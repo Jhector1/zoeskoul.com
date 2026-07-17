@@ -1,0 +1,153 @@
+{
+  "topics": {
+    "sql-analysis-reporting": {
+      "sql-analysis-reporting-module-1-null-safe-calculations": {
+        "coalesce-for-missing-values": {
+          "label": "COALESCE for Missing Values",
+          "summary": "Use COALESCE to apply a documented fallback while keeping the original source value visible for review.",
+          "cards": {
+            "sketch0": {
+              "title": "Choose a Documented Fallback"
+            },
+            "sketch1": {
+              "title": "Preserve the Source Value"
+            },
+            "quiz": {
+              "title": "Check Your Understanding"
+            }
+          },
+          "practice": {
+            "single-choice-1": {
+              "title": "COALESCE Result",
+              "prompt": "What does `COALESCE(discount_pct, 0)` return when `discount_pct` is 10?",
+              "hint": "COALESCE stops at the first non-NULL value.",
+              "help": {
+                "concept": "A known source value is preserved.",
+                "hint_1": "The fallback is used only when the first argument is NULL.",
+                "hint_2": "Choose the original percentage."
+              },
+              "options": {
+                "a": "0",
+                "b": "10",
+                "c": "NULL",
+                "d": "100"
+              }
+            },
+            "single-choice-2": {
+              "title": "Fallback for Missing Discount",
+              "prompt": "What does `COALESCE(discount_pct, 0)` return when `discount_pct` is NULL?",
+              "hint": "The first argument is missing, so the next value is used.",
+              "help": {
+                "concept": "COALESCE returns the first non-NULL argument.",
+                "hint_1": "The documented fallback is zero percent.",
+                "hint_2": "Choose the second argument."
+              },
+              "options": {
+                "a": "NULL",
+                "b": "0",
+                "c": "1",
+                "d": "100"
+              }
+            },
+            "multi-choice-1": {
+              "title": "Responsible COALESCE Use",
+              "prompt": "Which practices make COALESCE use trustworthy? Select all that apply.",
+              "hint": "A fallback is a business assumption, not just syntax.",
+              "help": {
+                "concept": "Document and expose the assumption where readers need it.",
+                "hint_1": "Different missing fields may require different treatment.",
+                "hint_2": "Choose practices that preserve meaning."
+              },
+              "options": {
+                "a": "Confirm the fallback matches the business rule.",
+                "b": "Keep the raw value visible when auditing missing data.",
+                "c": "Replace every NULL with zero automatically.",
+                "d": "Alias the applied value clearly."
+              }
+            },
+            "multi-choice-2": {
+              "title": "Valid Null-Safe Expressions",
+              "prompt": "Which expressions treat only a missing discount as zero? Select all that apply.",
+              "hint": "Look for COALESCE applied directly to the discount field.",
+              "help": {
+                "concept": "The fallback should target the nullable input named in the rule.",
+                "hint_1": "Wrapping another expression changes a different condition.",
+                "hint_2": "An unwrapped discount still propagates NULL."
+              },
+              "options": {
+                "a": "COALESCE(discount_pct, 0)",
+                "b": "quantity * unit_price * COALESCE(discount_pct, 0) / 100",
+                "c": "COALESCE(quantity * unit_price, 0)",
+                "d": "quantity * unit_price * discount_pct / 100"
+              }
+            },
+            "drag-reorder-1": {
+              "title": "Apply a Discount Fallback",
+              "prompt": "Arrange the expression-building steps.",
+              "hint": "Resolve the nullable input before applying it to money.",
+              "help": {
+                "concept": "The percentage must become a decimal rate before multiplication.",
+                "hint_1": "Start with the source value and its fallback.",
+                "hint_2": "End by applying the rate to gross sales."
+              },
+              "tokens": {
+                "t1": "Read discount_pct",
+                "t2": "Replace NULL with 0 using COALESCE",
+                "t3": "Divide the percentage by 100",
+                "t4": "Multiply by gross sales"
+              }
+            },
+            "fill-blank-choice-1": {
+              "title": "Complete the Fallback",
+              "prompt": "Fill the function that uses zero when the discount is missing.",
+              "hint": "Choose the function that returns the first non-NULL argument.",
+              "help": {
+                "concept": "The expression needs a fallback, not formatting or aggregation.",
+                "hint_1": "The nullable value is the first argument.",
+                "hint_2": "The zero is the second-choice value."
+              },
+              "template": "[blank1](discount_pct, 0) AS applied_discount_pct",
+              "choices": [
+                "COALESCE",
+                "ROUND",
+                "COUNT",
+                "DISTINCT"
+              ]
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_coalesce_for_missing_values_sketch0": {
+              "title": "Show Raw and Applied Discount Values",
+              "prompt": "Return `order_id`, the original `discount_pct`, and `COALESCE(discount_pct, 0)` as `applied_discount_pct`. Return `order_id, discount_pct, COALESCE(discount_pct, 0) AS applied_discount_pct` from `sales_reporting` in that column order.",
+              "hint": "Preserve `discount_pct` as its own column, then add a separate COALESCE expression for the value the report will use.",
+              "help": {
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "Return `order_id, discount_pct, COALESCE(discount_pct, 0) AS applied_discount_pct` from `sales_reporting` in that column order."
+              },
+              "starterCode": "-- Write the query below.",
+              "solutionCode": "SELECT\n    order_id,\n    discount_pct,\n    COALESCE(discount_pct, 0) AS applied_discount_pct\nFROM sales_reporting;"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql-analysis-reporting": {
+      "sql-analysis-reporting-module-1-null-safe-calculations": {
+        "coalesce-for-missing-values": {
+          "sketch0": {
+            "title": "Choose a Documented Fallback",
+            "bodyMarkdown": "The `COALESCE` function returns the first value in its argument list that is not `NULL`.\n\n```sql\nSELECT\n    COALESCE(NULL, 0) AS fallback_value;\n```\n\n#### Line-by-line walkthrough\n\n- `SELECT` — starts the result list.\n- `COALESCE(NULL, 0)` — checks the arguments from left to right. The first argument is `NULL`, so SQL continues to the next argument and returns `0`.\n- `AS fallback_value` — names the returned value `fallback_value`.\n- `;` — ends the statement.\n\n`COALESCE` does not decide what a missing value means. The report author must choose a fallback that matches the business rule. For this course, finance has documented that a missing discount percentage should be treated as zero percent when calculating order values."
+          },
+          "sketch1": {
+            "title": "Preserve the Source Value",
+            "bodyMarkdown": "A trustworthy report can preserve the original value and show the fallback used by the calculation in a separate column.\n\n```sql\nSELECT\n    order_id,\n    discount_pct,\n    COALESCE(discount_pct, 0) AS discount_pct_used\nFROM sales_reporting\nWHERE order_id IN (101, 102);\n```\n\n#### Line-by-line walkthrough\n\n- `SELECT` — starts the result list.\n- `order_id,` — identifies each order.\n- `discount_pct,` — keeps the original source value visible.\n- `COALESCE(discount_pct, 0)` — returns the recorded percentage when it exists and returns `0` when it is missing.\n- `AS discount_pct_used` — clearly labels the value that the report will use in later calculations.\n- `FROM sales_reporting` — reads rows from the reporting table.\n- `WHERE order_id IN (101, 102)` — limits the example to one order with a recorded discount and one order with a missing discount.\n- `;` — ends the statement.\n\nKeeping the raw and applied values side by side makes the fallback explicit. A reviewer can see both what the source contained and what the report used."
+          }
+        }
+      }
+    }
+  }
+}

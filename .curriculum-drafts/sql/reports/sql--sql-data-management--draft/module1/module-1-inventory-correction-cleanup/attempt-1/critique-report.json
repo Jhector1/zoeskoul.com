@@ -1,0 +1,12 @@
+{
+  "topicId": "module-1-inventory-correction-cleanup",
+  "ok": false,
+  "issues": [
+    {
+      "code": "PROJECT_REAL_WORLD_SCENARIO_MISSING",
+      "category": "clarity",
+      "severity": "error",
+      "message": "Project and capstone topics must include a believable real-world scenario, learner role, concrete files/tables/folders, and a useful deliverable."
+    }
+  ]
+}

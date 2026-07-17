@@ -1,0 +1,244 @@
+{
+  "title": "Using NULL and DEFAULT Intentionally",
+  "summary": "Learn how to use SQL NULL and DEFAULT values effectively in INSERT statements to manage missing data and default settings.",
+  "minutes": 28,
+  "sketchBlocks": [
+    {
+      "id": "sketch-using-null-default-1",
+      "title": "NULL and DEFAULT in SQL",
+      "bodyMarkdown": "In SQL, NULL represents a missing or undefined value, while DEFAULT is a predefined value set for a column when no specific value is provided during an INSERT operation. Understanding the difference between these two is crucial for managing data integrity and ensuring that your database behaves as expected.\n\nFor example, consider the `inventory_items` table where the `status` column has a default value of 'draft'. If you insert a new row without specifying a `status`, SQL will automatically assign 'draft' to that row. However, if you explicitly insert NULL into the `status` column, it will store a NULL value instead.\n\n```sql\nINSERT INTO inventory_items (name, category, price) VALUES ('New Item', 'Category', 10.99);\n-- This will use the default 'draft' for status.\n\nINSERT INTO inventory_items (name, category, price, status) VALUES ('Another Item', 'Category', 15.99, NULL);\n-- This will store NULL in the status column.\n```\n\nIn the first example, the `status` column uses its default value because it is omitted from the INSERT statement. In the second example, NULL is explicitly inserted, overriding the default."
+    },
+    {
+      "id": "sketch-using-null-default-2",
+      "title": "Applying NULL and DEFAULT in Practice",
+      "bodyMarkdown": "When inserting data into a table, you can control whether to use a column's default value or to insert NULL explicitly. This decision can affect how your data is interpreted and processed later.\n\nConsider a scenario where you want to add a new product to the `inventory_items` table. You might want to use the default `status` but explicitly set the `notes` to NULL to indicate that no additional information is available.\n\n```sql\nINSERT INTO inventory_items (name, category, price, notes) VALUES ('Sample Product', 'Gadgets', 29.99, NULL);\n-- The status will default to 'draft', and notes will be explicitly set to NULL.\n```\n\nThis approach ensures that your data entries are consistent and that any missing information is clearly marked with NULL, while default values are used where applicable. This practice helps maintain data integrity and clarity in your database."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "try-using-null-default-sketch0",
+      "kind": "code_input",
+      "title": "Insert with Default and NULL",
+      "prompt": "Insert a new item into the `inventory_items` table with the name 'Gadget', category 'Electronics', and price 19.99. Use the default value for `status` and explicitly set `notes` to NULL.",
+      "starterCode": "-- Write your SQL answer below",
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "-- Write your SQL answer below\n",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "INSERT INTO inventory_items (name, category, price, notes) VALUES ('Gadget', 'Electronics', 19.99, NULL);",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionCode": "INSERT INTO inventory_items (name, category, price, notes) VALUES ('Gadget', 'Electronics', 19.99, NULL);",
+      "tests": [
+        {
+          "stdout": "Gadget|Electronics|19.99|draft|0|NULL\n",
+          "match": "includes"
+        }
+      ],
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query",
+      "checkSql": "SELECT name, category, price, status, is_test, notes FROM inventory_items WHERE name = 'Gadget';",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Click Run query and compare the results table with the expected result."
+      }
+    },
+    {
+      "id": "try-using-null-default-sketch1",
+      "kind": "code_input",
+      "title": "Insert Multiple Rows with Defaults",
+      "prompt": "Insert two new items into the `inventory_items` table. The first item should have the name 'Widget', category 'Tools', and price 5.99, using the default `status`. The second item should have the name 'Device', category 'Gadgets', price 12.49, and explicitly set `notes` to NULL.",
+      "starterCode": "-- Write your SQL answer below",
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "-- Write your SQL answer below\n",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "INSERT INTO inventory_items (name, category, price, notes) VALUES\n('Widget', 'Tools', 5.99, NULL),\n('Device', 'Gadgets', 12.49, NULL);",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionCode": "INSERT INTO inventory_items (name, category, price, notes) VALUES\n('Widget', 'Tools', 5.99, NULL),\n('Device', 'Gadgets', 12.49, NULL);",
+      "tests": [
+        {
+          "stdout": "Widget|Tools|5.99|draft|0|NULL\nDevice|Gadgets|12.49|draft|0|NULL\n",
+          "match": "includes"
+        }
+      ],
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query",
+      "checkSql": "SELECT name, category, price, status, is_test, notes FROM inventory_items WHERE name IN ('Widget', 'Device');",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Click Run query and compare the results table with the expected result."
+      }
+    },
+    {
+      "id": "single-choice-1",
+      "kind": "single_choice",
+      "title": "Understanding SQL NULL",
+      "prompt": "What does SQL NULL represent in a database?",
+      "options": [
+        "A missing or undefined value",
+        "A zero value",
+        "An empty string",
+        "A default value"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "single-choice-2",
+      "kind": "single_choice",
+      "title": "Using DEFAULT in SQL",
+      "prompt": "How can you use a column's default value in an INSERT statement?",
+      "options": [
+        "Omit the column from the INSERT statement",
+        "Use the keyword DEFAULT in the VALUES clause",
+        "Set the column to NULL",
+        "Use a special function to apply the default"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Consider what happens when you omit a column from the INSERT statement.",
+      "help": {
+        "concept": "Omitting a column from the INSERT statement allows SQL to use the column's default value.",
+        "hint_1": "If you don't specify a value for a column, SQL will use its default value if one is set.",
+        "hint_2": "Omitting the column from the INSERT column list triggers the default."
+      }
+    },
+    {
+      "id": "multi-choice-1",
+      "kind": "multi_choice",
+      "title": "Effects of Using NULL and DEFAULT",
+      "prompt": "Which of the following are true about using NULL and DEFAULT in SQL? Select all that apply.",
+      "options": [
+        "NULL represents a missing value",
+        "DEFAULT provides a predefined value",
+        "NULL and DEFAULT are interchangeable",
+        "Using DEFAULT can simplify data entry"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "d"
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "multi-choice-2",
+      "kind": "multi_choice",
+      "title": "Choosing Between NULL and DEFAULT",
+      "prompt": "When should you choose to use NULL over a DEFAULT value in SQL? Select all that apply.",
+      "options": [
+        "When the data is intentionally missing",
+        "When the data is unknown",
+        "When a standard value is not appropriate",
+        "When you want to use a predefined value"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "hint": "Think about scenarios where data might be intentionally missing.",
+      "help": {
+        "concept": "Choosing between NULL and DEFAULT depends on whether the absence of data is intentional or a default value is appropriate.",
+        "hint_1": "NULL is used when data is intentionally missing or unknown.",
+        "hint_2": "DEFAULT is used when a standard value is appropriate for missing data."
+      }
+    },
+    {
+      "id": "drag-reorder-1",
+      "kind": "drag_reorder",
+      "title": "Order of SQL INSERT Steps",
+      "prompt": "Arrange the steps for inserting a new row using a default value in the correct order.",
+      "tokens": [
+        "Prepare the INSERT statement",
+        "Execute the INSERT statement",
+        "Verify the result"
+      ],
+      "correctOrder": [
+        "Prepare the INSERT statement",
+        "Execute the INSERT statement",
+        "Verify the result"
+      ],
+      "hint": "Read each piece and arrange them in the order the statement should be understood.",
+      "help": {
+        "concept": "The pieces should form a valid statement in a logical order.",
+        "hint_1": "Start with the piece that introduces the idea or action.",
+        "hint_2": "Place dependent pieces after the part they describe or complete."
+      }
+    },
+    {
+      "id": "fill-blank-choice-1",
+      "kind": "fill_blank_choice",
+      "title": "SQL Default Value Usage",
+      "prompt": "In SQL, to use a column's default value during an INSERT, you should [blank1] the column from the INSERT statement.",
+      "template": "In SQL, to use a column's default value during an INSERT, you should [blank1] the column from the INSERT statement.",
+      "choices": [
+        "omit",
+        "include",
+        "quote",
+        "highlight"
+      ],
+      "correctValue": "omit",
+      "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+      "help": {
+        "concept": "The blank should be filled with the term that makes the statement accurate.",
+        "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+        "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Build a New Inventory Intake Script",
+    "stepIds": [
+      "try-using-null-default-sketch0",
+      "try-using-null-default-sketch1"
+    ]
+  }
+}

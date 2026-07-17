@@ -1,0 +1,1032 @@
+{
+  "topicId": "final-inventory-operations-launch",
+  "subjectSlug": "sql--sql-data-management--draft",
+  "moduleSlug": "sql-data-management-module-3-final-capstone",
+  "sectionSlug": "sql--sql-data-management--draft-sql-data-management-section-3-final-capstone",
+  "prefix": "sql_data_management_module_3",
+  "minutes": 120,
+  "runtimeDefaults": {
+    "kind": "sql",
+    "showSchema": true,
+    "showErd": true,
+    "showChen": true,
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "datasetId": "ddl_blank",
+    "fixedSqlDialect": "sqlite",
+    "resultShape": "table"
+  },
+  "serviceDefaults": {
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": false
+    }
+  },
+  "tools": {
+    "defaultVisible": true,
+    "allowOpen": true,
+    "defaultSurface": "editor",
+    "compactDefaultSurface": "editor",
+    "sqlPane": {
+      "showResults": true,
+      "showTables": true,
+      "showErd": false,
+      "showChen": false,
+      "defaultTab": "results",
+      "compactDefaultTab": "results"
+    }
+  },
+  "topic": {
+    "labelKey": "topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.label",
+    "summaryKey": "topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.cards.sketch0.title",
+      "sketchId": "sketch-1",
+      "height": 420
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "displayKind": "capstone",
+        "uiKind": "capstone",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "ci_final_capstone_step1",
+            "titleKey": "topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.projectSteps.ci_final_capstone_step1.title",
+            "exerciseKey": "ci-final-capstone-step1",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "ci_final_capstone_step2",
+            "titleKey": "topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.projectSteps.ci_final_capstone_step2.title",
+            "exerciseKey": "ci-final-capstone-step2",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "ci_final_capstone_step3",
+            "titleKey": "topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.projectSteps.ci_final_capstone_step3.title",
+            "exerciseKey": "ci-final-capstone-step3",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "ci_final_capstone_step4",
+            "titleKey": "topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.projectSteps.ci_final_capstone_step4.title",
+            "exerciseKey": "ci-final-capstone-step4",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "ci_final_capstone_step5",
+            "titleKey": "topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.projectSteps.ci_final_capstone_step5.title",
+            "exerciseKey": "ci-final-capstone-step5",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "ci_final_capstone_step6",
+            "titleKey": "topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.projectSteps.ci_final_capstone_step6.title",
+            "exerciseKey": "ci-final-capstone-step6",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch-1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.sketch-1.title",
+      "bodyKey": "sketches.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.sketch-1.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "ci-final-capstone-step1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step1",
+      "language": "sql",
+      "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step1.starterCode",
+      "starterFiles": [
+        {
+          "path": "schema.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step1.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": "seed.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step1.starterFiles.seed_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step1.starterFiles.query_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "schema.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step1.solutionCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": "seed.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step1.solutionFiles.seed_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step1.solutionFiles.query_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        }
+      ],
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "ddl_blank",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "schema.sql",
+        "entryFile": "schema.sql",
+        "openTabs": [
+          "schema.sql",
+          "seed.sql",
+          "query.sql"
+        ],
+        "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step1.starterCode",
+        "starterFiles": [
+          {
+            "path": "schema.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step1.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          },
+          {
+            "path": "seed.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step1.starterFiles.seed_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          },
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step1.starterFiles.query_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          }
+        ]
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "ddl_blank",
+        "resultShape": "table",
+        "solutionCode": "-- file: schema.sql\nCREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    sku TEXT NOT NULL UNIQUE,\n    name TEXT NOT NULL,\n    category TEXT NOT NULL,\n    price REAL NOT NULL,\n    status TEXT NOT NULL DEFAULT 'draft',\n    notes TEXT NULL\n);\n\n-- file: seed.sql\n\n-- file: query.sql",
+        "solutionFiles": [
+          {
+            "path": "schema.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step1.solutionCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          },
+          {
+            "path": "seed.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step1.solutionFiles.seed_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          },
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step1.solutionFiles.query_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          }
+        ],
+        "sqlFileOrder": [
+          "schema.sql",
+          "seed.sql",
+          "query.sql"
+        ],
+        "checkSql": "SELECT name FROM sqlite_master WHERE type='table' AND name='products';"
+      }
+    },
+    {
+      "id": "ci-final-capstone-step2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step2",
+      "language": "sql",
+      "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step2.starterCode",
+      "starterFiles": [
+        {
+          "path": "schema.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step2.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": "seed.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step2.starterFiles.seed_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step2.starterFiles.query_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "schema.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step2.solutionCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": "seed.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step2.solutionFiles.seed_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step2.solutionFiles.query_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        }
+      ],
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "ddl_blank",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "schema.sql",
+        "entryFile": "schema.sql",
+        "openTabs": [
+          "schema.sql",
+          "seed.sql",
+          "query.sql"
+        ],
+        "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step2.starterCode",
+        "starterFiles": [
+          {
+            "path": "schema.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step2.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          },
+          {
+            "path": "seed.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step2.starterFiles.seed_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          },
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step2.starterFiles.query_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          }
+        ]
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "ddl_blank",
+        "resultShape": "table",
+        "solutionCode": "-- file: schema.sql\nCREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    sku TEXT NOT NULL UNIQUE,\n    name TEXT NOT NULL,\n    category TEXT NOT NULL,\n    price REAL NOT NULL,\n    status TEXT NOT NULL DEFAULT 'draft',\n    notes TEXT NULL\n);\n\nCREATE TABLE stock_events (\n    id INTEGER PRIMARY KEY,\n    product_id INTEGER NOT NULL,\n    quantity_change INTEGER NOT NULL,\n    event_type TEXT NOT NULL DEFAULT 'receipt',\n    note TEXT NULL,\n    FOREIGN KEY (product_id) REFERENCES products(id)\n);\n\n-- file: seed.sql\n\n-- file: query.sql",
+        "solutionFiles": [
+          {
+            "path": "schema.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step2.solutionCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          },
+          {
+            "path": "seed.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step2.solutionFiles.seed_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          },
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step2.solutionFiles.query_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          }
+        ],
+        "sqlFileOrder": [
+          "schema.sql",
+          "seed.sql",
+          "query.sql"
+        ],
+        "checkSql": "SELECT name FROM sqlite_master WHERE type='table' AND name='stock_events';"
+      }
+    },
+    {
+      "id": "ci-final-capstone-step3",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step3",
+      "language": "sql",
+      "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step3.starterCode",
+      "starterFiles": [
+        {
+          "path": "schema.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step3.starterFiles.schema_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "seed.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step3.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step3.starterFiles.query_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "schema.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step3.solutionFiles.schema_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "seed.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step3.solutionCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step3.solutionFiles.query_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        }
+      ],
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "ddl_blank",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "seed.sql",
+        "entryFile": "seed.sql",
+        "openTabs": [
+          "schema.sql",
+          "seed.sql",
+          "query.sql"
+        ],
+        "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step3.starterCode",
+        "starterFiles": [
+          {
+            "path": "schema.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step3.starterFiles.schema_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          },
+          {
+            "path": "seed.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step3.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          },
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step3.starterFiles.query_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          }
+        ]
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "ddl_blank",
+        "resultShape": "table",
+        "solutionCode": "-- file: schema.sql\nCREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    sku TEXT NOT NULL UNIQUE,\n    name TEXT NOT NULL,\n    category TEXT NOT NULL,\n    price REAL NOT NULL,\n    status TEXT NOT NULL DEFAULT 'draft',\n    notes TEXT NULL\n);\n\nCREATE TABLE stock_events (\n    id INTEGER PRIMARY KEY,\n    product_id INTEGER NOT NULL,\n    quantity_change INTEGER NOT NULL,\n    event_type TEXT NOT NULL DEFAULT 'receipt',\n    note TEXT NULL,\n    FOREIGN KEY (product_id) REFERENCES products(id)\n);\n\n-- file: seed.sql\nINSERT INTO products (sku, name, category, price, notes) VALUES\n    ('SKU001', 'Product A', 'Category 1', 19.99, NULL),\n    ('SKU002', 'Product B', 'Category 2', 29.99, 'Special edition'),\n    ('SKU003', 'Product C', 'Category 3', 39.99, NULL);\n\n-- file: query.sql",
+        "solutionFiles": [
+          {
+            "path": "schema.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step3.solutionFiles.schema_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          },
+          {
+            "path": "seed.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step3.solutionCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          },
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step3.solutionFiles.query_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          }
+        ],
+        "sqlFileOrder": [
+          "schema.sql",
+          "seed.sql",
+          "query.sql"
+        ],
+        "checkSql": "SELECT sku, name FROM products;"
+      }
+    },
+    {
+      "id": "ci-final-capstone-step4",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step4",
+      "language": "sql",
+      "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step4.starterCode",
+      "starterFiles": [
+        {
+          "path": "schema.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step4.starterFiles.schema_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "seed.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step4.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step4.starterFiles.query_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "schema.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step4.solutionFiles.schema_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "seed.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step4.solutionCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step4.solutionFiles.query_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        }
+      ],
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "ddl_blank",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "seed.sql",
+        "entryFile": "seed.sql",
+        "openTabs": [
+          "schema.sql",
+          "seed.sql",
+          "query.sql"
+        ],
+        "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step4.starterCode",
+        "starterFiles": [
+          {
+            "path": "schema.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step4.starterFiles.schema_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          },
+          {
+            "path": "seed.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step4.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          },
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step4.starterFiles.query_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          }
+        ]
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "ddl_blank",
+        "resultShape": "table",
+        "solutionCode": "-- file: schema.sql\nCREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    sku TEXT NOT NULL UNIQUE,\n    name TEXT NOT NULL,\n    category TEXT NOT NULL,\n    price REAL NOT NULL,\n    status TEXT NOT NULL DEFAULT 'draft',\n    notes TEXT NULL\n);\n\nCREATE TABLE stock_events (\n    id INTEGER PRIMARY KEY,\n    product_id INTEGER NOT NULL,\n    quantity_change INTEGER NOT NULL,\n    event_type TEXT NOT NULL DEFAULT 'receipt',\n    note TEXT NULL,\n    FOREIGN KEY (product_id) REFERENCES products(id)\n);\n\n-- file: seed.sql\nINSERT INTO products (sku, name, category, price, notes) VALUES\n    ('SKU001', 'Product A', 'Category 1', 19.99, NULL),\n    ('SKU002', 'Product B', 'Category 2', 29.99, 'Special edition'),\n    ('SKU003', 'Product C', 'Category 3', 39.99, NULL);\n\nINSERT INTO stock_events (product_id, quantity_change, event_type, note) VALUES\n    (1, 100, 'receipt', 'Initial stock'),\n    (2, 50, 'receipt', 'Restock'),\n    (3, 30, 'receipt', 'New shipment');\n\n-- file: query.sql",
+        "solutionFiles": [
+          {
+            "path": "schema.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step4.solutionFiles.schema_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          },
+          {
+            "path": "seed.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step4.solutionCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          },
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step4.solutionFiles.query_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          }
+        ],
+        "sqlFileOrder": [
+          "schema.sql",
+          "seed.sql",
+          "query.sql"
+        ],
+        "checkSql": "SELECT product_id, quantity_change FROM stock_events;"
+      }
+    },
+    {
+      "id": "ci-final-capstone-step5",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step5",
+      "language": "sql",
+      "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step5.starterCode",
+      "starterFiles": [
+        {
+          "path": "schema.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step5.starterFiles.schema_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "seed.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step5.starterFiles.seed_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step5.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "schema.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step5.solutionFiles.schema_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "seed.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step5.solutionFiles.seed_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step5.solutionCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "ddl_blank",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "entryFile": "query.sql",
+        "openTabs": [
+          "schema.sql",
+          "seed.sql",
+          "query.sql"
+        ],
+        "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step5.starterCode",
+        "starterFiles": [
+          {
+            "path": "schema.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step5.starterFiles.schema_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          },
+          {
+            "path": "seed.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step5.starterFiles.seed_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          },
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step5.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          }
+        ]
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "ddl_blank",
+        "resultShape": "table",
+        "solutionCode": "-- file: schema.sql\nCREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    sku TEXT NOT NULL UNIQUE,\n    name TEXT NOT NULL,\n    category TEXT NOT NULL,\n    price REAL NOT NULL,\n    status TEXT NOT NULL DEFAULT 'draft',\n    notes TEXT NULL\n);\n\nCREATE TABLE stock_events (\n    id INTEGER PRIMARY KEY,\n    product_id INTEGER NOT NULL,\n    quantity_change INTEGER NOT NULL,\n    event_type TEXT NOT NULL DEFAULT 'receipt',\n    note TEXT NULL,\n    FOREIGN KEY (product_id) REFERENCES products(id)\n);\n\n-- file: seed.sql\nINSERT INTO products (sku, name, category, price, notes) VALUES\n    ('SKU001', 'Product A', 'Category 1', 19.99, NULL),\n    ('SKU002', 'Product B', 'Category 2', 29.99, 'Special edition'),\n    ('SKU003', 'Product C', 'Category 3', 39.99, NULL);\n\nINSERT INTO stock_events (product_id, quantity_change, event_type, note) VALUES\n    (1, 100, 'receipt', 'Initial stock'),\n    (2, 50, 'receipt', 'Restock'),\n    (3, 30, 'receipt', 'New shipment');\n\n-- file: query.sql\nUPDATE products\nSET\n    price = 24.99,\n    status = 'active'\nWHERE\n    id = 1;",
+        "solutionFiles": [
+          {
+            "path": "schema.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step5.solutionFiles.schema_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          },
+          {
+            "path": "seed.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step5.solutionFiles.seed_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          },
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step5.solutionCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          }
+        ],
+        "sqlFileOrder": [
+          "schema.sql",
+          "seed.sql",
+          "query.sql"
+        ],
+        "checkSql": "SELECT price, status FROM products WHERE id = 1;"
+      }
+    },
+    {
+      "id": "ci-final-capstone-step6",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step6",
+      "language": "sql",
+      "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step6.starterCode",
+      "starterFiles": [
+        {
+          "path": "schema.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step6.starterFiles.schema_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "seed.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step6.starterFiles.seed_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step6.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "schema.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step6.solutionFiles.schema_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "seed.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step6.solutionFiles.seed_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step6.solutionCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "ddl_blank",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "entryFile": "query.sql",
+        "openTabs": [
+          "schema.sql",
+          "seed.sql",
+          "query.sql"
+        ],
+        "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step6.starterCode",
+        "starterFiles": [
+          {
+            "path": "schema.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step6.starterFiles.schema_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          },
+          {
+            "path": "seed.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step6.starterFiles.seed_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          },
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step6.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          }
+        ]
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "ddl_blank",
+        "resultShape": "table",
+        "solutionCode": "-- file: schema.sql\nCREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    sku TEXT NOT NULL UNIQUE,\n    name TEXT NOT NULL,\n    category TEXT NOT NULL,\n    price REAL NOT NULL,\n    status TEXT NOT NULL DEFAULT 'draft',\n    notes TEXT NULL\n);\n\nCREATE TABLE stock_events (\n    id INTEGER PRIMARY KEY,\n    product_id INTEGER NOT NULL,\n    quantity_change INTEGER NOT NULL,\n    event_type TEXT NOT NULL DEFAULT 'receipt',\n    note TEXT NULL,\n    FOREIGN KEY (product_id) REFERENCES products(id)\n);\n\n-- file: seed.sql\nINSERT INTO products (sku, name, category, price, notes) VALUES\n    ('SKU001', 'Product A', 'Category 1', 19.99, NULL),\n    ('SKU002', 'Product B', 'Category 2', 29.99, 'Special edition'),\n    ('SKU003', 'Product C', 'Category 3', 39.99, NULL);\n\nINSERT INTO stock_events (product_id, quantity_change, event_type, note) VALUES\n    (1, 100, 'receipt', 'Initial stock'),\n    (2, 50, 'receipt', 'Restock'),\n    (3, 30, 'receipt', 'New shipment');\n\n-- file: query.sql\nUPDATE products\nSET\n    price = 24.99,\n    status = 'active'\nWHERE\n    id = 1;\n\nDELETE FROM stock_events\nWHERE\n    note = 'Test event';",
+        "solutionFiles": [
+          {
+            "path": "schema.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step6.solutionFiles.schema_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          },
+          {
+            "path": "seed.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step6.solutionFiles.seed_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          },
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step6.solutionCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          }
+        ],
+        "sqlFileOrder": [
+          "schema.sql",
+          "seed.sql",
+          "query.sql"
+        ],
+        "checkSql": "SELECT * FROM stock_events WHERE note = 'Test event';"
+      }
+    }
+  ]
+}

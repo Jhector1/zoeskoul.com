@@ -1,0 +1,510 @@
+{
+  "topicId": "module-0-inventory-intake-batch",
+  "subjectSlug": "sql-data-management",
+  "moduleSlug": "sql-data-management-module-0-safe-inserts",
+  "sectionSlug": "sql-data-management-sql-data-management-section-0-module-project",
+  "prefix": "sql_data_management_module_0",
+  "minutes": 60,
+  "runtimeDefaults": {
+    "kind": "sql",
+    "showSchema": true,
+    "showErd": true,
+    "showChen": true,
+    "supportsTerminal": false,
+    "supportsMultiFile": false,
+    "supportsFileSystem": false,
+    "datasetId": "inventory_ops",
+    "fixedSqlDialect": "sqlite",
+    "resultShape": "table"
+  },
+  "serviceDefaults": null,
+  "tools": {
+    "defaultVisible": true,
+    "allowOpen": true,
+    "defaultSurface": "editor",
+    "compactDefaultSurface": "editor",
+    "sqlPane": {
+      "showResults": true,
+      "showTables": true,
+      "showErd": false,
+      "showChen": false,
+      "defaultTab": "results",
+      "compactDefaultTab": "results"
+    }
+  },
+  "topic": {
+    "labelKey": "topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.label",
+    "summaryKey": "topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.cards.sketch0.title",
+      "sketchId": "sketch-module-0-intro",
+      "height": 420
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "ci_module_0_step1",
+            "titleKey": "topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.projectSteps.ci_module_0_step1.title",
+            "exerciseKey": "ci-module-0-step1",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "ci_module_0_step2",
+            "titleKey": "topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.projectSteps.ci_module_0_step2.title",
+            "exerciseKey": "ci-module-0-step2",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "ci_module_0_step3",
+            "titleKey": "topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.projectSteps.ci_module_0_step3.title",
+            "exerciseKey": "ci-module-0-step3",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "ci_module_0_step4",
+            "titleKey": "topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.projectSteps.ci_module_0_step4.title",
+            "exerciseKey": "ci-module-0-step4",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "ci_module_0_step5",
+            "titleKey": "topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.projectSteps.ci_module_0_step5.title",
+            "exerciseKey": "ci-module-0-step5",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch-module-0-intro",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.sketch-module-0-intro.title",
+      "bodyKey": "sketches.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.sketch-module-0-intro.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "ci-module-0-step1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.moduleProject.steps.ci_module_0_step1",
+      "language": "sql",
+      "starterCode": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.moduleProject.steps.ci_module_0_step1.starterCode",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.moduleProject.steps.ci_module_0_step1.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.moduleProject.steps.ci_module_0_step1.solutionCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "inventory_ops",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "entryFile": "query.sql",
+        "openTabs": [
+          "query.sql"
+        ],
+        "starterCode": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.moduleProject.steps.ci_module_0_step1.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.moduleProject.steps.ci_module_0_step1.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          }
+        ]
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "inventory_ops",
+        "resultShape": "table",
+        "solutionCode": "-- Insert the first approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (101, 'Desk Organizer', 'Office', 12.99, 'active', 0, 'New stock', '2026-02-10');\n\n-- Verify the insertion\nSELECT * FROM inventory_items WHERE id = 101;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.moduleProject.steps.ci_module_0_step1.solutionCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          }
+        ],
+        "checkSql": "SELECT * FROM inventory_items WHERE id = 101;"
+      }
+    },
+    {
+      "id": "ci-module-0-step2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.moduleProject.steps.ci_module_0_step2",
+      "language": "sql",
+      "starterCode": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.moduleProject.steps.ci_module_0_step2.starterCode",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.moduleProject.steps.ci_module_0_step2.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.moduleProject.steps.ci_module_0_step2.solutionCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "inventory_ops",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "entryFile": "query.sql",
+        "openTabs": [
+          "query.sql"
+        ],
+        "starterCode": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.moduleProject.steps.ci_module_0_step2.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.moduleProject.steps.ci_module_0_step2.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          }
+        ]
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "inventory_ops",
+        "resultShape": "table",
+        "solutionCode": "-- Insert the second approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (102, 'Cable Labels', 'Office', 5.99, 'active', 0, NULL, '2026-02-11');\n\n-- Verify the insertion\nSELECT * FROM inventory_items WHERE id = 102;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.moduleProject.steps.ci_module_0_step2.solutionCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          }
+        ],
+        "checkSql": "SELECT * FROM inventory_items WHERE id = 102;"
+      }
+    },
+    {
+      "id": "ci-module-0-step3",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.moduleProject.steps.ci_module_0_step3",
+      "language": "sql",
+      "starterCode": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.moduleProject.steps.ci_module_0_step3.starterCode",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.moduleProject.steps.ci_module_0_step3.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.moduleProject.steps.ci_module_0_step3.solutionCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "inventory_ops",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "entryFile": "query.sql",
+        "openTabs": [
+          "query.sql"
+        ],
+        "starterCode": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.moduleProject.steps.ci_module_0_step3.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.moduleProject.steps.ci_module_0_step3.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          }
+        ]
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "inventory_ops",
+        "resultShape": "table",
+        "solutionCode": "-- Insert the third approved item\nINSERT INTO inventory_items (id, name, category, price, is_test, notes)\nVALUES\n  (103, 'Shipping Pouch', 'Office', 3.49, 0, 'Durable material');\n\n-- Verify the insertion\nSELECT * FROM inventory_items WHERE id = 103;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.moduleProject.steps.ci_module_0_step3.solutionCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          }
+        ],
+        "checkSql": "SELECT * FROM inventory_items WHERE id = 103;"
+      }
+    },
+    {
+      "id": "ci-module-0-step4",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.moduleProject.steps.ci_module_0_step4",
+      "language": "sql",
+      "starterCode": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.moduleProject.steps.ci_module_0_step4.starterCode",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.moduleProject.steps.ci_module_0_step4.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.moduleProject.steps.ci_module_0_step4.solutionCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "inventory_ops",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "entryFile": "query.sql",
+        "openTabs": [
+          "query.sql"
+        ],
+        "starterCode": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.moduleProject.steps.ci_module_0_step4.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.moduleProject.steps.ci_module_0_step4.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          }
+        ]
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "inventory_ops",
+        "resultShape": "table",
+        "solutionCode": "-- Insert the fourth and fifth approved items\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (104, 'Packing Tape', 'Office', 2.99, 'active', 0, 'Strong adhesive', '2026-02-12'),\n  (105, 'Label Roll', 'Office', 1.99, 'active', 0, 'Easy to peel', '2026-02-12');\n\n-- Verify the insertion\nSELECT * FROM inventory_items WHERE id IN (104, 105);",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.moduleProject.steps.ci_module_0_step4.solutionCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          }
+        ],
+        "checkSql": "SELECT * FROM inventory_items WHERE id IN (104, 105);"
+      }
+    },
+    {
+      "id": "ci-module-0-step5",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.moduleProject.steps.ci_module_0_step5",
+      "language": "sql",
+      "starterCode": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.moduleProject.steps.ci_module_0_step5.starterCode",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.moduleProject.steps.ci_module_0_step5.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.moduleProject.steps.ci_module_0_step5.solutionCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "inventory_ops",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "entryFile": "query.sql",
+        "openTabs": [
+          "query.sql"
+        ],
+        "starterCode": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.moduleProject.steps.ci_module_0_step5.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.moduleProject.steps.ci_module_0_step5.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          }
+        ]
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "inventory_ops",
+        "resultShape": "table",
+        "solutionCode": "-- Verify all new items and existing inventory\nSELECT * FROM inventory_items ORDER BY id;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.moduleProject.steps.ci_module_0_step5.solutionCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          }
+        ],
+        "checkSql": "SELECT * FROM inventory_items ORDER BY id;"
+      }
+    }
+  ]
+}

@@ -163,86 +163,31 @@
                 "stock"
               ]
             },
-            "ci_price_desc": {
-              "title": "Sort products by highest price",
-              "prompt": "Write a query that shows `name` and `price` from `products`, sorted by `price` in descending order. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Show name and price from products, sorted by price in descending order.\nSELECT name, price\nFROM products\n;"
-            },
-            "ci_newest_products": {
-              "title": "Show newest products first",
-              "prompt": "Write a query that shows `name` and `created_at` from `products`, sorted so the newest products appear first. Use the SQL editor, then click Run query and inspect the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Show name and created_at from products, sorted so the newest products appear first.\nSELECT name, created_at\nFROM products\n;"
-            },
-            "ci_top2_stock": {
-              "title": "Top 2 products by stock",
-              "prompt": "Write a query that shows `name` and `stock` from `products`, sorted by `stock` from highest to lowest, and returns only the first 2 rows. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- TODO: sort by highest stock first\n-- TODO: keep only 2 rows\nSELECT name, stock\nFROM products\n;"
-            },
             "try-descending_order-sketch0": {
-              "title": "Sort products by highest price",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that shows `name` and `price` from `products`, sorted by `price` in descending order. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Sort Categories in Reverse Alphabetical Order",
+              "prompt": "Return `id`, `name`, and `category`, sorted from Z to A by category. Return `id, name, category` from `products` in that column order. Sort the final result by `category DESC`.",
+              "hint": "Reverse alphabetical order uses DESC.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "Return `id, name, category` from `products` in that column order. Sort the final result by `category DESC`."
               },
-              "starterCode": "-- Show name and price from products, sorted by price in descending order.\nSELECT name, price\nFROM products\n;"
-            },
-            "try-descending_order-sketch1": {
-              "title": "Show newest products first",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that shows `name` and `created_at` from `products`, sorted so the newest products appear first. Use the SQL editor, then click Run query and inspect the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Show name and created_at from products, sorted so the newest products appear first.\nSELECT name, created_at\nFROM products\n;"
-            },
-            "try-descending_order-sketch2": {
-              "title": "Top 2 products by stock",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that shows `name` and `stock` from `products`, sorted by `stock` from highest to lowest, and returns only the first 2 rows. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- TODO: sort by highest stock first\n-- TODO: keep only 2 rows\nSELECT name, stock\nFROM products\n;"
+              "starterCode": "SELECT id, name, category\nFROM products\nORDER BY category ;"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_descending_order_sketch0": {
-              "title": "Sort products by highest price",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that shows `name` and `price` from `products`, sorted by `price` in descending order. Write the query in the SQL editor, click Run query, and check the results table."
+              "title": "Sort Categories in Reverse Alphabetical Order",
+              "prompt": "Return `id`, `name`, and `category`, sorted from Z to A by category."
             },
             "try_descending_order_sketch1": {
               "title": "Show newest products first",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that shows `name` and `created_at` from `products`, sorted so the newest products appear first. Use the SQL editor, then click Run query and inspect the results table."
+              "prompt": "Build a ranking query that shows `name` and `created_at` from `products`, sorted so the newest products appear first. Use the SQL editor, then click Run query and inspect the results table. Run it and compare the result with the expected table."
             },
             "try_descending_order_sketch2": {
               "title": "Top 2 products by stock",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that shows `name` and `stock` from `products`, sorted by `stock` from highest to lowest, and returns only the first 2 rows. Write the query in the SQL editor, click Run query, and check the results table."
+              "prompt": "Build a ranking query that shows `name` and `stock` from `products`, sorted by `stock` from highest to lowest, and returns only the first 2 rows. Run it and compare the result with the expected table."
             }
           }
         }
@@ -263,20 +208,6 @@
             },
             "quiz": {
               "title": "Quiz"
-            },
-            "project": {
-              "title": "Ranked Product Reports"
-            }
-          },
-          "projectSteps": {
-            "ci_price_desc": {
-              "title": "Sort products by highest price"
-            },
-            "ci_newest_products": {
-              "title": "Show newest products first"
-            },
-            "ci_top2_stock": {
-              "title": "Top 2 products by stock"
             }
           },
           "quiz": {
@@ -443,19 +374,19 @@
               "starterCode": "-- TODO: sort by highest stock first\n-- TODO: keep only 2 rows\nSELECT name, stock\nFROM products\n;"
             },
             "try-descending_order-sketch0": {
-              "title": "Sort products by highest price",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that shows `name` and `price` from `products`, sorted by `price` in descending order. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Sort Categories in Reverse Alphabetical Order",
+              "prompt": "Return `id`, `name`, and `category`, sorted from Z to A by category.",
+              "hint": "Reverse alphabetical order uses DESC.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
+                "concept": "Return `id`, `name`, and `category`, sorted from Z to A by category.",
+                "hint_1": "Reverse alphabetical order uses DESC.",
+                "hint_2": "Run the query and compare the returned columns and rows with the expected result."
               },
-              "starterCode": "-- Show name and price from products, sorted by price in descending order.\nSELECT name, price\nFROM products\n;"
+              "starterCode": "SELECT id, name, category\nFROM products\nORDER BY category ;"
             },
             "try-descending_order-sketch1": {
               "title": "Show newest products first",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that shows `name` and `created_at` from `products`, sorted so the newest products appear first. Use the SQL editor, then click Run query and inspect the results table.",
+              "prompt": "Build a ranking query that shows `name` and `created_at` from `products`, sorted so the newest products appear first. Use the SQL editor, then click Run query and inspect the results table. Run it and compare the result with the expected table.",
               "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
               "help": {
                 "concept": "This SQL exercise checks whether your query returns the requested result.",
@@ -466,7 +397,7 @@
             },
             "try-descending_order-sketch2": {
               "title": "Top 2 products by stock",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that shows `name` and `stock` from `products`, sorted by `stock` from highest to lowest, and returns only the first 2 rows. Write the query in the SQL editor, click Run query, and check the results table.",
+              "prompt": "Build a ranking query that shows `name` and `stock` from `products`, sorted by `stock` from highest to lowest, and returns only the first 2 rows. Run it and compare the result with the expected table.",
               "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
               "help": {
                 "concept": "This SQL exercise checks whether your query returns the requested result.",
@@ -479,16 +410,16 @@
           "tryIt": {
             "allowReveal": true,
             "try_descending_order_sketch0": {
-              "title": "Sort products by highest price",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that shows `name` and `price` from `products`, sorted by `price` in descending order. Write the query in the SQL editor, click Run query, and check the results table."
+              "title": "Sort Categories in Reverse Alphabetical Order",
+              "prompt": "Return `id`, `name`, and `category`, sorted from Z to A by category."
             },
             "try_descending_order_sketch1": {
               "title": "Show newest products first",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that shows `name` and `created_at` from `products`, sorted so the newest products appear first. Use the SQL editor, then click Run query and inspect the results table."
+              "prompt": "Build a ranking query that shows `name` and `created_at` from `products`, sorted so the newest products appear first. Use the SQL editor, then click Run query and inspect the results table. Run it and compare the result with the expected table."
             },
             "try_descending_order_sketch2": {
               "title": "Top 2 products by stock",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that shows `name` and `stock` from `products`, sorted by `stock` from highest to lowest, and returns only the first 2 rows. Write the query in the SQL editor, click Run query, and check the results table."
+              "prompt": "Build a ranking query that shows `name` and `stock` from `products`, sorted by `stock` from highest to lowest, and returns only the first 2 rows. Run it and compare the result with the expected table."
             }
           }
         }

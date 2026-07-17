@@ -1,0 +1,44 @@
+{
+  "ok": true,
+  "profileId": "sql",
+  "subjectSlug": "sql--sql-data-management--draft",
+  "courseSlug": "sql-data-management",
+  "topicId": "primary-key-and-not-null-constraints",
+  "summary": {
+    "modules": 1,
+    "topicsTotal": 1,
+    "exercises": 8,
+    "exerciseKinds": {
+      "code_input": 2,
+      "multi_choice": 2,
+      "fill_blank_choice": 2,
+      "single_choice": 1,
+      "drag_reorder": 1
+    },
+    "codeInputs": 2,
+    "projects": 2,
+    "capstones": 0,
+    "thinFixedTestCount": 0,
+    "blockers": 0,
+    "errors": 0,
+    "warnings": 1,
+    "infos": 0
+  },
+  "severityCounts": {
+    "blocker": 0,
+    "error": 0,
+    "warning": 1,
+    "info": 0
+  },
+  "issues": [
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-data-management-module-2-table-creation-constraints/sql-data-management-section-2-table-structure/primary-key-and-not-null-constraints",
+      "profileId": "sql",
+      "moduleId": "sql-data-management-module-2-table-creation-constraints",
+      "topicId": "primary-key-and-not-null-constraints",
+      "message": "Topic \"primary-key-and-not-null-constraints\" has no learning goals on its seed metadata."
+    }
+  ]
+}

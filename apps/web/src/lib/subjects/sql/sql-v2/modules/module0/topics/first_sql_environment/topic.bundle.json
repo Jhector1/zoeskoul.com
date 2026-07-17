@@ -189,7 +189,11 @@
             "isEntry": true,
             "entry": true
           }
-        ]
+        ],
+        "sqlFileOrder": [
+          "query.sql"
+        ],
+        "ignoreRowOrder": true
       },
       "entryFilePath": "query.sql",
       "starterFiles": [
@@ -231,6 +235,22 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "openTabs": [
+          "query.sql"
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "query.sql"
+          ]
+        }
+      },
+      "sqlFileOrder": [
+        "query.sql"
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "query.sql"
         ]
       }
     },
@@ -268,7 +288,11 @@
             "isEntry": true,
             "entry": true
           }
-        ]
+        ],
+        "sqlFileOrder": [
+          "query.sql"
+        ],
+        "ignoreRowOrder": true
       },
       "entryFilePath": "query.sql",
       "starterFiles": [
@@ -310,6 +334,22 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "openTabs": [
+          "query.sql"
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "query.sql"
+          ]
+        }
+      },
+      "sqlFileOrder": [
+        "query.sql"
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "query.sql"
         ]
       }
     },
@@ -338,16 +378,20 @@
         "type": "sql_query",
         "datasetId": "students_intro",
         "resultShape": "table",
-        "solutionCode": "SELECT 'Hello SQL' AS message;",
+        "solutionCode": "SELECT 'Ready to query' AS status;",
         "solutionFiles": [
           {
             "path": "query.sql",
-            "content": "SELECT 'Hello SQL' AS message;",
+            "content": "SELECT 'Ready to query' AS status;",
             "language": "sql",
             "isEntry": true,
             "entry": true
           }
-        ]
+        ],
+        "sqlFileOrder": [
+          "query.sql"
+        ],
+        "ignoreRowOrder": true
       },
       "entryFilePath": "query.sql",
       "starterFiles": [
@@ -362,7 +406,7 @@
       "solutionFiles": [
         {
           "path": "query.sql",
-          "content": "SELECT 'Hello SQL' AS message;",
+          "content": "SELECT 'Ready to query' AS status;",
           "language": "sql",
           "isEntry": true,
           "entry": true
@@ -389,6 +433,22 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "openTabs": [
+          "query.sql"
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "query.sql"
+          ]
+        }
+      },
+      "sqlFileOrder": [
+        "query.sql"
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "query.sql"
         ]
       }
     },
@@ -417,16 +477,20 @@
         "type": "sql_query",
         "datasetId": "students_intro",
         "resultShape": "table",
-        "solutionCode": "SELECT name, age, city\nFROM students;",
+        "solutionCode": "SELECT name, city\nFROM students;",
         "solutionFiles": [
           {
             "path": "query.sql",
-            "content": "SELECT name, age, city\nFROM students;",
+            "content": "SELECT name, city\nFROM students;",
             "language": "sql",
             "isEntry": true,
             "entry": true
           }
-        ]
+        ],
+        "sqlFileOrder": [
+          "query.sql"
+        ],
+        "ignoreRowOrder": true
       },
       "entryFilePath": "query.sql",
       "starterFiles": [
@@ -441,7 +505,7 @@
       "solutionFiles": [
         {
           "path": "query.sql",
-          "content": "SELECT name, age, city\nFROM students;",
+          "content": "SELECT name, city\nFROM students;",
           "language": "sql",
           "isEntry": true,
           "entry": true
@@ -468,6 +532,22 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "openTabs": [
+          "query.sql"
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "query.sql"
+          ]
+        }
+      },
+      "sqlFileOrder": [
+        "query.sql"
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "query.sql"
         ]
       }
     },

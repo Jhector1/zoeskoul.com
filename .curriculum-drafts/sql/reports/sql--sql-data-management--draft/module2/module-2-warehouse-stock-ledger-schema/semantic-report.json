@@ -1,0 +1,120 @@
+{
+  "topicId": "module-2-warehouse-stock-ledger-schema",
+  "ok": true,
+  "issues": [
+    {
+      "code": "SQL_DATASET_CONSISTENCY",
+      "category": "dataset",
+      "severity": "warn",
+      "message": "Exercise ci-warehouse-schema-step1 references table \"sqlite_master\" outside effective dataset \"ddl_blank\""
+    },
+    {
+      "code": "SQL_DATASET_CONSISTENCY",
+      "category": "dataset",
+      "severity": "warn",
+      "message": "Exercise ci-warehouse-schema-step1 references column \"type\" that does not belong to effective dataset \"ddl_blank\""
+    },
+    {
+      "code": "SQL_DATASET_CONSISTENCY",
+      "category": "dataset",
+      "severity": "warn",
+      "message": "Exercise ci-warehouse-schema-step2 references table \"sqlite_master\" outside effective dataset \"ddl_blank\""
+    },
+    {
+      "code": "SQL_DATASET_CONSISTENCY",
+      "category": "dataset",
+      "severity": "warn",
+      "message": "Exercise ci-warehouse-schema-step2 references column \"sql\" that does not belong to effective dataset \"ddl_blank\""
+    },
+    {
+      "code": "SQL_DATASET_CONSISTENCY",
+      "category": "dataset",
+      "severity": "warn",
+      "message": "Exercise ci-warehouse-schema-step2 references column \"type\" that does not belong to effective dataset \"ddl_blank\""
+    },
+    {
+      "code": "SQL_DATASET_CONSISTENCY",
+      "category": "dataset",
+      "severity": "warn",
+      "message": "Exercise ci-warehouse-schema-step3 references table \"sqlite_master\" outside effective dataset \"ddl_blank\""
+    },
+    {
+      "code": "SQL_DATASET_CONSISTENCY",
+      "category": "dataset",
+      "severity": "warn",
+      "message": "Exercise ci-warehouse-schema-step3 references column \"sql\" that does not belong to effective dataset \"ddl_blank\""
+    },
+    {
+      "code": "SQL_DATASET_CONSISTENCY",
+      "category": "dataset",
+      "severity": "warn",
+      "message": "Exercise ci-warehouse-schema-step3 references column \"type\" that does not belong to effective dataset \"ddl_blank\""
+    },
+    {
+      "code": "SQL_DATASET_CONSISTENCY",
+      "category": "dataset",
+      "severity": "warn",
+      "message": "Exercise ci-warehouse-schema-step4 references table \"sqlite_master\" outside effective dataset \"ddl_blank\""
+    },
+    {
+      "code": "SQL_DATASET_CONSISTENCY",
+      "category": "dataset",
+      "severity": "warn",
+      "message": "Exercise ci-warehouse-schema-step4 references column \"name\" that does not belong to effective dataset \"ddl_blank\""
+    },
+    {
+      "code": "SQL_DATASET_CONSISTENCY",
+      "category": "dataset",
+      "severity": "warn",
+      "message": "Exercise ci-warehouse-schema-step4 references column \"type\" that does not belong to effective dataset \"ddl_blank\""
+    },
+    {
+      "code": "SQL_DATASET_CONSISTENCY",
+      "category": "dataset",
+      "severity": "warn",
+      "message": "Exercise ci-warehouse-schema-step5 references table \"sqlite_master\" outside effective dataset \"ddl_blank\""
+    },
+    {
+      "code": "SQL_DATASET_CONSISTENCY",
+      "category": "dataset",
+      "severity": "warn",
+      "message": "Exercise ci-warehouse-schema-step5 references column \"sql\" that does not belong to effective dataset \"ddl_blank\""
+    },
+    {
+      "code": "SQL_DATASET_CONSISTENCY",
+      "category": "dataset",
+      "severity": "warn",
+      "message": "Exercise ci-warehouse-schema-step5 references column \"type\" that does not belong to effective dataset \"ddl_blank\""
+    },
+    {
+      "code": "SQL_DATASET_CONSISTENCY",
+      "category": "dataset",
+      "severity": "warn",
+      "message": "Exercise ci-warehouse-schema-step5 references column \"name\" that does not belong to effective dataset \"ddl_blank\""
+    },
+    {
+      "code": "SQL_DATASET_CONSISTENCY",
+      "category": "dataset",
+      "severity": "warn",
+      "message": "Exercise ci-warehouse-schema-step6 references table \"sqlite_master\" outside effective dataset \"ddl_blank\""
+    },
+    {
+      "code": "SQL_DATASET_CONSISTENCY",
+      "category": "dataset",
+      "severity": "warn",
+      "message": "Exercise ci-warehouse-schema-step6 references column \"sql\" that does not belong to effective dataset \"ddl_blank\""
+    },
+    {
+      "code": "SQL_DATASET_CONSISTENCY",
+      "category": "dataset",
+      "severity": "warn",
+      "message": "Exercise ci-warehouse-schema-step6 references column \"type\" that does not belong to effective dataset \"ddl_blank\""
+    },
+    {
+      "code": "SQL_DATASET_CONSISTENCY",
+      "category": "dataset",
+      "severity": "warn",
+      "message": "Exercise ci-warehouse-schema-step6 references column \"name\" that does not belong to effective dataset \"ddl_blank\""
+    }
+  ]
+}

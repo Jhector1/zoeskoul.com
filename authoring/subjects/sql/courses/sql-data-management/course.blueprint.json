@@ -1,0 +1,182 @@
+{
+  "subjectSlug": "sql",
+  "courseSlug": "sql-data-management",
+  "catalogSlug": "sql",
+  "trackSlug": "sql",
+  "profileId": "sql",
+  "workspaceProfileId": "browser-sql-runner",
+  "workspacePolicyId": "sql-browser-workspace",
+  "courseNumber": 4,
+  "title": "SQL Data Management",
+  "subtitle": "Add, change, remove, and structure relational data with deliberate safety checks.",
+  "level": "beginner",
+  "moduleCount": 4,
+  "description": "A focused SQLite course with three standard modules and one final capstone. Learners move from read-only relational reporting into safe mutations and table creation without repeating SELECT, filtering, reporting, or join lessons.",
+  "sourceLocale": "en",
+  "targetLocales": [],
+  "accessPolicy": "paid",
+  "moduleAccessOverrideDefault": null,
+  "audience": [
+    "Learners who completed SQL Foundations, SQL Analysis & Reporting, and Multi-Table SQL & Joins.",
+    "Beginners who can already identify rows safely with WHERE and understand primary-key and foreign-key relationships.",
+    "Learners preparing to create and maintain small relational datasets before studying database design."
+  ],
+  "prerequisites": [
+    "Write reliable SELECT and WHERE queries that identify exact target rows.",
+    "Use NULL checks, aliases, sorting, and deterministic verification queries.",
+    "Read primary-key and foreign-key relationships in a schema.",
+    "Work confidently in the browser SQL editor and results table."
+  ],
+  "goals": [
+    "Use a preview-change-verify-reset workflow for data-changing SQL.",
+    "Insert rows with explicit columns, intentional NULL values, and controlled defaults.",
+    "Update and delete only confirmed rows with required WHERE clauses.",
+    "Create tables with keys, required values, uniqueness, defaults, and foreign keys.",
+    "Complete three cumulative module projects and one integrated data-management capstone."
+  ],
+  "teachingStyle": {
+    "tone": "practical, safety-first, schema-aware, cumulative",
+    "quizWeight": 0.2,
+    "projectWeight": 0.4,
+    "codeInputWeight": 0.4
+  },
+  "constraints": {
+    "moduleCount": 4,
+    "topicsPerModuleMin": 1,
+    "topicsPerModuleMax": 5
+  },
+  "seedModules": [
+    "sql-data-management-module-0-safe-inserts",
+    "sql-data-management-module-1-controlled-updates-deletes",
+    "sql-data-management-module-2-table-creation-constraints",
+    "sql-data-management-module-3-final-capstone"
+  ],
+  "datasetIds": [
+    "inventory_ops",
+    "ddl_blank"
+  ],
+  "versioning": {
+    "family": "sql-data-management",
+    "version": 1,
+    "status": "draft",
+    "defaultForNewEnrollments": false,
+    "supersedes": null,
+    "supersededBy": null
+  },
+  "courseGenerationPolicy": {
+    "studentActionStyle": "browser_sql_workspace",
+    "forbidUnavailableWorkspaceActions": true,
+    "avoidTerms": [
+      "terminal",
+      "command line",
+      "relearn SELECT",
+      "relearn WHERE",
+      "relearn JOIN",
+      "production database",
+      "execute without preview"
+    ],
+    "preferredTerms": {
+      "editor": "SQL editor",
+      "run": "click Run query",
+      "output": "results table",
+      "preview": "run a SELECT with the intended WHERE condition",
+      "verify": "inspect the check query results",
+      "reset": "reset the exercise sandbox",
+      "filesPanel": "files panel",
+      "queryFile": "query.sql",
+      "schemaFile": "schema.sql",
+      "seedFile": "seed.sql",
+      "runWorkspace": "click Run query to execute the SQL files in their authored order"
+    },
+    "notes": [
+      "This course has four modules total: three standard modules plus one final capstone. Do not split INSERT, UPDATE, DELETE, or individual constraints into repetitive extra modules.",
+      "Assume learners already know SELECT, WHERE, NULL checks, aliases, sorting, aggregates, GROUP BY, and joins. Use those as tools for preview and verification; never create standalone review topics.",
+      "Every technical lesson has exactly two distinct sketches and two aligned code_input Try It exercises.",
+      "Worked examples, Try It tasks, module projects, and capstone steps must use different records, values, tables, and expected final states.",
+      "Modules 0 and 1 use inventory_ops. Modules 2 and 3 use ddl_blank.",
+      "Every INSERT must use an explicit column list. To use a column default in SQLite, omit that column from the explicit list; do not place DEFAULT inside a VALUES tuple. Every UPDATE and DELETE solution must include WHERE.",
+      "An unsafe no-WHERE mutation may appear only as clearly labeled non-executable diagnosis prose; it must never be a solutionCode or runnable starter.",
+      "Every mutation and DDL exercise must include result-returning checkSql that verifies the final state.",
+      "Each standard module has exactly one progressive module project. Only the final topic is rendered as a capstone.",
+      "A progressive data-management step is a complete cumulative SQL workspace. Step N+1 starterFiles must carry forward step N solutionFiles, and starterCode/solutionCode represent the entry file only.",
+      "CREATE TABLE work starts from ddl_blank. Module 2 uses schema.sql plus query.sql; the capstone uses schema.sql, seed.sql, and query.sql. Later steps replace complete files rather than using ALTER TABLE or DROP TABLE.",
+      "Do not introduce transactions, UPSERT, REPLACE, indexes, views, triggers, stored procedures, subqueries, CTEs, set operations, or window functions.",
+      "SQL file architecture is progressive: Modules 0-1 use one query.sql entry file; Module 2 uses schema.sql then query.sql; Module 3 uses schema.sql, seed.sql, then query.sql. The compiler executes files in sqlFileOrder and opens query.sql as the entry file.",
+      "Use the Tables tab for schema reading. ERD and Chen remain hidden in this course because database design is taught next."
+    ]
+  },
+  "practiceDefaults": {
+    "tryIt": true,
+    "requiresTryIt": true,
+    "tryItPlacement": "all_sketches",
+    "runtimeMode": "sql_workspace",
+    "expectedPracticeKinds": [
+      "code_input"
+    ]
+  },
+  "runtimePolicy": {
+    "datasetStrategy": "module_based",
+    "moduleDatasetIds": {
+      "sql-data-management-module-0-safe-inserts": "inventory_ops",
+      "sql-data-management-module-1-controlled-updates-deletes": "inventory_ops",
+      "sql-data-management-module-2-table-creation-constraints": "ddl_blank",
+      "sql-data-management-module-3-final-capstone": "ddl_blank"
+    },
+    "sqlDialect": "sqlite",
+    "resultShape": "table"
+  },
+  "tools": {
+    "defaultVisible": true,
+    "allowOpen": true,
+    "defaultSurface": "editor",
+    "compactDefaultSurface": "editor",
+    "sqlPane": {
+      "showResults": true,
+      "showTables": true,
+      "showErd": false,
+      "showChen": false,
+      "defaultTab": "results",
+      "compactDefaultTab": "results"
+    }
+  },
+  "modulePolicies": [
+    {
+      "moduleNumber": 0,
+      "workspaceProfileId": "browser-sql-runner",
+      "notes": [
+        "Use exactly one authored SQL file named query.sql.",
+        "Set entryFilePath to query.sql. Keep starterFiles and solutionFiles limited to that one file when they are present.",
+        "SELECT previews and verification queries remain in query.sql with INSERT statements."
+      ]
+    },
+    {
+      "moduleNumber": 1,
+      "workspaceProfileId": "browser-sql-runner",
+      "notes": [
+        "Use exactly one authored SQL file named query.sql.",
+        "Set entryFilePath to query.sql. Keep starterFiles and solutionFiles limited to that one file when they are present.",
+        "Preview, UPDATE or DELETE, and verification SELECT statements stay together in query.sql."
+      ]
+    },
+    {
+      "moduleNumber": 2,
+      "workspaceProfileId": "browser-sql-files-runner",
+      "notes": [
+        "Use exactly two learner-editable files: schema.sql and query.sql.",
+        "Set entryFilePath to query.sql and sqlFileOrder to [\"schema.sql\", \"query.sql\"].",
+        "schema.sql contains complete CREATE TABLE definitions. query.sql contains schema-inspection SELECT statements.",
+        "Every starterFiles and solutionFiles array must include both files with query.sql marked as the entry file."
+      ]
+    },
+    {
+      "moduleNumber": 3,
+      "workspaceProfileId": "browser-sql-files-runner",
+      "notes": [
+        "Use exactly three learner-editable files: schema.sql, seed.sql, and query.sql.",
+        "Set entryFilePath to query.sql and sqlFileOrder to [\"schema.sql\", \"seed.sql\", \"query.sql\"].",
+        "schema.sql owns CREATE TABLE statements, seed.sql owns approved INSERT statements, and query.sql owns UPDATE, DELETE, and final verification SELECT statements.",
+        "Every starterFiles and solutionFiles array must include all three files with query.sql marked as the entry file."
+      ]
+    }
+  ]
+}

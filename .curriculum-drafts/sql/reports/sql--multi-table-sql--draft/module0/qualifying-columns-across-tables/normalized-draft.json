@@ -1,0 +1,202 @@
+{
+  "title": "Qualifying Columns Across Tables",
+  "summary": "Use table-qualified column references so SQL and readers know which source each value comes from.",
+  "minutes": 24,
+  "sketchBlocks": [
+    {
+      "id": "sketch0",
+      "title": "Understanding Qualified Columns",
+      "bodyMarkdown": "When working with multiple tables in SQL, it's crucial to qualify column names to avoid ambiguity. This means prefixing the column name with the table name or alias. For example, if both `students` and `enrollments` tables have a column named `id`, you would refer to them as `students.id` and `enrollments.id` respectively. This ensures that SQL knows exactly which column you're referring to, especially in JOIN operations.\n\n```sql\nSELECT students.name, enrollments.term\nFROM students\nJOIN enrollments ON students.id = enrollments.student_id;\n```\n\nIn this query, `students.id` and `enrollments.student_id` are qualified column names. This practice helps maintain clarity and prevents errors in your queries."
+    },
+    {
+      "id": "sketch1",
+      "title": "Using Table Aliases for Simplicity",
+      "bodyMarkdown": "Table aliases are shorthand references for table names, making queries more readable and easier to write. You define an alias using the `AS` keyword. For example, you can alias the `students` table as `s` and the `enrollments` table as `e`.\n\n```sql\nSELECT s.name, e.term\nFROM students AS s\nJOIN enrollments AS e ON s.id = e.student_id;\n```\n\nHere, `s` and `e` are aliases for `students` and `enrollments`, respectively. This allows you to write shorter and more manageable queries, especially when dealing with multiple tables."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "try-qualifying-columns-across-tables-sketch0",
+      "kind": "code_input",
+      "title": "Practice Qualifying Columns",
+      "prompt": "Write a query to select the student names and course titles for all enrollments. Use qualified column names to avoid ambiguity.",
+      "starterCode": "SELECT students.name, courses.title\nFROM students\nJOIN enrollments ON students.id = enrollments.student_id\nJOIN courses ON enrollments.course_id = courses.id;",
+      "solutionCode": "SELECT students.name, courses.title\nFROM students\nJOIN enrollments ON students.id = enrollments.student_id\nJOIN courses ON enrollments.course_id = courses.id;",
+      "tests": [
+        {
+          "stdout": "Mia | Biology\nMia | Algebra II\nLeo | Algebra II\nLeo | World History\nAva | Computer Basics\nNoah | Biology\nNoah | Computer Basics\nEmma | World History\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "school_relations_intro",
+      "recipeType": "sql_query",
+      "hint": "Use qualified column names for both tables involved in the JOIN.",
+      "help": {
+        "concept": "Qualifying columns involves prefixing column names with their table names to avoid ambiguity.",
+        "hint_1": "Ensure each column name is prefixed with its table name.",
+        "hint_2": "Use `students.name` and `courses.title` in your SELECT statement."
+      }
+    },
+    {
+      "id": "try-qualifying-columns-across-tables-sketch1",
+      "kind": "code_input",
+      "title": "Using Aliases in Queries",
+      "prompt": "Write a query to list student names and the terms they are enrolled in, using table aliases for simplicity.",
+      "starterCode": "SELECT s.name, e.term\nFROM students AS s\nJOIN enrollments AS e ON s.id = e.student_id;",
+      "solutionCode": "SELECT s.name, e.term\nFROM students AS s\nJOIN enrollments AS e ON s.id = e.student_id;",
+      "tests": [
+        {
+          "stdout": "Mia | Spring 2026\nMia | Spring 2026\nLeo | Spring 2026\nLeo | Spring 2026\nAva | Spring 2026\nNoah | Spring 2026\nNoah | Spring 2026\nEmma | Spring 2026\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "school_relations_intro",
+      "recipeType": "sql_query",
+      "hint": "Define aliases for both tables and use them in your SELECT statement.",
+      "help": {
+        "concept": "Table aliases simplify queries by providing shorthand references for table names.",
+        "hint_1": "Use `AS` to define aliases for the tables.",
+        "hint_2": "Refer to columns using their aliases, like `s.name` and `e.term`."
+      }
+    },
+    {
+      "id": "single-choice-1",
+      "kind": "single_choice",
+      "title": "Purpose of Qualifying Columns",
+      "prompt": "Why is it important to qualify column names in SQL queries involving multiple tables?",
+      "options": [
+        "To prevent ambiguity when columns have the same name in different tables.",
+        "To make the query run faster.",
+        "To reduce the size of the database.",
+        "To ensure the database schema is correct."
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Think about how SQL distinguishes between columns with the same name in different tables.",
+      "help": {
+        "concept": "Qualifying columns helps SQL distinguish between columns with the same name in different tables.",
+        "hint_1": "Consider what happens if two tables have a column with the same name.",
+        "hint_2": "Qualifying columns prevents ambiguity in SQL queries."
+      }
+    },
+    {
+      "id": "single-choice-2",
+      "kind": "single_choice",
+      "title": "Using Table Aliases",
+      "prompt": "What is the main benefit of using table aliases in SQL queries?",
+      "options": [
+        "They make queries shorter and easier to read.",
+        "They increase the execution speed of queries.",
+        "They allow for more tables to be joined.",
+        "They ensure data integrity."
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Consider how aliases affect the readability and length of SQL queries.",
+      "help": {
+        "concept": "Table aliases provide shorthand references for table names, making queries more readable.",
+        "hint_1": "Aliases help shorten the query without losing clarity.",
+        "hint_2": "Using aliases can make complex queries easier to manage."
+      }
+    },
+    {
+      "id": "multi-choice-1",
+      "kind": "multi_choice",
+      "title": "Identifying Qualified Columns",
+      "prompt": "Which of the following are examples of qualified column names? Select all that apply.",
+      "options": [
+        "students.id",
+        "id",
+        "enrollments.student_id",
+        "student_id"
+      ],
+      "correctOptionIds": [
+        "a",
+        "c"
+      ],
+      "hint": "Qualified column names include the table name as a prefix.",
+      "help": {
+        "concept": "Qualified column names include the table name to avoid ambiguity.",
+        "hint_1": "Look for column names that are prefixed with a table name.",
+        "hint_2": "Qualified columns are written as `table.column`."
+      }
+    },
+    {
+      "id": "multi-choice-2",
+      "kind": "multi_choice",
+      "title": "Benefits of Using Aliases",
+      "prompt": "What are the benefits of using table aliases in SQL queries? Select all that apply.",
+      "options": [
+        "Simplifies query writing",
+        "Improves query readability",
+        "Increases query execution speed",
+        "Ensures data accuracy"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ],
+      "hint": "Think about how aliases affect query readability and management.",
+      "help": {
+        "concept": "Table aliases simplify queries by providing shorthand references for table names.",
+        "hint_1": "Aliases can make complex queries easier to read and write.",
+        "hint_2": "They help manage queries with multiple tables."
+      }
+    },
+    {
+      "id": "drag-reorder-1",
+      "kind": "drag_reorder",
+      "title": "Order of SQL Clauses",
+      "prompt": "Arrange the SQL clauses in the correct order for a basic SELECT query.",
+      "tokens": [
+        "SELECT clause",
+        "FROM clause",
+        "JOIN clause",
+        "ON condition",
+        "WHERE clause"
+      ],
+      "correctOrder": [
+        "SELECT clause",
+        "FROM clause",
+        "JOIN clause",
+        "ON condition",
+        "WHERE clause"
+      ],
+      "hint": "Consider the typical structure of a SELECT query.",
+      "help": {
+        "concept": "SQL queries follow a specific order of clauses to execute correctly.",
+        "hint_1": "The SELECT clause usually comes first.",
+        "hint_2": "The FROM clause follows the SELECT clause."
+      }
+    },
+    {
+      "id": "fill-blank-choice-1",
+      "kind": "fill_blank_choice",
+      "title": "SQL Aliases Syntax",
+      "prompt": "Fill in the blank: To create an alias for a table in SQL, use the keyword `[blank1]`.",
+      "template": "To create an alias for a table in SQL, use the keyword `[blank1]`.",
+      "choices": [
+        "AS",
+        "IS",
+        "IN",
+        "ON"
+      ],
+      "correctValue": "AS",
+      "hint": "This keyword is used to define aliases in SQL.",
+      "help": {
+        "concept": "The `the missing term` keyword is used to define aliases in SQL queries.",
+        "hint_1": "This keyword is often used to rename columns or tables temporarily.",
+        "hint_2": "It is a two-letter keyword."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Student Enrollment Activity Roster",
+    "stepIds": [
+      "try-qualifying-columns-across-tables-sketch0",
+      "try-qualifying-columns-across-tables-sketch1"
+    ]
+  }
+}

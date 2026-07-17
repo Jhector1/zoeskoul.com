@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
     resolveExerciseInteractionState,
+    practiceRuntimeSnapshotKeyForExerciseRenderer,
     resolveExerciseRuntimeDefaultsLayers,
     shouldSkipEmbeddedEnsureExercise,
 } from "./ExerciseRenderer";
@@ -125,5 +126,66 @@ describe("resolveExerciseInteractionState", () => {
                 maxAttempts: 3,
             }),
         ).toEqual({ outOfAttempts: true, lockInputs: true });
+    });
+});
+
+
+describe("practiceRuntimeSnapshotKeyForExerciseRenderer", () => {
+    const workspace = (content: string, updatedAt: number) => ({
+        version: 2 as const,
+        language: "sql",
+        nodes: [
+            {
+                id: "file:main.sql",
+                kind: "file" as const,
+                name: "main.sql",
+                parentId: null,
+                content,
+                createdAt: 0,
+                updatedAt,
+            },
+        ],
+        openTabs: ["file:main.sql"],
+        activeFileId: "file:main.sql",
+        entryFileId: "file:main.sql",
+        expanded: [],
+        stdin: "",
+    });
+
+    it("ignores timestamp and object-identity churn for the same runtime answer", () => {
+        const first = {
+            workspace: workspace("SELECT 1;", 1),
+            code: "SELECT 1;",
+            codeStdin: "",
+            language: "sql",
+            updatedAt: 1,
+        };
+        const second = {
+            workspace: workspace("SELECT 1;", 999),
+            code: "SELECT 1;",
+            codeStdin: "",
+            language: "sql",
+            updatedAt: 999,
+        };
+
+        expect(practiceRuntimeSnapshotKeyForExerciseRenderer(first)).toBe(
+            practiceRuntimeSnapshotKeyForExerciseRenderer(second),
+        );
+    });
+
+    it("changes when the learner answer changes", () => {
+        expect(
+            practiceRuntimeSnapshotKeyForExerciseRenderer({
+                workspace: workspace("SELECT 1;", 1),
+                code: "SELECT 1;",
+                language: "sql",
+            }),
+        ).not.toBe(
+            practiceRuntimeSnapshotKeyForExerciseRenderer({
+                workspace: workspace("SELECT 2;", 2),
+                code: "SELECT 2;",
+                language: "sql",
+            }),
+        );
     });
 });

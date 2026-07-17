@@ -1,0 +1,202 @@
+{
+  "title": "Reading Keys and Relationships",
+  "summary": "Trace documented primary-key and foreign-key pairs before writing a join.",
+  "minutes": 24,
+  "sketchBlocks": [
+    {
+      "id": "sketch-1",
+      "title": "Understanding Primary and Foreign Keys",
+      "bodyMarkdown": "In relational databases, primary keys uniquely identify each record in a table, while foreign keys establish a link between two tables. For example, in our `students` table, the `id` column is a primary key. In the `enrollments` table, `student_id` is a foreign key that references the `id` in `students`. This relationship allows us to join these tables and retrieve related data."
+    },
+    {
+      "id": "sketch-2",
+      "title": "Using INNER JOIN to Connect Tables",
+      "bodyMarkdown": "The `INNER JOIN` clause is used to combine rows from two or more tables based on a related column. For instance, to find all students enrolled in courses, we can join the `students` and `enrollments` tables on the `students.id` and `enrollments.student_id` columns:\n\n```sql\nSELECT students.name, enrollments.course_id\nFROM students\nINNER JOIN enrollments ON students.id = enrollments.student_id;\n```\n\nThis query retrieves the names of students along with their enrolled course IDs."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "quiz-1",
+      "kind": "single_choice",
+      "title": "Identify the Primary Key",
+      "prompt": "Which column is the primary key in the `students` table?",
+      "options": [
+        "name",
+        "grade_level",
+        "id",
+        "student_id"
+      ],
+      "correctOptionIds": [
+        "c"
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Remove options that do not match the concept or evidence named in the question."
+      }
+    },
+    {
+      "id": "quiz-2",
+      "kind": "single_choice",
+      "title": "Purpose of Foreign Keys",
+      "prompt": "What is the purpose of a foreign key in a database?",
+      "options": [
+        "To uniquely identify each record",
+        "To link two tables together",
+        "To store large amounts of data",
+        "To enforce data types"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Think about how tables are connected in a database.",
+      "help": {
+        "concept": "A foreign key links two tables together.",
+        "hint_1": "Foreign keys reference primary keys in another table.",
+        "hint_2": "They establish a relationship between tables."
+      }
+    },
+    {
+      "id": "quiz-3",
+      "kind": "multi_choice",
+      "title": "Components of an INNER JOIN",
+      "prompt": "Which components are necessary for an `INNER JOIN`? Select all that apply.",
+      "options": [
+        "SELECT clause",
+        "ON condition",
+        "WHERE clause",
+        "Table names"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "d"
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "quiz-4",
+      "kind": "multi_choice",
+      "title": "Benefits of Using Table Aliases",
+      "prompt": "What are the benefits of using table aliases in SQL queries? Select all that apply.",
+      "options": [
+        "Shorten query length",
+        "Improve query readability",
+        "Increase query execution speed",
+        "Avoid column name ambiguity"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "d"
+      ],
+      "hint": "Think about how aliases can simplify your queries.",
+      "help": {
+        "concept": "Table aliases make queries easier to read and write.",
+        "hint_1": "Aliases can shorten long table names.",
+        "hint_2": "They help avoid ambiguity when joining tables."
+      }
+    },
+    {
+      "id": "quiz-5",
+      "kind": "drag_reorder",
+      "title": "Order of SQL Clauses",
+      "prompt": "Arrange the SQL clauses in the correct order for a basic query.",
+      "tokens": [
+        "SELECT",
+        "FROM",
+        "WHERE",
+        "ORDER BY"
+      ],
+      "correctOrder": [
+        "SELECT",
+        "FROM",
+        "WHERE",
+        "ORDER BY"
+      ],
+      "hint": "Read each piece and arrange them in the order the statement should be understood.",
+      "help": {
+        "concept": "The pieces should form a valid statement in a logical order.",
+        "hint_1": "Start with the piece that introduces the idea or action.",
+        "hint_2": "Place dependent pieces after the part they describe or complete."
+      }
+    },
+    {
+      "id": "quiz-6",
+      "kind": "fill_blank_choice",
+      "title": "SQL Clause for Filtering",
+      "prompt": "Which SQL clause is used to filter records?",
+      "template": "The [blank1] clause is used to filter records.",
+      "choices": [
+        "SELECT",
+        "FROM",
+        "WHERE",
+        "ORDER BY"
+      ],
+      "correctValue": "WHERE",
+      "hint": "This clause specifies conditions for the rows to be included.",
+      "help": {
+        "concept": "The `the missing term` clause filters records based on conditions.",
+        "hint_1": "It comes after the `FROM` clause.",
+        "hint_2": "It specifies conditions for filtering rows."
+      }
+    },
+    {
+      "id": "quiz-7",
+      "kind": "code_input",
+      "title": "Join Students and Enrollments",
+      "prompt": "Write a query to join the `students` and `enrollments` tables to list student names and their enrolled course IDs.",
+      "starterCode": "-- Write your SQL answer below",
+      "solutionCode": "SELECT students.name, enrollments.course_id\nFROM students\nINNER JOIN enrollments ON students.id = enrollments.student_id;",
+      "tests": [
+        {
+          "stdout": "Mia|1\nMia|2\nLeo|2\nLeo|3\nAva|4\nNoah|1\nNoah|4\nEmma|3\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "school_relations_intro",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "quiz-8",
+      "kind": "code_input",
+      "title": "Join Courses and Departments",
+      "prompt": "Write a query to join the `courses` and `departments` tables to list course titles and their department names.",
+      "starterCode": "-- Write your SQL answer below",
+      "solutionCode": "SELECT courses.title, departments.name\nFROM courses\nINNER JOIN departments ON courses.department_id = departments.id;",
+      "tests": [
+        {
+          "stdout": "Biology|Science\nAlgebra II|Math\nWorld History|Humanities\nComputer Basics|Technology\nCreative Writing|Humanities\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "school_relations_intro",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Student Enrollment Activity Roster",
+    "stepIds": [
+      "quiz-7",
+      "quiz-8"
+    ]
+  }
+}

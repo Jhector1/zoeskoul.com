@@ -3,6 +3,7 @@ import type {
     CourseSpecModule,
     PracticeConfig,
     CourseSpecTopic,
+    CourseSpecProjectBrief,
     ExerciseKindMix,
 } from "@zoeskoul/curriculum-contracts";
 import { getCurriculumProfile } from "@zoeskoul/curriculum-profiles";
@@ -324,6 +325,25 @@ function normalizeTopicId(args: {
     return candidate;
 }
 
+function normalizeProjectBrief(value: unknown): CourseSpecProjectBrief | undefined {
+    if (!value || typeof value !== "object" || Array.isArray(value)) {
+        return undefined;
+    }
+
+    const brief = value as CourseSpecProjectBrief;
+    return {
+        ...brief,
+        ...(Array.isArray(brief.requirements)
+            ? { requirements: [...brief.requirements] }
+            : {}),
+        ...(Array.isArray(brief.stepLadder)
+            ? {
+                stepLadder: brief.stepLadder.map((step) => ({ ...step })),
+            }
+            : {}),
+    };
+}
+
 function normalizeTopic(
     topic: any,
     moduleNumber: number,
@@ -356,6 +376,7 @@ function normalizeTopic(
             : [],
         learningGoals: cleanStringArray(topic?.learningGoals),
         practice: normalizePractice(topic?.practice),
+        projectBrief: normalizeProjectBrief(topic?.projectBrief),
     };
 }
 

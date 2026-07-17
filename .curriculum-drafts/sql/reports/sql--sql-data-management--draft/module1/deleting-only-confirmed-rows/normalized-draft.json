@@ -1,0 +1,240 @@
+{
+  "title": "Deleting Only Confirmed Rows",
+  "summary": "Learn to safely delete records by confirming targets with a preview and using precise conditions in DELETE statements.",
+  "minutes": 30,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Safely Deleting Records with WHERE",
+      "bodyMarkdown": "Deleting records in a database is a powerful operation that must be handled with care. The `DELETE FROM` statement is used to remove rows from a table, but without a `WHERE` clause, it will delete all rows, which is often not the desired outcome. To prevent accidental data loss, always use a `WHERE` clause to specify which rows should be deleted.\n\nFor example, consider a table `inventory_items` where we want to delete a test item:\n\n```sql\nDELETE FROM inventory_items\nWHERE id = 2;\n```\n\nThis command deletes the row with `id` 2, which is a specific test item. The `WHERE` clause ensures that only this row is affected, preventing unintended deletions.\n\n**Why it matters:** Using a `WHERE` clause with `DELETE` helps maintain data integrity by ensuring only the intended records are removed. This practice is crucial in environments where data accuracy is paramount."
+    },
+    {
+      "id": "sketch2",
+      "title": "Confirming Deletions with Verification Queries",
+      "bodyMarkdown": "After performing a deletion, it's important to verify that only the intended records were removed. This can be done by running a `SELECT` query to check the current state of the table.\n\nFor instance, after deleting a test item from `inventory_items`, you can verify the deletion with:\n\n```sql\nSELECT * FROM inventory_items WHERE id = 2;\n```\n\nIf the deletion was successful, this query should return no rows, confirming that the item with `id` 2 has been removed.\n\n**Why it matters:** Verification ensures that the deletion operation was executed correctly and that no unintended data was affected. This step is essential for maintaining trust in the database's accuracy and reliability."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "try-deleting-only-confirmed-rows-sketch0",
+      "kind": "code_input",
+      "title": "Delete a Specific Test Item",
+      "prompt": "Delete the test item with `id` 4 from the `inventory_items` table. Verify the deletion by ensuring the item no longer exists.",
+      "starterCode": "-- Delete the test item with id 4\nDELETE FROM inventory_items\nWHERE id = 4;\n\n-- Verify the deletion\nSELECT * FROM inventory_items WHERE id = 4;",
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "-- Delete the test item with id 4\nDELETE FROM inventory_items\nWHERE id = 4;\n\n-- Verify the deletion\nSELECT * FROM inventory_items WHERE id = 4;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "-- Delete the test item with id 4\nDELETE FROM inventory_items\nWHERE id = 4;\n\n-- Verify the deletion\nSELECT * FROM inventory_items WHERE id = 4;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionCode": "-- Delete the test item with id 4\nDELETE FROM inventory_items\nWHERE id = 4;\n\n-- Verify the deletion\nSELECT * FROM inventory_items WHERE id = 4;",
+      "tests": [
+        {
+          "stdout": "-- Verify the deletion\nSELECT * FROM inventory_items WHERE id = 4;",
+          "match": "includes"
+        }
+      ],
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query",
+      "checkSql": "SELECT * FROM inventory_items WHERE id = 4;",
+      "hint": "Use DELETE FROM with a WHERE clause to target the specific id.",
+      "help": {
+        "concept": "Use DELETE FROM with a WHERE clause to remove specific rows.",
+        "hint_1": "Ensure the WHERE clause targets the correct id.",
+        "hint_2": "Verify the deletion by checking that the row with id 4 is gone."
+      }
+    },
+    {
+      "id": "try-deleting-only-confirmed-rows-sketch1",
+      "kind": "code_input",
+      "title": "Remove Inactive Test Items",
+      "prompt": "Delete all inactive test items from the `inventory_items` table. Verify that only inactive test items were removed.",
+      "starterCode": "-- Delete inactive test items\nDELETE FROM inventory_items\nWHERE status = 'inactive' AND is_test = 1;\n\n-- Verify the deletion\nSELECT * FROM inventory_items WHERE status = 'inactive' AND is_test = 1;",
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "-- Delete inactive test items\nDELETE FROM inventory_items\nWHERE status = 'inactive' AND is_test = 1;\n\n-- Verify the deletion\nSELECT * FROM inventory_items WHERE status = 'inactive' AND is_test = 1;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "-- Delete inactive test items\nDELETE FROM inventory_items\nWHERE status = 'inactive' AND is_test = 1;\n\n-- Verify the deletion\nSELECT * FROM inventory_items WHERE status = 'inactive' AND is_test = 1;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionCode": "-- Delete inactive test items\nDELETE FROM inventory_items\nWHERE status = 'inactive' AND is_test = 1;\n\n-- Verify the deletion\nSELECT * FROM inventory_items WHERE status = 'inactive' AND is_test = 1;",
+      "tests": [
+        {
+          "stdout": "-- Verify the deletion\nSELECT * FROM inventory_items WHERE status = 'inactive' AND is_test = 1;",
+          "match": "includes"
+        }
+      ],
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query",
+      "checkSql": "SELECT * FROM inventory_items WHERE status = 'inactive' AND is_test = 1;",
+      "hint": "Use DELETE FROM with a WHERE clause to target inactive test items.",
+      "help": {
+        "concept": "Use DELETE FROM with a WHERE clause to remove rows based on multiple conditions.",
+        "hint_1": "Combine conditions using AND to target inactive test items.",
+        "hint_2": "Verify by checking that no inactive test items remain."
+      }
+    },
+    {
+      "id": "single-choice-1",
+      "kind": "single_choice",
+      "title": "Purpose of WHERE in DELETE",
+      "prompt": "What is the purpose of using a WHERE clause in a DELETE statement?",
+      "options": [
+        "To specify which rows to delete",
+        "To sort the rows before deletion",
+        "To update the rows before deletion",
+        "To insert new rows before deletion"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Think about how WHERE affects the scope of deletion.",
+      "help": {
+        "concept": "The WHERE clause limits the rows affected by the DELETE statement.",
+        "hint_1": "Without WHERE, DELETE removes all rows.",
+        "hint_2": "WHERE specifies which rows to delete."
+      }
+    },
+    {
+      "id": "single-choice-2",
+      "kind": "single_choice",
+      "title": "Effect of No WHERE Clause",
+      "prompt": "What happens if you execute a DELETE statement without a WHERE clause?",
+      "options": [
+        "All rows in the table are deleted",
+        "Only the first row is deleted",
+        "No rows are deleted",
+        "Only rows with NULL values are deleted"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Consider the scope of deletion without WHERE.",
+      "help": {
+        "concept": "A DELETE without WHERE affects all rows in the table.",
+        "hint_1": "No WHERE means no condition to limit deletion.",
+        "hint_2": "All rows will be deleted."
+      }
+    },
+    {
+      "id": "multi-choice-1",
+      "kind": "multi_choice",
+      "title": "Verifying Deletions",
+      "prompt": "Which steps are important to verify a deletion operation? Select all that apply.",
+      "options": [
+        "Run a SELECT query to check the affected rows",
+        "Check for unintended deletions",
+        "Run the DELETE statement again",
+        "Ignore verification if the DELETE was successful"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ],
+      "hint": "Think about how you confirm the deletion was successful.",
+      "help": {
+        "concept": "Verification involves checking the affected rows and ensuring no unintended deletions.",
+        "hint_1": "Check the table state after deletion.",
+        "hint_2": "Ensure only intended rows are deleted."
+      }
+    },
+    {
+      "id": "drag-reorder-1",
+      "kind": "drag_reorder",
+      "title": "Steps for Safe Deletion",
+      "prompt": "Arrange the steps for safely deleting records in the correct order.",
+      "tokens": [
+        "Preview the target rows",
+        "Execute the DELETE statement",
+        "Verify the deletion"
+      ],
+      "correctOrder": [
+        "Preview the target rows",
+        "Execute the DELETE statement",
+        "Verify the deletion"
+      ],
+      "hint": "Consider the sequence from preview to verification.",
+      "help": {
+        "concept": "Safe deletion involves previewing, executing, and verifying.",
+        "hint_1": "Start with previewing the target rows.",
+        "hint_2": "End with verifying the deletion."
+      }
+    },
+    {
+      "id": "fill-blank-choice-1",
+      "kind": "fill_blank_choice",
+      "title": "DELETE Statement Syntax",
+      "prompt": "Complete the DELETE statement: DELETE FROM inventory_items [blank1] id = 3;",
+      "template": "DELETE FROM inventory_items [blank1] id = 3;",
+      "choices": [
+        "WHERE",
+        "ORDER BY",
+        "GROUP BY",
+        "HAVING"
+      ],
+      "correctValue": "WHERE",
+      "hint": "Think about what limits the deletion to specific rows.",
+      "help": {
+        "concept": "The the missing term clause specifies which rows to delete.",
+        "hint_1": "The the missing term clause follows the table name.",
+        "hint_2": "the missing term is used to specify conditions."
+      }
+    },
+    {
+      "id": "fill-blank-choice-2",
+      "kind": "fill_blank_choice",
+      "title": "Purpose of Verification",
+      "prompt": "Verification ensures that [blank1] records were deleted.",
+      "template": "Verification ensures that [blank1] records were deleted.",
+      "choices": [
+        "only intended",
+        "all",
+        "no",
+        "random"
+      ],
+      "correctValue": "only intended",
+      "hint": "Think about what verification confirms.",
+      "help": {
+        "concept": "Verification confirms the correct records were deleted.",
+        "hint_1": "Verification checks the intended outcome.",
+        "hint_2": "It ensures only the intended records are affected."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Inventory Correction and Cleanup",
+    "stepIds": [
+      "try-deleting-only-confirmed-rows-sketch0",
+      "try-deleting-only-confirmed-rows-sketch1"
+    ]
+  }
+}

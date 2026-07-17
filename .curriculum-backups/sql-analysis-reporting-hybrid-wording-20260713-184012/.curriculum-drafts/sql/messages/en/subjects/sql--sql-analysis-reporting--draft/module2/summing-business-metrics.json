@@ -1,0 +1,165 @@
+{
+  "topics": {
+    "sql--sql-analysis-reporting--draft": {
+      "sql-analysis-reporting-module-2-aggregate-functions": {
+        "summing-business-metrics": {
+          "label": "Summing Business Metrics",
+          "summary": "Add stored values or calculated row expressions across the full query scope.",
+          "cards": {
+            "sketch0": {
+              "title": "Sum a Stored Measure"
+            },
+            "sketch1": {
+              "title": "Sum a Calculated Expression"
+            },
+            "quiz": {
+              "title": "Check Your Understanding"
+            }
+          },
+          "practice": {
+            "single-choice-1": {
+              "title": "SUM Result Grain",
+              "prompt": "Without GROUP BY, how many rows does `SELECT SUM(quantity)` return?",
+              "hint": "An aggregate condenses the complete query scope.",
+              "help": {
+                "concept": "SUM without grouping returns one summary value.",
+                "hint_1": "Grouping is what creates several summary rows.",
+                "hint_2": "Choose the single-row result."
+              },
+              "options": {
+                "a": "One summary row",
+                "b": "One row per order",
+                "c": "One row per region",
+                "d": "No rows"
+              }
+            },
+            "single-choice-2": {
+              "title": "Gross Sales Total",
+              "prompt": "Which expression sums gross sales across rows?",
+              "hint": "Calculate each row value inside the aggregate.",
+              "help": {
+                "concept": "SUM can receive the full row-level expression.",
+                "hint_1": "A non-aggregated column cannot be multiplied by one overall sum in this one-row report.",
+                "hint_2": "Choose the expression inside SUM."
+              },
+              "options": {
+                "a": "SUM(quantity * unit_price)",
+                "b": "SUM(quantity) * unit_price",
+                "c": "quantity * SUM(unit_price)",
+                "d": "COUNT(quantity * unit_price)"
+              }
+            },
+            "multi-choice-1": {
+              "title": "Valid SUM Metrics",
+              "prompt": "Which values are meaningful to add across orders? Select all that apply.",
+              "hint": "SUM needs numeric values whose units remain meaningful when combined.",
+              "help": {
+                "concept": "Units and monetary amounts can be totaled.",
+                "hint_1": "Text labels cannot be added.",
+                "hint_2": "Choose numeric measures rather than dimensions."
+              },
+              "options": {
+                "a": "quantity",
+                "b": "quantity * unit_price",
+                "c": "discount dollars per order",
+                "d": "sales_rep names"
+              }
+            },
+            "multi-choice-2": {
+              "title": "Filtered Sum Facts",
+              "prompt": "Which statements about `SUM(quantity)` with a WHERE clause are true? Select all that apply.",
+              "hint": "Think about query scope, output grain, and read-only behavior.",
+              "help": {
+                "concept": "The filter defines the population before aggregation.",
+                "hint_1": "SELECT does not update the table.",
+                "hint_2": "No grouping means one total."
+              },
+              "options": {
+                "a": "WHERE controls which rows contribute.",
+                "b": "The alias should describe the filtered metric.",
+                "c": "SUM changes the stored quantity values.",
+                "d": "The output is one row when there is no GROUP BY."
+              }
+            },
+            "drag-reorder-1": {
+              "title": "Compute an Aggregate Expression",
+              "prompt": "Arrange the calculation stages.",
+              "hint": "Move from source scope to row metric to aggregate presentation.",
+              "help": {
+                "concept": "WHERE defines inputs before aggregation.",
+                "hint_1": "The row expression feeds SUM.",
+                "hint_2": "Formatting is applied to the completed total."
+              },
+              "tokens": {
+                "t1": "Filter the source rows",
+                "t2": "Calculate quantity * unit_price for each row",
+                "t3": "SUM the calculated values",
+                "t4": "ROUND the final total"
+              }
+            },
+            "fill-blank-choice-1": {
+              "title": "Complete the Total-Units KPI",
+              "prompt": "Fill the aggregate function that adds quantities.",
+              "hint": "Choose the function that adds numeric values.",
+              "help": {
+                "concept": "The metric is a total of unit counts.",
+                "hint_1": "COUNT would measure rows, not units.",
+                "hint_2": "AVG would describe a typical quantity."
+              },
+              "template": "SELECT [blank1](quantity) AS total_units FROM sales_reporting;",
+              "choices": [
+                "SUM",
+                "COUNT",
+                "AVG",
+                "ROUND"
+              ]
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_summing_business_metrics_sketch0": {
+              "title": "Total Units in Pending Orders",
+              "prompt": "Return one value named `pending_units` that sums `quantity` for pending orders.",
+              "hint": "Filter to pending rows before summing quantity.",
+              "help": {
+                "concept": "SUM adds the selected numeric expression across the current row set.",
+                "hint_1": "The metric is units, so sum `quantity`.",
+                "hint_2": "Name the result after both status and measure."
+              },
+              "starterCode": "-- Write the query below.",
+              "solutionCode": "SELECT SUM(quantity) AS pending_units\nFROM sales_reporting\nWHERE order_status = 'Pending';"
+            },
+            "try_summing_business_metrics_sketch1": {
+              "title": "Total Null-Safe Discount Dollars",
+              "prompt": "Return the total discount amount across all orders, rounded to two decimals as `total_discount_amount`.",
+              "hint": "Place the complete row-level discount expression inside SUM.",
+              "help": {
+                "concept": "SUM can aggregate a null-safe calculated monetary value across many rows.",
+                "hint_1": "Apply COALESCE to the percentage before calculating each discount.",
+                "hint_2": "Round the final aggregate total, not each source column."
+              },
+              "starterCode": "-- Write the query below.",
+              "solutionCode": "SELECT ROUND(\n    SUM(quantity * unit_price * COALESCE(discount_pct, 0) / 100),\n    2\n) AS total_discount_amount\nFROM sales_reporting;"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql--sql-analysis-reporting--draft": {
+      "sql-analysis-reporting-module-2-aggregate-functions": {
+        "summing-business-metrics": {
+          "sketch0": {
+            "title": "Sum a Stored Measure",
+            "bodyMarkdown": "`SUM` adds a numeric value across all rows in scope.\n\n```sql\nSELECT SUM(quantity) AS completed_units\nFROM sales_reporting\nWHERE order_status = 'Completed';\n```\n\nThe result is one row because no GROUP BY has been introduced yet."
+          },
+          "sketch1": {
+            "title": "Sum a Calculated Expression",
+            "bodyMarkdown": "SUM can aggregate a calculation that is evaluated for each row.\n\n```sql\nSELECT\n    ROUND(SUM(quantity * unit_price), 2) AS completed_gross_sales\nFROM sales_reporting\nWHERE order_status = 'Completed';\n```\n\nSQL calculates each row's gross value, adds those values, then rounds the final total."
+          }
+        }
+      }
+    }
+  }
+}

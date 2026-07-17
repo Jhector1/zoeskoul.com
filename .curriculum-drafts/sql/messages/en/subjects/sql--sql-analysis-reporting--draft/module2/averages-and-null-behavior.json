@@ -1,0 +1,165 @@
+{
+  "topics": {
+    "sql--sql-analysis-reporting--draft": {
+      "sql-analysis-reporting-module-2-aggregate-functions": {
+        "averages-and-null-behavior": {
+          "label": "Averages and NULL Behavior",
+          "summary": "Calculate an average and state clearly whether missing values are excluded or replaced.",
+          "cards": {
+            "sketch0": {
+              "title": "AVG Uses Known Values"
+            },
+            "sketch1": {
+              "title": "A Fallback Changes the Metric"
+            },
+            "quiz": {
+              "title": "Check Your Understanding"
+            }
+          },
+          "practice": {
+            "single-choice-1": {
+              "title": "AVG and NULL",
+              "prompt": "How does `AVG(customer_rating)` treat NULL ratings?",
+              "hint": "AVG uses known numeric inputs unless you replace missing values first.",
+              "help": {
+                "concept": "NULL values are excluded from AVG(column).",
+                "hint_1": "The denominator is the count of non-NULL values.",
+                "hint_2": "Choose the exclusion behavior."
+              },
+              "options": {
+                "a": "It treats them as zero.",
+                "b": "It ignores them.",
+                "c": "It returns NULL whenever one exists.",
+                "d": "It counts them twice."
+              }
+            },
+            "single-choice-2": {
+              "title": "Meaning of COALESCE Before AVG",
+              "prompt": "What changes when `AVG(COALESCE(customer_rating, 0))` is used?",
+              "hint": "The fallback is applied before the aggregate.",
+              "help": {
+                "concept": "Every missing rating becomes a numeric zero input.",
+                "hint_1": "That changes the metric definition.",
+                "hint_2": "Choose the explicit fallback effect."
+              },
+              "options": {
+                "a": "Missing ratings contribute zero.",
+                "b": "Duplicate ratings disappear.",
+                "c": "Only completed orders remain.",
+                "d": "The average becomes a sum."
+              }
+            },
+            "multi-choice-1": {
+              "title": "Clear Average Metrics",
+              "prompt": "Which choices improve the clarity of an average KPI? Select all that apply.",
+              "hint": "A reader needs to know population, missing-value rule, and presentation precision.",
+              "help": {
+                "concept": "Specific aliases communicate metric meaning.",
+                "hint_1": "A generic name hides assumptions.",
+                "hint_2": "Choose practices that make the denominator understandable."
+              },
+              "options": {
+                "a": "State the filtered population.",
+                "b": "State how NULL is handled.",
+                "c": "Round to a precision suited to the report.",
+                "d": "Call every average simply `avg`."
+              }
+            },
+            "multi-choice-2": {
+              "title": "Valid AVG Inputs",
+              "prompt": "Which expressions can be averaged meaningfully? Select all that apply.",
+              "hint": "AVG requires a numeric value or expression.",
+              "help": {
+                "concept": "Ratings and monetary row values are numeric.",
+                "hint_1": "Text names are dimensions, not measures.",
+                "hint_2": "A fallback expression is still numeric."
+              },
+              "options": {
+                "a": "customer_rating",
+                "b": "quantity * unit_price",
+                "c": "sales_rep",
+                "d": "COALESCE(customer_rating, 0)"
+              }
+            },
+            "drag-reorder-1": {
+              "title": "Interpret a Recorded-Value Average",
+              "prompt": "Arrange the reasoning steps.",
+              "hint": "AVG operates on the known numeric inputs in the current scope.",
+              "help": {
+                "concept": "The population is established before the aggregate.",
+                "hint_1": "NULL does not contribute to the numerator or denominator.",
+                "hint_2": "The final step forms the mean."
+              },
+              "tokens": {
+                "t1": "Filter the intended rows",
+                "t2": "Ignore NULL values in the averaged column",
+                "t3": "Add the known values",
+                "t4": "Divide by the count of known values"
+              }
+            },
+            "fill-blank-choice-1": {
+              "title": "Complete the Average Rating KPI",
+              "prompt": "Fill the aggregate function for the mean rating.",
+              "hint": "Choose the function that calculates the arithmetic mean.",
+              "help": {
+                "concept": "The output is a typical rating, not a total or boundary.",
+                "hint_1": "ROUND formats the aggregate result.",
+                "hint_2": "Select the mean function."
+              },
+              "template": "SELECT ROUND([blank1](customer_rating), 2) AS average_rating FROM sales_reporting;",
+              "choices": [
+                "AVG",
+                "SUM",
+                "COUNT",
+                "MAX"
+              ]
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_averages_and_null_behavior_sketch0": {
+              "title": "Average Completed-Order Rating",
+              "prompt": "Return the average recorded `customer_rating` for completed orders, rounded to two decimals as `average_completed_rating`. Calculate and return `ROUND(AVG(customer_rating), 2) AS average_completed_rating` from `sales_reporting`. Keep only rows where `order_status = 'Completed'`.",
+              "hint": "Filter completed rows; AVG will ignore any remaining NULL ratings.",
+              "help": {
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "Calculate and return `ROUND(AVG(customer_rating), 2) AS average_completed_rating` from `sales_reporting`. Keep only rows where `order_status = 'Completed'`."
+              },
+              "starterCode": "-- Write the query below.",
+              "solutionCode": "SELECT ROUND(AVG(customer_rating), 2) AS average_completed_rating\nFROM sales_reporting\nWHERE order_status = 'Completed';"
+            },
+            "try_averages_and_null_behavior_sketch1": {
+              "title": "Compare Two Rating Rules",
+              "prompt": "Return `rated_only_average` using `AVG(customer_rating)` and `zero_fallback_average` using `AVG(COALESCE(customer_rating, 0))`. Calculate and return `ROUND(AVG(customer_rating), 2) AS rated_only_average, ROUND(AVG(COALESCE(customer_rating, 0)), 2) AS zero_fallback_average` from `sales_reporting`.",
+              "hint": "Write two separate AVG expressions so the business assumptions remain visible.",
+              "help": {
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "Calculate and return `ROUND(AVG(customer_rating), 2) AS rated_only_average, ROUND(AVG(COALESCE(customer_rating, 0)), 2) AS zero_fallback_average` from `sales_reporting`."
+              },
+              "starterCode": "-- Write the query below.",
+              "solutionCode": "SELECT\n    ROUND(AVG(customer_rating), 2) AS rated_only_average,\n    ROUND(AVG(COALESCE(customer_rating, 0)), 2) AS zero_fallback_average\nFROM sales_reporting;"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql--sql-analysis-reporting--draft": {
+      "sql-analysis-reporting-module-2-aggregate-functions": {
+        "averages-and-null-behavior": {
+          "sketch0": {
+            "title": "AVG Uses Known Values",
+            "bodyMarkdown": "### What `AVG` actually calculates\n\n`AVG` is an aggregate function. It adds the non-NULL input values and divides by the number of non-NULL values. A missing value is excluded unless the query deliberately replaces it before averaging.\n\nThe `AVG` function in SQL is used to calculate the average value of a numeric column. However, it's important to understand how `NULL` values affect this calculation. When calculating an average, `NULL` values are ignored. This means that only non-null values are considered in the calculation.\n\nFor example, consider the following table:\n\n```\n| order_id | customer_rating |\n|----------|-----------------|\n| 101      | 4.8             |\n| 102      | NULL            |\n| 103      | 4.4             |\n| 104      | 4.4             |\n```\n\nIf we calculate the average customer rating using `AVG(customer_rating)`, the result will be `(4.8 + 4.4 + 4.4) / 3 = 4.53`. The `NULL` value is not included in the calculation."
+          },
+          "sketch1": {
+            "title": "A Fallback Changes the Metric",
+            "bodyMarkdown": "### What `AVG` actually calculates\n\n`AVG` is an aggregate function. It adds the non-NULL input values and divides by the number of non-NULL values. A missing value is excluded unless the query deliberately replaces it before averaging.\n\nLet's apply the `AVG` function to a real-world scenario using the `sales_reporting` table. Suppose we want to calculate the average `unit_price` for all completed orders.\n\nHere's how you can write the query:\n\n```sql\nSELECT\n    AVG(unit_price) AS average_price\nFROM sales_reporting\nWHERE order_status = 'Completed';\n```\n\n#### Line-by-line walkthrough\n\n- `SELECT` — starts the result list. The indented lines define the columns and calculations returned by the query.\n- `AVG(unit_price) AS average_price` — calculates the arithmetic mean of the non-NULL input values and names the output `average_price`.\n- `FROM sales_reporting` — reads source rows from the `sales_reporting` table.\n- `WHERE order_status = 'Completed';` — keeps only source rows that satisfy `order_status = 'Completed'`.\n\n#### How SQL evaluates this aggregate\n\n1. `FROM` identifies the source table.\n2. `WHERE` removes rows before any summary is calculated.\n3. With no `GROUP BY`, all remaining rows form one group.\n4. `SELECT` returns the finished metric under its alias.\n\nThis query calculates the average `unit_price` for orders where the `order_status` is 'Completed'. Any rows with `NULL` in the `unit_price` column are ignored in this calculation. This ensures that the average is calculated only from the available data."
+          }
+        }
+      }
+    }
+  }
+}

@@ -37,11 +37,11 @@
             "sc_choose_two_columns": {
               "title": "Select two specific columns",
               "prompt": "Which query shows only the `name` and `price` columns from the `products` table?",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Match each choice to the command, clause, or constraint described in the question.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "concept": "Use the SQL behavior described in the lesson to separate the valid choice from statements about a different command, clause, or constraint.",
+                "hint_1": "Identify the job the SQL must perform before comparing the choices.",
+                "hint_2": "Eliminate choices that belong to a different SQL concept."
               },
               "options": {
                 "a": "SELECT name, price FROM products;",
@@ -133,7 +133,7 @@
               "prompt": "Fill in the missing SQL keyword.",
               "hint": "Use the keyword that starts a query for choosing columns.",
               "help": {
-                "concept": "The the missing term keyword begins a query that retrieves columns from a table.",
+                "concept": "The blank keyword begins a query that retrieves columns from a table.",
                 "hint_1": "This keyword comes before the column names.",
                 "hint_2": "It is the standard SQL word used to ask for data from a table."
               },
@@ -162,86 +162,31 @@
                 "items"
               ]
             },
-            "ci_select_name_price": {
-              "title": "Show product names and prices",
-              "prompt": "Write a query that returns only the `name` and `price` columns from the `products` table. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Return only the name and price columns from the products table.\nSELECT\nFROM products;"
-            },
-            "ci_select_category_name": {
-              "title": "Show category first, then name",
-              "prompt": "Write a query that returns the `category` column first and the `name` column second from the `products` table. Write the query in the SQL editor, click Run query, and check that the results table shows the columns in that order.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- put the first column here,\n-- then the second column here\nSELECT\nFROM products;"
-            },
-            "ci_select_all_columns": {
-              "title": "Show every column",
-              "prompt": "Write a query that returns all columns from the `products` table. Write the query in the SQL editor, click Run query, and check the full results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- return every column\nSELECT\nFROM products;"
-            },
             "try-choosing_the_right_columns-sketch0": {
-              "title": "Query name and price from products",
-              "prompt": "Scenario: A store manager needs a clear product-catalog query before sharing results with the team. Write a query that returns `name`, `price` from the `products` table. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Choose Fields for a Stock Check",
+              "prompt": "A stock check needs the product identifier and current quantity only. Return `id, stock` from `products` in that column order.",
+              "hint": "Add stock as the second selected column.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the selected columns and table name in the SQL editor.",
-                "hint_2": "Run the query and compare the result table with the expected result."
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "Return `id, stock` from `products` in that column order."
               },
-              "starterCode": "-- Return name, price from the products table.\nSELECT\nFROM products;"
-            },
-            "try-choosing_the_right_columns-sketch1": {
-              "title": "Query category and name from products",
-              "prompt": "Scenario: A store manager needs a clear product-catalog query before sharing results with the team. Write a query that returns `category`, `name` from the `products` table. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the selected columns and table name in the SQL editor.",
-                "hint_2": "Run the query and compare the result table with the expected result."
-              },
-              "starterCode": "-- put the first column here,\n-- then the second column here\nSELECT\nFROM products;"
-            },
-            "try-choosing_the_right_columns-sketch2": {
-              "title": "Query all products rows",
-              "prompt": "Scenario: A store manager needs a clear product-catalog query before sharing results with the team. Write a query that returns all columns from the `products` table. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the selected columns and table name in the SQL editor.",
-                "hint_2": "Run the query and compare the result table with the expected result."
-              },
-              "starterCode": "-- return every column\nSELECT\nFROM products;"
+              "starterCode": "-- Return only the fields needed for a stock check\nSELECT\n    id\nFROM products;"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_choosing_the_right_columns_sketch0": {
-              "title": "Query name and price from products",
-              "prompt": "Scenario: A store manager needs a clear product-catalog query before sharing results with the team. Write a query that returns `name`, `price` from the `products` table. Write the query in the SQL editor, click Run query, and check the results table."
+              "title": "Choose Fields for a Stock Check",
+              "prompt": "A stock check needs the product identifier and current quantity only. Return `id` and `stock` from `products`."
             },
             "try_choosing_the_right_columns_sketch1": {
               "title": "Query category and name from products",
-              "prompt": "Scenario: A store manager needs a clear product-catalog query before sharing results with the team. Write a query that returns `category`, `name` from the `products` table. Write the query in the SQL editor, click Run query, and check the results table."
+              "prompt": "Build a product-catalog query that returns `category`, `name` from the `products` table. Run it and compare the result with the expected table."
             },
             "try_choosing_the_right_columns_sketch2": {
               "title": "Query all products rows",
-              "prompt": "Scenario: A store manager needs a clear product-catalog query before sharing results with the team. Write a query that returns all columns from the `products` table. Write the query in the SQL editor, click Run query, and check the results table."
+              "prompt": "Build a product-catalog query that returns all columns from the `products` table. Run it and compare the result with the expected table."
             }
           }
         }
@@ -262,31 +207,17 @@
             },
             "quiz": {
               "title": "Quiz"
-            },
-            "project": {
-              "title": "Starter product query sheet"
-            }
-          },
-          "projectSteps": {
-            "ci_select_name_price": {
-              "title": "Show product names and prices"
-            },
-            "ci_select_category_name": {
-              "title": "Show category first, then name"
-            },
-            "ci_select_all_columns": {
-              "title": "Show every column"
             }
           },
           "quiz": {
             "sc_choose_two_columns": {
               "title": "Select two specific columns",
               "prompt": "Which query shows only the `name` and `price` columns from the `products` table?",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Match each choice to the command, clause, or constraint described in the question.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "concept": "Use the SQL behavior described in the lesson to separate the valid choice from statements about a different command, clause, or constraint.",
+                "hint_1": "Identify the job the SQL must perform before comparing the choices.",
+                "hint_2": "Eliminate choices that belong to a different SQL concept."
               },
               "options": {
                 "a": "SELECT name, price FROM products;",
@@ -378,7 +309,7 @@
               "prompt": "Fill in the missing SQL keyword.",
               "hint": "Use the keyword that starts a query for choosing columns.",
               "help": {
-                "concept": "The the missing term keyword begins a query that retrieves columns from a table.",
+                "concept": "The blank keyword begins a query that retrieves columns from a table.",
                 "hint_1": "This keyword comes before the column names.",
                 "hint_2": "It is the standard SQL word used to ask for data from a table."
               },
@@ -441,19 +372,19 @@
               "starterCode": "-- return every column\nSELECT\nFROM products;"
             },
             "try-choosing_the_right_columns-sketch0": {
-              "title": "Query name and price from products",
-              "prompt": "Scenario: A store manager needs a clear product-catalog query before sharing results with the team. Write a query that returns `name`, `price` from the `products` table. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Choose Fields for a Stock Check",
+              "prompt": "A stock check needs the product identifier and current quantity only. Return `id` and `stock` from `products`.",
+              "hint": "Add stock as the second selected column.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the selected columns and table name in the SQL editor.",
-                "hint_2": "Run the query and compare the result table with the expected result."
+                "concept": "A stock check needs the product identifier and current quantity only. Return `id` and `stock` from `products`.",
+                "hint_1": "Add stock as the second selected column.",
+                "hint_2": "Run the query and compare the returned columns and rows with the expected result."
               },
-              "starterCode": "-- Return name, price from the products table.\nSELECT\nFROM products;"
+              "starterCode": "-- Return only the fields needed for a stock check\nSELECT\n    id\nFROM products;"
             },
             "try-choosing_the_right_columns-sketch1": {
               "title": "Query category and name from products",
-              "prompt": "Scenario: A store manager needs a clear product-catalog query before sharing results with the team. Write a query that returns `category`, `name` from the `products` table. Write the query in the SQL editor, click Run query, and check the results table.",
+              "prompt": "Build a product-catalog query that returns `category`, `name` from the `products` table. Run it and compare the result with the expected table.",
               "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
               "help": {
                 "concept": "This SQL exercise checks whether your query returns the requested result.",
@@ -464,7 +395,7 @@
             },
             "try-choosing_the_right_columns-sketch2": {
               "title": "Query all products rows",
-              "prompt": "Scenario: A store manager needs a clear product-catalog query before sharing results with the team. Write a query that returns all columns from the `products` table. Write the query in the SQL editor, click Run query, and check the results table.",
+              "prompt": "Build a product-catalog query that returns all columns from the `products` table. Run it and compare the result with the expected table.",
               "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
               "help": {
                 "concept": "This SQL exercise checks whether your query returns the requested result.",
@@ -477,16 +408,16 @@
           "tryIt": {
             "allowReveal": true,
             "try_choosing_the_right_columns_sketch0": {
-              "title": "Query name and price from products",
-              "prompt": "Scenario: A store manager needs a clear product-catalog query before sharing results with the team. Write a query that returns `name`, `price` from the `products` table. Write the query in the SQL editor, click Run query, and check the results table."
+              "title": "Choose Fields for a Stock Check",
+              "prompt": "A stock check needs the product identifier and current quantity only. Return `id` and `stock` from `products`."
             },
             "try_choosing_the_right_columns_sketch1": {
               "title": "Query category and name from products",
-              "prompt": "Scenario: A store manager needs a clear product-catalog query before sharing results with the team. Write a query that returns `category`, `name` from the `products` table. Write the query in the SQL editor, click Run query, and check the results table."
+              "prompt": "Build a product-catalog query that returns `category`, `name` from the `products` table. Run it and compare the result with the expected table."
             },
             "try_choosing_the_right_columns_sketch2": {
               "title": "Query all products rows",
-              "prompt": "Scenario: A store manager needs a clear product-catalog query before sharing results with the team. Write a query that returns all columns from the `products` table. Write the query in the SQL editor, click Run query, and check the results table."
+              "prompt": "Build a product-catalog query that returns all columns from the `products` table. Run it and compare the result with the expected table."
             }
           }
         }

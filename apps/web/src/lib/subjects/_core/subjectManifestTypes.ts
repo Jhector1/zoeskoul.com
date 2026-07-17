@@ -6,6 +6,7 @@ import type {
     TopicBundleManifest as BaseTopicBundleManifest,
 } from "@/lib/subjects/_core/manifestTypes";
 import type { LearningIdeConfig } from "@/lib/ide/learningIdeConfig";
+import type { ToolPresentationPolicy } from "@zoeskoul/curriculum-contracts";
 
 export type SubjectCurriculumManifestMeta = {
     plannedModuleCount?: number;
@@ -41,6 +42,7 @@ export type SubjectManifest = {
         descriptionKey?: string | null;
         serviceDefaults?: LearningIdeConfig | null;
         runtimeDefaults?: ManifestRuntimeDefaults | null;
+        tools?: ToolPresentationPolicy;
         meta?: {
             versioning?: SubjectVersioningManifestMeta;
             curriculum?: SubjectCurriculumManifestMeta;
@@ -61,6 +63,7 @@ export type SubjectModuleManifest = {
     accessOverride?: "free" | "paid" | null;
     serviceDefaults?: LearningIdeConfig | null;
     runtimeDefaults?: ManifestRuntimeDefaults | null;
+    tools?: ToolPresentationPolicy;
     meta?: {
         estimatedMinutes?: number;
         prereqKeys?: string[];
@@ -77,6 +80,7 @@ export type SubjectSectionManifest = {
     descriptionKey?: string | null;
     serviceDefaults?: LearningIdeConfig | null;
     runtimeDefaults?: ManifestRuntimeDefaults | null;
+    tools?: ToolPresentationPolicy;
     meta?: {
         module?: number;
         weeksKey?: string;
@@ -179,6 +183,7 @@ export type SlimTopicManifest = {
     };
     serviceDefaults?: LearningIdeConfig | null;
     runtimeDefaults?: ManifestRuntimeDefaults | null;
+    tools?: ToolPresentationPolicy;
     cards: ManifestCard[];
     sketches: ManifestSketch[];
     exercises: ManifestExercise[];

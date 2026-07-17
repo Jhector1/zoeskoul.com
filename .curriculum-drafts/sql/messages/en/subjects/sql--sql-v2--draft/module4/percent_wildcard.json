@@ -162,86 +162,31 @@
                 "Mia"
               ]
             },
-            "ci_find_example_domain": {
-              "title": "Find customers with example.com emails",
-              "prompt": "Write a query that returns `id`, `full_name`, and `email` for customers whose email ends with `example.com`. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Return id, full_name, and email for customers whose email ends with example.com.\nSELECT id, full_name, email\nFROM customers\nWHERE email LIKE ;"
-            },
-            "ci_find_test_names": {
-              "title": "Find names containing Test",
-              "prompt": "Write a query that returns `id` and `full_name` for customers whose `full_name` contains the text `Test`. Use the SQL editor and check the results table after you click Run query.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Return id and full_name for customers whose full_name contains the text Test.\nSELECT id, full_name\nFROM customers\nWHERE full_name LIKE ;"
-            },
-            "ci_find_internal_or_test_email": {
-              "title": "Find internal or test-style emails",
-              "prompt": "Write a query that returns `full_name` and `email` for customers whose email contains `internal` or contains `test`. Use `LIKE` with `%` and combine the conditions so either match is included.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Return full_name and email for customers whose email contains internal or contains test. Use LIKE with % and combine the conditions so either match is included.\nSELECT full_name, email\nFROM customers\nWHERE ;"
-            },
-            "try-percent_wildcard-sketch0": {
-              "title": "Find customers with example.com emails",
-              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that returns `id`, `full_name`, and `email` for customers whose email ends with `example.com`. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Return id, full_name, and email for customers whose email ends with `example.\nSELECT id, full_name, email\nFROM customers\nWHERE email LIKE ;"
-            },
-            "try-percent_wildcard-sketch1": {
-              "title": "Find names containing Test",
-              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that returns `id` and `full_name` for customers whose `full_name` contains the text `Test`. Use the SQL editor and check the results table after you click Run query.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Return id and full_name for customers whose full_name contains the text Test.\nSELECT id, full_name\nFROM customers\nWHERE full_name LIKE ;"
-            },
             "try-percent_wildcard-sketch2": {
-              "title": "Find internal or test-style emails",
-              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that returns `full_name` and `email` for customers whose email contains `internal` or contains `test`. Use `LIKE` with `%` and combine the conditions so either match is included.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Find Emails Containing Internal or Test",
+              "prompt": "Return `full_name` and `email` when the email contains `internal` or `test` anywhere in the text. Return `full_name, email` from `customers` in that column order. Keep only rows where `email LIKE '%internal%' OR email LIKE '%test%'`.",
+              "hint": "Add a second LIKE condition joined with OR.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "Return `full_name, email` from `customers` in that column order. Keep only rows where `email LIKE '%internal%' OR email LIKE '%test%'`."
               },
-              "starterCode": "-- Return full_name and email for customers whose email contains internal or contains test.\nSELECT full_name, email\nFROM customers\nWHERE ;"
+              "starterCode": "SELECT full_name, email\nFROM customers\nWHERE email LIKE '%internal%';"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_percent_wildcard_sketch0": {
               "title": "Find customers with example.com emails",
-              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that returns `id`, `full_name`, and `email` for customers whose email ends with `example.com`. Write the query in the SQL editor, click Run query, and check the results table."
+              "prompt": "Create a customer-cleanup query that returns `id`, `full_name`, and `email` for customers whose email ends with `example.com`. Run it and compare the result with the expected table."
             },
             "try_percent_wildcard_sketch1": {
               "title": "Find names containing Test",
-              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that returns `id` and `full_name` for customers whose `full_name` contains the text `Test`. Use the SQL editor and check the results table after you click Run query."
+              "prompt": "Create a customer-cleanup query that returns `id` and `full_name` for customers whose `full_name` contains the text `Test`. Use the SQL editor and check the results table after you click Run query. Run it and compare the result with the expected table."
             },
             "try_percent_wildcard_sketch2": {
-              "title": "Find internal or test-style emails",
-              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that returns `full_name` and `email` for customers whose email contains `internal` or contains `test`. Use `LIKE` with `%` and combine the conditions so either match is included."
+              "title": "Find Emails Containing Internal or Test",
+              "prompt": "Return `full_name` and `email` when the email contains `internal` or `test` anywhere in the text."
             }
           }
         }
@@ -262,20 +207,6 @@
             },
             "quiz": {
               "title": "Quiz"
-            },
-            "project": {
-              "title": "Search customer text patterns"
-            }
-          },
-          "projectSteps": {
-            "ci_find_example_domain": {
-              "title": "Find customers with example.com emails"
-            },
-            "ci_find_test_names": {
-              "title": "Find names containing Test"
-            },
-            "ci_find_internal_or_test_email": {
-              "title": "Find internal or test-style emails"
             }
           },
           "quiz": {
@@ -442,7 +373,7 @@
             },
             "try-percent_wildcard-sketch0": {
               "title": "Find customers with example.com emails",
-              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that returns `id`, `full_name`, and `email` for customers whose email ends with `example.com`. Write the query in the SQL editor, click Run query, and check the results table.",
+              "prompt": "Create a customer-cleanup query that returns `id`, `full_name`, and `email` for customers whose email ends with `example.com`. Run it and compare the result with the expected table.",
               "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
               "help": {
                 "concept": "This SQL exercise checks whether your query returns the requested result.",
@@ -453,7 +384,7 @@
             },
             "try-percent_wildcard-sketch1": {
               "title": "Find names containing Test",
-              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that returns `id` and `full_name` for customers whose `full_name` contains the text `Test`. Use the SQL editor and check the results table after you click Run query.",
+              "prompt": "Create a customer-cleanup query that returns `id` and `full_name` for customers whose `full_name` contains the text `Test`. Use the SQL editor and check the results table after you click Run query. Run it and compare the result with the expected table.",
               "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
               "help": {
                 "concept": "This SQL exercise checks whether your query returns the requested result.",
@@ -463,30 +394,30 @@
               "starterCode": "-- Return id and full_name for customers whose full_name contains the text Test.\nSELECT id, full_name\nFROM customers\nWHERE full_name LIKE ;"
             },
             "try-percent_wildcard-sketch2": {
-              "title": "Find internal or test-style emails",
-              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that returns `full_name` and `email` for customers whose email contains `internal` or contains `test`. Use `LIKE` with `%` and combine the conditions so either match is included.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Find Emails Containing Internal or Test",
+              "prompt": "Return `full_name` and `email` when the email contains `internal` or `test` anywhere in the text.",
+              "hint": "Add a second LIKE condition joined with OR.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
+                "concept": "Return `full_name` and `email` when the email contains `internal` or `test` anywhere in the text.",
+                "hint_1": "Add a second LIKE condition joined with OR.",
+                "hint_2": "Run the query and compare the returned columns and rows with the expected result."
               },
-              "starterCode": "-- Return full_name and email for customers whose email contains internal or contains test.\nSELECT full_name, email\nFROM customers\nWHERE ;"
+              "starterCode": "SELECT full_name, email\nFROM customers\nWHERE email LIKE '%internal%';"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_percent_wildcard_sketch0": {
               "title": "Find customers with example.com emails",
-              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that returns `id`, `full_name`, and `email` for customers whose email ends with `example.com`. Write the query in the SQL editor, click Run query, and check the results table."
+              "prompt": "Create a customer-cleanup query that returns `id`, `full_name`, and `email` for customers whose email ends with `example.com`. Run it and compare the result with the expected table."
             },
             "try_percent_wildcard_sketch1": {
               "title": "Find names containing Test",
-              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that returns `id` and `full_name` for customers whose `full_name` contains the text `Test`. Use the SQL editor and check the results table after you click Run query."
+              "prompt": "Create a customer-cleanup query that returns `id` and `full_name` for customers whose `full_name` contains the text `Test`. Use the SQL editor and check the results table after you click Run query. Run it and compare the result with the expected table."
             },
             "try_percent_wildcard_sketch2": {
-              "title": "Find internal or test-style emails",
-              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that returns `full_name` and `email` for customers whose email contains `internal` or contains `test`. Use `LIKE` with `%` and combine the conditions so either match is included."
+              "title": "Find Emails Containing Internal or Test",
+              "prompt": "Return `full_name` and `email` when the email contains `internal` or `test` anywhere in the text."
             }
           }
         }

@@ -1,0 +1,272 @@
+{
+  "topics": {
+    "sql-v2": {
+      "sql-v2-3": {
+        "build_clear_result_sets": {
+          "label": "build clear result sets",
+          "summary": "Learn how to make SQL results easier to read by sorting rows in a useful order and limiting how many rows appear.",
+          "cards": {
+            "sketch0": {
+              "title": "Sort results so the most useful rows appear first"
+            },
+            "sketch1": {
+              "title": "Use LIMIT to keep the result focused"
+            },
+            "sketch2": {
+              "title": "Clear result sets show the right columns in the right order"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Build a ranked product report"
+            }
+          },
+          "projectSteps": {
+            "ci_top_three_expensive_products": {
+              "title": "Show the 3 most expensive products"
+            },
+            "ci_newest_two_products": {
+              "title": "Show the 2 newest products"
+            },
+            "ci_low_stock_report": {
+              "title": "Build a low-stock report"
+            }
+          },
+          "quiz": {
+            "sc_order_by_desc_price": {
+              "title": "Pick the clause for highest price first",
+              "prompt": "Which clause puts the most expensive products at the top of the results?",
+              "hint": "Use descending order when you want larger numbers first.",
+              "help": {
+                "concept": "To show the largest numeric values first, SQL uses `ORDER BY` on that column with descending order.",
+                "hint_1": "Look for the option that sorts by `price` rather than filtering rows.",
+                "hint_2": "The correct clause uses `ORDER BY` and the keyword that places bigger prices before smaller ones."
+              },
+              "options": {
+                "a": "ORDER BY price ASC",
+                "b": "ORDER BY price DESC",
+                "c": "WHERE price DESC",
+                "d": "LIMIT price 3"
+              }
+            },
+            "sc_limit_after_sorting": {
+              "title": "Understand what LIMIT does",
+              "prompt": "What does `LIMIT 3` do in a query after the rows have been sorted?",
+              "hint": "It keeps only a certain number of rows in the final results.",
+              "help": {
+                "concept": "`LIMIT` controls how many rows appear in the final result set after SQL has applied the sort order.",
+                "hint_1": "Think about whether `LIMIT` changes row order or just the number of rows shown.",
+                "hint_2": "The matching answer describes keeping the first few rows from the already sorted results."
+              },
+              "options": {
+                "a": "It sorts the rows into alphabetical order",
+                "b": "It keeps only the first 3 rows of the sorted result",
+                "c": "It filters rows where a column equals 3",
+                "d": "It shows 3 columns instead of all columns"
+              }
+            },
+            "mc_clear_result_set_choices": {
+              "title": "Choose ways to make results clearer",
+              "prompt": "Which choices can make a result set clearer to read? Choose all that apply.",
+              "hint": "Think about reducing clutter and putting the most useful rows first.",
+              "help": {
+                "concept": "Clear result sets usually come from selecting only needed columns, sorting meaningfully, and sometimes limiting the number of rows.",
+                "hint_1": "Look for actions that improve readability, not actions that add unrelated data.",
+                "hint_2": "Useful choices include narrowing columns, ordering rows, and keeping only a small number of top rows."
+              },
+              "options": {
+                "a": "Select only the columns needed for the question",
+                "b": "Use ORDER BY to arrange rows meaningfully",
+                "c": "Use LIMIT when only a few rows are needed",
+                "d": "Always use SELECT * so no column is missed"
+              }
+            },
+            "mc_desc_examples": {
+              "title": "Find descending sorts",
+              "prompt": "Which queries would place larger values before smaller values? Choose all that apply.",
+              "hint": "Look for `DESC` on a numeric column.",
+              "help": {
+                "concept": "Descending order means higher numbers appear before lower numbers when sorting a numeric column.",
+                "hint_1": "Check which options use `ORDER BY` with `DESC`, not `ASC`.",
+                "hint_2": "Two options sort numeric columns from high to low: one for price and one for stock."
+              },
+              "options": {
+                "a": "SELECT name, price FROM products ORDER BY price DESC;",
+                "b": "SELECT name, stock FROM products ORDER BY stock DESC;",
+                "c": "SELECT name, price FROM products ORDER BY price ASC;",
+                "d": "SELECT name FROM products LIMIT 2;"
+              }
+            },
+            "dr_build_top_two_expensive": {
+              "title": "Build a top-2 expensive products query",
+              "prompt": "Arrange the SQL parts to show product names and prices, with the most expensive products first, limited to 2 rows.",
+              "hint": "Start with SELECT and FROM, then sort, then limit.",
+              "help": {
+                "concept": "A basic SQL query is built in clause order: `SELECT`, `FROM`, `ORDER BY`, then `LIMIT`.",
+                "hint_1": "Choose the columns first, then the table, then the sort direction, and finally the row limit.",
+                "hint_2": "The sorting clause must come before the limiting clause so the top 2 rows come from the sorted results."
+              },
+              "tokens": {
+                "t1": "SELECT name, price",
+                "t2": "FROM products",
+                "t3": "ORDER BY price DESC",
+                "t4": "LIMIT 2"
+              }
+            },
+            "dr_build_low_stock_list": {
+              "title": "Build a low-stock query",
+              "prompt": "Arrange the SQL parts to list product names and stock values from the smallest stock to the largest stock.",
+              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "help": {
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
+              },
+              "tokens": {
+                "t1": "SELECT name, stock",
+                "t2": "FROM products",
+                "t3": "ORDER BY stock ASC"
+              }
+            },
+            "fb_limit_keyword": {
+              "title": "Complete the row-count clause",
+              "prompt": "Fill in the missing SQL keyword to keep only 3 rows.",
+              "hint": "This clause controls how many rows appear.",
+              "help": {
+                "concept": "The SQL clause for restricting the number of returned rows is `the missing term`.",
+                "hint_1": "It is not a filtering clause like `WHERE` and not a sorting clause like `ORDER BY`.",
+                "hint_2": "Use the keyword that comes before a number such as 3 when you want only a few rows."
+              },
+              "template": "[blank1] 3",
+              "choices": [
+                "LIMIT",
+                "WHERE",
+                "FROM",
+                "DESC"
+              ]
+            },
+            "fb_desc_for_highest_first": {
+              "title": "Complete the sort direction",
+              "prompt": "Fill in the missing value so the highest prices appear first.",
+              "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+              "help": {
+                "concept": "The blank should be filled with the term that makes the statement accurate.",
+                "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+                "hint_2": "Choose the option that completes the statement with the clearest meaning."
+              },
+              "template": "SELECT name, price FROM products ORDER BY price [blank1];",
+              "choices": [
+                "ASC",
+                "DESC",
+                "LIMIT",
+                "WHERE"
+              ]
+            },
+            "ci_top_three_expensive_products": {
+              "title": "Show the 3 most expensive products",
+              "prompt": "Write a query that returns the `name` and `price` columns from `products`, sorted by `price` from highest to lowest, and shows only the top 3 rows. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "-- add sorting and limiting\nSELECT name, price\nFROM products"
+            },
+            "ci_newest_two_products": {
+              "title": "Show the 2 newest products",
+              "prompt": "Write a query that returns `name` and `created_at` from `products`, sorted so the newest dates come first, with only 2 rows in the results. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "-- sort by date and keep 2 rows\nSELECT name, created_at\nFROM products"
+            },
+            "ci_low_stock_report": {
+              "title": "Build a low-stock report",
+              "prompt": "Write a query that returns `name` and `stock` from `products`, sorted from the smallest stock value to the largest stock value, and limited to 4 rows. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "-- sort by stock and limit the result\nSELECT name, stock\nFROM products"
+            },
+            "try-build_clear_result_sets-sketch0": {
+              "title": "Show the 3 most expensive products",
+              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that returns the `name` and `price` columns from `products`, sorted by `price` from highest to lowest, and shows only the top 3 rows. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "-- add sorting and limiting\nSELECT name, price\nFROM products"
+            },
+            "try-build_clear_result_sets-sketch1": {
+              "title": "Show the 2 newest products",
+              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that returns `name` and `created_at` from `products`, sorted so the newest dates come first, with only 2 rows in the results. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "-- sort by date and keep 2 rows\nSELECT name, created_at\nFROM products"
+            },
+            "try-build_clear_result_sets-sketch2": {
+              "title": "Build a low-stock report",
+              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that returns `name` and `stock` from `products`, sorted from the smallest stock value to the largest stock value, and limited to 4 rows. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "-- sort by stock and limit the result\nSELECT name, stock\nFROM products"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_build_clear_result_sets_sketch0": {
+              "title": "Show the 3 most expensive products",
+              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that returns the `name` and `price` columns from `products`, sorted by `price` from highest to lowest, and shows only the top 3 rows. Write the query in the SQL editor, click Run query, and check the results table."
+            },
+            "try_build_clear_result_sets_sketch1": {
+              "title": "Show the 2 newest products",
+              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that returns `name` and `created_at` from `products`, sorted so the newest dates come first, with only 2 rows in the results. Write the query in the SQL editor, click Run query, and check the results table."
+            },
+            "try_build_clear_result_sets_sketch2": {
+              "title": "Build a low-stock report",
+              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that returns `name` and `stock` from `products`, sorted from the smallest stock value to the largest stock value, and limited to 4 rows. Write the query in the SQL editor, click Run query, and check the results table."
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql-v2": {
+      "sql-v2-3": {
+        "build_clear_result_sets": {
+          "sketch_sorting_makes_results_clear": {
+            "title": "Sort results so the most useful rows appear first",
+            "bodyMarkdown": "When a table has several rows, the default order is often not the clearest order. `ORDER BY` lets you choose how the results should be arranged.\n\nFor example, this query lists products from the lowest price to the highest price:\n\n```sql\nSELECT name, price\nFROM products\nORDER BY price ASC;\n```\n\nStep by step:\n- `SELECT name, price` chooses the columns to show.\n- `FROM products` says which table to read.\n- `ORDER BY price ASC` sorts by `price` in ascending order.\n\nIn this dataset, the first rows would start with cheaper items like `Notebook` before more expensive items like `Office Chair`.\n\nIf you want the most expensive items first, switch to descending order:\n\n```sql\nSELECT name, price\nFROM products\nORDER BY price DESC;\n```\n\nThat makes `Office Chair` appear before the lower-priced products."
+          },
+          "sketch_limit_focuses_answer": {
+            "title": "Use LIMIT to keep the result focused",
+            "bodyMarkdown": "Sometimes you do not need every row. `LIMIT` keeps the result set short and focused.\n\nHere is a query that shows the three newest products:\n\n```sql\nSELECT name, created_at\nFROM products\nORDER BY created_at DESC\nLIMIT 3;\n```\n\nLine by line:\n- `SELECT name, created_at` shows the product name and date.\n- `FROM products` reads from the products table.\n- `ORDER BY created_at DESC` puts newer dates first.\n- `LIMIT 3` keeps only the first three rows after sorting.\n\nThis is important: SQL sorts first, then applies the limit. So `LIMIT 3` gives you the top three rows in the chosen order, not just any three rows.\n\nA worked example with price:\n\n```sql\nSELECT name, price\nFROM products\nORDER BY price DESC\nLIMIT 2;\n```\n\nThis returns the two most expensive products."
+          },
+          "sketch_choose_columns_and_order": {
+            "title": "Clear result sets show the right columns in the right order",
+            "bodyMarkdown": "A clear result set is not only about sorting. It also helps to show only the columns you need.\n\nCompare these two ideas:\n\n```sql\nSELECT *\nFROM products\nORDER BY price DESC;\n```\n\nThis works, but it shows every column.\n\nA more focused version is:\n\n```sql\nSELECT name, category, price\nFROM products\nORDER BY price DESC\nLIMIT 3;\n```\n\nWhy this is clearer:\n- `name` tells you which product each row is about.\n- `category` adds useful context.\n- `price` matches the sort order.\n- `LIMIT 3` keeps the answer short.\n\nIn the `products` table, this kind of query is great for questions like “What are the top 3 most expensive products?”"
+          }
+        }
+      }
+    }
+  }
+}

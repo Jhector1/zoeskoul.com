@@ -89,6 +89,98 @@ describe("repairTopicAuthoringDraft", () => {
         expect(exercise.help.concept).not.toMatch(/where/i);
     });
 
+    it("injects authored project facts into a project synopsis deterministically", () => {
+        const seed = {
+            profileId: "sql",
+            moduleRole: "standard",
+            sectionRole: "module_project",
+            projectBrief: {
+                scenario:
+                    "An inventory audit found incorrect prices, unfinished statuses, and internal test rows. Operations needs a cleanup script that changes only confirmed records.",
+                role: "Inventory data steward",
+                workspace:
+                    "Browser SQL editor with one entry file named query.sql and the inventory_items table",
+                deliverable:
+                    "One cumulative query.sql correction-and-cleanup script that previews targets, applies scoped updates, removes confirmed test rows, and verifies preserved inventory.",
+                stepCountTarget: 6,
+            },
+        } as any;
+
+        const draft = {
+            title: "Module 1 Project: Inventory Correction and Cleanup",
+            summary: "Correct audited inventory values.",
+            minutes: 70,
+            sketchBlocks: [
+                {
+                    id: "sketch-1",
+                    title: "Inventory Correction and Cleanup",
+                    bodyMarkdown:
+                        "You are responsible for cleaning up an inventory database after an audit.",
+                },
+            ],
+            quizDraft: [],
+            projectDraft: {
+                title: "Inventory Correction and Cleanup",
+                stepIds: [],
+            },
+        } as any;
+
+        const repaired = repairTopicAuthoringDraft(draft, seed);
+        const body = repaired.sketchBlocks[0]?.bodyMarkdown ?? "";
+
+        expect(body).toContain("### Project Brief");
+        expect(body).toContain("**Scenario:**");
+        expect(body).toContain("Inventory data steward");
+        expect(body).toContain("query.sql");
+        expect(body).toContain("inventory_items");
+        expect(body).toContain("**Deliverable:**");
+
+        const repairedAgain = repairTopicAuthoringDraft(repaired, seed);
+        const repeatedBody = repairedAgain.sketchBlocks[0]?.bodyMarkdown ?? "";
+
+        expect(
+            repeatedBody.match(/### Project Brief/g),
+        ).toHaveLength(1);
+    });
+
+    it("creates a project synopsis sketch when authoring supplies a brief but the model omits the sketch", () => {
+        const repaired = repairTopicAuthoringDraft(
+            {
+                title: "Warehouse Launch",
+                summary: "Prepare a warehouse database.",
+                minutes: 45,
+                sketchBlocks: [],
+                quizDraft: [],
+                projectDraft: {
+                    title: "Warehouse Launch",
+                    stepIds: [],
+                },
+            } as any,
+            {
+                profileId: "sql",
+                sectionRole: "capstone",
+                projectBrief: {
+                    scenario:
+                        "A warehouse operations team needs a reliable launch database.",
+                    role: "Database operations specialist",
+                    workspace:
+                        "schema.sql, seed.sql, and query.sql",
+                    deliverable:
+                        "A complete launch-ready SQL workspace.",
+                    stepCountTarget: 6,
+                },
+            } as any,
+        );
+
+        expect(repaired.sketchBlocks).toHaveLength(1);
+        expect(repaired.sketchBlocks[0]?.bodyMarkdown).toContain(
+            "warehouse operations team",
+        );
+        expect(repaired.sketchBlocks[0]?.bodyMarkdown).toContain(
+            "schema.sql, seed.sql, and query.sql",
+        );
+    });
+
     it("uses SQL workspace language for default code_input help", () => {
         const repaired = repairTopicAuthoringDraft(
             {

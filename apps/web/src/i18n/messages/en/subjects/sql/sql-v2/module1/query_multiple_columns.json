@@ -3,34 +3,17 @@
     "sql-v2": {
       "sql-v2-1": {
         "query_multiple_columns": {
-          "label": "Query Multiple Columns",
-          "summary": "Learn how to select more than one column from the products table so your results show exactly the fields you need.",
+          "label": "Writing Clear Multi-Column Queries",
+          "summary": "Format and order several selected columns so a result is easy to understand.",
           "cards": {
             "sketch0": {
-              "title": "Selecting more than one column"
+              "title": "Build a Useful Column Sequence"
             },
             "sketch1": {
-              "title": "The order of selected columns affects the results"
-            },
-            "sketch2": {
-              "title": "Using commas correctly"
+              "title": "Format the Query for Easy Review"
             },
             "quiz": {
-              "title": "Quiz"
-            },
-            "project": {
-              "title": "Starter query sheet for multiple columns"
-            }
-          },
-          "projectSteps": {
-            "ci_select_name_category": {
-              "title": "Show names and categories"
-            },
-            "ci_select_three_columns": {
-              "title": "Show three useful columns"
-            },
-            "ci_select_category_stock_created": {
-              "title": "Choose a different set of columns"
+              "title": "Check Your Understanding"
             }
           },
           "quiz": {
@@ -84,11 +67,11 @@
             "mc_columns_in_products": {
               "title": "Columns you can select",
               "prompt": "Which of these are real column names in the `products` table? Choose all that apply.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Match each choice to the command, clause, or constraint described in the question.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "concept": "Use the SQL behavior described in the lesson to separate the valid choice from statements about a different command, clause, or constraint.",
+                "hint_1": "Identify the job the SQL must perform before comparing the choices.",
+                "hint_2": "Eliminate choices that belong to a different SQL concept."
               },
               "options": {
                 "a": "name",
@@ -117,11 +100,11 @@
             "dr_query_structure_three_columns": {
               "title": "Order a three-column query",
               "prompt": "Arrange the tokens to form a correct query that selects `id`, `name`, and `price` from `products`.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Match each choice to the command, clause, or constraint described in the question.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Think about which part must come first.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "concept": "Use the SQL behavior described in the lesson to separate the valid choice from statements about a different command, clause, or constraint.",
+                "hint_1": "Identify the job the SQL must perform before comparing the choices.",
+                "hint_2": "Eliminate choices that belong to a different SQL concept."
               },
               "tokens": {
                 "t1": "FROM",
@@ -152,7 +135,7 @@
             "fb_missing_table_name": {
               "title": "Complete the FROM clause",
               "prompt": "Choose the missing table name to complete the query.",
-              "hint": "This lesson uses one table named `the missing term`.",
+              "hint": "This lesson uses one table named `the blank`.",
               "help": {
                 "concept": "The `FROM` clause tells SQL which table contains the columns named in the `SELECT` clause.",
                 "hint_1": "The columns `id` and `name` both come from the same table used throughout this topic.",
@@ -200,19 +183,19 @@
               "starterCode": "-- Return category, stock, and created_at from products\n-- add the three columns here\nSELECT\nFROM products;"
             },
             "try-query_multiple_columns-sketch0": {
-              "title": "Query name and category from products",
-              "prompt": "Scenario: A store manager needs a clear product-catalog query before sharing results with the team. Write a query that returns `name`, `category` from the `products` table. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Control the Result Column Order",
+              "prompt": "A price-first export should place amounts before product labels. Return `price` first and `name` second from `products`.",
+              "hint": "The left-to-right order after SELECT becomes the result-column order.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the selected columns and table name in the SQL editor.",
-                "hint_2": "Run the query and compare the result table with the expected result."
+                "concept": "A useful column sequence follows the way the reader will interpret the result.",
+                "hint_1": "The left-to-right order after SELECT becomes the result-column order.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
               },
-              "starterCode": "-- Return the name and category columns from products\n-- add columns here\nSELECT\nFROM products;"
+              "starterCode": "-- Put price first, then name\nSELECT\nFROM products;"
             },
             "try-query_multiple_columns-sketch1": {
               "title": "Query id and name from products",
-              "prompt": "Scenario: A store manager needs a clear product-catalog query before sharing results with the team. Write a query that returns `id`, `name`, `price` from the `products` table. Write the query in the SQL editor, click Run query, and check the results table.",
+              "prompt": "Build a product-catalog query that returns `id`, `name`, `price` from the `products` table. Run it and compare the result with the expected table.",
               "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
               "help": {
                 "concept": "This SQL exercise checks whether your query returns the requested result.",
@@ -222,30 +205,38 @@
               "starterCode": "-- Return id, name, and price from products\n-- add three columns here\nSELECT\nFROM products;"
             },
             "try-query_multiple_columns-sketch2": {
-              "title": "Query category and stock from products",
-              "prompt": "Scenario: A store manager needs a clear product-catalog query before sharing results with the team. Write a query that returns `category`, `stock`, `created_at` from the `products` table. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Format a Three-Column Inventory View",
+              "prompt": "Prepare a readable inventory extract. Select `category`, `stock`, and `created_at` from `products`, in that order, with each selected column on its own line.",
+              "hint": "Separate the three selected columns with commas and keep FROM products after the list.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the selected columns and table name in the SQL editor.",
-                "hint_2": "Run the query and compare the result table with the expected result."
+                "concept": "Readable formatting makes a longer SELECT list easier to scan without changing the result.",
+                "hint_1": "Separate the three selected columns with commas and keep FROM products after the list.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
               },
-              "starterCode": "-- Return category, stock, and created_at from products\n-- add the three columns here\nSELECT\nFROM products;"
+              "starterCode": "-- Add the requested columns on separate lines\nSELECT\nFROM products;"
             }
           },
           "tryIt": {
             "allowReveal": true,
-            "try_query_multiple_columns_sketch0": {
-              "title": "Query name and category from products",
-              "prompt": "Scenario: A store manager needs a clear product-catalog query before sharing results with the team. Write a query that returns `name`, `category` from the `products` table. Write the query in the SQL editor, click Run query, and check the results table."
-            },
-            "try_query_multiple_columns_sketch1": {
-              "title": "Query id and name from products",
-              "prompt": "Scenario: A store manager needs a clear product-catalog query before sharing results with the team. Write a query that returns `id`, `name`, `price` from the `products` table. Write the query in the SQL editor, click Run query, and check the results table."
-            },
             "try_query_multiple_columns_sketch2": {
-              "title": "Query category and stock from products",
-              "prompt": "Scenario: A store manager needs a clear product-catalog query before sharing results with the team. Write a query that returns `category`, `stock`, `created_at` from the `products` table. Write the query in the SQL editor, click Run query, and check the results table."
+              "title": "Format a Three-Column Inventory View",
+              "prompt": "Prepare a readable inventory extract. Select `category`, `stock`, and `created_at` from `products`, in that order, with each selected column on its own line.",
+              "hint": "Separate the three selected columns with commas and keep FROM products after the list.",
+              "help": {
+                "concept": "Readable formatting makes a longer SELECT list easier to scan without changing the result.",
+                "hint_1": "Separate the three selected columns with commas and keep FROM products after the list.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+              }
+            },
+            "try_query_multiple_columns_sketch0": {
+              "title": "Control the Result Column Order",
+              "prompt": "A price-first export should place amounts before product labels. Return `price` first and `name` second from `products`.",
+              "hint": "The left-to-right order after SELECT becomes the result-column order.",
+              "help": {
+                "concept": "A useful column sequence follows the way the reader will interpret the result.",
+                "hint_1": "The left-to-right order after SELECT becomes the result-column order.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+              }
             }
           }
         }
@@ -256,17 +247,13 @@
     "sql-v2": {
       "sql-v2-1": {
         "query_multiple_columns": {
-          "sketch_select_multiple_columns": {
-            "title": "Selecting more than one column",
-            "bodyMarkdown": "When you use `SELECT`, you are choosing which columns should appear in the results table. To show more than one column, list the column names separated by commas.\n\n```sql\nSELECT name, price\nFROM products;\n```\n\nThis query reads as:\n- `SELECT name, price` → show the `name` and `price` columns\n- `FROM products` → get those columns from the `products` table\n\nWith the `products` table in this lesson, the results table would include rows like:\n- `Sketchbook | 12.99`\n- `Acrylic Paint Set | 24.50`\n- `Desk Lamp | 39.99`\n\nThis is useful when you do not need every column. For example, if you only want product names and prices, selecting just those columns keeps the results table simpler."
+          "column_sequence": {
+            "title": "Build a Useful Column Sequence",
+            "bodyMarkdown": "A multi-column query should present information in a useful sequence. Put identifiers and labels first, then the details that describe them.\n\n```sql\nSELECT\n    id,\n    name,\n    category,\n    stock\nFROM products;\n```\n\nThis result is easy to scan: the row begins with the product identity, then shows its category and inventory count. SQL does not decide this order for you—the order of the selected columns becomes the order of the result.\n\nWhen planning a report, imagine reading one row from left to right. Arrange the columns so the row tells a clear story."
           },
-          "sketch_column_order_matters": {
-            "title": "The order of selected columns affects the results",
-            "bodyMarkdown": "The order of column names in `SELECT` becomes the order of columns in the results table.\n\n```sql\nSELECT category, name, stock\nFROM products;\n```\n\nStep by step:\n- `category` appears first in the results table\n- `name` appears second\n- `stock` appears third\n\nSo a row might look like:\n- `Art | Sketchbook | 25`\n\nIf you switch the query to this:\n\n```sql\nSELECT name, stock, category\nFROM products;\n```\n\nthen the same product would appear as:\n- `Sketchbook | 25 | Art`\n\nThe data comes from the same table, but the display order changes because the `SELECT` list changed."
-          },
-          "sketch_commas_and_column_names": {
-            "title": "Using commas correctly",
-            "bodyMarkdown": "When selecting multiple columns, each column name must be separated by a comma.\n\nCorrect example:\n\n```sql\nSELECT id, name, category\nFROM products;\n```\n\nIncorrect idea:\n\n```sql\nSELECT id name category\nFROM products;\n```\n\nWhy the first one works:\n- `id`, `name`, and `category` are three separate column names\n- commas tell SQL where one column name ends and the next begins\n\nA concrete example from this table:\n- product `1` would show as `1 | Sketchbook | Art`\n- product `4` would show as `4 | Notebook | Stationery`\n\nIf a query fails, one common reason is a missing comma between column names."
+          "readable_formatting": {
+            "title": "Format the Query for Easy Review",
+            "bodyMarkdown": "SQL ignores most whitespace, so formatting is for people. Put each selected column on its own line when the list grows.\n\n```sql\nSELECT\n    name,\n    price,\n    created_at\nFROM products;\n```\n\nThe commas separate columns; the final selected column has no trailing comma. `FROM` begins on a new line so the source is easy to find.\n\nReadable formatting makes missing commas, misspelled columns, and incorrect clause order easier to spot. A query should be understandable before it is run."
           }
         }
       }

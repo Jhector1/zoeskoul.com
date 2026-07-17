@@ -1,0 +1,177 @@
+{
+  "title": "Counting Related Rows Without Inflation",
+  "summary": "Count matched rows and unique entities without allowing join multiplication to distort a report.",
+  "minutes": 32,
+  "sketchBlocks": [
+    {
+      "id": "sketch-counting-rows",
+      "title": "Understanding Row Counting in Joins",
+      "bodyMarkdown": "When working with SQL joins, especially LEFT JOINs, it's crucial to understand how row multiplication can affect your counts. Consider a scenario where you want to count the number of students enrolled in courses. If you simply count the rows in the join result, you might end up counting the same student multiple times if they are enrolled in multiple courses. To avoid this, you can use `COUNT(DISTINCT student_id)` to ensure each student is only counted once.\n\n```sql\nSELECT COUNT(DISTINCT enrollments.student_id) AS unique_students\nFROM students\nLEFT JOIN enrollments ON students.id = enrollments.student_id;\n```\n\nThis query counts each student only once, regardless of how many courses they are enrolled in."
+    },
+    {
+      "id": "sketch-anti-join",
+      "title": "Using Anti-Joins to Find Missing Relationships",
+      "bodyMarkdown": "An anti-join is a technique used to find records in one table that do not have corresponding records in another table. For example, if you want to find departments that have no courses, you can use a LEFT JOIN combined with a `WHERE` clause to filter out departments that do have courses.\n\n```sql\nSELECT departments.name\nFROM departments\nLEFT JOIN courses ON departments.id = courses.department_id\nWHERE courses.id IS NULL;\n```\n\nThis query lists all departments that do not have any courses associated with them, effectively using an anti-join pattern."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "single-choice-join-inflation",
+      "kind": "single_choice",
+      "title": "Understanding Join Inflation",
+      "prompt": "What is a common issue when counting rows in a join without using DISTINCT?",
+      "options": [
+        "Join inflation",
+        "Data loss",
+        "Syntax error",
+        "Performance issues"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Consider what happens when a single entity is related to multiple entries in another table.",
+      "help": {
+        "concept": "Join inflation occurs when a single entity is counted multiple times due to multiple related entries in another table.",
+        "hint_1": "Think about how a student enrolled in multiple courses would be counted.",
+        "hint_2": "Without DISTINCT, each related entry increases the count."
+      }
+    },
+    {
+      "id": "multi-choice-anti-join",
+      "kind": "multi_choice",
+      "title": "Identifying Anti-Join Patterns",
+      "prompt": "Which of the following SQL clauses can be used to implement an anti-join pattern? Select all that apply.",
+      "options": [
+        "LEFT JOIN",
+        "RIGHT JOIN",
+        "WHERE IS NULL",
+        "GROUP BY"
+      ],
+      "correctOptionIds": [
+        "a",
+        "c"
+      ],
+      "hint": "Think about how you can identify missing relationships between tables.",
+      "help": {
+        "concept": "An anti-join pattern is used to find records in one table that do not have corresponding records in another table.",
+        "hint_1": "Consider using a LEFT JOIN with a condition that checks for NULL values.",
+        "hint_2": "The WHERE clause can be used to filter out non-matching records."
+      }
+    },
+    {
+      "id": "drag-reorder-join-steps",
+      "kind": "drag_reorder",
+      "title": "Steps in Performing a LEFT JOIN",
+      "prompt": "Arrange the steps to correctly perform a LEFT JOIN to find unmatched records.",
+      "tokens": [
+        "Select all columns from the left table",
+        "Perform a LEFT JOIN with the right table",
+        "Use ON to specify the join condition",
+        "Filter results where the right table's key is NULL"
+      ],
+      "correctOrder": [
+        "Select all columns from the left table",
+        "Perform a LEFT JOIN with the right table",
+        "Use ON to specify the join condition",
+        "Filter results where the right table's key is NULL"
+      ],
+      "hint": "Start with the table you want to preserve all records from.",
+      "help": {
+        "concept": "A LEFT JOIN preserves all records from the left table and matches them with records from the right table.",
+        "hint_1": "Begin with the table that should retain all its rows.",
+        "hint_2": "Use a condition to identify unmatched records."
+      }
+    },
+    {
+      "id": "fill-blank-choice-count-distinct",
+      "kind": "fill_blank_choice",
+      "title": "Using COUNT(DISTINCT)",
+      "prompt": "Complete the SQL statement to count unique student enrollments.",
+      "template": "SELECT COUNT([blank1] student_id) FROM enrollments;",
+      "choices": [
+        "DISTINCT",
+        "ALL",
+        "UNIQUE",
+        "EVERY"
+      ],
+      "correctValue": "DISTINCT",
+      "hint": "Use COUNT with the missing term to avoid counting duplicates.",
+      "help": {
+        "concept": "COUNT(the missing term column) counts unique values in a column, avoiding duplicates.",
+        "hint_1": "the missing term ensures each unique value is counted once.",
+        "hint_2": "Place the missing term inside the COUNT function."
+      }
+    },
+    {
+      "id": "fill-blank-choice-anti-join",
+      "kind": "fill_blank_choice",
+      "title": "Anti-Join Condition",
+      "prompt": "Fill in the blank to complete the anti-join condition.",
+      "template": "WHERE courses.id [blank1];",
+      "choices": [
+        "IS NULL",
+        "IS NOT NULL",
+        "= 0",
+        "<> 0"
+      ],
+      "correctValue": "IS NULL",
+      "hint": "Use a condition that checks for NULL values in the right table.",
+      "help": {
+        "concept": "An anti-join uses a NULL check to find records without matches in another table.",
+        "hint_1": "The condition should identify where the right table's key the missing term.",
+        "hint_2": "Use the missing term to filter unmatched records."
+      }
+    },
+    {
+      "id": "try-counting-related-rows-sketch0",
+      "kind": "code_input",
+      "title": "Try It: Count Unique Students",
+      "prompt": "Write a query to count the number of unique students enrolled in any course. Use the `enrollments` table and ensure each student is counted only once.",
+      "starterCode": "SELECT COUNT(DISTINCT student_id) FROM enrollments;",
+      "solutionCode": "SELECT COUNT(DISTINCT student_id) FROM enrollments;",
+      "tests": [
+        {
+          "stdout": "4\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "school_relations_intro",
+      "recipeType": "sql_query",
+      "hint": "Use COUNT with DISTINCT to avoid counting the same student multiple times.",
+      "help": {
+        "concept": "Use COUNT(DISTINCT column) to count unique entries in a column.",
+        "hint_1": "DISTINCT ensures each unique student_id is counted once.",
+        "hint_2": "Place DISTINCT inside the COUNT function to get unique counts."
+      }
+    },
+    {
+      "id": "try-counting-related-rows-sketch1",
+      "kind": "code_input",
+      "title": "Try It: Find Departments Without Courses",
+      "prompt": "Write a query to list all departments that do not have any courses. Use a LEFT JOIN and filter for departments with no matching courses.",
+      "starterCode": "SELECT departments.name FROM departments LEFT JOIN courses ON departments.id = courses.department_id WHERE courses.id IS NULL;",
+      "solutionCode": "SELECT departments.name FROM departments LEFT JOIN courses ON departments.id = courses.department_id WHERE courses.id IS NULL;",
+      "tests": [
+        {
+          "stdout": "Arts\nTechnology\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "school_relations_intro",
+      "recipeType": "sql_query",
+      "hint": "Use a LEFT JOIN and filter where the course ID is NULL.",
+      "help": {
+        "concept": "An anti-join pattern can be used to find records without matches in another table.",
+        "hint_1": "LEFT JOIN departments with courses and check for NULL course IDs.",
+        "hint_2": "Filter results where the course ID is NULL to find departments without courses."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Department Participation Scorecard",
+    "stepIds": [
+      "try-counting-related-rows-sketch0",
+      "try-counting-related-rows-sketch1"
+    ]
+  }
+}

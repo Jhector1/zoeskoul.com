@@ -34,39 +34,6 @@
             }
           },
           "quiz": {
-            "ci_predict_name_price": {
-              "title": "Show product names and prices",
-              "prompt": "Write a query that returns exactly the `name` and `price` columns from the `products` table, for all rows. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Return exactly the name and price columns from the products table, for all rows.\nSELECT \nFROM products;"
-            },
-            "ci_predict_all_columns": {
-              "title": "Show every column",
-              "prompt": "Write a query that returns all columns from the `products` table. Use the SQL editor and run it so the results table shows the full product records.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Return all columns from the products table.\nSELECT \nFROM products;"
-            },
-            "ci_predict_category_name_order": {
-              "title": "Return category before name",
-              "prompt": "Write a query that returns the `category` column first and the `name` column second from the `products` table. The goal is to practice predicting output column order in the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Return the category column first and the name column second from the products table.\nSELECT name, category\nFROM products;"
-            },
             "sc_select_star_meaning": {
               "title": "Meaning of SELECT *",
               "prompt": "What does `SELECT * FROM products;` return?",
@@ -86,11 +53,11 @@
             "sc_no_where_all_rows": {
               "title": "Rows returned without WHERE",
               "prompt": "If a query is `SELECT name FROM products;`, how many product rows can appear in the results table with this dataset?",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Match each choice to the command, clause, or constraint described in the question.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "concept": "Use the SQL behavior described in the lesson to separate the valid choice from statements about a different command, clause, or constraint.",
+                "hint_1": "Identify the job the SQL must perform before comparing the choices.",
+                "hint_2": "Eliminate choices that belong to a different SQL concept."
               },
               "options": {
                 "a": "1 row",
@@ -197,53 +164,31 @@
                 "products"
               ]
             },
-            "try-predicting_result_output-sketch0": {
-              "title": "Query name and price from products",
-              "prompt": "Scenario: A store manager needs a clear product-catalog query before sharing results with the team. Write a query that returns `name`, `price` from the `products` table. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the selected columns and table name in the SQL editor.",
-                "hint_2": "Run the query and compare the result table with the expected result."
-              },
-              "starterCode": "-- Return name, price from the products table.\nSELECT \nFROM products;"
-            },
-            "try-predicting_result_output-sketch1": {
-              "title": "Query all products rows",
-              "prompt": "Scenario: A store manager needs a clear product-catalog query before sharing results with the team. Write a query that returns all columns from the `products` table. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the selected columns and table name in the SQL editor.",
-                "hint_2": "Run the query and compare the result table with the expected result."
-              },
-              "starterCode": "-- Return all columns from the products table.\nSELECT \nFROM products;"
-            },
             "try-predicting_result_output-sketch2": {
-              "title": "Query category and name from products",
-              "prompt": "Scenario: A store manager needs a clear product-catalog query before sharing results with the team. Write a query that returns `category`, `name` from the `products` table. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Control the Result Column Order — Predicting Result Output",
+              "prompt": "Return `stock` first and `name` second from `products`. Return `stock, name` from `products` in that column order.",
+              "hint": "SQL displays selected columns in the order written.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the selected columns and table name in the SQL editor.",
-                "hint_2": "Run the query and compare the result table with the expected result."
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "Return `stock, name` from `products` in that column order."
               },
-              "starterCode": "-- Return category, name from the products table.\nSELECT name, category\nFROM products;"
+              "starterCode": "-- Put stock before name\nSELECT name, stock\nFROM products;"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_predicting_result_output_sketch0": {
               "title": "Query name and price from products",
-              "prompt": "Scenario: A store manager needs a clear product-catalog query before sharing results with the team. Write a query that returns `name`, `price` from the `products` table. Write the query in the SQL editor, click Run query, and check the results table."
+              "prompt": "Build a product-catalog query that returns `name`, `price` from the `products` table. Run it and compare the result with the expected table."
             },
             "try_predicting_result_output_sketch1": {
               "title": "Query all products rows",
-              "prompt": "Scenario: A store manager needs a clear product-catalog query before sharing results with the team. Write a query that returns all columns from the `products` table. Write the query in the SQL editor, click Run query, and check the results table."
+              "prompt": "Build a product-catalog query that returns all columns from the `products` table. Run it and compare the result with the expected table."
             },
             "try_predicting_result_output_sketch2": {
-              "title": "Query category and name from products",
-              "prompt": "Scenario: A store manager needs a clear product-catalog query before sharing results with the team. Write a query that returns `category`, `name` from the `products` table. Write the query in the SQL editor, click Run query, and check the results table."
+              "title": "Control the Result Column Order",
+              "prompt": "Return `stock` first and `name` second from `products`. Before running it, predict which header appears on the left."
             }
           }
         }
@@ -264,20 +209,6 @@
             },
             "quiz": {
               "title": "Quiz"
-            },
-            "project": {
-              "title": "Predict Results from Starter SELECT Queries"
-            }
-          },
-          "projectSteps": {
-            "ci_predict_name_price": {
-              "title": "Show product names and prices"
-            },
-            "ci_predict_all_columns": {
-              "title": "Show every column"
-            },
-            "ci_predict_category_name_order": {
-              "title": "Return category before name"
             }
           },
           "quiz": {
@@ -333,11 +264,11 @@
             "sc_no_where_all_rows": {
               "title": "Rows returned without WHERE",
               "prompt": "If a query is `SELECT name FROM products;`, how many product rows can appear in the results table with this dataset?",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Match each choice to the command, clause, or constraint described in the question.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "concept": "Use the SQL behavior described in the lesson to separate the valid choice from statements about a different command, clause, or constraint.",
+                "hint_1": "Identify the job the SQL must perform before comparing the choices.",
+                "hint_2": "Eliminate choices that belong to a different SQL concept."
               },
               "options": {
                 "a": "1 row",
@@ -446,7 +377,7 @@
             },
             "try-predicting_result_output-sketch0": {
               "title": "Query name and price from products",
-              "prompt": "Scenario: A store manager needs a clear product-catalog query before sharing results with the team. Write a query that returns `name`, `price` from the `products` table. Write the query in the SQL editor, click Run query, and check the results table.",
+              "prompt": "Build a product-catalog query that returns `name`, `price` from the `products` table. Run it and compare the result with the expected table.",
               "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
               "help": {
                 "concept": "This SQL exercise checks whether your query returns the requested result.",
@@ -457,7 +388,7 @@
             },
             "try-predicting_result_output-sketch1": {
               "title": "Query all products rows",
-              "prompt": "Scenario: A store manager needs a clear product-catalog query before sharing results with the team. Write a query that returns all columns from the `products` table. Write the query in the SQL editor, click Run query, and check the results table.",
+              "prompt": "Build a product-catalog query that returns all columns from the `products` table. Run it and compare the result with the expected table.",
               "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
               "help": {
                 "concept": "This SQL exercise checks whether your query returns the requested result.",
@@ -467,30 +398,30 @@
               "starterCode": "-- Return all columns from the products table.\nSELECT \nFROM products;"
             },
             "try-predicting_result_output-sketch2": {
-              "title": "Query category and name from products",
-              "prompt": "Scenario: A store manager needs a clear product-catalog query before sharing results with the team. Write a query that returns `category`, `name` from the `products` table. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Control the Result Column Order",
+              "prompt": "Return `stock` first and `name` second from `products`. Before running it, predict which header appears on the left.",
+              "hint": "SQL displays selected columns in the order written.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the selected columns and table name in the SQL editor.",
-                "hint_2": "Run the query and compare the result table with the expected result."
+                "concept": "Return `stock` first and `name` second from `products`. Before running it, predict which header appears on the left.",
+                "hint_1": "SQL displays selected columns in the order written.",
+                "hint_2": "Run the query and compare the returned columns and rows with the expected result."
               },
-              "starterCode": "-- Return category, name from the products table.\nSELECT name, category\nFROM products;"
+              "starterCode": "-- Put stock before name\nSELECT name, stock\nFROM products;"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_predicting_result_output_sketch0": {
               "title": "Query name and price from products",
-              "prompt": "Scenario: A store manager needs a clear product-catalog query before sharing results with the team. Write a query that returns `name`, `price` from the `products` table. Write the query in the SQL editor, click Run query, and check the results table."
+              "prompt": "Build a product-catalog query that returns `name`, `price` from the `products` table. Run it and compare the result with the expected table."
             },
             "try_predicting_result_output_sketch1": {
               "title": "Query all products rows",
-              "prompt": "Scenario: A store manager needs a clear product-catalog query before sharing results with the team. Write a query that returns all columns from the `products` table. Write the query in the SQL editor, click Run query, and check the results table."
+              "prompt": "Build a product-catalog query that returns all columns from the `products` table. Run it and compare the result with the expected table."
             },
             "try_predicting_result_output_sketch2": {
-              "title": "Query category and name from products",
-              "prompt": "Scenario: A store manager needs a clear product-catalog query before sharing results with the team. Write a query that returns `category`, `name` from the `products` table. Write the query in the SQL editor, click Run query, and check the results table."
+              "title": "Control the Result Column Order",
+              "prompt": "Return `stock` first and `name` second from `products`. Before running it, predict which header appears on the left."
             }
           }
         }

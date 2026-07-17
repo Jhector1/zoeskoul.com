@@ -10,7 +10,11 @@
     "status": "active",
     "subjectSlugs": [
       "sql",
-      "sql-v2"
+      "sql-v2",
+        "sql-analysis-reporting",
+      "multi-table-sql",
+      "sql-data-management"
+
     ],
     "meta": {
       "family": "data"

@@ -494,6 +494,88 @@ function buildFallbackDistractors(correctText: string): string[] {
     );
 }
 
+function isProjectTopic(seed?: TopicSeed): boolean {
+    return (
+        seed?.sectionRole === "module_project" ||
+        seed?.sectionRole === "capstone" ||
+        seed?.moduleRole === "capstone"
+    );
+}
+
+function projectBriefMarkdown(seed?: TopicSeed): string {
+    if (!isProjectTopic(seed) || !seed?.projectBrief) return "";
+
+    const scenario = normalizeText(seed.projectBrief.scenario);
+    const role = normalizeText(seed.projectBrief.role);
+    const workspace = normalizeText(seed.projectBrief.workspace);
+    const deliverable = normalizeText(seed.projectBrief.deliverable);
+
+    const lines = [
+        scenario ? `**Scenario:** ${scenario}` : "",
+        role ? `**Your role:** ${role}` : "",
+        workspace ? `**Workspace:** ${workspace}` : "",
+        deliverable ? `**Deliverable:** ${deliverable}` : "",
+    ].filter(Boolean);
+
+    return lines.length > 0
+        ? ["### Project Brief", "", ...lines].join("\n\n")
+        : "";
+}
+
+function ensureAuthoredProjectSynopsis(args: {
+    draft: TopicAuthoringDraft;
+    seed?: TopicSeed;
+}): TopicAuthoringDraft {
+    const briefMarkdown = projectBriefMarkdown(args.seed);
+    if (!briefMarkdown) return args.draft;
+
+    const brief = args.seed?.projectBrief;
+    const requiredFacts = [
+        normalizeText(brief?.scenario),
+        normalizeText(brief?.role),
+        normalizeText(brief?.workspace),
+        normalizeText(brief?.deliverable),
+    ].filter(Boolean);
+
+    const sketchBlocks = Array.isArray(args.draft.sketchBlocks)
+        ? args.draft.sketchBlocks
+        : [];
+    const firstSketch = sketchBlocks[0];
+    const firstBody = normalizeText(firstSketch?.bodyMarkdown);
+    const normalizedBody = normalizeComparable(firstBody);
+    const hasEveryAuthoredFact = requiredFacts.every((fact) =>
+        normalizedBody.includes(normalizeComparable(fact)),
+    );
+
+    if (firstSketch && hasEveryAuthoredFact) {
+        return args.draft;
+    }
+
+    const repairedFirstSketch = firstSketch
+        ? {
+              ...firstSketch,
+              bodyMarkdown: [firstBody, briefMarkdown]
+                  .filter(Boolean)
+                  .join("\n\n"),
+          }
+        : {
+              id: "sketch-1",
+              title:
+                  normalizeText(args.draft.projectDraft?.title) ||
+                  normalizeText(args.draft.title) ||
+                  "Project Brief",
+              bodyMarkdown: briefMarkdown,
+          };
+
+    return {
+        ...args.draft,
+        sketchBlocks: [
+            repairedFirstSketch,
+            ...sketchBlocks.slice(1),
+        ],
+    };
+}
+
 function ensureMinimumChoiceOptions(args: {
     options: string[];
     correctOptionIds: string[];
@@ -541,7 +623,7 @@ export function repairTopicAuthoringDraft(
     draft: TopicAuthoringDraft,
     seed?: TopicSeed,
 ): TopicAuthoringDraft {
-    return {
+    const normalizedDraft: TopicAuthoringDraft = {
         ...draft,
         title: normalizeText(draft.title),
         summary: normalizeText(draft.summary),
@@ -781,4 +863,9 @@ export function repairTopicAuthoringDraft(
             }
             : undefined,
     };
+
+    return ensureAuthoredProjectSynopsis({
+        draft: normalizedDraft,
+        seed,
+    });
 }

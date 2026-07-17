@@ -606,7 +606,8 @@ describe("buildTopicBundleFromDraft messageBase integration", () => {
                     { stdin: "3\n", stdout: "4\n", match: "exact" },
                     { stdin: "8\n", stdout: "9\n", match: "exact" },
                 ],
-                solutionCode: "n = int(input())\nprint(n + 1)",
+                solutionCode:
+                    "@:topics.python-for-beginners.python-1.read-and-add.practice.code-1.solutionCode",
             },
         });
     });
@@ -901,14 +902,19 @@ describe("buildTopicBundleFromDraft messageBase integration", () => {
         });
 
         expect(bundle.cards.find((card) => card.id === "sketch0")).toMatchObject({
-            tryIt: { exerciseKey: "try-attributes-and-init-sketch1" },
+            tryIt: { exerciseKey: "try-attributes-and-init-sketch0" },
         });
         expect(bundle.cards.find((card) => card.id === "sketch1")).toMatchObject({
-            tryIt: { exerciseKey: "try-attributes-and-init-sketch0" },
+            tryIt: { exerciseKey: "try-attributes-and-init-sketch1" },
         });
         expect(bundle.cards.find((card) => card.id === "sketch2")).toMatchObject({
             tryIt: { exerciseKey: "try-attributes-and-init-sketch2" },
         });
+        expect(bundle.exercises.map((exercise) => exercise.id)).toEqual([
+            "try-attributes-and-init-sketch1",
+            "try-attributes-and-init-sketch0",
+            "try-attributes-and-init-sketch2",
+        ]);
     });
 
     it("keeps no local resolveTryItExerciseId helper in the emitters", async () => {
@@ -1256,6 +1262,113 @@ describe("buildTopicBundleFromDraft messageBase integration", () => {
         expect(bundle.cards.some((card) => card.kind === "quiz")).toBe(false);
         expect(bundle.exercises).toHaveLength(1);
         expect(bundle.exercises[0]?.id).toBe("capstone-step");
+    });
+
+    it("fails emission when a project draft does not match the authored step count", () => {
+        expect(() =>
+            buildTopicBundleFromDraft({
+                shape: makePythonShapePack(),
+                seed: {
+                    ...makePythonSeed(),
+                    moduleRole: "capstone",
+                    generationTargets: {
+                        quizBankMin: 0,
+                        quizBankTarget: 0,
+                        quizVisibleDefault: 0,
+                        quizVisibleMax: 0,
+                        projectCodeInputMin: 2,
+                        projectCodeInputTarget: 2,
+                        projectCodeInputMax: 2,
+                        maxAttempts: null,
+                    },
+                    projectBrief: {
+                        stepCountTarget: 2,
+                    },
+                } as any,
+                draft: {
+                    title: "Capstone",
+                    summary: "Build the capstone.",
+                    minutes: 20,
+                    sketchBlocks: [],
+                    quizDraft: [
+                        {
+                            id: "capstone-step-1",
+                            kind: "code_input",
+                            title: "Capstone step 1",
+                            prompt: "Build the first step.",
+                            starterCode: "print('start')\n",
+                            solutionCode: "print('done')\n",
+                            tests: [
+                                { stdout: "done\n", match: "exact" },
+                                { stdout: "done\n", match: "exact" },
+                            ],
+                            hint: "Hint",
+                            help: {
+                                concept: "Concept",
+                                hint_1: "Hint 1",
+                                hint_2: "Hint 2",
+                            },
+                        },
+                    ],
+                } as any,
+            }),
+        ).toThrow(
+            'Project topic "read-and-add" must generate exactly 2 authored project exercise(s). Found 1.',
+        );
+    });
+
+    it("rejects a projectDraft step list that omits an authored capstone exercise", () => {
+        const exercise = (id: string) => ({
+            id,
+            kind: "code_input" as const,
+            title: id,
+            prompt: `Complete ${id}.`,
+            starterCode: "print('start')\n",
+            solutionCode: "print('done')\n",
+            tests: [
+                { stdout: "done\n", match: "exact" as const },
+                { stdout: "done\n", match: "exact" as const },
+            ],
+            hint: "Hint",
+            help: {
+                concept: "Concept",
+                hint_1: "Hint 1",
+                hint_2: "Hint 2",
+            },
+        });
+
+        expect(() =>
+            buildTopicBundleFromDraft({
+                shape: makePythonShapePack(),
+                seed: {
+                    ...makePythonSeed(),
+                    moduleRole: "capstone",
+                    generationTargets: {
+                        quizBankMin: 0,
+                        quizBankTarget: 0,
+                        quizVisibleDefault: 0,
+                        quizVisibleMax: 0,
+                        projectCodeInputMin: 2,
+                        projectCodeInputTarget: 2,
+                        projectCodeInputMax: 2,
+                        maxAttempts: null,
+                    },
+                    projectBrief: { stepCountTarget: 2 },
+                } as any,
+                draft: {
+                    title: "Capstone",
+                    summary: "Build the capstone.",
+                    minutes: 20,
+                    sketchBlocks: [],
+                    quizDraft: [exercise("capstone-step-1"), exercise("capstone-step-2")],
+                    projectDraft: {
+                        stepIds: ["capstone-step-1"],
+                    },
+                } as any,
+            }),
+        ).toThrow(
+            'Project topic "read-and-add" must contain exactly 2 authored project step(s). Found 1.',
+        );
     });
 
     it("keeps quiz card emission for normal lesson topics", () => {
@@ -1973,4 +2086,155 @@ describe("buildTopicBundleFromDraft messageBase integration", () => {
             }),
         )
             .toThrow(/needs at least one stdin\/stdout test case/i);    });
+    it("emits resolved topic policy plus sparse lesson and exercise overrides", () => {
+        const seed = {
+            ...makeSeed(),
+            tools: {
+                defaultVisible: true,
+                defaultSurface: "editor",
+                compactDefaultSurface: "results",
+                sqlPane: { showTables: true, showErd: true, showChen: false },
+            },
+            lessonTools: {
+                "sketch-1": {
+                    defaultSurface: "results",
+                    sqlPane: { defaultTab: "tables" },
+                },
+                quiz: { defaultVisible: false },
+            },
+            exerciseTools: {
+                "relationship-check": { defaultSurface: "editor" },
+            },
+        } as any;
+        const draft = makeDraftWithExercise({
+            id: "relationship-check",
+            kind: "single_choice",
+            title: "Choose the key",
+            prompt: "Which pair follows the documented relationship?",
+            options: [
+                "students.id → enrollments.student_id",
+                "students.id → courses.id",
+                "courses.id → students.id",
+                "departments.id → students.id",
+            ],
+            correctOptionIds: ["a"],
+            hint: "Follow the declared foreign key.",
+            help: {
+                concept: "Foreign keys point to parent primary keys.",
+                hint_1: "Look at enrollments.student_id.",
+                hint_2: "It stores a students.id value.",
+            },
+        });
+
+        const bundle = buildTopicBundleFromDraft({
+            shape: makeShapePack(),
+            seed,
+            draft,
+        });
+
+        expect(bundle.tools).toEqual(seed.tools);
+        expect(bundle.cards[0]?.tools).toMatchObject({
+            defaultSurface: "results",
+            sqlPane: { defaultTab: "tables" },
+        });
+        expect(bundle.cards.find((card) => card.kind === "quiz")?.tools).toEqual({
+            defaultVisible: false,
+        });
+        expect(bundle.exercises[0]?.tools).toEqual({
+            defaultSurface: "editor",
+        });
+    });
+
+    it("compiles ordered SQL files into the manifest and runtime contract", () => {
+        const seed = {
+            ...makeSeed(),
+            courseSlug: "sql-data-management",
+            moduleNumber: 2,
+            moduleOrder: 3,
+            moduleRuntimeDefaults: {
+                kind: "sql",
+                datasetId: "ddl_blank",
+                fixedSqlDialect: "sqlite",
+                resultShape: "table",
+                supportsMultiFile: true,
+                supportsFileSystem: true,
+                supportsTerminal: false,
+            },
+        } as any;
+        const draft = makeDraftWithExercise({
+            id: "create-warehouse",
+            kind: "code_input",
+            title: "Create a warehouse table",
+            prompt: "Define the table in schema.sql and inspect it in query.sql.",
+            hint: "Keep schema creation separate from verification.",
+            help: {
+                concept: "Ordered SQL files execute setup before verification.",
+                hint_1: "Put CREATE TABLE in schema.sql.",
+                hint_2: "Inspect sqlite_master in query.sql.",
+            },
+            recipeType: "sql_query",
+            datasetId: "ddl_blank",
+            entryFilePath: "query.sql",
+            starterCode: "SELECT name FROM sqlite_master WHERE type = 'table';",
+            solutionCode:
+                "SELECT name, sql FROM sqlite_master WHERE type = 'table' AND name = 'warehouses';",
+            sqlFileOrder: ["schema.sql", "query.sql"],
+            starterFiles: [
+                { path: "schema.sql", content: "-- Define warehouses here.\n" },
+                {
+                    path: "query.sql",
+                    content: "SELECT name FROM sqlite_master WHERE type = 'table';",
+                    isEntry: true,
+                },
+            ],
+            solutionFiles: [
+                {
+                    path: "schema.sql",
+                    content:
+                        "CREATE TABLE warehouses (id INTEGER PRIMARY KEY, name TEXT NOT NULL);",
+                },
+                {
+                    path: "query.sql",
+                    content:
+                        "SELECT name, sql FROM sqlite_master WHERE type = 'table' AND name = 'warehouses';",
+                    isEntry: true,
+                },
+            ],
+            checkSql:
+                "SELECT name, sql FROM sqlite_master WHERE type = 'table' AND name = 'warehouses';",
+        });
+
+        const bundle = buildTopicBundleFromDraft({
+            shape: makeShapePack(),
+            seed,
+            draft,
+        });
+        const exercise = bundle.exercises[0];
+        expect(exercise).toMatchObject({
+            kind: "code_input",
+            runtime: {
+                kind: "sql",
+                supportsMultiFile: true,
+                supportsFileSystem: true,
+            },
+            workspace: {
+                entryFilePath: "query.sql",
+                openTabs: ["schema.sql", "query.sql"],
+            },
+            recipe: {
+                type: "sql_query",
+                sqlFileOrder: ["schema.sql", "query.sql"],
+            },
+        });
+        if (exercise?.kind !== "code_input" || exercise.recipe.type !== "sql_query") {
+            throw new Error("Expected a SQL code_input exercise");
+        }
+        expect(exercise.recipe.solutionCode).toContain(
+            "-- file: schema.sql\nCREATE TABLE warehouses",
+        );
+        expect(exercise.recipe.solutionCode).toContain(
+            "-- file: query.sql\nSELECT name, sql",
+        );
+    });
+
 });

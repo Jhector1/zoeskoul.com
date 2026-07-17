@@ -1,18 +1,20 @@
 import {studentsIntroDataset} from "./studentsIntro.js";
 import {productsCatalogDataset} from "./productsCatalog.js";
 import {salesKpiDataset} from "./salesKpi.js";
+import {salesReportingDataset} from "./salesReporting.js";
 import {inventoryOpsDataset} from "./inventoryOps.js";
 import {schoolRelationsIntroDataset} from "./schoolRelationsIntro.js";
 import {customersCleanupDataset} from "./customersCleanup.js";
 import {ddlBlankDataset} from "./ddlBlankDataset.js";
 import {designSandboxDataset} from "./designSandbox.js";
 import {capstoneSandboxDataset} from "./capstoneSandbox.js";
-import {SqlDatasetArtifact} from "@zoeskoul/curriculum-contracts";
+import type { SqlDatasetArtifact } from "@zoeskoul/curriculum-contracts";
 
 const SQL_DATASETS: Record<string, SqlDatasetArtifact> = {
     [studentsIntroDataset.id]: studentsIntroDataset,
     [productsCatalogDataset.id]: productsCatalogDataset,
     [salesKpiDataset.id]: salesKpiDataset,
+    [salesReportingDataset.id]: salesReportingDataset,
     [inventoryOpsDataset.id]: inventoryOpsDataset,
     [schoolRelationsIntroDataset.id]: schoolRelationsIntroDataset,
     [customersCleanupDataset.id]: customersCleanupDataset,

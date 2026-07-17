@@ -136,6 +136,66 @@ export const WORKSPACE_PROFILES: Record<string, WorkspaceProfile> = {
         ],
     },
 
+    "browser-sql-files-runner": {
+        id: "browser-sql-files-runner",
+        name: "Browser SQL files runner",
+        ui: {
+            editorLabel: "SQL editor",
+            runButtonLabel: "Run query",
+            resultsTableLabel: "results table",
+            outputPanelLabel: "results panel",
+            feedbackPanelLabel: "feedback area",
+            terminalPanelLabel: null,
+            filesPanelLabel: "files panel",
+        },
+        capabilities: {
+            singleFileCodeInput: { enabled: true },
+            multiFileProjects: {
+                enabled: true,
+                label: "Ordered SQL files",
+                notes: "Learners edit provided SQL files that execute in an authored order such as schema.sql, seed.sql, query.sql.",
+            },
+            terminal: { enabled: false },
+            filesystem: {
+                enabled: true,
+                label: "SQL files workspace",
+                notes: "The files panel contains the SQL files provided by the lesson.",
+            },
+            stdinStdout: { enabled: false },
+            packageInstall: { enabled: false },
+            externalNetwork: { enabled: false },
+            uploads: { enabled: false },
+            createFiles: {
+                enabled: false,
+                notes: "SQL course exercises provide the required files; learners edit rather than inventing file names.",
+            },
+            createFolders: { enabled: false },
+            sql: {
+                queryRunner: { enabled: true },
+                resultsTable: { enabled: true },
+                schemaBrowser: { enabled: true },
+                erdDiagram: { enabled: true },
+                chenDiagram: { enabled: true },
+            },
+        },
+        preferredActionLanguage: [
+            "Open schema.sql, seed.sql, or query.sql in the files panel when the lesson provides them.",
+            "Keep CREATE TABLE statements in schema.sql.",
+            "Keep approved starting INSERT statements in seed.sql when that file is provided.",
+            "Keep changes and verification SELECT statements in query.sql.",
+            "Click Run query to execute the SQL files in the lesson's authored order.",
+            "Check the results table and Tables tab.",
+        ],
+        forbiddenActionLanguage: [
+            "Open a terminal",
+            "Use the command line",
+            "Install a database",
+            "Create extra SQL files",
+            "Rename the provided SQL files",
+            "Run a shell command",
+        ],
+    },
+
     "full-ide": {
         id: "full-ide",
         name: "Full IDE workspace",

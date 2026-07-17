@@ -1,0 +1,144 @@
+{
+  "title": "Validating Report Grain and Order",
+  "summary": "Prototype grouping and sorting before adding every final KPI.",
+  "minutes": 24,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Understanding Report Grain",
+      "bodyMarkdown": "In SQL reporting, the 'grain' of a report refers to the level of detail represented by each row. For example, if each row in a sales report represents a single transaction, the grain is at the transaction level. If each row represents total sales per region, the grain is at the regional level. Understanding the grain is crucial for accurate data aggregation and analysis.\n\nConsider the following SQL query:\n\n```sql\nSELECT region, SUM(quantity) AS total_quantity\nFROM sales_reporting\nGROUP BY region;\n```\n\nIn this query, the grain is at the regional level because each row in the result represents the total quantity sold in a specific region. The `GROUP BY` clause determines the grain by specifying how the data should be aggregated."
+    },
+    {
+      "id": "sketch2",
+      "title": "Sorting Data for Clarity",
+      "bodyMarkdown": "Sorting data in SQL is done using the `ORDER BY` clause. This helps in organizing the output in a meaningful way, making it easier to interpret. You can sort data in ascending (`ASC`) or descending (`DESC`) order.\n\nHere's an example:\n\n```sql\nSELECT product_name, quantity\nFROM sales_reporting\nORDER BY quantity DESC;\n```\n\nThis query sorts the products by quantity sold in descending order, showing the most sold products first. Sorting is essential for highlighting key insights, such as top-performing products or regions."
+    },
+    {
+      "id": "sketch3",
+      "title": "Combining Grouping and Sorting",
+      "bodyMarkdown": "Combining `GROUP BY` and `ORDER BY` allows you to aggregate data and then sort it based on the aggregated values. This is useful for creating reports that highlight top categories, regions, or sales representatives.\n\nExample:\n\n```sql\nSELECT sales_rep, SUM(quantity) AS total_sales\nFROM sales_reporting\nGROUP BY sales_rep\nORDER BY total_sales DESC;\n```\n\nIn this query, we first group the data by `sales_rep` to calculate total sales for each representative. Then, we sort the results in descending order of `total_sales` to identify the top performers."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "try-validating-report-grain-sketch0",
+      "kind": "code_input",
+      "title": "Try It: Determine Report Grain",
+      "prompt": "Write a query to find the total sales for each category in the `sales_reporting` table. Group the results by category and order them by total sales in descending order.",
+      "starterCode": "SELECT category, SUM(quantity * unit_price) AS total_sales\nFROM sales_reporting\nGROUP BY category\nORDER BY total_sales DESC;",
+      "solutionCode": "SELECT category, SUM(quantity * unit_price) AS total_sales\nFROM sales_reporting\nGROUP BY category\nORDER BY total_sales DESC;",
+      "tests": [
+        {
+          "stdout": "category | total_sales\nArt | 500.00\nStationery | 400.00\nHome | 300.00\nTech | 200.00\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query",
+      "hint": "Use `GROUP BY` to aggregate by category and `ORDER BY` to sort by total sales.",
+      "help": {
+        "concept": "The grain of a report is determined by the `GROUP BY` clause, which specifies how data is aggregated.",
+        "hint_1": "Use `SUM(quantity * unit_price)` to calculate total sales for each category.",
+        "hint_2": "Ensure your query includes `ORDER BY total_sales DESC` to sort the results."
+      }
+    },
+    {
+      "id": "try-validating-report-grain-sketch1",
+      "kind": "code_input",
+      "title": "Try It: Sort by Customer Rating",
+      "prompt": "Write a query to list all products with their average customer rating, sorted by the average rating in descending order. Use the `sales_reporting` table.",
+      "starterCode": "SELECT product_name, AVG(customer_rating) AS avg_rating\nFROM sales_reporting\nGROUP BY product_name\nORDER BY avg_rating DESC;",
+      "solutionCode": "SELECT product_name, AVG(customer_rating) AS avg_rating\nFROM sales_reporting\nGROUP BY product_name\nORDER BY avg_rating DESC;",
+      "tests": [
+        {
+          "stdout": "product_name | avg_rating\nWebcam | 4.9\nWatercolor Set | 4.8\nUSB-C Hub | 4.7\nAcrylic Paint Set | 4.7\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query",
+      "hint": "Use `AVG(customer_rating)` to calculate the average rating and `ORDER BY` to sort.",
+      "help": {
+        "concept": "Sorting by calculated fields helps in identifying top-rated items.",
+        "hint_1": "Use `GROUP BY product_name` to calculate the average rating for each product.",
+        "hint_2": "Ensure your query includes `ORDER BY avg_rating DESC` to sort the results."
+      }
+    },
+    {
+      "id": "try-validating-report-grain-sketch2",
+      "kind": "code_input",
+      "title": "Try It: Calculate Total Discounts",
+      "prompt": "Write a query to calculate the total discount given for each sales representative. Group the results by sales representative and order them by total discount in descending order.",
+      "starterCode": "SELECT sales_rep, SUM(discount_pct * quantity * unit_price / 100) AS total_discount\nFROM sales_reporting\nGROUP BY sales_rep\nORDER BY total_discount DESC;",
+      "solutionCode": "SELECT sales_rep, SUM(discount_pct * quantity * unit_price / 100) AS total_discount\nFROM sales_reporting\nGROUP BY sales_rep\nORDER BY total_discount DESC;",
+      "tests": [
+        {
+          "stdout": "sales_rep | total_discount\nMaya | 150.00\nPriya | 120.00\nJon | 100.00\nLuis | 80.00\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query",
+      "hint": "Use `SUM(discount_pct * quantity * unit_price / 100)` to calculate total discount.",
+      "help": {
+        "concept": "Aggregating discounts helps in understanding the impact of promotions.",
+        "hint_1": "Use `GROUP BY sales_rep` to aggregate discounts for each representative.",
+        "hint_2": "Ensure your query includes `ORDER BY total_discount DESC` to sort the results."
+      }
+    },
+    {
+      "id": "try-validating-report-grain-sketch3",
+      "kind": "code_input",
+      "title": "Try It: Identify Top Regions by Sales",
+      "prompt": "Write a query to find the total sales for each region. Group the results by region and order them by total sales in descending order.",
+      "starterCode": "SELECT region, SUM(quantity * unit_price) AS total_sales\nFROM sales_reporting\nGROUP BY region\nORDER BY total_sales DESC;",
+      "solutionCode": "SELECT region, SUM(quantity * unit_price) AS total_sales\nFROM sales_reporting\nGROUP BY region\nORDER BY total_sales DESC;",
+      "tests": [
+        {
+          "stdout": "region | total_sales\nNorth | 1000.00\nSouth | 800.00\nEast | 600.00\nWest | 400.00\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query",
+      "hint": "Use `SUM(quantity * unit_price)` to calculate total sales for each region.",
+      "help": {
+        "concept": "Grouping by region helps in identifying top-performing areas.",
+        "hint_1": "Use `GROUP BY region` to aggregate sales for each region.",
+        "hint_2": "Ensure your query includes `ORDER BY total_sales DESC` to sort the results."
+      }
+    },
+    {
+      "id": "try-validating-report-grain-sketch4",
+      "kind": "code_input",
+      "title": "Try It: Analyze Sales by Product Category",
+      "prompt": "Write a query to calculate the average sales per order for each product category. Group the results by category and order them by average sales in descending order.",
+      "starterCode": "SELECT category, AVG(quantity * unit_price) AS avg_sales\nFROM sales_reporting\nGROUP BY category\nORDER BY avg_sales DESC;",
+      "solutionCode": "SELECT category, AVG(quantity * unit_price) AS avg_sales\nFROM sales_reporting\nGROUP BY category\nORDER BY avg_sales DESC;",
+      "tests": [
+        {
+          "stdout": "category | avg_sales\nTech | 50.00\nHome | 40.00\nArt | 30.00\nStationery | 20.00\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query",
+      "hint": "Use `AVG(quantity * unit_price)` to calculate average sales per order.",
+      "help": {
+        "concept": "Analyzing average sales per category helps in understanding product performance.",
+        "hint_1": "Use `GROUP BY category` to calculate average sales for each category.",
+        "hint_2": "Ensure your query includes `ORDER BY avg_sales DESC` to sort the results."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Executive Sales Performance Report",
+    "stepIds": [
+      "try-validating-report-grain-sketch0",
+      "try-validating-report-grain-sketch1",
+      "try-validating-report-grain-sketch2",
+      "try-validating-report-grain-sketch3",
+      "try-validating-report-grain-sketch4"
+    ]
+  }
+}

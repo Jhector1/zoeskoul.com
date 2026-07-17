@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";
 import { useTranslations } from "next-intl";
 import type { WorkspaceStateV2 } from "@/components/ide/types";
 import type { SqlPaneOptions } from "@/components/code/runner/components/sql/results-pane";
+import type { ToolSurface } from "@zoeskoul/curriculum-contracts";
 import type {
     SqlDialect,
     TerminalEvidence,
@@ -33,8 +34,13 @@ import {
     ReviewWorkspaceDraft,
     writeReviewWorkspaceDraft
 } from "@/components/tools/panes/reviewWorkspaceDrafts";
-import { extractRuntimeSnapshotFromWorkspace } from "@/components/tools/panes/workspaceSnapshot";
+import {
+    extractRuntimeSnapshotFromWorkspace,
+    selectWorkspaceForSubmit,
+    type WorkspaceSubmitCache,
+} from "@/components/tools/panes/workspaceSnapshot";
 import { learnerUiFlags } from "@/lib/config/learnerUiFlags";
+import { getReviewSubmitBridgeHost } from "@/lib/review/submitBridge";
 
 const FullIDE = dynamic(() => import("@/components/ide/fullide/FullIDE"), {
     ssr: false,
@@ -1251,6 +1257,7 @@ export default function CodeToolPane(props: {
     sqlDatasetId?: string;
     sqlResultShape?: "table";
     sqlPaneOptions?: SqlPaneOptions;
+    defaultSurface?: ToolSurface;
     sqlSchemaSql?: string;
     sqlSeedSql?: string;
     sqlSetupSql?: string;
@@ -1276,6 +1283,7 @@ export default function CodeToolPane(props: {
         sqlDatasetId,
         sqlResultShape,
         sqlPaneOptions,
+        defaultSurface,
         sqlSchemaSql,
         sqlSeedSql,
         sqlSetupSql,
@@ -1646,6 +1654,14 @@ export default function CodeToolPane(props: {
     const lastIncomingRef = useRef<{ code: string; stdin: string } | null>(null);
     const persistTimerRef = useRef<number | null>(null);
     const pendingWorkspaceRef = useRef<WorkspaceStateV2 | null | undefined>(undefined);
+    const lastFlushedWorkspaceForSubmitRef = useRef<WorkspaceSubmitCache | null>(null);
+
+    useEffect(() => {
+        const cached = lastFlushedWorkspaceForSubmitRef.current;
+        if (cached && cached.contextKey !== workspaceContextKey) {
+            lastFlushedWorkspaceForSubmitRef.current = null;
+        }
+    }, [workspaceContextKey]);
     const pendingWorkspaceForceUserEditRef = useRef(false);
     const pendingTerminalEvidenceRef = useRef<TerminalEvidence | null | undefined>(undefined);
     const latestTerminalEvidenceRef = useRef<TerminalEvidence | null>(null);
@@ -2415,6 +2431,10 @@ export default function CodeToolPane(props: {
             workspace &&
             forceWorkspaceHasContent(workspace)
         ) {
+            lastFlushedWorkspaceForSubmitRef.current = {
+                contextKey: workspaceContextKey,
+                workspace,
+            };
             pendingWorkspaceRef.current = undefined;
             pendingWorkspaceForceUserEditRef.current = false;
             emitWorkspaceUpstreamRef.current(workspace, true);
@@ -2474,6 +2494,7 @@ export default function CodeToolPane(props: {
         resolvedEditorOwnerKey,
         syncCodeInputSnapshot,
         usesWorkspaceShell,
+        workspaceContextKey,
     ]);
 
     useEffect(() => {
@@ -2505,33 +2526,53 @@ export default function CodeToolPane(props: {
         };
     }, [usesWorkspaceShell, flushPendingWorkspace]);
 
-    const handleBeforeRun = useCallback(async () => {
-        const workspaceForRun = pendingWorkspaceRef.current ?? finalReviewWorkspace;
+    const flushReviewWorkspaceForSubmit = useCallback(() => {
+        const workspaceForSubmit = selectWorkspaceForSubmit({
+            contextKey: workspaceContextKey,
+            pendingWorkspace: pendingWorkspaceRef.current,
+            lastFlushed: lastFlushedWorkspaceForSubmitRef.current,
+            currentWorkspace: finalReviewWorkspace,
+        });
+
+        if (workspaceForSubmit && forceWorkspaceHasContent(workspaceForSubmit)) {
+            lastFlushedWorkspaceForSubmitRef.current = {
+                contextKey: workspaceContextKey,
+                workspace: workspaceForSubmit,
+            };
+        }
 
         flushPendingWorkspace();
 
         if (
             isReviewRouteMode &&
             resolvedEditorOwnerKey &&
-            workspaceForRun &&
-            forceWorkspaceHasContent(workspaceForRun)
+            workspaceForSubmit &&
+            forceWorkspaceHasContent(workspaceForSubmit)
         ) {
-            const next = extractWorkspaceSnapshot(workspaceForRun);
+            const next = extractWorkspaceSnapshot(workspaceForSubmit);
 
-            patchEditorWorkspace(resolvedEditorOwnerKey, workspaceForRun, {
+            /**
+             * Monaco stays local-first while the learner types. Run and Check must
+             * both bridge that pending editor value into the route runtime before
+             * validation reads the exercise snapshot.
+             */
+            patchEditorWorkspace(resolvedEditorOwnerKey, workspaceForSubmit, {
                 generation: runtimeResetRevision,
-                source: "code-tool-before-run",
+                source: "code-tool-before-submit",
             });
             if (localWorkspacePersistenceEnabled) {
-                writeReviewWorkspaceDraft(workspaceOwnerIdentityKey, workspaceForRun);
+                writeReviewWorkspaceDraft(
+                    workspaceOwnerIdentityKey,
+                    workspaceForSubmit,
+                );
             }
             patchExerciseRuntime(resolvedEditorOwnerKey, {
                 generation: runtimeResetRevision,
                 language: effectiveLanguage,
                 lang: effectiveLanguage,
-                workspace: workspaceForRun,
-                codeWorkspace: workspaceForRun,
-                ideWorkspace: workspaceForRun,
+                workspace: workspaceForSubmit,
+                codeWorkspace: workspaceForSubmit,
+                ideWorkspace: workspaceForSubmit,
                 code: next.code,
                 source: next.code,
                 stdin: next.stdin,
@@ -2543,7 +2584,151 @@ export default function CodeToolPane(props: {
                 dismissFeedbackOnEdit: true,
                 updatedAt: Date.now(),
             });
+
+            return true;
         }
+
+        return false;
+    }, [
+        effectiveLanguage,
+        finalReviewWorkspace,
+        flushPendingWorkspace,
+        isReviewRouteMode,
+        localWorkspacePersistenceEnabled,
+        patchEditorWorkspace,
+        patchExerciseRuntime,
+        resolvedEditorOwnerKey,
+        runtimeResetRevision,
+        workspaceContextKey,
+        workspaceOwnerIdentityKey,
+    ]);
+
+    const flushReviewWorkspaceForSubmitRef = useRef(
+        flushReviewWorkspaceForSubmit,
+    );
+    flushReviewWorkspaceForSubmitRef.current = flushReviewWorkspaceForSubmit;
+
+    const workspaceSubmitBridgeStateRef = useRef({
+        effectiveLanguage,
+        finalReviewWorkspace,
+        resolvedEditorOwnerKey,
+        workspaceOwnerKey,
+    });
+    workspaceSubmitBridgeStateRef.current = {
+        effectiveLanguage,
+        finalReviewWorkspace,
+        resolvedEditorOwnerKey,
+        workspaceOwnerKey,
+    };
+
+    const workspaceSubmitBridgeKeys = useMemo(
+        () =>
+            Array.from(
+                new Set(
+                    [
+                        boundId,
+                        resolvedEditorOwnerKey,
+                        editorExerciseStateKey,
+                        workspaceOwnerKey,
+                        workspaceOwnerIdentityKey,
+                    ]
+                        .map((value) => String(value ?? "").trim())
+                        .filter(Boolean),
+                ),
+            ),
+        [
+            boundId,
+            editorExerciseStateKey,
+            resolvedEditorOwnerKey,
+            workspaceOwnerIdentityKey,
+            workspaceOwnerKey,
+        ],
+    );
+    const workspaceSubmitBridgeKey = workspaceSubmitBridgeKeys.join("\u0000");
+
+    useEffect(() => {
+        if (!isReviewRouteMode) return;
+
+        const win = getReviewSubmitBridgeHost();
+        if (!win) return;
+
+        win.__zoeFlushWorkspaceBeforeSubmit ??= {};
+        win.__zoeGetWorkspaceBeforeSubmit ??= {};
+
+        const flush = async () => {
+            const didFlush = flushReviewWorkspaceForSubmitRef.current();
+
+            /**
+             * Zustand writes are synchronous, but allow any registry subscribers
+             * triggered by the same patch to complete before Check builds its
+             * validation payload.
+             */
+            await Promise.resolve();
+            return didFlush;
+        };
+
+        const getCurrentWorkspace = () => {
+            const bridgeState = workspaceSubmitBridgeStateRef.current;
+            const workspace = selectWorkspaceForSubmit({
+                contextKey: workspaceContextKey,
+                pendingWorkspace: pendingWorkspaceRef.current,
+                lastFlushed: lastFlushedWorkspaceForSubmitRef.current,
+                currentWorkspace: bridgeState.finalReviewWorkspace,
+            });
+            if (!workspace || !forceWorkspaceHasContent(workspace)) return null;
+
+            const snapshot = extractWorkspaceSnapshot(workspace);
+            return {
+                ownerKey:
+                    bridgeState.resolvedEditorOwnerKey ??
+                    bridgeState.workspaceOwnerKey,
+                workspace,
+                code: snapshot.code,
+                source: snapshot.code,
+                stdin: snapshot.stdin,
+                codeStdin: snapshot.stdin,
+                language: bridgeState.effectiveLanguage,
+                lang: bridgeState.effectiveLanguage,
+                codeLang: bridgeState.effectiveLanguage,
+            };
+        };
+
+        win.__zoeFlushAnyWorkspaceBeforeSubmit = flush;
+        win.__zoeGetAnyWorkspaceBeforeSubmit = getCurrentWorkspace;
+
+        for (const key of workspaceSubmitBridgeKeys) {
+            win.__zoeFlushWorkspaceBeforeSubmit[key] = flush;
+            win.__zoeGetWorkspaceBeforeSubmit[key] = getCurrentWorkspace;
+        }
+
+        return () => {
+            for (const key of workspaceSubmitBridgeKeys) {
+                if (win.__zoeFlushWorkspaceBeforeSubmit?.[key] === flush) {
+                    delete win.__zoeFlushWorkspaceBeforeSubmit[key];
+                }
+                if (
+                    win.__zoeGetWorkspaceBeforeSubmit?.[key] ===
+                    getCurrentWorkspace
+                ) {
+                    delete win.__zoeGetWorkspaceBeforeSubmit[key];
+                }
+            }
+
+            if (win.__zoeFlushAnyWorkspaceBeforeSubmit === flush) {
+                delete win.__zoeFlushAnyWorkspaceBeforeSubmit;
+            }
+            if (win.__zoeGetAnyWorkspaceBeforeSubmit === getCurrentWorkspace) {
+                delete win.__zoeGetAnyWorkspaceBeforeSubmit;
+            }
+        };
+    }, [
+        isReviewRouteMode,
+        workspaceContextKey,
+        workspaceSubmitBridgeKey,
+    ]);
+
+    const handleBeforeRun = useCallback(async () => {
+        flushReviewWorkspaceForSubmit();
 
         setRunFeedback(null);
         if (boundId) clearRunFeedback?.(boundId);
@@ -2551,17 +2736,8 @@ export default function CodeToolPane(props: {
     }, [
         boundId,
         clearRunFeedback,
-        effectiveLanguage,
-        finalReviewWorkspace,
-        flushPendingWorkspace,
-        isReviewRouteMode,
+        flushReviewWorkspaceForSubmit,
         onBeforeRun,
-        patchEditorWorkspace,
-        patchExerciseRuntime,
-        resolvedEditorOwnerKey,
-        localWorkspacePersistenceEnabled,
-        runtimeResetRevision,
-        workspaceOwnerIdentityKey,
     ]);
 
     const handleRunResult = useCallback(({ result, runArgs }: { result: any; runArgs: any }) => {
@@ -2605,9 +2781,8 @@ export default function CodeToolPane(props: {
     useEffect(() => {
         if (!boundId) return;
 
-        const win = window as typeof window & {
-            __zoeFlushTerminalBeforeSubmit?: Record<string, () => Promise<void>>;
-        };
+        const win = getReviewSubmitBridgeHost();
+        if (!win) return;
 
         win.__zoeFlushTerminalBeforeSubmit ??= {};
 
@@ -2624,23 +2799,8 @@ export default function CodeToolPane(props: {
     }, [boundId]);
 
     useEffect(() => {
-        if (typeof window === "undefined") return;
-
-        const win = window as typeof window & {
-            __zoeFlushTerminalBeforeSubmit?: Record<
-                string,
-                () => Promise<boolean | void>
-            >;
-            __zoeFlushAnyTerminalBeforeSubmit?: () => Promise<boolean | void>;
-            __zoeGetTerminalEvidenceBeforeSubmit?: Record<
-                string,
-                () => TerminalEvidence | null | undefined
-            >;
-            __zoeGetAnyTerminalEvidenceBeforeSubmit?: () =>
-                | TerminalEvidence
-                | null
-                | undefined;
-        };
+        const win = getReviewSubmitBridgeHost();
+        if (!win) return;
 
         win.__zoeFlushTerminalBeforeSubmit ??= {};
         win.__zoeGetTerminalEvidenceBeforeSubmit ??= {};
@@ -2852,6 +3012,7 @@ export default function CodeToolPane(props: {
                         sqlDatasetId={sqlDatasetId}
                         sqlResultShape={sqlResultShape}
                         sqlPaneOptions={sqlPaneOptions ?? ideShell.sqlPaneOptions}
+                        defaultSurface={defaultSurface}
                         sqlSchemaSql={sqlSchemaSql ?? sqlSetupSql}
                         sqlSeedSql={sqlSeedSql}
                         sqlSetupSql={sqlSetupSql}

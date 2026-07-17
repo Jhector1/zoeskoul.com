@@ -5,7 +5,11 @@ import {
     makeDragReorderOut,
     makeFillBlankChoiceOut, cleanRuntimeCode,
 } from "@/lib/practice/generator/engines/utils";
-import type { HandlerArgs } from "@/lib/practice/generator/engines/utils";
+import type {
+    AnyGenOut,
+    HandlerArgs,
+} from "@/lib/practice/generator/engines/utils";
+import type { GenOut } from "@/lib/practice/generator/shared/expected";
 import type {
     ManifestExercise,
     ManifestCodeInput,
@@ -48,7 +52,7 @@ function buildCodeInput(
     def: ManifestCodeInput,
     args: HandlerArgs,
     manifest?: Pick<TopicBundleManifest, "runtimeDefaults">,
-) {
+): GenOut<"code_input"> {
     const resolved = resolveBase(def.messageBase);
     const recipeHandler = RECIPE_REGISTRY[def.recipe.type];
 
@@ -56,7 +60,7 @@ function buildCodeInput(
         throw new Error(`Unknown recipe type "${def.recipe.type}" for "${def.id}"`);
     }
 
-    return recipeHandler(
+    const output = recipeHandler(
         {
             ...(def as any),
             topicRuntimeDefaults: manifest?.runtimeDefaults ?? null,
@@ -64,13 +68,23 @@ function buildCodeInput(
         args,
         resolved,
     );
+
+    return def.tools
+        ? {
+            ...output,
+            exercise: {
+                ...output.exercise,
+                tools: def.tools,
+            },
+        }
+        : output;
 }
 
 export function buildExerciseFromManifest(
     def: ManifestExercise,
     args: HandlerArgs,
     manifest?: Pick<TopicBundleManifest, "serviceDefaults" | "runtimeDefaults">,
-) {
+): AnyGenOut {
     const resolved = resolveBase(def.messageBase);
     const authoredIdeConfig = (def as any).ideConfig ?? null;
 

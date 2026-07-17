@@ -27,6 +27,70 @@ describe("gradeCodeInput", () => {
             explanation: "Correct.",
             feedback: null,
         });
+        gradeSqlCodeInputMock.mockResolvedValue({
+            ok: true,
+            explanation: "Correct.",
+            feedback: null,
+        });
+    });
+
+    it("forwards a multi-file SQL workspace and preserves authored SQL metadata", async () => {
+        await gradeCodeInput({
+            instance: {} as any,
+            expectedCanon: {
+                kind: "code_input",
+                strategy: "sql",
+                language: "sql",
+                fixedSqlDialect: "sqlite",
+                solutionCode: [
+                    "-- file: schema.sql",
+                    "CREATE TABLE products (id INTEGER PRIMARY KEY);",
+                    "-- file: query.sql",
+                    "SELECT sql FROM sqlite_master WHERE name = 'products';",
+                ].join("\n"),
+                sqlFileOrder: ["schema.sql", "query.sql"],
+                workspaceExpectations: {
+                    requiredFiles: ["schema.sql", "query.sql"],
+                },
+                sourceChecks: [{
+                    type: "source_regex",
+                    pattern: "CREATE\\s+TABLE\\s+products",
+                    message: "Create products.",
+                }],
+                tests: [{
+                    compareTo: "solution",
+                    checkSql: "SELECT sql FROM sqlite_master WHERE name = 'products';",
+                }],
+            },
+            answer: {
+                kind: "code_input",
+                language: "sql",
+                code: "SELECT sql FROM sqlite_master WHERE name = 'products';",
+                entry: "query.sql",
+                files: [
+                    { kind: "file", path: "schema.sql", content: "CREATE TABLE products (id INTEGER PRIMARY KEY);" },
+                    { kind: "file", path: "query.sql", content: "SELECT sql FROM sqlite_master WHERE name = 'products';" },
+                ],
+            },
+            showDebug: false,
+        });
+
+        expect(gradeSqlCodeInputMock).toHaveBeenCalledWith(
+            expect.objectContaining({
+                entry: "query.sql",
+                files: expect.arrayContaining([
+                    expect.objectContaining({ path: "schema.sql" }),
+                    expect.objectContaining({ path: "query.sql" }),
+                ]),
+                expected: expect.objectContaining({
+                    sqlFileOrder: ["schema.sql", "query.sql"],
+                    sourceChecks: expect.any(Array),
+                    workspaceExpectations: {
+                        requiredFiles: ["schema.sql", "query.sql"],
+                    },
+                }),
+            }),
+        );
     });
 
     it("marks terminal_workspace shell_task submissions for workspace-only grading", async () => {

@@ -365,6 +365,39 @@ describe("buildTopicSeedFromPlanNode", () => {
         });
     });
 
+    it("uses the authoring-defined capstone step count instead of the profile default", () => {
+        const projectBrief = {
+            stepCountTarget: 4,
+            flow: "progressive",
+            stepLadder: [
+                { step: 1, title: "Start", requirement: "Build the base." },
+                { step: 2, title: "Extend", requirement: "Add the second metric." },
+                { step: 3, title: "Validate", requirement: "Check the grain." },
+                { step: 4, title: "Deliver", requirement: "Finish the report." },
+            ],
+        } as const;
+        const seed = buildTopicSeedFromPlanNode(
+            makeBaseArgs({
+                module: {
+                    role: "capstone",
+                },
+                section: {
+                    role: "capstone",
+                },
+                topic: {
+                    projectBrief,
+                },
+            }),
+        );
+
+        expect(seed.projectBrief).toEqual(projectBrief);
+        expect(seed.generationTargets.projectCodeInputMin).toBe(4);
+        expect(seed.generationTargets.projectCodeInputTarget).toBe(4);
+        expect(seed.generationTargets.projectCodeInputMax).toBe(4);
+        expect(seed.plannedExerciseCounts?.counts.code_input).toBe(4);
+        expect(seed.plannedExerciseCounts?.total).toBe(4);
+    });
+
     it("keeps normal lesson topics on quiz targets", () => {
         const seed = buildTopicSeedFromPlanNode(makeBaseArgs());
 
@@ -645,4 +678,66 @@ describe("buildTopicSeedFromPlanNode", () => {
             });
         }
     });
+    it("resolves subject through topic Tools inheritance and preserves sparse lower overrides", () => {
+        const seed = buildTopicSeedFromPlanNode(
+            makeBaseArgs({
+                blueprint: {
+                    subjectSlug: "sql",
+                    courseSlug: "multi-table-sql",
+                    profileId: "sql",
+                    tools: {
+                        defaultVisible: true,
+                        defaultSurface: "editor",
+                        sqlPane: { showTables: true, showErd: true },
+                    },
+                },
+                spec: {
+                    tools: { sqlPane: { showChen: false } },
+                    modules: [
+                        {
+                            moduleSlug: "m0",
+                            tools: { sqlPane: { defaultTab: "erd" } },
+                            sections: [
+                                {
+                                    sectionSlug: "s0",
+                                    tools: { defaultSurface: "results" },
+                                    topics: [
+                                        {
+                                            topicId: "t0",
+                                            learningGoals: ["Trace the relationship"],
+                                            tools: { sqlPane: { defaultTab: "tables" } },
+                                            lessonTools: {
+                                                sketch1: { sqlPane: { defaultTab: "erd" } },
+                                            },
+                                            exerciseTools: {
+                                                "try-t0": { defaultSurface: "editor" },
+                                            },
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                    ],
+                },
+            }),
+        );
+
+        expect(seed.tools).toEqual({
+            defaultVisible: true,
+            defaultSurface: "results",
+            sqlPane: {
+                showTables: true,
+                showErd: true,
+                showChen: false,
+                defaultTab: "tables",
+            },
+        });
+        expect(seed.lessonTools).toEqual({
+            sketch1: { sqlPane: { defaultTab: "erd" } },
+        });
+        expect(seed.exerciseTools).toEqual({
+            "try-t0": { defaultSurface: "editor" },
+        });
+    });
+
 });

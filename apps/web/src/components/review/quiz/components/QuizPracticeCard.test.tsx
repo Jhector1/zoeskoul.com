@@ -12,6 +12,10 @@ import type { WorkspaceStateV2 } from "@/components/ide/types";
 import type { CodeInputExercise, ValidateResponse } from "@/lib/practice/types";
 import type { QItem } from "@/lib/practice/uiTypes";
 import { DEFAULT_PRACTICE_HELP_POLICY } from "@/lib/practice/help/steps";
+import {
+    getReviewSubmitBridgeHost,
+    type ReviewSubmitBridgeHost,
+} from "@/lib/review/submitBridge";
 
 vi.mock("@/lib/config/learnerUiFlags", () => ({
     learnerUiFlags: {
@@ -291,6 +295,14 @@ describe("QuizPracticeCard project-step fallback", () => {
             setCodeInputMeta: mocked.setCodeInputMeta,
         };
         resetRuntimeStore();
+
+        const win = getReviewSubmitBridgeHost();
+        if (win) {
+            delete win.__zoeFlushWorkspaceBeforeSubmit;
+            delete win.__zoeFlushAnyWorkspaceBeforeSubmit;
+            delete win.__zoeFlushTerminalBeforeSubmit;
+            delete win.__zoeFlushAnyTerminalBeforeSubmit;
+        }
     });
 
     it("awaits the latest tools flush before practice submit", async () => {
@@ -307,6 +319,38 @@ describe("QuizPracticeCard project-step fallback", () => {
         steps.push("submit");
 
         expect(steps).toEqual(["flush:start", "flush:end", "flush:start", "flush:end", "submit"]);
+    });
+
+    it("flushes the current editor workspace before the tools registry snapshot", async () => {
+        const steps: string[] = [];
+        const previousWindow = (globalThis as any).window;
+        const win: ReviewSubmitBridgeHost = {
+            __zoeFlushWorkspaceBeforeSubmit: {
+                "sql-exercise": async () => {
+                    steps.push("workspace");
+                    return true;
+                },
+            },
+        };
+
+        (globalThis as any).window = win;
+
+        try {
+            await flushReviewToolsBeforeSubmit({
+                boundId: "sql-exercise",
+                flushLatest: () => {
+                    steps.push("tools");
+                },
+            });
+        } finally {
+            if (typeof previousWindow === "undefined") {
+                delete (globalThis as any).window;
+            } else {
+                (globalThis as any).window = previousWindow;
+            }
+        }
+
+        expect(steps).toEqual(["workspace", "tools", "tools"]);
     });
 
     it("treats workspace snapshots with only timestamp churn as the same starter workspace", () => {

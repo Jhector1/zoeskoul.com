@@ -248,6 +248,10 @@ describe("buildReviewFromManifest try-it project cards", () => {
                         tools: {
                             defaultVisible: false,
                             allowOpen: false,
+                            sqlPane: {
+                                defaultTab: "erd",
+                                compactDefaultTab: "results",
+                            },
                         },
                     },
                 ],
@@ -269,6 +273,10 @@ describe("buildReviewFromManifest try-it project cards", () => {
         expect(card.tools).toEqual({
             defaultVisible: false,
             allowOpen: false,
+            sqlPane: {
+                defaultTab: "erd",
+                compactDefaultTab: "results",
+            },
         });
     });
 

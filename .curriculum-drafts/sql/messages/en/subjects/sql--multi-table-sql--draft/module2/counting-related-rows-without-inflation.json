@@ -1,0 +1,167 @@
+{
+  "topics": {
+    "sql--multi-table-sql--draft": {
+      "multi-table-sql-module-2-outer-joins-and-accurate-counts": {
+        "counting-related-rows-without-inflation": {
+          "label": "Counting Related Rows Without Inflation",
+          "summary": "Learn to count matched rows and unique entities accurately in SQL without allowing join multiplication to distort reports.",
+          "cards": {
+            "sketch0": {
+              "title": "Count the Related Row, Not the Placeholder"
+            },
+            "sketch1": {
+              "title": "Count Entities Once at the Intended Grain"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_counting_related_rows_without_inflation_sketch0": {
+              "title": "Try Counting Enrollments per Student",
+              "prompt": "List every student and the number of enrollment rows they have. Calculate and return `students.name, COUNT(enrollments.id) AS enrollment_count` from `students`. Use a LEFT JOIN to connect `enrollments` on `students.id = enrollments.student_id`. Produce one result row per `students.id, students.name`. Sort the final result by `students.id`.",
+              "hint": "Count a nullable identifier from the right table, not `COUNT(*)`.",
+              "help": {
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "Produce one result row per `students.id, students.name`. Sort the final result by `students.id`."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT students.name,\n       COUNT(enrollments.id) AS enrollment_count\nFROM students\nLEFT JOIN enrollments ON students.id = enrollments.student_id\nGROUP BY students.id, students.name\nORDER BY students.id;"
+            },
+            "try_counting_related_rows_without_inflation_sketch1": {
+              "title": "Try Counting Department Breadth per Student",
+              "prompt": "List every student and the number of distinct departments represented by their enrolled courses. Calculate and return `students.name, COUNT(DISTINCT courses.department_id) AS department_count` from `students`. Use a LEFT JOIN to connect `enrollments` on `students.id = enrollments.student_id`. Use a LEFT JOIN to connect `courses` on `enrollments.course_id = courses.id`. Produce one result row per `students.id, students.name`. Sort the final result by `students.id`.",
+              "hint": "Follow enrollments to courses, then count unique department ids at the student grain.",
+              "help": {
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "Produce one result row per `students.id, students.name`. Sort the final result by `students.id`."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT students.name,\n       COUNT(DISTINCT courses.department_id) AS department_count\nFROM students\nLEFT JOIN enrollments ON students.id = enrollments.student_id\nLEFT JOIN courses ON enrollments.course_id = courses.id\nGROUP BY students.id, students.name\nORDER BY students.id;"
+            }
+          },
+          "practice": {
+            "quiz1": {
+              "title": "Purpose of COUNT with LEFT JOIN",
+              "prompt": "What is the purpose of using COUNT(column) with a LEFT JOIN?",
+              "hint": "Consider how COUNT(column) handles NULL values.",
+              "help": {
+                "concept": "COUNT(column) with LEFT JOIN counts non-NULL values, preserving unmatched rows.",
+                "hint_1": "COUNT(column) ignores NULLs, which are common in LEFT JOIN results.",
+                "hint_2": "Using COUNT(column) ensures unmatched rows are counted as zero."
+              },
+              "options": {
+                "a": "To count all rows, including NULLs",
+                "b": "To count only non-NULL values",
+                "c": "To count NULL values only",
+                "d": "To ignore all rows"
+              }
+            },
+            "quiz2": {
+              "title": "Benefits of COUNT(DISTINCT)",
+              "prompt": "What are the benefits of using COUNT(DISTINCT column) in SQL? Select all that apply.",
+              "hint": "Think about how COUNT(DISTINCT) affects duplicate values.",
+              "help": {
+                "concept": "COUNT(DISTINCT) counts unique values, reducing duplicates.",
+                "hint_1": "It helps in counting unique entities in a dataset.",
+                "hint_2": "It prevents duplicate values from inflating counts."
+              },
+              "options": {
+                "a": "Counts all values, including duplicates",
+                "b": "Counts only unique values",
+                "c": "Reduces duplicate inflation",
+                "d": "Ignores NULL values"
+              }
+            },
+            "quiz3": {
+              "title": "Plan a Join-Aware Count",
+              "prompt": "Arrange the checks for building a grouped count that preserves empty groups and avoids duplicate inflation.",
+              "hint": "Define the metric and result grain before choosing the count expression.",
+              "help": {
+                "concept": "A trustworthy joined count begins with the reporting grain and the entity being counted.",
+                "hint_1": "Preserve the requested groups before adding detail tables.",
+                "hint_2": "Use a right-side identifier for related rows and `DISTINCT` when the metric is unique entities."
+              },
+              "tokens": {
+                "t1": "State what one result row represents",
+                "t2": "Choose the starting table whose groups must remain",
+                "t3": "Follow the documented relationship path",
+                "t4": "Count the identifier that matches the requested metric",
+                "t5": "Verify zero groups and repeated entities in the result"
+              }
+            },
+            "quiz4": {
+              "title": "COUNT with NULL Handling",
+              "prompt": "In a LEFT JOIN, using COUNT(column) will count only the [blank1] values.",
+              "hint": "Consider what COUNT(column) does with NULLs.",
+              "help": {
+                "concept": "COUNT(column) counts the blank values in a result set.",
+                "hint_1": "COUNT(column) ignores NULLs, focusing on actual data.",
+                "hint_2": "NULLs are not counted by COUNT(column)."
+              },
+              "template": "In a LEFT JOIN, using COUNT(column) will count only the [blank1] values.",
+              "choices": [
+                "non-NULL",
+                "NULL",
+                "all",
+                "zero"
+              ]
+            },
+            "quiz5": {
+              "title": "Purpose of COUNT(DISTINCT)",
+              "prompt": "The purpose of COUNT(DISTINCT column) is to count [blank1] values.",
+              "hint": "Think about how COUNT(DISTINCT) handles duplicates.",
+              "help": {
+                "concept": "COUNT(DISTINCT) counts the blank values, excluding duplicates.",
+                "hint_1": "It focuses on the blank entries in a dataset.",
+                "hint_2": "Duplicates are not counted by COUNT(DISTINCT)."
+              },
+              "template": "The purpose of COUNT(DISTINCT column) is to count [blank1] values.",
+              "choices": [
+                "unique",
+                "duplicate",
+                "all",
+                "NULL"
+              ]
+            },
+            "quiz6": {
+              "title": "Understanding Report Grain",
+              "prompt": "Why is it important to state the grouped result grain before choosing a count expression? Select all that apply.",
+              "hint": "Consider how the result grain affects the interpretation of counts.",
+              "help": {
+                "concept": "The result grain defines what each row represents, affecting count accuracy.",
+                "hint_1": "The grain determines the level of detail in the report.",
+                "hint_2": "Choosing the wrong grain can lead to misleading counts."
+              },
+              "options": {
+                "a": "To ensure accurate counts",
+                "b": "To define the level of detail",
+                "c": "To ignore unmatched rows",
+                "d": "To simplify the query"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql--multi-table-sql--draft": {
+      "multi-table-sql-module-2-outer-joins-and-accurate-counts": {
+        "counting-related-rows-without-inflation": {
+          "sketch0": {
+            "title": "COUNT(right_table.id) turns unmatched rows into zero",
+            "bodyMarkdown": "An outer join preserves a left-side row even when no related row exists. That preserved row still participates in grouping, so the expression inside `COUNT` determines whether the missing relationship becomes zero or one.\n\n```sql\nSELECT departments.name,\n       COUNT(courses.id) AS course_count\nFROM departments\nLEFT JOIN courses\n  ON departments.id = courses.department_id\nGROUP BY departments.id, departments.name;\n```\n\nThe report has one group per department. For a department with courses, `courses.id` is non-`NULL` once for each matched course. For a department without courses, the preserved row contains `NULL` in `courses.id`, and `COUNT(courses.id)` ignores it. The result is zero.\n\n`COUNT(*)` would answer a different question. It counts every joined row, including the placeholder row created for an unmatched department, so that department would incorrectly appear to have one related row.\n\nName the metric before choosing the expression. If the metric is “number of courses,” count a column that exists only when a course row exists. A non-null right-side primary key is usually the clearest evidence of a real match."
+          },
+          "sketch1": {
+            "title": "COUNT(DISTINCT ...) protects unique-entity metrics",
+            "bodyMarkdown": "Longer join paths can repeat the same entity. A student taking two courses in one department creates two enrollment rows, so counting `enrollments.student_id` measures enrollments, not unique students. **Duplicate inflation** occurs when the joined grain is more detailed than the entity the metric is supposed to count.\n\n```sql\nSELECT departments.name,\n       COUNT(DISTINCT enrollments.student_id) AS unique_students\nFROM departments\nLEFT JOIN courses\n  ON departments.id = courses.department_id\nLEFT JOIN enrollments\n  ON courses.id = enrollments.course_id\nGROUP BY departments.id, departments.name;\n```\n\nOne result row represents one department because of the grouping. Inside each group, `COUNT(DISTINCT enrollments.student_id)` collapses repeated appearances of the same student before counting. A student enrolled in two Humanities courses contributes one unique student, not two.\n\n`DISTINCT` is not a general cleanup switch. Use it when the metric explicitly asks for unique entities and the relationship path can repeat their identifiers. If the metric asks for enrollment rows, ordinary `COUNT(enrollments.id)` is correct.\n\nReliable counts begin with two sentences: “one joined row represents ___” and “the metric counts unique ___.” The gap between those grains tells you whether `DISTINCT` is needed."
+          }
+        }
+      }
+    }
+  }
+}

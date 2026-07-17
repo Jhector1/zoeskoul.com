@@ -17,20 +17,6 @@
             },
             "quiz": {
               "title": "Quiz"
-            },
-            "project": {
-              "title": "Practice OR filters on the products table"
-            }
-          },
-          "projectSteps": {
-            "ci_art_or_home": {
-              "title": "Query two categories with OR"
-            },
-            "ci_price_or_low_stock": {
-              "title": "Find inexpensive or low-stock products"
-            },
-            "ci_stationery_or_under_20": {
-              "title": "Mix text and numeric conditions with OR"
             }
           },
           "quiz": {
@@ -196,19 +182,19 @@
               "starterCode": "-- Return name, category, and price for products where the category is Stationery or the price is less than 20.\nSELECT name, category, price\nFROM products\nWHERE ;"
             },
             "try-or_conditions-sketch0": {
-              "title": "Query two categories with OR",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that returns the `name` and `category` columns for products where the category is `Art` or `Home`. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Match a Category or Low Stock",
+              "prompt": "Return `name`, `category`, and `stock` when the category is `Art` or stock is at most 5.",
+              "hint": "Use OR before the second condition.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
+                "concept": "Return `name`, `category`, and `stock` when the category is `Art` or stock is at most 5.",
+                "hint_1": "Use OR before the second condition.",
+                "hint_2": "Run the query and compare the returned columns and rows with the expected result."
               },
-              "starterCode": "-- Return the name and category columns for products where the category is Art or Home.\nSELECT name, category\nFROM products\nWHERE ;"
+              "starterCode": "SELECT name, category, stock\nFROM products\nWHERE category = 'Art' ;"
             },
             "try-or_conditions-sketch1": {
               "title": "Find inexpensive or low-stock products",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that returns `name`, `price`, and `stock` for products where `price < 10` or `stock < 5`. Write the query in the SQL editor, click Run query, and check the results table.",
+              "prompt": "Create a focused inventory query that returns `name`, `price`, and `stock` for products where `price < 10` or `stock < 5`. Run it and compare the result with the expected table.",
               "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
               "help": {
                 "concept": "This SQL exercise checks whether your query returns the requested result.",
@@ -219,7 +205,7 @@
             },
             "try-or_conditions-sketch2": {
               "title": "Mix text and numeric conditions with OR",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that returns `name`, `category`, and `price` for products where the category is `Stationery` or the price is less than 20. Write the query in the SQL editor, click Run query, and check the results table.",
+              "prompt": "Create a focused inventory query that returns `name`, `category`, and `price` for products where the category is `Stationery` or the price is less than 20. Run it and compare the result with the expected table.",
               "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
               "help": {
                 "concept": "This SQL exercise checks whether your query returns the requested result.",
@@ -232,16 +218,16 @@
           "tryIt": {
             "allowReveal": true,
             "try_or_conditions_sketch0": {
-              "title": "Query two categories with OR",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that returns the `name` and `category` columns for products where the category is `Art` or `Home`. Write the query in the SQL editor, click Run query, and check the results table."
+              "title": "Match a Category or Low Stock",
+              "prompt": "Return `name`, `category`, and `stock` when the category is `Art` or stock is at most 5."
             },
             "try_or_conditions_sketch1": {
               "title": "Find inexpensive or low-stock products",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that returns `name`, `price`, and `stock` for products where `price < 10` or `stock < 5`. Write the query in the SQL editor, click Run query, and check the results table."
+              "prompt": "Create a focused inventory query that returns `name`, `price`, and `stock` for products where `price < 10` or `stock < 5`. Run it and compare the result with the expected table."
             },
             "try_or_conditions_sketch2": {
               "title": "Mix text and numeric conditions with OR",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that returns `name`, `category`, and `price` for products where the category is `Stationery` or the price is less than 20. Write the query in the SQL editor, click Run query, and check the results table."
+              "prompt": "Create a focused inventory query that returns `name`, `category`, and `price` for products where the category is `Stationery` or the price is less than 20. Run it and compare the result with the expected table."
             }
           }
         }

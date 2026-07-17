@@ -231,7 +231,11 @@ export function buildMessagesFromDraft(args: {
     const sketchBlocks = effectiveSketchBlocks({ draft, topicKind });
 
     sketchBlocks.forEach((block, index) => {
-        setNested(out, [...topicPath, "cards", `sketch${index}`, "title"], block.title);
+        setNested(
+            out,
+            [...topicPath, "cards", `sketch${index}`, "title"],
+            block.cardTitle ?? block.title,
+        );
     });
 
     const sourceProjectExercises =
@@ -402,9 +406,16 @@ export function buildMessagesFromDraft(args: {
         });
 
         const quizBase = splitQualifiedBase(messageKeys.qualifiedBase);
+        const isEmbeddedTryItExercise = tryItExerciseIdToMessageId.has(exercise.id);
 
-        setNested(out, [...quizBase, "title"], exercise.title);
-        setNested(out, [...quizBase, "prompt"], exercise.prompt);
+        // The Try It title and prompt are intentionally richer than the raw
+        // exercise copy. They were emitted above with buildTryItTitle and
+        // buildTryItPrompt, so do not overwrite them while adding the shared
+        // hint, help, starter, and solution fields below.
+        if (!isEmbeddedTryItExercise) {
+            setNested(out, [...quizBase, "title"], exercise.title);
+            setNested(out, [...quizBase, "prompt"], exercise.prompt);
+        }
         setNested(out, [...quizBase, "hint"], exercise.hint);
         setNested(out, [...quizBase, "help"], {
             concept: exercise.help.concept,

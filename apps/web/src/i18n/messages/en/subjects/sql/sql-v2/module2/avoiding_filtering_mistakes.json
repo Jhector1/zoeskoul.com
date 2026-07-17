@@ -3,34 +3,17 @@
     "sql-v2": {
       "sql-v2-2": {
         "avoiding_filtering_mistakes": {
-          "label": "Avoiding Filtering Mistakes",
-          "summary": "Learn how to avoid common WHERE mistakes by checking operators, combining conditions carefully, and reading your results closely.",
+          "label": "Finding and Fixing Filter Mistakes",
+          "summary": "Debug incorrect values, quoting, operators, and clause order in WHERE queries.",
           "cards": {
             "sketch0": {
-              "title": "Small WHERE mistakes change your results"
+              "title": "Check the Condition Against the Requirement"
             },
             "sketch1": {
-              "title": "Be careful when combining conditions"
-            },
-            "sketch2": {
-              "title": "Check the results table to catch mistakes"
+              "title": "Debug One Part at a Time"
             },
             "quiz": {
-              "title": "Quiz"
-            },
-            "project": {
-              "title": "Filtering Mistake Detective"
-            }
-          },
-          "projectSteps": {
-            "ci_filter_expensive_products": {
-              "title": "Query products above a price threshold"
-            },
-            "ci_filter_category_and_stock": {
-              "title": "Find well-stocked stationery items"
-            },
-            "ci_filter_recent_products": {
-              "title": "Show recently created products"
+              "title": "Check Your Understanding"
             }
           },
           "quiz": {
@@ -132,8 +115,8 @@
               "prompt": "Complete the query so it keeps only Art products with stock of at least 10.",
               "hint": "Both conditions must be true together.",
               "help": {
-                "concept": "Use the missing term when a row must satisfy two conditions at the same time.",
-                "hint_1": "The query should keep rows only when the category matches the missing term the stock rule also matches.",
+                "concept": "Use the blank when a row must satisfy two conditions at the same time.",
+                "hint_1": "The query should keep rows only when the category matches the blank the stock rule also matches.",
                 "hint_2": "Choose the operator that is stricter than OR because it requires both tests."
               },
               "template": "SELECT name FROM products WHERE category = 'Art' [blank1] stock >= 10;",
@@ -195,19 +178,19 @@
               "starterCode": "-- TODO: keep products created on or after 2026-01-25\n-- TODO: sort from earliest date to latest date\nSELECT \n  name,\n  created_at\nFROM products\n;"
             },
             "try-avoiding_filtering_mistakes-sketch0": {
-              "title": "Query products above a price threshold",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that shows the `name` and `price` of products with a `price` greater than 20. Sort the results by `price` from highest to lowest. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Repair an Invalid Comparison Operator",
+              "prompt": "The starter query has a broken price comparison. Repair it so the result shows `name` and `price` from `products` for items priced at least `20`.",
+              "hint": "SQL writes the inclusive greater-than operator as >=, not =>.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
+                "concept": "Debugging one clause at a time makes small operator mistakes easier to isolate.",
+                "hint_1": "SQL writes the inclusive greater-than operator as >=, not =>.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
               },
-              "starterCode": "-- TODO: keep only rows with price greater than 20\n-- TODO: sort by price from highest to lowest\nSELECT \n  name,\n  price\nFROM products\n;"
+              "starterCode": "SELECT name, price\nFROM products\nWHERE price => 20;"
             },
             "try-avoiding_filtering_mistakes-sketch1": {
               "title": "Find well-stocked stationery items",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that shows `name`, `category`, and `stock` for products in the `Stationery` category with `stock` greater than or equal to 15. Sort the results by `stock` from highest to lowest. Write the query in the SQL editor, click Run query, and check the results table.",
+              "prompt": "Create a focused inventory query that shows `name`, `category`, and `stock` for products in the `Stationery` category with `stock` greater than or equal to 15. Sort the results by `stock` from highest to lowest. Run it and compare the result with the expected table.",
               "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
               "help": {
                 "concept": "This SQL exercise checks whether your query returns the requested result.",
@@ -217,30 +200,38 @@
               "starterCode": "-- TODO: add a WHERE clause for Stationery items with enough stock\n-- TODO: sort by stock from highest to lowest\nSELECT \n  name,\n  category,\n  stock\nFROM products\n;"
             },
             "try-avoiding_filtering_mistakes-sketch2": {
-              "title": "Show recently created products",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that shows `name` and `created_at` for products created on or after `2026-01-25`. Sort the results by `created_at` from earliest to latest. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Check a Date Boundary Carefully",
+              "prompt": "Audit the newest catalog entries. Show `id`, `name`, and `created_at` from `products` for items added on or after `2026-01-25`.",
+              "hint": "“On or after” requires >=, and the date must be in single quotes.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
+                "concept": "Checking the requirement word by word helps prevent the wrong boundary operator.",
+                "hint_1": "“On or after” requires >=, and the date must be in single quotes.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
               },
-              "starterCode": "-- TODO: keep products created on or after 2026-01-25\n-- TODO: sort from earliest date to latest date\nSELECT \n  name,\n  created_at\nFROM products\n;"
+              "starterCode": "SELECT id, name, created_at\nFROM products\n-- Keep dates on or after 2026-01-25"
             }
           },
           "tryIt": {
             "allowReveal": true,
-            "try_avoiding_filtering_mistakes_sketch0": {
-              "title": "Query products above a price threshold",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that shows the `name` and `price` of products with a `price` greater than 20. Sort the results by `price` from highest to lowest. Write the query in the SQL editor, click Run query, and check the results table."
-            },
-            "try_avoiding_filtering_mistakes_sketch1": {
-              "title": "Find well-stocked stationery items",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that shows `name`, `category`, and `stock` for products in the `Stationery` category with `stock` greater than or equal to 15. Sort the results by `stock` from highest to lowest. Write the query in the SQL editor, click Run query, and check the results table."
-            },
             "try_avoiding_filtering_mistakes_sketch2": {
-              "title": "Show recently created products",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that shows `name` and `created_at` for products created on or after `2026-01-25`. Sort the results by `created_at` from earliest to latest. Write the query in the SQL editor, click Run query, and check the results table."
+              "title": "Check a Date Boundary Carefully",
+              "prompt": "Audit the newest catalog entries. Show `id`, `name`, and `created_at` from `products` for items added on or after `2026-01-25`.",
+              "hint": "“On or after” requires >=, and the date must be in single quotes.",
+              "help": {
+                "concept": "Checking the requirement word by word helps prevent the wrong boundary operator.",
+                "hint_1": "“On or after” requires >=, and the date must be in single quotes.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+              }
+            },
+            "try_avoiding_filtering_mistakes_sketch0": {
+              "title": "Repair an Invalid Comparison Operator",
+              "prompt": "The starter query has a broken price comparison. Repair it so the result shows `name` and `price` from `products` for items priced at least `20`.",
+              "hint": "SQL writes the inclusive greater-than operator as >=, not =>.",
+              "help": {
+                "concept": "Debugging one clause at a time makes small operator mistakes easier to isolate.",
+                "hint_1": "SQL writes the inclusive greater-than operator as >=, not =>.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+              }
             }
           }
         }
@@ -251,17 +242,13 @@
     "sql-v2": {
       "sql-v2-2": {
         "avoiding_filtering_mistakes": {
-          "sketch_where_precision": {
-            "title": "Small WHERE mistakes change your results",
-            "bodyMarkdown": "The `WHERE` clause keeps only the rows that match a condition. A tiny mistake in that condition can return the wrong products.\n\nHere is a correct example that finds products with a price above 20:\n\n```sql\nSELECT name, price\nFROM products\nWHERE price > 20;\n```\n\nStep by step:\n- `SELECT name, price` chooses the columns to show.\n- `FROM products` says which table to read.\n- `WHERE price > 20` keeps only rows where the `price` value is greater than 20.\n\nIn this dataset, that includes products like `Acrylic Paint Set`, `Desk Lamp`, and `Office Chair`.\n\nA common mistake is using the wrong comparison. For example, `price < 20` would return cheaper items instead, which is the opposite of what you wanted."
+          "filter_requirement_check": {
+            "title": "Check the Condition Against the Requirement",
+            "bodyMarkdown": "A query can run successfully and still answer the wrong question. Compare each part of the condition with the requirement.\n\n```sql\nSELECT\n    id,\n    name,\n    created_at\nFROM products\nWHERE created_at < '2026-02-01';\n```\n\nThe date is text in ISO order, so quoting it is appropriate. The strict `<` excludes February 1 itself. If the request says “on or before,” the operator must be `<=` instead.\n\nSuccessful execution proves the syntax is valid; it does not prove the logic is correct."
           },
-          "sketch_and_or_mistakes": {
-            "title": "Be careful when combining conditions",
-            "bodyMarkdown": "When you use `AND` or `OR`, each word changes how rows are filtered.\n\nExample:\n\n```sql\nSELECT name, category, stock\nFROM products\nWHERE category = 'Art' AND stock >= 10;\n```\n\nLine by line:\n- `category = 'Art'` keeps only Art products.\n- `stock >= 10` keeps only products with at least 10 in stock.\n- `AND` means both conditions must be true for the same row.\n\nWith this data, `Sketchbook` and `Acrylic Paint Set` match.\n\nIf you changed `AND` to `OR`, the query would return many more rows, because a product could match either condition instead of both.\n\nAnother common mistake is forgetting that text values need quotes in SQL. `category = 'Art'` is correct, but `category = Art` is not."
-          },
-          "sketch_reading_results": {
-            "title": "Check the results table to catch mistakes",
-            "bodyMarkdown": "A good habit is to read the results table after every filter. If the rows look surprising, your condition may be wrong.\n\nExample:\n\n```sql\nSELECT name, created_at\nFROM products\nWHERE created_at >= '2026-01-01'\nORDER BY created_at ASC;\n```\n\nWhat this does:\n- It shows product names and dates.\n- It keeps only rows from `2026-01-01` or later.\n- It sorts the remaining rows from earliest to latest.\n\nBecause the dates are stored in `YYYY-MM-DD` format, comparisons like `>= '2026-01-01'` work correctly in SQLite.\n\nIf you expected older products too, then the filter is too strict. If you expected a different order, check the `ORDER BY` direction."
+          "filter_debug_steps": {
+            "title": "Debug One Part at a Time",
+            "bodyMarkdown": "When a filter fails, reduce it to one small working query:\n\n```sql\nSELECT\n    id,\n    name,\n    price\nFROM products\nWHERE price >= 20;\n```\n\nThen debug in order:\n\n1. Confirm the table and selected columns.\n2. Test one condition.\n3. Check quotes around text or dates.\n4. Verify the strict or inclusive boundary.\n5. Add additional conditions one at a time.\n\nAvoid common mistakes such as `= NULL`, unquoted text, `WHERE` before `FROM`, or using `AND` when the requirement describes alternatives."
           }
         }
       }

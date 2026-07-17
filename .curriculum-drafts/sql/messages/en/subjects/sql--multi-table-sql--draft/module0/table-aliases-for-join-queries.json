@@ -1,0 +1,165 @@
+{
+  "topics": {
+    "sql--multi-table-sql--draft": {
+      "multi-table-sql-module-0-join-foundations": {
+        "table-aliases-for-join-queries": {
+          "label": "Table Aliases for Join Queries",
+          "summary": "Shorten table references while preserving a visible relationship path.",
+          "cards": {
+            "sketch0": {
+              "title": "Shorten Table Names Without Losing Meaning"
+            },
+            "sketch1": {
+              "title": "Choose Aliases a Reader Can Follow"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_table_aliases_for_join_queries_sketch0": {
+              "title": "Shorten a Course-to-Department Join",
+              "prompt": "Use `c` and `d` as table aliases to return each course title with its department name. Return `c.title AS course_title, d.name AS department_name` from `courses` in that column order. Use a INNER JOIN to connect `departments` on `c.department_id = d.id`. Sort the final result by `c.title`.",
+              "hint": "Declare each alias beside its table, then use the same aliases in `SELECT` and `ON`.",
+              "help": {
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "Use a INNER JOIN to connect `departments` on `c.department_id = d.id`. Sort the final result by `c.title`."
+              },
+              "starterCode": "-- Use short, consistent aliases for two related tables\n",
+              "solutionCode": "SELECT c.title AS course_title,\n       d.name AS department_name\nFROM courses AS c\nINNER JOIN departments AS d\n  ON c.department_id = d.id\nORDER BY c.title;\n"
+            },
+            "try_table_aliases_for_join_queries_sketch1": {
+              "title": "Keep Student and Enrollment Aliases Consistent",
+              "prompt": "Use `s` and `e` as aliases to return student name, enrollment term, and course id. Return `s.name AS student_name, e.term AS enrollment_term, e.course_id` from `students` in that column order. Use a INNER JOIN to connect `enrollments` on `s.id = e.student_id`. Sort the final result by `s.name, e.course_id`.",
+              "hint": "Every qualified column should begin with either `s.` or `e.` after the aliases are declared.",
+              "help": {
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "Use a INNER JOIN to connect `enrollments` on `s.id = e.student_id`. Sort the final result by `s.name, e.course_id`."
+              },
+              "starterCode": "-- Build a concise two-table student enrollment query\n",
+              "solutionCode": "SELECT s.name AS student_name,\n       e.term AS enrollment_term,\n       e.course_id\nFROM students AS s\nINNER JOIN enrollments AS e\n  ON s.id = e.student_id\nORDER BY s.name, e.course_id;\n"
+            }
+          },
+          "practice": {
+            "single-choice-1": {
+              "title": "Purpose of Table Aliases",
+              "prompt": "What is the primary purpose of using table aliases in SQL queries?",
+              "hint": "Think about how aliases affect the readability of queries.",
+              "help": {
+                "concept": "Table aliases are used to simplify and clarify SQL queries.",
+                "hint_1": "Aliases make queries shorter and easier to read.",
+                "hint_2": "They help avoid repeating long table names."
+              },
+              "options": {
+                "a": "To make queries run faster",
+                "b": "To simplify and clarify queries",
+                "c": "To change the data in the tables",
+                "d": "To create new tables"
+              }
+            },
+            "single-choice-2": {
+              "title": "Using Aliases with JOIN",
+              "prompt": "When using table aliases in a JOIN query, what must you ensure?",
+              "hint": "Consider how aliases relate to column references.",
+              "help": {
+                "concept": "Table aliases must be used consistently in the query to avoid ambiguity.",
+                "hint_1": "Ensure that aliases are used for all table references.",
+                "hint_2": "Aliases should be used to qualify column names."
+              },
+              "options": {
+                "a": "Aliases must be unique within the query",
+                "b": "Aliases must match the table names exactly",
+                "c": "Aliases can be used interchangeably",
+                "d": "Aliases are optional and can be omitted"
+              }
+            },
+            "multi-choice-1": {
+              "title": "Benefits of Table Aliases",
+              "prompt": "Which of the following are benefits of using table aliases in SQL queries? Select all that apply.",
+              "hint": "Think about how aliases improve query readability and maintenance.",
+              "help": {
+                "concept": "Table aliases improve readability and maintainability of SQL queries.",
+                "hint_1": "Aliases make queries shorter and easier to read.",
+                "hint_2": "They help avoid confusion when multiple tables are involved."
+              },
+              "options": {
+                "a": "Improves query readability",
+                "b": "Reduces typing effort",
+                "c": "Increases query execution speed",
+                "d": "Helps avoid column name conflicts"
+              }
+            },
+            "multi-choice-2": {
+              "title": "Table Aliases in Complex Queries",
+              "prompt": "In complex SQL queries involving multiple joins, why are table aliases particularly useful? Select all that apply.",
+              "hint": "Consider how aliases affect query complexity and clarity.",
+              "help": {
+                "concept": "Table aliases help manage complexity and improve clarity in SQL queries.",
+                "hint_1": "Aliases reduce the need to repeat long table names.",
+                "hint_2": "They make it easier to read and understand the query structure."
+              },
+              "options": {
+                "a": "They make the query more readable",
+                "b": "They allow for shorter column references",
+                "c": "They are required for all SQL queries",
+                "d": "They simplify the query structure"
+              }
+            },
+            "drag-reorder-1": {
+              "title": "Order of Operations in a JOIN Query",
+              "prompt": "Arrange the steps in the correct order for executing a JOIN query with table aliases.",
+              "hint": "Consider the logical flow of a JOIN query.",
+              "help": {
+                "concept": "Executing a JOIN query involves selecting columns, joining tables, and applying conditions.",
+                "hint_1": "Start with selecting columns from the tables.",
+                "hint_2": "Join the tables using the ON condition."
+              },
+              "tokens": {
+                "t1": "SELECT columns",
+                "t2": "FROM tables with aliases",
+                "t3": "JOIN tables using ON",
+                "t4": "Apply WHERE conditions"
+              }
+            },
+            "fill-blank-choice-1": {
+              "title": "Alias Syntax",
+              "prompt": "In SQL, the syntax to create an alias for a table is `FROM table_name AS [blank1]`.",
+              "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+              "help": {
+                "concept": "The blank should be filled with the term that makes the statement accurate.",
+                "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+                "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+              },
+              "template": "FROM table_name AS [blank1]",
+              "choices": [
+                "alias",
+                "AS",
+                "WITH",
+                "BY"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql--multi-table-sql--draft": {
+      "multi-table-sql-module-0-join-foundations": {
+        "table-aliases-for-join-queries": {
+          "sketch0": {
+            "title": "A table alias is a temporary name inside one query",
+            "bodyMarkdown": "A **table alias** is a short, temporary name assigned to a table for the duration of one query. It does not rename the table in the database. It simply replaces a long table name wherever that query needs to qualify a column.\n\nThe full-name version of a student-enrollment join is clear but repetitive. Aliases keep the same relationship visible with less visual noise:\n\n```sql\nSELECT s.name, e.term\nFROM students AS s\nINNER JOIN enrollments AS e\n  ON s.id = e.student_id;\n```\n\nRead the declarations first: `students AS s` means that `s` refers to `students`, and `enrollments AS e` means that `e` refers to `enrollments`. After those declarations, the query consistently uses `s.name`, `e.term`, `s.id`, and `e.student_id`.\n\nThe alias becomes part of the column's address. Once `students` has been named `s`, mixing `students.name` and `s.id` makes the query harder to scan and may be invalid in some contexts. Choose the alias once and use it throughout.\n\nA good alias shortens the name without hiding the table's identity. Initials such as `s` and `e` work well here because the query contains only two tables and their meanings are easy to remember."
+          },
+          "sketch1": {
+            "title": "Good aliases make the relationship path easier to scan",
+            "bodyMarkdown": "Aliases are most helpful when they make the join condition readable at a glance. The goal is not to make SQL as short as possible; it is to let a reader see which table owns each column and which keys form the relationship.\n\nA course-to-department join can use `c` for `courses` and `d` for `departments`:\n\n```sql\nSELECT c.id AS course_id,\n       d.name AS department_name\nFROM courses AS c\nINNER JOIN departments AS d\n  ON c.department_id = d.id;\n```\n\nThe first two lines define the report values. The next two lines show the path: the department stored on course `c` matches the primary key of department `d`. Output aliases such as `course_id` and `department_name` still label the result; the table aliases `c` and `d` shorten references inside the query.\n\nAvoid aliases that force the reader to decode them. `c` and `d` are clearer than unrelated letters such as `x` and `q`. In a longer query, use a consistent set of initials and keep the aliases close to the table declarations.\n\nClear aliases do not change a query's logic. They reveal that logic by making repeated qualifications compact enough to follow from the `SELECT` list through every `ON` condition."
+          }
+        }
+      }
+    }
+  }
+}

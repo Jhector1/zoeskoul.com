@@ -1,0 +1,40 @@
+{
+  "ok": true,
+  "profileId": "sql",
+  "subjectSlug": "sql--multi-table-sql--draft",
+  "courseSlug": "multi-table-sql",
+  "topicId": "module-1-course-enrollment-directory",
+  "summary": {
+    "modules": 1,
+    "topicsTotal": 1,
+    "exercises": 5,
+    "exerciseKinds": {
+      "code_input": 5
+    },
+    "codeInputs": 5,
+    "projects": 5,
+    "capstones": 5,
+    "thinFixedTestCount": 0,
+    "blockers": 0,
+    "errors": 0,
+    "warnings": 1,
+    "infos": 0
+  },
+  "severityCounts": {
+    "blocker": 0,
+    "error": 0,
+    "warning": 1,
+    "info": 0
+  },
+  "issues": [
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "multi-table-sql-module-1-relationship-paths/multi-table-sql-section-1-module-project/module-1-course-enrollment-directory",
+      "profileId": "sql",
+      "moduleId": "multi-table-sql-module-1-relationship-paths",
+      "topicId": "module-1-course-enrollment-directory",
+      "message": "Topic \"module-1-course-enrollment-directory\" has no learning goals on its seed metadata."
+    }
+  ]
+}

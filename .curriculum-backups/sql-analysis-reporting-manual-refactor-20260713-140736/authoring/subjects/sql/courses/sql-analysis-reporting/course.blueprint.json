@@ -1,0 +1,113 @@
+{
+  "subjectSlug": "sql",
+  "courseSlug": "sql-analysis-reporting",
+  "catalogSlug": "sql",
+  "trackSlug": "sql",
+  "profileId": "sql",
+  "workspaceProfileId": "browser-sql-runner",
+  "workspacePolicyId": "sql-browser-workspace",
+  "title": "SQL Analysis & Reporting",
+  "subtitle": "Turn single-table data into calculated, grouped, and decision-ready business reports.",
+  "level": "beginner-to-early-intermediate",
+  "moduleCount": 6,
+  "description": "A cumulative single-table SQL reporting course covering aliases, calculations, NULL safety, aggregate functions, GROUP BY, HAVING, CASE, conditional aggregation, module projects, and a final executive-report capstone.",
+  "sourceLocale": "en",
+  "targetLocales": [],
+  "accessPolicy": "paid",
+  "moduleAccessOverrideDefault": null,
+  "audience": [
+    "Learners who completed SQL Foundations / SQL V2.",
+    "Beginners who can already use SELECT, WHERE, ORDER BY, LIMIT, LIKE, IN, BETWEEN, and NULL filters.",
+    "Learners preparing for practical reporting, analytics, and business-intelligence work."
+  ],
+  "prerequisites": [
+    "Read a single database table and identify rows and columns.",
+    "Select specific columns and use readable filters.",
+    "Combine conditions with AND, OR, and NOT.",
+    "Sort and limit results and work with LIKE, IN, BETWEEN, and IS NULL."
+  ],
+  "goals": [
+    "Create readable result columns with aliases, calculations, and rounding.",
+    "Handle missing values deliberately with COALESCE.",
+    "Build one-row KPI snapshots with aggregate functions.",
+    "Build grouped scorecards with GROUP BY and deterministic sorting.",
+    "Filter grouped reports with HAVING and calculate conditional KPIs with CASE.",
+    "Complete five cumulative module projects and one final executive-report capstone."
+  ],
+  "teachingStyle": {
+    "tone": "practical, beginner-friendly, report-first, cumulative",
+    "quizWeight": 0.2,
+    "projectWeight": 0.35,
+    "codeInputWeight": 0.45
+  },
+  "constraints": {
+    "moduleCount": 6,
+    "standardModuleCount": 5,
+    "capstoneModuleCount": 1,
+    "teachingTopicsPerStandardModule": 4,
+    "moduleProjectsRequired": 5,
+    "capstoneRequired": true,
+    "singleTableOnly": true
+  },
+  "seedModules": [
+    "sql-analysis-reporting-module-0-report-foundations",
+    "sql-analysis-reporting-module-1-null-safe-calculations",
+    "sql-analysis-reporting-module-2-aggregate-functions",
+    "sql-analysis-reporting-module-3-grouped-summaries",
+    "sql-analysis-reporting-module-4-having-and-conditional-reporting",
+    "sql-analysis-reporting-module-5-final-capstone"
+  ],
+  "datasetIds": [
+    "sales_kpi"
+  ],
+  "versioning": {
+    "family": "sql",
+    "version": 2,
+    "status": "active",
+    "defaultForNewEnrollments": false,
+    "supersedes": null,
+    "supersededBy": null
+  },
+  "courseGenerationPolicy": {
+    "studentActionStyle": "browser_sql_workspace",
+    "forbidUnavailableWorkspaceActions": true,
+    "avoidTerms": [
+      "terminal",
+      "command line",
+      "SQL file",
+      "run the file",
+      "join these tables"
+    ],
+    "preferredTerms": {
+      "editor": "SQL editor",
+      "run": "click Run query",
+      "output": "results table",
+      "group grain": "what one result row represents"
+    },
+    "notes": [
+      "Every technical sketch must receive a required embedded Try It code_input with id/exerciseKey formatted as try-<topic-id>-sketchN.",
+      "Conceptual-only topics may omit Try It, but quizzes remain non-codeInput.",
+      "Every standard module must contain exactly one role=module_project section with one progressive project topic.",
+      "The final module must contain exactly one role=capstone section and no ordinary module project section.",
+      "Module projects and capstone steps are progressive: step N+1 starterCode must equal step N full solutionCode.",
+      "Lesson examples, Try It prompts, module projects, and the capstone must use different reporting questions, grouping targets, conditions, or thresholds.",
+      "All graded SQL must produce deterministic expected columns, rows, values, and order.",
+      "Use only the sales_kpi dataset and its sales_reporting table. Do not introduce joins, subqueries, CTEs, window functions, or data mutation."
+    ]
+  },
+  "practiceDefaults": {
+    "tryIt": true,
+    "requiresTryIt": true,
+    "tryItPlacement": "all_sketches",
+    "runtimeMode": "sql_workspace",
+    "expectedPracticeKinds": [
+      "code_input"
+    ]
+  },
+  "runtimePolicy": {
+    "sqlDialect": "sqlite",
+    "datasetStrategy": "module_based",
+    "datasetId": "sales_kpi",
+    "resultShape": "table"
+  }
+}

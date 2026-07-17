@@ -93,8 +93,8 @@ export function useSqlResultsPaneState(args: {
     const sourceKey = React.useMemo(() => {
         const snapshotKey = buildSnapshotsKey(initialTableSnapshots);
 
-        return `${viewKey}::${schemaSql}::${snapshotKey}`;
-    }, [viewKey, schemaSql, initialTableSnapshots]);
+        return `${viewKey}::${schemaSql}::${snapshotKey}::${defaultTab}`;
+    }, [viewKey, schemaSql, initialTableSnapshots, defaultTab]);
 
     const fallbackSnapshots = React.useMemo(() => {
         if (initialTableSnapshots && Object.keys(initialTableSnapshots).length > 0) {
@@ -109,10 +109,6 @@ export function useSqlResultsPaneState(args: {
 
     const [persistedSnapshots, setPersistedSnapshots] =
         React.useState<SqlTableSnapshots>(() => fallbackSnapshots);
-    const resetTab = React.useMemo<TabKey>(
-        () => (busy && availableTabs.includes("results") ? "results" : defaultTab),
-        [busy, availableTabs, defaultTab],
-    );
 
     const [acceptedResult, setAcceptedResult] = React.useState<SqlRunResult | null>(null);
 
@@ -131,8 +127,12 @@ export function useSqlResultsPaneState(args: {
             buildSnapshotsKey(prev) === fallbackSnapshotsKey ? prev : fallbackSnapshots,
         );
         setPositions((prev) => (positionsAreEmpty(prev) ? prev : {}));
-        rawSetTab((prev) => (prev === resetTab ? prev : resetTab));
-    }, [sourceKey, fallbackSnapshots, fallbackSnapshotsKey, resetTab, result]);
+
+        // A lesson/card change or a browser refresh must honor the resolved
+        // responsive default. Initial runner startup can be busy, but that is
+        // not a learner-triggered query and must not force the Results tab.
+        rawSetTab((prev) => (prev === defaultTab ? prev : defaultTab));
+    }, [sourceKey, fallbackSnapshots, fallbackSnapshotsKey, defaultTab, result]);
 
     React.useEffect(() => {
         if (!availableTabs.includes(tab)) {
@@ -144,10 +144,7 @@ export function useSqlResultsPaneState(args: {
 
 
     React.useEffect(() => {
-        if (busy) {
-            setTab(availableTabs.includes("results") ? "results" : defaultTab);
-            return;
-        }
+        if (busy) return;
 
         if (!result) {
             setAcceptedResult((prev) => (prev === null ? prev : null));
@@ -163,6 +160,10 @@ export function useSqlResultsPaneState(args: {
 
         if (result === blockedResultRef.current) return;
 
+        // Move to Results only after a new learner run completes. This keeps
+        // Tables/ERD selected through refresh and runner initialization while
+        // still surfacing the output as soon as it exists.
+        setTab(availableTabs.includes("results") ? "results" : defaultTab);
         setAcceptedResult((prev) => (prev === result ? prev : result));
 
         if (result.ok) {

@@ -58,7 +58,10 @@ export const CATALOG_MANIFESTS: Record<string, CatalogManifest> = {
       "status": "active",
       "subjectSlugs": [
         "sql",
-        "sql-v2"
+        "sql-v2",
+        "sql-analysis-reporting",
+        "multi-table-sql",
+        "sql-data-management"
       ],
       "meta": {
         "family": "data"
@@ -70,9 +73,12 @@ export const CATALOG_MANIFESTS: Record<string, CatalogManifest> = {
 export const SUBJECT_CATALOG_SLUGS: Record<string, string> = {
   "applied-python-projects": "python",
   "linux-terminal-fundamentals": "linux",
+  "multi-table-sql": "sql",
   "python": "python",
   "python-data-functions": "python",
   "python-v2": "python",
   "sql": "sql",
+  "sql-analysis-reporting": "sql",
+  "sql-data-management": "sql",
   "sql-v2": "sql",
 };

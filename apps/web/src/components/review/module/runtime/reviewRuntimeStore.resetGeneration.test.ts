@@ -608,6 +608,98 @@ describe("reviewRuntimeStore reset generation boundary", () => {
     expect(useReviewRuntimeStore.getState().exercises[ownerKey]?.workspaceError).toBe("metadata-only");
   });
 
+  it("applies SQL binding metadata once and treats an identical rebind as a no-op", () => {
+    const exerciseKey =
+      "sql:sql-data-management:module2:creating-tables-and-defining-columns:try-orders";
+    const workspace = {
+      ...makeWorkspace([
+        {
+          path: "schema.sql",
+          content:
+            "-- Provided setup\nCREATE TABLE orders (id INTEGER PRIMARY KEY);\n",
+        },
+        {
+          path: "query.sql",
+          content: "-- Verify the orders table\n",
+        },
+      ]),
+      language: "sql" as const,
+      entryFileId: "file:query.sql",
+      activeFileId: "file:query.sql",
+      openTabs: ["file:query.sql", "file:schema.sql"],
+    };
+    const runtime = useReviewRuntimeStore.getState();
+
+    runtime.patchExercise(exerciseKey, {
+      generation: 0,
+      language: "sql",
+      lang: "sql",
+      workspace,
+      codeWorkspace: workspace,
+      ideWorkspace: workspace,
+      code: "-- Verify the orders table\n",
+      source: "-- Verify the orders table\n",
+      stdin: "",
+      codeStdin: "",
+      workspaceOrigin: "starter",
+      userEdited: false,
+    });
+
+    const sqlBindingPatch = {
+      generation: 0,
+      language: "sql",
+      lang: "sql",
+      workspace,
+      codeWorkspace: workspace,
+      ideWorkspace: workspace,
+      code: "-- Verify the orders table\n",
+      source: "-- Verify the orders table\n",
+      stdin: "",
+      codeStdin: "",
+      workspaceOrigin: "starter",
+      userEdited: false,
+      ideConfig: {
+        requires: {
+          files: true,
+          multiFile: true,
+        },
+      },
+      sqlDialect: "sqlite",
+      sqlDatasetId: "ddl_blank",
+      sqlSchemaSql:
+        "CREATE TABLE orders (id INTEGER PRIMARY KEY);",
+      sqlSeedSql: "",
+      sqlInitialTableSnapshots: {
+        orders: {
+          columns: ["id"],
+          rows: [],
+        },
+      },
+    } as any;
+
+    runtime.patchExercise(exerciseKey, sqlBindingPatch);
+
+    const afterFirstBind =
+      useReviewRuntimeStore.getState().exercises[exerciseKey];
+    expect(afterFirstBind?.sqlDialect).toBe("sqlite");
+    expect(afterFirstBind?.sqlDatasetId).toBe("ddl_blank");
+    expect(afterFirstBind?.ideConfig).toMatchObject({
+      requires: {
+        files: true,
+        multiFile: true,
+      },
+    });
+
+    runtime.patchExercise(exerciseKey, {
+      ...sqlBindingPatch,
+      updatedAt: Date.now() + 1,
+    });
+
+    expect(
+      useReviewRuntimeStore.getState().exercises[exerciseKey],
+    ).toBe(afterFirstBind);
+  });
+
   it("keeps saved intentional blanks during saved hydration instead of repairing them as runtime shell", () => {
     const ownerKey =
       "python:python-8-object-oriented-foundations:section:thinking-in-objects:card-2:read-values-from-car-objects";

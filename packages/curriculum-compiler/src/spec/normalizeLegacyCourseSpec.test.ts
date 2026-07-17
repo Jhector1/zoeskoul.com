@@ -166,4 +166,56 @@ describe("normalizeLegacyCourseSpec", () => {
             tryItSketchIndex: 1,
         });
     });
+    it("preserves the authored project brief and exact capstone step count", () => {
+        const projectBrief = {
+            scenario: "Build the final report.",
+            role: "Analyst",
+            workspace: "SQL editor",
+            deliverable: "One cumulative report",
+            stepCountTarget: 4,
+            flow: "progressive",
+            requirements: ["Preserve each earlier requirement."],
+            stepLadder: [
+                { step: 1, title: "Start", requirement: "Build the grain." },
+                { step: 2, title: "Measure", requirement: "Add metrics." },
+                { step: 3, title: "Classify", requirement: "Add labels." },
+                { step: 4, title: "Finish", requirement: "Filter and sort." },
+            ],
+        };
+
+        const spec = normalizeLegacyCourseSpec({
+            authoringFormatVersion: "2.0",
+            subjectSlug: "sql",
+            courseSlug: "reporting",
+            profileId: "sql",
+            title: "Reporting",
+            modules: [
+                {
+                    moduleNumber: 1,
+                    moduleSlug: "reporting-module-1-capstone",
+                    role: "capstone",
+                    title: "Final Capstone",
+                    sections: [
+                        {
+                            sectionSlug: "reporting-section-1-capstone",
+                            role: "capstone",
+                            title: "Final Capstone",
+                            topics: [
+                                {
+                                    topicId: "final-report",
+                                    title: "Final Report",
+                                    projectBrief,
+                                },
+                            ],
+                        },
+                    ],
+                },
+            ],
+        });
+
+        expect(
+            spec.modules[0]?.sections[0]?.topics[0]?.projectBrief,
+        ).toEqual(projectBrief);
+    });
+
 });

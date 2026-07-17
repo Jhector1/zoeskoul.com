@@ -3,6 +3,7 @@ import type {
     TopicSeed,
 } from "@zoeskoul/curriculum-contracts";
 import type { SemanticValidationIssue } from "../../shared/profileServices.js";
+import { buildSqlDraftProgram } from "../shared/sqlWorkspace.js";
 import { stripSqlCommentsAndStrings } from "../shared/sqlReferenceScan.js";
 
 type ConceptRule = {
@@ -28,7 +29,12 @@ const SQL_CONCEPT_RULES: ConceptRule[] = [
     { concept: "BETWEEN", pattern: /\bbetween\b/i },
     { concept: "IS NULL", pattern: /\bis\s+null\b/i },
     { concept: "IS NOT NULL", pattern: /\bis\s+not\s+null\b/i },
-    { concept: "JOIN", pattern: /\b(?:inner|left|right|full|cross)?\s*join\b/i },
+    { concept: "INNER JOIN", pattern: /\binner\s+join\b/i },
+    { concept: "LEFT JOIN", pattern: /\bleft(?:\s+outer)?\s+join\b/i },
+    { concept: "RIGHT JOIN", pattern: /\bright(?:\s+outer)?\s+join\b/i },
+    { concept: "FULL JOIN", pattern: /\bfull(?:\s+outer)?\s+join\b/i },
+    { concept: "CROSS JOIN", pattern: /\bcross\s+join\b/i },
+    { concept: "JOIN", pattern: /\bjoin\b/i },
     { concept: "GROUP BY", pattern: /\bgroup\s+by\b/i },
     { concept: "HAVING", pattern: /\bhaving\b/i },
     { concept: "INSERT", pattern: /\binsert\s+into\b/i },
@@ -36,6 +42,28 @@ const SQL_CONCEPT_RULES: ConceptRule[] = [
     { concept: "DELETE", pattern: /\bdelete\s+from\b/i },
     { concept: "CREATE TABLE", pattern: /\bcreate\s+table\b/i },
 ];
+
+const CANONICAL_SQL_CONCEPTS = [
+    ...SQL_CONCEPT_RULES.map((rule) => rule.concept),
+    "subquery",
+] as const;
+
+function conceptKey(concept: string): string {
+    return concept
+        .trim()
+        .toLowerCase()
+        .replace(/[_-]+/g, " ")
+        .replace(/\s+/g, " ");
+}
+
+const CANONICAL_CONCEPT_BY_KEY = new Map(
+    CANONICAL_SQL_CONCEPTS.map((concept) => [conceptKey(concept), concept]),
+);
+
+function canonicalizeConcept(concept: string): string {
+    const trimmed = concept.trim();
+    return CANONICAL_CONCEPT_BY_KEY.get(conceptKey(trimmed)) ?? trimmed;
+}
 
 function detectConcepts(sql: string): string[] {
     const cleaned = stripSqlCommentsAndStrings(sql);
@@ -55,26 +83,30 @@ function detectConcepts(sql: string): string[] {
 }
 
 function buildAllowedSet(seed: TopicSeed): Set<string> {
-    const allowed = new Set<string>(seed.authoringPolicy?.allowedConcepts ?? []);
+    const allowed = new Set<string>(
+        (seed.authoringPolicy?.allowedConcepts ?? []).map(canonicalizeConcept),
+    );
     const logicalModuleNumber = Math.max(0, (seed.moduleOrder ?? 1) - 1);
     const moduleAllowed =
         seed.authoringPolicy?.moduleRules?.[String(logicalModuleNumber)]?.allowedConcepts ?? [];
 
     for (const concept of moduleAllowed) {
-        allowed.add(concept);
+        allowed.add(canonicalizeConcept(concept));
     }
 
     return allowed;
 }
 
 function buildDisallowedSet(seed: TopicSeed): Set<string> {
-    const disallowed = new Set<string>(seed.authoringPolicy?.disallowedConcepts ?? []);
+    const disallowed = new Set<string>(
+        (seed.authoringPolicy?.disallowedConcepts ?? []).map(canonicalizeConcept),
+    );
     const logicalModuleNumber = Math.max(0, (seed.moduleOrder ?? 1) - 1);
     const moduleDisallowed =
         seed.authoringPolicy?.moduleRules?.[String(logicalModuleNumber)]?.disallowedConcepts ?? [];
 
     for (const concept of moduleDisallowed) {
-        disallowed.add(concept);
+        disallowed.add(canonicalizeConcept(concept));
     }
 
     return disallowed;
@@ -93,7 +125,7 @@ export function validateSqlConceptStage(args: {
         if (exercise.kind !== "code_input") continue;
         if ((exercise.recipeType ?? "sql_query") !== "sql_query") continue;
 
-        const detected = detectConcepts(exercise.solutionCode ?? "");
+        const detected = detectConcepts(buildSqlDraftProgram(exercise, "solution"));
         if (detected.length === 0) continue;
 
         const futureConcepts = detected.filter((concept) => disallowed.has(concept));

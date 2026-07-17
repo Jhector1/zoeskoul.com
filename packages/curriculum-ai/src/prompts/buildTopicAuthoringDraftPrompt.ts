@@ -14,7 +14,7 @@ function renderRetryGuidance(seed: TopicSeed, retry?: TopicRetryContext) {
                 "",
                 "Specific issues from the previous attempt:",
                 ...retry.qualityIssues.map((issue) =>
-                    `- ${issue.exerciseId ? `${issue.exerciseId}: ` : ""}${issue.message}`,
+                    `- [${issue.code}] ${issue.exerciseId ? `${issue.exerciseId}: ` : ""}${issue.message}`,
                 ),
             ]
             : [];
@@ -26,6 +26,10 @@ function renderRetryGuidance(seed: TopicSeed, retry?: TopicRetryContext) {
     const unsafeFixedTestIssues =
         retry.qualityIssues?.filter(
             (issue) => issue.code === "PYTHON_FIXED_TEST_REPAIR_UNSAFE",
+        ) ?? [];
+    const workedExampleDuplicateIssues =
+        retry.qualityIssues?.filter(
+            (issue) => issue.code === "WORKED_EXAMPLE_TRY_IT_DUPLICATE",
         ) ?? [];
 
     const terminalAvailable =
@@ -88,10 +92,43 @@ function renderRetryGuidance(seed: TopicSeed, retry?: TopicRetryContext) {
         "- For Bash/Linux missing code_input, use fixedLanguage bash, recipeType shell_task, mode terminal_workspace, and workspaceExpectations or terminalExpectations.",
         "",
         "",
-        "If the failure mentions PROGRAMMING_TRY_IT_COVERAGE_MISSING or missing Try It coverage:",
+        "If the failure mentions PROGRAMMING_TRY_IT_COVERAGE_MISSING, TRY_IT_SKETCH_EXERCISE_MISSING, or missing Try It coverage:",
         "- Make sure the topic includes a real practice exercise that can serve as the embedded try-it activity.",
+        "- For all_sketches placement, every sketch must have one distinct matching code_input exercise.",
+        "- When exact code_input counts are provided, reduce the number of sketchBlocks to that count instead of adding extra code_input exercises beyond policy.",
         "- Do not add a literal `Try it yourself:` sentence to sketchBlocks just to satisfy practice requirements.",
         "- Keep sketchBlocks focused on explanation and worked examples; the embedded try-it UI comes from practice metadata and exercises.",
+        "",
+        ...(workedExampleDuplicateIssues.length > 0
+            ? [
+                "ACTIVE REPAIR — worked-example and Try It duplication:",
+                "- The following code_input exercise ids MUST be rewritten in this retry:",
+                ...workedExampleDuplicateIssues.map(
+                    (issue) => `  - ${issue.exerciseId ?? "unknown"}`,
+                ),
+                "- Keep the topic and learning goal, but change a meaningful learner expectation rather than only syntax style.",
+                "- For SQL, change at least one of: source table/entity, parent-child relationship path, selected output columns, WHERE condition, aggregate, grouping grain, or inserted/updated values.",
+                "- Update the exercise prompt, solutionCode, checkSql, starterCode, the active workspace file, query.sql verification, and every relevant starterFiles/solutionFiles entry coherently so they all describe and grade the new expectation.",
+                "- Do not solve this by changing aliases, capitalization, formatting, comments, ORDER BY, LIMIT, or output aliases alone.",
+                "- Before returning JSON, compare every rewritten solutionCode against every fenced SQL example in sketchBlocks. Their normalized SELECT/FROM/JOIN/WHERE/GROUP BY expectation must be materially different.",
+                "",
+            ]
+            : []),
+        "If the failure mentions WORKED_EXAMPLE_TRY_IT_DUPLICATE:",
+        "- The previous Try It reproduced a fenced worked example from the same topic.",
+        "- Rewrite the failing Try It so the learner must produce a materially different result.",
+        "- Change at least one meaningful expectation: requested output columns, source entity, filter, aggregate, input, or relationship path.",
+        "- Formatting, capitalization, aliases, and ORDER BY alone do not count as a different exercise.",
+        "- Never copy fenced example code into code_input solutionCode.",
+        "",
+        "If the failure mentions PROGRAMMING_CARD_TITLE_MISSING, PROGRAMMING_CARD_TITLE_REPEATS_HEADING, PROGRAMMING_SKETCH_TITLE_GENERIC, PROGRAMMING_TEACHING_PROSE_TOO_THIN, PROGRAMMING_CONCEPT_DEFINITION_MISSING, or PROGRAMMING_ROBOTIC_PROSE_DETECTED:",
+        "- Rewrite the teaching sketches as connected textbook prose, not mechanical template text.",
+        "- Give each sketch a concise cardTitle and a different, complementary inner title.",
+        "- Define the concept in the first paragraph before presenting syntax or an example.",
+        "- Explain why the concept matters and what one example/result row means.",
+        "- Replace generic titles such as Understanding X, Using X, Practical Use, Introduction, or Project Overview.",
+        "- Remove repeated openings such as In SQL, This query will, For example consider, and Let's look at.",
+        "- Make the second sketch advance the explanation instead of restating the first.",
         "",
         "If the failure mentions PROGRAMMING_LINE_BY_LINE_EXPLANATION_MISSING or missing a step-by-step explanation:",
         "- Keep the code example, but add explicit prose that walks through it line by line or step by step.",
@@ -145,6 +182,9 @@ function renderRetryGuidance(seed: TopicSeed, retry?: TopicRetryContext) {
         "- Alternatively print a clear confirmation message such as `Saved note.txt`.",
     ].join("\n");
 }
+
+
+
 function renderWorkspacePolicy(seed: TopicSeed) {
     const policy = seed.workspacePolicy;
     if (!policy) return "";
@@ -225,6 +265,12 @@ function renderStructuredLessonIntent(seed: TopicSeed) {
             requireUniqueTryItMessages?: boolean;
         }
         | undefined;
+    const isProjectTopic =
+        seed.sectionRole === "module_project" ||
+        seed.sectionRole === "capstone" ||
+        seed.moduleRole === "capstone";
+    const plannedCodeInputCount =
+        seed.plannedExerciseCounts?.counts.code_input ?? 0;
 
     if (conceptualOnly) {
         lines.push("Structured lesson intent for this topic:");
@@ -237,6 +283,15 @@ function renderStructuredLessonIntent(seed: TopicSeed) {
         lines.push("- This topic should support real embedded Try It practice through quizDraft exercises.");
         if (practice?.tryItPlacement === "all_sketches") {
             lines.push("- Every sketch block must map to its own concrete Try It exercise; do not rely on one exercise for the whole topic.");
+            if (!isProjectTopic && plannedCodeInputCount > 0) {
+                lines.push(
+                    `- Generate exactly ${plannedCodeInputCount} sketchBlocks for this lesson because the required exercise plan contains exactly ${plannedCodeInputCount} code_input Try It exercise(s).`,
+                );
+                lines.push(
+                    `- Generate exactly ${plannedCodeInputCount} matching code_input items with ids try-<topic-id>-sketch0 through try-<topic-id>-sketch${plannedCodeInputCount - 1}.`,
+                );
+                lines.push("- Do not generate extra teaching sketches that cannot receive their own required code_input Try It.");
+            }
             lines.push("- Prefer embedded Try It exercise ids that follow try-<topic-id>-sketch0, try-<topic-id>-sketch1, etc.; do not use ci-* ids for sketch try-it exercises.");
         } else {
             lines.push("- Use sketchBlocks to teach the idea clearly, then make the configured code_input exercise work as the embedded try-it task.");
@@ -277,6 +332,41 @@ function renderStructuredLessonIntent(seed: TopicSeed) {
         lines.push("- Use stronger project framing, integrated skills, and a polished final-output goal.");
     }
 
+    if (seed.projectBrief) {
+        if (lines.length === 0) lines.push("Structured lesson intent for this topic:");
+        const brief = seed.projectBrief;
+        lines.push("- The authored projectBrief is the source of truth for this project.");
+        lines.push(`- Generate exactly ${brief.stepCountTarget} project code_input step(s), no more and no fewer.`);
+        lines.push(`- projectDraft.stepIds must list exactly ${brief.stepCountTarget} existing quizDraft code_input id(s) in authored order.`);
+        if (brief.flow) {
+            lines.push(`- Authored project flow: ${brief.flow}.`);
+        }
+        if (brief.scenario) {
+            lines.push(`- Authored scenario: ${brief.scenario}`);
+        }
+        if (brief.role) {
+            lines.push(`- Learner role: ${brief.role}`);
+        }
+        if (brief.workspace) {
+            lines.push(`- Workspace: ${brief.workspace}`);
+        }
+        if (brief.deliverable) {
+            lines.push(`- Final deliverable: ${brief.deliverable}`);
+        }
+        if ((brief.requirements ?? []).length > 0) {
+            lines.push("- Authored project requirements:");
+            lines.push(...(brief.requirements ?? []).map((requirement) => `  - ${requirement}`));
+        }
+        if ((brief.stepLadder ?? []).length > 0) {
+            lines.push("- Follow this authored step ladder exactly:");
+            lines.push(
+                ...(brief.stepLadder ?? []).map(
+                    (step) => `  - Step ${step.step}: ${step.title} — ${step.requirement}`,
+                ),
+            );
+        }
+    }
+
     if (projectRequirements?.requireRealWorldStory) {
         if (lines.length === 0) lines.push("Structured lesson intent for this topic:");
         lines.push("- Use a believable real-world story with a learner role, concrete files/tables/folders, and a useful final deliverable.");
@@ -294,6 +384,44 @@ function renderStructuredLessonIntent(seed: TopicSeed) {
 
     return lines.join("\n");
 }
+function renderTopicLearningGoals(seed: TopicSeed): string {
+    const goals = Array.isArray(seed.topicLearningGoals)
+        ? seed.topicLearningGoals
+              .map((goal) => String(goal ?? "").trim())
+              .filter(Boolean)
+        : [];
+
+    if (goals.length === 0) return "";
+
+    return [
+        "AUTHORITATIVE TOPIC LEARNING GOALS:",
+        ...goals.map((goal, index) => `${index + 1}. ${goal}`),
+        "- Every teaching sketch, quiz exercise, and Try It must directly serve at least one goal above.",
+        "- Do not reuse the previous or next topic's exercise merely because it uses the same dataset or module.",
+        "- Stay inside this topic boundary even when broader module objectives mention adjacent concepts.",
+    ].join("\n");
+}
+
+function renderFinalExerciseCountChecklist(seed: TopicSeed): string {
+    const planned = seed.plannedExerciseCounts;
+    if (!planned) return "";
+
+    const countLines = Object.entries(planned.counts).map(
+        ([kind, count]) => `  - ${kind}: exactly ${Math.max(0, Math.trunc(Number(count) || 0))}`,
+    );
+
+    return [
+        "FINAL EXERCISE COUNT GATE — verify this immediately before returning JSON:",
+        `- quizDraft must contain exactly ${planned.total} array items total.`,
+        "- Count the actual quizDraft entries by kind; code_input exercises are also entries in quizDraft.",
+        "- The final per-kind counts must be:",
+        ...countLines,
+        `- The per-kind counts above must add up to exactly ${planned.total}.`,
+        "- Do not return JSON until the array length and every per-kind count match exactly.",
+        "- For every sql_query code_input, starterCode must be incomplete learner scaffolding and must not equal solutionCode after comments and whitespace are ignored.",
+    ].join("\n");
+}
+
 export function buildTopicAuthoringDraftPrompt(args: {
     seed: TopicSeed;
     locale: string;
@@ -333,6 +461,16 @@ export function buildTopicAuthoringDraftPrompt(args: {
             "Every exercise must include a real solution.",
             "Do not leave any solution field empty.",
             "Every Try It exercise prompt must be unique, specific, and tied to the topic context.",
+            "Worked-example and Try It separation:",
+            "- A Try It must not ask the learner to reproduce any fenced worked example from the same topic.",
+            "- For all_sketches placement, the Try It aligned to a sketch must use a different scenario, entity/record set, and concrete values from that sketch's worked example while practicing the same concept.",
+            "- Every Try It must change at least one meaningful expectation: requested output, source entity, filter, aggregate, input, inserted/updated values, or relationship path.",
+            "- Cosmetic differences such as formatting, capitalization, aliases, or ORDER BY alone do not make a different exercise.",
+            "- Never copy a sketch's fenced example code into solutionCode or any solutionFiles[].content entry.",
+            "- Before returning JSON, self-audit every code_input solutionCode and every solutionFiles[].content value against every fenced worked example in sketchBlocks.",
+            "- For SQL, compare the effective operation, table/entity, literal values, SELECT/FROM/JOIN/WHERE/GROUP BY expectation, and relationship path. Rewrite the Try It when those describe the worked example's task.",
+            "- When a SQL exercise uses workspace files, keep the prompt, checkSql, active starter/solution file, query.sql verification, solutionCode, and every relevant solutionFiles entry aligned with the distinct expectation.",
+            "",
             "Embedded sketch Try It exercises must use try-* ids, preferably try-<topic-id>-sketch0, try-<topic-id>-sketch1, etc., not ci-* ids.",
             "If a code_input exercise uses multiple files, include complete starterFiles and complete solutionFiles for every relevant file in the finished workspace.",
             "For OOP/class/object/method exercises, use recipeType \"semantic\" with semanticChecks rather than fixed_tests, even when the exercise uses multiple files.",
@@ -350,14 +488,21 @@ export function buildTopicAuthoringDraftPrompt(args: {
             '- "quizDraft"',
             '- optional "projectDraft"',
             "",
-            "Every sketchBlocks item must contain exactly:",
+            "Every teaching sketchBlocks item must contain:",
             '- "id"',
-            '- "title"',
+            '- "cardTitle" — a concise lesson/navigation title',
+            '- "title" — a distinct inner heading for the prose',
             '- "bodyMarkdown"',
             "",
             "Teaching-quality rules for sketchBlocks in every subject:",
+            "- Write connected, book-like teaching prose rather than a list of interface instructions or repeated textbook templates.",
+            "- Define the named concept in the first paragraph: explain what it is, what problem it solves, and why the learner should care before showing syntax.",
             "- Include at least one concrete worked example, not just abstract definitions.",
-            "- Explain the main idea clearly in beginner-friendly language.",
+            "- Interpret the example: explain what one result row means, why values repeat or disappear, and what mistake the example prevents.",
+            "- Make cardTitle and title complementary but different; never repeat the same heading twice in the learner UI.",
+            "- Avoid generic headings such as Understanding X, Using X, Practical Use of X, Introduction to X, or Project Overview.",
+            "- Avoid robotic openings and transitions such as `In SQL, ...`, `This query will ...`, `For example, consider ...`, and `Let's look at ...` repeated across cards.",
+            "- Let the second sketch deepen the first with a new distinction, pitfall, or reasoning habit instead of redefining the same concept.",
             "- Keep sketchBlocks focused on explanation; embedded try-it practice will be rendered separately from exercises when supported.",
             "- For hands-on topics using all_sketches Try It placement, include enough concrete exercises so every sketch can resolve to a unique Try It activity.",
             "",
@@ -431,6 +576,17 @@ export function buildTopicAuthoringDraftPrompt(args: {
             "- Include code_input authoring items inside quizDraft whenever Required exercise counts include code_input.",
             "- code_input authoring items are published as project practice automatically.",
             "- single_choice, multi_choice, drag_reorder, and fill_blank_choice are published as quiz practice.",
+            // DRAG_REORDER_EXACT_TOKEN_RULES
+            "- drag_reorder contract: correctOrder must be a full permutation of tokens.",
+            "- Copy every correctOrder entry exactly from tokens; strings must match character-for-character.",
+            "- correctOrder must have the same length as tokens, with no omissions, additions, or duplicates.",
+            "- Never use answer letters (a, b, c, d), numeric positions, indexes, or invented ids unless those exact strings are present in tokens.",
+            "- Example: tokens [\"FROM clause\", \"JOIN operation\", \"ON condition\"] requires those exact text values in correctOrder, not [\"a\", \"b\", \"c\"].",
+            // DRAG_REORDER_RETRY_REPAIR
+            "- If validation mentions drag_reorder, correctOrder, or tokens, rebuild the item by copying and reordering the exact token strings.",
+            "- On retry, verify correctOrder.length === tokens.length and each token occurs exactly once.",
+            // DRAG_REORDER_FINAL_GATE
+            "- Before returning JSON, verify every drag_reorder correctOrder is an exact full permutation of tokens.",
             "- You may include projectDraft, but projectDraft alone does not create code_input exercises; the compiler creates project cards from quizDraft code_input items.",
             "",
             ...profileAuthoringRules,
@@ -449,7 +605,11 @@ export function buildTopicAuthoringDraftPrompt(args: {
             "- Every multi_choice includes ALL correct options, not only one.",
             "- Every fill_blank_choice has exactly one blank and exactly one correctValue.",
             "- Every code_input follows the profile-specific runtime and recipe rules.",
-            renderWorkspacePolicy(args.seed),
+            "",
+            "",
+            renderTopicLearningGoals(args.seed),
+        renderFinalExerciseCountChecklist(args.seed),
+        renderWorkspacePolicy(args.seed),
         ].join("\n"),
         user: JSON.stringify(
             {

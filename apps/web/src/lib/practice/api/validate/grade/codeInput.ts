@@ -20,6 +20,15 @@ function isRecord(value: unknown): value is Record<string, unknown> {
   return Boolean(value) && typeof value === "object" && !Array.isArray(value);
 }
 
+function stringArray(value: unknown): string[] {
+  if (!Array.isArray(value)) return [];
+
+  return value
+    .filter((entry): entry is string => typeof entry === "string")
+    .map((entry) => entry.trim())
+    .filter(Boolean);
+}
+
 export async function gradeCodeInput(args: {
   instance: LoadedValidateInstance;
   expectedCanon: unknown;
@@ -76,10 +85,25 @@ export async function gradeCodeInput(args: {
           rawChecks: rawSemanticChecks,
         });
 
+        const sqlFileOrder = isRecord(expectedCanon)
+          ? stringArray(expectedCanon.sqlFileOrder)
+          : [];
+        const solutionFiles =
+          isRecord(expectedCanon) && Array.isArray(expectedCanon.solutionFiles)
+            ? expectedCanon.solutionFiles
+            : undefined;
+        const workspaceExpectations =
+          isRecord(expectedCanon) && isRecord(expectedCanon.workspaceExpectations)
+            ? expectedCanon.workspaceExpectations
+            : undefined;
+
         return {
           ...(parsed.data as any),
           ...(semanticChecks.length ? { semanticChecks } : {}),
           ...(sourceChecks.length ? { sourceChecks } : {}),
+          ...(sqlFileOrder.length ? { sqlFileOrder } : {}),
+          ...(solutionFiles ? { solutionFiles } : {}),
+          ...(workspaceExpectations ? { workspaceExpectations } : {}),
           ...(semanticFirst ? { semanticFirst: true } : {}),
         };
       })();
@@ -171,6 +195,8 @@ export async function gradeCodeInput(args: {
     return gradeSqlCodeInput({
       expected,
       code,
+      entry: submissionEntry,
+      files: submissionFiles,
       showDebug,
     });
   }

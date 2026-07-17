@@ -3,34 +3,17 @@
     "sql--sql-v2--draft": {
       "sql--sql-v2--draft-2": {
         "and_conditions": {
-          "label": "AND conditions",
-          "summary": "Learn how to combine multiple WHERE rules with AND so a query keeps only rows that match every condition.",
+          "label": "Combining Conditions with AND and OR",
+          "summary": "Use AND when every rule must pass and OR when any listed rule may pass.",
           "cards": {
             "sketch0": {
-              "title": "Using AND to narrow results"
+              "title": "AND Requires Every Condition"
             },
             "sketch1": {
-              "title": "Read AND conditions one rule at a time"
-            },
-            "sketch2": {
-              "title": "Common mistakes with AND"
+              "title": "OR Allows Alternative Conditions"
             },
             "quiz": {
-              "title": "Quiz"
-            },
-            "project": {
-              "title": "AND filter practice set"
-            }
-          },
-          "projectSteps": {
-            "ci_art_under_20": {
-              "title": "Query Art products under 20"
-            },
-            "ci_stationery_stock_15": {
-              "title": "Filter Stationery with enough stock"
-            },
-            "ci_home_price_under_100": {
-              "title": "Find affordable Home products"
+              "title": "Check Your Understanding"
             }
           },
           "quiz": {
@@ -133,7 +116,7 @@
               "prompt": "Fill in the missing SQL keyword.",
               "hint": "Use the keyword that requires both conditions to be true.",
               "help": {
-                "concept": "SQL uses `the missing term` to combine conditions when every condition must be true for a row to remain.",
+                "concept": "SQL uses `the blank` to combine conditions when every condition must be true for a row to remain.",
                 "hint_1": "This is not the keyword for either/or logic.",
                 "hint_2": "The missing word joins two conditions into one stricter filter."
               },
@@ -162,120 +145,67 @@
                 "id"
               ]
             },
-            "ci_art_under_20": {
-              "title": "Query Art products under 20",
-              "prompt": "Write a query that shows the `name` and `price` of products in the `Art` category with a price less than 20. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Show the name and price of products in the Art category with a price less than 20.\nSELECT \nFROM products\nWHERE ;"
-            },
-            "ci_stationery_stock_15": {
-              "title": "Filter Stationery with enough stock",
-              "prompt": "Write a query that returns `name`, `category`, and `stock` for products where the category is `Stationery` and the stock is at least 15. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Return name, category, and stock for products where the category is Stationery and the stock is at least 15.\nSELECT name, category, stock\nFROM products\nWHERE category = '' ;"
-            },
-            "ci_home_price_under_100": {
-              "title": "Find affordable Home products",
-              "prompt": "Write a query that shows `name` and `price` for products in the `Home` category with a price below 100. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- add one more condition here\nSELECT name, price\nFROM products\nWHERE category = 'Home'"
-            },
             "try-and_conditions-sketch0": {
-              "title": "Query Art products under 20",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that shows the `name` and `price` of products in the `Art` category with a price less than 20. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Allow Either of Two Product Rules",
+              "prompt": "Merchandising wants products that fit either of two opportunities: they belong to `Home`, or they cost less than `10`. Return `name, category, price` from `products` in that column order. Keep only rows where `category = 'Home' OR price < 10`.",
+              "hint": "Connect the two alternative conditions with OR.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "Return `name, category, price` from `products` in that column order. Keep only rows where `category = 'Home' OR price < 10`."
               },
-              "starterCode": "-- Show the name and price of products in the Art category with a price less than 20.\nSELECT \nFROM products\nWHERE ;"
+              "starterCode": "SELECT name, category, price\nFROM products\n-- Allow either rule"
             },
             "try-and_conditions-sketch1": {
-              "title": "Filter Stationery with enough stock",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that returns `name`, `category`, and `stock` for products where the category is `Stationery` and the stock is at least 15. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Require Category and Stock Together",
+              "prompt": "Prepare a bulk-order list of stationery items. Return `name, category, stock` from `products` in that column order. Keep only rows where `category = 'Stationery' AND stock >= 15`.",
+              "hint": "Join the exact category test and the inclusive stock test with AND.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "Return `name, category, stock` from `products` in that column order. Keep only rows where `category = 'Stationery' AND stock >= 15`."
               },
-              "starterCode": "-- Return name, category, and stock for products where the category is Stationery and the stock is at least 15.\nSELECT name, category, stock\nFROM products\nWHERE category = '' ;"
-            },
-            "try-and_conditions-sketch2": {
-              "title": "Find affordable Home products",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that shows `name` and `price` for products in the `Home` category with a price below 100. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- add one more condition here\nSELECT name, price\nFROM products\nWHERE category = 'Home'"
+              "starterCode": "SELECT name, category, stock\nFROM products\n-- Require both business rules"
             }
           },
           "tryIt": {
             "allowReveal": true,
-            "try_and_conditions_sketch0": {
-              "title": "Query Art products under 20",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that shows the `name` and `price` of products in the `Art` category with a price less than 20. Write the query in the SQL editor, click Run query, and check the results table."
-            },
             "try_and_conditions_sketch1": {
-              "title": "Filter Stationery with enough stock",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that returns `name`, `category`, and `stock` for products where the category is `Stationery` and the stock is at least 15. Write the query in the SQL editor, click Run query, and check the results table."
+              "title": "Require Category and Stock Together",
+              "prompt": "Prepare a bulk-order list of stationery items. Show `name`, `category`, and `stock` from `products` where the category is `Stationery` and stock is at least `15`.",
+              "hint": "Join the exact category test and the inclusive stock test with AND.",
+              "help": {
+                "concept": "AND keeps a row only when every connected condition is true.",
+                "hint_1": "Join the exact category test and the inclusive stock test with AND.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+              }
             },
-            "try_and_conditions_sketch2": {
-              "title": "Find affordable Home products",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that shows `name` and `price` for products in the `Home` category with a price below 100. Write the query in the SQL editor, click Run query, and check the results table."
+            "try_and_conditions_sketch0": {
+              "title": "Allow Either of Two Product Rules",
+              "prompt": "Merchandising wants products that fit either of two opportunities: they belong to `Home`, or they cost less than `10`. Show `name`, `category`, and `price` from `products`.",
+              "hint": "Connect the two alternative conditions with OR.",
+              "help": {
+                "concept": "OR keeps a row when at least one connected condition is true.",
+                "hint_1": "Connect the two alternative conditions with OR.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+              }
             }
           }
         }
       },
       "sql-v2-2": {
         "and_conditions": {
-          "label": "AND conditions",
-          "summary": "Learn how to combine multiple WHERE rules with AND so a query keeps only rows that match every condition.",
+          "label": "Combining Conditions with AND and OR",
+          "summary": "Use AND when every rule must pass and OR when any listed rule may pass.",
           "cards": {
             "sketch0": {
-              "title": "Using AND to narrow results"
+              "title": "AND Requires Every Condition"
             },
             "sketch1": {
-              "title": "Read AND conditions one rule at a time"
-            },
-            "sketch2": {
-              "title": "Common mistakes with AND"
+              "title": "OR Allows Alternative Conditions"
             },
             "quiz": {
-              "title": "Quiz"
-            },
-            "project": {
-              "title": "AND filter practice set"
-            }
-          },
-          "projectSteps": {
-            "ci_art_under_20": {
-              "title": "Query Art products under 20"
-            },
-            "ci_stationery_stock_15": {
-              "title": "Filter Stationery with enough stock"
-            },
-            "ci_home_price_under_100": {
-              "title": "Find affordable Home products"
+              "title": "Check Your Understanding"
             }
           },
           "quiz": {
@@ -378,7 +308,7 @@
               "prompt": "Fill in the missing SQL keyword.",
               "hint": "Use the keyword that requires both conditions to be true.",
               "help": {
-                "concept": "SQL uses `the missing term` to combine conditions when every condition must be true for a row to remain.",
+                "concept": "SQL uses `the blank` to combine conditions when every condition must be true for a row to remain.",
                 "hint_1": "This is not the keyword for either/or logic.",
                 "hint_2": "The missing word joins two conditions into one stricter filter."
               },
@@ -441,30 +371,30 @@
               "starterCode": "-- add one more condition here\nSELECT name, price\nFROM products\nWHERE category = 'Home'"
             },
             "try-and_conditions-sketch0": {
-              "title": "Query Art products under 20",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that shows the `name` and `price` of products in the `Art` category with a price less than 20. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Allow Either of Two Product Rules",
+              "prompt": "Merchandising wants products that fit either of two opportunities: they belong to `Home`, or they cost less than `10`. Show `name`, `category`, and `price` from `products`.",
+              "hint": "Connect the two alternative conditions with OR.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
+                "concept": "OR keeps a row when at least one connected condition is true.",
+                "hint_1": "Connect the two alternative conditions with OR.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
               },
-              "starterCode": "-- Show the name and price of products in the Art category with a price less than 20.\nSELECT \nFROM products\nWHERE ;"
+              "starterCode": "SELECT name, category, price\nFROM products\n-- Allow either rule"
             },
             "try-and_conditions-sketch1": {
-              "title": "Filter Stationery with enough stock",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that returns `name`, `category`, and `stock` for products where the category is `Stationery` and the stock is at least 15. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Require Category and Stock Together",
+              "prompt": "Prepare a bulk-order list of stationery items. Show `name`, `category`, and `stock` from `products` where the category is `Stationery` and stock is at least `15`.",
+              "hint": "Join the exact category test and the inclusive stock test with AND.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
+                "concept": "AND keeps a row only when every connected condition is true.",
+                "hint_1": "Join the exact category test and the inclusive stock test with AND.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
               },
-              "starterCode": "-- Return name, category, and stock for products where the category is Stationery and the stock is at least 15.\nSELECT name, category, stock\nFROM products\nWHERE category = '' ;"
+              "starterCode": "SELECT name, category, stock\nFROM products\n-- Require both business rules"
             },
             "try-and_conditions-sketch2": {
               "title": "Find affordable Home products",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that shows `name` and `price` for products in the `Home` category with a price below 100. Write the query in the SQL editor, click Run query, and check the results table.",
+              "prompt": "Create a focused inventory query that shows `name` and `price` for products in the `Home` category with a price below 100. Run it and compare the result with the expected table.",
               "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
               "help": {
                 "concept": "This SQL exercise checks whether your query returns the requested result.",
@@ -476,17 +406,25 @@
           },
           "tryIt": {
             "allowReveal": true,
-            "try_and_conditions_sketch0": {
-              "title": "Query Art products under 20",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that shows the `name` and `price` of products in the `Art` category with a price less than 20. Write the query in the SQL editor, click Run query, and check the results table."
-            },
             "try_and_conditions_sketch1": {
-              "title": "Filter Stationery with enough stock",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that returns `name`, `category`, and `stock` for products where the category is `Stationery` and the stock is at least 15. Write the query in the SQL editor, click Run query, and check the results table."
+              "title": "Require Category and Stock Together",
+              "prompt": "Prepare a bulk-order list of stationery items. Show `name`, `category`, and `stock` from `products` where the category is `Stationery` and stock is at least `15`.",
+              "hint": "Join the exact category test and the inclusive stock test with AND.",
+              "help": {
+                "concept": "AND keeps a row only when every connected condition is true.",
+                "hint_1": "Join the exact category test and the inclusive stock test with AND.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+              }
             },
-            "try_and_conditions_sketch2": {
-              "title": "Find affordable Home products",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that shows `name` and `price` for products in the `Home` category with a price below 100. Write the query in the SQL editor, click Run query, and check the results table."
+            "try_and_conditions_sketch0": {
+              "title": "Allow Either of Two Product Rules",
+              "prompt": "Merchandising wants products that fit either of two opportunities: they belong to `Home`, or they cost less than `10`. Show `name`, `category`, and `price` from `products`.",
+              "hint": "Connect the two alternative conditions with OR.",
+              "help": {
+                "concept": "OR keeps a row when at least one connected condition is true.",
+                "hint_1": "Connect the two alternative conditions with OR.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+              }
             }
           }
         }
@@ -497,33 +435,25 @@
     "sql--sql-v2--draft": {
       "sql--sql-v2--draft-2": {
         "and_conditions": {
-          "and_intro": {
-            "title": "Using AND to narrow results",
-            "bodyMarkdown": "When you use `AND` in a `WHERE` clause, a row must satisfy **every condition** to appear in the results.\n\nA simple pattern looks like this:\n\n```sql\nSELECT name, category, price\nFROM products\nWHERE category = 'Art' AND price < 20;\n```\n\nThis query checks the `products` table and keeps only rows where:\n\n1. `category = 'Art'`\n2. `price < 20`\n\nBoth must be true at the same time.\n\nIn this dataset, `Sketchbook` matches because it is in the `Art` category and its price is `12.99`. `Acrylic Paint Set` does **not** match because even though it is `Art`, its price is `24.50`.\n\nSo the result is just the `Sketchbook` row."
+          "and_all_rules": {
+            "title": "AND Requires Every Condition",
+            "bodyMarkdown": "Use `AND` when every condition must be true for a row to remain.\n\n```sql\nSELECT\n    name,\n    price,\n    stock\nFROM products\nWHERE price < 25\n  AND stock > 0;\n```\n\nA row passes only when its price is below 25 **and** its stock is above zero. If either test is false, the row is excluded.\n\nBreak a multi-rule request into separate yes-or-no questions, then connect them with `AND`."
           },
-          "and_step_by_step": {
-            "title": "Read AND conditions one rule at a time",
-            "bodyMarkdown": "A good beginner strategy is to read an `AND` filter as a checklist.\n\nExample:\n\n```sql\nSELECT name, stock, price\nFROM products\nWHERE stock >= 10 AND price <= 20;\n```\n\nLine by line:\n\n- `SELECT name, stock, price` shows the columns you want to see.\n- `FROM products` says which table to read.\n- `WHERE stock >= 10 AND price <= 20` keeps only products with enough stock **and** a price at or below 20.\n\nLet's test a few rows:\n\n- `Notebook` has stock `50` and price `6.75` → passes both conditions.\n- `Fountain Pen` has stock `15` and price `18.00` → passes both conditions.\n- `Desk Lamp` has stock `8` and price `39.99` → fails both conditions.\n- `Acrylic Paint Set` has stock `10` and price `24.50` → passes stock, fails price.\n\nOnly rows that pass **both** checks stay in the results."
-          },
-          "and_common_mistakes": {
-            "title": "Common mistakes with AND",
-            "bodyMarkdown": "A common mistake is thinking `AND` means a row can match either rule. That is actually how `OR` works. `AND` is stricter.\n\nCompare these ideas:\n\n```sql\nSELECT name\nFROM products\nWHERE category = 'Home' AND stock > 5;\n```\n\nThis returns only products that are in `Home` **and** have stock greater than 5.\n\nCheck the rows:\n\n- `Desk Lamp` → `Home`, stock `8` → included\n- `Office Chair` → `Home`, stock `3` → not included\n\nSo only `Desk Lamp` appears.\n\nAnother mistake is using a column name that is not in the schema. In this topic, use the real columns from `products`: `id`, `name`, `category`, `price`, `stock`, and `created_at`."
+          "or_alternatives": {
+            "title": "OR Allows Alternative Conditions",
+            "bodyMarkdown": "Use `OR` when either condition is acceptable.\n\n```sql\nSELECT\n    name,\n    category\nFROM products\nWHERE category = 'Home'\n   OR category = 'Art';\n```\n\nA product can belong to either category. It does not need to satisfy both comparisons.\n\nChoose `AND` for simultaneous requirements and `OR` for alternatives. Mixing them without parentheses can change the meaning, which the next lesson addresses."
           }
         }
       },
       "sql-v2-2": {
         "and_conditions": {
-          "and_intro": {
-            "title": "Using AND to narrow results",
-            "bodyMarkdown": "When you use `AND` in a `WHERE` clause, a row must satisfy **every condition** to appear in the results.\n\nA simple pattern looks like this:\n\n```sql\nSELECT name, category, price\nFROM products\nWHERE category = 'Art' AND price < 20;\n```\n\nThis query checks the `products` table and keeps only rows where:\n\n1. `category = 'Art'`\n2. `price < 20`\n\nBoth must be true at the same time.\n\nIn this dataset, `Sketchbook` matches because it is in the `Art` category and its price is `12.99`. `Acrylic Paint Set` does **not** match because even though it is `Art`, its price is `24.50`.\n\nSo the result is just the `Sketchbook` row."
+          "and_all_rules": {
+            "title": "AND Requires Every Condition",
+            "bodyMarkdown": "Use `AND` when every condition must be true for a row to remain.\n\n```sql\nSELECT\n    name,\n    price,\n    stock\nFROM products\nWHERE price < 25\n  AND stock > 0;\n```\n\nA row passes only when its price is below 25 **and** its stock is above zero. If either test is false, the row is excluded.\n\nBreak a multi-rule request into separate yes-or-no questions, then connect them with `AND`."
           },
-          "and_step_by_step": {
-            "title": "Read AND conditions one rule at a time",
-            "bodyMarkdown": "A good beginner strategy is to read an `AND` filter as a checklist.\n\nExample:\n\n```sql\nSELECT name, stock, price\nFROM products\nWHERE stock >= 10 AND price <= 20;\n```\n\nLine by line:\n\n- `SELECT name, stock, price` shows the columns you want to see.\n- `FROM products` says which table to read.\n- `WHERE stock >= 10 AND price <= 20` keeps only products with enough stock **and** a price at or below 20.\n\nLet's test a few rows:\n\n- `Notebook` has stock `50` and price `6.75` → passes both conditions.\n- `Fountain Pen` has stock `15` and price `18.00` → passes both conditions.\n- `Desk Lamp` has stock `8` and price `39.99` → fails both conditions.\n- `Acrylic Paint Set` has stock `10` and price `24.50` → passes stock, fails price.\n\nOnly rows that pass **both** checks stay in the results."
-          },
-          "and_common_mistakes": {
-            "title": "Common mistakes with AND",
-            "bodyMarkdown": "A common mistake is thinking `AND` means a row can match either rule. That is actually how `OR` works. `AND` is stricter.\n\nCompare these ideas:\n\n```sql\nSELECT name\nFROM products\nWHERE category = 'Home' AND stock > 5;\n```\n\nThis returns only products that are in `Home` **and** have stock greater than 5.\n\nCheck the rows:\n\n- `Desk Lamp` → `Home`, stock `8` → included\n- `Office Chair` → `Home`, stock `3` → not included\n\nSo only `Desk Lamp` appears.\n\nAnother mistake is using a column name that is not in the schema. In this topic, use the real columns from `products`: `id`, `name`, `category`, `price`, `stock`, and `created_at`."
+          "or_alternatives": {
+            "title": "OR Allows Alternative Conditions",
+            "bodyMarkdown": "Use `OR` when either condition is acceptable.\n\n```sql\nSELECT\n    name,\n    category\nFROM products\nWHERE category = 'Home'\n   OR category = 'Art';\n```\n\nA product can belong to either category. It does not need to satisfy both comparisons.\n\nChoose `AND` for simultaneous requirements and `OR` for alternatives. Mixing them without parentheses can change the meaning, which the next lesson addresses."
           }
         }
       }

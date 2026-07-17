@@ -1,0 +1,128 @@
+{
+  "title": "Module 1: Discount Audit Report",
+  "summary": "Calculate gross sales, discount amount, and net sales while clearly labeling rows that need review.",
+  "minutes": 55,
+  "sketchBlocks": [
+    {
+      "id": "sketch-1",
+      "title": "Understanding NULL in Calculations",
+      "bodyMarkdown": "In SQL, NULL represents a missing or undefined value. When performing arithmetic operations, any calculation involving NULL results in NULL. For example, if you try to calculate the total price with a NULL discount, the result will be NULL. To handle this, we use the COALESCE function to provide a default value when NULL is encountered.\n\n```sql\nSELECT order_id, unit_price * quantity AS gross_sales,\n       COALESCE(discount_pct, 0) AS discount_pct\nFROM sales_reporting;\n```\n\nIn this example, COALESCE replaces NULL discount percentages with 0, ensuring calculations proceed without interruption."
+    },
+    {
+      "id": "sketch-2",
+      "title": "Calculating Discount Amount and Net Sales",
+      "bodyMarkdown": "To calculate the discount amount and net sales, we need to consider the discount percentage. The discount amount is calculated by multiplying the gross sales by the discount percentage. The net sales are then calculated by subtracting the discount amount from the gross sales.\n\n```sql\nSELECT order_id, unit_price * quantity AS gross_sales,\n       COALESCE(discount_pct, 0) / 100 * (unit_price * quantity) AS discount_amount,\n       (unit_price * quantity) - COALESCE(discount_pct, 0) / 100 * (unit_price * quantity) AS net_sales\nFROM sales_reporting;\n```\n\nThis query calculates the gross sales, discount amount, and net sales for each order, handling NULL discount percentages with COALESCE."
+    },
+    {
+      "id": "sketch-3",
+      "title": "Labeling Rows with CASE",
+      "bodyMarkdown": "The CASE statement in SQL allows us to create conditional logic within our queries. This is useful for labeling rows based on certain conditions. For example, we can label orders that have a NULL discount percentage as 'Review Needed'.\n\n```sql\nSELECT order_id, \n       CASE \n           WHEN discount_pct IS NULL THEN 'Review Needed'\n           ELSE 'Reviewed'\n       END AS review_status\nFROM sales_reporting;\n```\n\nThis query assigns a 'Review Needed' label to orders with a NULL discount percentage, helping to identify rows that require attention."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "try-module-1-sketch0",
+      "kind": "code_input",
+      "title": "Handle NULL in Calculations",
+      "prompt": "Write a query to calculate gross sales and replace NULL discount percentages with 0 using COALESCE.",
+      "hint": "Use COALESCE to handle NULL values in discount_pct.",
+      "help": {
+        "concept": "COALESCE provides a default value for NULLs.",
+        "hint_1": "Use COALESCE(discount_pct, 0) to replace NULL with 0.",
+        "hint_2": "Calculate gross sales as unit_price * quantity."
+      },
+      "starterCode": "SELECT order_id, unit_price * quantity AS gross_sales,\n       COALESCE(discount_pct, 0) AS discount_pct\nFROM sales_reporting;",
+      "solutionCode": "SELECT order_id, unit_price * quantity AS gross_sales,\n       COALESCE(discount_pct, 0) AS discount_pct\nFROM sales_reporting;",
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "try-module-1-sketch1",
+      "kind": "code_input",
+      "title": "Calculate Discount Amount and Net Sales",
+      "prompt": "Write a query to calculate the discount amount and net sales for each order, handling NULL discount percentages.",
+      "hint": "Use COALESCE to handle NULL values in discount_pct.",
+      "help": {
+        "concept": "Calculate discount amount and net sales using COALESCE.",
+        "hint_1": "Calculate discount amount as COALESCE(discount_pct, 0) / 100 * gross_sales.",
+        "hint_2": "Net sales is gross_sales minus discount_amount."
+      },
+      "starterCode": "SELECT order_id, unit_price * quantity AS gross_sales,\n       COALESCE(discount_pct, 0) / 100 * (unit_price * quantity) AS discount_amount,\n       (unit_price * quantity) - COALESCE(discount_pct, 0) / 100 * (unit_price * quantity) AS net_sales\nFROM sales_reporting;",
+      "solutionCode": "SELECT order_id, unit_price * quantity AS gross_sales,\n       COALESCE(discount_pct, 0) / 100 * (unit_price * quantity) AS discount_amount,\n       (unit_price * quantity) - COALESCE(discount_pct, 0) / 100 * (unit_price * quantity) AS net_sales\nFROM sales_reporting;",
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "try-module-1-sketch2",
+      "kind": "code_input",
+      "title": "Label Rows with CASE",
+      "prompt": "Write a query to label orders with a NULL discount percentage as 'Review Needed'.",
+      "hint": "Use CASE to create conditional labels.",
+      "help": {
+        "concept": "CASE allows conditional logic in SQL queries.",
+        "hint_1": "Use CASE WHEN discount_pct IS NULL THEN 'Review Needed'.",
+        "hint_2": "Assign 'Reviewed' for non-NULL discount_pct."
+      },
+      "starterCode": "SELECT order_id, \n       CASE \n           WHEN discount_pct IS NULL THEN 'Review Needed'\n           ELSE 'Reviewed'\n       END AS review_status\nFROM sales_reporting;",
+      "solutionCode": "SELECT order_id, \n       CASE \n           WHEN discount_pct IS NULL THEN 'Review Needed'\n           ELSE 'Reviewed'\n       END AS review_status\nFROM sales_reporting;",
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "project-step-1",
+      "kind": "code_input",
+      "title": "Calculate Gross Sales",
+      "prompt": "Write a query to calculate the gross sales for each order in the sales_reporting table.",
+      "hint": "Multiply unit_price by quantity to get gross sales.",
+      "help": {
+        "concept": "Gross sales is the total sales amount before discounts.",
+        "hint_1": "Use unit_price * quantity to calculate gross sales.",
+        "hint_2": "Select order_id and gross_sales in the query."
+      },
+      "starterCode": "SELECT order_id, unit_price * quantity AS gross_sales\nFROM sales_reporting;",
+      "solutionCode": "SELECT order_id, unit_price * quantity AS gross_sales\nFROM sales_reporting;",
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "project-step-2",
+      "kind": "code_input",
+      "title": "Calculate Discount Amount",
+      "prompt": "Write a query to calculate the discount amount for each order, using COALESCE to handle NULL discount percentages.",
+      "hint": "Use COALESCE to replace NULL with 0 in discount_pct.",
+      "help": {
+        "concept": "Discount amount is calculated using the discount percentage.",
+        "hint_1": "Calculate discount amount as COALESCE(discount_pct, 0) / 100 * gross_sales.",
+        "hint_2": "Include order_id and discount_amount in the query."
+      },
+      "starterCode": "SELECT order_id, \n       COALESCE(discount_pct, 0) / 100 * (unit_price * quantity) AS discount_amount\nFROM sales_reporting;",
+      "solutionCode": "SELECT order_id, \n       COALESCE(discount_pct, 0) / 100 * (unit_price * quantity) AS discount_amount\nFROM sales_reporting;",
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "project-step-3",
+      "kind": "code_input",
+      "title": "Calculate Net Sales",
+      "prompt": "Write a query to calculate the net sales for each order, subtracting the discount amount from gross sales.",
+      "hint": "Subtract discount_amount from gross_sales to get net sales.",
+      "help": {
+        "concept": "Net sales is the total sales amount after discounts.",
+        "hint_1": "Calculate net sales as gross_sales - discount_amount.",
+        "hint_2": "Include order_id and net_sales in the query."
+      },
+      "starterCode": "SELECT order_id, \n       (unit_price * quantity) - COALESCE(discount_pct, 0) / 100 * (unit_price * quantity) AS net_sales\nFROM sales_reporting;",
+      "solutionCode": "SELECT order_id, \n       (unit_price * quantity) - COALESCE(discount_pct, 0) / 100 * (unit_price * quantity) AS net_sales\nFROM sales_reporting;",
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query"
+    }
+  ],
+  "projectDraft": {
+    "title": "Discount Audit Report Project",
+    "stepIds": [
+      "project-step-1",
+      "project-step-2",
+      "project-step-3"
+    ]
+  }
+}

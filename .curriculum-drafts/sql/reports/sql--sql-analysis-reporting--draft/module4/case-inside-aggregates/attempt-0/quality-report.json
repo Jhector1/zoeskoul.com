@@ -1,0 +1,44 @@
+{
+  "ok": true,
+  "profileId": "sql",
+  "subjectSlug": "sql--sql-analysis-reporting--draft",
+  "courseSlug": "sql-analysis-reporting",
+  "topicId": "case-inside-aggregates",
+  "summary": {
+    "modules": 1,
+    "topicsTotal": 1,
+    "exercises": 8,
+    "exerciseKinds": {
+      "code_input": 2,
+      "single_choice": 2,
+      "multi_choice": 1,
+      "drag_reorder": 1,
+      "fill_blank_choice": 2
+    },
+    "codeInputs": 2,
+    "projects": 2,
+    "capstones": 0,
+    "thinFixedTestCount": 0,
+    "blockers": 0,
+    "errors": 0,
+    "warnings": 1,
+    "infos": 0
+  },
+  "severityCounts": {
+    "blocker": 0,
+    "error": 0,
+    "warning": 1,
+    "info": 0
+  },
+  "issues": [
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-analysis-reporting-module-4-having-and-conditional-reporting/sql-analysis-reporting-section-4-conditional-kpis/case-inside-aggregates",
+      "profileId": "sql",
+      "moduleId": "sql-analysis-reporting-module-4-having-and-conditional-reporting",
+      "topicId": "case-inside-aggregates",
+      "message": "Topic \"case-inside-aggregates\" has no learning goals on its seed metadata."
+    }
+  ]
+}

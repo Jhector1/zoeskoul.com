@@ -1,0 +1,18 @@
+{
+  "profileId": "sql",
+  "subjectSlug": "sql--sql-data-management--draft",
+  "courseSlug": "sql-data-management",
+  "moduleSlug": "sql-data-management-module-0-safe-inserts",
+  "sectionSlug": "sql-data-management-section-0-mutation-workflow",
+  "topicId": "insert-with-explicit-column-lists",
+  "provider": "openai",
+  "model": "gpt-4o",
+  "temperature": 0,
+  "modelSeed": 0,
+  "generatorVersion": "2026-05-23-topic-authoring-draft-generator-v1",
+  "schemaName": "TopicAuthoringDraft",
+  "schemaVersion": "2026-07-16-topic-authoring-draft-v2",
+  "strictSchema": true,
+  "retryAttempt": 0,
+  "maxRetries": 2
+}

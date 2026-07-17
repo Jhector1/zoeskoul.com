@@ -1,0 +1,167 @@
+{
+  "topics": {
+    "sql--sql-analysis-reporting--draft": {
+      "sql-analysis-reporting-module-4-having-and-conditional-reporting": {
+        "case-inside-aggregates": {
+          "label": "CASE Inside Aggregate Functions",
+          "summary": "Use conditional aggregation to count or total only rows matching a condition.",
+          "cards": {
+            "sketch0": {
+              "title": "Understanding CASE in Aggregates"
+            },
+            "sketch1": {
+              "title": "Using CASE for Conditional Totals"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_case_inside_aggregates_sketch0": {
+              "title": "Count Completed Orders",
+              "prompt": "Write a query to count the number of completed orders in the `sales_reporting` table using a `CASE` statement inside the `COUNT` function.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT COUNT(CASE WHEN order_status = 'Completed' THEN 1 END) AS completed_orders\nFROM sales_reporting;"
+            },
+            "try_case_inside_aggregates_sketch1": {
+              "title": "Calculate Total Sales for Completed Orders",
+              "prompt": "Write a query to calculate the total sales for completed orders in the `sales_reporting` table using a `CASE` statement inside the `SUM` function.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT SUM(CASE WHEN order_status = 'Completed' THEN quantity * unit_price ELSE 0 END) AS total_completed_sales\nFROM sales_reporting;"
+            }
+          },
+          "practice": {
+            "single-choice-1": {
+              "title": "Purpose of CASE in Aggregates",
+              "prompt": "What is the purpose of using a `CASE` statement inside an aggregate function?",
+              "hint": "Think about how `CASE` affects the rows being aggregated.",
+              "help": {
+                "concept": "`CASE` allows conditional logic within aggregates.",
+                "hint_1": "`CASE` can filter which rows contribute to the aggregate.",
+                "hint_2": "`CASE` can return different values based on conditions."
+              },
+              "options": {
+                "a": "To filter rows before aggregation",
+                "b": "To perform conditional logic within aggregates",
+                "c": "To join tables",
+                "d": "To sort results"
+              }
+            },
+            "single-choice-2": {
+              "title": "CASE Statement Result",
+              "prompt": "What does a `CASE` statement return when used inside an aggregate function?",
+              "hint": "Consider what values `CASE` can return based on conditions.",
+              "help": {
+                "concept": "`CASE` returns values based on conditions.",
+                "hint_1": "`CASE` can return a specific value for each condition.",
+                "hint_2": "`CASE` often returns 1 or 0 for counting purposes."
+              },
+              "options": {
+                "a": "A boolean value",
+                "b": "A string",
+                "c": "A numeric value based on conditions",
+                "d": "A date"
+              }
+            },
+            "multi-choice-1": {
+              "title": "Benefits of Conditional Aggregation",
+              "prompt": "What are the benefits of using conditional aggregation with `CASE` inside aggregate functions? Select all that apply.",
+              "hint": "Think about how conditional aggregation can refine results.",
+              "help": {
+                "concept": "Conditional aggregation allows more precise calculations.",
+                "hint_1": "It can filter which rows contribute to the aggregate.",
+                "hint_2": "It can calculate different totals based on conditions."
+              },
+              "options": {
+                "a": "It allows filtering of rows before aggregation",
+                "b": "It enables different calculations based on conditions",
+                "c": "It simplifies the query structure",
+                "d": "It can calculate totals for specific conditions"
+              }
+            },
+            "drag-reorder-1": {
+              "title": "Order of SQL Clauses",
+              "prompt": "Arrange the SQL clauses in the correct order for a query using `CASE` inside an aggregate function.",
+              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "help": {
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
+              },
+              "tokens": {
+                "t1": "SELECT",
+                "t2": "FROM",
+                "t3": "WHERE",
+                "t4": "GROUP BY",
+                "t5": "HAVING"
+              }
+            },
+            "fill-blank-choice-1": {
+              "title": "CASE Syntax",
+              "prompt": "Complete the syntax for a `CASE` statement inside an aggregate function: `SUM(CASE WHEN condition THEN [blank1] ELSE 0 END)`",
+              "hint": "Think about what value should be returned when the condition is true.",
+              "help": {
+                "concept": "`CASE` returns a value based on a condition.",
+                "hint_1": "The value should contribute to the sum when the condition is true.",
+                "hint_2": "It often involves a calculation or constant value."
+              },
+              "template": "SUM(CASE WHEN condition THEN [blank1] ELSE 0 END)",
+              "choices": [
+                "1",
+                "quantity * unit_price",
+                "NULL",
+                "order_id"
+              ]
+            },
+            "fill-blank-choice-2": {
+              "title": "Conditional Count",
+              "prompt": "Complete the syntax for counting completed orders: `COUNT(CASE WHEN order_status = 'Completed' THEN [blank1] END)`",
+              "hint": "Consider what value should be counted for completed orders.",
+              "help": {
+                "concept": "`CASE` returns a value to be counted based on a condition.",
+                "hint_1": "The value should be the missing term for counting purposes.",
+                "hint_2": "`CASE` often returns the missing term for true conditions."
+              },
+              "template": "COUNT(CASE WHEN order_status = 'Completed' THEN [blank1] END)",
+              "choices": [
+                "1",
+                "order_id",
+                "quantity",
+                "NULL"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql--sql-analysis-reporting--draft": {
+      "sql-analysis-reporting-module-4-having-and-conditional-reporting": {
+        "case-inside-aggregates": {
+          "sketch0": {
+            "title": "Understanding CASE in Aggregates",
+            "bodyMarkdown": "The `CASE` statement in SQL allows you to perform conditional logic within your queries. When used inside aggregate functions like `SUM` or `COUNT`, it enables you to perform conditional aggregation. This means you can count or sum only those rows that meet certain conditions.\n\nFor example, consider the `sales_reporting` table. If you want to count how many orders were completed, you can use:\n\n```sql\nSELECT COUNT(CASE WHEN order_status = 'Completed' THEN 1 END) AS completed_orders\nFROM sales_reporting;\n```\n\nThis query counts only the rows where `order_status` is 'Completed'. The `CASE` statement returns 1 for each completed order, and `COUNT` aggregates these values."
+          },
+          "sketch1": {
+            "title": "Using CASE for Conditional Totals",
+            "bodyMarkdown": "You can also use `CASE` inside the `SUM` function to calculate totals conditionally. For instance, if you want to calculate the total sales for completed orders only, you can write:\n\n```sql\nSELECT SUM(CASE WHEN order_status = 'Completed' THEN quantity * unit_price ELSE 0 END) AS total_completed_sales\nFROM sales_reporting;\n```\n\nIn this query, the `CASE` statement multiplies `quantity` by `unit_price` only for rows where `order_status` is 'Completed'. The `SUM` function then adds up these values, giving you the total sales for completed orders."
+          }
+        }
+      }
+    }
+  }
+}

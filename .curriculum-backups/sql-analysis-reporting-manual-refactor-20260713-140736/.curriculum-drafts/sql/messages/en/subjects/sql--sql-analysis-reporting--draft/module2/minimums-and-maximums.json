@@ -1,0 +1,166 @@
+{
+  "topics": {
+    "sql--sql-analysis-reporting--draft": {
+      "sql-analysis-reporting-module-2-aggregate-functions": {
+        "minimums-and-maximums": {
+          "label": "Minimums and Maximums",
+          "summary": "Learn how to use the MIN and MAX functions to find the smallest and largest values in a dataset, helping you understand the range of your data.",
+          "cards": {
+            "sketch0": {
+              "title": "Understanding MIN and MAX"
+            },
+            "sketch1": {
+              "title": "Using MIN and MAX with Conditions"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_minimums_and_maximums_sketch0": {
+              "title": "Find Minimum and Maximum Prices",
+              "prompt": "Write a query to find the minimum and maximum `unit_price` from the `sales_reporting` table.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT MIN(unit_price) AS min_price, MAX(unit_price) AS max_price\nFROM sales_reporting;"
+            },
+            "try_minimums_and_maximums_sketch1": {
+              "title": "Minimum and Maximum Ratings for Completed Orders",
+              "prompt": "Write a query to find the minimum and maximum `customer_rating` for orders with the status 'Completed'.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT MIN(customer_rating) AS min_rating, MAX(customer_rating) AS max_rating\nFROM sales_reporting\nWHERE order_status = 'Completed';"
+            }
+          },
+          "practice": {
+            "quiz1": {
+              "title": "Purpose of MIN and MAX",
+              "prompt": "What is the primary purpose of the MIN and MAX functions in SQL?",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "options": {
+                "a": "To find the average value in a column",
+                "b": "To find the smallest and largest values in a column",
+                "c": "To count the number of rows in a table",
+                "d": "To sum all values in a column"
+              }
+            },
+            "quiz2": {
+              "title": "Using MIN and MAX with Conditions",
+              "prompt": "Which of the following queries correctly use MIN and MAX with a WHERE clause? Select all that apply.",
+              "hint": "Check if the WHERE clause is correctly filtering the data before applying MIN and MAX.",
+              "help": {
+                "concept": "MIN and MAX can be used with WHERE to filter data before aggregation.",
+                "hint_1": "Ensure the WHERE clause is applied before MIN and MAX.",
+                "hint_2": "Look for queries that filter data correctly before aggregation."
+              },
+              "options": {
+                "a": "SELECT MIN(price) FROM products WHERE category = 'Electronics';",
+                "b": "SELECT MAX(price) FROM products;",
+                "c": "SELECT MIN(price), MAX(price) FROM products WHERE category = 'Books';",
+                "d": "SELECT MIN(price) WHERE category = 'Clothing';"
+              }
+            },
+            "quiz3": {
+              "title": "Understanding Aggregate Functions",
+              "prompt": "Which of the following statements about aggregate functions are true? Select all that apply.",
+              "hint": "Consider what aggregate functions do with data in a column.",
+              "help": {
+                "concept": "Aggregate functions perform calculations on a set of values and return a single value.",
+                "hint_1": "Aggregate functions include SUM, AVG, MIN, MAX, etc.",
+                "hint_2": "They summarize data from multiple rows into a single result."
+              },
+              "options": {
+                "a": "Aggregate functions can return multiple rows.",
+                "b": "MIN and MAX are aggregate functions.",
+                "c": "Aggregate functions can be used with GROUP BY.",
+                "d": "Aggregate functions can only be used on numeric columns."
+              }
+            },
+            "quiz4": {
+              "title": "Order of SQL Clauses",
+              "prompt": "Arrange the SQL clauses in the correct order for a query that uses MIN and MAX with a WHERE clause.",
+              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "help": {
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
+              },
+              "tokens": {
+                "t1": "SELECT",
+                "t2": "FROM",
+                "t3": "WHERE",
+                "t4": "MIN/MAX"
+              }
+            },
+            "quiz5": {
+              "title": "SQL Function Syntax",
+              "prompt": "Complete the SQL statement to find the maximum unit price: `SELECT [blank1](unit_price) FROM sales_reporting;`",
+              "hint": "Think about the function used to find the largest value.",
+              "help": {
+                "concept": "The the missing term function is used to find the largest value in a column.",
+                "hint_1": "The function name starts with 'M'.",
+                "hint_2": "It's the opposite of MIN."
+              },
+              "template": "SELECT [blank1](unit_price) FROM sales_reporting;",
+              "choices": [
+                "MAX",
+                "MIN",
+                "SUM",
+                "AVG"
+              ]
+            },
+            "quiz6": {
+              "title": "Using MIN Function",
+              "prompt": "Fill in the blank to find the minimum customer rating: `SELECT [blank1](customer_rating) FROM sales_reporting;`",
+              "hint": "Consider the function that finds the smallest value.",
+              "help": {
+                "concept": "The the missing term function is used to find the smallest value in a column.",
+                "hint_1": "The function name starts with 'M'.",
+                "hint_2": "It's the opposite of MAX."
+              },
+              "template": "SELECT [blank1](customer_rating) FROM sales_reporting;",
+              "choices": [
+                "MIN",
+                "MAX",
+                "SUM",
+                "AVG"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql--sql-analysis-reporting--draft": {
+      "sql-analysis-reporting-module-2-aggregate-functions": {
+        "minimums-and-maximums": {
+          "sketch1": {
+            "title": "Understanding MIN and MAX",
+            "bodyMarkdown": "The `MIN` and `MAX` functions in SQL are used to find the smallest and largest values in a column, respectively. These functions are particularly useful when you want to understand the range of your data. For example, if you have a table of sales data, you might want to know the lowest and highest sales amounts.\n\n```sql\nSELECT MIN(unit_price) AS min_price, MAX(unit_price) AS max_price\nFROM sales_reporting;\n```\n\nIn this example, the query returns the minimum and maximum unit prices from the `sales_reporting` table. This helps in understanding the price range of products sold."
+          },
+          "sketch2": {
+            "title": "Using MIN and MAX with Conditions",
+            "bodyMarkdown": "You can also use `MIN` and `MAX` with conditions to find the smallest and largest values that meet specific criteria. For instance, you might want to find the minimum and maximum customer ratings for completed orders.\n\n```sql\nSELECT MIN(customer_rating) AS min_rating, MAX(customer_rating) AS max_rating\nFROM sales_reporting\nWHERE order_status = 'Completed';\n```\n\nThis query filters the `sales_reporting` table to only include completed orders and then finds the minimum and maximum customer ratings. This is useful for assessing customer satisfaction for completed transactions."
+          }
+        }
+      }
+    }
+  }
+}

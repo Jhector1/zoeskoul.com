@@ -17,20 +17,6 @@
             },
             "quiz": {
               "title": "Quiz"
-            },
-            "project": {
-              "title": "Customer text search practice"
-            }
-          },
-          "projectSteps": {
-            "ci_find_example_emails": {
-              "title": "Find example.com emails"
-            },
-            "ci_find_test_names": {
-              "title": "Find names containing Test"
-            },
-            "ci_real_example_customers": {
-              "title": "Filter real customers with example.com emails"
             }
           },
           "quiz": {
@@ -53,11 +39,11 @@
             "sc_like_single_char": {
               "title": "Meaning of underscore",
               "prompt": "In a `LIKE` pattern, what does `_` mean?",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Match each choice to the command, clause, or constraint described in the question.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "concept": "Use the SQL behavior described in the lesson to separate the valid choice from statements about a different command, clause, or constraint.",
+                "hint_1": "Identify the job the SQL must perform before comparing the choices.",
+                "hint_2": "Eliminate choices that belong to a different SQL concept."
               },
               "options": {
                 "a": "Any number of characters",
@@ -196,19 +182,19 @@
               "starterCode": "-- Return full_name, email, and is_test for rows where the email ends with @example.com and is_test is 0. This should keep real customers only.\nSELECT \n  full_name,\n  email,\n  is_test\nFROM customers\nWHERE ;"
             },
             "try-searching_partial_text-sketch0": {
-              "title": "Find example.com emails",
-              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that returns the `id`, `full_name`, and `email` columns for customers whose email ends with `@example.com`. Use the `customers` table. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Find Active Example-Domain Customers",
+              "prompt": "Return `id`, `full_name`, and `email` for active customers whose email ends with `@example.com`.",
+              "hint": "Add status = 'active' with AND.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
+                "concept": "Return `id`, `full_name`, and `email` for active customers whose email ends with `@example.com`.",
+                "hint_1": "Add status = 'active' with AND.",
+                "hint_2": "Run the query and compare the returned columns and rows with the expected result."
               },
-              "starterCode": "-- Return the id, full_name, and email columns for customers whose email ends with `@example.\nSELECT \n  id,\n  full_name,\n  email\nFROM customers\nWHERE ;"
+              "starterCode": "SELECT id, full_name, email\nFROM customers\nWHERE email LIKE '%@example.com';"
             },
             "try-searching_partial_text-sketch1": {
               "title": "Find names containing Test",
-              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that returns `id` and `full_name` for customers whose `full_name` contains the text `Test`. Use `LIKE` with the correct wildcard pattern. Write the query in the SQL editor, click Run query, and check the results table.",
+              "prompt": "Create a customer-cleanup query that returns `id` and `full_name` for customers whose `full_name` contains the text `Test`. Use `LIKE` with the correct wildcard pattern. Run it and compare the result with the expected table.",
               "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
               "help": {
                 "concept": "This SQL exercise checks whether your query returns the requested result.",
@@ -219,7 +205,7 @@
             },
             "try-searching_partial_text-sketch2": {
               "title": "Filter real customers with example.com emails",
-              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that returns `full_name`, `email`, and `is_test` for rows where the email ends with `@example.com` and `is_test` is `0`. This should keep real customers only. Write the query in the SQL editor, click Run query, and check the results table.",
+              "prompt": "Create a customer-cleanup query that returns `full_name`, `email`, and `is_test` for rows where the email ends with `@example.com` and `is_test` is `0`. This should keep real customers only. Run it and compare the result with the expected table.",
               "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
               "help": {
                 "concept": "This SQL exercise checks whether your query returns the requested result.",
@@ -232,16 +218,16 @@
           "tryIt": {
             "allowReveal": true,
             "try_searching_partial_text_sketch0": {
-              "title": "Find example.com emails",
-              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that returns the `id`, `full_name`, and `email` columns for customers whose email ends with `@example.com`. Use the `customers` table. Write the query in the SQL editor, click Run query, and check the results table."
+              "title": "Find Active Example-Domain Customers",
+              "prompt": "Return `id`, `full_name`, and `email` for active customers whose email ends with `@example.com`."
             },
             "try_searching_partial_text_sketch1": {
               "title": "Find names containing Test",
-              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that returns `id` and `full_name` for customers whose `full_name` contains the text `Test`. Use `LIKE` with the correct wildcard pattern. Write the query in the SQL editor, click Run query, and check the results table."
+              "prompt": "Create a customer-cleanup query that returns `id` and `full_name` for customers whose `full_name` contains the text `Test`. Use `LIKE` with the correct wildcard pattern. Run it and compare the result with the expected table."
             },
             "try_searching_partial_text_sketch2": {
               "title": "Filter real customers with example.com emails",
-              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that returns `full_name`, `email`, and `is_test` for rows where the email ends with `@example.com` and `is_test` is `0`. This should keep real customers only. Write the query in the SQL editor, click Run query, and check the results table."
+              "prompt": "Create a customer-cleanup query that returns `full_name`, `email`, and `is_test` for rows where the email ends with `@example.com` and `is_test` is `0`. This should keep real customers only. Run it and compare the result with the expected table."
             }
           }
         }

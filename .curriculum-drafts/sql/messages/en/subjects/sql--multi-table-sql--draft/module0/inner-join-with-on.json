@@ -1,0 +1,165 @@
+{
+  "topics": {
+    "sql--multi-table-sql--draft": {
+      "multi-table-sql-module-0-join-foundations": {
+        "inner-join-with-on": {
+          "label": "INNER JOIN with ON",
+          "summary": "Connect matching rows with one explicit relationship condition.",
+          "cards": {
+            "sketch0": {
+              "title": "See What an INNER JOIN Keeps"
+            },
+            "sketch1": {
+              "title": "Write the Relationship in ON"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_inner_join_with_on_sketch0": {
+              "title": "Try INNER JOIN with Enrollment Records",
+              "prompt": "Write a query that lists each enrollment id beside the grade level of the student who owns it. Return `enrollments.id, students.grade_level` from `enrollments` in that column order. Use a INNER JOIN to connect `students` on `enrollments.student_id = students.id`.",
+              "hint": "Start from `enrollments.student_id` and follow it to the matching student row.",
+              "help": {
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "Return `enrollments.id, students.grade_level` from `enrollments` in that column order. Use a INNER JOIN to connect `students` on `enrollments.student_id = students.id`."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT enrollments.id, students.grade_level\nFROM enrollments\nINNER JOIN students ON enrollments.student_id = students.id;"
+            },
+            "try_inner_join_with_on_sketch1": {
+              "title": "Try INNER JOIN from Departments to Courses",
+              "prompt": "Write a query that lists each department name beside the id of a course in that department. Return `departments.name, courses.id` from `departments` in that column order. Use a INNER JOIN to connect `courses` on `departments.id = courses.department_id`.",
+              "hint": "Follow the relationship from `departments.id` to the foreign key stored in `courses`.",
+              "help": {
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "Return `departments.name, courses.id` from `departments` in that column order. Use a INNER JOIN to connect `courses` on `departments.id = courses.department_id`."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT departments.name, courses.id\nFROM departments\nINNER JOIN courses ON departments.id = courses.department_id;"
+            }
+          },
+          "practice": {
+            "sc-primary-foreign-keys": {
+              "title": "Understanding Primary and Foreign Keys",
+              "prompt": "Which of the following best describes the relationship between a primary key and a foreign key?",
+              "hint": "Think about how primary keys and foreign keys connect tables.",
+              "help": {
+                "concept": "Primary keys uniquely identify rows in a table, while foreign keys link to primary keys in another table.",
+                "hint_1": "A primary key is unique to its table.",
+                "hint_2": "A foreign key references a primary key in another table."
+              },
+              "options": {
+                "a": "A primary key is used to link two tables together.",
+                "b": "A foreign key is used to uniquely identify each row in a table.",
+                "c": "A primary key is a unique identifier for a table, and a foreign key links to it from another table.",
+                "d": "A foreign key is a unique identifier for a table, and a primary key links to it from another table."
+              }
+            },
+            "mc-inner-join-usage": {
+              "title": "Using INNER JOIN",
+              "prompt": "Which of the following statements about INNER JOIN are true? Select all that apply.",
+              "hint": "Follow the declared key pair in the `ON` clause.",
+              "help": {
+                "concept": "INNER JOIN keeps rows only when the `ON` comparison finds a match on both sides.",
+                "hint_1": "Choose the foreign key that points to the related table's primary key.",
+                "hint_2": "Check that the requested columns come from the two joined tables and that unmatched rows may disappear."
+              },
+              "options": {
+                "a": "INNER JOIN returns all rows from both tables.",
+                "b": "INNER JOIN returns only rows with matching values in both tables.",
+                "c": "INNER JOIN can be used without an ON condition.",
+                "d": "INNER JOIN requires a condition to match rows."
+              }
+            },
+            "dr-inner-join-order": {
+              "title": "Order of INNER JOIN Components",
+              "prompt": "Arrange the components of an INNER JOIN query in the correct order.",
+              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "help": {
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
+              },
+              "tokens": {
+                "t1": "SELECT clause",
+                "t2": "FROM clause",
+                "t3": "INNER JOIN clause",
+                "t4": "ON condition"
+              }
+            },
+            "fbc-qualified-columns": {
+              "title": "Qualified Columns in Joins",
+              "prompt": "In a multi-table query, it's important to use qualified column names to avoid ambiguity. Complete the following statement: `SELECT [blank1] FROM students INNER JOIN enrollments ON students.id = enrollments.student_id;`",
+              "hint": "Use the table name to qualify the column.",
+              "help": {
+                "concept": "Qualified column names specify the table each column belongs to.",
+                "hint_1": "Use the table name followed by a dot and the column name.",
+                "hint_2": "For example, `the blank` specifies the `name` column from the `students` table."
+              },
+              "template": "SELECT [blank1] FROM students INNER JOIN enrollments ON students.id = enrollments.student_id;",
+              "choices": [
+                "students.name",
+                "name",
+                "enrollments.course_id",
+                "course_id"
+              ]
+            },
+            "sc-table-aliases": {
+              "title": "Using Table Aliases",
+              "prompt": "Why are table aliases useful in SQL queries?",
+              "hint": "Think about how aliases can simplify queries.",
+              "help": {
+                "concept": "Table aliases provide a shorthand for table names, making queries easier to read and write.",
+                "hint_1": "Aliases can reduce the length of table names in queries.",
+                "hint_2": "They help avoid repetitive long table names."
+              },
+              "options": {
+                "a": "They allow for shorter, more readable queries.",
+                "b": "They are required for all SQL queries.",
+                "c": "They replace the need for ON conditions.",
+                "d": "They automatically optimize query performance."
+              }
+            },
+            "mc-qualified-columns": {
+              "title": "Importance of Qualified Columns",
+              "prompt": "Why is it important to use qualified column names in multi-table queries? Select all that apply.",
+              "hint": "Consider how qualified names affect query clarity and correctness.",
+              "help": {
+                "concept": "Qualified column names prevent ambiguity and ensure correct data retrieval.",
+                "hint_1": "They specify which table a column belongs to.",
+                "hint_2": "They prevent errors when tables have columns with the same name."
+              },
+              "options": {
+                "a": "To prevent ambiguity when tables have columns with the same name.",
+                "b": "To ensure the query runs faster.",
+                "c": "To specify which table a column belongs to.",
+                "d": "To automatically join tables without an ON condition."
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql--multi-table-sql--draft": {
+      "multi-table-sql-module-0-join-foundations": {
+        "inner-join-with-on": {
+          "inner-join-sketch0": {
+            "title": "An INNER JOIN keeps only matched pairs",
+            "bodyMarkdown": "An **INNER JOIN** combines rows from two tables, but only when SQL can find a matching pair. Rows without a match are left out. That makes an inner join useful when the report should describe existing relationships rather than every possible row from either table.\n\nSuppose the report needs each enrolled student's name and the course id stored in the enrollment record:\n\n```sql\nSELECT students.name, enrollments.course_id\nFROM students\nINNER JOIN enrollments\n  ON students.id = enrollments.student_id;\n```\n\nRead the query in stages. First, `FROM students` establishes the starting table. Next, `INNER JOIN enrollments` asks SQL to bring in enrollment rows. The `ON` condition pairs a student row with an enrollment row when `students.id` equals `enrollments.student_id`. Finally, `SELECT` chooses the values that appear in the result.\n\nOne student can have several enrollments, so the same student name may appear more than once. That repetition is not an error: one result row represents **one matching student-enrollment pair**. A student with no enrollment does not appear because there is no pair for the inner join to keep."
+          },
+          "inner-join-sketch1": {
+            "title": "The ON clause tells SQL which rows belong together",
+            "bodyMarkdown": "The join type answers **which matches survive**; the `ON` clause answers **what counts as a match**. A reliable `ON` condition usually connects a foreign key in one table to the primary key it references in another.\n\nCourses record their department in `courses.department_id`, while departments identify themselves with `departments.id`:\n\n```sql\nSELECT courses.title, departments.name\nFROM courses\nINNER JOIN departments\n  ON courses.department_id = departments.id;\n```\n\nLine by line, the query begins with one row per course. It then searches `departments` for the row whose primary key matches the course's foreign key. The selected columns turn that matched pair into a readable result: a course title beside its department name.\n\nNotice what the condition does **not** say. It does not compare `courses.id` with `departments.id` simply because both columns are named `id`. Those values identify different kinds of records. The ERD's documented key pair is what gives the equality meaning.\n\nA useful reading habit is to say the condition aloud: “the department stored on this course equals the id of that department.” If the sentence sounds like the relationship shown in the schema, the join is probably following the right path."
+          }
+        }
+      }
+    }
+  }
+}

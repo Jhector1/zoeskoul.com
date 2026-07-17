@@ -134,7 +134,7 @@
               "prompt": "Complete the query so the highest prices appear first.",
               "hint": "Use the direction that puts larger numbers before smaller ones.",
               "help": {
-                "concept": "the missing term sorts values from highest to lowest, which is the correct direction when you want the largest prices first.",
+                "concept": "the blank sorts values from highest to lowest, which is the correct direction when you want the largest prices first.",
                 "hint_1": "ASC starts with smaller values, so that is not the right direction here.",
                 "hint_2": "You need the keyword that reverses the low-to-high order."
               },
@@ -151,7 +151,7 @@
               "prompt": "Complete the query so products are sorted by stock from highest to lowest.",
               "hint": "Choose the column that stores how many items are available.",
               "help": {
-                "concept": "The the missing term column holds inventory counts, so it is the correct column to sort when comparing how many units each product has.",
+                "concept": "The blank column holds inventory counts, so it is the correct column to sort when comparing how many units each product has.",
                 "hint_1": "Do not choose a text column like name or category if the goal is to rank inventory amounts.",
                 "hint_2": "Look for the integer column that represents quantity on hand."
               },
@@ -163,86 +163,31 @@
                 "created_at"
               ]
             },
-            "ci_sort_prices_low_to_high": {
-              "title": "Sort products by price ascending",
-              "prompt": "Write a query that shows the `name` and `price` columns from `products`, sorted by `price` from lowest to highest. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Show the name and price columns from products, sorted by price from lowest to highest.\nSELECT name, price\nFROM products\n;"
-            },
-            "ci_newest_products_first": {
-              "title": "Show newest products first",
-              "prompt": "Write a query that shows `name` and `created_at` from `products`, sorted so the newest products appear first. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Show name and created_at from products, sorted so the newest products appear first.\nSELECT name, created_at\nFROM products\n;"
-            },
-            "ci_top_three_expensive": {
-              "title": "Return the top 3 most expensive products",
-              "prompt": "Write a query that shows `name` and `price` from `products`, sorted from highest price to lowest price, and returns only the first 3 rows. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- TODO: sort from highest price to lowest\n-- TODO: return only 3 rows\nSELECT name, price\nFROM products\n;"
-            },
             "try-why_sorting_matters-sketch0": {
-              "title": "Sort products by price ascending",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that shows the `name` and `price` columns from `products`, sorted by `price` from lowest to highest. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Put the Highest Stock First",
+              "prompt": "Return `id`, `name`, and `stock`, sorted from highest stock to lowest. Return `id, name, stock` from `products` in that column order. Sort the final result by `stock DESC`.",
+              "hint": "Sort stock in descending order.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "Return `id, name, stock` from `products` in that column order. Sort the final result by `stock DESC`."
               },
-              "starterCode": "-- Show the name and price columns from products, sorted by price from lowest to highest.\nSELECT name, price\nFROM products\n;"
-            },
-            "try-why_sorting_matters-sketch1": {
-              "title": "Show newest products first",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that shows `name` and `created_at` from `products`, sorted so the newest products appear first. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Show name and created_at from products, sorted so the newest products appear first.\nSELECT name, created_at\nFROM products\n;"
-            },
-            "try-why_sorting_matters-sketch2": {
-              "title": "Return the top 3 most expensive products",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that shows `name` and `price` from `products`, sorted from highest price to lowest price, and returns only the first 3 rows. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- TODO: sort from highest price to lowest\n-- TODO: return only 3 rows\nSELECT name, price\nFROM products\n;"
+              "starterCode": "SELECT id, name, stock\nFROM products\nORDER BY ;"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_why_sorting_matters_sketch0": {
-              "title": "Sort products by price ascending",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that shows the `name` and `price` columns from `products`, sorted by `price` from lowest to highest. Write the query in the SQL editor, click Run query, and check the results table."
+              "title": "Put the Highest Stock First",
+              "prompt": "Return `id`, `name`, and `stock`, sorted from highest stock to lowest."
             },
             "try_why_sorting_matters_sketch1": {
               "title": "Show newest products first",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that shows `name` and `created_at` from `products`, sorted so the newest products appear first. Write the query in the SQL editor, click Run query, and check the results table."
+              "prompt": "Build a ranking query that shows `name` and `created_at` from `products`, sorted so the newest products appear first. Run it and compare the result with the expected table."
             },
             "try_why_sorting_matters_sketch2": {
               "title": "Return the top 3 most expensive products",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that shows `name` and `price` from `products`, sorted from highest price to lowest price, and returns only the first 3 rows. Write the query in the SQL editor, click Run query, and check the results table."
+              "prompt": "Build a ranking query that shows `name` and `price` from `products`, sorted from highest price to lowest price, and returns only the first 3 rows. Run it and compare the result with the expected table."
             }
           }
         }
@@ -263,20 +208,6 @@
             },
             "quiz": {
               "title": "Quiz"
-            },
-            "project": {
-              "title": "Build a ranked product report"
-            }
-          },
-          "projectSteps": {
-            "ci_sort_prices_low_to_high": {
-              "title": "Sort products by price ascending"
-            },
-            "ci_newest_products_first": {
-              "title": "Show newest products first"
-            },
-            "ci_top_three_expensive": {
-              "title": "Return the top 3 most expensive products"
             }
           },
           "quiz": {
@@ -380,7 +311,7 @@
               "prompt": "Complete the query so the highest prices appear first.",
               "hint": "Use the direction that puts larger numbers before smaller ones.",
               "help": {
-                "concept": "the missing term sorts values from highest to lowest, which is the correct direction when you want the largest prices first.",
+                "concept": "the blank sorts values from highest to lowest, which is the correct direction when you want the largest prices first.",
                 "hint_1": "ASC starts with smaller values, so that is not the right direction here.",
                 "hint_2": "You need the keyword that reverses the low-to-high order."
               },
@@ -397,7 +328,7 @@
               "prompt": "Complete the query so products are sorted by stock from highest to lowest.",
               "hint": "Choose the column that stores how many items are available.",
               "help": {
-                "concept": "The the missing term column holds inventory counts, so it is the correct column to sort when comparing how many units each product has.",
+                "concept": "The blank column holds inventory counts, so it is the correct column to sort when comparing how many units each product has.",
                 "hint_1": "Do not choose a text column like name or category if the goal is to rank inventory amounts.",
                 "hint_2": "Look for the integer column that represents quantity on hand."
               },
@@ -443,19 +374,19 @@
               "starterCode": "-- TODO: sort from highest price to lowest\n-- TODO: return only 3 rows\nSELECT name, price\nFROM products\n;"
             },
             "try-why_sorting_matters-sketch0": {
-              "title": "Sort products by price ascending",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that shows the `name` and `price` columns from `products`, sorted by `price` from lowest to highest. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Put the Highest Stock First",
+              "prompt": "Return `id`, `name`, and `stock`, sorted from highest stock to lowest.",
+              "hint": "Sort stock in descending order.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
+                "concept": "Return `id`, `name`, and `stock`, sorted from highest stock to lowest.",
+                "hint_1": "Sort stock in descending order.",
+                "hint_2": "Run the query and compare the returned columns and rows with the expected result."
               },
-              "starterCode": "-- Show the name and price columns from products, sorted by price from lowest to highest.\nSELECT name, price\nFROM products\n;"
+              "starterCode": "SELECT id, name, stock\nFROM products\nORDER BY ;"
             },
             "try-why_sorting_matters-sketch1": {
               "title": "Show newest products first",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that shows `name` and `created_at` from `products`, sorted so the newest products appear first. Write the query in the SQL editor, click Run query, and check the results table.",
+              "prompt": "Build a ranking query that shows `name` and `created_at` from `products`, sorted so the newest products appear first. Run it and compare the result with the expected table.",
               "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
               "help": {
                 "concept": "This SQL exercise checks whether your query returns the requested result.",
@@ -466,7 +397,7 @@
             },
             "try-why_sorting_matters-sketch2": {
               "title": "Return the top 3 most expensive products",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that shows `name` and `price` from `products`, sorted from highest price to lowest price, and returns only the first 3 rows. Write the query in the SQL editor, click Run query, and check the results table.",
+              "prompt": "Build a ranking query that shows `name` and `price` from `products`, sorted from highest price to lowest price, and returns only the first 3 rows. Run it and compare the result with the expected table.",
               "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
               "help": {
                 "concept": "This SQL exercise checks whether your query returns the requested result.",
@@ -479,16 +410,16 @@
           "tryIt": {
             "allowReveal": true,
             "try_why_sorting_matters_sketch0": {
-              "title": "Sort products by price ascending",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that shows the `name` and `price` columns from `products`, sorted by `price` from lowest to highest. Write the query in the SQL editor, click Run query, and check the results table."
+              "title": "Put the Highest Stock First",
+              "prompt": "Return `id`, `name`, and `stock`, sorted from highest stock to lowest."
             },
             "try_why_sorting_matters_sketch1": {
               "title": "Show newest products first",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that shows `name` and `created_at` from `products`, sorted so the newest products appear first. Write the query in the SQL editor, click Run query, and check the results table."
+              "prompt": "Build a ranking query that shows `name` and `created_at` from `products`, sorted so the newest products appear first. Run it and compare the result with the expected table."
             },
             "try_why_sorting_matters_sketch2": {
               "title": "Return the top 3 most expensive products",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that shows `name` and `price` from `products`, sorted from highest price to lowest price, and returns only the first 3 rows. Write the query in the SQL editor, click Run query, and check the results table."
+              "prompt": "Build a ranking query that shows `name` and `price` from `products`, sorted from highest price to lowest price, and returns only the first 3 rows. Run it and compare the result with the expected table."
             }
           }
         }

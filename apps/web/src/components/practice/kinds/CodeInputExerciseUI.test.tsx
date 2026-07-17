@@ -5,6 +5,10 @@ import { describe, expect, it, vi } from "vitest";
 import { learnerUiFlags } from "@/lib/config/learnerUiFlags";
 import CodeInputExerciseUI from "./CodeInputExerciseUI";
 
+vi.mock("next-intl", () => ({
+    useTranslations: () => (key: string) => key,
+}));
+
 vi.mock("@/components/code/CodeRunner", () => ({
     default: (props: { showStdinEditor?: boolean; height?: number | "auto" }) => (
         <div
@@ -141,6 +145,37 @@ describe("CodeInputExerciseUI", () => {
         );
 
         expect(html).toContain('data-show-stdin="false"');
+    });
+
+    it("renders duplicate SQL column labels without duplicate React keys", () => {
+        const consoleError = vi
+            .spyOn(console, "error")
+            .mockImplementation(() => undefined);
+
+        try {
+            const html = renderToStaticMarkup(
+                <CodeInputExerciseUI
+                    {...baseProps({
+                        variant: "tools",
+                        toolsBound: true,
+                        expectedExample: {
+                            kind: "sql_result",
+                            columns: ["id", "id"],
+                            rows: [[1, 2]],
+                        },
+                    })}
+                />,
+            );
+
+            expect(html.match(/<th/g)).toHaveLength(2);
+            expect(html).toContain(">1</td>");
+            expect(html).toContain(">2</td>");
+            expect(
+                consoleError.mock.calls.flat().join(" "),
+            ).not.toContain("same key");
+        } finally {
+            consoleError.mockRestore();
+        }
     });
 
 });

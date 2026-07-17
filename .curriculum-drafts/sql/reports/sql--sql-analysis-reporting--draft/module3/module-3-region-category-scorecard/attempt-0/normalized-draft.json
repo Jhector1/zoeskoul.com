@@ -1,0 +1,157 @@
+{
+  "title": "Module 3: Region and Category Scorecard",
+  "summary": "Group sales activity by region and category, calculate several KPIs, and rank the final scorecard.",
+  "minutes": 55,
+  "sketchBlocks": [
+    {
+      "id": "module-3-region-category-scorecard-sketch0",
+      "title": "Project Overview: Region and Category Scorecard",
+      "bodyMarkdown": "In this project, you will create a comprehensive scorecard that groups sales data by region and category. The goal is to calculate key performance indicators (KPIs) such as total sales and average customer ratings, and then rank these groups to identify top-performing segments. This scorecard will help in understanding regional and category-based performance, aiding strategic decision-making.\n\n### Example: Grouping Sales Data\nConsider the following SQL query that groups sales data by region and category:\n\n```sql\nSELECT region, category, SUM(quantity * unit_price) AS total_sales\nFROM sales_reporting\nGROUP BY region, category;\n```\n\nThis query calculates the total sales for each combination of region and category. The `GROUP BY` clause ensures that the results are aggregated at the desired level of detail.\n\n### Step-by-Step Explanation\n1. **SELECT Clause**: Specifies the columns to be included in the result set.\n2. **SUM Function**: Calculates the total sales by multiplying quantity by unit price.\n3. **GROUP BY Clause**: Groups the results by region and category, ensuring that the aggregation is performed for each unique combination.\n\nIn the following exercises, you will build upon this foundation to create a detailed scorecard."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "try-module-3-region-category-scorecard-sketch0",
+      "kind": "code_input",
+      "title": "Calculate Total Sales by Region and Category",
+      "prompt": "Write a query to calculate the total sales for each region and category in the `sales_reporting` table. Use the `SUM` function to aggregate the sales values.",
+      "starterCode": "SELECT region, category, SUM(quantity * unit_price) AS total_sales\nFROM sales_reporting\nGROUP BY region, category;",
+      "solutionCode": "SELECT region, category, SUM(quantity * unit_price) AS total_sales\nFROM sales_reporting\nGROUP BY region, category;",
+      "tests": [
+        {
+          "stdout": "North | Art | 140.00\nNorth | Stationery | 152.00\nNorth | Tech | 153.00\nSouth | Art | 140.00\nSouth | Home | 140.00\nSouth | Tech | 186.00\nEast | Stationery | 140.00\nEast | Home | 140.00\nEast | Tech | 140.00\nWest | Art | 140.00\nWest | Home | 140.00\nWest | Stationery | 140.00\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query",
+      "hint": "Use the `SUM` function to calculate total sales and group by both region and category.",
+      "help": {
+        "concept": "The `GROUP BY` clause is used to aggregate data by specified columns.",
+        "hint_1": "Ensure you are grouping by both `region` and `category`.",
+        "hint_2": "Use `SUM(quantity * unit_price)` to calculate total sales."
+      }
+    },
+    {
+      "id": "try-module-3-region-category-scorecard-sketch1",
+      "kind": "code_input",
+      "title": "Calculate Average Customer Rating by Region and Category",
+      "prompt": "Write a query to calculate the average customer rating for each region and category in the `sales_reporting` table. Use the `AVG` function to find the average ratings.",
+      "starterCode": "SELECT region, category, AVG(customer_rating) AS avg_rating\nFROM sales_reporting\nGROUP BY region, category;",
+      "solutionCode": "SELECT region, category, AVG(customer_rating) AS avg_rating\nFROM sales_reporting\nGROUP BY region, category;",
+      "tests": [
+        {
+          "stdout": "North | Art | 4.8\nNorth | Stationery | 4.4\nNorth | Tech | 4.7\nSouth | Art | 4.35\nSouth | Home | 4.4\nSouth | Tech | 4.9\nEast | Stationery | 4.0\nEast | Home | 4.3\nEast | Tech | 4.6\nWest | Art | 4.45\nWest | Home | 4.5\nWest | Stationery | 4.1\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query",
+      "hint": "Use the `AVG` function to calculate average ratings and group by both region and category.",
+      "help": {
+        "concept": "The `AVG` function calculates the average value of a numeric column.",
+        "hint_1": "Ensure you are grouping by both `region` and `category`.",
+        "hint_2": "Use `AVG(customer_rating)` to calculate average ratings."
+      }
+    },
+    {
+      "id": "try-module-3-region-category-scorecard-sketch2",
+      "kind": "code_input",
+      "title": "Rank Regions by Total Sales",
+      "prompt": "Write a query to rank regions based on their total sales. Use the `ORDER BY` clause to sort the results in descending order of total sales.",
+      "starterCode": "SELECT region, SUM(quantity * unit_price) AS total_sales\nFROM sales_reporting\nGROUP BY region\nORDER BY total_sales DESC;",
+      "solutionCode": "SELECT region, SUM(quantity * unit_price) AS total_sales\nFROM sales_reporting\nGROUP BY region\nORDER BY total_sales DESC;",
+      "tests": [
+        {
+          "stdout": "South | 466.00\nNorth | 445.00\nWest | 420.00\nEast | 420.00\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query",
+      "hint": "Use `ORDER BY` to sort the results by total sales in descending order.",
+      "help": {
+        "concept": "The `ORDER BY` clause is used to sort the result set by one or more columns.",
+        "hint_1": "Ensure you are ordering by the total sales column.",
+        "hint_2": "Use `DESC` to sort in descending order."
+      }
+    },
+    {
+      "id": "try-module-3-region-category-scorecard-sketch3",
+      "kind": "code_input",
+      "title": "Identify Top Category in Each Region",
+      "prompt": "Write a query to identify the top-performing category in each region based on total sales. Use `ORDER BY` and `LIMIT` to find the top category per region.",
+      "starterCode": "SELECT region, category, SUM(quantity * unit_price) AS total_sales\nFROM sales_reporting\nGROUP BY region, category\nORDER BY region, total_sales DESC\nLIMIT 1;",
+      "solutionCode": "SELECT region, category, SUM(quantity * unit_price) AS total_sales\nFROM sales_reporting\nGROUP BY region, category\nORDER BY region, total_sales DESC\nLIMIT 1;",
+      "tests": [
+        {
+          "stdout": "North | Art | 140.00\nSouth | Tech | 186.00\nEast | Tech | 140.00\nWest | Art | 140.00\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query",
+      "hint": "Use `ORDER BY` and `LIMIT` to find the top category per region.",
+      "help": {
+        "concept": "The `LIMIT` clause restricts the number of rows returned by a query.",
+        "hint_1": "Ensure you are ordering by total sales within each region.",
+        "hint_2": "Use `LIMIT 1` to get the top category per region."
+      }
+    },
+    {
+      "id": "try-module-3-region-category-scorecard-sketch4",
+      "kind": "code_input",
+      "title": "Calculate Total Discount Given by Region",
+      "prompt": "Write a query to calculate the total discount given in each region. Use the `SUM` function to aggregate the discount values.",
+      "starterCode": "SELECT region, SUM(discount_pct) AS total_discount\nFROM sales_reporting\nGROUP BY region;",
+      "solutionCode": "SELECT region, SUM(discount_pct) AS total_discount\nFROM sales_reporting\nGROUP BY region;",
+      "tests": [
+        {
+          "stdout": "North | 30.0\nSouth | 45.0\nEast | 20.0\nWest | 25.0\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query",
+      "hint": "Use the `SUM` function to calculate total discounts and group by region.",
+      "help": {
+        "concept": "The `SUM` function can be used to aggregate numeric columns, including discounts.",
+        "hint_1": "Ensure you are grouping by `region`.",
+        "hint_2": "Use `SUM(discount_pct)` to calculate total discounts."
+      }
+    },
+    {
+      "id": "try-module-3-region-category-scorecard-sketch5",
+      "kind": "code_input",
+      "title": "Determine Average Sales per Order by Region",
+      "prompt": "Write a query to determine the average sales per order for each region. Use the `AVG` function to calculate the average sales value.",
+      "starterCode": "SELECT region, AVG(quantity * unit_price) AS avg_sales_per_order\nFROM sales_reporting\nGROUP BY region;",
+      "solutionCode": "SELECT region, AVG(quantity * unit_price) AS avg_sales_per_order\nFROM sales_reporting\nGROUP BY region;",
+      "tests": [
+        {
+          "stdout": "North | 74.17\nSouth | 93.20\nEast | 70.00\nWest | 84.00\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query",
+      "hint": "Use the `AVG` function to calculate average sales per order and group by region.",
+      "help": {
+        "concept": "The `AVG` function calculates the average value of a numeric column.",
+        "hint_1": "Ensure you are grouping by `region`.",
+        "hint_2": "Use `AVG(quantity * unit_price)` to calculate average sales per order."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Region and Category Scorecard Project",
+    "stepIds": [
+      "try-module-3-region-category-scorecard-sketch0",
+      "try-module-3-region-category-scorecard-sketch1",
+      "try-module-3-region-category-scorecard-sketch2",
+      "try-module-3-region-category-scorecard-sketch3",
+      "try-module-3-region-category-scorecard-sketch4",
+      "try-module-3-region-category-scorecard-sketch5"
+    ]
+  }
+}

@@ -24,6 +24,42 @@ describe("resolveSqlRunnerConfig", () => {
         });
     });
 
+    it("loads the dedicated reporting dataset from the canonical registry", () => {
+        const resolved = resolveSqlRunnerConfig({
+            language: "sql",
+            exerciseRuntime: {
+                kind: "sql",
+                datasetId: "sales_reporting",
+                fixedSqlDialect: "sqlite",
+                showSchema: true,
+                showErd: true,
+                showChen: true,
+            },
+            recipe: {
+                type: "sql_query",
+                datasetId: "sales_reporting",
+                resultShape: "table",
+            },
+        });
+
+        expect(resolved.isSql).toBe(true);
+        expect(resolved.sqlDatasetId).toBe("sales_reporting");
+        expect(resolved.sqlSchemaSql).toContain("CREATE TABLE sales_reporting");
+        expect(resolved.sqlSeedSql).toContain("INSERT INTO sales_reporting");
+        expect(Object.keys(resolved.sqlInitialTableSnapshots ?? {})).toEqual([
+            "sales_reporting",
+        ]);
+        expect(
+            resolved.sqlInitialTableSnapshots?.sales_reporting?.rowCount,
+        ).toBe(24);
+        expect(resolved.sqlPaneOptions).toMatchObject({
+            showTables: true,
+            showErd: true,
+            showChen: true,
+            defaultTab: "tables",
+        });
+    });
+
     it("inherits dataset snapshots from topic runtime defaults", () => {
         const resolved = resolveSqlRunnerConfig({
             language: "sql",

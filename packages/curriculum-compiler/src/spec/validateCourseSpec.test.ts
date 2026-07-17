@@ -56,6 +56,7 @@ describe("validateCourseSpec", () => {
             title: "Math Foundations",
             sourceLocale: "en",
             targetLocales: [],
+            policy: { projectPolicy: { capstoneRequired: false } },
             modules: [
                 {
                     moduleNumber: 1,
@@ -111,6 +112,14 @@ describe("validateCourseSpec", () => {
                                         tryItExerciseId: "try-helper",
                                         tryItSketchIndex: 0,
                                         projectFlow: "progressive",
+                                    },
+                                    projectBrief: {
+                                        stepCountTarget: 2,
+                                        flow: "progressive",
+                                        stepLadder: [
+                                            { step: 1, title: "Start", requirement: "Build the first version." },
+                                            { step: 2, title: "Finish", requirement: "Complete the deliverable." },
+                                        ],
                                     },
                                 },
                             ],
@@ -300,7 +309,22 @@ describe("validateCourseSpec", () => {
                             sectionSlug: "python-v2-2-capstone",
                             title: "Final Project",
                             role: "capstone",
-                            topics: [{ topicId: "capstone", title: "Capstone" }],
+                            topics: [
+                                {
+                                    topicId: "capstone",
+                                    title: "Capstone",
+                                    projectBrief: {
+                                        stepCountTarget: 4,
+                                        flow: "progressive",
+                                        stepLadder: [
+                                            { step: 1, title: "Plan", requirement: "Build the base." },
+                                            { step: 2, title: "Extend", requirement: "Add the second feature." },
+                                            { step: 3, title: "Validate", requirement: "Check the result." },
+                                            { step: 4, title: "Deliver", requirement: "Finish the project." },
+                                        ],
+                                    },
+                                },
+                            ],
                         },
                     ],
                 },
@@ -487,7 +511,149 @@ describe("validateCourseSpec", () => {
         );
     });
 
-    it("does not force capstone structure when project policy does not require it", () => {
+    it("rejects extra planning sections inside the final capstone module", () => {
+        const issues = validateCourseSpec({
+            authoringFormatVersion: "2.0",
+            subjectSlug: "sql",
+            courseSlug: "multi-table-sql",
+            catalogSlug: "sql",
+            profileId: "sql",
+            title: "Multi-Table SQL",
+            description: "Learn joins.",
+            sourceLocale: "en",
+            targetLocales: [],
+            policy: { projectPolicy: { capstoneRequired: true } },
+            modules: [
+                {
+                    moduleNumber: 0,
+                    moduleSlug: "multi-table-sql-module-0-foundations",
+                    title: "Foundations",
+                    sections: [
+                        {
+                            sectionSlug: "multi-table-sql-section-0-project",
+                            title: "Project",
+                            role: "module_project",
+                            topics: [{ topicId: "project", title: "Project" }],
+                        },
+                    ],
+                },
+                {
+                    moduleNumber: 1,
+                    moduleSlug: "multi-table-sql-module-1-final-capstone",
+                    title: "Final Capstone",
+                    role: "capstone",
+                    sections: [
+                        {
+                            sectionSlug: "multi-table-sql-section-1-planning",
+                            title: "Planning",
+                            topics: [{ topicId: "planning", title: "Planning" }],
+                        },
+                        {
+                            sectionSlug: "multi-table-sql-section-1-capstone",
+                            title: "Final Capstone",
+                            role: "capstone",
+                            topics: [
+                                {
+                                    topicId: "capstone",
+                                    title: "Capstone",
+                                    projectBrief: { stepCountTarget: 4 },
+                                },
+                            ],
+                        },
+                    ],
+                },
+            ],
+        } as any);
+
+        expect(issues).toContain(
+            "modules[1]: capstone modules must contain exactly one section",
+        );
+    });
+
+    it("requires a valid authoring-defined capstone step count and matching ladder", () => {
+        const issues = validateCourseSpec({
+            authoringFormatVersion: "2.0",
+            subjectSlug: "sql",
+            courseSlug: "multi-table-sql",
+            catalogSlug: "sql",
+            profileId: "sql",
+            title: "Multi-Table SQL",
+            description: "Learn joins.",
+            sourceLocale: "en",
+            targetLocales: [],
+            modules: [
+                {
+                    moduleNumber: 0,
+                    moduleSlug: "multi-table-sql-module-0-final-capstone",
+                    title: "Final Capstone",
+                    role: "capstone",
+                    sections: [
+                        {
+                            sectionSlug: "multi-table-sql-section-0-final-capstone",
+                            title: "Final Capstone",
+                            role: "capstone",
+                            topics: [
+                                {
+                                    topicId: "capstone",
+                                    title: "Capstone",
+                                    projectBrief: {
+                                        stepCountTarget: 4,
+                                        stepLadder: [
+                                            { step: 1, title: "Start", requirement: "Build the base." },
+                                            { step: 3, title: "Finish", requirement: "Finish it." },
+                                        ],
+                                    },
+                                },
+                            ],
+                        },
+                    ],
+                },
+            ],
+        } as any);
+
+        expect(issues).toContain(
+            "modules[0].sections[0].topics[0].projectBrief.stepLadder must contain exactly 4 step(s) to match stepCountTarget",
+        );
+        expect(issues).toContain(
+            "modules[0].sections[0].topics[0].projectBrief.stepLadder[1].step must equal 2",
+        );
+    });
+
+    it("requires projectBrief on the single final capstone topic", () => {
+        const issues = validateCourseSpec({
+            authoringFormatVersion: "2.0",
+            subjectSlug: "sql",
+            courseSlug: "multi-table-sql",
+            catalogSlug: "sql",
+            profileId: "sql",
+            title: "Multi-Table SQL",
+            description: "Learn joins.",
+            sourceLocale: "en",
+            targetLocales: [],
+            modules: [
+                {
+                    moduleNumber: 0,
+                    moduleSlug: "multi-table-sql-module-0-final-capstone",
+                    title: "Final Capstone",
+                    role: "capstone",
+                    sections: [
+                        {
+                            sectionSlug: "multi-table-sql-section-0-final-capstone",
+                            title: "Final Capstone",
+                            role: "capstone",
+                            topics: [{ topicId: "capstone", title: "Capstone" }],
+                        },
+                    ],
+                },
+            ],
+        } as any);
+
+        expect(issues).toContain(
+            "modules[0].sections[0].topics[0].projectBrief is required for the final capstone topic",
+        );
+    });
+
+    it("allows an explicit capstone opt-out for exceptional courses", () => {
         const issues = validateCourseSpec({
             authoringFormatVersion: "2.0",
             subjectSlug: "math",
@@ -498,6 +664,7 @@ describe("validateCourseSpec", () => {
             description: "Learn math.",
             sourceLocale: "en",
             targetLocales: [],
+            policy: { projectPolicy: { capstoneRequired: false } },
             modules: [
                 {
                     moduleNumber: 1,
@@ -516,4 +683,65 @@ describe("validateCourseSpec", () => {
 
         expect(issues).toEqual([]);
     });
+    it("enforces the opt-in explicit module and section slug convention", () => {
+        const baseSpec = {
+            authoringFormatVersion: "2.0",
+            subjectSlug: "sql",
+            courseSlug: "sql-analysis-reporting",
+            catalogSlug: "sql",
+            profileId: "sql",
+            title: "SQL Analysis & Reporting",
+            description: "Build reporting queries.",
+            sourceLocale: "en",
+            targetLocales: [],
+            policy: {
+                projectPolicy: {
+                    capstoneRequired: false,
+                },
+                qualityPolicy: {
+                    slugConvention: "explicit_module_section",
+                },
+            },
+            modules: [
+                {
+                    moduleNumber: 0,
+                    moduleSlug: "sql-analysis-reporting-module-0-foundations",
+                    title: "Foundations",
+                    sections: [
+                        {
+                            sectionSlug: "sql-analysis-reporting-section-0-readable-output",
+                            title: "Readable Output",
+                            topics: [{ topicId: "aliases", title: "Aliases" }],
+                        },
+                    ],
+                },
+            ],
+        } as any;
+
+        expect(validateCourseSpec(baseSpec)).toEqual([]);
+
+        const issues = validateCourseSpec({
+            ...baseSpec,
+            modules: [
+                {
+                    ...baseSpec.modules[0],
+                    moduleSlug: "sql-analysis-reporting-0-foundations",
+                    sections: [
+                        {
+                            ...baseSpec.modules[0].sections[0],
+                            sectionSlug: "sql-analysis-reporting-0-readable-output",
+                        },
+                    ],
+                },
+            ],
+        } as any);
+
+        expect(issues).toContain(
+            'modules[0].moduleSlug must start with "sql-analysis-reporting-module-0-" and include a descriptive suffix when slugConvention="explicit_module_section"',
+        );
+        expect(issues).toContain(
+            'modules[0].sections[0].sectionSlug must start with "sql-analysis-reporting-section-0-" and include a descriptive suffix when slugConvention="explicit_module_section"',
+        );
+    });
+
 });

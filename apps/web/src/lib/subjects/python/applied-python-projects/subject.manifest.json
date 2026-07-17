@@ -6,7 +6,7 @@
     "genKey": "python_part1",
     "order": 0,
     "accessPolicy": "paid",
-    "status": "coming_soon",
+    "status": "",
     "imagePublicId": null,
     "imageAlt": null,
     "titleKey": "subjects.applied-python-projects.title",

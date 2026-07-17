@@ -21,8 +21,14 @@ import {
     stateLanguageMatches,
 } from "@/components/review/module/runtime/workspaceCodeSource";
 import { isI18nAliasString } from "../runtime/starterContent";
+import type { ToolPresentationPolicy } from "@zoeskoul/curriculum-contracts";
 
-type BoundTarget = { id: string; exerciseKey?: string; onPatch: (patch: any) => void };
+type BoundTarget = {
+    id: string;
+    exerciseKey?: string;
+    toolPresentation?: ToolPresentationPolicy;
+    onPatch: (patch: any) => void;
+};
 
 export type ToolStateSeed = {
     compatibleSaved: any;
@@ -433,6 +439,13 @@ function hydrateWorkspaceShellWithCode(
 }
 
 
+export function shouldSkipRepeatedToolBind(
+    lastBindKey: string,
+    nextBindKey: string,
+): boolean {
+    return Boolean(nextBindKey) && lastBindKey === nextBindKey;
+}
+
 function ideConfigKey(config: LearningIdeConfig | null | undefined) {
     const normalize = (input: unknown): unknown => {
         if (Array.isArray(input)) {
@@ -705,6 +718,8 @@ export function useToolCodeRunnerState(args: {
 
     const boundRef = useRef<BoundTarget | null>(null);
     const [boundId, setBoundId] = useState<string | null>(null);
+    const [boundToolPresentation, setBoundToolPresentation] =
+        useState<ToolPresentationPolicy | undefined>(undefined);
     const boundDirtyRef = useRef(false);
     const lastBindKeyRef = useRef<string>("");
     const bindingContext = useMemo(
@@ -726,6 +741,7 @@ export function useToolCodeRunnerState(args: {
         boundDirtyRef.current = false;
         lastBindKeyRef.current = "";
         setBoundId((prev) => (prev === null ? prev : null));
+        setBoundToolPresentation(undefined);
         setHydratedToolIdentity("");
     }, []);
 
@@ -1432,6 +1448,7 @@ export function useToolCodeRunnerState(args: {
             sqlSchemaSql?: string;
             sqlSeedSql?: string;
             sqlInitialTableSnapshots?: SqlTableSnapshots;
+            toolPresentation?: ToolPresentationPolicy;
             exerciseKey?: string;
             preferSnapshot?: boolean;
             userEdited?: boolean;
@@ -1761,6 +1778,32 @@ export function useToolCodeRunnerState(args: {
                     resolvedSql.sqlInitialTableSnapshots,
             };
 
+            const nextBindKey = `${nextIdentity}::${inputId}::${targetKey}::${snapKey(nextSnap)}::${ideConfigKey(args2.ideConfig)}::${JSON.stringify(args2.toolPresentation ?? null)}`;
+
+            /**
+             * Registration can run again after a passive runtime patch causes the
+             * surrounding review card to render. Guard before patchExercise/onPatch
+             * so an identical registration cannot write the same starter snapshot
+             * back into Zustand forever.
+             */
+            if (shouldSkipRepeatedToolBind(lastBindKeyRef.current, nextBindKey)) {
+                boundRef.current = {
+                    id: inputId,
+                    exerciseKey: targetKey,
+                    toolPresentation: args2.toolPresentation,
+                    onPatch: args2.onPatch,
+                };
+                boundContextRef.current = bindingContext;
+                return;
+            }
+
+            /**
+             * Set the semantic bind key before any synchronous store writes. A
+             * patch can immediately notify subscribers, and a re-registration in
+             * that render must already see this bind as handled.
+             */
+            lastBindKeyRef.current = nextBindKey;
+
             const nextSnapIsLearnerOwned = Boolean(
                 effectiveSavedIsUserWork ||
                 args2.userEdited === true ||
@@ -1829,18 +1872,13 @@ export function useToolCodeRunnerState(args: {
                 });
             }
 
-            const nextBindKey = `${nextIdentity}::${inputId}::${targetKey}::${snapKey(nextSnap)}::${ideConfigKey(args2.ideConfig)}`;
-
-            if (lastBindKeyRef.current === nextBindKey) {
-                boundRef.current = { id: inputId, exerciseKey: targetKey, onPatch: args2.onPatch };
-                boundContextRef.current = bindingContext;
-                setToolIdeConfigIfChanged(args2.ideConfig ?? null);
-                if (hydratedToolIdentity !== nextIdentity) setHydratedToolIdentity(nextIdentity);
-                return;
-            }
-
-            lastBindKeyRef.current = nextBindKey;
-            boundRef.current = { id: inputId, exerciseKey: targetKey, onPatch: args2.onPatch };
+            boundRef.current = {
+                id: inputId,
+                exerciseKey: targetKey,
+                toolPresentation: args2.toolPresentation,
+                onPatch: args2.onPatch,
+            };
+            setBoundToolPresentation(args2.toolPresentation);
             boundContextRef.current = bindingContext;
             setBoundId((prev) => (prev === targetKey ? prev : targetKey));
             setToolIdeConfigIfChanged(args2.ideConfig ?? null);
@@ -2311,6 +2349,7 @@ dismissFeedbackOnEdit: true,
             ? resolvedSql.sqlInitialTableSnapshots
             : initialResolvedSql.sqlInitialTableSnapshots,
         toolIdeConfig,
+        toolPresentation: effectiveBoundId ? boundToolPresentation : undefined,
 
         setToolLang,
         setToolCode,

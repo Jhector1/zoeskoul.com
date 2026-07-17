@@ -1,0 +1,64 @@
+{
+  "ok": true,
+  "profileId": "sql",
+  "subjectSlug": "sql--sql-data-management--draft",
+  "courseSlug": "sql-data-management",
+  "topicId": "insert-with-explicit-column-lists",
+  "summary": {
+    "modules": 1,
+    "topicsTotal": 1,
+    "exercises": 8,
+    "exerciseKinds": {
+      "single_choice": 2,
+      "multi_choice": 2,
+      "drag_reorder": 1,
+      "fill_blank_choice": 1,
+      "code_input": 2
+    },
+    "codeInputs": 2,
+    "projects": 2,
+    "capstones": 0,
+    "thinFixedTestCount": 0,
+    "blockers": 0,
+    "errors": 0,
+    "warnings": 3,
+    "infos": 0
+  },
+  "severityCounts": {
+    "blocker": 0,
+    "error": 0,
+    "warning": 3,
+    "info": 0
+  },
+  "issues": [
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-data-management-module-0-safe-inserts/sql-data-management-section-0-mutation-workflow/insert-with-explicit-column-lists",
+      "profileId": "sql",
+      "moduleId": "sql-data-management-module-0-safe-inserts",
+      "topicId": "insert-with-explicit-column-lists",
+      "message": "Topic \"insert-with-explicit-column-lists\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "STARTER_MAY_REVEAL_SOLUTION_STRUCTURE",
+      "severity": "warning",
+      "path": "sql-data-management-module-0-safe-inserts/sql-data-management-section-0-mutation-workflow/insert-with-explicit-column-lists",
+      "profileId": "sql",
+      "moduleId": "sql-data-management-module-0-safe-inserts",
+      "topicId": "insert-with-explicit-column-lists",
+      "exerciseId": "try-insert-with-explicit-column-lists-sketch0",
+      "message": "Exercise \"try-insert-with-explicit-column-lists-sketch0\" starterCode appears to contain most of the final solution structure."
+    },
+    {
+      "code": "STARTER_MAY_REVEAL_SOLUTION_STRUCTURE",
+      "severity": "warning",
+      "path": "sql-data-management-module-0-safe-inserts/sql-data-management-section-0-mutation-workflow/insert-with-explicit-column-lists",
+      "profileId": "sql",
+      "moduleId": "sql-data-management-module-0-safe-inserts",
+      "topicId": "insert-with-explicit-column-lists",
+      "exerciseId": "try-insert-with-explicit-column-lists-sketch1",
+      "message": "Exercise \"try-insert-with-explicit-column-lists-sketch1\" starterCode appears to contain most of the final solution structure."
+    }
+  ]
+}

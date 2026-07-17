@@ -4,7 +4,7 @@
     "profileId": "sql",
     "catalogSlug": "sql",
     "genKey": "sql_for_beginners",
-    "order": 1,
+    "order": 0,
     "accessPolicy": "paid",
     "status": "active",
     "imagePublicId": null,
@@ -15,8 +15,7 @@
     "meta": {
       "curriculum": {
         "plannedModuleCount": 6,
-        "isTerminalRelease": false,
-        "moreComingMessageKey": "subjects.sql--sql-v2--draft.moreComingSoon",
+        "isTerminalRelease": true,
         "qualityPass": {
           "name": "sql-v2-module0-legacy-preserved-images",
           "appliedAt": "2026-06-26T22:04:58.881199+00:00",
@@ -33,6 +32,14 @@
         "requireAllPublishedModules": true,
         "rewardEnabledByDefault": true,
         "certificateEnabledByDefault": true
+      },
+      "versioning": {
+        "family": "sql",
+        "version": 1,
+        "status": "ready",
+        "defaultForNewEnrollments": true,
+        "supersedes": null,
+        "supersededBy": null
       }
     }
   },
@@ -198,7 +205,7 @@
       },
       "serviceDefaults": null,
       "meta": {
-        "estimatedMinutes": 200,
+        "estimatedMinutes": 102,
         "prereqKeys": [
           "modules.sql--sql-v2--draft.sql-v2-0.title"
         ],
@@ -231,10 +238,7 @@
           },
           "serviceDefaults": null,
           "topics": [
-            "what_select_does",
-            "selecting_all_columns_with_star",
-            "selecting_specific_columns",
-            "query_structure_basics"
+            "what_select_does"
           ]
         },
         {
@@ -254,9 +258,7 @@
           },
           "serviceDefaults": null,
           "topics": [
-            "from_and_table_names",
-            "choosing_the_right_columns",
-            "writing_simple_readable_queries"
+            "selecting_specific_columns"
           ]
         },
         {
@@ -276,7 +278,7 @@
           },
           "serviceDefaults": null,
           "topics": [
-            "common_beginner_syntax_mistakes"
+            "query_multiple_columns"
           ]
         },
         {
@@ -296,9 +298,7 @@
           },
           "serviceDefaults": null,
           "topics": [
-            "query_one_column",
-            "query_multiple_columns",
-            "predicting_result_output"
+            "common_beginner_syntax_mistakes"
           ]
         },
         {
@@ -347,7 +347,7 @@
       },
       "serviceDefaults": null,
       "meta": {
-        "estimatedMinutes": 268,
+        "estimatedMinutes": 168,
         "prereqKeys": [
           "modules.sql--sql-v2--draft.sql-v2-1.title"
         ],
@@ -381,8 +381,7 @@
           "serviceDefaults": null,
           "topics": [
             "why_filtering_matters",
-            "the_where_clause",
-            "filtering_numbers_and_text"
+            "equals_comparison"
           ]
         },
         {
@@ -402,12 +401,8 @@
           },
           "serviceDefaults": null,
           "topics": [
-            "equals_comparison",
-            "not_equal_comparison",
             "greater_than_comparison",
-            "less_than_comparison",
-            "greater_than_or_equal_and_less_than_or_equal",
-            "choosing_the_right_comparison"
+            "filtering_numbers_and_text"
           ]
         },
         {
@@ -428,8 +423,6 @@
           "serviceDefaults": null,
           "topics": [
             "and_conditions",
-            "or_conditions",
-            "not_conditions",
             "combining_conditions_safely"
           ]
         },
@@ -499,7 +492,7 @@
       },
       "serviceDefaults": null,
       "meta": {
-        "estimatedMinutes": 200,
+        "estimatedMinutes": 108,
         "prereqKeys": [
           "modules.sql--sql-v2--draft.sql-v2-2.title"
         ],
@@ -532,10 +525,7 @@
           },
           "serviceDefaults": null,
           "topics": [
-            "why_sorting_matters",
-            "order_by",
-            "ascending_order",
-            "descending_order"
+            "order_by"
           ]
         },
         {
@@ -555,10 +545,7 @@
           },
           "serviceDefaults": null,
           "topics": [
-            "primary_sort",
-            "secondary_sort",
-            "sorting_text",
-            "sorting_numbers_and_dates"
+            "ascending_order"
           ]
         },
         {
@@ -578,8 +565,7 @@
           },
           "serviceDefaults": null,
           "topics": [
-            "limit_clause",
-            "combining_order_by_with_limit"
+            "primary_sort"
           ]
         },
         {
@@ -599,7 +585,7 @@
           },
           "serviceDefaults": null,
           "topics": [
-            "build_clear_result_sets"
+            "combining_order_by_with_limit"
           ]
         },
         {
@@ -648,7 +634,7 @@
       },
       "serviceDefaults": null,
       "meta": {
-        "estimatedMinutes": 238,
+        "estimatedMinutes": 152,
         "prereqKeys": [
           "modules.sql--sql-v2--draft.sql-v2-3.title"
         ],
@@ -682,9 +668,7 @@
           "serviceDefaults": null,
           "topics": [
             "intro_to_like",
-            "percent_wildcard",
-            "underscore_wildcard",
-            "searching_partial_text"
+            "underscore_wildcard"
           ]
         },
         {
@@ -705,7 +689,6 @@
           "serviceDefaults": null,
           "topics": [
             "in_list_filter",
-            "not_in_list_filter",
             "between_range_filter"
           ]
         },
@@ -726,10 +709,7 @@
           },
           "serviceDefaults": null,
           "topics": [
-            "what_null_means",
-            "is_null",
-            "is_not_null",
-            "common_null_mistakes"
+            "what_null_means"
           ]
         },
         {
@@ -749,7 +729,6 @@
           },
           "serviceDefaults": null,
           "topics": [
-            "search_names",
             "combine_text_and_null_filters"
           ]
         },
@@ -794,7 +773,7 @@
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false,
-        "datasetId": "sales_kpi",
+        "datasetId": "customers_cleanup",
         "fixedSqlDialect": "sqlite",
         "resultShape": "table"
       },

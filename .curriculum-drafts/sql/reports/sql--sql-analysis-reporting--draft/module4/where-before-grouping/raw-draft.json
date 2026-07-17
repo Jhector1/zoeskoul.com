@@ -1,0 +1,201 @@
+{
+  "title": "WHERE Before Grouping",
+  "summary": "Filter source rows before aggregate functions calculate grouped results.",
+  "minutes": 24,
+  "sketchBlocks": [
+    {
+      "id": "sketch-where-before-grouping-0",
+      "title": "Understanding WHERE Before Grouping",
+      "bodyMarkdown": "In SQL, the `WHERE` clause is used to filter rows before any grouping or aggregation occurs. This means that only the rows that meet the `WHERE` condition are included in the aggregation process. For example, if you want to calculate the total sales for each region but only include sales that are completed, you would use a `WHERE` clause to filter out any rows where the `order_status` is not 'Completed'.\n\n```sql\nSELECT region, SUM(quantity * unit_price) AS total_sales\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY region;\n```\n\nIn this query, the `WHERE` clause ensures that only completed sales are considered when calculating the total sales for each region. The `GROUP BY` clause then groups the filtered rows by region, and the `SUM` function calculates the total sales for each group."
+    },
+    {
+      "id": "sketch-where-before-grouping-1",
+      "title": "Practical Example: Filtering with WHERE",
+      "bodyMarkdown": "Let's consider a practical example where you want to find the average customer rating for products in the 'Tech' category, but only for those orders that have been completed. You can achieve this by using the `WHERE` clause to filter the rows before calculating the average.\n\n```sql\nSELECT product_name, AVG(customer_rating) AS average_rating\nFROM sales_reporting\nWHERE category = 'Tech' AND order_status = 'Completed'\nGROUP BY product_name;\n```\n\nHere, the `WHERE` clause filters the rows to include only those where the category is 'Tech' and the order status is 'Completed'. The `GROUP BY` clause groups these filtered rows by product name, and the `AVG` function calculates the average customer rating for each product."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "try-where-before-grouping-sketch0",
+      "kind": "code_input",
+      "title": "Filter Completed Sales by Region",
+      "prompt": "Write a query to calculate the total sales for each region, but only include sales that are completed. Use the `sales_reporting` table.",
+      "hint": "Use the WHERE clause to filter rows where order_status is 'Completed'.",
+      "help": {
+        "concept": "The WHERE clause filters rows before aggregation.",
+        "hint_1": "Ensure the WHERE clause filters for 'Completed' status.",
+        "hint_2": "Group by region after filtering."
+      },
+      "starterCode": "SELECT region, SUM(quantity * unit_price) AS total_sales\nFROM sales_reporting\nWHERE \nGROUP BY region;",
+      "solutionCode": "SELECT region, SUM(quantity * unit_price) AS total_sales\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY region;",
+      "tests": [
+        {
+          "stdout": "North|168.5\nSouth|248.0\nEast|288.0\nWest|288.0\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "try-where-before-grouping-sketch1",
+      "kind": "code_input",
+      "title": "Average Rating for Completed Tech Products",
+      "prompt": "Write a query to find the average customer rating for each product in the 'Tech' category, but only for completed orders. Use the `sales_reporting` table.",
+      "hint": "Filter for 'Tech' category and 'Completed' status using WHERE.",
+      "help": {
+        "concept": "The WHERE clause filters rows before aggregation.",
+        "hint_1": "Ensure the WHERE clause includes both category and status conditions.",
+        "hint_2": "Group by product_name after filtering."
+      },
+      "starterCode": "SELECT product_name, AVG(customer_rating) AS average_rating\nFROM sales_reporting\nWHERE \nGROUP BY product_name;",
+      "solutionCode": "SELECT product_name, AVG(customer_rating) AS average_rating\nFROM sales_reporting\nWHERE category = 'Tech' AND order_status = 'Completed'\nGROUP BY product_name;",
+      "tests": [
+        {
+          "stdout": "USB-C Hub|4.7\nKeyboard|4.6\nWebcam|4.9\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "single-choice-where-vs-having",
+      "kind": "single_choice",
+      "title": "Difference Between WHERE and HAVING",
+      "prompt": "What is the main difference between the WHERE and HAVING clauses in SQL?",
+      "hint": "Consider when each clause is applied in the query process.",
+      "help": {
+        "concept": "WHERE filters rows before grouping; HAVING filters groups after aggregation.",
+        "hint_1": "WHERE is applied before aggregation, HAVING after.",
+        "hint_2": "Think about the sequence of operations in SQL queries."
+      },
+      "options": [
+        "WHERE filters rows before grouping, HAVING filters groups after aggregation.",
+        "WHERE filters groups after aggregation, HAVING filters rows before grouping.",
+        "Both WHERE and HAVING filter rows before grouping.",
+        "Both WHERE and HAVING filter groups after aggregation."
+      ],
+      "correctOptionIds": [
+        "a"
+      ]
+    },
+    {
+      "id": "fill-blank-choice-where-clause",
+      "kind": "fill_blank_choice",
+      "title": "WHERE Clause Usage",
+      "prompt": "Complete the sentence: The WHERE clause is used to filter rows [blank1] aggregation in SQL queries.",
+      "hint": "Think about the sequence of operations in SQL queries.",
+      "help": {
+        "concept": "WHERE filters rows before any aggregation occurs.",
+        "hint_1": "WHERE is applied before any grouping or aggregation.",
+        "hint_2": "Consider the order of operations in SQL."
+      },
+      "template": "The WHERE clause is used to filter rows [blank1] aggregation in SQL queries.",
+      "choices": [
+        "before",
+        "after",
+        "during",
+        "instead of"
+      ],
+      "correctValue": "before"
+    },
+    {
+      "id": "multi-choice-where-conditions",
+      "kind": "multi_choice",
+      "title": "Valid WHERE Conditions",
+      "prompt": "Which of the following are valid conditions to use in a WHERE clause? Select all that apply.",
+      "hint": "Consider the types of conditions that can filter rows.",
+      "help": {
+        "concept": "WHERE conditions can include comparisons, logical operators, and pattern matching.",
+        "hint_1": "Think about comparisons and logical operators.",
+        "hint_2": "Pattern matching like LIKE can also be used."
+      },
+      "options": [
+        "order_status = 'Completed'",
+        "quantity > 10",
+        "AVG(quantity) > 5",
+        "product_name LIKE 'A%'"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "d"
+      ]
+    },
+    {
+      "id": "drag-reorder-sql-query-process",
+      "kind": "drag_reorder",
+      "title": "SQL Query Process Order",
+      "prompt": "Arrange the steps of the SQL query process in the correct order.",
+      "hint": "Consider the logical flow of a SQL query execution.",
+      "help": {
+        "concept": "SQL queries follow a specific order of operations.",
+        "hint_1": "Start with FROM, then WHERE, GROUP BY, HAVING, SELECT.",
+        "hint_2": "Think about how SQL processes data step by step."
+      },
+      "tokens": [
+        "FROM",
+        "WHERE",
+        "GROUP BY",
+        "HAVING",
+        "SELECT"
+      ],
+      "correctOrder": [
+        "FROM",
+        "WHERE",
+        "GROUP BY",
+        "HAVING",
+        "SELECT"
+      ]
+    },
+    {
+      "id": "single-choice-where-purpose",
+      "kind": "single_choice",
+      "title": "Purpose of WHERE Clause",
+      "prompt": "What is the primary purpose of the WHERE clause in SQL?",
+      "hint": "Think about what the WHERE clause does to the data.",
+      "help": {
+        "concept": "The WHERE clause filters rows based on specified conditions.",
+        "hint_1": "It filters rows before any grouping or aggregation.",
+        "hint_2": "Consider how it affects the dataset before processing."
+      },
+      "options": [
+        "To filter rows based on specified conditions.",
+        "To group rows by a specific column.",
+        "To sort rows in ascending or descending order.",
+        "To calculate aggregate functions."
+      ],
+      "correctOptionIds": [
+        "a"
+      ]
+    },
+    {
+      "id": "fill-blank-choice-where-filter",
+      "kind": "fill_blank_choice",
+      "title": "WHERE Clause Filter",
+      "prompt": "The WHERE clause filters rows [blank1] they are grouped or aggregated.",
+      "hint": "Consider the timing of the WHERE clause in the query process.",
+      "help": {
+        "concept": "WHERE filters rows before any grouping or aggregation.",
+        "hint_1": "WHERE is applied before any grouping or aggregation.",
+        "hint_2": "Think about the sequence of operations in SQL."
+      },
+      "template": "The WHERE clause filters rows [blank1] they are grouped or aggregated.",
+      "choices": [
+        "before",
+        "after",
+        "during",
+        "instead of"
+      ],
+      "correctValue": "before"
+    }
+  ],
+  "projectDraft": {
+    "title": "Performance Exception Report",
+    "stepIds": [
+      "try-where-before-grouping-sketch0",
+      "try-where-before-grouping-sketch1"
+    ]
+  }
+}

@@ -111,40 +111,57 @@ export function getAiCliFlag(args: string[], name: string): string | undefined {
   return readFlag(args, name);
 }
 
+type InteractiveSelectionOverrides = {
+  /** Test hook. Production callers should leave this undefined. */
+  isTty?: boolean;
+  /** Test hook. Production callers should leave this undefined. */
+  selectProvider?: () => Promise<AiProviderId>;
+  /** Test hook. Production callers should leave this undefined. */
+  selectModel?: (provider: AiProviderId) => Promise<string>;
+};
+
+function canPromptInteractively(args: {
+  interactive?: boolean;
+  isTty?: boolean;
+}): boolean {
+  return args.interactive !== false && (args.isTty ?? process.stdin.isTTY === true);
+}
+
 /**
  * Generation provider/model selection.
  *
- * Important behavior:
- * If the caller did not pass --provider and AI_PROVIDER is not set, interactive
- * mode must ask for the provider first. Model env vars such as OPENAI_MODEL must
- * not force OpenAI silently; they only matter after a provider is resolved.
+ * Interactive terminal behavior:
+ * - explicit CLI flags win;
+ * - otherwise always show the provider menu and then the model menu;
+ * - environment variables are non-interactive defaults only.
+ *
+ * This prevents stale AI_PROVIDER/AI_MODEL/OPENAI_MODEL values from silently
+ * choosing a model during a normal authoring run.
  */
 export async function resolveGenerationProviderModel(args: {
   cliArgs: string[];
   interactive?: boolean;
-}): Promise<{ provider: AiProviderId; model: string }> {
+} & InteractiveSelectionOverrides): Promise<{ provider: AiProviderId; model: string }> {
   const cliProvider = normalizeAiProviderId(readFlag(args.cliArgs, "--provider"));
-  const providerFromEnv = normalizeAiProviderId(process.env.AI_PROVIDER);
+  const cliModel = readFlag(args.cliArgs, "--model");
+  const interactive = canPromptInteractively(args);
+  const selectProvider = args.selectProvider ?? selectProviderFromConsole;
+  const selectModel = args.selectModel ?? selectModelFromConsoleForProvider;
 
   const provider =
     cliProvider ??
-    providerFromEnv ??
-    (args.interactive !== false && process.stdin.isTTY
-      ? await selectProviderFromConsole()
-      : "openai");
-
-  const cliModel = readFlag(args.cliArgs, "--model");
-  const genericModelEnv = process.env.AI_MODEL;
-  const providerModelEnv =
-    process.env[getAiProviderCatalogEntry(provider).modelEnv]?.trim();
+    (interactive
+      ? await selectProvider()
+      : normalizeAiProviderId(process.env.AI_PROVIDER) ?? "openai");
 
   const model =
     cliModel ??
-    genericModelEnv?.trim() ??
-    providerModelEnv ??
-    (args.interactive !== false && process.stdin.isTTY
-      ? await selectModelFromConsoleForProvider(provider)
-      : resolveModelForProvider({ provider }));
+    (interactive
+      ? await selectModel(provider)
+      : resolveModelForProvider({
+          provider,
+          genericModelEnv: process.env.AI_MODEL,
+        }));
 
   return { provider, model };
 }
@@ -152,40 +169,43 @@ export async function resolveGenerationProviderModel(args: {
 /**
  * Translation provider/model selection.
  *
- * This intentionally prompts for provider first when --translation-provider and
- * TRANSLATION_PROVIDER are missing. Translation should not silently use OpenAI
- * just because OPENAI_MODEL exists or because the old script used OpenAI only.
+ * Interactive terminal behavior mirrors generation: provider first, then its
+ * model. Translation environment variables are used only for non-interactive
+ * execution such as CI.
  */
 export async function resolveTranslationProviderModel(args: {
   cliArgs: string[];
   generation?: { provider: AiProviderId; model: string };
   interactive?: boolean;
-}): Promise<{ provider: AiProviderId; model: string }> {
-  const cliProvider = normalizeAiProviderId(readFlag(args.cliArgs, "--translation-provider"));
-  const envProvider = normalizeAiProviderId(process.env.TRANSLATION_PROVIDER);
-  const generationProvider = args.generation?.provider;
+} & InteractiveSelectionOverrides): Promise<{ provider: AiProviderId; model: string }> {
+  const cliProvider = normalizeAiProviderId(
+    readFlag(args.cliArgs, "--translation-provider"),
+  );
+  const cliModel = readFlag(args.cliArgs, "--translation-model");
+  const interactive = canPromptInteractively(args);
+  const selectProvider = args.selectProvider ?? selectProviderFromConsole;
+  const selectModel = args.selectModel ?? selectModelFromConsoleForProvider;
 
   const provider =
     cliProvider ??
-    envProvider ??
-    generationProvider ??
-    (args.interactive !== false && process.stdin.isTTY
-      ? await selectProviderFromConsole()
-      : normalizeAiProviderId(process.env.AI_PROVIDER) ?? "openai");
+    (interactive
+      ? await selectProvider()
+      : normalizeAiProviderId(process.env.TRANSLATION_PROVIDER) ??
+        args.generation?.provider ??
+        normalizeAiProviderId(process.env.AI_PROVIDER) ??
+        "openai");
 
-  const cliModel = readFlag(args.cliArgs, "--translation-model");
-  const translationModelEnv = process.env.TRANSLATION_MODEL?.trim();
   const providerModelEnv =
     process.env[getAiProviderCatalogEntry(provider).modelEnv]?.trim();
 
   const model =
     cliModel ??
-    translationModelEnv ??
-    providerModelEnv ??
-    (provider === args.generation?.provider ? args.generation?.model : undefined) ??
-    (args.interactive !== false && process.stdin.isTTY
-      ? await selectModelFromConsoleForProvider(provider)
-      : resolveModelForProvider({ provider }));
+    (interactive
+      ? await selectModel(provider)
+      : process.env.TRANSLATION_MODEL?.trim() ??
+        providerModelEnv ??
+        (provider === args.generation?.provider ? args.generation?.model : undefined) ??
+        resolveModelForProvider({ provider }));
 
   return { provider, model };
 }

@@ -2,29 +2,48 @@ import fs from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
+import { createRequire } from "node:module";
 import type { RunSqlFn } from "./runner.js";
 
-type BetterSqlite3Column = {
+type SqliteColumn = {
     name: string;
 };
 
-type BetterSqlite3Database = {
+type SqliteStatement = {
+    reader?: boolean;
+    columns(): SqliteColumn[];
+    all(): Array<Record<string, unknown>>;
+};
+
+type SqliteDatabase = {
     exec(sql: string): void;
-    prepare(sql: string): {
-        reader?: boolean;
-        columns(): BetterSqlite3Column[];
-        all(): Array<Record<string, unknown>>;
-    };
+    prepare(sql: string): SqliteStatement;
     close(): void;
 };
 
-type BetterSqlite3Constructor = new (filename: string) => BetterSqlite3Database;
-type RequireLike = (moduleName: string) => unknown;
+type SqliteDatabaseConstructor = new (filename: string) => SqliteDatabase;
 
-function getBetterSqlite3(): BetterSqlite3Constructor | null {
+function getInProcessSqlite(): SqliteDatabaseConstructor | null {
+    const require = createRequire(import.meta.url);
+
     try {
-        const req = (0, eval)("require") as RequireLike;
-        return req("better-sqlite3") as BetterSqlite3Constructor;
+        const nodeSqlite = require("node:sqlite") as {
+            DatabaseSync?: SqliteDatabaseConstructor;
+        };
+        if (typeof nodeSqlite.DatabaseSync === "function") {
+            return nodeSqlite.DatabaseSync;
+        }
+    } catch {
+        // Older Node versions may not provide node:sqlite.
+    }
+
+    try {
+        const loaded = require("better-sqlite3") as
+            | SqliteDatabaseConstructor
+            | { default?: SqliteDatabaseConstructor };
+        const constructor =
+            typeof loaded === "function" ? loaded : loaded.default;
+        return typeof constructor === "function" ? constructor : null;
     } catch {
         return null;
     }
@@ -46,10 +65,7 @@ function normalizeCell(value: unknown): string | number | boolean | null {
 }
 
 function collectTable(
-    stmt: {
-        columns(): BetterSqlite3Column[];
-        all(): Array<Record<string, unknown>>;
-    },
+    stmt: SqliteStatement,
 ) {
     const columns = stmt.columns().map((column) => column.name);
     const rows = stmt.all().map((row) =>
@@ -73,6 +89,23 @@ function runSqliteCli(dbFile: string, sql: string, json = false) {
     });
 }
 
+function formatSqliteCliError(
+    result: ReturnType<typeof spawnSync>,
+    fallback: string,
+): string {
+    const stderr =
+        typeof result.stderr === "string" ? result.stderr.trim() : "";
+    const processError = result.error?.message?.trim() ?? "";
+    return stderr || processError || fallback;
+}
+
+function hasSqliteCli(): boolean {
+    const probe = spawnSync("sqlite3", ["--version"], {
+        encoding: "utf8",
+    });
+    return !probe.error && probe.status === 0;
+}
+
 function createSqliteCliRunner(): RunSqlFn {
     return async (args) => {
         if ((args.dialect ?? "sqlite") !== "sqlite") {
@@ -91,7 +124,10 @@ function createSqliteCliRunner(): RunSqlFn {
                 if (schema.status !== 0) {
                     return {
                         ok: false,
-                        error: schema.stderr?.trim() || "Failed to initialize SQL schema.",
+                        error: formatSqliteCliError(
+                            schema,
+                            "Failed to initialize SQL schema.",
+                        ),
                     };
                 }
             }
@@ -101,7 +137,10 @@ function createSqliteCliRunner(): RunSqlFn {
                 if (seed.status !== 0) {
                     return {
                         ok: false,
-                        error: seed.stderr?.trim() || "Failed to seed SQL dataset.",
+                        error: formatSqliteCliError(
+                            seed,
+                            "Failed to seed SQL dataset.",
+                        ),
                     };
                 }
             }
@@ -111,7 +150,10 @@ function createSqliteCliRunner(): RunSqlFn {
                 if (mutation.status !== 0) {
                     return {
                         ok: false,
-                        error: mutation.stderr?.trim() || "SQL statement failed to execute.",
+                        error: formatSqliteCliError(
+                            mutation,
+                            "SQL statement failed to execute.",
+                        ),
                     };
                 }
 
@@ -119,7 +161,10 @@ function createSqliteCliRunner(): RunSqlFn {
                 if (query.status !== 0) {
                     return {
                         ok: false,
-                        error: query.stderr?.trim() || "SQL check query failed to execute.",
+                        error: formatSqliteCliError(
+                            query,
+                            "SQL check query failed to execute.",
+                        ),
                     };
                 }
 
@@ -141,7 +186,10 @@ function createSqliteCliRunner(): RunSqlFn {
             if (query.status !== 0) {
                 return {
                     ok: false,
-                    error: query.stderr?.trim() || "SQL query failed to execute.",
+                    error: formatSqliteCliError(
+                        query,
+                        "SQL query failed to execute.",
+                    ),
                 };
             }
 
@@ -169,9 +217,9 @@ function createSqliteCliRunner(): RunSqlFn {
 }
 
 export function createLocalSqlRunner(): RunSqlFn | null {
-    const BetterSqlite3 = getBetterSqlite3();
-    if (!BetterSqlite3) {
-        return createSqliteCliRunner();
+    const Sqlite = getInProcessSqlite();
+    if (!Sqlite) {
+        return hasSqliteCli() ? createSqliteCliRunner() : null;
     }
 
     return async (args) => {
@@ -182,7 +230,7 @@ export function createLocalSqlRunner(): RunSqlFn | null {
             };
         }
 
-        const db = new BetterSqlite3(":memory:");
+        const db = new Sqlite(":memory:");
 
         try {
             if (args.schemaSql?.trim()) {
@@ -198,7 +246,8 @@ export function createLocalSqlRunner(): RunSqlFn | null {
                 }
 
                 const stmt = db.prepare(args.checkSql);
-                if (stmt.reader === false) {
+                const columns = stmt.columns();
+                if (stmt.reader === false || columns.length === 0) {
                     return {
                         ok: false,
                         error: "SQL checkSql must return a result table.",
@@ -222,7 +271,8 @@ export function createLocalSqlRunner(): RunSqlFn | null {
             }
 
             const stmt = db.prepare(lastStatement);
-            if (stmt.reader === false) {
+            const columns = stmt.columns();
+            if (stmt.reader === false || columns.length === 0) {
                 db.exec(lastStatement);
                 return {
                     ok: true,

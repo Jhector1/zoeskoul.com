@@ -1,0 +1,153 @@
+{
+  "topics": {
+    "sql-analysis-reporting": {
+      "sql-analysis-reporting-module-5-final-capstone": {
+        "capstone-report-requirements": {
+          "label": "Reading the Capstone Reporting Brief",
+          "summary": "Identify the audience, business questions, required metrics, filters, and output order.",
+          "cards": {
+            "sketch0": {
+              "title": "Capstone Project Overview"
+            },
+            "project": {
+              "title": "Executive Sales Performance Report"
+            }
+          },
+          "projectSteps": {
+            "capstone_step1": {
+              "title": "Step 1: Basic Sales Report"
+            },
+            "capstone_step2": {
+              "title": "Step 2: Filter by Completed Orders"
+            },
+            "capstone_step3": {
+              "title": "Step 3: Include Average Customer Rating"
+            },
+            "capstone_step4": {
+              "title": "Step 4: Add Discount Impact"
+            },
+            "capstone_step5": {
+              "title": "Step 5: Finalize the Executive Report"
+            }
+          },
+          "finalCapstone": {
+            "steps": {
+              "capstone_step1": {
+                "title": "Step 1: Basic Sales Report",
+                "prompt": "Start the final capstone project. In step 1 of 5, Create a basic sales report that lists the total sales amount for each product category. Use the `sales_reporting` table.",
+                "hint": "This is the first project step. Build a clean starting version, then run it before moving on.",
+                "help": {
+                  "concept": "The final capstone is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "This is the first project step. Build a clean starting version, then run it before moving on.",
+                  "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+                },
+                "starterCode": "-- Write your SQL answer below",
+                "solutionCode": "SELECT category, SUM(quantity * unit_price) AS total_sales\nFROM sales_reporting\nGROUP BY category;"
+              },
+              "capstone_step2": {
+                "title": "Step 2: Filter by Completed Orders",
+                "prompt": "Continue the final capstone project from the previous working step. In step 2 of 5, Modify the report to include only completed orders. Use the `sales_reporting` table.",
+                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "help": {
+                  "concept": "The final capstone is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                  "hint_2": "Run the previous working code first, then make only the focused change for this step."
+                },
+                "starterCode": "SELECT category, SUM(quantity * unit_price) AS total_sales\nFROM sales_reporting\nGROUP BY category;\n-- Capstone step 2: Step 2: Filter by Completed Orders\n-- Keep the working code above from the previous step.\n-- Next, Modify the report to include only completed orders\n-- Add only the focused change for this step inside the existing work.\n",
+                "solutionCode": "SELECT category, SUM(quantity * unit_price) AS total_sales\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY category;\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "SELECT category, SUM(quantity * unit_price) AS total_sales\nFROM sales_reporting\nGROUP BY category;\n-- Capstone step 2: Step 2: Filter by Completed Orders\n-- Keep the working code above from the previous step.\n-- Next, Modify the report to include only completed orders\n-- Add only the focused change for this step inside the existing work.\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_py": {
+                    "content": "SELECT category, SUM(quantity * unit_price) AS total_sales\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY category;\n"
+                  }
+                }
+              },
+              "capstone_step3": {
+                "title": "Step 3: Include Average Customer Rating",
+                "prompt": "Continue the final capstone project from the previous working step. In step 3 of 5, Enhance the report to include the average customer rating for each category. Use the `sales_reporting` table.",
+                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "help": {
+                  "concept": "The final capstone is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                  "hint_2": "Run the previous working code first, then make only the focused change for this step."
+                },
+                "starterCode": "SELECT category, SUM(quantity * unit_price) AS total_sales\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY category;\n-- Capstone step 3: Step 3: Include Average Customer Rating\n-- Keep the working code above from the previous step.\n-- Next, Enhance the report to include the average customer rating for each category\n-- Add only the focused change for this step inside the existing work.\n",
+                "solutionCode": "SELECT category, SUM(quantity * unit_price) AS total_sales, AVG(customer_rating) AS avg_rating\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY category;\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "SELECT category, SUM(quantity * unit_price) AS total_sales\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY category;\n-- Capstone step 3: Step 3: Include Average Customer Rating\n-- Keep the working code above from the previous step.\n-- Next, Enhance the report to include the average customer rating for each category\n-- Add only the focused change for this step inside the existing work.\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_py": {
+                    "content": "SELECT category, SUM(quantity * unit_price) AS total_sales, AVG(customer_rating) AS avg_rating\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY category;\n"
+                  }
+                }
+              },
+              "capstone_step4": {
+                "title": "Step 4: Add Discount Impact",
+                "prompt": "Continue the final capstone project from the previous working step. In step 4 of 5, Modify the report to show the total discount impact for each category. Use the `sales_reporting` table.",
+                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "help": {
+                  "concept": "The final capstone is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                  "hint_2": "Run the previous working code first, then make only the focused change for this step."
+                },
+                "starterCode": "SELECT category, SUM(quantity * unit_price) AS total_sales, AVG(customer_rating) AS avg_rating\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY category;\n-- Capstone step 4: Step 4: Add Discount Impact\n-- Keep the working code above from the previous step.\n-- Next, Modify the report to show the total discount impact for each category\n-- Add only the focused change for this step inside the existing work.\n",
+                "solutionCode": "SELECT category, SUM(quantity * unit_price) AS total_sales, AVG(customer_rating) AS avg_rating, SUM(discount_pct * quantity * unit_price / 100) AS discount_impact\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY category;\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "SELECT category, SUM(quantity * unit_price) AS total_sales, AVG(customer_rating) AS avg_rating\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY category;\n-- Capstone step 4: Step 4: Add Discount Impact\n-- Keep the working code above from the previous step.\n-- Next, Modify the report to show the total discount impact for each category\n-- Add only the focused change for this step inside the existing work.\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_py": {
+                    "content": "SELECT category, SUM(quantity * unit_price) AS total_sales, AVG(customer_rating) AS avg_rating, SUM(discount_pct * quantity * unit_price / 100) AS discount_impact\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY category;\n"
+                  }
+                }
+              },
+              "capstone_step5": {
+                "title": "Step 5: Finalize the Executive Report",
+                "prompt": "Continue the final capstone project from the previous working step. In step 5 of 5, Finalize the report by ordering the results by total sales in descending order. Use the `sales_reporting` table.",
+                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "help": {
+                  "concept": "The final capstone is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                  "hint_2": "Run the previous working code first, then make only the focused change for this step."
+                },
+                "starterCode": "SELECT category, SUM(quantity * unit_price) AS total_sales, AVG(customer_rating) AS avg_rating, SUM(discount_pct * quantity * unit_price / 100) AS discount_impact\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY category;\n-- Capstone step 5: Step 5: Finalize the Executive Report\n-- Keep the working code above from the previous step.\n-- Next, Finalize the report by ordering the results by total sales in descending order\n-- Add only the focused change for this step inside the existing work.\n",
+                "solutionCode": "SELECT category, SUM(quantity * unit_price) AS total_sales, AVG(customer_rating) AS avg_rating, SUM(discount_pct * quantity * unit_price / 100) AS discount_impact\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY category\nORDER BY total_sales DESC;\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "SELECT category, SUM(quantity * unit_price) AS total_sales, AVG(customer_rating) AS avg_rating, SUM(discount_pct * quantity * unit_price / 100) AS discount_impact\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY category;\n-- Capstone step 5: Step 5: Finalize the Executive Report\n-- Keep the working code above from the previous step.\n-- Next, Finalize the report by ordering the results by total sales in descending order\n-- Add only the focused change for this step inside the existing work.\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_py": {
+                    "content": "SELECT category, SUM(quantity * unit_price) AS total_sales, AVG(customer_rating) AS avg_rating, SUM(discount_pct * quantity * unit_price / 100) AS discount_impact\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY category\nORDER BY total_sales DESC;\n"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql-analysis-reporting": {
+      "sql-analysis-reporting-module-5-final-capstone": {
+        "capstone-report-requirements": {
+          "capstone-intro": {
+            "title": "Capstone Project Overview",
+            "bodyMarkdown": "In this capstone project, you will take on the role of a data analyst tasked with creating an Executive Sales Performance Report. Your goal is to translate a reporting brief into a comprehensive SQL query that answers key business questions. You'll need to identify the audience, understand the required metrics, apply necessary filters, and ensure the output is ordered correctly. This project will integrate skills such as using aggregate functions, handling null values, and applying conditional logic to produce a polished, business-ready report."
+          }
+        }
+      }
+    }
+  }
+}

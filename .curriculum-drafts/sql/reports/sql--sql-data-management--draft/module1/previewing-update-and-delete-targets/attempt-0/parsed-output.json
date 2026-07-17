@@ -1,0 +1,230 @@
+{
+  "title": "Previewing Mutation Targets",
+  "summary": "Learn how to safely preview and execute SQL mutations by using SELECT statements to identify target rows before applying UPDATE or DELETE operations.",
+  "minutes": 26,
+  "sketchBlocks": [
+    {
+      "id": "preview-select",
+      "cardTitle": "Preview with SELECT",
+      "title": "Using SELECT to Preview Mutation Targets",
+      "bodyMarkdown": "Before executing an UPDATE or DELETE operation in SQL, it's crucial to preview the rows that will be affected. This is done by running a SELECT statement with the same WHERE clause intended for the mutation. This step ensures that only the desired rows are targeted, preventing accidental data changes.\n\nFor example, consider the `inventory_items` table. If you want to update the status of all items in the 'Kitchen' category to 'active', you should first preview these rows:\n\n```sql\nSELECT * FROM inventory_items WHERE category = 'Kitchen';\n```\n\nThis query will return all rows where the category is 'Kitchen'. If the result matches your expectations, you can proceed with the UPDATE operation. This practice helps avoid unintended data modifications and ensures data integrity."
+    },
+    {
+      "id": "mutation-execution",
+      "cardTitle": "Executing Safe Mutations",
+      "title": "Executing Safe UPDATE and DELETE Operations",
+      "bodyMarkdown": "Once you've previewed the target rows with a SELECT statement, you can safely execute the mutation. Always use the same WHERE clause in your UPDATE or DELETE statement to ensure consistency.\n\nContinuing with the previous example, after confirming the rows to update, execute the following:\n\n```sql\nUPDATE inventory_items SET status = 'active' WHERE category = 'Kitchen';\n```\n\nThis command updates the status of all items in the 'Kitchen' category to 'active'. By using the same WHERE clause, you ensure that only the intended rows are affected. This method is crucial for maintaining data accuracy and preventing errors in your database operations."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "try-preview-select-sketch0",
+      "kind": "code_input",
+      "title": "Try It: Preview Target Rows",
+      "prompt": "Write a SELECT statement to preview all items in the 'Decor' category that are marked as test items (is_test = 1).",
+      "hint": "Use a WHERE clause to filter by category and test status.",
+      "help": {
+        "concept": "Previewing rows before mutation ensures only intended data is affected.",
+        "hint_1": "Use WHERE to filter by category and is_test status.",
+        "hint_2": "Combine conditions with AND to filter 'Decor' and is_test = 1."
+      },
+      "starterCode": "-- Write your SELECT statement here",
+      "solutionCode": "SELECT * FROM inventory_items WHERE category = 'Decor' AND is_test = 1;",
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "-- Write your SELECT statement here",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT * FROM inventory_items WHERE category = 'Decor' AND is_test = 1;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "sqlFileOrder": [
+        "query.sql"
+      ],
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "try-execute-update-sketch1",
+      "kind": "code_input",
+      "title": "Try It: Execute a Safe UPDATE",
+      "prompt": "Update the price of all 'Accessories' items to 10.99, but only if they are not test items (is_test = 0).",
+      "hint": "Use WHERE to filter by category and test status.",
+      "help": {
+        "concept": "Executing updates with a WHERE clause ensures only specific rows are modified.",
+        "hint_1": "Filter by category 'Accessories' and is_test = 0.",
+        "hint_2": "Set the price to 10.99 for the filtered rows."
+      },
+      "starterCode": "-- Write your UPDATE statement here",
+      "solutionCode": "UPDATE inventory_items SET price = 10.99 WHERE category = 'Accessories' AND is_test = 0;",
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "-- Write your UPDATE statement here",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "UPDATE inventory_items SET price = 10.99 WHERE category = 'Accessories' AND is_test = 0;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "sqlFileOrder": [
+        "query.sql"
+      ],
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query",
+      "checkSql": "SELECT * FROM inventory_items WHERE category = 'Accessories' AND is_test = 0;"
+    },
+    {
+      "id": "single-choice-preview",
+      "kind": "single_choice",
+      "title": "Why Preview Before Mutation?",
+      "prompt": "Why is it important to preview rows with a SELECT statement before executing an UPDATE or DELETE?",
+      "hint": "Consider the impact of unintended data changes.",
+      "help": {
+        "concept": "Previewing helps ensure only intended rows are affected by a mutation.",
+        "hint_1": "Previewing prevents accidental changes to unintended rows.",
+        "hint_2": "It allows you to verify the target set before making changes."
+      },
+      "options": [
+        "To ensure the SQL syntax is correct",
+        "To verify the target rows before making changes",
+        "To speed up the execution of the query",
+        "To avoid using WHERE clauses"
+      ],
+      "correctOptionIds": [
+        "b"
+      ]
+    },
+    {
+      "id": "fill-blank-choice-update",
+      "kind": "fill_blank_choice",
+      "title": "Fill in the Blank: UPDATE Statement",
+      "prompt": "Complete the following UPDATE statement to change the status of all 'Kitchen' items to 'inactive'.",
+      "hint": "Use the correct WHERE clause to target 'Kitchen' items.",
+      "help": {
+        "concept": "Using WHERE in an UPDATE statement targets specific rows.",
+        "hint_1": "Ensure the WHERE clause filters by category 'Kitchen'.",
+        "hint_2": "The WHERE clause should match the category exactly."
+      },
+      "template": "UPDATE inventory_items SET status = 'inactive' WHERE category = [blank1];",
+      "choices": [
+        "'Kitchen'",
+        "'Decor'",
+        "'Accessories'",
+        "'active'"
+      ],
+      "correctValue": "'Kitchen'"
+    },
+    {
+      "id": "multi-choice-verify",
+      "kind": "multi_choice",
+      "title": "Verifying Changes",
+      "prompt": "After executing an UPDATE or DELETE, what should you verify? Select all that apply.",
+      "hint": "Consider both the affected and unaffected rows.",
+      "help": {
+        "concept": "Verification ensures both intended changes and data integrity.",
+        "hint_1": "Check that only the intended rows were changed.",
+        "hint_2": "Ensure that unaffected rows remain unchanged."
+      },
+      "options": [
+        "The affected rows were updated correctly",
+        "Unintended rows were also changed",
+        "Unchanged rows remain as expected",
+        "The SQL syntax was correct"
+      ],
+      "correctOptionIds": [
+        "a",
+        "c"
+      ]
+    },
+    {
+      "id": "drag-reorder-mutation-steps",
+      "kind": "drag_reorder",
+      "title": "Order the Steps: Safe Mutation",
+      "prompt": "Arrange the steps for safely executing a data mutation in SQL.",
+      "hint": "Start with previewing the target rows.",
+      "help": {
+        "concept": "Following a structured process ensures safe data mutations.",
+        "hint_1": "Begin with a SELECT to preview the target rows.",
+        "hint_2": "End with verifying the changes made."
+      },
+      "tokens": [
+        "Preview target rows with SELECT",
+        "Execute the mutation with UPDATE or DELETE",
+        "Verify the changes made",
+        "Ensure no unintended rows are affected"
+      ],
+      "correctOrder": [
+        "Preview target rows with SELECT",
+        "Execute the mutation with UPDATE or DELETE",
+        "Ensure no unintended rows are affected",
+        "Verify the changes made"
+      ]
+    },
+    {
+      "id": "single-choice-where",
+      "kind": "single_choice",
+      "title": "Role of WHERE in Mutations",
+      "prompt": "What is the role of the WHERE clause in an UPDATE or DELETE statement?",
+      "hint": "Think about how WHERE affects the scope of the mutation.",
+      "help": {
+        "concept": "WHERE specifies which rows are affected by the mutation.",
+        "hint_1": "WHERE limits the mutation to specific rows.",
+        "hint_2": "Without WHERE, all rows could be affected."
+      },
+      "options": [
+        "It specifies the columns to update",
+        "It limits the rows affected by the mutation",
+        "It speeds up the query execution",
+        "It is optional in all mutations"
+      ],
+      "correctOptionIds": [
+        "b"
+      ]
+    },
+    {
+      "id": "fill-blank-choice-delete",
+      "kind": "fill_blank_choice",
+      "title": "Fill in the Blank: DELETE Statement",
+      "prompt": "Complete the DELETE statement to remove all test items (is_test = 1) from the 'Decor' category.",
+      "hint": "Use the correct WHERE clause to target test items in 'Decor'.",
+      "help": {
+        "concept": "Using WHERE in a DELETE statement targets specific rows for removal.",
+        "hint_1": "Ensure the WHERE clause filters by category 'Decor' and is_test = 1.",
+        "hint_2": "The WHERE clause should match both conditions exactly."
+      },
+      "template": "DELETE FROM inventory_items WHERE category = [blank1] AND is_test = 1;",
+      "choices": [
+        "'Kitchen'",
+        "'Decor'",
+        "'Accessories'",
+        "'active'"
+      ],
+      "correctValue": "'Decor'"
+    }
+  ]
+}

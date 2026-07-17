@@ -1,0 +1,826 @@
+{
+  "topicId": "module-2-warehouse-stock-ledger-schema",
+  "subjectSlug": "sql--sql-data-management--draft",
+  "moduleSlug": "sql-data-management-module-2-table-creation-constraints",
+  "sectionSlug": "sql--sql-data-management--draft-sql-data-management-section-2-module-project",
+  "prefix": "sql_data_management_module_2",
+  "minutes": 75,
+  "runtimeDefaults": {
+    "kind": "sql",
+    "showSchema": true,
+    "showErd": true,
+    "showChen": true,
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "datasetId": "ddl_blank",
+    "fixedSqlDialect": "sqlite",
+    "resultShape": "table"
+  },
+  "serviceDefaults": {
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": false
+    }
+  },
+  "tools": {
+    "defaultVisible": true,
+    "allowOpen": true,
+    "defaultSurface": "editor",
+    "compactDefaultSurface": "editor",
+    "sqlPane": {
+      "showResults": true,
+      "showTables": true,
+      "showErd": false,
+      "showChen": false,
+      "defaultTab": "results",
+      "compactDefaultTab": "results"
+    }
+  },
+  "topic": {
+    "labelKey": "topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.label",
+    "summaryKey": "topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.cards.sketch0.title",
+      "sketchId": "sketch-warehouse-schema-intro",
+      "height": 420
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "ci_warehouse_schema_step1",
+            "titleKey": "topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.projectSteps.ci_warehouse_schema_step1.title",
+            "exerciseKey": "ci-warehouse-schema-step1",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "ci_warehouse_schema_step2",
+            "titleKey": "topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.projectSteps.ci_warehouse_schema_step2.title",
+            "exerciseKey": "ci-warehouse-schema-step2",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "ci_warehouse_schema_step3",
+            "titleKey": "topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.projectSteps.ci_warehouse_schema_step3.title",
+            "exerciseKey": "ci-warehouse-schema-step3",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "ci_warehouse_schema_step4",
+            "titleKey": "topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.projectSteps.ci_warehouse_schema_step4.title",
+            "exerciseKey": "ci-warehouse-schema-step4",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "ci_warehouse_schema_step5",
+            "titleKey": "topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.projectSteps.ci_warehouse_schema_step5.title",
+            "exerciseKey": "ci-warehouse-schema-step5",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "ci_warehouse_schema_step6",
+            "titleKey": "topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.projectSteps.ci_warehouse_schema_step6.title",
+            "exerciseKey": "ci-warehouse-schema-step6",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch-warehouse-schema-intro",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.sketch-warehouse-schema-intro.title",
+      "bodyKey": "sketches.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.sketch-warehouse-schema-intro.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "ci-warehouse-schema-step1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step1",
+      "language": "sql",
+      "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step1.starterCode",
+      "starterFiles": [
+        {
+          "path": "schema.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step1.starterFiles.schema_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step1.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "schema.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step1.solutionFiles.schema_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step1.solutionCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "ddl_blank",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "entryFile": "query.sql",
+        "openTabs": [
+          "schema.sql",
+          "query.sql"
+        ],
+        "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step1.starterCode",
+        "starterFiles": [
+          {
+            "path": "schema.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step1.starterFiles.schema_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          },
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step1.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          }
+        ]
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "ddl_blank",
+        "resultShape": "table",
+        "solutionCode": "-- file: schema.sql\n-- Define the warehouses table\nCREATE TABLE warehouses (\n    id INTEGER,\n    name TEXT\n);\n\n-- file: query.sql\n-- Verify the table creation\nSELECT name FROM sqlite_master WHERE type='table' AND name='warehouses';",
+        "solutionFiles": [
+          {
+            "path": "schema.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step1.solutionFiles.schema_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          },
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step1.solutionCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          }
+        ],
+        "sqlFileOrder": [
+          "schema.sql",
+          "query.sql"
+        ],
+        "checkSql": "SELECT name FROM sqlite_master WHERE type='table' AND name='warehouses';"
+      }
+    },
+    {
+      "id": "ci-warehouse-schema-step2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step2",
+      "language": "sql",
+      "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step2.starterCode",
+      "starterFiles": [
+        {
+          "path": "schema.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step2.starterFiles.schema_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step2.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "schema.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step2.solutionFiles.schema_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step2.solutionCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "ddl_blank",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "entryFile": "query.sql",
+        "openTabs": [
+          "schema.sql",
+          "query.sql"
+        ],
+        "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step2.starterCode",
+        "starterFiles": [
+          {
+            "path": "schema.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step2.starterFiles.schema_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          },
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step2.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          }
+        ]
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "ddl_blank",
+        "resultShape": "table",
+        "solutionCode": "-- file: schema.sql\n-- Redefine the warehouses table with constraints\nCREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE\n);\n\n-- file: query.sql\n-- Verify the table constraints\nSELECT sql FROM sqlite_master WHERE type='table' AND name='warehouses';",
+        "solutionFiles": [
+          {
+            "path": "schema.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step2.solutionFiles.schema_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          },
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step2.solutionCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          }
+        ],
+        "sqlFileOrder": [
+          "schema.sql",
+          "query.sql"
+        ],
+        "checkSql": "SELECT sql FROM sqlite_master WHERE type='table' AND name='warehouses';"
+      }
+    },
+    {
+      "id": "ci-warehouse-schema-step3",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step3",
+      "language": "sql",
+      "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step3.starterCode",
+      "starterFiles": [
+        {
+          "path": "schema.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step3.starterFiles.schema_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step3.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "schema.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step3.solutionFiles.schema_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step3.solutionCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "ddl_blank",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "entryFile": "query.sql",
+        "openTabs": [
+          "schema.sql",
+          "query.sql"
+        ],
+        "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step3.starterCode",
+        "starterFiles": [
+          {
+            "path": "schema.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step3.starterFiles.schema_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          },
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step3.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          }
+        ]
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "ddl_blank",
+        "resultShape": "table",
+        "solutionCode": "-- file: schema.sql\n-- Update the warehouses table with a default status\nCREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);\n\n-- file: query.sql\n-- Verify the table structure\nSELECT sql FROM sqlite_master WHERE type='table' AND name='warehouses';",
+        "solutionFiles": [
+          {
+            "path": "schema.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step3.solutionFiles.schema_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          },
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step3.solutionCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          }
+        ],
+        "sqlFileOrder": [
+          "schema.sql",
+          "query.sql"
+        ],
+        "checkSql": "SELECT sql FROM sqlite_master WHERE type='table' AND name='warehouses';"
+      }
+    },
+    {
+      "id": "ci-warehouse-schema-step4",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step4",
+      "language": "sql",
+      "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step4.starterCode",
+      "starterFiles": [
+        {
+          "path": "schema.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step4.starterFiles.schema_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step4.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "schema.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step4.solutionFiles.schema_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step4.solutionCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "ddl_blank",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "entryFile": "query.sql",
+        "openTabs": [
+          "schema.sql",
+          "query.sql"
+        ],
+        "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step4.starterCode",
+        "starterFiles": [
+          {
+            "path": "schema.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step4.starterFiles.schema_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          },
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step4.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          }
+        ]
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "ddl_blank",
+        "resultShape": "table",
+        "solutionCode": "-- file: schema.sql\n-- Define the stock_movements table\nCREATE TABLE stock_movements (\n    id INTEGER,\n    warehouse_id INTEGER,\n    sku TEXT,\n    quantity_change REAL,\n    movement_type TEXT,\n    note TEXT\n);\n\n-- file: query.sql\n-- Verify the table creation\nSELECT name FROM sqlite_master WHERE type='table' AND name='stock_movements';",
+        "solutionFiles": [
+          {
+            "path": "schema.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step4.solutionFiles.schema_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          },
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step4.solutionCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          }
+        ],
+        "sqlFileOrder": [
+          "schema.sql",
+          "query.sql"
+        ],
+        "checkSql": "SELECT name FROM sqlite_master WHERE type='table' AND name='stock_movements';"
+      }
+    },
+    {
+      "id": "ci-warehouse-schema-step5",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step5",
+      "language": "sql",
+      "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step5.starterCode",
+      "starterFiles": [
+        {
+          "path": "schema.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step5.starterFiles.schema_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step5.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "schema.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step5.solutionFiles.schema_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step5.solutionCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "ddl_blank",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "entryFile": "query.sql",
+        "openTabs": [
+          "schema.sql",
+          "query.sql"
+        ],
+        "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step5.starterCode",
+        "starterFiles": [
+          {
+            "path": "schema.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step5.starterFiles.schema_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          },
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step5.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          }
+        ]
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "ddl_blank",
+        "resultShape": "table",
+        "solutionCode": "-- file: schema.sql\n-- Update the stock_movements table with constraints\nCREATE TABLE stock_movements (\n    id INTEGER PRIMARY KEY,\n    warehouse_id INTEGER NOT NULL,\n    sku TEXT NOT NULL,\n    quantity_change REAL NOT NULL,\n    movement_type TEXT NOT NULL,\n    note TEXT\n);\n\n-- file: query.sql\n-- Verify the table constraints\nSELECT sql FROM sqlite_master WHERE type='table' AND name='stock_movements';",
+        "solutionFiles": [
+          {
+            "path": "schema.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step5.solutionFiles.schema_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          },
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step5.solutionCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          }
+        ],
+        "sqlFileOrder": [
+          "schema.sql",
+          "query.sql"
+        ],
+        "checkSql": "SELECT sql FROM sqlite_master WHERE type='table' AND name='stock_movements';"
+      }
+    },
+    {
+      "id": "ci-warehouse-schema-step6",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step6",
+      "language": "sql",
+      "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step6.starterCode",
+      "starterFiles": [
+        {
+          "path": "schema.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step6.starterFiles.schema_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step6.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "schema.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step6.solutionFiles.schema_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step6.solutionCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "ddl_blank",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "entryFile": "query.sql",
+        "openTabs": [
+          "schema.sql",
+          "query.sql"
+        ],
+        "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step6.starterCode",
+        "starterFiles": [
+          {
+            "path": "schema.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step6.starterFiles.schema_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          },
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step6.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          }
+        ]
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "ddl_blank",
+        "resultShape": "table",
+        "solutionCode": "-- file: schema.sql\n-- Update the stock_movements table with a foreign key\nCREATE TABLE stock_movements (\n    id INTEGER PRIMARY KEY,\n    warehouse_id INTEGER NOT NULL,\n    sku TEXT NOT NULL,\n    quantity_change REAL NOT NULL,\n    movement_type TEXT NOT NULL DEFAULT 'receipt',\n    note TEXT,\n    FOREIGN KEY (warehouse_id) REFERENCES warehouses(id)\n);\n\n-- file: query.sql\n-- Verify the foreign key constraint\nSELECT sql FROM sqlite_master WHERE type='table' AND name='stock_movements';",
+        "solutionFiles": [
+          {
+            "path": "schema.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step6.solutionFiles.schema_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          },
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step6.solutionCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          }
+        ],
+        "sqlFileOrder": [
+          "schema.sql",
+          "query.sql"
+        ],
+        "checkSql": "SELECT sql FROM sqlite_master WHERE type='table' AND name='stock_movements';"
+      }
+    }
+  ]
+}

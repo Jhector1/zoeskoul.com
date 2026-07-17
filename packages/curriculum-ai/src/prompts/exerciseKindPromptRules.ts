@@ -82,6 +82,7 @@ export function renderExerciseKindPromptRules(args: {
         `- Base quiz policy: learner quizzes may use ${baseCourseGenerationPolicy.quiz.allowedKinds.join(", ")}; code_input is not a learner-quiz item by default.`,
         "- Put code_input items in practice or project-step authoring when required by the seed, not in the learner quiz card.",
         "- Try It exercises must align with the exact concept just taught and must not introduce commands, APIs, syntax, or concepts not already taught in this topic or earlier topics.",
+        "- A Try It must solve a materially different task from every worked example in the topic; do not reuse the same expected result with only aliases, formatting, or ordering changed.",
         "- Project steps are progressive project work, not isolated practice drills; later steps must build on prior step output.",
         "",
     ];

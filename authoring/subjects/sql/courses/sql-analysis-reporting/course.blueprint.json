@@ -1,0 +1,109 @@
+{
+  "subjectSlug": "sql",
+  "courseSlug": "sql-analysis-reporting",
+  "catalogSlug": "sql",
+  "trackSlug": "sql",
+  "profileId": "sql",
+  "workspaceProfileId": "browser-sql-runner",
+  "workspacePolicyId": "sql-browser-workspace",
+  "title": "SQL Analysis & Reporting",
+  "subtitle": "Turn one table into readable calculations, reliable KPIs, grouped scorecards, and decision-ready reports.",
+  "level": "beginner",
+  "moduleCount": 6,
+  "description": "A cumulative SQLite reporting course covering readable output, null-safe calculations, aggregate functions, grouped summaries, conditional reporting, five module projects, and one final executive-report capstone.",
+  "sourceLocale": "en",
+  "targetLocales": [],
+  "accessPolicy": "paid",
+  "moduleAccessOverrideDefault": null,
+  "audience": [
+    "Learners who completed SQL Foundations / SQL V2.",
+    "Beginners who can already use SELECT, WHERE, ORDER BY, LIMIT, LIKE, IN, BETWEEN, and NULL filters.",
+    "Learners preparing for practical reporting, analytics, and business-intelligence work."
+  ],
+  "prerequisites": [
+    "Read a single database table and identify rows and columns.",
+    "Select specific columns and use readable filters.",
+    "Combine conditions with AND, OR, and NOT.",
+    "Sort and limit results and work with LIKE, IN, BETWEEN, and IS NULL."
+  ],
+  "goals": [
+    "Create readable row-level reports with aliases, calculations, and appropriate rounding.",
+    "Handle missing values explicitly without disguising data-quality issues.",
+    "Build one-row KPI snapshots and grouped scorecards with well-defined grain.",
+    "Filter grouped results and calculate conditional performance measures.",
+    "Complete five cumulative module projects and one integrated executive report."
+  ],
+  "teachingStyle": {
+    "tone": "practical, beginner-friendly, report-first, cumulative",
+    "quizWeight": 0.2,
+    "projectWeight": 0.35,
+    "codeInputWeight": 0.45
+  },
+  "constraints": {
+    "moduleCount": 6,
+    "topicsPerModuleMin": 5,
+    "topicsPerModuleMax": 5
+  },
+  "seedModules": [
+    "sql-analysis-reporting-module-0-report-foundations",
+    "sql-analysis-reporting-module-1-null-safe-calculations",
+    "sql-analysis-reporting-module-2-aggregate-functions",
+    "sql-analysis-reporting-module-3-grouped-summaries",
+    "sql-analysis-reporting-module-4-having-and-conditional-reporting",
+    "sql-analysis-reporting-module-5-final-capstone"
+  ],
+  "datasetIds": [
+    "sales_reporting"
+  ],
+  "versioning": {
+    "family": "sql",
+    "version": 2,
+    "status": "active",
+    "defaultForNewEnrollments": false,
+    "supersedes": null,
+    "supersededBy": null
+  },
+  "courseGenerationPolicy": {
+    "studentActionStyle": "browser_sql_workspace",
+    "forbidUnavailableWorkspaceActions": true,
+    "avoidTerms": [
+      "terminal",
+      "command line",
+      "SQL file",
+      "run the file",
+      "join these tables"
+    ],
+    "preferredTerms": {
+      "editor": "SQL editor",
+      "run": "click Run query",
+      "output": "results table",
+      "group grain": "what one result row represents"
+    },
+    "notes": [
+      "Every technical lesson has two distinct sketches and two aligned code_input Try It exercises.",
+      "Every lesson quiz contains exactly two single-choice, two multi-choice, one reorder, and one fill-blank item.",
+      "Hints must explain the SQL idea or debugging path; never emit generic repair or test-taking language.",
+      "Examples, Try It tasks, quizzes, projects, and capstone steps must use distinct reporting questions and wording.",
+      "Each standard module has exactly one progressive module project; only the final topic is rendered as a capstone.",
+      "A progressive SQL step contains one cumulative replacement SELECT statement. The next starter equals the previous full solution.",
+      "Every threshold must be calibrated to sales_reporting seed data and return meaningful rows unless an empty result is the explicit teaching goal.",
+      "Do not request top-per-group, period-over-period growth, or any outcome requiring joins, subqueries, CTEs, or window functions.",
+      "All graded SQL must use sales_reporting and produce deterministic columns, values, and ordering when order matters."
+    ]
+  },
+  "practiceDefaults": {
+    "tryIt": true,
+    "requiresTryIt": true,
+    "tryItPlacement": "all_sketches",
+    "runtimeMode": "sql_workspace",
+    "expectedPracticeKinds": [
+      "code_input"
+    ]
+  },
+  "runtimePolicy": {
+    "datasetStrategy": "manual",
+    "datasetId": "sales_reporting",
+    "sqlDialect": "sqlite",
+    "resultShape": "table"
+  }
+}

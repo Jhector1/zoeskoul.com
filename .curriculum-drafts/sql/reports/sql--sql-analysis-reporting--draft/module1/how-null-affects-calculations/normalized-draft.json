@@ -1,0 +1,197 @@
+{
+  "title": "How NULL Affects Calculations",
+  "summary": "Understand why arithmetic with an unknown value produces an unknown result.",
+  "minutes": 24,
+  "sketchBlocks": [
+    {
+      "id": "sketch0",
+      "title": "Understanding NULL in Calculations",
+      "bodyMarkdown": "In SQL, NULL represents an unknown or missing value. When you perform arithmetic operations involving NULL, the result is also NULL. This is because any operation with an unknown value remains unknown. For example, if you try to add a number to NULL, the result will be NULL.\n\n```sql\nSELECT 10 + NULL AS result;\n```\n\nThis query will return NULL as the result. Understanding this behavior is crucial when working with datasets that may have missing values."
+    },
+    {
+      "id": "sketch1",
+      "title": "Using COALESCE to Handle NULL",
+      "bodyMarkdown": "To handle NULL values in calculations, SQL provides the COALESCE function. COALESCE returns the first non-NULL value from a list of arguments. This is useful for providing default values in calculations.\n\nFor example, if you want to ensure that a discount percentage is never NULL, you can use COALESCE to replace NULL with a default value, such as 0.\n\n```sql\nSELECT COALESCE(discount_pct, 0) AS discount\nFROM sales_reporting;\n```\n\nThis query will replace any NULL discount percentages with 0, allowing for safe arithmetic operations."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "single-choice-1",
+      "kind": "single_choice",
+      "title": "Effect of NULL in Arithmetic",
+      "prompt": "What is the result of adding a number to NULL in SQL?",
+      "options": [
+        "The number itself",
+        "NULL",
+        "Zero",
+        "An error"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Consider how SQL treats unknown values in arithmetic.",
+      "help": {
+        "concept": "NULL in arithmetic results in NULL because the unknown value propagates.",
+        "hint_1": "Any arithmetic operation with NULL results in NULL.",
+        "hint_2": "Think about how an unknown value affects the outcome."
+      }
+    },
+    {
+      "id": "single-choice-2",
+      "kind": "single_choice",
+      "title": "COALESCE Function",
+      "prompt": "What does the COALESCE function do in SQL?",
+      "options": [
+        "Returns NULL if any argument is NULL",
+        "Returns the first non-NULL value",
+        "Returns the sum of all arguments",
+        "Returns the last argument"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Think about how COALESCE handles NULL values.",
+      "help": {
+        "concept": "COALESCE returns the first non-NULL value from its arguments.",
+        "hint_1": "COALESCE is used to provide a default value when NULL is encountered.",
+        "hint_2": "Consider how COALESCE can prevent NULL from affecting calculations."
+      }
+    },
+    {
+      "id": "multi-choice-1",
+      "kind": "multi_choice",
+      "title": "Handling NULL in Calculations",
+      "prompt": "Which of the following statements about handling NULL in SQL calculations are true? Select all that apply.",
+      "options": [
+        "NULL in arithmetic results in NULL",
+        "COALESCE can replace NULL with a default value",
+        "NULL is treated as zero in calculations",
+        "COALESCE returns NULL if all arguments are NULL"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "d"
+      ],
+      "hint": "Consider how NULL affects arithmetic and how COALESCE can be used.",
+      "help": {
+        "concept": "NULL in calculations results in NULL, but COALESCE can provide a default value.",
+        "hint_1": "NULL in arithmetic results in NULL, but COALESCE can replace NULL with a default value.",
+        "hint_2": "Think about how COALESCE helps in avoiding NULL propagation."
+      }
+    },
+    {
+      "id": "drag-reorder-1",
+      "kind": "drag_reorder",
+      "title": "Order of Operations with NULL",
+      "prompt": "Arrange the steps to safely calculate a discount amount when NULL values are present.",
+      "tokens": [
+        "Use COALESCE to replace NULL with 0",
+        "Multiply quantity by unit price",
+        "Calculate discount amount using the discount percentage"
+      ],
+      "correctOrder": [
+        "Use COALESCE to replace NULL with 0",
+        "Calculate discount amount using the discount percentage",
+        "Multiply quantity by unit price"
+      ],
+      "hint": "Consider using COALESCE to handle NULL values before performing arithmetic.",
+      "help": {
+        "concept": "Use COALESCE to replace NULL before performing calculations.",
+        "hint_1": "Replace NULL with a default value using COALESCE first.",
+        "hint_2": "Perform arithmetic operations after handling NULL values."
+      }
+    },
+    {
+      "id": "fill-blank-choice-1",
+      "kind": "fill_blank_choice",
+      "title": "COALESCE Usage",
+      "prompt": "Fill in the blank to correctly use COALESCE in a SQL query: `SELECT COALESCE([blank1], 0) AS discount FROM sales_reporting;`",
+      "template": "SELECT COALESCE([blank1], 0) AS discount FROM sales_reporting;",
+      "choices": [
+        "discount_pct",
+        "unit_price",
+        "quantity",
+        "order_status"
+      ],
+      "correctValue": "discount_pct",
+      "hint": "Think about what COALESCE replaces in the query.",
+      "help": {
+        "concept": "COALESCE replaces NULL with a specified value.",
+        "hint_1": "COALESCE is used to provide a default value for NULL.",
+        "hint_2": "The column name goes inside COALESCE to check for NULL."
+      }
+    },
+    {
+      "id": "fill-blank-choice-2",
+      "kind": "fill_blank_choice",
+      "title": "NULL Propagation",
+      "prompt": "Fill in the blank: In SQL, any arithmetic operation with NULL results in [blank1].",
+      "template": "In SQL, any arithmetic operation with NULL results in [blank1].",
+      "choices": [
+        "NULL",
+        "zero",
+        "an error",
+        "the number itself"
+      ],
+      "correctValue": "NULL",
+      "hint": "Consider what happens when an unknown value is involved in arithmetic.",
+      "help": {
+        "concept": "the missing term in arithmetic results in the missing term because the unknown value propagates.",
+        "hint_1": "Any operation with the missing term results in an unknown value.",
+        "hint_2": "The result of arithmetic with the missing term is always the missing term."
+      }
+    },
+    {
+      "id": "try-how-null-affects-calculations-sketch0",
+      "kind": "code_input",
+      "title": "Try It: Handling NULL with COALESCE",
+      "prompt": "Write a query to calculate the total sales amount for each order in the `sales_reporting` table, ensuring that any NULL `discount_pct` is treated as 0. Use COALESCE to handle NULL values.",
+      "starterCode": "SELECT order_id, quantity * unit_price * (1 - COALESCE(discount_pct, 0) / 100) AS total_sales\nFROM sales_reporting;",
+      "solutionCode": "SELECT order_id, quantity * unit_price * (1 - COALESCE(discount_pct, 0) / 100) AS total_sales\nFROM sales_reporting;",
+      "tests": [
+        {
+          "stdout": "101|75.6\n102|60.0\n103|72.2\n104|72.0\n105|57.8\n106|135.0\n107|86.4\n108|98.8\n109|84.0\n110|77.0\n111|76.8\n112|167.4\n113|57.0\n114|40.0\n115|72.0\n116|86.4\n117|114.0\n118|120.0\n119|86.4\n120|84.0\n121|68.85\n122|110.0\n123|59.85\n124|68.4\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query",
+      "hint": "Use COALESCE to replace NULL in the discount percentage before calculating the total sales amount.",
+      "help": {
+        "concept": "COALESCE can replace NULL with a default value to ensure calculations are accurate.",
+        "hint_1": "Use COALESCE to handle NULL in the discount percentage.",
+        "hint_2": "Calculate the total sales amount using the adjusted discount percentage."
+      }
+    },
+    {
+      "id": "try-how-null-affects-calculations-sketch1",
+      "kind": "code_input",
+      "title": "Try It: Calculating Discounts Safely",
+      "prompt": "Write a query to calculate the discount amount for each order in the `sales_reporting` table, ensuring that any NULL `discount_pct` is treated as 0. Use COALESCE to handle NULL values.",
+      "starterCode": "SELECT order_id, quantity * unit_price * COALESCE(discount_pct, 0) / 100 AS discount_amount\nFROM sales_reporting;",
+      "solutionCode": "SELECT order_id, quantity * unit_price * COALESCE(discount_pct, 0) / 100 AS discount_amount\nFROM sales_reporting;",
+      "tests": [
+        {
+          "stdout": "101|8.4\n102|0.0\n103|3.8\n104|0.0\n105|10.2\n106|0.0\n107|9.6\n108|5.2\n109|0.0\n110|0.0\n111|19.2\n112|18.6\n113|3.0\n114|0.0\n115|0.0\n116|9.6\n117|6.0\n118|0.0\n119|9.6\n120|0.0\n121|12.15\n122|0.0\n123|3.15\n124|7.6\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query",
+      "hint": "Use COALESCE to replace NULL in the discount percentage before calculating the discount amount.",
+      "help": {
+        "concept": "COALESCE can replace NULL with a default value to ensure calculations are accurate.",
+        "hint_1": "Use COALESCE to handle NULL in the discount percentage.",
+        "hint_2": "Calculate the discount amount using the adjusted discount percentage."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Discount Audit Report",
+    "stepIds": [
+      "try-how-null-affects-calculations-sketch0",
+      "try-how-null-affects-calculations-sketch1"
+    ]
+  }
+}

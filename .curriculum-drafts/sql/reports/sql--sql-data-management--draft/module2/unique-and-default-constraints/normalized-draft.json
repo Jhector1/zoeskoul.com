@@ -1,0 +1,252 @@
+{
+  "title": "UNIQUE and DEFAULT Constraints",
+  "summary": "Learn how to enforce uniqueness and provide default values in SQL tables to maintain data integrity and simplify data entry.",
+  "minutes": 30,
+  "sketchBlocks": [
+    {
+      "id": "unique-constraint",
+      "title": "Understanding the UNIQUE Constraint",
+      "bodyMarkdown": "The UNIQUE constraint in SQL ensures that all values in a column are different from each other. This is crucial for maintaining data integrity, especially when dealing with business identifiers like email addresses or product SKUs. By enforcing uniqueness, you prevent duplicate entries that could lead to data inconsistencies.\n\nFor example, consider a table `employees` where each employee must have a unique email address:\n\n```sql\nCREATE TABLE employees (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    email TEXT UNIQUE\n);\n```\n\nIn this example, the `email` column is constrained to have unique values. If you attempt to insert a duplicate email, the database will reject the entry, ensuring that each email address is unique across the table. This constraint is particularly useful in scenarios where a unique identifier is required for each record."
+    },
+    {
+      "id": "default-constraint",
+      "title": "Using the DEFAULT Constraint",
+      "bodyMarkdown": "The DEFAULT constraint in SQL allows you to specify a default value for a column. This is useful when you want to ensure that a column has a value even if none is provided during an INSERT operation. It simplifies data entry and ensures consistency across records.\n\nConsider a `products` table where each product has a default status of 'active':\n\n```sql\nCREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    status TEXT DEFAULT 'active'\n);\n```\n\nIn this example, if a new product is added without specifying a status, the database automatically assigns it the default value 'active'. This helps maintain a consistent state for new entries and reduces the need for explicit value assignments during data insertion."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "try-unique-constraint-sketch0",
+      "kind": "code_input",
+      "title": "Try It: Enforce Uniqueness",
+      "prompt": "Create a table `customers` with a UNIQUE constraint on the `phone_number` column to ensure no duplicate phone numbers are entered.",
+      "starterCode": "CREATE TABLE customers (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    phone_number TEXT\n);",
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "schema.sql",
+          "content": "",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "CREATE TABLE customers (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    phone_number TEXT\n);",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "schema.sql",
+          "content": "",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "CREATE TABLE customers (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    phone_number TEXT UNIQUE\n);",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "sqlFileOrder": [
+        "schema.sql",
+        "query.sql"
+      ],
+      "solutionCode": "CREATE TABLE customers (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    phone_number TEXT UNIQUE\n);",
+      "datasetId": "ddl_blank",
+      "recipeType": "sql_query",
+      "checkSql": "SELECT name FROM sqlite_master WHERE type='table' AND name='customers';",
+      "hint": "Define the `phone_number` column with a UNIQUE constraint.",
+      "help": {
+        "concept": "The UNIQUE constraint ensures that all values in a column are distinct.",
+        "hint_1": "Use the UNIQUE keyword in the column definition.",
+        "hint_2": "Ensure the `phone_number` column is defined with UNIQUE."
+      }
+    },
+    {
+      "id": "try-default-constraint-sketch1",
+      "kind": "code_input",
+      "title": "Try It: Set Default Values",
+      "prompt": "Create a table `orders` with a `status` column that defaults to 'pending' if no status is provided during insertion.",
+      "starterCode": "CREATE TABLE orders (\n    id INTEGER PRIMARY KEY,\n    customer_id INTEGER NOT NULL,\n    status TEXT\n);",
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "schema.sql",
+          "content": "",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "CREATE TABLE orders (\n    id INTEGER PRIMARY KEY,\n    customer_id INTEGER NOT NULL,\n    status TEXT\n);",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "schema.sql",
+          "content": "",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "CREATE TABLE orders (\n    id INTEGER PRIMARY KEY,\n    customer_id INTEGER NOT NULL,\n    status TEXT DEFAULT 'pending'\n);",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "sqlFileOrder": [
+        "schema.sql",
+        "query.sql"
+      ],
+      "solutionCode": "CREATE TABLE orders (\n    id INTEGER PRIMARY KEY,\n    customer_id INTEGER NOT NULL,\n    status TEXT DEFAULT 'pending'\n);",
+      "datasetId": "ddl_blank",
+      "recipeType": "sql_query",
+      "checkSql": "SELECT name FROM sqlite_master WHERE type='table' AND name='orders';",
+      "hint": "Use the DEFAULT keyword to set a default value for the `status` column.",
+      "help": {
+        "concept": "The DEFAULT constraint provides a default value for a column when none is specified during insertion.",
+        "hint_1": "Define the `status` column with a DEFAULT value of 'pending'.",
+        "hint_2": "Ensure the `status` column uses DEFAULT 'pending'."
+      }
+    },
+    {
+      "id": "unique-constraint-multi-choice",
+      "kind": "multi_choice",
+      "title": "Understanding UNIQUE Constraint",
+      "prompt": "Which of the following statements about the UNIQUE constraint are true?",
+      "options": [
+        "It allows duplicate values in a column.",
+        "It ensures all values in a column are distinct.",
+        "It can be applied to multiple columns in a table.",
+        "It is the same as the PRIMARY KEY constraint."
+      ],
+      "correctOptionIds": [
+        "b",
+        "c"
+      ],
+      "hint": "Consider how the UNIQUE constraint affects data integrity.",
+      "help": {
+        "concept": "The UNIQUE constraint ensures that all values in a column are distinct.",
+        "hint_1": "The UNIQUE constraint prevents duplicate values in a column.",
+        "hint_2": "UNIQUE is used to enforce data integrity by ensuring no duplicates."
+      }
+    },
+    {
+      "id": "default-constraint-fill-blank",
+      "kind": "fill_blank_choice",
+      "title": "Using DEFAULT Constraint",
+      "prompt": "In SQL, the DEFAULT constraint is used to provide a default value for a column when no value is specified during an INSERT operation. Complete the following statement: The DEFAULT constraint is useful for ensuring that a column always has a [blank1] value.",
+      "template": "The DEFAULT constraint is useful for ensuring that a column always has a [blank1] value.",
+      "choices": [
+        "unique",
+        "default",
+        "NULL",
+        "primary"
+      ],
+      "correctValue": "default",
+      "hint": "Think about what the the missing term constraint provides when no value is given.",
+      "help": {
+        "concept": "The the missing term constraint provides a the missing term value for a column when none is specified during insertion.",
+        "hint_1": "The the missing term constraint ensures a column has a value even if none is provided.",
+        "hint_2": "the missing term is used to supply a routine value automatically."
+      }
+    },
+    {
+      "id": "default-vs-null-single-choice",
+      "kind": "single_choice",
+      "title": "Default vs. NULL",
+      "prompt": "What happens when a column with a DEFAULT constraint is omitted from an INSERT statement?",
+      "options": [
+        "The column is set to NULL.",
+        "The column is set to its default value.",
+        "The column is left empty.",
+        "An error occurs."
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Consider what the DEFAULT constraint does when no value is provided.",
+      "help": {
+        "concept": "The DEFAULT constraint provides a default value for a column when none is specified during insertion.",
+        "hint_1": "If a column with a DEFAULT constraint is omitted, the default value is used.",
+        "hint_2": "The DEFAULT value is applied when no explicit value is provided."
+      }
+    },
+    {
+      "id": "unique-default-drag-reorder",
+      "kind": "drag_reorder",
+      "title": "Order of SQL Constraints",
+      "prompt": "Arrange the following SQL constraints in the order they are typically applied in a CREATE TABLE statement.",
+      "tokens": [
+        "PRIMARY KEY",
+        "NOT NULL",
+        "UNIQUE",
+        "DEFAULT"
+      ],
+      "correctOrder": [
+        "PRIMARY KEY",
+        "NOT NULL",
+        "UNIQUE",
+        "DEFAULT"
+      ],
+      "hint": "Consider the logical order of constraints in a table definition.",
+      "help": {
+        "concept": "SQL constraints are applied in a specific order to define table structure and rules.",
+        "hint_1": "Constraints are typically defined after the column type.",
+        "hint_2": "UNIQUE and DEFAULT constraints follow the column type definition."
+      }
+    },
+    {
+      "id": "default-constraint-multi-choice",
+      "kind": "multi_choice",
+      "title": "Benefits of DEFAULT Constraint",
+      "prompt": "Which of the following are benefits of using the DEFAULT constraint in SQL?",
+      "options": [
+        "Ensures a column always has a value.",
+        "Reduces the need for explicit value assignments.",
+        "Prevents duplicate values in a column.",
+        "Allows for automatic data entry."
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "d"
+      ],
+      "hint": "Think about how the DEFAULT constraint simplifies data entry and ensures consistency.",
+      "help": {
+        "concept": "The DEFAULT constraint provides a default value for a column when none is specified during insertion.",
+        "hint_1": "DEFAULT helps maintain consistent data entries.",
+        "hint_2": "DEFAULT reduces the need for explicit value assignments."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Build a Warehouse Stock Ledger Schema",
+    "stepIds": [
+      "try-unique-constraint-sketch0",
+      "try-default-constraint-sketch1"
+    ]
+  }
+}

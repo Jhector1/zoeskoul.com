@@ -1,0 +1,34 @@
+{
+  "topicId": "module-0-order-value-detail-report",
+  "ok": false,
+  "issues": [
+    {
+      "code": "GOLDEN_SQL_SOLUTION_MISMATCH",
+      "category": "tests",
+      "severity": "error",
+      "exerciseId": "try-module-0-sketch1",
+      "message": "Exercise \"try-module-0-sketch1\" SQL solution does not satisfy its published SQL contract: Learner SQL failed to execute."
+    },
+    {
+      "code": "GOLDEN_SQL_SOLUTION_MISMATCH",
+      "category": "tests",
+      "severity": "error",
+      "exerciseId": "try-module-0-sketch2",
+      "message": "Exercise \"try-module-0-sketch2\" SQL solution does not satisfy its published SQL contract: Learner SQL failed to execute."
+    },
+    {
+      "code": "GOLDEN_SQL_SOLUTION_MISMATCH",
+      "category": "tests",
+      "severity": "error",
+      "exerciseId": "try-module-0-sketch3",
+      "message": "Exercise \"try-module-0-sketch3\" SQL solution does not satisfy its published SQL contract: Learner SQL failed to execute."
+    },
+    {
+      "code": "GOLDEN_SQL_SOLUTION_MISMATCH",
+      "category": "tests",
+      "severity": "error",
+      "exerciseId": "try-module-0-sketch4",
+      "message": "Exercise \"try-module-0-sketch4\" SQL solution does not satisfy its published SQL contract: Learner SQL failed to execute."
+    }
+  ]
+}

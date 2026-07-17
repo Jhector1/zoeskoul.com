@@ -24,6 +24,21 @@ describe("workspace profile file and folder creation capabilities", () => {
         expect(profile.preferredActionLanguage.join("\n")).toMatch(/data\/input\.txt|src\/main\.py/i);
     });
 
+    it("registers an ordered multi-file SQL workspace without terminal access", () => {
+        const profile = WORKSPACE_PROFILES["browser-sql-files-runner"];
+
+        expect(profile).toBeDefined();
+        expect(profile.capabilities.filesystem.enabled).toBe(true);
+        expect(profile.capabilities.multiFileProjects.enabled).toBe(true);
+        expect(profile.capabilities.createFiles?.enabled).toBe(false);
+        expect(profile.capabilities.createFolders?.enabled).toBe(false);
+        expect(profile.capabilities.terminal.enabled).toBe(false);
+        expect(profile.ui.filesPanelLabel).toBe("files panel");
+        expect(profile.preferredActionLanguage.join("\n")).toMatch(
+            /schema\.sql.*seed\.sql.*query\.sql/s,
+        );
+    });
+
     it("keeps simple browser code runner single-file only", () => {
         const profile = WORKSPACE_PROFILES["browser-code-runner"];
 

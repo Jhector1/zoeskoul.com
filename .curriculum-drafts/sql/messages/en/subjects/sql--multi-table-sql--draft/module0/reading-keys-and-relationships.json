@@ -1,0 +1,138 @@
+{
+  "topics": {
+    "sql--multi-table-sql--draft": {
+      "multi-table-sql-module-0-join-foundations": {
+        "reading-keys-and-relationships": {
+          "label": "Reading Keys and Relationships",
+          "summary": "Trace documented primary-key and foreign-key pairs before writing a join.",
+          "cards": {
+            "sketch0": {
+              "title": "Meet the Tables Before the Join"
+            },
+            "sketch1": {
+              "title": "Read the Database as a Map"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "practice": {
+            "quiz-1": {
+              "title": "Find the Student Identifier",
+              "prompt": "Which column uniquely identifies one row in the `students` table?",
+              "hint": "Look for the column declared as the table's primary key.",
+              "help": {
+                "concept": "A primary key uniquely identifies one row in its own table.",
+                "hint_1": "Names and grade levels can repeat, but a primary-key value cannot.",
+                "hint_2": "Use the schema browser and find the key marker on `students`."
+              },
+              "options": {
+                "a": "name",
+                "b": "grade_level",
+                "c": "id",
+                "d": "student_id"
+              }
+            },
+            "quiz-2": {
+              "title": "Follow the Student Relationship",
+              "prompt": "Which documented key pair connects an enrollment row to its student?",
+              "hint": "Start with the foreign key stored on `enrollments`.",
+              "help": {
+                "concept": "A child table stores a foreign key that points to the parent's primary key.",
+                "hint_1": "The enrollment row stores the student's identifier in `student_id`.",
+                "hint_2": "Match that foreign key to the unique identifier on `students`."
+              },
+              "options": {
+                "a": "enrollments.id → students.id",
+                "b": "enrollments.student_id → students.id",
+                "c": "enrollments.course_id → students.id",
+                "d": "students.grade_level → enrollments.student_id"
+              }
+            },
+            "quiz-3": {
+              "title": "Choose Valid Relationship Paths",
+              "prompt": "Which key pairs are documented relationships in the school schema? Select all that apply.",
+              "hint": "Use the foreign-key arrows in the ERD, not columns that merely share a type or name.",
+              "help": {
+                "concept": "A valid relationship compares a declared foreign key with the referenced primary key.",
+                "hint_1": "Check the arrows leaving `courses` and `enrollments`.",
+                "hint_2": "Reject any pair that connects unrelated `id` columns."
+              },
+              "options": {
+                "a": "courses.department_id → departments.id",
+                "b": "enrollments.course_id → courses.id",
+                "c": "students.id → departments.id",
+                "d": "enrollments.student_id → students.id"
+              }
+            },
+            "quiz-4": {
+              "title": "Recognize a Foreign Key",
+              "prompt": "Which statements describe a foreign key? Select all that apply.",
+              "hint": "Think about where the value is stored and what table it points toward.",
+              "help": {
+                "concept": "A foreign key records the identity of a related parent row.",
+                "hint_1": "The value may repeat because many child rows can point to one parent.",
+                "hint_2": "It must reference the key on the related table, not just a similarly named column."
+              },
+              "options": {
+                "a": "It points to a key in a related table.",
+                "b": "Its values may repeat across child rows.",
+                "c": "It always uniquely identifies its own table row.",
+                "d": "It defines a path the join can follow."
+              }
+            },
+            "quiz-5": {
+              "title": "Trace a Relationship Safely",
+              "prompt": "Arrange the steps for deciding how two requested tables are related before writing SQL.",
+              "hint": "Start with the requested output, then verify the exact key path in the schema.",
+              "help": {
+                "concept": "Join planning begins with the requested tables and ends with a verified foreign-key path.",
+                "hint_1": "Do not compare columns until you know which tables supply the requested fields.",
+                "hint_2": "The last check is confirming that the foreign key points to the intended primary key."
+              },
+              "tokens": {
+                "t1": "Identify the tables that contain the requested fields",
+                "t2": "Find the primary key on the parent table",
+                "t3": "Find the matching foreign key on the related table",
+                "t4": "Verify the relationship arrow in the ERD"
+              }
+            },
+            "quiz-6": {
+              "title": "Complete the Course Relationship",
+              "prompt": "Complete the documented relationship from enrollments to courses.",
+              "hint": "The foreign key `course_id` points to the course table's unique identifier.",
+              "help": {
+                "concept": "`enrollments.course_id` stores the identifier of the related course row.",
+                "hint_1": "Look for the primary key on `courses`.",
+                "hint_2": "Choose the column that uniquely identifies one course."
+              },
+              "template": "`enrollments.course_id` references `courses.[blank1]`.",
+              "choices": [
+                "id",
+                "title",
+                "department_id",
+                "name"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql--multi-table-sql--draft": {
+      "multi-table-sql-module-0-join-foundations": {
+        "reading-keys-and-relationships": {
+          "sketch-1": {
+            "title": "Each table keeps one kind of fact",
+            "bodyMarkdown": "Earlier SQL courses answered questions from one table at a time. Real reports often need facts that live in separate tables: a student's name, the course they joined, and the department that owns that course. This course teaches you to rebuild those reports by following documented relationships instead of guessing which columns belong together.\n\nYou will start with primary keys, foreign keys, and two-table INNER JOINs. Then you will follow bridge tables, preserve unmatched rows with LEFT JOIN, count relationships accurately, and finish with a multi-table participation report. At every stage, the result grain matters as much as the join itself.\n\nA relational database becomes easier to read when you first ask a simple question: **what does one row represent?** The answer is called the table's **grain**. In this school database, one row in `students` represents one student, one row in `departments` represents one department, and one row in `courses` represents one course. An `enrollments` row represents something different: one student's registration in one course.\n\nOpen the **Tables** view and read the sample rows as if they were short sentences. A row in `courses` says that a particular course exists and belongs to the department named by `department_id`. A row in `enrollments` says that the student named by `student_id` registered for the course named by `course_id` during a particular term.\n\nEvery table also has an `id` column marked as a **primary key**. A primary key is a value that identifies exactly one row in its own table. The columns `courses.department_id`, `enrollments.student_id`, and `enrollments.course_id` are **foreign keys**: they store primary-key values from related tables.\n\nDrag the table boxes into an arrangement that helps you compare those columns, then zoom until the names and sample rows are comfortable to read. You do not need to memorize the schema. You are learning to recognize where each fact lives and which columns point toward another table."
+          },
+          "sketch-2": {
+            "title": "Primary keys and foreign keys form a route",
+            "bodyMarkdown": "An **entity-relationship diagram**, usually shortened to **ERD**, is a map of the database. Each box represents a table. Each connecting line records a relationship between a primary key and a foreign key. The diagram does not invent a route for a query; it reveals the route already built into the schema.\n\nBegin at `students.id`. Follow its connector to `enrollments.student_id`. The small `1` and `many` labels describe the relationship's **cardinality**: one student may appear in many enrollment rows, while each enrollment row points back to one student. Continue from `enrollments.course_id` to `courses.id`, then from `courses.department_id` to `departments.id`.\n\nArrange the draggable boxes so this path is easy to see:\n\n```text\nstudents → enrollments → courses → departments\n```\n\nNow imagine a report that needs a student's name and a department's name. Those values are separated across the database, but the ERD shows how to travel between them without guessing. Each connector will later become an `ON` condition in a join.\n\nThe habit to build here is quiet but important: before writing SQL, trace the relationship with your eyes. A join is dependable when its conditions follow the documented path; columns that merely share a name or happen to contain similar numbers are not enough."
+          }
+        }
+      }
+    }
+  }
+}

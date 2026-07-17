@@ -1,0 +1,165 @@
+{
+  "topics": {
+    "sql-analysis-reporting": {
+      "sql-analysis-reporting-module-1-null-safe-calculations": {
+        "percentage-and-discount-calculations": {
+          "label": "Percentage and Discount Calculations",
+          "summary": "Learn how to calculate discounts and net sales using SQL, handling NULL values safely with COALESCE and CASE statements.",
+          "cards": {
+            "sketch0": {
+              "title": "Calculating Discounts Safely"
+            },
+            "sketch1": {
+              "title": "Calculating Net Sales with Aliases"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_percentage_and_discount_calculations_sketch0": {
+              "title": "Calculate Discount Amount",
+              "prompt": "Write a SQL query to calculate the discount amount for each product in the `sales_reporting` table. Use COALESCE to handle NULL values in `discount_pct`.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT product_name, unit_price, COALESCE(discount_pct, 0) AS discount_pct, \n       unit_price * (COALESCE(discount_pct, 0) / 100) AS discount_amount\nFROM sales_reporting;"
+            },
+            "try_percentage_and_discount_calculations_sketch1": {
+              "title": "Calculate Net Sales",
+              "prompt": "Write a SQL query to calculate the net sales for each product in the `sales_reporting` table. Use COALESCE to handle NULL values in `discount_pct`.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT product_name, unit_price, COALESCE(discount_pct, 0) AS discount_pct, \n       unit_price * (COALESCE(discount_pct, 0) / 100) AS discount_amount, \n       unit_price - (unit_price * (COALESCE(discount_pct, 0) / 100)) AS net_sales\nFROM sales_reporting;"
+            }
+          },
+          "practice": {
+            "quiz1": {
+              "title": "Understanding COALESCE",
+              "prompt": "What does the COALESCE function do in SQL?",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "options": {
+                "a": "Replaces NULL with a specified value",
+                "b": "Calculates the average of a column",
+                "c": "Sorts the results in ascending order",
+                "d": "Joins two tables"
+              }
+            },
+            "quiz2": {
+              "title": "Effect of NULL in Calculations",
+              "prompt": "What happens when you multiply a number by NULL in SQL?",
+              "hint": "Consider how NULL affects arithmetic operations.",
+              "help": {
+                "concept": "NULL in arithmetic results in NULL.",
+                "hint_1": "Any arithmetic operation with NULL results in NULL.",
+                "hint_2": "Multiplying by NULL results in NULL."
+              },
+              "options": {
+                "a": "The result is NULL",
+                "b": "The result is zero",
+                "c": "The result is the original number",
+                "d": "An error occurs"
+              }
+            },
+            "quiz3": {
+              "title": "Using COALESCE in Calculations",
+              "prompt": "Which of the following are true about using COALESCE in SQL calculations? Select all that apply.",
+              "hint": "Consider how COALESCE affects NULL values and calculations.",
+              "help": {
+                "concept": "COALESCE provides a default value for NULLs in calculations.",
+                "hint_1": "COALESCE can prevent NULL results in calculations.",
+                "hint_2": "It allows specifying a fallback value for NULLs."
+              },
+              "options": {
+                "a": "COALESCE can replace NULL with a default value",
+                "b": "COALESCE can be used to avoid NULL results in calculations",
+                "c": "COALESCE sorts the results",
+                "d": "COALESCE joins tables"
+              }
+            },
+            "quiz4": {
+              "title": "Steps to Calculate Net Sales",
+              "prompt": "Arrange the steps to calculate net sales from a product's unit price and discount percentage.",
+              "hint": "Start with calculating the discount amount.",
+              "help": {
+                "concept": "Net sales calculation involves subtracting the discount from the total price.",
+                "hint_1": "Calculate the discount amount first.",
+                "hint_2": "Subtract the discount amount from the unit price."
+              },
+              "tokens": {
+                "t1": "Calculate discount amount",
+                "t2": "Subtract discount amount from unit price",
+                "t3": "Use COALESCE to handle NULL discount percentages"
+              }
+            },
+            "quiz5": {
+              "title": "COALESCE Function Usage",
+              "prompt": "In SQL, the COALESCE function is used to replace NULL values with a [blank1].",
+              "hint": "Think about what COALESCE provides when a value is NULL.",
+              "help": {
+                "concept": "COALESCE provides a the missing term for NULLs.",
+                "hint_1": "COALESCE replaces NULL with a specified value.",
+                "hint_2": "It ensures calculations proceed without resulting in NULL."
+              },
+              "template": "In SQL, the COALESCE function is used to replace NULL values with a [blank1].",
+              "choices": [
+                "default value",
+                "sum",
+                "average",
+                "table"
+              ]
+            },
+            "quiz6": {
+              "title": "Handling NULL in Calculations",
+              "prompt": "When performing calculations, NULL values can be replaced with a [blank1] using COALESCE.",
+              "hint": "Consider what COALESCE provides as a replacement for NULL.",
+              "help": {
+                "concept": "COALESCE provides a the missing term for NULLs in calculations.",
+                "hint_1": "COALESCE replaces NULL with a specified value.",
+                "hint_2": "It ensures calculations proceed without resulting in NULL."
+              },
+              "template": "When performing calculations, NULL values can be replaced with a [blank1] using COALESCE.",
+              "choices": [
+                "default value",
+                "sum",
+                "average",
+                "table"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql-analysis-reporting": {
+      "sql-analysis-reporting-module-1-null-safe-calculations": {
+        "percentage-and-discount-calculations": {
+          "sketch0": {
+            "title": "Calculating Discounts Safely",
+            "bodyMarkdown": "In SQL, calculating discounts involves using arithmetic expressions. However, when dealing with potential NULL values, it's crucial to handle them properly to avoid unexpected results. For instance, if a discount percentage is NULL, multiplying it directly with a price will result in a NULL value. To prevent this, we can use the COALESCE function to provide a default value.\n\nHere's an example:\n\n```sql\nSELECT product_name, \n       unit_price, \n       COALESCE(discount_pct, 0) AS discount_pct, \n       unit_price * (COALESCE(discount_pct, 0) / 100) AS discount_amount\nFROM sales_reporting;\n```\n\nIn this query, we calculate the discount amount by replacing any NULL discount percentages with 0 using COALESCE. This ensures that the calculation proceeds without resulting in NULL."
+          },
+          "sketch1": {
+            "title": "Calculating Net Sales with Aliases",
+            "bodyMarkdown": "After calculating the discount amount, the next step is to determine the net sales. This involves subtracting the discount amount from the total price. Using SQL, we can achieve this with clear expressions and aliases for readability.\n\nConsider the following SQL query:\n\n```sql\nSELECT product_name, \n       unit_price, \n       COALESCE(discount_pct, 0) AS discount_pct, \n       unit_price * (COALESCE(discount_pct, 0) / 100) AS discount_amount, \n       unit_price - (unit_price * (COALESCE(discount_pct, 0) / 100)) AS net_sales\nFROM sales_reporting;\n```\n\nHere, we calculate the net sales by subtracting the discount amount from the unit price. Aliases like `discount_amount` and `net_sales` make the query more readable and the results easier to interpret."
+          }
+        }
+      }
+    }
+  }
+}

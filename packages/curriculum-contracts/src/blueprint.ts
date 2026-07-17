@@ -2,6 +2,7 @@ import type { LocaleCode } from "./locales.js";
 import type { ManifestIdeServiceConfig } from "./ide-services.js";
 import {CourseGenerationPolicy, ModulePedagogyPolicy, TopicPedagogyPolicy, WorkspaceProfile} from "./workspace";
 import {SqlDialect} from "./manifest";
+import type { ToolPresentationPolicy } from "./tool-presentation.js";
 
 export type BuiltinCourseProfileId =
     | "sql"
@@ -62,6 +63,8 @@ export type CourseBlueprint = {
   };
   seedModules?: string[];
   runtimePolicy?: BlueprintRuntimePolicy;
+  /** Subject/profile-level Tools presentation defaults inherited by every course scope. */
+  tools?: ToolPresentationPolicy;
   idePolicy?: {
     defaultServices?: ManifestIdeServiceConfig;
     moduleServiceDefaults?: Record<string, ManifestIdeServiceConfig>;

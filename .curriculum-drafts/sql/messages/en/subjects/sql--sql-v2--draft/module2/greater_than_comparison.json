@@ -3,34 +3,17 @@
     "sql--sql-v2--draft": {
       "sql--sql-v2--draft-2": {
         "greater_than_comparison": {
-          "label": "Greater Than Comparison",
-          "summary": "Learn how to use the > operator in a WHERE clause to keep only rows with values larger than a chosen number.",
+          "label": "Numeric Comparisons and Boundaries",
+          "summary": "Choose strict or inclusive comparison operators for numeric thresholds.",
           "cards": {
             "sketch0": {
-              "title": "Using > in a WHERE clause"
+              "title": "Strict Comparisons Exclude the Boundary"
             },
             "sketch1": {
-              "title": "Filtering other numeric columns"
-            },
-            "sketch2": {
-              "title": "Greater than is strict"
+              "title": "Inclusive Comparisons Keep the Boundary"
             },
             "quiz": {
-              "title": "Quiz"
-            },
-            "project": {
-              "title": "Greater-than filtering practice"
-            }
-          },
-          "projectSteps": {
-            "gt_code_price_over_20": {
-              "title": "Query products priced above 20"
-            },
-            "gt_code_stock_over_10": {
-              "title": "Query products with stock above 10"
-            },
-            "gt_code_home_price_over_30": {
-              "title": "Filter Home products above 30"
+              "title": "Check Your Understanding"
             }
           },
           "quiz": {
@@ -135,7 +118,7 @@
               "help": {
                 "concept": "In `WHERE price > value`, the value on the right sets the minimum threshold that rows must exceed.",
                 "hint_1": "You want the condition to mean 'more than twenty'.",
-                "hint_2": "Choose the numeric value that makes the clause read `price > ...` for products above the missing term."
+                "hint_2": "Choose the numeric value that makes the clause read `price > ...` for products above the blank."
               },
               "template": "SELECT name FROM products WHERE price > [blank1];",
               "choices": [
@@ -162,120 +145,67 @@
                 "created_at"
               ]
             },
-            "gt-code-price-over-20": {
-              "title": "Query products priced above 20",
-              "prompt": "Write a query that shows the `name` and `price` of all products whose `price` is greater than 20. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Show the name and price of all products whose price is greater than 20.\nSELECT name, price\nFROM products\nWHERE ;"
-            },
-            "gt-code-stock-over-10": {
-              "title": "Query products with stock above 10",
-              "prompt": "Write a query that shows the `name` and `stock` columns for products whose `stock` is greater than 10. Use the SQL editor, click Run query, and inspect the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- add a WHERE clause here\nSELECT name, stock\nFROM products"
-            },
-            "gt-code-home-price-over-30": {
-              "title": "Filter Home products above 30",
-              "prompt": "Write a query that shows `name`, `category`, and `price` for products in the `Home` category whose `price` is greater than 30. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Show name, category, and price for products in the Home category whose price is greater than 30.\nSELECT name, category, price\nFROM products\nWHERE category = 'Home'\n  AND ;"
-            },
-            "try-greater_than_comparison-sketch0": {
-              "title": "Query products priced above 20",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that shows the `name` and `price` of all products whose `price` is greater than 20. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Show the name and price of all products whose price is greater than 20.\nSELECT name, price\nFROM products\nWHERE ;"
-            },
             "try-greater_than_comparison-sketch1": {
-              "title": "Query products with stock above 10",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that shows the `name` and `stock` columns for products whose `stock` is greater than 10. Use the SQL editor, click Run query, and inspect the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Include the Restock Boundary",
+              "prompt": "A promotion requires at least `15` units in stock, and items exactly on the boundary must count. Return `name, stock` from `products` in that column order. Keep only rows where `stock >= 15`.",
+              "hint": "At least means use >= so 15 remains in the result.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "Return `name, stock` from `products` in that column order. Keep only rows where `stock >= 15`."
               },
-              "starterCode": "-- add a WHERE clause here\nSELECT name, stock\nFROM products"
+              "starterCode": "SELECT name, stock\nFROM products\n-- Keep stock of 15 or more"
             },
             "try-greater_than_comparison-sketch2": {
-              "title": "Filter Home products above 30",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that shows `name`, `category`, and `price` for products in the `Home` category whose `price` is greater than 30. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Find Stock Above a Strict Threshold",
+              "prompt": "Find products that have more than `20` units available for a large-order list. Return `id, name, stock` from `products` in that column order. Keep only rows where `stock > 20`.",
+              "hint": "Use > because a stock value of exactly 20 should not be included.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "Return `id, name, stock` from `products` in that column order. Keep only rows where `stock > 20`."
               },
-              "starterCode": "-- Show name, category, and price for products in the Home category whose price is greater than 30.\nSELECT name, category, price\nFROM products\nWHERE category = 'Home'\n  AND ;"
+              "starterCode": "SELECT id, name, stock\nFROM products\n-- Keep stock strictly above 20"
             }
           },
           "tryIt": {
             "allowReveal": true,
-            "try_greater_than_comparison_sketch0": {
-              "title": "Query products priced above 20",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that shows the `name` and `price` of all products whose `price` is greater than 20. Write the query in the SQL editor, click Run query, and check the results table."
+            "try_greater_than_comparison_sketch2": {
+              "title": "Find Stock Above a Strict Threshold",
+              "prompt": "Find products that have more than `20` units available for a large-order list. Show `id`, `name`, and `stock` from `products`.",
+              "hint": "Use > because a stock value of exactly 20 should not be included.",
+              "help": {
+                "concept": "A strict comparison excludes the boundary value itself.",
+                "hint_1": "Use > because a stock value of exactly 20 should not be included.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+              }
             },
             "try_greater_than_comparison_sketch1": {
-              "title": "Query products with stock above 10",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that shows the `name` and `stock` columns for products whose `stock` is greater than 10. Use the SQL editor, click Run query, and inspect the results table."
-            },
-            "try_greater_than_comparison_sketch2": {
-              "title": "Filter Home products above 30",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that shows `name`, `category`, and `price` for products in the `Home` category whose `price` is greater than 30. Write the query in the SQL editor, click Run query, and check the results table."
+              "title": "Include the Restock Boundary",
+              "prompt": "A promotion requires at least `15` units in stock, and items exactly on the boundary must count. Show `name` and `stock` from `products` that qualify.",
+              "hint": "At least means use >= so 15 remains in the result.",
+              "help": {
+                "concept": "An inclusive comparison keeps rows at the boundary as well as rows above it.",
+                "hint_1": "At least means use >= so 15 remains in the result.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+              }
             }
           }
         }
       },
       "sql-v2-2": {
         "greater_than_comparison": {
-          "label": "Greater Than Comparison",
-          "summary": "Learn how to use the > operator in a WHERE clause to keep only rows with values larger than a chosen number.",
+          "label": "Numeric Comparisons and Boundaries",
+          "summary": "Choose strict or inclusive comparison operators for numeric thresholds.",
           "cards": {
             "sketch0": {
-              "title": "Using > in a WHERE clause"
+              "title": "Strict Comparisons Exclude the Boundary"
             },
             "sketch1": {
-              "title": "Filtering other numeric columns"
-            },
-            "sketch2": {
-              "title": "Greater than is strict"
+              "title": "Inclusive Comparisons Keep the Boundary"
             },
             "quiz": {
-              "title": "Quiz"
-            },
-            "project": {
-              "title": "Greater-than filtering practice"
-            }
-          },
-          "projectSteps": {
-            "gt_code_price_over_20": {
-              "title": "Query products priced above 20"
-            },
-            "gt_code_stock_over_10": {
-              "title": "Query products with stock above 10"
-            },
-            "gt_code_home_price_over_30": {
-              "title": "Filter Home products above 30"
+              "title": "Check Your Understanding"
             }
           },
           "quiz": {
@@ -380,7 +310,7 @@
               "help": {
                 "concept": "In `WHERE price > value`, the value on the right sets the minimum threshold that rows must exceed.",
                 "hint_1": "You want the condition to mean 'more than twenty'.",
-                "hint_2": "Choose the numeric value that makes the clause read `price > ...` for products above the missing term."
+                "hint_2": "Choose the numeric value that makes the clause read `price > ...` for products above the blank."
               },
               "template": "SELECT name FROM products WHERE price > [blank1];",
               "choices": [
@@ -442,7 +372,7 @@
             },
             "try-greater_than_comparison-sketch0": {
               "title": "Query products priced above 20",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that shows the `name` and `price` of all products whose `price` is greater than 20. Write the query in the SQL editor, click Run query, and check the results table.",
+              "prompt": "Create a focused inventory query that shows the `name` and `price` of all products whose `price` is greater than 20. Run it and compare the result with the expected table.",
               "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
               "help": {
                 "concept": "This SQL exercise checks whether your query returns the requested result.",
@@ -452,41 +382,49 @@
               "starterCode": "-- Show the name and price of all products whose price is greater than 20.\nSELECT name, price\nFROM products\nWHERE ;"
             },
             "try-greater_than_comparison-sketch1": {
-              "title": "Query products with stock above 10",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that shows the `name` and `stock` columns for products whose `stock` is greater than 10. Use the SQL editor, click Run query, and inspect the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Include the Restock Boundary",
+              "prompt": "A promotion requires at least `15` units in stock, and items exactly on the boundary must count. Show `name` and `stock` from `products` that qualify.",
+              "hint": "At least means use >= so 15 remains in the result.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
+                "concept": "An inclusive comparison keeps rows at the boundary as well as rows above it.",
+                "hint_1": "At least means use >= so 15 remains in the result.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
               },
-              "starterCode": "-- add a WHERE clause here\nSELECT name, stock\nFROM products"
+              "starterCode": "SELECT name, stock\nFROM products\n-- Keep stock of 15 or more"
             },
             "try-greater_than_comparison-sketch2": {
-              "title": "Filter Home products above 30",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that shows `name`, `category`, and `price` for products in the `Home` category whose `price` is greater than 30. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Find Stock Above a Strict Threshold",
+              "prompt": "Find products that have more than `20` units available for a large-order list. Show `id`, `name`, and `stock` from `products`.",
+              "hint": "Use > because a stock value of exactly 20 should not be included.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
+                "concept": "A strict comparison excludes the boundary value itself.",
+                "hint_1": "Use > because a stock value of exactly 20 should not be included.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
               },
-              "starterCode": "-- Show name, category, and price for products in the Home category whose price is greater than 30.\nSELECT name, category, price\nFROM products\nWHERE category = 'Home'\n  AND ;"
+              "starterCode": "SELECT id, name, stock\nFROM products\n-- Keep stock strictly above 20"
             }
           },
           "tryIt": {
             "allowReveal": true,
-            "try_greater_than_comparison_sketch0": {
-              "title": "Query products priced above 20",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that shows the `name` and `price` of all products whose `price` is greater than 20. Write the query in the SQL editor, click Run query, and check the results table."
+            "try_greater_than_comparison_sketch2": {
+              "title": "Find Stock Above a Strict Threshold",
+              "prompt": "Find products that have more than `20` units available for a large-order list. Show `id`, `name`, and `stock` from `products`.",
+              "hint": "Use > because a stock value of exactly 20 should not be included.",
+              "help": {
+                "concept": "A strict comparison excludes the boundary value itself.",
+                "hint_1": "Use > because a stock value of exactly 20 should not be included.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+              }
             },
             "try_greater_than_comparison_sketch1": {
-              "title": "Query products with stock above 10",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that shows the `name` and `stock` columns for products whose `stock` is greater than 10. Use the SQL editor, click Run query, and inspect the results table."
-            },
-            "try_greater_than_comparison_sketch2": {
-              "title": "Filter Home products above 30",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that shows `name`, `category`, and `price` for products in the `Home` category whose `price` is greater than 30. Write the query in the SQL editor, click Run query, and check the results table."
+              "title": "Include the Restock Boundary",
+              "prompt": "A promotion requires at least `15` units in stock, and items exactly on the boundary must count. Show `name` and `stock` from `products` that qualify.",
+              "hint": "At least means use >= so 15 remains in the result.",
+              "help": {
+                "concept": "An inclusive comparison keeps rows at the boundary as well as rows above it.",
+                "hint_1": "At least means use >= so 15 remains in the result.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+              }
             }
           }
         }
@@ -497,33 +435,25 @@
     "sql--sql-v2--draft": {
       "sql--sql-v2--draft-2": {
         "greater_than_comparison": {
-          "greater-than-basics": {
-            "title": "Using > in a WHERE clause",
-            "bodyMarkdown": "The `>` operator means **greater than**. In SQL, you often use it inside a `WHERE` clause to keep only rows where a number is bigger than a value you choose.\n\nFor example, in the `products` table, this query shows products with a price greater than 20:\n\n```sql\nSELECT name, price\nFROM products\nWHERE price > 20;\n```\n\nStep by step:\n- `SELECT name, price` chooses the columns to show.\n- `FROM products` says which table to read.\n- `WHERE price > 20` keeps only rows where the `price` value is bigger than `20`.\n\nWith the dataset in this lesson, that includes products like `Acrylic Paint Set`, `Desk Lamp`, and `Office Chair`.\n\nA key detail: `>` does **not** include the value itself. So if a product costs exactly `20`, it would **not** appear."
+          "strict_numeric_comparisons": {
+            "title": "Strict Comparisons Exclude the Boundary",
+            "bodyMarkdown": "`>` and `<` are strict comparisons. The boundary value itself does not pass.\n\n```sql\nSELECT\n    name,\n    price\nFROM products\nWHERE price > 25;\n```\n\nA product priced exactly `25` is excluded because the request says greater than, not greater than or equal to. Likewise, `price < 25` excludes exactly `25`.\n\nUnderline words such as “more than,” “above,” “less than,” and “below” before choosing the operator."
           },
-          "greater-than-with-stock": {
-            "title": "Filtering other numeric columns",
-            "bodyMarkdown": "You can use `>` with any numeric column, not just `price`. In this table, `stock` is also numeric.\n\nExample:\n\n```sql\nSELECT name, stock\nFROM products\nWHERE stock > 10;\n```\n\nLine by line:\n- `SELECT name, stock` shows each product name and its stock count.\n- `FROM products` reads from the `products` table.\n- `WHERE stock > 10` keeps only products with more than 10 items in stock.\n\nIn this dataset, `Sketchbook`, `Notebook`, and `Fountain Pen` match that condition.\n\nThis is useful when you want to find rows above a threshold, such as items with plenty of stock or products above a certain price."
-          },
-          "greater-than-vs-greater-than-or-equal": {
-            "title": "Greater than is strict",
-            "bodyMarkdown": "Beginners often mix up `>` and `>=`.\n\n- `>` means **strictly bigger than**\n- `>=` means **bigger than or equal to**\n\nLook at this query:\n\n```sql\nSELECT name, stock\nFROM products\nWHERE stock > 15;\n```\n\nThis query will include rows where stock is `25` or `50`, but it will **not** include a row where stock is exactly `15`.\n\nIn the lesson dataset, `Fountain Pen` has stock `15`, so it does not match `stock > 15`.\n\nWorked example:\n- `Sketchbook` has stock `25` → included\n- `Fountain Pen` has stock `15` → not included\n- `Office Chair` has stock `3` → not included"
+          "inclusive_boundaries": {
+            "title": "Inclusive Comparisons Keep the Boundary",
+            "bodyMarkdown": "`>=` and `<=` include the boundary.\n\n```sql\nSELECT\n    name,\n    price\nFROM products\nWHERE price <= 20;\n```\n\nA price of exactly `20` passes. These operators match phrases such as “at most 20,” “20 or less,” “at least 10,” and “10 or more.”\n\nWhen a filter seems off by one boundary row, compare the requirement with the operator. The difference between `<` and `<=` is small in syntax but important in meaning."
           }
         }
       },
       "sql-v2-2": {
         "greater_than_comparison": {
-          "greater-than-basics": {
-            "title": "Using > in a WHERE clause",
-            "bodyMarkdown": "The `>` operator means **greater than**. In SQL, you often use it inside a `WHERE` clause to keep only rows where a number is bigger than a value you choose.\n\nFor example, in the `products` table, this query shows products with a price greater than 20:\n\n```sql\nSELECT name, price\nFROM products\nWHERE price > 20;\n```\n\nStep by step:\n- `SELECT name, price` chooses the columns to show.\n- `FROM products` says which table to read.\n- `WHERE price > 20` keeps only rows where the `price` value is bigger than `20`.\n\nWith the dataset in this lesson, that includes products like `Acrylic Paint Set`, `Desk Lamp`, and `Office Chair`.\n\nA key detail: `>` does **not** include the value itself. So if a product costs exactly `20`, it would **not** appear."
+          "strict_numeric_comparisons": {
+            "title": "Strict Comparisons Exclude the Boundary",
+            "bodyMarkdown": "`>` and `<` are strict comparisons. The boundary value itself does not pass.\n\n```sql\nSELECT\n    name,\n    price\nFROM products\nWHERE price > 25;\n```\n\nA product priced exactly `25` is excluded because the request says greater than, not greater than or equal to. Likewise, `price < 25` excludes exactly `25`.\n\nUnderline words such as “more than,” “above,” “less than,” and “below” before choosing the operator."
           },
-          "greater-than-with-stock": {
-            "title": "Filtering other numeric columns",
-            "bodyMarkdown": "You can use `>` with any numeric column, not just `price`. In this table, `stock` is also numeric.\n\nExample:\n\n```sql\nSELECT name, stock\nFROM products\nWHERE stock > 10;\n```\n\nLine by line:\n- `SELECT name, stock` shows each product name and its stock count.\n- `FROM products` reads from the `products` table.\n- `WHERE stock > 10` keeps only products with more than 10 items in stock.\n\nIn this dataset, `Sketchbook`, `Notebook`, and `Fountain Pen` match that condition.\n\nThis is useful when you want to find rows above a threshold, such as items with plenty of stock or products above a certain price."
-          },
-          "greater-than-vs-greater-than-or-equal": {
-            "title": "Greater than is strict",
-            "bodyMarkdown": "Beginners often mix up `>` and `>=`.\n\n- `>` means **strictly bigger than**\n- `>=` means **bigger than or equal to**\n\nLook at this query:\n\n```sql\nSELECT name, stock\nFROM products\nWHERE stock > 15;\n```\n\nThis query will include rows where stock is `25` or `50`, but it will **not** include a row where stock is exactly `15`.\n\nIn the lesson dataset, `Fountain Pen` has stock `15`, so it does not match `stock > 15`.\n\nWorked example:\n- `Sketchbook` has stock `25` → included\n- `Fountain Pen` has stock `15` → not included\n- `Office Chair` has stock `3` → not included"
+          "inclusive_boundaries": {
+            "title": "Inclusive Comparisons Keep the Boundary",
+            "bodyMarkdown": "`>=` and `<=` include the boundary.\n\n```sql\nSELECT\n    name,\n    price\nFROM products\nWHERE price <= 20;\n```\n\nA price of exactly `20` passes. These operators match phrases such as “at most 20,” “20 or less,” “at least 10,” and “10 or more.”\n\nWhen a filter seems off by one boundary row, compare the requirement with the operator. The difference between `<` and `<=` is small in syntax but important in meaning."
           }
         }
       }

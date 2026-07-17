@@ -1,0 +1,13 @@
+{
+  "topicId": "module-0-inventory-intake-batch",
+  "ok": false,
+  "issues": [
+    {
+      "code": "SQL_UNPLANNED_CONCEPT",
+      "category": "pedagogy",
+      "severity": "error",
+      "exerciseId": "ci-module-0-step5",
+      "message": "Exercise \"ci-module-0-step5\" uses SQL concept(s) outside the allowed concept stage for module 0: BETWEEN."
+    }
+  ]
+}

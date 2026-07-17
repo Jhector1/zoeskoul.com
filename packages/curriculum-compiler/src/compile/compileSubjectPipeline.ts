@@ -44,6 +44,7 @@ import {
 import { evaluateTopicDraft } from "../quality/evaluateTopicDraft.js";
 import { buildCurriculumQualityReport } from "../quality/buildCurriculumQualityReport.js";
 import type { CompileProgressCallback } from "./compileProgress.js";
+import { extractRetryIssues } from "./topicRetryContext.js";
 import { listTopicPlanNodes } from "../plan/listTopicPlanNodes.js";
 import { buildTopicSeedFromPlanNode } from "../seeds/buildTopicSeedFromPlanNode.js";
 import { validateWorkspacePolicy } from "../validate/validateWorkspacePolicy.js";
@@ -356,6 +357,7 @@ export async function compileSubjectPipeline(args: {
                           maxRetries: MAX_TOPIC_RETRIES,
                           previousErrorCode: errorCode(previousError),
                           previousErrorMessage: previousError.message,
+                          qualityIssues: extractRetryIssues(previousError),
                       }
                     : undefined;
 

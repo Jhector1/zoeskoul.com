@@ -29,6 +29,42 @@ function asSqlDialect(value: unknown): SqlDialect | null {
 }
 export type SqlTableSnapshots = Record<string, SqlTableSnapshot>;
 
+type ReadonlySqlTableSnapshots = Readonly<
+    Record<
+        string,
+        {
+            readonly name: string;
+            readonly columns: readonly {
+                readonly name: string;
+                readonly type?: string | null;
+            }[];
+            readonly rows: readonly (readonly unknown[])[];
+            readonly rowCount: number;
+        }
+    >
+>;
+
+function cloneSqlTableSnapshots(
+    snapshots: ReadonlySqlTableSnapshots | null | undefined,
+): SqlTableSnapshots | undefined {
+    if (!snapshots) return undefined;
+
+    return Object.fromEntries(
+        Object.entries(snapshots).map(([key, table]) => [
+            key,
+            {
+                name: table.name,
+                columns: table.columns.map((column) => ({
+                    name: column.name,
+                    type: column.type ?? null,
+                })),
+                rows: table.rows.map((row) => [...row]),
+                rowCount: table.rowCount,
+            },
+        ]),
+    );
+}
+
 export type ResolveSqlRunnerConfigArgs = {
     language?: string | null;
     sqlDialect?: string | null;
@@ -115,10 +151,11 @@ export function resolveSqlRunnerConfig(
         dataset?.seedSql ??
         undefined;
 
-    const resolvedSnapshots =
+    const resolvedSnapshots = cloneSqlTableSnapshots(
         sqlInitialTableSnapshots ??
         dataset?.tableSnapshots ??
-        undefined;
+        undefined,
+    );
 
     const resolvedResultShape = sqlResultShape ?? effectiveRuntime.resultShape ?? "table";
 
@@ -136,7 +173,6 @@ export function resolveSqlRunnerConfig(
                 showTables: effectiveRuntime.showTables,
                 showErd: effectiveRuntime.showErd,
                 showChen: effectiveRuntime.showChen,
-                defaultTab: "tables",
             }
             : undefined,
     };

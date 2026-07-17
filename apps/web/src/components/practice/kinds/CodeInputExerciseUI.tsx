@@ -25,6 +25,7 @@ import {
     type SqlTableSnapshots,
 } from "@/lib/subjects/sql/sql/runtime/resolveSqlRunnerConfig";
 import {isRunnerLanguage, RunnerLanguage} from "@zoeskoul/code-contracts";
+import { formatSqlDisplayValue } from "@zoeskoul/practice-checks";
 import { learnerUiFlags } from "@/lib/config/learnerUiFlags";
 
 type CodeInputExercise = Extract<Exercise, { kind: "code_input" }>;
@@ -99,8 +100,11 @@ function ExpectedExampleCard({
                     <table className="min-w-full text-left text-sm">
                         <thead>
                         <tr className="border-b border-black/10 dark:border-white/10">
-                            {example.columns.map((col) => (
-                                <th key={col} className="px-2 py-1 ui-text-soft font-medium">
+                            {example.columns.map((col, columnIndex) => (
+                                <th
+                                    key={`${columnIndex}:${col}`}
+                                    className="px-2 py-1 ui-text-soft font-medium"
+                                >
                                     {col}
                                 </th>
                             ))}
@@ -115,7 +119,7 @@ function ExpectedExampleCard({
                             >
                                 {row.map((cell, j) => (
                                     <td key={j} className="px-2 py-1 ui-text">
-                                        {cell == null ? t("nullValue") : String(cell)}
+                                        {cell == null ? t("nullValue") : formatSqlDisplayValue(cell)}
                                     </td>
                                 ))}
                             </tr>

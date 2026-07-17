@@ -1,5 +1,6 @@
 
 import React from "react";
+import { formatSqlDisplayValue } from "@zoeskoul/practice-checks";
 
 export function CellValue({ value }: { value: unknown }) {
     if (value == null) {
@@ -14,5 +15,5 @@ export function CellValue({ value }: { value: unknown }) {
         return <span>{value ? "true" : "false"}</span>;
     }
 
-    return <span>{String(value)}</span>;
+    return <span>{formatSqlDisplayValue(value)}</span>;
 }

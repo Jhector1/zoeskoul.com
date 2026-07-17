@@ -1,0 +1,275 @@
+{
+  "topics": {
+    "sql-v2": {
+      "sql-v2-2": {
+        "the_where_clause": {
+          "label": "The WHERE Clause",
+          "summary": "Learn how WHERE filters rows so a query returns only the records you want from the products table.",
+          "cards": {
+            "sketch0": {
+              "title": "Filter rows with WHERE"
+            },
+            "sketch1": {
+              "title": "Comparing text and numbers"
+            },
+            "sketch2": {
+              "title": "Read a WHERE clause like a question"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Filter the products table with WHERE"
+            }
+          },
+          "projectSteps": {
+            "ci_where_art_products": {
+              "title": "Query only Art products"
+            },
+            "ci_where_low_stock": {
+              "title": "Find low-stock products"
+            },
+            "ci_where_stationery_prices": {
+              "title": "Show Stationery item prices"
+            }
+          },
+          "quiz": {
+            "sc_where_purpose": {
+              "title": "What WHERE does",
+              "prompt": "What is the main job of the `WHERE` clause in a SQL query?",
+              "hint": "Think about whether `WHERE` changes columns or filters rows.",
+              "help": {
+                "concept": "The `WHERE` clause filters rows based on a condition. It decides which records stay in the result.",
+                "hint_1": "Look for the option about keeping only rows that match a condition.",
+                "hint_2": "If a query should show only some products instead of all products, `WHERE` is the clause that does that filtering."
+              },
+              "options": {
+                "a": "It sorts the rows from highest to lowest.",
+                "b": "It filters the rows to keep only matches.",
+                "c": "It renames a column in the results.",
+                "d": "It adds a new row to the table."
+              }
+            },
+            "sc_where_text_quotes": {
+              "title": "Text values in conditions",
+              "prompt": "Which condition correctly filters the `products` table to rows where the category is Art?",
+              "hint": "Text values in SQL conditions use quotes.",
+              "help": {
+                "concept": "Text comparisons in SQL use quoted string values, such as `'Art'`, while column names are not quoted here.",
+                "hint_1": "Find the option that compares the `category` column to a quoted text value.",
+                "hint_2": "The column name should be `category`, and the word Art should appear in single quotes."
+              },
+              "options": {
+                "a": "WHERE 'category' = Art",
+                "b": "WHERE 'Art' = category ="
+              }
+            },
+            "mc_where_numeric_matches": {
+              "title": "Rows that match a numeric filter",
+              "prompt": "Choose all products that would appear in the results of this query: `SELECT name FROM products WHERE stock < 10;`",
+              "hint": "Check the stock values that are smaller than 10.",
+              "help": {
+                "concept": "A numeric `WHERE` condition keeps rows whose number satisfies the comparison. Here, only stock values below 10 match.",
+                "hint_1": "Look at the stock values for each product: 25, 10, 8, 50, 15, and 3.",
+                "hint_2": "Only the rows with stock 8 and 3 should be included."
+              },
+              "options": {
+                "a": "Desk Lamp",
+                "b": "Office Chair",
+                "c": "Sketchbook",
+                "d": "Acrylic Paint Set"
+              }
+            },
+            "mc_valid_where_conditions": {
+              "title": "Valid WHERE conditions",
+              "prompt": "Choose all conditions that correctly use `WHERE` with the `products` table.",
+              "hint": "Look for conditions that compare a real column to a matching kind of value.",
+              "help": {
+                "concept": "A valid `WHERE` condition compares an existing column to a value using correct SQL syntax and appropriate quoting.",
+                "hint_1": "Text values like category names need quotes, but numbers like stock counts do not.",
+                "hint_2": "The matching choices compare `category` to quoted text and `price` to a number with a comparison operator."
+              },
+              "options": {
+                "a": "WHERE category = 'Home'",
+                "b": "WHERE price > 20",
+                "c": "WHERE 'stock' < 10",
+                "d": "WHERE = category 'Art'"
+              }
+            },
+            "dr_where_query_order": {
+              "title": "Build a filtered query",
+              "prompt": "Put these SQL parts in the correct order to make a query that shows product names for rows where stock is greater than 20.",
+              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "help": {
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
+              },
+              "tokens": {
+                "t1": "SELECT",
+                "t2": "name",
+                "t3": "FROM",
+                "t4": "products",
+                "t5": "WHERE",
+                "t6": "stock > 20"
+              }
+            },
+            "dr_where_reading_order": {
+              "title": "Read the query in order",
+              "prompt": "Arrange these pieces to form the query that returns `name` and `price` for products in the `Stationery` category.",
+              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "help": {
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
+              },
+              "tokens": {
+                "t1": "SELECT",
+                "t2": "name, price",
+                "t3": "FROM",
+                "t4": "products",
+                "t5": "WHERE",
+                "t6": "category = 'Stationery'"
+              }
+            },
+            "fb_where_keyword": {
+              "title": "Choose the filtering keyword",
+              "prompt": "Complete the query so it filters rows by category.",
+              "hint": "The clause that filters rows comes after `FROM products`.",
+              "help": {
+                "concept": "The SQL keyword used to filter rows is `the missing term`.",
+                "hint_1": "This blank is asking for the clause name, not a column name or value.",
+                "hint_2": "Use the keyword that introduces a condition like `category = 'Art'`."
+              },
+              "template": "SELECT name FROM products [blank1] category = 'Art';",
+              "choices": [
+                "WHERE",
+                "ORDER BY",
+                "FROM",
+                "LIMIT"
+              ]
+            },
+            "fb_where_numeric_value": {
+              "title": "Complete a numeric condition",
+              "prompt": "Fill in the missing value so the query returns products with stock less than 10.",
+              "hint": "The comparison already says `stock < ...`.",
+              "help": {
+                "concept": "A numeric `WHERE` condition compares a number column to a numeric value without quotes.",
+                "hint_1": "The target is the same cutoff used when checking for products with stock below ten.",
+                "hint_2": "Choose the number that makes the condition read as 'stock is less than ten.'"
+              },
+              "template": "SELECT name FROM products WHERE stock < [blank1];",
+              "choices": [
+                "20",
+                "10",
+                "'10'",
+                "stock"
+              ]
+            },
+            "ci_where_art_products": {
+              "title": "Query only Art products",
+              "prompt": "Write a query that returns the `name` and `price` columns from `products` for rows where `category` is `Art`. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "-- Return the name and price columns from products for rows where category is Art.\nSELECT \nFROM products\nWHERE ;"
+            },
+            "ci_where_low_stock": {
+              "title": "Find low-stock products",
+              "prompt": "Write a query that returns `name` and `stock` from `products` for rows where `stock` is less than 10. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "-- Return name and stock from products for rows where stock is less than 10.\nSELECT name, stock\nFROM products\nWHERE ;"
+            },
+            "ci_where_stationery_prices": {
+              "title": "Show Stationery item prices",
+              "prompt": "Write a query that returns `name`, `category`, and `price` from `products` for rows where `category` is `Stationery`. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "-- add a WHERE clause below\nSELECT name, category, price\nFROM products"
+            },
+            "try-the_where_clause-sketch0": {
+              "title": "Query only Art products",
+              "prompt": "Create a focused inventory query that returns the `name` and `price` columns from `products` for rows where `category` is `Art`. Run it and compare the result with the expected table.",
+              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "-- Return the name and price columns from products for rows where category is Art.\nSELECT \nFROM products\nWHERE ;"
+            },
+            "try-the_where_clause-sketch1": {
+              "title": "Find low-stock products",
+              "prompt": "Create a focused inventory query that returns `name` and `stock` from `products` for rows where `stock` is less than 10. Run it and compare the result with the expected table.",
+              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "-- Return name and stock from products for rows where stock is less than 10.\nSELECT name, stock\nFROM products\nWHERE ;"
+            },
+            "try-the_where_clause-sketch2": {
+              "title": "Filter the Catalog to Stationery",
+              "prompt": "Return `name`, `category`, and `price` for rows whose category is `Stationery`.",
+              "hint": "Text values must be quoted.",
+              "help": {
+                "concept": "Return `name`, `category`, and `price` for rows whose category is `Stationery`.",
+                "hint_1": "Text values must be quoted.",
+                "hint_2": "Run the query and compare the returned columns and rows with the expected result."
+              },
+              "starterCode": "SELECT name, category, price\nFROM products\nWHERE category = ;"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_the_where_clause_sketch0": {
+              "title": "Query only Art products",
+              "prompt": "Create a focused inventory query that returns the `name` and `price` columns from `products` for rows where `category` is `Art`. Run it and compare the result with the expected table."
+            },
+            "try_the_where_clause_sketch1": {
+              "title": "Find low-stock products",
+              "prompt": "Create a focused inventory query that returns `name` and `stock` from `products` for rows where `stock` is less than 10. Run it and compare the result with the expected table."
+            },
+            "try_the_where_clause_sketch2": {
+              "title": "Filter the Catalog to Stationery",
+              "prompt": "Return `name`, `category`, and `price` for rows whose category is `Stationery`."
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql-v2": {
+      "sql-v2-2": {
+        "the_where_clause": {
+          "where_filters_rows": {
+            "title": "Filter rows with WHERE",
+            "bodyMarkdown": "The `WHERE` clause tells SQL which rows to keep.\n\nWithout `WHERE`, a query returns every row from the table. With `WHERE`, you add a condition, and only rows that match that condition appear in the results table.\n\nHere is a simple example using the `products` table:\n\n```sql\nSELECT name, price\nFROM products\nWHERE category = 'Art';\n```\n\nStep by step:\n- `SELECT name, price` chooses the columns to show.\n- `FROM products` says which table to read.\n- `WHERE category = 'Art'` keeps only rows where the category is `Art`.\n\nIn this dataset, that would return products like `Sketchbook` and `Acrylic Paint Set`.\n\nYou can also filter with numbers:\n\n```sql\nSELECT name, stock\nFROM products\nWHERE stock < 10;\n```\n\nThis keeps only products with stock less than 10, such as `Desk Lamp` and `Office Chair`."
+          },
+          "where_text_and_numbers": {
+            "title": "Comparing text and numbers",
+            "bodyMarkdown": "A `WHERE` condition can compare text values or numeric values.\n\nFor text, you usually compare with `=`:\n\n```sql\nSELECT name\nFROM products\nWHERE category = 'Home';\n```\n\nThis returns only rows where the `category` text is exactly `Home`.\n\nFor numbers, you can use operators like `>`, `<`, `>=`, and `<=`:\n\n```sql\nSELECT name, price\nFROM products\nWHERE price > 20;\n```\n\nLine by line:\n- `SELECT name, price` shows the product name and price.\n- `FROM products` reads from the products table.\n- `WHERE price > 20` keeps only products that cost more than 20.\n\nIn this table, that includes items such as `Acrylic Paint Set`, `Desk Lamp`, and `Office Chair`.\n\nRemember:\n- Text values go in quotes, like `'Art'`.\n- Numbers do not use quotes, like `20`."
+          },
+          "where_reads_like_a_question": {
+            "title": "Read a WHERE clause like a question",
+            "bodyMarkdown": "A good way to understand `WHERE` is to read it like a question:\n\n- \"Which products are in the `Art` category?\"\n- \"Which products have stock greater than 20?\"\n- \"Which products cost 18 or less?\"\n\nFor example:\n\n```sql\nSELECT name, category, stock\nFROM products\nWHERE stock > 20;\n```\n\nYou can read this as: \"Show the name, category, and stock for products where stock is greater than 20.\"\n\nIn the current data, rows like `Sketchbook` with stock `25` and `Notebook` with stock `50` match.\n\nThis helps you build queries from real questions:\n1. Decide what columns you want to see.\n2. Choose the table.\n3. Add a `WHERE` condition for the rows you want."
+          }
+        }
+      }
+    }
+  }
+}

@@ -9,6 +9,7 @@ import {
     stripSqlComments,
     stripSqlCommentsAndStrings,
 } from "../shared/sqlReferenceScan.js";
+import { collectSqlDraftSources } from "../shared/sqlWorkspace.js";
 
 const SQL_KEYWORDS = new Set([
     "add",
@@ -535,11 +536,7 @@ export function validateSqlDatasetConsistency(args: {
             continue;
         }
 
-        const sqlSnippets = [
-            exercise.starterCode,
-            exercise.solutionCode,
-            "checkSql" in exercise ? exercise.checkSql : undefined,
-        ];
+        const sqlSnippets = collectSqlDraftSources(exercise);
 
         for (const sql of sqlSnippets) {
             const trimmed = typeof sql === "string" ? sql.trim() : "";

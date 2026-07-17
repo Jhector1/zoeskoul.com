@@ -33,6 +33,7 @@ import { evaluateTopicDraft } from "../quality/evaluateTopicDraft.js";
 import { buildCurriculumQualityReport } from "../quality/buildCurriculumQualityReport.js";
 import type { CurriculumQualityReport } from "../quality/buildCurriculumQualityReport.js";
 import type { CompileProgressCallback } from "./compileProgress.js";
+import { extractRetryIssues } from "./topicRetryContext.js";
 import { resolvePlan } from "../spec/resolvePlan.js";
 import { findTopicPlanNode } from "../plan/findTopicPlanNode.js";
 import { buildTopicSeedFromPlanNode } from "../seeds/buildTopicSeedFromPlanNode.js";
@@ -72,53 +73,6 @@ function errorCode(error: unknown) {
 
 function errorMessage(error: unknown) {
     return error instanceof Error ? error.message : String(error);
-}
-
-function extractRetryIssues(error: unknown): TopicRetryContext["qualityIssues"] {
-    if (!isRetryableTopicValidationError(error)) return undefined;
-
-    const details = error.details as
-        | {
-            issues?: unknown;
-            repairs?: unknown;
-        }
-        | undefined;
-    const rawIssues = Array.isArray(details?.issues) ? details.issues : [];
-    const rawRepairs = Array.isArray(details?.repairs)
-        ? details.repairs.map((repair) =>
-            repair && typeof repair === "object"
-                ? {
-                    code: (repair as { code?: unknown }).code,
-                    exerciseId: (repair as { field?: unknown }).field,
-                    message: (repair as { message?: unknown }).message,
-                    severity: (repair as { severity?: unknown }).severity,
-                }
-                : repair,
-        )
-        : [];
-    const issues = [...rawIssues, ...rawRepairs];
-    if (issues.length < 1) return undefined;
-
-    return issues
-        .filter((issue): issue is {
-            code?: unknown;
-            exerciseId?: unknown;
-            message?: unknown;
-            severity?: unknown;
-        } =>
-            Boolean(issue) &&
-            typeof issue === "object" &&
-            (issue as { severity?: unknown }).severity !== "warning" &&
-            (issue as { severity?: unknown }).severity !== "info" &&
-            typeof (issue as { message?: unknown }).message === "string",
-        )
-        .map((issue) => ({
-            code: String(issue.code ?? "UNKNOWN"),
-            ...(typeof issue.exerciseId === "string"
-                ? { exerciseId: issue.exerciseId }
-                : {}),
-            message: String(issue.message),
-        }));
 }
 
 function formatReportErrors(args: {

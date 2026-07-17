@@ -38,6 +38,9 @@ export function buildGeneratorTopicsForModule(args: {
                 moduleRuntimeDefaults: moduleManifest.runtimeDefaults ?? null,
                 moduleServiceDefaults: moduleManifest.serviceDefaults ?? null,
                 sectionServiceDefaults: section.serviceDefaults ?? null,
+                subjectTools: manifest.subject.tools ?? null,
+                moduleTools: moduleManifest.tools ?? null,
+                sectionTools: section.tools ?? null,
             });
 
             return defineJsonGeneratorTopic(fullManifest);

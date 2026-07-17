@@ -1,0 +1,418 @@
+{
+  "subject": {
+    "slug": "sql--multi-table-sql--draft",
+    "profileId": "sql",
+    "catalogSlug": "sql",
+    "genKey": "sql_for_beginners",
+    "order": 3,
+    "accessPolicy": "paid",
+    "status": "active",
+    "imagePublicId": null,
+    "imageAlt": null,
+    "titleKey": "subjects.sql--multi-table-sql--draft.title",
+    "descriptionKey": "subjects.sql--multi-table-sql--draft.description",
+    "serviceDefaults": null,
+    "meta": {
+      "curriculum": {
+        "plannedModuleCount": 4,
+        "isTerminalRelease": true,
+        "prerequisiteSubjectSlugs": [
+          "sql-analysis-reporting"
+        ]
+      },
+      "completionPolicy": {
+        "requireAllPublishedModules": true,
+        "rewardEnabledByDefault": true,
+        "certificateEnabledByDefault": true
+      },
+      "versioning": {
+        "family": "multi-table-sql",
+        "version": 1,
+        "status": "ready",
+        "defaultForNewEnrollments": true,
+        "supersedes": null,
+        "supersededBy": null
+      }
+    }
+  },
+  "modules": [
+    {
+      "slug": "multi-table-sql-module-0-join-foundations",
+      "prefix": "multi_table_sql_module_0",
+      "order": 0,
+      "role": "standard",
+      "titleKey": "modules.sql--multi-table-sql--draft.multi-table-sql-module-0-join-foundations.title",
+      "descriptionKey": "modules.sql--multi-table-sql--draft.multi-table-sql-module-0-join-foundations.description",
+      "weekStart": null,
+      "weekEnd": null,
+      "accessOverride": null,
+      "runtimeDefaults": {
+        "kind": "sql",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": false,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false,
+        "datasetId": "school_relations_intro",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table"
+      },
+      "serviceDefaults": null,
+      "meta": {
+        "estimatedMinutes": 153,
+        "prereqKeys": [
+          "subjects.sql--multi-table-sql--draft.prerequisites.0"
+        ],
+        "outcomeKeys": [
+          "modules.sql--multi-table-sql--draft.multi-table-sql-module-0-join-foundations.outcomes.0",
+          "modules.sql--multi-table-sql--draft.multi-table-sql-module-0-join-foundations.outcomes.1",
+          "modules.sql--multi-table-sql--draft.multi-table-sql-module-0-join-foundations.outcomes.2",
+          "modules.sql--multi-table-sql--draft.multi-table-sql-module-0-join-foundations.outcomes.3"
+        ],
+        "whyKeys": [
+          "modules.sql--multi-table-sql--draft.multi-table-sql-module-0-join-foundations.why.0",
+          "modules.sql--multi-table-sql--draft.multi-table-sql-module-0-join-foundations.why.1"
+        ]
+      },
+      "sections": [
+        {
+          "slug": "sql--multi-table-sql--draft-multi-table-sql-section-0-relationship-keys",
+          "order": 1,
+          "titleKey": "sections.sql--multi-table-sql--draft.multi-table-sql-module-0-join-foundations.sql--multi-table-sql--draft-multi-table-sql-section-0-relationship-keys.title",
+          "descriptionKey": "sections.sql--multi-table-sql--draft.multi-table-sql-module-0-join-foundations.sql--multi-table-sql--draft-multi-table-sql-section-0-relationship-keys.description",
+          "meta": {
+            "module": 0,
+            "weeksKey": "sections.sql--multi-table-sql--draft.multi-table-sql-module-0-join-foundations.sql--multi-table-sql--draft-multi-table-sql-section-0-relationship-keys.weeks",
+            "bulletKeys": [
+              "sections.sql--multi-table-sql--draft.multi-table-sql-module-0-join-foundations.sql--multi-table-sql--draft-multi-table-sql-section-0-relationship-keys.bullets.0",
+              "sections.sql--multi-table-sql--draft.multi-table-sql-module-0-join-foundations.sql--multi-table-sql--draft-multi-table-sql-section-0-relationship-keys.bullets.1",
+              "sections.sql--multi-table-sql--draft.multi-table-sql-module-0-join-foundations.sql--multi-table-sql--draft-multi-table-sql-section-0-relationship-keys.bullets.2",
+              "sections.sql--multi-table-sql--draft.multi-table-sql-module-0-join-foundations.sql--multi-table-sql--draft-multi-table-sql-section-0-relationship-keys.bullets.3"
+            ]
+          },
+          "serviceDefaults": null,
+          "topics": [
+            "reading-keys-and-relationships",
+            "inner-join-with-on"
+          ]
+        },
+        {
+          "slug": "sql--multi-table-sql--draft-multi-table-sql-section-0-readable-joins",
+          "order": 2,
+          "titleKey": "sections.sql--multi-table-sql--draft.multi-table-sql-module-0-join-foundations.sql--multi-table-sql--draft-multi-table-sql-section-0-readable-joins.title",
+          "descriptionKey": "sections.sql--multi-table-sql--draft.multi-table-sql-module-0-join-foundations.sql--multi-table-sql--draft-multi-table-sql-section-0-readable-joins.description",
+          "meta": {
+            "module": 0,
+            "weeksKey": "sections.sql--multi-table-sql--draft.multi-table-sql-module-0-join-foundations.sql--multi-table-sql--draft-multi-table-sql-section-0-readable-joins.weeks",
+            "bulletKeys": [
+              "sections.sql--multi-table-sql--draft.multi-table-sql-module-0-join-foundations.sql--multi-table-sql--draft-multi-table-sql-section-0-readable-joins.bullets.0",
+              "sections.sql--multi-table-sql--draft.multi-table-sql-module-0-join-foundations.sql--multi-table-sql--draft-multi-table-sql-section-0-readable-joins.bullets.1",
+              "sections.sql--multi-table-sql--draft.multi-table-sql-module-0-join-foundations.sql--multi-table-sql--draft-multi-table-sql-section-0-readable-joins.bullets.2",
+              "sections.sql--multi-table-sql--draft.multi-table-sql-module-0-join-foundations.sql--multi-table-sql--draft-multi-table-sql-section-0-readable-joins.bullets.3"
+            ]
+          },
+          "serviceDefaults": null,
+          "topics": [
+            "qualifying-columns-across-tables",
+            "table-aliases-for-join-queries"
+          ]
+        },
+        {
+          "slug": "sql--multi-table-sql--draft-multi-table-sql-section-0-module-project",
+          "order": 3,
+          "role": "module_project",
+          "titleKey": "sections.sql--multi-table-sql--draft.multi-table-sql-module-0-join-foundations.sql--multi-table-sql--draft-multi-table-sql-section-0-module-project.title",
+          "descriptionKey": "sections.sql--multi-table-sql--draft.multi-table-sql-module-0-join-foundations.sql--multi-table-sql--draft-multi-table-sql-section-0-module-project.description",
+          "meta": {
+            "module": 0,
+            "weeksKey": "sections.sql--multi-table-sql--draft.multi-table-sql-module-0-join-foundations.sql--multi-table-sql--draft-multi-table-sql-section-0-module-project.weeks",
+            "bulletKeys": [
+              "sections.sql--multi-table-sql--draft.multi-table-sql-module-0-join-foundations.sql--multi-table-sql--draft-multi-table-sql-section-0-module-project.bullets.0",
+              "sections.sql--multi-table-sql--draft.multi-table-sql-module-0-join-foundations.sql--multi-table-sql--draft-multi-table-sql-section-0-module-project.bullets.1",
+              "sections.sql--multi-table-sql--draft.multi-table-sql-module-0-join-foundations.sql--multi-table-sql--draft-multi-table-sql-section-0-module-project.bullets.2",
+              "sections.sql--multi-table-sql--draft.multi-table-sql-module-0-join-foundations.sql--multi-table-sql--draft-multi-table-sql-section-0-module-project.bullets.3"
+            ]
+          },
+          "serviceDefaults": null,
+          "topics": [
+            "module-0-student-enrollment-roster"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "multi-table-sql-module-1-relationship-paths",
+      "prefix": "multi_table_sql_module_1",
+      "order": 1,
+      "role": "standard",
+      "titleKey": "modules.sql--multi-table-sql--draft.multi-table-sql-module-1-relationship-paths.title",
+      "descriptionKey": "modules.sql--multi-table-sql--draft.multi-table-sql-module-1-relationship-paths.description",
+      "weekStart": null,
+      "weekEnd": null,
+      "accessOverride": null,
+      "runtimeDefaults": {
+        "kind": "sql",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": false,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false,
+        "datasetId": "school_relations_intro",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table"
+      },
+      "serviceDefaults": null,
+      "meta": {
+        "estimatedMinutes": 173,
+        "prereqKeys": [
+          "modules.sql--multi-table-sql--draft.multi-table-sql-module-0-join-foundations.title"
+        ],
+        "outcomeKeys": [
+          "modules.sql--multi-table-sql--draft.multi-table-sql-module-1-relationship-paths.outcomes.0",
+          "modules.sql--multi-table-sql--draft.multi-table-sql-module-1-relationship-paths.outcomes.1",
+          "modules.sql--multi-table-sql--draft.multi-table-sql-module-1-relationship-paths.outcomes.2",
+          "modules.sql--multi-table-sql--draft.multi-table-sql-module-1-relationship-paths.outcomes.3"
+        ],
+        "whyKeys": [
+          "modules.sql--multi-table-sql--draft.multi-table-sql-module-1-relationship-paths.why.0",
+          "modules.sql--multi-table-sql--draft.multi-table-sql-module-1-relationship-paths.why.1"
+        ]
+      },
+      "sections": [
+        {
+          "slug": "sql--multi-table-sql--draft-multi-table-sql-section-1-relationship-shapes",
+          "order": 1,
+          "titleKey": "sections.sql--multi-table-sql--draft.multi-table-sql-module-1-relationship-paths.sql--multi-table-sql--draft-multi-table-sql-section-1-relationship-shapes.title",
+          "descriptionKey": "sections.sql--multi-table-sql--draft.multi-table-sql-module-1-relationship-paths.sql--multi-table-sql--draft-multi-table-sql-section-1-relationship-shapes.description",
+          "meta": {
+            "module": 1,
+            "weeksKey": "sections.sql--multi-table-sql--draft.multi-table-sql-module-1-relationship-paths.sql--multi-table-sql--draft-multi-table-sql-section-1-relationship-shapes.weeks",
+            "bulletKeys": [
+              "sections.sql--multi-table-sql--draft.multi-table-sql-module-1-relationship-paths.sql--multi-table-sql--draft-multi-table-sql-section-1-relationship-shapes.bullets.0",
+              "sections.sql--multi-table-sql--draft.multi-table-sql-module-1-relationship-paths.sql--multi-table-sql--draft-multi-table-sql-section-1-relationship-shapes.bullets.1",
+              "sections.sql--multi-table-sql--draft.multi-table-sql-module-1-relationship-paths.sql--multi-table-sql--draft-multi-table-sql-section-1-relationship-shapes.bullets.2",
+              "sections.sql--multi-table-sql--draft.multi-table-sql-module-1-relationship-paths.sql--multi-table-sql--draft-multi-table-sql-section-1-relationship-shapes.bullets.3"
+            ]
+          },
+          "serviceDefaults": null,
+          "topics": [
+            "one-to-many-and-many-to-many-results",
+            "joining-through-a-bridge-table"
+          ]
+        },
+        {
+          "slug": "sql--multi-table-sql--draft-multi-table-sql-section-1-longer-joins",
+          "order": 2,
+          "titleKey": "sections.sql--multi-table-sql--draft.multi-table-sql-module-1-relationship-paths.sql--multi-table-sql--draft-multi-table-sql-section-1-longer-joins.title",
+          "descriptionKey": "sections.sql--multi-table-sql--draft.multi-table-sql-module-1-relationship-paths.sql--multi-table-sql--draft-multi-table-sql-section-1-longer-joins.description",
+          "meta": {
+            "module": 1,
+            "weeksKey": "sections.sql--multi-table-sql--draft.multi-table-sql-module-1-relationship-paths.sql--multi-table-sql--draft-multi-table-sql-section-1-longer-joins.weeks",
+            "bulletKeys": [
+              "sections.sql--multi-table-sql--draft.multi-table-sql-module-1-relationship-paths.sql--multi-table-sql--draft-multi-table-sql-section-1-longer-joins.bullets.0",
+              "sections.sql--multi-table-sql--draft.multi-table-sql-module-1-relationship-paths.sql--multi-table-sql--draft-multi-table-sql-section-1-longer-joins.bullets.1",
+              "sections.sql--multi-table-sql--draft.multi-table-sql-module-1-relationship-paths.sql--multi-table-sql--draft-multi-table-sql-section-1-longer-joins.bullets.2",
+              "sections.sql--multi-table-sql--draft.multi-table-sql-module-1-relationship-paths.sql--multi-table-sql--draft-multi-table-sql-section-1-longer-joins.bullets.3"
+            ]
+          },
+          "serviceDefaults": null,
+          "topics": [
+            "extending-a-join-path",
+            "avoiding-cartesian-and-wrong-key-joins"
+          ]
+        },
+        {
+          "slug": "sql--multi-table-sql--draft-multi-table-sql-section-1-module-project",
+          "order": 3,
+          "role": "module_project",
+          "titleKey": "sections.sql--multi-table-sql--draft.multi-table-sql-module-1-relationship-paths.sql--multi-table-sql--draft-multi-table-sql-section-1-module-project.title",
+          "descriptionKey": "sections.sql--multi-table-sql--draft.multi-table-sql-module-1-relationship-paths.sql--multi-table-sql--draft-multi-table-sql-section-1-module-project.description",
+          "meta": {
+            "module": 1,
+            "weeksKey": "sections.sql--multi-table-sql--draft.multi-table-sql-module-1-relationship-paths.sql--multi-table-sql--draft-multi-table-sql-section-1-module-project.weeks",
+            "bulletKeys": [
+              "sections.sql--multi-table-sql--draft.multi-table-sql-module-1-relationship-paths.sql--multi-table-sql--draft-multi-table-sql-section-1-module-project.bullets.0",
+              "sections.sql--multi-table-sql--draft.multi-table-sql-module-1-relationship-paths.sql--multi-table-sql--draft-multi-table-sql-section-1-module-project.bullets.1",
+              "sections.sql--multi-table-sql--draft.multi-table-sql-module-1-relationship-paths.sql--multi-table-sql--draft-multi-table-sql-section-1-module-project.bullets.2",
+              "sections.sql--multi-table-sql--draft.multi-table-sql-module-1-relationship-paths.sql--multi-table-sql--draft-multi-table-sql-section-1-module-project.bullets.3"
+            ]
+          },
+          "serviceDefaults": null,
+          "topics": [
+            "module-1-course-enrollment-directory"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "multi-table-sql-module-2-outer-joins-and-accurate-counts",
+      "prefix": "multi_table_sql_module_2",
+      "order": 2,
+      "role": "standard",
+      "titleKey": "modules.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.title",
+      "descriptionKey": "modules.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.description",
+      "weekStart": null,
+      "weekEnd": null,
+      "accessOverride": null,
+      "runtimeDefaults": {
+        "kind": "sql",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": false,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false,
+        "datasetId": "school_relations_intro",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table"
+      },
+      "serviceDefaults": null,
+      "meta": {
+        "estimatedMinutes": 189,
+        "prereqKeys": [
+          "modules.sql--multi-table-sql--draft.multi-table-sql-module-1-relationship-paths.title"
+        ],
+        "outcomeKeys": [
+          "modules.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.outcomes.0",
+          "modules.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.outcomes.1",
+          "modules.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.outcomes.2",
+          "modules.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.outcomes.3"
+        ],
+        "whyKeys": [
+          "modules.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.why.0",
+          "modules.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.why.1"
+        ]
+      },
+      "sections": [
+        {
+          "slug": "sql--multi-table-sql--draft-multi-table-sql-section-2-preserving-rows",
+          "order": 1,
+          "titleKey": "sections.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.sql--multi-table-sql--draft-multi-table-sql-section-2-preserving-rows.title",
+          "descriptionKey": "sections.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.sql--multi-table-sql--draft-multi-table-sql-section-2-preserving-rows.description",
+          "meta": {
+            "module": 2,
+            "weeksKey": "sections.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.sql--multi-table-sql--draft-multi-table-sql-section-2-preserving-rows.weeks",
+            "bulletKeys": [
+              "sections.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.sql--multi-table-sql--draft-multi-table-sql-section-2-preserving-rows.bullets.0",
+              "sections.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.sql--multi-table-sql--draft-multi-table-sql-section-2-preserving-rows.bullets.1",
+              "sections.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.sql--multi-table-sql--draft-multi-table-sql-section-2-preserving-rows.bullets.2",
+              "sections.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.sql--multi-table-sql--draft-multi-table-sql-section-2-preserving-rows.bullets.3"
+            ]
+          },
+          "serviceDefaults": null,
+          "topics": [
+            "left-join-preserves-unmatched-rows",
+            "filtering-left-joins-with-on-and-where"
+          ]
+        },
+        {
+          "slug": "sql--multi-table-sql--draft-multi-table-sql-section-2-missing-and-counts",
+          "order": 2,
+          "titleKey": "sections.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.sql--multi-table-sql--draft-multi-table-sql-section-2-missing-and-counts.title",
+          "descriptionKey": "sections.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.sql--multi-table-sql--draft-multi-table-sql-section-2-missing-and-counts.description",
+          "meta": {
+            "module": 2,
+            "weeksKey": "sections.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.sql--multi-table-sql--draft-multi-table-sql-section-2-missing-and-counts.weeks",
+            "bulletKeys": [
+              "sections.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.sql--multi-table-sql--draft-multi-table-sql-section-2-missing-and-counts.bullets.0",
+              "sections.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.sql--multi-table-sql--draft-multi-table-sql-section-2-missing-and-counts.bullets.1",
+              "sections.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.sql--multi-table-sql--draft-multi-table-sql-section-2-missing-and-counts.bullets.2",
+              "sections.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.sql--multi-table-sql--draft-multi-table-sql-section-2-missing-and-counts.bullets.3"
+            ]
+          },
+          "serviceDefaults": null,
+          "topics": [
+            "finding-missing-relationships",
+            "counting-related-rows-without-inflation"
+          ]
+        },
+        {
+          "slug": "sql--multi-table-sql--draft-multi-table-sql-section-2-module-project",
+          "order": 3,
+          "role": "module_project",
+          "titleKey": "sections.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.sql--multi-table-sql--draft-multi-table-sql-section-2-module-project.title",
+          "descriptionKey": "sections.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.sql--multi-table-sql--draft-multi-table-sql-section-2-module-project.description",
+          "meta": {
+            "module": 2,
+            "weeksKey": "sections.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.sql--multi-table-sql--draft-multi-table-sql-section-2-module-project.weeks",
+            "bulletKeys": [
+              "sections.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.sql--multi-table-sql--draft-multi-table-sql-section-2-module-project.bullets.0",
+              "sections.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.sql--multi-table-sql--draft-multi-table-sql-section-2-module-project.bullets.1",
+              "sections.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.sql--multi-table-sql--draft-multi-table-sql-section-2-module-project.bullets.2",
+              "sections.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.sql--multi-table-sql--draft-multi-table-sql-section-2-module-project.bullets.3"
+            ]
+          },
+          "serviceDefaults": null,
+          "topics": [
+            "module-2-department-participation-scorecard"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "multi-table-sql-module-3-final-capstone",
+      "prefix": "multi_table_sql_module_3",
+      "order": 3,
+      "role": "capstone",
+      "titleKey": "modules.sql--multi-table-sql--draft.multi-table-sql-module-3-final-capstone.title",
+      "descriptionKey": "modules.sql--multi-table-sql--draft.multi-table-sql-module-3-final-capstone.description",
+      "weekStart": null,
+      "weekEnd": null,
+      "accessOverride": null,
+      "runtimeDefaults": {
+        "kind": "sql",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": false,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false,
+        "datasetId": "school_relations_intro",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table"
+      },
+      "serviceDefaults": null,
+      "meta": {
+        "estimatedMinutes": 110,
+        "prereqKeys": [
+          "modules.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.title"
+        ],
+        "outcomeKeys": [
+          "modules.sql--multi-table-sql--draft.multi-table-sql-module-3-final-capstone.outcomes.0",
+          "modules.sql--multi-table-sql--draft.multi-table-sql-module-3-final-capstone.outcomes.1",
+          "modules.sql--multi-table-sql--draft.multi-table-sql-module-3-final-capstone.outcomes.2",
+          "modules.sql--multi-table-sql--draft.multi-table-sql-module-3-final-capstone.outcomes.3"
+        ],
+        "whyKeys": [
+          "modules.sql--multi-table-sql--draft.multi-table-sql-module-3-final-capstone.why.0",
+          "modules.sql--multi-table-sql--draft.multi-table-sql-module-3-final-capstone.why.1"
+        ]
+      },
+      "sections": [
+        {
+          "slug": "sql--multi-table-sql--draft-multi-table-sql-section-3-final-capstone",
+          "order": 1,
+          "role": "capstone",
+          "titleKey": "sections.sql--multi-table-sql--draft.multi-table-sql-module-3-final-capstone.sql--multi-table-sql--draft-multi-table-sql-section-3-final-capstone.title",
+          "descriptionKey": "sections.sql--multi-table-sql--draft.multi-table-sql-module-3-final-capstone.sql--multi-table-sql--draft-multi-table-sql-section-3-final-capstone.description",
+          "meta": {
+            "module": 3,
+            "weeksKey": "sections.sql--multi-table-sql--draft.multi-table-sql-module-3-final-capstone.sql--multi-table-sql--draft-multi-table-sql-section-3-final-capstone.weeks",
+            "bulletKeys": [
+              "sections.sql--multi-table-sql--draft.multi-table-sql-module-3-final-capstone.sql--multi-table-sql--draft-multi-table-sql-section-3-final-capstone.bullets.0",
+              "sections.sql--multi-table-sql--draft.multi-table-sql-module-3-final-capstone.sql--multi-table-sql--draft-multi-table-sql-section-3-final-capstone.bullets.1",
+              "sections.sql--multi-table-sql--draft.multi-table-sql-module-3-final-capstone.sql--multi-table-sql--draft-multi-table-sql-section-3-final-capstone.bullets.2",
+              "sections.sql--multi-table-sql--draft.multi-table-sql-module-3-final-capstone.sql--multi-table-sql--draft-multi-table-sql-section-3-final-capstone.bullets.3"
+            ]
+          },
+          "serviceDefaults": null,
+          "topics": [
+            "final-school-program-participation-report"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,138 @@
+{
+  "topics": {
+    "sql--sql-analysis-reporting--draft": {
+      "sql-analysis-reporting-module-5-final-capstone": {
+        "capstone-report-requirements": {
+          "label": "Reading the Capstone Reporting Brief",
+          "summary": "Convert a stakeholder request into dimensions, metrics, filters, labels, and ordering rules before writing SQL.",
+          "cards": {
+            "sketch0": {
+              "title": "Find the Decision Behind the Report"
+            },
+            "sketch1": {
+              "title": "Write the Report Contract"
+            },
+            "quiz": {
+              "title": "Check Your Understanding"
+            }
+          },
+          "practice": {
+            "single-choice-1": {
+              "title": "Capstone Grain",
+              "prompt": "What should one row in the final capstone represent?",
+              "hint": "The brief compares categories within regions.",
+              "help": {
+                "concept": "The two dimensions together define the result grain.",
+                "hint_1": "Individual identifiers would make the report too detailed.",
+                "hint_2": "Choose the paired business dimensions."
+              },
+              "options": {
+                "a": "One individual order",
+                "b": "One region-category combination",
+                "c": "One product",
+                "d": "The whole company"
+              }
+            },
+            "single-choice-2": {
+              "title": "Source Filter Requirement",
+              "prompt": "Which date range belongs in the capstone contract?",
+              "hint": "The report period is explicitly limited to the month covered by the seeded data.",
+              "help": {
+                "concept": "A precise period prevents ambiguous metrics.",
+                "hint_1": "The dataset contains January 2026 reporting rows.",
+                "hint_2": "Choose the stated monthly range."
+              },
+              "options": {
+                "a": "All available years",
+                "b": "January 1 through January 31, 2026",
+                "c": "December 2025 only",
+                "d": "Future orders"
+              }
+            },
+            "multi-choice-1": {
+              "title": "Parts of a Report Contract",
+              "prompt": "Which items belong in a report contract? Select all that apply.",
+              "hint": "A contract defines what rows mean and how outputs are calculated and limited.",
+              "help": {
+                "concept": "Audience-facing presentation choices must support the business question.",
+                "hint_1": "Personal preferences are not data requirements.",
+                "hint_2": "Choose the testable report rules."
+              },
+              "options": {
+                "a": "Grain",
+                "b": "Metric definitions",
+                "c": "Filters and thresholds",
+                "d": "The analyst's favorite color"
+              }
+            },
+            "multi-choice-2": {
+              "title": "Columns That Fit the Grain",
+              "prompt": "Which outputs fit a region-category scorecard? Select all that apply.",
+              "hint": "Group dimensions and aggregate metrics fit the scorecard grain.",
+              "help": {
+                "concept": "An order identifier represents a lower level of detail.",
+                "hint_1": "The report should not expose individual rows.",
+                "hint_2": "Choose the dimensions and KPI."
+              },
+              "options": {
+                "a": "region",
+                "b": "category",
+                "c": "completed_orders",
+                "d": "order_id"
+              }
+            },
+            "drag-reorder-1": {
+              "title": "Translate a Brief into a Contract",
+              "prompt": "Arrange the planning sequence.",
+              "hint": "Move from purpose to structure to calculations to presentation.",
+              "help": {
+                "concept": "The decision explains why the report exists.",
+                "hint_1": "Grain controls valid dimensions.",
+                "hint_2": "Metrics and final ordering follow."
+              },
+              "tokens": {
+                "t1": "Identify the audience and decision",
+                "t2": "State the row grain",
+                "t3": "Define filters and metrics",
+                "t4": "Define labels and deterministic order"
+              }
+            },
+            "fill-blank-choice-1": {
+              "title": "Complete the Grain Statement",
+              "prompt": "Complete the sentence: one capstone row represents one region and one ____.",
+              "hint": "The final comparison is region-category performance.",
+              "help": {
+                "concept": "Use the second grouping dimension from the brief.",
+                "hint_1": "Order and product fields would create detail rows.",
+                "hint_2": "Choose category."
+              },
+              "template": "One row per region and [blank1]",
+              "choices": [
+                "category",
+                "order_id",
+                "product_name",
+                "date"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql--sql-analysis-reporting--draft": {
+      "sql-analysis-reporting-module-5-final-capstone": {
+        "capstone-report-requirements": {
+          "sketch0": {
+            "title": "Find the Decision Behind the Report",
+            "bodyMarkdown": "A reporting brief is more than a list of columns. Start by identifying who will use the result and what decision the report should support.\n\nFor this capstone, leadership wants to compare **region-category performance for January 2026**. It needs enough context to discuss order volume, completion, sales value, ratings, and missing discount data.\n\nThat purpose determines what does not belong in the final output. Individual details such as `order_id` and `product_name` would change the grain and distract from the group comparison.\n\nA strong report begins with a clear decision, then chooses columns and calculations that serve it."
+          },
+          "sketch1": {
+            "title": "Write the Report Contract",
+            "bodyMarkdown": "Turn the brief into a report contract before writing the full query:\n\n1. **Grain:** one row per region and category.\n2. **Period:** January 1 through January 31, 2026.\n3. **Metrics:** total orders, completed orders, completion rate, gross sales, completed net sales, average rating, and missing-discount count.\n4. **Label:** a performance band based on completion and completed net sales.\n5. **Order:** highest completed net sales first, followed by stable region and category tie-breakers.\n\nThis contract gives you a checklist for every later step. If a selected column or filter does not fit it, the query is drifting away from the requested report."
+          }
+        }
+      }
+    }
+  }
+}

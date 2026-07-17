@@ -1,0 +1,138 @@
+{
+  "topics": {
+    "sql-analysis-reporting": {
+      "sql-analysis-reporting-module-5-final-capstone": {
+        "capstone-metric-map": {
+          "label": "Building a Metric Map",
+          "summary": "Map each requested output column to its source fields, SQL expression, missing-value rule, and display format.",
+          "cards": {
+            "sketch0": {
+              "title": "Map Business Language to SQL"
+            },
+            "sketch1": {
+              "title": "Record Assumptions Beside the Formula"
+            },
+            "quiz": {
+              "title": "Check Your Understanding"
+            }
+          },
+          "practice": {
+            "single-choice-1": {
+              "title": "Completed Order Metric",
+              "prompt": "Which expression maps to `completed_orders` without filtering other rows out of the group?",
+              "hint": "The metric is a condition-specific count inside the full group.",
+              "help": {
+                "concept": "A 1/0 CASE inside SUM counts matching rows.",
+                "hint_1": "The other expressions measure units, ratings, or identifiers.",
+                "hint_2": "Choose the conditional count."
+              },
+              "options": {
+                "a": "SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END)",
+                "b": "SUM(quantity)",
+                "c": "AVG(customer_rating)",
+                "d": "MAX(order_id)"
+              }
+            },
+            "single-choice-2": {
+              "title": "Average Rating Rule",
+              "prompt": "What is the capstone rule for `AVG(customer_rating)`?",
+              "hint": "The metric map must state the missing-value assumption.",
+              "help": {
+                "concept": "AVG(column) excludes NULL unless a fallback is inserted.",
+                "hint_1": "The capstone keeps the rated-only interpretation.",
+                "hint_2": "Choose the recorded-value rule."
+              },
+              "options": {
+                "a": "Treat missing ratings as zero",
+                "b": "Use recorded ratings and ignore NULL",
+                "c": "Count ratings instead of averaging them",
+                "d": "Use the highest rating only"
+              }
+            },
+            "multi-choice-1": {
+              "title": "Metrics Requiring Conditional Aggregation",
+              "prompt": "Which capstone metrics require CASE inside an aggregate? Select all that apply.",
+              "hint": "Each selected metric measures a subset while preserving the full group.",
+              "help": {
+                "concept": "The region is a grouping dimension, not a conditional metric.",
+                "hint_1": "Status and NULL conditions define the subsets.",
+                "hint_2": "Choose the three subset KPIs."
+              },
+              "options": {
+                "a": "completed_orders",
+                "b": "completed_net_sales",
+                "c": "missing_discount_orders",
+                "d": "region"
+              }
+            },
+            "multi-choice-2": {
+              "title": "Metric Map Fields",
+              "prompt": "What should be recorded for a calculated KPI? Select all that apply.",
+              "hint": "A complete map documents how the metric is built and displayed.",
+              "help": {
+                "concept": "Each item supports implementation or validation.",
+                "hint_1": "Leaving out assumptions makes equivalent-looking queries disagree.",
+                "hint_2": "Select every listed field."
+              },
+              "options": {
+                "a": "Source columns",
+                "b": "Formula or aggregate",
+                "c": "NULL handling",
+                "d": "Rounding and alias"
+              }
+            },
+            "drag-reorder-1": {
+              "title": "Design a KPI Definition",
+              "prompt": "Arrange the definition steps.",
+              "hint": "Start with meaning, then inputs, logic, and presentation.",
+              "help": {
+                "concept": "The SQL expression should implement a named business concept.",
+                "hint_1": "Missing-value handling belongs with the formula.",
+                "hint_2": "Finish with output details."
+              },
+              "tokens": {
+                "t1": "Name the business metric",
+                "t2": "Identify source fields",
+                "t3": "Write the calculation and NULL rule",
+                "t4": "Choose alias and display precision"
+              }
+            },
+            "fill-blank-choice-1": {
+              "title": "Map Gross Sales",
+              "prompt": "Complete the aggregate expression for gross sales.",
+              "hint": "Gross sales multiplies units by price on each row before summing.",
+              "help": {
+                "concept": "Use the row-level multiplication operator.",
+                "hint_1": "Addition would combine unlike units.",
+                "hint_2": "Choose multiplication."
+              },
+              "template": "SUM(quantity [blank1] unit_price)",
+              "choices": [
+                "*",
+                "+",
+                "/",
+                "="
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql-analysis-reporting": {
+      "sql-analysis-reporting-module-5-final-capstone": {
+        "capstone-metric-map": {
+          "sketch0": {
+            "title": "Map Business Language to SQL",
+            "bodyMarkdown": "Business phrases need precise SQL definitions. A metric map records how each requested output will be calculated before the final query becomes large.\n\n| Report column | SQL plan |\n|---|---|\n| `total_orders` | `COUNT(*)` |\n| `completed_orders` | conditional SUM of `1` for completed rows |\n| `completion_rate` | completed count divided by total count, multiplied by `100.0` |\n| `gross_sales` | `SUM(quantity * unit_price)` |\n| `completed_net_sales` | conditional SUM of null-safe net sales |\n\nThe map keeps the formulas consistent across steps. It is a design contract, not a finished query to copy without understanding."
+          },
+          "sketch1": {
+            "title": "Record Assumptions Beside the Formula",
+            "bodyMarkdown": "Record the assumptions beside the formulas so the numbers remain explainable:\n\n- Missing `discount_pct` is treated as zero only inside net-sales calculations.\n- `AVG(customer_rating)` uses recorded ratings and ignores NULL.\n- Monetary totals are rounded to two decimals after aggregation.\n- Completion rate is rounded to one decimal.\n- Every metric uses the January 2026 region-category grain.\n\nSimilar SQL can represent different business rules. Writing the assumptions now prevents a later step from silently changing the meaning of the report."
+          }
+        }
+      }
+    }
+  }
+}

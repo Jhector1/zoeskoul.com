@@ -6,6 +6,7 @@ import type {
 } from "./manifest.js";
 import type { CourseVersionStatus } from "./blueprint.js";
 import type { ManifestIdeServiceConfig } from "./ide-services.js";
+import type { ToolPresentationPolicy } from "./tool-presentation.js";
 
 export type SubjectManifest = {
   subject: {
@@ -22,6 +23,7 @@ export type SubjectManifest = {
     descriptionKey?: string | null;
     serviceDefaults?: ManifestIdeServiceConfig | null;
     runtimeDefaults?: ManifestRuntimeDefaults | null;
+    tools?: ToolPresentationPolicy;
     meta?: {
       curriculum?: {
         plannedModuleCount?: number;
@@ -58,6 +60,7 @@ export type SubjectModuleManifest = {
   accessOverride?: "free" | "paid" | null;
   serviceDefaults?: ManifestIdeServiceConfig | null;
   runtimeDefaults?: ManifestRuntimeDefaults | null;
+  tools?: ToolPresentationPolicy;
   meta?: {
     estimatedMinutes?: number;
     prereqKeys?: string[];
@@ -75,6 +78,7 @@ export type SubjectSectionManifest = {
   descriptionKey?: string | null;
   serviceDefaults?: ManifestIdeServiceConfig | null;
   runtimeDefaults?: ManifestRuntimeDefaults | null;
+  tools?: ToolPresentationPolicy;
   meta?: {
     module?: number;
     weeksKey?: string;
@@ -145,6 +149,7 @@ export type SlimTopicManifest = {
   };
   serviceDefaults?: ManifestIdeServiceConfig | null;
   runtimeDefaults?: ManifestRuntimeDefaults | null;
+  tools?: ToolPresentationPolicy;
   cards: ManifestCard[];
   sketches: ManifestSketch[];
   exercises: ManifestExercise[];

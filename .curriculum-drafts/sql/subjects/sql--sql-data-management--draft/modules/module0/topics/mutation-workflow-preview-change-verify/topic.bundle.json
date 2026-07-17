@@ -1,0 +1,196 @@
+{
+  "topicId": "mutation-workflow-preview-change-verify",
+  "subjectSlug": "sql--sql-data-management--draft",
+  "moduleSlug": "sql-data-management-module-0-safe-inserts",
+  "sectionSlug": "sql--sql-data-management--draft-sql-data-management-section-0-mutation-workflow",
+  "prefix": "sql_data_management_module_0",
+  "minutes": 24,
+  "runtimeDefaults": {
+    "kind": "sql",
+    "showSchema": true,
+    "showErd": false,
+    "showChen": false,
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "datasetId": "inventory_ops",
+    "fixedSqlDialect": "sqlite",
+    "resultShape": "table"
+  },
+  "serviceDefaults": null,
+  "tools": {
+    "defaultVisible": true,
+    "allowOpen": true,
+    "defaultSurface": "editor",
+    "compactDefaultSurface": "editor",
+    "sqlPane": {
+      "showResults": true,
+      "showTables": true,
+      "showErd": false,
+      "showChen": false,
+      "defaultTab": "results",
+      "compactDefaultTab": "results"
+    }
+  },
+  "topic": {
+    "labelKey": "topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.mutation-workflow-preview-change-verify.label",
+    "summaryKey": "topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.mutation-workflow-preview-change-verify.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.mutation-workflow-preview-change-verify.cards.sketch0.title",
+      "sketchId": "mutation-workflow-intro",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.mutation-workflow-preview-change-verify.cards.sketch1.title",
+      "sketchId": "mutation-workflow-steps",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.mutation-workflow-preview-change-verify.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "mutation-workflow-intro",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.mutation-workflow-preview-change-verify.mutation-workflow-intro.title",
+      "bodyKey": "sketches.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.mutation-workflow-preview-change-verify.mutation-workflow-intro.bodyMarkdown"
+    },
+    {
+      "id": "mutation-workflow-steps",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.mutation-workflow-preview-change-verify.mutation-workflow-steps.title",
+      "bodyKey": "sketches.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.mutation-workflow-preview-change-verify.mutation-workflow-steps.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "sc-mutation-vs-select",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.mutation-workflow-preview-change-verify.practice.sc-mutation-vs-select",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "mc-preview-change-verify",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.mutation-workflow-preview-change-verify.practice.mc-preview-change-verify",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "c",
+          "d"
+        ]
+      }
+    },
+    {
+      "id": "dr-mutation-workflow-order",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.mutation-workflow-preview-change-verify.practice.dr-mutation-workflow-order",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "fb-insert-column-list",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.mutation-workflow-preview-change-verify.practice.fb-insert-column-list",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "explicit column list"
+      }
+    },
+    {
+      "id": "mc-verify-mutation",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.mutation-workflow-preview-change-verify.practice.mc-verify-mutation",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "sc-reset-sandbox",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.mutation-workflow-preview-change-verify.practice.sc-reset-sandbox",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    }
+  ]
+}

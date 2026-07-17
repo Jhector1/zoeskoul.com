@@ -17,20 +17,6 @@
             },
             "quiz": {
               "title": "Quiz"
-            },
-            "project": {
-              "title": "Less Than Filter Practice"
-            }
-          },
-          "projectSteps": {
-            "ci_products_price_lt_20": {
-              "title": "Query products cheaper than 20"
-            },
-            "ci_products_stock_lt_10": {
-              "title": "Find low-stock products"
-            },
-            "ci_products_created_before_2026": {
-              "title": "Filter by earlier date"
             }
           },
           "quiz": {
@@ -69,11 +55,11 @@
             "mc_rows_matching_price_lt_20": {
               "title": "Which products match price < 20?",
               "prompt": "Choose all products from this dataset that match `WHERE price < 20`.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Match each choice to the command, clause, or constraint described in the question.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "concept": "Use the SQL behavior described in the lesson to separate the valid choice from statements about a different command, clause, or constraint.",
+                "hint_1": "Identify the job the SQL must perform before comparing the choices.",
+                "hint_2": "Eliminate choices that belong to a different SQL concept."
               },
               "options": {
                 "a": "Sketchbook",
@@ -150,7 +136,7 @@
               "prompt": "Complete the query so it filters products with fewer than 10 items in stock.",
               "hint": "Use the column that stores inventory counts.",
               "help": {
-                "concept": "To filter by inventory amount, you must compare the `the missing term` column, not price, category, or name.",
+                "concept": "To filter by inventory amount, you must compare the `the blank` column, not price, category, or name.",
                 "hint_1": "The table column for item count is an integer field that tracks how many units are available.",
                 "hint_2": "Look for the schema column that contains values like 25, 10, 8, 50, 15, and 3."
               },
@@ -196,19 +182,19 @@
               "starterCode": "-- Show name and created_at for products created before 2026-01-01.\nSELECT name, created_at\nFROM products\nWHERE created_at < ;"
             },
             "try-less_than_comparison-sketch0": {
-              "title": "Query products cheaper than 20",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that shows the `name` and `price` columns for products whose `price` is less than 20. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Find Products Below a Price Limit",
+              "prompt": "Return `id`, `name`, and `price` for products priced below 15.",
+              "hint": "Use < 15.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
+                "concept": "Return `id`, `name`, and `price` for products priced below 15.",
+                "hint_1": "Use < 15.",
+                "hint_2": "Run the query and compare the returned columns and rows with the expected result."
               },
-              "starterCode": "-- Show the name and price columns for products whose price is less than 20.\nSELECT \n  name,\n  price\nFROM products\nWHERE ;"
+              "starterCode": "-- Keep prices below 15\nSELECT id, name, price\nFROM products\nWHERE price ;"
             },
             "try-less_than_comparison-sketch1": {
               "title": "Find low-stock products",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that shows `name` and `stock` for products with `stock` less than 10. Write the query in the SQL editor, click Run query, and check the results table.",
+              "prompt": "Create a focused inventory query that shows `name` and `stock` for products with `stock` less than 10. Run it and compare the result with the expected table.",
               "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
               "help": {
                 "concept": "This SQL exercise checks whether your query returns the requested result.",
@@ -219,7 +205,7 @@
             },
             "try-less_than_comparison-sketch2": {
               "title": "Filter by earlier date",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that shows `name` and `created_at` for products created before `2026-01-01`. Write the query in the SQL editor, click Run query, and check the results table.",
+              "prompt": "Create a focused inventory query that shows `name` and `created_at` for products created before `2026-01-01`. Run it and compare the result with the expected table.",
               "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
               "help": {
                 "concept": "This SQL exercise checks whether your query returns the requested result.",
@@ -232,16 +218,16 @@
           "tryIt": {
             "allowReveal": true,
             "try_less_than_comparison_sketch0": {
-              "title": "Query products cheaper than 20",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that shows the `name` and `price` columns for products whose `price` is less than 20. Write the query in the SQL editor, click Run query, and check the results table."
+              "title": "Find Products Below a Price Limit",
+              "prompt": "Return `id`, `name`, and `price` for products priced below 15."
             },
             "try_less_than_comparison_sketch1": {
               "title": "Find low-stock products",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that shows `name` and `stock` for products with `stock` less than 10. Write the query in the SQL editor, click Run query, and check the results table."
+              "prompt": "Create a focused inventory query that shows `name` and `stock` for products with `stock` less than 10. Run it and compare the result with the expected table."
             },
             "try_less_than_comparison_sketch2": {
               "title": "Filter by earlier date",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that shows `name` and `created_at` for products created before `2026-01-01`. Write the query in the SQL editor, click Run query, and check the results table."
+              "prompt": "Create a focused inventory query that shows `name` and `created_at` for products created before `2026-01-01`. Run it and compare the result with the expected table."
             }
           }
         }

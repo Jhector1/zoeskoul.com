@@ -1,0 +1,27 @@
+{
+  "topicId": "module-2-storewide-kpi-snapshot",
+  "ok": false,
+  "issues": [
+    {
+      "code": "SQL_PROMPT_INTENT_SUM_WEAK_MISMATCH",
+      "category": "prompt_intent",
+      "severity": "warn",
+      "exerciseId": "try-module-2-storewide-kpi-snapshot-sketch0",
+      "message": "Prompt mentions total/sum-like wording, but the solution query does not use SUM(...)."
+    },
+    {
+      "code": "SQL_PROMPT_INTENT_COUNT_WEAK_MISMATCH",
+      "category": "prompt_intent",
+      "severity": "warn",
+      "exerciseId": "try-module-2-storewide-kpi-snapshot-sketch1",
+      "message": "Prompt mentions count-like wording, but the solution query does not use COUNT(...)."
+    },
+    {
+      "code": "SQL_PROMPT_INTENT_AVG_MISSING",
+      "category": "prompt_intent",
+      "severity": "error",
+      "exerciseId": "try-module-2-storewide-kpi-snapshot-sketch4",
+      "message": "Prompt explicitly requires AVG, but the solution query does not use AVG(...)."
+    }
+  ]
+}

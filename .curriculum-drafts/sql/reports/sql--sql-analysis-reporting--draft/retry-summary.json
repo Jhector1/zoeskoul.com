@@ -1,0 +1,279 @@
+{
+  "subjectSlug": "sql--sql-analysis-reporting--draft",
+  "generatedAt": "2026-07-13T16:43:06.000Z",
+  "validationState": {
+    "unsafeSkipValidation": false,
+    "requested": {
+      "skipQualityGates": false,
+      "skipSemantic": false,
+      "skipGolden": false,
+      "unsafeSkipValidation": false
+    },
+    "structural": {
+      "ran": true,
+      "skipped": false,
+      "required": true
+    },
+    "qualityGates": {
+      "ran": true,
+      "skipped": false,
+      "required": true
+    },
+    "semantic": {
+      "ran": true,
+      "skipped": false,
+      "required": true
+    },
+    "golden": {
+      "ran": true,
+      "skipped": false,
+      "required": true
+    }
+  },
+  "topics": [
+    {
+      "moduleSlug": "sql-analysis-reporting-module-0-report-foundations",
+      "sectionSlug": "sql-analysis-reporting-section-0-readable-output",
+      "topicId": "aliases-for-readable-headings",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "sql-analysis-reporting-module-0-report-foundations",
+      "sectionSlug": "sql-analysis-reporting-section-0-readable-output",
+      "topicId": "distinct-values-for-report-categories",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "sql-analysis-reporting-module-0-report-foundations",
+      "sectionSlug": "sql-analysis-reporting-section-0-calculated-output",
+      "topicId": "arithmetic-expressions-in-select",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "sql-analysis-reporting-module-0-report-foundations",
+      "sectionSlug": "sql-analysis-reporting-section-0-calculated-output",
+      "topicId": "rounding-report-values",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "sql-analysis-reporting-module-0-report-foundations",
+      "sectionSlug": "sql-analysis-reporting-section-0-module-project",
+      "topicId": "module-0-order-value-detail-report",
+      "status": "success",
+      "attempts": 1,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "sql-analysis-reporting-module-1-null-safe-calculations",
+      "sectionSlug": "sql-analysis-reporting-section-1-null-safety",
+      "topicId": "how-null-affects-calculations",
+      "status": "success",
+      "attempts": 1,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "sql-analysis-reporting-module-1-null-safe-calculations",
+      "sectionSlug": "sql-analysis-reporting-section-1-null-safety",
+      "topicId": "coalesce-for-missing-values",
+      "status": "success",
+      "attempts": 1,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "sql-analysis-reporting-module-1-null-safe-calculations",
+      "sectionSlug": "sql-analysis-reporting-section-1-business-calculations",
+      "topicId": "percentage-and-discount-calculations",
+      "status": "success",
+      "attempts": 1,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "sql-analysis-reporting-module-1-null-safe-calculations",
+      "sectionSlug": "sql-analysis-reporting-section-1-business-calculations",
+      "topicId": "case-for-readable-labels",
+      "status": "success",
+      "attempts": 1,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "sql-analysis-reporting-module-1-null-safe-calculations",
+      "sectionSlug": "sql-analysis-reporting-section-1-module-project",
+      "topicId": "module-1-discount-audit-report",
+      "status": "success",
+      "attempts": 1,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "sql-analysis-reporting-module-2-aggregate-functions",
+      "sectionSlug": "sql-analysis-reporting-section-2-counts-and-totals",
+      "topicId": "counting-rows-and-values",
+      "status": "success",
+      "attempts": 1,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "sql-analysis-reporting-module-2-aggregate-functions",
+      "sectionSlug": "sql-analysis-reporting-section-2-counts-and-totals",
+      "topicId": "summing-business-metrics",
+      "status": "success",
+      "attempts": 1,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "sql-analysis-reporting-module-2-aggregate-functions",
+      "sectionSlug": "sql-analysis-reporting-section-2-averages-and-extremes",
+      "topicId": "averages-and-null-behavior",
+      "status": "success",
+      "attempts": 1,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "sql-analysis-reporting-module-2-aggregate-functions",
+      "sectionSlug": "sql-analysis-reporting-section-2-averages-and-extremes",
+      "topicId": "minimums-and-maximums",
+      "status": "success",
+      "attempts": 1,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "sql-analysis-reporting-module-2-aggregate-functions",
+      "sectionSlug": "sql-analysis-reporting-section-2-module-project",
+      "topicId": "module-2-storewide-kpi-snapshot",
+      "status": "success",
+      "attempts": 2,
+      "retryCodes": [
+        "SEMANTIC_VALIDATION_FAILED"
+      ]
+    },
+    {
+      "moduleSlug": "sql-analysis-reporting-module-3-grouped-summaries",
+      "sectionSlug": "sql-analysis-reporting-section-3-grouping-basics",
+      "topicId": "group-by-one-column",
+      "status": "success",
+      "attempts": 1,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "sql-analysis-reporting-module-3-grouped-summaries",
+      "sectionSlug": "sql-analysis-reporting-section-3-grouping-basics",
+      "topicId": "group-by-multiple-columns",
+      "status": "success",
+      "attempts": 1,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "sql-analysis-reporting-module-3-grouped-summaries",
+      "sectionSlug": "sql-analysis-reporting-section-3-ranking-and-quality",
+      "topicId": "sorting-aggregate-results",
+      "status": "success",
+      "attempts": 1,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "sql-analysis-reporting-module-3-grouped-summaries",
+      "sectionSlug": "sql-analysis-reporting-section-3-ranking-and-quality",
+      "topicId": "avoiding-grouping-mistakes",
+      "status": "success",
+      "attempts": 1,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "sql-analysis-reporting-module-3-grouped-summaries",
+      "sectionSlug": "sql-analysis-reporting-section-3-module-project",
+      "topicId": "module-3-region-category-scorecard",
+      "status": "success",
+      "attempts": 1,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "sql-analysis-reporting-module-4-having-and-conditional-reporting",
+      "sectionSlug": "sql-analysis-reporting-section-4-group-filters",
+      "topicId": "where-before-grouping",
+      "status": "success",
+      "attempts": 1,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "sql-analysis-reporting-module-4-having-and-conditional-reporting",
+      "sectionSlug": "sql-analysis-reporting-section-4-group-filters",
+      "topicId": "having-after-grouping",
+      "status": "success",
+      "attempts": 1,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "sql-analysis-reporting-module-4-having-and-conditional-reporting",
+      "sectionSlug": "sql-analysis-reporting-section-4-conditional-kpis",
+      "topicId": "case-inside-aggregates",
+      "status": "success",
+      "attempts": 1,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "sql-analysis-reporting-module-4-having-and-conditional-reporting",
+      "sectionSlug": "sql-analysis-reporting-section-4-conditional-kpis",
+      "topicId": "performance-bands-from-aggregates",
+      "status": "success",
+      "attempts": 1,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "sql-analysis-reporting-module-4-having-and-conditional-reporting",
+      "sectionSlug": "sql-analysis-reporting-section-4-module-project",
+      "topicId": "module-4-performance-exception-report",
+      "status": "success",
+      "attempts": 2,
+      "retryCodes": [
+        "SEMANTIC_VALIDATION_FAILED"
+      ]
+    },
+    {
+      "moduleSlug": "sql-analysis-reporting-module-5-final-capstone",
+      "sectionSlug": "sql-analysis-reporting-section-5-capstone-planning",
+      "topicId": "capstone-report-requirements",
+      "status": "success",
+      "attempts": 1,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "sql-analysis-reporting-module-5-final-capstone",
+      "sectionSlug": "sql-analysis-reporting-section-5-capstone-planning",
+      "topicId": "capstone-metric-map",
+      "status": "success",
+      "attempts": 1,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "sql-analysis-reporting-module-5-final-capstone",
+      "sectionSlug": "sql-analysis-reporting-section-5-capstone-readiness",
+      "topicId": "auditing-the-sales-kpi-dataset",
+      "status": "success",
+      "attempts": 1,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "sql-analysis-reporting-module-5-final-capstone",
+      "sectionSlug": "sql-analysis-reporting-section-5-capstone-readiness",
+      "topicId": "validating-report-grain-and-order",
+      "status": "success",
+      "attempts": 1,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "sql-analysis-reporting-module-5-final-capstone",
+      "sectionSlug": "sql-analysis-reporting-section-5-final-capstone-project",
+      "topicId": "final-executive-sales-performance-report",
+      "status": "success",
+      "attempts": 1,
+      "retryCodes": []
+    }
+  ]
+}

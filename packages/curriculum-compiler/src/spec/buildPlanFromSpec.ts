@@ -7,6 +7,7 @@ import type {
     PlannedSection,
     PlannedTopic,
 } from "@zoeskoul/curriculum-contracts";
+import { mergeToolPresentationPolicies } from "@zoeskoul/curriculum-contracts";
 import { normalizeSpecModuleOrder } from "./moduleOrder.js";
 import { resolveModuleRuntimePolicy } from "./resolveModuleRuntimePolicy.js";
 
@@ -38,6 +39,10 @@ export function buildPlanFromSpec(args: {
                         module.learningObjectives ??
                         [],
                     practice: topic.practice,
+                    projectBrief: topic.projectBrief,
+                    tools: topic.tools,
+                    lessonTools: topic.lessonTools,
+                    exerciseTools: topic.exerciseTools,
                 }));
 
                 return {
@@ -52,6 +57,7 @@ export function buildPlanFromSpec(args: {
                     weeksLabel: section.weeksLabel ?? null,
 
                     bullets: section.bullets,
+                    tools: section.tools,
 
                     topics,
                 };
@@ -84,6 +90,7 @@ export function buildPlanFromSpec(args: {
                 weekStart: module.weekStart ?? null,
                 weekEnd: module.weekEnd ?? null,
                 runtimePolicy,
+                tools: module.tools,
                 sections,
             };
         })
@@ -91,6 +98,10 @@ export function buildPlanFromSpec(args: {
 
     return {
         subjectSlug: args.blueprint.subjectSlug,
+        tools: mergeToolPresentationPolicies(
+            args.blueprint.tools,
+            args.spec.tools,
+        ),
         profileId: args.blueprint.profileId,
         modules,
     };

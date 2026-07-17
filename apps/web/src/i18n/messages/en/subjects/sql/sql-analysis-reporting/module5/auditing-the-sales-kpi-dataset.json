@@ -1,0 +1,165 @@
+{
+  "topics": {
+    "sql-analysis-reporting": {
+      "sql-analysis-reporting-module-5-final-capstone": {
+        "auditing-the-sales-kpi-dataset": {
+          "label": "Auditing the Sales Reporting Table",
+          "summary": "Check status coverage, date coverage, and missing-value exposure before building the capstone metrics.",
+          "cards": {
+            "sketch0": {
+              "title": "Check Status Coverage"
+            },
+            "sketch1": {
+              "title": "Check Missing Values and Date Coverage"
+            },
+            "quiz": {
+              "title": "Check Your Understanding"
+            }
+          },
+          "practice": {
+            "single-choice-1": {
+              "title": "Purpose of a Status Audit",
+              "prompt": "Why count rows by `order_status` before the capstone?",
+              "hint": "The audit checks source coverage rather than changing data.",
+              "help": {
+                "concept": "Status counts reveal the populations the final metrics must handle.",
+                "hint_1": "No mutation or unsupported time comparison is required.",
+                "hint_2": "Choose the coverage check."
+              },
+              "options": {
+                "a": "To confirm which states exist and their volume",
+                "b": "To permanently remove cancelled rows",
+                "c": "To rename the table",
+                "d": "To calculate monthly growth"
+              }
+            },
+            "single-choice-2": {
+              "title": "Missing-Value Count Pattern",
+              "prompt": "Which expression counts rows with a missing discount?",
+              "hint": "Each missing row should contribute one.",
+              "help": {
+                "concept": "A conditional 1/0 sum counts the subset explicitly.",
+                "hint_1": "The expression tests NULL rather than numeric size.",
+                "hint_2": "Choose the conditional count."
+              },
+              "options": {
+                "a": "SUM(CASE WHEN discount_pct IS NULL THEN 1 ELSE 0 END)",
+                "b": "SUM(discount_pct)",
+                "c": "COUNT(*) - 100",
+                "d": "MAX(discount_pct)"
+              }
+            },
+            "multi-choice-1": {
+              "title": "Useful Audit Outputs",
+              "prompt": "Which values belong in a capstone readiness audit? Select all that apply.",
+              "hint": "Use checks supported by the actual seeded table.",
+              "help": {
+                "concept": "The dataset covers January 2026, not a previous month.",
+                "hint_1": "Coverage and missingness are directly observable.",
+                "hint_2": "Choose the grounded audit outputs."
+              },
+              "options": {
+                "a": "Status counts",
+                "b": "Missing discount count",
+                "c": "First and last order dates",
+                "d": "An invented December growth rate"
+              }
+            },
+            "multi-choice-2": {
+              "title": "What the Audit Can Validate",
+              "prompt": "Which capstone assumptions can this audit confirm? Select all that apply.",
+              "hint": "The audit checks data coverage, not whether an unsupported top-per-group technique is available.",
+              "help": {
+                "concept": "Date boundaries, NULL counts, and status counts are observable.",
+                "hint_1": "The course still avoids subqueries and window functions.",
+                "hint_2": "Choose the data facts."
+              },
+              "options": {
+                "a": "The reporting month is covered.",
+                "b": "Missing discounts exist.",
+                "c": "Several order statuses exist.",
+                "d": "A top product per category can be selected without additional SQL concepts."
+              }
+            },
+            "drag-reorder-1": {
+              "title": "Run a Readiness Audit",
+              "prompt": "Arrange the workflow.",
+              "hint": "Inspect the source before committing to calculations.",
+              "help": {
+                "concept": "Coverage checks come before implementation.",
+                "hint_1": "The final comparison validates or changes assumptions.",
+                "hint_2": "End by reconciling audit and contract."
+              },
+              "tokens": {
+                "t1": "Confirm status categories",
+                "t2": "Count missing fields",
+                "t3": "Check date boundaries",
+                "t4": "Compare findings with the report contract"
+              }
+            },
+            "fill-blank-choice-1": {
+              "title": "Complete the Last-Date Check",
+              "prompt": "Fill the function that returns the latest order date.",
+              "hint": "Dates stored in ISO format sort chronologically in this dataset.",
+              "help": {
+                "concept": "The latest value is the maximum date string.",
+                "hint_1": "MIN would return the first date.",
+                "hint_2": "Choose MAX."
+              },
+              "template": "[blank1](order_date) AS last_order_date",
+              "choices": [
+                "MAX",
+                "MIN",
+                "AVG",
+                "COUNT"
+              ]
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_auditing_the_sales_kpi_dataset_sketch0": {
+              "title": "Audit Missing Data by Region",
+              "prompt": "For each `region`, return `total_orders`, `missing_discount_rows`, and `missing_rating_rows`. Calculate and return `region, COUNT(*) AS total_orders, SUM(CASE WHEN discount_pct IS NULL THEN 1 ELSE 0 END) AS missing_discount_rows, SUM(CASE WHEN customer_rating IS NULL THEN 1 ELSE 0 END) AS missing_rating_rows` from `sales_reporting`. Produce one result row per `region`. Sort the final result by `region`.",
+              "hint": "Group by region, count all rows, and add one conditional count for each nullable column.",
+              "help": {
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "Produce one result row per `region`. Sort the final result by `region`."
+              },
+              "starterCode": "-- Write the query below.",
+              "solutionCode": "SELECT\n    region,\n    COUNT(*) AS total_orders,\n    SUM(CASE WHEN discount_pct IS NULL THEN 1 ELSE 0 END) AS missing_discount_rows,\n    SUM(CASE WHEN customer_rating IS NULL THEN 1 ELSE 0 END) AS missing_rating_rows\nFROM sales_reporting\nGROUP BY region\nORDER BY region;"
+            },
+            "try_auditing_the_sales_kpi_dataset_sketch1": {
+              "title": "Audit Date and Value Boundaries",
+              "prompt": "Return one audit row with `first_order_date`, `last_order_date`, `minimum_quantity`, `maximum_quantity`, `minimum_unit_price`, and `maximum_unit_price`. Calculate and return `MIN(order_date) AS first_order_date, MAX(order_date) AS last_order_date, MIN(quantity) AS minimum_quantity, MAX(quantity) AS maximum_quantity, ROUND(MIN(unit_price), 2) AS minimum_unit_price, ROUND(MAX(unit_price), 2) AS maximum_unit_price` from `sales_reporting`.",
+              "hint": "Use MIN and MAX on the date, quantity, and unit-price columns without grouping.",
+              "help": {
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "Calculate and return `MIN(order_date) AS first_order_date, MAX(order_date) AS last_order_date, MIN(quantity) AS minimum_quantity, MAX(quantity) AS maximum_quantity, ROUND(MIN(unit_price), 2) AS minimum_unit_price, ROUND(MAX(unit_price), 2) AS maximum_unit_price` from `sales_reporting`."
+              },
+              "starterCode": "-- Write the query below.",
+              "solutionCode": "SELECT\n    MIN(order_date) AS first_order_date,\n    MAX(order_date) AS last_order_date,\n    MIN(quantity) AS minimum_quantity,\n    MAX(quantity) AS maximum_quantity,\n    ROUND(MIN(unit_price), 2) AS minimum_unit_price,\n    ROUND(MAX(unit_price), 2) AS maximum_unit_price\nFROM sales_reporting;"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql-analysis-reporting": {
+      "sql-analysis-reporting-module-5-final-capstone": {
+        "auditing-the-sales-kpi-dataset": {
+          "sketch0": {
+            "title": "Check Status Coverage",
+            "bodyMarkdown": "Before building the capstone, confirm which order states are present and how many rows belong to each one.\n\n```sql\nSELECT\n    order_status,\n    COUNT(*) AS order_count\nFROM sales_reporting\nGROUP BY order_status\nORDER BY order_status;\n```\n\n#### Line-by-line walkthrough\n\n- `SELECT` — starts the result list. The indented lines define the columns and calculations returned by the query.\n- `order_status,` — returns the stored `order_status` value.\n- `COUNT(*) AS order_count` — counts every row in the current scope and names the output `order_count`.\n- `FROM sales_reporting` — reads source rows from the `sales_reporting` table.\n- `GROUP BY order_status` — creates one group for every unique `order_status` value or combination.\n- `ORDER BY order_status;` — sorts the final rows by `order_status`; later expressions break ties.\n\n#### How SQL evaluates this aggregate\n\n1. `FROM` identifies the source table.\n2. `GROUP BY` divides the remaining rows into groups.\n3. The aggregate function runs once for each group.\n4. `SELECT` returns the finished metric under its alias.\n5. `ORDER BY` ranks the completed result rows.\n\nThis audit prevents the final report from assuming that every order is completed. It also verifies the exact status values that conditional metrics must use.\n\nA short inspection query can reveal incorrect assumptions before they are repeated across a large report."
+          },
+          "sketch1": {
+            "title": "Check Missing Values and Date Coverage",
+            "bodyMarkdown": "The capstone also depends on date coverage and two nullable columns. Audit those assumptions in one summary row.\n\n```sql\nSELECT\n    COUNT(*) AS total_rows,\n    SUM(CASE\n        WHEN discount_pct IS NULL THEN 1\n        ELSE 0\n    END) AS missing_discounts,\n    SUM(CASE\n        WHEN customer_rating IS NULL THEN 1\n        ELSE 0\n    END) AS missing_ratings,\n    MIN(order_date) AS first_order_date,\n    MAX(order_date) AS last_order_date\nFROM sales_reporting;\n```\n\n#### Line-by-line walkthrough\n\n- `SELECT` — starts the result list. The indented lines define the columns and calculations returned by the query.\n- `COUNT(*) AS total_rows,` — counts every row in the current scope and names the output `total_rows`.\n- `SUM(CASE` — adds the values produced by the conditional `CASE` expression.\n- `WHEN discount_pct IS NULL THEN 1` — tests `discount_pct IS NULL` and returns `1` when true.\n- `ELSE 0` — returns `0` when no earlier condition matches.\n- `END) AS missing_discounts,` — closes the `CASE` expression and the surrounding aggregate function. The completed metric is named `missing_discounts,`.\n- `SUM(CASE` — adds the values produced by the conditional `CASE` expression.\n- `WHEN customer_rating IS NULL THEN 1` — tests `customer_rating IS NULL` and returns `1` when true.\n- `ELSE 0` — returns `0` when no earlier condition matches.\n- `END) AS missing_ratings,` — closes the `CASE` expression and the surrounding aggregate function. The completed metric is named `missing_ratings,`.\n- `MIN(order_date) AS first_order_date,` — returns the smallest non-NULL value in the current scope and names the output `first_order_date`.\n- `MAX(order_date) AS last_order_date` — returns the largest non-NULL value in the current scope and names the output `last_order_date`.\n- `FROM sales_reporting;` — reads source rows from the `sales_reporting` table.\n\n#### How SQL evaluates this aggregate\n\n1. `FROM` identifies the source table.\n2. With no `GROUP BY`, all remaining rows form one group.\n3. `SELECT` returns the finished metric under its alias.\n\nThe result shows whether the requested January period exists and how much missing-data exposure the final metrics must handle.\n\nAuditing is not separate from reporting quality; it verifies that the report's definitions fit the data actually available."
+          }
+        }
+      }
+    }
+  }
+}

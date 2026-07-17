@@ -6,6 +6,10 @@ import type {
     PlannedSection,
     PlannedTopic,
 } from "@zoeskoul/curriculum-contracts";
+import {
+    mergeToolPresentationOverrideMaps,
+    mergeToolPresentationPolicies,
+} from "@zoeskoul/curriculum-contracts";
 import { getCurriculumProfile, getProfileAdapter } from "@zoeskoul/curriculum-profiles";
 import { resolveExercisePolicy } from "../spec/resolveExercisePolicy.js";
 import { planExerciseCounts } from "../policy/planExerciseCounts.js";
@@ -158,6 +162,26 @@ export function buildTopicSeedFromPlanNode(args: {
         sectionSlug: args.section.sectionSlug,
         topicId: args.topic.topicId,
     });
+    const authoredProjectBrief =
+        specTopic?.projectBrief ?? args.topic.projectBrief ?? undefined;
+    const resolvedTools = mergeToolPresentationPolicies(
+        args.blueprint.tools,
+        args.spec?.tools,
+        specModule?.tools,
+        args.module.tools,
+        specSection?.tools,
+        args.section.tools,
+        specTopic?.tools,
+        args.topic.tools,
+    );
+    const lessonTools = mergeToolPresentationOverrideMaps(
+        args.topic.lessonTools,
+        specTopic?.lessonTools,
+    );
+    const exerciseTools = mergeToolPresentationOverrideMaps(
+        args.topic.exerciseTools,
+        specTopic?.exerciseTools,
+    );
     const logicalModuleNumber =
         typeof args.module.moduleNumber === "number" && Number.isFinite(args.module.moduleNumber)
             ? args.module.moduleNumber
@@ -361,24 +385,38 @@ export function buildTopicSeedFromPlanNode(args: {
         generationTargets.quizVisibleDefault = 0;
         generationTargets.quizVisibleMax = 0;
 
-        if (typeof projectConfig.minStepCount === "number") {
-            generationTargets.projectCodeInputMin = Math.max(
-                generationTargets.projectCodeInputMin,
-                projectConfig.minStepCount,
-            );
-        }
+        const authoredStepCountTarget = authoredProjectBrief?.stepCountTarget;
+        if (
+            typeof authoredStepCountTarget === "number" &&
+            Number.isInteger(authoredStepCountTarget) &&
+            authoredStepCountTarget > 0
+        ) {
+            // The authored project brief is the source of truth. Profile defaults
+            // are fallbacks only and must never expand or shrink an explicit
+            // module-project or final-capstone step count.
+            generationTargets.projectCodeInputMin = authoredStepCountTarget;
+            generationTargets.projectCodeInputTarget = authoredStepCountTarget;
+            generationTargets.projectCodeInputMax = authoredStepCountTarget;
+        } else {
+            if (typeof projectConfig.minStepCount === "number") {
+                generationTargets.projectCodeInputMin = Math.max(
+                    generationTargets.projectCodeInputMin,
+                    projectConfig.minStepCount,
+                );
+            }
 
-        if (typeof projectConfig.targetStepCount === "number") {
-            generationTargets.projectCodeInputTarget = Math.max(
+            if (typeof projectConfig.targetStepCount === "number") {
+                generationTargets.projectCodeInputTarget = Math.max(
+                    generationTargets.projectCodeInputTarget,
+                    projectConfig.targetStepCount,
+                );
+            }
+
+            generationTargets.projectCodeInputMax = Math.max(
+                generationTargets.projectCodeInputMax,
                 generationTargets.projectCodeInputTarget,
-                projectConfig.targetStepCount,
             );
         }
-
-        generationTargets.projectCodeInputMax = Math.max(
-            generationTargets.projectCodeInputMax,
-            generationTargets.projectCodeInputTarget,
-        );
     }
 
     const hasExplicitTopicCodeInputTargets = hasExplicitCodeInputTargetOverrides(topicTargets);
@@ -443,7 +481,13 @@ export function buildTopicSeedFromPlanNode(args: {
         moduleServiceDefaults: mergedServiceDefaults,
         moduleRole: args.module.role,
         sectionRole: args.section.role,
+        topicLearningGoals:
+            specTopic?.learningGoals ?? args.topic.learningGoals ?? [],
+        tools: resolvedTools,
+        lessonTools,
+        exerciseTools,
         practice: resolvedPractice,
+        projectBrief: authoredProjectBrief,
     };
 }
 

@@ -37,6 +37,18 @@ function normalizeCell(value: unknown): string | number | null {
     return String(value);
 }
 
+export function buildSqlResultRows(
+    columns: readonly string[],
+    rawRows: readonly unknown[][],
+    maxRows: number,
+): Array<Array<string | number | null>> {
+    return rawRows.slice(0, maxRows).map((row) =>
+        columns.map((_column, columnIndex) =>
+            normalizeCell(row[columnIndex]),
+        ),
+    );
+}
+
 function stripSqlComments(sql: string): string {
     return String(sql ?? "")
         .replace(/--.*$/gm, " ")
@@ -54,6 +66,9 @@ function getBetterSqlite3():
     prepare(sql: string): {
         reader?: boolean;
         columns(): Array<{ name: string }>;
+        raw(toggle?: boolean): {
+            all(): unknown[][];
+        };
         all(): Array<Record<string, unknown>>;
     };
     close(): void;
@@ -137,11 +152,8 @@ export function buildSqlExpectedExample(args: {
             }
 
             const columns = checkStmt.columns().map((c) => c.name);
-            const rawRows = checkStmt.all();
-
-            const rows = rawRows.slice(0, maxRows).map((rowObj) =>
-                columns.map((col) => normalizeCell(rowObj[col])),
-            );
+            const rawRows = checkStmt.raw(true).all();
+            const rows = buildSqlResultRows(columns, rawRows, maxRows);
 
             return {
                 kind: "sql_result",
@@ -158,11 +170,8 @@ export function buildSqlExpectedExample(args: {
         }
 
         const columns = stmt.columns().map((c) => c.name);
-        const rawRows = stmt.all();
-
-        const rows = rawRows.slice(0, maxRows).map((rowObj) =>
-            columns.map((col) => normalizeCell(rowObj[col])),
-        );
+        const rawRows = stmt.raw(true).all();
+        const rows = buildSqlResultRows(columns, rawRows, maxRows);
 
         return {
             kind: "sql_result",

@@ -5,6 +5,7 @@ import type {
 } from "@zoeskoul/curriculum-contracts";
 import type { AiProvider } from "@zoeskoul/curriculum-ai";
 import { generateCoursePlan } from "@zoeskoul/curriculum-ai";
+import { baseCourseGenerationPolicy } from "@zoeskoul/curriculum-profiles";
 import { loadSavedPlan } from "../planning/loadSavedPlan.js";
 import { savePlan } from "../planning/savePlan.js";
 import { validatePlan } from "../validate/validatePlan.js";
@@ -33,7 +34,11 @@ export async function resolvePlan(args: {
             spec,
         });
 
-        validatePlan(plan);
+        validatePlan(plan, {
+            requireFinalCapstone:
+                spec.policy?.projectPolicy?.capstoneRequired ??
+                baseCourseGenerationPolicy.projects.requireFinalCapstone,
+        });
 
         return {
             plan,

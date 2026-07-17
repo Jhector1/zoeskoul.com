@@ -25,6 +25,9 @@ export function defineCourseFromManifest(args: {
             sectionSlug: sectionManifest.slug,
             prefix: moduleManifest.prefix,
             moduleRuntimeDefaults: moduleManifest.runtimeDefaults ?? null,
+            subjectTools: manifest.subject.tools ?? null,
+            moduleTools: moduleManifest.tools ?? null,
+            sectionTools: sectionManifest.tools ?? null,
           }),
           profileId,
         );

@@ -11,6 +11,8 @@ import { validateSqlResultShape } from "./validateSqlResultShape.js";
 import { validateSqlSolutionExecutes } from "./validateSqlSolutionExecutes.js";
 import { validateSqlConceptStage } from "./validateSqlConceptStage.js";
 import { validateSqlDatasetConsistency } from "../validate/validateSqlDatasetConsistency.js";
+import { validateWorkedExampleTryItDistinctness } from "../../shared/validateWorkedExampleTryItDistinctness.js";
+import { validateSqlDataManagementSchemaPractice } from "./validateSqlDataManagementSchemaPractice.js";
 
 function readEnvFlag(name: string): boolean {
     const maybeGlobal = globalThis as typeof globalThis & {
@@ -47,12 +49,24 @@ export async function validateSqlSemantic(args: {
             message,
         }));
 
+    const exampleTryItDistinctnessIssues =
+        validateWorkedExampleTryItDistinctness({
+            profileId: "sql",
+            seed: args.seed,
+            draft: args.draft,
+        });
+
+    const schemaPracticeIssues =
+        validateSqlDataManagementSchemaPractice(args);
+
     const issues: SemanticValidationIssue[] = [
         ...execution.issues,
         ...conceptStageIssues,
         ...shape.issues,
         ...promptIntent.issues,
         ...datasetConsistencyIssues,
+        ...exampleTryItDistinctnessIssues,
+        ...schemaPracticeIssues,
     ];
 
     return {

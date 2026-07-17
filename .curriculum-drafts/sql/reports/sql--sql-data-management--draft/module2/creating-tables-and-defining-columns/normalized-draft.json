@@ -1,0 +1,282 @@
+{
+  "title": "Creating Tables and Defining Columns",
+  "summary": "Write a complete CREATE TABLE statement whose column names and types describe the records the table will store.",
+  "minutes": 30,
+  "sketchBlocks": [
+    {
+      "id": "sketch0",
+      "title": "Creating a Simple Table with Columns",
+      "bodyMarkdown": "In SQL, creating a table is a fundamental task that involves defining the structure of the data you want to store. A table is defined using the `CREATE TABLE` statement, followed by the table name and a list of column definitions enclosed in parentheses. Each column definition includes the column name and its data type, such as INTEGER, TEXT, or REAL.\n\nFor example, to create a table named `employees` with columns for `id`, `name`, and `salary`, you would write:\n\n```sql\nCREATE TABLE employees (\n  id INTEGER PRIMARY KEY,\n  name TEXT NOT NULL,\n  salary REAL\n);\n```\n\nThis statement creates a table with three columns: `id`, which is an integer and serves as the primary key; `name`, which is a text field and cannot be null; and `salary`, which is a real number. The primary key ensures that each `id` is unique, while the `NOT NULL` constraint on `name` ensures that every employee must have a name."
+    },
+    {
+      "id": "sketch1",
+      "title": "Verifying Table Creation with sqlite_master",
+      "bodyMarkdown": "After creating a table, it's important to verify that it has been defined correctly. In SQLite, you can inspect the `sqlite_master` table to see the SQL statement used to create any table. This table contains metadata about all the tables, indexes, and other objects in the database.\n\nTo view the definition of a table, you can run a query like:\n\n```sql\nSELECT sql FROM sqlite_master WHERE type='table' AND name='employees';\n```\n\nThis query retrieves the SQL statement used to create the `employees` table. By examining this output, you can confirm that the table structure matches your expectations. This step is crucial for ensuring data integrity and consistency in your database."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "try-creating-tables-and-defining-columns-sketch0",
+      "kind": "code_input",
+      "title": "Create a Products Table",
+      "prompt": "Create a table named `products` with columns `product_id` (INTEGER, PRIMARY KEY), `product_name` (TEXT, NOT NULL), and `price` (REAL).",
+      "starterCode": "-- Verify the table creation\nSELECT sql FROM sqlite_master WHERE type='table' AND name='products';",
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "schema.sql",
+          "content": "-- Define the products table\nCREATE TABLE products (\n  product_id INTEGER PRIMARY KEY,\n  product_name TEXT NOT NULL,\n  price REAL\n);",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "-- Verify the table creation\nSELECT sql FROM sqlite_master WHERE type='table' AND name='products';",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "schema.sql",
+          "content": "-- Define the products table\nCREATE TABLE products (\n  product_id INTEGER PRIMARY KEY,\n  product_name TEXT NOT NULL,\n  price REAL\n);",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "-- Verify the table creation\nSELECT sql FROM sqlite_master WHERE type='table' AND name='products';",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "sqlFileOrder": [
+        "schema.sql",
+        "query.sql"
+      ],
+      "solutionCode": "-- Verify the table creation\nSELECT sql FROM sqlite_master WHERE type='table' AND name='products';",
+      "tests": [
+        {
+          "stdout": "CREATE TABLE products (product_id INTEGER PRIMARY KEY, product_name TEXT NOT NULL, price REAL)",
+          "match": "includes"
+        }
+      ],
+      "datasetId": "ddl_blank",
+      "recipeType": "sql_query",
+      "checkSql": "SELECT sql FROM sqlite_master WHERE type='table' AND name='products';",
+      "hint": "Define each column with its data type and constraints.",
+      "help": {
+        "concept": "Creating a table involves specifying column names, data types, and constraints.",
+        "hint_1": "Use CREATE TABLE followed by the table name and column definitions.",
+        "hint_2": "Ensure the primary key is set for `product_id` and `product_name` is NOT NULL."
+      }
+    },
+    {
+      "id": "try-creating-tables-and-defining-columns-sketch1",
+      "kind": "code_input",
+      "title": "Create an Orders Table",
+      "prompt": "Create a table named `orders` with columns `order_id` (INTEGER, PRIMARY KEY), `customer_name` (TEXT, NOT NULL), and `total_amount` (REAL).",
+      "starterCode": "-- Verify the table creation\nSELECT sql FROM sqlite_master WHERE type='table' AND name='orders';",
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "schema.sql",
+          "content": "-- Define the orders table\nCREATE TABLE orders (\n  order_id INTEGER PRIMARY KEY,\n  customer_name TEXT NOT NULL,\n  total_amount REAL\n);",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "-- Verify the table creation\nSELECT sql FROM sqlite_master WHERE type='table' AND name='orders';",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "schema.sql",
+          "content": "-- Define the orders table\nCREATE TABLE orders (\n  order_id INTEGER PRIMARY KEY,\n  customer_name TEXT NOT NULL,\n  total_amount REAL\n);",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "-- Verify the table creation\nSELECT sql FROM sqlite_master WHERE type='table' AND name='orders';",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "sqlFileOrder": [
+        "schema.sql",
+        "query.sql"
+      ],
+      "solutionCode": "-- Verify the table creation\nSELECT sql FROM sqlite_master WHERE type='table' AND name='orders';",
+      "tests": [
+        {
+          "stdout": "CREATE TABLE orders (order_id INTEGER PRIMARY KEY, customer_name TEXT NOT NULL, total_amount REAL)",
+          "match": "includes"
+        }
+      ],
+      "datasetId": "ddl_blank",
+      "recipeType": "sql_query",
+      "checkSql": "SELECT sql FROM sqlite_master WHERE type='table' AND name='orders';",
+      "hint": "Ensure each column is defined with the correct data type and constraints.",
+      "help": {
+        "concept": "Creating a table involves specifying column names, data types, and constraints.",
+        "hint_1": "Use CREATE TABLE followed by the table name and column definitions.",
+        "hint_2": "Ensure the primary key is set for `order_id` and `customer_name` is NOT NULL."
+      }
+    },
+    {
+      "id": "fill-blank-choice-1",
+      "kind": "fill_blank_choice",
+      "title": "Column Data Types",
+      "prompt": "Choose the correct data type for a column that stores names.",
+      "template": "The data type for storing names is [blank1].",
+      "choices": [
+        "INTEGER",
+        "TEXT",
+        "REAL"
+      ],
+      "correctValue": "TEXT",
+      "hint": "Names are typically stored as the missing term.",
+      "help": {
+        "concept": "Choosing the correct data type for a column is crucial for data integrity.",
+        "hint_1": "Consider what type of data a name represents.",
+        "hint_2": "Names are usually stored as strings of characters."
+      }
+    },
+    {
+      "id": "fill-blank-choice-2",
+      "kind": "fill_blank_choice",
+      "title": "Primary Key Constraint",
+      "prompt": "Identify the constraint used to ensure a column's values are unique and not null.",
+      "template": "The constraint that ensures uniqueness and non-nullability is [blank1].",
+      "choices": [
+        "PRIMARY KEY",
+        "NOT NULL",
+        "UNIQUE"
+      ],
+      "correctValue": "PRIMARY KEY",
+      "hint": "This constraint is often used for identifiers.",
+      "help": {
+        "concept": "A the missing term constraint ensures uniqueness and non-nullability of a column.",
+        "hint_1": "This constraint is crucial for identifying records uniquely.",
+        "hint_2": "It combines uniqueness with a non-null requirement."
+      }
+    },
+    {
+      "id": "multi-choice-1",
+      "kind": "multi_choice",
+      "title": "Table Creation Essentials",
+      "prompt": "Which of the following are essential components of a CREATE TABLE statement?",
+      "options": [
+        "Table name",
+        "Column definitions",
+        "Data insertion",
+        "Query execution"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ],
+      "hint": "Consider what defines the structure of a table.",
+      "help": {
+        "concept": "A CREATE TABLE statement requires a table name and column definitions.",
+        "hint_1": "Think about what you need to specify when creating a table.",
+        "hint_2": "Columns and their data types are crucial."
+      }
+    },
+    {
+      "id": "multi-choice-2",
+      "kind": "multi_choice",
+      "title": "Data Types in SQL",
+      "prompt": "Which of the following are valid SQL data types?",
+      "options": [
+        "INTEGER",
+        "TEXT",
+        "REAL",
+        "BOOLEAN"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "hint": "Consider the basic types used for numbers and text.",
+      "help": {
+        "concept": "SQL supports various data types for different kinds of data.",
+        "hint_1": "Think about types used for integers, text, and real numbers.",
+        "hint_2": "These types are commonly used in SQL tables."
+      }
+    },
+    {
+      "id": "drag-reorder-1",
+      "kind": "drag_reorder",
+      "title": "Order of SQL Clauses",
+      "prompt": "Arrange the SQL clauses in the correct order for a basic SELECT statement.",
+      "tokens": [
+        "SELECT",
+        "FROM",
+        "WHERE",
+        "ORDER BY"
+      ],
+      "correctOrder": [
+        "SELECT",
+        "FROM",
+        "WHERE",
+        "ORDER BY"
+      ],
+      "hint": "Consider the typical flow of a SQL query.",
+      "help": {
+        "concept": "SQL queries follow a specific order of clauses.",
+        "hint_1": "Start with the clause that specifies what to retrieve.",
+        "hint_2": "Finish with the clause that orders the results."
+      }
+    },
+    {
+      "id": "single-choice-1",
+      "kind": "single_choice",
+      "title": "Purpose of PRIMARY KEY",
+      "prompt": "What is the primary purpose of a PRIMARY KEY in a table?",
+      "options": [
+        "To allow duplicate rows",
+        "To uniquely identify each row",
+        "To store large text data",
+        "To enforce data types"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Consider what a PRIMARY KEY ensures for each row.",
+      "help": {
+        "concept": "A PRIMARY KEY uniquely identifies each row in a table.",
+        "hint_1": "Think about how a PRIMARY KEY affects row identification.",
+        "hint_2": "It ensures each row is distinct."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Build a Warehouse Stock Ledger Schema",
+    "stepIds": [
+      "try-creating-tables-and-defining-columns-sketch0",
+      "try-creating-tables-and-defining-columns-sketch1"
+    ]
+  }
+}

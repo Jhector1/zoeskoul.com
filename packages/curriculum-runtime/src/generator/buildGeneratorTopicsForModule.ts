@@ -34,6 +34,9 @@ export function buildGeneratorTopicsForModule(args: {
         sectionSlug: section.slug,
         prefix: moduleManifest.prefix,
         moduleRuntimeDefaults: moduleManifest.runtimeDefaults ?? null,
+        subjectTools: manifest.subject.tools ?? null,
+        moduleTools: moduleManifest.tools ?? null,
+        sectionTools: section.tools ?? null,
       });
 
       return defineJsonTopicBundle(fullManifest, profileId);

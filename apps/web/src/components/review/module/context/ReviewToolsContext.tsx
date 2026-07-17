@@ -19,6 +19,7 @@ import type {
   TerminalEvidence,
 } from "@/lib/practice/types";
 import type { SqlPaneOptions } from "@/components/code/runner/components/sql/results-pane";
+import type { ToolPresentationPolicy } from "@zoeskoul/curriculum-contracts";
 import type {
   RuntimeWorkspaceMutation,
   UnknownRecord,
@@ -67,6 +68,7 @@ type CodeInputPatch = UnknownRecord & {
   sqlSeedSql?: string;
   sqlInitialTableSnapshots?: SqlTableSnapshots;
   sqlPaneOptions?: SqlPaneOptions;
+  toolPresentation?: ToolPresentationPolicy;
 };
 
 export type RegisterArgs = {
@@ -90,6 +92,7 @@ export type RegisterArgs = {
   sqlSeedSql?: string;
   sqlInitialTableSnapshots?: SqlTableSnapshots;
   sqlPaneOptions?: SqlPaneOptions;
+  toolPresentation?: ToolPresentationPolicy;
 
   onPatch: (patch: CodeInputPatch) => void;
 };
@@ -234,6 +237,76 @@ function workspaceKeyOf(workspace: WorkspaceStateV2 | null | undefined) {
   });
 }
 
+function workspaceRegistrationKeyOf(
+  workspace: WorkspaceStateV2 | null | undefined,
+) {
+  if (!workspace || workspace.version !== 2 || !Array.isArray(workspace.nodes)) {
+    return JSON.stringify(workspace ?? null);
+  }
+
+  const folderPathById = new Map<string, string>();
+
+  let changed = true;
+  while (changed) {
+    changed = false;
+
+    for (const node of workspace.nodes as any[]) {
+      if (!node || node.kind !== "folder") continue;
+
+      const id = String(node.id ?? "");
+      if (!id || folderPathById.has(id)) continue;
+
+      const name = String(node.name ?? "");
+      const parentId = node.parentId == null ? null : String(node.parentId);
+      if (parentId && !folderPathById.has(parentId)) continue;
+
+      const parentPath = parentId ? folderPathById.get(parentId) || "" : "";
+      folderPathById.set(id, parentPath ? `${parentPath}/${name}` : name);
+      changed = true;
+    }
+  }
+
+  const nodePath = (node: any) => {
+    const name = String(node?.name ?? "");
+    const parentId = node?.parentId == null ? null : String(node.parentId);
+    const parentPath = parentId ? folderPathById.get(parentId) || "" : "";
+    return parentPath ? `${parentPath}/${name}` : name;
+  };
+
+  const files = (workspace.nodes as any[])
+    .filter((node) => node?.kind === "file")
+    .map((node) => ({
+      path: nodePath(node),
+      content: String(node.content ?? ""),
+    }))
+    .sort((left, right) => left.path.localeCompare(right.path));
+
+  const folders = (workspace.nodes as any[])
+    .filter((node) => node?.kind === "folder")
+    .map((node) => nodePath(node))
+    .sort((left, right) => left.localeCompare(right));
+
+  const entryNode = (workspace.nodes as any[]).find(
+    (node) => node?.kind === "file" && node.id === workspace.entryFileId,
+  );
+
+  /**
+   * Registration identity intentionally excludes view-only editor state:
+   * activeFileId, openTabs, expanded folders, and pane widths.
+   *
+   * Switching between schema.sql and query.sql must not look like a new
+   * exercise contract and trigger register -> render -> register loops.
+   */
+  return JSON.stringify({
+    version: workspace.version,
+    language: workspace.language ?? null,
+    entryPath: entryNode ? nodePath(entryNode) : null,
+    stdin: workspace.stdin ?? "",
+    folders,
+    files,
+  });
+}
+
 function getWorkspaceEntryCode(workspace: WorkspaceStateV2 | null | undefined) {
   if (!workspace || workspace.version !== 2 || !Array.isArray(workspace.nodes)) {
     return null;
@@ -273,7 +346,9 @@ function firstNonBlank(...values: Array<string | null | undefined>) {
 //         patch?.preferSnapshot === true
 //     );
 // }
-function registerArgsKey(args: RegisterArgs | undefined) {
+export function codeInputRegistrationKey(
+  args: RegisterArgs | undefined,
+) {
   if (!args) return "";
 
   return JSON.stringify({
@@ -283,7 +358,7 @@ function registerArgsKey(args: RegisterArgs | undefined) {
     stdin: args.stdin ?? "",
     terminalEvidence: args.terminalEvidence ?? null,
     ideConfig: args.ideConfig ?? null,
-    workspaceKey: workspaceKeyOf(args.workspace ?? null),
+    workspaceKey: workspaceRegistrationKeyOf(args.workspace ?? null),
     ownerCardId: args.ownerCardId ?? null,
     // Deliberately exclude transient ownership flags from the registry key.
     // They can flip during bind/progress reconciliation and otherwise cause
@@ -295,8 +370,28 @@ function registerArgsKey(args: RegisterArgs | undefined) {
     sqlSeedSql: args.sqlSeedSql ?? null,
     sqlInitialTableSnapshots: args.sqlInitialTableSnapshots ?? null,
     sqlPaneOptions: args.sqlPaneOptions ?? null,
+    toolPresentation: args.toolPresentation ?? null,
     generation: args.generation ?? null,
   });
+}
+
+export function shouldNotifyCodeInputRegistry(args: {
+  id: string;
+  had: boolean;
+  previous: RegisterArgs | undefined;
+  next: RegisterArgs;
+}) {
+  if (!args.had) return true;
+
+  const previousTarget = args.previous?.exerciseKey ?? args.id;
+  const nextTarget = args.next.exerciseKey ?? args.id;
+
+  /**
+   * Registry entries live in a ref. Existing content/config changes are read
+   * directly by bindNow and do not require a provider render. A render is only
+   * needed when the registered exercise set or its target-key mapping changes.
+   */
+  return previousTarget !== nextTarget;
 }
 
 function defer(fn: () => void) {
@@ -745,9 +840,13 @@ export function ReviewToolsProvider({
                     patch?.sqlPaneOptions && typeof patch.sqlPaneOptions === "object"
                         ? patch.sqlPaneOptions
                         : cur.sqlPaneOptions,
+                toolPresentation:
+                    patch?.toolPresentation && typeof patch.toolPresentation === "object"
+                        ? patch.toolPresentation
+                        : cur.toolPresentation,
             };
 
-            if (registerArgsKey(cur) === registerArgsKey(next)) {
+            if (codeInputRegistrationKey(cur) === codeInputRegistrationKey(next)) {
                 return;
             }
 
@@ -1133,6 +1232,9 @@ export function ReviewToolsProvider({
                     sqlPaneOptions:
                         normalizedArgs.sqlPaneOptions ??
                         prev.sqlPaneOptions,
+                    toolPresentation:
+                        normalizedArgs.toolPresentation ??
+                        prev.toolPresentation,
 
                     /**
                      * Important: keep the latest onPatch closure from the current
@@ -1147,12 +1249,22 @@ export function ReviewToolsProvider({
             }
         }
 
-      const prevKey = registerArgsKey(prev);
-      const nextKey = registerArgsKey(nextArgs);
+      const prevKey = codeInputRegistrationKey(prev);
+      const nextKey = codeInputRegistrationKey(nextArgs);
 
       registryRef.current.set(id, nextArgs);
 
-      if (!had || prevKey !== nextKey) setRegistryTick((x) => x + 1);
+      if (
+        shouldNotifyCodeInputRegistry({
+          id,
+          had,
+          previous: prev,
+          next: nextArgs,
+        })
+      ) {
+        setRegistryTick((x) => x + 1);
+      }
+
         const targetKey = nextArgs.exerciseKey ?? id;
         const currentBound = useReviewRuntimeStore.getState().tool.boundExerciseKey;
 

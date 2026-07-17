@@ -1,0 +1,178 @@
+{
+  "topics": {
+    "sql--sql-analysis-reporting--draft": {
+      "sql-analysis-reporting-module-2-aggregate-functions": {
+        "module-2-storewide-kpi-snapshot": {
+          "label": "Module 2: Storewide KPI Snapshot",
+          "summary": "Produce one row containing order count, units sold, gross sales, net sales, average order value, and value range.",
+          "cards": {
+            "sketch0": {
+              "title": "Introduction to Storewide KPI Snapshot"
+            },
+            "project": {
+              "title": "Storewide KPI Snapshot Project"
+            }
+          },
+          "projectSteps": {
+            "try_module_2_storewide_kpi_snapshot_sketch0": {
+              "title": "Calculate Total Orders and Units Sold"
+            },
+            "try_module_2_storewide_kpi_snapshot_sketch1": {
+              "title": "Calculate Gross and Net Sales"
+            },
+            "try_module_2_storewide_kpi_snapshot_sketch2": {
+              "title": "Calculate Average Order Value"
+            },
+            "try_module_2_storewide_kpi_snapshot_sketch3": {
+              "title": "Calculate Minimum and Maximum Order Values"
+            },
+            "try_module_2_storewide_kpi_snapshot_sketch4": {
+              "title": "Calculate Total Discount Given"
+            },
+            "try_module_2_storewide_kpi_snapshot_sketch5": {
+              "title": "Calculate Total Customer Ratings"
+            }
+          },
+          "moduleProject": {
+            "steps": {
+              "try_module_2_storewide_kpi_snapshot_sketch0": {
+                "title": "Calculate Total Orders and Units Sold",
+                "prompt": "Start the module project. In step 1 of 6, Write a SQL query to calculate the total number of orders and the total units sold from the `sales_reporting` table.",
+                "hint": "This is the first project step. Build a clean starting version, then run it before moving on.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "This is the first project step. Build a clean starting version, then run it before moving on.",
+                  "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+                },
+                "starterCode": "-- Write your SQL answer below",
+                "solutionCode": "SELECT COUNT(*) AS total_orders, SUM(quantity) AS total_units_sold FROM sales_reporting;"
+              },
+              "try_module_2_storewide_kpi_snapshot_sketch1": {
+                "title": "Calculate Gross and Net Sales",
+                "prompt": "Continue the same module project from the previous working step. In step 2 of 6, Write a SQL query to calculate the gross sales and net sales from the `sales_reporting` table. Assume net sales account for discounts.",
+                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                  "hint_2": "Run the previous working code first, then make only the focused change for this step."
+                },
+                "starterCode": "SELECT COUNT(*) AS total_orders, SUM(quantity) AS total_units_sold FROM sales_reporting;\n-- Project step 2: Calculate Gross and Net Sales\n-- Keep the working code above from the previous step.\n-- Next, Write a SQL query to calculate the gross sales and net sales from the `sales_reporting` table\n-- Add only the focused change for this step inside the existing work.\n",
+                "solutionCode": "SELECT SUM(unit_price * quantity) AS gross_sales, SUM((unit_price * quantity) * (1 - COALESCE(discount_pct, 0) / 100)) AS net_sales FROM sales_reporting;\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "SELECT COUNT(*) AS total_orders, SUM(quantity) AS total_units_sold FROM sales_reporting;\n-- Project step 2: Calculate Gross and Net Sales\n-- Keep the working code above from the previous step.\n-- Next, Write a SQL query to calculate the gross sales and net sales from the `sales_reporting` table\n-- Add only the focused change for this step inside the existing work.\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_py": {
+                    "content": "SELECT SUM(unit_price * quantity) AS gross_sales, SUM((unit_price * quantity) * (1 - COALESCE(discount_pct, 0) / 100)) AS net_sales FROM sales_reporting;\n"
+                  }
+                }
+              },
+              "try_module_2_storewide_kpi_snapshot_sketch2": {
+                "title": "Calculate Average Order Value",
+                "prompt": "Continue the same module project from the previous working step. In step 3 of 6, Write a SQL query to calculate the average order value from the `sales_reporting` table.",
+                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                  "hint_2": "Run the previous working code first, then make only the focused change for this step."
+                },
+                "starterCode": "SELECT SUM(unit_price * quantity) AS gross_sales, SUM((unit_price * quantity) * (1 - COALESCE(discount_pct, 0) / 100)) AS net_sales FROM sales_reporting;\n-- Project step 3: Calculate Average Order Value\n-- Keep the working code above from the previous step.\n-- Next, Write a SQL query to calculate the average order value from the `sales_reporting` table\n-- Add only the focused change for this step inside the existing work.\n",
+                "solutionCode": "SELECT AVG(unit_price * quantity) AS average_order_value FROM sales_reporting;\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "SELECT SUM(unit_price * quantity) AS gross_sales, SUM((unit_price * quantity) * (1 - COALESCE(discount_pct, 0) / 100)) AS net_sales FROM sales_reporting;\n-- Project step 3: Calculate Average Order Value\n-- Keep the working code above from the previous step.\n-- Next, Write a SQL query to calculate the average order value from the `sales_reporting` table\n-- Add only the focused change for this step inside the existing work.\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_py": {
+                    "content": "SELECT AVG(unit_price * quantity) AS average_order_value FROM sales_reporting;\n"
+                  }
+                }
+              },
+              "try_module_2_storewide_kpi_snapshot_sketch3": {
+                "title": "Calculate Minimum and Maximum Order Values",
+                "prompt": "Continue the same module project from the previous working step. In step 4 of 6, Write a SQL query to find the minimum and maximum order values from the `sales_reporting` table.",
+                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                  "hint_2": "Run the previous working code first, then make only the focused change for this step."
+                },
+                "starterCode": "SELECT AVG(unit_price * quantity) AS average_order_value FROM sales_reporting;\n-- Project step 4: Calculate Minimum and Maximum Order Values\n-- Keep the working code above from the previous step.\n-- Next, Write a SQL query to find the minimum and maximum order values from the `sales_reporting` table\n-- Add only the focused change for this step inside the existing work.\n",
+                "solutionCode": "SELECT MIN(unit_price * quantity) AS min_order_value, MAX(unit_price * quantity) AS max_order_value FROM sales_reporting;\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "SELECT AVG(unit_price * quantity) AS average_order_value FROM sales_reporting;\n-- Project step 4: Calculate Minimum and Maximum Order Values\n-- Keep the working code above from the previous step.\n-- Next, Write a SQL query to find the minimum and maximum order values from the `sales_reporting` table\n-- Add only the focused change for this step inside the existing work.\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_py": {
+                    "content": "SELECT MIN(unit_price * quantity) AS min_order_value, MAX(unit_price * quantity) AS max_order_value FROM sales_reporting;\n"
+                  }
+                }
+              },
+              "try_module_2_storewide_kpi_snapshot_sketch4": {
+                "title": "Calculate Total Discount Given",
+                "prompt": "Continue the same module project from the previous working step. In step 5 of 6, Write a SQL query to calculate the total discount given on all orders from the `sales_reporting` table.",
+                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                  "hint_2": "Run the previous working code first, then make only the focused change for this step."
+                },
+                "starterCode": "SELECT MIN(unit_price * quantity) AS min_order_value, MAX(unit_price * quantity) AS max_order_value FROM sales_reporting;\n-- Project step 5: Calculate Total Discount Given\n-- Keep the working code above from the previous step.\n-- Next, Write a SQL query to calculate the total discount given on all orders from the `sales_reporting` table\n-- Add only the focused change for this step inside the existing work.\n",
+                "solutionCode": "SELECT SUM((unit_price * quantity) * (COALESCE(discount_pct, 0) / 100)) AS total_discount FROM sales_reporting;\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "SELECT MIN(unit_price * quantity) AS min_order_value, MAX(unit_price * quantity) AS max_order_value FROM sales_reporting;\n-- Project step 5: Calculate Total Discount Given\n-- Keep the working code above from the previous step.\n-- Next, Write a SQL query to calculate the total discount given on all orders from the `sales_reporting` table\n-- Add only the focused change for this step inside the existing work.\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_py": {
+                    "content": "SELECT SUM((unit_price * quantity) * (COALESCE(discount_pct, 0) / 100)) AS total_discount FROM sales_reporting;\n"
+                  }
+                }
+              },
+              "try_module_2_storewide_kpi_snapshot_sketch5": {
+                "title": "Calculate Total Customer Ratings",
+                "prompt": "Continue the same module project from the previous working step. In step 6 of 6, Write a SQL query to calculate the total of all customer ratings from the `sales_reporting` table, ignoring NULL values.",
+                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                  "hint_2": "Run the previous working code first, then make only the focused change for this step."
+                },
+                "starterCode": "SELECT SUM((unit_price * quantity) * (COALESCE(discount_pct, 0) / 100)) AS total_discount FROM sales_reporting;\n-- Project step 6: Calculate Total Customer Ratings\n-- Keep the working code above from the previous step.\n-- Next, Write a SQL query to calculate the total of all customer ratings from the `sales_reporting` table, ignoring NULL values\n-- Add only the focused change for this step inside the existing work.\n",
+                "solutionCode": "SELECT SUM(COALESCE(customer_rating, 0)) AS total_customer_ratings FROM sales_reporting;\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "SELECT SUM((unit_price * quantity) * (COALESCE(discount_pct, 0) / 100)) AS total_discount FROM sales_reporting;\n-- Project step 6: Calculate Total Customer Ratings\n-- Keep the working code above from the previous step.\n-- Next, Write a SQL query to calculate the total of all customer ratings from the `sales_reporting` table, ignoring NULL values\n-- Add only the focused change for this step inside the existing work.\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_py": {
+                    "content": "SELECT SUM(COALESCE(customer_rating, 0)) AS total_customer_ratings FROM sales_reporting;\n"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql--sql-analysis-reporting--draft": {
+      "sql-analysis-reporting-module-2-aggregate-functions": {
+        "module-2-storewide-kpi-snapshot": {
+          "module-2-storewide-kpi-snapshot-sketch0": {
+            "title": "Introduction to Storewide KPI Snapshot",
+            "bodyMarkdown": "In this project, you will create a Storewide KPI Snapshot using SQL aggregate functions. The goal is to produce a single row of key performance indicators (KPIs) that summarize the store's sales data. This includes calculating the total number of orders, total units sold, gross sales, net sales, average order value, and the range of order values. These metrics provide a quick overview of the store's performance and help in making informed business decisions."
+          }
+        }
+      }
+    }
+  }
+}

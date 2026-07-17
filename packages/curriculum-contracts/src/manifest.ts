@@ -5,6 +5,7 @@ import type {
   TerminalExpectations,
 } from "@zoeskoul/practice-checks";
 import type { WorkspaceExpectations } from "./workspace-path.js";
+import type { ToolPresentationPolicy } from "./tool-presentation.js";
 
 export type ExerciseKind =
   | "single_choice"
@@ -94,12 +95,14 @@ export type ManifestCard =
       titleKey: string;
       sketchId: string;
       height?: number;
+      tools?: ToolPresentationPolicy;
       tryIt?: ManifestEmbeddedTryIt;
     }
   | {
       id: string;
       kind: "quiz";
       titleKey: string;
+      tools?: ToolPresentationPolicy;
   quiz: {
     difficulty: "easy" | "medium" | "hard";
     n: number;
@@ -115,6 +118,7 @@ export type ManifestCard =
       id: string;
       kind: "project";
       titleKey: string;
+      tools?: ToolPresentationPolicy;
       tryIt?: boolean;
   project: {
     difficulty: "easy" | "medium" | "hard";
@@ -177,6 +181,8 @@ export type ManifestBaseExercise = {
   messageBase: string;
   runtime?: ManifestRuntimeDefaults | null;
   serviceOverrides?: ManifestIdeServiceConfig | null;
+  /** Exercise-level Tools presentation override. */
+  tools?: ToolPresentationPolicy;
 };
 
 export type ManifestSingleChoice = ManifestBaseExercise & {
@@ -269,6 +275,9 @@ export type ManifestRecipe =
       type: "sql_query";
       datasetId?: string;
       solutionCode: string;
+      solutionFiles?: ManifestStarterFiles;
+      /** Ordered SQL file execution paths used to build solutionCode and learner submissions. */
+      sqlFileOrder?: string[];
       checkSql?: string;
       resultShape?: "table";
       ignoreRowOrder?: boolean;
@@ -458,6 +467,8 @@ export type TopicBundleManifest = {
   };
   serviceDefaults?: ManifestIdeServiceConfig | null;
   runtimeDefaults?: ManifestRuntimeDefaults | null;
+  /** Effective policy resolved through topic scope. */
+  tools?: ToolPresentationPolicy;
   cards: ManifestCard[];
   sketches: ManifestSketch[];
   exercises: ManifestExercise[];

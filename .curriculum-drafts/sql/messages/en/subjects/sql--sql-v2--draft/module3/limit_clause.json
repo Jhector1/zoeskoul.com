@@ -164,86 +164,31 @@
                 "WHERE"
               ]
             },
-            "ci_cheapest_three": {
-              "title": "Return the 3 cheapest products",
-              "prompt": "Write a query that shows `name` and `price` from `products`, sorted from the lowest price to the highest price, and returns only the first 3 rows. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- TODO: sort by price from lowest to highest\n-- TODO: return only 3 rows\nSELECT name, price\nFROM products\n;"
-            },
-            "ci_most_expensive_two": {
-              "title": "Return the 2 most expensive products",
-              "prompt": "Write a query that shows `name` and `price` from `products`, sorted from the highest price to the lowest price, and returns only 2 rows.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- TODO: sort so the highest prices appear first\n-- TODO: keep only 2 rows\nSELECT name, price\nFROM products\n;"
-            },
-            "ci_newest_four": {
-              "title": "Return the 4 newest products",
-              "prompt": "Write a query that shows `name` and `created_at` from `products`, sorted so the newest dates come first, and returns only 4 rows.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- TODO: sort by newest date first\n-- TODO: return only 4 rows\nSELECT name, created_at\nFROM products\n;"
-            },
-            "try-limit_clause-sketch0": {
-              "title": "Return the 3 cheapest products",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that shows `name` and `price` from `products`, sorted from the lowest price to the highest price, and returns only the first 3 rows. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- TODO: sort by price from lowest to highest\n-- TODO: return only 3 rows\nSELECT name, price\nFROM products\n;"
-            },
-            "try-limit_clause-sketch1": {
-              "title": "Return the 2 most expensive products",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that shows `name` and `price` from `products`, sorted from the highest price to the lowest price, and returns only 2 rows.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- TODO: sort so the highest prices appear first\n-- TODO: keep only 2 rows\nSELECT name, price\nFROM products\n;"
-            },
             "try-limit_clause-sketch2": {
-              "title": "Return the 4 newest products",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that shows `name` and `created_at` from `products`, sorted so the newest dates come first, and returns only 4 rows.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Return a Small Catalog Sample",
+              "prompt": "Return `id`, `name`, and `category` for only four rows. Return `id, name, category` from `products` in that column order. Return only the first `4` rows.",
+              "hint": "Place the row count after LIMIT.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "Return `id, name, category` from `products` in that column order. Return only the first `4` rows."
               },
-              "starterCode": "-- TODO: sort by newest date first\n-- TODO: return only 4 rows\nSELECT name, created_at\nFROM products\n;"
+              "starterCode": "SELECT id, name, category\nFROM products\nLIMIT ;"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_limit_clause_sketch0": {
               "title": "Return the 3 cheapest products",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that shows `name` and `price` from `products`, sorted from the lowest price to the highest price, and returns only the first 3 rows. Write the query in the SQL editor, click Run query, and check the results table."
+              "prompt": "Build a ranking query that shows `name` and `price` from `products`, sorted from the lowest price to the highest price, and returns only the first 3 rows. Run it and compare the result with the expected table."
             },
             "try_limit_clause_sketch1": {
               "title": "Return the 2 most expensive products",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that shows `name` and `price` from `products`, sorted from the highest price to the lowest price, and returns only 2 rows."
+              "prompt": "Build a ranking query that shows `name` and `price` from `products`, sorted from the highest price to the lowest price, and returns only 2 rows. Run it and compare the result with the expected table."
             },
             "try_limit_clause_sketch2": {
-              "title": "Return the 4 newest products",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that shows `name` and `created_at` from `products`, sorted so the newest dates come first, and returns only 4 rows."
+              "title": "Return a Small Catalog Sample",
+              "prompt": "Return `id`, `name`, and `category` for only four rows. Do not add ORDER BY in this exercise."
             }
           }
         }
@@ -264,20 +209,6 @@
             },
             "quiz": {
               "title": "Quiz"
-            },
-            "project": {
-              "title": "Top and bottom product snapshots"
-            }
-          },
-          "projectSteps": {
-            "ci_cheapest_three": {
-              "title": "Return the 3 cheapest products"
-            },
-            "ci_most_expensive_two": {
-              "title": "Return the 2 most expensive products"
-            },
-            "ci_newest_four": {
-              "title": "Return the 4 newest products"
             }
           },
           "quiz": {
@@ -446,7 +377,7 @@
             },
             "try-limit_clause-sketch0": {
               "title": "Return the 3 cheapest products",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that shows `name` and `price` from `products`, sorted from the lowest price to the highest price, and returns only the first 3 rows. Write the query in the SQL editor, click Run query, and check the results table.",
+              "prompt": "Build a ranking query that shows `name` and `price` from `products`, sorted from the lowest price to the highest price, and returns only the first 3 rows. Run it and compare the result with the expected table.",
               "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
               "help": {
                 "concept": "This SQL exercise checks whether your query returns the requested result.",
@@ -457,7 +388,7 @@
             },
             "try-limit_clause-sketch1": {
               "title": "Return the 2 most expensive products",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that shows `name` and `price` from `products`, sorted from the highest price to the lowest price, and returns only 2 rows.",
+              "prompt": "Build a ranking query that shows `name` and `price` from `products`, sorted from the highest price to the lowest price, and returns only 2 rows. Run it and compare the result with the expected table.",
               "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
               "help": {
                 "concept": "This SQL exercise checks whether your query returns the requested result.",
@@ -467,30 +398,30 @@
               "starterCode": "-- TODO: sort so the highest prices appear first\n-- TODO: keep only 2 rows\nSELECT name, price\nFROM products\n;"
             },
             "try-limit_clause-sketch2": {
-              "title": "Return the 4 newest products",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that shows `name` and `created_at` from `products`, sorted so the newest dates come first, and returns only 4 rows.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Return a Small Catalog Sample",
+              "prompt": "Return `id`, `name`, and `category` for only four rows. Do not add ORDER BY in this exercise.",
+              "hint": "Place the row count after LIMIT.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
+                "concept": "Return `id`, `name`, and `category` for only four rows. Do not add ORDER BY in this exercise.",
+                "hint_1": "Place the row count after LIMIT.",
+                "hint_2": "Run the query and compare the returned columns and rows with the expected result."
               },
-              "starterCode": "-- TODO: sort by newest date first\n-- TODO: return only 4 rows\nSELECT name, created_at\nFROM products\n;"
+              "starterCode": "SELECT id, name, category\nFROM products\nLIMIT ;"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_limit_clause_sketch0": {
               "title": "Return the 3 cheapest products",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that shows `name` and `price` from `products`, sorted from the lowest price to the highest price, and returns only the first 3 rows. Write the query in the SQL editor, click Run query, and check the results table."
+              "prompt": "Build a ranking query that shows `name` and `price` from `products`, sorted from the lowest price to the highest price, and returns only the first 3 rows. Run it and compare the result with the expected table."
             },
             "try_limit_clause_sketch1": {
               "title": "Return the 2 most expensive products",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that shows `name` and `price` from `products`, sorted from the highest price to the lowest price, and returns only 2 rows."
+              "prompt": "Build a ranking query that shows `name` and `price` from `products`, sorted from the highest price to the lowest price, and returns only 2 rows. Run it and compare the result with the expected table."
             },
             "try_limit_clause_sketch2": {
-              "title": "Return the 4 newest products",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that shows `name` and `created_at` from `products`, sorted so the newest dates come first, and returns only 4 rows."
+              "title": "Return a Small Catalog Sample",
+              "prompt": "Return `id`, `name`, and `category` for only four rows. Do not add ORDER BY in this exercise."
             }
           }
         }

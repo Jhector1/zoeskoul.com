@@ -1,0 +1,18 @@
+{
+  "profileId": "sql",
+  "subjectSlug": "sql--sql-analysis-reporting--draft",
+  "courseSlug": "sql-analysis-reporting",
+  "moduleSlug": "sql-analysis-reporting-module-4-having-and-conditional-reporting",
+  "sectionSlug": "sql-analysis-reporting-section-4-conditional-kpis",
+  "topicId": "performance-bands-from-aggregates",
+  "provider": "openai",
+  "model": "gpt-4o",
+  "temperature": 0,
+  "modelSeed": 0,
+  "generatorVersion": "2026-05-23-topic-authoring-draft-generator-v1",
+  "schemaName": "TopicAuthoringDraft",
+  "schemaVersion": "2026-05-23-topic-authoring-draft-v1",
+  "strictSchema": true,
+  "retryAttempt": 0,
+  "maxRetries": 2
+}

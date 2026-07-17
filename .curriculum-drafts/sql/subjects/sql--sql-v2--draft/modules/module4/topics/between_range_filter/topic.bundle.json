@@ -4,7 +4,7 @@
   "moduleSlug": "sql-v2-4",
   "sectionSlug": "sql--sql-v2--draft-sql-v2-4-2",
   "prefix": "sqlv2_4",
-  "minutes": 16,
+  "minutes": 18,
   "runtimeDefaults": {
     "kind": "sql",
     "showSchema": true,
@@ -26,7 +26,7 @@
       "id": "sketch0",
       "kind": "sketch",
       "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.between_range_filter.cards.sketch0.title",
-      "sketchId": "sketch_between_basics",
+      "sketchId": "between_inclusive_range",
       "height": 420,
       "tryIt": {
         "id": "try-between_range_filter-sketch0",
@@ -45,32 +45,13 @@
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.between_range_filter.cards.sketch1.title",
-      "sketchId": "sketch_between_dates_text",
+      "sketchId": "between_with_condition",
       "height": 420,
       "tryIt": {
         "id": "try-between_range_filter-sketch1",
         "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.between_range_filter.tryIt.try_between_range_filter_sketch1.title",
         "promptKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.between_range_filter.tryIt.try_between_range_filter_sketch1.prompt",
         "exerciseKey": "try-between_range_filter-sketch1",
-        "difficulty": "easy",
-        "preferKind": "code_input",
-        "seedPolicy": "global",
-        "required": true,
-        "allowReveal": true,
-        "maxAttempts": null
-      }
-    },
-    {
-      "id": "sketch2",
-      "kind": "sketch",
-      "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.between_range_filter.cards.sketch2.title",
-      "sketchId": "sketch_between_vs_comparisons",
-      "height": 420,
-      "tryIt": {
-        "id": "try-between_range_filter-sketch2",
-        "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.between_range_filter.tryIt.try_between_range_filter_sketch2.title",
-        "promptKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.between_range_filter.tryIt.try_between_range_filter_sketch2.prompt",
-        "exerciseKey": "try-between_range_filter-sketch2",
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -93,66 +74,20 @@
         "preferKind": null,
         "maxAttempts": null
       }
-    },
-    {
-      "id": "project",
-      "kind": "project",
-      "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.between_range_filter.cards.project.title",
-      "project": {
-        "difficulty": "easy",
-        "allowReveal": true,
-        "preferKind": "code_input",
-        "maxAttempts": null,
-        "steps": [
-          {
-            "id": "ci_between_january_window",
-            "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.between_range_filter.projectSteps.ci_between_january_window.title",
-            "exerciseKey": "ci_between_january_window",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "maxAttempts": null
-          },
-          {
-            "id": "ci_between_ids_non_test",
-            "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.between_range_filter.projectSteps.ci_between_ids_non_test.title",
-            "exerciseKey": "ci_between_ids_non_test",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "maxAttempts": null
-          },
-          {
-            "id": "ci_between_active_signups",
-            "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.between_range_filter.projectSteps.ci_between_active_signups.title",
-            "exerciseKey": "ci_between_active_signups",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "maxAttempts": null
-          }
-        ]
-      }
     }
   ],
   "sketches": [
     {
-      "id": "sketch_between_basics",
+      "id": "between_inclusive_range",
       "archetype": "paragraph",
-      "titleKey": "sketches.sql--sql-v2--draft.sql--sql-v2--draft-4.between_range_filter.sketch_between_basics.title",
-      "bodyKey": "sketches.sql--sql-v2--draft.sql--sql-v2--draft-4.between_range_filter.sketch_between_basics.bodyMarkdown"
+      "titleKey": "sketches.sql--sql-v2--draft.sql--sql-v2--draft-4.between_range_filter.between_inclusive_range.title",
+      "bodyKey": "sketches.sql--sql-v2--draft.sql--sql-v2--draft-4.between_range_filter.between_inclusive_range.bodyMarkdown"
     },
     {
-      "id": "sketch_between_dates_text",
+      "id": "between_with_condition",
       "archetype": "paragraph",
-      "titleKey": "sketches.sql--sql-v2--draft.sql--sql-v2--draft-4.between_range_filter.sketch_between_dates_text.title",
-      "bodyKey": "sketches.sql--sql-v2--draft.sql--sql-v2--draft-4.between_range_filter.sketch_between_dates_text.bodyMarkdown"
-    },
-    {
-      "id": "sketch_between_vs_comparisons",
-      "archetype": "paragraph",
-      "titleKey": "sketches.sql--sql-v2--draft.sql--sql-v2--draft-4.between_range_filter.sketch_between_vs_comparisons.title",
-      "bodyKey": "sketches.sql--sql-v2--draft.sql--sql-v2--draft-4.between_range_filter.sketch_between_vs_comparisons.bodyMarkdown"
+      "titleKey": "sketches.sql--sql-v2--draft.sql--sql-v2--draft-4.between_range_filter.between_with_condition.title",
+      "bodyKey": "sketches.sql--sql-v2--draft.sql--sql-v2--draft-4.between_range_filter.between_with_condition.bodyMarkdown"
     }
   ],
   "exercises": [
@@ -298,249 +233,9 @@
       }
     },
     {
-      "id": "ci_between_january_window",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.between_range_filter.quiz.ci_between_january_window",
-      "language": "sql",
-      "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.between_range_filter.quiz.ci_between_january_window.starterCode",
-      "fixedSqlDialect": "sqlite",
-      "runtime": {
-        "kind": "sql",
-        "datasetId": "customers_cleanup",
-        "fixedSqlDialect": "sqlite",
-        "resultShape": "table",
-        "showSchema": true,
-        "showErd": false,
-        "showChen": false,
-        "supportsTerminal": false,
-        "supportsMultiFile": false,
-        "supportsFileSystem": false
-      },
-      "recipe": {
-        "type": "sql_query",
-        "datasetId": "customers_cleanup",
-        "resultShape": "table",
-        "solutionCode": "SELECT\n  id,\n  full_name,\n  signup_date\nFROM customers\nWHERE signup_date BETWEEN '2026-01-12' AND '2026-01-25'\nORDER BY signup_date ASC;",
-        "solutionFiles": [
-          {
-            "path": "query.sql",
-            "content": "SELECT\n  id,\n  full_name,\n  signup_date\nFROM customers\nWHERE signup_date BETWEEN '2026-01-12' AND '2026-01-25'\nORDER BY signup_date ASC;",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "entryFilePath": "query.sql",
-      "starterFiles": [
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.between_range_filter.quiz.ci_between_january_window.starterCode",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "query.sql",
-          "content": "SELECT\n  id,\n  full_name,\n  signup_date\nFROM customers\nWHERE signup_date BETWEEN '2026-01-12' AND '2026-01-25'\nORDER BY signup_date ASC;",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "workspace": {
-        "language": "sql",
-        "entryFilePath": "query.sql",
-        "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.between_range_filter.quiz.ci_between_january_window.starterCode",
-        "starterFiles": [
-          {
-            "path": "query.sql",
-            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.between_range_filter.quiz.ci_between_january_window.starterCode",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ],
-        "solutionFiles": [
-          {
-            "path": "query.sql",
-            "content": "SELECT\n  id,\n  full_name,\n  signup_date\nFROM customers\nWHERE signup_date BETWEEN '2026-01-12' AND '2026-01-25'\nORDER BY signup_date ASC;",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "showExpectedExample": true
-    },
-    {
-      "id": "ci_between_ids_non_test",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.between_range_filter.quiz.ci_between_ids_non_test",
-      "language": "sql",
-      "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.between_range_filter.quiz.ci_between_ids_non_test.starterCode",
-      "fixedSqlDialect": "sqlite",
-      "runtime": {
-        "kind": "sql",
-        "datasetId": "customers_cleanup",
-        "fixedSqlDialect": "sqlite",
-        "resultShape": "table",
-        "showSchema": true,
-        "showErd": false,
-        "showChen": false,
-        "supportsTerminal": false,
-        "supportsMultiFile": false,
-        "supportsFileSystem": false
-      },
-      "recipe": {
-        "type": "sql_query",
-        "datasetId": "customers_cleanup",
-        "resultShape": "table",
-        "solutionCode": "SELECT id, full_name, is_test\nFROM customers\nWHERE id BETWEEN 2 AND 7\n  AND is_test = 0\nORDER BY id ASC;",
-        "solutionFiles": [
-          {
-            "path": "query.sql",
-            "content": "SELECT id, full_name, is_test\nFROM customers\nWHERE id BETWEEN 2 AND 7\n  AND is_test = 0\nORDER BY id ASC;",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "entryFilePath": "query.sql",
-      "starterFiles": [
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.between_range_filter.quiz.ci_between_ids_non_test.starterCode",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "query.sql",
-          "content": "SELECT id, full_name, is_test\nFROM customers\nWHERE id BETWEEN 2 AND 7\n  AND is_test = 0\nORDER BY id ASC;",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "workspace": {
-        "language": "sql",
-        "entryFilePath": "query.sql",
-        "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.between_range_filter.quiz.ci_between_ids_non_test.starterCode",
-        "starterFiles": [
-          {
-            "path": "query.sql",
-            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.between_range_filter.quiz.ci_between_ids_non_test.starterCode",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ],
-        "solutionFiles": [
-          {
-            "path": "query.sql",
-            "content": "SELECT id, full_name, is_test\nFROM customers\nWHERE id BETWEEN 2 AND 7\n  AND is_test = 0\nORDER BY id ASC;",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "showExpectedExample": true
-    },
-    {
-      "id": "ci_between_active_signups",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.between_range_filter.quiz.ci_between_active_signups",
-      "language": "sql",
-      "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.between_range_filter.quiz.ci_between_active_signups.starterCode",
-      "fixedSqlDialect": "sqlite",
-      "runtime": {
-        "kind": "sql",
-        "datasetId": "customers_cleanup",
-        "fixedSqlDialect": "sqlite",
-        "resultShape": "table",
-        "showSchema": true,
-        "showErd": false,
-        "showChen": false,
-        "supportsTerminal": false,
-        "supportsMultiFile": false,
-        "supportsFileSystem": false
-      },
-      "recipe": {
-        "type": "sql_query",
-        "datasetId": "customers_cleanup",
-        "resultShape": "table",
-        "solutionCode": "SELECT full_name, status, signup_date\nFROM customers\nWHERE signup_date BETWEEN '2026-01-10' AND '2026-02-01'\n  AND status = 'active'\nORDER BY signup_date ASC;",
-        "solutionFiles": [
-          {
-            "path": "query.sql",
-            "content": "SELECT full_name, status, signup_date\nFROM customers\nWHERE signup_date BETWEEN '2026-01-10' AND '2026-02-01'\n  AND status = 'active'\nORDER BY signup_date ASC;",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "entryFilePath": "query.sql",
-      "starterFiles": [
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.between_range_filter.quiz.ci_between_active_signups.starterCode",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "query.sql",
-          "content": "SELECT full_name, status, signup_date\nFROM customers\nWHERE signup_date BETWEEN '2026-01-10' AND '2026-02-01'\n  AND status = 'active'\nORDER BY signup_date ASC;",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "workspace": {
-        "language": "sql",
-        "entryFilePath": "query.sql",
-        "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.between_range_filter.quiz.ci_between_active_signups.starterCode",
-        "starterFiles": [
-          {
-            "path": "query.sql",
-            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.between_range_filter.quiz.ci_between_active_signups.starterCode",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ],
-        "solutionFiles": [
-          {
-            "path": "query.sql",
-            "content": "SELECT full_name, status, signup_date\nFROM customers\nWHERE signup_date BETWEEN '2026-01-10' AND '2026-02-01'\n  AND status = 'active'\nORDER BY signup_date ASC;",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "showExpectedExample": true
-    },
-    {
       "id": "try-between_range_filter-sketch0",
       "kind": "code_input",
-      "purpose": "project",
+      "purpose": "try_it",
       "weight": 1,
       "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.between_range_filter.quiz.try-between_range_filter-sketch0",
       "language": "sql",
@@ -562,16 +257,20 @@
         "type": "sql_query",
         "datasetId": "customers_cleanup",
         "resultShape": "table",
-        "solutionCode": "SELECT\n  id,\n  full_name,\n  signup_date\nFROM customers\nWHERE signup_date BETWEEN '2026-01-12' AND '2026-01-25'\nORDER BY signup_date ASC;",
+        "solutionCode": "SELECT id, full_name, signup_date\nFROM customers\nWHERE signup_date BETWEEN '2026-01-12' AND '2026-01-25';",
         "solutionFiles": [
           {
             "path": "query.sql",
-            "content": "SELECT\n  id,\n  full_name,\n  signup_date\nFROM customers\nWHERE signup_date BETWEEN '2026-01-12' AND '2026-01-25'\nORDER BY signup_date ASC;",
+            "content": "SELECT id, full_name, signup_date\nFROM customers\nWHERE signup_date BETWEEN '2026-01-12' AND '2026-01-25';",
             "language": "sql",
             "isEntry": true,
             "entry": true
           }
-        ]
+        ],
+        "sqlFileOrder": [
+          "query.sql"
+        ],
+        "ignoreRowOrder": true
       },
       "entryFilePath": "query.sql",
       "starterFiles": [
@@ -586,7 +285,7 @@
       "solutionFiles": [
         {
           "path": "query.sql",
-          "content": "SELECT\n  id,\n  full_name,\n  signup_date\nFROM customers\nWHERE signup_date BETWEEN '2026-01-12' AND '2026-01-25'\nORDER BY signup_date ASC;",
+          "content": "SELECT id, full_name, signup_date\nFROM customers\nWHERE signup_date BETWEEN '2026-01-12' AND '2026-01-25';",
           "language": "sql",
           "isEntry": true,
           "entry": true
@@ -608,19 +307,35 @@
         "solutionFiles": [
           {
             "path": "query.sql",
-            "content": "SELECT\n  id,\n  full_name,\n  signup_date\nFROM customers\nWHERE signup_date BETWEEN '2026-01-12' AND '2026-01-25'\nORDER BY signup_date ASC;",
+            "content": "SELECT id, full_name, signup_date\nFROM customers\nWHERE signup_date BETWEEN '2026-01-12' AND '2026-01-25';",
             "language": "sql",
             "isEntry": true,
             "entry": true
           }
-        ]
+        ],
+        "openTabs": [
+          "query.sql"
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "query.sql"
+          ]
+        }
       },
-      "showExpectedExample": true
+      "showExpectedExample": true,
+      "sqlFileOrder": [
+        "query.sql"
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "query.sql"
+        ]
+      }
     },
     {
       "id": "try-between_range_filter-sketch1",
       "kind": "code_input",
-      "purpose": "project",
+      "purpose": "try_it",
       "weight": 1,
       "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.between_range_filter.quiz.try-between_range_filter-sketch1",
       "language": "sql",
@@ -651,6 +366,9 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "sqlFileOrder": [
+          "query.sql"
         ]
       },
       "entryFilePath": "query.sql",
@@ -693,89 +411,25 @@
             "isEntry": true,
             "entry": true
           }
-        ]
-      },
-      "showExpectedExample": true
-    },
-    {
-      "id": "try-between_range_filter-sketch2",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.between_range_filter.quiz.try-between_range_filter-sketch2",
-      "language": "sql",
-      "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.between_range_filter.quiz.try-between_range_filter-sketch2.starterCode",
-      "fixedSqlDialect": "sqlite",
-      "runtime": {
-        "kind": "sql",
-        "datasetId": "customers_cleanup",
-        "fixedSqlDialect": "sqlite",
-        "resultShape": "table",
-        "showSchema": true,
-        "showErd": false,
-        "showChen": false,
-        "supportsTerminal": false,
-        "supportsMultiFile": false,
-        "supportsFileSystem": false
-      },
-      "recipe": {
-        "type": "sql_query",
-        "datasetId": "customers_cleanup",
-        "resultShape": "table",
-        "solutionCode": "SELECT full_name, status, signup_date\nFROM customers\nWHERE signup_date BETWEEN '2026-01-10' AND '2026-02-01'\n  AND status = 'active'\nORDER BY signup_date ASC;",
-        "solutionFiles": [
-          {
-            "path": "query.sql",
-            "content": "SELECT full_name, status, signup_date\nFROM customers\nWHERE signup_date BETWEEN '2026-01-10' AND '2026-02-01'\n  AND status = 'active'\nORDER BY signup_date ASC;",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "entryFilePath": "query.sql",
-      "starterFiles": [
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.between_range_filter.quiz.try-between_range_filter-sketch2.starterCode",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "query.sql",
-          "content": "SELECT full_name, status, signup_date\nFROM customers\nWHERE signup_date BETWEEN '2026-01-10' AND '2026-02-01'\n  AND status = 'active'\nORDER BY signup_date ASC;",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "workspace": {
-        "language": "sql",
-        "entryFilePath": "query.sql",
-        "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.between_range_filter.quiz.try-between_range_filter-sketch2.starterCode",
-        "starterFiles": [
-          {
-            "path": "query.sql",
-            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.between_range_filter.quiz.try-between_range_filter-sketch2.starterCode",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
         ],
-        "solutionFiles": [
-          {
-            "path": "query.sql",
-            "content": "SELECT full_name, status, signup_date\nFROM customers\nWHERE signup_date BETWEEN '2026-01-10' AND '2026-02-01'\n  AND status = 'active'\nORDER BY signup_date ASC;",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
+        "openTabs": [
+          "query.sql"
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "query.sql"
+          ]
+        }
       },
-      "showExpectedExample": true
+      "showExpectedExample": true,
+      "sqlFileOrder": [
+        "query.sql"
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "query.sql"
+        ]
+      }
     }
   ]
 }

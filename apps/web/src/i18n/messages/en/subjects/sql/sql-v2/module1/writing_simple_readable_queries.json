@@ -17,20 +17,6 @@
             },
             "quiz": {
               "title": "Quiz"
-            },
-            "project": {
-              "title": "Starter Query Sheet"
-            }
-          },
-          "projectSteps": {
-            "ci_select_name_price": {
-              "title": "Show product names and prices"
-            },
-            "ci_select_all_columns": {
-              "title": "Inspect the whole table"
-            },
-            "ci_select_name_category_stock": {
-              "title": "Choose three useful columns"
             }
           },
           "quiz": {
@@ -201,7 +187,7 @@
             },
             "try-writing_simple_readable_queries-sketch0": {
               "title": "Query name and price from products",
-              "prompt": "Scenario: A store manager needs a clear product-catalog query before sharing results with the team. Write a query that returns `name`, `price` from the `products` table. Write the query in the SQL editor, click Run query, and check the results table.",
+              "prompt": "Build a product-catalog query that returns `name`, `price` from the `products` table. Run it and compare the result with the expected table.",
               "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
               "help": {
                 "concept": "This SQL exercise checks whether your query returns the requested result.",
@@ -212,7 +198,7 @@
             },
             "try-writing_simple_readable_queries-sketch1": {
               "title": "Query all products rows",
-              "prompt": "Scenario: A store manager needs a clear product-catalog query before sharing results with the team. Write a query that returns all columns from the `products` table. Write the query in the SQL editor, click Run query, and check the results table.",
+              "prompt": "Build a product-catalog query that returns all columns from the `products` table. Run it and compare the result with the expected table.",
               "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
               "help": {
                 "concept": "This SQL exercise checks whether your query returns the requested result.",
@@ -222,30 +208,30 @@
               "starterCode": "-- Return all columns from the products table.\nSELECT \nFROM ;"
             },
             "try-writing_simple_readable_queries-sketch2": {
-              "title": "Query name and category from products",
-              "prompt": "Scenario: A store manager needs a clear product-catalog query before sharing results with the team. Write a query that returns `name`, `category`, `stock` from the `products` table. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Write a Readable Inventory Query",
+              "prompt": "Return `name`, `category`, and `stock` from `products`, one logical clause per line.",
+              "hint": "Add stock to the SELECT list before FROM.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the selected columns and table name in the SQL editor.",
-                "hint_2": "Run the query and compare the result table with the expected result."
+                "concept": "Return `name`, `category`, and `stock` from `products`, one logical clause per line.",
+                "hint_1": "Add stock to the SELECT list before FROM.",
+                "hint_2": "Run the query and compare the returned columns and rows with the expected result."
               },
-              "starterCode": "-- Return name, category, stock from the products table.\nSELECT name\nFROM products;"
+              "starterCode": "-- Keep the query easy to scan\nSELECT name, category\nFROM products;"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_writing_simple_readable_queries_sketch0": {
               "title": "Query name and price from products",
-              "prompt": "Scenario: A store manager needs a clear product-catalog query before sharing results with the team. Write a query that returns `name`, `price` from the `products` table. Write the query in the SQL editor, click Run query, and check the results table."
+              "prompt": "Build a product-catalog query that returns `name`, `price` from the `products` table. Run it and compare the result with the expected table."
             },
             "try_writing_simple_readable_queries_sketch1": {
               "title": "Query all products rows",
-              "prompt": "Scenario: A store manager needs a clear product-catalog query before sharing results with the team. Write a query that returns all columns from the `products` table. Write the query in the SQL editor, click Run query, and check the results table."
+              "prompt": "Build a product-catalog query that returns all columns from the `products` table. Run it and compare the result with the expected table."
             },
             "try_writing_simple_readable_queries_sketch2": {
-              "title": "Query name and category from products",
-              "prompt": "Scenario: A store manager needs a clear product-catalog query before sharing results with the team. Write a query that returns `name`, `category`, `stock` from the `products` table. Write the query in the SQL editor, click Run query, and check the results table."
+              "title": "Write a Readable Inventory Query",
+              "prompt": "Return `name`, `category`, and `stock` from `products`, one logical clause per line."
             }
           }
         }

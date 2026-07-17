@@ -1,3 +1,4 @@
+import type { ToolPresentationPolicy } from "@zoeskoul/curriculum-contracts";
 import { PracticeKind } from "@zoeskoul/db";
 import type { LearningIdeConfig } from "@/lib/ide/learningIdeConfig";
 import type { FileEntry } from "@/lib/code/types";
@@ -60,6 +61,7 @@ export type ExerciseBase = {
     prompt: string;
     help?: ExerciseHelpSpec;
     hint?: string;
+    tools?: ToolPresentationPolicy;
 };
 
 export type SingleChoiceExercise = ExerciseBase & {

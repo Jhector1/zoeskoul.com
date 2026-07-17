@@ -1,0 +1,192 @@
+{
+  "topics": {
+    "sql-data-management": {
+      "sql-data-management-module-1-controlled-updates-deletes": {
+        "previewing-update-and-delete-targets": {
+          "label": "Previewing Mutation Targets",
+          "summary": "Learn how to safely preview and execute SQL mutations by using SELECT statements to identify target rows before applying UPDATE or DELETE operations.",
+          "cards": {
+            "sketch0": {
+              "title": "Preview the Exact Target Set"
+            },
+            "sketch1": {
+              "title": "Carry the Filter Into the Change"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_previewing_update_and_delete_targets_sketch0": {
+              "title": "Preview Decor Test Rows",
+              "prompt": "Before the cleanup window opens, the audit team wants to see the exact Decor rows that could be removed. Select every column from `inventory_items` where `category = 'Decor'` and `is_test = 1`; do not modify any data.\n\n**Files for this exercise:**\n- `query.sql`: the learner-authored preview, inspection, report, or verification SELECT; **edit this file**. It opens first.\n\n`query.sql` is part of the learner answer when the task asks for a preview, inspection, report, or verification. The hidden database-state check does not replace that required SELECT.\n\nComplete `query.sql`. Do not create extra files or move SQL into a file with a different responsibility.",
+              "hint": "Leave the setup files unchanged and write the requested result-returning statement in query.sql.",
+              "help": {
+                "concept": "This step reads evidence from the supplied database. Use `query.sql` to return exactly the requested rows or metadata; no data change is needed.",
+                "hint_1": "Leave the setup files unchanged and write the requested result-returning statement in query.sql.",
+                "hint_2": "Both the required learner file and query.sql are checked. A hidden state check cannot replace the visible verification query."
+              },
+              "starterCode": "-- Return the verification result required for \"Preview Decor Test Rows\" below.\n",
+              "solutionCode": "SELECT * FROM inventory_items WHERE category = 'Decor' AND is_test = 1;",
+              "starterFiles": {
+                "query_sql": {
+                  "content": "-- Return the verification result required for \"Preview Decor Test Rows\" below.\n"
+                }
+              },
+              "solutionFiles": {
+                "query_sql": {
+                  "content": "SELECT * FROM inventory_items WHERE category = 'Decor' AND is_test = 1;"
+                }
+              }
+            },
+            "try_previewing_update_and_delete_targets_sketch1": {
+              "title": "Update Approved Accessories",
+              "prompt": "The pricing team approved a standard price of `10.99` for legitimate Accessories items. Update `inventory_items` so only rows with `category = 'Accessories'` and `is_test = 0` receive the new price.\n\n**Files for this exercise:**\n- `operations.sql`: the learner-authored INSERT, UPDATE, or DELETE statements; **edit this file**. It opens first.\n- `query.sql`: the learner-authored preview, inspection, report, or verification SELECT; **edit this file**.\n\n`query.sql` is part of the learner answer when the task asks for a preview, inspection, report, or verification. The hidden database-state check does not replace that required SELECT.\n\nComplete `operations.sql`, and `query.sql`. Do not create extra files or move SQL into a file with a different responsibility.",
+              "hint": "Apply the narrowly scoped change in operations.sql, then write query.sql so the Results tab proves the final state.",
+              "help": {
+                "concept": "Keep the approved data change in `operations.sql` and the evidence in `query.sql`. The exercise supplies the existing table and starting rows so you can focus on the mutation.",
+                "hint_1": "Apply the narrowly scoped change in operations.sql, then write query.sql so the Results tab proves the final state.",
+                "hint_2": "Both the required learner file and query.sql are checked. A hidden state check cannot replace the visible verification query."
+              },
+              "starterCode": "-- Apply the approved data change for \"Update Approved Accessories\" below.\n",
+              "solutionCode": "UPDATE inventory_items SET price = 10.99 WHERE category = 'Accessories' AND is_test = 0;",
+              "starterFiles": {
+                "operations_sql": {
+                  "content": "-- Apply the approved data change for \"Update Approved Accessories\" below.\n"
+                },
+                "query_sql": {
+                  "content": "-- Return the verification result required for \"Update Approved Accessories\" below.\n"
+                }
+              },
+              "solutionFiles": {
+                "operations_sql": {
+                  "content": "UPDATE inventory_items SET price = 10.99 WHERE category = 'Accessories' AND is_test = 0;"
+                },
+                "query_sql": {
+                  "content": "SELECT * FROM inventory_items WHERE category = 'Accessories' AND is_test = 0;"
+                }
+              }
+            }
+          },
+          "practice": {
+            "single-choice-preview": {
+              "title": "Why Preview Before Mutation?",
+              "prompt": "Why is it important to preview rows with a SELECT statement before executing an UPDATE or DELETE?",
+              "hint": "Consider the impact of unintended data changes.",
+              "help": {
+                "concept": "Previewing helps ensure only intended rows are affected by a mutation.",
+                "hint_1": "Previewing prevents accidental changes to unintended rows.",
+                "hint_2": "It allows you to verify the target set before making changes."
+              },
+              "options": {
+                "a": "To ensure the SQL syntax is correct",
+                "b": "To verify the target rows before making changes",
+                "c": "To speed up the execution of the query",
+                "d": "To avoid using WHERE clauses"
+              }
+            },
+            "fill-blank-choice-update": {
+              "title": "Fill in the Blank: UPDATE Statement",
+              "prompt": "Complete the following UPDATE statement to change the status of all 'Kitchen' items to 'inactive'.",
+              "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+              "help": {
+                "concept": "The blank should be filled with the term that makes the statement accurate.",
+                "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+                "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+              },
+              "template": "UPDATE inventory_items SET status = 'inactive' WHERE category = [blank1];",
+              "choices": [
+                "'Kitchen'",
+                "'Decor'",
+                "'Accessories'",
+                "'active'"
+              ]
+            },
+            "multi-choice-verify": {
+              "title": "Verifying Changes",
+              "prompt": "After executing an UPDATE or DELETE, what should you verify? Select all that apply.",
+              "hint": "Consider both the affected and unaffected rows.",
+              "help": {
+                "concept": "Verification ensures both intended changes and data integrity.",
+                "hint_1": "Check that only the intended rows were changed.",
+                "hint_2": "Ensure that unaffected rows remain unchanged."
+              },
+              "options": {
+                "a": "The affected rows were updated correctly",
+                "b": "Unintended rows were also changed",
+                "c": "Unchanged rows remain as expected",
+                "d": "The SQL syntax was correct"
+              }
+            },
+            "drag-reorder-mutation-steps": {
+              "title": "Order the Steps: Safe Mutation",
+              "prompt": "Arrange the steps for safely executing a data mutation in SQL.",
+              "hint": "Start with previewing the target rows.",
+              "help": {
+                "concept": "Following a structured process ensures safe data mutations.",
+                "hint_1": "Begin with a SELECT to preview the target rows.",
+                "hint_2": "End with verifying the changes made."
+              },
+              "tokens": {
+                "t1": "Preview target rows with SELECT",
+                "t2": "Execute the mutation with UPDATE or DELETE",
+                "t3": "Verify the changes made",
+                "t4": "Ensure no unintended rows are affected"
+              }
+            },
+            "single-choice-where": {
+              "title": "Role of WHERE in Mutations",
+              "prompt": "What is the role of the WHERE clause in an UPDATE or DELETE statement?",
+              "hint": "Think about how WHERE affects the scope of the mutation.",
+              "help": {
+                "concept": "WHERE specifies which rows are affected by the mutation.",
+                "hint_1": "WHERE limits the mutation to specific rows.",
+                "hint_2": "Without WHERE, all rows could be affected."
+              },
+              "options": {
+                "a": "It specifies the columns to update",
+                "b": "It limits the rows affected by the mutation",
+                "c": "It speeds up the query execution",
+                "d": "It is optional in all mutations"
+              }
+            },
+            "fill-blank-choice-delete": {
+              "title": "Fill in the Blank: DELETE Statement",
+              "prompt": "Complete the DELETE statement to remove all test items (is_test = 1) from the 'Decor' category.",
+              "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+              "help": {
+                "concept": "The blank should be filled with the term that makes the statement accurate.",
+                "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+                "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+              },
+              "template": "DELETE FROM inventory_items WHERE category = [blank1] AND is_test = 1;",
+              "choices": [
+                "'Kitchen'",
+                "'Decor'",
+                "'Accessories'",
+                "'active'"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql-data-management": {
+      "sql-data-management-module-1-controlled-updates-deletes": {
+        "previewing-update-and-delete-targets": {
+          "preview-select": {
+            "title": "The safest mutation begins with the same filter in a SELECT",
+            "bodyMarkdown": "Before executing an UPDATE or DELETE operation in SQL, it's crucial to preview the rows that will be affected. This is done by running a SELECT statement with the same WHERE clause intended for the mutation. This step ensures that only the desired rows are targeted, preventing accidental data changes.\n\nFor example, consider the `inventory_items` table. If you want to update the status of all items in the 'Kitchen' category to 'active', you should first preview these rows:\n\n```sql\nSELECT * FROM inventory_items WHERE category = 'Kitchen';\n```\n\nThis query will return all rows where the category is 'Kitchen'. If the result matches your expectations, you can proceed with the UPDATE operation. This practice helps avoid unintended data modifications and ensures data integrity."
+          },
+          "mutation-execution": {
+            "title": "UPDATE and DELETE are safe only when they preserve the reviewed scope",
+            "bodyMarkdown": "Once you've previewed the target rows with a SELECT statement, you can safely execute the mutation. Always use the same WHERE clause in your UPDATE or DELETE statement to ensure consistency.\n\nContinuing with the previous example, after confirming the rows to update, execute the following:\n\n```sql\nUPDATE inventory_items SET status = 'active' WHERE category = 'Kitchen';\n```\n\nThis command updates the status of all items in the 'Kitchen' category to 'active'. By using the same WHERE clause, you ensure that only the intended rows are affected. This method is crucial for maintaining data accuracy and preventing errors in your database operations."
+          }
+        }
+      }
+    }
+  }
+}

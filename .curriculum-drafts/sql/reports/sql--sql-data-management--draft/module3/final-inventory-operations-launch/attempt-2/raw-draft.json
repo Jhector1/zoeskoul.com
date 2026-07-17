@@ -1,0 +1,476 @@
+{
+  "title": "Final Capstone: Inventory Operations Launch",
+  "summary": "Build a two-table makers-market inventory database through six cumulative schema and data-management steps.",
+  "minutes": 120,
+  "sketchBlocks": [
+    {
+      "id": "sketch-final-inventory-operations-launch-0",
+      "cardTitle": "Project Overview",
+      "title": "Final Capstone: Inventory Operations Launch",
+      "bodyMarkdown": "In this final capstone project, you will take on the role of a SQL data management specialist tasked with setting up a database for a neighborhood makers market. The goal is to replace a shared spreadsheet with a robust operational database. This project will guide you through creating a schema, loading approved data, applying corrections, and ensuring the database is ready for launch. By the end, you'll have a portfolio-quality SQL workspace that demonstrates your ability to manage data integrity and operations effectively."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "ci-final-inventory-operations-launch-1",
+      "kind": "code_input",
+      "title": "Build the Product Table",
+      "prompt": "Create the `products` table with the specified columns and constraints in `schema.sql`.",
+      "hint": "Define each column with its data type and constraints.",
+      "help": {
+        "concept": "Creating a table with specific columns and constraints ensures data integrity.",
+        "hint_1": "Use `CREATE TABLE` with column definitions.",
+        "hint_2": "Ensure `id` is a primary key and `sku` is unique."
+      },
+      "starterCode": "-- Define the products table\nCREATE TABLE products (\n    -- Define columns here\n);",
+      "solutionCode": "CREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    sku TEXT NOT NULL UNIQUE,\n    name TEXT NOT NULL,\n    category TEXT NOT NULL,\n    price REAL NOT NULL,\n    status TEXT NOT NULL DEFAULT 'draft',\n    notes TEXT NULL\n);",
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "schema.sql",
+          "content": "-- Define the products table\nCREATE TABLE products (\n    -- Define columns here\n);",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "seed.sql",
+          "content": "",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "schema.sql",
+          "content": "CREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    sku TEXT NOT NULL UNIQUE,\n    name TEXT NOT NULL,\n    category TEXT NOT NULL,\n    price REAL NOT NULL,\n    status TEXT NOT NULL DEFAULT 'draft',\n    notes TEXT NULL\n);",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "seed.sql",
+          "content": "",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "sqlFileOrder": [
+        "schema.sql",
+        "seed.sql",
+        "query.sql"
+      ],
+      "datasetId": "ddl_blank",
+      "recipeType": "sql_query",
+      "checkSql": "SELECT name FROM sqlite_master WHERE type='table' AND name='products';"
+    },
+    {
+      "id": "ci-final-inventory-operations-launch-2",
+      "kind": "code_input",
+      "title": "Build the Stock Event Table",
+      "prompt": "Create the `stock_events` table with the specified columns and constraints in `schema.sql`.",
+      "hint": "Include a foreign key constraint to link to the `products` table.",
+      "help": {
+        "concept": "Creating a table with foreign key constraints helps maintain relational integrity.",
+        "hint_1": "Use `CREATE TABLE` with foreign key references.",
+        "hint_2": "Ensure `product_id` references `products(id)`."
+      },
+      "starterCode": "CREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    sku TEXT NOT NULL UNIQUE,\n    name TEXT NOT NULL,\n    category TEXT NOT NULL,\n    price REAL NOT NULL,\n    status TEXT NOT NULL DEFAULT 'draft',\n    notes TEXT NULL\n);\n\n-- Define the stock_events table\nCREATE TABLE stock_events (\n    -- Define columns here\n);",
+      "solutionCode": "CREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    sku TEXT NOT NULL UNIQUE,\n    name TEXT NOT NULL,\n    category TEXT NOT NULL,\n    price REAL NOT NULL,\n    status TEXT NOT NULL DEFAULT 'draft',\n    notes TEXT NULL\n);\n\nCREATE TABLE stock_events (\n    id INTEGER PRIMARY KEY,\n    product_id INTEGER NOT NULL,\n    quantity_change INTEGER NOT NULL,\n    event_type TEXT NOT NULL DEFAULT 'receipt',\n    note TEXT NULL,\n    FOREIGN KEY (product_id) REFERENCES products(id)\n);",
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "schema.sql",
+          "content": "CREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    sku TEXT NOT NULL UNIQUE,\n    name TEXT NOT NULL,\n    category TEXT NOT NULL,\n    price REAL NOT NULL,\n    status TEXT NOT NULL DEFAULT 'draft',\n    notes TEXT NULL\n);\n\n-- Define the stock_events table\nCREATE TABLE stock_events (\n    -- Define columns here\n);",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "seed.sql",
+          "content": "",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "schema.sql",
+          "content": "CREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    sku TEXT NOT NULL UNIQUE,\n    name TEXT NOT NULL,\n    category TEXT NOT NULL,\n    price REAL NOT NULL,\n    status TEXT NOT NULL DEFAULT 'draft',\n    notes TEXT NULL\n);\n\nCREATE TABLE stock_events (\n    id INTEGER PRIMARY KEY,\n    product_id INTEGER NOT NULL,\n    quantity_change INTEGER NOT NULL,\n    event_type TEXT NOT NULL DEFAULT 'receipt',\n    note TEXT NULL,\n    FOREIGN KEY (product_id) REFERENCES products(id)\n);",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "seed.sql",
+          "content": "",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "sqlFileOrder": [
+        "schema.sql",
+        "seed.sql",
+        "query.sql"
+      ],
+      "datasetId": "ddl_blank",
+      "recipeType": "sql_query",
+      "checkSql": "SELECT name FROM sqlite_master WHERE type='table' AND name='stock_events';"
+    },
+    {
+      "id": "ci-final-inventory-operations-launch-3",
+      "kind": "code_input",
+      "title": "Load the Approved Products",
+      "prompt": "Insert three approved products into the `products` table in `seed.sql`.",
+      "hint": "Use explicit column lists for each INSERT statement.",
+      "help": {
+        "concept": "Inserting data with explicit columns ensures clarity and control over defaults.",
+        "hint_1": "Include all necessary columns in the INSERT statement.",
+        "hint_2": "Omit the `status` column in one INSERT to use the default."
+      },
+      "starterCode": "CREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    sku TEXT NOT NULL UNIQUE,\n    name TEXT NOT NULL,\n    category TEXT NOT NULL,\n    price REAL NOT NULL,\n    status TEXT NOT NULL DEFAULT 'draft',\n    notes TEXT NULL\n);\n\nCREATE TABLE stock_events (\n    id INTEGER PRIMARY KEY,\n    product_id INTEGER NOT NULL,\n    quantity_change INTEGER NOT NULL,\n    event_type TEXT NOT NULL DEFAULT 'receipt',\n    note TEXT NULL,\n    FOREIGN KEY (product_id) REFERENCES products(id)\n);",
+      "solutionCode": "CREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    sku TEXT NOT NULL UNIQUE,\n    name TEXT NOT NULL,\n    category TEXT NOT NULL,\n    price REAL NOT NULL,\n    status TEXT NOT NULL DEFAULT 'draft',\n    notes TEXT NULL\n);\n\nCREATE TABLE stock_events (\n    id INTEGER PRIMARY KEY,\n    product_id INTEGER NOT NULL,\n    quantity_change INTEGER NOT NULL,\n    event_type TEXT NOT NULL DEFAULT 'receipt',\n    note TEXT NULL,\n    FOREIGN KEY (product_id) REFERENCES products(id)\n);",
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "schema.sql",
+          "content": "CREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    sku TEXT NOT NULL UNIQUE,\n    name TEXT NOT NULL,\n    category TEXT NOT NULL,\n    price REAL NOT NULL,\n    status TEXT NOT NULL DEFAULT 'draft',\n    notes TEXT NULL\n);\n\nCREATE TABLE stock_events (\n    id INTEGER PRIMARY KEY,\n    product_id INTEGER NOT NULL,\n    quantity_change INTEGER NOT NULL,\n    event_type TEXT NOT NULL DEFAULT 'receipt',\n    note TEXT NULL,\n    FOREIGN KEY (product_id) REFERENCES products(id)\n);",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "seed.sql",
+          "content": "-- Insert approved products\nINSERT INTO products (id, sku, name, category, price, status, notes) VALUES\n    -- Add product rows here\n;",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "schema.sql",
+          "content": "CREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    sku TEXT NOT NULL UNIQUE,\n    name TEXT NOT NULL,\n    category TEXT NOT NULL,\n    price REAL NOT NULL,\n    status TEXT NOT NULL DEFAULT 'draft',\n    notes TEXT NULL\n);\n\nCREATE TABLE stock_events (\n    id INTEGER PRIMARY KEY,\n    product_id INTEGER NOT NULL,\n    quantity_change INTEGER NOT NULL,\n    event_type TEXT NOT NULL DEFAULT 'receipt',\n    note TEXT NULL,\n    FOREIGN KEY (product_id) REFERENCES products(id)\n);",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "seed.sql",
+          "content": "INSERT INTO products (id, sku, name, category, price, status, notes) VALUES\n    (1, 'SKU001', 'Product A', 'Category 1', 10.99, 'active', NULL),\n    (2, 'SKU002', 'Product B', 'Category 2', 15.99, 'active', 'New arrival'),\n    (3, 'SKU003', 'Product C', 'Category 3', 12.99, DEFAULT, 'Limited edition');",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "sqlFileOrder": [
+        "schema.sql",
+        "seed.sql",
+        "query.sql"
+      ],
+      "datasetId": "ddl_blank",
+      "recipeType": "sql_query",
+      "checkSql": "SELECT COUNT(*) FROM products WHERE sku IN ('SKU001', 'SKU002', 'SKU003');"
+    },
+    {
+      "id": "ci-final-inventory-operations-launch-4",
+      "kind": "code_input",
+      "title": "Load the Opening Stock Events",
+      "prompt": "Insert three stock events into the `stock_events` table in `seed.sql`.",
+      "hint": "Ensure each event references a valid product ID.",
+      "help": {
+        "concept": "Inserting stock events requires valid foreign key references to products.",
+        "hint_1": "Use explicit columns for each INSERT statement.",
+        "hint_2": "Ensure `product_id` matches an existing product."
+      },
+      "starterCode": "CREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    sku TEXT NOT NULL UNIQUE,\n    name TEXT NOT NULL,\n    category TEXT NOT NULL,\n    price REAL NOT NULL,\n    status TEXT NOT NULL DEFAULT 'draft',\n    notes TEXT NULL\n);\n\nCREATE TABLE stock_events (\n    id INTEGER PRIMARY KEY,\n    product_id INTEGER NOT NULL,\n    quantity_change INTEGER NOT NULL,\n    event_type TEXT NOT NULL DEFAULT 'receipt',\n    note TEXT NULL,\n    FOREIGN KEY (product_id) REFERENCES products(id)\n);",
+      "solutionCode": "CREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    sku TEXT NOT NULL UNIQUE,\n    name TEXT NOT NULL,\n    category TEXT NOT NULL,\n    price REAL NOT NULL,\n    status TEXT NOT NULL DEFAULT 'draft',\n    notes TEXT NULL\n);\n\nCREATE TABLE stock_events (\n    id INTEGER PRIMARY KEY,\n    product_id INTEGER NOT NULL,\n    quantity_change INTEGER NOT NULL,\n    event_type TEXT NOT NULL DEFAULT 'receipt',\n    note TEXT NULL,\n    FOREIGN KEY (product_id) REFERENCES products(id)\n);",
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "schema.sql",
+          "content": "CREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    sku TEXT NOT NULL UNIQUE,\n    name TEXT NOT NULL,\n    category TEXT NOT NULL,\n    price REAL NOT NULL,\n    status TEXT NOT NULL DEFAULT 'draft',\n    notes TEXT NULL\n);\n\nCREATE TABLE stock_events (\n    id INTEGER PRIMARY KEY,\n    product_id INTEGER NOT NULL,\n    quantity_change INTEGER NOT NULL,\n    event_type TEXT NOT NULL DEFAULT 'receipt',\n    note TEXT NULL,\n    FOREIGN KEY (product_id) REFERENCES products(id)\n);",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "seed.sql",
+          "content": "INSERT INTO products (id, sku, name, category, price, status, notes) VALUES\n    (1, 'SKU001', 'Product A', 'Category 1', 10.99, 'active', NULL),\n    (2, 'SKU002', 'Product B', 'Category 2', 15.99, 'active', 'New arrival'),\n    (3, 'SKU003', 'Product C', 'Category 3', 12.99, DEFAULT, 'Limited edition');\n\n-- Insert stock events\nINSERT INTO stock_events (id, product_id, quantity_change, event_type, note) VALUES\n    -- Add stock event rows here\n;",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "schema.sql",
+          "content": "CREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    sku TEXT NOT NULL UNIQUE,\n    name TEXT NOT NULL,\n    category TEXT NOT NULL,\n    price REAL NOT NULL,\n    status TEXT NOT NULL DEFAULT 'draft',\n    notes TEXT NULL\n);\n\nCREATE TABLE stock_events (\n    id INTEGER PRIMARY KEY,\n    product_id INTEGER NOT NULL,\n    quantity_change INTEGER NOT NULL,\n    event_type TEXT NOT NULL DEFAULT 'receipt',\n    note TEXT NULL,\n    FOREIGN KEY (product_id) REFERENCES products(id)\n);",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "seed.sql",
+          "content": "INSERT INTO products (id, sku, name, category, price, status, notes) VALUES\n    (1, 'SKU001', 'Product A', 'Category 1', 10.99, 'active', NULL),\n    (2, 'SKU002', 'Product B', 'Category 2', 15.99, 'active', 'New arrival'),\n    (3, 'SKU003', 'Product C', 'Category 3', 12.99, DEFAULT, 'Limited edition');\n\nINSERT INTO stock_events (id, product_id, quantity_change, event_type, note) VALUES\n    (1, 1, 100, 'receipt', 'Initial stock'),\n    (2, 2, 50, 'receipt', 'Initial stock'),\n    (3, 3, 75, 'receipt', 'Initial stock');",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "sqlFileOrder": [
+        "schema.sql",
+        "seed.sql",
+        "query.sql"
+      ],
+      "datasetId": "ddl_blank",
+      "recipeType": "sql_query",
+      "checkSql": "SELECT COUNT(*) FROM stock_events WHERE product_id IN (1, 2, 3);"
+    },
+    {
+      "id": "ci-final-inventory-operations-launch-5",
+      "kind": "code_input",
+      "title": "Apply the Launch Correction",
+      "prompt": "Update the price and status of a specific product in `query.sql`.",
+      "hint": "Use a WHERE clause to target the correct product by id.",
+      "help": {
+        "concept": "Updating specific rows requires a precise WHERE clause to avoid unintended changes.",
+        "hint_1": "Use `UPDATE` with `SET` to change values.",
+        "hint_2": "Ensure the WHERE clause targets the correct product id."
+      },
+      "starterCode": "-- Update product details\nUPDATE products\nSET\n    -- Set new values here\nWHERE\n    -- Specify the product id\n;",
+      "solutionCode": "UPDATE products\nSET\n    price = 11.99,\n    status = 'active'\nWHERE\n    id = 1;",
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "schema.sql",
+          "content": "CREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    sku TEXT NOT NULL UNIQUE,\n    name TEXT NOT NULL,\n    category TEXT NOT NULL,\n    price REAL NOT NULL,\n    status TEXT NOT NULL DEFAULT 'draft',\n    notes TEXT NULL\n);\n\nCREATE TABLE stock_events (\n    id INTEGER PRIMARY KEY,\n    product_id INTEGER NOT NULL,\n    quantity_change INTEGER NOT NULL,\n    event_type TEXT NOT NULL DEFAULT 'receipt',\n    note TEXT NULL,\n    FOREIGN KEY (product_id) REFERENCES products(id)\n);",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "seed.sql",
+          "content": "INSERT INTO products (id, sku, name, category, price, status, notes) VALUES\n    (1, 'SKU001', 'Product A', 'Category 1', 10.99, 'active', NULL),\n    (2, 'SKU002', 'Product B', 'Category 2', 15.99, 'active', 'New arrival'),\n    (3, 'SKU003', 'Product C', 'Category 3', 12.99, DEFAULT, 'Limited edition');\n\nINSERT INTO stock_events (id, product_id, quantity_change, event_type, note) VALUES\n    (1, 1, 100, 'receipt', 'Initial stock'),\n    (2, 2, 50, 'receipt', 'Initial stock'),\n    (3, 3, 75, 'receipt', 'Initial stock');",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "-- Update product details\nUPDATE products\nSET\n    -- Set new values here\nWHERE\n    -- Specify the product id\n;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "schema.sql",
+          "content": "CREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    sku TEXT NOT NULL UNIQUE,\n    name TEXT NOT NULL,\n    category TEXT NOT NULL,\n    price REAL NOT NULL,\n    status TEXT NOT NULL DEFAULT 'draft',\n    notes TEXT NULL\n);\n\nCREATE TABLE stock_events (\n    id INTEGER PRIMARY KEY,\n    product_id INTEGER NOT NULL,\n    quantity_change INTEGER NOT NULL,\n    event_type TEXT NOT NULL DEFAULT 'receipt',\n    note TEXT NULL,\n    FOREIGN KEY (product_id) REFERENCES products(id)\n);",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "seed.sql",
+          "content": "INSERT INTO products (id, sku, name, category, price, status, notes) VALUES\n    (1, 'SKU001', 'Product A', 'Category 1', 10.99, 'active', NULL),\n    (2, 'SKU002', 'Product B', 'Category 2', 15.99, 'active', 'New arrival'),\n    (3, 'SKU003', 'Product C', 'Category 3', 12.99, DEFAULT, 'Limited edition');\n\nINSERT INTO stock_events (id, product_id, quantity_change, event_type, note) VALUES\n    (1, 1, 100, 'receipt', 'Initial stock'),\n    (2, 2, 50, 'receipt', 'Initial stock'),\n    (3, 3, 75, 'receipt', 'Initial stock');",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "UPDATE products\nSET\n    price = 11.99,\n    status = 'active'\nWHERE\n    id = 1;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "sqlFileOrder": [
+        "schema.sql",
+        "seed.sql",
+        "query.sql"
+      ],
+      "datasetId": "ddl_blank",
+      "recipeType": "sql_query",
+      "checkSql": "SELECT price, status FROM products WHERE id = 1;"
+    },
+    {
+      "id": "ci-final-inventory-operations-launch-6",
+      "kind": "code_input",
+      "title": "Remove the Test Event and Finalize",
+      "prompt": "Delete the test stock event from `query.sql` and verify the final state.",
+      "hint": "Use a WHERE clause to target the test event by its note.",
+      "help": {
+        "concept": "Deleting specific rows requires a precise WHERE clause to avoid unintended deletions.",
+        "hint_1": "Use `DELETE FROM` with a WHERE clause.",
+        "hint_2": "Ensure the WHERE clause targets the correct event note."
+      },
+      "starterCode": "UPDATE products\nSET\n    price = 11.99,\n    status = 'active'\nWHERE\n    id = 1;\n\n-- Delete the test event\nDELETE FROM stock_events\nWHERE\n    -- Specify the event note\n;",
+      "solutionCode": "UPDATE products\nSET\n    price = 11.99,\n    status = 'active'\nWHERE\n    id = 1;\n\nDELETE FROM stock_events\nWHERE\n    note = 'Test event';",
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "schema.sql",
+          "content": "CREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    sku TEXT NOT NULL UNIQUE,\n    name TEXT NOT NULL,\n    category TEXT NOT NULL,\n    price REAL NOT NULL,\n    status TEXT NOT NULL DEFAULT 'draft',\n    notes TEXT NULL\n);\n\nCREATE TABLE stock_events (\n    id INTEGER PRIMARY KEY,\n    product_id INTEGER NOT NULL,\n    quantity_change INTEGER NOT NULL,\n    event_type TEXT NOT NULL DEFAULT 'receipt',\n    note TEXT NULL,\n    FOREIGN KEY (product_id) REFERENCES products(id)\n);",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "seed.sql",
+          "content": "INSERT INTO products (id, sku, name, category, price, status, notes) VALUES\n    (1, 'SKU001', 'Product A', 'Category 1', 10.99, 'active', NULL),\n    (2, 'SKU002', 'Product B', 'Category 2', 15.99, 'active', 'New arrival'),\n    (3, 'SKU003', 'Product C', 'Category 3', 12.99, DEFAULT, 'Limited edition');\n\nINSERT INTO stock_events (id, product_id, quantity_change, event_type, note) VALUES\n    (1, 1, 100, 'receipt', 'Initial stock'),\n    (2, 2, 50, 'receipt', 'Initial stock'),\n    (3, 3, 75, 'receipt', 'Initial stock');",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "UPDATE products\nSET\n    price = 11.99,\n    status = 'active'\nWHERE\n    id = 1;\n\n-- Delete the test event\nDELETE FROM stock_events\nWHERE\n    -- Specify the event note\n;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "schema.sql",
+          "content": "CREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    sku TEXT NOT NULL UNIQUE,\n    name TEXT NOT NULL,\n    category TEXT NOT NULL,\n    price REAL NOT NULL,\n    status TEXT NOT NULL DEFAULT 'draft',\n    notes TEXT NULL\n);\n\nCREATE TABLE stock_events (\n    id INTEGER PRIMARY KEY,\n    product_id INTEGER NOT NULL,\n    quantity_change INTEGER NOT NULL,\n    event_type TEXT NOT NULL DEFAULT 'receipt',\n    note TEXT NULL,\n    FOREIGN KEY (product_id) REFERENCES products(id)\n);",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "seed.sql",
+          "content": "INSERT INTO products (id, sku, name, category, price, status, notes) VALUES\n    (1, 'SKU001', 'Product A', 'Category 1', 10.99, 'active', NULL),\n    (2, 'SKU002', 'Product B', 'Category 2', 15.99, 'active', 'New arrival'),\n    (3, 'SKU003', 'Product C', 'Category 3', 12.99, DEFAULT, 'Limited edition');\n\nINSERT INTO stock_events (id, product_id, quantity_change, event_type, note) VALUES\n    (1, 1, 100, 'receipt', 'Initial stock'),\n    (2, 2, 50, 'receipt', 'Initial stock'),\n    (3, 3, 75, 'receipt', 'Initial stock');",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "UPDATE products\nSET\n    price = 11.99,\n    status = 'active'\nWHERE\n    id = 1;\n\nDELETE FROM stock_events\nWHERE\n    note = 'Test event';",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "sqlFileOrder": [
+        "schema.sql",
+        "seed.sql",
+        "query.sql"
+      ],
+      "datasetId": "ddl_blank",
+      "recipeType": "sql_query",
+      "checkSql": "SELECT COUNT(*) FROM stock_events WHERE note = 'Test event';"
+    }
+  ],
+  "projectDraft": {
+    "title": "Inventory Operations Launch",
+    "stepIds": [
+      "ci-final-inventory-operations-launch-1",
+      "ci-final-inventory-operations-launch-2",
+      "ci-final-inventory-operations-launch-3",
+      "ci-final-inventory-operations-launch-4",
+      "ci-final-inventory-operations-launch-5",
+      "ci-final-inventory-operations-launch-6"
+    ]
+  }
+}

@@ -2,13 +2,23 @@
   "profileId": "sql",
   "language": "sql",
   "runtime": {
-    "kind": "sqlite",
-    "resultShape": "table"
+    "kind": "sql",
+    "fixedSqlDialect": "sqlite",
+    "resultShape": "table",
+    "supportsTerminal": false,
+    "supportsMultiFile": false,
+    "supportsFileSystem": false
   },
   "workspaceProfileId": "browser-sql-runner",
   "workspacePolicyId": "sql-browser-workspace",
   "checker": {
     "defaultRecipe": "sql_query",
     "validationMode": "result_table"
+  },
+  "practice": {
+    "runtimeMode": "sql_workspace",
+    "expectedPracticeKinds": [
+      "code_input"
+    ]
   }
 }

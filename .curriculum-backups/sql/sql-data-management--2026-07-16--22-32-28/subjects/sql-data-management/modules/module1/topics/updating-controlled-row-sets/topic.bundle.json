@@ -1,0 +1,668 @@
+{
+  "topicId": "updating-controlled-row-sets",
+  "subjectSlug": "sql-data-management",
+  "moduleSlug": "sql-data-management-module-1-controlled-updates-deletes",
+  "sectionSlug": "sql-data-management-sql-data-management-section-1-controlled-mutations",
+  "prefix": "sql_data_management_module_1",
+  "minutes": 30,
+  "runtimeDefaults": {
+    "kind": "sql",
+    "showSchema": true,
+    "showErd": false,
+    "showChen": false,
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "datasetId": "inventory_ops",
+    "fixedSqlDialect": "sqlite",
+    "resultShape": "table"
+  },
+  "serviceDefaults": null,
+  "tools": {
+    "defaultVisible": true,
+    "allowOpen": true,
+    "defaultSurface": "editor",
+    "compactDefaultSurface": "editor",
+    "sqlPane": {
+      "showResults": true,
+      "showTables": true,
+      "showErd": false,
+      "showChen": false,
+      "defaultTab": "results",
+      "compactDefaultTab": "results"
+    }
+  },
+  "topic": {
+    "labelKey": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.label",
+    "summaryKey": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.cards.sketch0.title",
+      "sketchId": "sketch1",
+      "height": 420,
+      "tryIt": {
+        "id": "try-updating-controlled-row-sets-sketch0",
+        "titleKey": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.tryIt.try_updating_controlled_row_sets_sketch0.title",
+        "promptKey": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.tryIt.try_updating_controlled_row_sets_sketch0.prompt",
+        "exerciseKey": "try-updating-controlled-row-sets-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.cards.sketch1.title",
+      "sketchId": "sketch2",
+      "height": 420,
+      "tryIt": {
+        "id": "try-updating-controlled-row-sets-sketch1",
+        "titleKey": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.tryIt.try_updating_controlled_row_sets_sketch1.title",
+        "promptKey": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.tryIt.try_updating_controlled_row_sets_sketch1.prompt",
+        "exerciseKey": "try-updating-controlled-row-sets-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.sketch1.title",
+      "bodyKey": "sketches.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.sketch1.bodyMarkdown"
+    },
+    {
+      "id": "sketch2",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.sketch2.title",
+      "bodyKey": "sketches.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.sketch2.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "try-updating-controlled-row-sets-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.tryIt.try_updating_controlled_row_sets_sketch0",
+      "language": "sql",
+      "starterCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.tryIt.try_updating_controlled_row_sets_sketch0.starterCode",
+      "starterFiles": [
+        {
+          "path": "schema.sql",
+          "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.tryIt.try_updating_controlled_row_sets_sketch0.starterFiles.schema_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": true
+        },
+        {
+          "path": "seed.sql",
+          "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.tryIt.try_updating_controlled_row_sets_sketch0.starterFiles.seed_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": true
+        },
+        {
+          "path": "operations.sql",
+          "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.tryIt.try_updating_controlled_row_sets_sketch0.starterFiles.operations_sql.content",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.tryIt.try_updating_controlled_row_sets_sketch0.starterFiles.query_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "schema.sql",
+          "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.tryIt.try_updating_controlled_row_sets_sketch0.solutionFiles.schema_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": true
+        },
+        {
+          "path": "seed.sql",
+          "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.tryIt.try_updating_controlled_row_sets_sketch0.solutionFiles.seed_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": true
+        },
+        {
+          "path": "operations.sql",
+          "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.tryIt.try_updating_controlled_row_sets_sketch0.solutionFiles.operations_sql.content",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.tryIt.try_updating_controlled_row_sets_sketch0.solutionFiles.query_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        }
+      ],
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "inventory_ops",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": false,
+        "showChen": false,
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "operations.sql",
+        "entryFile": "operations.sql",
+        "openTabs": [
+          "schema.sql",
+          "seed.sql",
+          "operations.sql",
+          "query.sql"
+        ],
+        "starterCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.tryIt.try_updating_controlled_row_sets_sketch0.starterCode",
+        "starterFiles": [
+          {
+            "path": "schema.sql",
+            "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.tryIt.try_updating_controlled_row_sets_sketch0.starterFiles.schema_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": true
+          },
+          {
+            "path": "seed.sql",
+            "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.tryIt.try_updating_controlled_row_sets_sketch0.starterFiles.seed_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": true
+          },
+          {
+            "path": "operations.sql",
+            "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.tryIt.try_updating_controlled_row_sets_sketch0.starterFiles.operations_sql.content",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          },
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.tryIt.try_updating_controlled_row_sets_sketch0.starterFiles.query_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "schema.sql",
+            "seed.sql",
+            "operations.sql",
+            "query.sql"
+          ]
+        }
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "inventory_ops",
+        "resultShape": "table",
+        "solutionCode": "-- file: schema.sql\n-- The inventory_items table is provided by the exercise dataset.\n-- This file is reference-only for this course step.\n\n-- file: seed.sql\n-- The starting inventory rows are provided by the exercise dataset.\n-- This file is reference-only for this course step.\n\n-- file: operations.sql\nUPDATE inventory_items\nSET price = 50.00, status = 'inactive'\nWHERE id = 3;\n\n-- file: query.sql\nSELECT price, status FROM inventory_items WHERE id = 3;\n",
+        "solutionFiles": [
+          {
+            "path": "schema.sql",
+            "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.tryIt.try_updating_controlled_row_sets_sketch0.solutionFiles.schema_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": true
+          },
+          {
+            "path": "seed.sql",
+            "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.tryIt.try_updating_controlled_row_sets_sketch0.solutionFiles.seed_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": true
+          },
+          {
+            "path": "operations.sql",
+            "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.tryIt.try_updating_controlled_row_sets_sketch0.solutionFiles.operations_sql.content",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          },
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.tryIt.try_updating_controlled_row_sets_sketch0.solutionFiles.query_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          }
+        ],
+        "checkSql": "SELECT price, status FROM inventory_items WHERE id = 3;",
+        "sqlFileOrder": [
+          "schema.sql",
+          "seed.sql",
+          "operations.sql",
+          "query.sql"
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\b[uU][pP][dD][aA][tT][eE]\\s+inventory_items\\b[\\s\\S]*?\\b[wW][hH][eE][rR][eE]\\b",
+            "message": "Write the required scoped UPDATE for `inventory_items` in operations.sql and keep its WHERE clause."
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+inventory_items\\b",
+            "message": "Write the required result-returning SELECT in query.sql for `inventory_items`."
+          }
+        ]
+      },
+      "entryFilePath": "operations.sql",
+      "sqlFileOrder": [
+        "schema.sql",
+        "seed.sql",
+        "operations.sql",
+        "query.sql"
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "schema.sql",
+          "seed.sql",
+          "operations.sql",
+          "query.sql"
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\b[uU][pP][dD][aA][tT][eE]\\s+inventory_items\\b[\\s\\S]*?\\b[wW][hH][eE][rR][eE]\\b",
+          "message": "Write the required scoped UPDATE for `inventory_items` in operations.sql and keep its WHERE clause."
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+inventory_items\\b",
+          "message": "Write the required result-returning SELECT in query.sql for `inventory_items`."
+        }
+      ]
+    },
+    {
+      "id": "try-updating-controlled-row-sets-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.tryIt.try_updating_controlled_row_sets_sketch1",
+      "language": "sql",
+      "starterCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.tryIt.try_updating_controlled_row_sets_sketch1.starterCode",
+      "starterFiles": [
+        {
+          "path": "schema.sql",
+          "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.tryIt.try_updating_controlled_row_sets_sketch1.starterFiles.schema_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": true
+        },
+        {
+          "path": "seed.sql",
+          "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.tryIt.try_updating_controlled_row_sets_sketch1.starterFiles.seed_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": true
+        },
+        {
+          "path": "operations.sql",
+          "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.tryIt.try_updating_controlled_row_sets_sketch1.starterFiles.operations_sql.content",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.tryIt.try_updating_controlled_row_sets_sketch1.starterFiles.query_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "schema.sql",
+          "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.tryIt.try_updating_controlled_row_sets_sketch1.solutionFiles.schema_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": true
+        },
+        {
+          "path": "seed.sql",
+          "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.tryIt.try_updating_controlled_row_sets_sketch1.solutionFiles.seed_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": true
+        },
+        {
+          "path": "operations.sql",
+          "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.tryIt.try_updating_controlled_row_sets_sketch1.solutionFiles.operations_sql.content",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.tryIt.try_updating_controlled_row_sets_sketch1.solutionFiles.query_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        }
+      ],
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "inventory_ops",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": false,
+        "showChen": false,
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "operations.sql",
+        "entryFile": "operations.sql",
+        "openTabs": [
+          "schema.sql",
+          "seed.sql",
+          "operations.sql",
+          "query.sql"
+        ],
+        "starterCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.tryIt.try_updating_controlled_row_sets_sketch1.starterCode",
+        "starterFiles": [
+          {
+            "path": "schema.sql",
+            "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.tryIt.try_updating_controlled_row_sets_sketch1.starterFiles.schema_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": true
+          },
+          {
+            "path": "seed.sql",
+            "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.tryIt.try_updating_controlled_row_sets_sketch1.starterFiles.seed_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": true
+          },
+          {
+            "path": "operations.sql",
+            "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.tryIt.try_updating_controlled_row_sets_sketch1.starterFiles.operations_sql.content",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          },
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.tryIt.try_updating_controlled_row_sets_sketch1.starterFiles.query_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "schema.sql",
+            "seed.sql",
+            "operations.sql",
+            "query.sql"
+          ]
+        }
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "inventory_ops",
+        "resultShape": "table",
+        "solutionCode": "-- file: schema.sql\n-- The inventory_items table is provided by the exercise dataset.\n-- This file is reference-only for this course step.\n\n-- file: seed.sql\n-- The starting inventory rows are provided by the exercise dataset.\n-- This file is reference-only for this course step.\n\n-- file: operations.sql\nUPDATE inventory_items\nSET status = 'archived'\nWHERE category = 'Kitchen' AND is_test = 1;\n\n-- file: query.sql\nSELECT id, status FROM inventory_items WHERE category = 'Kitchen' AND is_test = 1;\n",
+        "solutionFiles": [
+          {
+            "path": "schema.sql",
+            "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.tryIt.try_updating_controlled_row_sets_sketch1.solutionFiles.schema_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": true
+          },
+          {
+            "path": "seed.sql",
+            "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.tryIt.try_updating_controlled_row_sets_sketch1.solutionFiles.seed_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": true
+          },
+          {
+            "path": "operations.sql",
+            "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.tryIt.try_updating_controlled_row_sets_sketch1.solutionFiles.operations_sql.content",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          },
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.tryIt.try_updating_controlled_row_sets_sketch1.solutionFiles.query_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          }
+        ],
+        "checkSql": "SELECT id, status FROM inventory_items WHERE category = 'Kitchen' AND is_test = 1;",
+        "sqlFileOrder": [
+          "schema.sql",
+          "seed.sql",
+          "operations.sql",
+          "query.sql"
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\b[uU][pP][dD][aA][tT][eE]\\s+inventory_items\\b[\\s\\S]*?\\b[wW][hH][eE][rR][eE]\\b",
+            "message": "Write the required scoped UPDATE for `inventory_items` in operations.sql and keep its WHERE clause."
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+inventory_items\\b",
+            "message": "Write the required result-returning SELECT in query.sql for `inventory_items`."
+          }
+        ]
+      },
+      "entryFilePath": "operations.sql",
+      "sqlFileOrder": [
+        "schema.sql",
+        "seed.sql",
+        "operations.sql",
+        "query.sql"
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "schema.sql",
+          "seed.sql",
+          "operations.sql",
+          "query.sql"
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\b[uU][pP][dD][aA][tT][eE]\\s+inventory_items\\b[\\s\\S]*?\\b[wW][hH][eE][rR][eE]\\b",
+          "message": "Write the required scoped UPDATE for `inventory_items` in operations.sql and keep its WHERE clause."
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+inventory_items\\b",
+          "message": "Write the required result-returning SELECT in query.sql for `inventory_items`."
+        }
+      ]
+    },
+    {
+      "id": "single-choice-1",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.practice.single-choice-1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "single-choice-2",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.practice.single-choice-2",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "fill-blank-1",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.practice.fill-blank-1",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "values"
+      }
+    },
+    {
+      "id": "fill-blank-2",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.practice.fill-blank-2",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "rows"
+      }
+    },
+    {
+      "id": "multi-choice-1",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.practice.multi-choice-1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "b",
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "drag-reorder-1",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.practice.drag-reorder-1",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
+      }
+    }
+  ]
+}

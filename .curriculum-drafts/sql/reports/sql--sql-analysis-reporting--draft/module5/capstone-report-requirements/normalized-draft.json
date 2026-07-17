@@ -1,0 +1,134 @@
+{
+  "title": "Reading the Capstone Reporting Brief",
+  "summary": "Identify the audience, business questions, required metrics, filters, and output order.",
+  "minutes": 20,
+  "sketchBlocks": [
+    {
+      "id": "capstone-intro",
+      "title": "Capstone Project Overview",
+      "bodyMarkdown": "In this capstone project, you will take on the role of a data analyst tasked with creating an Executive Sales Performance Report. Your goal is to translate a reporting brief into a comprehensive SQL query that answers key business questions. You'll need to identify the audience, understand the required metrics, apply necessary filters, and ensure the output is ordered correctly. This project will integrate skills such as using aggregate functions, handling null values, and applying conditional logic to produce a polished, business-ready report."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "capstone-step1",
+      "kind": "code_input",
+      "title": "Step 1: Basic Sales Report",
+      "prompt": "Create a basic sales report that lists the total sales amount for each product category. Use the `sales_reporting` table.",
+      "starterCode": "SELECT category, SUM(quantity * unit_price) AS total_sales\nFROM sales_reporting\nGROUP BY category;",
+      "solutionCode": "SELECT category, SUM(quantity * unit_price) AS total_sales\nFROM sales_reporting\nGROUP BY category;",
+      "tests": [
+        {
+          "stdout": "category,total_sales\nArt,500.00\nStationery,300.00\nHome,400.00\nTech,600.00\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query",
+      "hint": "Calculate the total sales by multiplying quantity by unit price and summing it for each category.",
+      "help": {
+        "concept": "Aggregate functions like SUM can be used to calculate totals for groups of data.",
+        "hint_1": "Use SUM to aggregate the total sales for each category.",
+        "hint_2": "Remember to multiply quantity by unit price to get the sales amount."
+      }
+    },
+    {
+      "id": "capstone-step2",
+      "kind": "code_input",
+      "title": "Step 2: Filter by Completed Orders",
+      "prompt": "Modify the report to include only completed orders. Use the `sales_reporting` table.",
+      "starterCode": "SELECT category, SUM(quantity * unit_price) AS total_sales\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY category;",
+      "solutionCode": "SELECT category, SUM(quantity * unit_price) AS total_sales\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY category;",
+      "tests": [
+        {
+          "stdout": "category,total_sales\nArt,400.00\nStationery,200.00\nHome,300.00\nTech,500.00\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query",
+      "hint": "Use the WHERE clause to filter orders by their status.",
+      "help": {
+        "concept": "The WHERE clause is used to filter records based on specific conditions.",
+        "hint_1": "Filter the results to include only rows where order_status is 'Completed'.",
+        "hint_2": "Add a WHERE clause to check for 'Completed' status."
+      }
+    },
+    {
+      "id": "capstone-step3",
+      "kind": "code_input",
+      "title": "Step 3: Include Average Customer Rating",
+      "prompt": "Enhance the report to include the average customer rating for each category. Use the `sales_reporting` table.",
+      "starterCode": "SELECT category, SUM(quantity * unit_price) AS total_sales, AVG(customer_rating) AS avg_rating\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY category;",
+      "solutionCode": "SELECT category, SUM(quantity * unit_price) AS total_sales, AVG(customer_rating) AS avg_rating\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY category;",
+      "tests": [
+        {
+          "stdout": "category,total_sales,avg_rating\nArt,400.00,4.5\nStationery,200.00,4.2\nHome,300.00,4.4\nTech,500.00,4.6\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query",
+      "hint": "Use the AVG function to calculate the average rating.",
+      "help": {
+        "concept": "Aggregate functions like AVG can be used to calculate averages for groups of data.",
+        "hint_1": "Use AVG to calculate the average customer rating for each category.",
+        "hint_2": "Include customer_rating in your SELECT statement with AVG."
+      }
+    },
+    {
+      "id": "capstone-step4",
+      "kind": "code_input",
+      "title": "Step 4: Add Discount Impact",
+      "prompt": "Modify the report to show the total discount impact for each category. Use the `sales_reporting` table.",
+      "starterCode": "SELECT category, SUM(quantity * unit_price) AS total_sales, AVG(customer_rating) AS avg_rating, SUM(discount_pct * quantity * unit_price / 100) AS discount_impact\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY category;",
+      "solutionCode": "SELECT category, SUM(quantity * unit_price) AS total_sales, AVG(customer_rating) AS avg_rating, SUM(discount_pct * quantity * unit_price / 100) AS discount_impact\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY category;",
+      "tests": [
+        {
+          "stdout": "category,total_sales,avg_rating,discount_impact\nArt,400.00,4.5,40.00\nStationery,200.00,4.2,20.00\nHome,300.00,4.4,30.00\nTech,500.00,4.6,50.00\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query",
+      "hint": "Calculate the discount impact by multiplying the discount percentage by the sales amount.",
+      "help": {
+        "concept": "You can calculate the impact of discounts by applying arithmetic operations on columns.",
+        "hint_1": "Multiply discount_pct by quantity and unit_price to find the discount impact.",
+        "hint_2": "Include a calculation for discount impact in your SELECT statement."
+      }
+    },
+    {
+      "id": "capstone-step5",
+      "kind": "code_input",
+      "title": "Step 5: Finalize the Executive Report",
+      "prompt": "Finalize the report by ordering the results by total sales in descending order. Use the `sales_reporting` table.",
+      "starterCode": "SELECT category, SUM(quantity * unit_price) AS total_sales, AVG(customer_rating) AS avg_rating, SUM(discount_pct * quantity * unit_price / 100) AS discount_impact\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY category\nORDER BY total_sales DESC;",
+      "solutionCode": "SELECT category, SUM(quantity * unit_price) AS total_sales, AVG(customer_rating) AS avg_rating, SUM(discount_pct * quantity * unit_price / 100) AS discount_impact\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY category\nORDER BY total_sales DESC;",
+      "tests": [
+        {
+          "stdout": "category,total_sales,avg_rating,discount_impact\nTech,500.00,4.6,50.00\nArt,400.00,4.5,40.00\nHome,300.00,4.4,30.00\nStationery,200.00,4.2,20.00\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query",
+      "hint": "Use the ORDER BY clause to sort the results.",
+      "help": {
+        "concept": "The ORDER BY clause is used to sort the result set by one or more columns.",
+        "hint_1": "Sort the results by total_sales in descending order.",
+        "hint_2": "Add ORDER BY total_sales DESC to your query."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Executive Sales Performance Report",
+    "stepIds": [
+      "capstone-step1",
+      "capstone-step2",
+      "capstone-step3",
+      "capstone-step4",
+      "capstone-step5"
+    ]
+  }
+}

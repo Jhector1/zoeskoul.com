@@ -1,0 +1,248 @@
+{
+  "title": "FOREIGN KEY and REFERENCES",
+  "summary": "Declare which parent key a child-table column points to so the relationship is part of the schema rather than only a query convention.",
+  "minutes": 32,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Defining FOREIGN KEY Constraints",
+      "bodyMarkdown": "A FOREIGN KEY in SQL is a field (or collection of fields) in one table that uniquely identifies a row of another table. This key establishes a relationship between two tables, ensuring referential integrity. By using FOREIGN KEY constraints, you can prevent actions that would destroy links between tables.\n\nFor example, consider a database with two tables: `orders` and `customers`. Each order should be associated with a customer. You can enforce this relationship by adding a FOREIGN KEY constraint to the `orders` table that references the `customers` table.\n\n```sql\nCREATE TABLE customers (\n    customer_id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL\n);\n\nCREATE TABLE orders (\n    order_id INTEGER PRIMARY KEY,\n    order_date TEXT NOT NULL,\n    customer_id INTEGER,\n    FOREIGN KEY (customer_id) REFERENCES customers(customer_id)\n);\n```\n\nIn this example, `customer_id` in the `orders` table is a FOREIGN KEY that references `customer_id` in the `customers` table. This ensures that every order is linked to a valid customer."
+    },
+    {
+      "id": "sketch2",
+      "title": "Verifying FOREIGN KEY Relationships",
+      "bodyMarkdown": "Once you've defined FOREIGN KEY constraints, it's important to verify that your schema is correctly enforcing these relationships. You can inspect the schema using the `sqlite_master` table, which stores information about all tables, indexes, and other database objects.\n\nTo check the FOREIGN KEY constraints, you can query the `sqlite_master` table:\n\n```sql\nSELECT sql FROM sqlite_master WHERE type='table' AND name='orders';\n```\n\nThis query will return the SQL statement used to create the `orders` table, allowing you to verify that the FOREIGN KEY constraint is correctly defined. This step is crucial for ensuring that your database maintains referential integrity and that all relationships are properly enforced."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "try-foreign-keys-and-references-sketch0",
+      "kind": "code_input",
+      "title": "Create a Table with FOREIGN KEY",
+      "prompt": "Create a `products` table with a FOREIGN KEY that references the `categories` table. Ensure the `category_id` in `products` references `category_id` in `categories`.",
+      "starterCode": "CREATE TABLE categories (\n    category_id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL\n);\n\nCREATE TABLE products (\n    product_id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    category_id INTEGER,\n    -- Add FOREIGN KEY constraint here\n);",
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "schema.sql",
+          "content": "CREATE TABLE categories (\n    category_id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL\n);\n\nCREATE TABLE products (\n    product_id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    category_id INTEGER,\n    -- Add FOREIGN KEY constraint here\n);",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "schema.sql",
+          "content": "CREATE TABLE categories (\n    category_id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL\n);\n\nCREATE TABLE products (\n    product_id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    category_id INTEGER,\n    FOREIGN KEY (category_id) REFERENCES categories(category_id)\n);",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "sqlFileOrder": [
+        "schema.sql",
+        "query.sql"
+      ],
+      "solutionCode": "CREATE TABLE categories (\n    category_id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL\n);\n\nCREATE TABLE products (\n    product_id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    category_id INTEGER,\n    FOREIGN KEY (category_id) REFERENCES categories(category_id)\n);",
+      "datasetId": "ddl_blank",
+      "recipeType": "sql_query",
+      "checkSql": "SELECT sql FROM sqlite_master WHERE type='table' AND name='products';",
+      "hint": "Define the FOREIGN KEY constraint in the `products` table creation statement.",
+      "help": {
+        "concept": "A FOREIGN KEY in a table references a primary key in another table to enforce referential integrity.",
+        "hint_1": "Ensure the `category_id` in `products` references `category_id` in `categories`.",
+        "hint_2": "Use the FOREIGN KEY syntax to establish the relationship."
+      }
+    },
+    {
+      "id": "try-foreign-keys-and-references-sketch1",
+      "kind": "code_input",
+      "title": "Verify FOREIGN KEY in Schema",
+      "prompt": "Verify the FOREIGN KEY constraint in the `orders` table that references the `customers` table. Use the `sqlite_master` table to inspect the schema.",
+      "starterCode": "-- Write a query to verify the FOREIGN KEY constraint in the orders table",
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "schema.sql",
+          "content": "CREATE TABLE customers (\n    customer_id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL\n);\n\nCREATE TABLE orders (\n    order_id INTEGER PRIMARY KEY,\n    order_date TEXT NOT NULL,\n    customer_id INTEGER,\n    FOREIGN KEY (customer_id) REFERENCES customers(customer_id)\n);",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "-- Write a query to verify the FOREIGN KEY constraint in the orders table",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "schema.sql",
+          "content": "CREATE TABLE customers (\n    customer_id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL\n);\n\nCREATE TABLE orders (\n    order_id INTEGER PRIMARY KEY,\n    order_date TEXT NOT NULL,\n    customer_id INTEGER,\n    FOREIGN KEY (customer_id) REFERENCES customers(customer_id)\n);",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "SELECT sql FROM sqlite_master WHERE type='table' AND name='orders';",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "sqlFileOrder": [
+        "schema.sql",
+        "query.sql"
+      ],
+      "solutionCode": "SELECT sql FROM sqlite_master WHERE type='table' AND name='orders';",
+      "datasetId": "ddl_blank",
+      "recipeType": "sql_query",
+      "checkSql": "SELECT sql FROM sqlite_master WHERE type='table' AND name='orders';",
+      "hint": "Query the `sqlite_master` table to retrieve the SQL statement for the `orders` table.",
+      "help": {
+        "concept": "The `sqlite_master` table contains the SQL statements used to create database objects, allowing you to verify constraints.",
+        "hint_1": "Use a SELECT query on `sqlite_master` to find the `orders` table definition.",
+        "hint_2": "Check the `sql` column in `sqlite_master` for the `orders` table."
+      }
+    },
+    {
+      "id": "multi-choice-1",
+      "kind": "multi_choice",
+      "title": "Purpose of FOREIGN KEY",
+      "prompt": "What is the primary purpose of a FOREIGN KEY in a database?",
+      "options": [
+        "To enforce data integrity between tables",
+        "To speed up query performance",
+        "To store large amounts of data",
+        "To create indexes automatically"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Think about how FOREIGN KEYs help maintain data integrity between tables.",
+      "help": {
+        "concept": "A FOREIGN KEY ensures that a value in one table corresponds to a valid entry in another table, maintaining referential integrity.",
+        "hint_1": "Consider how FOREIGN KEYs prevent orphan records.",
+        "hint_2": "FOREIGN KEYs enforce relationships between tables."
+      }
+    },
+    {
+      "id": "multi-choice-2",
+      "kind": "multi_choice",
+      "title": "FOREIGN KEY Constraints",
+      "prompt": "Which of the following statements about FOREIGN KEY constraints is true?",
+      "options": [
+        "They allow any value to be inserted into the column",
+        "They ensure that a column's values match values in another table",
+        "They automatically create indexes",
+        "They are used to store large text data"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Consider how FOREIGN KEY constraints affect data relationships.",
+      "help": {
+        "concept": "FOREIGN KEY constraints ensure that a column's values correspond to values in another table, maintaining referential integrity.",
+        "hint_1": "Think about how FOREIGN KEYs prevent invalid data entries.",
+        "hint_2": "FOREIGN KEYs enforce valid relationships between tables."
+      }
+    },
+    {
+      "id": "fill-blank-1",
+      "kind": "fill_blank_choice",
+      "title": "FOREIGN KEY Syntax",
+      "prompt": "Complete the FOREIGN KEY syntax: `FOREIGN KEY (child_column) REFERENCES [blank1] (parent_key)`",
+      "template": "FOREIGN KEY (child_column) REFERENCES [blank1] (parent_key)",
+      "choices": [
+        "parent_table",
+        "child_table",
+        "index_table",
+        "data_table"
+      ],
+      "correctValue": "parent_table",
+      "hint": "Identify the table that the FOREIGN KEY references.",
+      "help": {
+        "concept": "The FOREIGN KEY syntax specifies which table and column the key references to maintain referential integrity.",
+        "hint_1": "The FOREIGN KEY references a column in another table.",
+        "hint_2": "The referenced table contains the primary key."
+      }
+    },
+    {
+      "id": "fill-blank-2",
+      "kind": "fill_blank_choice",
+      "title": "FOREIGN KEY Definition",
+      "prompt": "In a FOREIGN KEY definition, the referenced column must be a [blank1] in the parent table.",
+      "template": "In a FOREIGN KEY definition, the referenced column must be a [blank1] in the parent table.",
+      "choices": [
+        "primary key",
+        "foreign key",
+        "unique key",
+        "index"
+      ],
+      "correctValue": "primary key",
+      "hint": "Consider the role of the referenced column in the parent table.",
+      "help": {
+        "concept": "The referenced column in a FOREIGN KEY relationship must be a the missing term to ensure unique identification.",
+        "hint_1": "The referenced column uniquely identifies rows in the parent table.",
+        "hint_2": "The referenced column is often the the missing term."
+      }
+    },
+    {
+      "id": "drag-reorder-1",
+      "kind": "drag_reorder",
+      "title": "Steps to Define a FOREIGN KEY",
+      "prompt": "Arrange the steps to define a FOREIGN KEY in a table.",
+      "tokens": [
+        "Create the table",
+        "Define columns",
+        "Add FOREIGN KEY constraint",
+        "Reference parent table"
+      ],
+      "correctOrder": [
+        "Create the table",
+        "Define columns",
+        "Add FOREIGN KEY constraint",
+        "Reference parent table"
+      ],
+      "hint": "Consider the logical order of defining a table and adding a FOREIGN KEY constraint.",
+      "help": {
+        "concept": "Defining a FOREIGN KEY involves creating a table and specifying the FOREIGN KEY constraint to reference another table.",
+        "hint_1": "Start with creating the table and defining columns.",
+        "hint_2": "Add the FOREIGN KEY constraint after defining the columns."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Build a Warehouse Stock Ledger Schema",
+    "stepIds": [
+      "try-foreign-keys-and-references-sketch0",
+      "try-foreign-keys-and-references-sketch1"
+    ]
+  }
+}

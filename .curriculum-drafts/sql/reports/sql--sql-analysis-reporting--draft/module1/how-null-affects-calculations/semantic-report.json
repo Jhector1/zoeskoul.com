@@ -1,0 +1,20 @@
+{
+  "topicId": "how-null-affects-calculations",
+  "ok": true,
+  "issues": [
+    {
+      "code": "SQL_PROMPT_INTENT_GROUP_BY_WEAK_MISMATCH",
+      "category": "prompt_intent",
+      "severity": "warn",
+      "exerciseId": "try-how-null-affects-calculations-sketch0",
+      "message": "Prompt mentions grouping-like wording, but the solution query does not contain GROUP BY."
+    },
+    {
+      "code": "SQL_PROMPT_INTENT_SUM_WEAK_MISMATCH",
+      "category": "prompt_intent",
+      "severity": "warn",
+      "exerciseId": "try-how-null-affects-calculations-sketch0",
+      "message": "Prompt mentions total/sum-like wording, but the solution query does not use SUM(...)."
+    }
+  ]
+}

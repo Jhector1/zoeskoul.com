@@ -1,0 +1,121 @@
+{
+  "title": "Module 2 Project: Department Participation Scorecard",
+  "summary": "Build an all-department scorecard with course, enrollment, and distinct-student counts in six cumulative steps.",
+  "minutes": 75,
+  "sketchBlocks": [
+    {
+      "id": "sketch-intro",
+      "title": "Project Overview: Department Participation Scorecard",
+      "bodyMarkdown": "In this project, you will create a comprehensive department participation scorecard for a school. The goal is to ensure that every department is represented, even if it has no courses or enrollments. You'll use SQL to join tables and calculate accurate counts for courses, enrollments, and unique students per department. This project will help you understand how to preserve data integrity and report accuracy using LEFT JOINs and aggregate functions."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "step1-preserve-departments",
+      "kind": "code_input",
+      "title": "Preserve Every Department",
+      "prompt": "Write a query to list all departments, ensuring that even those without courses are included. Use a LEFT JOIN to connect departments with courses.",
+      "starterCode": "-- Write your SQL answer below",
+      "solutionCode": "SELECT d.name, c.title\nFROM departments d\nLEFT JOIN courses c ON d.id = c.department_id;",
+      "datasetId": "school_relations_intro",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "step2-count-courses",
+      "kind": "code_input",
+      "title": "Count Courses Correctly",
+      "prompt": "Modify your query to count the number of courses per department, ensuring that departments with no courses show a count of zero.",
+      "starterCode": "-- Write your SQL answer below",
+      "solutionCode": "SELECT d.name, COUNT(DISTINCT c.id) AS course_count\nFROM departments d\nLEFT JOIN courses c ON d.id = c.department_id\nGROUP BY d.name;",
+      "datasetId": "school_relations_intro",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "step3-extend-enrollments",
+      "kind": "code_input",
+      "title": "Extend to Enrollment Records",
+      "prompt": "Extend your query to include enrollments, ensuring all departments are preserved. Use a LEFT JOIN to connect courses with enrollments.",
+      "starterCode": "-- Write your SQL answer below",
+      "solutionCode": "SELECT d.name, COUNT(DISTINCT c.id) AS course_count\nFROM departments d\nLEFT JOIN courses c ON d.id = c.department_id\nLEFT JOIN enrollments e ON c.id = e.course_id\nGROUP BY d.name;",
+      "datasetId": "school_relations_intro",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "step4-count-enrollments",
+      "kind": "code_input",
+      "title": "Count Enrollment Rows",
+      "prompt": "Add a count of enrollment rows per department to your query, ensuring the department grain is maintained.",
+      "starterCode": "-- Write your SQL answer below",
+      "solutionCode": "SELECT d.name, COUNT(DISTINCT c.id) AS course_count, COUNT(e.id) AS enrollment_count\nFROM departments d\nLEFT JOIN courses c ON d.id = c.department_id\nLEFT JOIN enrollments e ON c.id = e.course_id\nGROUP BY d.name;",
+      "datasetId": "school_relations_intro",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "step5-count-unique-students",
+      "kind": "code_input",
+      "title": "Count Unique Students",
+      "prompt": "Modify your query to count unique students per department, ensuring each student is counted only once per department.",
+      "starterCode": "-- Write your SQL answer below",
+      "solutionCode": "SELECT d.name, COUNT(DISTINCT c.id) AS course_count, COUNT(e.id) AS enrollment_count, COUNT(DISTINCT e.student_id) AS student_count\nFROM departments d\nLEFT JOIN courses c ON d.id = c.department_id\nLEFT JOIN enrollments e ON c.id = e.course_id\nGROUP BY d.name;",
+      "datasetId": "school_relations_intro",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "step6-rank-scorecard",
+      "kind": "code_input",
+      "title": "Rank the Scorecard Predictably",
+      "prompt": "Sort the final scorecard by enrollment count descending, then by department name ascending.",
+      "starterCode": "-- Write your SQL answer below",
+      "solutionCode": "SELECT d.name, COUNT(DISTINCT c.id) AS course_count, COUNT(e.id) AS enrollment_count, COUNT(DISTINCT e.student_id) AS student_count\nFROM departments d\nLEFT JOIN courses c ON d.id = c.department_id\nLEFT JOIN enrollments e ON c.id = e.course_id\nGROUP BY d.name\nORDER BY enrollment_count DESC, d.name ASC;",
+      "datasetId": "school_relations_intro",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Department Participation Scorecard",
+    "stepIds": [
+      "step1-preserve-departments",
+      "step2-count-courses",
+      "step3-extend-enrollments",
+      "step4-count-enrollments",
+      "step5-count-unique-students",
+      "step6-rank-scorecard"
+    ]
+  }
+}

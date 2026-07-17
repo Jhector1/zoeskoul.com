@@ -3,7 +3,48 @@ import { describe, expect, it } from "vitest";
 import {
     resolveToolsRailVisibility,
     shouldDefaultCollapseToolsRailForCompactQuiz,
+    toolPresentationPolicyFromManifest,
 } from "./toolsRailVisibility";
+
+describe("toolPresentationPolicyFromManifest", () => {
+    it("returns a typed policy from a runtime manifest record", () => {
+        expect(
+            toolPresentationPolicyFromManifest({
+                kind: "code_input",
+                tools: {
+                    defaultVisible: false,
+                    allowOpen: true,
+                    defaultSurface: "results",
+                    sqlPane: {
+                        defaultTab: "tables",
+                    },
+                },
+            }),
+        ).toEqual({
+            defaultVisible: false,
+            allowOpen: true,
+            defaultSurface: "results",
+            sqlPane: {
+                defaultTab: "tables",
+            },
+        });
+    });
+
+    it("ignores missing or malformed runtime policy values", () => {
+        expect(toolPresentationPolicyFromManifest(null)).toBeNull();
+        expect(toolPresentationPolicyFromManifest("manifest")).toBeNull();
+        expect(
+            toolPresentationPolicyFromManifest({
+                tools: "results",
+            }),
+        ).toBeNull();
+        expect(
+            toolPresentationPolicyFromManifest({
+                tools: ["results"],
+            }),
+        ).toBeNull();
+    });
+});
 
 describe("shouldDefaultCollapseToolsRailForCompactQuiz", () => {
     it("collapses the tools rail for compact quiz cards by default", () => {
@@ -281,4 +322,32 @@ describe("resolveToolsRailVisibility", () => {
             allowOpen: false,
         });
     });
+    it("merges topic, lesson, and exercise visibility by specificity", () => {
+        const visibility = resolveToolsRailVisibility({
+            topicTools: { defaultVisible: false, allowOpen: true },
+            activeCard: {
+                type: "sketch",
+                id: "sketch-1",
+                title: "Sketch",
+                sketchId: "sketch-1",
+                tools: { defaultVisible: true },
+            },
+            exerciseTools: { allowOpen: false },
+            routeTargetKind: "card",
+            routeTargetTargetKind: "sketch",
+            cardHasEmbeddedTryIt: false,
+            hasWorkspaceExercise: false,
+        });
+
+        expect(visibility.effectiveTools).toEqual({
+            defaultVisible: true,
+            allowOpen: false,
+        });
+        expect(visibility).toMatchObject({
+            defaultVisible: true,
+            allowOpen: false,
+            isAvailable: true,
+        });
+    });
+
 });

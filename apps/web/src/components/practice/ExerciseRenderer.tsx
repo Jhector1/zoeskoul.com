@@ -124,6 +124,7 @@ type CodeToolsApi = {
             sqlSeedSql?: string;
             sqlInitialTableSnapshots?: SqlTableSnapshots;
             sqlPaneOptions?: SqlPaneOptions;
+            toolPresentation?: import("@zoeskoul/curriculum-contracts").ToolPresentationPolicy;
 
             onPatch: (patch: any) => void;
         },
@@ -775,6 +776,38 @@ function workspaceContentKeyForExerciseRenderer(workspace: WorkspaceStateV2 | nu
     });
 }
 
+export function practiceRuntimeSnapshotKeyForExerciseRenderer(value: any) {
+    const workspace = getWorkspaceFromAnyState(value);
+    const code = String(
+        value?.code ??
+        value?.source ??
+        deriveEntryCode(workspace) ??
+        "",
+    );
+    const stdin = String(
+        value?.codeStdin ??
+        value?.stdin ??
+        workspace?.stdin ??
+        "",
+    );
+
+    return JSON.stringify({
+        code,
+        stdin,
+        workspace: workspaceContentKeyForExerciseRenderer(workspace),
+        language: normalizeWorkspaceLanguage(
+            value?.codeLang ??
+            value?.lang ??
+            value?.language ??
+            workspace?.language ??
+            "",
+        ),
+        userEdited: value?.userEdited === true,
+        workspaceOrigin: String(value?.workspaceOrigin ?? ""),
+        starterHash: value?.starterHash ?? null,
+    });
+}
+
 export function shouldSkipEmbeddedEnsureExercise(args: {
     existing: any;
     manifestLanguage: string;
@@ -1383,6 +1416,7 @@ function CodeInputWithTools(props: {
             sqlInitialTableSnapshots:
                 activeLanguage === "sql" ? resolvedExerciseSql.sqlInitialTableSnapshots : undefined,
             sqlPaneOptions: activeLanguage === "sql" ? resolvedExerciseSql.sqlPaneOptions : undefined,
+            toolPresentation: (exercise as any)?.tools ?? undefined,
             onPatch,
         };
         },
@@ -1411,16 +1445,14 @@ function CodeInputWithTools(props: {
     }, [unregisterCodeInput]);
 
     useEffect(() => {
-        registerCodeInput(codeInputId, registerArgs);
         return () => unregisterRef.current(codeInputId);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [codeInputId]);
 
     const lastAutoBindKeyRef = useRef<string | null>(null);
 
     useEffect(() => {
         registerCodeInput(codeInputId, registerArgs);
-    }, [registerCodeInput, codeInputId, registerArgs, boundId]);
+    }, [registerCodeInput, codeInputId, registerArgs]);
 
     /**
      * Critical:
@@ -1651,6 +1683,24 @@ export default function ExerciseRenderer({
 
     const storeExercise = useReviewRuntimeStore((s) => s.exercises[exerciseKey]);
     const patchExercise = useReviewRuntimeStore((s) => s.patchExercise);
+
+    const currentRef = useRef(current);
+    currentRef.current = current;
+
+    const storeExerciseRef = useRef(storeExercise);
+    storeExerciseRef.current = storeExercise;
+
+    const updateCurrentRef = useRef(updateCurrent);
+    updateCurrentRef.current = updateCurrent;
+
+    const currentRuntimeSnapshotKey = useMemo(
+        () => practiceRuntimeSnapshotKeyForExerciseRenderer(current),
+        [current],
+    );
+    const storeRuntimeSnapshotKey = useMemo(
+        () => practiceRuntimeSnapshotKeyForExerciseRenderer(storeExercise),
+        [storeExercise],
+    );
     const lastEmbeddedEnsureExerciseKeyRef = useRef<string | null>(null);
     useEffect(() => {
         if (ex.kind !== "code_input") return;
@@ -1811,32 +1861,37 @@ export default function ExerciseRenderer({
     }
 
     useEffect(() => {
-        if (ex.kind !== "code_input") return;
+        if (exRef.current.kind !== "code_input") return;
 
-        const store = useReviewRuntimeStore.getState().exercises[exerciseKey];
-        const manifestLanguage = getManifestExerciseLanguage(ex as CodeInputExerciseWithSqlExtras);
+        const store = storeExerciseRef.current;
+        const currentItem = currentRef.current as any;
+        const manifestLanguage = getManifestExerciseLanguage(
+            exRef.current as CodeInputExerciseWithSqlExtras,
+        );
 
         const workspace =
             store?.workspace ??
-            ((current as any).workspace?.version === 2
-                ? (current as any).workspace
-                : (current as any).codeWorkspace?.version === 2
-                    ? (current as any).codeWorkspace
-                    : (current as any).ideWorkspace?.version === 2
-                        ? (current as any).ideWorkspace
+            (currentItem?.workspace?.version === 2
+                ? currentItem.workspace
+                : currentItem?.codeWorkspace?.version === 2
+                    ? currentItem.codeWorkspace
+                    : currentItem?.ideWorkspace?.version === 2
+                        ? currentItem.ideWorkspace
                         : null);
 
         if (!workspace || workspace.version !== 2) return;
-        if (!stateLanguageMatches(store, manifestLanguage, workspace)) return;
+        if (!stateLanguageMatches(store ?? currentItem, manifestLanguage, workspace)) return;
 
         const workspaceCode = deriveEntryCode(workspace) ?? "";
         const workspaceStdin = workspace.stdin ?? "";
 
-        const currentCode = (current as any).code;
-        const currentStdin = (current as any).codeStdin;
-        const currentWorkspace = (current as any).workspace;
+        const currentCode = String(currentItem?.code ?? currentItem?.source ?? "");
+        const currentStdin = String(
+            currentItem?.codeStdin ?? currentItem?.stdin ?? "",
+        );
+        const currentWorkspace = getWorkspaceFromAnyState(currentItem);
         const currentWorkspaceKey = workspaceContentKeyForExerciseRenderer(
-            currentWorkspace?.version === 2 ? currentWorkspace : null,
+            currentWorkspace,
         );
         const nextWorkspaceKey = workspaceContentKeyForExerciseRenderer(workspace);
 
@@ -1845,28 +1900,23 @@ export default function ExerciseRenderer({
             currentStdin !== workspaceStdin ||
             currentWorkspaceKey !== nextWorkspaceKey;
 
-        const runtimeSyncKey = JSON.stringify({
-            exerciseKey,
-            workspaceKey: nextWorkspaceKey,
-            code: workspaceCode,
-            stdin: workspaceStdin,
-            userEdited: store?.userEdited === true,
-            workspaceOrigin: store?.workspaceOrigin ?? "saved",
-            starterHash: store?.starterHash ?? null,
-            updatedAt: store?.updatedAt ?? null,
-        });
-
         if (!needsSync) {
-            if (lastRuntimeWorkspaceSyncKeyRef.current === runtimeSyncKey) {
-                lastRuntimeWorkspaceSyncKeyRef.current = null;
-            }
+            lastRuntimeWorkspaceSyncKeyRef.current = null;
             return;
         }
 
+        /**
+         * This bridge used to depend on the full `current` object and the
+         * parent-supplied `updateCurrent` callback. Both can receive a new
+         * identity on every practice-bank render, causing the effect to submit
+         * the same passive runtime snapshot forever. Track only semantic
+         * runtime/current signatures and read the latest callback through a ref.
+         */
+        const runtimeSyncKey = `${exerciseKey}:${storeRuntimeSnapshotKey}`;
         if (lastRuntimeWorkspaceSyncKeyRef.current === runtimeSyncKey) return;
         lastRuntimeWorkspaceSyncKeyRef.current = runtimeSyncKey;
 
-        updateCurrent({
+        updateCurrentRef.current({
             workspace,
             codeWorkspace: workspace,
             ideWorkspace: workspace,
@@ -1874,12 +1924,19 @@ export default function ExerciseRenderer({
             source: workspaceCode,
             stdin: workspaceStdin,
             codeStdin: workspaceStdin,
-            userEdited: store?.userEdited === true || store?.workspaceOrigin === "user" || store?.workspaceOrigin === "saved",
+            userEdited:
+                store?.userEdited === true ||
+                store?.workspaceOrigin === "user" ||
+                store?.workspaceOrigin === "saved",
             workspaceOrigin: store?.workspaceOrigin ?? "saved",
             starterHash: store?.starterHash,
             updatedAt: store?.updatedAt,
         } as any);
-    }, [ex.kind, exerciseKey, current, updateCurrent]);
+    }, [
+        exerciseKey,
+        currentRuntimeSnapshotKey,
+        storeRuntimeSnapshotKey,
+    ]);
 
     if (ex.kind === "numeric") {
         return (

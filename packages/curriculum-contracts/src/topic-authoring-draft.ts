@@ -15,6 +15,7 @@ import {
     normalizeWorkspacePath,
 } from "./workspace-path.js";
 import {countFillBlanks} from "./fillBlank/fillBlankText.js";
+import type { ToolPresentationPolicy } from "./tool-presentation.js";
 export type ExerciseHelpDraft = {
     concept: string;
     hint_1: string;
@@ -32,6 +33,8 @@ export type ProgrammingCodeInputFileDraft = ManifestFileFixture;
 
 type DraftCommon = {
     id: string;
+    /** Optional exercise-level Tools presentation override. */
+    tools?: ToolPresentationPolicy;
     title: string;
     prompt: string;
     hint: string;
@@ -68,8 +71,13 @@ export type TopicAuthoringDraft = {
 
     sketchBlocks: Array<{
         id: string;
+        /** Navigation/lesson title shown above the card. */
+        cardTitle?: string;
+        /** Inner heading that introduces the body prose. */
         title: string;
         bodyMarkdown: string;
+        /** Optional lesson/card-level Tools presentation override. */
+        tools?: ToolPresentationPolicy;
     }>;
 
     /**
@@ -121,6 +129,8 @@ export type TopicAuthoringDraft = {
         terminalExpectations?: TerminalExpectations;
         hiddenShellCheck?: HiddenShellCheck;
         solutionFiles?: ProgrammingCodeInputStarterFileDraft[];
+        /** Ordered SQL workspace execution paths, for example schema.sql, seed.sql, query.sql. */
+        sqlFileOrder?: string[];
         sourceChecks?: ProgrammingCodeInputSourceCheckDraft[];
 
         solutionCode: string;
@@ -177,6 +187,32 @@ const helpSchema = {
     },
 } satisfies JsonSchema;
 
+const toolPresentationSchema = {
+    type: "object",
+    additionalProperties: false,
+    properties: {
+        defaultVisible: { type: "boolean" },
+        allowOpen: { type: "boolean" },
+        defaultSurface: { type: "string", enum: ["editor", "results"] },
+        compactDefaultSurface: { type: "string", enum: ["editor", "results"] },
+        sqlPane: {
+            type: "object",
+            additionalProperties: false,
+            properties: {
+                showResults: { type: "boolean" },
+                showTables: { type: "boolean" },
+                showErd: { type: "boolean" },
+                showCrowFoot: { type: "boolean" },
+                showCrowfoot: { type: "boolean" },
+                showCrowsFoot: { type: "boolean" },
+                showChen: { type: "boolean" },
+                defaultTab: { type: "string", enum: ["results", "tables", "erd", "chen"] },
+                compactDefaultTab: { type: "string", enum: ["results", "tables", "erd", "chen"] },
+            },
+        },
+    },
+} satisfies JsonSchema;
+
 const draftCommonSchema = {
     id: { type: "string" },
     kind: { type: "string", enum: EXERCISE_KIND_ENUM },
@@ -184,10 +220,11 @@ const draftCommonSchema = {
     prompt: { type: "string" },
     hint: { type: "string" },
     help: helpSchema,
+    tools: toolPresentationSchema,
 } satisfies JsonSchema;
 
 export const TOPIC_AUTHORING_DRAFT_SCHEMA_VERSION =
-    "2026-05-23-topic-authoring-draft-v1";
+    "2026-07-16-topic-authoring-draft-v2";
 
 export const TOPIC_AUTHORING_DRAFT_JSON_SCHEMA = {
     type: "object",
@@ -205,8 +242,10 @@ export const TOPIC_AUTHORING_DRAFT_JSON_SCHEMA = {
                 required: ["id", "title", "bodyMarkdown"],
                 properties: {
                     id: { type: "string" },
+                    cardTitle: { type: "string" },
                     title: { type: "string" },
                     bodyMarkdown: { type: "string" },
+                    tools: toolPresentationSchema,
                 },
             },
         },
@@ -405,6 +444,10 @@ export const TOPIC_AUTHORING_DRAFT_JSON_SCHEMA = {
                                         readOnly: { type: "boolean" },
                                     },
                                 },
+                            },
+                            sqlFileOrder: {
+                                type: "array",
+                                items: { type: "string" },
                             },
                             sourceChecks: {
                                 type: "array",
@@ -782,10 +825,17 @@ export function assertTopicAuthoringDraft(
             fail(`sketchBlocks[${i}] must be an object`);
         }
 
-        assertOnlyKeys(block, ["id", "title", "bodyMarkdown"], `sketchBlocks[${i}]`);
+        assertOnlyKeys(
+            block,
+            ["id", "cardTitle", "title", "bodyMarkdown", "tools"],
+            `sketchBlocks[${i}]`,
+        );
 
         if (!isNonEmptyString(block.id)) {
             fail(`sketchBlocks[${i}] needs id`);
+        }
+        if (block.cardTitle !== undefined && !isNonEmptyString(block.cardTitle)) {
+            fail(`sketchBlocks[${i}].cardTitle must be a non-empty string when provided`);
         }
         if (!isNonEmptyString(block.title)) {
             fail(`sketchBlocks[${i}] needs title`);
@@ -953,6 +1003,7 @@ export function assertTopicAuthoringDraft(
                         "entryFilePath",
                         "starterFiles",
                         "solutionFiles",
+                        "sqlFileOrder",
                         "sourceChecks",
                         "workspaceExpectations",
                         "terminalExpectations",
@@ -1132,6 +1183,62 @@ export function assertTopicAuthoringDraft(
                         fail(`${label} solutionFiles[${fileIndex}].entry must be a boolean when provided`);
                     }
                 });
+            }
+
+            if (typeof exercise.sqlFileOrder !== "undefined") {
+                if (
+                    !Array.isArray(exercise.sqlFileOrder) ||
+                    exercise.sqlFileOrder.length < 1 ||
+                    exercise.sqlFileOrder.some((path) => !isNonEmptyString(path))
+                ) {
+                    fail(`${label} code_input sqlFileOrder must be a non-empty array of workspace-relative paths when provided`);
+                }
+
+                exercise.sqlFileOrder.forEach((path, pathIndex) => {
+                    assertWorkspacePath(path, `${label}.sqlFileOrder[${pathIndex}]`);
+                });
+
+                if (new Set(exercise.sqlFileOrder.map((path) => path.trim())).size !== exercise.sqlFileOrder.length) {
+                    fail(`${label} code_input sqlFileOrder must not contain duplicate paths`);
+                }
+
+                if (exercise.recipeType !== "sql_query") {
+                    fail(`${label} code_input sqlFileOrder is only supported for sql_query exercises`);
+                }
+
+                const orderedPaths = exercise.sqlFileOrder.map((path) => path.trim());
+                const solutionPaths = Array.isArray(exercise.solutionFiles)
+                    ? exercise.solutionFiles.map((file) => file.path.trim())
+                    : [];
+                if (
+                    solutionPaths.length > 0 &&
+                    (orderedPaths.length !== solutionPaths.length ||
+                        solutionPaths.some((path) => !orderedPaths.includes(path)))
+                ) {
+                    fail(`${label} code_input sqlFileOrder must list every solutionFiles path exactly once`);
+                }
+
+                if (
+                    typeof exercise.entryFilePath === "string" &&
+                    !orderedPaths.includes(exercise.entryFilePath.trim())
+                ) {
+                    fail(`${label} code_input sqlFileOrder must include entryFilePath`);
+                }
+            }
+
+            if (
+                exercise.recipeType === "sql_query" &&
+                Array.isArray(exercise.starterFiles) &&
+                Array.isArray(exercise.solutionFiles)
+            ) {
+                const starterPaths = exercise.starterFiles.map((file) => file.path.trim());
+                const solutionPaths = exercise.solutionFiles.map((file) => file.path.trim());
+                if (
+                    starterPaths.length !== solutionPaths.length ||
+                    starterPaths.some((path) => !solutionPaths.includes(path))
+                ) {
+                    fail(`${label} SQL starterFiles and solutionFiles must describe the same workspace paths`);
+                }
             }
 
             if (typeof exercise.sourceChecks !== "undefined") {

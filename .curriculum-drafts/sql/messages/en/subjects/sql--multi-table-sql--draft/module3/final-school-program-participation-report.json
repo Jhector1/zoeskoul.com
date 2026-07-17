@@ -1,0 +1,128 @@
+{
+  "topics": {
+    "sql--multi-table-sql--draft": {
+      "multi-table-sql-module-3-final-capstone": {
+        "final-school-program-participation-report": {
+          "label": "Final Capstone: Student Program Participation Audit",
+          "summary": "Build a one-row-per-student audit that preserves students with no enrollments and measures the breadth of each student's participation.",
+          "cards": {
+            "sketch0": {
+              "title": "Audit Participation from the Student's Point of View"
+            },
+            "project": {
+              "title": "Final Capstone: Student Program Participation Audit"
+            }
+          },
+          "projectSteps": {
+            "step1_establish_grain": {
+              "title": "Step 1: Preserve the All-Student Grain"
+            },
+            "step2_add_counts": {
+              "title": "Step 2: Add Enrollment and Course Counts"
+            },
+            "step3_add_distinct_students": {
+              "title": "Step 3: Measure Department Breadth"
+            },
+            "step4_label_rank": {
+              "title": "Step 4: Label and Rank Participation"
+            }
+          },
+          "finalCapstone": {
+            "steps": {
+              "step1_establish_grain": {
+                "title": "Step 1: Preserve the All-Student Grain",
+                "prompt": "Begin the Final School Program Participation Report. Return `s.name AS student_name, s.grade_level` from `students` in that column order. Use a LEFT JOIN to connect `enrollments` on `s.id = e.student_id`. Use a LEFT JOIN to connect `courses` on `e.course_id = c.id`. Use a LEFT JOIN to connect `departments` on `c.department_id = d.id`. Produce one result row per `s.id, s.name, s.grade_level`.",
+                "hint": "Run the previous working query, preserve its grain, and add only the metric or label requested in this step.",
+                "help": {
+                  "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                  "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                  "hint_2": "Use a LEFT JOIN to connect `departments` on `c.department_id = d.id`. Produce one result row per `s.id, s.name, s.grade_level`."
+                },
+                "starterCode": "-- Build one row per student and preserve students with no enrollments\n",
+                "solutionCode": "SELECT s.name AS student_name,\n       s.grade_level\nFROM students AS s\nLEFT JOIN enrollments AS e\n  ON s.id = e.student_id\nLEFT JOIN courses AS c\n  ON e.course_id = c.id\nLEFT JOIN departments AS d\n  ON c.department_id = d.id\nGROUP BY s.id, s.name, s.grade_level;\n"
+              },
+              "step2_add_counts": {
+                "title": "Step 2: Add Enrollment and Course Counts",
+                "prompt": "Extend the Final School Program Participation Report with the next approved requirement. Calculate and return `s.name AS student_name, s.grade_level, COUNT(e.id) AS enrollment_count, COUNT(DISTINCT c.id) AS course_count` from `students`. Use a LEFT JOIN to connect `enrollments` on `s.id = e.student_id`. Use a LEFT JOIN to connect `courses` on `e.course_id = c.id`. Use a LEFT JOIN to connect `departments` on `c.department_id = d.id`. Produce one result row per `s.id, s.name, s.grade_level`.",
+                "hint": "Run the previous working query, preserve its grain, and add only the metric or label requested in this step.",
+                "help": {
+                  "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                  "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                  "hint_2": "Use a LEFT JOIN to connect `departments` on `c.department_id = d.id`. Produce one result row per `s.id, s.name, s.grade_level`."
+                },
+                "starterCode": "SELECT s.name AS student_name,\n       s.grade_level\nFROM students AS s\nLEFT JOIN enrollments AS e\n  ON s.id = e.student_id\nLEFT JOIN courses AS c\n  ON e.course_id = c.id\nLEFT JOIN departments AS d\n  ON c.department_id = d.id\nGROUP BY s.id, s.name, s.grade_level;\n\n-- Step 2: Add Enrollment and Course Counts\n-- Add `enrollment_count` and distinct `course_count` while preserving one row per student.\n",
+                "solutionCode": "SELECT s.name AS student_name,\n       s.grade_level,\n       COUNT(e.id) AS enrollment_count,\n       COUNT(DISTINCT c.id) AS course_count\nFROM students AS s\nLEFT JOIN enrollments AS e\n  ON s.id = e.student_id\nLEFT JOIN courses AS c\n  ON e.course_id = c.id\nLEFT JOIN departments AS d\n  ON c.department_id = d.id\nGROUP BY s.id, s.name, s.grade_level;\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "SELECT s.name AS student_name,\n       s.grade_level\nFROM students AS s\nLEFT JOIN enrollments AS e\n  ON s.id = e.student_id\nLEFT JOIN courses AS c\n  ON e.course_id = c.id\nLEFT JOIN departments AS d\n  ON c.department_id = d.id\nGROUP BY s.id, s.name, s.grade_level;\n\n-- Step 2: Add Enrollment and Course Counts\n-- Add `enrollment_count` and distinct `course_count` while preserving one row per student.\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_py": {
+                    "content": "SELECT s.name AS student_name,\n       s.grade_level,\n       COUNT(e.id) AS enrollment_count,\n       COUNT(DISTINCT c.id) AS course_count\nFROM students AS s\nLEFT JOIN enrollments AS e\n  ON s.id = e.student_id\nLEFT JOIN courses AS c\n  ON e.course_id = c.id\nLEFT JOIN departments AS d\n  ON c.department_id = d.id\nGROUP BY s.id, s.name, s.grade_level;\n"
+                  }
+                }
+              },
+              "step3_add_distinct_students": {
+                "title": "Step 3: Measure Department Breadth",
+                "prompt": "Extend the Final School Program Participation Report with the next approved requirement. Calculate and return `s.name AS student_name, s.grade_level, COUNT(e.id) AS enrollment_count, COUNT(DISTINCT c.id) AS course_count, COUNT(DISTINCT d.id) AS department_count` from `students`. Use a LEFT JOIN to connect `enrollments` on `s.id = e.student_id`. Use a LEFT JOIN to connect `courses` on `e.course_id = c.id`. Use a LEFT JOIN to connect `departments` on `c.department_id = d.id`. Produce one result row per `s.id, s.name, s.grade_level`.",
+                "hint": "Run the previous working query, preserve its grain, and add only the metric or label requested in this step.",
+                "help": {
+                  "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                  "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                  "hint_2": "Use a LEFT JOIN to connect `departments` on `c.department_id = d.id`. Produce one result row per `s.id, s.name, s.grade_level`."
+                },
+                "starterCode": "SELECT s.name AS student_name,\n       s.grade_level,\n       COUNT(e.id) AS enrollment_count,\n       COUNT(DISTINCT c.id) AS course_count\nFROM students AS s\nLEFT JOIN enrollments AS e\n  ON s.id = e.student_id\nLEFT JOIN courses AS c\n  ON e.course_id = c.id\nLEFT JOIN departments AS d\n  ON c.department_id = d.id\nGROUP BY s.id, s.name, s.grade_level;\n\n-- Step 3: Measure Department Breadth\n-- Add distinct `department_count` to show how many departments each student participates in.\n",
+                "solutionCode": "SELECT s.name AS student_name,\n       s.grade_level,\n       COUNT(e.id) AS enrollment_count,\n       COUNT(DISTINCT c.id) AS course_count,\n       COUNT(DISTINCT d.id) AS department_count\nFROM students AS s\nLEFT JOIN enrollments AS e\n  ON s.id = e.student_id\nLEFT JOIN courses AS c\n  ON e.course_id = c.id\nLEFT JOIN departments AS d\n  ON c.department_id = d.id\nGROUP BY s.id, s.name, s.grade_level;\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "SELECT s.name AS student_name,\n       s.grade_level,\n       COUNT(e.id) AS enrollment_count,\n       COUNT(DISTINCT c.id) AS course_count\nFROM students AS s\nLEFT JOIN enrollments AS e\n  ON s.id = e.student_id\nLEFT JOIN courses AS c\n  ON e.course_id = c.id\nLEFT JOIN departments AS d\n  ON c.department_id = d.id\nGROUP BY s.id, s.name, s.grade_level;\n\n-- Step 3: Measure Department Breadth\n-- Add distinct `department_count` to show how many departments each student participates in.\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_py": {
+                    "content": "SELECT s.name AS student_name,\n       s.grade_level,\n       COUNT(e.id) AS enrollment_count,\n       COUNT(DISTINCT c.id) AS course_count,\n       COUNT(DISTINCT d.id) AS department_count\nFROM students AS s\nLEFT JOIN enrollments AS e\n  ON s.id = e.student_id\nLEFT JOIN courses AS c\n  ON e.course_id = c.id\nLEFT JOIN departments AS d\n  ON c.department_id = d.id\nGROUP BY s.id, s.name, s.grade_level;\n"
+                  }
+                }
+              },
+              "step4_label_rank": {
+                "title": "Step 4: Label and Rank Participation",
+                "prompt": "Complete the Final School Program Participation Report. Calculate and return `s.name AS student_name, s.grade_level, COUNT(e.id) AS enrollment_count, COUNT(DISTINCT c.id) AS course_count, COUNT(DISTINCT d.id) AS department_count, CASE WHEN COUNT(e.id) = 0 THEN 'Not enrolled' WHEN COUNT(DISTINCT d.id) >= 2 THEN 'Cross-disciplinary' ELSE 'Focused' END AS participation_status` from `students`. Use a LEFT JOIN to connect `enrollments` on `s.id = e.student_id`. Use a LEFT JOIN to connect `courses` on `e.course_id = c.id`. Use a LEFT JOIN to connect `departments` on `c.department_id = d.id`. Produce one result row per `s.id, s.name, s.grade_level`. Sort the final result by `department_count DESC, enrollment_count DESC, student_name ASC`.",
+                "hint": "Run the previous working query, preserve its grain, and add only the metric or label requested in this step.",
+                "help": {
+                  "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                  "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                  "hint_2": "Produce one result row per `s.id, s.name, s.grade_level`. Sort the final result by `department_count DESC, enrollment_count DESC, student_name ASC`."
+                },
+                "starterCode": "SELECT s.name AS student_name,\n       s.grade_level,\n       COUNT(e.id) AS enrollment_count,\n       COUNT(DISTINCT c.id) AS course_count,\n       COUNT(DISTINCT d.id) AS department_count\nFROM students AS s\nLEFT JOIN enrollments AS e\n  ON s.id = e.student_id\nLEFT JOIN courses AS c\n  ON e.course_id = c.id\nLEFT JOIN departments AS d\n  ON c.department_id = d.id\nGROUP BY s.id, s.name, s.grade_level;\n\n-- Step 4: Label and Rank Participation\n-- Add `participation_status`: `Not enrolled` for zero enrollments, `Cross-disciplinary` for two or more departments, otherwise `Focused`. Sort by department breadth, enrollment count, and student name.\n",
+                "solutionCode": "SELECT s.name AS student_name,\n       s.grade_level,\n       COUNT(e.id) AS enrollment_count,\n       COUNT(DISTINCT c.id) AS course_count,\n       COUNT(DISTINCT d.id) AS department_count,\n       CASE\n         WHEN COUNT(e.id) = 0 THEN 'Not enrolled'\n         WHEN COUNT(DISTINCT d.id) >= 2 THEN 'Cross-disciplinary'\n         ELSE 'Focused'\n       END AS participation_status\nFROM students AS s\nLEFT JOIN enrollments AS e\n  ON s.id = e.student_id\nLEFT JOIN courses AS c\n  ON e.course_id = c.id\nLEFT JOIN departments AS d\n  ON c.department_id = d.id\nGROUP BY s.id, s.name, s.grade_level\nORDER BY department_count DESC,\n         enrollment_count DESC,\n         student_name ASC;\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "SELECT s.name AS student_name,\n       s.grade_level,\n       COUNT(e.id) AS enrollment_count,\n       COUNT(DISTINCT c.id) AS course_count,\n       COUNT(DISTINCT d.id) AS department_count\nFROM students AS s\nLEFT JOIN enrollments AS e\n  ON s.id = e.student_id\nLEFT JOIN courses AS c\n  ON e.course_id = c.id\nLEFT JOIN departments AS d\n  ON c.department_id = d.id\nGROUP BY s.id, s.name, s.grade_level;\n\n-- Step 4: Label and Rank Participation\n-- Add `participation_status`: `Not enrolled` for zero enrollments, `Cross-disciplinary` for two or more departments, otherwise `Focused`. Sort by department breadth, enrollment count, and student name.\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_py": {
+                    "content": "SELECT s.name AS student_name,\n       s.grade_level,\n       COUNT(e.id) AS enrollment_count,\n       COUNT(DISTINCT c.id) AS course_count,\n       COUNT(DISTINCT d.id) AS department_count,\n       CASE\n         WHEN COUNT(e.id) = 0 THEN 'Not enrolled'\n         WHEN COUNT(DISTINCT d.id) >= 2 THEN 'Cross-disciplinary'\n         ELSE 'Focused'\n       END AS participation_status\nFROM students AS s\nLEFT JOIN enrollments AS e\n  ON s.id = e.student_id\nLEFT JOIN courses AS c\n  ON e.course_id = c.id\nLEFT JOIN departments AS d\n  ON c.department_id = d.id\nGROUP BY s.id, s.name, s.grade_level\nORDER BY department_count DESC,\n         enrollment_count DESC,\n         student_name ASC;\n"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql--multi-table-sql--draft": {
+      "multi-table-sql-module-3-final-capstone": {
+        "final-school-program-participation-report": {
+          "sketch-intro": {
+            "title": "Capstone brief: student program participation audit",
+            "bodyMarkdown": "The department scorecard viewed participation from the institution's side. This capstone turns the report around. The counseling team needs **one row per student**, including a student who has never enrolled in a course.\n\nFollow the full relationship path `students → enrollments → courses → departments`, but preserve the student grain throughout. The final audit must show `student_name`, `grade_level`, `enrollment_count`, `course_count`, `department_count`, and a readable `participation_status`.\n\nThe three counts describe different questions. Enrollment count measures registration rows. Course count measures distinct courses. Department count measures the breadth of a student's participation and must not rise merely because the student takes two courses in the same department. Liam is the acceptance test for the outer joins: he must remain in the report with zero for all three counts and the status `Not enrolled`.\n\nBuild the audit in four cumulative steps. Establish the preserved student grain, add the counts, measure department breadth, then label and rank the result predictably. The final query should make its reasoning legible enough that a counselor can trust both the visible rows and the students who would otherwise be easy to omit."
+          }
+        }
+      }
+    }
+  }
+}

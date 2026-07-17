@@ -160,4 +160,33 @@ describe("canonical SQL dataset registry", () => {
             ).toBeGreaterThan(0);
         }
     });
+
+    it("keeps legacy KPI and reporting schemas isolated behind different dataset IDs", () => {
+        const legacy = getSqlDatasetById("sales_kpi");
+        const reporting = getSqlDatasetById("sales_reporting");
+
+        expect(Object.keys(legacy?.tableSnapshots ?? {})).toEqual(["orders"]);
+        expect(Object.keys(reporting?.tableSnapshots ?? {})).toEqual([
+            "sales_reporting",
+        ]);
+        expect(reporting?.tableSnapshots.sales_reporting?.rowCount).toBe(24);
+        expect(
+            reporting?.tableSnapshots.sales_reporting?.columns.map(
+                (column) => column.name,
+            ),
+        ).toEqual([
+            "order_id",
+            "order_date",
+            "region",
+            "category",
+            "product_name",
+            "sales_rep",
+            "quantity",
+            "unit_price",
+            "discount_pct",
+            "order_status",
+            "customer_rating",
+        ]);
+    });
+
 });

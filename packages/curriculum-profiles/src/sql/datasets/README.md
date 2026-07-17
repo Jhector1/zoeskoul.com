@@ -1,7 +1,12 @@
-students_intro → modules 0–3
-products_catalog → modules 1, 3, 5, 10
-customers_cleanup → module 4
-sales_kpi → modules 5–7
-school_relations_intro → modules 8, 10, 14, 15
-inventory_ops → modules 11–12
-ddl_blank → modules 13–14
+students_intro → SQL V2 module 0
+products_catalog → SQL V2 modules 1–3 and compatible fallback lessons
+customers_cleanup → SQL V2 module 4
+sales_kpi.orders → SQL V2 module 5 legacy KPI lessons
+sales_reporting.sales_reporting → SQL Analysis & Reporting modules 0–5
+school_relations_intro → Multi-Table SQL & Joins modules 0–3
+inventory_ops → SQL V2 data-management modules
+ddl_blank → DDL modules
+design_sandbox → schema-design practice
+capstone_sandbox → database-design capstone practice
+
+Dataset IDs are persistence and cache boundaries. Do not add unrelated tables to an existing dataset ID; create a dedicated dataset artifact instead.

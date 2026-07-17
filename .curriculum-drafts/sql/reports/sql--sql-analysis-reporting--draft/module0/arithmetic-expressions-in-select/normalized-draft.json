@@ -1,0 +1,199 @@
+{
+  "title": "Arithmetic Expressions in SELECT",
+  "summary": "Calculate gross sales and other row-level metrics from numeric columns.",
+  "minutes": 24,
+  "sketchBlocks": [
+    {
+      "id": "sketch0",
+      "title": "Understanding Arithmetic Expressions",
+      "bodyMarkdown": "Arithmetic expressions in SQL allow you to perform calculations on data retrieved from a database. For example, you can calculate the total sales amount by multiplying the quantity of items sold by the unit price. This is useful for generating reports that require calculated fields.\n\n```sql\nSELECT product_name, quantity, unit_price, quantity * unit_price AS total_sales\nFROM sales_reporting;\n```\n\nIn this example, the `total_sales` column is calculated by multiplying `quantity` by `unit_price`. The `AS` keyword is used to give the calculated column a meaningful alias."
+    },
+    {
+      "id": "sketch1",
+      "title": "Using ROUND in Calculations",
+      "bodyMarkdown": "The `ROUND` function in SQL is used to round numeric values to a specified number of decimal places. This is particularly useful in financial reports where you want to display currency values rounded to two decimal places.\n\n```sql\nSELECT product_name, quantity, unit_price, ROUND(quantity * unit_price, 2) AS total_sales\nFROM sales_reporting;\n```\n\nHere, the `ROUND` function is applied to the `total_sales` calculation to ensure the result is rounded to two decimal places, making it more readable in financial contexts."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "single-choice-1",
+      "kind": "single_choice",
+      "title": "Purpose of Arithmetic Expressions",
+      "prompt": "What is the primary purpose of using arithmetic expressions in SQL SELECT statements?",
+      "options": [
+        "To perform calculations on data",
+        "To filter data based on conditions",
+        "To join multiple tables",
+        "To sort data in a specific order"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Consider how arithmetic expressions modify the data retrieved.",
+      "help": {
+        "concept": "Arithmetic expressions are used to perform calculations on data within SQL queries.",
+        "hint_1": "Arithmetic expressions allow calculations on numeric data.",
+        "hint_2": "They help in deriving new values from existing data."
+      }
+    },
+    {
+      "id": "single-choice-2",
+      "kind": "single_choice",
+      "title": "Using Aliases",
+      "prompt": "Why would you use an alias in a SQL query?",
+      "options": [
+        "To rename columns for better readability",
+        "To filter data",
+        "To perform calculations",
+        "To join tables"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Think about how aliases affect the readability of query results.",
+      "help": {
+        "concept": "Aliases provide a way to rename columns or tables in the result set for better readability.",
+        "hint_1": "Aliases make column names more understandable.",
+        "hint_2": "They help in making the output more readable."
+      }
+    },
+    {
+      "id": "multi-choice-1",
+      "kind": "multi_choice",
+      "title": "Benefits of Using ROUND",
+      "prompt": "What are the benefits of using the ROUND function in SQL? Select all that apply.",
+      "options": [
+        "Improves readability of numeric data",
+        "Ensures consistent decimal places",
+        "Filters out unwanted data",
+        "Joins tables"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ],
+      "hint": "Consider how ROUND affects numeric data in reports.",
+      "help": {
+        "concept": "The ROUND function is used to round numeric values to a specified number of decimal places.",
+        "hint_1": "ROUND helps in formatting numeric data.",
+        "hint_2": "It is useful for financial data presentation."
+      }
+    },
+    {
+      "id": "multi-choice-2",
+      "kind": "multi_choice",
+      "title": "Components of Arithmetic Expressions",
+      "prompt": "Which components can be part of an arithmetic expression in SQL? Select all that apply.",
+      "options": [
+        "Numeric columns",
+        "Constants",
+        "Arithmetic operators",
+        "Table names"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "hint": "Think about the elements involved in calculations.",
+      "help": {
+        "concept": "Arithmetic expressions can include numeric columns, constants, and arithmetic operators.",
+        "hint_1": "Consider both columns and constants.",
+        "hint_2": "Operators like +, -, *, and / are used."
+      }
+    },
+    {
+      "id": "drag-reorder-1",
+      "kind": "drag_reorder",
+      "title": "Order of Operations",
+      "prompt": "Arrange the following operations in the correct order of precedence in SQL arithmetic expressions.",
+      "tokens": [
+        "Parentheses",
+        "Multiplication/Division",
+        "Addition/Subtraction"
+      ],
+      "correctOrder": [
+        "Parentheses",
+        "Multiplication/Division",
+        "Addition/Subtraction"
+      ],
+      "hint": "Remember the standard mathematical order of operations.",
+      "help": {
+        "concept": "SQL follows the standard mathematical order of operations: parentheses, multiplication/division, addition/subtraction.",
+        "hint_1": "Multiplication and division come before addition and subtraction.",
+        "hint_2": "Parentheses can change the order of operations."
+      }
+    },
+    {
+      "id": "fill-blank-choice-1",
+      "kind": "fill_blank_choice",
+      "title": "Alias Syntax",
+      "prompt": "Complete the SQL syntax for creating an alias for a calculated column.",
+      "template": "SELECT quantity * unit_price [blank1] total_sales FROM sales_reporting;",
+      "choices": [
+        "AS",
+        "IS",
+        "LIKE",
+        "WITH"
+      ],
+      "correctValue": "AS",
+      "hint": "The alias is created using the the missing term keyword.",
+      "help": {
+        "concept": "The the missing term keyword is used to create an alias for a column in SQL.",
+        "hint_1": "The alias follows the the missing term keyword.",
+        "hint_2": "It renames the column in the result set."
+      }
+    },
+    {
+      "id": "try-arithmetic-expressions-in-select-sketch0",
+      "kind": "code_input",
+      "title": "Calculate Total Sales",
+      "prompt": "Write a SQL query to calculate the total sales for each product by multiplying the quantity by the unit price. Alias the result as 'total_sales'.",
+      "starterCode": "SELECT product_name, quantity, unit_price, \n-- Calculate total sales\nFROM sales_reporting;",
+      "solutionCode": "SELECT product_name, quantity, unit_price, quantity * unit_price AS total_sales\nFROM sales_reporting;",
+      "tests": [
+        {
+          "stdout": "product_name | quantity | unit_price | total_sales\nWatercolor Set | 3 | 28.0 | 84.0\nCanvas Pack | 5 | 12.0 | 60.0\nNotebook Bundle | 8 | 9.5 | 76.0\nDesk Planner | 4 | 18.0 | 72.0\nWireless Mouse | 2 | 34.0 | 68.0\nUSB-C Hub | 3 | 45.0 | 135.0\nStorage Basket | 6 | 16.0 | 96.0\nTable Lamp | 2 | 52.0 | 104.0\nMarker Set | 4 | 21.0 | 84.0\nSketchbook | 7 | 11.0 | 77.0\nLaptop Stand | 2 | 48.0 | 96.0\nWebcam | 3 | 62.0 | 186.0\nPen Pack | 10 | 6.0 | 60.0\nFolder Set | 5 | 8.0 | 40.0\nWall Clock | 2 | 36.0 | 72.0\nThrow Pillow | 4 | 24.0 | 96.0\nKeyboard | 3 | 40.0 | 120.0\nPortable Charger | 4 | 30.0 | 120.0\nAcrylic Paint Set | 3 | 32.0 | 96.0\nBrush Set | 6 | 14.0 | 84.0\nKitchen Organizer | 3 | 27.0 | 81.0\nBath Towel Set | 5 | 22.0 | 110.0\nLabel Pack | 9 | 7.0 | 63.0\nWeekly Planner | 4 | 19.0 | 76.0\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query",
+      "hint": "Use arithmetic expressions to calculate total sales and alias it using AS.",
+      "help": {
+        "concept": "Use arithmetic expressions to perform calculations on columns and alias the result for clarity.",
+        "hint_1": "Multiply quantity by unit price to get total sales.",
+        "hint_2": "Use AS to alias the calculated column."
+      }
+    },
+    {
+      "id": "try-arithmetic-expressions-in-select-sketch1",
+      "kind": "code_input",
+      "title": "Round Total Sales",
+      "prompt": "Modify the previous query to round the total sales to two decimal places.",
+      "starterCode": "SELECT product_name, quantity, unit_price, \n-- Calculate and round total sales\nFROM sales_reporting;",
+      "solutionCode": "SELECT product_name, quantity, unit_price, ROUND(quantity * unit_price, 2) AS total_sales\nFROM sales_reporting;",
+      "tests": [
+        {
+          "stdout": "product_name | quantity | unit_price | total_sales\nWatercolor Set | 3 | 28.0 | 84.00\nCanvas Pack | 5 | 12.0 | 60.00\nNotebook Bundle | 8 | 9.5 | 76.00\nDesk Planner | 4 | 18.0 | 72.00\nWireless Mouse | 2 | 34.0 | 68.00\nUSB-C Hub | 3 | 45.0 | 135.00\nStorage Basket | 6 | 16.0 | 96.00\nTable Lamp | 2 | 52.0 | 104.00\nMarker Set | 4 | 21.0 | 84.00\nSketchbook | 7 | 11.0 | 77.00\nLaptop Stand | 2 | 48.0 | 96.00\nWebcam | 3 | 62.0 | 186.00\nPen Pack | 10 | 6.0 | 60.00\nFolder Set | 5 | 8.0 | 40.00\nWall Clock | 2 | 36.0 | 72.00\nThrow Pillow | 4 | 24.0 | 96.00\nKeyboard | 3 | 40.0 | 120.00\nPortable Charger | 4 | 30.0 | 120.00\nAcrylic Paint Set | 3 | 32.0 | 96.00\nBrush Set | 6 | 14.0 | 84.00\nKitchen Organizer | 3 | 27.0 | 81.00\nBath Towel Set | 5 | 22.0 | 110.00\nLabel Pack | 9 | 7.0 | 63.00\nWeekly Planner | 4 | 19.0 | 76.00\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query",
+      "hint": "Use the ROUND function to round the calculated total sales.",
+      "help": {
+        "concept": "The ROUND function is used to round numeric values to a specified number of decimal places.",
+        "hint_1": "Apply ROUND to the total sales calculation.",
+        "hint_2": "Specify 2 as the number of decimal places."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Order Value Detail Report",
+    "stepIds": [
+      "try-arithmetic-expressions-in-select-sketch0",
+      "try-arithmetic-expressions-in-select-sketch1"
+    ]
+  }
+}

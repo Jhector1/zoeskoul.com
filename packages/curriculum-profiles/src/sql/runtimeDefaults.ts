@@ -11,13 +11,17 @@ export function resolveSqlRuntimeDefaults(args: {
     module?: PlannedModule;
     runtimePolicy?: PlannedModule["runtimePolicy"];
     blueprintRuntimePolicy?: BlueprintRuntimePolicy;
+    courseSlug?: string;
 }): ManifestRuntimeDefaults {
     const resolvedOrder =
         typeof args.module?.order === "number"
             ? Math.max(0, args.module.order - 1)
             : Math.max(0, (args.moduleOrder ?? 1) - 1);
 
-    const policy = getSqlModuleDatasetPolicy(resolvedOrder);
+    const policy = getSqlModuleDatasetPolicy({
+        courseSlug: args.courseSlug,
+        moduleOrder: resolvedOrder,
+    });
     const runtime = args.runtimePolicy ?? args.module?.runtimePolicy;
     const blueprintRuntime = args.blueprintRuntimePolicy;
 

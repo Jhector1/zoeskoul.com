@@ -1,0 +1,221 @@
+{
+  "title": "Updating Multiple Columns and Rows",
+  "summary": "Learn how to update multiple columns and rows in a SQL table using controlled conditions to ensure data integrity.",
+  "minutes": 30,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Updating Multiple Columns Simultaneously",
+      "bodyMarkdown": "When working with databases, there are times when you need to update multiple columns in a single operation. This is particularly useful when you want to ensure that related data changes occur together, maintaining data integrity.\n\nTo update multiple columns, you use the `SET` clause in the `UPDATE` statement. You can specify multiple column-value pairs, separated by commas. Here's an example:\n\n```sql\nUPDATE inventory_items\nSET price = 5.99, status = 'active'\nWHERE id = 2;\n```\n\nIn this example, the `price` and `status` columns for the item with `id` 2 are updated. This ensures that both changes happen simultaneously, reducing the risk of data inconsistency.\n\nIt's important to use a `WHERE` clause to target specific rows. Without it, you risk updating every row in the table, which can lead to unintended data changes."
+    },
+    {
+      "id": "sketch2",
+      "title": "Using Compound WHERE Conditions",
+      "bodyMarkdown": "To update a specific set of rows, you can use a compound `WHERE` condition. This allows you to define a precise subset of rows that should be updated, ensuring that only the intended data is modified.\n\nConsider the following example:\n\n```sql\nUPDATE inventory_items\nSET status = 'inactive'\nWHERE category = 'Decor' AND is_test = 1;\n```\n\nHere, only the rows in the `inventory_items` table where the `category` is 'Decor' and `is_test` is 1 will have their `status` updated to 'inactive'. This compound condition ensures that only test items in the 'Decor' category are affected, leaving other rows unchanged.\n\nUsing compound conditions in your `WHERE` clause helps maintain data integrity by precisely targeting the rows you intend to update."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "try-updating-controlled-row-sets-sketch0",
+      "kind": "code_input",
+      "title": "Try It: Update Multiple Columns",
+      "prompt": "Update the `price` and `status` of the item with `id` 3 to 50.00 and 'inactive', respectively. Ensure only this row is affected.",
+      "starterCode": "UPDATE inventory_items\nSET price = , status = \nWHERE id = ;",
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "UPDATE inventory_items\nSET price = , status = \nWHERE id = ;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "UPDATE inventory_items\nSET price = 50.00, status = 'inactive'\nWHERE id = 3;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionCode": "UPDATE inventory_items\nSET price = 50.00, status = 'inactive'\nWHERE id = 3;",
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query",
+      "checkSql": "SELECT price, status FROM inventory_items WHERE id = 3;",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "try-updating-controlled-row-sets-sketch1",
+      "kind": "code_input",
+      "title": "Try It: Controlled Row Set Update",
+      "prompt": "Set the `status` to 'archived' for all items in the 'Kitchen' category that are marked as test items. Verify only these rows are updated.",
+      "starterCode": "UPDATE inventory_items\nSET status = \nWHERE category = 'Kitchen' AND is_test = ;",
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "UPDATE inventory_items\nSET status = \nWHERE category = 'Kitchen' AND is_test = ;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "UPDATE inventory_items\nSET status = 'archived'\nWHERE category = 'Kitchen' AND is_test = 1;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionCode": "UPDATE inventory_items\nSET status = 'archived'\nWHERE category = 'Kitchen' AND is_test = 1;",
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query",
+      "checkSql": "SELECT id, status FROM inventory_items WHERE category = 'Kitchen' AND is_test = 1;",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "single-choice-1",
+      "kind": "single_choice",
+      "title": "Understanding Multiple Column Updates",
+      "prompt": "What is the purpose of using the `SET` clause in an `UPDATE` statement?",
+      "options": [
+        "To select specific rows to update",
+        "To specify the columns and their new values",
+        "To delete rows from a table",
+        "To create a new table"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Think about how the `SET` clause affects the columns in a table.",
+      "help": {
+        "concept": "The `SET` clause specifies which columns to update and their new values.",
+        "hint_1": "The `SET` clause is used to assign new values to columns.",
+        "hint_2": "It allows you to update one or more columns in a table."
+      }
+    },
+    {
+      "id": "single-choice-2",
+      "kind": "single_choice",
+      "title": "Purpose of WHERE Clause",
+      "prompt": "Why is it important to use a `WHERE` clause in an `UPDATE` statement?",
+      "options": [
+        "To update all rows in the table",
+        "To limit the update to specific rows",
+        "To delete rows from the table",
+        "To create a new table"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Consider what happens if you don't use a `WHERE` clause.",
+      "help": {
+        "concept": "The `WHERE` clause limits the rows affected by the `UPDATE`.",
+        "hint_1": "Without a `WHERE` clause, all rows in the table could be updated.",
+        "hint_2": "It ensures only specific rows are updated."
+      }
+    },
+    {
+      "id": "fill-blank-1",
+      "kind": "fill_blank_choice",
+      "title": "Fill in the Blank: SET Clause",
+      "prompt": "Complete the statement: The `SET` clause in an `UPDATE` statement is used to specify the columns and their new [blank1].",
+      "template": "The `SET` clause in an `UPDATE` statement is used to specify the columns and their new [blank1].",
+      "choices": [
+        "values",
+        "names",
+        "types",
+        "tables"
+      ],
+      "correctValue": "values",
+      "hint": "Think about what the `SET` clause assigns to columns.",
+      "help": {
+        "concept": "The `SET` clause assigns new the missing term to specified columns.",
+        "hint_1": "The `SET` clause specifies new the missing term for columns.",
+        "hint_2": "It assigns new the missing term to the columns."
+      }
+    },
+    {
+      "id": "fill-blank-2",
+      "kind": "fill_blank_choice",
+      "title": "Fill in the Blank: WHERE Clause",
+      "prompt": "Complete the statement: The `WHERE` clause in an `UPDATE` statement is crucial for limiting the update to specific [blank1].",
+      "template": "The `WHERE` clause in an `UPDATE` statement is crucial for limiting the update to specific [blank1].",
+      "choices": [
+        "rows",
+        "columns",
+        "tables",
+        "databases"
+      ],
+      "correctValue": "rows",
+      "hint": "Think about what the `WHERE` clause targets in a table.",
+      "help": {
+        "concept": "The `WHERE` clause targets specific the missing term for the update.",
+        "hint_1": "The `WHERE` clause limits the update to specific the missing term.",
+        "hint_2": "It ensures only certain the missing term are updated."
+      }
+    },
+    {
+      "id": "multi-choice-1",
+      "kind": "multi_choice",
+      "title": "Benefits of Compound WHERE Conditions",
+      "prompt": "What are the benefits of using compound `WHERE` conditions in an `UPDATE` statement? Select all that apply.",
+      "options": [
+        "They allow updating multiple columns at once",
+        "They help target specific rows based on multiple criteria",
+        "They ensure only intended rows are updated",
+        "They automatically create new tables"
+      ],
+      "correctOptionIds": [
+        "b",
+        "c"
+      ],
+      "hint": "Consider how compound conditions affect the update operation.",
+      "help": {
+        "concept": "Compound `WHERE` conditions allow precise targeting of rows.",
+        "hint_1": "They help in targeting specific rows based on multiple criteria.",
+        "hint_2": "They ensure only the intended rows are updated."
+      }
+    },
+    {
+      "id": "drag-reorder-1",
+      "kind": "drag_reorder",
+      "title": "Order of SQL Update Steps",
+      "prompt": "Arrange the steps for performing a controlled update in the correct order.",
+      "tokens": [
+        "Preview the intended rows with a SELECT",
+        "Execute the UPDATE statement",
+        "Verify the update results with a SELECT"
+      ],
+      "correctOrder": [
+        "Preview the intended rows with a SELECT",
+        "Execute the UPDATE statement",
+        "Verify the update results with a SELECT"
+      ],
+      "hint": "Think about the logical sequence of actions in an update operation.",
+      "help": {
+        "concept": "A controlled update involves previewing, updating, and verifying.",
+        "hint_1": "Start with previewing the intended rows.",
+        "hint_2": "End with verifying the update results."
+      }
+    }
+  ]
+}

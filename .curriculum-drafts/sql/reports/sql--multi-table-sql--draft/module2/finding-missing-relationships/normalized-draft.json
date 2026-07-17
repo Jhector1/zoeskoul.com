@@ -1,0 +1,186 @@
+{
+  "title": "Finding Missing Relationships",
+  "summary": "Use LEFT JOIN plus a right-side IS NULL check to locate missing related records.",
+  "minutes": 26,
+  "sketchBlocks": [
+    {
+      "id": "finding-missing-relationships-sketch0",
+      "title": "Understanding LEFT JOIN and IS NULL",
+      "bodyMarkdown": "In SQL, a LEFT JOIN is used to combine rows from two tables based on a related column between them. It returns all rows from the left table and the matched rows from the right table. If there is no match, the result is NULL on the side of the right table. This feature is particularly useful for identifying missing relationships.\n\nFor example, consider the `departments` and `courses` tables. To find departments with no courses, you can use a LEFT JOIN and check for NULL values in the `courses` table:\n\n```sql\nSELECT departments.name\nFROM departments\nLEFT JOIN courses ON departments.id = courses.department_id\nWHERE courses.id IS NULL;\n```\n\nThis query returns all department names that do not have any associated courses."
+    },
+    {
+      "id": "finding-missing-relationships-sketch1",
+      "title": "Using Anti-Join Patterns",
+      "bodyMarkdown": "An anti-join pattern is a technique used to find records in one table that do not have corresponding records in another table. This is achieved using a LEFT JOIN combined with a WHERE clause that checks for NULL values in the right table.\n\nFor instance, to find students who are not enrolled in any courses, you can use the following query:\n\n```sql\nSELECT students.name\nFROM students\nLEFT JOIN enrollments ON students.id = enrollments.student_id\nWHERE enrollments.id IS NULL;\n```\n\nThis query lists all students who do not have any entries in the `enrollments` table, effectively identifying students without course enrollments."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "try-finding-missing-relationships-sketch0",
+      "kind": "code_input",
+      "title": "Find Departments with No Courses",
+      "prompt": "Write a SQL query to find all departments that do not have any courses associated with them. Use a LEFT JOIN and check for NULL values in the courses table.",
+      "starterCode": "SELECT departments.name\nFROM departments\nLEFT JOIN courses ON departments.id = courses.department_id\nWHERE courses.id IS NULL;",
+      "solutionCode": "SELECT departments.name\nFROM departments\nLEFT JOIN courses ON departments.id = courses.department_id\nWHERE courses.id IS NULL;",
+      "datasetId": "school_relations_intro",
+      "recipeType": "sql_query",
+      "hint": "Use LEFT JOIN between departments and courses, and check for NULL in the courses table.",
+      "help": {
+        "concept": "LEFT JOIN returns all rows from the left table and matched rows from the right table. Use IS NULL to find unmatched rows.",
+        "hint_1": "LEFT JOIN departments with courses on department_id.",
+        "hint_2": "Check for NULL in the courses.id column."
+      }
+    },
+    {
+      "id": "try-finding-missing-relationships-sketch1",
+      "kind": "code_input",
+      "title": "Identify Students Without Enrollments",
+      "prompt": "Write a SQL query to list all students who are not enrolled in any courses. Use a LEFT JOIN and check for NULL values in the enrollments table.",
+      "starterCode": "SELECT students.name\nFROM students\nLEFT JOIN enrollments ON students.id = enrollments.student_id\nWHERE enrollments.id IS NULL;",
+      "solutionCode": "SELECT students.name\nFROM students\nLEFT JOIN enrollments ON students.id = enrollments.student_id\nWHERE enrollments.id IS NULL;",
+      "datasetId": "school_relations_intro",
+      "recipeType": "sql_query",
+      "hint": "Use LEFT JOIN between students and enrollments, and check for NULL in the enrollments table.",
+      "help": {
+        "concept": "LEFT JOIN can help identify rows in the left table without matches in the right table by checking for NULLs.",
+        "hint_1": "LEFT JOIN students with enrollments on student_id.",
+        "hint_2": "Check for NULL in the enrollments.id column."
+      }
+    },
+    {
+      "id": "multi-choice-1",
+      "kind": "multi_choice",
+      "title": "LEFT JOIN Characteristics",
+      "prompt": "Which of the following statements are true about LEFT JOIN?",
+      "options": [
+        "LEFT JOIN returns only matched rows from both tables.",
+        "LEFT JOIN returns all rows from the left table and matched rows from the right table.",
+        "LEFT JOIN fills unmatched right table rows with NULLs.",
+        "LEFT JOIN excludes unmatched rows from the left table."
+      ],
+      "correctOptionIds": [
+        "b",
+        "c"
+      ],
+      "hint": "Consider how LEFT JOIN handles unmatched rows.",
+      "help": {
+        "concept": "LEFT JOIN returns all rows from the left table and matched rows from the right table, filling unmatched rows with NULLs.",
+        "hint_1": "LEFT JOIN includes all rows from the left table.",
+        "hint_2": "Unmatched rows in the right table result in NULLs."
+      }
+    },
+    {
+      "id": "multi-choice-2",
+      "kind": "multi_choice",
+      "title": "Anti-Join Pattern",
+      "prompt": "What is the purpose of using an anti-join pattern in SQL?",
+      "options": [
+        "To find matching rows between two tables.",
+        "To find rows in one table without corresponding rows in another table.",
+        "To update rows in a table based on another table.",
+        "To delete rows from a table."
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Think about what an anti-join pattern helps you find.",
+      "help": {
+        "concept": "An anti-join pattern is used to find rows in one table that do not have corresponding rows in another table.",
+        "hint_1": "Anti-join helps identify missing relationships.",
+        "hint_2": "It finds rows in the left table without matches in the right table."
+      }
+    },
+    {
+      "id": "fill-blank-choice-1",
+      "kind": "fill_blank_choice",
+      "title": "LEFT JOIN Result",
+      "prompt": "In a LEFT JOIN, unmatched rows from the right table are filled with [blank1].",
+      "template": "In a LEFT JOIN, unmatched rows from the right table are filled with [blank1].",
+      "choices": [
+        "NULL",
+        "0",
+        "empty string",
+        "default value"
+      ],
+      "correctValue": "NULL",
+      "hint": "Consider what fills the unmatched rows in a LEFT JOIN.",
+      "help": {
+        "concept": "LEFT JOIN fills unmatched rows from the right table with NULLs.",
+        "hint_1": "Unmatched rows are filled with a special value.",
+        "hint_2": "The value is often used to indicate missing data."
+      }
+    },
+    {
+      "id": "fill-blank-choice-2",
+      "kind": "fill_blank_choice",
+      "title": "Anti-Join Check",
+      "prompt": "To perform an anti-join, you check for [blank1] in the right table's columns.",
+      "template": "To perform an anti-join, you check for [blank1] in the right table's columns.",
+      "choices": [
+        "NULL",
+        "duplicates",
+        "primary keys",
+        "foreign keys"
+      ],
+      "correctValue": "NULL",
+      "hint": "What do you check for in the right table to find missing relationships?",
+      "help": {
+        "concept": "An anti-join checks for NULLs in the right table's columns to find missing relationships.",
+        "hint_1": "The check involves a special value indicating absence.",
+        "hint_2": "This value is used to identify missing matches."
+      }
+    },
+    {
+      "id": "single-choice-1",
+      "kind": "single_choice",
+      "title": "LEFT JOIN Purpose",
+      "prompt": "What is the primary purpose of a LEFT JOIN in SQL?",
+      "options": [
+        "To combine only matching rows from two tables.",
+        "To include all rows from the left table and matched rows from the right table.",
+        "To exclude unmatched rows from both tables.",
+        "To update rows in the left table based on the right table."
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Consider what a LEFT JOIN allows you to do with unmatched rows.",
+      "help": {
+        "concept": "LEFT JOIN allows you to include all rows from the left table, even if there are no matches in the right table.",
+        "hint_1": "LEFT JOIN preserves all rows from the left table.",
+        "hint_2": "It helps identify missing relationships by including unmatched rows."
+      }
+    },
+    {
+      "id": "drag-reorder-1",
+      "kind": "drag_reorder",
+      "title": "LEFT JOIN Process",
+      "prompt": "Arrange the steps to perform a LEFT JOIN to find missing relationships.",
+      "tokens": [
+        "Perform LEFT JOIN",
+        "Specify ON condition",
+        "Check for NULL in right table",
+        "Select columns from left table"
+      ],
+      "correctOrder": [
+        "Perform LEFT JOIN",
+        "Specify ON condition",
+        "Select columns from left table",
+        "Check for NULL in right table"
+      ],
+      "hint": "Think about the sequence of operations in a LEFT JOIN.",
+      "help": {
+        "concept": "LEFT JOIN involves joining tables and checking for NULLs to find missing relationships.",
+        "hint_1": "Start with the LEFT JOIN operation.",
+        "hint_2": "End with checking for NULLs in the right table."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Department Participation Scorecard",
+    "stepIds": [
+      "try-finding-missing-relationships-sketch0",
+      "try-finding-missing-relationships-sketch1"
+    ]
+  }
+}

@@ -10,6 +10,7 @@ import NotesToolPane from "@/components/tools/panes/NotesToolPane";
 import type { LearningIdeConfig } from "@/lib/ide/learningIdeConfig";
 import type { WorkspaceStateV2 } from "@/components/ide/types";
 import type { SqlPaneOptions } from "@/components/code/runner/components/sql/results-pane";
+import type { ToolSurface } from "@zoeskoul/curriculum-contracts";
 
 export type CodeToolProps = {
     height: number;
@@ -42,6 +43,7 @@ export type CodeToolProps = {
     sqlDatasetId?: string;
     sqlResultShape?: "table";
     sqlPaneOptions?: SqlPaneOptions;
+    defaultSurface?: ToolSurface;
     sqlSchemaSql?: string;
     sqlSeedSql?: string;
     sqlSetupSql?: string;

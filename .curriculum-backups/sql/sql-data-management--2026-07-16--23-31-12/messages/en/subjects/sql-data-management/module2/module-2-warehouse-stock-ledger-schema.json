@@ -1,0 +1,224 @@
+{
+  "topics": {
+    "sql-data-management": {
+      "sql-data-management-module-2-table-creation-constraints": {
+        "module-2-warehouse-stock-ledger-schema": {
+          "label": "Module 2 Project: Warehouse Stock Ledger Schema",
+          "summary": "Create warehouses and stock_movements through six cumulative schema steps.",
+          "cards": {
+            "sketch0": {
+              "title": "Understanding the Warehouse Schema"
+            },
+            "project": {
+              "title": "Warehouse Stock Ledger Schema Project"
+            }
+          },
+          "projectSteps": {
+            "ci_warehouse_schema_step1": {
+              "title": "Create the Warehouse Table"
+            },
+            "ci_warehouse_schema_step2": {
+              "title": "Add Identity and Name Rules"
+            },
+            "ci_warehouse_schema_step3": {
+              "title": "Add an Operational Default"
+            },
+            "ci_warehouse_schema_step4": {
+              "title": "Create the Movement Table"
+            },
+            "ci_warehouse_schema_step5": {
+              "title": "Protect Required Movement Data"
+            },
+            "ci_warehouse_schema_step6": {
+              "title": "Connect Movements to Warehouses"
+            }
+          },
+          "moduleProject": {
+            "steps": {
+              "ci_warehouse_schema_step1": {
+                "title": "Create the Warehouse Table",
+                "prompt": "A regional warehouse team is replacing a spreadsheet with a stock ledger. In `schema.sql`, define `warehouses` with `id INTEGER` and `name TEXT`. In `query.sql`, verify the table exists by selecting `name` from `sqlite_master` where `type = 'table'` and `name = 'warehouses'`.\n\n**Files for this exercise:**\n- `schema.sql`: table definitions, columns, keys, defaults, and relationships; **edit this file**. It opens first.\n- `query.sql`: the learner-authored preview, inspection, report, or verification SELECT; **edit this file**.\n\n`query.sql` is part of the learner answer when the task asks for a preview, inspection, report, or verification. The hidden database-state check does not replace that required SELECT.\n\nComplete `schema.sql`, and `query.sql`. Do not create extra files or move SQL into a file with a different responsibility.",
+                "hint": "Complete the required table definitions in schema.sql, then write query.sql so the Results tab proves the structure exists.",
+                "help": {
+                  "concept": "The workspace runs schema.sql, seed.sql, operations.sql, and query.sql in that order. Each file has one responsibility, so setup, changes, and verification stay easy to inspect.",
+                  "hint_1": "Complete the required table definitions in schema.sql, then write query.sql so the Results tab proves the structure exists.",
+                  "hint_2": "Both the required learner file and query.sql are checked. A hidden state check cannot replace the visible verification query."
+                },
+                "starterCode": "-- Build the table definition required for \"Create the Warehouse Table\" below.\n",
+                "solutionCode": "-- Define the warehouses table\nCREATE TABLE warehouses (\n    id INTEGER,\n    name TEXT\n);",
+                "starterFiles": {
+                  "schema_sql": {
+                    "content": "-- Build the table definition required for \"Create the Warehouse Table\" below.\n"
+                  },
+                  "query_sql": {
+                    "content": "-- Return the verification result required for \"Create the Warehouse Table\" below.\n"
+                  }
+                },
+                "solutionFiles": {
+                  "schema_sql": {
+                    "content": "-- Define the warehouses table\nCREATE TABLE warehouses (\n    id INTEGER,\n    name TEXT\n);"
+                  },
+                  "query_sql": {
+                    "content": "-- Verify the table creation\nSELECT name FROM sqlite_master WHERE type='table' AND name='warehouses';"
+                  }
+                }
+              },
+              "ci_warehouse_schema_step2": {
+                "title": "Add Identity and Name Rules",
+                "prompt": "Warehouse names must now be reliable business identifiers. Update `schema.sql` so `warehouses.id` is `INTEGER PRIMARY KEY` and `warehouses.name` is `TEXT NOT NULL UNIQUE`. In `query.sql`, select the table's `sql` definition from `sqlite_master` to verify all three constraints.\n\n**Files for this exercise:**\n- `schema.sql`: table definitions, columns, keys, defaults, and relationships; **edit this file**. It opens first.\n- `query.sql`: the learner-authored preview, inspection, report, or verification SELECT; **edit this file**.\n\n`query.sql` is part of the learner answer when the task asks for a preview, inspection, report, or verification. The hidden database-state check does not replace that required SELECT.\n\nComplete `schema.sql`, and `query.sql`. Do not create extra files or move SQL into a file with a different responsibility.",
+                "hint": "Complete the required table definitions in schema.sql, then write query.sql so the Results tab proves the structure exists.",
+                "help": {
+                  "concept": "The workspace runs schema.sql, seed.sql, operations.sql, and query.sql in that order. Each file has one responsibility, so setup, changes, and verification stay easy to inspect.",
+                  "hint_1": "Complete the required table definitions in schema.sql, then write query.sql so the Results tab proves the structure exists.",
+                  "hint_2": "Both the required learner file and query.sql are checked. A hidden state check cannot replace the visible verification query."
+                },
+                "starterCode": "-- Define the warehouses table\nCREATE TABLE warehouses (\n    id INTEGER,\n    name TEXT\n);\n\n-- Continue the next requirement for Add Identity and Name Rules below.\n",
+                "solutionCode": "-- Redefine the warehouses table with constraints\nCREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE\n);",
+                "starterFiles": {
+                  "schema_sql": {
+                    "content": "-- Define the warehouses table\nCREATE TABLE warehouses (\n    id INTEGER,\n    name TEXT\n);\n\n-- Continue the next requirement for Add Identity and Name Rules below.\n"
+                  },
+                  "query_sql": {
+                    "content": "-- Return the verification result required for \"Add Identity and Name Rules\" below.\n"
+                  }
+                },
+                "solutionFiles": {
+                  "schema_sql": {
+                    "content": "-- Redefine the warehouses table with constraints\nCREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE\n);"
+                  },
+                  "query_sql": {
+                    "content": "-- Verify the table constraints\nSELECT sql FROM sqlite_master WHERE type='table' AND name='warehouses';"
+                  }
+                }
+              },
+              "ci_warehouse_schema_step3": {
+                "title": "Add an Operational Default",
+                "prompt": "New warehouse locations should open as active unless operations says otherwise. Add `status TEXT NOT NULL DEFAULT 'active'` to `warehouses` in `schema.sql`. In `query.sql`, return the stored table definition from `sqlite_master` so the default can be reviewed.\n\n**Files for this exercise:**\n- `schema.sql`: table definitions, columns, keys, defaults, and relationships; **edit this file**. It opens first.\n- `query.sql`: the learner-authored preview, inspection, report, or verification SELECT; **edit this file**.\n\n`query.sql` is part of the learner answer when the task asks for a preview, inspection, report, or verification. The hidden database-state check does not replace that required SELECT.\n\nComplete `schema.sql`, and `query.sql`. Do not create extra files or move SQL into a file with a different responsibility.",
+                "hint": "Complete the required table definitions in schema.sql, then write query.sql so the Results tab proves the structure exists.",
+                "help": {
+                  "concept": "The workspace runs schema.sql, seed.sql, operations.sql, and query.sql in that order. Each file has one responsibility, so setup, changes, and verification stay easy to inspect.",
+                  "hint_1": "Complete the required table definitions in schema.sql, then write query.sql so the Results tab proves the structure exists.",
+                  "hint_2": "Both the required learner file and query.sql are checked. A hidden state check cannot replace the visible verification query."
+                },
+                "starterCode": "-- Redefine the warehouses table with constraints\nCREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE\n);\n\n-- Continue the next requirement for Add an Operational Default below.\n",
+                "solutionCode": "-- Update the warehouses table with a default status\nCREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);",
+                "starterFiles": {
+                  "schema_sql": {
+                    "content": "-- Redefine the warehouses table with constraints\nCREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE\n);\n\n-- Continue the next requirement for Add an Operational Default below.\n"
+                  },
+                  "query_sql": {
+                    "content": "-- Return the verification result required for \"Add an Operational Default\" below.\n"
+                  }
+                },
+                "solutionFiles": {
+                  "schema_sql": {
+                    "content": "-- Update the warehouses table with a default status\nCREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);"
+                  },
+                  "query_sql": {
+                    "content": "-- Verify the table structure\nSELECT sql FROM sqlite_master WHERE type='table' AND name='warehouses';"
+                  }
+                }
+              },
+              "ci_warehouse_schema_step4": {
+                "title": "Create the Movement Table",
+                "prompt": "The ledger also needs a place to record every receipt and adjustment. In `schema.sql`, create `stock_movements` with `id INTEGER`, `warehouse_id INTEGER`, `sku TEXT`, `quantity_change REAL`, `movement_type TEXT`, and optional `note TEXT`. In `query.sql`, verify that the table name appears in `sqlite_master`.\n\n**Files for this exercise:**\n- `schema.sql`: table definitions, columns, keys, defaults, and relationships; **edit this file**. It opens first.\n- `query.sql`: the learner-authored preview, inspection, report, or verification SELECT; **edit this file**.\n\n`query.sql` is part of the learner answer when the task asks for a preview, inspection, report, or verification. The hidden database-state check does not replace that required SELECT.\n\nComplete `schema.sql`, and `query.sql`. Do not create extra files or move SQL into a file with a different responsibility.",
+                "hint": "Complete the required table definitions in schema.sql, then write query.sql so the Results tab proves the structure exists.",
+                "help": {
+                  "concept": "The workspace runs schema.sql, seed.sql, operations.sql, and query.sql in that order. Each file has one responsibility, so setup, changes, and verification stay easy to inspect.",
+                  "hint_1": "Complete the required table definitions in schema.sql, then write query.sql so the Results tab proves the structure exists.",
+                  "hint_2": "Both the required learner file and query.sql are checked. A hidden state check cannot replace the visible verification query."
+                },
+                "starterCode": "-- Update the warehouses table with a default status\nCREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);\n\n-- Continue the next requirement for Create the Movement Table below.\n",
+                "solutionCode": "-- Update the warehouses table with a default status\nCREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);\n\n-- Define the stock_movements table\nCREATE TABLE stock_movements (\n    id INTEGER,\n    warehouse_id INTEGER,\n    sku TEXT,\n    quantity_change REAL,\n    movement_type TEXT,\n    note TEXT\n);",
+                "starterFiles": {
+                  "schema_sql": {
+                    "content": "-- Update the warehouses table with a default status\nCREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);\n\n-- Continue the next requirement for Create the Movement Table below.\n"
+                  },
+                  "query_sql": {
+                    "content": "-- Return the verification result required for \"Create the Movement Table\" below.\n"
+                  }
+                },
+                "solutionFiles": {
+                  "schema_sql": {
+                    "content": "-- Update the warehouses table with a default status\nCREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);\n\n-- Define the stock_movements table\nCREATE TABLE stock_movements (\n    id INTEGER,\n    warehouse_id INTEGER,\n    sku TEXT,\n    quantity_change REAL,\n    movement_type TEXT,\n    note TEXT\n);"
+                  },
+                  "query_sql": {
+                    "content": "-- Verify the table creation\nSELECT name FROM sqlite_master WHERE type='table' AND name='stock_movements';"
+                  }
+                }
+              },
+              "ci_warehouse_schema_step5": {
+                "title": "Protect Required Movement Data",
+                "prompt": "Operations cannot accept incomplete movement records. Update `stock_movements` so `id` is `INTEGER PRIMARY KEY`; `warehouse_id`, `sku`, `quantity_change`, and `movement_type` are `NOT NULL`; and `note TEXT` remains optional. In `query.sql`, select the stored table definition to verify the rules.\n\n**Files for this exercise:**\n- `schema.sql`: table definitions, columns, keys, defaults, and relationships; **edit this file**. It opens first.\n- `query.sql`: the learner-authored preview, inspection, report, or verification SELECT; **edit this file**.\n\n`query.sql` is part of the learner answer when the task asks for a preview, inspection, report, or verification. The hidden database-state check does not replace that required SELECT.\n\nComplete `schema.sql`, and `query.sql`. Do not create extra files or move SQL into a file with a different responsibility.",
+                "hint": "Complete the required table definitions in schema.sql, then write query.sql so the Results tab proves the structure exists.",
+                "help": {
+                  "concept": "The workspace runs schema.sql, seed.sql, operations.sql, and query.sql in that order. Each file has one responsibility, so setup, changes, and verification stay easy to inspect.",
+                  "hint_1": "Complete the required table definitions in schema.sql, then write query.sql so the Results tab proves the structure exists.",
+                  "hint_2": "Both the required learner file and query.sql are checked. A hidden state check cannot replace the visible verification query."
+                },
+                "starterCode": "-- Update the warehouses table with a default status\nCREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);\n\n-- Define the stock_movements table\nCREATE TABLE stock_movements (\n    id INTEGER,\n    warehouse_id INTEGER,\n    sku TEXT,\n    quantity_change REAL,\n    movement_type TEXT,\n    note TEXT\n);\n\n-- Continue the next requirement for Protect Required Movement Data below.\n",
+                "solutionCode": "-- Update the warehouses table with a default status\nCREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);\n\n-- Update the stock_movements table with constraints\nCREATE TABLE stock_movements (\n    id INTEGER PRIMARY KEY,\n    warehouse_id INTEGER NOT NULL,\n    sku TEXT NOT NULL,\n    quantity_change REAL NOT NULL,\n    movement_type TEXT NOT NULL,\n    note TEXT\n);",
+                "starterFiles": {
+                  "schema_sql": {
+                    "content": "-- Update the warehouses table with a default status\nCREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);\n\n-- Define the stock_movements table\nCREATE TABLE stock_movements (\n    id INTEGER,\n    warehouse_id INTEGER,\n    sku TEXT,\n    quantity_change REAL,\n    movement_type TEXT,\n    note TEXT\n);\n\n-- Continue the next requirement for Protect Required Movement Data below.\n"
+                  },
+                  "query_sql": {
+                    "content": "-- Return the verification result required for \"Protect Required Movement Data\" below.\n"
+                  }
+                },
+                "solutionFiles": {
+                  "schema_sql": {
+                    "content": "-- Update the warehouses table with a default status\nCREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);\n\n-- Update the stock_movements table with constraints\nCREATE TABLE stock_movements (\n    id INTEGER PRIMARY KEY,\n    warehouse_id INTEGER NOT NULL,\n    sku TEXT NOT NULL,\n    quantity_change REAL NOT NULL,\n    movement_type TEXT NOT NULL,\n    note TEXT\n);"
+                  },
+                  "query_sql": {
+                    "content": "-- Verify the table constraints\nSELECT sql FROM sqlite_master WHERE type='table' AND name='stock_movements';"
+                  }
+                }
+              },
+              "ci_warehouse_schema_step6": {
+                "title": "Connect Movements to Warehouses",
+                "prompt": "Finish the warehouse ledger by connecting each movement to a real location. In `schema.sql`, give `movement_type` the default `'receipt'` and add `FOREIGN KEY (warehouse_id) REFERENCES warehouses(id)`. In `query.sql`, return the `stock_movements` definition from `sqlite_master` for the final review.\n\n**Files for this exercise:**\n- `schema.sql`: table definitions, columns, keys, defaults, and relationships; **edit this file**. It opens first.\n- `query.sql`: the learner-authored preview, inspection, report, or verification SELECT; **edit this file**.\n\n`query.sql` is part of the learner answer when the task asks for a preview, inspection, report, or verification. The hidden database-state check does not replace that required SELECT.\n\nComplete `schema.sql`, and `query.sql`. Do not create extra files or move SQL into a file with a different responsibility.",
+                "hint": "Complete the required table definitions in schema.sql, then write query.sql so the Results tab proves the structure exists.",
+                "help": {
+                  "concept": "The workspace runs schema.sql, seed.sql, operations.sql, and query.sql in that order. Each file has one responsibility, so setup, changes, and verification stay easy to inspect.",
+                  "hint_1": "Complete the required table definitions in schema.sql, then write query.sql so the Results tab proves the structure exists.",
+                  "hint_2": "Both the required learner file and query.sql are checked. A hidden state check cannot replace the visible verification query."
+                },
+                "starterCode": "-- Update the warehouses table with a default status\nCREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);\n\n-- Update the stock_movements table with constraints\nCREATE TABLE stock_movements (\n    id INTEGER PRIMARY KEY,\n    warehouse_id INTEGER NOT NULL,\n    sku TEXT NOT NULL,\n    quantity_change REAL NOT NULL,\n    movement_type TEXT NOT NULL,\n    note TEXT\n);\n\n-- Continue the next requirement for Connect Movements to Warehouses below.\n",
+                "solutionCode": "-- Update the warehouses table with a default status\nCREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);\n\n-- Update the stock_movements table with a foreign key\nCREATE TABLE stock_movements (\n    id INTEGER PRIMARY KEY,\n    warehouse_id INTEGER NOT NULL,\n    sku TEXT NOT NULL,\n    quantity_change REAL NOT NULL,\n    movement_type TEXT NOT NULL DEFAULT 'receipt',\n    note TEXT,\n    FOREIGN KEY (warehouse_id) REFERENCES warehouses(id)\n);",
+                "starterFiles": {
+                  "schema_sql": {
+                    "content": "-- Update the warehouses table with a default status\nCREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);\n\n-- Update the stock_movements table with constraints\nCREATE TABLE stock_movements (\n    id INTEGER PRIMARY KEY,\n    warehouse_id INTEGER NOT NULL,\n    sku TEXT NOT NULL,\n    quantity_change REAL NOT NULL,\n    movement_type TEXT NOT NULL,\n    note TEXT\n);\n\n-- Continue the next requirement for Connect Movements to Warehouses below.\n"
+                  },
+                  "query_sql": {
+                    "content": "-- Return the verification result required for \"Connect Movements to Warehouses\" below.\n"
+                  }
+                },
+                "solutionFiles": {
+                  "schema_sql": {
+                    "content": "-- Update the warehouses table with a default status\nCREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);\n\n-- Update the stock_movements table with a foreign key\nCREATE TABLE stock_movements (\n    id INTEGER PRIMARY KEY,\n    warehouse_id INTEGER NOT NULL,\n    sku TEXT NOT NULL,\n    quantity_change REAL NOT NULL,\n    movement_type TEXT NOT NULL DEFAULT 'receipt',\n    note TEXT,\n    FOREIGN KEY (warehouse_id) REFERENCES warehouses(id)\n);"
+                  },
+                  "query_sql": {
+                    "content": "-- Verify the foreign key constraint\nSELECT sql FROM sqlite_master WHERE type='table' AND name='stock_movements';"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql-data-management": {
+      "sql-data-management-module-2-table-creation-constraints": {
+        "module-2-warehouse-stock-ledger-schema": {
+          "sketch-warehouse-schema-intro": {
+            "title": "Understanding the Warehouse Schema",
+            "bodyMarkdown": "A regional warehouse team needs a small stock-ledger database before it can replace its shared spreadsheet. You are the junior database builder responsible for a two-table design that makes locations reliable and movement records traceable.\n\nIn `schema.sql`, you will build `warehouses` and `stock_movements`, then strengthen them with primary keys, required values, uniqueness, defaults, and a foreign-key relationship. In `query.sql`, each step verifies the stored definition through `sqlite_master`.\n\nYour deliverable is a cumulative two-file workspace in which every stock movement belongs to a warehouse and incomplete operational records are rejected by the schema.\n\n### Workspace Guide\n\nThis project uses only `schema.sql` for table design and `query.sql` for learner-authored inspection. The current step opens the file that needs work first."
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,258 @@
+{
+  "ok": true,
+  "profileId": "sql",
+  "subjectSlug": "sql--sql-data-management--draft",
+  "courseSlug": "sql-data-management",
+  "summary": {
+    "modules": 4,
+    "topicsTotal": 16,
+    "exercises": 117,
+    "exerciseKinds": {
+      "single_choice": 20,
+      "multi_choice": 20,
+      "drag_reorder": 12,
+      "fill_blank_choice": 20,
+      "code_input": 45
+    },
+    "codeInputs": 45,
+    "projects": 45,
+    "capstones": 39,
+    "thinFixedTestCount": 0,
+    "blockers": 0,
+    "errors": 0,
+    "warnings": 24,
+    "infos": 0
+  },
+  "severityCounts": {
+    "blocker": 0,
+    "error": 0,
+    "warning": 24,
+    "info": 0
+  },
+  "issues": [
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-data-management-module-0-safe-inserts/sql-data-management-section-0-mutation-workflow/mutation-workflow-preview-change-verify",
+      "profileId": "sql",
+      "moduleId": "sql-data-management-module-0-safe-inserts",
+      "topicId": "mutation-workflow-preview-change-verify",
+      "message": "Topic \"mutation-workflow-preview-change-verify\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-data-management-module-0-safe-inserts/sql-data-management-section-0-mutation-workflow/insert-with-explicit-column-lists",
+      "profileId": "sql",
+      "moduleId": "sql-data-management-module-0-safe-inserts",
+      "topicId": "insert-with-explicit-column-lists",
+      "message": "Topic \"insert-with-explicit-column-lists\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "STARTER_MAY_REVEAL_SOLUTION_STRUCTURE",
+      "severity": "warning",
+      "path": "sql-data-management-module-0-safe-inserts/sql-data-management-section-0-mutation-workflow/insert-with-explicit-column-lists",
+      "profileId": "sql",
+      "moduleId": "sql-data-management-module-0-safe-inserts",
+      "topicId": "insert-with-explicit-column-lists",
+      "exerciseId": "try-insert-with-explicit-column-lists-sketch0",
+      "message": "Exercise \"try-insert-with-explicit-column-lists-sketch0\" starterCode appears to contain most of the final solution structure."
+    },
+    {
+      "code": "STARTER_MAY_REVEAL_SOLUTION_STRUCTURE",
+      "severity": "warning",
+      "path": "sql-data-management-module-0-safe-inserts/sql-data-management-section-0-mutation-workflow/insert-with-explicit-column-lists",
+      "profileId": "sql",
+      "moduleId": "sql-data-management-module-0-safe-inserts",
+      "topicId": "insert-with-explicit-column-lists",
+      "exerciseId": "try-insert-with-explicit-column-lists-sketch1",
+      "message": "Exercise \"try-insert-with-explicit-column-lists-sketch1\" starterCode appears to contain most of the final solution structure."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-data-management-module-0-safe-inserts/sql-data-management-section-0-values-and-defaults/using-null-and-default-values",
+      "profileId": "sql",
+      "moduleId": "sql-data-management-module-0-safe-inserts",
+      "topicId": "using-null-and-default-values",
+      "message": "Topic \"using-null-and-default-values\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-data-management-module-0-safe-inserts/sql-data-management-section-0-values-and-defaults/inserting-multiple-rows",
+      "profileId": "sql",
+      "moduleId": "sql-data-management-module-0-safe-inserts",
+      "topicId": "inserting-multiple-rows",
+      "message": "Topic \"inserting-multiple-rows\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "STARTER_MAY_REVEAL_SOLUTION_STRUCTURE",
+      "severity": "warning",
+      "path": "sql-data-management-module-0-safe-inserts/sql-data-management-section-0-values-and-defaults/inserting-multiple-rows",
+      "profileId": "sql",
+      "moduleId": "sql-data-management-module-0-safe-inserts",
+      "topicId": "inserting-multiple-rows",
+      "exerciseId": "try-inserting-multiple-rows-sketch0",
+      "message": "Exercise \"try-inserting-multiple-rows-sketch0\" starterCode appears to contain most of the final solution structure."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-data-management-module-0-safe-inserts/sql-data-management-section-0-module-project/module-0-inventory-intake-batch",
+      "profileId": "sql",
+      "moduleId": "sql-data-management-module-0-safe-inserts",
+      "topicId": "module-0-inventory-intake-batch",
+      "message": "Topic \"module-0-inventory-intake-batch\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-data-management-module-1-controlled-updates-deletes/sql-data-management-section-1-target-before-change/previewing-update-and-delete-targets",
+      "profileId": "sql",
+      "moduleId": "sql-data-management-module-1-controlled-updates-deletes",
+      "topicId": "previewing-update-and-delete-targets",
+      "message": "Topic \"previewing-update-and-delete-targets\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-data-management-module-1-controlled-updates-deletes/sql-data-management-section-1-target-before-change/updating-one-row-precisely",
+      "profileId": "sql",
+      "moduleId": "sql-data-management-module-1-controlled-updates-deletes",
+      "topicId": "updating-one-row-precisely",
+      "message": "Topic \"updating-one-row-precisely\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-data-management-module-1-controlled-updates-deletes/sql-data-management-section-1-controlled-mutations/updating-controlled-row-sets",
+      "profileId": "sql",
+      "moduleId": "sql-data-management-module-1-controlled-updates-deletes",
+      "topicId": "updating-controlled-row-sets",
+      "message": "Topic \"updating-controlled-row-sets\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-data-management-module-1-controlled-updates-deletes/sql-data-management-section-1-controlled-mutations/deleting-only-confirmed-rows",
+      "profileId": "sql",
+      "moduleId": "sql-data-management-module-1-controlled-updates-deletes",
+      "topicId": "deleting-only-confirmed-rows",
+      "message": "Topic \"deleting-only-confirmed-rows\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-data-management-module-1-controlled-updates-deletes/sql-data-management-section-1-module-project/module-1-inventory-correction-cleanup",
+      "profileId": "sql",
+      "moduleId": "sql-data-management-module-1-controlled-updates-deletes",
+      "topicId": "module-1-inventory-correction-cleanup",
+      "message": "Topic \"module-1-inventory-correction-cleanup\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "STARTER_MAY_REVEAL_SOLUTION_STRUCTURE",
+      "severity": "warning",
+      "path": "sql-data-management-module-1-controlled-updates-deletes/sql-data-management-section-1-module-project/module-1-inventory-correction-cleanup",
+      "profileId": "sql",
+      "moduleId": "sql-data-management-module-1-controlled-updates-deletes",
+      "topicId": "module-1-inventory-correction-cleanup",
+      "exerciseId": "try-module-1-inventory-correction-cleanup-sketch1",
+      "message": "Exercise \"try-module-1-inventory-correction-cleanup-sketch1\" starterCode appears to contain most of the final solution structure."
+    },
+    {
+      "code": "STARTER_MAY_REVEAL_SOLUTION_STRUCTURE",
+      "severity": "warning",
+      "path": "sql-data-management-module-1-controlled-updates-deletes/sql-data-management-section-1-module-project/module-1-inventory-correction-cleanup",
+      "profileId": "sql",
+      "moduleId": "sql-data-management-module-1-controlled-updates-deletes",
+      "topicId": "module-1-inventory-correction-cleanup",
+      "exerciseId": "try-module-1-inventory-correction-cleanup-sketch2",
+      "message": "Exercise \"try-module-1-inventory-correction-cleanup-sketch2\" starterCode appears to contain most of the final solution structure."
+    },
+    {
+      "code": "STARTER_MAY_REVEAL_SOLUTION_STRUCTURE",
+      "severity": "warning",
+      "path": "sql-data-management-module-1-controlled-updates-deletes/sql-data-management-section-1-module-project/module-1-inventory-correction-cleanup",
+      "profileId": "sql",
+      "moduleId": "sql-data-management-module-1-controlled-updates-deletes",
+      "topicId": "module-1-inventory-correction-cleanup",
+      "exerciseId": "try-module-1-inventory-correction-cleanup-sketch3",
+      "message": "Exercise \"try-module-1-inventory-correction-cleanup-sketch3\" starterCode appears to contain most of the final solution structure."
+    },
+    {
+      "code": "STARTER_MAY_REVEAL_SOLUTION_STRUCTURE",
+      "severity": "warning",
+      "path": "sql-data-management-module-1-controlled-updates-deletes/sql-data-management-section-1-module-project/module-1-inventory-correction-cleanup",
+      "profileId": "sql",
+      "moduleId": "sql-data-management-module-1-controlled-updates-deletes",
+      "topicId": "module-1-inventory-correction-cleanup",
+      "exerciseId": "try-module-1-inventory-correction-cleanup-sketch4",
+      "message": "Exercise \"try-module-1-inventory-correction-cleanup-sketch4\" starterCode appears to contain most of the final solution structure."
+    },
+    {
+      "code": "STARTER_MAY_REVEAL_SOLUTION_STRUCTURE",
+      "severity": "warning",
+      "path": "sql-data-management-module-1-controlled-updates-deletes/sql-data-management-section-1-module-project/module-1-inventory-correction-cleanup",
+      "profileId": "sql",
+      "moduleId": "sql-data-management-module-1-controlled-updates-deletes",
+      "topicId": "module-1-inventory-correction-cleanup",
+      "exerciseId": "try-module-1-inventory-correction-cleanup-sketch5",
+      "message": "Exercise \"try-module-1-inventory-correction-cleanup-sketch5\" starterCode appears to contain most of the final solution structure."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-data-management-module-2-table-creation-constraints/sql-data-management-section-2-table-structure/creating-tables-and-defining-columns",
+      "profileId": "sql",
+      "moduleId": "sql-data-management-module-2-table-creation-constraints",
+      "topicId": "creating-tables-and-defining-columns",
+      "message": "Topic \"creating-tables-and-defining-columns\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-data-management-module-2-table-creation-constraints/sql-data-management-section-2-table-structure/primary-key-and-not-null-constraints",
+      "profileId": "sql",
+      "moduleId": "sql-data-management-module-2-table-creation-constraints",
+      "topicId": "primary-key-and-not-null-constraints",
+      "message": "Topic \"primary-key-and-not-null-constraints\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-data-management-module-2-table-creation-constraints/sql-data-management-section-2-data-rules/unique-and-default-constraints",
+      "profileId": "sql",
+      "moduleId": "sql-data-management-module-2-table-creation-constraints",
+      "topicId": "unique-and-default-constraints",
+      "message": "Topic \"unique-and-default-constraints\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-data-management-module-2-table-creation-constraints/sql-data-management-section-2-data-rules/foreign-keys-and-references",
+      "profileId": "sql",
+      "moduleId": "sql-data-management-module-2-table-creation-constraints",
+      "topicId": "foreign-keys-and-references",
+      "message": "Topic \"foreign-keys-and-references\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-data-management-module-2-table-creation-constraints/sql-data-management-section-2-module-project/module-2-warehouse-stock-ledger-schema",
+      "profileId": "sql",
+      "moduleId": "sql-data-management-module-2-table-creation-constraints",
+      "topicId": "module-2-warehouse-stock-ledger-schema",
+      "message": "Topic \"module-2-warehouse-stock-ledger-schema\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-data-management-module-3-final-capstone/sql-data-management-section-3-final-capstone/final-inventory-operations-launch",
+      "profileId": "sql",
+      "moduleId": "sql-data-management-module-3-final-capstone",
+      "topicId": "final-inventory-operations-launch",
+      "message": "Topic \"final-inventory-operations-launch\" has no learning goals on its seed metadata."
+    }
+  ]
+}

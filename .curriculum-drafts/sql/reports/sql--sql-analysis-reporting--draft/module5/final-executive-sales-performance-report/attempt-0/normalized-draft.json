@@ -1,0 +1,203 @@
+{
+  "title": "Final Capstone: Executive Sales Performance Report",
+  "summary": "Deliver a complete report that ranks region-category performance, calculates core and conditional KPIs, filters weak groups, and assigns a performance band.",
+  "minutes": 110,
+  "sketchBlocks": [
+    {
+      "id": "sketch-final-executive-sales-performance-report",
+      "title": "Executive Sales Performance Report Overview",
+      "bodyMarkdown": "In this final capstone project, you will create a comprehensive sales performance report using the `sales_reporting` table from the `sales_kpi` dataset. The goal is to integrate various SQL skills you've learned throughout the course to produce a polished, business-ready report.\n\n### Key Objectives\n- **Rank Performance**: Determine the performance of different regions and categories.\n- **Calculate KPIs**: Use aggregate functions to calculate key performance indicators.\n- **Filter and Group**: Apply filters to exclude underperforming groups and use `GROUP BY` to organize data.\n- **Assign Performance Bands**: Use `CASE` statements to categorize performance levels.\n\n### Example\nConsider a scenario where you need to calculate the total sales for each region and category, then rank them based on performance. You might start with a query like:\n\n```sql\nSELECT region, category, SUM(quantity * unit_price) AS total_sales\nFROM sales_reporting\nGROUP BY region, category\nORDER BY total_sales DESC;\n```\n\nThis query calculates the total sales for each region and category, then orders the results by total sales in descending order. You will build upon this foundation to create a more detailed report."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "try-final-executive-sales-performance-report-sketch0",
+      "kind": "code_input",
+      "title": "Calculate Total Sales by Region and Category",
+      "prompt": "Write a query to calculate the total sales for each region and category in the `sales_reporting` table. Order the results by total sales in descending order.",
+      "starterCode": "SELECT region, category, SUM(quantity * unit_price) AS total_sales\nFROM sales_reporting\nGROUP BY region, category\nORDER BY total_sales DESC;",
+      "solutionCode": "SELECT region, category, SUM(quantity * unit_price) AS total_sales\nFROM sales_reporting\nGROUP BY region, category\nORDER BY total_sales DESC;",
+      "tests": [
+        {
+          "stdout": "North, Art, 1000.00\nSouth, Home, 800.00\nEast, Tech, 600.00\nWest, Stationery, 400.00\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query",
+      "hint": "Use `SUM` to calculate total sales and `GROUP BY` to group by region and category.",
+      "help": {
+        "concept": "Aggregate functions like `SUM` can be used to calculate total sales.",
+        "hint_1": "Use `SUM(quantity * unit_price)` to calculate total sales.",
+        "hint_2": "Group the results by `region` and `category` to get totals for each combination."
+      }
+    },
+    {
+      "id": "try-final-executive-sales-performance-report-sketch1",
+      "kind": "code_input",
+      "title": "Filter Out Low-Performing Categories",
+      "prompt": "Modify the previous query to exclude categories with total sales less than $500.",
+      "starterCode": "SELECT region, category, SUM(quantity * unit_price) AS total_sales\nFROM sales_reporting\nGROUP BY region, category\nHAVING total_sales >= 500\nORDER BY total_sales DESC;",
+      "solutionCode": "SELECT region, category, SUM(quantity * unit_price) AS total_sales\nFROM sales_reporting\nGROUP BY region, category\nHAVING total_sales >= 500\nORDER BY total_sales DESC;",
+      "tests": [
+        {
+          "stdout": "North, Art, 1000.00\nSouth, Home, 800.00\nEast, Tech, 600.00\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query",
+      "hint": "Use the `HAVING` clause to filter groups based on aggregate results.",
+      "help": {
+        "concept": "The `HAVING` clause filters groups after aggregation.",
+        "hint_1": "Add `HAVING total_sales >= 500` to the query.",
+        "hint_2": "Ensure the `HAVING` clause is placed after `GROUP BY`."
+      }
+    },
+    {
+      "id": "try-final-executive-sales-performance-report-sketch2",
+      "kind": "code_input",
+      "title": "Calculate Average Customer Rating",
+      "prompt": "Write a query to calculate the average customer rating for each region and category.",
+      "starterCode": "SELECT region, category, AVG(customer_rating) AS avg_rating\nFROM sales_reporting\nGROUP BY region, category;",
+      "solutionCode": "SELECT region, category, AVG(customer_rating) AS avg_rating\nFROM sales_reporting\nGROUP BY region, category;",
+      "tests": [
+        {
+          "stdout": "North, Art, 4.6\nSouth, Home, 4.4\nEast, Tech, 4.5\nWest, Stationery, 4.2\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query",
+      "hint": "Use `AVG` to calculate the average rating.",
+      "help": {
+        "concept": "The `AVG` function calculates the average of a numeric column.",
+        "hint_1": "Use `AVG(customer_rating)` to find the average rating.",
+        "hint_2": "Group by `region` and `category` to get averages for each."
+      }
+    },
+    {
+      "id": "try-final-executive-sales-performance-report-sketch3",
+      "kind": "code_input",
+      "title": "Assign Performance Bands",
+      "prompt": "Use a `CASE` statement to assign a performance band based on total sales: 'High' for sales over $800, 'Medium' for sales between $500 and $800, and 'Low' for sales below $500.",
+      "starterCode": "SELECT region, category, SUM(quantity * unit_price) AS total_sales,\nCASE\n  WHEN SUM(quantity * unit_price) > 800 THEN 'High'\n  WHEN SUM(quantity * unit_price) BETWEEN 500 AND 800 THEN 'Medium'\n  ELSE 'Low'\nEND AS performance_band\nFROM sales_reporting\nGROUP BY region, category;",
+      "solutionCode": "SELECT region, category, SUM(quantity * unit_price) AS total_sales,\nCASE\n  WHEN SUM(quantity * unit_price) > 800 THEN 'High'\n  WHEN SUM(quantity * unit_price) BETWEEN 500 AND 800 THEN 'Medium'\n  ELSE 'Low'\nEND AS performance_band\nFROM sales_reporting\nGROUP BY region, category;",
+      "tests": [
+        {
+          "stdout": "North, Art, 1000.00, High\nSouth, Home, 800.00, Medium\nEast, Tech, 600.00, Medium\nWest, Stationery, 400.00, Low\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query",
+      "hint": "Use `CASE` to create conditional logic in SQL.",
+      "help": {
+        "concept": "`CASE` allows you to create conditional logic in SQL queries.",
+        "hint_1": "Use `CASE WHEN` to define conditions for each band.",
+        "hint_2": "Ensure each condition covers a specific range of sales."
+      }
+    },
+    {
+      "id": "try-final-executive-sales-performance-report-sketch4",
+      "kind": "code_input",
+      "title": "Calculate Total Discount Given",
+      "prompt": "Write a query to calculate the total discount given for each region and category.",
+      "starterCode": "SELECT region, category, SUM(quantity * unit_price * discount_pct / 100) AS total_discount\nFROM sales_reporting\nGROUP BY region, category;",
+      "solutionCode": "SELECT region, category, SUM(quantity * unit_price * discount_pct / 100) AS total_discount\nFROM sales_reporting\nGROUP BY region, category;",
+      "tests": [
+        {
+          "stdout": "North, Art, 50.00\nSouth, Home, 40.00\nEast, Tech, 30.00\nWest, Stationery, 20.00\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query",
+      "hint": "Use `SUM` to calculate the total discount, considering `discount_pct`.",
+      "help": {
+        "concept": "Aggregate functions can sum up values across rows.",
+        "hint_1": "Multiply `quantity * unit_price * discount_pct / 100` to find the discount amount.",
+        "hint_2": "Sum the discount amounts for each group."
+      }
+    },
+    {
+      "id": "try-final-executive-sales-performance-report-sketch5",
+      "kind": "code_input",
+      "title": "Identify Top Sales Representative",
+      "prompt": "Write a query to identify the top sales representative by total sales in each region.",
+      "starterCode": "SELECT region, sales_rep, SUM(quantity * unit_price) AS total_sales\nFROM sales_reporting\nGROUP BY region, sales_rep\nORDER BY total_sales DESC;",
+      "solutionCode": "SELECT region, sales_rep, SUM(quantity * unit_price) AS total_sales\nFROM sales_reporting\nGROUP BY region, sales_rep\nORDER BY total_sales DESC;",
+      "tests": [
+        {
+          "stdout": "North, Maya, 500.00\nSouth, Priya, 400.00\nEast, Avery, 300.00\nWest, Owen, 200.00\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query",
+      "hint": "Use `SUM` and `GROUP BY` to calculate total sales per representative.",
+      "help": {
+        "concept": "Grouping by sales representative allows you to calculate totals per person.",
+        "hint_1": "Group by `sales_rep` and `region` to get totals for each representative.",
+        "hint_2": "Order by total sales to find the top representative."
+      }
+    },
+    {
+      "id": "try-final-executive-sales-performance-report-sketch6",
+      "kind": "code_input",
+      "title": "Calculate Sales Growth Rate",
+      "prompt": "Write a query to calculate the sales growth rate for each region compared to the previous month.",
+      "starterCode": "SELECT region, (SUM(CASE WHEN order_date BETWEEN '2026-01-01' AND '2026-01-31' THEN quantity * unit_price ELSE 0 END) - SUM(CASE WHEN order_date BETWEEN '2025-12-01' AND '2025-12-31' THEN quantity * unit_price ELSE 0 END)) / SUM(CASE WHEN order_date BETWEEN '2025-12-01' AND '2025-12-31' THEN quantity * unit_price ELSE 0 END) * 100 AS growth_rate\nFROM sales_reporting\nGROUP BY region;",
+      "solutionCode": "SELECT region, (SUM(CASE WHEN order_date BETWEEN '2026-01-01' AND '2026-01-31' THEN quantity * unit_price ELSE 0 END) - SUM(CASE WHEN order_date BETWEEN '2025-12-01' AND '2025-12-31' THEN quantity * unit_price ELSE 0 END)) / SUM(CASE WHEN order_date BETWEEN '2025-12-01' AND '2025-12-31' THEN quantity * unit_price ELSE 0 END) * 100 AS growth_rate\nFROM sales_reporting\nGROUP BY region;",
+      "tests": [
+        {
+          "stdout": "North, 10.00\nSouth, 5.00\nEast, 15.00\nWest, 20.00\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query",
+      "hint": "Use arithmetic expressions to calculate growth rates.",
+      "help": {
+        "concept": "Growth rate can be calculated using current and previous period sales.",
+        "hint_1": "Subtract previous sales from current sales, then divide by previous sales.",
+        "hint_2": "Multiply by 100 to convert to a percentage."
+      }
+    },
+    {
+      "id": "try-final-executive-sales-performance-report-sketch7",
+      "kind": "code_input",
+      "title": "Determine Most Popular Product",
+      "prompt": "Write a query to determine the most popular product by quantity sold in each category.",
+      "starterCode": "SELECT category, product_name, SUM(quantity) AS total_quantity\nFROM sales_reporting\nGROUP BY category, product_name\nORDER BY total_quantity DESC;",
+      "solutionCode": "SELECT category, product_name, SUM(quantity) AS total_quantity\nFROM sales_reporting\nGROUP BY category, product_name\nORDER BY total_quantity DESC;",
+      "tests": [
+        {
+          "stdout": "Art, Watercolor Set, 50\nHome, Storage Basket, 40\nTech, USB-C Hub, 30\nStationery, Pen Pack, 20\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query",
+      "hint": "Use `SUM` and `GROUP BY` to calculate total quantities per product.",
+      "help": {
+        "concept": "Grouping by product allows you to calculate totals per item.",
+        "hint_1": "Group by `product_name` and `category` to get totals for each product.",
+        "hint_2": "Order by total quantity to find the most popular product."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Executive Sales Performance Report",
+    "stepIds": [
+      "try-final-executive-sales-performance-report-sketch0",
+      "try-final-executive-sales-performance-report-sketch1",
+      "try-final-executive-sales-performance-report-sketch2",
+      "try-final-executive-sales-performance-report-sketch3",
+      "try-final-executive-sales-performance-report-sketch4",
+      "try-final-executive-sales-performance-report-sketch5",
+      "try-final-executive-sales-performance-report-sketch6",
+      "try-final-executive-sales-performance-report-sketch7"
+    ]
+  }
+}

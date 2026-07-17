@@ -38,6 +38,9 @@ export function defineCourseFromManifest(args: {
                         moduleServiceDefaults: moduleManifest.serviceDefaults ?? null,
                         sectionRuntimeDefaults: sectionManifest.runtimeDefaults ?? null,
                         sectionServiceDefaults: sectionManifest.serviceDefaults ?? null,
+                        subjectTools: manifest.subject.tools ?? null,
+                        moduleTools: moduleManifest.tools ?? null,
+                        sectionTools: sectionManifest.tools ?? null,
                     }),
                 );
             });

@@ -395,7 +395,11 @@ export function buildCurriculumQualityReport(args: {
             capstoneCount += hasFinalCapstone && exercise.purpose === "project" ? 1 : 0;
 
             const expectedLanguage = profile.defaultLanguage;
-            const expectedEntryFile = profile.defaultEntryFileName;
+            const expectedEntryFile =
+                profile.resolveExpectedEntryFileName?.({
+                    seed: topic.seed,
+                    exercise,
+                }) ?? profile.defaultEntryFileName;
             const actualLanguage = exercise.language ?? exercise.workspace?.language;
             const runtimeKind = exercise.runtime?.kind ?? topic.topicBundle?.runtimeDefaults?.kind;
 

@@ -1,0 +1,269 @@
+{
+  "subjects": {
+    "sql--sql-analysis-reporting--draft": {
+      "title": "SQL Analysis & Reporting",
+      "description": "A cumulative single-table SQL reporting course covering aliases, calculations, NULL safety, aggregate functions, GROUP BY, HAVING, CASE, conditional aggregation, module projects, and a final executive-report capstone.",
+      "moreComingSoon": "More SQL Analysis & Reporting lessons are coming soon."
+    }
+  },
+  "modules": {
+    "sql--sql-analysis-reporting--draft": {
+      "sql-analysis-reporting-module-0-report-foundations": {
+        "title": "Readable Report Foundations",
+        "description": "Turn raw columns into clear, calculated report output with aliases, DISTINCT, arithmetic expressions, and rounding.",
+        "outcomes": [
+          "Rename result columns with clear aliases.",
+          "Use DISTINCT to discover report categories without duplicate values.",
+          "Create calculated columns from existing numeric fields.",
+          "Round calculated values for readable business reports."
+        ],
+        "why": [
+          "Builds confidence with readable report foundations.",
+          "Prepares learners for the next skills in the course."
+        ]
+      },
+      "sql-analysis-reporting-module-1-null-safe-calculations": {
+        "title": "Null-Safe Calculations and Business Labels",
+        "description": "Build trustworthy calculations when values are missing, then turn numeric results into readable business labels.",
+        "outcomes": [
+          "Predict how NULL affects arithmetic expressions.",
+          "Use COALESCE to provide explicit fallback values.",
+          "Calculate percentages and discounts safely.",
+          "Use CASE to produce readable categories and status labels."
+        ],
+        "why": [
+          "Builds confidence with null-safe calculations and business labels.",
+          "Prepares learners for the next skills in the course."
+        ]
+      },
+      "sql-analysis-reporting-module-2-aggregate-functions": {
+        "title": "Aggregate Functions and KPI Snapshots",
+        "description": "Summarize an entire filtered dataset with counts, totals, averages, minimums, and maximums.",
+        "outcomes": [
+          "Use COUNT(*) and COUNT(column) intentionally.",
+          "Calculate totals with SUM.",
+          "Calculate averages and explain NULL behavior.",
+          "Find smallest and largest values with MIN and MAX."
+        ],
+        "why": [
+          "Builds confidence with aggregate functions and kpi snapshots.",
+          "Prepares learners for the next skills in the course."
+        ]
+      },
+      "sql-analysis-reporting-module-3-grouped-summaries": {
+        "title": "Grouped Summaries and Ranked Scorecards",
+        "description": "Use GROUP BY to calculate KPIs for each region, category, status, or carefully chosen combination.",
+        "outcomes": [
+          "Group aggregate results by one column.",
+          "Group by more than one column and describe the resulting grain.",
+          "Sort grouped summaries by an aggregate result.",
+          "Recognize and fix common grouping mistakes."
+        ],
+        "why": [
+          "Builds confidence with grouped summaries and ranked scorecards.",
+          "Prepares learners for the next skills in the course."
+        ]
+      },
+      "sql-analysis-reporting-module-4-having-and-conditional-reporting": {
+        "title": "HAVING and Conditional Reporting",
+        "description": "Filter grouped results, calculate conditional KPIs, and turn aggregate results into performance bands.",
+        "outcomes": [
+          "Use WHERE to filter source rows before grouping.",
+          "Use HAVING to filter groups after aggregation.",
+          "Build conditional counts and totals with CASE inside aggregate functions.",
+          "Assign performance labels from aggregate results."
+        ],
+        "why": [
+          "Builds confidence with having and conditional reporting.",
+          "Prepares learners for the next skills in the course."
+        ]
+      },
+      "sql-analysis-reporting-module-5-final-capstone": {
+        "title": "Final Capstone: Executive Sales Performance Report",
+        "description": "Plan, build, validate, and explain a complete single-table executive report using the full course toolkit.",
+        "outcomes": [
+          "Translate a reporting brief into metrics, grain, filters, aliases, and sorting rules.",
+          "Audit the source dataset before building final calculations.",
+          "Build a complete grouped executive report progressively.",
+          "Validate results and explain findings in plain business language."
+        ],
+        "why": [
+          "Builds confidence with final capstone: executive sales performance report.",
+          "Prepares learners for the next skills in the course."
+        ]
+      }
+    }
+  },
+  "sections": {
+    "sql--sql-analysis-reporting--draft": {
+      "sql-analysis-reporting-module-0-report-foundations": {
+        "sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-0-readable-output": {
+          "title": "Readable Report Output",
+          "description": "Make raw result sets easier for another person to read and reuse.",
+          "weeks": null,
+          "bullets": [
+            "Aliases for Readable Headings",
+            "Distinct Values for Report Categories"
+          ]
+        },
+        "sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-0-calculated-output": {
+          "title": "Calculated Report Columns",
+          "description": "Create useful numbers directly in a SELECT result.",
+          "weeks": null,
+          "bullets": [
+            "Arithmetic Expressions in SELECT",
+            "Rounding Report Values"
+          ]
+        },
+        "sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-0-module-project": {
+          "title": "Module Project",
+          "description": "Build a manager-ready order detail report one query improvement at a time.",
+          "weeks": null,
+          "bullets": [
+            "Module 0: Order Value Detail Report"
+          ]
+        }
+      },
+      "sql-analysis-reporting-module-1-null-safe-calculations": {
+        "sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-1-null-safety": {
+          "title": "Null-Safe Calculations",
+          "description": "Make the treatment of missing values explicit and testable.",
+          "weeks": null,
+          "bullets": [
+            "How NULL Affects Calculations",
+            "COALESCE for Missing Values"
+          ]
+        },
+        "sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-1-business-calculations": {
+          "title": "Business Calculations and Labels",
+          "description": "Turn row-level data into net values and readable classifications.",
+          "weeks": null,
+          "bullets": [
+            "Percentage and Discount Calculations",
+            "CASE for Readable Labels"
+          ]
+        },
+        "sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-1-module-project": {
+          "title": "Module Project",
+          "description": "Create a review queue for orders with missing or unusual discount data.",
+          "weeks": null,
+          "bullets": [
+            "Module 1: Discount Audit Report"
+          ]
+        }
+      },
+      "sql-analysis-reporting-module-2-aggregate-functions": {
+        "sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-2-counts-and-totals": {
+          "title": "Counts and Totals",
+          "description": "Measure how much activity exists and how much value it represents.",
+          "weeks": null,
+          "bullets": [
+            "Counting Rows and Values",
+            "Summing Business Metrics"
+          ]
+        },
+        "sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-2-averages-and-extremes": {
+          "title": "Averages and Extremes",
+          "description": "Describe typical and boundary values in a dataset.",
+          "weeks": null,
+          "bullets": [
+            "Averages and NULL Behavior",
+            "Minimums and Maximums"
+          ]
+        },
+        "sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-2-module-project": {
+          "title": "Module Project",
+          "description": "Combine multiple aggregate expressions into one executive snapshot.",
+          "weeks": null,
+          "bullets": [
+            "Module 2: Storewide KPI Snapshot"
+          ]
+        }
+      },
+      "sql-analysis-reporting-module-3-grouped-summaries": {
+        "sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-3-grouping-basics": {
+          "title": "Grouping Basics",
+          "description": "Turn one overall summary into one summary row per meaningful group.",
+          "weeks": null,
+          "bullets": [
+            "GROUP BY One Column",
+            "GROUP BY Multiple Columns"
+          ]
+        },
+        "sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-3-ranking-and-quality": {
+          "title": "Ranking and Grouping Quality",
+          "description": "Order grouped reports and prevent accidental over-grouping.",
+          "weeks": null,
+          "bullets": [
+            "Sorting Aggregate Results",
+            "Avoiding Grouping Mistakes"
+          ]
+        },
+        "sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-3-module-project": {
+          "title": "Module Project",
+          "description": "Create a ranked scorecard for regional and category performance.",
+          "weeks": null,
+          "bullets": [
+            "Module 3: Region and Category Scorecard"
+          ]
+        }
+      },
+      "sql-analysis-reporting-module-4-having-and-conditional-reporting": {
+        "sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-4-group-filters": {
+          "title": "Filtering Before and After Grouping",
+          "description": "Place each condition at the stage where it logically belongs.",
+          "weeks": null,
+          "bullets": [
+            "WHERE Before Grouping",
+            "HAVING After Grouping"
+          ]
+        },
+        "sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-4-conditional-kpis": {
+          "title": "Conditional KPIs and Labels",
+          "description": "Calculate multiple business outcomes from one grouped result.",
+          "weeks": null,
+          "bullets": [
+            "CASE Inside Aggregate Functions",
+            "Performance Bands from Aggregates"
+          ]
+        },
+        "sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-4-module-project": {
+          "title": "Module Project",
+          "description": "Surface low-volume, low-value, or low-completion groups for management review.",
+          "weeks": null,
+          "bullets": [
+            "Module 4: Performance Exception Report"
+          ]
+        }
+      },
+      "sql-analysis-reporting-module-5-final-capstone": {
+        "sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-5-capstone-planning": {
+          "title": "Capstone Planning",
+          "description": "Convert stakeholder requirements into a precise report contract before writing the final query.",
+          "weeks": null,
+          "bullets": [
+            "Reading the Capstone Reporting Brief",
+            "Building a Metric Map"
+          ]
+        },
+        "sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-5-capstone-readiness": {
+          "title": "Capstone Data Readiness",
+          "description": "Audit the dataset and test the intended report grain before the final build.",
+          "weeks": null,
+          "bullets": [
+            "Auditing the sales_kpi Dataset",
+            "Validating Report Grain and Order"
+          ]
+        },
+        "sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-5-final-capstone-project": {
+          "title": "Final Capstone Project",
+          "description": "Build the final executive report through cumulative, fully validated query snapshots.",
+          "weeks": null,
+          "bullets": [
+            "Final Capstone: Executive Sales Performance Report"
+          ]
+        }
+      }
+    }
+  }
+}

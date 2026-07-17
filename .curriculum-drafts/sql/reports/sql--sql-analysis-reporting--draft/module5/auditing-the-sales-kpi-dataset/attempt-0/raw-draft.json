@@ -1,0 +1,134 @@
+{
+  "title": "Auditing the sales_kpi Dataset",
+  "summary": "Run focused checks for available categories, statuses, ranges, and missing values.",
+  "minutes": 24,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Introduction to the Capstone Project",
+      "bodyMarkdown": "In this final capstone project, you will take on the role of a data analyst tasked with auditing the `sales_kpi` dataset. Your goal is to prepare a comprehensive executive sales performance report. This involves checking for available categories, statuses, ranges, and identifying any missing values. By the end of this project, you will have a polished SQL query that provides insights into sales performance, ready for presentation to stakeholders."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "try-auditing-the-sales-kpi-dataset-sketch0",
+      "kind": "code_input",
+      "title": "Check for Distinct Categories",
+      "prompt": "Write a query to find all distinct categories in the `sales_reporting` table. This will help you understand the variety of products available.",
+      "hint": "Use the DISTINCT keyword to find unique values in a column.",
+      "help": {
+        "concept": "The DISTINCT keyword is used to return only distinct (different) values in a column.",
+        "hint_1": "Focus on the `category` column in the `sales_reporting` table.",
+        "hint_2": "Use `SELECT DISTINCT category FROM sales_reporting;` to get the unique categories."
+      },
+      "starterCode": "SELECT DISTINCT category FROM sales_reporting;",
+      "solutionCode": "SELECT DISTINCT category FROM sales_reporting;",
+      "tests": [
+        {
+          "stdout": "Art\nStationery\nTech\nHome\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "try-auditing-the-sales-kpi-dataset-sketch1",
+      "kind": "code_input",
+      "title": "Identify Missing Customer Ratings",
+      "prompt": "Write a query to find all records in the `sales_reporting` table where the `customer_rating` is missing. This will help you identify incomplete data.",
+      "hint": "Use the IS NULL condition to find missing values.",
+      "help": {
+        "concept": "The IS NULL condition is used to test for empty values (NULL values).",
+        "hint_1": "Focus on the `customer_rating` column in the `sales_reporting` table.",
+        "hint_2": "Use `SELECT * FROM sales_reporting WHERE customer_rating IS NULL;` to find records with missing ratings."
+      },
+      "starterCode": "SELECT * FROM sales_reporting WHERE customer_rating IS NULL;",
+      "solutionCode": "SELECT * FROM sales_reporting WHERE customer_rating IS NULL;",
+      "tests": [
+        {
+          "stdout": "102\n108\n114\n124\n",
+          "match": "includes"
+        }
+      ],
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "try-auditing-the-sales-kpi-dataset-sketch2",
+      "kind": "code_input",
+      "title": "Calculate Total Sales per Region",
+      "prompt": "Write a query to calculate the total sales for each region in the `sales_reporting` table. This will help you understand regional sales performance.",
+      "hint": "Use the SUM function to calculate total sales and GROUP BY to aggregate by region.",
+      "help": {
+        "concept": "The SUM function calculates the total sum of a numeric column. GROUP BY is used to arrange identical data into groups.",
+        "hint_1": "Focus on the `region` and `unit_price` columns.",
+        "hint_2": "Use `SELECT region, SUM(quantity * unit_price) AS total_sales FROM sales_reporting GROUP BY region;` to calculate total sales per region."
+      },
+      "starterCode": "SELECT region, SUM(quantity * unit_price) AS total_sales FROM sales_reporting GROUP BY region;",
+      "solutionCode": "SELECT region, SUM(quantity * unit_price) AS total_sales FROM sales_reporting GROUP BY region;",
+      "tests": [
+        {
+          "stdout": "North\nSouth\nEast\nWest\n",
+          "match": "includes"
+        }
+      ],
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "try-auditing-the-sales-kpi-dataset-sketch3",
+      "kind": "code_input",
+      "title": "Find Orders with High Discounts",
+      "prompt": "Write a query to find all orders in the `sales_reporting` table where the discount percentage is greater than 10%. This will help you identify heavily discounted sales.",
+      "hint": "Use the WHERE clause with a comparison operator to filter results.",
+      "help": {
+        "concept": "The WHERE clause is used to filter records. The comparison operator '>' is used to find values greater than a specified number.",
+        "hint_1": "Focus on the `discount_pct` column.",
+        "hint_2": "Use `SELECT * FROM sales_reporting WHERE discount_pct > 10;` to find orders with high discounts."
+      },
+      "starterCode": "SELECT * FROM sales_reporting WHERE discount_pct > 10;",
+      "solutionCode": "SELECT * FROM sales_reporting WHERE discount_pct > 10;",
+      "tests": [
+        {
+          "stdout": "105\n111\n121\n",
+          "match": "includes"
+        }
+      ],
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "try-auditing-the-sales-kpi-dataset-sketch4",
+      "kind": "code_input",
+      "title": "Determine Average Customer Rating by Category",
+      "prompt": "Write a query to determine the average customer rating for each product category in the `sales_reporting` table. This will help you assess customer satisfaction across categories.",
+      "hint": "Use the AVG function to calculate average ratings and GROUP BY to aggregate by category.",
+      "help": {
+        "concept": "The AVG function calculates the average value of a numeric column. GROUP BY is used to arrange identical data into groups.",
+        "hint_1": "Focus on the `category` and `customer_rating` columns.",
+        "hint_2": "Use `SELECT category, AVG(customer_rating) AS avg_rating FROM sales_reporting GROUP BY category;` to calculate average ratings by category."
+      },
+      "starterCode": "SELECT category, AVG(customer_rating) AS avg_rating FROM sales_reporting GROUP BY category;",
+      "solutionCode": "SELECT category, AVG(customer_rating) AS avg_rating FROM sales_reporting GROUP BY category;",
+      "tests": [
+        {
+          "stdout": "Art\nStationery\nTech\nHome\n",
+          "match": "includes"
+        }
+      ],
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query"
+    }
+  ],
+  "projectDraft": {
+    "title": "Executive Sales Performance Report",
+    "stepIds": [
+      "try-auditing-the-sales-kpi-dataset-sketch0",
+      "try-auditing-the-sales-kpi-dataset-sketch1",
+      "try-auditing-the-sales-kpi-dataset-sketch2",
+      "try-auditing-the-sales-kpi-dataset-sketch3",
+      "try-auditing-the-sales-kpi-dataset-sketch4"
+    ]
+  }
+}

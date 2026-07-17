@@ -1,0 +1,280 @@
+{
+  "topicId": "group-by-one-column",
+  "subjectSlug": "sql-analysis-reporting",
+  "moduleSlug": "sql-analysis-reporting-module-3-grouped-summaries",
+  "sectionSlug": "sql-analysis-reporting-sql-analysis-reporting-section-3-grouping-basics",
+  "prefix": "sql_analysis_reporting_module_3",
+  "minutes": 24,
+  "runtimeDefaults": {
+    "kind": "sql",
+    "showSchema": true,
+    "showErd": true,
+    "showChen": true,
+    "supportsTerminal": false,
+    "supportsMultiFile": false,
+    "supportsFileSystem": false,
+    "datasetId": "sales_kpi",
+    "fixedSqlDialect": "sqlite",
+    "resultShape": "table"
+  },
+  "serviceDefaults": null,
+  "topic": {
+    "labelKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.group-by-one-column.label",
+    "summaryKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.group-by-one-column.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.group-by-one-column.cards.sketch0.title",
+      "sketchId": "group-by-one-column-intro",
+      "height": 420,
+      "tryIt": {
+        "id": "try-group-by-one-column-sketch0",
+        "titleKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.group-by-one-column.tryIt.try_group_by_one_column_sketch0.title",
+        "promptKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.group-by-one-column.tryIt.try_group_by_one_column_sketch0.prompt",
+        "exerciseKey": "try-group-by-one-column-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.group-by-one-column.cards.sketch1.title",
+      "sketchId": "group-by-one-column-example",
+      "height": 420,
+      "tryIt": {
+        "id": "try-group-by-one-column-sketch1",
+        "titleKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.group-by-one-column.tryIt.try_group_by_one_column_sketch1.title",
+        "promptKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.group-by-one-column.tryIt.try_group_by_one_column_sketch1.prompt",
+        "exerciseKey": "try-group-by-one-column-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.group-by-one-column.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "group-by-one-column-intro",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.group-by-one-column.group-by-one-column-intro.title",
+      "bodyKey": "sketches.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.group-by-one-column.group-by-one-column-intro.bodyMarkdown"
+    },
+    {
+      "id": "group-by-one-column-example",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.group-by-one-column.group-by-one-column-example.title",
+      "bodyKey": "sketches.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.group-by-one-column.group-by-one-column-example.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "try-group-by-one-column-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.group-by-one-column.tryIt.try_group_by_one_column_sketch0",
+      "language": "sql",
+      "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.group-by-one-column.tryIt.try_group_by_one_column_sketch0.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "sales_kpi",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "main.sql",
+        "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.group-by-one-column.tryIt.try_group_by_one_column_sketch0.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.sql",
+            "content": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.group-by-one-column.tryIt.try_group_by_one_column_sketch0.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "sales_kpi",
+        "resultShape": "table",
+        "solutionCode": "SELECT region, SUM(quantity * unit_price) AS total_sales\nFROM sales_reporting\nGROUP BY region;"
+      }
+    },
+    {
+      "id": "try-group-by-one-column-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.group-by-one-column.tryIt.try_group_by_one_column_sketch1",
+      "language": "sql",
+      "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.group-by-one-column.tryIt.try_group_by_one_column_sketch1.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "sales_kpi",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "main.sql",
+        "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.group-by-one-column.tryIt.try_group_by_one_column_sketch1.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.sql",
+            "content": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.group-by-one-column.tryIt.try_group_by_one_column_sketch1.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "sales_kpi",
+        "resultShape": "table",
+        "solutionCode": "SELECT region, COUNT(order_id) AS order_count\nFROM sales_reporting\nGROUP BY region;"
+      }
+    },
+    {
+      "id": "single-choice-group-by-definition",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.group-by-one-column.practice.single-choice-group-by-definition",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "fill-blank-choice-group-by-syntax",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.group-by-one-column.practice.fill-blank-choice-group-by-syntax",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "SUM"
+      }
+    },
+    {
+      "id": "multi-choice-group-by-usage",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.group-by-one-column.practice.multi-choice-group-by-usage",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "c",
+          "d"
+        ]
+      }
+    },
+    {
+      "id": "drag-reorder-group-by-process",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.group-by-one-column.practice.drag-reorder-group-by-process",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "single-choice-group-by-aggregate",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.group-by-one-column.practice.single-choice-group-by-aggregate",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "c"
+      }
+    },
+    {
+      "id": "fill-blank-choice-group-by-result",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.group-by-one-column.practice.fill-blank-choice-group-by-result",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "value"
+      }
+    }
+  ]
+}

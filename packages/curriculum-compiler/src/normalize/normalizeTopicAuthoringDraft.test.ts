@@ -178,6 +178,282 @@ describe("normalizeTopicAuthoringDraft", () => {
         ]);
     });
 
+    it("uses the only changed SQL workspace file as the active entry file", () => {
+        const schemaStarter = [
+            "CREATE TABLE products (",
+            "    -- Add the required columns",
+            ");",
+        ].join("\n");
+        const schemaSolution = [
+            "CREATE TABLE products (",
+            "    id INTEGER PRIMARY KEY,",
+            "    name TEXT NOT NULL",
+            ");",
+        ].join("\n");
+
+        const normalized = normalizeTopicAuthoringDraft({
+            title: "Build a table",
+            summary: "Define the product table.",
+            minutes: 20,
+            sketchBlocks: [],
+            quizDraft: [
+                {
+                    id: "sql-schema-step",
+                    kind: "code_input",
+                    title: "Build the product table",
+                    prompt: "Complete schema.sql.",
+                    starterCode: schemaStarter,
+                    solutionCode: schemaSolution,
+                    recipeType: "sql_query",
+                    datasetId: "ddl_blank",
+                    entryFilePath: "query.sql",
+                    starterFiles: [
+                        {
+                            path: "schema.sql",
+                            content: schemaStarter,
+                            language: "sql",
+                        },
+                        {
+                            path: "seed.sql",
+                            content: "",
+                            language: "sql",
+                        },
+                        {
+                            path: "query.sql",
+                            content: "",
+                            language: "sql",
+                            isEntry: true,
+                            entry: true,
+                        },
+                    ],
+                    solutionFiles: [
+                        {
+                            path: "schema.sql",
+                            content: schemaSolution,
+                            language: "sql",
+                        },
+                        {
+                            path: "seed.sql",
+                            content: "",
+                            language: "sql",
+                        },
+                        {
+                            path: "query.sql",
+                            content: "",
+                            language: "sql",
+                            isEntry: true,
+                            entry: true,
+                        },
+                    ],
+                    sqlFileOrder: [
+                        "schema.sql",
+                        "seed.sql",
+                        "query.sql",
+                    ],
+                    checkSql:
+                        "SELECT name FROM sqlite_master WHERE name = 'products';",
+                    hint: "Define the table first.",
+                    help: {
+                        concept: "Schema files define tables.",
+                        hint_1: "Use CREATE TABLE.",
+                        hint_2: "Add a primary key.",
+                    },
+                },
+            ],
+        } as any);
+
+        const exercise = normalized.quizDraft[0] as any;
+        expect(exercise.entryFilePath).toBe("schema.sql");
+        expect(exercise.starterCode).toBe(schemaStarter);
+        expect(exercise.solutionCode).toBe(schemaSolution);
+        expect(
+            exercise.starterFiles.find(
+                (file: any) => file.path === "schema.sql",
+            ),
+        ).toMatchObject({
+            isEntry: true,
+            entry: true,
+        });
+        expect(
+            exercise.starterFiles.find(
+                (file: any) => file.path === "query.sql",
+            ),
+        ).toMatchObject({
+            isEntry: false,
+            entry: false,
+        });
+    });
+
+    it("preserves an explicit SQL file order during canonical normalization", () => {
+        const normalized = normalizeTopicAuthoringDraft({
+            title: "Topic",
+            summary: "Summary",
+            minutes: 20,
+            sketchBlocks: [],
+            quizDraft: [
+                {
+                    id: "sql-1",
+                    kind: "code_input",
+                    title: "Create and inspect",
+                    prompt: "Create a table and inspect it.",
+                    starterCode: "-- Write the query\n",
+                    solutionCode: "SELECT name FROM sqlite_master;\n",
+                    recipeType: "sql_query",
+                    datasetId: "ddl_blank",
+                    entryFilePath: "query.sql",
+                    starterFiles: [
+                        {
+                            path: "schema.sql",
+                            content: "-- Create the table\n",
+                            language: "sql",
+                        },
+                        {
+                            path: "query.sql",
+                            content: "-- Write the query\n",
+                            language: "sql",
+                            isEntry: true,
+                        },
+                    ],
+                    solutionFiles: [
+                        {
+                            path: "schema.sql",
+                            content:
+                                "CREATE TABLE products (id INTEGER PRIMARY KEY);\n",
+                            language: "sql",
+                        },
+                        {
+                            path: "query.sql",
+                            content: "SELECT name FROM sqlite_master;\n",
+                            language: "sql",
+                            isEntry: true,
+                        },
+                    ],
+                    sqlFileOrder: ["schema.sql", "query.sql"],
+                    hint: "Create first, then inspect.",
+                    help: {
+                        concept: "DDL file order",
+                        hint_1: "Run schema.sql first.",
+                        hint_2: "Run query.sql second.",
+                    },
+                },
+            ],
+        } as any);
+
+        const exercise = normalized.quizDraft[0] as any;
+        expect(exercise.sqlFileOrder).toEqual([
+            "schema.sql",
+            "query.sql",
+        ]);
+    });
+
+    it("derives SQL file order for resumed multi-file drafts that omitted it", () => {
+        const normalized = normalizeTopicAuthoringDraft({
+            title: "Topic",
+            summary: "Summary",
+            minutes: 20,
+            sketchBlocks: [],
+            quizDraft: [
+                {
+                    id: "sql-1",
+                    kind: "code_input",
+                    title: "Create and inspect",
+                    prompt: "Create a table and inspect it.",
+                    starterCode: "-- Write the query\n",
+                    solutionCode: "SELECT name FROM sqlite_master;\n",
+                    recipeType: "sql_query",
+                    datasetId: "ddl_blank",
+                    entryFilePath: "query.sql",
+                    starterFiles: [
+                        {
+                            path: "query.sql",
+                            content: "-- Write the query\n",
+                            language: "sql",
+                            isEntry: true,
+                        },
+                        {
+                            path: "schema.sql",
+                            content: "-- Create the table\n",
+                            language: "sql",
+                        },
+                    ],
+                    solutionFiles: [
+                        {
+                            path: "query.sql",
+                            content: "SELECT name FROM sqlite_master;\n",
+                            language: "sql",
+                            isEntry: true,
+                        },
+                        {
+                            path: "schema.sql",
+                            content:
+                                "CREATE TABLE products (id INTEGER PRIMARY KEY);\n",
+                            language: "sql",
+                        },
+                    ],
+                    hint: "Create first, then inspect.",
+                    help: {
+                        concept: "DDL file order",
+                        hint_1: "Run schema.sql first.",
+                        hint_2: "Run query.sql second.",
+                    },
+                },
+            ],
+        } as any);
+
+        const exercise = normalized.quizDraft[0] as any;
+        expect(exercise.sqlFileOrder).toEqual([
+            "schema.sql",
+            "query.sql",
+        ]);
+    });
+
+    it("does not invent sqlFileOrder for single-file SQL exercises", () => {
+        const normalized = normalizeTopicAuthoringDraft({
+            title: "Topic",
+            summary: "Summary",
+            minutes: 20,
+            sketchBlocks: [],
+            quizDraft: [
+                {
+                    id: "sql-1",
+                    kind: "code_input",
+                    title: "Inspect",
+                    prompt: "Inspect the table.",
+                    starterCode: "-- Write the query\n",
+                    solutionCode: "SELECT * FROM products;\n",
+                    recipeType: "sql_query",
+                    datasetId: "products_catalog",
+                    entryFilePath: "query.sql",
+                    starterFiles: [
+                        {
+                            path: "query.sql",
+                            content: "-- Write the query\n",
+                            language: "sql",
+                            isEntry: true,
+                        },
+                    ],
+                    solutionFiles: [
+                        {
+                            path: "query.sql",
+                            content: "SELECT * FROM products;\n",
+                            language: "sql",
+                            isEntry: true,
+                        },
+                    ],
+                    hint: "Select the rows.",
+                    help: {
+                        concept: "Single-file query",
+                        hint_1: "Use SELECT.",
+                        hint_2: "Name the table.",
+                    },
+                },
+            ],
+        } as any);
+
+        const exercise = normalized.quizDraft[0] as any;
+        expect(exercise.sqlFileOrder).toBeUndefined();
+    });
+
     it("throws on unsafe workspaceExpectations paths", () => {
         expect(() =>
             normalizeTopicAuthoringDraft({

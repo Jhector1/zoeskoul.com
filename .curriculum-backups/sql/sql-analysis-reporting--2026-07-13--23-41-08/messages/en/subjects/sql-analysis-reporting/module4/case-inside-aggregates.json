@@ -1,0 +1,165 @@
+{
+  "topics": {
+    "sql-analysis-reporting": {
+      "sql-analysis-reporting-module-4-having-and-conditional-reporting": {
+        "case-inside-aggregates": {
+          "label": "CASE Inside Aggregate Functions",
+          "summary": "Calculate condition-specific counts and monetary totals without removing the other rows from each group.",
+          "cards": {
+            "sketch0": {
+              "title": "Count One Outcome Inside Every Group"
+            },
+            "sketch1": {
+              "title": "Sum Value Only for Matching Rows"
+            },
+            "quiz": {
+              "title": "Check Your Understanding"
+            }
+          },
+          "practice": {
+            "single-choice-1": {
+              "title": "Conditional Count Pattern",
+              "prompt": "Which expression counts completed rows inside a group?",
+              "hint": "Each matching row must contribute one and each non-match zero.",
+              "help": {
+                "concept": "SUM of a 1/0 CASE is the standard conditional count pattern.",
+                "hint_1": "The condition is evaluated row by row inside the aggregate.",
+                "hint_2": "Choose the expression with THEN 1 ELSE 0."
+              },
+              "options": {
+                "a": "SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END)",
+                "b": "CASE WHEN order_status = 'Completed' THEN SUM(*) END",
+                "c": "COUNT(order_status = 'Completed')",
+                "d": "SUM(order_status)"
+              }
+            },
+            "single-choice-2": {
+              "title": "Why Not WHERE",
+              "prompt": "Why use conditional aggregation instead of filtering to completed rows with WHERE?",
+              "hint": "A WHERE filter would remove non-completed rows from every metric.",
+              "help": {
+                "concept": "Conditional aggregation preserves the full group while measuring a subset.",
+                "hint_1": "This enables side-by-side KPIs.",
+                "hint_2": "Choose the comparison use case."
+              },
+              "options": {
+                "a": "To keep total orders and completed orders in the same group row",
+                "b": "Because WHERE cannot use text",
+                "c": "To change the table schema",
+                "d": "Because CASE automatically sorts results"
+              }
+            },
+            "multi-choice-1": {
+              "title": "Conditional Aggregate Uses",
+              "prompt": "Which metrics can be built with CASE inside an aggregate? Select all that apply.",
+              "hint": "Choose read-only subset measures rather than data mutations.",
+              "help": {
+                "concept": "CASE can return 1, 0, or a numeric expression for SUM.",
+                "hint_1": "A condition can test status or NULL.",
+                "hint_2": "Updating stored values requires a mutation statement."
+              },
+              "options": {
+                "a": "Completed-order count",
+                "b": "Pending gross value",
+                "c": "Missing-discount count",
+                "d": "Permanent status updates"
+              }
+            },
+            "multi-choice-2": {
+              "title": "Correct ELSE Values",
+              "prompt": "Which ELSE values are appropriate in these conditional sums? Select all that apply.",
+              "hint": "Non-matching rows should contribute nothing to the subset total.",
+              "help": {
+                "concept": "Zero is the neutral value for SUM.",
+                "hint_1": "Matching rows can contribute one or a business expression.",
+                "hint_2": "Choose values that do not inflate non-matches."
+              },
+              "options": {
+                "a": "0 for a conditional count",
+                "b": "0 for a conditional monetary sum",
+                "c": "1 for every non-matching monetary row",
+                "d": "A net-sales expression for matching completed rows"
+              }
+            },
+            "drag-reorder-1": {
+              "title": "Build a Conditional Count",
+              "prompt": "Arrange the pieces inside SUM.",
+              "hint": "A CASE expression opens, tests, returns values, then closes.",
+              "help": {
+                "concept": "The condition follows CASE.",
+                "hint_1": "Both matching and non-matching contributions are defined.",
+                "hint_2": "END completes the expression before SUM closes."
+              },
+              "tokens": {
+                "t1": "CASE",
+                "t2": "WHEN order_status = 'Completed'",
+                "t3": "THEN 1 ELSE 0",
+                "t4": "END"
+              }
+            },
+            "fill-blank-choice-1": {
+              "title": "Complete the Non-Matching Contribution",
+              "prompt": "Fill the value that prevents non-completed rows from increasing the count.",
+              "hint": "A non-match should add nothing to the sum.",
+              "help": {
+                "concept": "Zero is the neutral numeric contribution.",
+                "hint_1": "Using one would count every row.",
+                "hint_2": "Choose 0."
+              },
+              "template": "SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE [blank1] END)",
+              "choices": [
+                "0",
+                "1",
+                "NULL + 1",
+                "COUNT(*)"
+              ]
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_case_inside_aggregates_sketch0": {
+              "title": "Count Pending Orders by Category",
+              "prompt": "Return one row per `category` with `total_orders` and `pending_orders`. Calculate pending orders with CASE inside SUM and sort by category.",
+              "hint": "Keep every row in the group; contribute one only when the status is pending.",
+              "help": {
+                "concept": "Conditional counting preserves the full group while measuring a matching subset.",
+                "hint_1": "Use COUNT(*) for the total population.",
+                "hint_2": "Use 1 and 0 inside the CASE so SUM becomes a count."
+              },
+              "starterCode": "-- Write the query below.",
+              "solutionCode": "SELECT\n    category,\n    COUNT(*) AS total_orders,\n    SUM(CASE WHEN order_status = 'Pending' THEN 1 ELSE 0 END) AS pending_orders\nFROM sales_reporting\nGROUP BY category\nORDER BY category;"
+            },
+            "try_case_inside_aggregates_sketch1": {
+              "title": "Completed Net Sales by Region Without Filtering Rows",
+              "prompt": "Return one row per `region` with `total_orders` and completed-order net sales as `completed_net_sales`, rounded to two decimals. Use CASE inside SUM and sort by region.",
+              "hint": "Return the net-sales expression only in the completed branch; return zero otherwise.",
+              "help": {
+                "concept": "Conditional sums let one grouped row compare the full population with a matching monetary subset.",
+                "hint_1": "Keep COUNT(*) outside the CASE for total orders.",
+                "hint_2": "Wrap the conditional monetary sum in ROUND."
+              },
+              "starterCode": "-- Write the query below.",
+              "solutionCode": "SELECT\n    region,\n    COUNT(*) AS total_orders,\n    ROUND(SUM(\n        CASE\n            WHEN order_status = 'Completed' THEN\n                quantity * unit_price\n                - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n            ELSE 0\n        END\n    ), 2) AS completed_net_sales\nFROM sales_reporting\nGROUP BY region\nORDER BY region;"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql-analysis-reporting": {
+      "sql-analysis-reporting-module-4-having-and-conditional-reporting": {
+        "case-inside-aggregates": {
+          "sketch0": {
+            "title": "Count One Outcome Inside Every Group",
+            "bodyMarkdown": "A CASE expression can contribute `1` for matching rows and `0` for all others.\n\n```sql\nSELECT\n    region,\n    COUNT(*) AS total_orders,\n    SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders\nFROM sales_reporting\nGROUP BY region;\n```\n\nBecause no rows are removed, the same group can show both total and completed counts."
+          },
+          "sketch1": {
+            "title": "Sum Value Only for Matching Rows",
+            "bodyMarkdown": "CASE can return a monetary expression for matching rows and zero otherwise.\n\n```sql\nSELECT\n    category,\n    ROUND(SUM(\n        CASE\n            WHEN order_status = 'Pending' THEN quantity * unit_price\n            ELSE 0\n        END\n    ), 2) AS pending_gross_value\nFROM sales_reporting\nGROUP BY category;\n```\n\nThe category groups remain complete, but only pending rows contribute dollars to this metric."
+          }
+        }
+      }
+    }
+  }
+}

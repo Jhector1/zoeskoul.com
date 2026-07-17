@@ -1,0 +1,153 @@
+{
+  "topics": {
+    "sql--sql-analysis-reporting--draft": {
+      "sql-analysis-reporting-module-0-report-foundations": {
+        "module-0-order-value-detail-report": {
+          "label": "Module 0: Order Value Detail Report",
+          "summary": "Create a clean order detail report with selected columns, readable aliases, gross sales, and stable sorting.",
+          "cards": {
+            "sketch0": {
+              "title": "Introduction to Order Value Detail Report"
+            },
+            "project": {
+              "title": "Order Value Detail Report Project"
+            }
+          },
+          "projectSteps": {
+            "try_module_0_sketch0": {
+              "title": "Create a Basic Order Report"
+            },
+            "try_module_0_sketch1": {
+              "title": "Add Aliases to Columns"
+            },
+            "try_module_0_sketch2": {
+              "title": "Calculate and Round Gross Sales"
+            },
+            "try_module_0_sketch3": {
+              "title": "Filter Completed Orders"
+            },
+            "try_module_0_sketch4": {
+              "title": "Limit the Number of Results"
+            }
+          },
+          "moduleProject": {
+            "steps": {
+              "try_module_0_sketch0": {
+                "title": "Create a Basic Order Report",
+                "prompt": "Start the module project. In step 1 of 5, Write a query to select the `order_id`, `product_name`, and calculate the `Gross Sales` as `quantity * unit_price` from the `sales_reporting` table. Sort the results by `Gross Sales` in descending order.",
+                "hint": "This is the first project step. Build a clean starting version, then run it before moving on.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "This is the first project step. Build a clean starting version, then run it before moving on.",
+                  "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+                },
+                "starterCode": "-- Write your SQL answer below",
+                "solutionCode": "SELECT order_id, product_name, quantity * unit_price AS \"Gross Sales\"\nFROM sales_reporting\nORDER BY \"Gross Sales\" DESC;"
+              },
+              "try_module_0_sketch1": {
+                "title": "Add Aliases to Columns",
+                "prompt": "Continue the same module project from the previous working step. In step 2 of 5, Modify the previous query to add aliases to the `order_id` and `product_name` columns as `Order ID` and `Product`, respectively.",
+                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                  "hint_2": "Run the previous working code first, then make only the focused change for this step."
+                },
+                "starterCode": "SELECT order_id, product_name, quantity * unit_price AS \"Gross Sales\"\nFROM sales_reporting\nORDER BY \"Gross Sales\" DESC;\n-- Project step 2: Add Aliases to Columns\n-- Keep the working code above from the previous step.\n-- Next, Modify the previous query to add aliases to the `order_id` and `product_name` columns as `Order ID` and `Product`, respectively\n-- Add only the focused change for this step inside the existing work.\n",
+                "solutionCode": "SELECT order_id AS \"Order ID\", product_name AS \"Product\", quantity * unit_price AS \"Gross Sales\"\nFROM sales_reporting\nORDER BY \"Gross Sales\" DESC;\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "SELECT order_id, product_name, quantity * unit_price AS \"Gross Sales\"\nFROM sales_reporting\nORDER BY \"Gross Sales\" DESC;\n-- Project step 2: Add Aliases to Columns\n-- Keep the working code above from the previous step.\n-- Next, Modify the previous query to add aliases to the `order_id` and `product_name` columns as `Order ID` and `Product`, respectively\n-- Add only the focused change for this step inside the existing work.\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_py": {
+                    "content": "SELECT order_id AS \"Order ID\", product_name AS \"Product\", quantity * unit_price AS \"Gross Sales\"\nFROM sales_reporting\nORDER BY \"Gross Sales\" DESC;\n"
+                  }
+                }
+              },
+              "try_module_0_sketch2": {
+                "title": "Calculate and Round Gross Sales",
+                "prompt": "Continue the same module project from the previous working step. In step 3 of 5, Extend the query to round the `Gross Sales` to two decimal places.",
+                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                  "hint_2": "Run the previous working code first, then make only the focused change for this step."
+                },
+                "starterCode": "SELECT order_id AS \"Order ID\", product_name AS \"Product\", quantity * unit_price AS \"Gross Sales\"\nFROM sales_reporting\nORDER BY \"Gross Sales\" DESC;\n-- Project step 3: Calculate and Round Gross Sales\n-- Keep the working code above from the previous step.\n-- Next, Extend the query to round the `Gross Sales` to two decimal places\n-- Add only the focused change for this step inside the existing work.\n",
+                "solutionCode": "SELECT order_id AS \"Order ID\", product_name AS \"Product\", ROUND(quantity * unit_price, 2) AS \"Gross Sales\"\nFROM sales_reporting\nORDER BY \"Gross Sales\" DESC;\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "SELECT order_id AS \"Order ID\", product_name AS \"Product\", quantity * unit_price AS \"Gross Sales\"\nFROM sales_reporting\nORDER BY \"Gross Sales\" DESC;\n-- Project step 3: Calculate and Round Gross Sales\n-- Keep the working code above from the previous step.\n-- Next, Extend the query to round the `Gross Sales` to two decimal places\n-- Add only the focused change for this step inside the existing work.\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_py": {
+                    "content": "SELECT order_id AS \"Order ID\", product_name AS \"Product\", ROUND(quantity * unit_price, 2) AS \"Gross Sales\"\nFROM sales_reporting\nORDER BY \"Gross Sales\" DESC;\n"
+                  }
+                }
+              },
+              "try_module_0_sketch3": {
+                "title": "Filter Completed Orders",
+                "prompt": "Continue the same module project from the previous working step. In step 4 of 5, Modify the query to include only orders with the status 'Completed'.",
+                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                  "hint_2": "Run the previous working code first, then make only the focused change for this step."
+                },
+                "starterCode": "SELECT order_id AS \"Order ID\", product_name AS \"Product\", ROUND(quantity * unit_price, 2) AS \"Gross Sales\"\nFROM sales_reporting\nORDER BY \"Gross Sales\" DESC;\n-- Project step 4: Filter Completed Orders\n-- Keep the working code above from the previous step.\n-- Next, Modify the query to include only orders with the status 'Completed'\n-- Add only the focused change for this step inside the existing work.\n",
+                "solutionCode": "SELECT order_id AS \"Order ID\", product_name AS \"Product\", ROUND(quantity * unit_price, 2) AS \"Gross Sales\"\nFROM sales_reporting\nWHERE order_status = 'Completed'\nORDER BY \"Gross Sales\" DESC;\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "SELECT order_id AS \"Order ID\", product_name AS \"Product\", ROUND(quantity * unit_price, 2) AS \"Gross Sales\"\nFROM sales_reporting\nORDER BY \"Gross Sales\" DESC;\n-- Project step 4: Filter Completed Orders\n-- Keep the working code above from the previous step.\n-- Next, Modify the query to include only orders with the status 'Completed'\n-- Add only the focused change for this step inside the existing work.\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_py": {
+                    "content": "SELECT order_id AS \"Order ID\", product_name AS \"Product\", ROUND(quantity * unit_price, 2) AS \"Gross Sales\"\nFROM sales_reporting\nWHERE order_status = 'Completed'\nORDER BY \"Gross Sales\" DESC;\n"
+                  }
+                }
+              },
+              "try_module_0_sketch4": {
+                "title": "Limit the Number of Results",
+                "prompt": "Continue the same module project from the previous working step. In step 5 of 5, Limit the query results to the top 5 orders by `Gross Sales`.",
+                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                  "hint_2": "Run the previous working code first, then make only the focused change for this step."
+                },
+                "starterCode": "SELECT order_id AS \"Order ID\", product_name AS \"Product\", ROUND(quantity * unit_price, 2) AS \"Gross Sales\"\nFROM sales_reporting\nWHERE order_status = 'Completed'\nORDER BY \"Gross Sales\" DESC;\n-- Project step 5: Limit the Number of Results\n-- Keep the working code above from the previous step.\n-- Next, Limit the query results to the top 5 orders by `Gross Sales`\n-- Add only the focused change for this step inside the existing work.\n",
+                "solutionCode": "SELECT order_id AS \"Order ID\", product_name AS \"Product\", ROUND(quantity * unit_price, 2) AS \"Gross Sales\"\nFROM sales_reporting\nWHERE order_status = 'Completed'\nORDER BY \"Gross Sales\" DESC\nLIMIT 5;\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "SELECT order_id AS \"Order ID\", product_name AS \"Product\", ROUND(quantity * unit_price, 2) AS \"Gross Sales\"\nFROM sales_reporting\nWHERE order_status = 'Completed'\nORDER BY \"Gross Sales\" DESC;\n-- Project step 5: Limit the Number of Results\n-- Keep the working code above from the previous step.\n-- Next, Limit the query results to the top 5 orders by `Gross Sales`\n-- Add only the focused change for this step inside the existing work.\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_py": {
+                    "content": "SELECT order_id AS \"Order ID\", product_name AS \"Product\", ROUND(quantity * unit_price, 2) AS \"Gross Sales\"\nFROM sales_reporting\nWHERE order_status = 'Completed'\nORDER BY \"Gross Sales\" DESC\nLIMIT 5;\n"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql--sql-analysis-reporting--draft": {
+      "sql-analysis-reporting-module-0-report-foundations": {
+        "module-0-order-value-detail-report": {
+          "sketch-0": {
+            "title": "Introduction to Order Value Detail Report",
+            "bodyMarkdown": "In this project, you will create an Order Value Detail Report using SQL. The goal is to generate a report that includes selected columns with clear aliases, calculates gross sales, and sorts the data in a stable manner. This report will help managers quickly understand order details and sales performance.\n\n### Key Concepts\n- **Aliases**: Use the `AS` keyword to rename columns for clarity.\n- **Arithmetic Expressions**: Calculate new values using existing columns.\n- **Rounding**: Use the `ROUND` function to format numbers for readability.\n- **Sorting**: Use `ORDER BY` to arrange data in a specific order.\n\n### Example\n```sql\nSELECT order_id AS \"Order ID\",\n       product_name AS \"Product\",\n       quantity * unit_price AS \"Gross Sales\"\nFROM sales_reporting\nORDER BY \"Gross Sales\" DESC;\n```\nThis query selects the order ID and product name, calculates the gross sales by multiplying quantity and unit price, and sorts the results by gross sales in descending order."
+          }
+        }
+      }
+    }
+  }
+}

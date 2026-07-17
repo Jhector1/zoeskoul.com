@@ -27,19 +27,7 @@
       "kind": "sketch",
       "titleKey": "topics.sql-v2.sql-v2-3.sorting_text.cards.sketch0.title",
       "sketchId": "sketch-1",
-      "height": 420,
-      "tryIt": {
-        "id": "try-sorting_text-sketch0",
-        "titleKey": "topics.sql-v2.sql-v2-3.sorting_text.tryIt.try_sorting_text_sketch0.title",
-        "promptKey": "topics.sql-v2.sql-v2-3.sorting_text.tryIt.try_sorting_text_sketch0.prompt",
-        "exerciseKey": "try-sorting_text-sketch0",
-        "difficulty": "easy",
-        "preferKind": "code_input",
-        "seedPolicy": "global",
-        "required": true,
-        "allowReveal": true,
-        "maxAttempts": null
-      }
+      "height": 420
     },
     {
       "id": "sketch1",
@@ -73,46 +61,6 @@
         "allowReveal": true,
         "preferKind": null,
         "maxAttempts": null
-      }
-    },
-    {
-      "id": "project",
-      "kind": "project",
-      "titleKey": "topics.sql-v2.sql-v2-3.sorting_text.cards.project.title",
-      "project": {
-        "difficulty": "easy",
-        "allowReveal": true,
-        "preferKind": "code_input",
-        "maxAttempts": null,
-        "steps": [
-          {
-            "id": "ci_1",
-            "titleKey": "topics.sql-v2.sql-v2-3.sorting_text.projectSteps.ci_1.title",
-            "exerciseKey": "ci-1",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "maxAttempts": null
-          },
-          {
-            "id": "ci_2",
-            "titleKey": "topics.sql-v2.sql-v2-3.sorting_text.projectSteps.ci_2.title",
-            "exerciseKey": "ci-2",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "maxAttempts": null
-          },
-          {
-            "id": "ci_3",
-            "titleKey": "topics.sql-v2.sql-v2-3.sorting_text.projectSteps.ci_3.title",
-            "exerciseKey": "ci-3",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "maxAttempts": null
-          }
-        ]
       }
     }
   ],
@@ -270,329 +218,9 @@
       }
     },
     {
-      "id": "ci-1",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-3.sorting_text.quiz.ci-1",
-      "language": "sql",
-      "starterCode": "@:topics.sql-v2.sql-v2-3.sorting_text.quiz.ci-1.starterCode",
-      "fixedSqlDialect": "sqlite",
-      "runtime": {
-        "kind": "sql",
-        "datasetId": "products_catalog",
-        "fixedSqlDialect": "sqlite",
-        "resultShape": "table",
-        "showSchema": true,
-        "showErd": false,
-        "showChen": false,
-        "supportsTerminal": false,
-        "supportsMultiFile": false,
-        "supportsFileSystem": false
-      },
-      "recipe": {
-        "type": "sql_query",
-        "datasetId": "products_catalog",
-        "resultShape": "table",
-        "solutionCode": "SELECT\n  name,\n  category\nFROM products\nORDER BY name ASC;",
-        "solutionFiles": [
-          {
-            "path": "query.sql",
-            "content": "SELECT\n  name,\n  category\nFROM products\nORDER BY name ASC;",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "entryFilePath": "query.sql",
-      "starterFiles": [
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-v2.sql-v2-3.sorting_text.quiz.ci-1.starterCode",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "query.sql",
-          "content": "SELECT\n  name,\n  category\nFROM products\nORDER BY name ASC;",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "workspace": {
-        "language": "sql",
-        "entryFilePath": "query.sql",
-        "starterCode": "@:topics.sql-v2.sql-v2-3.sorting_text.quiz.ci-1.starterCode",
-        "starterFiles": [
-          {
-            "path": "query.sql",
-            "content": "@:topics.sql-v2.sql-v2-3.sorting_text.quiz.ci-1.starterCode",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ],
-        "solutionFiles": [
-          {
-            "path": "query.sql",
-            "content": "SELECT\n  name,\n  category\nFROM products\nORDER BY name ASC;",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "showExpectedExample": true
-    },
-    {
-      "id": "ci-2",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-3.sorting_text.quiz.ci-2",
-      "language": "sql",
-      "starterCode": "@:topics.sql-v2.sql-v2-3.sorting_text.quiz.ci-2.starterCode",
-      "fixedSqlDialect": "sqlite",
-      "runtime": {
-        "kind": "sql",
-        "datasetId": "products_catalog",
-        "fixedSqlDialect": "sqlite",
-        "resultShape": "table",
-        "showSchema": true,
-        "showErd": false,
-        "showChen": false,
-        "supportsTerminal": false,
-        "supportsMultiFile": false,
-        "supportsFileSystem": false
-      },
-      "recipe": {
-        "type": "sql_query",
-        "datasetId": "products_catalog",
-        "resultShape": "table",
-        "solutionCode": "SELECT\n  name,\n  category\nFROM products\nORDER BY category ASC, name ASC;",
-        "solutionFiles": [
-          {
-            "path": "query.sql",
-            "content": "SELECT\n  name,\n  category\nFROM products\nORDER BY category ASC, name ASC;",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "entryFilePath": "query.sql",
-      "starterFiles": [
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-v2.sql-v2-3.sorting_text.quiz.ci-2.starterCode",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "query.sql",
-          "content": "SELECT\n  name,\n  category\nFROM products\nORDER BY category ASC, name ASC;",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "workspace": {
-        "language": "sql",
-        "entryFilePath": "query.sql",
-        "starterCode": "@:topics.sql-v2.sql-v2-3.sorting_text.quiz.ci-2.starterCode",
-        "starterFiles": [
-          {
-            "path": "query.sql",
-            "content": "@:topics.sql-v2.sql-v2-3.sorting_text.quiz.ci-2.starterCode",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ],
-        "solutionFiles": [
-          {
-            "path": "query.sql",
-            "content": "SELECT\n  name,\n  category\nFROM products\nORDER BY category ASC, name ASC;",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "showExpectedExample": true
-    },
-    {
-      "id": "ci-3",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-3.sorting_text.quiz.ci-3",
-      "language": "sql",
-      "starterCode": "@:topics.sql-v2.sql-v2-3.sorting_text.quiz.ci-3.starterCode",
-      "fixedSqlDialect": "sqlite",
-      "runtime": {
-        "kind": "sql",
-        "datasetId": "products_catalog",
-        "fixedSqlDialect": "sqlite",
-        "resultShape": "table",
-        "showSchema": true,
-        "showErd": false,
-        "showChen": false,
-        "supportsTerminal": false,
-        "supportsMultiFile": false,
-        "supportsFileSystem": false
-      },
-      "recipe": {
-        "type": "sql_query",
-        "datasetId": "products_catalog",
-        "resultShape": "table",
-        "solutionCode": "SELECT\n  name,\n  category\nFROM products\nORDER BY category ASC, name DESC;",
-        "solutionFiles": [
-          {
-            "path": "query.sql",
-            "content": "SELECT\n  name,\n  category\nFROM products\nORDER BY category ASC, name DESC;",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "entryFilePath": "query.sql",
-      "starterFiles": [
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-v2.sql-v2-3.sorting_text.quiz.ci-3.starterCode",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "query.sql",
-          "content": "SELECT\n  name,\n  category\nFROM products\nORDER BY category ASC, name DESC;",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "workspace": {
-        "language": "sql",
-        "entryFilePath": "query.sql",
-        "starterCode": "@:topics.sql-v2.sql-v2-3.sorting_text.quiz.ci-3.starterCode",
-        "starterFiles": [
-          {
-            "path": "query.sql",
-            "content": "@:topics.sql-v2.sql-v2-3.sorting_text.quiz.ci-3.starterCode",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ],
-        "solutionFiles": [
-          {
-            "path": "query.sql",
-            "content": "SELECT\n  name,\n  category\nFROM products\nORDER BY category ASC, name DESC;",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "showExpectedExample": true
-    },
-    {
-      "id": "try-sorting_text-sketch0",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-3.sorting_text.quiz.try-sorting_text-sketch0",
-      "language": "sql",
-      "starterCode": "@:topics.sql-v2.sql-v2-3.sorting_text.quiz.try-sorting_text-sketch0.starterCode",
-      "fixedSqlDialect": "sqlite",
-      "runtime": {
-        "kind": "sql",
-        "datasetId": "products_catalog",
-        "fixedSqlDialect": "sqlite",
-        "resultShape": "table",
-        "showSchema": true,
-        "showErd": false,
-        "showChen": false,
-        "supportsTerminal": false,
-        "supportsMultiFile": false,
-        "supportsFileSystem": false
-      },
-      "recipe": {
-        "type": "sql_query",
-        "datasetId": "products_catalog",
-        "resultShape": "table",
-        "solutionCode": "SELECT\n  name,\n  category\nFROM products\nORDER BY name ASC;",
-        "solutionFiles": [
-          {
-            "path": "query.sql",
-            "content": "SELECT\n  name,\n  category\nFROM products\nORDER BY name ASC;",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "entryFilePath": "query.sql",
-      "starterFiles": [
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-v2.sql-v2-3.sorting_text.quiz.try-sorting_text-sketch0.starterCode",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "query.sql",
-          "content": "SELECT\n  name,\n  category\nFROM products\nORDER BY name ASC;",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "workspace": {
-        "language": "sql",
-        "entryFilePath": "query.sql",
-        "starterCode": "@:topics.sql-v2.sql-v2-3.sorting_text.quiz.try-sorting_text-sketch0.starterCode",
-        "starterFiles": [
-          {
-            "path": "query.sql",
-            "content": "@:topics.sql-v2.sql-v2-3.sorting_text.quiz.try-sorting_text-sketch0.starterCode",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ],
-        "solutionFiles": [
-          {
-            "path": "query.sql",
-            "content": "SELECT\n  name,\n  category\nFROM products\nORDER BY name ASC;",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "showExpectedExample": true
-    },
-    {
       "id": "try-sorting_text-sketch1",
       "kind": "code_input",
-      "purpose": "project",
+      "purpose": "try_it",
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-3.sorting_text.quiz.try-sorting_text-sketch1",
       "language": "sql",
@@ -614,15 +242,18 @@
         "type": "sql_query",
         "datasetId": "products_catalog",
         "resultShape": "table",
-        "solutionCode": "SELECT\n  name,\n  category\nFROM products\nORDER BY category ASC, name ASC;",
+        "solutionCode": "SELECT name, category\nFROM products\nORDER BY category DESC, name ASC;",
         "solutionFiles": [
           {
             "path": "query.sql",
-            "content": "SELECT\n  name,\n  category\nFROM products\nORDER BY category ASC, name ASC;",
+            "content": "SELECT name, category\nFROM products\nORDER BY category DESC, name ASC;",
             "language": "sql",
             "isEntry": true,
             "entry": true
           }
+        ],
+        "sqlFileOrder": [
+          "query.sql"
         ]
       },
       "entryFilePath": "query.sql",
@@ -638,7 +269,7 @@
       "solutionFiles": [
         {
           "path": "query.sql",
-          "content": "SELECT\n  name,\n  category\nFROM products\nORDER BY category ASC, name ASC;",
+          "content": "SELECT name, category\nFROM products\nORDER BY category DESC, name ASC;",
           "language": "sql",
           "isEntry": true,
           "entry": true
@@ -660,14 +291,30 @@
         "solutionFiles": [
           {
             "path": "query.sql",
-            "content": "SELECT\n  name,\n  category\nFROM products\nORDER BY category ASC, name ASC;",
+            "content": "SELECT name, category\nFROM products\nORDER BY category DESC, name ASC;",
             "language": "sql",
             "isEntry": true,
             "entry": true
           }
-        ]
+        ],
+        "openTabs": [
+          "query.sql"
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "query.sql"
+          ]
+        }
       },
-      "showExpectedExample": true
+      "showExpectedExample": true,
+      "sqlFileOrder": [
+        "query.sql"
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "query.sql"
+        ]
+      }
     }
   ]
 }

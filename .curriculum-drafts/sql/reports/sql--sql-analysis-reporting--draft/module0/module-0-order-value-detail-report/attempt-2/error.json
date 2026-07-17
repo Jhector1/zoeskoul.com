@@ -1,0 +1,41 @@
+{
+  "name": "RetryableTopicValidationError",
+  "message": "Golden validation failed for topic \"module-0-order-value-detail-report\"\nModule: sql-analysis-reporting-module-0-report-foundations\nSection: sql-analysis-reporting-section-0-module-project\nReport dir: /Users/admin/Documents/NextJSProject/zoeskoul.com/.curriculum-drafts/sql/reports/sql--sql-analysis-reporting--draft/module0/module-0-order-value-detail-report\n- Exercise \"try-module-0-sketch1\" SQL solution does not satisfy its published SQL contract: Learner SQL failed to execute.\n- Exercise \"try-module-0-sketch2\" SQL solution does not satisfy its published SQL contract: Learner SQL failed to execute.\n- Exercise \"try-module-0-sketch3\" SQL solution does not satisfy its published SQL contract: Learner SQL failed to execute.\n- Exercise \"try-module-0-sketch4\" SQL solution does not satisfy its published SQL contract: Learner SQL failed to execute.",
+  "stack": "RetryableTopicValidationError: Golden validation failed for topic \"module-0-order-value-detail-report\"\nModule: sql-analysis-reporting-module-0-report-foundations\nSection: sql-analysis-reporting-section-0-module-project\nReport dir: /Users/admin/Documents/NextJSProject/zoeskoul.com/.curriculum-drafts/sql/reports/sql--sql-analysis-reporting--draft/module0/module-0-order-value-detail-report\n- Exercise \"try-module-0-sketch1\" SQL solution does not satisfy its published SQL contract: Learner SQL failed to execute.\n- Exercise \"try-module-0-sketch2\" SQL solution does not satisfy its published SQL contract: Learner SQL failed to execute.\n- Exercise \"try-module-0-sketch3\" SQL solution does not satisfy its published SQL contract: Learner SQL failed to execute.\n- Exercise \"try-module-0-sketch4\" SQL solution does not satisfy its published SQL contract: Learner SQL failed to execute.\n    at throwRetryableReportFailure (file:///Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-compiler/dist/compile/compileSubjectPipeline.js:85:11)\n    at compileSubjectPipeline (file:///Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-compiler/dist/compile/compileSubjectPipeline.js:469:25)\n    at async compileCourse (file:///Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-compiler/dist/compile/compileCourse.js:91:11)\n    at async runCompileCourse (file:///Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-cli/dist/commands/compile-course.js:79:21)\n    at async main (file:///Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-cli/dist/index.js:81:13)",
+  "code": "GOLDEN_VALIDATION_FAILED",
+  "retryable": true,
+  "details": {
+    "topicId": "module-0-order-value-detail-report",
+    "ok": false,
+    "issues": [
+      {
+        "code": "GOLDEN_SQL_SOLUTION_MISMATCH",
+        "category": "tests",
+        "severity": "error",
+        "exerciseId": "try-module-0-sketch1",
+        "message": "Exercise \"try-module-0-sketch1\" SQL solution does not satisfy its published SQL contract: Learner SQL failed to execute."
+      },
+      {
+        "code": "GOLDEN_SQL_SOLUTION_MISMATCH",
+        "category": "tests",
+        "severity": "error",
+        "exerciseId": "try-module-0-sketch2",
+        "message": "Exercise \"try-module-0-sketch2\" SQL solution does not satisfy its published SQL contract: Learner SQL failed to execute."
+      },
+      {
+        "code": "GOLDEN_SQL_SOLUTION_MISMATCH",
+        "category": "tests",
+        "severity": "error",
+        "exerciseId": "try-module-0-sketch3",
+        "message": "Exercise \"try-module-0-sketch3\" SQL solution does not satisfy its published SQL contract: Learner SQL failed to execute."
+      },
+      {
+        "code": "GOLDEN_SQL_SOLUTION_MISMATCH",
+        "category": "tests",
+        "severity": "error",
+        "exerciseId": "try-module-0-sketch4",
+        "message": "Exercise \"try-module-0-sketch4\" SQL solution does not satisfy its published SQL contract: Learner SQL failed to execute."
+      }
+    ]
+  }
+}

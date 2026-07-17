@@ -1,0 +1,99 @@
+{
+  "name": "RetryableTopicValidationError",
+  "message": "Semantic validation failed for topic \"creating-tables-and-defining-columns\"\nModule: sql-data-management-module-2-table-creation-constraints\nSection: sql-data-management-section-2-table-structure\nReport dir: /Users/admin/Documents/NextJSProject/zoeskoul.com/.curriculum-drafts/sql/reports/sql--sql-data-management--draft/module2/creating-tables-and-defining-columns\n- Generated SQL solution failed to execute: table products already exists\n- Generated SQL solution failed to execute: table orders already exists",
+  "stack": "RetryableTopicValidationError: Semantic validation failed for topic \"creating-tables-and-defining-columns\"\nModule: sql-data-management-module-2-table-creation-constraints\nSection: sql-data-management-section-2-table-structure\nReport dir: /Users/admin/Documents/NextJSProject/zoeskoul.com/.curriculum-drafts/sql/reports/sql--sql-data-management--draft/module2/creating-tables-and-defining-columns\n- Generated SQL solution failed to execute: table products already exists\n- Generated SQL solution failed to execute: table orders already exists\n    at throwRetryableReportFailure (file:///Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-compiler/dist/compile/compileSubjectPipeline.js:85:11)\n    at compileSubjectPipeline (file:///Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-compiler/dist/compile/compileSubjectPipeline.js:393:25)\n    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at async compileCourse (file:///Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-compiler/dist/compile/compileCourse.js:91:11)\n    at async runCompileCourse (file:///Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-cli/dist/commands/compile-course.js:79:21)\n    at async main (file:///Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-cli/dist/index.js:81:13)",
+  "code": "SEMANTIC_VALIDATION_FAILED",
+  "retryable": true,
+  "details": {
+    "topicId": "creating-tables-and-defining-columns",
+    "ok": false,
+    "issues": [
+      {
+        "code": "SQL_SOLUTION_EXECUTION_FAILED",
+        "category": "execution",
+        "severity": "error",
+        "exerciseId": "try-creating-tables-and-defining-columns-sketch0",
+        "message": "Generated SQL solution failed to execute: table products already exists"
+      },
+      {
+        "code": "SQL_SOLUTION_EXECUTION_FAILED",
+        "category": "execution",
+        "severity": "error",
+        "exerciseId": "try-creating-tables-and-defining-columns-sketch1",
+        "message": "Generated SQL solution failed to execute: table orders already exists"
+      },
+      {
+        "code": "SQL_DATASET_CONSISTENCY",
+        "category": "dataset",
+        "severity": "warn",
+        "message": "Sketch sketch2 references table \"sqlite_master\" outside effective dataset \"ddl_blank\""
+      },
+      {
+        "code": "SQL_DATASET_CONSISTENCY",
+        "category": "dataset",
+        "severity": "warn",
+        "message": "Sketch sketch2 references column \"sql\" that does not belong to effective dataset \"ddl_blank\""
+      },
+      {
+        "code": "SQL_DATASET_CONSISTENCY",
+        "category": "dataset",
+        "severity": "warn",
+        "message": "Sketch sketch2 references column \"type\" that does not belong to effective dataset \"ddl_blank\""
+      },
+      {
+        "code": "SQL_DATASET_CONSISTENCY",
+        "category": "dataset",
+        "severity": "warn",
+        "message": "Sketch sketch2 references column \"name\" that does not belong to effective dataset \"ddl_blank\""
+      },
+      {
+        "code": "SQL_DATASET_CONSISTENCY",
+        "category": "dataset",
+        "severity": "warn",
+        "message": "Exercise try-creating-tables-and-defining-columns-sketch0 references table \"sqlite_master\" outside effective dataset \"ddl_blank\""
+      },
+      {
+        "code": "SQL_DATASET_CONSISTENCY",
+        "category": "dataset",
+        "severity": "warn",
+        "message": "Exercise try-creating-tables-and-defining-columns-sketch0 references column \"sql\" that does not belong to effective dataset \"ddl_blank\""
+      },
+      {
+        "code": "SQL_DATASET_CONSISTENCY",
+        "category": "dataset",
+        "severity": "warn",
+        "message": "Exercise try-creating-tables-and-defining-columns-sketch0 references column \"type\" that does not belong to effective dataset \"ddl_blank\""
+      },
+      {
+        "code": "SQL_DATASET_CONSISTENCY",
+        "category": "dataset",
+        "severity": "warn",
+        "message": "Exercise try-creating-tables-and-defining-columns-sketch0 references column \"name\" that does not belong to effective dataset \"ddl_blank\""
+      },
+      {
+        "code": "SQL_DATASET_CONSISTENCY",
+        "category": "dataset",
+        "severity": "warn",
+        "message": "Exercise try-creating-tables-and-defining-columns-sketch1 references table \"sqlite_master\" outside effective dataset \"ddl_blank\""
+      },
+      {
+        "code": "SQL_DATASET_CONSISTENCY",
+        "category": "dataset",
+        "severity": "warn",
+        "message": "Exercise try-creating-tables-and-defining-columns-sketch1 references column \"sql\" that does not belong to effective dataset \"ddl_blank\""
+      },
+      {
+        "code": "SQL_DATASET_CONSISTENCY",
+        "category": "dataset",
+        "severity": "warn",
+        "message": "Exercise try-creating-tables-and-defining-columns-sketch1 references column \"type\" that does not belong to effective dataset \"ddl_blank\""
+      },
+      {
+        "code": "SQL_DATASET_CONSISTENCY",
+        "category": "dataset",
+        "severity": "warn",
+        "message": "Exercise try-creating-tables-and-defining-columns-sketch1 references column \"name\" that does not belong to effective dataset \"ddl_blank\""
+      }
+    ]
+  }
+}

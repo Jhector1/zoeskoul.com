@@ -1,0 +1,198 @@
+{
+  "topicId": "reading-keys-and-relationships",
+  "subjectSlug": "multi-table-sql",
+  "moduleSlug": "multi-table-sql-module-0-join-foundations",
+  "sectionSlug": "multi-table-sql-multi-table-sql-section-0-relationship-keys",
+  "prefix": "multi_table_sql_module_0",
+  "minutes": 24,
+  "runtimeDefaults": {
+    "kind": "sql",
+    "showSchema": true,
+    "showErd": true,
+    "showChen": false,
+    "supportsTerminal": false,
+    "supportsMultiFile": false,
+    "supportsFileSystem": false,
+    "datasetId": "school_relations_intro",
+    "fixedSqlDialect": "sqlite",
+    "resultShape": "table"
+  },
+  "serviceDefaults": null,
+  "topic": {
+    "labelKey": "topics.multi-table-sql.multi-table-sql-module-0-join-foundations.reading-keys-and-relationships.label",
+    "summaryKey": "topics.multi-table-sql.multi-table-sql-module-0-join-foundations.reading-keys-and-relationships.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.multi-table-sql.multi-table-sql-module-0-join-foundations.reading-keys-and-relationships.cards.sketch0.title",
+      "sketchId": "sketch-1",
+      "height": 420,
+      "tools": {
+        "defaultVisible": true,
+        "allowOpen": true,
+        "sqlPane": {
+          "defaultTab": "tables",
+          "compactDefaultTab": "results"
+        }
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.multi-table-sql.multi-table-sql-module-0-join-foundations.reading-keys-and-relationships.cards.sketch1.title",
+      "sketchId": "sketch-2",
+      "height": 420,
+      "tools": {
+        "defaultVisible": true,
+        "allowOpen": true,
+        "sqlPane": {
+          "defaultTab": "erd",
+          "compactDefaultTab": "results"
+        }
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.multi-table-sql.multi-table-sql-module-0-join-foundations.reading-keys-and-relationships.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch-1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.multi-table-sql.multi-table-sql-module-0-join-foundations.reading-keys-and-relationships.sketch-1.title",
+      "bodyKey": "sketches.multi-table-sql.multi-table-sql-module-0-join-foundations.reading-keys-and-relationships.sketch-1.bodyMarkdown"
+    },
+    {
+      "id": "sketch-2",
+      "archetype": "paragraph",
+      "titleKey": "sketches.multi-table-sql.multi-table-sql-module-0-join-foundations.reading-keys-and-relationships.sketch-2.title",
+      "bodyKey": "sketches.multi-table-sql.multi-table-sql-module-0-join-foundations.reading-keys-and-relationships.sketch-2.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "quiz-1",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.multi-table-sql.multi-table-sql-module-0-join-foundations.reading-keys-and-relationships.practice.quiz-1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "c"
+      }
+    },
+    {
+      "id": "quiz-2",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.multi-table-sql.multi-table-sql-module-0-join-foundations.reading-keys-and-relationships.practice.quiz-2",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "quiz-3",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.multi-table-sql.multi-table-sql-module-0-join-foundations.reading-keys-and-relationships.practice.quiz-3",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
+      }
+    },
+    {
+      "id": "quiz-4",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.multi-table-sql.multi-table-sql-module-0-join-foundations.reading-keys-and-relationships.practice.quiz-4",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
+      }
+    },
+    {
+      "id": "quiz-5",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.multi-table-sql.multi-table-sql-module-0-join-foundations.reading-keys-and-relationships.practice.quiz-5",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "quiz-6",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.multi-table-sql.multi-table-sql-module-0-join-foundations.reading-keys-and-relationships.practice.quiz-6",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "id"
+      }
+    }
+  ]
+}

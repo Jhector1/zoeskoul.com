@@ -1,0 +1,19 @@
+{
+  "topicId": "insert-with-explicit-column-lists",
+  "repairs": [
+    {
+      "code": "SQL_EXERCISE_POLICY_KIND_UNDER_TARGET_FILLED",
+      "category": "other",
+      "severity": "medium",
+      "field": "quizDraft",
+      "message": "Added one goal-grounded single_choice exercise to match the authored per-kind target of 2."
+    },
+    {
+      "code": "SQL_EXERCISE_POLICY_KIND_UNDER_TARGET_FILLED",
+      "category": "other",
+      "severity": "medium",
+      "field": "quizDraft",
+      "message": "Added one goal-grounded multi_choice exercise to match the authored per-kind target of 2."
+    }
+  ]
+}

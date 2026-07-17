@@ -5,6 +5,7 @@ import { cn } from "@/lib/cn";
 import TopicShell from "../../components/TopicShell";
 import ReviewTopicCards from "./ReviewTopicCards";
 import ReviewTopicCompletion from "./ReviewTopicCompletion";
+import ReviewLearningProgress from "./ReviewLearningProgress";
 import type { ReviewCard, ReviewModule } from "@/lib/subjects/types";
 import type {
     ReviewProgressState,
@@ -14,6 +15,12 @@ import type { SubjectFinishState } from "../../types/subjectFinish.types";
 import { useDebouncedSketchState } from "../../hooks/useDebouncedSketchState";
 import { learnerUiFlags } from "@/lib/config/learnerUiFlags";
 import type { CompactQuizNavigationState } from "../../compactFlowNavigation";
+import { isCardDoneFromState } from "../../progressKeys";
+import {
+    resolveLearningActivityLabel,
+    shouldUseNestedLearningProgress,
+    type LearningProgressTrack,
+} from "../../learningProgress";
 
 type Props = {
     leftCollapsedEff: boolean;
@@ -66,6 +73,7 @@ type Props = {
     onActiveCardIndexChange?: (index: number) => void;
     onNavigateToExerciseRoute?: (args: { cardId: string; exerciseId: string }) => Promise<void> | void;
     onCompactQuizNavigationChange?: (state: CompactQuizNavigationState | null) => void;
+    compactQuizNavigation?: CompactQuizNavigationState | null;
 };
 
 export default function ReviewTopicStage({
@@ -118,6 +126,7 @@ export default function ReviewTopicStage({
     onActiveCardIndexChange,
     onNavigateToExerciseRoute,
     onCompactQuizNavigationChange,
+    compactQuizNavigation,
 
 
                                              onBeforeCardNavigate,
@@ -141,8 +150,68 @@ export default function ReviewTopicStage({
         onMobileWorkspaceTabChange?.(tab);
     };
 
+    const cardStatuses = React.useMemo(
+        () =>
+            viewCards.map((card) =>
+                progressHydrated && isCardDoneFromState(card, tp)
+                    ? "complete" as const
+                    : "upcoming" as const,
+            ),
+        [progressHydrated, tp, viewCards],
+    );
+    const nestedProgress =
+        compactQuizNavigation?.cardId === activeCard?.id &&
+        shouldUseNestedLearningProgress(compactQuizNavigation.kind)
+            ? compactQuizNavigation
+            : null;
+    const activityProgress = React.useMemo<LearningProgressTrack | null>(() => {
+        if (nestedProgress && nestedProgress.total > 0) {
+            const identifyingText = [
+                viewTopic?.label,
+                activeCard?.title,
+                activeCard?.id,
+            ]
+                .filter(Boolean)
+                .join(" ");
+
+            return {
+                label: resolveLearningActivityLabel({
+                    kind: nestedProgress.kind === "project" ? "project" : "quiz",
+                    identifyingText,
+                }),
+                activeIndex: nestedProgress.activeIndex,
+                total: nestedProgress.total,
+                statuses: nestedProgress.stepStatuses,
+            };
+        }
+
+        if (!viewCards.length) return null;
+
+        return {
+            label: "Lesson",
+            activeIndex: activeCardIndex,
+            total: viewCards.length,
+            statuses: cardStatuses,
+        };
+    }, [
+        activeCard?.id,
+        activeCard?.title,
+        activeCard?.type,
+        activeCardIndex,
+        cardStatuses,
+        nestedProgress,
+        viewCards.length,
+        viewTopic?.label,
+    ]);
+
     const lessonContent = (
-        <TopicShell title={viewTopic?.label ?? ""} subtitle={viewTopic?.summary ?? null}>
+        <TopicShell
+            title={viewTopic?.label ?? ""}
+            subtitle={viewTopic?.summary ?? null}
+            progress={
+                <ReviewLearningProgress activity={activityProgress} />
+            }
+        >
             <div
                 className={cn(
                     "flex min-h-full flex-col pb-28",

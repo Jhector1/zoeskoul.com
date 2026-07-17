@@ -1,0 +1,47 @@
+{
+  "topicId": "module-1-inventory-correction-cleanup",
+  "repairs": [
+    {
+      "code": "SQL_STARTER_REVEALED_SOLUTION_REPAIRED",
+      "category": "other",
+      "severity": "high",
+      "field": "quizDraft.try-module-1-inventory-correction-cleanup-sketch0.starterCode",
+      "message": "Replaced SQL starterCode for \"try-module-1-inventory-correction-cleanup-sketch0\" because it revealed the complete solution."
+    },
+    {
+      "code": "SQL_STARTER_REVEALED_SOLUTION_REPAIRED",
+      "category": "other",
+      "severity": "high",
+      "field": "quizDraft.try-module-1-inventory-correction-cleanup-sketch1.starterCode",
+      "message": "Replaced SQL starterCode for \"try-module-1-inventory-correction-cleanup-sketch1\" because it revealed the complete solution."
+    },
+    {
+      "code": "SQL_STARTER_REVEALED_SOLUTION_REPAIRED",
+      "category": "other",
+      "severity": "high",
+      "field": "quizDraft.try-module-1-inventory-correction-cleanup-sketch2.starterCode",
+      "message": "Replaced SQL starterCode for \"try-module-1-inventory-correction-cleanup-sketch2\" because it revealed the complete solution."
+    },
+    {
+      "code": "SQL_STARTER_REVEALED_SOLUTION_REPAIRED",
+      "category": "other",
+      "severity": "high",
+      "field": "quizDraft.try-module-1-inventory-correction-cleanup-sketch3.starterCode",
+      "message": "Replaced SQL starterCode for \"try-module-1-inventory-correction-cleanup-sketch3\" because it revealed the complete solution."
+    },
+    {
+      "code": "SQL_STARTER_REVEALED_SOLUTION_REPAIRED",
+      "category": "other",
+      "severity": "high",
+      "field": "quizDraft.try-module-1-inventory-correction-cleanup-sketch4.starterCode",
+      "message": "Replaced SQL starterCode for \"try-module-1-inventory-correction-cleanup-sketch4\" because it revealed the complete solution."
+    },
+    {
+      "code": "SQL_STARTER_REVEALED_SOLUTION_REPAIRED",
+      "category": "other",
+      "severity": "high",
+      "field": "quizDraft.try-module-1-inventory-correction-cleanup-sketch5.starterCode",
+      "message": "Replaced SQL starterCode for \"try-module-1-inventory-correction-cleanup-sketch5\" because it revealed the complete solution."
+    }
+  ]
+}

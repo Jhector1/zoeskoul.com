@@ -17,8 +17,12 @@ function buildSqlGrounding(args: {
     dataset: SqlDatasetArtifact | null;
     datasetId?: string;
     moduleOrder: number;
+    courseSlug?: string;
 }) {
-    const policy = getSqlModuleDatasetPolicy(Math.max(0, args.moduleOrder - 1));
+    const policy = getSqlModuleDatasetPolicy({
+        courseSlug: args.courseSlug,
+        moduleOrder: Math.max(0, args.moduleOrder - 1),
+    });
 
     const datasetId = args.datasetId ?? args.dataset?.id ?? policy.datasetId;
     const allowedTables = Object.fromEntries(
@@ -49,6 +53,7 @@ export const sqlProfileAdapter: CourseProfileAdapter = {
             resolveSqlRuntimeDefaults({
                 moduleOrder: args.module.order,
                 blueprintRuntimePolicy: args.blueprint.runtimePolicy,
+                courseSlug: args.blueprint.courseSlug,
             });
 
         return runtimeDefaults;
@@ -72,6 +77,7 @@ export const sqlProfileAdapter: CourseProfileAdapter = {
                     sections: [],
                 } as any,
                 blueprintRuntimePolicy: args.blueprint.runtimePolicy,
+                courseSlug: args.blueprint.courseSlug,
             }) ?? undefined;
 
         const moduleRuntimeDefaults =
@@ -93,6 +99,7 @@ export const sqlProfileAdapter: CourseProfileAdapter = {
 
         return {
             subjectSlug: args.blueprint.subjectSlug,
+            courseSlug: args.blueprint.courseSlug,
             profileId: args.blueprint.profileId,
             moduleSlug: args.module.slug,
             sectionSlug: args.section.slug,
@@ -116,6 +123,7 @@ export const sqlProfileAdapter: CourseProfileAdapter = {
                 dataset: moduleDataset,
                 datasetId: moduleDatasetId,
                 moduleOrder: args.module.order,
+                courseSlug: args.blueprint.courseSlug,
             }),
             sectionTitle: args.section.title,
             sourceLocale: args.blueprint.sourceLocale,
@@ -142,7 +150,13 @@ export const sqlProfileAdapter: CourseProfileAdapter = {
         return buildBaseSubjectManifest(
             args.blueprint,
             args.modules,
-            (module) => sqlProfile.buildModuleRuntimeDefaults(module.order, module),
+            (module) =>
+                resolveSqlRuntimeDefaults({
+                    moduleOrder: module.order,
+                    module,
+                    blueprintRuntimePolicy: args.blueprint.runtimePolicy,
+                    courseSlug: args.blueprint.courseSlug,
+                }),
         );
     },
 };

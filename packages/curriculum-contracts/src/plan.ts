@@ -4,6 +4,8 @@ import type {
   CourseVersionStatus,
 } from "./blueprint.js";
 import type { PracticeConfig } from "./practice.js";
+import type { CourseSpecProjectBrief } from "./course-spec.js";
+import type { ToolPresentationPolicy } from "./tool-presentation.js";
 
 export type PlannedTopic = {
   topicId: string;
@@ -14,6 +16,10 @@ export type PlannedTopic = {
   technical?: boolean;
   learningGoals: string[];
   practice?: PracticeConfig;
+  projectBrief?: CourseSpecProjectBrief | null;
+  tools?: ToolPresentationPolicy;
+  lessonTools?: Record<string, ToolPresentationPolicy>;
+  exerciseTools?: Record<string, ToolPresentationPolicy>;
 };
 
 export type PlannedSection = {
@@ -29,6 +35,7 @@ export type PlannedSection = {
 
   bullets?: string[];
   practiceDefaults?: PracticeConfig;
+  tools?: ToolPresentationPolicy;
 
   topics: PlannedTopic[];
 };
@@ -59,11 +66,14 @@ export type PlannedModule = {
   weekEnd?: number | null;
   runtimePolicy?: PlannedModuleRuntimePolicy;
   practiceDefaults?: PracticeConfig;
+  tools?: ToolPresentationPolicy;
   sections: PlannedSection[];
 };
 
 export type CoursePlan = {
   subjectSlug: string;
+  /** Effective subject + course Tools defaults. */
+  tools?: ToolPresentationPolicy;
   profileId: CourseProfileId;
   modules: PlannedModule[];
 };

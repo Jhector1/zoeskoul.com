@@ -1,0 +1,289 @@
+{
+  "subjects": {
+    "sql-analysis-reporting": {
+      "title": "SQL Analysis & Reporting",
+      "description": "Turn reliable single-table queries into readable business reports. Build calculations, handle NULL safely, summarize data with aggregates, create grouped scorecards, and finish with an executive performance report.",
+      "prerequisites": [
+        "SQL Foundations, or equivalent experience selecting, filtering, sorting, and limiting rows from one table."
+      ]
+    }
+  },
+  "modules": {
+    "sql-analysis-reporting": {
+      "sql-analysis-reporting-module-0-report-foundations": {
+        "title": "Readable Report Foundations",
+        "description": "Turn detail rows into readable reports with aliases, distinct categories, calculations, and rounded values.",
+        "prereqs": {
+          "0": "Complete SQL Foundations before beginning this reporting course."
+        },
+        "outcomes": {
+          "0": "Rename result columns without changing the database schema.",
+          "1": "Use DISTINCT to inspect available reporting categories.",
+          "2": "Build row-level calculations from existing numeric columns.",
+          "3": "Round presentation values while preserving the source data."
+        },
+        "why": [
+          "Turn detail rows into readable reports with aliases, distinct categories, calculations, and rounded values.",
+          "The work in this module becomes part of the next cumulative report or project."
+        ]
+      },
+      "sql-analysis-reporting-module-1-null-safe-calculations": {
+        "title": "Null-Safe Calculations and Business Labels",
+        "description": "Keep calculations trustworthy when discounts, ratings, or other inputs are missing.",
+        "outcomes": {
+          "0": "Predict how NULL changes arithmetic results.",
+          "1": "Use COALESCE only when a documented fallback is appropriate.",
+          "2": "Calculate gross, discount, and net values consistently.",
+          "3": "Use CASE to label rows without hiding missing data."
+        },
+        "why": [
+          "Keep calculations trustworthy when discounts, ratings, or other inputs are missing.",
+          "The work in this module becomes part of the next cumulative report or project."
+        ]
+      },
+      "sql-analysis-reporting-module-2-aggregate-functions": {
+        "title": "Aggregate Functions and KPI Snapshots",
+        "description": "Build storewide KPI snapshots with COUNT, SUM, AVG, MIN, and MAX.",
+        "outcomes": {
+          "0": "Choose between COUNT(*) and COUNT(column).",
+          "1": "Sum stored columns and calculated expressions.",
+          "2": "Explain how AVG handles missing values.",
+          "3": "Use MIN and MAX to describe a metric range."
+        },
+        "why": [
+          "Build storewide KPI snapshots with COUNT, SUM, AVG, MIN, and MAX.",
+          "The work in this module becomes part of the next cumulative report or project."
+        ]
+      },
+      "sql-analysis-reporting-module-3-grouped-summaries": {
+        "title": "Grouped Summaries and Ranked Scorecards",
+        "description": "Change report grain deliberately with GROUP BY and produce one row per business group.",
+        "outcomes": {
+          "0": "Group an aggregate report by one dimension.",
+          "1": "Define the grain created by multiple grouping columns.",
+          "2": "Sort aggregate results with deterministic tie-breakers.",
+          "3": "Remove columns that accidentally split a report into extra groups."
+        },
+        "why": [
+          "Change report grain deliberately with GROUP BY and produce one row per business group.",
+          "The work in this module becomes part of the next cumulative report or project."
+        ]
+      },
+      "sql-analysis-reporting-module-4-having-and-conditional-reporting": {
+        "title": "HAVING and Conditional Reporting",
+        "description": "Filter grouped results with HAVING and calculate conditional metrics for performance exceptions.",
+        "outcomes": {
+          "0": "Use WHERE to control which rows enter an aggregate.",
+          "1": "Use HAVING to keep or remove completed groups.",
+          "2": "Calculate conditional counts and sums with CASE inside aggregates.",
+          "3": "Assign performance labels from aggregate results."
+        },
+        "why": [
+          "Filter grouped results with HAVING and calculate conditional metrics for performance exceptions.",
+          "The work in this module becomes part of the next cumulative report or project."
+        ]
+      },
+      "sql-analysis-reporting-module-5-final-capstone": {
+        "title": "Final Capstone: Executive Sales Performance Report",
+        "description": "Deliver an executive region-category report with a documented grain, date range, metrics, and ordering.",
+        "outcomes": {
+          "0": "Define the January 2026 region-category report grain and reporting period.",
+          "1": "Build grouped order-volume and completion KPIs.",
+          "2": "Add financial, rating, data-quality, and performance-band metrics.",
+          "3": "Filter and rank the finished report with deterministic SQL."
+        },
+        "why": [
+          "Deliver an executive region-category report with a documented grain, date range, metrics, and ordering.",
+          "The final work demonstrates the complete course workflow."
+        ]
+      }
+    }
+  },
+  "sections": {
+    "sql-analysis-reporting": {
+      "sql-analysis-reporting-module-0-report-foundations": {
+        "sql-analysis-reporting-section-0-readable-output": {
+          "title": "Readable Report Output",
+          "description": "Turn database-oriented columns into clear report output.",
+          "weeks": "Module 1",
+          "bullets": {
+            "0": "Rename result columns so a report communicates business meaning without changing the stored table.",
+            "1": "Inspect the unique values and combinations available before defining a report filter or grouping rule.",
+            "2": "Run each query and inspect the results before continuing.",
+            "3": "Keep the requested report grain and output order consistent."
+          }
+        },
+        "sql-analysis-reporting-section-0-calculated-output": {
+          "title": "Calculated Report Columns",
+          "description": "Create and format useful row-level metrics.",
+          "weeks": "Module 1",
+          "bullets": {
+            "0": "Create row-level metrics from numeric columns while keeping the original source data unchanged.",
+            "1": "Format calculated numbers for a readable report without changing the precision stored in the source table.",
+            "2": "Run each query and inspect the results before continuing.",
+            "3": "Keep the requested report grain and output order consistent."
+          }
+        },
+        "sql-analysis-reporting-section-0-module-project": {
+          "title": "Module Project",
+          "description": "Build one clean detail report without discarding earlier work.",
+          "weeks": "Module 1",
+          "bullets": {
+            "0": "Build one readable completed-order detail report, adding aliases, a gross-sales calculation, rounding, and stable sorting without discarding earlier columns.",
+            "1": "Run each query and inspect the results before continuing.",
+            "2": "Keep the requested report grain and output order consistent."
+          }
+        }
+      },
+      "sql-analysis-reporting-module-1-null-safe-calculations": {
+        "sql-analysis-reporting-section-1-null-safety": {
+          "title": "Null-Safe Calculations",
+          "description": "Understand missing values before deciding how a report should treat them.",
+          "weeks": "Module 2",
+          "bullets": {
+            "0": "Recognize when a missing source value makes a calculated result unknown instead of zero.",
+            "1": "Apply an explicit fallback when the reporting rule defines how a missing value should be treated.",
+            "2": "Run each query and inspect the results before continuing.",
+            "3": "Keep the requested report grain and output order consistent."
+          }
+        },
+        "sql-analysis-reporting-section-1-business-calculations": {
+          "title": "Business Calculations and Labels",
+          "description": "Turn percentage rules into readable financial output.",
+          "weeks": "Module 2",
+          "bullets": {
+            "0": "Translate a percentage stored in the table into gross, discount, and net monetary values.",
+            "1": "Turn row-level values into clear categories while handling missing data before numeric thresholds.",
+            "2": "Run each query and inspect the results before continuing.",
+            "3": "Keep the requested report grain and output order consistent."
+          }
+        },
+        "sql-analysis-reporting-section-1-module-project": {
+          "title": "Module Project",
+          "description": "Create a review-ready discount audit in cumulative steps.",
+          "weeks": "Module 2",
+          "bullets": {
+            "0": "Build a row-level audit that preserves raw discount data, applies an explicit fallback for calculations, and identifies records requiring review.",
+            "1": "Run each query and inspect the results before continuing.",
+            "2": "Keep the requested report grain and output order consistent."
+          }
+        }
+      },
+      "sql-analysis-reporting-module-2-aggregate-functions": {
+        "sql-analysis-reporting-section-2-counts-and-totals": {
+          "title": "Counts and Totals",
+          "description": "Measure activity volume and monetary value.",
+          "weeks": "Module 3",
+          "bullets": {
+            "0": "Use COUNT deliberately to distinguish total records from records with a known value.",
+            "1": "Add stored values or calculated row expressions across the full query scope.",
+            "2": "Run each query and inspect the results before continuing.",
+            "3": "Keep the requested report grain and output order consistent."
+          }
+        },
+        "sql-analysis-reporting-section-2-averages-and-extremes": {
+          "title": "Averages and Extremes",
+          "description": "Describe typical values and useful boundaries.",
+          "weeks": "Module 3",
+          "bullets": {
+            "0": "Calculate an average and state clearly whether missing values are excluded or replaced.",
+            "1": "Use MIN and MAX to describe the lower and upper boundaries of a numeric metric.",
+            "2": "Run each query and inspect the results before continuing.",
+            "3": "Keep the requested report grain and output order consistent."
+          }
+        },
+        "sql-analysis-reporting-section-2-module-project": {
+          "title": "Module Project",
+          "description": "Combine completed-order KPIs into one reliable snapshot.",
+          "weeks": "Module 3",
+          "bullets": {
+            "0": "Build one cumulative summary row for completed orders, preserving every previously added KPI.",
+            "1": "Run each query and inspect the results before continuing.",
+            "2": "Keep the requested report grain and output order consistent."
+          }
+        }
+      },
+      "sql-analysis-reporting-module-3-grouped-summaries": {
+        "sql-analysis-reporting-section-3-grouping-basics": {
+          "title": "Grouping Basics",
+          "description": "Define what one row represents in a grouped report.",
+          "weeks": "Module 4",
+          "bullets": {
+            "0": "Return one aggregate summary row for each value of a chosen business dimension.",
+            "1": "Define a more detailed report grain by grouping on a deliberate combination of dimensions.",
+            "2": "Run each query and inspect the results before continuing.",
+            "3": "Keep the requested report grain and output order consistent."
+          }
+        },
+        "sql-analysis-reporting-section-3-ranking-and-quality": {
+          "title": "Ranking and Grouping Quality",
+          "description": "Order grouped results and prevent accidental grain changes.",
+          "weeks": "Module 4",
+          "bullets": {
+            "0": "Rank grouped metrics and add deterministic tie-breakers so repeated runs produce a predictable order.",
+            "1": "Protect report grain by removing detail columns that split or confuse grouped results.",
+            "2": "Run each query and inspect the results before continuing.",
+            "3": "Keep the requested report grain and output order consistent."
+          }
+        },
+        "sql-analysis-reporting-section-3-module-project": {
+          "title": "Module Project",
+          "description": "Build one region-category scorecard from a stable base query.",
+          "weeks": "Module 4",
+          "bullets": {
+            "0": "Build one completed-order scorecard at region-category grain and retain every metric as the report grows.",
+            "1": "Run each query and inspect the results before continuing.",
+            "2": "Keep the requested report grain and output order consistent."
+          }
+        }
+      },
+      "sql-analysis-reporting-module-4-having-and-conditional-reporting": {
+        "sql-analysis-reporting-section-4-group-filters": {
+          "title": "Filtering Before and After Grouping",
+          "description": "Place conditions where they match the report logic.",
+          "weeks": "Module 5",
+          "bullets": {
+            "0": "Filter source rows before aggregation so every metric describes the intended population.",
+            "1": "Keep only completed groups whose aggregate results meet a meaningful threshold.",
+            "2": "Run each query and inspect the results before continuing.",
+            "3": "Keep the requested report grain and output order consistent."
+          }
+        },
+        "sql-analysis-reporting-section-4-conditional-kpis": {
+          "title": "Conditional KPIs and Labels",
+          "description": "Calculate several outcomes from the same grouped rows.",
+          "weeks": "Module 5",
+          "bullets": {
+            "0": "Calculate condition-specific counts and monetary totals without removing the other rows from each group.",
+            "1": "Use CASE on aggregate expressions to turn grouped metrics into concise management labels.",
+            "2": "Run each query and inspect the results before continuing.",
+            "3": "Keep the requested report grain and output order consistent."
+          }
+        },
+        "sql-analysis-reporting-section-4-module-project": {
+          "title": "Module Project",
+          "description": "Build a focused exception report with calibrated rules.",
+          "weeks": "Module 5",
+          "bullets": {
+            "0": "Build one region-category exception report that compares total and completed activity, calculates risk metrics, and keeps only groups needing attention.",
+            "1": "Run each query and inspect the results before continuing.",
+            "2": "Keep the requested report grain and output order consistent."
+          }
+        }
+      },
+      "sql-analysis-reporting-module-5-final-capstone": {
+        "sql-analysis-reporting-section-5-final-capstone-project": {
+          "title": "Final Capstone",
+          "description": "Build one January 2026 executive report through a short grain-preview Try It and four cumulative project steps.",
+          "weeks": "Module 6",
+          "bullets": {
+            "0": "Confirm the January 2026 region-category grain with the warm-up Try It.",
+            "1": "Build order volume, completion, sales, rating, and data-quality metrics in one evolving query.",
+            "2": "Classify each group with clear performance-band rules.",
+            "3": "Finish with grouped filtering and deterministic ranking."
+          }
+        }
+      }
+    }
+  }
+}

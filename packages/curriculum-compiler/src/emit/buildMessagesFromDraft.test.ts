@@ -153,7 +153,8 @@ describe("buildMessagesFromDraft", () => {
                 sketchBlocks: [
                     {
                         id: "sketch-1",
-                        title: "Sketch title",
+                        cardTitle: "Open the Helper Module",
+                        title: "A helper module keeps reusable work separate",
                         bodyMarkdown: "Sketch body",
                     },
                 ],
@@ -179,6 +180,11 @@ describe("buildMessagesFromDraft", () => {
                 ],
             } as any,
         }) as any;
+
+        expect(
+            messages.topics?.["python-v2"]?.["python-v2-1"]?.["helper-modules"]?.cards
+                ?.sketch0?.title,
+        ).toBe("Open the Helper Module");
 
         expect(
             messages.topics?.["python-v2"]?.["python-v2-1"]?.["helper-modules"]?.tryIt
@@ -680,6 +686,103 @@ describe("buildMessagesFromDraft", () => {
         expect(starterCode).toContain("# Project step 3: Step 3");
     });
 
+    it("keeps progressive SQL project solutions as one replacement query", () => {
+        const messages = buildMessagesFromDraft({
+            shape: makeShape(),
+            seed: makeSeed({
+                profileId: "sql",
+                sectionRole: "module_project",
+                moduleRuntimeDefaults: {
+                    kind: "sql",
+                    datasetId: "sales_kpi",
+                    fixedSqlDialect: "sqlite",
+                    resultShape: "table",
+                },
+                practice: {
+                    projectFlow: "progressive",
+                },
+            }),
+            draft: {
+                title: "Order value report",
+                summary: "Build one cumulative SQL report.",
+                minutes: 20,
+                sketchBlocks: [],
+                quizDraft: [
+                    {
+                        id: "step-1",
+                        kind: "code_input",
+                        title: "Select order IDs",
+                        prompt: "Select the order ID.",
+                        starterCode: "SELECT -- add the column\nFROM sales_reporting;",
+                        solutionCode: "SELECT order_id FROM sales_reporting;",
+                        recipeType: "sql_query",
+                        datasetId: "sales_kpi",
+                        hint: "Select order_id.",
+                        help: {
+                            concept: "Start the report.",
+                            hint_1: "Use SELECT.",
+                            hint_2: "Read from sales_reporting.",
+                        },
+                    },
+                    {
+                        id: "step-2",
+                        kind: "code_input",
+                        title: "Add gross sales",
+                        prompt: "Keep the order ID and add gross sales.",
+                        starterCode: "SELECT -- keep the prior work\nFROM sales_reporting;",
+                        solutionCode:
+                            "SELECT order_id, quantity * unit_price AS gross_sales FROM sales_reporting;",
+                        recipeType: "sql_query",
+                        datasetId: "sales_kpi",
+                        hint: "Multiply quantity by unit_price.",
+                        help: {
+                            concept: "Extend the same query.",
+                            hint_1: "Keep order_id.",
+                            hint_2: "Alias the expression.",
+                        },
+                    },
+                    {
+                        id: "step-3",
+                        kind: "code_input",
+                        title: "Round gross sales",
+                        prompt: "Keep the report and round gross sales.",
+                        starterCode: "SELECT -- keep the prior work\nFROM sales_reporting;",
+                        solutionCode:
+                            "SELECT order_id, ROUND(quantity * unit_price, 2) AS gross_sales FROM sales_reporting;",
+                        recipeType: "sql_query",
+                        datasetId: "sales_kpi",
+                        hint: "Use ROUND.",
+                        help: {
+                            concept: "Finish the report.",
+                            hint_1: "Keep order_id.",
+                            hint_2: "Round to two places.",
+                        },
+                    },
+                ],
+            } as any,
+        }) as any;
+
+        const step2 = messages.topics?.["python-v2"]?.["python-v2-1"]?.[
+            "helper-modules"
+        ]?.moduleProject?.steps?.step_2;
+        const step3 = messages.topics?.["python-v2"]?.["python-v2-1"]?.[
+            "helper-modules"
+        ]?.moduleProject?.steps?.step_3;
+
+        expect(step2?.starterCode).toContain(
+            "SELECT order_id FROM sales_reporting;",
+        );
+        expect(step2?.starterCode).toContain("-- Project step 2: Add gross sales");
+        expect(step2?.starterCode).not.toContain("# Project step 2");
+        expect(step2?.solutionCode).toBe(
+            "SELECT order_id, quantity * unit_price AS gross_sales FROM sales_reporting;\n",
+        );
+        expect(step3?.solutionCode).toBe(
+            "SELECT order_id, ROUND(quantity * unit_price, 2) AS gross_sales FROM sales_reporting;\n",
+        );
+        expect(step3?.solutionCode.match(/\bSELECT\b/gi)).toHaveLength(1);
+    });
+
     it("still emits quiz title for normal lesson topics", () => {
         const messages = buildMessagesFromDraft({
             shape: makeShape(),
@@ -914,9 +1017,9 @@ describe("buildMessagesFromDraft", () => {
 
         expect(messages.topics?.["python-v2"]?.["python-v2-1"]?.["attributes-and-init"]?.tryIt)
             .toMatchObject({
-                try_attributes_and_init_sketch0: { title: "Exercise 1" },
-                try_attributes_and_init_sketch1: { title: "Exercise 6" },
-                try_attributes_and_init_sketch2: { title: "Exercise 11" },
+                try_attributes_and_init_sketch0: { title: "Try it yourself: Exercise 1" },
+                try_attributes_and_init_sketch1: { title: "Try it yourself: Exercise 6" },
+                try_attributes_and_init_sketch2: { title: "Try it yourself: Exercise 11" },
                 allowReveal: true,
             });
         expect(
@@ -976,7 +1079,7 @@ describe("buildMessagesFromDraft", () => {
 
         const tryIt = messages.topics?.["python-v2"]?.["python-v2-1"]?.["attributes-and-init"]?.tryIt;
         expect(tryIt?.try_attributes_and_init_sketch0).toMatchObject({
-            title: "Exercise 1",
+            title: "Try it yourself: Exercise 1",
         });
         expect(tryIt?.try_attributes_and_init_sketch0?.prompt).toContain("Prompt ex1.");
         expect(tryIt?.try_attributes_and_init_sketch1).toBeUndefined();
@@ -1000,9 +1103,9 @@ describe("buildMessagesFromDraft", () => {
         expect(
             messages.topics?.["python-v2"]?.["python-v2-1"]?.["attributes-and-init"]?.tryIt,
         ).toMatchObject({
-            try_attributes_and_init_sketch0: { title: "Exercise 6" },
-            try_attributes_and_init_sketch1: { title: "Exercise 1" },
-            try_attributes_and_init_sketch2: { title: "Exercise 11" },
+            try_attributes_and_init_sketch0: { title: "Try it yourself: Exercise 6" },
+            try_attributes_and_init_sketch1: { title: "Try it yourself: Exercise 1" },
+            try_attributes_and_init_sketch2: { title: "Try it yourself: Exercise 11" },
         });
         expect(
             messages.topics?.["python-v2"]?.["python-v2-1"]?.["attributes-and-init"]?.tryIt
@@ -1049,7 +1152,7 @@ describe("buildMessagesFromDraft", () => {
                 messages.topics?.["python-v2"]?.["python-v2-1"]?.["attributes-and-init"]?.tryIt?.[
                     tryItMessageKey
                 ]?.title,
-            ).toBe(selectedSourceExercise?.title);
+            ).toBe(`Try it yourself: ${selectedSourceExercise?.title}`);
         }
     });
 });

@@ -46,3 +46,7 @@ export type GeneratedSubjectTopicBundle = SubjectTopicBundle & {
 export function defineTopicBundle<T extends SubjectTopicBundle>(input: T): T {
     return input;
 }
+
+export function defineGeneratedTopicBundle<T extends GeneratedSubjectTopicBundle>(input: T): T {
+    return input;
+}

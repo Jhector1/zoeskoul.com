@@ -1,0 +1,200 @@
+{
+  "title": "Summing Business Metrics",
+  "summary": "Use SUM to total stored values and calculated expressions.",
+  "minutes": 24,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Understanding SUM in SQL",
+      "bodyMarkdown": "The `SUM` function in SQL is used to calculate the total sum of a numeric column. This is particularly useful when you want to find the total sales, total quantity sold, or any other cumulative metric. For example, if you have a table `sales_reporting` with a column `quantity`, you can find the total quantity sold using:\n\n```sql\nSELECT SUM(quantity) AS total_quantity FROM sales_reporting;\n```\n\nThis query will return a single value representing the total quantity of all records in the `sales_reporting` table. It's important to note that `SUM` will ignore `NULL` values in the column."
+    },
+    {
+      "id": "sketch2",
+      "title": "Using SUM with Calculated Expressions",
+      "bodyMarkdown": "You can also use `SUM` with calculated expressions to get more complex totals. For instance, if you want to calculate the total revenue from sales, you can multiply the `quantity` by the `unit_price` for each record and then sum the results:\n\n```sql\nSELECT SUM(quantity * unit_price) AS total_revenue FROM sales_reporting;\n```\n\nThis query calculates the revenue for each sale by multiplying `quantity` and `unit_price`, and then sums up all these values to give the total revenue. This approach is useful for generating financial reports and understanding overall business performance."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "single-choice-1",
+      "kind": "single_choice",
+      "title": "Purpose of SUM",
+      "prompt": "What is the primary purpose of the SUM function in SQL?",
+      "hint": "Think about what SUM calculates in a dataset.",
+      "help": {
+        "concept": "The SUM function is used to calculate the total of a numeric column.",
+        "hint_1": "SUM adds up all the values in a column.",
+        "hint_2": "SUM is used for calculating totals, like total sales or total quantity."
+      },
+      "options": [
+        "To count the number of rows",
+        "To find the average value",
+        "To calculate the total of a numeric column",
+        "To find the maximum value"
+      ],
+      "correctOptionIds": [
+        "c"
+      ]
+    },
+    {
+      "id": "multi-choice-1",
+      "kind": "multi_choice",
+      "title": "SUM Function Characteristics",
+      "prompt": "Which of the following statements about the SUM function are true?",
+      "hint": "Consider how SUM handles data and what it returns.",
+      "help": {
+        "concept": "The SUM function calculates the total of a numeric column, ignoring NULLs.",
+        "hint_1": "SUM ignores NULL values in the column.",
+        "hint_2": "SUM returns a single value representing the total."
+      },
+      "options": [
+        "SUM can be used with non-numeric columns",
+        "SUM ignores NULL values",
+        "SUM returns multiple rows",
+        "SUM returns a single value"
+      ],
+      "correctOptionIds": [
+        "b",
+        "d"
+      ]
+    },
+    {
+      "id": "drag-reorder-1",
+      "kind": "drag_reorder",
+      "title": "Order of SQL Clauses",
+      "prompt": "Arrange the SQL clauses in the correct order for a basic SELECT statement using SUM.",
+      "hint": "Start with SELECT and end with the condition or grouping.",
+      "help": {
+        "concept": "The correct order of SQL clauses is important for query execution.",
+        "hint_1": "SELECT comes first, followed by FROM.",
+        "hint_2": "The WHERE clause comes after FROM, and GROUP BY or ORDER BY follows."
+      },
+      "tokens": [
+        "SELECT",
+        "FROM",
+        "WHERE",
+        "GROUP BY",
+        "ORDER BY"
+      ],
+      "correctOrder": [
+        "SELECT",
+        "FROM",
+        "WHERE",
+        "GROUP BY",
+        "ORDER BY"
+      ]
+    },
+    {
+      "id": "fill-blank-choice-1",
+      "kind": "fill_blank_choice",
+      "title": "SUM Syntax",
+      "prompt": "Complete the SQL statement to calculate the total quantity from the sales_reporting table: `SELECT [blank1](quantity) FROM sales_reporting;`",
+      "hint": "What function is used to calculate totals?",
+      "help": {
+        "concept": "The SUM function is used to calculate the total of a numeric column.",
+        "hint_1": "The function starts with 'S'.",
+        "hint_2": "It's a three-letter function that calculates totals."
+      },
+      "template": "SELECT [blank1](quantity) FROM sales_reporting;",
+      "choices": [
+        "SUM",
+        "COUNT",
+        "AVG",
+        "MAX"
+      ],
+      "correctValue": "SUM"
+    },
+    {
+      "id": "fill-blank-choice-2",
+      "kind": "fill_blank_choice",
+      "title": "SUM with Alias",
+      "prompt": "Fill in the blank to alias the total revenue: `SELECT SUM(quantity * unit_price) AS [blank1] FROM sales_reporting;`",
+      "hint": "The alias is a descriptive name for the calculated column.",
+      "help": {
+        "concept": "Aliases give a name to the result of an expression or function.",
+        "hint_1": "The alias should describe the total revenue.",
+        "hint_2": "Think of a name that represents the total sales amount."
+      },
+      "template": "SELECT SUM(quantity * unit_price) AS [blank1] FROM sales_reporting;",
+      "choices": [
+        "total_revenue",
+        "total_sales",
+        "revenue_sum",
+        "sales_total"
+      ],
+      "correctValue": "total_revenue"
+    },
+    {
+      "id": "multi-choice-2",
+      "kind": "multi_choice",
+      "title": "SUM and NULL Values",
+      "prompt": "How does the SUM function handle NULL values in a column?",
+      "hint": "Consider whether NULLs are included in the total.",
+      "help": {
+        "concept": "SUM ignores NULL values when calculating the total.",
+        "hint_1": "NULL values are not counted in the total.",
+        "hint_2": "SUM only adds non-NULL values."
+      },
+      "options": [
+        "SUM includes NULL values in the total",
+        "SUM ignores NULL values",
+        "SUM treats NULL as zero",
+        "SUM returns NULL if any value is NULL"
+      ],
+      "correctOptionIds": [
+        "b"
+      ]
+    },
+    {
+      "id": "try-summing-business-metrics-sketch0",
+      "kind": "code_input",
+      "title": "Calculate Total Quantity Sold",
+      "prompt": "Write a query to calculate the total quantity of products sold from the `sales_reporting` table.",
+      "hint": "Use the SUM function to calculate the total quantity.",
+      "help": {
+        "concept": "Use SUM to add up all the quantities in the table.",
+        "hint_1": "The query should use SUM(quantity).",
+        "hint_2": "Ensure you select from the correct table."
+      },
+      "starterCode": "SELECT SUM(quantity) FROM sales_reporting;",
+      "solutionCode": "SELECT SUM(quantity) FROM sales_reporting;",
+      "tests": [
+        {
+          "stdout": "total_quantity\n89\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "try-summing-business-metrics-sketch1",
+      "kind": "code_input",
+      "title": "Calculate Total Revenue",
+      "prompt": "Write a query to calculate the total revenue from the `sales_reporting` table by multiplying `quantity` and `unit_price`.",
+      "hint": "Use SUM with a calculated expression.",
+      "help": {
+        "concept": "Multiply quantity by unit_price and sum the results.",
+        "hint_1": "Use SUM(quantity * unit_price).",
+        "hint_2": "Ensure you select from the correct table."
+      },
+      "starterCode": "SELECT SUM(quantity * unit_price) FROM sales_reporting;",
+      "solutionCode": "SELECT SUM(quantity * unit_price) FROM sales_reporting;",
+      "tests": [
+        {
+          "stdout": "total_revenue\n1234.5\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query"
+    }
+  ],
+  "projectDraft": {
+    "title": "Storewide KPI Snapshot",
+    "stepIds": [
+      "try-summing-business-metrics-sketch0",
+      "try-summing-business-metrics-sketch1"
+    ]
+  }
+}

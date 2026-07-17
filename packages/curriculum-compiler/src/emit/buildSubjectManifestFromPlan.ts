@@ -11,6 +11,7 @@ import type {
     SubjectSectionManifest,
 
 } from "@zoeskoul/curriculum-contracts";
+import { mergeToolPresentationPolicies } from "@zoeskoul/curriculum-contracts";
 import type { SubjectShapePack } from "@zoeskoul/curriculum-profiles";
 import { moduleOrderToIndex } from "../spec/moduleOrder.js";
 import {
@@ -39,6 +40,10 @@ export function buildSubjectManifestFromPlan(args: {
 }): SubjectManifest {
     const { blueprint, plan, shape } = args;
     const kp = shape.subjectManifest.keyPatterns;
+    const subjectTools = mergeToolPresentationPolicies(
+        blueprint.tools,
+        plan.tools,
+    );
 
     const modules: SubjectModuleManifest[] = plan.modules.map((module) => {
         const moduleIndex = moduleOrderToIndex(module.order);
@@ -47,6 +52,10 @@ export function buildSubjectManifestFromPlan(args: {
                 ? module.moduleNumber
                 : moduleIndex;
         const logicalModuleSlug = module.moduleSlug;
+        const moduleTools = mergeToolPresentationPolicies(
+            subjectTools,
+            module.tools,
+        );
         const resolvedRuntimePolicy = resolveModuleRuntimePolicy({
             blueprint,
             module: {
@@ -125,6 +134,10 @@ export function buildSubjectManifestFromPlan(args: {
                         ),
                     },
                     serviceDefaults,
+                    tools: mergeToolPresentationPolicies(
+                        moduleTools,
+                        section.tools,
+                    ),
                     topics: section.topics.map((topic) => topic.topicId),
                 };
             },
@@ -152,6 +165,7 @@ export function buildSubjectManifestFromPlan(args: {
                 null,
             runtimeDefaults,
             serviceDefaults,
+            tools: moduleTools,
             meta: {
                 estimatedMinutes: module.sections
                     .flatMap((section) => section.topics)
@@ -201,6 +215,7 @@ export function buildSubjectManifestFromPlan(args: {
             titleKey: kp.subjectTitleKey(blueprint.subjectSlug),
             descriptionKey: kp.subjectDescriptionKey(blueprint.subjectSlug),
             serviceDefaults: mergeManifestIdeServiceConfigs(blueprint.idePolicy?.defaultServices),
+            tools: subjectTools,
             meta: {
                 curriculum: {
                     plannedModuleCount: plan.modules.length,

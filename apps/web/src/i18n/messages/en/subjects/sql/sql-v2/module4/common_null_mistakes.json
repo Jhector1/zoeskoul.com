@@ -17,20 +17,6 @@
             },
             "quiz": {
               "title": "Quiz"
-            },
-            "project": {
-              "title": "NULL Checks Practice Set"
-            }
-          },
-          "projectSteps": {
-            "ci_find_missing_emails": {
-              "title": "Query customers with missing emails"
-            },
-            "ci_find_missing_city_real_customers": {
-              "title": "Find real customers missing a city"
-            },
-            "ci_find_present_email_and_city": {
-              "title": "Find customers with both email and city present"
             }
           },
           "quiz": {
@@ -84,11 +70,11 @@
             "mc_rows_with_missing_data": {
               "title": "Identify rows with missing data",
               "prompt": "Based on the `customers` dataset, which customers have at least one NULL value? Choose all that apply.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Match each choice to the command, clause, or constraint described in the question.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "concept": "Use the SQL behavior described in the lesson to separate the valid choice from statements about a different command, clause, or constraint.",
+                "hint_1": "Identify the job the SQL must perform before comparing the choices.",
+                "hint_2": "Eliminate choices that belong to a different SQL concept."
               },
               "options": {
                 "a": "Leo Grant",
@@ -132,7 +118,7 @@
               "prompt": "Fill in the missing SQL keyword to find rows where `city` is missing.",
               "hint": "The condition uses `IS` followed by one special word.",
               "help": {
-                "concept": "The correct SQL pattern for checking missing data is `column IS the missing term`.",
+                "concept": "The correct SQL pattern for checking missing data is `column IS the blank`.",
                 "hint_1": "Compare the condition with the column named in the question, then check which rows would remain.",
                 "hint_2": "The missing word is the special marker SQL uses for unknown or absent values."
               },
@@ -149,9 +135,9 @@
               "prompt": "Fill in the missing SQL word to keep rows where `email` has a value.",
               "hint": "This pattern is `IS NOT ...`.",
               "help": {
-                "concept": "To keep rows where a column is not missing, SQL uses `IS NOT the missing term`.",
+                "concept": "To keep rows where a column is not missing, SQL uses `IS NOT the blank`.",
                 "hint_1": "The blank comes after `IS NOT` and names the missing-data marker.",
-                "hint_2": "Use the same special value that appears in `IS the missing term`, but here it is negated."
+                "hint_2": "Use the same special value that appears in `IS the blank`, but here it is negated."
               },
               "template": "WHERE email IS NOT [blank1]",
               "choices": [
@@ -196,7 +182,7 @@
             },
             "try-common_null_mistakes-sketch0": {
               "title": "Query customers with missing emails",
-              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that returns `id`, `full_name`, and `email` from `customers` for rows where `email` is missing. Write the query in the SQL editor, click Run query, and check the results table.",
+              "prompt": "Create a customer-cleanup query that returns `id`, `full_name`, and `email` from `customers` for rows where `email` is missing. Run it and compare the result with the expected table.",
               "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
               "help": {
                 "concept": "This SQL exercise checks whether your query returns the requested result.",
@@ -206,19 +192,19 @@
               "starterCode": "-- Return id, full_name, and email from customers for rows where email is missing.\nSELECT id, full_name, email\nFROM customers\nWHERE ;"
             },
             "try-common_null_mistakes-sketch1": {
-              "title": "Find real customers missing a city",
-              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that returns `id`, `full_name`, `city`, and `is_test` for customers whose `city` is missing and who are not test accounts. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Use the Correct NULL Test",
+              "prompt": "Return `id`, `full_name`, `city`, and `is_test` for real customers whose city is missing.",
+              "hint": "Replace = NULL with IS NULL.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
+                "concept": "Return `id`, `full_name`, `city`, and `is_test` for real customers whose city is missing.",
+                "hint_1": "Replace = NULL with IS NULL.",
+                "hint_2": "Run the query and compare the returned columns and rows with the expected result."
               },
-              "starterCode": "-- Return id, full_name, city, and is_test for customers whose city is missing and who are not test accounts.\nSELECT id, full_name, city, is_test\nFROM customers\nWHERE city IS NULL\n  AND ;"
+              "starterCode": "SELECT id, full_name, city, is_test\nFROM customers\nWHERE city = NULL\n  AND is_test = 0;"
             },
             "try-common_null_mistakes-sketch2": {
               "title": "Find customers with both email and city present",
-              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that returns `id`, `full_name`, `email`, and `city` for customers where both `email` and `city` are present. Order the results by `id` ascending. Write the query in the SQL editor, click Run query, and check the results table.",
+              "prompt": "Create a customer-cleanup query that returns `id`, `full_name`, `email`, and `city` for customers where both `email` and `city` are present. Order the results by `id` ascending. Run it and compare the result with the expected table.",
               "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
               "help": {
                 "concept": "This SQL exercise checks whether your query returns the requested result.",
@@ -232,15 +218,15 @@
             "allowReveal": true,
             "try_common_null_mistakes_sketch0": {
               "title": "Query customers with missing emails",
-              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that returns `id`, `full_name`, and `email` from `customers` for rows where `email` is missing. Write the query in the SQL editor, click Run query, and check the results table."
+              "prompt": "Create a customer-cleanup query that returns `id`, `full_name`, and `email` from `customers` for rows where `email` is missing. Run it and compare the result with the expected table."
             },
             "try_common_null_mistakes_sketch1": {
-              "title": "Find real customers missing a city",
-              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that returns `id`, `full_name`, `city`, and `is_test` for customers whose `city` is missing and who are not test accounts. Write the query in the SQL editor, click Run query, and check the results table."
+              "title": "Use the Correct NULL Test",
+              "prompt": "Return `id`, `full_name`, `city`, and `is_test` for real customers whose city is missing."
             },
             "try_common_null_mistakes_sketch2": {
               "title": "Find customers with both email and city present",
-              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that returns `id`, `full_name`, `email`, and `city` for customers where both `email` and `city` are present. Order the results by `id` ascending. Write the query in the SQL editor, click Run query, and check the results table."
+              "prompt": "Create a customer-cleanup query that returns `id`, `full_name`, `email`, and `city` for customers where both `email` and `city` are present. Order the results by `id` ascending. Run it and compare the result with the expected table."
             }
           }
         }

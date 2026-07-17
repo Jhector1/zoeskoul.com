@@ -1,0 +1,252 @@
+{
+  "title": "Using NULL and DEFAULT Intentionally",
+  "summary": "Learn how to use SQL NULL and DEFAULT values effectively in INSERT statements to manage missing data and default settings.",
+  "minutes": 28,
+  "sketchBlocks": [
+    {
+      "id": "sketch-using-null-default-1",
+      "cardTitle": "Understanding NULL and DEFAULT",
+      "title": "NULL and DEFAULT in SQL",
+      "bodyMarkdown": "In SQL, NULL represents a missing or undefined value, while DEFAULT is a predefined value set for a column when no specific value is provided during an INSERT operation. Understanding the difference between these two is crucial for managing data integrity and ensuring that your database behaves as expected.\n\nFor example, consider the `inventory_items` table where the `status` column has a default value of 'draft'. If you insert a new row without specifying a `status`, SQL will automatically assign 'draft' to that row. However, if you explicitly insert NULL into the `status` column, it will store a NULL value instead.\n\n```sql\nINSERT INTO inventory_items (name, category, price) VALUES ('New Item', 'Category', 10.99);\n-- This will use the default 'draft' for status.\n\nINSERT INTO inventory_items (name, category, price, status) VALUES ('Another Item', 'Category', 15.99, NULL);\n-- This will store NULL in the status column.\n```\n\nIn the first example, the `status` column uses its default value because it is omitted from the INSERT statement. In the second example, NULL is explicitly inserted, overriding the default."
+    },
+    {
+      "id": "sketch-using-null-default-2",
+      "cardTitle": "Practical Use of NULL and DEFAULT",
+      "title": "Applying NULL and DEFAULT in Practice",
+      "bodyMarkdown": "When inserting data into a table, you can control whether to use a column's default value or to insert NULL explicitly. This decision can affect how your data is interpreted and processed later.\n\nConsider a scenario where you want to add a new product to the `inventory_items` table. You might want to use the default `status` but explicitly set the `notes` to NULL to indicate that no additional information is available.\n\n```sql\nINSERT INTO inventory_items (name, category, price, notes) VALUES ('Sample Product', 'Gadgets', 29.99, NULL);\n-- The status will default to 'draft', and notes will be explicitly set to NULL.\n```\n\nThis approach ensures that your data entries are consistent and that any missing information is clearly marked with NULL, while default values are used where applicable. This practice helps maintain data integrity and clarity in your database."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "try-using-null-default-sketch0",
+      "kind": "code_input",
+      "title": "Insert with Default and NULL",
+      "prompt": "Insert a new item into the `inventory_items` table with the name 'Gadget', category 'Electronics', and price 19.99. Use the default value for `status` and explicitly set `notes` to NULL.",
+      "hint": "Remember to omit the `status` column to use its default value and explicitly set `notes` to NULL.",
+      "help": {
+        "concept": "Use an explicit column list to control which columns use defaults and which are set to NULL.",
+        "hint_1": "Omit the `status` column from the INSERT statement to use its default value.",
+        "hint_2": "Explicitly set `notes` to NULL in the VALUES clause."
+      },
+      "starterCode": "INSERT INTO inventory_items (name, category, price, notes) VALUES ('Gadget', 'Electronics', 19.99, NULL);",
+      "solutionCode": "INSERT INTO inventory_items (name, category, price, notes) VALUES ('Gadget', 'Electronics', 19.99, NULL);",
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "INSERT INTO inventory_items (name, category, price, notes) VALUES ('Gadget', 'Electronics', 19.99, NULL);",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "INSERT INTO inventory_items (name, category, price, notes) VALUES ('Gadget', 'Electronics', 19.99, NULL);",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "sqlFileOrder": [
+        "query.sql"
+      ],
+      "tests": [
+        {
+          "stdout": "Gadget|Electronics|19.99|draft|0|NULL\n",
+          "match": "includes"
+        }
+      ],
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query",
+      "checkSql": "SELECT name, category, price, status, is_test, notes FROM inventory_items WHERE name = 'Gadget';"
+    },
+    {
+      "id": "try-using-null-default-sketch1",
+      "kind": "code_input",
+      "title": "Insert Multiple Rows with Defaults",
+      "prompt": "Insert two new items into the `inventory_items` table. The first item should have the name 'Widget', category 'Tools', and price 5.99, using the default `status`. The second item should have the name 'Device', category 'Gadgets', price 12.49, and explicitly set `notes` to NULL.",
+      "hint": "Use a multi-row INSERT statement and omit the `status` column for both items to use the default value.",
+      "help": {
+        "concept": "Multi-row INSERT allows you to add multiple records in one statement, using defaults where columns are omitted.",
+        "hint_1": "Omit the `status` column for both items to use the default value.",
+        "hint_2": "Explicitly set `notes` to NULL for the second item."
+      },
+      "starterCode": "INSERT INTO inventory_items (name, category, price, notes) VALUES\n('Widget', 'Tools', 5.99, NULL),\n('Device', 'Gadgets', 12.49, NULL);",
+      "solutionCode": "INSERT INTO inventory_items (name, category, price, notes) VALUES\n('Widget', 'Tools', 5.99, NULL),\n('Device', 'Gadgets', 12.49, NULL);",
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "INSERT INTO inventory_items (name, category, price, notes) VALUES\n('Widget', 'Tools', 5.99, NULL),\n('Device', 'Gadgets', 12.49, NULL);",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "INSERT INTO inventory_items (name, category, price, notes) VALUES\n('Widget', 'Tools', 5.99, NULL),\n('Device', 'Gadgets', 12.49, NULL);",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "sqlFileOrder": [
+        "query.sql"
+      ],
+      "tests": [
+        {
+          "stdout": "Widget|Tools|5.99|draft|0|NULL\nDevice|Gadgets|12.49|draft|0|NULL\n",
+          "match": "includes"
+        }
+      ],
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query",
+      "checkSql": "SELECT name, category, price, status, is_test, notes FROM inventory_items WHERE name IN ('Widget', 'Device');"
+    },
+    {
+      "id": "single-choice-1",
+      "kind": "single_choice",
+      "title": "Understanding SQL NULL",
+      "prompt": "What does SQL NULL represent in a database?",
+      "hint": "Think about what NULL signifies in terms of data presence.",
+      "help": {
+        "concept": "SQL NULL represents a missing or undefined value in a database.",
+        "hint_1": "NULL is used when a value is not available or not applicable.",
+        "hint_2": "NULL is not the same as zero or an empty string."
+      },
+      "options": [
+        "A missing or undefined value",
+        "A zero value",
+        "An empty string",
+        "A default value"
+      ],
+      "correctOptionIds": [
+        "a"
+      ]
+    },
+    {
+      "id": "single-choice-2",
+      "kind": "single_choice",
+      "title": "Using DEFAULT in SQL",
+      "prompt": "How can you use a column's default value in an INSERT statement?",
+      "hint": "Consider what happens when you omit a column from the INSERT statement.",
+      "help": {
+        "concept": "Omitting a column from the INSERT statement allows SQL to use the column's default value.",
+        "hint_1": "If you don't specify a value for a column, SQL will use its default value if one is set.",
+        "hint_2": "Omitting the column from the INSERT column list triggers the default."
+      },
+      "options": [
+        "Omit the column from the INSERT statement",
+        "Use the keyword DEFAULT in the VALUES clause",
+        "Set the column to NULL",
+        "Use a special function to apply the default"
+      ],
+      "correctOptionIds": [
+        "a"
+      ]
+    },
+    {
+      "id": "multi-choice-1",
+      "kind": "multi_choice",
+      "title": "Effects of Using NULL and DEFAULT",
+      "prompt": "Which of the following are true about using NULL and DEFAULT in SQL? Select all that apply.",
+      "hint": "Consider how NULL and DEFAULT affect data storage and retrieval.",
+      "help": {
+        "concept": "NULL and DEFAULT have distinct roles in SQL for handling missing data and predefined values.",
+        "hint_1": "NULL represents missing data, while DEFAULT provides a predefined value.",
+        "hint_2": "Using NULL and DEFAULT can affect how data is stored and retrieved."
+      },
+      "options": [
+        "NULL represents a missing value",
+        "DEFAULT provides a predefined value",
+        "NULL and DEFAULT are interchangeable",
+        "Using DEFAULT can simplify data entry"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "d"
+      ]
+    },
+    {
+      "id": "multi-choice-2",
+      "kind": "multi_choice",
+      "title": "Choosing Between NULL and DEFAULT",
+      "prompt": "When should you choose to use NULL over a DEFAULT value in SQL? Select all that apply.",
+      "hint": "Think about scenarios where data might be intentionally missing.",
+      "help": {
+        "concept": "Choosing between NULL and DEFAULT depends on whether the absence of data is intentional or a default value is appropriate.",
+        "hint_1": "NULL is used when data is intentionally missing or unknown.",
+        "hint_2": "DEFAULT is used when a standard value is appropriate for missing data."
+      },
+      "options": [
+        "When the data is intentionally missing",
+        "When the data is unknown",
+        "When a standard value is not appropriate",
+        "When you want to use a predefined value"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c"
+      ]
+    },
+    {
+      "id": "drag-reorder-1",
+      "kind": "drag_reorder",
+      "title": "Order of SQL INSERT Steps",
+      "prompt": "Arrange the steps for inserting a new row using a default value in the correct order.",
+      "hint": "Consider the logical sequence of preparing and executing an INSERT statement.",
+      "help": {
+        "concept": "Inserting a new row with a default value involves preparing the statement, executing it, and verifying the result.",
+        "hint_1": "Start by preparing the INSERT statement with the necessary columns.",
+        "hint_2": "Execute the statement and verify the result."
+      },
+      "tokens": [
+        "Prepare the INSERT statement",
+        "Execute the INSERT statement",
+        "Verify the result"
+      ],
+      "correctOrder": [
+        "Prepare the INSERT statement",
+        "Execute the INSERT statement",
+        "Verify the result"
+      ]
+    },
+    {
+      "id": "fill-blank-choice-1",
+      "kind": "fill_blank_choice",
+      "title": "SQL Default Value Usage",
+      "prompt": "In SQL, to use a column's default value during an INSERT, you should [blank1] the column from the INSERT statement.",
+      "hint": "Think about what happens when you don't specify a column in an INSERT statement.",
+      "help": {
+        "concept": "Omitting a column from the INSERT statement allows SQL to use the column's default value.",
+        "hint_1": "If you don't specify a value for a column, SQL will use its default value if one is set.",
+        "hint_2": "Omitting the column from the INSERT column list triggers the default."
+      },
+      "template": "In SQL, to use a column's default value during an INSERT, you should [blank1] the column from the INSERT statement.",
+      "choices": [
+        "omit",
+        "include",
+        "quote",
+        "highlight"
+      ],
+      "correctValue": "omit"
+    }
+  ],
+  "projectDraft": {
+    "title": "Build a New Inventory Intake Script",
+    "stepIds": [
+      "try-using-null-default-sketch0",
+      "try-using-null-default-sketch1"
+    ]
+  }
+}

@@ -97,6 +97,125 @@ function normalizeStarterFileDrafts(
     return files.length > 0 ? files : undefined;
 }
 
+function normalizeWorkspacePathList(
+    value: unknown,
+    label: string,
+): string[] | undefined {
+    if (!Array.isArray(value)) return undefined;
+
+    const seen = new Set<string>();
+    const paths: string[] = [];
+
+    value.forEach((rawPath, index) => {
+        const path = normalizeOptionalWorkspacePath(
+            rawPath,
+            `${label}[${index}]`,
+        );
+        if (!path || seen.has(path)) return;
+        seen.add(path);
+        paths.push(path);
+    });
+
+    return paths.length > 0 ? paths : undefined;
+}
+
+function normalizeWorkspaceCodeForComparison(
+    value: unknown,
+): string {
+    return String(value ?? "")
+        .replace(/\r\n?/g, "\n")
+        .trim();
+}
+
+function inferChangedSqlEntryFile(args: {
+    recipeType?: string;
+    starterFiles?: ProgrammingCodeInputStarterFileDraft[];
+    solutionFiles?: ProgrammingCodeInputStarterFileDraft[];
+}): string | undefined {
+    if (args.recipeType !== "sql_query") return undefined;
+
+    const starterFiles = args.starterFiles ?? [];
+    const solutionFiles = args.solutionFiles ?? [];
+    if (starterFiles.length <= 1 || solutionFiles.length <= 1) {
+        return undefined;
+    }
+
+    const solutionByPath = new Map(
+        solutionFiles.map((file) => [file.path, file.content]),
+    );
+    const changedPaths = starterFiles
+        .filter((file) => solutionByPath.has(file.path))
+        .filter(
+            (file) =>
+                normalizeWorkspaceCodeForComparison(file.content) !==
+                normalizeWorkspaceCodeForComparison(
+                    solutionByPath.get(file.path),
+                ),
+        )
+        .map((file) => file.path);
+
+    return changedPaths.length === 1
+        ? changedPaths[0]
+        : undefined;
+}
+
+function markWorkspaceEntryFile(
+    files: ProgrammingCodeInputStarterFileDraft[] | undefined,
+    entryFilePath: string | undefined,
+): ProgrammingCodeInputStarterFileDraft[] | undefined {
+    if (!files?.length || !entryFilePath) return files;
+
+    return files.map((file) => ({
+        ...file,
+        isEntry: file.path === entryFilePath,
+        entry: file.path === entryFilePath,
+    }));
+}
+
+function workspaceFileContent(
+    files: ProgrammingCodeInputStarterFileDraft[] | undefined,
+    path: string | undefined,
+): string | undefined {
+    if (!path) return undefined;
+    return files?.find((file) => file.path === path)?.content;
+}
+
+function deriveSqlFileOrder(args: {
+    recipeType?: string;
+    starterFiles?: ProgrammingCodeInputStarterFileDraft[];
+    solutionFiles?: ProgrammingCodeInputStarterFileDraft[];
+}): string[] | undefined {
+    if (args.recipeType !== "sql_query") return undefined;
+
+    const files =
+        args.solutionFiles?.length
+            ? args.solutionFiles
+            : args.starterFiles ?? [];
+    if (files.length <= 1) return undefined;
+
+    const priority = new Map<string, number>([
+        ["schema.sql", 0],
+        ["seed.sql", 1],
+        ["query.sql", 2],
+        ["main.sql", 3],
+    ]);
+
+    return files
+        .map((file, index) => ({
+            path: file.path,
+            index,
+            priority:
+                priority.get(file.path.toLowerCase()) ??
+                Number.MAX_SAFE_INTEGER,
+        }))
+        .sort(
+            (left, right) =>
+                left.priority - right.priority ||
+                left.index - right.index,
+        )
+        .map(({ path }) => path);
+}
+
 function normalizeSourceChecks(
     value: unknown,
 ): ProgrammingCodeInputSourceCheckDraft[] | undefined {
@@ -647,7 +766,7 @@ function normalizeCodeInput(
                 ? item.type.trim()
                 : undefined;
 
-    const starterCode =
+    const fallbackStarterCode =
         typeof item.starterCode === "string" && item.starterCode.trim().length > 0
             ? item.starterCode
             : defaultStarterCodeForCodeInput({
@@ -693,11 +812,65 @@ function normalizeCodeInput(
         semanticChecksResult.success && semanticChecksResult.data.length
             ? semanticChecksResult.data
             : undefined;
-    const starterFiles = normalizeStarterFileDrafts(item.starterFiles);
-    const solutionFiles = normalizeStarterFileDrafts(item.solutionFiles);
+    const normalizedStarterFiles = normalizeStarterFileDrafts(
+        item.starterFiles,
+    );
+    const normalizedSolutionFiles = normalizeStarterFileDrafts(
+        item.solutionFiles,
+    );
+    const explicitEntryFilePath = normalizeOptionalWorkspacePath(
+        item.entryFilePath,
+        "entryFilePath",
+    );
+    const inferredEntryFilePath = inferChangedSqlEntryFile({
+        recipeType,
+        starterFiles: normalizedStarterFiles,
+        solutionFiles: normalizedSolutionFiles,
+    });
+    const entryFilePath =
+        inferredEntryFilePath ?? explicitEntryFilePath;
+    const starterFiles = markWorkspaceEntryFile(
+        normalizedStarterFiles,
+        entryFilePath,
+    );
+    const solutionFiles = markWorkspaceEntryFile(
+        normalizedSolutionFiles,
+        entryFilePath,
+    );
+    const starterEntryContent = workspaceFileContent(
+        starterFiles,
+        entryFilePath,
+    );
+    const solutionEntryContent = workspaceFileContent(
+        solutionFiles,
+        entryFilePath,
+    );
+    const starterCode =
+        recipeType === "sql_query" &&
+        typeof starterEntryContent === "string" &&
+        starterEntryContent.trim().length > 0
+            ? starterEntryContent
+            : fallbackStarterCode;
+    const solutionCode =
+        recipeType === "sql_query" &&
+        typeof solutionEntryContent === "string"
+            ? solutionEntryContent
+            : typeof item.solutionCode === "string"
+                ? item.solutionCode
+                : "";
+    const explicitSqlFileOrder = normalizeWorkspacePathList(
+        item.sqlFileOrder,
+        "sqlFileOrder",
+    );
+    const sqlFileOrder =
+        explicitSqlFileOrder ??
+        deriveSqlFileOrder({
+            recipeType,
+            starterFiles,
+            solutionFiles,
+        });
     const files = normalizeFileDrafts(item.files);
     const sourceChecks = normalizeSourceChecks(item.sourceChecks);
-    const entryFilePath = normalizeOptionalWorkspacePath(item.entryFilePath, "entryFilePath");
     const workspaceExpectations =
         typeof item.workspaceExpectations === "undefined"
             ? undefined
@@ -717,10 +890,10 @@ function normalizeCodeInput(
         ...(entryFilePath ? { entryFilePath } : {}),
         ...(starterFiles?.length ? { starterFiles } : {}),
         ...(solutionFiles?.length ? { solutionFiles } : {}),
+        ...(sqlFileOrder?.length ? { sqlFileOrder } : {}),
         ...(sourceChecks?.length ? { sourceChecks } : {}),
         ...(workspaceExpectations ? { workspaceExpectations } : {}),
-        solutionCode:
-            typeof item.solutionCode === "string" ? item.solutionCode : "",
+        solutionCode,
         ...(recipeType !== "semantic" && tests?.length ? { tests } : {}),
         ...(files?.length ? { files } : {}),
         datasetId:

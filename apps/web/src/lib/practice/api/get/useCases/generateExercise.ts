@@ -26,6 +26,36 @@ import { resolveTopicFromScope } from "../services/topicResolver.service";
 import { toDbTopicSlug } from "@/lib/practice/topicSlugs";
 import { readSharedChallengeMeta } from "@/lib/practice/challenges/session";
 
+export function openPracticeInstanceMatchesRequestedExercise(
+    publicPayload: unknown,
+    requestedExerciseKey: unknown,
+) {
+    const requested = String(requestedExerciseKey ?? "").trim();
+    if (!requested) return true;
+    if (!publicPayload || typeof publicPayload !== "object") return false;
+
+    const payload = publicPayload as Record<string, unknown>;
+    const nestedExercise =
+        payload.exercise && typeof payload.exercise === "object"
+            ? (payload.exercise as Record<string, unknown>)
+            : null;
+    const candidates = [
+        payload.exerciseKey,
+        payload.id,
+        nestedExercise?.exerciseKey,
+        nestedExercise?.id,
+    ]
+        .map((value) => String(value ?? "").trim())
+        .filter(Boolean);
+
+    return candidates.some(
+        (candidate) =>
+            candidate === requested ||
+            candidate.endsWith(`:${requested}`) ||
+            requested.endsWith(`:${candidate}`),
+    );
+}
+
 function isGeneratorTopicMismatch(e: any) {
     const code = String((e as any)?.code ?? "");
     if (
@@ -374,7 +404,13 @@ export async function generatePracticeExercise(
             },
         });
 
-        if (openInstance) {
+        if (
+            openInstance &&
+            openPracticeInstanceMatchesRequestedExercise(
+                openInstance.publicPayload,
+                exerciseKey,
+            )
+        ) {
             const key = signKey({
                 instanceId: openInstance.id,
                 sessionId: openInstance.sessionId ?? null,

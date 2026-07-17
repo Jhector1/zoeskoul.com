@@ -1,0 +1,36 @@
+{
+  "topicId": "unique-and-default-constraints",
+  "ok": true,
+  "issues": [
+    {
+      "code": "SQL_DATASET_CONSISTENCY",
+      "category": "dataset",
+      "severity": "warn",
+      "message": "Exercise try-unique-constraint-sketch0 references table \"sqlite_master\" outside effective dataset \"ddl_blank\""
+    },
+    {
+      "code": "SQL_DATASET_CONSISTENCY",
+      "category": "dataset",
+      "severity": "warn",
+      "message": "Exercise try-unique-constraint-sketch0 references column \"type\" that does not belong to effective dataset \"ddl_blank\""
+    },
+    {
+      "code": "SQL_DATASET_CONSISTENCY",
+      "category": "dataset",
+      "severity": "warn",
+      "message": "Exercise try-default-constraint-sketch1 references table \"sqlite_master\" outside effective dataset \"ddl_blank\""
+    },
+    {
+      "code": "SQL_DATASET_CONSISTENCY",
+      "category": "dataset",
+      "severity": "warn",
+      "message": "Exercise try-default-constraint-sketch1 references column \"name\" that does not belong to effective dataset \"ddl_blank\""
+    },
+    {
+      "code": "SQL_DATASET_CONSISTENCY",
+      "category": "dataset",
+      "severity": "warn",
+      "message": "Exercise try-default-constraint-sketch1 references column \"type\" that does not belong to effective dataset \"ddl_blank\""
+    }
+  ]
+}

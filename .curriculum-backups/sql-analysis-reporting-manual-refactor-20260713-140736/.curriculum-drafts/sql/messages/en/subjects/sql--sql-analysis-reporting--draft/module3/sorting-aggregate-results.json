@@ -1,0 +1,167 @@
+{
+  "topics": {
+    "sql--sql-analysis-reporting--draft": {
+      "sql-analysis-reporting-module-3-grouped-summaries": {
+        "sorting-aggregate-results": {
+          "label": "Sorting Aggregate Results",
+          "summary": "Rank grouped rows by totals, averages, or counts while keeping ties deterministic.",
+          "cards": {
+            "sketch0": {
+              "title": "Understanding Sorting in SQL"
+            },
+            "sketch1": {
+              "title": "Deterministic Sorting with Ties"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_sorting_aggregate_results_sketch0": {
+              "title": "Calculate and Sort Total Sales by Region",
+              "prompt": "Write a query to calculate the total sales for each region and sort the results in descending order of total sales.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT region, SUM(quantity * unit_price) AS total_sales\nFROM sales_reporting\nGROUP BY region\nORDER BY total_sales DESC;"
+            },
+            "try_sorting_aggregate_results_sketch1": {
+              "title": "Rank Regions by Average Customer Rating",
+              "prompt": "Write a query to calculate the average customer rating for each region and sort the results in descending order of average rating. Use the region name as a secondary sort criterion to ensure deterministic ordering.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT region, AVG(customer_rating) AS avg_rating\nFROM sales_reporting\nGROUP BY region\nORDER BY avg_rating DESC, region ASC;"
+            }
+          },
+          "practice": {
+            "single-choice-1": {
+              "title": "Purpose of ORDER BY",
+              "prompt": "What is the primary purpose of the ORDER BY clause in SQL?",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "options": {
+                "a": "To filter rows based on a condition",
+                "b": "To group rows with similar values",
+                "c": "To sort the result set",
+                "d": "To calculate aggregate values"
+              }
+            },
+            "single-choice-2": {
+              "title": "Secondary Sorting",
+              "prompt": "Why is secondary sorting important when dealing with ties in SQL results?",
+              "hint": "Consider what happens when two rows have the same primary sort value.",
+              "help": {
+                "concept": "Secondary sorting ensures consistent order when primary values are tied.",
+                "hint_1": "Secondary sorting provides a fallback order.",
+                "hint_2": "It helps maintain a stable and predictable result order."
+              },
+              "options": {
+                "a": "To improve query performance",
+                "b": "To ensure consistent ordering of tied results",
+                "c": "To reduce the number of rows returned",
+                "d": "To increase the complexity of the query"
+              }
+            },
+            "multi-choice-1": {
+              "title": "Functions Used in Sorting",
+              "prompt": "Which of the following SQL functions can be used to sort aggregated results? Select all that apply.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "options": {
+                "a": "SUM",
+                "b": "AVG",
+                "c": "COUNT",
+                "d": "JOIN"
+              }
+            },
+            "drag-reorder-1": {
+              "title": "Order of SQL Clauses",
+              "prompt": "Arrange the SQL clauses in the correct order of execution.",
+              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "help": {
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
+              },
+              "tokens": {
+                "t1": "SELECT",
+                "t2": "FROM",
+                "t3": "WHERE",
+                "t4": "GROUP BY",
+                "t5": "ORDER BY"
+              }
+            },
+            "fill-blank-choice-1": {
+              "title": "Using Aggregate Functions",
+              "prompt": "Complete the SQL statement to calculate the total sales for each category.",
+              "hint": "Use an aggregate function to the missing term the sales.",
+              "help": {
+                "concept": "Aggregate functions like the missing term are used to calculate totals.",
+                "hint_1": "the missing term is used to add up values.",
+                "hint_2": "GROUP BY is needed to aggregate by category."
+              },
+              "template": "SELECT category, [blank1](quantity * unit_price) AS total_sales FROM sales_reporting GROUP BY category;",
+              "choices": [
+                "SUM",
+                "AVG",
+                "COUNT",
+                "MAX"
+              ]
+            },
+            "fill-blank-choice-2": {
+              "title": "Sorting Results",
+              "prompt": "Complete the SQL statement to sort the results by total sales in descending order.",
+              "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+              "help": {
+                "concept": "The blank should be filled with the term that makes the statement accurate.",
+                "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+                "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+              },
+              "template": "SELECT region, SUM(quantity * unit_price) AS total_sales FROM sales_reporting GROUP BY region ORDER BY total_sales [blank1];",
+              "choices": [
+                "ASC",
+                "DESC",
+                "GROUP BY",
+                "LIMIT"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql--sql-analysis-reporting--draft": {
+      "sql-analysis-reporting-module-3-grouped-summaries": {
+        "sorting-aggregate-results": {
+          "sketch0": {
+            "title": "Understanding Sorting in SQL",
+            "bodyMarkdown": "In SQL, sorting is a crucial operation that allows you to organize your query results in a specific order. This is particularly useful when dealing with aggregated data, where you might want to rank groups based on their totals, averages, or counts. \n\nFor example, consider a table `sales_reporting` where you want to find the total sales for each region and sort these totals in descending order. You can achieve this using the `ORDER BY` clause in combination with aggregate functions like `SUM`.\n\n```sql\nSELECT SUM(quantity) AS total_quantity\nFROM orders;\n```\n\nIn this query:\n- `SUM(quantity * unit_price)` calculates the total sales for each region.\n- `GROUP BY region` groups the results by region.\n- `ORDER BY total_sales DESC` sorts the results in descending order of total sales.\n\nThis approach ensures that you can easily identify which regions are performing best in terms of sales."
+          },
+          "sketch1": {
+            "title": "Deterministic Sorting with Ties",
+            "bodyMarkdown": "When sorting aggregated results, it's important to handle ties deterministically. This means that if two groups have the same aggregate value, their order should be consistent across query executions.\n\nConsider the following example where we want to rank regions by their average customer rating. If two regions have the same average rating, we can use a secondary sort criterion to ensure deterministic ordering.\n\n```sql\nSELECT AVG(quantity) AS average_quantity\nFROM orders;\n```\n\nIn this query:\n- `AVG(customer_rating)` calculates the average customer rating for each region.\n- `ORDER BY avg_rating DESC` sorts the regions by average rating in descending order.\n- `region ASC` acts as a secondary sort criterion to break ties, ensuring that the order is consistent.\n\nBy using a secondary sort criterion, you ensure that your results are predictable and stable, even when there are ties in the primary sort column."
+          }
+        }
+      }
+    }
+  }
+}

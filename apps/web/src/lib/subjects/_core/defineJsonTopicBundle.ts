@@ -1,4 +1,4 @@
-import { defineTopicBundle, type GeneratedSubjectTopicBundle } from "@/lib/subjects/_core/defineTopicBundle";
+import { defineGeneratedTopicBundle, type GeneratedSubjectTopicBundle } from "@/lib/subjects/_core/defineTopicBundle";
 import type { TopicBundleManifest } from "./manifestTypes";
 import { defineJsonGeneratorTopic } from "@/lib/practice/generator/engines/json/defineJsonGeneratorTopic";
 import { buildReviewFromManifest } from "./buildReviewFromManifest";
@@ -16,7 +16,7 @@ export function defineJsonTopicBundle(
 
     const sketches = buildSketchesFromManifest(manifest);
 
-    return defineTopicBundle({
+    return defineGeneratedTopicBundle({
         def: review.def,
         review: review.topic,
         sketches,

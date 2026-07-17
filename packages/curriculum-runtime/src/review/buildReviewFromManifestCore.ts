@@ -103,6 +103,7 @@ export function buildReviewFromManifestCore(args: {
         meta: {
             runtimeDefaults: manifest.runtimeDefaults ?? null,
             serviceDefaults: manifest.serviceDefaults ?? null,
+            tools: manifest.tools ?? null,
         },
         cards: manifest.cards.map((card: any, index: number) => {
             if (card.kind === "sketch") {
@@ -116,6 +117,7 @@ export function buildReviewFromManifestCore(args: {
                     title: tag(card.titleKey),
                     sketchId: `${manifest.subjectSlug}.${manifest.moduleSlug}.${manifest.topicId}.${card.sketchId}`,
                     height: card.height ?? 520,
+                    tools: card.tools,
                     spec: {
                         runtime: sketchManifest?.runtime ?? null,
                         workspace: sketchManifest?.workspace ?? null,
@@ -128,6 +130,7 @@ export function buildReviewFromManifestCore(args: {
                     topicId: manifest.topicId,
                     index,
                     title: tag(card.titleKey),
+                    tools: card.tools,
                     spec: makeQuizSpec({
                         subject: manifest.subjectSlug,
                         module: manifest.moduleSlug,
@@ -163,6 +166,7 @@ export function buildReviewFromManifestCore(args: {
                     index,
                     id: shouldUseAuthoredTryId ? String(card.id).trim() : undefined,
                     title: tag(card.titleKey),
+                    tools: card.tools,
                     tryIt: cardTryIt || projectTryIt || undefined,
                     spec: makeProjectSpec({
                         subject: manifest.subjectSlug,
@@ -217,6 +221,7 @@ export function buildReviewFromManifestCore(args: {
             ...(baseDef.meta ?? {}),
             runtimeDefaults: manifest.runtimeDefaults ?? null,
             serviceDefaults: manifest.serviceDefaults ?? null,
+            tools: manifest.tools ?? null,
         },
     };
 

@@ -1,0 +1,165 @@
+{
+  "topics": {
+    "sql-analysis-reporting": {
+      "sql-analysis-reporting-module-2-aggregate-functions": {
+        "minimums-and-maximums": {
+          "label": "Minimums and Maximums",
+          "summary": "Use MIN and MAX to describe the lower and upper boundaries of a numeric metric.",
+          "cards": {
+            "sketch0": {
+              "title": "Find Stored-Value Boundaries"
+            },
+            "sketch1": {
+              "title": "Find Boundaries of a Calculated Metric"
+            },
+            "quiz": {
+              "title": "Check Your Understanding"
+            }
+          },
+          "practice": {
+            "single-choice-1": {
+              "title": "MIN Meaning",
+              "prompt": "What does `MIN(unit_price)` return?",
+              "hint": "MIN compares values rather than row position.",
+              "help": {
+                "concept": "MIN returns the lowest known value in the query scope.",
+                "hint_1": "It is a boundary, not a count or mean.",
+                "hint_2": "Choose the smallest-value definition."
+              },
+              "options": {
+                "a": "The first price stored",
+                "b": "The smallest non-NULL price in scope",
+                "c": "The average price",
+                "d": "The number of prices"
+              }
+            },
+            "single-choice-2": {
+              "title": "MAX on an Expression",
+              "prompt": "What does `MAX(quantity * unit_price)` compare?",
+              "hint": "The complete expression is evaluated before MAX chooses a boundary.",
+              "help": {
+                "concept": "MAX can receive a row-level calculated metric.",
+                "hint_1": "Both quantity and price contribute to the compared value.",
+                "hint_2": "Choose the gross-order interpretation."
+              },
+              "options": {
+                "a": "The largest quantity only",
+                "b": "The largest unit price only",
+                "c": "The gross value calculated for each row",
+                "d": "The number of rows"
+              }
+            },
+            "multi-choice-1": {
+              "title": "Useful Boundary Questions",
+              "prompt": "Which questions can MIN or MAX answer? Select all that apply.",
+              "hint": "Choose questions asking for the lower or upper observed value.",
+              "help": {
+                "concept": "Counts require COUNT rather than a boundary function.",
+                "hint_1": "MIN and MAX can use stored or calculated numeric values.",
+                "hint_2": "Look for “smallest,” “highest,” or “largest.”"
+              },
+              "options": {
+                "a": "What was the smallest completed net sale?",
+                "b": "What was the highest unit price?",
+                "c": "How many orders were completed?",
+                "d": "What was the largest order quantity?"
+              }
+            },
+            "multi-choice-2": {
+              "title": "Range Query Practices",
+              "prompt": "Which practices make a range KPI trustworthy? Select all that apply.",
+              "hint": "The two boundaries should describe one clearly defined metric and population.",
+              "help": {
+                "concept": "Parallel expressions make the range comparable.",
+                "hint_1": "Different formulas would not form one range.",
+                "hint_2": "Choose choices that preserve symmetry."
+              },
+              "options": {
+                "a": "Use the same metric expression in MIN and MAX.",
+                "b": "Apply the intended population filter.",
+                "c": "Give each result a descriptive alias.",
+                "d": "Use unrelated expressions for the lower and upper values."
+              }
+            },
+            "drag-reorder-1": {
+              "title": "Evaluate a Calculated Maximum",
+              "prompt": "Arrange the stages.",
+              "hint": "Follow the metric from source population to final presentation.",
+              "help": {
+                "concept": "MAX chooses among row-expression results.",
+                "hint_1": "Formatting follows the aggregate.",
+                "hint_2": "Start with the report scope."
+              },
+              "tokens": {
+                "t1": "Filter the intended rows",
+                "t2": "Calculate the row metric",
+                "t3": "Compare the calculated values with MAX",
+                "t4": "Round the displayed maximum"
+              }
+            },
+            "fill-blank-choice-1": {
+              "title": "Complete the Upper Boundary",
+              "prompt": "Fill the function that returns the largest gross order value.",
+              "hint": "Choose the aggregate for the upper boundary.",
+              "help": {
+                "concept": "The question asks for the largest calculated value.",
+                "hint_1": "SUM would add every order instead.",
+                "hint_2": "MIN would return the opposite end of the range."
+              },
+              "template": "SELECT [blank1](quantity * unit_price) AS largest_gross_order FROM sales_reporting;",
+              "choices": [
+                "MAX",
+                "MIN",
+                "AVG",
+                "SUM"
+              ]
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_minimums_and_maximums_sketch0": {
+              "title": "Find the Quantity Range",
+              "prompt": "Return the smallest quantity as `minimum_quantity` and the largest quantity as `maximum_quantity`.",
+              "hint": "Apply each boundary function to the same measure.",
+              "help": {
+                "concept": "MIN and MAX describe the observed range of a numeric field.",
+                "hint_1": "Select both aggregates in one query.",
+                "hint_2": "Use aliases that identify which end of the range is shown."
+              },
+              "starterCode": "-- Write the query below.",
+              "solutionCode": "SELECT\n    MIN(quantity) AS minimum_quantity,\n    MAX(quantity) AS maximum_quantity\nFROM sales_reporting;"
+            },
+            "try_minimums_and_maximums_sketch1": {
+              "title": "Find the Completed Net-Sales Range",
+              "prompt": "For completed orders, return null-safe minimum and maximum net sales rounded to two decimals as `minimum_net_sales` and `maximum_net_sales`.",
+              "hint": "Use the same null-safe net expression inside both aggregates.",
+              "help": {
+                "concept": "MIN and MAX can compare calculated values across the filtered rows.",
+                "hint_1": "Filter completed orders before evaluating the range.",
+                "hint_2": "Round each aggregate result and use parallel aliases."
+              },
+              "starterCode": "-- Write the query below.",
+              "solutionCode": "SELECT\n    ROUND(MIN(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS minimum_net_sales,\n    ROUND(MAX(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS maximum_net_sales\nFROM sales_reporting\nWHERE order_status = 'Completed';"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql-analysis-reporting": {
+      "sql-analysis-reporting-module-2-aggregate-functions": {
+        "minimums-and-maximums": {
+          "sketch0": {
+            "title": "Find Stored-Value Boundaries",
+            "bodyMarkdown": "`MIN` and `MAX` return the smallest and largest values in the current query scope.\n\n```sql\nSELECT\n    MIN(unit_price) AS lowest_unit_price,\n    MAX(unit_price) AS highest_unit_price\nFROM sales_reporting;\n```\n\nBoth values appear in one summary row because the query has no GROUP BY."
+          },
+          "sketch1": {
+            "title": "Find Boundaries of a Calculated Metric",
+            "bodyMarkdown": "The boundary can be calculated from a row expression.\n\n```sql\nSELECT\n    ROUND(MIN(quantity * unit_price), 2) AS smallest_gross_order,\n    ROUND(MAX(quantity * unit_price), 2) AS largest_gross_order\nFROM sales_reporting;\n```\n\nSQL evaluates gross sales for each row, then selects the smallest and largest result."
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,188 @@
+{
+  "topics": {
+    "sql-analysis-reporting": {
+      "sql-analysis-reporting-module-3-grouped-summaries": {
+        "module-3-region-category-scorecard": {
+          "label": "Module 3 Project: Region-Category Scorecard",
+          "summary": "Build one completed-order scorecard at region-category grain and retain every metric as the report grows.",
+          "cards": {
+            "sketch0": {
+              "title": "Project Brief"
+            },
+            "project": {
+              "title": "Build the Report"
+            }
+          },
+          "projectSteps": {
+            "project_step_1": {
+              "title": "Establish the Scorecard Grain"
+            },
+            "project_step_2": {
+              "title": "Add Completed Units"
+            },
+            "project_step_3": {
+              "title": "Add Gross Sales"
+            },
+            "project_step_4": {
+              "title": "Add Discount and Net Sales"
+            },
+            "project_step_5": {
+              "title": "Add Average Order Value and Rating"
+            },
+            "project_step_6": {
+              "title": "Rank the Completed Sales Scorecard"
+            }
+          },
+          "moduleProject": {
+            "steps": {
+              "project_step_1": {
+                "title": "Establish the Scorecard Grain",
+                "prompt": "Return `region`, `category`, and completed-order count as `completed_orders`.",
+                "hint": "Start with the exact group key and filtered population used by every later step.",
+                "help": {
+                  "concept": "One row represents one category within one region, based only on completed orders.",
+                  "hint_1": "Select both dimensions before the count.",
+                  "hint_2": "Group by region and category in that order."
+                },
+                "starterCode": "-- Build the first working query below.",
+                "solutionCode": "SELECT\n    region,\n    category,\n    COUNT(*) AS completed_orders\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY region, category;",
+                "starterFiles": {
+                  "main_sql": {
+                    "content": "-- Build the first working query below."
+                  }
+                },
+                "solutionFiles": {
+                  "main_sql": {
+                    "content": "SELECT\n    region,\n    category,\n    COUNT(*) AS completed_orders\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY region, category;"
+                  }
+                }
+              },
+              "project_step_2": {
+                "title": "Add Completed Units",
+                "prompt": "Keep the group key and order count, then add `SUM(quantity)` as `completed_units`.",
+                "hint": "Append the measure; do not change the group key or status filter.",
+                "help": {
+                  "concept": "All metrics in a scorecard row must summarize the same group population.",
+                  "hint_1": "Keep region, category, and completed_orders.",
+                  "hint_2": "Sum quantity inside each group."
+                },
+                "starterCode": "SELECT\n    region,\n    category,\n    COUNT(*) AS completed_orders\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY region, category;",
+                "solutionCode": "SELECT\n    region,\n    category,\n    COUNT(*) AS completed_orders,\n    SUM(quantity) AS completed_units\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY region, category;",
+                "starterFiles": {
+                  "main_sql": {
+                    "content": "SELECT\n    region,\n    category,\n    COUNT(*) AS completed_orders\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY region, category;"
+                  }
+                },
+                "solutionFiles": {
+                  "main_sql": {
+                    "content": "SELECT\n    region,\n    category,\n    COUNT(*) AS completed_orders,\n    SUM(quantity) AS completed_units\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY region, category;"
+                  }
+                }
+              },
+              "project_step_3": {
+                "title": "Add Gross Sales",
+                "prompt": "Preserve the volume KPIs and add rounded completed gross sales as `gross_sales`.",
+                "hint": "Add the monetary aggregate after the volume metrics.",
+                "help": {
+                  "concept": "Gross sales is calculated within each region-category group.",
+                  "hint_1": "Use SUM of the row-level value.",
+                  "hint_2": "Round the group total to two decimals."
+                },
+                "starterCode": "SELECT\n    region,\n    category,\n    COUNT(*) AS completed_orders,\n    SUM(quantity) AS completed_units\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY region, category;",
+                "solutionCode": "SELECT\n    region,\n    category,\n    COUNT(*) AS completed_orders,\n    SUM(quantity) AS completed_units,\n    ROUND(SUM(quantity * unit_price), 2) AS gross_sales\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY region, category;",
+                "starterFiles": {
+                  "main_sql": {
+                    "content": "SELECT\n    region,\n    category,\n    COUNT(*) AS completed_orders,\n    SUM(quantity) AS completed_units\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY region, category;"
+                  }
+                },
+                "solutionFiles": {
+                  "main_sql": {
+                    "content": "SELECT\n    region,\n    category,\n    COUNT(*) AS completed_orders,\n    SUM(quantity) AS completed_units,\n    ROUND(SUM(quantity * unit_price), 2) AS gross_sales\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY region, category;"
+                  }
+                }
+              },
+              "project_step_4": {
+                "title": "Add Discount and Net Sales",
+                "prompt": "Keep every existing KPI and add rounded `discount_amount` and `net_sales` using the zero-percent fallback for missing discounts.",
+                "hint": "Use parallel null-safe formulas so each group can reconcile gross, discount, and net.",
+                "help": {
+                  "concept": "Financial scorecard metrics must preserve the same grain and population as the volume metrics.",
+                  "hint_1": "Do not remove gross sales.",
+                  "hint_2": "Round each aggregate result separately."
+                },
+                "starterCode": "SELECT\n    region,\n    category,\n    COUNT(*) AS completed_orders,\n    SUM(quantity) AS completed_units,\n    ROUND(SUM(quantity * unit_price), 2) AS gross_sales\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY region, category;",
+                "solutionCode": "SELECT\n    region,\n    category,\n    COUNT(*) AS completed_orders,\n    SUM(quantity) AS completed_units,\n    ROUND(SUM(quantity * unit_price), 2) AS gross_sales,\n    ROUND(SUM(\n        quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS discount_amount,\n    ROUND(SUM(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS net_sales\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY region, category;",
+                "starterFiles": {
+                  "main_sql": {
+                    "content": "SELECT\n    region,\n    category,\n    COUNT(*) AS completed_orders,\n    SUM(quantity) AS completed_units,\n    ROUND(SUM(quantity * unit_price), 2) AS gross_sales\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY region, category;"
+                  }
+                },
+                "solutionFiles": {
+                  "main_sql": {
+                    "content": "SELECT\n    region,\n    category,\n    COUNT(*) AS completed_orders,\n    SUM(quantity) AS completed_units,\n    ROUND(SUM(quantity * unit_price), 2) AS gross_sales,\n    ROUND(SUM(\n        quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS discount_amount,\n    ROUND(SUM(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS net_sales\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY region, category;"
+                  }
+                }
+              },
+              "project_step_5": {
+                "title": "Add Average Order Value and Rating",
+                "prompt": "Preserve all totals and add rounded `average_net_order_value` and `average_rating` for each group.",
+                "hint": "Average the group-level order values without changing the group columns.",
+                "help": {
+                  "concept": "Averages add context to totals while keeping the same region-category row meaning.",
+                  "hint_1": "Use the existing net expression inside AVG.",
+                  "hint_2": "Leave customer-rating NULL behavior as rated-only."
+                },
+                "starterCode": "SELECT\n    region,\n    category,\n    COUNT(*) AS completed_orders,\n    SUM(quantity) AS completed_units,\n    ROUND(SUM(quantity * unit_price), 2) AS gross_sales,\n    ROUND(SUM(\n        quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS discount_amount,\n    ROUND(SUM(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS net_sales\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY region, category;",
+                "solutionCode": "SELECT\n    region,\n    category,\n    COUNT(*) AS completed_orders,\n    SUM(quantity) AS completed_units,\n    ROUND(SUM(quantity * unit_price), 2) AS gross_sales,\n    ROUND(SUM(\n        quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS discount_amount,\n    ROUND(SUM(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS net_sales,\n    ROUND(AVG(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS average_net_order_value,\n    ROUND(AVG(customer_rating), 2) AS average_rating\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY region, category;",
+                "starterFiles": {
+                  "main_sql": {
+                    "content": "SELECT\n    region,\n    category,\n    COUNT(*) AS completed_orders,\n    SUM(quantity) AS completed_units,\n    ROUND(SUM(quantity * unit_price), 2) AS gross_sales,\n    ROUND(SUM(\n        quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS discount_amount,\n    ROUND(SUM(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS net_sales\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY region, category;"
+                  }
+                },
+                "solutionFiles": {
+                  "main_sql": {
+                    "content": "SELECT\n    region,\n    category,\n    COUNT(*) AS completed_orders,\n    SUM(quantity) AS completed_units,\n    ROUND(SUM(quantity * unit_price), 2) AS gross_sales,\n    ROUND(SUM(\n        quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS discount_amount,\n    ROUND(SUM(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS net_sales,\n    ROUND(AVG(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS average_net_order_value,\n    ROUND(AVG(customer_rating), 2) AS average_rating\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY region, category;"
+                  }
+                }
+              },
+              "project_step_6": {
+                "title": "Rank the Completed Sales Scorecard",
+                "prompt": "Finish the scorecard by sorting `net_sales` highest first, then `region` and `category` alphabetically.",
+                "hint": "Add sorting after GROUP BY and preserve every selected metric.",
+                "help": {
+                  "concept": "Net sales drives the business ranking; both dimensions make tied groups predictable.",
+                  "hint_1": "Use the aggregate alias as the primary sort.",
+                  "hint_2": "Add both group dimensions as ascending tie-breakers."
+                },
+                "starterCode": "SELECT\n    region,\n    category,\n    COUNT(*) AS completed_orders,\n    SUM(quantity) AS completed_units,\n    ROUND(SUM(quantity * unit_price), 2) AS gross_sales,\n    ROUND(SUM(\n        quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS discount_amount,\n    ROUND(SUM(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS net_sales,\n    ROUND(AVG(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS average_net_order_value,\n    ROUND(AVG(customer_rating), 2) AS average_rating\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY region, category;",
+                "solutionCode": "SELECT\n    region,\n    category,\n    COUNT(*) AS completed_orders,\n    SUM(quantity) AS completed_units,\n    ROUND(SUM(quantity * unit_price), 2) AS gross_sales,\n    ROUND(SUM(\n        quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS discount_amount,\n    ROUND(SUM(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS net_sales,\n    ROUND(AVG(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS average_net_order_value,\n    ROUND(AVG(customer_rating), 2) AS average_rating\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY region, category\nORDER BY net_sales DESC, region ASC, category ASC;",
+                "starterFiles": {
+                  "main_sql": {
+                    "content": "SELECT\n    region,\n    category,\n    COUNT(*) AS completed_orders,\n    SUM(quantity) AS completed_units,\n    ROUND(SUM(quantity * unit_price), 2) AS gross_sales,\n    ROUND(SUM(\n        quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS discount_amount,\n    ROUND(SUM(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS net_sales,\n    ROUND(AVG(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS average_net_order_value,\n    ROUND(AVG(customer_rating), 2) AS average_rating\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY region, category;"
+                  }
+                },
+                "solutionFiles": {
+                  "main_sql": {
+                    "content": "SELECT\n    region,\n    category,\n    COUNT(*) AS completed_orders,\n    SUM(quantity) AS completed_units,\n    ROUND(SUM(quantity * unit_price), 2) AS gross_sales,\n    ROUND(SUM(\n        quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS discount_amount,\n    ROUND(SUM(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS net_sales,\n    ROUND(AVG(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS average_net_order_value,\n    ROUND(AVG(customer_rating), 2) AS average_rating\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY region, category\nORDER BY net_sales DESC, region ASC, category ASC;"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql-analysis-reporting": {
+      "sql-analysis-reporting-module-3-grouped-summaries": {
+        "module-3-region-category-scorecard": {
+          "sketch-0": {
+            "title": "Project Brief",
+            "bodyMarkdown": "## Your assignment\n\nRegional leaders need a comparable category scorecard without seeing individual order rows. The report should use one consistent grain—one completed-sales summary for each region and category—and add KPIs without losing earlier work.\n\nBuild **one cumulative grouped query**:\n\n1. Return `region`, `category`, and completed-order count as `completed_orders`.\n2. Add completed units as `completed_units`.\n3. Add rounded completed gross sales as `gross_sales`.\n4. Add null-safe `discount_amount` and `net_sales`.\n5. Add `average_net_order_value` and `average_rating`, rounded to two decimals.\n6. Sort `net_sales` highest first, then `region` and `category` alphabetically.\n\nPreserve the completed-order filter, the region-category grain, and every metric from the previous step.\n\n**Definition of done:** each row can be compared fairly with the others because all groups use the same definitions and appear in a stable ranking."
+          }
+        }
+      }
+    }
+  }
+}

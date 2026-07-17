@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { pythonShape } from "@zoeskoul/curriculum-profiles";
+import { pythonShape, sqlShape } from "@zoeskoul/curriculum-profiles";
 import { generateTopicAuthoringDraftAttempt } from "./generateTopicAuthoringDraft.js";
 import { validateTopicAuthoringDraft } from "@zoeskoul/curriculum-contracts";
 describe("generateTopicAuthoringDraftAttempt", () => {
@@ -38,6 +38,93 @@ describe("generateTopicAuthoringDraftAttempt", () => {
         );
     });
 
+
+    it("preserves SQL sql_query code_input exercises without stdout tests", async () => {
+        const result = await generateTopicAuthoringDraftAttempt(
+            {
+                async generateJson<T>() {
+                    throw new Error("generateJson should not be called in this test");
+                },
+
+                async generateJsonDetailed<T>() {
+                    return {
+                        provider: "test",
+                        model: "test",
+                        temperature: 1,
+                        schemaName: "TopicAuthoringDraft",
+                        strictSchema: true,
+                        rawText: "{}",
+                        parsedJson: {},
+                        value: {
+                            title: "Readable aliases",
+                            summary: "Practice readable SQL result headings.",
+                            minutes: 15,
+                            sketchBlocks: [
+                                {
+                                    id: "sketch0",
+                                    title: "Alias a result column",
+                                    bodyMarkdown:
+                                        "```sql\nSELECT region AS sales_region FROM sales_reporting;\n```",
+                                },
+                            ],
+                            quizDraft: [
+                                {
+                                    id: "try-aliases-for-readable-headings-sketch0",
+                                    kind: "code_input",
+                                    title: "Alias the region column",
+                                    prompt:
+                                        "Select region from sales_reporting and alias it as sales_region.",
+                                    hint: "Use AS after the source column.",
+                                    help: {
+                                        concept: "AS changes the result heading.",
+                                        hint_1: "Place AS between region and sales_region.",
+                                        hint_2: "Keep sales_reporting in the FROM clause.",
+                                    },
+                                    starterCode:
+                                        "SELECT region\nFROM sales_reporting;",
+                                    solutionCode:
+                                        "SELECT region AS sales_region\nFROM sales_reporting;",
+                                    datasetId: "sales_kpi",
+                                    recipeType: "sql_query",
+                                },
+                            ],
+                        },
+                    } as any;
+                },
+            },
+            {
+                seed: {
+                    profileId: "sql",
+                    subjectSlug: "sql",
+                    courseSlug: "sql-analysis-reporting",
+                    moduleSlug: "sql-analysis-reporting-module-0-report-foundations",
+                    modulePrefix: "sql_analysis_reporting_module_0",
+                    moduleOrder: 0,
+                    sectionSlug: "sql-analysis-reporting-section-0-readable-output",
+                    sectionOrder: 0,
+                    topicId: "aliases-for-readable-headings",
+                    order: 0,
+                    title: "Aliases for Readable Headings",
+                    summary: "Use aliases in reports.",
+                    minutes: 15,
+                    sourceLocale: "en",
+                    targetLocales: [],
+                } as any,
+                locale: "en",
+                shape: sqlShape,
+            },
+        );
+
+        const exercise = result.generation.value.quizDraft[0] as any;
+
+        expect(exercise.kind).toBe("code_input");
+        expect(exercise.recipeType).toBe("sql_query");
+        expect(exercise.datasetId).toBe("sales_kpi");
+        expect(exercise.tests).toBeUndefined();
+        expect(exercise.semanticChecks).toBeUndefined();
+        expect(exercise.solutionCode).toContain("AS sales_region");
+        expect(validateTopicAuthoringDraft(result.generation.value).ok).toBe(true);
+    });
 
     it("sanitizes empty-stdout generated code_input tests before validation", async () => {
         const result = await generateTopicAuthoringDraftAttempt(

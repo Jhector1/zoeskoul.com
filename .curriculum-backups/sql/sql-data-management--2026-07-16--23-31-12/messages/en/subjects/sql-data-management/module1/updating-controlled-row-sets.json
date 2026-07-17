@@ -1,0 +1,197 @@
+{
+  "topics": {
+    "sql-data-management": {
+      "sql-data-management-module-1-controlled-updates-deletes": {
+        "updating-controlled-row-sets": {
+          "label": "Updating Multiple Columns and Rows",
+          "summary": "Learn how to update multiple columns and rows in a SQL table using controlled conditions to ensure data integrity.",
+          "cards": {
+            "sketch0": {
+              "title": "Change Several Fields Together"
+            },
+            "sketch1": {
+              "title": "Protect Rows with Compound Conditions"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_updating_controlled_row_sets_sketch0": {
+              "title": "Correct One Item's Price and Status",
+              "prompt": "The audit ticket for item `id = 3` changes two fields at once. Update only that row in `inventory_items`, setting `price` to `50.00` and `status` to `inactive`.\n\n**Files for this exercise:**\n- `operations.sql`: the learner-authored INSERT, UPDATE, or DELETE statements; **edit this file**. It opens first.\n- `query.sql`: the learner-authored preview, inspection, report, or verification SELECT; **edit this file**.\n\n`query.sql` is part of the learner answer when the task asks for a preview, inspection, report, or verification. The hidden database-state check does not replace that required SELECT.\n\nComplete `operations.sql`, and `query.sql`. Do not create extra files or move SQL into a file with a different responsibility.",
+              "hint": "Apply the narrowly scoped change in operations.sql, then write query.sql so the Results tab proves the final state.",
+              "help": {
+                "concept": "The workspace runs schema.sql, seed.sql, operations.sql, and query.sql in that order. Each file has one responsibility, so setup, changes, and verification stay easy to inspect.",
+                "hint_1": "Apply the narrowly scoped change in operations.sql, then write query.sql so the Results tab proves the final state.",
+                "hint_2": "Both the required learner file and query.sql are checked. A hidden state check cannot replace the visible verification query."
+              },
+              "starterCode": "-- Apply the approved data change for \"Correct One Item's Price and Status\" below.\n",
+              "solutionCode": "UPDATE inventory_items\nSET price = 50.00, status = 'inactive'\nWHERE id = 3;",
+              "starterFiles": {
+                "operations_sql": {
+                  "content": "-- Apply the approved data change for \"Correct One Item's Price and Status\" below.\n"
+                },
+                "query_sql": {
+                  "content": "-- Return the verification result required for \"Correct One Item's Price and Status\" below.\n"
+                }
+              },
+              "solutionFiles": {
+                "operations_sql": {
+                  "content": "UPDATE inventory_items\nSET price = 50.00, status = 'inactive'\nWHERE id = 3;"
+                },
+                "query_sql": {
+                  "content": "SELECT price, status FROM inventory_items WHERE id = 3;"
+                }
+              }
+            },
+            "try_updating_controlled_row_sets_sketch1": {
+              "title": "Archive Test Kitchen Items",
+              "prompt": "The test kitchen catalog is being retired. Update `inventory_items` so rows are set to status `archived` only when both `category = 'Kitchen'` and `is_test = 1` are true.\n\n**Files for this exercise:**\n- `operations.sql`: the learner-authored INSERT, UPDATE, or DELETE statements; **edit this file**. It opens first.\n- `query.sql`: the learner-authored preview, inspection, report, or verification SELECT; **edit this file**.\n\n`query.sql` is part of the learner answer when the task asks for a preview, inspection, report, or verification. The hidden database-state check does not replace that required SELECT.\n\nComplete `operations.sql`, and `query.sql`. Do not create extra files or move SQL into a file with a different responsibility.",
+              "hint": "Apply the narrowly scoped change in operations.sql, then write query.sql so the Results tab proves the final state.",
+              "help": {
+                "concept": "The workspace runs schema.sql, seed.sql, operations.sql, and query.sql in that order. Each file has one responsibility, so setup, changes, and verification stay easy to inspect.",
+                "hint_1": "Apply the narrowly scoped change in operations.sql, then write query.sql so the Results tab proves the final state.",
+                "hint_2": "Both the required learner file and query.sql are checked. A hidden state check cannot replace the visible verification query."
+              },
+              "starterCode": "-- Apply the approved data change for \"Archive Test Kitchen Items\" below.\n",
+              "solutionCode": "UPDATE inventory_items\nSET status = 'archived'\nWHERE category = 'Kitchen' AND is_test = 1;",
+              "starterFiles": {
+                "operations_sql": {
+                  "content": "-- Apply the approved data change for \"Archive Test Kitchen Items\" below.\n"
+                },
+                "query_sql": {
+                  "content": "-- Return the verification result required for \"Archive Test Kitchen Items\" below.\n"
+                }
+              },
+              "solutionFiles": {
+                "operations_sql": {
+                  "content": "UPDATE inventory_items\nSET status = 'archived'\nWHERE category = 'Kitchen' AND is_test = 1;"
+                },
+                "query_sql": {
+                  "content": "SELECT id, status FROM inventory_items WHERE category = 'Kitchen' AND is_test = 1;"
+                }
+              }
+            }
+          },
+          "practice": {
+            "single-choice-1": {
+              "title": "Understanding Multiple Column Updates",
+              "prompt": "What is the purpose of using the `SET` clause in an `UPDATE` statement?",
+              "hint": "Think about how the `SET` clause affects the columns in a table.",
+              "help": {
+                "concept": "The `SET` clause specifies which columns to update and their new values.",
+                "hint_1": "The `SET` clause is used to assign new values to columns.",
+                "hint_2": "It allows you to update one or more columns in a table."
+              },
+              "options": {
+                "a": "To select specific rows to update",
+                "b": "To specify the columns and their new values",
+                "c": "To delete rows from a table",
+                "d": "To create a new table"
+              }
+            },
+            "single-choice-2": {
+              "title": "Purpose of WHERE Clause",
+              "prompt": "Why is it important to use a `WHERE` clause in an `UPDATE` statement?",
+              "hint": "Consider what happens if you don't use a `WHERE` clause.",
+              "help": {
+                "concept": "The `WHERE` clause limits the rows affected by the `UPDATE`.",
+                "hint_1": "Without a `WHERE` clause, all rows in the table could be updated.",
+                "hint_2": "It ensures only specific rows are updated."
+              },
+              "options": {
+                "a": "To update all rows in the table",
+                "b": "To limit the update to specific rows",
+                "c": "To delete rows from the table",
+                "d": "To create a new table"
+              }
+            },
+            "fill-blank-1": {
+              "title": "Fill in the Blank: SET Clause",
+              "prompt": "Complete the statement: The `SET` clause in an `UPDATE` statement is used to specify the columns and their new [blank1].",
+              "hint": "Think about what the `SET` clause assigns to columns.",
+              "help": {
+                "concept": "The `SET` clause assigns new the missing term to specified columns.",
+                "hint_1": "The `SET` clause specifies new the missing term for columns.",
+                "hint_2": "It assigns new the missing term to the columns."
+              },
+              "template": "The `SET` clause in an `UPDATE` statement is used to specify the columns and their new [blank1].",
+              "choices": [
+                "values",
+                "names",
+                "types",
+                "tables"
+              ]
+            },
+            "fill-blank-2": {
+              "title": "Fill in the Blank: WHERE Clause",
+              "prompt": "Complete the statement: The `WHERE` clause in an `UPDATE` statement is crucial for limiting the update to specific [blank1].",
+              "hint": "Think about what the `WHERE` clause targets in a table.",
+              "help": {
+                "concept": "The `WHERE` clause targets specific the missing term for the update.",
+                "hint_1": "The `WHERE` clause limits the update to specific the missing term.",
+                "hint_2": "It ensures only certain the missing term are updated."
+              },
+              "template": "The `WHERE` clause in an `UPDATE` statement is crucial for limiting the update to specific [blank1].",
+              "choices": [
+                "rows",
+                "columns",
+                "tables",
+                "databases"
+              ]
+            },
+            "multi-choice-1": {
+              "title": "Benefits of Compound WHERE Conditions",
+              "prompt": "What are the benefits of using compound `WHERE` conditions in an `UPDATE` statement? Select all that apply.",
+              "hint": "Consider how compound conditions affect the update operation.",
+              "help": {
+                "concept": "Compound `WHERE` conditions allow precise targeting of rows.",
+                "hint_1": "They help in targeting specific rows based on multiple criteria.",
+                "hint_2": "They ensure only the intended rows are updated."
+              },
+              "options": {
+                "a": "They allow updating multiple columns at once",
+                "b": "They help target specific rows based on multiple criteria",
+                "c": "They ensure only intended rows are updated",
+                "d": "They automatically create new tables"
+              }
+            },
+            "drag-reorder-1": {
+              "title": "Order of SQL Update Steps",
+              "prompt": "Arrange the steps for performing a controlled update in the correct order.",
+              "hint": "Think about the logical sequence of actions in an update operation.",
+              "help": {
+                "concept": "A controlled update involves previewing, updating, and verifying.",
+                "hint_1": "Start with previewing the intended rows.",
+                "hint_2": "End with verifying the update results."
+              },
+              "tokens": {
+                "t1": "Preview the intended rows with a SELECT",
+                "t2": "Execute the UPDATE statement",
+                "t3": "Verify the update results with a SELECT"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql-data-management": {
+      "sql-data-management-module-1-controlled-updates-deletes": {
+        "updating-controlled-row-sets": {
+          "sketch1": {
+            "title": "One UPDATE can keep related corrections on the same row",
+            "bodyMarkdown": "When working with databases, there are times when you need to update multiple columns in a single operation. This is particularly useful when you want to ensure that related data changes occur together, maintaining data integrity.\n\nTo update multiple columns, you use the `SET` clause in the `UPDATE` statement. You can specify multiple column-value pairs, separated by commas. Here's an example:\n\n```sql\nUPDATE inventory_items\nSET price = 5.99, status = 'active'\nWHERE id = 2;\n```\n\nIn this example, the `price` and `status` columns for the item with `id` 2 are updated. This ensures that both changes happen simultaneously, reducing the risk of data inconsistency.\n\nIt's important to use a `WHERE` clause to target specific rows. Without it, you risk updating every row in the table, which can lead to unintended data changes."
+          },
+          "sketch2": {
+            "title": "A complete predicate expresses the full business approval",
+            "bodyMarkdown": "To update a specific set of rows, you can use a compound `WHERE` condition. This allows you to define a precise subset of rows that should be updated, ensuring that only the intended data is modified.\n\nConsider the following example:\n\n```sql\nUPDATE inventory_items\nSET status = 'inactive'\nWHERE category = 'Decor' AND is_test = 1;\n```\n\nHere, only the rows in the `inventory_items` table where the `category` is 'Decor' and `is_test` is 1 will have their `status` updated to 'inactive'. This compound condition ensures that only test items in the 'Decor' category are affected, leaving other rows unchanged.\n\nUsing compound conditions in your `WHERE` clause helps maintain data integrity by precisely targeting the rows you intend to update."
+          }
+        }
+      }
+    }
+  }
+}

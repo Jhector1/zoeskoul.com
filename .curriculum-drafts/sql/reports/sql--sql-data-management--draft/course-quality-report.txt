@@ -1,0 +1,32 @@
+subject: sql--sql-data-management--draft
+profile: sql
+course: sql-data-management
+modules: 4
+topics: 16
+exercise counts: {"single_choice":20,"multi_choice":20,"drag_reorder":12,"fill_blank_choice":20,"code_input":45}
+code_input count: 45
+severity counts: {"blocker":0,"error":0,"warning":24,"info":0}
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "mutation-workflow-preview-change-verify" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "insert-with-explicit-column-lists" has no learning goals on its seed metadata.
+[warning] STARTER_MAY_REVEAL_SOLUTION_STRUCTURE: Exercise "try-insert-with-explicit-column-lists-sketch0" starterCode appears to contain most of the final solution structure.
+[warning] STARTER_MAY_REVEAL_SOLUTION_STRUCTURE: Exercise "try-insert-with-explicit-column-lists-sketch1" starterCode appears to contain most of the final solution structure.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "using-null-and-default-values" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "inserting-multiple-rows" has no learning goals on its seed metadata.
+[warning] STARTER_MAY_REVEAL_SOLUTION_STRUCTURE: Exercise "try-inserting-multiple-rows-sketch0" starterCode appears to contain most of the final solution structure.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "module-0-inventory-intake-batch" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "previewing-update-and-delete-targets" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "updating-one-row-precisely" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "updating-controlled-row-sets" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "deleting-only-confirmed-rows" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "module-1-inventory-correction-cleanup" has no learning goals on its seed metadata.
+[warning] STARTER_MAY_REVEAL_SOLUTION_STRUCTURE: Exercise "try-module-1-inventory-correction-cleanup-sketch1" starterCode appears to contain most of the final solution structure.
+[warning] STARTER_MAY_REVEAL_SOLUTION_STRUCTURE: Exercise "try-module-1-inventory-correction-cleanup-sketch2" starterCode appears to contain most of the final solution structure.
+[warning] STARTER_MAY_REVEAL_SOLUTION_STRUCTURE: Exercise "try-module-1-inventory-correction-cleanup-sketch3" starterCode appears to contain most of the final solution structure.
+[warning] STARTER_MAY_REVEAL_SOLUTION_STRUCTURE: Exercise "try-module-1-inventory-correction-cleanup-sketch4" starterCode appears to contain most of the final solution structure.
+[warning] STARTER_MAY_REVEAL_SOLUTION_STRUCTURE: Exercise "try-module-1-inventory-correction-cleanup-sketch5" starterCode appears to contain most of the final solution structure.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "creating-tables-and-defining-columns" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "primary-key-and-not-null-constraints" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "unique-and-default-constraints" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "foreign-keys-and-references" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "module-2-warehouse-stock-ledger-schema" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "final-inventory-operations-launch" has no learning goals on its seed metadata.

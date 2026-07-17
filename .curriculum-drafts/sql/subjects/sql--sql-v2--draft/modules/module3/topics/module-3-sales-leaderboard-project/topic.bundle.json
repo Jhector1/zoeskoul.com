@@ -27,19 +27,7 @@
       "kind": "sketch",
       "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-3.module-3-sales-leaderboard-project.cards.sketch0.title",
       "sketchId": "sketch_project_brief",
-      "height": 420,
-      "tryIt": {
-        "id": "try-module-3-sales-leaderboard-project-sketch0",
-        "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-3.module-3-sales-leaderboard-project.tryIt.try_module_3_sales_leaderboard_project_sketch0.title",
-        "promptKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-3.module-3-sales-leaderboard-project.tryIt.try_module_3_sales_leaderboard_project_sketch0.prompt",
-        "exerciseKey": "try-module-3-sales-leaderboard-project-sketch0",
-        "difficulty": "easy",
-        "preferKind": "code_input",
-        "seedPolicy": "global",
-        "required": true,
-        "allowReveal": true,
-        "maxAttempts": null
-      }
+      "height": 420
     },
     {
       "id": "project",
@@ -125,6 +113,9 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "sqlFileOrder": [
+          "query.sql"
         ]
       },
       "entryFilePath": "query.sql",
@@ -167,9 +158,25 @@
             "isEntry": true,
             "entry": true
           }
-        ]
+        ],
+        "openTabs": [
+          "query.sql"
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "query.sql"
+          ]
+        }
       },
-      "showExpectedExample": true
+      "showExpectedExample": true,
+      "sqlFileOrder": [
+        "query.sql"
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "query.sql"
+        ]
+      }
     },
     {
       "id": "mp-2-add-stock-tiebreaker",
@@ -205,6 +212,9 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "sqlFileOrder": [
+          "query.sql"
         ]
       },
       "entryFilePath": "query.sql",
@@ -247,9 +257,25 @@
             "isEntry": true,
             "entry": true
           }
-        ]
+        ],
+        "openTabs": [
+          "query.sql"
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "query.sql"
+          ]
+        }
       },
-      "showExpectedExample": true
+      "showExpectedExample": true,
+      "sqlFileOrder": [
+        "query.sql"
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "query.sql"
+        ]
+      }
     },
     {
       "id": "mp-3-finish-leaderboard",
@@ -285,6 +311,9 @@
             "isEntry": true,
             "entry": true
           }
+        ],
+        "sqlFileOrder": [
+          "query.sql"
         ]
       },
       "entryFilePath": "query.sql",
@@ -327,89 +356,25 @@
             "isEntry": true,
             "entry": true
           }
-        ]
-      },
-      "showExpectedExample": true
-    },
-    {
-      "id": "try-module-3-sales-leaderboard-project-sketch0",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-3.module-3-sales-leaderboard-project.quiz.try-module-3-sales-leaderboard-project-sketch0",
-      "language": "sql",
-      "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-3.module-3-sales-leaderboard-project.quiz.try-module-3-sales-leaderboard-project-sketch0.starterCode",
-      "fixedSqlDialect": "sqlite",
-      "runtime": {
-        "kind": "sql",
-        "datasetId": "products_catalog",
-        "fixedSqlDialect": "sqlite",
-        "resultShape": "table",
-        "showSchema": true,
-        "showErd": false,
-        "showChen": false,
-        "supportsTerminal": false,
-        "supportsMultiFile": false,
-        "supportsFileSystem": false
-      },
-      "recipe": {
-        "type": "sql_query",
-        "datasetId": "products_catalog",
-        "resultShape": "table",
-        "solutionCode": "SELECT\n  name,\n  price\nFROM products\nORDER BY price DESC;",
-        "solutionFiles": [
-          {
-            "path": "query.sql",
-            "content": "SELECT\n  name,\n  price\nFROM products\nORDER BY price DESC;",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "entryFilePath": "query.sql",
-      "starterFiles": [
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-3.module-3-sales-leaderboard-project.quiz.try-module-3-sales-leaderboard-project-sketch0.starterCode",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "query.sql",
-          "content": "SELECT\n  name,\n  price\nFROM products\nORDER BY price DESC;",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "workspace": {
-        "language": "sql",
-        "entryFilePath": "query.sql",
-        "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-3.module-3-sales-leaderboard-project.quiz.try-module-3-sales-leaderboard-project-sketch0.starterCode",
-        "starterFiles": [
-          {
-            "path": "query.sql",
-            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-3.module-3-sales-leaderboard-project.quiz.try-module-3-sales-leaderboard-project-sketch0.starterCode",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
         ],
-        "solutionFiles": [
-          {
-            "path": "query.sql",
-            "content": "SELECT\n  name,\n  price\nFROM products\nORDER BY price DESC;",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
+        "openTabs": [
+          "query.sql"
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "query.sql"
+          ]
+        }
       },
-      "showExpectedExample": true
+      "showExpectedExample": true,
+      "sqlFileOrder": [
+        "query.sql"
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "query.sql"
+        ]
+      }
     }
   ]
 }

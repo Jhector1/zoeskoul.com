@@ -1,0 +1,196 @@
+{
+  "title": "One-to-Many and Many-to-Many Results",
+  "summary": "Predict why one parent row may appear several times after joining to related detail rows.",
+  "minutes": 26,
+  "sketchBlocks": [
+    {
+      "id": "sketch0",
+      "title": "Understanding One-to-Many Relationships",
+      "bodyMarkdown": "In a one-to-many relationship, a single record in one table can be associated with multiple records in another table. For example, consider the relationship between `departments` and `courses`. Each department can offer multiple courses, but each course belongs to only one department. \n\n```sql\nSELECT departments.name AS department_name, courses.title AS course_title\nFROM departments\nJOIN courses ON departments.id = courses.department_id;\n```\n\nThis query joins the `departments` table with the `courses` table, showing each course along with its department. Notice how a department like 'Science' can appear multiple times, once for each course it offers."
+    },
+    {
+      "id": "sketch1",
+      "title": "Exploring Many-to-Many Relationships",
+      "bodyMarkdown": "Many-to-many relationships involve a bridge table to connect two tables. For instance, students can enroll in multiple courses, and each course can have multiple students. This is managed through the `enrollments` table, which acts as a bridge between `students` and `courses`.\n\n```sql\nSELECT students.name AS student_name, courses.title AS course_title\nFROM students\nJOIN enrollments ON students.id = enrollments.student_id\nJOIN courses ON enrollments.course_id = courses.id;\n```\n\nThis query retrieves the names of students along with the courses they are enrolled in. The `enrollments` table allows us to connect `students` and `courses`, enabling a many-to-many relationship."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "try-one-to-many-and-many-to-many-results-sketch0",
+      "kind": "code_input",
+      "title": "Join Departments and Courses",
+      "prompt": "Write a query to list each course along with its department name. Use the `departments` and `courses` tables.",
+      "starterCode": "SELECT \nFROM departments\nJOIN courses ON ;",
+      "solutionCode": "SELECT departments.name AS department_name, courses.title AS course_title\nFROM departments\nJOIN courses ON departments.id = courses.department_id;",
+      "tests": [
+        {
+          "stdout": "department_name,course_title\nScience,Biology\nMath,Algebra II\nHumanities,World History\nTechnology,Computer Basics\nArts,Creative Writing\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "school_relations_intro",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "try-one-to-many-and-many-to-many-results-sketch1",
+      "kind": "code_input",
+      "title": "List Students and Their Courses",
+      "prompt": "Write a query to list each student along with the courses they are enrolled in. Use the `students`, `enrollments`, and `courses` tables.",
+      "starterCode": "SELECT \nFROM students\nJOIN enrollments ON \nJOIN courses ON ;",
+      "solutionCode": "SELECT students.name AS student_name, courses.title AS course_title\nFROM students\nJOIN enrollments ON students.id = enrollments.student_id\nJOIN courses ON enrollments.course_id = courses.id;",
+      "tests": [
+        {
+          "stdout": "student_name,course_title\nMia,Biology\nMia,Algebra II\nLeo,Algebra II\nLeo,World History\nAva,Computer Basics\nNoah,Biology\nNoah,Computer Basics\nEmma,World History\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "school_relations_intro",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "single-choice-1",
+      "kind": "single_choice",
+      "title": "Understanding One-to-Many Relationships",
+      "prompt": "In a one-to-many relationship, how many records in the second table can be associated with a single record in the first table?",
+      "options": [
+        "One",
+        "Many",
+        "None",
+        "Exactly two"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "single-choice-2",
+      "kind": "single_choice",
+      "title": "Identifying Bridge Tables",
+      "prompt": "Which table acts as a bridge between students and courses in a many-to-many relationship?",
+      "options": [
+        "students",
+        "courses",
+        "enrollments",
+        "departments"
+      ],
+      "correctOptionIds": [
+        "c"
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "fill-blank-choice-1",
+      "kind": "fill_blank_choice",
+      "title": "SQL Join Syntax",
+      "prompt": "Complete the SQL statement to join `students` and `enrollments` on the student ID.",
+      "template": "SELECT * FROM students JOIN enrollments ON students.id = [blank1];",
+      "choices": [
+        "enrollments.student_id",
+        "students.student_id",
+        "enrollments.id",
+        "students.id"
+      ],
+      "correctValue": "enrollments.student_id",
+      "hint": "Use the correct SQL syntax for joining tables.",
+      "help": {
+        "concept": "The `ON` clause specifies the condition for joining tables.",
+        "hint_1": "The `ON` clause should match the primary key of one table to the foreign key of another.",
+        "hint_2": "Ensure the column names are correctly qualified with table names."
+      }
+    },
+    {
+      "id": "fill-blank-choice-2",
+      "kind": "fill_blank_choice",
+      "title": "Understanding Result Grain",
+      "prompt": "In a join query, the result grain is determined by the table with the [blank1] relationship.",
+      "template": "In a join query, the result grain is determined by the table with the [blank1] relationship.",
+      "choices": [
+        "one-to-many",
+        "many-to-one",
+        "one-to-one",
+        "many-to-many"
+      ],
+      "correctValue": "many-to-one",
+      "hint": "Consider which table's rows multiply in a join.",
+      "help": {
+        "concept": "The result grain is influenced by the table that contributes multiple rows per match.",
+        "hint_1": "Think about which table's rows appear multiple times in the result.",
+        "hint_2": "The table with the 'many' side of the relationship affects the result grain."
+      }
+    },
+    {
+      "id": "multi-choice-1",
+      "kind": "multi_choice",
+      "title": "Characteristics of Many-to-Many Relationships",
+      "prompt": "Select all characteristics of a many-to-many relationship.",
+      "options": [
+        "Requires a bridge table",
+        "Each record in one table can relate to multiple records in the other",
+        "Directly connects two tables without intermediaries",
+        "Involves only two tables"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ],
+      "hint": "Consider how many-to-many relationships are structured.",
+      "help": {
+        "concept": "Many-to-many relationships involve a bridge table to connect two tables.",
+        "hint_1": "Think about the role of the bridge table.",
+        "hint_2": "Consider how each table can relate to multiple records in the other."
+      }
+    },
+    {
+      "id": "drag-reorder-1",
+      "kind": "drag_reorder",
+      "title": "Order of SQL Join Operations",
+      "prompt": "Arrange the steps to perform a join between `students` and `courses` using `enrollments`.",
+      "tokens": [
+        "Join students to enrollments",
+        "Join enrollments to courses",
+        "Select columns from students and courses"
+      ],
+      "correctOrder": [
+        "Join students to enrollments",
+        "Join enrollments to courses",
+        "Select columns from students and courses"
+      ],
+      "hint": "Think about the sequence of joining tables in a many-to-many relationship.",
+      "help": {
+        "concept": "Joining tables in a many-to-many relationship involves using a bridge table.",
+        "hint_1": "Start by joining the first table to the bridge table.",
+        "hint_2": "Then join the bridge table to the second table."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Course Enrollment Directory",
+    "stepIds": [
+      "try-one-to-many-and-many-to-many-results-sketch0",
+      "try-one-to-many-and-many-to-many-results-sketch1"
+    ]
+  }
+}

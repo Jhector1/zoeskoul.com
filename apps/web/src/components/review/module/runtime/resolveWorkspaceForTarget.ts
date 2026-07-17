@@ -619,6 +619,91 @@ function workspaceHasNonBlankFile(workspace: WorkspaceStateV2 | null | undefined
   });
 }
 
+function normalizeWorkspaceFileContent(value: unknown) {
+  return String(value ?? "")
+    .replace(/\r\n?/g, "\n")
+    .trim();
+}
+
+function isCollapsedMultiFileStarterSnapshot(args: {
+  savedWorkspace: WorkspaceStateV2 | null | undefined;
+  manifestWorkspace: WorkspaceStateV2 | null | undefined;
+}) {
+  const savedFiles = workspaceFileEntries(args.savedWorkspace);
+  const manifestFiles = workspaceFileEntries(args.manifestWorkspace);
+
+  if (savedFiles.length < 2 || manifestFiles.length < 2) {
+    return false;
+  }
+
+  const manifestByPath = new Map(
+    manifestFiles.map((file) => [
+      file.path,
+      normalizeWorkspaceFileContent(file.content),
+    ]),
+  );
+  const savedByPath = new Map(
+    savedFiles.map((file) => [
+      file.path,
+      normalizeWorkspaceFileContent(file.content),
+    ]),
+  );
+
+  const manifestPaths = [...manifestByPath.keys()].sort();
+  if (
+    manifestPaths.some((path) => !savedByPath.has(path))
+  ) {
+    return false;
+  }
+
+  const manifestContents = manifestPaths
+    .map((path) => manifestByPath.get(path) ?? "")
+    .filter(Boolean);
+  const distinctManifestContents = new Set(manifestContents);
+
+  /**
+   * The current authored workspace must actually contain distinct file
+   * starters. Otherwise identical saved files may be intentional.
+   */
+  if (distinctManifestContents.size < 2) {
+    return false;
+  }
+
+  const savedContents = manifestPaths
+    .map((path) => savedByPath.get(path) ?? "")
+    .filter(Boolean);
+  const distinctSavedContents = new Set(savedContents);
+
+  /**
+   * Known legacy corruption:
+   * one non-empty authored starter was copied into every workspace file.
+   */
+  if (
+    savedContents.length !== manifestPaths.length ||
+    distinctSavedContents.size !== 1
+  ) {
+    return false;
+  }
+
+  const repeatedSavedContent = savedContents[0] ?? "";
+  if (!repeatedSavedContent) {
+    return false;
+  }
+
+  const repeatedContentIsAuthoredStarter =
+    distinctManifestContents.has(repeatedSavedContent);
+  const differsFromCurrentManifest = manifestPaths.some(
+    (path) =>
+      (savedByPath.get(path) ?? "") !==
+      (manifestByPath.get(path) ?? ""),
+  );
+
+  return (
+    repeatedContentIsAuthoredStarter &&
+    differsFromCurrentManifest
+  );
+}
+
 function workspaceHasMeaningfulSavedContent(workspace: WorkspaceStateV2 | null | undefined) {
   if (!workspace || workspace.version !== 2 || !Array.isArray(workspace.nodes)) {
     return false;
@@ -816,6 +901,21 @@ function shouldUseSavedWorkspace(args: {
       Boolean(String(args.manifest.starterCode ?? "").trim());
 
   const userOwned = isUserWorkspaceState(args.savedState);
+
+  /**
+   * An older multi-file hydration bug copied the first SQL starter into every
+   * file and then marked that snapshot as learner-owned. The current manifest
+   * is authoritative when it contains distinct starters and the saved files
+   * are all exact copies of one of those authored starters.
+   */
+  if (
+    isCollapsedMultiFileStarterSnapshot({
+      savedWorkspace: args.savedWorkspace,
+      manifestWorkspace: args.manifest.manifestWorkspace,
+    })
+  ) {
+    return false;
+  }
 
   /**
    * Real learner work must win even when the course was regenerated and the
@@ -1146,8 +1246,14 @@ export function resolveWorkspaceForTarget(args: {
   const localDraftHasMeaningfulContent = workspaceHasMeaningfulSavedContent(
     args.localDraft?.workspace,
   );
+  const localDraftIsCollapsedStarter =
+    isCollapsedMultiFileStarterSnapshot({
+      savedWorkspace: args.localDraft?.workspace,
+      manifestWorkspace: manifest.manifestWorkspace,
+    });
   const localDraftCanOverrideStarter =
-    !manifestHasStarter || localDraftHasMeaningfulContent;
+    (!manifestHasStarter || localDraftHasMeaningfulContent) &&
+    !localDraftIsCollapsedStarter;
   const draftIsFresh =
     args.localDraft &&
     args.localDraft.targetKey === args.targetKey &&

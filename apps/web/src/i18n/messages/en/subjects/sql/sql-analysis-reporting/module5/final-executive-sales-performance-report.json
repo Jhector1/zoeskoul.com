@@ -1,0 +1,141 @@
+{
+  "topics": {
+    "sql-analysis-reporting": {
+      "sql-analysis-reporting-module-5-final-capstone": {
+        "final-executive-sales-performance-report": {
+          "label": "Final Capstone: Executive Sales Performance Report",
+          "summary": "Build one January 2026 executive report through a focused warm-up and four cumulative project steps.",
+          "cards": {
+            "sketch0": {
+              "title": "Capstone Brief"
+            },
+            "project": {
+              "title": "Build the Executive Report"
+            }
+          },
+          "projectSteps": {
+            "capstone_step_1": {
+              "title": "Build the KPI Foundation"
+            },
+            "capstone_step_2": {
+              "title": "Add the Sales Metrics"
+            },
+            "capstone_step_3": {
+              "title": "Add Context and Performance Bands"
+            },
+            "capstone_step_4": {
+              "title": "Filter and Rank the Final Report"
+            }
+          },
+          "finalCapstone": {
+            "steps": {
+              "capstone_step_1": {
+                "title": "Build the KPI Foundation",
+                "prompt": "Begin the Final Executive Sales Performance Report. Calculate and return `region, category, COUNT(*) AS total_orders, SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders, ROUND( 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*), 1 ) AS completion_rate` from `sales_reporting`. Keep only rows where `order_date BETWEEN '2026-01-01' AND '2026-01-31'`. Produce one result row per `region, category`.",
+                "hint": "Build the report grain and all three volume KPIs in one working query.",
+                "help": {
+                  "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                  "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                  "hint_2": "Keep only rows where `order_date BETWEEN '2026-01-01' AND '2026-01-31'`. Produce one result row per `region, category`."
+                },
+                "starterCode": "-- Build the first cumulative report query below.",
+                "solutionCode": "SELECT\n    region,\n    category,\n    COUNT(*) AS total_orders,\n    SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders,\n    ROUND(\n        100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*),\n        1\n    ) AS completion_rate\nFROM sales_reporting\nWHERE order_date BETWEEN '2026-01-01' AND '2026-01-31'\nGROUP BY region, category;",
+                "starterFiles": {
+                  "main_sql": {
+                    "content": "-- Build the first cumulative report query below."
+                  }
+                },
+                "solutionFiles": {
+                  "main_sql": {
+                    "content": "SELECT\n    region,\n    category,\n    COUNT(*) AS total_orders,\n    SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders,\n    ROUND(\n        100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*),\n        1\n    ) AS completion_rate\nFROM sales_reporting\nWHERE order_date BETWEEN '2026-01-01' AND '2026-01-31'\nGROUP BY region, category;"
+                  }
+                }
+              },
+              "capstone_step_2": {
+                "title": "Add the Sales Metrics",
+                "prompt": "Extend the Final Executive Sales Performance Report with the next approved requirement. Calculate and return `region, category, COUNT(*) AS total_orders, SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders, ROUND( 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*), 1 ) AS completion_rate, ROUND(SUM(quantity * unit_price), 2) AS gross_sales, ROUND(SUM( CASE WHEN order_status = 'Completed' THEN quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ELSE 0 END ), 2) AS completed_net_sales` from `sales_reporting`. Keep only rows where `order_date BETWEEN '2026-01-01' AND '2026-01-31'`. Produce one result row per `region, category`.",
+                "hint": "Preserve every existing column while adding one all-order value and one completed-order value.",
+                "help": {
+                  "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                  "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                  "hint_2": "Keep only rows where `order_date BETWEEN '2026-01-01' AND '2026-01-31'`. Produce one result row per `region, category`."
+                },
+                "starterCode": "SELECT\n    region,\n    category,\n    COUNT(*) AS total_orders,\n    SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders,\n    ROUND(\n        100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*),\n        1\n    ) AS completion_rate\nFROM sales_reporting\nWHERE order_date BETWEEN '2026-01-01' AND '2026-01-31'\nGROUP BY region, category;",
+                "solutionCode": "SELECT\n    region,\n    category,\n    COUNT(*) AS total_orders,\n    SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders,\n    ROUND(\n        100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*),\n        1\n    ) AS completion_rate,\n    ROUND(SUM(quantity * unit_price), 2) AS gross_sales,\n    ROUND(SUM(\n        CASE\n            WHEN order_status = 'Completed' THEN\n                quantity * unit_price\n                - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n            ELSE 0\n        END\n    ), 2) AS completed_net_sales\nFROM sales_reporting\nWHERE order_date BETWEEN '2026-01-01' AND '2026-01-31'\nGROUP BY region, category;",
+                "starterFiles": {
+                  "main_sql": {
+                    "content": "SELECT\n    region,\n    category,\n    COUNT(*) AS total_orders,\n    SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders,\n    ROUND(\n        100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*),\n        1\n    ) AS completion_rate\nFROM sales_reporting\nWHERE order_date BETWEEN '2026-01-01' AND '2026-01-31'\nGROUP BY region, category;"
+                  }
+                },
+                "solutionFiles": {
+                  "main_sql": {
+                    "content": "SELECT\n    region,\n    category,\n    COUNT(*) AS total_orders,\n    SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders,\n    ROUND(\n        100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*),\n        1\n    ) AS completion_rate,\n    ROUND(SUM(quantity * unit_price), 2) AS gross_sales,\n    ROUND(SUM(\n        CASE\n            WHEN order_status = 'Completed' THEN\n                quantity * unit_price\n                - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n            ELSE 0\n        END\n    ), 2) AS completed_net_sales\nFROM sales_reporting\nWHERE order_date BETWEEN '2026-01-01' AND '2026-01-31'\nGROUP BY region, category;"
+                  }
+                }
+              },
+              "capstone_step_3": {
+                "title": "Add Context and Performance Bands",
+                "prompt": "Extend the Final Executive Sales Performance Report with the next approved requirement. Calculate and return `region, category, COUNT(*) AS total_orders, SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders, ROUND( 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*), 1 ) AS completion_rate, ROUND(SUM(quantity * unit_price), 2) AS gross_sales, ROUND(SUM( CASE WHEN order_status = 'Completed' THEN quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ELSE 0 END ), 2) AS completed_net_sales, ROUND(AVG(customer_rating), 2) AS average_rating, SUM(CASE WHEN discount_pct IS NULL THEN 1 ELSE 0 END) AS missing_discount_orders, CASE WHEN SUM( CASE WHEN order_status = 'Completed' THEN quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ELSE 0 END ) >= 150 AND 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) >= 75 THEN 'Strong' WHEN SUM( CASE WHEN order_status = 'Completed' THEN quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ELSE 0 END ) >= 100 AND 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) >= 50 THEN 'Stable' ELSE 'Watch' END AS performance_band` from `sales_reporting`. Keep only rows where `order_date BETWEEN '2026-01-01' AND '2026-01-31'`. Produce one result row per `region, category`.",
+                "hint": "Add the quality context first, then evaluate the stronger two-metric band before the stable band.",
+                "help": {
+                  "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                  "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                  "hint_2": "Keep only rows where `order_date BETWEEN '2026-01-01' AND '2026-01-31'`. Produce one result row per `region, category`."
+                },
+                "starterCode": "SELECT\n    region,\n    category,\n    COUNT(*) AS total_orders,\n    SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders,\n    ROUND(\n        100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*),\n        1\n    ) AS completion_rate,\n    ROUND(SUM(quantity * unit_price), 2) AS gross_sales,\n    ROUND(SUM(\n        CASE\n            WHEN order_status = 'Completed' THEN\n                quantity * unit_price\n                - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n            ELSE 0\n        END\n    ), 2) AS completed_net_sales\nFROM sales_reporting\nWHERE order_date BETWEEN '2026-01-01' AND '2026-01-31'\nGROUP BY region, category;",
+                "solutionCode": "SELECT\n    region,\n    category,\n    COUNT(*) AS total_orders,\n    SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders,\n    ROUND(\n        100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*),\n        1\n    ) AS completion_rate,\n    ROUND(SUM(quantity * unit_price), 2) AS gross_sales,\n    ROUND(SUM(\n        CASE\n            WHEN order_status = 'Completed' THEN\n                quantity * unit_price\n                - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n            ELSE 0\n        END\n    ), 2) AS completed_net_sales,\n    ROUND(AVG(customer_rating), 2) AS average_rating,\n    SUM(CASE WHEN discount_pct IS NULL THEN 1 ELSE 0 END) AS missing_discount_orders,\n    CASE\n        WHEN\n            SUM(\n                CASE\n                    WHEN order_status = 'Completed' THEN\n                        quantity * unit_price\n                        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n                    ELSE 0\n                END\n            ) >= 150\n            AND 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) >= 75\n        THEN 'Strong'\n        WHEN\n            SUM(\n                CASE\n                    WHEN order_status = 'Completed' THEN\n                        quantity * unit_price\n                        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n                    ELSE 0\n                END\n            ) >= 100\n            AND 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) >= 50\n        THEN 'Stable'\n        ELSE 'Watch'\n    END AS performance_band\nFROM sales_reporting\nWHERE order_date BETWEEN '2026-01-01' AND '2026-01-31'\nGROUP BY region, category;",
+                "starterFiles": {
+                  "main_sql": {
+                    "content": "SELECT\n    region,\n    category,\n    COUNT(*) AS total_orders,\n    SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders,\n    ROUND(\n        100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*),\n        1\n    ) AS completion_rate,\n    ROUND(SUM(quantity * unit_price), 2) AS gross_sales,\n    ROUND(SUM(\n        CASE\n            WHEN order_status = 'Completed' THEN\n                quantity * unit_price\n                - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n            ELSE 0\n        END\n    ), 2) AS completed_net_sales\nFROM sales_reporting\nWHERE order_date BETWEEN '2026-01-01' AND '2026-01-31'\nGROUP BY region, category;"
+                  }
+                },
+                "solutionFiles": {
+                  "main_sql": {
+                    "content": "SELECT\n    region,\n    category,\n    COUNT(*) AS total_orders,\n    SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders,\n    ROUND(\n        100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*),\n        1\n    ) AS completion_rate,\n    ROUND(SUM(quantity * unit_price), 2) AS gross_sales,\n    ROUND(SUM(\n        CASE\n            WHEN order_status = 'Completed' THEN\n                quantity * unit_price\n                - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n            ELSE 0\n        END\n    ), 2) AS completed_net_sales,\n    ROUND(AVG(customer_rating), 2) AS average_rating,\n    SUM(CASE WHEN discount_pct IS NULL THEN 1 ELSE 0 END) AS missing_discount_orders,\n    CASE\n        WHEN\n            SUM(\n                CASE\n                    WHEN order_status = 'Completed' THEN\n                        quantity * unit_price\n                        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n                    ELSE 0\n                END\n            ) >= 150\n            AND 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) >= 75\n        THEN 'Strong'\n        WHEN\n            SUM(\n                CASE\n                    WHEN order_status = 'Completed' THEN\n                        quantity * unit_price\n                        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n                    ELSE 0\n                END\n            ) >= 100\n            AND 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) >= 50\n        THEN 'Stable'\n        ELSE 'Watch'\n    END AS performance_band\nFROM sales_reporting\nWHERE order_date BETWEEN '2026-01-01' AND '2026-01-31'\nGROUP BY region, category;"
+                  }
+                }
+              },
+              "capstone_step_4": {
+                "title": "Filter and Rank the Final Report",
+                "prompt": "Complete the Final Executive Sales Performance Report. Calculate and return `region, category, COUNT(*) AS total_orders, SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders, ROUND( 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*), 1 ) AS completion_rate, ROUND(SUM(quantity * unit_price), 2) AS gross_sales, ROUND(SUM( CASE WHEN order_status = 'Completed' THEN quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ELSE 0 END ), 2) AS completed_net_sales, ROUND(AVG(customer_rating), 2) AS average_rating, SUM(CASE WHEN discount_pct IS NULL THEN 1 ELSE 0 END) AS missing_discount_orders, CASE WHEN SUM( CASE WHEN order_status = 'Completed' THEN quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ELSE 0 END ) >= 150 AND 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) >= 75 THEN 'Strong' WHEN SUM( CASE WHEN order_status = 'Completed' THEN quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ELSE 0 END ) >= 100 AND 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) >= 50 THEN 'Stable' ELSE 'Watch' END AS performance_band` from `sales_reporting`. Keep only rows where `order_date BETWEEN '2026-01-01' AND '2026-01-31'`. Produce one result row per `region, category`. After grouping, keep groups where `SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) >= 2 OR SUM( CASE WHEN order_status = 'Completed' THEN quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ELSE 0 END ) >= 150`. Sort the final result by `completed_net_sales DESC, region ASC, category ASC`.",
+                "hint": "Use HAVING for the grouped thresholds and finish with deterministic ordering.",
+                "help": {
+                  "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                  "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                  "hint_2": "After grouping, keep groups where `SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) >= 2 OR SUM( CASE WHEN order_status = 'Completed' THEN quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ELSE 0 END ) >= 150`. Sort the final result by `completed_net_sales DESC, region ASC, category ASC`."
+                },
+                "starterCode": "SELECT\n    region,\n    category,\n    COUNT(*) AS total_orders,\n    SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders,\n    ROUND(\n        100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*),\n        1\n    ) AS completion_rate,\n    ROUND(SUM(quantity * unit_price), 2) AS gross_sales,\n    ROUND(SUM(\n        CASE\n            WHEN order_status = 'Completed' THEN\n                quantity * unit_price\n                - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n            ELSE 0\n        END\n    ), 2) AS completed_net_sales,\n    ROUND(AVG(customer_rating), 2) AS average_rating,\n    SUM(CASE WHEN discount_pct IS NULL THEN 1 ELSE 0 END) AS missing_discount_orders,\n    CASE\n        WHEN\n            SUM(\n                CASE\n                    WHEN order_status = 'Completed' THEN\n                        quantity * unit_price\n                        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n                    ELSE 0\n                END\n            ) >= 150\n            AND 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) >= 75\n        THEN 'Strong'\n        WHEN\n            SUM(\n                CASE\n                    WHEN order_status = 'Completed' THEN\n                        quantity * unit_price\n                        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n                    ELSE 0\n                END\n            ) >= 100\n            AND 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) >= 50\n        THEN 'Stable'\n        ELSE 'Watch'\n    END AS performance_band\nFROM sales_reporting\nWHERE order_date BETWEEN '2026-01-01' AND '2026-01-31'\nGROUP BY region, category;",
+                "solutionCode": "SELECT\n    region,\n    category,\n    COUNT(*) AS total_orders,\n    SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders,\n    ROUND(\n        100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*),\n        1\n    ) AS completion_rate,\n    ROUND(SUM(quantity * unit_price), 2) AS gross_sales,\n    ROUND(SUM(\n        CASE\n            WHEN order_status = 'Completed' THEN\n                quantity * unit_price\n                - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n            ELSE 0\n        END\n    ), 2) AS completed_net_sales,\n    ROUND(AVG(customer_rating), 2) AS average_rating,\n    SUM(CASE WHEN discount_pct IS NULL THEN 1 ELSE 0 END) AS missing_discount_orders,\n    CASE\n        WHEN\n            SUM(\n                CASE\n                    WHEN order_status = 'Completed' THEN\n                        quantity * unit_price\n                        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n                    ELSE 0\n                END\n            ) >= 150\n            AND 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) >= 75\n        THEN 'Strong'\n        WHEN\n            SUM(\n                CASE\n                    WHEN order_status = 'Completed' THEN\n                        quantity * unit_price\n                        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n                    ELSE 0\n                END\n            ) >= 100\n            AND 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) >= 50\n        THEN 'Stable'\n        ELSE 'Watch'\n    END AS performance_band\nFROM sales_reporting\nWHERE order_date BETWEEN '2026-01-01' AND '2026-01-31'\nGROUP BY region, category\nHAVING\n    SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) >= 2\n    OR SUM(\n        CASE\n            WHEN order_status = 'Completed' THEN\n                quantity * unit_price\n                - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n            ELSE 0\n        END\n    ) >= 150\nORDER BY completed_net_sales DESC, region ASC, category ASC;",
+                "starterFiles": {
+                  "main_sql": {
+                    "content": "SELECT\n    region,\n    category,\n    COUNT(*) AS total_orders,\n    SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders,\n    ROUND(\n        100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*),\n        1\n    ) AS completion_rate,\n    ROUND(SUM(quantity * unit_price), 2) AS gross_sales,\n    ROUND(SUM(\n        CASE\n            WHEN order_status = 'Completed' THEN\n                quantity * unit_price\n                - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n            ELSE 0\n        END\n    ), 2) AS completed_net_sales,\n    ROUND(AVG(customer_rating), 2) AS average_rating,\n    SUM(CASE WHEN discount_pct IS NULL THEN 1 ELSE 0 END) AS missing_discount_orders,\n    CASE\n        WHEN\n            SUM(\n                CASE\n                    WHEN order_status = 'Completed' THEN\n                        quantity * unit_price\n                        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n                    ELSE 0\n                END\n            ) >= 150\n            AND 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) >= 75\n        THEN 'Strong'\n        WHEN\n            SUM(\n                CASE\n                    WHEN order_status = 'Completed' THEN\n                        quantity * unit_price\n                        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n                    ELSE 0\n                END\n            ) >= 100\n            AND 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) >= 50\n        THEN 'Stable'\n        ELSE 'Watch'\n    END AS performance_band\nFROM sales_reporting\nWHERE order_date BETWEEN '2026-01-01' AND '2026-01-31'\nGROUP BY region, category;"
+                  }
+                },
+                "solutionFiles": {
+                  "main_sql": {
+                    "content": "SELECT\n    region,\n    category,\n    COUNT(*) AS total_orders,\n    SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders,\n    ROUND(\n        100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*),\n        1\n    ) AS completion_rate,\n    ROUND(SUM(quantity * unit_price), 2) AS gross_sales,\n    ROUND(SUM(\n        CASE\n            WHEN order_status = 'Completed' THEN\n                quantity * unit_price\n                - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n            ELSE 0\n        END\n    ), 2) AS completed_net_sales,\n    ROUND(AVG(customer_rating), 2) AS average_rating,\n    SUM(CASE WHEN discount_pct IS NULL THEN 1 ELSE 0 END) AS missing_discount_orders,\n    CASE\n        WHEN\n            SUM(\n                CASE\n                    WHEN order_status = 'Completed' THEN\n                        quantity * unit_price\n                        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n                    ELSE 0\n                END\n            ) >= 150\n            AND 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) >= 75\n        THEN 'Strong'\n        WHEN\n            SUM(\n                CASE\n                    WHEN order_status = 'Completed' THEN\n                        quantity * unit_price\n                        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n                    ELSE 0\n                END\n            ) >= 100\n            AND 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) >= 50\n        THEN 'Stable'\n        ELSE 'Watch'\n    END AS performance_band\nFROM sales_reporting\nWHERE order_date BETWEEN '2026-01-01' AND '2026-01-31'\nGROUP BY region, category\nHAVING\n    SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) >= 2\n    OR SUM(\n        CASE\n            WHEN order_status = 'Completed' THEN\n                quantity * unit_price\n                - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n            ELSE 0\n        END\n    ) >= 150\nORDER BY completed_net_sales DESC, region ASC, category ASC;"
+                  }
+                }
+              }
+            }
+          },
+          "tryIt": {
+            "allowReveal": true
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql-analysis-reporting": {
+      "sql-analysis-reporting-module-5-final-capstone": {
+        "final-executive-sales-performance-report": {
+          "sketch-0": {
+            "title": "Executive Report Capstone",
+            "bodyMarkdown": "In this final capstone, you will turn the `sales_reporting` table into one business-ready January 2026 performance report.\n\n## Capstone assignment\n\nLeadership needs one concise view that compares region-category groups without losing the operational context behind the numbers.\n\nStart with the short grain-preview Try It, then build **one four-step cumulative query**. Every project step begins with the last complete working version.\n\n1. Establish the January period and region-category grain, then add `total_orders`, `completed_orders`, and `completion_rate`.\n2. Add all-order `gross_sales` and null-safe `completed_net_sales`.\n3. Add `average_rating`, `missing_discount_orders`, and the `Strong` / `Stable` / `Watch` performance band.\n4. Apply the final `HAVING` rules and deterministic ranking.\n\nRun the query after each change. Do not replace the report with an unrelated query; improve the same report until it is ready for leadership.\n\n**Final review:** confirm the grain, date range, aliases, NULL rules, formulas, grouped filter, and ordering. The finished result should support a leadership discussion without requiring anyone to inspect raw order rows."
+          }
+        }
+      }
+    }
+  }
+}

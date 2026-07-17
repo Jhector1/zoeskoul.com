@@ -1,0 +1,192 @@
+{
+  "title": "Rounding Report Values",
+  "summary": "Use ROUND to present calculated numbers at a practical level of precision.",
+  "minutes": 24,
+  "sketchBlocks": [
+    {
+      "id": "rounding-introduction",
+      "title": "Introduction to Rounding in SQL",
+      "bodyMarkdown": "Rounding numbers in SQL is essential for creating readable reports. The `ROUND` function allows you to specify the number of decimal places for a numeric value. This is particularly useful when dealing with financial data or any report where precision is important but excessive detail is not needed.\n\nFor example, consider a sales report where you need to display the total sales amount rounded to two decimal places:\n\n```sql\nSELECT product_name, ROUND(quantity * unit_price, 2) AS total_sales\nFROM sales_reporting;\n```\n\nIn this query, `ROUND(quantity * unit_price, 2)` calculates the total sales for each product and rounds it to two decimal places. The `AS total_sales` part gives a clear alias to the calculated column, making the report easier to understand."
+    },
+    {
+      "id": "practical-rounding-example",
+      "title": "Practical Example of Rounding",
+      "bodyMarkdown": "Let's look at a practical example where rounding is used to enhance report readability. Suppose you want to generate a report showing the average customer rating for each product category, rounded to one decimal place:\n\n```sql\nSELECT category, ROUND(AVG(customer_rating), 1) AS avg_rating\nFROM sales_reporting\nGROUP BY category;\n```\n\nIn this query, `ROUND(AVG(customer_rating), 1)` calculates the average rating for each category and rounds it to one decimal place. This makes the report concise and easy to interpret, especially when presenting to stakeholders who need a quick overview of performance."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "try-rounding-sketch0",
+      "kind": "code_input",
+      "title": "Try It: Round Total Sales",
+      "prompt": "Write a query to calculate the total sales for each product in the `sales_reporting` table, rounding the result to two decimal places. Alias the result as `total_sales`.",
+      "hint": "Use the ROUND function to round the calculated total sales.",
+      "help": {
+        "concept": "Rounding calculated values in SQL for better readability.",
+        "hint_1": "Use ROUND with two arguments: the expression and the number of decimal places.",
+        "hint_2": "Calculate total sales using quantity and unit price, then round it."
+      },
+      "starterCode": "SELECT product_name, ROUND(quantity * unit_price, 2) AS total_sales\nFROM sales_reporting;",
+      "solutionCode": "SELECT product_name, ROUND(quantity * unit_price, 2) AS total_sales\nFROM sales_reporting;",
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "try-rounding-sketch1",
+      "kind": "code_input",
+      "title": "Try It: Round Average Ratings",
+      "prompt": "Write a query to find the average customer rating for each product category in the `sales_reporting` table, rounding the result to one decimal place. Alias the result as `avg_rating`.",
+      "hint": "Use the ROUND function to round the average rating.",
+      "help": {
+        "concept": "Rounding average values in SQL for better readability.",
+        "hint_1": "Use ROUND with AVG to calculate and round the average rating.",
+        "hint_2": "Group by category to get the average rating for each category."
+      },
+      "starterCode": "SELECT category, ROUND(AVG(customer_rating), 1) AS avg_rating\nFROM sales_reporting\nGROUP BY category;",
+      "solutionCode": "SELECT category, ROUND(AVG(customer_rating), 1) AS avg_rating\nFROM sales_reporting\nGROUP BY category;",
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "single-choice-round-function",
+      "kind": "single_choice",
+      "title": "Understanding the ROUND Function",
+      "prompt": "What does the ROUND function do in SQL?",
+      "hint": "Consider how ROUND affects numeric values.",
+      "help": {
+        "concept": "The ROUND function is used to round numeric values to a specified number of decimal places.",
+        "hint_1": "ROUND can take two arguments: the number and the number of decimal places.",
+        "hint_2": "It is often used to make numbers more readable in reports."
+      },
+      "options": [
+        "Rounds a number to the nearest integer",
+        "Rounds a number to a specified number of decimal places",
+        "Truncates a number to a specified number of decimal places",
+        "Converts a number to a string"
+      ],
+      "correctOptionIds": [
+        "b"
+      ]
+    },
+    {
+      "id": "multi-choice-round-usage",
+      "kind": "multi_choice",
+      "title": "Using ROUND in SQL",
+      "prompt": "In which scenarios would you use the ROUND function in SQL? Select all that apply.",
+      "hint": "Think about when precision is needed in reports.",
+      "help": {
+        "concept": "ROUND is used to control the precision of numeric outputs in SQL queries.",
+        "hint_1": "Consider scenarios where numeric precision is important for readability.",
+        "hint_2": "ROUND is often used in financial reports and when displaying averages."
+      },
+      "options": [
+        "When calculating total sales amounts",
+        "When displaying average ratings",
+        "When converting text to numbers",
+        "When formatting dates"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ]
+    },
+    {
+      "id": "drag-reorder-round-syntax",
+      "kind": "drag_reorder",
+      "title": "Order the Syntax of ROUND",
+      "prompt": "Arrange the components of the ROUND function in the correct order.",
+      "hint": "Start with the function name, followed by its arguments.",
+      "help": {
+        "concept": "The ROUND function syntax involves the function name followed by its arguments in parentheses.",
+        "hint_1": "The first argument is the number or expression to round.",
+        "hint_2": "The second argument is the number of decimal places."
+      },
+      "tokens": [
+        "ROUND",
+        "(",
+        "expression",
+        ",",
+        "decimal_places",
+        ")"
+      ],
+      "correctOrder": [
+        "ROUND",
+        "(",
+        "expression",
+        ",",
+        "decimal_places",
+        ")"
+      ]
+    },
+    {
+      "id": "fill-blank-round-syntax",
+      "kind": "fill_blank_choice",
+      "title": "Fill in the ROUND Syntax",
+      "prompt": "Complete the syntax for the ROUND function: `ROUND([blank1], decimal_places)`",
+      "hint": "The first argument is the number or expression to round.",
+      "help": {
+        "concept": "The ROUND function requires a number or expression as its first argument.",
+        "hint_1": "The first argument is what you want to round.",
+        "hint_2": "It can be a column name or a calculation."
+      },
+      "template": "ROUND([blank1], decimal_places)",
+      "choices": [
+        "number",
+        "expression",
+        "column_name",
+        "string"
+      ],
+      "correctValue": "expression"
+    },
+    {
+      "id": "single-choice-round-precision",
+      "kind": "single_choice",
+      "title": "Precision in Rounding",
+      "prompt": "What does the second argument in the ROUND function specify?",
+      "hint": "Consider what the second argument controls in the ROUND function.",
+      "help": {
+        "concept": "The second argument in the ROUND function specifies the number of decimal places to round to.",
+        "hint_1": "It determines the precision of the rounded number.",
+        "hint_2": "This argument is crucial for controlling the level of detail in numeric outputs."
+      },
+      "options": [
+        "The number to be rounded",
+        "The number of decimal places",
+        "The rounding method",
+        "The data type"
+      ],
+      "correctOptionIds": [
+        "b"
+      ]
+    },
+    {
+      "id": "multi-choice-round-benefits",
+      "kind": "multi_choice",
+      "title": "Benefits of Using ROUND",
+      "prompt": "What are the benefits of using the ROUND function in SQL reports? Select all that apply.",
+      "hint": "Think about how ROUND affects report readability and precision.",
+      "help": {
+        "concept": "ROUND improves report readability by controlling numeric precision.",
+        "hint_1": "It helps in presenting data in a more understandable format.",
+        "hint_2": "ROUND can make financial reports more precise and professional."
+      },
+      "options": [
+        "Improves readability of numeric data",
+        "Ensures consistent data types",
+        "Reduces data storage requirements",
+        "Enhances precision in financial reports"
+      ],
+      "correctOptionIds": [
+        "a",
+        "d"
+      ]
+    }
+  ],
+  "projectDraft": {
+    "title": "Order Value Detail Report",
+    "stepIds": [
+      "try-rounding-sketch0",
+      "try-rounding-sketch1"
+    ]
+  }
+}

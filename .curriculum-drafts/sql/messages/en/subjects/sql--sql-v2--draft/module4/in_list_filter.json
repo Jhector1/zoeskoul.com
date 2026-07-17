@@ -3,34 +3,17 @@
     "sql--sql-v2--draft": {
       "sql--sql-v2--draft-4": {
         "in_list_filter": {
-          "label": "IN list filter",
-          "summary": "Use IN and NOT IN to filter rows by matching one value from a list.",
+          "label": "Filtering Lists with IN and NOT IN",
+          "summary": "Match or exclude several exact values without repeating the same column comparison.",
           "cards": {
             "sketch0": {
-              "title": "Filter for one of several exact values"
+              "title": "IN Matches Any Value in a List"
             },
             "sketch1": {
-              "title": "Exclude values with NOT IN"
-            },
-            "sketch2": {
-              "title": "Combine IN with other WHERE conditions"
+              "title": "NOT IN Excludes Every Listed Value"
             },
             "quiz": {
-              "title": "Quiz"
-            },
-            "project": {
-              "title": "Practice list-based customer filters"
-            }
-          },
-          "projectSteps": {
-            "ci_active_or_draft_names": {
-              "title": "Query active or draft customers"
-            },
-            "ci_not_in_cities": {
-              "title": "Exclude two cities"
-            },
-            "ci_in_with_and": {
-              "title": "Combine IN with another filter"
+              "title": "Check Your Understanding"
             }
           },
           "quiz": {
@@ -150,7 +133,7 @@
               "prompt": "Fill in the missing SQL phrase.",
               "hint": "Use the phrase that excludes rows whose value appears in the list.",
               "help": {
-                "concept": "`the missing term` is used to remove rows whose value matches any item in a listed set.",
+                "concept": "`the blank` is used to remove rows whose value matches any item in a listed set.",
                 "hint_1": "This phrase is built from `NOT` plus the list-matching keyword.",
                 "hint_2": "It is the exclusion version of `IN`."
               },
@@ -162,120 +145,67 @@
                 "ORDER BY"
               ]
             },
-            "ci_active_or_draft_names": {
-              "title": "Query active or draft customers",
-              "prompt": "Write a query that returns `full_name` and `status` from `customers` for rows where `status` is either `active` or `draft`. Keep the results in the table's default order.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Return full_name and status from customers for rows where status is either active or draft. Keep the results in the table's default order.\nSELECT \nFROM customers\nWHERE ;"
-            },
-            "ci_not_in_cities": {
-              "title": "Exclude two cities",
-              "prompt": "Write a query that returns `id`, `full_name`, and `city` for customers whose `city` is not `Chicago` and not `Miami`. Use `NOT IN`. Keep rows in the table's default order.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Return id, full_name, and city for customers whose city is not Chicago and not Miami. Use NOT IN. Keep rows in the table's default order.\nSELECT id, full_name, city\nFROM customers\nWHERE city ;"
-            },
-            "ci_in_with_and": {
-              "title": "Combine IN with another filter",
-              "prompt": "Write a query that returns `full_name`, `city`, and `status` for customers who are in `Chicago` or `Seattle` and also have `status = 'active'`. Keep rows in the table's default order.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Return full_name, city, and status for customers who are in Chicago or Seattle and also have status = 'active'. Keep rows in the table's default order.\nSELECT full_name, city, status\nFROM customers\nWHERE city IN () ;"
-            },
             "try-in_list_filter-sketch0": {
-              "title": "Query active or draft customers",
-              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that returns `full_name` and `status` from `customers` for rows where `status` is either `active` or `draft`. Keep the results in the table's default order.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Keep Two Allowed Statuses",
+              "prompt": "Build a review queue containing only customers whose status is `active` or `draft`. Return `id, full_name, status` from `customers` in that column order. Keep only rows where `status IN ('active', 'draft')`.",
+              "hint": "Use IN with the two quoted status values inside parentheses.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "Return `id, full_name, status` from `customers` in that column order. Keep only rows where `status IN ('active', 'draft')`."
               },
-              "starterCode": "-- Return full_name and status from customers for rows where status is either active or draft.\nSELECT \nFROM customers\nWHERE ;"
+              "starterCode": "SELECT id, full_name, status\nFROM customers\n-- Keep active or draft"
             },
             "try-in_list_filter-sketch1": {
-              "title": "Exclude two cities",
-              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that returns `id`, `full_name`, and `city` for customers whose `city` is not `Chicago` and not `Miami`. Use `NOT IN`. Keep rows in the table's default order.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Exclude Two Cities",
+              "prompt": "A regional campaign excludes `Chicago` and `Miami`. Return `id, full_name, city` from `customers` in that column order. Keep only rows where `city NOT IN ('Chicago', 'Miami')`.",
+              "hint": "Use NOT IN with both quoted city names.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "Return `id, full_name, city` from `customers` in that column order. Keep only rows where `city NOT IN ('Chicago', 'Miami')`."
               },
-              "starterCode": "-- Return id, full_name, and city for customers whose city is not Chicago and not Miami.\nSELECT id, full_name, city\nFROM customers\nWHERE city ;"
-            },
-            "try-in_list_filter-sketch2": {
-              "title": "Combine IN with another filter",
-              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that returns `full_name`, `city`, and `status` for customers who are in `Chicago` or `Seattle` and also have `status = 'active'`. Keep rows in the table's default order.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Return full_name, city, and status for customers who are in Chicago or Seattle and also have status = 'active.\nSELECT full_name, city, status\nFROM customers\nWHERE city IN () ;"
+              "starterCode": "SELECT id, full_name, city\nFROM customers\n-- Exclude Chicago and Miami"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_in_list_filter_sketch0": {
-              "title": "Query active or draft customers",
-              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that returns `full_name` and `status` from `customers` for rows where `status` is either `active` or `draft`. Keep the results in the table's default order."
+              "title": "Keep Two Allowed Statuses",
+              "prompt": "Build a review queue containing only customers whose status is `active` or `draft`. Show `id`, `full_name`, and `status` from `customers`.",
+              "hint": "Use IN with the two quoted status values inside parentheses.",
+              "help": {
+                "concept": "IN is a compact exact-match test for any value in a list.",
+                "hint_1": "Use IN with the two quoted status values inside parentheses.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+              }
             },
             "try_in_list_filter_sketch1": {
-              "title": "Exclude two cities",
-              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that returns `id`, `full_name`, and `city` for customers whose `city` is not `Chicago` and not `Miami`. Use `NOT IN`. Keep rows in the table's default order."
-            },
-            "try_in_list_filter_sketch2": {
-              "title": "Combine IN with another filter",
-              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that returns `full_name`, `city`, and `status` for customers who are in `Chicago` or `Seattle` and also have `status = 'active'`. Keep rows in the table's default order."
+              "title": "Exclude Two Cities",
+              "prompt": "A regional campaign excludes `Chicago` and `Miami`. Show `id`, `full_name`, and `city` from `customers` for everyone outside those two cities.",
+              "hint": "Use NOT IN with both quoted city names.",
+              "help": {
+                "concept": "NOT IN removes rows matching any value in the exclusion list.",
+                "hint_1": "Use NOT IN with both quoted city names.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+              }
             }
           }
         }
       },
       "sql-v2-4": {
         "in_list_filter": {
-          "label": "IN list filter",
-          "summary": "Use IN and NOT IN to filter rows by matching one value from a list.",
+          "label": "Filtering Lists with IN and NOT IN",
+          "summary": "Match or exclude several exact values without repeating the same column comparison.",
           "cards": {
             "sketch0": {
-              "title": "Filter for one of several exact values"
+              "title": "IN Matches Any Value in a List"
             },
             "sketch1": {
-              "title": "Exclude values with NOT IN"
-            },
-            "sketch2": {
-              "title": "Combine IN with other WHERE conditions"
+              "title": "NOT IN Excludes Every Listed Value"
             },
             "quiz": {
-              "title": "Quiz"
-            },
-            "project": {
-              "title": "Practice list-based customer filters"
-            }
-          },
-          "projectSteps": {
-            "ci_active_or_draft_names": {
-              "title": "Query active or draft customers"
-            },
-            "ci_not_in_cities": {
-              "title": "Exclude two cities"
-            },
-            "ci_in_with_and": {
-              "title": "Combine IN with another filter"
+              "title": "Check Your Understanding"
             }
           },
           "quiz": {
@@ -395,7 +325,7 @@
               "prompt": "Fill in the missing SQL phrase.",
               "hint": "Use the phrase that excludes rows whose value appears in the list.",
               "help": {
-                "concept": "`the missing term` is used to remove rows whose value matches any item in a listed set.",
+                "concept": "`the blank` is used to remove rows whose value matches any item in a listed set.",
                 "hint_1": "This phrase is built from `NOT` plus the list-matching keyword.",
                 "hint_2": "It is the exclusion version of `IN`."
               },
@@ -441,30 +371,30 @@
               "starterCode": "-- Return full_name, city, and status for customers who are in Chicago or Seattle and also have status = 'active'. Keep rows in the table's default order.\nSELECT full_name, city, status\nFROM customers\nWHERE city IN () ;"
             },
             "try-in_list_filter-sketch0": {
-              "title": "Query active or draft customers",
-              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that returns `full_name` and `status` from `customers` for rows where `status` is either `active` or `draft`. Keep the results in the table's default order.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Keep Two Allowed Statuses",
+              "prompt": "Build a review queue containing only customers whose status is `active` or `draft`. Show `id`, `full_name`, and `status` from `customers`.",
+              "hint": "Use IN with the two quoted status values inside parentheses.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
+                "concept": "IN is a compact exact-match test for any value in a list.",
+                "hint_1": "Use IN with the two quoted status values inside parentheses.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
               },
-              "starterCode": "-- Return full_name and status from customers for rows where status is either active or draft.\nSELECT \nFROM customers\nWHERE ;"
+              "starterCode": "SELECT id, full_name, status\nFROM customers\n-- Keep active or draft"
             },
             "try-in_list_filter-sketch1": {
-              "title": "Exclude two cities",
-              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that returns `id`, `full_name`, and `city` for customers whose `city` is not `Chicago` and not `Miami`. Use `NOT IN`. Keep rows in the table's default order.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Exclude Two Cities",
+              "prompt": "A regional campaign excludes `Chicago` and `Miami`. Show `id`, `full_name`, and `city` from `customers` for everyone outside those two cities.",
+              "hint": "Use NOT IN with both quoted city names.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
+                "concept": "NOT IN removes rows matching any value in the exclusion list.",
+                "hint_1": "Use NOT IN with both quoted city names.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
               },
-              "starterCode": "-- Return id, full_name, and city for customers whose city is not Chicago and not Miami.\nSELECT id, full_name, city\nFROM customers\nWHERE city ;"
+              "starterCode": "SELECT id, full_name, city\nFROM customers\n-- Exclude Chicago and Miami"
             },
             "try-in_list_filter-sketch2": {
               "title": "Combine IN with another filter",
-              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that returns `full_name`, `city`, and `status` for customers who are in `Chicago` or `Seattle` and also have `status = 'active'`. Keep rows in the table's default order.",
+              "prompt": "Create a customer-cleanup query that returns `full_name`, `city`, and `status` for customers who are in `Chicago` or `Seattle` and also have `status = 'active'`. Keep rows in the table's default order. Run it and compare the result with the expected table.",
               "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
               "help": {
                 "concept": "This SQL exercise checks whether your query returns the requested result.",
@@ -477,16 +407,24 @@
           "tryIt": {
             "allowReveal": true,
             "try_in_list_filter_sketch0": {
-              "title": "Query active or draft customers",
-              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that returns `full_name` and `status` from `customers` for rows where `status` is either `active` or `draft`. Keep the results in the table's default order."
+              "title": "Keep Two Allowed Statuses",
+              "prompt": "Build a review queue containing only customers whose status is `active` or `draft`. Show `id`, `full_name`, and `status` from `customers`.",
+              "hint": "Use IN with the two quoted status values inside parentheses.",
+              "help": {
+                "concept": "IN is a compact exact-match test for any value in a list.",
+                "hint_1": "Use IN with the two quoted status values inside parentheses.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+              }
             },
             "try_in_list_filter_sketch1": {
-              "title": "Exclude two cities",
-              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that returns `id`, `full_name`, and `city` for customers whose `city` is not `Chicago` and not `Miami`. Use `NOT IN`. Keep rows in the table's default order."
-            },
-            "try_in_list_filter_sketch2": {
-              "title": "Combine IN with another filter",
-              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that returns `full_name`, `city`, and `status` for customers who are in `Chicago` or `Seattle` and also have `status = 'active'`. Keep rows in the table's default order."
+              "title": "Exclude Two Cities",
+              "prompt": "A regional campaign excludes `Chicago` and `Miami`. Show `id`, `full_name`, and `city` from `customers` for everyone outside those two cities.",
+              "hint": "Use NOT IN with both quoted city names.",
+              "help": {
+                "concept": "NOT IN removes rows matching any value in the exclusion list.",
+                "hint_1": "Use NOT IN with both quoted city names.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+              }
             }
           }
         }
@@ -497,33 +435,25 @@
     "sql--sql-v2--draft": {
       "sql--sql-v2--draft-4": {
         "in_list_filter": {
-          "sketch_in_basic": {
-            "title": "Filter for one of several exact values",
-            "bodyMarkdown": "Sometimes you want rows that match **any one of several exact values**. Instead of writing many `OR` conditions, you can use `IN`.\n\n```sql\nSELECT full_name, city\nFROM customers\nWHERE city IN ('Chicago', 'Miami');\n```\n\nThis means:\n- `SELECT full_name, city` shows those two columns.\n- `FROM customers` reads from the `customers` table.\n- `WHERE city IN ('Chicago', 'Miami')` keeps only rows where `city` is exactly `Chicago` or `Miami`.\n\nWith this dataset, the results include customers from Chicago and Miami, such as Mia Lopez, Ava Patel, Olivia Chen, and Emma Reed.\n\nUsing `IN` is often easier to read than this longer version:\n\n```sql\nSELECT full_name, city\nFROM customers\nWHERE city = 'Chicago' OR city = 'Miami';\n```\n\nBoth queries mean the same thing."
+          "in_value_list": {
+            "title": "IN Matches Any Value in a List",
+            "bodyMarkdown": "`IN` is a compact way to accept any value from a list.\n\n```sql\nSELECT\n    id,\n    full_name,\n    city\nFROM customers\nWHERE city IN ('Chicago', 'Boston');\n```\n\nA row passes when its city equals either listed value. This is equivalent to connecting two exact comparisons with `OR`, but the list is easier to scan and extend."
           },
-          "sketch_not_in": {
-            "title": "Exclude values with NOT IN",
-            "bodyMarkdown": "Use `NOT IN` when you want rows whose value is **not** in a list.\n\n```sql\nSELECT id, full_name, status\nFROM customers\nWHERE status NOT IN ('draft', 'inactive');\n```\n\nStep by step:\n- `id, full_name, status` are the columns shown.\n- The query checks the `status` column.\n- Rows with `status` equal to `draft` or `inactive` are removed.\n- That leaves customers whose status is `active`.\n\nIn this table, that includes rows like Mia Lopez, Ava Patel, Emma Reed, and Olivia Chen.\n\nA useful idea: `IN` matches from a list, and `NOT IN` excludes from a list."
-          },
-          "sketch_in_with_other_filters": {
-            "title": "Combine IN with other WHERE conditions",
-            "bodyMarkdown": "`IN` becomes even more useful when you combine it with another condition.\n\n```sql\nSELECT full_name, city, status\nFROM customers\nWHERE city IN ('Chicago', 'Seattle')\n  AND status = 'active';\n```\n\nLine by line:\n- `SELECT full_name, city, status` chooses the columns to display.\n- `FROM customers` chooses the table.\n- `city IN ('Chicago', 'Seattle')` keeps customers in either Chicago or Seattle.\n- `AND status = 'active'` keeps only the active ones from that smaller set.\n\nIn the sample data, Chicago has active customers, while Seattle has Liam Scott with `inactive` status, so Seattle does not appear in the final results.\n\nThis shows that `IN` does not replace `AND` or `OR` completely. It works as one condition inside a larger `WHERE` clause."
+          "not_in_value_list": {
+            "title": "NOT IN Excludes Every Listed Value",
+            "bodyMarkdown": "`NOT IN` excludes every value in the list.\n\n```sql\nSELECT\n    id,\n    full_name,\n    status\nFROM customers\nWHERE status NOT IN ('inactive', 'archived');\n```\n\nKnown statuses outside the list remain. Missing values need separate attention because `NULL` does not behave like an ordinary value in comparisons.\n\nUse `IN` and `NOT IN` for several exact choices; use `LIKE` for patterns."
           }
         }
       },
       "sql-v2-4": {
         "in_list_filter": {
-          "sketch_in_basic": {
-            "title": "Filter for one of several exact values",
-            "bodyMarkdown": "Sometimes you want rows that match **any one of several exact values**. Instead of writing many `OR` conditions, you can use `IN`.\n\n```sql\nSELECT full_name, city\nFROM customers\nWHERE city IN ('Chicago', 'Miami');\n```\n\nThis means:\n- `SELECT full_name, city` shows those two columns.\n- `FROM customers` reads from the `customers` table.\n- `WHERE city IN ('Chicago', 'Miami')` keeps only rows where `city` is exactly `Chicago` or `Miami`.\n\nWith this dataset, the results include customers from Chicago and Miami, such as Mia Lopez, Ava Patel, Olivia Chen, and Emma Reed.\n\nUsing `IN` is often easier to read than this longer version:\n\n```sql\nSELECT full_name, city\nFROM customers\nWHERE city = 'Chicago' OR city = 'Miami';\n```\n\nBoth queries mean the same thing."
+          "in_value_list": {
+            "title": "IN Matches Any Value in a List",
+            "bodyMarkdown": "`IN` is a compact way to accept any value from a list.\n\n```sql\nSELECT\n    id,\n    full_name,\n    city\nFROM customers\nWHERE city IN ('Chicago', 'Boston');\n```\n\nA row passes when its city equals either listed value. This is equivalent to connecting two exact comparisons with `OR`, but the list is easier to scan and extend."
           },
-          "sketch_not_in": {
-            "title": "Exclude values with NOT IN",
-            "bodyMarkdown": "Use `NOT IN` when you want rows whose value is **not** in a list.\n\n```sql\nSELECT id, full_name, status\nFROM customers\nWHERE status NOT IN ('draft', 'inactive');\n```\n\nStep by step:\n- `id, full_name, status` are the columns shown.\n- The query checks the `status` column.\n- Rows with `status` equal to `draft` or `inactive` are removed.\n- That leaves customers whose status is `active`.\n\nIn this table, that includes rows like Mia Lopez, Ava Patel, Emma Reed, and Olivia Chen.\n\nA useful idea: `IN` matches from a list, and `NOT IN` excludes from a list."
-          },
-          "sketch_in_with_other_filters": {
-            "title": "Combine IN with other WHERE conditions",
-            "bodyMarkdown": "`IN` becomes even more useful when you combine it with another condition.\n\n```sql\nSELECT full_name, city, status\nFROM customers\nWHERE city IN ('Chicago', 'Seattle')\n  AND status = 'active';\n```\n\nLine by line:\n- `SELECT full_name, city, status` chooses the columns to display.\n- `FROM customers` chooses the table.\n- `city IN ('Chicago', 'Seattle')` keeps customers in either Chicago or Seattle.\n- `AND status = 'active'` keeps only the active ones from that smaller set.\n\nIn the sample data, Chicago has active customers, while Seattle has Liam Scott with `inactive` status, so Seattle does not appear in the final results.\n\nThis shows that `IN` does not replace `AND` or `OR` completely. It works as one condition inside a larger `WHERE` clause."
+          "not_in_value_list": {
+            "title": "NOT IN Excludes Every Listed Value",
+            "bodyMarkdown": "`NOT IN` excludes every value in the list.\n\n```sql\nSELECT\n    id,\n    full_name,\n    status\nFROM customers\nWHERE status NOT IN ('inactive', 'archived');\n```\n\nKnown statuses outside the list remain. Missing values need separate attention because `NULL` does not behave like an ordinary value in comparisons.\n\nUse `IN` and `NOT IN` for several exact choices; use `LIKE` for patterns."
           }
         }
       }

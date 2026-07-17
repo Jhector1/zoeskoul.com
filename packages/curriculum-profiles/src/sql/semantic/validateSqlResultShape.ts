@@ -9,6 +9,8 @@ export function validateSqlResultShape(args: {
     const issues: SemanticValidationIssue[] = [];
 
     for (const [exerciseId, run] of Object.entries(args.runsByExerciseId)) {
+        if (!(run as { ok?: boolean })?.ok) continue;
+
         const table = extractFirstSqlTable(run as any);
 
         if (!table) {

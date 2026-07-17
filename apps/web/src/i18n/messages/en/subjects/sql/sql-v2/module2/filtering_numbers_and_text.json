@@ -3,34 +3,17 @@
     "sql-v2": {
       "sql-v2-2": {
         "filtering_numbers_and_text": {
-          "label": "Filtering Numbers and Text",
-          "summary": "Learn how to use WHERE to keep only the rows that match numeric and text conditions in the products table.",
+          "label": "Choosing Comparisons for Numbers and Text",
+          "summary": "Match the comparison operator and literal format to the type of value being filtered.",
           "cards": {
             "sketch0": {
-              "title": "Filter rows with number conditions"
+              "title": "Numbers and Text Use Different Literals"
             },
             "sketch1": {
-              "title": "Filter rows with text conditions"
-            },
-            "sketch2": {
-              "title": "Combine number and text filters"
+              "title": "Translate Requirement Words into Operators"
             },
             "quiz": {
-              "title": "Quiz"
-            },
-            "project": {
-              "title": "Filtering detective practice"
-            }
-          },
-          "projectSteps": {
-            "ci_price_over_20": {
-              "title": "Query products with higher prices"
-            },
-            "ci_stationery_under_10": {
-              "title": "Filter by text and number together"
-            },
-            "ci_name_like_book": {
-              "title": "Find names with matching text"
+              "title": "Check Your Understanding"
             }
           },
           "quiz": {
@@ -133,8 +116,8 @@
               "hint": "This is a text value from the `category` column.",
               "help": {
                 "concept": "Text comparisons in SQL use the exact text value inside quotes.",
-                "hint_1": "The products table includes categories such as Art, the missing term, and Stationery.",
-                "hint_2": "Choose the category word that matches the missing term-related items like Desk Lamp and Office Chair."
+                "hint_1": "The products table includes categories such as Art, the blank, and Stationery.",
+                "hint_2": "Choose the category word that matches the blank-related items like Desk Lamp and Office Chair."
               },
               "template": "WHERE category = '[blank1]'",
               "choices": [
@@ -195,30 +178,30 @@
               "starterCode": "-- Show the name column for products whose name contains the text book.\nSELECT name\nFROM products\nWHERE name LIKE ;"
             },
             "try-filtering_numbers_and_text-sketch0": {
-              "title": "Query products with higher prices",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that shows the `name` and `price` columns for products where `price` is greater than 20. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Compare a Text Category",
+              "prompt": "Build a focused home-goods inventory view. Show `id`, `name`, and `category` from `products` where the category is `Home`.",
+              "hint": "Text values such as Home need single quotes.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
+                "concept": "SQL text literals are quoted, while numeric literals are written without quotes.",
+                "hint_1": "Text values such as Home need single quotes.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
               },
-              "starterCode": "-- Show the name and price columns for products where price is greater than 20.\nSELECT \nFROM products\nWHERE ;"
+              "starterCode": "SELECT id, name, category\nFROM products\n-- Match the Home category"
             },
             "try-filtering_numbers_and_text-sketch1": {
-              "title": "Filter by text and number together",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that shows `name`, `category`, and `price` for products where the category is `Stationery` and the price is less than 10. Use the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Translate “At Least” into SQL",
+              "prompt": "A premium-products report starts at a price of `25`. Show `name` and `price` from `products` for every item priced at least `25`.",
+              "hint": "Translate “at least 25” to >= 25.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
+                "concept": "Business words such as “at least” map to specific comparison operators.",
+                "hint_1": "Translate “at least 25” to >= 25.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
               },
-              "starterCode": "-- Show name, category, and price for products where the category is Stationery and the price is less than 10.\nSELECT name, category, price\nFROM products\nWHERE ;"
+              "starterCode": "SELECT name, price\nFROM products\n-- Keep prices of at least 25"
             },
             "try-filtering_numbers_and_text-sketch2": {
               "title": "Find names with matching text",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that shows the `name` column for products whose name contains the text `book`. Use `LIKE` with wildcards, then click Run query and check the results table.",
+              "prompt": "Create a focused inventory query that shows the `name` column for products whose name contains the text `book`. Use `LIKE` with wildcards, then click Run query and check the results table. Run it and compare the result with the expected table.",
               "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
               "help": {
                 "concept": "This SQL exercise checks whether your query returns the requested result.",
@@ -231,16 +214,24 @@
           "tryIt": {
             "allowReveal": true,
             "try_filtering_numbers_and_text_sketch0": {
-              "title": "Query products with higher prices",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that shows the `name` and `price` columns for products where `price` is greater than 20. Write the query in the SQL editor, click Run query, and check the results table."
+              "title": "Compare a Text Category",
+              "prompt": "Build a focused home-goods inventory view. Show `id`, `name`, and `category` from `products` where the category is `Home`.",
+              "hint": "Text values such as Home need single quotes.",
+              "help": {
+                "concept": "SQL text literals are quoted, while numeric literals are written without quotes.",
+                "hint_1": "Text values such as Home need single quotes.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+              }
             },
             "try_filtering_numbers_and_text_sketch1": {
-              "title": "Filter by text and number together",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that shows `name`, `category`, and `price` for products where the category is `Stationery` and the price is less than 10. Use the SQL editor, click Run query, and check the results table."
-            },
-            "try_filtering_numbers_and_text_sketch2": {
-              "title": "Find names with matching text",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that shows the `name` column for products whose name contains the text `book`. Use `LIKE` with wildcards, then click Run query and check the results table."
+              "title": "Translate “At Least” into SQL",
+              "prompt": "A premium-products report starts at a price of `25`. Show `name` and `price` from `products` for every item priced at least `25`.",
+              "hint": "Translate “at least 25” to >= 25.",
+              "help": {
+                "concept": "Business words such as “at least” map to specific comparison operators.",
+                "hint_1": "Translate “at least 25” to >= 25.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+              }
             }
           }
         }
@@ -251,17 +242,13 @@
     "sql-v2": {
       "sql-v2-2": {
         "filtering_numbers_and_text": {
-          "sketch_where_numbers": {
-            "title": "Filter rows with number conditions",
-            "bodyMarkdown": "The `WHERE` clause lets you keep only the rows you want. When you filter a number column, you can use comparison operators like `>`, `<`, `>=`, `<=`, and `=`.\n\nFor example, the `products` table has a `price` column and a `stock` column. If you want products that cost more than 20, you can write:\n\n```sql\nSELECT name, price\nFROM products\nWHERE price > 20;\n```\n\nStep by step:\n- `SELECT name, price` chooses the columns to show.\n- `FROM products` says which table to read.\n- `WHERE price > 20` keeps only rows where the price is greater than 20.\n\nWith the dataset in this lesson, that would include rows like `Acrylic Paint Set`, `Desk Lamp`, and `Office Chair`.\n\nYou can also filter whole-number values. For example:\n\n```sql\nSELECT name, stock\nFROM products\nWHERE stock <= 10;\n```\n\nThis keeps products with low stock, such as items with 10, 8, or 3 in the `stock` column."
+          "numeric_and_text_literals": {
+            "title": "Numbers and Text Use Different Literals",
+            "bodyMarkdown": "Numeric values are written without quotes, while text values are normally written inside single quotes.\n\n```sql\nSELECT\n    name,\n    price\nFROM products\nWHERE price <= 30;\n```\n\n```sql\nSELECT\n    name,\n    category\nFROM products\nWHERE category = 'Art';\n```\n\nThe first condition compares numbers. The second compares text. Using the correct literal form makes the intention clear and avoids accidental type conversion."
           },
-          "sketch_where_text": {
-            "title": "Filter rows with text conditions",
-            "bodyMarkdown": "You can also use `WHERE` with text columns such as `name` and `category`. In SQL, text values go inside quotes.\n\nFor example, to show only products in the `Art` category:\n\n```sql\nSELECT name, category\nFROM products\nWHERE category = 'Art';\n```\n\nLine by line:\n- `SELECT name, category` shows the product name and category.\n- `FROM products` reads from the products table.\n- `WHERE category = 'Art'` keeps only rows whose category text exactly matches `Art`.\n\nIn this dataset, that returns `Sketchbook` and `Acrylic Paint Set`.\n\nYou can also search for text patterns with `LIKE`:\n\n```sql\nSELECT name\nFROM products\nWHERE name LIKE '%Pen%';\n```\n\nHere, `%` means “any characters before or after.” This query finds names containing `Pen`, such as `Fountain Pen`."
-          },
-          "sketch_combine_filters": {
-            "title": "Combine number and text filters",
-            "bodyMarkdown": "You can combine conditions to be more specific. Use `AND` when both conditions must be true.\n\nExample:\n\n```sql\nSELECT name, category, price\nFROM products\nWHERE category = 'Stationery' AND price < 10;\n```\n\nWhat happens here?\n- First, SQL looks at rows in `products`.\n- `category = 'Stationery'` keeps only stationery items.\n- `price < 10` keeps only items cheaper than 10.\n- Because of `AND`, a row must pass both tests.\n\nIn this dataset, `Notebook` matches, but `Fountain Pen` does not because its price is 18.00.\n\nYou can also use `OR` when either condition can be true:\n\n```sql\nSELECT name, category\nFROM products\nWHERE category = 'Art' OR category = 'Home';\n```\n\nThat returns products from either category."
+          "operator_language": {
+            "title": "Translate Requirement Words into Operators",
+            "bodyMarkdown": "Choose the operator from the wording of the request:\n\n- “exactly” → `=`\n- “not” or “anything except” → `<>`\n- “more than” → `>`\n- “less than” → `<`\n- “at least” → `>=`\n- “at most” → `<=`\n\nFor example, “at least 15 units” includes the boundary:\n\n```sql\nSELECT\n    name,\n    stock\nFROM products\nWHERE stock >= 15;\n```\n\nFirst identify the column, then the value type, then the boundary rule. Do not choose an operator only because it appeared in the previous example."
           }
         }
       }

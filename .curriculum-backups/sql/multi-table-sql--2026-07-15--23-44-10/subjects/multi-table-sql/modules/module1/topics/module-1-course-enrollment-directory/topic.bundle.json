@@ -1,0 +1,316 @@
+{
+  "topicId": "module-1-course-enrollment-directory",
+  "subjectSlug": "multi-table-sql",
+  "moduleSlug": "multi-table-sql-module-1-relationship-paths",
+  "sectionSlug": "multi-table-sql-multi-table-sql-section-1-module-project",
+  "prefix": "multi_table_sql_module_1",
+  "minutes": 65,
+  "runtimeDefaults": {
+    "kind": "sql",
+    "showSchema": true,
+    "showErd": true,
+    "showChen": true,
+    "supportsTerminal": false,
+    "supportsMultiFile": false,
+    "supportsFileSystem": false,
+    "datasetId": "school_relations_intro",
+    "fixedSqlDialect": "sqlite",
+    "resultShape": "table"
+  },
+  "serviceDefaults": null,
+  "topic": {
+    "labelKey": "topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.module-1-course-enrollment-directory.label",
+    "summaryKey": "topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.module-1-course-enrollment-directory.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.module-1-course-enrollment-directory.cards.sketch0.title",
+      "sketchId": "sketch-1",
+      "height": 420
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.module-1-course-enrollment-directory.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "step_1",
+            "titleKey": "topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.module-1-course-enrollment-directory.projectSteps.step_1.title",
+            "exerciseKey": "step-1",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "step_2",
+            "titleKey": "topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.module-1-course-enrollment-directory.projectSteps.step_2.title",
+            "exerciseKey": "step-2",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "step_3",
+            "titleKey": "topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.module-1-course-enrollment-directory.projectSteps.step_3.title",
+            "exerciseKey": "step-3",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "step_4",
+            "titleKey": "topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.module-1-course-enrollment-directory.projectSteps.step_4.title",
+            "exerciseKey": "step-4",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "step_5",
+            "titleKey": "topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.module-1-course-enrollment-directory.projectSteps.step_5.title",
+            "exerciseKey": "step-5",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch-1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.multi-table-sql.multi-table-sql-module-1-relationship-paths.module-1-course-enrollment-directory.sketch-1.title",
+      "bodyKey": "sketches.multi-table-sql.multi-table-sql-module-1-relationship-paths.module-1-course-enrollment-directory.sketch-1.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "step-1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.module-1-course-enrollment-directory.moduleProject.steps.step_1",
+      "language": "sql",
+      "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.module-1-course-enrollment-directory.moduleProject.steps.step_1.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "school_relations_intro",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "main.sql",
+        "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.module-1-course-enrollment-directory.moduleProject.steps.step_1.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.sql",
+            "content": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.module-1-course-enrollment-directory.moduleProject.steps.step_1.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "school_relations_intro",
+        "resultShape": "table",
+        "solutionCode": "SELECT courses.title, departments.name FROM courses INNER JOIN departments ON courses.department_id = departments.id;"
+      }
+    },
+    {
+      "id": "step-2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.module-1-course-enrollment-directory.moduleProject.steps.step_2",
+      "language": "sql",
+      "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.module-1-course-enrollment-directory.moduleProject.steps.step_2.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "school_relations_intro",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "main.sql",
+        "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.module-1-course-enrollment-directory.moduleProject.steps.step_2.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.sql",
+            "content": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.module-1-course-enrollment-directory.moduleProject.steps.step_2.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "school_relations_intro",
+        "resultShape": "table",
+        "solutionCode": "SELECT courses.title, departments.name, enrollments.term FROM courses INNER JOIN departments ON courses.department_id = departments.id INNER JOIN enrollments ON courses.id = enrollments.course_id;"
+      }
+    },
+    {
+      "id": "step-3",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.module-1-course-enrollment-directory.moduleProject.steps.step_3",
+      "language": "sql",
+      "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.module-1-course-enrollment-directory.moduleProject.steps.step_3.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "school_relations_intro",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "main.sql",
+        "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.module-1-course-enrollment-directory.moduleProject.steps.step_3.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.sql",
+            "content": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.module-1-course-enrollment-directory.moduleProject.steps.step_3.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "school_relations_intro",
+        "resultShape": "table",
+        "solutionCode": "SELECT courses.title, departments.name, students.name, students.grade_level, enrollments.term FROM courses INNER JOIN departments ON courses.department_id = departments.id INNER JOIN enrollments ON courses.id = enrollments.course_id INNER JOIN students ON enrollments.student_id = students.id;"
+      }
+    },
+    {
+      "id": "step-4",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.module-1-course-enrollment-directory.moduleProject.steps.step_4",
+      "language": "sql",
+      "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.module-1-course-enrollment-directory.moduleProject.steps.step_4.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "school_relations_intro",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "main.sql",
+        "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.module-1-course-enrollment-directory.moduleProject.steps.step_4.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.sql",
+            "content": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.module-1-course-enrollment-directory.moduleProject.steps.step_4.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "school_relations_intro",
+        "resultShape": "table",
+        "solutionCode": "SELECT departments.name AS department, courses.title AS course, students.name AS student, students.grade_level AS grade_level, enrollments.term AS term FROM courses INNER JOIN departments ON courses.department_id = departments.id INNER JOIN enrollments ON courses.id = enrollments.course_id INNER JOIN students ON enrollments.student_id = students.id;"
+      }
+    },
+    {
+      "id": "step-5",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.module-1-course-enrollment-directory.moduleProject.steps.step_5",
+      "language": "sql",
+      "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.module-1-course-enrollment-directory.moduleProject.steps.step_5.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "school_relations_intro",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "main.sql",
+        "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.module-1-course-enrollment-directory.moduleProject.steps.step_5.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.sql",
+            "content": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.module-1-course-enrollment-directory.moduleProject.steps.step_5.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "school_relations_intro",
+        "resultShape": "table",
+        "solutionCode": "SELECT departments.name AS department, courses.title AS course, students.name AS student, students.grade_level AS grade_level, enrollments.term AS term FROM courses INNER JOIN departments ON courses.department_id = departments.id INNER JOIN enrollments ON courses.id = enrollments.course_id INNER JOIN students ON enrollments.student_id = students.id ORDER BY department ASC, course ASC, student ASC;"
+      }
+    }
+  ]
+}

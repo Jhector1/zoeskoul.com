@@ -3,31 +3,17 @@
     "sql--sql-v2--draft": {
       "sql--sql-v2--draft-3": {
         "combining_order_by_with_limit": {
-          "label": "Combining ORDER BY with LIMIT",
-          "summary": "Learn how to sort rows first and then keep only the top part of the result with LIMIT.",
+          "label": "LIMIT and Useful Ranked Results",
+          "summary": "Sort first, then use LIMIT to return a meaningful top or bottom subset.",
           "cards": {
             "sketch0": {
-              "title": "Sort first, then keep only a few rows"
+              "title": "LIMIT Keeps Only the First Result Rows"
             },
             "sketch1": {
-              "title": "Common patterns with ranked results"
+              "title": "ORDER BY Gives LIMIT a Meaningful Order"
             },
             "quiz": {
-              "title": "Quiz"
-            },
-            "project": {
-              "title": "Ranked product report"
-            }
-          },
-          "projectSteps": {
-            "ci_top_three_expensive": {
-              "title": "Top 3 most expensive products"
-            },
-            "ci_two_cheapest_stationery": {
-              "title": "Two cheapest stationery items"
-            },
-            "ci_newest_home_item": {
-              "title": "Newest home product"
+              "title": "Check Your Understanding"
             }
           },
           "quiz": {
@@ -162,102 +148,67 @@
                 "FROM"
               ]
             },
-            "ci_top_three_expensive": {
-              "title": "Top 3 most expensive products",
-              "prompt": "Write a query that returns the `name` and `price` of the 3 most expensive products from `products`. Sort so the highest price appears first. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Return the name and price of the 3 most expensive products from products. Sort so the highest price appears first.\nSELECT \nFROM products\nORDER BY \nLIMIT ;"
-            },
-            "ci_two_cheapest_stationery": {
-              "title": "Two cheapest stationery items",
-              "prompt": "Write a query that returns the `name`, `category`, and `price` of the 2 cheapest products in the `Stationery` category. Sort by `price` from lowest to highest. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Return the name, category, and price of the 2 cheapest products in the Stationery category. Sort by price from lowest to highest.\nSELECT name, category, price\nFROM products\nWHERE \nORDER BY \nLIMIT ;"
-            },
-            "ci_newest_home_item": {
-              "title": "Newest home product",
-              "prompt": "Write a query that returns the `name` and `created_at` of the newest product in the `Home` category. Sort by `created_at` so the newest date comes first, then return only one row. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Return the name and created_at of the newest product in the Home category. Sort by created_at so the newest date comes first, then return only one row.\nSELECT name, created_at\nFROM products\nWHERE \nORDER BY \nLIMIT ;"
-            },
             "try-combining_order_by_with_limit-sketch0": {
-              "title": "Top 3 most expensive products",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that returns the `name` and `price` of the 3 most expensive products from `products`. Sort so the highest price appears first. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Keep the First Four Product Rows",
+              "prompt": "A dashboard preview has room for only four product records. Return `id, name` from `products` in that column order. Return only the first `4` rows.",
+              "hint": "Add LIMIT 4 after FROM products.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "Return `id, name` from `products` in that column order. Return only the first `4` rows."
               },
-              "starterCode": "-- Return the name and price of the 3 most expensive products from products.\nSELECT \nFROM products\nORDER BY \nLIMIT ;"
+              "starterCode": "SELECT id, name\nFROM products\n-- Keep only four rows"
             },
             "try-combining_order_by_with_limit-sketch1": {
-              "title": "Two cheapest stationery items",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that returns the `name`, `category`, and `price` of the 2 cheapest products in the `Stationery` category. Sort by `price` from lowest to highest. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Find the Two Cheapest Stationery Products",
+              "prompt": "A buyer needs the two cheapest stationery options. Return `name, category, price` from `products` in that column order. Keep only rows where `category = 'Stationery'`. Sort the final result by `price ASC`. Return only the first `2` rows.",
+              "hint": "Filter with WHERE, sort with ORDER BY price ASC, then finish with LIMIT 2.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "Sort the final result by `price ASC`. Return only the first `2` rows."
               },
-              "starterCode": "-- Return the name, category, and price of the 2 cheapest products in the Stationery category.\nSELECT name, category, price\nFROM products\nWHERE \nORDER BY \nLIMIT ;"
+              "starterCode": "SELECT name, category, price\nFROM products\n-- Filter, rank, and keep two rows"
             }
           },
           "tryIt": {
             "allowReveal": true,
-            "try_combining_order_by_with_limit_sketch0": {
-              "title": "Top 3 most expensive products",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that returns the `name` and `price` of the 3 most expensive products from `products`. Sort so the highest price appears first. Write the query in the SQL editor, click Run query, and check the results table."
-            },
             "try_combining_order_by_with_limit_sketch1": {
-              "title": "Two cheapest stationery items",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that returns the `name`, `category`, and `price` of the 2 cheapest products in the `Stationery` category. Sort by `price` from lowest to highest. Write the query in the SQL editor, click Run query, and check the results table."
+              "title": "Find the Two Cheapest Stationery Products",
+              "prompt": "A buyer needs the two cheapest stationery options. Show `name`, `category`, and `price` from `products` for `Stationery` items, sort prices from low to high, and keep only `2` rows.",
+              "hint": "Filter with WHERE, sort with ORDER BY price ASC, then finish with LIMIT 2.",
+              "help": {
+                "concept": "ORDER BY defines which rows count as “first” before LIMIT trims the result.",
+                "hint_1": "Filter with WHERE, sort with ORDER BY price ASC, then finish with LIMIT 2.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+              }
+            },
+            "try_combining_order_by_with_limit_sketch0": {
+              "title": "Keep the First Four Product Rows",
+              "prompt": "A dashboard preview has room for only four product records. Show `id` and `name` from `products`, keeping only the first `4` result rows.",
+              "hint": "Add LIMIT 4 after FROM products.",
+              "help": {
+                "concept": "LIMIT keeps a fixed number of rows from the result order currently produced.",
+                "hint_1": "Add LIMIT 4 after FROM products.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+              }
             }
           }
         }
       },
       "sql-v2-3": {
         "combining_order_by_with_limit": {
-          "label": "Combining ORDER BY with LIMIT",
-          "summary": "Learn how to sort rows first and then keep only the top part of the result with LIMIT.",
+          "label": "LIMIT and Useful Ranked Results",
+          "summary": "Sort first, then use LIMIT to return a meaningful top or bottom subset.",
           "cards": {
             "sketch0": {
-              "title": "Sort first, then keep only a few rows"
+              "title": "LIMIT Keeps Only the First Result Rows"
             },
             "sketch1": {
-              "title": "Common patterns with ranked results"
+              "title": "ORDER BY Gives LIMIT a Meaningful Order"
             },
             "quiz": {
-              "title": "Quiz"
-            },
-            "project": {
-              "title": "Ranked product report"
-            }
-          },
-          "projectSteps": {
-            "ci_top_three_expensive": {
-              "title": "Top 3 most expensive products"
-            },
-            "ci_two_cheapest_stationery": {
-              "title": "Two cheapest stationery items"
-            },
-            "ci_newest_home_item": {
-              "title": "Newest home product"
+              "title": "Check Your Understanding"
             }
           },
           "quiz": {
@@ -426,37 +377,49 @@
               "starterCode": "-- Return the name and created_at of the newest product in the Home category. Sort by created_at so the newest date comes first, then return only one row.\nSELECT name, created_at\nFROM products\nWHERE \nORDER BY \nLIMIT ;"
             },
             "try-combining_order_by_with_limit-sketch0": {
-              "title": "Top 3 most expensive products",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that returns the `name` and `price` of the 3 most expensive products from `products`. Sort so the highest price appears first. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Keep the First Four Product Rows",
+              "prompt": "A dashboard preview has room for only four product records. Show `id` and `name` from `products`, keeping only the first `4` result rows.",
+              "hint": "Add LIMIT 4 after FROM products.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
+                "concept": "LIMIT keeps a fixed number of rows from the result order currently produced.",
+                "hint_1": "Add LIMIT 4 after FROM products.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
               },
-              "starterCode": "-- Return the name and price of the 3 most expensive products from products.\nSELECT \nFROM products\nORDER BY \nLIMIT ;"
+              "starterCode": "SELECT id, name\nFROM products\n-- Keep only four rows"
             },
             "try-combining_order_by_with_limit-sketch1": {
-              "title": "Two cheapest stationery items",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that returns the `name`, `category`, and `price` of the 2 cheapest products in the `Stationery` category. Sort by `price` from lowest to highest. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Find the Two Cheapest Stationery Products",
+              "prompt": "A buyer needs the two cheapest stationery options. Show `name`, `category`, and `price` from `products` for `Stationery` items, sort prices from low to high, and keep only `2` rows.",
+              "hint": "Filter with WHERE, sort with ORDER BY price ASC, then finish with LIMIT 2.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
+                "concept": "ORDER BY defines which rows count as “first” before LIMIT trims the result.",
+                "hint_1": "Filter with WHERE, sort with ORDER BY price ASC, then finish with LIMIT 2.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
               },
-              "starterCode": "-- Return the name, category, and price of the 2 cheapest products in the Stationery category.\nSELECT name, category, price\nFROM products\nWHERE \nORDER BY \nLIMIT ;"
+              "starterCode": "SELECT name, category, price\nFROM products\n-- Filter, rank, and keep two rows"
             }
           },
           "tryIt": {
             "allowReveal": true,
-            "try_combining_order_by_with_limit_sketch0": {
-              "title": "Top 3 most expensive products",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that returns the `name` and `price` of the 3 most expensive products from `products`. Sort so the highest price appears first. Write the query in the SQL editor, click Run query, and check the results table."
-            },
             "try_combining_order_by_with_limit_sketch1": {
-              "title": "Two cheapest stationery items",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that returns the `name`, `category`, and `price` of the 2 cheapest products in the `Stationery` category. Sort by `price` from lowest to highest. Write the query in the SQL editor, click Run query, and check the results table."
+              "title": "Find the Two Cheapest Stationery Products",
+              "prompt": "A buyer needs the two cheapest stationery options. Show `name`, `category`, and `price` from `products` for `Stationery` items, sort prices from low to high, and keep only `2` rows.",
+              "hint": "Filter with WHERE, sort with ORDER BY price ASC, then finish with LIMIT 2.",
+              "help": {
+                "concept": "ORDER BY defines which rows count as “first” before LIMIT trims the result.",
+                "hint_1": "Filter with WHERE, sort with ORDER BY price ASC, then finish with LIMIT 2.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+              }
+            },
+            "try_combining_order_by_with_limit_sketch0": {
+              "title": "Keep the First Four Product Rows",
+              "prompt": "A dashboard preview has room for only four product records. Show `id` and `name` from `products`, keeping only the first `4` result rows.",
+              "hint": "Add LIMIT 4 after FROM products.",
+              "help": {
+                "concept": "LIMIT keeps a fixed number of rows from the result order currently produced.",
+                "hint_1": "Add LIMIT 4 after FROM products.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+              }
             }
           }
         }
@@ -467,25 +430,25 @@
     "sql--sql-v2--draft": {
       "sql--sql-v2--draft-3": {
         "combining_order_by_with_limit": {
-          "sketch_sort_then_limit": {
-            "title": "Sort first, then keep only a few rows",
-            "bodyMarkdown": "When you use `ORDER BY` and `LIMIT` together, SQL first arranges the rows and then keeps only the number of rows you asked for.\n\nThat means the order matters conceptually:\n1. `FROM` gets the table.\n2. `ORDER BY` sorts the rows.\n3. `LIMIT` keeps only the first few rows from that sorted result.\n\nHere is a worked example using the `products` table:\n\n```sql\nSELECT name, price\nFROM products\nORDER BY price DESC\nLIMIT 3;\n```\n\nThis query means:\n- `SELECT name, price` shows only the product name and price columns.\n- `FROM products` reads rows from the `products` table.\n- `ORDER BY price DESC` puts the most expensive products first.\n- `LIMIT 3` keeps only the first 3 rows after sorting.\n\nWith the dataset in this lesson, the result would be the 3 highest-priced products:\n- Office Chair — 129.00\n- Desk Lamp — 39.99\n- Acrylic Paint Set — 24.50\n\nIf you changed `DESC` to `ASC`, you would get the 3 cheapest products instead."
+          "limit_first_rows": {
+            "title": "LIMIT Keeps Only the First Result Rows",
+            "bodyMarkdown": "`LIMIT` keeps only the first number of rows from the completed result.\n\n```sql\nSELECT\n    name,\n    price\nFROM products\nLIMIT 3;\n```\n\nThis returns three rows, but without `ORDER BY` those rows do not represent the cheapest, most expensive, oldest, or newest products. `LIMIT` controls quantity; it does not define rank."
           },
-          "sketch_common_patterns": {
-            "title": "Common patterns with ranked results",
-            "bodyMarkdown": "A very common beginner pattern is: filter rows, sort them, then limit the result.\n\nFor example, suppose you want only `Stationery` products, sorted by newest first, and only the first 2 rows:\n\n```sql\nSELECT name, created_at\nFROM products\nWHERE category = 'Stationery'\nORDER BY created_at DESC\nLIMIT 2;\n```\n\nLine by line:\n- `SELECT name, created_at` shows the columns you want to read.\n- `FROM products` chooses the table.\n- `WHERE category = 'Stationery'` keeps only stationery items.\n- `ORDER BY created_at DESC` puts the newest dates first.\n- `LIMIT 2` returns only the first 2 rows from that sorted list.\n\nIn this dataset, `Notebook` comes before `Fountain Pen` because `2026-02-14` is later than `2026-01-25`.\n\nA useful way to think about it is: `ORDER BY` decides *which rows rise to the top*, and `LIMIT` decides *how many of those top rows you keep*."
+          "rank_then_limit": {
+            "title": "ORDER BY Gives LIMIT a Meaningful Order",
+            "bodyMarkdown": "Sort the result before limiting it when the request asks for a top or bottom list.\n\n```sql\nSELECT\n    name,\n    price\nFROM products\nORDER BY price DESC\nLIMIT 3;\n```\n\nSQL orders all products from highest price to lowest, then keeps the first three. To find the three cheapest, change the direction to `ASC`.\n\nThe dependable pattern is:\n\n```text\nWHERE filters rows\nORDER BY ranks the remaining rows\nLIMIT keeps the requested number\n```"
           }
         }
       },
       "sql-v2-3": {
         "combining_order_by_with_limit": {
-          "sketch_sort_then_limit": {
-            "title": "Sort first, then keep only a few rows",
-            "bodyMarkdown": "When you use `ORDER BY` and `LIMIT` together, SQL first arranges the rows and then keeps only the number of rows you asked for.\n\nThat means the order matters conceptually:\n1. `FROM` gets the table.\n2. `ORDER BY` sorts the rows.\n3. `LIMIT` keeps only the first few rows from that sorted result.\n\nHere is a worked example using the `products` table:\n\n```sql\nSELECT name, price\nFROM products\nORDER BY price DESC\nLIMIT 3;\n```\n\nThis query means:\n- `SELECT name, price` shows only the product name and price columns.\n- `FROM products` reads rows from the `products` table.\n- `ORDER BY price DESC` puts the most expensive products first.\n- `LIMIT 3` keeps only the first 3 rows after sorting.\n\nWith the dataset in this lesson, the result would be the 3 highest-priced products:\n- Office Chair — 129.00\n- Desk Lamp — 39.99\n- Acrylic Paint Set — 24.50\n\nIf you changed `DESC` to `ASC`, you would get the 3 cheapest products instead."
+          "limit_first_rows": {
+            "title": "LIMIT Keeps Only the First Result Rows",
+            "bodyMarkdown": "`LIMIT` keeps only the first number of rows from the completed result.\n\n```sql\nSELECT\n    name,\n    price\nFROM products\nLIMIT 3;\n```\n\nThis returns three rows, but without `ORDER BY` those rows do not represent the cheapest, most expensive, oldest, or newest products. `LIMIT` controls quantity; it does not define rank."
           },
-          "sketch_common_patterns": {
-            "title": "Common patterns with ranked results",
-            "bodyMarkdown": "A very common beginner pattern is: filter rows, sort them, then limit the result.\n\nFor example, suppose you want only `Stationery` products, sorted by newest first, and only the first 2 rows:\n\n```sql\nSELECT name, created_at\nFROM products\nWHERE category = 'Stationery'\nORDER BY created_at DESC\nLIMIT 2;\n```\n\nLine by line:\n- `SELECT name, created_at` shows the columns you want to read.\n- `FROM products` chooses the table.\n- `WHERE category = 'Stationery'` keeps only stationery items.\n- `ORDER BY created_at DESC` puts the newest dates first.\n- `LIMIT 2` returns only the first 2 rows from that sorted list.\n\nIn this dataset, `Notebook` comes before `Fountain Pen` because `2026-02-14` is later than `2026-01-25`.\n\nA useful way to think about it is: `ORDER BY` decides *which rows rise to the top*, and `LIMIT` decides *how many of those top rows you keep*."
+          "rank_then_limit": {
+            "title": "ORDER BY Gives LIMIT a Meaningful Order",
+            "bodyMarkdown": "Sort the result before limiting it when the request asks for a top or bottom list.\n\n```sql\nSELECT\n    name,\n    price\nFROM products\nORDER BY price DESC\nLIMIT 3;\n```\n\nSQL orders all products from highest price to lowest, then keeps the first three. To find the three cheapest, change the direction to `ASC`.\n\nThe dependable pattern is:\n\n```text\nWHERE filters rows\nORDER BY ranks the remaining rows\nLIMIT keeps the requested number\n```"
           }
         }
       }

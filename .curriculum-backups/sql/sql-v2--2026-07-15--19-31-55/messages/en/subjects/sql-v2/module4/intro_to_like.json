@@ -1,0 +1,258 @@
+{
+  "topics": {
+    "sql-v2": {
+      "sql-v2-4": {
+        "intro_to_like": {
+          "label": "Searching Text with LIKE and %",
+          "summary": "Use LIKE with the percent wildcard to match text prefixes, suffixes, and contained fragments.",
+          "cards": {
+            "sketch0": {
+              "title": "LIKE Matches a Text Pattern"
+            },
+            "sketch1": {
+              "title": "% Represents Any Number of Characters"
+            },
+            "quiz": {
+              "title": "Check Your Understanding"
+            }
+          },
+          "quiz": {
+            "sc_like_prefix": {
+              "title": "Pattern for a starting text match",
+              "prompt": "Which pattern matches city values that start with `Chi`?",
+              "hint": "Use the wildcard that allows any number of characters after `Chi`.",
+              "help": {
+                "concept": "`LIKE` uses `%` to match any number of characters. To match text that begins with a fixed starting part, put `%` after that starting text.",
+                "hint_1": "You want values that begin with `Chi`, so the pattern should keep `Chi` at the front.",
+                "hint_2": "The correct pattern has `Chi` first and then a wildcard for the rest of the text."
+              },
+              "options": {
+                "a": "LIKE '%Chi'",
+                "b": "LIKE 'Chi%'",
+                "c": "LIKE '_Chi_'",
+                "d": "LIKE '%Chi%'"
+              }
+            },
+            "sc_like_single_char": {
+              "title": "Wildcard for one character",
+              "prompt": "In a `LIKE` pattern, which symbol matches exactly one character?",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "options": {
+                "a": "%",
+                "b": "_",
+                "c": "*",
+                "d": "#"
+              }
+            },
+            "mc_like_true_patterns": {
+              "title": "Patterns that contain text anywhere",
+              "prompt": "Choose all patterns that would match a value containing the text `test` anywhere inside it.",
+              "hint": "To allow text before and after `test`, think about where `%` should go.",
+              "help": {
+                "concept": "A pattern that matches text anywhere inside a value usually places `%` before and after the target text, or at least allows the needed side to vary.",
+                "hint_1": "If `test` could appear in the middle, the pattern must allow characters before it and after it.",
+                "hint_2": "Look for every option that does not force `test` to be only at the start or only at the end."
+              },
+              "options": {
+                "a": "'%test%'",
+                "b": "'test%'",
+                "c": "'%test'",
+                "d": "'abc%test%xyz'"
+              }
+            },
+            "mc_like_dataset_matches": {
+              "title": "Rows matched by an email pattern",
+              "prompt": "Based on the seeded `customers` table, which rows would match `WHERE email LIKE '%@example.com'`? Choose all that apply.",
+              "hint": "Look for emails that end exactly with `@example.com`.",
+              "help": {
+                "concept": "A pattern ending with fixed text and starting with `%` matches any value whose ending is that fixed text.",
+                "hint_1": "Check the email values row by row and ignore NULLs because NULL does not match a `LIKE` pattern.",
+                "hint_2": "The matching rows are the ones with emails from the `example.com` domain, not the test or internal domain."
+              },
+              "options": {
+                "a": "Mia Lopez",
+                "b": "Noah Kim",
+                "c": "Emma Reed",
+                "d": "Olivia Chen"
+              }
+            },
+            "dr_like_query_order": {
+              "title": "Build a LIKE query",
+              "prompt": "Put these SQL parts in the correct order to query customer names and emails where the email ends with `@example.com`.",
+              "hint": "Start with `SELECT`, then name the table, then add the filter.",
+              "help": {
+                "concept": "A basic SQL query follows the clause order `SELECT`, `FROM`, then `WHERE`.",
+                "hint_1": "The filter using `LIKE` belongs in the `WHERE` clause, not before `FROM`.",
+                "hint_2": "Place the column list after `SELECT`, then the table name after `FROM`, then the `LIKE` condition last."
+              },
+              "tokens": {
+                "t1": "SELECT full_name, email",
+                "t2": "FROM customers",
+                "t3": "WHERE email LIKE '%@example.com'"
+              }
+            },
+            "dr_pattern_order": {
+              "title": "Assemble the correct pattern",
+              "prompt": "Arrange these tokens to make a pattern that matches names ending with `Chen`.",
+              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "help": {
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
+              },
+              "tokens": {
+                "t1": "'",
+                "t2": "%",
+                "t3": "Chen"
+              }
+            },
+            "fb_like_suffix": {
+              "title": "Complete an ending match",
+              "prompt": "Fill in the missing pattern piece.",
+              "hint": "To match values that end with `@example.com`, allow any text before it.",
+              "help": {
+                "concept": "A suffix match uses `%` before the fixed ending text so any earlier characters are allowed.",
+                "hint_1": "Check which side of the pattern should stay fixed and where the wildcard should allow extra characters.",
+                "hint_2": "Choose the option that keeps `@example.com` fixed at the end of the pattern."
+              },
+              "template": "WHERE email LIKE [blank1]",
+              "choices": [
+                "'%@example.com'",
+                "'@example.com%'",
+                "'_@example.com'",
+                "'example.com'"
+              ]
+            },
+            "fb_like_contains": {
+              "title": "Complete a contains pattern",
+              "prompt": "Fill in the missing pattern so the query matches names containing the letter `a` anywhere.",
+              "hint": "A contains pattern usually needs wildcards on both sides of the text.",
+              "help": {
+                "concept": "To match text anywhere inside a value, place `%` before and after the target text.",
+                "hint_1": "The letter `a` should stay in the middle of the pattern.",
+                "hint_2": "Choose the option that allows characters both before and after `a`."
+              },
+              "template": "WHERE full_name LIKE [blank1]",
+              "choices": [
+                "'a%'",
+                "'%a'",
+                "'%a%'",
+                "'_a_'"
+              ]
+            },
+            "ci_like_city_prefix": {
+              "title": "Find cities starting with Chi",
+              "prompt": "Write a query that shows `full_name` and `city` for customers whose `city` starts with `Chi`. Use the `customers` table. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "-- Show full_name and city for customers whose city starts with Chi. Use the customers table.\nSELECT \nFROM customers\nWHERE ;"
+            },
+            "ci_like_email_domain": {
+              "title": "Find example.com emails",
+              "prompt": "Write a query that shows `full_name` and `email` for customers whose email ends with `@example.com`. Exclude rows where `email` is NULL by relying on the pattern match. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "-- Show full_name and email for customers whose email ends with @example.com. Exclude rows where email is NULL by relying on the pattern match.\nSELECT \nFROM customers\nWHERE ;"
+            },
+            "ci_like_active_name_contains": {
+              "title": "Find active customers with a in the name",
+              "prompt": "Write a query that shows `full_name` and `status` for customers whose `full_name` contains the letter `a` anywhere and whose `status` is `active`. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "-- Show full_name and status for customers whose full_name contains the letter a anywhere and whose status is active.\nSELECT \nFROM customers\nWHERE ;"
+            },
+            "try-intro_to_like-sketch0": {
+              "title": "Find Customer Names That Start with A",
+              "prompt": "A customer-success rep is preparing an A-list outreach. Show `id`, `full_name`, and `city` from `customers` for people whose names begin with `A`.",
+              "hint": "Use LIKE 'A%' so any characters may follow A.",
+              "help": {
+                "concept": "LIKE compares text with a pattern instead of requiring one exact value.",
+                "hint_1": "Use LIKE 'A%' so any characters may follow A.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+              },
+              "starterCode": "SELECT id, full_name, city\nFROM customers\n-- Match names that start with A"
+            },
+            "try-intro_to_like-sketch1": {
+              "title": "Find Cities Containing the Letter o",
+              "prompt": "A regional analyst is looking for customers in cities whose names contain the letter `o` anywhere. Show `full_name` and `city` from `customers`.",
+              "hint": "Put % on both sides of o: LIKE '%o%'.",
+              "help": {
+                "concept": "The percent wildcard can represent any number of characters before or after the known text.",
+                "hint_1": "Put % on both sides of o: LIKE '%o%'.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+              },
+              "starterCode": "SELECT full_name, city\nFROM customers\n-- Match cities containing o"
+            },
+            "try-intro_to_like-sketch2": {
+              "title": "Find active customers with a in the name",
+              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that shows `full_name` and `status` for customers whose `full_name` contains the letter `a` anywhere and whose `status` is `active`. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "-- Show full_name and status for customers whose full_name contains the letter a anywhere and whose status is active.\nSELECT \nFROM customers\nWHERE ;"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_intro_to_like_sketch0": {
+              "title": "Find Customer Names That Start with A",
+              "prompt": "A customer-success rep is preparing an A-list outreach. Show `id`, `full_name`, and `city` from `customers` for people whose names begin with `A`.",
+              "hint": "Use LIKE 'A%' so any characters may follow A.",
+              "help": {
+                "concept": "LIKE compares text with a pattern instead of requiring one exact value.",
+                "hint_1": "Use LIKE 'A%' so any characters may follow A.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+              }
+            },
+            "try_intro_to_like_sketch1": {
+              "title": "Find Cities Containing the Letter o",
+              "prompt": "A regional analyst is looking for customers in cities whose names contain the letter `o` anywhere. Show `full_name` and `city` from `customers`.",
+              "hint": "Put % on both sides of o: LIKE '%o%'.",
+              "help": {
+                "concept": "The percent wildcard can represent any number of characters before or after the known text.",
+                "hint_1": "Put % on both sides of o: LIKE '%o%'.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql-v2": {
+      "sql-v2-4": {
+        "intro_to_like": {
+          "like_text_pattern": {
+            "title": "LIKE Matches a Text Pattern",
+            "bodyMarkdown": "Use `LIKE` when an exact `=` comparison is too strict and the request describes a text pattern.\n\n```sql\nSELECT\n    id,\n    full_name,\n    city\nFROM customers\nWHERE city LIKE 'Chi%';\n```\n\nThe pattern begins with `Chi`. The `%` allows any remaining characters, so values such as `Chicago` match. A city that does not begin with those letters does not pass."
+          },
+          "percent_wildcard_patterns": {
+            "title": "% Represents Any Number of Characters",
+            "bodyMarkdown": "The position of `%` changes the search:\n\n```sql\nWHERE email LIKE '%@example.com'\n```\n\nmatches values ending with `@example.com`.\n\n```sql\nWHERE full_name LIKE '%ann%'\n```\n\nmatches values containing `ann` anywhere.\n\nUse a leading percent for “ends with,” a trailing percent for “starts with,” and percents on both sides for “contains.” Pattern matching can be case-sensitive or case-insensitive depending on the database and configuration, so follow the course dataset behavior."
+          }
+        }
+      }
+    }
+  }
+}

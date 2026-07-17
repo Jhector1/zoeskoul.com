@@ -1,0 +1,368 @@
+{
+  "topicId": "module-2-storewide-kpi-snapshot",
+  "subjectSlug": "sql--sql-analysis-reporting--draft",
+  "moduleSlug": "sql-analysis-reporting-module-2-aggregate-functions",
+  "sectionSlug": "sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-2-module-project",
+  "prefix": "sql_analysis_reporting_module_2",
+  "minutes": 55,
+  "runtimeDefaults": {
+    "kind": "sql",
+    "showSchema": true,
+    "showErd": true,
+    "showChen": true,
+    "supportsTerminal": false,
+    "supportsMultiFile": false,
+    "supportsFileSystem": false,
+    "datasetId": "sales_kpi",
+    "fixedSqlDialect": "sqlite",
+    "resultShape": "table"
+  },
+  "serviceDefaults": null,
+  "topic": {
+    "labelKey": "topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.module-2-storewide-kpi-snapshot.label",
+    "summaryKey": "topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.module-2-storewide-kpi-snapshot.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.module-2-storewide-kpi-snapshot.cards.sketch0.title",
+      "sketchId": "module-2-storewide-kpi-snapshot-sketch0",
+      "height": 420
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.module-2-storewide-kpi-snapshot.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "try_module_2_storewide_kpi_snapshot_sketch0",
+            "titleKey": "topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.module-2-storewide-kpi-snapshot.projectSteps.try_module_2_storewide_kpi_snapshot_sketch0.title",
+            "exerciseKey": "try-module-2-storewide-kpi-snapshot-sketch0",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "try_module_2_storewide_kpi_snapshot_sketch1",
+            "titleKey": "topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.module-2-storewide-kpi-snapshot.projectSteps.try_module_2_storewide_kpi_snapshot_sketch1.title",
+            "exerciseKey": "try-module-2-storewide-kpi-snapshot-sketch1",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "try_module_2_storewide_kpi_snapshot_sketch2",
+            "titleKey": "topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.module-2-storewide-kpi-snapshot.projectSteps.try_module_2_storewide_kpi_snapshot_sketch2.title",
+            "exerciseKey": "try-module-2-storewide-kpi-snapshot-sketch2",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "try_module_2_storewide_kpi_snapshot_sketch3",
+            "titleKey": "topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.module-2-storewide-kpi-snapshot.projectSteps.try_module_2_storewide_kpi_snapshot_sketch3.title",
+            "exerciseKey": "try-module-2-storewide-kpi-snapshot-sketch3",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "try_module_2_storewide_kpi_snapshot_sketch4",
+            "titleKey": "topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.module-2-storewide-kpi-snapshot.projectSteps.try_module_2_storewide_kpi_snapshot_sketch4.title",
+            "exerciseKey": "try-module-2-storewide-kpi-snapshot-sketch4",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "try_module_2_storewide_kpi_snapshot_sketch5",
+            "titleKey": "topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.module-2-storewide-kpi-snapshot.projectSteps.try_module_2_storewide_kpi_snapshot_sketch5.title",
+            "exerciseKey": "try-module-2-storewide-kpi-snapshot-sketch5",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "module-2-storewide-kpi-snapshot-sketch0",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.module-2-storewide-kpi-snapshot.module-2-storewide-kpi-snapshot-sketch0.title",
+      "bodyKey": "sketches.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.module-2-storewide-kpi-snapshot.module-2-storewide-kpi-snapshot-sketch0.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "try-module-2-storewide-kpi-snapshot-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.module-2-storewide-kpi-snapshot.moduleProject.steps.try_module_2_storewide_kpi_snapshot_sketch0",
+      "language": "sql",
+      "starterCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.module-2-storewide-kpi-snapshot.moduleProject.steps.try_module_2_storewide_kpi_snapshot_sketch0.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "sales_kpi",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "main.sql",
+        "starterCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.module-2-storewide-kpi-snapshot.moduleProject.steps.try_module_2_storewide_kpi_snapshot_sketch0.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.sql",
+            "content": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.module-2-storewide-kpi-snapshot.moduleProject.steps.try_module_2_storewide_kpi_snapshot_sketch0.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "sales_kpi",
+        "resultShape": "table",
+        "solutionCode": "SELECT COUNT(*) AS total_orders, SUM(quantity) AS total_units_sold FROM sales_reporting;"
+      }
+    },
+    {
+      "id": "try-module-2-storewide-kpi-snapshot-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.module-2-storewide-kpi-snapshot.moduleProject.steps.try_module_2_storewide_kpi_snapshot_sketch1",
+      "language": "sql",
+      "starterCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.module-2-storewide-kpi-snapshot.moduleProject.steps.try_module_2_storewide_kpi_snapshot_sketch1.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "sales_kpi",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "main.sql",
+        "starterCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.module-2-storewide-kpi-snapshot.moduleProject.steps.try_module_2_storewide_kpi_snapshot_sketch1.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.sql",
+            "content": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.module-2-storewide-kpi-snapshot.moduleProject.steps.try_module_2_storewide_kpi_snapshot_sketch1.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "sales_kpi",
+        "resultShape": "table",
+        "solutionCode": "SELECT SUM(unit_price * quantity) AS gross_sales, SUM((unit_price * quantity) * (1 - COALESCE(discount_pct, 0) / 100)) AS net_sales FROM sales_reporting;"
+      }
+    },
+    {
+      "id": "try-module-2-storewide-kpi-snapshot-sketch2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.module-2-storewide-kpi-snapshot.moduleProject.steps.try_module_2_storewide_kpi_snapshot_sketch2",
+      "language": "sql",
+      "starterCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.module-2-storewide-kpi-snapshot.moduleProject.steps.try_module_2_storewide_kpi_snapshot_sketch2.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "sales_kpi",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "main.sql",
+        "starterCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.module-2-storewide-kpi-snapshot.moduleProject.steps.try_module_2_storewide_kpi_snapshot_sketch2.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.sql",
+            "content": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.module-2-storewide-kpi-snapshot.moduleProject.steps.try_module_2_storewide_kpi_snapshot_sketch2.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "sales_kpi",
+        "resultShape": "table",
+        "solutionCode": "SELECT AVG(unit_price * quantity) AS average_order_value FROM sales_reporting;"
+      }
+    },
+    {
+      "id": "try-module-2-storewide-kpi-snapshot-sketch3",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.module-2-storewide-kpi-snapshot.moduleProject.steps.try_module_2_storewide_kpi_snapshot_sketch3",
+      "language": "sql",
+      "starterCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.module-2-storewide-kpi-snapshot.moduleProject.steps.try_module_2_storewide_kpi_snapshot_sketch3.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "sales_kpi",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "main.sql",
+        "starterCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.module-2-storewide-kpi-snapshot.moduleProject.steps.try_module_2_storewide_kpi_snapshot_sketch3.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.sql",
+            "content": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.module-2-storewide-kpi-snapshot.moduleProject.steps.try_module_2_storewide_kpi_snapshot_sketch3.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "sales_kpi",
+        "resultShape": "table",
+        "solutionCode": "SELECT MIN(unit_price * quantity) AS min_order_value, MAX(unit_price * quantity) AS max_order_value FROM sales_reporting;"
+      }
+    },
+    {
+      "id": "try-module-2-storewide-kpi-snapshot-sketch4",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.module-2-storewide-kpi-snapshot.moduleProject.steps.try_module_2_storewide_kpi_snapshot_sketch4",
+      "language": "sql",
+      "starterCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.module-2-storewide-kpi-snapshot.moduleProject.steps.try_module_2_storewide_kpi_snapshot_sketch4.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "sales_kpi",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "main.sql",
+        "starterCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.module-2-storewide-kpi-snapshot.moduleProject.steps.try_module_2_storewide_kpi_snapshot_sketch4.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.sql",
+            "content": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.module-2-storewide-kpi-snapshot.moduleProject.steps.try_module_2_storewide_kpi_snapshot_sketch4.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "sales_kpi",
+        "resultShape": "table",
+        "solutionCode": "SELECT SUM((unit_price * quantity) * (COALESCE(discount_pct, 0) / 100)) AS total_discount FROM sales_reporting;"
+      }
+    },
+    {
+      "id": "try-module-2-storewide-kpi-snapshot-sketch5",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.module-2-storewide-kpi-snapshot.moduleProject.steps.try_module_2_storewide_kpi_snapshot_sketch5",
+      "language": "sql",
+      "starterCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.module-2-storewide-kpi-snapshot.moduleProject.steps.try_module_2_storewide_kpi_snapshot_sketch5.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "sales_kpi",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "main.sql",
+        "starterCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.module-2-storewide-kpi-snapshot.moduleProject.steps.try_module_2_storewide_kpi_snapshot_sketch5.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.sql",
+            "content": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.module-2-storewide-kpi-snapshot.moduleProject.steps.try_module_2_storewide_kpi_snapshot_sketch5.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "sales_kpi",
+        "resultShape": "table",
+        "solutionCode": "SELECT SUM(COALESCE(customer_rating, 0)) AS total_customer_ratings FROM sales_reporting;"
+      }
+    }
+  ]
+}

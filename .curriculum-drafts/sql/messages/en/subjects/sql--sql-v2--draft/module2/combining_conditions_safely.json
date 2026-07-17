@@ -3,34 +3,17 @@
     "sql--sql-v2--draft": {
       "sql--sql-v2--draft-2": {
         "combining_conditions_safely": {
-          "label": "Combining Conditions Safely",
-          "summary": "Learn how to combine WHERE conditions with AND, OR, and parentheses so your SQL filters match exactly the rows you intend.",
+          "label": "Using Parentheses and NOT Safely",
+          "summary": "Group mixed AND/OR logic with parentheses and use NOT to reverse a condition deliberately.",
           "cards": {
             "sketch0": {
-              "title": "Using AND and OR together"
+              "title": "Parentheses Make Mixed Logic Explicit"
             },
             "sketch1": {
-              "title": "Why parentheses make filters safer"
-            },
-            "sketch2": {
-              "title": "Combining NOT with other conditions"
+              "title": "NOT Reverses the Test That Follows"
             },
             "quiz": {
-              "title": "Quiz"
-            },
-            "project": {
-              "title": "Data detective: safe multi-condition filters"
-            }
-          },
-          "projectSteps": {
-            "ci_art_or_stationery_stock": {
-              "title": "Filter grouped categories with stock"
-            },
-            "ci_not_home_under_20": {
-              "title": "Use NOT with a grouped condition"
-            },
-            "ci_stationery_or_low_stock": {
-              "title": "Combine OR with a numeric condition"
+              "title": "Check Your Understanding"
             }
           },
           "quiz": {
@@ -140,9 +123,9 @@
               "prompt": "Fill in the missing keyword to keep only Stationery products that also cost less than 10.",
               "hint": "You need the keyword that requires both conditions to be true.",
               "help": {
-                "concept": "Use `the missing term` when both conditions must match for the same row.",
+                "concept": "Use `the blank` when both conditions must match for the same row.",
                 "hint_1": "The query is combining a category check with a price check.",
-                "hint_2": "The missing word should make SQL require both the Stationery condition the missing term the price condition."
+                "hint_2": "The missing word should make SQL require both the Stationery condition the blank the price condition."
               },
               "template": "WHERE category = 'Stationery' [blank1] price < 10",
               "choices": [
@@ -167,120 +150,67 @@
                 "NOT"
               ]
             },
-            "ci_art_or_stationery_stock": {
-              "title": "Filter grouped categories with stock",
-              "prompt": "Write a query that shows `name`, `category`, and `stock` for products that are in `Art` or `Stationery` and have `stock > 20`. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Show name, category, and stock for products that are in Art or Stationery and have stock > 20.\nSELECT name, category, stock\nFROM products\nWHERE ;"
-            },
-            "ci_not_home_under_20": {
-              "title": "Use NOT with a grouped condition",
-              "prompt": "Write a query that shows `name`, `category`, and `price` for products that are not in the `Home` category and have `price < 20`. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Show name, category, and price for products that are not in the Home category and have price < 20.\nSELECT name, category, price\nFROM products\nWHERE ;"
-            },
-            "ci_stationery_or_low_stock": {
-              "title": "Combine OR with a numeric condition",
-              "prompt": "Write a query that shows `name`, `category`, and `stock` for products that are in `Stationery` or have `stock < 5`. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Show name, category, and stock for products that are in Stationery or have stock < 5.\nSELECT name, category, stock\nFROM products\nWHERE ;"
-            },
             "try-combining_conditions_safely-sketch0": {
-              "title": "Filter grouped categories with stock",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that shows `name`, `category`, and `stock` for products that are in `Art` or `Stationery` and have `stock > 20`. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Group Alternative Categories Before Filtering Price",
+              "prompt": "Build a budget collection from the `Home` and `Art` categories. Return `name, category, price` from `products` in that column order. Keep only rows where `(category = 'Home' OR category = 'Art') AND price <= 30`.",
+              "hint": "Put the two category alternatives in parentheses, then join the price rule with AND.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "Return `name, category, price` from `products` in that column order. Keep only rows where `(category = 'Home' OR category = 'Art') AND price <= 30`."
               },
-              "starterCode": "-- Show name, category, and stock for products that are in Art or Stationery and have stock > 20.\nSELECT name, category, stock\nFROM products\nWHERE ;"
+              "starterCode": "SELECT name, category, price\nFROM products\n-- Group the category alternatives first"
             },
             "try-combining_conditions_safely-sketch1": {
-              "title": "Use NOT with a grouped condition",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that shows `name`, `category`, and `price` for products that are not in the `Home` category and have `price < 20`. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Reverse a Category Test with NOT",
+              "prompt": "Create a low-cost campaign list that excludes `Home`. Return `name, category, price` from `products` in that column order. Keep only rows where `NOT (category = 'Home') AND price < 20`.",
+              "hint": "Wrap the category comparison in parentheses after NOT, then add the price rule with AND.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "Return `name, category, price` from `products` in that column order. Keep only rows where `NOT (category = 'Home') AND price < 20`."
               },
-              "starterCode": "-- Show name, category, and price for products that are not in the Home category and have price < 20.\nSELECT name, category, price\nFROM products\nWHERE ;"
-            },
-            "try-combining_conditions_safely-sketch2": {
-              "title": "Combine OR with a numeric condition",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that shows `name`, `category`, and `stock` for products that are in `Stationery` or have `stock < 5`. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Show name, category, and stock for products that are in Stationery or have stock < 5.\nSELECT name, category, stock\nFROM products\nWHERE ;"
+              "starterCode": "SELECT name, category, price\nFROM products\n-- Exclude Home and keep prices below 20"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_combining_conditions_safely_sketch0": {
-              "title": "Filter grouped categories with stock",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that shows `name`, `category`, and `stock` for products that are in `Art` or `Stationery` and have `stock > 20`. Write the query in the SQL editor, click Run query, and check the results table."
+              "title": "Group Alternative Categories Before Filtering Price",
+              "prompt": "Build a budget collection from the `Home` and `Art` categories. Show `name`, `category`, and `price` from `products` when the category is either one and the price is at most `30`.",
+              "hint": "Put the two category alternatives in parentheses, then join the price rule with AND.",
+              "help": {
+                "concept": "Parentheses make the intended grouping explicit when AND and OR appear together.",
+                "hint_1": "Put the two category alternatives in parentheses, then join the price rule with AND.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+              }
             },
             "try_combining_conditions_safely_sketch1": {
-              "title": "Use NOT with a grouped condition",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that shows `name`, `category`, and `price` for products that are not in the `Home` category and have `price < 20`. Write the query in the SQL editor, click Run query, and check the results table."
-            },
-            "try_combining_conditions_safely_sketch2": {
-              "title": "Combine OR with a numeric condition",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that shows `name`, `category`, and `stock` for products that are in `Stationery` or have `stock < 5`. Write the query in the SQL editor, click Run query, and check the results table."
+              "title": "Reverse a Category Test with NOT",
+              "prompt": "Create a low-cost campaign list that excludes `Home`. Show `name`, `category`, and `price` from `products` where the category is not `Home` and the price is below `20`.",
+              "hint": "Wrap the category comparison in parentheses after NOT, then add the price rule with AND.",
+              "help": {
+                "concept": "NOT reverses the truth of the condition that follows it.",
+                "hint_1": "Wrap the category comparison in parentheses after NOT, then add the price rule with AND.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+              }
             }
           }
         }
       },
       "sql-v2-2": {
         "combining_conditions_safely": {
-          "label": "Combining Conditions Safely",
-          "summary": "Learn how to combine WHERE conditions with AND, OR, and parentheses so your SQL filters match exactly the rows you intend.",
+          "label": "Using Parentheses and NOT Safely",
+          "summary": "Group mixed AND/OR logic with parentheses and use NOT to reverse a condition deliberately.",
           "cards": {
             "sketch0": {
-              "title": "Using AND and OR together"
+              "title": "Parentheses Make Mixed Logic Explicit"
             },
             "sketch1": {
-              "title": "Why parentheses make filters safer"
-            },
-            "sketch2": {
-              "title": "Combining NOT with other conditions"
+              "title": "NOT Reverses the Test That Follows"
             },
             "quiz": {
-              "title": "Quiz"
-            },
-            "project": {
-              "title": "Data detective: safe multi-condition filters"
-            }
-          },
-          "projectSteps": {
-            "ci_art_or_stationery_stock": {
-              "title": "Filter grouped categories with stock"
-            },
-            "ci_not_home_under_20": {
-              "title": "Use NOT with a grouped condition"
-            },
-            "ci_stationery_or_low_stock": {
-              "title": "Combine OR with a numeric condition"
+              "title": "Check Your Understanding"
             }
           },
           "quiz": {
@@ -390,9 +320,9 @@
               "prompt": "Fill in the missing keyword to keep only Stationery products that also cost less than 10.",
               "hint": "You need the keyword that requires both conditions to be true.",
               "help": {
-                "concept": "Use `the missing term` when both conditions must match for the same row.",
+                "concept": "Use `the blank` when both conditions must match for the same row.",
                 "hint_1": "The query is combining a category check with a price check.",
-                "hint_2": "The missing word should make SQL require both the Stationery condition the missing term the price condition."
+                "hint_2": "The missing word should make SQL require both the Stationery condition the blank the price condition."
               },
               "template": "WHERE category = 'Stationery' [blank1] price < 10",
               "choices": [
@@ -451,30 +381,30 @@
               "starterCode": "-- Show name, category, and stock for products that are in Stationery or have stock < 5.\nSELECT name, category, stock\nFROM products\nWHERE ;"
             },
             "try-combining_conditions_safely-sketch0": {
-              "title": "Filter grouped categories with stock",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that shows `name`, `category`, and `stock` for products that are in `Art` or `Stationery` and have `stock > 20`. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Group Alternative Categories Before Filtering Price",
+              "prompt": "Build a budget collection from the `Home` and `Art` categories. Show `name`, `category`, and `price` from `products` when the category is either one and the price is at most `30`.",
+              "hint": "Put the two category alternatives in parentheses, then join the price rule with AND.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
+                "concept": "Parentheses make the intended grouping explicit when AND and OR appear together.",
+                "hint_1": "Put the two category alternatives in parentheses, then join the price rule with AND.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
               },
-              "starterCode": "-- Show name, category, and stock for products that are in Art or Stationery and have stock > 20.\nSELECT name, category, stock\nFROM products\nWHERE ;"
+              "starterCode": "SELECT name, category, price\nFROM products\n-- Group the category alternatives first"
             },
             "try-combining_conditions_safely-sketch1": {
-              "title": "Use NOT with a grouped condition",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that shows `name`, `category`, and `price` for products that are not in the `Home` category and have `price < 20`. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Reverse a Category Test with NOT",
+              "prompt": "Create a low-cost campaign list that excludes `Home`. Show `name`, `category`, and `price` from `products` where the category is not `Home` and the price is below `20`.",
+              "hint": "Wrap the category comparison in parentheses after NOT, then add the price rule with AND.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
+                "concept": "NOT reverses the truth of the condition that follows it.",
+                "hint_1": "Wrap the category comparison in parentheses after NOT, then add the price rule with AND.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
               },
-              "starterCode": "-- Show name, category, and price for products that are not in the Home category and have price < 20.\nSELECT name, category, price\nFROM products\nWHERE ;"
+              "starterCode": "SELECT name, category, price\nFROM products\n-- Exclude Home and keep prices below 20"
             },
             "try-combining_conditions_safely-sketch2": {
               "title": "Combine OR with a numeric condition",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that shows `name`, `category`, and `stock` for products that are in `Stationery` or have `stock < 5`. Write the query in the SQL editor, click Run query, and check the results table.",
+              "prompt": "Create a focused inventory query that shows `name`, `category`, and `stock` for products that are in `Stationery` or have `stock < 5`. Run it and compare the result with the expected table.",
               "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
               "help": {
                 "concept": "This SQL exercise checks whether your query returns the requested result.",
@@ -487,16 +417,24 @@
           "tryIt": {
             "allowReveal": true,
             "try_combining_conditions_safely_sketch0": {
-              "title": "Filter grouped categories with stock",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that shows `name`, `category`, and `stock` for products that are in `Art` or `Stationery` and have `stock > 20`. Write the query in the SQL editor, click Run query, and check the results table."
+              "title": "Group Alternative Categories Before Filtering Price",
+              "prompt": "Build a budget collection from the `Home` and `Art` categories. Show `name`, `category`, and `price` from `products` when the category is either one and the price is at most `30`.",
+              "hint": "Put the two category alternatives in parentheses, then join the price rule with AND.",
+              "help": {
+                "concept": "Parentheses make the intended grouping explicit when AND and OR appear together.",
+                "hint_1": "Put the two category alternatives in parentheses, then join the price rule with AND.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+              }
             },
             "try_combining_conditions_safely_sketch1": {
-              "title": "Use NOT with a grouped condition",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that shows `name`, `category`, and `price` for products that are not in the `Home` category and have `price < 20`. Write the query in the SQL editor, click Run query, and check the results table."
-            },
-            "try_combining_conditions_safely_sketch2": {
-              "title": "Combine OR with a numeric condition",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that shows `name`, `category`, and `stock` for products that are in `Stationery` or have `stock < 5`. Write the query in the SQL editor, click Run query, and check the results table."
+              "title": "Reverse a Category Test with NOT",
+              "prompt": "Create a low-cost campaign list that excludes `Home`. Show `name`, `category`, and `price` from `products` where the category is not `Home` and the price is below `20`.",
+              "hint": "Wrap the category comparison in parentheses after NOT, then add the price rule with AND.",
+              "help": {
+                "concept": "NOT reverses the truth of the condition that follows it.",
+                "hint_1": "Wrap the category comparison in parentheses after NOT, then add the price rule with AND.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+              }
             }
           }
         }
@@ -507,33 +445,25 @@
     "sql--sql-v2--draft": {
       "sql--sql-v2--draft-2": {
         "combining_conditions_safely": {
-          "sketch_and_or_basics": {
-            "title": "Using AND and OR together",
-            "bodyMarkdown": "When you combine conditions in a `WHERE` clause, SQL checks whether each row matches the logic you wrote.\n\n- `AND` means both conditions must be true.\n- `OR` means at least one condition must be true.\n\nHere is a simple example using the `products` table:\n\n```sql\nSELECT name, category, price\nFROM products\nWHERE category = 'Art' AND price < 20;\n```\n\nThis returns products that are in the `Art` category **and** cost less than 20.\n\nStep by step:\n1. SQL looks at each row in `products`.\n2. It checks whether `category = 'Art'`.\n3. It checks whether `price < 20`.\n4. A row stays only if **both** checks are true.\n\nWith the sample data, `Sketchbook` matches because it is `Art` and costs `12.99`. `Acrylic Paint Set` does not match because its price is `24.50`."
+          "parentheses_mixed_logic": {
+            "title": "Parentheses Make Mixed Logic Explicit",
+            "bodyMarkdown": "When a filter contains both `AND` and `OR`, parentheses show which choices belong together.\n\n```sql\nSELECT\n    name,\n    category,\n    price\nFROM products\nWHERE (category = 'Home' OR category = 'Art')\n  AND price < 35;\n```\n\nSQL first accepts either category inside the parentheses. It then applies the price rule to those rows. Without the parentheses, the price limit might apply to only one side of the `OR`.\n\nWrite the grouped business idea first: “Home or Art products, and all of them must be under 35.”"
           },
-          "sketch_parentheses_safety": {
-            "title": "Why parentheses make filters safer",
-            "bodyMarkdown": "When a query uses both `AND` and `OR`, parentheses help you show exactly which conditions belong together.\n\nCompare these two ideas:\n\n```sql\nSELECT name, category, price, stock\nFROM products\nWHERE category = 'Art' OR category = 'Stationery' AND stock > 20;\n```\n\nand\n\n```sql\nSELECT name, category, price, stock\nFROM products\nWHERE (category = 'Art' OR category = 'Stationery') AND stock > 20;\n```\n\nThe second version is safer for beginners because the grouping is clear.\n\nLine by line for the safer version:\n1. `category = 'Art' OR category = 'Stationery'` finds rows in either category.\n2. Parentheses force SQL to treat that category check as one grouped idea.\n3. `AND stock > 20` then keeps only rows from those categories that also have stock above 20.\n\nUsing the sample data, the grouped query returns `Sketchbook` and `Notebook` because both are in one of those categories and both have stock greater than 20."
-          },
-          "sketch_not_grouping": {
-            "title": "Combining NOT with other conditions",
-            "bodyMarkdown": "`NOT` reverses a condition. It is often easier to read when you group the condition you want to reverse.\n\nExample:\n\n```sql\nSELECT name, category, stock\nFROM products\nWHERE NOT (category = 'Home' OR stock < 10);\n```\n\nWhat this means:\n- First, SQL checks whether a row is in `Home` **or** has stock below `10`.\n- Then `NOT` flips that result.\n- So the query keeps rows that are **not** in `Home` and also do **not** have stock below `10`.\n\nFrom the sample data, `Notebook` would stay because it is not `Home` and its stock is `50`. `Desk Lamp` would be removed because it is in `Home`."
+          "not_reverses_condition": {
+            "title": "NOT Reverses the Test That Follows",
+            "bodyMarkdown": "`NOT` reverses the truth of a condition.\n\n```sql\nSELECT\n    name,\n    category\nFROM products\nWHERE NOT (category = 'Office');\n```\n\nRows in the Office category fail; other known categories pass. Parentheses make the scope of `NOT` visible and become especially useful when the reversed test contains multiple conditions.\n\nPrefer the clearest equivalent expression. For one exact exclusion, `category <> 'Office'` is simpler; `NOT` becomes more valuable for grouped logic."
           }
         }
       },
       "sql-v2-2": {
         "combining_conditions_safely": {
-          "sketch_and_or_basics": {
-            "title": "Using AND and OR together",
-            "bodyMarkdown": "When you combine conditions in a `WHERE` clause, SQL checks whether each row matches the logic you wrote.\n\n- `AND` means both conditions must be true.\n- `OR` means at least one condition must be true.\n\nHere is a simple example using the `products` table:\n\n```sql\nSELECT name, category, price\nFROM products\nWHERE category = 'Art' AND price < 20;\n```\n\nThis returns products that are in the `Art` category **and** cost less than 20.\n\nStep by step:\n1. SQL looks at each row in `products`.\n2. It checks whether `category = 'Art'`.\n3. It checks whether `price < 20`.\n4. A row stays only if **both** checks are true.\n\nWith the sample data, `Sketchbook` matches because it is `Art` and costs `12.99`. `Acrylic Paint Set` does not match because its price is `24.50`."
+          "parentheses_mixed_logic": {
+            "title": "Parentheses Make Mixed Logic Explicit",
+            "bodyMarkdown": "When a filter contains both `AND` and `OR`, parentheses show which choices belong together.\n\n```sql\nSELECT\n    name,\n    category,\n    price\nFROM products\nWHERE (category = 'Home' OR category = 'Art')\n  AND price < 35;\n```\n\nSQL first accepts either category inside the parentheses. It then applies the price rule to those rows. Without the parentheses, the price limit might apply to only one side of the `OR`.\n\nWrite the grouped business idea first: “Home or Art products, and all of them must be under 35.”"
           },
-          "sketch_parentheses_safety": {
-            "title": "Why parentheses make filters safer",
-            "bodyMarkdown": "When a query uses both `AND` and `OR`, parentheses help you show exactly which conditions belong together.\n\nCompare these two ideas:\n\n```sql\nSELECT name, category, price, stock\nFROM products\nWHERE category = 'Art' OR category = 'Stationery' AND stock > 20;\n```\n\nand\n\n```sql\nSELECT name, category, price, stock\nFROM products\nWHERE (category = 'Art' OR category = 'Stationery') AND stock > 20;\n```\n\nThe second version is safer for beginners because the grouping is clear.\n\nLine by line for the safer version:\n1. `category = 'Art' OR category = 'Stationery'` finds rows in either category.\n2. Parentheses force SQL to treat that category check as one grouped idea.\n3. `AND stock > 20` then keeps only rows from those categories that also have stock above 20.\n\nUsing the sample data, the grouped query returns `Sketchbook` and `Notebook` because both are in one of those categories and both have stock greater than 20."
-          },
-          "sketch_not_grouping": {
-            "title": "Combining NOT with other conditions",
-            "bodyMarkdown": "`NOT` reverses a condition. It is often easier to read when you group the condition you want to reverse.\n\nExample:\n\n```sql\nSELECT name, category, stock\nFROM products\nWHERE NOT (category = 'Home' OR stock < 10);\n```\n\nWhat this means:\n- First, SQL checks whether a row is in `Home` **or** has stock below `10`.\n- Then `NOT` flips that result.\n- So the query keeps rows that are **not** in `Home` and also do **not** have stock below `10`.\n\nFrom the sample data, `Notebook` would stay because it is not `Home` and its stock is `50`. `Desk Lamp` would be removed because it is in `Home`."
+          "not_reverses_condition": {
+            "title": "NOT Reverses the Test That Follows",
+            "bodyMarkdown": "`NOT` reverses the truth of a condition.\n\n```sql\nSELECT\n    name,\n    category\nFROM products\nWHERE NOT (category = 'Office');\n```\n\nRows in the Office category fail; other known categories pass. Parentheses make the scope of `NOT` visible and become especially useful when the reversed test contains multiple conditions.\n\nPrefer the clearest equivalent expression. For one exact exclusion, `category <> 'Office'` is simpler; `NOT` becomes more valuable for grouped logic."
           }
         }
       }

@@ -1,0 +1,185 @@
+{
+  "title": "INSERT with Explicit Column Lists",
+  "summary": "Learn how to use explicit column lists in INSERT statements to ensure data integrity and readability.",
+  "minutes": 28,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Why Use Explicit Column Lists in INSERT",
+      "bodyMarkdown": "When inserting data into a SQL table, it's crucial to specify the columns explicitly. This practice ensures that your data is inserted into the correct columns, even if the table schema changes. By naming the columns, you make your SQL statements more readable and less prone to errors.\n\nConsider the following example:\n\n```sql\nINSERT INTO inventory_items (name, category, price, status) VALUES ('Notebook', 'Stationery', 3.99, 'active');\n```\n\nIn this example, we specify the columns `name`, `category`, `price`, and `status`. This ensures that the values 'Notebook', 'Stationery', 3.99, and 'active' are inserted into the correct columns, regardless of the table's column order.\n\nUsing explicit column lists is especially important when dealing with tables that have many columns or when some columns have default values. It prevents accidental data misplacement and maintains data integrity."
+    },
+    {
+      "id": "sketch2",
+      "title": "Applying INSERT with Explicit Column Lists",
+      "bodyMarkdown": "Let's apply what we've learned about explicit column lists in a practical scenario. Imagine you are managing an inventory database and need to add new products. Using explicit column lists ensures that each product's details are correctly recorded.\n\nHere's an example of inserting multiple rows with explicit column lists:\n\n```sql\nINSERT INTO inventory_items (name, category, price, status) VALUES\n  ('Pen', 'Stationery', 1.50, 'active'),\n  ('Eraser', 'Stationery', 0.99, 'active');\n```\n\nIn this example, two new products, 'Pen' and 'Eraser', are added to the `inventory_items` table. By specifying the columns, we ensure that each product's details are accurately placed in the corresponding columns.\n\nThis method is not only safer but also makes your SQL scripts easier to read and maintain, especially when dealing with complex tables or when collaborating with others."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "single-choice-1",
+      "kind": "single_choice",
+      "title": "Purpose of Explicit Column Lists",
+      "prompt": "Why is it important to use explicit column lists in INSERT statements?",
+      "options": [
+        "They make the SQL statement shorter.",
+        "They ensure data is inserted into the correct columns.",
+        "They allow for faster execution of the query.",
+        "They are required by all SQL databases."
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Consider how explicit column lists affect data integrity and readability.",
+      "help": {
+        "concept": "Explicit column lists ensure data is inserted into the correct columns, maintaining data integrity.",
+        "hint_1": "Think about what happens if the table schema changes.",
+        "hint_2": "Explicit column lists prevent data from being inserted into the wrong columns."
+      }
+    },
+    {
+      "id": "multi-choice-1",
+      "kind": "multi_choice",
+      "title": "Benefits of Using Explicit Column Lists",
+      "prompt": "Select all the benefits of using explicit column lists in INSERT statements.",
+      "options": [
+        "Improves readability of SQL statements.",
+        "Ensures data is inserted into the correct columns.",
+        "Allows for faster execution of the query.",
+        "Prevents accidental data misplacement."
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "d"
+      ],
+      "hint": "Think about how explicit column lists affect data integrity and readability.",
+      "help": {
+        "concept": "Explicit column lists improve readability and prevent data misplacement.",
+        "hint_1": "Consider how explicit column lists help when the table schema changes.",
+        "hint_2": "Explicit column lists ensure data is inserted into the correct columns."
+      }
+    },
+    {
+      "id": "drag-reorder-1",
+      "kind": "drag_reorder",
+      "title": "Order of INSERT Statement Components",
+      "prompt": "Arrange the components of an INSERT statement in the correct order.",
+      "tokens": [
+        "INSERT INTO",
+        "table name",
+        "(column list)",
+        "VALUES",
+        "(value list)"
+      ],
+      "correctOrder": [
+        "INSERT INTO",
+        "table name",
+        "(column list)",
+        "VALUES",
+        "(value list)"
+      ],
+      "hint": "Start with the table name and end with the values.",
+      "help": {
+        "concept": "An INSERT statement begins with the table name and ends with the values to be inserted.",
+        "hint_1": "The table name comes after INSERT INTO.",
+        "hint_2": "The VALUES keyword comes after the column list."
+      }
+    },
+    {
+      "id": "fill-blank-choice-1",
+      "kind": "fill_blank_choice",
+      "title": "INSERT Statement Syntax",
+      "prompt": "Complete the INSERT statement syntax: INSERT INTO [blank1] (column list) VALUES (value list).",
+      "template": "INSERT INTO [blank1] (column list) VALUES (value list).",
+      "choices": [
+        "table name",
+        "column name",
+        "value list",
+        "database name"
+      ],
+      "correctValue": "table name",
+      "hint": "The blank should be filled with the name of the table.",
+      "help": {
+        "concept": "The the missing term is specified after INSERT INTO in an INSERT statement.",
+        "hint_1": "The the missing term follows INSERT INTO.",
+        "hint_2": "The the missing term is where the data will be inserted."
+      }
+    },
+    {
+      "id": "try-insert-with-explicit-column-lists-sketch0",
+      "kind": "code_input",
+      "title": "Try It: Insert a New Product",
+      "prompt": "Insert a new product into the inventory_items table with the following details: name 'Notebook', category 'Stationery', price 3.99, and status 'active'. Use an explicit column list.",
+      "starterCode": "-- Insert a new product into the inventory_items table\nINSERT INTO inventory_items (name, category, price, status) VALUES",
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "-- Insert a new product into the inventory_items table\nINSERT INTO inventory_items (name, category, price, status) VALUES",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "INSERT INTO inventory_items (name, category, price, status) VALUES ('Notebook', 'Stationery', 3.99, 'active');\nSELECT * FROM inventory_items WHERE name = 'Notebook';",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionCode": "INSERT INTO inventory_items (name, category, price, status) VALUES ('Notebook', 'Stationery', 3.99, 'active');\nSELECT * FROM inventory_items WHERE name = 'Notebook';",
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query",
+      "checkSql": "SELECT * FROM inventory_items WHERE name = 'Notebook';",
+      "hint": "Ensure you specify the columns explicitly in the INSERT statement.",
+      "help": {
+        "concept": "Using explicit column lists ensures data is inserted into the correct columns.",
+        "hint_1": "List the columns in the INSERT statement before the VALUES keyword.",
+        "hint_2": "Match each value to its corresponding column."
+      }
+    },
+    {
+      "id": "try-insert-with-explicit-column-lists-sketch1",
+      "kind": "code_input",
+      "title": "Try It: Insert Multiple Products",
+      "prompt": "Insert two new products into the inventory_items table: 'Pen' in 'Stationery' category priced at 1.50 and 'Eraser' in 'Stationery' category priced at 0.99. Use explicit column lists.",
+      "starterCode": "-- Insert multiple products into the inventory_items table\nINSERT INTO inventory_items (name, category, price, status) VALUES",
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "-- Insert multiple products into the inventory_items table\nINSERT INTO inventory_items (name, category, price, status) VALUES",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "INSERT INTO inventory_items (name, category, price, status) VALUES \n  ('Pen', 'Stationery', 1.50, 'active'),\n  ('Eraser', 'Stationery', 0.99, 'active');\nSELECT * FROM inventory_items WHERE name IN ('Pen', 'Eraser');",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionCode": "INSERT INTO inventory_items (name, category, price, status) VALUES \n  ('Pen', 'Stationery', 1.50, 'active'),\n  ('Eraser', 'Stationery', 0.99, 'active');\nSELECT * FROM inventory_items WHERE name IN ('Pen', 'Eraser');",
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query",
+      "checkSql": "SELECT * FROM inventory_items WHERE name IN ('Pen', 'Eraser');",
+      "hint": "Use a single INSERT statement with multiple VALUES tuples.",
+      "help": {
+        "concept": "Explicit column lists ensure each value is inserted into the correct column.",
+        "hint_1": "Use a comma to separate multiple VALUES tuples.",
+        "hint_2": "Ensure each tuple matches the column list order."
+      }
+    }
+  ]
+}

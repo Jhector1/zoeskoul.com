@@ -1284,6 +1284,43 @@
               ],
               "practice": {
                 "projectFlow": "progressive"
+              },
+              "projectBrief": {
+                "scenario": "A community outreach coordinator needs a concise customer follow-up list built from the cleanup table. The report must keep only useful, contactable records and rank the most recent signups first.",
+                "role": "Junior SQL analyst preparing a customer follow-up handoff",
+                "workspace": "Browser SQL editor, customers table schema, and deterministic results table",
+                "deliverable": "One four-step cumulative customer follow-up query that combines the core SQL Foundations skills without losing earlier requirements.",
+                "stepCountTarget": 4,
+                "flow": "progressive",
+                "requirements": [
+                  "Keep one valid SELECT statement in every step.",
+                  "Use the previous complete solution as the next starter query.",
+                  "Preserve every earlier requirement unless the current step explicitly replaces it.",
+                  "Use only SQL concepts taught in SQL Foundations.",
+                  "Finish with deterministic ordering and a practical row limit."
+                ],
+                "stepLadder": [
+                  {
+                    "step": 1,
+                    "title": "Build the Follow-Up Candidate List",
+                    "requirement": "Return the requested customer columns and keep only records whose status is active or draft using IN."
+                  },
+                  {
+                    "step": 2,
+                    "title": "Keep Contactable Customers",
+                    "requirement": "Preserve the candidate list and require a non-missing email address with IS NOT NULL."
+                  },
+                  {
+                    "step": 3,
+                    "title": "Apply the Date and Text Rules",
+                    "requirement": "Keep all prior filters, add the authored signup-date range with BETWEEN, and exclude test-style names with a LIKE-based condition."
+                  },
+                  {
+                    "step": 4,
+                    "title": "Rank and Limit the Final Handoff",
+                    "requirement": "Preserve every filter, sort the newest signups first with a stable secondary sort, and limit the report to the requested number of rows."
+                  }
+                ]
               }
             }
           ]

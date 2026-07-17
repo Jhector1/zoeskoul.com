@@ -1,5 +1,7 @@
 import type { TopicAuthoringDraft, TopicSeed } from "@zoeskoul/curriculum-contracts";
 import type { SemanticValidationIssue } from "./profileServices.js";
+import { validateTeachingProseQuality } from "./validateTeachingProseQuality.js";
+import { validateWorkedExampleTryItDistinctness } from "./validateWorkedExampleTryItDistinctness.js";
 
 function hasCodeFence(text: string): boolean {
     return /```[\s\S]*?```/.test(text);
@@ -90,6 +92,14 @@ export function validateProgrammingTeachingSketches(args: {
     const combined = bodies.join("\n\n");
     const projectLike = isProjectLikeTopic(args.seed);
 
+    issues.push(
+        ...validateTeachingProseQuality({
+            profileId: args.profileId,
+            draft: { ...args.draft, sketchBlocks: blocks },
+            projectLike,
+        }),
+    );
+
     if (!projectLike && !bodies.some((body: string) => hasWorkedExample(body))) {
         issues.push({
             code: "PROGRAMMING_WORKED_EXAMPLE_MISSING",
@@ -145,6 +155,14 @@ export function validateProgrammingTeachingSketches(args: {
                 `Programming profile "${args.profileId}" uses all_sketches Try It policy, but has ${actualCodeInputs} code_input exercise(s) for ${blocks.length} sketch block(s).`,
         });
     }
+
+    issues.push(
+        ...validateWorkedExampleTryItDistinctness({
+            profileId: args.profileId,
+            seed: args.seed,
+            draft: args.draft,
+        }),
+    );
 
     return issues;
 }

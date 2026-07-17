@@ -1,0 +1,197 @@
+{
+  "topics": {
+    "sql-data-management": {
+      "sql-data-management-module-2-table-creation-constraints": {
+        "foreign-keys-and-references": {
+          "label": "FOREIGN KEY and REFERENCES",
+          "summary": "Declare which parent key a child-table column points to so the relationship is part of the schema rather than only a query convention.",
+          "cards": {
+            "sketch0": {
+              "title": "Defining FOREIGN KEY Constraints"
+            },
+            "sketch1": {
+              "title": "Implementing FOREIGN KEY Constraints"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_foreign_keys_and_references_sketch0": {
+              "title": "Link Departments to Employees",
+              "prompt": "The employee directory already exists in `schema.sql`. In `query.sql`, create `departments` with `id INTEGER PRIMARY KEY`, `name TEXT NOT NULL`, and an optional `manager_id INTEGER`. Add a foreign-key constraint from `departments.manager_id` to `employees.id`.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result for: \"Try It: Create a Table with FOREIGN KEY\".",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Click Run query and compare the results table with the expected result."
+              },
+              "starterCode": "-- Create the departments table\nCREATE TABLE departments (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    manager_id INTEGER,\n    -- Add the FOREIGN KEY constraint here\n);",
+              "solutionCode": "-- Create the departments table\nCREATE TABLE departments (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    manager_id INTEGER,\n    FOREIGN KEY (manager_id) REFERENCES employees(id)\n);",
+              "starterFiles": {
+                "schema_sql": {
+                  "content": "-- Schema for the employees table\nCREATE TABLE employees (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL\n);"
+                },
+                "query_sql": {
+                  "content": "-- Create the departments table\nCREATE TABLE departments (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    manager_id INTEGER,\n    -- Add the FOREIGN KEY constraint here\n);"
+                }
+              },
+              "solutionFiles": {
+                "schema_sql": {
+                  "content": "-- Schema for the employees table\nCREATE TABLE employees (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL\n);"
+                },
+                "query_sql": {
+                  "content": "-- Create the departments table\nCREATE TABLE departments (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    manager_id INTEGER,\n    FOREIGN KEY (manager_id) REFERENCES employees(id)\n);"
+                }
+              }
+            },
+            "try_foreign_keys_and_references_sketch1": {
+              "title": "Link Order Items to Orders and Products",
+              "prompt": "The sales database already has `orders` and `products`. In `query.sql`, create `order_items` with `id INTEGER PRIMARY KEY`, optional `order_id INTEGER`, optional `product_id INTEGER`, and `quantity INTEGER NOT NULL`. Add one foreign key from `order_id` to `orders.id` and another from `product_id` to `products.id`.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "-- Verify the order_items table\nCREATE TABLE order_items (\n    id INTEGER PRIMARY KEY,\n    order_id INTEGER,\n    product_id INTEGER,\n    quantity INTEGER NOT NULL,\n    -- Verify the FOREIGN KEY constraints here\n);",
+              "solutionCode": "-- Verify the order_items table\nCREATE TABLE order_items (\n    id INTEGER PRIMARY KEY,\n    order_id INTEGER,\n    product_id INTEGER,\n    quantity INTEGER NOT NULL,\n    FOREIGN KEY (order_id) REFERENCES orders(id),\n    FOREIGN KEY (product_id) REFERENCES products(id)\n);",
+              "starterFiles": {
+                "schema_sql": {
+                  "content": "-- Schema for the orders and products tables\nCREATE TABLE orders (\n    id INTEGER PRIMARY KEY,\n    order_date TEXT NOT NULL\n);\n\nCREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    price REAL NOT NULL\n);"
+                },
+                "query_sql": {
+                  "content": "-- Verify the order_items table\nCREATE TABLE order_items (\n    id INTEGER PRIMARY KEY,\n    order_id INTEGER,\n    product_id INTEGER,\n    quantity INTEGER NOT NULL,\n    -- Verify the FOREIGN KEY constraints here\n);"
+                }
+              },
+              "solutionFiles": {
+                "schema_sql": {
+                  "content": "-- Schema for the orders and products tables\nCREATE TABLE orders (\n    id INTEGER PRIMARY KEY,\n    order_date TEXT NOT NULL\n);\n\nCREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    price REAL NOT NULL\n);"
+                },
+                "query_sql": {
+                  "content": "-- Verify the order_items table\nCREATE TABLE order_items (\n    id INTEGER PRIMARY KEY,\n    order_id INTEGER,\n    product_id INTEGER,\n    quantity INTEGER NOT NULL,\n    FOREIGN KEY (order_id) REFERENCES orders(id),\n    FOREIGN KEY (product_id) REFERENCES products(id)\n);"
+                }
+              }
+            }
+          },
+          "practice": {
+            "single-choice-foreign-key-purpose": {
+              "title": "Purpose of FOREIGN KEY",
+              "prompt": "What is the primary purpose of a FOREIGN KEY in a database?",
+              "hint": "Consider how a FOREIGN KEY maintains relationships between tables.",
+              "help": {
+                "concept": "A FOREIGN KEY is used to enforce referential integrity between tables by ensuring that a column in one table matches a column in another table.",
+                "hint_1": "Think about how a FOREIGN KEY connects tables.",
+                "hint_2": "A FOREIGN KEY ensures that a value in one table corresponds to a valid entry in another table."
+              },
+              "options": {
+                "a": "To enforce data types",
+                "b": "To ensure referential integrity",
+                "c": "To improve query performance",
+                "d": "To store large amounts of data"
+              }
+            },
+            "multi-choice-foreign-key-benefits": {
+              "title": "Benefits of FOREIGN KEY",
+              "prompt": "Which of the following are benefits of using FOREIGN KEY constraints? Select all that apply.",
+              "hint": "Think about how FOREIGN KEY constraints affect data integrity and relationships.",
+              "help": {
+                "concept": "FOREIGN KEY constraints help maintain data integrity by ensuring that relationships between tables are consistent.",
+                "hint_1": "Consider how FOREIGN KEY constraints prevent invalid data entries.",
+                "hint_2": "FOREIGN KEY constraints ensure that data in one table corresponds to data in another table."
+              },
+              "options": {
+                "a": "Preventing orphan records",
+                "b": "Improving query speed",
+                "c": "Ensuring data consistency",
+                "d": "Reducing storage space"
+              }
+            },
+            "drag-reorder-foreign-key-steps": {
+              "title": "Steps to Implement FOREIGN KEY",
+              "prompt": "Arrange the steps to implement a FOREIGN KEY constraint in the correct order.",
+              "hint": "Start with defining the parent table and end with defining the foreign key constraint.",
+              "help": {
+                "concept": "Implementing a FOREIGN KEY involves creating the parent table, then the child table, and finally defining the FOREIGN KEY constraint.",
+                "hint_1": "Begin with creating the parent table.",
+                "hint_2": "End with defining the FOREIGN KEY in the child table."
+              },
+              "tokens": {
+                "t1": "Create the parent table",
+                "t2": "Create the child table",
+                "t3": "Define the FOREIGN KEY constraint"
+              }
+            },
+            "fill-blank-choice-foreign-key-syntax": {
+              "title": "FOREIGN KEY Syntax",
+              "prompt": "Complete the syntax for declaring a FOREIGN KEY constraint.",
+              "hint": "Remember the structure of a FOREIGN KEY declaration.",
+              "help": {
+                "concept": "A FOREIGN KEY declaration specifies the child column and the parent table and column it references.",
+                "hint_1": "The syntax involves the FOREIGN KEY keyword followed by the column and REFERENCES clause.",
+                "hint_2": "Ensure you specify both the child column and the parent table and column."
+              },
+              "template": "FOREIGN KEY ([blank1]) REFERENCES parent_table(parent_column)",
+              "choices": [
+                "child_column",
+                "parent_column",
+                "table_name",
+                "constraint_name"
+              ]
+            },
+            "fill-blank-choice-foreign-key-constraint": {
+              "title": "FOREIGN KEY Constraint",
+              "prompt": "Identify the correct keyword to declare a FOREIGN KEY constraint in SQL.",
+              "hint": "This keyword is used to establish a relationship between two tables.",
+              "help": {
+                "concept": "The the missing term KEY keyword is used to declare a constraint that links two tables.",
+                "hint_1": "This keyword is part of the SQL syntax for defining relationships.",
+                "hint_2": "It is used to ensure referential integrity between tables."
+              },
+              "template": "[blank1] KEY (column_name) REFERENCES other_table(column_name)",
+              "choices": [
+                "FOREIGN",
+                "PRIMARY",
+                "UNIQUE",
+                "CHECK"
+              ]
+            },
+            "multi-choice-foreign-key-requirements": {
+              "title": "FOREIGN KEY Requirements",
+              "prompt": "What are the requirements for a column to be a FOREIGN KEY? Select all that apply.",
+              "hint": "Consider the relationship between the child and parent tables.",
+              "help": {
+                "concept": "A FOREIGN KEY must reference a column in another table, and both columns must have compatible data types.",
+                "hint_1": "The referenced column must exist in the parent table.",
+                "hint_2": "The data types of the foreign key and the referenced column must be compatible."
+              },
+              "options": {
+                "a": "The column must be unique",
+                "b": "The column must reference a primary key",
+                "c": "The column must have the same data type as the referenced column",
+                "d": "The column must be indexed"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql-data-management": {
+      "sql-data-management-module-2-table-creation-constraints": {
+        "foreign-keys-and-references": {
+          "sketch-foreign-key-intro": {
+            "title": "Defining FOREIGN KEY Constraints",
+            "bodyMarkdown": "A FOREIGN KEY in SQL is a field (or collection of fields) in one table that uniquely identifies a row of another table. The table containing the foreign key is called the child table, and the table containing the candidate key is called the parent table. This relationship enforces referential integrity between the two tables.\n\n### Example\nConsider two tables: `orders` and `customers`. The `orders` table has a column `customer_id` that references the `id` column in the `customers` table. This ensures that every order is associated with a valid customer.\n\n```sql\nCREATE TABLE customers (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL\n);\n\nCREATE TABLE orders (\n    id INTEGER PRIMARY KEY,\n    order_date TEXT NOT NULL,\n    customer_id INTEGER,\n    FOREIGN KEY (customer_id) REFERENCES customers(id)\n);\n```\n\nIn this example, the `customer_id` in the `orders` table is a foreign key that references the `id` column in the `customers` table. This setup ensures that you cannot have an order with a `customer_id` that does not exist in the `customers` table."
+          },
+          "sketch-foreign-key-usage": {
+            "title": "Implementing FOREIGN KEY Constraints",
+            "bodyMarkdown": "Implementing FOREIGN KEY constraints helps maintain data integrity by ensuring that relationships between tables remain consistent. When you define a FOREIGN KEY, you are specifying that a column in one table must match a column in another table.\n\n### Example\nLet's extend our previous example by adding a `products` table and an `order_items` table. Each order item will reference both an order and a product.\n\n```sql\nCREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    price REAL NOT NULL\n);\n\nCREATE TABLE order_items (\n    id INTEGER PRIMARY KEY,\n    order_id INTEGER,\n    product_id INTEGER,\n    quantity INTEGER NOT NULL,\n    FOREIGN KEY (order_id) REFERENCES orders(id),\n    FOREIGN KEY (product_id) REFERENCES products(id)\n);\n```\n\nHere, `order_items` has two foreign keys: `order_id` references `orders(id)`, and `product_id` references `products(id)`. This ensures that each order item is linked to a valid order and product, maintaining the integrity of the data across these tables."
+          }
+        }
+      }
+    }
+  }
+}

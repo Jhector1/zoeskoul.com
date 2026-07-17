@@ -5,6 +5,7 @@ import { awardValidateGamification } from "@/lib/gamification/awardValidateGamif
 
 import type { PracticeValidateContext } from "./types";
 import { getExpectedCanon } from "./mappers/expected.mapper";
+import { selectExpectedCanonForValidation } from "./services/currentAuthoredSqlExpected.service";
 import { gradeInstance } from "./services/grading.service";
 import { assertAnswerKindMatchesInstance } from "./guards/instance.guard";
 import { computeCanReveal } from "./policies/validate.policy";
@@ -250,9 +251,14 @@ export async function handlePracticeValidate(ctx: PracticeValidateContext) {
         );
     }
 
+    const effectiveExpectedCanon = selectExpectedCanonForValidation({
+        instance,
+        persistedExpected: expectedCanon,
+    });
+
     const graded = await gradeInstance({
         instance,
-        expectedCanon,
+        expectedCanon: effectiveExpectedCanon,
         answer: isReveal ? null : answer!,
         showDebug: Boolean(session?.assignment?.showDebug),
     });

@@ -12,7 +12,8 @@ import { getSqlDatasetById } from "../sql/datasets/index.js";
 import type { GoldenValidationReport } from "./profileServices.js";
 import { makeEmptyGoldenValidationReport } from "./noopReports.js";
 import { resolveEffectiveExerciseRuntime } from "@zoeskoul/curriculum-runtime/runtime";
-import { resolveSqlRunner, validateSqlAgainstSolution } from "@zoeskoul/curriculum-runtime/sql";
+import { validateSqlSubmission } from "@zoeskoul/curriculum-runtime/sql";
+import { resolveSqlRunner } from "@zoeskoul/curriculum-runtime/sql/local";
 
 function formatSqlContext(args: {
     subjectSlug: string;
@@ -148,8 +149,9 @@ export async function validateGoldenTopicBundle(args: {
             });
             continue;
         }
-        const result = await validateSqlAgainstSolution({
+        const result = await validateSqlSubmission({
             learnerSql: expected.solutionCode ?? "",
+            compareTo: "solution",
             solutionSql: expected.solutionCode ?? "",
             checkSql: firstTest?.checkSql,
             dialect:

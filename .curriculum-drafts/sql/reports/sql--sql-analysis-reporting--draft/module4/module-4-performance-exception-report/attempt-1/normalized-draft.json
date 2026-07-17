@@ -1,0 +1,121 @@
+{
+  "title": "Module 4: Performance Exception Report",
+  "summary": "Build a grouped exception report with row filtering, HAVING thresholds, conditional KPIs, and performance labels.",
+  "minutes": 55,
+  "sketchBlocks": [
+    {
+      "id": "module-4-performance-exception-report-sketch0",
+      "title": "Introduction to Performance Exception Reporting",
+      "bodyMarkdown": "In this module, you'll learn how to create a performance exception report using SQL. This involves filtering data at both the row and group levels, applying conditional logic to aggregate functions, and labeling performance based on aggregate results. We'll use the `sales_reporting` table from the `sales_kpi` dataset to demonstrate these concepts."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "try-module-4-performance-exception-report-sketch0",
+      "kind": "code_input",
+      "title": "Filter Rows and Groups",
+      "prompt": "Write a query to filter the `sales_reporting` table to show only completed orders in the 'North' region. Then, group by `category` and show only those groups with a total quantity greater than 10.",
+      "starterCode": "SELECT category, SUM(quantity) AS total_quantity\nFROM sales_reporting\nWHERE order_status = 'Completed' AND region = 'North'\nGROUP BY category\nHAVING total_quantity > 10;",
+      "solutionCode": "SELECT category, SUM(quantity) AS total_quantity\nFROM sales_reporting\nWHERE order_status = 'Completed' AND region = 'North'\nGROUP BY category\nHAVING total_quantity > 10;",
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query",
+      "hint": "Use WHERE to filter rows and HAVING to filter groups.",
+      "help": {
+        "concept": "Use WHERE for row-level filtering and HAVING for group-level filtering.",
+        "hint_1": "Start with a WHERE clause to filter completed orders in the 'North' region.",
+        "hint_2": "Use HAVING to filter groups where the total quantity is greater than 10."
+      }
+    },
+    {
+      "id": "try-module-4-performance-exception-report-sketch1",
+      "kind": "code_input",
+      "title": "Conditional Aggregation with CASE",
+      "prompt": "Create a query that counts the number of completed and pending orders for each `sales_rep`. Use a CASE statement inside the COUNT function to differentiate between the two statuses.",
+      "starterCode": "SELECT sales_rep,\n  COUNT(CASE WHEN order_status = 'Completed' THEN 1 END) AS completed_orders,\n  COUNT(CASE WHEN order_status = 'Pending' THEN 1 END) AS pending_orders\nFROM sales_reporting\nGROUP BY sales_rep;",
+      "solutionCode": "SELECT sales_rep,\n  COUNT(CASE WHEN order_status = 'Completed' THEN 1 END) AS completed_orders,\n  COUNT(CASE WHEN order_status = 'Pending' THEN 1 END) AS pending_orders\nFROM sales_reporting\nGROUP BY sales_rep;",
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query",
+      "hint": "Use CASE inside COUNT to conditionally count orders based on status.",
+      "help": {
+        "concept": "CASE can be used inside aggregate functions to conditionally count or sum values.",
+        "hint_1": "Use CASE to check the order status inside the COUNT function.",
+        "hint_2": "Count completed and pending orders separately using CASE."
+      }
+    },
+    {
+      "id": "try-module-4-performance-exception-report-sketch2",
+      "kind": "code_input",
+      "title": "Label Performance with CASE",
+      "prompt": "Write a query to label each `category` as 'High Performance' if the average `customer_rating` is above 4.5, otherwise label it as 'Needs Improvement'.",
+      "starterCode": "SELECT category,\n  CASE\n    WHEN AVG(customer_rating) > 4.5 THEN 'High Performance'\n    ELSE 'Needs Improvement'\n  END AS performance_label\nFROM sales_reporting\nGROUP BY category;",
+      "solutionCode": "SELECT category,\n  CASE\n    WHEN AVG(customer_rating) > 4.5 THEN 'High Performance'\n    ELSE 'Needs Improvement'\n  END AS performance_label\nFROM sales_reporting\nGROUP BY category;",
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query",
+      "hint": "Use CASE to assign labels based on the average customer rating.",
+      "help": {
+        "concept": "CASE can be used to assign labels based on conditions.",
+        "hint_1": "Calculate the average customer rating for each category.",
+        "hint_2": "Use CASE to label categories based on the average rating."
+      }
+    },
+    {
+      "id": "try-module-4-performance-exception-report-sketch3",
+      "kind": "code_input",
+      "title": "Calculate Total Sales with Discounts",
+      "prompt": "Create a query to calculate the total sales for each `region`, considering discounts. Use the formula: `quantity * unit_price * (1 - discount_pct/100)` for each sale.",
+      "starterCode": "SELECT region,\n  SUM(quantity * unit_price * (1 - COALESCE(discount_pct, 0)/100)) AS total_sales\nFROM sales_reporting\nGROUP BY region;",
+      "solutionCode": "SELECT region,\n  SUM(quantity * unit_price * (1 - COALESCE(discount_pct, 0)/100)) AS total_sales\nFROM sales_reporting\nGROUP BY region;",
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query",
+      "hint": "Incorporate discounts into the total sales calculation using arithmetic expressions.",
+      "help": {
+        "concept": "Use arithmetic expressions to calculate total sales considering discounts.",
+        "hint_1": "Multiply quantity by unit price and adjust for discount percentage.",
+        "hint_2": "Use SUM to aggregate total sales for each region."
+      }
+    },
+    {
+      "id": "try-module-4-performance-exception-report-sketch4",
+      "kind": "code_input",
+      "title": "Identify Underperforming Products",
+      "prompt": "Write a query to identify products with an average `customer_rating` below 4.0. List the `product_name` and the average rating.",
+      "starterCode": "SELECT product_name, AVG(customer_rating) AS avg_rating\nFROM sales_reporting\nGROUP BY product_name\nHAVING avg_rating < 4.0;",
+      "solutionCode": "SELECT product_name, AVG(customer_rating) AS avg_rating\nFROM sales_reporting\nGROUP BY product_name\nHAVING avg_rating < 4.0;",
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query",
+      "hint": "Use HAVING to filter products based on average customer rating.",
+      "help": {
+        "concept": "HAVING can filter groups based on aggregate conditions.",
+        "hint_1": "Calculate the average customer rating for each product.",
+        "hint_2": "Use HAVING to filter products with an average rating below 4.0."
+      }
+    },
+    {
+      "id": "try-module-4-performance-exception-report-sketch5",
+      "kind": "code_input",
+      "title": "Summarize Sales by Category and Status",
+      "prompt": "Create a query to summarize total sales by `category` and `order_status`. Include only categories with total sales over $500.",
+      "starterCode": "SELECT category, order_status,\n  SUM(quantity * unit_price) AS total_sales\nFROM sales_reporting\nGROUP BY category, order_status\nHAVING total_sales > 500;",
+      "solutionCode": "SELECT category, order_status,\n  SUM(quantity * unit_price) AS total_sales\nFROM sales_reporting\nGROUP BY category, order_status\nHAVING total_sales > 500;",
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query",
+      "hint": "Use GROUP BY with multiple columns and HAVING to filter by total sales.",
+      "help": {
+        "concept": "GROUP BY can be used with multiple columns to create detailed summaries.",
+        "hint_1": "Group by both category and order status.",
+        "hint_2": "Use HAVING to filter categories with total sales over $500."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Performance Exception Report Project",
+    "stepIds": [
+      "try-module-4-performance-exception-report-sketch0",
+      "try-module-4-performance-exception-report-sketch1",
+      "try-module-4-performance-exception-report-sketch2",
+      "try-module-4-performance-exception-report-sketch3",
+      "try-module-4-performance-exception-report-sketch4",
+      "try-module-4-performance-exception-report-sketch5"
+    ]
+  }
+}

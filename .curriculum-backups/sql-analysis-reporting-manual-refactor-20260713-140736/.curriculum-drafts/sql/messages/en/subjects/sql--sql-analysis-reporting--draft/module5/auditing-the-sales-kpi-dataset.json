@@ -1,0 +1,153 @@
+{
+  "topics": {
+    "sql--sql-analysis-reporting--draft": {
+      "sql-analysis-reporting-module-5-final-capstone": {
+        "auditing-the-sales-kpi-dataset": {
+          "label": "Auditing the sales_kpi Dataset",
+          "summary": "Run focused checks for available categories, statuses, ranges, and missing values.",
+          "cards": {
+            "sketch0": {
+              "title": "Introduction to the Capstone Project"
+            },
+            "project": {
+              "title": "Executive Sales Performance Report"
+            }
+          },
+          "projectSteps": {
+            "try_auditing_the_sales_kpi_dataset_sketch0": {
+              "title": "Check for Distinct Categories"
+            },
+            "try_auditing_the_sales_kpi_dataset_sketch1": {
+              "title": "Identify Missing Customer Ratings"
+            },
+            "try_auditing_the_sales_kpi_dataset_sketch2": {
+              "title": "Calculate Total Sales per Region"
+            },
+            "try_auditing_the_sales_kpi_dataset_sketch3": {
+              "title": "Find Orders with High Discounts"
+            },
+            "try_auditing_the_sales_kpi_dataset_sketch4": {
+              "title": "Determine Average Customer Rating by Category"
+            }
+          },
+          "finalCapstone": {
+            "steps": {
+              "try_auditing_the_sales_kpi_dataset_sketch0": {
+                "title": "Check for Distinct Categories",
+                "prompt": "Start the final capstone project. In step 1 of 5, Write a query to find all distinct categories in the `sales_reporting` table. This will help you understand the variety of products available.",
+                "hint": "This is the first project step. Build a clean starting version, then run it before moving on.",
+                "help": {
+                  "concept": "The final capstone is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "This is the first project step. Build a clean starting version, then run it before moving on.",
+                  "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+                },
+                "starterCode": "-- Write your SQL answer below",
+                "solutionCode": "SELECT DISTINCT category FROM sales_reporting;"
+              },
+              "try_auditing_the_sales_kpi_dataset_sketch1": {
+                "title": "Identify Missing Customer Ratings",
+                "prompt": "Continue the final capstone project from the previous working step. In step 2 of 5, Write a query to find all records in the `sales_reporting` table where the `customer_rating` is missing. This will help you identify incomplete data.",
+                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "help": {
+                  "concept": "The final capstone is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                  "hint_2": "Run the previous working code first, then make only the focused change for this step."
+                },
+                "starterCode": "SELECT DISTINCT category FROM sales_reporting;\n-- Capstone step 2: Identify Missing Customer Ratings\n-- Keep the working code above from the previous step.\n-- Next, Write a query to find all records in the `sales_reporting` table where the `customer_rating` is missing\n-- Add only the focused change for this step inside the existing work.\n",
+                "solutionCode": "SELECT * FROM sales_reporting WHERE customer_rating IS NULL;\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "SELECT DISTINCT category FROM sales_reporting;\n-- Capstone step 2: Identify Missing Customer Ratings\n-- Keep the working code above from the previous step.\n-- Next, Write a query to find all records in the `sales_reporting` table where the `customer_rating` is missing\n-- Add only the focused change for this step inside the existing work.\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_py": {
+                    "content": "SELECT * FROM sales_reporting WHERE customer_rating IS NULL;\n"
+                  }
+                }
+              },
+              "try_auditing_the_sales_kpi_dataset_sketch2": {
+                "title": "Calculate Total Sales per Region",
+                "prompt": "Continue the final capstone project from the previous working step. In step 3 of 5, Write a query to calculate the total sales for each region in the `sales_reporting` table. This will help you understand regional sales performance.",
+                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "help": {
+                  "concept": "The final capstone is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                  "hint_2": "Run the previous working code first, then make only the focused change for this step."
+                },
+                "starterCode": "SELECT * FROM sales_reporting WHERE customer_rating IS NULL;\n-- Capstone step 3: Calculate Total Sales per Region\n-- Keep the working code above from the previous step.\n-- Next, Write a query to calculate the total sales for each region in the `sales_reporting` table\n-- Add only the focused change for this step inside the existing work.\n",
+                "solutionCode": "SELECT region, SUM(quantity * unit_price) AS total_sales FROM sales_reporting GROUP BY region;\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "SELECT * FROM sales_reporting WHERE customer_rating IS NULL;\n-- Capstone step 3: Calculate Total Sales per Region\n-- Keep the working code above from the previous step.\n-- Next, Write a query to calculate the total sales for each region in the `sales_reporting` table\n-- Add only the focused change for this step inside the existing work.\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_py": {
+                    "content": "SELECT region, SUM(quantity * unit_price) AS total_sales FROM sales_reporting GROUP BY region;\n"
+                  }
+                }
+              },
+              "try_auditing_the_sales_kpi_dataset_sketch3": {
+                "title": "Find Orders with High Discounts",
+                "prompt": "Continue the final capstone project from the previous working step. In step 4 of 5, Write a query to find all orders in the `sales_reporting` table where the discount percentage is greater than 10%. This will help you identify heavily discounted sales.",
+                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "help": {
+                  "concept": "The final capstone is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                  "hint_2": "Run the previous working code first, then make only the focused change for this step."
+                },
+                "starterCode": "SELECT region, SUM(quantity * unit_price) AS total_sales FROM sales_reporting GROUP BY region;\n-- Capstone step 4: Find Orders with High Discounts\n-- Keep the working code above from the previous step.\n-- Next, Write a query to find all orders in the `sales_reporting` table where the discount percentage is greater than 10%\n-- Add only the focused change for this step inside the existing work.\n",
+                "solutionCode": "SELECT * FROM sales_reporting WHERE discount_pct > 10;\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "SELECT region, SUM(quantity * unit_price) AS total_sales FROM sales_reporting GROUP BY region;\n-- Capstone step 4: Find Orders with High Discounts\n-- Keep the working code above from the previous step.\n-- Next, Write a query to find all orders in the `sales_reporting` table where the discount percentage is greater than 10%\n-- Add only the focused change for this step inside the existing work.\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_py": {
+                    "content": "SELECT * FROM sales_reporting WHERE discount_pct > 10;\n"
+                  }
+                }
+              },
+              "try_auditing_the_sales_kpi_dataset_sketch4": {
+                "title": "Determine Average Customer Rating by Category",
+                "prompt": "Continue the final capstone project from the previous working step. In step 5 of 5, Write a query to determine the average customer rating for each product category in the `sales_reporting` table. This will help you assess customer satisfaction across categories.",
+                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "help": {
+                  "concept": "The final capstone is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                  "hint_2": "Run the previous working code first, then make only the focused change for this step."
+                },
+                "starterCode": "SELECT * FROM sales_reporting WHERE discount_pct > 10;\n-- Capstone step 5: Determine Average Customer Rating by Category\n-- Keep the working code above from the previous step.\n-- Next, Write a query to determine the average customer rating for each product category in the `sales_reporting` table\n-- Add only the focused change for this step inside the existing work.\n",
+                "solutionCode": "SELECT category, AVG(customer_rating) AS avg_rating FROM sales_reporting GROUP BY category;\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "SELECT * FROM sales_reporting WHERE discount_pct > 10;\n-- Capstone step 5: Determine Average Customer Rating by Category\n-- Keep the working code above from the previous step.\n-- Next, Write a query to determine the average customer rating for each product category in the `sales_reporting` table\n-- Add only the focused change for this step inside the existing work.\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_py": {
+                    "content": "SELECT category, AVG(customer_rating) AS avg_rating FROM sales_reporting GROUP BY category;\n"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql--sql-analysis-reporting--draft": {
+      "sql-analysis-reporting-module-5-final-capstone": {
+        "auditing-the-sales-kpi-dataset": {
+          "sketch1": {
+            "title": "Introduction to the Capstone Project",
+            "bodyMarkdown": "In this final capstone project, you will take on the role of a data analyst tasked with auditing the `sales_kpi` dataset. Your goal is to prepare a comprehensive executive sales performance report. This involves checking for available categories, statuses, ranges, and identifying any missing values. By the end of this project, you will have a polished SQL query that provides insights into sales performance, ready for presentation to stakeholders."
+          }
+        }
+      }
+    }
+  }
+}

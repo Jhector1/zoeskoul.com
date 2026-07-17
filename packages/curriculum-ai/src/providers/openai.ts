@@ -1,11 +1,23 @@
 import OpenAI from "openai";
 
-import type { AiProvider, GenerateJsonArgs, GeneratedJsonResult } from "../types.js";
+import type {
+  AiProvider,
+  GenerateJsonArgs,
+  GeneratedJsonMetadata,
+  GeneratedJsonResult,
+} from "../types.js";
 import { GeneratedJsonError } from "../types.js";
 
 type JsonSchema = Record<string, unknown>;
 const OPENAI_DEFAULT_TEMPERATURE = 0;
+const OPENAI_API_DEFAULT_TEMPERATURE = 1;
 const OPENAI_DETERMINISTIC_SEED = 0;
+
+function supportsDeterministicSamplingParameters(model: string): boolean {
+  // GPT-5-family Chat Completions models accept only their default sampling
+  // behavior. Omitting both fields is safer than sending unsupported values.
+  return !/^gpt-5(?:[.-]|$)/i.test(model.trim());
+}
 
 export type OpenAiProviderOptions = {
   model?: string;
@@ -50,6 +62,63 @@ const OPENAI_STRUCTURED_OUTPUT_UNSUPPORTED_KEYWORDS = [
   "unevaluatedProperties",
 ] as const;
 
+const OPENAI_COURSE_PLAN_PROJECT_STEP_SCHEMA = {
+  type: "object",
+  additionalProperties: false,
+  required: ["step", "title", "requirement"],
+  properties: {
+    step: { type: "integer" },
+    title: { type: "string" },
+    requirement: { type: "string" },
+  },
+} satisfies JsonSchema;
+
+const OPENAI_COURSE_PLAN_PROJECT_BRIEF_SCHEMA = {
+  type: ["object", "null"],
+  additionalProperties: false,
+  required: [
+    "scenario",
+    "role",
+    "workspace",
+    "deliverable",
+    "stepCountTarget",
+    "flow",
+    "requirements",
+    "stepLadder",
+  ],
+  properties: {
+    scenario: { type: "string" },
+    role: { type: "string" },
+    workspace: { type: "string" },
+    deliverable: { type: "string" },
+    stepCountTarget: { type: "integer" },
+    flow: { type: "string", enum: ["standalone", "progressive"] },
+    requirements: {
+      type: "array",
+      items: { type: "string" },
+    },
+    stepLadder: {
+      type: "array",
+      minItems: 1,
+      items: OPENAI_COURSE_PLAN_PROJECT_STEP_SCHEMA,
+    },
+  },
+} satisfies JsonSchema;
+
+const OPENAI_TOPIC_AUTHORING_WORKSPACE_FILE_SCHEMA = {
+  type: "object",
+  additionalProperties: false,
+  required: ["path", "content", "language", "isEntry", "entry", "readOnly"],
+  properties: {
+    path: { type: "string", maxLength: 160 },
+    content: { type: "string", maxLength: 12_000 },
+    language: { type: ["string", "null"] },
+    isEntry: { type: ["boolean", "null"] },
+    entry: { type: ["boolean", "null"] },
+    readOnly: { type: ["boolean", "null"] },
+  },
+} satisfies JsonSchema;
+
 const OPENAI_TOPIC_AUTHORING_EXERCISE_ITEM_SCHEMA = {
   type: "object",
   additionalProperties: false,
@@ -69,6 +138,10 @@ const OPENAI_TOPIC_AUTHORING_EXERCISE_ITEM_SCHEMA = {
     "correctValue",
     "starterCode",
     "solutionCode",
+    "entryFilePath",
+    "starterFiles",
+    "solutionFiles",
+    "sqlFileOrder",
     "tests",
     "files",
     "semanticChecks",
@@ -110,6 +183,19 @@ const OPENAI_TOPIC_AUTHORING_EXERCISE_ITEM_SCHEMA = {
     correctValue: { type: ["string", "null"] },
     starterCode: { type: ["string", "null"] },
     solutionCode: { type: ["string", "null"] },
+    entryFilePath: { type: ["string", "null"], maxLength: 160 },
+    starterFiles: {
+      type: ["array", "null"],
+      items: OPENAI_TOPIC_AUTHORING_WORKSPACE_FILE_SCHEMA,
+    },
+    solutionFiles: {
+      type: ["array", "null"],
+      items: OPENAI_TOPIC_AUTHORING_WORKSPACE_FILE_SCHEMA,
+    },
+    sqlFileOrder: {
+      type: ["array", "null"],
+      items: { type: "string", maxLength: 160 },
+    },
     tests: {
       type: ["array", "null"],
       items: {
@@ -281,9 +367,10 @@ const OPENAI_TOPIC_AUTHORING_DRAFT_SCHEMA = {
       items: {
         type: "object",
         additionalProperties: false,
-        required: ["id", "title", "bodyMarkdown"],
+        required: ["id", "cardTitle", "title", "bodyMarkdown"],
         properties: {
           id: { type: "string" },
+          cardTitle: { type: ["string", "null"] },
           title: { type: "string" },
           bodyMarkdown: { type: "string" },
         },
@@ -487,6 +574,7 @@ function getSchema(schemaName: GenerateJsonArgs["schemaName"]): JsonSchema {
                 "description",
                 "weekStart",
                 "weekEnd",
+                "role",
                 "sections"
               ],
               properties: {
@@ -497,6 +585,7 @@ function getSchema(schemaName: GenerateJsonArgs["schemaName"]): JsonSchema {
                 description: { type: ["string", "null"] },
                 weekStart: { type: ["number", "null"] },
                 weekEnd: { type: ["number", "null"] },
+                role: { type: "string", enum: ["standard", "capstone"] },
                 sections: {
                   type: "array",
                   minItems: 1,
@@ -508,6 +597,7 @@ function getSchema(schemaName: GenerateJsonArgs["schemaName"]): JsonSchema {
                       "order",
                       "title",
                       "description",
+                      "role",
                       "topics"
                     ],
                     properties: {
@@ -515,6 +605,10 @@ function getSchema(schemaName: GenerateJsonArgs["schemaName"]): JsonSchema {
                       order: { type: "number" },
                       title: { type: "string" },
                       description: { type: ["string", "null"] },
+                      role: {
+                        type: "string",
+                        enum: ["lesson", "module_project", "capstone"]
+                      },
                       topics: {
                         type: "array",
                         minItems: 1,
@@ -527,7 +621,8 @@ function getSchema(schemaName: GenerateJsonArgs["schemaName"]): JsonSchema {
                             "title",
                             "summary",
                             "minutes",
-                            "learningGoals"
+                            "learningGoals",
+                            "projectBrief"
                           ],
                           properties: {
                             topicId: { type: "string" },
@@ -538,7 +633,8 @@ function getSchema(schemaName: GenerateJsonArgs["schemaName"]): JsonSchema {
                             learningGoals: {
                               type: "array",
                               items: { type: "string" }
-                            }
+                            },
+                            projectBrief: OPENAI_COURSE_PLAN_PROJECT_BRIEF_SCHEMA
                           }
                         }
                       }
@@ -645,14 +741,17 @@ export function createOpenAiProvider(options: OpenAiProviderOptions = {}): AiPro
       const client = createClient();
       const model = explicitModel || getModel();
       const strictSchema = useStrictSchema(args.schemaName);
+      const deterministicSampling = supportsDeterministicSamplingParameters(model);
       const metadata = {
         provider: "openai",
         model,
-        temperature: OPENAI_DEFAULT_TEMPERATURE,
-        seed: OPENAI_DETERMINISTIC_SEED,
+        temperature: deterministicSampling
+          ? OPENAI_DEFAULT_TEMPERATURE
+          : OPENAI_API_DEFAULT_TEMPERATURE,
+        ...(deterministicSampling ? { seed: OPENAI_DETERMINISTIC_SEED } : {}),
         schemaName: args.schemaName,
         strictSchema,
-      } as const;
+      } satisfies GeneratedJsonMetadata;
 
       const response = await client.chat.completions.create({
         model,
@@ -672,8 +771,12 @@ export function createOpenAiProvider(options: OpenAiProviderOptions = {}): AiPro
             : {
               type: "json_object",
             },
-        temperature: OPENAI_DEFAULT_TEMPERATURE,
-        seed: OPENAI_DETERMINISTIC_SEED,
+        ...(deterministicSampling
+          ? {
+              temperature: OPENAI_DEFAULT_TEMPERATURE,
+              seed: OPENAI_DETERMINISTIC_SEED,
+            }
+          : {}),
       });
 
       const text = getTextFromCompletion(response);

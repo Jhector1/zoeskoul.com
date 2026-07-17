@@ -4,6 +4,7 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 import CodeRunner, {
     restartWorkspaceTerminalSession,
     resolveMobileKeyboardViewport,
+    resolveSqlMobilePaneDefault,
     shouldCollapseIdleOutputPanel,
     shouldAutoOpenWorkspaceTerminal,
     shouldOpenEditorForWorkspaceFileSelection,
@@ -97,6 +98,64 @@ vi.mock("@/components/code/runner/hooks/pty/useWorkspaceTerminalController", () 
         };
     },
 }));
+
+describe("CodeRunner SQL narrow-pane defaults", () => {
+    it("opens the output surface when a SQL lesson authors a default data tab", () => {
+        expect(
+            resolveSqlMobilePaneDefault({
+                language: "sql",
+                sqlPaneOptions: { defaultTab: "tables" },
+            }),
+        ).toBe("output");
+
+        expect(
+            resolveSqlMobilePaneDefault({
+                language: "sql",
+                sqlPaneOptions: { defaultTab: "erd" },
+            }),
+        ).toBe("output");
+    });
+
+
+    it("lets the explicit outer surface override legacy SQL tab inference", () => {
+        expect(
+            resolveSqlMobilePaneDefault({
+                language: "sql",
+                defaultSurface: "editor",
+                sqlPaneOptions: { defaultTab: "tables" },
+            }),
+        ).toBe("editor");
+
+        expect(
+            resolveSqlMobilePaneDefault({
+                language: "sql",
+                defaultSurface: "results",
+            }),
+        ).toBe("output");
+    });
+
+    it("also honors a compact SQL default and preserves normal editor behavior otherwise", () => {
+        expect(
+            resolveSqlMobilePaneDefault({
+                language: "sql",
+                sqlPaneOptions: { compactDefaultTab: "results" },
+            }),
+        ).toBe("output");
+
+        expect(
+            resolveSqlMobilePaneDefault({
+                language: "sql",
+            }),
+        ).toBe("editor");
+
+        expect(
+            resolveSqlMobilePaneDefault({
+                language: "python",
+                sqlPaneOptions: { defaultTab: "tables" },
+            }),
+        ).toBe("editor");
+    });
+});
 
 describe("CodeRunner mobile keyboard viewport", () => {
     it("detects a focused editor keyboard and returns the visible height below the runner", () => {

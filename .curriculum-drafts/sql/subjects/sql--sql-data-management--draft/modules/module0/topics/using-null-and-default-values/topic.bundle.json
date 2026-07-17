@@ -1,0 +1,540 @@
+{
+  "topicId": "using-null-and-default-values",
+  "subjectSlug": "sql--sql-data-management--draft",
+  "moduleSlug": "sql-data-management-module-0-safe-inserts",
+  "sectionSlug": "sql--sql-data-management--draft-sql-data-management-section-0-values-and-defaults",
+  "prefix": "sql_data_management_module_0",
+  "minutes": 28,
+  "runtimeDefaults": {
+    "kind": "sql",
+    "showSchema": true,
+    "showErd": false,
+    "showChen": false,
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "datasetId": "inventory_ops",
+    "fixedSqlDialect": "sqlite",
+    "resultShape": "table"
+  },
+  "serviceDefaults": null,
+  "tools": {
+    "defaultVisible": true,
+    "allowOpen": true,
+    "defaultSurface": "editor",
+    "compactDefaultSurface": "editor",
+    "sqlPane": {
+      "showResults": true,
+      "showTables": true,
+      "showErd": false,
+      "showChen": false,
+      "defaultTab": "results",
+      "compactDefaultTab": "results"
+    }
+  },
+  "topic": {
+    "labelKey": "topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.using-null-and-default-values.label",
+    "summaryKey": "topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.using-null-and-default-values.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.using-null-and-default-values.cards.sketch0.title",
+      "sketchId": "sketch-using-null-default-1",
+      "height": 420,
+      "tryIt": {
+        "id": "try-using-null-and-default-values-sketch0",
+        "titleKey": "topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.using-null-and-default-values.tryIt.try_using_null_and_default_values_sketch0.title",
+        "promptKey": "topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.using-null-and-default-values.tryIt.try_using_null_and_default_values_sketch0.prompt",
+        "exerciseKey": "try-using-null-and-default-values-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.using-null-and-default-values.cards.sketch1.title",
+      "sketchId": "sketch-using-null-default-2",
+      "height": 420,
+      "tryIt": {
+        "id": "try-using-null-and-default-values-sketch1",
+        "titleKey": "topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.using-null-and-default-values.tryIt.try_using_null_and_default_values_sketch1.title",
+        "promptKey": "topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.using-null-and-default-values.tryIt.try_using_null_and_default_values_sketch1.prompt",
+        "exerciseKey": "try-using-null-and-default-values-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.using-null-and-default-values.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch-using-null-default-1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.using-null-and-default-values.sketch-using-null-default-1.title",
+      "bodyKey": "sketches.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.using-null-and-default-values.sketch-using-null-default-1.bodyMarkdown"
+    },
+    {
+      "id": "sketch-using-null-default-2",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.using-null-and-default-values.sketch-using-null-default-2.title",
+      "bodyKey": "sketches.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.using-null-and-default-values.sketch-using-null-default-2.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "try-using-null-and-default-values-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.using-null-and-default-values.tryIt.try_using_null_and_default_values_sketch0",
+      "language": "sql",
+      "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.using-null-and-default-values.tryIt.try_using_null_and_default_values_sketch0.starterCode",
+      "starterFiles": [
+        {
+          "path": "operations.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.using-null-and-default-values.tryIt.try_using_null_and_default_values_sketch0.starterFiles.operations_sql.content",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.using-null-and-default-values.tryIt.try_using_null_and_default_values_sketch0.starterFiles.query_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "operations.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.using-null-and-default-values.tryIt.try_using_null_and_default_values_sketch0.solutionFiles.operations_sql.content",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.using-null-and-default-values.tryIt.try_using_null_and_default_values_sketch0.solutionFiles.query_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        }
+      ],
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "inventory_ops",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": false,
+        "showChen": false,
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "operations.sql",
+        "entryFile": "operations.sql",
+        "openTabs": [
+          "operations.sql",
+          "query.sql"
+        ],
+        "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.using-null-and-default-values.tryIt.try_using_null_and_default_values_sketch0.starterCode",
+        "starterFiles": [
+          {
+            "path": "operations.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.using-null-and-default-values.tryIt.try_using_null_and_default_values_sketch0.starterFiles.operations_sql.content",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          },
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.using-null-and-default-values.tryIt.try_using_null_and_default_values_sketch0.starterFiles.query_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "operations.sql",
+            "query.sql"
+          ]
+        }
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "inventory_ops",
+        "resultShape": "table",
+        "solutionCode": "-- file: operations.sql\nINSERT INTO inventory_items (name, category, price, notes) VALUES ('Gadget', 'Electronics', 19.99, NULL);\n\n-- file: query.sql\nSELECT name, category, price, status, is_test, notes FROM inventory_items WHERE name = 'Gadget';",
+        "solutionFiles": [
+          {
+            "path": "operations.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.using-null-and-default-values.tryIt.try_using_null_and_default_values_sketch0.solutionFiles.operations_sql.content",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          },
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.using-null-and-default-values.tryIt.try_using_null_and_default_values_sketch0.solutionFiles.query_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          }
+        ],
+        "checkSql": "SELECT name, category, price, status, is_test, notes FROM inventory_items WHERE name = 'Gadget';",
+        "sqlFileOrder": [
+          "operations.sql",
+          "query.sql"
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\b[iI][nN][sS][eE][rR][tT]\\s+[iI][nN][tT][oO]\\s+inventory_items\\s*\\(",
+            "message": "Write the required `inventory_items` insertion in operations.sql with an explicit column list.",
+            "path": "operations.sql"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+inventory_items\\b",
+            "message": "Write the required result-returning SELECT in query.sql for `inventory_items`.",
+            "path": "query.sql"
+          }
+        ],
+        "ignoreRowOrder": true
+      },
+      "entryFilePath": "operations.sql",
+      "sqlFileOrder": [
+        "operations.sql",
+        "query.sql"
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "operations.sql",
+          "query.sql"
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\b[iI][nN][sS][eE][rR][tT]\\s+[iI][nN][tT][oO]\\s+inventory_items\\s*\\(",
+          "message": "Write the required `inventory_items` insertion in operations.sql with an explicit column list.",
+          "path": "operations.sql"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+inventory_items\\b",
+          "message": "Write the required result-returning SELECT in query.sql for `inventory_items`.",
+          "path": "query.sql"
+        }
+      ]
+    },
+    {
+      "id": "try-using-null-and-default-values-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.using-null-and-default-values.tryIt.try_using_null_and_default_values_sketch1",
+      "language": "sql",
+      "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.using-null-and-default-values.tryIt.try_using_null_and_default_values_sketch1.starterCode",
+      "starterFiles": [
+        {
+          "path": "operations.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.using-null-and-default-values.tryIt.try_using_null_and_default_values_sketch1.starterFiles.operations_sql.content",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.using-null-and-default-values.tryIt.try_using_null_and_default_values_sketch1.starterFiles.query_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "operations.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.using-null-and-default-values.tryIt.try_using_null_and_default_values_sketch1.solutionFiles.operations_sql.content",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.using-null-and-default-values.tryIt.try_using_null_and_default_values_sketch1.solutionFiles.query_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        }
+      ],
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "inventory_ops",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": false,
+        "showChen": false,
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "operations.sql",
+        "entryFile": "operations.sql",
+        "openTabs": [
+          "operations.sql",
+          "query.sql"
+        ],
+        "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.using-null-and-default-values.tryIt.try_using_null_and_default_values_sketch1.starterCode",
+        "starterFiles": [
+          {
+            "path": "operations.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.using-null-and-default-values.tryIt.try_using_null_and_default_values_sketch1.starterFiles.operations_sql.content",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          },
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.using-null-and-default-values.tryIt.try_using_null_and_default_values_sketch1.starterFiles.query_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "operations.sql",
+            "query.sql"
+          ]
+        }
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "inventory_ops",
+        "resultShape": "table",
+        "solutionCode": "-- file: operations.sql\nINSERT INTO inventory_items (name, category, price, notes) VALUES\n('Widget', 'Tools', 5.99, NULL),\n('Device', 'Gadgets', 12.49, NULL);\n\n-- file: query.sql\nSELECT name, category, price, status, is_test, notes FROM inventory_items WHERE name IN ('Widget', 'Device')\nORDER BY name;",
+        "solutionFiles": [
+          {
+            "path": "operations.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.using-null-and-default-values.tryIt.try_using_null_and_default_values_sketch1.solutionFiles.operations_sql.content",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          },
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.using-null-and-default-values.tryIt.try_using_null_and_default_values_sketch1.solutionFiles.query_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          }
+        ],
+        "checkSql": "SELECT name, category, price, status, is_test, notes FROM inventory_items WHERE name IN ('Widget', 'Device');",
+        "sqlFileOrder": [
+          "operations.sql",
+          "query.sql"
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\b[iI][nN][sS][eE][rR][tT]\\s+[iI][nN][tT][oO]\\s+inventory_items\\s*\\(",
+            "message": "Write the required `inventory_items` insertion in operations.sql with an explicit column list.",
+            "path": "operations.sql"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+inventory_items\\b",
+            "message": "Write the required result-returning SELECT in query.sql for `inventory_items`.",
+            "path": "query.sql"
+          }
+        ],
+        "ignoreRowOrder": true
+      },
+      "entryFilePath": "operations.sql",
+      "sqlFileOrder": [
+        "operations.sql",
+        "query.sql"
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "operations.sql",
+          "query.sql"
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\b[iI][nN][sS][eE][rR][tT]\\s+[iI][nN][tT][oO]\\s+inventory_items\\s*\\(",
+          "message": "Write the required `inventory_items` insertion in operations.sql with an explicit column list.",
+          "path": "operations.sql"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+inventory_items\\b",
+          "message": "Write the required result-returning SELECT in query.sql for `inventory_items`.",
+          "path": "query.sql"
+        }
+      ]
+    },
+    {
+      "id": "single-choice-1",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.using-null-and-default-values.practice.single-choice-1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "single-choice-2",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.using-null-and-default-values.practice.single-choice-2",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "multi-choice-1",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.using-null-and-default-values.practice.multi-choice-1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
+      }
+    },
+    {
+      "id": "multi-choice-2",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.using-null-and-default-values.practice.multi-choice-2",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "drag-reorder-1",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.using-null-and-default-values.practice.drag-reorder-1",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
+      }
+    },
+    {
+      "id": "fill-blank-choice-1",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.using-null-and-default-values.practice.fill-blank-choice-1",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "omit"
+      }
+    }
+  ]
+}

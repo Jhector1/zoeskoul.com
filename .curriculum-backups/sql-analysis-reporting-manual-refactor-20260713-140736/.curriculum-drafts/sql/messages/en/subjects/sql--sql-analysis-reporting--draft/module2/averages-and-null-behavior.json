@@ -1,0 +1,165 @@
+{
+  "topics": {
+    "sql--sql-analysis-reporting--draft": {
+      "sql-analysis-reporting-module-2-aggregate-functions": {
+        "averages-and-null-behavior": {
+          "label": "Averages and NULL Behavior",
+          "summary": "Use AVG and explain which rows contribute to the result.",
+          "cards": {
+            "sketch0": {
+              "title": "Understanding AVG and NULLs"
+            },
+            "sketch1": {
+              "title": "Practical Example: Calculating Average Sales"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_averages_and_null_behavior_sketch0": {
+              "title": "Calculate Average Customer Rating",
+              "prompt": "Write a query to calculate the average `customer_rating` for all completed orders in the `sales_reporting` table. Remember to ignore `NULL` values.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT AVG(customer_rating) AS average_rating\nFROM sales_reporting\nWHERE order_status = 'Completed';"
+            },
+            "try_averages_and_null_behavior_sketch1": {
+              "title": "Calculate Average Unit Price",
+              "prompt": "Write a query to find the average `unit_price` for all completed orders in the `sales_reporting` table. Ensure that `NULL` values are not included in the calculation.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT AVG(unit_price) AS average_price\nFROM sales_reporting\nWHERE order_status = 'Completed';"
+            }
+          },
+          "practice": {
+            "multi-choice-1": {
+              "title": "Effect of NULL on AVG",
+              "prompt": "Which of the following statements about the AVG function and NULL values are true?",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "options": {
+                "a": "AVG includes NULL values in its calculation.",
+                "b": "AVG ignores NULL values when calculating the average.",
+                "c": "NULL values are treated as zero in AVG calculations.",
+                "d": "AVG only considers non-null values."
+              }
+            },
+            "multi-choice-2": {
+              "title": "AVG Function Usage",
+              "prompt": "Which of the following queries correctly calculates the average `unit_price` for completed orders?",
+              "hint": "Focus on filtering completed orders and using AVG.",
+              "help": {
+                "concept": "Use AVG with a WHERE clause to filter completed orders.",
+                "hint_1": "Ensure the WHERE clause filters for 'Completed' status.",
+                "hint_2": "Use AVG(unit_price) to calculate the average."
+              },
+              "options": {
+                "a": "SELECT AVG(unit_price) FROM sales_reporting WHERE order_status = 'Completed';",
+                "b": "SELECT AVG(unit_price) FROM sales_reporting WHERE order_status = 'Pending';",
+                "c": "SELECT AVG(unit_price) FROM sales_reporting;",
+                "d": "SELECT AVG(unit_price) FROM sales_reporting WHERE order_status IS NOT NULL;"
+              }
+            },
+            "fill-blank-1": {
+              "title": "AVG Function Syntax",
+              "prompt": "Complete the SQL query to calculate the average `customer_rating` for completed orders: `SELECT AVG([blank1]) FROM sales_reporting WHERE order_status = 'Completed';`",
+              "hint": "Focus on the column name for the AVG function.",
+              "help": {
+                "concept": "The AVG function requires a column name as its argument.",
+                "hint_1": "The column name should be `the missing term`.",
+                "hint_2": "Use `the missing term` inside the AVG function."
+              },
+              "template": "SELECT AVG([blank1]) FROM sales_reporting WHERE order_status = 'Completed';",
+              "choices": [
+                "customer_rating",
+                "unit_price",
+                "order_status",
+                "quantity"
+              ]
+            },
+            "fill-blank-2": {
+              "title": "Ignoring NULLs in AVG",
+              "prompt": "In the query `SELECT AVG(unit_price) FROM sales_reporting WHERE order_status = 'Completed';`, which rows are ignored in the AVG calculation? [blank1]",
+              "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+              "help": {
+                "concept": "The blank should be filled with the term that makes the statement accurate.",
+                "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+                "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+              },
+              "template": "In the query `SELECT AVG(unit_price) FROM sales_reporting WHERE order_status = 'Completed';`, which rows are ignored in the AVG calculation? [blank1]",
+              "choices": [
+                "Rows with NULL in `unit_price`",
+                "Rows with non-null `unit_price`",
+                "All rows",
+                "No rows"
+              ]
+            },
+            "single-choice-1": {
+              "title": "AVG Calculation Result",
+              "prompt": "What is the result of `SELECT AVG(customer_rating) FROM sales_reporting WHERE order_status = 'Completed';` if the ratings are 4.8, NULL, 4.4, and 4.4?",
+              "hint": "Calculate the average of non-null values.",
+              "help": {
+                "concept": "AVG calculates the average of non-null values.",
+                "hint_1": "Ignore the NULL value in the calculation.",
+                "hint_2": "Average the values 4.8, 4.4, and 4.4."
+              },
+              "options": {
+                "a": "4.53",
+                "b": "4.5",
+                "c": "4.4",
+                "d": "NULL"
+              }
+            },
+            "drag-reorder-1": {
+              "title": "Steps to Calculate AVG",
+              "prompt": "Arrange the steps to calculate the average `unit_price` for completed orders.",
+              "hint": "Consider the logical order of SQL query construction.",
+              "help": {
+                "concept": "Constructing a SQL query involves selecting, filtering, and calculating.",
+                "hint_1": "Start with selecting the column to average.",
+                "hint_2": "Filter the rows based on order status."
+              },
+              "tokens": {
+                "t1": "SELECT AVG(unit_price)",
+                "t2": "FROM sales_reporting",
+                "t3": "WHERE order_status = 'Completed'"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql--sql-analysis-reporting--draft": {
+      "sql-analysis-reporting-module-2-aggregate-functions": {
+        "averages-and-null-behavior": {
+          "sketch-averages-null-0": {
+            "title": "Understanding AVG and NULLs",
+            "bodyMarkdown": "The `AVG` function in SQL is used to calculate the average value of a numeric column. However, it's important to understand how `NULL` values affect this calculation. When calculating an average, `NULL` values are ignored. This means that only non-null values are considered in the calculation.\n\nFor example, consider the following table:\n\n```\n| order_id | customer_rating |\n|----------|-----------------|\n| 101      | 4.8             |\n| 102      | NULL            |\n| 103      | 4.4             |\n| 104      | 4.4             |\n```\n\nIf we calculate the average customer rating using `AVG(customer_rating)`, the result will be `(4.8 + 4.4 + 4.4) / 3 = 4.53`. The `NULL` value is not included in the calculation."
+          },
+          "sketch-averages-null-1": {
+            "title": "Practical Example: Calculating Average Sales",
+            "bodyMarkdown": "Let's apply the `AVG` function to a real-world scenario using the `sales_reporting` table. Suppose we want to calculate the average `unit_price` for all completed orders.\n\nHere's how you can write the query:\n\n```sql\nSELECT AVG(unit_price) AS average_price\nFROM sales_reporting\nWHERE order_status = 'Completed';\n```\n\nThis query calculates the average `unit_price` for orders where the `order_status` is 'Completed'. Any rows with `NULL` in the `unit_price` column are ignored in this calculation. This ensures that the average is calculated only from the available data."
+          }
+        }
+      }
+    }
+  }
+}

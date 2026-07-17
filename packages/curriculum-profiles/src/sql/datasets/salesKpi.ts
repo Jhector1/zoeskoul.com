@@ -1,5 +1,13 @@
-// src/subjects/lib/sql/datasets/salesKpi.ts
-export const salesKpiDataset = {
+import type { SqlDatasetArtifact } from "@zoeskoul/curriculum-contracts";
+
+/**
+ * Legacy SQL V2 order-summary dataset.
+ *
+ * Keep this artifact intentionally limited to the `orders` table. The
+ * reporting course uses the dedicated `sales_reporting` dataset so learner
+ * workspaces, compiler goldens, and cached browser databases cannot collide.
+ */
+export const salesKpiDataset: SqlDatasetArtifact = {
     id: "sales_kpi",
     dialect: "sqlite",
     titleKey: "datasets.sales_kpi.title",
@@ -55,4 +63,4 @@ INSERT INTO orders (id, customer_name, region, category, order_date, quantity, u
             rowCount: 8,
         },
     },
-} as const;
+};

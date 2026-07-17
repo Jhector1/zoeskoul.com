@@ -1,0 +1,244 @@
+{
+  "title": "Module 0 Project: New Inventory Intake",
+  "summary": "Add a five-item approved inventory batch through five cumulative INSERT steps.",
+  "minutes": 60,
+  "sketchBlocks": [
+    {
+      "id": "sketch-module-0-intro",
+      "title": "New Inventory Intake Project",
+      "bodyMarkdown": "In this project, you will take on the role of a Junior Data Operations Analyst tasked with adding a batch of new inventory items to the existing database. The goal is to insert these items without altering any existing records, ensuring that each new entry is deliberate and precise. You'll use explicit column lists for each INSERT statement, apply SQL NULL and DEFAULT values where appropriate, and verify that all pre-existing rows remain unchanged. This project will help you master the skills needed to manage data insertion tasks effectively."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "ci-module-0-step1",
+      "kind": "code_input",
+      "title": "Add the First Approved Item",
+      "prompt": "Insert a new item, 'Desk Organizer', into the inventory with explicit columns and values.",
+      "starterCode": "-- Write your SQL answer below",
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "-- Write your SQL answer below\n",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "-- Insert the first approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (101, 'Desk Organizer', 'Office', 12.99, 'active', 0, 'New stock', '2026-02-10');\n\n-- Verify the insertion\nSELECT * FROM inventory_items WHERE id = 101;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionCode": "-- Insert the first approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (101, 'Desk Organizer', 'Office', 12.99, 'active', 0, 'New stock', '2026-02-10');\n\n-- Verify the insertion\nSELECT * FROM inventory_items WHERE id = 101;",
+      "tests": [
+        {
+          "stdout": "101|Desk Organizer|Office|12.99|active|0|New stock|2026-02-10\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query",
+      "checkSql": "SELECT * FROM inventory_items WHERE id = 101;",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Click Run query and compare the results table with the expected result."
+      }
+    },
+    {
+      "id": "ci-module-0-step2",
+      "kind": "code_input",
+      "title": "Record an Item with No Notes",
+      "prompt": "Add 'Cable Labels' to the inventory, ensuring the notes column is set to SQL NULL.",
+      "starterCode": "-- Write your SQL answer below",
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "-- Write your SQL answer below\n",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "-- Insert the second approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (102, 'Cable Labels', 'Office', 5.99, 'active', 0, NULL, '2026-02-11');\n\n-- Verify the insertion\nSELECT * FROM inventory_items WHERE id = 102;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionCode": "-- Insert the second approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (102, 'Cable Labels', 'Office', 5.99, 'active', 0, NULL, '2026-02-11');\n\n-- Verify the insertion\nSELECT * FROM inventory_items WHERE id = 102;",
+      "tests": [
+        {
+          "stdout": "102|Cable Labels|Office|5.99|active|0|NULL|2026-02-11\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query",
+      "checkSql": "SELECT * FROM inventory_items WHERE id = 102;",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Click Run query and compare the results table with the expected result."
+      }
+    },
+    {
+      "id": "ci-module-0-step3",
+      "kind": "code_input",
+      "title": "Use the Approved Defaults",
+      "prompt": "Insert 'Shipping Pouch' into the inventory, omitting status and last_updated to use defaults.",
+      "starterCode": "-- Write your SQL answer below",
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "-- Write your SQL answer below\n",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "-- Insert the third approved item\nINSERT INTO inventory_items (id, name, category, price, is_test, notes)\nVALUES\n  (103, 'Shipping Pouch', 'Office', 3.49, 0, 'Durable material');\n\n-- Verify the insertion\nSELECT * FROM inventory_items WHERE id = 103;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionCode": "-- Insert the third approved item\nINSERT INTO inventory_items (id, name, category, price, is_test, notes)\nVALUES\n  (103, 'Shipping Pouch', 'Office', 3.49, 0, 'Durable material');\n\n-- Verify the insertion\nSELECT * FROM inventory_items WHERE id = 103;",
+      "tests": [
+        {
+          "stdout": "103|Shipping Pouch|Office|3.49|draft|0|Durable material|2026-02-01\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query",
+      "checkSql": "SELECT * FROM inventory_items WHERE id = 103;",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Click Run query and compare the results table with the expected result."
+      }
+    },
+    {
+      "id": "ci-module-0-step4",
+      "kind": "code_input",
+      "title": "Add Two Items as One Batch",
+      "prompt": "Insert 'Packing Tape' and 'Label Roll' in one multi-row INSERT statement.",
+      "starterCode": "-- Write your SQL answer below",
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "-- Write your SQL answer below\n",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "-- Insert the fourth and fifth approved items\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (104, 'Packing Tape', 'Office', 2.99, 'active', 0, 'Strong adhesive', '2026-02-12'),\n  (105, 'Label Roll', 'Office', 1.99, 'active', 0, 'Easy to peel', '2026-02-12');\n\n-- Verify the insertion\nSELECT * FROM inventory_items WHERE id IN (104, 105);",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionCode": "-- Insert the fourth and fifth approved items\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (104, 'Packing Tape', 'Office', 2.99, 'active', 0, 'Strong adhesive', '2026-02-12'),\n  (105, 'Label Roll', 'Office', 1.99, 'active', 0, 'Easy to peel', '2026-02-12');\n\n-- Verify the insertion\nSELECT * FROM inventory_items WHERE id IN (104, 105);",
+      "tests": [
+        {
+          "stdout": "104|Packing Tape|Office|2.99|active|0|Strong adhesive|2026-02-12\n105|Label Roll|Office|1.99|active|0|Easy to peel|2026-02-12\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query",
+      "checkSql": "SELECT * FROM inventory_items WHERE id IN (104, 105);",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Click Run query and compare the results table with the expected result."
+      }
+    },
+    {
+      "id": "ci-module-0-step5",
+      "kind": "code_input",
+      "title": "Finish the Intake Handoff",
+      "prompt": "Ensure all five new items are inserted correctly and verify the entire inventory remains consistent.",
+      "starterCode": "-- Write your SQL answer below",
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "-- Write your SQL answer below\n",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "-- Verify all new items and existing inventory\nSELECT * FROM inventory_items ORDER BY id;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionCode": "-- Verify all new items and existing inventory\nSELECT * FROM inventory_items ORDER BY id;",
+      "tests": [
+        {
+          "stdout": "1|Sticker Pack|Accessories|4.99|active|0|NULL|2026-02-01\n2|Test Mug|Kitchen|7.5|draft|1|Internal sample|2026-02-03\n3|Canvas Print|Decor|45|active|0|NULL|2026-02-02\n4|Sample Poster|Decor|12|inactive|1|Archived test item|2026-01-29\n5|Water Bottle|Kitchen|15|active|0|NULL|2026-02-05\n6|Trial Tote|Accessories|9|draft|1|Trial inventory|2026-02-06\n101|Desk Organizer|Office|12.99|active|0|New stock|2026-02-10\n102|Cable Labels|Office|5.99|active|0|NULL|2026-02-11\n103|Shipping Pouch|Office|3.49|draft|0|Durable material|2026-02-01\n104|Packing Tape|Office|2.99|active|0|Strong adhesive|2026-02-12\n105|Label Roll|Office|1.99|active|0|Easy to peel|2026-02-12\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query",
+      "checkSql": "SELECT * FROM inventory_items ORDER BY id;",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "New Inventory Intake Project",
+    "stepIds": [
+      "ci-module-0-step1",
+      "ci-module-0-step2",
+      "ci-module-0-step3",
+      "ci-module-0-step4",
+      "ci-module-0-step5"
+    ]
+  }
+}

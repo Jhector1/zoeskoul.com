@@ -2,22 +2,304 @@
   "policyId": "sql-data-management-validation",
   "allowedConcepts": [
     "SELECT",
+    "FROM",
     "WHERE",
+    "comparison operators",
+    "AND",
+    "OR",
+    "NOT",
+    "ORDER BY",
+    "ASC",
+    "DESC",
+    "LIMIT",
+    "IN",
+    "IS NULL",
+    "IS NOT NULL",
+    "JOIN",
+    "INNER JOIN",
+    "LEFT JOIN",
+    "ON",
+    "qualified columns",
+    "table aliases",
+    "primary key",
+    "foreign key",
+    "data mutation",
+    "preview-change-verify-reset",
     "INSERT",
+    "INSERT INTO",
+    "explicit column list",
+    "VALUES",
+    "multi-row INSERT",
+    "NULL",
+    "DEFAULT",
     "UPDATE",
+    "SET",
     "DELETE",
+    "DELETE FROM",
     "CREATE TABLE",
+    "INTEGER",
+    "TEXT",
+    "REAL",
     "PRIMARY KEY",
     "NOT NULL",
     "UNIQUE",
     "FOREIGN KEY",
-    "DEFAULT",
-    "NULL"
+    "REFERENCES",
+    "sqlite_master"
+  ],
+  "disallowedConcepts": [
+    "ALTER TABLE",
+    "DROP TABLE",
+    "TRUNCATE",
+    "REPLACE",
+    "UPSERT",
+    "ON CONFLICT",
+    "MERGE",
+    "BEGIN",
+    "COMMIT",
+    "ROLLBACK",
+    "SAVEPOINT",
+    "transaction",
+    "CREATE INDEX",
+    "VIEW",
+    "TRIGGER",
+    "stored procedure",
+    "subquery",
+    "CTE",
+    "WITH",
+    "window functions",
+    "OVER",
+    "PARTITION BY",
+    "UNION",
+    "INTERSECT",
+    "EXCEPT",
+    "RIGHT JOIN",
+    "FULL JOIN",
+    "CROSS JOIN"
   ],
   "datasets": [
     "inventory_ops",
     "ddl_blank"
   ],
+  "datasetContracts": {
+    "inventory_ops": {
+      "tables": {
+        "inventory_items": {
+          "columns": [
+            {
+              "name": "id",
+              "type": "INTEGER",
+              "nullable": false
+            },
+            {
+              "name": "name",
+              "type": "TEXT",
+              "nullable": false
+            },
+            {
+              "name": "category",
+              "type": "TEXT",
+              "nullable": false
+            },
+            {
+              "name": "price",
+              "type": "REAL",
+              "nullable": false
+            },
+            {
+              "name": "status",
+              "type": "TEXT",
+              "nullable": false,
+              "default": "draft"
+            },
+            {
+              "name": "is_test",
+              "type": "INTEGER",
+              "nullable": false,
+              "default": 0
+            },
+            {
+              "name": "notes",
+              "type": "TEXT",
+              "nullable": true
+            },
+            {
+              "name": "last_updated",
+              "type": "TEXT",
+              "nullable": false,
+              "default": "2026-02-01"
+            }
+          ]
+        }
+      },
+      "requiredDataCharacteristics": [
+        "The dataset begins with exactly six rows using ids 1 through 6.",
+        "At least three rows have is_test = 1 so scoped cleanup examples are meaningful.",
+        "At least one notes value is NULL.",
+        "The category Decor contains both a legitimate row and a test row.",
+        "Statuses include active, draft, and inactive."
+      ]
+    },
+    "ddl_blank": {
+      "tables": {},
+      "requiredDataCharacteristics": [
+        "The database begins with no user-created tables.",
+        "Every exercise must create every table it references before using it."
+      ]
+    }
+  },
+  "globalRules": [
+    "Every technical sketch must have a required embedded Try It.",
+    "Try It ids and exercise keys must start with try- and follow try-<topic-id>-sketchN.",
+    "Quizzes must not contain code_input.",
+    "Every standard module must contain exactly one role=module_project section.",
+    "The final module must contain exactly one role=capstone section and one visible capstone topic.",
+    "Module project and capstone step N+1 starterCode must equal step N solutionCode.",
+    "Every mutation or DDL code_input must include non-empty checkSql that returns a result table.",
+    "Every INSERT solution must name its target columns.",
+    "SQLite defaults must be invoked by omitting the defaulted column from the INSERT column list; DEFAULT must not appear inside a VALUES tuple.",
+    "Every UPDATE and DELETE solution must include WHERE.",
+    "Unsafe no-WHERE mutations are allowed only as clearly labeled prose examples and never as runnable starterCode or solutionCode.",
+    "Examples, Try Its, projects, and capstone steps must use materially different records, values, tables, or final states.",
+    "Modules 0 and 1 must use inventory_ops. Modules 2 and 3 must use ddl_blank.",
+    "Every ddl_blank solution must create a table before referencing it.",
+    "When output order matters, verification queries must include deterministic ordering.",
+    "No topic may exist solely to re-teach SELECT, filtering, aggregation, reporting, or joins."
+  ],
+  "moduleRules": {
+    "0": {
+      "notes": [
+        "Teach additions only; do not change or remove existing rows.",
+        "Every mutation must preserve the six seeded inventory rows.",
+        "SQLite defaults are used by omitting the defaulted column from the INSERT column list, not by placing DEFAULT in a VALUES tuple."
+      ],
+      "allowedConcepts": [
+        "all prerequisite concepts",
+        "data mutation",
+        "preview-change-verify-reset",
+        "INSERT",
+        "INSERT INTO",
+        "explicit column list",
+        "VALUES",
+        "single-row INSERT",
+        "multi-row INSERT",
+        "NULL",
+        "declared column DEFAULT",
+        "omitting defaulted columns from INSERT"
+      ],
+      "forbiddenConcepts": [
+        "UPDATE",
+        "DELETE",
+        "CREATE TABLE",
+        "ALTER TABLE",
+        "DROP TABLE",
+        "REPLACE",
+        "UPSERT",
+        "transactions",
+        "subquery",
+        "CTE",
+        "window functions"
+      ]
+    },
+    "1": {
+      "notes": [
+        "Every UPDATE and DELETE solution must contain WHERE.",
+        "Verify both affected rows and rows that must remain unchanged."
+      ],
+      "allowedConcepts": [
+        "all Module 0 concepts",
+        "mutation preview",
+        "UPDATE",
+        "SET",
+        "multiple-column UPDATE",
+        "controlled row-set UPDATE",
+        "DELETE FROM",
+        "WHERE mutation scope",
+        "post-mutation verification"
+      ],
+      "forbiddenConcepts": [
+        "CREATE TABLE",
+        "ALTER TABLE",
+        "DROP TABLE",
+        "REPLACE",
+        "UPSERT",
+        "transactions",
+        "triggers",
+        "subquery",
+        "CTE",
+        "window functions"
+      ]
+    },
+    "2": {
+      "notes": [
+        "Every exercise starts from ddl_blank.",
+        "Progressive steps replace the complete schema; they do not apply ALTER TABLE."
+      ],
+      "allowedConcepts": [
+        "all earlier concepts",
+        "CREATE TABLE",
+        "column definition",
+        "INTEGER",
+        "TEXT",
+        "REAL",
+        "PRIMARY KEY",
+        "NOT NULL",
+        "UNIQUE",
+        "DEFAULT",
+        "FOREIGN KEY",
+        "REFERENCES",
+        "sqlite_master"
+      ],
+      "forbiddenConcepts": [
+        "ALTER TABLE",
+        "DROP TABLE",
+        "CREATE INDEX",
+        "VIEW",
+        "TRIGGER",
+        "transactions",
+        "REPLACE",
+        "UPSERT",
+        "subquery",
+        "CTE",
+        "window functions"
+      ]
+    },
+    "3": {
+      "notes": [
+        "The capstone adds no new SQL construct.",
+        "Every step runs from an empty ddl_blank database as one complete cumulative script."
+      ],
+      "allowedConcepts": [
+        "all course concepts",
+        "schema verification",
+        "data-state verification",
+        "cumulative launch script",
+        "business interpretation"
+      ],
+      "forbiddenConcepts": [
+        "ALTER TABLE",
+        "DROP TABLE",
+        "REPLACE",
+        "UPSERT",
+        "MERGE",
+        "transactions",
+        "BEGIN",
+        "COMMIT",
+        "ROLLBACK",
+        "INDEX",
+        "VIEW",
+        "TRIGGER",
+        "stored procedure",
+        "subquery",
+        "CTE",
+        "WITH",
+        "window functions",
+        "UNION",
+        "INTERSECT",
+        "EXCEPT"
+      ]
+    }
+  },
   "validationRequirements": {
     "goldenTestsRequired": true,
     "mutationSandboxRequired": true,
@@ -25,6 +307,20 @@
     "requireWhereForUpdateDelete": true,
     "allowUnsafeMutationOnlyIfMarkedUnsafeDemo": true,
     "requireInsertColumnList": true,
-    "requireSchemaIntrospectionTests": true
+    "requireSchemaIntrospectionTests": true,
+    "requireMappedImages": true,
+    "requireResolvedI18n": true,
+    "requireTryItPrefix": true,
+    "requireTryItOnAllTechnicalSketches": true,
+    "requireQuizNoCodeInput": true,
+    "requireExactlyOneModuleProjectPerStandardModule": true,
+    "requireFinalCapstone": true,
+    "requireCapstoneRubric": true,
+    "requireProjectStepChaining": true,
+    "requireNonEmptySqlResults": true,
+    "allowIntentionalEmptyOnlyWhenDeclared": true,
+    "requireUniqueLearnerPrompts": true,
+    "requireNoGenericRepairText": true,
+    "forbidStandalonePrerequisiteReviewTopics": true
   }
 }

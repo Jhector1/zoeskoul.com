@@ -97,4 +97,34 @@ describe("validateProgrammingTeachingSketches", () => {
             "PROGRAMMING_TRY_IT_PER_SKETCH_MISSING",
         );
     });
+    it("rejects a Try It that copies the worked example", () => {
+        const issues = validateProgrammingTeachingSketches({
+            profileId: "python",
+            seed: {
+                topicId: "printing",
+                sectionSlug: "printing",
+                practice: {
+                    conceptualOnly: false,
+                    requiresTryIt: true,
+                    tryIt: true,
+                    tryItPlacement: "all_sketches",
+                },
+            } as any,
+            draft: {
+                sketchBlocks: [workedSketch],
+                quizDraft: [
+                    {
+                        ...codeInput("one"),
+                        fixedLanguage: "python",
+                        solutionCode: "print('hello')\nprint('world')\n",
+                    },
+                ],
+            } as any,
+        });
+
+        expect(issues.map((issue) => issue.code)).toContain(
+            "WORKED_EXAMPLE_TRY_IT_DUPLICATE",
+        );
+    });
+
 });

@@ -27,38 +27,14 @@
       "kind": "sketch",
       "titleKey": "topics.sql-v2.sql-v2-4.search_names.cards.sketch0.title",
       "sketchId": "sketch_like_basics",
-      "height": 420,
-      "tryIt": {
-        "id": "try-search_names-sketch0",
-        "titleKey": "topics.sql-v2.sql-v2-4.search_names.tryIt.try_search_names_sketch0.title",
-        "promptKey": "topics.sql-v2.sql-v2-4.search_names.tryIt.try_search_names_sketch0.prompt",
-        "exerciseKey": "try-search_names-sketch0",
-        "difficulty": "easy",
-        "preferKind": "code_input",
-        "seedPolicy": "global",
-        "required": true,
-        "allowReveal": true,
-        "maxAttempts": null
-      }
+      "height": 420
     },
     {
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.sql-v2.sql-v2-4.search_names.cards.sketch1.title",
       "sketchId": "sketch_prefix_suffix",
-      "height": 420,
-      "tryIt": {
-        "id": "try-search_names-sketch1",
-        "titleKey": "topics.sql-v2.sql-v2-4.search_names.tryIt.try_search_names_sketch1.title",
-        "promptKey": "topics.sql-v2.sql-v2-4.search_names.tryIt.try_search_names_sketch1.prompt",
-        "exerciseKey": "try-search_names-sketch1",
-        "difficulty": "easy",
-        "preferKind": "code_input",
-        "seedPolicy": "global",
-        "required": true,
-        "allowReveal": true,
-        "maxAttempts": null
-      }
+      "height": 420
     },
     {
       "id": "sketch2",
@@ -92,46 +68,6 @@
         "allowReveal": true,
         "preferKind": null,
         "maxAttempts": null
-      }
-    },
-    {
-      "id": "project",
-      "kind": "project",
-      "titleKey": "topics.sql-v2.sql-v2-4.search_names.cards.project.title",
-      "project": {
-        "difficulty": "easy",
-        "allowReveal": true,
-        "preferKind": "code_input",
-        "maxAttempts": null,
-        "steps": [
-          {
-            "id": "ci_search_contains_a",
-            "titleKey": "topics.sql-v2.sql-v2-4.search_names.projectSteps.ci_search_contains_a.title",
-            "exerciseKey": "ci_search_contains_a",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "maxAttempts": null
-          },
-          {
-            "id": "ci_search_starts_o",
-            "titleKey": "topics.sql-v2.sql-v2-4.search_names.projectSteps.ci_search_starts_o.title",
-            "exerciseKey": "ci_search_starts_o",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "maxAttempts": null
-          },
-          {
-            "id": "ci_search_active_e",
-            "titleKey": "topics.sql-v2.sql-v2-4.search_names.projectSteps.ci_search_active_e.title",
-            "exerciseKey": "ci_search_active_e",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "maxAttempts": null
-          }
-        ]
       }
     }
   ],
@@ -296,409 +232,9 @@
       }
     },
     {
-      "id": "ci_search_contains_a",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-4.search_names.quiz.ci_search_contains_a",
-      "language": "sql",
-      "starterCode": "@:topics.sql-v2.sql-v2-4.search_names.quiz.ci_search_contains_a.starterCode",
-      "fixedSqlDialect": "sqlite",
-      "runtime": {
-        "kind": "sql",
-        "datasetId": "customers_cleanup",
-        "fixedSqlDialect": "sqlite",
-        "resultShape": "table",
-        "showSchema": true,
-        "showErd": false,
-        "showChen": false,
-        "supportsTerminal": false,
-        "supportsMultiFile": false,
-        "supportsFileSystem": false
-      },
-      "recipe": {
-        "type": "sql_query",
-        "datasetId": "customers_cleanup",
-        "resultShape": "table",
-        "solutionCode": "SELECT id, full_name\nFROM customers\nWHERE full_name LIKE '%a%';",
-        "solutionFiles": [
-          {
-            "path": "query.sql",
-            "content": "SELECT id, full_name\nFROM customers\nWHERE full_name LIKE '%a%';",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "entryFilePath": "query.sql",
-      "starterFiles": [
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-v2.sql-v2-4.search_names.quiz.ci_search_contains_a.starterCode",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "query.sql",
-          "content": "SELECT id, full_name\nFROM customers\nWHERE full_name LIKE '%a%';",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "workspace": {
-        "language": "sql",
-        "entryFilePath": "query.sql",
-        "starterCode": "@:topics.sql-v2.sql-v2-4.search_names.quiz.ci_search_contains_a.starterCode",
-        "starterFiles": [
-          {
-            "path": "query.sql",
-            "content": "@:topics.sql-v2.sql-v2-4.search_names.quiz.ci_search_contains_a.starterCode",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ],
-        "solutionFiles": [
-          {
-            "path": "query.sql",
-            "content": "SELECT id, full_name\nFROM customers\nWHERE full_name LIKE '%a%';",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "showExpectedExample": true
-    },
-    {
-      "id": "ci_search_starts_o",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-4.search_names.quiz.ci_search_starts_o",
-      "language": "sql",
-      "starterCode": "@:topics.sql-v2.sql-v2-4.search_names.quiz.ci_search_starts_o.starterCode",
-      "fixedSqlDialect": "sqlite",
-      "runtime": {
-        "kind": "sql",
-        "datasetId": "customers_cleanup",
-        "fixedSqlDialect": "sqlite",
-        "resultShape": "table",
-        "showSchema": true,
-        "showErd": false,
-        "showChen": false,
-        "supportsTerminal": false,
-        "supportsMultiFile": false,
-        "supportsFileSystem": false
-      },
-      "recipe": {
-        "type": "sql_query",
-        "datasetId": "customers_cleanup",
-        "resultShape": "table",
-        "solutionCode": "SELECT full_name, status\nFROM customers\nWHERE full_name LIKE 'O%';",
-        "solutionFiles": [
-          {
-            "path": "query.sql",
-            "content": "SELECT full_name, status\nFROM customers\nWHERE full_name LIKE 'O%';",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "entryFilePath": "query.sql",
-      "starterFiles": [
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-v2.sql-v2-4.search_names.quiz.ci_search_starts_o.starterCode",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "query.sql",
-          "content": "SELECT full_name, status\nFROM customers\nWHERE full_name LIKE 'O%';",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "workspace": {
-        "language": "sql",
-        "entryFilePath": "query.sql",
-        "starterCode": "@:topics.sql-v2.sql-v2-4.search_names.quiz.ci_search_starts_o.starterCode",
-        "starterFiles": [
-          {
-            "path": "query.sql",
-            "content": "@:topics.sql-v2.sql-v2-4.search_names.quiz.ci_search_starts_o.starterCode",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ],
-        "solutionFiles": [
-          {
-            "path": "query.sql",
-            "content": "SELECT full_name, status\nFROM customers\nWHERE full_name LIKE 'O%';",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "showExpectedExample": true
-    },
-    {
-      "id": "ci_search_active_e",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-4.search_names.quiz.ci_search_active_e",
-      "language": "sql",
-      "starterCode": "@:topics.sql-v2.sql-v2-4.search_names.quiz.ci_search_active_e.starterCode",
-      "fixedSqlDialect": "sqlite",
-      "runtime": {
-        "kind": "sql",
-        "datasetId": "customers_cleanup",
-        "fixedSqlDialect": "sqlite",
-        "resultShape": "table",
-        "showSchema": true,
-        "showErd": false,
-        "showChen": false,
-        "supportsTerminal": false,
-        "supportsMultiFile": false,
-        "supportsFileSystem": false
-      },
-      "recipe": {
-        "type": "sql_query",
-        "datasetId": "customers_cleanup",
-        "resultShape": "table",
-        "solutionCode": "SELECT full_name, city, status\nFROM customers\nWHERE full_name LIKE '%e%'\n  AND status = 'active';",
-        "solutionFiles": [
-          {
-            "path": "query.sql",
-            "content": "SELECT full_name, city, status\nFROM customers\nWHERE full_name LIKE '%e%'\n  AND status = 'active';",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "entryFilePath": "query.sql",
-      "starterFiles": [
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-v2.sql-v2-4.search_names.quiz.ci_search_active_e.starterCode",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "query.sql",
-          "content": "SELECT full_name, city, status\nFROM customers\nWHERE full_name LIKE '%e%'\n  AND status = 'active';",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "workspace": {
-        "language": "sql",
-        "entryFilePath": "query.sql",
-        "starterCode": "@:topics.sql-v2.sql-v2-4.search_names.quiz.ci_search_active_e.starterCode",
-        "starterFiles": [
-          {
-            "path": "query.sql",
-            "content": "@:topics.sql-v2.sql-v2-4.search_names.quiz.ci_search_active_e.starterCode",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ],
-        "solutionFiles": [
-          {
-            "path": "query.sql",
-            "content": "SELECT full_name, city, status\nFROM customers\nWHERE full_name LIKE '%e%'\n  AND status = 'active';",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "showExpectedExample": true
-    },
-    {
-      "id": "try-search_names-sketch0",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-4.search_names.quiz.try-search_names-sketch0",
-      "language": "sql",
-      "starterCode": "@:topics.sql-v2.sql-v2-4.search_names.quiz.try-search_names-sketch0.starterCode",
-      "fixedSqlDialect": "sqlite",
-      "runtime": {
-        "kind": "sql",
-        "datasetId": "customers_cleanup",
-        "fixedSqlDialect": "sqlite",
-        "resultShape": "table",
-        "showSchema": true,
-        "showErd": false,
-        "showChen": false,
-        "supportsTerminal": false,
-        "supportsMultiFile": false,
-        "supportsFileSystem": false
-      },
-      "recipe": {
-        "type": "sql_query",
-        "datasetId": "customers_cleanup",
-        "resultShape": "table",
-        "solutionCode": "SELECT id, full_name\nFROM customers\nWHERE full_name LIKE '%a%';",
-        "solutionFiles": [
-          {
-            "path": "query.sql",
-            "content": "SELECT id, full_name\nFROM customers\nWHERE full_name LIKE '%a%';",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "entryFilePath": "query.sql",
-      "starterFiles": [
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-v2.sql-v2-4.search_names.quiz.try-search_names-sketch0.starterCode",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "query.sql",
-          "content": "SELECT id, full_name\nFROM customers\nWHERE full_name LIKE '%a%';",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "workspace": {
-        "language": "sql",
-        "entryFilePath": "query.sql",
-        "starterCode": "@:topics.sql-v2.sql-v2-4.search_names.quiz.try-search_names-sketch0.starterCode",
-        "starterFiles": [
-          {
-            "path": "query.sql",
-            "content": "@:topics.sql-v2.sql-v2-4.search_names.quiz.try-search_names-sketch0.starterCode",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ],
-        "solutionFiles": [
-          {
-            "path": "query.sql",
-            "content": "SELECT id, full_name\nFROM customers\nWHERE full_name LIKE '%a%';",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "showExpectedExample": true
-    },
-    {
-      "id": "try-search_names-sketch1",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-4.search_names.quiz.try-search_names-sketch1",
-      "language": "sql",
-      "starterCode": "@:topics.sql-v2.sql-v2-4.search_names.quiz.try-search_names-sketch1.starterCode",
-      "fixedSqlDialect": "sqlite",
-      "runtime": {
-        "kind": "sql",
-        "datasetId": "customers_cleanup",
-        "fixedSqlDialect": "sqlite",
-        "resultShape": "table",
-        "showSchema": true,
-        "showErd": false,
-        "showChen": false,
-        "supportsTerminal": false,
-        "supportsMultiFile": false,
-        "supportsFileSystem": false
-      },
-      "recipe": {
-        "type": "sql_query",
-        "datasetId": "customers_cleanup",
-        "resultShape": "table",
-        "solutionCode": "SELECT full_name, status\nFROM customers\nWHERE full_name LIKE 'O%';",
-        "solutionFiles": [
-          {
-            "path": "query.sql",
-            "content": "SELECT full_name, status\nFROM customers\nWHERE full_name LIKE 'O%';",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "entryFilePath": "query.sql",
-      "starterFiles": [
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-v2.sql-v2-4.search_names.quiz.try-search_names-sketch1.starterCode",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "query.sql",
-          "content": "SELECT full_name, status\nFROM customers\nWHERE full_name LIKE 'O%';",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "workspace": {
-        "language": "sql",
-        "entryFilePath": "query.sql",
-        "starterCode": "@:topics.sql-v2.sql-v2-4.search_names.quiz.try-search_names-sketch1.starterCode",
-        "starterFiles": [
-          {
-            "path": "query.sql",
-            "content": "@:topics.sql-v2.sql-v2-4.search_names.quiz.try-search_names-sketch1.starterCode",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ],
-        "solutionFiles": [
-          {
-            "path": "query.sql",
-            "content": "SELECT full_name, status\nFROM customers\nWHERE full_name LIKE 'O%';",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "showExpectedExample": true
-    },
-    {
       "id": "try-search_names-sketch2",
       "kind": "code_input",
-      "purpose": "project",
+      "purpose": "try_it",
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-4.search_names.quiz.try-search_names-sketch2",
       "language": "sql",
@@ -729,7 +265,11 @@
             "isEntry": true,
             "entry": true
           }
-        ]
+        ],
+        "sqlFileOrder": [
+          "query.sql"
+        ],
+        "ignoreRowOrder": true
       },
       "entryFilePath": "query.sql",
       "starterFiles": [
@@ -771,9 +311,25 @@
             "isEntry": true,
             "entry": true
           }
-        ]
+        ],
+        "openTabs": [
+          "query.sql"
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "query.sql"
+          ]
+        }
       },
-      "showExpectedExample": true
+      "showExpectedExample": true,
+      "sqlFileOrder": [
+        "query.sql"
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "query.sql"
+        ]
+      }
     }
   ]
 }

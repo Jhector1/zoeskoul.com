@@ -1,0 +1,539 @@
+{
+  "topicId": "foreign-keys-and-references",
+  "subjectSlug": "sql--sql-data-management--draft",
+  "moduleSlug": "sql-data-management-module-2-table-creation-constraints",
+  "sectionSlug": "sql--sql-data-management--draft-sql-data-management-section-2-data-rules",
+  "prefix": "sql_data_management_module_2",
+  "minutes": 32,
+  "runtimeDefaults": {
+    "kind": "sql",
+    "showSchema": true,
+    "showErd": false,
+    "showChen": false,
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "datasetId": "ddl_blank",
+    "fixedSqlDialect": "sqlite",
+    "resultShape": "table"
+  },
+  "serviceDefaults": {
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": false
+    }
+  },
+  "tools": {
+    "defaultVisible": true,
+    "allowOpen": true,
+    "defaultSurface": "editor",
+    "compactDefaultSurface": "editor",
+    "sqlPane": {
+      "showResults": true,
+      "showTables": true,
+      "showErd": false,
+      "showChen": false,
+      "defaultTab": "results",
+      "compactDefaultTab": "results"
+    }
+  },
+  "topic": {
+    "labelKey": "topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.label",
+    "summaryKey": "topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.cards.sketch0.title",
+      "sketchId": "sketch-foreign-key-intro",
+      "height": 420,
+      "tryIt": {
+        "id": "try-foreign-keys-and-references-sketch0",
+        "titleKey": "topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.tryIt.try_foreign_keys_and_references_sketch0.title",
+        "promptKey": "topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.tryIt.try_foreign_keys_and_references_sketch0.prompt",
+        "exerciseKey": "try-foreign-keys-and-references-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.cards.sketch1.title",
+      "sketchId": "sketch-foreign-key-usage",
+      "height": 420,
+      "tryIt": {
+        "id": "try-foreign-keys-and-references-sketch1",
+        "titleKey": "topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.tryIt.try_foreign_keys_and_references_sketch1.title",
+        "promptKey": "topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.tryIt.try_foreign_keys_and_references_sketch1.prompt",
+        "exerciseKey": "try-foreign-keys-and-references-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch-foreign-key-intro",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.sketch-foreign-key-intro.title",
+      "bodyKey": "sketches.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.sketch-foreign-key-intro.bodyMarkdown"
+    },
+    {
+      "id": "sketch-foreign-key-usage",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.sketch-foreign-key-usage.title",
+      "bodyKey": "sketches.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.sketch-foreign-key-usage.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "single-choice-foreign-key-purpose",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.practice.single-choice-foreign-key-purpose",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "multi-choice-foreign-key-benefits",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.practice.multi-choice-foreign-key-benefits",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "drag-reorder-foreign-key-steps",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.practice.drag-reorder-foreign-key-steps",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
+      }
+    },
+    {
+      "id": "fill-blank-choice-foreign-key-syntax",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.practice.fill-blank-choice-foreign-key-syntax",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "child_column"
+      }
+    },
+    {
+      "id": "fill-blank-choice-foreign-key-constraint",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.practice.fill-blank-choice-foreign-key-constraint",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "FOREIGN"
+      }
+    },
+    {
+      "id": "multi-choice-foreign-key-requirements",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.practice.multi-choice-foreign-key-requirements",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "b",
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "try-foreign-keys-and-references-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.tryIt.try_foreign_keys_and_references_sketch0",
+      "language": "sql",
+      "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.tryIt.try_foreign_keys_and_references_sketch0.starterCode",
+      "starterFiles": [
+        {
+          "path": "schema.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.tryIt.try_foreign_keys_and_references_sketch0.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.tryIt.try_foreign_keys_and_references_sketch0.starterFiles.query_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "schema.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.tryIt.try_foreign_keys_and_references_sketch0.solutionCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.tryIt.try_foreign_keys_and_references_sketch0.solutionFiles.query_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        }
+      ],
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "ddl_blank",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": false,
+        "showChen": false,
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "schema.sql",
+        "entryFile": "schema.sql",
+        "openTabs": [
+          "schema.sql",
+          "query.sql"
+        ],
+        "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.tryIt.try_foreign_keys_and_references_sketch0.starterCode",
+        "starterFiles": [
+          {
+            "path": "schema.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.tryIt.try_foreign_keys_and_references_sketch0.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          },
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.tryIt.try_foreign_keys_and_references_sketch0.starterFiles.query_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "schema.sql",
+            "query.sql"
+          ]
+        }
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "ddl_blank",
+        "resultShape": "table",
+        "solutionCode": "-- file: schema.sql\n-- Provided parent table\nCREATE TABLE employees (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL\n);\n\n-- Create the departments child table\nCREATE TABLE departments (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    manager_id INTEGER,\n    FOREIGN KEY (manager_id) REFERENCES employees(id)\n);\n\n-- file: query.sql\nPRAGMA foreign_key_list(departments);",
+        "solutionFiles": [
+          {
+            "path": "schema.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.tryIt.try_foreign_keys_and_references_sketch0.solutionCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          },
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.tryIt.try_foreign_keys_and_references_sketch0.solutionFiles.query_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          }
+        ],
+        "sqlFileOrder": [
+          "schema.sql",
+          "query.sql"
+        ],
+        "checkSql": "SELECT name FROM sqlite_master WHERE type='table' AND name='departments';",
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?departments\\b",
+            "message": "Create the `departments` table in schema.sql.",
+            "path": "schema.sql"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\b[pP][rR][aA][gG][mM][aA]\\s+[fF][oO][rR][eE][iI][gG][nN]_[kK][eE][yY]_[lL][iI][sS][tT]\\s*\\(",
+            "message": "Write the required learner-authored inspection in query.sql.",
+            "path": "query.sql"
+          }
+        ],
+        "ignoreRowOrder": true
+      },
+      "entryFilePath": "schema.sql",
+      "sqlFileOrder": [
+        "schema.sql",
+        "query.sql"
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "schema.sql",
+          "query.sql"
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?departments\\b",
+          "message": "Create the `departments` table in schema.sql.",
+          "path": "schema.sql"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\b[pP][rR][aA][gG][mM][aA]\\s+[fF][oO][rR][eE][iI][gG][nN]_[kK][eE][yY]_[lL][iI][sS][tT]\\s*\\(",
+          "message": "Write the required learner-authored inspection in query.sql.",
+          "path": "query.sql"
+        }
+      ]
+    },
+    {
+      "id": "try-foreign-keys-and-references-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.tryIt.try_foreign_keys_and_references_sketch1",
+      "language": "sql",
+      "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.tryIt.try_foreign_keys_and_references_sketch1.starterCode",
+      "starterFiles": [
+        {
+          "path": "schema.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.tryIt.try_foreign_keys_and_references_sketch1.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.tryIt.try_foreign_keys_and_references_sketch1.starterFiles.query_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "schema.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.tryIt.try_foreign_keys_and_references_sketch1.solutionCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.tryIt.try_foreign_keys_and_references_sketch1.solutionFiles.query_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        }
+      ],
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "ddl_blank",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": false,
+        "showChen": false,
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "schema.sql",
+        "entryFile": "schema.sql",
+        "openTabs": [
+          "schema.sql",
+          "query.sql"
+        ],
+        "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.tryIt.try_foreign_keys_and_references_sketch1.starterCode",
+        "starterFiles": [
+          {
+            "path": "schema.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.tryIt.try_foreign_keys_and_references_sketch1.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          },
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.tryIt.try_foreign_keys_and_references_sketch1.starterFiles.query_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "schema.sql",
+            "query.sql"
+          ]
+        }
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "ddl_blank",
+        "resultShape": "table",
+        "solutionCode": "-- file: schema.sql\n-- Provided parent tables\nCREATE TABLE orders (\n    id INTEGER PRIMARY KEY,\n    order_date TEXT NOT NULL\n);\n\nCREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    price REAL NOT NULL\n);\n\n-- Create the order_items child table\nCREATE TABLE order_items (\n    id INTEGER PRIMARY KEY,\n    order_id INTEGER,\n    product_id INTEGER,\n    quantity INTEGER NOT NULL,\n    FOREIGN KEY (order_id) REFERENCES orders(id),\n    FOREIGN KEY (product_id) REFERENCES products(id)\n);\n\n-- file: query.sql\nPRAGMA foreign_key_list(order_items);",
+        "solutionFiles": [
+          {
+            "path": "schema.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.tryIt.try_foreign_keys_and_references_sketch1.solutionCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          },
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.tryIt.try_foreign_keys_and_references_sketch1.solutionFiles.query_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          }
+        ],
+        "sqlFileOrder": [
+          "schema.sql",
+          "query.sql"
+        ],
+        "checkSql": "SELECT name FROM sqlite_master WHERE type='table' AND name='order_items';",
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?order_items\\b",
+            "message": "Create the `order_items` table in schema.sql.",
+            "path": "schema.sql"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\b[pP][rR][aA][gG][mM][aA]\\s+[fF][oO][rR][eE][iI][gG][nN]_[kK][eE][yY]_[lL][iI][sS][tT]\\s*\\(",
+            "message": "Write the required learner-authored inspection in query.sql.",
+            "path": "query.sql"
+          }
+        ],
+        "ignoreRowOrder": true
+      },
+      "entryFilePath": "schema.sql",
+      "sqlFileOrder": [
+        "schema.sql",
+        "query.sql"
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "schema.sql",
+          "query.sql"
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?order_items\\b",
+          "message": "Create the `order_items` table in schema.sql.",
+          "path": "schema.sql"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\b[pP][rR][aA][gG][mM][aA]\\s+[fF][oO][rR][eE][iI][gG][nN]_[kK][eE][yY]_[lL][iI][sS][tT]\\s*\\(",
+          "message": "Write the required learner-authored inspection in query.sql.",
+          "path": "query.sql"
+        }
+      ]
+    }
+  ]
+}

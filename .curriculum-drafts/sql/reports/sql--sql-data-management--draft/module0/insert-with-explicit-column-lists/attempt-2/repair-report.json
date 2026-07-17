@@ -1,0 +1,19 @@
+{
+  "topicId": "insert-with-explicit-column-lists",
+  "repairs": [
+    {
+      "code": "SQL_STARTER_REVEALED_SOLUTION_REPAIRED",
+      "category": "other",
+      "severity": "high",
+      "field": "quizDraft.try-insert-with-explicit-column-lists-sketch0.starterCode",
+      "message": "Replaced SQL starterCode for \"try-insert-with-explicit-column-lists-sketch0\" because it revealed the complete solution."
+    },
+    {
+      "code": "SQL_STARTER_REVEALED_SOLUTION_REPAIRED",
+      "category": "other",
+      "severity": "high",
+      "field": "quizDraft.try-insert-with-explicit-column-lists-sketch1.starterCode",
+      "message": "Replaced SQL starterCode for \"try-insert-with-explicit-column-lists-sketch1\" because it revealed the complete solution."
+    }
+  ]
+}

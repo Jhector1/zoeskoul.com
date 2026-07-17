@@ -1,4 +1,5 @@
 import type { CourseProfileId } from "./blueprint.js";
+import type { CourseSpecProjectBrief } from "./course-spec.js";
 import type { PracticeConfig } from "./practice.js";
 import type { SqlDatasetArtifact } from "./sql-dataset.js";
 import { ExerciseKindKey, ResolvedExercisePolicy } from "./exercise-policy.js";
@@ -10,6 +11,7 @@ import {
 } from "./workspace.js";
 import {ManifestRuntimeDefaults} from "./manifest";
 import type { ManifestIdeServiceConfig } from "./ide-services.js";
+import type { ToolPresentationPolicy } from "./tool-presentation.js";
 
 export type TopicSeedRuntimeDefaults = ManifestRuntimeDefaults;
 export type TopicSeedServiceDefaults = ManifestIdeServiceConfig;
@@ -35,6 +37,14 @@ export type TopicSeed = {
     messageBase?: string;
     learningGoals?: string[];
     technical?: boolean;
+    /** Authoritative goals for this exact topic, distinct from broad module objectives. */
+    topicLearningGoals?: string[];
+    /** Effective policy through topic scope. */
+    tools?: ToolPresentationPolicy;
+    /** Sparse lesson/card overrides keyed by emitted card id or sketch id. */
+    lessonTools?: Record<string, ToolPresentationPolicy>;
+    /** Sparse exercise overrides keyed by authored exercise id. */
+    exerciseTools?: Record<string, ToolPresentationPolicy>;
 
     moduleRuntimeDefaults?: TopicSeedRuntimeDefaults | null;
     moduleServiceDefaults?: TopicSeedServiceDefaults | null;
@@ -77,6 +87,7 @@ export type TopicSeed = {
     moduleOrder: number;
     sectionOrder: number;
     practice?: PracticeConfig;
+    projectBrief?: CourseSpecProjectBrief;
     generationTargets?: {
         quizBankMin: number;
         quizBankTarget: number;

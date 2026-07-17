@@ -47,7 +47,10 @@ import { clearReviewWorkspaceDrafts } from "@/components/tools/panes/reviewWorks
 import FlowNavigator, {
   type FlowNavMode,
 } from "@/components/review/navigation/FlowNavigator";
-import type { CompactQuizNavigationState } from "@/components/review/module/compactFlowNavigation";
+import type {
+  CompactProgressStepStatus,
+  CompactQuizNavigationState,
+} from "@/components/review/module/compactFlowNavigation";
 import {
     computeReviewQuizCompletionSummary,
     resolveReviewCardAutoCompletionReason,
@@ -635,6 +638,7 @@ export default function QuizBlock({
                                     onNavigateToExerciseRoute,
                                     onFinalize,
                                     onCompactNavigationStateChange,
+                                    compactNavigationKind,
                                   }: {
   prereqsMet?: boolean;
   quizId: string;
@@ -668,6 +672,7 @@ export default function QuizBlock({
   topicRuntimeDefaults?: unknown;
   onNavigateToExerciseRoute?: (args: { cardId: string; exerciseId: string }) => Promise<void> | void;
   onCompactNavigationStateChange?: (state: CompactQuizNavigationState | null) => void;
+  compactNavigationKind?: CompactQuizNavigationState["kind"];
 }) {
   const initState = initialState ?? null;
 
@@ -1839,6 +1844,32 @@ export default function QuizBlock({
         scrollToFooter,
     ]);
 
+    const compactStepStatuses = useMemo(() =>
+        questions.map((question) => {
+            if (question.kind === "practice") {
+                const completion = getPracticeCompletionStatus(question);
+                if (completion.ok === true) return "complete" as const;
+                if (completion.finalized) return "revealed" as const;
+            }
+
+            return isFlowDone(question)
+                ? "complete" as const
+                : "upcoming" as const;
+        }),
+    [
+        questions,
+        local.checkedById,
+        local.answers,
+        practiceBank.practice,
+        excusedById,
+        initState?.practiceMeta,
+        initState?.practiceItemPatch,
+        strictSequential,
+        unlimitedAttempts,
+    ]);
+
+    const compactStepStatusSignature = compactStepStatuses.join(",");
+
     useEffect(() => {
         if (!onCompactNavigationStateChange) return;
 
@@ -1860,6 +1891,10 @@ export default function QuizBlock({
             total: questions.length,
             canGoPrev: activeIndex > 0,
             canGoNext: activeQuestionCanUseCompactNext,
+            kind: compactNavigationKind ?? (isProjectQuestionFlow ? "project" : "quiz"),
+            stepStatuses: compactStepStatusSignature
+                ? compactStepStatusSignature.split(",") as CompactProgressStepStatus[]
+                : [],
             prevLabel: "Previous",
             nextLabel: compactNestedNextLabel,
             onPrev: handleCompactQuizPrev,
@@ -1870,11 +1905,14 @@ export default function QuizBlock({
         activeIndex,
         activeQuestionCanUseCompactNext,
         compactNestedNextLabel,
+        compactStepStatusSignature,
+        compactNavigationKind,
         handleCompactQuizNext,
         handleCompactQuizPrev,
         navigationMode,
         onCompactNavigationStateChange,
         questions.length,
+        isProjectQuestionFlow,
         quizCardId,
         quizError,
         quizId,

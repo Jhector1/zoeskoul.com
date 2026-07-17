@@ -3,6 +3,7 @@ import type { ManifestRuntimeDefaults } from "@/lib/subjects/_core/manifestTypes
 import type { LearningIdeConfig } from "@/lib/ide/learningIdeConfig";
 import type { ReviewContentVersion } from "@/lib/review/contentVersionTypes";
 import type { CodeInputSurface, CodeInputUiSpec } from "@/lib/practice/types";
+import type { ToolPresentationPolicy } from "@zoeskoul/curriculum-contracts";
 export type ReviewQuestion =
     | {
     kind: "mcq";
@@ -141,19 +142,7 @@ export type ReviewCardProgressMeta = {
     legacyProgressKeys?: string[];
 };
 
-export type ReviewCardToolsSpec = {
-    /**
-     * Controls whether the right Tools rail opens by default for this card.
-     * Missing values preserve legacy behavior; the runtime still keeps Tools
-     * visible for cards that require a workspace.
-     */
-    defaultVisible?: boolean;
-    /**
-     * Controls whether learners may manually open Tools for this card.
-     * Missing values allow opening so older bundles keep working.
-     */
-    allowOpen?: boolean;
-};
+export type ReviewCardToolsSpec = ToolPresentationPolicy;
 
 export type ReviewVideoCard = ReviewCardProgressMeta & {
     type: "video";
@@ -216,6 +205,7 @@ export type ReviewTopic = {
     meta?: {
         runtimeDefaults?: ManifestRuntimeDefaults | null;
         serviceDefaults?: LearningIdeConfig | null;
+        tools?: ToolPresentationPolicy | null;
         [key: string]: unknown;
     } | null;
     cards: ReadonlyArray<ReviewCard>;

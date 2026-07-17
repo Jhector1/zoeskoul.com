@@ -1,0 +1,198 @@
+{
+  "title": "Counting Rows and Values",
+  "summary": "Choose between COUNT(*) and COUNT(column) based on the question being answered.",
+  "minutes": 24,
+  "sketchBlocks": [
+    {
+      "id": "sketch0",
+      "title": "Understanding COUNT(*) vs COUNT(column)",
+      "bodyMarkdown": "In SQL, the `COUNT` function is used to count the number of rows in a table. However, there are two main variations: `COUNT(*)` and `COUNT(column)`. \n\n- **`COUNT(*)`**: This counts all rows in the result set, including those with NULL values in any column. It's useful when you want to know the total number of rows returned by a query.\n\n- **`COUNT(column)`**: This counts only the rows where the specified column is not NULL. It's useful when you want to count the number of non-null entries in a specific column.\n\n### Example\nConsider the `sales_reporting` table:\n\n```sql\nSELECT COUNT(*) AS total_orders FROM sales_reporting;\n```\nThis query returns the total number of orders in the `sales_reporting` table.\n\n```sql\nSELECT COUNT(customer_rating) AS rated_orders FROM sales_reporting;\n```\nThis query returns the number of orders that have a non-null `customer_rating`. \n\nUnderstanding the difference between these two can help you choose the right function based on the data you need."
+    },
+    {
+      "id": "sketch1",
+      "title": "Practical Use of COUNT in Reports",
+      "bodyMarkdown": "When generating reports, choosing between `COUNT(*)` and `COUNT(column)` can significantly affect the insights you derive.\n\n### Scenario\nImagine you are tasked with generating a report on customer feedback. You want to know how many orders have been rated by customers.\n\n- **Using `COUNT(*)`**:\n  ```sql\n  SELECT COUNT(*) AS total_orders FROM sales_reporting WHERE order_status = 'Completed';\n  ```\n  This query gives you the total number of completed orders.\n\n- **Using `COUNT(customer_rating)`**:\n  ```sql\n  SELECT COUNT(customer_rating) AS rated_orders FROM sales_reporting WHERE order_status = 'Completed';\n  ```\n  This query tells you how many of those completed orders have a customer rating.\n\nBy comparing these two counts, you can determine the proportion of completed orders that have been rated, providing valuable insights into customer engagement."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "try-counting-rows-and-values-sketch0",
+      "kind": "code_input",
+      "title": "Try It: Count All Orders",
+      "prompt": "Write a query to count all orders in the `sales_reporting` table, regardless of their status.",
+      "starterCode": "-- Write your SQL answer below",
+      "solutionCode": "SELECT COUNT(*) FROM sales_reporting;",
+      "tests": [
+        {
+          "stdout": "24\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "try-counting-rows-and-values-sketch1",
+      "kind": "code_input",
+      "title": "Try It: Count Rated Orders",
+      "prompt": "Write a query to count the number of orders with a non-null customer rating in the `sales_reporting` table.",
+      "starterCode": "-- Write your SQL answer below",
+      "solutionCode": "SELECT COUNT(customer_rating) FROM sales_reporting;",
+      "tests": [
+        {
+          "stdout": "20\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "single-choice-1",
+      "kind": "single_choice",
+      "title": "Understanding COUNT(*)",
+      "prompt": "What does COUNT(*) do in a SQL query?",
+      "options": [
+        "Counts all rows, including those with NULL values",
+        "Counts only rows with non-null values",
+        "Counts only distinct rows",
+        "Counts only rows with a specific condition"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Think about what COUNT(*) includes in its count.",
+      "help": {
+        "concept": "COUNT(*) counts all rows in the result set, including those with NULL values.",
+        "hint_1": "COUNT(*) includes every row, regardless of NULLs.",
+        "hint_2": "COUNT(*) is used to count all rows in a table."
+      }
+    },
+    {
+      "id": "multi-choice-1",
+      "kind": "multi_choice",
+      "title": "Choosing COUNT Function",
+      "prompt": "Which of the following statements about COUNT functions are true?",
+      "options": [
+        "COUNT(*) counts all rows, including those with NULL values",
+        "COUNT(column) counts only non-null values in the specified column",
+        "COUNT(*) and COUNT(column) always return the same result",
+        "COUNT(column) can be used to count distinct values"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ],
+      "hint": "Consider the differences between COUNT(*) and COUNT(column).",
+      "help": {
+        "concept": "COUNT(*) counts all rows, while COUNT(column) counts only non-null values in the column.",
+        "hint_1": "COUNT(*) includes all rows, even with NULLs.",
+        "hint_2": "COUNT(column) excludes rows where the column is NULL."
+      }
+    },
+    {
+      "id": "multi-choice-2",
+      "kind": "multi_choice",
+      "title": "COUNT(column) Usage",
+      "prompt": "When should you use COUNT(column) instead of COUNT(*)?",
+      "options": [
+        "When you want to count all rows, including NULLs",
+        "When you want to count only non-null values in a column",
+        "When you want to count distinct values",
+        "When you want to count rows with a specific condition"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Think about when you want to exclude NULL values.",
+      "help": {
+        "concept": "Use COUNT(column) when you want to count only non-null values in a specific column.",
+        "hint_1": "COUNT(column) excludes rows where the column is NULL.",
+        "hint_2": "Use COUNT(column) to focus on non-null entries."
+      }
+    },
+    {
+      "id": "drag-reorder-1",
+      "kind": "drag_reorder",
+      "title": "Order of SQL Clauses",
+      "prompt": "Arrange the SQL clauses in the correct order for a basic SELECT query.",
+      "tokens": [
+        "SELECT",
+        "FROM",
+        "WHERE",
+        "ORDER BY"
+      ],
+      "correctOrder": [
+        "SELECT",
+        "FROM",
+        "WHERE",
+        "ORDER BY"
+      ],
+      "hint": "Read each piece and arrange them in the order the statement should be understood.",
+      "help": {
+        "concept": "The pieces should form a valid statement in a logical order.",
+        "hint_1": "Start with the piece that introduces the idea or action.",
+        "hint_2": "Place dependent pieces after the part they describe or complete."
+      }
+    },
+    {
+      "id": "fill-blank-choice-1",
+      "kind": "fill_blank_choice",
+      "title": "COUNT Function Syntax",
+      "prompt": "Complete the SQL statement: `SELECT [blank1] FROM sales_reporting;` to count all rows.",
+      "template": "SELECT [blank1] FROM sales_reporting;",
+      "choices": [
+        "COUNT(*)",
+        "COUNT(order_id)",
+        "COUNT(customer_rating)",
+        "COUNT(DISTINCT order_id)"
+      ],
+      "correctValue": "COUNT(*)",
+      "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+      "help": {
+        "concept": "The blank should be filled with the term that makes the statement accurate.",
+        "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+        "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+      }
+    },
+    {
+      "id": "fill-blank-choice-2",
+      "kind": "fill_blank_choice",
+      "title": "COUNT(column) Example",
+      "prompt": "Complete the SQL statement: `SELECT [blank1] FROM sales_reporting;` to count non-null customer ratings.",
+      "template": "SELECT [blank1] FROM sales_reporting;",
+      "choices": [
+        "COUNT(*)",
+        "COUNT(order_id)",
+        "COUNT(customer_rating)",
+        "COUNT(DISTINCT customer_rating)"
+      ],
+      "correctValue": "COUNT(customer_rating)",
+      "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+      "help": {
+        "concept": "The blank should be filled with the term that makes the statement accurate.",
+        "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+        "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Storewide KPI Snapshot",
+    "stepIds": [
+      "try-counting-rows-and-values-sketch0",
+      "try-counting-rows-and-values-sketch1"
+    ]
+  }
+}

@@ -1,0 +1,165 @@
+{
+  "topics": {
+    "sql--multi-table-sql--draft": {
+      "multi-table-sql-module-1-relationship-paths": {
+        "joining-through-a-bridge-table": {
+          "label": "Joining Through a Bridge Table",
+          "summary": "Connect two entity tables through the enrollment records that relate them.",
+          "cards": {
+            "sketch0": {
+              "title": "Cross the Enrollment Bridge"
+            },
+            "sketch1": {
+              "title": "Carry the Path One Table Farther"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_joining_through_a_bridge_table_sketch0": {
+              "title": "Try the Bridge with Enrollment Terms",
+              "prompt": "Use `enrollments` as the bridge to list each student name, course title, and enrollment term. Return `students.name AS student_name, courses.title AS course_title, enrollments.term AS enrollment_term` from `students` in that column order. Use a INNER JOIN to connect `enrollments` on `students.id = enrollments.student_id`. Use a INNER JOIN to connect `courses` on `enrollments.course_id = courses.id`. Sort the final result by `students.name, courses.title`.",
+              "hint": "Follow both foreign keys in the bridge, then include one value stored on the bridge row itself.",
+              "help": {
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "Use a INNER JOIN to connect `courses` on `enrollments.course_id = courses.id`. Sort the final result by `students.name, courses.title`."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT students.name AS student_name,\n       courses.title AS course_title,\n       enrollments.term AS enrollment_term\nFROM students\nINNER JOIN enrollments ON students.id = enrollments.student_id\nINNER JOIN courses ON enrollments.course_id = courses.id\nORDER BY students.name, courses.title;"
+            },
+            "try_joining_through_a_bridge_table_sketch1": {
+              "title": "Try a Four-Table Path for Grade Levels",
+              "prompt": "Follow the full relationship path to list each student grade level, course title, and department name for every enrollment. Return `students.grade_level, courses.title AS course_title, departments.name AS department_name` from `students` in that column order. Use a INNER JOIN to connect `enrollments` on `students.id = enrollments.student_id`. Use a INNER JOIN to connect `courses` on `enrollments.course_id = courses.id`. Use a INNER JOIN to connect `departments` on `courses.department_id = departments.id`. Sort the final result by `students.grade_level, courses.title`.",
+              "hint": "Keep `enrollments` between students and courses, then extend from courses to departments.",
+              "help": {
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "Use a INNER JOIN to connect `departments` on `courses.department_id = departments.id`. Sort the final result by `students.grade_level, courses.title`."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT students.grade_level,\n       courses.title AS course_title,\n       departments.name AS department_name\nFROM students\nINNER JOIN enrollments ON students.id = enrollments.student_id\nINNER JOIN courses ON enrollments.course_id = courses.id\nINNER JOIN departments ON courses.department_id = departments.id\nORDER BY students.grade_level, courses.title;"
+            }
+          },
+          "practice": {
+            "single-choice-1": {
+              "title": "Purpose of a Bridge Table",
+              "prompt": "What is the primary purpose of a bridge table in a database?",
+              "hint": "Think about how bridge tables connect other tables.",
+              "help": {
+                "concept": "Bridge tables connect two tables that have a many-to-many relationship.",
+                "hint_1": "Bridge tables help in linking two tables indirectly.",
+                "hint_2": "They are used to manage many-to-many relationships."
+              },
+              "options": {
+                "a": "To store redundant data",
+                "b": "To connect two tables with a many-to-many relationship",
+                "c": "To enforce data integrity",
+                "d": "To improve query performance"
+              }
+            },
+            "single-choice-2": {
+              "title": "Identifying Bridge Tables",
+              "prompt": "Which table acts as a bridge table between `students` and `courses` in the school database?",
+              "hint": "Follow both sides of the enrollment bridge.",
+              "help": {
+                "concept": "The `enrollments` bridge connects students to courses through two separate key relationships.",
+                "hint_1": "Join students to enrollments first, then enrollments to courses.",
+                "hint_2": "Use one `ON` clause for each foreign-key arrow and keep one row per enrollment."
+              },
+              "options": {
+                "a": "students",
+                "b": "courses",
+                "c": "enrollments",
+                "d": "departments"
+              }
+            },
+            "fill-blank-choice-1": {
+              "title": "SQL Join Syntax",
+              "prompt": "Complete the SQL statement to join `students` and `enrollments` on `student_id`.",
+              "hint": "Use the correct SQL syntax for joining tables.",
+              "help": {
+                "concept": "The `ON` clause specifies the condition for joining tables.",
+                "hint_1": "The `ON` clause follows the `JOIN` keyword.",
+                "hint_2": "Use `the blank`."
+              },
+              "template": "SELECT * FROM students JOIN enrollments ON [blank1];",
+              "choices": [
+                "students.id = enrollments.student_id",
+                "students.name = enrollments.student_id",
+                "students.id = enrollments.course_id",
+                "students.name = enrollments.course_id"
+              ]
+            },
+            "fill-blank-choice-2": {
+              "title": "Extending a Query",
+              "prompt": "Complete the SQL statement to join `courses` and `departments` on `department_id`.",
+              "hint": "Use the correct SQL syntax for joining tables.",
+              "help": {
+                "concept": "The `ON` clause specifies the condition for joining tables.",
+                "hint_1": "The `ON` clause follows the `JOIN` keyword.",
+                "hint_2": "Use `the blank`."
+              },
+              "template": "SELECT * FROM courses JOIN departments ON [blank1];",
+              "choices": [
+                "courses.department_id = departments.id",
+                "courses.id = departments.department_id",
+                "courses.title = departments.id",
+                "courses.id = departments.name"
+              ]
+            },
+            "multi-choice-1": {
+              "title": "Characteristics of Bridge Tables",
+              "prompt": "Which of the following are characteristics of a bridge table? Select all that apply.",
+              "hint": "Consider the role of bridge tables in managing relationships.",
+              "help": {
+                "concept": "Bridge tables manage many-to-many relationships by linking two tables.",
+                "hint_1": "They contain foreign keys to both related tables.",
+                "hint_2": "They do not store redundant data but facilitate connections."
+              },
+              "options": {
+                "a": "Contains foreign keys to related tables",
+                "b": "Stores redundant data",
+                "c": "Facilitates many-to-many relationships",
+                "d": "Improves query performance by itself"
+              }
+            },
+            "drag-reorder-1": {
+              "title": "Order of SQL Join Operations",
+              "prompt": "Arrange the steps to join `students`, `enrollments`, and `courses` in the correct order.",
+              "hint": "Start with the table that contains the primary key.",
+              "help": {
+                "concept": "The order of joins should follow the relationship path from primary to foreign keys.",
+                "hint_1": "Begin with `students` and join through `enrollments`.",
+                "hint_2": "Finish by joining `courses`."
+              },
+              "tokens": {
+                "t1": "JOIN students to enrollments on student_id",
+                "t2": "JOIN enrollments to courses on course_id",
+                "t3": "SELECT columns from students, enrollments, and courses"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql--multi-table-sql--draft": {
+      "multi-table-sql-module-1-relationship-paths": {
+        "joining-through-a-bridge-table": {
+          "sketch-joining-bridge-table-0": {
+            "title": "A bridge table turns a many-to-many idea into rows",
+            "bodyMarkdown": "A **bridge table** records the links between two tables that can relate many times in both directions. Students may take several courses, and a course may include several students. Neither `students` nor `courses` can store that entire relationship in one foreign-key column. The `enrollments` table solves the problem by keeping one row for each student-course registration.\n\nTo move from a student to a course, the query crosses the bridge in two joins:\n\n```sql\nSELECT students.name, courses.title\nFROM students\nINNER JOIN enrollments\n  ON students.id = enrollments.student_id\nINNER JOIN courses\n  ON enrollments.course_id = courses.id;\n```\n\nFirst, a student row matches its enrollment rows. Second, each enrollment row matches its course. The selected values come from the endpoints, but the bridge supplies the evidence that they belong together.\n\nOne result row represents one enrollment relationship. A student name may repeat because that student has several enrollment rows; a course title may repeat because several students share the course. Those repetitions are the visible shape of the many-to-many relationship, not duplicate data to remove automatically."
+          },
+          "sketch-joining-bridge-table-1": {
+            "title": "A bridge can lead to details beyond either endpoint",
+            "bodyMarkdown": "Once the bridge has connected students to courses, the path can continue to any table related to a course. Departments are one step farther away because `courses.department_id` points to `departments.id`.\n\n```sql\nSELECT students.name,\n       courses.title,\n       departments.name AS department_name\nFROM students\nINNER JOIN enrollments\n  ON students.id = enrollments.student_id\nINNER JOIN courses\n  ON enrollments.course_id = courses.id\nINNER JOIN departments\n  ON courses.department_id = departments.id;\n```\n\nRead the path from top to bottom. The first join answers which enrollment rows belong to each student. The second answers which course belongs to each enrollment. The third answers which department owns each course. No join skips a table or guesses at a convenient-looking `id`.\n\nThe result still has one row per enrollment, even though it now includes department information. Adding a lookup table gives each row more detail; it does not automatically change what the row represents. Protecting that **result grain** is one of the main skills in a longer join.\n\nBridge tables often carry useful facts of their own, such as `term`. When a report needs that information, select it from the bridge rather than trying to infer it from either endpoint."
+          }
+        }
+      }
+    }
+  }
+}

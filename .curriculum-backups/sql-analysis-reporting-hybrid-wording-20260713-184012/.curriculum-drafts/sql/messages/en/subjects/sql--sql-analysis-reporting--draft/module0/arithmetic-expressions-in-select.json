@@ -1,0 +1,165 @@
+{
+  "topics": {
+    "sql--sql-analysis-reporting--draft": {
+      "sql-analysis-reporting-module-0-report-foundations": {
+        "arithmetic-expressions-in-select": {
+          "label": "Arithmetic Expressions in SELECT",
+          "summary": "Create row-level metrics from numeric columns while keeping the original source data unchanged.",
+          "cards": {
+            "sketch0": {
+              "title": "Calculate a Value for Each Row"
+            },
+            "sketch1": {
+              "title": "Make Multi-Part Arithmetic Obvious"
+            },
+            "quiz": {
+              "title": "Check Your Understanding"
+            }
+          },
+          "practice": {
+            "single-choice-1": {
+              "title": "Gross Sales Formula",
+              "prompt": "Which expression calculates gross sales for one order row?",
+              "hint": "Gross value combines how many units were sold with the price of each unit.",
+              "help": {
+                "concept": "Multiplication converts unit count and unit price into a row value.",
+                "hint_1": "Addition mixes unlike units.",
+                "hint_2": "The formula should grow when either quantity or price grows."
+              },
+              "options": {
+                "a": "quantity * unit_price",
+                "b": "quantity + unit_price",
+                "c": "quantity / unit_price",
+                "d": "unit_price - quantity"
+              }
+            },
+            "single-choice-2": {
+              "title": "Parentheses Change Meaning",
+              "prompt": "Which expression adds a $2 fee to every unit before multiplying?",
+              "hint": "The fee must be part of the per-unit amount.",
+              "help": {
+                "concept": "Parentheses force the addition to happen before multiplication.",
+                "hint_1": "A fee outside the parentheses is added only once.",
+                "hint_2": "Look for quantity multiplying the complete adjusted price."
+              },
+              "options": {
+                "a": "quantity * unit_price + 2",
+                "b": "quantity * (unit_price + 2)",
+                "c": "(quantity * unit_price) / 2",
+                "d": "quantity + (unit_price * 2)"
+              }
+            },
+            "multi-choice-1": {
+              "title": "Calculated-Column Facts",
+              "prompt": "Which statements about arithmetic in SELECT are true? Select all that apply.",
+              "hint": "Separate calculation behavior from formatting behavior.",
+              "help": {
+                "concept": "SELECT expressions create derived output values.",
+                "hint_1": "ROUND must be requested explicitly.",
+                "hint_2": "The table remains unchanged by a read-only query."
+              },
+              "options": {
+                "a": "The expression is evaluated for each returned row.",
+                "b": "The source columns are not changed.",
+                "c": "An alias can name the calculated result.",
+                "d": "Every arithmetic expression automatically rounds to two decimals."
+              }
+            },
+            "multi-choice-2": {
+              "title": "Useful Row-Level Metrics",
+              "prompt": "Which expressions are row-level calculations? Select all that apply.",
+              "hint": "Choose expressions that use values from one row rather than summarizing many rows.",
+              "help": {
+                "concept": "Row-level arithmetic is evaluated before any aggregation.",
+                "hint_1": "COUNT summarizes a set of rows.",
+                "hint_2": "Numeric columns and constants can be combined in one row expression."
+              },
+              "options": {
+                "a": "quantity * unit_price",
+                "b": "unit_price + 2.00",
+                "c": "COUNT(*)",
+                "d": "quantity * (unit_price + 1.50)"
+              }
+            },
+            "drag-reorder-1": {
+              "title": "Build a Calculated Column",
+              "prompt": "Arrange the SELECT item from source values to readable result.",
+              "hint": "The alias comes after the complete expression.",
+              "help": {
+                "concept": "A calculated SELECT item is expression first, alias second.",
+                "hint_1": "Place the multiplication operator between its operands.",
+                "hint_2": "Name the result only after the arithmetic is complete."
+              },
+              "tokens": {
+                "t1": "quantity",
+                "t2": "*",
+                "t3": "unit_price",
+                "t4": "AS gross_sales"
+              }
+            },
+            "fill-blank-choice-1": {
+              "title": "Complete the Gross-Sales Expression",
+              "prompt": "Choose the operator that calculates quantity times unit price.",
+              "hint": "Use the arithmetic operator for multiplication.",
+              "help": {
+                "concept": "Gross sales is units multiplied by price per unit.",
+                "hint_1": "The equals sign compares values; it does not multiply them.",
+                "hint_2": "Choose the operator whose result scales with both inputs."
+              },
+              "template": "SELECT quantity [blank1] unit_price AS gross_sales FROM sales_reporting;",
+              "choices": [
+                "*",
+                "+",
+                "/",
+                "="
+              ]
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_arithmetic_expressions_in_select_sketch0": {
+              "title": "Calculate Pending Order Value",
+              "prompt": "For pending orders, select `order_id`, `product_name`, and a calculated `pending_value` equal to `quantity * unit_price`.",
+              "hint": "Build the calculation in the SELECT list, then filter the source rows.",
+              "help": {
+                "concept": "A row-level arithmetic expression produces one calculated value per matching order.",
+                "hint_1": "Multiply the two numeric columns before assigning the alias.",
+                "hint_2": "Use the status value exactly as it appears in the table."
+              },
+              "starterCode": "-- Write the query below.",
+              "solutionCode": "SELECT\n    order_id,\n    product_name,\n    quantity * unit_price AS pending_value\nFROM sales_reporting\nWHERE order_status = 'Pending';"
+            },
+            "try_arithmetic_expressions_in_select_sketch1": {
+              "title": "Apply a Per-Unit Insurance Amount",
+              "prompt": "Select `order_id`, `quantity`, and an `insured_value` calculated as quantity multiplied by `(unit_price + 2.00)`.",
+              "hint": "The fixed amount applies to every unit, so add it inside parentheses.",
+              "help": {
+                "concept": "Parentheses distinguish a per-unit adjustment from a one-time adjustment.",
+                "hint_1": "Write the adjusted unit price first inside parentheses.",
+                "hint_2": "Multiply the complete per-unit amount by quantity."
+              },
+              "starterCode": "-- Write the query below.",
+              "solutionCode": "SELECT\n    order_id,\n    quantity,\n    quantity * (unit_price + 2.00) AS insured_value\nFROM sales_reporting;"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql--sql-analysis-reporting--draft": {
+      "sql-analysis-reporting-module-0-report-foundations": {
+        "arithmetic-expressions-in-select": {
+          "sketch0": {
+            "title": "Calculate a Value for Each Row",
+            "bodyMarkdown": "A SELECT expression can combine numeric columns. The calculation runs separately for every source row.\n\n```sql\nSELECT\n    product_name,\n    quantity,\n    unit_price,\n    quantity * unit_price AS gross_sales\nFROM sales_reporting;\n```\n\n`gross_sales` is calculated in the result. The stored quantity and unit price remain unchanged."
+          },
+          "sketch1": {
+            "title": "Make Multi-Part Arithmetic Obvious",
+            "bodyMarkdown": "Parentheses communicate which part of a calculation belongs together. Suppose a handling rule adds $1.50 to each unit before multiplying by quantity:\n\n```sql\nSELECT\n    order_id,\n    quantity * (unit_price + 1.50) AS handled_value\nFROM sales_reporting;\n```\n\nWithout the parentheses, SQL would multiply first and add $1.50 only once. The two formulas answer different business questions."
+          }
+        }
+      }
+    }
+  }
+}

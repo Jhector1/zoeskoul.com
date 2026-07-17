@@ -1,0 +1,178 @@
+{
+  "topics": {
+    "multi-table-sql": {
+      "multi-table-sql-module-2-outer-joins-and-accurate-counts": {
+        "module-2-department-participation-scorecard": {
+          "label": "Module 2 Project: Department Participation Scorecard",
+          "summary": "Build an all-department scorecard with course, enrollment, and distinct-student counts in six cumulative steps.",
+          "cards": {
+            "sketch0": {
+              "title": "Project Overview: Department Participation Scorecard"
+            },
+            "project": {
+              "title": "Department Participation Scorecard"
+            }
+          },
+          "projectSteps": {
+            "step1_preserve_departments": {
+              "title": "Preserve Every Department"
+            },
+            "step2_count_courses": {
+              "title": "Count Courses Correctly"
+            },
+            "step3_extend_enrollments": {
+              "title": "Extend to Enrollment Records"
+            },
+            "step4_count_enrollments": {
+              "title": "Count Enrollment Rows"
+            },
+            "step5_count_unique_students": {
+              "title": "Count Unique Students"
+            },
+            "step6_rank_scorecard": {
+              "title": "Rank the Scorecard Predictably"
+            }
+          },
+          "moduleProject": {
+            "steps": {
+              "step1_preserve_departments": {
+                "title": "Preserve Every Department",
+                "prompt": "Start the module project. In step 1 of 6, Write a query to list all departments, ensuring that even those without courses are included. Use a LEFT JOIN to connect departments with courses.",
+                "hint": "This is the first project step. Build a clean starting version, then run it before moving on.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "This is the first project step. Build a clean starting version, then run it before moving on.",
+                  "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+                },
+                "starterCode": "-- Write your SQL answer below",
+                "solutionCode": "SELECT d.name, c.title\nFROM departments d\nLEFT JOIN courses c ON d.id = c.department_id;"
+              },
+              "step2_count_courses": {
+                "title": "Count Courses Correctly",
+                "prompt": "Continue the same module project from the previous working step. In step 2 of 6, Modify your query to count the number of courses per department, ensuring that departments with no courses show a count of zero.",
+                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                  "hint_2": "Run the previous working code first, then make only the focused change for this step."
+                },
+                "starterCode": "SELECT d.name, c.title\nFROM departments d\nLEFT JOIN courses c ON d.id = c.department_id;\n-- Project step 2: Count Courses Correctly\n-- Keep the working code above from the previous step.\n-- Next, Modify your query to count the number of courses per department, ensuring that departments with no courses show a count of zero\n-- Add only the focused change for this step inside the existing work.\n",
+                "solutionCode": "SELECT d.name, COUNT(DISTINCT c.id) AS course_count\nFROM departments d\nLEFT JOIN courses c ON d.id = c.department_id\nGROUP BY d.name;\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "SELECT d.name, c.title\nFROM departments d\nLEFT JOIN courses c ON d.id = c.department_id;\n-- Project step 2: Count Courses Correctly\n-- Keep the working code above from the previous step.\n-- Next, Modify your query to count the number of courses per department, ensuring that departments with no courses show a count of zero\n-- Add only the focused change for this step inside the existing work.\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_py": {
+                    "content": "SELECT d.name, COUNT(DISTINCT c.id) AS course_count\nFROM departments d\nLEFT JOIN courses c ON d.id = c.department_id\nGROUP BY d.name;\n"
+                  }
+                }
+              },
+              "step3_extend_enrollments": {
+                "title": "Extend to Enrollment Records",
+                "prompt": "Continue the same module project from the previous working step. In step 3 of 6, Extend your query to include enrollments, ensuring all departments are preserved. Use a LEFT JOIN to connect courses with enrollments.",
+                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                  "hint_2": "Run the previous working code first, then make only the focused change for this step."
+                },
+                "starterCode": "SELECT d.name, COUNT(DISTINCT c.id) AS course_count\nFROM departments d\nLEFT JOIN courses c ON d.id = c.department_id\nGROUP BY d.name;\n-- Project step 3: Extend to Enrollment Records\n-- Keep the working code above from the previous step.\n-- Next, Extend your query to include enrollments, ensuring all departments are preserved\n-- Add only the focused change for this step inside the existing work.\n",
+                "solutionCode": "SELECT d.name, COUNT(DISTINCT c.id) AS course_count\nFROM departments d\nLEFT JOIN courses c ON d.id = c.department_id\nLEFT JOIN enrollments e ON c.id = e.course_id\nGROUP BY d.name;\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "SELECT d.name, COUNT(DISTINCT c.id) AS course_count\nFROM departments d\nLEFT JOIN courses c ON d.id = c.department_id\nGROUP BY d.name;\n-- Project step 3: Extend to Enrollment Records\n-- Keep the working code above from the previous step.\n-- Next, Extend your query to include enrollments, ensuring all departments are preserved\n-- Add only the focused change for this step inside the existing work.\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_py": {
+                    "content": "SELECT d.name, COUNT(DISTINCT c.id) AS course_count\nFROM departments d\nLEFT JOIN courses c ON d.id = c.department_id\nLEFT JOIN enrollments e ON c.id = e.course_id\nGROUP BY d.name;\n"
+                  }
+                }
+              },
+              "step4_count_enrollments": {
+                "title": "Count Enrollment Rows",
+                "prompt": "Continue the same module project from the previous working step. In step 4 of 6, Add a count of enrollment rows per department to your query, ensuring the department grain is maintained.",
+                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                  "hint_2": "Run the previous working code first, then make only the focused change for this step."
+                },
+                "starterCode": "SELECT d.name, COUNT(DISTINCT c.id) AS course_count\nFROM departments d\nLEFT JOIN courses c ON d.id = c.department_id\nLEFT JOIN enrollments e ON c.id = e.course_id\nGROUP BY d.name;\n-- Project step 4: Count Enrollment Rows\n-- Keep the working code above from the previous step.\n-- Next, Add a count of enrollment rows per department to your query, ensuring the department grain is maintained\n-- Add only the focused change for this step inside the existing work.\n",
+                "solutionCode": "SELECT d.name, COUNT(DISTINCT c.id) AS course_count, COUNT(e.id) AS enrollment_count\nFROM departments d\nLEFT JOIN courses c ON d.id = c.department_id\nLEFT JOIN enrollments e ON c.id = e.course_id\nGROUP BY d.name;\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "SELECT d.name, COUNT(DISTINCT c.id) AS course_count\nFROM departments d\nLEFT JOIN courses c ON d.id = c.department_id\nLEFT JOIN enrollments e ON c.id = e.course_id\nGROUP BY d.name;\n-- Project step 4: Count Enrollment Rows\n-- Keep the working code above from the previous step.\n-- Next, Add a count of enrollment rows per department to your query, ensuring the department grain is maintained\n-- Add only the focused change for this step inside the existing work.\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_py": {
+                    "content": "SELECT d.name, COUNT(DISTINCT c.id) AS course_count, COUNT(e.id) AS enrollment_count\nFROM departments d\nLEFT JOIN courses c ON d.id = c.department_id\nLEFT JOIN enrollments e ON c.id = e.course_id\nGROUP BY d.name;\n"
+                  }
+                }
+              },
+              "step5_count_unique_students": {
+                "title": "Count Unique Students",
+                "prompt": "Continue the same module project from the previous working step. In step 5 of 6, Modify your query to count unique students per department, ensuring each student is counted only once per department.",
+                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                  "hint_2": "Run the previous working code first, then make only the focused change for this step."
+                },
+                "starterCode": "SELECT d.name, COUNT(DISTINCT c.id) AS course_count, COUNT(e.id) AS enrollment_count\nFROM departments d\nLEFT JOIN courses c ON d.id = c.department_id\nLEFT JOIN enrollments e ON c.id = e.course_id\nGROUP BY d.name;\n-- Project step 5: Count Unique Students\n-- Keep the working code above from the previous step.\n-- Next, Modify your query to count unique students per department, ensuring each student is counted only once per department\n-- Add only the focused change for this step inside the existing work.\n",
+                "solutionCode": "SELECT d.name, COUNT(DISTINCT c.id) AS course_count, COUNT(e.id) AS enrollment_count, COUNT(DISTINCT e.student_id) AS student_count\nFROM departments d\nLEFT JOIN courses c ON d.id = c.department_id\nLEFT JOIN enrollments e ON c.id = e.course_id\nGROUP BY d.name;\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "SELECT d.name, COUNT(DISTINCT c.id) AS course_count, COUNT(e.id) AS enrollment_count\nFROM departments d\nLEFT JOIN courses c ON d.id = c.department_id\nLEFT JOIN enrollments e ON c.id = e.course_id\nGROUP BY d.name;\n-- Project step 5: Count Unique Students\n-- Keep the working code above from the previous step.\n-- Next, Modify your query to count unique students per department, ensuring each student is counted only once per department\n-- Add only the focused change for this step inside the existing work.\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_py": {
+                    "content": "SELECT d.name, COUNT(DISTINCT c.id) AS course_count, COUNT(e.id) AS enrollment_count, COUNT(DISTINCT e.student_id) AS student_count\nFROM departments d\nLEFT JOIN courses c ON d.id = c.department_id\nLEFT JOIN enrollments e ON c.id = e.course_id\nGROUP BY d.name;\n"
+                  }
+                }
+              },
+              "step6_rank_scorecard": {
+                "title": "Rank the Scorecard Predictably",
+                "prompt": "Continue the same module project from the previous working step. In step 6 of 6, Sort the final scorecard by enrollment count descending, then by department name ascending.",
+                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                  "hint_2": "Run the previous working code first, then make only the focused change for this step."
+                },
+                "starterCode": "SELECT d.name, COUNT(DISTINCT c.id) AS course_count, COUNT(e.id) AS enrollment_count, COUNT(DISTINCT e.student_id) AS student_count\nFROM departments d\nLEFT JOIN courses c ON d.id = c.department_id\nLEFT JOIN enrollments e ON c.id = e.course_id\nGROUP BY d.name;\n-- Project step 6: Rank the Scorecard Predictably\n-- Keep the working code above from the previous step.\n-- Next, Sort the final scorecard by enrollment count descending, then by department name ascending\n-- Add only the focused change for this step inside the existing work.\n",
+                "solutionCode": "SELECT d.name, COUNT(DISTINCT c.id) AS course_count, COUNT(e.id) AS enrollment_count, COUNT(DISTINCT e.student_id) AS student_count\nFROM departments d\nLEFT JOIN courses c ON d.id = c.department_id\nLEFT JOIN enrollments e ON c.id = e.course_id\nGROUP BY d.name\nORDER BY enrollment_count DESC, d.name ASC;\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "SELECT d.name, COUNT(DISTINCT c.id) AS course_count, COUNT(e.id) AS enrollment_count, COUNT(DISTINCT e.student_id) AS student_count\nFROM departments d\nLEFT JOIN courses c ON d.id = c.department_id\nLEFT JOIN enrollments e ON c.id = e.course_id\nGROUP BY d.name;\n-- Project step 6: Rank the Scorecard Predictably\n-- Keep the working code above from the previous step.\n-- Next, Sort the final scorecard by enrollment count descending, then by department name ascending\n-- Add only the focused change for this step inside the existing work.\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_py": {
+                    "content": "SELECT d.name, COUNT(DISTINCT c.id) AS course_count, COUNT(e.id) AS enrollment_count, COUNT(DISTINCT e.student_id) AS student_count\nFROM departments d\nLEFT JOIN courses c ON d.id = c.department_id\nLEFT JOIN enrollments e ON c.id = e.course_id\nGROUP BY d.name\nORDER BY enrollment_count DESC, d.name ASC;\n"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "multi-table-sql": {
+      "multi-table-sql-module-2-outer-joins-and-accurate-counts": {
+        "module-2-department-participation-scorecard": {
+          "sketch-intro": {
+            "title": "Project Overview: Department Participation Scorecard",
+            "bodyMarkdown": "In this project, you will create a comprehensive department participation scorecard for a school. The goal is to ensure that every department is represented, even if it has no courses or enrollments. You'll use SQL to join tables and calculate accurate counts for courses, enrollments, and unique students per department. This project will help you understand how to preserve data integrity and report accuracy using LEFT JOINs and aggregate functions."
+          }
+        }
+      }
+    }
+  }
+}

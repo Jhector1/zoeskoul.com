@@ -1,0 +1,266 @@
+{
+  "topicId": "final-school-program-participation-report",
+  "subjectSlug": "sql--multi-table-sql--draft",
+  "moduleSlug": "multi-table-sql-module-3-final-capstone",
+  "sectionSlug": "sql--multi-table-sql--draft-multi-table-sql-section-3-final-capstone",
+  "prefix": "multi_table_sql_module_3",
+  "minutes": 110,
+  "runtimeDefaults": {
+    "kind": "sql",
+    "showSchema": true,
+    "showErd": true,
+    "showChen": true,
+    "supportsTerminal": false,
+    "supportsMultiFile": false,
+    "supportsFileSystem": false,
+    "datasetId": "school_relations_intro",
+    "fixedSqlDialect": "sqlite",
+    "resultShape": "table"
+  },
+  "serviceDefaults": null,
+  "topic": {
+    "labelKey": "topics.sql--multi-table-sql--draft.multi-table-sql-module-3-final-capstone.final-school-program-participation-report.label",
+    "summaryKey": "topics.sql--multi-table-sql--draft.multi-table-sql-module-3-final-capstone.final-school-program-participation-report.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql--multi-table-sql--draft.multi-table-sql-module-3-final-capstone.final-school-program-participation-report.cards.sketch0.title",
+      "sketchId": "sketch-intro",
+      "height": 420
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.sql--multi-table-sql--draft.multi-table-sql-module-3-final-capstone.final-school-program-participation-report.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "displayKind": "capstone",
+        "uiKind": "capstone",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "step1_establish_grain",
+            "titleKey": "topics.sql--multi-table-sql--draft.multi-table-sql-module-3-final-capstone.final-school-program-participation-report.projectSteps.step1_establish_grain.title",
+            "exerciseKey": "step1-establish-grain",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "step2_add_counts",
+            "titleKey": "topics.sql--multi-table-sql--draft.multi-table-sql-module-3-final-capstone.final-school-program-participation-report.projectSteps.step2_add_counts.title",
+            "exerciseKey": "step2-add-counts",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "step3_add_distinct_students",
+            "titleKey": "topics.sql--multi-table-sql--draft.multi-table-sql-module-3-final-capstone.final-school-program-participation-report.projectSteps.step3_add_distinct_students.title",
+            "exerciseKey": "step3-add-distinct-students",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "step4_label_rank",
+            "titleKey": "topics.sql--multi-table-sql--draft.multi-table-sql-module-3-final-capstone.final-school-program-participation-report.projectSteps.step4_label_rank.title",
+            "exerciseKey": "step4-label-rank",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch-intro",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql--multi-table-sql--draft.multi-table-sql-module-3-final-capstone.final-school-program-participation-report.sketch-intro.title",
+      "bodyKey": "sketches.sql--multi-table-sql--draft.multi-table-sql-module-3-final-capstone.final-school-program-participation-report.sketch-intro.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "step1-establish-grain",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql--multi-table-sql--draft.multi-table-sql-module-3-final-capstone.final-school-program-participation-report.finalCapstone.steps.step1_establish_grain",
+      "language": "sql",
+      "starterCode": "@:topics.sql--multi-table-sql--draft.multi-table-sql-module-3-final-capstone.final-school-program-participation-report.finalCapstone.steps.step1_establish_grain.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "school_relations_intro",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "main.sql",
+        "starterCode": "@:topics.sql--multi-table-sql--draft.multi-table-sql-module-3-final-capstone.final-school-program-participation-report.finalCapstone.steps.step1_establish_grain.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.sql",
+            "content": "@:topics.sql--multi-table-sql--draft.multi-table-sql-module-3-final-capstone.final-school-program-participation-report.finalCapstone.steps.step1_establish_grain.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "school_relations_intro",
+        "resultShape": "table",
+        "solutionCode": "SELECT d.name AS department_name\nFROM departments d\nLEFT JOIN courses c ON d.id = c.department_id\nLEFT JOIN enrollments e ON c.id = e.course_id\nGROUP BY d.id;"
+      }
+    },
+    {
+      "id": "step2-add-counts",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql--multi-table-sql--draft.multi-table-sql-module-3-final-capstone.final-school-program-participation-report.finalCapstone.steps.step2_add_counts",
+      "language": "sql",
+      "starterCode": "@:topics.sql--multi-table-sql--draft.multi-table-sql-module-3-final-capstone.final-school-program-participation-report.finalCapstone.steps.step2_add_counts.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "school_relations_intro",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "main.sql",
+        "starterCode": "@:topics.sql--multi-table-sql--draft.multi-table-sql-module-3-final-capstone.final-school-program-participation-report.finalCapstone.steps.step2_add_counts.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.sql",
+            "content": "@:topics.sql--multi-table-sql--draft.multi-table-sql-module-3-final-capstone.final-school-program-participation-report.finalCapstone.steps.step2_add_counts.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "school_relations_intro",
+        "resultShape": "table",
+        "solutionCode": "SELECT d.name AS department_name, COUNT(c.id) AS course_count, COUNT(e.id) AS enrollment_count\nFROM departments d\nLEFT JOIN courses c ON d.id = c.department_id\nLEFT JOIN enrollments e ON c.id = e.course_id\nGROUP BY d.id;"
+      }
+    },
+    {
+      "id": "step3-add-distinct-students",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql--multi-table-sql--draft.multi-table-sql-module-3-final-capstone.final-school-program-participation-report.finalCapstone.steps.step3_add_distinct_students",
+      "language": "sql",
+      "starterCode": "@:topics.sql--multi-table-sql--draft.multi-table-sql-module-3-final-capstone.final-school-program-participation-report.finalCapstone.steps.step3_add_distinct_students.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "school_relations_intro",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "main.sql",
+        "starterCode": "@:topics.sql--multi-table-sql--draft.multi-table-sql-module-3-final-capstone.final-school-program-participation-report.finalCapstone.steps.step3_add_distinct_students.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.sql",
+            "content": "@:topics.sql--multi-table-sql--draft.multi-table-sql-module-3-final-capstone.final-school-program-participation-report.finalCapstone.steps.step3_add_distinct_students.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "school_relations_intro",
+        "resultShape": "table",
+        "solutionCode": "SELECT d.name AS department_name, COUNT(c.id) AS course_count, COUNT(e.id) AS enrollment_count, COUNT(DISTINCT e.student_id) AS student_count\nFROM departments d\nLEFT JOIN courses c ON d.id = c.department_id\nLEFT JOIN enrollments e ON c.id = e.course_id\nGROUP BY d.id;"
+      }
+    },
+    {
+      "id": "step4-label-rank",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql--multi-table-sql--draft.multi-table-sql-module-3-final-capstone.final-school-program-participation-report.finalCapstone.steps.step4_label_rank",
+      "language": "sql",
+      "starterCode": "@:topics.sql--multi-table-sql--draft.multi-table-sql-module-3-final-capstone.final-school-program-participation-report.finalCapstone.steps.step4_label_rank.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "school_relations_intro",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "main.sql",
+        "starterCode": "@:topics.sql--multi-table-sql--draft.multi-table-sql-module-3-final-capstone.final-school-program-participation-report.finalCapstone.steps.step4_label_rank.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.sql",
+            "content": "@:topics.sql--multi-table-sql--draft.multi-table-sql-module-3-final-capstone.final-school-program-participation-report.finalCapstone.steps.step4_label_rank.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "school_relations_intro",
+        "resultShape": "table",
+        "solutionCode": "SELECT d.name AS department_name, COUNT(c.id) AS course_count, COUNT(e.id) AS enrollment_count, COUNT(DISTINCT e.student_id) AS student_count,\nCASE\n  WHEN COUNT(e.id) = 0 THEN 'No activity'\n  WHEN COUNT(c.id) >= 2 AND COUNT(DISTINCT e.student_id) >= 2 THEN 'Broad participation'\n  ELSE 'Active'\nEND AS participation_status\nFROM departments d\nLEFT JOIN courses c ON d.id = c.department_id\nLEFT JOIN enrollments e ON c.id = e.course_id\nGROUP BY d.id\nORDER BY enrollment_count DESC, department_name ASC;"
+      }
+    }
+  ]
+}

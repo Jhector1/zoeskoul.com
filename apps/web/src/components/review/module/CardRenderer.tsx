@@ -289,6 +289,7 @@ export default function CardRenderer(props: {
                         {...runtimeDefaultsProps}
                         routeExerciseId={routeExerciseId}
                         onNavigateToExerciseRoute={onNavigateToExerciseRoute}
+                        compactNavigationKind="embedded_try_it"
                         onCompactNavigationStateChange={active ? onCompactQuizNavigationChange : undefined}
                     />
                 )}
@@ -381,6 +382,7 @@ export default function CardRenderer(props: {
                             {...runtimeDefaultsProps}
                             routeExerciseId={routeExerciseId}
                             onNavigateToExerciseRoute={onNavigateToExerciseRoute}
+                            compactNavigationKind={displayKind === "tryIt" ? "embedded_try_it" : kind}
                             onCompactNavigationStateChange={active ? onCompactQuizNavigationChange : undefined}
                         />
                     )

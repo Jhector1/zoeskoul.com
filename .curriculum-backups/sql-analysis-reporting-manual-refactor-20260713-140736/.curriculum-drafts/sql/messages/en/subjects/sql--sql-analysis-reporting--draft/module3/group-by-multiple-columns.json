@@ -1,0 +1,167 @@
+{
+  "topics": {
+    "sql--sql-analysis-reporting--draft": {
+      "sql-analysis-reporting-module-3-grouped-summaries": {
+        "group-by-multiple-columns": {
+          "label": "GROUP BY Multiple Columns",
+          "summary": "Create one summary row for each meaningful combination of values.",
+          "cards": {
+            "sketch0": {
+              "title": "Understanding GROUP BY with Multiple Columns"
+            },
+            "sketch1": {
+              "title": "Sorting Grouped Results"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_group_by_multiple_columns_sketch0": {
+              "title": "Try GROUP BY with Multiple Columns",
+              "prompt": "Write a query to find the total sales amount for each combination of region and category in the `sales_reporting` table. Use the `SUM` function to calculate the total sales amount.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT region, category, SUM(quantity * unit_price) AS total_sales\nFROM sales_reporting\nGROUP BY region, category;"
+            },
+            "try_group_by_multiple_columns_sketch1": {
+              "title": "Sort Grouped Results by Total Sales",
+              "prompt": "Write a query to find the total sales amount for each combination of region and category, and sort the results by total sales in descending order.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT region, category, SUM(quantity * unit_price) AS total_sales\nFROM sales_reporting\nGROUP BY region, category\nORDER BY total_sales DESC;"
+            }
+          },
+          "practice": {
+            "single-choice-1": {
+              "title": "Purpose of GROUP BY",
+              "prompt": "What is the primary purpose of the GROUP BY clause in SQL?",
+              "hint": "Think about how GROUP BY affects the rows in the result set.",
+              "help": {
+                "concept": "GROUP BY is used to aggregate data based on unique combinations of specified columns.",
+                "hint_1": "GROUP BY groups rows that have the same values in specified columns.",
+                "hint_2": "It is often used with aggregate functions like SUM, COUNT, etc."
+              },
+              "options": {
+                "a": "To filter rows based on a condition",
+                "b": "To sort the result set",
+                "c": "To group rows that have the same values in specified columns",
+                "d": "To join tables"
+              }
+            },
+            "single-choice-2": {
+              "title": "Sorting Grouped Results",
+              "prompt": "Which SQL clause is used to sort the results of a grouped query?",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "options": {
+                "a": "GROUP BY",
+                "b": "ORDER BY",
+                "c": "WHERE",
+                "d": "HAVING"
+              }
+            },
+            "multi-choice-1": {
+              "title": "Aggregate Functions with GROUP BY",
+              "prompt": "Which of the following aggregate functions can be used with the GROUP BY clause? Select all that apply.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "options": {
+                "a": "SUM",
+                "b": "COUNT",
+                "c": "AVG",
+                "d": "JOIN"
+              }
+            },
+            "drag-reorder-1": {
+              "title": "Order of SQL Clauses",
+              "prompt": "Arrange the SQL clauses in the correct order of execution for a query that includes grouping and sorting.",
+              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "help": {
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
+              },
+              "tokens": {
+                "t1": "SELECT",
+                "t2": "FROM",
+                "t3": "WHERE",
+                "t4": "GROUP BY",
+                "t5": "ORDER BY"
+              }
+            },
+            "fill-blank-choice-1": {
+              "title": "GROUP BY Clause",
+              "prompt": "Complete the SQL statement to group data by region and category.",
+              "hint": "Use the correct SQL syntax for grouping.",
+              "help": {
+                "concept": "the missing term is used to aggregate data based on unique combinations of specified columns.",
+                "hint_1": "the missing term follows the SELECT and FROM clauses.",
+                "hint_2": "Specify the columns to the missing term after the the missing term keyword."
+              },
+              "template": "SELECT region, category, SUM(quantity) FROM sales_reporting [blank1] region, category;",
+              "choices": [
+                "GROUP BY",
+                "ORDER BY",
+                "WHERE",
+                "HAVING"
+              ]
+            },
+            "fill-blank-choice-2": {
+              "title": "ORDER BY Clause",
+              "prompt": "Complete the SQL statement to sort the results by total sales in descending order.",
+              "hint": "Use the correct SQL syntax for sorting.",
+              "help": {
+                "concept": "the missing term is used to sort the results of a query.",
+                "hint_1": "the missing term follows the GROUP BY clause.",
+                "hint_2": "Specify DESC to sort in descending order."
+              },
+              "template": "SELECT region, category, SUM(quantity * unit_price) AS total_sales FROM sales_reporting GROUP BY region, category [blank1] total_sales DESC;",
+              "choices": [
+                "ORDER BY",
+                "GROUP BY",
+                "WHERE",
+                "HAVING"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql--sql-analysis-reporting--draft": {
+      "sql-analysis-reporting-module-3-grouped-summaries": {
+        "group-by-multiple-columns": {
+          "sketch0": {
+            "title": "Understanding GROUP BY with Multiple Columns",
+            "bodyMarkdown": "When you use the `GROUP BY` clause in SQL, you can group your results by one or more columns. This is useful when you want to create summaries for each unique combination of values in those columns. For example, if you have a sales dataset, you might want to group sales data by both `region` and `category` to see how different product categories perform in different regions.\n\nHere's a basic example:\n\n```sql\nSELECT region, category, SUM(quantity) AS total_quantity\nFROM sales_reporting\nGROUP BY region, category;\n```\n\nIn this query, we're selecting the `region` and `category` columns and calculating the total quantity sold for each combination of region and category. The `GROUP BY` clause ensures that the results are grouped by both `region` and `category`, providing a summary for each unique pair of values."
+          },
+          "sketch1": {
+            "title": "Sorting Grouped Results",
+            "bodyMarkdown": "After grouping your data, you might want to sort the results to make them easier to analyze. You can use the `ORDER BY` clause to sort the grouped results based on one or more columns, including aggregate functions.\n\nFor example, if you want to sort the grouped results by the total quantity in descending order, you can modify the previous query like this:\n\n```sql\nSELECT SUM(quantity) AS total_quantity\nFROM orders;\n```\n\nThis query will first group the data by `region` and `category`, then sort the results by `total_quantity` in descending order, showing the highest quantities first. Sorting helps in quickly identifying the most significant groups in your data."
+          }
+        }
+      }
+    }
+  }
+}

@@ -86,9 +86,11 @@ import {
 import { resolveActiveToolScopeKey } from "./activeToolScopeKey";
 import { resolveCompactAssignmentCtaVisibility } from "../assignmentCtaVisibility";
 import type { CompactQuizNavigationState } from "../compactFlowNavigation";
+import { shouldShowFinalCertificateCta } from "../certificateNavigation";
 import {
     resolveToolsRailVisibility,
     shouldDefaultCollapseToolsRailForCompactQuiz,
+    toolPresentationPolicyFromManifest,
 } from "../toolsRailVisibility";
 
 function normalizeCompactNavKind(value: unknown) {
@@ -1153,6 +1155,8 @@ export function useReviewModuleController({
                 state.total,
                 state.canGoPrev ? 1 : 0,
                 state.canGoNext ? 1 : 0,
+                state.kind ?? "",
+                state.stepStatuses?.join(",") ?? "",
                 state.prevLabel ?? "",
                 state.nextLabel ?? "",
             ].join(":")
@@ -1235,10 +1239,17 @@ export function useReviewModuleController({
             ) ?? null;
     }, [targetRegistry, activeCard?.id, viewTid]);
 
+    const activeCardExerciseTools =
+        toolPresentationPolicyFromManifest(
+            activeCardWorkspaceExercise?.manifest,
+        );
+
     const shouldDefaultCollapseRightRail = shouldDefaultCollapseToolsRailForCompactQuiz({
         compactLearnerUi: learnerUiFlags.compactLearnerUi,
         showDebugLearningUi: learnerUiFlags.showDebugLearningUi,
         activeCard,
+        topicTools: viewTopic?.meta?.tools,
+        exerciseTools: activeCardExerciseTools,
         routeTargetKind: routeTarget?.kind ?? null,
         routeTargetTargetKind: routeTarget?.targetKind ?? null,
         cardHasEmbeddedTryIt: Boolean(
@@ -1249,6 +1260,8 @@ export function useReviewModuleController({
     });
     const toolsRailVisibility = resolveToolsRailVisibility({
         activeCard,
+        topicTools: viewTopic?.meta?.tools,
+        exerciseTools: activeCardExerciseTools,
         routeTargetKind: routeTarget?.kind ?? null,
         routeTargetTargetKind: routeTarget?.targetKind ?? null,
         cardHasEmbeddedTryIt: Boolean(
@@ -2075,6 +2088,22 @@ export function useReviewModuleController({
         unlockAll || activeCardIndex + 1 <= maxUnlockedCardIndex;
     const canGoNextCard =
         hasNextCard && activeCardCanAdvance && nextCardUnlocked;
+    const certificateLabel = subjectFinish?.certificateIssued
+        ? "View certificate"
+        : "Get certificate";
+    const canOpenCertificate = Boolean(
+        subjectFinish?.certificateEligible || subjectFinish?.certificateIssued,
+    );
+    const showFinalCertificateCta = shouldShowFinalCertificateCta({
+        navLoading,
+        navError,
+        nextModuleId: nav?.nextModuleId ?? null,
+        nextTopicId: topicFlow.nextTopic?.id ?? null,
+        activeCardIndex,
+        cardCount: viewCards.length,
+        topicComplete: viewIsComplete,
+        atEndOfPublishedTrack: Boolean(subjectFinish?.atEndOfPublishedTrack),
+    });
     const compactSinglePrevEnabled =
         Boolean(compactQuizNavigation?.canGoPrev) ||
         hasPrevCard ||
@@ -2084,11 +2113,7 @@ export function useReviewModuleController({
         Boolean(compactQuizNavigation?.canGoNext) ||
         canGoNextCard ||
         (viewIsComplete && outroContinueEnabled) ||
-        (!navLoading &&
-            !navError &&
-            !nav?.nextModuleId &&
-            Boolean(subjectFinish?.atEndOfPublishedTrack) &&
-            Boolean(subjectFinish?.certificateEligible || subjectFinish?.certificateIssued));
+        (showFinalCertificateCta && canOpenCertificate);
     const compactSinglePrevLabel =
         compactQuizNavigation?.canGoPrev && compactQuizNavigation.prevLabel
             ? compactQuizNavigation.prevLabel
@@ -2107,23 +2132,11 @@ export function useReviewModuleController({
         if (viewIsComplete && outroContinueEnabled) {
             if (topicFlow.nextTopic?.id) return "Next topic";
             if (nav?.nextModuleId) return "Next module";
-            if (
-                subjectFinish?.atEndOfPublishedTrack &&
-                (subjectFinish?.certificateEligible || subjectFinish?.certificateIssued)
-            ) {
-                return "View certificate";
-            }
             return "Continue";
         }
 
-        if (
-            !navLoading &&
-            !navError &&
-            !nav?.nextModuleId &&
-            subjectFinish?.atEndOfPublishedTrack &&
-            (subjectFinish?.certificateEligible || subjectFinish?.certificateIssued)
-        ) {
-            return "View certificate";
+        if (showFinalCertificateCta) {
+            return certificateLabel;
         }
 
         return "Next";
@@ -2131,15 +2144,11 @@ export function useReviewModuleController({
         canGoNextCard,
         compactQuizNavigation?.canGoNext,
         compactQuizNavigation?.nextLabel,
-        nav?.nextModuleId,
-        navError,
-        navLoading,
+        certificateLabel,
         nextCard,
         nextLocked,
         outroContinueEnabled,
-        subjectFinish?.atEndOfPublishedTrack,
-        subjectFinish?.certificateEligible,
-        subjectFinish?.certificateIssued,
+        showFinalCertificateCta,
         topicFlow.nextTopic?.id,
         viewIsComplete,
     ]);
@@ -2238,13 +2247,7 @@ export function useReviewModuleController({
             return;
         }
 
-        if (
-            !navLoading &&
-            !navError &&
-            !nav?.nextModuleId &&
-            subjectFinish?.atEndOfPublishedTrack &&
-            (subjectFinish?.certificateEligible || subjectFinish?.certificateIssued)
-        ) {
+        if (showFinalCertificateCta && canOpenCertificate) {
             handleOpenCertificate();
         }
     }, [
@@ -2255,14 +2258,10 @@ export function useReviewModuleController({
         handleNavigateCardIndex,
         handleOpenCertificate,
         handleOutroContinue,
-        nav?.nextModuleId,
-        navError,
-        navLoading,
+        canOpenCertificate,
         outroContinueEnabled,
         persistBeforeUnifiedNavigation,
-        subjectFinish?.atEndOfPublishedTrack,
-        subjectFinish?.certificateEligible,
-        subjectFinish?.certificateIssued,
+        showFinalCertificateCta,
         viewIsComplete,
     ]);
 
@@ -2343,6 +2342,11 @@ export function useReviewModuleController({
         routeCanUseBoundExercise,
         tool,
         topicSqlFallback: runtime.topicSqlFallback,
+        topicTools:
+            (viewTopic?.meta?.tools as import("@zoeskoul/curriculum-contracts").ToolPresentationPolicy | null | undefined) ??
+            null,
+        cardTools: activeCard?.tools ?? null,
+        compactLayout: !panels.showDesktopRight,
     });
     const rightRailIdeConfig = resolveRightRailIdeConfig({
         rightRailExerciseIdeConfig: rightRailExerciseRuntime?.ideConfig ?? null,
@@ -2545,6 +2549,7 @@ export function useReviewModuleController({
                 sqlSeedSql: rightRailSqlProps.sqlSeedSql,
                 sqlInitialTableSnapshots: rightRailSqlProps.sqlInitialTableSnapshots,
                 sqlPaneOptions: rightRailSqlProps.sqlPaneOptions,
+                defaultSurface: rightRailSqlProps.defaultSurface,
             },
         },
 
@@ -2649,6 +2654,7 @@ export function useReviewModuleController({
             onActiveCardIndexChange: handleNavigateCardIndex,
             onNavigateToExerciseRoute: handleNavigateToExerciseRoute,
             onCompactQuizNavigationChange: handleCompactQuizNavigationChange,
+            compactQuizNavigation,
             subjectRuntimeDefaults: topicStageRuntimeDefaults.subjectRuntimeDefaults,
             courseRuntimeDefaults: topicStageRuntimeDefaults.courseRuntimeDefaults,
             moduleRuntimeDefaults: topicStageRuntimeDefaults.moduleRuntimeDefaults,
@@ -2674,18 +2680,10 @@ export function useReviewModuleController({
                 Boolean(nav?.nextModuleId) &&
                 (nextLocked || canGoNextModule),
 
-            showCertificateCta:
-                !navLoading &&
-                !navError &&
-                !nav?.nextModuleId &&
-                Boolean(subjectFinish?.atEndOfPublishedTrack),
+            showCertificateCta: showFinalCertificateCta,
 
-            canGetCertificate: Boolean(
-                subjectFinish?.certificateEligible || subjectFinish?.certificateIssued,
-            ),
-            certificateLabel: subjectFinish?.certificateIssued
-                ? "View certificate"
-                : "Get certificate",
+            canGetCertificate: canOpenCertificate,
+            certificateLabel,
             certificateHint: subjectFinish?.message ?? null,
         },
         celebrations: {

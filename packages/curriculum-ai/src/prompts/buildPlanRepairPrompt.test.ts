@@ -18,5 +18,8 @@ describe("buildPlanRepairPrompt", () => {
     expect(rules).toContain("moduleSlug format: <subjectSlug>-module-<number>-<short-topic-area>");
     expect(rules).toContain("Do not use shorthand prefixes such as lin1");
     expect(rules).toContain("Do not duplicate the course slug");
+    expect(rules).toContain("exactly one module whose role is capstone");
+    expect(rules).toContain("Set projectBrief to null on every non-capstone topic");
+    expect(rules).toContain("projectBrief.stepCountTarget");
   });
 });

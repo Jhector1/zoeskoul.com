@@ -17,20 +17,6 @@
             },
             "quiz": {
               "title": "Quiz"
-            },
-            "project": {
-              "title": "Practice secondary sorting with product reports"
-            }
-          },
-          "projectSteps": {
-            "ci_sort_category_then_price": {
-              "title": "Sort by category, then price"
-            },
-            "ci_sort_stock_then_name": {
-              "title": "Sort by stock, then name"
-            },
-            "ci_sort_category_then_created": {
-              "title": "Sort by category, then date"
             }
           },
           "quiz": {
@@ -197,7 +183,7 @@
             },
             "try-secondary_sort-sketch0": {
               "title": "Sort by category, then price",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that shows `name`, `category`, and `price` from `products`. Sort first by `category` in ascending order, then by `price` in descending order. Write the query in the SQL editor, click Run query, and check the results table.",
+              "prompt": "Build a ranking query that shows `name`, `category`, and `price` from `products`. Sort first by `category` in ascending order, then by `price` in descending order. Run it and compare the result with the expected table.",
               "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
               "help": {
                 "concept": "This SQL exercise checks whether your query returns the requested result.",
@@ -207,19 +193,19 @@
               "starterCode": "-- Show name, category, and price from products.\nSELECT name, category, price\nFROM products"
             },
             "try-secondary_sort-sketch1": {
-              "title": "Sort by stock, then name",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that shows `name` and `stock` from `products`. Sort by `stock` from highest to lowest, and for any tie, sort by `name` from A to Z. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Break Stock Ties by Product Name",
+              "prompt": "Return `name` and `stock`. Sort higher stock first, then sort tied rows alphabetically by name.",
+              "hint": "Add name ASC as the second ORDER BY expression.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
+                "concept": "Return `name` and `stock`. Sort higher stock first, then sort tied rows alphabetically by name.",
+                "hint_1": "Add name ASC as the second ORDER BY expression.",
+                "hint_2": "Run the query and compare the returned columns and rows with the expected result."
               },
-              "starterCode": "-- Show name and stock from products.\nSELECT name, stock\nFROM products"
+              "starterCode": "SELECT name, stock\nFROM products\nORDER BY stock DESC;"
             },
             "try-secondary_sort-sketch2": {
               "title": "Sort by category, then date",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that shows `name`, `category`, and `created_at` from `products`. Sort by `category` in ascending order, then by `created_at` in ascending order so earlier dates come first within each category. Write the query in the SQL editor, click Run query, and check the results table.",
+              "prompt": "Build a ranking query that shows `name`, `category`, and `created_at` from `products`. Sort by `category` in ascending order, then by `created_at` in ascending order so earlier dates come first within each category. Run it and compare the result with the expected table.",
               "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
               "help": {
                 "concept": "This SQL exercise checks whether your query returns the requested result.",
@@ -233,15 +219,15 @@
             "allowReveal": true,
             "try_secondary_sort_sketch0": {
               "title": "Sort by category, then price",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that shows `name`, `category`, and `price` from `products`. Sort first by `category` in ascending order, then by `price` in descending order. Write the query in the SQL editor, click Run query, and check the results table."
+              "prompt": "Build a ranking query that shows `name`, `category`, and `price` from `products`. Sort first by `category` in ascending order, then by `price` in descending order. Run it and compare the result with the expected table."
             },
             "try_secondary_sort_sketch1": {
-              "title": "Sort by stock, then name",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that shows `name` and `stock` from `products`. Sort by `stock` from highest to lowest, and for any tie, sort by `name` from A to Z. Write the query in the SQL editor, click Run query, and check the results table."
+              "title": "Break Stock Ties by Product Name",
+              "prompt": "Return `name` and `stock`. Sort higher stock first, then sort tied rows alphabetically by name."
             },
             "try_secondary_sort_sketch2": {
               "title": "Sort by category, then date",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that shows `name`, `category`, and `created_at` from `products`. Sort by `category` in ascending order, then by `created_at` in ascending order so earlier dates come first within each category. Write the query in the SQL editor, click Run query, and check the results table."
+              "prompt": "Build a ranking query that shows `name`, `category`, and `created_at` from `products`. Sort by `category` in ascending order, then by `created_at` in ascending order so earlier dates come first within each category. Run it and compare the result with the expected table."
             }
           }
         }

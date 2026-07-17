@@ -1,0 +1,273 @@
+{
+  "topics": {
+    "sql-v2": {
+      "sql-v2-1": {
+        "query_one_column": {
+          "label": "Query One Column",
+          "summary": "Learn how to use SELECT and FROM to return a single column from the products table in the browser SQL runner.",
+          "cards": {
+            "sketch0": {
+              "title": "Selecting one column"
+            },
+            "sketch1": {
+              "title": "Use the exact column name"
+            },
+            "sketch2": {
+              "title": "What the result looks like"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Starter one-column query sheet"
+            }
+          },
+          "projectSteps": {
+            "ci_select_name_from_products": {
+              "title": "Query the name column"
+            },
+            "ci_select_price_from_products": {
+              "title": "Query the price column"
+            },
+            "ci_select_created_at_from_products": {
+              "title": "Query the created_at column"
+            }
+          },
+          "quiz": {
+            "sc_select_name_column": {
+              "title": "Pick the query for product names",
+              "prompt": "Which query returns only the `name` column from the `products` table?",
+              "hint": "Use `SELECT` with the exact column name, then `FROM products`.",
+              "help": {
+                "concept": "A basic one-column query names one real column after SELECT and one table after FROM.",
+                "hint_1": "The correct query must use the real column `name`, not `products` or `category`.",
+                "hint_2": "Look for the option shaped like `SELECT column_name FROM table_name;` with `name` and `products`."
+              },
+              "options": {
+                "a": "SELECT name FROM products;",
+                "b": "SELECT products FROM name;",
+                "c": "SELECT category FROM name;",
+                "d": "FROM products SELECT name;"
+              }
+            },
+            "sc_result_of_one_column_query": {
+              "title": "Understand the result shape",
+              "prompt": "If you run `SELECT price FROM products;`, what should the results table show?",
+              "hint": "Think about what `SELECT price` asks SQL to return.",
+              "help": {
+                "concept": "Selecting one column returns that single column for every row in the table unless filtering is added later.",
+                "hint_1": "The query does not ask for names, categories, or all columns.",
+                "hint_2": "Expect one column labeled `price`, with one row of price data for each product."
+              },
+              "options": {
+                "a": "One column named `price` with a row for each product",
+                "b": "All columns from the `products` table",
+                "c": "Only the first product's full row",
+                "d": "A single total price value"
+              }
+            },
+            "mc_valid_single_column_queries": {
+              "title": "Find valid one-column queries",
+              "prompt": "Which queries correctly return one column from the `products` table? Choose all that apply.",
+              "hint": "Check whether each query uses a real column from `products` and the table name `products`.",
+              "help": {
+                "concept": "A valid one-column SELECT query needs one existing column name and the correct table in the FROM clause.",
+                "hint_1": "Columns like `name` and `stock` exist in the schema, but invented names do not.",
+                "hint_2": "Choose every option that follows `SELECT real_column FROM products;` exactly."
+              },
+              "options": {
+                "a": "SELECT name FROM products;",
+                "b": "SELECT stock FROM products;",
+                "c": "SELECT product_name FROM products;",
+                "d": "SELECT products FROM stock;"
+              }
+            },
+            "mc_real_columns_in_products": {
+              "title": "Recognize real columns",
+              "prompt": "Which of these are actual column names in the `products` table? Choose all that apply.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "options": {
+                "a": "name",
+                "b": "created_at",
+                "c": "product_name",
+                "d": "stock_quantity"
+              }
+            },
+            "dr_order_basic_select_query": {
+              "title": "Build a one-column query",
+              "prompt": "Arrange the tokens to make a valid query that returns the `category` column from `products`.",
+              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "help": {
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
+              },
+              "tokens": {
+                "t1": "products;",
+                "t2": "FROM",
+                "t3": "SELECT",
+                "t4": "category"
+              }
+            },
+            "dr_order_price_query": {
+              "title": "Sequence the query parts",
+              "prompt": "Put these tokens in order to query the `price` column from the `products` table.",
+              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "help": {
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
+              },
+              "tokens": {
+                "t1": "price",
+                "t2": "products;",
+                "t3": "SELECT",
+                "t4": "FROM"
+              }
+            },
+            "fb_select_keyword": {
+              "title": "Complete the query keyword",
+              "prompt": "Fill in the missing SQL keyword.",
+              "hint": "The first keyword in a query that returns data is `the missing term`.",
+              "help": {
+                "concept": "SQL uses `the missing term` to choose which column or columns to return.",
+                "hint_1": "The blank comes before the column name `name`.",
+                "hint_2": "Use the keyword that starts a read-only query for table data."
+              },
+              "template": "[blank1] name FROM products;",
+              "choices": [
+                "SELECT",
+                "FROM",
+                "WHERE",
+                "TABLE"
+              ]
+            },
+            "fb_choose_correct_column": {
+              "title": "Fill the column name",
+              "prompt": "Choose the column name that makes this query return product stock values.",
+              "hint": "Use the exact column that stores how many items are available.",
+              "help": {
+                "concept": "The selected column determines which values appear in the results table.",
+                "hint_1": "In this dataset, the quantity available is stored in `the missing term`.",
+                "hint_2": "Pick the real column name used for counts of items on hand, not a guessed longer version."
+              },
+              "template": "SELECT [blank1] FROM products;",
+              "choices": [
+                "stock",
+                "stock_quantity",
+                "quantity",
+                "name"
+              ]
+            },
+            "ci_select_name_from_products": {
+              "title": "Query the name column",
+              "prompt": "Write a query that returns only the `name` column from the `products` table. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "-- Return only the name column from the products table.\nSELECT \nFROM products;"
+            },
+            "ci_select_price_from_products": {
+              "title": "Query the price column",
+              "prompt": "Write a query that returns only the `price` column from the `products` table. Use the SQL editor and Run query, then inspect the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "-- Return only the price column from the products table.\nSELECT column_name\nFROM products;"
+            },
+            "ci_select_created_at_from_products": {
+              "title": "Query the created_at column",
+              "prompt": "Write a query that returns only the `created_at` column from the `products` table. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "-- Return only the created_at column from the products table.\nSELECT date_column\nFROM products;"
+            },
+            "try-query_one_column-sketch0": {
+              "title": "Query `name` from products",
+              "prompt": "Scenario: A store manager needs a clear product-catalog query before sharing results with the team. Write a query that returns `name` from the `products` table. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the selected columns and table name in the SQL editor.",
+                "hint_2": "Run the query and compare the result table with the expected result."
+              },
+              "starterCode": "-- Return the name column from the products table.\nSELECT \nFROM products;"
+            },
+            "try-query_one_column-sketch1": {
+              "title": "Query `price` from products",
+              "prompt": "Scenario: A store manager needs a clear product-catalog query before sharing results with the team. Write a query that returns `price` from the `products` table. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the selected columns and table name in the SQL editor.",
+                "hint_2": "Run the query and compare the result table with the expected result."
+              },
+              "starterCode": "-- Return the price column from the products table.\nSELECT column_name\nFROM products;"
+            },
+            "try-query_one_column-sketch2": {
+              "title": "Return the Creation Date Column",
+              "prompt": "Return only `created_at` from the `products` table.",
+              "hint": "Place created_at after SELECT.",
+              "help": {
+                "concept": "Return only `created_at` from the `products` table.",
+                "hint_1": "Place created_at after SELECT.",
+                "hint_2": "Run the query and compare the returned columns and rows with the expected result."
+              },
+              "starterCode": "-- Return exactly one column\nSELECT\nFROM products;"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_query_one_column_sketch0": {
+              "title": "Query `name` from products",
+              "prompt": "Scenario: A store manager needs a clear product-catalog query before sharing results with the team. Write a query that returns `name` from the `products` table. Write the query in the SQL editor, click Run query, and check the results table."
+            },
+            "try_query_one_column_sketch1": {
+              "title": "Query `price` from products",
+              "prompt": "Scenario: A store manager needs a clear product-catalog query before sharing results with the team. Write a query that returns `price` from the `products` table. Write the query in the SQL editor, click Run query, and check the results table."
+            },
+            "try_query_one_column_sketch2": {
+              "title": "Return the Creation Date Column",
+              "prompt": "Return only `created_at` from the `products` table."
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql-v2": {
+      "sql-v2-1": {
+        "query_one_column": {
+          "sketch_select_one_column_intro": {
+            "title": "Selecting one column",
+            "bodyMarkdown": "When you want to see just one piece of information from a table, you can select a single column.\n\nIn this topic, the table is `products`. If you only want product names, write:\n\n```sql\nSELECT name\nFROM products;\n```\n\nThis query means:\n- `SELECT name` → return the `name` column\n- `FROM products` → get that column from the `products` table\n\nThe results table will show one column named `name`, with rows like `Sketchbook`, `Acrylic Paint Set`, and `Desk Lamp`.\n\nWorked example:\n- If the table has a row `(1, 'Sketchbook', 'Art', 12.99, 25, '2026-01-10')`\n- then this query returns just `Sketchbook` from that row"
+          },
+          "sketch_column_names_matter": {
+            "title": "Use the exact column name",
+            "bodyMarkdown": "SQL needs the real column name from the schema. In the `products` table, the columns are:\n- `id`\n- `name`\n- `category`\n- `price`\n- `stock`\n- `created_at`\n\nFor example, this works because `price` is a real column:\n\n```sql\nSELECT price\nFROM products;\n```\n\nLine by line:\n- `SELECT price` asks for the `price` values only\n- `FROM products` tells SQL which table to read\n\nThis would not work if you wrote a made-up column like `product_name`, because that column is not in this dataset.\n\nWorked example:\n- The row for `Notebook` has a price of `6.75`\n- so the query returns `6.75` in the `price` column for that row"
+          },
+          "sketch_result_shape_one_column": {
+            "title": "What the result looks like",
+            "bodyMarkdown": "A one-column query still returns multiple rows if the table has multiple records.\n\nExample:\n\n```sql\nSELECT category\nFROM products;\n```\n\nThis result has:\n- one column: `category`\n- six rows: one for each product in the table\n\nYou may see repeated values such as `Art` or `Home`, because different products can share the same category.\n\nWorked example from the dataset:\n- `Sketchbook` returns `Art`\n- `Desk Lamp` returns `Home`\n- `Notebook` returns `Stationery`\n\nSo even though you selected only one column, SQL still reads every row in `products`."
+          }
+        }
+      }
+    }
+  }
+}

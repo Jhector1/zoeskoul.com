@@ -1,0 +1,213 @@
+{
+  "topics": {
+    "sql--sql-analysis-reporting--draft": {
+      "sql-analysis-reporting-module-4-having-and-conditional-reporting": {
+        "module-4-performance-exception-report": {
+          "label": "Module 4 Project: Performance Exception Report",
+          "summary": "Build one region-category exception report that compares total and completed activity, calculates risk metrics, and keeps only groups needing attention.",
+          "cards": {
+            "sketch0": {
+              "title": "Project Brief"
+            },
+            "project": {
+              "title": "Build the Report"
+            }
+          },
+          "projectSteps": {
+            "project_step_1": {
+              "title": "Establish Total Orders by Group"
+            },
+            "project_step_2": {
+              "title": "Add Completed Orders"
+            },
+            "project_step_3": {
+              "title": "Calculate Completion Rate"
+            },
+            "project_step_4": {
+              "title": "Add Completed Net Sales"
+            },
+            "project_step_5": {
+              "title": "Add Rating and Missing-Discount Exposure"
+            },
+            "project_step_6": {
+              "title": "Assign the Exception Reason"
+            },
+            "project_step_7": {
+              "title": "Keep and Prioritize Only Exceptions"
+            }
+          },
+          "moduleProject": {
+            "steps": {
+              "project_step_1": {
+                "title": "Establish Total Orders by Group",
+                "prompt": "Begin the Module 4 Performance Exception Report. Calculate and return `region, category, COUNT(*) AS total_orders` from `sales_reporting`. Produce one result row per `region, category`.",
+                "hint": "Keep all statuses because later metrics compare completed rows with the full group.",
+                "help": {
+                  "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                  "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                  "hint_2": "Calculate and return `region, category, COUNT(*) AS total_orders` from `sales_reporting`. Produce one result row per `region, category`."
+                },
+                "starterCode": "-- Build the first working query below.",
+                "solutionCode": "SELECT\n    region,\n    category,\n    COUNT(*) AS total_orders\nFROM sales_reporting\nGROUP BY region, category;",
+                "starterFiles": {
+                  "main_sql": {
+                    "content": "-- Build the first working query below."
+                  }
+                },
+                "solutionFiles": {
+                  "main_sql": {
+                    "content": "SELECT\n    region,\n    category,\n    COUNT(*) AS total_orders\nFROM sales_reporting\nGROUP BY region, category;"
+                  }
+                }
+              },
+              "project_step_2": {
+                "title": "Add Completed Orders",
+                "prompt": "Extend the Module 4 Performance Exception Report with the next approved requirement. Calculate and return `region, category, COUNT(*) AS total_orders, SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders` from `sales_reporting`. Produce one result row per `region, category`.",
+                "hint": "Use a 1/0 CASE inside SUM so non-completed rows stay in the group.",
+                "help": {
+                  "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                  "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                  "hint_2": "Calculate and return `region, category, COUNT(*) AS total_orders, SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders` from `sales_reporting`. Produce one result row per `region, category`."
+                },
+                "starterCode": "SELECT\n    region,\n    category,\n    COUNT(*) AS total_orders\nFROM sales_reporting\nGROUP BY region, category;",
+                "solutionCode": "SELECT\n    region,\n    category,\n    COUNT(*) AS total_orders,\n    SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders\nFROM sales_reporting\nGROUP BY region, category;",
+                "starterFiles": {
+                  "main_sql": {
+                    "content": "SELECT\n    region,\n    category,\n    COUNT(*) AS total_orders\nFROM sales_reporting\nGROUP BY region, category;"
+                  }
+                },
+                "solutionFiles": {
+                  "main_sql": {
+                    "content": "SELECT\n    region,\n    category,\n    COUNT(*) AS total_orders,\n    SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders\nFROM sales_reporting\nGROUP BY region, category;"
+                  }
+                }
+              },
+              "project_step_3": {
+                "title": "Calculate Completion Rate",
+                "prompt": "Extend the Module 4 Performance Exception Report with the next approved requirement. Calculate and return `region, category, COUNT(*) AS total_orders, SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders, ROUND( 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*), 1 ) AS completion_rate` from `sales_reporting`. Produce one result row per `region, category`.",
+                "hint": "Use the same conditional count as the numerator and COUNT(*) as the denominator.",
+                "help": {
+                  "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                  "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                  "hint_2": "Calculate and return `region, category, COUNT(*) AS total_orders, SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders, ROUND( 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*), 1 ) AS completion_rate` from `sales_reporting`. Produce one result row per `region, category`."
+                },
+                "starterCode": "SELECT\n    region,\n    category,\n    COUNT(*) AS total_orders,\n    SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders\nFROM sales_reporting\nGROUP BY region, category;",
+                "solutionCode": "SELECT\n    region,\n    category,\n    COUNT(*) AS total_orders,\n    SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders,\n    ROUND(\n        100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*),\n        1\n    ) AS completion_rate\nFROM sales_reporting\nGROUP BY region, category;",
+                "starterFiles": {
+                  "main_sql": {
+                    "content": "SELECT\n    region,\n    category,\n    COUNT(*) AS total_orders,\n    SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders\nFROM sales_reporting\nGROUP BY region, category;"
+                  }
+                },
+                "solutionFiles": {
+                  "main_sql": {
+                    "content": "SELECT\n    region,\n    category,\n    COUNT(*) AS total_orders,\n    SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders,\n    ROUND(\n        100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*),\n        1\n    ) AS completion_rate\nFROM sales_reporting\nGROUP BY region, category;"
+                  }
+                }
+              },
+              "project_step_4": {
+                "title": "Add Completed Net Sales",
+                "prompt": "Extend the Module 4 Performance Exception Report with the next approved requirement. Calculate and return `region, category, COUNT(*) AS total_orders, SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders, ROUND( 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*), 1 ) AS completion_rate, ROUND(SUM( CASE WHEN order_status = 'Completed' THEN quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ELSE 0 END ), 2) AS completed_net_sales` from `sales_reporting`. Produce one result row per `region, category`.",
+                "hint": "Let completed rows contribute null-safe net sales and all other rows contribute zero.",
+                "help": {
+                  "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                  "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                  "hint_2": "Calculate and return `region, category, COUNT(*) AS total_orders, SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders, ROUND( 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*), 1 ) AS completion_rate, ROUND(SUM( CASE WHEN order_status = 'Completed' THEN quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ELSE 0 END ), 2) AS completed_net_sales` from `sales_reporting`. Produce one result row per `region, category`."
+                },
+                "starterCode": "SELECT\n    region,\n    category,\n    COUNT(*) AS total_orders,\n    SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders,\n    ROUND(\n        100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*),\n        1\n    ) AS completion_rate\nFROM sales_reporting\nGROUP BY region, category;",
+                "solutionCode": "SELECT\n    region,\n    category,\n    COUNT(*) AS total_orders,\n    SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders,\n    ROUND(\n        100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*),\n        1\n    ) AS completion_rate,\n    ROUND(SUM(\n        CASE\n            WHEN order_status = 'Completed' THEN\n                quantity * unit_price\n                - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n            ELSE 0\n        END\n    ), 2) AS completed_net_sales\nFROM sales_reporting\nGROUP BY region, category;",
+                "starterFiles": {
+                  "main_sql": {
+                    "content": "SELECT\n    region,\n    category,\n    COUNT(*) AS total_orders,\n    SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders,\n    ROUND(\n        100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*),\n        1\n    ) AS completion_rate\nFROM sales_reporting\nGROUP BY region, category;"
+                  }
+                },
+                "solutionFiles": {
+                  "main_sql": {
+                    "content": "SELECT\n    region,\n    category,\n    COUNT(*) AS total_orders,\n    SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders,\n    ROUND(\n        100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*),\n        1\n    ) AS completion_rate,\n    ROUND(SUM(\n        CASE\n            WHEN order_status = 'Completed' THEN\n                quantity * unit_price\n                - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n            ELSE 0\n        END\n    ), 2) AS completed_net_sales\nFROM sales_reporting\nGROUP BY region, category;"
+                  }
+                }
+              },
+              "project_step_5": {
+                "title": "Add Rating and Missing-Discount Exposure",
+                "prompt": "Extend the Module 4 Performance Exception Report with the next approved requirement. Calculate and return `region, category, COUNT(*) AS total_orders, SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders, ROUND( 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*), 1 ) AS completion_rate, ROUND(SUM( CASE WHEN order_status = 'Completed' THEN quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ELSE 0 END ), 2) AS completed_net_sales, ROUND(AVG(customer_rating), 2) AS average_rating, SUM(CASE WHEN discount_pct IS NULL THEN 1 ELSE 0 END) AS missing_discount_orders` from `sales_reporting`. Produce one result row per `region, category`.",
+                "hint": "Add one recorded-value average and one conditional missing-value count.",
+                "help": {
+                  "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                  "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                  "hint_2": "Calculate and return `region, category, COUNT(*) AS total_orders, SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders, ROUND( 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*), 1 ) AS completion_rate, ROUND(SUM( CASE WHEN order_status = 'Completed' THEN quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ELSE 0 END ), 2) AS completed_net_sales, ROUND(AVG(customer_rating), 2) AS average_rating, SUM(CASE WHEN discount_pct IS NULL THEN 1 ELSE 0 END) AS missing_discount_orders` from `sales_reporting`. Produce one result row per `region, category`."
+                },
+                "starterCode": "SELECT\n    region,\n    category,\n    COUNT(*) AS total_orders,\n    SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders,\n    ROUND(\n        100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*),\n        1\n    ) AS completion_rate,\n    ROUND(SUM(\n        CASE\n            WHEN order_status = 'Completed' THEN\n                quantity * unit_price\n                - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n            ELSE 0\n        END\n    ), 2) AS completed_net_sales\nFROM sales_reporting\nGROUP BY region, category;",
+                "solutionCode": "SELECT\n    region,\n    category,\n    COUNT(*) AS total_orders,\n    SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders,\n    ROUND(\n        100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*),\n        1\n    ) AS completion_rate,\n    ROUND(SUM(\n        CASE\n            WHEN order_status = 'Completed' THEN\n                quantity * unit_price\n                - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n            ELSE 0\n        END\n    ), 2) AS completed_net_sales,\n    ROUND(AVG(customer_rating), 2) AS average_rating,\n    SUM(CASE WHEN discount_pct IS NULL THEN 1 ELSE 0 END) AS missing_discount_orders\nFROM sales_reporting\nGROUP BY region, category;",
+                "starterFiles": {
+                  "main_sql": {
+                    "content": "SELECT\n    region,\n    category,\n    COUNT(*) AS total_orders,\n    SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders,\n    ROUND(\n        100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*),\n        1\n    ) AS completion_rate,\n    ROUND(SUM(\n        CASE\n            WHEN order_status = 'Completed' THEN\n                quantity * unit_price\n                - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n            ELSE 0\n        END\n    ), 2) AS completed_net_sales\nFROM sales_reporting\nGROUP BY region, category;"
+                  }
+                },
+                "solutionFiles": {
+                  "main_sql": {
+                    "content": "SELECT\n    region,\n    category,\n    COUNT(*) AS total_orders,\n    SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders,\n    ROUND(\n        100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*),\n        1\n    ) AS completion_rate,\n    ROUND(SUM(\n        CASE\n            WHEN order_status = 'Completed' THEN\n                quantity * unit_price\n                - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n            ELSE 0\n        END\n    ), 2) AS completed_net_sales,\n    ROUND(AVG(customer_rating), 2) AS average_rating,\n    SUM(CASE WHEN discount_pct IS NULL THEN 1 ELSE 0 END) AS missing_discount_orders\nFROM sales_reporting\nGROUP BY region, category;"
+                  }
+                }
+              },
+              "project_step_6": {
+                "title": "Assign the Exception Reason",
+                "prompt": "Extend the Module 4 Performance Exception Report with the next approved requirement. Calculate and return `region, category, COUNT(*) AS total_orders, SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders, ROUND( 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*), 1 ) AS completion_rate, ROUND(SUM( CASE WHEN order_status = 'Completed' THEN quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ELSE 0 END ), 2) AS completed_net_sales, ROUND(AVG(customer_rating), 2) AS average_rating, SUM(CASE WHEN discount_pct IS NULL THEN 1 ELSE 0 END) AS missing_discount_orders, CASE WHEN 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) < 75 AND COALESCE(AVG(customer_rating), 0) < 4.3 THEN 'Completion and rating risk' WHEN 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) < 75 THEN 'Completion risk' ELSE 'Rating risk' END AS exception_reason` from `sales_reporting`. Produce one result row per `region, category`.",
+                "hint": "Test the combined risk before the single completion condition.",
+                "help": {
+                  "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                  "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                  "hint_2": "Calculate and return `region, category, COUNT(*) AS total_orders, SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders, ROUND( 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*), 1 ) AS completion_rate, ROUND(SUM( CASE WHEN order_status = 'Completed' THEN quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ELSE 0 END ), 2) AS completed_net_sales, ROUND(AVG(customer_rating), 2) AS average_rating, SUM(CASE WHEN discount_pct IS NULL THEN 1 ELSE 0 END) AS missing_discount_orders, CASE WHEN 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) < 75 AND COALESCE(AVG(customer_rating), 0) < 4.3 THEN 'Completion and rating risk' WHEN 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) < 75 THEN 'Completion risk' ELSE 'Rating risk' END AS exception_reason` from `sales_reporting`. Produce one result row per `region, category`."
+                },
+                "starterCode": "SELECT\n    region,\n    category,\n    COUNT(*) AS total_orders,\n    SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders,\n    ROUND(\n        100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*),\n        1\n    ) AS completion_rate,\n    ROUND(SUM(\n        CASE\n            WHEN order_status = 'Completed' THEN\n                quantity * unit_price\n                - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n            ELSE 0\n        END\n    ), 2) AS completed_net_sales,\n    ROUND(AVG(customer_rating), 2) AS average_rating,\n    SUM(CASE WHEN discount_pct IS NULL THEN 1 ELSE 0 END) AS missing_discount_orders\nFROM sales_reporting\nGROUP BY region, category;",
+                "solutionCode": "SELECT\n    region,\n    category,\n    COUNT(*) AS total_orders,\n    SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders,\n    ROUND(\n        100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*),\n        1\n    ) AS completion_rate,\n    ROUND(SUM(\n        CASE\n            WHEN order_status = 'Completed' THEN\n                quantity * unit_price\n                - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n            ELSE 0\n        END\n    ), 2) AS completed_net_sales,\n    ROUND(AVG(customer_rating), 2) AS average_rating,\n    SUM(CASE WHEN discount_pct IS NULL THEN 1 ELSE 0 END) AS missing_discount_orders,\n    CASE\n        WHEN\n            100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) < 75\n            AND COALESCE(AVG(customer_rating), 0) < 4.3\n        THEN 'Completion and rating risk'\n        WHEN\n            100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) < 75\n        THEN 'Completion risk'\n        ELSE 'Rating risk'\n    END AS exception_reason\nFROM sales_reporting\nGROUP BY region, category;",
+                "starterFiles": {
+                  "main_sql": {
+                    "content": "SELECT\n    region,\n    category,\n    COUNT(*) AS total_orders,\n    SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders,\n    ROUND(\n        100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*),\n        1\n    ) AS completion_rate,\n    ROUND(SUM(\n        CASE\n            WHEN order_status = 'Completed' THEN\n                quantity * unit_price\n                - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n            ELSE 0\n        END\n    ), 2) AS completed_net_sales,\n    ROUND(AVG(customer_rating), 2) AS average_rating,\n    SUM(CASE WHEN discount_pct IS NULL THEN 1 ELSE 0 END) AS missing_discount_orders\nFROM sales_reporting\nGROUP BY region, category;"
+                  }
+                },
+                "solutionFiles": {
+                  "main_sql": {
+                    "content": "SELECT\n    region,\n    category,\n    COUNT(*) AS total_orders,\n    SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders,\n    ROUND(\n        100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*),\n        1\n    ) AS completion_rate,\n    ROUND(SUM(\n        CASE\n            WHEN order_status = 'Completed' THEN\n                quantity * unit_price\n                - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n            ELSE 0\n        END\n    ), 2) AS completed_net_sales,\n    ROUND(AVG(customer_rating), 2) AS average_rating,\n    SUM(CASE WHEN discount_pct IS NULL THEN 1 ELSE 0 END) AS missing_discount_orders,\n    CASE\n        WHEN\n            100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) < 75\n            AND COALESCE(AVG(customer_rating), 0) < 4.3\n        THEN 'Completion and rating risk'\n        WHEN\n            100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) < 75\n        THEN 'Completion risk'\n        ELSE 'Rating risk'\n    END AS exception_reason\nFROM sales_reporting\nGROUP BY region, category;"
+                  }
+                }
+              },
+              "project_step_7": {
+                "title": "Keep and Prioritize Only Exceptions",
+                "prompt": "Complete the Module 4 Performance Exception Report. Calculate and return `region, category, COUNT(*) AS total_orders, SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders, ROUND( 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*), 1 ) AS completion_rate, ROUND(SUM( CASE WHEN order_status = 'Completed' THEN quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ELSE 0 END ), 2) AS completed_net_sales, ROUND(AVG(customer_rating), 2) AS average_rating, SUM(CASE WHEN discount_pct IS NULL THEN 1 ELSE 0 END) AS missing_discount_orders, CASE WHEN 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) < 75 AND COALESCE(AVG(customer_rating), 0) < 4.3 THEN 'Completion and rating risk' WHEN 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) < 75 THEN 'Completion risk' ELSE 'Rating risk' END AS exception_reason` from `sales_reporting`. Produce one result row per `region, category`. After grouping, keep groups where `COUNT(*) >= 2 AND ( 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) < 75 OR COALESCE(AVG(customer_rating), 0) < 4.3 )`. Sort the final result by `CASE WHEN 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) < 75 AND COALESCE(AVG(customer_rating), 0) < 4.3 THEN 1 WHEN 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) < 75 THEN 2 ELSE 3 END, completed_net_sales ASC, region ASC, category ASC`.",
+                "hint": "Use HAVING for group thresholds and repeat the label priority in ORDER BY.",
+                "help": {
+                  "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                  "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                  "hint_2": "After grouping, keep groups where `COUNT(*) >= 2 AND ( 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) < 75 OR COALESCE(AVG(customer_rating), 0) < 4.3 )`. Sort the final result by `CASE WHEN 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) < 75 AND COALESCE(AVG(customer_rating), 0) < 4.3 THEN 1 WHEN 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) < 75 THEN 2 ELSE 3 END, completed_net_sales ASC, region ASC, category ASC`."
+                },
+                "starterCode": "SELECT\n    region,\n    category,\n    COUNT(*) AS total_orders,\n    SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders,\n    ROUND(\n        100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*),\n        1\n    ) AS completion_rate,\n    ROUND(SUM(\n        CASE\n            WHEN order_status = 'Completed' THEN\n                quantity * unit_price\n                - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n            ELSE 0\n        END\n    ), 2) AS completed_net_sales,\n    ROUND(AVG(customer_rating), 2) AS average_rating,\n    SUM(CASE WHEN discount_pct IS NULL THEN 1 ELSE 0 END) AS missing_discount_orders,\n    CASE\n        WHEN\n            100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) < 75\n            AND COALESCE(AVG(customer_rating), 0) < 4.3\n        THEN 'Completion and rating risk'\n        WHEN\n            100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) < 75\n        THEN 'Completion risk'\n        ELSE 'Rating risk'\n    END AS exception_reason\nFROM sales_reporting\nGROUP BY region, category;",
+                "solutionCode": "SELECT\n    region,\n    category,\n    COUNT(*) AS total_orders,\n    SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders,\n    ROUND(\n        100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*),\n        1\n    ) AS completion_rate,\n    ROUND(SUM(\n        CASE\n            WHEN order_status = 'Completed' THEN\n                quantity * unit_price\n                - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n            ELSE 0\n        END\n    ), 2) AS completed_net_sales,\n    ROUND(AVG(customer_rating), 2) AS average_rating,\n    SUM(CASE WHEN discount_pct IS NULL THEN 1 ELSE 0 END) AS missing_discount_orders,\n    CASE\n        WHEN\n            100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) < 75\n            AND COALESCE(AVG(customer_rating), 0) < 4.3\n        THEN 'Completion and rating risk'\n        WHEN\n            100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) < 75\n        THEN 'Completion risk'\n        ELSE 'Rating risk'\n    END AS exception_reason\nFROM sales_reporting\nGROUP BY region, category\nHAVING\n    COUNT(*) >= 2\n    AND (\n        100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) < 75\n        OR COALESCE(AVG(customer_rating), 0) < 4.3\n    )\nORDER BY\n    CASE\n        WHEN\n            100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) < 75\n            AND COALESCE(AVG(customer_rating), 0) < 4.3\n        THEN 1\n        WHEN\n            100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) < 75\n        THEN 2\n        ELSE 3\n    END,\n    completed_net_sales ASC,\n    region ASC,\n    category ASC;",
+                "starterFiles": {
+                  "main_sql": {
+                    "content": "SELECT\n    region,\n    category,\n    COUNT(*) AS total_orders,\n    SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders,\n    ROUND(\n        100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*),\n        1\n    ) AS completion_rate,\n    ROUND(SUM(\n        CASE\n            WHEN order_status = 'Completed' THEN\n                quantity * unit_price\n                - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n            ELSE 0\n        END\n    ), 2) AS completed_net_sales,\n    ROUND(AVG(customer_rating), 2) AS average_rating,\n    SUM(CASE WHEN discount_pct IS NULL THEN 1 ELSE 0 END) AS missing_discount_orders,\n    CASE\n        WHEN\n            100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) < 75\n            AND COALESCE(AVG(customer_rating), 0) < 4.3\n        THEN 'Completion and rating risk'\n        WHEN\n            100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) < 75\n        THEN 'Completion risk'\n        ELSE 'Rating risk'\n    END AS exception_reason\nFROM sales_reporting\nGROUP BY region, category;"
+                  }
+                },
+                "solutionFiles": {
+                  "main_sql": {
+                    "content": "SELECT\n    region,\n    category,\n    COUNT(*) AS total_orders,\n    SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders,\n    ROUND(\n        100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*),\n        1\n    ) AS completion_rate,\n    ROUND(SUM(\n        CASE\n            WHEN order_status = 'Completed' THEN\n                quantity * unit_price\n                - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n            ELSE 0\n        END\n    ), 2) AS completed_net_sales,\n    ROUND(AVG(customer_rating), 2) AS average_rating,\n    SUM(CASE WHEN discount_pct IS NULL THEN 1 ELSE 0 END) AS missing_discount_orders,\n    CASE\n        WHEN\n            100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) < 75\n            AND COALESCE(AVG(customer_rating), 0) < 4.3\n        THEN 'Completion and rating risk'\n        WHEN\n            100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) < 75\n        THEN 'Completion risk'\n        ELSE 'Rating risk'\n    END AS exception_reason\nFROM sales_reporting\nGROUP BY region, category\nHAVING\n    COUNT(*) >= 2\n    AND (\n        100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) < 75\n        OR COALESCE(AVG(customer_rating), 0) < 4.3\n    )\nORDER BY\n    CASE\n        WHEN\n            100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) < 75\n            AND COALESCE(AVG(customer_rating), 0) < 4.3\n        THEN 1\n        WHEN\n            100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) < 75\n        THEN 2\n        ELSE 3\n    END,\n    completed_net_sales ASC,\n    region ASC,\n    category ASC;"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql--sql-analysis-reporting--draft": {
+      "sql-analysis-reporting-module-4-having-and-conditional-reporting": {
+        "module-4-performance-exception-report": {
+          "sketch-0": {
+            "title": "Project Brief",
+            "bodyMarkdown": "In this module, you'll learn how to create a performance exception report using SQL. This involves filtering data at both the row and group levels, applying conditional logic to aggregate functions, and labeling performance based on aggregate results. We'll use the `sales_reporting` table in the dedicated `sales_reporting` dataset to demonstrate these concepts.\n\n## Your assignment\n\nOperations leaders do not need another full scorecard. They need a short review queue that highlights region-category groups with weak completion, weak ratings, or both.\n\nBuild **one cumulative exception report**:\n\n1. Return `region`, `category`, and `COUNT(*)` as `total_orders`.\n2. Add a conditional `completed_orders` count.\n3. Add `completion_rate`, rounded to one decimal.\n4. Add null-safe completed net sales as `completed_net_sales`.\n5. Add `average_rating` and `missing_discount_orders`.\n6. Add `exception_reason`: `Completion and rating risk`, `Completion risk`, or `Rating risk` according to the stated thresholds.\n7. Keep groups with at least two orders where completion is below 75 percent or average rating is below 4.3. Rank combined risks first, then completion risks, then rating risks; within each priority, show lower completed net sales first and use region/category as tie-breakers.\n\nRun and inspect the report after every step. Preserve the same grain and every previous KPI.\n\n**Definition of done:** the output is a focused, stable queue that explains why each group requires attention."
+          }
+        }
+      }
+    }
+  }
+}

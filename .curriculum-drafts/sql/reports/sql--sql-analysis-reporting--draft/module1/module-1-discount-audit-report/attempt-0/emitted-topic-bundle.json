@@ -1,0 +1,212 @@
+{
+  "topicId": "module-1-discount-audit-report",
+  "subjectSlug": "sql--sql-analysis-reporting--draft",
+  "moduleSlug": "sql-analysis-reporting-module-1-null-safe-calculations",
+  "sectionSlug": "sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-1-module-project",
+  "prefix": "sql_analysis_reporting_module_1",
+  "minutes": 55,
+  "runtimeDefaults": {
+    "kind": "sql",
+    "showSchema": true,
+    "showErd": true,
+    "showChen": true,
+    "supportsTerminal": false,
+    "supportsMultiFile": false,
+    "supportsFileSystem": false,
+    "datasetId": "sales_kpi",
+    "fixedSqlDialect": "sqlite",
+    "resultShape": "table"
+  },
+  "serviceDefaults": null,
+  "topic": {
+    "labelKey": "topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.module-1-discount-audit-report.label",
+    "summaryKey": "topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.module-1-discount-audit-report.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.module-1-discount-audit-report.cards.sketch0.title",
+      "sketchId": "sketch-1",
+      "height": 420
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.module-1-discount-audit-report.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "project_step_1",
+            "titleKey": "topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.module-1-discount-audit-report.projectSteps.project_step_1.title",
+            "exerciseKey": "project-step-1",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "project_step_2",
+            "titleKey": "topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.module-1-discount-audit-report.projectSteps.project_step_2.title",
+            "exerciseKey": "project-step-2",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "project_step_3",
+            "titleKey": "topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.module-1-discount-audit-report.projectSteps.project_step_3.title",
+            "exerciseKey": "project-step-3",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch-1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.module-1-discount-audit-report.sketch-1.title",
+      "bodyKey": "sketches.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.module-1-discount-audit-report.sketch-1.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "project-step-1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.module-1-discount-audit-report.moduleProject.steps.project_step_1",
+      "language": "sql",
+      "starterCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.module-1-discount-audit-report.moduleProject.steps.project_step_1.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "sales_kpi",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "main.sql",
+        "starterCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.module-1-discount-audit-report.moduleProject.steps.project_step_1.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.sql",
+            "content": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.module-1-discount-audit-report.moduleProject.steps.project_step_1.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "sales_kpi",
+        "resultShape": "table",
+        "solutionCode": "SELECT order_id, unit_price * quantity AS gross_sales\nFROM sales_reporting;"
+      }
+    },
+    {
+      "id": "project-step-2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.module-1-discount-audit-report.moduleProject.steps.project_step_2",
+      "language": "sql",
+      "starterCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.module-1-discount-audit-report.moduleProject.steps.project_step_2.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "sales_kpi",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "main.sql",
+        "starterCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.module-1-discount-audit-report.moduleProject.steps.project_step_2.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.sql",
+            "content": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.module-1-discount-audit-report.moduleProject.steps.project_step_2.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "sales_kpi",
+        "resultShape": "table",
+        "solutionCode": "SELECT order_id, \n       COALESCE(discount_pct, 0) / 100 * (unit_price * quantity) AS discount_amount\nFROM sales_reporting;"
+      }
+    },
+    {
+      "id": "project-step-3",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.module-1-discount-audit-report.moduleProject.steps.project_step_3",
+      "language": "sql",
+      "starterCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.module-1-discount-audit-report.moduleProject.steps.project_step_3.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "sales_kpi",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "main.sql",
+        "starterCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.module-1-discount-audit-report.moduleProject.steps.project_step_3.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.sql",
+            "content": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.module-1-discount-audit-report.moduleProject.steps.project_step_3.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "sales_kpi",
+        "resultShape": "table",
+        "solutionCode": "SELECT order_id, \n       (unit_price * quantity) - COALESCE(discount_pct, 0) / 100 * (unit_price * quantity) AS net_sales\nFROM sales_reporting;"
+      }
+    }
+  ]
+}

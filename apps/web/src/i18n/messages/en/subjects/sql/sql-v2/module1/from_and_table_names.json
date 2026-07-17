@@ -17,20 +17,6 @@
             },
             "quiz": {
               "title": "Quiz"
-            },
-            "project": {
-              "title": "Starter queries for the products table"
-            }
-          },
-          "projectSteps": {
-            "ci_select_all_products": {
-              "title": "Show every column from products"
-            },
-            "ci_select_names_from_products": {
-              "title": "Show product names"
-            },
-            "ci_select_price_and_stock": {
-              "title": "Show two columns from products"
             }
           },
           "quiz": {
@@ -85,11 +71,11 @@
             "mc_columns_from_products": {
               "title": "Columns in the products table",
               "prompt": "Which of these are real columns in the `products` table? Choose all that apply.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Match each choice to the command, clause, or constraint described in the question.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "concept": "Use the SQL behavior described in the lesson to separate the valid choice from statements about a different command, clause, or constraint.",
+                "hint_1": "Identify the job the SQL must perform before comparing the choices.",
+                "hint_2": "Eliminate choices that belong to a different SQL concept."
               },
               "options": {
                 "a": "name",
@@ -135,7 +121,7 @@
               "prompt": "Fill in the blank to complete the query.",
               "hint": "Use the exact table name from the schema.",
               "help": {
-                "concept": "The `FROM` clause must name the real table exactly. In this lesson, the table is `the missing term`.",
+                "concept": "The `FROM` clause must name the real table exactly. In this lesson, the table is `the blank`.",
                 "hint_1": "The blank comes after `FROM`, so it should be a table name, not a column name.",
                 "hint_2": "Choose the plural table name used throughout the lesson."
               },
@@ -152,7 +138,7 @@
               "prompt": "Fill in the blank to complete the query.",
               "hint": "This keyword introduces the table name.",
               "help": {
-                "concept": "In a basic query, `SELECT` chooses columns and `the missing term` introduces the table those columns come the missing term.",
+                "concept": "In a basic query, `SELECT` chooses columns and `the blank` introduces the table those columns come the blank.",
                 "hint_1": "The missing word goes between the selected column and the table name.",
                 "hint_2": "Choose the clause keyword that points to the data source table."
               },
@@ -199,7 +185,7 @@
             },
             "try-from_and_table_names-sketch0": {
               "title": "Query all products rows",
-              "prompt": "Scenario: A store manager needs a clear product-catalog query before sharing results with the team. Write a query that returns all columns from the `products` table. Write the query in the SQL editor, click Run query, and check the results table.",
+              "prompt": "Build a product-catalog query that returns all columns from the `products` table. Run it and compare the result with the expected table.",
               "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
               "help": {
                 "concept": "This SQL exercise checks whether your query returns the requested result.",
@@ -210,7 +196,7 @@
             },
             "try-from_and_table_names-sketch1": {
               "title": "Query `name` from products",
-              "prompt": "Scenario: A store manager needs a clear product-catalog query before sharing results with the team. Write a query that returns `name` from the `products` table. Write the query in the SQL editor, click Run query, and check the results table.",
+              "prompt": "Build a product-catalog query that returns `name` from the `products` table. Run it and compare the result with the expected table.",
               "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
               "help": {
                 "concept": "This SQL exercise checks whether your query returns the requested result.",
@@ -220,30 +206,30 @@
               "starterCode": "-- Return only the name column\nSELECT \nFROM products;"
             },
             "try-from_and_table_names-sketch2": {
-              "title": "Query price and stock from products",
-              "prompt": "Scenario: A store manager needs a clear product-catalog query before sharing results with the team. Write a query that returns `price`, `stock` from the `products` table. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Read Pricing Fields from the Correct Table",
+              "prompt": "Return `price` and `stock` from the `products` table. Use the exact table name shown in the schema.",
+              "hint": "The source table is named products.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the selected columns and table name in the SQL editor.",
-                "hint_2": "Run the query and compare the result table with the expected result."
+                "concept": "Return `price` and `stock` from the `products` table. Use the exact table name shown in the schema.",
+                "hint_1": "The source table is named products.",
+                "hint_2": "Run the query and compare the returned columns and rows with the expected result."
               },
-              "starterCode": "-- Return the price and stock columns\nSELECT price\nFROM products;"
+              "starterCode": "-- Use the exact table name\nSELECT price, stock\nFROM ;"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_from_and_table_names_sketch0": {
               "title": "Query all products rows",
-              "prompt": "Scenario: A store manager needs a clear product-catalog query before sharing results with the team. Write a query that returns all columns from the `products` table. Write the query in the SQL editor, click Run query, and check the results table."
+              "prompt": "Build a product-catalog query that returns all columns from the `products` table. Run it and compare the result with the expected table."
             },
             "try_from_and_table_names_sketch1": {
               "title": "Query `name` from products",
-              "prompt": "Scenario: A store manager needs a clear product-catalog query before sharing results with the team. Write a query that returns `name` from the `products` table. Write the query in the SQL editor, click Run query, and check the results table."
+              "prompt": "Build a product-catalog query that returns `name` from the `products` table. Run it and compare the result with the expected table."
             },
             "try_from_and_table_names_sketch2": {
-              "title": "Query price and stock from products",
-              "prompt": "Scenario: A store manager needs a clear product-catalog query before sharing results with the team. Write a query that returns `price`, `stock` from the `products` table. Write the query in the SQL editor, click Run query, and check the results table."
+              "title": "Read Pricing Fields from the Correct Table",
+              "prompt": "Return `price` and `stock` from the `products` table. Use the exact table name shown in the schema."
             }
           }
         }

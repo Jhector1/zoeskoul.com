@@ -1,0 +1,24 @@
+subject: sql--multi-table-sql--draft
+profile: sql
+course: multi-table-sql
+modules: 4
+topics: 16
+exercise counts: {"single_choice":20,"multi_choice":20,"drag_reorder":12,"fill_blank_choice":20,"code_input":44}
+code_input count: 44
+severity counts: {"blocker":0,"error":0,"warning":16,"info":0}
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "reading-keys-and-relationships" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "inner-join-with-on" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "qualifying-columns-across-tables" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "table-aliases-for-join-queries" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "module-0-student-enrollment-roster" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "one-to-many-and-many-to-many-results" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "joining-through-a-bridge-table" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "extending-a-join-path" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "avoiding-cartesian-and-wrong-key-joins" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "module-1-course-enrollment-directory" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "left-join-preserves-unmatched-rows" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "filtering-left-joins-with-on-and-where" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "finding-missing-relationships" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "counting-related-rows-without-inflation" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "module-2-department-participation-scorecard" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "final-school-program-participation-report" has no learning goals on its seed metadata.

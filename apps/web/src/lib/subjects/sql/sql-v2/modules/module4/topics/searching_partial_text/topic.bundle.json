@@ -46,38 +46,14 @@
       "kind": "sketch",
       "titleKey": "topics.sql-v2.sql-v2-4.searching_partial_text.cards.sketch1.title",
       "sketchId": "sketch_start_end_patterns",
-      "height": 420,
-      "tryIt": {
-        "id": "try-searching_partial_text-sketch1",
-        "titleKey": "topics.sql-v2.sql-v2-4.searching_partial_text.tryIt.try_searching_partial_text_sketch1.title",
-        "promptKey": "topics.sql-v2.sql-v2-4.searching_partial_text.tryIt.try_searching_partial_text_sketch1.prompt",
-        "exerciseKey": "try-searching_partial_text-sketch1",
-        "difficulty": "easy",
-        "preferKind": "code_input",
-        "seedPolicy": "global",
-        "required": true,
-        "allowReveal": true,
-        "maxAttempts": null
-      }
+      "height": 420
     },
     {
       "id": "sketch2",
       "kind": "sketch",
       "titleKey": "topics.sql-v2.sql-v2-4.searching_partial_text.cards.sketch2.title",
       "sketchId": "sketch_like_with_where",
-      "height": 420,
-      "tryIt": {
-        "id": "try-searching_partial_text-sketch2",
-        "titleKey": "topics.sql-v2.sql-v2-4.searching_partial_text.tryIt.try_searching_partial_text_sketch2.title",
-        "promptKey": "topics.sql-v2.sql-v2-4.searching_partial_text.tryIt.try_searching_partial_text_sketch2.prompt",
-        "exerciseKey": "try-searching_partial_text-sketch2",
-        "difficulty": "easy",
-        "preferKind": "code_input",
-        "seedPolicy": "global",
-        "required": true,
-        "allowReveal": true,
-        "maxAttempts": null
-      }
+      "height": 420
     },
     {
       "id": "quiz",
@@ -92,46 +68,6 @@
         "allowReveal": true,
         "preferKind": null,
         "maxAttempts": null
-      }
-    },
-    {
-      "id": "project",
-      "kind": "project",
-      "titleKey": "topics.sql-v2.sql-v2-4.searching_partial_text.cards.project.title",
-      "project": {
-        "difficulty": "easy",
-        "allowReveal": true,
-        "preferKind": "code_input",
-        "maxAttempts": null,
-        "steps": [
-          {
-            "id": "ci_find_example_emails",
-            "titleKey": "topics.sql-v2.sql-v2-4.searching_partial_text.projectSteps.ci_find_example_emails.title",
-            "exerciseKey": "ci_find_example_emails",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "maxAttempts": null
-          },
-          {
-            "id": "ci_find_test_names",
-            "titleKey": "topics.sql-v2.sql-v2-4.searching_partial_text.projectSteps.ci_find_test_names.title",
-            "exerciseKey": "ci_find_test_names",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "maxAttempts": null
-          },
-          {
-            "id": "ci_real_example_customers",
-            "titleKey": "topics.sql-v2.sql-v2-4.searching_partial_text.projectSteps.ci_real_example_customers.title",
-            "exerciseKey": "ci_real_example_customers",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "maxAttempts": null
-          }
-        ]
       }
     }
   ],
@@ -297,249 +233,9 @@
       }
     },
     {
-      "id": "ci_find_example_emails",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-4.searching_partial_text.quiz.ci_find_example_emails",
-      "language": "sql",
-      "starterCode": "@:topics.sql-v2.sql-v2-4.searching_partial_text.quiz.ci_find_example_emails.starterCode",
-      "fixedSqlDialect": "sqlite",
-      "runtime": {
-        "kind": "sql",
-        "datasetId": "customers_cleanup",
-        "fixedSqlDialect": "sqlite",
-        "resultShape": "table",
-        "showSchema": true,
-        "showErd": false,
-        "showChen": false,
-        "supportsTerminal": false,
-        "supportsMultiFile": false,
-        "supportsFileSystem": false
-      },
-      "recipe": {
-        "type": "sql_query",
-        "datasetId": "customers_cleanup",
-        "resultShape": "table",
-        "solutionCode": "SELECT id, full_name, email\nFROM customers\nWHERE email LIKE '%@example.com';",
-        "solutionFiles": [
-          {
-            "path": "query.sql",
-            "content": "SELECT id, full_name, email\nFROM customers\nWHERE email LIKE '%@example.com';",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "entryFilePath": "query.sql",
-      "starterFiles": [
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-v2.sql-v2-4.searching_partial_text.quiz.ci_find_example_emails.starterCode",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "query.sql",
-          "content": "SELECT id, full_name, email\nFROM customers\nWHERE email LIKE '%@example.com';",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "workspace": {
-        "language": "sql",
-        "entryFilePath": "query.sql",
-        "starterCode": "@:topics.sql-v2.sql-v2-4.searching_partial_text.quiz.ci_find_example_emails.starterCode",
-        "starterFiles": [
-          {
-            "path": "query.sql",
-            "content": "@:topics.sql-v2.sql-v2-4.searching_partial_text.quiz.ci_find_example_emails.starterCode",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ],
-        "solutionFiles": [
-          {
-            "path": "query.sql",
-            "content": "SELECT id, full_name, email\nFROM customers\nWHERE email LIKE '%@example.com';",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "showExpectedExample": true
-    },
-    {
-      "id": "ci_find_test_names",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-4.searching_partial_text.quiz.ci_find_test_names",
-      "language": "sql",
-      "starterCode": "@:topics.sql-v2.sql-v2-4.searching_partial_text.quiz.ci_find_test_names.starterCode",
-      "fixedSqlDialect": "sqlite",
-      "runtime": {
-        "kind": "sql",
-        "datasetId": "customers_cleanup",
-        "fixedSqlDialect": "sqlite",
-        "resultShape": "table",
-        "showSchema": true,
-        "showErd": false,
-        "showChen": false,
-        "supportsTerminal": false,
-        "supportsMultiFile": false,
-        "supportsFileSystem": false
-      },
-      "recipe": {
-        "type": "sql_query",
-        "datasetId": "customers_cleanup",
-        "resultShape": "table",
-        "solutionCode": "SELECT id, full_name\nFROM customers\nWHERE full_name LIKE '%Test%';",
-        "solutionFiles": [
-          {
-            "path": "query.sql",
-            "content": "SELECT id, full_name\nFROM customers\nWHERE full_name LIKE '%Test%';",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "entryFilePath": "query.sql",
-      "starterFiles": [
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-v2.sql-v2-4.searching_partial_text.quiz.ci_find_test_names.starterCode",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "query.sql",
-          "content": "SELECT id, full_name\nFROM customers\nWHERE full_name LIKE '%Test%';",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "workspace": {
-        "language": "sql",
-        "entryFilePath": "query.sql",
-        "starterCode": "@:topics.sql-v2.sql-v2-4.searching_partial_text.quiz.ci_find_test_names.starterCode",
-        "starterFiles": [
-          {
-            "path": "query.sql",
-            "content": "@:topics.sql-v2.sql-v2-4.searching_partial_text.quiz.ci_find_test_names.starterCode",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ],
-        "solutionFiles": [
-          {
-            "path": "query.sql",
-            "content": "SELECT id, full_name\nFROM customers\nWHERE full_name LIKE '%Test%';",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "showExpectedExample": true
-    },
-    {
-      "id": "ci_real_example_customers",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-4.searching_partial_text.quiz.ci_real_example_customers",
-      "language": "sql",
-      "starterCode": "@:topics.sql-v2.sql-v2-4.searching_partial_text.quiz.ci_real_example_customers.starterCode",
-      "fixedSqlDialect": "sqlite",
-      "runtime": {
-        "kind": "sql",
-        "datasetId": "customers_cleanup",
-        "fixedSqlDialect": "sqlite",
-        "resultShape": "table",
-        "showSchema": true,
-        "showErd": false,
-        "showChen": false,
-        "supportsTerminal": false,
-        "supportsMultiFile": false,
-        "supportsFileSystem": false
-      },
-      "recipe": {
-        "type": "sql_query",
-        "datasetId": "customers_cleanup",
-        "resultShape": "table",
-        "solutionCode": "SELECT full_name, email, is_test\nFROM customers\nWHERE email LIKE '%@example.com'\n  AND is_test = 0;",
-        "solutionFiles": [
-          {
-            "path": "query.sql",
-            "content": "SELECT full_name, email, is_test\nFROM customers\nWHERE email LIKE '%@example.com'\n  AND is_test = 0;",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "entryFilePath": "query.sql",
-      "starterFiles": [
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-v2.sql-v2-4.searching_partial_text.quiz.ci_real_example_customers.starterCode",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "query.sql",
-          "content": "SELECT full_name, email, is_test\nFROM customers\nWHERE email LIKE '%@example.com'\n  AND is_test = 0;",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "workspace": {
-        "language": "sql",
-        "entryFilePath": "query.sql",
-        "starterCode": "@:topics.sql-v2.sql-v2-4.searching_partial_text.quiz.ci_real_example_customers.starterCode",
-        "starterFiles": [
-          {
-            "path": "query.sql",
-            "content": "@:topics.sql-v2.sql-v2-4.searching_partial_text.quiz.ci_real_example_customers.starterCode",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ],
-        "solutionFiles": [
-          {
-            "path": "query.sql",
-            "content": "SELECT full_name, email, is_test\nFROM customers\nWHERE email LIKE '%@example.com'\n  AND is_test = 0;",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "showExpectedExample": true
-    },
-    {
       "id": "try-searching_partial_text-sketch0",
       "kind": "code_input",
-      "purpose": "project",
+      "purpose": "try_it",
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-4.searching_partial_text.quiz.try-searching_partial_text-sketch0",
       "language": "sql",
@@ -561,16 +257,20 @@
         "type": "sql_query",
         "datasetId": "customers_cleanup",
         "resultShape": "table",
-        "solutionCode": "SELECT id, full_name, email\nFROM customers\nWHERE email LIKE '%@example.com';",
+        "solutionCode": "SELECT id, full_name, email\nFROM customers\nWHERE email LIKE '%@example.com'\n  AND status = 'active';",
         "solutionFiles": [
           {
             "path": "query.sql",
-            "content": "SELECT id, full_name, email\nFROM customers\nWHERE email LIKE '%@example.com';",
+            "content": "SELECT id, full_name, email\nFROM customers\nWHERE email LIKE '%@example.com'\n  AND status = 'active';",
             "language": "sql",
             "isEntry": true,
             "entry": true
           }
-        ]
+        ],
+        "sqlFileOrder": [
+          "query.sql"
+        ],
+        "ignoreRowOrder": true
       },
       "entryFilePath": "query.sql",
       "starterFiles": [
@@ -585,7 +285,7 @@
       "solutionFiles": [
         {
           "path": "query.sql",
-          "content": "SELECT id, full_name, email\nFROM customers\nWHERE email LIKE '%@example.com';",
+          "content": "SELECT id, full_name, email\nFROM customers\nWHERE email LIKE '%@example.com'\n  AND status = 'active';",
           "language": "sql",
           "isEntry": true,
           "entry": true
@@ -607,174 +307,30 @@
         "solutionFiles": [
           {
             "path": "query.sql",
-            "content": "SELECT id, full_name, email\nFROM customers\nWHERE email LIKE '%@example.com';",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "showExpectedExample": true
-    },
-    {
-      "id": "try-searching_partial_text-sketch1",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-4.searching_partial_text.quiz.try-searching_partial_text-sketch1",
-      "language": "sql",
-      "starterCode": "@:topics.sql-v2.sql-v2-4.searching_partial_text.quiz.try-searching_partial_text-sketch1.starterCode",
-      "fixedSqlDialect": "sqlite",
-      "runtime": {
-        "kind": "sql",
-        "datasetId": "customers_cleanup",
-        "fixedSqlDialect": "sqlite",
-        "resultShape": "table",
-        "showSchema": true,
-        "showErd": false,
-        "showChen": false,
-        "supportsTerminal": false,
-        "supportsMultiFile": false,
-        "supportsFileSystem": false
-      },
-      "recipe": {
-        "type": "sql_query",
-        "datasetId": "customers_cleanup",
-        "resultShape": "table",
-        "solutionCode": "SELECT id, full_name\nFROM customers\nWHERE full_name LIKE '%Test%';",
-        "solutionFiles": [
-          {
-            "path": "query.sql",
-            "content": "SELECT id, full_name\nFROM customers\nWHERE full_name LIKE '%Test%';",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "entryFilePath": "query.sql",
-      "starterFiles": [
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-v2.sql-v2-4.searching_partial_text.quiz.try-searching_partial_text-sketch1.starterCode",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "query.sql",
-          "content": "SELECT id, full_name\nFROM customers\nWHERE full_name LIKE '%Test%';",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "workspace": {
-        "language": "sql",
-        "entryFilePath": "query.sql",
-        "starterCode": "@:topics.sql-v2.sql-v2-4.searching_partial_text.quiz.try-searching_partial_text-sketch1.starterCode",
-        "starterFiles": [
-          {
-            "path": "query.sql",
-            "content": "@:topics.sql-v2.sql-v2-4.searching_partial_text.quiz.try-searching_partial_text-sketch1.starterCode",
+            "content": "SELECT id, full_name, email\nFROM customers\nWHERE email LIKE '%@example.com'\n  AND status = 'active';",
             "language": "sql",
             "isEntry": true,
             "entry": true
           }
         ],
-        "solutionFiles": [
-          {
-            "path": "query.sql",
-            "content": "SELECT id, full_name\nFROM customers\nWHERE full_name LIKE '%Test%';",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "showExpectedExample": true
-    },
-    {
-      "id": "try-searching_partial_text-sketch2",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-4.searching_partial_text.quiz.try-searching_partial_text-sketch2",
-      "language": "sql",
-      "starterCode": "@:topics.sql-v2.sql-v2-4.searching_partial_text.quiz.try-searching_partial_text-sketch2.starterCode",
-      "fixedSqlDialect": "sqlite",
-      "runtime": {
-        "kind": "sql",
-        "datasetId": "customers_cleanup",
-        "fixedSqlDialect": "sqlite",
-        "resultShape": "table",
-        "showSchema": true,
-        "showErd": false,
-        "showChen": false,
-        "supportsTerminal": false,
-        "supportsMultiFile": false,
-        "supportsFileSystem": false
-      },
-      "recipe": {
-        "type": "sql_query",
-        "datasetId": "customers_cleanup",
-        "resultShape": "table",
-        "solutionCode": "SELECT full_name, email, is_test\nFROM customers\nWHERE email LIKE '%@example.com'\n  AND is_test = 0;",
-        "solutionFiles": [
-          {
-            "path": "query.sql",
-            "content": "SELECT full_name, email, is_test\nFROM customers\nWHERE email LIKE '%@example.com'\n  AND is_test = 0;",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "entryFilePath": "query.sql",
-      "starterFiles": [
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-v2.sql-v2-4.searching_partial_text.quiz.try-searching_partial_text-sketch2.starterCode",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "query.sql",
-          "content": "SELECT full_name, email, is_test\nFROM customers\nWHERE email LIKE '%@example.com'\n  AND is_test = 0;",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "workspace": {
-        "language": "sql",
-        "entryFilePath": "query.sql",
-        "starterCode": "@:topics.sql-v2.sql-v2-4.searching_partial_text.quiz.try-searching_partial_text-sketch2.starterCode",
-        "starterFiles": [
-          {
-            "path": "query.sql",
-            "content": "@:topics.sql-v2.sql-v2-4.searching_partial_text.quiz.try-searching_partial_text-sketch2.starterCode",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
+        "openTabs": [
+          "query.sql"
         ],
-        "solutionFiles": [
-          {
-            "path": "query.sql",
-            "content": "SELECT full_name, email, is_test\nFROM customers\nWHERE email LIKE '%@example.com'\n  AND is_test = 0;",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "query.sql"
+          ]
+        }
       },
-      "showExpectedExample": true
+      "showExpectedExample": true,
+      "sqlFileOrder": [
+        "query.sql"
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "query.sql"
+        ]
+      }
     }
   ]
 }

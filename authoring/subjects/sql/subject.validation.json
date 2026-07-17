@@ -16,7 +16,7 @@
     "conceptStageValidation": [
       "sql-foundations must not use joins, aggregates, mutation SQL, CREATE TABLE, or subqueries",
       "sql-analysis-reporting may use expressions, aliases, functions, aggregates, GROUP BY, and HAVING",
-      "multi-table-sql may use joins, aliases, formatting, and beginner subqueries",
+      "multi-table-sql may use INNER JOIN, LEFT JOIN, relationship aliases, bridge tables, anti-joins, and join-aware aggregation",
       "sql-data-management may use INSERT, UPDATE, DELETE, and CREATE TABLE in sandboxed exercises",
       "sql-database-design-capstone may use all previously taught beginner concepts"
     ],

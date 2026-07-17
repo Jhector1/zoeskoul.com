@@ -1,6 +1,24 @@
 import { describe, expect, it } from "vitest";
 
-import { resolveToolStateSeed } from "./useToolCodeRunnerState";
+import { resolveToolStateSeed, shouldSkipRepeatedToolBind } from "./useToolCodeRunnerState";
+
+describe("shouldSkipRepeatedToolBind", () => {
+    it("skips only an identical semantic bind key", () => {
+        expect(
+            shouldSkipRepeatedToolBind(
+                "exercise::workspace::config",
+                "exercise::workspace::config",
+            ),
+        ).toBe(true);
+        expect(
+            shouldSkipRepeatedToolBind(
+                "exercise::workspace::config",
+                "exercise::new-workspace::config",
+            ),
+        ).toBe(false);
+        expect(shouldSkipRepeatedToolBind("", "")).toBe(false);
+    });
+});
 
 describe("resolveToolStateSeed", () => {
     it("ignores starter-origin snapshots so current starter can win", () => {

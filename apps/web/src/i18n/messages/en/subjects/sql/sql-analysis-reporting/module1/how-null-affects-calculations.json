@@ -1,0 +1,153 @@
+{
+  "topics": {
+    "sql-analysis-reporting": {
+      "sql-analysis-reporting-module-1-null-safe-calculations": {
+        "how-null-affects-calculations": {
+          "label": "How NULL Affects Calculations",
+          "summary": "See how NULL propagates through arithmetic, then distinguish a missing value from a recorded zero before choosing any fallback.",
+          "cards": {
+            "sketch0": {
+              "title": "Unknown Inputs Produce Unknown Results"
+            },
+            "sketch1": {
+              "title": "Missing Is Not the Same as Zero"
+            },
+            "quiz": {
+              "title": "Check Your Understanding"
+            }
+          },
+          "practice": {
+            "single-choice-1": {
+              "title": "NULL Arithmetic Result",
+              "prompt": "What is the result of `50 * NULL` in SQL?",
+              "hint": "The calculation includes an unknown input.",
+              "help": {
+                "concept": "Arithmetic with NULL produces NULL.",
+                "hint_1": "SQL does not silently convert missing numeric data to zero.",
+                "hint_2": "Choose the result that preserves uncertainty."
+              },
+              "options": {
+                "a": "0",
+                "b": "50",
+                "c": "NULL",
+                "d": "An empty string"
+              }
+            },
+            "single-choice-2": {
+              "title": "Zero Versus Missing",
+              "prompt": "Which statement correctly compares `0` and `NULL`?",
+              "hint": "One value is explicit and the other indicates absence.",
+              "help": {
+                "concept": "Zero is a numeric value; NULL represents missing information.",
+                "hint_1": "A report may need different rules for each.",
+                "hint_2": "Choose the statement about meaning, not ordering."
+              },
+              "options": {
+                "a": "They always mean the same thing.",
+                "b": "0 is known; NULL is missing or unknown.",
+                "c": "NULL is larger than 0.",
+                "d": "0 cannot be stored in numeric columns."
+              }
+            },
+            "multi-choice-1": {
+              "title": "Consequences of NULL",
+              "prompt": "Which calculations return NULL when `discount_pct` is NULL? Select all that apply.",
+              "hint": "Select expressions that directly include the missing column.",
+              "help": {
+                "concept": "NULL propagates through arithmetic that references it.",
+                "hint_1": "A calculation using only known columns can still produce a value.",
+                "hint_2": "Trace whether `discount_pct` appears in each expression."
+              },
+              "options": {
+                "a": "discount_pct / 100",
+                "b": "unit_price * discount_pct",
+                "c": "quantity + discount_pct",
+                "d": "quantity * unit_price"
+              }
+            },
+            "multi-choice-2": {
+              "title": "Good First Checks",
+              "prompt": "Before choosing a fallback for NULL, which questions are useful? Select all that apply.",
+              "hint": "A trustworthy report documents what missing data means.",
+              "help": {
+                "concept": "Check prevalence, meaning, and communication needs.",
+                "hint_1": "Ignoring missing values without a rule can distort the report.",
+                "hint_2": "Choose the checks that make the assumption explicit."
+              },
+              "options": {
+                "a": "Does missing mean zero for this business rule?",
+                "b": "How many rows are missing the value?",
+                "c": "Should missing values receive a separate label?",
+                "d": "Can the source column be ignored without reviewing the requirement?"
+              }
+            },
+            "drag-reorder-1": {
+              "title": "Trace a NULL Calculation",
+              "prompt": "Arrange the reasoning steps for a missing discount.",
+              "hint": "Follow the value from source input to displayed result.",
+              "help": {
+                "concept": "The calculation cannot produce a known number from an unknown input.",
+                "hint_1": "Start with the source field.",
+                "hint_2": "End with what the report reader sees."
+              },
+              "tokens": {
+                "t1": "Read discount_pct as NULL",
+                "t2": "Use it in the arithmetic expression",
+                "t3": "The expression evaluates to NULL",
+                "t4": "The results table displays a missing calculated value"
+              }
+            },
+            "fill-blank-choice-1": {
+              "title": "Filter Missing Discounts",
+              "prompt": "Complete the condition that finds missing discount percentages.",
+              "hint": "NULL uses its own comparison syntax.",
+              "help": {
+                "concept": "Use `IS NULL` rather than the equals operator.",
+                "hint_1": "A zero discount is not the same as a missing discount.",
+                "hint_2": "Choose the condition that tests absence."
+              },
+              "template": "WHERE discount_pct [blank1]",
+              "choices": [
+                "IS NULL",
+                "= 0",
+                "= NULL",
+                "IS 0"
+              ]
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_how_null_affects_calculations_sketch0": {
+              "title": "Trace NULL Through a Discount Calculation",
+              "prompt": "Return `order_id`, the original `discount_pct`, and `unit_price * discount_pct / 100` as `unit_discount`. Return `order_id, discount_pct, unit_price * discount_pct / 100 AS unit_discount` from `sales_reporting` in that column order.",
+              "hint": "Use the raw `discount_pct` value. Do not add COALESCE yet; this exercise is about observing how NULL propagates.",
+              "help": {
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "Return `order_id, discount_pct, unit_price * discount_pct / 100 AS unit_discount` from `sales_reporting` in that column order."
+              },
+              "starterCode": "-- Write the query below.",
+              "solutionCode": "SELECT\n    order_id,\n    discount_pct,\n    unit_price * discount_pct / 100 AS unit_discount\nFROM sales_reporting;"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql-analysis-reporting": {
+      "sql-analysis-reporting-module-1-null-safe-calculations": {
+        "how-null-affects-calculations": {
+          "sketch0": {
+            "title": "Unknown Inputs Produce Unknown Results",
+            "bodyMarkdown": "In SQL, `NULL` represents a value that is missing or unknown. Arithmetic cannot produce a known number from an unknown input, so an expression that contains `NULL` also returns `NULL`.\n\n```sql\nSELECT\n    10 + NULL AS result;\n```\n\n#### Line-by-line walkthrough\n\n- `SELECT` — starts the result list.\n- `10 + NULL` — asks SQL to add a known number to an unknown value.\n- `AS result` — names the calculated output column `result`.\n- `;` — ends the statement.\n\nThe query returns `NULL`, not `10` and not `0`. SQL preserves the uncertainty instead of inventing a number.\n\nThe same rule applies to subtraction, multiplication, and division. If a discount percentage is missing, a discount calculation that uses it will also be missing until the report defines an explicit fallback rule."
+          },
+          "sketch1": {
+            "title": "Missing Is Not the Same as Zero",
+            "bodyMarkdown": "Missing and zero are not interchangeable.\n\n- A discount of `0` means the business recorded that no discount was applied.\n- A discount of `NULL` means the value was not recorded or is unknown.\n\nYou can inspect the missing source values before deciding how the report should treat them:\n\n```sql\nSELECT\n    order_id,\n    discount_pct\nFROM sales_reporting\nWHERE discount_pct IS NULL;\n```\n\n#### Line-by-line walkthrough\n\n- `SELECT` — starts the result list.\n- `order_id,` — identifies the order connected to each missing value.\n- `discount_pct` — returns the original discount value without changing it.\n- `FROM sales_reporting` — reads rows from the `sales_reporting` table.\n- `WHERE discount_pct IS NULL` — keeps only rows whose discount percentage is missing.\n- `;` — ends the statement.\n\nThis inspection step protects the meaning of the data. Replacing every missing value with zero may be correct for one business calculation, but it should be a documented decision rather than an automatic habit."
+          }
+        }
+      }
+    }
+  }
+}

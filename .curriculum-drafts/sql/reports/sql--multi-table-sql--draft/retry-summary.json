@@ -1,0 +1,163 @@
+{
+  "subjectSlug": "sql--multi-table-sql--draft",
+  "generatedAt": "2026-07-15T22:07:32.236Z",
+  "validationState": {
+    "unsafeSkipValidation": false,
+    "requested": {
+      "skipQualityGates": false,
+      "skipSemantic": false,
+      "skipGolden": false,
+      "unsafeSkipValidation": false
+    },
+    "structural": {
+      "ran": true,
+      "skipped": false,
+      "required": true
+    },
+    "qualityGates": {
+      "ran": true,
+      "skipped": false,
+      "required": true
+    },
+    "semantic": {
+      "ran": true,
+      "skipped": false,
+      "required": true
+    },
+    "golden": {
+      "ran": true,
+      "skipped": false,
+      "required": true
+    }
+  },
+  "topics": [
+    {
+      "moduleSlug": "multi-table-sql-module-0-join-foundations",
+      "sectionSlug": "multi-table-sql-section-0-relationship-keys",
+      "topicId": "reading-keys-and-relationships",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "multi-table-sql-module-0-join-foundations",
+      "sectionSlug": "multi-table-sql-section-0-relationship-keys",
+      "topicId": "inner-join-with-on",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "multi-table-sql-module-0-join-foundations",
+      "sectionSlug": "multi-table-sql-section-0-readable-joins",
+      "topicId": "qualifying-columns-across-tables",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "multi-table-sql-module-0-join-foundations",
+      "sectionSlug": "multi-table-sql-section-0-readable-joins",
+      "topicId": "table-aliases-for-join-queries",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "multi-table-sql-module-0-join-foundations",
+      "sectionSlug": "multi-table-sql-section-0-module-project",
+      "topicId": "module-0-student-enrollment-roster",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "multi-table-sql-module-1-relationship-paths",
+      "sectionSlug": "multi-table-sql-section-1-relationship-shapes",
+      "topicId": "one-to-many-and-many-to-many-results",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "multi-table-sql-module-1-relationship-paths",
+      "sectionSlug": "multi-table-sql-section-1-relationship-shapes",
+      "topicId": "joining-through-a-bridge-table",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "multi-table-sql-module-1-relationship-paths",
+      "sectionSlug": "multi-table-sql-section-1-longer-joins",
+      "topicId": "extending-a-join-path",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "multi-table-sql-module-1-relationship-paths",
+      "sectionSlug": "multi-table-sql-section-1-longer-joins",
+      "topicId": "avoiding-cartesian-and-wrong-key-joins",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "multi-table-sql-module-1-relationship-paths",
+      "sectionSlug": "multi-table-sql-section-1-module-project",
+      "topicId": "module-1-course-enrollment-directory",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "multi-table-sql-module-2-outer-joins-and-accurate-counts",
+      "sectionSlug": "multi-table-sql-section-2-preserving-rows",
+      "topicId": "left-join-preserves-unmatched-rows",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "multi-table-sql-module-2-outer-joins-and-accurate-counts",
+      "sectionSlug": "multi-table-sql-section-2-preserving-rows",
+      "topicId": "filtering-left-joins-with-on-and-where",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "multi-table-sql-module-2-outer-joins-and-accurate-counts",
+      "sectionSlug": "multi-table-sql-section-2-missing-and-counts",
+      "topicId": "finding-missing-relationships",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "multi-table-sql-module-2-outer-joins-and-accurate-counts",
+      "sectionSlug": "multi-table-sql-section-2-missing-and-counts",
+      "topicId": "counting-related-rows-without-inflation",
+      "status": "success",
+      "attempts": 1,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "multi-table-sql-module-2-outer-joins-and-accurate-counts",
+      "sectionSlug": "multi-table-sql-section-2-module-project",
+      "topicId": "module-2-department-participation-scorecard",
+      "status": "success",
+      "attempts": 1,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "multi-table-sql-module-3-final-capstone",
+      "sectionSlug": "multi-table-sql-section-3-final-capstone",
+      "topicId": "final-school-program-participation-report",
+      "status": "success",
+      "attempts": 1,
+      "retryCodes": []
+    }
+  ]
+}

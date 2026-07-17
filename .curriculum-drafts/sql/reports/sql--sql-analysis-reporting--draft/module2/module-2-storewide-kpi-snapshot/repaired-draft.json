@@ -1,0 +1,121 @@
+{
+  "title": "Module 2: Storewide KPI Snapshot",
+  "summary": "Produce one row containing order count, units sold, gross sales, net sales, average order value, and value range.",
+  "minutes": 55,
+  "sketchBlocks": [
+    {
+      "id": "module-2-storewide-kpi-snapshot-sketch0",
+      "title": "Introduction to Storewide KPI Snapshot",
+      "bodyMarkdown": "In this project, you will create a Storewide KPI Snapshot using SQL aggregate functions. The goal is to produce a single row of key performance indicators (KPIs) that summarize the store's sales data. This includes calculating the total number of orders, total units sold, gross sales, net sales, average order value, and the range of order values. These metrics provide a quick overview of the store's performance and help in making informed business decisions."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "try-module-2-storewide-kpi-snapshot-sketch0",
+      "kind": "code_input",
+      "title": "Calculate Total Orders and Units Sold",
+      "prompt": "Write a SQL query to calculate the total number of orders and the total units sold from the `sales_reporting` table.",
+      "starterCode": "-- Write your SQL answer below",
+      "solutionCode": "SELECT COUNT(*) AS total_orders, SUM(quantity) AS total_units_sold FROM sales_reporting;",
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "try-module-2-storewide-kpi-snapshot-sketch1",
+      "kind": "code_input",
+      "title": "Calculate Gross and Net Sales",
+      "prompt": "Write a SQL query to calculate the gross sales and net sales from the `sales_reporting` table. Assume net sales account for discounts.",
+      "starterCode": "-- Write your SQL answer below",
+      "solutionCode": "SELECT SUM(unit_price * quantity) AS gross_sales, SUM((unit_price * quantity) * (1 - COALESCE(discount_pct, 0) / 100)) AS net_sales FROM sales_reporting;",
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "try-module-2-storewide-kpi-snapshot-sketch2",
+      "kind": "code_input",
+      "title": "Calculate Average Order Value",
+      "prompt": "Write a SQL query to calculate the average order value from the `sales_reporting` table.",
+      "starterCode": "-- Write your SQL answer below",
+      "solutionCode": "SELECT AVG(unit_price * quantity) AS average_order_value FROM sales_reporting;",
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "try-module-2-storewide-kpi-snapshot-sketch3",
+      "kind": "code_input",
+      "title": "Calculate Minimum and Maximum Order Values",
+      "prompt": "Write a SQL query to find the minimum and maximum order values from the `sales_reporting` table.",
+      "starterCode": "-- Write your SQL answer below",
+      "solutionCode": "SELECT MIN(unit_price * quantity) AS min_order_value, MAX(unit_price * quantity) AS max_order_value FROM sales_reporting;",
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "try-module-2-storewide-kpi-snapshot-sketch4",
+      "kind": "code_input",
+      "title": "Calculate Total Discount Given",
+      "prompt": "Write a SQL query to calculate the total discount given on all orders from the `sales_reporting` table.",
+      "starterCode": "-- Write your SQL answer below",
+      "solutionCode": "SELECT SUM((unit_price * quantity) * (COALESCE(discount_pct, 0) / 100)) AS total_discount FROM sales_reporting;",
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "try-module-2-storewide-kpi-snapshot-sketch5",
+      "kind": "code_input",
+      "title": "Calculate Total Customer Ratings",
+      "prompt": "Write a SQL query to calculate the total of all customer ratings from the `sales_reporting` table, ignoring NULL values.",
+      "starterCode": "-- Write your SQL answer below",
+      "solutionCode": "SELECT SUM(COALESCE(customer_rating, 0)) AS total_customer_ratings FROM sales_reporting;",
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Storewide KPI Snapshot Project",
+    "stepIds": [
+      "try-module-2-storewide-kpi-snapshot-sketch0",
+      "try-module-2-storewide-kpi-snapshot-sketch1",
+      "try-module-2-storewide-kpi-snapshot-sketch2",
+      "try-module-2-storewide-kpi-snapshot-sketch3",
+      "try-module-2-storewide-kpi-snapshot-sketch4",
+      "try-module-2-storewide-kpi-snapshot-sketch5"
+    ]
+  }
+}

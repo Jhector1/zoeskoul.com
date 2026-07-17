@@ -133,7 +133,7 @@
               "prompt": "Fill in the missing SQL keyword.",
               "hint": "This pattern excludes values from a list.",
               "help": {
-                "concept": "`the missing term IN` is used to exclude rows whose value appears in a given list.",
+                "concept": "`the blank IN` is used to exclude rows whose value appears in a given list.",
                 "hint_1": "The missing word comes before `IN` to make the filter exclude categories.",
                 "hint_2": "You need the keyword that flips membership in the list."
               },
@@ -150,7 +150,7 @@
               "prompt": "Fill in the missing SQL keyword.",
               "hint": "This query should exclude names that match a text pattern.",
               "help": {
-                "concept": "`the missing term LIKE` excludes rows whose text matches a pattern such as `%Pen%`.",
+                "concept": "`the blank LIKE` excludes rows whose text matches a pattern such as `%Pen%`.",
                 "hint_1": "The missing word should reverse the normal `LIKE` match.",
                 "hint_2": "Use the keyword that turns a matching pattern into an excluded one."
               },
@@ -162,86 +162,31 @@
                 "BETWEEN"
               ]
             },
-            "ci_not_category_filter": {
-              "title": "Exclude one category",
-              "prompt": "Write a query that returns the `name` and `category` columns for all products that are not in the `Art` category. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Return the name and category columns for all products that are not in the Art category.\nSELECT name, category\nFROM products\nWHERE ;"
-            },
-            "ci_not_price_filter": {
-              "title": "Keep products not above a price",
-              "prompt": "Write a query that returns `name` and `price` for products where the price is not greater than 20. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Return name and price for products where the price is not greater than 20.\nSELECT name, price\nFROM products\nWHERE ;"
-            },
-            "ci_not_in_categories": {
-              "title": "Exclude multiple categories",
-              "prompt": "Write a query that returns `name` and `category` for products whose category is not `Art` and not `Home`. Use a single WHERE condition with `NOT IN`. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Return name and category for products whose category is not Art and not Home. Use a single WHERE condition with NOT IN.\nSELECT name, category\nFROM products\nWHERE category ;"
-            },
             "try-not_conditions-sketch0": {
-              "title": "Exclude one category",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that returns the `name` and `category` columns for all products that are not in the `Art` category. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Negate One Category Rule",
+              "prompt": "Return `id`, `name`, and `category` for rows where the category is not `Home`, using `NOT` with an equality condition. Return `id, name, category` from `products` in that column order. Keep only rows where `NOT category = 'Home'`.",
+              "hint": "Place NOT before the category comparison.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "Return `id, name, category` from `products` in that column order. Keep only rows where `NOT category = 'Home'`."
               },
-              "starterCode": "-- Return the name and category columns for all products that are not in the Art category.\nSELECT name, category\nFROM products\nWHERE ;"
-            },
-            "try-not_conditions-sketch1": {
-              "title": "Keep products not above a price",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that returns `name` and `price` for products where the price is not greater than 20. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Return name and price for products where the price is not greater than 20.\nSELECT name, price\nFROM products\nWHERE ;"
-            },
-            "try-not_conditions-sketch2": {
-              "title": "Exclude multiple categories",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that returns `name` and `category` for products whose category is not `Art` and not `Home`. Use a single WHERE condition with `NOT IN`. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Return name and category for products whose category is not Art and not Home.\nSELECT name, category\nFROM products\nWHERE category ;"
+              "starterCode": "SELECT id, name, category\nFROM products\nWHERE category = 'Home';"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_not_conditions_sketch0": {
-              "title": "Exclude one category",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that returns the `name` and `category` columns for all products that are not in the `Art` category. Write the query in the SQL editor, click Run query, and check the results table."
+              "title": "Negate One Category Rule",
+              "prompt": "Return `id`, `name`, and `category` for rows where the category is not `Home`, using `NOT` with an equality condition."
             },
             "try_not_conditions_sketch1": {
               "title": "Keep products not above a price",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that returns `name` and `price` for products where the price is not greater than 20. Write the query in the SQL editor, click Run query, and check the results table."
+              "prompt": "Create a focused inventory query that returns `name` and `price` for products where the price is not greater than 20. Run it and compare the result with the expected table."
             },
             "try_not_conditions_sketch2": {
               "title": "Exclude multiple categories",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that returns `name` and `category` for products whose category is not `Art` and not `Home`. Use a single WHERE condition with `NOT IN`. Write the query in the SQL editor, click Run query, and check the results table."
+              "prompt": "Create a focused inventory query that returns `name` and `category` for products whose category is not `Art` and not `Home`. Use a single WHERE condition with `NOT IN`. Run it and compare the result with the expected table."
             }
           }
         }
@@ -262,20 +207,6 @@
             },
             "quiz": {
               "title": "Quiz"
-            },
-            "project": {
-              "title": "NOT filter practice set"
-            }
-          },
-          "projectSteps": {
-            "ci_not_category_filter": {
-              "title": "Exclude one category"
-            },
-            "ci_not_price_filter": {
-              "title": "Keep products not above a price"
-            },
-            "ci_not_in_categories": {
-              "title": "Exclude multiple categories"
             }
           },
           "quiz": {
@@ -378,7 +309,7 @@
               "prompt": "Fill in the missing SQL keyword.",
               "hint": "This pattern excludes values from a list.",
               "help": {
-                "concept": "`the missing term IN` is used to exclude rows whose value appears in a given list.",
+                "concept": "`the blank IN` is used to exclude rows whose value appears in a given list.",
                 "hint_1": "The missing word comes before `IN` to make the filter exclude categories.",
                 "hint_2": "You need the keyword that flips membership in the list."
               },
@@ -395,7 +326,7 @@
               "prompt": "Fill in the missing SQL keyword.",
               "hint": "This query should exclude names that match a text pattern.",
               "help": {
-                "concept": "`the missing term LIKE` excludes rows whose text matches a pattern such as `%Pen%`.",
+                "concept": "`the blank LIKE` excludes rows whose text matches a pattern such as `%Pen%`.",
                 "hint_1": "The missing word should reverse the normal `LIKE` match.",
                 "hint_2": "Use the keyword that turns a matching pattern into an excluded one."
               },
@@ -441,19 +372,19 @@
               "starterCode": "-- Return name and category for products whose category is not Art and not Home. Use a single WHERE condition with NOT IN.\nSELECT name, category\nFROM products\nWHERE category ;"
             },
             "try-not_conditions-sketch0": {
-              "title": "Exclude one category",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that returns the `name` and `category` columns for all products that are not in the `Art` category. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Negate One Category Rule",
+              "prompt": "Return `id`, `name`, and `category` for rows where the category is not `Home`, using `NOT` with an equality condition.",
+              "hint": "Place NOT before the category comparison.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
+                "concept": "Return `id`, `name`, and `category` for rows where the category is not `Home`, using `NOT` with an equality condition.",
+                "hint_1": "Place NOT before the category comparison.",
+                "hint_2": "Run the query and compare the returned columns and rows with the expected result."
               },
-              "starterCode": "-- Return the name and category columns for all products that are not in the Art category.\nSELECT name, category\nFROM products\nWHERE ;"
+              "starterCode": "SELECT id, name, category\nFROM products\nWHERE category = 'Home';"
             },
             "try-not_conditions-sketch1": {
               "title": "Keep products not above a price",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that returns `name` and `price` for products where the price is not greater than 20. Write the query in the SQL editor, click Run query, and check the results table.",
+              "prompt": "Create a focused inventory query that returns `name` and `price` for products where the price is not greater than 20. Run it and compare the result with the expected table.",
               "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
               "help": {
                 "concept": "This SQL exercise checks whether your query returns the requested result.",
@@ -464,7 +395,7 @@
             },
             "try-not_conditions-sketch2": {
               "title": "Exclude multiple categories",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that returns `name` and `category` for products whose category is not `Art` and not `Home`. Use a single WHERE condition with `NOT IN`. Write the query in the SQL editor, click Run query, and check the results table.",
+              "prompt": "Create a focused inventory query that returns `name` and `category` for products whose category is not `Art` and not `Home`. Use a single WHERE condition with `NOT IN`. Run it and compare the result with the expected table.",
               "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
               "help": {
                 "concept": "This SQL exercise checks whether your query returns the requested result.",
@@ -477,16 +408,16 @@
           "tryIt": {
             "allowReveal": true,
             "try_not_conditions_sketch0": {
-              "title": "Exclude one category",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that returns the `name` and `category` columns for all products that are not in the `Art` category. Write the query in the SQL editor, click Run query, and check the results table."
+              "title": "Negate One Category Rule",
+              "prompt": "Return `id`, `name`, and `category` for rows where the category is not `Home`, using `NOT` with an equality condition."
             },
             "try_not_conditions_sketch1": {
               "title": "Keep products not above a price",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that returns `name` and `price` for products where the price is not greater than 20. Write the query in the SQL editor, click Run query, and check the results table."
+              "prompt": "Create a focused inventory query that returns `name` and `price` for products where the price is not greater than 20. Run it and compare the result with the expected table."
             },
             "try_not_conditions_sketch2": {
               "title": "Exclude multiple categories",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that returns `name` and `category` for products whose category is not `Art` and not `Home`. Use a single WHERE condition with `NOT IN`. Write the query in the SQL editor, click Run query, and check the results table."
+              "prompt": "Create a focused inventory query that returns `name` and `category` for products whose category is not `Art` and not `Home`. Use a single WHERE condition with `NOT IN`. Run it and compare the result with the expected table."
             }
           }
         }

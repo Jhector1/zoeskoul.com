@@ -1,0 +1,374 @@
+{
+  "topicId": "insert-with-explicit-column-lists",
+  "subjectSlug": "sql--sql-data-management--draft",
+  "moduleSlug": "sql-data-management-module-0-safe-inserts",
+  "sectionSlug": "sql--sql-data-management--draft-sql-data-management-section-0-mutation-workflow",
+  "prefix": "sql_data_management_module_0",
+  "minutes": 28,
+  "runtimeDefaults": {
+    "kind": "sql",
+    "showSchema": true,
+    "showErd": true,
+    "showChen": true,
+    "supportsTerminal": false,
+    "supportsMultiFile": false,
+    "supportsFileSystem": false,
+    "datasetId": "inventory_ops",
+    "fixedSqlDialect": "sqlite",
+    "resultShape": "table"
+  },
+  "serviceDefaults": null,
+  "tools": {
+    "defaultVisible": true,
+    "allowOpen": true,
+    "defaultSurface": "editor",
+    "compactDefaultSurface": "editor",
+    "sqlPane": {
+      "showResults": true,
+      "showTables": true,
+      "showErd": false,
+      "showChen": false,
+      "defaultTab": "results",
+      "compactDefaultTab": "results"
+    }
+  },
+  "topic": {
+    "labelKey": "topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.label",
+    "summaryKey": "topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.cards.sketch0.title",
+      "sketchId": "insert-with-explicit-column-lists-sketch0",
+      "height": 420,
+      "tryIt": {
+        "id": "try-insert-with-explicit-column-lists-sketch0",
+        "titleKey": "topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.tryIt.try_insert_with_explicit_column_lists_sketch0.title",
+        "promptKey": "topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.tryIt.try_insert_with_explicit_column_lists_sketch0.prompt",
+        "exerciseKey": "try-insert-with-explicit-column-lists-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.cards.sketch1.title",
+      "sketchId": "insert-with-explicit-column-lists-sketch1",
+      "height": 420,
+      "tryIt": {
+        "id": "try-insert-with-explicit-column-lists-sketch1",
+        "titleKey": "topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.tryIt.try_insert_with_explicit_column_lists_sketch1.title",
+        "promptKey": "topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.tryIt.try_insert_with_explicit_column_lists_sketch1.prompt",
+        "exerciseKey": "try-insert-with-explicit-column-lists-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "insert-with-explicit-column-lists-sketch0",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.insert-with-explicit-column-lists-sketch0.title",
+      "bodyKey": "sketches.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.insert-with-explicit-column-lists-sketch0.bodyMarkdown"
+    },
+    {
+      "id": "insert-with-explicit-column-lists-sketch1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.insert-with-explicit-column-lists-sketch1.title",
+      "bodyKey": "sketches.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.insert-with-explicit-column-lists-sketch1.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "try-insert-with-explicit-column-lists-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.tryIt.try_insert_with_explicit_column_lists_sketch0",
+      "language": "sql",
+      "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.tryIt.try_insert_with_explicit_column_lists_sketch0.starterCode",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.tryIt.try_insert_with_explicit_column_lists_sketch0.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.tryIt.try_insert_with_explicit_column_lists_sketch0.solutionCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "inventory_ops",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "entryFile": "query.sql",
+        "openTabs": [
+          "query.sql"
+        ],
+        "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.tryIt.try_insert_with_explicit_column_lists_sketch0.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.tryIt.try_insert_with_explicit_column_lists_sketch0.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          }
+        ]
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "inventory_ops",
+        "resultShape": "table",
+        "solutionCode": "-- Insert a new product into the inventory_items table\nINSERT INTO inventory_items (name, category, price, status) VALUES ('Journal', 'Stationery', 5.99, 'active');\n\n-- Verify the insertion\nSELECT * FROM inventory_items WHERE name = 'Journal';",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.tryIt.try_insert_with_explicit_column_lists_sketch0.solutionCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          }
+        ],
+        "checkSql": "SELECT * FROM inventory_items WHERE name = 'Journal';"
+      }
+    },
+    {
+      "id": "try-insert-with-explicit-column-lists-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.tryIt.try_insert_with_explicit_column_lists_sketch1",
+      "language": "sql",
+      "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.tryIt.try_insert_with_explicit_column_lists_sketch1.starterCode",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.tryIt.try_insert_with_explicit_column_lists_sketch1.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.tryIt.try_insert_with_explicit_column_lists_sketch1.solutionCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "inventory_ops",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "entryFile": "query.sql",
+        "openTabs": [
+          "query.sql"
+        ],
+        "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.tryIt.try_insert_with_explicit_column_lists_sketch1.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.tryIt.try_insert_with_explicit_column_lists_sketch1.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          }
+        ]
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "inventory_ops",
+        "resultShape": "table",
+        "solutionCode": "-- Insert multiple products into the inventory_items table\nINSERT INTO inventory_items (name, category, price, status) VALUES\n('Pen', 'Stationery', 1.99, 'active'),\n('Eraser', 'Stationery', 0.99, 'active');\n\n-- Verify the insertion\nSELECT * FROM inventory_items WHERE name IN ('Pen', 'Eraser');",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.tryIt.try_insert_with_explicit_column_lists_sketch1.solutionCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          }
+        ],
+        "checkSql": "SELECT * FROM inventory_items WHERE name IN ('Pen', 'Eraser');"
+      }
+    },
+    {
+      "id": "insert-with-explicit-column-lists-sc1",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.practice.insert-with-explicit-column-lists-sc1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "insert-with-explicit-column-lists-sc2",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.practice.insert-with-explicit-column-lists-sc2",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "insert-with-explicit-column-lists-mc1",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.practice.insert-with-explicit-column-lists-mc1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "insert-with-explicit-column-lists-mc2",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.practice.insert-with-explicit-column-lists-mc2",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "insert-with-explicit-column-lists-drag1",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.practice.insert-with-explicit-column-lists-drag1",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
+      }
+    },
+    {
+      "id": "insert-with-explicit-column-lists-fb1",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.practice.insert-with-explicit-column-lists-fb1",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "name, category, price, status"
+      }
+    }
+  ]
+}

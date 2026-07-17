@@ -1,0 +1,116 @@
+{
+  "title": "Final Capstone: School Program Participation Report",
+  "summary": "Build one all-department participation report through a relationship-preview Try It and four cumulative capstone steps.",
+  "minutes": 110,
+  "sketchBlocks": [
+    {
+      "id": "sketch-intro",
+      "title": "Introduction to the Capstone Project",
+      "bodyMarkdown": "In this final capstone project, you will create a comprehensive report that shows participation across all school departments. The goal is to ensure that every department is represented, even those without active courses. You'll use SQL to join tables, calculate metrics, and label participation levels. This project will help you consolidate your SQL skills and produce a portfolio-quality report."
+    },
+    {
+      "id": "sketch-relationship-path",
+      "title": "Understanding the Relationship Path",
+      "bodyMarkdown": "To build the report, you'll follow the relationship path from departments to courses and then to enrollments. This path allows you to gather data on course offerings and student enrollments for each department. Here's a simple SQL example to illustrate the concept:\n\n```sql\nSELECT d.name AS department_name, COUNT(c.id) AS course_count\nFROM departments d\nLEFT JOIN courses c ON d.id = c.department_id\nGROUP BY d.id;\n```\n\nThis query starts from the `departments` table and uses a LEFT JOIN to include all departments, even those without courses. It counts the number of courses per department."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "step1-establish-grain",
+      "kind": "code_input",
+      "title": "Step 1: Establish the All-Department Grain",
+      "prompt": "Start from the departments table and LEFT JOIN with courses and enrollments. Ensure that each result row represents one department.",
+      "starterCode": "-- Write your SQL answer below",
+      "solutionCode": "SELECT d.name AS department_name\nFROM departments d\nLEFT JOIN courses c ON d.id = c.department_id\nLEFT JOIN enrollments e ON c.id = e.course_id\nGROUP BY d.id;",
+      "tests": [
+        {
+          "stdout": "Science\nMath\nHumanities\nTechnology\nArts\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "school_relations_intro",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "step2-add-counts",
+      "kind": "code_input",
+      "title": "Step 2: Add Course and Enrollment Counts",
+      "prompt": "Extend the previous query to include course_count and enrollment_count for each department.",
+      "starterCode": "SELECT d.name AS department_name, COUNT(c.id) AS course_count\nFROM departments d\nLEFT JOIN courses c ON d.id = c.department_id\nLEFT JOIN enrollments e ON c.id = e.course_id\nGROUP BY d.id;",
+      "solutionCode": "SELECT d.name AS department_name, COUNT(c.id) AS course_count, COUNT(e.id) AS enrollment_count\nFROM departments d\nLEFT JOIN courses c ON d.id = c.department_id\nLEFT JOIN enrollments e ON c.id = e.course_id\nGROUP BY d.id;",
+      "tests": [
+        {
+          "stdout": "Science,2,2\nMath,1,2\nHumanities,2,2\nTechnology,1,2\nArts,0,0\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "school_relations_intro",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "step3-add-distinct-students",
+      "kind": "code_input",
+      "title": "Step 3: Add Distinct Student Participation",
+      "prompt": "Modify the query to include a count of distinct students participating in each department.",
+      "starterCode": "SELECT d.name AS department_name, COUNT(c.id) AS course_count, COUNT(e.id) AS enrollment_count\nFROM departments d\nLEFT JOIN courses c ON d.id = c.department_id\nLEFT JOIN enrollments e ON c.id = e.course_id\nGROUP BY d.id;",
+      "solutionCode": "SELECT d.name AS department_name, COUNT(c.id) AS course_count, COUNT(e.id) AS enrollment_count, COUNT(DISTINCT e.student_id) AS student_count\nFROM departments d\nLEFT JOIN courses c ON d.id = c.department_id\nLEFT JOIN enrollments e ON c.id = e.course_id\nGROUP BY d.id;",
+      "tests": [
+        {
+          "stdout": "Science,2,2,2\nMath,1,2,2\nHumanities,2,2,2\nTechnology,1,2,1\nArts,0,0,0\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "school_relations_intro",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "step4-label-rank",
+      "kind": "code_input",
+      "title": "Step 4: Label and Rank Participation",
+      "prompt": "Add a participation_status column and sort the results by enrollment_count descending and department_name ascending.",
+      "starterCode": "SELECT d.name AS department_name, COUNT(c.id) AS course_count, COUNT(e.id) AS enrollment_count, COUNT(DISTINCT e.student_id) AS student_count\nFROM departments d\nLEFT JOIN courses c ON d.id = c.department_id\nLEFT JOIN enrollments e ON c.id = e.course_id\nGROUP BY d.id;",
+      "solutionCode": "SELECT d.name AS department_name, COUNT(c.id) AS course_count, COUNT(e.id) AS enrollment_count, COUNT(DISTINCT e.student_id) AS student_count,\nCASE\n  WHEN COUNT(e.id) = 0 THEN 'No activity'\n  WHEN COUNT(c.id) >= 2 AND COUNT(DISTINCT e.student_id) >= 2 THEN 'Broad participation'\n  ELSE 'Active'\nEND AS participation_status\nFROM departments d\nLEFT JOIN courses c ON d.id = c.department_id\nLEFT JOIN enrollments e ON c.id = e.course_id\nGROUP BY d.id\nORDER BY enrollment_count DESC, department_name ASC;",
+      "tests": [
+        {
+          "stdout": "Science,2,2,2,Active\nMath,1,2,2,Active\nHumanities,2,2,2,Broad participation\nTechnology,1,2,1,Active\nArts,0,0,0,No activity\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "school_relations_intro",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Final Capstone: School Program Participation Report",
+    "stepIds": [
+      "step1-establish-grain",
+      "step2-add-counts",
+      "step3-add-distinct-students",
+      "step4-label-rank"
+    ]
+  }
+}

@@ -1,0 +1,134 @@
+{
+  "title": "Building a Metric Map",
+  "summary": "Plan how each report column will be calculated and validated.",
+  "minutes": 20,
+  "sketchBlocks": [
+    {
+      "id": "capstone-metric-map-sketch0",
+      "title": "Capstone Project Overview",
+      "bodyMarkdown": "In this final capstone project, you will create an Executive Sales Performance Report using the `sales_reporting` table from the `sales_kpi` dataset. Your task is to integrate various SQL concepts such as aggregate functions, conditional aggregation, and null-safe calculations to produce a comprehensive report. The report should answer key business questions and provide insights into sales performance across different regions and categories. You will progressively build this report, ensuring each step is validated and explained in business terms."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "capstone-metric-map-step1",
+      "kind": "code_input",
+      "title": "Calculate Total Sales",
+      "prompt": "Write a query to calculate the total sales for each region. Use the `sales_reporting` table and consider the `quantity` and `unit_price` columns.",
+      "starterCode": "-- Write your SQL answer below",
+      "solutionCode": "SELECT region, SUM(quantity * unit_price) AS total_sales\nFROM sales_reporting\nGROUP BY region;",
+      "tests": [
+        {
+          "stdout": "North|1234.50\nSouth|987.00\nEast|876.00\nWest|765.00\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "capstone-metric-map-step2",
+      "kind": "code_input",
+      "title": "Average Customer Rating by Category",
+      "prompt": "Write a query to find the average customer rating for each product category. Use the `sales_reporting` table and handle any null values appropriately.",
+      "starterCode": "-- Write your SQL answer below",
+      "solutionCode": "SELECT category, AVG(COALESCE(customer_rating, 0)) AS avg_rating\nFROM sales_reporting\nGROUP BY category;",
+      "tests": [
+        {
+          "stdout": "Art|4.5\nStationery|4.2\nHome|4.3\nTech|4.4\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "capstone-metric-map-step3",
+      "kind": "code_input",
+      "title": "Identify Top Sales Rep",
+      "prompt": "Write a query to identify the sales representative with the highest total sales. Use the `sales_reporting` table and consider both `quantity` and `unit_price`.",
+      "starterCode": "-- Write your SQL answer below",
+      "solutionCode": "SELECT sales_rep, SUM(quantity * unit_price) AS total_sales\nFROM sales_reporting\nGROUP BY sales_rep\nORDER BY total_sales DESC\nLIMIT 1;",
+      "tests": [
+        {
+          "stdout": "Maya|2345.00\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "capstone-metric-map-step4",
+      "kind": "code_input",
+      "title": "Sales Performance by Region and Status",
+      "prompt": "Write a query to calculate the total sales for each region and order status. Use the `sales_reporting` table and group the results accordingly.",
+      "starterCode": "-- Write your SQL answer below",
+      "solutionCode": "SELECT region, order_status, SUM(quantity * unit_price) AS total_sales\nFROM sales_reporting\nGROUP BY region, order_status;",
+      "tests": [
+        {
+          "stdout": "North|Completed|1234.50\nNorth|Pending|567.00\nSouth|Completed|876.00\nSouth|Pending|111.00\nEast|Completed|765.00\nEast|Pending|222.00\nWest|Completed|654.00\nWest|Pending|333.00\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "capstone-metric-map-step5",
+      "kind": "code_input",
+      "title": "Conditional Sales Analysis",
+      "prompt": "Write a query to calculate the total sales for orders with a discount greater than 5%. Use the `sales_reporting` table and filter the results accordingly.",
+      "starterCode": "-- Write your SQL answer below",
+      "solutionCode": "SELECT SUM(quantity * unit_price) AS total_sales\nFROM sales_reporting\nWHERE discount_pct > 5;",
+      "tests": [
+        {
+          "stdout": "3456.00\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Executive Sales Performance Report",
+    "stepIds": [
+      "capstone-metric-map-step1",
+      "capstone-metric-map-step2",
+      "capstone-metric-map-step3",
+      "capstone-metric-map-step4",
+      "capstone-metric-map-step5"
+    ]
+  }
+}

@@ -24,13 +24,13 @@
           },
           "quiz": {
             "try-what_sql_is-sketch0": {
-              "title": "Try it yourself: What does SQL mean?",
-              "prompt": "Use the SQL editor to practice the idea from this card. Run the query, then compare the result table with the lesson explanation.",
+              "title": "Return Name",
+              "prompt": "Return `name` from `students` in that column order.",
               "hint": "Use the pattern shown in the lesson card.",
               "help": {
-                "concept": "This try-it checks that you can connect the card concept to a small SQL query.",
-                "hint_1": "Check the selected columns and the table name.",
-                "hint_2": "Run the query and read the result table."
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "Return `name` from `students` in that column order."
               },
               "starterCode": "-- Show the names in the students table\nSELECT \nFROM students;"
             },
@@ -422,7 +422,7 @@
         "what_sql_is": {
           "what_sql_means": {
             "title": "SQL is a language for data.",
-            "bodyMarkdown": "SQL is used to work with data in a database.\n\n[[image:sql_language_overview]]\n\nIt stands for **Structured Query Language**.\n\nThe idea is simple:\n\n> SQL helps you retrieve data, sort it, filter it, and sometimes change it.\n\n[[image:sql_question_to_data_flow]]\n\nIf you had a table of students, SQL could help answer questions like:\n\n- Who got an A?\n- How many students are there?\n- What are all the names?\n\n[[image:students_table_example]]\n\nA simple preview query looks like this:\n\n~~~sql\nSELECT * FROM students;\n~~~\n\nWhen you run a query like this, SQL returns a table with student information.\n\n[[image:select_from_breakdown]]\n\nFor now, just notice:\n\n- `SELECT` = show data\n- `FROM students` = from the students table\n\nSo SQL is a way to **talk to stored information**.\n\n---\n\n## Big idea\n\nMany languages focus on steps.\nSQL often focuses on the result:\n\n> What data do you want?\n\n[[image:sql_result_focus]]"
+            "bodyMarkdown": "Welcome to SQL Foundations. You do not need previous database experience for this course. You will begin by learning how tables organize information, then write small queries that select columns, filter rows, sort results, and handle missing values. Each new idea adds one clear piece to the same reading workflow, and the final capstone combines those pieces into a useful customer report.\n\nSQL is used to work with data in a database.\n\n[[image:sql_language_overview]]\n\nIt stands for **Structured Query Language**.\n\nThe idea is simple:\n\n> SQL helps you retrieve data, sort it, filter it, and sometimes change it.\n\n[[image:sql_question_to_data_flow]]\n\nIf you had a table of students, SQL could help answer questions like:\n\n- Who got an A?\n- How many students are there?\n- What are all the names?\n\n[[image:students_table_example]]\n\nA simple preview query looks like this:\n\n~~~sql\nSELECT * FROM students;\n~~~\n\nWhen you run a query like this, SQL returns a table with student information.\n\n[[image:select_from_breakdown]]\n\nFor now, just notice:\n\n- `SELECT` = show data\n- `FROM students` = from the students table\n\nSo SQL is a way to **talk to stored information**.\n\n---\n\n## Big idea\n\nMany languages focus on steps.\nSQL often focuses on the result:\n\n> What data do you want?\n\n[[image:sql_result_focus]]"
           },
           "what_a_database_is": {
             "title": "A database stores organized information.",

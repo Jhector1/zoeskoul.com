@@ -32,6 +32,7 @@ import {
   stateLanguageMatches,
 } from "@/components/review/module/runtime/workspaceCodeSource";
 import { buildReviewPracticeRevealCompletionPatch } from "@/components/review/quiz/reviewPracticeRevealCompletion";
+import { getReviewSubmitBridgeHost } from "@/lib/review/submitBridge";
 
 export { isEmptyPracticeAnswer } from "@/lib/practice/runtime";
 export type PracticeState = PracticeItemState & {
@@ -129,6 +130,27 @@ export function getStablePracticeQuestionKey(q: ReviewQuestion) {
 
   const scopedKey = buildScopedPracticeQuestionKey(q);
   return scopedKey || String(q.id ?? "");
+}
+
+export function resolvedPracticeExerciseMatchesRequestedKey(
+    exercise: unknown,
+    requestedExerciseKey: unknown,
+) {
+  const requested = String(requestedExerciseKey ?? "").trim();
+  if (!requested) return true;
+  if (!exercise || typeof exercise !== "object") return false;
+
+  const record = exercise as Record<string, unknown>;
+  const candidates = [record.exerciseKey, record.id]
+      .map((value) => String(value ?? "").trim())
+      .filter(Boolean);
+
+  return candidates.some(
+      (candidate) =>
+          candidate === requested ||
+          candidate.endsWith(`:${requested}`) ||
+          requested.endsWith(`:${candidate}`),
+  );
 }
 
 type PracticeQuestionIdentity = {
@@ -501,12 +523,8 @@ function mergeTerminalEvidenceForPracticeSubmit(...values: unknown[]) {
 }
 
 function getLiveTerminalEvidenceForPracticeSubmit(candidateKeys: string[]) {
-  if (typeof window === "undefined") return null;
-
-  const win = window as typeof window & {
-    __zoeGetTerminalEvidenceBeforeSubmit?: Record<string, () => unknown>;
-    __zoeGetAnyTerminalEvidenceBeforeSubmit?: () => unknown;
-  };
+  const win = getReviewSubmitBridgeHost();
+  if (!win) return null;
 
   const seen = new Set<string>();
   let keyedEvidence: ReturnType<typeof normalizeTerminalEvidenceForPracticeSubmit> = null;
@@ -536,6 +554,61 @@ function getLiveTerminalEvidenceForPracticeSubmit(candidateKeys: string[]) {
       keyedEvidence,
       win.__zoeGetAnyTerminalEvidenceBeforeSubmit?.(),
       getVisibleTerminalEvidenceForPracticeSubmit(),
+  );
+}
+
+type LiveWorkspaceSubmitSnapshot = {
+  workspace: unknown;
+  code: string;
+  stdin: string;
+  language: string;
+  ownerKey?: string;
+};
+
+function normalizeLiveWorkspaceSubmitSnapshot(
+    value: unknown,
+): LiveWorkspaceSubmitSnapshot | null {
+  if (!value || typeof value !== "object") return null;
+
+  const record = value as Record<string, unknown>;
+  const workspace = record.workspace ?? null;
+  const code = String(record.code ?? record.source ?? "");
+  const stdin = String(record.stdin ?? record.codeStdin ?? "");
+  const language = String(
+      record.language ?? record.lang ?? record.codeLang ?? "python",
+  );
+
+  if (!workspace && !code.trim()) return null;
+
+  return {
+    workspace,
+    code,
+    stdin,
+    language,
+    ...(typeof record.ownerKey === "string" && record.ownerKey.trim()
+        ? { ownerKey: record.ownerKey.trim() }
+        : {}),
+  };
+}
+
+export function getLiveWorkspaceForPracticeSubmit(candidateKeys: string[]) {
+  const win = getReviewSubmitBridgeHost();
+  if (!win) return null;
+
+  const seen = new Set<string>();
+  for (const candidateKey of candidateKeys) {
+    const key = String(candidateKey ?? "").trim();
+    if (!key || seen.has(key)) continue;
+    seen.add(key);
+
+    const snapshot = normalizeLiveWorkspaceSubmitSnapshot(
+        win.__zoeGetWorkspaceBeforeSubmit?.[key]?.(),
+    );
+    if (snapshot) return snapshot;
+  }
+
+  return normalizeLiveWorkspaceSubmitSnapshot(
+      win.__zoeGetAnyWorkspaceBeforeSubmit?.(),
   );
 }
 
@@ -649,6 +722,12 @@ function getRuntimePracticePatchForQuestion(
 
   const activeExerciseKey = String(runtime.activeExerciseKey ?? "").trim();
   const boundExerciseKey = String(runtime.tool?.boundExerciseKey ?? "").trim();
+  const liveWorkspaceSnapshot = getLiveWorkspaceForPracticeSubmit([
+    boundExerciseKey,
+    activeExerciseKey,
+    stableKey,
+    ...Array.from(wantedIds),
+  ]);
 
   const candidates = Object.entries(exercises)
       .map(([key, value]: any) => {
@@ -763,24 +842,35 @@ function getRuntimePracticePatchForQuestion(
           ])
         : null;
 
-    if (!liveTerminalEvidence) return null;
+    if (!liveTerminalEvidence && !liveWorkspaceSnapshot) return null;
 
     return {
-      __runtimeStoreKey: boundExerciseKey || activeExerciseKey || stableKey,
+      __runtimeStoreKey:
+          liveWorkspaceSnapshot?.ownerKey ||
+          boundExerciseKey ||
+          activeExerciseKey ||
+          stableKey,
       exerciseKey: qAny.fetch?.exerciseKey ?? qAny.exerciseKey ?? qAny.item?.exerciseKey,
       exerciseId: qAny.exercise?.id ?? qAny.item?.id,
       subjectSlug: qAny.fetch?.subject ?? qAny.subjectSlug,
       moduleSlug: qAny.fetch?.module ?? qAny.moduleSlug,
       sectionSlug: qAny.fetch?.section ?? qAny.sectionSlug,
       topicId: wantedTopic,
-      code: "",
-      source: "",
-      stdin: "",
-      codeStdin: "",
-      lang: "bash",
-      language: "bash",
-      codeLang: "bash",
-      terminalEvidence: liveTerminalEvidence,
+      code: liveWorkspaceSnapshot?.code ?? "",
+      source: liveWorkspaceSnapshot?.code ?? "",
+      stdin: liveWorkspaceSnapshot?.stdin ?? "",
+      codeStdin: liveWorkspaceSnapshot?.stdin ?? "",
+      lang: liveWorkspaceSnapshot?.language ?? "bash",
+      language: liveWorkspaceSnapshot?.language ?? "bash",
+      codeLang: liveWorkspaceSnapshot?.language ?? "bash",
+      ...(liveWorkspaceSnapshot?.workspace
+          ? {
+              workspace: liveWorkspaceSnapshot.workspace,
+              codeWorkspace: liveWorkspaceSnapshot.workspace,
+              ideWorkspace: liveWorkspaceSnapshot.workspace,
+            }
+          : {}),
+      ...(liveTerminalEvidence ? { terminalEvidence: liveTerminalEvidence } : {}),
       userEdited: true,
       workspaceOrigin: "user",
       updatedAt: Date.now(),
@@ -790,6 +880,7 @@ function getRuntimePracticePatchForQuestion(
   const estate = found.value;
 
   const workspace =
+      liveWorkspaceSnapshot?.workspace ??
       estate.workspace ??
       estate.codeWorkspace ??
       estate.ideWorkspace ??
@@ -798,7 +889,9 @@ function getRuntimePracticePatchForQuestion(
   const workspaceCode = getWorkspaceEntryCodeForPracticeBank(workspace);
 
   const code =
-      workspaceCode.trim().length > 0
+      liveWorkspaceSnapshot?.code?.trim().length
+          ? liveWorkspaceSnapshot.code
+          : workspaceCode.trim().length > 0
           ? workspaceCode
           : typeof estate.code === "string" && estate.code.trim().length > 0
               ? estate.code
@@ -830,7 +923,9 @@ function getRuntimePracticePatchForQuestion(
   if (!code.trim() && !terminalEvidence && !workspace) return null;
 
   const stdin =
-      typeof workspace?.stdin === "string"
+      liveWorkspaceSnapshot
+          ? liveWorkspaceSnapshot.stdin
+          : typeof workspace?.stdin === "string"
           ? workspace.stdin
           : typeof estate.codeStdin === "string"
               ? estate.codeStdin
@@ -839,7 +934,8 @@ function getRuntimePracticePatchForQuestion(
                   : "";
 
   const lang =
-      typeof workspace?.language === "string"
+      liveWorkspaceSnapshot?.language ||
+      (typeof workspace?.language === "string"
           ? workspace.language
           : typeof estate.codeLang === "string"
               ? estate.codeLang
@@ -847,7 +943,7 @@ function getRuntimePracticePatchForQuestion(
                   ? estate.lang
                   : typeof estate.language === "string"
                       ? estate.language
-                      : "python";
+                      : "python");
 
   if (process.env.NODE_ENV !== "production") {
     console.log("[practice-check-runtime-patch]", {
@@ -861,6 +957,8 @@ function getRuntimePracticePatchForQuestion(
       boundExerciseKey,
       score: found.score,
       submittedCode: code,
+      liveWorkspaceOwnerKey: liveWorkspaceSnapshot?.ownerKey ?? null,
+      usedLiveWorkspace: Boolean(liveWorkspaceSnapshot),
       submittedTerminalCommandCount:
           terminalEvidence?.commands?.length ?? 0,
       liveTerminalCommandCount:
@@ -1635,6 +1733,18 @@ export function useQuizPracticeBank(args: {
               () => fetchCtrl?.abort(),
           );
 
+          if (
+              resolvedExerciseKey &&
+              !resolvedPracticeExerciseMatchesRequestedKey(
+                  loaded.exercise,
+                  resolvedExerciseKey,
+              )
+          ) {
+            throw new Error(
+                `Practice exercise identity mismatch: requested "${resolvedExerciseKey}" but received "${String((loaded.exercise as any)?.exerciseKey ?? (loaded.exercise as any)?.id ?? "unknown")}".`,
+            );
+          }
+
           reviewDebug("7_RESTORE_LOADED useQuizPracticeBank.loadPracticeQuestion", {
             qid: q.id,
             stableKey,
@@ -1853,7 +1963,7 @@ export function useQuizPracticeBank(args: {
 
   const updatePracticeItem = useCallback(
       (id: string, patch: Partial<QItem>) => {
-        const q = resolveQuestionByAnyId(questions, id);
+        const q = resolveQuestionByAnyId(questionsRef.current, id);
         const key = q ? getStablePracticeQuestionKey(q) : resolvePracticeKey(id);
 
         const pr = padRefs.current[key];
@@ -1956,8 +2066,9 @@ export function useQuizPracticeBank(args: {
             ...prev,
             [key]: nextState,
           };
-        });        },
-      [questions],
+        });
+      },
+      [],
   );
 
   const submitPractice = useCallback(

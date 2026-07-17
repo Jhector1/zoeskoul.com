@@ -1,0 +1,163 @@
+{
+  "topics": {
+    "sql--sql-analysis-reporting--draft": {
+      "sql-analysis-reporting-module-0-report-foundations": {
+        "module-0-order-value-detail-report": {
+          "label": "Module 0 Project: Completed Order Value Report",
+          "summary": "Build one readable completed-order detail report, adding aliases, a gross-sales calculation, rounding, and stable sorting without discarding earlier columns.",
+          "cards": {
+            "sketch0": {
+              "title": "Project Brief"
+            },
+            "project": {
+              "title": "Build the Report"
+            }
+          },
+          "projectSteps": {
+            "project_step_1": {
+              "title": "Select the Completed Order Details"
+            },
+            "project_step_2": {
+              "title": "Add Reader-Friendly Aliases"
+            },
+            "project_step_3": {
+              "title": "Add Gross Sales"
+            },
+            "project_step_4": {
+              "title": "Round the Monetary Result"
+            },
+            "project_step_5": {
+              "title": "Rank the Report Predictably"
+            }
+          },
+          "moduleProject": {
+            "steps": {
+              "project_step_1": {
+                "title": "Select the Completed Order Details",
+                "prompt": "Begin the Module 0 Order Value Detail Report. Return `order_id, order_date, product_name, quantity, unit_price` from `sales_reporting` in that column order. Keep only rows where `order_status = 'Completed'`.",
+                "hint": "Keep the first version narrow: requested columns and the completed-status filter only.",
+                "help": {
+                  "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                  "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                  "hint_2": "Return `order_id, order_date, product_name, quantity, unit_price` from `sales_reporting` in that column order. Keep only rows where `order_status = 'Completed'`."
+                },
+                "starterCode": "-- Build the first working query below.",
+                "solutionCode": "SELECT\n    order_id,\n    order_date,\n    product_name,\n    quantity,\n    unit_price\nFROM sales_reporting\nWHERE order_status = 'Completed';",
+                "starterFiles": {
+                  "main_sql": {
+                    "content": "-- Build the first working query below."
+                  }
+                },
+                "solutionFiles": {
+                  "main_sql": {
+                    "content": "SELECT\n    order_id,\n    order_date,\n    product_name,\n    quantity,\n    unit_price\nFROM sales_reporting\nWHERE order_status = 'Completed';"
+                  }
+                }
+              },
+              "project_step_2": {
+                "title": "Add Reader-Friendly Aliases",
+                "prompt": "Extend the Module 0 Order Value Detail Report with the next approved requirement. Return `order_id AS order_number, order_date AS ordered_on, product_name AS product, quantity AS units, unit_price AS unit_price` from `sales_reporting` in that column order. Keep only rows where `order_status = 'Completed'`.",
+                "hint": "Change only the output headings; keep every source column and the filter.",
+                "help": {
+                  "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                  "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                  "hint_2": "Return `order_id AS order_number, order_date AS ordered_on, product_name AS product, quantity AS units, unit_price AS unit_price` from `sales_reporting` in that column order. Keep only rows where `order_status = 'Completed'`."
+                },
+                "starterCode": "SELECT\n    order_id,\n    order_date,\n    product_name,\n    quantity,\n    unit_price\nFROM sales_reporting\nWHERE order_status = 'Completed';",
+                "solutionCode": "SELECT\n    order_id AS order_number,\n    order_date AS ordered_on,\n    product_name AS product,\n    quantity AS units,\n    unit_price AS unit_price\nFROM sales_reporting\nWHERE order_status = 'Completed';",
+                "starterFiles": {
+                  "main_sql": {
+                    "content": "SELECT\n    order_id,\n    order_date,\n    product_name,\n    quantity,\n    unit_price\nFROM sales_reporting\nWHERE order_status = 'Completed';"
+                  }
+                },
+                "solutionFiles": {
+                  "main_sql": {
+                    "content": "SELECT\n    order_id AS order_number,\n    order_date AS ordered_on,\n    product_name AS product,\n    quantity AS units,\n    unit_price AS unit_price\nFROM sales_reporting\nWHERE order_status = 'Completed';"
+                  }
+                }
+              },
+              "project_step_3": {
+                "title": "Add Gross Sales — 0 Project: Completed Order Value Report",
+                "prompt": "Extend the Module 0 Order Value Detail Report with the next approved requirement. Return `order_id AS order_number, order_date AS ordered_on, product_name AS product, quantity AS units, unit_price AS unit_price, quantity * unit_price AS gross_sales` from `sales_reporting` in that column order. Keep only rows where `order_status = 'Completed'`.",
+                "hint": "Append the calculated column after the existing detail fields.",
+                "help": {
+                  "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                  "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                  "hint_2": "Return `order_id AS order_number, order_date AS ordered_on, product_name AS product, quantity AS units, unit_price AS unit_price, quantity * unit_price AS gross_sales` from `sales_reporting` in that column order. Keep only rows where `order_status = 'Completed'`."
+                },
+                "starterCode": "SELECT\n    order_id AS order_number,\n    order_date AS ordered_on,\n    product_name AS product,\n    quantity AS units,\n    unit_price AS unit_price\nFROM sales_reporting\nWHERE order_status = 'Completed';",
+                "solutionCode": "SELECT\n    order_id AS order_number,\n    order_date AS ordered_on,\n    product_name AS product,\n    quantity AS units,\n    unit_price AS unit_price,\n    quantity * unit_price AS gross_sales\nFROM sales_reporting\nWHERE order_status = 'Completed';",
+                "starterFiles": {
+                  "main_sql": {
+                    "content": "SELECT\n    order_id AS order_number,\n    order_date AS ordered_on,\n    product_name AS product,\n    quantity AS units,\n    unit_price AS unit_price\nFROM sales_reporting\nWHERE order_status = 'Completed';"
+                  }
+                },
+                "solutionFiles": {
+                  "main_sql": {
+                    "content": "SELECT\n    order_id AS order_number,\n    order_date AS ordered_on,\n    product_name AS product,\n    quantity AS units,\n    unit_price AS unit_price,\n    quantity * unit_price AS gross_sales\nFROM sales_reporting\nWHERE order_status = 'Completed';"
+                  }
+                }
+              },
+              "project_step_4": {
+                "title": "Round the Monetary Result",
+                "prompt": "Extend the Module 0 Order Value Detail Report with the next approved requirement. Return `order_id AS order_number, order_date AS ordered_on, product_name AS product, quantity AS units, unit_price AS unit_price, ROUND(quantity * unit_price, 2) AS gross_sales` from `sales_reporting` in that column order. Keep only rows where `order_status = 'Completed'`.",
+                "hint": "Wrap the existing gross-sales expression in ROUND; do not round the source columns.",
+                "help": {
+                  "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                  "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                  "hint_2": "Return `order_id AS order_number, order_date AS ordered_on, product_name AS product, quantity AS units, unit_price AS unit_price, ROUND(quantity * unit_price, 2) AS gross_sales` from `sales_reporting` in that column order. Keep only rows where `order_status = 'Completed'`."
+                },
+                "starterCode": "SELECT\n    order_id AS order_number,\n    order_date AS ordered_on,\n    product_name AS product,\n    quantity AS units,\n    unit_price AS unit_price,\n    quantity * unit_price AS gross_sales\nFROM sales_reporting\nWHERE order_status = 'Completed';",
+                "solutionCode": "SELECT\n    order_id AS order_number,\n    order_date AS ordered_on,\n    product_name AS product,\n    quantity AS units,\n    unit_price AS unit_price,\n    ROUND(quantity * unit_price, 2) AS gross_sales\nFROM sales_reporting\nWHERE order_status = 'Completed';",
+                "starterFiles": {
+                  "main_sql": {
+                    "content": "SELECT\n    order_id AS order_number,\n    order_date AS ordered_on,\n    product_name AS product,\n    quantity AS units,\n    unit_price AS unit_price,\n    quantity * unit_price AS gross_sales\nFROM sales_reporting\nWHERE order_status = 'Completed';"
+                  }
+                },
+                "solutionFiles": {
+                  "main_sql": {
+                    "content": "SELECT\n    order_id AS order_number,\n    order_date AS ordered_on,\n    product_name AS product,\n    quantity AS units,\n    unit_price AS unit_price,\n    ROUND(quantity * unit_price, 2) AS gross_sales\nFROM sales_reporting\nWHERE order_status = 'Completed';"
+                  }
+                }
+              },
+              "project_step_5": {
+                "title": "Rank the Report Predictably",
+                "prompt": "Complete the Module 0 Order Value Detail Report. Return `order_id AS order_number, order_date AS ordered_on, product_name AS product, quantity AS units, unit_price AS unit_price, ROUND(quantity * unit_price, 2) AS gross_sales` from `sales_reporting` in that column order. Keep only rows where `order_status = 'Completed'`. Sort the final result by `gross_sales DESC, order_number ASC`.",
+                "hint": "Add the ordering clause after the filter; keep the SELECT list unchanged.",
+                "help": {
+                  "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                  "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                  "hint_2": "Keep only rows where `order_status = 'Completed'`. Sort the final result by `gross_sales DESC, order_number ASC`."
+                },
+                "starterCode": "SELECT\n    order_id AS order_number,\n    order_date AS ordered_on,\n    product_name AS product,\n    quantity AS units,\n    unit_price AS unit_price,\n    ROUND(quantity * unit_price, 2) AS gross_sales\nFROM sales_reporting\nWHERE order_status = 'Completed';",
+                "solutionCode": "SELECT\n    order_id AS order_number,\n    order_date AS ordered_on,\n    product_name AS product,\n    quantity AS units,\n    unit_price AS unit_price,\n    ROUND(quantity * unit_price, 2) AS gross_sales\nFROM sales_reporting\nWHERE order_status = 'Completed'\nORDER BY gross_sales DESC, order_number ASC;",
+                "starterFiles": {
+                  "main_sql": {
+                    "content": "SELECT\n    order_id AS order_number,\n    order_date AS ordered_on,\n    product_name AS product,\n    quantity AS units,\n    unit_price AS unit_price,\n    ROUND(quantity * unit_price, 2) AS gross_sales\nFROM sales_reporting\nWHERE order_status = 'Completed';"
+                  }
+                },
+                "solutionFiles": {
+                  "main_sql": {
+                    "content": "SELECT\n    order_id AS order_number,\n    order_date AS ordered_on,\n    product_name AS product,\n    quantity AS units,\n    unit_price AS unit_price,\n    ROUND(quantity * unit_price, 2) AS gross_sales\nFROM sales_reporting\nWHERE order_status = 'Completed'\nORDER BY gross_sales DESC, order_number ASC;"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql--sql-analysis-reporting--draft": {
+      "sql-analysis-reporting-module-0-report-foundations": {
+        "module-0-order-value-detail-report": {
+          "sketch-0": {
+            "title": "Project Brief",
+            "bodyMarkdown": "In this project, you will create an Order Value Detail Report using SQL. The goal is to generate a report that includes selected columns with clear aliases, calculates gross sales, and sorts the data in a stable manner. This report will help managers quickly understand order details and sales performance.\n\n## Your assignment\n\nA sales manager is preparing a weekly review and needs a clean list of completed orders. The source table contains the necessary facts, but the raw column names and unformatted calculations are not ready to share.\n\nYour deliverable is **one detail query** that shows completed orders with readable headings, rounded gross sales, and a predictable ranking. You will improve the same query at every step rather than starting over.\n\n### Build the report\n\n1. Select `order_id`, `order_date`, `product_name`, `quantity`, and `unit_price` for completed orders.\n2. Rename the output columns `order_number`, `ordered_on`, `product`, `units`, and `unit_price`.\n3. Add `quantity * unit_price` as `gross_sales`.\n4. Round `gross_sales` to two decimal places.\n5. Sort highest gross sales first, then use `order_number` ascending to break ties.\n\nAfter each change, run the query and inspect the result. The final step should still contain every field, filter, calculation, and ordering rule introduced earlier.\n\n**Definition of done:** the manager can read the report without knowing the original schema, and repeated runs return rows in the same order."
+          }
+        }
+      }
+    }
+  }
+}

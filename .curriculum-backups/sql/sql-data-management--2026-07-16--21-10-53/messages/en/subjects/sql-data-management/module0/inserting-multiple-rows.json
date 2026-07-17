@@ -1,0 +1,186 @@
+{
+  "topics": {
+    "sql-data-management": {
+      "sql-data-management-module-0-safe-inserts": {
+        "inserting-multiple-rows": {
+          "label": "Adding Several Rows in One Statement",
+          "summary": "Insert a small approved batch with one shared column list and one value tuple per new row.",
+          "cards": {
+            "sketch0": {
+              "title": "Understanding Multi-row INSERT Statements"
+            },
+            "sketch1": {
+              "title": "Checking Your Multi-row INSERT Results"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_inserting_multiple_rows_sketch0": {
+              "title": "Add a Two-Item Intake Batch",
+              "prompt": "A classroom-supplies shipment contains two approved items. In one `INSERT` statement, add `Sketchbook` at `8.00` and `Marker Set` at `12.00` to `inventory_items`. For both rows, use category `Stationery`, status `active`, `is_test = 0`, `notes = NULL`, and `last_updated = '2026-02-10'`.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Click Run query and compare the results table with the expected result."
+              },
+              "starterCode": "-- Task: add Sketchbook and Marker Set in one INSERT statement.\nINSERT INTO inventory_items (name, category, price, status, is_test, notes, last_updated) VALUES\n  -- Add both approved rows here\n;",
+              "solutionCode": "INSERT INTO inventory_items (name, category, price, status, is_test, notes, last_updated) VALUES\n  ('Sketchbook', 'Stationery', 8.00, 'active', 0, NULL, '2026-02-10'),\n  ('Marker Set', 'Stationery', 12.00, 'active', 0, NULL, '2026-02-10');",
+              "starterFiles": {
+                "query_sql": {
+                  "content": "-- Task: add Sketchbook and Marker Set in one INSERT statement.\nINSERT INTO inventory_items (name, category, price, status, is_test, notes, last_updated) VALUES\n  -- Add both approved rows here\n;"
+                }
+              },
+              "solutionFiles": {
+                "query_sql": {
+                  "content": "INSERT INTO inventory_items (name, category, price, status, is_test, notes, last_updated) VALUES\n  ('Sketchbook', 'Stationery', 8.00, 'active', 0, NULL, '2026-02-10'),\n  ('Marker Set', 'Stationery', 12.00, 'active', 0, NULL, '2026-02-10');"
+                }
+              }
+            },
+            "try_inserting_multiple_rows_sketch1": {
+              "title": "Verify the New Batch",
+              "prompt": "The receiving lead wants proof that the new classroom-supplies batch is present. In `query.sql`, select every column from `inventory_items` for the rows named `Sketchbook` or `Marker Set`.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Click Run query and compare the results table with the expected result."
+              },
+              "starterCode": "-- Task: verify only the Sketchbook and Marker Set rows.\n",
+              "solutionCode": "SELECT * FROM inventory_items WHERE name IN ('Sketchbook', 'Marker Set');",
+              "starterFiles": {
+                "query_sql": {
+                  "content": "-- Task: verify only the Sketchbook and Marker Set rows.\n"
+                }
+              },
+              "solutionFiles": {
+                "query_sql": {
+                  "content": "SELECT * FROM inventory_items WHERE name IN ('Sketchbook', 'Marker Set');"
+                }
+              }
+            }
+          },
+          "practice": {
+            "single-choice-1": {
+              "title": "Purpose of Multi-row INSERT",
+              "prompt": "What is the primary advantage of using a multi-row INSERT statement?",
+              "hint": "Consider efficiency and consistency.",
+              "help": {
+                "concept": "Multi-row INSERT statements allow inserting multiple rows in one go, which is efficient and reduces the chance of errors.",
+                "hint_1": "Think about how it affects the number of statements executed.",
+                "hint_2": "It reduces the number of separate INSERT statements needed."
+              },
+              "options": {
+                "a": "It allows inserting multiple rows with a single statement, improving efficiency.",
+                "b": "It ensures each row is inserted in a separate transaction.",
+                "c": "It automatically checks for duplicate entries.",
+                "d": "It allows inserting rows without specifying column names."
+              }
+            },
+            "multi-choice-1": {
+              "title": "Components of a Multi-row INSERT",
+              "prompt": "Which components are necessary for a multi-row INSERT statement? Select all that apply.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "options": {
+                "a": "Column list",
+                "b": "VALUES keyword",
+                "c": "Multiple value tuples",
+                "d": "WHERE clause"
+              }
+            },
+            "drag-reorder-1": {
+              "title": "Order of INSERT Statement Components",
+              "prompt": "Arrange the components of a multi-row INSERT statement in the correct order.",
+              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "help": {
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
+              },
+              "tokens": {
+                "t1": "INSERT INTO",
+                "t2": "table name",
+                "t3": "column list",
+                "t4": "VALUES",
+                "t5": "value tuples"
+              }
+            },
+            "fill-blank-choice-1": {
+              "title": "Default Value Handling",
+              "prompt": "In a multi-row INSERT, how do you use a column's default value?",
+              "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+              "help": {
+                "concept": "The blank should be filled with the term that makes the statement accurate.",
+                "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+                "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+              },
+              "template": "To use a column's default value in an INSERT, [blank1] the column from the column list.",
+              "choices": [
+                "omit",
+                "include",
+                "set to NULL",
+                "specify DEFAULT"
+              ]
+            },
+            "single-choice-2": {
+              "title": "Verifying Inserted Data",
+              "prompt": "What is the best way to verify that data has been inserted correctly?",
+              "hint": "Think about using SQL queries to check data.",
+              "help": {
+                "concept": "Using a SELECT query to verify inserted data ensures accuracy.",
+                "hint_1": "Consider what SQL command retrieves data.",
+                "hint_2": "A SELECT query can confirm the presence of new data."
+              },
+              "options": {
+                "a": "Run a SELECT query to check the new data.",
+                "b": "Check the database logs for insertions.",
+                "c": "Rely on the success message from the INSERT command.",
+                "d": "Manually inspect the database file."
+              }
+            },
+            "multi-choice-2": {
+              "title": "Benefits of Using Defaults",
+              "prompt": "What are the benefits of using default values in an INSERT statement? Select all that apply.",
+              "hint": "Consider how defaults simplify data entry.",
+              "help": {
+                "concept": "Defaults reduce the need to specify every column value explicitly.",
+                "hint_1": "Defaults can simplify the INSERT statement.",
+                "hint_2": "They ensure consistent values for omitted columns."
+              },
+              "options": {
+                "a": "Simplifies the INSERT statement",
+                "b": "Ensures consistent default values",
+                "c": "Reduces the chance of errors",
+                "d": "Requires specifying every column"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql-data-management": {
+      "sql-data-management-module-0-safe-inserts": {
+        "inserting-multiple-rows": {
+          "sketch0": {
+            "title": "Understanding Multi-row INSERT Statements",
+            "bodyMarkdown": "In SQL, inserting multiple rows in a single statement can be efficient and helps maintain consistency. The `INSERT INTO` statement allows you to specify a list of columns followed by multiple sets of values. Each set of values corresponds to a new row in the table.\n\nFor example, consider the `inventory_items` table. To insert multiple new products, you can use:\n\n```sql\nINSERT INTO inventory_items (name, category, price, status, is_test, notes, last_updated) VALUES\n  ('Notebook', 'Stationery', 3.50, 'active', 0, NULL, '2026-02-10'),\n  ('Pen Set', 'Stationery', 5.00, 'active', 0, NULL, '2026-02-10');\n```\n\nThis statement adds two new rows to the `inventory_items` table. Each tuple in the `VALUES` list corresponds to a new row, and the order of values must match the order of columns specified. This approach ensures that all new rows are inserted with the correct data alignment."
+          },
+          "sketch1": {
+            "title": "Checking Your Multi-row INSERT Results",
+            "bodyMarkdown": "After inserting multiple rows, it's crucial to verify that the data has been added correctly. You can do this by running a `SELECT` query to preview the changes.\n\nFor instance, after executing the previous `INSERT` statement, you can verify the new entries with:\n\n```sql\nSELECT * FROM inventory_items WHERE name IN ('Notebook', 'Pen Set');\n```\n\nThis query checks that the new products have been added to the `inventory_items` table. It ensures that the data aligns with expectations and that no existing data has been altered. Always verify your data after a multi-row insert to catch any discrepancies early."
+          }
+        }
+      }
+    }
+  }
+}

@@ -389,6 +389,122 @@ function normalizeSql(value: unknown): string {
     return String(value ?? "").trim();
 }
 
+/**
+ * Result row order is only part of a SELECT contract when the authored
+ * solution explicitly sorts the outer query. Ignore ORDER BY inside strings,
+ * comments, and nested subqueries.
+ */
+export function hasTopLevelOrderBy(sql: string): boolean {
+    const source = String(sql ?? "");
+    let depth = 0;
+    let index = 0;
+    let previousTopLevelToken = "";
+    let token = "";
+    let found = false;
+
+    const commitToken = () => {
+        if (!token) return;
+
+        if (
+            depth === 0 &&
+            previousTopLevelToken === "order" &&
+            token.toLowerCase() === "by"
+        ) {
+            found = true;
+        }
+
+        if (depth === 0) {
+            previousTopLevelToken = token.toLowerCase();
+        }
+
+        token = "";
+    };
+
+    while (index < source.length && !found) {
+        const char = source[index] ?? "";
+        const next = source[index + 1] ?? "";
+
+        if (char === "-" && next === "-") {
+            commitToken();
+            index += 2;
+            while (index < source.length && source[index] !== "\n") {
+                index += 1;
+            }
+            continue;
+        }
+
+        if (char === "/" && next === "*") {
+            commitToken();
+            index += 2;
+            while (
+                index < source.length &&
+                !(source[index] === "*" && source[index + 1] === "/")
+            ) {
+                index += 1;
+            }
+            index += 2;
+            continue;
+        }
+
+        if (char === "'" || char === '"' || char === "`") {
+            commitToken();
+            const quote = char;
+            index += 1;
+
+            while (index < source.length) {
+                if (source[index] === quote) {
+                    if (source[index + 1] === quote) {
+                        index += 2;
+                        continue;
+                    }
+
+                    index += 1;
+                    break;
+                }
+
+                index += 1;
+            }
+            continue;
+        }
+
+        if (char === "[") {
+            commitToken();
+            index += 1;
+            while (index < source.length && source[index] !== "]") {
+                index += 1;
+            }
+            index += 1;
+            continue;
+        }
+
+        if (char === "(") {
+            commitToken();
+            depth += 1;
+            index += 1;
+            continue;
+        }
+
+        if (char === ")") {
+            commitToken();
+            depth = Math.max(0, depth - 1);
+            index += 1;
+            continue;
+        }
+
+        if (/[a-zA-Z_]/.test(char)) {
+            token += char;
+            index += 1;
+            continue;
+        }
+
+        commitToken();
+        index += 1;
+    }
+
+    commitToken();
+    return found;
+}
+
 function normalizeIdentifier(identifier: string): string {
     return identifier
         .trim()
@@ -475,6 +591,8 @@ export function buildSqlQueryExpected(args: {
         Array.isArray(args.recipe.tests) && args.recipe.tests.length > 0
             ? args.recipe.tests
             : null;
+    const defaultIgnoreRowOrder =
+        args.recipe.ignoreRowOrder ?? !hasTopLevelOrderBy(solutionCode);
 
     return makeSqlExpected({
         language: "sql",
@@ -497,7 +615,7 @@ export function buildSqlQueryExpected(args: {
                 expectedTable: test.expectedTable,
                 match: "table_exact" as const,
                 ignoreRowOrder:
-                    test.ignoreRowOrder ?? args.recipe.ignoreRowOrder ?? false,
+                    test.ignoreRowOrder ?? defaultIgnoreRowOrder,
                 ...(normalizeSql(test.checkSql) || checkSql
                     ? { checkSql: normalizeSql(test.checkSql) || checkSql }
                     : {}),
@@ -512,7 +630,7 @@ export function buildSqlQueryExpected(args: {
                 },
                 compareTo: "solution",
                 match: "table_exact",
-                ignoreRowOrder: args.recipe.ignoreRowOrder ?? false,
+                ignoreRowOrder: defaultIgnoreRowOrder,
                 ...(checkSql ? { checkSql } : {}),
             } satisfies SqlExpectedTest],
         solutionCode,

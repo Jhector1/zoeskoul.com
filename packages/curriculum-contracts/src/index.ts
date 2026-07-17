@@ -19,6 +19,7 @@ export * from "./workspace.js";
 export * from "./exercise-policy.js";
 export * from "./ide-services.js";
 export * from "./workspace-path.js";
+export * from "./tool-presentation.js";
 
 export {
     countBracketBlanks,

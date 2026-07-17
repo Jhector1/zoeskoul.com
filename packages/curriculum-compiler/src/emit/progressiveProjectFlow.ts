@@ -8,6 +8,10 @@ function normalizeText(value: unknown): string {
     return typeof value === "string" ? value.trim() : "";
 }
 
+function isSqlQueryExercise(exercise: CodeExercise | undefined): boolean {
+    return exercise?.recipeType === "sql_query";
+}
+
 function ensureTrailingNewline(value: string): string {
     return value.endsWith("\n") ? value : `${value}\n`;
 }
@@ -85,11 +89,12 @@ function progressiveStarterCode(args: {
     const title = normalizeText(args.exercise.title) || `${label} ${args.stepNumber}`;
     const shortTask = shortTaskFromPrompt(args.exercise.prompt);
 
+    const commentPrefix = isSqlQueryExercise(args.exercise) ? "--" : "#";
     const commentBlock = [
-        `# ${label} ${args.stepNumber}: ${title}`,
-        "# Keep the working code above from the previous step.",
-        `# Next, ${shortTask}`,
-        "# Add only the focused change for this step below or inside the existing work.",
+        `${commentPrefix} ${label} ${args.stepNumber}: ${title}`,
+        `${commentPrefix} Keep the working code above from the previous step.`,
+        `${commentPrefix} Next, ${shortTask}`,
+        `${commentPrefix} Add only the focused change for this step inside the existing work.`,
     ].join("\n");
 
     return ensureTrailingNewline(
@@ -110,6 +115,19 @@ function progressiveSolutionCode(args: {
     const previousSolution = normalizeText(args.previousExercise.solutionCode);
     if (!previousSolution) return currentSolution;
     if (!currentSolution) return previousSolution;
+
+    // A progressive SQL step is a replacement query, not an additional
+    // statement. Concatenating the previous and current SELECT statements
+    // produces a multi-statement recipe that the SQL golden/runtime contract
+    // cannot execute as one learner query. The authoring prompt requires each
+    // later SQL solution to contain the complete cumulative query.
+    if (
+        isSqlQueryExercise(args.exercise) ||
+        isSqlQueryExercise(args.previousExercise)
+    ) {
+        return ensureTrailingNewline(currentSolution);
+    }
+
     if (currentSolution.includes(previousSolution)) return currentSolution;
 
     return ensureTrailingNewline(
@@ -129,7 +147,7 @@ function resolveEntryFilePath(exercise: CodeExercise) {
         return entryStarter.path;
     }
 
-    return "main.py";
+    return isSqlQueryExercise(exercise) ? "query.sql" : "main.py";
 }
 
 function cloneStarterFiles(files: CodeExercise["starterFiles"]) {

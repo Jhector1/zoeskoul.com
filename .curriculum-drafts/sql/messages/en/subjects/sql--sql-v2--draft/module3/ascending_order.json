@@ -3,34 +3,17 @@
     "sql--sql-v2--draft": {
       "sql--sql-v2--draft-3": {
         "ascending_order": {
-          "label": "Ascending Order",
-          "summary": "Learn how to sort SQL results from smallest to largest or earliest to latest with ORDER BY ... ASC.",
+          "label": "Ascending and Descending Sorts",
+          "summary": "Choose ASC or DESC for text, numeric, and date columns.",
           "cards": {
             "sketch0": {
-              "title": "What ascending order means"
+              "title": "ASC Moves from Smaller to Larger"
             },
             "sketch1": {
-              "title": "Why ASC is helpful even though it is the default"
-            },
-            "sketch2": {
-              "title": "Using ascending order with LIMIT"
+              "title": "DESC Reverses the Sequence"
             },
             "quiz": {
-              "title": "Quiz"
-            },
-            "project": {
-              "title": "Ascending order practice set"
-            }
-          },
-          "projectSteps": {
-            "ci_sort_prices_asc": {
-              "title": "Sort all products by price ascending"
-            },
-            "ci_oldest_products": {
-              "title": "Show oldest products first"
-            },
-            "ci_cheapest_three": {
-              "title": "Find the 3 cheapest products"
+              "title": "Check Your Understanding"
             }
           },
           "quiz": {
@@ -69,11 +52,11 @@
             "mc_columns_for_asc": {
               "title": "Columns that can use ascending order",
               "prompt": "Which columns from the `products` table can be meaningfully sorted with `ORDER BY ... ASC`? Choose all that apply.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Match each choice to the command, clause, or constraint described in the question.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "concept": "Use the SQL behavior described in the lesson to separate the valid choice from statements about a different command, clause, or constraint.",
+                "hint_1": "Identify the job the SQL must perform before comparing the choices.",
+                "hint_2": "Eliminate choices that belong to a different SQL concept."
               },
               "options": {
                 "a": "name",
@@ -152,7 +135,7 @@
               "hint": "Use the column that stores how many items are available.",
               "help": {
                 "concept": "The column named in `ORDER BY` is the one SQL uses to arrange the rows.",
-                "hint_1": "In this table, the quantity on hand is stored in `the missing term`.",
+                "hint_1": "In this table, the quantity on hand is stored in `the blank`.",
                 "hint_2": "Choose the column with values like 25, 10, 8, 50, 15, and 3."
               },
               "template": "SELECT name, stock FROM products ORDER BY [blank1] ASC;",
@@ -163,120 +146,67 @@
                 "name"
               ]
             },
-            "ci_sort_prices_asc": {
-              "title": "Sort all products by price ascending",
-              "prompt": "Write a query that shows `name` and `price` from the `products` table, sorted by `price` in ascending order. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Show name and price from the products table, sorted by price in ascending order.\nSELECT name, price\nFROM products\n;"
-            },
-            "ci_oldest_products": {
-              "title": "Show oldest products first",
-              "prompt": "Write a query that shows `name` and `created_at` from `products`, sorted so the earliest `created_at` date appears first. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Show name and created_at from products, sorted so the earliest created_at date appears first.\nSELECT name, created_at\nFROM products\n;"
-            },
-            "ci_cheapest_three": {
-              "title": "Find the 3 cheapest products",
-              "prompt": "Write a query that shows `name` and `price` for the 3 cheapest products in `products`. Sort by `price` in ascending order, then keep only 3 rows. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- TODO: sort from lowest price to highest\n-- TODO: keep only 3 rows\nSELECT name, price\nFROM products\n;"
-            },
             "try-ascending_order-sketch0": {
-              "title": "Sort all products by price ascending",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that shows `name` and `price` from the `products` table, sorted by `price` in ascending order. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Sort Stock from Low to High",
+              "prompt": "Sort the catalog so the scarcest items appear first. Return `id, name, stock` from `products` in that column order. Sort the final result by `stock ASC`.",
+              "hint": "Use ORDER BY stock ASC.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "Return `id, name, stock` from `products` in that column order. Sort the final result by `stock ASC`."
               },
-              "starterCode": "-- Show name and price from the products table, sorted by price in ascending order.\nSELECT name, price\nFROM products\n;"
+              "starterCode": "SELECT id, name, stock\nFROM products\n-- Sort stock low to high"
             },
             "try-ascending_order-sketch1": {
-              "title": "Show oldest products first",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that shows `name` and `created_at` from `products`, sorted so the earliest `created_at` date appears first. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Show Highest Prices First",
+              "prompt": "Build a premium-first catalog view. Return `name, price` from `products` in that column order. Sort the final result by `price DESC`.",
+              "hint": "Use ORDER BY price DESC.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "Return `name, price` from `products` in that column order. Sort the final result by `price DESC`."
               },
-              "starterCode": "-- Show name and created_at from products, sorted so the earliest created_at date appears first.\nSELECT name, created_at\nFROM products\n;"
-            },
-            "try-ascending_order-sketch2": {
-              "title": "Find the 3 cheapest products",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that shows `name` and `price` for the 3 cheapest products in `products`. Sort by `price` in ascending order, then keep only 3 rows. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- TODO: sort from lowest price to highest\n-- TODO: keep only 3 rows\nSELECT name, price\nFROM products\n;"
+              "starterCode": "SELECT name, price\nFROM products\n-- Sort highest price to lowest price"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_ascending_order_sketch0": {
-              "title": "Sort all products by price ascending",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that shows `name` and `price` from the `products` table, sorted by `price` in ascending order. Write the query in the SQL editor, click Run query, and check the results table."
+              "title": "Sort Stock from Low to High",
+              "prompt": "Sort the catalog so the scarcest items appear first. Show `id`, `name`, and `stock` from `products`, ordered from the lowest stock value to the highest.",
+              "hint": "Use ORDER BY stock ASC.",
+              "help": {
+                "concept": "Ascending numeric order moves from smaller values to larger values.",
+                "hint_1": "Use ORDER BY stock ASC.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+              }
             },
             "try_ascending_order_sketch1": {
-              "title": "Show oldest products first",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that shows `name` and `created_at` from `products`, sorted so the earliest `created_at` date appears first. Write the query in the SQL editor, click Run query, and check the results table."
-            },
-            "try_ascending_order_sketch2": {
-              "title": "Find the 3 cheapest products",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that shows `name` and `price` for the 3 cheapest products in `products`. Sort by `price` in ascending order, then keep only 3 rows. Write the query in the SQL editor, click Run query, and check the results table."
+              "title": "Show Highest Prices First",
+              "prompt": "Build a premium-first catalog view. Show `name` and `price` from `products`, with the highest-priced products appearing first.",
+              "hint": "Use ORDER BY price DESC.",
+              "help": {
+                "concept": "Descending numeric order moves from larger values to smaller values.",
+                "hint_1": "Use ORDER BY price DESC.",
+                "hint_2": "Run the query and verify that the highest price appears first."
+              }
             }
           }
         }
       },
       "sql-v2-3": {
         "ascending_order": {
-          "label": "Ascending Order",
-          "summary": "Learn how to sort SQL results from smallest to largest or earliest to latest with ORDER BY ... ASC.",
+          "label": "Ascending and Descending Sorts",
+          "summary": "Choose ASC or DESC for text, numeric, and date columns.",
           "cards": {
             "sketch0": {
-              "title": "What ascending order means"
+              "title": "ASC Moves from Smaller to Larger"
             },
             "sketch1": {
-              "title": "Why ASC is helpful even though it is the default"
-            },
-            "sketch2": {
-              "title": "Using ascending order with LIMIT"
+              "title": "DESC Reverses the Sequence"
             },
             "quiz": {
-              "title": "Quiz"
-            },
-            "project": {
-              "title": "Ascending order practice set"
-            }
-          },
-          "projectSteps": {
-            "ci_sort_prices_asc": {
-              "title": "Sort all products by price ascending"
-            },
-            "ci_oldest_products": {
-              "title": "Show oldest products first"
-            },
-            "ci_cheapest_three": {
-              "title": "Find the 3 cheapest products"
+              "title": "Check Your Understanding"
             }
           },
           "quiz": {
@@ -315,11 +245,11 @@
             "mc_columns_for_asc": {
               "title": "Columns that can use ascending order",
               "prompt": "Which columns from the `products` table can be meaningfully sorted with `ORDER BY ... ASC`? Choose all that apply.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Match each choice to the command, clause, or constraint described in the question.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "concept": "Use the SQL behavior described in the lesson to separate the valid choice from statements about a different command, clause, or constraint.",
+                "hint_1": "Identify the job the SQL must perform before comparing the choices.",
+                "hint_2": "Eliminate choices that belong to a different SQL concept."
               },
               "options": {
                 "a": "name",
@@ -398,7 +328,7 @@
               "hint": "Use the column that stores how many items are available.",
               "help": {
                 "concept": "The column named in `ORDER BY` is the one SQL uses to arrange the rows.",
-                "hint_1": "In this table, the quantity on hand is stored in `the missing term`.",
+                "hint_1": "In this table, the quantity on hand is stored in `the blank`.",
                 "hint_2": "Choose the column with values like 25, 10, 8, 50, 15, and 3."
               },
               "template": "SELECT name, stock FROM products ORDER BY [blank1] ASC;",
@@ -443,30 +373,30 @@
               "starterCode": "-- TODO: sort from lowest price to highest\n-- TODO: keep only 3 rows\nSELECT name, price\nFROM products\n;"
             },
             "try-ascending_order-sketch0": {
-              "title": "Sort all products by price ascending",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that shows `name` and `price` from the `products` table, sorted by `price` in ascending order. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Sort Stock from Low to High",
+              "prompt": "Sort the catalog so the scarcest items appear first. Show `id`, `name`, and `stock` from `products`, ordered from the lowest stock value to the highest.",
+              "hint": "Use ORDER BY stock ASC.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
+                "concept": "Ascending numeric order moves from smaller values to larger values.",
+                "hint_1": "Use ORDER BY stock ASC.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
               },
-              "starterCode": "-- Show name and price from the products table, sorted by price in ascending order.\nSELECT name, price\nFROM products\n;"
+              "starterCode": "SELECT id, name, stock\nFROM products\n-- Sort stock low to high"
             },
             "try-ascending_order-sketch1": {
-              "title": "Show oldest products first",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that shows `name` and `created_at` from `products`, sorted so the earliest `created_at` date appears first. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Show Highest Prices First",
+              "prompt": "Build a premium-first catalog view. Show `name` and `price` from `products`, with the highest-priced products appearing first.",
+              "hint": "Use ORDER BY price DESC.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
+                "concept": "Descending numeric order moves from larger values to smaller values.",
+                "hint_1": "Use ORDER BY price DESC.",
+                "hint_2": "Run the query and verify that the highest price appears first."
               },
-              "starterCode": "-- Show name and created_at from products, sorted so the earliest created_at date appears first.\nSELECT name, created_at\nFROM products\n;"
+              "starterCode": "SELECT name, price\nFROM products\n-- Sort highest price to lowest price"
             },
             "try-ascending_order-sketch2": {
               "title": "Find the 3 cheapest products",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that shows `name` and `price` for the 3 cheapest products in `products`. Sort by `price` in ascending order, then keep only 3 rows. Write the query in the SQL editor, click Run query, and check the results table.",
+              "prompt": "Build a ranking query that shows `name` and `price` for the 3 cheapest products in `products`. Sort by `price` in ascending order, then keep only 3 rows. Run it and compare the result with the expected table.",
               "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
               "help": {
                 "concept": "This SQL exercise checks whether your query returns the requested result.",
@@ -479,16 +409,24 @@
           "tryIt": {
             "allowReveal": true,
             "try_ascending_order_sketch0": {
-              "title": "Sort all products by price ascending",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that shows `name` and `price` from the `products` table, sorted by `price` in ascending order. Write the query in the SQL editor, click Run query, and check the results table."
+              "title": "Sort Stock from Low to High",
+              "prompt": "Sort the catalog so the scarcest items appear first. Show `id`, `name`, and `stock` from `products`, ordered from the lowest stock value to the highest.",
+              "hint": "Use ORDER BY stock ASC.",
+              "help": {
+                "concept": "Ascending numeric order moves from smaller values to larger values.",
+                "hint_1": "Use ORDER BY stock ASC.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+              }
             },
             "try_ascending_order_sketch1": {
-              "title": "Show oldest products first",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that shows `name` and `created_at` from `products`, sorted so the earliest `created_at` date appears first. Write the query in the SQL editor, click Run query, and check the results table."
-            },
-            "try_ascending_order_sketch2": {
-              "title": "Find the 3 cheapest products",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that shows `name` and `price` for the 3 cheapest products in `products`. Sort by `price` in ascending order, then keep only 3 rows. Write the query in the SQL editor, click Run query, and check the results table."
+              "title": "Show Highest Prices First",
+              "prompt": "Build a premium-first catalog view. Show `name` and `price` from `products`, with the highest-priced products appearing first.",
+              "hint": "Use ORDER BY price DESC.",
+              "help": {
+                "concept": "Descending numeric order moves from larger values to smaller values.",
+                "hint_1": "Use ORDER BY price DESC.",
+                "hint_2": "Run the query and verify that the highest price appears first."
+              }
             }
           }
         }
@@ -499,33 +437,25 @@
     "sql--sql-v2--draft": {
       "sql--sql-v2--draft-3": {
         "ascending_order": {
-          "asc_basics": {
-            "title": "What ascending order means",
-            "bodyMarkdown": "Ascending order means sorting values from low to high. In SQL, you do this with `ORDER BY` and often write `ASC` to make the direction clear.\n\nFor numbers, ascending order goes from smaller numbers to larger numbers. For text, it goes from A to Z. For dates, it goes from earlier dates to later dates.\n\nHere is a simple example using the `products` table:\n\n```sql\nSELECT name, price\nFROM products\nORDER BY price ASC;\n```\n\nStep by step:\n- `SELECT name, price` chooses the columns to show.\n- `FROM products` says which table to read.\n- `ORDER BY price ASC` sorts the rows by `price`, from lowest to highest.\n\nWith this dataset, the first few rows would start with lower-priced items like `Notebook` before higher-priced items like `Office Chair`.\n\nYou can also sort dates in ascending order:\n\n```sql\nSELECT name, created_at\nFROM products\nORDER BY created_at ASC;\n```\n\nThat puts older product dates first and newer product dates later."
+          "ascending_examples": {
+            "title": "ASC Moves from Smaller to Larger",
+            "bodyMarkdown": "`ASC` sorts values in ascending order. For text, that is alphabetical order; for numbers, lowest to highest; for ISO dates, earliest to latest.\n\n```sql\nSELECT\n    name,\n    price\nFROM products\nORDER BY name ASC;\n```\n\nThe product names appear alphabetically. Although `ASC` is the default, writing it can make the intention clearer while learning."
           },
-          "asc_optional_keyword": {
-            "title": "Why ASC is helpful even though it is the default",
-            "bodyMarkdown": "In SQL, ascending order is usually the default when you use `ORDER BY`. That means these two queries behave the same way:\n\n```sql\nSELECT name, price\nFROM products\nORDER BY price;\n```\n\n```sql\nSELECT name, price\nFROM products\nORDER BY price ASC;\n```\n\nBoth sort prices from low to high.\n\nMany learners still write `ASC` because it makes the query easier to read. It also helps when you are comparing it with `DESC`, which means highest to lowest.\n\nWorked example:\n\n```sql\nSELECT name, stock\nFROM products\nORDER BY stock ASC;\n```\n\nLine by line:\n- `SELECT name, stock` shows each product and its stock count.\n- `FROM products` reads from the products table.\n- `ORDER BY stock ASC` places the smallest stock values first.\n\nIn this dataset, `Office Chair` has stock `3`, so it would appear before items with larger stock values."
-          },
-          "asc_with_limit": {
-            "title": "Using ascending order with LIMIT",
-            "bodyMarkdown": "Ascending order becomes especially useful when you combine it with `LIMIT`. This helps you find the smallest, earliest, or lowest values quickly.\n\nExample:\n\n```sql\nSELECT name, price\nFROM products\nORDER BY price ASC\nLIMIT 3;\n```\n\nStep by step:\n- `SELECT name, price` shows product names and prices.\n- `FROM products` reads the table.\n- `ORDER BY price ASC` sorts from cheapest to most expensive.\n- `LIMIT 3` keeps only the first 3 rows after sorting.\n\nSo this query returns the 3 cheapest products.\n\nAnother example with dates:\n\n```sql\nSELECT name, created_at\nFROM products\nORDER BY created_at ASC\nLIMIT 1;\n```\n\nThis returns the earliest created product in the table."
+          "descending_examples": {
+            "title": "DESC Reverses the Sequence",
+            "bodyMarkdown": "`DESC` sorts in the reverse direction.\n\n```sql\nSELECT\n    name,\n    created_at\nFROM products\nORDER BY created_at DESC;\n```\n\nThe newest date appears first. Choose the direction from the business question: “cheapest first” uses ascending price, “newest first” uses descending date, and “highest stock first” uses descending stock."
           }
         }
       },
       "sql-v2-3": {
         "ascending_order": {
-          "asc_basics": {
-            "title": "What ascending order means",
-            "bodyMarkdown": "Ascending order means sorting values from low to high. In SQL, you do this with `ORDER BY` and often write `ASC` to make the direction clear.\n\nFor numbers, ascending order goes from smaller numbers to larger numbers. For text, it goes from A to Z. For dates, it goes from earlier dates to later dates.\n\nHere is a simple example using the `products` table:\n\n```sql\nSELECT name, price\nFROM products\nORDER BY price ASC;\n```\n\nStep by step:\n- `SELECT name, price` chooses the columns to show.\n- `FROM products` says which table to read.\n- `ORDER BY price ASC` sorts the rows by `price`, from lowest to highest.\n\nWith this dataset, the first few rows would start with lower-priced items like `Notebook` before higher-priced items like `Office Chair`.\n\nYou can also sort dates in ascending order:\n\n```sql\nSELECT name, created_at\nFROM products\nORDER BY created_at ASC;\n```\n\nThat puts older product dates first and newer product dates later."
+          "ascending_examples": {
+            "title": "ASC Moves from Smaller to Larger",
+            "bodyMarkdown": "`ASC` sorts values in ascending order. For text, that is alphabetical order; for numbers, lowest to highest; for ISO dates, earliest to latest.\n\n```sql\nSELECT\n    name,\n    price\nFROM products\nORDER BY name ASC;\n```\n\nThe product names appear alphabetically. Although `ASC` is the default, writing it can make the intention clearer while learning."
           },
-          "asc_optional_keyword": {
-            "title": "Why ASC is helpful even though it is the default",
-            "bodyMarkdown": "In SQL, ascending order is usually the default when you use `ORDER BY`. That means these two queries behave the same way:\n\n```sql\nSELECT name, price\nFROM products\nORDER BY price;\n```\n\n```sql\nSELECT name, price\nFROM products\nORDER BY price ASC;\n```\n\nBoth sort prices from low to high.\n\nMany learners still write `ASC` because it makes the query easier to read. It also helps when you are comparing it with `DESC`, which means highest to lowest.\n\nWorked example:\n\n```sql\nSELECT name, stock\nFROM products\nORDER BY stock ASC;\n```\n\nLine by line:\n- `SELECT name, stock` shows each product and its stock count.\n- `FROM products` reads from the products table.\n- `ORDER BY stock ASC` places the smallest stock values first.\n\nIn this dataset, `Office Chair` has stock `3`, so it would appear before items with larger stock values."
-          },
-          "asc_with_limit": {
-            "title": "Using ascending order with LIMIT",
-            "bodyMarkdown": "Ascending order becomes especially useful when you combine it with `LIMIT`. This helps you find the smallest, earliest, or lowest values quickly.\n\nExample:\n\n```sql\nSELECT name, price\nFROM products\nORDER BY price ASC\nLIMIT 3;\n```\n\nStep by step:\n- `SELECT name, price` shows product names and prices.\n- `FROM products` reads the table.\n- `ORDER BY price ASC` sorts from cheapest to most expensive.\n- `LIMIT 3` keeps only the first 3 rows after sorting.\n\nSo this query returns the 3 cheapest products.\n\nAnother example with dates:\n\n```sql\nSELECT name, created_at\nFROM products\nORDER BY created_at ASC\nLIMIT 1;\n```\n\nThis returns the earliest created product in the table."
+          "descending_examples": {
+            "title": "DESC Reverses the Sequence",
+            "bodyMarkdown": "`DESC` sorts in the reverse direction.\n\n```sql\nSELECT\n    name,\n    created_at\nFROM products\nORDER BY created_at DESC;\n```\n\nThe newest date appears first. Choose the direction from the business question: “cheapest first” uses ascending price, “newest first” uses descending date, and “highest stock first” uses descending stock."
           }
         }
       }

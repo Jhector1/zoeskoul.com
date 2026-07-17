@@ -3,34 +3,17 @@
     "sql-v2": {
       "sql-v2-4": {
         "combine_text_and_null_filters": {
-          "label": "Combine Text and NULL Filters",
-          "summary": "Learn how to combine LIKE, IS NULL, and other WHERE conditions to find missing or suspicious customer records.",
+          "label": "IS NOT NULL and Cleanup Filters",
+          "summary": "Require present values and combine text patterns, statuses, and missing-data rules in cleanup queries.",
           "cards": {
             "sketch0": {
-              "title": "Using text filters and NULL filters in one query"
+              "title": "IS NOT NULL Requires a Present Value"
             },
             "sketch1": {
-              "title": "Grouping conditions carefully"
-            },
-            "sketch2": {
-              "title": "Common cleanup patterns"
+              "title": "Combine Presence Checks with Business Rules"
             },
             "quiz": {
-              "title": "Quiz"
-            },
-            "project": {
-              "title": "Search and cleanup query practice"
-            }
-          },
-          "projectSteps": {
-            "ci_missing_or_test_accounts": {
-              "title": "Find missing emails or test-like names"
-            },
-            "ci_active_example_emails": {
-              "title": "Find active example.com customers"
-            },
-            "ci_grouped_test_email_filter": {
-              "title": "Use grouped conditions for test records"
+              "title": "Check Your Understanding"
             }
           },
           "quiz": {
@@ -151,8 +134,8 @@
               "prompt": "Fill in the missing keyword to complete this condition for missing cities.",
               "hint": "Missing values use a special keyword after `IS`.",
               "help": {
-                "concept": "SQL uses `IS the missing term` to test whether a column has no stored value.",
-                "hint_1": "The condition is not checking text like `'the missing term'`; it is checking the missing-value marker.",
+                "concept": "SQL uses `IS the blank` to test whether a column has no stored value.",
+                "hint_1": "The condition is not checking text like `'the blank'`; it is checking the missing-value marker.",
                 "hint_2": "Choose the keyword that completes `city IS ...` for a missing city."
               },
               "template": "city IS [blank1]",
@@ -197,30 +180,30 @@
               "starterCode": "-- Return id, full_name, email, and is_test for rows where the email is missing or contains test, but only when is_test = 1. Use parentheses so the email conditions are grouped together.\nSELECT id, full_name, email, is_test\nFROM customers\nWHERE ( )\n  AND ;"
             },
             "try-combine_text_and_null_filters-sketch0": {
-              "title": "Find missing emails or test-like names",
-              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that returns `id`, `full_name`, and `email` from `customers` for rows where the email is missing or the full name contains `Test`. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Keep Customers with a Known City",
+              "prompt": "Build a location-ready customer list containing only records with a known city. Show `id`, `full_name`, and `city` from `customers` where `city` is present.",
+              "hint": "Use city IS NOT NULL.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
+                "concept": "IS NOT NULL keeps rows where a value is present rather than missing.",
+                "hint_1": "Use city IS NOT NULL.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
               },
-              "starterCode": "-- Return id, full_name, and email from customers for rows where the email is missing or the full name contains Test.\nSELECT \nFROM customers\nWHERE ;"
+              "starterCode": "SELECT id, full_name, city\nFROM customers\n-- Keep rows with a known city"
             },
             "try-combine_text_and_null_filters-sketch1": {
-              "title": "Find active example.com customers",
-              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that returns `id`, `full_name`, `email`, and `status` for customers whose email ends with `@example.com` and whose status is `active`. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Build an Active Contact List",
+              "prompt": "Prepare an outreach list of active customers who can actually be contacted by email. Show `id`, `full_name`, `email`, and `status` from `customers` where `email` is present and `status` is `active`.",
+              "hint": "Combine email IS NOT NULL with status = 'active' using AND.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
+                "concept": "A cleanup filter can require both usable contact data and the intended business status.",
+                "hint_1": "Combine email IS NOT NULL with status = 'active' using AND.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
               },
-              "starterCode": "-- Return id, full_name, email, and status for customers whose email ends with `@example.\nSELECT id, full_name, email, status\nFROM customers\nWHERE ;"
+              "starterCode": "SELECT id, full_name, email, status\nFROM customers\n-- Require a present email and active status"
             },
             "try-combine_text_and_null_filters-sketch2": {
               "title": "Use grouped conditions for test records",
-              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that returns `id`, `full_name`, `email`, and `is_test` for rows where the email is missing or contains `test`, but only when `is_test = 1`. Use parentheses so the email conditions are grouped together. Write the query in the SQL editor, click Run query, and check the results table.",
+              "prompt": "Create a customer-cleanup query that returns `id`, `full_name`, `email`, and `is_test` for rows where the email is missing or contains `test`, but only when `is_test = 1`. Use parentheses so the email conditions are grouped together. Run it and compare the result with the expected table.",
               "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
               "help": {
                 "concept": "This SQL exercise checks whether your query returns the requested result.",
@@ -232,17 +215,25 @@
           },
           "tryIt": {
             "allowReveal": true,
-            "try_combine_text_and_null_filters_sketch0": {
-              "title": "Find missing emails or test-like names",
-              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that returns `id`, `full_name`, and `email` from `customers` for rows where the email is missing or the full name contains `Test`. Write the query in the SQL editor, click Run query, and check the results table."
-            },
             "try_combine_text_and_null_filters_sketch1": {
-              "title": "Find active example.com customers",
-              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that returns `id`, `full_name`, `email`, and `status` for customers whose email ends with `@example.com` and whose status is `active`. Write the query in the SQL editor, click Run query, and check the results table."
+              "title": "Build an Active Contact List",
+              "prompt": "Prepare an outreach list of active customers who can actually be contacted by email. Show `id`, `full_name`, `email`, and `status` from `customers` where `email` is present and `status` is `active`.",
+              "hint": "Combine email IS NOT NULL with status = 'active' using AND.",
+              "help": {
+                "concept": "A cleanup filter can require both usable contact data and the intended business status.",
+                "hint_1": "Combine email IS NOT NULL with status = 'active' using AND.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+              }
             },
-            "try_combine_text_and_null_filters_sketch2": {
-              "title": "Use grouped conditions for test records",
-              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that returns `id`, `full_name`, `email`, and `is_test` for rows where the email is missing or contains `test`, but only when `is_test = 1`. Use parentheses so the email conditions are grouped together. Write the query in the SQL editor, click Run query, and check the results table."
+            "try_combine_text_and_null_filters_sketch0": {
+              "title": "Keep Customers with a Known City",
+              "prompt": "Build a location-ready customer list containing only records with a known city. Show `id`, `full_name`, and `city` from `customers` where `city` is present.",
+              "hint": "Use city IS NOT NULL.",
+              "help": {
+                "concept": "IS NOT NULL keeps rows where a value is present rather than missing.",
+                "hint_1": "Use city IS NOT NULL.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+              }
             }
           }
         }
@@ -253,17 +244,13 @@
     "sql-v2": {
       "sql-v2-4": {
         "combine_text_and_null_filters": {
-          "sketch_text_and_null_together": {
-            "title": "Using text filters and NULL filters in one query",
-            "bodyMarkdown": "You can combine text checks and missing-value checks in the same `WHERE` clause. This is useful when you want to find records that look incomplete or suspicious.\n\nFor example, in the `customers` table, some rows have missing emails and some rows look like test accounts.\n\n```sql\nSELECT id, full_name, email, status\nFROM customers\nWHERE email IS NULL\n   OR full_name LIKE '%Test%';\n```\n\nStep by step:\n- `SELECT id, full_name, email, status` chooses the columns to show.\n- `FROM customers` reads from the `customers` table.\n- `email IS NULL` finds customers with no email value.\n- `OR full_name LIKE '%Test%'` also includes rows whose name contains `Test`.\n\nWith the sample data, this would match rows like:\n- `Leo Grant` because `email` is `NULL`\n- `Liam Scott` because `email` is `NULL`\n- `Test Account` because the name contains `Test`"
+          "is_not_null_present_value": {
+            "title": "IS NOT NULL Requires a Present Value",
+            "bodyMarkdown": "Use `IS NOT NULL` when a report requires a stored value.\n\n```sql\nSELECT\n    id,\n    full_name,\n    email\nFROM customers\nWHERE email IS NOT NULL;\n```\n\nRows with a missing email are removed. This check says only that a value is present; it does not prove that the value has the right format or belongs to a particular domain."
           },
-          "sketch_grouping_conditions": {
-            "title": "Grouping conditions carefully",
-            "bodyMarkdown": "When you mix `AND` and `OR`, grouping matters. Parentheses help SQL understand which conditions belong together.\n\nExample:\n\n```sql\nSELECT id, full_name, email, is_test\nFROM customers\nWHERE (email IS NULL OR email LIKE '%test%')\n  AND is_test = 1;\n```\n\nLine by line:\n- `email IS NULL OR email LIKE '%test%'` looks for either a missing email or an email containing `test`.\n- Parentheses group those two text/NULL checks together.\n- `AND is_test = 1` keeps only rows marked as test accounts.\n\nWithout parentheses, SQL may combine the conditions in a different way than you intended.\n\nA concrete example from this dataset:\n- `Noah Kim` has `noah@test.com` and `is_test = 1`, so this row matches.\n- `Test Account` has `test@internal.dev` and `is_test = 1`, so this row also matches.\n- `Leo Grant` has `email IS NULL`, but `is_test = 0`, so this row does not match."
-          },
-          "sketch_real_cleanup_patterns": {
-            "title": "Common cleanup patterns",
-            "bodyMarkdown": "Real cleanup work often means combining several filters to narrow down the exact rows you need.\n\nHere is a practical example that finds non-test customers in Chicago who are missing an email:\n\n```sql\nSELECT id, full_name, city, email\nFROM customers\nWHERE city = 'Chicago'\n  AND email IS NULL\n  AND is_test = 0;\n```\n\nHow to read it:\n- `city = 'Chicago'` keeps only Chicago customers.\n- `email IS NULL` keeps only rows with missing email values.\n- `is_test = 0` removes test accounts.\n\nIn the current sample data, this query returns no rows, and that is still useful. A query can confirm that no records match a cleanup rule.\n\nYou can also search for suspicious text values:\n\n```sql\nSELECT id, full_name, email\nFROM customers\nWHERE email LIKE '%@example.com'\n  AND status = 'active';\n```\n\nThis finds active customers whose email ends with `@example.com`."
+          "cleanup_filter_combination": {
+            "title": "Combine Presence Checks with Business Rules",
+            "bodyMarkdown": "Cleanup reports often combine presence checks with exact or pattern filters.\n\n```sql\nSELECT\n    id,\n    full_name,\n    email,\n    city\nFROM customers\nWHERE email IS NOT NULL\n  AND city LIKE 'C%';\n```\n\nA row must have an email and a city beginning with `C`. Each condition answers a different question: is the required value present, and does another field match the business rule?\n\nWrite one condition per line so the cleanup logic is easy to review."
           }
         }
       }

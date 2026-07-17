@@ -1,0 +1,188 @@
+{
+  "topics": {
+    "sql--sql-analysis-reporting--draft": {
+      "sql-analysis-reporting-module-2-aggregate-functions": {
+        "module-2-storewide-kpi-snapshot": {
+          "label": "Module 2 Project: Completed Sales KPI Snapshot",
+          "summary": "Build one cumulative summary row for completed orders, preserving every previously added KPI.",
+          "cards": {
+            "sketch0": {
+              "title": "Project Brief"
+            },
+            "project": {
+              "title": "Build the Report"
+            }
+          },
+          "projectSteps": {
+            "project_step_1": {
+              "title": "Count Completed Orders"
+            },
+            "project_step_2": {
+              "title": "Add Completed Units"
+            },
+            "project_step_3": {
+              "title": "Add Gross Sales"
+            },
+            "project_step_4": {
+              "title": "Add Discount and Net Sales"
+            },
+            "project_step_5": {
+              "title": "Add Averages"
+            },
+            "project_step_6": {
+              "title": "Add the Net-Order Range"
+            }
+          },
+          "moduleProject": {
+            "steps": {
+              "project_step_1": {
+                "title": "Count Completed Orders",
+                "prompt": "Begin the Module 2 Storewide Kpi Snapshot. Calculate and return `COUNT(*) AS completed_orders` from `sales_reporting`. Keep only rows where `order_status = 'Completed'`.",
+                "hint": "Establish one filtered population and one-row grain.",
+                "help": {
+                  "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                  "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                  "hint_2": "Calculate and return `COUNT(*) AS completed_orders` from `sales_reporting`. Keep only rows where `order_status = 'Completed'`."
+                },
+                "starterCode": "-- Build the first working query below.",
+                "solutionCode": "SELECT\n    COUNT(*) AS completed_orders\nFROM sales_reporting\nWHERE order_status = 'Completed';",
+                "starterFiles": {
+                  "main_sql": {
+                    "content": "-- Build the first working query below."
+                  }
+                },
+                "solutionFiles": {
+                  "main_sql": {
+                    "content": "SELECT\n    COUNT(*) AS completed_orders\nFROM sales_reporting\nWHERE order_status = 'Completed';"
+                  }
+                }
+              },
+              "project_step_2": {
+                "title": "Add Completed Units — 2 Project: Completed Sales KPI Snapshot",
+                "prompt": "Extend the Module 2 Storewide Kpi Snapshot with the next approved requirement. Calculate and return `COUNT(*) AS completed_orders, SUM(quantity) AS completed_units` from `sales_reporting`. Keep only rows where `order_status = 'Completed'`.",
+                "hint": "Append the units total to the existing summary row.",
+                "help": {
+                  "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                  "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                  "hint_2": "Calculate and return `COUNT(*) AS completed_orders, SUM(quantity) AS completed_units` from `sales_reporting`. Keep only rows where `order_status = 'Completed'`."
+                },
+                "starterCode": "SELECT\n    COUNT(*) AS completed_orders\nFROM sales_reporting\nWHERE order_status = 'Completed';",
+                "solutionCode": "SELECT\n    COUNT(*) AS completed_orders,\n    SUM(quantity) AS completed_units\nFROM sales_reporting\nWHERE order_status = 'Completed';",
+                "starterFiles": {
+                  "main_sql": {
+                    "content": "SELECT\n    COUNT(*) AS completed_orders\nFROM sales_reporting\nWHERE order_status = 'Completed';"
+                  }
+                },
+                "solutionFiles": {
+                  "main_sql": {
+                    "content": "SELECT\n    COUNT(*) AS completed_orders,\n    SUM(quantity) AS completed_units\nFROM sales_reporting\nWHERE order_status = 'Completed';"
+                  }
+                }
+              },
+              "project_step_3": {
+                "title": "Add Gross Sales — 2 Project: Completed Sales KPI Snapshot",
+                "prompt": "Extend the Module 2 Storewide Kpi Snapshot with the next approved requirement. Calculate and return `COUNT(*) AS completed_orders, SUM(quantity) AS completed_units, ROUND(SUM(quantity * unit_price), 2) AS gross_sales` from `sales_reporting`. Keep only rows where `order_status = 'Completed'`.",
+                "hint": "Place the row-level gross expression inside SUM and round the final total.",
+                "help": {
+                  "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                  "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                  "hint_2": "Calculate and return `COUNT(*) AS completed_orders, SUM(quantity) AS completed_units, ROUND(SUM(quantity * unit_price), 2) AS gross_sales` from `sales_reporting`. Keep only rows where `order_status = 'Completed'`."
+                },
+                "starterCode": "SELECT\n    COUNT(*) AS completed_orders,\n    SUM(quantity) AS completed_units\nFROM sales_reporting\nWHERE order_status = 'Completed';",
+                "solutionCode": "SELECT\n    COUNT(*) AS completed_orders,\n    SUM(quantity) AS completed_units,\n    ROUND(SUM(quantity * unit_price), 2) AS gross_sales\nFROM sales_reporting\nWHERE order_status = 'Completed';",
+                "starterFiles": {
+                  "main_sql": {
+                    "content": "SELECT\n    COUNT(*) AS completed_orders,\n    SUM(quantity) AS completed_units\nFROM sales_reporting\nWHERE order_status = 'Completed';"
+                  }
+                },
+                "solutionFiles": {
+                  "main_sql": {
+                    "content": "SELECT\n    COUNT(*) AS completed_orders,\n    SUM(quantity) AS completed_units,\n    ROUND(SUM(quantity * unit_price), 2) AS gross_sales\nFROM sales_reporting\nWHERE order_status = 'Completed';"
+                  }
+                }
+              },
+              "project_step_4": {
+                "title": "Add Discount and Net Sales — 2 Project: Completed Sales KPI Snapshot",
+                "prompt": "Extend the Module 2 Storewide Kpi Snapshot with the next approved requirement. Calculate and return `COUNT(*) AS completed_orders, SUM(quantity) AS completed_units, ROUND(SUM(quantity * unit_price), 2) AS gross_sales, ROUND(SUM( quantity * unit_price * COALESCE(discount_pct, 0) / 100 ), 2) AS discount_amount, ROUND(SUM( quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ), 2) AS net_sales` from `sales_reporting`. Keep only rows where `order_status = 'Completed'`.",
+                "hint": "Use the same fallback rule in both monetary aggregates.",
+                "help": {
+                  "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                  "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                  "hint_2": "Calculate and return `COUNT(*) AS completed_orders, SUM(quantity) AS completed_units, ROUND(SUM(quantity * unit_price), 2) AS gross_sales, ROUND(SUM( quantity * unit_price * COALESCE(discount_pct, 0) / 100 ), 2) AS discount_amount, ROUND(SUM( quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ), 2) AS net_sales` from `sales_reporting`. Keep only rows where `order_status = 'Completed'`."
+                },
+                "starterCode": "SELECT\n    COUNT(*) AS completed_orders,\n    SUM(quantity) AS completed_units,\n    ROUND(SUM(quantity * unit_price), 2) AS gross_sales\nFROM sales_reporting\nWHERE order_status = 'Completed';",
+                "solutionCode": "SELECT\n    COUNT(*) AS completed_orders,\n    SUM(quantity) AS completed_units,\n    ROUND(SUM(quantity * unit_price), 2) AS gross_sales,\n    ROUND(SUM(\n        quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS discount_amount,\n    ROUND(SUM(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS net_sales\nFROM sales_reporting\nWHERE order_status = 'Completed';",
+                "starterFiles": {
+                  "main_sql": {
+                    "content": "SELECT\n    COUNT(*) AS completed_orders,\n    SUM(quantity) AS completed_units,\n    ROUND(SUM(quantity * unit_price), 2) AS gross_sales\nFROM sales_reporting\nWHERE order_status = 'Completed';"
+                  }
+                },
+                "solutionFiles": {
+                  "main_sql": {
+                    "content": "SELECT\n    COUNT(*) AS completed_orders,\n    SUM(quantity) AS completed_units,\n    ROUND(SUM(quantity * unit_price), 2) AS gross_sales,\n    ROUND(SUM(\n        quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS discount_amount,\n    ROUND(SUM(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS net_sales\nFROM sales_reporting\nWHERE order_status = 'Completed';"
+                  }
+                }
+              },
+              "project_step_5": {
+                "title": "Add Averages",
+                "prompt": "Extend the Module 2 Storewide Kpi Snapshot with the next approved requirement. Calculate and return `COUNT(*) AS completed_orders, SUM(quantity) AS completed_units, ROUND(SUM(quantity * unit_price), 2) AS gross_sales, ROUND(SUM( quantity * unit_price * COALESCE(discount_pct, 0) / 100 ), 2) AS discount_amount, ROUND(SUM( quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ), 2) AS net_sales, ROUND(AVG( quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ), 2) AS average_net_order_value, ROUND(AVG(customer_rating), 2) AS average_rating` from `sales_reporting`. Keep only rows where `order_status = 'Completed'`.",
+                "hint": "Average the same net expression used in the total; leave rating NULL behavior explicit.",
+                "help": {
+                  "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                  "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                  "hint_2": "Calculate and return `COUNT(*) AS completed_orders, SUM(quantity) AS completed_units, ROUND(SUM(quantity * unit_price), 2) AS gross_sales, ROUND(SUM( quantity * unit_price * COALESCE(discount_pct, 0) / 100 ), 2) AS discount_amount, ROUND(SUM( quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ), 2) AS net_sales, ROUND(AVG( quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ), 2) AS average_net_order_value, ROUND(AVG(customer_rating), 2) AS average_rating` from `sales_reporting`. Keep only rows where `order_status = 'Completed'`."
+                },
+                "starterCode": "SELECT\n    COUNT(*) AS completed_orders,\n    SUM(quantity) AS completed_units,\n    ROUND(SUM(quantity * unit_price), 2) AS gross_sales,\n    ROUND(SUM(\n        quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS discount_amount,\n    ROUND(SUM(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS net_sales\nFROM sales_reporting\nWHERE order_status = 'Completed';",
+                "solutionCode": "SELECT\n    COUNT(*) AS completed_orders,\n    SUM(quantity) AS completed_units,\n    ROUND(SUM(quantity * unit_price), 2) AS gross_sales,\n    ROUND(SUM(\n        quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS discount_amount,\n    ROUND(SUM(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS net_sales,\n    ROUND(AVG(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS average_net_order_value,\n    ROUND(AVG(customer_rating), 2) AS average_rating\nFROM sales_reporting\nWHERE order_status = 'Completed';",
+                "starterFiles": {
+                  "main_sql": {
+                    "content": "SELECT\n    COUNT(*) AS completed_orders,\n    SUM(quantity) AS completed_units,\n    ROUND(SUM(quantity * unit_price), 2) AS gross_sales,\n    ROUND(SUM(\n        quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS discount_amount,\n    ROUND(SUM(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS net_sales\nFROM sales_reporting\nWHERE order_status = 'Completed';"
+                  }
+                },
+                "solutionFiles": {
+                  "main_sql": {
+                    "content": "SELECT\n    COUNT(*) AS completed_orders,\n    SUM(quantity) AS completed_units,\n    ROUND(SUM(quantity * unit_price), 2) AS gross_sales,\n    ROUND(SUM(\n        quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS discount_amount,\n    ROUND(SUM(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS net_sales,\n    ROUND(AVG(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS average_net_order_value,\n    ROUND(AVG(customer_rating), 2) AS average_rating\nFROM sales_reporting\nWHERE order_status = 'Completed';"
+                  }
+                }
+              },
+              "project_step_6": {
+                "title": "Add the Net-Order Range",
+                "prompt": "Complete the Module 2 Storewide Kpi Snapshot. Calculate and return `COUNT(*) AS completed_orders, SUM(quantity) AS completed_units, ROUND(SUM(quantity * unit_price), 2) AS gross_sales, ROUND(SUM( quantity * unit_price * COALESCE(discount_pct, 0) / 100 ), 2) AS discount_amount, ROUND(SUM( quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ), 2) AS net_sales, ROUND(AVG( quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ), 2) AS average_net_order_value, ROUND(AVG(customer_rating), 2) AS average_rating, ROUND(MIN( quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ), 2) AS smallest_net_order, ROUND(MAX( quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ), 2) AS largest_net_order` from `sales_reporting`. Keep only rows where `order_status = 'Completed'`.",
+                "hint": "Apply MIN and MAX to the same null-safe net-order expression used by the averages.",
+                "help": {
+                  "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                  "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                  "hint_2": "Calculate and return `COUNT(*) AS completed_orders, SUM(quantity) AS completed_units, ROUND(SUM(quantity * unit_price), 2) AS gross_sales, ROUND(SUM( quantity * unit_price * COALESCE(discount_pct, 0) / 100 ), 2) AS discount_amount, ROUND(SUM( quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ), 2) AS net_sales, ROUND(AVG( quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ), 2) AS average_net_order_value, ROUND(AVG(customer_rating), 2) AS average_rating, ROUND(MIN( quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ), 2) AS smallest_net_order, ROUND(MAX( quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ), 2) AS largest_net_order` from `sales_reporting`. Keep only rows where `order_status = 'Completed'`."
+                },
+                "starterCode": "SELECT\n    COUNT(*) AS completed_orders,\n    SUM(quantity) AS completed_units,\n    ROUND(SUM(quantity * unit_price), 2) AS gross_sales,\n    ROUND(SUM(\n        quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS discount_amount,\n    ROUND(SUM(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS net_sales,\n    ROUND(AVG(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS average_net_order_value,\n    ROUND(AVG(customer_rating), 2) AS average_rating\nFROM sales_reporting\nWHERE order_status = 'Completed';",
+                "solutionCode": "SELECT\n    COUNT(*) AS completed_orders,\n    SUM(quantity) AS completed_units,\n    ROUND(SUM(quantity * unit_price), 2) AS gross_sales,\n    ROUND(SUM(\n        quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS discount_amount,\n    ROUND(SUM(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS net_sales,\n    ROUND(AVG(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS average_net_order_value,\n    ROUND(AVG(customer_rating), 2) AS average_rating,\n    ROUND(MIN(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS smallest_net_order,\n    ROUND(MAX(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS largest_net_order\nFROM sales_reporting\nWHERE order_status = 'Completed';",
+                "starterFiles": {
+                  "main_sql": {
+                    "content": "SELECT\n    COUNT(*) AS completed_orders,\n    SUM(quantity) AS completed_units,\n    ROUND(SUM(quantity * unit_price), 2) AS gross_sales,\n    ROUND(SUM(\n        quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS discount_amount,\n    ROUND(SUM(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS net_sales,\n    ROUND(AVG(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS average_net_order_value,\n    ROUND(AVG(customer_rating), 2) AS average_rating\nFROM sales_reporting\nWHERE order_status = 'Completed';"
+                  }
+                },
+                "solutionFiles": {
+                  "main_sql": {
+                    "content": "SELECT\n    COUNT(*) AS completed_orders,\n    SUM(quantity) AS completed_units,\n    ROUND(SUM(quantity * unit_price), 2) AS gross_sales,\n    ROUND(SUM(\n        quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS discount_amount,\n    ROUND(SUM(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS net_sales,\n    ROUND(AVG(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS average_net_order_value,\n    ROUND(AVG(customer_rating), 2) AS average_rating,\n    ROUND(MIN(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS smallest_net_order,\n    ROUND(MAX(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS largest_net_order\nFROM sales_reporting\nWHERE order_status = 'Completed';"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql--sql-analysis-reporting--draft": {
+      "sql-analysis-reporting-module-2-aggregate-functions": {
+        "module-2-storewide-kpi-snapshot": {
+          "sketch-0": {
+            "title": "Project Brief",
+            "bodyMarkdown": "In this project, you will create a Storewide KPI Snapshot using SQL aggregate functions. The goal is to produce a single row of key performance indicators (KPIs) that summarize the store's sales data. This includes calculating the total number of orders, total units sold, gross sales, net sales, average order value, and the range of order values. These metrics provide a quick overview of the store's performance and help in making informed business decisions.\n\n## Your assignment\n\nThe store director wants one compact row of completed-sales KPIs before reviewing any regional detail. Each metric must use the same completed-order population and the same null-safe discount rule.\n\nBuild a **single cumulative summary query**:\n\n1. Count completed orders as `completed_orders`.\n2. Add `SUM(quantity)` as `completed_units`.\n3. Add completed gross sales rounded to two decimals as `gross_sales`.\n4. Add null-safe `discount_amount` and `net_sales`.\n5. Add `average_net_order_value` and `average_rating`, rounded to two decimals.\n6. Add the smallest and largest completed net order values as `smallest_net_order` and `largest_net_order`.\n\nKeep the completed-order filter and every previous KPI as the query grows. The final output should still be exactly one row.\n\n**Definition of done:** every metric can be explained in plain language, uses a consistent population, and has an alias suitable for an executive snapshot."
+          }
+        }
+      }
+    }
+  }
+}

@@ -186,4 +186,122 @@ describe("validateGoldenTopicBundle", () => {
         expect(report.ok).toBe(true);
     });
 
+
+    it("validates reporting-course SQL against the dedicated sales_reporting dataset", async () => {
+        const report = await validateGoldenTopicBundle({
+            seed: {
+                topicId: "reporting-topic",
+                subjectSlug: "sql--sql-analysis-reporting--draft",
+                courseSlug: "sql-analysis-reporting",
+                moduleRuntimeDefaults: {
+                    kind: "sql",
+                    datasetId: "sales_reporting",
+                    fixedSqlDialect: "sqlite",
+                },
+            } as any,
+            draft: {} as any,
+            topicBundle: {
+                topicId: "reporting-topic",
+                subjectSlug: "sql--sql-analysis-reporting--draft",
+                moduleSlug: "sql-analysis-reporting-module-0-report-foundations",
+                sectionSlug: "sql-analysis-reporting-section-0-readable-output",
+                prefix: "topics.sql.reporting-topic",
+                minutes: 10,
+                runtimeDefaults: {
+                    kind: "sql",
+                    datasetId: "sales_reporting",
+                    fixedSqlDialect: "sqlite",
+                },
+                topic: {
+                    labelKey: "label",
+                    summaryKey: "summary",
+                },
+                cards: [],
+                sketches: [],
+                exercises: [
+                    {
+                        id: "code-1",
+                        kind: "code_input",
+                        messageBase: "quiz.code-1",
+                        language: "sql",
+                        fixedSqlDialect: "sqlite",
+                        runtime: {
+                            kind: "sql",
+                            datasetId: "sales_reporting",
+                            fixedSqlDialect: "sqlite",
+                        },
+                        recipe: {
+                            type: "sql_query",
+                            datasetId: "sales_reporting",
+                            solutionCode:
+                                "SELECT order_id, product_name FROM sales_reporting ORDER BY order_id LIMIT 1;",
+                        },
+                    },
+                ],
+            } as any,
+        });
+
+        expect(report.ok).toBe(true);
+    });
+
+    it("rejects a reporting-table solution when it is bound to legacy sales_kpi", async () => {
+        const report = await validateGoldenTopicBundle({
+            seed: {
+                topicId: "reporting-topic",
+                subjectSlug: "sql--sql-analysis-reporting--draft",
+                courseSlug: "sql-analysis-reporting",
+                moduleRuntimeDefaults: {
+                    kind: "sql",
+                    datasetId: "sales_kpi",
+                    fixedSqlDialect: "sqlite",
+                },
+            } as any,
+            draft: {} as any,
+            topicBundle: {
+                topicId: "reporting-topic",
+                subjectSlug: "sql--sql-analysis-reporting--draft",
+                moduleSlug: "sql-analysis-reporting-module-0-report-foundations",
+                sectionSlug: "sql-analysis-reporting-section-0-readable-output",
+                prefix: "topics.sql.reporting-topic",
+                minutes: 10,
+                runtimeDefaults: {
+                    kind: "sql",
+                    datasetId: "sales_kpi",
+                    fixedSqlDialect: "sqlite",
+                },
+                topic: {
+                    labelKey: "label",
+                    summaryKey: "summary",
+                },
+                cards: [],
+                sketches: [],
+                exercises: [
+                    {
+                        id: "code-1",
+                        kind: "code_input",
+                        messageBase: "quiz.code-1",
+                        language: "sql",
+                        fixedSqlDialect: "sqlite",
+                        recipe: {
+                            type: "sql_query",
+                            datasetId: "sales_kpi",
+                            solutionCode:
+                                "SELECT order_id FROM sales_reporting LIMIT 1;",
+                        },
+                    },
+                ],
+            } as any,
+        });
+
+        expect(report.ok).toBe(false);
+        expect(report.issues).toEqual(
+            expect.arrayContaining([
+                expect.objectContaining({
+                    code: "GOLDEN_SQL_SOLUTION_MISMATCH",
+                    exerciseId: "code-1",
+                }),
+            ]),
+        );
+    });
+
 });

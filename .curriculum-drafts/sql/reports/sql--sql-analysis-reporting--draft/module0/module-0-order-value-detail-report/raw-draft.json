@@ -1,0 +1,134 @@
+{
+  "title": "Module 0: Order Value Detail Report",
+  "summary": "Create a clean order detail report with selected columns, readable aliases, gross sales, and stable sorting.",
+  "minutes": 55,
+  "sketchBlocks": [
+    {
+      "id": "sketch-0",
+      "title": "Introduction to Order Value Detail Report",
+      "bodyMarkdown": "In this project, you will create an Order Value Detail Report using SQL. The goal is to generate a report that includes selected columns with clear aliases, calculates gross sales, and sorts the data in a stable manner. This report will help managers quickly understand order details and sales performance.\n\n### Key Concepts\n- **Aliases**: Use the `AS` keyword to rename columns for clarity.\n- **Arithmetic Expressions**: Calculate new values using existing columns.\n- **Rounding**: Use the `ROUND` function to format numbers for readability.\n- **Sorting**: Use `ORDER BY` to arrange data in a specific order.\n\n### Example\n```sql\nSELECT order_id AS \"Order ID\",\n       product_name AS \"Product\",\n       quantity * unit_price AS \"Gross Sales\"\nFROM sales_reporting\nORDER BY \"Gross Sales\" DESC;\n```\nThis query selects the order ID and product name, calculates the gross sales by multiplying quantity and unit price, and sorts the results by gross sales in descending order."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "try-module-0-sketch0",
+      "kind": "code_input",
+      "title": "Create a Basic Order Report",
+      "prompt": "Write a query to select the `order_id`, `product_name`, and calculate the `Gross Sales` as `quantity * unit_price` from the `sales_reporting` table. Sort the results by `Gross Sales` in descending order.",
+      "hint": "Use SELECT with arithmetic expressions and ORDER BY.",
+      "help": {
+        "concept": "Use SELECT to choose columns and arithmetic expressions to calculate new values.",
+        "hint_1": "Start with SELECT and list the columns you need.",
+        "hint_2": "Use ORDER BY to sort the results by the calculated column."
+      },
+      "starterCode": "SELECT order_id, product_name, quantity * unit_price AS \"Gross Sales\"\nFROM sales_reporting\nORDER BY \"Gross Sales\" DESC;",
+      "solutionCode": "SELECT order_id, product_name, quantity * unit_price AS \"Gross Sales\"\nFROM sales_reporting\nORDER BY \"Gross Sales\" DESC;",
+      "tests": [
+        {
+          "stdout": "101|Watercolor Set|84.0\n103|Notebook Bundle|76.0\n107|Storage Basket|96.0\n...",
+          "match": "includes"
+        }
+      ],
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "try-module-0-sketch1",
+      "kind": "code_input",
+      "title": "Add Aliases to Columns",
+      "prompt": "Modify the previous query to add aliases to the `order_id` and `product_name` columns as `Order ID` and `Product`, respectively.",
+      "hint": "Use the AS keyword to rename columns.",
+      "help": {
+        "concept": "Aliases make column names more readable in the output.",
+        "hint_1": "Add AS after each column name to specify the alias.",
+        "hint_2": "Ensure each alias is enclosed in double quotes."
+      },
+      "starterCode": "SELECT order_id AS \"Order ID\", product_name AS \"Product\", quantity * unit_price AS \"Gross Sales\"\nFROM sales_reporting\nORDER BY \"Gross Sales\" DESC;",
+      "solutionCode": "SELECT order_id AS \"Order ID\", product_name AS \"Product\", quantity * unit_price AS \"Gross Sales\"\nFROM sales_reporting\nORDER BY \"Gross Sales\" DESC;",
+      "tests": [
+        {
+          "stdout": "Order ID|Product|Gross Sales\n101|Watercolor Set|84.0\n103|Notebook Bundle|76.0\n107|Storage Basket|96.0\n...",
+          "match": "includes"
+        }
+      ],
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "try-module-0-sketch2",
+      "kind": "code_input",
+      "title": "Calculate and Round Gross Sales",
+      "prompt": "Extend the query to round the `Gross Sales` to two decimal places.",
+      "hint": "Use the ROUND function to format the calculated column.",
+      "help": {
+        "concept": "Rounding makes numerical data more readable.",
+        "hint_1": "Wrap the arithmetic expression with the ROUND function.",
+        "hint_2": "Specify the number of decimal places as the second argument to ROUND."
+      },
+      "starterCode": "SELECT order_id AS \"Order ID\", product_name AS \"Product\", ROUND(quantity * unit_price, 2) AS \"Gross Sales\"\nFROM sales_reporting\nORDER BY \"Gross Sales\" DESC;",
+      "solutionCode": "SELECT order_id AS \"Order ID\", product_name AS \"Product\", ROUND(quantity * unit_price, 2) AS \"Gross Sales\"\nFROM sales_reporting\nORDER BY \"Gross Sales\" DESC;",
+      "tests": [
+        {
+          "stdout": "Order ID|Product|Gross Sales\n101|Watercolor Set|84.00\n103|Notebook Bundle|76.00\n107|Storage Basket|96.00\n...",
+          "match": "includes"
+        }
+      ],
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "try-module-0-sketch3",
+      "kind": "code_input",
+      "title": "Filter Completed Orders",
+      "prompt": "Modify the query to include only orders with the status 'Completed'.",
+      "hint": "Use the WHERE clause to filter rows based on conditions.",
+      "help": {
+        "concept": "Filtering allows you to focus on specific subsets of data.",
+        "hint_1": "Add a WHERE clause to filter by order_status.",
+        "hint_2": "Ensure the condition checks for 'Completed' status."
+      },
+      "starterCode": "SELECT order_id AS \"Order ID\", product_name AS \"Product\", ROUND(quantity * unit_price, 2) AS \"Gross Sales\"\nFROM sales_reporting\nWHERE order_status = 'Completed'\nORDER BY \"Gross Sales\" DESC;",
+      "solutionCode": "SELECT order_id AS \"Order ID\", product_name AS \"Product\", ROUND(quantity * unit_price, 2) AS \"Gross Sales\"\nFROM sales_reporting\nWHERE order_status = 'Completed'\nORDER BY \"Gross Sales\" DESC;",
+      "tests": [
+        {
+          "stdout": "Order ID|Product|Gross Sales\n101|Watercolor Set|84.00\n103|Notebook Bundle|76.00\n107|Storage Basket|96.00\n...",
+          "match": "includes"
+        }
+      ],
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "try-module-0-sketch4",
+      "kind": "code_input",
+      "title": "Limit the Number of Results",
+      "prompt": "Limit the query results to the top 5 orders by `Gross Sales`.",
+      "hint": "Use the LIMIT clause to restrict the number of rows returned.",
+      "help": {
+        "concept": "Limiting results helps focus on the most relevant data.",
+        "hint_1": "Add a LIMIT clause at the end of the query.",
+        "hint_2": "Specify the number of rows to return after LIMIT."
+      },
+      "starterCode": "SELECT order_id AS \"Order ID\", product_name AS \"Product\", ROUND(quantity * unit_price, 2) AS \"Gross Sales\"\nFROM sales_reporting\nWHERE order_status = 'Completed'\nORDER BY \"Gross Sales\" DESC\nLIMIT 5;",
+      "solutionCode": "SELECT order_id AS \"Order ID\", product_name AS \"Product\", ROUND(quantity * unit_price, 2) AS \"Gross Sales\"\nFROM sales_reporting\nWHERE order_status = 'Completed'\nORDER BY \"Gross Sales\" DESC\nLIMIT 5;",
+      "tests": [
+        {
+          "stdout": "Order ID|Product|Gross Sales\n101|Watercolor Set|84.00\n107|Storage Basket|96.00\n112|Webcam|186.00\n...",
+          "match": "includes"
+        }
+      ],
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query"
+    }
+  ],
+  "projectDraft": {
+    "title": "Order Value Detail Report Project",
+    "stepIds": [
+      "try-module-0-sketch0",
+      "try-module-0-sketch1",
+      "try-module-0-sketch2",
+      "try-module-0-sketch3",
+      "try-module-0-sketch4"
+    ]
+  }
+}

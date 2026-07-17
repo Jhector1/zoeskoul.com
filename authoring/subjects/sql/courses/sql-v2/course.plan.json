@@ -41,7 +41,70 @@
     {
       "moduleSlug": "sql-v2-5",
       "moduleNumber": 5,
-      "title": "Capstone: Customer Follow-Up Report"
+      "title": "Capstone: Customer Follow-Up Report",
+      "role": "capstone",
+      "prefix": "sqlv2_5",
+      "description": "Pull the course skills together in one final reporting task that feels like a beginner analyst handoff.",
+      "sections": [
+        {
+          "sectionSlug": "sql-v2-5-capstone-project",
+          "title": "Capstone Project",
+          "role": "capstone",
+          "topics": [
+            {
+              "topicId": "module-5-customer-follow-up-capstone",
+              "title": "Module 5 Customer Follow-Up Capstone",
+              "summary": "Build a real-world customer follow-up report by improving one working query step by step until the final handoff is ready.",
+              "minutes": 36,
+              "technical": true,
+              "learningGoals": [
+                "Sustain one SQL project through several realistic revisions.",
+                "Ship a final customer report that combines the core SQL foundations skills from the course."
+              ],
+              "practice": {
+                "projectFlow": "progressive"
+              },
+              "projectBrief": {
+                "scenario": "A community outreach coordinator needs a concise customer follow-up list built from the cleanup table. The report must keep only useful, contactable records and rank the most recent signups first.",
+                "role": "Junior SQL analyst preparing a customer follow-up handoff",
+                "workspace": "Browser SQL editor, customers table schema, and deterministic results table",
+                "deliverable": "One four-step cumulative customer follow-up query that combines the core SQL Foundations skills without losing earlier requirements.",
+                "stepCountTarget": 4,
+                "flow": "progressive",
+                "requirements": [
+                  "Keep one valid SELECT statement in every step.",
+                  "Use the previous complete solution as the next starter query.",
+                  "Preserve every earlier requirement unless the current step explicitly replaces it.",
+                  "Use only SQL concepts taught in SQL Foundations.",
+                  "Finish with deterministic ordering and a practical row limit."
+                ],
+                "stepLadder": [
+                  {
+                    "step": 1,
+                    "title": "Build the Follow-Up Candidate List",
+                    "requirement": "Return the requested customer columns and keep only records whose status is active or draft using IN."
+                  },
+                  {
+                    "step": 2,
+                    "title": "Keep Contactable Customers",
+                    "requirement": "Preserve the candidate list and require a non-missing email address with IS NOT NULL."
+                  },
+                  {
+                    "step": 3,
+                    "title": "Apply the Date and Text Rules",
+                    "requirement": "Keep all prior filters, add the authored signup-date range with BETWEEN, and exclude test-style names with a LIKE-based condition."
+                  },
+                  {
+                    "step": 4,
+                    "title": "Rank and Limit the Final Handoff",
+                    "requirement": "Preserve every filter, sort the newest signups first with a stable secondary sort, and limit the report to the requested number of rows."
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
     }
   ]
 }

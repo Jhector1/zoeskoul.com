@@ -34,39 +34,6 @@
             }
           },
           "quiz": {
-            "ci_not_in_status_exclude": {
-              "title": "Exclude inactive and draft statuses",
-              "prompt": "Write a query that shows `id`, `full_name`, and `status` from `customers` for customers whose `status` is not `inactive` and not `draft`. Order the results by `id` ascending. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Show id, full_name, and status from customers for whose status is not inactive and not draft. Order the results by id ascending.\nSELECT id, full_name, status\nFROM customers\nWHERE ;"
-            },
-            "ci_not_in_city_exclude": {
-              "title": "Exclude a list of cities",
-              "prompt": "Write a query that shows `full_name` and `city` from `customers` for rows where `city` is not `Chicago` and not `Miami`. Order the results by `full_name` ascending.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- add your filter here\nSELECT full_name, city\nFROM customers\nORDER BY full_name ASC;"
-            },
-            "ci_not_in_with_null_include": {
-              "title": "Exclude listed cities but keep missing cities",
-              "prompt": "Write a query that shows `id`, `full_name`, and `city` from `customers` where the city is not `Chicago` and not `Miami`, but rows with a missing city should still be included. Order by `id` ascending.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- add one more condition so missing cities are included\nSELECT id, full_name, city\nFROM customers\nWHERE city NOT IN ('Chicago', 'Miami')\n;"
-            },
             "sc_not_in_meaning": {
               "title": "What does NOT IN do?",
               "prompt": "What does `WHERE status NOT IN ('inactive', 'draft')` do?",
@@ -168,7 +135,7 @@
               "prompt": "Fill in the missing SQL keyword pair.",
               "hint": "You want the opposite of `IN` for a list filter.",
               "help": {
-                "concept": "`the missing term` excludes rows whose values appear in a listed set.",
+                "concept": "`the blank` excludes rows whose values appear in a listed set.",
                 "hint_1": "The missing text should create a filter that removes listed values rather than keeping them.",
                 "hint_2": "Use the two-word operator that is the opposite of `IN`."
               },
@@ -198,52 +165,30 @@
               ]
             },
             "try-not_in_list_filter-sketch0": {
-              "title": "Exclude inactive and draft statuses",
-              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that shows `id`, `full_name`, and `status` from `customers` for customers whose `status` is not `inactive` and not `draft`. Order the results by `id` ascending. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Exclude Inactive and Draft Customers",
+              "prompt": "Return `id`, `full_name`, and `status` for real customers whose status is neither `inactive` nor `draft`. Return `id, full_name, status` from `customers` in that column order. Keep only rows where `status NOT IN ('inactive', 'draft') AND is_test = 0`.",
+              "hint": "Add the real-customer condition with AND.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "Return `id, full_name, status` from `customers` in that column order. Keep only rows where `status NOT IN ('inactive', 'draft') AND is_test = 0`."
               },
-              "starterCode": "-- Show id, full_name, and status from customers for whose status is not inactive and not draft.\nSELECT id, full_name, status\nFROM customers\nWHERE ;"
-            },
-            "try-not_in_list_filter-sketch1": {
-              "title": "Exclude a list of cities",
-              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that shows `full_name` and `city` from `customers` for rows where `city` is not `Chicago` and not `Miami`. Order the results by `full_name` ascending.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- add your filter here\nSELECT full_name, city\nFROM customers\nORDER BY full_name ASC;"
-            },
-            "try-not_in_list_filter-sketch2": {
-              "title": "Exclude listed cities but keep missing cities",
-              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that shows `id`, `full_name`, and `city` from `customers` where the city is not `Chicago` and not `Miami`, but rows with a missing city should still be included. Order by `id` ascending.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- add one more condition so missing cities are included\nSELECT id, full_name, city\nFROM customers\nWHERE city NOT IN ('Chicago', 'Miami')\n;"
+              "starterCode": "SELECT id, full_name, status\nFROM customers\nWHERE status NOT IN ('inactive', 'draft');"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_not_in_list_filter_sketch0": {
-              "title": "Exclude inactive and draft statuses",
-              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that shows `id`, `full_name`, and `status` from `customers` for customers whose `status` is not `inactive` and not `draft`. Order the results by `id` ascending. Write the query in the SQL editor, click Run query, and check the results table."
+              "title": "Exclude Inactive and Draft Customers",
+              "prompt": "Return `id`, `full_name`, and `status` for real customers whose status is neither `inactive` nor `draft`."
             },
             "try_not_in_list_filter_sketch1": {
               "title": "Exclude a list of cities",
-              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that shows `full_name` and `city` from `customers` for rows where `city` is not `Chicago` and not `Miami`. Order the results by `full_name` ascending."
+              "prompt": "Create a customer-cleanup query that shows `full_name` and `city` from `customers` for rows where `city` is not `Chicago` and not `Miami`. Order the results by `full_name` ascending. Run it and compare the result with the expected table."
             },
             "try_not_in_list_filter_sketch2": {
               "title": "Exclude listed cities but keep missing cities",
-              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that shows `id`, `full_name`, and `city` from `customers` where the city is not `Chicago` and not `Miami`, but rows with a missing city should still be included. Order by `id` ascending."
+              "prompt": "Create a customer-cleanup query that shows `id`, `full_name`, and `city` from `customers` where the city is not `Chicago` and not `Miami`, but rows with a missing city should still be included. Order by `id` ascending. Run it and compare the result with the expected table."
             }
           }
         }
@@ -264,20 +209,6 @@
             },
             "quiz": {
               "title": "Quiz"
-            },
-            "project": {
-              "title": "Practice excluding unwanted customer rows"
-            }
-          },
-          "projectSteps": {
-            "ci_not_in_status_exclude": {
-              "title": "Exclude inactive and draft statuses"
-            },
-            "ci_not_in_city_exclude": {
-              "title": "Exclude a list of cities"
-            },
-            "ci_not_in_with_null_include": {
-              "title": "Exclude listed cities but keep missing cities"
             }
           },
           "quiz": {
@@ -415,7 +346,7 @@
               "prompt": "Fill in the missing SQL keyword pair.",
               "hint": "You want the opposite of `IN` for a list filter.",
               "help": {
-                "concept": "`the missing term` excludes rows whose values appear in a listed set.",
+                "concept": "`the blank` excludes rows whose values appear in a listed set.",
                 "hint_1": "The missing text should create a filter that removes listed values rather than keeping them.",
                 "hint_2": "Use the two-word operator that is the opposite of `IN`."
               },
@@ -445,19 +376,19 @@
               ]
             },
             "try-not_in_list_filter-sketch0": {
-              "title": "Exclude inactive and draft statuses",
-              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that shows `id`, `full_name`, and `status` from `customers` for customers whose `status` is not `inactive` and not `draft`. Order the results by `id` ascending. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Exclude Inactive and Draft Customers",
+              "prompt": "Return `id`, `full_name`, and `status` for real customers whose status is neither `inactive` nor `draft`.",
+              "hint": "Add the real-customer condition with AND.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
+                "concept": "Return `id`, `full_name`, and `status` for real customers whose status is neither `inactive` nor `draft`.",
+                "hint_1": "Add the real-customer condition with AND.",
+                "hint_2": "Run the query and compare the returned columns and rows with the expected result."
               },
-              "starterCode": "-- Show id, full_name, and status from customers for whose status is not inactive and not draft.\nSELECT id, full_name, status\nFROM customers\nWHERE ;"
+              "starterCode": "SELECT id, full_name, status\nFROM customers\nWHERE status NOT IN ('inactive', 'draft');"
             },
             "try-not_in_list_filter-sketch1": {
               "title": "Exclude a list of cities",
-              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that shows `full_name` and `city` from `customers` for rows where `city` is not `Chicago` and not `Miami`. Order the results by `full_name` ascending.",
+              "prompt": "Create a customer-cleanup query that shows `full_name` and `city` from `customers` for rows where `city` is not `Chicago` and not `Miami`. Order the results by `full_name` ascending. Run it and compare the result with the expected table.",
               "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
               "help": {
                 "concept": "This SQL exercise checks whether your query returns the requested result.",
@@ -468,7 +399,7 @@
             },
             "try-not_in_list_filter-sketch2": {
               "title": "Exclude listed cities but keep missing cities",
-              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that shows `id`, `full_name`, and `city` from `customers` where the city is not `Chicago` and not `Miami`, but rows with a missing city should still be included. Order by `id` ascending.",
+              "prompt": "Create a customer-cleanup query that shows `id`, `full_name`, and `city` from `customers` where the city is not `Chicago` and not `Miami`, but rows with a missing city should still be included. Order by `id` ascending. Run it and compare the result with the expected table.",
               "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
               "help": {
                 "concept": "This SQL exercise checks whether your query returns the requested result.",
@@ -481,16 +412,16 @@
           "tryIt": {
             "allowReveal": true,
             "try_not_in_list_filter_sketch0": {
-              "title": "Exclude inactive and draft statuses",
-              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that shows `id`, `full_name`, and `status` from `customers` for customers whose `status` is not `inactive` and not `draft`. Order the results by `id` ascending. Write the query in the SQL editor, click Run query, and check the results table."
+              "title": "Exclude Inactive and Draft Customers",
+              "prompt": "Return `id`, `full_name`, and `status` for real customers whose status is neither `inactive` nor `draft`."
             },
             "try_not_in_list_filter_sketch1": {
               "title": "Exclude a list of cities",
-              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that shows `full_name` and `city` from `customers` for rows where `city` is not `Chicago` and not `Miami`. Order the results by `full_name` ascending."
+              "prompt": "Create a customer-cleanup query that shows `full_name` and `city` from `customers` for rows where `city` is not `Chicago` and not `Miami`. Order the results by `full_name` ascending. Run it and compare the result with the expected table."
             },
             "try_not_in_list_filter_sketch2": {
               "title": "Exclude listed cities but keep missing cities",
-              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that shows `id`, `full_name`, and `city` from `customers` where the city is not `Chicago` and not `Miami`, but rows with a missing city should still be included. Order by `id` ascending."
+              "prompt": "Create a customer-cleanup query that shows `id`, `full_name`, and `city` from `customers` where the city is not `Chicago` and not `Miami`, but rows with a missing city should still be included. Order by `id` ascending. Run it and compare the result with the expected table."
             }
           }
         }

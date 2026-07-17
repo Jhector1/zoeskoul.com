@@ -1,7 +1,8 @@
 
 
 
-import type { HandlerArgs, AnyGenOut } from "@/lib/practice/generator/engines/utils";
+import type { HandlerArgs } from "@/lib/practice/generator/engines/utils";
+import type { GenOut } from "@/lib/practice/generator/shared/expected";
 import type { ManifestCodeInput, ManifestRecipe } from "@/lib/subjects/_core/manifestTypes";
 
 export type RecipeHandler<T extends ManifestRecipe = ManifestRecipe> = (
@@ -16,4 +17,4 @@ export type RecipeHandler<T extends ManifestRecipe = ManifestRecipe> = (
             expectedExampleMeta?: string;
             maybeT?: (key: string) => string | undefined;
     },
-) => AnyGenOut;
+) => GenOut<"code_input">;

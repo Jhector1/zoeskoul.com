@@ -1,0 +1,84 @@
+{
+  "ok": false,
+  "profileId": "sql",
+  "subjectSlug": "sql--sql-data-management--draft",
+  "courseSlug": "sql-data-management",
+  "topicId": "insert-with-explicit-column-lists",
+  "summary": {
+    "modules": 1,
+    "topicsTotal": 1,
+    "exercises": 8,
+    "exerciseKinds": {
+      "code_input": 2,
+      "single_choice": 2,
+      "multi_choice": 2,
+      "drag_reorder": 1,
+      "fill_blank_choice": 1
+    },
+    "codeInputs": 2,
+    "projects": 2,
+    "capstones": 0,
+    "thinFixedTestCount": 0,
+    "blockers": 2,
+    "errors": 2,
+    "warnings": 1,
+    "infos": 0
+  },
+  "severityCounts": {
+    "blocker": 2,
+    "error": 2,
+    "warning": 1,
+    "info": 0
+  },
+  "issues": [
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-data-management-module-0-safe-inserts/sql-data-management-section-0-mutation-workflow/insert-with-explicit-column-lists",
+      "profileId": "sql",
+      "moduleId": "sql-data-management-module-0-safe-inserts",
+      "topicId": "insert-with-explicit-column-lists",
+      "message": "Topic \"insert-with-explicit-column-lists\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "EXPECTED_ENTRY_FILE_MISSING",
+      "severity": "error",
+      "path": "sql-data-management-module-0-safe-inserts/sql-data-management-section-0-mutation-workflow/insert-with-explicit-column-lists",
+      "profileId": "sql",
+      "moduleId": "sql-data-management-module-0-safe-inserts",
+      "topicId": "insert-with-explicit-column-lists",
+      "exerciseId": "try-insert-with-explicit-column-lists-sketch0",
+      "message": "Exercise \"try-insert-with-explicit-column-lists-sketch0\" workspace does not reference expected entry file \"main.sql\"."
+    },
+    {
+      "code": "WORKSPACE_ENTRY_FILE_LEAK",
+      "severity": "blocker",
+      "path": "sql-data-management-module-0-safe-inserts/sql-data-management-section-0-mutation-workflow/insert-with-explicit-column-lists",
+      "profileId": "sql",
+      "moduleId": "sql-data-management-module-0-safe-inserts",
+      "topicId": "insert-with-explicit-column-lists",
+      "exerciseId": "try-insert-with-explicit-column-lists-sketch0",
+      "message": "Exercise \"try-insert-with-explicit-column-lists-sketch0\" uses workspace entry file \"query.sql\" but profile \"sql\" expects \"main.sql\"."
+    },
+    {
+      "code": "EXPECTED_ENTRY_FILE_MISSING",
+      "severity": "error",
+      "path": "sql-data-management-module-0-safe-inserts/sql-data-management-section-0-mutation-workflow/insert-with-explicit-column-lists",
+      "profileId": "sql",
+      "moduleId": "sql-data-management-module-0-safe-inserts",
+      "topicId": "insert-with-explicit-column-lists",
+      "exerciseId": "try-insert-with-explicit-column-lists-sketch1",
+      "message": "Exercise \"try-insert-with-explicit-column-lists-sketch1\" workspace does not reference expected entry file \"main.sql\"."
+    },
+    {
+      "code": "WORKSPACE_ENTRY_FILE_LEAK",
+      "severity": "blocker",
+      "path": "sql-data-management-module-0-safe-inserts/sql-data-management-section-0-mutation-workflow/insert-with-explicit-column-lists",
+      "profileId": "sql",
+      "moduleId": "sql-data-management-module-0-safe-inserts",
+      "topicId": "insert-with-explicit-column-lists",
+      "exerciseId": "try-insert-with-explicit-column-lists-sketch1",
+      "message": "Exercise \"try-insert-with-explicit-column-lists-sketch1\" uses workspace entry file \"query.sql\" but profile \"sql\" expects \"main.sql\"."
+    }
+  ]
+}

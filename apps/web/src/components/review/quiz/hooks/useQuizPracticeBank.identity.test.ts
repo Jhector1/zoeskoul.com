@@ -3,14 +3,17 @@ import {
     doesPracticeStateMatchQuestion,
     getPracticeQuestionIdentity,
     getPracticeStateIdentity,
+    getLiveWorkspaceForPracticeSubmit,
     mergeSavedPatchIntoPracticeItem,
     sanitizeSavedPracticePatch,
     stablePracticeItemJsonForNoopCompare,
+    resolvedPracticeExerciseMatchesRequestedKey,
     shouldTreatPatchAsExplicitFeedbackDismiss,
     shouldTreatPatchAsRevealFill,
 } from "@/components/review/quiz/hooks/useQuizPracticeBank";
 import { collectTerminalWorkspaceCommands } from "@/lib/practice/terminalWorkspaceHints";
 import { normalizeVisibleTerminalTranscriptText } from "@/lib/practice/visibleTerminalTranscript";
+import { getReviewSubmitBridgeHost } from "@/lib/review/submitBridge";
 
 describe("useQuizPracticeBank practice identity guards", () => {
     const subjectSlug = "python-data-functions";
@@ -25,6 +28,46 @@ describe("useQuizPracticeBank practice identity guards", () => {
         topicId,
         exerciseId,
     ].join(":");
+
+    it("reads the current Monaco workspace directly for submit", () => {
+        const win = getReviewSubmitBridgeHost();
+        if (!win) throw new Error("Expected a browser window for this test.");
+
+        win.__zoeGetWorkspaceBeforeSubmit = {
+            [stableKey]: () => ({
+                ownerKey: stableKey,
+                workspace: { version: 2, nodes: [] },
+                code: "SELECT 1;",
+                stdin: "",
+                language: "sql",
+            }),
+        };
+
+        expect(getLiveWorkspaceForPracticeSubmit([stableKey])).toMatchObject({
+            ownerKey: stableKey,
+            code: "SELECT 1;",
+            language: "sql",
+        });
+
+        delete win.__zoeGetWorkspaceBeforeSubmit;
+        delete win.__zoeGetAnyWorkspaceBeforeSubmit;
+    });
+
+    it("rejects a signed practice exercise that does not match the visible exercise", () => {
+        expect(
+            resolvedPracticeExerciseMatchesRequestedKey(
+                { id: exerciseId, exerciseKey: exerciseId },
+                exerciseId,
+            ),
+        ).toBe(true);
+
+        expect(
+            resolvedPracticeExerciseMatchesRequestedKey(
+                { id: "another-exercise", exerciseKey: "another-exercise" },
+                exerciseId,
+            ),
+        ).toBe(false);
+    });
 
     it("keeps the current item reference when restore only changes timestamps", () => {
         const item = {

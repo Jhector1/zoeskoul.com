@@ -1,0 +1,271 @@
+{
+  "title": "FOREIGN KEY and REFERENCES",
+  "summary": "Declare which parent key a child-table column points to so the relationship is part of the schema rather than only a query convention.",
+  "minutes": 32,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Defining FOREIGN KEY Constraints",
+      "bodyMarkdown": "A FOREIGN KEY constraint is a key used to link two tables together. It is a field (or collection of fields) in one table that refers to the PRIMARY KEY in another table. The table containing the foreign key is called the child table, and the table containing the candidate key is called the parent table. This relationship ensures that the data in the child table corresponds to data in the parent table, maintaining referential integrity.\n\nFor example, consider a `students` table and an `enrollments` table. The `enrollments` table might have a `student_id` column that is a FOREIGN KEY referencing the `id` column in the `students` table:\n\n```sql\nCREATE TABLE students (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL\n);\n\nCREATE TABLE enrollments (\n    enrollment_id INTEGER PRIMARY KEY,\n    student_id INTEGER,\n    FOREIGN KEY (student_id) REFERENCES students(id)\n);\n```\n\nIn this example, the `student_id` in the `enrollments` table must match an `id` in the `students` table, ensuring that every enrollment is associated with a valid student."
+    },
+    {
+      "id": "sketch2",
+      "title": "Verifying FOREIGN KEY Relationships",
+      "bodyMarkdown": "After defining tables with FOREIGN KEY constraints, it's important to verify that these constraints are correctly set up. This can be done by inspecting the schema definitions stored in the database. In SQLite, the `sqlite_master` table holds the schema definitions for all tables.\n\nTo check the schema of a table, you can use the following query:\n\n```sql\nSELECT sql FROM sqlite_master WHERE type='table' AND name='enrollments';\n```\n\nThis query retrieves the SQL statement used to create the `enrollments` table, allowing you to verify that the FOREIGN KEY constraint is correctly defined. This step is crucial for ensuring that your database maintains the intended relationships between tables."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "single-choice-1",
+      "kind": "single_choice",
+      "title": "Purpose of FOREIGN KEY",
+      "prompt": "What is the primary purpose of a FOREIGN KEY in a database?",
+      "options": [
+        "To ensure data uniqueness within a table",
+        "To link two tables together",
+        "To enforce data type constraints",
+        "To automatically update data"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Think about how tables are related in a database.",
+      "help": {
+        "concept": "A FOREIGN KEY is used to link two tables together, ensuring referential integrity.",
+        "hint_1": "Consider how data in one table can relate to data in another table.",
+        "hint_2": "A FOREIGN KEY ensures that a value in one table corresponds to a value in another table."
+      }
+    },
+    {
+      "id": "multi-choice-1",
+      "kind": "multi_choice",
+      "title": "Components of FOREIGN KEY",
+      "prompt": "Which of the following are components of a FOREIGN KEY constraint?",
+      "options": [
+        "Child column",
+        "Parent table's primary key",
+        "Unique constraint",
+        "Default value"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ],
+      "hint": "Consider what is needed to establish a relationship between two tables.",
+      "help": {
+        "concept": "A FOREIGN KEY constraint involves a child column and a parent table's primary key.",
+        "hint_1": "Think about the columns and tables involved in a FOREIGN KEY relationship.",
+        "hint_2": "A FOREIGN KEY references a primary key in another table."
+      }
+    },
+    {
+      "id": "multi-choice-2",
+      "kind": "multi_choice",
+      "title": "Verifying Schema",
+      "prompt": "How can you verify that a FOREIGN KEY constraint is correctly set up in SQLite?",
+      "options": [
+        "By querying the sqlite_master table",
+        "By checking the data types of columns",
+        "By using a SELECT statement on the table",
+        "By inspecting the table's creation SQL"
+      ],
+      "correctOptionIds": [
+        "a",
+        "d"
+      ],
+      "hint": "Think about how you can inspect the table definitions.",
+      "help": {
+        "concept": "You can verify FOREIGN KEY constraints by inspecting the schema definitions in the sqlite_master table.",
+        "hint_1": "Consider using a query to check the table's creation statement.",
+        "hint_2": "The sqlite_master table holds the schema definitions."
+      }
+    },
+    {
+      "id": "drag-reorder-1",
+      "kind": "drag_reorder",
+      "title": "Order of FOREIGN KEY Declaration",
+      "prompt": "Arrange the steps to declare a FOREIGN KEY constraint in the correct order.",
+      "tokens": [
+        "Define child table",
+        "Define child column",
+        "Declare FOREIGN KEY",
+        "Reference parent key"
+      ],
+      "correctOrder": [
+        "Define child table",
+        "Define child column",
+        "Declare FOREIGN KEY",
+        "Reference parent key"
+      ],
+      "hint": "Start with defining the child table and end with referencing the parent key.",
+      "help": {
+        "concept": "Declaring a FOREIGN KEY involves defining the child column and referencing the parent key.",
+        "hint_1": "Begin with the child table's column definition.",
+        "hint_2": "End with the REFERENCES clause pointing to the parent key."
+      }
+    },
+    {
+      "id": "fill-blank-choice-1",
+      "kind": "fill_blank_choice",
+      "title": "FOREIGN KEY Syntax",
+      "prompt": "Complete the syntax for declaring a FOREIGN KEY constraint.",
+      "template": "FOREIGN KEY ([blank1]) REFERENCES parent_table(parent_key)",
+      "choices": [
+        "child_column",
+        "parent_column",
+        "table_name",
+        "key_name"
+      ],
+      "correctValue": "child_column",
+      "hint": "Remember the structure of the FOREIGN KEY declaration.",
+      "help": {
+        "concept": "The FOREIGN KEY syntax involves specifying the child column and the parent table's primary key.",
+        "hint_1": "The FOREIGN KEY references a column in another table.",
+        "hint_2": "The REFERENCES clause specifies the parent table and key."
+      }
+    },
+    {
+      "id": "fill-blank-choice-2",
+      "kind": "fill_blank_choice",
+      "title": "Schema Verification",
+      "prompt": "Which table can you query to verify the schema of a table in SQLite?",
+      "template": "SELECT sql FROM [blank1] WHERE type='table' AND name='enrollments';",
+      "choices": [
+        "sqlite_master",
+        "information_schema",
+        "tables",
+        "schema"
+      ],
+      "correctValue": "sqlite_master",
+      "hint": "Think about where SQLite stores table definitions.",
+      "help": {
+        "concept": "The the missing term table holds the schema definitions for all tables in SQLite.",
+        "hint_1": "This table contains the SQL statements used to create tables.",
+        "hint_2": "It's a system table that stores schema information."
+      }
+    },
+    {
+      "id": "try-foreign-keys-and-references-sketch0",
+      "kind": "code_input",
+      "title": "Create a Child Table with FOREIGN KEY",
+      "prompt": "Create a `courses` table with a `course_id` as the PRIMARY KEY and a `course_name` column. Then, create an `enrollments` table with an `enrollment_id` as the PRIMARY KEY and a `course_id` as a FOREIGN KEY referencing the `courses` table.",
+      "starterCode": "-- Verify the schema\nSELECT sql FROM sqlite_master WHERE type='table' AND name='enrollments';",
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "schema.sql",
+          "content": "-- Define the courses table\nCREATE TABLE courses (\n    course_id INTEGER PRIMARY KEY,\n    course_name TEXT NOT NULL\n);\n\n-- Define the enrollments table\nCREATE TABLE enrollments (\n    enrollment_id INTEGER PRIMARY KEY,\n    course_id INTEGER,\n    -- Add FOREIGN KEY constraint here\n);",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "-- Verify the schema\nSELECT sql FROM sqlite_master WHERE type='table' AND name='enrollments';",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "schema.sql",
+          "content": "-- Define the courses table\nCREATE TABLE courses (\n    course_id INTEGER PRIMARY KEY,\n    course_name TEXT NOT NULL\n);\n\n-- Define the enrollments table\nCREATE TABLE enrollments (\n    enrollment_id INTEGER PRIMARY KEY,\n    course_id INTEGER,\n    FOREIGN KEY (course_id) REFERENCES courses(course_id)\n);",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "-- Verify the schema\nSELECT sql FROM sqlite_master WHERE type='table' AND name='enrollments';",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "sqlFileOrder": [
+        "schema.sql",
+        "query.sql"
+      ],
+      "solutionCode": "-- Verify the schema\nSELECT sql FROM sqlite_master WHERE type='table' AND name='enrollments';",
+      "datasetId": "ddl_blank",
+      "recipeType": "sql_query",
+      "checkSql": "SELECT sql FROM sqlite_master WHERE type='table' AND name='enrollments';",
+      "hint": "Start by defining the `courses` table, then define the `enrollments` table with the FOREIGN KEY constraint.",
+      "help": {
+        "concept": "A FOREIGN KEY in the `enrollments` table should reference the `course_id` in the `courses` table.",
+        "hint_1": "Define the `courses` table first with `course_id` as PRIMARY KEY.",
+        "hint_2": "In the `enrollments` table, use FOREIGN KEY to reference `course_id` in `courses`."
+      }
+    },
+    {
+      "id": "try-foreign-keys-and-references-sketch1",
+      "kind": "code_input",
+      "title": "Verify FOREIGN KEY Integrity",
+      "prompt": "Create a `departments` table with a `dept_id` as the PRIMARY KEY and a `dept_name` column. Then, create an `employees` table with an `emp_id` as the PRIMARY KEY and a `dept_id` as a FOREIGN KEY referencing the `departments` table. Verify the schema to ensure the FOREIGN KEY is correctly set up.",
+      "starterCode": "-- Verify the schema\nSELECT sql FROM sqlite_master WHERE type='table' AND name='employees';",
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "schema.sql",
+          "content": "-- Define the departments table\nCREATE TABLE departments (\n    dept_id INTEGER PRIMARY KEY,\n    dept_name TEXT NOT NULL\n);\n\n-- Define the employees table\nCREATE TABLE employees (\n    emp_id INTEGER PRIMARY KEY,\n    dept_id INTEGER,\n    -- Add FOREIGN KEY constraint here\n);",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "-- Verify the schema\nSELECT sql FROM sqlite_master WHERE type='table' AND name='employees';",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "schema.sql",
+          "content": "-- Define the departments table\nCREATE TABLE departments (\n    dept_id INTEGER PRIMARY KEY,\n    dept_name TEXT NOT NULL\n);\n\n-- Define the employees table\nCREATE TABLE employees (\n    emp_id INTEGER PRIMARY KEY,\n    dept_id INTEGER,\n    FOREIGN KEY (dept_id) REFERENCES departments(dept_id)\n);",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "-- Verify the schema\nSELECT sql FROM sqlite_master WHERE type='table' AND name='employees';",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "sqlFileOrder": [
+        "schema.sql",
+        "query.sql"
+      ],
+      "solutionCode": "-- Verify the schema\nSELECT sql FROM sqlite_master WHERE type='table' AND name='employees';",
+      "datasetId": "ddl_blank",
+      "recipeType": "sql_query",
+      "checkSql": "SELECT sql FROM sqlite_master WHERE type='table' AND name='employees';",
+      "hint": "Define the `departments` table first, then define the `employees` table with the FOREIGN KEY constraint.",
+      "help": {
+        "concept": "A FOREIGN KEY in the `employees` table should reference the `dept_id` in the `departments` table.",
+        "hint_1": "Define the `departments` table first with `dept_id` as PRIMARY KEY.",
+        "hint_2": "In the `employees` table, use FOREIGN KEY to reference `dept_id` in `departments`."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Build a Warehouse Stock Ledger Schema",
+    "stepIds": [
+      "try-foreign-keys-and-references-sketch0",
+      "try-foreign-keys-and-references-sketch1"
+    ]
+  }
+}

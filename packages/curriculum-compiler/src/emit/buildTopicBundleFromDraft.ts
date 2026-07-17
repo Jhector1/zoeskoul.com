@@ -7,6 +7,7 @@ import type {
     TopicBundleManifest,
     TopicSeed,
 } from "@zoeskoul/curriculum-contracts";
+import { mergeToolPresentationPolicies } from "@zoeskoul/curriculum-contracts";
 import {
     assertProfileSupportsCodeInput,
     getCurriculumProfile,
@@ -79,6 +80,19 @@ function manifestPreferredKind(value: string | null | undefined): ExerciseKind |
     return value ? (value as ExerciseKind) : null;
 }
 
+function resolveLessonTools(args: {
+    seed: TopicSeed;
+    cardId: string;
+    sourceId?: string;
+    authored?: import("@zoeskoul/curriculum-contracts").ToolPresentationPolicy;
+}) {
+    return mergeToolPresentationPolicies(
+        args.authored,
+        args.sourceId ? args.seed.lessonTools?.[args.sourceId] : undefined,
+        args.seed.lessonTools?.[args.cardId],
+    );
+}
+
 export function buildTopicBundleFromDraft(args: {
     shape: SubjectShapePack;
     seed: TopicSeed;
@@ -118,12 +132,52 @@ export function buildTopicBundleFromDraft(args: {
             }) === true,
         )
         : [];
-    const projectStepIds = isProjectOnlyTopic
+    const sourceProjectStepIds = uniqueNonEmpty(
+        sourceProjectExercises
+            .map((exercise) => exercise.id)
+            .filter((id) => !isGeneratedPolicyExerciseId(id)),
+    );
+    const resolvedProjectStepIds = isProjectOnlyTopic
         ? buildProjectStepIds(
             draft,
             sourceProjectExercises,
-            targets?.projectCodeInputTarget ?? 3,
+            Number.MAX_SAFE_INTEGER,
         )
+        : [];
+    const authoredProjectStepCount = seed.projectBrief?.stepCountTarget;
+    const expectedProjectStepCount =
+        authoredProjectStepCount ?? targets?.projectCodeInputTarget ?? 3;
+
+    if (
+        isProjectOnlyTopic &&
+        typeof authoredProjectStepCount === "number" &&
+        sourceProjectStepIds.length !== authoredProjectStepCount
+    ) {
+        throw new Error(
+            [
+                `Project topic "${seed.topicId}" must generate exactly ${authoredProjectStepCount} authored project exercise(s).`,
+                `Found ${sourceProjectStepIds.length}.`,
+                "The exact count comes from projectBrief.stepCountTarget.",
+            ].join(" "),
+        );
+    }
+
+    if (
+        isProjectOnlyTopic &&
+        typeof authoredProjectStepCount === "number" &&
+        resolvedProjectStepIds.length !== authoredProjectStepCount
+    ) {
+        throw new Error(
+            [
+                `Project topic "${seed.topicId}" must contain exactly ${authoredProjectStepCount} authored project step(s).`,
+                `Found ${resolvedProjectStepIds.length}.`,
+                "The exact step count comes from projectBrief.stepCountTarget when authoring provides it.",
+            ].join(" "),
+        );
+    }
+
+    const projectStepIds = isProjectOnlyTopic
+        ? resolvedProjectStepIds.slice(0, expectedProjectStepCount)
         : [];
     const tryItExercises = isProjectOnlyTopic
         ? []
@@ -183,6 +237,12 @@ export function buildTopicBundleFromDraft(args: {
             ),
             sketchId: block.id,
             height: 420,
+            tools: resolveLessonTools({
+                seed,
+                cardId: `sketch${index}`,
+                sourceId: block.id,
+                authored: block.tools,
+            }),
             ...(canonicalTryItExerciseId
                 ? {
                     tryIt: {
@@ -226,6 +286,7 @@ export function buildTopicBundleFromDraft(args: {
                         seed.topicId,
                         "quiz",
                     ),
+                    tools: resolveLessonTools({ seed, cardId: "quiz" }),
                     quiz: {
                         difficulty: "easy",
                         n: Math.min(quizVisibleDefault, quizOnlyExercises.length),
@@ -252,6 +313,7 @@ export function buildTopicBundleFromDraft(args: {
                         seed.topicId,
                         "project",
                     ),
+                    tools: resolveLessonTools({ seed, cardId: "project" }),
                     project: {
                         difficulty: "easy",
                         allowReveal: projectConfig?.allowReveal ?? true,
@@ -342,7 +404,7 @@ export function buildTopicBundleFromDraft(args: {
         return canonicalId ? { ...exercise, id: canonicalId } : exercise;
     });
 
-    const exercises: ManifestExercise[] = canonicalExercises.map((exercise) => {
+    const emittedExercises: ManifestExercise[] = canonicalExercises.map((exercise) => {
         const optionIdsForKeys =
             exercise.kind === "single_choice" || exercise.kind === "multi_choice"
                 ? optionIdsFromCount(exercise.options.length)
@@ -511,6 +573,18 @@ export function buildTopicBundleFromDraft(args: {
         );
     });
 
+    const exercises: ManifestExercise[] = emittedExercises.map((manifestExercise, index) => {
+        const authoredExercise = canonicalExercises[index];
+        const tools = mergeToolPresentationPolicies(
+            authoredExercise?.tools,
+            authoredExercise ? seed.exerciseTools?.[authoredExercise.id] : undefined,
+        );
+
+        return tools
+            ? { ...manifestExercise, tools }
+            : manifestExercise;
+    });
+
     return {
         topicId: seed.topicId,
         subjectSlug: seed.subjectSlug,
@@ -520,6 +594,7 @@ export function buildTopicBundleFromDraft(args: {
         minutes: seed.minutes,
         runtimeDefaults: seed.moduleRuntimeDefaults ?? null,
         serviceDefaults: seed.moduleServiceDefaults ?? null,
+        tools: seed.tools,
         topic: {
             labelKey: kp.topicLabelKey(
                 seed.subjectSlug,

@@ -1,0 +1,196 @@
+{
+  "topics": {
+    "sql--sql-data-management--draft": {
+      "sql-data-management-module-2-table-creation-constraints": {
+        "creating-tables-and-defining-columns": {
+          "label": "Creating Tables and Defining Columns",
+          "summary": "Write a complete CREATE TABLE statement whose column names and types describe the records the table will store.",
+          "cards": {
+            "sketch0": {
+              "title": "Give the Table a Shape"
+            },
+            "sketch1": {
+              "title": "Read the Definition Back"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_creating_tables_and_defining_columns_sketch0": {
+              "title": "Create and Verify the Products Table",
+              "prompt": "The catalog team is opening a new product registry. Create or complete the `products` table with the columns and constraints named in the brief. In `query.sql`, return `sql` from `sqlite_master` in that column order. Keep only rows where `type = 'table' AND name = 'products'`.",
+              "hint": "Create products in schema.sql first, then inspect that exact table through sqlite_master in query.sql.",
+              "help": {
+                "concept": "Keep each database responsibility in its named file: schema definitions in schema.sql, approved starting rows in seed.sql, mutations in operations.sql, and visible evidence in query.sql.",
+                "hint_1": "Complete the main database change before writing the inspection or verification query.",
+                "hint_2": "In `query.sql`, return the stored SQL definition for the table `products` from `sqlite_master`."
+              },
+              "starterCode": "-- Task: create the products table below.\n-- Required columns:\n--   product_id INTEGER PRIMARY KEY\n--   product_name TEXT NOT NULL\n--   price REAL\n",
+              "solutionCode": "-- Define the products table\nCREATE TABLE products (\n  product_id INTEGER PRIMARY KEY,\n  product_name TEXT NOT NULL,\n  price REAL\n);",
+              "starterFiles": {
+                "schema_sql": {
+                  "content": "-- Task: create the products table below.\n-- Required columns:\n--   product_id INTEGER PRIMARY KEY\n--   product_name TEXT NOT NULL\n--   price REAL\n"
+                },
+                "query_sql": {
+                  "content": "-- Task: inspect the completed products table through sqlite_master.\n"
+                }
+              },
+              "solutionFiles": {
+                "schema_sql": {
+                  "content": "-- Define the products table\nCREATE TABLE products (\n  product_id INTEGER PRIMARY KEY,\n  product_name TEXT NOT NULL,\n  price REAL\n);"
+                },
+                "query_sql": {
+                  "content": "-- Verify the products table definition\nSELECT sql\nFROM sqlite_master\nWHERE type = 'table' AND name = 'products';"
+                }
+              }
+            },
+            "try_creating_tables_and_defining_columns_sketch1": {
+              "title": "Create and Verify the Orders Table",
+              "prompt": "The order team needs a new register for customer purchases. Create or complete the `orders` table with the columns and constraints named in the brief. In `query.sql`, return `sql` from `sqlite_master` in that column order. Keep only rows where `type = 'table' AND name = 'orders'`.",
+              "hint": "Define all three orders columns in schema.sql, then inspect orders in query.sql.",
+              "help": {
+                "concept": "Keep each database responsibility in its named file: schema definitions in schema.sql, approved starting rows in seed.sql, mutations in operations.sql, and visible evidence in query.sql.",
+                "hint_1": "Complete the main database change before writing the inspection or verification query.",
+                "hint_2": "In `query.sql`, return the stored SQL definition for the table `orders` from `sqlite_master`."
+              },
+              "starterCode": "-- Task: create the orders table below.\n-- Required columns:\n--   order_id INTEGER PRIMARY KEY\n--   customer_name TEXT NOT NULL\n--   total_amount REAL\n",
+              "solutionCode": "-- Define the orders table\nCREATE TABLE orders (\n  order_id INTEGER PRIMARY KEY,\n  customer_name TEXT NOT NULL,\n  total_amount REAL\n);",
+              "starterFiles": {
+                "schema_sql": {
+                  "content": "-- Task: create the orders table below.\n-- Required columns:\n--   order_id INTEGER PRIMARY KEY\n--   customer_name TEXT NOT NULL\n--   total_amount REAL\n"
+                },
+                "query_sql": {
+                  "content": "-- Task: inspect the completed orders table through sqlite_master.\n"
+                }
+              },
+              "solutionFiles": {
+                "schema_sql": {
+                  "content": "-- Define the orders table\nCREATE TABLE orders (\n  order_id INTEGER PRIMARY KEY,\n  customer_name TEXT NOT NULL,\n  total_amount REAL\n);"
+                },
+                "query_sql": {
+                  "content": "-- Verify the orders table definition\nSELECT sql\nFROM sqlite_master\nWHERE type = 'table' AND name = 'orders';"
+                }
+              }
+            }
+          },
+          "practice": {
+            "fill-blank-choice-1": {
+              "title": "Column Data Types",
+              "prompt": "Choose the correct data type for a column that stores names.",
+              "hint": "Names are typically stored as TEXT.",
+              "help": {
+                "concept": "Choosing the correct data type for a column is crucial for data integrity.",
+                "hint_1": "Consider what type of data a name represents.",
+                "hint_2": "Names are usually stored as strings of characters."
+              },
+              "template": "The data type for storing names is [blank1].",
+              "choices": [
+                "INTEGER",
+                "TEXT",
+                "REAL"
+              ]
+            },
+            "fill-blank-choice-2": {
+              "title": "Primary Key Constraint",
+              "prompt": "Identify the constraint used to ensure a column's values are unique and not null.",
+              "hint": "This constraint is often used for identifiers.",
+              "help": {
+                "concept": "An INTEGER PRIMARY KEY gives each row a unique, non-NULL identity in this course's SQLite examples.",
+                "hint_1": "This constraint is crucial for identifying records uniquely.",
+                "hint_2": "It combines uniqueness with a non-null requirement."
+              },
+              "template": "The constraint that ensures uniqueness and non-nullability is [blank1].",
+              "choices": [
+                "PRIMARY KEY",
+                "NOT NULL",
+                "UNIQUE"
+              ]
+            },
+            "multi-choice-1": {
+              "title": "Table Creation Essentials",
+              "prompt": "Which of the following are essential components of a CREATE TABLE statement?",
+              "hint": "Match each choice to the SQL behavior described in the lesson.",
+              "help": {
+                "concept": "A CREATE TABLE statement names the table and defines its columns. Each column needs a name and a declared type; constraints are added when the data rule requires them.",
+                "hint_1": "Look for the parts that belong inside a table definition.",
+                "hint_2": "A SELECT clause reads rows and is not required to define the table."
+              },
+              "options": {
+                "a": "Table name",
+                "b": "Column definitions",
+                "c": "Data insertion",
+                "d": "Query execution"
+              }
+            },
+            "multi-choice-2": {
+              "title": "Data Types in SQL",
+              "prompt": "Which of the following are valid SQL data types?",
+              "hint": "Match each choice to the command, clause, or constraint described in the question.",
+              "help": {
+                "concept": "Use the SQL behavior described in the lesson to separate the valid choice from statements about a different command, clause, or constraint.",
+                "hint_1": "Identify the job the SQL must perform before comparing the choices.",
+                "hint_2": "Eliminate choices that belong to a different SQL concept."
+              },
+              "options": {
+                "a": "INTEGER",
+                "b": "TEXT",
+                "c": "REAL",
+                "d": "BOOLEAN"
+              }
+            },
+            "drag-reorder-1": {
+              "title": "Order of SQL Clauses",
+              "prompt": "Arrange the SQL clauses in the correct order for a basic SELECT statement.",
+              "hint": "Consider the typical flow of a SQL query.",
+              "help": {
+                "concept": "SQL queries follow a specific order of clauses.",
+                "hint_1": "Start with the clause that specifies what to retrieve.",
+                "hint_2": "Finish with the clause that orders the results."
+              },
+              "tokens": {
+                "t1": "SELECT",
+                "t2": "FROM",
+                "t3": "WHERE",
+                "t4": "ORDER BY"
+              }
+            },
+            "single-choice-1": {
+              "title": "SQLite Type Names",
+              "prompt": "Which statement best describes declared column types in SQLite?",
+              "hint": "SQLite uses type affinity rather than the rigid type enforcement used by some database systems.",
+              "help": {
+                "concept": "SQLite accepts many declared type names and maps them to type affinities. This course uses INTEGER, REAL, and TEXT because their intent is clear.",
+                "hint_1": "BOOLEAN can be declared, but SQLite stores boolean values as integers.",
+                "hint_2": "Choose the statement that reflects SQLite's flexible typing model."
+              },
+              "options": {
+                "a": "Only INTEGER, REAL, and TEXT are accepted in CREATE TABLE",
+                "b": "Declared type names are mapped to SQLite type affinities",
+                "c": "Every column rejects values from other storage classes",
+                "d": "SQLite requires a separate BOOLEAN storage class"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql--sql-data-management--draft": {
+      "sql-data-management-module-2-table-creation-constraints": {
+        "creating-tables-and-defining-columns": {
+          "sketch0": {
+            "title": "A CREATE TABLE statement turns record requirements into typed columns",
+            "bodyMarkdown": "In SQL, creating a table is a fundamental task that involves defining the structure of the data you want to store. A table is defined using the `CREATE TABLE` statement, followed by the table name and a list of column definitions enclosed in parentheses. Each column definition includes the column name and its data type, such as INTEGER, TEXT, or REAL.\n\nFor example, to create a table named `employees` with columns for `id`, `name`, and `salary`, you would write:\n\n```sql\nCREATE TABLE employees (\n  id INTEGER PRIMARY KEY,\n  name TEXT NOT NULL,\n  salary REAL\n);\n```\n\nThis statement creates a table with three columns: `id`, which is an integer and serves as the primary key; `name`, which is a text field and cannot be null; and `salary`, which is a real number. The primary key ensures that each `id` is unique, while the `NOT NULL` constraint on `name` ensures that every employee must have a name."
+          },
+          "sketch1": {
+            "title": "sqlite_master reveals the exact table statement SQLite stored",
+            "bodyMarkdown": "After creating a table, it's important to verify that it has been defined correctly. In SQLite, you can inspect the `sqlite_master` table to see the SQL statement used to create any table. This table contains metadata about all the tables, indexes, and other objects in the database.\n\nTo view the definition of a table, you can run a query like:\n\n```sql\nSELECT sql FROM sqlite_master WHERE type='table' AND name='employees';\n```\n\nThis query retrieves the SQL statement used to create the `employees` table. By examining this output, you can confirm that the table structure matches your expectations. This step is crucial for ensuring data integrity and consistency in your database."
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "topicId": "final-inventory-operations-launch",
+  "ok": false,
+  "issues": [
+    {
+      "code": "SQL_SOLUTION_EXECUTION_FAILED",
+      "category": "execution",
+      "severity": "error",
+      "exerciseId": "ci-final-inventory-operations-launch-3",
+      "message": "Generated SQL solution failed to execute: near \"DEFAULT\": syntax error"
+    },
+    {
+      "code": "SQL_SOLUTION_EXECUTION_FAILED",
+      "category": "execution",
+      "severity": "error",
+      "exerciseId": "ci-final-inventory-operations-launch-4",
+      "message": "Generated SQL solution failed to execute: near \"DEFAULT\": syntax error"
+    },
+    {
+      "code": "SQL_SOLUTION_EXECUTION_FAILED",
+      "category": "execution",
+      "severity": "error",
+      "exerciseId": "ci-final-inventory-operations-launch-5",
+      "message": "Generated SQL solution failed to execute: near \"DEFAULT\": syntax error"
+    },
+    {
+      "code": "SQL_SOLUTION_EXECUTION_FAILED",
+      "category": "execution",
+      "severity": "error",
+      "exerciseId": "ci-final-inventory-operations-launch-6",
+      "message": "Generated SQL solution failed to execute: near \"DEFAULT\": syntax error"
+    },
+    {
+      "code": "SQL_DATASET_CONSISTENCY",
+      "category": "dataset",
+      "severity": "warn",
+      "message": "Exercise ci-final-inventory-operations-launch-1 references table \"sqlite_master\" outside effective dataset \"ddl_blank\""
+    },
+    {
+      "code": "SQL_DATASET_CONSISTENCY",
+      "category": "dataset",
+      "severity": "warn",
+      "message": "Exercise ci-final-inventory-operations-launch-1 references column \"type\" that does not belong to effective dataset \"ddl_blank\""
+    },
+    {
+      "code": "SQL_DATASET_CONSISTENCY",
+      "category": "dataset",
+      "severity": "warn",
+      "message": "Exercise ci-final-inventory-operations-launch-2 references table \"sqlite_master\" outside effective dataset \"ddl_blank\""
+    },
+    {
+      "code": "SQL_DATASET_CONSISTENCY",
+      "category": "dataset",
+      "severity": "warn",
+      "message": "Exercise ci-final-inventory-operations-launch-2 references column \"type\" that does not belong to effective dataset \"ddl_blank\""
+    }
+  ]
+}

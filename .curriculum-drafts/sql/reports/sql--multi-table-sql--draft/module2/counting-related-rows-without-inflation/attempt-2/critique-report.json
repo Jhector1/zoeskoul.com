@@ -1,0 +1,24 @@
+{
+  "topicId": "counting-related-rows-without-inflation",
+  "ok": false,
+  "issues": [
+    {
+      "code": "QUIZ_BANK_TOO_SMALL",
+      "category": "clarity",
+      "severity": "error",
+      "message": "Expected at least 6 non-code quiz exercise(s), but the draft has 5."
+    },
+    {
+      "code": "EXERCISE_POLICY_KIND_UNDER_TARGET",
+      "category": "clarity",
+      "severity": "warn",
+      "message": "Exercise policy targets 2 \"multi_choice\" exercise(s), but the draft has 1."
+    },
+    {
+      "code": "EXERCISE_POLICY_TOTAL_MISMATCH",
+      "category": "clarity",
+      "severity": "warn",
+      "message": "Exercise policy expects 8 total exercise(s), but the draft has 7."
+    }
+  ]
+}

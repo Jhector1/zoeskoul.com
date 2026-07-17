@@ -784,6 +784,230 @@ describe("resolveWorkspaceForExerciseTarget", () => {
     );
   });
 
+  it("rejects a saved SQL workspace whose first starter was copied into every file", () => {
+    const schema = [
+      "-- Provided setup: the products table is already defined.",
+      "CREATE TABLE products (",
+      "  product_id INTEGER PRIMARY KEY,",
+      "  product_name TEXT NOT NULL,",
+      "  price REAL",
+      ");",
+    ].join("\n");
+    const query =
+      "-- Task: verify products through sqlite_master.\n";
+
+    const resolved = resolveWorkspaceForTarget({
+      targetKey: "exercise:collapsed-sql-starter",
+      targetKind: "exercise",
+      language: "sql",
+      manifest: {
+        starterCode: query,
+        workspace: {
+          language: "sql",
+          entryFilePath: "query.sql",
+          starterFiles: [
+            {
+              path: "schema.sql",
+              content: schema,
+            },
+            {
+              path: "query.sql",
+              content: query,
+              isEntry: true,
+            },
+          ],
+        },
+      },
+      workspaceRequested: true,
+      savedCandidates: [
+        {
+          targetKey: "exercise:collapsed-sql-starter",
+          workspace: {
+            version: 2,
+            language: "sql",
+            nodes: [
+              {
+                id: "file:schema.sql",
+                kind: "file",
+                name: "schema.sql",
+                parentId: null,
+                content: schema,
+                createdAt: 0,
+                updatedAt: 0,
+              },
+              {
+                id: "file:query.sql",
+                kind: "file",
+                name: "query.sql",
+                parentId: null,
+                content: schema,
+                createdAt: 0,
+                updatedAt: 0,
+              },
+            ],
+            openTabs: ["file:query.sql", "file:schema.sql"],
+            activeFileId: "file:query.sql",
+            entryFileId: "file:query.sql",
+            stdin: "",
+            expanded: [],
+            leftPct: 26,
+          },
+          code: schema,
+          source: schema,
+          userEdited: true,
+          workspaceOrigin: "saved",
+        },
+      ],
+    });
+
+    expect(resolved.source).toBe("manifest");
+    expect(fileContent(resolved.workspace, "schema.sql")).toBe(schema);
+    expect(fileContent(resolved.workspace, "query.sql")).toBe(query);
+  });
+
+  it("rejects the same collapsed SQL shape from a fresh local draft", () => {
+    const schema =
+      "CREATE TABLE orders (id INTEGER PRIMARY KEY);\n";
+    const query =
+      "-- Task: verify the orders table.\n";
+
+    const resolved = resolveWorkspaceForTarget({
+      targetKey: "exercise:collapsed-sql-local-draft",
+      targetKind: "exercise",
+      language: "sql",
+      manifest: {
+        starterCode: query,
+        workspace: {
+          language: "sql",
+          entryFilePath: "query.sql",
+          starterFiles: [
+            { path: "schema.sql", content: schema },
+            {
+              path: "query.sql",
+              content: query,
+              isEntry: true,
+            },
+          ],
+        },
+      },
+      workspaceRequested: true,
+      localDraft: {
+        targetKey: "exercise:collapsed-sql-local-draft",
+        workspace: {
+          version: 2,
+          language: "sql",
+          nodes: [
+            {
+              id: "file:schema.sql",
+              kind: "file",
+              name: "schema.sql",
+              parentId: null,
+              content: schema,
+              createdAt: 0,
+              updatedAt: 0,
+            },
+            {
+              id: "file:query.sql",
+              kind: "file",
+              name: "query.sql",
+              parentId: null,
+              content: schema,
+              createdAt: 0,
+              updatedAt: 0,
+            },
+          ],
+          openTabs: ["file:query.sql", "file:schema.sql"],
+          activeFileId: "file:query.sql",
+          entryFileId: "file:query.sql",
+          stdin: "",
+          expanded: [],
+          leftPct: 26,
+        },
+        savedAt: Date.now(),
+      },
+    });
+
+    expect(resolved.source).toBe("manifest");
+    expect(fileContent(resolved.workspace, "schema.sql")).toBe(schema);
+    expect(fileContent(resolved.workspace, "query.sql")).toBe(query);
+  });
+
+  it("preserves real learner edits across distinct SQL files", () => {
+    const schema =
+      "CREATE TABLE products (id INTEGER PRIMARY KEY);\n";
+    const query =
+      "-- Task: verify products.\n";
+    const learnerQuery =
+      "SELECT sql FROM sqlite_master WHERE name = 'products';\n";
+
+    const resolved = resolveWorkspaceForTarget({
+      targetKey: "exercise:real-sql-work",
+      targetKind: "exercise",
+      language: "sql",
+      manifest: {
+        starterCode: query,
+        workspace: {
+          language: "sql",
+          entryFilePath: "query.sql",
+          starterFiles: [
+            { path: "schema.sql", content: schema },
+            {
+              path: "query.sql",
+              content: query,
+              isEntry: true,
+            },
+          ],
+        },
+      },
+      workspaceRequested: true,
+      savedCandidates: [
+        {
+          targetKey: "exercise:real-sql-work",
+          workspace: {
+            version: 2,
+            language: "sql",
+            nodes: [
+              {
+                id: "file:schema.sql",
+                kind: "file",
+                name: "schema.sql",
+                parentId: null,
+                content: schema,
+                createdAt: 0,
+                updatedAt: 0,
+              },
+              {
+                id: "file:query.sql",
+                kind: "file",
+                name: "query.sql",
+                parentId: null,
+                content: learnerQuery,
+                createdAt: 0,
+                updatedAt: 0,
+              },
+            ],
+            openTabs: ["file:query.sql", "file:schema.sql"],
+            activeFileId: "file:query.sql",
+            entryFileId: "file:query.sql",
+            stdin: "",
+            expanded: [],
+            leftPct: 26,
+          },
+          code: learnerQuery,
+          source: learnerQuery,
+          userEdited: true,
+          workspaceOrigin: "user",
+        },
+      ],
+    });
+
+    expect(resolved.source).toBe("saved");
+    expect(fileContent(resolved.workspace, "schema.sql")).toBe(schema);
+    expect(fileContent(resolved.workspace, "query.sql")).toBe(
+      learnerQuery,
+    );
+  });
+
   it("rejects saved unresolved i18n alias workspace when manifest has resolved starter code", () => {
     const resolved = resolveWorkspaceForTarget({
       targetKey: "exercise:embedded-tryit-i18n",

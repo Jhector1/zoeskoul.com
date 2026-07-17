@@ -1,0 +1,197 @@
+{
+  "topics": {
+    "sql-data-management": {
+      "sql-data-management-module-1-controlled-updates-deletes": {
+        "deleting-only-confirmed-rows": {
+          "label": "Deleting Only Confirmed Rows",
+          "summary": "Learn to safely delete records by confirming targets with a preview and using precise conditions in DELETE statements.",
+          "cards": {
+            "sketch0": {
+              "title": "Delete by Evidence, Not Guesswork"
+            },
+            "sketch1": {
+              "title": "Prove What Is Gone"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_deleting_only_confirmed_rows_sketch0": {
+              "title": "Remove One Approved Test Row",
+              "prompt": "The audit log confirms that row `id = 4` is an approved test record. In `operations.sql`, delete only that row from `inventory_items`, then run a `SELECT` with the same `id = 4` condition; a correct result returns no rows.\n\n**Files for this exercise:**\n- `operations.sql`: the learner-authored INSERT, UPDATE, or DELETE statements; **edit this file**. It opens first.\n- `query.sql`: the learner-authored preview, inspection, report, or verification SELECT; **edit this file**.\n\n`query.sql` is part of the learner answer when the task asks for a preview, inspection, report, or verification. The hidden database-state check does not replace that required SELECT.\n\nComplete `operations.sql`, and `query.sql`. Do not create extra files or move SQL into a file with a different responsibility.",
+              "hint": "Apply the narrowly scoped change in operations.sql, then write query.sql so the Results tab proves the final state.",
+              "help": {
+                "concept": "Keep the approved data change in `operations.sql` and the evidence in `query.sql`. The exercise supplies the existing table and starting rows so you can focus on the mutation.",
+                "hint_1": "Apply the narrowly scoped change in operations.sql, then write query.sql so the Results tab proves the final state.",
+                "hint_2": "Both the required learner file and query.sql are checked. A hidden state check cannot replace the visible verification query."
+              },
+              "starterCode": "-- Apply the approved data change for \"Remove One Approved Test Row\" below.\n",
+              "solutionCode": "-- Delete the test item with id 4\nDELETE FROM inventory_items\nWHERE id = 4;",
+              "starterFiles": {
+                "operations_sql": {
+                  "content": "-- Apply the approved data change for \"Remove One Approved Test Row\" below.\n"
+                },
+                "query_sql": {
+                  "content": "-- Return the verification result required for \"Remove One Approved Test Row\" below.\n"
+                }
+              },
+              "solutionFiles": {
+                "operations_sql": {
+                  "content": "-- Delete the test item with id 4\nDELETE FROM inventory_items\nWHERE id = 4;"
+                },
+                "query_sql": {
+                  "content": "-- Verify the deletion\nSELECT * FROM inventory_items WHERE id = 4;"
+                }
+              }
+            },
+            "try_deleting_only_confirmed_rows_sketch1": {
+              "title": "Remove Inactive Test Rows",
+              "prompt": "Operations has approved removal of every row that is both inactive and marked as test data. Delete from `inventory_items` only where `status = 'inactive'` and `is_test = 1`. Then select with the same two conditions to prove no matching test rows remain.\n\n**Files for this exercise:**\n- `operations.sql`: the learner-authored INSERT, UPDATE, or DELETE statements; **edit this file**. It opens first.\n- `query.sql`: the learner-authored preview, inspection, report, or verification SELECT; **edit this file**.\n\n`query.sql` is part of the learner answer when the task asks for a preview, inspection, report, or verification. The hidden database-state check does not replace that required SELECT.\n\nComplete `operations.sql`, and `query.sql`. Do not create extra files or move SQL into a file with a different responsibility.",
+              "hint": "Apply the narrowly scoped change in operations.sql, then write query.sql so the Results tab proves the final state.",
+              "help": {
+                "concept": "Keep the approved data change in `operations.sql` and the evidence in `query.sql`. The exercise supplies the existing table and starting rows so you can focus on the mutation.",
+                "hint_1": "Apply the narrowly scoped change in operations.sql, then write query.sql so the Results tab proves the final state.",
+                "hint_2": "Both the required learner file and query.sql are checked. A hidden state check cannot replace the visible verification query."
+              },
+              "starterCode": "-- Apply the approved data change for \"Remove Inactive Test Rows\" below.\n",
+              "solutionCode": "-- Delete inactive test items\nDELETE FROM inventory_items\nWHERE status = 'inactive' AND is_test = 1;",
+              "starterFiles": {
+                "operations_sql": {
+                  "content": "-- Apply the approved data change for \"Remove Inactive Test Rows\" below.\n"
+                },
+                "query_sql": {
+                  "content": "-- Return the verification result required for \"Remove Inactive Test Rows\" below.\n"
+                }
+              },
+              "solutionFiles": {
+                "operations_sql": {
+                  "content": "-- Delete inactive test items\nDELETE FROM inventory_items\nWHERE status = 'inactive' AND is_test = 1;"
+                },
+                "query_sql": {
+                  "content": "-- Verify the deletion\nSELECT * FROM inventory_items WHERE status = 'inactive' AND is_test = 1;"
+                }
+              }
+            }
+          },
+          "practice": {
+            "single-choice-1": {
+              "title": "Purpose of WHERE in DELETE",
+              "prompt": "What is the purpose of using a WHERE clause in a DELETE statement?",
+              "hint": "Think about how WHERE affects the scope of deletion.",
+              "help": {
+                "concept": "The WHERE clause limits the rows affected by the DELETE statement.",
+                "hint_1": "Without WHERE, DELETE removes all rows.",
+                "hint_2": "WHERE specifies which rows to delete."
+              },
+              "options": {
+                "a": "To specify which rows to delete",
+                "b": "To sort the rows before deletion",
+                "c": "To update the rows before deletion",
+                "d": "To insert new rows before deletion"
+              }
+            },
+            "single-choice-2": {
+              "title": "Effect of No WHERE Clause",
+              "prompt": "What happens if you execute a DELETE statement without a WHERE clause?",
+              "hint": "Consider the scope of deletion without WHERE.",
+              "help": {
+                "concept": "A DELETE without WHERE affects all rows in the table.",
+                "hint_1": "No WHERE means no condition to limit deletion.",
+                "hint_2": "All rows will be deleted."
+              },
+              "options": {
+                "a": "All rows in the table are deleted",
+                "b": "Only the first row is deleted",
+                "c": "No rows are deleted",
+                "d": "Only rows with NULL values are deleted"
+              }
+            },
+            "multi-choice-1": {
+              "title": "Verifying Deletions",
+              "prompt": "Which steps are important to verify a deletion operation? Select all that apply.",
+              "hint": "Think about how you confirm the deletion was successful.",
+              "help": {
+                "concept": "Verification involves checking the affected rows and ensuring no unintended deletions.",
+                "hint_1": "Check the table state after deletion.",
+                "hint_2": "Ensure only intended rows are deleted."
+              },
+              "options": {
+                "a": "Run a SELECT query to check the affected rows",
+                "b": "Check for unintended deletions",
+                "c": "Run the DELETE statement again",
+                "d": "Ignore verification if the DELETE was successful"
+              }
+            },
+            "drag-reorder-1": {
+              "title": "Steps for Safe Deletion",
+              "prompt": "Arrange the steps for safely deleting records in the correct order.",
+              "hint": "Consider the sequence from preview to verification.",
+              "help": {
+                "concept": "Safe deletion involves previewing, executing, and verifying.",
+                "hint_1": "Start with previewing the target rows.",
+                "hint_2": "End with verifying the deletion."
+              },
+              "tokens": {
+                "t1": "Preview the target rows",
+                "t2": "Execute the DELETE statement",
+                "t3": "Verify the deletion"
+              }
+            },
+            "fill-blank-choice-1": {
+              "title": "DELETE Statement Syntax",
+              "prompt": "Complete the DELETE statement: DELETE FROM inventory_items [blank1] id = 3;",
+              "hint": "Think about what limits the deletion to specific rows.",
+              "help": {
+                "concept": "The the missing term clause specifies which rows to delete.",
+                "hint_1": "The the missing term clause follows the table name.",
+                "hint_2": "the missing term is used to specify conditions."
+              },
+              "template": "DELETE FROM inventory_items [blank1] id = 3;",
+              "choices": [
+                "WHERE",
+                "ORDER BY",
+                "GROUP BY",
+                "HAVING"
+              ]
+            },
+            "fill-blank-choice-2": {
+              "title": "Purpose of Verification",
+              "prompt": "Verification ensures that [blank1] records were deleted.",
+              "hint": "Think about what verification confirms.",
+              "help": {
+                "concept": "Verification confirms the correct records were deleted.",
+                "hint_1": "Verification checks the intended outcome.",
+                "hint_2": "It ensures only the intended records are affected."
+              },
+              "template": "Verification ensures that [blank1] records were deleted.",
+              "choices": [
+                "only intended",
+                "all",
+                "no",
+                "random"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql-data-management": {
+      "sql-data-management-module-1-controlled-updates-deletes": {
+        "deleting-only-confirmed-rows": {
+          "sketch1": {
+            "title": "A narrow WHERE clause turns deletion into a reviewable change",
+            "bodyMarkdown": "Deleting records in a database is a powerful operation that must be handled with care. The `DELETE FROM` statement is used to remove rows from a table, but without a `WHERE` clause, it will delete all rows, which is often not the desired outcome. To prevent accidental data loss, always use a `WHERE` clause to specify which rows should be deleted.\n\nFor example, consider a table `inventory_items` where we want to delete a test item:\n\n```sql\nDELETE FROM inventory_items\nWHERE id = 2;\n```\n\nThis command deletes the row with `id` 2, which is a specific test item. The `WHERE` clause ensures that only this row is affected, preventing unintended deletions.\n\n**Why it matters:** Using a `WHERE` clause with `DELETE` helps maintain data integrity by ensuring only the intended records are removed. This practice is crucial in environments where data accuracy is paramount."
+          },
+          "sketch2": {
+            "title": "A post-delete SELECT confirms the approved target disappeared",
+            "bodyMarkdown": "After performing a deletion, it's important to verify that only the intended records were removed. This can be done by running a `SELECT` query to check the current state of the table.\n\nFor instance, after deleting a test item from `inventory_items`, you can verify the deletion with:\n\n```sql\nSELECT * FROM inventory_items WHERE id = 2;\n```\n\nIf the deletion was successful, this query should return no rows, confirming that the item with `id` 2 has been removed.\n\n**Why it matters:** Verification ensures that the deletion operation was executed correctly and that no unintended data was affected. This step is essential for maintaining trust in the database's accuracy and reliability."
+          }
+        }
+      }
+    }
+  }
+}

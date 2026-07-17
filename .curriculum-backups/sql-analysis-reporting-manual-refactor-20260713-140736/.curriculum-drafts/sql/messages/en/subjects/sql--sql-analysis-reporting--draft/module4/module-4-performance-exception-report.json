@@ -1,0 +1,178 @@
+{
+  "topics": {
+    "sql--sql-analysis-reporting--draft": {
+      "sql-analysis-reporting-module-4-having-and-conditional-reporting": {
+        "module-4-performance-exception-report": {
+          "label": "Module 4: Performance Exception Report",
+          "summary": "Build a grouped exception report with row filtering, HAVING thresholds, conditional KPIs, and performance labels.",
+          "cards": {
+            "sketch0": {
+              "title": "Introduction to Performance Exception Reporting"
+            },
+            "project": {
+              "title": "Performance Exception Report Project"
+            }
+          },
+          "projectSteps": {
+            "try_module_4_performance_exception_report_sketch0": {
+              "title": "Filter Rows and Groups"
+            },
+            "try_module_4_performance_exception_report_sketch1": {
+              "title": "Conditional Aggregation with CASE"
+            },
+            "try_module_4_performance_exception_report_sketch2": {
+              "title": "Label Performance with CASE"
+            },
+            "try_module_4_performance_exception_report_sketch3": {
+              "title": "Calculate Total Sales with Discounts"
+            },
+            "try_module_4_performance_exception_report_sketch4": {
+              "title": "Identify Underperforming Products"
+            },
+            "try_module_4_performance_exception_report_sketch5": {
+              "title": "Summarize Sales by Category and Status"
+            }
+          },
+          "moduleProject": {
+            "steps": {
+              "try_module_4_performance_exception_report_sketch0": {
+                "title": "Filter Rows and Groups",
+                "prompt": "Start the module project. In step 1 of 6, Write a query to filter the `sales_reporting` table to show only completed orders in the 'North' region. Then, group by `category` and show only those groups with a total quantity greater than 10.",
+                "hint": "This is the first project step. Build a clean starting version, then run it before moving on.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "This is the first project step. Build a clean starting version, then run it before moving on.",
+                  "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+                },
+                "starterCode": "-- Write your SQL answer below",
+                "solutionCode": "SELECT category, SUM(quantity) AS total_quantity\nFROM sales_reporting\nWHERE order_status = 'Completed' AND region = 'North'\nGROUP BY category\nHAVING total_quantity > 10;"
+              },
+              "try_module_4_performance_exception_report_sketch1": {
+                "title": "Conditional Aggregation with CASE",
+                "prompt": "Continue the same module project from the previous working step. In step 2 of 6, Create a query that counts the number of completed and pending orders for each `sales_rep`. Use a CASE statement inside the COUNT function to differentiate between the two statuses.",
+                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                  "hint_2": "Run the previous working code first, then make only the focused change for this step."
+                },
+                "starterCode": "SELECT category, SUM(quantity) AS total_quantity\nFROM sales_reporting\nWHERE order_status = 'Completed' AND region = 'North'\nGROUP BY category\nHAVING total_quantity > 10;\n-- Project step 2: Conditional Aggregation with CASE\n-- Keep the working code above from the previous step.\n-- Next, Create a query that counts the number of completed and pending orders for each `sales_rep`\n-- Add only the focused change for this step inside the existing work.\n",
+                "solutionCode": "SELECT sales_rep,\n  COUNT(CASE WHEN order_status = 'Completed' THEN 1 END) AS completed_orders,\n  COUNT(CASE WHEN order_status = 'Pending' THEN 1 END) AS pending_orders\nFROM sales_reporting\nGROUP BY sales_rep;\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "SELECT category, SUM(quantity) AS total_quantity\nFROM sales_reporting\nWHERE order_status = 'Completed' AND region = 'North'\nGROUP BY category\nHAVING total_quantity > 10;\n-- Project step 2: Conditional Aggregation with CASE\n-- Keep the working code above from the previous step.\n-- Next, Create a query that counts the number of completed and pending orders for each `sales_rep`\n-- Add only the focused change for this step inside the existing work.\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_py": {
+                    "content": "SELECT sales_rep,\n  COUNT(CASE WHEN order_status = 'Completed' THEN 1 END) AS completed_orders,\n  COUNT(CASE WHEN order_status = 'Pending' THEN 1 END) AS pending_orders\nFROM sales_reporting\nGROUP BY sales_rep;\n"
+                  }
+                }
+              },
+              "try_module_4_performance_exception_report_sketch2": {
+                "title": "Label Performance with CASE",
+                "prompt": "Continue the same module project from the previous working step. In step 3 of 6, Write a query to label each `category` as 'High Performance' if the average `customer_rating` is above 4.5, otherwise label it as 'Needs Improvement'.",
+                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                  "hint_2": "Run the previous working code first, then make only the focused change for this step."
+                },
+                "starterCode": "SELECT sales_rep,\n  COUNT(CASE WHEN order_status = 'Completed' THEN 1 END) AS completed_orders,\n  COUNT(CASE WHEN order_status = 'Pending' THEN 1 END) AS pending_orders\nFROM sales_reporting\nGROUP BY sales_rep;\n-- Project step 3: Label Performance with CASE\n-- Keep the working code above from the previous step.\n-- Next, Write a query to label each `category` as 'High Performance' if the average `customer_rating` is above 4.5, otherwise label it as 'Needs Improvement'\n-- Add only the focused change for this step inside the existing work.\n",
+                "solutionCode": "SELECT category,\n  CASE\n    WHEN AVG(customer_rating) > 4.5 THEN 'High Performance'\n    ELSE 'Needs Improvement'\n  END AS performance_label\nFROM sales_reporting\nGROUP BY category;\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "SELECT sales_rep,\n  COUNT(CASE WHEN order_status = 'Completed' THEN 1 END) AS completed_orders,\n  COUNT(CASE WHEN order_status = 'Pending' THEN 1 END) AS pending_orders\nFROM sales_reporting\nGROUP BY sales_rep;\n-- Project step 3: Label Performance with CASE\n-- Keep the working code above from the previous step.\n-- Next, Write a query to label each `category` as 'High Performance' if the average `customer_rating` is above 4.5, otherwise label it as 'Needs Improvement'\n-- Add only the focused change for this step inside the existing work.\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_py": {
+                    "content": "SELECT category,\n  CASE\n    WHEN AVG(customer_rating) > 4.5 THEN 'High Performance'\n    ELSE 'Needs Improvement'\n  END AS performance_label\nFROM sales_reporting\nGROUP BY category;\n"
+                  }
+                }
+              },
+              "try_module_4_performance_exception_report_sketch3": {
+                "title": "Calculate Total Sales with Discounts",
+                "prompt": "Continue the same module project from the previous working step. In step 4 of 6, Create a query to calculate the total sales for each `region`, considering discounts. Use the formula: `quantity * unit_price * (1 - discount_pct/100)` for each sale.",
+                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                  "hint_2": "Run the previous working code first, then make only the focused change for this step."
+                },
+                "starterCode": "SELECT category,\n  CASE\n    WHEN AVG(customer_rating) > 4.5 THEN 'High Performance'\n    ELSE 'Needs Improvement'\n  END AS performance_label\nFROM sales_reporting\nGROUP BY category;\n-- Project step 4: Calculate Total Sales with Discounts\n-- Keep the working code above from the previous step.\n-- Next, Create a query to calculate the total sales for each `region`, considering discounts\n-- Add only the focused change for this step inside the existing work.\n",
+                "solutionCode": "SELECT region,\n  SUM(quantity * unit_price * (1 - COALESCE(discount_pct, 0)/100)) AS total_sales\nFROM sales_reporting\nGROUP BY region;\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "SELECT category,\n  CASE\n    WHEN AVG(customer_rating) > 4.5 THEN 'High Performance'\n    ELSE 'Needs Improvement'\n  END AS performance_label\nFROM sales_reporting\nGROUP BY category;\n-- Project step 4: Calculate Total Sales with Discounts\n-- Keep the working code above from the previous step.\n-- Next, Create a query to calculate the total sales for each `region`, considering discounts\n-- Add only the focused change for this step inside the existing work.\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_py": {
+                    "content": "SELECT region,\n  SUM(quantity * unit_price * (1 - COALESCE(discount_pct, 0)/100)) AS total_sales\nFROM sales_reporting\nGROUP BY region;\n"
+                  }
+                }
+              },
+              "try_module_4_performance_exception_report_sketch4": {
+                "title": "Identify Underperforming Products",
+                "prompt": "Continue the same module project from the previous working step. In step 5 of 6, Write a query to identify products with an average `customer_rating` below 4.0. List the `product_name` and the average rating.",
+                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                  "hint_2": "Run the previous working code first, then make only the focused change for this step."
+                },
+                "starterCode": "SELECT region,\n  SUM(quantity * unit_price * (1 - COALESCE(discount_pct, 0)/100)) AS total_sales\nFROM sales_reporting\nGROUP BY region;\n-- Project step 5: Identify Underperforming Products\n-- Keep the working code above from the previous step.\n-- Next, Write a query to identify products with an average `customer_rating` below 4.0\n-- Add only the focused change for this step inside the existing work.\n",
+                "solutionCode": "SELECT product_name, AVG(customer_rating) AS avg_rating\nFROM sales_reporting\nGROUP BY product_name\nHAVING avg_rating < 4.0;\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "SELECT region,\n  SUM(quantity * unit_price * (1 - COALESCE(discount_pct, 0)/100)) AS total_sales\nFROM sales_reporting\nGROUP BY region;\n-- Project step 5: Identify Underperforming Products\n-- Keep the working code above from the previous step.\n-- Next, Write a query to identify products with an average `customer_rating` below 4.0\n-- Add only the focused change for this step inside the existing work.\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_py": {
+                    "content": "SELECT product_name, AVG(customer_rating) AS avg_rating\nFROM sales_reporting\nGROUP BY product_name\nHAVING avg_rating < 4.0;\n"
+                  }
+                }
+              },
+              "try_module_4_performance_exception_report_sketch5": {
+                "title": "Summarize Sales by Category and Status",
+                "prompt": "Continue the same module project from the previous working step. In step 6 of 6, Create a query to summarize total sales by `category` and `order_status`. Include only categories with total sales over $500.",
+                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                  "hint_2": "Run the previous working code first, then make only the focused change for this step."
+                },
+                "starterCode": "SELECT product_name, AVG(customer_rating) AS avg_rating\nFROM sales_reporting\nGROUP BY product_name\nHAVING avg_rating < 4.0;\n-- Project step 6: Summarize Sales by Category and Status\n-- Keep the working code above from the previous step.\n-- Next, Create a query to summarize total sales by `category` and `order_status`\n-- Add only the focused change for this step inside the existing work.\n",
+                "solutionCode": "SELECT category, order_status,\n  SUM(quantity * unit_price) AS total_sales\nFROM sales_reporting\nGROUP BY category, order_status\nHAVING total_sales > 500;\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "SELECT product_name, AVG(customer_rating) AS avg_rating\nFROM sales_reporting\nGROUP BY product_name\nHAVING avg_rating < 4.0;\n-- Project step 6: Summarize Sales by Category and Status\n-- Keep the working code above from the previous step.\n-- Next, Create a query to summarize total sales by `category` and `order_status`\n-- Add only the focused change for this step inside the existing work.\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_py": {
+                    "content": "SELECT category, order_status,\n  SUM(quantity * unit_price) AS total_sales\nFROM sales_reporting\nGROUP BY category, order_status\nHAVING total_sales > 500;\n"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql--sql-analysis-reporting--draft": {
+      "sql-analysis-reporting-module-4-having-and-conditional-reporting": {
+        "module-4-performance-exception-report": {
+          "module-4-performance-exception-report-sketch0": {
+            "title": "Introduction to Performance Exception Reporting",
+            "bodyMarkdown": "In this module, you'll learn how to create a performance exception report using SQL. This involves filtering data at both the row and group levels, applying conditional logic to aggregate functions, and labeling performance based on aggregate results. We'll use the `sales_reporting` table from the `sales_kpi` dataset to demonstrate these concepts."
+          }
+        }
+      }
+    }
+  }
+}

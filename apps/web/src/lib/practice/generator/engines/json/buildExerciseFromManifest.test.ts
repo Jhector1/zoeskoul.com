@@ -678,6 +678,28 @@ describe("buildExerciseFromManifest runtime IDE mapping", () => {
     ]);
   });
 
+  it("preserves authored Tools policy on a code-input result", () => {
+    const result = buildExerciseFromManifest(
+      makeCodeInputDef({
+        tools: {
+          defaultVisible: false,
+          allowOpen: true,
+          defaultSurface: "results",
+        },
+      }),
+      makeArgs(),
+    );
+
+    expect(result.exercise).toMatchObject({
+      kind: "code_input",
+      tools: {
+        defaultVisible: false,
+        allowOpen: true,
+        defaultSurface: "results",
+      },
+    });
+  });
+
   it("keeps source checks on fixed-test exercises for anti-cheat validation", () => {
     const sourceChecks = [
       {

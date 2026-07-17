@@ -2954,6 +2954,61 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
             const nextWorkspaceError = Object.prototype.hasOwnProperty.call(effectivePatch, "workspaceError")
                 ? String((effectivePatch as any).workspaceError ?? "")
                 : existingWorkspaceError;
+            const hasPatchField = (field: string) =>
+                Object.prototype.hasOwnProperty.call(effectivePatch, field);
+            const existingRuntimeConfigKey = stableContentKey({
+                ideConfig: existing?.ideConfig ?? null,
+                fixedSqlDialect: existing?.fixedSqlDialect ?? null,
+                sqlDialect: existing?.sqlDialect ?? null,
+                sqlDatasetId: existing?.sqlDatasetId ?? null,
+                sqlDatasetResolutionSource:
+                    existing?.sqlDatasetResolutionSource ?? null,
+                sqlDatasetResolutionError:
+                    existing?.sqlDatasetResolutionError ?? null,
+                sqlSchemaSql: existing?.sqlSchemaSql ?? null,
+                sqlSeedSql: existing?.sqlSeedSql ?? null,
+                sqlInitialTableSnapshots:
+                    existing?.sqlInitialTableSnapshots ?? null,
+                runtime: existing?.runtime ?? null,
+            });
+            const nextRuntimeConfigKey = stableContentKey({
+                ideConfig: hasPatchField("ideConfig")
+                    ? effectivePatch.ideConfig
+                    : existing?.ideConfig ?? null,
+                fixedSqlDialect: hasPatchField("fixedSqlDialect")
+                    ? effectivePatch.fixedSqlDialect
+                    : existing?.fixedSqlDialect ?? null,
+                sqlDialect: hasPatchField("sqlDialect")
+                    ? effectivePatch.sqlDialect
+                    : existing?.sqlDialect ?? null,
+                sqlDatasetId: hasPatchField("sqlDatasetId")
+                    ? effectivePatch.sqlDatasetId
+                    : existing?.sqlDatasetId ?? null,
+                sqlDatasetResolutionSource: hasPatchField(
+                    "sqlDatasetResolutionSource",
+                )
+                    ? effectivePatch.sqlDatasetResolutionSource
+                    : existing?.sqlDatasetResolutionSource ?? null,
+                sqlDatasetResolutionError: hasPatchField(
+                    "sqlDatasetResolutionError",
+                )
+                    ? effectivePatch.sqlDatasetResolutionError
+                    : existing?.sqlDatasetResolutionError ?? null,
+                sqlSchemaSql: hasPatchField("sqlSchemaSql")
+                    ? effectivePatch.sqlSchemaSql
+                    : existing?.sqlSchemaSql ?? null,
+                sqlSeedSql: hasPatchField("sqlSeedSql")
+                    ? effectivePatch.sqlSeedSql
+                    : existing?.sqlSeedSql ?? null,
+                sqlInitialTableSnapshots: hasPatchField(
+                    "sqlInitialTableSnapshots",
+                )
+                    ? effectivePatch.sqlInitialTableSnapshots
+                    : existing?.sqlInitialTableSnapshots ?? null,
+                runtime: hasPatchField("runtime")
+                    ? effectivePatch.runtime
+                    : existing?.runtime ?? null,
+            });
 
             const noMeaningfulChange = Boolean(
                 existing &&
@@ -2964,6 +3019,7 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
                 existingLanguage === nextLanguageComparable &&
                 existingWorkspaceStatus === nextWorkspaceStatus &&
                 existingWorkspaceError === nextWorkspaceError &&
+                existingRuntimeConfigKey === nextRuntimeConfigKey &&
                 existing.workspaceOrigin === nextWorkspaceOrigin &&
                 Boolean(existing.userEdited) === Boolean(nextUserEdited) &&
                 String(existing.starterHash ?? "") === String(nextStarterHash ?? ""),
@@ -2985,6 +3041,8 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
                 nextWorkspaceStatus,
                 existingWorkspaceError,
                 nextWorkspaceError,
+                existingRuntimeConfigKey,
+                nextRuntimeConfigKey,
                 noop: noMeaningfulChange,
                 patchKeys: Object.keys(effectivePatch ?? {}),
             });

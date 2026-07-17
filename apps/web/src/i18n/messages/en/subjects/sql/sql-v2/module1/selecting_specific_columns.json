@@ -3,34 +3,17 @@
     "sql-v2": {
       "sql-v2-1": {
         "selecting_specific_columns": {
-          "label": "Selecting Specific Columns",
-          "summary": "Learn how to use SELECT to return only the columns you need from the products table.",
+          "label": "Selecting All or Specific Columns",
+          "summary": "Choose between SELECT * and an explicit column list based on the purpose of the result.",
           "cards": {
             "sketch0": {
-              "title": "Pick only the columns you want"
+              "title": "When SELECT * Is Useful"
             },
             "sketch1": {
-              "title": "The result follows the order you write"
-            },
-            "sketch2": {
-              "title": "Use commas between column names"
+              "title": "Why Explicit Columns Make Better Reports"
             },
             "quiz": {
-              "title": "Quiz"
-            },
-            "project": {
-              "title": "Starter query sheet for specific columns"
-            }
-          },
-          "projectSteps": {
-            "ci_select_name_price": {
-              "title": "Query product names and prices"
-            },
-            "ci_select_id_name_stock": {
-              "title": "Show id, name, and stock"
-            },
-            "ci_select_category_created_at": {
-              "title": "Return category and created date"
+              "title": "Check Your Understanding"
             }
           },
           "quiz": {
@@ -84,11 +67,11 @@
             "mc_columns_in_products_table": {
               "title": "Real columns in the table",
               "prompt": "Which of these are actual columns in the `products` table? Choose all that apply.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Match each choice to the command, clause, or constraint described in the question.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "concept": "Use the SQL behavior described in the lesson to separate the valid choice from statements about a different command, clause, or constraint.",
+                "hint_1": "Identify the job the SQL must perform before comparing the choices.",
+                "hint_2": "Eliminate choices that belong to a different SQL concept."
               },
               "options": {
                 "a": "name",
@@ -117,11 +100,11 @@
             "dr_build_three_column_query": {
               "title": "Order the parts of the query",
               "prompt": "Arrange the tokens to make a query that returns `id`, `name`, and `stock` from `products`.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Match each choice to the command, clause, or constraint described in the question.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Think about which part must come first.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "concept": "Use the SQL behavior described in the lesson to separate the valid choice from statements about a different command, clause, or constraint.",
+                "hint_1": "Identify the job the SQL must perform before comparing the choices.",
+                "hint_2": "Eliminate choices that belong to a different SQL concept."
               },
               "tokens": {
                 "t1": "SELECT",
@@ -200,19 +183,19 @@
               "starterCode": "-- Return only the category and created_at columns from the products table.\nSELECT category\nFROM products;"
             },
             "try-selecting_specific_columns-sketch0": {
-              "title": "Query name and price from products",
-              "prompt": "Scenario: A store manager needs a clear product-catalog query before sharing results with the team. Write a query that returns `name`, `price` from the `products` table. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Inspect Every Product Column",
+              "prompt": "You have just inherited the product catalog and need a full-table inspection before working with it. Show the complete `products` dataset, including every available column.",
+              "hint": "Use the all-columns wildcard after SELECT.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the selected columns and table name in the SQL editor.",
-                "hint_2": "Run the query and compare the result table with the expected result."
+                "concept": "SELECT * is useful when you intentionally need to inspect every available column.",
+                "hint_1": "Use the all-columns wildcard after SELECT.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
               },
-              "starterCode": "-- Return name, price from the products table.\nSELECT\nFROM products;"
+              "starterCode": "-- Return every column from products\nSELECT\nFROM products;"
             },
             "try-selecting_specific_columns-sketch1": {
               "title": "Query id and name from products",
-              "prompt": "Scenario: A store manager needs a clear product-catalog query before sharing results with the team. Write a query that returns `id`, `name`, `stock` from the `products` table. Write the query in the SQL editor, click Run query, and check the results table.",
+              "prompt": "Build a product-catalog query that returns `id`, `name`, `stock` from the `products` table. Run it and compare the result with the expected table.",
               "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
               "help": {
                 "concept": "This SQL exercise checks whether your query returns the requested result.",
@@ -222,30 +205,38 @@
               "starterCode": "-- Return id, name, stock from the products table.\nSELECT\n  id\nFROM products;"
             },
             "try-selecting_specific_columns-sketch2": {
-              "title": "Query category and created_at from products",
-              "prompt": "Scenario: A store manager needs a clear product-catalog query before sharing results with the team. Write a query that returns `category`, `created_at` from the `products` table. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Build a Focused Product View",
+              "prompt": "Audit when product categories were added by building a focused view with only `category` and `created_at` from `products`, in that order.",
+              "hint": "Name only the two requested columns instead of using *.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the selected columns and table name in the SQL editor.",
-                "hint_2": "Run the query and compare the result table with the expected result."
+                "concept": "Explicit column lists keep a result focused and make its column order intentional.",
+                "hint_1": "Name only the two requested columns instead of using *.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
               },
-              "starterCode": "-- Return category, created_at from the products table.\nSELECT category\nFROM products;"
+              "starterCode": "-- Return only category and created_at\nSELECT\nFROM products;"
             }
           },
           "tryIt": {
             "allowReveal": true,
-            "try_selecting_specific_columns_sketch0": {
-              "title": "Query name and price from products",
-              "prompt": "Scenario: A store manager needs a clear product-catalog query before sharing results with the team. Write a query that returns `name`, `price` from the `products` table. Write the query in the SQL editor, click Run query, and check the results table."
-            },
-            "try_selecting_specific_columns_sketch1": {
-              "title": "Query id and name from products",
-              "prompt": "Scenario: A store manager needs a clear product-catalog query before sharing results with the team. Write a query that returns `id`, `name`, `stock` from the `products` table. Write the query in the SQL editor, click Run query, and check the results table."
-            },
             "try_selecting_specific_columns_sketch2": {
-              "title": "Query category and created_at from products",
-              "prompt": "Scenario: A store manager needs a clear product-catalog query before sharing results with the team. Write a query that returns `category`, `created_at` from the `products` table. Write the query in the SQL editor, click Run query, and check the results table."
+              "title": "Build a Focused Product View",
+              "prompt": "Audit when product categories were added by building a focused view with only `category` and `created_at` from `products`, in that order.",
+              "hint": "Name only the two requested columns instead of using *.",
+              "help": {
+                "concept": "Explicit column lists keep a result focused and make its column order intentional.",
+                "hint_1": "Name only the two requested columns instead of using *.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+              }
+            },
+            "try_selecting_specific_columns_sketch0": {
+              "title": "Inspect Every Product Column",
+              "prompt": "You have just inherited the product catalog and need a full-table inspection before working with it. Show the complete `products` dataset, including every available column.",
+              "hint": "Use the all-columns wildcard after SELECT.",
+              "help": {
+                "concept": "SELECT * is useful when you intentionally need to inspect every available column.",
+                "hint_1": "Use the all-columns wildcard after SELECT.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+              }
             }
           }
         }
@@ -256,17 +247,13 @@
     "sql-v2": {
       "sql-v2-1": {
         "selecting_specific_columns": {
-          "sketch_select_named_columns": {
-            "title": "Pick only the columns you want",
-            "bodyMarkdown": "When you write a SQL query, you do not have to return every column in a table. You can list the exact columns you want after `SELECT`.\n\nIn this lesson, the table is `products`, and it has these columns:\n- `id`\n- `name`\n- `category`\n- `price`\n- `stock`\n- `created_at`\n\nHere is a simple example:\n\n```sql\nSELECT name, price\nFROM products;\n```\n\nThis query returns only the `name` and `price` columns from every row in `products`.\n\nStep by step:\n1. `SELECT name, price` tells SQL which columns to show.\n2. `FROM products` tells SQL which table to read.\n3. The results table will have 2 columns, not all 6.\n\nFor example, one row in the results could look like:\n- `Sketchbook | 12.99`\n\nThat means SQL read the full row, but displayed only the columns you asked for."
+          "select_all_columns": {
+            "title": "When SELECT * Is Useful",
+            "bodyMarkdown": "The asterisk in `SELECT *` means “return every column.” It is useful when you are first exploring an unfamiliar table and want to see its full shape.\n\n```sql\nSELECT *\nFROM products;\n```\n\nThis query is quick, but the result may contain more information than the task needs. If the table later gains new columns, `SELECT *` will return those too. That can make a saved report change unexpectedly.\n\nUse `SELECT *` for exploration, quick checks, and very small tables. For a report or exercise with a clear requirement, prefer an explicit column list."
           },
-          "sketch_column_order_matters": {
-            "title": "The result follows the order you write",
-            "bodyMarkdown": "The order of columns in your `SELECT` list becomes the order of columns in the results table.\n\nCompare these two queries:\n\n```sql\nSELECT name, category\nFROM products;\n```\n\n```sql\nSELECT category, name\nFROM products;\n```\n\nBoth queries use the same table and the same two columns, but the results table will show them in a different order.\n\nWorked example:\n- If a row is `Notebook` in the `Stationery` category,\n- the first query shows `Notebook | Stationery`\n- the second query shows `Stationery | Notebook`\n\nThis is useful when you want the most important column to appear first in the results table."
-          },
-          "sketch_commas_and_column_names": {
-            "title": "Use commas between column names",
-            "bodyMarkdown": "To select more than one column, separate the column names with commas.\n\nCorrect example:\n\n```sql\nSELECT id, name, stock\nFROM products;\n```\n\nLine by line:\n1. `SELECT id, name, stock` asks for three columns.\n2. Each column name is separated by a comma.\n3. `FROM products` tells SQL where those columns come from.\n\nIf you forget a comma, SQL will not understand the query correctly.\n\nUsing the sample data, one result row from this query could be:\n- `4 | Notebook | 50`\n\nThat row shows the product id, product name, and stock count."
+          "select_explicit_columns": {
+            "title": "Why Explicit Columns Make Better Reports",
+            "bodyMarkdown": "An explicit column list makes the query’s purpose visible and keeps the result stable.\n\n```sql\nSELECT\n    id,\n    name,\n    price\nFROM products;\n```\n\nThe result contains exactly three columns, in exactly that order. The order after `SELECT` is also the left-to-right order in the results table.\n\nBefore writing the query, ask what the reader actually needs. A pricing view may need `name` and `price`; an inventory view may need `name` and `stock`. Choosing columns is part of designing the report, not merely SQL syntax."
           }
         }
       }

@@ -162,86 +162,31 @@
                 "'M'"
               ]
             },
-            "ci_search_contains_a": {
-              "title": "Query names containing a letter",
-              "prompt": "Write a query that returns `id` and `full_name` from `customers` for rows where `full_name` contains the letter `a`. Use `LIKE`. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Return id and full_name from customers for rows where full_name contains the letter a. Use LIKE.\nSELECT \nFROM customers\nWHERE ;"
-            },
-            "ci_search_starts_o": {
-              "title": "Query names starting with O",
-              "prompt": "Write a query that returns `full_name` and `status` for customers whose `full_name` starts with `O`. Use `LIKE`. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Return full_name and status for customers whose full_name starts with O. Use LIKE.\nSELECT full_name, status\nFROM customers\nWHERE full_name LIKE ;"
-            },
-            "ci_search_active_e": {
-              "title": "Search names and keep only active rows",
-              "prompt": "Write a query that returns `full_name`, `city`, and `status` for customers whose `full_name` contains the letter `e` and whose `status` is `active`. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Return full_name, city, and status for customers whose full_name contains the letter e and whose status is active.\nSELECT full_name, city, status\nFROM customers\nWHERE full_name LIKE \n  AND ;"
-            },
-            "try-search_names-sketch0": {
-              "title": "Query names containing a letter",
-              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that returns `id` and `full_name` from `customers` for rows where `full_name` contains the letter `a`. Use `LIKE`. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Return id and full_name from customers for rows where full_name contains the letter a.\nSELECT \nFROM customers\nWHERE ;"
-            },
-            "try-search_names-sketch1": {
-              "title": "Query names starting with O",
-              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that returns `full_name` and `status` for customers whose `full_name` starts with `O`. Use `LIKE`. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Return full_name and status for customers whose full_name starts with O.\nSELECT full_name, status\nFROM customers\nWHERE full_name LIKE ;"
-            },
             "try-search_names-sketch2": {
-              "title": "Search names and keep only active rows",
-              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that returns `full_name`, `city`, and `status` for customers whose `full_name` contains the letter `e` and whose `status` is `active`. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Find Active Names Containing E",
+              "prompt": "Return `full_name`, `city`, and `status` for active customers whose name contains the letter e. Return `full_name, city, status` from `customers` in that column order. Keep only rows where `full_name LIKE '%e%' AND status = 'active'`.",
+              "hint": "Add status = 'active' with AND.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "Return `full_name, city, status` from `customers` in that column order. Keep only rows where `full_name LIKE '%e%' AND status = 'active'`."
               },
-              "starterCode": "-- Return full_name, city, and status for customers whose full_name contains the letter e and whose status is active.\nSELECT full_name, city, status\nFROM customers\nWHERE full_name LIKE \n  AND ;"
+              "starterCode": "SELECT full_name, city, status\nFROM customers\nWHERE full_name LIKE '%e%';"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_search_names_sketch0": {
               "title": "Query names containing a letter",
-              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that returns `id` and `full_name` from `customers` for rows where `full_name` contains the letter `a`. Use `LIKE`. Write the query in the SQL editor, click Run query, and check the results table."
+              "prompt": "Create a customer-cleanup query that returns `id` and `full_name` from `customers` for rows where `full_name` contains the letter `a`. Use `LIKE`. Run it and compare the result with the expected table."
             },
             "try_search_names_sketch1": {
               "title": "Query names starting with O",
-              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that returns `full_name` and `status` for customers whose `full_name` starts with `O`. Use `LIKE`. Write the query in the SQL editor, click Run query, and check the results table."
+              "prompt": "Create a customer-cleanup query that returns `full_name` and `status` for customers whose `full_name` starts with `O`. Use `LIKE`. Run it and compare the result with the expected table."
             },
             "try_search_names_sketch2": {
-              "title": "Search names and keep only active rows",
-              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that returns `full_name`, `city`, and `status` for customers whose `full_name` contains the letter `e` and whose `status` is `active`. Write the query in the SQL editor, click Run query, and check the results table."
+              "title": "Find Active Names Containing E",
+              "prompt": "Return `full_name`, `city`, and `status` for active customers whose name contains the letter e."
             }
           }
         }
@@ -262,20 +207,6 @@
             },
             "quiz": {
               "title": "Quiz"
-            },
-            "project": {
-              "title": "Name Search Practice"
-            }
-          },
-          "projectSteps": {
-            "ci_search_contains_a": {
-              "title": "Query names containing a letter"
-            },
-            "ci_search_starts_o": {
-              "title": "Query names starting with O"
-            },
-            "ci_search_active_e": {
-              "title": "Search names and keep only active rows"
             }
           },
           "quiz": {
@@ -442,7 +373,7 @@
             },
             "try-search_names-sketch0": {
               "title": "Query names containing a letter",
-              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that returns `id` and `full_name` from `customers` for rows where `full_name` contains the letter `a`. Use `LIKE`. Write the query in the SQL editor, click Run query, and check the results table.",
+              "prompt": "Create a customer-cleanup query that returns `id` and `full_name` from `customers` for rows where `full_name` contains the letter `a`. Use `LIKE`. Run it and compare the result with the expected table.",
               "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
               "help": {
                 "concept": "This SQL exercise checks whether your query returns the requested result.",
@@ -453,7 +384,7 @@
             },
             "try-search_names-sketch1": {
               "title": "Query names starting with O",
-              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that returns `full_name` and `status` for customers whose `full_name` starts with `O`. Use `LIKE`. Write the query in the SQL editor, click Run query, and check the results table.",
+              "prompt": "Create a customer-cleanup query that returns `full_name` and `status` for customers whose `full_name` starts with `O`. Use `LIKE`. Run it and compare the result with the expected table.",
               "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
               "help": {
                 "concept": "This SQL exercise checks whether your query returns the requested result.",
@@ -463,30 +394,30 @@
               "starterCode": "-- Return full_name and status for customers whose full_name starts with O.\nSELECT full_name, status\nFROM customers\nWHERE full_name LIKE ;"
             },
             "try-search_names-sketch2": {
-              "title": "Search names and keep only active rows",
-              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that returns `full_name`, `city`, and `status` for customers whose `full_name` contains the letter `e` and whose `status` is `active`. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Find Active Names Containing E",
+              "prompt": "Return `full_name`, `city`, and `status` for active customers whose name contains the letter e.",
+              "hint": "Add status = 'active' with AND.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
+                "concept": "Return `full_name`, `city`, and `status` for active customers whose name contains the letter e.",
+                "hint_1": "Add status = 'active' with AND.",
+                "hint_2": "Run the query and compare the returned columns and rows with the expected result."
               },
-              "starterCode": "-- Return full_name, city, and status for customers whose full_name contains the letter e and whose status is active.\nSELECT full_name, city, status\nFROM customers\nWHERE full_name LIKE \n  AND ;"
+              "starterCode": "SELECT full_name, city, status\nFROM customers\nWHERE full_name LIKE '%e%';"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_search_names_sketch0": {
               "title": "Query names containing a letter",
-              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that returns `id` and `full_name` from `customers` for rows where `full_name` contains the letter `a`. Use `LIKE`. Write the query in the SQL editor, click Run query, and check the results table."
+              "prompt": "Create a customer-cleanup query that returns `id` and `full_name` from `customers` for rows where `full_name` contains the letter `a`. Use `LIKE`. Run it and compare the result with the expected table."
             },
             "try_search_names_sketch1": {
               "title": "Query names starting with O",
-              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that returns `full_name` and `status` for customers whose `full_name` starts with `O`. Use `LIKE`. Write the query in the SQL editor, click Run query, and check the results table."
+              "prompt": "Create a customer-cleanup query that returns `full_name` and `status` for customers whose `full_name` starts with `O`. Use `LIKE`. Run it and compare the result with the expected table."
             },
             "try_search_names_sketch2": {
-              "title": "Search names and keep only active rows",
-              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that returns `full_name`, `city`, and `status` for customers whose `full_name` contains the letter `e` and whose `status` is `active`. Write the query in the SQL editor, click Run query, and check the results table."
+              "title": "Find Active Names Containing E",
+              "prompt": "Return `full_name`, `city`, and `status` for active customers whose name contains the letter e."
             }
           }
         }

@@ -1,0 +1,260 @@
+{
+  "title": "Module 0 Project: New Inventory Intake",
+  "summary": "Add a five-item approved inventory batch through five cumulative INSERT steps.",
+  "minutes": 60,
+  "sketchBlocks": [
+    {
+      "id": "sketch-1",
+      "cardTitle": "Project Overview",
+      "title": "Introducing the Inventory Intake Project",
+      "bodyMarkdown": "In this project, you will take on the role of a Junior Data Operations Analyst tasked with adding a batch of new inventory products to the database. The goal is to insert these records without relying on column order or accidentally replacing explicit values with defaults. This project will help you understand the importance of using explicit column lists and how to apply NULL and DEFAULT values correctly. By the end of this project, you will have a cumulative SQL script that inserts a clean five-item batch with explicit columns, intentional NULL values, controlled defaults, and verification SELECT statements."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "ci-module-0-step1",
+      "kind": "code_input",
+      "title": "Add the First Approved Item",
+      "prompt": "Insert a new item, Desk Organizer, into the inventory with explicit columns and values.",
+      "hint": "Use an explicit column list to insert the Desk Organizer with all required details.",
+      "help": {
+        "concept": "Explicit column lists ensure that each value is inserted into the correct column, preventing errors due to column order changes.",
+        "hint_1": "List all columns explicitly in the INSERT statement.",
+        "hint_2": "Ensure each value matches the intended column, including id, name, category, price, status, is_test, notes, and last_updated."
+      },
+      "starterCode": "-- Insert the first approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES (101, 'Desk Organizer', 'Office Supplies', 12.99, 'active', 0, 'New stock', '2026-02-10');\n\n-- Verify the insertion\nSELECT * FROM inventory_items WHERE id = 101;",
+      "solutionCode": "-- Insert the first approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES (101, 'Desk Organizer', 'Office Supplies', 12.99, 'active', 0, 'New stock', '2026-02-10');\n\n-- Verify the insertion\nSELECT * FROM inventory_items WHERE id = 101;",
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "-- Insert the first approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES (101, 'Desk Organizer', 'Office Supplies', 12.99, 'active', 0, 'New stock', '2026-02-10');\n\n-- Verify the insertion\nSELECT * FROM inventory_items WHERE id = 101;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "-- Insert the first approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES (101, 'Desk Organizer', 'Office Supplies', 12.99, 'active', 0, 'New stock', '2026-02-10');\n\n-- Verify the insertion\nSELECT * FROM inventory_items WHERE id = 101;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "sqlFileOrder": [
+        "query.sql"
+      ],
+      "tests": [
+        {
+          "stdout": "101|Desk Organizer|Office Supplies|12.99|active|0|New stock|2026-02-10\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query",
+      "checkSql": "SELECT * FROM inventory_items WHERE id = 101;"
+    },
+    {
+      "id": "ci-module-0-step2",
+      "kind": "code_input",
+      "title": "Record an Item with No Notes",
+      "prompt": "Insert Cable Labels into the inventory, ensuring the notes column is set to NULL.",
+      "hint": "Use SQL NULL for the notes column to indicate no notes are available.",
+      "help": {
+        "concept": "Using SQL NULL allows you to represent missing or unknown data in a column.",
+        "hint_1": "Include NULL in the VALUES list for the notes column.",
+        "hint_2": "Ensure the notes column is explicitly listed in the INSERT statement."
+      },
+      "starterCode": "-- Insert the second approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES (102, 'Cable Labels', 'Office Supplies', 3.99, 'active', 0, NULL, '2026-02-11');\n\n-- Verify the insertion\nSELECT * FROM inventory_items WHERE id = 102;",
+      "solutionCode": "-- Insert the second approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES (102, 'Cable Labels', 'Office Supplies', 3.99, 'active', 0, NULL, '2026-02-11');\n\n-- Verify the insertion\nSELECT * FROM inventory_items WHERE id = 102;",
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "-- Insert the second approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES (102, 'Cable Labels', 'Office Supplies', 3.99, 'active', 0, NULL, '2026-02-11');\n\n-- Verify the insertion\nSELECT * FROM inventory_items WHERE id = 102;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "-- Insert the second approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES (102, 'Cable Labels', 'Office Supplies', 3.99, 'active', 0, NULL, '2026-02-11');\n\n-- Verify the insertion\nSELECT * FROM inventory_items WHERE id = 102;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "sqlFileOrder": [
+        "query.sql"
+      ],
+      "tests": [
+        {
+          "stdout": "102|Cable Labels|Office Supplies|3.99|active|0|NULL|2026-02-11\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query",
+      "checkSql": "SELECT * FROM inventory_items WHERE id = 102;"
+    },
+    {
+      "id": "ci-module-0-step3",
+      "kind": "code_input",
+      "title": "Use the Approved Defaults",
+      "prompt": "Insert Shipping Pouch into the inventory, omitting status and last_updated to use defaults.",
+      "hint": "Omit the status and last_updated columns to use their default values.",
+      "help": {
+        "concept": "Omitting columns with defaults in an INSERT statement allows the database to use the declared defaults.",
+        "hint_1": "Do not include status and last_updated in the column list.",
+        "hint_2": "Ensure the remaining columns are explicitly listed and values are provided."
+      },
+      "starterCode": "-- Insert the third approved item\nINSERT INTO inventory_items (id, name, category, price, is_test, notes)\nVALUES (103, 'Shipping Pouch', 'Packaging', 5.99, 0, 'Durable material');\n\n-- Verify the insertion\nSELECT * FROM inventory_items WHERE id = 103;",
+      "solutionCode": "-- Insert the third approved item\nINSERT INTO inventory_items (id, name, category, price, is_test, notes)\nVALUES (103, 'Shipping Pouch', 'Packaging', 5.99, 0, 'Durable material');\n\n-- Verify the insertion\nSELECT * FROM inventory_items WHERE id = 103;",
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "-- Insert the third approved item\nINSERT INTO inventory_items (id, name, category, price, is_test, notes)\nVALUES (103, 'Shipping Pouch', 'Packaging', 5.99, 0, 'Durable material');\n\n-- Verify the insertion\nSELECT * FROM inventory_items WHERE id = 103;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "-- Insert the third approved item\nINSERT INTO inventory_items (id, name, category, price, is_test, notes)\nVALUES (103, 'Shipping Pouch', 'Packaging', 5.99, 0, 'Durable material');\n\n-- Verify the insertion\nSELECT * FROM inventory_items WHERE id = 103;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "sqlFileOrder": [
+        "query.sql"
+      ],
+      "tests": [
+        {
+          "stdout": "103|Shipping Pouch|Packaging|5.99|draft|0|Durable material|2026-02-01\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query",
+      "checkSql": "SELECT * FROM inventory_items WHERE id = 103;"
+    },
+    {
+      "id": "ci-module-0-step4",
+      "kind": "code_input",
+      "title": "Add Two Items as One Batch",
+      "prompt": "Insert Packing Tape and Label Roll in one multi-row INSERT statement.",
+      "hint": "Use a multi-row INSERT to add both items with the same column list.",
+      "help": {
+        "concept": "A multi-row INSERT allows you to add multiple records in a single statement, improving efficiency.",
+        "hint_1": "List all columns explicitly and provide values for both items in the VALUES clause.",
+        "hint_2": "Ensure each set of values corresponds to the correct columns."
+      },
+      "starterCode": "-- Insert the fourth and fifth approved items\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES \n(104, 'Packing Tape', 'Office Supplies', 2.99, 'active', 0, 'Strong adhesive', '2026-02-12'),\n(105, 'Label Roll', 'Office Supplies', 4.49, 'active', 0, 'For labeling', '2026-02-12');\n\n-- Verify the insertion\nSELECT * FROM inventory_items WHERE id IN (104, 105);",
+      "solutionCode": "-- Insert the fourth and fifth approved items\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES \n(104, 'Packing Tape', 'Office Supplies', 2.99, 'active', 0, 'Strong adhesive', '2026-02-12'),\n(105, 'Label Roll', 'Office Supplies', 4.49, 'active', 0, 'For labeling', '2026-02-12');\n\n-- Verify the insertion\nSELECT * FROM inventory_items WHERE id IN (104, 105);",
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "-- Insert the fourth and fifth approved items\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES \n(104, 'Packing Tape', 'Office Supplies', 2.99, 'active', 0, 'Strong adhesive', '2026-02-12'),\n(105, 'Label Roll', 'Office Supplies', 4.49, 'active', 0, 'For labeling', '2026-02-12');\n\n-- Verify the insertion\nSELECT * FROM inventory_items WHERE id IN (104, 105);",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "-- Insert the fourth and fifth approved items\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES \n(104, 'Packing Tape', 'Office Supplies', 2.99, 'active', 0, 'Strong adhesive', '2026-02-12'),\n(105, 'Label Roll', 'Office Supplies', 4.49, 'active', 0, 'For labeling', '2026-02-12');\n\n-- Verify the insertion\nSELECT * FROM inventory_items WHERE id IN (104, 105);",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "sqlFileOrder": [
+        "query.sql"
+      ],
+      "tests": [
+        {
+          "stdout": "104|Packing Tape|Office Supplies|2.99|active|0|Strong adhesive|2026-02-12\n105|Label Roll|Office Supplies|4.49|active|0|For labeling|2026-02-12\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query",
+      "checkSql": "SELECT * FROM inventory_items WHERE id IN (104, 105);"
+    },
+    {
+      "id": "ci-module-0-step5",
+      "kind": "code_input",
+      "title": "Finish the Intake Handoff",
+      "prompt": "Ensure all five new items are inserted correctly and verify the entire inventory remains consistent.",
+      "hint": "Verify that all new items are present and existing items remain unchanged.",
+      "help": {
+        "concept": "Verification ensures that the intended changes have been applied correctly without affecting existing data.",
+        "hint_1": "Use SELECT to verify the presence of all new items by their ids.",
+        "hint_2": "Check that the existing inventory items are unchanged."
+      },
+      "starterCode": "-- Verify all new items and existing inventory\nSELECT * FROM inventory_items WHERE id BETWEEN 101 AND 105;\n\n-- Verify existing items remain unchanged\nSELECT * FROM inventory_items WHERE id BETWEEN 1 AND 6;",
+      "solutionCode": "-- Verify all new items and existing inventory\nSELECT * FROM inventory_items WHERE id BETWEEN 101 AND 105;\n\n-- Verify existing items remain unchanged\nSELECT * FROM inventory_items WHERE id BETWEEN 1 AND 6;",
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "-- Verify all new items and existing inventory\nSELECT * FROM inventory_items WHERE id BETWEEN 101 AND 105;\n\n-- Verify existing items remain unchanged\nSELECT * FROM inventory_items WHERE id BETWEEN 1 AND 6;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "-- Verify all new items and existing inventory\nSELECT * FROM inventory_items WHERE id BETWEEN 101 AND 105;\n\n-- Verify existing items remain unchanged\nSELECT * FROM inventory_items WHERE id BETWEEN 1 AND 6;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "sqlFileOrder": [
+        "query.sql"
+      ],
+      "tests": [
+        {
+          "stdout": "1|Sticker Pack|Accessories|4.99|active|0|NULL|2026-02-01\n2|Test Mug|Kitchen|7.5|draft|1|Internal sample|2026-02-03\n3|Canvas Print|Decor|45.0|active|0|NULL|2026-02-02\n4|Sample Poster|Decor|12.0|inactive|1|Archived test item|2026-01-29\n5|Water Bottle|Kitchen|15.0|active|0|NULL|2026-02-05\n6|Trial Tote|Accessories|9.0|draft|1|Trial inventory|2026-02-06\n101|Desk Organizer|Office Supplies|12.99|active|0|New stock|2026-02-10\n102|Cable Labels|Office Supplies|3.99|active|0|NULL|2026-02-11\n103|Shipping Pouch|Packaging|5.99|draft|0|Durable material|2026-02-01\n104|Packing Tape|Office Supplies|2.99|active|0|Strong adhesive|2026-02-12\n105|Label Roll|Office Supplies|4.49|active|0|For labeling|2026-02-12\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query",
+      "checkSql": "SELECT * FROM inventory_items WHERE id BETWEEN 101 AND 105;"
+    }
+  ],
+  "projectDraft": {
+    "title": "Module 0 Project: New Inventory Intake",
+    "stepIds": [
+      "ci-module-0-step1",
+      "ci-module-0-step2",
+      "ci-module-0-step3",
+      "ci-module-0-step4",
+      "ci-module-0-step5"
+    ]
+  }
+}

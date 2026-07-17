@@ -131,6 +131,10 @@ export type CourseProfile = {
     runtimeKind?: ManifestRuntimeDefaults["kind"];
     defaultLanguage?: WorkspaceLanguage;
     defaultEntryFileName?: string;
+    resolveExpectedEntryFileName?(args: {
+        seed: TopicSeed;
+        exercise: ManifestCodeInput;
+    }): string | undefined;
     allowedExerciseKinds: string[];
     allowedRecipeTypes: string[];
     buildModuleRuntimeDefaults(

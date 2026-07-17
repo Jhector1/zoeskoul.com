@@ -156,6 +156,48 @@ describe("openAiProvider", () => {
         ).not.toContain("\"oneOf\"");
     });
 
+    it("omits unsupported sampling parameters for GPT-5-family models", async () => {
+        const create = vi.fn(async (_request: Record<string, unknown>) => ({
+            choices: [
+                {
+                    message: {
+                        content: JSON.stringify({
+                            title: "Topic",
+                            summary: "Summary",
+                            minutes: 15,
+                            sketchBlocks: [],
+                            quizDraft: [],
+                        }),
+                    },
+                },
+            ],
+        }));
+
+        setOpenAiClientFactoryForTests(
+            () =>
+                ({
+                    chat: {
+                        completions: {
+                            create,
+                        },
+                    },
+                }) as any,
+        );
+        setOpenAiModelResolverForTests(() => "gpt-5-mini");
+
+        const result = await openAiProvider.generateJsonDetailed!({
+            system: "system prompt",
+            user: "user prompt",
+            schemaName: "TopicAuthoringDraft",
+        });
+
+        expect(create).toHaveBeenCalledTimes(1);
+        expect(create.mock.calls[0][0]).not.toHaveProperty("temperature");
+        expect(create.mock.calls[0][0]).not.toHaveProperty("seed");
+        expect(result.temperature).toBe(1);
+        expect(result.seed).toBeUndefined();
+    });
+
     it("strips provider-only null compatibility fields before canonical TopicAuthoringDraft validation", async () => {
         const create = vi.fn(async () => ({
             choices: [
@@ -165,7 +207,14 @@ describe("openAiProvider", () => {
                             title: "Topic",
                             summary: "Summary",
                             minutes: 15,
-                            sketchBlocks: [],
+                            sketchBlocks: [
+                                {
+                                    id: "sketch0",
+                                    cardTitle: null,
+                                    title: "Lesson",
+                                    bodyMarkdown: "Body",
+                                },
+                            ],
                             projectDraft: null,
                             quizDraft: [
                                 {
@@ -223,7 +272,13 @@ describe("openAiProvider", () => {
             title: "Topic",
             summary: "Summary",
             minutes: 15,
-            sketchBlocks: [],
+            sketchBlocks: [
+                {
+                    id: "sketch0",
+                    title: "Lesson",
+                    bodyMarkdown: "Body",
+                },
+            ],
             quizDraft: [
                 {
                     id: "quiz1",
@@ -293,6 +348,38 @@ describe("openAiProvider", () => {
             findObjectPropertyCoverageIssue(
                 getOpenAiStructuredOutputSchema("TopicAuthoringDraft"),
             ),
+        ).toBeNull();
+    });
+
+    it("requires nullable cardTitle in the OpenAI sketch schema", () => {
+        const providerSchema = getOpenAiStructuredOutputSchema("TopicAuthoringDraft") as any;
+        const sketchSchema = providerSchema.properties.sketchBlocks.items;
+
+        expect(sketchSchema.required).toContain("cardTitle");
+        expect(sketchSchema.properties.cardTitle.type).toEqual(["string", "null"]);
+    });
+
+    it("requires course-plan role metadata and an authored capstone project brief", () => {
+        const providerSchema = getOpenAiStructuredOutputSchema("CoursePlan") as any;
+        const moduleSchema = providerSchema.properties.modules.items;
+        const sectionSchema = moduleSchema.properties.sections.items;
+        const topicSchema = sectionSchema.properties.topics.items;
+        const projectBriefSchema = topicSchema.properties.projectBrief;
+
+        expect(moduleSchema.required).toContain("role");
+        expect(moduleSchema.properties.role.enum).toEqual(["standard", "capstone"]);
+        expect(sectionSchema.required).toContain("role");
+        expect(sectionSchema.properties.role.enum).toEqual([
+            "lesson",
+            "module_project",
+            "capstone",
+        ]);
+        expect(topicSchema.required).toContain("projectBrief");
+        expect(projectBriefSchema.type).toEqual(["object", "null"]);
+        expect(projectBriefSchema.required).toContain("stepCountTarget");
+        expect(projectBriefSchema.required).toContain("stepLadder");
+        expect(
+            findObjectPropertyCoverageIssue(providerSchema),
         ).toBeNull();
     });
 

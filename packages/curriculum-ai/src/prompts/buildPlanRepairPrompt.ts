@@ -1,5 +1,8 @@
 import type { NormalizedCoursePlan } from "@zoeskoul/curriculum-contracts";
-import { COURSE_STRUCTURE_NAMING_RULES } from "./buildPlanPrompt.js";
+import {
+  COURSE_STRUCTURE_NAMING_RULES,
+  FINAL_CAPSTONE_STRUCTURE_RULES,
+} from "./buildPlanPrompt.js";
 
 export function buildPlanRepairPrompt(args: {
   plan: NormalizedCoursePlan;
@@ -12,6 +15,7 @@ export function buildPlanRepairPrompt(args: {
       rules: [
         "Preserve the user's intended course structure while fixing validation errors.",
         ...COURSE_STRUCTURE_NAMING_RULES,
+        ...FINAL_CAPSTONE_STRUCTURE_RULES,
       ],
     }),
   };

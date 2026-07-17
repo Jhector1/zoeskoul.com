@@ -1,0 +1,199 @@
+{
+  "title": "COALESCE for Missing Values",
+  "summary": "Use COALESCE to choose the first available value and keep calculations usable.",
+  "minutes": 24,
+  "sketchBlocks": [
+    {
+      "id": "coalesce-for-missing-values-sketch0",
+      "title": "Understanding COALESCE",
+      "bodyMarkdown": "The `COALESCE` function in SQL is used to handle NULL values by returning the first non-NULL value from a list of arguments. This is particularly useful in calculations where NULL values can lead to unexpected results. For example, if you have a column `discount_pct` that sometimes contains NULL, you can use `COALESCE` to replace NULL with a default value, such as 0.\n\n```sql\nSELECT order_id, COALESCE(discount_pct, 0) AS discount_pct\nFROM sales_reporting;\n```\n\nIn this example, any NULL values in `discount_pct` are replaced with 0, ensuring that calculations using this column do not fail or produce incorrect results."
+    },
+    {
+      "id": "coalesce-for-missing-values-sketch1",
+      "title": "Practical Example with COALESCE",
+      "bodyMarkdown": "Let's consider a practical example where we calculate the total sales amount, taking into account any discounts. If the `discount_pct` is NULL, we should assume no discount (0%).\n\n```sql\nSELECT order_id, quantity * unit_price * (1 - COALESCE(discount_pct, 0) / 100) AS total_sales\nFROM sales_reporting;\n```\n\nHere, `COALESCE` ensures that if `discount_pct` is NULL, it is treated as 0, allowing the calculation to proceed without errors. This approach helps maintain data integrity and provides accurate financial reports."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "try-coalesce-for-missing-values-sketch0",
+      "kind": "code_input",
+      "title": "Replace NULL with COALESCE",
+      "prompt": "Write a query to select `order_id` and `discount_pct` from `sales_reporting`, replacing any NULL `discount_pct` with 0 using COALESCE.",
+      "starterCode": "SELECT order_id, discount_pct\nFROM sales_reporting;",
+      "solutionCode": "SELECT order_id, COALESCE(discount_pct, 0) AS discount_pct\nFROM sales_reporting;",
+      "tests": [
+        {
+          "stdout": "101|10.0\n102|0.0\n103|5.0\n104|0.0\n105|15.0\n106|0.0\n107|10.0\n108|5.0\n109|0.0\n110|0.0\n111|20.0\n112|10.0\n113|5.0\n114|0.0\n115|0.0\n116|10.0\n117|5.0\n118|0.0\n119|10.0\n120|0.0\n121|15.0\n122|0.0\n123|5.0\n124|10.0\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "try-coalesce-for-missing-values-sketch1",
+      "kind": "code_input",
+      "title": "Calculate Total Sales with COALESCE",
+      "prompt": "Write a query to calculate the total sales for each order in `sales_reporting`, assuming a 0% discount if `discount_pct` is NULL. Select `order_id` and the calculated `total_sales`.",
+      "starterCode": "SELECT order_id, quantity * unit_price AS total_sales\nFROM sales_reporting;",
+      "solutionCode": "SELECT order_id, quantity * unit_price * (1 - COALESCE(discount_pct, 0) / 100) AS total_sales\nFROM sales_reporting;",
+      "tests": [
+        {
+          "stdout": "101|75.6\n102|60.0\n103|72.2\n104|72.0\n105|57.8\n106|135.0\n107|86.4\n108|98.8\n109|84.0\n110|77.0\n111|76.8\n112|167.4\n113|57.0\n114|40.0\n115|72.0\n116|86.4\n117|114.0\n118|120.0\n119|86.4\n120|84.0\n121|68.85\n122|110.0\n123|59.85\n124|68.4\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "coalesce-quiz-single-choice-0",
+      "kind": "single_choice",
+      "title": "Effect of NULL in Calculations",
+      "prompt": "What happens when a NULL value is used in an arithmetic expression in SQL?",
+      "options": [
+        "The result is NULL.",
+        "The result is 0.",
+        "The result is ignored.",
+        "The result is the same as the other operand."
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Consider how NULL affects calculations.",
+      "help": {
+        "concept": "NULL in arithmetic expressions results in NULL.",
+        "hint_1": "NULL propagates through arithmetic operations.",
+        "hint_2": "Any arithmetic operation with NULL results in NULL."
+      }
+    },
+    {
+      "id": "coalesce-quiz-single-choice-1",
+      "kind": "single_choice",
+      "title": "Purpose of COALESCE",
+      "prompt": "What is the primary purpose of the COALESCE function in SQL?",
+      "options": [
+        "To return the first non-NULL value.",
+        "To concatenate strings.",
+        "To perform arithmetic operations.",
+        "To sort data."
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Think about how COALESCE handles NULL values.",
+      "help": {
+        "concept": "COALESCE returns the first non-NULL value from its arguments.",
+        "hint_1": "COALESCE is used to handle NULL values.",
+        "hint_2": "COALESCE provides a default value when encountering NULL."
+      }
+    },
+    {
+      "id": "coalesce-quiz-multi-choice-0",
+      "kind": "multi_choice",
+      "title": "Using COALESCE in SQL",
+      "prompt": "Which of the following are correct uses of the COALESCE function in SQL? Select all that apply.",
+      "options": [
+        "COALESCE(discount_pct, 0)",
+        "COALESCE(NULL, 'N/A')",
+        "COALESCE(price, 100)",
+        "COALESCE()"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "hint": "Consider how COALESCE can be used to handle NULL values.",
+      "help": {
+        "concept": "COALESCE is used to handle NULL values by providing a default.",
+        "hint_1": "COALESCE can replace NULL with a specified value.",
+        "hint_2": "COALESCE can be used in SELECT statements to handle NULLs."
+      }
+    },
+    {
+      "id": "coalesce-quiz-drag-reorder-0",
+      "kind": "drag_reorder",
+      "title": "Order of COALESCE Evaluation",
+      "prompt": "Arrange the steps in the order COALESCE evaluates its arguments.",
+      "tokens": [
+        "Evaluate first argument",
+        "If first is NULL, evaluate second",
+        "If second is NULL, evaluate third",
+        "Return first non-NULL value"
+      ],
+      "correctOrder": [
+        "Evaluate first argument",
+        "If first is NULL, evaluate second",
+        "If second is NULL, evaluate third",
+        "Return first non-NULL value"
+      ],
+      "hint": "COALESCE evaluates arguments from left to right.",
+      "help": {
+        "concept": "COALESCE returns the first non-NULL value from its arguments.",
+        "hint_1": "COALESCE checks each argument in order.",
+        "hint_2": "COALESCE stops at the first non-NULL value."
+      }
+    },
+    {
+      "id": "coalesce-quiz-fill-blank-choice-0",
+      "kind": "fill_blank_choice",
+      "title": "COALESCE Syntax",
+      "prompt": "Complete the syntax for using COALESCE to replace NULL values: `SELECT COALESCE([blank1], 0) FROM table;`",
+      "template": "SELECT COALESCE([blank1], 0) FROM table;",
+      "choices": [
+        "column_name",
+        "NULL",
+        "value",
+        "table_name"
+      ],
+      "correctValue": "column_name",
+      "hint": "COALESCE takes a column name as its first argument.",
+      "help": {
+        "concept": "COALESCE replaces NULL with a specified value.",
+        "hint_1": "The first argument is usually a column name.",
+        "hint_2": "Use a column name that might contain NULLs."
+      }
+    },
+    {
+      "id": "coalesce-quiz-fill-blank-choice-1",
+      "kind": "fill_blank_choice",
+      "title": "COALESCE with Multiple Arguments",
+      "prompt": "Fill in the blank: `COALESCE(value1, value2, [blank1])` returns the first non-NULL value.",
+      "template": "COALESCE(value1, value2, [blank1])",
+      "choices": [
+        "value3",
+        "NULL",
+        "value4",
+        "column_name"
+      ],
+      "correctValue": "value3",
+      "hint": "COALESCE can take multiple arguments.",
+      "help": {
+        "concept": "COALESCE evaluates arguments in order and returns the first non-NULL.",
+        "hint_1": "The blank should be another value or column.",
+        "hint_2": "COALESCE can have more than two arguments."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Discount Audit Report",
+    "stepIds": [
+      "try-coalesce-for-missing-values-sketch0",
+      "try-coalesce-for-missing-values-sketch1"
+    ]
+  }
+}

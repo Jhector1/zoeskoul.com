@@ -17,20 +17,6 @@
             },
             "quiz": {
               "title": "Quiz"
-            },
-            "project": {
-              "title": "Starter queries for the products table"
-            }
-          },
-          "projectSteps": {
-            "ci_select_all_products": {
-              "title": "Write your first SELECT * query"
-            },
-            "ci_select_all_verify_columns": {
-              "title": "Show the full products table"
-            },
-            "ci_select_all_one_line": {
-              "title": "Return every product field"
             }
           },
           "quiz": {
@@ -85,11 +71,11 @@
             "mc_visible_columns": {
               "title": "Columns you would see",
               "prompt": "After running `SELECT * FROM products;`, which columns should appear in the results table? Choose all that apply.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Match each choice to the command, clause, or constraint described in the question.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "concept": "Use the SQL behavior described in the lesson to separate the valid choice from statements about a different command, clause, or constraint.",
+                "hint_1": "Identify the job the SQL must perform before comparing the choices.",
+                "hint_2": "Eliminate choices that belong to a different SQL concept."
               },
               "options": {
                 "a": "name",
@@ -197,19 +183,19 @@
               "starterCode": "-- Show all columns from the products table.\nSELECT \nFROM products;"
             },
             "try-selecting_all_columns_with_star-sketch0": {
-              "title": "Query all products rows",
-              "prompt": "Scenario: A store manager needs a clear product-catalog query before sharing results with the team. Write a query that returns all columns from the `products` table. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Expand a Narrow Query to Full Rows",
+              "prompt": "The current query shows only two fields. Replace the column list with `*` so the result returns every stored column from `products`.",
+              "hint": "The asterisk belongs immediately after SELECT.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the selected columns and table name in the SQL editor.",
-                "hint_2": "Run the query and compare the result table with the expected result."
+                "concept": "The current query shows only two fields. Replace the column list with `*` so the result returns every stored column from `products`.",
+                "hint_1": "The asterisk belongs immediately after SELECT.",
+                "hint_2": "Run the query and compare the returned columns and rows with the expected result."
               },
-              "starterCode": "-- Return all columns from the products table.\nSELECT \nFROM products;"
+              "starterCode": "-- Replace the narrow column list with *\nSELECT name, price\nFROM products;"
             },
             "try-selecting_all_columns_with_star-sketch1": {
               "title": "Query all products rows",
-              "prompt": "Scenario: A store manager needs a clear product-catalog query before sharing results with the team. Write a query that returns all columns from the `products` table. Write the query in the SQL editor, click Run query, and check the results table.",
+              "prompt": "Build a product-catalog query that returns all columns from the `products` table. Run it and compare the result with the expected table.",
               "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
               "help": {
                 "concept": "This SQL exercise checks whether your query returns the requested result.",
@@ -220,7 +206,7 @@
             },
             "try-selecting_all_columns_with_star-sketch2": {
               "title": "Query all products rows",
-              "prompt": "Scenario: A store manager needs a clear product-catalog query before sharing results with the team. Write a query that returns all columns from the `products` table. Write the query in the SQL editor, click Run query, and check the results table.",
+              "prompt": "Build a product-catalog query that returns all columns from the `products` table. Run it and compare the result with the expected table.",
               "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
               "help": {
                 "concept": "This SQL exercise checks whether your query returns the requested result.",
@@ -233,16 +219,16 @@
           "tryIt": {
             "allowReveal": true,
             "try_selecting_all_columns_with_star_sketch0": {
-              "title": "Query all products rows",
-              "prompt": "Scenario: A store manager needs a clear product-catalog query before sharing results with the team. Write a query that returns all columns from the `products` table. Write the query in the SQL editor, click Run query, and check the results table."
+              "title": "Expand a Narrow Query to Full Rows",
+              "prompt": "The current query shows only two fields. Replace the column list with `*` so the result returns every stored column from `products`."
             },
             "try_selecting_all_columns_with_star_sketch1": {
               "title": "Query all products rows",
-              "prompt": "Scenario: A store manager needs a clear product-catalog query before sharing results with the team. Write a query that returns all columns from the `products` table. Write the query in the SQL editor, click Run query, and check the results table."
+              "prompt": "Build a product-catalog query that returns all columns from the `products` table. Run it and compare the result with the expected table."
             },
             "try_selecting_all_columns_with_star_sketch2": {
               "title": "Query all products rows",
-              "prompt": "Scenario: A store manager needs a clear product-catalog query before sharing results with the team. Write a query that returns all columns from the `products` table. Write the query in the SQL editor, click Run query, and check the results table."
+              "prompt": "Build a product-catalog query that returns all columns from the `products` table. Run it and compare the result with the expected table."
             }
           }
         }
@@ -255,15 +241,15 @@
         "selecting_all_columns_with_star": {
           "what_star_means": {
             "title": "What SELECT * means",
-            "bodyMarkdown": "When you write `SELECT *`, the `*` means **all columns** from the table you name in `FROM`.\n\nIn this topic, the table is `products`, which has these columns:\n- `id`\n- `name`\n- `category`\n- `price`\n- `stock`\n- `created_at`\n\nA basic query looks like this:\n\n```sql\nSELECT *\nFROM products;\n```\n\nThis returns every row and every column from `products`.\n\nWorked example:\n- One row in `products` is `1, Sketchbook, Art, 12.99, 25, 2026-01-10`\n- Because you used `*`, the results table shows all six values for that row, not just the name or price.\n\nStep by step:\n1. `SELECT *` says to fetch all columns.\n2. `FROM products` says which table to read.\n3. The semicolon ends the query."
+            "bodyMarkdown": "When you write `SELECT *`, the `*` means **all columns** from the table you name in `FROM`.\n\nIn this topic, the table is `products`, which has these columns:\n- `id`\n- `name`\n- `category`\n- `price`\n- `stock`\n- `created_at`\n\nA basic query looks like this:\n\n```sql\nSELECT *\nFROM table_name;\n```\n\nThis returns every row and every column from `products`.\n\nWorked example:\n- One row in `products` is `1, Sketchbook, Art, 12.99, 25, 2026-01-10`\n- Because you used `*`, the results table shows all six values for that row, not just the name or price.\n\nStep by step:\n1. `SELECT *` says to fetch all columns.\n2. `FROM products` says which table to read.\n3. The semicolon ends the query."
           },
           "star_vs_named_columns": {
             "title": "SELECT * versus naming columns",
-            "bodyMarkdown": "You can query a table in two common ways:\n\n```sql\nSELECT *\nFROM products;\n```\n\nor\n\n```sql\nSELECT name, price\nFROM products;\n```\n\nThese queries do different jobs.\n\n- `SELECT *` returns **all columns**.\n- `SELECT name, price` returns only the `name` and `price` columns.\n\nWorked example:\n- For `Notebook`, `SELECT *` shows `4, Notebook, Stationery, 6.75, 50, 2026-02-14`\n- `SELECT name, price` shows only `Notebook, 6.75`\n\nSo `*` is useful when you want to inspect the whole table quickly."
+            "bodyMarkdown": "You can query a table in two common ways:\n\n```sql\nSELECT *\nFROM table_name;\n```\n\nor\n\n```sql\nSELECT name, price\nFROM products;\n```\n\nThese queries do different jobs.\n\n- `SELECT *` returns **all columns**.\n- `SELECT name, price` returns only the `name` and `price` columns.\n\nWorked example:\n- For `Notebook`, `SELECT *` shows `4, Notebook, Stationery, 6.75, 50, 2026-02-14`\n- `SELECT name, price` shows only `Notebook, 6.75`\n\nSo `*` is useful when you want to inspect the whole table quickly."
           },
           "reading_results": {
             "title": "How to read the results of SELECT *",
-            "bodyMarkdown": "After you run a `SELECT *` query, the results table shows:\n- one column for each table column\n- one row for each matching record\n\nExample query:\n\n```sql\nSELECT *\nFROM products;\n```\n\nFrom the seeded data, you should see rows such as:\n- `Sketchbook` in the `name` column\n- `Art` in the `category` column\n- `12.99` in the `price` column\n- `25` in the `stock` column\n\nBecause there is no `WHERE` yet, the query returns all 6 rows in the table.\n\nBeginner tip: if you are unsure what columns a table has, `SELECT *` is a simple way to explore it."
+            "bodyMarkdown": "After you run a `SELECT *` query, the results table shows:\n- one column for each table column\n- one row for each matching record\n\nExample query:\n\n```sql\nSELECT *\nFROM table_name;\n```\n\nFrom the seeded data, you should see rows such as:\n- `Sketchbook` in the `name` column\n- `Art` in the `category` column\n- `12.99` in the `price` column\n- `25` in the `stock` column\n\nBecause there is no `WHERE` yet, the query returns all 6 rows in the table.\n\nBeginner tip: if you are unsure what columns a table has, `SELECT *` is a simple way to explore it."
           }
         }
       }

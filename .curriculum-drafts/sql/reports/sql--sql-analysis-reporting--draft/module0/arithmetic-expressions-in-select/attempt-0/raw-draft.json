@@ -1,0 +1,158 @@
+{
+  "title": "Arithmetic Expressions in SELECT",
+  "summary": "Learn how to use arithmetic expressions in SQL SELECT statements to calculate new values from existing columns.",
+  "minutes": 24,
+  "sketchBlocks": [
+    {
+      "id": "sketch0",
+      "title": "Understanding Arithmetic Expressions",
+      "bodyMarkdown": "Arithmetic expressions in SQL allow you to perform calculations on data retrieved from a database. You can use operators like `+`, `-`, `*`, and `/` to create new calculated columns in your SELECT queries. For example, if you have a `quantity` and a `unit_price` column, you can calculate the total price for each row by multiplying these two columns.\n\n```sql\nSELECT product_name, quantity, unit_price, quantity * unit_price AS total_price\nFROM sales_reporting;\n```\n\nIn this example, the `total_price` column is calculated by multiplying `quantity` by `unit_price`. The `AS` keyword is used to give the calculated column a meaningful alias, making the output more readable."
+    },
+    {
+      "id": "sketch1",
+      "title": "Using ROUND with Arithmetic Expressions",
+      "bodyMarkdown": "When dealing with monetary values, it's often important to round the results to a specific number of decimal places for clarity and accuracy. SQL provides the `ROUND` function to achieve this. You can use `ROUND` in conjunction with arithmetic expressions to ensure your calculated columns are neatly formatted.\n\n```sql\nSELECT product_name, quantity, unit_price, ROUND(quantity * unit_price, 2) AS total_price\nFROM sales_reporting;\n```\n\nHere, the `ROUND` function is used to round the `total_price` to two decimal places, which is typical for currency values. This ensures that the output is both accurate and easy to read."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "single-choice-1",
+      "kind": "single_choice",
+      "title": "Basic Arithmetic Expression",
+      "prompt": "What is the result of the following SQL expression: `SELECT 10 + 5 * 2;`?",
+      "hint": "Remember the order of operations in arithmetic expressions.",
+      "help": {
+        "concept": "SQL follows the standard order of operations: multiplication and division before addition and subtraction.",
+        "hint_1": "Calculate the multiplication first, then the addition.",
+        "hint_2": "5 * 2 is 10, then add 10."
+      },
+      "options": [
+        "20",
+        "30",
+        "25",
+        "15"
+      ],
+      "correctOptionIds": [
+        "d"
+      ]
+    },
+    {
+      "id": "multi-choice-1",
+      "kind": "multi_choice",
+      "title": "Using Aliases",
+      "prompt": "Which of the following statements correctly use an alias in SQL?",
+      "hint": "Look for the use of the AS keyword to rename columns.",
+      "help": {
+        "concept": "Aliases are used to rename columns or tables for better readability.",
+        "hint_1": "The AS keyword is used to create an alias.",
+        "hint_2": "Check if the AS keyword is followed by a new name for the column."
+      },
+      "options": [
+        "SELECT name AS customer_name FROM customers;",
+        "SELECT price * quantity AS total FROM sales;",
+        "SELECT * FROM orders AS o;",
+        "SELECT id, name FROM users;"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c"
+      ]
+    },
+    {
+      "id": "drag-reorder-1",
+      "kind": "drag_reorder",
+      "title": "Order of Operations",
+      "prompt": "Arrange the following SQL operations in the correct order of execution.",
+      "hint": "Remember the standard order of operations: parentheses, multiplication/division, addition/subtraction.",
+      "help": {
+        "concept": "SQL follows the standard mathematical order of operations.",
+        "hint_1": "Operations inside parentheses are executed first.",
+        "hint_2": "Multiplication and division are performed before addition and subtraction."
+      },
+      "tokens": [
+        "SELECT",
+        "FROM",
+        "WHERE",
+        "ORDER BY"
+      ],
+      "correctOrder": [
+        "SELECT",
+        "FROM",
+        "WHERE",
+        "ORDER BY"
+      ]
+    },
+    {
+      "id": "fill-blank-choice-1",
+      "kind": "fill_blank_choice",
+      "title": "Rounding Values",
+      "prompt": "Complete the SQL statement to round the total price to two decimal places: `SELECT ROUND(quantity * unit_price, [blank1]) AS total_price FROM sales_reporting;`",
+      "hint": "The second argument of the ROUND function specifies the number of decimal places.",
+      "help": {
+        "concept": "The ROUND function takes two arguments: the value to round and the number of decimal places.",
+        "hint_1": "The second argument should be the number of decimal places you want.",
+        "hint_2": "For two decimal places, use the number 2."
+      },
+      "template": "SELECT ROUND(quantity * unit_price, [blank1]) AS total_price FROM sales_reporting;",
+      "choices": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "correctValue": "2"
+    },
+    {
+      "id": "try-arithmetic-expressions-in-select-sketch0",
+      "kind": "code_input",
+      "title": "Calculate Total Sales",
+      "prompt": "Write a SQL query to calculate the total sales for each product in the `sales_reporting` table. Use an alias `total_sales` for the calculated column.",
+      "hint": "Multiply the `quantity` by the `unit_price` and use the AS keyword to alias the result.",
+      "help": {
+        "concept": "Use arithmetic expressions to calculate new values from existing columns.",
+        "hint_1": "Multiply `quantity` by `unit_price` to get the total sales.",
+        "hint_2": "Use `AS total_sales` to alias the calculated column."
+      },
+      "starterCode": "SELECT product_name, quantity, unit_price, \n-- Calculate total sales here\nFROM sales_reporting;",
+      "solutionCode": "SELECT product_name, quantity, unit_price, quantity * unit_price AS total_sales\nFROM sales_reporting;",
+      "tests": [
+        {
+          "stdout": "product_name | quantity | unit_price | total_sales\nWatercolor Set | 3 | 28.0 | 84.0\nCanvas Pack | 5 | 12.0 | 60.0\nNotebook Bundle | 8 | 9.5 | 76.0\nDesk Planner | 4 | 18.0 | 72.0\nWireless Mouse | 2 | 34.0 | 68.0\nUSB-C Hub | 3 | 45.0 | 135.0\nStorage Basket | 6 | 16.0 | 96.0\nTable Lamp | 2 | 52.0 | 104.0\nMarker Set | 4 | 21.0 | 84.0\nSketchbook | 7 | 11.0 | 77.0\nLaptop Stand | 2 | 48.0 | 96.0\nWebcam | 3 | 62.0 | 186.0\nPen Pack | 10 | 6.0 | 60.0\nFolder Set | 5 | 8.0 | 40.0\nWall Clock | 2 | 36.0 | 72.0\nThrow Pillow | 4 | 24.0 | 96.0\nKeyboard | 3 | 40.0 | 120.0\nPortable Charger | 4 | 30.0 | 120.0\nAcrylic Paint Set | 3 | 32.0 | 96.0\nBrush Set | 6 | 14.0 | 84.0\nKitchen Organizer | 3 | 27.0 | 81.0\nBath Towel Set | 5 | 22.0 | 110.0\nLabel Pack | 9 | 7.0 | 63.0\nWeekly Planner | 4 | 19.0 | 76.0\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "try-arithmetic-expressions-in-select-sketch1",
+      "kind": "code_input",
+      "title": "Round Total Sales",
+      "prompt": "Modify the previous query to round the total sales to two decimal places. Use the alias `rounded_sales` for the rounded column.",
+      "hint": "Use the ROUND function to round the calculated total sales.",
+      "help": {
+        "concept": "The ROUND function is used to round numbers to a specified number of decimal places.",
+        "hint_1": "Wrap the total sales calculation in the ROUND function.",
+        "hint_2": "Specify 2 as the number of decimal places in the ROUND function."
+      },
+      "starterCode": "SELECT product_name, quantity, unit_price, \n-- Round total sales here\nFROM sales_reporting;",
+      "solutionCode": "SELECT product_name, quantity, unit_price, ROUND(quantity * unit_price, 2) AS rounded_sales\nFROM sales_reporting;",
+      "tests": [
+        {
+          "stdout": "product_name | quantity | unit_price | rounded_sales\nWatercolor Set | 3 | 28.0 | 84.00\nCanvas Pack | 5 | 12.0 | 60.00\nNotebook Bundle | 8 | 9.5 | 76.00\nDesk Planner | 4 | 18.0 | 72.00\nWireless Mouse | 2 | 34.0 | 68.00\nUSB-C Hub | 3 | 45.0 | 135.00\nStorage Basket | 6 | 16.0 | 96.00\nTable Lamp | 2 | 52.0 | 104.00\nMarker Set | 4 | 21.0 | 84.00\nSketchbook | 7 | 11.0 | 77.00\nLaptop Stand | 2 | 48.0 | 96.00\nWebcam | 3 | 62.0 | 186.00\nPen Pack | 10 | 6.0 | 60.00\nFolder Set | 5 | 8.0 | 40.00\nWall Clock | 2 | 36.0 | 72.00\nThrow Pillow | 4 | 24.0 | 96.00\nKeyboard | 3 | 40.0 | 120.00\nPortable Charger | 4 | 30.0 | 120.00\nAcrylic Paint Set | 3 | 32.0 | 96.00\nBrush Set | 6 | 14.0 | 84.00\nKitchen Organizer | 3 | 27.0 | 81.00\nBath Towel Set | 5 | 22.0 | 110.00\nLabel Pack | 9 | 7.0 | 63.00\nWeekly Planner | 4 | 19.0 | 76.00\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query"
+    }
+  ],
+  "projectDraft": {
+    "title": "Order Value Detail Report",
+    "stepIds": [
+      "try-arithmetic-expressions-in-select-sketch0",
+      "try-arithmetic-expressions-in-select-sketch1"
+    ]
+  }
+}

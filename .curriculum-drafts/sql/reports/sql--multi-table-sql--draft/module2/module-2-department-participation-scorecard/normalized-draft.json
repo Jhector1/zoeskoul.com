@@ -1,0 +1,121 @@
+{
+  "title": "Module 2 Project: Department Participation Scorecard",
+  "summary": "Build an all-department scorecard with course, enrollment, and distinct-student counts in six cumulative steps.",
+  "minutes": 75,
+  "sketchBlocks": [
+    {
+      "id": "sketch-intro",
+      "title": "Project Overview: Department Participation Scorecard",
+      "bodyMarkdown": "In this project, you will create a comprehensive department participation scorecard for a school. The goal is to ensure that every department is represented, even if it has no courses or enrollments. You'll use SQL to join tables and calculate accurate counts for courses, enrollments, and unique students per department. This project will help you understand how to preserve data integrity and report accuracy using LEFT JOINs and aggregate functions."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "step1-preserve-departments",
+      "kind": "code_input",
+      "title": "Preserve Every Department",
+      "prompt": "Write a query to list all departments, ensuring that even those without courses are included. Use a LEFT JOIN to connect departments with courses.",
+      "starterCode": "SELECT d.name, c.title\nFROM departments d\nLEFT JOIN courses c ON d.id = c.department_id;",
+      "solutionCode": "SELECT d.name, c.title\nFROM departments d\nLEFT JOIN courses c ON d.id = c.department_id;",
+      "datasetId": "school_relations_intro",
+      "recipeType": "sql_query",
+      "hint": "Use LEFT JOIN to ensure all departments are listed, even those without courses.",
+      "help": {
+        "concept": "LEFT JOIN allows you to include all rows from the left table, even if there are no matching rows in the right table.",
+        "hint_1": "Start with the departments table and LEFT JOIN with courses.",
+        "hint_2": "Ensure that the Arts department appears in the results, even if it has no courses."
+      }
+    },
+    {
+      "id": "step2-count-courses",
+      "kind": "code_input",
+      "title": "Count Courses Correctly",
+      "prompt": "Modify your query to count the number of courses per department, ensuring that departments with no courses show a count of zero.",
+      "starterCode": "SELECT d.name, COUNT(DISTINCT c.id) AS course_count\nFROM departments d\nLEFT JOIN courses c ON d.id = c.department_id\nGROUP BY d.name;",
+      "solutionCode": "SELECT d.name, COUNT(DISTINCT c.id) AS course_count\nFROM departments d\nLEFT JOIN courses c ON d.id = c.department_id\nGROUP BY d.name;",
+      "datasetId": "school_relations_intro",
+      "recipeType": "sql_query",
+      "hint": "Use COUNT(DISTINCT c.id) to count courses per department.",
+      "help": {
+        "concept": "COUNT(DISTINCT ...) counts unique occurrences, which helps avoid inflating counts due to joins.",
+        "hint_1": "Group by department and use COUNT(DISTINCT c.id) for course count.",
+        "hint_2": "Ensure departments with no courses show a count of zero."
+      }
+    },
+    {
+      "id": "step3-extend-enrollments",
+      "kind": "code_input",
+      "title": "Extend to Enrollment Records",
+      "prompt": "Extend your query to include enrollments, ensuring all departments are preserved. Use a LEFT JOIN to connect courses with enrollments.",
+      "starterCode": "SELECT d.name, COUNT(DISTINCT c.id) AS course_count\nFROM departments d\nLEFT JOIN courses c ON d.id = c.department_id\nLEFT JOIN enrollments e ON c.id = e.course_id\nGROUP BY d.name;",
+      "solutionCode": "SELECT d.name, COUNT(DISTINCT c.id) AS course_count\nFROM departments d\nLEFT JOIN courses c ON d.id = c.department_id\nLEFT JOIN enrollments e ON c.id = e.course_id\nGROUP BY d.name;",
+      "datasetId": "school_relations_intro",
+      "recipeType": "sql_query",
+      "hint": "Use LEFT JOIN to connect courses with enrollments while preserving all departments.",
+      "help": {
+        "concept": "LEFT JOIN ensures that all rows from the left table are included, even if there are no matches in the right table.",
+        "hint_1": "Start with the existing query and add a LEFT JOIN to enrollments.",
+        "hint_2": "Ensure that departments with no enrollments still appear in the results."
+      }
+    },
+    {
+      "id": "step4-count-enrollments",
+      "kind": "code_input",
+      "title": "Count Enrollment Rows",
+      "prompt": "Add a count of enrollment rows per department to your query, ensuring the department grain is maintained.",
+      "starterCode": "SELECT d.name, COUNT(DISTINCT c.id) AS course_count, COUNT(e.id) AS enrollment_count\nFROM departments d\nLEFT JOIN courses c ON d.id = c.department_id\nLEFT JOIN enrollments e ON c.id = e.course_id\nGROUP BY d.name;",
+      "solutionCode": "SELECT d.name, COUNT(DISTINCT c.id) AS course_count, COUNT(e.id) AS enrollment_count\nFROM departments d\nLEFT JOIN courses c ON d.id = c.department_id\nLEFT JOIN enrollments e ON c.id = e.course_id\nGROUP BY d.name;",
+      "datasetId": "school_relations_intro",
+      "recipeType": "sql_query",
+      "hint": "Use COUNT(e.id) to count enrollment rows per department.",
+      "help": {
+        "concept": "COUNT(column) counts non-null occurrences of the column, useful for counting related records.",
+        "hint_1": "Add COUNT(e.id) to count enrollments per department.",
+        "hint_2": "Ensure the department grain is maintained in the results."
+      }
+    },
+    {
+      "id": "step5-count-unique-students",
+      "kind": "code_input",
+      "title": "Count Unique Students",
+      "prompt": "Modify your query to count unique students per department, ensuring each student is counted only once per department.",
+      "starterCode": "SELECT d.name, COUNT(DISTINCT c.id) AS course_count, COUNT(e.id) AS enrollment_count, COUNT(DISTINCT e.student_id) AS student_count\nFROM departments d\nLEFT JOIN courses c ON d.id = c.department_id\nLEFT JOIN enrollments e ON c.id = e.course_id\nGROUP BY d.name;",
+      "solutionCode": "SELECT d.name, COUNT(DISTINCT c.id) AS course_count, COUNT(e.id) AS enrollment_count, COUNT(DISTINCT e.student_id) AS student_count\nFROM departments d\nLEFT JOIN courses c ON d.id = c.department_id\nLEFT JOIN enrollments e ON c.id = e.course_id\nGROUP BY d.name;",
+      "datasetId": "school_relations_intro",
+      "recipeType": "sql_query",
+      "hint": "Use COUNT(DISTINCT e.student_id) to count unique students per department.",
+      "help": {
+        "concept": "COUNT(DISTINCT ...) ensures each unique value is counted once, useful for counting unique entities.",
+        "hint_1": "Add COUNT(DISTINCT e.student_id) for unique student count.",
+        "hint_2": "Ensure each student is counted only once per department."
+      }
+    },
+    {
+      "id": "step6-rank-scorecard",
+      "kind": "code_input",
+      "title": "Rank the Scorecard Predictably",
+      "prompt": "Sort the final scorecard by enrollment count descending, then by department name ascending.",
+      "starterCode": "SELECT d.name, COUNT(DISTINCT c.id) AS course_count, COUNT(e.id) AS enrollment_count, COUNT(DISTINCT e.student_id) AS student_count\nFROM departments d\nLEFT JOIN courses c ON d.id = c.department_id\nLEFT JOIN enrollments e ON c.id = e.course_id\nGROUP BY d.name\nORDER BY enrollment_count DESC, d.name ASC;",
+      "solutionCode": "SELECT d.name, COUNT(DISTINCT c.id) AS course_count, COUNT(e.id) AS enrollment_count, COUNT(DISTINCT e.student_id) AS student_count\nFROM departments d\nLEFT JOIN courses c ON d.id = c.department_id\nLEFT JOIN enrollments e ON c.id = e.course_id\nGROUP BY d.name\nORDER BY enrollment_count DESC, d.name ASC;",
+      "datasetId": "school_relations_intro",
+      "recipeType": "sql_query",
+      "hint": "Use ORDER BY to sort by enrollment_count descending and department name ascending.",
+      "help": {
+        "concept": "ORDER BY allows you to sort results based on specified columns and order.",
+        "hint_1": "Use ORDER BY enrollment_count DESC, d.name ASC.",
+        "hint_2": "Ensure the scorecard is sorted predictably by enrollment count and department name."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Department Participation Scorecard",
+    "stepIds": [
+      "step1-preserve-departments",
+      "step2-count-courses",
+      "step3-extend-enrollments",
+      "step4-count-enrollments",
+      "step5-count-unique-students",
+      "step6-rank-scorecard"
+    ]
+  }
+}

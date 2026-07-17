@@ -78,7 +78,7 @@ docker compose -f docker-compose.prod.yml logs -f runner
 
 
 
-pnpm curr:course -- publish python applied-python-projects --live-subject  applied-python-projects  --force
+pnpm curr:course -- publish sql sql-data-management  --live-subject  sql-data-management   --force
 
 
 
@@ -156,7 +156,7 @@ sudo docker compose up -d judge0 worker
 
 
 
-RUN_DRAFT_CODE_INPUT_GOLDENS=1 pnpm curr:course -- draft-goldens python applied-python-projects
+RUN_DRAFT_CODE_INPUT_GOLDENS=1 pnpm curr:course -- draft-goldens sql sql-data-management
 
 sudo scp -r deploy@5.78.159.224:/opt/edge-proxy ~/Downloads/
 
@@ -192,7 +192,20 @@ Opt-in suites:
   pnpm --filter @zoeskoul/web test:e2e:legacy
 
 
-pnpm curr:course -- check python applied-python-projects --resume
+pnpm curr:course -- check sql sql-data-management --resume
+pnpm curr:course -- check sql sql-data-management --resume \
+  --provider openai \
+  --model gpt-4o \
+  --translation-provider deepseek \
+  --translation-model deepseek-v4-flash
+
+  cd /Users/admin/Documents/NextJSProject/zoeskoul.com
+
+  AI_PROVIDER=openai \
+  AI_MODEL=gpt-4o \
+  TRANSLATION_PROVIDER=deepseek \
+  TRANSLATION_MODEL=deepseek-v4-flash \
+  pnpm curr:course -- check sql sql-data-management --resume < /dev/null
 
 ssh deploy@5.78.227.155
 

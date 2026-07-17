@@ -1,0 +1,166 @@
+{
+  "topics": {
+    "multi-table-sql": {
+      "multi-table-sql-module-2-outer-joins-and-accurate-counts": {
+        "filtering-left-joins-with-on-and-where": {
+          "label": "Filtering LEFT JOINs with ON and WHERE",
+          "summary": "Place right-table conditions according to whether unmatched left rows must survive.",
+          "cards": {
+            "sketch0": {
+              "title": "Understanding LEFT JOIN with ON and WHERE"
+            },
+            "sketch1": {
+              "title": "Preserving Rows with LEFT JOIN"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_filtering_left_joins_with_on_and_where_sketch0": {
+              "title": "Preserve Every Department While Limiting Matches",
+              "prompt": "Return every department, but match only courses whose title contains `History`. Put the title condition inside `ON` so departments without a matching course remain visible.",
+              "hint": "Add the title condition after the key comparison inside the `ON` clause.",
+              "help": {
+                "concept": "A right-table condition in `ON` limits which right rows match without removing preserved left rows.",
+                "hint_1": "Start from `departments` and use a `LEFT JOIN` to `courses`.",
+                "hint_2": "The final result should still contain all five departments."
+              },
+              "starterCode": "-- Keep every department while matching only History courses\n",
+              "solutionCode": "SELECT d.name AS department_name,\n       c.title AS history_course\nFROM departments AS d\nLEFT JOIN courses AS c\n  ON d.id = c.department_id\n AND c.title LIKE '%History%'\nORDER BY d.name;\n"
+            },
+            "try_filtering_left_joins_with_on_and_where_sketch1": {
+              "title": "Move the Same Condition to WHERE",
+              "prompt": "Use the same department-to-course join and the same `History` title condition, but place the condition in `WHERE`. Observe that only departments with a matching course remain.",
+              "hint": "Keep the key comparison in `ON`; move only the title condition below the join.",
+              "help": {
+                "concept": "A right-table condition in `WHERE` filters the completed result and removes rows whose right-side values are NULL.",
+                "hint_1": "Compare the row count with the previous Try It.",
+                "hint_2": "Only Humanities has a course title containing `History` in this dataset."
+              },
+              "starterCode": "-- Move the same right-table filter to WHERE\n",
+              "solutionCode": "SELECT d.name AS department_name,\n       c.title AS history_course\nFROM departments AS d\nLEFT JOIN courses AS c\n  ON d.id = c.department_id\nWHERE c.title LIKE '%History%'\nORDER BY d.name;\n"
+            }
+          },
+          "practice": {
+            "multi-choice-1": {
+              "title": "What Does LEFT JOIN Preserve?",
+              "prompt": "Which statement correctly describes the preserved side of a LEFT JOIN?",
+              "hint": "Decide whether unmatched left rows must survive.",
+              "help": {
+                "concept": "A right-table condition in `ON` limits matches; the same condition in `WHERE` can remove unmatched left rows.",
+                "hint_1": "Decide whether the report must preserve left rows with no qualifying match.",
+                "hint_2": "Compare the row count when the same right-table condition moves from `ON` to `WHERE`."
+              },
+              "options": {
+                "a": "LEFT JOIN returns only matched rows from both tables.",
+                "b": "LEFT JOIN returns all rows from the left table and matched rows from the right table.",
+                "c": "LEFT JOIN excludes unmatched rows from the left table.",
+                "d": "LEFT JOIN is the same as INNER JOIN."
+              }
+            },
+            "multi-choice-2": {
+              "title": "What Can a WHERE Filter Remove?",
+              "prompt": "What happens when `WHERE` requires a value from the nullable right side of a LEFT JOIN?",
+              "hint": "Think about how WHERE affects unmatched rows in a LEFT JOIN.",
+              "help": {
+                "concept": "Placing a condition in WHERE can filter out unmatched rows from the left table.",
+                "hint_1": "WHERE filters the entire result set, potentially excluding unmatched rows.",
+                "hint_2": "A WHERE condition can remove rows where the right table columns are NULL."
+              },
+              "options": {
+                "a": "It filters the entire result set, potentially excluding unmatched rows.",
+                "b": "It only affects the matched rows from the right table.",
+                "c": "It has no effect on the result set.",
+                "d": "It ensures all unmatched rows are included."
+              }
+            },
+            "drag-reorder-1": {
+              "title": "Choose Where the Right-Table Filter Belongs",
+              "prompt": "Arrange the reasoning steps for deciding whether a right-table condition belongs in `ON` or `WHERE`.",
+              "hint": "Decide first whether unmatched left rows must remain.",
+              "help": {
+                "concept": "Filter placement follows the report requirement, not a memorized clause order.",
+                "hint_1": "Start by identifying the preserved table and the rows the report must keep.",
+                "hint_2": "Use `ON` to limit matches; use `WHERE` to filter the finished result."
+              },
+              "tokens": {
+                "t1": "Identify which table's rows must be preserved",
+                "t2": "Decide whether unmatched left rows must remain",
+                "t3": "Put a match-limiting right-table condition in ON",
+                "t4": "Put a final-result filter in WHERE"
+              }
+            },
+            "fill-blank-choice-1": {
+              "title": "LEFT JOIN Clause",
+              "prompt": "In a LEFT JOIN, the condition that specifies how the tables are related is placed in the [blank1] clause.",
+              "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+              "help": {
+                "concept": "The blank should be filled with the term that makes the statement accurate.",
+                "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+                "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+              },
+              "template": "In a LEFT JOIN, the condition that specifies how the tables are related is placed in the [blank1] clause.",
+              "choices": [
+                "ON",
+                "WHERE",
+                "SELECT",
+                "FROM"
+              ]
+            },
+            "fill-blank-choice-2": {
+              "title": "Effect of WHERE Clause",
+              "prompt": "Placing a condition in the WHERE clause of a LEFT JOIN can unintentionally remove [blank1] rows.",
+              "hint": "Consider what happens to the missing term rows when a WHERE condition is applied.",
+              "help": {
+                "concept": "A WHERE condition can filter out the missing term rows from the left table.",
+                "hint_1": "WHERE conditions can exclude rows where the right table columns are NULL.",
+                "hint_2": "the missing term rows from the left table can be removed by a WHERE condition."
+              },
+              "template": "Placing a condition in the WHERE clause of a LEFT JOIN can unintentionally remove [blank1] rows.",
+              "choices": [
+                "unmatched",
+                "matched",
+                "all",
+                "none"
+              ]
+            },
+            "single-choice-1": {
+              "title": "Purpose of LEFT JOIN",
+              "prompt": "What is the primary purpose of using a LEFT JOIN in SQL?",
+              "hint": "Think about what LEFT JOIN achieves compared to other types of joins.",
+              "help": {
+                "concept": "LEFT JOIN is used to include all rows from the left table, regardless of matches in the right table.",
+                "hint_1": "LEFT JOIN ensures all rows from the left table are included.",
+                "hint_2": "LEFT JOIN is useful for preserving unmatched rows from the left table."
+              },
+              "options": {
+                "a": "To include only matched rows from both tables.",
+                "b": "To include all rows from the left table and matched rows from the right table.",
+                "c": "To exclude unmatched rows from the left table.",
+                "d": "To perform a full outer join."
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "multi-table-sql": {
+      "multi-table-sql-module-2-outer-joins-and-accurate-counts": {
+        "filtering-left-joins-with-on-and-where": {
+          "sketch0": {
+            "title": "Understanding LEFT JOIN with ON and WHERE",
+            "bodyMarkdown": "In SQL, a LEFT JOIN is used to combine rows from two tables based on a related column between them. It returns all rows from the left table and the matched rows from the right table. If there is no match, the result is NULL on the side of the right table.\n\n### Example\nConsider the `students` and `enrollments` tables. To list all students and their enrollments, you can use:\n\n```sql\nSELECT students.name, enrollments.course_id\nFROM students\nLEFT JOIN enrollments ON students.id = enrollments.student_id;\n```\n\nThis query returns all students, including those without enrollments, with `NULL` for `course_id` where there is no match.\n\n### ON vs WHERE\nThe `ON` clause specifies the condition for joining tables, while the `WHERE` clause filters the result set. Using conditions in `WHERE` can unintentionally filter out unmatched rows from the left table.\n\nFor example, adding a `WHERE` condition:\n\n```sql\nSELECT students.name, enrollments.course_id\nFROM students\nLEFT JOIN enrollments ON students.id = enrollments.student_id\nWHERE enrollments.course_id IS NOT NULL;\n```\n\nThis query will exclude students without enrollments because the `WHERE` clause filters out rows where `course_id` is `NULL`."
+          },
+          "sketch1": {
+            "title": "Preserving Rows with LEFT JOIN",
+            "bodyMarkdown": "When using LEFT JOIN, it's crucial to decide where to place conditions to ensure the desired rows are preserved.\n\n### Example\nSuppose you want to list all departments and their courses, including departments without courses:\n\n```sql\nSELECT departments.name, courses.title\nFROM departments\nLEFT JOIN courses ON departments.id = courses.department_id;\n```\n\nThis query lists all departments, showing `NULL` for `title` where there are no courses.\n\n### Filtering with ON\nTo filter based on a condition that should not exclude unmatched rows, place the condition in the `ON` clause:\n\n```sql\nSELECT departments.name, courses.title\nFROM departments\nLEFT JOIN courses ON departments.id = courses.department_id AND courses.title LIKE '%History%';\n```\n\nThis query includes all departments, but only shows courses with 'History' in the title, preserving departments without such courses.\n\n### Filtering with WHERE\nIf you place the condition in the `WHERE` clause, it will filter the entire result set, potentially excluding unmatched rows:\n\n```sql\nSELECT departments.name, courses.title\nFROM departments\nLEFT JOIN courses ON departments.id = courses.department_id\nWHERE courses.title LIKE '%History%';\n```\n\nThis query will exclude departments without any 'History' courses."
+          }
+        }
+      }
+    }
+  }
+}

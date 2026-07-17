@@ -1,0 +1,167 @@
+{
+  "title": "Reading Keys and Relationships",
+  "summary": "Trace documented primary-key and foreign-key pairs before writing a join.",
+  "minutes": 24,
+  "sketchBlocks": [
+    {
+      "id": "sketch-1",
+      "title": "Understanding Primary and Foreign Keys",
+      "bodyMarkdown": "In relational databases, primary keys uniquely identify a record in a table, while foreign keys establish a link between two tables. For example, in our `students` table, the `id` column is a primary key. In the `enrollments` table, the `student_id` column serves as a foreign key that references the `id` in the `students` table. This relationship allows us to connect student records with their respective enrollments."
+    },
+    {
+      "id": "sketch-2",
+      "title": "Using INNER JOIN to Connect Tables",
+      "bodyMarkdown": "To retrieve data from multiple tables, we can use the INNER JOIN clause. For instance, if we want to list all students along with their enrolled courses, we can join the `students` table with the `enrollments` table on the `student_id`. The SQL query would look like this:\n\n```sql\nSELECT students.name, courses.title\nFROM students\nINNER JOIN enrollments ON students.id = enrollments.student_id\nINNER JOIN courses ON enrollments.course_id = courses.id;\n```\nThis query connects the tables based on their relationships, allowing us to fetch relevant data."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "q1",
+      "kind": "single_choice",
+      "title": "What is a primary key?",
+      "prompt": "A primary key is used to uniquely identify a record in a table.",
+      "hint": "Think about how records are distinguished in a database.",
+      "help": {
+        "concept": "A primary key is a unique identifier for a record in a table.",
+        "hint_1": "It cannot contain NULL values.",
+        "hint_2": "Each table should have one primary key."
+      },
+      "options": [
+        "A unique identifier for a record",
+        "A reference to another table",
+        "A column that can be NULL",
+        "A column that stores multiple values"
+      ],
+      "correctOptionIds": [
+        "a"
+      ]
+    },
+    {
+      "id": "q2",
+      "kind": "single_choice",
+      "title": "What does a foreign key do?",
+      "prompt": "A foreign key establishes a relationship between two tables.",
+      "hint": "Consider how tables are linked in a relational database.",
+      "help": {
+        "concept": "A foreign key is a field in one table that uniquely identifies a row of another table.",
+        "hint_1": "It refers to the primary key in another table.",
+        "hint_2": "It helps maintain referential integrity between tables."
+      },
+      "options": [
+        "Links two tables together",
+        "Stores unique values",
+        "Identifies a record",
+        "Is always NULL"
+      ],
+      "correctOptionIds": [
+        "a"
+      ]
+    },
+    {
+      "id": "q3",
+      "kind": "multi_choice",
+      "title": "Which of the following are true about INNER JOIN?",
+      "prompt": "Select all that apply.",
+      "hint": "Think about how INNER JOIN operates on tables.",
+      "help": {
+        "concept": "INNER JOIN retrieves records that have matching values in both tables.",
+        "hint_1": "It only returns rows where there is a match.",
+        "hint_2": "It can join more than two tables."
+      },
+      "options": [
+        "It returns all records from both tables",
+        "It only returns matching records",
+        "It can join multiple tables",
+        "It requires a condition to join"
+      ],
+      "correctOptionIds": [
+        "b",
+        "c",
+        "d"
+      ]
+    },
+    {
+      "id": "q4",
+      "kind": "drag_reorder",
+      "title": "Order the steps to perform an INNER JOIN.",
+      "prompt": "Arrange the steps in the correct order.",
+      "hint": "Think about the sequence of actions needed to join tables.",
+      "help": {
+        "concept": "To perform an INNER JOIN, you need to specify the tables and the join condition.",
+        "hint_1": "Start with the SELECT statement.",
+        "hint_2": "Then specify the tables and the join condition."
+      },
+      "tokens": [
+        "Write the SELECT statement",
+        "Specify the tables",
+        "Define the join condition",
+        "Execute the query"
+      ],
+      "correctOrder": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ]
+    },
+    {
+      "id": "q5",
+      "kind": "fill_blank_choice",
+      "title": "A foreign key in the enrollments table references the _____ table.",
+      "prompt": "Fill in the blank with the correct table name.",
+      "hint": "Think about which table the foreign key is linked to.",
+      "help": {
+        "concept": "The foreign key in the enrollments table links to the students table.",
+        "hint_1": "It connects to the primary key of another table.",
+        "hint_2": "This table contains student records."
+      },
+      "template": "A foreign key in the enrollments table references the [blank1] table.",
+      "choices": [
+        "students",
+        "courses",
+        "departments",
+        "enrollments"
+      ],
+      "correctValue": "students"
+    },
+    {
+      "id": "try-reading-keys-and-relationships-sketch0",
+      "kind": "code_input",
+      "title": "Join Students and Enrollments",
+      "prompt": "Write a query to join the students and enrollments tables to list student names and their enrolled courses.",
+      "hint": "Use INNER JOIN to connect the two tables on the student_id.",
+      "help": {
+        "concept": "You need to join the students table with the enrollments table using the student_id.",
+        "hint_1": "Remember to select the student name and course title.",
+        "hint_2": "Make sure to use the correct ON condition."
+      },
+      "starterCode": "SELECT students.name, courses.title\nFROM students\nINNER JOIN enrollments ON students.id = enrollments.student_id\nINNER JOIN courses ON enrollments.course_id = courses.id;",
+      "solutionCode": "SELECT students.name, courses.title\nFROM students\nINNER JOIN enrollments ON students.id = enrollments.student_id\nINNER JOIN courses ON enrollments.course_id = courses.id;",
+      "datasetId": "school_relations_intro",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "try-reading-keys-and-relationships-sketch1",
+      "kind": "code_input",
+      "title": "List Students by Grade Level",
+      "prompt": "Write a query to list all students along with their grade levels.",
+      "hint": "Select the name and grade_level from the students table.",
+      "help": {
+        "concept": "You need to retrieve the name and grade level of each student.",
+        "hint_1": "Make sure to select the correct columns.",
+        "hint_2": "You don't need to join any other tables for this query."
+      },
+      "starterCode": "SELECT name, grade_level\nFROM students;",
+      "solutionCode": "SELECT name, grade_level\nFROM students;",
+      "datasetId": "school_relations_intro",
+      "recipeType": "sql_query"
+    }
+  ],
+  "projectDraft": {
+    "title": "Build a Student Enrollment Activity Roster",
+    "stepIds": [
+      "try-reading-keys-and-relationships-sketch0",
+      "try-reading-keys-and-relationships-sketch1"
+    ]
+  }
+}

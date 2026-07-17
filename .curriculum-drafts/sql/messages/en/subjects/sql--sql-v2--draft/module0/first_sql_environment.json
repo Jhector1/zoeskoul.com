@@ -24,48 +24,48 @@
           },
           "quiz": {
             "try-first_sql_environment-sketch0": {
-              "title": "Try it yourself: Where will you run SQL in this course?",
-              "prompt": "Use the SQL editor to practice the idea from this card. Run the query, then compare the result table with the lesson explanation.",
+              "title": "Return Grade and City",
+              "prompt": "Return `grade, city` from `students` in that column order.",
               "hint": "Use the pattern shown in the lesson card.",
               "help": {
-                "concept": "This try-it checks that you can connect the card concept to a small SQL query.",
-                "hint_1": "Check the selected columns and the table name.",
-                "hint_2": "Run the query and read the result table."
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "Return `grade, city` from `students` in that column order."
               },
               "starterCode": "-- Show the grade and city columns from the students table\nSELECT \nFROM students;"
             },
             "try-first_sql_environment-sketch1": {
-              "title": "Try it yourself: What parts of the SQL workspace matter most?",
-              "prompt": "Use the SQL editor to practice the idea from this card. Run the query, then compare the result table with the lesson explanation.",
+              "title": "Return Id and Age",
+              "prompt": "Return `id, age` from `students` in that column order.",
               "hint": "Use the pattern shown in the lesson card.",
               "help": {
-                "concept": "This try-it checks that you can connect the card concept to a small SQL query.",
-                "hint_1": "Check the selected columns and the table name.",
-                "hint_2": "Run the query and read the result table."
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "Return `id, age` from `students` in that column order."
               },
               "starterCode": "-- Show the id and age columns from the students table\nSELECT \nFROM students;"
             },
             "try-first_sql_environment-sketch2": {
-              "title": "Try it yourself: How do you run your first query here?",
-              "prompt": "Use the SQL editor to practice the idea from this card. Run the query, then compare the result table with the lesson explanation.",
+              "title": "First Sql Environment",
+              "prompt": "Return the expression `'Ready to query' AS status` as a one-row result.",
               "hint": "Use the pattern shown in the lesson card.",
               "help": {
-                "concept": "This try-it checks that you can connect the card concept to a small SQL query.",
-                "hint_1": "Check the selected columns and the table name.",
-                "hint_2": "Run the query and read the result table."
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "Return the expression `'Ready to query' AS status` as a one-row result."
               },
-              "starterCode": "-- Return the message Hello SQL with a column named message\nSELECT"
+              "starterCode": "-- Return a short readiness message with the heading status\nSELECT "
             },
             "try-first_sql_environment-sketch3": {
-              "title": "Try it yourself: How do you read the results and tables?",
-              "prompt": "Use the SQL editor to practice the idea from this card. Run the query, then compare the result table with the lesson explanation.",
+              "title": "Return Name and City",
+              "prompt": "Return `name, city` from `students` in that column order.",
               "hint": "Use the pattern shown in the lesson card.",
               "help": {
-                "concept": "This try-it checks that you can connect the card concept to a small SQL query.",
-                "hint_1": "Check the selected columns and the table name.",
-                "hint_2": "Run the query and read the result table."
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "Return `name, city` from `students` in that column order."
               },
-              "starterCode": "-- Query name, age, and city from the students table.\nSELECT \nFROM students;"
+              "starterCode": "-- Show each student's name and city\nSELECT \nFROM students;"
             },
             "m0_s04_where_sql_runs": {
               "title": "Where will you run SQL here?",

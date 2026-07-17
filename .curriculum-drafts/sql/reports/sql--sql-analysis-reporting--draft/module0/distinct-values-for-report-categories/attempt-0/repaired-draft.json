@@ -1,0 +1,200 @@
+{
+  "title": "Distinct Values for Report Categories",
+  "summary": "Learn how to use the DISTINCT keyword in SQL to identify unique categories in a dataset, which is essential for creating clear and concise reports.",
+  "minutes": 24,
+  "sketchBlocks": [
+    {
+      "id": "sketch0",
+      "title": "Understanding DISTINCT in SQL",
+      "bodyMarkdown": "The `DISTINCT` keyword in SQL is used to remove duplicate rows from the result set. This is particularly useful when you want to list unique values from a column. For example, if you have a table of sales data and you want to find out all the unique product categories, you can use `DISTINCT` to achieve this.\n\n```sql\nSELECT DISTINCT category\nFROM sales_reporting;\n```\n\nThis query will return a list of all unique categories in the `sales_reporting` table. It's important to note that `DISTINCT` applies to all columns in the SELECT statement, so if you select multiple columns, the combination of all columns must be unique for a row to be included in the result."
+    },
+    {
+      "id": "sketch1",
+      "title": "Using DISTINCT with Multiple Columns",
+      "bodyMarkdown": "When using `DISTINCT` with multiple columns, SQL will return unique combinations of the specified columns. This can be useful when you want to see unique pairs or sets of data.\n\nFor example, if you want to find unique combinations of regions and categories in the `sales_reporting` table, you can write:\n\n```sql\nSELECT DISTINCT region, category\nFROM sales_reporting;\n```\n\nThis query will return each unique pair of region and category. It's a powerful way to understand the diversity of data combinations in your dataset."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "single-choice-1",
+      "kind": "single_choice",
+      "title": "Purpose of DISTINCT",
+      "prompt": "What is the primary purpose of the DISTINCT keyword in SQL?",
+      "options": [
+        "To sort the data in ascending order",
+        "To remove duplicate rows from the result set",
+        "To calculate the sum of a column",
+        "To filter rows based on a condition"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Think about what DISTINCT does to duplicate rows.",
+      "help": {
+        "concept": "DISTINCT is used to eliminate duplicate rows from the result set.",
+        "hint_1": "DISTINCT ensures that each row in the result set is unique.",
+        "hint_2": "DISTINCT is applied to the columns specified in the SELECT statement."
+      }
+    },
+    {
+      "id": "multi-choice-1",
+      "kind": "multi_choice",
+      "title": "Using DISTINCT with Multiple Columns",
+      "prompt": "Which of the following statements about using DISTINCT with multiple columns are true? Select all that apply.",
+      "options": [
+        "DISTINCT can only be used with one column at a time",
+        "DISTINCT will return unique combinations of the selected columns",
+        "Using DISTINCT with multiple columns will return all possible combinations",
+        "DISTINCT can help identify unique pairs or sets of data"
+      ],
+      "correctOptionIds": [
+        "b",
+        "d"
+      ],
+      "hint": "Consider how DISTINCT affects the result set when multiple columns are involved.",
+      "help": {
+        "concept": "DISTINCT can be used with multiple columns to find unique combinations of values.",
+        "hint_1": "DISTINCT applies to the combination of all selected columns.",
+        "hint_2": "Each unique combination of the selected columns will appear once in the result set."
+      }
+    },
+    {
+      "id": "drag-reorder-1",
+      "kind": "drag_reorder",
+      "title": "Order of SQL Clauses",
+      "prompt": "Arrange the SQL clauses in the correct order for a basic SELECT statement.",
+      "tokens": [
+        "SELECT",
+        "FROM",
+        "WHERE",
+        "ORDER BY"
+      ],
+      "correctOrder": [
+        "SELECT",
+        "FROM",
+        "WHERE",
+        "ORDER BY"
+      ],
+      "hint": "Read each piece and arrange them in the order the statement should be understood.",
+      "help": {
+        "concept": "The pieces should form a valid statement in a logical order.",
+        "hint_1": "Start with the piece that introduces the idea or action.",
+        "hint_2": "Place dependent pieces after the part they describe or complete."
+      }
+    },
+    {
+      "id": "fill-blank-choice-1",
+      "kind": "fill_blank_choice",
+      "title": "DISTINCT Keyword Usage",
+      "prompt": "Complete the SQL statement to find unique product names from the sales_reporting table: `SELECT [blank1] product_name FROM sales_reporting;`",
+      "template": "SELECT [blank1] product_name FROM sales_reporting;",
+      "choices": [
+        "UNIQUE",
+        "DISTINCT",
+        "ALL",
+        "SINGLE"
+      ],
+      "correctValue": "DISTINCT",
+      "hint": "The keyword removes duplicates.",
+      "help": {
+        "concept": "the missing term is used to ensure each row in the result set is unique.",
+        "hint_1": "the missing term is placed right after SELECT to affect the result set.",
+        "hint_2": "the missing term ensures that only unique product names are returned."
+      }
+    },
+    {
+      "id": "try-distinct-values-for-report-categories-sketch0",
+      "kind": "code_input",
+      "title": "Try It: Unique Categories",
+      "prompt": "Write a SQL query to list all unique categories from the `sales_reporting` table. This will help you understand the variety of products available.",
+      "starterCode": "-- Write your SQL answer below",
+      "solutionCode": "SELECT DISTINCT category\nFROM sales_reporting;",
+      "tests": [
+        {
+          "stdout": "Art\nStationery\nTech\nHome\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "try-distinct-values-for-report-categories-sketch1",
+      "kind": "code_input",
+      "title": "Try It: Unique Region-Category Pairs",
+      "prompt": "Write a SQL query to find all unique combinations of region and category from the `sales_reporting` table. This will help you see how products are distributed across regions.",
+      "starterCode": "-- Write your SQL answer below",
+      "solutionCode": "SELECT DISTINCT region, category\nFROM sales_reporting;",
+      "tests": [
+        {
+          "stdout": "North Art\nNorth Stationery\nNorth Tech\nSouth Home\nSouth Art\nSouth Tech\nEast Stationery\nEast Home\nEast Tech\nWest Art\nWest Home\nWest Stationery\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "single-choice-2",
+      "kind": "single_choice",
+      "title": "DISTINCT and Aliases",
+      "prompt": "How does using an alias with DISTINCT affect the result set?",
+      "options": [
+        "It changes the column name in the result set",
+        "It affects which rows are considered duplicates",
+        "It changes the data type of the column",
+        "It has no effect on the DISTINCT operation"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Consider what an alias does to the column name in the result set.",
+      "help": {
+        "concept": "An alias renames a column in the result set but does not affect the DISTINCT operation.",
+        "hint_1": "DISTINCT removes duplicates, while an alias changes the column header.",
+        "hint_2": "The alias is applied after DISTINCT has filtered the rows."
+      }
+    },
+    {
+      "id": "multi-choice-2",
+      "kind": "multi_choice",
+      "title": "DISTINCT Limitations",
+      "prompt": "Which of the following are limitations of using DISTINCT in SQL? Select all that apply.",
+      "options": [
+        "DISTINCT cannot perform calculations",
+        "DISTINCT cannot filter rows based on conditions",
+        "DISTINCT can only be used with numeric columns",
+        "DISTINCT cannot be used with ORDER BY"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ],
+      "hint": "Think about what DISTINCT can and cannot do.",
+      "help": {
+        "concept": "DISTINCT is limited to removing duplicate rows based on the selected columns.",
+        "hint_1": "DISTINCT does not perform calculations or transformations.",
+        "hint_2": "DISTINCT cannot be used to filter rows based on conditions."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Order Value Detail Report",
+    "stepIds": [
+      "try-distinct-values-for-report-categories-sketch0",
+      "try-distinct-values-for-report-categories-sketch1"
+    ]
+  }
+}

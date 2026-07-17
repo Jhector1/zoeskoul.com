@@ -1,0 +1,200 @@
+{
+  "title": "Aliases for Readable Headings",
+  "summary": "Learn how to use SQL aliases to create clear and readable column headings in your reports.",
+  "minutes": 24,
+  "sketchBlocks": [
+    {
+      "id": "sketch0",
+      "title": "Understanding SQL Aliases",
+      "bodyMarkdown": "In SQL, aliases are used to give a table or a column in a table a temporary name. This is often done to make column names more readable or to simplify complex queries. The `AS` keyword is used to create an alias.\n\nFor example, if you have a column named `unit_price`, you might want to display it as `Price per Unit` in your report. You can achieve this by using an alias:\n\n```sql\nSELECT unit_price AS 'Price per Unit'\nFROM sales_reporting;\n```\n\nThis query will display the `unit_price` column with the heading `Price per Unit` in the results table. Aliases are especially useful in reports where clarity and readability are important."
+    },
+    {
+      "id": "sketch1",
+      "title": "Using Aliases in Calculated Columns",
+      "bodyMarkdown": "Aliases can also be used in calculated columns to make the results more understandable. For instance, if you want to calculate the total sales value for each order, you can multiply the `quantity` by the `unit_price` and give this calculation a clear alias.\n\nHere's how you can do it:\n\n```sql\nSELECT product_name, quantity * unit_price AS 'Total Sales'\nFROM sales_reporting;\n```\n\nIn this query, `quantity * unit_price` calculates the total sales for each product, and the alias `Total Sales` makes it clear what this column represents. This approach helps in creating reports that are easy to read and interpret."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "single-choice-1",
+      "kind": "single_choice",
+      "title": "Purpose of SQL Aliases",
+      "prompt": "What is the primary purpose of using aliases in SQL?",
+      "options": [
+        "To permanently rename columns in the database",
+        "To temporarily rename columns for better readability",
+        "To change the data type of a column",
+        "To delete columns from the output"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Think about how aliases affect the readability of column names.",
+      "help": {
+        "concept": "SQL aliases are used to rename columns or tables for better readability.",
+        "hint_1": "Aliases make column names more understandable in the output.",
+        "hint_2": "They are often used to simplify complex queries or make reports clearer."
+      }
+    },
+    {
+      "id": "multi-choice-1",
+      "kind": "multi_choice",
+      "title": "Benefits of Using Aliases",
+      "prompt": "Which of the following are benefits of using aliases in SQL? Select all that apply.",
+      "options": [
+        "Improving readability of column names",
+        "Changing the data type of columns",
+        "Simplifying complex queries",
+        "Permanently altering table structures"
+      ],
+      "correctOptionIds": [
+        "a",
+        "c"
+      ],
+      "hint": "Consider how aliases improve the presentation of query results.",
+      "help": {
+        "concept": "Aliases improve the readability and presentation of SQL query results.",
+        "hint_1": "Aliases can make complex queries easier to understand.",
+        "hint_2": "They help in creating more readable and user-friendly reports."
+      }
+    },
+    {
+      "id": "drag-reorder-1",
+      "kind": "drag_reorder",
+      "title": "Order of SQL Query Clauses",
+      "prompt": "Arrange the SQL query clauses in the correct order of execution.",
+      "tokens": [
+        "FROM",
+        "WHERE",
+        "SELECT",
+        "ORDER BY"
+      ],
+      "correctOrder": [
+        "FROM",
+        "WHERE",
+        "SELECT",
+        "ORDER BY"
+      ],
+      "hint": "Read each piece and arrange them in the order the statement should be understood.",
+      "help": {
+        "concept": "The pieces should form a valid statement in a logical order.",
+        "hint_1": "Start with the piece that introduces the idea or action.",
+        "hint_2": "Place dependent pieces after the part they describe or complete."
+      }
+    },
+    {
+      "id": "fill-blank-choice-1",
+      "kind": "fill_blank_choice",
+      "title": "SQL Alias Syntax",
+      "prompt": "Complete the SQL statement to create an alias for the column `unit_price`.",
+      "template": "SELECT unit_price AS [blank1] FROM sales_reporting;",
+      "choices": [
+        "'Price per Unit'",
+        "unit_price",
+        "Price",
+        "'Unit Price'"
+      ],
+      "correctValue": "'Price per Unit'",
+      "hint": "Use the AS keyword to create an alias.",
+      "help": {
+        "concept": "The AS keyword is used to create an alias for a column or table.",
+        "hint_1": "The alias follows the AS keyword.",
+        "hint_2": "The alias should be enclosed in quotes if it contains spaces."
+      }
+    },
+    {
+      "id": "multi-choice-2",
+      "kind": "multi_choice",
+      "title": "Alias Usage in Calculated Columns",
+      "prompt": "Why would you use an alias in a calculated column? Select all that apply.",
+      "options": [
+        "To make the calculation results clearer",
+        "To change the calculation logic",
+        "To improve the readability of the output",
+        "To permanently change the column name"
+      ],
+      "correctOptionIds": [
+        "a",
+        "c"
+      ],
+      "hint": "Consider how aliases affect the clarity of calculated results.",
+      "help": {
+        "concept": "Aliases in calculated columns make the results more understandable and readable.",
+        "hint_1": "They help in identifying what the calculated column represents.",
+        "hint_2": "Aliases can make complex calculations easier to interpret."
+      }
+    },
+    {
+      "id": "single-choice-2",
+      "kind": "single_choice",
+      "title": "Alias Keyword",
+      "prompt": "Which keyword is used to create an alias in SQL?",
+      "options": [
+        "ALIAS",
+        "AS",
+        "RENAME",
+        "WITH"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This question checks a specific idea from the lesson, not general test-taking strategy.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "try-aliases-for-readable-headings-sketch0",
+      "kind": "code_input",
+      "title": "Try It: Create a Simple Alias",
+      "prompt": "Write a query to select the `product_name` and `unit_price` from the `sales_reporting` table, using an alias to rename `unit_price` to `Price per Unit`.",
+      "starterCode": "-- Write your SQL answer below",
+      "solutionCode": "SELECT product_name, unit_price AS 'Price per Unit'\nFROM sales_reporting;",
+      "tests": [
+        {
+          "stdout": "product_name | Price per Unit\n-----------------------------\nWatercolor Set | 28.0\nCanvas Pack | 12.0\nNotebook Bundle | 9.5\nDesk Planner | 18.0\nWireless Mouse | 34.0\nUSB-C Hub | 45.0\nStorage Basket | 16.0\nTable Lamp | 52.0\nMarker Set | 21.0\nSketchbook | 11.0\nLaptop Stand | 48.0\nWebcam | 62.0\nPen Pack | 6.0\nFolder Set | 8.0\nWall Clock | 36.0\nThrow Pillow | 24.0\nKeyboard | 40.0\nPortable Charger | 30.0\nAcrylic Paint Set | 32.0\nBrush Set | 14.0\nKitchen Organizer | 27.0\nBath Towel Set | 22.0\nLabel Pack | 7.0\nWeekly Planner | 19.0\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "try-aliases-for-readable-headings-sketch1",
+      "kind": "code_input",
+      "title": "Try It: Alias in Calculated Column",
+      "prompt": "Write a query to calculate the total sales for each product by multiplying `quantity` by `unit_price`, and use an alias to name this column `Total Sales`.",
+      "starterCode": "-- Write your SQL answer below",
+      "solutionCode": "SELECT product_name, quantity * unit_price AS 'Total Sales'\nFROM sales_reporting;",
+      "tests": [
+        {
+          "stdout": "product_name | Total Sales\n--------------------------\nWatercolor Set | 84.0\nCanvas Pack | 60.0\nNotebook Bundle | 76.0\nDesk Planner | 72.0\nWireless Mouse | 68.0\nUSB-C Hub | 135.0\nStorage Basket | 96.0\nTable Lamp | 104.0\nMarker Set | 84.0\nSketchbook | 77.0\nLaptop Stand | 96.0\nWebcam | 186.0\nPen Pack | 60.0\nFolder Set | 40.0\nWall Clock | 72.0\nThrow Pillow | 96.0\nKeyboard | 120.0\nPortable Charger | 120.0\nAcrylic Paint Set | 96.0\nBrush Set | 84.0\nKitchen Organizer | 81.0\nBath Towel Set | 110.0\nLabel Pack | 63.0\nWeekly Planner | 76.0\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Order Value Detail Report",
+    "stepIds": [
+      "try-aliases-for-readable-headings-sketch0",
+      "try-aliases-for-readable-headings-sketch1"
+    ]
+  }
+}

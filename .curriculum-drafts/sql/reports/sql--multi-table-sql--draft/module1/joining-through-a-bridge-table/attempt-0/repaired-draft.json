@@ -1,0 +1,196 @@
+{
+  "title": "Joining Through a Bridge Table",
+  "summary": "Connect two entity tables through the enrollment records that relate them.",
+  "minutes": 28,
+  "sketchBlocks": [
+    {
+      "id": "sketch-joining-bridge-table-0",
+      "title": "Understanding Bridge Tables",
+      "bodyMarkdown": "A bridge table is used to connect two tables that have a many-to-many relationship. In our school database, the `enrollments` table acts as a bridge between `students` and `courses`. Each enrollment record links a student to a course, allowing us to query information about which students are enrolled in which courses.\n\nFor example, consider the following SQL query:\n\n```sql\nSELECT students.name, courses.title\nFROM students\nJOIN enrollments ON students.id = enrollments.student_id\nJOIN courses ON enrollments.course_id = courses.id;\n```\n\nThis query retrieves the names of students along with the titles of the courses they are enrolled in. The `enrollments` table is crucial here as it provides the necessary link between `students` and `courses`. By joining through the `enrollments` table, we can access data from both related tables."
+    },
+    {
+      "id": "sketch-joining-bridge-table-1",
+      "title": "Building Complex Queries with Bridge Tables",
+      "bodyMarkdown": "When working with bridge tables, it's important to understand how to extend queries to include additional related data. For instance, if we want to include department information for each course a student is enrolled in, we can extend our query by joining the `departments` table.\n\nHere's how you can do it:\n\n```sql\nSELECT students.name, courses.title, departments.name AS department\nFROM students\nJOIN enrollments ON students.id = enrollments.student_id\nJOIN courses ON enrollments.course_id = courses.id\nJOIN departments ON courses.department_id = departments.id;\n```\n\nIn this query, we have added another join to include the `departments` table. This allows us to retrieve not only the student names and course titles but also the department names associated with each course. By understanding the relationships and using bridge tables effectively, you can build complex queries that provide comprehensive insights into your data."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "try-joining-bridge-table-sketch0",
+      "kind": "code_input",
+      "title": "Querying Student Enrollments",
+      "prompt": "Write a SQL query to list all students and the courses they are enrolled in, using the `enrollments` table as a bridge.",
+      "starterCode": "-- Write your SQL answer below",
+      "solutionCode": "SELECT students.name, courses.title\nFROM students\nJOIN enrollments ON students.id = enrollments.student_id\nJOIN courses ON enrollments.course_id = courses.id;",
+      "tests": [
+        {
+          "stdout": "Mia | Biology\nMia | Algebra II\nLeo | Algebra II\nLeo | World History\nAva | Computer Basics\nNoah | Biology\nNoah | Computer Basics\nEmma | World History\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "school_relations_intro",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "try-joining-bridge-table-sketch1",
+      "kind": "code_input",
+      "title": "Extending Queries with Departments",
+      "prompt": "Write a SQL query to list all students, the courses they are enrolled in, and the corresponding department for each course.",
+      "starterCode": "-- Write your SQL answer below",
+      "solutionCode": "SELECT students.name, courses.title, departments.name AS department\nFROM students\nJOIN enrollments ON students.id = enrollments.student_id\nJOIN courses ON enrollments.course_id = courses.id\nJOIN departments ON courses.department_id = departments.id;",
+      "tests": [
+        {
+          "stdout": "Mia | Biology | Science\nMia | Algebra II | Math\nLeo | Algebra II | Math\nLeo | World History | Humanities\nAva | Computer Basics | Technology\nNoah | Biology | Science\nNoah | Computer Basics | Technology\nEmma | World History | Humanities\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "school_relations_intro",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "single-choice-1",
+      "kind": "single_choice",
+      "title": "Purpose of a Bridge Table",
+      "prompt": "What is the primary purpose of a bridge table in a database?",
+      "options": [
+        "To store redundant data",
+        "To connect two tables with a many-to-many relationship",
+        "To enforce data integrity",
+        "To improve query performance"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Think about how bridge tables connect other tables.",
+      "help": {
+        "concept": "Bridge tables connect two tables that have a many-to-many relationship.",
+        "hint_1": "Bridge tables help in linking two tables indirectly.",
+        "hint_2": "They are used to manage many-to-many relationships."
+      }
+    },
+    {
+      "id": "single-choice-2",
+      "kind": "single_choice",
+      "title": "Identifying Bridge Tables",
+      "prompt": "Which table acts as a bridge table between `students` and `courses` in the school database?",
+      "options": [
+        "students",
+        "courses",
+        "enrollments",
+        "departments"
+      ],
+      "correctOptionIds": [
+        "c"
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "fill-blank-choice-1",
+      "kind": "fill_blank_choice",
+      "title": "SQL Join Syntax",
+      "prompt": "Complete the SQL statement to join `students` and `enrollments` on `student_id`.",
+      "template": "SELECT * FROM students JOIN enrollments ON [blank1];",
+      "choices": [
+        "students.id = enrollments.student_id",
+        "students.name = enrollments.student_id",
+        "students.id = enrollments.course_id",
+        "students.name = enrollments.course_id"
+      ],
+      "correctValue": "students.id = enrollments.student_id",
+      "hint": "Use the correct SQL syntax for joining tables.",
+      "help": {
+        "concept": "The `ON` clause specifies the condition for joining tables.",
+        "hint_1": "The `ON` clause follows the `JOIN` keyword.",
+        "hint_2": "Use `the missing term`."
+      }
+    },
+    {
+      "id": "fill-blank-choice-2",
+      "kind": "fill_blank_choice",
+      "title": "Extending a Query",
+      "prompt": "Complete the SQL statement to join `courses` and `departments` on `department_id`.",
+      "template": "SELECT * FROM courses JOIN departments ON [blank1];",
+      "choices": [
+        "courses.department_id = departments.id",
+        "courses.id = departments.department_id",
+        "courses.title = departments.id",
+        "courses.id = departments.name"
+      ],
+      "correctValue": "courses.department_id = departments.id",
+      "hint": "Use the correct SQL syntax for joining tables.",
+      "help": {
+        "concept": "The `ON` clause specifies the condition for joining tables.",
+        "hint_1": "The `ON` clause follows the `JOIN` keyword.",
+        "hint_2": "Use `the missing term`."
+      }
+    },
+    {
+      "id": "multi-choice-1",
+      "kind": "multi_choice",
+      "title": "Characteristics of Bridge Tables",
+      "prompt": "Which of the following are characteristics of a bridge table? Select all that apply.",
+      "options": [
+        "Contains foreign keys to related tables",
+        "Stores redundant data",
+        "Facilitates many-to-many relationships",
+        "Improves query performance by itself"
+      ],
+      "correctOptionIds": [
+        "a",
+        "c"
+      ],
+      "hint": "Consider the role of bridge tables in managing relationships.",
+      "help": {
+        "concept": "Bridge tables manage many-to-many relationships by linking two tables.",
+        "hint_1": "They contain foreign keys to both related tables.",
+        "hint_2": "They do not store redundant data but facilitate connections."
+      }
+    },
+    {
+      "id": "drag-reorder-1",
+      "kind": "drag_reorder",
+      "title": "Order of SQL Join Operations",
+      "prompt": "Arrange the steps to join `students`, `enrollments`, and `courses` in the correct order.",
+      "tokens": [
+        "JOIN students to enrollments on student_id",
+        "JOIN enrollments to courses on course_id",
+        "SELECT columns from students, enrollments, and courses"
+      ],
+      "correctOrder": [
+        "SELECT columns from students, enrollments, and courses",
+        "JOIN students to enrollments on student_id",
+        "JOIN enrollments to courses on course_id"
+      ],
+      "hint": "Start with the table that contains the primary key.",
+      "help": {
+        "concept": "The order of joins should follow the relationship path from primary to foreign keys.",
+        "hint_1": "Begin with `students` and join through `enrollments`.",
+        "hint_2": "Finish by joining `courses`."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Course Enrollment Directory",
+    "stepIds": [
+      "try-joining-bridge-table-sketch0",
+      "try-joining-bridge-table-sketch1"
+    ]
+  }
+}

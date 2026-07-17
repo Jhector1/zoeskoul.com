@@ -3,34 +3,17 @@
     "sql--sql-v2--draft": {
       "sql--sql-v2--draft-4": {
         "underscore_wildcard": {
-          "label": "underscore wildcard",
-          "summary": "Learn how the underscore (_) wildcard in LIKE matches exactly one character when filtering text in SQL.",
+          "label": "Matching One Character with _",
+          "summary": "Use the underscore wildcard when each missing position must represent exactly one character.",
           "cards": {
             "sketch0": {
-              "title": "What the underscore wildcard does"
+              "title": "_ Matches Exactly One Character"
             },
             "sketch1": {
-              "title": "Using multiple underscores in patterns"
-            },
-            "sketch2": {
-              "title": "Choosing between _ and %"
+              "title": "Combine _ and % for Precise Patterns"
             },
             "quiz": {
-              "title": "Quiz"
-            },
-            "project": {
-              "title": "Underscore wildcard practice queries"
-            }
-          },
-          "projectSteps": {
-            "code_1": {
-              "title": "Find 3-letter first names"
-            },
-            "code_2": {
-              "title": "Find 5-letter cities starting with M"
-            },
-            "code_3": {
-              "title": "Match example.com emails with 4-character usernames"
+              "title": "Check Your Understanding"
             }
           },
           "quiz": {
@@ -135,7 +118,7 @@
               "prompt": "Fill in the blank to make a pattern that matches exactly one character.",
               "hint": "This is the single-character wildcard used with `LIKE`.",
               "help": {
-                "concept": "In SQL `LIKE`, `the missing term` is the wildcard for exactly one character, while `%` is for any number of characters.",
+                "concept": "In SQL `LIKE`, `the blank` is the wildcard for exactly one character, while `%` is for any number of characters.",
                 "hint_1": "You need the symbol that stands for one character, not many.",
                 "hint_2": "It is the shorter wildcard symbol, not the percent sign."
               },
@@ -164,120 +147,67 @@
                 "_%"
               ]
             },
-            "code_1": {
-              "title": "Find 3-letter first names",
-              "prompt": "Write a query that returns the `full_name` column from `customers` for rows where the first name has exactly 3 letters, followed by a space and the rest of the name. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Return the full_name column from customers for rows where the first name has exactly 3 letters, followed by a space and the rest of the name.\nSELECT full_name\nFROM customers\nWHERE ;"
-            },
-            "code_2": {
-              "title": "Find 5-letter cities starting with M",
-              "prompt": "Write a query that returns the `city` column from `customers` for cities that start with `M` and have exactly 5 total characters. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Return the city column from customers for cities that start with M and have exactly 5 total characters.\nSELECT city\nFROM customers\nWHERE city LIKE '';"
-            },
-            "code_3": {
-              "title": "Match example.com emails with 4-character usernames",
-              "prompt": "Write a query that returns `email` from `customers` where the email ends with `@example.com` and has exactly 4 characters before the `@`. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Return email from customers where the email ends with @example.com and has exactly 4 characters before the @.\nSELECT email\nFROM customers\nWHERE email LIKE ;"
-            },
             "try-underscore_wildcard-sketch0": {
-              "title": "Find 3-letter first names",
-              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that returns the `full_name` column from `customers` for rows where the first name has exactly 3 letters, followed by a space and the rest of the name. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Match Houston with One Unknown Character",
+              "prompt": "You know the city starts with `H` and ends with `uston`, but one character in the middle is unknown. Return `full_name, city` from `customers` in that column order. Keep only rows where `city LIKE 'H_uston'`.",
+              "hint": "Use the pattern `H_uston`; the underscore represents exactly one character.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "Return `full_name, city` from `customers` in that column order. Keep only rows where `city LIKE 'H_uston'`."
               },
-              "starterCode": "-- Return the full_name column from customers for rows where the first name has exactly 3 letters, followed by a space and the rest of the name.\nSELECT full_name\nFROM customers\nWHERE ;"
+              "starterCode": "SELECT full_name, city\nFROM customers\n-- Use one-character wildcard inside Houston"
             },
             "try-underscore_wildcard-sketch1": {
-              "title": "Find 5-letter cities starting with M",
-              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that returns the `city` column from `customers` for cities that start with `M` and have exactly 5 total characters. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Find Five-Character City Names",
+              "prompt": "Find customers whose city names are exactly five characters long. Return `id, full_name, city` from `customers` in that column order. Keep only rows where `city LIKE '_____'`.",
+              "hint": "Use five underscore characters and no percent wildcard.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "Return `id, full_name, city` from `customers` in that column order. Keep only rows where `city LIKE '_____'`."
               },
-              "starterCode": "-- Return the city column from customers for cities that start with M and have exactly 5 total characters.\nSELECT city\nFROM customers\nWHERE city LIKE '';"
-            },
-            "try-underscore_wildcard-sketch2": {
-              "title": "Match example.com emails with 4-character usernames",
-              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that returns `email` from `customers` where the email ends with `@example.com` and has exactly 4 characters before the `@`. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Return email from customers where the email ends with `@example.\nSELECT email\nFROM customers\nWHERE email LIKE ;"
+              "starterCode": "SELECT id, full_name, city\nFROM customers\n-- Match exactly five characters"
             }
           },
           "tryIt": {
             "allowReveal": true,
-            "try_underscore_wildcard_sketch0": {
-              "title": "Find 3-letter first names",
-              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that returns the `full_name` column from `customers` for rows where the first name has exactly 3 letters, followed by a space and the rest of the name. Write the query in the SQL editor, click Run query, and check the results table."
-            },
             "try_underscore_wildcard_sketch1": {
-              "title": "Find 5-letter cities starting with M",
-              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that returns the `city` column from `customers` for cities that start with `M` and have exactly 5 total characters. Write the query in the SQL editor, click Run query, and check the results table."
+              "title": "Find Five-Character City Names",
+              "prompt": "Find customers whose city names are exactly five characters long. Show `id`, `full_name`, and `city` from `customers`.",
+              "hint": "Use five underscore characters and no percent wildcard.",
+              "help": {
+                "concept": "A sequence of underscores can require an exact text length.",
+                "hint_1": "Use five underscore characters and no percent wildcard.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+              }
             },
-            "try_underscore_wildcard_sketch2": {
-              "title": "Match example.com emails with 4-character usernames",
-              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that returns `email` from `customers` where the email ends with `@example.com` and has exactly 4 characters before the `@`. Write the query in the SQL editor, click Run query, and check the results table."
+            "try_underscore_wildcard_sketch0": {
+              "title": "Match Houston with One Unknown Character",
+              "prompt": "You know the city starts with `H` and ends with `uston`, but one character in the middle is unknown. Show `full_name` and `city` from `customers` for the matching records.",
+              "hint": "Use the pattern `H_uston`; the underscore represents exactly one character.",
+              "help": {
+                "concept": "The underscore wildcard stands for exactly one character in a LIKE pattern.",
+                "hint_1": "Use the pattern `H_uston`; the underscore represents exactly one character.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+              }
             }
           }
         }
       },
       "sql-v2-4": {
         "underscore_wildcard": {
-          "label": "underscore wildcard",
-          "summary": "Learn how the underscore (_) wildcard in LIKE matches exactly one character when filtering text in SQL.",
+          "label": "Matching One Character with _",
+          "summary": "Use the underscore wildcard when each missing position must represent exactly one character.",
           "cards": {
             "sketch0": {
-              "title": "What the underscore wildcard does"
+              "title": "_ Matches Exactly One Character"
             },
             "sketch1": {
-              "title": "Using multiple underscores in patterns"
-            },
-            "sketch2": {
-              "title": "Choosing between _ and %"
+              "title": "Combine _ and % for Precise Patterns"
             },
             "quiz": {
-              "title": "Quiz"
-            },
-            "project": {
-              "title": "Underscore wildcard practice queries"
-            }
-          },
-          "projectSteps": {
-            "code_1": {
-              "title": "Find 3-letter first names"
-            },
-            "code_2": {
-              "title": "Find 5-letter cities starting with M"
-            },
-            "code_3": {
-              "title": "Match example.com emails with 4-character usernames"
+              "title": "Check Your Understanding"
             }
           },
           "quiz": {
@@ -382,7 +312,7 @@
               "prompt": "Fill in the blank to make a pattern that matches exactly one character.",
               "hint": "This is the single-character wildcard used with `LIKE`.",
               "help": {
-                "concept": "In SQL `LIKE`, `the missing term` is the wildcard for exactly one character, while `%` is for any number of characters.",
+                "concept": "In SQL `LIKE`, `the blank` is the wildcard for exactly one character, while `%` is for any number of characters.",
                 "hint_1": "You need the symbol that stands for one character, not many.",
                 "hint_2": "It is the shorter wildcard symbol, not the percent sign."
               },
@@ -445,30 +375,30 @@
               "starterCode": "-- Return email from customers where the email ends with @example.com and has exactly 4 characters before the @.\nSELECT email\nFROM customers\nWHERE email LIKE ;"
             },
             "try-underscore_wildcard-sketch0": {
-              "title": "Find 3-letter first names",
-              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that returns the `full_name` column from `customers` for rows where the first name has exactly 3 letters, followed by a space and the rest of the name. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Match Houston with One Unknown Character",
+              "prompt": "You know the city starts with `H` and ends with `uston`, but one character in the middle is unknown. Show `full_name` and `city` from `customers` for the matching records.",
+              "hint": "Use the pattern `H_uston`; the underscore represents exactly one character.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
+                "concept": "The underscore wildcard stands for exactly one character in a LIKE pattern.",
+                "hint_1": "Use the pattern `H_uston`; the underscore represents exactly one character.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
               },
-              "starterCode": "-- Return the full_name column from customers for rows where the first name has exactly 3 letters, followed by a space and the rest of the name.\nSELECT full_name\nFROM customers\nWHERE ;"
+              "starterCode": "SELECT full_name, city\nFROM customers\n-- Use one-character wildcard inside Houston"
             },
             "try-underscore_wildcard-sketch1": {
-              "title": "Find 5-letter cities starting with M",
-              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that returns the `city` column from `customers` for cities that start with `M` and have exactly 5 total characters. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Find Five-Character City Names",
+              "prompt": "Find customers whose city names are exactly five characters long. Show `id`, `full_name`, and `city` from `customers`.",
+              "hint": "Use five underscore characters and no percent wildcard.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
+                "concept": "A sequence of underscores can require an exact text length.",
+                "hint_1": "Use five underscore characters and no percent wildcard.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
               },
-              "starterCode": "-- Return the city column from customers for cities that start with M and have exactly 5 total characters.\nSELECT city\nFROM customers\nWHERE city LIKE '';"
+              "starterCode": "SELECT id, full_name, city\nFROM customers\n-- Match exactly five characters"
             },
             "try-underscore_wildcard-sketch2": {
               "title": "Match example.com emails with 4-character usernames",
-              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that returns `email` from `customers` where the email ends with `@example.com` and has exactly 4 characters before the `@`. Write the query in the SQL editor, click Run query, and check the results table.",
+              "prompt": "Create a customer-cleanup query that returns `email` from `customers` where the email ends with `@example.com` and has exactly 4 characters before the `@`. Run it and compare the result with the expected table.",
               "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
               "help": {
                 "concept": "This SQL exercise checks whether your query returns the requested result.",
@@ -480,17 +410,25 @@
           },
           "tryIt": {
             "allowReveal": true,
-            "try_underscore_wildcard_sketch0": {
-              "title": "Find 3-letter first names",
-              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that returns the `full_name` column from `customers` for rows where the first name has exactly 3 letters, followed by a space and the rest of the name. Write the query in the SQL editor, click Run query, and check the results table."
-            },
             "try_underscore_wildcard_sketch1": {
-              "title": "Find 5-letter cities starting with M",
-              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that returns the `city` column from `customers` for cities that start with `M` and have exactly 5 total characters. Write the query in the SQL editor, click Run query, and check the results table."
+              "title": "Find Five-Character City Names",
+              "prompt": "Find customers whose city names are exactly five characters long. Show `id`, `full_name`, and `city` from `customers`.",
+              "hint": "Use five underscore characters and no percent wildcard.",
+              "help": {
+                "concept": "A sequence of underscores can require an exact text length.",
+                "hint_1": "Use five underscore characters and no percent wildcard.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+              }
             },
-            "try_underscore_wildcard_sketch2": {
-              "title": "Match example.com emails with 4-character usernames",
-              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that returns `email` from `customers` where the email ends with `@example.com` and has exactly 4 characters before the `@`. Write the query in the SQL editor, click Run query, and check the results table."
+            "try_underscore_wildcard_sketch0": {
+              "title": "Match Houston with One Unknown Character",
+              "prompt": "You know the city starts with `H` and ends with `uston`, but one character in the middle is unknown. Show `full_name` and `city` from `customers` for the matching records.",
+              "hint": "Use the pattern `H_uston`; the underscore represents exactly one character.",
+              "help": {
+                "concept": "The underscore wildcard stands for exactly one character in a LIKE pattern.",
+                "hint_1": "Use the pattern `H_uston`; the underscore represents exactly one character.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+              }
             }
           }
         }
@@ -501,33 +439,25 @@
     "sql--sql-v2--draft": {
       "sql--sql-v2--draft-4": {
         "underscore_wildcard": {
-          "sketch_1": {
-            "title": "What the underscore wildcard does",
-            "bodyMarkdown": "In a `LIKE` pattern, the underscore character `_` matches **exactly one character**.\n\nThat is different from `%`, which matches **any number of characters**.\n\nA quick way to remember it:\n\n- `_` = one slot for one character\n- `%` = any length\n\nFor example, in the `customers` table, this query looks for names where the first name has exactly three letters before a space and last name:\n\n```sql\nSELECT full_name\nFROM customers\nWHERE full_name LIKE '___ %';\n```\n\nThis matches names such as `Mia Lopez` and `Leo Grant` because `Mia` and `Leo` each have 3 letters before the space.\n\nStep by step:\n\n- The first `_` matches the first character.\n- The second `_` matches the second character.\n- The third `_` matches the third character.\n- The space in the pattern matches a real space.\n- `%` matches the rest of the name.\n\nIt would not match `Emma Reed`, because `Emma` has 4 letters before the space."
+          "underscore_one_character": {
+            "title": "_ Matches Exactly One Character",
+            "bodyMarkdown": "The underscore wildcard `_` represents exactly one character.\n\n```sql\nSELECT\n    id,\n    full_name\nFROM customers\nWHERE full_name LIKE 'M_a%';\n```\n\n`M` is fixed, `_` accepts exactly one character, `a` must follow, and `%` allows the rest of the name. `Mia Lopez` matches because the underscore accounts for `i`."
           },
-          "sketch_2": {
-            "title": "Using multiple underscores in patterns",
-            "bodyMarkdown": "You can combine several underscores to describe a text shape.\n\nEach underscore stands for one character, so the number of underscores matters.\n\nWorked example:\n\n```sql\nSELECT email\nFROM customers\nWHERE email LIKE '____@example.com';\n```\n\nThis pattern means:\n\n- `____` = exactly 4 characters before `@example.com`\n- `@example.com` = that exact ending\n\nIn the dataset, `mia@example.com` would not match because `mia` has 3 letters before `@`.\nBut `emma@example.com` would match because `emma` has 4 letters before `@`.\n\nAnother example:\n\n```sql\nSELECT city\nFROM customers\nWHERE city LIKE 'M____';\n```\n\nLine by line:\n\n- `M` means the city must start with uppercase `M`.\n- `____` means exactly 4 more characters.\n- So the whole city must be 5 characters long and start with `M`.\n\nThat matches `Miami`."
-          },
-          "sketch_3": {
-            "title": "Choosing between _ and %",
-            "bodyMarkdown": "Use `_` when the number of characters matters. Use `%` when the length can vary.\n\nCompare these two queries:\n\n```sql\nSELECT full_name\nFROM customers\nWHERE full_name LIKE 'L___ %';\n```\n\n```sql\nSELECT full_name\nFROM customers\nWHERE full_name LIKE 'L%';\n```\n\nWhat is the difference?\n\nFor `L___ %`:\n\n- The name must start with `L`.\n- Then there must be exactly 3 more characters.\n- Then a space.\n- Then anything after that.\n\nThis matches a first name with exactly 4 letters starting with `L`, such as `Liam Scott`.\n\nFor `L%`:\n\n- The text only needs to start with `L`.\n- Any number of characters can follow.\n\nSo `L%` is broader, while `_` gives tighter control."
+          "mixed_wildcards": {
+            "title": "Combine _ and % for Precise Patterns",
+            "bodyMarkdown": "Use one underscore for each required character position.\n\n```sql\nSELECT\n    id,\n    full_name,\n    city\nFROM customers\nWHERE city LIKE '_____';\n```\n\nFive underscores match city values with exactly five characters, such as `Miami`. Unlike `%`, an underscore cannot represent zero characters or several characters.\n\nChoose `_` when length and position matter; choose `%` when the number of characters may vary."
           }
         }
       },
       "sql-v2-4": {
         "underscore_wildcard": {
-          "sketch_1": {
-            "title": "What the underscore wildcard does",
-            "bodyMarkdown": "In a `LIKE` pattern, the underscore character `_` matches **exactly one character**.\n\nThat is different from `%`, which matches **any number of characters**.\n\nA quick way to remember it:\n\n- `_` = one slot for one character\n- `%` = any length\n\nFor example, in the `customers` table, this query looks for names where the first name has exactly three letters before a space and last name:\n\n```sql\nSELECT full_name\nFROM customers\nWHERE full_name LIKE '___ %';\n```\n\nThis matches names such as `Mia Lopez` and `Leo Grant` because `Mia` and `Leo` each have 3 letters before the space.\n\nStep by step:\n\n- The first `_` matches the first character.\n- The second `_` matches the second character.\n- The third `_` matches the third character.\n- The space in the pattern matches a real space.\n- `%` matches the rest of the name.\n\nIt would not match `Emma Reed`, because `Emma` has 4 letters before the space."
+          "underscore_one_character": {
+            "title": "_ Matches Exactly One Character",
+            "bodyMarkdown": "The underscore wildcard `_` represents exactly one character.\n\n```sql\nSELECT\n    id,\n    full_name\nFROM customers\nWHERE full_name LIKE 'M_a%';\n```\n\n`M` is fixed, `_` accepts exactly one character, `a` must follow, and `%` allows the rest of the name. `Mia Lopez` matches because the underscore accounts for `i`."
           },
-          "sketch_2": {
-            "title": "Using multiple underscores in patterns",
-            "bodyMarkdown": "You can combine several underscores to describe a text shape.\n\nEach underscore stands for one character, so the number of underscores matters.\n\nWorked example:\n\n```sql\nSELECT email\nFROM customers\nWHERE email LIKE '____@example.com';\n```\n\nThis pattern means:\n\n- `____` = exactly 4 characters before `@example.com`\n- `@example.com` = that exact ending\n\nIn the dataset, `mia@example.com` would not match because `mia` has 3 letters before `@`.\nBut `emma@example.com` would match because `emma` has 4 letters before `@`.\n\nAnother example:\n\n```sql\nSELECT city\nFROM customers\nWHERE city LIKE 'M____';\n```\n\nLine by line:\n\n- `M` means the city must start with uppercase `M`.\n- `____` means exactly 4 more characters.\n- So the whole city must be 5 characters long and start with `M`.\n\nThat matches `Miami`."
-          },
-          "sketch_3": {
-            "title": "Choosing between _ and %",
-            "bodyMarkdown": "Use `_` when the number of characters matters. Use `%` when the length can vary.\n\nCompare these two queries:\n\n```sql\nSELECT full_name\nFROM customers\nWHERE full_name LIKE 'L___ %';\n```\n\n```sql\nSELECT full_name\nFROM customers\nWHERE full_name LIKE 'L%';\n```\n\nWhat is the difference?\n\nFor `L___ %`:\n\n- The name must start with `L`.\n- Then there must be exactly 3 more characters.\n- Then a space.\n- Then anything after that.\n\nThis matches a first name with exactly 4 letters starting with `L`, such as `Liam Scott`.\n\nFor `L%`:\n\n- The text only needs to start with `L`.\n- Any number of characters can follow.\n\nSo `L%` is broader, while `_` gives tighter control."
+          "mixed_wildcards": {
+            "title": "Combine _ and % for Precise Patterns",
+            "bodyMarkdown": "Use one underscore for each required character position.\n\n```sql\nSELECT\n    id,\n    full_name,\n    city\nFROM customers\nWHERE city LIKE '_____';\n```\n\nFive underscores match city values with exactly five characters, such as `Miami`. Unlike `%`, an underscore cannot represent zero characters or several characters.\n\nChoose `_` when length and position matter; choose `%` when the number of characters may vary."
           }
         }
       }

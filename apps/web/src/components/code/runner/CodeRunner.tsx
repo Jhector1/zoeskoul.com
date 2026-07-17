@@ -38,6 +38,7 @@ import { WorkspaceStateV2 } from "@/components/ide/types";
 import { cx } from "@/components/tools/utils/cx";
 import HeaderBar from "@/components/code/runner/components/HeaderBar";
 import type { SqlPaneOptions } from "@/components/code/runner/components/sql/results-pane";
+import type { ToolSurface } from "@zoeskoul/curriculum-contracts";
 import { resolveEditableWorkspaceFileId } from "@/components/code/runner/workspaceEditing";
 import { learnerUiFlags } from "@/lib/config/learnerUiFlags";
 import type {
@@ -47,6 +48,26 @@ import type {
 
 type MobilePane = "editor" | "output";
 type OutputTab = "output" | "terminal";
+
+export function resolveSqlMobilePaneDefault(args: {
+    language: WorkspaceLanguage;
+    defaultSurface?: ToolSurface | null;
+    sqlPaneOptions?: SqlPaneOptions | null;
+}): MobilePane {
+    if (args.defaultSurface === "results") return "output";
+    if (args.defaultSurface === "editor") return "editor";
+
+    // Backward compatibility for older bundles that authored only an inner
+    // SQL tab. New compiler output always emits defaultSurface explicitly.
+    const hasLegacyAuthoredSqlTab = Boolean(
+        args.sqlPaneOptions?.defaultTab ??
+        args.sqlPaneOptions?.compactDefaultTab,
+    );
+
+    return args.language === "sql" && hasLegacyAuthoredSqlTab
+        ? "output"
+        : "editor";
+}
 
 type IdleOutputCollapseArgs = {
     compactLearnerUi: boolean;
@@ -111,6 +132,7 @@ type CodeRunnerWithStdinProps = CodeRunnerProps & {
         }
     >;
     sqlPaneOptions?: SqlPaneOptions;
+    defaultSurface?: ToolSurface;
 };
 
 const RUNNER_SURFACE =
@@ -410,6 +432,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         webPreviewEntries = [],
         sqlInitialTableSnapshots,
         sqlPaneOptions,
+        defaultSurface,
         stdinPlaceholder = t("stdinPlaceholder"),
         workspaceTerminal,
         onTerminalEvidenceChange,
@@ -430,7 +453,19 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
     const [editorTheme, setEditorTheme] = useState<"vs" | "vs-dark">("vs-dark");
     const runnerRootRef = useRef<HTMLDivElement | null>(null);
     const [isNarrowScreen, setIsNarrowScreen] = useState(false);
-    const [mobilePane, setMobilePane] = useState<MobilePane>("editor");
+    const initialMobilePaneLanguage: WorkspaceLanguage =
+        fixedLanguage ??
+        (controlled ? (props as any).language : (props as any).initialLanguage) ??
+        allowedLanguages?.[0] ??
+        "python";
+    const [mobilePane, setMobilePane] = useState<MobilePane>(() =>
+        resolveSqlMobilePaneDefault({
+            language: initialMobilePaneLanguage,
+            defaultSurface,
+            sqlPaneOptions,
+        }),
+    );
+    const appliedSqlMobilePaneDefaultKeyRef = useRef<string | null>(null);
     const previousWorkspaceFileIdRef = useRef<string | null>(
         typeof props.activeWorkspaceFileId === "string"
             ? props.activeWorkspaceFileId
@@ -537,6 +572,36 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
     const [outputTab, setOutputTab] = useState<OutputTab>(
         terminalOnlyMode ? "terminal" : "output",
     );
+
+    const sqlMobilePaneDefault = resolveSqlMobilePaneDefault({
+        language: lang,
+        defaultSurface,
+        sqlPaneOptions,
+    });
+    const sqlMobilePaneDefaultKey = [
+        toolScopeKey ?? "",
+        exerciseStateKey ?? "",
+        editorModelKey ?? "",
+        sqlDatasetId ?? "",
+        defaultSurface ?? "",
+        sqlPaneOptions?.defaultTab ?? "",
+        sqlPaneOptions?.compactDefaultTab ?? "",
+    ].join("::");
+
+    useEffect(() => {
+        if (
+            appliedSqlMobilePaneDefaultKeyRef.current ===
+            sqlMobilePaneDefaultKey
+        ) {
+            return;
+        }
+
+        appliedSqlMobilePaneDefaultKeyRef.current = sqlMobilePaneDefaultKey;
+        setMobilePane(sqlMobilePaneDefault);
+        if (sqlMobilePaneDefault === "output") {
+            setOutputTab("output");
+        }
+    }, [sqlMobilePaneDefault, sqlMobilePaneDefaultKey]);
 
     const setLang = (l: WorkspaceLanguage) => {
         if (fixedLanguage) return;

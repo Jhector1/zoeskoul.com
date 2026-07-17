@@ -1,0 +1,185 @@
+{
+  "topics": {
+    "sql-data-management": {
+      "sql-data-management-module-1-controlled-updates-deletes": {
+        "updating-one-row-precisely": {
+          "label": "Updating One Row Precisely",
+          "summary": "Use UPDATE, SET, and a key-based WHERE clause to correct one known record without touching its neighbors.",
+          "cards": {
+            "sketch0": {
+              "title": "How to Update a Specific Row"
+            },
+            "sketch1": {
+              "title": "Ensuring Data Integrity After Updates"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_updating_one_row_precisely_sketch0": {
+              "title": "Try it yourself: Update a Single Row",
+              "prompt": "Right after the sketch \"How to Update a Specific Row\", practice that exact idea with this task. Update the status of the 'Trial Tote' to 'active' using its id. Verify the change and ensure no other rows are affected. Produce the result for update a Single Row so it reinforces Updating One Row Precisely.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Click Run query and compare the results table with the expected result."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "-- Update the status of 'Trial Tote' to 'active'\nUPDATE inventory_items\nSET status = 'active'\nWHERE id = 6;\n\n-- Verify the change\nSELECT id, name, status\nFROM inventory_items\nWHERE id IN (5, 6);",
+              "starterFiles": {
+                "query_sql": {
+                  "content": "-- Write your SQL answer below\n"
+                }
+              },
+              "solutionFiles": {
+                "query_sql": {
+                  "content": "-- Update the status of 'Trial Tote' to 'active'\nUPDATE inventory_items\nSET status = 'active'\nWHERE id = 6;\n\n-- Verify the change\nSELECT id, name, status\nFROM inventory_items\nWHERE id IN (5, 6);"
+                }
+              }
+            },
+            "try_updating_one_row_precisely_sketch1": {
+              "title": "Try it yourself: Verify an Update",
+              "prompt": "Right after the sketch \"Ensuring Data Integrity After Updates\", practice that exact idea with this task. Change the category of 'Sample Poster' to 'Art' and verify the update. Ensure no other rows are affected. Produce the result for verify an Update so it reinforces Updating One Row Precisely.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Click Run query and compare the results table with the expected result."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "-- Change the category of 'Sample Poster' to 'Art'\nUPDATE inventory_items\nSET category = 'Art'\nWHERE id = 4;\n\n-- Verify the change\nSELECT id, name, category\nFROM inventory_items\nWHERE id IN (3, 4, 5);",
+              "starterFiles": {
+                "query_sql": {
+                  "content": "-- Write your SQL answer below\n"
+                }
+              },
+              "solutionFiles": {
+                "query_sql": {
+                  "content": "-- Change the category of 'Sample Poster' to 'Art'\nUPDATE inventory_items\nSET category = 'Art'\nWHERE id = 4;\n\n-- Verify the change\nSELECT id, name, category\nFROM inventory_items\nWHERE id IN (3, 4, 5);"
+                }
+              }
+            }
+          },
+          "practice": {
+            "single-choice-1": {
+              "title": "Understanding UPDATE Syntax",
+              "prompt": "Which SQL statement correctly updates the price of an item with id 5 to 20.00?",
+              "hint": "Focus on the correct use of UPDATE and WHERE clauses.",
+              "help": {
+                "concept": "The UPDATE statement modifies existing records in a table. Use WHERE to specify which records to update.",
+                "hint_1": "Ensure the WHERE clause targets the correct id.",
+                "hint_2": "The SET clause should specify the column and new value."
+              },
+              "options": {
+                "a": "UPDATE inventory_items SET price = 20.00 WHERE id = 5;",
+                "b": "UPDATE inventory_items WHERE id = 5 SET price = 20.00;",
+                "c": "SET price = 20.00 WHERE id = 5 IN inventory_items;",
+                "d": "UPDATE price = 20.00 FROM inventory_items WHERE id = 5;"
+              }
+            },
+            "single-choice-2": {
+              "title": "Purpose of WHERE Clause",
+              "prompt": "What is the purpose of the WHERE clause in an UPDATE statement?",
+              "hint": "Consider how WHERE affects which rows are updated.",
+              "help": {
+                "concept": "The WHERE clause specifies which rows should be updated.",
+                "hint_1": "Without WHERE, all rows would be updated.",
+                "hint_2": "WHERE targets specific rows based on a condition."
+              },
+              "options": {
+                "a": "To specify which rows to update",
+                "b": "To specify which columns to update",
+                "c": "To specify the new values for columns",
+                "d": "To specify the table to update"
+              }
+            },
+            "multi-choice-1": {
+              "title": "Components of an UPDATE Statement",
+              "prompt": "Select all components that are part of a typical UPDATE statement.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "options": {
+                "a": "UPDATE keyword",
+                "b": "SET clause",
+                "c": "WHERE clause",
+                "d": "FROM clause"
+              }
+            },
+            "drag-reorder-1": {
+              "title": "Order of SQL Clauses",
+              "prompt": "Arrange the SQL clauses in the correct order for an UPDATE statement.",
+              "hint": "Start with the keyword that initiates the update process.",
+              "help": {
+                "concept": "The order of clauses in an SQL statement is important for correct execution.",
+                "hint_1": "Begin with the action keyword.",
+                "hint_2": "Follow with the details of the change and the condition."
+              },
+              "tokens": {
+                "t1": "UPDATE clause",
+                "t2": "SET clause",
+                "t3": "WHERE clause"
+              }
+            },
+            "fill-blank-choice-1": {
+              "title": "Fill in the Blank: UPDATE Statement",
+              "prompt": "Complete the SQL statement to update the status of an item with id 2 to 'inactive'.",
+              "hint": "Use the correct SQL keywords and structure.",
+              "help": {
+                "concept": "An UPDATE statement modifies existing records in a table. Use WHERE to specify which records to update.",
+                "hint_1": "Ensure the WHERE clause targets the correct id.",
+                "hint_2": "The SET clause should specify the column and new value."
+              },
+              "template": "UPDATE inventory_items SET status = [blank1] WHERE id = 2;",
+              "choices": [
+                "inactive",
+                "active",
+                "draft",
+                "pending"
+              ]
+            },
+            "fill-blank-choice-2": {
+              "title": "Fill in the Blank: WHERE Clause",
+              "prompt": "Complete the SQL statement to update the price of an item to 10.00 where the name is 'Sticker Pack'.",
+              "hint": "Use the correct SQL keywords and structure.",
+              "help": {
+                "concept": "The WHERE clause specifies which rows should be updated.",
+                "hint_1": "Ensure the WHERE clause targets the correct name.",
+                "hint_2": "The SET clause should specify the column and new value."
+              },
+              "template": "UPDATE inventory_items SET price = 10.00 WHERE name = [blank1];",
+              "choices": [
+                "'Sticker Pack'",
+                "'Canvas Print'",
+                "'Water Bottle'",
+                "'Trial Tote'"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql-data-management": {
+      "sql-data-management-module-1-controlled-updates-deletes": {
+        "updating-one-row-precisely": {
+          "sketch-1": {
+            "title": "How to Update a Specific Row",
+            "bodyMarkdown": "When working with databases, it's crucial to update only the intended records without affecting others. The `UPDATE` statement in SQL allows you to modify existing records in a table. To ensure that only the desired row is updated, you must use a `WHERE` clause with a condition that uniquely identifies the row.\n\nFor example, consider the `inventory_items` table. If you want to update the price of the 'Canvas Print' item, you can use its `id` as a unique identifier:\n\n```sql\nUPDATE inventory_items\nSET price = 50.00\nWHERE id = 3;\n```\n\nThis query changes the price of the item with `id` 3 to 50.00. The `WHERE` clause ensures that only this specific row is updated, leaving all other rows unchanged. This approach prevents accidental updates to unintended records."
+          },
+          "sketch-2": {
+            "title": "Ensuring Data Integrity After Updates",
+            "bodyMarkdown": "After performing an update, it's important to verify that the change was applied correctly and that no other data was unintentionally modified. You can do this by running a `SELECT` query to check the updated row and its neighbors.\n\nContinuing with the previous example, you can verify the update by selecting the relevant rows:\n\n```sql\nSELECT id, name, price\nFROM inventory_items\nWHERE id IN (2, 3, 4);\n```\n\nThis query retrieves the `id`, `name`, and `price` of the items with `id` 2, 3, and 4. By inspecting the results, you can confirm that only the 'Canvas Print' item has its price updated to 50.00, while the other items remain unchanged. This verification step is crucial for maintaining data integrity."
+          }
+        }
+      }
+    }
+  }
+}

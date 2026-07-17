@@ -1,0 +1,252 @@
+{
+  "title": "Module 1 Project: Inventory Correction and Cleanup",
+  "summary": "Correct audited inventory values and remove only two approved test records through six cumulative steps.",
+  "minutes": 70,
+  "sketchBlocks": [
+    {
+      "id": "sketch-1",
+      "title": "Inventory Correction and Cleanup Project",
+      "bodyMarkdown": "In this project, you will take on the role of an Inventory Data Steward tasked with cleaning up an inventory database. An audit has identified incorrect prices, unfinished statuses, and internal test rows that need to be corrected or removed. Your goal is to create a SQL script that precisely targets these issues without affecting legitimate records. This project will guide you through a series of steps to preview, update, and verify changes to ensure the integrity of the inventory data."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "try-module-1-inventory-correction-cleanup-sketch0",
+      "kind": "code_input",
+      "title": "Preview the Audit Targets",
+      "prompt": "Write a SELECT statement to preview the inventory items with ids 2, 4, and 6, showing their price, status, test flag, and notes.",
+      "starterCode": "-- Write your SELECT statement here\nSELECT id, price, status, is_test, notes FROM inventory_items WHERE id IN (2, 4, 6);",
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "-- Write your SELECT statement here\nSELECT id, price, status, is_test, notes FROM inventory_items WHERE id IN (2, 4, 6);",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT id, price, status, is_test, notes FROM inventory_items WHERE id IN (2, 4, 6);",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionCode": "SELECT id, price, status, is_test, notes FROM inventory_items WHERE id IN (2, 4, 6);",
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query",
+      "hint": "Use a WHERE clause to filter by specific ids.",
+      "help": {
+        "concept": "Previewing data before making changes helps ensure that only the intended records are affected.",
+        "hint_1": "Use SELECT to choose specific columns and WHERE to filter by ids.",
+        "hint_2": "Ensure your WHERE clause includes ids 2, 4, and 6."
+      }
+    },
+    {
+      "id": "try-module-1-inventory-correction-cleanup-sketch1",
+      "kind": "code_input",
+      "title": "Correct One Item Precisely",
+      "prompt": "Update the inventory item with id 2 to set the price to 8.25 and status to 'active'.",
+      "starterCode": "-- Keep the previous SELECT and add your UPDATE statement\nSELECT id, price, status, is_test, notes FROM inventory_items WHERE id IN (2, 4, 6);\n\n-- Update statement\nUPDATE inventory_items SET price = 8.25, status = 'active' WHERE id = 2;",
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "-- Keep the previous SELECT and add your UPDATE statement\nSELECT id, price, status, is_test, notes FROM inventory_items WHERE id IN (2, 4, 6);\n\n-- Update statement\nUPDATE inventory_items SET price = 8.25, status = 'active' WHERE id = 2;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT id, price, status, is_test, notes FROM inventory_items WHERE id IN (2, 4, 6);\n\nUPDATE inventory_items SET price = 8.25, status = 'active' WHERE id = 2;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionCode": "SELECT id, price, status, is_test, notes FROM inventory_items WHERE id IN (2, 4, 6);\n\nUPDATE inventory_items SET price = 8.25, status = 'active' WHERE id = 2;",
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query",
+      "checkSql": "SELECT * FROM inventory_items WHERE id = 2;",
+      "hint": "Use the UPDATE statement with a WHERE clause to target id 2.",
+      "help": {
+        "concept": "Updating specific records requires precise conditions to avoid unintended changes.",
+        "hint_1": "Use SET to change the price and status for id 2.",
+        "hint_2": "Ensure your WHERE clause targets only id 2."
+      }
+    },
+    {
+      "id": "try-module-1-inventory-correction-cleanup-sketch2",
+      "kind": "code_input",
+      "title": "Apply a Controlled Category Update",
+      "prompt": "Update all non-test Decor items to set last_updated to '2026-02-10'.",
+      "starterCode": "-- Keep previous statements and add your UPDATE\nSELECT id, price, status, is_test, notes FROM inventory_items WHERE id IN (2, 4, 6);\n\nUPDATE inventory_items SET price = 8.25, status = 'active' WHERE id = 2;\n\n-- Controlled update\nUPDATE inventory_items SET last_updated = '2026-02-10' WHERE category = 'Decor' AND is_test = 0;",
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "-- Keep previous statements and add your UPDATE\nSELECT id, price, status, is_test, notes FROM inventory_items WHERE id IN (2, 4, 6);\n\nUPDATE inventory_items SET price = 8.25, status = 'active' WHERE id = 2;\n\n-- Controlled update\nUPDATE inventory_items SET last_updated = '2026-02-10' WHERE category = 'Decor' AND is_test = 0;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT id, price, status, is_test, notes FROM inventory_items WHERE id IN (2, 4, 6);\n\nUPDATE inventory_items SET price = 8.25, status = 'active' WHERE id = 2;\n\nUPDATE inventory_items SET last_updated = '2026-02-10' WHERE category = 'Decor' AND is_test = 0;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionCode": "SELECT id, price, status, is_test, notes FROM inventory_items WHERE id IN (2, 4, 6);\n\nUPDATE inventory_items SET price = 8.25, status = 'active' WHERE id = 2;\n\nUPDATE inventory_items SET last_updated = '2026-02-10' WHERE category = 'Decor' AND is_test = 0;",
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query",
+      "checkSql": "SELECT * FROM inventory_items WHERE category = 'Decor' AND is_test = 0;",
+      "hint": "Use a WHERE clause to exclude test items and target the Decor category.",
+      "help": {
+        "concept": "Controlled updates ensure only the intended subset of data is modified.",
+        "hint_1": "Use WHERE to filter by category and exclude test items.",
+        "hint_2": "Set last_updated for the filtered items."
+      }
+    },
+    {
+      "id": "try-module-1-inventory-correction-cleanup-sketch3",
+      "kind": "code_input",
+      "title": "Delete One Confirmed Test Item",
+      "prompt": "Delete the inventory item with id 4, ensuring only this test item is removed.",
+      "starterCode": "-- Keep previous statements and add your DELETE\nSELECT id, price, status, is_test, notes FROM inventory_items WHERE id IN (2, 4, 6);\n\nUPDATE inventory_items SET price = 8.25, status = 'active' WHERE id = 2;\n\nUPDATE inventory_items SET last_updated = '2026-02-10' WHERE category = 'Decor' AND is_test = 0;\n\n-- Delete statement\nDELETE FROM inventory_items WHERE id = 4;",
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "-- Keep previous statements and add your DELETE\nSELECT id, price, status, is_test, notes FROM inventory_items WHERE id IN (2, 4, 6);\n\nUPDATE inventory_items SET price = 8.25, status = 'active' WHERE id = 2;\n\nUPDATE inventory_items SET last_updated = '2026-02-10' WHERE category = 'Decor' AND is_test = 0;\n\n-- Delete statement\nDELETE FROM inventory_items WHERE id = 4;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT id, price, status, is_test, notes FROM inventory_items WHERE id IN (2, 4, 6);\n\nUPDATE inventory_items SET price = 8.25, status = 'active' WHERE id = 2;\n\nUPDATE inventory_items SET last_updated = '2026-02-10' WHERE category = 'Decor' AND is_test = 0;\n\nDELETE FROM inventory_items WHERE id = 4;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionCode": "SELECT id, price, status, is_test, notes FROM inventory_items WHERE id IN (2, 4, 6);\n\nUPDATE inventory_items SET price = 8.25, status = 'active' WHERE id = 2;\n\nUPDATE inventory_items SET last_updated = '2026-02-10' WHERE category = 'Decor' AND is_test = 0;\n\nDELETE FROM inventory_items WHERE id = 4;",
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query",
+      "checkSql": "SELECT * FROM inventory_items WHERE id = 4;",
+      "hint": "Use DELETE with a WHERE clause to target id 4.",
+      "help": {
+        "concept": "Deleting specific records requires precise conditions to avoid unintended deletions.",
+        "hint_1": "Use WHERE to ensure only id 4 is deleted.",
+        "hint_2": "Check that your DELETE statement is scoped correctly."
+      }
+    },
+    {
+      "id": "try-module-1-inventory-correction-cleanup-sketch4",
+      "kind": "code_input",
+      "title": "Remove the Remaining Draft Test Row",
+      "prompt": "Delete the inventory item with id 6 only if it is marked as a test and has a draft status.",
+      "starterCode": "-- Keep previous statements and add your DELETE\nSELECT id, price, status, is_test, notes FROM inventory_items WHERE id IN (2, 4, 6);\n\nUPDATE inventory_items SET price = 8.25, status = 'active' WHERE id = 2;\n\nUPDATE inventory_items SET last_updated = '2026-02-10' WHERE category = 'Decor' AND is_test = 0;\n\nDELETE FROM inventory_items WHERE id = 4;\n\n-- Conditional delete\nDELETE FROM inventory_items WHERE id = 6 AND is_test = 1 AND status = 'draft';",
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "-- Keep previous statements and add your DELETE\nSELECT id, price, status, is_test, notes FROM inventory_items WHERE id IN (2, 4, 6);\n\nUPDATE inventory_items SET price = 8.25, status = 'active' WHERE id = 2;\n\nUPDATE inventory_items SET last_updated = '2026-02-10' WHERE category = 'Decor' AND is_test = 0;\n\nDELETE FROM inventory_items WHERE id = 4;\n\n-- Conditional delete\nDELETE FROM inventory_items WHERE id = 6 AND is_test = 1 AND status = 'draft';",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT id, price, status, is_test, notes FROM inventory_items WHERE id IN (2, 4, 6);\n\nUPDATE inventory_items SET price = 8.25, status = 'active' WHERE id = 2;\n\nUPDATE inventory_items SET last_updated = '2026-02-10' WHERE category = 'Decor' AND is_test = 0;\n\nDELETE FROM inventory_items WHERE id = 4;\n\nDELETE FROM inventory_items WHERE id = 6 AND is_test = 1 AND status = 'draft';",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionCode": "SELECT id, price, status, is_test, notes FROM inventory_items WHERE id IN (2, 4, 6);\n\nUPDATE inventory_items SET price = 8.25, status = 'active' WHERE id = 2;\n\nUPDATE inventory_items SET last_updated = '2026-02-10' WHERE category = 'Decor' AND is_test = 0;\n\nDELETE FROM inventory_items WHERE id = 4;\n\nDELETE FROM inventory_items WHERE id = 6 AND is_test = 1 AND status = 'draft';",
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query",
+      "checkSql": "SELECT * FROM inventory_items WHERE id = 6;",
+      "hint": "Use DELETE with a WHERE clause to ensure both conditions are met.",
+      "help": {
+        "concept": "Combining conditions in a WHERE clause ensures precise targeting for deletions.",
+        "hint_1": "Use AND to combine conditions in your WHERE clause.",
+        "hint_2": "Ensure both is_test = 1 and status = 'draft' are true for id 6."
+      }
+    },
+    {
+      "id": "try-module-1-inventory-correction-cleanup-sketch5",
+      "kind": "code_input",
+      "title": "Complete the Operational Handoff",
+      "prompt": "Ensure your script retains legitimate rows, contains corrected values, and removes only the two approved test records.",
+      "starterCode": "-- Ensure all previous steps are included\nSELECT id, price, status, is_test, notes FROM inventory_items WHERE id IN (2, 4, 6);\n\nUPDATE inventory_items SET price = 8.25, status = 'active' WHERE id = 2;\n\nUPDATE inventory_items SET last_updated = '2026-02-10' WHERE category = 'Decor' AND is_test = 0;\n\nDELETE FROM inventory_items WHERE id = 4;\n\nDELETE FROM inventory_items WHERE id = 6 AND is_test = 1 AND status = 'draft';",
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "-- Ensure all previous steps are included\nSELECT id, price, status, is_test, notes FROM inventory_items WHERE id IN (2, 4, 6);\n\nUPDATE inventory_items SET price = 8.25, status = 'active' WHERE id = 2;\n\nUPDATE inventory_items SET last_updated = '2026-02-10' WHERE category = 'Decor' AND is_test = 0;\n\nDELETE FROM inventory_items WHERE id = 4;\n\nDELETE FROM inventory_items WHERE id = 6 AND is_test = 1 AND status = 'draft';",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT id, price, status, is_test, notes FROM inventory_items WHERE id IN (2, 4, 6);\n\nUPDATE inventory_items SET price = 8.25, status = 'active' WHERE id = 2;\n\nUPDATE inventory_items SET last_updated = '2026-02-10' WHERE category = 'Decor' AND is_test = 0;\n\nDELETE FROM inventory_items WHERE id = 4;\n\nDELETE FROM inventory_items WHERE id = 6 AND is_test = 1 AND status = 'draft';",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionCode": "SELECT id, price, status, is_test, notes FROM inventory_items WHERE id IN (2, 4, 6);\n\nUPDATE inventory_items SET price = 8.25, status = 'active' WHERE id = 2;\n\nUPDATE inventory_items SET last_updated = '2026-02-10' WHERE category = 'Decor' AND is_test = 0;\n\nDELETE FROM inventory_items WHERE id = 4;\n\nDELETE FROM inventory_items WHERE id = 6 AND is_test = 1 AND status = 'draft';",
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query",
+      "checkSql": "SELECT * FROM inventory_items;",
+      "hint": "Review all previous steps to ensure the script is cumulative and correct.",
+      "help": {
+        "concept": "A cumulative script ensures all changes are applied in sequence, preserving data integrity.",
+        "hint_1": "Ensure all previous updates and deletes are included.",
+        "hint_2": "Verify that only ids 4 and 6 are deleted."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Inventory Correction and Cleanup",
+    "stepIds": [
+      "try-module-1-inventory-correction-cleanup-sketch0",
+      "try-module-1-inventory-correction-cleanup-sketch1",
+      "try-module-1-inventory-correction-cleanup-sketch2",
+      "try-module-1-inventory-correction-cleanup-sketch3",
+      "try-module-1-inventory-correction-cleanup-sketch4",
+      "try-module-1-inventory-correction-cleanup-sketch5"
+    ]
+  }
+}

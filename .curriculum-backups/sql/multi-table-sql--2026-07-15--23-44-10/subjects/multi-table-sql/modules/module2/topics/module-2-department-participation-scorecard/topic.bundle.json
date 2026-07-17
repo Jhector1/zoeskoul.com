@@ -1,0 +1,368 @@
+{
+  "topicId": "module-2-department-participation-scorecard",
+  "subjectSlug": "multi-table-sql",
+  "moduleSlug": "multi-table-sql-module-2-outer-joins-and-accurate-counts",
+  "sectionSlug": "multi-table-sql-multi-table-sql-section-2-module-project",
+  "prefix": "multi_table_sql_module_2",
+  "minutes": 75,
+  "runtimeDefaults": {
+    "kind": "sql",
+    "showSchema": true,
+    "showErd": true,
+    "showChen": true,
+    "supportsTerminal": false,
+    "supportsMultiFile": false,
+    "supportsFileSystem": false,
+    "datasetId": "school_relations_intro",
+    "fixedSqlDialect": "sqlite",
+    "resultShape": "table"
+  },
+  "serviceDefaults": null,
+  "topic": {
+    "labelKey": "topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.module-2-department-participation-scorecard.label",
+    "summaryKey": "topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.module-2-department-participation-scorecard.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.module-2-department-participation-scorecard.cards.sketch0.title",
+      "sketchId": "sketch-intro",
+      "height": 420
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.module-2-department-participation-scorecard.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "step1_preserve_departments",
+            "titleKey": "topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.module-2-department-participation-scorecard.projectSteps.step1_preserve_departments.title",
+            "exerciseKey": "step1-preserve-departments",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "step2_count_courses",
+            "titleKey": "topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.module-2-department-participation-scorecard.projectSteps.step2_count_courses.title",
+            "exerciseKey": "step2-count-courses",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "step3_extend_enrollments",
+            "titleKey": "topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.module-2-department-participation-scorecard.projectSteps.step3_extend_enrollments.title",
+            "exerciseKey": "step3-extend-enrollments",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "step4_count_enrollments",
+            "titleKey": "topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.module-2-department-participation-scorecard.projectSteps.step4_count_enrollments.title",
+            "exerciseKey": "step4-count-enrollments",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "step5_count_unique_students",
+            "titleKey": "topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.module-2-department-participation-scorecard.projectSteps.step5_count_unique_students.title",
+            "exerciseKey": "step5-count-unique-students",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "step6_rank_scorecard",
+            "titleKey": "topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.module-2-department-participation-scorecard.projectSteps.step6_rank_scorecard.title",
+            "exerciseKey": "step6-rank-scorecard",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch-intro",
+      "archetype": "paragraph",
+      "titleKey": "sketches.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.module-2-department-participation-scorecard.sketch-intro.title",
+      "bodyKey": "sketches.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.module-2-department-participation-scorecard.sketch-intro.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "step1-preserve-departments",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.module-2-department-participation-scorecard.moduleProject.steps.step1_preserve_departments",
+      "language": "sql",
+      "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.module-2-department-participation-scorecard.moduleProject.steps.step1_preserve_departments.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "school_relations_intro",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "main.sql",
+        "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.module-2-department-participation-scorecard.moduleProject.steps.step1_preserve_departments.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.sql",
+            "content": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.module-2-department-participation-scorecard.moduleProject.steps.step1_preserve_departments.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "school_relations_intro",
+        "resultShape": "table",
+        "solutionCode": "SELECT d.name, c.title\nFROM departments d\nLEFT JOIN courses c ON d.id = c.department_id;"
+      }
+    },
+    {
+      "id": "step2-count-courses",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.module-2-department-participation-scorecard.moduleProject.steps.step2_count_courses",
+      "language": "sql",
+      "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.module-2-department-participation-scorecard.moduleProject.steps.step2_count_courses.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "school_relations_intro",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "main.sql",
+        "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.module-2-department-participation-scorecard.moduleProject.steps.step2_count_courses.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.sql",
+            "content": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.module-2-department-participation-scorecard.moduleProject.steps.step2_count_courses.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "school_relations_intro",
+        "resultShape": "table",
+        "solutionCode": "SELECT d.name, COUNT(DISTINCT c.id) AS course_count\nFROM departments d\nLEFT JOIN courses c ON d.id = c.department_id\nGROUP BY d.name;"
+      }
+    },
+    {
+      "id": "step3-extend-enrollments",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.module-2-department-participation-scorecard.moduleProject.steps.step3_extend_enrollments",
+      "language": "sql",
+      "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.module-2-department-participation-scorecard.moduleProject.steps.step3_extend_enrollments.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "school_relations_intro",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "main.sql",
+        "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.module-2-department-participation-scorecard.moduleProject.steps.step3_extend_enrollments.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.sql",
+            "content": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.module-2-department-participation-scorecard.moduleProject.steps.step3_extend_enrollments.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "school_relations_intro",
+        "resultShape": "table",
+        "solutionCode": "SELECT d.name, COUNT(DISTINCT c.id) AS course_count\nFROM departments d\nLEFT JOIN courses c ON d.id = c.department_id\nLEFT JOIN enrollments e ON c.id = e.course_id\nGROUP BY d.name;"
+      }
+    },
+    {
+      "id": "step4-count-enrollments",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.module-2-department-participation-scorecard.moduleProject.steps.step4_count_enrollments",
+      "language": "sql",
+      "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.module-2-department-participation-scorecard.moduleProject.steps.step4_count_enrollments.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "school_relations_intro",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "main.sql",
+        "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.module-2-department-participation-scorecard.moduleProject.steps.step4_count_enrollments.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.sql",
+            "content": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.module-2-department-participation-scorecard.moduleProject.steps.step4_count_enrollments.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "school_relations_intro",
+        "resultShape": "table",
+        "solutionCode": "SELECT d.name, COUNT(DISTINCT c.id) AS course_count, COUNT(e.id) AS enrollment_count\nFROM departments d\nLEFT JOIN courses c ON d.id = c.department_id\nLEFT JOIN enrollments e ON c.id = e.course_id\nGROUP BY d.name;"
+      }
+    },
+    {
+      "id": "step5-count-unique-students",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.module-2-department-participation-scorecard.moduleProject.steps.step5_count_unique_students",
+      "language": "sql",
+      "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.module-2-department-participation-scorecard.moduleProject.steps.step5_count_unique_students.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "school_relations_intro",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "main.sql",
+        "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.module-2-department-participation-scorecard.moduleProject.steps.step5_count_unique_students.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.sql",
+            "content": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.module-2-department-participation-scorecard.moduleProject.steps.step5_count_unique_students.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "school_relations_intro",
+        "resultShape": "table",
+        "solutionCode": "SELECT d.name, COUNT(DISTINCT c.id) AS course_count, COUNT(e.id) AS enrollment_count, COUNT(DISTINCT e.student_id) AS student_count\nFROM departments d\nLEFT JOIN courses c ON d.id = c.department_id\nLEFT JOIN enrollments e ON c.id = e.course_id\nGROUP BY d.name;"
+      }
+    },
+    {
+      "id": "step6-rank-scorecard",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.module-2-department-participation-scorecard.moduleProject.steps.step6_rank_scorecard",
+      "language": "sql",
+      "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.module-2-department-participation-scorecard.moduleProject.steps.step6_rank_scorecard.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "school_relations_intro",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "main.sql",
+        "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.module-2-department-participation-scorecard.moduleProject.steps.step6_rank_scorecard.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.sql",
+            "content": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.module-2-department-participation-scorecard.moduleProject.steps.step6_rank_scorecard.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "school_relations_intro",
+        "resultShape": "table",
+        "solutionCode": "SELECT d.name, COUNT(DISTINCT c.id) AS course_count, COUNT(e.id) AS enrollment_count, COUNT(DISTINCT e.student_id) AS student_count\nFROM departments d\nLEFT JOIN courses c ON d.id = c.department_id\nLEFT JOIN enrollments e ON c.id = e.course_id\nGROUP BY d.name\nORDER BY enrollment_count DESC, d.name ASC;"
+      }
+    }
+  ]
+}

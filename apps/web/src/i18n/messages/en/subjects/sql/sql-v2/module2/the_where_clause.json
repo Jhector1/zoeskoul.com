@@ -17,20 +17,6 @@
             },
             "quiz": {
               "title": "Quiz"
-            },
-            "project": {
-              "title": "Filter the products table with WHERE"
-            }
-          },
-          "projectSteps": {
-            "ci_where_art_products": {
-              "title": "Query only Art products"
-            },
-            "ci_where_low_stock": {
-              "title": "Find low-stock products"
-            },
-            "ci_where_stationery_prices": {
-              "title": "Show Stationery item prices"
             }
           },
           "quiz": {
@@ -137,7 +123,7 @@
               "prompt": "Complete the query so it filters rows by category.",
               "hint": "The clause that filters rows comes after `FROM products`.",
               "help": {
-                "concept": "The SQL keyword used to filter rows is `the missing term`.",
+                "concept": "The SQL keyword used to filter rows is `the blank`.",
                 "hint_1": "This blank is asking for the clause name, not a column name or value.",
                 "hint_2": "Use the keyword that introduces a condition like `category = 'Art'`."
               },
@@ -201,7 +187,7 @@
             },
             "try-the_where_clause-sketch0": {
               "title": "Query only Art products",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that returns the `name` and `price` columns from `products` for rows where `category` is `Art`. Write the query in the SQL editor, click Run query, and check the results table.",
+              "prompt": "Create a focused inventory query that returns the `name` and `price` columns from `products` for rows where `category` is `Art`. Run it and compare the result with the expected table.",
               "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
               "help": {
                 "concept": "This SQL exercise checks whether your query returns the requested result.",
@@ -212,7 +198,7 @@
             },
             "try-the_where_clause-sketch1": {
               "title": "Find low-stock products",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that returns `name` and `stock` from `products` for rows where `stock` is less than 10. Write the query in the SQL editor, click Run query, and check the results table.",
+              "prompt": "Create a focused inventory query that returns `name` and `stock` from `products` for rows where `stock` is less than 10. Run it and compare the result with the expected table.",
               "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
               "help": {
                 "concept": "This SQL exercise checks whether your query returns the requested result.",
@@ -222,30 +208,30 @@
               "starterCode": "-- Return name and stock from products for rows where stock is less than 10.\nSELECT name, stock\nFROM products\nWHERE ;"
             },
             "try-the_where_clause-sketch2": {
-              "title": "Show Stationery item prices",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that returns `name`, `category`, and `price` from `products` for rows where `category` is `Stationery`. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Filter the Catalog to Stationery",
+              "prompt": "Return `name`, `category`, and `price` for rows whose category is `Stationery`.",
+              "hint": "Text values must be quoted.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
+                "concept": "Return `name`, `category`, and `price` for rows whose category is `Stationery`.",
+                "hint_1": "Text values must be quoted.",
+                "hint_2": "Run the query and compare the returned columns and rows with the expected result."
               },
-              "starterCode": "-- add a WHERE clause below\nSELECT name, category, price\nFROM products"
+              "starterCode": "SELECT name, category, price\nFROM products\nWHERE category = ;"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_the_where_clause_sketch0": {
               "title": "Query only Art products",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that returns the `name` and `price` columns from `products` for rows where `category` is `Art`. Write the query in the SQL editor, click Run query, and check the results table."
+              "prompt": "Create a focused inventory query that returns the `name` and `price` columns from `products` for rows where `category` is `Art`. Run it and compare the result with the expected table."
             },
             "try_the_where_clause_sketch1": {
               "title": "Find low-stock products",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that returns `name` and `stock` from `products` for rows where `stock` is less than 10. Write the query in the SQL editor, click Run query, and check the results table."
+              "prompt": "Create a focused inventory query that returns `name` and `stock` from `products` for rows where `stock` is less than 10. Run it and compare the result with the expected table."
             },
             "try_the_where_clause_sketch2": {
-              "title": "Show Stationery item prices",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that returns `name`, `category`, and `price` from `products` for rows where `category` is `Stationery`. Write the query in the SQL editor, click Run query, and check the results table."
+              "title": "Filter the Catalog to Stationery",
+              "prompt": "Return `name`, `category`, and `price` for rows whose category is `Stationery`."
             }
           }
         }

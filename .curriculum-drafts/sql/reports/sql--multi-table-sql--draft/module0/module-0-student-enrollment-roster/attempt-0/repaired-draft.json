@@ -1,0 +1,104 @@
+{
+  "title": "Module 0 Project: Student Enrollment Activity Roster",
+  "summary": "Build a qualified and readable student-enrollment roster through five cumulative join steps.",
+  "minutes": 55,
+  "sketchBlocks": [
+    {
+      "id": "sketch0",
+      "title": "Project Overview: Building a Student Enrollment Roster",
+      "bodyMarkdown": "In this project, you will create a comprehensive student enrollment roster by joining data from the `students` and `enrollments` tables. The goal is to produce a readable and qualified report that lists each student's enrollment activities. You'll use SQL joins to connect these tables, ensuring that each enrollment record is accurately linked to the corresponding student. This project will guide you through five steps, each building on the previous one, to achieve a final, polished roster."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "step1",
+      "kind": "code_input",
+      "title": "Connect Students to Enrollment Records",
+      "prompt": "Use an INNER JOIN to connect students and enrollments. Return student id, student name, enrollment id, course id, and term.",
+      "starterCode": "-- Write your SQL answer below",
+      "solutionCode": "SELECT \n  students.id, \n  students.name, \n  enrollments.id, \n  enrollments.course_id, \n  enrollments.term \nFROM students \nINNER JOIN enrollments ON students.id = enrollments.student_id;",
+      "datasetId": "school_relations_intro",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "step2",
+      "kind": "code_input",
+      "title": "Qualify Every Shared Identifier",
+      "prompt": "Keep the same rows and qualify every selected id column with its table name or alias.",
+      "starterCode": "-- Write your SQL answer below",
+      "solutionCode": "SELECT \n  students.id AS student_id, \n  students.name, \n  enrollments.id AS enrollment_id, \n  enrollments.course_id, \n  enrollments.term \nFROM students \nINNER JOIN enrollments ON students.id = enrollments.student_id;",
+      "datasetId": "school_relations_intro",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "step3",
+      "kind": "code_input",
+      "title": "Add Readable Table and Column Aliases",
+      "prompt": "Use concise table aliases and rename the displayed identifiers as student_id, enrollment_id, and course_id.",
+      "starterCode": "-- Write your SQL answer below",
+      "solutionCode": "SELECT \n  s.id AS student_id, \n  s.name, \n  e.id AS enrollment_id, \n  e.course_id AS course_id, \n  e.term \nFROM students AS s \nINNER JOIN enrollments AS e ON s.id = e.student_id;",
+      "datasetId": "school_relations_intro",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "step4",
+      "kind": "code_input",
+      "title": "Focus on Upper Grade Levels",
+      "prompt": "Keep the complete joined roster and include only students in grade level 10 or higher.",
+      "starterCode": "-- Write your SQL answer below",
+      "solutionCode": "SELECT \n  s.id AS student_id, \n  s.name, \n  e.id AS enrollment_id, \n  e.course_id AS course_id, \n  e.term \nFROM students AS s \nINNER JOIN enrollments AS e ON s.id = e.student_id \nWHERE s.grade_level >= 10;",
+      "datasetId": "school_relations_intro",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "step5",
+      "kind": "code_input",
+      "title": "Order the Roster Predictably",
+      "prompt": "Sort by student name ascending, then course_id ascending, while preserving the complete query.",
+      "starterCode": "-- Write your SQL answer below",
+      "solutionCode": "SELECT \n  s.id AS student_id, \n  s.name, \n  e.id AS enrollment_id, \n  e.course_id AS course_id, \n  e.term \nFROM students AS s \nINNER JOIN enrollments AS e ON s.id = e.student_id \nWHERE s.grade_level >= 10 \nORDER BY s.name ASC, e.course_id ASC;",
+      "datasetId": "school_relations_intro",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Student Enrollment Activity Roster",
+    "stepIds": [
+      "step1",
+      "step2",
+      "step3",
+      "step4",
+      "step5"
+    ]
+  }
+}

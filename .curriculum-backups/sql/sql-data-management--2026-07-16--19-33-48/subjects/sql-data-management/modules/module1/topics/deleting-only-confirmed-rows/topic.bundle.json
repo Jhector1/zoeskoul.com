@@ -1,0 +1,364 @@
+{
+  "topicId": "deleting-only-confirmed-rows",
+  "subjectSlug": "sql-data-management",
+  "moduleSlug": "sql-data-management-module-1-controlled-updates-deletes",
+  "sectionSlug": "sql-data-management-sql-data-management-section-1-controlled-mutations",
+  "prefix": "sql_data_management_module_1",
+  "minutes": 30,
+  "runtimeDefaults": {
+    "kind": "sql",
+    "showSchema": true,
+    "showErd": true,
+    "showChen": true,
+    "supportsTerminal": false,
+    "supportsMultiFile": false,
+    "supportsFileSystem": false,
+    "datasetId": "inventory_ops",
+    "fixedSqlDialect": "sqlite",
+    "resultShape": "table"
+  },
+  "serviceDefaults": null,
+  "tools": {
+    "defaultVisible": true,
+    "allowOpen": true,
+    "defaultSurface": "editor",
+    "compactDefaultSurface": "editor",
+    "sqlPane": {
+      "showResults": true,
+      "showTables": true,
+      "showErd": false,
+      "showChen": false,
+      "defaultTab": "results",
+      "compactDefaultTab": "results"
+    }
+  },
+  "topic": {
+    "labelKey": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.label",
+    "summaryKey": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.cards.sketch0.title",
+      "sketchId": "sketch1",
+      "height": 420,
+      "tryIt": {
+        "id": "try-deleting-only-confirmed-rows-sketch0",
+        "titleKey": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.tryIt.try_deleting_only_confirmed_rows_sketch0.title",
+        "promptKey": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.tryIt.try_deleting_only_confirmed_rows_sketch0.prompt",
+        "exerciseKey": "try-deleting-only-confirmed-rows-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.cards.sketch1.title",
+      "sketchId": "sketch2",
+      "height": 420,
+      "tryIt": {
+        "id": "try-deleting-only-confirmed-rows-sketch1",
+        "titleKey": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.tryIt.try_deleting_only_confirmed_rows_sketch1.title",
+        "promptKey": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.tryIt.try_deleting_only_confirmed_rows_sketch1.prompt",
+        "exerciseKey": "try-deleting-only-confirmed-rows-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.sketch1.title",
+      "bodyKey": "sketches.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.sketch1.bodyMarkdown"
+    },
+    {
+      "id": "sketch2",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.sketch2.title",
+      "bodyKey": "sketches.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.sketch2.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "try-deleting-only-confirmed-rows-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.tryIt.try_deleting_only_confirmed_rows_sketch0",
+      "language": "sql",
+      "starterCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.tryIt.try_deleting_only_confirmed_rows_sketch0.starterCode",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.tryIt.try_deleting_only_confirmed_rows_sketch0.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.tryIt.try_deleting_only_confirmed_rows_sketch0.solutionCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "inventory_ops",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "entryFile": "query.sql",
+        "openTabs": [
+          "query.sql"
+        ],
+        "starterCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.tryIt.try_deleting_only_confirmed_rows_sketch0.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.tryIt.try_deleting_only_confirmed_rows_sketch0.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          }
+        ]
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "inventory_ops",
+        "resultShape": "table",
+        "solutionCode": "-- Delete the test item with id 4\nDELETE FROM inventory_items\nWHERE id = 4;\n\n-- Verify the deletion\nSELECT * FROM inventory_items WHERE id = 4;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.tryIt.try_deleting_only_confirmed_rows_sketch0.solutionCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          }
+        ],
+        "checkSql": "SELECT * FROM inventory_items WHERE id = 4;"
+      }
+    },
+    {
+      "id": "try-deleting-only-confirmed-rows-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.tryIt.try_deleting_only_confirmed_rows_sketch1",
+      "language": "sql",
+      "starterCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.tryIt.try_deleting_only_confirmed_rows_sketch1.starterCode",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.tryIt.try_deleting_only_confirmed_rows_sketch1.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.tryIt.try_deleting_only_confirmed_rows_sketch1.solutionCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "inventory_ops",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "entryFile": "query.sql",
+        "openTabs": [
+          "query.sql"
+        ],
+        "starterCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.tryIt.try_deleting_only_confirmed_rows_sketch1.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.tryIt.try_deleting_only_confirmed_rows_sketch1.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          }
+        ]
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "inventory_ops",
+        "resultShape": "table",
+        "solutionCode": "-- Delete inactive test items\nDELETE FROM inventory_items\nWHERE status = 'inactive' AND is_test = 1;\n\n-- Verify the deletion\nSELECT * FROM inventory_items WHERE status = 'inactive' AND is_test = 1;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.tryIt.try_deleting_only_confirmed_rows_sketch1.solutionCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          }
+        ],
+        "checkSql": "SELECT * FROM inventory_items WHERE status = 'inactive' AND is_test = 1;"
+      }
+    },
+    {
+      "id": "single-choice-1",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.practice.single-choice-1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "single-choice-2",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.practice.single-choice-2",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "multi-choice-1",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.practice.multi-choice-1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "drag-reorder-1",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.practice.drag-reorder-1",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
+      }
+    },
+    {
+      "id": "fill-blank-choice-1",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.practice.fill-blank-choice-1",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "WHERE"
+      }
+    },
+    {
+      "id": "fill-blank-choice-2",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.practice.fill-blank-choice-2",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "only intended"
+      }
+    }
+  ]
+}

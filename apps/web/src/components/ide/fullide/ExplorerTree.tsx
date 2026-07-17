@@ -531,10 +531,11 @@ function Tree(props: TreeProps) {
                                 clearAutoExpand();
                             }}
                             className={cn(
-                                "group flex min-h-[36px] items-center rounded-md border border-transparent px-2",
+                                "group flex min-h-[36px] items-center rounded-md border border-transparent px-2 transition-colors",
                                 "hover:bg-neutral-50 hover:border-neutral-200 dark:hover:bg-white/[0.06] dark:hover:border-white/10",
                                 "cursor-pointer",
-                                isActive && "bg-neutral-50 border-neutral-200 dark:bg-white/[0.08] dark:border-white/10",
+                                isActive &&
+                                "bg-emerald-50 border-emerald-200 shadow-[inset_0_0_0_1px_rgba(16,185,129,0.08)] dark:bg-emerald-400/10 dark:border-emerald-300/30",
                                 isDropTarget &&
                                 "border-emerald-400 bg-emerald-50/80 dark:border-emerald-300/50 dark:bg-emerald-400/10",
                                 pendingMoveId === n.id &&
@@ -610,7 +611,12 @@ function Tree(props: TreeProps) {
                                 ) : null}
                             </button>
 
-                            <div className="grid h-7 w-7 place-items-center text-neutral-700 dark:text-white/80">
+                            <div
+                                className={cn(
+                                    "grid h-7 w-7 place-items-center text-neutral-700 dark:text-white/80",
+                                    isActive && "text-emerald-700 dark:text-emerald-200",
+                                )}
+                            >
                                 {isFolder ? (
                                     <IconFolder className="h-4 w-4" />
                                 ) : (
@@ -632,7 +638,13 @@ function Tree(props: TreeProps) {
                                     activateNode();
                                 }}
                             >
-                                <div className="truncate text-[12px] font-medium text-neutral-900 dark:text-white/85">                                    {n.name}
+                                <div
+                                    className={cn(
+                                        "truncate text-[12px] font-medium text-neutral-900 dark:text-white/85",
+                                        isActive && "text-emerald-900 dark:text-emerald-100",
+                                    )}
+                                >
+                                    {n.name}
                                 </div>
                             </button>
 

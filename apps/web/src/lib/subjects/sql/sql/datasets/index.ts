@@ -1,33 +1,17 @@
-// src/lib/subjects/sql/datasets/index.ts
+/**
+ * Browser/runtime bridge to the canonical SQL dataset registry.
+ *
+ * Do not maintain a second dataset map in the web app. Compiler goldens,
+ * authoring validation, grading, and the learner SQL workspace must all resolve
+ * datasets from the same registry or a dataset can pass goldens while rendering
+ * with no schema in the browser.
+ */
+export {
+    getSqlDataset,
+    getSqlDatasetById,
+    listSqlDatasetIds,
+} from "@zoeskoul/curriculum-profiles/sql-datasets";
 
-import { studentsIntroDataset } from "./studentsIntro";
-import {productsCatalogDataset} from "@/lib/subjects/sql/sql/datasets/productsCatalog";
-import {salesKpiDataset} from "@/lib/subjects/sql/sql/datasets/salesKpi";
-import {inventoryOpsDataset} from "@/lib/subjects/sql/sql/datasets/inventoryOps";
-import {schoolRelationsIntroDataset} from "@/lib/subjects/sql/sql/datasets/schoolRelationsIntro";
-import {customersCleanupDataset} from "@/lib/subjects/sql/sql/datasets/customersCleanup";
-import {ddlBlankDataset} from "@/lib/subjects/sql/sql/datasets/ddlBlankDataset";
-// import { productsCatalogDataset } from "./productsCatalog";
-// import { salesKpiDataset } from "./salesKpi";
-
-export const SQL_DATASETS = {
-    [studentsIntroDataset.id]: studentsIntroDataset,
-    [productsCatalogDataset.id]: productsCatalogDataset,
-    [salesKpiDataset.id]: salesKpiDataset,
-    [inventoryOpsDataset.id]: inventoryOpsDataset,
-    [schoolRelationsIntroDataset.id]: schoolRelationsIntroDataset,
-    [customersCleanupDataset.id]: customersCleanupDataset,
-    [ddlBlankDataset.id]: ddlBlankDataset,
-
-
-
-
-} as const;
-
-export type SqlDatasetId = keyof typeof SQL_DATASETS;
-
-export function getSqlDataset(datasetId: string | null | undefined) {
-
-    if (!datasetId) return null;
-    return SQL_DATASETS[datasetId as SqlDatasetId] ?? null;
-}
+export type {
+    SqlDatasetId,
+} from "@zoeskoul/curriculum-profiles/sql-datasets";

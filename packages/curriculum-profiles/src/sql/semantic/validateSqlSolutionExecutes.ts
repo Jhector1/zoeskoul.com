@@ -6,9 +6,10 @@ import type {
 import type { SemanticValidationIssue } from "../../shared/profileServices.js";
 import {
     resolveSqlRunner,
-} from "@zoeskoul/curriculum-runtime";
+} from "@zoeskoul/curriculum-runtime/sql/local";
 import { resolveEffectiveExerciseRuntime } from "@zoeskoul/curriculum-runtime/runtime";
 import { getSqlDatasetById } from "../datasets/index.js";
+import { buildSqlDraftProgram } from "../shared/sqlWorkspace.js";
 
 const DEFAULT_SQL_LIMITS = {
     statementTimeoutMs: 4000,
@@ -65,7 +66,9 @@ export async function validateSqlSolutionExecutes(args: {
         if (exercise.kind !== "code_input") continue;
         if ((exercise.recipeType ?? "sql_query") !== "sql_query") continue;
 
-        if (!exercise.solutionCode.trim()) {
+        const solutionProgram = buildSqlDraftProgram(exercise, "solution");
+
+        if (!solutionProgram.trim()) {
             issues.push({
                 code: "SQL_SOLUTION_CODE_EMPTY",
                 category: "execution",
@@ -93,7 +96,7 @@ export async function validateSqlSolutionExecutes(args: {
         });
 
         const run = await runSql({
-            code: exercise.solutionCode,
+            code: solutionProgram,
             checkSql: exercise.checkSql,
             dialect: resolved.dialect,
             schemaSql: resolved.dataset?.schemaSql ?? "",
@@ -105,12 +108,18 @@ export async function validateSqlSolutionExecutes(args: {
         runsByExerciseId[exercise.id] = run;
 
         if (!(run as { ok?: boolean })?.ok) {
+            const runnerError =
+                typeof (run as { error?: unknown })?.error === "string"
+                    ? (run as { error: string }).error.trim()
+                    : "";
             issues.push({
                 code: "SQL_SOLUTION_EXECUTION_FAILED",
                 category: "execution",
                 severity: "error",
                 exerciseId: exercise.id,
-                message: "Generated SQL solution failed to execute.",
+                message: runnerError
+                    ? `Generated SQL solution failed to execute: ${runnerError}`
+                    : "Generated SQL solution failed to execute.",
             });
         }
     }

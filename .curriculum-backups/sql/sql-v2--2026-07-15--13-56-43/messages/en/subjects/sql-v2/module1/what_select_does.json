@@ -1,0 +1,250 @@
+{
+  "topics": {
+    "sql-v2": {
+      "sql-v2-1": {
+        "what_select_does": {
+          "label": "SELECT and FROM: Building a Query",
+          "summary": "Build a complete single-table query and understand how SELECT and FROM work together.",
+          "cards": {
+            "sketch0": {
+              "title": "Choose What the Result Should Show"
+            },
+            "sketch1": {
+              "title": "Name the Table That Supplies the Rows"
+            },
+            "quiz": {
+              "title": "Check Your Understanding"
+            }
+          },
+          "quiz": {
+            "sc_select_purpose": {
+              "title": "What does SELECT do?",
+              "prompt": "What is the main job of `SELECT` in SQL?",
+              "hint": "Think about whether `SELECT` shows data or changes data.",
+              "help": {
+                "concept": "`SELECT` is used to retrieve data from a table so you can view results in the results panel.",
+                "hint_1": "A basic query like `SELECT name FROM products;` displays values from a column.",
+                "hint_2": "Choose the option about showing or retrieving rows and columns, not editing the table."
+              },
+              "options": {
+                "a": "It retrieves data from a table",
+                "b": "It deletes rows from a table",
+                "c": "It creates a new table",
+                "d": "It renames a column permanently"
+              }
+            },
+            "sc_select_star_meaning": {
+              "title": "Meaning of the star",
+              "prompt": "In the query `SELECT * FROM products;`, what does `*` mean?",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "options": {
+                "a": "Only the first column",
+                "b": "All columns",
+                "c": "Only numeric columns",
+                "d": "A random row"
+              }
+            },
+            "mc_valid_select_parts": {
+              "title": "Valid beginner SELECT queries",
+              "prompt": "Which queries correctly retrieve data from the `products` table? Choose all that apply.",
+              "hint": "A valid beginner query here needs `SELECT` and `FROM products` in the right places.",
+              "help": {
+                "concept": "A basic retrieval query names one or more columns after `SELECT` and the table after `FROM`.",
+                "hint_1": "Check whether the query starts with `SELECT` and whether `products` appears after `FROM`.",
+                "hint_2": "Two choices correctly ask for columns from `products`; the others misuse the keywords."
+              },
+              "options": {
+                "a": "SELECT name FROM products;",
+                "b": "FROM products SELECT name;",
+                "c": "SELECT * FROM products;",
+                "d": "products FROM SELECT name;"
+              }
+            },
+            "mc_columns_returned": {
+              "title": "Columns shown by a query",
+              "prompt": "If you run `SELECT name, price FROM products;`, which columns will appear in the results table? Choose all that apply.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "options": {
+                "a": "name",
+                "b": "price",
+                "c": "stock",
+                "d": "created_at"
+              }
+            },
+            "dr_query_order_basic": {
+              "title": "Build a basic query",
+              "prompt": "Arrange the tokens to make a valid query that shows the `name` column from the `products` table.",
+              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "help": {
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
+              },
+              "tokens": {
+                "t1": "SELECT",
+                "t2": "name",
+                "t3": "FROM",
+                "t4": "products;"
+              }
+            },
+            "dr_query_order_two_columns": {
+              "title": "Order a two-column query",
+              "prompt": "Arrange the tokens to make a valid query that shows `name` and `category` from `products`.",
+              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "help": {
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
+              },
+              "tokens": {
+                "t1": "FROM",
+                "t2": "products;",
+                "t3": "SELECT",
+                "t4": "name, category"
+              }
+            },
+            "fb_from_table_name": {
+              "title": "Complete the table name",
+              "prompt": "Fill in the missing table name to select all columns from the products table.",
+              "hint": "Use the actual table name shown in the schema browser.",
+              "help": {
+                "concept": "The `FROM` clause names the table that the query reads from.",
+                "hint_1": "This lesson's dataset has one table named `the missing term`.",
+                "hint_2": "Choose the table name that contains columns like `id`, `name`, and `price`."
+              },
+              "template": "SELECT * FROM [blank1];",
+              "choices": [
+                "products",
+                "price",
+                "name",
+                "category"
+              ]
+            },
+            "fb_select_column_name": {
+              "title": "Complete the column list",
+              "prompt": "Fill in the missing column so the query shows product names.",
+              "hint": "Use the column that stores values like Sketchbook and Notebook.",
+              "help": {
+                "concept": "The column list after `SELECT` tells SQL which data to return.",
+                "hint_1": "You want the text values that identify each product.",
+                "hint_2": "Choose the column whose entries include product labels rather than prices or stock counts."
+              },
+              "template": "SELECT [blank1] FROM products;",
+              "choices": [
+                "name",
+                "stock",
+                "created_at",
+                "id"
+              ]
+            },
+            "ci_select_all_products": {
+              "title": "Show every column from products",
+              "prompt": "Write a query that returns all columns from the `products` table. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "-- Return all columns from the products table.\nSELECT \nFROM products;"
+            },
+            "ci_select_name_price": {
+              "title": "Show product names and prices",
+              "prompt": "Write a query that returns only the `name` and `price` columns from the `products` table. Write the query in the SQL editor, click Run query, and check that the results table has exactly those two columns.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "-- Return only the name and price columns from the products table.\nSELECT \nFROM products;"
+            },
+            "ci_select_category_stock": {
+              "title": "Show categories and stock counts",
+              "prompt": "Write a query that returns the `category` and `stock` columns from the `products` table. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "-- Return the category and stock columns from the products table.\nSELECT \nFROM products;"
+            },
+            "try-what_select_does-sketch0": {
+              "title": "Query all products rows",
+              "prompt": "Scenario: A store manager needs a clear product-catalog query before sharing results with the team. Write a query that returns all columns from the `products` table. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the selected columns and table name in the SQL editor.",
+                "hint_2": "Run the query and compare the result table with the expected result."
+              },
+              "starterCode": "-- Return all columns from the products table.\nSELECT \nFROM products;"
+            },
+            "try-what_select_does-sketch1": {
+              "title": "Query name and price from products",
+              "prompt": "Scenario: A store manager needs a clear product-catalog query before sharing results with the team. Write a query that returns `name`, `price` from the `products` table. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the selected columns and table name in the SQL editor.",
+                "hint_2": "Run the query and compare the result table with the expected result."
+              },
+              "starterCode": "-- Return name, price from the products table.\nSELECT \nFROM products;"
+            },
+            "try-what_select_does-sketch2": {
+              "title": "Build a Compact Inventory View",
+              "prompt": "Return only `category` and `stock` from the `products` table. Keep the columns in that order so the result answers an inventory question without showing unrelated fields.",
+              "hint": "List the two requested columns after SELECT, separated by a comma.",
+              "help": {
+                "concept": "Return only `category` and `stock` from the `products` table. Keep the columns in that order so the result answers an inventory question without showing unrelated fields.",
+                "hint_1": "List the two requested columns after SELECT, separated by a comma.",
+                "hint_2": "Run the query and compare the returned columns and rows with the expected result."
+              },
+              "starterCode": "-- Return category and stock only\nSELECT\n    \nFROM products;"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_what_select_does_sketch2": {
+              "title": "Build a Two-Column Product Query",
+              "prompt": "Return the `category` and `stock` columns from `products`, in that order. Include every product row.",
+              "hint": "List the two requested columns after SELECT and name products after FROM.",
+              "help": {
+                "concept": "SELECT controls the result columns, and FROM identifies the source table.",
+                "hint_1": "List the two requested columns after SELECT and name products after FROM.",
+                "hint_2": "Run the query and verify that the returned columns and rows match the request."
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql-v2": {
+      "sql-v2-1": {
+        "what_select_does": {
+          "select_result_list": {
+            "title": "Choose What the Result Should Show",
+            "bodyMarkdown": "A basic SQL query answers two questions: **what should the result show**, and **where should those values come from**? `SELECT` answers the first question. The column list after it becomes the shape of the results table.\n\n```sql\nSELECT\n    name,\n    price\nFROM products;\n```\n\nHere, `name` and `price` are the only result columns. SQL reads every row in `products`, takes those two values from each row, and returns them in the same order they appear after `SELECT`.\n\nStart by describing the result you want in plain language: “Show each product name and price.” Then translate that request into the column list. This habit keeps beginner queries focused and prevents extra columns from making the result harder to read."
+          },
+          "from_source_table": {
+            "title": "Name the Table That Supplies the Rows",
+            "bodyMarkdown": "`FROM` identifies the source table. A column name is meaningful only when SQL knows which table contains it.\n\n```sql\nSELECT\n    id,\n    name,\n    category\nFROM products;\n```\n\nRead the query from top to bottom when writing it: select the three columns, then read them from `products`. Read it from `FROM` upward when checking the logic: SQL first has access to the rows in `products`, then it builds the requested result columns.\n\nA complete beginner retrieval query therefore needs both parts:\n\n```text\nSELECT requested_columns\nFROM source_table;\n```\n\nThe semicolon closes the statement. Uppercase keywords are a readability convention, not a requirement."
+          }
+        }
+      }
+    }
+  }
+}

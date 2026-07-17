@@ -1,0 +1,365 @@
+{
+  "topicId": "previewing-update-and-delete-targets",
+  "subjectSlug": "sql--sql-data-management--draft",
+  "moduleSlug": "sql-data-management-module-1-controlled-updates-deletes",
+  "sectionSlug": "sql--sql-data-management--draft-sql-data-management-section-1-target-before-change",
+  "prefix": "sql_data_management_module_1",
+  "minutes": 26,
+  "runtimeDefaults": {
+    "kind": "sql",
+    "showSchema": true,
+    "showErd": true,
+    "showChen": true,
+    "supportsTerminal": false,
+    "supportsMultiFile": false,
+    "supportsFileSystem": false,
+    "datasetId": "inventory_ops",
+    "fixedSqlDialect": "sqlite",
+    "resultShape": "table"
+  },
+  "serviceDefaults": null,
+  "tools": {
+    "defaultVisible": true,
+    "allowOpen": true,
+    "defaultSurface": "editor",
+    "compactDefaultSurface": "editor",
+    "sqlPane": {
+      "showResults": true,
+      "showTables": true,
+      "showErd": false,
+      "showChen": false,
+      "defaultTab": "results",
+      "compactDefaultTab": "results"
+    }
+  },
+  "topic": {
+    "labelKey": "topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.label",
+    "summaryKey": "topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.cards.sketch0.title",
+      "sketchId": "preview-select",
+      "height": 420,
+      "tryIt": {
+        "id": "try-previewing-update-and-delete-targets-sketch0",
+        "titleKey": "topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.tryIt.try_previewing_update_and_delete_targets_sketch0.title",
+        "promptKey": "topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.tryIt.try_previewing_update_and_delete_targets_sketch0.prompt",
+        "exerciseKey": "try-previewing-update-and-delete-targets-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.cards.sketch1.title",
+      "sketchId": "mutation-execution",
+      "height": 420,
+      "tryIt": {
+        "id": "try-previewing-update-and-delete-targets-sketch1",
+        "titleKey": "topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.tryIt.try_previewing_update_and_delete_targets_sketch1.title",
+        "promptKey": "topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.tryIt.try_previewing_update_and_delete_targets_sketch1.prompt",
+        "exerciseKey": "try-previewing-update-and-delete-targets-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "preview-select",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.preview-select.title",
+      "bodyKey": "sketches.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.preview-select.bodyMarkdown"
+    },
+    {
+      "id": "mutation-execution",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.mutation-execution.title",
+      "bodyKey": "sketches.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.mutation-execution.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "try-previewing-update-and-delete-targets-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.tryIt.try_previewing_update_and_delete_targets_sketch0",
+      "language": "sql",
+      "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.tryIt.try_previewing_update_and_delete_targets_sketch0.starterCode",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.tryIt.try_previewing_update_and_delete_targets_sketch0.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.tryIt.try_previewing_update_and_delete_targets_sketch0.solutionCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "inventory_ops",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "entryFile": "query.sql",
+        "openTabs": [
+          "query.sql"
+        ],
+        "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.tryIt.try_previewing_update_and_delete_targets_sketch0.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.tryIt.try_previewing_update_and_delete_targets_sketch0.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          }
+        ]
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "inventory_ops",
+        "resultShape": "table",
+        "solutionCode": "SELECT * FROM inventory_items WHERE category = 'Decor' AND is_test = 1;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.tryIt.try_previewing_update_and_delete_targets_sketch0.solutionCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-previewing-update-and-delete-targets-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.tryIt.try_previewing_update_and_delete_targets_sketch1",
+      "language": "sql",
+      "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.tryIt.try_previewing_update_and_delete_targets_sketch1.starterCode",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.tryIt.try_previewing_update_and_delete_targets_sketch1.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.tryIt.try_previewing_update_and_delete_targets_sketch1.solutionCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "inventory_ops",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "entryFile": "query.sql",
+        "openTabs": [
+          "query.sql"
+        ],
+        "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.tryIt.try_previewing_update_and_delete_targets_sketch1.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.tryIt.try_previewing_update_and_delete_targets_sketch1.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          }
+        ]
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "inventory_ops",
+        "resultShape": "table",
+        "solutionCode": "UPDATE inventory_items SET price = 10.99 WHERE category = 'Accessories' AND is_test = 0;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.tryIt.try_previewing_update_and_delete_targets_sketch1.solutionCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          }
+        ],
+        "checkSql": "SELECT * FROM inventory_items WHERE category = 'Accessories' AND is_test = 0;"
+      }
+    },
+    {
+      "id": "single-choice-preview",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.practice.single-choice-preview",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "fill-blank-choice-update",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.practice.fill-blank-choice-update",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "'Kitchen'"
+      }
+    },
+    {
+      "id": "multi-choice-verify",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.practice.multi-choice-verify",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "drag-reorder-mutation-steps",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.practice.drag-reorder-mutation-steps",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t4",
+          "t3"
+        ]
+      }
+    },
+    {
+      "id": "single-choice-where",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.practice.single-choice-where",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "fill-blank-choice-delete",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.practice.fill-blank-choice-delete",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "'Decor'"
+      }
+    }
+  ]
+}

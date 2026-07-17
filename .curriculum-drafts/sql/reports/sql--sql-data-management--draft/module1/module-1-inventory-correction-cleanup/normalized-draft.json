@@ -1,0 +1,271 @@
+{
+  "title": "Module 1 Project: Inventory Correction and Cleanup",
+  "summary": "Correct audited inventory values and remove only two approved test records through six cumulative steps.",
+  "minutes": 70,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Inventory Correction and Cleanup Overview",
+      "bodyMarkdown": "In this project, you will take on the role of an Inventory Data Steward tasked with correcting and cleaning up an inventory database. An audit has identified incorrect prices, unfinished statuses, and internal test rows that need to be addressed. Your goal is to create a SQL script that precisely targets these issues without affecting legitimate records.\n\nThe project will guide you through a series of steps where you'll preview the data, apply updates, and verify changes. This ensures that only the intended records are modified or removed, preserving the integrity of the inventory data.\n\n### Example Scenario\nConsider an inventory item with an incorrect price and status. You'll write a SQL query to update these fields based on specific conditions, ensuring that only the targeted item is affected. This approach prevents accidental changes to other records, maintaining data accuracy.\n\nBy the end of this project, you'll have a comprehensive script that not only corrects errors but also removes test data, leaving the inventory clean and accurate."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "try-module-1-inventory-correction-cleanup-sketch0",
+      "kind": "code_input",
+      "title": "Preview the Audit Targets",
+      "prompt": "Write a SELECT statement to preview the inventory items with ids 2, 4, and 6. Include columns for price, status, is_test, and notes to review these items before any changes.",
+      "starterCode": "-- Write your SELECT statement here\nSELECT * FROM inventory_items WHERE id IN (2, 4, 6);",
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "-- Write your SELECT statement here\nSELECT * FROM inventory_items WHERE id IN (2, 4, 6);",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT id, price, status, is_test, notes FROM inventory_items WHERE id IN (2, 4, 6);",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionCode": "SELECT id, price, status, is_test, notes FROM inventory_items WHERE id IN (2, 4, 6);",
+      "tests": [
+        {
+          "stdout": "2|7.5|draft|1|Internal sample\n4|12.0|inactive|1|Archived test item\n6|9.0|draft|1|Trial inventory\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query",
+      "hint": "Use a WHERE clause to filter the specific ids.",
+      "help": {
+        "concept": "Previewing data before making changes helps ensure that only the intended records are targeted.",
+        "hint_1": "Use SELECT with a WHERE clause to filter specific ids.",
+        "hint_2": "Ensure you include all necessary columns in your SELECT statement."
+      }
+    },
+    {
+      "id": "try-module-1-inventory-correction-cleanup-sketch1",
+      "kind": "code_input",
+      "title": "Correct One Item Precisely",
+      "prompt": "Update the inventory item with id 2 to set the price to 8.25 and status to 'active'. Ensure your query only affects this specific item.",
+      "starterCode": "-- Preview the target\nSELECT id, price, status FROM inventory_items WHERE id = 2;\n\n-- Update the item\n-- TODO: Write your UPDATE statement here",
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "-- Preview the target\nSELECT id, price, status FROM inventory_items WHERE id = 2;\n\n-- Update the item\n-- TODO: Write your UPDATE statement here",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "-- Preview the target\nSELECT id, price, status FROM inventory_items WHERE id = 2;\n\n-- Update the item\nUPDATE inventory_items SET price = 8.25, status = 'active' WHERE id = 2;\n\n-- Verify the update\nSELECT id, price, status FROM inventory_items WHERE id = 2;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionCode": "-- Preview the target\nSELECT id, price, status FROM inventory_items WHERE id = 2;\n\n-- Update the item\nUPDATE inventory_items SET price = 8.25, status = 'active' WHERE id = 2;\n\n-- Verify the update\nSELECT id, price, status FROM inventory_items WHERE id = 2;",
+      "tests": [
+        {
+          "stdout": "2|8.25|active\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query",
+      "hint": "Use a WHERE clause to target the specific id.",
+      "help": {
+        "concept": "Using a WHERE clause ensures that only the intended record is updated.",
+        "hint_1": "Include both SET and WHERE clauses in your UPDATE statement.",
+        "hint_2": "Ensure the WHERE clause targets only id 2."
+      }
+    },
+    {
+      "id": "try-module-1-inventory-correction-cleanup-sketch2",
+      "kind": "code_input",
+      "title": "Apply a Controlled Category Update",
+      "prompt": "Update all non-test Decor items to set last_updated to '2026-02-10'. Ensure your query only affects the intended items.",
+      "starterCode": "-- Preview the target\nSELECT id, category, is_test, last_updated FROM inventory_items WHERE category = 'Decor' AND is_test = 0;\n\n-- Update the items\n-- TODO: Write your UPDATE statement here",
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "-- Preview the target\nSELECT id, category, is_test, last_updated FROM inventory_items WHERE category = 'Decor' AND is_test = 0;\n\n-- Update the items\n-- TODO: Write your UPDATE statement here",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "-- Preview the target\nSELECT id, category, is_test, last_updated FROM inventory_items WHERE category = 'Decor' AND is_test = 0;\n\n-- Update the items\nUPDATE inventory_items SET last_updated = '2026-02-10' WHERE category = 'Decor' AND is_test = 0;\n\n-- Verify the update\nSELECT id, category, is_test, last_updated FROM inventory_items WHERE category = 'Decor' AND is_test = 0;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionCode": "-- Preview the target\nSELECT id, category, is_test, last_updated FROM inventory_items WHERE category = 'Decor' AND is_test = 0;\n\n-- Update the items\nUPDATE inventory_items SET last_updated = '2026-02-10' WHERE category = 'Decor' AND is_test = 0;\n\n-- Verify the update\nSELECT id, category, is_test, last_updated FROM inventory_items WHERE category = 'Decor' AND is_test = 0;",
+      "tests": [
+        {
+          "stdout": "3|Decor|0|2026-02-10\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query",
+      "hint": "Use a WHERE clause to filter by category and is_test flag.",
+      "help": {
+        "concept": "Controlled updates ensure only the intended records are modified.",
+        "hint_1": "Use WHERE to filter by category and is_test flag.",
+        "hint_2": "Ensure your WHERE clause excludes test items."
+      }
+    },
+    {
+      "id": "try-module-1-inventory-correction-cleanup-sketch3",
+      "kind": "code_input",
+      "title": "Delete One Confirmed Test Item",
+      "prompt": "Delete the inventory item with id 4. Ensure your query only affects this specific item.",
+      "starterCode": "-- Preview the target\nSELECT id, name FROM inventory_items WHERE id = 4;\n\n-- Delete the item\n-- TODO: Write your DELETE statement here",
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "-- Preview the target\nSELECT id, name FROM inventory_items WHERE id = 4;\n\n-- Delete the item\n-- TODO: Write your DELETE statement here",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "-- Preview the target\nSELECT id, name FROM inventory_items WHERE id = 4;\n\n-- Delete the item\nDELETE FROM inventory_items WHERE id = 4;\n\n-- Verify the deletion\nSELECT id, name FROM inventory_items WHERE id = 4;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionCode": "-- Preview the target\nSELECT id, name FROM inventory_items WHERE id = 4;\n\n-- Delete the item\nDELETE FROM inventory_items WHERE id = 4;\n\n-- Verify the deletion\nSELECT id, name FROM inventory_items WHERE id = 4;",
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query",
+      "hint": "Use a WHERE clause to target the specific id.",
+      "help": {
+        "concept": "Using a WHERE clause ensures that only the intended record is deleted.",
+        "hint_1": "Include a WHERE clause in your DELETE statement.",
+        "hint_2": "Ensure the WHERE clause targets only id 4."
+      }
+    },
+    {
+      "id": "try-module-1-inventory-correction-cleanup-sketch4",
+      "kind": "code_input",
+      "title": "Remove the Remaining Draft Test Row",
+      "prompt": "Delete the inventory item with id 6 only if it is marked as a test and has a draft status. Ensure your query only affects this specific item under these conditions.",
+      "starterCode": "-- Preview the target\nSELECT id, name, is_test, status FROM inventory_items WHERE id = 6;\n\n-- Delete the item\n-- TODO: Write your DELETE statement here",
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "-- Preview the target\nSELECT id, name, is_test, status FROM inventory_items WHERE id = 6;\n\n-- Delete the item\n-- TODO: Write your DELETE statement here",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "-- Preview the target\nSELECT id, name, is_test, status FROM inventory_items WHERE id = 6;\n\n-- Delete the item\nDELETE FROM inventory_items WHERE id = 6 AND is_test = 1 AND status = 'draft';\n\n-- Verify the deletion\nSELECT id, name FROM inventory_items WHERE id = 6;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionCode": "-- Preview the target\nSELECT id, name, is_test, status FROM inventory_items WHERE id = 6;\n\n-- Delete the item\nDELETE FROM inventory_items WHERE id = 6 AND is_test = 1 AND status = 'draft';\n\n-- Verify the deletion\nSELECT id, name FROM inventory_items WHERE id = 6;",
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query",
+      "hint": "Use a WHERE clause with multiple conditions.",
+      "help": {
+        "concept": "Combining conditions in a WHERE clause ensures precise targeting of records.",
+        "hint_1": "Use AND to combine conditions in your WHERE clause.",
+        "hint_2": "Ensure both is_test and status conditions are met."
+      }
+    },
+    {
+      "id": "try-module-1-inventory-correction-cleanup-sketch5",
+      "kind": "code_input",
+      "title": "Complete the Operational Handoff",
+      "prompt": "Create a cumulative script that retains legitimate rows, contains the corrected values, and removes only the two approved test records. Ensure all previous steps are included.",
+      "starterCode": "-- Preview the targets\nSELECT * FROM inventory_items WHERE id IN (2, 4, 6);\n\n-- Correct item with id 2\nUPDATE inventory_items SET price = 8.25, status = 'active' WHERE id = 2;\n\n-- Update non-test Decor items\nUPDATE inventory_items SET last_updated = '2026-02-10' WHERE category = 'Decor' AND is_test = 0;\n\n-- Delete item with id 4\nDELETE FROM inventory_items WHERE id = 4;\n\n-- Delete item with id 6\n-- TODO: Write your DELETE statement here",
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "-- Preview the targets\nSELECT * FROM inventory_items WHERE id IN (2, 4, 6);\n\n-- Correct item with id 2\nUPDATE inventory_items SET price = 8.25, status = 'active' WHERE id = 2;\n\n-- Update non-test Decor items\nUPDATE inventory_items SET last_updated = '2026-02-10' WHERE category = 'Decor' AND is_test = 0;\n\n-- Delete item with id 4\nDELETE FROM inventory_items WHERE id = 4;\n\n-- Delete item with id 6\n-- TODO: Write your DELETE statement here",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "-- Preview the targets\nSELECT * FROM inventory_items WHERE id IN (2, 4, 6);\n\n-- Correct item with id 2\nUPDATE inventory_items SET price = 8.25, status = 'active' WHERE id = 2;\n\n-- Update non-test Decor items\nUPDATE inventory_items SET last_updated = '2026-02-10' WHERE category = 'Decor' AND is_test = 0;\n\n-- Delete item with id 4\nDELETE FROM inventory_items WHERE id = 4;\n\n-- Delete item with id 6\nDELETE FROM inventory_items WHERE id = 6 AND is_test = 1 AND status = 'draft';\n\n-- Verify the final state\nSELECT * FROM inventory_items;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionCode": "-- Preview the targets\nSELECT * FROM inventory_items WHERE id IN (2, 4, 6);\n\n-- Correct item with id 2\nUPDATE inventory_items SET price = 8.25, status = 'active' WHERE id = 2;\n\n-- Update non-test Decor items\nUPDATE inventory_items SET last_updated = '2026-02-10' WHERE category = 'Decor' AND is_test = 0;\n\n-- Delete item with id 4\nDELETE FROM inventory_items WHERE id = 4;\n\n-- Delete item with id 6\nDELETE FROM inventory_items WHERE id = 6 AND is_test = 1 AND status = 'draft';\n\n-- Verify the final state\nSELECT * FROM inventory_items;",
+      "tests": [
+        {
+          "stdout": "1|Sticker Pack|Accessories|4.99|active|0||2026-02-01\n2|Test Mug|Kitchen|8.25|active|1|Internal sample|2026-02-03\n3|Canvas Print|Decor|45.0|active|0||2026-02-10\n5|Water Bottle|Kitchen|15.0|active|0||2026-02-05\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query",
+      "hint": "Ensure all previous updates and deletions are included in the script.",
+      "help": {
+        "concept": "A cumulative script ensures all intended changes are applied in sequence.",
+        "hint_1": "Include all previous steps in your script.",
+        "hint_2": "Ensure the final state matches the intended corrections and deletions."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Inventory Correction and Cleanup Project",
+    "stepIds": [
+      "try-module-1-inventory-correction-cleanup-sketch0",
+      "try-module-1-inventory-correction-cleanup-sketch1",
+      "try-module-1-inventory-correction-cleanup-sketch2",
+      "try-module-1-inventory-correction-cleanup-sketch3",
+      "try-module-1-inventory-correction-cleanup-sketch4",
+      "try-module-1-inventory-correction-cleanup-sketch5"
+    ]
+  }
+}

@@ -1,0 +1,162 @@
+{
+  "topics": {
+    "multi-table-sql": {
+      "multi-table-sql-module-0-join-foundations": {
+        "reading-keys-and-relationships": {
+          "label": "Reading Keys and Relationships",
+          "summary": "Trace documented primary-key and foreign-key pairs before writing a join.",
+          "cards": {
+            "sketch0": {
+              "title": "Understanding Primary and Foreign Keys"
+            },
+            "sketch1": {
+              "title": "Using INNER JOIN to Connect Tables"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "practice": {
+            "quiz-1": {
+              "title": "Identify the Primary Key",
+              "prompt": "Which column is the primary key in the `students` table?",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Remove options that do not match the concept or evidence named in the question."
+              },
+              "options": {
+                "a": "name",
+                "b": "grade_level",
+                "c": "id",
+                "d": "student_id"
+              }
+            },
+            "quiz-2": {
+              "title": "Purpose of Foreign Keys",
+              "prompt": "What is the purpose of a foreign key in a database?",
+              "hint": "Think about how tables are connected in a database.",
+              "help": {
+                "concept": "A foreign key links two tables together.",
+                "hint_1": "Foreign keys reference primary keys in another table.",
+                "hint_2": "They establish a relationship between tables."
+              },
+              "options": {
+                "a": "To uniquely identify each record",
+                "b": "To link two tables together",
+                "c": "To store large amounts of data",
+                "d": "To enforce data types"
+              }
+            },
+            "quiz-3": {
+              "title": "Components of an INNER JOIN",
+              "prompt": "Which components are necessary for an `INNER JOIN`? Select all that apply.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "options": {
+                "a": "SELECT clause",
+                "b": "ON condition",
+                "c": "WHERE clause",
+                "d": "Table names"
+              }
+            },
+            "quiz-4": {
+              "title": "Benefits of Using Table Aliases",
+              "prompt": "What are the benefits of using table aliases in SQL queries? Select all that apply.",
+              "hint": "Think about how aliases can simplify your queries.",
+              "help": {
+                "concept": "Table aliases make queries easier to read and write.",
+                "hint_1": "Aliases can shorten long table names.",
+                "hint_2": "They help avoid ambiguity when joining tables."
+              },
+              "options": {
+                "a": "Shorten query length",
+                "b": "Improve query readability",
+                "c": "Increase query execution speed",
+                "d": "Avoid column name ambiguity"
+              }
+            },
+            "quiz-5": {
+              "title": "Order of SQL Clauses",
+              "prompt": "Arrange the SQL clauses in the correct order for a basic query.",
+              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "help": {
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
+              },
+              "tokens": {
+                "t1": "SELECT",
+                "t2": "FROM",
+                "t3": "WHERE",
+                "t4": "ORDER BY"
+              }
+            },
+            "quiz-6": {
+              "title": "SQL Clause for Filtering",
+              "prompt": "Which SQL clause is used to filter records?",
+              "hint": "This clause specifies conditions for the rows to be included.",
+              "help": {
+                "concept": "The `the missing term` clause filters records based on conditions.",
+                "hint_1": "It comes after the `FROM` clause.",
+                "hint_2": "It specifies conditions for filtering rows."
+              },
+              "template": "The [blank1] clause is used to filter records.",
+              "choices": [
+                "SELECT",
+                "FROM",
+                "WHERE",
+                "ORDER BY"
+              ]
+            },
+            "quiz-7": {
+              "title": "Join Students and Enrollments",
+              "prompt": "Write a query to join the `students` and `enrollments` tables to list student names and their enrolled course IDs.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT students.name, enrollments.course_id\nFROM students\nINNER JOIN enrollments ON students.id = enrollments.student_id;"
+            },
+            "quiz-8": {
+              "title": "Join Courses and Departments",
+              "prompt": "Write a query to join the `courses` and `departments` tables to list course titles and their department names.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT courses.title, departments.name\nFROM courses\nINNER JOIN departments ON courses.department_id = departments.id;"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "multi-table-sql": {
+      "multi-table-sql-module-0-join-foundations": {
+        "reading-keys-and-relationships": {
+          "sketch-1": {
+            "title": "Understanding Primary and Foreign Keys",
+            "bodyMarkdown": "In relational databases, primary keys uniquely identify each record in a table, while foreign keys establish a link between two tables. For example, in our `students` table, the `id` column is a primary key. In the `enrollments` table, `student_id` is a foreign key that references the `id` in `students`. This relationship allows us to join these tables and retrieve related data."
+          },
+          "sketch-2": {
+            "title": "Using INNER JOIN to Connect Tables",
+            "bodyMarkdown": "The `INNER JOIN` clause is used to combine rows from two or more tables based on a related column. For instance, to find all students enrolled in courses, we can join the `students` and `enrollments` tables on the `students.id` and `enrollments.student_id` columns:\n\n```sql\nSELECT students.name, enrollments.course_id\nFROM students\nINNER JOIN enrollments ON students.id = enrollments.student_id;\n```\n\nThis query retrieves the names of students along with their enrolled course IDs."
+          }
+        }
+      }
+    }
+  }
+}

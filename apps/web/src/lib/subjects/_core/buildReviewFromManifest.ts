@@ -11,6 +11,7 @@ import type {
 } from "@/lib/subjects/types";
 import type { PracticeKind } from "@zoeskoul/db";
 import { buildReviewFromManifestCore } from "@zoeskoul/curriculum-runtime/review";
+import { normalizeToolPresentationPolicy } from "@zoeskoul/curriculum-contracts";
 import { makeTopicDef } from "@/lib/subjects/_core/topicMeta";
 import { tag } from "@/lib/practice/generator/shared/i18n";
 
@@ -22,24 +23,6 @@ function asRecord(value: unknown): Record<string, unknown> | null {
 
 function asString(value: unknown) {
     return typeof value === "string" ? value.trim() : "";
-}
-
-function asOptionalBoolean(value: unknown) {
-    return typeof value === "boolean" ? value : undefined;
-}
-
-function asToolsSpec(value: unknown) {
-    const tools = asRecord(value);
-    if (!tools) return null;
-
-    const defaultVisible = asOptionalBoolean(tools.defaultVisible);
-    const allowOpen = asOptionalBoolean(tools.allowOpen);
-    if (defaultVisible === undefined && allowOpen === undefined) return null;
-
-    return {
-        ...(defaultVisible !== undefined ? { defaultVisible } : {}),
-        ...(allowOpen !== undefined ? { allowOpen } : {}),
-    };
 }
 
 const TRY_IT_EXERCISE_STEP_FIELDS = [
@@ -71,6 +54,7 @@ const TRY_IT_EXERCISE_STEP_FIELDS = [
     "sqlSchemaSql",
     "sqlSeedSql",
     "sqlInitialTableSnapshots",
+    "tools",
 ] as const;
 
 function pickExerciseStepFields(exercise: Record<string, unknown> | null) {
@@ -175,7 +159,7 @@ export function buildReviewFromManifest(args: {
             );
         if (!rawCard) return card;
 
-        const rawToolsSpec = asToolsSpec(rawCard.tools);
+        const rawToolsSpec = normalizeToolPresentationPolicy(rawCard.tools);
         const cardWithTools = rawToolsSpec
             ? {
                 ...card,

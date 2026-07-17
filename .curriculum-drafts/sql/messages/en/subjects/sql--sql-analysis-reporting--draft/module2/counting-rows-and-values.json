@@ -1,0 +1,164 @@
+{
+  "topics": {
+    "sql--sql-analysis-reporting--draft": {
+      "sql-analysis-reporting-module-2-aggregate-functions": {
+        "counting-rows-and-values": {
+          "label": "Counting Rows and Values",
+          "summary": "Use COUNT deliberately to distinguish total records from records with a known value.",
+          "cards": {
+            "sketch0": {
+              "title": "Count the Rows in Scope"
+            },
+            "sketch1": {
+              "title": "Count Known Values"
+            },
+            "quiz": {
+              "title": "Check Your Understanding"
+            }
+          },
+          "practice": {
+            "single-choice-1": {
+              "title": "COUNT Star Meaning",
+              "prompt": "What does `COUNT(*)` count?",
+              "hint": "The star refers to rows, not one nullable column.",
+              "help": {
+                "concept": "COUNT(*) includes every row that survives WHERE.",
+                "hint_1": "It does not remove duplicates or inspect one field.",
+                "hint_2": "Choose the option describing the full row set."
+              },
+              "options": {
+                "a": "Every row in the query scope",
+                "b": "Only rows with a rating",
+                "c": "Only numeric columns",
+                "d": "Unique values automatically"
+              }
+            },
+            "single-choice-2": {
+              "title": "COUNT Column Meaning",
+              "prompt": "What does `COUNT(customer_rating)` exclude?",
+              "hint": "COUNT(column) focuses on whether the selected column has a value.",
+              "help": {
+                "concept": "NULL values are not counted by COUNT(column).",
+                "hint_1": "Repeated non-NULL values still count as separate rows.",
+                "hint_2": "Choose the missing-value case."
+              },
+              "options": {
+                "a": "Ratings below 4",
+                "b": "Duplicate ratings",
+                "c": "NULL ratings",
+                "d": "Completed orders"
+              }
+            },
+            "multi-choice-1": {
+              "title": "Appropriate Count Choices",
+              "prompt": "Which counting choices match the stated business measure? Select all that apply.",
+              "hint": "Match the function to the population being measured.",
+              "help": {
+                "concept": "COUNT(column) measures non-NULL entries; COUNT(*) measures rows.",
+                "hint_1": "Distinct categories require an additional DISTINCT rule.",
+                "hint_2": "Choose pairings whose names match their actual populations."
+              },
+              "options": {
+                "a": "`COUNT(*)` for all orders",
+                "b": "`COUNT(customer_rating)` for rated orders",
+                "c": "`COUNT(discount_pct)` for rows with recorded discount data",
+                "d": "`COUNT(*)` for distinct regions without DISTINCT"
+              }
+            },
+            "multi-choice-2": {
+              "title": "Count Report Design",
+              "prompt": "Which choices make a count KPI clearer? Select all that apply.",
+              "hint": "A KPI should reveal both what was counted and how missing data was handled.",
+              "help": {
+                "concept": "Specific aliases and explicit filters define the metric.",
+                "hint_1": "A generic heading hides the population.",
+                "hint_2": "Choose practices that make interpretation possible."
+              },
+              "options": {
+                "a": "Filter the intended population explicitly.",
+                "b": "Use an alias such as `completed_orders`.",
+                "c": "Name every result simply `count`.",
+                "d": "Compare COUNT(*) and COUNT(column) when missing values matter."
+              }
+            },
+            "drag-reorder-1": {
+              "title": "Build a Filtered Count",
+              "prompt": "Arrange the clauses for a completed-order count in written SQL order.",
+              "hint": "Write the aggregate selection, source, then row filter.",
+              "help": {
+                "concept": "WHERE limits rows before COUNT evaluates them.",
+                "hint_1": "The output alias belongs in SELECT.",
+                "hint_2": "The status condition follows FROM."
+              },
+              "tokens": {
+                "t1": "SELECT COUNT(*) AS completed_orders",
+                "t2": "FROM sales_reporting",
+                "t3": "WHERE order_status = 'Completed'"
+              }
+            },
+            "fill-blank-choice-1": {
+              "title": "Count Non-NULL Ratings",
+              "prompt": "Fill the column that makes COUNT ignore unrated rows.",
+              "hint": "COUNT must receive the nullable field whose known values matter.",
+              "help": {
+                "concept": "COUNT(customer_rating) skips rows where that column is NULL.",
+                "hint_1": "COUNT(*) would include every row.",
+                "hint_2": "Choose the rating column itself."
+              },
+              "template": "SELECT COUNT([blank1]) AS rated_orders FROM sales_reporting;",
+              "choices": [
+                "customer_rating",
+                "*",
+                "order_id, customer_rating",
+                "NULL"
+              ]
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_counting_rows_and_values_sketch0": {
+              "title": "Count Pending Orders",
+              "prompt": "Return one value named `pending_orders` that counts rows where `order_status` is `Pending`. Calculate and return `COUNT(*) AS pending_orders` from `sales_reporting`. Keep only rows where `order_status = 'Pending'`.",
+              "hint": "Filter the population first, then count every remaining row.",
+              "help": {
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "Calculate and return `COUNT(*) AS pending_orders` from `sales_reporting`. Keep only rows where `order_status = 'Pending'`."
+              },
+              "starterCode": "-- Write the query below.",
+              "solutionCode": "SELECT COUNT(*) AS pending_orders\nFROM sales_reporting\nWHERE order_status = 'Pending';"
+            },
+            "try_counting_rows_and_values_sketch1": {
+              "title": "Compare Total and Recorded Discounts",
+              "prompt": "Return `total_orders` with `COUNT(*)` and `orders_with_discount_data` with `COUNT(discount_pct)`. Calculate and return `COUNT(*) AS total_orders, COUNT(discount_pct) AS orders_with_discount_data` from `sales_reporting`.",
+              "hint": "Count all rows once and the nullable column once.",
+              "help": {
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "Calculate and return `COUNT(*) AS total_orders, COUNT(discount_pct) AS orders_with_discount_data` from `sales_reporting`."
+              },
+              "starterCode": "-- Write the query below.",
+              "solutionCode": "SELECT\n    COUNT(*) AS total_orders,\n    COUNT(discount_pct) AS orders_with_discount_data\nFROM sales_reporting;"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql--sql-analysis-reporting--draft": {
+      "sql-analysis-reporting-module-2-aggregate-functions": {
+        "counting-rows-and-values": {
+          "sketch0": {
+            "title": "Count the Rows in Scope",
+            "bodyMarkdown": "### What an aggregate function does\n\nAn **aggregate function** reads a set of rows and returns a summary value. Without `GROUP BY`, all qualifying rows form one set and the query returns one summary row. With `GROUP BY`, SQL creates one set per group and calculates the aggregate separately for each set. `COUNT` answers a **how many** question.\n\nIn SQL, the `COUNT` function is used to count the number of rows in a table. However, there are two main variations: `COUNT(*)` and `COUNT(column)`. \n\n- **`COUNT(*)`**: This counts all rows in the result set, including those with NULL values in any column. It's useful when you want to know the total number of rows returned by a query.\n\n- **`COUNT(column)`**: This counts only the rows where the specified column is not NULL. It's useful when you want to count the number of non-null entries in a specific column.\n\n### Example\nConsider the `sales_reporting` table:\n\n```sql\nSELECT\n    COUNT(*) AS total_orders\nFROM sales_reporting;\n```\n\n#### Line-by-line walkthrough\n\n- `SELECT` — starts the result list. The indented lines define the columns and calculations returned by the query.\n- `COUNT(*) AS total_orders` — counts every row in the current scope and names the output `total_orders`.\n- `FROM sales_reporting;` — reads source rows from the `sales_reporting` table.\n\n#### How SQL evaluates this aggregate\n\n1. `FROM` identifies the source table.\n2. With no `GROUP BY`, all remaining rows form one group.\n3. `SELECT` returns the finished metric under its alias.\nThis query returns the total number of orders in the `sales_reporting` table.\n\n```sql\nSELECT\n    COUNT(customer_rating) AS rated_orders\nFROM sales_reporting;\n```\n\n#### Line-by-line walkthrough\n\n- `SELECT` — starts the result list. The indented lines define the columns and calculations returned by the query.\n- `COUNT(customer_rating) AS rated_orders` — counts rows where `customer_rating` is not NULL and names the output `rated_orders`.\n- `FROM sales_reporting;` — reads source rows from the `sales_reporting` table.\n\n#### How SQL evaluates this aggregate\n\n1. `FROM` identifies the source table.\n2. With no `GROUP BY`, all remaining rows form one group.\n3. `SELECT` returns the finished metric under its alias.\nThis query returns the number of orders that have a non-null `customer_rating`. \n\nUnderstanding the difference between these two can help you choose the right function based on the data you need."
+          },
+          "sketch1": {
+            "title": "Count Known Values",
+            "bodyMarkdown": "### What an aggregate function does\n\nAn **aggregate function** reads a set of rows and returns a summary value. Without `GROUP BY`, all qualifying rows form one set and the query returns one summary row. With `GROUP BY`, SQL creates one set per group and calculates the aggregate separately for each set. `COUNT` answers a **how many** question.\n\nWhen generating reports, choosing between `COUNT(*)` and `COUNT(column)` can significantly affect the insights you derive.\n\n### Scenario\nImagine you are tasked with generating a report on customer feedback. You want to know how many orders have been rated by customers.\n\n- **Using `COUNT(*)`**:\n  ```sql\nSELECT\n    COUNT(*) AS total_orders\nFROM sales_reporting\nWHERE order_status = 'Completed';\n```\n\n#### Line-by-line walkthrough\n\n- `SELECT` — starts the result list. The indented lines define the columns and calculations returned by the query.\n- `COUNT(*) AS total_orders` — counts every row in the current scope and names the output `total_orders`.\n- `FROM sales_reporting` — reads source rows from the `sales_reporting` table.\n- `WHERE order_status = 'Completed';` — keeps only source rows that satisfy `order_status = 'Completed'`.\n\n#### How SQL evaluates this aggregate\n\n1. `FROM` identifies the source table.\n2. `WHERE` removes rows before any summary is calculated.\n3. With no `GROUP BY`, all remaining rows form one group.\n4. `SELECT` returns the finished metric under its alias.\n  This query gives you the total number of completed orders.\n\n- **Using `COUNT(customer_rating)`**:\n  ```sql\nSELECT\n    COUNT(customer_rating) AS rated_orders\nFROM sales_reporting\nWHERE order_status = 'Completed';\n```\n\n#### Line-by-line walkthrough\n\n- `SELECT` — starts the result list. The indented lines define the columns and calculations returned by the query.\n- `COUNT(customer_rating) AS rated_orders` — counts rows where `customer_rating` is not NULL and names the output `rated_orders`.\n- `FROM sales_reporting` — reads source rows from the `sales_reporting` table.\n- `WHERE order_status = 'Completed';` — keeps only source rows that satisfy `order_status = 'Completed'`.\n\n#### How SQL evaluates this aggregate\n\n1. `FROM` identifies the source table.\n2. `WHERE` removes rows before any summary is calculated.\n3. With no `GROUP BY`, all remaining rows form one group.\n4. `SELECT` returns the finished metric under its alias.\n  This query tells you how many of those completed orders have a customer rating.\n\nBy comparing these two counts, you can determine the proportion of completed orders that have been rated, providing valuable insights into customer engagement."
+          }
+        }
+      }
+    }
+  }
+}

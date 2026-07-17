@@ -1,0 +1,283 @@
+{
+  "topicId": "where-before-grouping",
+  "subjectSlug": "sql-analysis-reporting",
+  "moduleSlug": "sql-analysis-reporting-module-4-having-and-conditional-reporting",
+  "sectionSlug": "sql-analysis-reporting-sql-analysis-reporting-section-4-group-filters",
+  "prefix": "sql_analysis_reporting_module_4",
+  "minutes": 24,
+  "runtimeDefaults": {
+    "kind": "sql",
+    "showSchema": true,
+    "showErd": true,
+    "showChen": true,
+    "supportsTerminal": false,
+    "supportsMultiFile": false,
+    "supportsFileSystem": false,
+    "datasetId": "sales_kpi",
+    "fixedSqlDialect": "sqlite",
+    "resultShape": "table"
+  },
+  "serviceDefaults": null,
+  "topic": {
+    "labelKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.where-before-grouping.label",
+    "summaryKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.where-before-grouping.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.where-before-grouping.cards.sketch0.title",
+      "sketchId": "sketch-where-before-grouping-0",
+      "height": 420,
+      "tryIt": {
+        "id": "try-where-before-grouping-sketch0",
+        "titleKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.where-before-grouping.tryIt.try_where_before_grouping_sketch0.title",
+        "promptKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.where-before-grouping.tryIt.try_where_before_grouping_sketch0.prompt",
+        "exerciseKey": "try-where-before-grouping-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.where-before-grouping.cards.sketch1.title",
+      "sketchId": "sketch-where-before-grouping-1",
+      "height": 420,
+      "tryIt": {
+        "id": "try-where-before-grouping-sketch1",
+        "titleKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.where-before-grouping.tryIt.try_where_before_grouping_sketch1.title",
+        "promptKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.where-before-grouping.tryIt.try_where_before_grouping_sketch1.prompt",
+        "exerciseKey": "try-where-before-grouping-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.where-before-grouping.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch-where-before-grouping-0",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.where-before-grouping.sketch-where-before-grouping-0.title",
+      "bodyKey": "sketches.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.where-before-grouping.sketch-where-before-grouping-0.bodyMarkdown"
+    },
+    {
+      "id": "sketch-where-before-grouping-1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.where-before-grouping.sketch-where-before-grouping-1.title",
+      "bodyKey": "sketches.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.where-before-grouping.sketch-where-before-grouping-1.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "try-where-before-grouping-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.where-before-grouping.tryIt.try_where_before_grouping_sketch0",
+      "language": "sql",
+      "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.where-before-grouping.tryIt.try_where_before_grouping_sketch0.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "sales_kpi",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "main.sql",
+        "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.where-before-grouping.tryIt.try_where_before_grouping_sketch0.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.sql",
+            "content": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.where-before-grouping.tryIt.try_where_before_grouping_sketch0.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "sales_kpi",
+        "resultShape": "table",
+        "solutionCode": "SELECT region, SUM(quantity * unit_price) AS total_sales\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY region;"
+      }
+    },
+    {
+      "id": "try-where-before-grouping-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.where-before-grouping.tryIt.try_where_before_grouping_sketch1",
+      "language": "sql",
+      "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.where-before-grouping.tryIt.try_where_before_grouping_sketch1.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "sales_kpi",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "main.sql",
+        "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.where-before-grouping.tryIt.try_where_before_grouping_sketch1.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.sql",
+            "content": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.where-before-grouping.tryIt.try_where_before_grouping_sketch1.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "sales_kpi",
+        "resultShape": "table",
+        "solutionCode": "SELECT product_name, AVG(customer_rating) AS average_rating\nFROM sales_reporting\nWHERE category = 'Tech' AND order_status = 'Completed'\nGROUP BY product_name;"
+      }
+    },
+    {
+      "id": "single-choice-where-vs-having",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.where-before-grouping.practice.single-choice-where-vs-having",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "fill-blank-choice-where-clause",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.where-before-grouping.practice.fill-blank-choice-where-clause",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "before"
+      }
+    },
+    {
+      "id": "multi-choice-where-conditions",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.where-before-grouping.practice.multi-choice-where-conditions",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
+      }
+    },
+    {
+      "id": "drag-reorder-sql-query-process",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.where-before-grouping.practice.drag-reorder-sql-query-process",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4",
+        "t5"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4",
+          "t5"
+        ]
+      }
+    },
+    {
+      "id": "single-choice-where-purpose",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.where-before-grouping.practice.single-choice-where-purpose",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "fill-blank-choice-where-filter",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.where-before-grouping.practice.fill-blank-choice-where-filter",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "before"
+      }
+    }
+  ]
+}

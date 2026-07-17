@@ -148,6 +148,68 @@ function defaultStarterCodeForProfile(profileId?: string): string {
     ).defaultStarter({});
 }
 
+function synchronizeEntryStarterFile(args: {
+    exercise: Extract<
+        TopicAuthoringDraft["quizDraft"][number],
+        { kind: "code_input" }
+    >;
+    starterCode: string;
+}): Extract<
+    TopicAuthoringDraft["quizDraft"][number],
+    { kind: "code_input" }
+> {
+    const starterFiles = Array.isArray(args.exercise.starterFiles)
+        ? args.exercise.starterFiles
+        : [];
+
+    if (starterFiles.length === 0) {
+        return {
+            ...args.exercise,
+            starterCode: args.starterCode,
+        };
+    }
+
+    const explicitEntryPath = normalizeText(args.exercise.entryFilePath);
+    const markedEntryPath = normalizeText(
+        starterFiles.find(
+            (file) => file.isEntry === true || file.entry === true,
+        )?.path,
+    );
+    const conventionalSqlEntryPath = normalizeText(
+        starterFiles.find((file) => normalizeText(file.path) === "query.sql")
+            ?.path,
+    );
+    const singleFileEntryPath =
+        starterFiles.length === 1
+            ? normalizeText(starterFiles[0]?.path)
+            : "";
+    const entryFilePath =
+        explicitEntryPath ||
+        markedEntryPath ||
+        conventionalSqlEntryPath ||
+        singleFileEntryPath;
+
+    if (!entryFilePath) {
+        return {
+            ...args.exercise,
+            starterCode: args.starterCode,
+        };
+    }
+
+    return {
+        ...args.exercise,
+        starterCode: args.starterCode,
+        starterFiles: starterFiles.map((file) =>
+            normalizeText(file.path) === entryFilePath
+                ? {
+                      ...file,
+                      content: args.starterCode,
+                  }
+                : file,
+        ),
+    };
+}
+
 function isChoiceFillBlankValid(exercise: any): boolean {
     if (exercise?.kind !== "fill_blank_choice") return true;
 
@@ -392,23 +454,34 @@ export async function repairIncompleteExercises(args: {
                 ...safeRepairedExercise
             } = repairedExercise;
 
-            const repairedCodeInput = {
+            const revealsSolution = starterRevealsSolution(
+                repairedExercise.starterCode,
+                repairedExercise.solutionCode,
+            );
+            const repairedStarterCode = revealsSolution
+                ? defaultStarterCodeForProfile(args.seed.profileId)
+                : normalizeText(repairedExercise.starterCode);
+
+            const repairedCodeInputBase = {
                 ...exercise,
                 ...safeRepairedExercise,
                 kind: "code_input" as const,
-                starterCode: starterRevealsSolution(
-                    repairedExercise.starterCode,
-                    repairedExercise.solutionCode,
-                )
-                    ? defaultStarterCodeForProfile(args.seed.profileId)
-                    : normalizeText(repairedExercise.starterCode),
+                starterCode: repairedStarterCode,
                 solutionCode: normalizeText(repairedExercise.solutionCode),
                 ...(recipeType ? { recipeType } : {}),
                 ...(normalizedTests ? { tests: normalizedTests } : {}),
                 ...(hasSemanticChecks ? { semanticChecks } : {}),
-            } satisfies TopicAuthoringDraft["quizDraft"][number];
+            } satisfies Extract<
+                TopicAuthoringDraft["quizDraft"][number],
+                { kind: "code_input" }
+            >;
 
-            return repairedCodeInput;
+            return revealsSolution
+                ? synchronizeEntryStarterFile({
+                      exercise: repairedCodeInputBase,
+                      starterCode: repairedStarterCode,
+                  })
+                : repairedCodeInputBase;
         }
         return exercise;
     });

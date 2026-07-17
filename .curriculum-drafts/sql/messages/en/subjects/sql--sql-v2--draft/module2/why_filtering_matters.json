@@ -3,34 +3,17 @@
     "sql--sql-v2--draft": {
       "sql--sql-v2--draft-2": {
         "why_filtering_matters": {
-          "label": "why filtering matters",
-          "summary": "Learn why the WHERE clause matters by comparing broad queries with focused ones that return only the rows you actually need.",
+          "label": "Filtering Rows with WHERE",
+          "summary": "Use WHERE to keep only source rows that satisfy a condition.",
           "cards": {
             "sketch0": {
-              "title": "Why filtering helps"
+              "title": "A Filter Changes Which Rows Remain"
             },
             "sketch1": {
-              "title": "Filtering with numbers and conditions"
-            },
-            "sketch2": {
-              "title": "Filtering turns a table into an answer"
+              "title": "Place WHERE After FROM"
             },
             "quiz": {
-              "title": "Quiz"
-            },
-            "project": {
-              "title": "Filtering detective practice"
-            }
-          },
-          "projectSteps": {
-            "ci_1": {
-              "title": "Show only Art products"
-            },
-            "ci_2": {
-              "title": "Find lower-priced products"
-            },
-            "ci_3": {
-              "title": "Find low-stock items"
+              "title": "Check Your Understanding"
             }
           },
           "quiz": {
@@ -133,7 +116,7 @@
               "prompt": "Fill in the missing SQL keyword.",
               "hint": "This keyword comes after `FROM products` when you want to filter rows.",
               "help": {
-                "concept": "The `the missing term` keyword introduces the condition that filters rows in a query.",
+                "concept": "The `the blank` keyword introduces the condition that filters rows in a query.",
                 "hint_1": "It is the clause used before a condition like `price < 20`.",
                 "hint_2": "It is not `SELECT` or `FROM`; it is the filtering clause."
               },
@@ -151,7 +134,7 @@
               "hint": "Look at the exact category text used in the dataset.",
               "help": {
                 "concept": "A text filter compares a column to an exact text value, such as a category name.",
-                "hint_1": "The `products` table includes categories like `the missing term`, `Home`, and `Stationery`.",
+                "hint_1": "The `products` table includes categories like `the blank`, `Home`, and `Stationery`.",
                 "hint_2": "Pick the category value that matches Sketchbook and Acrylic Paint Set."
               },
               "template": "SELECT name FROM products WHERE category = '[blank1]';",
@@ -162,120 +145,67 @@
                 "stock"
               ]
             },
-            "ci_1": {
-              "title": "Show only Art products",
-              "prompt": "Write a query that returns the `name` and `category` columns for products in the `Art` category only. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Return the name and category columns for products in the Art category only.\nSELECT \nFROM products\nWHERE ;"
-            },
-            "ci_2": {
-              "title": "Find lower-priced products",
-              "prompt": "Write a query that returns `name` and `price` for products with a price less than 20. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Return name and price for products with a price less than 20.\nSELECT name, price\nFROM products\nWHERE ;"
-            },
-            "ci_3": {
-              "title": "Find low-stock items",
-              "prompt": "Write a query that returns `name` and `stock` for products with stock less than 10. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Return name and stock for products with stock less than 10.\nSELECT name, stock\nFROM products\nWHERE stock ;"
-            },
             "try-why_filtering_matters-sketch0": {
-              "title": "Show only Art products",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that returns the `name` and `category` columns for products in the `Art` category only. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Place an Exact Category Filter",
+              "prompt": "Create a stationery-only inventory slice. Return `id, name, category` from `products` in that column order. Keep only rows where `category = 'Stationery'`.",
+              "hint": "Place WHERE after FROM products and put the text value in single quotes.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "Return `id, name, category` from `products` in that column order. Keep only rows where `category = 'Stationery'`."
               },
-              "starterCode": "-- Return the name and category columns for products in the Art category only.\nSELECT \nFROM products\nWHERE ;"
-            },
-            "try-why_filtering_matters-sketch1": {
-              "title": "Find lower-priced products",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that returns `name` and `price` for products with a price less than 20. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Return name and price for products with a price less than 20.\nSELECT name, price\nFROM products\nWHERE ;"
+              "starterCode": "SELECT id, name, category\nFROM products\n-- Keep only Stationery rows"
             },
             "try-why_filtering_matters-sketch2": {
-              "title": "Find low-stock items",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that returns `name` and `stock` for products with stock less than 10. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Keep Products with Low Stock",
+              "prompt": "Create a low-stock view containing only products with fewer than `10` units left. Return `name, stock` from `products` in that column order. Keep only rows where `stock < 10`.",
+              "hint": "Add a WHERE condition after FROM products and compare stock with 10.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "Return `name, stock` from `products` in that column order. Keep only rows where `stock < 10`."
               },
-              "starterCode": "-- Return name and stock for products with stock less than 10.\nSELECT name, stock\nFROM products\nWHERE stock ;"
+              "starterCode": "SELECT name, stock\nFROM products\n-- Add the low-stock filter"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_why_filtering_matters_sketch0": {
-              "title": "Show only Art products",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that returns the `name` and `category` columns for products in the `Art` category only. Write the query in the SQL editor, click Run query, and check the results table."
-            },
-            "try_why_filtering_matters_sketch1": {
-              "title": "Find lower-priced products",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that returns `name` and `price` for products with a price less than 20. Write the query in the SQL editor, click Run query, and check the results table."
+              "title": "Place an Exact Category Filter",
+              "prompt": "Create a stationery-only inventory slice. Show `id`, `name`, and `category` from `products` where `category` is exactly `Stationery`.",
+              "hint": "Place WHERE after FROM products and put the text value in single quotes.",
+              "help": {
+                "concept": "The WHERE clause follows FROM and states which rows are allowed to remain.",
+                "hint_1": "Place WHERE after FROM products and put the text value in single quotes.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+              }
             },
             "try_why_filtering_matters_sketch2": {
-              "title": "Find low-stock items",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that returns `name` and `stock` for products with stock less than 10. Write the query in the SQL editor, click Run query, and check the results table."
+              "title": "Keep Products with Low Stock",
+              "prompt": "Create a low-stock view containing only products with fewer than `10` units left. Show `name` and `stock` from `products`.",
+              "hint": "Add a WHERE condition after FROM products and compare stock with 10.",
+              "help": {
+                "concept": "WHERE removes rows that do not satisfy the business condition.",
+                "hint_1": "Add a WHERE condition after FROM products and compare stock with 10.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+              }
             }
           }
         }
       },
       "sql-v2-2": {
         "why_filtering_matters": {
-          "label": "why filtering matters",
-          "summary": "Learn why the WHERE clause matters by comparing broad queries with focused ones that return only the rows you actually need.",
+          "label": "Filtering Rows with WHERE",
+          "summary": "Use WHERE to keep only source rows that satisfy a condition.",
           "cards": {
             "sketch0": {
-              "title": "Why filtering helps"
+              "title": "A Filter Changes Which Rows Remain"
             },
             "sketch1": {
-              "title": "Filtering with numbers and conditions"
-            },
-            "sketch2": {
-              "title": "Filtering turns a table into an answer"
+              "title": "Place WHERE After FROM"
             },
             "quiz": {
-              "title": "Quiz"
-            },
-            "project": {
-              "title": "Filtering detective practice"
-            }
-          },
-          "projectSteps": {
-            "ci_1": {
-              "title": "Show only Art products"
-            },
-            "ci_2": {
-              "title": "Find lower-priced products"
-            },
-            "ci_3": {
-              "title": "Find low-stock items"
+              "title": "Check Your Understanding"
             }
           },
           "quiz": {
@@ -378,7 +308,7 @@
               "prompt": "Fill in the missing SQL keyword.",
               "hint": "This keyword comes after `FROM products` when you want to filter rows.",
               "help": {
-                "concept": "The `the missing term` keyword introduces the condition that filters rows in a query.",
+                "concept": "The `the blank` keyword introduces the condition that filters rows in a query.",
                 "hint_1": "It is the clause used before a condition like `price < 20`.",
                 "hint_2": "It is not `SELECT` or `FROM`; it is the filtering clause."
               },
@@ -396,7 +326,7 @@
               "hint": "Look at the exact category text used in the dataset.",
               "help": {
                 "concept": "A text filter compares a column to an exact text value, such as a category name.",
-                "hint_1": "The `products` table includes categories like `the missing term`, `Home`, and `Stationery`.",
+                "hint_1": "The `products` table includes categories like `the blank`, `Home`, and `Stationery`.",
                 "hint_2": "Pick the category value that matches Sketchbook and Acrylic Paint Set."
               },
               "template": "SELECT name FROM products WHERE category = '[blank1]';",
@@ -441,19 +371,19 @@
               "starterCode": "-- Return name and stock for products with stock less than 10.\nSELECT name, stock\nFROM products\nWHERE stock ;"
             },
             "try-why_filtering_matters-sketch0": {
-              "title": "Show only Art products",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that returns the `name` and `category` columns for products in the `Art` category only. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Place an Exact Category Filter",
+              "prompt": "Create a stationery-only inventory slice. Show `id`, `name`, and `category` from `products` where `category` is exactly `Stationery`.",
+              "hint": "Place WHERE after FROM products and put the text value in single quotes.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
+                "concept": "The WHERE clause follows FROM and states which rows are allowed to remain.",
+                "hint_1": "Place WHERE after FROM products and put the text value in single quotes.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
               },
-              "starterCode": "-- Return the name and category columns for products in the Art category only.\nSELECT \nFROM products\nWHERE ;"
+              "starterCode": "SELECT id, name, category\nFROM products\n-- Keep only Stationery rows"
             },
             "try-why_filtering_matters-sketch1": {
               "title": "Find lower-priced products",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that returns `name` and `price` for products with a price less than 20. Write the query in the SQL editor, click Run query, and check the results table.",
+              "prompt": "Create a focused inventory query that returns `name` and `price` for products with a price less than 20. Run it and compare the result with the expected table.",
               "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
               "help": {
                 "concept": "This SQL exercise checks whether your query returns the requested result.",
@@ -463,30 +393,38 @@
               "starterCode": "-- Return name and price for products with a price less than 20.\nSELECT name, price\nFROM products\nWHERE ;"
             },
             "try-why_filtering_matters-sketch2": {
-              "title": "Find low-stock items",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that returns `name` and `stock` for products with stock less than 10. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Keep Products with Low Stock",
+              "prompt": "Create a low-stock view containing only products with fewer than `10` units left. Show `name` and `stock` from `products`.",
+              "hint": "Add a WHERE condition after FROM products and compare stock with 10.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
+                "concept": "WHERE removes rows that do not satisfy the business condition.",
+                "hint_1": "Add a WHERE condition after FROM products and compare stock with 10.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
               },
-              "starterCode": "-- Return name and stock for products with stock less than 10.\nSELECT name, stock\nFROM products\nWHERE stock ;"
+              "starterCode": "SELECT name, stock\nFROM products\n-- Add the low-stock filter"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_why_filtering_matters_sketch0": {
-              "title": "Show only Art products",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that returns the `name` and `category` columns for products in the `Art` category only. Write the query in the SQL editor, click Run query, and check the results table."
-            },
-            "try_why_filtering_matters_sketch1": {
-              "title": "Find lower-priced products",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that returns `name` and `price` for products with a price less than 20. Write the query in the SQL editor, click Run query, and check the results table."
+              "title": "Place an Exact Category Filter",
+              "prompt": "Create a stationery-only inventory slice. Show `id`, `name`, and `category` from `products` where `category` is exactly `Stationery`.",
+              "hint": "Place WHERE after FROM products and put the text value in single quotes.",
+              "help": {
+                "concept": "The WHERE clause follows FROM and states which rows are allowed to remain.",
+                "hint_1": "Place WHERE after FROM products and put the text value in single quotes.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+              }
             },
             "try_why_filtering_matters_sketch2": {
-              "title": "Find low-stock items",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that returns `name` and `stock` for products with stock less than 10. Write the query in the SQL editor, click Run query, and check the results table."
+              "title": "Keep Products with Low Stock",
+              "prompt": "Create a low-stock view containing only products with fewer than `10` units left. Show `name` and `stock` from `products`.",
+              "hint": "Add a WHERE condition after FROM products and compare stock with 10.",
+              "help": {
+                "concept": "WHERE removes rows that do not satisfy the business condition.",
+                "hint_1": "Add a WHERE condition after FROM products and compare stock with 10.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+              }
             }
           }
         }
@@ -497,33 +435,25 @@
     "sql--sql-v2--draft": {
       "sql--sql-v2--draft-2": {
         "why_filtering_matters": {
-          "sketch_1": {
-            "title": "Why filtering helps",
-            "bodyMarkdown": "When you query a table without filtering, SQL returns **all rows** that match the rest of your query. That can be useful at first, but real questions are usually more specific.\n\nFor example, this query shows every product:\n\n```sql\nSELECT name, category, price\nFROM products;\n```\n\nThat gives you a full list. But what if you only want products in the `Art` category? Then filtering matters:\n\n```sql\nSELECT name, category, price\nFROM products\nWHERE category = 'Art';\n```\n\nThis returns only the rows where the `category` value is exactly `Art`.\n\nWorked example from this dataset:\n- `Sketchbook` is in `Art`, so it stays.\n- `Acrylic Paint Set` is in `Art`, so it stays.\n- `Desk Lamp` is in `Home`, so it is removed.\n\nSo filtering helps you move from **everything in the table** to **just the rows that answer your question**."
+          "where_changes_rows": {
+            "title": "A Filter Changes Which Rows Remain",
+            "bodyMarkdown": "A `SELECT` query without a filter returns every source row. `WHERE` narrows that result to the rows that satisfy a condition.\n\n```sql\nSELECT\n    id,\n    name,\n    price\nFROM products\nWHERE price < 20;\n```\n\nSQL checks the `price < 20` condition for each product. Rows where the condition is true remain; rows where it is false do not appear. The filter does not change the stored table—it changes only this query result.\n\nTranslate the business request into a yes-or-no test: “Is this product’s price below 20?” That test becomes the `WHERE` condition."
           },
-          "sketch_2": {
-            "title": "Filtering with numbers and conditions",
-            "bodyMarkdown": "A `WHERE` clause can also compare numbers. This is useful when you want items above, below, or equal to a value.\n\nExample:\n\n```sql\nSELECT name, price, stock\nFROM products\nWHERE price < 20;\n```\n\nLine by line:\n- `SELECT name, price, stock` chooses the columns to show.\n- `FROM products` tells SQL which table to read.\n- `WHERE price < 20` keeps only rows where the price is less than 20.\n\nUsing the dataset:\n- `Notebook` has price `6.75`, so it matches.\n- `Sketchbook` has price `12.99`, so it matches.\n- `Office Chair` has price `129.00`, so it does not match.\n\nFiltering is important because it lets you answer practical questions like:\n- Which products are low-cost?\n- Which items are almost out of stock?\n- Which rows belong to one category only?"
-          },
-          "sketch_3": {
-            "title": "Filtering turns a table into an answer",
-            "bodyMarkdown": "Think of a table as a big collection of facts. A filter turns that collection into a smaller set of rows that fits one question.\n\nSuppose you want products with low stock:\n\n```sql\nSELECT name, stock\nFROM products\nWHERE stock <= 10;\n```\n\nStep by step:\n- SQL checks each row in `products`.\n- It looks at the `stock` value.\n- If the stock is `10` or less, the row stays.\n- If the stock is greater than `10`, the row is left out.\n\nFrom this dataset, rows like `Acrylic Paint Set` with stock `10` and `Office Chair` with stock `3` stay in the result.\n\nWithout filtering, you would need to scan every row yourself. With filtering, SQL does that work for you."
+          "where_clause_order": {
+            "title": "Place WHERE After FROM",
+            "bodyMarkdown": "Clause order matters. Start with the result columns, name the source table, then add the row condition.\n\n```text\nSELECT columns\nFROM table\nWHERE condition;\n```\n\nFor example:\n\n```sql\nSELECT\n    name,\n    stock\nFROM products\nWHERE stock < 10;\n```\n\n`WHERE` belongs after `FROM` because SQL needs a source row before it can test the row. Keep the condition focused on the requirement; sorting and limiting belong to later clauses."
           }
         }
       },
       "sql-v2-2": {
         "why_filtering_matters": {
-          "sketch_1": {
-            "title": "Why filtering helps",
-            "bodyMarkdown": "When you query a table without filtering, SQL returns **all rows** that match the rest of your query. That can be useful at first, but real questions are usually more specific.\n\nFor example, this query shows every product:\n\n```sql\nSELECT name, category, price\nFROM products;\n```\n\nThat gives you a full list. But what if you only want products in the `Art` category? Then filtering matters:\n\n```sql\nSELECT name, category, price\nFROM products\nWHERE category = 'Art';\n```\n\nThis returns only the rows where the `category` value is exactly `Art`.\n\nWorked example from this dataset:\n- `Sketchbook` is in `Art`, so it stays.\n- `Acrylic Paint Set` is in `Art`, so it stays.\n- `Desk Lamp` is in `Home`, so it is removed.\n\nSo filtering helps you move from **everything in the table** to **just the rows that answer your question**."
+          "where_changes_rows": {
+            "title": "A Filter Changes Which Rows Remain",
+            "bodyMarkdown": "A `SELECT` query without a filter returns every source row. `WHERE` narrows that result to the rows that satisfy a condition.\n\n```sql\nSELECT\n    id,\n    name,\n    price\nFROM products\nWHERE price < 20;\n```\n\nSQL checks the `price < 20` condition for each product. Rows where the condition is true remain; rows where it is false do not appear. The filter does not change the stored table—it changes only this query result.\n\nTranslate the business request into a yes-or-no test: “Is this product’s price below 20?” That test becomes the `WHERE` condition."
           },
-          "sketch_2": {
-            "title": "Filtering with numbers and conditions",
-            "bodyMarkdown": "A `WHERE` clause can also compare numbers. This is useful when you want items above, below, or equal to a value.\n\nExample:\n\n```sql\nSELECT name, price, stock\nFROM products\nWHERE price < 20;\n```\n\nLine by line:\n- `SELECT name, price, stock` chooses the columns to show.\n- `FROM products` tells SQL which table to read.\n- `WHERE price < 20` keeps only rows where the price is less than 20.\n\nUsing the dataset:\n- `Notebook` has price `6.75`, so it matches.\n- `Sketchbook` has price `12.99`, so it matches.\n- `Office Chair` has price `129.00`, so it does not match.\n\nFiltering is important because it lets you answer practical questions like:\n- Which products are low-cost?\n- Which items are almost out of stock?\n- Which rows belong to one category only?"
-          },
-          "sketch_3": {
-            "title": "Filtering turns a table into an answer",
-            "bodyMarkdown": "Think of a table as a big collection of facts. A filter turns that collection into a smaller set of rows that fits one question.\n\nSuppose you want products with low stock:\n\n```sql\nSELECT name, stock\nFROM products\nWHERE stock <= 10;\n```\n\nStep by step:\n- SQL checks each row in `products`.\n- It looks at the `stock` value.\n- If the stock is `10` or less, the row stays.\n- If the stock is greater than `10`, the row is left out.\n\nFrom this dataset, rows like `Acrylic Paint Set` with stock `10` and `Office Chair` with stock `3` stay in the result.\n\nWithout filtering, you would need to scan every row yourself. With filtering, SQL does that work for you."
+          "where_clause_order": {
+            "title": "Place WHERE After FROM",
+            "bodyMarkdown": "Clause order matters. Start with the result columns, name the source table, then add the row condition.\n\n```text\nSELECT columns\nFROM table\nWHERE condition;\n```\n\nFor example:\n\n```sql\nSELECT\n    name,\n    stock\nFROM products\nWHERE stock < 10;\n```\n\n`WHERE` belongs after `FROM` because SQL needs a source row before it can test the row. Keep the condition focused on the requirement; sorting and limiting belong to later clauses."
           }
         }
       }

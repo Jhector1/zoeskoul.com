@@ -1,0 +1,27 @@
+{
+  "topicId": "arithmetic-expressions-in-select",
+  "ok": true,
+  "issues": [
+    {
+      "code": "SQL_PROMPT_INTENT_GROUP_BY_WEAK_MISMATCH",
+      "category": "prompt_intent",
+      "severity": "warn",
+      "exerciseId": "try-arithmetic-expressions-in-select-sketch0",
+      "message": "Prompt mentions grouping-like wording, but the solution query does not contain GROUP BY."
+    },
+    {
+      "code": "SQL_PROMPT_INTENT_SUM_WEAK_MISMATCH",
+      "category": "prompt_intent",
+      "severity": "warn",
+      "exerciseId": "try-arithmetic-expressions-in-select-sketch0",
+      "message": "Prompt mentions total/sum-like wording, but the solution query does not use SUM(...)."
+    },
+    {
+      "code": "SQL_PROMPT_INTENT_SUM_WEAK_MISMATCH",
+      "category": "prompt_intent",
+      "severity": "warn",
+      "exerciseId": "try-arithmetic-expressions-in-select-sketch1",
+      "message": "Prompt mentions total/sum-like wording, but the solution query does not use SUM(...)."
+    }
+  ]
+}

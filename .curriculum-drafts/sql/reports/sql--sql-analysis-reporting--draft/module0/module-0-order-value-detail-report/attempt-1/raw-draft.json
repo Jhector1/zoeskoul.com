@@ -1,0 +1,134 @@
+{
+  "title": "Module 0: Order Value Detail Report",
+  "summary": "Create a clean order detail report with selected columns, readable aliases, gross sales, and stable sorting.",
+  "minutes": 55,
+  "sketchBlocks": [
+    {
+      "id": "module-0-sketch0",
+      "title": "Introduction to Order Value Detail Report",
+      "bodyMarkdown": "In this project, you will create an Order Value Detail Report using SQL. The goal is to generate a report that includes selected columns with clear aliases, calculates gross sales, and ensures stable sorting. This report will help managers quickly understand order details and sales performance."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "try-module-0-sketch0",
+      "kind": "code_input",
+      "title": "Select Specific Columns with Aliases",
+      "prompt": "Write a query to select the `order_id`, `order_date`, and `region` from the `sales_reporting` table. Use aliases to rename these columns to `Order ID`, `Date`, and `Region`.",
+      "hint": "Use the AS keyword to rename columns.",
+      "help": {
+        "concept": "Renaming columns with aliases makes the report more readable.",
+        "hint_1": "Use SELECT with AS to rename columns.",
+        "hint_2": "Ensure each column has a unique alias."
+      },
+      "starterCode": "SELECT order_id, order_date, region FROM sales_reporting;",
+      "solutionCode": "SELECT order_id AS 'Order ID', order_date AS 'Date', region AS 'Region' FROM sales_reporting;",
+      "tests": [
+        {
+          "stdout": "Order ID|Date|Region\n101|2026-01-03|North\n102|2026-01-07|North\n...",
+          "match": "includes"
+        }
+      ],
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "try-module-0-sketch1",
+      "kind": "code_input",
+      "title": "Calculate Gross Sales",
+      "prompt": "Write a query to calculate the gross sales for each order in the `sales_reporting` table. Multiply `quantity` by `unit_price` and alias the result as `Gross Sales`.",
+      "hint": "Use arithmetic expressions to calculate gross sales.",
+      "help": {
+        "concept": "Calculating gross sales involves multiplying quantity by unit price.",
+        "hint_1": "Use SELECT with arithmetic expressions.",
+        "hint_2": "Alias the calculated column for clarity."
+      },
+      "starterCode": "SELECT quantity, unit_price FROM sales_reporting;",
+      "solutionCode": "SELECT quantity * unit_price AS 'Gross Sales' FROM sales_reporting;",
+      "tests": [
+        {
+          "stdout": "Gross Sales\n84.00\n60.00\n...",
+          "match": "includes"
+        }
+      ],
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "try-module-0-sketch2",
+      "kind": "code_input",
+      "title": "Round Gross Sales",
+      "prompt": "Modify the previous query to round the `Gross Sales` to two decimal places.",
+      "hint": "Use the ROUND function to round values.",
+      "help": {
+        "concept": "Rounding makes financial data more readable.",
+        "hint_1": "Use the ROUND function around the expression.",
+        "hint_2": "Specify the number of decimal places to round to."
+      },
+      "starterCode": "SELECT quantity * unit_price AS 'Gross Sales' FROM sales_reporting;",
+      "solutionCode": "SELECT ROUND(quantity * unit_price, 2) AS 'Gross Sales' FROM sales_reporting;",
+      "tests": [
+        {
+          "stdout": "Gross Sales\n84.00\n60.00\n...",
+          "match": "includes"
+        }
+      ],
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "try-module-0-sketch3",
+      "kind": "code_input",
+      "title": "Order by Gross Sales",
+      "prompt": "Write a query to order the results by `Gross Sales` in descending order.",
+      "hint": "Use ORDER BY to sort results.",
+      "help": {
+        "concept": "Ordering results helps in analyzing data trends.",
+        "hint_1": "Use ORDER BY with DESC for descending order.",
+        "hint_2": "Ensure the column used for ordering is correctly aliased."
+      },
+      "starterCode": "SELECT ROUND(quantity * unit_price, 2) AS 'Gross Sales' FROM sales_reporting;",
+      "solutionCode": "SELECT ROUND(quantity * unit_price, 2) AS 'Gross Sales' FROM sales_reporting ORDER BY 'Gross Sales' DESC;",
+      "tests": [
+        {
+          "stdout": "Gross Sales\n186.00\n168.00\n...",
+          "match": "includes"
+        }
+      ],
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "try-module-0-sketch4",
+      "kind": "code_input",
+      "title": "Complete Order Value Detail Report",
+      "prompt": "Combine all previous steps to create a complete order value detail report with `Order ID`, `Date`, `Region`, and rounded `Gross Sales`, ordered by `Gross Sales` descending.",
+      "hint": "Combine selection, calculation, aliasing, and ordering in one query.",
+      "help": {
+        "concept": "A complete report combines all elements for clarity and analysis.",
+        "hint_1": "Use SELECT with multiple columns and expressions.",
+        "hint_2": "Ensure all columns are correctly aliased and ordered."
+      },
+      "starterCode": "SELECT order_id, order_date, region, ROUND(quantity * unit_price, 2) AS 'Gross Sales' FROM sales_reporting;",
+      "solutionCode": "SELECT order_id AS 'Order ID', order_date AS 'Date', region AS 'Region', ROUND(quantity * unit_price, 2) AS 'Gross Sales' FROM sales_reporting ORDER BY 'Gross Sales' DESC;",
+      "tests": [
+        {
+          "stdout": "Order ID|Date|Region|Gross Sales\n106|2026-01-18|North|135.00\n112|2026-01-23|South|186.00\n...",
+          "match": "includes"
+        }
+      ],
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query"
+    }
+  ],
+  "projectDraft": {
+    "title": "Order Value Detail Report Project",
+    "stepIds": [
+      "try-module-0-sketch0",
+      "try-module-0-sketch1",
+      "try-module-0-sketch2",
+      "try-module-0-sketch3",
+      "try-module-0-sketch4"
+    ]
+  }
+}

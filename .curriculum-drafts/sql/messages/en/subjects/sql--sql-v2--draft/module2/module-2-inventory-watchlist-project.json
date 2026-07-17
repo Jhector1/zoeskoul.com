@@ -27,54 +27,43 @@
           "quiz": {
             "mp-1-find-budget-products": {
               "title": "Find budget products",
-              "prompt": "Start the watchlist by returning `id`, `name`, and `price` from `products` where `price` is less than 20.",
+              "prompt": "Begin the Module 2 Inventory Watchlist Project. Return `id, name, price` from `products` in that column order. Keep only rows where `price < 20`.",
               "hint": "Adjust the comparison so the watchlist keeps products under 20.",
               "help": {
-                "concept": "Start broad, then tighten the watchlist with the right filter.",
-                "hint_1": "Use `price < 20` in the WHERE clause.",
-                "hint_2": "Run the query and confirm the results table shows only cheaper products."
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "Return `id, name, price` from `products` in that column order. Keep only rows where `price < 20`."
               },
               "starterCode": "-- Returning id, name, and price from products where price is less than 20.\nSELECT\n  id,\n  name,\n  price\nFROM products\nWHERE price <= 10;"
             },
             "mp-2-focus-on-stationery": {
               "title": "Focus on the stationery items",
-              "prompt": "Add a second rule so the watchlist only keeps products in the `Stationery` category.",
+              "prompt": "Extend the Module 2 Inventory Watchlist Project with the next approved requirement. Return `id, name, price` from `products` in that column order. Keep only rows where `price < 20 AND category = 'Stationery'`.",
               "hint": "Use AND to keep both rules true at the same time.",
               "help": {
-                "concept": "Multiple conditions narrow the result set one rule at a time.",
-                "hint_1": "Keep `price < 20` exactly as it is.",
-                "hint_2": "Add `AND category = 'Stationery'`, then rerun the query."
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "Return `id, name, price` from `products` in that column order. Keep only rows where `price < 20 AND category = 'Stationery'`."
               },
               "starterCode": "-- Keep the budget filter above.\n-- Add a category filter for Stationery.\nSELECT\n  id,\n  name,\n  price\nFROM products\nWHERE price < 20;"
             },
             "mp-3-finish-watchlist": {
               "title": "Finish the low-stock watchlist",
-              "prompt": "Add `stock` to the result and one more rule so the final query only keeps products where `stock` is less than or equal to 10.",
-              "hint": "Add both one more selected column and one more condition.",
+              "prompt": "Complete the Module 2 Inventory Watchlist Project. Return `id, name, price, stock` from `products` in that column order. Keep only rows where `price < 20 AND category = 'Stationery' AND stock <= 15`.",
+              "hint": "Add `stock` to the selected columns, then keep values at or below `15`.",
               "help": {
-                "concept": "The last step should keep the earlier filter logic and add the final field and condition.",
-                "hint_1": "Add `stock` to the SELECT list.",
-                "hint_2": "Use `AND stock <= 10` in the WHERE clause, then rerun the query."
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "Return `id, name, price, stock` from `products` in that column order. Keep only rows where `price < 20 AND category = 'Stationery' AND stock <= 15`."
               },
-              "starterCode": "-- Keep the filters above.\n-- Add a low-stock rule for products with stock <= 10.\nSELECT\n  id,\n  name,\n  price\nFROM products\nWHERE price < 20\n  AND category = 'Stationery';"
-            },
-            "try-module-2-inventory-watchlist-project-sketch0": {
-              "title": "Query id and name from products",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that returns `id`, `name`, `price` from the `products` table. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the selected columns and table name in the SQL editor.",
-                "hint_2": "Run the query and compare the result table with the expected result."
-              },
-              "starterCode": "-- Return id, name, price from the products table.\nSELECT\n  id,\n  name,\n  price\nFROM products\nWHERE price <= 10;"
+              "starterCode": "-- Keep the filters above.\n-- Add stock and a low-stock rule for products with stock <= 15.\nSELECT\n  id,\n  name,\n  price\nFROM products\nWHERE price < 20\n  AND category = 'Stationery';"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_module_2_inventory_watchlist_project_sketch0": {
-              "title": "Query id and name from products",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that returns `id`, `name`, `price` from the `products` table. Write the query in the SQL editor, click Run query, and check the results table."
+              "title": "Preview Budget Products",
+              "prompt": "Before adding category and stock rules, preview the budget products. Return `id`, `name`, and `price` from `products` where `price` is less than `20`."
             }
           }
         }
@@ -127,21 +116,21 @@
             },
             "mp-3-finish-watchlist": {
               "title": "Finish the low-stock watchlist",
-              "prompt": "Add `stock` to the result and one more rule so the final query only keeps products where `stock` is less than or equal to 10.",
-              "hint": "Add both one more selected column and one more condition.",
+              "prompt": "Add `stock` to the result and one more rule so the final query only keeps products where `stock` is less than or equal to `15`.",
+              "hint": "Add `stock` to the selected columns, then keep values at or below `15`.",
               "help": {
-                "concept": "The last step should keep the earlier filter logic and add the final field and condition.",
+                "concept": "The final step preserves the budget and category rules, then adds a stock threshold that returns a real watchlist.",
                 "hint_1": "Add `stock` to the SELECT list.",
                 "hint_2": "Use `AND stock <= 10` in the WHERE clause, then rerun the query."
               },
-              "starterCode": "-- Keep the filters above.\n-- Add a low-stock rule for products with stock <= 10.\nSELECT\n  id,\n  name,\n  price\nFROM products\nWHERE price < 20\n  AND category = 'Stationery';"
+              "starterCode": "-- Keep the filters above.\n-- Add stock and a low-stock rule for products with stock <= 15.\nSELECT\n  id,\n  name,\n  price\nFROM products\nWHERE price < 20\n  AND category = 'Stationery';"
             },
             "try-module-2-inventory-watchlist-project-sketch0": {
-              "title": "Query id and name from products",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that returns `id`, `name`, `price` from the `products` table. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Preview Budget Products",
+              "prompt": "Before adding category and stock rules, preview the budget products. Return `id`, `name`, and `price` from `products` where `price` is less than `20`.",
+              "hint": "Keep the three requested columns and use a strict price comparison below `20`.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "concept": "This warm-up creates the budget filter that the watchlist project will refine.",
                 "hint_1": "Check the selected columns and table name in the SQL editor.",
                 "hint_2": "Run the query and compare the result table with the expected result."
               },
@@ -151,8 +140,8 @@
           "tryIt": {
             "allowReveal": true,
             "try_module_2_inventory_watchlist_project_sketch0": {
-              "title": "Query id and name from products",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that returns `id`, `name`, `price` from the `products` table. Write the query in the SQL editor, click Run query, and check the results table."
+              "title": "Preview Budget Products",
+              "prompt": "Before adding category and stock rules, preview the budget products. Return `id`, `name`, and `price` from `products` where `price` is less than `20`."
             }
           }
         }
@@ -165,7 +154,7 @@
         "module-2-inventory-watchlist-project": {
           "sketch_project_brief": {
             "title": "Project brief",
-            "bodyMarkdown": "A teammate wants a short list of products that may need attention.\n\nStart with cheaper items, then narrow the list until only the most useful matches remain.\n\nThe finished watchlist should surface budget stationery products that are also running low on stock."
+            "bodyMarkdown": "A restocking review needs a short watchlist of affordable stationery with limited inventory.\n\nStart with budget products, narrow the category, then add the stock threshold.\n\nThe finished query should surface a small, actionable list instead of an empty report."
           }
         }
       },
@@ -173,7 +162,7 @@
         "module-2-inventory-watchlist-project": {
           "sketch_project_brief": {
             "title": "Project brief",
-            "bodyMarkdown": "A teammate wants a short list of products that may need attention.\n\nStart with cheaper items, then narrow the list until only the most useful matches remain.\n\nThe finished watchlist should surface budget stationery products that are also running low on stock."
+            "bodyMarkdown": "A restocking review needs a short watchlist of affordable stationery with limited inventory.\n\nStart with budget products, narrow the category, then add the stock threshold.\n\nThe finished query should surface a small, actionable list instead of an empty report."
           }
         }
       }

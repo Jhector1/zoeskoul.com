@@ -125,4 +125,63 @@ describe("validateSqlConceptStage", () => {
 
         expect(issues).toHaveLength(0);
     });
+
+    it("accepts human-readable comparison operator labels from authoring policy", () => {
+        const seed = makeSeed(2);
+        seed.authoringPolicy.allowedConcepts = seed.authoringPolicy.allowedConcepts.map(
+            (concept: string) =>
+                concept === "comparison_operators" ? "comparison operators" : concept,
+        );
+
+        const issues = validateSqlConceptStage({
+            seed,
+            draft: makeDraft("SELECT student_name FROM students WHERE grade_level = 8;"),
+        });
+
+        expect(issues).toHaveLength(0);
+    });
+});
+
+describe("join-type concept staging", () => {
+    function makeJoinSeed(allowedConcepts: string[], disallowedConcepts: string[]) {
+        return {
+            subjectSlug: "sql",
+            courseSlug: "multi-table-sql",
+            topicId: "join-topic",
+            moduleOrder: 1,
+            authoringPolicy: {
+                allowedConcepts,
+                disallowedConcepts,
+                moduleRules: {},
+            },
+        } as any;
+    }
+
+    it("allows INNER JOIN when the course stage permits it", () => {
+        const issues = validateSqlConceptStage({
+            seed: makeJoinSeed(
+                ["SELECT", "FROM", "JOIN", "INNER JOIN", "comparison_operators"],
+                ["LEFT JOIN"],
+            ),
+            draft: makeDraft(
+                "SELECT s.name FROM students AS s INNER JOIN enrollments AS e ON e.student_id = s.id;",
+            ),
+        });
+
+        expect(issues).toHaveLength(0);
+    });
+
+    it("rejects LEFT JOIN before the outer-join module", () => {
+        const issues = validateSqlConceptStage({
+            seed: makeJoinSeed(
+                ["SELECT", "FROM", "JOIN", "INNER JOIN", "comparison_operators"],
+                ["LEFT JOIN"],
+            ),
+            draft: makeDraft(
+                "SELECT s.name FROM students AS s LEFT JOIN enrollments AS e ON e.student_id = s.id;",
+            ),
+        });
+
+        expect(issues.some((issue) => issue.message.includes("LEFT JOIN"))).toBe(true);
+    });
 });

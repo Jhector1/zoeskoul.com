@@ -2,7 +2,7 @@
   "topicId": "equals_comparison",
   "subjectSlug": "sql-v2",
   "moduleSlug": "sql-v2-2",
-  "sectionSlug": "sql-v2-sql-v2-2-2",
+  "sectionSlug": "sql-v2-sql-v2-2-1",
   "prefix": "sqlv2_2",
   "minutes": 20,
   "runtimeDefaults": {
@@ -26,13 +26,13 @@
       "id": "sketch0",
       "kind": "sketch",
       "titleKey": "topics.sql-v2.sql-v2-2.equals_comparison.cards.sketch0.title",
-      "sketchId": "equals-idea",
+      "sketchId": "equals_exact_value",
       "height": 420,
       "tryIt": {
-        "id": "try-equals_comparison-sketch0",
-        "titleKey": "topics.sql-v2.sql-v2-2.equals_comparison.tryIt.try_equals_comparison_sketch0.title",
-        "promptKey": "topics.sql-v2.sql-v2-2.equals_comparison.tryIt.try_equals_comparison_sketch0.prompt",
-        "exerciseKey": "try-equals_comparison-sketch0",
+        "id": "try-equals_comparison-sketch2",
+        "titleKey": "topics.sql-v2.sql-v2-2.equals_comparison.tryIt.try_equals_comparison_sketch2.title",
+        "promptKey": "topics.sql-v2.sql-v2-2.equals_comparison.tryIt.try_equals_comparison_sketch2.prompt",
+        "exerciseKey": "try-equals_comparison-sketch2",
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -45,32 +45,13 @@
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.sql-v2.sql-v2-2.equals_comparison.cards.sketch1.title",
-      "sketchId": "equals-text-vs-number",
+      "sketchId": "not_equal_value",
       "height": 420,
       "tryIt": {
-        "id": "try-equals_comparison-sketch1",
-        "titleKey": "topics.sql-v2.sql-v2-2.equals_comparison.tryIt.try_equals_comparison_sketch1.title",
-        "promptKey": "topics.sql-v2.sql-v2-2.equals_comparison.tryIt.try_equals_comparison_sketch1.prompt",
-        "exerciseKey": "try-equals_comparison-sketch1",
-        "difficulty": "easy",
-        "preferKind": "code_input",
-        "seedPolicy": "global",
-        "required": true,
-        "allowReveal": true,
-        "maxAttempts": null
-      }
-    },
-    {
-      "id": "sketch2",
-      "kind": "sketch",
-      "titleKey": "topics.sql-v2.sql-v2-2.equals_comparison.cards.sketch2.title",
-      "sketchId": "equals-common-mistakes",
-      "height": 420,
-      "tryIt": {
-        "id": "try-equals_comparison-sketch2",
-        "titleKey": "topics.sql-v2.sql-v2-2.equals_comparison.tryIt.try_equals_comparison_sketch2.title",
-        "promptKey": "topics.sql-v2.sql-v2-2.equals_comparison.tryIt.try_equals_comparison_sketch2.prompt",
-        "exerciseKey": "try-equals_comparison-sketch2",
+        "id": "try-equals_comparison-sketch0",
+        "titleKey": "topics.sql-v2.sql-v2-2.equals_comparison.tryIt.try_equals_comparison_sketch0.title",
+        "promptKey": "topics.sql-v2.sql-v2-2.equals_comparison.tryIt.try_equals_comparison_sketch0.prompt",
+        "exerciseKey": "try-equals_comparison-sketch0",
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -93,66 +74,20 @@
         "preferKind": null,
         "maxAttempts": null
       }
-    },
-    {
-      "id": "project",
-      "kind": "project",
-      "titleKey": "topics.sql-v2.sql-v2-2.equals_comparison.cards.project.title",
-      "project": {
-        "difficulty": "easy",
-        "allowReveal": true,
-        "preferKind": "code_input",
-        "maxAttempts": null,
-        "steps": [
-          {
-            "id": "eq_code_1",
-            "titleKey": "topics.sql-v2.sql-v2-2.equals_comparison.projectSteps.eq_code_1.title",
-            "exerciseKey": "eq-code-1",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "maxAttempts": null
-          },
-          {
-            "id": "eq_code_2",
-            "titleKey": "topics.sql-v2.sql-v2-2.equals_comparison.projectSteps.eq_code_2.title",
-            "exerciseKey": "eq-code-2",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "maxAttempts": null
-          },
-          {
-            "id": "eq_code_3",
-            "titleKey": "topics.sql-v2.sql-v2-2.equals_comparison.projectSteps.eq_code_3.title",
-            "exerciseKey": "eq-code-3",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "maxAttempts": null
-          }
-        ]
-      }
     }
   ],
   "sketches": [
     {
-      "id": "equals-idea",
+      "id": "equals_exact_value",
       "archetype": "paragraph",
-      "titleKey": "sketches.sql-v2.sql-v2-2.equals_comparison.equals-idea.title",
-      "bodyKey": "sketches.sql-v2.sql-v2-2.equals_comparison.equals-idea.bodyMarkdown"
+      "titleKey": "sketches.sql-v2.sql-v2-2.equals_comparison.equals_exact_value.title",
+      "bodyKey": "sketches.sql-v2.sql-v2-2.equals_comparison.equals_exact_value.bodyMarkdown"
     },
     {
-      "id": "equals-text-vs-number",
+      "id": "not_equal_value",
       "archetype": "paragraph",
-      "titleKey": "sketches.sql-v2.sql-v2-2.equals_comparison.equals-text-vs-number.title",
-      "bodyKey": "sketches.sql-v2.sql-v2-2.equals_comparison.equals-text-vs-number.bodyMarkdown"
-    },
-    {
-      "id": "equals-common-mistakes",
-      "archetype": "paragraph",
-      "titleKey": "sketches.sql-v2.sql-v2-2.equals_comparison.equals-common-mistakes.title",
-      "bodyKey": "sketches.sql-v2.sql-v2-2.equals_comparison.equals-common-mistakes.bodyMarkdown"
+      "titleKey": "sketches.sql-v2.sql-v2-2.equals_comparison.not_equal_value.title",
+      "bodyKey": "sketches.sql-v2.sql-v2-2.equals_comparison.not_equal_value.bodyMarkdown"
     }
   ],
   "exercises": [
@@ -295,249 +230,9 @@
       }
     },
     {
-      "id": "eq-code-1",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-2.equals_comparison.quiz.eq-code-1",
-      "language": "sql",
-      "starterCode": "@:topics.sql-v2.sql-v2-2.equals_comparison.quiz.eq-code-1.starterCode",
-      "fixedSqlDialect": "sqlite",
-      "runtime": {
-        "kind": "sql",
-        "datasetId": "products_catalog",
-        "fixedSqlDialect": "sqlite",
-        "resultShape": "table",
-        "showSchema": true,
-        "showErd": false,
-        "showChen": false,
-        "supportsTerminal": false,
-        "supportsMultiFile": false,
-        "supportsFileSystem": false
-      },
-      "recipe": {
-        "type": "sql_query",
-        "datasetId": "products_catalog",
-        "resultShape": "table",
-        "solutionCode": "SELECT id, name, category\nFROM products\nWHERE category = 'Art';",
-        "solutionFiles": [
-          {
-            "path": "query.sql",
-            "content": "SELECT id, name, category\nFROM products\nWHERE category = 'Art';",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "entryFilePath": "query.sql",
-      "starterFiles": [
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-v2.sql-v2-2.equals_comparison.quiz.eq-code-1.starterCode",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "query.sql",
-          "content": "SELECT id, name, category\nFROM products\nWHERE category = 'Art';",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "workspace": {
-        "language": "sql",
-        "entryFilePath": "query.sql",
-        "starterCode": "@:topics.sql-v2.sql-v2-2.equals_comparison.quiz.eq-code-1.starterCode",
-        "starterFiles": [
-          {
-            "path": "query.sql",
-            "content": "@:topics.sql-v2.sql-v2-2.equals_comparison.quiz.eq-code-1.starterCode",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ],
-        "solutionFiles": [
-          {
-            "path": "query.sql",
-            "content": "SELECT id, name, category\nFROM products\nWHERE category = 'Art';",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "showExpectedExample": true
-    },
-    {
-      "id": "eq-code-2",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-2.equals_comparison.quiz.eq-code-2",
-      "language": "sql",
-      "starterCode": "@:topics.sql-v2.sql-v2-2.equals_comparison.quiz.eq-code-2.starterCode",
-      "fixedSqlDialect": "sqlite",
-      "runtime": {
-        "kind": "sql",
-        "datasetId": "products_catalog",
-        "fixedSqlDialect": "sqlite",
-        "resultShape": "table",
-        "showSchema": true,
-        "showErd": false,
-        "showChen": false,
-        "supportsTerminal": false,
-        "supportsMultiFile": false,
-        "supportsFileSystem": false
-      },
-      "recipe": {
-        "type": "sql_query",
-        "datasetId": "products_catalog",
-        "resultShape": "table",
-        "solutionCode": "SELECT name, stock\nFROM products\nWHERE stock = 3;",
-        "solutionFiles": [
-          {
-            "path": "query.sql",
-            "content": "SELECT name, stock\nFROM products\nWHERE stock = 3;",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "entryFilePath": "query.sql",
-      "starterFiles": [
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-v2.sql-v2-2.equals_comparison.quiz.eq-code-2.starterCode",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "query.sql",
-          "content": "SELECT name, stock\nFROM products\nWHERE stock = 3;",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "workspace": {
-        "language": "sql",
-        "entryFilePath": "query.sql",
-        "starterCode": "@:topics.sql-v2.sql-v2-2.equals_comparison.quiz.eq-code-2.starterCode",
-        "starterFiles": [
-          {
-            "path": "query.sql",
-            "content": "@:topics.sql-v2.sql-v2-2.equals_comparison.quiz.eq-code-2.starterCode",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ],
-        "solutionFiles": [
-          {
-            "path": "query.sql",
-            "content": "SELECT name, stock\nFROM products\nWHERE stock = 3;",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "showExpectedExample": true
-    },
-    {
-      "id": "eq-code-3",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-2.equals_comparison.quiz.eq-code-3",
-      "language": "sql",
-      "starterCode": "@:topics.sql-v2.sql-v2-2.equals_comparison.quiz.eq-code-3.starterCode",
-      "fixedSqlDialect": "sqlite",
-      "runtime": {
-        "kind": "sql",
-        "datasetId": "products_catalog",
-        "fixedSqlDialect": "sqlite",
-        "resultShape": "table",
-        "showSchema": true,
-        "showErd": false,
-        "showChen": false,
-        "supportsTerminal": false,
-        "supportsMultiFile": false,
-        "supportsFileSystem": false
-      },
-      "recipe": {
-        "type": "sql_query",
-        "datasetId": "products_catalog",
-        "resultShape": "table",
-        "solutionCode": "SELECT *\nFROM products\nWHERE name = 'Desk Lamp';",
-        "solutionFiles": [
-          {
-            "path": "query.sql",
-            "content": "SELECT *\nFROM products\nWHERE name = 'Desk Lamp';",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "entryFilePath": "query.sql",
-      "starterFiles": [
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-v2.sql-v2-2.equals_comparison.quiz.eq-code-3.starterCode",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "query.sql",
-          "content": "SELECT *\nFROM products\nWHERE name = 'Desk Lamp';",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "workspace": {
-        "language": "sql",
-        "entryFilePath": "query.sql",
-        "starterCode": "@:topics.sql-v2.sql-v2-2.equals_comparison.quiz.eq-code-3.starterCode",
-        "starterFiles": [
-          {
-            "path": "query.sql",
-            "content": "@:topics.sql-v2.sql-v2-2.equals_comparison.quiz.eq-code-3.starterCode",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ],
-        "solutionFiles": [
-          {
-            "path": "query.sql",
-            "content": "SELECT *\nFROM products\nWHERE name = 'Desk Lamp';",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "showExpectedExample": true
-    },
-    {
       "id": "try-equals_comparison-sketch0",
       "kind": "code_input",
-      "purpose": "project",
+      "purpose": "try_it",
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-2.equals_comparison.quiz.try-equals_comparison-sketch0",
       "language": "sql",
@@ -559,16 +254,20 @@
         "type": "sql_query",
         "datasetId": "products_catalog",
         "resultShape": "table",
-        "solutionCode": "SELECT id, name, category\nFROM products\nWHERE category = 'Art';",
+        "solutionCode": "SELECT id, name, category\nFROM products\nWHERE category <> 'Home';",
         "solutionFiles": [
           {
             "path": "query.sql",
-            "content": "SELECT id, name, category\nFROM products\nWHERE category = 'Art';",
+            "content": "SELECT id, name, category\nFROM products\nWHERE category <> 'Home';",
             "language": "sql",
             "isEntry": true,
             "entry": true
           }
-        ]
+        ],
+        "sqlFileOrder": [
+          "query.sql"
+        ],
+        "ignoreRowOrder": true
       },
       "entryFilePath": "query.sql",
       "starterFiles": [
@@ -583,7 +282,7 @@
       "solutionFiles": [
         {
           "path": "query.sql",
-          "content": "SELECT id, name, category\nFROM products\nWHERE category = 'Art';",
+          "content": "SELECT id, name, category\nFROM products\nWHERE category <> 'Home';",
           "language": "sql",
           "isEntry": true,
           "entry": true
@@ -605,99 +304,35 @@
         "solutionFiles": [
           {
             "path": "query.sql",
-            "content": "SELECT id, name, category\nFROM products\nWHERE category = 'Art';",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "showExpectedExample": true
-    },
-    {
-      "id": "try-equals_comparison-sketch1",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-2.equals_comparison.quiz.try-equals_comparison-sketch1",
-      "language": "sql",
-      "starterCode": "@:topics.sql-v2.sql-v2-2.equals_comparison.quiz.try-equals_comparison-sketch1.starterCode",
-      "fixedSqlDialect": "sqlite",
-      "runtime": {
-        "kind": "sql",
-        "datasetId": "products_catalog",
-        "fixedSqlDialect": "sqlite",
-        "resultShape": "table",
-        "showSchema": true,
-        "showErd": false,
-        "showChen": false,
-        "supportsTerminal": false,
-        "supportsMultiFile": false,
-        "supportsFileSystem": false
-      },
-      "recipe": {
-        "type": "sql_query",
-        "datasetId": "products_catalog",
-        "resultShape": "table",
-        "solutionCode": "SELECT name, stock\nFROM products\nWHERE stock = 3;",
-        "solutionFiles": [
-          {
-            "path": "query.sql",
-            "content": "SELECT name, stock\nFROM products\nWHERE stock = 3;",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "entryFilePath": "query.sql",
-      "starterFiles": [
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-v2.sql-v2-2.equals_comparison.quiz.try-equals_comparison-sketch1.starterCode",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "query.sql",
-          "content": "SELECT name, stock\nFROM products\nWHERE stock = 3;",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "workspace": {
-        "language": "sql",
-        "entryFilePath": "query.sql",
-        "starterCode": "@:topics.sql-v2.sql-v2-2.equals_comparison.quiz.try-equals_comparison-sketch1.starterCode",
-        "starterFiles": [
-          {
-            "path": "query.sql",
-            "content": "@:topics.sql-v2.sql-v2-2.equals_comparison.quiz.try-equals_comparison-sketch1.starterCode",
+            "content": "SELECT id, name, category\nFROM products\nWHERE category <> 'Home';",
             "language": "sql",
             "isEntry": true,
             "entry": true
           }
         ],
-        "solutionFiles": [
-          {
-            "path": "query.sql",
-            "content": "SELECT name, stock\nFROM products\nWHERE stock = 3;",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
+        "openTabs": [
+          "query.sql"
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "query.sql"
+          ]
+        }
       },
-      "showExpectedExample": true
+      "showExpectedExample": true,
+      "sqlFileOrder": [
+        "query.sql"
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "query.sql"
+        ]
+      }
     },
     {
       "id": "try-equals_comparison-sketch2",
       "kind": "code_input",
-      "purpose": "project",
+      "purpose": "try_it",
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-2.equals_comparison.quiz.try-equals_comparison-sketch2",
       "language": "sql",
@@ -728,7 +363,11 @@
             "isEntry": true,
             "entry": true
           }
-        ]
+        ],
+        "sqlFileOrder": [
+          "query.sql"
+        ],
+        "ignoreRowOrder": true
       },
       "entryFilePath": "query.sql",
       "starterFiles": [
@@ -770,9 +409,25 @@
             "isEntry": true,
             "entry": true
           }
-        ]
+        ],
+        "openTabs": [
+          "query.sql"
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "query.sql"
+          ]
+        }
       },
-      "showExpectedExample": true
+      "showExpectedExample": true,
+      "sqlFileOrder": [
+        "query.sql"
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "query.sql"
+        ]
+      }
     }
   ]
 }

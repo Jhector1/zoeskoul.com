@@ -102,6 +102,39 @@ function validDraftWithPath(path: string): TopicAuthoringDraft {
     };
 }
 
+describe("TopicAuthoringDraft sketch presentation", () => {
+    it("accepts a distinct cardTitle and lesson heading", () => {
+        const draft = makeValidMinimalDraft() as any;
+        draft.sketchBlocks = [
+            {
+                id: "s1",
+                cardTitle: "Give Every Column an Address",
+                title: "A qualified column names its table and column",
+                bodyMarkdown: "A qualified column identifies its source.",
+                tools: { defaultSurface: "editor" },
+            },
+        ];
+
+        expect(() => assertTopicAuthoringDraft(draft)).not.toThrow();
+    });
+
+    it("rejects an empty cardTitle when the field is provided", () => {
+        const draft = makeValidMinimalDraft() as any;
+        draft.sketchBlocks = [
+            {
+                id: "s1",
+                cardTitle: "   ",
+                title: "A clear heading",
+                bodyMarkdown: "A clear explanation.",
+            },
+        ];
+
+        expect(() => assertTopicAuthoringDraft(draft)).toThrow(
+            "cardTitle must be a non-empty string",
+        );
+    });
+});
+
 describe("TopicAuthoringDraft workspace file paths", () => {
     it("allows nested workspace-relative file paths", () => {
         expect(() =>
@@ -493,6 +526,85 @@ describe("TopicAuthoringDraft canonical validation", () => {
         expect(result.ok).toBe(false);
         expect(result.errors.join("\n")).toMatch(
             /unknown field\(s\): template, choices, correctValue/,
+        );
+    });
+});
+
+describe("TopicAuthoringDraft SQL multi-file workspaces", () => {
+    function makeSqlMultiFileDraft(): TopicAuthoringDraft {
+        return {
+            title: "Build the schema",
+            summary: "Separate schema and verification work.",
+            minutes: 20,
+            sketchBlocks: [],
+            quizDraft: [
+                {
+                    id: "sql-files",
+                    kind: "code_input",
+                    title: "Create and verify",
+                    prompt: "Create the table and verify it.",
+                    hint: "Keep creation and verification in separate files.",
+                    help: {
+                        concept: "Ordered SQL files separate database setup from verification.",
+                        hint_1: "Put CREATE TABLE in schema.sql.",
+                        hint_2: "Use query.sql to inspect sqlite_master.",
+                    },
+                    starterCode: "SELECT name FROM sqlite_master;",
+                    solutionCode: "SELECT name, sql FROM sqlite_master WHERE type = 'table';",
+                    recipeType: "sql_query",
+                    datasetId: "ddl_blank",
+                    entryFilePath: "query.sql",
+                    sqlFileOrder: ["schema.sql", "query.sql"],
+                    starterFiles: [
+                        { path: "schema.sql", content: "-- Create the table\n" },
+                        {
+                            path: "query.sql",
+                            content: "SELECT name FROM sqlite_master;",
+                            isEntry: true,
+                        },
+                    ],
+                    solutionFiles: [
+                        {
+                            path: "schema.sql",
+                            content: "CREATE TABLE warehouses (id INTEGER PRIMARY KEY);",
+                        },
+                        {
+                            path: "query.sql",
+                            content: "SELECT name, sql FROM sqlite_master WHERE type = 'table';",
+                            isEntry: true,
+                        },
+                    ],
+                    checkSql: "SELECT name, sql FROM sqlite_master WHERE name = 'warehouses';",
+                },
+            ],
+        };
+    }
+
+    it("accepts an ordered SQL workspace", () => {
+        expect(() => assertTopicAuthoringDraft(makeSqlMultiFileDraft())).not.toThrow();
+    });
+
+    it("rejects duplicate SQL execution paths", () => {
+        const draft = makeSqlMultiFileDraft();
+        const exercise = draft.quizDraft[0];
+        if (exercise?.kind === "code_input") {
+            exercise.sqlFileOrder = ["schema.sql", "schema.sql"];
+        }
+
+        expect(() => assertTopicAuthoringDraft(draft)).toThrow(
+            /sqlFileOrder must not contain duplicate paths/i,
+        );
+    });
+
+    it("rejects sqlFileOrder on a non-SQL recipe", () => {
+        const draft = makeSqlMultiFileDraft();
+        const exercise = draft.quizDraft[0];
+        if (exercise?.kind === "code_input") {
+            exercise.recipeType = "fixed_tests";
+        }
+
+        expect(() => assertTopicAuthoringDraft(draft)).toThrow(
+            /sqlFileOrder is only supported for sql_query/i,
         );
     });
 });

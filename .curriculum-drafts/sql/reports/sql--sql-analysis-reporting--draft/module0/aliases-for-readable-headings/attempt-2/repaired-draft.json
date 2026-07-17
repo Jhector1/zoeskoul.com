@@ -1,0 +1,157 @@
+{
+  "title": "Aliases for Readable Headings",
+  "summary": "Use AS to replace database-oriented column names with clear report headings.",
+  "minutes": 24,
+  "sketchBlocks": [
+    {
+      "id": "aliases-for-readable-headings-sketch0",
+      "title": "Using Aliases for Clarity",
+      "bodyMarkdown": "In SQL, you can use the `AS` keyword to create aliases for column names. This is particularly useful when you want to make your query results more readable. For example, if you have a column named `unit_price`, you might want to display it as `Price per Unit` in your results.\n\n```sql\nSELECT unit_price AS \"Price per Unit\"\nFROM sales_reporting;\n```\n\nThis query will display the `unit_price` column with the heading `Price per Unit` in the results table. Aliases are especially helpful in reports where clarity is crucial."
+    },
+    {
+      "id": "aliases-for-readable-headings-sketch1",
+      "title": "Combining Aliases with Calculations",
+      "bodyMarkdown": "You can also use aliases when performing calculations in your SQL queries. For instance, if you want to calculate the total sales value for each order, you can use an alias to label this calculated column.\n\n```sql\nSELECT quantity * unit_price AS \"Total Sales\"\nFROM sales_reporting;\n```\n\nIn this example, the calculated column `quantity * unit_price` is given the alias `Total Sales`, making the output more understandable. This practice is essential for creating business reports that are easy to interpret."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "single-choice-aliases-1",
+      "kind": "single_choice",
+      "title": "Purpose of AS Keyword",
+      "prompt": "What is the primary purpose of using the `AS` keyword in SQL?",
+      "options": [
+        "To perform arithmetic operations",
+        "To rename columns in the result set",
+        "To filter rows based on a condition",
+        "To sort the results"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "multi-choice-aliases-1",
+      "kind": "multi_choice",
+      "title": "Benefits of Using Aliases",
+      "prompt": "Which of the following are benefits of using aliases in SQL queries? Select all that apply.",
+      "options": [
+        "Improves readability of results",
+        "Allows for complex calculations",
+        "Makes column names more descriptive",
+        "Increases query execution speed"
+      ],
+      "correctOptionIds": [
+        "a",
+        "c"
+      ],
+      "hint": "Consider how aliases affect the readability and clarity of query results.",
+      "help": {
+        "concept": "Aliases improve the readability of SQL query results by providing descriptive names for columns.",
+        "hint_1": "Aliases make column names more descriptive.",
+        "hint_2": "They help in understanding the output better."
+      }
+    },
+    {
+      "id": "drag-reorder-aliases-1",
+      "kind": "drag_reorder",
+      "title": "Order of SQL Clauses",
+      "prompt": "Arrange the SQL clauses in the correct order of execution.",
+      "tokens": [
+        "SELECT",
+        "FROM",
+        "WHERE",
+        "ORDER BY"
+      ],
+      "correctOrder": [
+        "SELECT",
+        "FROM",
+        "WHERE",
+        "ORDER BY"
+      ],
+      "hint": "Read each piece and arrange them in the order the statement should be understood.",
+      "help": {
+        "concept": "The pieces should form a valid statement in a logical order.",
+        "hint_1": "Start with the piece that introduces the idea or action.",
+        "hint_2": "Place dependent pieces after the part they describe or complete."
+      }
+    },
+    {
+      "id": "fill-blank-choice-aliases-1",
+      "kind": "fill_blank_choice",
+      "title": "Alias Syntax",
+      "prompt": "Complete the SQL statement to alias the column `quantity` as `Qty`.",
+      "template": "SELECT quantity AS [blank1] FROM sales_reporting;",
+      "choices": [
+        "Qty",
+        "Quantity",
+        "QTY",
+        "quantity"
+      ],
+      "correctValue": "Qty",
+      "hint": "Use the `AS` keyword to create an alias.",
+      "help": {
+        "concept": "The `AS` keyword is used to create an alias for a column name in SQL.",
+        "hint_1": "The alias follows the `AS` keyword.",
+        "hint_2": "The correct syntax is `column_name AS alias_name`."
+      }
+    },
+    {
+      "id": "try-aliases-for-readable-headings-sketch0",
+      "kind": "code_input",
+      "title": "Try It: Alias a Column",
+      "prompt": "Write a query to select the `product_name` column from the `sales_reporting` table and alias it as `Product`.",
+      "starterCode": "-- Write your SQL answer below",
+      "solutionCode": "SELECT product_name AS \"Product\"\nFROM sales_reporting;",
+      "tests": [
+        {
+          "stdout": "Product\nWatercolor Set\nCanvas Pack\nNotebook Bundle\nDesk Planner\nWireless Mouse\nUSB-C Hub\nStorage Basket\nTable Lamp\nMarker Set\nSketchbook\nLaptop Stand\nWebcam\nPen Pack\nFolder Set\nWall Clock\nThrow Pillow\nKeyboard\nPortable Charger\nAcrylic Paint Set\nBrush Set\nKitchen Organizer\nBath Towel Set\nLabel Pack\nWeekly Planner\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "try-aliases-for-readable-headings-sketch1",
+      "kind": "code_input",
+      "title": "Try It: Calculate and Alias Total Sales",
+      "prompt": "Write a query to calculate the total sales for each order by multiplying `quantity` and `unit_price`, and alias the result as `Total Sales`.",
+      "starterCode": "-- Write your SQL answer below",
+      "solutionCode": "SELECT quantity * unit_price AS \"Total Sales\"\nFROM sales_reporting;",
+      "tests": [
+        {
+          "stdout": "Total Sales\n84.0\n60.0\n76.0\n72.0\n68.0\n135.0\n96.0\n104.0\n84.0\n77.0\n96.0\n186.0\n60.0\n40.0\n72.0\n96.0\n120.0\n120.0\n96.0\n84.0\n81.0\n110.0\n63.0\n76.0\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Order Value Detail Report",
+    "stepIds": [
+      "try-aliases-for-readable-headings-sketch0",
+      "try-aliases-for-readable-headings-sketch1"
+    ]
+  }
+}

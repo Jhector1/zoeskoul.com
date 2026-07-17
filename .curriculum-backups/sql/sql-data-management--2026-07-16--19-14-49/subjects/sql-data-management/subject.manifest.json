@@ -1,0 +1,664 @@
+{
+  "subject": {
+    "slug": "sql-data-management",
+    "profileId": "sql",
+    "catalogSlug": "sql",
+    "genKey": "sql_for_beginners",
+    "order": 4,
+    "accessPolicy": "paid",
+    "status": "active",
+    "imagePublicId": null,
+    "imageAlt": null,
+    "titleKey": "subjects.sql-data-management.title",
+    "descriptionKey": "subjects.sql-data-management.description",
+    "serviceDefaults": null,
+    "tools": {
+      "defaultVisible": true,
+      "allowOpen": true,
+      "defaultSurface": "editor",
+      "compactDefaultSurface": "editor",
+      "sqlPane": {
+        "showResults": true,
+        "showTables": true,
+        "showErd": false,
+        "showChen": false,
+        "defaultTab": "results",
+        "compactDefaultTab": "results"
+      }
+    },
+    "meta": {
+      "curriculum": {
+        "plannedModuleCount": 4,
+        "isTerminalRelease": false,
+        "moreComingMessageKey": "subjects.sql-data-management.moreComingSoon"
+      },
+      "completionPolicy": {
+        "requireAllPublishedModules": true,
+        "rewardEnabledByDefault": true,
+        "certificateEnabledByDefault": true
+      },
+      "versioning": {
+        "family": "sql-data-management",
+        "version": 1,
+        "status": "draft",
+        "defaultForNewEnrollments": false,
+        "supersedes": null,
+        "supersededBy": null
+      }
+    }
+  },
+  "modules": [
+    {
+      "slug": "sql-data-management-module-0-safe-inserts",
+      "prefix": "sql_data_management_module_0",
+      "order": 0,
+      "role": "standard",
+      "titleKey": "modules.sql-data-management.sql-data-management-module-0-safe-inserts.title",
+      "descriptionKey": "modules.sql-data-management.sql-data-management-module-0-safe-inserts.description",
+      "weekStart": null,
+      "weekEnd": null,
+      "accessOverride": null,
+      "runtimeDefaults": {
+        "kind": "sql",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false,
+        "datasetId": "inventory_ops",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table"
+      },
+      "serviceDefaults": null,
+      "tools": {
+        "defaultVisible": true,
+        "allowOpen": true,
+        "defaultSurface": "editor",
+        "compactDefaultSurface": "editor",
+        "sqlPane": {
+          "showResults": true,
+          "showTables": true,
+          "showErd": false,
+          "showChen": false,
+          "defaultTab": "results",
+          "compactDefaultTab": "results"
+        }
+      },
+      "meta": {
+        "estimatedMinutes": 168,
+        "prereqKeys": [],
+        "outcomeKeys": [
+          "modules.sql-data-management.sql-data-management-module-0-safe-inserts.outcomes.0",
+          "modules.sql-data-management.sql-data-management-module-0-safe-inserts.outcomes.1",
+          "modules.sql-data-management.sql-data-management-module-0-safe-inserts.outcomes.2",
+          "modules.sql-data-management.sql-data-management-module-0-safe-inserts.outcomes.3",
+          "modules.sql-data-management.sql-data-management-module-0-safe-inserts.outcomes.4"
+        ],
+        "whyKeys": [
+          "modules.sql-data-management.sql-data-management-module-0-safe-inserts.why.0",
+          "modules.sql-data-management.sql-data-management-module-0-safe-inserts.why.1"
+        ]
+      },
+      "sections": [
+        {
+          "slug": "sql-data-management-sql-data-management-section-0-mutation-workflow",
+          "order": 1,
+          "titleKey": "sections.sql-data-management.sql-data-management-module-0-safe-inserts.sql-data-management-sql-data-management-section-0-mutation-workflow.title",
+          "descriptionKey": "sections.sql-data-management.sql-data-management-module-0-safe-inserts.sql-data-management-sql-data-management-section-0-mutation-workflow.description",
+          "meta": {
+            "module": 0,
+            "weeksKey": "sections.sql-data-management.sql-data-management-module-0-safe-inserts.sql-data-management-sql-data-management-section-0-mutation-workflow.weeks",
+            "bulletKeys": [
+              "sections.sql-data-management.sql-data-management-module-0-safe-inserts.sql-data-management-sql-data-management-section-0-mutation-workflow.bullets.0",
+              "sections.sql-data-management.sql-data-management-module-0-safe-inserts.sql-data-management-sql-data-management-section-0-mutation-workflow.bullets.1",
+              "sections.sql-data-management.sql-data-management-module-0-safe-inserts.sql-data-management-sql-data-management-section-0-mutation-workflow.bullets.2",
+              "sections.sql-data-management.sql-data-management-module-0-safe-inserts.sql-data-management-sql-data-management-section-0-mutation-workflow.bullets.3"
+            ]
+          },
+          "serviceDefaults": null,
+          "tools": {
+            "defaultVisible": true,
+            "allowOpen": true,
+            "defaultSurface": "editor",
+            "compactDefaultSurface": "editor",
+            "sqlPane": {
+              "showResults": true,
+              "showTables": true,
+              "showErd": false,
+              "showChen": false,
+              "defaultTab": "results",
+              "compactDefaultTab": "results"
+            }
+          },
+          "topics": [
+            "mutation-workflow-preview-change-verify",
+            "insert-with-explicit-column-lists"
+          ]
+        },
+        {
+          "slug": "sql-data-management-sql-data-management-section-0-values-and-defaults",
+          "order": 2,
+          "titleKey": "sections.sql-data-management.sql-data-management-module-0-safe-inserts.sql-data-management-sql-data-management-section-0-values-and-defaults.title",
+          "descriptionKey": "sections.sql-data-management.sql-data-management-module-0-safe-inserts.sql-data-management-sql-data-management-section-0-values-and-defaults.description",
+          "meta": {
+            "module": 0,
+            "weeksKey": "sections.sql-data-management.sql-data-management-module-0-safe-inserts.sql-data-management-sql-data-management-section-0-values-and-defaults.weeks",
+            "bulletKeys": [
+              "sections.sql-data-management.sql-data-management-module-0-safe-inserts.sql-data-management-sql-data-management-section-0-values-and-defaults.bullets.0",
+              "sections.sql-data-management.sql-data-management-module-0-safe-inserts.sql-data-management-sql-data-management-section-0-values-and-defaults.bullets.1",
+              "sections.sql-data-management.sql-data-management-module-0-safe-inserts.sql-data-management-sql-data-management-section-0-values-and-defaults.bullets.2",
+              "sections.sql-data-management.sql-data-management-module-0-safe-inserts.sql-data-management-sql-data-management-section-0-values-and-defaults.bullets.3"
+            ]
+          },
+          "serviceDefaults": null,
+          "tools": {
+            "defaultVisible": true,
+            "allowOpen": true,
+            "defaultSurface": "editor",
+            "compactDefaultSurface": "editor",
+            "sqlPane": {
+              "showResults": true,
+              "showTables": true,
+              "showErd": false,
+              "showChen": false,
+              "defaultTab": "results",
+              "compactDefaultTab": "results"
+            }
+          },
+          "topics": [
+            "using-null-and-default-values",
+            "inserting-multiple-rows"
+          ]
+        },
+        {
+          "slug": "sql-data-management-sql-data-management-section-0-module-project",
+          "order": 3,
+          "role": "module_project",
+          "titleKey": "sections.sql-data-management.sql-data-management-module-0-safe-inserts.sql-data-management-sql-data-management-section-0-module-project.title",
+          "descriptionKey": "sections.sql-data-management.sql-data-management-module-0-safe-inserts.sql-data-management-sql-data-management-section-0-module-project.description",
+          "meta": {
+            "module": 0,
+            "weeksKey": "sections.sql-data-management.sql-data-management-module-0-safe-inserts.sql-data-management-sql-data-management-section-0-module-project.weeks",
+            "bulletKeys": [
+              "sections.sql-data-management.sql-data-management-module-0-safe-inserts.sql-data-management-sql-data-management-section-0-module-project.bullets.0",
+              "sections.sql-data-management.sql-data-management-module-0-safe-inserts.sql-data-management-sql-data-management-section-0-module-project.bullets.1",
+              "sections.sql-data-management.sql-data-management-module-0-safe-inserts.sql-data-management-sql-data-management-section-0-module-project.bullets.2",
+              "sections.sql-data-management.sql-data-management-module-0-safe-inserts.sql-data-management-sql-data-management-section-0-module-project.bullets.3"
+            ]
+          },
+          "serviceDefaults": null,
+          "tools": {
+            "defaultVisible": true,
+            "allowOpen": true,
+            "defaultSurface": "editor",
+            "compactDefaultSurface": "editor",
+            "sqlPane": {
+              "showResults": true,
+              "showTables": true,
+              "showErd": false,
+              "showChen": false,
+              "defaultTab": "results",
+              "compactDefaultTab": "results"
+            }
+          },
+          "topics": [
+            "module-0-inventory-intake-batch"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "sql-data-management-module-1-controlled-updates-deletes",
+      "prefix": "sql_data_management_module_1",
+      "order": 1,
+      "role": "standard",
+      "titleKey": "modules.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.title",
+      "descriptionKey": "modules.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.description",
+      "weekStart": null,
+      "weekEnd": null,
+      "accessOverride": null,
+      "runtimeDefaults": {
+        "kind": "sql",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false,
+        "datasetId": "inventory_ops",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table"
+      },
+      "serviceDefaults": null,
+      "tools": {
+        "defaultVisible": true,
+        "allowOpen": true,
+        "defaultSurface": "editor",
+        "compactDefaultSurface": "editor",
+        "sqlPane": {
+          "showResults": true,
+          "showTables": true,
+          "showErd": false,
+          "showChen": false,
+          "defaultTab": "results",
+          "compactDefaultTab": "results"
+        }
+      },
+      "meta": {
+        "estimatedMinutes": 184,
+        "prereqKeys": [
+          "modules.sql-data-management.sql-data-management-module-0-safe-inserts.title"
+        ],
+        "outcomeKeys": [
+          "modules.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.outcomes.0",
+          "modules.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.outcomes.1",
+          "modules.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.outcomes.2",
+          "modules.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.outcomes.3",
+          "modules.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.outcomes.4"
+        ],
+        "whyKeys": [
+          "modules.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.why.0",
+          "modules.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.why.1"
+        ]
+      },
+      "sections": [
+        {
+          "slug": "sql-data-management-sql-data-management-section-1-target-before-change",
+          "order": 1,
+          "titleKey": "sections.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.sql-data-management-sql-data-management-section-1-target-before-change.title",
+          "descriptionKey": "sections.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.sql-data-management-sql-data-management-section-1-target-before-change.description",
+          "meta": {
+            "module": 1,
+            "weeksKey": "sections.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.sql-data-management-sql-data-management-section-1-target-before-change.weeks",
+            "bulletKeys": [
+              "sections.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.sql-data-management-sql-data-management-section-1-target-before-change.bullets.0",
+              "sections.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.sql-data-management-sql-data-management-section-1-target-before-change.bullets.1",
+              "sections.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.sql-data-management-sql-data-management-section-1-target-before-change.bullets.2",
+              "sections.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.sql-data-management-sql-data-management-section-1-target-before-change.bullets.3"
+            ]
+          },
+          "serviceDefaults": null,
+          "tools": {
+            "defaultVisible": true,
+            "allowOpen": true,
+            "defaultSurface": "editor",
+            "compactDefaultSurface": "editor",
+            "sqlPane": {
+              "showResults": true,
+              "showTables": true,
+              "showErd": false,
+              "showChen": false,
+              "defaultTab": "results",
+              "compactDefaultTab": "results"
+            }
+          },
+          "topics": [
+            "previewing-update-and-delete-targets",
+            "updating-one-row-precisely"
+          ]
+        },
+        {
+          "slug": "sql-data-management-sql-data-management-section-1-controlled-mutations",
+          "order": 2,
+          "titleKey": "sections.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.sql-data-management-sql-data-management-section-1-controlled-mutations.title",
+          "descriptionKey": "sections.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.sql-data-management-sql-data-management-section-1-controlled-mutations.description",
+          "meta": {
+            "module": 1,
+            "weeksKey": "sections.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.sql-data-management-sql-data-management-section-1-controlled-mutations.weeks",
+            "bulletKeys": [
+              "sections.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.sql-data-management-sql-data-management-section-1-controlled-mutations.bullets.0",
+              "sections.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.sql-data-management-sql-data-management-section-1-controlled-mutations.bullets.1",
+              "sections.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.sql-data-management-sql-data-management-section-1-controlled-mutations.bullets.2",
+              "sections.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.sql-data-management-sql-data-management-section-1-controlled-mutations.bullets.3"
+            ]
+          },
+          "serviceDefaults": null,
+          "tools": {
+            "defaultVisible": true,
+            "allowOpen": true,
+            "defaultSurface": "editor",
+            "compactDefaultSurface": "editor",
+            "sqlPane": {
+              "showResults": true,
+              "showTables": true,
+              "showErd": false,
+              "showChen": false,
+              "defaultTab": "results",
+              "compactDefaultTab": "results"
+            }
+          },
+          "topics": [
+            "updating-controlled-row-sets",
+            "deleting-only-confirmed-rows"
+          ]
+        },
+        {
+          "slug": "sql-data-management-sql-data-management-section-1-module-project",
+          "order": 3,
+          "role": "module_project",
+          "titleKey": "sections.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.sql-data-management-sql-data-management-section-1-module-project.title",
+          "descriptionKey": "sections.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.sql-data-management-sql-data-management-section-1-module-project.description",
+          "meta": {
+            "module": 1,
+            "weeksKey": "sections.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.sql-data-management-sql-data-management-section-1-module-project.weeks",
+            "bulletKeys": [
+              "sections.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.sql-data-management-sql-data-management-section-1-module-project.bullets.0",
+              "sections.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.sql-data-management-sql-data-management-section-1-module-project.bullets.1",
+              "sections.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.sql-data-management-sql-data-management-section-1-module-project.bullets.2",
+              "sections.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.sql-data-management-sql-data-management-section-1-module-project.bullets.3"
+            ]
+          },
+          "serviceDefaults": null,
+          "tools": {
+            "defaultVisible": true,
+            "allowOpen": true,
+            "defaultSurface": "editor",
+            "compactDefaultSurface": "editor",
+            "sqlPane": {
+              "showResults": true,
+              "showTables": true,
+              "showErd": false,
+              "showChen": false,
+              "defaultTab": "results",
+              "compactDefaultTab": "results"
+            }
+          },
+          "topics": [
+            "module-1-inventory-correction-cleanup"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "sql-data-management-module-2-table-creation-constraints",
+      "prefix": "sql_data_management_module_2",
+      "order": 2,
+      "role": "standard",
+      "titleKey": "modules.sql-data-management.sql-data-management-module-2-table-creation-constraints.title",
+      "descriptionKey": "modules.sql-data-management.sql-data-management-module-2-table-creation-constraints.description",
+      "weekStart": null,
+      "weekEnd": null,
+      "accessOverride": null,
+      "runtimeDefaults": {
+        "kind": "sql",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true,
+        "datasetId": "ddl_blank",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table"
+      },
+      "serviceDefaults": {
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": false
+        }
+      },
+      "tools": {
+        "defaultVisible": true,
+        "allowOpen": true,
+        "defaultSurface": "editor",
+        "compactDefaultSurface": "editor",
+        "sqlPane": {
+          "showResults": true,
+          "showTables": true,
+          "showErd": false,
+          "showChen": false,
+          "defaultTab": "results",
+          "compactDefaultTab": "results"
+        }
+      },
+      "meta": {
+        "estimatedMinutes": 197,
+        "prereqKeys": [
+          "modules.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.title"
+        ],
+        "outcomeKeys": [
+          "modules.sql-data-management.sql-data-management-module-2-table-creation-constraints.outcomes.0",
+          "modules.sql-data-management.sql-data-management-module-2-table-creation-constraints.outcomes.1",
+          "modules.sql-data-management.sql-data-management-module-2-table-creation-constraints.outcomes.2",
+          "modules.sql-data-management.sql-data-management-module-2-table-creation-constraints.outcomes.3",
+          "modules.sql-data-management.sql-data-management-module-2-table-creation-constraints.outcomes.4"
+        ],
+        "whyKeys": [
+          "modules.sql-data-management.sql-data-management-module-2-table-creation-constraints.why.0",
+          "modules.sql-data-management.sql-data-management-module-2-table-creation-constraints.why.1"
+        ]
+      },
+      "sections": [
+        {
+          "slug": "sql-data-management-sql-data-management-section-2-table-structure",
+          "order": 1,
+          "titleKey": "sections.sql-data-management.sql-data-management-module-2-table-creation-constraints.sql-data-management-sql-data-management-section-2-table-structure.title",
+          "descriptionKey": "sections.sql-data-management.sql-data-management-module-2-table-creation-constraints.sql-data-management-sql-data-management-section-2-table-structure.description",
+          "meta": {
+            "module": 2,
+            "weeksKey": "sections.sql-data-management.sql-data-management-module-2-table-creation-constraints.sql-data-management-sql-data-management-section-2-table-structure.weeks",
+            "bulletKeys": [
+              "sections.sql-data-management.sql-data-management-module-2-table-creation-constraints.sql-data-management-sql-data-management-section-2-table-structure.bullets.0",
+              "sections.sql-data-management.sql-data-management-module-2-table-creation-constraints.sql-data-management-sql-data-management-section-2-table-structure.bullets.1",
+              "sections.sql-data-management.sql-data-management-module-2-table-creation-constraints.sql-data-management-sql-data-management-section-2-table-structure.bullets.2",
+              "sections.sql-data-management.sql-data-management-module-2-table-creation-constraints.sql-data-management-sql-data-management-section-2-table-structure.bullets.3"
+            ]
+          },
+          "serviceDefaults": {
+            "requires": {
+              "files": true,
+              "multiFile": true,
+              "terminal": false
+            }
+          },
+          "tools": {
+            "defaultVisible": true,
+            "allowOpen": true,
+            "defaultSurface": "editor",
+            "compactDefaultSurface": "editor",
+            "sqlPane": {
+              "showResults": true,
+              "showTables": true,
+              "showErd": false,
+              "showChen": false,
+              "defaultTab": "results",
+              "compactDefaultTab": "results"
+            }
+          },
+          "topics": [
+            "creating-tables-and-defining-columns",
+            "primary-key-and-not-null-constraints"
+          ]
+        },
+        {
+          "slug": "sql-data-management-sql-data-management-section-2-data-rules",
+          "order": 2,
+          "titleKey": "sections.sql-data-management.sql-data-management-module-2-table-creation-constraints.sql-data-management-sql-data-management-section-2-data-rules.title",
+          "descriptionKey": "sections.sql-data-management.sql-data-management-module-2-table-creation-constraints.sql-data-management-sql-data-management-section-2-data-rules.description",
+          "meta": {
+            "module": 2,
+            "weeksKey": "sections.sql-data-management.sql-data-management-module-2-table-creation-constraints.sql-data-management-sql-data-management-section-2-data-rules.weeks",
+            "bulletKeys": [
+              "sections.sql-data-management.sql-data-management-module-2-table-creation-constraints.sql-data-management-sql-data-management-section-2-data-rules.bullets.0",
+              "sections.sql-data-management.sql-data-management-module-2-table-creation-constraints.sql-data-management-sql-data-management-section-2-data-rules.bullets.1",
+              "sections.sql-data-management.sql-data-management-module-2-table-creation-constraints.sql-data-management-sql-data-management-section-2-data-rules.bullets.2",
+              "sections.sql-data-management.sql-data-management-module-2-table-creation-constraints.sql-data-management-sql-data-management-section-2-data-rules.bullets.3"
+            ]
+          },
+          "serviceDefaults": {
+            "requires": {
+              "files": true,
+              "multiFile": true,
+              "terminal": false
+            }
+          },
+          "tools": {
+            "defaultVisible": true,
+            "allowOpen": true,
+            "defaultSurface": "editor",
+            "compactDefaultSurface": "editor",
+            "sqlPane": {
+              "showResults": true,
+              "showTables": true,
+              "showErd": false,
+              "showChen": false,
+              "defaultTab": "results",
+              "compactDefaultTab": "results"
+            }
+          },
+          "topics": [
+            "unique-and-default-constraints",
+            "foreign-keys-and-references"
+          ]
+        },
+        {
+          "slug": "sql-data-management-sql-data-management-section-2-module-project",
+          "order": 3,
+          "role": "module_project",
+          "titleKey": "sections.sql-data-management.sql-data-management-module-2-table-creation-constraints.sql-data-management-sql-data-management-section-2-module-project.title",
+          "descriptionKey": "sections.sql-data-management.sql-data-management-module-2-table-creation-constraints.sql-data-management-sql-data-management-section-2-module-project.description",
+          "meta": {
+            "module": 2,
+            "weeksKey": "sections.sql-data-management.sql-data-management-module-2-table-creation-constraints.sql-data-management-sql-data-management-section-2-module-project.weeks",
+            "bulletKeys": [
+              "sections.sql-data-management.sql-data-management-module-2-table-creation-constraints.sql-data-management-sql-data-management-section-2-module-project.bullets.0",
+              "sections.sql-data-management.sql-data-management-module-2-table-creation-constraints.sql-data-management-sql-data-management-section-2-module-project.bullets.1",
+              "sections.sql-data-management.sql-data-management-module-2-table-creation-constraints.sql-data-management-sql-data-management-section-2-module-project.bullets.2",
+              "sections.sql-data-management.sql-data-management-module-2-table-creation-constraints.sql-data-management-sql-data-management-section-2-module-project.bullets.3"
+            ]
+          },
+          "serviceDefaults": {
+            "requires": {
+              "files": true,
+              "multiFile": true,
+              "terminal": false
+            }
+          },
+          "tools": {
+            "defaultVisible": true,
+            "allowOpen": true,
+            "defaultSurface": "editor",
+            "compactDefaultSurface": "editor",
+            "sqlPane": {
+              "showResults": true,
+              "showTables": true,
+              "showErd": false,
+              "showChen": false,
+              "defaultTab": "results",
+              "compactDefaultTab": "results"
+            }
+          },
+          "topics": [
+            "module-2-warehouse-stock-ledger-schema"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "sql-data-management-module-3-final-capstone",
+      "prefix": "sql_data_management_module_3",
+      "order": 3,
+      "role": "capstone",
+      "titleKey": "modules.sql-data-management.sql-data-management-module-3-final-capstone.title",
+      "descriptionKey": "modules.sql-data-management.sql-data-management-module-3-final-capstone.description",
+      "weekStart": null,
+      "weekEnd": null,
+      "accessOverride": null,
+      "runtimeDefaults": {
+        "kind": "sql",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true,
+        "datasetId": "ddl_blank",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table"
+      },
+      "serviceDefaults": {
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": false
+        }
+      },
+      "tools": {
+        "defaultVisible": true,
+        "allowOpen": true,
+        "defaultSurface": "editor",
+        "compactDefaultSurface": "editor",
+        "sqlPane": {
+          "showResults": true,
+          "showTables": true,
+          "showErd": false,
+          "showChen": false,
+          "defaultTab": "results",
+          "compactDefaultTab": "results"
+        }
+      },
+      "meta": {
+        "estimatedMinutes": 120,
+        "prereqKeys": [
+          "modules.sql-data-management.sql-data-management-module-2-table-creation-constraints.title"
+        ],
+        "outcomeKeys": [
+          "modules.sql-data-management.sql-data-management-module-3-final-capstone.outcomes.0",
+          "modules.sql-data-management.sql-data-management-module-3-final-capstone.outcomes.1",
+          "modules.sql-data-management.sql-data-management-module-3-final-capstone.outcomes.2",
+          "modules.sql-data-management.sql-data-management-module-3-final-capstone.outcomes.3",
+          "modules.sql-data-management.sql-data-management-module-3-final-capstone.outcomes.4"
+        ],
+        "whyKeys": [
+          "modules.sql-data-management.sql-data-management-module-3-final-capstone.why.0",
+          "modules.sql-data-management.sql-data-management-module-3-final-capstone.why.1"
+        ]
+      },
+      "sections": [
+        {
+          "slug": "sql-data-management-sql-data-management-section-3-final-capstone",
+          "order": 1,
+          "role": "capstone",
+          "titleKey": "sections.sql-data-management.sql-data-management-module-3-final-capstone.sql-data-management-sql-data-management-section-3-final-capstone.title",
+          "descriptionKey": "sections.sql-data-management.sql-data-management-module-3-final-capstone.sql-data-management-sql-data-management-section-3-final-capstone.description",
+          "meta": {
+            "module": 3,
+            "weeksKey": "sections.sql-data-management.sql-data-management-module-3-final-capstone.sql-data-management-sql-data-management-section-3-final-capstone.weeks",
+            "bulletKeys": [
+              "sections.sql-data-management.sql-data-management-module-3-final-capstone.sql-data-management-sql-data-management-section-3-final-capstone.bullets.0",
+              "sections.sql-data-management.sql-data-management-module-3-final-capstone.sql-data-management-sql-data-management-section-3-final-capstone.bullets.1",
+              "sections.sql-data-management.sql-data-management-module-3-final-capstone.sql-data-management-sql-data-management-section-3-final-capstone.bullets.2",
+              "sections.sql-data-management.sql-data-management-module-3-final-capstone.sql-data-management-sql-data-management-section-3-final-capstone.bullets.3"
+            ]
+          },
+          "serviceDefaults": {
+            "requires": {
+              "files": true,
+              "multiFile": true,
+              "terminal": false
+            }
+          },
+          "tools": {
+            "defaultVisible": true,
+            "allowOpen": true,
+            "defaultSurface": "editor",
+            "compactDefaultSurface": "editor",
+            "sqlPane": {
+              "showResults": true,
+              "showTables": true,
+              "showErd": false,
+              "showChen": false,
+              "defaultTab": "results",
+              "compactDefaultTab": "results"
+            }
+          },
+          "topics": [
+            "final-inventory-operations-launch"
+          ]
+        }
+      ]
+    }
+  ]
+}

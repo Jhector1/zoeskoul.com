@@ -181,6 +181,79 @@ describe("buildCurriculumQualityReport", () => {
         expect(report.issues.some((issue) => issue.code === "STARTER_REVEALS_SOLUTION" && issue.severity === "blocker")).toBe(true);
     });
 
+    it("uses query.sql as the expected entry file for SQL Data Management", () => {
+        const starterCode = "-- Write your SQL answer below\n";
+        const solutionCode = [
+            "SELECT id, name",
+            "FROM inventory_items",
+            "ORDER BY id;",
+        ].join("\n");
+        const sqlTopicSeed = sqlSeed({
+            subjectSlug: "sql",
+            courseSlug: "sql-data-management",
+            moduleNumber: 0,
+            moduleOrder: 1,
+            moduleRuntimeDefaults: {
+                kind: "sql",
+                datasetId: "inventory_ops",
+                fixedSqlDialect: "sqlite",
+                resultShape: "table",
+                showSchema: true,
+            },
+        });
+        const draft = sqlDraft({
+            starterCode,
+            solutionCode,
+            datasetId: "inventory_ops",
+            entryFilePath: "query.sql",
+            starterFiles: [
+                {
+                    path: "query.sql",
+                    content: starterCode,
+                    language: "sql",
+                    isEntry: true,
+                    entry: true,
+                },
+            ],
+            solutionFiles: [
+                {
+                    path: "query.sql",
+                    content: solutionCode,
+                    language: "sql",
+                    isEntry: true,
+                    entry: true,
+                },
+            ],
+            sqlFileOrder: ["query.sql"],
+        });
+        const bundle = buildTopicBundleFromDraft({
+            shape: sqlShape,
+            seed: sqlTopicSeed,
+            draft,
+        });
+        const report = buildCurriculumQualityReport({
+            profileId: "sql",
+            subjectSlug: "sql",
+            courseSlug: "sql-data-management",
+            topics: [
+                {
+                    seed: sqlTopicSeed,
+                    draft,
+                    topicBundle: bundle,
+                },
+            ],
+        });
+
+        expect(
+            report.issues.some(
+                (issue) =>
+                    issue.code === "EXPECTED_ENTRY_FILE_MISSING" ||
+                    issue.code === "WORKSPACE_ENTRY_FILE_LEAK",
+            ),
+        ).toBe(false);
+        expect(report.ok).toBe(true);
+    });
+
     it("blocks SQL bundles with Python workspace metadata", () => {
         const sqlTopicSeed = sqlSeed();
         const draft = sqlDraft();

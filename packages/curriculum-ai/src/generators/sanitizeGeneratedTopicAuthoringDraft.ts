@@ -9,6 +9,7 @@ const VALID_RECIPE_TYPES = new Set([
 
 const VALID_MATCH_TYPES = new Set(["exact", "includes"]);
 const PYTHON_MAX_FIXTURE_CONTENT_LENGTH = 600;
+const WORKSPACE_FILE_CONTENT_MAX_LENGTH = 12_000;
 
 function isRecord(value: unknown): value is Record<string, unknown> {
     return !!value && typeof value === "object" && !Array.isArray(value);
@@ -119,6 +120,13 @@ function isInvalidFixturePath(path: string): boolean {
                     segment.includes("\0"),
             )
     );
+}
+
+function sanitizeWorkspaceFileContent(value: unknown): string {
+    return String(value ?? "")
+        .replace(/\r\n?/g, "\n")
+        .slice(0, WORKSPACE_FILE_CONTENT_MAX_LENGTH)
+        .trimEnd();
 }
 
 function sanitizeFixtureContent(value: unknown): string {
@@ -272,6 +280,85 @@ function sanitizeFixtureList(
     return sanitized.length > 0 ? sanitized : undefined;
 }
 
+function sanitizeWorkspaceFileList(
+    files: unknown,
+): Record<string, unknown>[] | undefined {
+    if (!Array.isArray(files)) return undefined;
+
+    const seen = new Set<string>();
+    const sanitized = files
+        .filter(isRecord)
+        .map((file) => {
+            const path = normalizeText(file.path);
+            if (isInvalidFixturePath(path) || seen.has(path)) return null;
+            seen.add(path);
+
+            const nextFile: Record<string, unknown> = {
+                path,
+                content: sanitizeWorkspaceFileContent(file.content),
+            };
+            const language = normalizeText(file.language);
+            if (language) nextFile.language = language;
+            if (typeof file.isEntry === "boolean") nextFile.isEntry = file.isEntry;
+            if (typeof file.entry === "boolean") nextFile.entry = file.entry;
+            if (typeof file.readOnly === "boolean") nextFile.readOnly = file.readOnly;
+            return nextFile;
+        })
+        .filter((file): file is Record<string, unknown> => !!file);
+
+    return sanitized.length > 0 ? sanitized : undefined;
+}
+
+function sanitizeSqlFileOrder(value: unknown): string[] | undefined {
+    if (!Array.isArray(value)) return undefined;
+    const seen = new Set<string>();
+    const order: string[] = [];
+    for (const rawPath of value) {
+        const path = normalizeText(rawPath);
+        if (isInvalidFixturePath(path) || seen.has(path)) continue;
+        seen.add(path);
+        order.push(path);
+    }
+    return order.length > 0 ? order : undefined;
+}
+
+function deriveSqlFileOrder(args: {
+    starterFiles?: Record<string, unknown>[];
+    solutionFiles?: Record<string, unknown>[];
+}): string[] | undefined {
+    const files =
+        args.solutionFiles?.length
+            ? args.solutionFiles
+            : args.starterFiles ?? [];
+    const paths = files
+        .map((file) => normalizeText(file.path))
+        .filter((path) => path.length > 0);
+
+    if (paths.length <= 1) return undefined;
+
+    const priority = new Map<string, number>([
+        ["schema.sql", 0],
+        ["seed.sql", 1],
+        ["query.sql", 2],
+        ["main.sql", 3],
+    ]);
+
+    return paths
+        .map((path, index) => ({
+            path,
+            index,
+            priority:
+                priority.get(path.toLowerCase()) ??
+                Number.MAX_SAFE_INTEGER,
+        }))
+        .sort(
+            (left, right) =>
+                left.priority - right.priority ||
+                left.index - right.index,
+        )
+        .map(({ path }) => path);
+}
+
 function firstNonEmptyString(...values: unknown[]): string {
     for (const value of values) {
         const normalized = normalizeText(value);
@@ -287,7 +374,13 @@ function findEntryFixtureContent(
 ): string {
     if (!files?.length) return "";
 
-    const preferredPaths = [entryFilePath, "main.py", "src/main.py"]
+    const preferredPaths = [
+        entryFilePath,
+        "query.sql",
+        "main.sql",
+        "main.py",
+        "src/main.py",
+    ]
         .map((path) => normalizeText(path))
         .filter(Boolean);
 
@@ -297,27 +390,79 @@ function findEntryFixtureContent(
         if (content) return content;
     }
 
-    const firstPythonFile = files.find((file) => normalizeText(file.path).endsWith(".py"));
-    const pythonContent = normalizeText(firstPythonFile?.content);
-    if (pythonContent) return pythonContent;
+    const firstCodeFile = files.find((file) => /\.(?:sql|py|js|ts|java|c|cpp)$/i.test(normalizeText(file.path)));
+    const codeContent = normalizeText(firstCodeFile?.content);
+    if (codeContent) return codeContent;
 
     const firstContent = files.map((file) => normalizeText(file.content)).find(Boolean);
     return firstContent ?? "";
 }
 
-function ensureCodeInputRequiredCodeFields(
-    exercise: Record<string, unknown>,
-    files: Record<string, unknown>[] | undefined,
-): void {
-    const entryFilePath = firstNonEmptyString(exercise.entryFilePath, "main.py");
-    const entryContent = findEntryFixtureContent(files, entryFilePath);
+function resolveGeneratedEntryFilePath(args: {
+    exercise: Record<string, unknown>;
+    starterFiles?: Record<string, unknown>[];
+    solutionFiles?: Record<string, unknown>[];
+}): string {
+    const explicit = normalizeText(args.exercise.entryFilePath);
+    if (explicit) return explicit;
 
-    if (!normalizeText(exercise.starterCode)) {
-        exercise.starterCode = entryContent || "# Write your code below.\n";
+    const allFiles = [...(args.starterFiles ?? []), ...(args.solutionFiles ?? [])];
+    const marked = allFiles.find(
+        (file) => file.isEntry === true || file.entry === true,
+    );
+    const markedPath = normalizeText(marked?.path);
+    if (markedPath) return markedPath;
+
+    const queryPath = allFiles.find(
+        (file) => normalizeText(file.path) === "query.sql",
+    );
+    if (queryPath) return "query.sql";
+
+    const firstPath = normalizeText(allFiles[0]?.path);
+    if (firstPath) return firstPath;
+
+    return normalizeText(args.exercise.recipeType) === "sql_query"
+        ? "main.sql"
+        : "main.py";
+}
+
+function ensureCodeInputRequiredCodeFields(args: {
+    exercise: Record<string, unknown>;
+    starterFiles?: Record<string, unknown>[];
+    solutionFiles?: Record<string, unknown>[];
+}): void {
+    const recipeType = normalizeText(args.exercise.recipeType);
+    const entryFilePath = resolveGeneratedEntryFilePath(args);
+    const hasWorkspaceFiles =
+        (args.starterFiles?.length ?? 0) > 0 ||
+        (args.solutionFiles?.length ?? 0) > 0;
+    if (hasWorkspaceFiles || normalizeText(args.exercise.entryFilePath)) {
+        args.exercise.entryFilePath = entryFilePath;
     }
 
-    if (!normalizeText(exercise.solutionCode)) {
-        exercise.solutionCode = entryContent || String(exercise.starterCode ?? "# Write your code below.\n");
+    const starterEntryContent = findEntryFixtureContent(args.starterFiles, entryFilePath);
+    const solutionEntryContent = findEntryFixtureContent(args.solutionFiles, entryFilePath);
+    const starterFallback = recipeType === "sql_query"
+        ? "-- Write your SQL answer below\n"
+        : "# Write your code below.\n";
+
+    if (recipeType === "sql_query" && hasWorkspaceFiles) {
+        args.exercise.starterCode =
+            starterEntryContent || normalizeText(args.exercise.starterCode) || starterFallback;
+        args.exercise.solutionCode =
+            solutionEntryContent ||
+            normalizeText(args.exercise.solutionCode) ||
+            String(args.exercise.starterCode ?? starterFallback);
+        return;
+    }
+
+    if (!normalizeText(args.exercise.starterCode)) {
+        args.exercise.starterCode = starterEntryContent || starterFallback;
+    }
+
+    if (!normalizeText(args.exercise.solutionCode)) {
+        args.exercise.solutionCode =
+            solutionEntryContent || String(args.exercise.starterCode ?? starterFallback);
     }
 }
 
@@ -686,8 +831,16 @@ function sanitizeCodeInputExercise(
 
     const hasTests = tests.length > 0;
     const hasSemanticChecks = semanticChecks.length > 0;
+    const declaredRecipeType =
+        typeof exercise.recipeType === "string"
+            ? normalizeText(exercise.recipeType)
+            : undefined;
+    const recipeRunsWithoutAuthoredTests = declaredRecipeType === "sql_query";
 
-    if (!hasTests && !hasSemanticChecks) {
+    // SQL query recipes are graded from their result-table contract and do not
+    // require fixed stdout tests or semantic checks. Do not replace a valid SQL
+    // code_input with the Python file-output fallback exercise.
+    if (!hasTests && !hasSemanticChecks && !recipeRunsWithoutAuthoredTests) {
         return fallbackObservableChoiceExercise(exercise);
     }
 
@@ -696,19 +849,33 @@ function sanitizeCodeInputExercise(
     };
 
     const fixtureFiles = sanitizeFixtureList(exercise.files);
+    const starterFiles = sanitizeWorkspaceFileList(exercise.starterFiles);
+    const solutionFiles = sanitizeWorkspaceFileList(exercise.solutionFiles);
+    const authoredSqlFileOrder = sanitizeSqlFileOrder(
+        exercise.sqlFileOrder,
+    );
 
-    if (fixtureFiles) {
-        next.files = fixtureFiles;
+    if (fixtureFiles) next.files = fixtureFiles;
+    else delete next.files;
+
+    if (starterFiles) next.starterFiles = starterFiles;
+    else delete next.starterFiles;
+
+    if (solutionFiles) next.solutionFiles = solutionFiles;
+    else delete next.solutionFiles;
+
+    const entryFilePath = normalizeText(exercise.entryFilePath);
+    if (entryFilePath && !isInvalidFixturePath(entryFilePath)) {
+        next.entryFilePath = entryFilePath;
     } else {
-        delete next.files;
+        delete next.entryFilePath;
     }
 
-    ensureCodeInputRequiredCodeFields(next, fixtureFiles);
-
-    const declaredRecipeType =
-        typeof next.recipeType === "string"
-            ? normalizeText(next.recipeType)
-            : undefined;
+    ensureCodeInputRequiredCodeFields({
+        exercise: next,
+        starterFiles,
+        solutionFiles,
+    });
 
     const recipeType = resolveRecipeType({
         declaredRecipeType,
@@ -717,6 +884,18 @@ function sanitizeCodeInputExercise(
     });
 
     next.recipeType = recipeType;
+    if (recipeType === "sql_query") {
+        const sqlFileOrder =
+            authoredSqlFileOrder ??
+            deriveSqlFileOrder({
+                starterFiles,
+                solutionFiles,
+            });
+        if (sqlFileOrder) next.sqlFileOrder = sqlFileOrder;
+        else delete next.sqlFileOrder;
+    } else {
+        delete next.sqlFileOrder;
+    }
 
     if (recipeType === "semantic") {
         next.semanticChecks = semanticChecks;
@@ -746,7 +925,7 @@ function sanitizeCodeInputExercise(
     return next;
 }
 
-export function sanitizeGeneratedTopicAuthoringDraft(
+function sanitizeGeneratedTopicAuthoringDraftBase(
     value: TopicAuthoringDraft,
 ): TopicAuthoringDraft {
     const quizDraft = Array.isArray(value.quizDraft)
@@ -767,4 +946,93 @@ export function sanitizeGeneratedTopicAuthoringDraft(
         ...value,
         quizDraft,
     } as TopicAuthoringDraft;
+}
+
+// DRAG_REORDER_MARKER_REPAIR
+function exactUniquePermutation(values: string[], tokens: string[]): boolean {
+    if (values.length !== tokens.length) return false;
+    if (new Set(values).size !== values.length) return false;
+    if (new Set(tokens).size !== tokens.length) return false;
+
+    const tokenSet = new Set(tokens);
+    return values.every((value) => tokenSet.has(value));
+}
+
+function indexesFromLetterMarkers(values: string[], tokenCount: number): number[] | null {
+    const indexes = values.map((value) => {
+        const marker = value.trim().toLowerCase();
+        return /^[a-z]$/.test(marker) ? marker.charCodeAt(0) - 97 : -1;
+    });
+
+    if (indexes.some((index) => index < 0 || index >= tokenCount)) return null;
+    return new Set(indexes).size === indexes.length ? indexes : null;
+}
+
+function indexesFromNumericMarkers(values: string[], tokenCount: number): number[] | null {
+    if (!values.every((value) => /^\d+$/.test(value.trim()))) return null;
+
+    const numeric = values.map((value) => Number.parseInt(value.trim(), 10));
+    const oneBased = numeric.every((value) => value >= 1 && value <= tokenCount);
+    const zeroBased = numeric.every((value) => value >= 0 && value < tokenCount);
+
+    const indexes = oneBased
+        ? numeric.map((value) => value - 1)
+        : zeroBased
+          ? numeric
+          : null;
+
+    return indexes && new Set(indexes).size === indexes.length ? indexes : null;
+}
+
+/**
+ * Structured-output models sometimes emit answer labels in correctOrder even
+ * though the contract requires the literal token strings. Repair only the two
+ * unambiguous shorthand forms we see in generation: a/b/c... and numeric
+ * positions. Arbitrary invalid orders stay invalid so schema validation still
+ * catches genuine data loss or ambiguity.
+ */
+export function repairGeneratedDragReorderCorrectOrder<T>(exercise: T): T {
+    if (!exercise || typeof exercise !== "object") return exercise;
+
+    const item = exercise as Record<string, unknown>;
+    if (item.kind !== "drag_reorder") return exercise;
+
+    const tokens = Array.isArray(item.tokens)
+        ? item.tokens.filter((value): value is string => typeof value === "string")
+        : [];
+    const correctOrder = Array.isArray(item.correctOrder)
+        ? item.correctOrder.filter((value): value is string => typeof value === "string")
+        : [];
+
+    if (tokens.length === 0 || correctOrder.length !== tokens.length) return exercise;
+    if (exactUniquePermutation(correctOrder, tokens)) return exercise;
+
+    // Literal numeric tokens are valid learner content. Do not reinterpret an
+    // already-valid token permutation as positional shorthand.
+    const letterIndexes = indexesFromLetterMarkers(correctOrder, tokens.length);
+    const numericIndexes = letterIndexes
+        ? null
+        : indexesFromNumericMarkers(correctOrder, tokens.length);
+    const indexes = letterIndexes ?? numericIndexes;
+
+    if (!indexes) return exercise;
+
+    const repaired = indexes.map((index) => tokens[index]);
+    if (!exactUniquePermutation(repaired, tokens)) return exercise;
+
+    return {
+        ...item,
+        correctOrder: repaired,
+    } as unknown as T;
+}
+
+export function sanitizeGeneratedTopicAuthoringDraft(
+    ...args: Parameters<typeof sanitizeGeneratedTopicAuthoringDraftBase>
+): ReturnType<typeof sanitizeGeneratedTopicAuthoringDraftBase> {
+    const draft = sanitizeGeneratedTopicAuthoringDraftBase(...args);
+
+    return {
+        ...draft,
+        quizDraft: draft.quizDraft.map(repairGeneratedDragReorderCorrectOrder),
+    } as ReturnType<typeof sanitizeGeneratedTopicAuthoringDraftBase>;
 }

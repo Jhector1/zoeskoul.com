@@ -7,6 +7,7 @@ export function makeSketchCard(args: any) {
     spec: args.spec,
     height: args.height,
     props: args.props,
+    tools: args.tools,
   };
 }
 
@@ -36,6 +37,7 @@ export function makeQuizCard(args: any) {
     title: args.title,
     passScore: args.passScore ?? 0.75,
     spec: args.spec,
+    tools: args.tools,
   };
 }
 
@@ -80,5 +82,6 @@ export function makeProjectCard(args: any) {
     passScore: args.passScore ?? 0.75,
     tryIt: args.tryIt,
     spec: args.spec,
+    tools: args.tools,
   };
 }

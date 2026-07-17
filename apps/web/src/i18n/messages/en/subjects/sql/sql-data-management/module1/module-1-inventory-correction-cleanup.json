@@ -1,0 +1,218 @@
+{
+  "topics": {
+    "sql-data-management": {
+      "sql-data-management-module-1-controlled-updates-deletes": {
+        "module-1-inventory-correction-cleanup": {
+          "label": "Module 1 Project: Inventory Correction and Cleanup",
+          "summary": "Correct audited inventory values and remove only two approved test records through six cumulative steps.",
+          "cards": {
+            "sketch0": {
+              "title": "Inventory Correction and Cleanup Overview"
+            },
+            "project": {
+              "title": "Inventory Correction and Cleanup Project"
+            }
+          },
+          "projectSteps": {
+            "try_module_1_inventory_correction_cleanup_sketch0": {
+              "title": "Preview the Audit Targets"
+            },
+            "try_module_1_inventory_correction_cleanup_sketch1": {
+              "title": "Correct One Item Precisely"
+            },
+            "try_module_1_inventory_correction_cleanup_sketch2": {
+              "title": "Apply a Controlled Category Update"
+            },
+            "try_module_1_inventory_correction_cleanup_sketch3": {
+              "title": "Delete One Confirmed Test Item"
+            },
+            "try_module_1_inventory_correction_cleanup_sketch4": {
+              "title": "Remove the Remaining Draft Test Row"
+            },
+            "try_module_1_inventory_correction_cleanup_sketch5": {
+              "title": "Complete the Operational Handoff"
+            }
+          },
+          "moduleProject": {
+            "steps": {
+              "try_module_1_inventory_correction_cleanup_sketch0": {
+                "title": "Preview the Audit Targets",
+                "prompt": "The inventory audit flagged rows `2`, `4`, and `6` for review, but no changes are approved yet. In `query.sql`, return `id, price, status, is_test, notes` from `inventory_items` in that column order. Keep only rows where `id IN (2, 4, 6)`. Sort the final result by `id`.",
+                "hint": "Leave the setup files unchanged and write the requested result-returning statement in query.sql.",
+                "help": {
+                  "concept": "Keep each database responsibility in its named file: schema definitions in schema.sql, approved starting rows in seed.sql, mutations in operations.sql, and visible evidence in query.sql.",
+                  "hint_1": "Complete the main database change before writing the inspection or verification query.",
+                  "hint_2": "In `query.sql`, return `id, price, status, is_test, notes` from `inventory_items` for rows matching `id IN (2, 4, 6)`, ordered by `id`."
+                },
+                "starterCode": "-- Return the verification result required for \"Preview the Audit Targets\" below.\n",
+                "solutionCode": "SELECT id, price, status, is_test, notes\nFROM inventory_items\nWHERE id IN (2, 4, 6)\nORDER BY id;",
+                "starterFiles": {
+                  "query_sql": {
+                    "content": "-- Return the verification result required for \"Preview the Audit Targets\" below.\n"
+                  }
+                },
+                "solutionFiles": {
+                  "query_sql": {
+                    "content": "SELECT id, price, status, is_test, notes\nFROM inventory_items\nWHERE id IN (2, 4, 6)\nORDER BY id;"
+                  }
+                }
+              },
+              "try_module_1_inventory_correction_cleanup_sketch1": {
+                "title": "Correct One Item Precisely",
+                "prompt": "The audit confirms that item `id = 2` has the wrong price and status. Update `inventory_items` with the assignments `price = 8.25, status = 'active'`. Limit the mutation with `WHERE id = 2`. In `query.sql`, return `id, price, status` from `inventory_items` in that column order. Keep only rows where `id = 2`.",
+                "hint": "Apply the narrowly scoped change in operations.sql, then write query.sql so the Results tab proves the final state.",
+                "help": {
+                  "concept": "Keep each database responsibility in its named file: schema definitions in schema.sql, approved starting rows in seed.sql, mutations in operations.sql, and visible evidence in query.sql.",
+                  "hint_1": "Complete the main database change before writing the inspection or verification query.",
+                  "hint_2": "In `query.sql`, return `id, price, status` from `inventory_items` for rows matching `id = 2`."
+                },
+                "starterCode": "-- Continue the next requirement for Correct One Item Precisely below.\n",
+                "solutionCode": "-- Update the item\nUPDATE inventory_items SET price = 8.25, status = 'active' WHERE id = 2;",
+                "starterFiles": {
+                  "operations_sql": {
+                    "content": "-- Continue the next requirement for Correct One Item Precisely below.\n"
+                  },
+                  "query_sql": {
+                    "content": "-- Return the verification result required for \"Correct One Item Precisely\" below.\n"
+                  }
+                },
+                "solutionFiles": {
+                  "operations_sql": {
+                    "content": "-- Update the item\nUPDATE inventory_items SET price = 8.25, status = 'active' WHERE id = 2;"
+                  },
+                  "query_sql": {
+                    "content": "SELECT id, price, status\nFROM inventory_items\nWHERE id = 2;"
+                  }
+                }
+              },
+              "try_module_1_inventory_correction_cleanup_sketch2": {
+                "title": "Apply a Controlled Category Update",
+                "prompt": "Operations needs one audit date on legitimate Decor inventory. Update `inventory_items` with the assignments `price = 8.25, status = 'active'`. Update `inventory_items` with the assignments `last_updated = '2026-02-10'`. Limit the mutation with `WHERE id = 2; UPDATE inventory_items SET last_updated = '2026-02-10' WHERE category = 'Decor' AND is_test = 0`. In `query.sql`, return `id, category, is_test, last_updated` from `inventory_items` in that column order. Keep only rows where `category = 'Decor' AND is_test = 0`. Sort the final result by `id`.",
+                "hint": "Apply the narrowly scoped change in operations.sql, then write query.sql so the Results tab proves the final state.",
+                "help": {
+                  "concept": "Keep each database responsibility in its named file: schema definitions in schema.sql, approved starting rows in seed.sql, mutations in operations.sql, and visible evidence in query.sql.",
+                  "hint_1": "Complete the main database change before writing the inspection or verification query.",
+                  "hint_2": "In `query.sql`, return `id, category, is_test, last_updated` from `inventory_items` for rows matching `category = 'Decor' AND is_test = 0`, ordered by `id`."
+                },
+                "starterCode": "-- Update the item\nUPDATE inventory_items SET price = 8.25, status = 'active' WHERE id = 2;\n\n-- Continue the next requirement for Apply a Controlled Category Update below.\n",
+                "solutionCode": "-- Update the item\nUPDATE inventory_items SET price = 8.25, status = 'active' WHERE id = 2;\n\n-- Update the items\nUPDATE inventory_items SET last_updated = '2026-02-10' WHERE category = 'Decor' AND is_test = 0;",
+                "starterFiles": {
+                  "operations_sql": {
+                    "content": "-- Update the item\nUPDATE inventory_items SET price = 8.25, status = 'active' WHERE id = 2;\n\n-- Continue the next requirement for Apply a Controlled Category Update below.\n"
+                  },
+                  "query_sql": {
+                    "content": "-- Return the verification result required for \"Apply a Controlled Category Update\" below.\n"
+                  }
+                },
+                "solutionFiles": {
+                  "operations_sql": {
+                    "content": "-- Update the item\nUPDATE inventory_items SET price = 8.25, status = 'active' WHERE id = 2;\n\n-- Update the items\nUPDATE inventory_items SET last_updated = '2026-02-10' WHERE category = 'Decor' AND is_test = 0;"
+                  },
+                  "query_sql": {
+                    "content": "SELECT id, category, is_test, last_updated\nFROM inventory_items\nWHERE category = 'Decor' AND is_test = 0\nORDER BY id;"
+                  }
+                }
+              },
+              "try_module_1_inventory_correction_cleanup_sketch3": {
+                "title": "Delete One Confirmed Test Item",
+                "prompt": "The audit board approved row `id = 4` for deletion. Update `inventory_items` with the assignments `price = 8.25, status = 'active'`. Update `inventory_items` with the assignments `last_updated = '2026-02-10'`. Delete only the approved rows from `inventory_items`. Limit the mutation with `WHERE id = 2; UPDATE inventory_items SET last_updated = '2026-02-10' WHERE category = 'Decor' AND is_test = 0; DELETE FROM inventory_items WHERE id = 4`. In `query.sql`, return `id, name` from `inventory_items` in that column order. Keep only rows where `id = 4`.",
+                "hint": "Apply the narrowly scoped change in operations.sql, then write query.sql so the Results tab proves the final state.",
+                "help": {
+                  "concept": "Keep each database responsibility in its named file: schema definitions in schema.sql, approved starting rows in seed.sql, mutations in operations.sql, and visible evidence in query.sql.",
+                  "hint_1": "Complete the main database change before writing the inspection or verification query.",
+                  "hint_2": "In `query.sql`, return `id, name` from `inventory_items` for rows matching `id = 4`."
+                },
+                "starterCode": "-- Update the item\nUPDATE inventory_items SET price = 8.25, status = 'active' WHERE id = 2;\n\n-- Update the items\nUPDATE inventory_items SET last_updated = '2026-02-10' WHERE category = 'Decor' AND is_test = 0;\n\n-- Continue the next requirement for Delete One Confirmed Test Item below.\n",
+                "solutionCode": "-- Update the item\nUPDATE inventory_items SET price = 8.25, status = 'active' WHERE id = 2;\n\n-- Update the items\nUPDATE inventory_items SET last_updated = '2026-02-10' WHERE category = 'Decor' AND is_test = 0;\n\n-- Delete the item\nDELETE FROM inventory_items WHERE id = 4;",
+                "starterFiles": {
+                  "operations_sql": {
+                    "content": "-- Update the item\nUPDATE inventory_items SET price = 8.25, status = 'active' WHERE id = 2;\n\n-- Update the items\nUPDATE inventory_items SET last_updated = '2026-02-10' WHERE category = 'Decor' AND is_test = 0;\n\n-- Continue the next requirement for Delete One Confirmed Test Item below.\n"
+                  },
+                  "query_sql": {
+                    "content": "-- Return the verification result required for \"Delete One Confirmed Test Item\" below.\n"
+                  }
+                },
+                "solutionFiles": {
+                  "operations_sql": {
+                    "content": "-- Update the item\nUPDATE inventory_items SET price = 8.25, status = 'active' WHERE id = 2;\n\n-- Update the items\nUPDATE inventory_items SET last_updated = '2026-02-10' WHERE category = 'Decor' AND is_test = 0;\n\n-- Delete the item\nDELETE FROM inventory_items WHERE id = 4;"
+                  },
+                  "query_sql": {
+                    "content": "SELECT id, name\nFROM inventory_items\nWHERE id = 4;"
+                  }
+                }
+              },
+              "try_module_1_inventory_correction_cleanup_sketch4": {
+                "title": "Remove the Remaining Draft Test Row",
+                "prompt": "Row `id = 6` may be removed only while it is still both test data and in draft status. Update `inventory_items` with the assignments `price = 8.25, status = 'active'`. Update `inventory_items` with the assignments `last_updated = '2026-02-10'`. Delete only the approved rows from `inventory_items`. Limit the mutation with `WHERE id = 2; UPDATE inventory_items SET last_updated = '2026-02-10' WHERE category = 'Decor' AND is_test = 0; DELETE FROM inventory_items WHERE id = 4; DELETE FROM inventory_items WHERE id = 6 AND is_test = 1 AND status = 'draft'`. In `query.sql`, return `id, name` from `inventory_items` in that column order. Keep only rows where `id = 6`.",
+                "hint": "Apply the narrowly scoped change in operations.sql, then write query.sql so the Results tab proves the final state.",
+                "help": {
+                  "concept": "Keep each database responsibility in its named file: schema definitions in schema.sql, approved starting rows in seed.sql, mutations in operations.sql, and visible evidence in query.sql.",
+                  "hint_1": "Complete the main database change before writing the inspection or verification query.",
+                  "hint_2": "In `query.sql`, return `id, name` from `inventory_items` for rows matching `id = 6`."
+                },
+                "starterCode": "-- Update the item\nUPDATE inventory_items SET price = 8.25, status = 'active' WHERE id = 2;\n\n-- Update the items\nUPDATE inventory_items SET last_updated = '2026-02-10' WHERE category = 'Decor' AND is_test = 0;\n\n-- Delete the item\nDELETE FROM inventory_items WHERE id = 4;\n\n-- Continue the next requirement for Remove the Remaining Draft Test Row below.\n",
+                "solutionCode": "-- Update the item\nUPDATE inventory_items SET price = 8.25, status = 'active' WHERE id = 2;\n\n-- Update the items\nUPDATE inventory_items SET last_updated = '2026-02-10' WHERE category = 'Decor' AND is_test = 0;\n\n-- Delete the item\nDELETE FROM inventory_items WHERE id = 4;\n\n-- Delete the item\nDELETE FROM inventory_items WHERE id = 6 AND is_test = 1 AND status = 'draft';",
+                "starterFiles": {
+                  "operations_sql": {
+                    "content": "-- Update the item\nUPDATE inventory_items SET price = 8.25, status = 'active' WHERE id = 2;\n\n-- Update the items\nUPDATE inventory_items SET last_updated = '2026-02-10' WHERE category = 'Decor' AND is_test = 0;\n\n-- Delete the item\nDELETE FROM inventory_items WHERE id = 4;\n\n-- Continue the next requirement for Remove the Remaining Draft Test Row below.\n"
+                  },
+                  "query_sql": {
+                    "content": "-- Return the verification result required for \"Remove the Remaining Draft Test Row\" below.\n"
+                  }
+                },
+                "solutionFiles": {
+                  "operations_sql": {
+                    "content": "-- Update the item\nUPDATE inventory_items SET price = 8.25, status = 'active' WHERE id = 2;\n\n-- Update the items\nUPDATE inventory_items SET last_updated = '2026-02-10' WHERE category = 'Decor' AND is_test = 0;\n\n-- Delete the item\nDELETE FROM inventory_items WHERE id = 4;\n\n-- Delete the item\nDELETE FROM inventory_items WHERE id = 6 AND is_test = 1 AND status = 'draft';"
+                  },
+                  "query_sql": {
+                    "content": "SELECT id, name\nFROM inventory_items\nWHERE id = 6;"
+                  }
+                }
+              },
+              "try_module_1_inventory_correction_cleanup_sketch5": {
+                "title": "Complete the Operational Handoff",
+                "prompt": "The audit cleanup is complete and another analyst needs a final handoff report. In `query.sql`, return every column from `inventory_items`. Sort the final result by `id`. Keep the completed work in `operations.sql` unchanged.",
+                "hint": "Leave the setup files unchanged and write the requested result-returning statement in query.sql.",
+                "help": {
+                  "concept": "Keep each database responsibility in its named file: schema definitions in schema.sql, approved starting rows in seed.sql, mutations in operations.sql, and visible evidence in query.sql.",
+                  "hint_1": "Complete the main database change before writing the inspection or verification query.",
+                  "hint_2": "In `query.sql`, return `*` from `inventory_items`, ordered by `id`."
+                },
+                "starterCode": "-- Return the verification result required for \"Complete the Operational Handoff\" below.\n",
+                "solutionCode": "SELECT *\nFROM inventory_items\nORDER BY id;",
+                "starterFiles": {
+                  "operations_sql": {
+                    "content": "-- Correct item with id 2\nUPDATE inventory_items SET price = 8.25, status = 'active' WHERE id = 2;\n\n-- Update non-test Decor items\nUPDATE inventory_items SET last_updated = '2026-02-10' WHERE category = 'Decor' AND is_test = 0;\n\n-- Delete item with id 4\nDELETE FROM inventory_items WHERE id = 4;\n\n-- Delete item with id 6\nDELETE FROM inventory_items WHERE id = 6 AND is_test = 1 AND status = 'draft';\n"
+                  },
+                  "query_sql": {
+                    "content": "-- Return the verification result required for \"Complete the Operational Handoff\" below.\n"
+                  }
+                },
+                "solutionFiles": {
+                  "operations_sql": {
+                    "content": "-- Correct item with id 2\nUPDATE inventory_items SET price = 8.25, status = 'active' WHERE id = 2;\n\n-- Update non-test Decor items\nUPDATE inventory_items SET last_updated = '2026-02-10' WHERE category = 'Decor' AND is_test = 0;\n\n-- Delete item with id 4\nDELETE FROM inventory_items WHERE id = 4;\n\n-- Delete item with id 6\nDELETE FROM inventory_items WHERE id = 6 AND is_test = 1 AND status = 'draft';"
+                  },
+                  "query_sql": {
+                    "content": "SELECT *\nFROM inventory_items\nORDER BY id;"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql-data-management": {
+      "sql-data-management-module-1-controlled-updates-deletes": {
+        "module-1-inventory-correction-cleanup": {
+          "sketch1": {
+            "title": "Inventory Correction and Cleanup Overview",
+            "bodyMarkdown": "A makers-market inventory audit found records that need correction and test rows that are approved for removal. You are the inventory data steward responsible for applying the audit without touching legitimate inventory outside the request.\n\nThe project progresses from evidence to action. You will preview the affected rows, correct one item, update an approved group, remove two confirmed test records under different conditions, and inspect the final table.\n\nYour deliverable is a two-file audit workspace:\n\n- `operations.sql` contains the cumulative scoped `UPDATE` and `DELETE` statements.\n- `query.sql` contains the previews and final verification queries that prove the target rows changed while unrelated rows were preserved.\n\nEvery mutation must use a narrow condition that reflects the audit decision."
+          }
+        }
+      }
+    }
+  }
+}

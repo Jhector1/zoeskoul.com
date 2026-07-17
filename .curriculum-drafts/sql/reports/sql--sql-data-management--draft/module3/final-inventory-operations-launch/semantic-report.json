@@ -1,0 +1,30 @@
+{
+  "topicId": "final-inventory-operations-launch",
+  "ok": true,
+  "issues": [
+    {
+      "code": "SQL_DATASET_CONSISTENCY",
+      "category": "dataset",
+      "severity": "warn",
+      "message": "Exercise ci-final-capstone-step1 references table \"sqlite_master\" outside effective dataset \"ddl_blank\""
+    },
+    {
+      "code": "SQL_DATASET_CONSISTENCY",
+      "category": "dataset",
+      "severity": "warn",
+      "message": "Exercise ci-final-capstone-step1 references column \"type\" that does not belong to effective dataset \"ddl_blank\""
+    },
+    {
+      "code": "SQL_DATASET_CONSISTENCY",
+      "category": "dataset",
+      "severity": "warn",
+      "message": "Exercise ci-final-capstone-step2 references table \"sqlite_master\" outside effective dataset \"ddl_blank\""
+    },
+    {
+      "code": "SQL_DATASET_CONSISTENCY",
+      "category": "dataset",
+      "severity": "warn",
+      "message": "Exercise ci-final-capstone-step2 references column \"type\" that does not belong to effective dataset \"ddl_blank\""
+    }
+  ]
+}

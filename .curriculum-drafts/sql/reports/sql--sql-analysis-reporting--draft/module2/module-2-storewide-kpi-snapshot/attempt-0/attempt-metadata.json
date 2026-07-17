@@ -1,0 +1,18 @@
+{
+  "profileId": "sql",
+  "subjectSlug": "sql--sql-analysis-reporting--draft",
+  "courseSlug": "sql-analysis-reporting",
+  "moduleSlug": "sql-analysis-reporting-module-2-aggregate-functions",
+  "sectionSlug": "sql-analysis-reporting-section-2-module-project",
+  "topicId": "module-2-storewide-kpi-snapshot",
+  "provider": "openai",
+  "model": "gpt-4o",
+  "temperature": 0,
+  "modelSeed": 0,
+  "generatorVersion": "2026-05-23-topic-authoring-draft-generator-v1",
+  "schemaName": "TopicAuthoringDraft",
+  "schemaVersion": "2026-05-23-topic-authoring-draft-v1",
+  "strictSchema": true,
+  "retryAttempt": 0,
+  "maxRetries": 2
+}

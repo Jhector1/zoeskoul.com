@@ -1,0 +1,199 @@
+{
+  "title": "Avoiding Grouping Mistakes",
+  "summary": "Recognize selected columns that do not belong at the intended report grain.",
+  "minutes": 24,
+  "sketchBlocks": [
+    {
+      "id": "sketch0",
+      "title": "Understanding Report Grain",
+      "bodyMarkdown": "In SQL, the concept of 'report grain' refers to the level of detail represented by each row in a grouped query result. When using `GROUP BY`, it's crucial to ensure that the columns selected align with the intended grain of the report. For example, if you want to summarize sales by region, your `GROUP BY` clause should include the `region` column, and any selected columns should be aggregates or part of the grouping.\n\n```sql\nSELECT region, SUM(quantity) AS total_quantity\nFROM sales_reporting\nGROUP BY region;\n```\n\nIn this query, each row represents the total quantity of sales for a specific region. The `SUM(quantity)` function aggregates the data to match the report grain defined by `region`. Including non-aggregated columns that aren't part of the `GROUP BY` clause can lead to incorrect results or SQL errors."
+    },
+    {
+      "id": "sketch1",
+      "title": "Common Grouping Mistakes",
+      "bodyMarkdown": "A common mistake when using `GROUP BY` is including columns in the `SELECT` statement that aren't part of the aggregation or the grouping. This can lead to misleading results or SQL errors. For instance, if you try to include `product_name` without aggregating it or including it in the `GROUP BY`, SQL will not know how to handle it.\n\n```sql\n-- Incorrect\nSELECT region, product_name, SUM(quantity) AS total_quantity\nFROM sales_reporting\nGROUP BY region;\n```\n\nThis query will result in an error because `product_name` is neither aggregated nor included in the `GROUP BY` clause. To fix this, you should either aggregate `product_name` or include it in the `GROUP BY` clause if you want to see totals per product per region.\n\n```sql\n-- Correct\nSELECT region, product_name, SUM(quantity) AS total_quantity\nFROM sales_reporting\nGROUP BY region, product_name;\n```\n\nNow, each row represents the total quantity of a specific product sold in a specific region."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "try-avoiding-grouping-mistakes-sketch0",
+      "kind": "code_input",
+      "title": "Calculate Total Sales by Region",
+      "prompt": "Write a query to calculate the total sales amount for each region. Use the `sales_reporting` table and ensure your query reflects the correct report grain.",
+      "hint": "Use the `SUM` function to calculate total sales and group by `region`.",
+      "help": {
+        "concept": "The report grain should match the grouping column, which is `region` in this case.",
+        "hint_1": "Ensure that the `SUM` function is used to aggregate sales data.",
+        "hint_2": "The `GROUP BY` clause should include `region` to match the report grain."
+      },
+      "starterCode": "SELECT region, SUM(unit_price * quantity) AS total_sales\nFROM sales_reporting\nGROUP BY region;",
+      "solutionCode": "SELECT region, SUM(unit_price * quantity) AS total_sales\nFROM sales_reporting\nGROUP BY region;",
+      "tests": [
+        {
+          "stdout": "North|1234.50\nSouth|987.00\nEast|876.00\nWest|765.00\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "try-avoiding-grouping-mistakes-sketch1",
+      "kind": "code_input",
+      "title": "Identify Grouping Errors",
+      "prompt": "Write a query to find the average customer rating for each product category. Ensure your query does not include non-aggregated columns that aren't part of the grouping.",
+      "hint": "Use `AVG` to calculate the average rating and group by `category`.",
+      "help": {
+        "concept": "Ensure that all selected columns are either aggregated or part of the `GROUP BY` clause.",
+        "hint_1": "Use `AVG(customer_rating)` to calculate the average rating.",
+        "hint_2": "Include `category` in the `GROUP BY` clause to match the report grain."
+      },
+      "starterCode": "SELECT category, AVG(customer_rating) AS average_rating\nFROM sales_reporting\nGROUP BY category;",
+      "solutionCode": "SELECT category, AVG(customer_rating) AS average_rating\nFROM sales_reporting\nGROUP BY category;",
+      "tests": [
+        {
+          "stdout": "Art|4.5\nStationery|4.2\nHome|4.3\nTech|4.4\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "quiz1",
+      "kind": "single_choice",
+      "title": "Understanding Report Grain",
+      "prompt": "What does the term 'report grain' refer to in SQL?",
+      "hint": "Think about the level of detail each row in a grouped query represents.",
+      "help": {
+        "concept": "Report grain is about the level of detail in each row of a grouped query result.",
+        "hint_1": "Consider what each row in a grouped query result represents.",
+        "hint_2": "It's the level of detail or granularity of the data in each row."
+      },
+      "options": [
+        "The number of rows in a table",
+        "The level of detail each row represents in a grouped query",
+        "The total number of columns in a table",
+        "The size of the database"
+      ],
+      "correctOptionIds": [
+        "b"
+      ]
+    },
+    {
+      "id": "quiz2",
+      "kind": "single_choice",
+      "title": "Grouping Mistakes",
+      "prompt": "Which of the following is a common mistake when using `GROUP BY` in SQL?",
+      "hint": "Consider what happens if you include non-aggregated columns in the `SELECT` statement.",
+      "help": {
+        "concept": "Including non-aggregated columns not in the `GROUP BY` clause can cause errors.",
+        "hint_1": "Think about columns that are not aggregated or grouped.",
+        "hint_2": "Including such columns can lead to SQL errors or incorrect results."
+      },
+      "options": [
+        "Using `GROUP BY` with only one column",
+        "Including non-aggregated columns not in the `GROUP BY` clause",
+        "Using aggregate functions without `GROUP BY`",
+        "Grouping by all columns in the table"
+      ],
+      "correctOptionIds": [
+        "b"
+      ]
+    },
+    {
+      "id": "quiz3",
+      "kind": "multi_choice",
+      "title": "Correct Grouping Practices",
+      "prompt": "Select all correct practices when using `GROUP BY` in SQL.",
+      "hint": "Consider how to ensure the query aligns with the intended report grain.",
+      "help": {
+        "concept": "Correct grouping practices ensure the query aligns with the intended report grain.",
+        "hint_1": "Ensure all selected columns are either aggregated or part of the `GROUP BY`.",
+        "hint_2": "Avoid including non-aggregated columns that aren't in the `GROUP BY` clause."
+      },
+      "options": [
+        "Include all columns in the `SELECT` statement in the `GROUP BY` clause",
+        "Use aggregate functions for columns not in the `GROUP BY` clause",
+        "Include non-aggregated columns not in the `GROUP BY` clause",
+        "Ensure the `GROUP BY` clause matches the intended report grain"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "d"
+      ]
+    },
+    {
+      "id": "quiz4",
+      "kind": "drag_reorder",
+      "title": "Steps to Correct Grouping",
+      "prompt": "Arrange the steps to correct a SQL query with grouping mistakes.",
+      "hint": "Start by identifying the columns that need to be aggregated or grouped.",
+      "help": {
+        "concept": "Correcting grouping mistakes involves ensuring all selected columns are aggregated or grouped.",
+        "hint_1": "Identify columns that are not aggregated or grouped.",
+        "hint_2": "Adjust the `SELECT` and `GROUP BY` clauses to align with the report grain."
+      },
+      "tokens": [
+        "Identify non-aggregated columns",
+        "Add necessary columns to `GROUP BY`",
+        "Use aggregate functions for non-grouped columns",
+        "Ensure report grain matches `GROUP BY`"
+      ],
+      "correctOrder": [
+        "Identify non-aggregated columns",
+        "Add necessary columns to `GROUP BY`",
+        "Use aggregate functions for non-grouped columns",
+        "Ensure report grain matches `GROUP BY`"
+      ]
+    },
+    {
+      "id": "quiz5",
+      "kind": "fill_blank_choice",
+      "title": "Grouping and Aggregation",
+      "prompt": "In a SQL query, the `GROUP BY` clause is used to group rows that have the same values in specified columns into summary rows, like \"total sales by region\". The `SELECT` statement must include either aggregate functions or columns that are part of the `[blank1]`.",
+      "hint": "Think about what the `GROUP BY` clause does in a query.",
+      "help": {
+        "concept": "The `GROUP BY` clause groups rows with the same values into summary rows.",
+        "hint_1": "Columns in the `SELECT` statement should be part of this clause or aggregated.",
+        "hint_2": "This clause determines how rows are grouped in the result."
+      },
+      "template": "In a SQL query, the `GROUP BY` clause is used to group rows that have the same values in specified columns into summary rows, like \"total sales by region\". The `SELECT` statement must include either aggregate functions or columns that are part of the `[blank1]`.",
+      "choices": [
+        "GROUP BY",
+        "ORDER BY",
+        "WHERE",
+        "HAVING"
+      ],
+      "correctValue": "GROUP BY"
+    },
+    {
+      "id": "quiz6",
+      "kind": "fill_blank_choice",
+      "title": "Report Grain Definition",
+      "prompt": "The report grain in a SQL query defines the level of detail for each row in the result set. It is determined by the columns specified in the `[blank1]` clause.",
+      "hint": "Consider which clause determines the grouping of rows.",
+      "help": {
+        "concept": "The report grain is determined by the columns in the `GROUP BY` clause.",
+        "hint_1": "This clause specifies how rows are grouped in the result set.",
+        "hint_2": "It defines the level of detail for each row."
+      },
+      "template": "The report grain in a SQL query defines the level of detail for each row in the result set. It is determined by the columns specified in the `[blank1]` clause.",
+      "choices": [
+        "GROUP BY",
+        "ORDER BY",
+        "SELECT",
+        "WHERE"
+      ],
+      "correctValue": "GROUP BY"
+    }
+  ],
+  "projectDraft": {
+    "title": "Region and Category Scorecard",
+    "stepIds": [
+      "try-avoiding-grouping-mistakes-sketch0",
+      "try-avoiding-grouping-mistakes-sketch1"
+    ]
+  }
+}

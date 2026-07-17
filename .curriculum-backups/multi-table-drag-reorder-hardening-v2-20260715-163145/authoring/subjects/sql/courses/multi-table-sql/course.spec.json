@@ -1,0 +1,1723 @@
+{
+  "authoringFormatVersion": "2.0",
+  "subjectSlug": "sql",
+  "courseSlug": "multi-table-sql",
+  "catalogSlug": "sql",
+  "trackSlug": "sql",
+  "profileId": "sql",
+  "workspaceProfileId": "browser-sql-runner",
+  "workspacePolicyId": "sql-browser-workspace",
+  "courseNumber": 3,
+  "title": "Multi-Table SQL & Joins",
+  "subtitle": "Follow relationship paths, preserve unmatched rows, and build accurate reports across related tables.",
+  "description": "A focused SQLite course with three standard modules and one final capstone. Learners move directly from single-table reporting into INNER JOIN, multi-table relationship paths, LEFT JOIN, anti-joins, and join-aware counting without repeating earlier SELECT, filtering, alias, aggregate, or GROUP BY lessons.",
+  "level": "beginner",
+  "sourceLocale": "en",
+  "targetLocales": [],
+  "accessPolicy": "paid",
+  "moduleAccessOverrideDefault": null,
+  "moduleCount": 4,
+  "moduleRange": {
+    "start": 0,
+    "end": 3,
+    "label": "Modules 0-3"
+  },
+  "prerequisites": [
+    "Write reliable SELECT, WHERE, ORDER BY, and LIMIT queries.",
+    "Use aliases, NULL checks, CASE, aggregate functions, GROUP BY, and HAVING.",
+    "State what one result row represents before validating a report.",
+    "Read table and column names in the schema browser."
+  ],
+  "intendedFor": "Learners who completed SQL Foundations and SQL Analysis & Reporting and are ready to query normalized relational data.",
+  "learningGoals": [
+    "Read primary-key and foreign-key relationships in a relational schema.",
+    "Write reliable INNER JOIN and LEFT JOIN queries with explicit ON conditions.",
+    "Follow relationship paths through bridge tables across three or four tables.",
+    "Preserve unmatched rows and find missing relationships intentionally.",
+    "Count related rows and unique entities without duplicate inflation.",
+    "Complete three cumulative module projects and one integrated multi-table capstone."
+  ],
+  "versioning": {
+    "family": "multi-table-sql",
+    "version": 1,
+    "status": "draft",
+    "defaultForNewEnrollments": false,
+    "supersedes": null,
+    "supersededBy": null
+  },
+  "practiceDefaults": {
+    "tryIt": true,
+    "requiresTryIt": true,
+    "tryItPlacement": "all_sketches",
+    "runtimeMode": "sql_workspace",
+    "expectedPracticeKinds": [
+      "code_input"
+    ]
+  },
+  "courseOverview": {
+    "recommendedSequence": "Complete the three standard modules in order—join foundations, longer relationship paths, then outer joins and accurate counts—before the final capstone.",
+    "summary": "Learners move directly from one-table reporting into relationship-driven SQL. The course is intentionally four modules so aliases, ON clauses, and individual join variants are not stretched into repetitive standalone modules.",
+    "moduleSummary": [
+      {
+        "moduleNumber": 0,
+        "title": "Join Foundations",
+        "coreSkill": "Read keys and write reliable two-table INNER JOIN queries.",
+        "outputFocus": "Build a Student Enrollment Activity Roster."
+      },
+      {
+        "moduleNumber": 1,
+        "title": "Following Relationship Paths",
+        "coreSkill": "Follow bridge tables across three and four related tables without accidental row multiplication.",
+        "outputFocus": "Build a Course Enrollment Directory."
+      },
+      {
+        "moduleNumber": 2,
+        "title": "Outer Joins and Accurate Counts",
+        "coreSkill": "Preserve unmatched rows and calculate trustworthy relationship counts.",
+        "outputFocus": "Build a Department Participation Scorecard."
+      },
+      {
+        "moduleNumber": 3,
+        "title": "Final Capstone",
+        "coreSkill": "Integrate relationship paths, LEFT JOIN, grain, and distinct counts in one final report.",
+        "outputFocus": "Complete the School Program Participation Report."
+      }
+    ]
+  },
+  "courseGenerationPolicy": {
+    "studentActionStyle": "browser_sql_workspace",
+    "forbidUnavailableWorkspaceActions": true,
+    "avoidTerms": [
+      "terminal",
+      "command line",
+      "SQL file",
+      "run the file",
+      "relearn SELECT",
+      "relearn WHERE",
+      "relearn GROUP BY"
+    ],
+    "preferredTerms": {
+      "editor": "SQL editor",
+      "run": "click Run query",
+      "output": "results table",
+      "relationship path": "the key path connecting the requested tables",
+      "result grain": "what one result row represents"
+    },
+    "notes": [
+      "This course has four modules total: three standard modules plus one final capstone. Do not expand it to five modules by splitting aliases, ON, or individual join variants into repetitive lessons.",
+      "Do not create standalone lessons that re-teach SELECT, WHERE, ORDER BY, aliases, aggregate functions, GROUP BY, HAVING, NULL, CASE, or deterministic sorting. Use those only as previously learned tools inside a new join problem.",
+      "Every technical lesson has exactly two distinct sketches and two aligned code_input Try It exercises.",
+      "Worked examples, Try It tasks, module projects, and capstone steps must use different relationship questions and output goals.",
+      "Each standard module has exactly one progressive module project. Only the final topic is rendered as a capstone.",
+      "A progressive SQL step contains one cumulative replacement SELECT statement. The next starter equals the previous full solution.",
+      "Every join must follow a documented school_relations_intro relationship. Never join columns merely because both are named id.",
+      "Teach report grain and row multiplication only in the context of joins; do not repeat the previous course general GROUP BY lessons.",
+      "Do not introduce subqueries, CTEs, window functions, self joins, CROSS JOIN, RIGHT JOIN, FULL JOIN, or mutation SQL.",
+      "Use ERD and schema visuals for relationship decisions. All graded SQL must execute against school_relations_intro."
+    ]
+  },
+  "validationPolicy": {
+    "policyId": "multi-table-sql-validation",
+    "allowedConcepts": [
+      "SELECT",
+      "FROM",
+      "WHERE",
+      "comparison operators",
+      "AND",
+      "OR",
+      "NOT",
+      "ORDER BY",
+      "ASC",
+      "DESC",
+      "LIMIT",
+      "LIKE",
+      "IN",
+      "NOT IN",
+      "BETWEEN",
+      "IS NULL",
+      "IS NOT NULL",
+      "AS",
+      "DISTINCT",
+      "arithmetic expressions",
+      "parentheses",
+      "ROUND",
+      "COALESCE",
+      "CASE",
+      "COUNT",
+      "SUM",
+      "AVG",
+      "MIN",
+      "MAX",
+      "GROUP BY",
+      "HAVING",
+      "conditional aggregation",
+      "report grain",
+      "deterministic sorting",
+      "JOIN",
+      "INNER JOIN",
+      "LEFT JOIN",
+      "ON",
+      "primary key",
+      "foreign key",
+      "table aliases",
+      "qualified columns",
+      "one-to-many relationships",
+      "many-to-many relationships",
+      "bridge table",
+      "anti-join",
+      "COUNT(DISTINCT)",
+      "join-generated NULL",
+      "row multiplication"
+    ],
+    "disallowedConcepts": [
+      "RIGHT JOIN",
+      "FULL JOIN",
+      "CROSS JOIN",
+      "NATURAL JOIN",
+      "self join",
+      "subquery",
+      "CTE",
+      "WITH",
+      "window functions",
+      "OVER",
+      "PARTITION BY",
+      "UNION",
+      "INTERSECT",
+      "EXCEPT",
+      "INSERT",
+      "UPDATE",
+      "DELETE",
+      "CREATE TABLE",
+      "ALTER TABLE",
+      "DROP TABLE"
+    ],
+    "datasets": [
+      "school_relations_intro"
+    ],
+    "datasetContracts": {
+      "school_relations_intro": {
+        "tables": {
+          "students": {
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER",
+                "nullable": false
+              },
+              {
+                "name": "name",
+                "type": "TEXT",
+                "nullable": false
+              },
+              {
+                "name": "grade_level",
+                "type": "INTEGER",
+                "nullable": false
+              }
+            ]
+          },
+          "departments": {
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER",
+                "nullable": false
+              },
+              {
+                "name": "name",
+                "type": "TEXT",
+                "nullable": false
+              }
+            ]
+          },
+          "courses": {
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER",
+                "nullable": false
+              },
+              {
+                "name": "title",
+                "type": "TEXT",
+                "nullable": false
+              },
+              {
+                "name": "department_id",
+                "type": "INTEGER",
+                "nullable": false
+              }
+            ]
+          },
+          "enrollments": {
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER",
+                "nullable": false
+              },
+              {
+                "name": "student_id",
+                "type": "INTEGER",
+                "nullable": false
+              },
+              {
+                "name": "course_id",
+                "type": "INTEGER",
+                "nullable": false
+              },
+              {
+                "name": "term",
+                "type": "TEXT",
+                "nullable": false
+              }
+            ]
+          }
+        },
+        "relationships": [
+          {
+            "fromTable": "courses",
+            "fromColumn": "department_id",
+            "toTable": "departments",
+            "toColumn": "id",
+            "cardinality": "many-to-one"
+          },
+          {
+            "fromTable": "enrollments",
+            "fromColumn": "student_id",
+            "toTable": "students",
+            "toColumn": "id",
+            "cardinality": "many-to-one"
+          },
+          {
+            "fromTable": "enrollments",
+            "fromColumn": "course_id",
+            "toTable": "courses",
+            "toColumn": "id",
+            "cardinality": "many-to-one"
+          }
+        ],
+        "requiredDataCharacteristics": [
+          "At least one student has no enrollment so LEFT JOIN and anti-join results are non-empty.",
+          "At least one course has no enrollment so missing-course audits are non-empty.",
+          "At least one department has no course so all-department LEFT JOIN reports include a zero-count row.",
+          "At least one student has multiple enrollments so row multiplication and COUNT(DISTINCT) can be demonstrated.",
+          "At least one department owns multiple courses so one-to-many grouping is meaningful."
+        ]
+      }
+    },
+    "globalRules": [
+      "Every technical sketch must have a required embedded Try It.",
+      "Try It IDs and exercise keys must start with try- and follow try-<topic-id>-sketchN.",
+      "Every standard module must contain exactly one role=module_project section.",
+      "The final module must contain exactly one role=capstone section and one visible capstone topic.",
+      "Module project and capstone step N+1 starterCode must equal step N solutionCode.",
+      "Quizzes must not contain code_input.",
+      "Every JOIN must include an ON condition matching a declared relationship unless the exercise is an explicitly marked broken-query diagnosis.",
+      "Every expected result must be generated from school_relations_intro.",
+      "Every multi-table SELECT must qualify duplicate-prone source columns.",
+      "No topic may exist solely to re-teach a concept completed in SQL Foundations or SQL Analysis & Reporting.",
+      "When output order matters, expected rows must be order-stable and the query must include deterministic tie-breaking."
+    ],
+    "moduleRules": {
+      "0": {
+        "notes": [
+          "Use only two-table INNER JOINs in teaching and project work.",
+          "The relationship-key topic may inspect tables separately before the first JOIN."
+        ],
+        "allowedConcepts": [
+          "all prerequisite single-table concepts",
+          "JOIN",
+          "INNER JOIN",
+          "ON",
+          "primary key",
+          "foreign key",
+          "qualified columns",
+          "table aliases"
+        ],
+        "forbiddenConcepts": [
+          "LEFT JOIN",
+          "anti-join",
+          "three-table joins",
+          "four-table joins",
+          "subquery",
+          "CTE",
+          "window functions",
+          "mutation SQL"
+        ]
+      },
+      "1": {
+        "notes": [
+          "Teach longer INNER JOIN paths one documented relationship at a time.",
+          "Keep one result row per enrollment unless a prompt explicitly states another grain."
+        ],
+        "allowedConcepts": [
+          "all Module 0 concepts",
+          "one-to-many relationships",
+          "many-to-many relationships",
+          "bridge table",
+          "three-table joins",
+          "four-table joins",
+          "row multiplication"
+        ],
+        "forbiddenConcepts": [
+          "LEFT JOIN",
+          "anti-join",
+          "subquery",
+          "CTE",
+          "window functions",
+          "mutation SQL"
+        ]
+      },
+      "2": {
+        "notes": [
+          "LEFT JOIN starts from the entity the report must preserve.",
+          "Counts must use right-side identifiers and DISTINCT only when uniqueness is requested."
+        ],
+        "allowedConcepts": [
+          "all Module 0-1 concepts",
+          "LEFT JOIN",
+          "join-generated NULL",
+          "ON versus WHERE",
+          "anti-join",
+          "COUNT(right_id)",
+          "COUNT(DISTINCT)",
+          "grouped join reports",
+          "duplicate-inflation checks"
+        ],
+        "forbiddenConcepts": [
+          "RIGHT JOIN",
+          "FULL JOIN",
+          "CROSS JOIN",
+          "subquery",
+          "CTE",
+          "window functions",
+          "mutation SQL"
+        ]
+      },
+      "3": {
+        "notes": [
+          "The capstone integrates the complete course without adding a new SQL construct.",
+          "Every step preserves all departments and one-row-per-department grain."
+        ],
+        "allowedConcepts": [
+          "all course concepts",
+          "relationship planning",
+          "result validation",
+          "business interpretation"
+        ],
+        "forbiddenConcepts": [
+          "RIGHT JOIN",
+          "FULL JOIN",
+          "CROSS JOIN",
+          "NATURAL JOIN",
+          "self join",
+          "subquery",
+          "CTE",
+          "WITH",
+          "window functions",
+          "OVER",
+          "PARTITION BY",
+          "UNION",
+          "INTERSECT",
+          "EXCEPT",
+          "INSERT",
+          "UPDATE",
+          "DELETE",
+          "CREATE TABLE",
+          "ALTER TABLE",
+          "DROP TABLE"
+        ]
+      }
+    },
+    "validationRequirements": {
+      "goldenTestsRequired": true,
+      "requireMappedImages": true,
+      "requireResolvedI18n": true,
+      "requireTryItPrefix": true,
+      "requireTryItOnAllTechnicalSketches": true,
+      "requireQuizNoCodeInput": true,
+      "requireExactlyOneModuleProjectPerStandardModule": true,
+      "requireFinalCapstone": true,
+      "requireCapstoneRubric": true,
+      "requireProjectStepChaining": true,
+      "requireJoinRelationshipMetadata": true,
+      "requireErdOrTableRelationshipVisuals": true,
+      "requireJoinConditionForEveryJoin": true,
+      "requireDuplicateRowTeachingChecks": true,
+      "requireQualifiedColumnsInMultiTableQueries": true,
+      "requireNonEmptySqlResults": true,
+      "allowIntentionalEmptyOnlyWhenDeclared": true,
+      "requireUniqueLearnerPrompts": true,
+      "requireNoGenericRepairText": true,
+      "forbidStandalonePrerequisiteReviewTopics": true
+    }
+  },
+  "modules": [
+    {
+      "moduleNumber": 0,
+      "moduleSlug": "multi-table-sql-module-0-join-foundations",
+      "role": "standard",
+      "prefix": "multi_table_sql_module_0",
+      "title": "Join Foundations",
+      "description": "Read relationship keys and write reliable two-table INNER JOIN queries without re-teaching single-table SQL.",
+      "purpose": "Bridge from one-table reporting to relational queries by making each ON condition explicit and verifiable.",
+      "datasetId": "school_relations_intro",
+      "learningObjectives": [
+        "Trace primary-key and foreign-key relationships in the ERD.",
+        "Use INNER JOIN and ON to connect matching rows.",
+        "Qualify columns when multiple tables contain similar names.",
+        "Use concise table aliases without hiding the relationship logic."
+      ],
+      "guidedExercises": [
+        "Match course department_id values to department ids.",
+        "Connect students to enrollment records.",
+        "Repair ambiguous and unqualified joined columns.",
+        "Build a two-table student enrollment roster in five cumulative steps."
+      ],
+      "quizFocus": [
+        "primary and foreign keys",
+        "INNER JOIN",
+        "ON conditions",
+        "qualified columns",
+        "table aliases"
+      ],
+      "moduleProject": "Build a Student Enrollment Activity Roster from students and enrollments.",
+      "sections": [
+        {
+          "sectionSlug": "multi-table-sql-section-0-relationship-keys",
+          "title": "Relationship Keys",
+          "description": "Use the schema and ERD to identify which columns can connect tables.",
+          "topics": [
+            {
+              "topicId": "reading-keys-and-relationships",
+              "title": "Reading Keys and Relationships",
+              "summary": "Trace documented primary-key and foreign-key pairs before writing a join.",
+              "minutes": 24,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Identify the primary key on each table in the course dataset.",
+                "Match courses.department_id to departments.id and enrollment foreign keys to their parent tables.",
+                "Explain why columns with similar values are not automatically a valid relationship."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "sql_workspace",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "inner-join-with-on",
+              "title": "INNER JOIN with ON",
+              "summary": "Connect matching rows with one explicit relationship condition.",
+              "minutes": 26,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Write an INNER JOIN between two related tables.",
+                "Place the key comparison in an ON clause.",
+                "Predict which unmatched rows an INNER JOIN removes."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "sql_workspace",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ]
+              }
+            }
+          ],
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches",
+            "runtimeMode": "sql_workspace",
+            "expectedPracticeKinds": [
+              "code_input"
+            ]
+          }
+        },
+        {
+          "sectionSlug": "multi-table-sql-section-0-readable-joins",
+          "title": "Readable Join Queries",
+          "description": "Keep joined queries unambiguous as more columns appear.",
+          "topics": [
+            {
+              "topicId": "qualifying-columns-across-tables",
+              "title": "Qualifying Columns Across Tables",
+              "summary": "Use table-qualified column references so SQL and readers know which source each value comes from.",
+              "minutes": 24,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Qualify selected columns with a table name or alias.",
+                "Resolve ambiguous id and name references.",
+                "Keep output aliases separate from source qualification."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "sql_workspace",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "table-aliases-for-join-queries",
+              "title": "Table Aliases for Join Queries",
+              "summary": "Shorten table references while preserving a visible relationship path.",
+              "minutes": 24,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Assign concise aliases in FROM and JOIN clauses.",
+                "Use the same aliases consistently in SELECT and ON.",
+                "Choose aliases that remain readable in multi-line SQL."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "sql_workspace",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ]
+              }
+            }
+          ],
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches",
+            "runtimeMode": "sql_workspace",
+            "expectedPracticeKinds": [
+              "code_input"
+            ]
+          }
+        },
+        {
+          "sectionSlug": "multi-table-sql-section-0-module-project",
+          "title": "Module Project",
+          "description": "Build one dependable two-table roster without discarding earlier work.",
+          "topics": [
+            {
+              "topicId": "module-0-student-enrollment-roster",
+              "title": "Module 0 Project: Student Enrollment Activity Roster",
+              "summary": "Build a qualified and readable student-enrollment roster through five cumulative join steps.",
+              "minutes": 55,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Preserve the correct students-to-enrollments relationship through every step.",
+                "Keep one result row per enrollment record.",
+                "Finish with exact aliases, a focused filter, and deterministic sorting."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "sql_workspace",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ],
+                "projectFlow": "progressive"
+              },
+              "projectBrief": {
+                "scenario": "The registrar needs a dependable enrollment activity list that connects each enrollment record to the correct student without duplicating or losing rows.",
+                "role": "Junior data analyst",
+                "workspace": "Browser SQL editor, schema browser, ERD, and deterministic results table",
+                "deliverable": "One two-table enrollment roster with qualified columns, readable aliases, a grade-level filter, and stable ordering.",
+                "stepCountTarget": 5,
+                "flow": "progressive",
+                "requirements": [
+                  "Keep one valid SELECT statement in every step.",
+                  "Join students to enrollments only through students.id = enrollments.student_id.",
+                  "Use the previous full solution as the next starter query.",
+                  "Preserve every earlier requirement unless the current step explicitly replaces it.",
+                  "Do not introduce LEFT JOIN, subqueries, CTEs, window functions, or mutation SQL."
+                ],
+                "stepLadder": [
+                  {
+                    "step": 1,
+                    "title": "Connect Students to Enrollment Records",
+                    "requirement": "Use an INNER JOIN to connect students and enrollments. Return student id, student name, enrollment id, course id, and term."
+                  },
+                  {
+                    "step": 2,
+                    "title": "Qualify Every Shared Identifier",
+                    "requirement": "Keep the same rows and qualify every selected id column with its table name or alias."
+                  },
+                  {
+                    "step": 3,
+                    "title": "Add Readable Table and Column Aliases",
+                    "requirement": "Use concise table aliases and rename the displayed identifiers as student_id, enrollment_id, and course_id."
+                  },
+                  {
+                    "step": 4,
+                    "title": "Focus on Upper Grade Levels",
+                    "requirement": "Keep the complete joined roster and include only students in grade level 10 or higher."
+                  },
+                  {
+                    "step": 5,
+                    "title": "Order the Roster Predictably",
+                    "requirement": "Sort by student name ascending, then course_id ascending, while preserving the complete query."
+                  }
+                ]
+              }
+            }
+          ],
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches",
+            "runtimeMode": "sql_workspace",
+            "expectedPracticeKinds": [
+              "code_input"
+            ],
+            "projectFlow": "progressive"
+          },
+          "role": "module_project"
+        }
+      ]
+    },
+    {
+      "moduleNumber": 1,
+      "moduleSlug": "multi-table-sql-module-1-relationship-paths",
+      "role": "standard",
+      "prefix": "multi_table_sql_module_1",
+      "title": "Following Relationship Paths",
+      "description": "Move through bridge tables and extend a query across three or four related tables without creating accidental row combinations.",
+      "purpose": "Teach learners to reason about the path between requested fields rather than adding JOIN clauses by trial and error.",
+      "datasetId": "school_relations_intro",
+      "learningObjectives": [
+        "Distinguish one-to-many and many-to-many result behavior.",
+        "Use enrollments as a bridge between students and courses.",
+        "Extend a valid join path one relationship at a time.",
+        "Detect missing, reversed, or unrelated ON conditions."
+      ],
+      "guidedExercises": [
+        "Connect courses to their departments.",
+        "Follow students through enrollments to courses.",
+        "Extend a three-table query to department details.",
+        "Diagnose a Cartesian result and a wrong-key join.",
+        "Build a four-table course enrollment directory."
+      ],
+      "quizFocus": [
+        "one-to-many results",
+        "many-to-many bridge tables",
+        "multi-join paths",
+        "row grain",
+        "Cartesian products"
+      ],
+      "moduleProject": "Build a Course Enrollment Directory across departments, courses, enrollments, and students.",
+      "sections": [
+        {
+          "sectionSlug": "multi-table-sql-section-1-relationship-shapes",
+          "title": "Relationship Shapes",
+          "description": "Understand how relationship cardinality changes the result rows.",
+          "topics": [
+            {
+              "topicId": "one-to-many-and-many-to-many-results",
+              "title": "One-to-Many and Many-to-Many Results",
+              "summary": "Predict why one parent row may appear several times after joining to related detail rows.",
+              "minutes": 26,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Describe what one result row represents after a one-to-many join.",
+                "Explain why a student can appear once per enrollment.",
+                "Recognize enrollments as the bridge between students and courses."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "sql_workspace",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "joining-through-a-bridge-table",
+              "title": "Joining Through a Bridge Table",
+              "summary": "Connect two entity tables through the enrollment records that relate them.",
+              "minutes": 28,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Join students to enrollments and then to courses.",
+                "Use one ON clause for each relationship in the path.",
+                "Keep the intended one-row-per-enrollment grain visible."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "sql_workspace",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ]
+              }
+            }
+          ],
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches",
+            "runtimeMode": "sql_workspace",
+            "expectedPracticeKinds": [
+              "code_input"
+            ]
+          }
+        },
+        {
+          "sectionSlug": "multi-table-sql-section-1-longer-joins",
+          "title": "Longer Join Paths",
+          "description": "Extend and debug longer relational queries.",
+          "topics": [
+            {
+              "topicId": "extending-a-join-path",
+              "title": "Extending a Join Path",
+              "summary": "Add one related table to an already-correct join without rewriting the query from scratch.",
+              "minutes": 26,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Extend students-enrollments-courses to departments.",
+                "Select descriptive columns from each table with clear qualification.",
+                "Verify that each added JOIN follows an ERD relationship."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "sql_workspace",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "avoiding-cartesian-and-wrong-key-joins",
+              "title": "Avoiding Cartesian and Wrong-Key Joins",
+              "summary": "Diagnose results that multiply unexpectedly or match unrelated identifiers.",
+              "minutes": 28,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Recognize the symptoms of a missing ON clause.",
+                "Reject joins that compare unrelated id columns.",
+                "Use expected row grain and sample values to verify a join path."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "sql_workspace",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ]
+              }
+            }
+          ],
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches",
+            "runtimeMode": "sql_workspace",
+            "expectedPracticeKinds": [
+              "code_input"
+            ]
+          }
+        },
+        {
+          "sectionSlug": "multi-table-sql-section-1-module-project",
+          "title": "Module Project",
+          "description": "Build one four-table directory by extending a correct relationship path.",
+          "topics": [
+            {
+              "topicId": "module-1-course-enrollment-directory",
+              "title": "Module 1 Project: Course Enrollment Directory",
+              "summary": "Build a department-to-student enrollment directory through five cumulative multi-table steps.",
+              "minutes": 65,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Preserve one result row per enrollment through every step.",
+                "Follow the complete documented relationship path.",
+                "Finish with exact aliases and deterministic directory ordering."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "sql_workspace",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ],
+                "projectFlow": "progressive"
+              },
+              "projectBrief": {
+                "scenario": "The academic office needs a course enrollment directory that shows who is taking each course and which department owns it.",
+                "role": "Reporting analyst",
+                "workspace": "Browser SQL editor, schema browser, ERD, and deterministic results table",
+                "deliverable": "One four-table course enrollment directory with a correct relationship path and readable output.",
+                "stepCountTarget": 5,
+                "flow": "progressive",
+                "requirements": [
+                  "Keep one valid SELECT statement in every step.",
+                  "Follow the relationship path departments → courses → enrollments → students.",
+                  "Use each ON clause for one documented key relationship.",
+                  "Use the previous full solution as the next starter query.",
+                  "Do not use LEFT JOIN, subqueries, CTEs, window functions, or mutation SQL."
+                ],
+                "stepLadder": [
+                  {
+                    "step": 1,
+                    "title": "Connect Courses to Departments",
+                    "requirement": "Join courses to departments and return course title with department name."
+                  },
+                  {
+                    "step": 2,
+                    "title": "Add Enrollment Records",
+                    "requirement": "Extend the existing query through enrollments so each result row represents one enrollment in a course."
+                  },
+                  {
+                    "step": 3,
+                    "title": "Add Student Details",
+                    "requirement": "Extend the same relationship path to students and return the student name and grade level."
+                  },
+                  {
+                    "step": 4,
+                    "title": "Clarify the Directory Output",
+                    "requirement": "Use exact aliases department, course, student, grade_level, and term without changing the row grain."
+                  },
+                  {
+                    "step": 5,
+                    "title": "Sort the Directory for Review",
+                    "requirement": "Order by department, course, and student ascending with deterministic output."
+                  }
+                ]
+              }
+            }
+          ],
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches",
+            "runtimeMode": "sql_workspace",
+            "expectedPracticeKinds": [
+              "code_input"
+            ],
+            "projectFlow": "progressive"
+          },
+          "role": "module_project"
+        }
+      ]
+    },
+    {
+      "moduleNumber": 2,
+      "moduleSlug": "multi-table-sql-module-2-outer-joins-and-accurate-counts",
+      "role": "standard",
+      "prefix": "multi_table_sql_module_2",
+      "title": "Outer Joins and Accurate Counts",
+      "description": "Preserve unmatched rows, place filters safely, find missing relationships, and count related records without inflating metrics.",
+      "purpose": "Combine join reasoning with reporting skills from the previous course while focusing only on new multi-table failure modes.",
+      "datasetId": "school_relations_intro",
+      "learningObjectives": [
+        "Use LEFT JOIN to preserve every row from the chosen starting table.",
+        "Explain how WHERE can accidentally remove unmatched LEFT JOIN rows.",
+        "Find entities with no related records using an anti-join pattern.",
+        "Use COUNT(right_id) and COUNT(DISTINCT ...) at the intended result grain."
+      ],
+      "guidedExercises": [
+        "Keep all students while showing available enrollment details.",
+        "Compare a right-table condition in ON with the same condition in WHERE.",
+        "Find courses with no enrollments and departments with no courses.",
+        "Count courses, enrollment rows, and unique students by department.",
+        "Build an all-department participation scorecard."
+      ],
+      "quizFocus": [
+        "LEFT JOIN",
+        "join-generated NULL",
+        "ON versus WHERE",
+        "anti-join",
+        "COUNT(column)",
+        "COUNT DISTINCT",
+        "duplicate inflation"
+      ],
+      "moduleProject": "Build a Department Participation Scorecard that preserves inactive departments and reports accurate counts.",
+      "sections": [
+        {
+          "sectionSlug": "multi-table-sql-section-2-preserving-rows",
+          "title": "Preserving Unmatched Rows",
+          "description": "Use LEFT JOIN intentionally and keep its unmatched rows visible.",
+          "topics": [
+            {
+              "topicId": "left-join-preserves-unmatched-rows",
+              "title": "LEFT JOIN Preserves Unmatched Rows",
+              "summary": "Choose a starting table and keep every row even when no related record exists.",
+              "minutes": 26,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Identify the preserved left side of a LEFT JOIN.",
+                "Explain why unmatched right-side columns appear as NULL.",
+                "Choose INNER JOIN or LEFT JOIN from the report requirement."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "sql_workspace",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "filtering-left-joins-with-on-and-where",
+              "title": "Filtering LEFT JOINs with ON and WHERE",
+              "summary": "Place right-table conditions according to whether unmatched left rows must survive.",
+              "minutes": 30,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Compare a right-table filter inside ON with the same filter in WHERE.",
+                "Explain why WHERE right_column = value can remove unmatched rows.",
+                "Preserve all left rows while limiting which right rows can match."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "sql_workspace",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ]
+              }
+            }
+          ],
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches",
+            "runtimeMode": "sql_workspace",
+            "expectedPracticeKinds": [
+              "code_input"
+            ]
+          }
+        },
+        {
+          "sectionSlug": "multi-table-sql-section-2-missing-and-counts",
+          "title": "Missing Relationships and Counts",
+          "description": "Turn unmatched rows into useful audits and reliable grouped metrics.",
+          "topics": [
+            {
+              "topicId": "finding-missing-relationships",
+              "title": "Finding Missing Relationships",
+              "summary": "Use LEFT JOIN plus a right-side IS NULL check to locate missing related records.",
+              "minutes": 26,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Find students without enrollments.",
+                "Find courses without enrollment records.",
+                "Explain why the NULL test targets the joined table key."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "sql_workspace",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "counting-related-rows-without-inflation",
+              "title": "Counting Related Rows Without Inflation",
+              "summary": "Count matched rows and unique entities without allowing join multiplication to distort a report.",
+              "minutes": 32,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Use COUNT(right_table.id) so unmatched rows produce zero.",
+                "Use COUNT(DISTINCT entity_id) for unique-entity metrics.",
+                "State the grouped result grain before choosing a count expression."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "sql_workspace",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ]
+              }
+            }
+          ],
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches",
+            "runtimeMode": "sql_workspace",
+            "expectedPracticeKinds": [
+              "code_input"
+            ]
+          }
+        },
+        {
+          "sectionSlug": "multi-table-sql-section-2-module-project",
+          "title": "Module Project",
+          "description": "Build one all-department scorecard with trustworthy relationship counts.",
+          "topics": [
+            {
+              "topicId": "module-2-department-participation-scorecard",
+              "title": "Module 2 Project: Department Participation Scorecard",
+              "summary": "Build an all-department scorecard with course, enrollment, and distinct-student counts in six cumulative steps.",
+              "minutes": 75,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Preserve every department through every LEFT JOIN.",
+                "Keep one result row per department.",
+                "Finish with accurate counts and deterministic ranking."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "sql_workspace",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ],
+                "projectFlow": "progressive"
+              },
+              "projectBrief": {
+                "scenario": "School leadership wants a department participation scorecard that includes departments with no courses and courses with no enrollments.",
+                "role": "Data quality analyst",
+                "workspace": "Browser SQL editor, schema browser, ERD, and deterministic results table",
+                "deliverable": "One all-department scorecard with accurate course, enrollment, and distinct-student counts.",
+                "stepCountTarget": 6,
+                "flow": "progressive",
+                "requirements": [
+                  "Begin from departments and preserve every department with LEFT JOIN.",
+                  "Use COUNT on right-side identifiers so unmatched rows count as zero.",
+                  "Use COUNT(DISTINCT ...) only where the requested metric requires unique entities.",
+                  "State and preserve one result row per department.",
+                  "Use the previous full solution as the next starter query.",
+                  "Do not use subqueries, CTEs, window functions, or mutation SQL."
+                ],
+                "stepLadder": [
+                  {
+                    "step": 1,
+                    "title": "Preserve Every Department",
+                    "requirement": "Start from departments and LEFT JOIN courses so Arts remains visible even without a course."
+                  },
+                  {
+                    "step": 2,
+                    "title": "Count Courses Correctly",
+                    "requirement": "Group at one row per department and add COUNT(DISTINCT c.id) as course_count so later enrollment joins cannot inflate the course total."
+                  },
+                  {
+                    "step": 3,
+                    "title": "Extend to Enrollment Records",
+                    "requirement": "LEFT JOIN enrollments through courses while preserving all departments."
+                  },
+                  {
+                    "step": 4,
+                    "title": "Count Enrollment Rows",
+                    "requirement": "Add COUNT(e.id) as enrollment_count without changing the department grain."
+                  },
+                  {
+                    "step": 5,
+                    "title": "Count Unique Students",
+                    "requirement": "Add COUNT(DISTINCT e.student_id) as student_count so one student enrolled in multiple courses is counted once per department."
+                  },
+                  {
+                    "step": 6,
+                    "title": "Rank the Scorecard Predictably",
+                    "requirement": "Sort by enrollment_count descending, then department ascending."
+                  }
+                ]
+              }
+            }
+          ],
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches",
+            "runtimeMode": "sql_workspace",
+            "expectedPracticeKinds": [
+              "code_input"
+            ],
+            "projectFlow": "progressive"
+          },
+          "role": "module_project"
+        }
+      ]
+    },
+    {
+      "moduleNumber": 3,
+      "moduleSlug": "multi-table-sql-module-3-final-capstone",
+      "role": "capstone",
+      "prefix": "multi_table_sql_module_3",
+      "title": "Final Capstone",
+      "description": "Build one complete school-program participation report that preserves inactive departments and reports trustworthy multi-table metrics.",
+      "purpose": "Integrate relationship paths, LEFT JOIN, join-aware grain, and accurate counting in one portfolio-quality query.",
+      "datasetId": "school_relations_intro",
+      "learningObjectives": [
+        "Plan a relationship path from requested output back to the required tables.",
+        "Preserve all departments while joining courses and enrollments.",
+        "Calculate course, enrollment, and unique-student counts at one-row-per-department grain.",
+        "Add a clear participation label and deterministic ranking."
+      ],
+      "guidedExercises": [
+        "Preview the department-to-course relationship before the capstone.",
+        "Build the full report in four cumulative steps.",
+        "Validate unmatched departments, count logic, aliases, grain, and order."
+      ],
+      "quizFocus": [],
+      "moduleProject": "Build the final School Program Participation Report.",
+      "sections": [
+        {
+          "sectionSlug": "multi-table-sql-section-3-final-capstone",
+          "title": "Final Capstone",
+          "description": "Complete one focused multi-table report from brief to final validated query.",
+          "topics": [
+            {
+              "topicId": "final-school-program-participation-report",
+              "title": "Final Capstone: School Program Participation Report",
+              "summary": "Build one all-department participation report through a relationship-preview Try It and four cumulative capstone steps.",
+              "minutes": 110,
+              "difficulty": "intermediate",
+              "technical": true,
+              "learningGoals": [
+                "Preserve every department, including departments with no courses.",
+                "Keep one row per department while joining through courses to enrollments.",
+                "Calculate accurate related-row and distinct-student metrics.",
+                "Finish with a participation label and stable leadership-ready ranking."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "sql_workspace",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ],
+                "projectFlow": "progressive"
+              },
+              "projectBrief": {
+                "scenario": "The principal needs one compact school-program report that shows participation across every department, including inactive areas that would disappear in an INNER JOIN.",
+                "role": "SQL reporting specialist",
+                "workspace": "Browser SQL editor, schema browser, ERD, and deterministic results table",
+                "deliverable": "A portfolio-quality all-department participation report built through one four-step cumulative query.",
+                "stepCountTarget": 4,
+                "flow": "progressive",
+                "requirements": [
+                  "Preserve all departments from the first step through the final query.",
+                  "Use the relationship path departments → courses → enrollments and count right-side identifiers.",
+                  "Keep one row per department throughout the capstone.",
+                  "Use the previous full solution as the next starter query.",
+                  "Finish with exact aliases and deterministic ordering.",
+                  "Do not use subqueries, CTEs, window functions, or mutation SQL."
+                ],
+                "stepLadder": [
+                  {
+                    "step": 1,
+                    "title": "Establish the All-Department Grain",
+                    "requirement": "Start from departments, LEFT JOIN courses and enrollments, and group so one result row represents one department."
+                  },
+                  {
+                    "step": 2,
+                    "title": "Add Course and Enrollment Counts",
+                    "requirement": "Add course_count and enrollment_count using the correct right-side identifiers."
+                  },
+                  {
+                    "step": 3,
+                    "title": "Add Distinct Student Participation",
+                    "requirement": "Add COUNT(DISTINCT e.student_id) as student_count without changing the grain."
+                  },
+                  {
+                    "step": 4,
+                    "title": "Label and Rank Participation",
+                    "requirement": "Add participation_status with CASE: No activity when enrollment_count is zero, Broad participation when both course_count and student_count are at least 2, otherwise Active. Sort by enrollment_count descending and department ascending."
+                  }
+                ]
+              }
+            }
+          ],
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches",
+            "runtimeMode": "sql_workspace",
+            "expectedPracticeKinds": [
+              "code_input"
+            ],
+            "projectFlow": "progressive"
+          },
+          "role": "capstone"
+        }
+      ]
+    }
+  ],
+  "topicPolicies": {
+    "reading-keys-and-relationships": {
+      "teachingMode": "query-workspace",
+      "generationTargets": {
+        "quizBankMin": 6,
+        "quizBankTarget": 6,
+        "quizVisibleDefault": 4,
+        "quizVisibleMax": 6,
+        "projectCodeInputMin": 2,
+        "projectCodeInputTarget": 2,
+        "projectCodeInputMax": 2
+      }
+    },
+    "inner-join-with-on": {
+      "teachingMode": "query-workspace",
+      "generationTargets": {
+        "quizBankMin": 6,
+        "quizBankTarget": 6,
+        "quizVisibleDefault": 4,
+        "quizVisibleMax": 6,
+        "projectCodeInputMin": 2,
+        "projectCodeInputTarget": 2,
+        "projectCodeInputMax": 2
+      }
+    },
+    "qualifying-columns-across-tables": {
+      "teachingMode": "query-workspace",
+      "generationTargets": {
+        "quizBankMin": 6,
+        "quizBankTarget": 6,
+        "quizVisibleDefault": 4,
+        "quizVisibleMax": 6,
+        "projectCodeInputMin": 2,
+        "projectCodeInputTarget": 2,
+        "projectCodeInputMax": 2
+      }
+    },
+    "table-aliases-for-join-queries": {
+      "teachingMode": "query-workspace",
+      "generationTargets": {
+        "quizBankMin": 6,
+        "quizBankTarget": 6,
+        "quizVisibleDefault": 4,
+        "quizVisibleMax": 6,
+        "projectCodeInputMin": 2,
+        "projectCodeInputTarget": 2,
+        "projectCodeInputMax": 2
+      }
+    },
+    "one-to-many-and-many-to-many-results": {
+      "teachingMode": "query-workspace",
+      "generationTargets": {
+        "quizBankMin": 6,
+        "quizBankTarget": 6,
+        "quizVisibleDefault": 4,
+        "quizVisibleMax": 6,
+        "projectCodeInputMin": 2,
+        "projectCodeInputTarget": 2,
+        "projectCodeInputMax": 2
+      }
+    },
+    "joining-through-a-bridge-table": {
+      "teachingMode": "query-workspace",
+      "generationTargets": {
+        "quizBankMin": 6,
+        "quizBankTarget": 6,
+        "quizVisibleDefault": 4,
+        "quizVisibleMax": 6,
+        "projectCodeInputMin": 2,
+        "projectCodeInputTarget": 2,
+        "projectCodeInputMax": 2
+      }
+    },
+    "extending-a-join-path": {
+      "teachingMode": "query-workspace",
+      "generationTargets": {
+        "quizBankMin": 6,
+        "quizBankTarget": 6,
+        "quizVisibleDefault": 4,
+        "quizVisibleMax": 6,
+        "projectCodeInputMin": 2,
+        "projectCodeInputTarget": 2,
+        "projectCodeInputMax": 2
+      }
+    },
+    "avoiding-cartesian-and-wrong-key-joins": {
+      "teachingMode": "query-workspace",
+      "generationTargets": {
+        "quizBankMin": 6,
+        "quizBankTarget": 6,
+        "quizVisibleDefault": 4,
+        "quizVisibleMax": 6,
+        "projectCodeInputMin": 2,
+        "projectCodeInputTarget": 2,
+        "projectCodeInputMax": 2
+      }
+    },
+    "left-join-preserves-unmatched-rows": {
+      "teachingMode": "query-workspace",
+      "generationTargets": {
+        "quizBankMin": 6,
+        "quizBankTarget": 6,
+        "quizVisibleDefault": 4,
+        "quizVisibleMax": 6,
+        "projectCodeInputMin": 2,
+        "projectCodeInputTarget": 2,
+        "projectCodeInputMax": 2
+      }
+    },
+    "filtering-left-joins-with-on-and-where": {
+      "teachingMode": "query-workspace",
+      "generationTargets": {
+        "quizBankMin": 6,
+        "quizBankTarget": 6,
+        "quizVisibleDefault": 4,
+        "quizVisibleMax": 6,
+        "projectCodeInputMin": 2,
+        "projectCodeInputTarget": 2,
+        "projectCodeInputMax": 2
+      }
+    },
+    "finding-missing-relationships": {
+      "teachingMode": "query-workspace",
+      "generationTargets": {
+        "quizBankMin": 6,
+        "quizBankTarget": 6,
+        "quizVisibleDefault": 4,
+        "quizVisibleMax": 6,
+        "projectCodeInputMin": 2,
+        "projectCodeInputTarget": 2,
+        "projectCodeInputMax": 2
+      }
+    },
+    "counting-related-rows-without-inflation": {
+      "teachingMode": "query-workspace",
+      "generationTargets": {
+        "quizBankMin": 6,
+        "quizBankTarget": 6,
+        "quizVisibleDefault": 4,
+        "quizVisibleMax": 6,
+        "projectCodeInputMin": 2,
+        "projectCodeInputTarget": 2,
+        "projectCodeInputMax": 2
+      }
+    },
+    "module-0-student-enrollment-roster": {
+      "teachingMode": "progressive-project",
+      "generationTargets": {
+        "quizBankMin": 0,
+        "quizBankTarget": 0,
+        "quizVisibleDefault": 0,
+        "quizVisibleMax": 0,
+        "projectCodeInputMin": 5,
+        "projectCodeInputTarget": 5,
+        "projectCodeInputMax": 5
+      }
+    },
+    "module-1-course-enrollment-directory": {
+      "teachingMode": "progressive-project",
+      "generationTargets": {
+        "quizBankMin": 0,
+        "quizBankTarget": 0,
+        "quizVisibleDefault": 0,
+        "quizVisibleMax": 0,
+        "projectCodeInputMin": 5,
+        "projectCodeInputTarget": 5,
+        "projectCodeInputMax": 5
+      }
+    },
+    "module-2-department-participation-scorecard": {
+      "teachingMode": "progressive-project",
+      "generationTargets": {
+        "quizBankMin": 0,
+        "quizBankTarget": 0,
+        "quizVisibleDefault": 0,
+        "quizVisibleMax": 0,
+        "projectCodeInputMin": 6,
+        "projectCodeInputTarget": 6,
+        "projectCodeInputMax": 6
+      }
+    },
+    "final-school-program-participation-report": {
+      "teachingMode": "progressive-project",
+      "generationTargets": {
+        "quizBankMin": 0,
+        "quizBankTarget": 0,
+        "quizVisibleDefault": 0,
+        "quizVisibleMax": 0,
+        "projectCodeInputMin": 4,
+        "projectCodeInputTarget": 4,
+        "projectCodeInputMax": 4
+      }
+    }
+  },
+  "policy": {
+    "exercisePolicy": {
+      "defaultMix": {
+        "single_choice": 0.12,
+        "multi_choice": 0.1,
+        "drag_reorder": 0.08,
+        "fill_blank_choice": 0.15,
+        "code_input": 0.55
+      },
+      "minimums": {
+        "technicalTopicCodeInputMin": 2,
+        "topicExerciseMin": 4
+      },
+      "generationTargets": {
+        "quizBankMin": 6,
+        "quizBankTarget": 6,
+        "quizVisibleDefault": 4,
+        "quizVisibleMax": 6,
+        "projectCodeInputMin": 4,
+        "projectCodeInputTarget": 5,
+        "projectCodeInputMax": 6,
+        "maxAttempts": null
+      }
+    },
+    "projectPolicy": {
+      "standardModuleProjectCount": 3,
+      "minProjectsBeforeCapstone": 3,
+      "capstoneRequired": true,
+      "projectFlow": "progressive"
+    },
+    "runtimePolicy": {
+      "datasetStrategy": "manual",
+      "datasetId": "school_relations_intro",
+      "sqlDialect": "sqlite",
+      "resultShape": "table"
+    },
+    "qualityPolicy": {
+      "allowBlankTopicIds": false,
+      "allowDuplicateTopicIds": false,
+      "requireUniqueModuleSlugs": true,
+      "requireUniqueSectionSlugs": true,
+      "requireModuleProject": true,
+      "requireFinalCapstone": true,
+      "maxModuleProjectLength": 320,
+      "reservedConceptsByModule": [
+        {
+          "concept": "INNER JOIN",
+          "earliestModuleNumber": 0
+        },
+        {
+          "concept": "three-table joins",
+          "earliestModuleNumber": 1
+        },
+        {
+          "concept": "LEFT JOIN",
+          "earliestModuleNumber": 2
+        },
+        {
+          "concept": "anti-join",
+          "earliestModuleNumber": 2
+        },
+        {
+          "concept": "COUNT(DISTINCT)",
+          "earliestModuleNumber": 2
+        }
+      ],
+      "slugConvention": "explicit_module_section"
+    }
+  },
+  "releasePlan": {
+    "currentRelease": {
+      "name": "multi-table-sql-v1",
+      "startModuleNumber": 0,
+      "endModuleNumber": 3
+    },
+    "releases": [
+      {
+        "name": "multi-table-sql-v1",
+        "startModuleNumber": 0,
+        "endModuleNumber": 3
+      }
+    ]
+  },
+  "authoringGuidance": [
+    "This course must always use subjectSlug sql, courseSlug multi-table-sql, catalogSlug sql, and profileId sql.",
+    "Use browser-sql-runner and sql-browser-workspace across every module. Learners write in the SQL editor, click Run query, and inspect the results table.",
+    "Use school_relations_intro in every module and expose schema, ERD, and Chen relationship visuals.",
+    "Assume learners already know SELECT, filtering, sorting, aliases, NULL, CASE, aggregates, GROUP BY, HAVING, and deterministic ordering. Never create standalone review topics for them.",
+    "Every technical sketch must have a required embedded Try It code_input with tryItPlacement all_sketches.",
+    "Embedded Try It IDs, tryIt.id, and tryIt.exerciseKey must use try-<topic-id>-sketchN.",
+    "Quizzes are conceptual and must not use code_input; graded SQL belongs in Try It, module projects, or capstone steps.",
+    "Each standard module has exactly one progressive module project. The final module contains exactly one capstone topic.",
+    "Project and capstone step N+1 starterCode must equal step N full solutionCode. Solutions are complete snapshots, never diffs.",
+    "Every JOIN follows a declared foreign-key relationship. Broken-query examples must be explicitly labeled as diagnosis tasks and must not become solution queries.",
+    "Use table qualification whenever two source tables contain id or name columns.",
+    "State what one result row represents whenever a join can multiply parent rows.",
+    "Examples, Try Its, projects, and capstone steps must use distinct questions. Do not repeat the same join with only renamed aliases.",
+    "Do not teach subqueries in this course. Reserve subqueries, CTEs, set operations, and window functions for Advanced SQL Analytics.",
+    "Do not use terminal, command-line, sqlite3, psql, SQL file, or run-file instructions."
+  ],
+  "assessmentAndDelivery": {
+    "suggestedBeginnerRhythm": "Complete one standard module per week, including its cumulative project, then reserve a final session for the capstone.",
+    "recommendedCourseDeliverables": [
+      "Embedded Try It query on every technical sketch",
+      "Student Enrollment Activity Roster",
+      "Course Enrollment Directory",
+      "Department Participation Scorecard",
+      "Final School Program Participation Report"
+    ],
+    "toolingSuggestions": [
+      "SQLite",
+      "Browser SQL runner",
+      "Schema browser",
+      "ERD",
+      "Deterministic results-table checker"
+    ],
+    "moduleMilestones": [
+      {
+        "range": "Module 0",
+        "milestone": "Reliable two-table joins",
+        "learnersCan": "Read relationship keys and write qualified INNER JOIN queries."
+      },
+      {
+        "range": "Module 1",
+        "milestone": "Complete relationship paths",
+        "learnersCan": "Join through bridge tables across three or four tables and verify row grain."
+      },
+      {
+        "range": "Module 2",
+        "milestone": "Trustworthy outer-join reporting",
+        "learnersCan": "Preserve unmatched rows, audit missing relationships, and count related records accurately."
+      },
+      {
+        "range": "Module 3",
+        "milestone": "Multi-table capstone",
+        "learnersCan": "Build and validate one complete all-department participation report."
+      }
+    ],
+    "closingNote": "Learners finish ready for SQL Data Management, where they will create and safely modify relational data rather than only query it."
+  },
+  "modulePolicies": [
+    {
+      "moduleNumber": 0,
+      "allowedConcepts": [
+        "all prerequisite concepts",
+        "JOIN",
+        "INNER JOIN",
+        "ON",
+        "primary key",
+        "foreign key",
+        "qualified columns",
+        "table aliases"
+      ],
+      "forbiddenConcepts": [
+        "LEFT JOIN",
+        "three-table joins",
+        "subquery",
+        "CTE",
+        "window functions",
+        "mutation SQL"
+      ],
+      "notes": [
+        "Teach only new relationship and join reasoning.",
+        "Keep project work to students and enrollments."
+      ]
+    },
+    {
+      "moduleNumber": 1,
+      "allowedConcepts": [
+        "all Module 0 concepts",
+        "one-to-many",
+        "many-to-many",
+        "bridge table",
+        "three-table joins",
+        "four-table joins",
+        "row multiplication"
+      ],
+      "forbiddenConcepts": [
+        "LEFT JOIN",
+        "anti-join",
+        "subquery",
+        "CTE",
+        "window functions",
+        "mutation SQL"
+      ],
+      "notes": [
+        "Extend one relationship at a time.",
+        "Use expected grain to detect accidental combinations."
+      ]
+    },
+    {
+      "moduleNumber": 2,
+      "allowedConcepts": [
+        "all earlier concepts",
+        "LEFT JOIN",
+        "ON versus WHERE",
+        "anti-join",
+        "COUNT(right_id)",
+        "COUNT(DISTINCT)",
+        "join-aware GROUP BY"
+      ],
+      "forbiddenConcepts": [
+        "RIGHT JOIN",
+        "FULL JOIN",
+        "CROSS JOIN",
+        "subquery",
+        "CTE",
+        "window functions",
+        "mutation SQL"
+      ],
+      "notes": [
+        "Start from the entity the report must preserve.",
+        "Count right-side identifiers rather than COUNT(*)."
+      ]
+    },
+    {
+      "moduleNumber": 3,
+      "allowedConcepts": [
+        "all course concepts",
+        "relationship planning",
+        "result validation",
+        "business interpretation"
+      ],
+      "forbiddenConcepts": [
+        "RIGHT JOIN",
+        "FULL JOIN",
+        "CROSS JOIN",
+        "NATURAL JOIN",
+        "self join",
+        "subquery",
+        "CTE",
+        "WITH",
+        "window functions",
+        "OVER",
+        "PARTITION BY",
+        "UNION",
+        "INTERSECT",
+        "EXCEPT",
+        "INSERT",
+        "UPDATE",
+        "DELETE",
+        "CREATE TABLE",
+        "ALTER TABLE",
+        "DROP TABLE"
+      ],
+      "notes": [
+        "Add no new SQL construct in the capstone.",
+        "Preserve all departments and one-row-per-department grain."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,200 @@
+{
+  "title": "INNER JOIN with ON",
+  "summary": "Connect matching rows with one explicit relationship condition.",
+  "minutes": 26,
+  "sketchBlocks": [
+    {
+      "id": "inner-join-sketch0",
+      "title": "Understanding INNER JOIN",
+      "bodyMarkdown": "The `INNER JOIN` clause is used to combine rows from two or more tables based on a related column between them. This is one of the most common types of joins in SQL. When using `INNER JOIN`, only the rows with matching values in both tables are returned.\n\n### Example\nSuppose we have two tables: `students` and `enrollments`. We want to find all students who are enrolled in courses. We can use the `INNER JOIN` to achieve this:\n\n```sql\nSELECT students.name, enrollments.course_id\nFROM students\nINNER JOIN enrollments ON students.id = enrollments.student_id;\n```\n\nIn this query:\n- We select the `name` from the `students` table and `course_id` from the `enrollments` table.\n- We use `INNER JOIN` to connect the `students` table with the `enrollments` table on the condition that `students.id` matches `enrollments.student_id`.\n\nThis query will return only those students who have enrollments."
+    },
+    {
+      "id": "inner-join-sketch1",
+      "title": "Using ON with INNER JOIN",
+      "bodyMarkdown": "The `ON` clause is crucial when using `INNER JOIN` as it specifies the condition for the join. This condition is usually based on the primary key of one table and the foreign key of another.\n\n### Example\nLet's say we want to list all courses along with the departments they belong to. We have `courses` and `departments` tables:\n\n```sql\nSELECT courses.title, departments.name\nFROM courses\nINNER JOIN departments ON courses.department_id = departments.id;\n```\n\nIn this query:\n- We select the `title` from the `courses` table and `name` from the `departments` table.\n- The `INNER JOIN` connects `courses` with `departments` where `courses.department_id` matches `departments.id`.\n\nThis query will return a list of courses along with their respective department names."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "try-inner-join-sketch0",
+      "kind": "code_input",
+      "title": "Try INNER JOIN with Students and Enrollments",
+      "prompt": "Write a query to list all students and the courses they are enrolled in using INNER JOIN.",
+      "starterCode": "-- Write your SQL answer below",
+      "solutionCode": "SELECT students.name, enrollments.course_id\nFROM students\nINNER JOIN enrollments ON students.id = enrollments.student_id;",
+      "tests": [
+        {
+          "stdout": "Mia|1\nMia|2\nLeo|2\nLeo|3\nAva|4\nNoah|1\nNoah|4\nEmma|3\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "school_relations_intro",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "try-inner-join-sketch1",
+      "kind": "code_input",
+      "title": "Try INNER JOIN with Courses and Departments",
+      "prompt": "Write a query to list all courses along with their department names using INNER JOIN.",
+      "starterCode": "-- Write your SQL answer below",
+      "solutionCode": "SELECT courses.title, departments.name\nFROM courses\nINNER JOIN departments ON courses.department_id = departments.id;",
+      "tests": [
+        {
+          "stdout": "Biology|Science\nAlgebra II|Math\nWorld History|Humanities\nComputer Basics|Technology\nCreative Writing|Humanities\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "school_relations_intro",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "sc-primary-foreign-keys",
+      "kind": "single_choice",
+      "title": "Understanding Primary and Foreign Keys",
+      "prompt": "Which of the following best describes the relationship between a primary key and a foreign key?",
+      "options": [
+        "A primary key is used to link two tables together.",
+        "A foreign key is used to uniquely identify each row in a table.",
+        "A primary key is a unique identifier for a table, and a foreign key links to it from another table.",
+        "A foreign key is a unique identifier for a table, and a primary key links to it from another table."
+      ],
+      "correctOptionIds": [
+        "c"
+      ],
+      "hint": "Think about how primary keys and foreign keys connect tables.",
+      "help": {
+        "concept": "Primary keys uniquely identify rows in a table, while foreign keys link to primary keys in another table.",
+        "hint_1": "A primary key is unique to its table.",
+        "hint_2": "A foreign key references a primary key in another table."
+      }
+    },
+    {
+      "id": "mc-inner-join-usage",
+      "kind": "multi_choice",
+      "title": "Using INNER JOIN",
+      "prompt": "Which of the following statements about INNER JOIN are true? Select all that apply.",
+      "options": [
+        "INNER JOIN returns all rows from both tables.",
+        "INNER JOIN returns only rows with matching values in both tables.",
+        "INNER JOIN can be used without an ON condition.",
+        "INNER JOIN requires a condition to match rows."
+      ],
+      "correctOptionIds": [
+        "b",
+        "d"
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "dr-inner-join-order",
+      "kind": "drag_reorder",
+      "title": "Order of INNER JOIN Components",
+      "prompt": "Arrange the components of an INNER JOIN query in the correct order.",
+      "tokens": [
+        "SELECT clause",
+        "FROM clause",
+        "INNER JOIN clause",
+        "ON condition"
+      ],
+      "correctOrder": [
+        "SELECT clause",
+        "FROM clause",
+        "INNER JOIN clause",
+        "ON condition"
+      ],
+      "hint": "Read each piece and arrange them in the order the statement should be understood.",
+      "help": {
+        "concept": "The pieces should form a valid statement in a logical order.",
+        "hint_1": "Start with the piece that introduces the idea or action.",
+        "hint_2": "Place dependent pieces after the part they describe or complete."
+      }
+    },
+    {
+      "id": "fbc-qualified-columns",
+      "kind": "fill_blank_choice",
+      "title": "Qualified Columns in Joins",
+      "prompt": "In a multi-table query, it's important to use qualified column names to avoid ambiguity. Complete the following statement: `SELECT [blank1] FROM students INNER JOIN enrollments ON students.id = enrollments.student_id;`",
+      "template": "SELECT [blank1] FROM students INNER JOIN enrollments ON students.id = enrollments.student_id;",
+      "choices": [
+        "students.name",
+        "name",
+        "enrollments.course_id",
+        "course_id"
+      ],
+      "correctValue": "students.name",
+      "hint": "Use the table name to qualify the column.",
+      "help": {
+        "concept": "Qualified column names specify the table each column belongs to.",
+        "hint_1": "Use the table name followed by a dot and the column name.",
+        "hint_2": "For example, `the missing term` specifies the `name` column from the `students` table."
+      }
+    },
+    {
+      "id": "sc-table-aliases",
+      "kind": "single_choice",
+      "title": "Using Table Aliases",
+      "prompt": "Why are table aliases useful in SQL queries?",
+      "options": [
+        "They allow for shorter, more readable queries.",
+        "They are required for all SQL queries.",
+        "They replace the need for ON conditions.",
+        "They automatically optimize query performance."
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Think about how aliases can simplify queries.",
+      "help": {
+        "concept": "Table aliases provide a shorthand for table names, making queries easier to read and write.",
+        "hint_1": "Aliases can reduce the length of table names in queries.",
+        "hint_2": "They help avoid repetitive long table names."
+      }
+    },
+    {
+      "id": "mc-qualified-columns",
+      "kind": "multi_choice",
+      "title": "Importance of Qualified Columns",
+      "prompt": "Why is it important to use qualified column names in multi-table queries? Select all that apply.",
+      "options": [
+        "To prevent ambiguity when tables have columns with the same name.",
+        "To ensure the query runs faster.",
+        "To specify which table a column belongs to.",
+        "To automatically join tables without an ON condition."
+      ],
+      "correctOptionIds": [
+        "a",
+        "c"
+      ],
+      "hint": "Consider how qualified names affect query clarity and correctness.",
+      "help": {
+        "concept": "Qualified column names prevent ambiguity and ensure correct data retrieval.",
+        "hint_1": "They specify which table a column belongs to.",
+        "hint_2": "They prevent errors when tables have columns with the same name."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Build a Student Enrollment Activity Roster",
+    "stepIds": [
+      "try-inner-join-sketch0",
+      "try-inner-join-sketch1"
+    ]
+  }
+}

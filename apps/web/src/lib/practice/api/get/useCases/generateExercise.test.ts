@@ -53,7 +53,10 @@ vi.mock("../services/topicResolver.service", () => ({
     resolveTopicFromScope: resolveTopicFromScopeMock,
 }));
 
-import { generatePracticeExercise } from "./generateExercise";
+import {
+    generatePracticeExercise,
+    openPracticeInstanceMatchesRequestedExercise,
+} from "./generateExercise";
 
 describe("generatePracticeExercise authored project resolution", () => {
     beforeEach(() => {
@@ -110,7 +113,11 @@ describe("generatePracticeExercise authored project resolution", () => {
     it("uses the session subject slug when request subject is absent", async () => {
         const result = await generatePracticeExercise(
             {
-                prisma: {} as any,
+                prisma: {
+                    practiceQuestionInstance: {
+                        findFirst: vi.fn().mockResolvedValue(null),
+                    },
+                } as any,
                 actor: { userId: "user-1", guestId: null } as any,
                 locale: "en",
                 params: {
@@ -203,4 +210,20 @@ describe("generatePracticeExercise authored project resolution", () => {
         });
         expect(getExerciseWithExpectedMock).not.toHaveBeenCalled();
     });
+    it("does not reuse an open instance for a different exact exercise key", () => {
+        expect(
+            openPracticeInstanceMatchesRequestedExercise(
+                { exerciseKey: "try-current" },
+                "try-current",
+            ),
+        ).toBe(true);
+
+        expect(
+            openPracticeInstanceMatchesRequestedExercise(
+                { exerciseKey: "try-previous" },
+                "try-current",
+            ),
+        ).toBe(false);
+    });
+
 });

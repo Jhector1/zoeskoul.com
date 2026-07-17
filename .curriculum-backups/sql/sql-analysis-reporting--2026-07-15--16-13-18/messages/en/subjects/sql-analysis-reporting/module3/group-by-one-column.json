@@ -1,0 +1,165 @@
+{
+  "topics": {
+    "sql-analysis-reporting": {
+      "sql-analysis-reporting-module-3-grouped-summaries": {
+        "group-by-one-column": {
+          "label": "GROUP BY One Column",
+          "summary": "Return one aggregate summary row for each value of a chosen business dimension.",
+          "cards": {
+            "sketch0": {
+              "title": "Change One Overall Total into Several Group Totals"
+            },
+            "sketch1": {
+              "title": "Filter Rows Before Grouping Them"
+            },
+            "quiz": {
+              "title": "Check Your Understanding"
+            }
+          },
+          "practice": {
+            "single-choice-1": {
+              "title": "Grouped Row Meaning",
+              "prompt": "In a query grouped by `region`, what does one result row represent?",
+              "hint": "The grouping column defines the row grain.",
+              "help": {
+                "concept": "GROUP BY region creates one summary row per region.",
+                "hint_1": "Aggregates are calculated within that region.",
+                "hint_2": "Choose the selected dimension."
+              },
+              "options": {
+                "a": "One order",
+                "b": "One region",
+                "c": "One product",
+                "d": "The entire company"
+              }
+            },
+            "single-choice-2": {
+              "title": "Required Grouping Column",
+              "prompt": "Which selected column must appear in GROUP BY in `SELECT category, SUM(quantity)`?",
+              "hint": "The non-aggregate selected dimension defines each group.",
+              "help": {
+                "concept": "Every non-aggregate selected column belongs in GROUP BY.",
+                "hint_1": "The aggregated measure stays inside SUM.",
+                "hint_2": "Choose the displayed dimension."
+              },
+              "options": {
+                "a": "quantity",
+                "b": "category",
+                "c": "SUM",
+                "d": "order_id"
+              }
+            },
+            "multi-choice-1": {
+              "title": "Valid One-Column Grouped Reports",
+              "prompt": "Which reports have one-column group grain? Select all that apply.",
+              "hint": "Count the dimensions named after “by.”",
+              "help": {
+                "concept": "One-column grouping uses exactly one business dimension.",
+                "hint_1": "Region and category together create a two-column grain.",
+                "hint_2": "Choose reports with one grouping field."
+              },
+              "options": {
+                "a": "Order count by region",
+                "b": "Units by category",
+                "c": "Sales by region and category",
+                "d": "Average rating by sales representative"
+              }
+            },
+            "multi-choice-2": {
+              "title": "Grouped Query Facts",
+              "prompt": "Which statements accurately describe a one-column grouped report? Select all that apply.",
+              "hint": "GROUP BY changes result structure, not stored data.",
+              "help": {
+                "concept": "Filtering precedes grouping; sorting follows it.",
+                "hint_1": "Each group receives its own aggregate calculation.",
+                "hint_2": "Choose read-only query behaviors."
+              },
+              "options": {
+                "a": "Aggregates are calculated separately inside each group.",
+                "b": "WHERE can limit rows before groups are formed.",
+                "c": "GROUP BY permanently reorganizes the table.",
+                "d": "ORDER BY can sort the final grouped rows."
+              }
+            },
+            "drag-reorder-1": {
+              "title": "Write a Grouped Total",
+              "prompt": "Arrange the clauses for a category unit summary in written SQL order.",
+              "hint": "Written order places grouping after the source and before final sorting.",
+              "help": {
+                "concept": "SELECT defines dimensions and metrics.",
+                "hint_1": "GROUP BY defines the result grain.",
+                "hint_2": "ORDER BY arranges the completed groups."
+              },
+              "tokens": {
+                "t1": "SELECT category, SUM(quantity) AS total_units",
+                "t2": "FROM sales_reporting",
+                "t3": "GROUP BY category",
+                "t4": "ORDER BY category"
+              }
+            },
+            "fill-blank-choice-1": {
+              "title": "Complete the Grouping Clause",
+              "prompt": "Fill the column that creates one summary row per region.",
+              "hint": "Use the dimension named in the reporting requirement.",
+              "help": {
+                "concept": "The result needs regional grain.",
+                "hint_1": "The measure is aggregated rather than grouped.",
+                "hint_2": "Choose the region column."
+              },
+              "template": "GROUP BY [blank1]",
+              "choices": [
+                "region",
+                "quantity",
+                "COUNT(*)",
+                "order_id, product_name"
+              ]
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_group_by_one_column_sketch0": {
+              "title": "Total Units by Category",
+              "prompt": "Return one row per `category` with `SUM(quantity)` as `total_units`. Sort categories alphabetically.",
+              "hint": "Select the dimension, aggregate the measure, then group by the dimension.",
+              "help": {
+                "concept": "A one-column GROUP BY defines one result row for each value of that column.",
+                "hint_1": "Put `category` in both SELECT and GROUP BY.",
+                "hint_2": "Sort the final group rows after aggregation."
+              },
+              "starterCode": "-- Write the query below.",
+              "solutionCode": "SELECT\n    category,\n    SUM(quantity) AS total_units\nFROM sales_reporting\nGROUP BY category\nORDER BY category;"
+            },
+            "try_group_by_one_column_sketch1": {
+              "title": "Completed Orders by Region",
+              "prompt": "Return one row per `region` with the number of completed orders as `completed_orders`. Sort by region.",
+              "hint": "The status condition belongs before GROUP BY.",
+              "help": {
+                "concept": "WHERE controls source rows; GROUP BY then creates regional summaries.",
+                "hint_1": "Filter to completed rows first.",
+                "hint_2": "Group and sort using the same region dimension."
+              },
+              "starterCode": "-- Write the query below.",
+              "solutionCode": "SELECT\n    region,\n    COUNT(*) AS completed_orders\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY region\nORDER BY region;"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql-analysis-reporting": {
+      "sql-analysis-reporting-module-3-grouped-summaries": {
+        "group-by-one-column": {
+          "sketch0": {
+            "title": "Change One Overall Total into Several Group Totals",
+            "bodyMarkdown": "### From one total to one total per group\n\nAn aggregate without `GROUP BY` summarizes all qualifying rows together. `GROUP BY` divides those rows into separate sets and runs the aggregate once for every distinct grouping value.\n\nThe `GROUP BY` clause in SQL is used to arrange identical data into groups. This is particularly useful when you want to perform aggregate functions like `COUNT`, `SUM`, `AVG`, etc., on each group of data. For example, if you want to know the total sales for each region, you can group the data by the `region` column.\n\n```sql\nSELECT\n    region,\n    SUM(quantity * unit_price) AS total_sales\nFROM sales_reporting\nGROUP BY region;\n```\n\n#### Line-by-line walkthrough\n\n- `SELECT` — starts the result list. The indented lines define the columns and calculations returned by the query.\n- `region,` — returns the stored `region` value.\n- `SUM(quantity * unit_price) AS total_sales` — adds the row values across the current group and names the output `total_sales`.\n- `FROM sales_reporting` — reads source rows from the `sales_reporting` table.\n- `GROUP BY region;` — creates one group for every unique `region` value or combination.\n\n#### How SQL evaluates this aggregate\n\n1. `FROM` identifies the source table.\n2. `GROUP BY` divides the remaining rows into groups.\n3. The aggregate function runs once for each group.\n4. `SELECT` returns the finished metric under its alias.\n\nIn this query, we are selecting the `region` and calculating the total sales for each region by multiplying `quantity` by `unit_price` and summing the results. The `GROUP BY region` clause ensures that the sum is calculated for each distinct region."
+          },
+          "sketch1": {
+            "title": "Filter Rows Before Grouping Them",
+            "bodyMarkdown": "### From one total to one total per group\n\nAn aggregate without `GROUP BY` summarizes all qualifying rows together. `GROUP BY` divides those rows into separate sets and runs the aggregate once for every distinct grouping value.\n\nLet's look at a practical example where we count the number of orders in each region. This helps in understanding the distribution of orders geographically.\n\n```sql\nSELECT\n    region,\n    COUNT(order_id) AS order_count\nFROM sales_reporting\nGROUP BY region;\n```\n\n#### Line-by-line walkthrough\n\n- `SELECT` — starts the result list. The indented lines define the columns and calculations returned by the query.\n- `region,` — returns the stored `region` value.\n- `COUNT(order_id) AS order_count` — counts rows where `order_id` is not NULL and names the output `order_count`.\n- `FROM sales_reporting` — reads source rows from the `sales_reporting` table.\n- `GROUP BY region;` — creates one group for every unique `region` value or combination.\n\n#### How SQL evaluates this aggregate\n\n1. `FROM` identifies the source table.\n2. `GROUP BY` divides the remaining rows into groups.\n3. The aggregate function runs once for each group.\n4. `SELECT` returns the finished metric under its alias.\n\nHere, the `COUNT(order_id)` function counts the number of orders for each region. The `GROUP BY region` clause groups the results by each distinct region, providing a count of orders per region. This is useful for identifying which regions have the most or least orders."
+          }
+        }
+      }
+    }
+  }
+}

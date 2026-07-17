@@ -1,0 +1,779 @@
+{
+  "topicId": "is_not_null",
+  "subjectSlug": "sql-v2",
+  "moduleSlug": "sql-v2-4",
+  "sectionSlug": "sql-v2-sql-v2-4-3",
+  "prefix": "sqlv2_4",
+  "minutes": 16,
+  "runtimeDefaults": {
+    "kind": "sql",
+    "showSchema": true,
+    "showErd": false,
+    "showChen": false,
+    "supportsTerminal": false,
+    "supportsMultiFile": false,
+    "supportsFileSystem": false,
+    "datasetId": "customers_cleanup",
+    "fixedSqlDialect": "sqlite",
+    "resultShape": "table"
+  },
+  "topic": {
+    "labelKey": "topics.sql-v2.sql-v2-4.is_not_null.label",
+    "summaryKey": "topics.sql-v2.sql-v2-4.is_not_null.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql-v2.sql-v2-4.is_not_null.cards.sketch0.title",
+      "sketchId": "sketch_is_not_null_basics",
+      "height": 420,
+      "tryIt": {
+        "id": "try-is_not_null-sketch0",
+        "titleKey": "topics.sql-v2.sql-v2-4.is_not_null.tryIt.try_is_not_null_sketch0.title",
+        "promptKey": "topics.sql-v2.sql-v2-4.is_not_null.tryIt.try_is_not_null_sketch0.prompt",
+        "exerciseKey": "try-is_not_null-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.sql-v2.sql-v2-4.is_not_null.cards.sketch1.title",
+      "sketchId": "sketch_is_not_null_with_other_filters",
+      "height": 420,
+      "tryIt": {
+        "id": "try-is_not_null-sketch1",
+        "titleKey": "topics.sql-v2.sql-v2-4.is_not_null.tryIt.try_is_not_null_sketch1.title",
+        "promptKey": "topics.sql-v2.sql-v2-4.is_not_null.tryIt.try_is_not_null_sketch1.prompt",
+        "exerciseKey": "try-is_not_null-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.sql-v2.sql-v2-4.is_not_null.cards.sketch2.title",
+      "sketchId": "sketch_is_not_null_vs_empty_thinking",
+      "height": 420,
+      "tryIt": {
+        "id": "try-is_not_null-sketch2",
+        "titleKey": "topics.sql-v2.sql-v2-4.is_not_null.tryIt.try_is_not_null_sketch2.title",
+        "promptKey": "topics.sql-v2.sql-v2-4.is_not_null.tryIt.try_is_not_null_sketch2.prompt",
+        "exerciseKey": "try-is_not_null-sketch2",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql-v2.sql-v2-4.is_not_null.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.sql-v2.sql-v2-4.is_not_null.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "ci_show_customers_with_email",
+            "titleKey": "topics.sql-v2.sql-v2-4.is_not_null.projectSteps.ci_show_customers_with_email.title",
+            "exerciseKey": "ci_show_customers_with_email",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "ci_active_with_city",
+            "titleKey": "topics.sql-v2.sql-v2-4.is_not_null.projectSteps.ci_active_with_city.title",
+            "exerciseKey": "ci_active_with_city",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "ci_real_non_test_emails",
+            "titleKey": "topics.sql-v2.sql-v2-4.is_not_null.projectSteps.ci_real_non_test_emails.title",
+            "exerciseKey": "ci_real_non_test_emails",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch_is_not_null_basics",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql-v2.sql-v2-4.is_not_null.sketch_is_not_null_basics.title",
+      "bodyKey": "sketches.sql-v2.sql-v2-4.is_not_null.sketch_is_not_null_basics.bodyMarkdown"
+    },
+    {
+      "id": "sketch_is_not_null_with_other_filters",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql-v2.sql-v2-4.is_not_null.sketch_is_not_null_with_other_filters.title",
+      "bodyKey": "sketches.sql-v2.sql-v2-4.is_not_null.sketch_is_not_null_with_other_filters.bodyMarkdown"
+    },
+    {
+      "id": "sketch_is_not_null_vs_empty_thinking",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql-v2.sql-v2-4.is_not_null.sketch_is_not_null_vs_empty_thinking.title",
+      "bodyKey": "sketches.sql-v2.sql-v2-4.is_not_null.sketch_is_not_null_vs_empty_thinking.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "sc_is_not_null_meaning",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-4.is_not_null.quiz.sc_is_not_null_meaning",
+      "optionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "sc_null_comparison_misconception",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-4.is_not_null.quiz.sc_null_comparison_misconception",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "c"
+      }
+    },
+    {
+      "id": "mc_rows_with_email",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-4.is_not_null.quiz.mc_rows_with_email",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "c",
+          "d"
+        ]
+      }
+    },
+    {
+      "id": "mc_conditions_with_city",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-4.is_not_null.quiz.mc_conditions_with_city",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
+      }
+    },
+    {
+      "id": "dr_query_order_basic",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-4.is_not_null.quiz.dr_query_order_basic",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
+      }
+    },
+    {
+      "id": "dr_query_order_with_and",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-4.is_not_null.quiz.dr_query_order_with_and",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t2",
+          "t3",
+          "t1"
+        ]
+      }
+    },
+    {
+      "id": "fb_email_not_null",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-4.is_not_null.quiz.fb_email_not_null",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "NOT"
+      }
+    },
+    {
+      "id": "fb_city_column_check",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-4.is_not_null.quiz.fb_city_column_check",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "city"
+      }
+    },
+    {
+      "id": "ci_show_customers_with_email",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-4.is_not_null.quiz.ci_show_customers_with_email",
+      "language": "sql",
+      "starterCode": "@:topics.sql-v2.sql-v2-4.is_not_null.quiz.ci_show_customers_with_email.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "customers_cleanup",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": false,
+        "showChen": false,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "customers_cleanup",
+        "resultShape": "table",
+        "solutionCode": "SELECT id, full_name, email\nFROM customers\nWHERE email IS NOT NULL\nORDER BY id ASC;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT id, full_name, email\nFROM customers\nWHERE email IS NOT NULL\nORDER BY id ASC;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-4.is_not_null.quiz.ci_show_customers_with_email.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT id, full_name, email\nFROM customers\nWHERE email IS NOT NULL\nORDER BY id ASC;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql-v2.sql-v2-4.is_not_null.quiz.ci_show_customers_with_email.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-4.is_not_null.quiz.ci_show_customers_with_email.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT id, full_name, email\nFROM customers\nWHERE email IS NOT NULL\nORDER BY id ASC;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
+    },
+    {
+      "id": "ci_active_with_city",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-4.is_not_null.quiz.ci_active_with_city",
+      "language": "sql",
+      "starterCode": "@:topics.sql-v2.sql-v2-4.is_not_null.quiz.ci_active_with_city.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "customers_cleanup",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": false,
+        "showChen": false,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "customers_cleanup",
+        "resultShape": "table",
+        "solutionCode": "SELECT full_name, city, status\nFROM customers\nWHERE city IS NOT NULL\n  AND status = 'active'\nORDER BY full_name ASC;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT full_name, city, status\nFROM customers\nWHERE city IS NOT NULL\n  AND status = 'active'\nORDER BY full_name ASC;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-4.is_not_null.quiz.ci_active_with_city.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT full_name, city, status\nFROM customers\nWHERE city IS NOT NULL\n  AND status = 'active'\nORDER BY full_name ASC;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql-v2.sql-v2-4.is_not_null.quiz.ci_active_with_city.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-4.is_not_null.quiz.ci_active_with_city.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT full_name, city, status\nFROM customers\nWHERE city IS NOT NULL\n  AND status = 'active'\nORDER BY full_name ASC;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
+    },
+    {
+      "id": "ci_real_non_test_emails",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-4.is_not_null.quiz.ci_real_non_test_emails",
+      "language": "sql",
+      "starterCode": "@:topics.sql-v2.sql-v2-4.is_not_null.quiz.ci_real_non_test_emails.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "customers_cleanup",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": false,
+        "showChen": false,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "customers_cleanup",
+        "resultShape": "table",
+        "solutionCode": "SELECT full_name, email\nFROM customers\nWHERE email IS NOT NULL\n  AND is_test = 0\nORDER BY signup_date ASC;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT full_name, email\nFROM customers\nWHERE email IS NOT NULL\n  AND is_test = 0\nORDER BY signup_date ASC;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-4.is_not_null.quiz.ci_real_non_test_emails.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT full_name, email\nFROM customers\nWHERE email IS NOT NULL\n  AND is_test = 0\nORDER BY signup_date ASC;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql-v2.sql-v2-4.is_not_null.quiz.ci_real_non_test_emails.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-4.is_not_null.quiz.ci_real_non_test_emails.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT full_name, email\nFROM customers\nWHERE email IS NOT NULL\n  AND is_test = 0\nORDER BY signup_date ASC;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
+    },
+    {
+      "id": "try-is_not_null-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-4.is_not_null.quiz.try-is_not_null-sketch0",
+      "language": "sql",
+      "starterCode": "@:topics.sql-v2.sql-v2-4.is_not_null.quiz.try-is_not_null-sketch0.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "customers_cleanup",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": false,
+        "showChen": false,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "customers_cleanup",
+        "resultShape": "table",
+        "solutionCode": "SELECT id, full_name, email\nFROM customers\nWHERE email IS NOT NULL\nORDER BY id ASC;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT id, full_name, email\nFROM customers\nWHERE email IS NOT NULL\nORDER BY id ASC;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-4.is_not_null.quiz.try-is_not_null-sketch0.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT id, full_name, email\nFROM customers\nWHERE email IS NOT NULL\nORDER BY id ASC;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql-v2.sql-v2-4.is_not_null.quiz.try-is_not_null-sketch0.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-4.is_not_null.quiz.try-is_not_null-sketch0.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT id, full_name, email\nFROM customers\nWHERE email IS NOT NULL\nORDER BY id ASC;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
+    },
+    {
+      "id": "try-is_not_null-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-4.is_not_null.quiz.try-is_not_null-sketch1",
+      "language": "sql",
+      "starterCode": "@:topics.sql-v2.sql-v2-4.is_not_null.quiz.try-is_not_null-sketch1.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "customers_cleanup",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": false,
+        "showChen": false,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "customers_cleanup",
+        "resultShape": "table",
+        "solutionCode": "SELECT full_name, city, status\nFROM customers\nWHERE city IS NOT NULL\n  AND status = 'active'\nORDER BY full_name ASC;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT full_name, city, status\nFROM customers\nWHERE city IS NOT NULL\n  AND status = 'active'\nORDER BY full_name ASC;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-4.is_not_null.quiz.try-is_not_null-sketch1.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT full_name, city, status\nFROM customers\nWHERE city IS NOT NULL\n  AND status = 'active'\nORDER BY full_name ASC;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql-v2.sql-v2-4.is_not_null.quiz.try-is_not_null-sketch1.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-4.is_not_null.quiz.try-is_not_null-sketch1.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT full_name, city, status\nFROM customers\nWHERE city IS NOT NULL\n  AND status = 'active'\nORDER BY full_name ASC;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
+    },
+    {
+      "id": "try-is_not_null-sketch2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-4.is_not_null.quiz.try-is_not_null-sketch2",
+      "language": "sql",
+      "starterCode": "@:topics.sql-v2.sql-v2-4.is_not_null.quiz.try-is_not_null-sketch2.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "customers_cleanup",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": false,
+        "showChen": false,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "customers_cleanup",
+        "resultShape": "table",
+        "solutionCode": "SELECT full_name, email\nFROM customers\nWHERE email IS NOT NULL\n  AND is_test = 0\nORDER BY signup_date ASC;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT full_name, email\nFROM customers\nWHERE email IS NOT NULL\n  AND is_test = 0\nORDER BY signup_date ASC;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-4.is_not_null.quiz.try-is_not_null-sketch2.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT full_name, email\nFROM customers\nWHERE email IS NOT NULL\n  AND is_test = 0\nORDER BY signup_date ASC;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql-v2.sql-v2-4.is_not_null.quiz.try-is_not_null-sketch2.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-4.is_not_null.quiz.try-is_not_null-sketch2.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT full_name, email\nFROM customers\nWHERE email IS NOT NULL\n  AND is_test = 0\nORDER BY signup_date ASC;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
+    }
+  ]
+}

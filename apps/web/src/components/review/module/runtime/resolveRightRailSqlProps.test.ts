@@ -64,7 +64,7 @@ describe("resolveRightRailSqlProps", () => {
             },
         });
 
-        expect(props).toEqual({
+        expect(props).toMatchObject({
             toolSqlDialect: "sqlite",
             sqlResultShape: "table",
             sqlDatasetId: "products_catalog",
@@ -78,6 +78,7 @@ describe("resolveRightRailSqlProps", () => {
                 showChen: false,
                 defaultTab: "tables",
             },
+            defaultSurface: "results",
         });
     });
 
@@ -301,4 +302,150 @@ describe("resolveRightRailSqlProps", () => {
         );
         expect(props.sqlInitialTableSnapshots).toBe(fallbackSnapshots);
     });
+
+    it("merges a card-specific desktop tab with topic SQL visibility", () => {
+        const props = resolveRightRailSqlProps({
+            routeCanUseBoundExercise: false,
+            tool: {
+                toolLang: "sql",
+                toolSqlDialect: "sqlite",
+            },
+            topicSqlFallback: {
+                sqlDialect: "sqlite",
+                sqlDatasetId: "school_relations_intro",
+                sqlPaneOptions: {
+                    showResults: true,
+                    showTables: true,
+                    showErd: true,
+                    showChen: false,
+                    defaultTab: "tables",
+                },
+            },
+            cardSqlPaneOptions: {
+                defaultTab: "erd",
+                compactDefaultTab: "results",
+            },
+            compactLayout: false,
+        });
+
+        expect(props.sqlPaneOptions).toEqual({
+            showResults: true,
+            showTables: true,
+            showErd: true,
+            showChen: false,
+            defaultTab: "erd",
+            compactDefaultTab: "results",
+        });
+    });
+
+    it("defaults compact SQL layouts to Results without hiding Tables or ERD", () => {
+        const props = resolveRightRailSqlProps({
+            routeCanUseBoundExercise: false,
+            tool: {
+                toolLang: "sql",
+                toolSqlDialect: "sqlite",
+            },
+            topicSqlFallback: {
+                sqlDialect: "sqlite",
+                sqlDatasetId: "school_relations_intro",
+                sqlPaneOptions: {
+                    showResults: true,
+                    showTables: true,
+                    showErd: true,
+                    defaultTab: "tables",
+                },
+            },
+            cardSqlPaneOptions: {
+                defaultTab: "erd",
+                compactDefaultTab: "results",
+            },
+            compactLayout: true,
+        });
+
+        expect(props.sqlPaneOptions).toMatchObject({
+            showResults: true,
+            showTables: true,
+            showErd: true,
+            defaultTab: "results",
+        });
+    });
+
+    it("resolves topic, lesson, and exercise policies by specificity", () => {
+        const lesson = resolveRightRailSqlProps({
+            routeCanUseBoundExercise: false,
+            tool: { toolLang: "sql", toolSqlDialect: "sqlite" },
+            topicSqlFallback: {
+                sqlDialect: "sqlite",
+                sqlDatasetId: "school_relations_intro",
+            },
+            topicTools: {
+                defaultSurface: "editor",
+                compactDefaultSurface: "results",
+                sqlPane: { showTables: true, showErd: true, showChen: false },
+            },
+            cardTools: {
+                defaultSurface: "results",
+                sqlPane: { defaultTab: "erd", compactDefaultTab: "results" },
+            },
+        });
+
+        expect(lesson.defaultSurface).toBe("results");
+        expect(lesson.sqlPaneOptions).toMatchObject({
+            showTables: true,
+            showErd: true,
+            showChen: false,
+            defaultTab: "erd",
+        });
+
+        const exercise = resolveRightRailSqlProps({
+            routeCanUseBoundExercise: true,
+            tool: {
+                toolLang: "sql",
+                toolSqlDialect: "sqlite",
+                toolPresentation: {
+                    defaultSurface: "editor",
+                    sqlPane: { defaultTab: "results" },
+                },
+            },
+            topicSqlFallback: {
+                sqlDialect: "sqlite",
+                sqlDatasetId: "school_relations_intro",
+            },
+            topicTools: lesson.toolPresentation,
+            cardTools: { defaultSurface: "results", sqlPane: { defaultTab: "erd" } },
+        });
+
+        expect(exercise.defaultSurface).toBe("editor");
+        expect(exercise.sqlPaneOptions?.defaultTab).toBe("results");
+    });
+
+    it("uses compact defaults without erasing desktop visibility", () => {
+        const props = resolveRightRailSqlProps({
+            routeCanUseBoundExercise: false,
+            tool: { toolLang: "sql", toolSqlDialect: "sqlite" },
+            topicSqlFallback: {
+                sqlDialect: "sqlite",
+                sqlDatasetId: "school_relations_intro",
+            },
+            topicTools: {
+                defaultSurface: "editor",
+                compactDefaultSurface: "results",
+                sqlPane: {
+                    defaultTab: "erd",
+                    compactDefaultTab: "results",
+                    showTables: true,
+                    showErd: true,
+                },
+            },
+            compactLayout: true,
+        });
+
+        expect(props.defaultSurface).toBe("results");
+        expect(props.sqlPaneOptions).toMatchObject({
+            defaultTab: "results",
+            showTables: true,
+            showErd: true,
+        });
+    });
+
 });

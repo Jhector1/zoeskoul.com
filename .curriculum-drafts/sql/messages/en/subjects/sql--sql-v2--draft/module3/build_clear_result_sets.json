@@ -134,7 +134,7 @@
               "prompt": "Fill in the missing SQL keyword to keep only 3 rows.",
               "hint": "This clause controls how many rows appear.",
               "help": {
-                "concept": "The SQL clause for restricting the number of returned rows is `the missing term`.",
+                "concept": "The SQL clause for restricting the number of returned rows is `the blank`.",
                 "hint_1": "It is not a filtering clause like `WHERE` and not a sorting clause like `ORDER BY`.",
                 "hint_2": "Use the keyword that comes before a number such as 3 when you want only a few rows."
               },
@@ -163,86 +163,31 @@
                 "WHERE"
               ]
             },
-            "ci_top_three_expensive_products": {
-              "title": "Show the 3 most expensive products",
-              "prompt": "Write a query that returns the `name` and `price` columns from `products`, sorted by `price` from highest to lowest, and shows only the top 3 rows. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- add sorting and limiting\nSELECT name, price\nFROM products"
-            },
-            "ci_newest_two_products": {
-              "title": "Show the 2 newest products",
-              "prompt": "Write a query that returns `name` and `created_at` from `products`, sorted so the newest dates come first, with only 2 rows in the results. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- sort by date and keep 2 rows\nSELECT name, created_at\nFROM products"
-            },
-            "ci_low_stock_report": {
-              "title": "Build a low-stock report",
-              "prompt": "Write a query that returns `name` and `stock` from `products`, sorted from the smallest stock value to the largest stock value, and limited to 4 rows. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- sort by stock and limit the result\nSELECT name, stock\nFROM products"
-            },
-            "try-build_clear_result_sets-sketch0": {
-              "title": "Show the 3 most expensive products",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that returns the `name` and `price` columns from `products`, sorted by `price` from highest to lowest, and shows only the top 3 rows. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- add sorting and limiting\nSELECT name, price\nFROM products"
-            },
-            "try-build_clear_result_sets-sketch1": {
-              "title": "Show the 2 newest products",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that returns `name` and `created_at` from `products`, sorted so the newest dates come first, with only 2 rows in the results. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- sort by date and keep 2 rows\nSELECT name, created_at\nFROM products"
-            },
             "try-build_clear_result_sets-sketch2": {
-              "title": "Build a low-stock report",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that returns `name` and `stock` from `products`, sorted from the smallest stock value to the largest stock value, and limited to 4 rows. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Build a Low-Stock Review List",
+              "prompt": "Return `id`, `name`, and `stock`, sorted from lowest stock to highest, and keep only four rows. Return `id, name, stock` from `products` in that column order. Sort the final result by `stock ASC`. Return only the first `4` rows.",
+              "hint": "Use LIMIT 4 after the sort.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "Sort the final result by `stock ASC`. Return only the first `4` rows."
               },
-              "starterCode": "-- sort by stock and limit the result\nSELECT name, stock\nFROM products"
+              "starterCode": "SELECT id, name, stock\nFROM products\nORDER BY stock ASC\nLIMIT ;"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_build_clear_result_sets_sketch0": {
               "title": "Show the 3 most expensive products",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that returns the `name` and `price` columns from `products`, sorted by `price` from highest to lowest, and shows only the top 3 rows. Write the query in the SQL editor, click Run query, and check the results table."
+              "prompt": "Build a ranking query that returns the `name` and `price` columns from `products`, sorted by `price` from highest to lowest, and shows only the top 3 rows. Run it and compare the result with the expected table."
             },
             "try_build_clear_result_sets_sketch1": {
               "title": "Show the 2 newest products",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that returns `name` and `created_at` from `products`, sorted so the newest dates come first, with only 2 rows in the results. Write the query in the SQL editor, click Run query, and check the results table."
+              "prompt": "Build a ranking query that returns `name` and `created_at` from `products`, sorted so the newest dates come first, with only 2 rows in the results. Run it and compare the result with the expected table."
             },
             "try_build_clear_result_sets_sketch2": {
-              "title": "Build a low-stock report",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that returns `name` and `stock` from `products`, sorted from the smallest stock value to the largest stock value, and limited to 4 rows. Write the query in the SQL editor, click Run query, and check the results table."
+              "title": "Build a Low-Stock Review List",
+              "prompt": "Return `id`, `name`, and `stock`, sorted from lowest stock to highest, and keep only four rows."
             }
           }
         }
@@ -263,20 +208,6 @@
             },
             "quiz": {
               "title": "Quiz"
-            },
-            "project": {
-              "title": "Build a ranked product report"
-            }
-          },
-          "projectSteps": {
-            "ci_top_three_expensive_products": {
-              "title": "Show the 3 most expensive products"
-            },
-            "ci_newest_two_products": {
-              "title": "Show the 2 newest products"
-            },
-            "ci_low_stock_report": {
-              "title": "Build a low-stock report"
             }
           },
           "quiz": {
@@ -380,7 +311,7 @@
               "prompt": "Fill in the missing SQL keyword to keep only 3 rows.",
               "hint": "This clause controls how many rows appear.",
               "help": {
-                "concept": "The SQL clause for restricting the number of returned rows is `the missing term`.",
+                "concept": "The SQL clause for restricting the number of returned rows is `the blank`.",
                 "hint_1": "It is not a filtering clause like `WHERE` and not a sorting clause like `ORDER BY`.",
                 "hint_2": "Use the keyword that comes before a number such as 3 when you want only a few rows."
               },
@@ -444,7 +375,7 @@
             },
             "try-build_clear_result_sets-sketch0": {
               "title": "Show the 3 most expensive products",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that returns the `name` and `price` columns from `products`, sorted by `price` from highest to lowest, and shows only the top 3 rows. Write the query in the SQL editor, click Run query, and check the results table.",
+              "prompt": "Build a ranking query that returns the `name` and `price` columns from `products`, sorted by `price` from highest to lowest, and shows only the top 3 rows. Run it and compare the result with the expected table.",
               "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
               "help": {
                 "concept": "This SQL exercise checks whether your query returns the requested result.",
@@ -455,7 +386,7 @@
             },
             "try-build_clear_result_sets-sketch1": {
               "title": "Show the 2 newest products",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that returns `name` and `created_at` from `products`, sorted so the newest dates come first, with only 2 rows in the results. Write the query in the SQL editor, click Run query, and check the results table.",
+              "prompt": "Build a ranking query that returns `name` and `created_at` from `products`, sorted so the newest dates come first, with only 2 rows in the results. Run it and compare the result with the expected table.",
               "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
               "help": {
                 "concept": "This SQL exercise checks whether your query returns the requested result.",
@@ -465,30 +396,30 @@
               "starterCode": "-- sort by date and keep 2 rows\nSELECT name, created_at\nFROM products"
             },
             "try-build_clear_result_sets-sketch2": {
-              "title": "Build a low-stock report",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that returns `name` and `stock` from `products`, sorted from the smallest stock value to the largest stock value, and limited to 4 rows. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Build a Low-Stock Review List",
+              "prompt": "Return `id`, `name`, and `stock`, sorted from lowest stock to highest, and keep only four rows.",
+              "hint": "Use LIMIT 4 after the sort.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
+                "concept": "Return `id`, `name`, and `stock`, sorted from lowest stock to highest, and keep only four rows.",
+                "hint_1": "Use LIMIT 4 after the sort.",
+                "hint_2": "Run the query and compare the returned columns and rows with the expected result."
               },
-              "starterCode": "-- sort by stock and limit the result\nSELECT name, stock\nFROM products"
+              "starterCode": "SELECT id, name, stock\nFROM products\nORDER BY stock ASC\nLIMIT ;"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_build_clear_result_sets_sketch0": {
               "title": "Show the 3 most expensive products",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that returns the `name` and `price` columns from `products`, sorted by `price` from highest to lowest, and shows only the top 3 rows. Write the query in the SQL editor, click Run query, and check the results table."
+              "prompt": "Build a ranking query that returns the `name` and `price` columns from `products`, sorted by `price` from highest to lowest, and shows only the top 3 rows. Run it and compare the result with the expected table."
             },
             "try_build_clear_result_sets_sketch1": {
               "title": "Show the 2 newest products",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that returns `name` and `created_at` from `products`, sorted so the newest dates come first, with only 2 rows in the results. Write the query in the SQL editor, click Run query, and check the results table."
+              "prompt": "Build a ranking query that returns `name` and `created_at` from `products`, sorted so the newest dates come first, with only 2 rows in the results. Run it and compare the result with the expected table."
             },
             "try_build_clear_result_sets_sketch2": {
-              "title": "Build a low-stock report",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that returns `name` and `stock` from `products`, sorted from the smallest stock value to the largest stock value, and limited to 4 rows. Write the query in the SQL editor, click Run query, and check the results table."
+              "title": "Build a Low-Stock Review List",
+              "prompt": "Return `id`, `name`, and `stock`, sorted from lowest stock to highest, and keep only four rows."
             }
           }
         }

@@ -11,12 +11,27 @@
       "subjectSlug": "sql",
       "path": "subjects/sql",
       "courseOrder": [
-        "sql-v2"
+        "sql-v2",
+        "sql-analysis-reporting",
+        "multi-table-sql",
+        "sql-data-management"
       ],
       "courses": [
         {
           "courseSlug": "sql-v2",
           "path": "subjects/sql/courses/sql-v2/course.spec.json"
+        },
+        {
+          "courseSlug": "sql-analysis-reporting",
+          "path": "subjects/sql/courses/sql-analysis-reporting/course.spec.json"
+        },
+        {
+          "courseSlug": "multi-table-sql",
+          "path": "subjects/sql/courses/multi-table-sql/course.spec.json"
+        },
+        {
+          "courseSlug": "sql-data-management",
+          "path": "subjects/sql/courses/sql-data-management/course.spec.json"
         }
       ]
     },

@@ -1,0 +1,165 @@
+{
+  "topics": {
+    "multi-table-sql": {
+      "multi-table-sql-module-1-relationship-paths": {
+        "avoiding-cartesian-and-wrong-key-joins": {
+          "label": "Avoiding Cartesian and Wrong-Key Joins",
+          "summary": "Diagnose results that multiply unexpectedly or match unrelated identifiers.",
+          "cards": {
+            "sketch0": {
+              "title": "Understanding Cartesian Products"
+            },
+            "sketch1": {
+              "title": "Avoiding Wrong-Key Joins"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_avoiding_cartesian_and_wrong_key_joins_sketch0": {
+              "title": "Try a Connected Grade-Level Course List",
+              "prompt": "List each enrolled student grade level beside the matching course title without creating a Cartesian product. Use `enrollments` to connect the two tables.",
+              "hint": "The bridge table supplies the two key comparisons that prevent unrelated combinations.",
+              "help": {
+                "concept": "A correct relationship path limits the result to real registrations instead of every possible student-course pair.",
+                "hint_1": "Join students to enrollments, then enrollments to courses.",
+                "hint_2": "Select `students.grade_level` rather than copying the lesson's student-name output."
+              },
+              "starterCode": "SELECT students.name, courses.title\nFROM students\n-- Complete the JOINs here\n;",
+              "solutionCode": "SELECT students.grade_level,\n       courses.title\nFROM students\nINNER JOIN enrollments ON students.id = enrollments.student_id\nINNER JOIN courses ON enrollments.course_id = courses.id\nORDER BY students.grade_level, courses.title;"
+            },
+            "try_avoiding_cartesian_and_wrong_key_joins_sketch1": {
+              "title": "Repair a Wrong-Key Enrollment Audit",
+              "prompt": "Start from `enrollments` and return enrollment id, student name, and course title. Use each foreign key with its documented parent key and sort by enrollment id.",
+              "hint": "`student_id` points to `students.id`; `course_id` points to `courses.id`.",
+              "help": {
+                "concept": "A wrong-key join can return plausible-looking rows even when the compared identifiers represent different entities.",
+                "hint_1": "Use one `ON` condition for each relationship leaving `enrollments`.",
+                "hint_2": "Starting from the bridge table makes the expected one-row-per-enrollment grain easy to verify."
+              },
+              "starterCode": "-- Repair the key path for an enrollment audit\n",
+              "solutionCode": "SELECT e.id AS enrollment_id,\n       s.name AS student_name,\n       c.title AS course_title\nFROM enrollments AS e\nINNER JOIN students AS s\n  ON e.student_id = s.id\nINNER JOIN courses AS c\n  ON e.course_id = c.id\nORDER BY e.id;\n"
+            }
+          },
+          "practice": {
+            "quiz1": {
+              "title": "Understanding Cartesian Products",
+              "prompt": "What is a Cartesian product in SQL?",
+              "hint": "Think about what happens when two tables are joined without an ON condition.",
+              "help": {
+                "concept": "A Cartesian product results from joining tables without a condition.",
+                "hint_1": "Consider the result of joining every row from one table with every row from another.",
+                "hint_2": "It's the result of a join without specifying how the tables relate."
+              },
+              "options": {
+                "a": "A join that multiplies rows from two tables without a condition",
+                "b": "A join that correctly matches rows based on a condition",
+                "c": "A join that filters rows based on a condition",
+                "d": "A join that combines rows from two tables with a condition"
+              }
+            },
+            "quiz2": {
+              "title": "Identifying Wrong-Key Joins",
+              "prompt": "What is a wrong-key join in SQL?",
+              "hint": "Consider what happens when tables are joined on unrelated columns.",
+              "help": {
+                "concept": "A wrong-key join uses incorrect columns for joining tables.",
+                "hint_1": "Think about joining tables on columns that don't represent their relationship.",
+                "hint_2": "It's when tables are joined on columns that don't match their intended relationship."
+              },
+              "options": {
+                "a": "A join using unrelated columns",
+                "b": "A join using correct foreign keys",
+                "c": "A join using primary keys",
+                "d": "A join using a bridge table"
+              }
+            },
+            "quiz3": {
+              "title": "Avoiding Cartesian Products",
+              "prompt": "Which of the following strategies help avoid Cartesian products? Select all that apply.",
+              "hint": "Consider how you can ensure tables are joined correctly.",
+              "help": {
+                "concept": "Avoid Cartesian products by using proper join conditions.",
+                "hint_1": "Use ON conditions to specify how tables relate.",
+                "hint_2": "Ensure every join has a condition that matches related columns."
+              },
+              "options": {
+                "a": "Use proper ON conditions in joins",
+                "b": "Join tables without any conditions",
+                "c": "Use WHERE clauses to filter results",
+                "d": "Join tables using a bridge table"
+              }
+            },
+            "quiz4": {
+              "title": "Order of Join Operations",
+              "prompt": "Arrange the steps to correctly join `students` and `courses` using the `enrollments` table.",
+              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "help": {
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
+              },
+              "tokens": {
+                "t1": "Join students to enrollments",
+                "t2": "Join enrollments to courses",
+                "t3": "Select student names and course titles"
+              }
+            },
+            "quiz5": {
+              "title": "Correct Join Condition",
+              "prompt": "Fill in the blank to complete the correct join condition: `JOIN enrollments ON students.id = [blank1]`",
+              "hint": "Identify the correct column in `enrollments` that relates to `students`.",
+              "help": {
+                "concept": "Use the correct foreign key to join tables.",
+                "hint_1": "The column in `enrollments` that relates to `students` is a foreign key.",
+                "hint_2": "It's the column that references `students.id`."
+              },
+              "template": "JOIN enrollments ON students.id = [blank1]",
+              "choices": [
+                "enrollments.student_id",
+                "enrollments.course_id",
+                "students.name",
+                "courses.id"
+              ]
+            },
+            "quiz6": {
+              "title": "Bridge Table Join",
+              "prompt": "Fill in the blank to complete the join using a bridge table: `JOIN courses ON enrollments.course_id = [blank1]`",
+              "hint": "Identify the correct column in `courses` that relates to `enrollments`.",
+              "help": {
+                "concept": "Use the correct foreign key to join tables through a bridge table.",
+                "hint_1": "The column in `courses` that relates to `enrollments` is a primary key.",
+                "hint_2": "It's the column that `enrollments.course_id` references."
+              },
+              "template": "JOIN courses ON enrollments.course_id = [blank1]",
+              "choices": [
+                "courses.id",
+                "courses.title",
+                "enrollments.student_id",
+                "students.id"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "multi-table-sql": {
+      "multi-table-sql-module-1-relationship-paths": {
+        "avoiding-cartesian-and-wrong-key-joins": {
+          "sketch0": {
+            "title": "Understanding Cartesian Products",
+            "bodyMarkdown": "A Cartesian product occurs when two tables are joined without a proper ON condition, resulting in every row from the first table being combined with every row from the second table. This often leads to an unexpectedly large number of results. \n\nFor example, consider the following SQL query:\n\n```sql\nSELECT *\nFROM students, courses;\n```\n\nThis query will return a Cartesian product of the `students` and `courses` tables, multiplying the number of rows in `students` by the number of rows in `courses`. To avoid this, always use a proper JOIN with an ON condition that specifies how the tables are related."
+          },
+          "sketch1": {
+            "title": "Avoiding Wrong-Key Joins",
+            "bodyMarkdown": "A wrong-key join happens when tables are joined on columns that do not correctly represent the relationship between them. This can lead to incorrect data being combined.\n\nFor example, if you mistakenly join `students` and `courses` on their `id` columns, you might write:\n\n```sql\nSELECT *\nFROM students\nJOIN courses ON students.id = courses.id;\n```\n\nThis join is incorrect because `students.id` should not be matched with `courses.id`. Instead, use the `enrollments` table as a bridge:\n\n```sql\nSELECT students.name, courses.title\nFROM students\nJOIN enrollments ON students.id = enrollments.student_id\nJOIN courses ON enrollments.course_id = courses.id;\n```\n\nThis query correctly joins the tables using the `enrollments` table to connect `students` and `courses`."
+          }
+        }
+      }
+    }
+  }
+}

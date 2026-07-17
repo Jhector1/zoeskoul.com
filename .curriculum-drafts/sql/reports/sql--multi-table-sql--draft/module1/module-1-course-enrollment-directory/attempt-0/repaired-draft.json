@@ -1,0 +1,104 @@
+{
+  "title": "Module 1 Project: Course Enrollment Directory",
+  "summary": "Build a department-to-student enrollment directory through five cumulative multi-table steps.",
+  "minutes": 65,
+  "sketchBlocks": [
+    {
+      "id": "sketch-1",
+      "title": "Project Overview: Course Enrollment Directory",
+      "bodyMarkdown": "In this project, you will create a comprehensive course enrollment directory. The goal is to connect various tables in the database to display which students are enrolled in each course and which department offers each course. This involves joining multiple tables: departments, courses, enrollments, and students. By the end of this project, you will have a clear understanding of how to navigate and join tables to produce meaningful reports."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "step-1",
+      "kind": "code_input",
+      "title": "Connect Courses to Departments",
+      "prompt": "Join the courses table to the departments table and return the course title along with the department name.",
+      "starterCode": "-- Write your SQL answer below",
+      "solutionCode": "SELECT courses.title, departments.name\nFROM courses\nJOIN departments ON courses.department_id = departments.id;",
+      "datasetId": "school_relations_intro",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "step-2",
+      "kind": "code_input",
+      "title": "Add Enrollment Records",
+      "prompt": "Extend the query to include enrollments so each result row represents one enrollment in a course.",
+      "starterCode": "-- Write your SQL answer below",
+      "solutionCode": "SELECT courses.title, departments.name, enrollments.term\nFROM courses\nJOIN departments ON courses.department_id = departments.id\nJOIN enrollments ON courses.id = enrollments.course_id;",
+      "datasetId": "school_relations_intro",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "step-3",
+      "kind": "code_input",
+      "title": "Add Student Details",
+      "prompt": "Extend the query to include student details, returning the student name and grade level.",
+      "starterCode": "-- Write your SQL answer below",
+      "solutionCode": "SELECT courses.title, departments.name, students.name, students.grade_level, enrollments.term\nFROM courses\nJOIN departments ON courses.department_id = departments.id\nJOIN enrollments ON courses.id = enrollments.course_id\nJOIN students ON enrollments.student_id = students.id;",
+      "datasetId": "school_relations_intro",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "step-4",
+      "kind": "code_input",
+      "title": "Clarify the Directory Output",
+      "prompt": "Use exact aliases for department, course, student, grade_level, and term without changing the row grain.",
+      "starterCode": "-- Write your SQL answer below",
+      "solutionCode": "SELECT courses.title AS course, departments.name AS department, students.name AS student, students.grade_level AS grade_level, enrollments.term AS term\nFROM courses\nJOIN departments ON courses.department_id = departments.id\nJOIN enrollments ON courses.id = enrollments.course_id\nJOIN students ON enrollments.student_id = students.id;",
+      "datasetId": "school_relations_intro",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "step-5",
+      "kind": "code_input",
+      "title": "Sort the Directory for Review",
+      "prompt": "Order the results by department, course, and student ascending with deterministic output.",
+      "starterCode": "-- Write your SQL answer below",
+      "solutionCode": "SELECT courses.title AS course, departments.name AS department, students.name AS student, students.grade_level AS grade_level, enrollments.term AS term\nFROM courses\nJOIN departments ON courses.department_id = departments.id\nJOIN enrollments ON courses.id = enrollments.course_id\nJOIN students ON enrollments.student_id = students.id\nORDER BY department, course, student;",
+      "datasetId": "school_relations_intro",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Course Enrollment Directory Project",
+    "stepIds": [
+      "step-1",
+      "step-2",
+      "step-3",
+      "step-4",
+      "step-5"
+    ]
+  }
+}

@@ -8,6 +8,10 @@ import {
     mergeLearningIdeConfigs,
 } from "@/lib/ide/learningIdeConfig";
 import { mergeManifestRuntimeDefaults } from "./runtimeDefaults";
+import {
+    mergeToolPresentationPolicies,
+    type ToolPresentationPolicy,
+} from "@zoeskoul/curriculum-contracts";
 
 export function withTopicParentContext(args: {
     manifest: SlimTopicManifest;
@@ -21,6 +25,9 @@ export function withTopicParentContext(args: {
     moduleServiceDefaults?: LearningIdeConfig | null;
     sectionRuntimeDefaults?: ManifestRuntimeDefaults | null;
     sectionServiceDefaults?: LearningIdeConfig | null;
+    subjectTools?: ToolPresentationPolicy | null;
+    moduleTools?: ToolPresentationPolicy | null;
+    sectionTools?: ToolPresentationPolicy | null;
 }): FullTopicManifest {
     return {
         ...args.manifest,
@@ -39,6 +46,12 @@ export function withTopicParentContext(args: {
             args.moduleRuntimeDefaults,
             args.sectionRuntimeDefaults,
             args.manifest.runtimeDefaults,
+        ),
+        tools: mergeToolPresentationPolicies(
+            args.subjectTools,
+            args.moduleTools,
+            args.sectionTools,
+            args.manifest.tools,
         ),
     };
 }

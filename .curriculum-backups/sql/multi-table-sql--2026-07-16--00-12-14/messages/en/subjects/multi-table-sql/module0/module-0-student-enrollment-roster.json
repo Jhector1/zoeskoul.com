@@ -1,0 +1,153 @@
+{
+  "topics": {
+    "multi-table-sql": {
+      "multi-table-sql-module-0-join-foundations": {
+        "module-0-student-enrollment-roster": {
+          "label": "Module 0 Project: Student Enrollment Activity Roster",
+          "summary": "Build a qualified and readable student-enrollment roster through five cumulative join steps.",
+          "cards": {
+            "sketch0": {
+              "title": "Project Overview: Building a Student Enrollment Roster"
+            },
+            "project": {
+              "title": "Student Enrollment Activity Roster"
+            }
+          },
+          "projectSteps": {
+            "step1": {
+              "title": "Connect Students to Enrollment Records"
+            },
+            "step2": {
+              "title": "Step 2: Give Duplicate IDs Clear Output Headings"
+            },
+            "step3": {
+              "title": "Step 3: Shorten the Query with Table Aliases"
+            },
+            "step4": {
+              "title": "Focus on Upper Grade Levels"
+            },
+            "step5": {
+              "title": "Order the Roster Predictably"
+            }
+          },
+          "moduleProject": {
+            "steps": {
+              "step1": {
+                "title": "Connect Students to Enrollment Records",
+                "prompt": "Start the module project. In step 1 of 5, Use an INNER JOIN to connect students and enrollments. Return student id, student name, enrollment id, course id, and term.",
+                "hint": "This is the first project step. Build a clean starting version, then run it before moving on.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "This is the first project step. Build a clean starting version, then run it before moving on.",
+                  "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+                },
+                "starterCode": "-- Write your SQL answer below",
+                "solutionCode": "SELECT \n  students.id, \n  students.name, \n  enrollments.id, \n  enrollments.course_id, \n  enrollments.term \nFROM students \nINNER JOIN enrollments ON students.id = enrollments.student_id;"
+              },
+              "step2": {
+                "title": "Step 2: Give Duplicate IDs Clear Output Headings",
+                "prompt": "Continue the roster by aliasing the two displayed `id` columns as `student_id` and `enrollment_id`. Keep full table names and preserve the same rows.",
+                "hint": "Change only the naming requirement for this step; keep the relationship and selected data intact.",
+                "help": {
+                  "concept": "This project separates output aliases from table aliases so each change has one clear purpose.",
+                  "hint_1": "Output aliases appear after selected expressions; table aliases are declared after table names.",
+                  "hint_2": "Run the previous solution first, then make only the naming change requested here."
+                },
+                "starterCode": "SELECT \n  students.id, \n  students.name, \n  enrollments.id, \n  enrollments.course_id, \n  enrollments.term \nFROM students \nINNER JOIN enrollments ON students.id = enrollments.student_id;\n-- Project step 2: Qualify Every Shared Identifier\n-- Keep the working code above from the previous step.\n-- Next, Keep the same rows and qualify every selected id column with its table name or alias\n-- Add only the focused change for this step inside the existing work.\n",
+                "solutionCode": "SELECT \n  students.id AS student_id, \n  students.name, \n  enrollments.id AS enrollment_id, \n  enrollments.course_id, \n  enrollments.term \nFROM students \nINNER JOIN enrollments ON students.id = enrollments.student_id;\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "SELECT \n  students.id, \n  students.name, \n  enrollments.id, \n  enrollments.course_id, \n  enrollments.term \nFROM students \nINNER JOIN enrollments ON students.id = enrollments.student_id;\n-- Project step 2: Qualify Every Shared Identifier\n-- Keep the working code above from the previous step.\n-- Next, Keep the same rows and qualify every selected id column with its table name or alias\n-- Add only the focused change for this step inside the existing work.\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_py": {
+                    "content": "SELECT \n  students.id AS student_id, \n  students.name, \n  enrollments.id AS enrollment_id, \n  enrollments.course_id, \n  enrollments.term \nFROM students \nINNER JOIN enrollments ON students.id = enrollments.student_id;\n"
+                  }
+                }
+              },
+              "step3": {
+                "title": "Step 3: Shorten the Query with Table Aliases",
+                "prompt": "Replace the repeated table names with `s` and `e` while preserving the output headings and the same one-row-per-enrollment result.",
+                "hint": "Change only the naming requirement for this step; keep the relationship and selected data intact.",
+                "help": {
+                  "concept": "This project separates output aliases from table aliases so each change has one clear purpose.",
+                  "hint_1": "Output aliases appear after selected expressions; table aliases are declared after table names.",
+                  "hint_2": "Run the previous solution first, then make only the naming change requested here."
+                },
+                "starterCode": "SELECT \n  students.id AS student_id, \n  students.name, \n  enrollments.id AS enrollment_id, \n  enrollments.course_id, \n  enrollments.term \nFROM students \nINNER JOIN enrollments ON students.id = enrollments.student_id;\n-- Project step 3: Add Readable Table and Column Aliases\n-- Keep the working code above from the previous step.\n-- Next, Use concise table aliases and rename the displayed identifiers as student_id, enrollment_id, and course_id\n-- Add only the focused change for this step inside the existing work.\n",
+                "solutionCode": "SELECT \n  s.id AS student_id, \n  s.name, \n  e.id AS enrollment_id, \n  e.course_id AS course_id, \n  e.term \nFROM students AS s \nINNER JOIN enrollments AS e ON s.id = e.student_id;\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "SELECT \n  students.id AS student_id, \n  students.name, \n  enrollments.id AS enrollment_id, \n  enrollments.course_id, \n  enrollments.term \nFROM students \nINNER JOIN enrollments ON students.id = enrollments.student_id;\n-- Project step 3: Add Readable Table and Column Aliases\n-- Keep the working code above from the previous step.\n-- Next, Use concise table aliases and rename the displayed identifiers as student_id, enrollment_id, and course_id\n-- Add only the focused change for this step inside the existing work.\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_py": {
+                    "content": "SELECT \n  s.id AS student_id, \n  s.name, \n  e.id AS enrollment_id, \n  e.course_id AS course_id, \n  e.term \nFROM students AS s \nINNER JOIN enrollments AS e ON s.id = e.student_id;\n"
+                  }
+                }
+              },
+              "step4": {
+                "title": "Focus on Upper Grade Levels",
+                "prompt": "Continue the same module project from the previous working step. In step 4 of 5, Keep the complete joined roster and include only students in grade level 10 or higher.",
+                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                  "hint_2": "Run the previous working code first, then make only the focused change for this step."
+                },
+                "starterCode": "SELECT \n  s.id AS student_id, \n  s.name, \n  e.id AS enrollment_id, \n  e.course_id AS course_id, \n  e.term \nFROM students AS s \nINNER JOIN enrollments AS e ON s.id = e.student_id;\n-- Project step 4: Focus on Upper Grade Levels\n-- Keep the working code above from the previous step.\n-- Next, Keep the complete joined roster and include only students in grade level 10 or higher\n-- Add only the focused change for this step inside the existing work.\n",
+                "solutionCode": "SELECT \n  s.id AS student_id, \n  s.name, \n  e.id AS enrollment_id, \n  e.course_id AS course_id, \n  e.term \nFROM students AS s \nINNER JOIN enrollments AS e ON s.id = e.student_id \nWHERE s.grade_level >= 10;\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "SELECT \n  s.id AS student_id, \n  s.name, \n  e.id AS enrollment_id, \n  e.course_id AS course_id, \n  e.term \nFROM students AS s \nINNER JOIN enrollments AS e ON s.id = e.student_id;\n-- Project step 4: Focus on Upper Grade Levels\n-- Keep the working code above from the previous step.\n-- Next, Keep the complete joined roster and include only students in grade level 10 or higher\n-- Add only the focused change for this step inside the existing work.\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_py": {
+                    "content": "SELECT \n  s.id AS student_id, \n  s.name, \n  e.id AS enrollment_id, \n  e.course_id AS course_id, \n  e.term \nFROM students AS s \nINNER JOIN enrollments AS e ON s.id = e.student_id \nWHERE s.grade_level >= 10;\n"
+                  }
+                }
+              },
+              "step5": {
+                "title": "Order the Roster Predictably",
+                "prompt": "Continue the same module project from the previous working step. In step 5 of 5, Sort by student name ascending, then course_id ascending, while preserving the complete query.",
+                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                  "hint_2": "Run the previous working code first, then make only the focused change for this step."
+                },
+                "starterCode": "SELECT \n  s.id AS student_id, \n  s.name, \n  e.id AS enrollment_id, \n  e.course_id AS course_id, \n  e.term \nFROM students AS s \nINNER JOIN enrollments AS e ON s.id = e.student_id \nWHERE s.grade_level >= 10;\n-- Project step 5: Order the Roster Predictably\n-- Keep the working code above from the previous step.\n-- Next, Sort by student name ascending, then course_id ascending, while preserving the complete query\n-- Add only the focused change for this step inside the existing work.\n",
+                "solutionCode": "SELECT \n  s.id AS student_id, \n  s.name, \n  e.id AS enrollment_id, \n  e.course_id AS course_id, \n  e.term \nFROM students AS s \nINNER JOIN enrollments AS e ON s.id = e.student_id \nWHERE s.grade_level >= 10 \nORDER BY s.name ASC, e.course_id ASC;\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "SELECT \n  s.id AS student_id, \n  s.name, \n  e.id AS enrollment_id, \n  e.course_id AS course_id, \n  e.term \nFROM students AS s \nINNER JOIN enrollments AS e ON s.id = e.student_id \nWHERE s.grade_level >= 10;\n-- Project step 5: Order the Roster Predictably\n-- Keep the working code above from the previous step.\n-- Next, Sort by student name ascending, then course_id ascending, while preserving the complete query\n-- Add only the focused change for this step inside the existing work.\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_py": {
+                    "content": "SELECT \n  s.id AS student_id, \n  s.name, \n  e.id AS enrollment_id, \n  e.course_id AS course_id, \n  e.term \nFROM students AS s \nINNER JOIN enrollments AS e ON s.id = e.student_id \nWHERE s.grade_level >= 10 \nORDER BY s.name ASC, e.course_id ASC;\n"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "multi-table-sql": {
+      "multi-table-sql-module-0-join-foundations": {
+        "module-0-student-enrollment-roster": {
+          "sketch0": {
+            "title": "Project Overview: Building a Student Enrollment Roster",
+            "bodyMarkdown": "In this project, you will create a comprehensive student enrollment roster by joining data from the `students` and `enrollments` tables. The goal is to produce a readable and qualified report that lists each student's enrollment activities. You'll use SQL joins to connect these tables, ensuring that each enrollment record is accurately linked to the corresponding student. This project will guide you through five steps, each building on the previous one, to achieve a final, polished roster."
+          }
+        }
+      }
+    }
+  }
+}

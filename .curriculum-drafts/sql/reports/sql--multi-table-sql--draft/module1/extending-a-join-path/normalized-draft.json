@@ -1,0 +1,186 @@
+{
+  "title": "Extending a Join Path",
+  "summary": "Learn to extend a join path by adding one related table at a time without rewriting the query from scratch.",
+  "minutes": 26,
+  "sketchBlocks": [
+    {
+      "id": "sketch-0",
+      "title": "Understanding Join Paths",
+      "bodyMarkdown": "In SQL, a join path is the sequence of tables connected through join operations to retrieve data from multiple tables. When extending a join path, it's crucial to understand the relationships between tables. For example, consider the `students`, `enrollments`, and `courses` tables. A student can enroll in multiple courses, and each course can have multiple students. This is a many-to-many relationship facilitated by the `enrollments` table, which acts as a bridge.\n\n```sql\nSELECT students.name, courses.title\nFROM students\nJOIN enrollments ON students.id = enrollments.student_id\nJOIN courses ON enrollments.course_id = courses.id;\n```\n\nThis query retrieves the names of students and the titles of the courses they are enrolled in. The `enrollments` table connects `students` and `courses`, allowing us to extend the join path to include course details."
+    },
+    {
+      "id": "sketch-1",
+      "title": "Adding a Department to the Join Path",
+      "bodyMarkdown": "To extend a join path, you can add another related table. For instance, if you want to include department information for each course, you can join the `departments` table to the existing path. Each course belongs to a department, creating a many-to-one relationship between `courses` and `departments`.\n\n```sql\nSELECT students.name, courses.title, departments.name AS department_name\nFROM students\nJOIN enrollments ON students.id = enrollments.student_id\nJOIN courses ON enrollments.course_id = courses.id\nJOIN departments ON courses.department_id = departments.id;\n```\n\nThis query now includes the department name for each course, extending the join path to four tables. By understanding the relationships and using the correct join conditions, you can efficiently retrieve comprehensive data."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "try-extending-a-join-path-sketch0",
+      "kind": "code_input",
+      "title": "Try It: Extend the Join Path",
+      "prompt": "Extend the join path to include the department name for each course a student is enrolled in. Use the `students`, `enrollments`, `courses`, and `departments` tables.",
+      "starterCode": "SELECT students.name, courses.title\nFROM students\nJOIN enrollments ON students.id = enrollments.student_id\nJOIN courses ON enrollments.course_id = courses.id\n-- Add the departments table join here",
+      "solutionCode": "SELECT students.name, courses.title, departments.name AS department_name\nFROM students\nJOIN enrollments ON students.id = enrollments.student_id\nJOIN courses ON enrollments.course_id = courses.id\nJOIN departments ON courses.department_id = departments.id;",
+      "datasetId": "school_relations_intro",
+      "recipeType": "sql_query",
+      "hint": "Join the `departments` table using the `department_id` from the `courses` table.",
+      "help": {
+        "concept": "Extend the join path by adding the `departments` table to include department names.",
+        "hint_1": "Ensure you join `departments` on `courses.department_id = departments.id`.",
+        "hint_2": "Add `departments.name` to the SELECT clause to retrieve department names."
+      }
+    },
+    {
+      "id": "try-extending-a-join-path-sketch1",
+      "kind": "code_input",
+      "title": "Try It: Include Term Information",
+      "prompt": "Modify the query to also include the term information for each enrollment. Use the `students`, `enrollments`, `courses`, and `departments` tables.",
+      "starterCode": "SELECT students.name, courses.title, departments.name AS department_name\nFROM students\nJOIN enrollments ON students.id = enrollments.student_id\nJOIN courses ON enrollments.course_id = courses.id\nJOIN departments ON courses.department_id = departments.id\n-- Add term information to the SELECT clause",
+      "solutionCode": "SELECT students.name, courses.title, departments.name AS department_name, enrollments.term\nFROM students\nJOIN enrollments ON students.id = enrollments.student_id\nJOIN courses ON enrollments.course_id = courses.id\nJOIN departments ON courses.department_id = departments.id;",
+      "datasetId": "school_relations_intro",
+      "recipeType": "sql_query",
+      "hint": "Add the `term` column from the `enrollments` table to the SELECT clause.",
+      "help": {
+        "concept": "Include additional columns from the `enrollments` table to provide more context.",
+        "hint_1": "Ensure the `term` column is included in the SELECT clause.",
+        "hint_2": "The `term` column is directly available from the `enrollments` table."
+      }
+    },
+    {
+      "id": "single-choice-1",
+      "kind": "single_choice",
+      "title": "Understanding Many-to-Many Relationships",
+      "prompt": "Which table acts as a bridge in a many-to-many relationship between students and courses?",
+      "options": [
+        "students",
+        "courses",
+        "enrollments",
+        "departments"
+      ],
+      "correctOptionIds": [
+        "c"
+      ],
+      "hint": "Think about which table connects students to courses.",
+      "help": {
+        "concept": "A bridge table connects two tables in a many-to-many relationship.",
+        "hint_1": "The bridge table contains foreign keys referencing both related tables.",
+        "hint_2": "In this case, the `enrollments` table connects students and courses."
+      }
+    },
+    {
+      "id": "single-choice-2",
+      "kind": "single_choice",
+      "title": "Identifying Join Conditions",
+      "prompt": "What is the correct join condition to connect the `courses` table to the `departments` table?",
+      "options": [
+        "courses.id = departments.id",
+        "courses.department_id = departments.id",
+        "courses.id = departments.department_id",
+        "courses.department_id = departments.department_id"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Consider the foreign key relationship between these tables.",
+      "help": {
+        "concept": "Join conditions use foreign keys to connect related tables.",
+        "hint_1": "The `courses` table has a `department_id` column that references the `departments` table.",
+        "hint_2": "The correct condition is `courses.department_id = departments.id`."
+      }
+    },
+    {
+      "id": "multi-choice-1",
+      "kind": "multi_choice",
+      "title": "Characteristics of a Bridge Table",
+      "prompt": "Select all characteristics of a bridge table in a many-to-many relationship.",
+      "options": [
+        "Contains foreign keys to both related tables",
+        "Directly contains data from both related tables",
+        "Facilitates many-to-many relationships",
+        "Contains primary keys from related tables"
+      ],
+      "correctOptionIds": [
+        "a",
+        "c"
+      ],
+      "hint": "Consider what makes a bridge table unique in its role.",
+      "help": {
+        "concept": "Bridge tables connect two tables in a many-to-many relationship.",
+        "hint_1": "Bridge tables contain foreign keys referencing both related tables.",
+        "hint_2": "They do not contain primary keys from the related tables themselves."
+      }
+    },
+    {
+      "id": "drag-reorder-1",
+      "kind": "drag_reorder",
+      "title": "Order of Join Operations",
+      "prompt": "Arrange the steps to correctly join the `students`, `enrollments`, `courses`, and `departments` tables.",
+      "tokens": [
+        "students",
+        "enrollments",
+        "courses",
+        "departments"
+      ],
+      "correctOrder": [
+        "students",
+        "enrollments",
+        "courses",
+        "departments"
+      ],
+      "hint": "Start with the table that contains the primary key for the first join.",
+      "help": {
+        "concept": "The order of joins should follow the path of foreign key relationships.",
+        "hint_1": "Begin with the `students` table and follow the foreign key path.",
+        "hint_2": "The correct order follows the path: `students` -> `enrollments` -> `courses` -> `departments`."
+      }
+    },
+    {
+      "id": "fill-blank-choice-1",
+      "kind": "fill_blank_choice",
+      "title": "SQL Join Syntax",
+      "prompt": "Complete the SQL statement to join `students` and `enrollments` on the correct condition: `JOIN enrollments ON [blank1]`.",
+      "template": "JOIN enrollments ON [blank1]",
+      "choices": [
+        "students.id = enrollments.student_id",
+        "students.student_id = enrollments.id",
+        "enrollments.id = students.student_id",
+        "enrollments.student_id = students.id"
+      ],
+      "correctValue": "students.id = enrollments.student_id",
+      "hint": "Identify the foreign key relationship between `students` and `enrollments`.",
+      "help": {
+        "concept": "The join condition should match the foreign key in `enrollments` to the primary key in `students`.",
+        "hint_1": "The `enrollments` table references `students` using `student_id`.",
+        "hint_2": "The correct condition is `the missing term`."
+      }
+    },
+    {
+      "id": "fill-blank-choice-2",
+      "kind": "fill_blank_choice",
+      "title": "Adding a Column to SELECT",
+      "prompt": "Complete the SQL statement to add the `term` column from `enrollments` to the SELECT clause: `SELECT students.name, courses.title, [blank1]`.",
+      "template": "SELECT students.name, courses.title, [blank1]",
+      "choices": [
+        "enrollments.term",
+        "courses.term",
+        "students.term",
+        "departments.term"
+      ],
+      "correctValue": "enrollments.term",
+      "hint": "The `term` column is directly available from the `enrollments` table.",
+      "help": {
+        "concept": "Include additional columns in the SELECT clause to retrieve more data.",
+        "hint_1": "The `term` column provides information about the enrollment period.",
+        "hint_2": "Add `the missing term` to the SELECT clause."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Course Enrollment Directory",
+    "stepIds": [
+      "try-extending-a-join-path-sketch0",
+      "try-extending-a-join-path-sketch1"
+    ]
+  }
+}

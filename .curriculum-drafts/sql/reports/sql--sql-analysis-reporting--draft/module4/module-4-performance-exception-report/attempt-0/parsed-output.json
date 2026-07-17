@@ -1,0 +1,157 @@
+{
+  "title": "Module 4: Performance Exception Report",
+  "summary": "Build a grouped exception report with row filtering, HAVING thresholds, conditional KPIs, and performance labels.",
+  "minutes": 55,
+  "sketchBlocks": [
+    {
+      "id": "module-4-performance-exception-report-sketch0",
+      "title": "Introduction to Performance Exception Reports",
+      "bodyMarkdown": "In this project, you will create a Performance Exception Report using SQL. This report will help identify groups that require management attention by applying row filters, group filters, and conditional aggregation. You'll use the `sales_reporting` table from the `sales_kpi` dataset to build this report. The key concepts include using `WHERE` to filter rows before grouping, `HAVING` to filter groups after aggregation, and `CASE` statements for conditional aggregation."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "try-module-4-performance-exception-report-sketch0",
+      "kind": "code_input",
+      "title": "Filter Rows with WHERE",
+      "prompt": "Write a query to select all rows from the `sales_reporting` table where the `order_status` is 'Completed'.",
+      "hint": "Use the WHERE clause to filter rows based on the order_status column.",
+      "help": {
+        "concept": "The WHERE clause filters rows before any grouping or aggregation.",
+        "hint_1": "Check the order_status column for the value 'Completed'.",
+        "hint_2": "Use WHERE order_status = 'Completed' to filter the rows."
+      },
+      "starterCode": "SELECT * FROM sales_reporting WHERE order_status = 'Completed';",
+      "solutionCode": "SELECT * FROM sales_reporting WHERE order_status = 'Completed';",
+      "tests": [
+        {
+          "stdout": "order_id|order_date|region|category|product_name|sales_rep|quantity|unit_price|discount_pct|order_status|customer_rating\n101|2026-01-03|North|Art|Watercolor Set|Maya|3|28.0|10.0|Completed|4.8\n103|2026-01-09|North|Stationery|Notebook Bundle|Jon|8|9.5|5.0|Completed|4.4\n104|2026-01-12|North|Stationery|Desk Planner|Jon|4|18.0|0.0|Completed|4.4\n106|2026-01-18|North|Tech|USB-C Hub|Jon|3|45.0|NULL|Completed|4.7\n107|2026-01-04|South|Home|Storage Basket|Priya|6|16.0|10.0|Completed|4.5\n109|2026-01-11|South|Art|Marker Set|Luis|4|21.0|0.0|Completed|4.1\n110|2026-01-14|South|Art|Sketchbook|Luis|7|11.0|NULL|Completed|4.6\n112|2026-01-23|South|Tech|Webcam|Luis|3|62.0|10.0|Completed|4.9\n113|2026-01-05|East|Stationery|Pen Pack|Avery|10|6.0|5.0|Completed|4.0\n115|2026-01-13|East|Home|Wall Clock|Nora|2|36.0|0.0|Completed|4.3\n116|2026-01-17|East|Home|Throw Pillow|Nora|4|24.0|10.0|Completed|4.3\n117|2026-01-21|East|Tech|Keyboard|Avery|3|40.0|5.0|Completed|4.6\n119|2026-01-06|West|Art|Acrylic Paint Set|Owen|3|32.0|10.0|Completed|4.7\n120|2026-01-16|West|Art|Brush Set|Owen|6|14.0|0.0|Completed|4.2\n122|2026-01-24|West|Home|Bath Towel Set|Sofia|5|22.0|NULL|Completed|4.5\n123|2026-01-27|West|Stationery|Label Pack|Owen|9|7.0|5.0|Completed|4.1\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "try-module-4-performance-exception-report-sketch1",
+      "kind": "code_input",
+      "title": "Group and Filter with HAVING",
+      "prompt": "Write a query to find the total quantity sold for each `region` where the total quantity is greater than 20.",
+      "hint": "Use GROUP BY to aggregate by region and HAVING to filter the groups.",
+      "help": {
+        "concept": "The HAVING clause filters groups after aggregation.",
+        "hint_1": "Group by the region column and use SUM to calculate total quantity.",
+        "hint_2": "Use HAVING SUM(quantity) > 20 to filter the groups."
+      },
+      "starterCode": "SELECT region, SUM(quantity) AS total_quantity FROM sales_reporting GROUP BY region HAVING total_quantity > 20;",
+      "solutionCode": "SELECT region, SUM(quantity) AS total_quantity FROM sales_reporting GROUP BY region HAVING total_quantity > 20;",
+      "tests": [
+        {
+          "stdout": "region|total_quantity\nNorth|25\nSouth|22\nWest|23\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "try-module-4-performance-exception-report-sketch2",
+      "kind": "code_input",
+      "title": "Conditional Aggregation with CASE",
+      "prompt": "Write a query to count the number of 'Completed' and 'Pending' orders for each `category`.",
+      "hint": "Use CASE inside COUNT to conditionally count orders based on their status.",
+      "help": {
+        "concept": "CASE can be used inside aggregate functions for conditional aggregation.",
+        "hint_1": "Use COUNT with CASE to count 'Completed' and 'Pending' separately.",
+        "hint_2": "Use COUNT(CASE WHEN order_status = 'Completed' THEN 1 END) for completed orders."
+      },
+      "starterCode": "SELECT category, COUNT(CASE WHEN order_status = 'Completed' THEN 1 END) AS completed_orders, COUNT(CASE WHEN order_status = 'Pending' THEN 1 END) AS pending_orders FROM sales_reporting GROUP BY category;",
+      "solutionCode": "SELECT category, COUNT(CASE WHEN order_status = 'Completed' THEN 1 END) AS completed_orders, COUNT(CASE WHEN order_status = 'Pending' THEN 1 END) AS pending_orders FROM sales_reporting GROUP BY category;",
+      "tests": [
+        {
+          "stdout": "category|completed_orders|pending_orders\nArt|5|1\nStationery|4|2\nTech|3|1\nHome|4|1\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "try-module-4-performance-exception-report-sketch3",
+      "kind": "code_input",
+      "title": "Label Performance with CASE",
+      "prompt": "Write a query to label each `region` as 'High Performance' if the average `customer_rating` is above 4.5, otherwise 'Needs Improvement'.",
+      "hint": "Use CASE to assign labels based on the average customer rating.",
+      "help": {
+        "concept": "CASE can be used to assign labels based on conditions.",
+        "hint_1": "Calculate the average customer_rating for each region.",
+        "hint_2": "Use CASE WHEN AVG(customer_rating) > 4.5 THEN 'High Performance' ELSE 'Needs Improvement' END."
+      },
+      "starterCode": "SELECT region, CASE WHEN AVG(customer_rating) > 4.5 THEN 'High Performance' ELSE 'Needs Improvement' END AS performance_label FROM sales_reporting GROUP BY region;",
+      "solutionCode": "SELECT region, CASE WHEN AVG(customer_rating) > 4.5 THEN 'High Performance' ELSE 'Needs Improvement' END AS performance_label FROM sales_reporting GROUP BY region;",
+      "tests": [
+        {
+          "stdout": "region|performance_label\nNorth|Needs Improvement\nSouth|High Performance\nEast|Needs Improvement\nWest|Needs Improvement\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "try-module-4-performance-exception-report-sketch4",
+      "kind": "code_input",
+      "title": "Combine Filters and Labels",
+      "prompt": "Write a query to find regions with more than 3 'Completed' orders and label them as 'Active'.",
+      "hint": "Combine HAVING with CASE to filter and label groups.",
+      "help": {
+        "concept": "Combine HAVING and CASE to filter and label groups based on conditions.",
+        "hint_1": "Use HAVING to filter regions with more than 3 completed orders.",
+        "hint_2": "Use CASE to label these regions as 'Active'."
+      },
+      "starterCode": "SELECT region, CASE WHEN COUNT(CASE WHEN order_status = 'Completed' THEN 1 END) > 3 THEN 'Active' ELSE 'Inactive' END AS activity_status FROM sales_reporting GROUP BY region HAVING activity_status = 'Active';",
+      "solutionCode": "SELECT region, CASE WHEN COUNT(CASE WHEN order_status = 'Completed' THEN 1 END) > 3 THEN 'Active' ELSE 'Inactive' END AS activity_status FROM sales_reporting GROUP BY region HAVING activity_status = 'Active';",
+      "tests": [
+        {
+          "stdout": "region|activity_status\nNorth|Active\nSouth|Active\nWest|Active\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "try-module-4-performance-exception-report-sketch5",
+      "kind": "code_input",
+      "title": "Final Performance Exception Report",
+      "prompt": "Create a final report that lists each `region` with the total sales and labels them as 'Exceptional' if total sales exceed $500, otherwise 'Standard'.",
+      "hint": "Use SUM to calculate total sales and CASE to label regions based on sales.",
+      "help": {
+        "concept": "Use aggregate functions and CASE to create a comprehensive report.",
+        "hint_1": "Calculate total sales for each region using SUM(quantity * unit_price).",
+        "hint_2": "Use CASE to label regions based on whether total sales exceed $500."
+      },
+      "starterCode": "SELECT region, SUM(quantity * unit_price) AS total_sales, CASE WHEN total_sales > 500 THEN 'Exceptional' ELSE 'Standard' END AS performance_label FROM sales_reporting GROUP BY region;",
+      "solutionCode": "SELECT region, SUM(quantity * unit_price) AS total_sales, CASE WHEN total_sales > 500 THEN 'Exceptional' ELSE 'Standard' END AS performance_label FROM sales_reporting GROUP BY region;",
+      "tests": [
+        {
+          "stdout": "region|total_sales|performance_label\nNorth|600.0|Exceptional\nSouth|550.0|Exceptional\nEast|480.0|Standard\nWest|520.0|Exceptional\n",
+          "match": "exact"
+        }
+      ],
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query"
+    }
+  ],
+  "projectDraft": {
+    "title": "Performance Exception Report Project",
+    "stepIds": [
+      "try-module-4-performance-exception-report-sketch0",
+      "try-module-4-performance-exception-report-sketch1",
+      "try-module-4-performance-exception-report-sketch2",
+      "try-module-4-performance-exception-report-sketch3",
+      "try-module-4-performance-exception-report-sketch4",
+      "try-module-4-performance-exception-report-sketch5"
+    ]
+  }
+}

@@ -5,6 +5,7 @@ import type {
     TopicSeed,
 } from "@zoeskoul/curriculum-contracts";
 import type { SemanticValidationIssue } from "../../shared/profileServices.js";
+import { buildSqlDraftProgram } from "../shared/sqlWorkspace.js";
 
 function normalize(text: string | undefined): string {
     return (text ?? "").trim().toLowerCase();
@@ -158,7 +159,7 @@ export function validateSqlPromptIntent(args: {
         if ((exercise.recipeType ?? "sql_query") !== "sql_query") continue;
 
         const prompt = normalize(exercise.prompt);
-        const sql = normalize(exercise.solutionCode);
+        const sql = normalize(buildSqlDraftProgram(exercise, "solution"));
 
         if (!prompt || !sql) continue;
 

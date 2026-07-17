@@ -57,6 +57,109 @@ describe("repairIncompleteExercises", () => {
         expect(exercise.datasetId).toBe("students_intro");
     });
 
+    it("keeps a SQL entry file aligned when replacing a solution-revealing starter", async () => {
+        const sql = [
+            "INSERT INTO inventory_items (name, category, price, status)",
+            "VALUES ('Sketchbook', 'Art Supplies', 12.99, 'active');",
+            "",
+            "SELECT name, category, price, status",
+            "FROM inventory_items",
+            "WHERE name = 'Sketchbook';",
+        ].join("\n");
+
+        const repaired = await repairIncompleteExercises({
+            provider: {} as any,
+            seed: {
+                profileId: "sql",
+                moduleRuntimeDefaults: {
+                    kind: "sql",
+                    datasetId: "inventory_ops",
+                },
+            } as any,
+            draft: {
+                title: "Insert with explicit columns",
+                summary: "Practice a safe insert.",
+                minutes: 15,
+                sketchBlocks: [],
+                quizDraft: [
+                    {
+                        id: "try-insert",
+                        kind: "code_input",
+                        title: "Insert a product",
+                        prompt: "Insert one product with an explicit column list.",
+                        hint: "Name each target column.",
+                        help: {
+                            concept: "Explicit column lists map values safely.",
+                            hint_1: "List the columns before VALUES.",
+                            hint_2: "Verify the inserted row.",
+                        },
+                        entryFilePath: "query.sql",
+                        starterCode: sql,
+                        solutionCode: sql,
+                        starterFiles: [
+                            {
+                                path: "schema.sql",
+                                content:
+                                    "CREATE TABLE inventory_items (id INTEGER PRIMARY KEY, name TEXT);",
+                                language: "sql",
+                                readOnly: true,
+                            },
+                            {
+                                path: "query.sql",
+                                content: sql,
+                                language: "sql",
+                                isEntry: true,
+                                entry: true,
+                                readOnly: false,
+                            },
+                        ],
+                        solutionFiles: [
+                            {
+                                path: "schema.sql",
+                                content:
+                                    "CREATE TABLE inventory_items (id INTEGER PRIMARY KEY, name TEXT);",
+                                language: "sql",
+                                readOnly: true,
+                            },
+                            {
+                                path: "query.sql",
+                                content: sql,
+                                language: "sql",
+                                isEntry: true,
+                                entry: true,
+                                readOnly: false,
+                            },
+                        ],
+                        sqlFileOrder: ["schema.sql", "query.sql"],
+                        recipeType: "sql_query",
+                        datasetId: "inventory_ops",
+                        checkSql:
+                            "SELECT name FROM inventory_items WHERE name = 'Sketchbook';",
+                    },
+                ],
+            } as any,
+        });
+
+        const exercise = repaired.quizDraft[0] as any;
+        const starterQuery = exercise.starterFiles.find(
+            (file: any) => file.path === "query.sql",
+        );
+        const starterSchema = exercise.starterFiles.find(
+            (file: any) => file.path === "schema.sql",
+        );
+        const solutionQuery = exercise.solutionFiles.find(
+            (file: any) => file.path === "query.sql",
+        );
+
+        expect(exercise.starterCode).toBe("-- Write your SQL answer below\n");
+        expect(starterQuery.content).toBe(exercise.starterCode);
+        expect(starterSchema.content).toBe(
+            "CREATE TABLE inventory_items (id INTEGER PRIMARY KEY, name TEXT);",
+        );
+        expect(exercise.solutionCode).toBe(sql);
+        expect(solutionQuery.content).toBe(sql);
+    });
+
     it("fills missing fill_blank correctValue from the first choice deterministically", async () => {
         const repaired = await repairIncompleteExercises({
             provider: {} as any,

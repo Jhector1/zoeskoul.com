@@ -1,0 +1,85 @@
+{
+  "topicId": "foreign-keys-and-references",
+  "ok": false,
+  "issues": [
+    {
+      "code": "SQL_DATASET_CONSISTENCY",
+      "category": "dataset",
+      "severity": "warn",
+      "message": "Sketch sketch2 references table \"sqlite_master\" outside effective dataset \"ddl_blank\""
+    },
+    {
+      "code": "SQL_DATASET_CONSISTENCY",
+      "category": "dataset",
+      "severity": "warn",
+      "message": "Sketch sketch2 references column \"sql\" that does not belong to effective dataset \"ddl_blank\""
+    },
+    {
+      "code": "SQL_DATASET_CONSISTENCY",
+      "category": "dataset",
+      "severity": "warn",
+      "message": "Sketch sketch2 references column \"type\" that does not belong to effective dataset \"ddl_blank\""
+    },
+    {
+      "code": "SQL_DATASET_CONSISTENCY",
+      "category": "dataset",
+      "severity": "warn",
+      "message": "Sketch sketch2 references column \"name\" that does not belong to effective dataset \"ddl_blank\""
+    },
+    {
+      "code": "SQL_DATASET_CONSISTENCY",
+      "category": "dataset",
+      "severity": "warn",
+      "message": "Exercise try-foreign-keys-and-references-sketch0 references table \"sqlite_master\" outside effective dataset \"ddl_blank\""
+    },
+    {
+      "code": "SQL_DATASET_CONSISTENCY",
+      "category": "dataset",
+      "severity": "warn",
+      "message": "Exercise try-foreign-keys-and-references-sketch0 references column \"sql\" that does not belong to effective dataset \"ddl_blank\""
+    },
+    {
+      "code": "SQL_DATASET_CONSISTENCY",
+      "category": "dataset",
+      "severity": "warn",
+      "message": "Exercise try-foreign-keys-and-references-sketch0 references column \"type\" that does not belong to effective dataset \"ddl_blank\""
+    },
+    {
+      "code": "SQL_DATASET_CONSISTENCY",
+      "category": "dataset",
+      "severity": "warn",
+      "message": "Exercise try-foreign-keys-and-references-sketch0 references column \"name\" that does not belong to effective dataset \"ddl_blank\""
+    },
+    {
+      "code": "SQL_DATASET_CONSISTENCY",
+      "category": "dataset",
+      "severity": "warn",
+      "message": "Exercise try-foreign-keys-and-references-sketch1 references table \"sqlite_master\" outside effective dataset \"ddl_blank\""
+    },
+    {
+      "code": "SQL_DATASET_CONSISTENCY",
+      "category": "dataset",
+      "severity": "warn",
+      "message": "Exercise try-foreign-keys-and-references-sketch1 references column \"sql\" that does not belong to effective dataset \"ddl_blank\""
+    },
+    {
+      "code": "SQL_DATASET_CONSISTENCY",
+      "category": "dataset",
+      "severity": "warn",
+      "message": "Exercise try-foreign-keys-and-references-sketch1 references column \"type\" that does not belong to effective dataset \"ddl_blank\""
+    },
+    {
+      "code": "SQL_DATASET_CONSISTENCY",
+      "category": "dataset",
+      "severity": "warn",
+      "message": "Exercise try-foreign-keys-and-references-sketch1 references column \"name\" that does not belong to effective dataset \"ddl_blank\""
+    },
+    {
+      "code": "WORKED_EXAMPLE_TRY_IT_DUPLICATE",
+      "category": "pedagogy",
+      "severity": "error",
+      "exerciseId": "try-foreign-keys-and-references-sketch0",
+      "message": "Try It exercise \"try-foreign-keys-and-references-sketch0\" reproduces the worked example in \"Verifying FOREIGN KEY Relationships\" (sketch2). Change a meaningful expectation such as the requested output, source entity, filter, aggregate, input, or relationship path. Formatting, capitalization, aliases, and ORDER BY alone do not make it a different exercise."
+    }
+  ]
+}

@@ -1,0 +1,165 @@
+{
+  "topics": {
+    "sql-analysis-reporting": {
+      "sql-analysis-reporting-module-1-null-safe-calculations": {
+        "case-for-readable-labels": {
+          "label": "CASE for Readable Labels",
+          "summary": "Turn row-level values into clear categories while handling missing data before numeric thresholds.",
+          "cards": {
+            "sketch0": {
+              "title": "Test Missing Values First"
+            },
+            "sketch1": {
+              "title": "Order Thresholds from Most Specific to Broadest"
+            },
+            "quiz": {
+              "title": "Check Your Understanding"
+            }
+          },
+          "practice": {
+            "single-choice-1": {
+              "title": "First Matching Branch",
+              "prompt": "How does a searched CASE choose its result?",
+              "hint": "CASE evaluates conditions in written order.",
+              "help": {
+                "concept": "The first true WHEN determines the result.",
+                "hint_1": "Later branches are skipped after a match.",
+                "hint_2": "Choose the behavior that makes order important."
+              },
+              "options": {
+                "a": "It returns every matching label.",
+                "b": "It returns the first matching branch.",
+                "c": "It always returns ELSE.",
+                "d": "It sorts the rows first."
+              }
+            },
+            "single-choice-2": {
+              "title": "Missing Rating Label",
+              "prompt": "Why should `customer_rating IS NULL` appear before rating thresholds?",
+              "hint": "A missing observation does not communicate the same meaning as a poor score.",
+              "help": {
+                "concept": "Explicit NULL handling protects the business interpretation.",
+                "hint_1": "The report should not invent a low rating.",
+                "hint_2": "Choose the option about meaning."
+              },
+              "options": {
+                "a": "NULL should be treated as zero.",
+                "b": "Missing is a separate state from low performance.",
+                "c": "CASE cannot compare numbers.",
+                "d": "It changes the source data."
+              }
+            },
+            "multi-choice-1": {
+              "title": "Good CASE Practices",
+              "prompt": "Which practices improve a row-level CASE label? Select all that apply.",
+              "hint": "CASE stops after the first true condition.",
+              "help": {
+                "concept": "Specific rules and missing-data rules should not be hidden by a broad branch.",
+                "hint_1": "Readable labels are part of the report contract.",
+                "hint_2": "Avoid a first branch that captures unintended rows."
+              },
+              "options": {
+                "a": "Order overlapping thresholds from most specific to broadest.",
+                "b": "Use an explicit NULL branch when missing has distinct meaning.",
+                "c": "Choose labels that tell the reader what the category means.",
+                "d": "Place a broad condition first so every row matches immediately."
+              }
+            },
+            "multi-choice-2": {
+              "title": "Rows Labeled High Value",
+              "prompt": "With `WHEN gross_sales >= 130 THEN High`, which gross values receive `High`? Select all that apply.",
+              "hint": "The comparison includes the threshold itself.",
+              "help": {
+                "concept": "Greater-than-or-equal matches 130 and any larger value.",
+                "hint_1": "Values below the threshold continue to later branches.",
+                "hint_2": "Check each number against 130."
+              },
+              "options": {
+                "a": "129",
+                "b": "130",
+                "c": "150",
+                "d": "80"
+              }
+            },
+            "drag-reorder-1": {
+              "title": "Order Rating Conditions",
+              "prompt": "Arrange the CASE checks from first to last.",
+              "hint": "Handle the distinct missing state, then test higher thresholds before lower ones.",
+              "help": {
+                "concept": "CASE order determines which overlapping condition wins.",
+                "hint_1": "NULL needs an explicit branch.",
+                "hint_2": "ELSE belongs after every WHEN."
+              },
+              "tokens": {
+                "t1": "customer_rating IS NULL",
+                "t2": "customer_rating >= 4.5",
+                "t3": "customer_rating >= 4.0",
+                "t4": "ELSE"
+              }
+            },
+            "fill-blank-choice-1": {
+              "title": "Close a CASE Expression",
+              "prompt": "Fill the keyword that completes the CASE before the alias.",
+              "hint": "A CASE expression has a required closing keyword.",
+              "help": {
+                "concept": "END closes the conditional expression.",
+                "hint_1": "The alias comes after the completed CASE.",
+                "hint_2": "Choose the standard SQL keyword."
+              },
+              "template": "CASE WHEN discount_pct IS NULL THEN 'Missing' ELSE 'Recorded' [blank1] AS discount_state",
+              "choices": [
+                "END",
+                "STOP",
+                "CLOSE",
+                "DONE"
+              ]
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_case_for_readable_labels_sketch0": {
+              "title": "Label Discount Review Status",
+              "prompt": "Select `order_id`, `discount_pct`, and a `discount_review` label: `Missing discount` for NULL, `Large discount` for 15 or more, otherwise `Standard discount`. Return `order_id, discount_pct, CASE WHEN discount_pct IS NULL THEN 'Missing discount' WHEN discount_pct >= 15 THEN 'Large discount' ELSE 'Standard discount' END AS discount_review` from `sales_reporting` in that column order.",
+              "hint": "Put the NULL condition before the numeric threshold.",
+              "help": {
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "Return `order_id, discount_pct, CASE WHEN discount_pct IS NULL THEN 'Missing discount' WHEN discount_pct >= 15 THEN 'Large discount' ELSE 'Standard discount' END AS discount_review` from `sales_reporting` in that column order."
+              },
+              "starterCode": "-- Write the query below.",
+              "solutionCode": "SELECT\n    order_id,\n    discount_pct,\n    CASE\n        WHEN discount_pct IS NULL THEN 'Missing discount'\n        WHEN discount_pct >= 15 THEN 'Large discount'\n        ELSE 'Standard discount'\n    END AS discount_review\nFROM sales_reporting;"
+            },
+            "try_case_for_readable_labels_sketch1": {
+              "title": "Classify Order Values",
+              "prompt": "Select `order_id`, gross sales, and `value_band`: `High value` for gross sales of 130 or more, `Mid value` for 80 or more, otherwise `Low value`. Return `order_id, quantity * unit_price AS gross_sales, CASE WHEN quantity * unit_price >= 130 THEN 'High value' WHEN quantity * unit_price >= 80 THEN 'Mid value' ELSE 'Low value' END AS value_band` from `sales_reporting` in that column order.",
+              "hint": "Check the highest threshold before the lower threshold.",
+              "help": {
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "Return `order_id, quantity * unit_price AS gross_sales, CASE WHEN quantity * unit_price >= 130 THEN 'High value' WHEN quantity * unit_price >= 80 THEN 'Mid value' ELSE 'Low value' END AS value_band` from `sales_reporting` in that column order."
+              },
+              "starterCode": "-- Write the query below.",
+              "solutionCode": "SELECT\n    order_id,\n    quantity * unit_price AS gross_sales,\n    CASE\n        WHEN quantity * unit_price >= 130 THEN 'High value'\n        WHEN quantity * unit_price >= 80 THEN 'Mid value'\n        ELSE 'Low value'\n    END AS value_band\nFROM sales_reporting;"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql-analysis-reporting": {
+      "sql-analysis-reporting-module-1-null-safe-calculations": {
+        "case-for-readable-labels": {
+          "sketch0": {
+            "title": "Test Missing Values First",
+            "bodyMarkdown": "The `CASE` statement in SQL is a powerful tool for creating readable labels based on conditions. It allows you to evaluate a list of conditions and return a specific value when the first condition is met. If no conditions are true, it can return a default value. This is particularly useful for categorizing data in reports.\n\n`CASE` turns conditions into readable report labels. SQL evaluates the branches from top to bottom and returns the result from the first condition that matches.\n\nMissing values should usually be tested before numeric thresholds:\n\n```sql\nSELECT\n    order_id,\n    customer_rating,\n    CASE\n        WHEN customer_rating IS NULL THEN 'Unrated'\n        WHEN customer_rating >= 4.5 THEN 'Excellent'\n        WHEN customer_rating >= 4.0 THEN 'Good'\n        ELSE 'Needs follow-up'\n    END AS rating_label\nFROM sales_reporting;\n```\n\n#### Line-by-line walkthrough\n\n- `SELECT` — starts the result list. The indented lines define the columns and calculations returned by the query.\n- `order_id,` — returns the stored `order_id` value.\n- `customer_rating,` — returns the stored `customer_rating` value.\n- `CASE` — starts conditional logic. SQL checks the following `WHEN` branches from top to bottom.\n- `WHEN customer_rating IS NULL THEN 'Unrated'` — tests `customer_rating IS NULL` and returns `'Unrated'` when true.\n- `WHEN customer_rating >= 4.5 THEN 'Excellent'` — tests `customer_rating >= 4.5` and returns `'Excellent'` when true.\n- `WHEN customer_rating >= 4.0 THEN 'Good'` — tests `customer_rating >= 4.0` and returns `'Good'` when true.\n- `ELSE 'Needs follow-up'` — returns `'Needs follow-up'` when no earlier condition matches.\n- `END AS rating_label` — closes the `CASE` expression. The result is named `rating_label`.\n- `FROM sales_reporting;` — reads source rows from the `sales_reporting` table.\n\nA missing rating is not the same as a poor rating, so it receives its own label. The result is easier for a manager to interpret than a column of raw numbers and NULL values."
+          },
+          "sketch1": {
+            "title": "Order Thresholds from Most Specific to Broadest",
+            "bodyMarkdown": "When several conditions can match the same value, place the most specific or highest threshold first.\n\n```sql\nSELECT\n    order_id,\n    quantity * unit_price AS gross_sales,\n    CASE\n        WHEN quantity * unit_price >= 150 THEN 'Large'\n        WHEN quantity * unit_price >= 90 THEN 'Standard'\n        ELSE 'Small'\n    END AS order_size\nFROM sales_reporting;\n```\n\n#### Line-by-line walkthrough\n\n- `SELECT` — starts the result list. The indented lines define the columns and calculations returned by the query.\n- `order_id,` — returns the stored `order_id` value.\n- `quantity * unit_price AS gross_sales,` — multiplies row values to create a calculated measure and names the output `gross_sales`.\n- `CASE` — starts conditional logic. SQL checks the following `WHEN` branches from top to bottom.\n- `WHEN quantity * unit_price >= 150 THEN 'Large'` — tests `quantity * unit_price >= 150` and returns `'Large'` when true.\n- `WHEN quantity * unit_price >= 90 THEN 'Standard'` — tests `quantity * unit_price >= 90` and returns `'Standard'` when true.\n- `ELSE 'Small'` — returns `'Small'` when no earlier condition matches.\n- `END AS order_size` — closes the `CASE` expression. The result is named `order_size`.\n- `FROM sales_reporting;` — reads source rows from the `sales_reporting` table.\n\nAn order worth 170 also satisfies `>= 90`. Because the `>= 150` branch appears first, it is correctly labeled `Large`.\n\nRead a CASE expression as a sequence of decisions. Once one branch matches, SQL stops checking the branches below it."
+          }
+        }
+      }
+    }
+  }
+}

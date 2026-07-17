@@ -4,7 +4,10 @@
   "profileId": "sql",
   "accessPolicy": "paid",
   "courseOrder": [
-    "sql-v2"
+    "sql-v2",
+    "sql-analysis-reporting",
+    "multi-table-sql",
+    "sql-data-management"
   ],
   "publishTarget": {
     "liveSubjectSlug": "sql-v2",
@@ -25,6 +28,27 @@
       "title": "SQL Foundations",
       "order": 1,
       "path": "courses/sql-v2/course.spec.json"
+    },
+    {
+      "courseSlug": "sql-analysis-reporting",
+      "title": "SQL Analysis & Reporting",
+      "order": 2,
+      "path": "courses/sql-analysis-reporting/course.spec.json",
+      "prerequisiteCourseSlug": "sql-v2"
+    },
+    {
+      "courseSlug": "multi-table-sql",
+      "title": "Multi-Table SQL & Joins",
+      "order": 3,
+      "path": "courses/multi-table-sql/course.spec.json",
+      "prerequisiteCourseSlug": "sql-analysis-reporting"
+    },
+    {
+      "courseSlug": "sql-data-management",
+      "title": "SQL Data Management",
+      "order": 4,
+      "path": "courses/sql-data-management/course.spec.json",
+      "prerequisiteCourseSlug": "multi-table-sql"
     }
   ]
 }

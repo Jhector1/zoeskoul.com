@@ -62,6 +62,7 @@ type FullIDEInnerProps = {
     sqlDatasetId?: FullIDEProps["sqlDatasetId"];
     sqlResultShape?: FullIDEProps["sqlResultShape"];
     sqlPaneOptions?: FullIDEProps["sqlPaneOptions"];
+    defaultSurface?: FullIDEProps["defaultSurface"];
     sqlSchemaSql?: FullIDEProps["sqlSchemaSql"];
     sqlSeedSql?: FullIDEProps["sqlSeedSql"];
     sqlSetupSql?: FullIDEProps["sqlSetupSql"];
@@ -162,6 +163,7 @@ function FullIDEInner({
                           sqlDatasetId,
                           sqlResultShape,
                           sqlPaneOptions,
+                          defaultSurface,
                           sqlSchemaSql,
                           sqlSeedSql,
                           sqlSetupSql,
@@ -533,6 +535,7 @@ function FullIDEInner({
             sqlDatasetId={sqlDatasetId}
             sqlResultShape={sqlResultShape}
             sqlPaneOptions={sqlPaneOptions}
+            defaultSurface={defaultSurface}
             sqlSchemaSql={sqlSchemaSql}
             sqlSeedSql={sqlSeedSql}
             sqlSetupSql={sqlSetupSql}
@@ -783,6 +786,7 @@ export default function FullIDE(props: FullIDEProps) {
         sqlDatasetId,
         sqlResultShape,
         sqlPaneOptions,
+        defaultSurface,
         sqlSchemaSql,
         sqlSeedSql,
         sqlSetupSql,
@@ -1071,6 +1075,7 @@ export default function FullIDE(props: FullIDEProps) {
                 sqlDatasetId={sqlDatasetId}
                 sqlResultShape={sqlResultShape}
                 sqlPaneOptions={sqlPaneOptions}
+                defaultSurface={defaultSurface}
                 sqlSchemaSql={sqlSchemaSql}
                 sqlSeedSql={sqlSeedSql}
                 sqlSetupSql={sqlSetupSql}

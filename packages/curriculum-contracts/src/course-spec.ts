@@ -1,6 +1,7 @@
 import type { BlueprintRuntimePolicy, CourseVersionStatus } from "./blueprint.js";
 import type { ExerciseKindMix } from "./exercise-policy.js";
 import type { PracticeConfig } from "./practice.js";
+import type { ToolPresentationPolicy } from "./tool-presentation.js";
 import type {
     CourseGenerationPolicy,
     ModulePedagogyPolicy,
@@ -10,6 +11,23 @@ import type {
 } from "./workspace.js";
 
 export type CourseSpecDifficulty = "beginner" | "intermediate" | "advanced";
+
+export type CourseSpecProjectStep = {
+    step: number;
+    title: string;
+    requirement: string;
+};
+
+export type CourseSpecProjectBrief = {
+    scenario?: string;
+    role?: string;
+    workspace?: string;
+    deliverable?: string;
+    stepCountTarget: number;
+    flow?: "standalone" | "progressive";
+    requirements?: string[];
+    stepLadder?: CourseSpecProjectStep[];
+};
 
 export type CourseSpecExercisePolicy = {
     defaultMix?: ExerciseKindMix;
@@ -43,6 +61,7 @@ export type CourseSpecQualityPolicy = {
     allowDuplicateTopicIds?: boolean;
     requireUniqueModuleSlugs?: boolean;
     requireUniqueSectionSlugs?: boolean;
+    slugConvention?: "explicit_module_section";
     requireModuleProject?: boolean;
     maxModuleProjectLength?: number;
     maxAdjacentDifficultyJump?: number;
@@ -81,6 +100,13 @@ export type CourseSpecTopic = {
     tags?: string[];
     learningGoals?: string[];
     practice?: PracticeConfig;
+    projectBrief?: CourseSpecProjectBrief;
+    /** Topic-level Tools presentation override. */
+    tools?: ToolPresentationPolicy;
+    /** Sparse lesson/card overrides keyed by emitted card id (for example sketch0, quiz, project). */
+    lessonTools?: Record<string, ToolPresentationPolicy>;
+    /** Sparse exercise overrides keyed by authored exercise id. */
+    exerciseTools?: Record<string, ToolPresentationPolicy>;
 };
 
 export type CourseSpecSection = {
@@ -96,6 +122,7 @@ export type CourseSpecSection = {
 
     bullets?: string[];
     practiceDefaults?: PracticeConfig;
+    tools?: ToolPresentationPolicy;
 
     topics: CourseSpecTopic[];
 };
@@ -125,6 +152,7 @@ export type CourseSpecModule = {
     };
     runtimePolicy?: CourseSpecRuntimePolicy;
     practiceDefaults?: PracticeConfig;
+    tools?: ToolPresentationPolicy;
     sections: CourseSpecSection[];
 };
 
@@ -151,6 +179,8 @@ export type CourseSpec = {
     profileId: string;
     title: string;
     description?: string;
+    /** Course-level Tools presentation override layered over blueprint/subject defaults. */
+    tools?: ToolPresentationPolicy;
 
     sourceLocale: string;
     targetLocales: string[];

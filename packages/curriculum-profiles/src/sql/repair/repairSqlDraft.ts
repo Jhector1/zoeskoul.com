@@ -1,432 +1,674 @@
 import type {
+    ExerciseKindKey,
     TopicAuthoringDraft,
     TopicSeed,
-    SqlDatasetArtifact,
 } from "@zoeskoul/curriculum-contracts";
-import type { RepairReport } from "../../shared/profileServices.js";
-import { makeEmptyRepairReport } from "../../shared/noopReports.js";
-import { getSqlDatasetById } from "../datasets/index.js";
 import {
-    prepareSqlForExistingColumnReferenceScan,
-    stripSqlComments,
-    stripSqlStringLiterals,
-} from "../shared/sqlReferenceScan.js";
-function extractSqlCodeBlocks(markdown: string): string[] {
-    const matches = markdown.match(/```sql\s*[\s\S]*?```/gi) ?? [];
-    const tildeMatches = markdown.match(/~~~sql\s*[\s\S]*?~~~/gi) ?? [];
+    makePolicyRepair,
+} from "../../shared/repairExercisePolicyDraft.js";
+import type { RepairReport } from "../../shared/profileServices.js";
 
-    return [...matches, ...tildeMatches].map((block) =>
-        block
-            .replace(/^```sql\s*/i, "")
-            .replace(/^~~~sql\s*/i, "")
-            .replace(/```$/i, "")
-            .replace(/~~~$/i, "")
-            .trim(),
-    );
-}
+type DraftExercise = TopicAuthoringDraft["quizDraft"][number];
+type CodeInputDraft = Extract<DraftExercise, { kind: "code_input" }>;
 
-function replaceSqlCodeBlocks(markdown: string, nextSql: string): string {
-    const replacement = `\`\`\`sql\n${nextSql}\n\`\`\``;
-    return markdown
-        .replace(/```sql\s*[\s\S]*?```/gi, replacement)
-        .replace(/~~~sql\s*[\s\S]*?~~~/gi, replacement);
-}
+const KIND_ORDER: ExerciseKindKey[] = [
+    "single_choice",
+    "multi_choice",
+    "drag_reorder",
+    "fill_blank_choice",
+    "code_input",
+];
 
-const SQL_NON_COLUMN_WORDS = new Set([
-    "select",
-    "from",
-    "where",
-    "and",
-    "or",
-    "as",
-    "count",
-    "sum",
-    "avg",
-    "min",
-    "max",
-    "distinct",
-    "group",
-    "by",
-    "order",
-    "having",
-    "limit",
-    "asc",
-    "desc",
-    "upper",
-    "lower",
-    "length",
-    "trim",
-    "ltrim",
-    "rtrim",
-    "round",
-    "abs",
-    "coalesce",
-    "substr",
-    "substring",
-    "replace",
-    "cast",
-    "case",
-    "when",
-    "then",
-    "else",
-    "end",
-    "null",
-    "is",
-    "not",
-    "in",
-    "like",
-    "between",
-    "create",
-    "table",
-    "temporary",
-    "temp",
-    "if",
-    "exists",
-    "integer",
-    "int",
-    "real",
-    "text",
-    "numeric",
-    "boolean",
-    "primary",
-    "key",
-    "foreign",
-    "references",
-    "constraint",
-    "default",
-    "unique",
-    "check",
-    "on",
-    "cascade",
-    "restrict",
-    "no",
-    "action",
-    "set",
-    "autoincrement",
-    "alter",
-    "add",
-    "drop",
-]);
-
-const SQL_PLACEHOLDER_IDENTIFIERS = new Set([
-    "table",
-    "tables",
-    "column",
-    "columns",
-    "column_or_expression",
-    "expression",
-    "expressions",
-    "value",
-    "values",
-    "alias",
-    "result",
-    "results",
-    "condition",
-    "conditions",
-    "table_name",
-    "column_name",
-    "blank",
-    "blank1",
-    "blank2",
-    "placeholder",
-    "____",
-]);
-
-function isPlaceholderIdentifier(value: string): boolean {
-    const lower = value.toLowerCase();
+function safeSlug(value: unknown): string {
     return (
-        SQL_PLACEHOLDER_IDENTIFIERS.has(lower) ||
-        /^_+$/.test(value) ||
-        /^_{2,}[a-z0-9_]*$/i.test(value) ||
-        lower.endsWith("_or_expression") ||
-        lower.endsWith("_name_here") ||
-        lower.endsWith("_value_here")
+        String(value ?? "")
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, "-")
+            .replace(/^-+|-+$/g, "") || "sql-topic"
     );
 }
 
-function extractReferencedTables(sql: string): string[] {
-    const matches = [
-        ...sql.matchAll(/\bfrom\s+([a-zA-Z_][a-zA-Z0-9_]*)/gi),
-        ...sql.matchAll(/\bjoin\s+([a-zA-Z_][a-zA-Z0-9_]*)/gi),
-        ...sql.matchAll(/\bupdate\s+([a-zA-Z_][a-zA-Z0-9_]*)/gi),
-        ...sql.matchAll(/\binsert\s+into\s+([a-zA-Z_][a-zA-Z0-9_]*)/gi),
-        ...sql.matchAll(/\bdelete\s+from\s+([a-zA-Z_][a-zA-Z0-9_]*)/gi),
-    ];
+function topicGoals(seed: TopicSeed): string[] {
+    const goals = Array.isArray(seed.topicLearningGoals)
+        ? seed.topicLearningGoals
+              .map((goal) => String(goal ?? "").trim())
+              .filter(Boolean)
+        : [];
 
-    return [
-        ...new Set(
-            matches
-                .map((m) => m[1])
-                .filter((name) => name && !isPlaceholderIdentifier(name)),
-        ),
-    ];
+    if (goals.length > 0) return goals;
+
+    const fallback = String(seed.summary ?? seed.title ?? seed.topicId ?? "").trim();
+    return fallback ? [fallback] : ["Apply the SQL concept taught in this topic."];
 }
 
-function splitTopLevelCommaSeparated(text: string): string[] {
-    const parts: string[] = [];
-    let current = "";
+function commonHelp(seed: TopicSeed, goals: string[]) {
+    return {
+        concept: `This question checks the exact learning goals for ${seed.title || seed.topicId}.`,
+        hint_1: goals[0] ?? "Use the first topic learning goal.",
+        hint_2:
+            goals[1] ??
+            "Check that the answer matches this topic rather than an adjacent lesson.",
+    };
+}
+
+function makeSqlFallbackExercise(args: {
+    seed: TopicSeed;
+    kind: Exclude<ExerciseKindKey, "code_input">;
+    index: number;
+}): DraftExercise {
+    const goals = topicGoals(args.seed);
+    const primary = goals[0] ?? "Apply the topic's SQL rule.";
+    const secondary =
+        goals[1] ??
+        "State the intended result grain before choosing the SQL expression.";
+    const idBase = `${safeSlug(args.seed.topicId)}-policy-${args.kind}-${args.index}`;
+    const help = commonHelp(args.seed, goals);
+
+    switch (args.kind) {
+        case "single_choice":
+            return {
+                id: idBase,
+                kind: "single_choice",
+                title: "Match the topic goal",
+                prompt: `Which choice best applies this topic's SQL goal: ${primary}`,
+                hint: "Choose the option that directly matches the authored topic goal.",
+                help,
+                options: [
+                    primary,
+                    "Ignore the requested result grain.",
+                    "Reuse a different topic's rule without checking the requirement.",
+                    "Choose SQL only because it is shorter.",
+                ],
+                correctOptionIds: ["a"],
+            };
+
+        case "multi_choice":
+            return {
+                id: idBase,
+                kind: "multi_choice",
+                title: "Apply the count-safe topic rules",
+                prompt:
+                    "Which statements are aligned with this topic's authored learning goals? Select all that apply.",
+                hint: "Choose the statements copied from the topic's actual goals.",
+                help,
+                options: [
+                    primary,
+                    secondary,
+                    "Ignore duplicate-producing relationships when choosing a count.",
+                    "Use an adjacent topic's technique even when it changes the requested metric.",
+                ],
+                correctOptionIds: ["a", "b"],
+            };
+
+        case "drag_reorder": {
+            const tokens = [
+                "Read the requested metric",
+                "State the intended result grain",
+                "Choose SQL that matches the topic goal",
+                "Run the query and verify the result",
+            ];
+            return {
+                id: idBase,
+                kind: "drag_reorder",
+                title: "Build a goal-aligned SQL check",
+                prompt: "Put the SQL reasoning steps in a safe order.",
+                hint: "Define the metric and grain before choosing the expression.",
+                help,
+                tokens,
+                correctOrder: [...tokens],
+            };
+        }
+
+        case "fill_blank_choice":
+            return {
+                id: idBase,
+                kind: "fill_blank_choice",
+                title: "Stay inside the topic boundary",
+                prompt: "Complete the sentence about choosing SQL for this exercise.",
+                hint: "Use the exact goals authored for this topic.",
+                help,
+                template:
+                    "The query and explanation should match the topic [blank1].",
+                choices: [
+                    "learning goals",
+                    "previous lesson",
+                    "random syntax",
+                    "unrelated dataset",
+                ],
+                correctValue: "learning goals",
+            };
+    }
+}
+
+function normalizeSqlForComparison(value: unknown): string {
+    return String(value ?? "")
+        .replace(/\/\*[\s\S]*?\*\//g, "")
+        .replace(/--.*$/gm, "")
+        .replace(/\s+/g, "")
+        .replace(/;+$/g, "")
+        .toLowerCase()
+        .trim();
+}
+
+function normalizeWorkspaceFilePath(value: unknown): string {
+    return String(value ?? "").trim();
+}
+
+function replaceSqlEntryStarter(args: {
+    exercise: CodeInputDraft;
+    starterCode: string;
+}): CodeInputDraft {
+    const files = Array.isArray(args.exercise.starterFiles)
+        ? args.exercise.starterFiles
+        : [];
+
+    if (files.length === 0) {
+        return {
+            ...args.exercise,
+            starterCode: args.starterCode,
+        };
+    }
+
+    const explicitEntryPath = normalizeWorkspaceFilePath(
+        args.exercise.entryFilePath,
+    );
+    const markedEntryPath = normalizeWorkspaceFilePath(
+        files.find(
+            (file) => file.isEntry === true || file.entry === true,
+        )?.path,
+    );
+    const inferredEntryPath =
+        files.length === 1
+            ? normalizeWorkspaceFilePath(files[0]?.path)
+            : "query.sql";
+    const entryFilePath =
+        explicitEntryPath || markedEntryPath || inferredEntryPath;
+
+    return {
+        ...args.exercise,
+        starterCode: args.starterCode,
+        starterFiles: files.map((file) =>
+            normalizeWorkspaceFilePath(file.path) === entryFilePath
+                ? {
+                      ...file,
+                      content: args.starterCode,
+                  }
+                : file,
+        ),
+    };
+}
+
+function normalizeSqlIdentifier(value: string): string {
+    const trimmed = value.trim();
+    const lastPart = trimmed.split(".").at(-1) ?? trimmed;
+
+    if (
+        (lastPart.startsWith('"') && lastPart.endsWith('"')) ||
+        (lastPart.startsWith("`") && lastPart.endsWith("`")) ||
+        (lastPart.startsWith("[") && lastPart.endsWith("]"))
+    ) {
+        return lastPart.slice(1, -1).toLowerCase();
+    }
+
+    return lastPart.toLowerCase();
+}
+
+function findMatchingSqlParenthesis(
+    sql: string,
+    openIndex: number,
+): number {
     let depth = 0;
+    let quote: "'" | '"' | "`" | "]" | null = null;
 
-    for (const ch of text) {
-        if (ch === "(") depth += 1;
-        if (ch === ")") depth = Math.max(0, depth - 1);
+    for (let index = openIndex; index < sql.length; index += 1) {
+        const character = sql[index];
 
-        if (ch === "," && depth === 0) {
-            parts.push(current.trim());
-            current = "";
+        if (quote) {
+            if (quote === "]") {
+                if (character === "]") quote = null;
+                continue;
+            }
+
+            if (character === quote) {
+                if (
+                    (quote === "'" || quote === '"') &&
+                    sql[index + 1] === quote
+                ) {
+                    index += 1;
+                    continue;
+                }
+                quote = null;
+            }
             continue;
         }
 
-        current += ch;
+        if (
+            character === "'" ||
+            character === '"' ||
+            character === "`"
+        ) {
+            quote = character;
+            continue;
+        }
+        if (character === "[") {
+            quote = "]";
+            continue;
+        }
+        if (character === "(") {
+            depth += 1;
+            continue;
+        }
+        if (character === ")") {
+            depth -= 1;
+            if (depth === 0) return index;
+        }
     }
 
-    if (current.trim()) parts.push(current.trim());
+    return -1;
+}
+
+function splitTopLevelSqlList(value: string): string[] {
+    const parts: string[] = [];
+    let start = 0;
+    let depth = 0;
+    let quote: "'" | '"' | "`" | "]" | null = null;
+
+    for (let index = 0; index < value.length; index += 1) {
+        const character = value[index];
+
+        if (quote) {
+            if (quote === "]") {
+                if (character === "]") quote = null;
+                continue;
+            }
+
+            if (character === quote) {
+                if (
+                    (quote === "'" || quote === '"') &&
+                    value[index + 1] === quote
+                ) {
+                    index += 1;
+                    continue;
+                }
+                quote = null;
+            }
+            continue;
+        }
+
+        if (
+            character === "'" ||
+            character === '"' ||
+            character === "`"
+        ) {
+            quote = character;
+            continue;
+        }
+        if (character === "[") {
+            quote = "]";
+            continue;
+        }
+        if (character === "(") {
+            depth += 1;
+            continue;
+        }
+        if (character === ")") {
+            depth = Math.max(0, depth - 1);
+            continue;
+        }
+        if (character === "," && depth === 0) {
+            parts.push(value.slice(start, index));
+            start = index + 1;
+        }
+    }
+
+    parts.push(value.slice(start));
     return parts;
 }
 
-function stripExplicitAlias(expression: string): string {
-    return expression.replace(
-        /\s+as\s+(?:"[^"]+"|'[^']+'|`[^`]+`|\[[^\]]+\]|[a-zA-Z_][a-zA-Z0-9_]*)\s*$/i,
-        "",
-    );
-}
+function extractSqliteColumnDefaults(
+    schemaSql: string,
+): Map<string, Map<string, string>> {
+    const defaultsByTable = new Map<
+        string,
+        Map<string, string>
+    >();
+    const tablePattern =
+        /\bCREATE\s+TABLE\s+(?:IF\s+NOT\s+EXISTS\s+)?((?:"[^"]+"|`[^`]+`|\[[^\]]+\]|[A-Za-z_][A-Za-z0-9_]*)(?:\.(?:"[^"]+"|`[^`]+`|\[[^\]]+\]|[A-Za-z_][A-Za-z0-9_]*))?)\s*\(/gi;
 
-function stripBareTrailingAlias(expression: string): string {
-    const match = expression.match(
-        /^(.*?)(?:\s+)(?:"[^"]+"|'[^']+'|`[^`]+`|\[[^\]]+\]|[a-zA-Z_][a-zA-Z0-9_]*)\s*$/i,
-    );
+    let match: RegExpExecArray | null;
+    while ((match = tablePattern.exec(schemaSql))) {
+        const openIndex = tablePattern.lastIndex - 1;
+        const closeIndex = findMatchingSqlParenthesis(
+            schemaSql,
+            openIndex,
+        );
+        if (closeIndex < 0) continue;
 
-    if (!match) return expression;
-    const left = match[1].trim();
+        const tableName = normalizeSqlIdentifier(match[1] ?? "");
+        const columnDefaults = new Map<string, string>();
+        const body = schemaSql.slice(openIndex + 1, closeIndex);
 
-    if (
-        /[()+\-*/]/.test(left) ||
-        /\./.test(left) ||
-        /\b(?:upper|lower|length|trim|ltrim|rtrim|round|abs|coalesce|substr|substring|replace|cast|count|sum|avg|min|max)\s*\(/i.test(
-            left,
-        )
-    ) {
-        return left;
-    }
-
-    return expression;
-}
-
-function stripTableQualifiers(expression: string): string {
-    return expression.replace(/\b[a-zA-Z_][a-zA-Z0-9_]*\./g, "");
-}
-
-function extractIdentifiersFromExpression(expression: string): string[] {
-    let text = expression;
-    text = stripExplicitAlias(text);
-    text = stripBareTrailingAlias(text);
-    text = stripTableQualifiers(text);
-
-    const identifiers = new Set<string>();
-
-    for (const match of text.matchAll(/\b([a-zA-Z_][a-zA-Z0-9_]*)\b/g)) {
-        const value = match[1];
-        if (!value) continue;
-
-        const lower = value.toLowerCase();
-        if (SQL_NON_COLUMN_WORDS.has(lower)) continue;
-        if (isPlaceholderIdentifier(value)) continue;
-
-        identifiers.add(value);
-    }
-
-    return [...identifiers];
-}
-
-function extractReferencedColumns(sql: string): string[] {
-    const cleaned = stripSqlStringLiterals(stripSqlComments(sql));
-    const identifiers = new Set<string>();
-
-    const selectMatches = [
-        ...cleaned.matchAll(/\bselect\s+([\s\S]*?)\bfrom\b/gi),
-    ];
-
-    for (const match of selectMatches) {
-        for (const expr of splitTopLevelCommaSeparated(match[1] ?? "")) {
-            for (const id of extractIdentifiersFromExpression(expr)) {
-                identifiers.add(id);
+        for (const rawDefinition of splitTopLevelSqlList(body)) {
+            const definition = rawDefinition.trim();
+            if (
+                /^(?:CONSTRAINT|PRIMARY\s+KEY|FOREIGN\s+KEY|UNIQUE|CHECK)\b/i.test(
+                    definition,
+                )
+            ) {
+                continue;
             }
+
+            const columnMatch = definition.match(
+                /^((?:"(?:[^"]|"")*"|`[^`]*`|\[[^\]]+\]|[A-Za-z_][A-Za-z0-9_]*))\s+([\s\S]+)$/,
+            );
+            if (!columnMatch) continue;
+
+            const defaultMatch = (columnMatch[2] ?? "").match(
+                /\bDEFAULT\s+('(?:''|[^'])*'|"(?:""|[^"])*"|[-+]?(?:\d+(?:\.\d*)?|\.\d+)|NULL|CURRENT_(?:TIME|DATE|TIMESTAMP)|\([^)]*\)|[A-Za-z_][A-Za-z0-9_]*)/i,
+            );
+            if (!defaultMatch) continue;
+
+            columnDefaults.set(
+                normalizeSqlIdentifier(columnMatch[1] ?? ""),
+                defaultMatch[1] ?? "",
+            );
         }
+
+        if (columnDefaults.size > 0) {
+            defaultsByTable.set(tableName, columnDefaults);
+        }
+
+        tablePattern.lastIndex = closeIndex + 1;
     }
 
-    const whereMatches = [
-        ...cleaned.matchAll(
-            /\bwhere\s+([\s\S]*?)(?:\bgroup\s+by\b|\border\s+by\b|\bhaving\b|\blimit\b|$)/gi,
-        ),
-    ];
-
-    for (const match of whereMatches) {
-        for (const id of extractIdentifiersFromExpression(match[1] ?? "")) {
-            identifiers.add(id);
-        }
-    }
-
-    const orderByMatches = [
-        ...cleaned.matchAll(/\border\s+by\s+([\s\S]*?)(?:\blimit\b|$)/gi),
-    ];
-
-    for (const match of orderByMatches) {
-        for (const expr of splitTopLevelCommaSeparated(match[1] ?? "")) {
-            for (const id of extractIdentifiersFromExpression(expr)) {
-                identifiers.add(id);
-            }
-        }
-    }
-
-    return [...identifiers];
+    return defaultsByTable;
 }
 
-function resolveModuleDataset(seed: TopicSeed): {
-    datasetId?: string;
-    dataset: SqlDatasetArtifact | null;
-} {
-    const datasetId =
-        seed.moduleRuntimeDefaults?.kind === "sql"
-            ? seed.moduleRuntimeDefaults.datasetId
+function preserveSqlValueWhitespace(
+    original: string,
+    replacement: string,
+): string {
+    const leading = original.match(/^\s*/)?.[0] ?? "";
+    const trailing = original.match(/\s*$/)?.[0] ?? "";
+    return `${leading}${replacement}${trailing}`;
+}
+
+function repairSqliteInsertDefaults(args: {
+    sql: string;
+    defaultsByTable: Map<string, Map<string, string>>;
+}): { sql: string; changed: boolean } {
+    const insertPattern =
+        /\bINSERT\s+INTO\s+((?:"[^"]+"|`[^`]+`|\[[^\]]+\]|[A-Za-z_][A-Za-z0-9_]*)(?:\.(?:"[^"]+"|`[^`]+`|\[[^\]]+\]|[A-Za-z_][A-Za-z0-9_]*))?)\s*\(/gi;
+    let cursor = 0;
+    let output = "";
+    let changed = false;
+    let match: RegExpExecArray | null;
+
+    while ((match = insertPattern.exec(args.sql))) {
+        const columnOpenIndex = insertPattern.lastIndex - 1;
+        const columnCloseIndex = findMatchingSqlParenthesis(
+            args.sql,
+            columnOpenIndex,
+        );
+        if (columnCloseIndex < 0) continue;
+
+        const afterColumns = args.sql.slice(columnCloseIndex + 1);
+        const valuesMatch = afterColumns.match(/^\s*VALUES\b/i);
+        if (!valuesMatch) {
+            insertPattern.lastIndex = columnCloseIndex + 1;
+            continue;
+        }
+
+        const valuesStart =
+            columnCloseIndex + 1 + valuesMatch[0].length;
+        let statementEnd = valuesStart;
+        let quote: "'" | '"' | "`" | "]" | null = null;
+        let depth = 0;
+
+        for (
+            statementEnd = valuesStart;
+            statementEnd < args.sql.length;
+            statementEnd += 1
+        ) {
+            const character = args.sql[statementEnd];
+
+            if (quote) {
+                if (quote === "]") {
+                    if (character === "]") quote = null;
+                    continue;
+                }
+
+                if (character === quote) {
+                    if (
+                        (quote === "'" || quote === '"') &&
+                        args.sql[statementEnd + 1] === quote
+                    ) {
+                        statementEnd += 1;
+                        continue;
+                    }
+                    quote = null;
+                }
+                continue;
+            }
+
+            if (
+                character === "'" ||
+                character === '"' ||
+                character === "`"
+            ) {
+                quote = character;
+                continue;
+            }
+            if (character === "[") {
+                quote = "]";
+                continue;
+            }
+            if (character === "(") {
+                depth += 1;
+                continue;
+            }
+            if (character === ")") {
+                depth = Math.max(0, depth - 1);
+                continue;
+            }
+            if (character === ";" && depth === 0) break;
+        }
+
+        const tableDefaults = args.defaultsByTable.get(
+            normalizeSqlIdentifier(match[1] ?? ""),
+        );
+        if (!tableDefaults) {
+            insertPattern.lastIndex = statementEnd + 1;
+            continue;
+        }
+
+        const columns = splitTopLevelSqlList(
+            args.sql.slice(columnOpenIndex + 1, columnCloseIndex),
+        ).map(normalizeSqlIdentifier);
+        const valuesSql = args.sql.slice(valuesStart, statementEnd);
+        const rows = splitTopLevelSqlList(valuesSql);
+        let rowsChanged = false;
+
+        const repairedRows = rows.map((row) => {
+            const openOffset = row.indexOf("(");
+            if (openOffset < 0) return row;
+
+            const closeOffset = findMatchingSqlParenthesis(
+                row,
+                openOffset,
+            );
+            if (
+                closeOffset < 0 ||
+                row.slice(closeOffset + 1).trim().length > 0
+            ) {
+                return row;
+            }
+
+            const values = splitTopLevelSqlList(
+                row.slice(openOffset + 1, closeOffset),
+            );
+            if (values.length !== columns.length) return row;
+
+            const repairedValues = values.map((value, index) => {
+                if (!/^DEFAULT$/i.test(value.trim())) return value;
+
+                const declaredDefault = tableDefaults.get(
+                    columns[index] ?? "",
+                );
+                if (!declaredDefault) return value;
+
+                rowsChanged = true;
+                return preserveSqlValueWhitespace(
+                    value,
+                    declaredDefault,
+                );
+            });
+
+            if (!rowsChanged) return row;
+
+            return [
+                row.slice(0, openOffset + 1),
+                repairedValues.join(","),
+                row.slice(closeOffset),
+            ].join("");
+        });
+
+        if (!rowsChanged) {
+            insertPattern.lastIndex = statementEnd + 1;
+            continue;
+        }
+
+        output += args.sql.slice(cursor, valuesStart);
+        output += repairedRows.join(",");
+        cursor = statementEnd;
+        changed = true;
+        insertPattern.lastIndex = statementEnd + 1;
+    }
+
+    if (!changed) return { sql: args.sql, changed: false };
+
+    output += args.sql.slice(cursor);
+    return { sql: output, changed: true };
+}
+
+function repairSqliteSeedDefaults(args: {
+    seed: TopicSeed;
+    exercise: CodeInputDraft;
+}): { exercise: CodeInputDraft; changed: boolean } {
+    const runtimeDefaults = args.seed.moduleRuntimeDefaults;
+    const dialect =
+        runtimeDefaults?.kind === "sql"
+            ? runtimeDefaults.fixedSqlDialect
             : undefined;
 
-    const dataset =
-        seed.moduleDataset ??
-        (datasetId ? getSqlDatasetById(datasetId) : null);
+    if (dialect !== "sqlite") {
+        return { exercise: args.exercise, changed: false };
+    }
 
-    return { datasetId, dataset };
-}
+    const schemaFiles =
+        args.exercise.solutionFiles?.length
+            ? args.exercise.solutionFiles
+            : args.exercise.starterFiles ?? [];
+    const schemaSql = schemaFiles
+        .filter((file) =>
+            normalizeWorkspaceFilePath(file.path)
+                .toLowerCase()
+                .endsWith("schema.sql"),
+        )
+        .map((file) => file.content)
+        .join("\n");
 
-function getAllowedTables(dataset: SqlDatasetArtifact) {
-    return new Set(Object.keys(dataset.tableSnapshots));
-}
+    if (!schemaSql.trim()) {
+        return { exercise: args.exercise, changed: false };
+    }
 
-function getAllowedColumns(dataset: SqlDatasetArtifact) {
-    return new Set(
-        Object.values(dataset.tableSnapshots).flatMap((table) =>
-            Array.isArray(table?.columns) ? table.columns.map((c) => c.name) : [],
-        ),
+    const defaultsByTable =
+        extractSqliteColumnDefaults(schemaSql);
+    if (defaultsByTable.size === 0) {
+        return { exercise: args.exercise, changed: false };
+    }
+
+    let changed = false;
+    const repairFiles = (
+        files: CodeInputDraft["starterFiles"],
+    ): CodeInputDraft["starterFiles"] => {
+        if (!files) return files;
+
+        return files.map((file) => {
+            if (
+                !normalizeWorkspaceFilePath(file.path)
+                    .toLowerCase()
+                    .endsWith("seed.sql")
+            ) {
+                return file;
+            }
+
+            const repaired = repairSqliteInsertDefaults({
+                sql: file.content,
+                defaultsByTable,
+            });
+            if (!repaired.changed) return file;
+
+            changed = true;
+            return {
+                ...file,
+                content: repaired.sql,
+            };
+        });
+    };
+
+    const starterFiles = repairFiles(
+        args.exercise.starterFiles,
     );
-}
-function sketchSqlNeedsRewrite(args: {
-    sql: string;
-    dataset: SqlDatasetArtifact;
-}): boolean {
-    const allowedTables = getAllowedTables(args.dataset);
-    const allowedColumns = getAllowedColumns(args.dataset);
+    const solutionFiles = repairFiles(
+        args.exercise.solutionFiles,
+    );
 
-    const sqlForReferenceScan = prepareSqlForExistingColumnReferenceScan(args.sql);
+    if (!changed) {
+        return { exercise: args.exercise, changed: false };
+    }
 
-    const tables = extractReferencedTables(sqlForReferenceScan);
-    const columns = extractReferencedColumns(sqlForReferenceScan);
-    if (tables.some((t) => !allowedTables.has(t))) return true;
-    if (columns.some((c) => !allowedColumns.has(c) && !allowedTables.has(c))) return true;
-
-    return false;
-}
-
-function getPreferredTable(seed: TopicSeed, dataset: SqlDatasetArtifact): string {
-    const preferred = seed.sqlGrounding?.preferredTeachingTable;
-    if (preferred && dataset.tableSnapshots[preferred]) return preferred;
-    return Object.keys(dataset.tableSnapshots)[0] ?? "table_name";
+    return {
+        exercise: {
+            ...args.exercise,
+            ...(starterFiles ? { starterFiles } : {}),
+            ...(solutionFiles ? { solutionFiles } : {}),
+        },
+        changed: true,
+    };
 }
 
-function getTableColumns(dataset: SqlDatasetArtifact, tableName: string): string[] {
-    const table = dataset.tableSnapshots[tableName];
-    return table?.columns?.map((c) => c.name) ?? [];
-}
+function repairSqlStarter(
+    exercise: CodeInputDraft,
+): { exercise: CodeInputDraft; changed: boolean } {
+    const record = exercise as CodeInputDraft & {
+        recipeType?: unknown;
+        fixedLanguage?: unknown;
+        starterCode?: unknown;
+        solutionCode?: unknown;
+    };
 
-function chooseLabelColumn(args: {
-    seed: TopicSeed;
-    dataset: SqlDatasetArtifact;
-    columns: string[];
-}): string {
-    const preferred = args.seed.sqlGrounding?.preferredLabelColumn;
-    if (preferred && args.columns.includes(preferred)) return preferred;
+    const sqlLike =
+        record.recipeType === "sql_query" ||
+        record.fixedLanguage === "sql";
 
-    const fallbacks = ["name", "title", "customer_name", "student_name", "term"];
-    return fallbacks.find((c) => args.columns.includes(c)) ?? args.columns[0] ?? "id";
-}
+    if (!sqlLike) return { exercise, changed: false };
 
-function chooseNumericColumns(args: {
-    seed: TopicSeed;
-    columns: string[];
-}): string[] {
-    const preferred = args.seed.sqlGrounding?.preferredNumericColumns ?? [];
-    const matched = preferred.filter((c) => args.columns.includes(c));
-    if (matched.length > 0) return matched;
+    const starter = normalizeSqlForComparison(record.starterCode);
+    const solution = normalizeSqlForComparison(record.solutionCode);
 
-    const common = [
-        "quantity",
-        "unit_price",
-        "price",
-        "amount",
-        "revenue",
-        "stock_quantity",
-        "grade_level",
-        "id",
-    ];
-
-    return common.filter((c) => args.columns.includes(c));
-}
-
-function buildSafeModuleSketchSql(args: {
-    seed: TopicSeed;
-    dataset: SqlDatasetArtifact;
-    originalMarkdown: string;
-}): string {
-    const tableName = getPreferredTable(args.seed, args.dataset);
-    const columns = getTableColumns(args.dataset, tableName);
-    const labelColumn = chooseLabelColumn({
-        seed: args.seed,
-        dataset: args.dataset,
-        columns,
-    });
-    const numericColumns = chooseNumericColumns({
-        seed: args.seed,
-        columns,
-    });
-
-    const text = args.originalMarkdown.toLowerCase();
-
-    if (/\bupper\b/.test(text)) {
-        return `SELECT ${labelColumn}, UPPER(${labelColumn}) AS upper_${labelColumn}\nFROM ${tableName};`;
+    if (!solution || starter !== solution) {
+        return { exercise, changed: false };
     }
 
-    if (/\blower\b/.test(text)) {
-        return `SELECT ${labelColumn}, LOWER(${labelColumn}) AS lower_${labelColumn}\nFROM ${tableName};`;
-    }
-
-    if (/\blength\b|\bnumber of characters\b/.test(text)) {
-        return `SELECT ${labelColumn}, LENGTH(${labelColumn}) AS ${labelColumn}_length\nFROM ${tableName};`;
-    }
-
-    if (/\bcount\b|\bhow many\b|\bnumber of rows\b/.test(text)) {
-        return `SELECT COUNT(*) AS row_count\nFROM ${tableName};`;
-    }
-
-    if (/\bavg\b|\baverage\b/.test(text) && numericColumns[0]) {
-        return `SELECT AVG(${numericColumns[0]}) AS average_${numericColumns[0]}\nFROM ${tableName};`;
-    }
-
-    if (/\bsum\b|\btotal up\b|\badd up\b/.test(text) && numericColumns[0]) {
-        return `SELECT SUM(${numericColumns[0]}) AS total_${numericColumns[0]}\nFROM ${tableName};`;
-    }
-
-    if (/\bgroup by\b/.test(text)) {
-        const groupColumn = columns.find((c) => c !== labelColumn) ?? labelColumn;
-        return `SELECT ${groupColumn}, COUNT(*) AS row_count\nFROM ${tableName}\nGROUP BY ${groupColumn};`;
-    }
-
-    if (numericColumns.length >= 2) {
-        return `SELECT ${labelColumn}, ${numericColumns[0]}, ${numericColumns[1]}, ${numericColumns[0]} * ${numericColumns[1]} AS calculated_value\nFROM ${tableName};`;
-    }
-
-    if (numericColumns.length === 1) {
-        return `SELECT ${labelColumn}, ${numericColumns[0]}, ${numericColumns[0]} * 2 AS doubled_${numericColumns[0]}\nFROM ${tableName};`;
-    }
-
-    return `SELECT ${labelColumn}\nFROM ${tableName};`;
+    return {
+        exercise: replaceSqlEntryStarter({
+            exercise: record as CodeInputDraft,
+            starterCode:
+                "-- Write a query that satisfies the exercise prompt.\n",
+        }),
+        changed: true,
+    };
 }
 
 export async function repairSqlDraft(args: {
@@ -436,91 +678,134 @@ export async function repairSqlDraft(args: {
     draft: TopicAuthoringDraft;
     report: RepairReport;
 }> {
-    const { datasetId: moduleDatasetId, dataset: moduleDataset } =
-        resolveModuleDataset(args.seed);
+    const repairs: RepairReport["repairs"] = [];
 
-    const report = makeEmptyRepairReport(args.seed.topicId);
+    const normalized = args.draft.quizDraft.map((exercise) => {
+        if (exercise.kind !== "code_input") return exercise;
 
-    const sketchBlocks = (args.draft.sketchBlocks ?? []).map((block) => {
-        if (!moduleDatasetId || !moduleDataset) return block;
+        const seedDefaultRepair = repairSqliteSeedDefaults({
+            seed: args.seed,
+            exercise,
+        });
+        if (seedDefaultRepair.changed) {
+            repairs.push(
+                makePolicyRepair({
+                    code: "SQLITE_SEED_DEFAULT_VALUE_REPAIRED",
+                    field: `quizDraft.${exercise.id}.starterFiles`,
+                    severity: "high",
+                    message:
+                        `Replaced bare DEFAULT values in SQLite seed.sql for "${exercise.id}" with the matching defaults declared in schema.sql.`,
+                }),
+            );
+        }
 
-        const sqlBlocks = extractSqlCodeBlocks(block.bodyMarkdown);
-        if (sqlBlocks.length === 0) return block;
+        const starterRepair = repairSqlStarter(
+            seedDefaultRepair.exercise,
+        );
+        if (starterRepair.changed) {
+            repairs.push(
+                makePolicyRepair({
+                    code: "SQL_STARTER_REVEALED_SOLUTION_REPAIRED",
+                    field: `quizDraft.${exercise.id}.starterCode`,
+                    severity: "high",
+                    message:
+                        `Replaced SQL starterCode for "${exercise.id}" because it revealed the complete solution.`,
+                }),
+            );
+        }
+        return starterRepair.exercise;
+    });
 
-        const needsRewrite = sqlBlocks.some((sql) =>
-            sketchSqlNeedsRewrite({
-                sql,
-                dataset: moduleDataset,
-            }),
+    const plannedCounts = args.seed.plannedExerciseCounts?.counts;
+    if (!plannedCounts) {
+        return {
+            draft: {
+                ...args.draft,
+                quizDraft: normalized,
+            },
+            report: {
+                topicId: args.seed.topicId,
+                repairs,
+            },
+        };
+    }
+
+    const kept: DraftExercise[] = [];
+    const keptCounts = Object.fromEntries(
+        KIND_ORDER.map((kind) => [kind, 0]),
+    ) as Record<ExerciseKindKey, number>;
+
+    for (const exercise of normalized) {
+        const kind = exercise.kind as ExerciseKindKey;
+        const expected = Math.max(
+            0,
+            Math.trunc(Number(plannedCounts[kind] ?? 0)),
         );
 
-        if (!needsRewrite) return block;
-
-        const safeSql = buildSafeModuleSketchSql({
-            seed: args.seed,
-            dataset: moduleDataset,
-            originalMarkdown: block.bodyMarkdown,
-        });
-
-        report.repairs.push({
-            code: "SQL_REWROTE_SKETCH_TO_MODULE_DATASET",
-            category: "dataset",
-            severity: "medium",
-            field: `sketchBlocks.${block.id}.bodyMarkdown`,
-            message:
-                "Rewrote sketch SQL example to use the module runtime dataset instead of off-schema or exercise-scope SQL.",
-        });
-
-        return {
-            ...block,
-            bodyMarkdown: replaceSqlCodeBlocks(block.bodyMarkdown, safeSql),
-        };
-    });
-
-    const quizDraft = (args.draft.quizDraft ?? []).map((exercise) => {
-        if (exercise.kind !== "code_input") {
-            return exercise;
+        if (keptCounts[kind] < expected) {
+            kept.push(exercise);
+            keptCounts[kind] += 1;
+            continue;
         }
 
-        let next = exercise;
+        repairs.push(
+            makePolicyRepair({
+                code: "SQL_EXERCISE_POLICY_KIND_OVER_TARGET_TRIMMED",
+                field: "quizDraft",
+                severity: "medium",
+                message:
+                    `Trimmed one extra ${kind} exercise to match the authored per-kind target of ${expected}.`,
+            }),
+        );
+    }
 
-        if (!next.recipeType) {
-            next = {
-                ...next,
-                recipeType: "sql_query",
-            };
-            report.repairs.push({
-                code: "SQL_DEFAULTED_MISSING_RECIPE_TYPE",
-                category: "recipe",
-                severity: "low",
-                field: `${exercise.id}.recipeType`,
-                message: `Defaulted missing recipeType to "sql_query" for SQL profile.`,
+    for (const kind of KIND_ORDER) {
+        const expected = Math.max(
+            0,
+            Math.trunc(Number(plannedCounts[kind] ?? 0)),
+        );
+
+        while (keptCounts[kind] < expected) {
+            if (kind === "code_input") {
+                repairs.push(
+                    makePolicyRepair({
+                        code: "SQL_EXERCISE_POLICY_CODE_INPUT_FALLBACK_NOT_AVAILABLE",
+                        field: "quizDraft",
+                        severity: "high",
+                        message:
+                            `SQL generation is missing code_input ${keptCounts[kind] + 1} of ${expected}; executable SQL recipes must be regenerated rather than invented by policy repair.`,
+                    }),
+                );
+                break;
+            }
+
+            const fallback = makeSqlFallbackExercise({
+                seed: args.seed,
+                kind,
+                index: keptCounts[kind] + 1,
             });
+            kept.push(fallback);
+            keptCounts[kind] += 1;
+            repairs.push(
+                makePolicyRepair({
+                    code: "SQL_EXERCISE_POLICY_KIND_UNDER_TARGET_FILLED",
+                    field: "quizDraft",
+                    severity: "medium",
+                    message:
+                        `Added one goal-grounded ${kind} exercise to match the authored per-kind target of ${expected}.`,
+                }),
+            );
         }
-
-        if (!next.datasetId && moduleDatasetId) {
-            next = {
-                ...next,
-                datasetId: moduleDatasetId,
-            };
-            report.repairs.push({
-                code: "SQL_DEFAULTED_MISSING_DATASET",
-                category: "dataset",
-                severity: "low",
-                field: `${exercise.id}.datasetId`,
-                message: "Defaulted missing datasetId from module runtime defaults.",
-            });
-        }
-
-        return next;
-    });
+    }
 
     return {
         draft: {
             ...args.draft,
-            sketchBlocks,
-            quizDraft,
+            quizDraft: kept,
         },
-        report,
+        report: {
+            topicId: args.seed.topicId,
+            repairs,
+        },
     };
 }

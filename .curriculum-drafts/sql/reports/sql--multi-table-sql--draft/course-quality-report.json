@@ -1,0 +1,178 @@
+{
+  "ok": true,
+  "profileId": "sql",
+  "subjectSlug": "sql--multi-table-sql--draft",
+  "courseSlug": "multi-table-sql",
+  "summary": {
+    "modules": 4,
+    "topicsTotal": 16,
+    "exercises": 116,
+    "exerciseKinds": {
+      "single_choice": 20,
+      "multi_choice": 20,
+      "drag_reorder": 12,
+      "fill_blank_choice": 20,
+      "code_input": 44
+    },
+    "codeInputs": 44,
+    "projects": 44,
+    "capstones": 36,
+    "thinFixedTestCount": 0,
+    "blockers": 0,
+    "errors": 0,
+    "warnings": 16,
+    "infos": 0
+  },
+  "severityCounts": {
+    "blocker": 0,
+    "error": 0,
+    "warning": 16,
+    "info": 0
+  },
+  "issues": [
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "multi-table-sql-module-0-join-foundations/multi-table-sql-section-0-relationship-keys/reading-keys-and-relationships",
+      "profileId": "sql",
+      "moduleId": "multi-table-sql-module-0-join-foundations",
+      "topicId": "reading-keys-and-relationships",
+      "message": "Topic \"reading-keys-and-relationships\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "multi-table-sql-module-0-join-foundations/multi-table-sql-section-0-relationship-keys/inner-join-with-on",
+      "profileId": "sql",
+      "moduleId": "multi-table-sql-module-0-join-foundations",
+      "topicId": "inner-join-with-on",
+      "message": "Topic \"inner-join-with-on\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "multi-table-sql-module-0-join-foundations/multi-table-sql-section-0-readable-joins/qualifying-columns-across-tables",
+      "profileId": "sql",
+      "moduleId": "multi-table-sql-module-0-join-foundations",
+      "topicId": "qualifying-columns-across-tables",
+      "message": "Topic \"qualifying-columns-across-tables\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "multi-table-sql-module-0-join-foundations/multi-table-sql-section-0-readable-joins/table-aliases-for-join-queries",
+      "profileId": "sql",
+      "moduleId": "multi-table-sql-module-0-join-foundations",
+      "topicId": "table-aliases-for-join-queries",
+      "message": "Topic \"table-aliases-for-join-queries\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "multi-table-sql-module-0-join-foundations/multi-table-sql-section-0-module-project/module-0-student-enrollment-roster",
+      "profileId": "sql",
+      "moduleId": "multi-table-sql-module-0-join-foundations",
+      "topicId": "module-0-student-enrollment-roster",
+      "message": "Topic \"module-0-student-enrollment-roster\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "multi-table-sql-module-1-relationship-paths/multi-table-sql-section-1-relationship-shapes/one-to-many-and-many-to-many-results",
+      "profileId": "sql",
+      "moduleId": "multi-table-sql-module-1-relationship-paths",
+      "topicId": "one-to-many-and-many-to-many-results",
+      "message": "Topic \"one-to-many-and-many-to-many-results\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "multi-table-sql-module-1-relationship-paths/multi-table-sql-section-1-relationship-shapes/joining-through-a-bridge-table",
+      "profileId": "sql",
+      "moduleId": "multi-table-sql-module-1-relationship-paths",
+      "topicId": "joining-through-a-bridge-table",
+      "message": "Topic \"joining-through-a-bridge-table\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "multi-table-sql-module-1-relationship-paths/multi-table-sql-section-1-longer-joins/extending-a-join-path",
+      "profileId": "sql",
+      "moduleId": "multi-table-sql-module-1-relationship-paths",
+      "topicId": "extending-a-join-path",
+      "message": "Topic \"extending-a-join-path\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "multi-table-sql-module-1-relationship-paths/multi-table-sql-section-1-longer-joins/avoiding-cartesian-and-wrong-key-joins",
+      "profileId": "sql",
+      "moduleId": "multi-table-sql-module-1-relationship-paths",
+      "topicId": "avoiding-cartesian-and-wrong-key-joins",
+      "message": "Topic \"avoiding-cartesian-and-wrong-key-joins\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "multi-table-sql-module-1-relationship-paths/multi-table-sql-section-1-module-project/module-1-course-enrollment-directory",
+      "profileId": "sql",
+      "moduleId": "multi-table-sql-module-1-relationship-paths",
+      "topicId": "module-1-course-enrollment-directory",
+      "message": "Topic \"module-1-course-enrollment-directory\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "multi-table-sql-module-2-outer-joins-and-accurate-counts/multi-table-sql-section-2-preserving-rows/left-join-preserves-unmatched-rows",
+      "profileId": "sql",
+      "moduleId": "multi-table-sql-module-2-outer-joins-and-accurate-counts",
+      "topicId": "left-join-preserves-unmatched-rows",
+      "message": "Topic \"left-join-preserves-unmatched-rows\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "multi-table-sql-module-2-outer-joins-and-accurate-counts/multi-table-sql-section-2-preserving-rows/filtering-left-joins-with-on-and-where",
+      "profileId": "sql",
+      "moduleId": "multi-table-sql-module-2-outer-joins-and-accurate-counts",
+      "topicId": "filtering-left-joins-with-on-and-where",
+      "message": "Topic \"filtering-left-joins-with-on-and-where\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "multi-table-sql-module-2-outer-joins-and-accurate-counts/multi-table-sql-section-2-missing-and-counts/finding-missing-relationships",
+      "profileId": "sql",
+      "moduleId": "multi-table-sql-module-2-outer-joins-and-accurate-counts",
+      "topicId": "finding-missing-relationships",
+      "message": "Topic \"finding-missing-relationships\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "multi-table-sql-module-2-outer-joins-and-accurate-counts/multi-table-sql-section-2-missing-and-counts/counting-related-rows-without-inflation",
+      "profileId": "sql",
+      "moduleId": "multi-table-sql-module-2-outer-joins-and-accurate-counts",
+      "topicId": "counting-related-rows-without-inflation",
+      "message": "Topic \"counting-related-rows-without-inflation\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "multi-table-sql-module-2-outer-joins-and-accurate-counts/multi-table-sql-section-2-module-project/module-2-department-participation-scorecard",
+      "profileId": "sql",
+      "moduleId": "multi-table-sql-module-2-outer-joins-and-accurate-counts",
+      "topicId": "module-2-department-participation-scorecard",
+      "message": "Topic \"module-2-department-participation-scorecard\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "multi-table-sql-module-3-final-capstone/multi-table-sql-section-3-final-capstone/final-school-program-participation-report",
+      "profileId": "sql",
+      "moduleId": "multi-table-sql-module-3-final-capstone",
+      "topicId": "final-school-program-participation-report",
+      "message": "Topic \"final-school-program-participation-report\" has no learning goals on its seed metadata."
+    }
+  ]
+}

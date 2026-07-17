@@ -69,11 +69,11 @@
             "mc_valid_sort_columns": {
               "title": "Columns you can sort in this topic",
               "prompt": "Choose all columns from `products` that fit this lesson's focus on sorting numbers and dates.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Match each choice to the command, clause, or constraint described in the question.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "concept": "Use the SQL behavior described in the lesson to separate the valid choice from statements about a different command, clause, or constraint.",
+                "hint_1": "Identify the job the SQL must perform before comparing the choices.",
+                "hint_2": "Eliminate choices that belong to a different SQL concept."
               },
               "options": {
                 "a": "price",
@@ -151,7 +151,7 @@
               "prompt": "Fill in the missing column so the query sorts by product date.",
               "hint": "Use the column that stores values like 2026-02-14.",
               "help": {
-                "concept": "To sort by dates, the `ORDER BY` clause must use the date column from the table, which here is `the missing term`.",
+                "concept": "To sort by dates, the `ORDER BY` clause must use the date column from the table, which here is `the blank`.",
                 "hint_1": "Look for the column in `products` that represents when the row was created.",
                 "hint_2": "It is not `name`, `price`, or `stock`; it is the timestamp-style text column."
               },
@@ -163,86 +163,31 @@
                 "category"
               ]
             },
-            "code_top_3_prices": {
-              "title": "Show the three most expensive products",
-              "prompt": "Write a query that returns `name` and `price` from `products`, sorted by highest `price` first, and shows only 3 rows. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- TODO: sort by highest price first\n-- TODO: keep only 3 rows\nSELECT name, price\nFROM products\n;"
-            },
-            "code_oldest_products": {
-              "title": "List products from oldest to newest",
-              "prompt": "Write a query that returns `name` and `created_at` from `products`, sorted from the oldest date to the newest date. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Return name and created_at from products, sorted from the oldest date to the newest date.\nSELECT name, created_at\nFROM products\n;"
-            },
-            "code_latest_two_in_stock": {
-              "title": "Find the two newest products with stock",
-              "prompt": "Write a query that returns `name`, `stock`, and `created_at` from `products` for rows where `stock > 5`. Sort the results by newest `created_at` first and show only 2 rows. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- TODO: keep only rows with stock greater than 5\n-- TODO: sort by newest date first\n-- TODO: show only 2 rows\nSELECT name, stock, created_at\nFROM products\n;"
-            },
-            "try-sorting_numbers_and_dates-sketch0": {
-              "title": "Show the three most expensive products",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that returns `name` and `price` from `products`, sorted by highest `price` first, and shows only 3 rows. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- TODO: sort by highest price first\n-- TODO: keep only 3 rows\nSELECT name, price\nFROM products\n;"
-            },
             "try-sorting_numbers_and_dates-sketch1": {
-              "title": "List products from oldest to newest",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that returns `name` and `created_at` from `products`, sorted from the oldest date to the newest date. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Sort by Oldest Creation Date",
+              "prompt": "Return `id`, `name`, and `created_at`, sorted from the oldest date to the newest. Return `id, name, created_at` from `products` in that column order. Sort the final result by `created_at ASC`.",
+              "hint": "Oldest first means ascending date order.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "Return `id, name, created_at` from `products` in that column order. Sort the final result by `created_at ASC`."
               },
-              "starterCode": "-- Return name and created_at from products, sorted from the oldest date to the newest date.\nSELECT name, created_at\nFROM products\n;"
-            },
-            "try-sorting_numbers_and_dates-sketch2": {
-              "title": "Find the two newest products with stock",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that returns `name`, `stock`, and `created_at` from `products` for rows where `stock > 5`. Sort the results by newest `created_at` first and show only 2 rows. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- TODO: keep only rows with stock greater than 5\n-- TODO: sort by newest date first\n-- TODO: show only 2 rows\nSELECT name, stock, created_at\nFROM products\n;"
+              "starterCode": "SELECT id, name, created_at\nFROM products\nORDER BY created_at ;"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_sorting_numbers_and_dates_sketch0": {
               "title": "Show the three most expensive products",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that returns `name` and `price` from `products`, sorted by highest `price` first, and shows only 3 rows. Write the query in the SQL editor, click Run query, and check the results table."
+              "prompt": "Build a ranking query that returns `name` and `price` from `products`, sorted by highest `price` first, and shows only 3 rows. Run it and compare the result with the expected table."
             },
             "try_sorting_numbers_and_dates_sketch1": {
-              "title": "List products from oldest to newest",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that returns `name` and `created_at` from `products`, sorted from the oldest date to the newest date. Write the query in the SQL editor, click Run query, and check the results table."
+              "title": "Sort by Oldest Creation Date",
+              "prompt": "Return `id`, `name`, and `created_at`, sorted from the oldest date to the newest."
             },
             "try_sorting_numbers_and_dates_sketch2": {
               "title": "Find the two newest products with stock",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that returns `name`, `stock`, and `created_at` from `products` for rows where `stock > 5`. Sort the results by newest `created_at` first and show only 2 rows. Write the query in the SQL editor, click Run query, and check the results table."
+              "prompt": "Build a ranking query that returns `name`, `stock`, and `created_at` from `products` for rows where `stock > 5`. Sort the results by newest `created_at` first and show only 2 rows. Run it and compare the result with the expected table."
             }
           }
         }
@@ -263,20 +208,6 @@
             },
             "quiz": {
               "title": "Quiz"
-            },
-            "project": {
-              "title": "Sort product prices and dates"
-            }
-          },
-          "projectSteps": {
-            "code_top_3_prices": {
-              "title": "Show the three most expensive products"
-            },
-            "code_oldest_products": {
-              "title": "List products from oldest to newest"
-            },
-            "code_latest_two_in_stock": {
-              "title": "Find the two newest products with stock"
             }
           },
           "quiz": {
@@ -315,11 +246,11 @@
             "mc_valid_sort_columns": {
               "title": "Columns you can sort in this topic",
               "prompt": "Choose all columns from `products` that fit this lesson's focus on sorting numbers and dates.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Match each choice to the command, clause, or constraint described in the question.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "concept": "Use the SQL behavior described in the lesson to separate the valid choice from statements about a different command, clause, or constraint.",
+                "hint_1": "Identify the job the SQL must perform before comparing the choices.",
+                "hint_2": "Eliminate choices that belong to a different SQL concept."
               },
               "options": {
                 "a": "price",
@@ -397,7 +328,7 @@
               "prompt": "Fill in the missing column so the query sorts by product date.",
               "hint": "Use the column that stores values like 2026-02-14.",
               "help": {
-                "concept": "To sort by dates, the `ORDER BY` clause must use the date column from the table, which here is `the missing term`.",
+                "concept": "To sort by dates, the `ORDER BY` clause must use the date column from the table, which here is `the blank`.",
                 "hint_1": "Look for the column in `products` that represents when the row was created.",
                 "hint_2": "It is not `name`, `price`, or `stock`; it is the timestamp-style text column."
               },
@@ -444,7 +375,7 @@
             },
             "try-sorting_numbers_and_dates-sketch0": {
               "title": "Show the three most expensive products",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that returns `name` and `price` from `products`, sorted by highest `price` first, and shows only 3 rows. Write the query in the SQL editor, click Run query, and check the results table.",
+              "prompt": "Build a ranking query that returns `name` and `price` from `products`, sorted by highest `price` first, and shows only 3 rows. Run it and compare the result with the expected table.",
               "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
               "help": {
                 "concept": "This SQL exercise checks whether your query returns the requested result.",
@@ -454,19 +385,19 @@
               "starterCode": "-- TODO: sort by highest price first\n-- TODO: keep only 3 rows\nSELECT name, price\nFROM products\n;"
             },
             "try-sorting_numbers_and_dates-sketch1": {
-              "title": "List products from oldest to newest",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that returns `name` and `created_at` from `products`, sorted from the oldest date to the newest date. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Sort by Oldest Creation Date",
+              "prompt": "Return `id`, `name`, and `created_at`, sorted from the oldest date to the newest.",
+              "hint": "Oldest first means ascending date order.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
+                "concept": "Return `id`, `name`, and `created_at`, sorted from the oldest date to the newest.",
+                "hint_1": "Oldest first means ascending date order.",
+                "hint_2": "Run the query and compare the returned columns and rows with the expected result."
               },
-              "starterCode": "-- Return name and created_at from products, sorted from the oldest date to the newest date.\nSELECT name, created_at\nFROM products\n;"
+              "starterCode": "SELECT id, name, created_at\nFROM products\nORDER BY created_at ;"
             },
             "try-sorting_numbers_and_dates-sketch2": {
               "title": "Find the two newest products with stock",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that returns `name`, `stock`, and `created_at` from `products` for rows where `stock > 5`. Sort the results by newest `created_at` first and show only 2 rows. Write the query in the SQL editor, click Run query, and check the results table.",
+              "prompt": "Build a ranking query that returns `name`, `stock`, and `created_at` from `products` for rows where `stock > 5`. Sort the results by newest `created_at` first and show only 2 rows. Run it and compare the result with the expected table.",
               "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
               "help": {
                 "concept": "This SQL exercise checks whether your query returns the requested result.",
@@ -480,15 +411,15 @@
             "allowReveal": true,
             "try_sorting_numbers_and_dates_sketch0": {
               "title": "Show the three most expensive products",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that returns `name` and `price` from `products`, sorted by highest `price` first, and shows only 3 rows. Write the query in the SQL editor, click Run query, and check the results table."
+              "prompt": "Build a ranking query that returns `name` and `price` from `products`, sorted by highest `price` first, and shows only 3 rows. Run it and compare the result with the expected table."
             },
             "try_sorting_numbers_and_dates_sketch1": {
-              "title": "List products from oldest to newest",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that returns `name` and `created_at` from `products`, sorted from the oldest date to the newest date. Write the query in the SQL editor, click Run query, and check the results table."
+              "title": "Sort by Oldest Creation Date",
+              "prompt": "Return `id`, `name`, and `created_at`, sorted from the oldest date to the newest."
             },
             "try_sorting_numbers_and_dates_sketch2": {
               "title": "Find the two newest products with stock",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that returns `name`, `stock`, and `created_at` from `products` for rows where `stock > 5`. Sort the results by newest `created_at` first and show only 2 rows. Write the query in the SQL editor, click Run query, and check the results table."
+              "prompt": "Build a ranking query that returns `name`, `stock`, and `created_at` from `products` for rows where `stock > 5`. Sort the results by newest `created_at` first and show only 2 rows. Run it and compare the result with the expected table."
             }
           }
         }

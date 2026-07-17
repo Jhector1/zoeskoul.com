@@ -1,0 +1,281 @@
+{
+  "title": "Creating Tables and Defining Columns",
+  "summary": "Learn to create tables with specific column definitions and verify them using sqlite_master.",
+  "minutes": 30,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Understanding CREATE TABLE",
+      "bodyMarkdown": "Creating a table in SQL involves defining its structure using the `CREATE TABLE` statement. This statement specifies the table's name and its columns, each with a defined data type. The data types can be `INTEGER`, `TEXT`, or `REAL`, depending on the kind of data you want to store. For example, to create a table for storing user information, you might define columns for user ID, name, and age:\n\n```sql\nCREATE TABLE users (\n  id INTEGER PRIMARY KEY,\n  name TEXT NOT NULL,\n  age INTEGER\n);\n```\n\nIn this example, `id` is an `INTEGER` and serves as the primary key, ensuring each user has a unique identifier. The `name` column is `TEXT` and marked as `NOT NULL`, meaning it must have a value. The `age` column is also an `INTEGER`, but it can be null if the age is unknown. This structure helps maintain data integrity and clarity."
+    },
+    {
+      "id": "sketch2",
+      "title": "Inspecting Table Definitions",
+      "bodyMarkdown": "After creating a table, it's crucial to verify its structure to ensure it matches your expectations. In SQLite, you can inspect the `sqlite_master` table to see the SQL statement used to create your table. This can help confirm that all columns and constraints are correctly defined.\n\nFor instance, after creating the `users` table, you can run the following query to check its definition:\n\n```sql\nSELECT sql FROM sqlite_master WHERE type='table' AND name='users';\n```\n\nThis query retrieves the SQL statement for the `users` table, allowing you to verify that the `id` is set as the primary key and that `name` is not nullable. This step is essential for ensuring that your table's schema is correctly implemented and ready for data insertion."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "try-creating-tables-and-defining-columns-sketch0",
+      "kind": "code_input",
+      "title": "Create a Simple Table",
+      "prompt": "Create a table named `products` with columns `product_id` (INTEGER, primary key), `product_name` (TEXT, not null), and `price` (REAL). Verify the table structure using `sqlite_master`.",
+      "starterCode": "-- Define the table structure here\nCREATE TABLE products (\n  -- Define columns\n);",
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "schema.sql",
+          "content": "",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "-- Define the table structure here\nCREATE TABLE products (\n  -- Define columns\n);",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "schema.sql",
+          "content": "CREATE TABLE products (\n  product_id INTEGER PRIMARY KEY,\n  product_name TEXT NOT NULL,\n  price REAL\n);",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "CREATE TABLE products (\n  product_id INTEGER PRIMARY KEY,\n  product_name TEXT NOT NULL,\n  price REAL\n);\n\n-- Verify the table structure\nSELECT sql FROM sqlite_master WHERE type='table' AND name='products';",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "sqlFileOrder": [
+        "schema.sql",
+        "query.sql"
+      ],
+      "solutionCode": "CREATE TABLE products (\n  product_id INTEGER PRIMARY KEY,\n  product_name TEXT NOT NULL,\n  price REAL\n);\n\n-- Verify the table structure\nSELECT sql FROM sqlite_master WHERE type='table' AND name='products';",
+      "tests": [
+        {
+          "stdout": "CREATE TABLE products (product_id INTEGER PRIMARY KEY, product_name TEXT NOT NULL, price REAL)",
+          "match": "includes"
+        }
+      ],
+      "datasetId": "ddl_blank",
+      "recipeType": "sql_query",
+      "checkSql": "SELECT sql FROM sqlite_master WHERE type='table' AND name='products';",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This SQL exercise checks whether your query returns the requested result for: \"Create a Simple Table\".",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "try-creating-tables-and-defining-columns-sketch1",
+      "kind": "code_input",
+      "title": "Create a Table with Constraints",
+      "prompt": "Create a table named `orders` with columns `order_id` (INTEGER, primary key), `customer_name` (TEXT, not null), and `order_date` (TEXT, default to current date). Verify the table structure using `sqlite_master`.",
+      "starterCode": "-- Define the table structure here\nCREATE TABLE orders (\n  -- Define columns\n);",
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "schema.sql",
+          "content": "",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "-- Define the table structure here\nCREATE TABLE orders (\n  -- Define columns\n);",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "schema.sql",
+          "content": "CREATE TABLE orders (\n  order_id INTEGER PRIMARY KEY,\n  customer_name TEXT NOT NULL,\n  order_date TEXT DEFAULT (date('now'))\n);",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "CREATE TABLE orders (\n  order_id INTEGER PRIMARY KEY,\n  customer_name TEXT NOT NULL,\n  order_date TEXT DEFAULT (date('now'))\n);\n\n-- Verify the table structure\nSELECT sql FROM sqlite_master WHERE type='table' AND name='orders';",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "sqlFileOrder": [
+        "schema.sql",
+        "query.sql"
+      ],
+      "solutionCode": "CREATE TABLE orders (\n  order_id INTEGER PRIMARY KEY,\n  customer_name TEXT NOT NULL,\n  order_date TEXT DEFAULT (date('now'))\n);\n\n-- Verify the table structure\nSELECT sql FROM sqlite_master WHERE type='table' AND name='orders';",
+      "tests": [
+        {
+          "stdout": "CREATE TABLE orders (order_id INTEGER PRIMARY KEY, customer_name TEXT NOT NULL, order_date TEXT DEFAULT (date('now')))",
+          "match": "includes"
+        }
+      ],
+      "datasetId": "ddl_blank",
+      "recipeType": "sql_query",
+      "checkSql": "SELECT sql FROM sqlite_master WHERE type='table' AND name='orders';",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This SQL exercise checks whether your query returns the requested result for: \"Create a Table with Constraints\".",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "multi-choice-1",
+      "kind": "multi_choice",
+      "title": "Choosing Data Types",
+      "prompt": "Which data types are suitable for storing a person's age and name in a table?",
+      "options": [
+        "INTEGER for age, TEXT for name",
+        "REAL for age, TEXT for name",
+        "TEXT for age, INTEGER for name",
+        "REAL for age, REAL for name"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Consider the nature of the data for age and name.",
+      "help": {
+        "concept": "Data types should match the nature of the data they store.",
+        "hint_1": "Age is a number, while name is text.",
+        "hint_2": "Use INTEGER for numbers and TEXT for strings."
+      }
+    },
+    {
+      "id": "multi-choice-2",
+      "kind": "multi_choice",
+      "title": "Primary Key Constraint",
+      "prompt": "What is the purpose of a PRIMARY KEY in a table?",
+      "options": [
+        "To allow duplicate rows",
+        "To uniquely identify each row",
+        "To store large text data",
+        "To enforce a default value"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Think about how a PRIMARY KEY affects table rows.",
+      "help": {
+        "concept": "A PRIMARY KEY uniquely identifies each row in a table.",
+        "hint_1": "It ensures each row is unique.",
+        "hint_2": "It prevents duplicate rows."
+      }
+    },
+    {
+      "id": "fill-blank-1",
+      "kind": "fill_blank_choice",
+      "title": "Defining a Column",
+      "prompt": "Fill in the blank to define a column for storing a product's price: `price [blank1]`",
+      "template": "price [blank1]",
+      "choices": [
+        "INTEGER",
+        "TEXT",
+        "REAL",
+        "BLOB"
+      ],
+      "correctValue": "REAL",
+      "hint": "Choose the correct data type for a price.",
+      "help": {
+        "concept": "Choose a data type that can store decimal values.",
+        "hint_1": "Prices often include decimal points.",
+        "hint_2": "Use the missing term for decimal numbers."
+      }
+    },
+    {
+      "id": "fill-blank-2",
+      "kind": "fill_blank_choice",
+      "title": "Column Constraint",
+      "prompt": "Fill in the blank to ensure a column cannot have null values: `name [blank1]`",
+      "template": "name [blank1]",
+      "choices": [
+        "NOT NULL",
+        "UNIQUE",
+        "DEFAULT",
+        "PRIMARY KEY"
+      ],
+      "correctValue": "NOT NULL",
+      "hint": "Use a constraint that enforces non-null values.",
+      "help": {
+        "concept": "Use the missing term to ensure a column must have a value.",
+        "hint_1": "This constraint prevents null entries.",
+        "hint_2": "It ensures every row has a value for this column."
+      }
+    },
+    {
+      "id": "single-choice-1",
+      "kind": "single_choice",
+      "title": "Verifying Table Structure",
+      "prompt": "How can you verify the structure of a table in SQLite?",
+      "options": [
+        "By querying the table directly",
+        "By checking the sqlite_master table",
+        "By using a SELECT statement",
+        "By using a DELETE statement"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Think about where SQLite stores table definitions.",
+      "help": {
+        "concept": "Use the sqlite_master table to check table definitions.",
+        "hint_1": "sqlite_master contains the SQL statements for tables.",
+        "hint_2": "Query sqlite_master to see the table's SQL definition."
+      }
+    },
+    {
+      "id": "drag-reorder-1",
+      "kind": "drag_reorder",
+      "title": "Order of SQL Clauses",
+      "prompt": "Arrange the SQL clauses in the correct order for creating a table.",
+      "tokens": [
+        "CREATE TABLE",
+        "table name",
+        "column definitions",
+        "PRIMARY KEY"
+      ],
+      "correctOrder": [
+        "CREATE TABLE",
+        "table name",
+        "column definitions",
+        "PRIMARY KEY"
+      ],
+      "hint": "Read each piece and arrange them in the order the statement should be understood.",
+      "help": {
+        "concept": "The pieces should form a valid statement in a logical order.",
+        "hint_1": "Start with the piece that introduces the idea or action.",
+        "hint_2": "Place dependent pieces after the part they describe or complete."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Build a Warehouse Stock Ledger Schema",
+    "stepIds": [
+      "try-creating-tables-and-defining-columns-sketch0",
+      "try-creating-tables-and-defining-columns-sketch1"
+    ]
+  }
+}

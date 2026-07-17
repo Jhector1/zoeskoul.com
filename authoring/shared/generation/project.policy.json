@@ -3,12 +3,17 @@
   "notes": [
     "Project and capstone topics should inherit progressive, connected practice behavior unless authoring overrides it.",
     "Project-specific runtime details still belong to the concrete profile/runtime layer.",
-    "Module projects and final capstones should use real-world scenarios, cumulative steps, and reusable learner work."
+    "Module projects and final capstones should use real-world scenarios, cumulative steps, and reusable learner work.",
+    "The final module contains exactly one capstone section with exactly one capstone topic.",
+    "projectBrief.stepCountTarget is authoritative; the compiler must generate and publish exactly that many cumulative steps."
   ],
   "projectRequirements": {
     "requireRealWorldStory": true,
     "requireCumulativeChaining": true,
     "requireCompleteSolutionFiles": true,
-    "reuseTryItInProjects": true
+    "reuseTryItInProjects": true,
+    "finalCapstoneModuleContainsOneSection": true,
+    "finalCapstoneSectionContainsOneTopic": true,
+    "authoredStepCountIsExact": true
   }
 }

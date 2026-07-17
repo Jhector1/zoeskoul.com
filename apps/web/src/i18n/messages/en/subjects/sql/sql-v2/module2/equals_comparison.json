@@ -3,34 +3,17 @@
     "sql-v2": {
       "sql-v2-2": {
         "equals_comparison": {
-          "label": "equals comparison",
-          "summary": "Learn how to use = in a WHERE clause to keep only rows whose column value exactly matches what you ask for.",
+          "label": "Exact and Not-Equal Comparisons",
+          "summary": "Use = to match an exact value and <> to exclude an exact value.",
           "cards": {
             "sketch0": {
-              "title": "Using = to match an exact value"
+              "title": "Match an Exact Value with ="
             },
             "sketch1": {
-              "title": "Text values and number values"
-            },
-            "sketch2": {
-              "title": "Common mistakes with ="
+              "title": "Exclude an Exact Value with <>"
             },
             "quiz": {
-              "title": "Quiz"
-            },
-            "project": {
-              "title": "Exact-match product detective"
-            }
-          },
-          "projectSteps": {
-            "eq_code_1": {
-              "title": "Find all Art products"
-            },
-            "eq_code_2": {
-              "title": "Find the product with stock 3"
-            },
-            "eq_code_3": {
-              "title": "Match one exact product name"
+              "title": "Check Your Understanding"
             }
           },
           "quiz": {
@@ -134,7 +117,7 @@
               "hint": "The missing part is the text value for the category column.",
               "help": {
                 "concept": "Text comparisons with `=` use the exact text value from the table.",
-                "hint_1": "Look at the category names in the products data: Art, Home, and the missing term.",
+                "hint_1": "Look at the category names in the products data: Art, Home, and the blank.",
                 "hint_2": "The matching choice is the category used by Notebook and Fountain Pen."
               },
               "template": "SELECT name FROM products WHERE category = '[blank1]';",
@@ -196,19 +179,19 @@
               "starterCode": "-- Show all columns for the product whose name is exactly Desk Lamp.\nSELECT *\nFROM products\nWHERE ;"
             },
             "try-equals_comparison-sketch0": {
-              "title": "Find all Art products",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that shows the `id`, `name`, and `category` columns for products whose category is exactly `Art`. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Exclude One Product Category",
+              "prompt": "A campaign will feature everything except the `Home` category. Show `id`, `name`, and `category` from `products` while excluding `Home` rows.",
+              "hint": "Use the not-equal operator <> with the quoted category.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
+                "concept": "The <> operator keeps rows whose value is different from the comparison value.",
+                "hint_1": "Use the not-equal operator <> with the quoted category.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
               },
-              "starterCode": "-- Show the id, name, and category columns for products whose category is exactly Art.\nSELECT \nFROM products\nWHERE ;"
+              "starterCode": "SELECT id, name, category\nFROM products\n-- Exclude the Home category"
             },
             "try-equals_comparison-sketch1": {
               "title": "Find the product with stock 3",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that returns the `name` and `stock` columns for the product whose stock is exactly 3. Use the SQL editor and check the results table after you click Run query.",
+              "prompt": "Create a focused inventory query that returns the `name` and `stock` columns for the product whose stock is exactly 3. Use the SQL editor and check the results table after you click Run query. Run it and compare the result with the expected table.",
               "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
               "help": {
                 "concept": "This SQL exercise checks whether your query returns the requested result.",
@@ -218,30 +201,38 @@
               "starterCode": "-- Return the name and stock columns for the product whose stock is exactly 3.\nSELECT name\nFROM products\nWHERE stock = ;"
             },
             "try-equals_comparison-sketch2": {
-              "title": "Match one exact product name",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that shows all columns for the product whose name is exactly `Desk Lamp`. Write the query in the SQL editor, click Run query, and confirm that the results table shows one matching row.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Match One Product Name Exactly",
+              "prompt": "Customer support is investigating the `Desk Lamp` listing. Find that exact product by name and show its complete row from `products`.",
+              "hint": "Use = with the quoted product name.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
+                "concept": "The equals operator keeps rows whose value exactly matches the comparison value.",
+                "hint_1": "Use = with the quoted product name.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
               },
-              "starterCode": "-- Show all columns for the product whose name is exactly Desk Lamp.\nSELECT *\nFROM products\nWHERE ;"
+              "starterCode": "SELECT *\nFROM products\n-- Match Desk Lamp exactly"
             }
           },
           "tryIt": {
             "allowReveal": true,
-            "try_equals_comparison_sketch0": {
-              "title": "Find all Art products",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that shows the `id`, `name`, and `category` columns for products whose category is exactly `Art`. Write the query in the SQL editor, click Run query, and check the results table."
-            },
-            "try_equals_comparison_sketch1": {
-              "title": "Find the product with stock 3",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that returns the `name` and `stock` columns for the product whose stock is exactly 3. Use the SQL editor and check the results table after you click Run query."
-            },
             "try_equals_comparison_sketch2": {
-              "title": "Match one exact product name",
-              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that shows all columns for the product whose name is exactly `Desk Lamp`. Write the query in the SQL editor, click Run query, and confirm that the results table shows one matching row."
+              "title": "Match One Product Name Exactly",
+              "prompt": "Customer support is investigating the `Desk Lamp` listing. Find that exact product by name and show its complete row from `products`.",
+              "hint": "Use = with the quoted product name.",
+              "help": {
+                "concept": "The equals operator keeps rows whose value exactly matches the comparison value.",
+                "hint_1": "Use = with the quoted product name.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+              }
+            },
+            "try_equals_comparison_sketch0": {
+              "title": "Exclude One Product Category",
+              "prompt": "A campaign will feature everything except the `Home` category. Show `id`, `name`, and `category` from `products` while excluding `Home` rows.",
+              "hint": "Use the not-equal operator <> with the quoted category.",
+              "help": {
+                "concept": "The <> operator keeps rows whose value is different from the comparison value.",
+                "hint_1": "Use the not-equal operator <> with the quoted category.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+              }
             }
           }
         }
@@ -252,17 +243,13 @@
     "sql-v2": {
       "sql-v2-2": {
         "equals_comparison": {
-          "equals-idea": {
-            "title": "Using = to match an exact value",
-            "bodyMarkdown": "The `=` operator in SQL checks for an exact match inside a `WHERE` clause. It keeps only the rows where the column value is exactly the same as the value you write.\n\nFor example, in the `products` table, this query returns only products in the `Art` category:\n\n```sql\nSELECT name, category\nFROM products\nWHERE category = 'Art';\n```\n\nStep by step:\n- `SELECT name, category` chooses the columns to show.\n- `FROM products` says which table to read.\n- `WHERE category = 'Art'` keeps only rows whose `category` is exactly `Art`.\n\nWith the dataset in this lesson, the matching rows are `Sketchbook` and `Acrylic Paint Set`.\n\nA number works the same way. This query looks for the product whose `id` is exactly 4:\n\n```sql\nSELECT id, name\nFROM products\nWHERE id = 4;\n```\n\nThat returns the row for `Notebook`."
+          "equals_exact_value": {
+            "title": "Match an Exact Value with =",
+            "bodyMarkdown": "Use `=` when a row must contain one exact value.\n\n```sql\nSELECT\n    id,\n    name,\n    category\nFROM products\nWHERE category = 'Home';\n```\n\nText values are written inside single quotes. The column name is not quoted. This condition keeps products whose category is exactly `Home`; it does not match similar words or partial text.\n\nExact matching is appropriate for controlled values such as a known category, status, or identifier."
           },
-          "equals-text-vs-number": {
-            "title": "Text values and number values",
-            "bodyMarkdown": "When you use `=`, the value you compare must fit the column type.\n\n- Text values use quotes, like `'Stationery'`\n- Numbers do not use quotes, like `50`\n\nExample with text:\n\n```sql\nSELECT name, category\nFROM products\nWHERE category = 'Stationery';\n```\n\nThis returns `Notebook` and `Fountain Pen`.\n\nExample with a number:\n\n```sql\nSELECT name, stock\nFROM products\nWHERE stock = 10;\n```\n\nThis returns `Acrylic Paint Set` because its `stock` value is exactly 10.\n\nIf you accidentally compare the wrong value, the query may return no rows. That does not always mean the query is broken. It may just mean nothing matches."
-          },
-          "equals-common-mistakes": {
-            "title": "Common mistakes with =",
-            "bodyMarkdown": "A common beginner mistake is forgetting that `=` checks one exact value.\n\nFor example:\n\n```sql\nSELECT name, price\nFROM products\nWHERE price = 18.00;\n```\n\nThis returns `Fountain Pen` because its `price` is exactly `18.00`.\n\nHere are a few things to watch for:\n- Use `=` in `WHERE` when you want an exact match.\n- Put quotes around text such as `'Home'` or `'Notebook'`.\n- Do not put quotes around numbers such as `4` or `129.00`.\n- Make sure the value really exists in the table.\n\nLine by line:\n- `SELECT name, price` shows the product name and price.\n- `FROM products` reads from the products table.\n- `WHERE price = 18.00` keeps only rows with that exact price."
+          "not_equal_value": {
+            "title": "Exclude an Exact Value with <>",
+            "bodyMarkdown": "Use `<>` when a row must not contain one exact value.\n\n```sql\nSELECT\n    id,\n    name,\n    category\nFROM products\nWHERE category <> 'Stationery';\n```\n\nEvery row whose category is different from `Stationery` remains. This is different from asking whether a value is missing; missing data uses `IS NULL`, which is taught later.\n\nRead `<>` as “not equal to.” Keep the comparison aligned with the request instead of using a more complicated condition than necessary."
           }
         }
       }

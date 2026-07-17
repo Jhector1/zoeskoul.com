@@ -1,0 +1,260 @@
+{
+  "topics": {
+    "sql--sql-data-management--draft": {
+      "sql-data-management-module-3-final-capstone": {
+        "final-inventory-operations-launch": {
+          "label": "Final Capstone: Inventory Operations Launch",
+          "summary": "Build a two-table makers-market inventory database through six cumulative schema and data-management steps.",
+          "cards": {
+            "sketch0": {
+              "title": "Inventory Operations Launch Project"
+            },
+            "project": {
+              "title": "Inventory Operations Launch"
+            }
+          },
+          "projectSteps": {
+            "ci_final_capstone_step1": {
+              "title": "Build the Product Table"
+            },
+            "ci_final_capstone_step2": {
+              "title": "Build the Stock Event Table"
+            },
+            "ci_final_capstone_step3": {
+              "title": "Load the Approved Products"
+            },
+            "ci_final_capstone_step4": {
+              "title": "Load the Opening Stock Events"
+            },
+            "ci_final_capstone_step5": {
+              "title": "Apply the Launch Correction"
+            },
+            "ci_final_capstone_step6": {
+              "title": "Remove the Test Event and Finalize"
+            }
+          },
+          "finalCapstone": {
+            "steps": {
+              "ci_final_capstone_step1": {
+                "title": "Build the Product Table",
+                "prompt": "The neighborhood makers market is replacing its launch spreadsheet with a real product catalog. Create or complete the `products` table with the columns and constraints named in the brief. In `query.sql`, return `name, sql` from `sqlite_master` in that column order. Keep only rows where `type = 'table' AND name = 'products'`.",
+                "hint": "Complete the required table definitions in schema.sql, then write query.sql so the Results tab proves the structure exists.",
+                "help": {
+                  "concept": "Keep each database responsibility in its named file: schema definitions in schema.sql, approved starting rows in seed.sql, mutations in operations.sql, and visible evidence in query.sql.",
+                  "hint_1": "Complete the main database change before writing the inspection or verification query.",
+                  "hint_2": "In `query.sql`, return `name, sql` from `sqlite_master` for the table `products`."
+                },
+                "starterCode": "-- Build the table definition required for \"Build the Product Table\" below.",
+                "solutionCode": "CREATE TABLE products ( id INTEGER PRIMARY KEY, sku TEXT NOT NULL UNIQUE, name TEXT NOT NULL, category TEXT NOT NULL, price REAL NOT NULL, status TEXT NOT NULL DEFAULT 'draft', notes TEXT NULL );",
+                "starterFiles": {
+                  "schema_sql": {
+                    "content": "-- Build the table definition required for \"Build the Product Table\" below."
+                  },
+                  "query_sql": {
+                    "content": "-- Return the verification result required for \"Build the Product Table\" below."
+                  }
+                },
+                "solutionFiles": {
+                  "schema_sql": {
+                    "content": "CREATE TABLE products ( id INTEGER PRIMARY KEY, sku TEXT NOT NULL UNIQUE, name TEXT NOT NULL, category TEXT NOT NULL, price REAL NOT NULL, status TEXT NOT NULL DEFAULT 'draft', notes TEXT NULL );"
+                  },
+                  "query_sql": {
+                    "content": "SELECT name, sql FROM sqlite_master WHERE type = 'table' AND name = 'products';"
+                  }
+                }
+              },
+              "ci_final_capstone_step2": {
+                "title": "Build the Stock Event Table",
+                "prompt": "The market also needs an auditable history of stock receipts and adjustments. Create or complete the `products` table with the columns and constraints named in the brief. Create or complete the `stock_events` table with the columns and constraints named in the brief. Declare every required foreign-key relationship in `schema.sql`. In `query.sql`, return `name, sql` from `sqlite_master` in that column order. Keep only rows where `type = 'table' AND name IN ('products', 'stock_events')`. Sort the final result by `name`.",
+                "hint": "Complete the required table definitions in schema.sql, then write query.sql so the Results tab proves the structure exists.",
+                "help": {
+                  "concept": "Keep each database responsibility in its named file: schema definitions in schema.sql, approved starting rows in seed.sql, mutations in operations.sql, and visible evidence in query.sql.",
+                  "hint_1": "Complete the main database change before writing the inspection or verification query.",
+                  "hint_2": "In `query.sql`, return `name, sql` from `sqlite_master` for the table `the named table`."
+                },
+                "starterCode": "CREATE TABLE products ( id INTEGER PRIMARY KEY, sku TEXT NOT NULL UNIQUE, name TEXT NOT NULL, category TEXT NOT NULL, price REAL NOT NULL, status TEXT NOT NULL DEFAULT 'draft', notes TEXT NULL ); -- Complete Build the Stock Event Table below.",
+                "solutionCode": "CREATE TABLE products ( id INTEGER PRIMARY KEY, sku TEXT NOT NULL UNIQUE, name TEXT NOT NULL, category TEXT NOT NULL, price REAL NOT NULL, status TEXT NOT NULL DEFAULT 'draft', notes TEXT NULL ); CREATE TABLE stock_events ( id INTEGER PRIMARY KEY, product_id INTEGER NOT NULL, quantity_change INTEGER NOT NULL, event_type TEXT NOT NULL DEFAULT 'receipt', note TEXT NULL, FOREIGN KEY (product_id) REFERENCES products(id) );",
+                "starterFiles": {
+                  "schema_sql": {
+                    "content": "CREATE TABLE products ( id INTEGER PRIMARY KEY, sku TEXT NOT NULL UNIQUE, name TEXT NOT NULL, category TEXT NOT NULL, price REAL NOT NULL, status TEXT NOT NULL DEFAULT 'draft', notes TEXT NULL ); -- Complete Build the Stock Event Table below."
+                  },
+                  "query_sql": {
+                    "content": "-- Return the verification result required for \"Build the Stock Event Table\" below."
+                  }
+                },
+                "solutionFiles": {
+                  "schema_sql": {
+                    "content": "CREATE TABLE products ( id INTEGER PRIMARY KEY, sku TEXT NOT NULL UNIQUE, name TEXT NOT NULL, category TEXT NOT NULL, price REAL NOT NULL, status TEXT NOT NULL DEFAULT 'draft', notes TEXT NULL ); CREATE TABLE stock_events ( id INTEGER PRIMARY KEY, product_id INTEGER NOT NULL, quantity_change INTEGER NOT NULL, event_type TEXT NOT NULL DEFAULT 'receipt', note TEXT NULL, FOREIGN KEY (product_id) REFERENCES products(id) );"
+                  },
+                  "query_sql": {
+                    "content": "SELECT name, sql FROM sqlite_master WHERE type = 'table' AND name IN ('products', 'stock_events') ORDER BY name;"
+                  }
+                }
+              },
+              "ci_final_capstone_step3": {
+                "title": "Load the Approved Products",
+                "prompt": "The launch committee approved three catalog rows. Load the approved starting rows into `products` in `seed.sql`. In `query.sql`, return `id, sku, name, category, price, status, notes` from `products` in that column order. Sort the final result by `id`. Keep the completed work in `schema.sql` unchanged.",
+                "hint": "Load only the approved rows in seed.sql, then write query.sql so the Results tab proves the load succeeded.",
+                "help": {
+                  "concept": "Keep each database responsibility in its named file: schema definitions in schema.sql, approved starting rows in seed.sql, mutations in operations.sql, and visible evidence in query.sql.",
+                  "hint_1": "Complete the main database change before writing the inspection or verification query.",
+                  "hint_2": "In `query.sql`, return `id, sku, name, category, price, status, notes` from `products`, ordered by `id`."
+                },
+                "starterCode": "-- Product and stock-event rows are loaded in later capstone steps. -- No changes are required in this file yet. -- Complete Load the Approved Products below.",
+                "solutionCode": "INSERT INTO products (sku, name, category, price, notes) VALUES ('SKU001', 'Product A', 'Category 1', 19.99, NULL), ('SKU002', 'Product B', 'Category 2', 29.99, 'Special edition'), ('SKU003', 'Product C', 'Category 3', 39.99, NULL);",
+                "starterFiles": {
+                  "schema_sql": {
+                    "content": "CREATE TABLE products ( id INTEGER PRIMARY KEY, sku TEXT NOT NULL UNIQUE, name TEXT NOT NULL, category TEXT NOT NULL, price REAL NOT NULL, status TEXT NOT NULL DEFAULT 'draft', notes TEXT NULL ); CREATE TABLE stock_events ( id INTEGER PRIMARY KEY, product_id INTEGER NOT NULL, quantity_change INTEGER NOT NULL, event_type TEXT NOT NULL DEFAULT 'receipt', note TEXT NULL, FOREIGN KEY (product_id) REFERENCES products(id) );"
+                  },
+                  "seed_sql": {
+                    "content": "-- Product and stock-event rows are loaded in later capstone steps. -- No changes are required in this file yet. -- Complete Load the Approved Products below."
+                  },
+                  "query_sql": {
+                    "content": "-- Return the verification result required for \"Load the Approved Products\" below."
+                  }
+                },
+                "solutionFiles": {
+                  "schema_sql": {
+                    "content": "CREATE TABLE products ( id INTEGER PRIMARY KEY, sku TEXT NOT NULL UNIQUE, name TEXT NOT NULL, category TEXT NOT NULL, price REAL NOT NULL, status TEXT NOT NULL DEFAULT 'draft', notes TEXT NULL ); CREATE TABLE stock_events ( id INTEGER PRIMARY KEY, product_id INTEGER NOT NULL, quantity_change INTEGER NOT NULL, event_type TEXT NOT NULL DEFAULT 'receipt', note TEXT NULL, FOREIGN KEY (product_id) REFERENCES products(id) );"
+                  },
+                  "seed_sql": {
+                    "content": "INSERT INTO products (sku, name, category, price, notes) VALUES ('SKU001', 'Product A', 'Category 1', 19.99, NULL), ('SKU002', 'Product B', 'Category 2', 29.99, 'Special edition'), ('SKU003', 'Product C', 'Category 3', 39.99, NULL);"
+                  },
+                  "query_sql": {
+                    "content": "SELECT id, sku, name, category, price, status, notes FROM products ORDER BY id;"
+                  }
+                }
+              },
+              "ci_final_capstone_step4": {
+                "title": "Load the Opening Stock Events",
+                "prompt": "The opening inventory counts are ready. Load the approved starting rows into `products`, `stock_events` in `seed.sql`. In `query.sql`, return `id, product_id, quantity_change, event_type, note` from `stock_events` in that column order. Sort the final result by `id`. Keep the completed work in `schema.sql` unchanged.",
+                "hint": "Load only the approved rows in seed.sql, then write query.sql so the Results tab proves the load succeeded.",
+                "help": {
+                  "concept": "Keep each database responsibility in its named file: schema definitions in schema.sql, approved starting rows in seed.sql, mutations in operations.sql, and visible evidence in query.sql.",
+                  "hint_1": "Complete the main database change before writing the inspection or verification query.",
+                  "hint_2": "In `query.sql`, return `id, product_id, quantity_change, event_type, note` from `stock_events`, ordered by `id`."
+                },
+                "starterCode": "INSERT INTO products (sku, name, category, price, notes) VALUES ('SKU001', 'Product A', 'Category 1', 19.99, NULL), ('SKU002', 'Product B', 'Category 2', 29.99, 'Special edition'), ('SKU003', 'Product C', 'Category 3', 39.99, NULL); -- Complete Load the Opening Stock Events below.",
+                "solutionCode": "INSERT INTO products (sku, name, category, price, notes) VALUES ('SKU001', 'Product A', 'Category 1', 19.99, NULL), ('SKU002', 'Product B', 'Category 2', 29.99, 'Special edition'), ('SKU003', 'Product C', 'Category 3', 39.99, NULL); INSERT INTO stock_events (product_id, quantity_change, event_type, note) VALUES (1, 100, 'receipt', 'Initial stock'), (2, 50, 'receipt', 'Restock'), (3, 30, 'receipt', 'New shipment'), (1, 0, 'adjustment', 'Test event');",
+                "starterFiles": {
+                  "schema_sql": {
+                    "content": "CREATE TABLE products ( id INTEGER PRIMARY KEY, sku TEXT NOT NULL UNIQUE, name TEXT NOT NULL, category TEXT NOT NULL, price REAL NOT NULL, status TEXT NOT NULL DEFAULT 'draft', notes TEXT NULL ); CREATE TABLE stock_events ( id INTEGER PRIMARY KEY, product_id INTEGER NOT NULL, quantity_change INTEGER NOT NULL, event_type TEXT NOT NULL DEFAULT 'receipt', note TEXT NULL, FOREIGN KEY (product_id) REFERENCES products(id) );"
+                  },
+                  "seed_sql": {
+                    "content": "INSERT INTO products (sku, name, category, price, notes) VALUES ('SKU001', 'Product A', 'Category 1', 19.99, NULL), ('SKU002', 'Product B', 'Category 2', 29.99, 'Special edition'), ('SKU003', 'Product C', 'Category 3', 39.99, NULL); -- Complete Load the Opening Stock Events below."
+                  },
+                  "query_sql": {
+                    "content": "-- Return the verification result required for \"Load the Opening Stock Events\" below."
+                  }
+                },
+                "solutionFiles": {
+                  "schema_sql": {
+                    "content": "CREATE TABLE products ( id INTEGER PRIMARY KEY, sku TEXT NOT NULL UNIQUE, name TEXT NOT NULL, category TEXT NOT NULL, price REAL NOT NULL, status TEXT NOT NULL DEFAULT 'draft', notes TEXT NULL ); CREATE TABLE stock_events ( id INTEGER PRIMARY KEY, product_id INTEGER NOT NULL, quantity_change INTEGER NOT NULL, event_type TEXT NOT NULL DEFAULT 'receipt', note TEXT NULL, FOREIGN KEY (product_id) REFERENCES products(id) );"
+                  },
+                  "seed_sql": {
+                    "content": "INSERT INTO products (sku, name, category, price, notes) VALUES ('SKU001', 'Product A', 'Category 1', 19.99, NULL), ('SKU002', 'Product B', 'Category 2', 29.99, 'Special edition'), ('SKU003', 'Product C', 'Category 3', 39.99, NULL); INSERT INTO stock_events (product_id, quantity_change, event_type, note) VALUES (1, 100, 'receipt', 'Initial stock'), (2, 50, 'receipt', 'Restock'), (3, 30, 'receipt', 'New shipment'), (1, 0, 'adjustment', 'Test event');"
+                  },
+                  "query_sql": {
+                    "content": "SELECT id, product_id, quantity_change, event_type, note FROM stock_events ORDER BY id;"
+                  }
+                }
+              },
+              "ci_final_capstone_step5": {
+                "title": "Apply the Launch Correction",
+                "prompt": "A final pricing review changed the launch record for product `id = 1`. Update `products` with the assignments `price = 24.99, status = 'active'`. Limit the mutation with `WHERE id = 1`. In `query.sql`, return `id, sku, price, status` from `products` in that column order. Keep only rows where `id = 1`. Keep the completed work in `schema.sql`, `seed.sql` unchanged.",
+                "hint": "Apply the narrowly scoped change in operations.sql, then write query.sql so the Results tab proves the final state.",
+                "help": {
+                  "concept": "Keep each database responsibility in its named file: schema definitions in schema.sql, approved starting rows in seed.sql, mutations in operations.sql, and visible evidence in query.sql.",
+                  "hint_1": "Complete the main database change before writing the inspection or verification query.",
+                  "hint_2": "In `query.sql`, return `id, sku, price, status` from `products` for rows matching `id = 1`."
+                },
+                "starterCode": "-- Data corrections begin in a later capstone step. -- No changes are required in this file yet. -- Complete Apply the Launch Correction below.",
+                "solutionCode": "UPDATE products SET price = 24.99, status = 'active' WHERE id = 1;",
+                "starterFiles": {
+                  "schema_sql": {
+                    "content": "CREATE TABLE products ( id INTEGER PRIMARY KEY, sku TEXT NOT NULL UNIQUE, name TEXT NOT NULL, category TEXT NOT NULL, price REAL NOT NULL, status TEXT NOT NULL DEFAULT 'draft', notes TEXT NULL ); CREATE TABLE stock_events ( id INTEGER PRIMARY KEY, product_id INTEGER NOT NULL, quantity_change INTEGER NOT NULL, event_type TEXT NOT NULL DEFAULT 'receipt', note TEXT NULL, FOREIGN KEY (product_id) REFERENCES products(id) );"
+                  },
+                  "seed_sql": {
+                    "content": "INSERT INTO products (sku, name, category, price, notes) VALUES ('SKU001', 'Product A', 'Category 1', 19.99, NULL), ('SKU002', 'Product B', 'Category 2', 29.99, 'Special edition'), ('SKU003', 'Product C', 'Category 3', 39.99, NULL); INSERT INTO stock_events (product_id, quantity_change, event_type, note) VALUES (1, 100, 'receipt', 'Initial stock'), (2, 50, 'receipt', 'Restock'), (3, 30, 'receipt', 'New shipment'), (1, 0, 'adjustment', 'Test event');"
+                  },
+                  "operations_sql": {
+                    "content": "-- Data corrections begin in a later capstone step. -- No changes are required in this file yet. -- Complete Apply the Launch Correction below."
+                  },
+                  "query_sql": {
+                    "content": "-- Return the verification result required for \"Apply the Launch Correction\" below."
+                  }
+                },
+                "solutionFiles": {
+                  "schema_sql": {
+                    "content": "CREATE TABLE products ( id INTEGER PRIMARY KEY, sku TEXT NOT NULL UNIQUE, name TEXT NOT NULL, category TEXT NOT NULL, price REAL NOT NULL, status TEXT NOT NULL DEFAULT 'draft', notes TEXT NULL ); CREATE TABLE stock_events ( id INTEGER PRIMARY KEY, product_id INTEGER NOT NULL, quantity_change INTEGER NOT NULL, event_type TEXT NOT NULL DEFAULT 'receipt', note TEXT NULL, FOREIGN KEY (product_id) REFERENCES products(id) );"
+                  },
+                  "seed_sql": {
+                    "content": "INSERT INTO products (sku, name, category, price, notes) VALUES ('SKU001', 'Product A', 'Category 1', 19.99, NULL), ('SKU002', 'Product B', 'Category 2', 29.99, 'Special edition'), ('SKU003', 'Product C', 'Category 3', 39.99, NULL); INSERT INTO stock_events (product_id, quantity_change, event_type, note) VALUES (1, 100, 'receipt', 'Initial stock'), (2, 50, 'receipt', 'Restock'), (3, 30, 'receipt', 'New shipment'), (1, 0, 'adjustment', 'Test event');"
+                  },
+                  "operations_sql": {
+                    "content": "UPDATE products SET price = 24.99, status = 'active' WHERE id = 1;"
+                  },
+                  "query_sql": {
+                    "content": "SELECT id, sku, price, status FROM products WHERE id = 1;"
+                  }
+                }
+              },
+              "ci_final_capstone_step6": {
+                "title": "Remove the Test Event and Finalize",
+                "prompt": "Quality assurance found one placeholder stock event that must not reach production. Update `products` with the assignments `price = 24.99, status = 'active'`. Delete only the approved rows from `stock_events`. Limit the mutation with `WHERE id = 1; DELETE FROM stock_events WHERE note = 'Test event'`. In `query.sql`, return `id, product_id, quantity_change, event_type, note` from `stock_events` in that column order. Sort the final result by `id`. Keep the completed work in `schema.sql`, `seed.sql` unchanged.",
+                "hint": "Apply the narrowly scoped change in operations.sql, then write query.sql so the Results tab proves the final state.",
+                "help": {
+                  "concept": "Keep each database responsibility in its named file: schema definitions in schema.sql, approved starting rows in seed.sql, mutations in operations.sql, and visible evidence in query.sql.",
+                  "hint_1": "Complete the main database change before writing the inspection or verification query.",
+                  "hint_2": "In `query.sql`, return `id, product_id, quantity_change, event_type, note` from `stock_events`, ordered by `id`."
+                },
+                "starterCode": "UPDATE products SET price = 24.99, status = 'active' WHERE id = 1; -- Complete Remove the Test Event and Finalize below.",
+                "solutionCode": "UPDATE products SET price = 24.99, status = 'active' WHERE id = 1; DELETE FROM stock_events WHERE note = 'Test event';",
+                "starterFiles": {
+                  "schema_sql": {
+                    "content": "CREATE TABLE products ( id INTEGER PRIMARY KEY, sku TEXT NOT NULL UNIQUE, name TEXT NOT NULL, category TEXT NOT NULL, price REAL NOT NULL, status TEXT NOT NULL DEFAULT 'draft', notes TEXT NULL ); CREATE TABLE stock_events ( id INTEGER PRIMARY KEY, product_id INTEGER NOT NULL, quantity_change INTEGER NOT NULL, event_type TEXT NOT NULL DEFAULT 'receipt', note TEXT NULL, FOREIGN KEY (product_id) REFERENCES products(id) );"
+                  },
+                  "seed_sql": {
+                    "content": "INSERT INTO products (sku, name, category, price, notes) VALUES ('SKU001', 'Product A', 'Category 1', 19.99, NULL), ('SKU002', 'Product B', 'Category 2', 29.99, 'Special edition'), ('SKU003', 'Product C', 'Category 3', 39.99, NULL); INSERT INTO stock_events (product_id, quantity_change, event_type, note) VALUES (1, 100, 'receipt', 'Initial stock'), (2, 50, 'receipt', 'Restock'), (3, 30, 'receipt', 'New shipment'), (1, 0, 'adjustment', 'Test event');"
+                  },
+                  "operations_sql": {
+                    "content": "UPDATE products SET price = 24.99, status = 'active' WHERE id = 1; -- Complete Remove the Test Event and Finalize below."
+                  },
+                  "query_sql": {
+                    "content": "-- Return the verification result required for \"Remove the Test Event and Finalize\" below."
+                  }
+                },
+                "solutionFiles": {
+                  "schema_sql": {
+                    "content": "CREATE TABLE products ( id INTEGER PRIMARY KEY, sku TEXT NOT NULL UNIQUE, name TEXT NOT NULL, category TEXT NOT NULL, price REAL NOT NULL, status TEXT NOT NULL DEFAULT 'draft', notes TEXT NULL ); CREATE TABLE stock_events ( id INTEGER PRIMARY KEY, product_id INTEGER NOT NULL, quantity_change INTEGER NOT NULL, event_type TEXT NOT NULL DEFAULT 'receipt', note TEXT NULL, FOREIGN KEY (product_id) REFERENCES products(id) );"
+                  },
+                  "seed_sql": {
+                    "content": "INSERT INTO products (sku, name, category, price, notes) VALUES ('SKU001', 'Product A', 'Category 1', 19.99, NULL), ('SKU002', 'Product B', 'Category 2', 29.99, 'Special edition'), ('SKU003', 'Product C', 'Category 3', 39.99, NULL); INSERT INTO stock_events (product_id, quantity_change, event_type, note) VALUES (1, 100, 'receipt', 'Initial stock'), (2, 50, 'receipt', 'Restock'), (3, 30, 'receipt', 'New shipment'), (1, 0, 'adjustment', 'Test event');"
+                  },
+                  "operations_sql": {
+                    "content": "UPDATE products SET price = 24.99, status = 'active' WHERE id = 1; DELETE FROM stock_events WHERE note = 'Test event';"
+                  },
+                  "query_sql": {
+                    "content": "SELECT id, product_id, quantity_change, event_type, note FROM stock_events ORDER BY id;"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql--sql-data-management--draft": {
+      "sql-data-management-module-3-final-capstone": {
+        "final-inventory-operations-launch": {
+          "sketch-1": {
+            "title": "Inventory Operations Launch Project",
+            "bodyMarkdown": "A neighborhood makers market is replacing its launch spreadsheet with a small relational database. You are the SQL data management specialist responsible for preparing the database for its first operational handoff. The capstone develops one workspace in six stages: create the product catalog, create the related stock-event table, load approved products, load opening stock events, correct the launch record for product 1, and remove one confirmed placeholder event. Your final deliverable is a four-file workspace: - `schema.sql` defines `products` and `stock_events` with keys, required values, defaults, uniqueness, and a foreign key. - `seed.sql` loads the approved starting products and stock events. - `operations.sql` contains the precise update and delete required by the launch review. - `query.sql` provides the schema inspections and final data verification required at each stage. Each step states which file to edit and what the Results panel must prove. Completed files carry forward without changing responsibilities."
+          }
+        }
+      }
+    }
+  }
+}

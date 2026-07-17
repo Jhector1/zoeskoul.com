@@ -1,0 +1,278 @@
+{
+  "topicId": "avoiding-cartesian-and-wrong-key-joins",
+  "subjectSlug": "multi-table-sql",
+  "moduleSlug": "multi-table-sql-module-1-relationship-paths",
+  "sectionSlug": "multi-table-sql-multi-table-sql-section-1-longer-joins",
+  "prefix": "multi_table_sql_module_1",
+  "minutes": 28,
+  "runtimeDefaults": {
+    "kind": "sql",
+    "showSchema": true,
+    "showErd": true,
+    "showChen": true,
+    "supportsTerminal": false,
+    "supportsMultiFile": false,
+    "supportsFileSystem": false,
+    "datasetId": "school_relations_intro",
+    "fixedSqlDialect": "sqlite",
+    "resultShape": "table"
+  },
+  "serviceDefaults": null,
+  "topic": {
+    "labelKey": "topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.avoiding-cartesian-and-wrong-key-joins.label",
+    "summaryKey": "topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.avoiding-cartesian-and-wrong-key-joins.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.avoiding-cartesian-and-wrong-key-joins.cards.sketch0.title",
+      "sketchId": "sketch0",
+      "height": 420,
+      "tryIt": {
+        "id": "try-avoiding-cartesian-and-wrong-key-joins-sketch0",
+        "titleKey": "topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.avoiding-cartesian-and-wrong-key-joins.tryIt.try_avoiding_cartesian_and_wrong_key_joins_sketch0.title",
+        "promptKey": "topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.avoiding-cartesian-and-wrong-key-joins.tryIt.try_avoiding_cartesian_and_wrong_key_joins_sketch0.prompt",
+        "exerciseKey": "try-avoiding-cartesian-and-wrong-key-joins-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.avoiding-cartesian-and-wrong-key-joins.cards.sketch1.title",
+      "sketchId": "sketch1",
+      "height": 420,
+      "tryIt": {
+        "id": "try-avoiding-cartesian-and-wrong-key-joins-sketch1",
+        "titleKey": "topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.avoiding-cartesian-and-wrong-key-joins.tryIt.try_avoiding_cartesian_and_wrong_key_joins_sketch1.title",
+        "promptKey": "topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.avoiding-cartesian-and-wrong-key-joins.tryIt.try_avoiding_cartesian_and_wrong_key_joins_sketch1.prompt",
+        "exerciseKey": "try-avoiding-cartesian-and-wrong-key-joins-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.avoiding-cartesian-and-wrong-key-joins.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch0",
+      "archetype": "paragraph",
+      "titleKey": "sketches.multi-table-sql.multi-table-sql-module-1-relationship-paths.avoiding-cartesian-and-wrong-key-joins.sketch0.title",
+      "bodyKey": "sketches.multi-table-sql.multi-table-sql-module-1-relationship-paths.avoiding-cartesian-and-wrong-key-joins.sketch0.bodyMarkdown"
+    },
+    {
+      "id": "sketch1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.multi-table-sql.multi-table-sql-module-1-relationship-paths.avoiding-cartesian-and-wrong-key-joins.sketch1.title",
+      "bodyKey": "sketches.multi-table-sql.multi-table-sql-module-1-relationship-paths.avoiding-cartesian-and-wrong-key-joins.sketch1.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "try-avoiding-cartesian-and-wrong-key-joins-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.avoiding-cartesian-and-wrong-key-joins.tryIt.try_avoiding_cartesian_and_wrong_key_joins_sketch0",
+      "language": "sql",
+      "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.avoiding-cartesian-and-wrong-key-joins.tryIt.try_avoiding_cartesian_and_wrong_key_joins_sketch0.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "school_relations_intro",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "main.sql",
+        "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.avoiding-cartesian-and-wrong-key-joins.tryIt.try_avoiding_cartesian_and_wrong_key_joins_sketch0.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.sql",
+            "content": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.avoiding-cartesian-and-wrong-key-joins.tryIt.try_avoiding_cartesian_and_wrong_key_joins_sketch0.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "school_relations_intro",
+        "resultShape": "table",
+        "solutionCode": "SELECT students.name, courses.title\nFROM students\nJOIN enrollments ON students.id = enrollments.student_id\nJOIN courses ON enrollments.course_id = courses.id;"
+      }
+    },
+    {
+      "id": "try-avoiding-cartesian-and-wrong-key-joins-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.avoiding-cartesian-and-wrong-key-joins.tryIt.try_avoiding_cartesian_and_wrong_key_joins_sketch1",
+      "language": "sql",
+      "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.avoiding-cartesian-and-wrong-key-joins.tryIt.try_avoiding_cartesian_and_wrong_key_joins_sketch1.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "school_relations_intro",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "main.sql",
+        "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.avoiding-cartesian-and-wrong-key-joins.tryIt.try_avoiding_cartesian_and_wrong_key_joins_sketch1.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.sql",
+            "content": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.avoiding-cartesian-and-wrong-key-joins.tryIt.try_avoiding_cartesian_and_wrong_key_joins_sketch1.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "school_relations_intro",
+        "resultShape": "table",
+        "solutionCode": "SELECT students.name, courses.title\nFROM students\nJOIN enrollments ON students.id = enrollments.student_id\nJOIN courses ON enrollments.course_id = courses.id;"
+      }
+    },
+    {
+      "id": "quiz1",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.avoiding-cartesian-and-wrong-key-joins.practice.quiz1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "quiz2",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.avoiding-cartesian-and-wrong-key-joins.practice.quiz2",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "quiz3",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.avoiding-cartesian-and-wrong-key-joins.practice.quiz3",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "d"
+        ]
+      }
+    },
+    {
+      "id": "quiz4",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.avoiding-cartesian-and-wrong-key-joins.practice.quiz4",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
+      }
+    },
+    {
+      "id": "quiz5",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.avoiding-cartesian-and-wrong-key-joins.practice.quiz5",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "enrollments.student_id"
+      }
+    },
+    {
+      "id": "quiz6",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.avoiding-cartesian-and-wrong-key-joins.practice.quiz6",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "courses.id"
+      }
+    }
+  ]
+}

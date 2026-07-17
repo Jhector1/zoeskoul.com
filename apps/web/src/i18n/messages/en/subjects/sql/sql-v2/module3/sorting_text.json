@@ -14,31 +14,17 @@
             },
             "quiz": {
               "title": "Quiz"
-            },
-            "project": {
-              "title": "Practice sorting text in product reports"
-            }
-          },
-          "projectSteps": {
-            "ci_1": {
-              "title": "Sort product names alphabetically"
-            },
-            "ci_2": {
-              "title": "Sort by category then name"
-            },
-            "ci_3": {
-              "title": "Reverse names inside each category"
             }
           },
           "quiz": {
             "sc-1": {
               "title": "What ASC means for text",
               "prompt": "When you use `ORDER BY name ASC` on a text column, how are the rows sorted?",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Match each choice to the command, clause, or constraint described in the question.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "concept": "Use the SQL behavior described in the lesson to separate the valid choice from statements about a different command, clause, or constraint.",
+                "hint_1": "Identify the job the SQL must perform before comparing the choices.",
+                "hint_2": "Eliminate choices that belong to a different SQL concept."
               },
               "options": {
                 "a": "From A to Z",
@@ -194,7 +180,7 @@
             },
             "try-sorting_text-sketch0": {
               "title": "Sort product names alphabetically",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that shows the `name` and `category` columns from `products`, sorted by `name` from A to Z. Write the query in the SQL editor, click Run query, and check the results table.",
+              "prompt": "Build a ranking query that shows the `name` and `category` columns from `products`, sorted by `name` from A to Z. Run it and compare the result with the expected table.",
               "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
               "help": {
                 "concept": "This SQL exercise checks whether your query returns the requested result.",
@@ -204,26 +190,26 @@
               "starterCode": "-- Show the name and category columns from products, sorted by name from A to Z.\nSELECT\n  name,\n  category\nFROM products\n;"
             },
             "try-sorting_text-sketch1": {
-              "title": "Sort by category then name",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that shows `name` and `category` from `products`. Sort first by `category` from A to Z, then by `name` from A to Z inside each category. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Sort Text with a Tie-Breaker",
+              "prompt": "Return `name` and `category`. Sort categories from Z to A, then names from A to Z inside each category.",
+              "hint": "Add name ASC after a comma.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
+                "concept": "Return `name` and `category`. Sort categories from Z to A, then names from A to Z inside each category.",
+                "hint_1": "Add name ASC after a comma.",
+                "hint_2": "Run the query and compare the returned columns and rows with the expected result."
               },
-              "starterCode": "-- Show name and category from products.\nSELECT\n  name,\n  category\nFROM products\n;"
+              "starterCode": "SELECT name, category\nFROM products\nORDER BY category DESC;"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_sorting_text_sketch0": {
               "title": "Sort product names alphabetically",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that shows the `name` and `category` columns from `products`, sorted by `name` from A to Z. Write the query in the SQL editor, click Run query, and check the results table."
+              "prompt": "Build a ranking query that shows the `name` and `category` columns from `products`, sorted by `name` from A to Z. Run it and compare the result with the expected table."
             },
             "try_sorting_text_sketch1": {
-              "title": "Sort by category then name",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that shows `name` and `category` from `products`. Sort first by `category` from A to Z, then by `name` from A to Z inside each category. Write the query in the SQL editor, click Run query, and check the results table."
+              "title": "Sort Text with a Tie-Breaker",
+              "prompt": "Return `name` and `category`. Sort categories from Z to A, then names from A to Z inside each category."
             }
           }
         }

@@ -5,7 +5,9 @@ import type {
     CourseSpecReleaseWindow,
     ExerciseKindMix,
 } from "@zoeskoul/curriculum-contracts";
+import { validateToolPresentationPolicy } from "@zoeskoul/curriculum-contracts";
 import {
+    baseCourseGenerationPolicy,
     getCurriculumProfile,
     validateProfileShapeConsistency,
 } from "@zoeskoul/curriculum-profiles";
@@ -88,6 +90,91 @@ function validateReleaseWindow(
     }
 }
 
+function validateProjectBrief(args: {
+    brief: CourseSpecSection["topics"][number]["projectBrief"];
+    path: string;
+    required: boolean;
+    issues: string[];
+}) {
+    const { brief, path, required, issues } = args;
+
+    if (!brief) {
+        if (required) {
+            issues.push(`${path}.projectBrief is required for the final capstone topic`);
+        }
+        return;
+    }
+
+    if (
+        typeof brief.stepCountTarget !== "number" ||
+        !Number.isInteger(brief.stepCountTarget) ||
+        brief.stepCountTarget <= 0
+    ) {
+        issues.push(`${path}.projectBrief.stepCountTarget must be a positive integer`);
+    }
+
+    if (
+        brief.flow != null &&
+        brief.flow !== "standalone" &&
+        brief.flow !== "progressive"
+    ) {
+        issues.push(`${path}.projectBrief.flow must be "standalone" or "progressive" when provided`);
+    }
+
+    for (const field of ["scenario", "role", "workspace", "deliverable"] as const) {
+        const value = brief[field];
+        if (value != null && !isNonEmptyString(value)) {
+            issues.push(`${path}.projectBrief.${field} must not be blank when provided`);
+        }
+    }
+
+    if (brief.requirements != null) {
+        if (!Array.isArray(brief.requirements)) {
+            issues.push(`${path}.projectBrief.requirements must be an array when provided`);
+        } else {
+            brief.requirements.forEach((requirement, index) => {
+                if (!isNonEmptyString(requirement)) {
+                    issues.push(`${path}.projectBrief.requirements[${index}] must not be blank`);
+                }
+            });
+        }
+    }
+
+    if (brief.stepLadder != null) {
+        if (!Array.isArray(brief.stepLadder) || brief.stepLadder.length === 0) {
+            issues.push(`${path}.projectBrief.stepLadder must be a non-empty array when provided`);
+            return;
+        }
+
+        if (
+            Number.isInteger(brief.stepCountTarget) &&
+            brief.stepCountTarget > 0 &&
+            brief.stepLadder.length !== brief.stepCountTarget
+        ) {
+            issues.push(
+                `${path}.projectBrief.stepLadder must contain exactly ${brief.stepCountTarget} step(s) to match stepCountTarget`,
+            );
+        }
+
+        brief.stepLadder.forEach((step, index) => {
+            const stepPath = `${path}.projectBrief.stepLadder[${index}]`;
+            if (!step || typeof step !== "object") {
+                issues.push(`${stepPath} must be an object`);
+                return;
+            }
+            if (step.step !== index + 1) {
+                issues.push(`${stepPath}.step must equal ${index + 1}`);
+            }
+            if (!isNonEmptyString(step.title)) {
+                issues.push(`${stepPath}.title is required`);
+            }
+            if (!isNonEmptyString(step.requirement)) {
+                issues.push(`${stepPath}.requirement is required`);
+            }
+        });
+    }
+}
+
 function validateSection(
     section: CourseSpecSection,
     module: CourseSpecModule,
@@ -109,6 +196,8 @@ function validateSection(
     if (!isNonEmptyString(section.title)) {
         issues.push(`${path}.title is required`);
     }
+
+    issues.push(...validateToolPresentationPolicy(section.tools, `${path}.tools`));
 
     if (section.description != null && !String(section.description).trim()) {
         issues.push(`${path}.description must not be blank if provided`);
@@ -193,6 +282,32 @@ function validateSection(
         ) {
             issues.push(`${topicPath}.minutes must be a positive number`);
         }
+
+        issues.push(...validateToolPresentationPolicy(topic.tools, `${topicPath}.tools`));
+        for (const [lessonId, policy] of Object.entries(topic.lessonTools ?? {})) {
+            issues.push(
+                ...validateToolPresentationPolicy(
+                    policy,
+                    `${topicPath}.lessonTools.${lessonId}`,
+                ),
+            );
+        }
+        for (const [exerciseId, policy] of Object.entries(topic.exerciseTools ?? {})) {
+            issues.push(
+                ...validateToolPresentationPolicy(
+                    policy,
+                    `${topicPath}.exerciseTools.${exerciseId}`,
+                ),
+            );
+        }
+
+        const isFinalCapstoneTopic = section.role === "capstone";
+        validateProjectBrief({
+            brief: topic.projectBrief,
+            path: topicPath,
+            required: isFinalCapstoneTopic,
+            issues,
+        });
 
         if (topic.practice != null) {
             if (!topic.practice || typeof topic.practice !== "object") {
@@ -315,6 +430,7 @@ export function validateCourseSpec(spec: CourseSpec): string[] {
     if (!isNonEmptyString(spec.title)) {
         issues.push("title is required");
     }
+    issues.push(...validateToolPresentationPolicy(spec.tools, "tools"));
     if (
         !isNonEmptyString((spec as any).description) &&
         !isNonEmptyString(spec.courseOverview?.summary)
@@ -365,6 +481,15 @@ export function validateCourseSpec(spec: CourseSpec): string[] {
         spec.policy?.qualityPolicy?.requireUniqueModuleSlugs !== false;
     const requireUniqueSectionSlugs =
         spec.policy?.qualityPolicy?.requireUniqueSectionSlugs !== false;
+    const slugConvention = spec.policy?.qualityPolicy?.slugConvention;
+    if (
+        slugConvention != null &&
+        slugConvention !== "explicit_module_section"
+    ) {
+        issues.push(
+            'policy.qualityPolicy.slugConvention must be "explicit_module_section" when provided',
+        );
+    }
     const requireModuleProject =
         spec.policy?.qualityPolicy?.requireModuleProject === true;
     const maxModuleProjectLength =
@@ -372,7 +497,8 @@ export function validateCourseSpec(spec: CourseSpec): string[] {
     const minProjectsBeforeCapstone =
         spec.policy?.projectPolicy?.minProjectsBeforeCapstone ?? 0;
     const capstoneRequired =
-        spec.policy?.projectPolicy?.capstoneRequired === true;
+        spec.policy?.projectPolicy?.capstoneRequired ??
+        baseCourseGenerationPolicy.projects.requireFinalCapstone;
     const enforceAuthoredProjectStructure =
         capstoneRequired || minProjectsBeforeCapstone > 0;
 
@@ -402,6 +528,26 @@ export function validateCourseSpec(spec: CourseSpec): string[] {
             moduleSlugSet.add(module.moduleSlug);
         }
 
+        if (
+            slugConvention === "explicit_module_section" &&
+            isNonEmptyString(spec.courseSlug) &&
+            typeof module.moduleNumber === "number" &&
+            Number.isFinite(module.moduleNumber) &&
+            isNonEmptyString(module.moduleSlug)
+        ) {
+            const expectedModulePrefix =
+                `${spec.courseSlug}-module-${module.moduleNumber}-`;
+
+            if (
+                !module.moduleSlug.startsWith(expectedModulePrefix) ||
+                module.moduleSlug.length === expectedModulePrefix.length
+            ) {
+                issues.push(
+                    `${modulePath}.moduleSlug must start with "${expectedModulePrefix}" and include a descriptive suffix when slugConvention="explicit_module_section"`,
+                );
+            }
+        }
+
         if (typeof module.moduleNumber !== "number" || !Number.isFinite(module.moduleNumber)) {
             issues.push(`${modulePath}.moduleNumber is required`);
         }
@@ -409,6 +555,8 @@ export function validateCourseSpec(spec: CourseSpec): string[] {
         if (!isNonEmptyString(module.title)) {
             issues.push(`${modulePath}.title is required`);
         }
+
+        issues.push(...validateToolPresentationPolicy(module.tools, `${modulePath}.tools`));
 
         if (
             module.role != null &&
@@ -470,16 +618,38 @@ export function validateCourseSpec(spec: CourseSpec): string[] {
         }
 
         for (const [sectionIndex, section] of module.sections.entries()) {
+            const sectionPath = `${modulePath}.sections[${sectionIndex}]`;
+
             validateSection(
                 section,
                 module,
-                `${modulePath}.sections[${sectionIndex}]`,
+                sectionPath,
                 requireUniqueSectionSlugs ? sectionSlugSet : new Set<string>(),
                 topicIdSet,
                 allowBlankTopicIds,
                 allowDuplicateTopicIds,
                 issues,
             );
+
+            if (
+                slugConvention === "explicit_module_section" &&
+                isNonEmptyString(spec.courseSlug) &&
+                typeof module.moduleNumber === "number" &&
+                Number.isFinite(module.moduleNumber) &&
+                isNonEmptyString(section.sectionSlug)
+            ) {
+                const expectedSectionPrefix =
+                    `${spec.courseSlug}-section-${module.moduleNumber}-`;
+
+                if (
+                    !section.sectionSlug.startsWith(expectedSectionPrefix) ||
+                    section.sectionSlug.length === expectedSectionPrefix.length
+                ) {
+                    issues.push(
+                        `${sectionPath}.sectionSlug must start with "${expectedSectionPrefix}" and include a descriptive suffix when slugConvention="explicit_module_section"`,
+                    );
+                }
+            }
         }
 
         const moduleProjectSections = module.sections.filter(
@@ -507,6 +677,12 @@ export function validateCourseSpec(spec: CourseSpec): string[] {
             );
         }
 
+        if (module.role === "capstone" && module.sections.length !== 1) {
+            issues.push(
+                `${modulePath}: capstone modules must contain exactly one section`,
+            );
+        }
+
         if (module.role !== "capstone" && capstoneSections.length > 0) {
             issues.push(
                 `${modulePath}: capstone sections require module.role="capstone"`,
@@ -528,6 +704,23 @@ export function validateCourseSpec(spec: CourseSpec): string[] {
             }
         }
     });
+
+    const authoredCapstoneModules = moduleStructure.filter(
+        (entry) => entry.isCapstoneModule || entry.capstoneSectionCount > 0,
+    );
+
+    if (authoredCapstoneModules.length > 1) {
+        issues.push(
+            `course authoring must contain at most one capstone module, but found ${authoredCapstoneModules.length}`,
+        );
+    }
+
+    if (
+        authoredCapstoneModules.length === 1 &&
+        authoredCapstoneModules[0].moduleIndex !== spec.modules.length - 1
+    ) {
+        issues.push("the authored capstone module must be the final module in the course");
+    }
 
     const firstCapstoneModuleIndex = moduleStructure.findIndex(
         (entry) => entry.isCapstoneModule || entry.capstoneSectionCount > 0,
@@ -575,6 +768,12 @@ export function validateCourseSpec(spec: CourseSpec): string[] {
         if (lastModuleCapstoneSections.length !== 1) {
             issues.push(
                 "policy.projectPolicy.capstoneRequired requires the final module to contain exactly one capstone section",
+            );
+        }
+
+        if (authoredCapstoneModules.length !== 1) {
+            issues.push(
+                `policy.projectPolicy.capstoneRequired requires exactly one authored capstone module, but found ${authoredCapstoneModules.length}`,
             );
         }
 

@@ -1,0 +1,259 @@
+{
+  "topics": {
+    "sql-v2": {
+      "sql-v2-3": {
+        "order_by": {
+          "label": "Why and How ORDER BY Works",
+          "summary": "Sort a completed result by one selected or source column without changing which rows are returned.",
+          "cards": {
+            "sketch0": {
+              "title": "Sorting Changes Order, Not Membership"
+            },
+            "sketch1": {
+              "title": "Place ORDER BY After Filtering"
+            },
+            "quiz": {
+              "title": "Check Your Understanding"
+            }
+          },
+          "quiz": {
+            "sc_order_by_purpose": {
+              "title": "What is ORDER BY for?",
+              "prompt": "What does `ORDER BY` do in a SQL query?",
+              "hint": "Think about how rows appear in the results table after the query runs.",
+              "help": {
+                "concept": "`ORDER BY` changes the sequence of returned rows based on one column's values, such as price, name, or date.",
+                "hint_1": "It does not choose columns or filter rows. It controls row order.",
+                "hint_2": "Look for the option about sorting the query results."
+              },
+              "options": {
+                "a": "It sorts the returned rows",
+                "b": "It creates a new table",
+                "c": "It removes duplicate rows",
+                "d": "It filters rows by a condition"
+              }
+            },
+            "sc_desc_direction": {
+              "title": "Meaning of DESC",
+              "prompt": "In `ORDER BY price DESC`, what does `DESC` mean?",
+              "hint": "Think about whether the largest or smallest price appears first.",
+              "help": {
+                "concept": "`DESC` means descending order, so higher values come before lower values.",
+                "hint_1": "If prices are sorted with `DESC`, the most expensive item appears near the top.",
+                "hint_2": "Choose the option that means highest-to-lowest."
+              },
+              "options": {
+                "a": "Alphabetical order only",
+                "b": "Lowest to highest",
+                "c": "Highest to lowest",
+                "d": "Random order"
+              }
+            },
+            "mc_order_by_examples": {
+              "title": "Queries that use ORDER BY correctly",
+              "prompt": "Which queries correctly use `ORDER BY` to sort rows from the `products` table? Choose all that apply.",
+              "hint": "Check whether `ORDER BY` comes after `FROM` and names a real column.",
+              "help": {
+                "concept": "A valid `ORDER BY` query must select from a table and then sort by an existing column, optionally with `ASC` or `DESC`.",
+                "hint_1": "Look for statements that follow the pattern `SELECT ... FROM products ORDER BY column`.",
+                "hint_2": "Reject options that place `ORDER BY` in the wrong spot or use it like a filter."
+              },
+              "options": {
+                "a": "SELECT name, price FROM products ORDER BY price DESC;",
+                "b": "SELECT name FROM products ORDER BY name ASC;",
+                "c": "SELECT name ORDER BY price FROM products;",
+                "d": "SELECT name, price FROM products WHERE ORDER BY price;"
+              }
+            },
+            "mc_order_by_true_statements": {
+              "title": "True statements about sorting",
+              "prompt": "Which statements about `ORDER BY` are true? Choose all that apply.",
+              "hint": "Think about default sort direction and how `LIMIT` works with sorting.",
+              "help": {
+                "concept": "`ORDER BY` sorts rows, `ASC` is the default direction, and sorting usually happens before limiting the displayed rows.",
+                "hint_1": "One true statement is about `ASC` being optional. Another is about using `ORDER BY` with `LIMIT`.",
+                "hint_2": "Avoid statements that claim `ORDER BY` filters rows or that `DESC` means smallest first."
+              },
+              "options": {
+                "a": "`ORDER BY price` sorts by price in ascending order by default",
+                "b": "`ORDER BY` can be used before `LIMIT` to get the top rows after sorting",
+                "c": "`ORDER BY` removes rows that do not match a condition",
+                "d": "`DESC` puts the smallest values first"
+              }
+            },
+            "dr_query_clause_order": {
+              "title": "Build a sorted query",
+              "prompt": "Put these SQL parts in the correct order to make a query that shows product names sorted by price from low to high.",
+              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "help": {
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
+              },
+              "tokens": {
+                "t1": "SELECT name",
+                "t2": "FROM products",
+                "t3": "ORDER BY price ASC"
+              }
+            },
+            "dr_order_by_limit_sequence": {
+              "title": "Sort then limit",
+              "prompt": "Arrange these parts to create a query that shows the 2 most expensive products.",
+              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "help": {
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
+              },
+              "tokens": {
+                "t1": "SELECT name, price",
+                "t2": "FROM products",
+                "t3": "ORDER BY price DESC",
+                "t4": "LIMIT 2"
+              }
+            },
+            "fb_default_direction": {
+              "title": "Default sort direction",
+              "prompt": "Complete the statement.",
+              "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+              "help": {
+                "concept": "The blank should be filled with the term that makes the statement accurate.",
+                "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+                "hint_2": "Choose the option that completes the statement with the clearest meaning."
+              },
+              "template": "`ORDER BY price` is the same as `ORDER BY price [blank1]`.",
+              "choices": [
+                "ASC",
+                "DESC",
+                "WHERE",
+                "LIMIT"
+              ]
+            },
+            "fb_desc_keyword": {
+              "title": "Keyword for highest first",
+              "prompt": "Fill in the missing keyword.",
+              "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+              "help": {
+                "concept": "The blank should be filled with the term that makes the statement accurate.",
+                "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+                "hint_2": "Choose the option that completes the statement with the clearest meaning."
+              },
+              "template": "SELECT name, stock FROM products ORDER BY stock [blank1];",
+              "choices": [
+                "ASC",
+                "DESC",
+                "FROM",
+                "LIKE"
+              ]
+            },
+            "ci_sort_by_price_low_high": {
+              "title": "Sort products by price",
+              "prompt": "Write a query that shows `name` and `price` from `products`, sorted by `price` from lowest to highest. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "-- Show name and price from products, sorted by price from lowest to highest.\nSELECT name, price\nFROM products\n;"
+            },
+            "ci_newest_products": {
+              "title": "Show newest products first",
+              "prompt": "Write a query that shows `name` and `created_at` from `products`, sorted so the newest products appear first. Use the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "-- Show name and created_at from products, sorted so the newest products appear first.\nSELECT name, created_at\nFROM products\n;"
+            },
+            "ci_top_3_expensive": {
+              "title": "Top 3 most expensive products",
+              "prompt": "Write a query that shows `name` and `price` from `products`, sorted from highest price to lowest price, and returns only the first 3 rows. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "-- TODO: sort by highest price first\n-- TODO: return only 3 rows\nSELECT name, price\nFROM products\n;"
+            },
+            "try-order_by-sketch0": {
+              "title": "Sort Products by Category",
+              "prompt": "Return `id`, `name`, and `category` from `products`, sorted by `category` from A to Z.",
+              "hint": "Use ORDER BY category ASC after FROM products.",
+              "help": {
+                "concept": "ORDER BY changes row sequence without changing which rows belong in the result.",
+                "hint_1": "Use ORDER BY category ASC after FROM products.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+              },
+              "starterCode": "SELECT id, name, category\nFROM products\n-- Sort category A to Z"
+            },
+            "try-order_by-sketch1": {
+              "title": "Filter First, Then Sort",
+              "prompt": "Return `name`, `category`, and `price` from `products` for the `Art` category, sorted by `price` from lowest to highest.",
+              "hint": "Put WHERE before ORDER BY, then sort price with ASC.",
+              "help": {
+                "concept": "SQL filters rows before applying the final result ordering.",
+                "hint_1": "Put WHERE before ORDER BY, then sort price with ASC.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+              },
+              "starterCode": "SELECT name, category, price\nFROM products\n-- Keep Art products, then sort by price"
+            },
+            "try-order_by-sketch2": {
+              "title": "Top 3 most expensive products",
+              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that shows `name` and `price` from `products`, sorted from highest price to lowest price, and returns only the first 3 rows. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "-- TODO: sort by highest price first\n-- TODO: return only 3 rows\nSELECT name, price\nFROM products\n;"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_order_by_sketch0": {
+              "title": "Sort Products by Category",
+              "prompt": "Return `id`, `name`, and `category` from `products`, sorted by `category` from A to Z.",
+              "hint": "Use ORDER BY category ASC after FROM products.",
+              "help": {
+                "concept": "ORDER BY changes row sequence without changing which rows belong in the result.",
+                "hint_1": "Use ORDER BY category ASC after FROM products.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+              }
+            },
+            "try_order_by_sketch1": {
+              "title": "Filter First, Then Sort",
+              "prompt": "Return `name`, `category`, and `price` from `products` for the `Art` category, sorted by `price` from lowest to highest.",
+              "hint": "Put WHERE before ORDER BY, then sort price with ASC.",
+              "help": {
+                "concept": "SQL filters rows before applying the final result ordering.",
+                "hint_1": "Put WHERE before ORDER BY, then sort price with ASC.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql-v2": {
+      "sql-v2-3": {
+        "order_by": {
+          "sorting_changes_order": {
+            "title": "Sorting Changes Order, Not Membership",
+            "bodyMarkdown": "`ORDER BY` changes the sequence of result rows. It does not add rows, remove rows, or change stored data.\n\n```sql\nSELECT\n    name,\n    price\nFROM products\nORDER BY price DESC;\n```\n\nThe result contains the same products as an unsorted query, but the highest prices appear first. `DESC` means descending order. If no direction is written, SQL uses ascending order by default.\n\nSorting makes comparisons easier because related values appear in a predictable sequence."
+          },
+          "order_by_clause_position": {
+            "title": "Place ORDER BY After Filtering",
+            "bodyMarkdown": "`ORDER BY` belongs after `WHERE` because SQL first decides which rows remain, then sorts those rows.\n\n```sql\nSELECT\n    name,\n    category,\n    price\nFROM products\nWHERE category = 'Home'\nORDER BY price DESC;\n```\n\nRead the request in two parts: keep the Home products, then rank the remaining rows by price. This separation helps prevent placing clauses in the wrong order."
+          }
+        }
+      }
+    }
+  }
+}

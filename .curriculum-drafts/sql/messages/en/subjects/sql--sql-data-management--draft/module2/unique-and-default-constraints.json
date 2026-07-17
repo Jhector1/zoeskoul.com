@@ -1,0 +1,198 @@
+{
+  "topics": {
+    "sql--sql-data-management--draft": {
+      "sql-data-management-module-2-table-creation-constraints": {
+        "unique-and-default-constraints": {
+          "label": "UNIQUE and DEFAULT Constraints",
+          "summary": "Learn how to enforce uniqueness and provide default values in SQL tables to maintain data integrity and simplify data entry.",
+          "cards": {
+            "sketch0": {
+              "title": "Reject Duplicate Business Identifiers"
+            },
+            "sketch1": {
+              "title": "Start New Rows in a Known State"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_unique_and_default_constraints_sketch0": {
+              "title": "Protect Customer Phone Numbers",
+              "prompt": "A customer-support team uses phone numbers to avoid duplicate contact records. Create or complete the `customers` table with the columns and constraints named in the brief. In `query.sql`, return `name` from `sqlite_master` in that column order. Keep only rows where `type='table' AND name='customers'`.",
+              "hint": "Complete the required table definitions in schema.sql, then write query.sql so the Results tab proves the structure exists.",
+              "help": {
+                "concept": "Keep each database responsibility in its named file: schema definitions in schema.sql, approved starting rows in seed.sql, mutations in operations.sql, and visible evidence in query.sql.",
+                "hint_1": "Complete the main database change before writing the inspection or verification query.",
+                "hint_2": "In `query.sql`, return `name` from `sqlite_master` for the table `customers`."
+              },
+              "starterCode": "-- Build the table definition required for \"Protect Customer Phone Numbers\" below.\n",
+              "solutionCode": "CREATE TABLE customers (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    phone_number TEXT UNIQUE\n);",
+              "starterFiles": {
+                "schema_sql": {
+                  "content": "-- Build the table definition required for \"Protect Customer Phone Numbers\" below.\n"
+                },
+                "query_sql": {
+                  "content": "-- Return the verification result required for \"Protect Customer Phone Numbers\" below.\n"
+                }
+              },
+              "solutionFiles": {
+                "schema_sql": {
+                  "content": "CREATE TABLE customers (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    phone_number TEXT UNIQUE\n);"
+                },
+                "query_sql": {
+                  "content": "SELECT name FROM sqlite_master WHERE type='table' AND name='customers';"
+                }
+              }
+            },
+            "try_unique_and_default_constraints_sketch1": {
+              "title": "Give New Orders a Default Status",
+              "prompt": "New orders should begin in the pending queue unless another status is supplied. Create or complete the `orders` table with the columns and constraints named in the brief. In `query.sql`, return `name` from `sqlite_master` in that column order. Keep only rows where `type='table' AND name='orders'`.",
+              "hint": "Complete the required table definitions in schema.sql, then write query.sql so the Results tab proves the structure exists.",
+              "help": {
+                "concept": "Keep each database responsibility in its named file: schema definitions in schema.sql, approved starting rows in seed.sql, mutations in operations.sql, and visible evidence in query.sql.",
+                "hint_1": "Complete the main database change before writing the inspection or verification query.",
+                "hint_2": "In `query.sql`, return `name` from `sqlite_master` for the table `orders`."
+              },
+              "starterCode": "-- Build the table definition required for \"Give New Orders a Default Status\" below.\n",
+              "solutionCode": "CREATE TABLE orders (\n    id INTEGER PRIMARY KEY,\n    customer_id INTEGER NOT NULL,\n    status TEXT DEFAULT 'pending'\n);",
+              "starterFiles": {
+                "schema_sql": {
+                  "content": "-- Build the table definition required for \"Give New Orders a Default Status\" below.\n"
+                },
+                "query_sql": {
+                  "content": "-- Return the verification result required for \"Give New Orders a Default Status\" below.\n"
+                }
+              },
+              "solutionFiles": {
+                "schema_sql": {
+                  "content": "CREATE TABLE orders (\n    id INTEGER PRIMARY KEY,\n    customer_id INTEGER NOT NULL,\n    status TEXT DEFAULT 'pending'\n);"
+                },
+                "query_sql": {
+                  "content": "SELECT name FROM sqlite_master WHERE type='table' AND name='orders';"
+                }
+              }
+            }
+          },
+          "practice": {
+            "unique-constraint-multi-choice": {
+              "title": "What UNIQUE Enforces in SQLite",
+              "prompt": "Which statements about a SQLite UNIQUE constraint are correct? Select all that apply.",
+              "hint": "Separate duplicate non-NULL values from SQLite's treatment of NULL.",
+              "help": {
+                "concept": "UNIQUE rejects duplicate non-NULL key values and may cover one column or a column combination. SQLite permits multiple NULL values because NULL is not equal to another NULL.",
+                "hint_1": "A UNIQUE rule can be declared on more than one column.",
+                "hint_2": "Do not treat UNIQUE as identical to PRIMARY KEY."
+              },
+              "options": {
+                "a": "It allows duplicate non-NULL values in the constrained key",
+                "b": "It rejects duplicate non-NULL values in the constrained key",
+                "c": "It can apply to a combination of columns",
+                "d": "It is identical to a PRIMARY KEY"
+              }
+            },
+            "default-constraint-fill-blank": {
+              "title": "When DEFAULT Is Used",
+              "prompt": "When an INSERT omits a column that has a DEFAULT expression, SQLite stores the column's [blank1] value.",
+              "hint": "The value comes from the table definition when the column is omitted.",
+              "help": {
+                "concept": "DEFAULT supplies a routine value when an INSERT does not provide that column.",
+                "hint_1": "This is different from an explicit SQL NULL.",
+                "hint_2": "Choose the term used in the CREATE TABLE definition."
+              },
+              "template": "When an INSERT omits a column that has a DEFAULT expression, SQLite stores the column's [blank1] value.",
+              "choices": [
+                "default",
+                "unique",
+                "NULL",
+                "primary"
+              ]
+            },
+            "default-vs-null-single-choice": {
+              "title": "Default vs. NULL",
+              "prompt": "What happens when a column with a DEFAULT constraint is omitted from an INSERT statement?",
+              "hint": "Consider what the DEFAULT constraint does when no value is provided.",
+              "help": {
+                "concept": "The DEFAULT constraint provides a default value for a column when none is specified during insertion.",
+                "hint_1": "If a column with a DEFAULT constraint is omitted, the default value is used.",
+                "hint_2": "The DEFAULT value is applied when no explicit value is provided."
+              },
+              "options": {
+                "a": "The column is set to NULL.",
+                "b": "The column is set to its default value.",
+                "c": "The column is left empty.",
+                "d": "An error occurs."
+              }
+            },
+            "unique-default-drag-reorder": {
+              "title": "Build a Column Definition",
+              "prompt": "Arrange the pieces to form a valid column definition with a required default status.",
+              "hint": "Start with the column name and type, then add its constraints.",
+              "help": {
+                "concept": "A column definition begins with a name and type, followed by constraints such as NOT NULL and DEFAULT.",
+                "hint_1": "The column name comes first.",
+                "hint_2": "The default expression follows the required-value rule."
+              },
+              "tokens": {
+                "t1": "status",
+                "t2": "TEXT",
+                "t3": "NOT NULL",
+                "t4": "DEFAULT 'pending'"
+              }
+            },
+            "default-constraint-multi-choice": {
+              "title": "Useful Effects of DEFAULT",
+              "prompt": "Which statements describe useful effects of a DEFAULT expression? Select all that apply.",
+              "hint": "A default supplies a routine value when the column is omitted; it does not replace NOT NULL or UNIQUE.",
+              "help": {
+                "concept": "DEFAULT reduces repeated literal values and gives omitted columns a predictable starting value, while still allowing an explicit NULL when the column permits NULL.",
+                "hint_1": "DEFAULT does not guarantee uniqueness.",
+                "hint_2": "DEFAULT alone does not guarantee that a column is never NULL."
+              },
+              "options": {
+                "a": "It supplies a routine value when the column is omitted",
+                "b": "It reduces repeated value assignments in INSERT statements",
+                "c": "It prevents duplicate values",
+                "d": "It gives new rows a predictable starting value"
+              }
+            },
+            "unique-and-default-constraints-policy-fill_blank_choice-2": {
+              "title": "Choose the Right Constraint",
+              "prompt": "A new order should begin with status 'pending' when the INSERT omits the status column. The appropriate constraint is [blank1].",
+              "hint": "Choose the rule that supplies a value for an omitted column.",
+              "help": {
+                "concept": "DEFAULT supplies the starting value declared in the table definition.",
+                "hint_1": "UNIQUE controls duplicates, not omitted values.",
+                "hint_2": "NOT NULL rejects NULL but does not choose a value."
+              },
+              "template": "A new order should begin with status 'pending' when the INSERT omits the status column. The appropriate constraint is [blank1].",
+              "choices": [
+                "DEFAULT",
+                "UNIQUE",
+                "FOREIGN KEY",
+                "CHECK"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql--sql-data-management--draft": {
+      "sql-data-management-module-2-table-creation-constraints": {
+        "unique-and-default-constraints": {
+          "unique-constraint": {
+            "title": "UNIQUE protects values that must identify one real-world record",
+            "bodyMarkdown": "The UNIQUE constraint in SQL ensures that all values in a column are different from each other. This is crucial for maintaining data integrity, especially when dealing with business identifiers like email addresses or product SKUs. By enforcing uniqueness, you prevent duplicate entries that could lead to data inconsistencies.\n\nFor example, consider a table `employees` where each employee must have a unique email address:\n\n```sql\nCREATE TABLE employees (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    email TEXT UNIQUE\n);\n```\n\nIn this example, the `email` column is constrained to have unique values. If you attempt to insert a duplicate email, the database will reject the entry, ensuring that each email address is unique across the table. This constraint is particularly useful in scenarios where a unique identifier is required for each record."
+          },
+          "default-constraint": {
+            "title": "DEFAULT supplies a value when an INSERT omits the column",
+            "bodyMarkdown": "The DEFAULT constraint in SQL allows you to specify a default value for a column. This is useful when you want to ensure that a column has a value even if none is provided during an INSERT operation. It simplifies data entry and ensures consistency across records.\n\nConsider a `products` table where each product has a default status of 'active':\n\n```sql\nCREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    status TEXT DEFAULT 'active'\n);\n```\n\nIn this example, if a new product is added without specifying a status, the database automatically assigns it the default value 'active'. This helps maintain a consistent state for new entries and reduces the need for explicit value assignments during data insertion."
+          }
+        }
+      }
+    }
+  }
+}

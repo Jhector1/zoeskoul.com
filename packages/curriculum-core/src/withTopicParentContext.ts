@@ -1,11 +1,13 @@
 import {
-  mergeManifestIdeServiceConfigs
+  mergeManifestIdeServiceConfigs,
+  mergeToolPresentationPolicies
 } from "@zoeskoul/curriculum-contracts";
 import type {
   FullTopicManifest,
   ManifestIdeServiceConfig,
   ManifestRuntimeDefaults,
-  SlimTopicManifest
+  SlimTopicManifest,
+  ToolPresentationPolicy
 } from "@zoeskoul/curriculum-contracts";
 
 export function withTopicParentContext(args: {
@@ -18,6 +20,9 @@ export function withTopicParentContext(args: {
   moduleRuntimeDefaults?: ManifestRuntimeDefaults | null;
   moduleServiceDefaults?: ManifestIdeServiceConfig | null;
   sectionServiceDefaults?: ManifestIdeServiceConfig | null;
+  subjectTools?: ToolPresentationPolicy | null;
+  moduleTools?: ToolPresentationPolicy | null;
+  sectionTools?: ToolPresentationPolicy | null;
 }): FullTopicManifest {
   return {
     ...args.manifest,
@@ -31,6 +36,12 @@ export function withTopicParentContext(args: {
       args.sectionServiceDefaults,
       args.manifest.serviceDefaults
     ),
-    runtimeDefaults: args.manifest.runtimeDefaults ?? args.moduleRuntimeDefaults ?? null
+    runtimeDefaults: args.manifest.runtimeDefaults ?? args.moduleRuntimeDefaults ?? null,
+    tools: mergeToolPresentationPolicies(
+      args.subjectTools,
+      args.moduleTools,
+      args.sectionTools,
+      args.manifest.tools,
+    )
   };
 }

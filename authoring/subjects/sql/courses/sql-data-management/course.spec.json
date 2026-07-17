@@ -1,0 +1,2054 @@
+{
+  "authoringFormatVersion": "2.0",
+  "subjectSlug": "sql",
+  "courseSlug": "sql-data-management",
+  "catalogSlug": "sql",
+  "trackSlug": "sql",
+  "profileId": "sql",
+  "workspaceProfileId": "browser-sql-runner",
+  "workspacePolicyId": "sql-browser-workspace",
+  "courseNumber": 4,
+  "title": "SQL Data Management",
+  "subtitle": "Add, change, remove, and structure relational data with deliberate safety checks.",
+  "description": "A focused SQLite course with three standard modules and one final capstone. Learners move from read-only relational reporting into safe INSERT, UPDATE, DELETE, and CREATE TABLE work without repeating the earlier query curriculum.",
+  "level": "beginner",
+  "sourceLocale": "en",
+  "targetLocales": [],
+  "accessPolicy": "paid",
+  "moduleAccessOverrideDefault": null,
+  "moduleCount": 4,
+  "moduleRange": {
+    "start": 0,
+    "end": 3,
+    "label": "Modules 0-3"
+  },
+  "prerequisites": [
+    "Write reliable SELECT and WHERE queries that identify exact target rows.",
+    "Use NULL checks, aliases, sorting, and deterministic verification queries.",
+    "Read primary-key and foreign-key relationships in a schema.",
+    "Work confidently in the browser SQL editor and results table."
+  ],
+  "intendedFor": "Learners who completed SQL Foundations, SQL Analysis & Reporting, and Multi-Table SQL & Joins and are ready to maintain relational data safely.",
+  "learningGoals": [
+    "Use a preview-change-verify-reset workflow for data-changing SQL.",
+    "Insert rows with explicit columns, intentional NULL values, and controlled defaults.",
+    "Update and delete only confirmed rows with required WHERE clauses.",
+    "Create tables with keys, required values, uniqueness, defaults, and foreign keys.",
+    "Complete three cumulative module projects and one integrated data-management capstone."
+  ],
+  "versioning": {
+    "family": "sql-data-management",
+    "version": 1,
+    "status": "draft",
+    "defaultForNewEnrollments": false,
+    "supersedes": null,
+    "supersededBy": null
+  },
+  "practiceDefaults": {
+    "tryIt": true,
+    "requiresTryIt": true,
+    "tryItPlacement": "all_sketches",
+    "runtimeMode": "sql_workspace",
+    "expectedPracticeKinds": [
+      "code_input"
+    ]
+  },
+  "tools": {
+    "defaultVisible": true,
+    "allowOpen": true,
+    "defaultSurface": "editor",
+    "compactDefaultSurface": "editor",
+    "sqlPane": {
+      "showResults": true,
+      "showTables": true,
+      "showErd": false,
+      "showChen": false,
+      "defaultTab": "results",
+      "compactDefaultTab": "results"
+    }
+  },
+  "courseOverview": {
+    "recommendedSequence": "Complete safe inserts first, then controlled updates and deletes, then table creation and constraints before the final launch capstone.",
+    "summary": "The course is intentionally four modules. It treats data changes as audited operations and schema definitions as guardrails, while relying on prior query and join skills for preview and verification.",
+    "moduleSummary": [
+      {
+        "moduleNumber": 0,
+        "title": "Add Rows Deliberately",
+        "coreSkill": "Insert exact rows with explicit columns, intentional NULL, and controlled defaults.",
+        "outputFocus": "Build a New Inventory Intake."
+      },
+      {
+        "moduleNumber": 1,
+        "title": "Change and Remove Rows Safely",
+        "coreSkill": "Preview and scope UPDATE and DELETE with required WHERE conditions.",
+        "outputFocus": "Build an Inventory Correction and Cleanup."
+      },
+      {
+        "moduleNumber": 2,
+        "title": "Build Tables with Guardrails",
+        "coreSkill": "Create tables with keys, required values, uniqueness, defaults, and references.",
+        "outputFocus": "Build a Warehouse Stock Ledger Schema."
+      },
+      {
+        "moduleNumber": 3,
+        "title": "Final Capstone",
+        "coreSkill": "Integrate schema creation and the full safe mutation lifecycle.",
+        "outputFocus": "Complete the Inventory Operations Launch."
+      }
+    ]
+  },
+  "courseGenerationPolicy": {
+    "studentActionStyle": "browser_sql_workspace",
+    "forbidUnavailableWorkspaceActions": true,
+    "avoidTerms": [
+      "terminal",
+      "command line",
+      "relearn SELECT",
+      "relearn WHERE",
+      "relearn JOIN",
+      "production database",
+      "execute without preview"
+    ],
+    "preferredTerms": {
+      "editor": "SQL editor",
+      "run": "click Run query",
+      "output": "results table",
+      "preview": "run a SELECT with the intended WHERE condition",
+      "verify": "inspect the check query results",
+      "reset": "reset the exercise sandbox",
+      "filesPanel": "files panel",
+      "queryFile": "query.sql",
+      "schemaFile": "schema.sql",
+      "seedFile": "seed.sql",
+      "runWorkspace": "click Run query to execute the SQL files in their authored order"
+    },
+    "notes": [
+      "This course has four modules total: three standard modules plus one final capstone. Do not split INSERT, UPDATE, DELETE, or individual constraints into repetitive extra modules.",
+      "Assume learners already know SELECT, WHERE, NULL checks, aliases, sorting, aggregates, GROUP BY, and joins. Use those as tools for preview and verification; never create standalone review topics.",
+      "Every technical lesson has exactly two distinct sketches and two aligned code_input Try It exercises.",
+      "Worked examples, Try It tasks, module projects, and capstone steps must use different records, values, tables, and expected final states.",
+      "Modules 0 and 1 use inventory_ops. Modules 2 and 3 use ddl_blank.",
+      "Every INSERT must use an explicit column list. To use a column default in SQLite, omit that column from the explicit list; do not place DEFAULT inside a VALUES tuple. Every UPDATE and DELETE solution must include WHERE.",
+      "An unsafe no-WHERE mutation may appear only as clearly labeled non-executable diagnosis prose; it must never be a solutionCode or runnable starter.",
+      "Every mutation and DDL exercise must include result-returning checkSql that verifies the final state.",
+      "Each standard module has exactly one progressive module project. Only the final topic is rendered as a capstone.",
+      "A progressive data-management step is a complete cumulative SQL workspace. Step N+1 starterFiles must carry forward step N solutionFiles, and starterCode/solutionCode represent the entry file only.",
+      "CREATE TABLE work starts from ddl_blank. Module 2 uses schema.sql plus query.sql; the capstone uses schema.sql, seed.sql, and query.sql. Later steps replace complete files rather than using ALTER TABLE or DROP TABLE.",
+      "Do not introduce transactions, UPSERT, REPLACE, indexes, views, triggers, stored procedures, subqueries, CTEs, set operations, or window functions.",
+      "SQL file architecture is progressive: Modules 0-1 use one query.sql entry file; Module 2 uses schema.sql then query.sql; Module 3 uses schema.sql, seed.sql, then query.sql. The compiler executes files in sqlFileOrder and opens query.sql as the entry file.",
+      "Use the Tables tab for schema reading. ERD and Chen remain hidden in this course because database design is taught next."
+    ]
+  },
+  "validationPolicy": {
+    "policyId": "sql-data-management-validation",
+    "allowedConcepts": [
+      "SELECT",
+      "FROM",
+      "WHERE",
+      "comparison operators",
+      "AND",
+      "OR",
+      "NOT",
+      "ORDER BY",
+      "ASC",
+      "DESC",
+      "LIMIT",
+      "IN",
+      "IS NULL",
+      "IS NOT NULL",
+      "JOIN",
+      "INNER JOIN",
+      "LEFT JOIN",
+      "ON",
+      "qualified columns",
+      "table aliases",
+      "primary key",
+      "foreign key",
+      "data mutation",
+      "preview-change-verify-reset",
+      "INSERT",
+      "INSERT INTO",
+      "explicit column list",
+      "VALUES",
+      "multi-row INSERT",
+      "NULL",
+      "DEFAULT",
+      "UPDATE",
+      "SET",
+      "DELETE",
+      "DELETE FROM",
+      "CREATE TABLE",
+      "INTEGER",
+      "TEXT",
+      "REAL",
+      "PRIMARY KEY",
+      "NOT NULL",
+      "UNIQUE",
+      "FOREIGN KEY",
+      "REFERENCES",
+      "sqlite_master"
+    ],
+    "disallowedConcepts": [
+      "ALTER TABLE",
+      "DROP TABLE",
+      "TRUNCATE",
+      "REPLACE",
+      "UPSERT",
+      "ON CONFLICT",
+      "MERGE",
+      "BEGIN",
+      "COMMIT",
+      "ROLLBACK",
+      "SAVEPOINT",
+      "transaction",
+      "CREATE INDEX",
+      "VIEW",
+      "TRIGGER",
+      "stored procedure",
+      "subquery",
+      "CTE",
+      "WITH",
+      "window functions",
+      "OVER",
+      "PARTITION BY",
+      "UNION",
+      "INTERSECT",
+      "EXCEPT",
+      "RIGHT JOIN",
+      "FULL JOIN",
+      "CROSS JOIN"
+    ],
+    "datasets": [
+      "inventory_ops",
+      "ddl_blank"
+    ],
+    "datasetContracts": {
+      "inventory_ops": {
+        "tables": {
+          "inventory_items": {
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER",
+                "nullable": false
+              },
+              {
+                "name": "name",
+                "type": "TEXT",
+                "nullable": false
+              },
+              {
+                "name": "category",
+                "type": "TEXT",
+                "nullable": false
+              },
+              {
+                "name": "price",
+                "type": "REAL",
+                "nullable": false
+              },
+              {
+                "name": "status",
+                "type": "TEXT",
+                "nullable": false,
+                "default": "draft"
+              },
+              {
+                "name": "is_test",
+                "type": "INTEGER",
+                "nullable": false,
+                "default": 0
+              },
+              {
+                "name": "notes",
+                "type": "TEXT",
+                "nullable": true
+              },
+              {
+                "name": "last_updated",
+                "type": "TEXT",
+                "nullable": false,
+                "default": "2026-02-01"
+              }
+            ]
+          }
+        },
+        "requiredDataCharacteristics": [
+          "The dataset begins with exactly six rows using ids 1 through 6.",
+          "At least three rows have is_test = 1 so scoped cleanup examples are meaningful.",
+          "At least one notes value is NULL.",
+          "The category Decor contains both a legitimate row and a test row.",
+          "Statuses include active, draft, and inactive."
+        ]
+      },
+      "ddl_blank": {
+        "tables": {},
+        "requiredDataCharacteristics": [
+          "The database begins with no user-created tables.",
+          "Every exercise must create every table it references before using it."
+        ]
+      }
+    },
+    "globalRules": [
+      "Every technical sketch must have a required embedded Try It.",
+      "Try It ids and exercise keys must start with try- and follow try-<topic-id>-sketchN.",
+      "Quizzes must not contain code_input.",
+      "Every standard module must contain exactly one role=module_project section.",
+      "The final module must contain exactly one role=capstone section and one visible capstone topic.",
+      "Module project and capstone step N+1 starterCode must equal step N solutionCode.",
+      "Every mutation or DDL code_input must include non-empty checkSql that returns a result table.",
+      "Every INSERT solution must name its target columns.",
+      "SQLite defaults must be invoked by omitting the defaulted column from the INSERT column list; DEFAULT must not appear inside a VALUES tuple.",
+      "Every UPDATE and DELETE solution must include WHERE.",
+      "Unsafe no-WHERE mutations are allowed only as clearly labeled prose examples and never as runnable starterCode or solutionCode.",
+      "Examples, Try Its, projects, and capstone steps must use materially different records, values, tables, or final states.",
+      "Modules 0 and 1 must use inventory_ops. Modules 2 and 3 must use ddl_blank.",
+      "Every ddl_blank solution must create a table before referencing it.",
+      "When output order matters, verification queries must include deterministic ordering.",
+      "No topic may exist solely to re-teach SELECT, filtering, aggregation, reporting, or joins."
+    ],
+    "moduleRules": {
+      "0": {
+        "notes": [
+          "Teach additions only; do not change or remove existing rows.",
+          "Every mutation must preserve the six seeded inventory rows.",
+          "SQLite defaults are used by omitting the defaulted column from the INSERT column list, not by placing DEFAULT in a VALUES tuple."
+        ],
+        "allowedConcepts": [
+          "all prerequisite concepts",
+          "data mutation",
+          "preview-change-verify-reset",
+          "INSERT",
+          "INSERT INTO",
+          "explicit column list",
+          "VALUES",
+          "single-row INSERT",
+          "multi-row INSERT",
+          "NULL",
+          "declared column DEFAULT",
+          "omitting defaulted columns from INSERT"
+        ],
+        "forbiddenConcepts": [
+          "UPDATE",
+          "DELETE",
+          "CREATE TABLE",
+          "ALTER TABLE",
+          "DROP TABLE",
+          "REPLACE",
+          "UPSERT",
+          "transactions",
+          "subquery",
+          "CTE",
+          "window functions"
+        ]
+      },
+      "1": {
+        "notes": [
+          "Every UPDATE and DELETE solution must contain WHERE.",
+          "Verify both affected rows and rows that must remain unchanged."
+        ],
+        "allowedConcepts": [
+          "all Module 0 concepts",
+          "mutation preview",
+          "UPDATE",
+          "SET",
+          "multiple-column UPDATE",
+          "controlled row-set UPDATE",
+          "DELETE FROM",
+          "WHERE mutation scope",
+          "post-mutation verification"
+        ],
+        "forbiddenConcepts": [
+          "CREATE TABLE",
+          "ALTER TABLE",
+          "DROP TABLE",
+          "REPLACE",
+          "UPSERT",
+          "transactions",
+          "triggers",
+          "subquery",
+          "CTE",
+          "window functions"
+        ]
+      },
+      "2": {
+        "notes": [
+          "Every exercise starts from ddl_blank.",
+          "Progressive steps replace the complete schema; they do not apply ALTER TABLE."
+        ],
+        "allowedConcepts": [
+          "all earlier concepts",
+          "CREATE TABLE",
+          "column definition",
+          "INTEGER",
+          "TEXT",
+          "REAL",
+          "PRIMARY KEY",
+          "NOT NULL",
+          "UNIQUE",
+          "DEFAULT",
+          "FOREIGN KEY",
+          "REFERENCES",
+          "sqlite_master"
+        ],
+        "forbiddenConcepts": [
+          "ALTER TABLE",
+          "DROP TABLE",
+          "CREATE INDEX",
+          "VIEW",
+          "TRIGGER",
+          "transactions",
+          "REPLACE",
+          "UPSERT",
+          "subquery",
+          "CTE",
+          "window functions"
+        ]
+      },
+      "3": {
+        "notes": [
+          "The capstone adds no new SQL construct.",
+          "Every step runs from an empty ddl_blank database as one complete cumulative script."
+        ],
+        "allowedConcepts": [
+          "all course concepts",
+          "schema verification",
+          "data-state verification",
+          "cumulative launch script",
+          "business interpretation"
+        ],
+        "forbiddenConcepts": [
+          "ALTER TABLE",
+          "DROP TABLE",
+          "REPLACE",
+          "UPSERT",
+          "MERGE",
+          "transactions",
+          "BEGIN",
+          "COMMIT",
+          "ROLLBACK",
+          "INDEX",
+          "VIEW",
+          "TRIGGER",
+          "stored procedure",
+          "subquery",
+          "CTE",
+          "WITH",
+          "window functions",
+          "UNION",
+          "INTERSECT",
+          "EXCEPT"
+        ]
+      }
+    },
+    "validationRequirements": {
+      "goldenTestsRequired": true,
+      "mutationSandboxRequired": true,
+      "requireSelectPreviewBeforeMutation": true,
+      "requireWhereForUpdateDelete": true,
+      "allowUnsafeMutationOnlyIfMarkedUnsafeDemo": true,
+      "requireInsertColumnList": true,
+      "requireSchemaIntrospectionTests": true,
+      "requireMappedImages": true,
+      "requireResolvedI18n": true,
+      "requireTryItPrefix": true,
+      "requireTryItOnAllTechnicalSketches": true,
+      "requireQuizNoCodeInput": true,
+      "requireExactlyOneModuleProjectPerStandardModule": true,
+      "requireFinalCapstone": true,
+      "requireCapstoneRubric": true,
+      "requireProjectStepChaining": true,
+      "requireNonEmptySqlResults": true,
+      "allowIntentionalEmptyOnlyWhenDeclared": true,
+      "requireUniqueLearnerPrompts": true,
+      "requireNoGenericRepairText": true,
+      "forbidStandalonePrerequisiteReviewTopics": true
+    }
+  },
+  "policy": {
+    "exercisePolicy": {
+      "defaultMix": {
+        "single_choice": 0.12,
+        "multi_choice": 0.1,
+        "drag_reorder": 0.08,
+        "fill_blank_choice": 0.15,
+        "code_input": 0.55
+      },
+      "minimums": {
+        "technicalTopicCodeInputMin": 2,
+        "topicExerciseMin": 4
+      },
+      "generationTargets": {
+        "quizBankMin": 6,
+        "quizBankTarget": 6,
+        "quizVisibleDefault": 4,
+        "quizVisibleMax": 6,
+        "projectCodeInputMin": 5,
+        "projectCodeInputTarget": 5,
+        "projectCodeInputMax": 6,
+        "maxAttempts": null
+      }
+    },
+    "projectPolicy": {
+      "standardModuleProjectCount": 3,
+      "minProjectsBeforeCapstone": 3,
+      "capstoneRequired": true,
+      "projectFlow": "progressive"
+    },
+    "runtimePolicy": {
+      "datasetStrategy": "module_based",
+      "sqlDialect": "sqlite",
+      "resultShape": "table"
+    },
+    "qualityPolicy": {
+      "allowBlankTopicIds": false,
+      "allowDuplicateTopicIds": false,
+      "requireUniqueModuleSlugs": true,
+      "requireUniqueSectionSlugs": true,
+      "requireModuleProject": true,
+      "requireFinalCapstone": true,
+      "maxModuleProjectLength": 320,
+      "reservedConceptsByModule": [
+        {
+          "concept": "INSERT",
+          "earliestModuleNumber": 0
+        },
+        {
+          "concept": "UPDATE",
+          "earliestModuleNumber": 1
+        },
+        {
+          "concept": "DELETE",
+          "earliestModuleNumber": 1
+        },
+        {
+          "concept": "CREATE TABLE",
+          "earliestModuleNumber": 2
+        },
+        {
+          "concept": "FOREIGN KEY",
+          "earliestModuleNumber": 2
+        }
+      ],
+      "slugConvention": "explicit_module_section"
+    }
+  },
+  "releasePlan": {
+    "currentRelease": {
+      "name": "sql-data-management-v1",
+      "startModuleNumber": 0,
+      "endModuleNumber": 3
+    },
+    "releases": [
+      {
+        "name": "sql-data-management-v1",
+        "startModuleNumber": 0,
+        "endModuleNumber": 3
+      }
+    ]
+  },
+  "authoringGuidance": [
+    "This course must always use subjectSlug sql, courseSlug sql-data-management, catalogSlug sql, and profileId sql.",
+    "Use browser-sql-runner for Modules 0-1 and browser-sql-files-runner for Modules 2-3. The course-level fallback remains browser-sql-runner.",
+    "Modules 0-1 use query.sql only. Module 2 uses schema.sql plus query.sql. Module 3 uses schema.sql, seed.sql, and query.sql.",
+    "For every SQL file workspace, set entryFilePath to query.sql, include complete starterFiles and solutionFiles, and provide sqlFileOrder in execution order.",
+    "In multi-file SQL, solutionCode is the completed query.sql entry-file content. The compiler builds the graded SQL program from solutionFiles in sqlFileOrder.",
+    "Modules 0 and 1 use inventory_ops. Modules 2 and 3 use ddl_blank.",
+    "Assume learners already know SELECT, WHERE, sorting, NULL checks, aggregates, GROUP BY, and joins. Never create standalone review topics for those concepts.",
+    "Use SELECT only to preview mutation targets or verify final state; the new instructional focus is data management.",
+    "Every technical sketch has exactly one distinct embedded Try It code_input, for exactly two Try Its per technical topic.",
+    "Embedded Try It ids, tryIt.id, and tryIt.exerciseKey use try-<topic-id>-sketchN.",
+    "Worked examples and Try Its must differ materially; changing only names, aliases, formatting, or ordering is not enough.",
+    "Every mutation and DDL code_input includes checkSql that returns a table and verifies the intended final state.",
+    "Every INSERT names its columns. To invoke a SQLite column default, omit that column from the INSERT list; do not put DEFAULT inside a VALUES tuple. Every UPDATE and DELETE solution includes WHERE.",
+    "Unsafe whole-table UPDATE or DELETE examples are labeled as unsafe prose only and never appear in runnable starterCode or solutionCode.",
+    "Each standard module has exactly one progressive module project. The final module has exactly one capstone section and one capstone topic.",
+    "For single-file steps, step N+1 starterCode equals step N solutionCode. For multi-file steps, step N+1 starterFiles equals the complete step N solutionFiles workspace. Every solution is cumulative, never a diff.",
+    "For ddl_blank, schema.sql creates all referenced tables before seed.sql or query.sql runs. The authored sqlFileOrder is the source of execution order.",
+    "Do not use ALTER TABLE or DROP TABLE; later schema steps replace the complete CREATE script.",
+    "Do not introduce transactions, REPLACE, UPSERT, indexes, views, triggers, subqueries, CTEs, set operations, or window functions.",
+    "Keep ERD and Chen hidden. Use the Tables tab and sqlite_master checks for schema inspection.",
+    "Quizzes are conceptual and never use code_input; graded SQL belongs in Try It, module projects, or capstone steps."
+  ],
+  "modules": [
+    {
+      "moduleNumber": 0,
+      "moduleSlug": "sql-data-management-module-0-safe-inserts",
+      "role": "standard",
+      "prefix": "sql_data_management_module_0",
+      "title": "Add Rows Deliberately",
+      "description": "Move from read-only SQL into safe insertion work with explicit columns, intentional values, and verification.",
+      "purpose": "Teach learners to add data without depending on hidden column order or accidentally misusing NULL and DEFAULT.",
+      "learningObjectives": [
+        "Distinguish a read-only query from a data-changing statement.",
+        "Use a preview-change-verify-reset workflow before trusting a mutation.",
+        "Write INSERT statements with explicit column lists.",
+        "Choose deliberately among literal values, SQL NULL, and table defaults.",
+        "Insert several rows in one controlled statement."
+      ],
+      "guidedExercises": [
+        "Read the current inventory before changing it.",
+        "Insert one complete product with an explicit column list.",
+        "Insert rows that intentionally use NULL or table defaults.",
+        "Add a small multi-row batch and verify exact new records.",
+        "Build a five-step inventory intake project."
+      ],
+      "quizFocus": [
+        "mutation workflow",
+        "INSERT INTO",
+        "column lists",
+        "VALUES",
+        "NULL",
+        "DEFAULT",
+        "multi-row INSERT"
+      ],
+      "moduleProject": "Build a New Inventory Intake script that adds five approved products without altering existing rows.",
+      "sections": [
+        {
+          "sectionSlug": "sql-data-management-section-0-mutation-workflow",
+          "title": "A Safe Mutation Workflow",
+          "description": "Understand what changes when SQL writes data and how previewing and verification reduce mistakes.",
+          "topics": [
+            {
+              "topicId": "mutation-workflow-preview-change-verify",
+              "title": "Preview, Change, Verify",
+              "summary": "Treat every data change as a controlled sequence: inspect the starting rows, perform one intended mutation, verify the result, and reset the sandbox before the next attempt.",
+              "minutes": 24,
+              "difficulty": "beginner",
+              "technical": false,
+              "learningGoals": [
+                "Explain how INSERT, UPDATE, and DELETE differ from SELECT.",
+                "Describe the preview-change-verify-reset workflow in the browser SQL workspace.",
+                "Identify which result should be checked before and after a mutation."
+              ],
+              "practice": {
+                "tryIt": false,
+                "requiresTryIt": false,
+                "tryItPlacement": "none",
+                "runtimeMode": "sql_workspace",
+                "expectedPracticeKinds": [],
+                "conceptualOnly": true
+              },
+              "tools": {
+                "defaultSurface": "results",
+                "compactDefaultSurface": "results",
+                "sqlPane": {
+                  "defaultTab": "tables",
+                  "compactDefaultTab": "tables"
+                }
+              }
+            },
+            {
+              "topicId": "insert-with-explicit-column-lists",
+              "title": "INSERT with Explicit Column Lists",
+              "summary": "Add one row while naming the destination columns so the statement remains readable and resistant to schema-order mistakes.",
+              "minutes": 28,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Write INSERT INTO with a parenthesized column list.",
+                "Match each VALUES entry to the corresponding named column.",
+                "Verify that exactly one intended row was added."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "sql_workspace",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ]
+              }
+            }
+          ],
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches",
+            "runtimeMode": "sql_workspace",
+            "expectedPracticeKinds": [
+              "code_input"
+            ]
+          }
+        },
+        {
+          "sectionSlug": "sql-data-management-section-0-values-and-defaults",
+          "title": "Values, NULL, and Defaults",
+          "description": "Control what a new row stores when a value is present, intentionally missing, or supplied by the table.",
+          "topics": [
+            {
+              "topicId": "using-null-and-default-values",
+              "title": "Using NULL and DEFAULT Intentionally",
+              "summary": "Decide whether a new row should store an explicit value, SQL NULL, or a declared table default by omitting the defaulted column from the INSERT column list.",
+              "minutes": 28,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Insert SQL NULL without quoting it as text.",
+                "Omit a defaulted column from the explicit INSERT column list so SQLite supplies its declared default.",
+                "Explain the difference between a missing value, an omitted defaulted column, and an explicit inserted value."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "sql_workspace",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "inserting-multiple-rows",
+              "title": "Adding Several Rows in One Statement",
+              "summary": "Insert a small approved batch with one shared column list and one value tuple per new row.",
+              "minutes": 28,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Write a multi-row VALUES list.",
+                "Keep every tuple aligned with the shared column order.",
+                "Verify the exact set of inserted ids without changing earlier rows."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "sql_workspace",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ]
+              }
+            }
+          ],
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches",
+            "runtimeMode": "sql_workspace",
+            "expectedPracticeKinds": [
+              "code_input"
+            ]
+          }
+        },
+        {
+          "sectionSlug": "sql-data-management-section-0-module-project",
+          "title": "Module Project",
+          "description": "Build a complete intake script while carrying every approved insert forward.",
+          "topics": [
+            {
+              "topicId": "module-0-inventory-intake-batch",
+              "title": "Module 0 Project: New Inventory Intake",
+              "summary": "Add a five-item approved inventory batch through five cumulative INSERT steps.",
+              "minutes": 60,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Preserve each earlier insert as the script grows.",
+                "Use explicit column lists for every inserted row.",
+                "Apply NULL and DEFAULT only where the intake brief requires them.",
+                "Verify that all pre-existing rows remain unchanged."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "sql_workspace",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ],
+                "projectFlow": "progressive"
+              },
+              "projectBrief": {
+                "scenario": "A small fulfillment team has approved a batch of new inventory products. The records must be added without relying on column order or accidentally replacing explicit values with defaults.",
+                "role": "Junior data operations analyst",
+                "workspace": "Browser SQL editor with one entry file named query.sql, plus the schema browser, Tables tab, and deterministic results table",
+                "deliverable": "One cumulative query.sql intake script that inserts a clean five-item batch with explicit columns, intentional NULL values, controlled defaults, and verification SELECT statements.",
+                "stepCountTarget": 5,
+                "flow": "progressive",
+                "requirements": [
+                  "Use exactly one learner-editable file named query.sql and set entryFilePath to query.sql.",
+                  "When starterFiles or solutionFiles are emitted, they contain only query.sql.",
+                  "Use one cumulative query.sql file in every step; each new solution replaces the previous entry-file content as a complete snapshot.",
+                  "Every INSERT must name its target columns explicitly.",
+                  "Use only ids 101 through 105 for the intake batch.",
+                  "Use SQL NULL only where the brief allows a missing note.",
+                  "Use a declared default only by omitting the defaulted column from the explicit INSERT list when a step asks for it.",
+                  "Every generated mutation exercise must include checkSql that verifies the final database state.",
+                  "Do not use UPDATE, DELETE, CREATE TABLE, ALTER TABLE, DROP TABLE, or REPLACE."
+                ],
+                "stepLadder": [
+                  {
+                    "step": 1,
+                    "title": "Add the First Approved Item",
+                    "requirement": "Insert Desk Organizer with an explicit column list, a deliberate id, category, price, status, test flag, notes value, and last-updated date."
+                  },
+                  {
+                    "step": 2,
+                    "title": "Record an Item with No Notes",
+                    "requirement": "Preserve the first insert and add Cable Labels while storing SQL NULL\u2014not the text 'NULL'\u2014in notes."
+                  },
+                  {
+                    "step": 3,
+                    "title": "Use the Approved Defaults",
+                    "requirement": "Keep both earlier rows and insert Shipping Pouch with an explicit column list that omits status and last_updated so SQLite supplies their declared defaults."
+                  },
+                  {
+                    "step": 4,
+                    "title": "Add Two Items as One Batch",
+                    "requirement": "Preserve the cumulative script and add Packing Tape and Label Roll in one multi-row INSERT with the same explicit column list."
+                  },
+                  {
+                    "step": 5,
+                    "title": "Finish the Intake Handoff",
+                    "requirement": "Keep all five inserted rows, preserve unique ids and exact prices, and leave every pre-existing inventory row unchanged."
+                  }
+                ]
+              }
+            }
+          ],
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches",
+            "runtimeMode": "sql_workspace",
+            "expectedPracticeKinds": [
+              "code_input"
+            ]
+          },
+          "role": "module_project"
+        }
+      ],
+      "runtimePolicy": {
+        "datasetStrategy": "module_based",
+        "datasetId": "inventory_ops",
+        "sqlDialect": "sqlite",
+        "resultShape": "table"
+      },
+      "practiceDefaults": {
+        "tryIt": true,
+        "requiresTryIt": true,
+        "tryItPlacement": "all_sketches",
+        "runtimeMode": "sql_workspace",
+        "expectedPracticeKinds": [
+          "code_input"
+        ]
+      },
+      "tools": {
+        "defaultVisible": true,
+        "allowOpen": true,
+        "defaultSurface": "editor",
+        "compactDefaultSurface": "editor",
+        "sqlPane": {
+          "showResults": true,
+          "showTables": true,
+          "showErd": false,
+          "showChen": false,
+          "defaultTab": "results",
+          "compactDefaultTab": "results"
+        }
+      }
+    },
+    {
+      "moduleNumber": 1,
+      "moduleSlug": "sql-data-management-module-1-controlled-updates-deletes",
+      "role": "standard",
+      "prefix": "sql_data_management_module_1",
+      "title": "Change and Remove Rows Safely",
+      "description": "Use the same WHERE reasoning learned for reports to control exactly which stored rows may change or disappear.",
+      "purpose": "Make mutation scope visible before learners run UPDATE or DELETE, then require verification of both changed and preserved data.",
+      "learningObjectives": [
+        "Preview the exact rows an UPDATE or DELETE will target.",
+        "Update one row with a precise key-based condition.",
+        "Update multiple columns or a controlled row set without broadening scope.",
+        "Delete only records confirmed by an explicit predicate.",
+        "Verify changed, deleted, and preserved rows after each mutation."
+      ],
+      "guidedExercises": [
+        "Reuse an authored WHERE condition in a preview SELECT and a mutation.",
+        "Correct one item by primary key.",
+        "Update a bounded set of non-test rows.",
+        "Delete a confirmed test record with a narrow predicate.",
+        "Build a six-step correction and cleanup project."
+      ],
+      "quizFocus": [
+        "mutation targets",
+        "UPDATE",
+        "SET",
+        "WHERE",
+        "DELETE FROM",
+        "verification",
+        "unsafe no-WHERE mutations"
+      ],
+      "moduleProject": "Build an Inventory Correction and Cleanup script that changes only audited rows and removes only confirmed test records.",
+      "sections": [
+        {
+          "sectionSlug": "sql-data-management-section-1-target-before-change",
+          "title": "Target Before You Change",
+          "description": "Use familiar query conditions as a safety contract before the same condition controls a mutation.",
+          "topics": [
+            {
+              "topicId": "previewing-update-and-delete-targets",
+              "title": "Previewing Mutation Targets",
+              "summary": "Run a SELECT with the intended WHERE clause first so the visible target set becomes the contract for the later UPDATE or DELETE.",
+              "minutes": 26,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Write a preview SELECT that returns every row a mutation should affect.",
+                "Carry the same WHERE condition into the data-changing statement.",
+                "Reject a mutation when the preview includes an unintended row."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "sql_workspace",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "updating-one-row-precisely",
+              "title": "Updating One Row Precisely",
+              "summary": "Use UPDATE, SET, and a key-based WHERE clause to correct one known record without touching its neighbors.",
+              "minutes": 28,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Write UPDATE table_name SET column = value.",
+                "Target one row with a primary-key predicate.",
+                "Verify both the changed row and a nearby preserved row."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "sql_workspace",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ]
+              }
+            }
+          ],
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches",
+            "runtimeMode": "sql_workspace",
+            "expectedPracticeKinds": [
+              "code_input"
+            ]
+          }
+        },
+        {
+          "sectionSlug": "sql-data-management-section-1-controlled-mutations",
+          "title": "Controlled Set Changes",
+          "description": "Change a justified set of rows or remove a confirmed record while keeping the mutation boundary explicit.",
+          "topics": [
+            {
+              "topicId": "updating-controlled-row-sets",
+              "title": "Updating Multiple Columns and Rows",
+              "summary": "Change several columns or a clearly bounded set of records without turning a business rule into an accidental whole-table update.",
+              "minutes": 30,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Assign multiple columns in one SET clause.",
+                "Use a compound WHERE condition to define a controlled row set.",
+                "Confirm that rows outside the predicate remain unchanged."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "sql_workspace",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "deleting-only-confirmed-rows",
+              "title": "Deleting Only Confirmed Rows",
+              "summary": "Remove records only after a preview confirms the exact target and the DELETE repeats the same narrow condition.",
+              "minutes": 30,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Write DELETE FROM with a required WHERE clause.",
+                "Use a unique id or equally precise compound condition.",
+                "Verify that only approved rows disappeared."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "sql_workspace",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ]
+              }
+            }
+          ],
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches",
+            "runtimeMode": "sql_workspace",
+            "expectedPracticeKinds": [
+              "code_input"
+            ]
+          }
+        },
+        {
+          "sectionSlug": "sql-data-management-section-1-module-project",
+          "title": "Module Project",
+          "description": "Carry a reviewed preview, two updates, and two deletes through one audited cleanup script.",
+          "topics": [
+            {
+              "topicId": "module-1-inventory-correction-cleanup",
+              "title": "Module 1 Project: Inventory Correction and Cleanup",
+              "summary": "Correct audited inventory values and remove only two approved test records through six cumulative steps.",
+              "minutes": 70,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Preview every target before mutation work begins.",
+                "Use WHERE on every UPDATE and DELETE.",
+                "Preserve legitimate rows and unrelated values.",
+                "Verify the final operational inventory state."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "sql_workspace",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ],
+                "projectFlow": "progressive"
+              },
+              "projectBrief": {
+                "scenario": "An inventory audit found incorrect prices, unfinished statuses, and internal test rows. Operations needs a cleanup script that changes only the records confirmed by the audit.",
+                "role": "Inventory data steward",
+                "workspace": "Browser SQL editor with one entry file named query.sql, plus the schema browser, Tables tab, and deterministic results table",
+                "deliverable": "One cumulative query.sql correction-and-cleanup script that previews targets, applies scoped updates, removes confirmed test rows, and verifies preserved inventory.",
+                "stepCountTarget": 6,
+                "flow": "progressive",
+                "requirements": [
+                  "Use exactly one learner-editable file named query.sql and set entryFilePath to query.sql.",
+                  "Keep preview, mutation, and verification SELECT statements together in query.sql.",
+                  "Preview the intended rows before the first mutation.",
+                  "Every UPDATE and DELETE must include a WHERE clause.",
+                  "Use the same identifying conditions described in the audit; do not broaden them.",
+                  "Use a complete cumulative query.sql file in every step.",
+                  "Every mutation exercise must include checkSql that verifies changed and preserved rows.",
+                  "Do not insert new rows or change the table schema.",
+                  "Never use an executable UPDATE or DELETE without WHERE, even as a demonstration."
+                ],
+                "stepLadder": [
+                  {
+                    "step": 1,
+                    "title": "Preview the Audit Targets",
+                    "requirement": "Write a SELECT that shows ids 2, 4, and 6 with the columns needed to review price, status, test flag, and notes before any mutation."
+                  },
+                  {
+                    "step": 2,
+                    "title": "Correct One Item Precisely",
+                    "requirement": "Keep the preview and update id 2 so price becomes 8.25 and status becomes active, using a WHERE clause that targets only that id."
+                  },
+                  {
+                    "step": 3,
+                    "title": "Apply a Controlled Category Update",
+                    "requirement": "Preserve earlier work and update only non-test Decor items so last_updated becomes 2026-02-10."
+                  },
+                  {
+                    "step": 4,
+                    "title": "Delete One Confirmed Test Item",
+                    "requirement": "Keep the updates and delete only id 4 after preserving the exact id-based WHERE condition."
+                  },
+                  {
+                    "step": 5,
+                    "title": "Remove the Remaining Draft Test Row",
+                    "requirement": "Preserve every prior statement and delete id 6 only when both is_test = 1 and status = 'draft' are true."
+                  },
+                  {
+                    "step": 6,
+                    "title": "Complete the Operational Handoff",
+                    "requirement": "Keep one cumulative script whose final state retains legitimate rows, contains the corrected values, and removes only the two approved test records."
+                  }
+                ]
+              }
+            }
+          ],
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches",
+            "runtimeMode": "sql_workspace",
+            "expectedPracticeKinds": [
+              "code_input"
+            ]
+          },
+          "role": "module_project"
+        }
+      ],
+      "runtimePolicy": {
+        "datasetStrategy": "module_based",
+        "datasetId": "inventory_ops",
+        "sqlDialect": "sqlite",
+        "resultShape": "table"
+      },
+      "practiceDefaults": {
+        "tryIt": true,
+        "requiresTryIt": true,
+        "tryItPlacement": "all_sketches",
+        "runtimeMode": "sql_workspace",
+        "expectedPracticeKinds": [
+          "code_input"
+        ]
+      },
+      "tools": {
+        "defaultVisible": true,
+        "allowOpen": true,
+        "defaultSurface": "editor",
+        "compactDefaultSurface": "editor",
+        "sqlPane": {
+          "showResults": true,
+          "showTables": true,
+          "showErd": false,
+          "showChen": false,
+          "defaultTab": "results",
+          "compactDefaultTab": "results"
+        }
+      }
+    },
+    {
+      "moduleNumber": 2,
+      "moduleSlug": "sql-data-management-module-2-table-creation-constraints",
+      "role": "standard",
+      "prefix": "sql_data_management_module_2",
+      "title": "Build Tables with Guardrails",
+      "description": "Create tables whose column definitions and constraints communicate which data is valid before any rows are stored.",
+      "purpose": "Prepare learners for database design by showing how keys, required values, uniqueness, defaults, and references become enforceable schema rules.",
+      "learningObjectives": [
+        "Create a table with deliberate column names and SQLite data types.",
+        "Use PRIMARY KEY and NOT NULL to establish identity and required values.",
+        "Use UNIQUE and DEFAULT to protect business rules and routine values.",
+        "Declare a FOREIGN KEY that references a compatible parent key.",
+        "Inspect sqlite_master to verify the resulting table definition."
+      ],
+      "guidedExercises": [
+        "Create a small table from an empty database.",
+        "Strengthen a complete replacement definition with primary-key and required-value rules.",
+        "Add uniqueness and default-value constraints.",
+        "Create a related child table with a foreign key.",
+        "Build a two-table warehouse ledger schema in six cumulative steps."
+      ],
+      "quizFocus": [
+        "CREATE TABLE",
+        "column definitions",
+        "SQLite types",
+        "PRIMARY KEY",
+        "NOT NULL",
+        "UNIQUE",
+        "DEFAULT",
+        "FOREIGN KEY",
+        "REFERENCES"
+      ],
+      "moduleProject": "Build a Warehouse Stock Ledger Schema in schema.sql and verify it from query.sql.",
+      "sections": [
+        {
+          "sectionSlug": "sql-data-management-section-2-table-structure",
+          "title": "Table Structure and Identity",
+          "description": "Turn a blank database into a named table with clear columns, types, and required identifiers.",
+          "topics": [
+            {
+              "topicId": "creating-tables-and-defining-columns",
+              "title": "Creating Tables and Defining Columns",
+              "summary": "Write a complete CREATE TABLE statement whose column names and types describe the records the table will store.",
+              "minutes": 30,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Write CREATE TABLE with a parenthesized list of column definitions.",
+                "Choose INTEGER, TEXT, or REAL according to the value a column stores.",
+                "Inspect sqlite_master to verify the created definition."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "sql_workspace",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ]
+              },
+              "lessonTools": {
+                "sketch0": {
+                  "defaultSurface": "results",
+                  "compactDefaultSurface": "results",
+                  "sqlPane": {
+                    "defaultTab": "tables",
+                    "compactDefaultTab": "tables"
+                  }
+                },
+                "sketch1": {
+                  "defaultSurface": "results",
+                  "compactDefaultSurface": "results",
+                  "sqlPane": {
+                    "defaultTab": "tables",
+                    "compactDefaultTab": "tables"
+                  }
+                }
+              }
+            },
+            {
+              "topicId": "primary-key-and-not-null-constraints",
+              "title": "PRIMARY KEY and NOT NULL Constraints",
+              "summary": "Use a primary key to identify each row and NOT NULL to mark values that every valid record must provide.",
+              "minutes": 30,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Declare an INTEGER PRIMARY KEY.",
+                "Apply NOT NULL to genuinely required columns.",
+                "Explain why identity and required-value rules solve different problems."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "sql_workspace",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ]
+              },
+              "lessonTools": {
+                "sketch0": {
+                  "defaultSurface": "results",
+                  "compactDefaultSurface": "results",
+                  "sqlPane": {
+                    "defaultTab": "tables",
+                    "compactDefaultTab": "tables"
+                  }
+                },
+                "sketch1": {
+                  "defaultSurface": "results",
+                  "compactDefaultSurface": "results",
+                  "sqlPane": {
+                    "defaultTab": "tables",
+                    "compactDefaultTab": "tables"
+                  }
+                }
+              }
+            }
+          ],
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches",
+            "runtimeMode": "sql_workspace",
+            "expectedPracticeKinds": [
+              "code_input"
+            ]
+          }
+        },
+        {
+          "sectionSlug": "sql-data-management-section-2-data-rules",
+          "title": "Defaults, Uniqueness, and Relationships",
+          "description": "Add rules that prevent duplicate business identifiers, supply routine values, and connect child rows to parent records.",
+          "topics": [
+            {
+              "topicId": "unique-and-default-constraints",
+              "title": "UNIQUE and DEFAULT Constraints",
+              "summary": "Protect a business identifier from duplicates and let the schema supply a routine value when an INSERT intentionally omits it.",
+              "minutes": 30,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Declare a UNIQUE column.",
+                "Declare a DEFAULT value compatible with the column type.",
+                "Distinguish a default from NULL and from an explicit inserted value."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "sql_workspace",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ]
+              },
+              "lessonTools": {
+                "sketch0": {
+                  "defaultSurface": "results",
+                  "compactDefaultSurface": "results",
+                  "sqlPane": {
+                    "defaultTab": "tables",
+                    "compactDefaultTab": "tables"
+                  }
+                },
+                "sketch1": {
+                  "defaultSurface": "results",
+                  "compactDefaultSurface": "results",
+                  "sqlPane": {
+                    "defaultTab": "tables",
+                    "compactDefaultTab": "tables"
+                  }
+                }
+              }
+            },
+            {
+              "topicId": "foreign-keys-and-references",
+              "title": "FOREIGN KEY and REFERENCES",
+              "summary": "Declare which parent key a child-table column points to so the relationship is part of the schema rather than only a query convention.",
+              "minutes": 32,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Declare FOREIGN KEY (child_column) REFERENCES parent_table(parent_key).",
+                "Use compatible parent and child key types.",
+                "Inspect the completed schema definition without re-teaching JOIN syntax."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "sql_workspace",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ]
+              },
+              "lessonTools": {
+                "sketch0": {
+                  "defaultSurface": "results",
+                  "compactDefaultSurface": "results",
+                  "sqlPane": {
+                    "defaultTab": "tables",
+                    "compactDefaultTab": "tables"
+                  }
+                },
+                "sketch1": {
+                  "defaultSurface": "results",
+                  "compactDefaultSurface": "results",
+                  "sqlPane": {
+                    "defaultTab": "tables",
+                    "compactDefaultTab": "tables"
+                  }
+                }
+              }
+            }
+          ],
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches",
+            "runtimeMode": "sql_workspace",
+            "expectedPracticeKinds": [
+              "code_input"
+            ]
+          }
+        },
+        {
+          "sectionSlug": "sql-data-management-section-2-module-project",
+          "title": "Module Project",
+          "description": "Build two related tables by replacing each earlier schema with a complete stronger definition.",
+          "topics": [
+            {
+              "topicId": "module-2-warehouse-stock-ledger-schema",
+              "title": "Module 2 Project: Warehouse Stock Ledger Schema",
+              "summary": "Create warehouses and stock_movements through six cumulative schema steps.",
+              "minutes": 75,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Keep a complete runnable schema in every step.",
+                "Use keys and constraints intentionally rather than decoratively.",
+                "Connect stock movements to warehouses with a foreign key.",
+                "Verify the final definitions from an empty database."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "sql_workspace",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ],
+                "projectFlow": "progressive"
+              },
+              "projectBrief": {
+                "scenario": "A warehouse team needs a small stock-ledger schema before it can record receipts and adjustments. The schema must communicate identity, required values, uniqueness, defaults, and the relationship between locations and movements.",
+                "role": "Junior database builder",
+                "workspace": "Browser SQL files workspace with schema.sql and query.sql, a files panel, schema browser, Tables tab, and deterministic results table",
+                "deliverable": "A cumulative two-file workspace: schema.sql defines warehouses and stock_movements, while query.sql verifies the resulting schema.",
+                "stepCountTarget": 6,
+                "flow": "progressive",
+                "requirements": [
+                  "Use exactly schema.sql and query.sql in starterFiles and solutionFiles.",
+                  "Set entryFilePath to query.sql and sqlFileOrder to [\"schema.sql\", \"query.sql\"].",
+                  "Keep every CREATE TABLE statement in schema.sql and every sqlite_master verification SELECT in query.sql.",
+                  "Each later step carries forward the previous complete solutionFiles workspace.",
+                  "Each step must contain a complete schema.sql plus query.sql workspace that can run against ddl_blank from an empty database.",
+                  "Use CREATE TABLE only; do not use ALTER TABLE or DROP TABLE.",
+                  "Use SQLite types INTEGER, TEXT, and REAL only when the column meaning requires them.",
+                  "Keep constraint names and table names consistent across all steps.",
+                  "The final schema must contain exactly the two tables named in the brief.",
+                  "Every DDL exercise must use checkSql to inspect sqlite_master or another result-returning schema query.",
+                  "Do not insert project data; this project is about structure and constraints."
+                ],
+                "stepLadder": [
+                  {
+                    "step": 1,
+                    "title": "Create the Warehouse Table",
+                    "requirement": "In schema.sql, create warehouses with id INTEGER and name TEXT columns, using a complete CREATE TABLE statement. Keep query.sql as a result-returning sqlite_master verification query."
+                  },
+                  {
+                    "step": 2,
+                    "title": "Add Identity and Name Rules",
+                    "requirement": "In schema.sql, replace the first definition with a complete warehouses table where id is the PRIMARY KEY and name is NOT NULL and UNIQUE. Keep query.sql as a result-returning sqlite_master verification query."
+                  },
+                  {
+                    "step": 3,
+                    "title": "Add an Operational Default",
+                    "requirement": "In schema.sql, preserve the prior constraints and add status TEXT NOT NULL DEFAULT 'active' to warehouses. Keep query.sql as a result-returning sqlite_master verification query."
+                  },
+                  {
+                    "step": 4,
+                    "title": "Create the Movement Table",
+                    "requirement": "In schema.sql, keep warehouses and add stock_movements with id, warehouse_id, sku, quantity_change, movement_type, and note columns. Keep query.sql as a result-returning sqlite_master verification query."
+                  },
+                  {
+                    "step": 5,
+                    "title": "Protect Required Movement Data",
+                    "requirement": "In schema.sql, make the movement id a PRIMARY KEY and require warehouse_id, sku, quantity_change, and movement_type while allowing note to remain NULL. Keep query.sql as a result-returning sqlite_master verification query."
+                  },
+                  {
+                    "step": 6,
+                    "title": "Connect Movements to Warehouses",
+                    "requirement": "In schema.sql, preserve the full schema, give movement_type the default 'receipt', and add FOREIGN KEY (warehouse_id) REFERENCES warehouses(id). Keep query.sql as a result-returning sqlite_master verification query."
+                  }
+                ]
+              },
+              "lessonTools": {
+                "sketch0": {
+                  "defaultSurface": "results",
+                  "compactDefaultSurface": "results",
+                  "sqlPane": {
+                    "defaultTab": "tables",
+                    "compactDefaultTab": "tables"
+                  }
+                },
+                "sketch1": {
+                  "defaultSurface": "results",
+                  "compactDefaultSurface": "results",
+                  "sqlPane": {
+                    "defaultTab": "tables",
+                    "compactDefaultTab": "tables"
+                  }
+                }
+              }
+            }
+          ],
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches",
+            "runtimeMode": "sql_workspace",
+            "expectedPracticeKinds": [
+              "code_input"
+            ]
+          },
+          "role": "module_project"
+        }
+      ],
+      "runtimePolicy": {
+        "datasetStrategy": "module_based",
+        "datasetId": "ddl_blank",
+        "sqlDialect": "sqlite",
+        "resultShape": "table"
+      },
+      "practiceDefaults": {
+        "tryIt": true,
+        "requiresTryIt": true,
+        "tryItPlacement": "all_sketches",
+        "runtimeMode": "sql_workspace",
+        "expectedPracticeKinds": [
+          "code_input"
+        ]
+      },
+      "tools": {
+        "defaultVisible": true,
+        "allowOpen": true,
+        "defaultSurface": "editor",
+        "compactDefaultSurface": "editor",
+        "sqlPane": {
+          "showResults": true,
+          "showTables": true,
+          "showErd": false,
+          "showChen": false,
+          "defaultTab": "results",
+          "compactDefaultTab": "results"
+        }
+      }
+    },
+    {
+      "moduleNumber": 3,
+      "moduleSlug": "sql-data-management-module-3-final-capstone",
+      "role": "capstone",
+      "prefix": "sql_data_management_module_3",
+      "title": "Final Capstone",
+      "description": "Launch a small relational operations database by combining schema creation and safe mutations in one cumulative script.",
+      "purpose": "Demonstrate that the learner can create guardrails, load approved data, correct one record, remove one test record, and preserve everything else.",
+      "learningObjectives": [
+        "Create two related tables with appropriate keys and constraints.",
+        "Insert approved parent and child rows with explicit column lists.",
+        "Use NULL and DEFAULT intentionally during data loading.",
+        "Apply a precise UPDATE and DELETE with required WHERE clauses.",
+        "Verify the final schema and data state without adding a new SQL concept."
+      ],
+      "guidedExercises": [
+        "Build the two-table schema from an empty database.",
+        "Load approved products and opening stock events.",
+        "Apply one scoped launch correction.",
+        "Remove one approved test event.",
+        "Validate the final operational state."
+      ],
+      "quizFocus": [],
+      "moduleProject": "Complete the Inventory Operations Launch across schema.sql, seed.sql, and query.sql.",
+      "sections": [
+        {
+          "sectionSlug": "sql-data-management-section-3-final-capstone",
+          "title": "Final Capstone",
+          "description": "Create, load, correct, and clean a small relational inventory database from one production-style brief.",
+          "topics": [
+            {
+              "topicId": "final-inventory-operations-launch",
+              "title": "Final Capstone: Inventory Operations Launch",
+              "summary": "Build a two-table makers-market inventory database through six cumulative schema and data-management steps.",
+              "minutes": 120,
+              "difficulty": "intermediate",
+              "technical": true,
+              "learningGoals": [
+                "Create products and stock_events with clear integrity rules.",
+                "Load approved rows with explicit columns, intentional NULL, and controlled defaults.",
+                "Update exactly one product and delete exactly one test event.",
+                "Preserve all legitimate data and verify the final state."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "sql_workspace",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ],
+                "projectFlow": "progressive"
+              },
+              "projectBrief": {
+                "scenario": "A neighborhood makers market is replacing a shared spreadsheet with a small operational database. The launch script must create the schema, load approved products and stock events, correct one product, remove one test event, and leave a state that another analyst can verify.",
+                "role": "SQL data management specialist",
+                "workspace": "Browser SQL files workspace with schema.sql, seed.sql, and query.sql, a files panel, schema browser, Tables tab, and deterministic results table",
+                "deliverable": "A portfolio-quality three-file launch workspace: schema.sql defines two related tables, seed.sql loads approved data, and query.sql applies scoped changes and verifies the final state.",
+                "stepCountTarget": 6,
+                "flow": "progressive",
+                "requirements": [
+                  "Use exactly schema.sql, seed.sql, and query.sql in starterFiles and solutionFiles.",
+                  "Set entryFilePath to query.sql and sqlFileOrder to [\"schema.sql\", \"seed.sql\", \"query.sql\"].",
+                  "Keep CREATE TABLE statements in schema.sql, approved INSERT statements in seed.sql, and UPDATE, DELETE, and final verification SELECT statements in query.sql.",
+                  "Each later capstone step carries forward the previous complete solutionFiles workspace.",
+                  "Every step is a complete cumulative schema.sql, seed.sql, and query.sql workspace that runs from an empty ddl_blank database.",
+                  "Use only concepts taught in this course and its prerequisites.",
+                  "Every INSERT must include an explicit column list.",
+                  "Every UPDATE and DELETE must include a narrow WHERE clause.",
+                  "Use NULL only where the step explicitly calls for it, and use a declared default by omitting that column from the relevant INSERT list.",
+                  "Keep the foreign-key column and referenced primary key compatible.",
+                  "Every capstone exercise must include a result-returning checkSql that verifies the required schema or final data state.",
+                  "Do not use ALTER TABLE, DROP TABLE, REPLACE, UPSERT, transactions, triggers, views, indexes, subqueries, CTEs, or window functions."
+                ],
+                "stepLadder": [
+                  {
+                    "step": 1,
+                    "title": "Build the Product Table",
+                    "requirement": "In schema.sql, create products with id INTEGER PRIMARY KEY, sku TEXT NOT NULL UNIQUE, name TEXT NOT NULL, category TEXT NOT NULL, price REAL NOT NULL, status TEXT NOT NULL DEFAULT 'draft', and notes TEXT NULL."
+                  },
+                  {
+                    "step": 2,
+                    "title": "Build the Stock Event Table",
+                    "requirement": "In schema.sql, preserve products and create stock_events with id INTEGER PRIMARY KEY, product_id INTEGER NOT NULL, quantity_change INTEGER NOT NULL, event_type TEXT NOT NULL DEFAULT 'receipt', note TEXT NULL, and a foreign key to products(id)."
+                  },
+                  {
+                    "step": 3,
+                    "title": "Load the Approved Products",
+                    "requirement": "In seed.sql, keep both tables and insert three approved products with explicit column lists; use one intentional NULL note and omit status from exactly one INSERT so the declared default supplies it."
+                  },
+                  {
+                    "step": 4,
+                    "title": "Load the Opening Stock Events",
+                    "requirement": "In seed.sql, preserve the schema and products, then insert three stock events with explicit columns and valid product ids."
+                  },
+                  {
+                    "step": 5,
+                    "title": "Apply the Launch Correction",
+                    "requirement": "In query.sql, keep all earlier work and update exactly one product by id so both its price and status match the launch brief."
+                  },
+                  {
+                    "step": 6,
+                    "title": "Remove the Test Event and Finalize",
+                    "requirement": "In query.sql, preserve the complete script, delete only the event marked as the approved test record using a narrow WHERE clause, and leave all legitimate products and events intact."
+                  }
+                ]
+              },
+              "lessonTools": {
+                "sketch0": {
+                  "defaultSurface": "results",
+                  "compactDefaultSurface": "results",
+                  "sqlPane": {
+                    "defaultTab": "tables",
+                    "compactDefaultTab": "tables"
+                  }
+                },
+                "sketch1": {
+                  "defaultSurface": "results",
+                  "compactDefaultSurface": "results",
+                  "sqlPane": {
+                    "defaultTab": "tables",
+                    "compactDefaultTab": "tables"
+                  }
+                }
+              }
+            }
+          ],
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches",
+            "runtimeMode": "sql_workspace",
+            "expectedPracticeKinds": [
+              "code_input"
+            ]
+          },
+          "role": "capstone"
+        }
+      ],
+      "runtimePolicy": {
+        "datasetStrategy": "module_based",
+        "datasetId": "ddl_blank",
+        "sqlDialect": "sqlite",
+        "resultShape": "table"
+      },
+      "practiceDefaults": {
+        "tryIt": true,
+        "requiresTryIt": true,
+        "tryItPlacement": "all_sketches",
+        "runtimeMode": "sql_workspace",
+        "expectedPracticeKinds": [
+          "code_input"
+        ]
+      },
+      "tools": {
+        "defaultVisible": true,
+        "allowOpen": true,
+        "defaultSurface": "editor",
+        "compactDefaultSurface": "editor",
+        "sqlPane": {
+          "showResults": true,
+          "showTables": true,
+          "showErd": false,
+          "showChen": false,
+          "defaultTab": "results",
+          "compactDefaultTab": "results"
+        }
+      }
+    }
+  ],
+  "modulePolicies": [
+    {
+      "moduleNumber": 0,
+      "allowedConcepts": [
+        "all prerequisite concepts",
+        "data mutation",
+        "preview-change-verify-reset",
+        "INSERT",
+        "INSERT INTO",
+        "explicit column list",
+        "VALUES",
+        "single-row INSERT",
+        "multi-row INSERT",
+        "NULL",
+        "declared column DEFAULT",
+        "omitting defaulted columns from INSERT"
+      ],
+      "forbiddenConcepts": [
+        "UPDATE",
+        "DELETE",
+        "CREATE TABLE",
+        "ALTER TABLE",
+        "DROP TABLE",
+        "REPLACE",
+        "UPSERT",
+        "transactions",
+        "subquery",
+        "CTE",
+        "window functions"
+      ],
+      "notes": [
+        "Teach additions only; do not change or remove existing rows.",
+        "Every mutation must preserve the six seeded inventory rows.",
+        "SQLite defaults are used by omitting the defaulted column from the INSERT column list, not by placing DEFAULT in a VALUES tuple.",
+        "Author exactly one SQL workspace file named query.sql and set entryFilePath to query.sql."
+      ],
+      "workspaceProfileId": "browser-sql-runner"
+    },
+    {
+      "moduleNumber": 1,
+      "allowedConcepts": [
+        "all Module 0 concepts",
+        "mutation preview",
+        "UPDATE",
+        "SET",
+        "multiple-column UPDATE",
+        "controlled row-set UPDATE",
+        "DELETE FROM",
+        "WHERE mutation scope",
+        "post-mutation verification"
+      ],
+      "forbiddenConcepts": [
+        "CREATE TABLE",
+        "ALTER TABLE",
+        "DROP TABLE",
+        "REPLACE",
+        "UPSERT",
+        "transactions",
+        "triggers",
+        "subquery",
+        "CTE",
+        "window functions"
+      ],
+      "notes": [
+        "Every UPDATE and DELETE solution must contain WHERE.",
+        "Verify both affected rows and rows that must remain unchanged.",
+        "Author exactly one SQL workspace file named query.sql and set entryFilePath to query.sql."
+      ],
+      "workspaceProfileId": "browser-sql-runner"
+    },
+    {
+      "moduleNumber": 2,
+      "allowedConcepts": [
+        "all earlier concepts",
+        "CREATE TABLE",
+        "column definition",
+        "INTEGER",
+        "TEXT",
+        "REAL",
+        "PRIMARY KEY",
+        "NOT NULL",
+        "UNIQUE",
+        "DEFAULT",
+        "FOREIGN KEY",
+        "REFERENCES",
+        "sqlite_master"
+      ],
+      "forbiddenConcepts": [
+        "ALTER TABLE",
+        "DROP TABLE",
+        "CREATE INDEX",
+        "VIEW",
+        "TRIGGER",
+        "transactions",
+        "REPLACE",
+        "UPSERT",
+        "subquery",
+        "CTE",
+        "window functions"
+      ],
+      "notes": [
+        "Every exercise starts from ddl_blank.",
+        "Progressive steps replace the complete schema; they do not apply ALTER TABLE.",
+        "Author exactly schema.sql and query.sql; set entryFilePath to query.sql and sqlFileOrder to schema.sql then query.sql.",
+        "Both starterFiles and solutionFiles must contain the complete two-file workspace."
+      ],
+      "workspaceProfileId": "browser-sql-files-runner"
+    },
+    {
+      "moduleNumber": 3,
+      "allowedConcepts": [
+        "all course concepts",
+        "schema verification",
+        "data-state verification",
+        "cumulative launch script",
+        "business interpretation"
+      ],
+      "forbiddenConcepts": [
+        "ALTER TABLE",
+        "DROP TABLE",
+        "REPLACE",
+        "UPSERT",
+        "MERGE",
+        "transactions",
+        "BEGIN",
+        "COMMIT",
+        "ROLLBACK",
+        "INDEX",
+        "VIEW",
+        "TRIGGER",
+        "stored procedure",
+        "subquery",
+        "CTE",
+        "WITH",
+        "window functions",
+        "UNION",
+        "INTERSECT",
+        "EXCEPT"
+      ],
+      "notes": [
+        "The capstone adds no new SQL construct.",
+        "Every step runs from an empty ddl_blank database as one complete cumulative script.",
+        "Author exactly schema.sql, seed.sql, and query.sql; set entryFilePath to query.sql and sqlFileOrder to schema.sql, seed.sql, then query.sql.",
+        "Both starterFiles and solutionFiles must contain the complete three-file workspace."
+      ],
+      "workspaceProfileId": "browser-sql-files-runner"
+    }
+  ],
+  "topicPolicies": {
+    "mutation-workflow-preview-change-verify": {
+      "teachingMode": "conceptual-only",
+      "conceptualOnly": true,
+      "requiresTryIt": false,
+      "generationTargets": {
+        "quizBankMin": 6,
+        "quizBankTarget": 6,
+        "quizVisibleDefault": 4,
+        "quizVisibleMax": 6,
+        "projectCodeInputMin": 0,
+        "projectCodeInputTarget": 0,
+        "projectCodeInputMax": 0
+      }
+    },
+    "insert-with-explicit-column-lists": {
+      "teachingMode": "normal",
+      "generationTargets": {
+        "quizBankMin": 6,
+        "quizBankTarget": 6,
+        "quizVisibleDefault": 4,
+        "quizVisibleMax": 6,
+        "projectCodeInputMin": 2,
+        "projectCodeInputTarget": 2,
+        "projectCodeInputMax": 2
+      }
+    },
+    "using-null-and-default-values": {
+      "teachingMode": "normal",
+      "generationTargets": {
+        "quizBankMin": 6,
+        "quizBankTarget": 6,
+        "quizVisibleDefault": 4,
+        "quizVisibleMax": 6,
+        "projectCodeInputMin": 2,
+        "projectCodeInputTarget": 2,
+        "projectCodeInputMax": 2
+      }
+    },
+    "inserting-multiple-rows": {
+      "teachingMode": "normal",
+      "generationTargets": {
+        "quizBankMin": 6,
+        "quizBankTarget": 6,
+        "quizVisibleDefault": 4,
+        "quizVisibleMax": 6,
+        "projectCodeInputMin": 2,
+        "projectCodeInputTarget": 2,
+        "projectCodeInputMax": 2
+      }
+    },
+    "module-0-inventory-intake-batch": {
+      "teachingMode": "normal",
+      "generationTargets": {
+        "quizBankMin": 0,
+        "quizBankTarget": 0,
+        "quizVisibleDefault": 0,
+        "quizVisibleMax": 0,
+        "projectCodeInputMin": 5,
+        "projectCodeInputTarget": 5,
+        "projectCodeInputMax": 5
+      }
+    },
+    "previewing-update-and-delete-targets": {
+      "teachingMode": "normal",
+      "generationTargets": {
+        "quizBankMin": 6,
+        "quizBankTarget": 6,
+        "quizVisibleDefault": 4,
+        "quizVisibleMax": 6,
+        "projectCodeInputMin": 2,
+        "projectCodeInputTarget": 2,
+        "projectCodeInputMax": 2
+      }
+    },
+    "updating-one-row-precisely": {
+      "teachingMode": "normal",
+      "generationTargets": {
+        "quizBankMin": 6,
+        "quizBankTarget": 6,
+        "quizVisibleDefault": 4,
+        "quizVisibleMax": 6,
+        "projectCodeInputMin": 2,
+        "projectCodeInputTarget": 2,
+        "projectCodeInputMax": 2
+      }
+    },
+    "updating-controlled-row-sets": {
+      "teachingMode": "normal",
+      "generationTargets": {
+        "quizBankMin": 6,
+        "quizBankTarget": 6,
+        "quizVisibleDefault": 4,
+        "quizVisibleMax": 6,
+        "projectCodeInputMin": 2,
+        "projectCodeInputTarget": 2,
+        "projectCodeInputMax": 2
+      }
+    },
+    "deleting-only-confirmed-rows": {
+      "teachingMode": "normal",
+      "generationTargets": {
+        "quizBankMin": 6,
+        "quizBankTarget": 6,
+        "quizVisibleDefault": 4,
+        "quizVisibleMax": 6,
+        "projectCodeInputMin": 2,
+        "projectCodeInputTarget": 2,
+        "projectCodeInputMax": 2
+      }
+    },
+    "module-1-inventory-correction-cleanup": {
+      "teachingMode": "normal",
+      "generationTargets": {
+        "quizBankMin": 0,
+        "quizBankTarget": 0,
+        "quizVisibleDefault": 0,
+        "quizVisibleMax": 0,
+        "projectCodeInputMin": 6,
+        "projectCodeInputTarget": 6,
+        "projectCodeInputMax": 6
+      }
+    },
+    "creating-tables-and-defining-columns": {
+      "teachingMode": "normal",
+      "generationTargets": {
+        "quizBankMin": 6,
+        "quizBankTarget": 6,
+        "quizVisibleDefault": 4,
+        "quizVisibleMax": 6,
+        "projectCodeInputMin": 2,
+        "projectCodeInputTarget": 2,
+        "projectCodeInputMax": 2
+      }
+    },
+    "primary-key-and-not-null-constraints": {
+      "teachingMode": "normal",
+      "generationTargets": {
+        "quizBankMin": 6,
+        "quizBankTarget": 6,
+        "quizVisibleDefault": 4,
+        "quizVisibleMax": 6,
+        "projectCodeInputMin": 2,
+        "projectCodeInputTarget": 2,
+        "projectCodeInputMax": 2
+      }
+    },
+    "unique-and-default-constraints": {
+      "teachingMode": "normal",
+      "generationTargets": {
+        "quizBankMin": 6,
+        "quizBankTarget": 6,
+        "quizVisibleDefault": 4,
+        "quizVisibleMax": 6,
+        "projectCodeInputMin": 2,
+        "projectCodeInputTarget": 2,
+        "projectCodeInputMax": 2
+      }
+    },
+    "foreign-keys-and-references": {
+      "teachingMode": "normal",
+      "generationTargets": {
+        "quizBankMin": 6,
+        "quizBankTarget": 6,
+        "quizVisibleDefault": 4,
+        "quizVisibleMax": 6,
+        "projectCodeInputMin": 2,
+        "projectCodeInputTarget": 2,
+        "projectCodeInputMax": 2
+      }
+    },
+    "module-2-warehouse-stock-ledger-schema": {
+      "teachingMode": "normal",
+      "generationTargets": {
+        "quizBankMin": 0,
+        "quizBankTarget": 0,
+        "quizVisibleDefault": 0,
+        "quizVisibleMax": 0,
+        "projectCodeInputMin": 6,
+        "projectCodeInputTarget": 6,
+        "projectCodeInputMax": 6
+      }
+    },
+    "final-inventory-operations-launch": {
+      "teachingMode": "normal",
+      "generationTargets": {
+        "quizBankMin": 0,
+        "quizBankTarget": 0,
+        "quizVisibleDefault": 0,
+        "quizVisibleMax": 0,
+        "projectCodeInputMin": 6,
+        "projectCodeInputTarget": 6,
+        "projectCodeInputMax": 6
+      }
+    }
+  },
+  "assessmentAndDelivery": {
+    "suggestedBeginnerRhythm": "Complete one standard module per week with its cumulative project, then reserve a final session for the capstone.",
+    "recommendedCourseDeliverables": [
+      "Embedded Try It mutation or schema task on every technical sketch",
+      "New Inventory Intake",
+      "Inventory Correction and Cleanup",
+      "Warehouse Stock Ledger Schema",
+      "Final Inventory Operations Launch"
+    ],
+    "toolingSuggestions": [
+      "SQLite",
+      "Browser SQL runner",
+      "Tables/schema browser",
+      "Deterministic checkSql result table",
+      "Per-exercise reset sandbox",
+      "SQL files panel",
+      "Ordered SQL workspace execution (schema.sql \u2192 seed.sql \u2192 query.sql)"
+    ],
+    "moduleMilestones": [
+      {
+        "range": "Module 0",
+        "milestone": "Reliable row insertion",
+        "learnersCan": "Add exact rows with explicit columns, intentional NULL, and controlled defaults."
+      },
+      {
+        "range": "Module 1",
+        "milestone": "Scoped data correction",
+        "learnersCan": "Preview, update, and delete only confirmed rows with required WHERE clauses."
+      },
+      {
+        "range": "Module 2",
+        "milestone": "Constraint-aware table creation",
+        "learnersCan": "Create related tables whose keys and constraints express valid data."
+      },
+      {
+        "range": "Module 3",
+        "milestone": "Data management capstone",
+        "learnersCan": "Launch and verify a small relational operations database from an empty sandbox."
+      }
+    ],
+    "closingNote": "Learners finish ready for SQL Database Design & Capstone, where they will model entities, choose relationships, normalize a system, and defend design decisions."
+  }
+}

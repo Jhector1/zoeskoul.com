@@ -25,6 +25,7 @@ import {
 } from "@/components/review/module/runtime/workspaceCodeSource";
 import { resolveExerciseWorkspace } from "@/components/review/module/runtime/exerciseWorkspaceResolver";
 import { normalizeTopicProgressKey } from "@/lib/review/progressTopicKeys";
+import { getReviewSubmitBridgeHost } from "@/lib/review/submitBridge";
 
 import { useTaggedT } from "@/i18n/tagged";
 import { resolveDeepTagged } from "@/i18n/resolveDeepTagged";
@@ -133,24 +134,35 @@ export async function flushReviewToolsBeforeSubmit(
 ) {
   const boundId = tools?.boundId ?? null;
 
-  if (typeof window !== "undefined") {
-    const win = window as typeof window & {
-      __zoeFlushTerminalBeforeSubmit?: Record<
-          string,
-          () => Promise<boolean | void>
-      >;
-      __zoeFlushAnyTerminalBeforeSubmit?: () => Promise<boolean | void>;
-      __zoeGetTerminalEvidenceBeforeSubmit?: Record<string, () => unknown>;
-      __zoeGetAnyTerminalEvidenceBeforeSubmit?: () => unknown;
-    };
+  const submitBridge = getReviewSubmitBridgeHost();
 
-    const boundFlush =
+  if (submitBridge) {
+    const win = submitBridge;
+
+    /**
+     * CodeToolPane keeps direct Monaco edits local while the learner types so the
+     * controlled editor does not blink. Flush that local workspace first; the
+     * generic tools registry can otherwise submit the previous/starter snapshot
+     * even though Run just executed the current editor text.
+     */
+    const boundWorkspaceFlush =
+        boundId && win.__zoeFlushWorkspaceBeforeSubmit
+            ? win.__zoeFlushWorkspaceBeforeSubmit[boundId]
+            : null;
+
+    if (boundWorkspaceFlush) {
+      await boundWorkspaceFlush();
+    } else {
+      await win.__zoeFlushAnyWorkspaceBeforeSubmit?.();
+    }
+
+    const boundTerminalFlush =
         boundId && win.__zoeFlushTerminalBeforeSubmit
             ? win.__zoeFlushTerminalBeforeSubmit[boundId]
             : null;
 
-    if (boundFlush) {
-      await boundFlush();
+    if (boundTerminalFlush) {
+      await boundTerminalFlush();
     } else {
       await win.__zoeFlushAnyTerminalBeforeSubmit?.();
     }
@@ -186,20 +198,18 @@ export async function flushReviewToolsBeforeSubmit(
   // emitted by FullIDE just after the first terminal sync promise resolves.
   await tools?.flushLatest?.();
 
-  if (typeof window !== "undefined" && boundId) {
-    const win = window as typeof window & {
-      __zoeGetTerminalEvidenceBeforeSubmit?: Record<string, () => unknown>;
-      __zoeGetAnyTerminalEvidenceBeforeSubmit?: () => unknown;
-    };
-
-    const liveTerminalEvidence =
-        win.__zoeGetTerminalEvidenceBeforeSubmit?.[boundId]?.() ??
-        win.__zoeGetAnyTerminalEvidenceBeforeSubmit?.() ??
-        null;
-    patchTerminalEvidenceForSubmit({
-      boundId,
-      terminalEvidence: liveTerminalEvidence,
-    });
+  if (boundId) {
+    const win = getReviewSubmitBridgeHost();
+    if (win) {
+      const liveTerminalEvidence =
+          win.__zoeGetTerminalEvidenceBeforeSubmit?.[boundId]?.() ??
+          win.__zoeGetAnyTerminalEvidenceBeforeSubmit?.() ??
+          null;
+      patchTerminalEvidenceForSubmit({
+        boundId,
+        terminalEvidence: liveTerminalEvidence,
+      });
+    }
   }
 }
 

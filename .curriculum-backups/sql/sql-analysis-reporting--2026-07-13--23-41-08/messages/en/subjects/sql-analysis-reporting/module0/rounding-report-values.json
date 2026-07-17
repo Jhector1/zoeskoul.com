@@ -1,0 +1,165 @@
+{
+  "topics": {
+    "sql-analysis-reporting": {
+      "sql-analysis-reporting-module-0-report-foundations": {
+        "rounding-report-values": {
+          "label": "Rounding Report Values",
+          "summary": "Format calculated numbers for a readable report without changing the precision stored in the source table.",
+          "cards": {
+            "sketch0": {
+              "title": "Round Money at the Presentation Layer"
+            },
+            "sketch1": {
+              "title": "Match Precision to the Audience"
+            },
+            "quiz": {
+              "title": "Check Your Understanding"
+            }
+          },
+          "practice": {
+            "single-choice-1": {
+              "title": "Two-Decimal Rounding",
+              "prompt": "Which expression displays gross sales to two decimal places?",
+              "hint": "ROUND needs both the value and the requested number of digits.",
+              "help": {
+                "concept": "The second ROUND argument controls decimal places.",
+                "hint_1": "The complete monetary expression is the value being formatted.",
+                "hint_2": "Look for `2` as a separate function argument."
+              },
+              "options": {
+                "a": "ROUND(quantity * unit_price, 2)",
+                "b": "ROUND(quantity, unit_price)",
+                "c": "quantity * ROUND(2)",
+                "d": "ROUND(quantity * unit_price)"
+              }
+            },
+            "single-choice-2": {
+              "title": "What ROUND Does Not Do",
+              "prompt": "What remains unchanged after selecting `ROUND(unit_price, 0)`?",
+              "hint": "A SELECT query reads and formats data; it does not update the table.",
+              "help": {
+                "concept": "ROUND changes the query result value, not the underlying record.",
+                "hint_1": "No mutation statement is being used.",
+                "hint_2": "Choose the option about stored data."
+              },
+              "options": {
+                "a": "The displayed result",
+                "b": "The stored unit_price values",
+                "c": "The result heading",
+                "d": "The number of returned rows"
+              }
+            },
+            "multi-choice-1": {
+              "title": "Choosing Precision",
+              "prompt": "Which statements are reasonable reporting choices? Select all that apply.",
+              "hint": "Precision should follow the meaning and audience of the report.",
+              "help": {
+                "concept": "Different outputs can require different levels of detail.",
+                "hint_1": "Rounding the displayed expression keeps the rule clear.",
+                "hint_2": "There is no universal decimal count for every metric."
+              },
+              "options": {
+                "a": "Use two decimals for monetary detail.",
+                "b": "Use zero decimals when a brief explicitly requests whole-dollar planning values.",
+                "c": "Assume every metric must use exactly two decimals.",
+                "d": "Round the final expression that the reader will see."
+              }
+            },
+            "multi-choice-2": {
+              "title": "Valid ROUND Expressions",
+              "prompt": "Which expressions use ROUND correctly? Select all that apply.",
+              "hint": "The value comes first and the digit count comes second.",
+              "help": {
+                "concept": "ROUND can format a stored column or a calculated expression.",
+                "hint_1": "The argument order matters.",
+                "hint_2": "Look for a numeric expression followed by the precision."
+              },
+              "options": {
+                "a": "ROUND(unit_price, 2)",
+                "b": "ROUND(quantity * unit_price, 2)",
+                "c": "ROUND(2, quantity * unit_price)",
+                "d": "ROUND(quantity * (unit_price + 1.25), 2)"
+              }
+            },
+            "drag-reorder-1": {
+              "title": "Wrap a Calculation in ROUND",
+              "prompt": "Arrange the pieces to form a rounded gross-sales expression.",
+              "hint": "Complete the function call before assigning the alias.",
+              "help": {
+                "concept": "The calculated value is ROUND's first argument.",
+                "hint_1": "The precision belongs inside the closing function syntax.",
+                "hint_2": "The alias labels the finished expression."
+              },
+              "tokens": {
+                "t1": "ROUND(",
+                "t2": "quantity * unit_price",
+                "t3": ", 2)",
+                "t4": "AS gross_sales"
+              }
+            },
+            "fill-blank-choice-1": {
+              "title": "Choose the Decimal Count",
+              "prompt": "Complete the expression to display cents.",
+              "hint": "Money is being displayed to two decimal places.",
+              "help": {
+                "concept": "The second argument is a count of digits after the decimal point.",
+                "hint_1": "It is not a multiplier or percentage.",
+                "hint_2": "Choose the digit count used for cents."
+              },
+              "template": "ROUND(quantity * unit_price, [blank1]) AS gross_sales",
+              "choices": [
+                "2",
+                "0",
+                "10",
+                "100"
+              ]
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_rounding_report_values_sketch0": {
+              "title": "Round Completed Order Values",
+              "prompt": "For completed orders, return `order_id` and gross sales rounded to two decimal places as `gross_sales`.",
+              "hint": "Put the complete multiplication expression inside ROUND.",
+              "help": {
+                "concept": "ROUND takes the value to format and the number of decimal places to display.",
+                "hint_1": "Calculate quantity times unit price inside the function.",
+                "hint_2": "Use `2` as the second argument for cents."
+              },
+              "starterCode": "-- Write the query below.",
+              "solutionCode": "SELECT\n    order_id,\n    ROUND(quantity * unit_price, 2) AS gross_sales\nFROM sales_reporting\nWHERE order_status = 'Completed';"
+            },
+            "try_rounding_report_values_sketch1": {
+              "title": "Round an Adjusted Order Value",
+              "prompt": "Select `order_id` and `quantity * (unit_price + 1.25)` rounded to two decimals as `packed_order_value`.",
+              "hint": "Round the final adjusted value, not just one input.",
+              "help": {
+                "concept": "The full business expression belongs inside ROUND when the final report value needs formatting.",
+                "hint_1": "Keep the per-unit adjustment inside parentheses.",
+                "hint_2": "Wrap the resulting multiplication in ROUND with two digits."
+              },
+              "starterCode": "-- Write the query below.",
+              "solutionCode": "SELECT\n    order_id,\n    ROUND(quantity * (unit_price + 1.25), 2) AS packed_order_value\nFROM sales_reporting;"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql-analysis-reporting": {
+      "sql-analysis-reporting-module-0-report-foundations": {
+        "rounding-report-values": {
+          "sketch0": {
+            "title": "Round Money at the Presentation Layer",
+            "bodyMarkdown": "Financial output is usually displayed to two decimal places. Wrap the complete expression in `ROUND`:\n\n```sql\nSELECT\n    order_id,\n    ROUND(quantity * unit_price, 2) AS gross_sales\nFROM sales_reporting;\n```\n\nThe calculation remains row-level. `ROUND` changes only the displayed result of this query."
+          },
+          "sketch1": {
+            "title": "Match Precision to the Audience",
+            "bodyMarkdown": "Different values may need different precision. A whole-dollar planning view can use zero decimal places, while money in a transaction report usually uses two.\n\n```sql\nSELECT\n    product_name,\n    ROUND(unit_price, 0) AS planning_price\nFROM sales_reporting;\n```\n\nThe report requirement—not habit—should decide the number of digits."
+          }
+        }
+      }
+    }
+  }
+}

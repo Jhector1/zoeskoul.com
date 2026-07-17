@@ -55,6 +55,7 @@ type Props = {
     sqlDatasetId?: string;
     sqlResultShape?: "table";
     sqlPaneOptions?: import("@/components/code/runner/components/sql/results-pane").SqlPaneOptions;
+    defaultSurface?: import("@zoeskoul/curriculum-contracts").ToolSurface;
     sqlSchemaSql?: string;
     sqlSeedSql?: string;
     sqlSetupSql?: string;
@@ -116,6 +117,7 @@ export default function IdeEditorPane({
                                           sqlDatasetId,
                                           sqlResultShape,
                                           sqlPaneOptions,
+                                          defaultSurface,
                                           sqlSchemaSql,
                                           sqlSeedSql,
                                           sqlSetupSql,
@@ -233,6 +235,7 @@ export default function IdeEditorPane({
                             sqlDatasetId={sqlDatasetId}
                             sqlResultShape={sqlResultShape}
                             sqlPaneOptions={sqlPaneOptions}
+                            defaultSurface={defaultSurface}
                             sqlSchemaSql={schemaSql}
                             sqlSeedSql={seedSql}
                             sqlSetupSql={sqlSetupSql}

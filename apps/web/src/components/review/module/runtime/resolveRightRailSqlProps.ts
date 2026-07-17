@@ -4,8 +4,13 @@ import {
     STUDENTS_SQL_SEED,
 } from "../data/studentsSqlFallback";
 import {SqlDialect} from "@zoeskoul/practice-checks";
+import {
+    mergeToolPresentationPolicies,
+    resolveToolPresentationForLayout,
+    type ToolPresentationPolicy,
+    type ToolSurface,
+} from "@zoeskoul/curriculum-contracts";
 import type { SqlPaneOptions } from "@/components/code/runner/components/sql/results-pane";
-
 
 export type SqlInitialTableSnapshots = Record<
     string,
@@ -26,7 +31,9 @@ export type RightRailSqlToolState = {
     toolSqlSchemaSql?: string | null;
     toolSqlSeedSql?: string | null;
     toolSqlInitialTableSnapshots?: SqlInitialTableSnapshots;
+    /** Legacy exercise-only SQL options. Prefer toolPresentation. */
     toolSqlPaneOptions?: SqlPaneOptions | null;
+    toolPresentation?: ToolPresentationPolicy | null;
 };
 
 export type RightRailSqlFallback = {
@@ -42,6 +49,11 @@ export type ResolveRightRailSqlPropsArgs = {
     routeCanUseBoundExercise: boolean;
     tool: RightRailSqlToolState;
     topicSqlFallback?: RightRailSqlFallback | null;
+    topicTools?: ToolPresentationPolicy | null;
+    /** Legacy card-level inner SQL options. Prefer cardTools. */
+    cardSqlPaneOptions?: SqlPaneOptions | null;
+    cardTools?: ToolPresentationPolicy | null;
+    compactLayout?: boolean;
 };
 
 export type ResolvedRightRailSqlProps = {
@@ -52,6 +64,8 @@ export type ResolvedRightRailSqlProps = {
     sqlSeedSql?: string;
     sqlInitialTableSnapshots?: SqlInitialTableSnapshots;
     sqlPaneOptions?: SqlPaneOptions;
+    defaultSurface?: ToolSurface;
+    toolPresentation?: ToolPresentationPolicy;
 };
 
 function firstNonBlank(...values: Array<string | null | undefined>) {
@@ -80,10 +94,14 @@ function firstSqlDialect(...values: Array<string | null | undefined>): SqlDialec
 }
 
 export function resolveRightRailSqlProps({
-                                             routeCanUseBoundExercise,
-                                             tool,
-                                             topicSqlFallback,
-                                         }: ResolveRightRailSqlPropsArgs): ResolvedRightRailSqlProps {
+    routeCanUseBoundExercise,
+    tool,
+    topicSqlFallback,
+    topicTools,
+    cardSqlPaneOptions,
+    cardTools,
+    compactLayout = false,
+}: ResolveRightRailSqlPropsArgs): ResolvedRightRailSqlProps {
     const hasExerciseSqlDataset =
         routeCanUseBoundExercise && Boolean(firstNonBlank(tool.toolSqlDatasetId));
 
@@ -95,6 +113,57 @@ export function resolveRightRailSqlProps({
         tool.toolLang === "sql" ||
         hasExerciseSqlDataset ||
         hasRuntimeSqlDataset;
+
+    const legacyTopicTools = topicSqlFallback?.sqlPaneOptions
+        ? { sqlPane: topicSqlFallback.sqlPaneOptions }
+        : undefined;
+    const legacyCardTools = cardSqlPaneOptions
+        ? { sqlPane: cardSqlPaneOptions }
+        : undefined;
+    const legacyExerciseTools =
+        routeCanUseBoundExercise && tool.toolSqlPaneOptions
+            ? { sqlPane: tool.toolSqlPaneOptions }
+            : undefined;
+
+    const mergedToolPresentation = mergeToolPresentationPolicies(
+        legacyTopicTools,
+        topicTools,
+        legacyCardTools,
+        cardTools,
+        routeCanUseBoundExercise ? legacyExerciseTools : undefined,
+        routeCanUseBoundExercise ? tool.toolPresentation : undefined,
+    );
+
+    const responsivePolicy = resolveToolPresentationForLayout({
+        policy: mergedToolPresentation,
+        compact: compactLayout,
+    });
+
+    const authoredDefaultSurface = responsivePolicy?.defaultSurface;
+    const legacySqlTabRequestsResultsSurface = Boolean(
+        responsivePolicy?.sqlPane?.defaultTab,
+    );
+    const defaultSurface: ToolSurface | undefined = authoredDefaultSurface ??
+        (compactLayout && isSqlTool
+            ? "results"
+            : legacySqlTabRequestsResultsSurface
+                ? "results"
+                : undefined);
+
+    const sqlPaneOptions: SqlPaneOptions | undefined = isSqlTool
+        ? {
+            ...(responsivePolicy?.sqlPane ?? {}),
+            ...(compactLayout && !responsivePolicy?.sqlPane?.defaultTab
+                ? { defaultTab: "results" as const }
+                : {}),
+        }
+        : undefined;
+
+    const toolPresentation = mergeToolPresentationPolicies(
+        responsivePolicy,
+        defaultSurface ? { defaultSurface } : undefined,
+        sqlPaneOptions ? { sqlPane: sqlPaneOptions } : undefined,
+    );
 
     return {
         toolSqlDialect: firstSqlDialect(
@@ -130,11 +199,8 @@ export function resolveRightRailSqlProps({
             (tool.toolLang === "sql"
                 ? undefined
                 : STUDENTS_INITIAL_TABLE_SNAPSHOTS),
-        sqlPaneOptions:
-            (routeCanUseBoundExercise
-                ? tool.toolSqlPaneOptions ?? undefined
-                : undefined) ??
-            topicSqlFallback?.sqlPaneOptions ??
-            undefined,
+        sqlPaneOptions,
+        defaultSurface,
+        toolPresentation,
     };
 }

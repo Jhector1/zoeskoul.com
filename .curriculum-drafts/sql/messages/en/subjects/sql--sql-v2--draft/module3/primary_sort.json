@@ -3,45 +3,28 @@
     "sql--sql-v2--draft": {
       "sql--sql-v2--draft-3": {
         "primary_sort": {
-          "label": "Primary sort",
-          "summary": "Learn how to choose the main column for ORDER BY so rows appear in a clear, useful order.",
+          "label": "Primary and Secondary Sorts",
+          "summary": "Sort by more than one column so ties have a clear and deterministic order.",
           "cards": {
             "sketch0": {
-              "title": "What a primary sort does"
+              "title": "The First Sort Column Creates the Main Groups"
             },
             "sketch1": {
-              "title": "Choosing the right first column"
-            },
-            "sketch2": {
-              "title": "Primary sort before secondary sort"
+              "title": "A Secondary Sort Breaks Ties"
             },
             "quiz": {
-              "title": "Quiz"
-            },
-            "project": {
-              "title": "Practice primary sorting with product reports"
-            }
-          },
-          "projectSteps": {
-            "ci_primary_sort_price_desc": {
-              "title": "Sort by price descending"
-            },
-            "ci_primary_sort_name_asc": {
-              "title": "Sort names alphabetically"
-            },
-            "ci_primary_sort_newest_first": {
-              "title": "Sort by newest date first"
+              "title": "Check Your Understanding"
             }
           },
           "quiz": {
             "sc_primary_sort_goal_price": {
               "title": "Pick the best primary sort",
               "prompt": "You want to see the most expensive products first. Which column should be the primary sort?",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Match each choice to the command, clause, or constraint described in the question.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "concept": "Use the SQL behavior described in the lesson to separate the valid choice from statements about a different command, clause, or constraint.",
+                "hint_1": "Identify the job the SQL must perform before comparing the choices.",
+                "hint_2": "Eliminate choices that belong to a different SQL concept."
               },
               "options": {
                 "a": "name",
@@ -162,131 +145,78 @@
                 "created_at"
               ]
             },
-            "ci_primary_sort_price_desc": {
-              "title": "Sort by price descending",
-              "prompt": "Write a query that shows `name` and `price` from `products`, sorted by `price` from highest to lowest. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Show name and price from products, sorted by price from highest to lowest.\nSELECT name, price\nFROM products\n;"
-            },
-            "ci_primary_sort_name_asc": {
-              "title": "Sort names alphabetically",
-              "prompt": "Write a query that shows `name` and `category` from `products`, sorted alphabetically by `name` from A to Z. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Show name and category from products, sorted alphabetically by name from A to Z.\nSELECT name, category\nFROM products\n;"
-            },
-            "ci_primary_sort_newest_first": {
-              "title": "Sort by newest date first",
-              "prompt": "Write a query that shows `name` and `created_at` from `products`, sorted so the newest products appear first. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Show name and created_at from products, sorted so the newest products appear first.\nSELECT name, created_at\nFROM products\n;"
-            },
             "try-primary_sort-sketch0": {
-              "title": "Sort by price descending",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that shows `name` and `price` from `products`, sorted by `price` from highest to lowest. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Create Category Groups with a Price Order",
+              "prompt": "Create category sections from Z to A, then make each section easy to compare by price. Return `name, category, price` from `products` in that column order. Sort the final result by `category DESC, price ASC`.",
+              "hint": "List category DESC first and price ASC second in ORDER BY.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "Return `name, category, price` from `products` in that column order. Sort the final result by `category DESC, price ASC`."
               },
-              "starterCode": "-- Show name and price from products, sorted by price from highest to lowest.\nSELECT name, price\nFROM products\n;"
-            },
-            "try-primary_sort-sketch1": {
-              "title": "Sort names alphabetically",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that shows `name` and `category` from `products`, sorted alphabetically by `name` from A to Z. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
-              },
-              "starterCode": "-- Show name and category from products, sorted alphabetically by name from A to Z.\nSELECT name, category\nFROM products\n;"
+              "starterCode": "SELECT name, category, price\nFROM products\n-- Add the primary and secondary sorts"
             },
             "try-primary_sort-sketch2": {
-              "title": "Sort by newest date first",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that shows `name` and `created_at` from `products`, sorted so the newest products appear first. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Add a Stable Name Tie-Breaker",
+              "prompt": "Prepare a stable product directory that stays predictable when categories repeat. Return `name, category, stock` from `products` in that column order. Sort the final result by `category ASC, name ASC`.",
+              "hint": "Use category ASC as the first sort and name ASC as the second.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "Return `name, category, stock` from `products` in that column order. Sort the final result by `category ASC, name ASC`."
               },
-              "starterCode": "-- Show name and created_at from products, sorted so the newest products appear first.\nSELECT name, created_at\nFROM products\n;"
+              "starterCode": "SELECT name, category, stock\nFROM products\n-- Sort by category, then name"
             }
           },
           "tryIt": {
             "allowReveal": true,
-            "try_primary_sort_sketch0": {
-              "title": "Sort by price descending",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that shows `name` and `price` from `products`, sorted by `price` from highest to lowest. Write the query in the SQL editor, click Run query, and check the results table."
-            },
-            "try_primary_sort_sketch1": {
-              "title": "Sort names alphabetically",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that shows `name` and `category` from `products`, sorted alphabetically by `name` from A to Z. Write the query in the SQL editor, click Run query, and check the results table."
-            },
             "try_primary_sort_sketch2": {
-              "title": "Sort by newest date first",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that shows `name` and `created_at` from `products`, sorted so the newest products appear first. Write the query in the SQL editor, click Run query, and check the results table."
+              "title": "Add a Stable Name Tie-Breaker",
+              "prompt": "Prepare a stable product directory that stays predictable when categories repeat. Show `name`, `category`, and `stock` from `products`, sorting by category A to Z and then by name A to Z.",
+              "hint": "Use category ASC as the first sort and name ASC as the second.",
+              "help": {
+                "concept": "A secondary sort makes the order inside each primary group predictable.",
+                "hint_1": "Use category ASC as the first sort and name ASC as the second.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+              }
+            },
+            "try_primary_sort_sketch0": {
+              "title": "Create Category Groups with a Price Order",
+              "prompt": "Create category sections from Z to A, then make each section easy to compare by price. Show `name`, `category`, and `price` from `products`, sorting prices low to high within each category.",
+              "hint": "List category DESC first and price ASC second in ORDER BY.",
+              "help": {
+                "concept": "The first ORDER BY column creates the primary groups; later columns order rows inside those groups.",
+                "hint_1": "List category DESC first and price ASC second in ORDER BY.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+              }
             }
           }
         }
       },
       "sql-v2-3": {
         "primary_sort": {
-          "label": "Primary sort",
-          "summary": "Learn how to choose the main column for ORDER BY so rows appear in a clear, useful order.",
+          "label": "Primary and Secondary Sorts",
+          "summary": "Sort by more than one column so ties have a clear and deterministic order.",
           "cards": {
             "sketch0": {
-              "title": "What a primary sort does"
+              "title": "The First Sort Column Creates the Main Groups"
             },
             "sketch1": {
-              "title": "Choosing the right first column"
-            },
-            "sketch2": {
-              "title": "Primary sort before secondary sort"
+              "title": "A Secondary Sort Breaks Ties"
             },
             "quiz": {
-              "title": "Quiz"
-            },
-            "project": {
-              "title": "Practice primary sorting with product reports"
-            }
-          },
-          "projectSteps": {
-            "ci_primary_sort_price_desc": {
-              "title": "Sort by price descending"
-            },
-            "ci_primary_sort_name_asc": {
-              "title": "Sort names alphabetically"
-            },
-            "ci_primary_sort_newest_first": {
-              "title": "Sort by newest date first"
+              "title": "Check Your Understanding"
             }
           },
           "quiz": {
             "sc_primary_sort_goal_price": {
               "title": "Pick the best primary sort",
               "prompt": "You want to see the most expensive products first. Which column should be the primary sort?",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Match each choice to the command, clause, or constraint described in the question.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "concept": "Use the SQL behavior described in the lesson to separate the valid choice from statements about a different command, clause, or constraint.",
+                "hint_1": "Identify the job the SQL must perform before comparing the choices.",
+                "hint_2": "Eliminate choices that belong to a different SQL concept."
               },
               "options": {
                 "a": "name",
@@ -441,19 +371,19 @@
               "starterCode": "-- Show name and created_at from products, sorted so the newest products appear first.\nSELECT name, created_at\nFROM products\n;"
             },
             "try-primary_sort-sketch0": {
-              "title": "Sort by price descending",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that shows `name` and `price` from `products`, sorted by `price` from highest to lowest. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Create Category Groups with a Price Order",
+              "prompt": "Create category sections from Z to A, then make each section easy to compare by price. Show `name`, `category`, and `price` from `products`, sorting prices low to high within each category.",
+              "hint": "List category DESC first and price ASC second in ORDER BY.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
+                "concept": "The first ORDER BY column creates the primary groups; later columns order rows inside those groups.",
+                "hint_1": "List category DESC first and price ASC second in ORDER BY.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
               },
-              "starterCode": "-- Show name and price from products, sorted by price from highest to lowest.\nSELECT name, price\nFROM products\n;"
+              "starterCode": "SELECT name, category, price\nFROM products\n-- Add the primary and secondary sorts"
             },
             "try-primary_sort-sketch1": {
               "title": "Sort names alphabetically",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that shows `name` and `category` from `products`, sorted alphabetically by `name` from A to Z. Write the query in the SQL editor, click Run query, and check the results table.",
+              "prompt": "Build a ranking query that shows `name` and `category` from `products`, sorted alphabetically by `name` from A to Z. Run it and compare the result with the expected table.",
               "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
               "help": {
                 "concept": "This SQL exercise checks whether your query returns the requested result.",
@@ -463,30 +393,38 @@
               "starterCode": "-- Show name and category from products, sorted alphabetically by name from A to Z.\nSELECT name, category\nFROM products\n;"
             },
             "try-primary_sort-sketch2": {
-              "title": "Sort by newest date first",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that shows `name` and `created_at` from `products`, sorted so the newest products appear first. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "title": "Add a Stable Name Tie-Breaker",
+              "prompt": "Prepare a stable product directory that stays predictable when categories repeat. Show `name`, `category`, and `stock` from `products`, sorting by category A to Z and then by name A to Z.",
+              "hint": "Use category ASC as the first sort and name ASC as the second.",
               "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the table name and selected columns in the SQL editor.",
-                "hint_2": "Run the query and compare the results table."
+                "concept": "A secondary sort makes the order inside each primary group predictable.",
+                "hint_1": "Use category ASC as the first sort and name ASC as the second.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
               },
-              "starterCode": "-- Show name and created_at from products, sorted so the newest products appear first.\nSELECT name, created_at\nFROM products\n;"
+              "starterCode": "SELECT name, category, stock\nFROM products\n-- Sort by category, then name"
             }
           },
           "tryIt": {
             "allowReveal": true,
-            "try_primary_sort_sketch0": {
-              "title": "Sort by price descending",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that shows `name` and `price` from `products`, sorted by `price` from highest to lowest. Write the query in the SQL editor, click Run query, and check the results table."
-            },
-            "try_primary_sort_sketch1": {
-              "title": "Sort names alphabetically",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that shows `name` and `category` from `products`, sorted alphabetically by `name` from A to Z. Write the query in the SQL editor, click Run query, and check the results table."
-            },
             "try_primary_sort_sketch2": {
-              "title": "Sort by newest date first",
-              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that shows `name` and `created_at` from `products`, sorted so the newest products appear first. Write the query in the SQL editor, click Run query, and check the results table."
+              "title": "Add a Stable Name Tie-Breaker",
+              "prompt": "Prepare a stable product directory that stays predictable when categories repeat. Show `name`, `category`, and `stock` from `products`, sorting by category A to Z and then by name A to Z.",
+              "hint": "Use category ASC as the first sort and name ASC as the second.",
+              "help": {
+                "concept": "A secondary sort makes the order inside each primary group predictable.",
+                "hint_1": "Use category ASC as the first sort and name ASC as the second.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+              }
+            },
+            "try_primary_sort_sketch0": {
+              "title": "Create Category Groups with a Price Order",
+              "prompt": "Create category sections from Z to A, then make each section easy to compare by price. Show `name`, `category`, and `price` from `products`, sorting prices low to high within each category.",
+              "hint": "List category DESC first and price ASC second in ORDER BY.",
+              "help": {
+                "concept": "The first ORDER BY column creates the primary groups; later columns order rows inside those groups.",
+                "hint_1": "List category DESC first and price ASC second in ORDER BY.",
+                "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
+              }
             }
           }
         }
@@ -497,33 +435,25 @@
     "sql--sql-v2--draft": {
       "sql--sql-v2--draft-3": {
         "primary_sort": {
-          "sketch_primary_sort_intro": {
-            "title": "What a primary sort does",
-            "bodyMarkdown": "A **primary sort** is the first rule SQL uses to arrange your rows. You write it with `ORDER BY`.\n\nIf you sort by one column, that column is the primary sort. For example, this query sorts products by price from lowest to highest:\n\n```sql\nSELECT name, price\nFROM products\nORDER BY price ASC;\n```\n\nStep by step:\n- `SELECT name, price` chooses the columns to show.\n- `FROM products` reads rows from the `products` table.\n- `ORDER BY price ASC` puts the smallest `price` first.\n\nWith the `products` data, the first few rows would start with lower-priced items like `Notebook` before higher-priced items like `Office Chair`.\n\nWhy this matters: if your question is about **cheapest**, **most expensive**, **newest**, or **alphabetical order**, the primary sort should match that goal."
+          "primary_sort_column": {
+            "title": "The First Sort Column Creates the Main Groups",
+            "bodyMarkdown": "When `ORDER BY` lists more than one column, the first column is the primary sort.\n\n```sql\nSELECT\n    name,\n    category,\n    price\nFROM products\nORDER BY category ASC, price DESC;\n```\n\nSQL groups the rows alphabetically by category first. Price does not override that grouping; it is used only within each category."
           },
-          "sketch_primary_sort_examples": {
-            "title": "Choosing the right first column",
-            "bodyMarkdown": "The main idea is simple: **pick the column that answers the question first**.\n\nExample 1: If you want the most expensive products first, sort by `price`.\n\n```sql\nSELECT name, category, price\nFROM products\nORDER BY price DESC;\n```\n\nLine by line:\n- `SELECT name, category, price` shows useful product details.\n- `FROM products` gets all product rows.\n- `ORDER BY price DESC` puts the highest price at the top.\n\nExample 2: If you want products in alphabetical order, sort by `name`.\n\n```sql\nSELECT name, category\nFROM products\nORDER BY name ASC;\n```\n\nNow the primary sort is `name`, so rows are arranged alphabetically.\n\nA common beginner mistake is sorting by a column that does not match the goal. If you want the newest products, sorting by `name` will not help. You should sort by `created_at` instead."
-          },
-          "sketch_primary_sort_ties": {
-            "title": "Primary sort before secondary sort",
-            "bodyMarkdown": "When you sort by more than one column, the **first** column is still the primary sort. SQL uses the second column only when rows tie on the first one.\n\nExample:\n\n```sql\nSELECT name, category, price\nFROM products\nORDER BY category ASC, price DESC;\n```\n\nHow this works:\n- First, SQL groups the order by `category` alphabetically.\n- Inside each category, SQL uses `price DESC`.\n- So `category` is the **primary sort**, and `price` is the next rule.\n\nThis means the first sort column has the biggest effect on the overall order.\n\nFor this topic, focus on recognizing that the first column after `ORDER BY` controls the main arrangement of the results."
+          "secondary_tie_breaker": {
+            "title": "A Secondary Sort Breaks Ties",
+            "bodyMarkdown": "The second sort column orders rows that share the same primary value.\n\n```sql\nSELECT\n    name,\n    category,\n    stock\nFROM products\nORDER BY category ASC, stock ASC;\n```\n\nProducts in the same category are arranged from lowest stock to highest. Adding a final stable tie-breaker such as `name ASC` can make repeated results completely deterministic.\n\nRead a multi-column sort from left to right: main order first, tie-breaker second."
           }
         }
       },
       "sql-v2-3": {
         "primary_sort": {
-          "sketch_primary_sort_intro": {
-            "title": "What a primary sort does",
-            "bodyMarkdown": "A **primary sort** is the first rule SQL uses to arrange your rows. You write it with `ORDER BY`.\n\nIf you sort by one column, that column is the primary sort. For example, this query sorts products by price from lowest to highest:\n\n```sql\nSELECT name, price\nFROM products\nORDER BY price ASC;\n```\n\nStep by step:\n- `SELECT name, price` chooses the columns to show.\n- `FROM products` reads rows from the `products` table.\n- `ORDER BY price ASC` puts the smallest `price` first.\n\nWith the `products` data, the first few rows would start with lower-priced items like `Notebook` before higher-priced items like `Office Chair`.\n\nWhy this matters: if your question is about **cheapest**, **most expensive**, **newest**, or **alphabetical order**, the primary sort should match that goal."
+          "primary_sort_column": {
+            "title": "The First Sort Column Creates the Main Groups",
+            "bodyMarkdown": "When `ORDER BY` lists more than one column, the first column is the primary sort.\n\n```sql\nSELECT\n    name,\n    category,\n    price\nFROM products\nORDER BY category ASC, price DESC;\n```\n\nSQL groups the rows alphabetically by category first. Price does not override that grouping; it is used only within each category."
           },
-          "sketch_primary_sort_examples": {
-            "title": "Choosing the right first column",
-            "bodyMarkdown": "The main idea is simple: **pick the column that answers the question first**.\n\nExample 1: If you want the most expensive products first, sort by `price`.\n\n```sql\nSELECT name, category, price\nFROM products\nORDER BY price DESC;\n```\n\nLine by line:\n- `SELECT name, category, price` shows useful product details.\n- `FROM products` gets all product rows.\n- `ORDER BY price DESC` puts the highest price at the top.\n\nExample 2: If you want products in alphabetical order, sort by `name`.\n\n```sql\nSELECT name, category\nFROM products\nORDER BY name ASC;\n```\n\nNow the primary sort is `name`, so rows are arranged alphabetically.\n\nA common beginner mistake is sorting by a column that does not match the goal. If you want the newest products, sorting by `name` will not help. You should sort by `created_at` instead."
-          },
-          "sketch_primary_sort_ties": {
-            "title": "Primary sort before secondary sort",
-            "bodyMarkdown": "When you sort by more than one column, the **first** column is still the primary sort. SQL uses the second column only when rows tie on the first one.\n\nExample:\n\n```sql\nSELECT name, category, price\nFROM products\nORDER BY category ASC, price DESC;\n```\n\nHow this works:\n- First, SQL groups the order by `category` alphabetically.\n- Inside each category, SQL uses `price DESC`.\n- So `category` is the **primary sort**, and `price` is the next rule.\n\nThis means the first sort column has the biggest effect on the overall order.\n\nFor this topic, focus on recognizing that the first column after `ORDER BY` controls the main arrangement of the results."
+          "secondary_tie_breaker": {
+            "title": "A Secondary Sort Breaks Ties",
+            "bodyMarkdown": "The second sort column orders rows that share the same primary value.\n\n```sql\nSELECT\n    name,\n    category,\n    stock\nFROM products\nORDER BY category ASC, stock ASC;\n```\n\nProducts in the same category are arranged from lowest stock to highest. Adding a final stable tie-breaker such as `name ASC` can make repeated results completely deterministic.\n\nRead a multi-column sort from left to right: main order first, tie-breaker second."
           }
         }
       }

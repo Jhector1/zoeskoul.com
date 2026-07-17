@@ -1,0 +1,90 @@
+{
+  "ok": true,
+  "profileId": "sql",
+  "subjectSlug": "sql--sql-data-management--draft",
+  "courseSlug": "sql-data-management",
+  "topicId": "module-1-inventory-correction-cleanup",
+  "summary": {
+    "modules": 1,
+    "topicsTotal": 1,
+    "exercises": 6,
+    "exerciseKinds": {
+      "code_input": 6
+    },
+    "codeInputs": 6,
+    "projects": 6,
+    "capstones": 6,
+    "thinFixedTestCount": 0,
+    "blockers": 0,
+    "errors": 0,
+    "warnings": 6,
+    "infos": 0
+  },
+  "severityCounts": {
+    "blocker": 0,
+    "error": 0,
+    "warning": 6,
+    "info": 0
+  },
+  "issues": [
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-data-management-module-1-controlled-updates-deletes/sql-data-management-section-1-module-project/module-1-inventory-correction-cleanup",
+      "profileId": "sql",
+      "moduleId": "sql-data-management-module-1-controlled-updates-deletes",
+      "topicId": "module-1-inventory-correction-cleanup",
+      "message": "Topic \"module-1-inventory-correction-cleanup\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "STARTER_MAY_REVEAL_SOLUTION_STRUCTURE",
+      "severity": "warning",
+      "path": "sql-data-management-module-1-controlled-updates-deletes/sql-data-management-section-1-module-project/module-1-inventory-correction-cleanup",
+      "profileId": "sql",
+      "moduleId": "sql-data-management-module-1-controlled-updates-deletes",
+      "topicId": "module-1-inventory-correction-cleanup",
+      "exerciseId": "try-module-1-inventory-correction-cleanup-sketch1",
+      "message": "Exercise \"try-module-1-inventory-correction-cleanup-sketch1\" starterCode appears to contain most of the final solution structure."
+    },
+    {
+      "code": "STARTER_MAY_REVEAL_SOLUTION_STRUCTURE",
+      "severity": "warning",
+      "path": "sql-data-management-module-1-controlled-updates-deletes/sql-data-management-section-1-module-project/module-1-inventory-correction-cleanup",
+      "profileId": "sql",
+      "moduleId": "sql-data-management-module-1-controlled-updates-deletes",
+      "topicId": "module-1-inventory-correction-cleanup",
+      "exerciseId": "try-module-1-inventory-correction-cleanup-sketch2",
+      "message": "Exercise \"try-module-1-inventory-correction-cleanup-sketch2\" starterCode appears to contain most of the final solution structure."
+    },
+    {
+      "code": "STARTER_MAY_REVEAL_SOLUTION_STRUCTURE",
+      "severity": "warning",
+      "path": "sql-data-management-module-1-controlled-updates-deletes/sql-data-management-section-1-module-project/module-1-inventory-correction-cleanup",
+      "profileId": "sql",
+      "moduleId": "sql-data-management-module-1-controlled-updates-deletes",
+      "topicId": "module-1-inventory-correction-cleanup",
+      "exerciseId": "try-module-1-inventory-correction-cleanup-sketch3",
+      "message": "Exercise \"try-module-1-inventory-correction-cleanup-sketch3\" starterCode appears to contain most of the final solution structure."
+    },
+    {
+      "code": "STARTER_MAY_REVEAL_SOLUTION_STRUCTURE",
+      "severity": "warning",
+      "path": "sql-data-management-module-1-controlled-updates-deletes/sql-data-management-section-1-module-project/module-1-inventory-correction-cleanup",
+      "profileId": "sql",
+      "moduleId": "sql-data-management-module-1-controlled-updates-deletes",
+      "topicId": "module-1-inventory-correction-cleanup",
+      "exerciseId": "try-module-1-inventory-correction-cleanup-sketch4",
+      "message": "Exercise \"try-module-1-inventory-correction-cleanup-sketch4\" starterCode appears to contain most of the final solution structure."
+    },
+    {
+      "code": "STARTER_MAY_REVEAL_SOLUTION_STRUCTURE",
+      "severity": "warning",
+      "path": "sql-data-management-module-1-controlled-updates-deletes/sql-data-management-section-1-module-project/module-1-inventory-correction-cleanup",
+      "profileId": "sql",
+      "moduleId": "sql-data-management-module-1-controlled-updates-deletes",
+      "topicId": "module-1-inventory-correction-cleanup",
+      "exerciseId": "try-module-1-inventory-correction-cleanup-sketch5",
+      "message": "Exercise \"try-module-1-inventory-correction-cleanup-sketch5\" starterCode appears to contain most of the final solution structure."
+    }
+  ]
+}

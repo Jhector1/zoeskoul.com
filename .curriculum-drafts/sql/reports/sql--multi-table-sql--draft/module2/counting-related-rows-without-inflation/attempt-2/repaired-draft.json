@@ -1,0 +1,165 @@
+{
+  "title": "Counting Related Rows Without Inflation",
+  "summary": "Count matched rows and unique entities without allowing join multiplication to distort a report.",
+  "minutes": 32,
+  "sketchBlocks": [
+    {
+      "id": "sketch-counting-rows",
+      "title": "Understanding Row Multiplication in Joins",
+      "bodyMarkdown": "When using joins in SQL, especially with LEFT JOIN, it's crucial to understand how row multiplication can occur. This happens when a row from the left table matches multiple rows in the right table, leading to inflated counts if not handled properly. For example, consider the `students` and `enrollments` tables. If a student is enrolled in multiple courses, a simple join will multiply the student's row for each enrollment.\n\n```sql\nSELECT students.name, COUNT(enrollments.id) AS enrollment_count\nFROM students\nLEFT JOIN enrollments ON students.id = enrollments.student_id\nGROUP BY students.name;\n```\n\nIn this query, we use `COUNT(enrollments.id)` to count the number of enrollments per student. However, if we want to count unique students, we should use `COUNT(DISTINCT students.id)` to avoid inflation."
+    },
+    {
+      "id": "sketch-anti-join-pattern",
+      "title": "Using Anti-Join to Find Unmatched Rows",
+      "bodyMarkdown": "An anti-join is a pattern used to find rows in one table that do not have corresponding matches in another table. This is useful for identifying entities without related records. For instance, to find departments with no courses, you can use a LEFT JOIN combined with a WHERE clause to filter out matched rows.\n\n```sql\nSELECT departments.name\nFROM departments\nLEFT JOIN courses ON departments.id = courses.department_id\nWHERE courses.id IS NULL;\n```\n\nThis query lists all departments that do not have any courses associated with them. The key is the `WHERE courses.id IS NULL` condition, which filters out departments that have at least one course."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "single-choice-join-inflation",
+      "kind": "single_choice",
+      "title": "Understanding Join Inflation",
+      "prompt": "What is a common cause of row multiplication in SQL joins?",
+      "options": [
+        "Using a LEFT JOIN without a GROUP BY clause",
+        "Using COUNT(DISTINCT) incorrectly",
+        "Having a WHERE clause that filters out NULLs",
+        "A row in one table matching multiple rows in another"
+      ],
+      "correctOptionIds": [
+        "d"
+      ],
+      "hint": "Consider what happens when a row in one table matches multiple rows in another.",
+      "help": {
+        "concept": "Row multiplication occurs when a row from one table matches multiple rows in another table during a join.",
+        "hint_1": "Think about how a single row can be duplicated in the result set.",
+        "hint_2": "A row in the left table matching multiple rows in the right table causes multiplication."
+      }
+    },
+    {
+      "id": "multi-choice-anti-join",
+      "kind": "multi_choice",
+      "title": "Identifying Unmatched Rows with Anti-Join",
+      "prompt": "Which of the following are true about using an anti-join pattern? Select all that apply.",
+      "options": [
+        "It uses a LEFT JOIN with a WHERE clause checking for NULLs",
+        "It can identify rows in one table that have no matches in another",
+        "It requires a FULL JOIN to function",
+        "It is used to count all rows in both tables"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ],
+      "hint": "Consider how an anti-join pattern is used to find unmatched rows.",
+      "help": {
+        "concept": "An anti-join pattern is used to find rows in one table that do not have corresponding matches in another table.",
+        "hint_1": "Think about the purpose of using a LEFT JOIN with a WHERE clause checking for NULLs.",
+        "hint_2": "An anti-join helps identify entities without related records."
+      }
+    },
+    {
+      "id": "drag-reorder-join-steps",
+      "kind": "drag_reorder",
+      "title": "Steps in Performing a LEFT JOIN",
+      "prompt": "Arrange the steps in the correct order to perform a LEFT JOIN that counts related rows accurately.",
+      "tokens": [
+        "Select columns from the main table",
+        "Perform a LEFT JOIN with the related table",
+        "Use GROUP BY to aggregate results",
+        "Count the related rows using COUNT()"
+      ],
+      "correctOrder": [
+        "Select columns from the main table",
+        "Perform a LEFT JOIN with the related table",
+        "Use GROUP BY to aggregate results",
+        "Count the related rows using COUNT()"
+      ],
+      "hint": "Consider the logical flow of setting up a LEFT JOIN and counting related rows.",
+      "help": {
+        "concept": "Performing a LEFT JOIN involves selecting columns, joining tables, and grouping results.",
+        "hint_1": "Start by selecting the necessary columns and joining the tables.",
+        "hint_2": "Ensure you group the results to count accurately."
+      }
+    },
+    {
+      "id": "fill-blank-choice-count-distinct",
+      "kind": "fill_blank_choice",
+      "title": "Using COUNT(DISTINCT)",
+      "prompt": "Fill in the blank to correctly use COUNT(DISTINCT) in a query.",
+      "template": "SELECT COUNT(DISTINCT [blank1]) FROM enrollments;",
+      "choices": [
+        "student_id",
+        "course_id",
+        "term",
+        "id"
+      ],
+      "correctValue": "student_id",
+      "hint": "Consider how COUNT(DISTINCT) is used to avoid counting duplicates.",
+      "help": {
+        "concept": "COUNT(DISTINCT) is used to count unique values in a column, avoiding duplicates.",
+        "hint_1": "Think about the column you want to count uniquely.",
+        "hint_2": "COUNT(DISTINCT column_name) is the correct syntax."
+      }
+    },
+    {
+      "id": "fill-blank-choice-anti-join",
+      "kind": "fill_blank_choice",
+      "title": "Anti-Join Condition",
+      "prompt": "Fill in the blank to complete the anti-join condition.",
+      "template": "SELECT departments.name FROM departments LEFT JOIN courses ON departments.id = courses.department_id WHERE courses.id IS [blank1];",
+      "choices": [
+        "NULL",
+        "NOT NULL",
+        "0",
+        "EMPTY"
+      ],
+      "correctValue": "NULL",
+      "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+      "help": {
+        "concept": "The blank should be filled with the term that makes the statement accurate.",
+        "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+        "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+      }
+    },
+    {
+      "id": "try-counting-related-rows-sketch0",
+      "kind": "code_input",
+      "title": "Try It: Counting Enrollments per Student",
+      "prompt": "Write a query to count the number of enrollments for each student, ensuring no row multiplication occurs.",
+      "starterCode": "-- Write your SQL answer below",
+      "solutionCode": "SELECT students.name, COUNT(enrollments.id) AS enrollment_count\nFROM students\nLEFT JOIN enrollments ON students.id = enrollments.student_id\nGROUP BY students.name;",
+      "datasetId": "school_relations_intro",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "try-counting-related-rows-sketch1",
+      "kind": "code_input",
+      "title": "Try It: Finding Departments Without Courses",
+      "prompt": "Write a query to list all departments that do not have any courses associated with them.",
+      "starterCode": "-- Write your SQL answer below",
+      "solutionCode": "SELECT departments.name\nFROM departments\nLEFT JOIN courses ON departments.id = courses.department_id\nWHERE courses.id IS NULL;",
+      "datasetId": "school_relations_intro",
+      "recipeType": "sql_query",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Department Participation Scorecard",
+    "stepIds": [
+      "try-counting-related-rows-sketch0",
+      "try-counting-related-rows-sketch1"
+    ]
+  }
+}

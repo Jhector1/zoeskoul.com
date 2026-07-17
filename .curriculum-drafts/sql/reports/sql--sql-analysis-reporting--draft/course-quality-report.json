@@ -1,0 +1,304 @@
+{
+  "ok": true,
+  "profileId": "sql",
+  "subjectSlug": "sql--sql-analysis-reporting--draft",
+  "courseSlug": "sql-analysis-reporting",
+  "summary": {
+    "modules": 6,
+    "topicsTotal": 30,
+    "exercises": 214,
+    "exerciseKinds": {
+      "single_choice": 36,
+      "multi_choice": 28,
+      "drag_reorder": 20,
+      "fill_blank_choice": 36,
+      "code_input": 94
+    },
+    "codeInputs": 94,
+    "projects": 94,
+    "capstones": 86,
+    "thinFixedTestCount": 0,
+    "blockers": 0,
+    "errors": 0,
+    "warnings": 30,
+    "infos": 0
+  },
+  "severityCounts": {
+    "blocker": 0,
+    "error": 0,
+    "warning": 30,
+    "info": 0
+  },
+  "issues": [
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-analysis-reporting-module-0-report-foundations/sql-analysis-reporting-section-0-readable-output/aliases-for-readable-headings",
+      "profileId": "sql",
+      "moduleId": "sql-analysis-reporting-module-0-report-foundations",
+      "topicId": "aliases-for-readable-headings",
+      "message": "Topic \"aliases-for-readable-headings\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-analysis-reporting-module-0-report-foundations/sql-analysis-reporting-section-0-readable-output/distinct-values-for-report-categories",
+      "profileId": "sql",
+      "moduleId": "sql-analysis-reporting-module-0-report-foundations",
+      "topicId": "distinct-values-for-report-categories",
+      "message": "Topic \"distinct-values-for-report-categories\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-analysis-reporting-module-0-report-foundations/sql-analysis-reporting-section-0-calculated-output/arithmetic-expressions-in-select",
+      "profileId": "sql",
+      "moduleId": "sql-analysis-reporting-module-0-report-foundations",
+      "topicId": "arithmetic-expressions-in-select",
+      "message": "Topic \"arithmetic-expressions-in-select\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-analysis-reporting-module-0-report-foundations/sql-analysis-reporting-section-0-calculated-output/rounding-report-values",
+      "profileId": "sql",
+      "moduleId": "sql-analysis-reporting-module-0-report-foundations",
+      "topicId": "rounding-report-values",
+      "message": "Topic \"rounding-report-values\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-analysis-reporting-module-0-report-foundations/sql-analysis-reporting-section-0-module-project/module-0-order-value-detail-report",
+      "profileId": "sql",
+      "moduleId": "sql-analysis-reporting-module-0-report-foundations",
+      "topicId": "module-0-order-value-detail-report",
+      "message": "Topic \"module-0-order-value-detail-report\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-analysis-reporting-module-1-null-safe-calculations/sql-analysis-reporting-section-1-null-safety/how-null-affects-calculations",
+      "profileId": "sql",
+      "moduleId": "sql-analysis-reporting-module-1-null-safe-calculations",
+      "topicId": "how-null-affects-calculations",
+      "message": "Topic \"how-null-affects-calculations\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-analysis-reporting-module-1-null-safe-calculations/sql-analysis-reporting-section-1-null-safety/coalesce-for-missing-values",
+      "profileId": "sql",
+      "moduleId": "sql-analysis-reporting-module-1-null-safe-calculations",
+      "topicId": "coalesce-for-missing-values",
+      "message": "Topic \"coalesce-for-missing-values\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-analysis-reporting-module-1-null-safe-calculations/sql-analysis-reporting-section-1-business-calculations/percentage-and-discount-calculations",
+      "profileId": "sql",
+      "moduleId": "sql-analysis-reporting-module-1-null-safe-calculations",
+      "topicId": "percentage-and-discount-calculations",
+      "message": "Topic \"percentage-and-discount-calculations\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-analysis-reporting-module-1-null-safe-calculations/sql-analysis-reporting-section-1-business-calculations/case-for-readable-labels",
+      "profileId": "sql",
+      "moduleId": "sql-analysis-reporting-module-1-null-safe-calculations",
+      "topicId": "case-for-readable-labels",
+      "message": "Topic \"case-for-readable-labels\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-analysis-reporting-module-1-null-safe-calculations/sql-analysis-reporting-section-1-module-project/module-1-discount-audit-report",
+      "profileId": "sql",
+      "moduleId": "sql-analysis-reporting-module-1-null-safe-calculations",
+      "topicId": "module-1-discount-audit-report",
+      "message": "Topic \"module-1-discount-audit-report\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-analysis-reporting-module-2-aggregate-functions/sql-analysis-reporting-section-2-counts-and-totals/counting-rows-and-values",
+      "profileId": "sql",
+      "moduleId": "sql-analysis-reporting-module-2-aggregate-functions",
+      "topicId": "counting-rows-and-values",
+      "message": "Topic \"counting-rows-and-values\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-analysis-reporting-module-2-aggregate-functions/sql-analysis-reporting-section-2-counts-and-totals/summing-business-metrics",
+      "profileId": "sql",
+      "moduleId": "sql-analysis-reporting-module-2-aggregate-functions",
+      "topicId": "summing-business-metrics",
+      "message": "Topic \"summing-business-metrics\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-analysis-reporting-module-2-aggregate-functions/sql-analysis-reporting-section-2-averages-and-extremes/averages-and-null-behavior",
+      "profileId": "sql",
+      "moduleId": "sql-analysis-reporting-module-2-aggregate-functions",
+      "topicId": "averages-and-null-behavior",
+      "message": "Topic \"averages-and-null-behavior\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-analysis-reporting-module-2-aggregate-functions/sql-analysis-reporting-section-2-averages-and-extremes/minimums-and-maximums",
+      "profileId": "sql",
+      "moduleId": "sql-analysis-reporting-module-2-aggregate-functions",
+      "topicId": "minimums-and-maximums",
+      "message": "Topic \"minimums-and-maximums\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-analysis-reporting-module-2-aggregate-functions/sql-analysis-reporting-section-2-module-project/module-2-storewide-kpi-snapshot",
+      "profileId": "sql",
+      "moduleId": "sql-analysis-reporting-module-2-aggregate-functions",
+      "topicId": "module-2-storewide-kpi-snapshot",
+      "message": "Topic \"module-2-storewide-kpi-snapshot\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-analysis-reporting-module-3-grouped-summaries/sql-analysis-reporting-section-3-grouping-basics/group-by-one-column",
+      "profileId": "sql",
+      "moduleId": "sql-analysis-reporting-module-3-grouped-summaries",
+      "topicId": "group-by-one-column",
+      "message": "Topic \"group-by-one-column\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-analysis-reporting-module-3-grouped-summaries/sql-analysis-reporting-section-3-grouping-basics/group-by-multiple-columns",
+      "profileId": "sql",
+      "moduleId": "sql-analysis-reporting-module-3-grouped-summaries",
+      "topicId": "group-by-multiple-columns",
+      "message": "Topic \"group-by-multiple-columns\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-analysis-reporting-module-3-grouped-summaries/sql-analysis-reporting-section-3-ranking-and-quality/sorting-aggregate-results",
+      "profileId": "sql",
+      "moduleId": "sql-analysis-reporting-module-3-grouped-summaries",
+      "topicId": "sorting-aggregate-results",
+      "message": "Topic \"sorting-aggregate-results\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-analysis-reporting-module-3-grouped-summaries/sql-analysis-reporting-section-3-ranking-and-quality/avoiding-grouping-mistakes",
+      "profileId": "sql",
+      "moduleId": "sql-analysis-reporting-module-3-grouped-summaries",
+      "topicId": "avoiding-grouping-mistakes",
+      "message": "Topic \"avoiding-grouping-mistakes\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-analysis-reporting-module-3-grouped-summaries/sql-analysis-reporting-section-3-module-project/module-3-region-category-scorecard",
+      "profileId": "sql",
+      "moduleId": "sql-analysis-reporting-module-3-grouped-summaries",
+      "topicId": "module-3-region-category-scorecard",
+      "message": "Topic \"module-3-region-category-scorecard\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-analysis-reporting-module-4-having-and-conditional-reporting/sql-analysis-reporting-section-4-group-filters/where-before-grouping",
+      "profileId": "sql",
+      "moduleId": "sql-analysis-reporting-module-4-having-and-conditional-reporting",
+      "topicId": "where-before-grouping",
+      "message": "Topic \"where-before-grouping\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-analysis-reporting-module-4-having-and-conditional-reporting/sql-analysis-reporting-section-4-group-filters/having-after-grouping",
+      "profileId": "sql",
+      "moduleId": "sql-analysis-reporting-module-4-having-and-conditional-reporting",
+      "topicId": "having-after-grouping",
+      "message": "Topic \"having-after-grouping\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-analysis-reporting-module-4-having-and-conditional-reporting/sql-analysis-reporting-section-4-conditional-kpis/case-inside-aggregates",
+      "profileId": "sql",
+      "moduleId": "sql-analysis-reporting-module-4-having-and-conditional-reporting",
+      "topicId": "case-inside-aggregates",
+      "message": "Topic \"case-inside-aggregates\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-analysis-reporting-module-4-having-and-conditional-reporting/sql-analysis-reporting-section-4-conditional-kpis/performance-bands-from-aggregates",
+      "profileId": "sql",
+      "moduleId": "sql-analysis-reporting-module-4-having-and-conditional-reporting",
+      "topicId": "performance-bands-from-aggregates",
+      "message": "Topic \"performance-bands-from-aggregates\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-analysis-reporting-module-4-having-and-conditional-reporting/sql-analysis-reporting-section-4-module-project/module-4-performance-exception-report",
+      "profileId": "sql",
+      "moduleId": "sql-analysis-reporting-module-4-having-and-conditional-reporting",
+      "topicId": "module-4-performance-exception-report",
+      "message": "Topic \"module-4-performance-exception-report\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-analysis-reporting-module-5-final-capstone/sql-analysis-reporting-section-5-capstone-planning/capstone-report-requirements",
+      "profileId": "sql",
+      "moduleId": "sql-analysis-reporting-module-5-final-capstone",
+      "topicId": "capstone-report-requirements",
+      "message": "Topic \"capstone-report-requirements\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-analysis-reporting-module-5-final-capstone/sql-analysis-reporting-section-5-capstone-planning/capstone-metric-map",
+      "profileId": "sql",
+      "moduleId": "sql-analysis-reporting-module-5-final-capstone",
+      "topicId": "capstone-metric-map",
+      "message": "Topic \"capstone-metric-map\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-analysis-reporting-module-5-final-capstone/sql-analysis-reporting-section-5-capstone-readiness/auditing-the-sales-kpi-dataset",
+      "profileId": "sql",
+      "moduleId": "sql-analysis-reporting-module-5-final-capstone",
+      "topicId": "auditing-the-sales-kpi-dataset",
+      "message": "Topic \"auditing-the-sales-kpi-dataset\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-analysis-reporting-module-5-final-capstone/sql-analysis-reporting-section-5-capstone-readiness/validating-report-grain-and-order",
+      "profileId": "sql",
+      "moduleId": "sql-analysis-reporting-module-5-final-capstone",
+      "topicId": "validating-report-grain-and-order",
+      "message": "Topic \"validating-report-grain-and-order\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-analysis-reporting-module-5-final-capstone/sql-analysis-reporting-section-5-final-capstone-project/final-executive-sales-performance-report",
+      "profileId": "sql",
+      "moduleId": "sql-analysis-reporting-module-5-final-capstone",
+      "topicId": "final-executive-sales-performance-report",
+      "message": "Topic \"final-executive-sales-performance-report\" has no learning goals on its seed metadata."
+    }
+  ]
+}

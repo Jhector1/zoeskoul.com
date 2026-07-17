@@ -1,0 +1,163 @@
+{
+  "subjectSlug": "sql--sql-data-management--draft",
+  "generatedAt": "2026-07-16T16:54:39.721Z",
+  "validationState": {
+    "unsafeSkipValidation": false,
+    "requested": {
+      "skipQualityGates": false,
+      "skipSemantic": false,
+      "skipGolden": false,
+      "unsafeSkipValidation": false
+    },
+    "structural": {
+      "ran": true,
+      "skipped": false,
+      "required": true
+    },
+    "qualityGates": {
+      "ran": true,
+      "skipped": false,
+      "required": true
+    },
+    "semantic": {
+      "ran": true,
+      "skipped": false,
+      "required": true
+    },
+    "golden": {
+      "ran": true,
+      "skipped": false,
+      "required": true
+    }
+  },
+  "topics": [
+    {
+      "moduleSlug": "sql-data-management-module-0-safe-inserts",
+      "sectionSlug": "sql-data-management-section-0-mutation-workflow",
+      "topicId": "mutation-workflow-preview-change-verify",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "sql-data-management-module-0-safe-inserts",
+      "sectionSlug": "sql-data-management-section-0-mutation-workflow",
+      "topicId": "insert-with-explicit-column-lists",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "sql-data-management-module-0-safe-inserts",
+      "sectionSlug": "sql-data-management-section-0-values-and-defaults",
+      "topicId": "using-null-and-default-values",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "sql-data-management-module-0-safe-inserts",
+      "sectionSlug": "sql-data-management-section-0-values-and-defaults",
+      "topicId": "inserting-multiple-rows",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "sql-data-management-module-0-safe-inserts",
+      "sectionSlug": "sql-data-management-section-0-module-project",
+      "topicId": "module-0-inventory-intake-batch",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "sql-data-management-module-1-controlled-updates-deletes",
+      "sectionSlug": "sql-data-management-section-1-target-before-change",
+      "topicId": "previewing-update-and-delete-targets",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "sql-data-management-module-1-controlled-updates-deletes",
+      "sectionSlug": "sql-data-management-section-1-target-before-change",
+      "topicId": "updating-one-row-precisely",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "sql-data-management-module-1-controlled-updates-deletes",
+      "sectionSlug": "sql-data-management-section-1-controlled-mutations",
+      "topicId": "updating-controlled-row-sets",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "sql-data-management-module-1-controlled-updates-deletes",
+      "sectionSlug": "sql-data-management-section-1-controlled-mutations",
+      "topicId": "deleting-only-confirmed-rows",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "sql-data-management-module-1-controlled-updates-deletes",
+      "sectionSlug": "sql-data-management-section-1-module-project",
+      "topicId": "module-1-inventory-correction-cleanup",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "sql-data-management-module-2-table-creation-constraints",
+      "sectionSlug": "sql-data-management-section-2-table-structure",
+      "topicId": "creating-tables-and-defining-columns",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "sql-data-management-module-2-table-creation-constraints",
+      "sectionSlug": "sql-data-management-section-2-table-structure",
+      "topicId": "primary-key-and-not-null-constraints",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "sql-data-management-module-2-table-creation-constraints",
+      "sectionSlug": "sql-data-management-section-2-data-rules",
+      "topicId": "unique-and-default-constraints",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "sql-data-management-module-2-table-creation-constraints",
+      "sectionSlug": "sql-data-management-section-2-data-rules",
+      "topicId": "foreign-keys-and-references",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "sql-data-management-module-2-table-creation-constraints",
+      "sectionSlug": "sql-data-management-section-2-module-project",
+      "topicId": "module-2-warehouse-stock-ledger-schema",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "sql-data-management-module-3-final-capstone",
+      "sectionSlug": "sql-data-management-section-3-final-capstone",
+      "topicId": "final-inventory-operations-launch",
+      "status": "success",
+      "attempts": 1,
+      "retryCodes": []
+    }
+  ]
+}

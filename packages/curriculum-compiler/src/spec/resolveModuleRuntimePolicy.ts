@@ -6,7 +6,10 @@ import type {
     SqlDialect,
     TopicSeedRuntimeDefaults,
 } from "@zoeskoul/curriculum-contracts";
-import { getCurriculumProfile } from "@zoeskoul/curriculum-profiles";
+import {
+    getCurriculumProfile,
+    getProfileAdapter,
+} from "@zoeskoul/curriculum-profiles";
 
 function clean(value: unknown): string | undefined {
     return typeof value === "string" && value.trim() ? value.trim() : undefined;
@@ -30,10 +33,18 @@ export function resolveModuleRuntimePolicy(args: {
     module: Pick<PlannedModule, "moduleSlug" | "order" | "runtimePolicy">;
 }): CourseSpecRuntimePolicy | undefined {
     const profile = getCurriculumProfile(args.blueprint.profileId);
+    const adapter = getProfileAdapter(args.blueprint.profileId);
     const moduleSpec = args.spec?.modules.find(
         (m) => m.moduleSlug === args.module.moduleSlug,
     );
-    const profileRuntimeDefaults = profile.buildModuleRuntimeDefaults(args.module.order);
+    const profileRuntimeDefaults =
+        adapter.getTopicSeedRuntimeDefaults?.({
+            blueprint: args.blueprint,
+            module: {
+                slug: args.module.moduleSlug,
+                order: args.module.order,
+            },
+        }) ?? profile.buildModuleRuntimeDefaults(args.module.order);
     const profileSqlDefaults =
         profileRuntimeDefaults?.kind === "sql" ? profileRuntimeDefaults : null;
 

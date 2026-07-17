@@ -1,0 +1,6 @@
+{
+  "ok": false,
+  "errors": [
+    "Invalid TopicAuthoringDraft: quizDraft[3] drag_reorder correctOrder must only contain values from tokens"
+  ]
+}

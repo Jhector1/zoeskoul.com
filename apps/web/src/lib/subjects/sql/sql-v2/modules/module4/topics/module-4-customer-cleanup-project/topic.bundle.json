@@ -27,19 +27,7 @@
       "kind": "sketch",
       "titleKey": "topics.sql-v2.sql-v2-4.module-4-customer-cleanup-project.cards.sketch0.title",
       "sketchId": "sketch_project_brief",
-      "height": 420,
-      "tryIt": {
-        "id": "try-module-4-customer-cleanup-project-sketch0",
-        "titleKey": "topics.sql-v2.sql-v2-4.module-4-customer-cleanup-project.tryIt.try_module_4_customer_cleanup_project_sketch0.title",
-        "promptKey": "topics.sql-v2.sql-v2-4.module-4-customer-cleanup-project.tryIt.try_module_4_customer_cleanup_project_sketch0.prompt",
-        "exerciseKey": "try-module-4-customer-cleanup-project-sketch0",
-        "difficulty": "easy",
-        "preferKind": "code_input",
-        "seedPolicy": "global",
-        "required": true,
-        "allowReveal": true,
-        "maxAttempts": null
-      }
+      "height": 420
     },
     {
       "id": "project",
@@ -125,7 +113,11 @@
             "isEntry": true,
             "entry": true
           }
-        ]
+        ],
+        "sqlFileOrder": [
+          "query.sql"
+        ],
+        "ignoreRowOrder": true
       },
       "entryFilePath": "query.sql",
       "starterFiles": [
@@ -167,9 +159,25 @@
             "isEntry": true,
             "entry": true
           }
-        ]
+        ],
+        "openTabs": [
+          "query.sql"
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "query.sql"
+          ]
+        }
       },
-      "showExpectedExample": true
+      "showExpectedExample": true,
+      "sqlFileOrder": [
+        "query.sql"
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "query.sql"
+        ]
+      }
     },
     {
       "id": "mp-2-keep-real-follow-ups",
@@ -196,16 +204,20 @@
         "type": "sql_query",
         "datasetId": "customers_cleanup",
         "resultShape": "table",
-        "solutionCode": "SELECT\n  id,\n  full_name,\n  email,\n  status\nFROM customers\nWHERE email IS NULL\n  AND status IN ('active', 'draft');",
+        "solutionCode": "SELECT\n  id,\n  full_name,\n  email,\n  status\nFROM customers\nWHERE email IS NULL\n  AND status = 'inactive';",
         "solutionFiles": [
           {
             "path": "query.sql",
-            "content": "SELECT\n  id,\n  full_name,\n  email,\n  status\nFROM customers\nWHERE email IS NULL\n  AND status IN ('active', 'draft');",
+            "content": "SELECT\n  id,\n  full_name,\n  email,\n  status\nFROM customers\nWHERE email IS NULL\n  AND status = 'inactive';",
             "language": "sql",
             "isEntry": true,
             "entry": true
           }
-        ]
+        ],
+        "sqlFileOrder": [
+          "query.sql"
+        ],
+        "ignoreRowOrder": true
       },
       "entryFilePath": "query.sql",
       "starterFiles": [
@@ -220,7 +232,7 @@
       "solutionFiles": [
         {
           "path": "query.sql",
-          "content": "SELECT\n  id,\n  full_name,\n  email,\n  status\nFROM customers\nWHERE email IS NULL\n  AND status IN ('active', 'draft');",
+          "content": "SELECT\n  id,\n  full_name,\n  email,\n  status\nFROM customers\nWHERE email IS NULL\n  AND status = 'inactive';",
           "language": "sql",
           "isEntry": true,
           "entry": true
@@ -242,14 +254,30 @@
         "solutionFiles": [
           {
             "path": "query.sql",
-            "content": "SELECT\n  id,\n  full_name,\n  email,\n  status\nFROM customers\nWHERE email IS NULL\n  AND status IN ('active', 'draft');",
+            "content": "SELECT\n  id,\n  full_name,\n  email,\n  status\nFROM customers\nWHERE email IS NULL\n  AND status = 'inactive';",
             "language": "sql",
             "isEntry": true,
             "entry": true
           }
-        ]
+        ],
+        "openTabs": [
+          "query.sql"
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "query.sql"
+          ]
+        }
       },
-      "showExpectedExample": true
+      "showExpectedExample": true,
+      "sqlFileOrder": [
+        "query.sql"
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "query.sql"
+        ]
+      }
     },
     {
       "id": "mp-3-finish-cleanup-report",
@@ -276,16 +304,20 @@
         "type": "sql_query",
         "datasetId": "customers_cleanup",
         "resultShape": "table",
-        "solutionCode": "SELECT\n  id,\n  full_name,\n  email,\n  city,\n  status\nFROM customers\nWHERE email IS NULL\n  AND status IN ('active', 'draft')\n  AND city LIKE 'Chi%'\n  AND is_test = 0;",
+        "solutionCode": "SELECT\n  id,\n  full_name,\n  email,\n  city,\n  status\nFROM customers\nWHERE email IS NULL\n  AND status = 'inactive'\n  AND city LIKE 'H%'\n  AND is_test = 0;",
         "solutionFiles": [
           {
             "path": "query.sql",
-            "content": "SELECT\n  id,\n  full_name,\n  email,\n  city,\n  status\nFROM customers\nWHERE email IS NULL\n  AND status IN ('active', 'draft')\n  AND city LIKE 'Chi%'\n  AND is_test = 0;",
+            "content": "SELECT\n  id,\n  full_name,\n  email,\n  city,\n  status\nFROM customers\nWHERE email IS NULL\n  AND status = 'inactive'\n  AND city LIKE 'H%'\n  AND is_test = 0;",
             "language": "sql",
             "isEntry": true,
             "entry": true
           }
-        ]
+        ],
+        "sqlFileOrder": [
+          "query.sql"
+        ],
+        "ignoreRowOrder": true
       },
       "entryFilePath": "query.sql",
       "starterFiles": [
@@ -300,7 +332,7 @@
       "solutionFiles": [
         {
           "path": "query.sql",
-          "content": "SELECT\n  id,\n  full_name,\n  email,\n  city,\n  status\nFROM customers\nWHERE email IS NULL\n  AND status IN ('active', 'draft')\n  AND city LIKE 'Chi%'\n  AND is_test = 0;",
+          "content": "SELECT\n  id,\n  full_name,\n  email,\n  city,\n  status\nFROM customers\nWHERE email IS NULL\n  AND status = 'inactive'\n  AND city LIKE 'H%'\n  AND is_test = 0;",
           "language": "sql",
           "isEntry": true,
           "entry": true
@@ -322,94 +354,30 @@
         "solutionFiles": [
           {
             "path": "query.sql",
-            "content": "SELECT\n  id,\n  full_name,\n  email,\n  city,\n  status\nFROM customers\nWHERE email IS NULL\n  AND status IN ('active', 'draft')\n  AND city LIKE 'Chi%'\n  AND is_test = 0;",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "showExpectedExample": true
-    },
-    {
-      "id": "try-module-4-customer-cleanup-project-sketch0",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-4.module-4-customer-cleanup-project.quiz.try-module-4-customer-cleanup-project-sketch0",
-      "language": "sql",
-      "starterCode": "@:topics.sql-v2.sql-v2-4.module-4-customer-cleanup-project.quiz.try-module-4-customer-cleanup-project-sketch0.starterCode",
-      "fixedSqlDialect": "sqlite",
-      "runtime": {
-        "kind": "sql",
-        "datasetId": "customers_cleanup",
-        "fixedSqlDialect": "sqlite",
-        "resultShape": "table",
-        "showSchema": true,
-        "showErd": false,
-        "showChen": false,
-        "supportsTerminal": false,
-        "supportsMultiFile": false,
-        "supportsFileSystem": false
-      },
-      "recipe": {
-        "type": "sql_query",
-        "datasetId": "customers_cleanup",
-        "resultShape": "table",
-        "solutionCode": "SELECT\n  id,\n  full_name,\n  email\nFROM customers\nWHERE email IS NULL;",
-        "solutionFiles": [
-          {
-            "path": "query.sql",
-            "content": "SELECT\n  id,\n  full_name,\n  email\nFROM customers\nWHERE email IS NULL;",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "entryFilePath": "query.sql",
-      "starterFiles": [
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-v2.sql-v2-4.module-4-customer-cleanup-project.quiz.try-module-4-customer-cleanup-project-sketch0.starterCode",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "query.sql",
-          "content": "SELECT\n  id,\n  full_name,\n  email\nFROM customers\nWHERE email IS NULL;",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "workspace": {
-        "language": "sql",
-        "entryFilePath": "query.sql",
-        "starterCode": "@:topics.sql-v2.sql-v2-4.module-4-customer-cleanup-project.quiz.try-module-4-customer-cleanup-project-sketch0.starterCode",
-        "starterFiles": [
-          {
-            "path": "query.sql",
-            "content": "@:topics.sql-v2.sql-v2-4.module-4-customer-cleanup-project.quiz.try-module-4-customer-cleanup-project-sketch0.starterCode",
+            "content": "SELECT\n  id,\n  full_name,\n  email,\n  city,\n  status\nFROM customers\nWHERE email IS NULL\n  AND status = 'inactive'\n  AND city LIKE 'H%'\n  AND is_test = 0;",
             "language": "sql",
             "isEntry": true,
             "entry": true
           }
         ],
-        "solutionFiles": [
-          {
-            "path": "query.sql",
-            "content": "SELECT\n  id,\n  full_name,\n  email\nFROM customers\nWHERE email IS NULL;",
-            "language": "sql",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
+        "openTabs": [
+          "query.sql"
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "query.sql"
+          ]
+        }
       },
-      "showExpectedExample": true
+      "showExpectedExample": true,
+      "sqlFileOrder": [
+        "query.sql"
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "query.sql"
+        ]
+      }
     }
   ]
 }

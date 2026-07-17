@@ -1,0 +1,272 @@
+{
+  "topics": {
+    "sql-v2": {
+      "sql-v2-3": {
+        "why_sorting_matters": {
+          "label": "Why Sorting Matters",
+          "summary": "Learn why ORDER BY helps you read, compare, and rank query results more clearly before you start limiting them.",
+          "cards": {
+            "sketch0": {
+              "title": "Why unsorted results can be hard to use"
+            },
+            "sketch1": {
+              "title": "Sorting helps answer real questions"
+            },
+            "sketch2": {
+              "title": "Sorting comes before limiting"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Build a ranked product report"
+            }
+          },
+          "projectSteps": {
+            "ci_sort_prices_low_to_high": {
+              "title": "Sort products by price ascending"
+            },
+            "ci_newest_products_first": {
+              "title": "Show newest products first"
+            },
+            "ci_top_three_expensive": {
+              "title": "Return the top 3 most expensive products"
+            }
+          },
+          "quiz": {
+            "sc_sorting_goal_price": {
+              "title": "Why sort by price?",
+              "prompt": "If you want to quickly find the cheapest products, why is `ORDER BY price ASC` helpful?",
+              "hint": "Think about what ascending order does to smaller numbers.",
+              "help": {
+                "concept": "Ascending order sorts numeric values from smallest to largest, which makes the lowest prices appear first in the results.",
+                "hint_1": "Look for the choice that places cheaper items before more expensive ones.",
+                "hint_2": "The key idea is that `ASC` starts with the smallest value in the sorted column."
+              },
+              "options": {
+                "a": "It hides the price column from the results.",
+                "b": "It puts the lowest prices at the top of the results.",
+                "c": "It removes products with high prices.",
+                "d": "It changes all prices into whole numbers."
+              }
+            },
+            "sc_limit_without_sorting": {
+              "title": "LIMIT without ORDER BY",
+              "prompt": "What is the main problem with using `LIMIT 3` without an `ORDER BY` when you want the three most expensive products?",
+              "hint": "Think about whether the first three rows are automatically the highest-priced rows.",
+              "help": {
+                "concept": "LIMIT only cuts the result set down to a certain number of rows. It does not rank or organize rows unless ORDER BY is used first.",
+                "hint_1": "Ask yourself what decides which rows count as the 'first' three when no sort is given.",
+                "hint_2": "Without sorting by price descending, the database may return three rows that are simply early in the current table order."
+              },
+              "options": {
+                "a": "LIMIT can only be used with text columns.",
+                "b": "The query will always fail in SQLite.",
+                "c": "The first three rows may not be the highest-priced products.",
+                "d": "ORDER BY is only for dates, not numbers."
+              }
+            },
+            "mc_sorting_helps_tasks": {
+              "title": "Tasks made easier by sorting",
+              "prompt": "Which tasks become easier when you sort query results? Choose all that apply.",
+              "hint": "Think about tasks where order helps you compare or rank rows.",
+              "help": {
+                "concept": "Sorting is useful when you need ranked, ordered, or easier-to-scan results, such as cheapest, newest, or lowest-stock items.",
+                "hint_1": "Look for tasks that depend on seeing rows in a meaningful order rather than just showing all rows.",
+                "hint_2": "Comparing prices, spotting newest dates, and finding low stock all benefit from sorted output."
+              },
+              "options": {
+                "a": "Finding the cheapest products first",
+                "b": "Seeing the newest products first",
+                "c": "Making SQL automatically create new rows",
+                "d": "Spotting products with the lowest stock"
+              }
+            },
+            "mc_order_by_true_statements": {
+              "title": "True statements about ORDER BY",
+              "prompt": "Which statements about `ORDER BY` are true? Choose all that apply.",
+              "hint": "Think about what column ORDER BY uses and what ASC and DESC mean.",
+              "help": {
+                "concept": "ORDER BY sorts rows based on one or more columns. ASC means low-to-high or A-to-Z, while DESC means high-to-low or Z-to-A.",
+                "hint_1": "Pick the statements that describe sorting direction correctly.",
+                "hint_2": "One true idea is that ORDER BY changes row order; another is that DESC puts larger values before smaller ones."
+              },
+              "options": {
+                "a": "`ORDER BY` changes the order of rows in the results.",
+                "b": "`DESC` can be used to show higher prices before lower prices.",
+                "c": "`ORDER BY` deletes rows that do not match the sort.",
+                "d": "`ASC` can sort prices from low to high."
+              }
+            },
+            "dr_query_clause_order_basic": {
+              "title": "Build a sorted query",
+              "prompt": "Put these SQL parts in the correct order to make a valid query that sorts products by price.",
+              "hint": "Start with SELECT, then name the table, then add sorting.",
+              "help": {
+                "concept": "A basic SQL query follows clause order: SELECT columns, FROM table, then ORDER BY sort_column and direction.",
+                "hint_1": "The table name comes after FROM, not after ORDER BY.",
+                "hint_2": "Sorting is the last part here, so place the ORDER BY clause after the FROM clause."
+              },
+              "tokens": {
+                "t1": "SELECT name, price",
+                "t2": "FROM products",
+                "t3": "ORDER BY price ASC"
+              }
+            },
+            "dr_ranked_query_with_limit": {
+              "title": "Sort before limit",
+              "prompt": "Arrange these parts to create a query that returns the three most expensive products.",
+              "hint": "The ranking step must happen before the limiting step.",
+              "help": {
+                "concept": "When you want top or bottom results, ORDER BY must come before LIMIT so the database limits the already-sorted rows.",
+                "hint_1": "Use DESC for most expensive, then apply LIMIT after that sort.",
+                "hint_2": "The final clause should be the one that cuts the result down to three rows."
+              },
+              "tokens": {
+                "t1": "SELECT name, price",
+                "t2": "FROM products",
+                "t3": "ORDER BY price DESC",
+                "t4": "LIMIT 3"
+              }
+            },
+            "fb_desc_for_highest_first": {
+              "title": "Choose the right sort direction",
+              "prompt": "Complete the query so the highest prices appear first.",
+              "hint": "Use the direction that puts larger numbers before smaller ones.",
+              "help": {
+                "concept": "the missing term sorts values from highest to lowest, which is the correct direction when you want the largest prices first.",
+                "hint_1": "ASC starts with smaller values, so that is not the right direction here.",
+                "hint_2": "You need the keyword that reverses the low-to-high order."
+              },
+              "template": "SELECT name, price FROM products ORDER BY price [blank1];",
+              "choices": [
+                "ASC",
+                "DESC",
+                "FROM",
+                "WHERE"
+              ]
+            },
+            "fb_sort_column_stock": {
+              "title": "Pick the sort column",
+              "prompt": "Complete the query so products are sorted by stock from highest to lowest.",
+              "hint": "Choose the column that stores how many items are available.",
+              "help": {
+                "concept": "The the missing term column holds inventory counts, so it is the correct column to sort when comparing how many units each product has.",
+                "hint_1": "Do not choose a text column like name or category if the goal is to rank inventory amounts.",
+                "hint_2": "Look for the integer column that represents quantity on hand."
+              },
+              "template": "SELECT name, stock FROM products ORDER BY [blank1] DESC;",
+              "choices": [
+                "name",
+                "category",
+                "stock",
+                "created_at"
+              ]
+            },
+            "ci_sort_prices_low_to_high": {
+              "title": "Sort products by price ascending",
+              "prompt": "Write a query that shows the `name` and `price` columns from `products`, sorted by `price` from lowest to highest. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "-- Show the name and price columns from products, sorted by price from lowest to highest.\nSELECT name, price\nFROM products\n;"
+            },
+            "ci_newest_products_first": {
+              "title": "Show newest products first",
+              "prompt": "Write a query that shows `name` and `created_at` from `products`, sorted so the newest products appear first. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "-- Show name and created_at from products, sorted so the newest products appear first.\nSELECT name, created_at\nFROM products\n;"
+            },
+            "ci_top_three_expensive": {
+              "title": "Return the top 3 most expensive products",
+              "prompt": "Write a query that shows `name` and `price` from `products`, sorted from highest price to lowest price, and returns only the first 3 rows. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "-- TODO: sort from highest price to lowest\n-- TODO: return only 3 rows\nSELECT name, price\nFROM products\n;"
+            },
+            "try-why_sorting_matters-sketch0": {
+              "title": "Put the Highest Stock First",
+              "prompt": "Return `id`, `name`, and `stock`, sorted from highest stock to lowest.",
+              "hint": "Sort stock in descending order.",
+              "help": {
+                "concept": "Return `id`, `name`, and `stock`, sorted from highest stock to lowest.",
+                "hint_1": "Sort stock in descending order.",
+                "hint_2": "Run the query and compare the returned columns and rows with the expected result."
+              },
+              "starterCode": "SELECT id, name, stock\nFROM products\nORDER BY ;"
+            },
+            "try-why_sorting_matters-sketch1": {
+              "title": "Show newest products first",
+              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that shows `name` and `created_at` from `products`, sorted so the newest products appear first. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "-- Show name and created_at from products, sorted so the newest products appear first.\nSELECT name, created_at\nFROM products\n;"
+            },
+            "try-why_sorting_matters-sketch2": {
+              "title": "Return the top 3 most expensive products",
+              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that shows `name` and `price` from `products`, sorted from highest price to lowest price, and returns only the first 3 rows. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "-- TODO: sort from highest price to lowest\n-- TODO: return only 3 rows\nSELECT name, price\nFROM products\n;"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_why_sorting_matters_sketch0": {
+              "title": "Put the Highest Stock First",
+              "prompt": "Return `id`, `name`, and `stock`, sorted from highest stock to lowest."
+            },
+            "try_why_sorting_matters_sketch1": {
+              "title": "Show newest products first",
+              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that shows `name` and `created_at` from `products`, sorted so the newest products appear first. Write the query in the SQL editor, click Run query, and check the results table."
+            },
+            "try_why_sorting_matters_sketch2": {
+              "title": "Return the top 3 most expensive products",
+              "prompt": "Scenario: The sales team needs a sorted result that answers a practical leaderboard question. Write a query that shows `name` and `price` from `products`, sorted from highest price to lowest price, and returns only the first 3 rows. Write the query in the SQL editor, click Run query, and check the results table."
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql-v2": {
+      "sql-v2-3": {
+        "why_sorting_matters": {
+          "sorting_makes_results_useful": {
+            "title": "Why unsorted results can be hard to use",
+            "bodyMarkdown": "When a table has several rows, the default row order is often **not the order you care about**. If you want the cheapest products, newest products, or items with the most stock, you need to sort the results.\n\nIn SQL, sorting is done with `ORDER BY`.\n\nExample:\n\n```sql\nSELECT name, price\nFROM products\nORDER BY price ASC;\n```\n\nThis query asks for product names and prices, then sorts them from the **lowest price** to the **highest price**.\n\nWith the `products` table, the beginning of the result would look like this:\n- Notebook — 6.75\n- Sketchbook — 12.99\n- Fountain Pen — 18.00\n\nThat is much easier to scan than an unsorted list when your goal is to compare prices.\n\nStep by step:\n- `SELECT name, price` chooses the columns to show.\n- `FROM products` chooses the table.\n- `ORDER BY price ASC` sorts by the `price` column in ascending order."
+          },
+          "sorting_supports_real_questions": {
+            "title": "Sorting helps answer real questions",
+            "bodyMarkdown": "Sorting is useful because people often ask ranked questions such as:\n- Which product is most expensive?\n- Which items were added most recently?\n- Which products have the lowest stock?\n\nHere is another example:\n\n```sql\nSELECT name, stock\nFROM products\nORDER BY stock DESC;\n```\n\nThis sorts products from the **highest stock** to the **lowest stock**.\n\nUsing the sample data, the first rows would include:\n- Notebook — 50\n- Sketchbook — 25\n- Fountain Pen — 15\n\nThat makes it easy to spot which items are well stocked.\n\nYou can also sort dates:\n\n```sql\nSELECT name, created_at\nFROM products\nORDER BY created_at DESC;\n```\n\nBecause the dates are stored in `YYYY-MM-DD` format, sorting descending shows the **newest products first**."
+          },
+          "sorting_prepares_for_limiting": {
+            "title": "Sorting comes before limiting",
+            "bodyMarkdown": "Sorting matters even more when you only want a few rows. If you use `LIMIT`, the database returns only part of the result set. Without sorting first, those rows may not be the ones you actually want.\n\nExample:\n\n```sql\nSELECT name, price\nFROM products\nORDER BY price DESC\nLIMIT 3;\n```\n\nThis means:\n- show `name` and `price`\n- from the `products` table\n- sort by `price` from highest to lowest\n- return only the first 3 rows after sorting\n\nWith the sample data, this gives the three most expensive products:\n- Office Chair — 129.00\n- Desk Lamp — 39.99\n- Acrylic Paint Set — 24.50\n\nIf you removed `ORDER BY`, `LIMIT 3` would just return the first three rows in the current table order, which is usually not the same as the top three by price."
+          }
+        }
+      }
+    }
+  }
+}

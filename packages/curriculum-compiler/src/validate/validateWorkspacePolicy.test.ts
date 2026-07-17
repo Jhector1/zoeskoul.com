@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import type { CourseBlueprint } from "@zoeskoul/curriculum-contracts";
 import { repairPythonDraft } from "../../../curriculum-profiles/src/python/repair/repairPythonDraft.js";
 import { resolveWorkspacePolicy } from "../policy/resolveWorkspacePolicy.js";
+import { workspaceToRuntimeDefaults } from "../policy/workspaceToRuntimeDefaults.js";
 import { validateWorkspacePolicy } from "./validateWorkspacePolicy.js";
 
 function makeBlueprint(overrides: Partial<CourseBlueprint>): CourseBlueprint {
@@ -143,6 +144,39 @@ describe("validateWorkspacePolicy", () => {
         expect(policy.workspace.capabilities.multiFileProjects.enabled).toBe(true);
         expect(policy.workspace.capabilities.terminal.enabled).toBe(false);
         expect(policy.workspace.capabilities.packageInstall.enabled).toBe(false);
+    });
+
+    it("resolves ordered SQL files for Data Management Modules 2-3", () => {
+        const policy = resolveWorkspacePolicy({
+            blueprint: makeBlueprint({
+                subjectSlug: "sql",
+                courseSlug: "sql-data-management",
+                workspaceProfileId: "browser-sql-runner",
+                modulePolicies: [
+                    {
+                        moduleNumber: 2,
+                        workspaceProfileId: "browser-sql-files-runner",
+                    },
+                ],
+            }),
+            moduleNumber: 2,
+        });
+        const runtime = workspaceToRuntimeDefaults({
+            policy,
+            profileId: "sql",
+        });
+
+        expect(policy.workspace.id).toBe("browser-sql-files-runner");
+        expect(policy.workspace.ui.filesPanelLabel).toBe("files panel");
+        expect(policy.workspace.capabilities.filesystem.enabled).toBe(true);
+        expect(policy.workspace.capabilities.multiFileProjects.enabled).toBe(true);
+        expect(policy.workspace.capabilities.terminal.enabled).toBe(false);
+        expect(runtime).toMatchObject({
+            kind: "sql",
+            supportsMultiFile: true,
+            supportsFileSystem: true,
+            supportsTerminal: false,
+        });
     });
 
     it("allows file and module language when the Python workspace supports files", () => {

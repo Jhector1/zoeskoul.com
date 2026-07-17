@@ -1,0 +1,115 @@
+{
+  "subjectSlug": "sql",
+  "courseSlug": "multi-table-sql",
+  "catalogSlug": "sql",
+  "trackSlug": "sql",
+  "profileId": "sql",
+  "workspaceProfileId": "browser-sql-runner",
+  "workspacePolicyId": "sql-browser-workspace",
+  "title": "Multi-Table SQL & Joins",
+  "subtitle": "Follow relationship paths, preserve unmatched rows, and build accurate reports across related tables.",
+  "level": "beginner",
+  "moduleCount": 4,
+  "description": "A focused SQLite course with three standard modules and one final capstone. Learners move directly from single-table reporting into INNER JOIN, multi-table relationship paths, LEFT JOIN, anti-joins, and join-aware counting without repeating earlier SELECT, filtering, alias, aggregate, or GROUP BY lessons.",
+  "sourceLocale": "en",
+  "targetLocales": [],
+  "accessPolicy": "paid",
+  "moduleAccessOverrideDefault": null,
+  "audience": [
+    "Learners who completed SQL Foundations and SQL Analysis & Reporting.",
+    "Beginners who can already filter, sort, calculate, aggregate, group, and label single-table results.",
+    "Learners preparing to work with normalized relational databases and multi-table reports."
+  ],
+  "prerequisites": [
+    "Write reliable SELECT, WHERE, ORDER BY, and LIMIT queries.",
+    "Use aliases, NULL checks, CASE, aggregate functions, GROUP BY, and HAVING.",
+    "State what one result row represents before validating a report.",
+    "Read table and column names in the schema browser."
+  ],
+  "goals": [
+    "Read primary-key and foreign-key relationships in a relational schema.",
+    "Write reliable INNER JOIN and LEFT JOIN queries with explicit ON conditions.",
+    "Follow relationship paths through bridge tables across three or four tables.",
+    "Preserve unmatched rows and find missing relationships intentionally.",
+    "Count related rows and unique entities without duplicate inflation.",
+    "Complete three cumulative module projects and one integrated multi-table capstone."
+  ],
+  "teachingStyle": {
+    "tone": "practical, relationship-first, visual, cumulative",
+    "quizWeight": 0.2,
+    "projectWeight": 0.35,
+    "codeInputWeight": 0.45
+  },
+  "constraints": {
+    "moduleCount": 4,
+    "topicsPerStandardModule": 5,
+    "finalModuleTopics": 1
+  },
+  "seedModules": [
+    "multi-table-sql-module-0-join-foundations",
+    "multi-table-sql-module-1-relationship-paths",
+    "multi-table-sql-module-2-outer-joins-and-accurate-counts",
+    "multi-table-sql-module-3-final-capstone"
+  ],
+  "datasetIds": [
+    "school_relations_intro"
+  ],
+  "versioning": {
+    "family": "multi-table-sql",
+    "version": 1,
+    "status": "draft",
+    "defaultForNewEnrollments": false,
+    "supersedes": null,
+    "supersededBy": null
+  },
+  "courseGenerationPolicy": {
+    "studentActionStyle": "browser_sql_workspace",
+    "forbidUnavailableWorkspaceActions": true,
+    "avoidTerms": [
+      "terminal",
+      "command line",
+      "SQL file",
+      "run the file",
+      "relearn SELECT",
+      "relearn WHERE",
+      "relearn GROUP BY"
+    ],
+    "preferredTerms": {
+      "editor": "SQL editor",
+      "run": "click Run query",
+      "output": "results table",
+      "relationship path": "the key path connecting the requested tables",
+      "result grain": "what one result row represents"
+    },
+    "notes": [
+      "This course has four modules total: three standard modules plus one final capstone. Do not expand it to five modules by splitting aliases, ON, or individual join variants into repetitive lessons.",
+      "Do not create standalone lessons that re-teach SELECT, WHERE, ORDER BY, aliases, aggregate functions, GROUP BY, HAVING, NULL, CASE, or deterministic sorting. Use those only as previously learned tools inside a new join problem.",
+      "Every technical lesson has exactly two distinct sketches and two aligned code_input Try It exercises.",
+      "Worked examples, Try It tasks, module projects, and capstone steps must use different relationship questions and output goals.",
+      "Each standard module has exactly one progressive module project. Only the final topic is rendered as a capstone.",
+      "A progressive SQL step contains one cumulative replacement SELECT statement. The next starter equals the previous full solution.",
+      "Every join must follow a documented school_relations_intro relationship. Never join columns merely because both are named id.",
+      "Teach report grain and row multiplication only in the context of joins; do not repeat the previous course general GROUP BY lessons.",
+      "Do not introduce subqueries, CTEs, window functions, self joins, CROSS JOIN, RIGHT JOIN, FULL JOIN, or mutation SQL.",
+      "Use ERD and schema visuals for relationship decisions. All graded SQL must execute against school_relations_intro."
+    ]
+  },
+  "practiceDefaults": {
+    "tryIt": true,
+    "requiresTryIt": true,
+    "tryItPlacement": "all_sketches",
+    "runtimeMode": "sql_workspace",
+    "expectedPracticeKinds": [
+      "code_input"
+    ]
+  },
+  "runtimePolicy": {
+    "datasetStrategy": "manual",
+    "datasetId": "school_relations_intro",
+    "sqlDialect": "sqlite",
+    "resultShape": "table",
+    "showSchema": true,
+    "showErd": true,
+    "showChen": true
+  }
+}

@@ -1,0 +1,188 @@
+{
+  "topics": {
+    "sql-analysis-reporting": {
+      "sql-analysis-reporting-module-1-null-safe-calculations": {
+        "module-1-discount-audit-report": {
+          "label": "Module 1 Project: Discount Audit Report",
+          "summary": "Build a row-level audit that preserves raw discount data, applies an explicit fallback for calculations, and identifies records requiring review.",
+          "cards": {
+            "sketch0": {
+              "title": "Project Brief"
+            },
+            "project": {
+              "title": "Build the Report"
+            }
+          },
+          "projectSteps": {
+            "project_step_1": {
+              "title": "Create the Audit Base"
+            },
+            "project_step_2": {
+              "title": "Add the Applied Discount Rule"
+            },
+            "project_step_3": {
+              "title": "Calculate Gross Sales"
+            },
+            "project_step_4": {
+              "title": "Calculate Discount Amount"
+            },
+            "project_step_5": {
+              "title": "Calculate Net Sales"
+            },
+            "project_step_6": {
+              "title": "Add Review Labels and Priority"
+            }
+          },
+          "moduleProject": {
+            "steps": {
+              "project_step_1": {
+                "title": "Create the Audit Base",
+                "prompt": "Start with `order_id`, `product_name`, `order_status`, and the raw `discount_pct` for every order.",
+                "hint": "Do not replace or filter missing discounts yet; the audit must expose them.",
+                "help": {
+                  "concept": "An audit begins with the source fields needed to explain later calculations and labels.",
+                  "hint_1": "Select the four requested fields in a stable order.",
+                  "hint_2": "Keep every order in the report."
+                },
+                "starterCode": "-- Build the first working query below.",
+                "solutionCode": "SELECT\n    order_id,\n    product_name,\n    order_status,\n    discount_pct\nFROM sales_reporting;",
+                "starterFiles": {
+                  "main_sql": {
+                    "content": "-- Build the first working query below."
+                  }
+                },
+                "solutionFiles": {
+                  "main_sql": {
+                    "content": "SELECT\n    order_id,\n    product_name,\n    order_status,\n    discount_pct\nFROM sales_reporting;"
+                  }
+                }
+              },
+              "project_step_2": {
+                "title": "Add the Applied Discount Rule",
+                "prompt": "Keep the raw fields and add `COALESCE(discount_pct, 0)` as `applied_discount_pct`.",
+                "hint": "Add a separate calculated field; do not overwrite the raw percentage.",
+                "help": {
+                  "concept": "The report should show both source truth and the fallback used by financial calculations.",
+                  "hint_1": "Preserve the four original columns.",
+                  "hint_2": "Append COALESCE with a descriptive alias."
+                },
+                "starterCode": "SELECT\n    order_id,\n    product_name,\n    order_status,\n    discount_pct\nFROM sales_reporting;",
+                "solutionCode": "SELECT\n    order_id,\n    product_name,\n    order_status,\n    discount_pct,\n    COALESCE(discount_pct, 0) AS applied_discount_pct\nFROM sales_reporting;",
+                "starterFiles": {
+                  "main_sql": {
+                    "content": "SELECT\n    order_id,\n    product_name,\n    order_status,\n    discount_pct\nFROM sales_reporting;"
+                  }
+                },
+                "solutionFiles": {
+                  "main_sql": {
+                    "content": "SELECT\n    order_id,\n    product_name,\n    order_status,\n    discount_pct,\n    COALESCE(discount_pct, 0) AS applied_discount_pct\nFROM sales_reporting;"
+                  }
+                }
+              },
+              "project_step_3": {
+                "title": "Calculate Gross Sales",
+                "prompt": "Keep all existing audit fields and add gross sales rounded to two decimals as `gross_sales`.",
+                "hint": "Append the row-level monetary calculation without removing the audit columns.",
+                "help": {
+                  "concept": "Gross sales is the common base used by both discount amount and net sales.",
+                  "hint_1": "Multiply quantity and unit price.",
+                  "hint_2": "Round only the displayed gross result."
+                },
+                "starterCode": "SELECT\n    order_id,\n    product_name,\n    order_status,\n    discount_pct,\n    COALESCE(discount_pct, 0) AS applied_discount_pct\nFROM sales_reporting;",
+                "solutionCode": "SELECT\n    order_id,\n    product_name,\n    order_status,\n    discount_pct,\n    COALESCE(discount_pct, 0) AS applied_discount_pct,\n    ROUND(quantity * unit_price, 2) AS gross_sales\nFROM sales_reporting;",
+                "starterFiles": {
+                  "main_sql": {
+                    "content": "SELECT\n    order_id,\n    product_name,\n    order_status,\n    discount_pct,\n    COALESCE(discount_pct, 0) AS applied_discount_pct\nFROM sales_reporting;"
+                  }
+                },
+                "solutionFiles": {
+                  "main_sql": {
+                    "content": "SELECT\n    order_id,\n    product_name,\n    order_status,\n    discount_pct,\n    COALESCE(discount_pct, 0) AS applied_discount_pct,\n    ROUND(quantity * unit_price, 2) AS gross_sales\nFROM sales_reporting;"
+                  }
+                }
+              },
+              "project_step_4": {
+                "title": "Calculate Discount Amount",
+                "prompt": "Preserve the report and add the null-safe discount dollars rounded to two decimals as `discount_amount`.",
+                "hint": "Apply the fallback percentage to the same gross-sales expression.",
+                "help": {
+                  "concept": "Discount amount converts the applied percentage into a monetary reduction.",
+                  "hint_1": "Keep gross sales in the output.",
+                  "hint_2": "Divide the percentage by 100 before rounding the final amount."
+                },
+                "starterCode": "SELECT\n    order_id,\n    product_name,\n    order_status,\n    discount_pct,\n    COALESCE(discount_pct, 0) AS applied_discount_pct,\n    ROUND(quantity * unit_price, 2) AS gross_sales\nFROM sales_reporting;",
+                "solutionCode": "SELECT\n    order_id,\n    product_name,\n    order_status,\n    discount_pct,\n    COALESCE(discount_pct, 0) AS applied_discount_pct,\n    ROUND(quantity * unit_price, 2) AS gross_sales,\n    ROUND(\n        quantity * unit_price * COALESCE(discount_pct, 0) / 100,\n        2\n    ) AS discount_amount\nFROM sales_reporting;",
+                "starterFiles": {
+                  "main_sql": {
+                    "content": "SELECT\n    order_id,\n    product_name,\n    order_status,\n    discount_pct,\n    COALESCE(discount_pct, 0) AS applied_discount_pct,\n    ROUND(quantity * unit_price, 2) AS gross_sales\nFROM sales_reporting;"
+                  }
+                },
+                "solutionFiles": {
+                  "main_sql": {
+                    "content": "SELECT\n    order_id,\n    product_name,\n    order_status,\n    discount_pct,\n    COALESCE(discount_pct, 0) AS applied_discount_pct,\n    ROUND(quantity * unit_price, 2) AS gross_sales,\n    ROUND(\n        quantity * unit_price * COALESCE(discount_pct, 0) / 100,\n        2\n    ) AS discount_amount\nFROM sales_reporting;"
+                  }
+                }
+              },
+              "project_step_5": {
+                "title": "Calculate Net Sales",
+                "prompt": "Keep gross sales and discount amount, then add null-safe net sales rounded to two decimals as `net_sales`.",
+                "hint": "Subtract the same discount formula from gross sales and preserve every prior column.",
+                "help": {
+                  "concept": "A cumulative financial audit should let a reviewer reconcile gross, discount, and net values in one row.",
+                  "hint_1": "Use the same fallback rule as the discount amount.",
+                  "hint_2": "Round the completed net expression to two decimals."
+                },
+                "starterCode": "SELECT\n    order_id,\n    product_name,\n    order_status,\n    discount_pct,\n    COALESCE(discount_pct, 0) AS applied_discount_pct,\n    ROUND(quantity * unit_price, 2) AS gross_sales,\n    ROUND(\n        quantity * unit_price * COALESCE(discount_pct, 0) / 100,\n        2\n    ) AS discount_amount\nFROM sales_reporting;",
+                "solutionCode": "SELECT\n    order_id,\n    product_name,\n    order_status,\n    discount_pct,\n    COALESCE(discount_pct, 0) AS applied_discount_pct,\n    ROUND(quantity * unit_price, 2) AS gross_sales,\n    ROUND(\n        quantity * unit_price * COALESCE(discount_pct, 0) / 100,\n        2\n    ) AS discount_amount,\n    ROUND(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100,\n        2\n    ) AS net_sales\nFROM sales_reporting;",
+                "starterFiles": {
+                  "main_sql": {
+                    "content": "SELECT\n    order_id,\n    product_name,\n    order_status,\n    discount_pct,\n    COALESCE(discount_pct, 0) AS applied_discount_pct,\n    ROUND(quantity * unit_price, 2) AS gross_sales,\n    ROUND(\n        quantity * unit_price * COALESCE(discount_pct, 0) / 100,\n        2\n    ) AS discount_amount\nFROM sales_reporting;"
+                  }
+                },
+                "solutionFiles": {
+                  "main_sql": {
+                    "content": "SELECT\n    order_id,\n    product_name,\n    order_status,\n    discount_pct,\n    COALESCE(discount_pct, 0) AS applied_discount_pct,\n    ROUND(quantity * unit_price, 2) AS gross_sales,\n    ROUND(\n        quantity * unit_price * COALESCE(discount_pct, 0) / 100,\n        2\n    ) AS discount_amount,\n    ROUND(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100,\n        2\n    ) AS net_sales\nFROM sales_reporting;"
+                  }
+                }
+              },
+              "project_step_6": {
+                "title": "Add Review Labels and Priority",
+                "prompt": "Finish the audit with `discount_review`: `Missing discount` for NULL, `Review high discount` for 15 percent or more, otherwise `OK`. Sort missing discounts first, then high discounts, then remaining orders; use `order_id` as the final tie-breaker.",
+                "hint": "Use the same condition order in the label and priority sort.",
+                "help": {
+                  "concept": "The final audit keeps every calculation and makes the most important review cases appear first.",
+                  "hint_1": "Handle NULL before the numeric threshold.",
+                  "hint_2": "Use a numeric CASE in ORDER BY for explicit priority."
+                },
+                "starterCode": "SELECT\n    order_id,\n    product_name,\n    order_status,\n    discount_pct,\n    COALESCE(discount_pct, 0) AS applied_discount_pct,\n    ROUND(quantity * unit_price, 2) AS gross_sales,\n    ROUND(\n        quantity * unit_price * COALESCE(discount_pct, 0) / 100,\n        2\n    ) AS discount_amount,\n    ROUND(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100,\n        2\n    ) AS net_sales\nFROM sales_reporting;",
+                "solutionCode": "SELECT\n    order_id,\n    product_name,\n    order_status,\n    discount_pct,\n    COALESCE(discount_pct, 0) AS applied_discount_pct,\n    ROUND(quantity * unit_price, 2) AS gross_sales,\n    ROUND(\n        quantity * unit_price * COALESCE(discount_pct, 0) / 100,\n        2\n    ) AS discount_amount,\n    ROUND(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100,\n        2\n    ) AS net_sales,\n    CASE\n        WHEN discount_pct IS NULL THEN 'Missing discount'\n        WHEN discount_pct >= 15 THEN 'Review high discount'\n        ELSE 'OK'\n    END AS discount_review\nFROM sales_reporting\nORDER BY\n    CASE\n        WHEN discount_pct IS NULL THEN 1\n        WHEN discount_pct >= 15 THEN 2\n        ELSE 3\n    END,\n    order_id ASC;",
+                "starterFiles": {
+                  "main_sql": {
+                    "content": "SELECT\n    order_id,\n    product_name,\n    order_status,\n    discount_pct,\n    COALESCE(discount_pct, 0) AS applied_discount_pct,\n    ROUND(quantity * unit_price, 2) AS gross_sales,\n    ROUND(\n        quantity * unit_price * COALESCE(discount_pct, 0) / 100,\n        2\n    ) AS discount_amount,\n    ROUND(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100,\n        2\n    ) AS net_sales\nFROM sales_reporting;"
+                  }
+                },
+                "solutionFiles": {
+                  "main_sql": {
+                    "content": "SELECT\n    order_id,\n    product_name,\n    order_status,\n    discount_pct,\n    COALESCE(discount_pct, 0) AS applied_discount_pct,\n    ROUND(quantity * unit_price, 2) AS gross_sales,\n    ROUND(\n        quantity * unit_price * COALESCE(discount_pct, 0) / 100,\n        2\n    ) AS discount_amount,\n    ROUND(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100,\n        2\n    ) AS net_sales,\n    CASE\n        WHEN discount_pct IS NULL THEN 'Missing discount'\n        WHEN discount_pct >= 15 THEN 'Review high discount'\n        ELSE 'OK'\n    END AS discount_review\nFROM sales_reporting\nORDER BY\n    CASE\n        WHEN discount_pct IS NULL THEN 1\n        WHEN discount_pct >= 15 THEN 2\n        ELSE 3\n    END,\n    order_id ASC;"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql-analysis-reporting": {
+      "sql-analysis-reporting-module-1-null-safe-calculations": {
+        "module-1-discount-audit-report": {
+          "sketch-0": {
+            "title": "Project Brief",
+            "bodyMarkdown": "## Your assignment\n\nFinance wants to use net sales in a management report, but first it needs to see which orders have missing or unusually large discounts. Your job is to build an audit that preserves the raw data while also showing the values used in financial calculations.\n\nBuild **one cumulative query** through these steps:\n\n1. Start with `order_id`, `product_name`, `order_status`, and the raw `discount_pct`.\n2. Add `COALESCE(discount_pct, 0)` as `applied_discount_pct`.\n3. Add gross sales rounded to two decimals as `gross_sales`.\n4. Add the null-safe discount dollars as `discount_amount`.\n5. Add null-safe `net_sales`.\n6. Add `discount_review`: `Missing discount` for NULL, `Review high discount` for 15 percent or more, otherwise `OK`. Sort missing discounts first, high discounts second, and use `order_id` as the final tie-breaker.\n\nRun the query after every change. Do not remove earlier audit fields when adding a new calculation.\n\n**Definition of done:** finance can distinguish raw missing data from applied fallback values and can review the highest-priority orders first."
+          }
+        }
+      }
+    }
+  }
+}
