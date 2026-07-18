@@ -26,8 +26,8 @@
         "certificateEnabledByDefault": true
       },
       "versioning": {
-        "family": "sql",
-        "version": 2,
+        "family": "sql-analysis-reporting",
+        "version": 1,
         "status": "active",
         "defaultForNewEnrollments": true,
         "supersedes": null,
