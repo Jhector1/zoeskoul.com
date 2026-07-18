@@ -3,20 +3,20 @@
     "git-foundations": {
       "git-foundations-module-1-start-tracking": {
         "configure-and-initialize-a-repository": {
-          "label": "Configure and Initialize a Repository",
-          "summary": "Set a repository-local author identity and turn an existing project folder into a repository on main.",
+          "label": "Initialize Your First Repository",
+          "summary": "Turn an ordinary project folder into a Git repository on main, inspect the metadata Git created, and set a repository-only author identity.",
           "cards": {
             "sketch0": {
-              "title": "Configure Local Git Identity"
+              "title": "Create the Repository"
             },
             "sketch1": {
-              "title": "Initialize a Git Repository"
+              "title": "What Git Added"
             },
             "sketch2": {
-              "title": "Explore the .git Directory"
+              "title": "Set a Local Identity"
             },
             "sketch3": {
-              "title": "Verify Repository Status"
+              "title": "Ask Git for the First Status"
             },
             "quiz": {
               "title": "Practice"
@@ -25,103 +25,101 @@
           "tryIt": {
             "allowReveal": true,
             "try_configure_and_initialize_a_repository_sketch0": {
-              "title": "Try it yourself: Configure Local Identity",
-              "prompt": "Right after the sketch \"Configure Local Git Identity\", practice that exact idea with this task. Initialize a new Git repository in the `project_alpha` directory with `main` as its initial branch.\n\nFirst type `bash .zoeskoul/setup.sh` and press Enter to create the empty directory. Then enter the directory, initialize Git with the requested branch name, and press Enter after each command. Produce the result for configure Local Identity so it reinforces Configure and Initialize a Repository.",
-              "hint": "Read the Git task \"Configure Local Identity\" and identify the repository state you need to create.",
+              "title": "Initialize an Ordinary Folder",
+              "prompt": "The terminal opens inside the prepared `trail-journal/` project folder.\n\nThe `trail-journal/` folder already contains a README but has no history. Initialize Git with `main` as the first branch, and print the current branch.\n\nType each command in the terminal and press Enter.",
+              "hint": "Read the repository state first, then use the Git command that changes only the requested boundary.",
               "help": {
-                "concept": "This Git exercise checks the repository state produced by \"Configure Local Identity\".",
-                "hint_1": "Use git status before and after each small change so you can see what moved between the working tree, staging area, and history.",
-                "hint_2": "Match the requested file names, branch names, and commit purpose before clicking Check Answer."
+                "concept": "git init creates repository metadata without changing the project files already in the folder.",
+                "hint_1": "Use the exact file or repository named in the task; avoid broad commands that include unrelated work.",
+                "hint_2": "After the action, run the requested inspection command to confirm the final state."
               },
-              "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then follow the task in the lesson prompt.",
-              "solutionCode": "bash .zoeskoul/setup.sh\ncd project_alpha\ngit init -b main",
-              "instructions": "Initialize a new Git repository in the `project_alpha` directory with `main` as its initial branch.\n\nFirst type `bash .zoeskoul/setup.sh` and press Enter to create the empty directory. Then enter the directory, initialize Git with the requested branch name, and press Enter after each command.",
+              "starterCode": "# Trail Journal\n",
+              "solutionCode": "git init -b main\ngit branch --show-current",
+              "instructions": "The terminal opens inside the prepared `trail-journal/` project folder.\n\nThe `trail-journal/` folder already contains a README but has no history. Initialize Git with `main` as the first branch, and print the current branch.\n\nType each command in the terminal and press Enter.",
               "starterFiles": {
-                "main_sh": {
-                  "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then follow the task in the lesson prompt.\n"
-                },
                 "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"project_alpha\"\nmkdir -p -- \"project_alpha\"\n"
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf trail-journal\nmkdir -p trail-journal\ncd trail-journal\nprintf %s '# Trail Journal\n' > README.md\ncd ..\n"
                 }
               },
               "solutionFiles": {
-                "main_sh": {
-                  "content": "bash .zoeskoul/setup.sh\ncd project_alpha\ngit init -b main\n"
-                },
                 "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"project_alpha\"\nmkdir -p -- \"project_alpha\"\n"
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf trail-journal\nmkdir -p trail-journal\ncd trail-journal\nprintf %s '# Trail Journal\n' > README.md\ncd ..\n"
                 }
               },
               "terminalExpectations": {
                 "forbiddenCommands": {
                   "0": {
                     "message": "Do not rewrite shared history in this Git practice task."
+                  }
+                },
+                "requiredCommands": {
+                  "0": {
+                    "message": "Run `git init -b main`, then check your answer again."
+                  },
+                  "1": {
+                    "message": "Run `git branch --show-current`, then check your answer again."
                   }
                 }
               }
             },
             "try_configure_and_initialize_a_repository_sketch1": {
-              "title": "Try it yourself: Initialize a Repository",
-              "prompt": "Right after the sketch \"Initialize a Git Repository\", practice that exact idea with this task. Inspect the repository metadata in `project_beta` and confirm which branch `HEAD` points to.\n\nFirst type `bash .zoeskoul/setup.sh` and press Enter. Enter project_beta, type `ls .git` and press Enter, then type `cat .git/HEAD` and press Enter. The final output should show `ref: refs/heads/main`. Produce the result for initialize a Repository so it reinforces Configure and Initialize a Repository.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "title": "Read What Git Created",
+              "prompt": "The terminal opens inside the prepared `trail-journal/` project folder.\n\n`trail-journal/` is now a repository. List its `.git` directory, then read `.git/HEAD` to confirm that HEAD points to `main`.\n\nType each command in the terminal and press Enter.",
+              "hint": "Read the repository state first, then use the Git command that changes only the requested boundary.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+                "concept": "The .git directory stores repository metadata, and HEAD identifies the currently checked-out branch reference.",
+                "hint_1": "Use the exact file or repository named in the task; avoid broad commands that include unrelated work.",
+                "hint_2": "After the action, run the requested inspection command to confirm the final state."
               },
-              "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then follow the task in the lesson prompt.",
-              "solutionCode": "bash .zoeskoul/setup.sh\ncd project_beta\nls .git\ncat .git/HEAD",
-              "instructions": "Inspect the repository metadata in `project_beta` and confirm which branch `HEAD` points to.\n\nFirst type `bash .zoeskoul/setup.sh` and press Enter. Enter project_beta, type `ls .git` and press Enter, then type `cat .git/HEAD` and press Enter. The final output should show `ref: refs/heads/main`.",
+              "starterCode": "# Trail Journal\n",
+              "solutionCode": "ls .git\ncat .git/HEAD",
+              "instructions": "The terminal opens inside the prepared `trail-journal/` project folder.\n\n`trail-journal/` is now a repository. List its `.git` directory, then read `.git/HEAD` to confirm that HEAD points to `main`.\n\nType each command in the terminal and press Enter.",
               "starterFiles": {
-                "main_sh": {
-                  "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then follow the task in the lesson prompt.\n"
-                },
                 "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"project_beta\"\nmkdir -p -- \"project_beta\"\ngit -C \"project_beta\" init -q -b main\ngit -C \"project_beta\" config user.name \"ZoeSkoul Learner\"\ngit -C \"project_beta\" config user.email \"learner@zoeskoul.local\"\n"
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf trail-journal\nmkdir -p trail-journal\ncd trail-journal\nprintf %s '# Trail Journal\n' > README.md\ncd ..\ngit -C trail-journal init -q -b main\n"
                 }
               },
               "solutionFiles": {
-                "main_sh": {
-                  "content": "bash .zoeskoul/setup.sh\ncd project_beta\nls .git\ncat .git/HEAD\n"
-                },
                 "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"project_beta\"\nmkdir -p -- \"project_beta\"\ngit -C \"project_beta\" init -q -b main\ngit -C \"project_beta\" config user.name \"ZoeSkoul Learner\"\ngit -C \"project_beta\" config user.email \"learner@zoeskoul.local\"\n"
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf trail-journal\nmkdir -p trail-journal\ncd trail-journal\nprintf %s '# Trail Journal\n' > README.md\ncd ..\ngit -C trail-journal init -q -b main\n"
                 }
               },
               "terminalExpectations": {
                 "forbiddenCommands": {
                   "0": {
                     "message": "Do not rewrite shared history in this Git practice task."
+                  }
+                },
+                "requiredCommands": {
+                  "0": {
+                    "message": "Run `ls .git`, then check your answer again."
+                  },
+                  "1": {
+                    "message": "Run `cat .git/HEAD`, then check your answer again."
                   }
                 }
               }
             },
             "try_configure_and_initialize_a_repository_sketch2": {
-              "title": "Try it yourself: Explore the .git Directory",
-              "prompt": "Right after the sketch \"Explore the .git Directory\", practice that exact idea with this task. Inspect the status of `project_gamma` and identify its untracked file.\n\nFirst type `bash .zoeskoul/setup.sh` and press Enter. Enter project_gamma, type `git status --short`, and press Enter. The output should include `?? launch-notes.txt`. Produce the result for explore the .git Directory so it reinforces Configure and Initialize a Repository.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "title": "Set a Repository-Only Identity",
+              "prompt": "The terminal opens inside the prepared `trail-journal/` project folder.\n\nSet the author name to `ZoeSkoul Learner` and the email to `learner@zoeskoul.local` inside `trail-journal/` only. Print both local values afterward.\n\nType each command in the terminal and press Enter.",
+              "hint": "Read the repository state first, then use the Git command that changes only the requested boundary.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+                "concept": "Repository-local identity applies only to this project and does not alter the machine-wide Git configuration.",
+                "hint_1": "Use the exact file or repository named in the task; avoid broad commands that include unrelated work.",
+                "hint_2": "After the action, run the requested inspection command to confirm the final state."
               },
-              "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then follow the task in the lesson prompt.",
-              "solutionCode": "bash .zoeskoul/setup.sh\ncd project_gamma\ngit status --short",
-              "instructions": "Inspect the status of `project_gamma` and identify its untracked file.\n\nFirst type `bash .zoeskoul/setup.sh` and press Enter. Enter project_gamma, type `git status --short`, and press Enter. The output should include `?? launch-notes.txt`.",
+              "starterCode": "# Trail Journal\n",
+              "solutionCode": "git config --local user.name \"ZoeSkoul Learner\"\ngit config --local user.email \"learner@zoeskoul.local\"\ngit config --local --get user.name\ngit config --local --get user.email",
+              "instructions": "The terminal opens inside the prepared `trail-journal/` project folder.\n\nSet the author name to `ZoeSkoul Learner` and the email to `learner@zoeskoul.local` inside `trail-journal/` only. Print both local values afterward.\n\nType each command in the terminal and press Enter.",
               "starterFiles": {
-                "main_sh": {
-                  "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then follow the task in the lesson prompt.\n"
-                },
                 "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"project_gamma\"\nmkdir -p -- \"project_gamma\"\ngit -C \"project_gamma\" init -q -b main\ngit -C \"project_gamma\" config user.name \"ZoeSkoul Learner\"\ngit -C \"project_gamma\" config user.email \"learner@zoeskoul.local\"\nprintf %s \"Draft launch checklist\\n\" > \"project_gamma/launch-notes.txt\"\n"
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf trail-journal\nmkdir -p trail-journal\ncd trail-journal\nprintf %s '# Trail Journal\n' > README.md\ncd ..\ngit -C trail-journal init -q -b main\n"
                 }
               },
               "solutionFiles": {
-                "main_sh": {
-                  "content": "bash .zoeskoul/setup.sh\ncd project_gamma\ngit status --short\n"
-                },
                 "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"project_gamma\"\nmkdir -p -- \"project_gamma\"\ngit -C \"project_gamma\" init -q -b main\ngit -C \"project_gamma\" config user.name \"ZoeSkoul Learner\"\ngit -C \"project_gamma\" config user.email \"learner@zoeskoul.local\"\nprintf %s \"Draft launch checklist\\n\" > \"project_gamma/launch-notes.txt\"\n"
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf trail-journal\nmkdir -p trail-journal\ncd trail-journal\nprintf %s '# Trail Journal\n' > README.md\ncd ..\ngit -C trail-journal init -q -b main\n"
                 }
               },
               "terminalExpectations": {
@@ -129,41 +127,48 @@
                   "0": {
                     "message": "Do not rewrite shared history in this Git practice task."
                   }
+                },
+                "requiredCommands": {
+                  "0": {
+                    "message": "Run `git config --local user.name \"ZoeSkoul Learner\"`, then check your answer again."
+                  },
+                  "1": {
+                    "message": "Run `git config --local user.email \"learner@zoeskoul.local\"`, then check your answer again."
+                  }
                 }
               }
             },
             "try_configure_and_initialize_a_repository_sketch3": {
-              "title": "Try it yourself: Check Repository Status",
-              "prompt": "Right after the sketch \"Verify Repository Status\", practice that exact idea with this task. Configure a repository-only Git identity in `project_delta` using the name `ZoeSkoul Learner` and email `learner@zoeskoul.local`.\n\nFirst type `bash .zoeskoul/setup.sh` and press Enter. Enter project_delta, run each local Git configuration command, and press Enter after each one. Produce the result for check Repository Status so it reinforces Configure and Initialize a Repository.",
-              "hint": "Read the Git task \"Check Repository Status\" and identify the repository state you need to create.",
+              "title": "Ask Git What It Sees",
+              "prompt": "The terminal opens inside the prepared `trail-journal/` project folder.\n\nThe repository and local identity are ready. Use short status to see the untracked `README.md` before staging anything.\n\nType each command in the terminal and press Enter.",
+              "hint": "Read the repository state first, then use the Git command that changes only the requested boundary.",
               "help": {
-                "concept": "This Git exercise checks the repository state produced by \"Check Repository Status\".",
-                "hint_1": "Use git status before and after each small change so you can see what moved between the working tree, staging area, and history.",
-                "hint_2": "Match the requested file names, branch names, and commit purpose before clicking Check Answer."
+                "concept": "git status --short summarizes the relationship between the working tree and the staging area.",
+                "hint_1": "Use the exact file or repository named in the task; avoid broad commands that include unrelated work.",
+                "hint_2": "After the action, run the requested inspection command to confirm the final state."
               },
-              "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then follow the task in the lesson prompt.",
-              "solutionCode": "bash .zoeskoul/setup.sh\ncd project_delta\ngit config --local user.name \"ZoeSkoul Learner\"\ngit config --local user.email \"learner@zoeskoul.local\"",
-              "instructions": "Configure a repository-only Git identity in `project_delta` using the name `ZoeSkoul Learner` and email `learner@zoeskoul.local`.\n\nFirst type `bash .zoeskoul/setup.sh` and press Enter. Enter project_delta, run each local Git configuration command, and press Enter after each one.",
+              "starterCode": "# Trail Journal\n",
+              "solutionCode": "git status --short",
+              "instructions": "The terminal opens inside the prepared `trail-journal/` project folder.\n\nThe repository and local identity are ready. Use short status to see the untracked `README.md` before staging anything.\n\nType each command in the terminal and press Enter.",
               "starterFiles": {
-                "main_sh": {
-                  "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then follow the task in the lesson prompt.\n"
-                },
                 "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"project_delta\"\nmkdir -p -- \"project_delta\"\ngit -C \"project_delta\" init -q -b main\n"
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf trail-journal\nmkdir -p trail-journal\ncd trail-journal\nprintf %s '# Trail Journal\n' > README.md\ncd ..\ngit -C trail-journal init -q -b main\ngit -C trail-journal config --local user.name \"ZoeSkoul Learner\"\ngit -C trail-journal config --local user.email \"learner@zoeskoul.local\"\n"
                 }
               },
               "solutionFiles": {
-                "main_sh": {
-                  "content": "bash .zoeskoul/setup.sh\ncd project_delta\ngit config --local user.name \"ZoeSkoul Learner\"\ngit config --local user.email \"learner@zoeskoul.local\"\n"
-                },
                 "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"project_delta\"\nmkdir -p -- \"project_delta\"\ngit -C \"project_delta\" init -q -b main\n"
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf trail-journal\nmkdir -p trail-journal\ncd trail-journal\nprintf %s '# Trail Journal\n' > README.md\ncd ..\ngit -C trail-journal init -q -b main\ngit -C trail-journal config --local user.name \"ZoeSkoul Learner\"\ngit -C trail-journal config --local user.email \"learner@zoeskoul.local\"\n"
                 }
               },
               "terminalExpectations": {
                 "forbiddenCommands": {
                   "0": {
                     "message": "Do not rewrite shared history in this Git practice task."
+                  }
+                },
+                "requiredCommands": {
+                  "0": {
+                    "message": "Run `git status --short`, then check your answer again."
                   }
                 }
               }
@@ -277,20 +282,20 @@
       "git-foundations-module-1-start-tracking": {
         "configure-and-initialize-a-repository": {
           "sketch0": {
-            "title": "Configure Local Git Identity",
-            "bodyMarkdown": "To start using Git effectively, it's crucial to set up your local identity. This involves configuring your name and email address, which will be associated with your commits. This information is stored in the repository's configuration file and helps identify the author of changes.\n\nWorked example:\n\n```bash\ngit config --local user.name \"ZoeSkoul Learner\"\ngit config --local user.email \"learner@zoeskoul.local\"\n```\n\nThis command sets the local user name and email for the repository. It's important to use `--local` to ensure these settings apply only to the current repository, not globally. This setup is essential for tracking contributions accurately.\n\nStep by step, read the commands in the order shown. The first line stores the commit author name in this repository's local Git configuration. The second line stores the matching author email in the same local configuration. Together, the lines form one complete example rather than unrelated commands."
+            "title": "Create the Repository",
+            "bodyMarkdown": "A Git project begins as an ordinary folder. Nothing is tracked until you initialize the folder as a repository. Enter the project directory first, then run:\n\n```bash\ngit init -b main\n```\n\nThe command creates Git’s private metadata inside the current folder and names the first branch `main`. It does not upload anything, change your project files, or create a commit.\n\nRead the command from left to right: `git init` creates the repository; `-b main` chooses the initial branch name. The location matters. Running it one directory too high would make the wrong folder the repository."
           },
           "sketch1": {
-            "title": "Initialize a Git Repository",
-            "bodyMarkdown": "Once your identity is configured, the next step is to initialize a Git repository. This process creates a `.git` directory in your project folder, which contains all the metadata and history for your project.\n\nWorked example:\n\n```bash\ngit init\n```\n\nThis command initializes a new Git repository in the current directory. By default, it sets the initial branch to `main`. This step is crucial as it transforms your project folder into a version-controlled repository, allowing you to track changes over time."
+            "title": "What Git Added",
+            "bodyMarkdown": "Initialization adds a hidden `.git` directory. Your visible project files remain where they were, while `.git` stores repository configuration, references, and future commit objects.\n\nYou can confirm that Git recognizes the folder without editing its internals:\n\n```bash\ngit rev-parse --is-inside-work-tree\ngit branch --show-current\n```\n\nThe first command prints `true`; the second prints `main`. Treat `.git` as Git-managed data. Looking is safe, but manually changing files inside it can damage the repository."
           },
           "sketch2": {
-            "title": "Explore the .git Directory",
-            "bodyMarkdown": "The `.git` directory is the heart of a Git repository. It contains all the metadata, including configuration, commit history, and references to branches and tags. Understanding its structure helps in managing the repository effectively.\n\nWorked example:\n\n```bash\nls -a .git\n```\n\nThis command lists the contents of the `.git` directory. It's important to note that while you can view these files, you should not edit them directly. They are managed by Git and any manual changes can corrupt the repository."
+            "title": "Ask Git for the First Status",
+            "bodyMarkdown": "A new repository usually contains project files that Git has not started tracking. Ask Git to describe the situation:\n\n```bash\ngit status --short\n```\n\nSuppose the folder contains `route-notes.txt`. Git prints:\n\n```text\n?? route-notes.txt\n```\n\nThe two question marks mean the file is untracked. Git can see it in the working folder, but no snapshot contains it yet. Status is a reading command: it tells you what Git knows before you decide what to stage or commit."
           },
           "sketch3": {
-            "title": "Verify Repository Status",
-            "bodyMarkdown": "After initializing a repository, it's important to check its status to understand the current state of your working directory and staging area. This helps in identifying untracked files and changes that need to be committed.\n\nWorked example:\n\n```bash\ngit status\n```\n\nThis command provides a summary of the repository's status, showing which files are staged, unstaged, or untracked. It's a vital tool for managing your workflow and ensuring that all changes are tracked and committed properly."
+            "title": "Set a Local Identity",
+            "bodyMarkdown": "Commits record an author name and email. In a learning workspace, keep that identity inside the repository instead of changing the entire machine:\n\n```bash\ngit config --local user.name \"Avery Chen\"\ngit config --local user.email \"avery@example.test\"\n```\n\nThe first line stores the author name. The second stores the matching email. Because both commands use `--local`, the values apply only to the current repository.\n\nIdentity configuration does not create a commit. It prepares Git to attach clear authorship when you create one later."
           }
         }
       }

@@ -2,24 +2,24 @@
   "subjects": {
     "git--git-foundations--draft": {
       "title": "Git Foundations",
-      "description": "A beginner Git course with three standard modules and one final capstone. Learners work locally first, moving from an ordinary folder to a readable repository history without introducing branches, remotes, GitHub, or advanced history rewriting.",
+      "description": "Learn Git by building one local repository at a time—from `git init` to a clean, readable history—without remotes, GitHub, or hidden learner setup commands.",
       "moreComingSoon": "More Git Foundations lessons are coming soon."
     }
   },
   "modules": {
     "git--git-foundations--draft": {
       "git-foundations-module-1-start-tracking": {
-        "title": "Start Tracking a Project",
-        "description": "Move from an ordinary folder to a repository whose current state Git can explain.",
+        "title": "Create Your First Repository",
+        "description": "Start with an ordinary folder, initialize Git on main, read its state, and record the first meaningful snapshot.",
         "outcomes": [
-          "Explain why version control is more reliable than duplicate final folders.",
-          "Distinguish the working tree, staging area, and commit history.",
-          "Configure a local Git identity and initialize a repository on main.",
-          "Use git status and git status --short to read tracked and untracked state."
+          "Explain why one project with history is safer than duplicate “final” folders.",
+          "Initialize an ordinary folder as a Git repository on main.",
+          "Read untracked, tracked, staged, and clean state with Git status.",
+          "Stage project files and create a clear first commit."
         ],
         "why": [
-          "Builds confidence with start tracking a project.",
-          "Prepares learners for the next skills in the course."
+          "Gives every later Git command a concrete repository to work with.",
+          "Builds the inspect, act, verify rhythm used throughout the course."
         ]
       },
       "git-foundations-module-2-meaningful-history": {
@@ -32,8 +32,8 @@
           "Read history with git log --oneline and inspect a commit with git show."
         ],
         "why": [
-          "Builds confidence with build meaningful history.",
-          "Prepares learners for the next skills in the course."
+          "Turns raw edits into focused snapshots another developer can review.",
+          "Makes commit history useful as documentation, not just storage."
         ]
       },
       "git-foundations-module-3-manage-tracked-files": {
@@ -46,8 +46,8 @@
           "Restore staged and unstaged mistakes safely."
         ],
         "why": [
-          "Builds confidence with manage tracked files safely.",
-          "Prepares learners for the next skills in the course."
+          "Keeps the repository accurate as files change names, disappear, or become generated output.",
+          "Builds safe correction habits without rewriting existing history."
         ]
       },
       "git-foundations-module-4-final-capstone": {
@@ -60,8 +60,8 @@
           "Verify the final history and clean working state before handoff."
         ],
         "why": [
-          "Builds confidence with final capstone.",
-          "Prepares learners for the next skills in the course."
+          "Combines initialization, focused commits, file management, and verification in one realistic handoff.",
+          "Produces a complete local history that explains the work from beginning to end."
         ]
       }
     }
@@ -70,29 +70,29 @@
     "git--git-foundations--draft": {
       "git-foundations-module-1-start-tracking": {
         "git--git-foundations--draft-git-foundations-section-1-repository-basics": {
-          "title": "A Project Needs a Memory",
-          "description": "Learn why version control matters, working tree, staging area, and history, configure and initialize a repository through focused examples and practice.",
+          "title": "From Folder to First Commit",
+          "description": "Understand the problem Git solves, initialize your first repository, read its state, and move one change into history.",
           "weeks": null,
           "bullets": [
-            "Why Version Control Matters",
-            "Working Tree, Staging Area, and History",
-            "Configure and Initialize a Repository",
-            "Read Tracked and Untracked State"
+            "Why a Project Needs History",
+            "Initialize Your First Repository",
+            "Read the Repository State",
+            "Move a Change into History"
           ]
         },
         "git--git-foundations--draft-git-foundations-section-1-module-project": {
           "title": "Module Project",
-          "description": "Learn project: start the field notes repository through focused examples and practice.",
+          "description": "Build a neighborhood field-notes repository from an ordinary folder to a clean first commit.",
           "weeks": null,
           "bullets": [
-            "Project: Start the Field Notes Repository"
+            "Project: Build the Field Notes Repository"
           ]
         }
       },
       "git-foundations-module-2-meaningful-history": {
         "git--git-foundations--draft-git-foundations-section-2-history-workflow": {
           "title": "From Edits to Understandable Snapshots",
-          "description": "Learn inspect unstaged changes with git diff, stage intentionally, create focused commits through focused examples and practice.",
+          "description": "Inspect changes, choose what belongs together, commit one idea at a time, and read the history you created.",
           "weeks": null,
           "bullets": [
             "Inspect Unstaged Changes with git diff",
@@ -103,7 +103,7 @@
         },
         "git--git-foundations--draft-git-foundations-section-2-module-project": {
           "title": "Module Project",
-          "description": "Learn project: build the community website history through focused examples and practice.",
+          "description": "Build a readable history for a small community website without mixing unrelated changes.",
           "weeks": null,
           "bullets": [
             "Project: Build the Community Website History"
@@ -112,8 +112,8 @@
       },
       "git-foundations-module-3-manage-tracked-files": {
         "git--git-foundations--draft-git-foundations-section-3-safe-file-management": {
-          "title": "A Repository Changes Shape",
-          "description": "Learn modify and verify tracked files, rename and remove tracked files, ignore generated files through focused examples and practice.",
+          "title": "Keep the Repository Honest",
+          "description": "Rename and remove tracked files, ignore generated output, and recover from staging or working-tree mistakes safely.",
           "weeks": null,
           "bullets": [
             "Modify and Verify Tracked Files",
@@ -124,7 +124,7 @@
         },
         "git--git-foundations--draft-git-foundations-section-3-module-project": {
           "title": "Module Project",
-          "description": "Learn project: prepare a clean release snapshot through focused examples and practice.",
+          "description": "Prepare a clean release snapshot while preserving the history that explains how the project changed.",
           "weeks": null,
           "bullets": [
             "Project: Prepare a Clean Release Snapshot"
@@ -134,7 +134,7 @@
       "git-foundations-module-4-final-capstone": {
         "git--git-foundations--draft-git-foundations-section-4-final-capstone": {
           "title": "Final Capstone",
-          "description": "Learn final capstone: neighborhood resource guide history through focused examples and practice.",
+          "description": "Build and verify a complete local history for a neighborhood resource guide.",
           "weeks": null,
           "bullets": [
             "Final Capstone: Neighborhood Resource Guide History"

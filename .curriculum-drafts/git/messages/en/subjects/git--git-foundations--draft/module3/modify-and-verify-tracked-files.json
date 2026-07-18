@@ -4,19 +4,19 @@
       "git-foundations-module-3-manage-tracked-files": {
         "modify-and-verify-tracked-files": {
           "label": "Modify and Verify Tracked Files",
-          "summary": "Follow an already tracked file through editing, diff inspection, staging, and status verification.",
+          "summary": "Edit an existing tracked file, inspect the difference, stage the intended version, and verify the snapshot before committing.",
           "cards": {
             "sketch0": {
-              "title": "Recognizing Changes with Git Status"
+              "title": "Begin from a Known State"
             },
             "sketch1": {
-              "title": "Using Git Diff to Inspect Changes"
+              "title": "Inspect the Tracked Edit"
             },
             "sketch2": {
-              "title": "Staging Files with Git Add"
+              "title": "Stage the Reviewed Version"
             },
             "sketch3": {
-              "title": "Finalizing Changes with Git Commit"
+              "title": "Commit and Recheck"
             },
             "quiz": {
               "title": "Practice"
@@ -25,103 +25,95 @@
           "tryIt": {
             "allowReveal": true,
             "try_modify_and_verify_tracked_files_sketch0": {
-              "title": "Try it yourself: Practice Recognizing Changes with Git Status",
-              "prompt": "Right after the sketch \"Recognizing Changes with Git Status\", practice that exact idea with this task. Modify the file `notes.txt` and use `git status` to verify the changes. Ensure the file appears under \"Changes not staged for commit.\"\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter. Produce the result for practice Recognizing Changes with Git Status so it reinforces Modify and Verify Tracked Files.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "title": "Spot a Modified Tracked File",
+              "prompt": "The terminal opens inside the prepared `release-notes/` repository.\n\n`volunteer.md` is committed, but its meeting time changed. Use short status to identify the tracked modification.\n\nType each command in the terminal and press Enter.",
+              "hint": "Read the repository state first, then use the Git command that changes only the requested boundary.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+                "concept": "A tracked file remains known to Git after it changes; status marks the difference from HEAD.",
+                "hint_1": "Use the exact file or repository named in the task; avoid broad commands that include unrelated work.",
+                "hint_2": "After the action, run the requested inspection command to confirm the final state."
               },
-              "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.",
-              "solutionCode": "bash .zoeskoul/setup.sh\ngit status",
-              "instructions": "Modify the file `notes.txt` and use `git status` to verify the changes. Ensure the file appears under \"Changes not staged for commit.\"\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+              "starterCode": "Meeting: 5 PM\n",
+              "solutionCode": "git status --short",
+              "instructions": "The terminal opens inside the prepared `release-notes/` repository.\n\n`volunteer.md` is committed, but its meeting time changed. Use short status to identify the tracked modification.\n\nType each command in the terminal and press Enter.",
               "starterFiles": {
-                "main_sh": {
-                  "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.\n"
-                },
                 "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 1\\n' > notes.txt\n"
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-notes\nmkdir -p release-notes\ngit -C release-notes init -q -b main\ngit -C release-notes config --local user.name \"ZoeSkoul Learner\"\ngit -C release-notes config --local user.email \"learner@zoeskoul.local\"\ncd release-notes\nprintf %s 'Meeting: 4 PM\n' > volunteer.md\ncd ..\ngit -C release-notes add -A\ngit -C release-notes commit -q -m 'Add project baseline'\ncd release-notes\nprintf %s 'Meeting: 5 PM\n' > volunteer.md\ncd ..\n"
                 }
               },
               "solutionFiles": {
-                "main_sh": {
-                  "content": "bash .zoeskoul/setup.sh\ngit status\n"
-                },
                 "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 1\\n' > notes.txt\n"
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-notes\nmkdir -p release-notes\ngit -C release-notes init -q -b main\ngit -C release-notes config --local user.name \"ZoeSkoul Learner\"\ngit -C release-notes config --local user.email \"learner@zoeskoul.local\"\ncd release-notes\nprintf %s 'Meeting: 4 PM\n' > volunteer.md\ncd ..\ngit -C release-notes add -A\ngit -C release-notes commit -q -m 'Add project baseline'\ncd release-notes\nprintf %s 'Meeting: 5 PM\n' > volunteer.md\ncd ..\n"
                 }
               },
               "terminalExpectations": {
                 "forbiddenCommands": {
                   "0": {
                     "message": "Do not rewrite shared history in this Git practice task."
+                  }
+                },
+                "requiredCommands": {
+                  "0": {
+                    "message": "Run `git status --short`, then check your answer again."
                   }
                 }
               }
             },
             "try_modify_and_verify_tracked_files_sketch1": {
-              "title": "Try it yourself: Inspect Changes with Git Diff",
-              "prompt": "Right after the sketch \"Using Git Diff to Inspect Changes\", practice that exact idea with this task. Edit `summary.txt` and use `git diff` to inspect the changes. Ensure you can see the differences between the working directory and the last commit.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter. Produce the result for inspect Changes with Git Diff so it reinforces Modify and Verify Tracked Files.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "title": "Inspect the Tracked Edit",
+              "prompt": "The terminal opens inside the prepared `release-notes/` repository.\n\nRead the unstaged diff for `volunteer.md` and confirm the old and new meeting times.\n\nType each command in the terminal and press Enter.",
+              "hint": "Read the repository state first, then use the Git command that changes only the requested boundary.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+                "concept": "A file diff explains the exact content change behind the status marker.",
+                "hint_1": "Use the exact file or repository named in the task; avoid broad commands that include unrelated work.",
+                "hint_2": "After the action, run the requested inspection command to confirm the final state."
               },
-              "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.",
-              "solutionCode": "bash .zoeskoul/setup.sh\ngit diff",
-              "instructions": "Edit `summary.txt` and use `git diff` to inspect the changes. Ensure you can see the differences between the working directory and the last commit.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+              "starterCode": "Meeting: 5 PM\n",
+              "solutionCode": "git diff -- volunteer.md",
+              "instructions": "The terminal opens inside the prepared `release-notes/` repository.\n\nRead the unstaged diff for `volunteer.md` and confirm the old and new meeting times.\n\nType each command in the terminal and press Enter.",
               "starterFiles": {
-                "main_sh": {
-                  "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.\n"
-                },
                 "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 2\\n' > summary.txt\n"
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-notes\nmkdir -p release-notes\ngit -C release-notes init -q -b main\ngit -C release-notes config --local user.name \"ZoeSkoul Learner\"\ngit -C release-notes config --local user.email \"learner@zoeskoul.local\"\ncd release-notes\nprintf %s 'Meeting: 4 PM\n' > volunteer.md\ncd ..\ngit -C release-notes add -A\ngit -C release-notes commit -q -m 'Add project baseline'\ncd release-notes\nprintf %s 'Meeting: 5 PM\n' > volunteer.md\ncd ..\n"
                 }
               },
               "solutionFiles": {
-                "main_sh": {
-                  "content": "bash .zoeskoul/setup.sh\ngit diff\n"
-                },
                 "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 2\\n' > summary.txt\n"
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-notes\nmkdir -p release-notes\ngit -C release-notes init -q -b main\ngit -C release-notes config --local user.name \"ZoeSkoul Learner\"\ngit -C release-notes config --local user.email \"learner@zoeskoul.local\"\ncd release-notes\nprintf %s 'Meeting: 4 PM\n' > volunteer.md\ncd ..\ngit -C release-notes add -A\ngit -C release-notes commit -q -m 'Add project baseline'\ncd release-notes\nprintf %s 'Meeting: 5 PM\n' > volunteer.md\ncd ..\n"
                 }
               },
               "terminalExpectations": {
                 "forbiddenCommands": {
                   "0": {
                     "message": "Do not rewrite shared history in this Git practice task."
+                  }
+                },
+                "requiredCommands": {
+                  "0": {
+                    "message": "Run `git diff -- volunteer.md`, then check your answer again."
                   }
                 }
               }
             },
             "try_modify_and_verify_tracked_files_sketch2": {
-              "title": "Try it yourself: Stage Changes with Git Add",
-              "prompt": "Right after the sketch \"Staging Files with Git Add\", practice that exact idea with this task. Stage the changes made to `draft.txt` using `git add`. Verify the file is now in the staging area using `git status`.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter. Produce the result for stage Changes with Git Add so it reinforces Modify and Verify Tracked Files.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "title": "Stage the Verified Edit",
+              "prompt": "The terminal opens inside the prepared `release-notes/` repository.\n\nStage `volunteer.md`, then inspect the staged name and staged patch.\n\nType each command in the terminal and press Enter.",
+              "hint": "Read the repository state first, then use the Git command that changes only the requested boundary.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+                "concept": "Staging a verified edit prepares exactly that version of the tracked file for the next snapshot.",
+                "hint_1": "Use the exact file or repository named in the task; avoid broad commands that include unrelated work.",
+                "hint_2": "After the action, run the requested inspection command to confirm the final state."
               },
-              "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.",
-              "solutionCode": "bash .zoeskoul/setup.sh\ngit add\ngit status\ngit add draft.txt",
-              "instructions": "Stage the changes made to `draft.txt` using `git add`. Verify the file is now in the staging area using `git status`.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+              "starterCode": "Meeting: 5 PM\n",
+              "solutionCode": "git add volunteer.md\ngit diff --staged --name-only\ngit diff --staged -- volunteer.md",
+              "instructions": "The terminal opens inside the prepared `release-notes/` repository.\n\nStage `volunteer.md`, then inspect the staged name and staged patch.\n\nType each command in the terminal and press Enter.",
               "starterFiles": {
-                "main_sh": {
-                  "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.\n"
-                },
                 "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 3\\n' > draft.txt\n"
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-notes\nmkdir -p release-notes\ngit -C release-notes init -q -b main\ngit -C release-notes config --local user.name \"ZoeSkoul Learner\"\ngit -C release-notes config --local user.email \"learner@zoeskoul.local\"\ncd release-notes\nprintf %s 'Meeting: 4 PM\n' > volunteer.md\ncd ..\ngit -C release-notes add -A\ngit -C release-notes commit -q -m 'Add project baseline'\ncd release-notes\nprintf %s 'Meeting: 5 PM\n' > volunteer.md\ncd ..\n"
                 }
               },
               "solutionFiles": {
-                "main_sh": {
-                  "content": "bash .zoeskoul/setup.sh\ngit add\ngit status\ngit add draft.txt\n"
-                },
                 "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 3\\n' > draft.txt\n"
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-notes\nmkdir -p release-notes\ngit -C release-notes init -q -b main\ngit -C release-notes config --local user.name \"ZoeSkoul Learner\"\ngit -C release-notes config --local user.email \"learner@zoeskoul.local\"\ncd release-notes\nprintf %s 'Meeting: 4 PM\n' > volunteer.md\ncd ..\ngit -C release-notes add -A\ngit -C release-notes commit -q -m 'Add project baseline'\ncd release-notes\nprintf %s 'Meeting: 5 PM\n' > volunteer.md\ncd ..\n"
                 }
               },
               "terminalExpectations": {
@@ -129,41 +121,54 @@
                   "0": {
                     "message": "Do not rewrite shared history in this Git practice task."
                   }
+                },
+                "requiredCommands": {
+                  "0": {
+                    "message": "Run `git add volunteer.md`, then check your answer again."
+                  },
+                  "1": {
+                    "message": "Run `git diff --staged --name-only`, then check your answer again."
+                  }
                 }
               }
             },
             "try_modify_and_verify_tracked_files_sketch3": {
-              "title": "Try it yourself: Commit Changes with Git Commit",
-              "prompt": "Right after the sketch \"Finalizing Changes with Git Commit\", practice that exact idea with this task. Commit the staged changes in `update.txt` with a message. Verify the commit using `git log --oneline`.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter. Produce the result for commit Changes with Git Commit so it reinforces Modify and Verify Tracked Files.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "title": "Commit and Verify the Update",
+              "prompt": "The terminal opens inside the prepared `release-notes/` repository.\n\nThe meeting-time edit is staged. Commit it as `Update volunteer meeting time`, then verify the latest history entry and clean status.\n\nType each command in the terminal and press Enter.",
+              "hint": "Read the repository state first, then use the Git command that changes only the requested boundary.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+                "concept": "After commit, the updated tracked file becomes part of HEAD and the working tree can be clean again.",
+                "hint_1": "Use the exact file or repository named in the task; avoid broad commands that include unrelated work.",
+                "hint_2": "After the action, run the requested inspection command to confirm the final state."
               },
-              "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.",
-              "solutionCode": "bash .zoeskoul/setup.sh\ngit log --oneline\ngit commit\ngit commit -m 'Updated update.txt'",
-              "instructions": "Commit the staged changes in `update.txt` with a message. Verify the commit using `git log --oneline`.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+              "starterCode": "Meeting: 5 PM\n",
+              "solutionCode": "git commit -m \"Update volunteer meeting time\"\ngit log -1 --oneline\ngit status --short",
+              "instructions": "The terminal opens inside the prepared `release-notes/` repository.\n\nThe meeting-time edit is staged. Commit it as `Update volunteer meeting time`, then verify the latest history entry and clean status.\n\nType each command in the terminal and press Enter.",
               "starterFiles": {
-                "main_sh": {
-                  "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.\n"
-                },
                 "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 4\\n' > update.txt\n"
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-notes\nmkdir -p release-notes\ngit -C release-notes init -q -b main\ngit -C release-notes config --local user.name \"ZoeSkoul Learner\"\ngit -C release-notes config --local user.email \"learner@zoeskoul.local\"\ncd release-notes\nprintf %s 'Meeting: 4 PM\n' > volunteer.md\ncd ..\ngit -C release-notes add -A\ngit -C release-notes commit -q -m 'Add project baseline'\ncd release-notes\nprintf %s 'Meeting: 5 PM\n' > volunteer.md\ncd ..\ngit -C release-notes add -- volunteer.md\n"
                 }
               },
               "solutionFiles": {
-                "main_sh": {
-                  "content": "bash .zoeskoul/setup.sh\ngit log --oneline\ngit commit\ngit commit -m 'Updated update.txt'\n"
-                },
                 "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 4\\n' > update.txt\n"
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-notes\nmkdir -p release-notes\ngit -C release-notes init -q -b main\ngit -C release-notes config --local user.name \"ZoeSkoul Learner\"\ngit -C release-notes config --local user.email \"learner@zoeskoul.local\"\ncd release-notes\nprintf %s 'Meeting: 4 PM\n' > volunteer.md\ncd ..\ngit -C release-notes add -A\ngit -C release-notes commit -q -m 'Add project baseline'\ncd release-notes\nprintf %s 'Meeting: 5 PM\n' > volunteer.md\ncd ..\ngit -C release-notes add -- volunteer.md\n"
                 }
               },
               "terminalExpectations": {
                 "forbiddenCommands": {
                   "0": {
                     "message": "Do not rewrite shared history in this Git practice task."
+                  }
+                },
+                "requiredCommands": {
+                  "0": {
+                    "message": "Run `git commit -m \"Update volunteer meeting time\"`, then check your answer again."
+                  },
+                  "1": {
+                    "message": "Run `git log -1 --oneline`, then check your answer again."
+                  },
+                  "2": {
+                    "message": "Run `git status --short`, then check your answer again."
                   }
                 }
               }
@@ -277,20 +282,20 @@
       "git-foundations-module-3-manage-tracked-files": {
         "modify-and-verify-tracked-files": {
           "sketch0": {
-            "title": "Recognizing Changes with Git Status",
-            "bodyMarkdown": "Git status is a powerful command that helps you understand the current state of your working directory and staging area. It shows which changes have been staged, which haven't, and which files aren't being tracked by Git.\n\nWorked example: Suppose you have a file `report.txt` that you've modified. Running `git status` will show this file under the \"Changes not staged for commit\" section, indicating that the file has been modified but not yet staged. This helps you decide what to do next, whether to stage the changes or discard them.\n\nBy using `git status`, you can keep track of your changes and ensure that you only commit what you intend to. This prevents accidental commits of incomplete or incorrect changes."
+            "title": "Begin from a Known State",
+            "bodyMarkdown": "Before editing, confirm the repository is clean with `git status --short`. A quiet result means the working tree matches HEAD.\n\nMake the requested change to a tracked file, then run status again. Git reports a modification because it can compare the current file with its committed version.\n\nStarting from a known state keeps new work separate from leftovers."
           },
           "sketch1": {
-            "title": "Using Git Diff to Inspect Changes",
-            "bodyMarkdown": "The `git diff` command allows you to see the exact changes made to your files. This is crucial for reviewing your work before staging it.\n\nWorked example: Imagine you've edited `report.txt` and want to see what you've changed. By running `git diff report.txt`, you can view the line-by-line differences between your working directory and the last commit. This helps you verify your changes and ensure they are correct before staging them.\n\nUnderstanding the output of `git diff` is essential for maintaining code quality and avoiding errors in your commits."
+            "title": "Inspect the Tracked Edit",
+            "bodyMarkdown": "Use `git diff` to review the line-level change before staging:\n\n```bash\ngit diff handbook.md\n```\n\nThe path narrows the review to one file. Read the removed and added lines and confirm they match the task.\n\nIf the diff contains extra work, fix the file before moving forward."
           },
           "sketch2": {
-            "title": "Staging Files with Git Add",
-            "bodyMarkdown": "Once you're satisfied with your changes, you can stage them using `git add`. This moves your changes from the working directory to the staging area, preparing them for the next commit.\n\nWorked example: After reviewing your changes in `report.txt` with `git diff`, you decide to stage them. Running `git add report.txt` will move the changes to the staging area. You can confirm this by running `git status` again, which will now show `report.txt` under the \"Changes to be committed\" section.\n\nStaging changes allows you to build up a set of changes that you want to commit together, ensuring that your commits are logical and organized."
+            "title": "Stage the Reviewed Version",
+            "bodyMarkdown": "Once the diff is correct, stage the file and inspect the staged snapshot:\n\n```bash\ngit add handbook.md\ngit diff --staged handbook.md\n```\n\nThe second command proves which version is ready to commit. A later edit would appear separately as an unstaged change.\n\nThis two-review pattern makes the boundary explicit."
           },
           "sketch3": {
-            "title": "Finalizing Changes with Git Commit",
-            "bodyMarkdown": "After staging your changes, the next step is to commit them to your repository. This creates a new snapshot of your project at its current state.\n\nWorked example: With `report.txt` staged, you can commit your changes using `git commit -m \"Updated report with latest data\"`. This command creates a new commit with a message describing the changes. You can verify the commit by running `git log --oneline`, which will show the latest commit at the top of the list.\n\nCommitting changes is a crucial step in version control, as it allows you to save your progress and create a history of your project."
+            "title": "Commit and Recheck",
+            "bodyMarkdown": "Commit the focused update with a message that describes its purpose, then run status again.\n\n```bash\ngit commit -m \"Clarify volunteer check-in\"\ngit status --short\n```\n\nA clean result confirms the tracked edit is now part of history and no accidental work remains."
           }
         }
       }

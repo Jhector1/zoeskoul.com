@@ -4,19 +4,19 @@
       "git-foundations-module-2-meaningful-history": {
         "create-focused-commits": {
           "label": "Create Focused Commits",
-          "summary": "Record one coherent change with a message that explains the purpose of the snapshot.",
+          "summary": "Record one coherent staged change with a concise message that makes the project timeline readable.",
           "cards": {
             "sketch0": {
-              "title": "The Role of Commits in Version Control"
+              "title": "A Commit Is a Deliberate Checkpoint"
             },
             "sketch1": {
-              "title": "Preparing Changes for a Commit"
+              "title": "Commit Only the Staged Snapshot"
             },
             "sketch2": {
-              "title": "Crafting Effective Commit Messages"
+              "title": "Write the Message for a Reader"
             },
             "sketch3": {
-              "title": "Inspecting Past Commits"
+              "title": "Verify the Result"
             },
             "quiz": {
               "title": "Practice"
@@ -25,103 +25,101 @@
           "tryIt": {
             "allowReveal": true,
             "try_create_focused_commits_sketch0": {
-              "title": "Try it yourself: Create a Commit with a Message",
-              "prompt": "Right after the sketch \"The Role of Commits in Version Control\", practice that exact idea with this task. Stage the changes in `feature.txt` and commit them with the message 'Add new feature'.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter. Produce the result for create a Commit with a Message so it reinforces Create Focused Commits.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "title": "Commit One Coherent Change",
+              "prompt": "The terminal opens inside the prepared `community-site/` repository.\n\nThe navigation files are staged. Commit them with `Add events navigation`, then inspect the latest one-line entry.\n\nType each command in the terminal and press Enter.",
+              "hint": "Read the repository state first, then use the Git command that changes only the requested boundary.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+                "concept": "A focused commit records one understandable idea with a message that explains the result.",
+                "hint_1": "Use the exact file or repository named in the task; avoid broad commands that include unrelated work.",
+                "hint_2": "After the action, run the requested inspection command to confirm the final state."
               },
-              "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.",
-              "solutionCode": "bash .zoeskoul/setup.sh\ngit add\ngit commit\ngit add feature.txt\ngit commit -m 'Add new feature'",
-              "instructions": "Stage the changes in `feature.txt` and commit them with the message 'Add new feature'.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+              "starterCode": "<nav>Home Events</nav>\n",
+              "solutionCode": "git commit -m \"Add events navigation\"\ngit log -1 --oneline",
+              "instructions": "The terminal opens inside the prepared `community-site/` repository.\n\nThe navigation files are staged. Commit them with `Add events navigation`, then inspect the latest one-line entry.\n\nType each command in the terminal and press Enter.",
               "starterFiles": {
-                "main_sh": {
-                  "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.\n"
-                },
                 "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 1\\n' > feature.txt\n"
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-site\nmkdir -p community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name \"ZoeSkoul Learner\"\ngit -C community-site config --local user.email \"learner@zoeskoul.local\"\ncd community-site\nprintf %s '<nav>Home</nav>\n' > index.html\ncd ..\ncd community-site\nprintf %s 'export const links = [\"Home\"];\n' > nav.js\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Add project baseline'\ncd community-site\nprintf %s '<nav>Home Events</nav>\n' > index.html\ncd ..\ncd community-site\nprintf %s 'export const links = [\"Home\", \"Events\"];\n' > nav.js\ncd ..\ngit -C community-site add -- index.html nav.js\n"
                 }
               },
               "solutionFiles": {
-                "main_sh": {
-                  "content": "bash .zoeskoul/setup.sh\ngit add\ngit commit\ngit add feature.txt\ngit commit -m 'Add new feature'\n"
-                },
                 "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 1\\n' > feature.txt\n"
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-site\nmkdir -p community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name \"ZoeSkoul Learner\"\ngit -C community-site config --local user.email \"learner@zoeskoul.local\"\ncd community-site\nprintf %s '<nav>Home</nav>\n' > index.html\ncd ..\ncd community-site\nprintf %s 'export const links = [\"Home\"];\n' > nav.js\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Add project baseline'\ncd community-site\nprintf %s '<nav>Home Events</nav>\n' > index.html\ncd ..\ncd community-site\nprintf %s 'export const links = [\"Home\", \"Events\"];\n' > nav.js\ncd ..\ngit -C community-site add -- index.html nav.js\n"
                 }
               },
               "terminalExpectations": {
                 "forbiddenCommands": {
                   "0": {
                     "message": "Do not rewrite shared history in this Git practice task."
+                  }
+                },
+                "requiredCommands": {
+                  "0": {
+                    "message": "Run `git commit -m \"Add events navigation\"`, then check your answer again."
+                  },
+                  "1": {
+                    "message": "Run `git log -1 --oneline`, then check your answer again."
                   }
                 }
               }
             },
             "try_create_focused_commits_sketch1": {
-              "title": "Try it yourself: Stage Specific Changes",
-              "prompt": "Right after the sketch \"Preparing Changes for a Commit\", practice that exact idea with this task. Stage only the changes in `index.html` for the next commit.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter. Produce the result for stage Specific Changes so it reinforces Create Focused Commits.",
-              "hint": "Read the Git task \"Stage Specific Changes\" and identify the repository state you need to create.",
+              "title": "Leave Unrelated Work for Later",
+              "prompt": "The terminal opens inside the prepared `community-site/` repository.\n\nOnly `README.md` is staged; `styles.css` is still an unstaged experiment. Commit the documentation change as `Clarify volunteer hours` and verify that the style edit remains.\n\nType each command in the terminal and press Enter.",
+              "hint": "Read the repository state first, then use the Git command that changes only the requested boundary.",
               "help": {
-                "concept": "This Git exercise checks the repository state produced by \"Stage Specific Changes\".",
-                "hint_1": "Use git status before and after each small change so you can see what moved between the working tree, staging area, and history.",
-                "hint_2": "Match the requested file names, branch names, and commit purpose before clicking Check Answer."
+                "concept": "Committing staged work does not sweep unrelated unstaged edits into history.",
+                "hint_1": "Use the exact file or repository named in the task; avoid broad commands that include unrelated work.",
+                "hint_2": "After the action, run the requested inspection command to confirm the final state."
               },
-              "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.",
-              "solutionCode": "bash .zoeskoul/setup.sh\ngit add\ngit add index.html",
-              "instructions": "Stage only the changes in `index.html` for the next commit.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+              "starterCode": "Open Saturdays from 9 AM to noon.\n",
+              "solutionCode": "git commit -m \"Clarify volunteer hours\"\ngit status --short",
+              "instructions": "The terminal opens inside the prepared `community-site/` repository.\n\nOnly `README.md` is staged; `styles.css` is still an unstaged experiment. Commit the documentation change as `Clarify volunteer hours` and verify that the style edit remains.\n\nType each command in the terminal and press Enter.",
               "starterFiles": {
-                "main_sh": {
-                  "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.\n"
-                },
                 "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 2\\n' > index.html\n"
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-site\nmkdir -p community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name \"ZoeSkoul Learner\"\ngit -C community-site config --local user.email \"learner@zoeskoul.local\"\ncd community-site\nprintf %s 'Open Saturdays.\n' > README.md\ncd ..\ncd community-site\nprintf %s 'body { color: navy; }\n' > styles.css\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Add project baseline'\ncd community-site\nprintf %s 'Open Saturdays from 9 AM to noon.\n' > README.md\ncd ..\ncd community-site\nprintf %s 'body { color: teal; }\n' > styles.css\ncd ..\ngit -C community-site add -- README.md\n"
                 }
               },
               "solutionFiles": {
-                "main_sh": {
-                  "content": "bash .zoeskoul/setup.sh\ngit add\ngit add index.html\n"
-                },
                 "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 2\\n' > index.html\n"
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-site\nmkdir -p community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name \"ZoeSkoul Learner\"\ngit -C community-site config --local user.email \"learner@zoeskoul.local\"\ncd community-site\nprintf %s 'Open Saturdays.\n' > README.md\ncd ..\ncd community-site\nprintf %s 'body { color: navy; }\n' > styles.css\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Add project baseline'\ncd community-site\nprintf %s 'Open Saturdays from 9 AM to noon.\n' > README.md\ncd ..\ncd community-site\nprintf %s 'body { color: teal; }\n' > styles.css\ncd ..\ngit -C community-site add -- README.md\n"
                 }
               },
               "terminalExpectations": {
                 "forbiddenCommands": {
                   "0": {
                     "message": "Do not rewrite shared history in this Git practice task."
+                  }
+                },
+                "requiredCommands": {
+                  "0": {
+                    "message": "Run `git commit -m \"Clarify volunteer hours\"`, then check your answer again."
+                  },
+                  "1": {
+                    "message": "Run `git status --short`, then check your answer again."
                   }
                 }
               }
             },
             "try_create_focused_commits_sketch2": {
-              "title": "Try it yourself: Write a Commit Message",
-              "prompt": "Right after the sketch \"Crafting Effective Commit Messages\", practice that exact idea with this task. Commit the staged changes with the message 'Fix login bug'.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter. Produce the result for write a Commit Message so it reinforces Create Focused Commits.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "title": "Use an Imperative Commit Message",
+              "prompt": "The terminal opens inside the prepared `community-site/` repository.\n\nA bug fix in `app.js` is staged. Commit it with `Fix event card toggle`, then print only the latest subject line.\n\nType each command in the terminal and press Enter.",
+              "hint": "Read the repository state first, then use the Git command that changes only the requested boundary.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+                "concept": "Imperative messages describe what the snapshot does when applied to the project.",
+                "hint_1": "Use the exact file or repository named in the task; avoid broad commands that include unrelated work.",
+                "hint_2": "After the action, run the requested inspection command to confirm the final state."
               },
-              "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.",
-              "solutionCode": "bash .zoeskoul/setup.sh\ngit commit -m\ngit commit -m 'Fix login bug'",
-              "instructions": "Commit the staged changes with the message 'Fix login bug'.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+              "starterCode": "const open = !open;\n",
+              "solutionCode": "git commit -m \"Fix event card toggle\"\ngit log -1 --format=%s",
+              "instructions": "The terminal opens inside the prepared `community-site/` repository.\n\nA bug fix in `app.js` is staged. Commit it with `Fix event card toggle`, then print only the latest subject line.\n\nType each command in the terminal and press Enter.",
               "starterFiles": {
-                "main_sh": {
-                  "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.\n"
-                },
                 "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 3\\n' > practice-3.txt\n"
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-site\nmkdir -p community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name \"ZoeSkoul Learner\"\ngit -C community-site config --local user.email \"learner@zoeskoul.local\"\ncd community-site\nprintf %s 'const open = false;\n' > app.js\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Add project baseline'\ncd community-site\nprintf %s 'const open = !open;\n' > app.js\ncd ..\ngit -C community-site add -- app.js\n"
                 }
               },
               "solutionFiles": {
-                "main_sh": {
-                  "content": "bash .zoeskoul/setup.sh\ngit commit -m\ngit commit -m 'Fix login bug'\n"
-                },
                 "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 3\\n' > practice-3.txt\n"
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-site\nmkdir -p community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name \"ZoeSkoul Learner\"\ngit -C community-site config --local user.email \"learner@zoeskoul.local\"\ncd community-site\nprintf %s 'const open = false;\n' > app.js\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Add project baseline'\ncd community-site\nprintf %s 'const open = !open;\n' > app.js\ncd ..\ngit -C community-site add -- app.js\n"
                 }
               },
               "terminalExpectations": {
@@ -129,41 +127,51 @@
                   "0": {
                     "message": "Do not rewrite shared history in this Git practice task."
                   }
+                },
+                "requiredCommands": {
+                  "0": {
+                    "message": "Run `git commit -m \"Fix event card toggle\"`, then check your answer again."
+                  },
+                  "1": {
+                    "message": "Run `git log -1 --format=%s`, then check your answer again."
+                  }
                 }
               }
             },
             "try_create_focused_commits_sketch3": {
-              "title": "Try it yourself: Review Commit History",
-              "prompt": "Right after the sketch \"Inspecting Past Commits\", practice that exact idea with this task. Use a command to view the commit history in a concise format.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter. Produce the result for review Commit History so it reinforces Create Focused Commits.",
-              "hint": "Read the Git task \"Review Commit History\" and identify the repository state you need to create.",
+              "title": "Read the Story You Created",
+              "prompt": "The terminal opens inside the prepared `community-site/` repository.\n\nThe site now has three focused snapshots. Read the one-line history and confirm that the working tree is clean.\n\nType each command in the terminal and press Enter.",
+              "hint": "Read the repository state first, then use the Git command that changes only the requested boundary.",
               "help": {
-                "concept": "This Git exercise checks the repository state produced by \"Review Commit History\".",
-                "hint_1": "Use git status before and after each small change so you can see what moved between the working tree, staging area, and history.",
-                "hint_2": "Match the requested file names, branch names, and commit purpose before clicking Check Answer."
+                "concept": "A sequence of focused commits reads like a concise explanation of how the project grew.",
+                "hint_1": "Use the exact file or repository named in the task; avoid broad commands that include unrelated work.",
+                "hint_2": "After the action, run the requested inspection command to confirm the final state."
               },
-              "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.",
-              "solutionCode": "bash .zoeskoul/setup.sh\ngit log --oneline",
-              "instructions": "Use a command to view the commit history in a concise format.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+              "starterCode": "Open Saturdays from 9 AM to noon.\n",
+              "solutionCode": "git log --oneline\ngit status --short",
+              "instructions": "The terminal opens inside the prepared `community-site/` repository.\n\nThe site now has three focused snapshots. Read the one-line history and confirm that the working tree is clean.\n\nType each command in the terminal and press Enter.",
               "starterFiles": {
-                "main_sh": {
-                  "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.\n"
-                },
                 "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 4\\n' > practice-4.txt\n"
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-site\nmkdir -p community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name \"ZoeSkoul Learner\"\ngit -C community-site config --local user.email \"learner@zoeskoul.local\"\ncd community-site\nprintf %s '<h1>Community Hub</h1>\n' > index.html\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Start community site'\ncd community-site\nprintf %s '<h1>Community Hub</h1>\n<nav>Events</nav>\n' > index.html\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Add events navigation'\ncd community-site\nprintf %s 'Open Saturdays from 9 AM to noon.\n' > README.md\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Clarify volunteer hours'\n"
                 }
               },
               "solutionFiles": {
-                "main_sh": {
-                  "content": "bash .zoeskoul/setup.sh\ngit log --oneline\n"
-                },
                 "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 4\\n' > practice-4.txt\n"
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-site\nmkdir -p community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name \"ZoeSkoul Learner\"\ngit -C community-site config --local user.email \"learner@zoeskoul.local\"\ncd community-site\nprintf %s '<h1>Community Hub</h1>\n' > index.html\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Start community site'\ncd community-site\nprintf %s '<h1>Community Hub</h1>\n<nav>Events</nav>\n' > index.html\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Add events navigation'\ncd community-site\nprintf %s 'Open Saturdays from 9 AM to noon.\n' > README.md\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Clarify volunteer hours'\n"
                 }
               },
               "terminalExpectations": {
                 "forbiddenCommands": {
                   "0": {
                     "message": "Do not rewrite shared history in this Git practice task."
+                  }
+                },
+                "requiredCommands": {
+                  "0": {
+                    "message": "Run `git log --oneline`, then check your answer again."
+                  },
+                  "1": {
+                    "message": "Run `git status --short`, then check your answer again."
                   }
                 }
               }
@@ -207,7 +215,7 @@
               "prompt": "Which of the following are best practices for writing commit messages?",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "A focused commit records one coherent change with a message that explains the result.",
                 "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
                 "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
               },
@@ -275,20 +283,20 @@
       "git-foundations-module-2-meaningful-history": {
         "create-focused-commits": {
           "sketch0": {
-            "title": "The Role of Commits in Version Control",
-            "bodyMarkdown": "Commits are the fundamental units of change in a Git repository. Each commit represents a snapshot of your project at a specific point in time. By creating commits, you can track changes, revert to previous states, and collaborate with others more effectively. \n\nWorked example: Imagine you're working on a project where you've just added a new feature and fixed a bug. Instead of committing both changes together, you should create separate commits for each. This way, each commit has a clear purpose and can be easily understood by others reviewing the history.\n\nTo create a commit, you first need to stage your changes using `git add`. Once staged, you can commit them with `git commit -m \"Your commit message\"`. The message should be concise and imperative, summarizing the change's purpose."
+            "title": "A Commit Is a Deliberate Checkpoint",
+            "bodyMarkdown": "A commit is a named checkpoint in the repository timeline. It records the staged snapshot, author identity, message, and link to the previous commit.\n\nA useful checkpoint answers one question: what meaningful change became true here? It might add opening hours, correct a contact address, or remove an obsolete page.\n\nAvoid treating a commit as a periodic save of everything in sight. Review the staged snapshot first."
           },
           "sketch1": {
-            "title": "Preparing Changes for a Commit",
-            "bodyMarkdown": "Before you can commit changes, you need to stage them. Staging allows you to select which changes you want to include in your next commit. This is particularly useful when you have multiple changes in your working directory but only want to commit some of them.\n\nWorked example: Suppose you've modified two files, `index.html` and `style.css`. If you only want to commit the changes in `index.html`, you would stage it using `git add index.html`. You can then commit this change separately from any others.\n\nStaging helps maintain a clean and understandable commit history by allowing you to group related changes together."
+            "title": "Commit Only the Staged Snapshot",
+            "bodyMarkdown": "After reviewing `git diff --staged`, record the snapshot:\n\n```bash\ngit commit -m \"Add evening workshop schedule\"\n```\n\nGit commits only the staging area. Unstaged edits remain in the working tree, ready for later work.\n\nThat boundary is what allows two changes made on the same afternoon to become two understandable commits."
           },
           "sketch2": {
-            "title": "Crafting Effective Commit Messages",
-            "bodyMarkdown": "A good commit message is crucial for understanding the history of a project. It should be short, descriptive, and written in the imperative mood. This style helps convey what the commit does, rather than what was done.\n\nWorked example: If you fixed a bug in the login feature, a good commit message might be `Fix login bug causing crash`. This message clearly states what the commit achieves, making it easier for others to understand the change.\n\nCommit messages are not just for you; they are for anyone who might work on the project in the future. Clear messages help maintain a project's readability and manageability."
+            "title": "Write the Message for a Reader",
+            "bodyMarkdown": "A commit subject should be brief, specific, and written as an action: `Add evening workshop schedule`, not `changes` or `worked on page`.\n\nImagine the message completing the sentence “This commit will …”. The wording should describe the result, not the commands you typed.\n\nGood messages turn `git log --oneline` into a useful project summary."
           },
           "sketch3": {
-            "title": "Inspecting Past Commits",
-            "bodyMarkdown": "Once you've made several commits, you can review them to understand the project's evolution. Git provides several commands to inspect commit history, such as `git log` and `git show`.\n\nWorked example: Using `git log --oneline`, you can see a condensed view of your commit history, showing each commit's hash and message. This view helps you quickly understand the sequence of changes.\n\nFor more detailed information about a specific commit, use `git show <commit-hash>`. This command displays the changes introduced by the commit, along with the commit message and metadata. Reviewing commit history is essential for tracking progress and identifying when specific changes were made."
+            "title": "Verify the Result",
+            "bodyMarkdown": "After committing, read both history and current state:\n\n```bash\ngit log --oneline -1\ngit status --short\n```\n\nThe first command confirms the newest message. The second reveals whether anything remains unstaged or untracked.\n\nVerification closes the loop: you know what entered history and what still needs attention."
           }
         }
       }

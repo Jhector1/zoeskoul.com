@@ -1,4 +1,8 @@
-import type { TerminalSessionScope } from "@/components/code/runner/runtime";
+import type {
+    TerminalSessionScope,
+    WorkspaceTerminalBootstrap,
+} from "@/components/code/runner/runtime";
+import { mergeManifestTerminalBootstraps } from "@zoeskoul/curriculum-contracts";
 import type { SqlPaneOptions } from "@/components/code/runner/components/sql/results-pane";
 import type {
     FullIDEServicePreset,
@@ -34,6 +38,7 @@ export type LearningIdeConfig = {
     layoutMode?: LearningIdeLayoutMode;
     terminalSessionScope?: TerminalSessionScope;
     terminalCwd?: string;
+    terminalBootstrap?: WorkspaceTerminalBootstrap;
     showOpenTerminalButton?: boolean;
     showRestartTerminalButton?: boolean;
     fileActions?: LearningIdeFileActions;
@@ -80,6 +85,10 @@ export function mergeLearningIdeConfigs(
         const previousRequires: LearningIdeServiceRequirements = merged?.requires ?? {};
         const previousSqlPane: SqlPaneOptions = merged?.sqlPane ?? {};
         const previousFileActions: LearningIdeFileActions = merged?.fileActions ?? {};
+        const terminalBootstrap = mergeManifestTerminalBootstraps(
+            merged?.terminalBootstrap,
+            config.terminalBootstrap,
+        );
 
         merged = {
             ...(merged ?? {}),
@@ -91,6 +100,7 @@ export function mergeLearningIdeConfigs(
                 ? { terminalSessionScope: config.terminalSessionScope }
                 : {}),
             ...(config.terminalCwd ? { terminalCwd: config.terminalCwd } : {}),
+            ...(terminalBootstrap ? { terminalBootstrap } : {}),
             ...(typeof config.showOpenTerminalButton === "boolean"
                 ? { showOpenTerminalButton: config.showOpenTerminalButton }
                 : {}),
@@ -144,6 +154,9 @@ export function resolveFullIDEConfigFromLearningIde(args?: {
         runnerBackend === "pty" || (runnerBackend === "auto" && wantsTerminal);
     const terminalSessionScope = ideConfig?.terminalSessionScope ?? "exercise";
     const terminalCwd = ideConfig?.terminalCwd?.trim() || undefined;
+    const terminalBootstrap = mergeManifestTerminalBootstraps(
+        ideConfig?.terminalBootstrap,
+    );
     const requestedFileActions = resolveIdeFileActions(ideConfig?.fileActions ?? null);
     const fileActions: ResolvedIdeFileActions = terminalWorkspaceMode
         ? {
@@ -168,6 +181,7 @@ export function resolveFullIDEConfigFromLearningIde(args?: {
         runner: {
             terminalSessionScope,
             ...(terminalCwd ? { terminalCwd } : {}),
+            ...(terminalBootstrap ? { terminalBootstrap } : {}),
             ...(typeof ideConfig?.showOpenTerminalButton === "boolean"
                 ? { showOpenTerminalButton: ideConfig.showOpenTerminalButton }
                 : {}),
@@ -217,19 +231,16 @@ export function resolveFullIDEConfigFromLearningIde(args?: {
                     allowRun: !terminalWorkspaceMode,
                     terminalSessionScope,
                     ...(terminalCwd ? { terminalCwd } : {}),
+                    ...(terminalBootstrap ? { terminalBootstrap } : {}),
                 },
             }
             : {}),
-        ...(wantsProjectPersistence || wantsCloudProjects
-            ? {
-                projects: {
-                    showProjectSwitcher: true,
-                    showSaveControls: wantsProjectPersistence,
-                    showSaveAs: wantsProjectPersistence,
-                    showCloudProjects: wantsCloudProjects,
-                },
-            }
-            : {}),
+        projects: {
+            showProjectSwitcher: wantsProjectPersistence || wantsCloudProjects,
+            showSaveControls: wantsProjectPersistence,
+            showSaveAs: wantsProjectPersistence,
+            showCloudProjects: wantsCloudProjects,
+        },
     };
 
     return {

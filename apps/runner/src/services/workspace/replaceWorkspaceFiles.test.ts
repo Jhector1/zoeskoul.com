@@ -128,4 +128,56 @@ describe("replaceWorkspaceFiles", () => {
         ).resolves.toBe("new");
     });
 
+    it("preserves Git and hidden bootstrap state while replacing visible editor files", async () => {
+        await fs.mkdir(path.join(root, "trail-journal", ".git"), { recursive: true });
+        await fs.mkdir(path.join(root, ".zoeskoul"), { recursive: true });
+        await fs.writeFile(
+            path.join(root, "trail-journal", ".git", "HEAD"),
+            "ref: refs/heads/main\n",
+        );
+        await fs.writeFile(
+            path.join(root, "trail-journal", ".git", "index"),
+            "opaque-index",
+        );
+        await fs.writeFile(
+            path.join(root, ".zoeskoul", "setup.sh"),
+            "#!/usr/bin/env bash\necho old\n",
+        );
+        await fs.writeFile(
+            path.join(root, ".zoeskoul", ".setup-complete"),
+            "old-state\n",
+        );
+        await fs.writeFile(path.join(root, "old-visible.txt"), "remove me\n");
+
+        await replaceWorkspaceFiles(root, [
+            {
+                kind: "file",
+                path: "trail-journal/README.md",
+                content: "# Trail Journal\n",
+            },
+            {
+                kind: "file",
+                path: ".zoeskoul/setup.sh",
+                content: "#!/usr/bin/env bash\necho new\n",
+            },
+        ]);
+
+        await expect(
+            fs.readFile(path.join(root, "trail-journal", ".git", "HEAD"), "utf8"),
+        ).resolves.toBe("ref: refs/heads/main\n");
+        await expect(
+            fs.readFile(path.join(root, "trail-journal", ".git", "index"), "utf8"),
+        ).resolves.toBe("opaque-index");
+        await expect(
+            fs.readFile(path.join(root, ".zoeskoul", ".setup-complete"), "utf8"),
+        ).resolves.toBe("old-state\n");
+        await expect(
+            fs.readFile(path.join(root, ".zoeskoul", "setup.sh"), "utf8"),
+        ).resolves.toBe("#!/usr/bin/env bash\necho new\n");
+        await expect(
+            fs.readFile(path.join(root, "trail-journal", "README.md"), "utf8"),
+        ).resolves.toBe("# Trail Journal\n");
+        await expect(fs.access(path.join(root, "old-visible.txt"))).rejects.toThrow();
+    });
+
 });

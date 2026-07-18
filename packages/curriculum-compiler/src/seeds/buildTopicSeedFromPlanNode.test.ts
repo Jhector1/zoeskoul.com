@@ -398,6 +398,67 @@ describe("buildTopicSeedFromPlanNode", () => {
         expect(seed.plannedExerciseCounts?.total).toBe(4);
     });
 
+    it("uses profile-owned layouts instead of inferring presentation from capabilities", () => {
+        const gitSeed = buildTopicSeedFromPlanNode(
+            makeBaseArgs({
+                blueprint: {
+                    subjectSlug: "git-foundations",
+                    courseSlug: "git-foundations",
+                    profileId: "git",
+                },
+            }),
+        );
+        const bashSeed = buildTopicSeedFromPlanNode(
+            makeBaseArgs({
+                blueprint: {
+                    subjectSlug: "linux-terminal-fundamentals",
+                    courseSlug: "linux-terminal-fundamentals",
+                    profileId: "bash",
+                },
+            }),
+        );
+
+        expect(gitSeed.moduleServiceDefaults).toMatchObject({
+            preset: "runner",
+            runnerBackend: "pty",
+            layoutMode: "default",
+            terminalBootstrap: {
+                gitSafeDirectories: ["/workspace/*"],
+            },
+            requires: { files: true, multiFile: true, terminal: true },
+        });
+        expect(bashSeed.moduleServiceDefaults).toMatchObject({
+            preset: "runner",
+            runnerBackend: "pty",
+            layoutMode: "terminal_workspace",
+            requires: { files: true, multiFile: true, terminal: true },
+        });
+    });
+
+    it("keeps authored module IDE policy above the profile default", () => {
+        const seed = buildTopicSeedFromPlanNode(
+            makeBaseArgs({
+                blueprint: {
+                    subjectSlug: "git-foundations",
+                    courseSlug: "git-foundations",
+                    profileId: "git",
+                    idePolicy: {
+                        moduleServiceDefaults: {
+                            m0: { layoutMode: "terminal_workspace" },
+                        },
+                    },
+                },
+            }),
+        );
+
+        expect(seed.moduleServiceDefaults).toMatchObject({
+            layoutMode: "terminal_workspace",
+            terminalBootstrap: {
+                gitSafeDirectories: ["/workspace/*"],
+            },
+        });
+    });
+
     it("keeps normal lesson topics on quiz targets", () => {
         const seed = buildTopicSeedFromPlanNode(makeBaseArgs());
 

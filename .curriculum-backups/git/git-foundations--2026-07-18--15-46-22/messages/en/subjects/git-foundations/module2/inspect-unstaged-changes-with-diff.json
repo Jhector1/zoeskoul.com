@@ -1,0 +1,243 @@
+{
+  "topics": {
+    "git-foundations": {
+      "git-foundations-module-2-meaningful-history": {
+        "inspect-unstaged-changes-with-diff": {
+          "label": "Inspect Unstaged Changes with git diff",
+          "summary": "Read line-level differences before deciding what belongs in the next commit.",
+          "cards": {
+            "sketch0": {
+              "title": "Inspecting Unstaged Changes with git diff"
+            },
+            "sketch1": {
+              "title": "Interpreting the Diff Output"
+            },
+            "sketch2": {
+              "title": "Spotting Unrelated Edits"
+            },
+            "sketch3": {
+              "title": "Using git diff in Your Workflow"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_inspect_unstaged_changes_with_diff_sketch0": {
+              "title": "Try it yourself: Try It: Inspect Changes in index.html",
+              "prompt": "Right after the sketch \"Inspecting Unstaged Changes with git diff\", practice that exact idea with this task. You have made changes to `index.html` in your project. Use `git diff` to inspect the unstaged changes. Type the command and press Enter to see the differences. Produce the result for try It: Inspect Changes in index.html so it reinforces Inspect Unstaged Changes with git diff.",
+              "hint": "Read the Git task \"Try It: Inspect Changes in index.html\" and identify the repository state you need to create.",
+              "help": {
+                "concept": "This Git exercise checks the repository state produced by \"Try It: Inspect Changes in index.html\".",
+                "hint_1": "Use git status before and after each small change so you can see what moved between the working tree, staging area, and history.",
+                "hint_2": "Match the requested file names, branch names, and commit purpose before clicking Check Answer."
+              },
+              "starterCode": "# Type your command below",
+              "solutionCode": "git diff",
+              "starterFiles": {
+                "main_sh": {
+                  "content": "# Type your command below"
+                }
+              },
+              "solutionFiles": {
+                "main_sh": {
+                  "content": "git diff"
+                }
+              }
+            },
+            "try_inspect_unstaged_changes_with_diff_sketch1": {
+              "title": "Try it yourself: Try It: Review Changes in style.css",
+              "prompt": "Right after the sketch \"Interpreting the Diff Output\", practice that exact idea with this task. You've updated the color scheme in `style.css`. Use `git diff` to review the changes before staging them. Type the command and press Enter to see the differences. Produce the result for try It: Review Changes in style.css so it reinforces Inspect Unstaged Changes with git diff.",
+              "hint": "Read the Git task \"Try It: Review Changes in style.css\" and identify the repository state you need to create.",
+              "help": {
+                "concept": "This Git exercise checks the repository state produced by \"Try It: Review Changes in style.css\".",
+                "hint_1": "Use git status before and after each small change so you can see what moved between the working tree, staging area, and history.",
+                "hint_2": "Match the requested file names, branch names, and commit purpose before clicking Check Answer."
+              },
+              "starterCode": "# Type your command below",
+              "solutionCode": "git diff",
+              "starterFiles": {
+                "main_sh": {
+                  "content": "# Type your command below"
+                }
+              },
+              "solutionFiles": {
+                "main_sh": {
+                  "content": "git diff"
+                }
+              }
+            },
+            "try_inspect_unstaged_changes_with_diff_sketch2": {
+              "title": "Try it yourself: Try It: Identify Unrelated Changes",
+              "prompt": "Right after the sketch \"Spotting Unrelated Edits\", practice that exact idea with this task. You've made changes to both `app.js` and `config.js`. Use `git diff` to identify unrelated changes that should not be staged together. Type the command and press Enter to see the differences. Produce the result for try It: Identify Unrelated Changes so it reinforces Inspect Unstaged Changes with git diff.",
+              "hint": "Read the Git task \"Try It: Identify Unrelated Changes\" and identify the repository state you need to create.",
+              "help": {
+                "concept": "This Git exercise checks the repository state produced by \"Try It: Identify Unrelated Changes\".",
+                "hint_1": "Use git status before and after each small change so you can see what moved between the working tree, staging area, and history.",
+                "hint_2": "Match the requested file names, branch names, and commit purpose before clicking Check Answer."
+              },
+              "starterCode": "# Type your command below",
+              "solutionCode": "git diff",
+              "starterFiles": {
+                "main_sh": {
+                  "content": "# Type your command below"
+                }
+              },
+              "solutionFiles": {
+                "main_sh": {
+                  "content": "git diff"
+                }
+              }
+            },
+            "try_inspect_unstaged_changes_with_diff_sketch3": {
+              "title": "Try it yourself: Try It: Use git diff in a Collaborative Project",
+              "prompt": "Right after the sketch \"Using git diff in Your Workflow\", practice that exact idea with this task. In a collaborative project, you've modified `README.md`. Use `git diff` to ensure your changes are clear and focused before committing. Type the command and press Enter to see the differences. Produce the result for try It: Use git diff in a Collaborative Project so it reinforces Inspect Unstaged Changes with git diff.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "# Type your command below",
+              "solutionCode": "git diff",
+              "starterFiles": {
+                "main_sh": {
+                  "content": "# Type your command below"
+                }
+              },
+              "solutionFiles": {
+                "main_sh": {
+                  "content": "git diff"
+                }
+              }
+            }
+          },
+          "practice": {
+            "single-choice-1": {
+              "title": "Using git diff",
+              "prompt": "When should you use `git diff`?",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "options": {
+                "a": "After committing changes",
+                "b": "Before staging changes",
+                "c": "After pushing to remote",
+                "d": "Before creating a branch"
+              }
+            },
+            "multi-choice-1": {
+              "title": "Understanding git diff",
+              "prompt": "What does the `git diff` command do?",
+              "hint": "Think about what changes `git diff` shows.",
+              "help": {
+                "concept": "`git diff` shows changes in the working directory that are not yet staged.",
+                "hint_1": "`git diff` compares the working directory with the staging area.",
+                "hint_2": "It highlights changes that are not yet staged for commit."
+              },
+              "options": {
+                "a": "Shows the commit history",
+                "b": "Displays changes in the working directory not yet staged",
+                "c": "Lists all branches",
+                "d": "Shows the current branch"
+              }
+            },
+            "multi-choice-2": {
+              "title": "Interpreting Diff Output",
+              "prompt": "Which symbol in `git diff` output indicates a line has been added?",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "options": {
+                "a": "-",
+                "b": "+",
+                "c": "*",
+                "d": "/"
+              }
+            },
+            "drag-reorder-1": {
+              "title": "Steps to Use git diff",
+              "prompt": "Arrange the steps to use `git diff` to inspect changes.",
+              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "help": {
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
+              },
+              "tokens": {
+                "t1": "Navigate to the project directory",
+                "t2": "Run `git diff`",
+                "t3": "Review the output"
+              }
+            },
+            "fill-blank-choice-1": {
+              "title": "Symbol for Removed Lines",
+              "prompt": "In `git diff`, lines that have been removed are indicated by the symbol `[blank1]`.",
+              "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+              "help": {
+                "concept": "The blank should be filled with the term that makes the statement accurate.",
+                "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+                "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+              },
+              "template": "In `git diff`, lines that have been removed are indicated by the symbol `[blank1]`.",
+              "choices": [
+                "-",
+                "+",
+                "*",
+                "/"
+              ]
+            },
+            "fill-blank-choice-2": {
+              "title": "Purpose of git diff",
+              "prompt": "The primary purpose of `git diff` is to show changes in the [blank1] that are not yet staged.",
+              "hint": "Consider where `git diff` looks for changes.",
+              "help": {
+                "concept": "`git diff` shows changes in the the missing term that are not yet staged.",
+                "hint_1": "`git diff` compares the the missing term with the staging area.",
+                "hint_2": "It highlights changes that are not yet staged for commit."
+              },
+              "template": "The primary purpose of `git diff` is to show changes in the [blank1] that are not yet staged.",
+              "choices": [
+                "working directory",
+                "staging area",
+                "commit history",
+                "remote repository"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "git-foundations": {
+      "git-foundations-module-2-meaningful-history": {
+        "inspect-unstaged-changes-with-diff": {
+          "sketch0": {
+            "title": "Inspecting Unstaged Changes with git diff",
+            "bodyMarkdown": "The `git diff` command is a powerful tool that allows you to see the changes in your working directory that have not yet been staged for commit. This command helps you understand what modifications have been made to your files, so you can decide what to include in your next commit.\n\nWorked example:\nImagine you have a file called `index.html` in your project. You've made some changes to this file, but you're not sure what exactly has been modified. By running `git diff`, you can see a line-by-line comparison of the changes. The output will show lines that have been added, removed, or modified, helping you to review your work before staging it.\n\nFor instance, if you added a new paragraph to `index.html`, `git diff` will highlight this addition with a `+` sign at the beginning of the line. If you removed a line, it will be marked with a `-` sign. This visual representation makes it easy to spot changes and ensure that only the intended modifications are included in your commit."
+          },
+          "sketch1": {
+            "title": "Interpreting the Diff Output",
+            "bodyMarkdown": "When you run `git diff`, the output can seem overwhelming at first, but it's structured to help you understand the changes clearly. Each change is prefixed with a header that indicates the file being compared. The lines starting with `---` and `+++` show the old and new file versions, respectively.\n\nThe actual changes are displayed with `-` and `+` signs. Lines with a `-` indicate content that was removed, while lines with a `+` show new content. This format allows you to quickly identify what has been added or removed.\n\nConsider a scenario where you have a file `style.css` and you've changed the color scheme. The `git diff` output will show the old color values with `-` and the new ones with `+`. This helps you verify that the changes align with your design intentions before committing."
+          },
+          "sketch2": {
+            "title": "Spotting Unrelated Edits",
+            "bodyMarkdown": "One of the key benefits of using `git diff` is the ability to spot unrelated changes that might have been made unintentionally. This is crucial for maintaining a clean commit history.\n\nImagine you're working on a feature in `app.js`, but you also made some experimental changes to `config.js` that you don't want to commit yet. By running `git diff`, you can see all the changes across your files. This allows you to selectively stage only the changes related to your feature, leaving the experimental changes for later.\n\nThis practice helps in creating focused commits that are easier to understand and review, ensuring that your commit history remains clear and meaningful."
+          },
+          "sketch3": {
+            "title": "Using git diff in Your Workflow",
+            "bodyMarkdown": "Incorporating `git diff` into your workflow can significantly enhance your development process. It allows you to review changes before staging them, ensuring that only the necessary modifications are included in your commits.\n\nFor example, if you're working on a collaborative project, using `git diff` before committing can help you communicate your changes more effectively to your team. It ensures that your commits are precise and only contain relevant changes, making code reviews smoother and more efficient.\n\nBy regularly using `git diff`, you develop a habit of reviewing your work, which leads to better code quality and a more organized project history."
+          }
+        }
+      }
+    }
+  }
+}

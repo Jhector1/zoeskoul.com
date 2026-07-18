@@ -182,7 +182,16 @@ describe("repairGitDraft", () => {
                     expect.objectContaining({ path: ".zoeskoul/setup.sh", readOnly: true }),
                 ]),
             );
-            expect(exercise.terminalExpectations.requiredCommands.length).toBeGreaterThan(1);
+            expect(
+                exercise.terminalExpectations.requiredCommands.length,
+            ).toBeGreaterThanOrEqual(1);
+            expect(
+                exercise.terminalExpectations.requiredCommands.some(
+                    ({ pattern }: { pattern: string }) =>
+                        pattern.includes("zoeskoul/setup") ||
+                        pattern.includes("^cd\\s+"),
+                ),
+            ).toBe(false);
         }
 
         expect(codeInputs[1].hiddenShellCheck.script).toContain(

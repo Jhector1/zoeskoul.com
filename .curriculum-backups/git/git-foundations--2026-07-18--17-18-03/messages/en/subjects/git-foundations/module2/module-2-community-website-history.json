@@ -1,0 +1,272 @@
+{
+  "topics": {
+    "git-foundations": {
+      "git-foundations-module-2-meaningful-history": {
+        "module-2-community-website-history": {
+          "label": "Project: Build a Readable Website History",
+          "summary": "A community website has two unrelated edits. Separate them into focused snapshots, then read the history as a clear project story.",
+          "cards": {
+            "sketch0": {
+              "title": "Build a History Another Maintainer Can Read"
+            },
+            "project": {
+              "title": "Build the Community Website History"
+            }
+          },
+          "projectSteps": {
+            "try_module_2_community_website_history_sketch0": {
+              "title": "Inspect the First Website Change"
+            },
+            "try_module_2_community_website_history_sketch1": {
+              "title": "Stage Only the Navigation Update"
+            },
+            "try_module_2_community_website_history_sketch2": {
+              "title": "Commit the Navigation Update"
+            },
+            "try_module_2_community_website_history_sketch3": {
+              "title": "Prepare the Events Update"
+            },
+            "try_module_2_community_website_history_sketch4": {
+              "title": "Commit the Events Update"
+            },
+            "try_module_2_community_website_history_sketch5": {
+              "title": "Read and Verify the Finished History"
+            }
+          },
+          "moduleProject": {
+            "steps": {
+              "try_module_2_community_website_history_sketch0": {
+                "title": "Inspect the Two Pending Changes",
+                "prompt": "The terminal opens inside the prepared `community-website/` repository.\n\nThe website has a navigation edit and a palette edit. Use status, name-only diff, and a focused diff of `index.html` to understand the work before staging.\n\nType each command in the terminal and press Enter.",
+                "hint": "Read the repository state first, then use the Git command that changes only the requested boundary.",
+                "help": {
+                  "concept": "A project begins with inspection so commit boundaries are chosen from evidence, not guesswork.",
+                  "hint_1": "Use the exact file or repository named in the task; avoid broad commands that include unrelated work.",
+                  "hint_2": "After the action, run the requested inspection command to confirm the final state."
+                },
+                "starterCode": "# Use the terminal for this Git task.\n# The required starting files and repository state are already prepared.\n",
+                "solutionCode": "git status --short\ngit diff --name-only\ngit diff -- index.html",
+                "instructions": "The terminal opens inside the prepared `community-website/` repository.\n\nThe website has a navigation edit and a palette edit. Use status, name-only diff, and a focused diff of `index.html` to understand the work before staging.\n\nType each command in the terminal and press Enter.",
+                "starterFiles": {
+                  "main_sh": {
+                    "content": "# Use the terminal for this Git task.\n# The required starting files and repository state are already prepared.\n"
+                  },
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-website\nmkdir -p community-website\ngit -C community-website init -q -b main\ngit -C community-website config --local user.name \"ZoeSkoul Learner\"\ngit -C community-website config --local user.email \"learner@zoeskoul.local\"\ncd community-website\nprintf %s '<h1>Community Hub</h1>\n<nav>Home</nav>\n' > index.html\ncd ..\ncd community-website\nprintf %s 'body { color: navy; }\n' > styles.css\ncd ..\ngit -C community-website add -A\ngit -C community-website commit -q -m 'Add project baseline'\ncd community-website\nprintf %s '<h1>Community Hub</h1>\n<nav>Home Events</nav>\n' > index.html\ncd ..\ncd community-website\nprintf %s 'body { color: teal; }\n' > styles.css\ncd ..\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_sh": {
+                    "content": "git status --short\ngit diff --name-only\ngit diff -- index.html\n"
+                  },
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-website\nmkdir -p community-website\ngit -C community-website init -q -b main\ngit -C community-website config --local user.name \"ZoeSkoul Learner\"\ngit -C community-website config --local user.email \"learner@zoeskoul.local\"\ncd community-website\nprintf %s '<h1>Community Hub</h1>\n<nav>Home</nav>\n' > index.html\ncd ..\ncd community-website\nprintf %s 'body { color: navy; }\n' > styles.css\ncd ..\ngit -C community-website add -A\ngit -C community-website commit -q -m 'Add project baseline'\ncd community-website\nprintf %s '<h1>Community Hub</h1>\n<nav>Home Events</nav>\n' > index.html\ncd ..\ncd community-website\nprintf %s 'body { color: teal; }\n' > styles.css\ncd ..\n"
+                  }
+                },
+                "terminalExpectations": {
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "Do not rewrite shared history in this Git practice task."
+                    }
+                  }
+                }
+              },
+              "try_module_2_community_website_history_sketch1": {
+                "title": "Stage the Navigation Update",
+                "prompt": "The terminal opens inside the prepared `community-website/` repository.\n\nStage only `index.html`, then inspect the staged file names and patch. Leave the palette edit unstaged.\n\nType each command in the terminal and press Enter.",
+                "hint": "Read the repository state first, then use the Git command that changes only the requested boundary.",
+                "help": {
+                  "concept": "The index can hold one focused part of a larger working tree.",
+                  "hint_1": "Use the exact file or repository named in the task; avoid broad commands that include unrelated work.",
+                  "hint_2": "After the action, run the requested inspection command to confirm the final state."
+                },
+                "starterCode": "# Use the terminal for this Git task.\n# The required starting files and repository state are already prepared.\n",
+                "solutionCode": "git add index.html\ngit diff --staged --name-only\ngit diff --staged -- index.html",
+                "instructions": "The terminal opens inside the prepared `community-website/` repository.\n\nStage only `index.html`, then inspect the staged file names and patch. Leave the palette edit unstaged.\n\nType each command in the terminal and press Enter.",
+                "starterFiles": {
+                  "main_sh": {
+                    "content": "# Use the terminal for this Git task.\n# The required starting files and repository state are already prepared.\n"
+                  },
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-website\nmkdir -p community-website\ngit -C community-website init -q -b main\ngit -C community-website config --local user.name \"ZoeSkoul Learner\"\ngit -C community-website config --local user.email \"learner@zoeskoul.local\"\ncd community-website\nprintf %s '<h1>Community Hub</h1>\n<nav>Home</nav>\n' > index.html\ncd ..\ncd community-website\nprintf %s 'body { color: navy; }\n' > styles.css\ncd ..\ngit -C community-website add -A\ngit -C community-website commit -q -m 'Add project baseline'\ncd community-website\nprintf %s '<h1>Community Hub</h1>\n<nav>Home Events</nav>\n' > index.html\ncd ..\ncd community-website\nprintf %s 'body { color: teal; }\n' > styles.css\ncd ..\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_sh": {
+                    "content": "git add index.html\ngit diff --staged --name-only\ngit diff --staged -- index.html\n"
+                  },
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-website\nmkdir -p community-website\ngit -C community-website init -q -b main\ngit -C community-website config --local user.name \"ZoeSkoul Learner\"\ngit -C community-website config --local user.email \"learner@zoeskoul.local\"\ncd community-website\nprintf %s '<h1>Community Hub</h1>\n<nav>Home</nav>\n' > index.html\ncd ..\ncd community-website\nprintf %s 'body { color: navy; }\n' > styles.css\ncd ..\ngit -C community-website add -A\ngit -C community-website commit -q -m 'Add project baseline'\ncd community-website\nprintf %s '<h1>Community Hub</h1>\n<nav>Home Events</nav>\n' > index.html\ncd ..\ncd community-website\nprintf %s 'body { color: teal; }\n' > styles.css\ncd ..\n"
+                  }
+                },
+                "terminalExpectations": {
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "Do not rewrite shared history in this Git practice task."
+                    }
+                  }
+                }
+              },
+              "try_module_2_community_website_history_sketch2": {
+                "title": "Commit the Navigation Update",
+                "prompt": "The terminal opens inside the prepared `community-website/` repository.\n\nThe navigation change is staged and the palette edit remains unstaged. Commit `Add events navigation`, then verify the remaining status.\n\nType each command in the terminal and press Enter.",
+                "hint": "Read the repository state first, then use the Git command that changes only the requested boundary.",
+                "help": {
+                  "concept": "A commit records only the staged navigation work and leaves the unrelated palette edit for its own snapshot.",
+                  "hint_1": "Use the exact file or repository named in the task; avoid broad commands that include unrelated work.",
+                  "hint_2": "After the action, run the requested inspection command to confirm the final state."
+                },
+                "starterCode": "# Use the terminal for this Git task.\n# The required starting files and repository state are already prepared.\n",
+                "solutionCode": "git commit -m \"Add events navigation\"\ngit status --short",
+                "instructions": "The terminal opens inside the prepared `community-website/` repository.\n\nThe navigation change is staged and the palette edit remains unstaged. Commit `Add events navigation`, then verify the remaining status.\n\nType each command in the terminal and press Enter.",
+                "starterFiles": {
+                  "main_sh": {
+                    "content": "# Use the terminal for this Git task.\n# The required starting files and repository state are already prepared.\n"
+                  },
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-website\nmkdir -p community-website\ngit -C community-website init -q -b main\ngit -C community-website config --local user.name \"ZoeSkoul Learner\"\ngit -C community-website config --local user.email \"learner@zoeskoul.local\"\ncd community-website\nprintf %s '<h1>Community Hub</h1>\n<nav>Home</nav>\n' > index.html\ncd ..\ncd community-website\nprintf %s 'body { color: navy; }\n' > styles.css\ncd ..\ngit -C community-website add -A\ngit -C community-website commit -q -m 'Add project baseline'\ncd community-website\nprintf %s '<h1>Community Hub</h1>\n<nav>Home Events</nav>\n' > index.html\ncd ..\ncd community-website\nprintf %s 'body { color: teal; }\n' > styles.css\ncd ..\ngit -C community-website add -- index.html\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_sh": {
+                    "content": "git commit -m \"Add events navigation\"\ngit status --short\n"
+                  },
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-website\nmkdir -p community-website\ngit -C community-website init -q -b main\ngit -C community-website config --local user.name \"ZoeSkoul Learner\"\ngit -C community-website config --local user.email \"learner@zoeskoul.local\"\ncd community-website\nprintf %s '<h1>Community Hub</h1>\n<nav>Home</nav>\n' > index.html\ncd ..\ncd community-website\nprintf %s 'body { color: navy; }\n' > styles.css\ncd ..\ngit -C community-website add -A\ngit -C community-website commit -q -m 'Add project baseline'\ncd community-website\nprintf %s '<h1>Community Hub</h1>\n<nav>Home Events</nav>\n' > index.html\ncd ..\ncd community-website\nprintf %s 'body { color: teal; }\n' > styles.css\ncd ..\ngit -C community-website add -- index.html\n"
+                  }
+                },
+                "terminalExpectations": {
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "Do not rewrite shared history in this Git practice task."
+                    }
+                  }
+                }
+              },
+              "try_module_2_community_website_history_sketch3": {
+                "title": "Stage the Palette Update",
+                "prompt": "The terminal opens inside the prepared `community-website/` repository.\n\nThe navigation commit now exists. Stage `styles.css` and inspect the staged patch.\n\nType each command in the terminal and press Enter.",
+                "hint": "Read the repository state first, then use the Git command that changes only the requested boundary.",
+                "help": {
+                  "concept": "The second coherent change receives its own staging boundary after the first snapshot is complete.",
+                  "hint_1": "Use the exact file or repository named in the task; avoid broad commands that include unrelated work.",
+                  "hint_2": "After the action, run the requested inspection command to confirm the final state."
+                },
+                "starterCode": "# Use the terminal for this Git task.\n# The required starting files and repository state are already prepared.\n",
+                "solutionCode": "git add styles.css\ngit diff --staged -- styles.css",
+                "instructions": "The terminal opens inside the prepared `community-website/` repository.\n\nThe navigation commit now exists. Stage `styles.css` and inspect the staged patch.\n\nType each command in the terminal and press Enter.",
+                "starterFiles": {
+                  "main_sh": {
+                    "content": "# Use the terminal for this Git task.\n# The required starting files and repository state are already prepared.\n"
+                  },
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-website\nmkdir -p community-website\ngit -C community-website init -q -b main\ngit -C community-website config --local user.name \"ZoeSkoul Learner\"\ngit -C community-website config --local user.email \"learner@zoeskoul.local\"\ncd community-website\nprintf %s '<h1>Community Hub</h1>\n<nav>Home</nav>\n' > index.html\ncd ..\ncd community-website\nprintf %s 'body { color: navy; }\n' > styles.css\ncd ..\ngit -C community-website add -A\ngit -C community-website commit -q -m 'Start community website'\ncd community-website\nprintf %s '<h1>Community Hub</h1>\n<nav>Home Events</nav>\n' > index.html\ncd ..\ngit -C community-website add -A\ngit -C community-website commit -q -m 'Add events navigation'\ncd community-website\nprintf %s 'body { color: teal; }\n' > styles.css\ncd ..\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_sh": {
+                    "content": "git add styles.css\ngit diff --staged -- styles.css\n"
+                  },
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-website\nmkdir -p community-website\ngit -C community-website init -q -b main\ngit -C community-website config --local user.name \"ZoeSkoul Learner\"\ngit -C community-website config --local user.email \"learner@zoeskoul.local\"\ncd community-website\nprintf %s '<h1>Community Hub</h1>\n<nav>Home</nav>\n' > index.html\ncd ..\ncd community-website\nprintf %s 'body { color: navy; }\n' > styles.css\ncd ..\ngit -C community-website add -A\ngit -C community-website commit -q -m 'Start community website'\ncd community-website\nprintf %s '<h1>Community Hub</h1>\n<nav>Home Events</nav>\n' > index.html\ncd ..\ngit -C community-website add -A\ngit -C community-website commit -q -m 'Add events navigation'\ncd community-website\nprintf %s 'body { color: teal; }\n' > styles.css\ncd ..\n"
+                  }
+                },
+                "terminalExpectations": {
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "Do not rewrite shared history in this Git practice task."
+                    }
+                  }
+                }
+              },
+              "try_module_2_community_website_history_sketch4": {
+                "title": "Commit the Palette Update",
+                "prompt": "The terminal opens inside the prepared `community-website/` repository.\n\nThe palette change is staged. Commit `Refresh site palette` and verify a clean working tree.\n\nType each command in the terminal and press Enter.",
+                "hint": "Read the repository state first, then use the Git command that changes only the requested boundary.",
+                "help": {
+                  "concept": "Separate commits make navigation and design changes independently understandable.",
+                  "hint_1": "Use the exact file or repository named in the task; avoid broad commands that include unrelated work.",
+                  "hint_2": "After the action, run the requested inspection command to confirm the final state."
+                },
+                "starterCode": "# Use the terminal for this Git task.\n# The required starting files and repository state are already prepared.\n",
+                "solutionCode": "git commit -m \"Refresh site palette\"\ngit status --short",
+                "instructions": "The terminal opens inside the prepared `community-website/` repository.\n\nThe palette change is staged. Commit `Refresh site palette` and verify a clean working tree.\n\nType each command in the terminal and press Enter.",
+                "starterFiles": {
+                  "main_sh": {
+                    "content": "# Use the terminal for this Git task.\n# The required starting files and repository state are already prepared.\n"
+                  },
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-website\nmkdir -p community-website\ngit -C community-website init -q -b main\ngit -C community-website config --local user.name \"ZoeSkoul Learner\"\ngit -C community-website config --local user.email \"learner@zoeskoul.local\"\ncd community-website\nprintf %s '<h1>Community Hub</h1>\n<nav>Home</nav>\n' > index.html\ncd ..\ncd community-website\nprintf %s 'body { color: navy; }\n' > styles.css\ncd ..\ngit -C community-website add -A\ngit -C community-website commit -q -m 'Start community website'\ncd community-website\nprintf %s '<h1>Community Hub</h1>\n<nav>Home Events</nav>\n' > index.html\ncd ..\ngit -C community-website add -A\ngit -C community-website commit -q -m 'Add events navigation'\ncd community-website\nprintf %s 'body { color: teal; }\n' > styles.css\ncd ..\ngit -C community-website add -- styles.css\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_sh": {
+                    "content": "git commit -m \"Refresh site palette\"\ngit status --short\n"
+                  },
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-website\nmkdir -p community-website\ngit -C community-website init -q -b main\ngit -C community-website config --local user.name \"ZoeSkoul Learner\"\ngit -C community-website config --local user.email \"learner@zoeskoul.local\"\ncd community-website\nprintf %s '<h1>Community Hub</h1>\n<nav>Home</nav>\n' > index.html\ncd ..\ncd community-website\nprintf %s 'body { color: navy; }\n' > styles.css\ncd ..\ngit -C community-website add -A\ngit -C community-website commit -q -m 'Start community website'\ncd community-website\nprintf %s '<h1>Community Hub</h1>\n<nav>Home Events</nav>\n' > index.html\ncd ..\ngit -C community-website add -A\ngit -C community-website commit -q -m 'Add events navigation'\ncd community-website\nprintf %s 'body { color: teal; }\n' > styles.css\ncd ..\ngit -C community-website add -- styles.css\n"
+                  }
+                },
+                "terminalExpectations": {
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "Do not rewrite shared history in this Git practice task."
+                    }
+                  }
+                }
+              },
+              "try_module_2_community_website_history_sketch5": {
+                "title": "Read the Finished Website History",
+                "prompt": "The terminal opens inside the prepared `community-website/` repository.\n\nRead the three one-line entries, inspect the latest snapshot with `git show --stat HEAD`, and confirm the working tree remains clean.\n\nType each command in the terminal and press Enter.",
+                "hint": "Read the repository state first, then use the Git command that changes only the requested boundary.",
+                "help": {
+                  "concept": "The final history explains the project in three focused milestones and remains safe to inspect.",
+                  "hint_1": "Use the exact file or repository named in the task; avoid broad commands that include unrelated work.",
+                  "hint_2": "After the action, run the requested inspection command to confirm the final state."
+                },
+                "starterCode": "# Use the terminal for this Git task.\n# The required starting files and repository state are already prepared.\n",
+                "solutionCode": "git log --oneline\ngit show --stat HEAD\ngit status --short",
+                "instructions": "The terminal opens inside the prepared `community-website/` repository.\n\nRead the three one-line entries, inspect the latest snapshot with `git show --stat HEAD`, and confirm the working tree remains clean.\n\nType each command in the terminal and press Enter.",
+                "starterFiles": {
+                  "main_sh": {
+                    "content": "# Use the terminal for this Git task.\n# The required starting files and repository state are already prepared.\n"
+                  },
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-website\nmkdir -p community-website\ngit -C community-website init -q -b main\ngit -C community-website config --local user.name \"ZoeSkoul Learner\"\ngit -C community-website config --local user.email \"learner@zoeskoul.local\"\ncd community-website\nprintf %s '<h1>Community Hub</h1>\n<nav>Home</nav>\n' > index.html\ncd ..\ncd community-website\nprintf %s 'body { color: navy; }\n' > styles.css\ncd ..\ngit -C community-website add -A\ngit -C community-website commit -q -m 'Start community website'\ncd community-website\nprintf %s '<h1>Community Hub</h1>\n<nav>Home Events</nav>\n' > index.html\ncd ..\ngit -C community-website add -A\ngit -C community-website commit -q -m 'Add events navigation'\ncd community-website\nprintf %s 'body { color: teal; }\n' > styles.css\ncd ..\ngit -C community-website add -A\ngit -C community-website commit -q -m 'Refresh site palette'\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_sh": {
+                    "content": "git log --oneline\ngit show --stat HEAD\ngit status --short\n"
+                  },
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-website\nmkdir -p community-website\ngit -C community-website init -q -b main\ngit -C community-website config --local user.name \"ZoeSkoul Learner\"\ngit -C community-website config --local user.email \"learner@zoeskoul.local\"\ncd community-website\nprintf %s '<h1>Community Hub</h1>\n<nav>Home</nav>\n' > index.html\ncd ..\ncd community-website\nprintf %s 'body { color: navy; }\n' > styles.css\ncd ..\ngit -C community-website add -A\ngit -C community-website commit -q -m 'Start community website'\ncd community-website\nprintf %s '<h1>Community Hub</h1>\n<nav>Home Events</nav>\n' > index.html\ncd ..\ngit -C community-website add -A\ngit -C community-website commit -q -m 'Add events navigation'\ncd community-website\nprintf %s 'body { color: teal; }\n' > styles.css\ncd ..\ngit -C community-website add -A\ngit -C community-website commit -q -m 'Refresh site palette'\n"
+                  }
+                },
+                "terminalExpectations": {
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "Do not rewrite shared history in this Git practice task."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "git-foundations": {
+      "git-foundations-module-2-meaningful-history": {
+        "module-2-community-website-history": {
+          "intro-sketch": {
+            "title": "Build a History Another Maintainer Can Read",
+            "bodyMarkdown": "The community center website needs two unrelated updates: navigation and weekend events. Recording both in one large snapshot would hide the reason for each change.\n\nYou will inspect each diff, stage only the files for the current purpose, create two focused commits, and read the finished timeline. The project carries the repository state forward between steps while keeping setup invisible.\n\nThe final history should explain itself without opening every file."
+          }
+        }
+      }
+    }
+  }
+}

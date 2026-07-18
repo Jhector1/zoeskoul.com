@@ -4,6 +4,7 @@ import type {
     RunnerLanguage,
     WorkspaceSyncEntry,
 } from "@zoeskoul/code-contracts";
+import type { ManifestTerminalBootstrap } from "@zoeskoul/curriculum-contracts";
 import type { RunResult } from "@/lib/code/types";
 import type { BatchRunResult } from "@/lib/code/types/batch";
 import type { SqlDialect, TerminalEvidence } from "@/lib/practice/types";
@@ -16,6 +17,36 @@ export type { TerminalEvidence };
 export type ExecutionBackend = "pty" | "judge0";
 export type TerminalView = "plain" | "xterm" | "auto";
 export type TerminalSessionScope = "exercise" | "topic" | "module" | "project";
+
+export type WorkspaceTerminalBootstrap = ManifestTerminalBootstrap;
+
+export function workspaceTerminalBootstrapKey(
+    bootstrap?: WorkspaceTerminalBootstrap | null,
+): string | undefined {
+    const gitSafeDirectories = Array.from(
+        new Set(
+            (bootstrap?.gitSafeDirectories ?? [])
+                .map((value) => String(value ?? "").trim())
+                .filter(Boolean),
+        ),
+    ).sort();
+    const setupScriptPath = String(bootstrap?.setupScriptPath ?? "").trim();
+    const workspaceStateKey = String(bootstrap?.workspaceStateKey ?? "").trim();
+
+    if (
+        gitSafeDirectories.length === 0 &&
+        !setupScriptPath &&
+        !workspaceStateKey
+    ) {
+        return undefined;
+    }
+
+    return `workspace-bootstrap-v3:${JSON.stringify({
+        gitSafeDirectories,
+        setupScriptPath,
+        workspaceStateKey,
+    })}`;
+}
 
 export type CodeRunnerRuntime = {
     backend: ExecutionBackend;
@@ -86,6 +117,7 @@ export type WorkspaceTerminalConfig = {
     projectId?: string;
     cwd?: string;
     terminalSessionScope?: TerminalSessionScope;
+    bootstrap?: WorkspaceTerminalBootstrap;
 
     /**
      * Stable PTY lease key. This can intentionally be broader than the current
@@ -363,17 +395,22 @@ export function resolveTerminalWorkspaceKey(args: {
     projectId?: string | null;
     terminalSessionScope?: TerminalSessionScope;
     terminalCwd?: string | null;
+    terminalBootstrapKey?: string | null;
 }): string | undefined {
     const exerciseStateKey = normalizeTerminalKeyPart(args.exerciseStateKey);
     const terminalHistoryScopeKey = normalizeTerminalKeyPart(args.terminalHistoryScopeKey);
     const projectId = normalizeTerminalKeyPart(args.projectId);
     const terminalCwd = normalizeTerminalKeyPart(args.terminalCwd);
+    const terminalBootstrapKey = normalizeTerminalKeyPart(args.terminalBootstrapKey);
     const scope = args.terminalSessionScope ?? "exercise";
     const projectKey = projectId ? `project:${projectId}` : "";
 
     const withTerminalCwd = (base: string | undefined) => {
         if (!base) return undefined;
-        return terminalCwd ? `${base}::cwd:${terminalCwd}` : base;
+        const withCwd = terminalCwd ? `${base}::cwd:${terminalCwd}` : base;
+        return terminalBootstrapKey
+            ? `${withCwd}::bootstrap:${terminalBootstrapKey}`
+            : withCwd;
     };
 
     if (scope === "project") {

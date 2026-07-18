@@ -3,8 +3,8 @@ import path from "node:path";
 import type { WorkspaceSyncEntry } from "@zoeskoul/code-contracts";
 import { env } from "../../lib/env.js";
 import {
-  isRunnerManagedDirPath,
   isRunnerManagedFilePath,
+  isWorkspaceSnapshotHiddenDirPath,
 } from "./runnerManagedWorkspace.js";
 import {
   assertWorkspaceUnderQuota,
@@ -28,7 +28,10 @@ async function walkEntries(
     if (!isSafeRelativePath(rel)) continue;
 
     if (entry.isDirectory()) {
-      if (IGNORED_SNAPSHOT_DIRS.has(entry.name) || isRunnerManagedDirPath(rel))
+      if (
+        IGNORED_SNAPSHOT_DIRS.has(entry.name) ||
+        isWorkspaceSnapshotHiddenDirPath(rel)
+      )
         continue;
 
       dirs.push(rel);

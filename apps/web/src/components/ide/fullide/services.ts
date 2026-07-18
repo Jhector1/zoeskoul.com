@@ -1,4 +1,7 @@
-import type { TerminalSessionScope } from "@/components/code/runner/runtime";
+import type {
+    TerminalSessionScope,
+    WorkspaceTerminalBootstrap,
+} from "@/components/code/runner/runtime";
 import {DEFAULT_IDE_FILE_ACTIONS, ResolvedIdeFileActions} from "@/lib/ide/workspacePolicy";
 
 export type FullIDEExplorerServices = {
@@ -28,6 +31,7 @@ export type FullIDERunnerServices = {
     enableWorkspaceTerminal: boolean;
     terminalSessionScope: TerminalSessionScope;
     terminalCwd?: string;
+    terminalBootstrap?: WorkspaceTerminalBootstrap;
 };
 
 export type FullIDEProjectServices = {

@@ -344,7 +344,9 @@ export async function startDockerSession(
         "HISTFILE=/workspace/.bash_history",
         "HISTSIZE=1000",
         "HISTFILESIZE=2000",
-        "HISTCONTROL=ignoredups:erasedups",
+        // Startup bootstrap input begins with a space and must never become
+        // learner-visible shell history or grading evidence.
+        "HISTCONTROL=ignoreboth:erasedups",
         "PROMPT_COMMAND=history -a; history -n",
         "UMASK=000",
         `START_CWD=${sessionCwd}`,

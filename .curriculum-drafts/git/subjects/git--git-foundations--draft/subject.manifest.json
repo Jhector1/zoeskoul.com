@@ -54,11 +54,17 @@
       },
       "serviceDefaults": {
         "runnerBackend": "pty",
-        "layoutMode": "terminal_workspace",
+        "layoutMode": "default",
         "requires": {
           "files": true,
           "multiFile": true,
           "terminal": true
+        },
+        "preset": "runner",
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
         }
       },
       "meta": {
@@ -95,18 +101,24 @@
           },
           "serviceDefaults": {
             "runnerBackend": "pty",
-            "layoutMode": "terminal_workspace",
+            "layoutMode": "default",
             "requires": {
               "files": true,
               "multiFile": true,
               "terminal": true
+            },
+            "preset": "runner",
+            "terminalBootstrap": {
+              "gitSafeDirectories": [
+                "/workspace/*"
+              ]
             }
           },
           "topics": [
             "why-version-control-matters",
-            "working-tree-staging-and-history",
             "configure-and-initialize-a-repository",
-            "read-tracked-and-untracked-state"
+            "read-tracked-and-untracked-state",
+            "working-tree-staging-and-history"
           ]
         },
         {
@@ -127,11 +139,17 @@
           },
           "serviceDefaults": {
             "runnerBackend": "pty",
-            "layoutMode": "terminal_workspace",
+            "layoutMode": "default",
             "requires": {
               "files": true,
               "multiFile": true,
               "terminal": true
+            },
+            "preset": "runner",
+            "terminalBootstrap": {
+              "gitSafeDirectories": [
+                "/workspace/*"
+              ]
             }
           },
           "topics": [
@@ -160,11 +178,17 @@
       },
       "serviceDefaults": {
         "runnerBackend": "pty",
-        "layoutMode": "terminal_workspace",
+        "layoutMode": "default",
         "requires": {
           "files": true,
           "multiFile": true,
           "terminal": true
+        },
+        "preset": "runner",
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
         }
       },
       "meta": {
@@ -201,11 +225,17 @@
           },
           "serviceDefaults": {
             "runnerBackend": "pty",
-            "layoutMode": "terminal_workspace",
+            "layoutMode": "default",
             "requires": {
               "files": true,
               "multiFile": true,
               "terminal": true
+            },
+            "preset": "runner",
+            "terminalBootstrap": {
+              "gitSafeDirectories": [
+                "/workspace/*"
+              ]
             }
           },
           "topics": [
@@ -233,11 +263,17 @@
           },
           "serviceDefaults": {
             "runnerBackend": "pty",
-            "layoutMode": "terminal_workspace",
+            "layoutMode": "default",
             "requires": {
               "files": true,
               "multiFile": true,
               "terminal": true
+            },
+            "preset": "runner",
+            "terminalBootstrap": {
+              "gitSafeDirectories": [
+                "/workspace/*"
+              ]
             }
           },
           "topics": [
@@ -266,11 +302,17 @@
       },
       "serviceDefaults": {
         "runnerBackend": "pty",
-        "layoutMode": "terminal_workspace",
+        "layoutMode": "default",
         "requires": {
           "files": true,
           "multiFile": true,
           "terminal": true
+        },
+        "preset": "runner",
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
         }
       },
       "meta": {
@@ -307,11 +349,17 @@
           },
           "serviceDefaults": {
             "runnerBackend": "pty",
-            "layoutMode": "terminal_workspace",
+            "layoutMode": "default",
             "requires": {
               "files": true,
               "multiFile": true,
               "terminal": true
+            },
+            "preset": "runner",
+            "terminalBootstrap": {
+              "gitSafeDirectories": [
+                "/workspace/*"
+              ]
             }
           },
           "topics": [
@@ -339,11 +387,17 @@
           },
           "serviceDefaults": {
             "runnerBackend": "pty",
-            "layoutMode": "terminal_workspace",
+            "layoutMode": "default",
             "requires": {
               "files": true,
               "multiFile": true,
               "terminal": true
+            },
+            "preset": "runner",
+            "terminalBootstrap": {
+              "gitSafeDirectories": [
+                "/workspace/*"
+              ]
             }
           },
           "topics": [
@@ -373,11 +427,17 @@
       },
       "serviceDefaults": {
         "runnerBackend": "pty",
-        "layoutMode": "terminal_workspace",
+        "layoutMode": "default",
         "requires": {
           "files": true,
           "multiFile": true,
           "terminal": true
+        },
+        "preset": "runner",
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
         }
       },
       "meta": {
@@ -415,11 +475,17 @@
           },
           "serviceDefaults": {
             "runnerBackend": "pty",
-            "layoutMode": "terminal_workspace",
+            "layoutMode": "default",
             "requires": {
               "files": true,
               "multiFile": true,
               "terminal": true
+            },
+            "preset": "runner",
+            "terminalBootstrap": {
+              "gitSafeDirectories": [
+                "/workspace/*"
+              ]
             }
           },
           "topics": [

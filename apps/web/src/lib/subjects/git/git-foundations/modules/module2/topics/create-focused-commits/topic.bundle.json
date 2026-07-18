@@ -16,11 +16,17 @@
   },
   "serviceDefaults": {
     "runnerBackend": "pty",
-    "layoutMode": "terminal_workspace",
+    "layoutMode": "default",
     "requires": {
       "files": true,
       "multiFile": true,
       "terminal": true
+    },
+    "preset": "runner",
+    "terminalBootstrap": {
+      "gitSafeDirectories": [
+        "/workspace/*"
+      ]
     }
   },
   "topic": {
@@ -255,54 +261,30 @@
       "weight": 1,
       "messageBase": "topics.git-foundations.git-foundations-module-2-meaningful-history.create-focused-commits.tryIt.try_create_focused_commits_sketch0",
       "language": "bash",
-      "starterCode": "@:topics.git-foundations.git-foundations-module-2-meaningful-history.create-focused-commits.tryIt.try_create_focused_commits_sketch0.starterCode",
+      "starterCode": "<nav>Home Events</nav>\n",
       "starterFiles": [
         {
-          "path": "main.sh",
-          "content": "@:topics.git-foundations.git-foundations-module-2-meaningful-history.create-focused-commits.tryIt.try_create_focused_commits_sketch0.starterCode",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        },
-        {
-          "path": ".zoeskoul/setup.sh",
-          "content": "@:topics.git-foundations.git-foundations-module-2-meaningful-history.create-focused-commits.tryIt.try_create_focused_commits_sketch0.starterFiles.zoeskoul_setup_sh.content",
-          "language": "bash",
-          "readOnly": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "main.sh",
-          "content": "bash .zoeskoul/setup.sh\ngit add\ngit commit\ngit add feature.txt\ngit commit -m 'Add new feature'\n",
-          "language": "bash",
+          "path": "community-site/index.html",
+          "content": "<nav>Home Events</nav>\n",
+          "language": "html",
           "isEntry": true,
           "entry": true
         },
         {
-          "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 1\\n' > feature.txt\n",
-          "language": "bash",
-          "readOnly": true
+          "path": "community-site/nav.js",
+          "content": "export const links = [\"Home\", \"Events\"];\n",
+          "language": "javascript"
         }
       ],
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
+            "pattern": "^git\\s+commit\\s+\\-m\\s+\"Add\\s+events\\s+navigation\"$",
+            "message": "@:topics.git-foundations.git-foundations-module-2-meaningful-history.create-focused-commits.tryIt.try_create_focused_commits_sketch0.terminalExpectations.requiredCommands.0.message"
           },
           {
-            "pattern": "^git\\s+add$"
-          },
-          {
-            "pattern": "^git\\s+commit$"
-          },
-          {
-            "pattern": "^git\\s+add\\s+feature\\.txt$"
-          },
-          {
-            "pattern": "^git\\s+commit\\s+-m\\s+'Add\\s+new\\s+feature'$"
+            "pattern": "^git\\s+log\\s+\\-1\\s+\\-\\-oneline$",
+            "message": "@:topics.git-foundations.git-foundations-module-2-meaningful-history.create-focused-commits.tryIt.try_create_focused_commits_sketch0.terminalExpectations.requiredCommands.1.message"
           }
         ],
         "forbiddenCommands": [
@@ -313,27 +295,43 @@
         ]
       },
       "hiddenShellCheck": {
-        "script": "set -eu\nrepo='.'\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ncommand -v git >/dev/null 2>&1 || fail \"Git is not available in this workspace.\"\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail 'Initialize a Git repository in ..'\nactual_branch=$(git -C \"$repo\" branch --show-current 2>/dev/null || true)\n[ \"$actual_branch\" = 'main' ] || fail 'Switch to the main branch.'",
+        "script": "set -eu\nrepo=community-site\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" branch --show-current)\" = main ] || fail \"The repository is not on main.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = 2 ] || fail \"The repository has the wrong number of commits.\"\n[ -z \"$(git -C \"$repo\" status --porcelain)\" ] || fail \"The working tree is not clean.\"\nexpected=$(printf \"%s\\n\" index.html nav.js | sort)\nactual=$(git -C \"$repo\" ls-files | sort)\n[ \"$actual\" = \"$expected\" ] || fail \"The tracked file set is not correct.\"\n[ \"$(git -C \"$repo\" log -1 --format=%s)\" = 'Add events navigation' ] || fail \"The latest commit message is not correct.\"",
         "timeoutMs": 15000
       },
       "workspace": {
         "language": "bash",
-        "entryFilePath": "main.sh",
-        "starterCode": "@:topics.git-foundations.git-foundations-module-2-meaningful-history.create-focused-commits.tryIt.try_create_focused_commits_sketch0.starterCode",
+        "entryFilePath": "community-site/index.html",
+        "starterCode": "<nav>Home Events</nav>\n",
         "starterFiles": [
           {
-            "path": "main.sh",
-            "content": "@:topics.git-foundations.git-foundations-module-2-meaningful-history.create-focused-commits.tryIt.try_create_focused_commits_sketch0.starterCode",
-            "language": "bash",
+            "path": "community-site/index.html",
+            "content": "<nav>Home Events</nav>\n",
+            "language": "html",
             "isEntry": true,
-            "entry": true,
-            "readOnly": false
+            "entry": true
           },
           {
+            "path": "community-site/nav.js",
+            "content": "export const links = [\"Home\", \"Events\"];\n",
+            "language": "javascript"
+          }
+        ],
+        "fixtureFiles": [
+          {
             "path": ".zoeskoul/setup.sh",
-            "content": "@:topics.git-foundations.git-foundations-module-2-meaningful-history.create-focused-commits.tryIt.try_create_focused_commits_sketch0.starterFiles.zoeskoul_setup_sh.content",
+            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-site\nmkdir -p community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name \"ZoeSkoul Learner\"\ngit -C community-site config --local user.email \"learner@zoeskoul.local\"\ncd community-site\nprintf %s '<nav>Home</nav>\n' > index.html\ncd ..\ncd community-site\nprintf %s 'export const links = [\"Home\"];\n' > nav.js\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Add project baseline'\ncd community-site\nprintf %s '<nav>Home Events</nav>\n' > index.html\ncd ..\ncd community-site\nprintf %s 'export const links = [\"Home\", \"Events\"];\n' > nav.js\ncd ..\ngit -C community-site add -- index.html nav.js\n",
             "language": "bash",
             "readOnly": true
+          },
+          {
+            "path": "community-site/index.html",
+            "content": "<nav>Home Events</nav>\n",
+            "language": "html"
+          },
+          {
+            "path": "community-site/nav.js",
+            "content": "export const links = [\"Home\", \"Events\"];\n",
+            "language": "javascript"
           }
         ]
       },
@@ -342,7 +340,75 @@
         "type": "shell_task",
         "mode": "terminal_workspace",
         "instructions": "@:topics.git-foundations.git-foundations-module-2-meaningful-history.create-focused-commits.tryIt.try_create_focused_commits_sketch0.instructions"
-      }
+      },
+      "ideConfig": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/community-site",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "serviceOverrides": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/community-site",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "fixtureFiles": [
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-site\nmkdir -p community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name \"ZoeSkoul Learner\"\ngit -C community-site config --local user.email \"learner@zoeskoul.local\"\ncd community-site\nprintf %s '<nav>Home</nav>\n' > index.html\ncd ..\ncd community-site\nprintf %s 'export const links = [\"Home\"];\n' > nav.js\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Add project baseline'\ncd community-site\nprintf %s '<nav>Home Events</nav>\n' > index.html\ncd ..\ncd community-site\nprintf %s 'export const links = [\"Home\", \"Events\"];\n' > nav.js\ncd ..\ngit -C community-site add -- index.html nav.js\n",
+          "language": "bash",
+          "readOnly": true
+        },
+        {
+          "path": "community-site/index.html",
+          "content": "<nav>Home Events</nav>\n",
+          "language": "html"
+        },
+        {
+          "path": "community-site/nav.js",
+          "content": "export const links = [\"Home\", \"Events\"];\n",
+          "language": "javascript"
+        }
+      ]
     },
     {
       "id": "try-create-focused-commits-sketch1",
@@ -351,48 +417,30 @@
       "weight": 1,
       "messageBase": "topics.git-foundations.git-foundations-module-2-meaningful-history.create-focused-commits.tryIt.try_create_focused_commits_sketch1",
       "language": "bash",
-      "starterCode": "@:topics.git-foundations.git-foundations-module-2-meaningful-history.create-focused-commits.tryIt.try_create_focused_commits_sketch1.starterCode",
+      "starterCode": "Open Saturdays from 9 AM to noon.\n",
       "starterFiles": [
         {
-          "path": "main.sh",
-          "content": "@:topics.git-foundations.git-foundations-module-2-meaningful-history.create-focused-commits.tryIt.try_create_focused_commits_sketch1.starterCode",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        },
-        {
-          "path": ".zoeskoul/setup.sh",
-          "content": "@:topics.git-foundations.git-foundations-module-2-meaningful-history.create-focused-commits.tryIt.try_create_focused_commits_sketch1.starterFiles.zoeskoul_setup_sh.content",
-          "language": "bash",
-          "readOnly": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "main.sh",
-          "content": "bash .zoeskoul/setup.sh\ngit add\ngit add index.html\n",
-          "language": "bash",
+          "path": "community-site/README.md",
+          "content": "Open Saturdays from 9 AM to noon.\n",
+          "language": "markdown",
           "isEntry": true,
           "entry": true
         },
         {
-          "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 2\\n' > index.html\n",
-          "language": "bash",
-          "readOnly": true
+          "path": "community-site/styles.css",
+          "content": "body { color: teal; }\n",
+          "language": "css"
         }
       ],
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
+            "pattern": "^git\\s+commit\\s+\\-m\\s+\"Clarify\\s+volunteer\\s+hours\"$",
+            "message": "@:topics.git-foundations.git-foundations-module-2-meaningful-history.create-focused-commits.tryIt.try_create_focused_commits_sketch1.terminalExpectations.requiredCommands.0.message"
           },
           {
-            "pattern": "^git\\s+add$"
-          },
-          {
-            "pattern": "^git\\s+add\\s+index\\.html$"
+            "pattern": "^git\\s+status\\s+\\-\\-short$",
+            "message": "@:topics.git-foundations.git-foundations-module-2-meaningful-history.create-focused-commits.tryIt.try_create_focused_commits_sketch1.terminalExpectations.requiredCommands.1.message"
           }
         ],
         "forbiddenCommands": [
@@ -403,27 +451,43 @@
         ]
       },
       "hiddenShellCheck": {
-        "script": "set -eu\nrepo='.'\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ncommand -v git >/dev/null 2>&1 || fail \"Git is not available in this workspace.\"\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail 'Initialize a Git repository in ..'\nactual_branch=$(git -C \"$repo\" branch --show-current 2>/dev/null || true)\n[ \"$actual_branch\" = 'main' ] || fail 'Switch to the main branch.'",
+        "script": "set -eu\nrepo=community-site\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" branch --show-current)\" = main ] || fail \"The repository is not on main.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = 2 ] || fail \"The repository has the wrong number of commits.\"\n[ -n \"$(git -C \"$repo\" status --porcelain)\" ] || fail \"The exercise change is missing.\"\nexpected=$(printf \"%s\\n\" README.md styles.css | sort)\nactual=$(git -C \"$repo\" ls-files | sort)\n[ \"$actual\" = \"$expected\" ] || fail \"The tracked file set is not correct.\"\nexpected_staged=$(printf \"%s\\n\"  | sort)\nactual_staged=$(git -C \"$repo\" diff --cached --name-only | sort)\n[ \"$actual_staged\" = \"$expected_staged\" ] || fail \"The staged file set is not correct.\"\n[ \"$(git -C \"$repo\" log -1 --format=%s)\" = 'Clarify volunteer hours' ] || fail \"The latest commit message is not correct.\"",
         "timeoutMs": 15000
       },
       "workspace": {
         "language": "bash",
-        "entryFilePath": "main.sh",
-        "starterCode": "@:topics.git-foundations.git-foundations-module-2-meaningful-history.create-focused-commits.tryIt.try_create_focused_commits_sketch1.starterCode",
+        "entryFilePath": "community-site/README.md",
+        "starterCode": "Open Saturdays from 9 AM to noon.\n",
         "starterFiles": [
           {
-            "path": "main.sh",
-            "content": "@:topics.git-foundations.git-foundations-module-2-meaningful-history.create-focused-commits.tryIt.try_create_focused_commits_sketch1.starterCode",
-            "language": "bash",
+            "path": "community-site/README.md",
+            "content": "Open Saturdays from 9 AM to noon.\n",
+            "language": "markdown",
             "isEntry": true,
-            "entry": true,
-            "readOnly": false
+            "entry": true
           },
           {
+            "path": "community-site/styles.css",
+            "content": "body { color: teal; }\n",
+            "language": "css"
+          }
+        ],
+        "fixtureFiles": [
+          {
             "path": ".zoeskoul/setup.sh",
-            "content": "@:topics.git-foundations.git-foundations-module-2-meaningful-history.create-focused-commits.tryIt.try_create_focused_commits_sketch1.starterFiles.zoeskoul_setup_sh.content",
+            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-site\nmkdir -p community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name \"ZoeSkoul Learner\"\ngit -C community-site config --local user.email \"learner@zoeskoul.local\"\ncd community-site\nprintf %s 'Open Saturdays.\n' > README.md\ncd ..\ncd community-site\nprintf %s 'body { color: navy; }\n' > styles.css\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Add project baseline'\ncd community-site\nprintf %s 'Open Saturdays from 9 AM to noon.\n' > README.md\ncd ..\ncd community-site\nprintf %s 'body { color: teal; }\n' > styles.css\ncd ..\ngit -C community-site add -- README.md\n",
             "language": "bash",
             "readOnly": true
+          },
+          {
+            "path": "community-site/README.md",
+            "content": "Open Saturdays from 9 AM to noon.\n",
+            "language": "markdown"
+          },
+          {
+            "path": "community-site/styles.css",
+            "content": "body { color: teal; }\n",
+            "language": "css"
           }
         ]
       },
@@ -432,7 +496,75 @@
         "type": "shell_task",
         "mode": "terminal_workspace",
         "instructions": "@:topics.git-foundations.git-foundations-module-2-meaningful-history.create-focused-commits.tryIt.try_create_focused_commits_sketch1.instructions"
-      }
+      },
+      "ideConfig": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/community-site",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "serviceOverrides": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/community-site",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "fixtureFiles": [
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-site\nmkdir -p community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name \"ZoeSkoul Learner\"\ngit -C community-site config --local user.email \"learner@zoeskoul.local\"\ncd community-site\nprintf %s 'Open Saturdays.\n' > README.md\ncd ..\ncd community-site\nprintf %s 'body { color: navy; }\n' > styles.css\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Add project baseline'\ncd community-site\nprintf %s 'Open Saturdays from 9 AM to noon.\n' > README.md\ncd ..\ncd community-site\nprintf %s 'body { color: teal; }\n' > styles.css\ncd ..\ngit -C community-site add -- README.md\n",
+          "language": "bash",
+          "readOnly": true
+        },
+        {
+          "path": "community-site/README.md",
+          "content": "Open Saturdays from 9 AM to noon.\n",
+          "language": "markdown"
+        },
+        {
+          "path": "community-site/styles.css",
+          "content": "body { color: teal; }\n",
+          "language": "css"
+        }
+      ]
     },
     {
       "id": "try-create-focused-commits-sketch2",
@@ -441,48 +573,25 @@
       "weight": 1,
       "messageBase": "topics.git-foundations.git-foundations-module-2-meaningful-history.create-focused-commits.tryIt.try_create_focused_commits_sketch2",
       "language": "bash",
-      "starterCode": "@:topics.git-foundations.git-foundations-module-2-meaningful-history.create-focused-commits.tryIt.try_create_focused_commits_sketch2.starterCode",
+      "starterCode": "const open = !open;\n",
       "starterFiles": [
         {
-          "path": "main.sh",
-          "content": "@:topics.git-foundations.git-foundations-module-2-meaningful-history.create-focused-commits.tryIt.try_create_focused_commits_sketch2.starterCode",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        },
-        {
-          "path": ".zoeskoul/setup.sh",
-          "content": "@:topics.git-foundations.git-foundations-module-2-meaningful-history.create-focused-commits.tryIt.try_create_focused_commits_sketch2.starterFiles.zoeskoul_setup_sh.content",
-          "language": "bash",
-          "readOnly": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "main.sh",
-          "content": "bash .zoeskoul/setup.sh\ngit commit -m\ngit commit -m 'Fix login bug'\n",
-          "language": "bash",
+          "path": "community-site/app.js",
+          "content": "const open = !open;\n",
+          "language": "javascript",
           "isEntry": true,
           "entry": true
-        },
-        {
-          "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 3\\n' > practice-3.txt\n",
-          "language": "bash",
-          "readOnly": true
         }
       ],
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
+            "pattern": "^git\\s+commit\\s+\\-m\\s+\"Fix\\s+event\\s+card\\s+toggle\"$",
+            "message": "@:topics.git-foundations.git-foundations-module-2-meaningful-history.create-focused-commits.tryIt.try_create_focused_commits_sketch2.terminalExpectations.requiredCommands.0.message"
           },
           {
-            "pattern": "^git\\s+commit\\s+-m$"
-          },
-          {
-            "pattern": "^git\\s+commit\\s+-m\\s+'Fix\\s+login\\s+bug'$"
+            "pattern": "^git\\s+log\\s+\\-1\\s+\\-\\-format=%s$",
+            "message": "@:topics.git-foundations.git-foundations-module-2-meaningful-history.create-focused-commits.tryIt.try_create_focused_commits_sketch2.terminalExpectations.requiredCommands.1.message"
           }
         ],
         "forbiddenCommands": [
@@ -493,27 +602,33 @@
         ]
       },
       "hiddenShellCheck": {
-        "script": "set -eu\nrepo='.'\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ncommand -v git >/dev/null 2>&1 || fail \"Git is not available in this workspace.\"\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail 'Initialize a Git repository in ..'\nactual_branch=$(git -C \"$repo\" branch --show-current 2>/dev/null || true)\n[ \"$actual_branch\" = 'main' ] || fail 'Switch to the main branch.'",
+        "script": "set -eu\nrepo=community-site\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" branch --show-current)\" = main ] || fail \"The repository is not on main.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = 2 ] || fail \"The repository has the wrong number of commits.\"\n[ -z \"$(git -C \"$repo\" status --porcelain)\" ] || fail \"The working tree is not clean.\"\nexpected=$(printf \"%s\\n\" app.js | sort)\nactual=$(git -C \"$repo\" ls-files | sort)\n[ \"$actual\" = \"$expected\" ] || fail \"The tracked file set is not correct.\"\n[ \"$(git -C \"$repo\" log -1 --format=%s)\" = 'Fix event card toggle' ] || fail \"The latest commit message is not correct.\"",
         "timeoutMs": 15000
       },
       "workspace": {
         "language": "bash",
-        "entryFilePath": "main.sh",
-        "starterCode": "@:topics.git-foundations.git-foundations-module-2-meaningful-history.create-focused-commits.tryIt.try_create_focused_commits_sketch2.starterCode",
+        "entryFilePath": "community-site/app.js",
+        "starterCode": "const open = !open;\n",
         "starterFiles": [
           {
-            "path": "main.sh",
-            "content": "@:topics.git-foundations.git-foundations-module-2-meaningful-history.create-focused-commits.tryIt.try_create_focused_commits_sketch2.starterCode",
-            "language": "bash",
+            "path": "community-site/app.js",
+            "content": "const open = !open;\n",
+            "language": "javascript",
             "isEntry": true,
-            "entry": true,
-            "readOnly": false
-          },
+            "entry": true
+          }
+        ],
+        "fixtureFiles": [
           {
             "path": ".zoeskoul/setup.sh",
-            "content": "@:topics.git-foundations.git-foundations-module-2-meaningful-history.create-focused-commits.tryIt.try_create_focused_commits_sketch2.starterFiles.zoeskoul_setup_sh.content",
+            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-site\nmkdir -p community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name \"ZoeSkoul Learner\"\ngit -C community-site config --local user.email \"learner@zoeskoul.local\"\ncd community-site\nprintf %s 'const open = false;\n' > app.js\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Add project baseline'\ncd community-site\nprintf %s 'const open = !open;\n' > app.js\ncd ..\ngit -C community-site add -- app.js\n",
             "language": "bash",
             "readOnly": true
+          },
+          {
+            "path": "community-site/app.js",
+            "content": "const open = !open;\n",
+            "language": "javascript"
           }
         ]
       },
@@ -522,7 +637,70 @@
         "type": "shell_task",
         "mode": "terminal_workspace",
         "instructions": "@:topics.git-foundations.git-foundations-module-2-meaningful-history.create-focused-commits.tryIt.try_create_focused_commits_sketch2.instructions"
-      }
+      },
+      "ideConfig": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/community-site",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "serviceOverrides": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/community-site",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "fixtureFiles": [
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-site\nmkdir -p community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name \"ZoeSkoul Learner\"\ngit -C community-site config --local user.email \"learner@zoeskoul.local\"\ncd community-site\nprintf %s 'const open = false;\n' > app.js\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Add project baseline'\ncd community-site\nprintf %s 'const open = !open;\n' > app.js\ncd ..\ngit -C community-site add -- app.js\n",
+          "language": "bash",
+          "readOnly": true
+        },
+        {
+          "path": "community-site/app.js",
+          "content": "const open = !open;\n",
+          "language": "javascript"
+        }
+      ]
     },
     {
       "id": "try-create-focused-commits-sketch3",
@@ -531,45 +709,30 @@
       "weight": 1,
       "messageBase": "topics.git-foundations.git-foundations-module-2-meaningful-history.create-focused-commits.tryIt.try_create_focused_commits_sketch3",
       "language": "bash",
-      "starterCode": "@:topics.git-foundations.git-foundations-module-2-meaningful-history.create-focused-commits.tryIt.try_create_focused_commits_sketch3.starterCode",
+      "starterCode": "Open Saturdays from 9 AM to noon.\n",
       "starterFiles": [
         {
-          "path": "main.sh",
-          "content": "@:topics.git-foundations.git-foundations-module-2-meaningful-history.create-focused-commits.tryIt.try_create_focused_commits_sketch3.starterCode",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        },
-        {
-          "path": ".zoeskoul/setup.sh",
-          "content": "@:topics.git-foundations.git-foundations-module-2-meaningful-history.create-focused-commits.tryIt.try_create_focused_commits_sketch3.starterFiles.zoeskoul_setup_sh.content",
-          "language": "bash",
-          "readOnly": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "main.sh",
-          "content": "bash .zoeskoul/setup.sh\ngit log --oneline\n",
-          "language": "bash",
+          "path": "community-site/README.md",
+          "content": "Open Saturdays from 9 AM to noon.\n",
+          "language": "markdown",
           "isEntry": true,
           "entry": true
         },
         {
-          "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 4\\n' > practice-4.txt\n",
-          "language": "bash",
-          "readOnly": true
+          "path": "community-site/index.html",
+          "content": "<h1>Community Hub</h1>\n<nav>Events</nav>\n",
+          "language": "html"
         }
       ],
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
+            "pattern": "^git\\s+log\\s+\\-\\-oneline$",
+            "message": "@:topics.git-foundations.git-foundations-module-2-meaningful-history.create-focused-commits.tryIt.try_create_focused_commits_sketch3.terminalExpectations.requiredCommands.0.message"
           },
           {
-            "pattern": "^git\\s+log\\s+--oneline$"
+            "pattern": "^git\\s+status\\s+\\-\\-short$",
+            "message": "@:topics.git-foundations.git-foundations-module-2-meaningful-history.create-focused-commits.tryIt.try_create_focused_commits_sketch3.terminalExpectations.requiredCommands.1.message"
           }
         ],
         "forbiddenCommands": [
@@ -580,27 +743,43 @@
         ]
       },
       "hiddenShellCheck": {
-        "script": "set -eu\nrepo='.'\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ncommand -v git >/dev/null 2>&1 || fail \"Git is not available in this workspace.\"\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail 'Initialize a Git repository in ..'\nactual_branch=$(git -C \"$repo\" branch --show-current 2>/dev/null || true)\n[ \"$actual_branch\" = 'main' ] || fail 'Switch to the main branch.'",
+        "script": "set -eu\nrepo=community-site\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" branch --show-current)\" = main ] || fail \"The repository is not on main.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = 3 ] || fail \"The repository has the wrong number of commits.\"\n[ -z \"$(git -C \"$repo\" status --porcelain)\" ] || fail \"The working tree is not clean.\"\nexpected=$(printf \"%s\\n\" README.md index.html | sort)\nactual=$(git -C \"$repo\" ls-files | sort)\n[ \"$actual\" = \"$expected\" ] || fail \"The tracked file set is not correct.\"",
         "timeoutMs": 15000
       },
       "workspace": {
         "language": "bash",
-        "entryFilePath": "main.sh",
-        "starterCode": "@:topics.git-foundations.git-foundations-module-2-meaningful-history.create-focused-commits.tryIt.try_create_focused_commits_sketch3.starterCode",
+        "entryFilePath": "community-site/README.md",
+        "starterCode": "Open Saturdays from 9 AM to noon.\n",
         "starterFiles": [
           {
-            "path": "main.sh",
-            "content": "@:topics.git-foundations.git-foundations-module-2-meaningful-history.create-focused-commits.tryIt.try_create_focused_commits_sketch3.starterCode",
-            "language": "bash",
+            "path": "community-site/README.md",
+            "content": "Open Saturdays from 9 AM to noon.\n",
+            "language": "markdown",
             "isEntry": true,
-            "entry": true,
-            "readOnly": false
+            "entry": true
           },
           {
+            "path": "community-site/index.html",
+            "content": "<h1>Community Hub</h1>\n<nav>Events</nav>\n",
+            "language": "html"
+          }
+        ],
+        "fixtureFiles": [
+          {
             "path": ".zoeskoul/setup.sh",
-            "content": "@:topics.git-foundations.git-foundations-module-2-meaningful-history.create-focused-commits.tryIt.try_create_focused_commits_sketch3.starterFiles.zoeskoul_setup_sh.content",
+            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-site\nmkdir -p community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name \"ZoeSkoul Learner\"\ngit -C community-site config --local user.email \"learner@zoeskoul.local\"\ncd community-site\nprintf %s '<h1>Community Hub</h1>\n' > index.html\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Start community site'\ncd community-site\nprintf %s '<h1>Community Hub</h1>\n<nav>Events</nav>\n' > index.html\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Add events navigation'\ncd community-site\nprintf %s 'Open Saturdays from 9 AM to noon.\n' > README.md\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Clarify volunteer hours'\n",
             "language": "bash",
             "readOnly": true
+          },
+          {
+            "path": "community-site/README.md",
+            "content": "Open Saturdays from 9 AM to noon.\n",
+            "language": "markdown"
+          },
+          {
+            "path": "community-site/index.html",
+            "content": "<h1>Community Hub</h1>\n<nav>Events</nav>\n",
+            "language": "html"
           }
         ]
       },
@@ -609,7 +788,75 @@
         "type": "shell_task",
         "mode": "terminal_workspace",
         "instructions": "@:topics.git-foundations.git-foundations-module-2-meaningful-history.create-focused-commits.tryIt.try_create_focused_commits_sketch3.instructions"
-      }
+      },
+      "ideConfig": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/community-site",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "serviceOverrides": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/community-site",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "fixtureFiles": [
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-site\nmkdir -p community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name \"ZoeSkoul Learner\"\ngit -C community-site config --local user.email \"learner@zoeskoul.local\"\ncd community-site\nprintf %s '<h1>Community Hub</h1>\n' > index.html\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Start community site'\ncd community-site\nprintf %s '<h1>Community Hub</h1>\n<nav>Events</nav>\n' > index.html\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Add events navigation'\ncd community-site\nprintf %s 'Open Saturdays from 9 AM to noon.\n' > README.md\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Clarify volunteer hours'\n",
+          "language": "bash",
+          "readOnly": true
+        },
+        {
+          "path": "community-site/README.md",
+          "content": "Open Saturdays from 9 AM to noon.\n",
+          "language": "markdown"
+        },
+        {
+          "path": "community-site/index.html",
+          "content": "<h1>Community Hub</h1>\n<nav>Events</nav>\n",
+          "language": "html"
+        }
+      ]
     }
   ]
 }

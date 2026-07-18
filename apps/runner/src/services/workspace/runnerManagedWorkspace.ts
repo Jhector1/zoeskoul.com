@@ -1,6 +1,13 @@
 export const RUNNER_MANAGED_FILES = new Set([".bash_history"]);
 export const RUNNER_MANAGED_DIRS = new Set(["build"]);
 
+/**
+ * Runtime state that belongs to the active shell rather than to the editor
+ * projection. These directories must survive editor-to-terminal replacement,
+ * but they must never be returned to Explorer snapshots.
+ */
+export const WORKSPACE_INTERNAL_STATE_DIRS = new Set([".git", ".zoeskoul"]);
+
 export function normalizeWorkspaceRelPath(input: string) {
     return String(input ?? "").replace(/\\/g, "/").trim();
 }
@@ -16,6 +23,10 @@ function safePathParts(input: string) {
     return parts;
 }
 
+function pathContainsSegment(input: string, segments: Set<string>) {
+    return safePathParts(input).some((part) => segments.has(part));
+}
+
 export function isRunnerManagedFilePath(relPath: string) {
     const parts = safePathParts(relPath);
     if (!parts.length) return false;
@@ -26,8 +37,24 @@ export function isRunnerManagedFilePath(relPath: string) {
 }
 
 export function isRunnerManagedDirPath(relPath: string) {
-    const parts = safePathParts(relPath);
-    if (!parts.length) return false;
+    return pathContainsSegment(relPath, RUNNER_MANAGED_DIRS);
+}
 
-    return parts.some((part) => RUNNER_MANAGED_DIRS.has(part));
+export function isWorkspaceInternalStatePath(relPath: string) {
+    return pathContainsSegment(relPath, WORKSPACE_INTERNAL_STATE_DIRS);
+}
+
+export function isWorkspacePreservedPath(relPath: string) {
+    return (
+        isRunnerManagedFilePath(relPath) ||
+        isRunnerManagedDirPath(relPath) ||
+        isWorkspaceInternalStatePath(relPath)
+    );
+}
+
+export function isWorkspaceSnapshotHiddenDirPath(relPath: string) {
+    return (
+        isRunnerManagedDirPath(relPath) ||
+        isWorkspaceInternalStatePath(relPath)
+    );
 }

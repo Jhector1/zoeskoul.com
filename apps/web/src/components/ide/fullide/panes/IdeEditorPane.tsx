@@ -6,6 +6,7 @@ import CodeRunner from "@/components/code/CodeRunner";
 import { learnerUiFlags } from "@/lib/config/learnerUiFlags";
 import {
     resolveTerminalWorkspaceKey,
+    workspaceTerminalBootstrapKey,
     type CodeRunnerRuntime,
 } from "@/components/code/runner/runtime";
 import type { FullIDEServices } from "@/components/ide/fullide/services";
@@ -178,6 +179,9 @@ export default function IdeEditorPane({
                 projectId,
                 terminalSessionScope: services.runner.terminalSessionScope,
                 terminalCwd: services.runner.terminalCwd,
+                terminalBootstrapKey: workspaceTerminalBootstrapKey(
+                    services.runner.terminalBootstrap,
+                ),
             }),
         [
             exerciseStateKey,
@@ -185,6 +189,7 @@ export default function IdeEditorPane({
             projectId,
             services.runner.terminalSessionScope,
             services.runner.terminalCwd,
+            services.runner.terminalBootstrap,
         ],
     );
 
@@ -291,6 +296,7 @@ export default function IdeEditorPane({
                                         workspaceKey: terminalWorkspaceKey,
                                         terminalSessionScope:
                                             services.runner.terminalSessionScope,
+                                        bootstrap: services.runner.terminalBootstrap,
                                         initialFiles: workspaceEntries,
                                         getWorkspaceFiles: () => workspaceEntries,
                                         onTerminalSnapshotFiles: onApplyTerminalSnapshotFiles,

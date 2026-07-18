@@ -10,7 +10,7 @@
   "subtitle": "Build a clean local history before sharing work anywhere.",
   "level": "beginner",
   "moduleCount": 4,
-  "description": "A beginner Git course with three standard modules and one final capstone. Learners work locally first, moving from an ordinary folder to a readable repository history without introducing branches, remotes, GitHub, or advanced history rewriting.",
+  "description": "A story-led beginner Git course that starts with an ordinary folder and builds a clean local history in visible, cumulative steps. Learners perform the Git work themselves; fixture preparation stays inside the platform.",
   "sourceLocale": "en",
   "targetLocales": [],
   "accessPolicy": "paid",
@@ -26,9 +26,10 @@
     "No Python, GitHub account, public network access, or prior version-control experience is required."
   ],
   "goals": [
-    "Explain the working tree, staging area, commits, and HEAD in practical language.",
-    "Initialize a repository and read tracked, untracked, staged, and clean state.",
-    "Inspect changes, stage intentionally, and create meaningful commits.",
+    "Explain why version control is more reliable than duplicate final folders.",
+    "Initialize an ordinary folder on main and configure a repository-only identity.",
+    "Read untracked, modified, staged, committed, and clean repository state.",
+    "Inspect changes, stage intentionally, and create focused commits.",
     "Read history and inspect committed snapshots.",
     "Rename, remove, ignore, and restore files safely.",
     "Complete three cumulative module projects and one integrated local-history capstone."
@@ -77,6 +78,11 @@
       "check": "click Check Answer after verifying the repository state"
     },
     "notes": [
+      "The learner’s first hands-on Git command is git init -b main in an ordinary folder; never pre-initialize that first exercise.",
+      "A hidden .zoeskoul/setup.sh file may restore deterministic prerequisite state, but the runner executes it automatically and silently before the terminal opens.",
+      "Never mention .zoeskoul/setup.sh in learner-facing prose, prompts, hints, starterCode, solutionCode, expected commands, or terminal history.",
+      "For isolated Try It exercises after initialization, restore the exact prerequisite repository state invisibly so the learner can practice only the new Git decision.",
+      "For projects and capstones, each step must represent the complete state produced by the previous milestone; official solutions contain only the commands for the current milestone.",
       "Use profileId git, fixedLanguage bash, recipeType shell_task, and mode terminal_workspace for every Git code_input.",
       "Use the existing terminal-workspace runner; do not create a Git-specific IDE, runner, recipe type, or programming language.",
       "Grade final repository state with gitExpectations. Use terminalExpectations only when the exact safe command is itself part of the learning goal.",

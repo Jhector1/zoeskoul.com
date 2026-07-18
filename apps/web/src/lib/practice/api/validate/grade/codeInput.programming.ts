@@ -477,7 +477,7 @@ function validateTerminalExpectations(args: {
             const message =
                 typeof expectation.message === "string" && expectation.message.trim()
                     ? expectation.message.trim()
-                    : `Run a terminal command matching: ${pattern}`;
+                    : "Run the command requested in the instructions, then check your answer again.";
 
             return terminalFeedback({
                 explanation: message,
@@ -511,7 +511,7 @@ function validateTerminalExpectations(args: {
             const message =
                 typeof expectation.message === "string" && expectation.message.trim()
                     ? expectation.message.trim()
-                    : `Do not use a terminal command matching: ${pattern}`;
+                    : "That command is not allowed for this exercise. Use the safer command described in the instructions.";
 
             return terminalFeedback({
                 explanation: message,
@@ -550,7 +550,8 @@ function validateTerminalExpectations(args: {
         }
 
         if (!compiled.test(outputText)) {
-            const message = `The terminal output did not match the expected pattern: ${trimmedPattern}`;
+            const message =
+                "The terminal output is not what this exercise expects yet. Review the command in the instructions and try again.";
 
             return terminalFeedback({
                 explanation: message,

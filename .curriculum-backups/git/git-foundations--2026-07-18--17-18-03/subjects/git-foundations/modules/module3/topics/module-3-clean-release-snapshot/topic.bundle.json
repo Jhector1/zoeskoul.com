@@ -1,0 +1,1316 @@
+{
+  "topicId": "module-3-clean-release-snapshot",
+  "subjectSlug": "git-foundations",
+  "moduleSlug": "git-foundations-module-3-manage-tracked-files",
+  "sectionSlug": "git-foundations-git-foundations-section-3-module-project",
+  "prefix": "git_foundations_module_3",
+  "minutes": 80,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "bash",
+    "supportsTerminal": true,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "runnerBackend": "pty",
+    "layoutMode": "terminal_workspace",
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": true
+    }
+  },
+  "topic": {
+    "labelKey": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.label",
+    "summaryKey": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.cards.sketch0.title",
+      "sketchId": "intro-sketch",
+      "height": 420
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "try_module_3_sketch0",
+            "titleKey": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.projectSteps.try_module_3_sketch0.title",
+            "exerciseKey": "try-module-3-sketch0",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "try_module_3_sketch1",
+            "titleKey": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.projectSteps.try_module_3_sketch1.title",
+            "exerciseKey": "try-module-3-sketch1",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "try_module_3_sketch2",
+            "titleKey": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.projectSteps.try_module_3_sketch2.title",
+            "exerciseKey": "try-module-3-sketch2",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "try_module_3_sketch3",
+            "titleKey": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.projectSteps.try_module_3_sketch3.title",
+            "exerciseKey": "try-module-3-sketch3",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "try_module_3_sketch4",
+            "titleKey": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.projectSteps.try_module_3_sketch4.title",
+            "exerciseKey": "try-module-3-sketch4",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "try_module_3_sketch5",
+            "titleKey": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.projectSteps.try_module_3_sketch5.title",
+            "exerciseKey": "try-module-3-sketch5",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "intro-sketch",
+      "archetype": "paragraph",
+      "titleKey": "sketches.git-foundations.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.intro-sketch.title",
+      "bodyKey": "sketches.git-foundations.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.intro-sketch.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "try-module-3-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch0",
+      "language": "bash",
+      "starterCode": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch0.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch0.starterCode",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch0.starterFiles.zoeskoul_setup_sh.content",
+          "language": "bash",
+          "readOnly": true
+        },
+        {
+          "path": "release-snapshot/README.md",
+          "content": "# Volunteer Toolkit\n",
+          "language": "bash"
+        },
+        {
+          "path": "release-snapshot/docs/guide-draft.md",
+          "content": "# Draft Volunteer Guide\n",
+          "language": "bash"
+        },
+        {
+          "path": "release-snapshot/docs/old-checklist.md",
+          "content": "Old checklist\n",
+          "language": "bash"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "git status --short\ngit ls-files\ngit log --oneline\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-snapshot\nmkdir -p release-snapshot\ngit -C release-snapshot init -q -b main\ngit -C release-snapshot config --local user.name \"ZoeSkoul Learner\"\ngit -C release-snapshot config --local user.email \"learner@zoeskoul.local\"\ncd release-snapshot\nprintf %s '# Volunteer Toolkit\n' > README.md\ncd ..\ncd release-snapshot\nmkdir -p docs\nprintf %s '# Draft Volunteer Guide\n' > docs/guide-draft.md\ncd ..\ncd release-snapshot\nmkdir -p docs\nprintf %s 'Old checklist\n' > docs/old-checklist.md\ncd ..\ngit -C release-snapshot add -A\ngit -C release-snapshot commit -q -m 'Add project baseline'\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^git\\s+status\\s+\\-\\-short$"
+          },
+          {
+            "pattern": "^git\\s+ls\\-files$"
+          },
+          {
+            "pattern": "^git\\s+log\\s+\\-\\-oneline$"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch0.terminalExpectations.forbiddenCommands.0.message"
+          }
+        ]
+      },
+      "hiddenShellCheck": {
+        "script": "set -eu\nrepo=release-snapshot\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" branch --show-current)\" = main ] || fail \"The repository is not on main.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = 1 ] || fail \"The repository has the wrong number of commits.\"\n[ -z \"$(git -C \"$repo\" status --porcelain)\" ] || fail \"The working tree is not clean.\"\nexpected=$(printf \"%s\\n\" README.md docs/guide-draft.md docs/old-checklist.md | sort)\nactual=$(git -C \"$repo\" ls-files | sort)\n[ \"$actual\" = \"$expected\" ] || fail \"The tracked file set is not correct.\"",
+        "timeoutMs": 15000
+      },
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "main.sh",
+        "starterCode": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch0.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.sh",
+            "content": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch0.starterCode",
+            "language": "bash",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          },
+          {
+            "path": ".zoeskoul/setup.sh",
+            "content": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch0.starterFiles.zoeskoul_setup_sh.content",
+            "language": "bash",
+            "readOnly": true
+          },
+          {
+            "path": "release-snapshot/README.md",
+            "content": "# Volunteer Toolkit\n",
+            "language": "bash"
+          },
+          {
+            "path": "release-snapshot/docs/guide-draft.md",
+            "content": "# Draft Volunteer Guide\n",
+            "language": "bash"
+          },
+          {
+            "path": "release-snapshot/docs/old-checklist.md",
+            "content": "Old checklist\n",
+            "language": "bash"
+          }
+        ],
+        "fixtureFiles": [
+          {
+            "path": ".zoeskoul/setup.sh",
+            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-snapshot\nmkdir -p release-snapshot\ngit -C release-snapshot init -q -b main\ngit -C release-snapshot config --local user.name \"ZoeSkoul Learner\"\ngit -C release-snapshot config --local user.email \"learner@zoeskoul.local\"\ncd release-snapshot\nprintf %s '# Volunteer Toolkit\n' > README.md\ncd ..\ncd release-snapshot\nmkdir -p docs\nprintf %s '# Draft Volunteer Guide\n' > docs/guide-draft.md\ncd ..\ncd release-snapshot\nmkdir -p docs\nprintf %s 'Old checklist\n' > docs/old-checklist.md\ncd ..\ngit -C release-snapshot add -A\ngit -C release-snapshot commit -q -m 'Add project baseline'\n",
+            "language": "bash",
+            "readOnly": true
+          },
+          {
+            "path": "release-snapshot/README.md",
+            "content": "# Volunteer Toolkit\n",
+            "language": "bash"
+          },
+          {
+            "path": "release-snapshot/docs/guide-draft.md",
+            "content": "# Draft Volunteer Guide\n",
+            "language": "bash"
+          },
+          {
+            "path": "release-snapshot/docs/old-checklist.md",
+            "content": "Old checklist\n",
+            "language": "bash"
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch0.instructions"
+      },
+      "ideConfig": {
+        "runnerBackend": "pty",
+        "layoutMode": "terminal_workspace",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/release-snapshot",
+        "fileActions": {
+          "enabled": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        }
+      },
+      "serviceOverrides": {
+        "runnerBackend": "pty",
+        "layoutMode": "terminal_workspace",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/release-snapshot",
+        "fileActions": {
+          "enabled": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        }
+      },
+      "fixtureFiles": [
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-snapshot\nmkdir -p release-snapshot\ngit -C release-snapshot init -q -b main\ngit -C release-snapshot config --local user.name \"ZoeSkoul Learner\"\ngit -C release-snapshot config --local user.email \"learner@zoeskoul.local\"\ncd release-snapshot\nprintf %s '# Volunteer Toolkit\n' > README.md\ncd ..\ncd release-snapshot\nmkdir -p docs\nprintf %s '# Draft Volunteer Guide\n' > docs/guide-draft.md\ncd ..\ncd release-snapshot\nmkdir -p docs\nprintf %s 'Old checklist\n' > docs/old-checklist.md\ncd ..\ngit -C release-snapshot add -A\ngit -C release-snapshot commit -q -m 'Add project baseline'\n",
+          "language": "bash",
+          "readOnly": true
+        },
+        {
+          "path": "release-snapshot/README.md",
+          "content": "# Volunteer Toolkit\n",
+          "language": "bash"
+        },
+        {
+          "path": "release-snapshot/docs/guide-draft.md",
+          "content": "# Draft Volunteer Guide\n",
+          "language": "bash"
+        },
+        {
+          "path": "release-snapshot/docs/old-checklist.md",
+          "content": "Old checklist\n",
+          "language": "bash"
+        }
+      ]
+    },
+    {
+      "id": "try-module-3-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch1",
+      "language": "bash",
+      "starterCode": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch1.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch1.starterCode",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch1.starterFiles.zoeskoul_setup_sh.content",
+          "language": "bash",
+          "readOnly": true
+        },
+        {
+          "path": "release-snapshot/README.md",
+          "content": "# Volunteer Toolkit\n",
+          "language": "bash"
+        },
+        {
+          "path": "release-snapshot/docs/guide-draft.md",
+          "content": "# Draft Volunteer Guide\n",
+          "language": "bash"
+        },
+        {
+          "path": "release-snapshot/docs/old-checklist.md",
+          "content": "Old checklist\n",
+          "language": "bash"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "git mv docs/guide-draft.md docs/volunteer-guide.md\ngit diff --staged --name-status\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-snapshot\nmkdir -p release-snapshot\ngit -C release-snapshot init -q -b main\ngit -C release-snapshot config --local user.name \"ZoeSkoul Learner\"\ngit -C release-snapshot config --local user.email \"learner@zoeskoul.local\"\ncd release-snapshot\nprintf %s '# Volunteer Toolkit\n' > README.md\ncd ..\ncd release-snapshot\nmkdir -p docs\nprintf %s '# Draft Volunteer Guide\n' > docs/guide-draft.md\ncd ..\ncd release-snapshot\nmkdir -p docs\nprintf %s 'Old checklist\n' > docs/old-checklist.md\ncd ..\ngit -C release-snapshot add -A\ngit -C release-snapshot commit -q -m 'Add project baseline'\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^git\\s+mv\\s+docs/guide\\-draft\\.md\\s+docs/volunteer\\-guide\\.md$"
+          },
+          {
+            "pattern": "^git\\s+diff\\s+\\-\\-staged\\s+\\-\\-name\\-status$"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch1.terminalExpectations.forbiddenCommands.0.message"
+          }
+        ]
+      },
+      "hiddenShellCheck": {
+        "script": "set -eu\nrepo=release-snapshot\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" branch --show-current)\" = main ] || fail \"The repository is not on main.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = 1 ] || fail \"The repository has the wrong number of commits.\"\n[ -n \"$(git -C \"$repo\" status --porcelain)\" ] || fail \"The exercise change is missing.\"\nexpected=$(printf \"%s\\n\" README.md docs/old-checklist.md docs/volunteer-guide.md | sort)\nactual=$(git -C \"$repo\" ls-files | sort)\n[ \"$actual\" = \"$expected\" ] || fail \"The tracked file set is not correct.\"\nexpected_staged=$(printf \"%s\\n\" docs/volunteer-guide.md | sort)\nactual_staged=$(git -C \"$repo\" diff --cached --name-only | sort)\n[ \"$actual_staged\" = \"$expected_staged\" ] || fail \"The staged file set is not correct.\"",
+        "timeoutMs": 15000
+      },
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "main.sh",
+        "starterCode": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch1.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.sh",
+            "content": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch1.starterCode",
+            "language": "bash",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          },
+          {
+            "path": ".zoeskoul/setup.sh",
+            "content": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch1.starterFiles.zoeskoul_setup_sh.content",
+            "language": "bash",
+            "readOnly": true
+          },
+          {
+            "path": "release-snapshot/README.md",
+            "content": "# Volunteer Toolkit\n",
+            "language": "bash"
+          },
+          {
+            "path": "release-snapshot/docs/guide-draft.md",
+            "content": "# Draft Volunteer Guide\n",
+            "language": "bash"
+          },
+          {
+            "path": "release-snapshot/docs/old-checklist.md",
+            "content": "Old checklist\n",
+            "language": "bash"
+          }
+        ],
+        "fixtureFiles": [
+          {
+            "path": ".zoeskoul/setup.sh",
+            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-snapshot\nmkdir -p release-snapshot\ngit -C release-snapshot init -q -b main\ngit -C release-snapshot config --local user.name \"ZoeSkoul Learner\"\ngit -C release-snapshot config --local user.email \"learner@zoeskoul.local\"\ncd release-snapshot\nprintf %s '# Volunteer Toolkit\n' > README.md\ncd ..\ncd release-snapshot\nmkdir -p docs\nprintf %s '# Draft Volunteer Guide\n' > docs/guide-draft.md\ncd ..\ncd release-snapshot\nmkdir -p docs\nprintf %s 'Old checklist\n' > docs/old-checklist.md\ncd ..\ngit -C release-snapshot add -A\ngit -C release-snapshot commit -q -m 'Add project baseline'\n",
+            "language": "bash",
+            "readOnly": true
+          },
+          {
+            "path": "release-snapshot/README.md",
+            "content": "# Volunteer Toolkit\n",
+            "language": "bash"
+          },
+          {
+            "path": "release-snapshot/docs/guide-draft.md",
+            "content": "# Draft Volunteer Guide\n",
+            "language": "bash"
+          },
+          {
+            "path": "release-snapshot/docs/old-checklist.md",
+            "content": "Old checklist\n",
+            "language": "bash"
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch1.instructions"
+      },
+      "ideConfig": {
+        "runnerBackend": "pty",
+        "layoutMode": "terminal_workspace",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/release-snapshot",
+        "fileActions": {
+          "enabled": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        }
+      },
+      "serviceOverrides": {
+        "runnerBackend": "pty",
+        "layoutMode": "terminal_workspace",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/release-snapshot",
+        "fileActions": {
+          "enabled": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        }
+      },
+      "fixtureFiles": [
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-snapshot\nmkdir -p release-snapshot\ngit -C release-snapshot init -q -b main\ngit -C release-snapshot config --local user.name \"ZoeSkoul Learner\"\ngit -C release-snapshot config --local user.email \"learner@zoeskoul.local\"\ncd release-snapshot\nprintf %s '# Volunteer Toolkit\n' > README.md\ncd ..\ncd release-snapshot\nmkdir -p docs\nprintf %s '# Draft Volunteer Guide\n' > docs/guide-draft.md\ncd ..\ncd release-snapshot\nmkdir -p docs\nprintf %s 'Old checklist\n' > docs/old-checklist.md\ncd ..\ngit -C release-snapshot add -A\ngit -C release-snapshot commit -q -m 'Add project baseline'\n",
+          "language": "bash",
+          "readOnly": true
+        },
+        {
+          "path": "release-snapshot/README.md",
+          "content": "# Volunteer Toolkit\n",
+          "language": "bash"
+        },
+        {
+          "path": "release-snapshot/docs/guide-draft.md",
+          "content": "# Draft Volunteer Guide\n",
+          "language": "bash"
+        },
+        {
+          "path": "release-snapshot/docs/old-checklist.md",
+          "content": "Old checklist\n",
+          "language": "bash"
+        }
+      ]
+    },
+    {
+      "id": "try-module-3-sketch2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch2",
+      "language": "bash",
+      "starterCode": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch2.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch2.starterCode",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch2.starterFiles.zoeskoul_setup_sh.content",
+          "language": "bash",
+          "readOnly": true
+        },
+        {
+          "path": "release-snapshot/README.md",
+          "content": "# Volunteer Toolkit\n",
+          "language": "bash"
+        },
+        {
+          "path": "release-snapshot/docs/old-checklist.md",
+          "content": "Old checklist\n",
+          "language": "bash"
+        },
+        {
+          "path": "release-snapshot/docs/volunteer-guide.md",
+          "content": "# Draft Volunteer Guide\n",
+          "language": "bash"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "git rm docs/old-checklist.md\ngit diff --staged --name-status\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-snapshot\nmkdir -p release-snapshot\ngit -C release-snapshot init -q -b main\ngit -C release-snapshot config --local user.name \"ZoeSkoul Learner\"\ngit -C release-snapshot config --local user.email \"learner@zoeskoul.local\"\ncd release-snapshot\nprintf %s '# Volunteer Toolkit\n' > README.md\ncd ..\ncd release-snapshot\nmkdir -p docs\nprintf %s '# Draft Volunteer Guide\n' > docs/guide-draft.md\ncd ..\ncd release-snapshot\nmkdir -p docs\nprintf %s 'Old checklist\n' > docs/old-checklist.md\ncd ..\ngit -C release-snapshot add -A\ngit -C release-snapshot commit -q -m 'Add project baseline'\ngit -C release-snapshot mv docs/guide-draft.md docs/volunteer-guide.md\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^git\\s+rm\\s+docs/old\\-checklist\\.md$"
+          },
+          {
+            "pattern": "^git\\s+diff\\s+\\-\\-staged\\s+\\-\\-name\\-status$"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch2.terminalExpectations.forbiddenCommands.0.message"
+          }
+        ]
+      },
+      "hiddenShellCheck": {
+        "script": "set -eu\nrepo=release-snapshot\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" branch --show-current)\" = main ] || fail \"The repository is not on main.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = 1 ] || fail \"The repository has the wrong number of commits.\"\n[ -n \"$(git -C \"$repo\" status --porcelain)\" ] || fail \"The exercise change is missing.\"\nexpected=$(printf \"%s\\n\" README.md docs/volunteer-guide.md | sort)\nactual=$(git -C \"$repo\" ls-files | sort)\n[ \"$actual\" = \"$expected\" ] || fail \"The tracked file set is not correct.\"\nexpected_staged=$(printf \"%s\\n\" docs/old-checklist.md docs/volunteer-guide.md | sort)\nactual_staged=$(git -C \"$repo\" diff --cached --name-only | sort)\n[ \"$actual_staged\" = \"$expected_staged\" ] || fail \"The staged file set is not correct.\"\n[ ! -e \"$repo/docs/old-checklist.md\" ]",
+        "timeoutMs": 15000
+      },
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "main.sh",
+        "starterCode": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch2.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.sh",
+            "content": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch2.starterCode",
+            "language": "bash",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          },
+          {
+            "path": ".zoeskoul/setup.sh",
+            "content": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch2.starterFiles.zoeskoul_setup_sh.content",
+            "language": "bash",
+            "readOnly": true
+          },
+          {
+            "path": "release-snapshot/README.md",
+            "content": "# Volunteer Toolkit\n",
+            "language": "bash"
+          },
+          {
+            "path": "release-snapshot/docs/old-checklist.md",
+            "content": "Old checklist\n",
+            "language": "bash"
+          },
+          {
+            "path": "release-snapshot/docs/volunteer-guide.md",
+            "content": "# Draft Volunteer Guide\n",
+            "language": "bash"
+          }
+        ],
+        "fixtureFiles": [
+          {
+            "path": ".zoeskoul/setup.sh",
+            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-snapshot\nmkdir -p release-snapshot\ngit -C release-snapshot init -q -b main\ngit -C release-snapshot config --local user.name \"ZoeSkoul Learner\"\ngit -C release-snapshot config --local user.email \"learner@zoeskoul.local\"\ncd release-snapshot\nprintf %s '# Volunteer Toolkit\n' > README.md\ncd ..\ncd release-snapshot\nmkdir -p docs\nprintf %s '# Draft Volunteer Guide\n' > docs/guide-draft.md\ncd ..\ncd release-snapshot\nmkdir -p docs\nprintf %s 'Old checklist\n' > docs/old-checklist.md\ncd ..\ngit -C release-snapshot add -A\ngit -C release-snapshot commit -q -m 'Add project baseline'\ngit -C release-snapshot mv docs/guide-draft.md docs/volunteer-guide.md\n",
+            "language": "bash",
+            "readOnly": true
+          },
+          {
+            "path": "release-snapshot/README.md",
+            "content": "# Volunteer Toolkit\n",
+            "language": "bash"
+          },
+          {
+            "path": "release-snapshot/docs/old-checklist.md",
+            "content": "Old checklist\n",
+            "language": "bash"
+          },
+          {
+            "path": "release-snapshot/docs/volunteer-guide.md",
+            "content": "# Draft Volunteer Guide\n",
+            "language": "bash"
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch2.instructions"
+      },
+      "ideConfig": {
+        "runnerBackend": "pty",
+        "layoutMode": "terminal_workspace",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/release-snapshot",
+        "fileActions": {
+          "enabled": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        }
+      },
+      "serviceOverrides": {
+        "runnerBackend": "pty",
+        "layoutMode": "terminal_workspace",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/release-snapshot",
+        "fileActions": {
+          "enabled": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        }
+      },
+      "fixtureFiles": [
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-snapshot\nmkdir -p release-snapshot\ngit -C release-snapshot init -q -b main\ngit -C release-snapshot config --local user.name \"ZoeSkoul Learner\"\ngit -C release-snapshot config --local user.email \"learner@zoeskoul.local\"\ncd release-snapshot\nprintf %s '# Volunteer Toolkit\n' > README.md\ncd ..\ncd release-snapshot\nmkdir -p docs\nprintf %s '# Draft Volunteer Guide\n' > docs/guide-draft.md\ncd ..\ncd release-snapshot\nmkdir -p docs\nprintf %s 'Old checklist\n' > docs/old-checklist.md\ncd ..\ngit -C release-snapshot add -A\ngit -C release-snapshot commit -q -m 'Add project baseline'\ngit -C release-snapshot mv docs/guide-draft.md docs/volunteer-guide.md\n",
+          "language": "bash",
+          "readOnly": true
+        },
+        {
+          "path": "release-snapshot/README.md",
+          "content": "# Volunteer Toolkit\n",
+          "language": "bash"
+        },
+        {
+          "path": "release-snapshot/docs/old-checklist.md",
+          "content": "Old checklist\n",
+          "language": "bash"
+        },
+        {
+          "path": "release-snapshot/docs/volunteer-guide.md",
+          "content": "# Draft Volunteer Guide\n",
+          "language": "bash"
+        }
+      ]
+    },
+    {
+      "id": "try-module-3-sketch3",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch3",
+      "language": "bash",
+      "starterCode": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch3.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch3.starterCode",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch3.starterFiles.zoeskoul_setup_sh.content",
+          "language": "bash",
+          "readOnly": true
+        },
+        {
+          "path": "release-snapshot/README.md",
+          "content": "# Volunteer Toolkit\n",
+          "language": "bash"
+        },
+        {
+          "path": "release-snapshot/docs/volunteer-guide.md",
+          "content": "# Draft Volunteer Guide\n",
+          "language": "bash"
+        },
+        {
+          "path": "release-snapshot/preview.log",
+          "content": "local preview\n",
+          "language": "bash"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "printf \"*.log\\n\" > .gitignore\ngit add .gitignore\ngit check-ignore preview.log\ngit diff --staged --name-only\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-snapshot\nmkdir -p release-snapshot\ngit -C release-snapshot init -q -b main\ngit -C release-snapshot config --local user.name \"ZoeSkoul Learner\"\ngit -C release-snapshot config --local user.email \"learner@zoeskoul.local\"\ncd release-snapshot\nprintf %s '# Volunteer Toolkit\n' > README.md\ncd ..\ncd release-snapshot\nmkdir -p docs\nprintf %s '# Draft Volunteer Guide\n' > docs/guide-draft.md\ncd ..\ncd release-snapshot\nmkdir -p docs\nprintf %s 'Old checklist\n' > docs/old-checklist.md\ncd ..\ngit -C release-snapshot add -A\ngit -C release-snapshot commit -q -m 'Add project baseline'\ncd release-snapshot\nprintf %s 'local preview\n' > preview.log\ncd ..\ngit -C release-snapshot mv docs/guide-draft.md docs/volunteer-guide.md\ngit -C release-snapshot rm -q docs/old-checklist.md\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^git\\s+add\\s+\\.gitignore$"
+          },
+          {
+            "pattern": "^git\\s+check\\-ignore\\s+preview\\.log$"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch3.terminalExpectations.forbiddenCommands.0.message"
+          }
+        ]
+      },
+      "hiddenShellCheck": {
+        "script": "set -eu\nrepo=release-snapshot\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" branch --show-current)\" = main ] || fail \"The repository is not on main.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = 1 ] || fail \"The repository has the wrong number of commits.\"\n[ -n \"$(git -C \"$repo\" status --porcelain)\" ] || fail \"The exercise change is missing.\"\nexpected=$(printf \"%s\\n\" .gitignore README.md docs/volunteer-guide.md | sort)\nactual=$(git -C \"$repo\" ls-files | sort)\n[ \"$actual\" = \"$expected\" ] || fail \"The tracked file set is not correct.\"\nexpected_staged=$(printf \"%s\\n\" .gitignore docs/old-checklist.md docs/volunteer-guide.md | sort)\nactual_staged=$(git -C \"$repo\" diff --cached --name-only | sort)\n[ \"$actual_staged\" = \"$expected_staged\" ] || fail \"The staged file set is not correct.\"\ngit -C \"$repo\" check-ignore -q preview.log",
+        "timeoutMs": 15000
+      },
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "main.sh",
+        "starterCode": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch3.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.sh",
+            "content": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch3.starterCode",
+            "language": "bash",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          },
+          {
+            "path": ".zoeskoul/setup.sh",
+            "content": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch3.starterFiles.zoeskoul_setup_sh.content",
+            "language": "bash",
+            "readOnly": true
+          },
+          {
+            "path": "release-snapshot/README.md",
+            "content": "# Volunteer Toolkit\n",
+            "language": "bash"
+          },
+          {
+            "path": "release-snapshot/docs/volunteer-guide.md",
+            "content": "# Draft Volunteer Guide\n",
+            "language": "bash"
+          },
+          {
+            "path": "release-snapshot/preview.log",
+            "content": "local preview\n",
+            "language": "bash"
+          }
+        ],
+        "fixtureFiles": [
+          {
+            "path": ".zoeskoul/setup.sh",
+            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-snapshot\nmkdir -p release-snapshot\ngit -C release-snapshot init -q -b main\ngit -C release-snapshot config --local user.name \"ZoeSkoul Learner\"\ngit -C release-snapshot config --local user.email \"learner@zoeskoul.local\"\ncd release-snapshot\nprintf %s '# Volunteer Toolkit\n' > README.md\ncd ..\ncd release-snapshot\nmkdir -p docs\nprintf %s '# Draft Volunteer Guide\n' > docs/guide-draft.md\ncd ..\ncd release-snapshot\nmkdir -p docs\nprintf %s 'Old checklist\n' > docs/old-checklist.md\ncd ..\ngit -C release-snapshot add -A\ngit -C release-snapshot commit -q -m 'Add project baseline'\ncd release-snapshot\nprintf %s 'local preview\n' > preview.log\ncd ..\ngit -C release-snapshot mv docs/guide-draft.md docs/volunteer-guide.md\ngit -C release-snapshot rm -q docs/old-checklist.md\n",
+            "language": "bash",
+            "readOnly": true
+          },
+          {
+            "path": "release-snapshot/README.md",
+            "content": "# Volunteer Toolkit\n",
+            "language": "bash"
+          },
+          {
+            "path": "release-snapshot/docs/volunteer-guide.md",
+            "content": "# Draft Volunteer Guide\n",
+            "language": "bash"
+          },
+          {
+            "path": "release-snapshot/preview.log",
+            "content": "local preview\n",
+            "language": "bash"
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch3.instructions"
+      },
+      "ideConfig": {
+        "runnerBackend": "pty",
+        "layoutMode": "terminal_workspace",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/release-snapshot",
+        "fileActions": {
+          "enabled": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        }
+      },
+      "serviceOverrides": {
+        "runnerBackend": "pty",
+        "layoutMode": "terminal_workspace",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/release-snapshot",
+        "fileActions": {
+          "enabled": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        }
+      },
+      "fixtureFiles": [
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-snapshot\nmkdir -p release-snapshot\ngit -C release-snapshot init -q -b main\ngit -C release-snapshot config --local user.name \"ZoeSkoul Learner\"\ngit -C release-snapshot config --local user.email \"learner@zoeskoul.local\"\ncd release-snapshot\nprintf %s '# Volunteer Toolkit\n' > README.md\ncd ..\ncd release-snapshot\nmkdir -p docs\nprintf %s '# Draft Volunteer Guide\n' > docs/guide-draft.md\ncd ..\ncd release-snapshot\nmkdir -p docs\nprintf %s 'Old checklist\n' > docs/old-checklist.md\ncd ..\ngit -C release-snapshot add -A\ngit -C release-snapshot commit -q -m 'Add project baseline'\ncd release-snapshot\nprintf %s 'local preview\n' > preview.log\ncd ..\ngit -C release-snapshot mv docs/guide-draft.md docs/volunteer-guide.md\ngit -C release-snapshot rm -q docs/old-checklist.md\n",
+          "language": "bash",
+          "readOnly": true
+        },
+        {
+          "path": "release-snapshot/README.md",
+          "content": "# Volunteer Toolkit\n",
+          "language": "bash"
+        },
+        {
+          "path": "release-snapshot/docs/volunteer-guide.md",
+          "content": "# Draft Volunteer Guide\n",
+          "language": "bash"
+        },
+        {
+          "path": "release-snapshot/preview.log",
+          "content": "local preview\n",
+          "language": "bash"
+        }
+      ]
+    },
+    {
+      "id": "try-module-3-sketch4",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch4",
+      "language": "bash",
+      "starterCode": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch4.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch4.starterCode",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch4.starterFiles.zoeskoul_setup_sh.content",
+          "language": "bash",
+          "readOnly": true
+        },
+        {
+          "path": "release-snapshot/.gitignore",
+          "content": "*.log\n",
+          "language": "bash"
+        },
+        {
+          "path": "release-snapshot/README.md",
+          "content": "Accidental rewrite\n",
+          "language": "bash"
+        },
+        {
+          "path": "release-snapshot/docs/volunteer-guide.md",
+          "content": "# Draft Volunteer Guide\n",
+          "language": "bash"
+        },
+        {
+          "path": "release-snapshot/preview.log",
+          "content": "local preview\n",
+          "language": "bash"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "git restore README.md\ngit status --short\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-snapshot\nmkdir -p release-snapshot\ngit -C release-snapshot init -q -b main\ngit -C release-snapshot config --local user.name \"ZoeSkoul Learner\"\ngit -C release-snapshot config --local user.email \"learner@zoeskoul.local\"\ncd release-snapshot\nprintf %s '# Volunteer Toolkit\n' > README.md\ncd ..\ncd release-snapshot\nmkdir -p docs\nprintf %s '# Draft Volunteer Guide\n' > docs/guide-draft.md\ncd ..\ncd release-snapshot\nmkdir -p docs\nprintf %s 'Old checklist\n' > docs/old-checklist.md\ncd ..\ngit -C release-snapshot add -A\ngit -C release-snapshot commit -q -m 'Add project baseline'\ncd release-snapshot\nprintf %s 'local preview\n' > preview.log\ncd ..\ncd release-snapshot\nprintf %s 'Accidental rewrite\n' > README.md\ncd ..\ncd release-snapshot\nprintf %s '*.log\n' > .gitignore\ncd ..\ngit -C release-snapshot mv docs/guide-draft.md docs/volunteer-guide.md\ngit -C release-snapshot rm -q docs/old-checklist.md\ngit -C release-snapshot add .gitignore\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^git\\s+restore\\s+README\\.md$"
+          },
+          {
+            "pattern": "^git\\s+status\\s+\\-\\-short$"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch4.terminalExpectations.forbiddenCommands.0.message"
+          }
+        ]
+      },
+      "hiddenShellCheck": {
+        "script": "set -eu\nrepo=release-snapshot\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" branch --show-current)\" = main ] || fail \"The repository is not on main.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = 1 ] || fail \"The repository has the wrong number of commits.\"\n[ -n \"$(git -C \"$repo\" status --porcelain)\" ] || fail \"The exercise change is missing.\"\nexpected=$(printf \"%s\\n\" .gitignore README.md docs/volunteer-guide.md | sort)\nactual=$(git -C \"$repo\" ls-files | sort)\n[ \"$actual\" = \"$expected\" ] || fail \"The tracked file set is not correct.\"\nexpected_staged=$(printf \"%s\\n\" .gitignore docs/old-checklist.md docs/volunteer-guide.md | sort)\nactual_staged=$(git -C \"$repo\" diff --cached --name-only | sort)\n[ \"$actual_staged\" = \"$expected_staged\" ] || fail \"The staged file set is not correct.\"\ngrep -Fxq \"# Volunteer Toolkit\" \"$repo/README.md\"\ngit -C \"$repo\" check-ignore -q preview.log",
+        "timeoutMs": 15000
+      },
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "main.sh",
+        "starterCode": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch4.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.sh",
+            "content": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch4.starterCode",
+            "language": "bash",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          },
+          {
+            "path": ".zoeskoul/setup.sh",
+            "content": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch4.starterFiles.zoeskoul_setup_sh.content",
+            "language": "bash",
+            "readOnly": true
+          },
+          {
+            "path": "release-snapshot/.gitignore",
+            "content": "*.log\n",
+            "language": "bash"
+          },
+          {
+            "path": "release-snapshot/README.md",
+            "content": "Accidental rewrite\n",
+            "language": "bash"
+          },
+          {
+            "path": "release-snapshot/docs/volunteer-guide.md",
+            "content": "# Draft Volunteer Guide\n",
+            "language": "bash"
+          },
+          {
+            "path": "release-snapshot/preview.log",
+            "content": "local preview\n",
+            "language": "bash"
+          }
+        ],
+        "fixtureFiles": [
+          {
+            "path": ".zoeskoul/setup.sh",
+            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-snapshot\nmkdir -p release-snapshot\ngit -C release-snapshot init -q -b main\ngit -C release-snapshot config --local user.name \"ZoeSkoul Learner\"\ngit -C release-snapshot config --local user.email \"learner@zoeskoul.local\"\ncd release-snapshot\nprintf %s '# Volunteer Toolkit\n' > README.md\ncd ..\ncd release-snapshot\nmkdir -p docs\nprintf %s '# Draft Volunteer Guide\n' > docs/guide-draft.md\ncd ..\ncd release-snapshot\nmkdir -p docs\nprintf %s 'Old checklist\n' > docs/old-checklist.md\ncd ..\ngit -C release-snapshot add -A\ngit -C release-snapshot commit -q -m 'Add project baseline'\ncd release-snapshot\nprintf %s 'local preview\n' > preview.log\ncd ..\ncd release-snapshot\nprintf %s 'Accidental rewrite\n' > README.md\ncd ..\ncd release-snapshot\nprintf %s '*.log\n' > .gitignore\ncd ..\ngit -C release-snapshot mv docs/guide-draft.md docs/volunteer-guide.md\ngit -C release-snapshot rm -q docs/old-checklist.md\ngit -C release-snapshot add .gitignore\n",
+            "language": "bash",
+            "readOnly": true
+          },
+          {
+            "path": "release-snapshot/.gitignore",
+            "content": "*.log\n",
+            "language": "bash"
+          },
+          {
+            "path": "release-snapshot/README.md",
+            "content": "Accidental rewrite\n",
+            "language": "bash"
+          },
+          {
+            "path": "release-snapshot/docs/volunteer-guide.md",
+            "content": "# Draft Volunteer Guide\n",
+            "language": "bash"
+          },
+          {
+            "path": "release-snapshot/preview.log",
+            "content": "local preview\n",
+            "language": "bash"
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch4.instructions"
+      },
+      "ideConfig": {
+        "runnerBackend": "pty",
+        "layoutMode": "terminal_workspace",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/release-snapshot",
+        "fileActions": {
+          "enabled": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        }
+      },
+      "serviceOverrides": {
+        "runnerBackend": "pty",
+        "layoutMode": "terminal_workspace",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/release-snapshot",
+        "fileActions": {
+          "enabled": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        }
+      },
+      "fixtureFiles": [
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-snapshot\nmkdir -p release-snapshot\ngit -C release-snapshot init -q -b main\ngit -C release-snapshot config --local user.name \"ZoeSkoul Learner\"\ngit -C release-snapshot config --local user.email \"learner@zoeskoul.local\"\ncd release-snapshot\nprintf %s '# Volunteer Toolkit\n' > README.md\ncd ..\ncd release-snapshot\nmkdir -p docs\nprintf %s '# Draft Volunteer Guide\n' > docs/guide-draft.md\ncd ..\ncd release-snapshot\nmkdir -p docs\nprintf %s 'Old checklist\n' > docs/old-checklist.md\ncd ..\ngit -C release-snapshot add -A\ngit -C release-snapshot commit -q -m 'Add project baseline'\ncd release-snapshot\nprintf %s 'local preview\n' > preview.log\ncd ..\ncd release-snapshot\nprintf %s 'Accidental rewrite\n' > README.md\ncd ..\ncd release-snapshot\nprintf %s '*.log\n' > .gitignore\ncd ..\ngit -C release-snapshot mv docs/guide-draft.md docs/volunteer-guide.md\ngit -C release-snapshot rm -q docs/old-checklist.md\ngit -C release-snapshot add .gitignore\n",
+          "language": "bash",
+          "readOnly": true
+        },
+        {
+          "path": "release-snapshot/.gitignore",
+          "content": "*.log\n",
+          "language": "bash"
+        },
+        {
+          "path": "release-snapshot/README.md",
+          "content": "Accidental rewrite\n",
+          "language": "bash"
+        },
+        {
+          "path": "release-snapshot/docs/volunteer-guide.md",
+          "content": "# Draft Volunteer Guide\n",
+          "language": "bash"
+        },
+        {
+          "path": "release-snapshot/preview.log",
+          "content": "local preview\n",
+          "language": "bash"
+        }
+      ]
+    },
+    {
+      "id": "try-module-3-sketch5",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch5",
+      "language": "bash",
+      "starterCode": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch5.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch5.starterCode",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch5.starterFiles.zoeskoul_setup_sh.content",
+          "language": "bash",
+          "readOnly": true
+        },
+        {
+          "path": "release-snapshot/.gitignore",
+          "content": "*.log\n",
+          "language": "bash"
+        },
+        {
+          "path": "release-snapshot/README.md",
+          "content": "# Volunteer Toolkit\n",
+          "language": "bash"
+        },
+        {
+          "path": "release-snapshot/docs/volunteer-guide.md",
+          "content": "# Draft Volunteer Guide\n",
+          "language": "bash"
+        },
+        {
+          "path": "release-snapshot/preview.log",
+          "content": "local preview\n",
+          "language": "bash"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "git commit -m \"Prepare clean volunteer release\"\ngit log --oneline\ngit ls-files\ngit status --short\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-snapshot\nmkdir -p release-snapshot\ngit -C release-snapshot init -q -b main\ngit -C release-snapshot config --local user.name \"ZoeSkoul Learner\"\ngit -C release-snapshot config --local user.email \"learner@zoeskoul.local\"\ncd release-snapshot\nprintf %s '# Volunteer Toolkit\n' > README.md\ncd ..\ncd release-snapshot\nmkdir -p docs\nprintf %s '# Draft Volunteer Guide\n' > docs/guide-draft.md\ncd ..\ncd release-snapshot\nmkdir -p docs\nprintf %s 'Old checklist\n' > docs/old-checklist.md\ncd ..\ngit -C release-snapshot add -A\ngit -C release-snapshot commit -q -m 'Add project baseline'\ncd release-snapshot\nprintf %s 'local preview\n' > preview.log\ncd ..\ncd release-snapshot\nprintf %s '*.log\n' > .gitignore\ncd ..\ngit -C release-snapshot mv docs/guide-draft.md docs/volunteer-guide.md\ngit -C release-snapshot rm -q docs/old-checklist.md\ngit -C release-snapshot add .gitignore\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^git\\s+commit\\s+\\-m\\s+\"Prepare\\s+clean\\s+volunteer\\s+release\"$"
+          },
+          {
+            "pattern": "^git\\s+log\\s+\\-\\-oneline$"
+          },
+          {
+            "pattern": "^git\\s+ls\\-files$"
+          },
+          {
+            "pattern": "^git\\s+status\\s+\\-\\-short$"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch5.terminalExpectations.forbiddenCommands.0.message"
+          }
+        ]
+      },
+      "hiddenShellCheck": {
+        "script": "set -eu\nrepo=release-snapshot\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" branch --show-current)\" = main ] || fail \"The repository is not on main.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = 2 ] || fail \"The repository has the wrong number of commits.\"\n[ -z \"$(git -C \"$repo\" status --porcelain)\" ] || fail \"The working tree is not clean.\"\nexpected=$(printf \"%s\\n\" .gitignore README.md docs/volunteer-guide.md | sort)\nactual=$(git -C \"$repo\" ls-files | sort)\n[ \"$actual\" = \"$expected\" ] || fail \"The tracked file set is not correct.\"\n[ \"$(git -C \"$repo\" log -1 --format=%s)\" = 'Prepare clean volunteer release' ] || fail \"The latest commit message is not correct.\"\ngit -C \"$repo\" check-ignore -q preview.log",
+        "timeoutMs": 15000
+      },
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "main.sh",
+        "starterCode": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch5.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.sh",
+            "content": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch5.starterCode",
+            "language": "bash",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          },
+          {
+            "path": ".zoeskoul/setup.sh",
+            "content": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch5.starterFiles.zoeskoul_setup_sh.content",
+            "language": "bash",
+            "readOnly": true
+          },
+          {
+            "path": "release-snapshot/.gitignore",
+            "content": "*.log\n",
+            "language": "bash"
+          },
+          {
+            "path": "release-snapshot/README.md",
+            "content": "# Volunteer Toolkit\n",
+            "language": "bash"
+          },
+          {
+            "path": "release-snapshot/docs/volunteer-guide.md",
+            "content": "# Draft Volunteer Guide\n",
+            "language": "bash"
+          },
+          {
+            "path": "release-snapshot/preview.log",
+            "content": "local preview\n",
+            "language": "bash"
+          }
+        ],
+        "fixtureFiles": [
+          {
+            "path": ".zoeskoul/setup.sh",
+            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-snapshot\nmkdir -p release-snapshot\ngit -C release-snapshot init -q -b main\ngit -C release-snapshot config --local user.name \"ZoeSkoul Learner\"\ngit -C release-snapshot config --local user.email \"learner@zoeskoul.local\"\ncd release-snapshot\nprintf %s '# Volunteer Toolkit\n' > README.md\ncd ..\ncd release-snapshot\nmkdir -p docs\nprintf %s '# Draft Volunteer Guide\n' > docs/guide-draft.md\ncd ..\ncd release-snapshot\nmkdir -p docs\nprintf %s 'Old checklist\n' > docs/old-checklist.md\ncd ..\ngit -C release-snapshot add -A\ngit -C release-snapshot commit -q -m 'Add project baseline'\ncd release-snapshot\nprintf %s 'local preview\n' > preview.log\ncd ..\ncd release-snapshot\nprintf %s '*.log\n' > .gitignore\ncd ..\ngit -C release-snapshot mv docs/guide-draft.md docs/volunteer-guide.md\ngit -C release-snapshot rm -q docs/old-checklist.md\ngit -C release-snapshot add .gitignore\n",
+            "language": "bash",
+            "readOnly": true
+          },
+          {
+            "path": "release-snapshot/.gitignore",
+            "content": "*.log\n",
+            "language": "bash"
+          },
+          {
+            "path": "release-snapshot/README.md",
+            "content": "# Volunteer Toolkit\n",
+            "language": "bash"
+          },
+          {
+            "path": "release-snapshot/docs/volunteer-guide.md",
+            "content": "# Draft Volunteer Guide\n",
+            "language": "bash"
+          },
+          {
+            "path": "release-snapshot/preview.log",
+            "content": "local preview\n",
+            "language": "bash"
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch5.instructions"
+      },
+      "ideConfig": {
+        "runnerBackend": "pty",
+        "layoutMode": "terminal_workspace",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/release-snapshot",
+        "fileActions": {
+          "enabled": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        }
+      },
+      "serviceOverrides": {
+        "runnerBackend": "pty",
+        "layoutMode": "terminal_workspace",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/release-snapshot",
+        "fileActions": {
+          "enabled": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        }
+      },
+      "fixtureFiles": [
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-snapshot\nmkdir -p release-snapshot\ngit -C release-snapshot init -q -b main\ngit -C release-snapshot config --local user.name \"ZoeSkoul Learner\"\ngit -C release-snapshot config --local user.email \"learner@zoeskoul.local\"\ncd release-snapshot\nprintf %s '# Volunteer Toolkit\n' > README.md\ncd ..\ncd release-snapshot\nmkdir -p docs\nprintf %s '# Draft Volunteer Guide\n' > docs/guide-draft.md\ncd ..\ncd release-snapshot\nmkdir -p docs\nprintf %s 'Old checklist\n' > docs/old-checklist.md\ncd ..\ngit -C release-snapshot add -A\ngit -C release-snapshot commit -q -m 'Add project baseline'\ncd release-snapshot\nprintf %s 'local preview\n' > preview.log\ncd ..\ncd release-snapshot\nprintf %s '*.log\n' > .gitignore\ncd ..\ngit -C release-snapshot mv docs/guide-draft.md docs/volunteer-guide.md\ngit -C release-snapshot rm -q docs/old-checklist.md\ngit -C release-snapshot add .gitignore\n",
+          "language": "bash",
+          "readOnly": true
+        },
+        {
+          "path": "release-snapshot/.gitignore",
+          "content": "*.log\n",
+          "language": "bash"
+        },
+        {
+          "path": "release-snapshot/README.md",
+          "content": "# Volunteer Toolkit\n",
+          "language": "bash"
+        },
+        {
+          "path": "release-snapshot/docs/volunteer-guide.md",
+          "content": "# Draft Volunteer Guide\n",
+          "language": "bash"
+        },
+        {
+          "path": "release-snapshot/preview.log",
+          "content": "local preview\n",
+          "language": "bash"
+        }
+      ]
+    }
+  ]
+}

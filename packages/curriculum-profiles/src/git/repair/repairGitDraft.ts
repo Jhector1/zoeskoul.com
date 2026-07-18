@@ -121,8 +121,12 @@ function inferGitCommand(seed: TopicSeed, exercise: DraftExercise): string {
 function requiredCommands(
     commands: string[],
 ): NonNullable<CodeInputDraft["terminalExpectations"]> {
+    const learnerCommands = unique(commands).filter(
+        (command) => command.trim() !== `bash ${SETUP_PATH}`,
+    );
+
     return {
-        requiredCommands: unique(commands).map((command) => ({
+        requiredCommands: learnerCommands.map((command) => ({
             pattern: commandPattern(command),
         })),
         forbiddenCommands: [
@@ -416,14 +420,14 @@ function configureAndInitializeFallback(args: {
         },
         {
             prompt: [
-                "Configure a repository-only Git identity in `project_delta` using the name `ZoeSkoul Learner` and email `learner@zoeskoul.local`.",
+                "Configure a repository-only Git identity in `project_delta` using the name `Trail Journal Team` and email `trail-journal@zoeskoul.local`.",
                 `First type \`bash ${SETUP_PATH}\` and press Enter. Enter project_delta, run each local Git configuration command, and press Enter after each one.`,
             ].join("\n\n"),
             hint: "Use repository-local configuration so the practice does not change the machine's global Git identity.",
             help: {
                 concept: "Local Git configuration stores author identity inside one repository and overrides global values only there.",
                 hint_1: "Set user.name and user.email with the local scope after entering project_delta.",
-                hint_2: "Use the exact name and email shown in the task.",
+                hint_2: "Use the exact project-specific name and email shown in the task.",
             },
             setup: directorySetup("project_delta", {
                 initialize: true,
@@ -431,13 +435,13 @@ function configureAndInitializeFallback(args: {
             }),
             solutionCommands: [
                 "cd project_delta",
-                'git config --local user.name "ZoeSkoul Learner"',
-                'git config --local user.email "learner@zoeskoul.local"',
+                'git config --local user.name "Trail Journal Team"',
+                'git config --local user.email "trail-journal@zoeskoul.local"',
             ],
             evidenceCommands: [
                 `bash ${SETUP_PATH}`,
-                'git config --local user.name "ZoeSkoul Learner"',
-                'git config --local user.email "learner@zoeskoul.local"',
+                'git config --local user.name "Trail Journal Team"',
+                'git config --local user.email "trail-journal@zoeskoul.local"',
             ],
             gitExpectations: {
                 repositoryPath: "project_delta",
@@ -446,8 +450,8 @@ function configureAndInitializeFallback(args: {
             } satisfies NonNullable<CodeInputDraft["gitExpectations"]>,
             hiddenShellCheck: {
                 script: [
-                    'test "$(git -C project_delta config --local user.name)" = "ZoeSkoul Learner"',
-                    'test "$(git -C project_delta config --local user.email)" = "learner@zoeskoul.local"',
+                    'test "$(git -C project_delta config --local user.name)" = "Trail Journal Team"',
+                    'test "$(git -C project_delta config --local user.email)" = "trail-journal@zoeskoul.local"',
                 ].join(" && "),
                 timeoutMs: 5000,
             } satisfies NonNullable<CodeInputDraft["hiddenShellCheck"]>,
@@ -1165,6 +1169,140 @@ function promoteMissingGitTryIts(args: {
     };
 }
 
+
+const LEARNER_STARTER_CODE = [
+    "# Work in the terminal; the starting repository state is ready.",
+    "# Type each requested command and press Enter.",
+    "",
+].join("\n");
+
+function stripInternalSetupParagraphs(value: string | undefined): string | undefined {
+    if (!value) return value;
+
+    const cleaned = value
+        .split(/\n\s*\n/)
+        .filter((paragraph) => !paragraph.includes(SETUP_PATH))
+        .join("\n\n")
+        .trim();
+
+    if (!cleaned) return cleaned;
+    if (/press Enter/i.test(cleaned)) return cleaned;
+    return `${cleaned}\n\nType each command in the terminal and press Enter.`;
+}
+
+function currentStepCommands(
+    value: string | undefined,
+    repositoryPath?: string,
+): string {
+    const lines = String(value ?? "")
+        .replace(/\r\n/g, "\n")
+        .split("\n");
+    const setupLine = `bash ${SETUP_PATH}`;
+    let start = 0;
+
+    for (let index = 0; index < lines.length; index += 1) {
+        if (lines[index]?.trim() === setupLine) start = index + 1;
+    }
+
+    const commandLines = lines
+        .slice(start)
+        .filter((line) => line.trim() !== setupLine);
+    const normalizedRepositoryPath = String(repositoryPath ?? "").trim();
+    const firstCommandIndex = commandLines.findIndex(
+        (line) => line.trim() && !line.trim().startsWith("#"),
+    );
+
+    if (firstCommandIndex >= 0 && normalizedRepositoryPath) {
+        const firstCommand = commandLines[firstCommandIndex]?.trim();
+        const quotedRepositoryPath = JSON.stringify(normalizedRepositoryPath);
+        if (
+            firstCommand === `cd ${normalizedRepositoryPath}` ||
+            firstCommand === `cd ${quotedRepositoryPath}`
+        ) {
+            commandLines.splice(firstCommandIndex, 1);
+        }
+    }
+
+    const cleaned = commandLines.join("\n").trim();
+
+    return cleaned ? `${cleaned}\n` : "git status\n";
+}
+
+function isSetupExpectationPattern(pattern: string | undefined): boolean {
+    return String(pattern ?? "").includes("zoeskoul/setup");
+}
+
+function sanitizeTerminalExpectations(
+    value: CodeInputDraft["terminalExpectations"],
+): CodeInputDraft["terminalExpectations"] {
+    if (!value) return value;
+
+    return {
+        ...value,
+        requiredCommands: value.requiredCommands?.filter(
+            (command) => !isSetupExpectationPattern(command.pattern),
+        ),
+    };
+}
+
+function sanitizeGitFiles(args: {
+    files: CodeInputDraft["starterFiles"] | CodeInputDraft["solutionFiles"];
+    entryFilePath: string;
+    entryContent: string;
+}) {
+    return args.files?.map((file) => {
+        if (file.path === SETUP_PATH) return file;
+        if (file.path !== args.entryFilePath && file.path !== ENTRY_PATH) return file;
+        return { ...file, content: args.entryContent };
+    });
+}
+
+function sanitizeGitExerciseForLearners(exercise: DraftExercise): DraftExercise {
+    if (exercise.kind !== "code_input") return exercise;
+
+    const codeInput = normalizeGitCodeInput(exercise);
+    const entryFilePath = codeInput.entryFilePath || ENTRY_PATH;
+    const solutionCode = currentStepCommands(
+        codeInput.solutionCode,
+        codeInput.gitExpectations?.repositoryPath,
+    );
+    const prompt = stripInternalSetupParagraphs(codeInput.prompt);
+    const instructions = stripInternalSetupParagraphs(
+        codeInput.instructions || codeInput.prompt,
+    );
+
+    return {
+        ...codeInput,
+        ...(prompt !== undefined ? { prompt } : {}),
+        ...(instructions !== undefined ? { instructions } : {}),
+        hint: stripInternalSetupParagraphs(codeInput.hint) ?? codeInput.hint,
+        starterCode: LEARNER_STARTER_CODE,
+        solutionCode,
+        starterFiles: sanitizeGitFiles({
+            files: codeInput.starterFiles,
+            entryFilePath,
+            entryContent: LEARNER_STARTER_CODE,
+        }),
+        solutionFiles: sanitizeGitFiles({
+            files: codeInput.solutionFiles,
+            entryFilePath,
+            entryContent: solutionCode,
+        }),
+        terminalExpectations: sanitizeTerminalExpectations(
+            codeInput.terminalExpectations,
+        ),
+    };
+}
+
+function sanitizeGitDraftForLearners(
+    draft: TopicAuthoringDraft,
+): TopicAuthoringDraft {
+    return {
+        ...draft,
+        quizDraft: draft.quizDraft.map(sanitizeGitExerciseForLearners),
+    };
+}
+
 function makeGitCodeInputFallback(seed: TopicSeed, index: number): CodeInputDraft {
     const id = `try-${safeSlug(seed.topicId)}-sketch${Math.max(0, index - 1)}`;
     return promoteTryIt({
@@ -1216,7 +1354,7 @@ export async function repairGitDraft(args: {
     });
 
     return {
-        draft: repaired.draft,
+        draft: sanitizeGitDraftForLearners(repaired.draft),
         report: {
             topicId: args.seed.topicId,
             repairs: [

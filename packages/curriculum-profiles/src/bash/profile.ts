@@ -24,6 +24,14 @@ export const bashProfile = createTerminalCourseProfile({
     errorLabel: "Bash",
     validationLabel: "Bash/Linux",
     defaultStarterCode: 'echo "Hello from Bash!"\n',
+    buildModuleServiceDefaults() {
+        return {
+            preset: "runner",
+            runnerBackend: "pty",
+            layoutMode: "terminal_workspace",
+            requires: { files: true, multiFile: true, terminal: true },
+        };
+    },
     makeHelpFallback: makeBashCodeHelpFallback,
     requireTerminalWorkspace({ bundle }) {
         const courseSlug = (bundle as { courseSlug?: string }).courseSlug;

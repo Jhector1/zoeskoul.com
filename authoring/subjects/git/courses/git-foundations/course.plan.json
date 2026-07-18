@@ -19,32 +19,32 @@
       "moduleNumber": 1,
       "moduleSlug": "git-foundations-module-1-start-tracking",
       "prefix": "git_foundations_module_1",
-      "title": "Start Tracking a Project",
-      "description": "Move from an ordinary folder to a repository whose current state Git can explain.",
-      "purpose": "Understand the local repository model, configure a safe identity, initialize main, and read tracked and untracked state.",
+      "title": "Create Your First Repository",
+      "description": "Start with an ordinary folder, initialize Git on main, read what Git sees, and record the project’s first meaningful snapshot.",
+      "purpose": "Build the repository model in the order a beginner actually uses it: initialize, configure, inspect, stage, commit, and verify.",
       "learningObjectives": [
-        "Explain why version control is more reliable than duplicate final folders.",
-        "Distinguish the working tree, staging area, and commit history.",
-        "Configure a local Git identity and initialize a repository on main.",
-        "Use git status and git status --short to read tracked and untracked state."
+        "Explain why one project with history is safer than a stack of duplicate final folders.",
+        "Initialize an ordinary folder as a Git repository on main.",
+        "Configure a repository-only author identity and read untracked, staged, committed, and clean state.",
+        "Stage a deliberate first snapshot, commit it, and verify the resulting history."
       ],
       "guidedExercises": [
-        "Inspect an ordinary project folder before initialization.",
-        "Initialize a repository and trace its first status changes.",
-        "Use repository-state checks instead of memorizing command output."
+        "Turn a prepared ordinary folder into a repository with git init -b main.",
+        "Read repository state before and after staging without memorizing decorative output.",
+        "Carry one small project from untracked files to a clean first commit."
       ],
       "quizFocus": [
-        "version-control purpose",
-        "repository vocabulary",
-        "safe local configuration",
-        "tracked versus untracked state"
+        "the problem version control solves",
+        "repository initialization and local identity",
+        "working tree and staging area state",
+        "the transition from staged files to a committed snapshot"
       ],
-      "moduleProject": "Build a Field Notes repository with one meaningful initial commit and a clean working tree.",
+      "moduleProject": "Build a Field Notes repository in five cumulative milestones, ending with one clear initial commit and a clean working tree.",
       "sections": [
         {
           "sectionSlug": "git-foundations-section-1-repository-basics",
-          "title": "A Project Needs a Memory",
-          "summary": "Begin with the problem version control solves, then trace how Git describes an ordinary project folder.",
+          "title": "From Folder to First Commit",
+          "summary": "Understand the problem Git solves, initialize your first repository, read its state, and move one deliberate change into history.",
           "topics": [
             {
               "topicId": "why-version-control-matters",
@@ -73,42 +73,16 @@
               }
             },
             {
-              "topicId": "working-tree-staging-and-history",
-              "title": "Working Tree, Staging Area, and History",
-              "summary": "Follow one file from an ordinary edit through the staging area into a committed snapshot.",
-              "minutes": 20,
-              "difficulty": "beginner",
-              "technical": true,
-              "learningGoals": [
-                "Describe the working tree, staging area, and commit history in plain language.",
-                "Predict which repository area changes after editing, staging, and committing.",
-                "Use git status as the bridge between the three areas."
-              ],
-              "practice": {
-                "tryIt": true,
-                "requiresTryIt": true,
-                "tryItPlacement": "all_sketches",
-                "runtimeMode": "terminal_workspace",
-                "terminalSessionScope": "exercise",
-                "expectedPracticeKinds": [
-                  "single_choice",
-                  "multi_choice",
-                  "fill_blank_choice",
-                  "code_input"
-                ]
-              }
-            },
-            {
               "topicId": "configure-and-initialize-a-repository",
-              "title": "Configure and Initialize a Repository",
-              "summary": "Set a repository-local author identity and turn an existing project folder into a repository on main.",
+              "title": "Initialize Your First Repository",
+              "summary": "Begin with an ordinary project folder, create its Git metadata on main, inspect HEAD, and set a repository-only author identity.",
               "minutes": 22,
               "difficulty": "beginner",
               "technical": true,
               "learningGoals": [
-                "Configure user.name and user.email inside one repository.",
-                "Initialize a repository with main as the starting branch.",
-                "Verify that the .git directory represents repository metadata without editing it directly."
+                "Initialize an existing folder with main as the starting branch.",
+                "Explain what the .git directory and HEAD represent without editing repository metadata directly.",
+                "Configure user.name and user.email for one repository only."
               ],
               "practice": {
                 "tryIt": true,
@@ -126,15 +100,41 @@
             },
             {
               "topicId": "read-tracked-and-untracked-state",
-              "title": "Read Tracked and Untracked State",
-              "summary": "Use full and short status views to tell which files Git knows, which files are new, and which changes still need attention.",
+              "title": "Read the Repository State",
+              "summary": "Use full and short status views to distinguish new files, tracked changes, staged changes, and a clean working tree.",
               "minutes": 22,
               "difficulty": "beginner",
               "technical": true,
               "learningGoals": [
-                "Interpret the main sections of git status.",
-                "Use git status --short to read compact working-tree state.",
-                "Distinguish untracked files from tracked files with modifications."
+                "Interpret the important sections of git status.",
+                "Use git status --short to read compact file state.",
+                "Distinguish untracked, modified, staged, and clean states."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "terminal_workspace",
+                "terminalSessionScope": "exercise",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "working-tree-staging-and-history",
+              "title": "Move a Change into History",
+              "summary": "Follow one file from an ordinary edit through the staging area into a committed snapshot, checking the repository at each boundary.",
+              "minutes": 20,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Describe the working tree, staging area, and commit history in plain language.",
+                "Stage one intended change and verify exactly what the next commit will contain.",
+                "Create a meaningful commit and confirm the working tree is clean."
               ],
               "practice": {
                 "tryIt": true,
@@ -156,19 +156,19 @@
           "sectionSlug": "git-foundations-section-1-module-project",
           "role": "module_project",
           "title": "Module Project",
-          "summary": "Build a Field Notes repository with one meaningful initial commit and a clean working tree.",
+          "summary": "Build the Field Notes repository from an ordinary folder to a clean first commit, one milestone at a time.",
           "topics": [
             {
               "topicId": "module-1-field-notes-repository",
-              "title": "Project: Start the Field Notes Repository",
-              "summary": "Turn a small set of neighborhood field notes into a trustworthy first Git repository with a clean initial commit.",
+              "title": "Project: Build the Field Notes Repository",
+              "summary": "Guide a neighborhood garden’s field notes through initialization, local identity, status, staging, and the first trustworthy snapshot.",
               "minutes": 55,
               "difficulty": "beginner",
               "technical": true,
               "learningGoals": [
-                "Configure a local Git identity without changing machine-wide settings.",
-                "Initialize a repository on main and distinguish untracked, staged, and committed files.",
-                "Finish with a clean working tree and a meaningful first commit."
+                "Initialize a real project folder on main before using later repository commands.",
+                "Configure a repository-only identity and distinguish untracked from staged files.",
+                "Create one meaningful initial commit and verify a clean working tree."
               ],
               "practice": {
                 "tryIt": true,
@@ -184,42 +184,43 @@
               "projectBrief": {
                 "scenario": "A neighborhood garden coordinator keeps plot observations in a folder, but every revision currently replaces the previous one. The next volunteer needs a trustworthy starting point before more notes are added.",
                 "role": "Junior developer preparing the garden field-notes repository",
-                "workspace": "One cumulative terminal workspace rooted at garden-notes/ with README.md, observations/, and a deterministic local Git identity",
-                "deliverable": "A five-step repository setup ending with an initialized main branch, tracked project files, one meaningful initial commit, and a clean working tree.",
+                "workspace": "A cumulative garden-notes/ project whose completed milestone is restored automatically before the next step opens.",
+                "deliverable": "A five-milestone local repository on main with a repository-only identity, three tracked project files, one meaningful initial commit, and a clean working tree.",
                 "stepCountTarget": 5,
                 "flow": "progressive",
                 "requirements": [
-                  "Keep every step inside garden-notes/ and carry the full repository state forward.",
-                  "Use only local repository configuration for user.name and user.email.",
-                  "Use gitExpectations to grade initialization, tracked files, commit count, commit message, and clean working state.",
-                  "Do not grade exact commit hashes, timestamps, or absolute paths.",
-                  "Every prompt must tell the learner to type each command and press Enter."
+                  "The learner’s first Git command is git init -b main; platform fixture preparation must remain invisible.",
+                  "Each step begins from the complete state produced by the previous milestone.",
+                  "Use only repository-local configuration for user.name and user.email.",
+                  "Grade repository state rather than exact hashes, timestamps, absolute paths, or decorative output.",
+                  "Every learner-facing prompt names only the Git and prerequisite navigation commands the learner should type, and explicitly says to press Enter.",
+                  "Never expose .zoeskoul/setup.sh in prompts, hints, starterCode, solutionCode, or terminal expectations."
                 ],
                 "stepLadder": [
                   {
                     "step": 1,
-                    "title": "Inspect the Garden Notes Workspace",
-                    "requirement": "Use pwd and ls to inspect garden-notes/, then read the provided README.md and observation files before changing repository state."
+                    "title": "Initialize the Field Notes Repository",
+                    "requirement": "Enter garden-notes/, initialize the ordinary folder on main, and verify the current branch."
                   },
                   {
                     "step": 2,
-                    "title": "Configure the Local Author Identity",
-                    "requirement": "Set user.name to ZoeSkoul Learner and user.email to learner@zoeskoul.local inside this repository only."
+                    "title": "Set the Repository Identity",
+                    "requirement": "Set the repository-only learner name and email, then verify both local values."
                   },
                   {
                     "step": 3,
-                    "title": "Initialize the Repository on main",
-                    "requirement": "Initialize garden-notes/ as a Git repository whose current branch is main, then inspect the untracked files with git status."
+                    "title": "Read the Untracked Project Files",
+                    "requirement": "Use short status to identify README.md and the two observation files before anything is staged."
                   },
                   {
                     "step": 4,
-                    "title": "Stage the Initial Project Files",
-                    "requirement": "Stage README.md and the observations/ files, then verify that the intended files are staged and no unrelated file is tracked."
+                    "title": "Stage the Field Notes",
+                    "requirement": "Stage only README.md and observations/, then inspect the staged file names."
                   },
                   {
                     "step": 5,
-                    "title": "Create and Verify the First Commit",
-                    "requirement": "Commit the staged files with the message Start garden field notes, then verify one commit and a clean working tree."
+                    "title": "Create the First Snapshot",
+                    "requirement": "Commit the staged files as Start garden field notes, inspect the one-line history, and verify a clean working tree."
                   }
                 ]
               }

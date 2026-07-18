@@ -4,19 +4,19 @@
       "git-foundations-module-2-meaningful-history": {
         "read-history-with-log-and-show": {
           "label": "Read History with log and show",
-          "summary": "Use compact history and commit inspection to understand what changed without opening every file manually.",
+          "summary": "Scan the timeline with log, inspect one snapshot with show, and relate HEAD to the current project state.",
           "cards": {
             "sketch0": {
-              "title": "Reading Commit History with git log --oneline"
+              "title": "Scan the Timeline"
             },
             "sketch1": {
-              "title": "Detailed Commit Inspection with git show"
+              "title": "Open One Commit"
             },
             "sketch2": {
-              "title": "Understanding HEAD and Its Relation to Commits"
+              "title": "Understand HEAD"
             },
             "sketch3": {
-              "title": "Applying git log and git show in Real Scenarios"
+              "title": "Move Between Overview and Detail"
             },
             "quiz": {
               "title": "Practice"
@@ -25,103 +25,95 @@
           "tryIt": {
             "allowReveal": true,
             "try_read_history_with_log_and_show_sketch0": {
-              "title": "Try it yourself: Practice git log --oneline",
-              "prompt": "Right after the sketch \"Reading Commit History with git log --oneline\", practice that exact idea with this task. Use `git log --oneline` to view the commit history of your current branch. Identify the sequence of changes and their descriptions.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter. Produce the result for practice git log --oneline so it reinforces Read History with log and show.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "title": "Scan the One-Line History",
+              "prompt": "The terminal opens inside the prepared `community-site/` repository.\n\nRead the three-entry history of `community-site/` in compact form.\n\nType each command in the terminal and press Enter.",
+              "hint": "Read the repository state first, then use the Git command that changes only the requested boundary.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+                "concept": "git log --oneline compresses each snapshot to an identifier and subject so the project story is easy to scan.",
+                "hint_1": "Use the exact file or repository named in the task; avoid broad commands that include unrelated work.",
+                "hint_2": "After the action, run the requested inspection command to confirm the final state."
               },
-              "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.",
-              "solutionCode": "bash .zoeskoul/setup.sh\ngit log --oneline",
-              "instructions": "Use `git log --oneline` to view the commit history of your current branch. Identify the sequence of changes and their descriptions.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+              "starterCode": "Open Saturdays from 9 AM to noon.\n",
+              "solutionCode": "git log --oneline",
+              "instructions": "The terminal opens inside the prepared `community-site/` repository.\n\nRead the three-entry history of `community-site/` in compact form.\n\nType each command in the terminal and press Enter.",
               "starterFiles": {
-                "main_sh": {
-                  "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.\n"
-                },
                 "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 1\\n' > practice-1.txt\n"
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-site\nmkdir -p community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name \"ZoeSkoul Learner\"\ngit -C community-site config --local user.email \"learner@zoeskoul.local\"\ncd community-site\nprintf %s '<h1>Community Hub</h1>\n' > index.html\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Start community site'\ncd community-site\nprintf %s 'export const links = [\"Home\", \"Events\"];\n' > nav.js\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Add events navigation'\ncd community-site\nprintf %s 'Open Saturdays from 9 AM to noon.\n' > README.md\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Clarify volunteer hours'\n"
                 }
               },
               "solutionFiles": {
-                "main_sh": {
-                  "content": "bash .zoeskoul/setup.sh\ngit log --oneline\n"
-                },
                 "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 1\\n' > practice-1.txt\n"
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-site\nmkdir -p community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name \"ZoeSkoul Learner\"\ngit -C community-site config --local user.email \"learner@zoeskoul.local\"\ncd community-site\nprintf %s '<h1>Community Hub</h1>\n' > index.html\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Start community site'\ncd community-site\nprintf %s 'export const links = [\"Home\", \"Events\"];\n' > nav.js\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Add events navigation'\ncd community-site\nprintf %s 'Open Saturdays from 9 AM to noon.\n' > README.md\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Clarify volunteer hours'\n"
                 }
               },
               "terminalExpectations": {
                 "forbiddenCommands": {
                   "0": {
                     "message": "Do not rewrite shared history in this Git practice task."
+                  }
+                },
+                "requiredCommands": {
+                  "0": {
+                    "message": "Run `git log --oneline`, then check your answer again."
                   }
                 }
               }
             },
             "try_read_history_with_log_and_show_sketch1": {
-              "title": "Try it yourself: Inspect a Commit with git show",
-              "prompt": "Right after the sketch \"Detailed Commit Inspection with git show\", practice that exact idea with this task. Use `git show` to inspect the details of a specific commit in your repository. Focus on understanding the changes made in that commit.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter. Produce the result for inspect a Commit with git show so it reinforces Read History with log and show.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "title": "Inspect the Latest Snapshot",
+              "prompt": "The terminal opens inside the prepared `community-site/` repository.\n\nUse `git show --stat HEAD` to see the latest commit message and the files it changed.\n\nType each command in the terminal and press Enter.",
+              "hint": "Read the repository state first, then use the Git command that changes only the requested boundary.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+                "concept": "git show connects a commit’s message to the exact snapshot and patch it introduced.",
+                "hint_1": "Use the exact file or repository named in the task; avoid broad commands that include unrelated work.",
+                "hint_2": "After the action, run the requested inspection command to confirm the final state."
               },
-              "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.",
-              "solutionCode": "bash .zoeskoul/setup.sh\ngit show\ngit log --oneline",
-              "instructions": "Use `git show` to inspect the details of a specific commit in your repository. Focus on understanding the changes made in that commit.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+              "starterCode": "Open Saturdays from 9 AM to noon.\n",
+              "solutionCode": "git show --stat HEAD",
+              "instructions": "The terminal opens inside the prepared `community-site/` repository.\n\nUse `git show --stat HEAD` to see the latest commit message and the files it changed.\n\nType each command in the terminal and press Enter.",
               "starterFiles": {
-                "main_sh": {
-                  "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.\n"
-                },
                 "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 2\\n' > practice-2.txt\n"
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-site\nmkdir -p community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name \"ZoeSkoul Learner\"\ngit -C community-site config --local user.email \"learner@zoeskoul.local\"\ncd community-site\nprintf %s '<h1>Community Hub</h1>\n' > index.html\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Start community site'\ncd community-site\nprintf %s 'Open Saturdays from 9 AM to noon.\n' > README.md\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Clarify volunteer hours'\n"
                 }
               },
               "solutionFiles": {
-                "main_sh": {
-                  "content": "bash .zoeskoul/setup.sh\ngit show\ngit log --oneline\n"
-                },
                 "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 2\\n' > practice-2.txt\n"
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-site\nmkdir -p community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name \"ZoeSkoul Learner\"\ngit -C community-site config --local user.email \"learner@zoeskoul.local\"\ncd community-site\nprintf %s '<h1>Community Hub</h1>\n' > index.html\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Start community site'\ncd community-site\nprintf %s 'Open Saturdays from 9 AM to noon.\n' > README.md\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Clarify volunteer hours'\n"
                 }
               },
               "terminalExpectations": {
                 "forbiddenCommands": {
                   "0": {
                     "message": "Do not rewrite shared history in this Git practice task."
+                  }
+                },
+                "requiredCommands": {
+                  "0": {
+                    "message": "Run `git show --stat HEAD`, then check your answer again."
                   }
                 }
               }
             },
             "try_read_history_with_log_and_show_sketch2": {
-              "title": "Try it yourself: Relate HEAD to Previous Commits",
-              "prompt": "Right after the sketch \"Understanding HEAD and Its Relation to Commits\", practice that exact idea with this task. Use `git log --oneline` to determine where `HEAD` is pointing in your commit history. Explain how this helps you understand your project's current state.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter. Produce the result for relate HEAD to Previous Commits so it reinforces Read History with log and show.",
-              "hint": "Read the Git task \"Relate HEAD to Previous Commits\" and identify the repository state you need to create.",
+              "title": "Inspect the Previous Snapshot",
+              "prompt": "The terminal opens inside the prepared `community-site/` repository.\n\nThe newest commit changed the README. Inspect `HEAD~1` to review the snapshot immediately before it.\n\nType each command in the terminal and press Enter.",
+              "hint": "Read the repository state first, then use the Git command that changes only the requested boundary.",
               "help": {
-                "concept": "This Git exercise checks the repository state produced by \"Relate HEAD to Previous Commits\".",
-                "hint_1": "Use git status before and after each small change so you can see what moved between the working tree, staging area, and history.",
-                "hint_2": "Match the requested file names, branch names, and commit purpose before clicking Check Answer."
+                "concept": "HEAD~1 names the first parent of the current commit, which is the snapshot immediately before HEAD in this linear history.",
+                "hint_1": "Use the exact file or repository named in the task; avoid broad commands that include unrelated work.",
+                "hint_2": "After the action, run the requested inspection command to confirm the final state."
               },
-              "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.",
-              "solutionCode": "bash .zoeskoul/setup.sh\ngit log --oneline",
-              "instructions": "Use `git log --oneline` to determine where `HEAD` is pointing in your commit history. Explain how this helps you understand your project's current state.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+              "starterCode": "Open Saturdays from 9 AM to noon.\n",
+              "solutionCode": "git show --stat HEAD~1",
+              "instructions": "The terminal opens inside the prepared `community-site/` repository.\n\nThe newest commit changed the README. Inspect `HEAD~1` to review the snapshot immediately before it.\n\nType each command in the terminal and press Enter.",
               "starterFiles": {
-                "main_sh": {
-                  "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.\n"
-                },
                 "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 3\\n' > practice-3.txt\n"
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-site\nmkdir -p community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name \"ZoeSkoul Learner\"\ngit -C community-site config --local user.email \"learner@zoeskoul.local\"\ncd community-site\nprintf %s '<h1>Community Hub</h1>\n' > index.html\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Start community site'\ncd community-site\nprintf %s 'Open Saturdays from 9 AM to noon.\n' > README.md\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Clarify volunteer hours'\n"
                 }
               },
               "solutionFiles": {
-                "main_sh": {
-                  "content": "bash .zoeskoul/setup.sh\ngit log --oneline\n"
-                },
                 "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 3\\n' > practice-3.txt\n"
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-site\nmkdir -p community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name \"ZoeSkoul Learner\"\ngit -C community-site config --local user.email \"learner@zoeskoul.local\"\ncd community-site\nprintf %s '<h1>Community Hub</h1>\n' > index.html\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Start community site'\ncd community-site\nprintf %s 'Open Saturdays from 9 AM to noon.\n' > README.md\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Clarify volunteer hours'\n"
                 }
               },
               "terminalExpectations": {
@@ -129,41 +121,51 @@
                   "0": {
                     "message": "Do not rewrite shared history in this Git practice task."
                   }
+                },
+                "requiredCommands": {
+                  "0": {
+                    "message": "Run `git show --stat HEAD~1`, then check your answer again."
+                  }
                 }
               }
             },
             "try_read_history_with_log_and_show_sketch3": {
-              "title": "Try it yourself: Combine git log and git show",
-              "prompt": "Right after the sketch \"Applying git log and git show in Real Scenarios\", practice that exact idea with this task. Use `git log --oneline` to find a commit and then `git show` to inspect its details. Explain how these commands together provide a comprehensive view of your project's history.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter. Produce the result for combine git log and git show so it reinforces Read History with log and show.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "title": "Connect History to Current State",
+              "prompt": "The terminal opens inside the prepared `community-site/` repository.\n\nRead the one-line history, inspect the latest snapshot, and finish with short status to confirm that inspection changed nothing.\n\nType each command in the terminal and press Enter.",
+              "hint": "Read the repository state first, then use the Git command that changes only the requested boundary.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+                "concept": "History inspection is read-only: log and show explain snapshots without changing the working tree.",
+                "hint_1": "Use the exact file or repository named in the task; avoid broad commands that include unrelated work.",
+                "hint_2": "After the action, run the requested inspection command to confirm the final state."
               },
-              "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.",
-              "solutionCode": "bash .zoeskoul/setup.sh\ngit log --oneline\ngit show\ngit show <commit-hash>",
-              "instructions": "Use `git log --oneline` to find a commit and then `git show` to inspect its details. Explain how these commands together provide a comprehensive view of your project's history.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+              "starterCode": "Open Saturdays from 9 AM to noon.\n",
+              "solutionCode": "git log --oneline\ngit show --stat HEAD\ngit status --short",
+              "instructions": "The terminal opens inside the prepared `community-site/` repository.\n\nRead the one-line history, inspect the latest snapshot, and finish with short status to confirm that inspection changed nothing.\n\nType each command in the terminal and press Enter.",
               "starterFiles": {
-                "main_sh": {
-                  "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.\n"
-                },
                 "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 4\\n' > practice-4.txt\n"
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-site\nmkdir -p community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name \"ZoeSkoul Learner\"\ngit -C community-site config --local user.email \"learner@zoeskoul.local\"\ncd community-site\nprintf %s '<h1>Community Hub</h1>\n' > index.html\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Start community site'\ncd community-site\nprintf %s 'Open Saturdays from 9 AM to noon.\n' > README.md\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Clarify volunteer hours'\n"
                 }
               },
               "solutionFiles": {
-                "main_sh": {
-                  "content": "bash .zoeskoul/setup.sh\ngit log --oneline\ngit show\ngit show <commit-hash>\n"
-                },
                 "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 4\\n' > practice-4.txt\n"
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-site\nmkdir -p community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name \"ZoeSkoul Learner\"\ngit -C community-site config --local user.email \"learner@zoeskoul.local\"\ncd community-site\nprintf %s '<h1>Community Hub</h1>\n' > index.html\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Start community site'\ncd community-site\nprintf %s 'Open Saturdays from 9 AM to noon.\n' > README.md\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Clarify volunteer hours'\n"
                 }
               },
               "terminalExpectations": {
                 "forbiddenCommands": {
                   "0": {
                     "message": "Do not rewrite shared history in this Git practice task."
+                  }
+                },
+                "requiredCommands": {
+                  "0": {
+                    "message": "Run `git log --oneline`, then check your answer again."
+                  },
+                  "1": {
+                    "message": "Run `git show --stat HEAD`, then check your answer again."
+                  },
+                  "2": {
+                    "message": "Run `git status --short`, then check your answer again."
                   }
                 }
               }
@@ -229,7 +231,7 @@
               },
               "tokens": {
                 "t1": "git log --oneline",
-                "t2": "git show <commit-hash>"
+                "t2": "git show HEAD"
               }
             },
             "fill-blank-1": {
@@ -251,14 +253,14 @@
             },
             "fill-blank-2": {
               "title": "Command to inspect a commit",
-              "prompt": "Fill in the blank: Use `git [blank1] <commit-hash>` to inspect the details of a specific commit.",
+              "prompt": "Fill in the blank: Use `git [blank1] HEAD` to inspect the details of a specific commit.",
               "hint": "This command reveals detailed information about a commit.",
               "help": {
                 "concept": "`git the missing term` is used to inspect a specific commit.",
                 "hint_1": "The command starts with `git` and is followed by a word that means 'display'.",
                 "hint_2": "The missing word is `the missing term`."
               },
-              "template": "Use `git [blank1] <commit-hash>` to inspect the details of a specific commit.",
+              "template": "Use `git [blank1] HEAD` to inspect the details of a specific commit.",
               "choices": [
                 "log",
                 "show",
@@ -276,20 +278,20 @@
       "git-foundations-module-2-meaningful-history": {
         "read-history-with-log-and-show": {
           "sketch0": {
-            "title": "Reading Commit History with git log --oneline",
-            "bodyMarkdown": "The `git log --oneline` command provides a concise view of the commit history. It displays each commit on a single line, showing the commit hash and the commit message. This format is particularly useful for getting a quick overview of the project's history without overwhelming details.\n\nWorked example:\n\n```bash\ngit log --oneline\n```\n\nThis command will list all the commits in the current branch, each prefixed by a short hash and followed by the commit message. For instance, you might see:\n\n```\nabc1234 Initial commit\ndef5678 Added README file\nghi9012 Updated index.html\n```\n\nEach line represents a commit, with the hash allowing you to reference it later. This view helps you quickly understand the sequence of changes and their descriptions."
+            "title": "Scan the Timeline",
+            "bodyMarkdown": "`git log --oneline` turns the commit history into a compact list:\n\n```bash\ngit log --oneline\n```\n\nEach row pairs a shortened identifier with a subject. Newest appears first. The identifier is useful for selecting a commit, but the message and order are what make the history understandable.\n\nUse the list to find the checkpoint you want to investigate."
           },
           "sketch1": {
-            "title": "Detailed Commit Inspection with git show",
-            "bodyMarkdown": "The `git show` command allows you to inspect the details of a specific commit. It provides information about the changes made in that commit, including the diff, author, and date.\n\nWorked example:\n\n```bash\ngit show abc1234\n```\n\nThis command will display the full details of the commit with hash `abc1234`. You'll see the commit message, author, date, and the changes made to the files. This is useful for understanding exactly what was altered in a particular commit and why."
+            "title": "Open One Commit",
+            "bodyMarkdown": "`git show` opens a commit and displays its metadata and patch:\n\n```bash\ngit show --stat --oneline HEAD\n```\n\n`HEAD` selects the current commit. `--stat` summarizes which files changed, while `--oneline` keeps the heading compact.\n\nRemove `--stat` when you need the full line-by-line patch."
           },
           "sketch2": {
-            "title": "Understanding HEAD and Its Relation to Commits",
-            "bodyMarkdown": "In Git, `HEAD` refers to the current snapshot of your working directory. It usually points to the latest commit in your current branch. Understanding how `HEAD` relates to previous commits is crucial for navigating and managing your project's history.\n\nWorked example:\n\n```bash\ngit log --oneline\n```\n\nBy running this command, you can see where `HEAD` is pointing in relation to other commits. The topmost commit in the list is where `HEAD` currently points. This helps you understand the current state of your project and how recent changes fit into the overall history."
+            "title": "Understand HEAD",
+            "bodyMarkdown": "HEAD is Git’s name for the commit currently checked out. On `main`, it normally points to the newest commit on that branch.\n\n```bash\ngit rev-parse --short HEAD\n```\n\nThe output is an identifier, not a version number you should memorize. As new commits are created, HEAD moves forward.\n\nThinking of HEAD as “the snapshot I am currently standing on” makes status and history easier to connect."
           },
           "sketch3": {
-            "title": "Applying git log and git show in Real Scenarios",
-            "bodyMarkdown": "Using `git log --oneline` and `git show` together can provide a comprehensive understanding of your project's history. While `git log --oneline` gives you a quick overview, `git show` allows you to dive deeper into specific changes.\n\nWorked example:\n\nFirst, get a quick overview:\n\n```bash\ngit log --oneline\n```\n\nThen, inspect a specific commit:\n\n```bash\ngit show def5678\n```\n\nThis approach helps you maintain a clear understanding of what changes have been made, why they were made, and how they affect the project."
+            "title": "Move Between Overview and Detail",
+            "bodyMarkdown": "History inspection works like a table of contents and a chapter. Start with `git log --oneline` for the overview, then use `git show` for the selected detail.\n\nThis is faster and safer than opening every file and guessing what changed. It also lets you verify whether a commit message accurately describes its snapshot.\n\nA readable history supports both views without surprises."
           }
         }
       }

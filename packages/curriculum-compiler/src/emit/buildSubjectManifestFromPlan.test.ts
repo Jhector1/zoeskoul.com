@@ -303,6 +303,82 @@ describe("buildSubjectManifestFromPlan", () => {
         expect(manifest.modules[0]?.sections[0]?.role).toBe("capstone");
     });
 
+    it("uses the Git profile for editor, explorer, terminal, and hidden Git bootstrap defaults", () => {
+        const manifest = buildSubjectManifestFromPlan(
+            makeArgs({
+                blueprint: {
+                    subjectSlug: "git-foundations",
+                    catalogSlug: "git",
+                    profileId: "git",
+                },
+            }),
+        );
+
+        const expected = {
+            preset: "runner",
+            runnerBackend: "pty",
+            layoutMode: "default",
+            terminalBootstrap: {
+                gitSafeDirectories: ["/workspace/*"],
+            },
+            requires: {
+                files: true,
+                multiFile: true,
+                terminal: true,
+            },
+        };
+
+        expect(manifest.modules[0]?.serviceDefaults).toMatchObject(expected);
+        expect(manifest.modules[0]?.sections[0]?.serviceDefaults).toMatchObject(expected);
+    });
+
+    it("keeps Linux on the terminal-only profile layout", () => {
+        const manifest = buildSubjectManifestFromPlan(
+            makeArgs({
+                blueprint: {
+                    subjectSlug: "linux-terminal-fundamentals",
+                    catalogSlug: "linux",
+                    profileId: "bash",
+                },
+            }),
+        );
+
+        expect(manifest.modules[0]?.serviceDefaults).toMatchObject({
+            preset: "runner",
+            runnerBackend: "pty",
+            layoutMode: "terminal_workspace",
+            requires: {
+                files: true,
+                multiFile: true,
+                terminal: true,
+            },
+        });
+    });
+
+    it("lets explicit authored IDE policy override the profile presentation", () => {
+        const manifest = buildSubjectManifestFromPlan(
+            makeArgs({
+                blueprint: {
+                    subjectSlug: "git-foundations",
+                    catalogSlug: "git",
+                    profileId: "git",
+                    idePolicy: {
+                        defaultServices: {
+                            layoutMode: "terminal_workspace",
+                        },
+                    },
+                },
+            }),
+        );
+
+        expect(manifest.modules[0]?.serviceDefaults).toMatchObject({
+            layoutMode: "terminal_workspace",
+            terminalBootstrap: {
+                gitSafeDirectories: ["/workspace/*"],
+            },
+        });
+    });
+
     it("enables filesystem and multifile only for the module with a file-runner workspace policy", () => {
         const manifest = buildSubjectManifestFromPlan(
             makeArgs({

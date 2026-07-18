@@ -280,10 +280,13 @@ export function buildTopicSeedFromPlanNode(args: {
 
     const mergedServiceDefaults: ManifestIdeServiceConfig | null =
         mergeManifestIdeServiceConfigs(
+            // Capabilities are the neutral base. Profiles choose their normal
+            // learning layout, and authored course/module policy can override
+            // that choice without profile-specific compiler branches.
+            workspaceServiceDefaults,
+            adapterServiceDefaults,
             args.blueprint.idePolicy?.defaultServices,
             args.blueprint.idePolicy?.moduleServiceDefaults?.[args.module.moduleSlug],
-            adapterServiceDefaults,
-            workspaceServiceDefaults,
         );
 
     const mergedRuntimeDefaults: ManifestRuntimeDefaults =

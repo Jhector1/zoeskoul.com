@@ -547,45 +547,45 @@ function Tree(props: TreeProps) {
                         >
                             <IndentGuides depth={depth} />
 
-                            <div
-                                data-tree-no-open="true"
-                                draggable={!isTouchLike && policy.canMoveNodes}
-                                onDragStart={(e) => {
-                                    if (isTouchLike || !policy.canMoveNodes) return;
-                                    e.stopPropagation();
-                                    setDraggingId(n.id);
-                                    e.dataTransfer.effectAllowed = "move";
-                                    e.dataTransfer.setData("text/plain", String(n.id));
-                                }}
-                                onDragEnd={(e) => {
-                                    e.stopPropagation();
-                                    setDraggingId(null);
-                                    setDropParentId(null);
-                                    clearAutoExpand();
-                                }}
-                                className={cn(
-                                    "mr-1 grid h-7 w-7 shrink-0 place-items-center rounded-lg text-neutral-400",
-                                    "cursor-grab hover:bg-neutral-100 hover:text-neutral-700 active:cursor-grabbing dark:hover:bg-white/[0.06] dark:hover:text-white/80",
-                                    (isTouchLike || !policy.canMoveNodes) && "opacity-40",
-                                    !policy.canMoveNodes && "pointer-events-none opacity-0",
-                                    draggingId === n.id && "opacity-50",
-                                )}
-                                title={
-                                    !policy.canMoveNodes
-                                        ? ""
-                                        : isTouchLike
+                            {policy.canMoveNodes ? (
+                                <div
+                                    data-tree-no-open="true"
+                                    draggable={!isTouchLike}
+                                    onDragStart={(e) => {
+                                        if (isTouchLike) return;
+                                        e.stopPropagation();
+                                        setDraggingId(n.id);
+                                        e.dataTransfer.effectAllowed = "move";
+                                        e.dataTransfer.setData("text/plain", String(n.id));
+                                    }}
+                                    onDragEnd={(e) => {
+                                        e.stopPropagation();
+                                        setDraggingId(null);
+                                        setDropParentId(null);
+                                        clearAutoExpand();
+                                    }}
+                                    className={cn(
+                                        "mr-1 grid h-7 w-7 shrink-0 place-items-center rounded-lg text-neutral-400",
+                                        "cursor-grab hover:bg-neutral-100 hover:text-neutral-700 active:cursor-grabbing dark:hover:bg-white/[0.06] dark:hover:text-white/80",
+                                        isTouchLike && "opacity-40",
+                                        draggingId === n.id && "opacity-50",
+                                    )}
+                                    title={
+                                        isTouchLike
                                             ? t("moveUsingMenu")
                                             : t("dragToMove")
-                                }
-                                aria-label={
-                                    !policy.canMoveNodes
-                                        ? t("moveDisabled")
-                                        : isTouchLike
+                                    }
+                                    aria-label={
+                                        isTouchLike
                                             ? t("useMoveAction")
                                             : t("dragHandle")
-                                }
-                            >
-                                <span className="select-none text-[12px] font-medium leading-none">⋮⋮</span>                            </div>
+                                    }
+                                >
+                                    <span className="select-none text-[12px] font-medium leading-none">
+                                        ⋮⋮
+                                    </span>
+                                </div>
+                            ) : null}
 
                             <button
                                 type="button"

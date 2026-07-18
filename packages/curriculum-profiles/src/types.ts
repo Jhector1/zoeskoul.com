@@ -141,6 +141,10 @@ export type CourseProfile = {
         moduleOrder?: number,
         module?: PlannedModule,
     ): TopicSeed["moduleRuntimeDefaults"] | null;
+    buildModuleServiceDefaults?(
+        moduleOrder?: number,
+        module?: PlannedModule,
+    ): TopicSeed["moduleServiceDefaults"] | null;
     renderAuthoringPromptRules?(args: {
         seed: TopicSeed;
         shape: SubjectShapePack;

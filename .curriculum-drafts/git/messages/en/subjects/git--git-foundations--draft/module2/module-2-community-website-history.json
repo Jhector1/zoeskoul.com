@@ -3,11 +3,11 @@
     "git--git-foundations--draft": {
       "git-foundations-module-2-meaningful-history": {
         "module-2-community-website-history": {
-          "label": "Project: Build the Community Website History",
-          "summary": "Create a readable sequence of cohesive commits for a small community website instead of saving unrelated changes in one snapshot.",
+          "label": "Project: Build a Readable Website History",
+          "summary": "A community website has two unrelated edits. Separate them into focused snapshots, then read the history as a clear project story.",
           "cards": {
             "sketch0": {
-              "title": "Building a Cohesive Commit History"
+              "title": "Build a History Another Maintainer Can Read"
             },
             "project": {
               "title": "Build the Community Website History"
@@ -36,31 +36,25 @@
           "moduleProject": {
             "steps": {
               "try_module_2_community_website_history_sketch0": {
-                "title": "Inspect the First Website Change",
-                "prompt": "Start the module project. In step 1 of 6, Use `git status` and `git diff` to identify the changes made to `index.html` without staging them. Type the commands and press Enter to see the output.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
-                "hint": "This is the first project step. Build a clean starting version, then run it before moving on.",
+                "title": "Inspect the Two Pending Changes",
+                "prompt": "The terminal opens inside the prepared `community-website/` repository.\n\nThe website has a navigation edit and a palette edit. Use status, name-only diff, and a focused diff of `index.html` to understand the work before staging.\n\nType each command in the terminal and press Enter.",
+                "hint": "Read the repository state first, then use the Git command that changes only the requested boundary.",
                 "help": {
-                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
-                  "hint_1": "This is the first project step. Build a clean starting version, then run it before moving on.",
-                  "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+                  "concept": "A project begins with inspection so commit boundaries are chosen from evidence, not guesswork.",
+                  "hint_1": "Use the exact file or repository named in the task; avoid broad commands that include unrelated work.",
+                  "hint_2": "After the action, run the requested inspection command to confirm the final state."
                 },
-                "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.",
-                "solutionCode": "bash .zoeskoul/setup.sh\ngit status\ngit diff",
-                "instructions": "Use `git status` and `git diff` to identify the changes made to `index.html` without staging them. Type the commands and press Enter to see the output.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+                "starterCode": "<h1>Community Hub</h1>\n<nav>Home Events</nav>\n",
+                "solutionCode": "git status --short\ngit diff --name-only\ngit diff -- index.html",
+                "instructions": "The terminal opens inside the prepared `community-website/` repository.\n\nThe website has a navigation edit and a palette edit. Use status, name-only diff, and a focused diff of `index.html` to understand the work before staging.\n\nType each command in the terminal and press Enter.",
                 "starterFiles": {
-                  "main_sh": {
-                    "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.\n"
-                  },
                   "zoeskoul_setup_sh": {
-                    "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 1\\n' > index.html\n"
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-website\nmkdir -p community-website\ngit -C community-website init -q -b main\ngit -C community-website config --local user.name \"ZoeSkoul Learner\"\ngit -C community-website config --local user.email \"learner@zoeskoul.local\"\ncd community-website\nprintf %s '<h1>Community Hub</h1>\n<nav>Home</nav>\n' > index.html\ncd ..\ncd community-website\nprintf %s 'body { color: navy; }\n' > styles.css\ncd ..\ngit -C community-website add -A\ngit -C community-website commit -q -m 'Add project baseline'\ncd community-website\nprintf %s '<h1>Community Hub</h1>\n<nav>Home Events</nav>\n' > index.html\ncd ..\ncd community-website\nprintf %s 'body { color: teal; }\n' > styles.css\ncd ..\n"
                   }
                 },
                 "solutionFiles": {
-                  "main_sh": {
-                    "content": "bash .zoeskoul/setup.sh\ngit status\ngit diff\n"
-                  },
                   "zoeskoul_setup_sh": {
-                    "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 1\\n' > index.html\n"
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-website\nmkdir -p community-website\ngit -C community-website init -q -b main\ngit -C community-website config --local user.name \"ZoeSkoul Learner\"\ngit -C community-website config --local user.email \"learner@zoeskoul.local\"\ncd community-website\nprintf %s '<h1>Community Hub</h1>\n<nav>Home</nav>\n' > index.html\ncd ..\ncd community-website\nprintf %s 'body { color: navy; }\n' > styles.css\ncd ..\ngit -C community-website add -A\ngit -C community-website commit -q -m 'Add project baseline'\ncd community-website\nprintf %s '<h1>Community Hub</h1>\n<nav>Home Events</nav>\n' > index.html\ncd ..\ncd community-website\nprintf %s 'body { color: teal; }\n' > styles.css\ncd ..\n"
                   }
                 },
                 "terminalExpectations": {
@@ -68,143 +62,154 @@
                     "0": {
                       "message": "Do not rewrite shared history in this Git practice task."
                     }
+                  },
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Run `git status --short`, then check your answer again."
+                    },
+                    "1": {
+                      "message": "Run `git diff --name-only`, then check your answer again."
+                    },
+                    "2": {
+                      "message": "Run `git diff -- index.html`, then check your answer again."
+                    }
                   }
                 }
               },
               "try_module_2_community_website_history_sketch1": {
-                "title": "Stage Only the Navigation Update",
-                "prompt": "Continue the same module project from the previous working step. In step 2 of 6, Stage the changes in `index.html` for the navigation update. Use `git add` and verify with `git diff --staged`. Type the commands and press Enter.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
-                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "title": "Stage the Navigation Update",
+                "prompt": "The terminal opens inside the prepared `community-website/` repository.\n\nStage only `index.html`, then inspect the staged file names and patch. Leave the palette edit unstaged.\n\nType each command in the terminal and press Enter.",
+                "hint": "Read the repository state first, then use the Git command that changes only the requested boundary.",
                 "help": {
-                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
-                  "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
-                  "hint_2": "Run the previous working code first, then make only the focused change for this step."
+                  "concept": "The index can hold one focused part of a larger working tree.",
+                  "hint_1": "Use the exact file or repository named in the task; avoid broad commands that include unrelated work.",
+                  "hint_2": "After the action, run the requested inspection command to confirm the final state."
                 },
-                "starterCode": "bash .zoeskoul/setup.sh\ngit status\ngit diff\n# Project step 2: Stage Only the Navigation Update\n# Keep the working code above from the previous step.\n# Next, Stage the changes in `index.html` for the navigation update\n# Add only the focused change for this step inside the existing work.\n",
-                "solutionCode": "bash .zoeskoul/setup.sh\ngit status\ngit diff\nbash .zoeskoul/setup.sh\ngit add\ngit diff --staged\ngit add index.html\n",
-                "instructions": "Stage the changes in `index.html` for the navigation update. Use `git add` and verify with `git diff --staged`. Type the commands and press Enter.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+                "starterCode": "<h1>Community Hub</h1>\n<nav>Home Events</nav>\n",
+                "solutionCode": "git add index.html\ngit diff --staged --name-only\ngit diff --staged -- index.html",
+                "instructions": "The terminal opens inside the prepared `community-website/` repository.\n\nStage only `index.html`, then inspect the staged file names and patch. Leave the palette edit unstaged.\n\nType each command in the terminal and press Enter.",
                 "starterFiles": {
-                  "main_sh": {
-                    "content": "bash .zoeskoul/setup.sh\ngit status\ngit diff\n# Project step 2: Stage Only the Navigation Update\n# Keep the working code above from the previous step.\n# Next, Stage the changes in `index.html` for the navigation update\n# Add only the focused change for this step inside the existing work.\n"
-                  },
                   "zoeskoul_setup_sh": {
-                    "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 1\\n' > index.html\n"
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-website\nmkdir -p community-website\ngit -C community-website init -q -b main\ngit -C community-website config --local user.name \"ZoeSkoul Learner\"\ngit -C community-website config --local user.email \"learner@zoeskoul.local\"\ncd community-website\nprintf %s '<h1>Community Hub</h1>\n<nav>Home</nav>\n' > index.html\ncd ..\ncd community-website\nprintf %s 'body { color: navy; }\n' > styles.css\ncd ..\ngit -C community-website add -A\ngit -C community-website commit -q -m 'Add project baseline'\ncd community-website\nprintf %s '<h1>Community Hub</h1>\n<nav>Home Events</nav>\n' > index.html\ncd ..\ncd community-website\nprintf %s 'body { color: teal; }\n' > styles.css\ncd ..\n"
                   }
                 },
                 "solutionFiles": {
-                  "main_sh": {
-                    "content": "bash .zoeskoul/setup.sh\ngit status\ngit diff\nbash .zoeskoul/setup.sh\ngit add\ngit diff --staged\ngit add index.html\n"
-                  },
                   "zoeskoul_setup_sh": {
-                    "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 2\\n' > index.html\n"
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-website\nmkdir -p community-website\ngit -C community-website init -q -b main\ngit -C community-website config --local user.name \"ZoeSkoul Learner\"\ngit -C community-website config --local user.email \"learner@zoeskoul.local\"\ncd community-website\nprintf %s '<h1>Community Hub</h1>\n<nav>Home</nav>\n' > index.html\ncd ..\ncd community-website\nprintf %s 'body { color: navy; }\n' > styles.css\ncd ..\ngit -C community-website add -A\ngit -C community-website commit -q -m 'Add project baseline'\ncd community-website\nprintf %s '<h1>Community Hub</h1>\n<nav>Home Events</nav>\n' > index.html\ncd ..\ncd community-website\nprintf %s 'body { color: teal; }\n' > styles.css\ncd ..\n"
                   }
                 },
                 "terminalExpectations": {
                   "forbiddenCommands": {
                     "0": {
                       "message": "Do not rewrite shared history in this Git practice task."
+                    }
+                  },
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Run `git add index.html`, then check your answer again."
+                    },
+                    "1": {
+                      "message": "Run `git diff --staged --name-only`, then check your answer again."
                     }
                   }
                 }
               },
               "try_module_2_community_website_history_sketch2": {
                 "title": "Commit the Navigation Update",
-                "prompt": "Continue the same module project from the previous working step. In step 3 of 6, Commit the staged navigation changes with a meaningful message. Use `git commit` and verify that `events.html` still has an unstaged change. Type the commands and press Enter.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
-                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "prompt": "The terminal opens inside the prepared `community-website/` repository.\n\nThe navigation change is staged and the palette edit remains unstaged. Commit `Add events navigation`, then verify the remaining status.\n\nType each command in the terminal and press Enter.",
+                "hint": "Read the repository state first, then use the Git command that changes only the requested boundary.",
                 "help": {
-                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
-                  "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
-                  "hint_2": "Run the previous working code first, then make only the focused change for this step."
+                  "concept": "A commit records only the staged navigation work and leaves the unrelated palette edit for its own snapshot.",
+                  "hint_1": "Use the exact file or repository named in the task; avoid broad commands that include unrelated work.",
+                  "hint_2": "After the action, run the requested inspection command to confirm the final state."
                 },
-                "starterCode": "bash .zoeskoul/setup.sh\ngit status\ngit diff\nbash .zoeskoul/setup.sh\ngit add\ngit diff --staged\ngit add index.html\n# Project step 3: Commit the Navigation Update\n# Keep the working code above from the previous step.\n# Next, Commit the staged navigation changes with a meaningful message\n# Add only the focused change for this step inside the existing work.\n",
-                "solutionCode": "bash .zoeskoul/setup.sh\ngit status\ngit diff\nbash .zoeskoul/setup.sh\ngit add\ngit diff --staged\ngit add index.html\nbash .zoeskoul/setup.sh\ngit commit\ngit commit -m\ngit commit -m \"Add primary navigation\"\n",
-                "instructions": "Commit the staged navigation changes with a meaningful message. Use `git commit` and verify that `events.html` still has an unstaged change. Type the commands and press Enter.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+                "starterCode": "<h1>Community Hub</h1>\n<nav>Home Events</nav>\n",
+                "solutionCode": "git commit -m \"Add events navigation\"\ngit status --short",
+                "instructions": "The terminal opens inside the prepared `community-website/` repository.\n\nThe navigation change is staged and the palette edit remains unstaged. Commit `Add events navigation`, then verify the remaining status.\n\nType each command in the terminal and press Enter.",
                 "starterFiles": {
-                  "main_sh": {
-                    "content": "bash .zoeskoul/setup.sh\ngit status\ngit diff\nbash .zoeskoul/setup.sh\ngit add\ngit diff --staged\ngit add index.html\n# Project step 3: Commit the Navigation Update\n# Keep the working code above from the previous step.\n# Next, Commit the staged navigation changes with a meaningful message\n# Add only the focused change for this step inside the existing work.\n"
-                  },
                   "zoeskoul_setup_sh": {
-                    "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 2\\n' > index.html\n"
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-website\nmkdir -p community-website\ngit -C community-website init -q -b main\ngit -C community-website config --local user.name \"ZoeSkoul Learner\"\ngit -C community-website config --local user.email \"learner@zoeskoul.local\"\ncd community-website\nprintf %s '<h1>Community Hub</h1>\n<nav>Home</nav>\n' > index.html\ncd ..\ncd community-website\nprintf %s 'body { color: navy; }\n' > styles.css\ncd ..\ngit -C community-website add -A\ngit -C community-website commit -q -m 'Add project baseline'\ncd community-website\nprintf %s '<h1>Community Hub</h1>\n<nav>Home Events</nav>\n' > index.html\ncd ..\ncd community-website\nprintf %s 'body { color: teal; }\n' > styles.css\ncd ..\ngit -C community-website add -- index.html\n"
                   }
                 },
                 "solutionFiles": {
-                  "main_sh": {
-                    "content": "bash .zoeskoul/setup.sh\ngit status\ngit diff\nbash .zoeskoul/setup.sh\ngit add\ngit diff --staged\ngit add index.html\nbash .zoeskoul/setup.sh\ngit commit\ngit commit -m\ngit commit -m \"Add primary navigation\"\n"
-                  },
                   "zoeskoul_setup_sh": {
-                    "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 3\\n' > events.html\n"
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-website\nmkdir -p community-website\ngit -C community-website init -q -b main\ngit -C community-website config --local user.name \"ZoeSkoul Learner\"\ngit -C community-website config --local user.email \"learner@zoeskoul.local\"\ncd community-website\nprintf %s '<h1>Community Hub</h1>\n<nav>Home</nav>\n' > index.html\ncd ..\ncd community-website\nprintf %s 'body { color: navy; }\n' > styles.css\ncd ..\ngit -C community-website add -A\ngit -C community-website commit -q -m 'Add project baseline'\ncd community-website\nprintf %s '<h1>Community Hub</h1>\n<nav>Home Events</nav>\n' > index.html\ncd ..\ncd community-website\nprintf %s 'body { color: teal; }\n' > styles.css\ncd ..\ngit -C community-website add -- index.html\n"
                   }
                 },
                 "terminalExpectations": {
                   "forbiddenCommands": {
                     "0": {
                       "message": "Do not rewrite shared history in this Git practice task."
+                    }
+                  },
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Run `git commit -m \"Add events navigation\"`, then check your answer again."
+                    },
+                    "1": {
+                      "message": "Run `git status --short`, then check your answer again."
                     }
                   }
                 }
               },
               "try_module_2_community_website_history_sketch3": {
-                "title": "Prepare the Events Update",
-                "prompt": "Continue the same module project from the previous working step. In step 4 of 6, Finish the events update in `events.html`, inspect its unstaged diff, and stage only `events.html`. Type the commands and press Enter.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
-                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "title": "Stage the Palette Update",
+                "prompt": "The terminal opens inside the prepared `community-website/` repository.\n\nThe navigation commit now exists. Stage `styles.css` and inspect the staged patch.\n\nType each command in the terminal and press Enter.",
+                "hint": "Read the repository state first, then use the Git command that changes only the requested boundary.",
                 "help": {
-                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
-                  "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
-                  "hint_2": "Run the previous working code first, then make only the focused change for this step."
+                  "concept": "The second coherent change receives its own staging boundary after the first snapshot is complete.",
+                  "hint_1": "Use the exact file or repository named in the task; avoid broad commands that include unrelated work.",
+                  "hint_2": "After the action, run the requested inspection command to confirm the final state."
                 },
-                "starterCode": "bash .zoeskoul/setup.sh\ngit status\ngit diff\nbash .zoeskoul/setup.sh\ngit add\ngit diff --staged\ngit add index.html\nbash .zoeskoul/setup.sh\ngit commit\ngit commit -m\ngit commit -m \"Add primary navigation\"\n# Project step 4: Prepare the Events Update\n# Keep the working code above from the previous step.\n# Next, Finish the events update in `events.html`, inspect its unstaged diff, and stage only `events.html`\n# Add only the focused change for this step inside the existing work.\n",
-                "solutionCode": "bash .zoeskoul/setup.sh\ngit status\ngit diff\nbash .zoeskoul/setup.sh\ngit add\ngit diff --staged\ngit add index.html\nbash .zoeskoul/setup.sh\ngit commit\ngit commit -m\ngit commit -m \"Add primary navigation\"\nbash .zoeskoul/setup.sh\ngit diff\ngit add\ngit add events.html\n",
-                "instructions": "Finish the events update in `events.html`, inspect its unstaged diff, and stage only `events.html`. Type the commands and press Enter.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+                "starterCode": "<h1>Community Hub</h1>\n<nav>Home Events</nav>\n",
+                "solutionCode": "git add styles.css\ngit diff --staged -- styles.css",
+                "instructions": "The terminal opens inside the prepared `community-website/` repository.\n\nThe navigation commit now exists. Stage `styles.css` and inspect the staged patch.\n\nType each command in the terminal and press Enter.",
                 "starterFiles": {
-                  "main_sh": {
-                    "content": "bash .zoeskoul/setup.sh\ngit status\ngit diff\nbash .zoeskoul/setup.sh\ngit add\ngit diff --staged\ngit add index.html\nbash .zoeskoul/setup.sh\ngit commit\ngit commit -m\ngit commit -m \"Add primary navigation\"\n# Project step 4: Prepare the Events Update\n# Keep the working code above from the previous step.\n# Next, Finish the events update in `events.html`, inspect its unstaged diff, and stage only `events.html`\n# Add only the focused change for this step inside the existing work.\n"
-                  },
                   "zoeskoul_setup_sh": {
-                    "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 3\\n' > events.html\n"
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-website\nmkdir -p community-website\ngit -C community-website init -q -b main\ngit -C community-website config --local user.name \"ZoeSkoul Learner\"\ngit -C community-website config --local user.email \"learner@zoeskoul.local\"\ncd community-website\nprintf %s '<h1>Community Hub</h1>\n<nav>Home</nav>\n' > index.html\ncd ..\ncd community-website\nprintf %s 'body { color: navy; }\n' > styles.css\ncd ..\ngit -C community-website add -A\ngit -C community-website commit -q -m 'Start community website'\ncd community-website\nprintf %s '<h1>Community Hub</h1>\n<nav>Home Events</nav>\n' > index.html\ncd ..\ngit -C community-website add -A\ngit -C community-website commit -q -m 'Add events navigation'\ncd community-website\nprintf %s 'body { color: teal; }\n' > styles.css\ncd ..\n"
                   }
                 },
                 "solutionFiles": {
-                  "main_sh": {
-                    "content": "bash .zoeskoul/setup.sh\ngit status\ngit diff\nbash .zoeskoul/setup.sh\ngit add\ngit diff --staged\ngit add index.html\nbash .zoeskoul/setup.sh\ngit commit\ngit commit -m\ngit commit -m \"Add primary navigation\"\nbash .zoeskoul/setup.sh\ngit diff\ngit add\ngit add events.html\n"
-                  },
                   "zoeskoul_setup_sh": {
-                    "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 4\\n' > events.html\n"
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-website\nmkdir -p community-website\ngit -C community-website init -q -b main\ngit -C community-website config --local user.name \"ZoeSkoul Learner\"\ngit -C community-website config --local user.email \"learner@zoeskoul.local\"\ncd community-website\nprintf %s '<h1>Community Hub</h1>\n<nav>Home</nav>\n' > index.html\ncd ..\ncd community-website\nprintf %s 'body { color: navy; }\n' > styles.css\ncd ..\ngit -C community-website add -A\ngit -C community-website commit -q -m 'Start community website'\ncd community-website\nprintf %s '<h1>Community Hub</h1>\n<nav>Home Events</nav>\n' > index.html\ncd ..\ngit -C community-website add -A\ngit -C community-website commit -q -m 'Add events navigation'\ncd community-website\nprintf %s 'body { color: teal; }\n' > styles.css\ncd ..\n"
                   }
                 },
                 "terminalExpectations": {
                   "forbiddenCommands": {
                     "0": {
                       "message": "Do not rewrite shared history in this Git practice task."
+                    }
+                  },
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Run `git add styles.css`, then check your answer again."
+                    },
+                    "1": {
+                      "message": "Run `git diff --staged -- styles.css`, then check your answer again."
                     }
                   }
                 }
               },
               "try_module_2_community_website_history_sketch4": {
-                "title": "Commit the Events Update",
-                "prompt": "Continue the same module project from the previous working step. In step 5 of 6, Commit the staged events changes with a meaningful message. Use `git commit` and ensure the navigation commit is preserved. Type the commands and press Enter.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
-                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "title": "Commit the Palette Update",
+                "prompt": "The terminal opens inside the prepared `community-website/` repository.\n\nThe palette change is staged. Commit `Refresh site palette` and verify a clean working tree.\n\nType each command in the terminal and press Enter.",
+                "hint": "Read the repository state first, then use the Git command that changes only the requested boundary.",
                 "help": {
-                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
-                  "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
-                  "hint_2": "Run the previous working code first, then make only the focused change for this step."
+                  "concept": "Separate commits make navigation and design changes independently understandable.",
+                  "hint_1": "Use the exact file or repository named in the task; avoid broad commands that include unrelated work.",
+                  "hint_2": "After the action, run the requested inspection command to confirm the final state."
                 },
-                "starterCode": "bash .zoeskoul/setup.sh\ngit status\ngit diff\nbash .zoeskoul/setup.sh\ngit add\ngit diff --staged\ngit add index.html\nbash .zoeskoul/setup.sh\ngit commit\ngit commit -m\ngit commit -m \"Add primary navigation\"\nbash .zoeskoul/setup.sh\ngit diff\ngit add\ngit add events.html\n# Project step 5: Commit the Events Update\n# Keep the working code above from the previous step.\n# Next, Commit the staged events changes with a meaningful message\n# Add only the focused change for this step inside the existing work.\n",
-                "solutionCode": "bash .zoeskoul/setup.sh\ngit status\ngit diff\nbash .zoeskoul/setup.sh\ngit add\ngit diff --staged\ngit add index.html\nbash .zoeskoul/setup.sh\ngit commit\ngit commit -m\ngit commit -m \"Add primary navigation\"\nbash .zoeskoul/setup.sh\ngit diff\ngit add\ngit add events.html\nbash .zoeskoul/setup.sh\ngit commit\ngit commit -m\ngit commit -m \"Publish weekend events\"\n",
-                "instructions": "Commit the staged events changes with a meaningful message. Use `git commit` and ensure the navigation commit is preserved. Type the commands and press Enter.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+                "starterCode": "<h1>Community Hub</h1>\n<nav>Home Events</nav>\n",
+                "solutionCode": "git commit -m \"Refresh site palette\"\ngit status --short",
+                "instructions": "The terminal opens inside the prepared `community-website/` repository.\n\nThe palette change is staged. Commit `Refresh site palette` and verify a clean working tree.\n\nType each command in the terminal and press Enter.",
                 "starterFiles": {
-                  "main_sh": {
-                    "content": "bash .zoeskoul/setup.sh\ngit status\ngit diff\nbash .zoeskoul/setup.sh\ngit add\ngit diff --staged\ngit add index.html\nbash .zoeskoul/setup.sh\ngit commit\ngit commit -m\ngit commit -m \"Add primary navigation\"\nbash .zoeskoul/setup.sh\ngit diff\ngit add\ngit add events.html\n# Project step 5: Commit the Events Update\n# Keep the working code above from the previous step.\n# Next, Commit the staged events changes with a meaningful message\n# Add only the focused change for this step inside the existing work.\n"
-                  },
                   "zoeskoul_setup_sh": {
-                    "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 4\\n' > events.html\n"
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-website\nmkdir -p community-website\ngit -C community-website init -q -b main\ngit -C community-website config --local user.name \"ZoeSkoul Learner\"\ngit -C community-website config --local user.email \"learner@zoeskoul.local\"\ncd community-website\nprintf %s '<h1>Community Hub</h1>\n<nav>Home</nav>\n' > index.html\ncd ..\ncd community-website\nprintf %s 'body { color: navy; }\n' > styles.css\ncd ..\ngit -C community-website add -A\ngit -C community-website commit -q -m 'Start community website'\ncd community-website\nprintf %s '<h1>Community Hub</h1>\n<nav>Home Events</nav>\n' > index.html\ncd ..\ngit -C community-website add -A\ngit -C community-website commit -q -m 'Add events navigation'\ncd community-website\nprintf %s 'body { color: teal; }\n' > styles.css\ncd ..\ngit -C community-website add -- styles.css\n"
                   }
                 },
                 "solutionFiles": {
-                  "main_sh": {
-                    "content": "bash .zoeskoul/setup.sh\ngit status\ngit diff\nbash .zoeskoul/setup.sh\ngit add\ngit diff --staged\ngit add index.html\nbash .zoeskoul/setup.sh\ngit commit\ngit commit -m\ngit commit -m \"Add primary navigation\"\nbash .zoeskoul/setup.sh\ngit diff\ngit add\ngit add events.html\nbash .zoeskoul/setup.sh\ngit commit\ngit commit -m\ngit commit -m \"Publish weekend events\"\n"
-                  },
                   "zoeskoul_setup_sh": {
-                    "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 5\\n' > practice-5.txt\n"
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-website\nmkdir -p community-website\ngit -C community-website init -q -b main\ngit -C community-website config --local user.name \"ZoeSkoul Learner\"\ngit -C community-website config --local user.email \"learner@zoeskoul.local\"\ncd community-website\nprintf %s '<h1>Community Hub</h1>\n<nav>Home</nav>\n' > index.html\ncd ..\ncd community-website\nprintf %s 'body { color: navy; }\n' > styles.css\ncd ..\ngit -C community-website add -A\ngit -C community-website commit -q -m 'Start community website'\ncd community-website\nprintf %s '<h1>Community Hub</h1>\n<nav>Home Events</nav>\n' > index.html\ncd ..\ngit -C community-website add -A\ngit -C community-website commit -q -m 'Add events navigation'\ncd community-website\nprintf %s 'body { color: teal; }\n' > styles.css\ncd ..\ngit -C community-website add -- styles.css\n"
                   }
                 },
                 "terminalExpectations": {
@@ -212,41 +217,54 @@
                     "0": {
                       "message": "Do not rewrite shared history in this Git practice task."
                     }
+                  },
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Run `git commit -m \"Refresh site palette\"`, then check your answer again."
+                    },
+                    "1": {
+                      "message": "Run `git status --short`, then check your answer again."
+                    }
                   }
                 }
               },
               "try_module_2_community_website_history_sketch5": {
-                "title": "Read and Verify the Finished History",
-                "prompt": "Continue the same module project from the previous working step. In step 6 of 6, Use `git log --oneline` and `git show` to inspect the two new commits. Ensure the working tree is clean. Type the commands and press Enter.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
-                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "title": "Read the Finished Website History",
+                "prompt": "The terminal opens inside the prepared `community-website/` repository.\n\nRead the three one-line entries, inspect the latest snapshot with `git show --stat HEAD`, and confirm the working tree remains clean.\n\nType each command in the terminal and press Enter.",
+                "hint": "Read the repository state first, then use the Git command that changes only the requested boundary.",
                 "help": {
-                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
-                  "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
-                  "hint_2": "Run the previous working code first, then make only the focused change for this step."
+                  "concept": "The final history explains the project in three focused milestones and remains safe to inspect.",
+                  "hint_1": "Use the exact file or repository named in the task; avoid broad commands that include unrelated work.",
+                  "hint_2": "After the action, run the requested inspection command to confirm the final state."
                 },
-                "starterCode": "bash .zoeskoul/setup.sh\ngit status\ngit diff\nbash .zoeskoul/setup.sh\ngit add\ngit diff --staged\ngit add index.html\nbash .zoeskoul/setup.sh\ngit commit\ngit commit -m\ngit commit -m \"Add primary navigation\"\nbash .zoeskoul/setup.sh\ngit diff\ngit add\ngit add events.html\nbash .zoeskoul/setup.sh\ngit commit\ngit commit -m\ngit commit -m \"Publish weekend events\"\n# Project step 6: Read and Verify the Finished History\n# Keep the working code above from the previous step.\n# Next, Use `git log --oneline` and `git show` to inspect the two new commits\n# Add only the focused change for this step inside the existing work.\n",
-                "solutionCode": "bash .zoeskoul/setup.sh\ngit status\ngit diff\nbash .zoeskoul/setup.sh\ngit add\ngit diff --staged\ngit add index.html\nbash .zoeskoul/setup.sh\ngit commit\ngit commit -m\ngit commit -m \"Add primary navigation\"\nbash .zoeskoul/setup.sh\ngit diff\ngit add\ngit add events.html\nbash .zoeskoul/setup.sh\ngit commit\ngit commit -m\ngit commit -m \"Publish weekend events\"\nbash .zoeskoul/setup.sh\ngit log --oneline\ngit show\ngit show <commit-hash>\n",
-                "instructions": "Use `git log --oneline` and `git show` to inspect the two new commits. Ensure the working tree is clean. Type the commands and press Enter.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+                "starterCode": "<h1>Community Hub</h1>\n<nav>Home Events</nav>\n",
+                "solutionCode": "git log --oneline\ngit show --stat HEAD\ngit status --short",
+                "instructions": "The terminal opens inside the prepared `community-website/` repository.\n\nRead the three one-line entries, inspect the latest snapshot with `git show --stat HEAD`, and confirm the working tree remains clean.\n\nType each command in the terminal and press Enter.",
                 "starterFiles": {
-                  "main_sh": {
-                    "content": "bash .zoeskoul/setup.sh\ngit status\ngit diff\nbash .zoeskoul/setup.sh\ngit add\ngit diff --staged\ngit add index.html\nbash .zoeskoul/setup.sh\ngit commit\ngit commit -m\ngit commit -m \"Add primary navigation\"\nbash .zoeskoul/setup.sh\ngit diff\ngit add\ngit add events.html\nbash .zoeskoul/setup.sh\ngit commit\ngit commit -m\ngit commit -m \"Publish weekend events\"\n# Project step 6: Read and Verify the Finished History\n# Keep the working code above from the previous step.\n# Next, Use `git log --oneline` and `git show` to inspect the two new commits\n# Add only the focused change for this step inside the existing work.\n"
-                  },
                   "zoeskoul_setup_sh": {
-                    "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 5\\n' > practice-5.txt\n"
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-website\nmkdir -p community-website\ngit -C community-website init -q -b main\ngit -C community-website config --local user.name \"ZoeSkoul Learner\"\ngit -C community-website config --local user.email \"learner@zoeskoul.local\"\ncd community-website\nprintf %s '<h1>Community Hub</h1>\n<nav>Home</nav>\n' > index.html\ncd ..\ncd community-website\nprintf %s 'body { color: navy; }\n' > styles.css\ncd ..\ngit -C community-website add -A\ngit -C community-website commit -q -m 'Start community website'\ncd community-website\nprintf %s '<h1>Community Hub</h1>\n<nav>Home Events</nav>\n' > index.html\ncd ..\ngit -C community-website add -A\ngit -C community-website commit -q -m 'Add events navigation'\ncd community-website\nprintf %s 'body { color: teal; }\n' > styles.css\ncd ..\ngit -C community-website add -A\ngit -C community-website commit -q -m 'Refresh site palette'\n"
                   }
                 },
                 "solutionFiles": {
-                  "main_sh": {
-                    "content": "bash .zoeskoul/setup.sh\ngit status\ngit diff\nbash .zoeskoul/setup.sh\ngit add\ngit diff --staged\ngit add index.html\nbash .zoeskoul/setup.sh\ngit commit\ngit commit -m\ngit commit -m \"Add primary navigation\"\nbash .zoeskoul/setup.sh\ngit diff\ngit add\ngit add events.html\nbash .zoeskoul/setup.sh\ngit commit\ngit commit -m\ngit commit -m \"Publish weekend events\"\nbash .zoeskoul/setup.sh\ngit log --oneline\ngit show\ngit show <commit-hash>\n"
-                  },
                   "zoeskoul_setup_sh": {
-                    "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 6\\n' > practice-6.txt\n"
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-website\nmkdir -p community-website\ngit -C community-website init -q -b main\ngit -C community-website config --local user.name \"ZoeSkoul Learner\"\ngit -C community-website config --local user.email \"learner@zoeskoul.local\"\ncd community-website\nprintf %s '<h1>Community Hub</h1>\n<nav>Home</nav>\n' > index.html\ncd ..\ncd community-website\nprintf %s 'body { color: navy; }\n' > styles.css\ncd ..\ngit -C community-website add -A\ngit -C community-website commit -q -m 'Start community website'\ncd community-website\nprintf %s '<h1>Community Hub</h1>\n<nav>Home Events</nav>\n' > index.html\ncd ..\ngit -C community-website add -A\ngit -C community-website commit -q -m 'Add events navigation'\ncd community-website\nprintf %s 'body { color: teal; }\n' > styles.css\ncd ..\ngit -C community-website add -A\ngit -C community-website commit -q -m 'Refresh site palette'\n"
                   }
                 },
                 "terminalExpectations": {
                   "forbiddenCommands": {
                     "0": {
                       "message": "Do not rewrite shared history in this Git practice task."
+                    }
+                  },
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Run `git log --oneline`, then check your answer again."
+                    },
+                    "1": {
+                      "message": "Run `git show --stat HEAD`, then check your answer again."
+                    },
+                    "2": {
+                      "message": "Run `git status --short`, then check your answer again."
                     }
                   }
                 }
@@ -262,8 +280,8 @@
       "git-foundations-module-2-meaningful-history": {
         "module-2-community-website-history": {
           "intro-sketch": {
-            "title": "Building a Cohesive Commit History",
-            "bodyMarkdown": "In this project, you'll work as a junior web maintainer for a community center website. The goal is to create a readable commit history that clearly documents changes to the website's home page and events page. This will help other developers understand the updates without needing to open every file. You'll learn to use Git commands to inspect changes, stage them selectively, and commit them with meaningful messages. By the end of this project, you'll have a clean, organized commit history that reflects the website's development accurately.\n\n### Project Brief\n\n\n\n**Scenario:** A community center website has a plain home page and an events page. Staff want the next updates recorded as a history that another developer can understand without opening every file.\n\n**Your role:** Junior web maintainer organizing a readable local history\n\n**Workspace:** One cumulative terminal workspace rooted at community-site/ with index.html, events.html, styles.css, and an initialized repository\n\n**Deliverable:** A six-step history with separate navigation and events commits, exact authored messages, preserved file content, and a clean final working tree."
+            "title": "Build a History Another Maintainer Can Read",
+            "bodyMarkdown": "The community center website needs two unrelated updates: navigation and weekend events. Recording both in one large snapshot would hide the reason for each change.\n\nYou will inspect each diff, stage only the files for the current purpose, create two focused commits, and read the finished timeline. The project carries the repository state forward between steps while keeping setup invisible.\n\nThe final history should explain itself without opening every file."
           }
         }
       }

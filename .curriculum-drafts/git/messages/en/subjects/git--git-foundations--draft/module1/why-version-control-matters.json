@@ -3,14 +3,14 @@
     "git--git-foundations--draft": {
       "git-foundations-module-1-start-tracking": {
         "why-version-control-matters": {
-          "label": "Why Version Control Matters",
-          "summary": "Open with a standalone story about a project losing its history, then distinguish Git from duplicate final folders and explain the safe local course workspace.",
+          "label": "Why a Project Needs History",
+          "summary": "See what Git protects before learning its commands: a clear record of what changed, why it changed, and which version is trusted.",
           "cards": {
             "sketch0": {
-              "title": "The Importance of Project History"
+              "title": "When “Final” Stops Meaning Final"
             },
             "sketch1": {
-              "title": "Worked Example: How Git Solves Project Chaos"
+              "title": "A Timeline You Can Inspect"
             },
             "quiz": {
               "title": "Practice"
@@ -38,7 +38,7 @@
               "prompt": "How does Git differ from GitHub?",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "Version control preserves a sequence of project snapshots so changes can be explained and recovered without relying on duplicate folder names.",
                 "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
                 "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
               },
@@ -54,7 +54,7 @@
               "prompt": "Which of the following are benefits of using Git? Select all that apply.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "Version control preserves a sequence of project snapshots so changes can be explained and recovered without relying on duplicate folder names.",
                 "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
                 "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
               },
@@ -124,12 +124,12 @@
       "git-foundations-module-1-start-tracking": {
         "why-version-control-matters": {
           "intro-memory": {
-            "title": "The Importance of Project History",
-            "bodyMarkdown": "Imagine working on a large project with multiple collaborators. Each person saves their work in separate folders labeled 'final', 'final_v2', 'final_v3', and so on. Over time, it becomes nearly impossible to track changes, understand why certain decisions were made, or revert to a previous state if something goes wrong. This is where version control systems like Git come into play. They provide a structured way to manage changes, track history, and collaborate effectively without the chaos of multiple 'final' folders."
+            "title": "When “Final” Stops Meaning Final",
+            "bodyMarkdown": "A volunteer team is preparing a neighborhood event guide. By Friday, the shared folder contains `guide-final.md`, `guide-final-fixed.md`, and `guide-final-really-final.md`. Nobody can tell which copy includes the corrected phone number, and replacing one file erases the path that led there.\n\nGit solves that problem by keeping named snapshots of a project. A snapshot does not replace the folder you work in; it records a trustworthy point in the project’s history. Later, you can ask who recorded it, read its message, and compare it with another snapshot.\n\nThe important idea is not “save more copies.” It is “keep one project and give its meaningful states a history.”"
           },
           "worked-example": {
-            "title": "Worked Example: How Git Solves Project Chaos",
-            "bodyMarkdown": "Worked example: Consider a project where a team is developing a new software application. Initially, they save their work in a folder named 'Project'. As changes are made, they create copies like 'Project_final', 'Project_final_v2', and so on. One day, a team member accidentally overwrites a crucial file. Without a version control system, recovering the original file is difficult. However, with Git, every change is recorded as a snapshot. If a mistake occurs, the team can easily revert to a previous version, ensuring no work is lost. This reliable history contrasts sharply with the ambiguous nature of final-copy folder names."
+            "title": "A Timeline You Can Inspect",
+            "bodyMarkdown": "Imagine the guide begins with one page, then gains an accessibility note, then corrects an address. A useful history reads like a short timeline:\n\n```text\nCorrect library address\nAdd accessibility note\nStart neighborhood guide\n```\n\nEach line represents a deliberate checkpoint, not an automatic save. The newest snapshot appears first, while earlier snapshots remain available for inspection.\n\nGit works locally. GitHub is a separate hosting and collaboration service that can store Git repositories online. This course stays local so you can learn the repository model without accounts, network access, or remote commands."
           }
         }
       }

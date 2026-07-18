@@ -379,6 +379,169 @@ function shellQuotePosix(value: string) {
     return `'${String(value ?? "").replace(/'/g, `'\\''`)}'`;
 }
 
+function normalizeWorkspaceSetupScriptPath(value: string): string | null {
+    const normalized = String(value ?? "")
+        .replace(/\\/g, "/")
+        .replace(/^\.\//, "")
+        .replace(/\/{2,}/g, "/")
+        .trim();
+
+    if (!normalized || normalized.startsWith("/") || /[\r\n\0]/.test(normalized)) {
+        return null;
+    }
+
+    const parts = normalized.split("/");
+    if (parts.some((part) => !part || part === "." || part === "..")) {
+        return null;
+    }
+
+    return normalized;
+}
+
+function normalizeGitSafeDirectory(value: string): string | null {
+    const normalized = normalizePath(value).replace(/\/+/g, "/").replace(/\/$/, "");
+    if (!normalized || /[\r\n\0]/.test(normalized)) return null;
+
+    if (normalized !== "/workspace" && !normalized.startsWith("/workspace/")) {
+        return null;
+    }
+
+    const relativeParts = normalized
+        .slice("/workspace".length)
+        .split("/")
+        .filter(Boolean);
+
+    if (relativeParts.some((part) => part === "." || part === "..")) {
+        return null;
+    }
+
+    if (
+        relativeParts.some(
+            (part, index) =>
+                part.includes("*") &&
+                !(part === "*" && index === relativeParts.length - 1),
+        )
+    ) {
+        return null;
+    }
+
+    if (relativeParts.some((part) => /[?\[\]]/.test(part))) {
+        return null;
+    }
+
+    return normalized || "/workspace";
+}
+
+export function resolveWorkspaceTerminalStartupCwd(args: {
+    cwd?: string | null;
+    bootstrap?: WorkspaceTerminalConfig["bootstrap"];
+}): string | null {
+    const cwd = normalizePath(args.cwd ?? "") || "/workspace";
+    const hasGitTrustBootstrap = (args.bootstrap?.gitSafeDirectories ?? []).some(
+        (directory) => normalizeGitSafeDirectory(directory) != null,
+    );
+    const hasWorkspaceSetup =
+        normalizeWorkspaceSetupScriptPath(
+            String(args.bootstrap?.setupScriptPath ?? ""),
+        ) != null;
+
+    return cwd === "/workspace" && !hasGitTrustBootstrap && !hasWorkspaceSetup
+        ? null
+        : cwd;
+}
+
+function resolveGitSafeDirectoriesForShell(args: {
+    cwd: string;
+    bootstrap?: WorkspaceTerminalConfig["bootstrap"];
+}): string[] {
+    const cwd = normalizePath(args.cwd) || "/workspace";
+
+    return Array.from(
+        new Set(
+            (args.bootstrap?.gitSafeDirectories ?? [])
+                .map(normalizeGitSafeDirectory)
+                .filter((value): value is string => Boolean(value))
+                .map((directory) => {
+                    if (!directory.endsWith("/*")) return directory;
+
+                    const root = directory.slice(0, -2) || "/workspace";
+                    return cwd === root || cwd.startsWith(`${root}/`) ? cwd : root;
+                }),
+        ),
+    ).sort();
+}
+
+export function buildWorkspaceTerminalStartupInput(args: {
+    cwd: string;
+    bootstrap?: WorkspaceTerminalConfig["bootstrap"];
+    markerParts: [string, string, string];
+}): string {
+    const cwd = normalizePath(args.cwd) || "/workspace";
+    const setupScriptPath = normalizeWorkspaceSetupScriptPath(
+        String(args.bootstrap?.setupScriptPath ?? ""),
+    );
+    const workspaceStateKey = String(
+        args.bootstrap?.workspaceStateKey ?? "",
+    ).trim();
+    const gitSafeDirectories = resolveGitSafeDirectoriesForShell({
+        cwd,
+        bootstrap: args.bootstrap,
+    });
+    const gitTrustCommands =
+        gitSafeDirectories.length > 0
+            ? [
+                `export GIT_CONFIG_COUNT=${gitSafeDirectories.length}`,
+                ...gitSafeDirectories.flatMap((directory, index) => [
+                    `export GIT_CONFIG_KEY_${index}='safe.directory'`,
+                    `export GIT_CONFIG_VALUE_${index}=${shellQuotePosix(directory)}`,
+                ]),
+            ]
+            : [];
+    const setupCommands = setupScriptPath
+        ? [
+            "cd -- '/workspace'",
+            [
+                "__zoe_prepare_workspace() {",
+                `  __zoe_setup=${shellQuotePosix(`/workspace/${setupScriptPath}`)}`,
+                "  __zoe_setup_marker='/workspace/.zoeskoul/.setup-complete'",
+                "  __zoe_setup_log='/workspace/.zoeskoul/setup.log'",
+                '  if [ ! -f "$__zoe_setup" ]; then',
+                "    return 0",
+                "  fi",
+                "  mkdir -p -- '/workspace/.zoeskoul'",
+                workspaceStateKey
+                    ? `  __zoe_setup_signature=${shellQuotePosix(workspaceStateKey)}`
+                    : `  __zoe_setup_signature=$(cksum "$__zoe_setup" | awk '{print $1 ":" $2}')`,
+                '  __zoe_setup_completed=$(cat "$__zoe_setup_marker" 2>/dev/null || true)',
+                '  if [ "$__zoe_setup_signature" = "$__zoe_setup_completed" ]; then',
+                "    return 0",
+                "  fi",
+                '  rm -f -- "$__zoe_setup_marker"',
+                '  if ! (cd -- /workspace && /bin/bash "$__zoe_setup") >"$__zoe_setup_log" 2>&1; then',
+                '    cat "$__zoe_setup_log" >&2',
+                "    return 1",
+                "  fi",
+                '  printf "%s\\n" "$__zoe_setup_signature" >"$__zoe_setup_marker"',
+                "}",
+            ].join("\n"),
+            "__zoe_prepare_workspace",
+            "unset -f __zoe_prepare_workspace",
+        ]
+        : [];
+    const [markerPartA, markerPartB, markerPartC] = args.markerParts;
+    const startupCommands = [
+        ...setupCommands,
+        ...gitTrustCommands,
+        `cd -- ${shellQuotePosix(cwd)}`,
+        "export PS1='[zoeskoul]\\w\\$ '",
+        `printf '%s%s%s\\n' ${shellQuotePosix(markerPartA)} ${shellQuotePosix(markerPartB)} ${shellQuotePosix(markerPartC)}`,
+    ];
+    const hideFromShellHistory =
+        setupCommands.length > 0 || gitTrustCommands.length > 0;
+
+    return `${hideFromShellHistory ? " " : ""}${startupCommands.join(" && ")}\n`;
+}
+
 function sortEntries(entries: WorkspaceSyncEntry[]): WorkspaceSyncEntry[] {
     return [...entries]
         .map((entry): WorkspaceSyncEntry => {
@@ -1408,8 +1571,11 @@ export function useWorkspaceTerminalController(
 
     const queueAuthoredCwd = React.useCallback(
         (cwd: string) => {
-            const normalizedCwd = normalizePath(cwd);
-            if (!normalizedCwd || normalizedCwd === "/workspace") return;
+            const normalizedCwd = resolveWorkspaceTerminalStartupCwd({
+                cwd,
+                bootstrap: args.bootstrap,
+            });
+            if (!normalizedCwd) return;
 
             const startupMarker = `${STARTUP_CWD_READY_MARKER}_${Date.now().toString(36)}_${Math.random()
                 .toString(36)
@@ -1428,8 +1594,11 @@ export function useWorkspaceTerminalController(
                 deadline: Date.now() + STARTUP_CWD_OUTPUT_SUPPRESSION_MS,
                 clearLineBeforeRelease: true,
             };
-            pendingStartupInputRef.current =
-                `cd -- ${shellQuotePosix(normalizedCwd)} && export PS1='[zoeskoul]\\w\\$ ' && printf '%s%s%s\\n' ${shellQuotePosix(markerPartA)} ${shellQuotePosix(markerPartB)} ${shellQuotePosix(markerPartC)}\n`;
+            pendingStartupInputRef.current = buildWorkspaceTerminalStartupInput({
+                cwd: normalizedCwd,
+                bootstrap: args.bootstrap,
+                markerParts: [markerPartA, markerPartB, markerPartC],
+            });
             pendingStartupCwdRef.current = normalizedCwd;
 
             if (
@@ -1447,7 +1616,7 @@ export function useWorkspaceTerminalController(
 
             scheduleStartupCwdFlush();
         },
-        [flushPendingStartupInput, scheduleStartupCwdFlush],
+        [args.bootstrap, flushPendingStartupInput, scheduleStartupCwdFlush],
     );
 
     const open = React.useCallback(
@@ -1573,8 +1742,11 @@ export function useWorkspaceTerminalController(
 
                 pushChunk("sys", "[starting workspace terminal]\r\n");
 
-                const normalizedInitialCwd = normalizePath(args.cwd ?? "");
-                if (normalizedInitialCwd && normalizedInitialCwd !== "/workspace") {
+                const normalizedInitialCwd = resolveWorkspaceTerminalStartupCwd({
+                    cwd: args.cwd,
+                    bootstrap: args.bootstrap,
+                });
+                if (normalizedInitialCwd) {
                     queueAuthoredCwd(normalizedInitialCwd);
                 }
 
@@ -1643,10 +1815,12 @@ export function useWorkspaceTerminalController(
                         return;
                     }
 
-                    const normalizedStartCwd = normalizePath(args.cwd ?? "");
+                    const normalizedStartCwd = resolveWorkspaceTerminalStartupCwd({
+                        cwd: args.cwd,
+                        bootstrap: args.bootstrap,
+                    });
                     if (
                         normalizedStartCwd &&
-                        normalizedStartCwd !== "/workspace" &&
                         pendingStartupCwdRef.current !== normalizedStartCwd &&
                         lastAuthoredCwdAppliedRef.current !== normalizedStartCwd
                     ) {
@@ -1868,8 +2042,11 @@ export function useWorkspaceTerminalController(
     }, [terminalLeaseKey, cancel, clearQuietTimer, clearRecycleRestartTimer, clearStartupCwdFlushTimer, clearStaleStartingTimer, clearTerminalRecovery, closeSocket]);
 
     React.useEffect(() => {
-        const desiredCwd = normalizePath(args.cwd ?? "");
-        if (!desiredCwd || desiredCwd === "/workspace") {
+        const desiredCwd = resolveWorkspaceTerminalStartupCwd({
+            cwd: args.cwd,
+            bootstrap: args.bootstrap,
+        });
+        if (!desiredCwd) {
             return;
         }
 
@@ -1900,7 +2077,13 @@ export function useWorkspaceTerminalController(
         }
 
         queueAuthoredCwd(desiredCwd);
-    }, [args.cwd, queueAuthoredCwd, scheduleStartupCwdFlush, terminalLeaseKey]);
+    }, [
+        args.bootstrap,
+        args.cwd,
+        queueAuthoredCwd,
+        scheduleStartupCwdFlush,
+        terminalLeaseKey,
+    ]);
 
     React.useEffect(() => {
         return () => {

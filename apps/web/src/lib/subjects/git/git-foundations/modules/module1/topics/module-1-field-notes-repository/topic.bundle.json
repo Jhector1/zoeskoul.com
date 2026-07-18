@@ -16,11 +16,17 @@
   },
   "serviceDefaults": {
     "runnerBackend": "pty",
-    "layoutMode": "terminal_workspace",
+    "layoutMode": "default",
     "requires": {
       "files": true,
       "multiFile": true,
       "terminal": true
+    },
+    "preset": "runner",
+    "terminalBootstrap": {
+      "gitSafeDirectories": [
+        "/workspace/*"
+      ]
     }
   },
   "topic": {
@@ -114,45 +120,35 @@
       "weight": 1,
       "messageBase": "topics.git-foundations.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_repo_inspection",
       "language": "bash",
-      "starterCode": "@:topics.git-foundations.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_repo_inspection.starterCode",
+      "starterCode": "# Garden Field Notes\n",
       "starterFiles": [
         {
-          "path": "main.sh",
-          "content": "@:topics.git-foundations.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_repo_inspection.starterCode",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        },
-        {
-          "path": ".zoeskoul/setup.sh",
-          "content": "@:topics.git-foundations.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_repo_inspection.starterFiles.zoeskoul_setup_sh.content",
-          "language": "bash",
-          "readOnly": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "main.sh",
-          "content": "bash .zoeskoul/setup.sh\ngit status\n",
-          "language": "bash",
+          "path": "garden-notes/README.md",
+          "content": "# Garden Field Notes\n",
+          "language": "markdown",
           "isEntry": true,
           "entry": true
         },
         {
-          "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 1\\n' > README.md\n",
-          "language": "bash",
-          "readOnly": true
+          "path": "garden-notes/observations/plot-a.txt",
+          "content": "Plot A: soil is damp after rain.\n",
+          "language": "text"
+        },
+        {
+          "path": "garden-notes/observations/plot-b.txt",
+          "content": "Plot B: seedlings need labels.\n",
+          "language": "text"
         }
       ],
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
+            "pattern": "^git\\s+init\\s+-b\\s+main$",
+            "message": "@:topics.git-foundations.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_repo_inspection.terminalExpectations.requiredCommands.0.message"
           },
           {
-            "pattern": "^git\\s+status$"
+            "pattern": "^git\\s+branch\\s+--show-current$",
+            "message": "@:topics.git-foundations.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_repo_inspection.terminalExpectations.requiredCommands.1.message"
           }
         ],
         "forbiddenCommands": [
@@ -163,27 +159,53 @@
         ]
       },
       "hiddenShellCheck": {
-        "script": "set -eu\nrepo='.'\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ncommand -v git >/dev/null 2>&1 || fail \"Git is not available in this workspace.\"\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail 'Initialize a Git repository in ..'\nactual_branch=$(git -C \"$repo\" branch --show-current 2>/dev/null || true)\n[ \"$actual_branch\" = 'main' ] || fail 'Switch to the main branch.'",
+        "script": "set -eu\nrepo='garden-notes'\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail 'Initialize garden-notes as a Git repository.'\n[ \"$(git -C \"$repo\" branch --show-current)\" = 'main' ] || fail 'Initialize the repository on main.'\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = '0' ] || fail 'Do not create a commit yet.'",
         "timeoutMs": 15000
       },
       "workspace": {
         "language": "bash",
-        "entryFilePath": "main.sh",
-        "starterCode": "@:topics.git-foundations.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_repo_inspection.starterCode",
+        "entryFilePath": "garden-notes/README.md",
+        "starterCode": "# Garden Field Notes\n",
         "starterFiles": [
           {
-            "path": "main.sh",
-            "content": "@:topics.git-foundations.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_repo_inspection.starterCode",
-            "language": "bash",
+            "path": "garden-notes/README.md",
+            "content": "# Garden Field Notes\n",
+            "language": "markdown",
             "isEntry": true,
-            "entry": true,
-            "readOnly": false
+            "entry": true
           },
           {
+            "path": "garden-notes/observations/plot-a.txt",
+            "content": "Plot A: soil is damp after rain.\n",
+            "language": "text"
+          },
+          {
+            "path": "garden-notes/observations/plot-b.txt",
+            "content": "Plot B: seedlings need labels.\n",
+            "language": "text"
+          }
+        ],
+        "fixtureFiles": [
+          {
             "path": ".zoeskoul/setup.sh",
-            "content": "@:topics.git-foundations.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_repo_inspection.starterFiles.zoeskoul_setup_sh.content",
+            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf garden-notes\nmkdir -p garden-notes/observations\nprintf '# Garden Field Notes\\n' > garden-notes/README.md\nprintf 'Plot A: soil is damp after rain.\\n' > garden-notes/observations/plot-a.txt\nprintf 'Plot B: seedlings need labels.\\n' > garden-notes/observations/plot-b.txt\n",
             "language": "bash",
             "readOnly": true
+          },
+          {
+            "path": "garden-notes/README.md",
+            "content": "# Garden Field Notes\n",
+            "language": "markdown"
+          },
+          {
+            "path": "garden-notes/observations/plot-a.txt",
+            "content": "Plot A: soil is damp after rain.\n",
+            "language": "text"
+          },
+          {
+            "path": "garden-notes/observations/plot-b.txt",
+            "content": "Plot B: seedlings need labels.\n",
+            "language": "text"
           }
         ]
       },
@@ -192,7 +214,80 @@
         "type": "shell_task",
         "mode": "terminal_workspace",
         "instructions": "@:topics.git-foundations.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_repo_inspection.instructions"
-      }
+      },
+      "ideConfig": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/garden-notes",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "serviceOverrides": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/garden-notes",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "fixtureFiles": [
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf garden-notes\nmkdir -p garden-notes/observations\nprintf '# Garden Field Notes\\n' > garden-notes/README.md\nprintf 'Plot A: soil is damp after rain.\\n' > garden-notes/observations/plot-a.txt\nprintf 'Plot B: seedlings need labels.\\n' > garden-notes/observations/plot-b.txt\n",
+          "language": "bash",
+          "readOnly": true
+        },
+        {
+          "path": "garden-notes/README.md",
+          "content": "# Garden Field Notes\n",
+          "language": "markdown"
+        },
+        {
+          "path": "garden-notes/observations/plot-a.txt",
+          "content": "Plot A: soil is damp after rain.\n",
+          "language": "text"
+        },
+        {
+          "path": "garden-notes/observations/plot-b.txt",
+          "content": "Plot B: seedlings need labels.\n",
+          "language": "text"
+        }
+      ]
     },
     {
       "id": "try-git-config",
@@ -201,50 +296,35 @@
       "weight": 1,
       "messageBase": "topics.git-foundations.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_config",
       "language": "bash",
-      "starterCode": "@:topics.git-foundations.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_config.starterCode",
+      "starterCode": "# Garden Field Notes\n",
       "starterFiles": [
         {
-          "path": "main.sh",
-          "content": "@:topics.git-foundations.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_config.starterCode",
-          "language": "bash",
+          "path": "garden-notes/README.md",
+          "content": "# Garden Field Notes\n",
+          "language": "markdown",
           "isEntry": true,
           "entry": true
         },
         {
-          "path": ".zoeskoul/setup.sh",
-          "content": "@:topics.git-foundations.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_config.starterFiles.zoeskoul_setup_sh.content",
-          "language": "bash",
-          "readOnly": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "main.sh",
-          "content": "bash .zoeskoul/setup.sh\ngit status\nbash .zoeskoul/setup.sh\ngit config --local\ngit config --local user.name \"ZoeSkoul Learner\"\ngit config --local user.email \"learner@zoeskoul.local\"\n",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true
+          "path": "garden-notes/observations/plot-a.txt",
+          "content": "Plot A: soil is damp after rain.\n",
+          "language": "text"
         },
         {
-          "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 2\\n' > user.name\n",
-          "language": "bash",
-          "readOnly": true
+          "path": "garden-notes/observations/plot-b.txt",
+          "content": "Plot B: seedlings need labels.\n",
+          "language": "text"
         }
       ],
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
+            "pattern": "^git\\s+config\\s+--local\\s+user\\.name\\s+\"ZoeSkoul\\s+Learner\"$",
+            "message": "@:topics.git-foundations.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_config.terminalExpectations.requiredCommands.0.message"
           },
           {
-            "pattern": "^git\\s+config\\s+--local$"
-          },
-          {
-            "pattern": "^git\\s+config\\s+--local\\s+user\\.name\\s+\"ZoeSkoul\\s+Learner\"$"
-          },
-          {
-            "pattern": "^git\\s+config\\s+--local\\s+user\\.email\\s+\"learner@zoeskoul\\.local\"$"
+            "pattern": "^git\\s+config\\s+--local\\s+user\\.email\\s+\"learner@zoeskoul\\.local\"$",
+            "message": "@:topics.git-foundations.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_config.terminalExpectations.requiredCommands.1.message"
           }
         ],
         "forbiddenCommands": [
@@ -255,26 +335,53 @@
         ]
       },
       "hiddenShellCheck": {
-        "script": "set -eu\nrepo='.'\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ncommand -v git >/dev/null 2>&1 || fail \"Git is not available in this workspace.\"\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail 'Initialize a Git repository in ..'\nactual_branch=$(git -C \"$repo\" branch --show-current 2>/dev/null || true)\n[ \"$actual_branch\" = 'main' ] || fail 'Switch to the main branch.'",
+        "script": "set -eu\nrepo='garden-notes'\n[ \"$(git -C \"$repo\" config --local --get user.name)\" = 'ZoeSkoul Learner' ]\n[ \"$(git -C \"$repo\" config --local --get user.email)\" = 'learner@zoeskoul.local' ]\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = '0' ]",
         "timeoutMs": 15000
       },
       "workspace": {
         "language": "bash",
-        "entryFilePath": "main.sh",
-        "starterCode": "@:topics.git-foundations.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_config.starterCode",
+        "entryFilePath": "garden-notes/README.md",
+        "starterCode": "# Garden Field Notes\n",
         "starterFiles": [
           {
-            "path": "main.sh",
-            "content": "@:topics.git-foundations.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_config.starterCode",
-            "language": "bash",
+            "path": "garden-notes/README.md",
+            "content": "# Garden Field Notes\n",
+            "language": "markdown",
             "isEntry": true,
             "entry": true
           },
           {
+            "path": "garden-notes/observations/plot-a.txt",
+            "content": "Plot A: soil is damp after rain.\n",
+            "language": "text"
+          },
+          {
+            "path": "garden-notes/observations/plot-b.txt",
+            "content": "Plot B: seedlings need labels.\n",
+            "language": "text"
+          }
+        ],
+        "fixtureFiles": [
+          {
             "path": ".zoeskoul/setup.sh",
-            "content": "@:topics.git-foundations.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_config.starterFiles.zoeskoul_setup_sh.content",
+            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf garden-notes\nmkdir -p garden-notes/observations\nprintf '# Garden Field Notes\\n' > garden-notes/README.md\nprintf 'Plot A: soil is damp after rain.\\n' > garden-notes/observations/plot-a.txt\nprintf 'Plot B: seedlings need labels.\\n' > garden-notes/observations/plot-b.txt\ngit -C garden-notes init -q -b main\n",
             "language": "bash",
             "readOnly": true
+          },
+          {
+            "path": "garden-notes/README.md",
+            "content": "# Garden Field Notes\n",
+            "language": "markdown"
+          },
+          {
+            "path": "garden-notes/observations/plot-a.txt",
+            "content": "Plot A: soil is damp after rain.\n",
+            "language": "text"
+          },
+          {
+            "path": "garden-notes/observations/plot-b.txt",
+            "content": "Plot B: seedlings need labels.\n",
+            "language": "text"
           }
         ]
       },
@@ -283,7 +390,80 @@
         "type": "shell_task",
         "mode": "terminal_workspace",
         "instructions": "@:topics.git-foundations.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_config.instructions"
-      }
+      },
+      "ideConfig": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/garden-notes",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "serviceOverrides": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/garden-notes",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "fixtureFiles": [
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf garden-notes\nmkdir -p garden-notes/observations\nprintf '# Garden Field Notes\\n' > garden-notes/README.md\nprintf 'Plot A: soil is damp after rain.\\n' > garden-notes/observations/plot-a.txt\nprintf 'Plot B: seedlings need labels.\\n' > garden-notes/observations/plot-b.txt\ngit -C garden-notes init -q -b main\n",
+          "language": "bash",
+          "readOnly": true
+        },
+        {
+          "path": "garden-notes/README.md",
+          "content": "# Garden Field Notes\n",
+          "language": "markdown"
+        },
+        {
+          "path": "garden-notes/observations/plot-a.txt",
+          "content": "Plot A: soil is damp after rain.\n",
+          "language": "text"
+        },
+        {
+          "path": "garden-notes/observations/plot-b.txt",
+          "content": "Plot B: seedlings need labels.\n",
+          "language": "text"
+        }
+      ]
     },
     {
       "id": "try-git-init",
@@ -292,47 +472,31 @@
       "weight": 1,
       "messageBase": "topics.git-foundations.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_init",
       "language": "bash",
-      "starterCode": "@:topics.git-foundations.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_init.starterCode",
+      "starterCode": "# Garden Field Notes\n",
       "starterFiles": [
         {
-          "path": "main.sh",
-          "content": "@:topics.git-foundations.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_init.starterCode",
-          "language": "bash",
+          "path": "garden-notes/README.md",
+          "content": "# Garden Field Notes\n",
+          "language": "markdown",
           "isEntry": true,
           "entry": true
         },
         {
-          "path": ".zoeskoul/setup.sh",
-          "content": "@:topics.git-foundations.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_init.starterFiles.zoeskoul_setup_sh.content",
-          "language": "bash",
-          "readOnly": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "main.sh",
-          "content": "bash .zoeskoul/setup.sh\ngit status\nbash .zoeskoul/setup.sh\ngit config --local\ngit config --local user.name \"ZoeSkoul Learner\"\ngit config --local user.email \"learner@zoeskoul.local\"\nbash .zoeskoul/setup.sh\ngit init -b main\ngit status\n",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true
+          "path": "garden-notes/observations/plot-a.txt",
+          "content": "Plot A: soil is damp after rain.\n",
+          "language": "text"
         },
         {
-          "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 3\\n' > practice-3.txt\n",
-          "language": "bash",
-          "readOnly": true
+          "path": "garden-notes/observations/plot-b.txt",
+          "content": "Plot B: seedlings need labels.\n",
+          "language": "text"
         }
       ],
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
-          },
-          {
-            "pattern": "^git\\s+init\\s+-b\\s+main$"
-          },
-          {
-            "pattern": "^git\\s+status$"
+            "pattern": "^git\\s+status\\s+--short$",
+            "message": "@:topics.git-foundations.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_init.terminalExpectations.requiredCommands.0.message"
           }
         ],
         "forbiddenCommands": [
@@ -343,26 +507,53 @@
         ]
       },
       "hiddenShellCheck": {
-        "script": "set -eu\nrepo='.'\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ncommand -v git >/dev/null 2>&1 || fail \"Git is not available in this workspace.\"\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail 'Initialize a Git repository in ..'\nactual_branch=$(git -C \"$repo\" branch --show-current 2>/dev/null || true)\n[ \"$actual_branch\" = 'main' ] || fail 'Switch to the main branch.'",
+        "script": "set -eu\nrepo='garden-notes'\nstatus=$(git -C \"$repo\" status --short --untracked-files=all)\nprintf '%s\\n' \"$status\" | grep -Fxq '?? README.md'\nprintf '%s\\n' \"$status\" | grep -Fxq '?? observations/plot-a.txt'\nprintf '%s\\n' \"$status\" | grep -Fxq '?? observations/plot-b.txt'\n[ \"$(git -C \"$repo\" diff --cached --name-only | wc -l | tr -d ' ')\" = '0' ]",
         "timeoutMs": 15000
       },
       "workspace": {
         "language": "bash",
-        "entryFilePath": "main.sh",
-        "starterCode": "@:topics.git-foundations.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_init.starterCode",
+        "entryFilePath": "garden-notes/README.md",
+        "starterCode": "# Garden Field Notes\n",
         "starterFiles": [
           {
-            "path": "main.sh",
-            "content": "@:topics.git-foundations.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_init.starterCode",
-            "language": "bash",
+            "path": "garden-notes/README.md",
+            "content": "# Garden Field Notes\n",
+            "language": "markdown",
             "isEntry": true,
             "entry": true
           },
           {
+            "path": "garden-notes/observations/plot-a.txt",
+            "content": "Plot A: soil is damp after rain.\n",
+            "language": "text"
+          },
+          {
+            "path": "garden-notes/observations/plot-b.txt",
+            "content": "Plot B: seedlings need labels.\n",
+            "language": "text"
+          }
+        ],
+        "fixtureFiles": [
+          {
             "path": ".zoeskoul/setup.sh",
-            "content": "@:topics.git-foundations.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_init.starterFiles.zoeskoul_setup_sh.content",
+            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf garden-notes\nmkdir -p garden-notes/observations\nprintf '# Garden Field Notes\\n' > garden-notes/README.md\nprintf 'Plot A: soil is damp after rain.\\n' > garden-notes/observations/plot-a.txt\nprintf 'Plot B: seedlings need labels.\\n' > garden-notes/observations/plot-b.txt\ngit -C garden-notes init -q -b main\ngit -C garden-notes config --local user.name \"ZoeSkoul Learner\"\ngit -C garden-notes config --local user.email \"learner@zoeskoul.local\"\n",
             "language": "bash",
             "readOnly": true
+          },
+          {
+            "path": "garden-notes/README.md",
+            "content": "# Garden Field Notes\n",
+            "language": "markdown"
+          },
+          {
+            "path": "garden-notes/observations/plot-a.txt",
+            "content": "Plot A: soil is damp after rain.\n",
+            "language": "text"
+          },
+          {
+            "path": "garden-notes/observations/plot-b.txt",
+            "content": "Plot B: seedlings need labels.\n",
+            "language": "text"
           }
         ]
       },
@@ -371,7 +562,80 @@
         "type": "shell_task",
         "mode": "terminal_workspace",
         "instructions": "@:topics.git-foundations.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_init.instructions"
-      }
+      },
+      "ideConfig": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/garden-notes",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "serviceOverrides": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/garden-notes",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "fixtureFiles": [
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf garden-notes\nmkdir -p garden-notes/observations\nprintf '# Garden Field Notes\\n' > garden-notes/README.md\nprintf 'Plot A: soil is damp after rain.\\n' > garden-notes/observations/plot-a.txt\nprintf 'Plot B: seedlings need labels.\\n' > garden-notes/observations/plot-b.txt\ngit -C garden-notes init -q -b main\ngit -C garden-notes config --local user.name \"ZoeSkoul Learner\"\ngit -C garden-notes config --local user.email \"learner@zoeskoul.local\"\n",
+          "language": "bash",
+          "readOnly": true
+        },
+        {
+          "path": "garden-notes/README.md",
+          "content": "# Garden Field Notes\n",
+          "language": "markdown"
+        },
+        {
+          "path": "garden-notes/observations/plot-a.txt",
+          "content": "Plot A: soil is damp after rain.\n",
+          "language": "text"
+        },
+        {
+          "path": "garden-notes/observations/plot-b.txt",
+          "content": "Plot B: seedlings need labels.\n",
+          "language": "text"
+        }
+      ]
     },
     {
       "id": "try-git-stage-files",
@@ -380,50 +644,35 @@
       "weight": 1,
       "messageBase": "topics.git-foundations.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_stage_files",
       "language": "bash",
-      "starterCode": "@:topics.git-foundations.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_stage_files.starterCode",
+      "starterCode": "# Garden Field Notes\n",
       "starterFiles": [
         {
-          "path": "main.sh",
-          "content": "@:topics.git-foundations.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_stage_files.starterCode",
-          "language": "bash",
+          "path": "garden-notes/README.md",
+          "content": "# Garden Field Notes\n",
+          "language": "markdown",
           "isEntry": true,
           "entry": true
         },
         {
-          "path": ".zoeskoul/setup.sh",
-          "content": "@:topics.git-foundations.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_stage_files.starterFiles.zoeskoul_setup_sh.content",
-          "language": "bash",
-          "readOnly": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "main.sh",
-          "content": "bash .zoeskoul/setup.sh\ngit status\nbash .zoeskoul/setup.sh\ngit config --local\ngit config --local user.name \"ZoeSkoul Learner\"\ngit config --local user.email \"learner@zoeskoul.local\"\nbash .zoeskoul/setup.sh\ngit init -b main\ngit status\nbash .zoeskoul/setup.sh\ngit add\ngit add README.md\ngit add observations/\n",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true
+          "path": "garden-notes/observations/plot-a.txt",
+          "content": "Plot A: soil is damp after rain.\n",
+          "language": "text"
         },
         {
-          "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 4\\n' > README.md\n",
-          "language": "bash",
-          "readOnly": true
+          "path": "garden-notes/observations/plot-b.txt",
+          "content": "Plot B: seedlings need labels.\n",
+          "language": "text"
         }
       ],
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
+            "pattern": "^git\\s+add\\s+README\\.md\\s+observations/$",
+            "message": "@:topics.git-foundations.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_stage_files.terminalExpectations.requiredCommands.0.message"
           },
           {
-            "pattern": "^git\\s+add$"
-          },
-          {
-            "pattern": "^git\\s+add\\s+README\\.md$"
-          },
-          {
-            "pattern": "^git\\s+add\\s+observations/$"
+            "pattern": "^git\\s+diff\\s+--staged\\s+--name-only$",
+            "message": "@:topics.git-foundations.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_stage_files.terminalExpectations.requiredCommands.1.message"
           }
         ],
         "forbiddenCommands": [
@@ -434,26 +683,53 @@
         ]
       },
       "hiddenShellCheck": {
-        "script": "set -eu\nrepo='.'\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ncommand -v git >/dev/null 2>&1 || fail \"Git is not available in this workspace.\"\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail 'Initialize a Git repository in ..'\nactual_branch=$(git -C \"$repo\" branch --show-current 2>/dev/null || true)\n[ \"$actual_branch\" = 'main' ] || fail 'Switch to the main branch.'",
+        "script": "set -eu\nrepo='garden-notes'\nactual=$(git -C \"$repo\" diff --cached --name-only | sort)\nexpected=$(printf '%s\\n' README.md observations/plot-a.txt observations/plot-b.txt | sort)\n[ \"$actual\" = \"$expected\" ]\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = '0' ]",
         "timeoutMs": 15000
       },
       "workspace": {
         "language": "bash",
-        "entryFilePath": "main.sh",
-        "starterCode": "@:topics.git-foundations.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_stage_files.starterCode",
+        "entryFilePath": "garden-notes/README.md",
+        "starterCode": "# Garden Field Notes\n",
         "starterFiles": [
           {
-            "path": "main.sh",
-            "content": "@:topics.git-foundations.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_stage_files.starterCode",
-            "language": "bash",
+            "path": "garden-notes/README.md",
+            "content": "# Garden Field Notes\n",
+            "language": "markdown",
             "isEntry": true,
             "entry": true
           },
           {
+            "path": "garden-notes/observations/plot-a.txt",
+            "content": "Plot A: soil is damp after rain.\n",
+            "language": "text"
+          },
+          {
+            "path": "garden-notes/observations/plot-b.txt",
+            "content": "Plot B: seedlings need labels.\n",
+            "language": "text"
+          }
+        ],
+        "fixtureFiles": [
+          {
             "path": ".zoeskoul/setup.sh",
-            "content": "@:topics.git-foundations.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_stage_files.starterFiles.zoeskoul_setup_sh.content",
+            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf garden-notes\nmkdir -p garden-notes/observations\nprintf '# Garden Field Notes\\n' > garden-notes/README.md\nprintf 'Plot A: soil is damp after rain.\\n' > garden-notes/observations/plot-a.txt\nprintf 'Plot B: seedlings need labels.\\n' > garden-notes/observations/plot-b.txt\ngit -C garden-notes init -q -b main\ngit -C garden-notes config --local user.name \"ZoeSkoul Learner\"\ngit -C garden-notes config --local user.email \"learner@zoeskoul.local\"\n",
             "language": "bash",
             "readOnly": true
+          },
+          {
+            "path": "garden-notes/README.md",
+            "content": "# Garden Field Notes\n",
+            "language": "markdown"
+          },
+          {
+            "path": "garden-notes/observations/plot-a.txt",
+            "content": "Plot A: soil is damp after rain.\n",
+            "language": "text"
+          },
+          {
+            "path": "garden-notes/observations/plot-b.txt",
+            "content": "Plot B: seedlings need labels.\n",
+            "language": "text"
           }
         ]
       },
@@ -462,7 +738,80 @@
         "type": "shell_task",
         "mode": "terminal_workspace",
         "instructions": "@:topics.git-foundations.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_stage_files.instructions"
-      }
+      },
+      "ideConfig": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/garden-notes",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "serviceOverrides": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/garden-notes",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "fixtureFiles": [
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf garden-notes\nmkdir -p garden-notes/observations\nprintf '# Garden Field Notes\\n' > garden-notes/README.md\nprintf 'Plot A: soil is damp after rain.\\n' > garden-notes/observations/plot-a.txt\nprintf 'Plot B: seedlings need labels.\\n' > garden-notes/observations/plot-b.txt\ngit -C garden-notes init -q -b main\ngit -C garden-notes config --local user.name \"ZoeSkoul Learner\"\ngit -C garden-notes config --local user.email \"learner@zoeskoul.local\"\n",
+          "language": "bash",
+          "readOnly": true
+        },
+        {
+          "path": "garden-notes/README.md",
+          "content": "# Garden Field Notes\n",
+          "language": "markdown"
+        },
+        {
+          "path": "garden-notes/observations/plot-a.txt",
+          "content": "Plot A: soil is damp after rain.\n",
+          "language": "text"
+        },
+        {
+          "path": "garden-notes/observations/plot-b.txt",
+          "content": "Plot B: seedlings need labels.\n",
+          "language": "text"
+        }
+      ]
     },
     {
       "id": "try-git-commit",
@@ -471,53 +820,39 @@
       "weight": 1,
       "messageBase": "topics.git-foundations.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_commit",
       "language": "bash",
-      "starterCode": "@:topics.git-foundations.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_commit.starterCode",
+      "starterCode": "# Garden Field Notes\n",
       "starterFiles": [
         {
-          "path": "main.sh",
-          "content": "@:topics.git-foundations.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_commit.starterCode",
-          "language": "bash",
+          "path": "garden-notes/README.md",
+          "content": "# Garden Field Notes\n",
+          "language": "markdown",
           "isEntry": true,
           "entry": true
         },
         {
-          "path": ".zoeskoul/setup.sh",
-          "content": "@:topics.git-foundations.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_commit.starterFiles.zoeskoul_setup_sh.content",
-          "language": "bash",
-          "readOnly": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "main.sh",
-          "content": "bash .zoeskoul/setup.sh\ngit status\nbash .zoeskoul/setup.sh\ngit config --local\ngit config --local user.name \"ZoeSkoul Learner\"\ngit config --local user.email \"learner@zoeskoul.local\"\nbash .zoeskoul/setup.sh\ngit init -b main\ngit status\nbash .zoeskoul/setup.sh\ngit add\ngit add README.md\ngit add observations/\nbash .zoeskoul/setup.sh\ngit commit\ngit log --oneline\ngit commit -m\ngit commit -m \"Start garden field notes\"\n",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true
+          "path": "garden-notes/observations/plot-a.txt",
+          "content": "Plot A: soil is damp after rain.\n",
+          "language": "text"
         },
         {
-          "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 5\\n' > practice-5.txt\n",
-          "language": "bash",
-          "readOnly": true
+          "path": "garden-notes/observations/plot-b.txt",
+          "content": "Plot B: seedlings need labels.\n",
+          "language": "text"
         }
       ],
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
+            "pattern": "^git\\s+commit\\s+-m\\s+\"Start\\s+garden\\s+field\\s+notes\"$",
+            "message": "@:topics.git-foundations.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_commit.terminalExpectations.requiredCommands.0.message"
           },
           {
-            "pattern": "^git\\s+commit$"
+            "pattern": "^git\\s+log\\s+--oneline$",
+            "message": "@:topics.git-foundations.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_commit.terminalExpectations.requiredCommands.1.message"
           },
           {
-            "pattern": "^git\\s+log\\s+--oneline$"
-          },
-          {
-            "pattern": "^git\\s+commit\\s+-m$"
-          },
-          {
-            "pattern": "^git\\s+commit\\s+-m\\s+\"Start\\s+garden\\s+field\\s+notes\"$"
+            "pattern": "^git\\s+status\\s+--short$",
+            "message": "@:topics.git-foundations.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_commit.terminalExpectations.requiredCommands.2.message"
           }
         ],
         "forbiddenCommands": [
@@ -528,26 +863,53 @@
         ]
       },
       "hiddenShellCheck": {
-        "script": "set -eu\nrepo='.'\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ncommand -v git >/dev/null 2>&1 || fail \"Git is not available in this workspace.\"\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail 'Initialize a Git repository in ..'\nactual_branch=$(git -C \"$repo\" branch --show-current 2>/dev/null || true)\n[ \"$actual_branch\" = 'main' ] || fail 'Switch to the main branch.'",
+        "script": "set -eu\nrepo='garden-notes'\n[ \"$(git -C \"$repo\" rev-list --count HEAD)\" = '1' ]\n[ \"$(git -C \"$repo\" log -1 --format=%s)\" = 'Start garden field notes' ]\n[ -z \"$(git -C \"$repo\" status --porcelain)\" ]\nactual=$(git -C \"$repo\" ls-files | sort)\nexpected=$(printf '%s\\n' README.md observations/plot-a.txt observations/plot-b.txt | sort)\n[ \"$actual\" = \"$expected\" ]",
         "timeoutMs": 15000
       },
       "workspace": {
         "language": "bash",
-        "entryFilePath": "main.sh",
-        "starterCode": "@:topics.git-foundations.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_commit.starterCode",
+        "entryFilePath": "garden-notes/README.md",
+        "starterCode": "# Garden Field Notes\n",
         "starterFiles": [
           {
-            "path": "main.sh",
-            "content": "@:topics.git-foundations.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_commit.starterCode",
-            "language": "bash",
+            "path": "garden-notes/README.md",
+            "content": "# Garden Field Notes\n",
+            "language": "markdown",
             "isEntry": true,
             "entry": true
           },
           {
+            "path": "garden-notes/observations/plot-a.txt",
+            "content": "Plot A: soil is damp after rain.\n",
+            "language": "text"
+          },
+          {
+            "path": "garden-notes/observations/plot-b.txt",
+            "content": "Plot B: seedlings need labels.\n",
+            "language": "text"
+          }
+        ],
+        "fixtureFiles": [
+          {
             "path": ".zoeskoul/setup.sh",
-            "content": "@:topics.git-foundations.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_commit.starterFiles.zoeskoul_setup_sh.content",
+            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf garden-notes\nmkdir -p garden-notes/observations\nprintf '# Garden Field Notes\\n' > garden-notes/README.md\nprintf 'Plot A: soil is damp after rain.\\n' > garden-notes/observations/plot-a.txt\nprintf 'Plot B: seedlings need labels.\\n' > garden-notes/observations/plot-b.txt\ngit -C garden-notes init -q -b main\ngit -C garden-notes config --local user.name \"ZoeSkoul Learner\"\ngit -C garden-notes config --local user.email \"learner@zoeskoul.local\"\ngit -C garden-notes add README.md observations/\n",
             "language": "bash",
             "readOnly": true
+          },
+          {
+            "path": "garden-notes/README.md",
+            "content": "# Garden Field Notes\n",
+            "language": "markdown"
+          },
+          {
+            "path": "garden-notes/observations/plot-a.txt",
+            "content": "Plot A: soil is damp after rain.\n",
+            "language": "text"
+          },
+          {
+            "path": "garden-notes/observations/plot-b.txt",
+            "content": "Plot B: seedlings need labels.\n",
+            "language": "text"
           }
         ]
       },
@@ -556,7 +918,80 @@
         "type": "shell_task",
         "mode": "terminal_workspace",
         "instructions": "@:topics.git-foundations.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_commit.instructions"
-      }
+      },
+      "ideConfig": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/garden-notes",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "serviceOverrides": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/garden-notes",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "fixtureFiles": [
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf garden-notes\nmkdir -p garden-notes/observations\nprintf '# Garden Field Notes\\n' > garden-notes/README.md\nprintf 'Plot A: soil is damp after rain.\\n' > garden-notes/observations/plot-a.txt\nprintf 'Plot B: seedlings need labels.\\n' > garden-notes/observations/plot-b.txt\ngit -C garden-notes init -q -b main\ngit -C garden-notes config --local user.name \"ZoeSkoul Learner\"\ngit -C garden-notes config --local user.email \"learner@zoeskoul.local\"\ngit -C garden-notes add README.md observations/\n",
+          "language": "bash",
+          "readOnly": true
+        },
+        {
+          "path": "garden-notes/README.md",
+          "content": "# Garden Field Notes\n",
+          "language": "markdown"
+        },
+        {
+          "path": "garden-notes/observations/plot-a.txt",
+          "content": "Plot A: soil is damp after rain.\n",
+          "language": "text"
+        },
+        {
+          "path": "garden-notes/observations/plot-b.txt",
+          "content": "Plot B: seedlings need labels.\n",
+          "language": "text"
+        }
+      ]
     }
   ]
 }

@@ -27,6 +27,7 @@ import type {FullIDEProps, WorkspaceStateV2} from "../types";
 import { CodeRunnerRuntime, ExecutionBackend } from "@/components/code/runner/runtime";
 import { mergeTerminalSnapshotIntoWorkspace } from "@/lib/projects/mergeTerminalSnapshotIntoWorkspace";
 import {FullIDEServices, resolveFullIDEServices} from "./services";
+import { resolveLearnerWorkspacePresentation } from "./workspacePresentation";
 // import {
 //     FullIDEServices,
 //     resolveFullIDEServices,
@@ -182,8 +183,8 @@ function FullIDEInner({
     const {
         language,
         nodes,
-        activeFileId,
-        entryFileId,
+        activeFileId: workspaceActiveFileId,
+        entryFileId: workspaceEntryFileId,
         stdin,
         expanded,
         leftPct,
@@ -193,11 +194,44 @@ function FullIDEInner({
         toast,
     } = state;
 
-    const { activeFile, entryFile, tabFiles, currentWorkspace } = derived;
+    const { tabFiles, currentWorkspace } = derived;
+    const learnerWorkspace = useMemo(
+        () =>
+            resolveLearnerWorkspacePresentation({
+                nodes,
+                tabFiles,
+                activeFileId: workspaceActiveFileId,
+                entryFileId: workspaceEntryFileId,
+            }),
+        [nodes, tabFiles, workspaceActiveFileId, workspaceEntryFileId],
+    );
+    const visibleWorkspaceNodes = learnerWorkspace.nodes;
+    const visibleTabFiles = learnerWorkspace.tabFiles;
+    const activeFileId = learnerWorkspace.activeFileId ?? "";
+    const entryFileId = learnerWorkspace.entryFileId ?? "";
+    const activeFile = learnerWorkspace.activeFile ?? undefined;
+    const entryFile = learnerWorkspace.entryFile ?? undefined;
     const [explorerCollapsed, setExplorerCollapsed] = useState(false);
     const [workspaceFileSelectionVersion, setWorkspaceFileSelectionVersion] =
         useState(0);
     const currentWorkspaceRef = useRef(currentWorkspace);
+
+    useEffect(() => {
+        if (activeFileId && activeFileId !== workspaceActiveFileId) {
+            actions.setActiveFileId(activeFileId);
+        }
+        if (entryFileId && entryFileId !== workspaceEntryFileId) {
+            actions.setEntryFileId(entryFileId);
+        }
+    }, [
+        activeFileId,
+        actions.setActiveFileId,
+        actions.setEntryFileId,
+        entryFileId,
+        workspaceActiveFileId,
+        workspaceEntryFileId,
+    ]);
+
     const emitImmediateWorkspaceChange = useCallback(
         (workspace: WorkspaceStateV2 | null) => {
             onWorkspaceChange?.(workspace, { origin: "user" });
@@ -440,7 +474,7 @@ function FullIDEInner({
             entryPath={entryFile ? pathOf(nodes, entryFile.id) : "—"}
             upgradeText={upgradeText}
             filter={filter}
-            nodes={nodes}
+            nodes={visibleWorkspaceNodes}
             expanded={expanded}
             activeFileId={activeFileId}
             entryFileId={entryFileId}
@@ -505,7 +539,7 @@ function FullIDEInner({
         <IdeEditorPane
             panelRef={editorHostRef}
             nodes={nodes}
-            tabFiles={tabFiles}
+            tabFiles={visibleTabFiles}
             activeFileId={activeFileId}
             activeFile={activeFile}
             runnerHeight={runnerHeight}

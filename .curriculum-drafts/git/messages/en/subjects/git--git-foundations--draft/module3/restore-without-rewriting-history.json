@@ -4,19 +4,19 @@
       "git-foundations-module-3-manage-tracked-files": {
         "restore-without-rewriting-history": {
           "label": "Restore without Rewriting History",
-          "summary": "Undo an unstaged edit or unstage a file while keeping the committed history intact.",
+          "summary": "Undo working-tree or staging mistakes safely while leaving existing commits untouched.",
           "cards": {
             "sketch0": {
-              "title": "Using git restore for Working Tree Files"
+              "title": "Restore an Unstaged File"
             },
             "sketch1": {
-              "title": "Using git restore --staged to Unstage Files"
+              "title": "Unstage Without Discarding"
             },
             "sketch2": {
-              "title": "Deciding Between git restore and git restore --staged"
+              "title": "Choose the Layer You Mean"
             },
             "sketch3": {
-              "title": "Avoiding Common Mistakes with git restore"
+              "title": "Verify Before Moving On"
             },
             "quiz": {
               "title": "Practice"
@@ -25,103 +25,101 @@
           "tryIt": {
             "allowReveal": true,
             "try_restore_without_rewriting_history_sketch0": {
-              "title": "Try it yourself: Revert Changes in Working Directory",
-              "prompt": "Right after the sketch \"Using git restore for Working Tree Files\", practice that exact idea with this task. You have modified a file named `notes.txt` in your working directory but want to discard these changes. Use the appropriate Git command to revert `notes.txt` to its last committed state.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter. Produce the result for revert Changes in Working Directory so it reinforces Restore without Rewriting History.",
-              "hint": "Read the Git task \"Revert Changes in Working Directory\" and identify the repository state you need to create.",
+              "title": "Discard One Unstaged Mistake",
+              "prompt": "The terminal opens inside the prepared `release-kit/` repository.\n\n`notes.txt` has an unwanted working-tree edit. Restore it from HEAD, then verify that the repository is clean.\n\nType each command in the terminal and press Enter.",
+              "hint": "Read the repository state first, then use the Git command that changes only the requested boundary.",
               "help": {
-                "concept": "This Git exercise checks the repository state produced by \"Revert Changes in Working Directory\".",
-                "hint_1": "Use git status before and after each small change so you can see what moved between the working tree, staging area, and history.",
-                "hint_2": "Match the requested file names, branch names, and commit purpose before clicking Check Answer."
+                "concept": "git restore PATH replaces an unstaged working-tree version with the version recorded in the index/HEAD.",
+                "hint_1": "Use the exact file or repository named in the task; avoid broad commands that include unrelated work.",
+                "hint_2": "After the action, run the requested inspection command to confirm the final state."
               },
-              "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.",
-              "solutionCode": "bash .zoeskoul/setup.sh\ngit restore\ngit restore <filename>",
-              "instructions": "You have modified a file named `notes.txt` in your working directory but want to discard these changes. Use the appropriate Git command to revert `notes.txt` to its last committed state.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+              "starterCode": "Accidental replacement.\n",
+              "solutionCode": "git restore notes.txt\ngit status --short",
+              "instructions": "The terminal opens inside the prepared `release-kit/` repository.\n\n`notes.txt` has an unwanted working-tree edit. Restore it from HEAD, then verify that the repository is clean.\n\nType each command in the terminal and press Enter.",
               "starterFiles": {
-                "main_sh": {
-                  "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.\n"
-                },
                 "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 1\\n' > notes.txt\n"
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-kit\nmkdir -p release-kit\ngit -C release-kit init -q -b main\ngit -C release-kit config --local user.name \"ZoeSkoul Learner\"\ngit -C release-kit config --local user.email \"learner@zoeskoul.local\"\ncd release-kit\nprintf %s 'Approved release note.\n' > notes.txt\ncd ..\ngit -C release-kit add -A\ngit -C release-kit commit -q -m 'Add project baseline'\ncd release-kit\nprintf %s 'Accidental replacement.\n' > notes.txt\ncd ..\n"
                 }
               },
               "solutionFiles": {
-                "main_sh": {
-                  "content": "bash .zoeskoul/setup.sh\ngit restore\ngit restore <filename>\n"
-                },
                 "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 1\\n' > notes.txt\n"
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-kit\nmkdir -p release-kit\ngit -C release-kit init -q -b main\ngit -C release-kit config --local user.name \"ZoeSkoul Learner\"\ngit -C release-kit config --local user.email \"learner@zoeskoul.local\"\ncd release-kit\nprintf %s 'Approved release note.\n' > notes.txt\ncd ..\ngit -C release-kit add -A\ngit -C release-kit commit -q -m 'Add project baseline'\ncd release-kit\nprintf %s 'Accidental replacement.\n' > notes.txt\ncd ..\n"
                 }
               },
               "terminalExpectations": {
                 "forbiddenCommands": {
                   "0": {
                     "message": "Do not rewrite shared history in this Git practice task."
+                  }
+                },
+                "requiredCommands": {
+                  "0": {
+                    "message": "Run `git restore notes.txt`, then check your answer again."
+                  },
+                  "1": {
+                    "message": "Run `git status --short`, then check your answer again."
                   }
                 }
               }
             },
             "try_restore_without_rewriting_history_sketch1": {
-              "title": "Try it yourself: Unstage a File",
-              "prompt": "Right after the sketch \"Using git restore --staged to Unstage Files\", practice that exact idea with this task. You have staged a file named `draft.txt` but decide it should not be part of the next commit. Use the appropriate Git command to unstage `draft.txt` while keeping its changes in the working directory.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter. Produce the result for unstage a File so it reinforces Restore without Rewriting History.",
-              "hint": "Read the Git task \"Unstage a File\" and identify the repository state you need to create.",
+              "title": "Unstage Without Losing the Edit",
+              "prompt": "The terminal opens inside the prepared `release-kit/` repository.\n\n`draft.txt` is staged, but it should not be in the next commit. Unstage it while keeping its working-tree content, then read short status.\n\nType each command in the terminal and press Enter.",
+              "hint": "Read the repository state first, then use the Git command that changes only the requested boundary.",
               "help": {
-                "concept": "This Git exercise checks the repository state produced by \"Unstage a File\".",
-                "hint_1": "Use git status before and after each small change so you can see what moved between the working tree, staging area, and history.",
-                "hint_2": "Match the requested file names, branch names, and commit purpose before clicking Check Answer."
+                "concept": "git restore --staged moves the selected path out of the index while preserving the working-tree edit.",
+                "hint_1": "Use the exact file or repository named in the task; avoid broad commands that include unrelated work.",
+                "hint_2": "After the action, run the requested inspection command to confirm the final state."
               },
-              "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.",
-              "solutionCode": "bash .zoeskoul/setup.sh\ngit restore --staged\ngit restore --staged <filename>",
-              "instructions": "You have staged a file named `draft.txt` but decide it should not be part of the next commit. Use the appropriate Git command to unstage `draft.txt` while keeping its changes in the working directory.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+              "starterCode": "Draft v2\n",
+              "solutionCode": "git restore --staged draft.txt\ngit status --short",
+              "instructions": "The terminal opens inside the prepared `release-kit/` repository.\n\n`draft.txt` is staged, but it should not be in the next commit. Unstage it while keeping its working-tree content, then read short status.\n\nType each command in the terminal and press Enter.",
               "starterFiles": {
-                "main_sh": {
-                  "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.\n"
-                },
                 "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 2\\n' > draft.txt\n"
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-kit\nmkdir -p release-kit\ngit -C release-kit init -q -b main\ngit -C release-kit config --local user.name \"ZoeSkoul Learner\"\ngit -C release-kit config --local user.email \"learner@zoeskoul.local\"\ncd release-kit\nprintf %s 'Draft v1\n' > draft.txt\ncd ..\ngit -C release-kit add -A\ngit -C release-kit commit -q -m 'Add project baseline'\ncd release-kit\nprintf %s 'Draft v2\n' > draft.txt\ncd ..\ngit -C release-kit add -- draft.txt\n"
                 }
               },
               "solutionFiles": {
-                "main_sh": {
-                  "content": "bash .zoeskoul/setup.sh\ngit restore --staged\ngit restore --staged <filename>\n"
-                },
                 "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 2\\n' > draft.txt\n"
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-kit\nmkdir -p release-kit\ngit -C release-kit init -q -b main\ngit -C release-kit config --local user.name \"ZoeSkoul Learner\"\ngit -C release-kit config --local user.email \"learner@zoeskoul.local\"\ncd release-kit\nprintf %s 'Draft v1\n' > draft.txt\ncd ..\ngit -C release-kit add -A\ngit -C release-kit commit -q -m 'Add project baseline'\ncd release-kit\nprintf %s 'Draft v2\n' > draft.txt\ncd ..\ngit -C release-kit add -- draft.txt\n"
                 }
               },
               "terminalExpectations": {
                 "forbiddenCommands": {
                   "0": {
                     "message": "Do not rewrite shared history in this Git practice task."
+                  }
+                },
+                "requiredCommands": {
+                  "0": {
+                    "message": "Run `git restore --staged draft.txt`, then check your answer again."
+                  },
+                  "1": {
+                    "message": "Run `git status --short`, then check your answer again."
                   }
                 }
               }
             },
             "try_restore_without_rewriting_history_sketch2": {
-              "title": "Try it yourself: Decide the Correct Restore Command",
-              "prompt": "Right after the sketch \"Deciding Between git restore and git restore --staged\", practice that exact idea with this task. You have modified and staged a file named `summary.txt`. You want to keep the changes but not include them in the next commit. Use the appropriate Git command to achieve this.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter. Produce the result for decide the Correct Restore Command so it reinforces Restore without Rewriting History.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "title": "Unstage, Then Discard",
+              "prompt": "The terminal opens inside the prepared `release-kit/` repository.\n\n`summary.txt` is staged with an accidental rewrite. First unstage it, then restore the working file from HEAD and confirm a clean state.\n\nType each command in the terminal and press Enter.",
+              "hint": "Read the repository state first, then use the Git command that changes only the requested boundary.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+                "concept": "Staged and working-tree state are separate boundaries, so a staged mistake may require two deliberate restore commands.",
+                "hint_1": "Use the exact file or repository named in the task; avoid broad commands that include unrelated work.",
+                "hint_2": "After the action, run the requested inspection command to confirm the final state."
               },
-              "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.",
-              "solutionCode": "bash .zoeskoul/setup.sh\ngit restore --staged <filename>",
-              "instructions": "You have modified and staged a file named `summary.txt`. You want to keep the changes but not include them in the next commit. Use the appropriate Git command to achieve this.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+              "starterCode": "Accidental rewrite.\n",
+              "solutionCode": "git restore --staged summary.txt\ngit restore summary.txt\ngit status --short",
+              "instructions": "The terminal opens inside the prepared `release-kit/` repository.\n\n`summary.txt` is staged with an accidental rewrite. First unstage it, then restore the working file from HEAD and confirm a clean state.\n\nType each command in the terminal and press Enter.",
               "starterFiles": {
-                "main_sh": {
-                  "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.\n"
-                },
                 "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 3\\n' > summary.txt\n"
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-kit\nmkdir -p release-kit\ngit -C release-kit init -q -b main\ngit -C release-kit config --local user.name \"ZoeSkoul Learner\"\ngit -C release-kit config --local user.email \"learner@zoeskoul.local\"\ncd release-kit\nprintf %s 'Approved summary.\n' > summary.txt\ncd ..\ngit -C release-kit add -A\ngit -C release-kit commit -q -m 'Add project baseline'\ncd release-kit\nprintf %s 'Accidental rewrite.\n' > summary.txt\ncd ..\ngit -C release-kit add -- summary.txt\n"
                 }
               },
               "solutionFiles": {
-                "main_sh": {
-                  "content": "bash .zoeskoul/setup.sh\ngit restore --staged <filename>\n"
-                },
                 "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 3\\n' > summary.txt\n"
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-kit\nmkdir -p release-kit\ngit -C release-kit init -q -b main\ngit -C release-kit config --local user.name \"ZoeSkoul Learner\"\ngit -C release-kit config --local user.email \"learner@zoeskoul.local\"\ncd release-kit\nprintf %s 'Approved summary.\n' > summary.txt\ncd ..\ngit -C release-kit add -A\ngit -C release-kit commit -q -m 'Add project baseline'\ncd release-kit\nprintf %s 'Accidental rewrite.\n' > summary.txt\ncd ..\ngit -C release-kit add -- summary.txt\n"
                 }
               },
               "terminalExpectations": {
@@ -129,41 +127,54 @@
                   "0": {
                     "message": "Do not rewrite shared history in this Git practice task."
                   }
+                },
+                "requiredCommands": {
+                  "0": {
+                    "message": "Run `git restore --staged summary.txt`, then check your answer again."
+                  },
+                  "1": {
+                    "message": "Run `git restore summary.txt`, then check your answer again."
+                  },
+                  "2": {
+                    "message": "Run `git status --short`, then check your answer again."
+                  }
                 }
               }
             },
             "try_restore_without_rewriting_history_sketch3": {
-              "title": "Try it yourself: Avoid Common Mistakes with git restore",
-              "prompt": "Right after the sketch \"Avoiding Common Mistakes with git restore\", practice that exact idea with this task. You mistakenly staged a file named `config.txt` and want to unstage it while keeping its changes. Use the correct Git command to unstage `config.txt`.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter. Produce the result for avoid Common Mistakes with git restore so it reinforces Restore without Rewriting History.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "title": "Verify History Was Not Rewritten",
+              "prompt": "The terminal opens inside the prepared `release-kit/` repository.\n\nA mistaken edit has already been restored. Read the latest commit and clean status to confirm that correction changed the working tree, not existing history.\n\nType each command in the terminal and press Enter.",
+              "hint": "Read the repository state first, then use the Git command that changes only the requested boundary.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+                "concept": "Safe restore operations adjust the index or working tree; they do not alter the commit already stored in history.",
+                "hint_1": "Use the exact file or repository named in the task; avoid broad commands that include unrelated work.",
+                "hint_2": "After the action, run the requested inspection command to confirm the final state."
               },
-              "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.",
-              "solutionCode": "bash .zoeskoul/setup.sh\ngit restore\ngit restore --staged\ngit restore --staged <filename>",
-              "instructions": "You mistakenly staged a file named `config.txt` and want to unstage it while keeping its changes. Use the correct Git command to unstage `config.txt`.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+              "starterCode": "mode=production\n",
+              "solutionCode": "git log -1 --oneline\ngit status --short",
+              "instructions": "The terminal opens inside the prepared `release-kit/` repository.\n\nA mistaken edit has already been restored. Read the latest commit and clean status to confirm that correction changed the working tree, not existing history.\n\nType each command in the terminal and press Enter.",
               "starterFiles": {
-                "main_sh": {
-                  "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.\n"
-                },
                 "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 4\\n' > config.txt\n"
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-kit\nmkdir -p release-kit\ngit -C release-kit init -q -b main\ngit -C release-kit config --local user.name \"ZoeSkoul Learner\"\ngit -C release-kit config --local user.email \"learner@zoeskoul.local\"\ncd release-kit\nprintf %s 'mode=production\n' > config.txt\ncd ..\ngit -C release-kit add -A\ngit -C release-kit commit -q -m 'Add release configuration'\n"
                 }
               },
               "solutionFiles": {
-                "main_sh": {
-                  "content": "bash .zoeskoul/setup.sh\ngit restore\ngit restore --staged\ngit restore --staged <filename>\n"
-                },
                 "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 4\\n' > config.txt\n"
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-kit\nmkdir -p release-kit\ngit -C release-kit init -q -b main\ngit -C release-kit config --local user.name \"ZoeSkoul Learner\"\ngit -C release-kit config --local user.email \"learner@zoeskoul.local\"\ncd release-kit\nprintf %s 'mode=production\n' > config.txt\ncd ..\ngit -C release-kit add -A\ngit -C release-kit commit -q -m 'Add release configuration'\n"
                 }
               },
               "terminalExpectations": {
                 "forbiddenCommands": {
                   "0": {
                     "message": "Do not rewrite shared history in this Git practice task."
+                  }
+                },
+                "requiredCommands": {
+                  "0": {
+                    "message": "Run `git log -1 --oneline`, then check your answer again."
+                  },
+                  "1": {
+                    "message": "Run `git status --short`, then check your answer again."
                   }
                 }
               }
@@ -175,7 +186,7 @@
               "prompt": "What is the primary purpose of the `git restore` command?",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "git restore changes the working tree, while git restore --staged changes the index; neither rewrites existing commits.",
                 "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
                 "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
               },
@@ -207,7 +218,7 @@
               "prompt": "Which commands can be used to revert changes in the working directory and unstage a file?",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "git restore changes the working tree, while git restore --staged changes the index; neither rewrites existing commits.",
                 "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
                 "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
               },
@@ -234,14 +245,14 @@
             },
             "fill-blank-1": {
               "title": "Command to Unstage a File",
-              "prompt": "Fill in the blank to unstage a file while keeping its changes: `git restore --[blank1] <filename>`",
+              "prompt": "Fill in the blank to unstage a file while keeping its changes: `git restore --[blank1] notes.txt`",
               "hint": "The option to unstage a file is `--the missing term`.",
               "help": {
                 "concept": "The `git restore --the missing term` command is used to unstage files while keeping their changes.",
                 "hint_1": "The option to unstage a file is `--the missing term`.",
                 "hint_2": "Use `--the missing term` to unstage a file."
               },
-              "template": "git restore --[blank1] <filename>",
+              "template": "git restore --[blank1] notes.txt",
               "choices": [
                 "staged",
                 "commit",
@@ -251,14 +262,14 @@
             },
             "fill-blank-2": {
               "title": "Command to Revert Changes",
-              "prompt": "Fill in the blank to revert changes in the working directory: `git [blank1] <filename>`",
+              "prompt": "Fill in the blank to revert changes in the working directory: `git [blank1] notes.txt`",
               "hint": "The command to revert changes is `the missing term`.",
               "help": {
                 "concept": "The `git the missing term` command is used to revert changes in the working directory.",
                 "hint_1": "The command to revert changes is `the missing term`.",
                 "hint_2": "Use `the missing term` to revert changes."
               },
-              "template": "git [blank1] <filename>",
+              "template": "git [blank1] notes.txt",
               "choices": [
                 "restore",
                 "commit",
@@ -276,20 +287,20 @@
       "git-foundations-module-3-manage-tracked-files": {
         "restore-without-rewriting-history": {
           "restore-sketch-0": {
-            "title": "Using git restore for Working Tree Files",
-            "bodyMarkdown": "Git provides a powerful command called `git restore` that allows you to revert changes in your working directory. This command is particularly useful when you want to discard changes in a file that you haven't staged yet. \n\nWorked example: Suppose you have a file `report.txt` that you've modified but now wish to revert to its last committed state. You can use the command `git restore report.txt` to discard the changes and restore the file to its committed version. This operation affects only the working tree and does not alter the staging area or commit history."
+            "title": "Restore an Unstaged File",
+            "bodyMarkdown": "To discard an unstaged edit and return a tracked file to the staged or committed version, run:\n\n```bash\ngit restore checklist.md\n```\n\nThis changes the working file. The discarded text is not preserved by a new commit, so inspect the diff first.\n\nUse restore only when you are certain the working-tree edit is unwanted."
           },
           "restore-sketch-1": {
-            "title": "Using git restore --staged to Unstage Files",
-            "bodyMarkdown": "The `git restore --staged` command is used to unstage files that have been added to the staging area. This is useful when you realize that a file should not be included in the next commit.\n\nWorked example: Imagine you have staged a file `draft.txt` using `git add draft.txt`, but you decide it should not be part of the next commit. You can run `git restore --staged draft.txt` to remove it from the staging area while keeping the changes in your working directory."
+            "title": "Unstage Without Discarding",
+            "bodyMarkdown": "To remove a file from the staging area while keeping its current contents, run:\n\n```bash\ngit restore --staged checklist.md\n```\n\nThe change moves back to the unstaged section of status. Your work remains in the file.\n\nThis is the safe choice when the edit is valid but does not belong in the next commit."
           },
           "restore-sketch-2": {
-            "title": "Deciding Between git restore and git restore --staged",
-            "bodyMarkdown": "Choosing the correct restore operation depends on your current situation. If you need to discard changes in the working directory, use `git restore`. If you need to unstage a file but keep its changes, use `git restore --staged`.\n\nWorked example: You have modified and staged `summary.txt`, but you want to keep the changes without including them in the next commit. Use `git restore --staged summary.txt` to unstage it."
+            "title": "Choose the Layer You Mean",
+            "bodyMarkdown": "Plain `git restore path` affects the working tree. `git restore --staged path` affects the staging area. The extra option changes which layer Git updates.\n\nRead `git status --short` before choosing. A left-column mark points to staged state; a right-column mark points to working-tree state.\n\nThe goal is precise correction, not history rewriting."
           },
           "restore-sketch-3": {
-            "title": "Avoiding Common Mistakes with git restore",
-            "bodyMarkdown": "A common mistake when using `git restore` is misunderstanding its scope. Remember, `git restore` affects only the working directory, while `git restore --staged` affects the staging area.\n\nWorked example: If you mistakenly use `git restore` on a staged file, it will not unstage it. Instead, use `git restore --staged` to correctly unstage the file while preserving its changes."
+            "title": "Verify Before Moving On",
+            "bodyMarkdown": "After restoring or unstaging, run status and the appropriate diff again.\n\nA successful working-tree restore removes the unstaged diff. A successful unstage moves the change from `git diff --staged` back to plain `git diff`.\n\nVerification makes the undo visible and protects the work you meant to keep."
           }
         }
       }

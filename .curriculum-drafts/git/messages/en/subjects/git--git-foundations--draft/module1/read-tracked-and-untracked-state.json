@@ -3,20 +3,20 @@
     "git--git-foundations--draft": {
       "git-foundations-module-1-start-tracking": {
         "read-tracked-and-untracked-state": {
-          "label": "Read Tracked and Untracked State",
-          "summary": "Use full and short status views to tell which files Git knows, which files are new, and which changes still need attention.",
+          "label": "Read the Repository State",
+          "summary": "Use full and short status views to distinguish untracked files, tracked edits, and changes already prepared for a commit.",
           "cards": {
             "sketch0": {
-              "title": "Decoding git status"
+              "title": "Let Git Describe the Folder"
             },
             "sketch1": {
-              "title": "Compact View with git status --short"
+              "title": "Read the Two Status Columns"
             },
             "sketch2": {
-              "title": "Tracked vs. Untracked Files"
+              "title": "Tracked and Untracked Are Different"
             },
             "sketch3": {
-              "title": "Applying git status in Real Projects"
+              "title": "Check Before You Change State"
             },
             "quiz": {
               "title": "Practice"
@@ -25,90 +25,151 @@
           "tryIt": {
             "allowReveal": true,
             "try_read_tracked_and_untracked_state_sketch0": {
-              "title": "Try it yourself: Practice with git status",
-              "prompt": "Right after the sketch \"Decoding git status\", practice that exact idea with this task. Initialize a new Git repository and create two files: `tracked.txt` and `untracked.txt`. Add `tracked.txt` to the staging area. Use `git status` to verify the state of your repository. What does the output show? Produce the result for practice with git status so it reinforces Read Tracked and Untracked State.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "title": "Recognize an Untracked File",
+              "prompt": "The terminal opens inside the prepared `event-board/` repository.\n\nIn `event-board/`, use short status to identify the new `schedule.md` file before it has ever been staged.\n\nType each command in the terminal and press Enter.",
+              "hint": "Read the repository state first, then use the Git command that changes only the requested boundary.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+                "concept": "An untracked file exists in the working tree but is not yet part of Git’s index or history.",
+                "hint_1": "Use the exact file or repository named in the task; avoid broad commands that include unrelated work.",
+                "hint_2": "After the action, run the requested inspection command to confirm the final state."
               },
-              "starterCode": "# Initialize a new Git repository\n# Create two files: tracked.txt and untracked.txt\n# Add tracked.txt to the staging area\n# Use git status to verify the state",
-              "solutionCode": "git init\ntouch tracked.txt untracked.txt\ngit add tracked.txt\ngit status",
+              "starterCode": "# Event Schedule\n",
+              "solutionCode": "git status --short",
               "starterFiles": {
-                "main_sh": {
-                  "content": "# Initialize a new Git repository\n# Create two files: tracked.txt and untracked.txt\n# Add tracked.txt to the staging area\n# Use git status to verify the state"
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf event-board\nmkdir -p event-board\ncd event-board\nprintf %s '# Event Schedule\n' > schedule.md\ncd ..\ngit -C event-board init -q -b main\ngit -C event-board config --local user.name \"ZoeSkoul Learner\"\ngit -C event-board config --local user.email \"learner@zoeskoul.local\"\n"
                 }
               },
               "solutionFiles": {
-                "main_sh": {
-                  "content": "git init\ntouch tracked.txt untracked.txt\ngit add tracked.txt\ngit status"
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf event-board\nmkdir -p event-board\ncd event-board\nprintf %s '# Event Schedule\n' > schedule.md\ncd ..\ngit -C event-board init -q -b main\ngit -C event-board config --local user.name \"ZoeSkoul Learner\"\ngit -C event-board config --local user.email \"learner@zoeskoul.local\"\n"
+                }
+              },
+              "instructions": "The terminal opens inside the prepared `event-board/` repository.\n\nIn `event-board/`, use short status to identify the new `schedule.md` file before it has ever been staged.\n\nType each command in the terminal and press Enter.",
+              "terminalExpectations": {
+                "forbiddenCommands": {
+                  "0": {
+                    "message": "Do not use destructive history-rewriting commands in this course."
+                  }
+                },
+                "requiredCommands": {
+                  "0": {
+                    "message": "Run `git status --short`, then check your answer again."
+                  }
                 }
               }
             },
             "try_read_tracked_and_untracked_state_sketch1": {
-              "title": "Try it yourself: Using git status --short",
-              "prompt": "Right after the sketch \"Compact View with git status --short\", practice that exact idea with this task. Create a new Git repository and two files: `fileA.txt` and `fileB.txt`. Modify `fileA.txt` and leave `fileB.txt` untracked. Use `git status --short` to check the status. What does the output show? Produce the result for using git status --short so it reinforces Read Tracked and Untracked State.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "title": "Recognize a Staged File",
+              "prompt": "The terminal opens inside the prepared `event-board/` repository.\n\n`schedule.md` is already staged for the first snapshot. Use short status and a staged-name listing to verify that it is in the index.\n\nType each command in the terminal and press Enter.",
+              "hint": "Read the repository state first, then use the Git command that changes only the requested boundary.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+                "concept": "A staged file is in the index and will be included in the next commit unless the staging area changes.",
+                "hint_1": "Use the exact file or repository named in the task; avoid broad commands that include unrelated work.",
+                "hint_2": "After the action, run the requested inspection command to confirm the final state."
               },
-              "starterCode": "# Initialize a new Git repository\n# Create two files: fileA.txt and fileB.txt\n# Modify fileA.txt\n# Use git status --short to check the status",
-              "solutionCode": "git init\ntouch fileA.txt fileB.txt\necho 'modification' > fileA.txt\ngit status --short",
+              "starterCode": "# Event Schedule\n",
+              "solutionCode": "git status --short\ngit diff --staged --name-only",
               "starterFiles": {
-                "main_sh": {
-                  "content": "# Initialize a new Git repository\n# Create two files: fileA.txt and fileB.txt\n# Modify fileA.txt\n# Use git status --short to check the status"
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf event-board\nmkdir -p event-board\ncd event-board\nprintf %s '# Event Schedule\n' > schedule.md\ncd ..\ngit -C event-board init -q -b main\ngit -C event-board config --local user.name \"ZoeSkoul Learner\"\ngit -C event-board config --local user.email \"learner@zoeskoul.local\"\ngit -C event-board add -- schedule.md\n"
                 }
               },
               "solutionFiles": {
-                "main_sh": {
-                  "content": "git init\ntouch fileA.txt fileB.txt\necho 'modification' > fileA.txt\ngit status --short"
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf event-board\nmkdir -p event-board\ncd event-board\nprintf %s '# Event Schedule\n' > schedule.md\ncd ..\ngit -C event-board init -q -b main\ngit -C event-board config --local user.name \"ZoeSkoul Learner\"\ngit -C event-board config --local user.email \"learner@zoeskoul.local\"\ngit -C event-board add -- schedule.md\n"
+                }
+              },
+              "instructions": "The terminal opens inside the prepared `event-board/` repository.\n\n`schedule.md` is already staged for the first snapshot. Use short status and a staged-name listing to verify that it is in the index.\n\nType each command in the terminal and press Enter.",
+              "terminalExpectations": {
+                "forbiddenCommands": {
+                  "0": {
+                    "message": "Do not use destructive history-rewriting commands in this course."
+                  }
+                },
+                "requiredCommands": {
+                  "0": {
+                    "message": "Run `git status --short`, then check your answer again."
+                  },
+                  "1": {
+                    "message": "Run `git diff --staged --name-only`, then check your answer again."
+                  }
                 }
               }
             },
             "try_read_tracked_and_untracked_state_sketch2": {
-              "title": "Try it yourself: Distinguishing Tracked and Untracked Files",
-              "prompt": "Right after the sketch \"Tracked vs. Untracked Files\", practice that exact idea with this task. Initialize a Git repository and create a file `example.txt`. Do not add it to the staging area. Use `git status` to determine if the file is tracked or untracked. Produce the result for distinguishing Tracked and Untracked Files so it reinforces Read Tracked and Untracked State.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "title": "Recognize a Tracked Modification",
+              "prompt": "The terminal opens inside the prepared `event-board/` repository.\n\nThe board has one committed schedule, and its time has changed in the working tree. Use short status and `git diff` to inspect the unstaged edit.\n\nType each command in the terminal and press Enter.",
+              "hint": "Read the repository state first, then use the Git command that changes only the requested boundary.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+                "concept": "A tracked modification differs from the last committed snapshot but has not entered the staging area.",
+                "hint_1": "Use the exact file or repository named in the task; avoid broad commands that include unrelated work.",
+                "hint_2": "After the action, run the requested inspection command to confirm the final state."
               },
-              "starterCode": "# Initialize a new Git repository\n# Create a file: example.txt\n# Use git status to check if it's tracked or untracked",
-              "solutionCode": "git init\ntouch example.txt\ngit status",
+              "starterCode": "Doors open at 10 AM.\n",
+              "solutionCode": "git status --short\ngit diff -- schedule.md",
               "starterFiles": {
-                "main_sh": {
-                  "content": "# Initialize a new Git repository\n# Create a file: example.txt\n# Use git status to check if it's tracked or untracked"
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf event-board\nmkdir -p event-board\ngit -C event-board init -q -b main\ngit -C event-board config --local user.name \"ZoeSkoul Learner\"\ngit -C event-board config --local user.email \"learner@zoeskoul.local\"\ncd event-board\nprintf %s 'Doors open at 9 AM.\n' > schedule.md\ncd ..\ngit -C event-board add -A\ngit -C event-board commit -q -m 'Add project baseline'\ncd event-board\nprintf %s 'Doors open at 10 AM.\n' > schedule.md\ncd ..\n"
                 }
               },
               "solutionFiles": {
-                "main_sh": {
-                  "content": "git init\ntouch example.txt\ngit status"
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf event-board\nmkdir -p event-board\ngit -C event-board init -q -b main\ngit -C event-board config --local user.name \"ZoeSkoul Learner\"\ngit -C event-board config --local user.email \"learner@zoeskoul.local\"\ncd event-board\nprintf %s 'Doors open at 9 AM.\n' > schedule.md\ncd ..\ngit -C event-board add -A\ngit -C event-board commit -q -m 'Add project baseline'\ncd event-board\nprintf %s 'Doors open at 10 AM.\n' > schedule.md\ncd ..\n"
+                }
+              },
+              "instructions": "The terminal opens inside the prepared `event-board/` repository.\n\nThe board has one committed schedule, and its time has changed in the working tree. Use short status and `git diff` to inspect the unstaged edit.\n\nType each command in the terminal and press Enter.",
+              "terminalExpectations": {
+                "forbiddenCommands": {
+                  "0": {
+                    "message": "Do not use destructive history-rewriting commands in this course."
+                  }
+                },
+                "requiredCommands": {
+                  "0": {
+                    "message": "Run `git status --short`, then check your answer again."
+                  },
+                  "1": {
+                    "message": "Run `git diff -- schedule.md`, then check your answer again."
+                  }
                 }
               }
             },
             "try_read_tracked_and_untracked_state_sketch3": {
-              "title": "Try it yourself: Practical Use of git status",
-              "prompt": "Right after the sketch \"Applying git status in Real Projects\", practice that exact idea with this task. You have a Git repository with several changes. Create a file `important.txt` and modify an existing file `notes.txt`. Use `git status` to ensure all changes are accounted for before committing. Produce the result for practical Use of git status so it reinforces Read Tracked and Untracked State.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "title": "Confirm a Clean Working Tree",
+              "prompt": "The terminal opens inside the prepared `event-board/` repository.\n\nThe current event-board snapshot is committed and unchanged. Use full and short status to confirm that there is nothing left to stage or commit.\n\nType each command in the terminal and press Enter.",
+              "hint": "Read the repository state first, then use the Git command that changes only the requested boundary.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+                "concept": "A clean working tree means the files, index, and current commit agree.",
+                "hint_1": "Use the exact file or repository named in the task; avoid broad commands that include unrelated work.",
+                "hint_2": "After the action, run the requested inspection command to confirm the final state."
               },
-              "starterCode": "# Assume a Git repository with changes\n# Create a file: important.txt\n# Modify an existing file: notes.txt\n# Use git status to ensure all changes are accounted for",
-              "solutionCode": "touch important.txt\necho 'update' >> notes.txt\ngit status",
+              "starterCode": "Doors open at 10 AM.\n",
+              "solutionCode": "git status\ngit status --short",
               "starterFiles": {
-                "main_sh": {
-                  "content": "# Assume a Git repository with changes\n# Create a file: important.txt\n# Modify an existing file: notes.txt\n# Use git status to ensure all changes are accounted for"
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf event-board\nmkdir -p event-board\ngit -C event-board init -q -b main\ngit -C event-board config --local user.name \"ZoeSkoul Learner\"\ngit -C event-board config --local user.email \"learner@zoeskoul.local\"\ncd event-board\nprintf %s 'Doors open at 10 AM.\n' > schedule.md\ncd ..\ngit -C event-board add -A\ngit -C event-board commit -q -m 'Add project baseline'\n"
                 }
               },
               "solutionFiles": {
-                "main_sh": {
-                  "content": "touch important.txt\necho 'update' >> notes.txt\ngit status"
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf event-board\nmkdir -p event-board\ngit -C event-board init -q -b main\ngit -C event-board config --local user.name \"ZoeSkoul Learner\"\ngit -C event-board config --local user.email \"learner@zoeskoul.local\"\ncd event-board\nprintf %s 'Doors open at 10 AM.\n' > schedule.md\ncd ..\ngit -C event-board add -A\ngit -C event-board commit -q -m 'Add project baseline'\n"
+                }
+              },
+              "instructions": "The terminal opens inside the prepared `event-board/` repository.\n\nThe current event-board snapshot is committed and unchanged. Use full and short status to confirm that there is nothing left to stage or commit.\n\nType each command in the terminal and press Enter.",
+              "terminalExpectations": {
+                "forbiddenCommands": {
+                  "0": {
+                    "message": "Do not use destructive history-rewriting commands in this course."
+                  }
+                },
+                "requiredCommands": {
+                  "0": {
+                    "message": "Run `git status`, then check your answer again."
+                  },
+                  "1": {
+                    "message": "Run `git status --short`, then check your answer again."
+                  }
                 }
               }
             }
@@ -151,7 +212,7 @@
               "prompt": "Which of the following are components of the `git status` output? Select all that apply.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "Git status distinguishes files Git has never tracked from tracked files that are modified or staged.",
                 "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
                 "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
               },
@@ -183,7 +244,7 @@
               "prompt": "In `git status --short`, the symbol for a modified file is `[blank1]`.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "Git status distinguishes files Git has never tracked from tracked files that are modified or staged.",
                 "hint_1": "Think about what the missing part needs to do in the statement.",
                 "hint_2": "Choose the term that best completes the meaning of the statement."
               },
@@ -222,20 +283,20 @@
       "git-foundations-module-1-start-tracking": {
         "read-tracked-and-untracked-state": {
           "sketch0": {
-            "title": "Decoding git status",
-            "bodyMarkdown": "The `git status` command is a powerful tool that provides a snapshot of the current state of your working directory and staging area. It helps you understand which changes are staged for the next commit, which are not, and which files are not being tracked by Git.\n\nWorked example: Imagine you have a project with several files. After making some changes, you run `git status`. The output shows:\n\n```\nOn branch main\nYour branch is up to date with 'origin/main'.\n\nChanges not staged for commit:\n  (use \"git add <file>...\" to update what will be committed)\n  (use \"git restore <file>...\" to discard changes in working directory)\n\tmodified:   file1.txt\n\nUntracked files:\n  (use \"git add <file>...\" to include in what will be committed)\n\tfile2.txt\n```\n\nThis output tells you that `file1.txt` has been modified but not staged, and `file2.txt` is a new file that Git is not tracking yet. Understanding this output helps you decide your next steps, such as staging changes or adding new files to the repository.\n\nStep by step, read the commands in the order shown. The first line runs `On branch main` as the next repository step in the example. The second line runs `Your branch is up to date with 'origin/main'.` as the next repository step in the example. The third line runs `Changes not staged for commit:` as the next repository step in the example. The fourth line runs `(use \"git add <file>...\" to update what will be committed)` as the next repository step in the example. The next line runs `(use \"git restore <file>...\" to discard changes in working directory)` as the next repository step in the example. The next line runs `modified:   file1.txt` as the next repository step in the example. The next line runs `Untracked files:` as the next repository step in the example. The next line runs `(use \"git add <file>...\" to include in what will be committed)` as the next repository step in the example. The next line runs `file2.txt` as the next repository step in the example. Together, the lines form one complete example rather than unrelated commands."
+            "title": "Let Git Describe the Folder",
+            "bodyMarkdown": "`git status` is the safest first question in an unfamiliar repository. It reports the current branch, staged changes, unstaged changes, and untracked files in plain language.\n\n```bash\ngit status\n```\n\nSuppose `outline.md` is new and `README.md` was edited. The report separates those facts instead of treating every file the same. Nothing changes when you run status; it is an inspection command.\n\nUse the full view while learning because its headings explain where each change lives."
           },
           "sketch1": {
-            "title": "Compact View with git status --short",
-            "bodyMarkdown": "For a more concise view of your repository's status, you can use `git status --short`. This command provides a brief overview of the changes in your working directory and staging area, using symbols to indicate the state of each file.\n\nWorked example: After making changes to your project, you run `git status --short` and see:\n\n```\n M file1.txt\n?? file2.txt\n```\n\nIn this output, `M` indicates that `file1.txt` has been modified, and `??` shows that `file2.txt` is untracked. This shorthand view is particularly useful when you want a quick overview without the detailed explanations provided by the full `git status` command."
+            "title": "Read the Two Status Columns",
+            "bodyMarkdown": "The short view compresses the same information into two columns:\n\n```bash\ngit status --short\n```\n\nA few common shapes are:\n\n```text\n?? outline.md\n M README.md\nM  schedule.md\n```\n\n`??` means untracked. A mark in the right column means the working file differs from the staged version. A mark in the left column means a change is already staged for the next commit. The spacing is meaningful, so read both columns."
           },
           "sketch2": {
-            "title": "Tracked vs. Untracked Files",
-            "bodyMarkdown": "Understanding the difference between tracked and untracked files is crucial in Git. Tracked files are those that Git is aware of and are part of the repository's history. Untracked files, on the other hand, are new files that Git has not yet been told to track.\n\nWorked example: Suppose you have a directory with several files. You run `git status` and see:\n\n```\nUntracked files:\n  (use \"git add <file>...\" to include in what will be committed)\n\tnewfile.txt\n```\n\nThis indicates that `newfile.txt` is not yet tracked by Git. To start tracking it, you would use `git add newfile.txt`. Once added, it becomes a tracked file and will be included in future commits."
+            "title": "Tracked and Untracked Are Different",
+            "bodyMarkdown": "A tracked file already belongs to repository history. Git can compare its current contents with an earlier snapshot. An untracked file exists in the folder, but Git has no recorded version to compare.\n\nStaging a new file introduces it to Git:\n\n```bash\ngit add outline.md\ngit status --short\n```\n\nThe status changes from `?? outline.md` to `A  outline.md`. `A` means the new file is prepared for the next commit. The file is not committed yet; staging and committing are separate decisions."
           },
           "sketch3": {
-            "title": "Applying git status in Real Projects",
-            "bodyMarkdown": "Using `git status` effectively can prevent many common mistakes in version control. It helps ensure that you are aware of all changes before committing, reducing the risk of accidentally omitting important updates or including unwanted changes.\n\nWorked example: You're working on a project and have made several changes. Before committing, you run `git status` to review the current state. You notice a file you forgot to stage. By catching this oversight, you can stage the file and ensure it is included in your next commit, maintaining a complete and accurate project history."
+            "title": "Check Before You Change State",
+            "bodyMarkdown": "A reliable Git rhythm is inspect, act, inspect again. Before staging, run status. After staging, run it again. After committing, confirm the working tree is clean.\n\nThis habit catches the mistakes that command memorization misses: operating in the wrong folder, staging an unrelated file, or assuming a change was committed when it was only staged.\n\nWhen status surprises you, stop and read it. Git is describing the state it will grade and eventually record."
           }
         }
       }

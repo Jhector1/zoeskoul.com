@@ -11,6 +11,20 @@ describe("getExecutionPlan", () => {
         expect(plan.prepareDirs).toEqual(["park-terminal-map/requests"]);
     });
 
+
+    it("leaves hidden lesson setup to the post-sync terminal bootstrap", () => {
+        const plan = getExecutionPlan("bash", undefined, [], {
+            shell: true,
+            cwd: "/workspace/project",
+        });
+
+        const command = plan.runCmd.at(-1) ?? "";
+        expect(command).not.toContain(".zoeskoul/setup.sh");
+        expect(command).not.toContain(".setup-complete");
+        expect(command).toContain('cd "${START_CWD:-/workspace}"');
+        expect(command).toContain("exec /bin/bash --noprofile --norc -i");
+    });
+
     it("does not prepare dirs for the workspace root", () => {
         const plan = getExecutionPlan("bash", undefined, [], {
             shell: true,

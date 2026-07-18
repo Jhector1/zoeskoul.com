@@ -61,8 +61,10 @@
     "publicNetworkForbidden": true
   },
   "globalRules": [
-    "Every technical sketch has an aligned Git terminal Try It.",
-    "Final learner quiz cards contain no code_input. quizDraft is the shared authoring exercise collection and must still contain every runtime Try It code_input required by plannedExerciseCounts.",
+    "The first hands-on repository exercise starts from an ordinary folder and requires the learner to run git init -b main.",
+    "Hidden fixture setup runs automatically and must never appear in learner-facing prompts, hints, starterCode, solutionCode, terminal expectations, or terminal history.",
+    "Every technical lesson after initialization begins from deterministic prerequisite repository state and asks the learner to perform only the newly taught Git action.",
+    "Final learner quiz cards contain no code_input. quizDraft remains the authoring collection for runtime Try It exercises.",
     "Every standard module contains exactly one role=module_project section.",
     "The final module contains exactly one role=capstone section and one capstone topic.",
     "Every project step N+1 starts from the complete repository state produced by step N.",

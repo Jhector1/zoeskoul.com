@@ -29,6 +29,9 @@ export type TerminalCourseProfileConfig = {
     validationLabel: string;
     defaultStarterCode: string;
     forceTerminalWorkspace?: boolean;
+    buildModuleServiceDefaults?: NonNullable<
+        CourseProfile["buildModuleServiceDefaults"]
+    >;
     makeHelpFallback(args: {
         title: string;
         prompt: string;
@@ -433,6 +436,9 @@ export function createTerminalCourseProfile(
                     dragDrop: false,
                 },
             };
+        },
+        buildModuleServiceDefaults(moduleOrder, module) {
+            return config.buildModuleServiceDefaults?.(moduleOrder, module) ?? null;
         },
         renderExerciseKindPromptRules(args) {
             return config.renderExerciseKindPromptRules(args);

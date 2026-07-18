@@ -2,8 +2,7 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import type { WorkspaceSyncEntry } from "@zoeskoul/code-contracts";
 import {
-  isRunnerManagedDirPath,
-  isRunnerManagedFilePath,
+  isWorkspacePreservedPath,
   RUNNER_MANAGED_DIRS,
 } from "./runnerManagedWorkspace.js";
 import {
@@ -130,7 +129,7 @@ export async function replaceWorkspaceFiles(
     if (desiredFiles.has(relPath)) continue;
 
     // Keep terminal/runtime metadata even when the editor replaces the workspace.
-    if (isRunnerManagedFilePath(relPath)) continue;
+    if (isWorkspacePreservedPath(relPath)) continue;
 
     const abs = path.join(workspaceDir, relPath);
     await fs.rm(abs, { force: true });
@@ -142,7 +141,7 @@ export async function replaceWorkspaceFiles(
 
   const dirsToDelete = [...currentDirs]
     .filter((relPath) => !keepDirs.has(relPath))
-    .filter((relPath) => !isRunnerManagedDirPath(relPath))
+    .filter((relPath) => !isWorkspacePreservedPath(relPath))
     .sort((a, b) => {
       const da = a.split("/").length;
       const db = b.split("/").length;

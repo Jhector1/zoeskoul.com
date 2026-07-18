@@ -16,11 +16,17 @@
   },
   "serviceDefaults": {
     "runnerBackend": "pty",
-    "layoutMode": "terminal_workspace",
+    "layoutMode": "default",
     "requires": {
       "files": true,
       "multiFile": true,
       "terminal": true
+    },
+    "preset": "runner",
+    "terminalBootstrap": {
+      "gitSafeDirectories": [
+        "/workspace/*"
+      ]
     }
   },
   "topic": {
@@ -252,46 +258,73 @@
       "weight": 1,
       "messageBase": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.rename-and-remove-tracked-files.tryIt.try_rename_and_remove_tracked_files_sketch0",
       "language": "bash",
-      "starterCode": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.rename-and-remove-tracked-files.tryIt.try_rename_and_remove_tracked_files_sketch0.starterCode",
+      "starterCode": "# Draft Guide\n",
       "starterFiles": [
         {
-          "path": "main.sh",
-          "content": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.rename-and-remove-tracked-files.tryIt.try_rename_and_remove_tracked_files_sketch0.starterCode",
-          "language": "bash",
+          "path": "release-kit/docs/guide-draft.md",
+          "content": "# Draft Guide\n",
+          "language": "markdown",
           "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        }
-      ],
-      "solutionFiles": [
+          "entry": true
+        },
         {
-          "path": "main.sh",
-          "content": "git mv example.txt sample.txt",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
+          "path": "release-kit/docs/old-checklist.md",
+          "content": "Old checklist\n",
+          "language": "markdown"
         }
       ],
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^git\\s+mv\\s+example\\.txt\\s+sample\\.txt$"
+            "pattern": "^git\\s+mv\\s+docs/guide\\-draft\\.md\\s+docs/volunteer\\-guide\\.md$",
+            "message": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.rename-and-remove-tracked-files.tryIt.try_rename_and_remove_tracked_files_sketch0.terminalExpectations.requiredCommands.0.message"
+          },
+          {
+            "pattern": "^git\\s+status\\s+\\-\\-short$",
+            "message": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.rename-and-remove-tracked-files.tryIt.try_rename_and_remove_tracked_files_sketch0.terminalExpectations.requiredCommands.1.message"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.rename-and-remove-tracked-files.tryIt.try_rename_and_remove_tracked_files_sketch0.terminalExpectations.forbiddenCommands.0.message"
           }
         ]
       },
       "workspace": {
         "language": "bash",
-        "entryFilePath": "main.sh",
-        "starterCode": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.rename-and-remove-tracked-files.tryIt.try_rename_and_remove_tracked_files_sketch0.starterCode",
+        "entryFilePath": "release-kit/docs/guide-draft.md",
+        "starterCode": "# Draft Guide\n",
         "starterFiles": [
           {
-            "path": "main.sh",
-            "content": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.rename-and-remove-tracked-files.tryIt.try_rename_and_remove_tracked_files_sketch0.starterCode",
-            "language": "bash",
+            "path": "release-kit/docs/guide-draft.md",
+            "content": "# Draft Guide\n",
+            "language": "markdown",
             "isEntry": true,
-            "entry": true,
-            "readOnly": false
+            "entry": true
+          },
+          {
+            "path": "release-kit/docs/old-checklist.md",
+            "content": "Old checklist\n",
+            "language": "markdown"
+          }
+        ],
+        "fixtureFiles": [
+          {
+            "path": ".zoeskoul/setup.sh",
+            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-kit\nmkdir -p release-kit\ngit -C release-kit init -q -b main\ngit -C release-kit config --local user.name \"ZoeSkoul Learner\"\ngit -C release-kit config --local user.email \"learner@zoeskoul.local\"\ncd release-kit\nmkdir -p docs\nprintf %s '# Draft Guide\n' > docs/guide-draft.md\ncd ..\ncd release-kit\nmkdir -p docs\nprintf %s 'Old checklist\n' > docs/old-checklist.md\ncd ..\ngit -C release-kit add -A\ngit -C release-kit commit -q -m 'Add project baseline'\n",
+            "language": "bash",
+            "readOnly": true
+          },
+          {
+            "path": "release-kit/docs/guide-draft.md",
+            "content": "# Draft Guide\n",
+            "language": "markdown"
+          },
+          {
+            "path": "release-kit/docs/old-checklist.md",
+            "content": "Old checklist\n",
+            "language": "markdown"
           }
         ]
       },
@@ -299,8 +332,80 @@
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.rename-and-remove-tracked-files.tryIt.try_rename_and_remove_tracked_files_sketch0.prompt"
-      }
+        "instructions": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.rename-and-remove-tracked-files.tryIt.try_rename_and_remove_tracked_files_sketch0.instructions"
+      },
+      "hiddenShellCheck": {
+        "script": "set -eu\nrepo=release-kit\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" branch --show-current)\" = main ] || fail \"The repository is not on main.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = 1 ] || fail \"The repository has the wrong number of commits.\"\n[ -n \"$(git -C \"$repo\" status --porcelain)\" ] || fail \"The exercise change is missing.\"\nexpected=$(printf \"%s\\n\" docs/old-checklist.md docs/volunteer-guide.md | sort)\nactual=$(git -C \"$repo\" ls-files | sort)\n[ \"$actual\" = \"$expected\" ] || fail \"The tracked file set is not correct.\"\nexpected_staged=$(printf \"%s\\n\" docs/volunteer-guide.md | sort)\nactual_staged=$(git -C \"$repo\" diff --cached --name-only | sort)\n[ \"$actual_staged\" = \"$expected_staged\" ] || fail \"The staged file set is not correct.\"\ngit -C \"$repo\" diff --cached --name-status | grep -Eq \"^R[0-9]*[[:space:]]+docs/guide-draft.md[[:space:]]+docs/volunteer-guide.md$\"",
+        "timeoutMs": 15000
+      },
+      "ideConfig": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/release-kit",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "serviceOverrides": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/release-kit",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "fixtureFiles": [
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-kit\nmkdir -p release-kit\ngit -C release-kit init -q -b main\ngit -C release-kit config --local user.name \"ZoeSkoul Learner\"\ngit -C release-kit config --local user.email \"learner@zoeskoul.local\"\ncd release-kit\nmkdir -p docs\nprintf %s '# Draft Guide\n' > docs/guide-draft.md\ncd ..\ncd release-kit\nmkdir -p docs\nprintf %s 'Old checklist\n' > docs/old-checklist.md\ncd ..\ngit -C release-kit add -A\ngit -C release-kit commit -q -m 'Add project baseline'\n",
+          "language": "bash",
+          "readOnly": true
+        },
+        {
+          "path": "release-kit/docs/guide-draft.md",
+          "content": "# Draft Guide\n",
+          "language": "markdown"
+        },
+        {
+          "path": "release-kit/docs/old-checklist.md",
+          "content": "Old checklist\n",
+          "language": "markdown"
+        }
+      ]
     },
     {
       "id": "try-rename-and-remove-tracked-files-sketch1",
@@ -309,46 +414,73 @@
       "weight": 1,
       "messageBase": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.rename-and-remove-tracked-files.tryIt.try_rename_and_remove_tracked_files_sketch1",
       "language": "bash",
-      "starterCode": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.rename-and-remove-tracked-files.tryIt.try_rename_and_remove_tracked_files_sketch1.starterCode",
+      "starterCode": "# Guide\n",
       "starterFiles": [
         {
-          "path": "main.sh",
-          "content": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.rename-and-remove-tracked-files.tryIt.try_rename_and_remove_tracked_files_sketch1.starterCode",
-          "language": "bash",
+          "path": "release-kit/docs/guide.md",
+          "content": "# Guide\n",
+          "language": "markdown",
           "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        }
-      ],
-      "solutionFiles": [
+          "entry": true
+        },
         {
-          "path": "main.sh",
-          "content": "git rm unnecessary.txt",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
+          "path": "release-kit/docs/old-checklist.md",
+          "content": "Old checklist\n",
+          "language": "markdown"
         }
       ],
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^git\\s+rm\\s+unnecessary\\.txt$"
+            "pattern": "^git\\s+rm\\s+docs/old\\-checklist\\.md$",
+            "message": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.rename-and-remove-tracked-files.tryIt.try_rename_and_remove_tracked_files_sketch1.terminalExpectations.requiredCommands.0.message"
+          },
+          {
+            "pattern": "^git\\s+status\\s+\\-\\-short$",
+            "message": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.rename-and-remove-tracked-files.tryIt.try_rename_and_remove_tracked_files_sketch1.terminalExpectations.requiredCommands.1.message"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.rename-and-remove-tracked-files.tryIt.try_rename_and_remove_tracked_files_sketch1.terminalExpectations.forbiddenCommands.0.message"
           }
         ]
       },
       "workspace": {
         "language": "bash",
-        "entryFilePath": "main.sh",
-        "starterCode": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.rename-and-remove-tracked-files.tryIt.try_rename_and_remove_tracked_files_sketch1.starterCode",
+        "entryFilePath": "release-kit/docs/guide.md",
+        "starterCode": "# Guide\n",
         "starterFiles": [
           {
-            "path": "main.sh",
-            "content": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.rename-and-remove-tracked-files.tryIt.try_rename_and_remove_tracked_files_sketch1.starterCode",
-            "language": "bash",
+            "path": "release-kit/docs/guide.md",
+            "content": "# Guide\n",
+            "language": "markdown",
             "isEntry": true,
-            "entry": true,
-            "readOnly": false
+            "entry": true
+          },
+          {
+            "path": "release-kit/docs/old-checklist.md",
+            "content": "Old checklist\n",
+            "language": "markdown"
+          }
+        ],
+        "fixtureFiles": [
+          {
+            "path": ".zoeskoul/setup.sh",
+            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-kit\nmkdir -p release-kit\ngit -C release-kit init -q -b main\ngit -C release-kit config --local user.name \"ZoeSkoul Learner\"\ngit -C release-kit config --local user.email \"learner@zoeskoul.local\"\ncd release-kit\nmkdir -p docs\nprintf %s '# Guide\n' > docs/guide.md\ncd ..\ncd release-kit\nmkdir -p docs\nprintf %s 'Old checklist\n' > docs/old-checklist.md\ncd ..\ngit -C release-kit add -A\ngit -C release-kit commit -q -m 'Add project baseline'\n",
+            "language": "bash",
+            "readOnly": true
+          },
+          {
+            "path": "release-kit/docs/guide.md",
+            "content": "# Guide\n",
+            "language": "markdown"
+          },
+          {
+            "path": "release-kit/docs/old-checklist.md",
+            "content": "Old checklist\n",
+            "language": "markdown"
           }
         ]
       },
@@ -356,8 +488,80 @@
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.rename-and-remove-tracked-files.tryIt.try_rename_and_remove_tracked_files_sketch1.prompt"
-      }
+        "instructions": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.rename-and-remove-tracked-files.tryIt.try_rename_and_remove_tracked_files_sketch1.instructions"
+      },
+      "hiddenShellCheck": {
+        "script": "set -eu\nrepo=release-kit\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" branch --show-current)\" = main ] || fail \"The repository is not on main.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = 1 ] || fail \"The repository has the wrong number of commits.\"\n[ -n \"$(git -C \"$repo\" status --porcelain)\" ] || fail \"The exercise change is missing.\"\nexpected=$(printf \"%s\\n\" docs/guide.md | sort)\nactual=$(git -C \"$repo\" ls-files | sort)\n[ \"$actual\" = \"$expected\" ] || fail \"The tracked file set is not correct.\"\nexpected_staged=$(printf \"%s\\n\" docs/old-checklist.md | sort)\nactual_staged=$(git -C \"$repo\" diff --cached --name-only | sort)\n[ \"$actual_staged\" = \"$expected_staged\" ] || fail \"The staged file set is not correct.\"\n[ ! -e \"$repo/docs/old-checklist.md\" ]",
+        "timeoutMs": 15000
+      },
+      "ideConfig": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/release-kit",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "serviceOverrides": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/release-kit",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "fixtureFiles": [
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-kit\nmkdir -p release-kit\ngit -C release-kit init -q -b main\ngit -C release-kit config --local user.name \"ZoeSkoul Learner\"\ngit -C release-kit config --local user.email \"learner@zoeskoul.local\"\ncd release-kit\nmkdir -p docs\nprintf %s '# Guide\n' > docs/guide.md\ncd ..\ncd release-kit\nmkdir -p docs\nprintf %s 'Old checklist\n' > docs/old-checklist.md\ncd ..\ngit -C release-kit add -A\ngit -C release-kit commit -q -m 'Add project baseline'\n",
+          "language": "bash",
+          "readOnly": true
+        },
+        {
+          "path": "release-kit/docs/guide.md",
+          "content": "# Guide\n",
+          "language": "markdown"
+        },
+        {
+          "path": "release-kit/docs/old-checklist.md",
+          "content": "Old checklist\n",
+          "language": "markdown"
+        }
+      ]
     },
     {
       "id": "try-rename-and-remove-tracked-files-sketch2",
@@ -366,49 +570,58 @@
       "weight": 1,
       "messageBase": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.rename-and-remove-tracked-files.tryIt.try_rename_and_remove_tracked_files_sketch2",
       "language": "bash",
-      "starterCode": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.rename-and-remove-tracked-files.tryIt.try_rename_and_remove_tracked_files_sketch2.starterCode",
+      "starterCode": "# Draft Guide\n",
       "starterFiles": [
         {
-          "path": "main.sh",
-          "content": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.rename-and-remove-tracked-files.tryIt.try_rename_and_remove_tracked_files_sketch2.starterCode",
-          "language": "bash",
+          "path": "release-kit/docs/volunteer-guide.md",
+          "content": "# Draft Guide\n",
+          "language": "markdown",
           "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "main.sh",
-          "content": "git status\ngit diff --staged",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
+          "entry": true
         }
       ],
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^git\\s+status$"
+            "pattern": "^git\\s+diff\\s+\\-\\-staged\\s+\\-\\-name\\-status$",
+            "message": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.rename-and-remove-tracked-files.tryIt.try_rename_and_remove_tracked_files_sketch2.terminalExpectations.requiredCommands.0.message"
           },
           {
-            "pattern": "^git\\s+diff\\s+--staged$"
+            "pattern": "^git\\s+status\\s+\\-\\-short$",
+            "message": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.rename-and-remove-tracked-files.tryIt.try_rename_and_remove_tracked_files_sketch2.terminalExpectations.requiredCommands.1.message"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.rename-and-remove-tracked-files.tryIt.try_rename_and_remove_tracked_files_sketch2.terminalExpectations.forbiddenCommands.0.message"
           }
         ]
       },
       "workspace": {
         "language": "bash",
-        "entryFilePath": "main.sh",
-        "starterCode": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.rename-and-remove-tracked-files.tryIt.try_rename_and_remove_tracked_files_sketch2.starterCode",
+        "entryFilePath": "release-kit/docs/volunteer-guide.md",
+        "starterCode": "# Draft Guide\n",
         "starterFiles": [
           {
-            "path": "main.sh",
-            "content": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.rename-and-remove-tracked-files.tryIt.try_rename_and_remove_tracked_files_sketch2.starterCode",
-            "language": "bash",
+            "path": "release-kit/docs/volunteer-guide.md",
+            "content": "# Draft Guide\n",
+            "language": "markdown",
             "isEntry": true,
-            "entry": true,
-            "readOnly": false
+            "entry": true
+          }
+        ],
+        "fixtureFiles": [
+          {
+            "path": ".zoeskoul/setup.sh",
+            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-kit\nmkdir -p release-kit\ngit -C release-kit init -q -b main\ngit -C release-kit config --local user.name \"ZoeSkoul Learner\"\ngit -C release-kit config --local user.email \"learner@zoeskoul.local\"\ncd release-kit\nmkdir -p docs\nprintf %s '# Draft Guide\n' > docs/guide-draft.md\ncd ..\ncd release-kit\nmkdir -p docs\nprintf %s 'Old checklist\n' > docs/old-checklist.md\ncd ..\ngit -C release-kit add -A\ngit -C release-kit commit -q -m 'Add project baseline'\ngit -C release-kit mv docs/guide-draft.md docs/volunteer-guide.md\ngit -C release-kit rm -q docs/old-checklist.md\n",
+            "language": "bash",
+            "readOnly": true
+          },
+          {
+            "path": "release-kit/docs/volunteer-guide.md",
+            "content": "# Draft Guide\n",
+            "language": "markdown"
           }
         ]
       },
@@ -416,8 +629,75 @@
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.rename-and-remove-tracked-files.tryIt.try_rename_and_remove_tracked_files_sketch2.prompt"
-      }
+        "instructions": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.rename-and-remove-tracked-files.tryIt.try_rename_and_remove_tracked_files_sketch2.instructions"
+      },
+      "hiddenShellCheck": {
+        "script": "set -eu\nrepo=release-kit\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" branch --show-current)\" = main ] || fail \"The repository is not on main.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = 1 ] || fail \"The repository has the wrong number of commits.\"\n[ -n \"$(git -C \"$repo\" status --porcelain)\" ] || fail \"The exercise change is missing.\"\nexpected=$(printf \"%s\\n\" docs/volunteer-guide.md | sort)\nactual=$(git -C \"$repo\" ls-files | sort)\n[ \"$actual\" = \"$expected\" ] || fail \"The tracked file set is not correct.\"\nexpected_staged=$(printf \"%s\\n\" docs/old-checklist.md docs/volunteer-guide.md | sort)\nactual_staged=$(git -C \"$repo\" diff --cached --name-only | sort)\n[ \"$actual_staged\" = \"$expected_staged\" ] || fail \"The staged file set is not correct.\"",
+        "timeoutMs": 15000
+      },
+      "ideConfig": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/release-kit",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "serviceOverrides": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/release-kit",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "fixtureFiles": [
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-kit\nmkdir -p release-kit\ngit -C release-kit init -q -b main\ngit -C release-kit config --local user.name \"ZoeSkoul Learner\"\ngit -C release-kit config --local user.email \"learner@zoeskoul.local\"\ncd release-kit\nmkdir -p docs\nprintf %s '# Draft Guide\n' > docs/guide-draft.md\ncd ..\ncd release-kit\nmkdir -p docs\nprintf %s 'Old checklist\n' > docs/old-checklist.md\ncd ..\ngit -C release-kit add -A\ngit -C release-kit commit -q -m 'Add project baseline'\ngit -C release-kit mv docs/guide-draft.md docs/volunteer-guide.md\ngit -C release-kit rm -q docs/old-checklist.md\n",
+          "language": "bash",
+          "readOnly": true
+        },
+        {
+          "path": "release-kit/docs/volunteer-guide.md",
+          "content": "# Draft Guide\n",
+          "language": "markdown"
+        }
+      ]
     },
     {
       "id": "try-rename-and-remove-tracked-files-sketch3",
@@ -426,46 +706,62 @@
       "weight": 1,
       "messageBase": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.rename-and-remove-tracked-files.tryIt.try_rename_and_remove_tracked_files_sketch3",
       "language": "bash",
-      "starterCode": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.rename-and-remove-tracked-files.tryIt.try_rename_and_remove_tracked_files_sketch3.starterCode",
+      "starterCode": "# Draft Guide\n",
       "starterFiles": [
         {
-          "path": "main.sh",
-          "content": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.rename-and-remove-tracked-files.tryIt.try_rename_and_remove_tracked_files_sketch3.starterCode",
-          "language": "bash",
+          "path": "release-kit/docs/volunteer-guide.md",
+          "content": "# Draft Guide\n",
+          "language": "markdown",
           "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "main.sh",
-          "content": "git commit -m \"Updated project files\"",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
+          "entry": true
         }
       ],
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^git\\s+commit\\s+-m\\s+\"Updated\\s+project\\s+files\"$"
+            "pattern": "^git\\s+commit\\s+\\-m\\s+\"Organize\\s+release\\s+documentation\"$",
+            "message": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.rename-and-remove-tracked-files.tryIt.try_rename_and_remove_tracked_files_sketch3.terminalExpectations.requiredCommands.0.message"
+          },
+          {
+            "pattern": "^git\\s+ls\\-files$",
+            "message": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.rename-and-remove-tracked-files.tryIt.try_rename_and_remove_tracked_files_sketch3.terminalExpectations.requiredCommands.1.message"
+          },
+          {
+            "pattern": "^git\\s+status\\s+\\-\\-short$",
+            "message": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.rename-and-remove-tracked-files.tryIt.try_rename_and_remove_tracked_files_sketch3.terminalExpectations.requiredCommands.2.message"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.rename-and-remove-tracked-files.tryIt.try_rename_and_remove_tracked_files_sketch3.terminalExpectations.forbiddenCommands.0.message"
           }
         ]
       },
       "workspace": {
         "language": "bash",
-        "entryFilePath": "main.sh",
-        "starterCode": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.rename-and-remove-tracked-files.tryIt.try_rename_and_remove_tracked_files_sketch3.starterCode",
+        "entryFilePath": "release-kit/docs/volunteer-guide.md",
+        "starterCode": "# Draft Guide\n",
         "starterFiles": [
           {
-            "path": "main.sh",
-            "content": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.rename-and-remove-tracked-files.tryIt.try_rename_and_remove_tracked_files_sketch3.starterCode",
-            "language": "bash",
+            "path": "release-kit/docs/volunteer-guide.md",
+            "content": "# Draft Guide\n",
+            "language": "markdown",
             "isEntry": true,
-            "entry": true,
-            "readOnly": false
+            "entry": true
+          }
+        ],
+        "fixtureFiles": [
+          {
+            "path": ".zoeskoul/setup.sh",
+            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-kit\nmkdir -p release-kit\ngit -C release-kit init -q -b main\ngit -C release-kit config --local user.name \"ZoeSkoul Learner\"\ngit -C release-kit config --local user.email \"learner@zoeskoul.local\"\ncd release-kit\nmkdir -p docs\nprintf %s '# Draft Guide\n' > docs/guide-draft.md\ncd ..\ncd release-kit\nmkdir -p docs\nprintf %s 'Old checklist\n' > docs/old-checklist.md\ncd ..\ngit -C release-kit add -A\ngit -C release-kit commit -q -m 'Add project baseline'\ngit -C release-kit mv docs/guide-draft.md docs/volunteer-guide.md\ngit -C release-kit rm -q docs/old-checklist.md\n",
+            "language": "bash",
+            "readOnly": true
+          },
+          {
+            "path": "release-kit/docs/volunteer-guide.md",
+            "content": "# Draft Guide\n",
+            "language": "markdown"
           }
         ]
       },
@@ -473,8 +769,75 @@
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.rename-and-remove-tracked-files.tryIt.try_rename_and_remove_tracked_files_sketch3.prompt"
-      }
+        "instructions": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.rename-and-remove-tracked-files.tryIt.try_rename_and_remove_tracked_files_sketch3.instructions"
+      },
+      "hiddenShellCheck": {
+        "script": "set -eu\nrepo=release-kit\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" branch --show-current)\" = main ] || fail \"The repository is not on main.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = 2 ] || fail \"The repository has the wrong number of commits.\"\n[ -z \"$(git -C \"$repo\" status --porcelain)\" ] || fail \"The working tree is not clean.\"\nexpected=$(printf \"%s\\n\" docs/volunteer-guide.md | sort)\nactual=$(git -C \"$repo\" ls-files | sort)\n[ \"$actual\" = \"$expected\" ] || fail \"The tracked file set is not correct.\"\n[ \"$(git -C \"$repo\" log -1 --format=%s)\" = 'Organize release documentation' ] || fail \"The latest commit message is not correct.\"",
+        "timeoutMs": 15000
+      },
+      "ideConfig": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/release-kit",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "serviceOverrides": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/release-kit",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "fixtureFiles": [
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-kit\nmkdir -p release-kit\ngit -C release-kit init -q -b main\ngit -C release-kit config --local user.name \"ZoeSkoul Learner\"\ngit -C release-kit config --local user.email \"learner@zoeskoul.local\"\ncd release-kit\nmkdir -p docs\nprintf %s '# Draft Guide\n' > docs/guide-draft.md\ncd ..\ncd release-kit\nmkdir -p docs\nprintf %s 'Old checklist\n' > docs/old-checklist.md\ncd ..\ngit -C release-kit add -A\ngit -C release-kit commit -q -m 'Add project baseline'\ngit -C release-kit mv docs/guide-draft.md docs/volunteer-guide.md\ngit -C release-kit rm -q docs/old-checklist.md\n",
+          "language": "bash",
+          "readOnly": true
+        },
+        {
+          "path": "release-kit/docs/volunteer-guide.md",
+          "content": "# Draft Guide\n",
+          "language": "markdown"
+        }
+      ]
     }
   ]
 }

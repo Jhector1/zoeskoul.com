@@ -18,9 +18,9 @@ export function workspaceToServiceDefaults(args: {
 
     return {
         ...(requires.terminal ? { runnerBackend: "pty" as const } : {}),
-        ...(requires.terminal && requires.files
-            ? { layoutMode: "terminal_workspace" as const }
-            : {}),
+        // Capabilities do not decide presentation. A terminal + filesystem can
+        // be Linux terminal-only or Git editor + terminal. The profile or
+        // authored IDE policy owns layoutMode.
         requires,
     };
 }

@@ -59,6 +59,12 @@ export function createTerminalProfileAdapter(
             };
         },
 
+        getTopicSeedServiceDefaults({ module }) {
+            return profile.buildModuleServiceDefaults?.(
+                module.order,
+            ) ?? null;
+        },
+
         buildSubjectManifest(args: BuildSubjectManifestArgs) {
             return buildBaseSubjectManifest(
                 args.blueprint,

@@ -1074,6 +1074,43 @@ describe("gradeProgrammingCodeInput", () => {
         expect(mockedSharedRunner).not.toHaveBeenCalled();
     });
 
+    it("never exposes a raw required-command regex in learner feedback", async () => {
+        const expected: ProgrammingExpected = {
+            kind: "code_input",
+            strategy: "programming",
+            checkMode: "stdout",
+            tests: [{ stdin: "", stdout: "", match: "includes" }],
+            semanticChecks: [],
+            terminalExpectations: {
+                requiredCommands: [
+                    {
+                        pattern: "^git\\s+init\\s+\\-b\\s+main$",
+                    },
+                ],
+            },
+        } as any;
+
+        const result = await gradeProgrammingCodeInput({
+            expected,
+            terminalWorkspaceShellTask: true,
+            code: "",
+            language: "bash",
+            terminalEvidence: {
+                commands: ["ls"],
+                outputText: "",
+            },
+            showDebug: false,
+        });
+
+        expect(result.ok).toBe(false);
+        expect(result.explanation).toBe(
+            "Run the command requested in the instructions, then check your answer again.",
+        );
+        expect(result.explanation).not.toContain("^git");
+        expect(result.feedback?.message).not.toContain("\\s+");
+        expect(mockedSharedRunner).not.toHaveBeenCalled();
+    });
+
     it("fails terminal_workspace shell tasks when a forbidden command is used", async () => {
         const expected: ProgrammingExpected = {
             kind: "code_input",
@@ -1265,8 +1302,9 @@ describe("gradeProgrammingCodeInput", () => {
 
         expect(result.ok).toBe(false);
         expect(result.explanation).toBe(
-            "The terminal output did not match the expected pattern: ^notes$",
+            "The terminal output is not what this exercise expects yet. Review the command in the instructions and try again.",
         );
+        expect(result.explanation).not.toContain("^notes$");
         expect(mockedSharedRunner).not.toHaveBeenCalled();
     });
 

@@ -2,6 +2,15 @@ import { describe, expect, it } from "vitest";
 import { bashProfile } from "./profile.js";
 
 describe("bashProfile", () => {
+    it("keeps Linux terminal-only through the Bash profile presentation", () => {
+        expect(bashProfile.buildModuleServiceDefaults?.()).toEqual({
+            preset: "runner",
+            runnerBackend: "pty",
+            layoutMode: "terminal_workspace",
+            requires: { files: true, multiFile: true, terminal: true },
+        });
+    });
+
     it("tells the generator to put required shell tasks in quizDraft", () => {
         const rules = bashProfile.renderAuthoringPromptRules?.({
             seed: {

@@ -1,0 +1,749 @@
+{
+  "topicId": "modify-and-verify-tracked-files",
+  "subjectSlug": "git-foundations",
+  "moduleSlug": "git-foundations-module-3-manage-tracked-files",
+  "sectionSlug": "git-foundations-git-foundations-section-3-safe-file-management",
+  "prefix": "git_foundations_module_3",
+  "minutes": 20,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "bash",
+    "supportsTerminal": true,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "runnerBackend": "pty",
+    "layoutMode": "terminal_workspace",
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": true
+    }
+  },
+  "topic": {
+    "labelKey": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.modify-and-verify-tracked-files.label",
+    "summaryKey": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.modify-and-verify-tracked-files.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.modify-and-verify-tracked-files.cards.sketch0.title",
+      "sketchId": "sketch0",
+      "height": 420,
+      "tryIt": {
+        "id": "try-modify-and-verify-tracked-files-sketch0",
+        "titleKey": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.modify-and-verify-tracked-files.tryIt.try_modify_and_verify_tracked_files_sketch0.title",
+        "promptKey": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.modify-and-verify-tracked-files.tryIt.try_modify_and_verify_tracked_files_sketch0.prompt",
+        "exerciseKey": "try-modify-and-verify-tracked-files-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.modify-and-verify-tracked-files.cards.sketch1.title",
+      "sketchId": "sketch1",
+      "height": 420,
+      "tryIt": {
+        "id": "try-modify-and-verify-tracked-files-sketch1",
+        "titleKey": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.modify-and-verify-tracked-files.tryIt.try_modify_and_verify_tracked_files_sketch1.title",
+        "promptKey": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.modify-and-verify-tracked-files.tryIt.try_modify_and_verify_tracked_files_sketch1.prompt",
+        "exerciseKey": "try-modify-and-verify-tracked-files-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.modify-and-verify-tracked-files.cards.sketch2.title",
+      "sketchId": "sketch2",
+      "height": 420,
+      "tryIt": {
+        "id": "try-modify-and-verify-tracked-files-sketch2",
+        "titleKey": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.modify-and-verify-tracked-files.tryIt.try_modify_and_verify_tracked_files_sketch2.title",
+        "promptKey": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.modify-and-verify-tracked-files.tryIt.try_modify_and_verify_tracked_files_sketch2.prompt",
+        "exerciseKey": "try-modify-and-verify-tracked-files-sketch2",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch3",
+      "kind": "sketch",
+      "titleKey": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.modify-and-verify-tracked-files.cards.sketch3.title",
+      "sketchId": "sketch3",
+      "height": 420,
+      "tryIt": {
+        "id": "try-modify-and-verify-tracked-files-sketch3",
+        "titleKey": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.modify-and-verify-tracked-files.tryIt.try_modify_and_verify_tracked_files_sketch3.title",
+        "promptKey": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.modify-and-verify-tracked-files.tryIt.try_modify_and_verify_tracked_files_sketch3.prompt",
+        "exerciseKey": "try-modify-and-verify-tracked-files-sketch3",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.modify-and-verify-tracked-files.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch0",
+      "archetype": "paragraph",
+      "titleKey": "sketches.git-foundations.git-foundations-module-3-manage-tracked-files.modify-and-verify-tracked-files.sketch0.title",
+      "bodyKey": "sketches.git-foundations.git-foundations-module-3-manage-tracked-files.modify-and-verify-tracked-files.sketch0.bodyMarkdown"
+    },
+    {
+      "id": "sketch1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.git-foundations.git-foundations-module-3-manage-tracked-files.modify-and-verify-tracked-files.sketch1.title",
+      "bodyKey": "sketches.git-foundations.git-foundations-module-3-manage-tracked-files.modify-and-verify-tracked-files.sketch1.bodyMarkdown"
+    },
+    {
+      "id": "sketch2",
+      "archetype": "paragraph",
+      "titleKey": "sketches.git-foundations.git-foundations-module-3-manage-tracked-files.modify-and-verify-tracked-files.sketch2.title",
+      "bodyKey": "sketches.git-foundations.git-foundations-module-3-manage-tracked-files.modify-and-verify-tracked-files.sketch2.bodyMarkdown"
+    },
+    {
+      "id": "sketch3",
+      "archetype": "paragraph",
+      "titleKey": "sketches.git-foundations.git-foundations-module-3-manage-tracked-files.modify-and-verify-tracked-files.sketch3.title",
+      "bodyKey": "sketches.git-foundations.git-foundations-module-3-manage-tracked-files.modify-and-verify-tracked-files.sketch3.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "single-choice-1",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.modify-and-verify-tracked-files.practice.single-choice-1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "c"
+      }
+    },
+    {
+      "id": "single-choice-2",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.modify-and-verify-tracked-files.practice.single-choice-2",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "d"
+      }
+    },
+    {
+      "id": "multi-choice-1",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.modify-and-verify-tracked-files.practice.multi-choice-1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "drag-reorder-1",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.modify-and-verify-tracked-files.practice.drag-reorder-1",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
+      }
+    },
+    {
+      "id": "fill-blank-choice-1",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.modify-and-verify-tracked-files.practice.fill-blank-choice-1",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "add"
+      }
+    },
+    {
+      "id": "fill-blank-choice-2",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.modify-and-verify-tracked-files.practice.fill-blank-choice-2",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "\"Update file\""
+      }
+    },
+    {
+      "id": "try-modify-and-verify-tracked-files-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.modify-and-verify-tracked-files.tryIt.try_modify_and_verify_tracked_files_sketch0",
+      "language": "bash",
+      "starterCode": "Meeting: 5 PM\n",
+      "starterFiles": [
+        {
+          "path": "release-notes/volunteer.md",
+          "content": "Meeting: 5 PM\n",
+          "language": "markdown",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^git\\s+status\\s+\\-\\-short$",
+            "message": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.modify-and-verify-tracked-files.tryIt.try_modify_and_verify_tracked_files_sketch0.terminalExpectations.requiredCommands.0.message"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.modify-and-verify-tracked-files.tryIt.try_modify_and_verify_tracked_files_sketch0.terminalExpectations.forbiddenCommands.0.message"
+          }
+        ]
+      },
+      "hiddenShellCheck": {
+        "script": "set -eu\nrepo=release-notes\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" branch --show-current)\" = main ] || fail \"The repository is not on main.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = 1 ] || fail \"The repository has the wrong number of commits.\"\n[ -n \"$(git -C \"$repo\" status --porcelain)\" ] || fail \"The exercise change is missing.\"\nexpected=$(printf \"%s\\n\" volunteer.md | sort)\nactual=$(git -C \"$repo\" ls-files | sort)\n[ \"$actual\" = \"$expected\" ] || fail \"The tracked file set is not correct.\"\nexpected_staged=$(printf \"%s\\n\"  | sort)\nactual_staged=$(git -C \"$repo\" diff --cached --name-only | sort)\n[ \"$actual_staged\" = \"$expected_staged\" ] || fail \"The staged file set is not correct.\"",
+        "timeoutMs": 15000
+      },
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "release-notes/volunteer.md",
+        "starterCode": "Meeting: 5 PM\n",
+        "starterFiles": [
+          {
+            "path": "release-notes/volunteer.md",
+            "content": "Meeting: 5 PM\n",
+            "language": "markdown",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "fixtureFiles": [
+          {
+            "path": ".zoeskoul/setup.sh",
+            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-notes\nmkdir -p release-notes\ngit -C release-notes init -q -b main\ngit -C release-notes config --local user.name \"ZoeSkoul Learner\"\ngit -C release-notes config --local user.email \"learner@zoeskoul.local\"\ncd release-notes\nprintf %s 'Meeting: 4 PM\n' > volunteer.md\ncd ..\ngit -C release-notes add -A\ngit -C release-notes commit -q -m 'Add project baseline'\ncd release-notes\nprintf %s 'Meeting: 5 PM\n' > volunteer.md\ncd ..\n",
+            "language": "bash",
+            "readOnly": true
+          },
+          {
+            "path": "release-notes/volunteer.md",
+            "content": "Meeting: 5 PM\n",
+            "language": "markdown"
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.modify-and-verify-tracked-files.tryIt.try_modify_and_verify_tracked_files_sketch0.instructions"
+      },
+      "ideConfig": {
+        "preset": "workspace",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/release-notes",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        }
+      },
+      "serviceOverrides": {
+        "preset": "workspace",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/release-notes",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        }
+      },
+      "fixtureFiles": [
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-notes\nmkdir -p release-notes\ngit -C release-notes init -q -b main\ngit -C release-notes config --local user.name \"ZoeSkoul Learner\"\ngit -C release-notes config --local user.email \"learner@zoeskoul.local\"\ncd release-notes\nprintf %s 'Meeting: 4 PM\n' > volunteer.md\ncd ..\ngit -C release-notes add -A\ngit -C release-notes commit -q -m 'Add project baseline'\ncd release-notes\nprintf %s 'Meeting: 5 PM\n' > volunteer.md\ncd ..\n",
+          "language": "bash",
+          "readOnly": true
+        },
+        {
+          "path": "release-notes/volunteer.md",
+          "content": "Meeting: 5 PM\n",
+          "language": "markdown"
+        }
+      ]
+    },
+    {
+      "id": "try-modify-and-verify-tracked-files-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.modify-and-verify-tracked-files.tryIt.try_modify_and_verify_tracked_files_sketch1",
+      "language": "bash",
+      "starterCode": "Meeting: 5 PM\n",
+      "starterFiles": [
+        {
+          "path": "release-notes/volunteer.md",
+          "content": "Meeting: 5 PM\n",
+          "language": "markdown",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^git\\s+diff\\s+\\-\\-\\s+volunteer\\.md$",
+            "message": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.modify-and-verify-tracked-files.tryIt.try_modify_and_verify_tracked_files_sketch1.terminalExpectations.requiredCommands.0.message"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.modify-and-verify-tracked-files.tryIt.try_modify_and_verify_tracked_files_sketch1.terminalExpectations.forbiddenCommands.0.message"
+          }
+        ]
+      },
+      "hiddenShellCheck": {
+        "script": "set -eu\nrepo=release-notes\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" branch --show-current)\" = main ] || fail \"The repository is not on main.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = 1 ] || fail \"The repository has the wrong number of commits.\"\n[ -n \"$(git -C \"$repo\" status --porcelain)\" ] || fail \"The exercise change is missing.\"\nexpected=$(printf \"%s\\n\" volunteer.md | sort)\nactual=$(git -C \"$repo\" ls-files | sort)\n[ \"$actual\" = \"$expected\" ] || fail \"The tracked file set is not correct.\"\nexpected_staged=$(printf \"%s\\n\"  | sort)\nactual_staged=$(git -C \"$repo\" diff --cached --name-only | sort)\n[ \"$actual_staged\" = \"$expected_staged\" ] || fail \"The staged file set is not correct.\"",
+        "timeoutMs": 15000
+      },
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "release-notes/volunteer.md",
+        "starterCode": "Meeting: 5 PM\n",
+        "starterFiles": [
+          {
+            "path": "release-notes/volunteer.md",
+            "content": "Meeting: 5 PM\n",
+            "language": "markdown",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "fixtureFiles": [
+          {
+            "path": ".zoeskoul/setup.sh",
+            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-notes\nmkdir -p release-notes\ngit -C release-notes init -q -b main\ngit -C release-notes config --local user.name \"ZoeSkoul Learner\"\ngit -C release-notes config --local user.email \"learner@zoeskoul.local\"\ncd release-notes\nprintf %s 'Meeting: 4 PM\n' > volunteer.md\ncd ..\ngit -C release-notes add -A\ngit -C release-notes commit -q -m 'Add project baseline'\ncd release-notes\nprintf %s 'Meeting: 5 PM\n' > volunteer.md\ncd ..\n",
+            "language": "bash",
+            "readOnly": true
+          },
+          {
+            "path": "release-notes/volunteer.md",
+            "content": "Meeting: 5 PM\n",
+            "language": "markdown"
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.modify-and-verify-tracked-files.tryIt.try_modify_and_verify_tracked_files_sketch1.instructions"
+      },
+      "ideConfig": {
+        "preset": "workspace",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/release-notes",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        }
+      },
+      "serviceOverrides": {
+        "preset": "workspace",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/release-notes",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        }
+      },
+      "fixtureFiles": [
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-notes\nmkdir -p release-notes\ngit -C release-notes init -q -b main\ngit -C release-notes config --local user.name \"ZoeSkoul Learner\"\ngit -C release-notes config --local user.email \"learner@zoeskoul.local\"\ncd release-notes\nprintf %s 'Meeting: 4 PM\n' > volunteer.md\ncd ..\ngit -C release-notes add -A\ngit -C release-notes commit -q -m 'Add project baseline'\ncd release-notes\nprintf %s 'Meeting: 5 PM\n' > volunteer.md\ncd ..\n",
+          "language": "bash",
+          "readOnly": true
+        },
+        {
+          "path": "release-notes/volunteer.md",
+          "content": "Meeting: 5 PM\n",
+          "language": "markdown"
+        }
+      ]
+    },
+    {
+      "id": "try-modify-and-verify-tracked-files-sketch2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.modify-and-verify-tracked-files.tryIt.try_modify_and_verify_tracked_files_sketch2",
+      "language": "bash",
+      "starterCode": "Meeting: 5 PM\n",
+      "starterFiles": [
+        {
+          "path": "release-notes/volunteer.md",
+          "content": "Meeting: 5 PM\n",
+          "language": "markdown",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^git\\s+add\\s+volunteer\\.md$",
+            "message": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.modify-and-verify-tracked-files.tryIt.try_modify_and_verify_tracked_files_sketch2.terminalExpectations.requiredCommands.0.message"
+          },
+          {
+            "pattern": "^git\\s+diff\\s+\\-\\-staged\\s+\\-\\-name\\-only$",
+            "message": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.modify-and-verify-tracked-files.tryIt.try_modify_and_verify_tracked_files_sketch2.terminalExpectations.requiredCommands.1.message"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.modify-and-verify-tracked-files.tryIt.try_modify_and_verify_tracked_files_sketch2.terminalExpectations.forbiddenCommands.0.message"
+          }
+        ]
+      },
+      "hiddenShellCheck": {
+        "script": "set -eu\nrepo=release-notes\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" branch --show-current)\" = main ] || fail \"The repository is not on main.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = 1 ] || fail \"The repository has the wrong number of commits.\"\n[ -n \"$(git -C \"$repo\" status --porcelain)\" ] || fail \"The exercise change is missing.\"\nexpected=$(printf \"%s\\n\" volunteer.md | sort)\nactual=$(git -C \"$repo\" ls-files | sort)\n[ \"$actual\" = \"$expected\" ] || fail \"The tracked file set is not correct.\"\nexpected_staged=$(printf \"%s\\n\" volunteer.md | sort)\nactual_staged=$(git -C \"$repo\" diff --cached --name-only | sort)\n[ \"$actual_staged\" = \"$expected_staged\" ] || fail \"The staged file set is not correct.\"",
+        "timeoutMs": 15000
+      },
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "release-notes/volunteer.md",
+        "starterCode": "Meeting: 5 PM\n",
+        "starterFiles": [
+          {
+            "path": "release-notes/volunteer.md",
+            "content": "Meeting: 5 PM\n",
+            "language": "markdown",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "fixtureFiles": [
+          {
+            "path": ".zoeskoul/setup.sh",
+            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-notes\nmkdir -p release-notes\ngit -C release-notes init -q -b main\ngit -C release-notes config --local user.name \"ZoeSkoul Learner\"\ngit -C release-notes config --local user.email \"learner@zoeskoul.local\"\ncd release-notes\nprintf %s 'Meeting: 4 PM\n' > volunteer.md\ncd ..\ngit -C release-notes add -A\ngit -C release-notes commit -q -m 'Add project baseline'\ncd release-notes\nprintf %s 'Meeting: 5 PM\n' > volunteer.md\ncd ..\n",
+            "language": "bash",
+            "readOnly": true
+          },
+          {
+            "path": "release-notes/volunteer.md",
+            "content": "Meeting: 5 PM\n",
+            "language": "markdown"
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.modify-and-verify-tracked-files.tryIt.try_modify_and_verify_tracked_files_sketch2.instructions"
+      },
+      "ideConfig": {
+        "preset": "workspace",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/release-notes",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        }
+      },
+      "serviceOverrides": {
+        "preset": "workspace",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/release-notes",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        }
+      },
+      "fixtureFiles": [
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-notes\nmkdir -p release-notes\ngit -C release-notes init -q -b main\ngit -C release-notes config --local user.name \"ZoeSkoul Learner\"\ngit -C release-notes config --local user.email \"learner@zoeskoul.local\"\ncd release-notes\nprintf %s 'Meeting: 4 PM\n' > volunteer.md\ncd ..\ngit -C release-notes add -A\ngit -C release-notes commit -q -m 'Add project baseline'\ncd release-notes\nprintf %s 'Meeting: 5 PM\n' > volunteer.md\ncd ..\n",
+          "language": "bash",
+          "readOnly": true
+        },
+        {
+          "path": "release-notes/volunteer.md",
+          "content": "Meeting: 5 PM\n",
+          "language": "markdown"
+        }
+      ]
+    },
+    {
+      "id": "try-modify-and-verify-tracked-files-sketch3",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.modify-and-verify-tracked-files.tryIt.try_modify_and_verify_tracked_files_sketch3",
+      "language": "bash",
+      "starterCode": "Meeting: 5 PM\n",
+      "starterFiles": [
+        {
+          "path": "release-notes/volunteer.md",
+          "content": "Meeting: 5 PM\n",
+          "language": "markdown",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^git\\s+commit\\s+\\-m\\s+\"Update\\s+volunteer\\s+meeting\\s+time\"$",
+            "message": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.modify-and-verify-tracked-files.tryIt.try_modify_and_verify_tracked_files_sketch3.terminalExpectations.requiredCommands.0.message"
+          },
+          {
+            "pattern": "^git\\s+log\\s+\\-1\\s+\\-\\-oneline$",
+            "message": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.modify-and-verify-tracked-files.tryIt.try_modify_and_verify_tracked_files_sketch3.terminalExpectations.requiredCommands.1.message"
+          },
+          {
+            "pattern": "^git\\s+status\\s+\\-\\-short$",
+            "message": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.modify-and-verify-tracked-files.tryIt.try_modify_and_verify_tracked_files_sketch3.terminalExpectations.requiredCommands.2.message"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.modify-and-verify-tracked-files.tryIt.try_modify_and_verify_tracked_files_sketch3.terminalExpectations.forbiddenCommands.0.message"
+          }
+        ]
+      },
+      "hiddenShellCheck": {
+        "script": "set -eu\nrepo=release-notes\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" branch --show-current)\" = main ] || fail \"The repository is not on main.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = 2 ] || fail \"The repository has the wrong number of commits.\"\n[ -z \"$(git -C \"$repo\" status --porcelain)\" ] || fail \"The working tree is not clean.\"\nexpected=$(printf \"%s\\n\" volunteer.md | sort)\nactual=$(git -C \"$repo\" ls-files | sort)\n[ \"$actual\" = \"$expected\" ] || fail \"The tracked file set is not correct.\"\n[ \"$(git -C \"$repo\" log -1 --format=%s)\" = 'Update volunteer meeting time' ] || fail \"The latest commit message is not correct.\"",
+        "timeoutMs": 15000
+      },
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "release-notes/volunteer.md",
+        "starterCode": "Meeting: 5 PM\n",
+        "starterFiles": [
+          {
+            "path": "release-notes/volunteer.md",
+            "content": "Meeting: 5 PM\n",
+            "language": "markdown",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "fixtureFiles": [
+          {
+            "path": ".zoeskoul/setup.sh",
+            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-notes\nmkdir -p release-notes\ngit -C release-notes init -q -b main\ngit -C release-notes config --local user.name \"ZoeSkoul Learner\"\ngit -C release-notes config --local user.email \"learner@zoeskoul.local\"\ncd release-notes\nprintf %s 'Meeting: 4 PM\n' > volunteer.md\ncd ..\ngit -C release-notes add -A\ngit -C release-notes commit -q -m 'Add project baseline'\ncd release-notes\nprintf %s 'Meeting: 5 PM\n' > volunteer.md\ncd ..\ngit -C release-notes add -- volunteer.md\n",
+            "language": "bash",
+            "readOnly": true
+          },
+          {
+            "path": "release-notes/volunteer.md",
+            "content": "Meeting: 5 PM\n",
+            "language": "markdown"
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.modify-and-verify-tracked-files.tryIt.try_modify_and_verify_tracked_files_sketch3.instructions"
+      },
+      "ideConfig": {
+        "preset": "workspace",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/release-notes",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        }
+      },
+      "serviceOverrides": {
+        "preset": "workspace",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/release-notes",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        }
+      },
+      "fixtureFiles": [
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-notes\nmkdir -p release-notes\ngit -C release-notes init -q -b main\ngit -C release-notes config --local user.name \"ZoeSkoul Learner\"\ngit -C release-notes config --local user.email \"learner@zoeskoul.local\"\ncd release-notes\nprintf %s 'Meeting: 4 PM\n' > volunteer.md\ncd ..\ngit -C release-notes add -A\ngit -C release-notes commit -q -m 'Add project baseline'\ncd release-notes\nprintf %s 'Meeting: 5 PM\n' > volunteer.md\ncd ..\ngit -C release-notes add -- volunteer.md\n",
+          "language": "bash",
+          "readOnly": true
+        },
+        {
+          "path": "release-notes/volunteer.md",
+          "content": "Meeting: 5 PM\n",
+          "language": "markdown"
+        }
+      ]
+    }
+  ]
+}

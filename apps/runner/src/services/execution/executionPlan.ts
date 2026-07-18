@@ -113,6 +113,19 @@ export function getExecutionPlan(
 
         case "bash":
             if (shell) {
+                /**
+                 * The browser synchronizes editor files after the PTY session
+                 * exists. Hidden lesson setup therefore runs from the terminal
+                 * bootstrap only after that synchronization finishes; running it
+                 * here would race with workspace replacement and lose Git state.
+                 */
+                const interactiveShell = [
+                    'cd "${START_CWD:-/workspace}"',
+                    "export PS1='[zoeskoul]\\w$ '",
+                    "umask 000",
+                    "exec /bin/bash --noprofile --norc -i",
+                ].join("\n");
+
                 return {
                     prepareDirs: prepareDirsForWorkspaceCwd(options.cwd),
                     runCmd: [
@@ -120,7 +133,7 @@ export function getExecutionPlan(
                         "--noprofile",
                         "--norc",
                         "-c",
-                        "export PS1='[zoeskoul]\\w$ '; umask 000; exec /bin/bash --noprofile --norc -i",
+                        interactiveShell,
                     ],
                 };
             }

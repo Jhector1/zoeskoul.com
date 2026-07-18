@@ -4,19 +4,19 @@
       "git-foundations-module-3-manage-tracked-files": {
         "ignore-generated-files": {
           "label": "Ignore Generated Files",
-          "summary": "Write focused .gitignore rules and verify that generated artifacts remain outside the repository history.",
+          "summary": "Write precise .gitignore rules, verify them, and keep generated output outside the maintained project history.",
           "cards": {
             "sketch0": {
-              "title": "The Role of .gitignore in Git"
+              "title": "Keep Rebuildable Output Out of History"
             },
             "sketch1": {
-              "title": "Using git check-ignore"
+              "title": "Prove a Rule Matches"
             },
             "sketch2": {
-              "title": "Why .gitignore Doesn't Untrack Files"
+              "title": "Ignoring Is Not Untracking"
             },
             "sketch3": {
-              "title": "Creating Effective .gitignore Rules"
+              "title": "Prefer Narrow Rules"
             },
             "quiz": {
               "title": "Practice"
@@ -25,103 +25,95 @@
           "tryIt": {
             "allowReveal": true,
             "try_ignore_generated_files_sketch0": {
-              "title": "Try it yourself: Create a .gitignore Rule",
-              "prompt": "Right after the sketch \"The Role of .gitignore in Git\", practice that exact idea with this task. Create a `.gitignore` rule to ignore all files in the `dist/` directory. Verify that the rule works by checking the status of a file `dist/output.js`.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter. Produce the result for create a .gitignore Rule so it reinforces Ignore Generated Files.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "title": "Add an Ignore Rule for Build Output",
+              "prompt": "The terminal opens inside the prepared `release-kit/` repository.\n\n`dist/app.js` is generated output. Write `dist/` to `.gitignore`, then use short status to confirm the generated file disappears while `.gitignore` remains visible.\n\nType each command in the terminal and press Enter.",
+              "hint": "Read the repository state first, then use the Git command that changes only the requested boundary.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+                "concept": ".gitignore rules keep matching untracked generated files out of normal status and staging workflows.",
+                "hint_1": "Use the exact file or repository named in the task; avoid broad commands that include unrelated work.",
+                "hint_2": "After the action, run the requested inspection command to confirm the final state."
               },
-              "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.",
-              "solutionCode": "bash .zoeskoul/setup.sh\ngit status",
-              "instructions": "Create a `.gitignore` rule to ignore all files in the `dist/` directory. Verify that the rule works by checking the status of a file `dist/output.js`.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+              "starterCode": "# Release Kit\n",
+              "solutionCode": "printf \"dist/\\n\" > .gitignore\ngit status --short",
+              "instructions": "The terminal opens inside the prepared `release-kit/` repository.\n\n`dist/app.js` is generated output. Write `dist/` to `.gitignore`, then use short status to confirm the generated file disappears while `.gitignore` remains visible.\n\nType each command in the terminal and press Enter.",
               "starterFiles": {
-                "main_sh": {
-                  "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.\n"
-                },
                 "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 1\\n' > dist/output.js\n"
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-kit\nmkdir -p release-kit\ngit -C release-kit init -q -b main\ngit -C release-kit config --local user.name \"ZoeSkoul Learner\"\ngit -C release-kit config --local user.email \"learner@zoeskoul.local\"\ncd release-kit\nprintf %s '# Release Kit\n' > README.md\ncd ..\ngit -C release-kit add -A\ngit -C release-kit commit -q -m 'Add project baseline'\ncd release-kit\nmkdir -p dist\nprintf %s 'bundled output\n' > dist/app.js\ncd ..\n"
                 }
               },
               "solutionFiles": {
-                "main_sh": {
-                  "content": "bash .zoeskoul/setup.sh\ngit status\n"
-                },
                 "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 1\\n' > dist/output.js\n"
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-kit\nmkdir -p release-kit\ngit -C release-kit init -q -b main\ngit -C release-kit config --local user.name \"ZoeSkoul Learner\"\ngit -C release-kit config --local user.email \"learner@zoeskoul.local\"\ncd release-kit\nprintf %s '# Release Kit\n' > README.md\ncd ..\ngit -C release-kit add -A\ngit -C release-kit commit -q -m 'Add project baseline'\ncd release-kit\nmkdir -p dist\nprintf %s 'bundled output\n' > dist/app.js\ncd ..\n"
                 }
               },
               "terminalExpectations": {
                 "forbiddenCommands": {
                   "0": {
                     "message": "Do not rewrite shared history in this Git practice task."
+                  }
+                },
+                "requiredCommands": {
+                  "0": {
+                    "message": "Run `git status --short`, then check your answer again."
                   }
                 }
               }
             },
             "try_ignore_generated_files_sketch1": {
-              "title": "Try it yourself: Verify Ignored Files",
-              "prompt": "Right after the sketch \"Using git check-ignore\", practice that exact idea with this task. Use `git check-ignore` to verify that `logs/error.log` is ignored by the `.gitignore` rule `logs/`.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter. Produce the result for verify Ignored Files so it reinforces Ignore Generated Files.",
-              "hint": "Read the Git task \"Verify Ignored Files\" and identify the repository state you need to create.",
+              "title": "Explain Why a File Is Ignored",
+              "prompt": "The terminal opens inside the prepared `release-kit/` repository.\n\nThe repository already ignores `logs/`. Use `git check-ignore -v` to identify the rule that matches `logs/error.log`.\n\nType each command in the terminal and press Enter.",
+              "hint": "Read the repository state first, then use the Git command that changes only the requested boundary.",
               "help": {
-                "concept": "This Git exercise checks the repository state produced by \"Verify Ignored Files\".",
-                "hint_1": "Use git status before and after each small change so you can see what moved between the working tree, staging area, and history.",
-                "hint_2": "Match the requested file names, branch names, and commit purpose before clicking Check Answer."
+                "concept": "git check-ignore -v reports the matching rule and file, which makes ignore behavior explainable instead of mysterious.",
+                "hint_1": "Use the exact file or repository named in the task; avoid broad commands that include unrelated work.",
+                "hint_2": "After the action, run the requested inspection command to confirm the final state."
               },
-              "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.",
-              "solutionCode": "bash .zoeskoul/setup.sh\ngit check-ignore\ngit check-ignore logs/error.log",
-              "instructions": "Use `git check-ignore` to verify that `logs/error.log` is ignored by the `.gitignore` rule `logs/`.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+              "starterCode": "# Release Kit\n",
+              "solutionCode": "git check-ignore -v logs/error.log",
+              "instructions": "The terminal opens inside the prepared `release-kit/` repository.\n\nThe repository already ignores `logs/`. Use `git check-ignore -v` to identify the rule that matches `logs/error.log`.\n\nType each command in the terminal and press Enter.",
               "starterFiles": {
-                "main_sh": {
-                  "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.\n"
-                },
                 "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 2\\n' > logs/error.log\n"
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-kit\nmkdir -p release-kit\ngit -C release-kit init -q -b main\ngit -C release-kit config --local user.name \"ZoeSkoul Learner\"\ngit -C release-kit config --local user.email \"learner@zoeskoul.local\"\ncd release-kit\nprintf %s '# Release Kit\n' > README.md\ncd ..\ncd release-kit\nprintf %s 'logs/\n' > .gitignore\ncd ..\ngit -C release-kit add -A\ngit -C release-kit commit -q -m 'Add project baseline'\ncd release-kit\nmkdir -p logs\nprintf %s 'preview warning\n' > logs/error.log\ncd ..\n"
                 }
               },
               "solutionFiles": {
-                "main_sh": {
-                  "content": "bash .zoeskoul/setup.sh\ngit check-ignore\ngit check-ignore logs/error.log\n"
-                },
                 "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 2\\n' > logs/error.log\n"
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-kit\nmkdir -p release-kit\ngit -C release-kit init -q -b main\ngit -C release-kit config --local user.name \"ZoeSkoul Learner\"\ngit -C release-kit config --local user.email \"learner@zoeskoul.local\"\ncd release-kit\nprintf %s '# Release Kit\n' > README.md\ncd ..\ncd release-kit\nprintf %s 'logs/\n' > .gitignore\ncd ..\ngit -C release-kit add -A\ngit -C release-kit commit -q -m 'Add project baseline'\ncd release-kit\nmkdir -p logs\nprintf %s 'preview warning\n' > logs/error.log\ncd ..\n"
                 }
               },
               "terminalExpectations": {
                 "forbiddenCommands": {
                   "0": {
                     "message": "Do not rewrite shared history in this Git practice task."
+                  }
+                },
+                "requiredCommands": {
+                  "0": {
+                    "message": "Run `git check-ignore -v logs/error.log`, then check your answer again."
                   }
                 }
               }
             },
             "try_ignore_generated_files_sketch2": {
-              "title": "Try it yourself: Untrack a Committed File",
-              "prompt": "Right after the sketch \"Why .gitignore Doesn't Untrack Files\", practice that exact idea with this task. A file `config/settings.json` was committed by mistake. Add it to `.gitignore` and untrack it without deleting it from the working directory.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter. Produce the result for untrack a Committed File so it reinforces Ignore Generated Files.",
-              "hint": "Read the Git task \"Untrack a Committed File\" and identify the repository state you need to create.",
+              "title": "Stop Tracking a Local Configuration File",
+              "prompt": "The terminal opens inside the prepared `release-kit/` repository.\n\n`config/local.json` was committed by mistake. The ignore rule now exists. Remove the file from Git’s index without deleting the working copy, then check status.\n\nType each command in the terminal and press Enter.",
+              "hint": "Read the repository state first, then use the Git command that changes only the requested boundary.",
               "help": {
-                "concept": "This Git exercise checks the repository state produced by \"Untrack a Committed File\".",
-                "hint_1": "Use git status before and after each small change so you can see what moved between the working tree, staging area, and history.",
-                "hint_2": "Match the requested file names, branch names, and commit purpose before clicking Check Answer."
+                "concept": "An ignore rule does not automatically untrack a file; git rm --cached removes it from the index while preserving the working copy.",
+                "hint_1": "Use the exact file or repository named in the task; avoid broad commands that include unrelated work.",
+                "hint_2": "After the action, run the requested inspection command to confirm the final state."
               },
-              "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.",
-              "solutionCode": "bash .zoeskoul/setup.sh\ngit rm --cached\ngit rm --cached config/settings.json",
-              "instructions": "A file `config/settings.json` was committed by mistake. Add it to `.gitignore` and untrack it without deleting it from the working directory.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+              "starterCode": "config/local.json\n",
+              "solutionCode": "git rm --cached config/local.json\ngit status --short",
+              "instructions": "The terminal opens inside the prepared `release-kit/` repository.\n\n`config/local.json` was committed by mistake. The ignore rule now exists. Remove the file from Git’s index without deleting the working copy, then check status.\n\nType each command in the terminal and press Enter.",
               "starterFiles": {
-                "main_sh": {
-                  "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.\n"
-                },
                 "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 3\\n' > config/settings.json\n"
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-kit\nmkdir -p release-kit/config\ngit -C release-kit init -q -b main\ngit -C release-kit config --local user.name \"ZoeSkoul Learner\"\ngit -C release-kit config --local user.email \"learner@zoeskoul.local\"\nprintf '%s\n' '{\"port\":3000}' > release-kit/config/local.json\ngit -C release-kit add config/local.json\ngit -C release-kit commit -q -m \"Add local configuration\"\nprintf '%s\n' 'config/local.json' > release-kit/.gitignore\ngit -C release-kit add .gitignore\ngit -C release-kit commit -q -m \"Ignore local configuration\"\n"
                 }
               },
               "solutionFiles": {
-                "main_sh": {
-                  "content": "bash .zoeskoul/setup.sh\ngit rm --cached\ngit rm --cached config/settings.json\n"
-                },
                 "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 3\\n' > config/settings.json\n"
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-kit\nmkdir -p release-kit/config\ngit -C release-kit init -q -b main\ngit -C release-kit config --local user.name \"ZoeSkoul Learner\"\ngit -C release-kit config --local user.email \"learner@zoeskoul.local\"\nprintf '%s\n' '{\"port\":3000}' > release-kit/config/local.json\ngit -C release-kit add config/local.json\ngit -C release-kit commit -q -m \"Add local configuration\"\nprintf '%s\n' 'config/local.json' > release-kit/.gitignore\ngit -C release-kit add .gitignore\ngit -C release-kit commit -q -m \"Ignore local configuration\"\n"
                 }
               },
               "terminalExpectations": {
@@ -129,41 +121,54 @@
                   "0": {
                     "message": "Do not rewrite shared history in this Git practice task."
                   }
+                },
+                "requiredCommands": {
+                  "0": {
+                    "message": "Run `git rm --cached config/local.json`, then check your answer again."
+                  },
+                  "1": {
+                    "message": "Run `git status --short`, then check your answer again."
+                  }
                 }
               }
             },
             "try_ignore_generated_files_sketch3": {
-              "title": "Try it yourself: Create a Pattern for Temporary Files",
-              "prompt": "Right after the sketch \"Creating Effective .gitignore Rules\", practice that exact idea with this task. Add a `.gitignore` rule to ignore all `.tmp` files in the project. Verify that `temp/data.tmp` is ignored.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter. Produce the result for create a Pattern for Temporary Files so it reinforces Ignore Generated Files.",
-              "hint": "Read the Git task \"Create a Pattern for Temporary Files\" and identify the repository state you need to create.",
+              "title": "Commit the Ignore Policy",
+              "prompt": "The terminal opens inside the prepared `release-kit/` repository.\n\n`.gitignore` is staged with rules for `dist/` and `*.log`. Commit it as `Ignore generated output`, then verify that build and log files remain ignored.\n\nType each command in the terminal and press Enter.",
+              "hint": "Read the repository state first, then use the Git command that changes only the requested boundary.",
               "help": {
-                "concept": "This Git exercise checks the repository state produced by \"Create a Pattern for Temporary Files\".",
-                "hint_1": "Use git status before and after each small change so you can see what moved between the working tree, staging area, and history.",
-                "hint_2": "Match the requested file names, branch names, and commit purpose before clicking Check Answer."
+                "concept": "Committing .gitignore shares the project policy while ignored generated files remain outside history.",
+                "hint_1": "Use the exact file or repository named in the task; avoid broad commands that include unrelated work.",
+                "hint_2": "After the action, run the requested inspection command to confirm the final state."
               },
-              "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.",
-              "solutionCode": "bash .zoeskoul/setup.sh\ngit check-ignore",
-              "instructions": "Add a `.gitignore` rule to ignore all `.tmp` files in the project. Verify that `temp/data.tmp` is ignored.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+              "starterCode": "# Release Kit\n",
+              "solutionCode": "git commit -m \"Ignore generated output\"\ngit check-ignore dist/app.js debug.log\ngit status --short",
+              "instructions": "The terminal opens inside the prepared `release-kit/` repository.\n\n`.gitignore` is staged with rules for `dist/` and `*.log`. Commit it as `Ignore generated output`, then verify that build and log files remain ignored.\n\nType each command in the terminal and press Enter.",
               "starterFiles": {
-                "main_sh": {
-                  "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.\n"
-                },
                 "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 4\\n' > temp/data.tmp\n"
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-kit\nmkdir -p release-kit\ngit -C release-kit init -q -b main\ngit -C release-kit config --local user.name \"ZoeSkoul Learner\"\ngit -C release-kit config --local user.email \"learner@zoeskoul.local\"\ncd release-kit\nprintf %s '# Release Kit\n' > README.md\ncd ..\ngit -C release-kit add -A\ngit -C release-kit commit -q -m 'Add project baseline'\ncd release-kit\nprintf %s 'dist/\n*.log\n' > .gitignore\ncd ..\ncd release-kit\nmkdir -p dist\nprintf %s 'bundled output\n' > dist/app.js\ncd ..\ncd release-kit\nprintf %s 'local log\n' > debug.log\ncd ..\ngit -C release-kit add -- .gitignore\n"
                 }
               },
               "solutionFiles": {
-                "main_sh": {
-                  "content": "bash .zoeskoul/setup.sh\ngit check-ignore\n"
-                },
                 "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 4\\n' > temp/data.tmp\n"
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-kit\nmkdir -p release-kit\ngit -C release-kit init -q -b main\ngit -C release-kit config --local user.name \"ZoeSkoul Learner\"\ngit -C release-kit config --local user.email \"learner@zoeskoul.local\"\ncd release-kit\nprintf %s '# Release Kit\n' > README.md\ncd ..\ngit -C release-kit add -A\ngit -C release-kit commit -q -m 'Add project baseline'\ncd release-kit\nprintf %s 'dist/\n*.log\n' > .gitignore\ncd ..\ncd release-kit\nmkdir -p dist\nprintf %s 'bundled output\n' > dist/app.js\ncd ..\ncd release-kit\nprintf %s 'local log\n' > debug.log\ncd ..\ngit -C release-kit add -- .gitignore\n"
                 }
               },
               "terminalExpectations": {
                 "forbiddenCommands": {
                   "0": {
                     "message": "Do not rewrite shared history in this Git practice task."
+                  }
+                },
+                "requiredCommands": {
+                  "0": {
+                    "message": "Run `git commit -m \"Ignore generated output\"`, then check your answer again."
+                  },
+                  "1": {
+                    "message": "Run `git check-ignore dist/app.js debug.log`, then check your answer again."
+                  },
+                  "2": {
+                    "message": "Run `git status --short`, then check your answer again."
                   }
                 }
               }
@@ -277,20 +282,20 @@
       "git-foundations-module-3-manage-tracked-files": {
         "ignore-generated-files": {
           "ignore-generated-files-sketch0": {
-            "title": "The Role of .gitignore in Git",
-            "bodyMarkdown": "In Git, the `.gitignore` file is crucial for managing which files and directories should be ignored by version control. This is particularly useful for excluding generated files, such as build artifacts or temporary files, that do not need to be tracked. \n\nWorked example: Consider a project where you have a `build/` directory that contains compiled files. You can create a `.gitignore` file with the line `build/` to ensure that all files within this directory are ignored by Git. This prevents unnecessary clutter in your repository and keeps your version history clean."
+            "title": "Keep Rebuildable Output Out of History",
+            "bodyMarkdown": "Generated previews, caches, and build output can usually be recreated. Recording them adds noise and merge conflicts without preserving meaningful source work.\n\nAdd a rule to `.gitignore`:\n\n```gitignore\npreview/\n```\n\nThe trailing slash makes the intent clear: ignore the directory and everything beneath it. Commit the rule itself so every contributor shares the same boundary."
           },
           "ignore-generated-files-sketch1": {
-            "title": "Using git check-ignore",
-            "bodyMarkdown": "The `git check-ignore` command is a powerful tool to verify if a specific file or directory is being ignored by your `.gitignore` rules. This command helps you understand why certain files are not being tracked.\n\nWorked example: Suppose you have a `.gitignore` file that includes `*.log` to ignore all log files. You can use `git check-ignore -v debug.log` to check if `debug.log` is ignored and see which rule is responsible for it."
+            "title": "Prove a Rule Matches",
+            "bodyMarkdown": "Verify an ignore rule instead of assuming it works:\n\n```bash\ngit check-ignore -v preview/index.html\n```\n\nThe command prints the matching rule and file when Git ignores the path. `-v` also names the rule source, which helps debug overlapping patterns.\n\nA silent result means no ignore rule matched."
           },
           "ignore-generated-files-sketch2": {
-            "title": "Why .gitignore Doesn't Untrack Files",
-            "bodyMarkdown": "A common misconception is that adding a file to `.gitignore` will automatically untrack it if it has already been committed. However, `.gitignore` only affects untracked files. To stop tracking a file that has already been committed, you need to use `git rm --cached`.\n\nWorked example: If `config.json` was committed by mistake and you want to ignore it, first add `config.json` to your `.gitignore`, then run `git rm --cached config.json` to untrack it while keeping it in your working directory."
+            "title": "Ignoring Is Not Untracking",
+            "bodyMarkdown": "`.gitignore` affects untracked paths. If a generated file is already committed, adding a rule does not remove it from history or the index.\n\nYou must first stop tracking the path while keeping the local file when that is the intended change:\n\n```bash\ngit rm --cached preview/index.html\n```\n\nReview this carefully; the next commit records the path’s removal from the repository."
           },
           "ignore-generated-files-sketch3": {
-            "title": "Creating Effective .gitignore Rules",
-            "bodyMarkdown": "Creating effective `.gitignore` rules involves understanding the patterns that match the files you want to ignore. You can use wildcards and directory patterns to specify which files should be excluded.\n\nWorked example: To ignore all `.tmp` files in any directory, you can add `*.tmp` to your `.gitignore`. For ignoring all files in a specific directory, such as `temp/`, simply add `temp/` to the file. This ensures that any temporary files or directories are not included in your version control."
+            "title": "Prefer Narrow Rules",
+            "bodyMarkdown": "Broad patterns can hide files the project actually needs. Prefer `preview/` over `*.html` when only one generated directory should be excluded.\n\nUse status and `git check-ignore -v` together. Status confirms ignored output stays out of the change list; check-ignore proves why.\n\nA good ignore file is small, intentional, and tied to the project’s real generated artifacts."
           }
         }
       }

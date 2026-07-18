@@ -16,11 +16,17 @@
   },
   "serviceDefaults": {
     "runnerBackend": "pty",
-    "layoutMode": "terminal_workspace",
+    "layoutMode": "default",
     "requires": {
       "files": true,
       "multiFile": true,
       "terminal": true
+    },
+    "preset": "runner",
+    "terminalBootstrap": {
+      "gitSafeDirectories": [
+        "/workspace/*"
+      ]
     }
   },
   "topic": {
@@ -67,25 +73,6 @@
       }
     },
     {
-      "id": "sketch2",
-      "kind": "sketch",
-      "titleKey": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.cards.sketch2.title",
-      "sketchId": "sketch2",
-      "height": 420,
-      "tryIt": {
-        "id": "try-configure-and-initialize-a-repository-sketch2",
-        "titleKey": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch2.title",
-        "promptKey": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch2.prompt",
-        "exerciseKey": "try-configure-and-initialize-a-repository-sketch2",
-        "difficulty": "easy",
-        "preferKind": "code_input",
-        "seedPolicy": "global",
-        "required": true,
-        "allowReveal": true,
-        "maxAttempts": null
-      }
-    },
-    {
       "id": "sketch3",
       "kind": "sketch",
       "titleKey": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.cards.sketch3.title",
@@ -96,6 +83,25 @@
         "titleKey": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch3.title",
         "promptKey": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch3.prompt",
         "exerciseKey": "try-configure-and-initialize-a-repository-sketch3",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.cards.sketch2.title",
+      "sketchId": "sketch2",
+      "height": 420,
+      "tryIt": {
+        "id": "try-configure-and-initialize-a-repository-sketch2",
+        "titleKey": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch2.title",
+        "promptKey": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch2.prompt",
+        "exerciseKey": "try-configure-and-initialize-a-repository-sketch2",
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -134,16 +140,16 @@
       "bodyKey": "sketches.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.sketch1.bodyMarkdown"
     },
     {
-      "id": "sketch2",
-      "archetype": "paragraph",
-      "titleKey": "sketches.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.sketch2.title",
-      "bodyKey": "sketches.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.sketch2.bodyMarkdown"
-    },
-    {
       "id": "sketch3",
       "archetype": "paragraph",
       "titleKey": "sketches.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.sketch3.title",
       "bodyKey": "sketches.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.sketch3.bodyMarkdown"
+    },
+    {
+      "id": "sketch2",
+      "archetype": "paragraph",
+      "titleKey": "sketches.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.sketch2.title",
+      "bodyKey": "sketches.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.sketch2.bodyMarkdown"
     }
   ],
   "exercises": [
@@ -253,45 +259,25 @@
       "weight": 1,
       "messageBase": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch0",
       "language": "bash",
-      "starterCode": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch0.starterCode",
+      "starterCode": "# Trail Journal\n",
       "starterFiles": [
         {
-          "path": "main.sh",
-          "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch0.starterCode",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        },
-        {
-          "path": ".zoeskoul/setup.sh",
-          "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch0.starterFiles.zoeskoul_setup_sh.content",
-          "language": "bash",
-          "readOnly": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "main.sh",
-          "content": "bash .zoeskoul/setup.sh\ncd project_alpha\ngit init -b main\n",
-          "language": "bash",
+          "path": "trail-journal/README.md",
+          "content": "# Trail Journal\n",
+          "language": "markdown",
           "isEntry": true,
           "entry": true
-        },
-        {
-          "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"project_alpha\"\nmkdir -p -- \"project_alpha\"\n",
-          "language": "bash",
-          "readOnly": true
         }
       ],
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
+            "pattern": "^git\\s+init\\s+\\-b\\s+main$",
+            "message": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch0.terminalExpectations.requiredCommands.0.message"
           },
           {
-            "pattern": "^git\\s+init\\s+-b\\s+main$"
+            "pattern": "^git\\s+branch\\s+\\-\\-show\\-current$",
+            "message": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch0.terminalExpectations.requiredCommands.1.message"
           }
         ],
         "forbiddenCommands": [
@@ -302,27 +288,33 @@
         ]
       },
       "hiddenShellCheck": {
-        "script": "set -eu\nrepo='project_alpha'\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ncommand -v git >/dev/null 2>&1 || fail \"Git is not available in this workspace.\"\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail 'Initialize a Git repository in project_alpha.'\nactual_branch=$(git -C \"$repo\" branch --show-current 2>/dev/null || true)\n[ \"$actual_branch\" = 'main' ] || fail 'Switch to the main branch.'",
+        "script": "set -eu\nrepo=trail-journal\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" branch --show-current)\" = main ] || fail \"The repository is not on main.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = 0 ] || fail \"The repository has the wrong number of commits.\"\n[ -n \"$(git -C \"$repo\" status --porcelain)\" ] || fail \"The exercise change is missing.\"\nexpected_untracked=$(printf \"%s\\n\" README.md | sort)\nactual_untracked=$(git -C \"$repo\" ls-files --others --exclude-standard | sort)\n[ \"$actual_untracked\" = \"$expected_untracked\" ] || fail \"The untracked file set is not correct.\"",
         "timeoutMs": 15000
       },
       "workspace": {
         "language": "bash",
-        "entryFilePath": "main.sh",
-        "starterCode": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch0.starterCode",
+        "entryFilePath": "trail-journal/README.md",
+        "starterCode": "# Trail Journal\n",
         "starterFiles": [
           {
-            "path": "main.sh",
-            "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch0.starterCode",
-            "language": "bash",
+            "path": "trail-journal/README.md",
+            "content": "# Trail Journal\n",
+            "language": "markdown",
             "isEntry": true,
-            "entry": true,
-            "readOnly": false
-          },
+            "entry": true
+          }
+        ],
+        "fixtureFiles": [
           {
             "path": ".zoeskoul/setup.sh",
-            "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch0.starterFiles.zoeskoul_setup_sh.content",
+            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf trail-journal\nmkdir -p trail-journal\ncd trail-journal\nprintf %s '# Trail Journal\n' > README.md\ncd ..\n",
             "language": "bash",
             "readOnly": true
+          },
+          {
+            "path": "trail-journal/README.md",
+            "content": "# Trail Journal\n",
+            "language": "markdown"
           }
         ]
       },
@@ -331,7 +323,70 @@
         "type": "shell_task",
         "mode": "terminal_workspace",
         "instructions": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch0.instructions"
-      }
+      },
+      "ideConfig": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/trail-journal",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "serviceOverrides": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/trail-journal",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "fixtureFiles": [
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf trail-journal\nmkdir -p trail-journal\ncd trail-journal\nprintf %s '# Trail Journal\n' > README.md\ncd ..\n",
+          "language": "bash",
+          "readOnly": true
+        },
+        {
+          "path": "trail-journal/README.md",
+          "content": "# Trail Journal\n",
+          "language": "markdown"
+        }
+      ]
     },
     {
       "id": "try-configure-and-initialize-a-repository-sketch1",
@@ -340,48 +395,25 @@
       "weight": 1,
       "messageBase": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch1",
       "language": "bash",
-      "starterCode": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch1.starterCode",
+      "starterCode": "# Trail Journal\n",
       "starterFiles": [
         {
-          "path": "main.sh",
-          "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch1.starterCode",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        },
-        {
-          "path": ".zoeskoul/setup.sh",
-          "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch1.starterFiles.zoeskoul_setup_sh.content",
-          "language": "bash",
-          "readOnly": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "main.sh",
-          "content": "bash .zoeskoul/setup.sh\ncd project_beta\nls .git\ncat .git/HEAD\n",
-          "language": "bash",
+          "path": "trail-journal/README.md",
+          "content": "# Trail Journal\n",
+          "language": "markdown",
           "isEntry": true,
           "entry": true
-        },
-        {
-          "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"project_beta\"\nmkdir -p -- \"project_beta\"\ngit -C \"project_beta\" init -q -b main\ngit -C \"project_beta\" config user.name \"ZoeSkoul Learner\"\ngit -C \"project_beta\" config user.email \"learner@zoeskoul.local\"\n",
-          "language": "bash",
-          "readOnly": true
         }
       ],
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
+            "pattern": "^ls\\s+\\.git$",
+            "message": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch1.terminalExpectations.requiredCommands.0.message"
           },
           {
-            "pattern": "^ls\\s+\\.git$"
-          },
-          {
-            "pattern": "^cat\\s+\\.git/HEAD$"
+            "pattern": "^cat\\s+\\.git/HEAD$",
+            "message": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch1.terminalExpectations.requiredCommands.1.message"
           }
         ],
         "forbiddenCommands": [
@@ -392,27 +424,33 @@
         ]
       },
       "hiddenShellCheck": {
-        "script": "set -eu\nrepo='project_beta'\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ncommand -v git >/dev/null 2>&1 || fail \"Git is not available in this workspace.\"\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail 'Initialize a Git repository in project_beta.'\nactual_branch=$(git -C \"$repo\" branch --show-current 2>/dev/null || true)\n[ \"$actual_branch\" = 'main' ] || fail 'Switch to the main branch.'",
+        "script": "set -eu\nrepo=trail-journal\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" branch --show-current)\" = main ] || fail \"The repository is not on main.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = 0 ] || fail \"The repository has the wrong number of commits.\"\n[ -n \"$(git -C \"$repo\" status --porcelain)\" ] || fail \"The exercise change is missing.\"",
         "timeoutMs": 15000
       },
       "workspace": {
         "language": "bash",
-        "entryFilePath": "main.sh",
-        "starterCode": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch1.starterCode",
+        "entryFilePath": "trail-journal/README.md",
+        "starterCode": "# Trail Journal\n",
         "starterFiles": [
           {
-            "path": "main.sh",
-            "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch1.starterCode",
-            "language": "bash",
+            "path": "trail-journal/README.md",
+            "content": "# Trail Journal\n",
+            "language": "markdown",
             "isEntry": true,
-            "entry": true,
-            "readOnly": false
-          },
+            "entry": true
+          }
+        ],
+        "fixtureFiles": [
           {
             "path": ".zoeskoul/setup.sh",
-            "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch1.starterFiles.zoeskoul_setup_sh.content",
+            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf trail-journal\nmkdir -p trail-journal\ncd trail-journal\nprintf %s '# Trail Journal\n' > README.md\ncd ..\ngit -C trail-journal init -q -b main\n",
             "language": "bash",
             "readOnly": true
+          },
+          {
+            "path": "trail-journal/README.md",
+            "content": "# Trail Journal\n",
+            "language": "markdown"
           }
         ]
       },
@@ -421,7 +459,70 @@
         "type": "shell_task",
         "mode": "terminal_workspace",
         "instructions": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch1.instructions"
-      }
+      },
+      "ideConfig": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/trail-journal",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "serviceOverrides": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/trail-journal",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "fixtureFiles": [
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf trail-journal\nmkdir -p trail-journal\ncd trail-journal\nprintf %s '# Trail Journal\n' > README.md\ncd ..\ngit -C trail-journal init -q -b main\n",
+          "language": "bash",
+          "readOnly": true
+        },
+        {
+          "path": "trail-journal/README.md",
+          "content": "# Trail Journal\n",
+          "language": "markdown"
+        }
+      ]
     },
     {
       "id": "try-configure-and-initialize-a-repository-sketch2",
@@ -430,45 +531,25 @@
       "weight": 1,
       "messageBase": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch2",
       "language": "bash",
-      "starterCode": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch2.starterCode",
+      "starterCode": "# Trail Journal\n",
       "starterFiles": [
         {
-          "path": "main.sh",
-          "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch2.starterCode",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        },
-        {
-          "path": ".zoeskoul/setup.sh",
-          "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch2.starterFiles.zoeskoul_setup_sh.content",
-          "language": "bash",
-          "readOnly": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "main.sh",
-          "content": "bash .zoeskoul/setup.sh\ncd project_gamma\ngit status --short\n",
-          "language": "bash",
+          "path": "trail-journal/README.md",
+          "content": "# Trail Journal\n",
+          "language": "markdown",
           "isEntry": true,
           "entry": true
-        },
-        {
-          "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"project_gamma\"\nmkdir -p -- \"project_gamma\"\ngit -C \"project_gamma\" init -q -b main\ngit -C \"project_gamma\" config user.name \"ZoeSkoul Learner\"\ngit -C \"project_gamma\" config user.email \"learner@zoeskoul.local\"\nprintf %s \"Draft launch checklist\\n\" > \"project_gamma/launch-notes.txt\"\n",
-          "language": "bash",
-          "readOnly": true
         }
       ],
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
+            "pattern": "^git\\s+config\\s+\\-\\-local\\s+user\\.name\\s+\"ZoeSkoul\\s+Learner\"$",
+            "message": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch2.terminalExpectations.requiredCommands.0.message"
           },
           {
-            "pattern": "^git\\s+status\\s+--short$"
+            "pattern": "^git\\s+config\\s+\\-\\-local\\s+user\\.email\\s+\"learner@zoeskoul\\.local\"$",
+            "message": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch2.terminalExpectations.requiredCommands.1.message"
           }
         ],
         "forbiddenCommands": [
@@ -479,27 +560,33 @@
         ]
       },
       "hiddenShellCheck": {
-        "script": "set -eu\nrepo='project_gamma'\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ncommand -v git >/dev/null 2>&1 || fail \"Git is not available in this workspace.\"\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail 'Initialize a Git repository in project_gamma.'\nactual_branch=$(git -C \"$repo\" branch --show-current 2>/dev/null || true)\n[ \"$actual_branch\" = 'main' ] || fail 'Switch to the main branch.'\nstatus_output=$(git -C \"$repo\" status --porcelain --untracked-files=all)\n[ -n \"$status_output\" ] || fail 'Make the requested repository change before checking the task.'\ngit -C \"$repo\" ls-files --others --exclude-standard -- 'launch-notes.txt' | grep -Fxq -- 'launch-notes.txt' || fail 'Leave launch-notes.txt untracked.'",
+        "script": "set -eu\nrepo=trail-journal\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" branch --show-current)\" = main ] || fail \"The repository is not on main.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = 0 ] || fail \"The repository has the wrong number of commits.\"\n[ -n \"$(git -C \"$repo\" status --porcelain)\" ] || fail \"The exercise change is missing.\"\n[ \"$(git -C \"$repo\" config --local --get user.name)\" = \"ZoeSkoul Learner\" ]\n[ \"$(git -C \"$repo\" config --local --get user.email)\" = \"learner@zoeskoul.local\" ]",
         "timeoutMs": 15000
       },
       "workspace": {
         "language": "bash",
-        "entryFilePath": "main.sh",
-        "starterCode": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch2.starterCode",
+        "entryFilePath": "trail-journal/README.md",
+        "starterCode": "# Trail Journal\n",
         "starterFiles": [
           {
-            "path": "main.sh",
-            "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch2.starterCode",
-            "language": "bash",
+            "path": "trail-journal/README.md",
+            "content": "# Trail Journal\n",
+            "language": "markdown",
             "isEntry": true,
-            "entry": true,
-            "readOnly": false
-          },
+            "entry": true
+          }
+        ],
+        "fixtureFiles": [
           {
             "path": ".zoeskoul/setup.sh",
-            "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch2.starterFiles.zoeskoul_setup_sh.content",
+            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf trail-journal\nmkdir -p trail-journal\ncd trail-journal\nprintf %s '# Trail Journal\n' > README.md\ncd ..\ngit -C trail-journal init -q -b main\n",
             "language": "bash",
             "readOnly": true
+          },
+          {
+            "path": "trail-journal/README.md",
+            "content": "# Trail Journal\n",
+            "language": "markdown"
           }
         ]
       },
@@ -508,7 +595,70 @@
         "type": "shell_task",
         "mode": "terminal_workspace",
         "instructions": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch2.instructions"
-      }
+      },
+      "ideConfig": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/trail-journal",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "serviceOverrides": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/trail-journal",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "fixtureFiles": [
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf trail-journal\nmkdir -p trail-journal\ncd trail-journal\nprintf %s '# Trail Journal\n' > README.md\ncd ..\ngit -C trail-journal init -q -b main\n",
+          "language": "bash",
+          "readOnly": true
+        },
+        {
+          "path": "trail-journal/README.md",
+          "content": "# Trail Journal\n",
+          "language": "markdown"
+        }
+      ]
     },
     {
       "id": "try-configure-and-initialize-a-repository-sketch3",
@@ -517,48 +667,21 @@
       "weight": 1,
       "messageBase": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch3",
       "language": "bash",
-      "starterCode": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch3.starterCode",
+      "starterCode": "# Trail Journal\n",
       "starterFiles": [
         {
-          "path": "main.sh",
-          "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch3.starterCode",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        },
-        {
-          "path": ".zoeskoul/setup.sh",
-          "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch3.starterFiles.zoeskoul_setup_sh.content",
-          "language": "bash",
-          "readOnly": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "main.sh",
-          "content": "bash .zoeskoul/setup.sh\ncd project_delta\ngit config --local user.name \"ZoeSkoul Learner\"\ngit config --local user.email \"learner@zoeskoul.local\"\n",
-          "language": "bash",
+          "path": "trail-journal/README.md",
+          "content": "# Trail Journal\n",
+          "language": "markdown",
           "isEntry": true,
           "entry": true
-        },
-        {
-          "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"project_delta\"\nmkdir -p -- \"project_delta\"\ngit -C \"project_delta\" init -q -b main\n",
-          "language": "bash",
-          "readOnly": true
         }
       ],
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
-          },
-          {
-            "pattern": "^git\\s+config\\s+--local\\s+user\\.name\\s+\"ZoeSkoul\\s+Learner\"$"
-          },
-          {
-            "pattern": "^git\\s+config\\s+--local\\s+user\\.email\\s+\"learner@zoeskoul\\.local\"$"
+            "pattern": "^git\\s+status\\s+\\-\\-short$",
+            "message": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch3.terminalExpectations.requiredCommands.0.message"
           }
         ],
         "forbiddenCommands": [
@@ -569,27 +692,33 @@
         ]
       },
       "hiddenShellCheck": {
-        "script": "set -eu\n(\ntest \"$(git -C project_delta config --local user.name)\" = \"ZoeSkoul Learner\" && test \"$(git -C project_delta config --local user.email)\" = \"learner@zoeskoul.local\"\n)\n(\nset -eu\nrepo='project_delta'\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ncommand -v git >/dev/null 2>&1 || fail \"Git is not available in this workspace.\"\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail 'Initialize a Git repository in project_delta.'\nactual_branch=$(git -C \"$repo\" branch --show-current 2>/dev/null || true)\n[ \"$actual_branch\" = 'main' ] || fail 'Switch to the main branch.'\n)",
+        "script": "set -eu\nrepo=trail-journal\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" branch --show-current)\" = main ] || fail \"The repository is not on main.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = 0 ] || fail \"The repository has the wrong number of commits.\"\n[ -n \"$(git -C \"$repo\" status --porcelain)\" ] || fail \"The exercise change is missing.\"\nexpected_untracked=$(printf \"%s\\n\" README.md | sort)\nactual_untracked=$(git -C \"$repo\" ls-files --others --exclude-standard | sort)\n[ \"$actual_untracked\" = \"$expected_untracked\" ] || fail \"The untracked file set is not correct.\"\nexpected_staged=$(printf \"%s\\n\"  | sort)\nactual_staged=$(git -C \"$repo\" diff --cached --name-only | sort)\n[ \"$actual_staged\" = \"$expected_staged\" ] || fail \"The staged file set is not correct.\"",
         "timeoutMs": 15000
       },
       "workspace": {
         "language": "bash",
-        "entryFilePath": "main.sh",
-        "starterCode": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch3.starterCode",
+        "entryFilePath": "trail-journal/README.md",
+        "starterCode": "# Trail Journal\n",
         "starterFiles": [
           {
-            "path": "main.sh",
-            "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch3.starterCode",
-            "language": "bash",
+            "path": "trail-journal/README.md",
+            "content": "# Trail Journal\n",
+            "language": "markdown",
             "isEntry": true,
-            "entry": true,
-            "readOnly": false
-          },
+            "entry": true
+          }
+        ],
+        "fixtureFiles": [
           {
             "path": ".zoeskoul/setup.sh",
-            "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch3.starterFiles.zoeskoul_setup_sh.content",
+            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf trail-journal\nmkdir -p trail-journal\ncd trail-journal\nprintf %s '# Trail Journal\n' > README.md\ncd ..\ngit -C trail-journal init -q -b main\ngit -C trail-journal config --local user.name \"ZoeSkoul Learner\"\ngit -C trail-journal config --local user.email \"learner@zoeskoul.local\"\n",
             "language": "bash",
             "readOnly": true
+          },
+          {
+            "path": "trail-journal/README.md",
+            "content": "# Trail Journal\n",
+            "language": "markdown"
           }
         ]
       },
@@ -598,7 +727,70 @@
         "type": "shell_task",
         "mode": "terminal_workspace",
         "instructions": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch3.instructions"
-      }
+      },
+      "ideConfig": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/trail-journal",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "serviceOverrides": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/trail-journal",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "fixtureFiles": [
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf trail-journal\nmkdir -p trail-journal\ncd trail-journal\nprintf %s '# Trail Journal\n' > README.md\ncd ..\ngit -C trail-journal init -q -b main\ngit -C trail-journal config --local user.name \"ZoeSkoul Learner\"\ngit -C trail-journal config --local user.email \"learner@zoeskoul.local\"\n",
+          "language": "bash",
+          "readOnly": true
+        },
+        {
+          "path": "trail-journal/README.md",
+          "content": "# Trail Journal\n",
+          "language": "markdown"
+        }
+      ]
     }
   ]
 }

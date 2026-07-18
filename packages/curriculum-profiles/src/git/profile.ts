@@ -1,3 +1,4 @@
+import type { ManifestCodeInput, ManifestStarterFile } from "@zoeskoul/curriculum-contracts";
 import type {
     CodeInputHelpFallback,
     CourseProfile,
@@ -43,6 +44,7 @@ function inferSafeGitCommandExpectations(
     return {
         requiredCommands: commands.map((command) => ({
             pattern: commandPattern(command),
+            message: `Run \`${command}\`, then check your answer again.`,
         })),
     };
 }
@@ -61,6 +63,235 @@ function repairMissingGitEvidence(
         ...exercise,
         terminalExpectations,
     };
+}
+
+
+
+type GitTerminalManifest = ManifestCodeInput & {
+    ideConfig?: Record<string, unknown>;
+    fixtureFiles?: ManifestStarterFile[];
+    workspace?: (NonNullable<ManifestCodeInput["workspace"]> & {
+        fixtureFiles?: ManifestStarterFile[];
+    }) | null;
+};
+
+/**
+ * Git repositories are materialized in an isolated PTY workspace that may be
+ * written by a different container user than the interactive shell. Keep the
+ * trust scope narrow and profile-owned so learners never see infrastructure
+ * ownership errors or setup commands.
+ */
+const GIT_SAFE_WORKSPACE_SCOPE = "/workspace/*";
+const GIT_SETUP_SCRIPT_PATH = ".zoeskoul/setup.sh";
+
+function gitLearningServiceDefaults() {
+    return {
+        preset: "runner" as const,
+        runnerBackend: "pty" as const,
+        layoutMode: "default" as const,
+        terminalBootstrap: {
+            gitSafeDirectories: [GIT_SAFE_WORKSPACE_SCOPE],
+            setupScriptPath: GIT_SETUP_SCRIPT_PATH,
+        },
+        requires: { files: true, multiFile: true, terminal: true },
+    };
+}
+
+function gitRepositoryCwd(exercise: ProfileCodeInputDraft): string {
+    const repositoryPath = exercise.gitExpectations?.repositoryPath?.trim();
+    return repositoryPath ? `/workspace/${repositoryPath}` : "/workspace";
+}
+
+function gitManifestFilePath(file: ManifestStarterFile): string {
+    return String(file.path ?? file.name ?? "").trim();
+}
+
+function stableGitWorkspaceStateKey(args: {
+    terminalCwd: string;
+    fixtureFiles: ManifestStarterFile[];
+}): string {
+    const serialized = JSON.stringify({
+        terminalCwd: args.terminalCwd,
+        fixtureFiles: [...args.fixtureFiles]
+            .map((file) => ({
+                path: gitManifestFilePath(file),
+                content: String(file.content ?? ""),
+                language: String(file.language ?? ""),
+                readOnly: file.readOnly === true,
+            }))
+            .sort((a, b) => a.path.localeCompare(b.path)),
+    });
+    let hash = 0x811c9dc5;
+
+    for (let index = 0; index < serialized.length; index += 1) {
+        hash ^= serialized.charCodeAt(index);
+        hash = Math.imul(hash, 0x01000193);
+    }
+
+    return `git-state-v1-${(hash >>> 0).toString(36)}`;
+}
+
+function isInternalGitWorkspaceFile(path: string): boolean {
+    return path === "main.sh" || path.startsWith(".zoeskoul/");
+}
+
+function gitEditorLanguage(path: string): string {
+    const lower = path.toLowerCase();
+
+    if (lower.endsWith(".md") || lower.endsWith(".markdown")) return "markdown";
+    if (lower.endsWith(".json")) return "json";
+    if (lower.endsWith(".html")) return "html";
+    if (lower.endsWith(".css")) return "css";
+    if (lower.endsWith(".js")) return "javascript";
+    if (lower.endsWith(".ts")) return "typescript";
+    if (lower.endsWith(".sh")) return "bash";
+
+    return "text";
+}
+
+function withoutEntryFlags(file: ManifestStarterFile): ManifestStarterFile {
+    const {
+        isEntry: _isEntry,
+        entry: _entry,
+        ...rest
+    } = file;
+
+    return rest;
+}
+
+function gitFixtureFiles(manifest: ManifestCodeInput): ManifestStarterFile[] {
+    if (!Array.isArray(manifest.starterFiles)) return [];
+
+    return manifest.starterFiles
+        .filter((file) => gitManifestFilePath(file) !== "main.sh")
+        .map((file) => {
+            const path = gitManifestFilePath(file);
+
+            return {
+                ...withoutEntryFlags(file),
+                path,
+                language: path.startsWith(".zoeskoul/")
+                    ? "bash"
+                    : gitEditorLanguage(path),
+            };
+        });
+}
+
+function gitVisibleStarterFiles(
+    fixtureFiles: ManifestStarterFile[],
+): ManifestStarterFile[] {
+    return fixtureFiles.filter(
+        (file) => !isInternalGitWorkspaceFile(gitManifestFilePath(file)),
+    );
+}
+
+function pickGitEntryFilePath(args: {
+    exercise: ProfileCodeInputDraft;
+    files: ManifestStarterFile[];
+}): string {
+    const repositoryPath = args.exercise.gitExpectations?.repositoryPath?.trim();
+    const candidates = args.files
+        .map((file) => gitManifestFilePath(file))
+        .filter(Boolean);
+    const repositoryCandidates = repositoryPath
+        ? candidates.filter(
+            (path) =>
+                path === repositoryPath ||
+                path.startsWith(`${repositoryPath}/`),
+        )
+        : candidates;
+    const pool =
+        repositoryCandidates.length > 0 ? repositoryCandidates : candidates;
+
+    return (
+        pool.find((path) => /(^|\/)readme\.md$/i.test(path)) ??
+        pool.find((path) => /\.md$/i.test(path)) ??
+        pool[0] ??
+        "README.md"
+    );
+}
+
+function markGitEntryFile(args: {
+    files: ManifestStarterFile[];
+    entryFilePath: string;
+}): ManifestStarterFile[] {
+    return args.files.map((file) => {
+        const path = gitManifestFilePath(file);
+        const entry = path === args.entryFilePath;
+
+        return {
+            ...withoutEntryFlags(file),
+            path,
+            language: gitEditorLanguage(path),
+            ...(entry ? { isEntry: true, entry: true } : {}),
+        };
+    });
+}
+
+function withGitEditorWorkspace(args: {
+    manifest: ManifestCodeInput;
+    exercise: ProfileCodeInputDraft;
+}): ManifestCodeInput {
+    const terminalCwd = gitRepositoryCwd(args.exercise);
+    const fixtureFiles = gitFixtureFiles(args.manifest);
+    const serviceDefaults = gitLearningServiceDefaults();
+    const terminalBootstrap = {
+        ...serviceDefaults.terminalBootstrap,
+        workspaceStateKey: stableGitWorkspaceStateKey({
+            terminalCwd,
+            fixtureFiles,
+        }),
+    };
+    const visibleFiles = gitVisibleStarterFiles(fixtureFiles);
+    const entryFilePath = pickGitEntryFilePath({
+        exercise: args.exercise,
+        files: visibleFiles,
+    });
+    const starterFiles = markGitEntryFile({
+        files: visibleFiles,
+        entryFilePath,
+    });
+    const entryFile = starterFiles.find(
+        (file) => gitManifestFilePath(file) === entryFilePath,
+    );
+    const starterCode = String(entryFile?.content ?? "");
+    const ideConfig = {
+        ...serviceDefaults,
+        terminalBootstrap,
+        terminalSessionScope: "exercise",
+        terminalCwd,
+        fileActions: {
+            enabled: true,
+            createFile: true,
+            createFolder: true,
+            rename: true,
+            delete: true,
+            dragDrop: false,
+        },
+    };
+    const manifest = args.manifest as GitTerminalManifest;
+    const {
+        starterFiles: _starterFiles,
+        solutionFiles: _solutionFiles,
+        ...manifestWithoutSyntheticShellFiles
+    } = manifest;
+
+    return {
+        ...manifestWithoutSyntheticShellFiles,
+        starterCode,
+        starterFiles,
+        serviceOverrides: ideConfig as ManifestCodeInput["serviceOverrides"],
+        ideConfig,
+        ...(fixtureFiles.length > 0 ? { fixtureFiles } : {}),
+        workspace: {
+            ...(manifest.workspace ?? {}),
+            language: "bash",
+            entryFilePath,
+            starterCode,
+            starterFiles,
+            ...(fixtureFiles.length > 0 ? { fixtureFiles } : {}),
+        },
+    } as ManifestCodeInput;
 }
 
 function makeGitCodeHelpFallback(args: {
@@ -86,6 +317,9 @@ const baseGitProfile = createTerminalCourseProfile({
     validationLabel: "Git",
     defaultStarterCode: "# Use the terminal for this Git task.\n",
     forceTerminalWorkspace: true,
+    buildModuleServiceDefaults() {
+        return gitLearningServiceDefaults();
+    },
     makeHelpFallback: makeGitCodeHelpFallback,
     requireTerminalWorkspace() {
         return true;
@@ -119,7 +353,9 @@ const baseGitProfile = createTerminalCourseProfile({
                 : "If the exercise policy requires code_input, put those code_input items inside quizDraft.",
             "Never replace a required Git code_input with fill_blank_choice, single_choice, multi_choice, or drag_reorder.",
             "For all_sketches placement, emit one distinct try-<topic-id>-sketchN code_input per sketch, up to the exact required code_input count.",
-            'Every Git code_input must use fixedLanguage "bash", recipeType "shell_task", mode "terminal_workspace", and entryFilePath "main.sh".',
+            'Every Git code_input must use fixedLanguage "bash", recipeType "shell_task", and mode "terminal_workspace".',
+            "Use a real project file such as README.md, notes.md, or .gitignore as the editor entry file; never create a synthetic main.sh for Git coursework.",
+            "Keep the Git editor, explorer, and terminal visible together. Git inherits the shared PTY runtime but uses the normal workspace layout instead of the Linux terminal-only presentation.",
             "Every Git terminal instruction must explicitly tell the learner to type the command and press Enter.",
             'Every non-project technical Git topic must include a concrete teaching walkthrough in sketchBlocks whose body explicitly begins with "Worked example:".',
             'A practice.conceptualOnly topic omits code_input practice; it does not omit the concrete "Worked example:" teaching walkthrough.',
@@ -130,7 +366,10 @@ const baseGitProfile = createTerminalCourseProfile({
             "Prefer gitExpectations fields such as repositoryInitialized, currentBranch, cleanWorkingTree, commit counts, trackedFiles, ignoredFiles, requiredBranches, commitMessages, headFiles, and remotes.",
             "Use terminalExpectations only when the exact safe command matters; repository state remains the primary proof of completion.",
             "For a command-observation task such as git status or git log, use terminalExpectations.requiredCommands with a regex such as ^git\\s+status$.",
-            "Configure a deterministic local identity in starter setup or instructions: ZoeSkoul Learner and learner@zoeskoul.local.",
+            "Prepare prerequisite files and repository history internally; never ask the learner to run .zoeskoul/setup.sh or another platform bootstrap command.",
+            "Treat every Git code_input as an isolated workspace: its hidden setup must reconstruct all prerequisite files, branches, commits, index state, and local remotes instead of relying on a previous exercise or PTY session.",
+            "Set gitExpectations.repositoryPath to the learner repository folder so the shared terminal workspace opens there automatically.",
+            "Configure a deterministic local identity in the internal starter setup: ZoeSkoul Learner and learner@zoeskoul.local.",
             "Set the initial branch to main whenever branch naming matters.",
             "Use local bare repositories for origin, push, fetch, pull, and remote-tracking exercises.",
             "Do not require GitHub credentials, personal access tokens, public network access, or external repositories.",
@@ -142,9 +381,11 @@ const baseGitProfile = createTerminalCourseProfile({
 
 
 const baseGitRepairDraft = baseGitProfile.codeInput?.repairDraft;
+const baseGitBuildManifest = baseGitProfile.codeInput?.buildManifest;
 
 export const gitProfile: CourseProfile = {
     ...baseGitProfile,
+    defaultEntryFileName: "README.md",
     ...(baseGitProfile.codeInput
         ? {
             codeInput: {
@@ -153,6 +394,16 @@ export const gitProfile: CourseProfile = {
                     const repaired =
                         baseGitRepairDraft?.(args) ?? args.exercise;
                     return repairMissingGitEvidence(repaired);
+                },
+                buildManifest(args) {
+                    if (!baseGitBuildManifest) {
+                        throw new Error("Git terminal profile is missing buildManifest.");
+                    }
+
+                    return withGitEditorWorkspace({
+                        manifest: baseGitBuildManifest(args),
+                        exercise: args.exercise,
+                    });
                 },
             },
         }

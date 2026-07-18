@@ -1,0 +1,297 @@
+{
+  "topics": {
+    "git-foundations": {
+      "git-foundations-module-2-meaningful-history": {
+        "create-focused-commits": {
+          "label": "Create Focused Commits",
+          "summary": "Record one coherent staged change with a concise message that makes the project timeline readable.",
+          "cards": {
+            "sketch0": {
+              "title": "A Commit Is a Deliberate Checkpoint"
+            },
+            "sketch1": {
+              "title": "Commit Only the Staged Snapshot"
+            },
+            "sketch2": {
+              "title": "Write the Message for a Reader"
+            },
+            "sketch3": {
+              "title": "Verify the Result"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_create_focused_commits_sketch0": {
+              "title": "Commit One Coherent Change",
+              "prompt": "The terminal opens inside the prepared `community-site/` repository.\n\nThe navigation files are staged. Commit them with `Add events navigation`, then inspect the latest one-line entry.\n\nType each command in the terminal and press Enter.",
+              "hint": "Read the repository state first, then use the Git command that changes only the requested boundary.",
+              "help": {
+                "concept": "A focused commit records one understandable idea with a message that explains the result.",
+                "hint_1": "Use the exact file or repository named in the task; avoid broad commands that include unrelated work.",
+                "hint_2": "After the action, run the requested inspection command to confirm the final state."
+              },
+              "starterCode": "# Use the terminal for this Git task.\n# The required starting files and repository state are already prepared.\n",
+              "solutionCode": "git commit -m \"Add events navigation\"\ngit log -1 --oneline",
+              "instructions": "The terminal opens inside the prepared `community-site/` repository.\n\nThe navigation files are staged. Commit them with `Add events navigation`, then inspect the latest one-line entry.\n\nType each command in the terminal and press Enter.",
+              "starterFiles": {
+                "main_sh": {
+                  "content": "# Use the terminal for this Git task.\n# The required starting files and repository state are already prepared.\n"
+                },
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-site\nmkdir -p community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name \"ZoeSkoul Learner\"\ngit -C community-site config --local user.email \"learner@zoeskoul.local\"\ncd community-site\nprintf %s '<nav>Home</nav>\n' > index.html\ncd ..\ncd community-site\nprintf %s 'export const links = [\"Home\"];\n' > nav.js\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Add project baseline'\ncd community-site\nprintf %s '<nav>Home Events</nav>\n' > index.html\ncd ..\ncd community-site\nprintf %s 'export const links = [\"Home\", \"Events\"];\n' > nav.js\ncd ..\ngit -C community-site add -- index.html nav.js\n"
+                }
+              },
+              "solutionFiles": {
+                "main_sh": {
+                  "content": "git commit -m \"Add events navigation\"\ngit log -1 --oneline\n"
+                },
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-site\nmkdir -p community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name \"ZoeSkoul Learner\"\ngit -C community-site config --local user.email \"learner@zoeskoul.local\"\ncd community-site\nprintf %s '<nav>Home</nav>\n' > index.html\ncd ..\ncd community-site\nprintf %s 'export const links = [\"Home\"];\n' > nav.js\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Add project baseline'\ncd community-site\nprintf %s '<nav>Home Events</nav>\n' > index.html\ncd ..\ncd community-site\nprintf %s 'export const links = [\"Home\", \"Events\"];\n' > nav.js\ncd ..\ngit -C community-site add -- index.html nav.js\n"
+                }
+              },
+              "terminalExpectations": {
+                "forbiddenCommands": {
+                  "0": {
+                    "message": "Do not rewrite shared history in this Git practice task."
+                  }
+                }
+              }
+            },
+            "try_create_focused_commits_sketch1": {
+              "title": "Leave Unrelated Work for Later",
+              "prompt": "The terminal opens inside the prepared `community-site/` repository.\n\nOnly `README.md` is staged; `styles.css` is still an unstaged experiment. Commit the documentation change as `Clarify volunteer hours` and verify that the style edit remains.\n\nType each command in the terminal and press Enter.",
+              "hint": "Read the repository state first, then use the Git command that changes only the requested boundary.",
+              "help": {
+                "concept": "Committing staged work does not sweep unrelated unstaged edits into history.",
+                "hint_1": "Use the exact file or repository named in the task; avoid broad commands that include unrelated work.",
+                "hint_2": "After the action, run the requested inspection command to confirm the final state."
+              },
+              "starterCode": "# Use the terminal for this Git task.\n# The required starting files and repository state are already prepared.\n",
+              "solutionCode": "git commit -m \"Clarify volunteer hours\"\ngit status --short",
+              "instructions": "The terminal opens inside the prepared `community-site/` repository.\n\nOnly `README.md` is staged; `styles.css` is still an unstaged experiment. Commit the documentation change as `Clarify volunteer hours` and verify that the style edit remains.\n\nType each command in the terminal and press Enter.",
+              "starterFiles": {
+                "main_sh": {
+                  "content": "# Use the terminal for this Git task.\n# The required starting files and repository state are already prepared.\n"
+                },
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-site\nmkdir -p community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name \"ZoeSkoul Learner\"\ngit -C community-site config --local user.email \"learner@zoeskoul.local\"\ncd community-site\nprintf %s 'Open Saturdays.\n' > README.md\ncd ..\ncd community-site\nprintf %s 'body { color: navy; }\n' > styles.css\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Add project baseline'\ncd community-site\nprintf %s 'Open Saturdays from 9 AM to noon.\n' > README.md\ncd ..\ncd community-site\nprintf %s 'body { color: teal; }\n' > styles.css\ncd ..\ngit -C community-site add -- README.md\n"
+                }
+              },
+              "solutionFiles": {
+                "main_sh": {
+                  "content": "git commit -m \"Clarify volunteer hours\"\ngit status --short\n"
+                },
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-site\nmkdir -p community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name \"ZoeSkoul Learner\"\ngit -C community-site config --local user.email \"learner@zoeskoul.local\"\ncd community-site\nprintf %s 'Open Saturdays.\n' > README.md\ncd ..\ncd community-site\nprintf %s 'body { color: navy; }\n' > styles.css\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Add project baseline'\ncd community-site\nprintf %s 'Open Saturdays from 9 AM to noon.\n' > README.md\ncd ..\ncd community-site\nprintf %s 'body { color: teal; }\n' > styles.css\ncd ..\ngit -C community-site add -- README.md\n"
+                }
+              },
+              "terminalExpectations": {
+                "forbiddenCommands": {
+                  "0": {
+                    "message": "Do not rewrite shared history in this Git practice task."
+                  }
+                }
+              }
+            },
+            "try_create_focused_commits_sketch2": {
+              "title": "Use an Imperative Commit Message",
+              "prompt": "The terminal opens inside the prepared `community-site/` repository.\n\nA bug fix in `app.js` is staged. Commit it with `Fix event card toggle`, then print only the latest subject line.\n\nType each command in the terminal and press Enter.",
+              "hint": "Read the repository state first, then use the Git command that changes only the requested boundary.",
+              "help": {
+                "concept": "Imperative messages describe what the snapshot does when applied to the project.",
+                "hint_1": "Use the exact file or repository named in the task; avoid broad commands that include unrelated work.",
+                "hint_2": "After the action, run the requested inspection command to confirm the final state."
+              },
+              "starterCode": "# Use the terminal for this Git task.\n# The required starting files and repository state are already prepared.\n",
+              "solutionCode": "git commit -m \"Fix event card toggle\"\ngit log -1 --format=%s",
+              "instructions": "The terminal opens inside the prepared `community-site/` repository.\n\nA bug fix in `app.js` is staged. Commit it with `Fix event card toggle`, then print only the latest subject line.\n\nType each command in the terminal and press Enter.",
+              "starterFiles": {
+                "main_sh": {
+                  "content": "# Use the terminal for this Git task.\n# The required starting files and repository state are already prepared.\n"
+                },
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-site\nmkdir -p community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name \"ZoeSkoul Learner\"\ngit -C community-site config --local user.email \"learner@zoeskoul.local\"\ncd community-site\nprintf %s 'const open = false;\n' > app.js\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Add project baseline'\ncd community-site\nprintf %s 'const open = !open;\n' > app.js\ncd ..\ngit -C community-site add -- app.js\n"
+                }
+              },
+              "solutionFiles": {
+                "main_sh": {
+                  "content": "git commit -m \"Fix event card toggle\"\ngit log -1 --format=%s\n"
+                },
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-site\nmkdir -p community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name \"ZoeSkoul Learner\"\ngit -C community-site config --local user.email \"learner@zoeskoul.local\"\ncd community-site\nprintf %s 'const open = false;\n' > app.js\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Add project baseline'\ncd community-site\nprintf %s 'const open = !open;\n' > app.js\ncd ..\ngit -C community-site add -- app.js\n"
+                }
+              },
+              "terminalExpectations": {
+                "forbiddenCommands": {
+                  "0": {
+                    "message": "Do not rewrite shared history in this Git practice task."
+                  }
+                }
+              }
+            },
+            "try_create_focused_commits_sketch3": {
+              "title": "Read the Story You Created",
+              "prompt": "The terminal opens inside the prepared `community-site/` repository.\n\nThe site now has three focused snapshots. Read the one-line history and confirm that the working tree is clean.\n\nType each command in the terminal and press Enter.",
+              "hint": "Read the repository state first, then use the Git command that changes only the requested boundary.",
+              "help": {
+                "concept": "A sequence of focused commits reads like a concise explanation of how the project grew.",
+                "hint_1": "Use the exact file or repository named in the task; avoid broad commands that include unrelated work.",
+                "hint_2": "After the action, run the requested inspection command to confirm the final state."
+              },
+              "starterCode": "# Use the terminal for this Git task.\n# The required starting files and repository state are already prepared.\n",
+              "solutionCode": "git log --oneline\ngit status --short",
+              "instructions": "The terminal opens inside the prepared `community-site/` repository.\n\nThe site now has three focused snapshots. Read the one-line history and confirm that the working tree is clean.\n\nType each command in the terminal and press Enter.",
+              "starterFiles": {
+                "main_sh": {
+                  "content": "# Use the terminal for this Git task.\n# The required starting files and repository state are already prepared.\n"
+                },
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-site\nmkdir -p community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name \"ZoeSkoul Learner\"\ngit -C community-site config --local user.email \"learner@zoeskoul.local\"\ncd community-site\nprintf %s '<h1>Community Hub</h1>\n' > index.html\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Start community site'\ncd community-site\nprintf %s '<h1>Community Hub</h1>\n<nav>Events</nav>\n' > index.html\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Add events navigation'\ncd community-site\nprintf %s 'Open Saturdays from 9 AM to noon.\n' > README.md\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Clarify volunteer hours'\n"
+                }
+              },
+              "solutionFiles": {
+                "main_sh": {
+                  "content": "git log --oneline\ngit status --short\n"
+                },
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-site\nmkdir -p community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name \"ZoeSkoul Learner\"\ngit -C community-site config --local user.email \"learner@zoeskoul.local\"\ncd community-site\nprintf %s '<h1>Community Hub</h1>\n' > index.html\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Start community site'\ncd community-site\nprintf %s '<h1>Community Hub</h1>\n<nav>Events</nav>\n' > index.html\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Add events navigation'\ncd community-site\nprintf %s 'Open Saturdays from 9 AM to noon.\n' > README.md\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Clarify volunteer hours'\n"
+                }
+              },
+              "terminalExpectations": {
+                "forbiddenCommands": {
+                  "0": {
+                    "message": "Do not rewrite shared history in this Git practice task."
+                  }
+                }
+              }
+            }
+          },
+          "practice": {
+            "single-choice-1": {
+              "title": "Commit History Inspection",
+              "prompt": "Which command provides a concise view of the commit history?",
+              "hint": "Look for a command that summarizes commit messages.",
+              "help": {
+                "concept": "A concise history view helps quickly understand changes.",
+                "hint_1": "The command uses `git log`.",
+                "hint_2": "It includes the `--oneline` option for brevity."
+              },
+              "options": {
+                "a": "git log --oneline",
+                "b": "git status",
+                "c": "git diff",
+                "d": "git show"
+              }
+            },
+            "multi-choice-1": {
+              "title": "Purpose of Commits",
+              "prompt": "What is the primary purpose of creating commits in Git?",
+              "hint": "Think about how commits help in tracking changes.",
+              "help": {
+                "concept": "Commits are snapshots of your project at a point in time.",
+                "hint_1": "Commits help in tracking changes and reverting to previous states.",
+                "hint_2": "They are essential for collaboration and understanding project history."
+              },
+              "options": {
+                "a": "To track changes over time",
+                "b": "To permanently delete files",
+                "c": "To merge branches",
+                "d": "To create backups"
+              }
+            },
+            "multi-choice-2": {
+              "title": "Commit Message Best Practices",
+              "prompt": "Which of the following are best practices for writing commit messages?",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "A focused commit records one coherent change with a message that explains the result.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "options": {
+                "a": "Use imperative mood",
+                "b": "Include detailed code changes",
+                "c": "Be concise",
+                "d": "Describe the change's purpose"
+              }
+            },
+            "drag-reorder-1": {
+              "title": "Commit Process Steps",
+              "prompt": "Arrange the steps to create a commit in the correct order.",
+              "hint": "Think about the sequence from making changes to committing them.",
+              "help": {
+                "concept": "Creating a commit involves staging changes and then committing them.",
+                "hint_1": "Staging comes before committing.",
+                "hint_2": "You need to write a commit message after staging."
+              },
+              "tokens": {
+                "t1": "Make changes in the working directory",
+                "t2": "Stage changes with git add",
+                "t3": "Commit changes with git commit"
+              }
+            },
+            "fill-blank-1": {
+              "title": "Staging Command",
+              "prompt": "Complete the command to stage a file named `app.js`.",
+              "hint": "Use the `git add` command to stage files.",
+              "help": {
+                "concept": "Staging prepares files for a commit.",
+                "hint_1": "The command starts with `git add`.",
+                "hint_2": "You need to specify the file name after `git add`."
+              },
+              "template": "git add [blank1]",
+              "choices": [
+                "app.js",
+                "index.html",
+                "style.css"
+              ]
+            },
+            "fill-blank-2": {
+              "title": "Commit Message Format",
+              "prompt": "Fill in the blank to complete the commit message: `git commit -m '[blank1]'`.",
+              "hint": "Commit messages should be in imperative form.",
+              "help": {
+                "concept": "Commit messages describe the change's purpose.",
+                "hint_1": "The message should be concise and imperative.",
+                "hint_2": "Think about what the commit achieves."
+              },
+              "template": "git commit -m '[blank1]'",
+              "choices": [
+                "Add new feature",
+                "Fixed bug",
+                "Update README"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "git-foundations": {
+      "git-foundations-module-2-meaningful-history": {
+        "create-focused-commits": {
+          "sketch0": {
+            "title": "A Commit Is a Deliberate Checkpoint",
+            "bodyMarkdown": "A commit is a named checkpoint in the repository timeline. It records the staged snapshot, author identity, message, and link to the previous commit.\n\nA useful checkpoint answers one question: what meaningful change became true here? It might add opening hours, correct a contact address, or remove an obsolete page.\n\nAvoid treating a commit as a periodic save of everything in sight. Review the staged snapshot first."
+          },
+          "sketch1": {
+            "title": "Commit Only the Staged Snapshot",
+            "bodyMarkdown": "After reviewing `git diff --staged`, record the snapshot:\n\n```bash\ngit commit -m \"Add evening workshop schedule\"\n```\n\nGit commits only the staging area. Unstaged edits remain in the working tree, ready for later work.\n\nThat boundary is what allows two changes made on the same afternoon to become two understandable commits."
+          },
+          "sketch2": {
+            "title": "Write the Message for a Reader",
+            "bodyMarkdown": "A commit subject should be brief, specific, and written as an action: `Add evening workshop schedule`, not `changes` or `worked on page`.\n\nImagine the message completing the sentence “This commit will …”. The wording should describe the result, not the commands you typed.\n\nGood messages turn `git log --oneline` into a useful project summary."
+          },
+          "sketch3": {
+            "title": "Verify the Result",
+            "bodyMarkdown": "After committing, read both history and current state:\n\n```bash\ngit log --oneline -1\ngit status --short\n```\n\nThe first command confirms the newest message. The second reveals whether anything remains unstaged or untracked.\n\nVerification closes the loop: you know what entered history and what still needs attention."
+          }
+        }
+      }
+    }
+  }
+}

@@ -5,13 +5,16 @@ import {
 } from "@/lib/ide/learningIdeConfig";
 
 describe("mergeLearningIdeConfigs", () => {
-    it("preserves layoutMode, requires, runnerBackend, terminalCwd, and sqlPane additively", () => {
+    it("preserves layoutMode, requirements, terminal cwd, bootstrap, and SQL options additively", () => {
         const merged = mergeLearningIdeConfigs(
             {
                 runnerBackend: "pty",
                 requires: {
                     files: true,
                     multiFile: true,
+                },
+                terminalBootstrap: {
+                    gitSafeDirectories: ["/workspace/trail-journal"],
                 },
                 sqlPane: {
                     defaultTab: "results",
@@ -22,6 +25,9 @@ describe("mergeLearningIdeConfigs", () => {
                 terminalCwd: "/workspace/navigation-practice",
                 showOpenTerminalButton: false,
                 showRestartTerminalButton: false,
+                terminalBootstrap: {
+                    gitSafeDirectories: ["/workspace/*", "/workspace/trail-journal"],
+                },
                 requires: {
                     terminal: true,
                 },
@@ -37,6 +43,9 @@ describe("mergeLearningIdeConfigs", () => {
             terminalCwd: "/workspace/navigation-practice",
             showOpenTerminalButton: false,
             showRestartTerminalButton: false,
+            terminalBootstrap: {
+                gitSafeDirectories: ["/workspace/trail-journal", "/workspace/*"],
+            },
             requires: {
                 files: true,
                 multiFile: true,
@@ -102,6 +111,50 @@ describe("resolveFullIDEConfigFromLearningIde", () => {
         expect(resolved.services.runner?.terminalSessionScope).toBe("exercise");
         expect(resolved.services.runner?.showTerminal).not.toBe(true);
         expect(resolved.access.canUseMultiFile).toBe(true);
+    });
+
+
+    it("does not inherit cloud project or upgrade controls from the workspace preset", () => {
+        const resolved = resolveFullIDEConfigFromLearningIde({
+            ideConfig: {
+                preset: "workspace",
+                requires: {
+                    files: true,
+                    multiFile: true,
+                    terminal: true,
+                },
+            },
+        });
+
+        expect(resolved.services.projects).toEqual({
+            showProjectSwitcher: false,
+            showSaveControls: false,
+            showSaveAs: false,
+            showCloudProjects: false,
+        });
+        expect(resolved.access.canSaveCloud).toBe(false);
+        expect(resolved.access.canCreateProjects).toBe(false);
+    });
+
+    it("enables project controls only when the learning contract requests them", () => {
+        const resolved = resolveFullIDEConfigFromLearningIde({
+            ideConfig: {
+                requires: {
+                    files: true,
+                    projectPersistence: true,
+                    cloudProjects: true,
+                },
+            },
+        });
+
+        expect(resolved.services.projects).toEqual({
+            showProjectSwitcher: true,
+            showSaveControls: true,
+            showSaveAs: true,
+            showCloudProjects: true,
+        });
+        expect(resolved.access.canSaveCloud).toBe(true);
+        expect(resolved.access.canCreateProjects).toBe(true);
     });
 
     it("hides explorer, editor, and tabs in terminal_workspace mode", () => {
@@ -190,6 +243,26 @@ describe("resolveFullIDEConfigFromLearningIde", () => {
         });
 
         expect(resolved.services.runner?.terminalSessionScope).toBe("project");
+    });
+
+    it("passes a profile-authored terminal bootstrap to the shared runner", () => {
+        const resolved = resolveFullIDEConfigFromLearningIde({
+            ideConfig: {
+                runnerBackend: "pty",
+                terminalCwd: "/workspace/trail-journal",
+                terminalBootstrap: {
+                    gitSafeDirectories: ["/workspace/*"],
+                },
+                requires: {
+                    files: true,
+                    terminal: true,
+                },
+            },
+        });
+
+        expect(resolved.services.runner?.terminalBootstrap).toEqual({
+            gitSafeDirectories: ["/workspace/*"],
+        });
     });
 
     it("passes through an explicit terminalCwd override", () => {

@@ -171,4 +171,43 @@ describe("snapshotWorkspaceFiles", () => {
             ]),
         );
     });
+    it("omits Git metadata and hidden bootstrap state from workspace snapshots", async () => {
+        await fs.mkdir(path.join(root, "trail-journal", ".git", "refs", "heads"), {
+            recursive: true,
+        });
+        await fs.mkdir(path.join(root, ".zoeskoul"), { recursive: true });
+        await fs.writeFile(
+            path.join(root, "trail-journal", "README.md"),
+            "# Trail Journal\n",
+        );
+        await fs.writeFile(
+            path.join(root, "trail-journal", ".git", "HEAD"),
+            "ref: refs/heads/main\n",
+        );
+        await fs.writeFile(
+            path.join(root, ".zoeskoul", "setup.sh"),
+            "#!/usr/bin/env bash\n",
+        );
+        await fs.writeFile(
+            path.join(root, ".zoeskoul", ".setup-complete"),
+            "state-v1\n",
+        );
+
+        const snapshot = await snapshotWorkspaceFiles(root);
+        const paths = snapshot.map((entry) => entry.path);
+
+        expect(snapshot).toEqual(
+            expect.arrayContaining([
+                { kind: "directory", path: "trail-journal" },
+                {
+                    kind: "file",
+                    path: "trail-journal/README.md",
+                    content: "# Trail Journal\n",
+                },
+            ]),
+        );
+        expect(paths.some((entryPath) => entryPath.includes(".git"))).toBe(false);
+        expect(paths.some((entryPath) => entryPath.includes(".zoeskoul"))).toBe(false);
+    });
+
 });

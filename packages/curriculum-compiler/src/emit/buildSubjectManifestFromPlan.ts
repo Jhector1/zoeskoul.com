@@ -12,7 +12,7 @@ import type {
 
 } from "@zoeskoul/curriculum-contracts";
 import { mergeToolPresentationPolicies } from "@zoeskoul/curriculum-contracts";
-import type { SubjectShapePack } from "@zoeskoul/curriculum-profiles";
+import { getProfileAdapter, type SubjectShapePack } from "@zoeskoul/curriculum-profiles";
 import { moduleOrderToIndex } from "../spec/moduleOrder.js";
 import {
     resolveModuleRuntimePolicy,
@@ -40,6 +40,7 @@ export function buildSubjectManifestFromPlan(args: {
 }): SubjectManifest {
     const { blueprint, plan, shape } = args;
     const kp = shape.subjectManifest.keyPatterns;
+    const profileAdapter = getProfileAdapter(blueprint.profileId);
     const subjectTools = mergeToolPresentationPolicies(
         blueprint.tools,
         plan.tools,
@@ -79,11 +80,24 @@ export function buildSubjectManifestFromPlan(args: {
             runtimePolicy: resolvedRuntimePolicy,
         });
 
+        const profileServiceDefaults =
+            profileAdapter.getTopicSeedServiceDefaults?.({
+                blueprint,
+                module: {
+                    slug: module.moduleSlug,
+                    order: module.order,
+                },
+            }) ?? null;
+
         const serviceDefaults: ManifestIdeServiceConfig | null =
             mergeManifestIdeServiceConfigs(
+                // Workspace policy contributes capabilities only. The profile
+                // owns the default presentation, while explicit course/module
+                // authoring remains the final override.
+                workspaceToServiceDefaults({ policy: workspacePolicy }),
+                profileServiceDefaults,
                 blueprint.idePolicy?.defaultServices,
                 blueprint.idePolicy?.moduleServiceDefaults?.[module.moduleSlug],
-                workspaceToServiceDefaults({ policy: workspacePolicy }),
             );
 
         const runtimeDefaults: ManifestRuntimeDefaults =

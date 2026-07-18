@@ -9,6 +9,7 @@ import {
     reuseInFlightPromise,
     resolveTerminalWorkspaceKey,
     shouldProbeTerminalOnVisibilityRestore,
+    workspaceTerminalBootstrapKey,
 } from "@/components/code/runner/runtime";
 
 describe("resolveTerminalWorkspaceKey", () => {
@@ -66,6 +67,46 @@ describe("resolveTerminalWorkspaceKey", () => {
                 terminalSessionScope: "topic",
             }),
         ).toBe("linux-terminal-fundamentals:linux-1-terminal-navigation:what-the-terminal-is");
+    });
+
+    it("keys terminal leases by normalized startup bootstrap", () => {
+        const bootstrapKey = workspaceTerminalBootstrapKey({
+            gitSafeDirectories: [
+                "/workspace/trail-journal",
+                "/workspace/*",
+                "/workspace/trail-journal",
+            ],
+            setupScriptPath: ".zoeskoul/setup.sh",
+            workspaceStateKey: "git-state-v1-abc123",
+        });
+
+        expect(bootstrapKey).toBe(
+            'workspace-bootstrap-v3:{"gitSafeDirectories":["/workspace/*","/workspace/trail-journal"],"setupScriptPath":".zoeskoul/setup.sh","workspaceStateKey":"git-state-v1-abc123"}',
+        );
+        expect(
+            resolveTerminalWorkspaceKey({
+                exerciseStateKey: topicExerciseA,
+                terminalSessionScope: "exercise",
+                terminalCwd: "/workspace/trail-journal",
+                terminalBootstrapKey: bootstrapKey,
+            }),
+        ).toBe(
+            `${topicExerciseA}::cwd:/workspace/trail-journal::bootstrap:${bootstrapKey}`,
+        );
+    });
+
+
+    it("changes the lease identity when the authored workspace state changes", () => {
+        const first = workspaceTerminalBootstrapKey({
+            setupScriptPath: ".zoeskoul/setup.sh",
+            workspaceStateKey: "git-state-v1-first",
+        });
+        const second = workspaceTerminalBootstrapKey({
+            setupScriptPath: ".zoeskoul/setup.sh",
+            workspaceStateKey: "git-state-v1-second",
+        });
+
+        expect(first).not.toBe(second);
     });
 
     it("falls back safely when scoped keys are missing", () => {

@@ -16,11 +16,17 @@
   },
   "serviceDefaults": {
     "runnerBackend": "pty",
-    "layoutMode": "terminal_workspace",
+    "layoutMode": "default",
     "requires": {
       "files": true,
       "multiFile": true,
       "terminal": true
+    },
+    "preset": "runner",
+    "terminalBootstrap": {
+      "gitSafeDirectories": [
+        "/workspace/*"
+      ]
     }
   },
   "topic": {
@@ -255,52 +261,54 @@
       "weight": 1,
       "messageBase": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch0",
       "language": "bash",
-      "starterCode": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch0.starterCode",
+      "starterCode": "# Event Schedule\n",
       "starterFiles": [
         {
-          "path": "main.sh",
-          "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch0.starterCode",
-          "language": "bash",
+          "path": "event-board/schedule.md",
+          "content": "# Event Schedule\n",
+          "language": "markdown",
           "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "main.sh",
-          "content": "git init\ntouch tracked.txt untracked.txt\ngit add tracked.txt\ngit status",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
+          "entry": true
         }
       ],
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^git\\s+init$"
-          },
+            "pattern": "^git\\s+status\\s+\\-\\-short$",
+            "message": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch0.terminalExpectations.requiredCommands.0.message"
+          }
+        ],
+        "forbiddenCommands": [
           {
-            "pattern": "^git\\s+add\\s+tracked\\.txt$"
-          },
-          {
-            "pattern": "^git\\s+status$"
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch0.terminalExpectations.forbiddenCommands.0.message"
           }
         ]
       },
       "workspace": {
         "language": "bash",
-        "entryFilePath": "main.sh",
-        "starterCode": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch0.starterCode",
+        "entryFilePath": "event-board/schedule.md",
+        "starterCode": "# Event Schedule\n",
         "starterFiles": [
           {
-            "path": "main.sh",
-            "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch0.starterCode",
-            "language": "bash",
+            "path": "event-board/schedule.md",
+            "content": "# Event Schedule\n",
+            "language": "markdown",
             "isEntry": true,
-            "entry": true,
-            "readOnly": false
+            "entry": true
+          }
+        ],
+        "fixtureFiles": [
+          {
+            "path": ".zoeskoul/setup.sh",
+            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf event-board\nmkdir -p event-board\ncd event-board\nprintf %s '# Event Schedule\n' > schedule.md\ncd ..\ngit -C event-board init -q -b main\ngit -C event-board config --local user.name \"ZoeSkoul Learner\"\ngit -C event-board config --local user.email \"learner@zoeskoul.local\"\n",
+            "language": "bash",
+            "readOnly": true
+          },
+          {
+            "path": "event-board/schedule.md",
+            "content": "# Event Schedule\n",
+            "language": "markdown"
           }
         ]
       },
@@ -308,8 +316,75 @@
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch0.prompt"
-      }
+        "instructions": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch0.instructions"
+      },
+      "hiddenShellCheck": {
+        "script": "set -eu\nrepo=event-board\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" branch --show-current)\" = main ] || fail \"The repository is not on main.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = 0 ] || fail \"The repository has the wrong number of commits.\"\n[ -n \"$(git -C \"$repo\" status --porcelain)\" ] || fail \"The exercise change is missing.\"\nexpected_untracked=$(printf \"%s\\n\" schedule.md | sort)\nactual_untracked=$(git -C \"$repo\" ls-files --others --exclude-standard | sort)\n[ \"$actual_untracked\" = \"$expected_untracked\" ] || fail \"The untracked file set is not correct.\"\nexpected_staged=$(printf \"%s\\n\"  | sort)\nactual_staged=$(git -C \"$repo\" diff --cached --name-only | sort)\n[ \"$actual_staged\" = \"$expected_staged\" ] || fail \"The staged file set is not correct.\"",
+        "timeoutMs": 15000
+      },
+      "ideConfig": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/event-board",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "serviceOverrides": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/event-board",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "fixtureFiles": [
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf event-board\nmkdir -p event-board\ncd event-board\nprintf %s '# Event Schedule\n' > schedule.md\ncd ..\ngit -C event-board init -q -b main\ngit -C event-board config --local user.name \"ZoeSkoul Learner\"\ngit -C event-board config --local user.email \"learner@zoeskoul.local\"\n",
+          "language": "bash",
+          "readOnly": true
+        },
+        {
+          "path": "event-board/schedule.md",
+          "content": "# Event Schedule\n",
+          "language": "markdown"
+        }
+      ]
     },
     {
       "id": "try-read-tracked-and-untracked-state-sketch1",
@@ -318,49 +393,58 @@
       "weight": 1,
       "messageBase": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch1",
       "language": "bash",
-      "starterCode": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch1.starterCode",
+      "starterCode": "# Event Schedule\n",
       "starterFiles": [
         {
-          "path": "main.sh",
-          "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch1.starterCode",
-          "language": "bash",
+          "path": "event-board/schedule.md",
+          "content": "# Event Schedule\n",
+          "language": "markdown",
           "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "main.sh",
-          "content": "git init\ntouch fileA.txt fileB.txt\necho 'modification' > fileA.txt\ngit status --short",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
+          "entry": true
         }
       ],
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^git\\s+init$"
+            "pattern": "^git\\s+status\\s+\\-\\-short$",
+            "message": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch1.terminalExpectations.requiredCommands.0.message"
           },
           {
-            "pattern": "^git\\s+status\\s+--short$"
+            "pattern": "^git\\s+diff\\s+\\-\\-staged\\s+\\-\\-name\\-only$",
+            "message": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch1.terminalExpectations.requiredCommands.1.message"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch1.terminalExpectations.forbiddenCommands.0.message"
           }
         ]
       },
       "workspace": {
         "language": "bash",
-        "entryFilePath": "main.sh",
-        "starterCode": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch1.starterCode",
+        "entryFilePath": "event-board/schedule.md",
+        "starterCode": "# Event Schedule\n",
         "starterFiles": [
           {
-            "path": "main.sh",
-            "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch1.starterCode",
-            "language": "bash",
+            "path": "event-board/schedule.md",
+            "content": "# Event Schedule\n",
+            "language": "markdown",
             "isEntry": true,
-            "entry": true,
-            "readOnly": false
+            "entry": true
+          }
+        ],
+        "fixtureFiles": [
+          {
+            "path": ".zoeskoul/setup.sh",
+            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf event-board\nmkdir -p event-board\ncd event-board\nprintf %s '# Event Schedule\n' > schedule.md\ncd ..\ngit -C event-board init -q -b main\ngit -C event-board config --local user.name \"ZoeSkoul Learner\"\ngit -C event-board config --local user.email \"learner@zoeskoul.local\"\ngit -C event-board add -- schedule.md\n",
+            "language": "bash",
+            "readOnly": true
+          },
+          {
+            "path": "event-board/schedule.md",
+            "content": "# Event Schedule\n",
+            "language": "markdown"
           }
         ]
       },
@@ -368,8 +452,75 @@
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch1.prompt"
-      }
+        "instructions": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch1.instructions"
+      },
+      "hiddenShellCheck": {
+        "script": "set -eu\nrepo=event-board\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" branch --show-current)\" = main ] || fail \"The repository is not on main.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = 0 ] || fail \"The repository has the wrong number of commits.\"\n[ -n \"$(git -C \"$repo\" status --porcelain)\" ] || fail \"The exercise change is missing.\"\nexpected_untracked=$(printf \"%s\\n\"  | sort)\nactual_untracked=$(git -C \"$repo\" ls-files --others --exclude-standard | sort)\n[ \"$actual_untracked\" = \"$expected_untracked\" ] || fail \"The untracked file set is not correct.\"\nexpected_staged=$(printf \"%s\\n\" schedule.md | sort)\nactual_staged=$(git -C \"$repo\" diff --cached --name-only | sort)\n[ \"$actual_staged\" = \"$expected_staged\" ] || fail \"The staged file set is not correct.\"",
+        "timeoutMs": 15000
+      },
+      "ideConfig": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/event-board",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "serviceOverrides": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/event-board",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "fixtureFiles": [
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf event-board\nmkdir -p event-board\ncd event-board\nprintf %s '# Event Schedule\n' > schedule.md\ncd ..\ngit -C event-board init -q -b main\ngit -C event-board config --local user.name \"ZoeSkoul Learner\"\ngit -C event-board config --local user.email \"learner@zoeskoul.local\"\ngit -C event-board add -- schedule.md\n",
+          "language": "bash",
+          "readOnly": true
+        },
+        {
+          "path": "event-board/schedule.md",
+          "content": "# Event Schedule\n",
+          "language": "markdown"
+        }
+      ]
     },
     {
       "id": "try-read-tracked-and-untracked-state-sketch2",
@@ -378,49 +529,58 @@
       "weight": 1,
       "messageBase": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch2",
       "language": "bash",
-      "starterCode": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch2.starterCode",
+      "starterCode": "Doors open at 10 AM.\n",
       "starterFiles": [
         {
-          "path": "main.sh",
-          "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch2.starterCode",
-          "language": "bash",
+          "path": "event-board/schedule.md",
+          "content": "Doors open at 10 AM.\n",
+          "language": "markdown",
           "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "main.sh",
-          "content": "git init\ntouch example.txt\ngit status",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
+          "entry": true
         }
       ],
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^git\\s+init$"
+            "pattern": "^git\\s+status\\s+\\-\\-short$",
+            "message": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch2.terminalExpectations.requiredCommands.0.message"
           },
           {
-            "pattern": "^git\\s+status$"
+            "pattern": "^git\\s+diff\\s+\\-\\-\\s+schedule\\.md$",
+            "message": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch2.terminalExpectations.requiredCommands.1.message"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch2.terminalExpectations.forbiddenCommands.0.message"
           }
         ]
       },
       "workspace": {
         "language": "bash",
-        "entryFilePath": "main.sh",
-        "starterCode": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch2.starterCode",
+        "entryFilePath": "event-board/schedule.md",
+        "starterCode": "Doors open at 10 AM.\n",
         "starterFiles": [
           {
-            "path": "main.sh",
-            "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch2.starterCode",
-            "language": "bash",
+            "path": "event-board/schedule.md",
+            "content": "Doors open at 10 AM.\n",
+            "language": "markdown",
             "isEntry": true,
-            "entry": true,
-            "readOnly": false
+            "entry": true
+          }
+        ],
+        "fixtureFiles": [
+          {
+            "path": ".zoeskoul/setup.sh",
+            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf event-board\nmkdir -p event-board\ngit -C event-board init -q -b main\ngit -C event-board config --local user.name \"ZoeSkoul Learner\"\ngit -C event-board config --local user.email \"learner@zoeskoul.local\"\ncd event-board\nprintf %s 'Doors open at 9 AM.\n' > schedule.md\ncd ..\ngit -C event-board add -A\ngit -C event-board commit -q -m 'Add project baseline'\ncd event-board\nprintf %s 'Doors open at 10 AM.\n' > schedule.md\ncd ..\n",
+            "language": "bash",
+            "readOnly": true
+          },
+          {
+            "path": "event-board/schedule.md",
+            "content": "Doors open at 10 AM.\n",
+            "language": "markdown"
           }
         ]
       },
@@ -428,8 +588,75 @@
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch2.prompt"
-      }
+        "instructions": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch2.instructions"
+      },
+      "hiddenShellCheck": {
+        "script": "set -eu\nrepo=event-board\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" branch --show-current)\" = main ] || fail \"The repository is not on main.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = 1 ] || fail \"The repository has the wrong number of commits.\"\n[ -n \"$(git -C \"$repo\" status --porcelain)\" ] || fail \"The exercise change is missing.\"\nexpected=$(printf \"%s\\n\" schedule.md | sort)\nactual=$(git -C \"$repo\" ls-files | sort)\n[ \"$actual\" = \"$expected\" ] || fail \"The tracked file set is not correct.\"\nexpected_staged=$(printf \"%s\\n\"  | sort)\nactual_staged=$(git -C \"$repo\" diff --cached --name-only | sort)\n[ \"$actual_staged\" = \"$expected_staged\" ] || fail \"The staged file set is not correct.\"",
+        "timeoutMs": 15000
+      },
+      "ideConfig": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/event-board",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "serviceOverrides": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/event-board",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "fixtureFiles": [
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf event-board\nmkdir -p event-board\ngit -C event-board init -q -b main\ngit -C event-board config --local user.name \"ZoeSkoul Learner\"\ngit -C event-board config --local user.email \"learner@zoeskoul.local\"\ncd event-board\nprintf %s 'Doors open at 9 AM.\n' > schedule.md\ncd ..\ngit -C event-board add -A\ngit -C event-board commit -q -m 'Add project baseline'\ncd event-board\nprintf %s 'Doors open at 10 AM.\n' > schedule.md\ncd ..\n",
+          "language": "bash",
+          "readOnly": true
+        },
+        {
+          "path": "event-board/schedule.md",
+          "content": "Doors open at 10 AM.\n",
+          "language": "markdown"
+        }
+      ]
     },
     {
       "id": "try-read-tracked-and-untracked-state-sketch3",
@@ -438,46 +665,58 @@
       "weight": 1,
       "messageBase": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch3",
       "language": "bash",
-      "starterCode": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch3.starterCode",
+      "starterCode": "Doors open at 10 AM.\n",
       "starterFiles": [
         {
-          "path": "main.sh",
-          "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch3.starterCode",
-          "language": "bash",
+          "path": "event-board/schedule.md",
+          "content": "Doors open at 10 AM.\n",
+          "language": "markdown",
           "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "main.sh",
-          "content": "touch important.txt\necho 'update' >> notes.txt\ngit status",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
+          "entry": true
         }
       ],
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^git\\s+status$"
+            "pattern": "^git\\s+status$",
+            "message": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch3.terminalExpectations.requiredCommands.0.message"
+          },
+          {
+            "pattern": "^git\\s+status\\s+\\-\\-short$",
+            "message": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch3.terminalExpectations.requiredCommands.1.message"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch3.terminalExpectations.forbiddenCommands.0.message"
           }
         ]
       },
       "workspace": {
         "language": "bash",
-        "entryFilePath": "main.sh",
-        "starterCode": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch3.starterCode",
+        "entryFilePath": "event-board/schedule.md",
+        "starterCode": "Doors open at 10 AM.\n",
         "starterFiles": [
           {
-            "path": "main.sh",
-            "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch3.starterCode",
-            "language": "bash",
+            "path": "event-board/schedule.md",
+            "content": "Doors open at 10 AM.\n",
+            "language": "markdown",
             "isEntry": true,
-            "entry": true,
-            "readOnly": false
+            "entry": true
+          }
+        ],
+        "fixtureFiles": [
+          {
+            "path": ".zoeskoul/setup.sh",
+            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf event-board\nmkdir -p event-board\ngit -C event-board init -q -b main\ngit -C event-board config --local user.name \"ZoeSkoul Learner\"\ngit -C event-board config --local user.email \"learner@zoeskoul.local\"\ncd event-board\nprintf %s 'Doors open at 10 AM.\n' > schedule.md\ncd ..\ngit -C event-board add -A\ngit -C event-board commit -q -m 'Add project baseline'\n",
+            "language": "bash",
+            "readOnly": true
+          },
+          {
+            "path": "event-board/schedule.md",
+            "content": "Doors open at 10 AM.\n",
+            "language": "markdown"
           }
         ]
       },
@@ -485,8 +724,75 @@
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch3.prompt"
-      }
+        "instructions": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch3.instructions"
+      },
+      "hiddenShellCheck": {
+        "script": "set -eu\nrepo=event-board\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" branch --show-current)\" = main ] || fail \"The repository is not on main.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = 1 ] || fail \"The repository has the wrong number of commits.\"\n[ -z \"$(git -C \"$repo\" status --porcelain)\" ] || fail \"The working tree is not clean.\"\nexpected=$(printf \"%s\\n\" schedule.md | sort)\nactual=$(git -C \"$repo\" ls-files | sort)\n[ \"$actual\" = \"$expected\" ] || fail \"The tracked file set is not correct.\"",
+        "timeoutMs": 15000
+      },
+      "ideConfig": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/event-board",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "serviceOverrides": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/event-board",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "fixtureFiles": [
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf event-board\nmkdir -p event-board\ngit -C event-board init -q -b main\ngit -C event-board config --local user.name \"ZoeSkoul Learner\"\ngit -C event-board config --local user.email \"learner@zoeskoul.local\"\ncd event-board\nprintf %s 'Doors open at 10 AM.\n' > schedule.md\ncd ..\ngit -C event-board add -A\ngit -C event-board commit -q -m 'Add project baseline'\n",
+          "language": "bash",
+          "readOnly": true
+        },
+        {
+          "path": "event-board/schedule.md",
+          "content": "Doors open at 10 AM.\n",
+          "language": "markdown"
+        }
+      ]
     }
   ]
 }

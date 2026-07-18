@@ -9,10 +9,170 @@ describe("gitProfile", () => {
             bashProfile.buildModuleRuntimeDefaults(),
         );
         expect(gitProfile.defaultLanguage).toBe("bash");
-        expect(gitProfile.defaultEntryFileName).toBe("main.sh");
+        expect(gitProfile.defaultEntryFileName).toBe("README.md");
         expect(gitProfile.allowedRecipeTypes).toEqual(["shell_task"]);
         expect(gitProfile.shape.profileId).toBe("git");
         expect(bashProfile.shape.profileId).toBe("bash");
+    });
+
+    it("owns the Git learning presentation without changing the shared terminal runtime", () => {
+        const expected = {
+            preset: "runner",
+            runnerBackend: "pty",
+            layoutMode: "default",
+            terminalBootstrap: {
+                gitSafeDirectories: ["/workspace/*"],
+                setupScriptPath: ".zoeskoul/setup.sh",
+            },
+            requires: { files: true, multiFile: true, terminal: true },
+        };
+
+        expect(gitProfile.buildModuleServiceDefaults?.()).toEqual(expected);
+        expect(
+            getProfileAdapter("git").getTopicSeedServiceDefaults?.({
+                blueprint: { profileId: "git" } as any,
+                module: { slug: "git-module-1", order: 1 },
+            }),
+        ).toEqual(expected);
+    });
+
+    it("inherits the shared terminal workspace and adds only Git repository cwd", () => {
+        const manifest = gitProfile.codeInput?.buildManifest({
+            messageBase: "quiz.git.init",
+            seed: { topicId: "init", profileId: "git" } as any,
+            exercise: {
+                id: "init-1",
+                kind: "code_input",
+                title: "Initialize the repository",
+                prompt: "Initialize the prepared folder.",
+                hint: "Use git init.",
+                help: {
+                    concept: "A repository begins with git init.",
+                    hint_1: "The terminal already opens in the project folder.",
+                    hint_2: "Use main as the initial branch.",
+                },
+                starterCode: "# Use the terminal.\n",
+                solutionCode: "git init -b main\n",
+                fixedLanguage: "bash",
+                recipeType: "shell_task",
+                mode: "terminal_workspace",
+                starterFiles: [
+                    {
+                        path: "main.sh",
+                        content: "# Use the terminal.\n",
+                        language: "bash",
+                        isEntry: true,
+                        entry: true,
+                    },
+                    {
+                        path: ".zoeskoul/setup.sh",
+                        content: "#!/usr/bin/env bash\nmkdir -p trail-journal\n",
+                        language: "bash",
+                        readOnly: true,
+                    },
+                    {
+                        path: "trail-journal/README.md",
+                        content: "# Trail Journal\n",
+                        language: "bash",
+                    },
+                ],
+                gitExpectations: {
+                    repositoryPath: "trail-journal",
+                    repositoryInitialized: true,
+                    currentBranch: "main",
+                },
+            } as any,
+        });
+
+        expect((manifest as any)?.serviceOverrides).toMatchObject({
+            preset: "runner",
+            runnerBackend: "pty",
+            layoutMode: "default",
+            terminalSessionScope: "exercise",
+            terminalCwd: "/workspace/trail-journal",
+            terminalBootstrap: {
+                gitSafeDirectories: ["/workspace/*"],
+                setupScriptPath: ".zoeskoul/setup.sh",
+                workspaceStateKey: expect.stringMatching(/^git-state-v1-/),
+            },
+            fileActions: {
+                enabled: true,
+                createFile: true,
+                createFolder: true,
+                rename: true,
+                delete: true,
+            },
+            requires: { files: true, multiFile: true, terminal: true },
+        });
+        expect((manifest as any)?.fixtureFiles).toEqual([
+            expect.objectContaining({ path: ".zoeskoul/setup.sh" }),
+            expect.objectContaining({ path: "trail-journal/README.md" }),
+        ]);
+        expect((manifest as any)?.workspace?.fixtureFiles).toEqual([
+            expect.objectContaining({ path: ".zoeskoul/setup.sh" }),
+            expect.objectContaining({ path: "trail-journal/README.md" }),
+        ]);
+        expect((manifest as any)?.workspace?.entryFilePath).toBe(
+            "trail-journal/README.md",
+        );
+        expect((manifest as any)?.starterFiles).toEqual([
+            expect.objectContaining({
+                path: "trail-journal/README.md",
+                isEntry: true,
+                entry: true,
+            }),
+        ]);
+        expect(JSON.stringify(manifest)).not.toContain("main.sh");
+        expect(bashProfile.codeInput?.buildManifest).not.toBe(
+            gitProfile.codeInput?.buildManifest,
+        );
+    });
+
+    it("keys the PTY lease from the compiled hidden starting state", () => {
+        const build = (setupContent: string) =>
+            gitProfile.codeInput?.buildManifest({
+                messageBase: "quiz.git.state-key",
+                seed: { topicId: "state-key", profileId: "git" } as any,
+                exercise: {
+                    id: "state-key-1",
+                    kind: "code_input",
+                    title: "Inspect the repository",
+                    prompt: "Inspect the prepared repository.",
+                    starterCode: "# Trail Journal\n",
+                    solutionCode: "git status\n",
+                    fixedLanguage: "bash",
+                    recipeType: "shell_task",
+                    mode: "terminal_workspace",
+                    starterFiles: [
+                        {
+                            path: ".zoeskoul/setup.sh",
+                            content: setupContent,
+                            language: "bash",
+                            readOnly: true,
+                        },
+                        {
+                            path: "trail-journal/README.md",
+                            content: "# Trail Journal\n",
+                            language: "markdown",
+                        },
+                    ],
+                    gitExpectations: {
+                        repositoryPath: "trail-journal",
+                        repositoryInitialized: true,
+                    },
+                } as any,
+            }) as any;
+
+        const first = build("#!/usr/bin/env bash\ngit -C trail-journal init -q -b main\n");
+        const same = build("#!/usr/bin/env bash\ngit -C trail-journal init -q -b main\n");
+        const changed = build("#!/usr/bin/env bash\ngit -C trail-journal init -q -b trunk\n");
+
+        expect(first.ideConfig.terminalBootstrap.workspaceStateKey).toBe(
+            same.ideConfig.terminalBootstrap.workspaceStateKey,
+        );
+        expect(first.ideConfig.terminalBootstrap.workspaceStateKey).not.toBe(
+            changed.ideConfig.terminalBootstrap.workspaceStateKey,
+        );
     });
 
     it("registers the Git profile, adapter, and code family services path", () => {
@@ -57,7 +217,12 @@ describe("gitProfile", () => {
         });
 
         expect(repaired?.terminalExpectations).toEqual({
-            requiredCommands: [{ pattern: "^git\\s+status$" }],
+            requiredCommands: [
+                {
+                    pattern: "^git\\s+status$",
+                    message: "Run `git status`, then check your answer again.",
+                },
+            ],
         });
 
         const manifest = gitProfile.codeInput?.buildManifest({
@@ -66,7 +231,13 @@ describe("gitProfile", () => {
             exercise: repaired!,
         });
         expect(manifest?.terminalExpectations).toEqual({
-            requiredCommands: [{ pattern: "^git\\s+status$" }],
+            requiredCommands: [
+                {
+                    pattern: "^git\\s+status$",
+                    message:
+                        "@:quiz.git.status.terminalExpectations.requiredCommands.0.message",
+                },
+            ],
         });
     });
 
@@ -116,6 +287,11 @@ describe("gitProfile", () => {
         expect(joined).toMatch(/local bare repositories/i);
         expect(joined).toMatch(/Do not assert exact commit hashes/i);
         expect(joined).toMatch(/press Enter/i);
+        expect(joined).toMatch(/real project file/i);
+        expect(joined).toMatch(/never create a synthetic main\.sh/i);
+        expect(joined).toMatch(/editor, explorer, and terminal visible together/i);
+        expect(joined).toMatch(/every Git code_input as an isolated workspace/i);
+        expect(joined).toMatch(/instead of relying on a previous exercise or PTY session/i);
         expect(joined).toContain('body explicitly begins with "Worked example:"');
         expect(joined).toMatch(/conceptualOnly topic omits code_input practice/i);
         expect(joined).toMatch(/course introduction and the worked-example teaching sketch as separate/i);

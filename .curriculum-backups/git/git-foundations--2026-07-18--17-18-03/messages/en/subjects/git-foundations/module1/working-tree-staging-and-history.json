@@ -1,0 +1,299 @@
+{
+  "topics": {
+    "git-foundations": {
+      "git-foundations-module-1-start-tracking": {
+        "working-tree-staging-and-history": {
+          "label": "Move a Change into History",
+          "summary": "Follow one edit through the working tree, staging area, and first commit, then confirm the snapshot appears in history.",
+          "cards": {
+            "sketch0": {
+              "title": "The Working Tree Is Your Draft"
+            },
+            "sketch1": {
+              "title": "Stage the Change You Intend"
+            },
+            "sketch2": {
+              "title": "Commit a Named Snapshot"
+            },
+            "sketch3": {
+              "title": "Read the History You Created"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_working_tree_staging_and_history_sketch0": {
+              "title": "Read a Working-Tree Change",
+              "prompt": "The terminal opens inside the prepared `study-notes/` repository.\n\nA committed `notes.txt` has a new line that is not staged. Use status and diff to inspect the working-tree change.\n\nType each command in the terminal and press Enter.",
+              "hint": "Read the repository state first, then use the Git command that changes only the requested boundary.",
+              "help": {
+                "concept": "The working tree is where edits live before they are selected for a commit.",
+                "hint_1": "Use the exact file or repository named in the task; avoid broad commands that include unrelated work.",
+                "hint_2": "After the action, run the requested inspection command to confirm the final state."
+              },
+              "starterCode": "# Use the terminal for this Git task.\n# The required starting files and repository state are already prepared.\n",
+              "solutionCode": "git status --short\ngit diff -- notes.txt",
+              "instructions": "The terminal opens inside the prepared `study-notes/` repository.\n\nA committed `notes.txt` has a new line that is not staged. Use status and diff to inspect the working-tree change.\n\nType each command in the terminal and press Enter.",
+              "starterFiles": {
+                "main_sh": {
+                  "content": "# Use the terminal for this Git task.\n# The required starting files and repository state are already prepared.\n"
+                },
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf study-notes\nmkdir -p study-notes\ngit -C study-notes init -q -b main\ngit -C study-notes config --local user.name \"ZoeSkoul Learner\"\ngit -C study-notes config --local user.email \"learner@zoeskoul.local\"\ncd study-notes\nprintf %s 'Git tracks snapshots.\n' > notes.txt\ncd ..\ngit -C study-notes add -A\ngit -C study-notes commit -q -m 'Add project baseline'\ncd study-notes\nprintf %s 'Git tracks snapshots.\nThe working tree can change first.\n' > notes.txt\ncd ..\n"
+                }
+              },
+              "solutionFiles": {
+                "main_sh": {
+                  "content": "git status --short\ngit diff -- notes.txt\n"
+                },
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf study-notes\nmkdir -p study-notes\ngit -C study-notes init -q -b main\ngit -C study-notes config --local user.name \"ZoeSkoul Learner\"\ngit -C study-notes config --local user.email \"learner@zoeskoul.local\"\ncd study-notes\nprintf %s 'Git tracks snapshots.\n' > notes.txt\ncd ..\ngit -C study-notes add -A\ngit -C study-notes commit -q -m 'Add project baseline'\ncd study-notes\nprintf %s 'Git tracks snapshots.\nThe working tree can change first.\n' > notes.txt\ncd ..\n"
+                }
+              },
+              "terminalExpectations": {
+                "forbiddenCommands": {
+                  "0": {
+                    "message": "Do not rewrite shared history in this Git practice task."
+                  }
+                }
+              }
+            },
+            "try_working_tree_staging_and_history_sketch1": {
+              "title": "Move the Change into the Staging Area",
+              "prompt": "The terminal opens inside the prepared `study-notes/` repository.\n\nStage only `notes.txt`, then inspect the staged file name and staged diff.\n\nType each command in the terminal and press Enter.",
+              "hint": "Read the repository state first, then use the Git command that changes only the requested boundary.",
+              "help": {
+                "concept": "git add copies the chosen working-tree content into the staging area; it does not create history yet.",
+                "hint_1": "Use the exact file or repository named in the task; avoid broad commands that include unrelated work.",
+                "hint_2": "After the action, run the requested inspection command to confirm the final state."
+              },
+              "starterCode": "# Use the terminal for this Git task.\n# The required starting files and repository state are already prepared.\n",
+              "solutionCode": "git add notes.txt\ngit diff --staged --name-only\ngit diff --staged -- notes.txt",
+              "instructions": "The terminal opens inside the prepared `study-notes/` repository.\n\nStage only `notes.txt`, then inspect the staged file name and staged diff.\n\nType each command in the terminal and press Enter.",
+              "starterFiles": {
+                "main_sh": {
+                  "content": "# Use the terminal for this Git task.\n# The required starting files and repository state are already prepared.\n"
+                },
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf study-notes\nmkdir -p study-notes\ngit -C study-notes init -q -b main\ngit -C study-notes config --local user.name \"ZoeSkoul Learner\"\ngit -C study-notes config --local user.email \"learner@zoeskoul.local\"\ncd study-notes\nprintf %s 'Git tracks snapshots.\n' > notes.txt\ncd ..\ngit -C study-notes add -A\ngit -C study-notes commit -q -m 'Add project baseline'\ncd study-notes\nprintf %s 'Git tracks snapshots.\nThe staging area selects the next snapshot.\n' > notes.txt\ncd ..\n"
+                }
+              },
+              "solutionFiles": {
+                "main_sh": {
+                  "content": "git add notes.txt\ngit diff --staged --name-only\ngit diff --staged -- notes.txt\n"
+                },
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf study-notes\nmkdir -p study-notes\ngit -C study-notes init -q -b main\ngit -C study-notes config --local user.name \"ZoeSkoul Learner\"\ngit -C study-notes config --local user.email \"learner@zoeskoul.local\"\ncd study-notes\nprintf %s 'Git tracks snapshots.\n' > notes.txt\ncd ..\ngit -C study-notes add -A\ngit -C study-notes commit -q -m 'Add project baseline'\ncd study-notes\nprintf %s 'Git tracks snapshots.\nThe staging area selects the next snapshot.\n' > notes.txt\ncd ..\n"
+                }
+              },
+              "terminalExpectations": {
+                "forbiddenCommands": {
+                  "0": {
+                    "message": "Do not rewrite shared history in this Git practice task."
+                  }
+                }
+              }
+            },
+            "try_working_tree_staging_and_history_sketch2": {
+              "title": "Record the Staged Snapshot",
+              "prompt": "The terminal opens inside the prepared `study-notes/` repository.\n\nThe notes change is already staged. Commit it with `Explain the staging area`, then read the latest one-line history entry.\n\nType each command in the terminal and press Enter.",
+              "hint": "Read the repository state first, then use the Git command that changes only the requested boundary.",
+              "help": {
+                "concept": "git commit records the staged snapshot as a new history entry; unstaged work is not included.",
+                "hint_1": "Use the exact file or repository named in the task; avoid broad commands that include unrelated work.",
+                "hint_2": "After the action, run the requested inspection command to confirm the final state."
+              },
+              "starterCode": "# Use the terminal for this Git task.\n# The required starting files and repository state are already prepared.\n",
+              "solutionCode": "git commit -m \"Explain the staging area\"\ngit log -1 --oneline",
+              "instructions": "The terminal opens inside the prepared `study-notes/` repository.\n\nThe notes change is already staged. Commit it with `Explain the staging area`, then read the latest one-line history entry.\n\nType each command in the terminal and press Enter.",
+              "starterFiles": {
+                "main_sh": {
+                  "content": "# Use the terminal for this Git task.\n# The required starting files and repository state are already prepared.\n"
+                },
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf study-notes\nmkdir -p study-notes\ngit -C study-notes init -q -b main\ngit -C study-notes config --local user.name \"ZoeSkoul Learner\"\ngit -C study-notes config --local user.email \"learner@zoeskoul.local\"\ncd study-notes\nprintf %s 'Git tracks snapshots.\n' > notes.txt\ncd ..\ngit -C study-notes add -A\ngit -C study-notes commit -q -m 'Add project baseline'\ncd study-notes\nprintf %s 'Git tracks snapshots.\nThe staging area selects the next snapshot.\n' > notes.txt\ncd ..\ngit -C study-notes add -- notes.txt\n"
+                }
+              },
+              "solutionFiles": {
+                "main_sh": {
+                  "content": "git commit -m \"Explain the staging area\"\ngit log -1 --oneline\n"
+                },
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf study-notes\nmkdir -p study-notes\ngit -C study-notes init -q -b main\ngit -C study-notes config --local user.name \"ZoeSkoul Learner\"\ngit -C study-notes config --local user.email \"learner@zoeskoul.local\"\ncd study-notes\nprintf %s 'Git tracks snapshots.\n' > notes.txt\ncd ..\ngit -C study-notes add -A\ngit -C study-notes commit -q -m 'Add project baseline'\ncd study-notes\nprintf %s 'Git tracks snapshots.\nThe staging area selects the next snapshot.\n' > notes.txt\ncd ..\ngit -C study-notes add -- notes.txt\n"
+                }
+              },
+              "terminalExpectations": {
+                "forbiddenCommands": {
+                  "0": {
+                    "message": "Do not rewrite shared history in this Git practice task."
+                  }
+                }
+              }
+            },
+            "try_working_tree_staging_and_history_sketch3": {
+              "title": "Verify the Three Areas Agree",
+              "prompt": "The terminal opens inside the prepared `study-notes/` repository.\n\nThe second notes snapshot is complete. Use short status and one-line log to verify a clean working tree and two commits.\n\nType each command in the terminal and press Enter.",
+              "hint": "Read the repository state first, then use the Git command that changes only the requested boundary.",
+              "help": {
+                "concept": "After a successful commit, the working tree and index can match HEAD again while the history keeps both snapshots.",
+                "hint_1": "Use the exact file or repository named in the task; avoid broad commands that include unrelated work.",
+                "hint_2": "After the action, run the requested inspection command to confirm the final state."
+              },
+              "starterCode": "# Use the terminal for this Git task.\n# The required starting files and repository state are already prepared.\n",
+              "solutionCode": "git status --short\ngit log --oneline",
+              "instructions": "The terminal opens inside the prepared `study-notes/` repository.\n\nThe second notes snapshot is complete. Use short status and one-line log to verify a clean working tree and two commits.\n\nType each command in the terminal and press Enter.",
+              "starterFiles": {
+                "main_sh": {
+                  "content": "# Use the terminal for this Git task.\n# The required starting files and repository state are already prepared.\n"
+                },
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf study-notes\nmkdir -p study-notes\ngit -C study-notes init -q -b main\ngit -C study-notes config --local user.name \"ZoeSkoul Learner\"\ngit -C study-notes config --local user.email \"learner@zoeskoul.local\"\ncd study-notes\nprintf %s 'Git tracks snapshots.\n' > notes.txt\ncd ..\ngit -C study-notes add -A\ngit -C study-notes commit -q -m 'Start study notes'\ncd study-notes\nprintf %s 'Git tracks snapshots.\nThe staging area selects the next snapshot.\n' > notes.txt\ncd ..\ngit -C study-notes add -A\ngit -C study-notes commit -q -m 'Explain the staging area'\n"
+                }
+              },
+              "solutionFiles": {
+                "main_sh": {
+                  "content": "git status --short\ngit log --oneline\n"
+                },
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf study-notes\nmkdir -p study-notes\ngit -C study-notes init -q -b main\ngit -C study-notes config --local user.name \"ZoeSkoul Learner\"\ngit -C study-notes config --local user.email \"learner@zoeskoul.local\"\ncd study-notes\nprintf %s 'Git tracks snapshots.\n' > notes.txt\ncd ..\ngit -C study-notes add -A\ngit -C study-notes commit -q -m 'Start study notes'\ncd study-notes\nprintf %s 'Git tracks snapshots.\nThe staging area selects the next snapshot.\n' > notes.txt\ncd ..\ngit -C study-notes add -A\ngit -C study-notes commit -q -m 'Explain the staging area'\n"
+                }
+              },
+              "terminalExpectations": {
+                "forbiddenCommands": {
+                  "0": {
+                    "message": "Do not rewrite shared history in this Git practice task."
+                  }
+                }
+              }
+            }
+          },
+          "practice": {
+            "single-choice-1": {
+              "title": "Identify the Working Tree",
+              "prompt": "What is the working tree in Git?",
+              "hint": "Think about where you make changes before staging them.",
+              "help": {
+                "concept": "The working tree is where you make changes to files before staging.",
+                "hint_1": "It's the directory where your project files are located.",
+                "hint_2": "It's not the staging area or commit history."
+              },
+              "options": {
+                "a": "The directory where you make changes to files",
+                "b": "The area where changes are staged for commit",
+                "c": "The history of all commits",
+                "d": "The remote repository"
+              }
+            },
+            "single-choice-2": {
+              "title": "Purpose of the Staging Area",
+              "prompt": "What is the purpose of the staging area in Git?",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "The working tree, staging area, and commit history are separate layers; each Git action moves content across one boundary.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "options": {
+                "a": "To prepare changes for the next commit",
+                "b": "To store the commit history",
+                "c": "To track remote changes",
+                "d": "To initialize a repository"
+              }
+            },
+            "multi-choice-1": {
+              "title": "Components of a Git Repository",
+              "prompt": "Which of the following are components of a Git repository? Select all that apply.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "The working tree, staging area, and commit history are separate layers; each Git action moves content across one boundary.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "options": {
+                "a": "Working tree",
+                "b": "Staging area",
+                "c": "Commit history",
+                "d": "Remote server"
+              }
+            },
+            "drag-reorder-1": {
+              "title": "Order of Git Workflow",
+              "prompt": "Arrange the steps of the Git workflow in the correct order.",
+              "hint": "Think about the sequence from editing to committing changes.",
+              "help": {
+                "concept": "The Git workflow involves editing, staging, and committing changes.",
+                "hint_1": "Start with making changes in the working tree.",
+                "hint_2": "Staging comes before committing."
+              },
+              "tokens": {
+                "t1": "Edit files in the working tree",
+                "t2": "Stage changes in the staging area",
+                "t3": "Commit changes to the commit history"
+              }
+            },
+            "fill-blank-choice-1": {
+              "title": "Command to Stage Files",
+              "prompt": "Fill in the blank to stage a file for commit: `git [blank1] filename.txt`.",
+              "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+              "help": {
+                "concept": "The blank should be filled with the term that makes the statement accurate.",
+                "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+                "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+              },
+              "template": "git [blank1] filename.txt",
+              "choices": [
+                "add",
+                "commit",
+                "status",
+                "log"
+              ]
+            },
+            "fill-blank-choice-2": {
+              "title": "Command to View Commit History",
+              "prompt": "Fill in the blank to view the commit history: `git [blank1] --oneline`.",
+              "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+              "help": {
+                "concept": "The blank should be filled with the term that makes the statement accurate.",
+                "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+                "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+              },
+              "template": "git [blank1] --oneline",
+              "choices": [
+                "log",
+                "status",
+                "add",
+                "commit"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "git-foundations": {
+      "git-foundations-module-1-start-tracking": {
+        "working-tree-staging-and-history": {
+          "working-tree-intro": {
+            "title": "The Working Tree Is Your Draft",
+            "bodyMarkdown": "The working tree is the project you can open and edit right now. When you change a tracked file, the working tree moves ahead of the last commit.\n\n```bash\nprintf '%s\n' 'Open Saturdays' >> hours.txt\ngit status --short\n```\n\nGit reports a modified tracked file, but history has not changed. You are still working on a draft. This separation lets you revise freely before deciding what belongs in the next snapshot."
+          },
+          "staging-area-intro": {
+            "title": "Stage the Change You Intend",
+            "bodyMarkdown": "The staging area is the proposed contents of the next commit. Add only the file that belongs to the current purpose:\n\n```bash\ngit add hours.txt\ngit status --short\n```\n\nThe status mark moves to the left column, showing that the change is staged. Staging does not copy the whole working tree automatically; it records the version of `hours.txt` that exists at that moment.\n\nIf you edit the file again afterward, Git can show both a staged version and a newer unstaged edit."
+          },
+          "commit-history-intro": {
+            "title": "Commit a Named Snapshot",
+            "bodyMarkdown": "A commit records the staged snapshot with a message:\n\n```bash\ngit commit -m \"Add Saturday hours\"\n```\n\nThe message explains the purpose of the snapshot. A useful commit is focused: its files support one understandable change, and its message says what that change accomplishes.\n\nOnly staged content enters the commit. Untracked files and unstaged edits remain outside it."
+          },
+          "git-status-bridge": {
+            "title": "Read the History You Created",
+            "bodyMarkdown": "After committing, inspect the timeline:\n\n```bash\ngit log --oneline\n```\n\nThe newest commit appears first with a shortened identifier and its subject. The identifier will differ between repositories, so focus on the order and message rather than memorizing a hash.\n\nFinish with `git status --short`. No output means the working tree matches the latest commit and nothing is waiting to be recorded."
+          }
+        }
+      }
+    }
+  }
+}

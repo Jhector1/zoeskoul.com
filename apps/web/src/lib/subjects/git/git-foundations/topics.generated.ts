@@ -8,9 +8,9 @@ import type {
 } from "@/lib/subjects/_core/subjectManifestTypes";
 
 import whyVersionControlMattersJson from "./modules/module1/topics/why-version-control-matters/topic.bundle.json";
-import workingTreeStagingAndHistoryJson from "./modules/module1/topics/working-tree-staging-and-history/topic.bundle.json";
 import configureAndInitializeARepositoryJson from "./modules/module1/topics/configure-and-initialize-a-repository/topic.bundle.json";
 import readTrackedAndUntrackedStateJson from "./modules/module1/topics/read-tracked-and-untracked-state/topic.bundle.json";
+import workingTreeStagingAndHistoryJson from "./modules/module1/topics/working-tree-staging-and-history/topic.bundle.json";
 import module1FieldNotesRepositoryJson from "./modules/module1/topics/module-1-field-notes-repository/topic.bundle.json";
 import inspectUnstagedChangesWithDiffJson from "./modules/module2/topics/inspect-unstaged-changes-with-diff/topic.bundle.json";
 import stageIntentionallyJson from "./modules/module2/topics/stage-intentionally/topic.bundle.json";
@@ -26,9 +26,9 @@ import finalNeighborhoodResourceGuideHistoryJson from "./modules/module4/topics/
 
 
 const whyVersionControlMatters = whyVersionControlMattersJson as SlimTopicManifest;
-const workingTreeStagingAndHistory = workingTreeStagingAndHistoryJson as SlimTopicManifest;
 const configureAndInitializeARepository = configureAndInitializeARepositoryJson as SlimTopicManifest;
 const readTrackedAndUntrackedState = readTrackedAndUntrackedStateJson as SlimTopicManifest;
+const workingTreeStagingAndHistory = workingTreeStagingAndHistoryJson as SlimTopicManifest;
 const module1FieldNotesRepository = module1FieldNotesRepositoryJson as SlimTopicManifest;
 const inspectUnstagedChangesWithDiff = inspectUnstagedChangesWithDiffJson as SlimTopicManifest;
 const stageIntentionally = stageIntentionallyJson as SlimTopicManifest;
@@ -44,9 +44,9 @@ const finalNeighborhoodResourceGuideHistory = finalNeighborhoodResourceGuideHist
 
 export const TOPIC_MANIFESTS: TopicManifestRefMap = {
   "why-version-control-matters": whyVersionControlMatters,
-  "working-tree-staging-and-history": workingTreeStagingAndHistory,
   "configure-and-initialize-a-repository": configureAndInitializeARepository,
   "read-tracked-and-untracked-state": readTrackedAndUntrackedState,
+  "working-tree-staging-and-history": workingTreeStagingAndHistory,
   "module-1-field-notes-repository": module1FieldNotesRepository,
   "inspect-unstaged-changes-with-diff": inspectUnstagedChangesWithDiff,
   "stage-intentionally": stageIntentionally,

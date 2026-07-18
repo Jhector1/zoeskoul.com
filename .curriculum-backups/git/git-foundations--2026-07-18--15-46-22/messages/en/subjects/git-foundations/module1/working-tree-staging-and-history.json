@@ -1,0 +1,299 @@
+{
+  "topics": {
+    "git-foundations": {
+      "git-foundations-module-1-start-tracking": {
+        "working-tree-staging-and-history": {
+          "label": "Working Tree, Staging Area, and History",
+          "summary": "Follow one file from an ordinary edit through the staging area into a committed snapshot.",
+          "cards": {
+            "sketch0": {
+              "title": "The Working Tree Explained"
+            },
+            "sketch1": {
+              "title": "The Role of the Staging Area"
+            },
+            "sketch2": {
+              "title": "The Importance of Commit History"
+            },
+            "sketch3": {
+              "title": "Git Status as a Bridge"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_working_tree_staging_and_history_sketch0": {
+              "title": "Try it yourself: Explore the Working Tree",
+              "prompt": "Right after the sketch \"The Working Tree Explained\", practice that exact idea with this task. Modify a file in your working tree and check its status. Create a file named `example.txt`, add some text, and use `git status` to see its state.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter to prepare the local repository. Then type the requested Git command and press Enter. Produce the result for explore the Working Tree so it reinforces Working Tree, Staging Area, and History.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then type the Git command requested in the prompt.",
+              "solutionCode": "bash .zoeskoul/setup.sh\ngit status",
+              "instructions": "Modify a file in your working tree and check its status. Create a file named `example.txt`, add some text, and use `git status` to see its state.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter to prepare the local repository. Then type the requested Git command and press Enter.",
+              "starterFiles": {
+                "main_sh": {
+                  "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then type the Git command requested in the prompt.\n"
+                },
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Project baseline\\n' > example.txt\ngit add example.txt\ngit commit -q -m \"Add project baseline\"\nprintf 'Working tree update\\n' >> example.txt\n"
+                }
+              },
+              "solutionFiles": {
+                "main_sh": {
+                  "content": "bash .zoeskoul/setup.sh\ngit status\n"
+                },
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Project baseline\\n' > example.txt\ngit add example.txt\ngit commit -q -m \"Add project baseline\"\nprintf 'Working tree update\\n' >> example.txt\n"
+                }
+              },
+              "terminalExpectations": {
+                "forbiddenCommands": {
+                  "0": {
+                    "message": "Do not rewrite shared history in this Git practice task."
+                  }
+                }
+              }
+            },
+            "try_working_tree_staging_and_history_sketch1": {
+              "title": "Try it yourself: Stage Changes for Commit",
+              "prompt": "Right after the sketch \"The Role of the Staging Area\", practice that exact idea with this task. Stage a modified file for commit. Edit `example.txt` to add more text, then stage it using `git add`. Verify the staging area with `git status`.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter to prepare the local repository. Then type the requested Git command and press Enter. Produce the result for stage Changes for Commit so it reinforces Working Tree, Staging Area, and History.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then type the Git command requested in the prompt.",
+              "solutionCode": "bash .zoeskoul/setup.sh\ngit add example.txt\ngit status",
+              "instructions": "Stage a modified file for commit. Edit `example.txt` to add more text, then stage it using `git add`. Verify the staging area with `git status`.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter to prepare the local repository. Then type the requested Git command and press Enter.",
+              "starterFiles": {
+                "main_sh": {
+                  "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then type the Git command requested in the prompt.\n"
+                },
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Project baseline\\n' > example.txt\ngit add example.txt\ngit commit -q -m \"Add project baseline\"\nprintf 'Ready to stage\\n' >> example.txt\n"
+                }
+              },
+              "solutionFiles": {
+                "main_sh": {
+                  "content": "bash .zoeskoul/setup.sh\ngit add example.txt\ngit status\n"
+                },
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Project baseline\\n' > example.txt\ngit add example.txt\ngit commit -q -m \"Add project baseline\"\nprintf 'Ready to stage\\n' >> example.txt\n"
+                }
+              },
+              "terminalExpectations": {
+                "forbiddenCommands": {
+                  "0": {
+                    "message": "Do not rewrite shared history in this Git practice task."
+                  }
+                }
+              }
+            },
+            "try_working_tree_staging_and_history_sketch2": {
+              "title": "Try it yourself: Commit Your Changes",
+              "prompt": "Right after the sketch \"The Importance of Commit History\", practice that exact idea with this task. Commit the staged changes with a meaningful message. Use `git commit` to save the changes to the commit history.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter to prepare the local repository. Then type the requested Git command and press Enter. Produce the result for commit Your Changes so it reinforces Working Tree, Staging Area, and History.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then type the Git command requested in the prompt.",
+              "solutionCode": "bash .zoeskoul/setup.sh\ngit commit -m \"Update project file\"\ngit log --oneline",
+              "instructions": "Commit the staged changes with a meaningful message. Use `git commit` to save the changes to the commit history.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter to prepare the local repository. Then type the requested Git command and press Enter.",
+              "starterFiles": {
+                "main_sh": {
+                  "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then type the Git command requested in the prompt.\n"
+                },
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Project baseline\\n' > project.txt\ngit add project.txt\ngit commit -q -m \"Add project baseline\"\nprintf 'Ready to commit\\n' >> project.txt\ngit add project.txt\n"
+                }
+              },
+              "solutionFiles": {
+                "main_sh": {
+                  "content": "bash .zoeskoul/setup.sh\ngit commit -m \"Update project file\"\ngit log --oneline\n"
+                },
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Project baseline\\n' > project.txt\ngit add project.txt\ngit commit -q -m \"Add project baseline\"\nprintf 'Ready to commit\\n' >> project.txt\ngit add project.txt\n"
+                }
+              },
+              "terminalExpectations": {
+                "forbiddenCommands": {
+                  "0": {
+                    "message": "Do not rewrite shared history in this Git practice task."
+                  }
+                }
+              }
+            },
+            "try_working_tree_staging_and_history_sketch3": {
+              "title": "Try it yourself: Use Git Status to Verify Changes",
+              "prompt": "Right after the sketch \"Git Status as a Bridge\", practice that exact idea with this task. Use `git status` to verify the current state of your repository after committing changes. Ensure the working tree is clean.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter to prepare the local repository. Then type the requested Git command and press Enter. Produce the result for use Git Status to Verify Changes so it reinforces Working Tree, Staging Area, and History.",
+              "hint": "Run `git status` to check the repository state.",
+              "help": {
+                "concept": "`git status` shows the current state of the working tree and staging area.",
+                "hint_1": "After committing, `git status` should show a clean working tree.",
+                "hint_2": "Ensure no files are staged or modified."
+              },
+              "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then type the Git command requested in the prompt.",
+              "solutionCode": "bash .zoeskoul/setup.sh\ngit log --oneline",
+              "instructions": "Use `git status` to verify the current state of your repository after committing changes. Ensure the working tree is clean.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter to prepare the local repository. Then type the requested Git command and press Enter.",
+              "starterFiles": {
+                "main_sh": {
+                  "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then type the Git command requested in the prompt.\n"
+                },
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'First project note\\n' > project.txt\ngit add project.txt\ngit commit -q -m \"Add first project note\"\nprintf 'Second project note\\n' >> project.txt\ngit add project.txt\ngit commit -q -m \"Add second project note\"\n"
+                }
+              },
+              "solutionFiles": {
+                "main_sh": {
+                  "content": "bash .zoeskoul/setup.sh\ngit log --oneline\n"
+                },
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'First project note\\n' > project.txt\ngit add project.txt\ngit commit -q -m \"Add first project note\"\nprintf 'Second project note\\n' >> project.txt\ngit add project.txt\ngit commit -q -m \"Add second project note\"\n"
+                }
+              },
+              "terminalExpectations": {
+                "forbiddenCommands": {
+                  "0": {
+                    "message": "Do not rewrite shared history in this Git practice task."
+                  }
+                }
+              }
+            }
+          },
+          "practice": {
+            "single-choice-1": {
+              "title": "Identify the Working Tree",
+              "prompt": "What is the working tree in Git?",
+              "hint": "Think about where you make changes before staging them.",
+              "help": {
+                "concept": "The working tree is where you make changes to files before staging.",
+                "hint_1": "It's the directory where your project files are located.",
+                "hint_2": "It's not the staging area or commit history."
+              },
+              "options": {
+                "a": "The directory where you make changes to files",
+                "b": "The area where changes are staged for commit",
+                "c": "The history of all commits",
+                "d": "The remote repository"
+              }
+            },
+            "single-choice-2": {
+              "title": "Purpose of the Staging Area",
+              "prompt": "What is the purpose of the staging area in Git?",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "options": {
+                "a": "To prepare changes for the next commit",
+                "b": "To store the commit history",
+                "c": "To track remote changes",
+                "d": "To initialize a repository"
+              }
+            },
+            "multi-choice-1": {
+              "title": "Components of a Git Repository",
+              "prompt": "Which of the following are components of a Git repository? Select all that apply.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "options": {
+                "a": "Working tree",
+                "b": "Staging area",
+                "c": "Commit history",
+                "d": "Remote server"
+              }
+            },
+            "drag-reorder-1": {
+              "title": "Order of Git Workflow",
+              "prompt": "Arrange the steps of the Git workflow in the correct order.",
+              "hint": "Think about the sequence from editing to committing changes.",
+              "help": {
+                "concept": "The Git workflow involves editing, staging, and committing changes.",
+                "hint_1": "Start with making changes in the working tree.",
+                "hint_2": "Staging comes before committing."
+              },
+              "tokens": {
+                "t1": "Edit files in the working tree",
+                "t2": "Stage changes in the staging area",
+                "t3": "Commit changes to the commit history"
+              }
+            },
+            "fill-blank-choice-1": {
+              "title": "Command to Stage Files",
+              "prompt": "Fill in the blank to stage a file for commit: `git [blank1] filename.txt`.",
+              "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+              "help": {
+                "concept": "The blank should be filled with the term that makes the statement accurate.",
+                "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+                "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+              },
+              "template": "git [blank1] filename.txt",
+              "choices": [
+                "add",
+                "commit",
+                "status",
+                "log"
+              ]
+            },
+            "fill-blank-choice-2": {
+              "title": "Command to View Commit History",
+              "prompt": "Fill in the blank to view the commit history: `git [blank1] --oneline`.",
+              "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+              "help": {
+                "concept": "The blank should be filled with the term that makes the statement accurate.",
+                "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+                "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+              },
+              "template": "git [blank1] --oneline",
+              "choices": [
+                "log",
+                "status",
+                "add",
+                "commit"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "git-foundations": {
+      "git-foundations-module-1-start-tracking": {
+        "working-tree-staging-and-history": {
+          "working-tree-intro": {
+            "title": "The Working Tree Explained",
+            "bodyMarkdown": "The working tree is the directory where you make changes to your files. It's the place where you can freely edit, add, or remove files before deciding to track them with Git. When you modify a file, it exists in the working tree until you stage it for a commit.\n\nWorked example: Imagine you have a project folder with a file named `notes.txt`. You open this file and add some new information. At this point, the changes are only in your working tree. You can check the status of your working tree using the command:\n\n```bash\ngit status\n```\n\nThis command will show you which files have been modified but not yet staged for commit. It's a crucial step to ensure you know what changes are pending before you move them to the staging area."
+          },
+          "staging-area-intro": {
+            "title": "The Role of the Staging Area",
+            "bodyMarkdown": "The staging area, also known as the index, is a space where you prepare changes for the next commit. It acts as a buffer between the working tree and the commit history. You add files to the staging area using the `git add` command.\n\nWorked example: Continuing with `notes.txt`, after editing, you decide to include these changes in your next commit. You stage the file by running:\n\n```bash\ngit add notes.txt\n```\n\nNow, `notes.txt` is in the staging area. You can verify this by running `git status` again, which will show the file as staged for commit. This step allows you to selectively choose which changes to include in your next commit, providing flexibility and control over your project history."
+          },
+          "commit-history-intro": {
+            "title": "The Importance of Commit History",
+            "bodyMarkdown": "Commit history is the record of snapshots of your project at various points in time. Each commit represents a state of the project, capturing the changes made since the last commit.\n\nWorked example: Once `notes.txt` is staged, you can commit the changes with:\n\n```bash\ngit commit -m \"Add new information to notes\"\n```\n\nThis command creates a new commit in the history, with a message describing the changes. You can view the commit history using:\n\n```bash\ngit log --oneline\n```\n\nThis will show a list of commits, each with a unique identifier and message. The commit history is essential for tracking the evolution of your project and understanding what changes were made and why."
+          },
+          "git-status-bridge": {
+            "title": "Git Status as a Bridge",
+            "bodyMarkdown": "`git status` is a powerful command that acts as a bridge between the working tree, staging area, and commit history. It provides a summary of the current state of your project, showing which files are modified, staged, or untracked.\n\nWorked example: After making changes to multiple files, you can run:\n\n```bash\ngit status\n```\n\nThis command will display the status of each file, helping you decide what to stage or commit next. It's an essential tool for managing your workflow and ensuring that you don't accidentally commit unwanted changes."
+          }
+        }
+      }
+    }
+  }
+}

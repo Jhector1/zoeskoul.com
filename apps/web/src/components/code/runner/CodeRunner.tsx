@@ -1025,6 +1025,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         enabled: workspaceTerminalEnabled,
         projectId: workspaceTerminal?.projectId,
         cwd: workspaceTerminal?.cwd,
+        bootstrap: workspaceTerminal?.bootstrap,
         workspaceKey: workspaceTerminal?.workspaceKey ?? effectiveExerciseStateKey,
         initialFiles: workspaceTerminal?.initialFiles,
         getWorkspaceFiles: workspaceTerminal?.getWorkspaceFiles,

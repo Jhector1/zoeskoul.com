@@ -569,6 +569,164 @@ function workspaceFileEntries(
     .filter((file) => file.path.trim().length > 0);
 }
 
+function isLegacyGeneratedSafeDirectoryConfig(content: string): boolean {
+  const lines = String(content ?? "")
+    .replace(/\r\n?/g, "\n")
+    .split("\n")
+    .map((line) => line.trim())
+    .filter((line) => line && !line.startsWith("#") && !line.startsWith(";"));
+
+  if (lines.length < 2) return false;
+
+  let sawSafeSection = false;
+  let sawDirectory = false;
+
+  for (const line of lines) {
+    if (/^\[safe\]$/i.test(line)) {
+      sawSafeSection = true;
+      continue;
+    }
+
+    const match = /^directory\s*=\s*(.+)$/i.exec(line);
+    if (!match || !sawSafeSection) return false;
+
+    const directory = match[1].trim().replace(/^['"]|['"]$/g, "");
+    if (directory !== "/workspace" && !directory.startsWith("/workspace/")) {
+      return false;
+    }
+
+    sawDirectory = true;
+  }
+
+  return sawSafeSection && sawDirectory;
+}
+
+function sanitizeLegacyWorkspaceArtifacts(args: {
+  workspace: WorkspaceStateV2;
+  manifest: ManifestWorkspaceDefinition;
+  userOwned: boolean;
+}): WorkspaceStateV2 {
+  const workspace = cloneWorkspace(args.workspace);
+  const authoredPaths = new Set(
+    [...args.manifest.starterFiles, ...args.manifest.fixtureFiles].map((file) =>
+      normalizePath(file.path, args.manifest.entryFile),
+    ),
+  );
+  const authoredEntry = normalizePath(
+    args.manifest.entryFile,
+    defaultMainFile(args.manifest.language),
+  );
+  const defaultEntry = normalizePath(
+    defaultMainFile(args.manifest.language),
+    defaultMainFile(args.manifest.language),
+  );
+  const removeIds = new Set<NodeId>();
+
+  for (const node of workspace.nodes) {
+    if (node.kind !== "file") continue;
+
+    const path = normalizePath(
+      workspacePathForNode(workspace.nodes, node.id),
+      node.name,
+    );
+    const content = String(node.content ?? "");
+    const isUnlistedDefaultEntry =
+      path === defaultEntry &&
+      authoredEntry !== defaultEntry &&
+      !authoredPaths.has(path);
+    const isDisposableDefaultEntry =
+      isUnlistedDefaultEntry && (!args.userOwned || !content.trim());
+    const isGeneratedGitConfig =
+      (path === ".gitconfig" || path.endsWith("/.gitconfig")) &&
+      !authoredPaths.has(path) &&
+      isLegacyGeneratedSafeDirectoryConfig(content);
+
+    if (isDisposableDefaultEntry || isGeneratedGitConfig) {
+      removeIds.add(node.id);
+    }
+  }
+
+  if (removeIds.size === 0) return workspace;
+
+  const nodeById = new Map(workspace.nodes.map((node) => [node.id, node]));
+  const possibleEmptyFolderIds = new Set<NodeId>();
+
+  for (const id of removeIds) {
+    let parentId = nodeById.get(id)?.parentId ?? null;
+
+    while (parentId) {
+      if (possibleEmptyFolderIds.has(parentId)) break;
+      possibleEmptyFolderIds.add(parentId);
+      parentId = nodeById.get(parentId)?.parentId ?? null;
+    }
+  }
+
+  let nextNodes = workspace.nodes.filter((node) => !removeIds.has(node.id));
+  let removedFolder = true;
+
+  while (removedFolder) {
+    removedFolder = false;
+    const parentIds = new Set(
+      nextNodes
+        .map((node) => node.parentId)
+        .filter((id): id is NodeId => Boolean(id)),
+    );
+    const emptyFolderIds = new Set(
+      nextNodes
+        .filter(
+          (node) =>
+            node.kind === "folder" &&
+            possibleEmptyFolderIds.has(node.id) &&
+            !parentIds.has(node.id),
+        )
+        .map((node) => node.id),
+    );
+
+    if (emptyFolderIds.size > 0) {
+      nextNodes = nextNodes.filter((node) => !emptyFolderIds.has(node.id));
+      emptyFolderIds.forEach((id) => removeIds.add(id));
+      removedFolder = true;
+    }
+  }
+
+  const fileByPath = new Map<string, FileNode>();
+  for (const node of nextNodes) {
+    if (node.kind !== "file") continue;
+    const path = normalizePath(
+      workspacePathForNode(nextNodes, node.id),
+      node.name,
+    );
+    fileByPath.set(path, node);
+  }
+
+  const fallbackFile =
+    fileByPath.get(authoredEntry) ??
+    nextNodes.find((node): node is FileNode => node.kind === "file") ??
+    null;
+  const activeFileId =
+    workspace.activeFileId && !removeIds.has(workspace.activeFileId)
+      ? workspace.activeFileId
+      : fallbackFile?.id ?? "";
+  const entryFileId =
+    workspace.entryFileId && !removeIds.has(workspace.entryFileId)
+      ? workspace.entryFileId
+      : fallbackFile?.id ?? activeFileId;
+  const openTabs = workspace.openTabs.filter((id) => !removeIds.has(id));
+
+  if (activeFileId && !openTabs.includes(activeFileId)) {
+    openTabs.push(activeFileId);
+  }
+
+  return {
+    ...workspace,
+    nodes: nextNodes,
+    openTabs,
+    activeFileId,
+    entryFileId,
+    expanded: workspace.expanded.filter((id) => !removeIds.has(id)),
+  };
+}
+
 function manifestFilesForMissingMerge(
   manifest: ManifestWorkspaceDefinition,
 ): Array<{ path: string; content: string }> {
@@ -997,7 +1155,11 @@ function normalizeSavedCandidate(args: {
   language: WorkspaceLanguage;
 }): WorkspaceStateV2 | null {
   if (isWorkspace(args.candidate.workspace)) {
-    const workspace = cloneWorkspace(args.candidate.workspace);
+    const workspace = sanitizeLegacyWorkspaceArtifacts({
+      workspace: args.candidate.workspace,
+      manifest: args.manifest,
+      userOwned: isUserWorkspaceState(args.candidate),
+    });
     const explicitCode =
       typeof args.candidate.code === "string" && args.candidate.code.trim()
         ? args.candidate.code
@@ -1263,12 +1425,17 @@ export function resolveWorkspaceForTarget(args: {
     args.localDraft.savedAt >= freshestSavedUpdatedAt;
 
   if (draftIsFresh && args.localDraft) {
+    const sanitizedDraftWorkspace = sanitizeLegacyWorkspaceArtifacts({
+      workspace: args.localDraft.workspace,
+      manifest,
+      userOwned: true,
+    });
     const mergedWorkspace = manifest.manifestWorkspace
       ? mergeMissingManifestFilesIntoWorkspace({
-          base: args.localDraft.workspace,
+          base: sanitizedDraftWorkspace,
           manifest,
         })
-      : cloneWorkspace(args.localDraft.workspace);
+      : sanitizedDraftWorkspace;
 
     return {
       workspace: mergedWorkspace,

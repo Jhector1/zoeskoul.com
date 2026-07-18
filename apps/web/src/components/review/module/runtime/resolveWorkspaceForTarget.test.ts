@@ -1159,6 +1159,185 @@ describe("resolveWorkspaceForExerciseTarget", () => {
     expect(fileContent(resolved.workspace, "query.sql")).toBe(registrySqlStarter);
   });
 
+  it("removes stale generated main.sh and Git safe-directory config from a regenerated workspace", () => {
+    const staleWorkspace: WorkspaceStateV2 = {
+      version: 2,
+      language: "bash",
+      nodes: [
+        {
+          id: "folder:trail-journal",
+          kind: "folder",
+          name: "trail-journal",
+          parentId: null,
+          createdAt: 0,
+          updatedAt: 0,
+        },
+        {
+          id: "file:trail-journal__README.md",
+          kind: "file",
+          name: "README.md",
+          parentId: "folder:trail-journal",
+          content: "# Trail Journal\n",
+          createdAt: 0,
+          updatedAt: 0,
+        },
+        {
+          id: "file:trail-journal__.gitconfig",
+          kind: "file",
+          name: ".gitconfig",
+          parentId: "folder:trail-journal",
+          content: "[safe]\n\tdirectory = /workspace/*\n",
+          createdAt: 0,
+          updatedAt: 0,
+        },
+        {
+          id: "file:main.sh",
+          kind: "file",
+          name: "main.sh",
+          parentId: null,
+          content: "",
+          createdAt: 0,
+          updatedAt: 0,
+        },
+      ],
+      openTabs: ["file:main.sh", "file:trail-journal__README.md"],
+      activeFileId: "file:main.sh",
+      entryFileId: "file:main.sh",
+      stdin: "",
+      expanded: ["folder:trail-journal"],
+      leftPct: 26,
+    };
+
+    const resolved = resolveWorkspaceForTarget({
+      targetKey: "exercise:git-init",
+      targetKind: "exercise",
+      language: "bash",
+      manifest: {
+        starterCode: "# Trail Journal\n",
+        starterFiles: [
+          {
+            path: "trail-journal/README.md",
+            content: "# Trail Journal\n",
+            isEntry: true,
+          },
+        ],
+        fixtureFiles: [
+          {
+            path: ".zoeskoul/setup.sh",
+            content: "#!/usr/bin/env bash\n",
+          },
+        ],
+        workspace: {
+          entryFilePath: "trail-journal/README.md",
+          starterFiles: [
+            {
+              path: "trail-journal/README.md",
+              content: "# Trail Journal\n",
+              isEntry: true,
+            },
+          ],
+          fixtureFiles: [
+            {
+              path: ".zoeskoul/setup.sh",
+              content: "#!/usr/bin/env bash\n",
+            },
+          ],
+        },
+      },
+      workspaceRequested: true,
+      savedCandidates: [
+        {
+          workspace: staleWorkspace,
+          userEdited: false,
+          workspaceOrigin: "sync",
+        },
+      ],
+    });
+
+    expect(filePaths(resolved.workspace)).toEqual([
+      ".zoeskoul/setup.sh",
+      "trail-journal/README.md",
+    ]);
+    expect(resolved.workspace?.entryFileId).toBe(
+      "file:trail-journal__README.md",
+    );
+    expect(resolved.workspace?.activeFileId).toBe(
+      "file:trail-journal__README.md",
+    );
+    expect(resolved.workspace?.openTabs).toEqual([
+      "file:trail-journal__README.md",
+    ]);
+  });
+
+  it("preserves a learner-created default file while still removing generated Git config", () => {
+    const userWorkspace: WorkspaceStateV2 = {
+      version: 2,
+      language: "bash",
+      nodes: [
+        {
+          id: "file:README.md",
+          kind: "file",
+          name: "README.md",
+          parentId: null,
+          content: "# Project\n",
+          createdAt: 0,
+          updatedAt: 0,
+        },
+        {
+          id: "file:main.sh",
+          kind: "file",
+          name: "main.sh",
+          parentId: null,
+          content: "echo learner file\n",
+          createdAt: 0,
+          updatedAt: 0,
+        },
+        {
+          id: "file:.gitconfig",
+          kind: "file",
+          name: ".gitconfig",
+          parentId: null,
+          content: "[safe]\n\tdirectory = /workspace/project\n",
+          createdAt: 0,
+          updatedAt: 0,
+        },
+      ],
+      openTabs: ["file:main.sh"],
+      activeFileId: "file:main.sh",
+      entryFileId: "file:main.sh",
+      stdin: "",
+      expanded: [],
+      leftPct: 26,
+    };
+
+    const resolved = resolveWorkspaceForTarget({
+      targetKey: "exercise:git-user-file",
+      targetKind: "exercise",
+      language: "bash",
+      manifest: {
+        workspace: {
+          entryFilePath: "README.md",
+          starterFiles: [
+            { path: "README.md", content: "# Project\n", isEntry: true },
+          ],
+        },
+      },
+      workspaceRequested: true,
+      savedCandidates: [
+        {
+          workspace: userWorkspace,
+          userEdited: true,
+          workspaceOrigin: "user",
+        },
+      ],
+    });
+
+    expect(filePaths(resolved.workspace)).toEqual(["main.sh", "README.md"]);
+    expect(fileContent(resolved.workspace, "main.sh")).toBe(
+      "echo learner file\n",
+    );
+  });
+
 });
 
 describe("createManifestWorkspaceDefinition", () => {
