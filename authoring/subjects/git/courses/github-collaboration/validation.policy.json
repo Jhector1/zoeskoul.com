@@ -1,0 +1,110 @@
+{
+  "policyId": "github-collaboration-validation",
+  "allowedConcepts": [
+    "Git versus GitHub",
+    "remote",
+    "origin",
+    "local branch",
+    "remote-tracking branch",
+    "git clone",
+    "git remote -v",
+    "git remote get-url",
+    "git push -u",
+    "upstream",
+    "git fetch",
+    "git pull --ff-only",
+    "issue",
+    "acceptance criteria",
+    "issue branch",
+    "commit issue reference",
+    "pull request",
+    "changed files",
+    "review comment",
+    "request changes",
+    "review response",
+    "merge",
+    "remote branch deletion",
+    "fork concept"
+  ],
+  "disallowedConcepts": [
+    "real learner credentials",
+    "personal access token",
+    "public network dependency",
+    "GitHub Actions",
+    "CODEOWNERS",
+    "protected branch administration",
+    "organization administration",
+    "interactive rebase",
+    "force push",
+    "release automation"
+  ],
+  "validationRequirements": {
+    "profileId": "git",
+    "language": "bash",
+    "recipeType": "shell_task",
+    "mode": "terminal_workspace",
+    "repositoryStateUsesGitExpectations": true,
+    "localBareRemoteRequired": true,
+    "hostedArtifactsAreExplicitSimulations": true,
+    "moduleCount": 4,
+    "standardModuleProjectCount": 3,
+    "finalCapstoneStepCount": 8
+  },
+  "globalRules": [
+    "No graded exercise requires a real GitHub account, token, API call, browser click, or public repository.",
+    "Local bare repositories provide real push, fetch, pull, merge, and remote branch behavior.",
+    "Issue, pull-request, and review markdown records are labeled as simulations of hosted metadata.",
+    "Every remote integration exercise fetches and compares before integrating when that distinction is taught.",
+    "The final module contains one capstone section and one capstone topic."
+  ],
+  "moduleRules": {
+    "1": {
+      "focus": [
+        "origin",
+        "clone",
+        "push",
+        "upstream",
+        "fetch",
+        "compare",
+        "pull --ff-only"
+      ],
+      "forbidden": [
+        "issues",
+        "pull-request review"
+      ]
+    },
+    "2": {
+      "focus": [
+        "issue brief",
+        "acceptance criteria",
+        "issue branch",
+        "linked commit",
+        "publish and handoff"
+      ],
+      "forbidden": [
+        "advanced repository governance"
+      ]
+    },
+    "3": {
+      "focus": [
+        "pull-request brief",
+        "diff review",
+        "actionable feedback",
+        "revision",
+        "merge",
+        "cleanup",
+        "fork concept"
+      ],
+      "forbidden": [
+        "GitHub Actions",
+        "force push"
+      ]
+    },
+    "4": {
+      "focus": [
+        "integrated issue-to-merge capstone"
+      ],
+      "requiredStepCount": 8
+    }
+  }
+}

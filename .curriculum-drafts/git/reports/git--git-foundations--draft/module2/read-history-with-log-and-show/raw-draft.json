@@ -1,0 +1,236 @@
+{
+  "title": "Read History with log and show",
+  "summary": "Use compact history and commit inspection to understand what changed without opening every file manually.",
+  "minutes": 22,
+  "sketchBlocks": [
+    {
+      "id": "sketch0",
+      "cardTitle": "Understanding git log --oneline",
+      "title": "Reading Commit History with git log --oneline",
+      "bodyMarkdown": "The `git log --oneline` command provides a concise view of the commit history. It displays each commit on a single line, showing the commit hash and the commit message. This format is particularly useful for getting a quick overview of the project's history without overwhelming details.\n\nWorked example:\n\n```bash\ngit log --oneline\n```\n\nThis command will list all the commits in the current branch, each prefixed by a short hash and followed by the commit message. For instance, you might see:\n\n```\nabc1234 Initial commit\ndef5678 Added README file\nghi9012 Updated index.html\n```\n\nEach line represents a commit, with the hash allowing you to reference it later. This view helps you quickly understand the sequence of changes and their descriptions."
+    },
+    {
+      "id": "sketch1",
+      "cardTitle": "Inspecting a Commit with git show",
+      "title": "Detailed Commit Inspection with git show",
+      "bodyMarkdown": "The `git show` command allows you to inspect the details of a specific commit. It provides information about the changes made in that commit, including the diff, author, and date.\n\nWorked example:\n\n```bash\ngit show abc1234\n```\n\nThis command will display the full details of the commit with hash `abc1234`. You'll see the commit message, author, date, and the changes made to the files. This is useful for understanding exactly what was altered in a particular commit and why."
+    },
+    {
+      "id": "sketch2",
+      "cardTitle": "Relating HEAD to Previous Commits",
+      "title": "Understanding HEAD and Its Relation to Commits",
+      "bodyMarkdown": "In Git, `HEAD` refers to the current snapshot of your working directory. It usually points to the latest commit in your current branch. Understanding how `HEAD` relates to previous commits is crucial for navigating and managing your project's history.\n\nWorked example:\n\n```bash\ngit log --oneline\n```\n\nBy running this command, you can see where `HEAD` is pointing in relation to other commits. The topmost commit in the list is where `HEAD` currently points. This helps you understand the current state of your project and how recent changes fit into the overall history."
+    },
+    {
+      "id": "sketch3",
+      "cardTitle": "Practical Use of git log and git show",
+      "title": "Applying git log and git show in Real Scenarios",
+      "bodyMarkdown": "Using `git log --oneline` and `git show` together can provide a comprehensive understanding of your project's history. While `git log --oneline` gives you a quick overview, `git show` allows you to dive deeper into specific changes.\n\nWorked example:\n\nFirst, get a quick overview:\n\n```bash\ngit log --oneline\n```\n\nThen, inspect a specific commit:\n\n```bash\ngit show def5678\n```\n\nThis approach helps you maintain a clear understanding of what changes have been made, why they were made, and how they affect the project."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "try-read-history-with-log-and-show-sketch0",
+      "kind": "fill_blank_choice",
+      "title": "Practice git log --oneline",
+      "prompt": "Use `git log --oneline` to view the commit history of your current branch. Identify the sequence of changes and their descriptions.",
+      "hint": "Use the command to see a concise list of commits.",
+      "help": {
+        "concept": "The `git log --oneline` command provides a brief overview of the commit history.",
+        "hint_1": "Run `git log --oneline` in the terminal to see the commit history.",
+        "hint_2": "Each line in the output represents a commit with its hash and message."
+      },
+      "template": "A file-writing code exercise should also ____ so automated tests can check it.",
+      "choices": [
+        "print an observable result",
+        "hide all output",
+        "delete the file immediately",
+        "skip the program"
+      ],
+      "correctValue": "print an observable result"
+    },
+    {
+      "id": "try-read-history-with-log-and-show-sketch1",
+      "kind": "fill_blank_choice",
+      "title": "Inspect a Commit with git show",
+      "prompt": "Use `git show` to inspect the details of a specific commit in your repository. Focus on understanding the changes made in that commit.",
+      "hint": "Use the commit hash to inspect its details.",
+      "help": {
+        "concept": "The `git show` command provides detailed information about a specific commit.",
+        "hint_1": "Identify a commit hash from `git log --oneline` and use it with `git show`.",
+        "hint_2": "The command will show the commit message, author, date, and changes."
+      },
+      "template": "A file-writing code exercise should also ____ so automated tests can check it.",
+      "choices": [
+        "print an observable result",
+        "hide all output",
+        "delete the file immediately",
+        "skip the program"
+      ],
+      "correctValue": "print an observable result"
+    },
+    {
+      "id": "try-read-history-with-log-and-show-sketch2",
+      "kind": "fill_blank_choice",
+      "title": "Relate HEAD to Previous Commits",
+      "prompt": "Use `git log --oneline` to determine where `HEAD` is pointing in your commit history. Explain how this helps you understand your project's current state.",
+      "hint": "Look at the topmost commit in the log output.",
+      "help": {
+        "concept": "`HEAD` points to the current commit in your branch.",
+        "hint_1": "The topmost commit in `git log --oneline` is where `HEAD` points.",
+        "hint_2": "Understanding `HEAD` helps you see the latest changes in your project."
+      },
+      "template": "A file-writing code exercise should also ____ so automated tests can check it.",
+      "choices": [
+        "print an observable result",
+        "hide all output",
+        "delete the file immediately",
+        "skip the program"
+      ],
+      "correctValue": "print an observable result"
+    },
+    {
+      "id": "try-read-history-with-log-and-show-sketch3",
+      "kind": "fill_blank_choice",
+      "title": "Combine git log and git show",
+      "prompt": "Use `git log --oneline` to find a commit and then `git show` to inspect its details. Explain how these commands together provide a comprehensive view of your project's history.",
+      "hint": "First, list commits, then inspect one in detail.",
+      "help": {
+        "concept": "Combining `git log --oneline` and `git show` gives both an overview and detailed insight into commits.",
+        "hint_1": "Use `git log --oneline` to find a commit hash.",
+        "hint_2": "Use `git show <commit-hash>` to see detailed changes."
+      },
+      "template": "A file-writing code exercise should also ____ so automated tests can check it.",
+      "choices": [
+        "print an observable result",
+        "hide all output",
+        "delete the file immediately",
+        "skip the program"
+      ],
+      "correctValue": "print an observable result"
+    },
+    {
+      "id": "multi-choice-1",
+      "kind": "multi_choice",
+      "title": "Understanding git log --oneline",
+      "prompt": "What information does `git log --oneline` provide?",
+      "hint": "Think about the format and details shown by this command.",
+      "help": {
+        "concept": "`git log --oneline` provides a brief overview of the commit history.",
+        "hint_1": "It shows each commit on a single line.",
+        "hint_2": "Each line includes a short hash and the commit message."
+      },
+      "options": [
+        "A detailed diff of each commit",
+        "A single line summary of each commit",
+        "The full commit message and author details",
+        "A list of all branches"
+      ],
+      "correctOptionIds": [
+        "b"
+      ]
+    },
+    {
+      "id": "multi-choice-2",
+      "kind": "multi_choice",
+      "title": "Purpose of git show",
+      "prompt": "What is the primary purpose of the `git show` command?",
+      "hint": "Consider what details this command reveals about a commit.",
+      "help": {
+        "concept": "`git show` provides detailed information about a specific commit.",
+        "hint_1": "It shows the changes made in a commit.",
+        "hint_2": "It includes the commit message, author, and date."
+      },
+      "options": [
+        "To list all commits in a branch",
+        "To show detailed information about a specific commit",
+        "To display the current branch name",
+        "To merge two branches"
+      ],
+      "correctOptionIds": [
+        "b"
+      ]
+    },
+    {
+      "id": "fill-blank-1",
+      "kind": "fill_blank_choice",
+      "title": "Command for concise commit history",
+      "prompt": "Fill in the blank: The command `git [blank1] --oneline` provides a concise view of the commit history.",
+      "hint": "This command is used to list commits briefly.",
+      "help": {
+        "concept": "`git log --oneline` is used to view a brief commit history.",
+        "hint_1": "The command starts with `git` and is followed by a word that means 'record'.",
+        "hint_2": "The missing word is `log`."
+      },
+      "template": "The command `git [blank1] --oneline` provides a concise view of the commit history.",
+      "choices": [
+        "log",
+        "show",
+        "status",
+        "commit"
+      ],
+      "correctValue": "log"
+    },
+    {
+      "id": "fill-blank-2",
+      "kind": "fill_blank_choice",
+      "title": "Command to inspect a commit",
+      "prompt": "Fill in the blank: Use `git [blank1] <commit-hash>` to inspect the details of a specific commit.",
+      "hint": "This command reveals detailed information about a commit.",
+      "help": {
+        "concept": "`git show` is used to inspect a specific commit.",
+        "hint_1": "The command starts with `git` and is followed by a word that means 'display'.",
+        "hint_2": "The missing word is `show`."
+      },
+      "template": "Use `git [blank1] <commit-hash>` to inspect the details of a specific commit.",
+      "choices": [
+        "log",
+        "show",
+        "status",
+        "commit"
+      ],
+      "correctValue": "show"
+    },
+    {
+      "id": "single-choice-1",
+      "kind": "single_choice",
+      "title": "HEAD in Git",
+      "prompt": "What does `HEAD` refer to in Git?",
+      "hint": "Think about the current state of your working directory.",
+      "help": {
+        "concept": "`HEAD` points to the current commit in your branch.",
+        "hint_1": "It usually points to the latest commit in your branch.",
+        "hint_2": "`HEAD` helps you understand the current state of your project."
+      },
+      "options": [
+        "The first commit in the repository",
+        "The current branch name",
+        "The latest commit in the current branch",
+        "The remote repository"
+      ],
+      "correctOptionIds": [
+        "c"
+      ]
+    },
+    {
+      "id": "drag-reorder-1",
+      "kind": "drag_reorder",
+      "title": "Order of Git Commands",
+      "prompt": "Arrange the following Git commands in the order you would use them to inspect a commit's history and details.",
+      "hint": "Start with listing commits, then inspect one.",
+      "help": {
+        "concept": "First, list commits to find the one you want to inspect, then use the show command.",
+        "hint_1": "Use `git log --oneline` before `git show`.",
+        "hint_2": "The order is to first get an overview, then inspect details."
+      },
+      "tokens": [
+        "git log --oneline",
+        "git show <commit-hash>"
+      ],
+      "correctOrder": [
+        "git log --oneline",
+        "git show <commit-hash>"
+      ]
+    }
+  ]
+}

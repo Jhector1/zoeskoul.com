@@ -1,0 +1,434 @@
+{
+  "title": "Inspect Unstaged Changes with git diff",
+  "summary": "Read line-level differences before deciding what belongs in the next commit.",
+  "minutes": 20,
+  "sketchBlocks": [
+    {
+      "id": "sketch0",
+      "title": "Inspecting Unstaged Changes with git diff",
+      "bodyMarkdown": "The `git diff` command is a powerful tool that allows you to see the changes in your working directory that have not yet been staged for commit. This command helps you understand what modifications have been made to your files, so you can decide what to include in your next commit.\n\nWorked example:\nImagine you have a file called `index.html` in your project. You've made some changes to this file, but you're not sure what exactly has been modified. By running `git diff`, you can see a line-by-line comparison of the changes. The output will show lines that have been added, removed, or modified, helping you to review your work before staging it.\n\nFor instance, if you added a new paragraph to `index.html`, `git diff` will highlight this addition with a `+` sign at the beginning of the line. If you removed a line, it will be marked with a `-` sign. This visual representation makes it easy to spot changes and ensure that only the intended modifications are included in your commit."
+    },
+    {
+      "id": "sketch1",
+      "title": "Interpreting the Diff Output",
+      "bodyMarkdown": "When you run `git diff`, the output can seem overwhelming at first, but it's structured to help you understand the changes clearly. Each change is prefixed with a header that indicates the file being compared. The lines starting with `---` and `+++` show the old and new file versions, respectively.\n\nThe actual changes are displayed with `-` and `+` signs. Lines with a `-` indicate content that was removed, while lines with a `+` show new content. This format allows you to quickly identify what has been added or removed.\n\nConsider a scenario where you have a file `style.css` and you've changed the color scheme. The `git diff` output will show the old color values with `-` and the new ones with `+`. This helps you verify that the changes align with your design intentions before committing."
+    },
+    {
+      "id": "sketch2",
+      "title": "Spotting Unrelated Edits",
+      "bodyMarkdown": "One of the key benefits of using `git diff` is the ability to spot unrelated changes that might have been made unintentionally. This is crucial for maintaining a clean commit history.\n\nImagine you're working on a feature in `app.js`, but you also made some experimental changes to `config.js` that you don't want to commit yet. By running `git diff`, you can see all the changes across your files. This allows you to selectively stage only the changes related to your feature, leaving the experimental changes for later.\n\nThis practice helps in creating focused commits that are easier to understand and review, ensuring that your commit history remains clear and meaningful."
+    },
+    {
+      "id": "sketch3",
+      "title": "Using git diff in Your Workflow",
+      "bodyMarkdown": "Incorporating `git diff` into your workflow can significantly enhance your development process. It allows you to review changes before staging them, ensuring that only the necessary modifications are included in your commits.\n\nFor example, if you're working on a collaborative project, using `git diff` before committing can help you communicate your changes more effectively to your team. It ensures that your commits are precise and only contain relevant changes, making code reviews smoother and more efficient.\n\nBy regularly using `git diff`, you develop a habit of reviewing your work, which leads to better code quality and a more organized project history."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "single-choice-1",
+      "kind": "single_choice",
+      "title": "Using git diff",
+      "prompt": "When should you use `git diff`?",
+      "options": [
+        "After committing changes",
+        "Before staging changes",
+        "After pushing to remote",
+        "Before creating a branch"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "multi-choice-1",
+      "kind": "multi_choice",
+      "title": "Understanding git diff",
+      "prompt": "What does the `git diff` command do?",
+      "options": [
+        "Shows the commit history",
+        "Displays changes in the working directory not yet staged",
+        "Lists all branches",
+        "Shows the current branch"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Think about what changes `git diff` shows.",
+      "help": {
+        "concept": "`git diff` shows changes in the working directory that are not yet staged.",
+        "hint_1": "`git diff` compares the working directory with the staging area.",
+        "hint_2": "It highlights changes that are not yet staged for commit."
+      }
+    },
+    {
+      "id": "multi-choice-2",
+      "kind": "multi_choice",
+      "title": "Interpreting Diff Output",
+      "prompt": "Which symbol in `git diff` output indicates a line has been added?",
+      "options": [
+        "-",
+        "+",
+        "*",
+        "/"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "drag-reorder-1",
+      "kind": "drag_reorder",
+      "title": "Steps to Use git diff",
+      "prompt": "Arrange the steps to use `git diff` to inspect changes.",
+      "tokens": [
+        "Navigate to the project directory",
+        "Run `git diff`",
+        "Review the output"
+      ],
+      "correctOrder": [
+        "Navigate to the project directory",
+        "Run `git diff`",
+        "Review the output"
+      ],
+      "hint": "Read each piece and arrange them in the order the statement should be understood.",
+      "help": {
+        "concept": "The pieces should form a valid statement in a logical order.",
+        "hint_1": "Start with the piece that introduces the idea or action.",
+        "hint_2": "Place dependent pieces after the part they describe or complete."
+      }
+    },
+    {
+      "id": "fill-blank-choice-1",
+      "kind": "fill_blank_choice",
+      "title": "Symbol for Removed Lines",
+      "prompt": "In `git diff`, lines that have been removed are indicated by the symbol `[blank1]`.",
+      "template": "In `git diff`, lines that have been removed are indicated by the symbol `[blank1]`.",
+      "choices": [
+        "-",
+        "+",
+        "*",
+        "/"
+      ],
+      "correctValue": "-",
+      "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+      "help": {
+        "concept": "The blank should be filled with the term that makes the statement accurate.",
+        "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+        "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+      }
+    },
+    {
+      "id": "fill-blank-choice-2",
+      "kind": "fill_blank_choice",
+      "title": "Purpose of git diff",
+      "prompt": "The primary purpose of `git diff` is to show changes in the [blank1] that are not yet staged.",
+      "template": "The primary purpose of `git diff` is to show changes in the [blank1] that are not yet staged.",
+      "choices": [
+        "working directory",
+        "staging area",
+        "commit history",
+        "remote repository"
+      ],
+      "correctValue": "working directory",
+      "hint": "Consider where `git diff` looks for changes.",
+      "help": {
+        "concept": "`git diff` shows changes in the the missing term that are not yet staged.",
+        "hint_1": "`git diff` compares the the missing term with the staging area.",
+        "hint_2": "It highlights changes that are not yet staged for commit."
+      }
+    },
+    {
+      "id": "try-inspect-unstaged-changes-with-diff-sketch0",
+      "kind": "code_input",
+      "title": "Try It: Inspect Changes in index.html",
+      "prompt": "You have made changes to `index.html` in your project. Use `git diff` to inspect the unstaged changes. Type the command and press Enter to see the differences.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+      "hint": "Read the Git task \"Try It: Inspect Changes in index.html\" and identify the repository state you need to create.",
+      "help": {
+        "concept": "This Git exercise checks the repository state produced by \"Try It: Inspect Changes in index.html\".",
+        "hint_1": "Use git status before and after each small change so you can see what moved between the working tree, staging area, and history.",
+        "hint_2": "Match the requested file names, branch names, and commit purpose before clicking Check Answer."
+      },
+      "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.",
+      "solutionCode": "bash .zoeskoul/setup.sh\ngit diff",
+      "fixedLanguage": "bash",
+      "recipeType": "shell_task",
+      "mode": "terminal_workspace",
+      "entryFilePath": "main.sh",
+      "instructions": "You have made changes to `index.html` in your project. Use `git diff` to inspect the unstaged changes. Type the command and press Enter to see the differences.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 1\\n' > index.html\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "bash .zoeskoul/setup.sh\ngit diff\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 1\\n' > index.html\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
+          },
+          {
+            "pattern": "^git\\s+diff$"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "Do not rewrite shared history in this Git practice task."
+          }
+        ]
+      },
+      "gitExpectations": {
+        "repositoryInitialized": true,
+        "currentBranch": "main"
+      }
+    },
+    {
+      "id": "try-inspect-unstaged-changes-with-diff-sketch1",
+      "kind": "code_input",
+      "title": "Try It: Review Changes in style.css",
+      "prompt": "You've updated the color scheme in `style.css`. Use `git diff` to review the changes before staging them. Type the command and press Enter to see the differences.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+      "hint": "Read the Git task \"Try It: Review Changes in style.css\" and identify the repository state you need to create.",
+      "help": {
+        "concept": "This Git exercise checks the repository state produced by \"Try It: Review Changes in style.css\".",
+        "hint_1": "Use git status before and after each small change so you can see what moved between the working tree, staging area, and history.",
+        "hint_2": "Match the requested file names, branch names, and commit purpose before clicking Check Answer."
+      },
+      "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.",
+      "solutionCode": "bash .zoeskoul/setup.sh\ngit diff",
+      "fixedLanguage": "bash",
+      "recipeType": "shell_task",
+      "mode": "terminal_workspace",
+      "entryFilePath": "main.sh",
+      "instructions": "You've updated the color scheme in `style.css`. Use `git diff` to review the changes before staging them. Type the command and press Enter to see the differences.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 2\\n' > style.css\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "bash .zoeskoul/setup.sh\ngit diff\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 2\\n' > style.css\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
+          },
+          {
+            "pattern": "^git\\s+diff$"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "Do not rewrite shared history in this Git practice task."
+          }
+        ]
+      },
+      "gitExpectations": {
+        "repositoryInitialized": true,
+        "currentBranch": "main"
+      }
+    },
+    {
+      "id": "try-inspect-unstaged-changes-with-diff-sketch2",
+      "kind": "code_input",
+      "title": "Try It: Identify Unrelated Changes",
+      "prompt": "You've made changes to both `app.js` and `config.js`. Use `git diff` to identify unrelated changes that should not be staged together. Type the command and press Enter to see the differences.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+      "hint": "Read the Git task \"Try It: Identify Unrelated Changes\" and identify the repository state you need to create.",
+      "help": {
+        "concept": "This Git exercise checks the repository state produced by \"Try It: Identify Unrelated Changes\".",
+        "hint_1": "Use git status before and after each small change so you can see what moved between the working tree, staging area, and history.",
+        "hint_2": "Match the requested file names, branch names, and commit purpose before clicking Check Answer."
+      },
+      "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.",
+      "solutionCode": "bash .zoeskoul/setup.sh\ngit diff",
+      "fixedLanguage": "bash",
+      "recipeType": "shell_task",
+      "mode": "terminal_workspace",
+      "entryFilePath": "main.sh",
+      "instructions": "You've made changes to both `app.js` and `config.js`. Use `git diff` to identify unrelated changes that should not be staged together. Type the command and press Enter to see the differences.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 3\\n' > app.js\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "bash .zoeskoul/setup.sh\ngit diff\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 3\\n' > app.js\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
+          },
+          {
+            "pattern": "^git\\s+diff$"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "Do not rewrite shared history in this Git practice task."
+          }
+        ]
+      },
+      "gitExpectations": {
+        "repositoryInitialized": true,
+        "currentBranch": "main"
+      }
+    },
+    {
+      "id": "try-inspect-unstaged-changes-with-diff-sketch3",
+      "kind": "code_input",
+      "title": "Try It: Use git diff in a Collaborative Project",
+      "prompt": "In a collaborative project, you've modified `README.md`. Use `git diff` to ensure your changes are clear and focused before committing. Type the command and press Enter to see the differences.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      },
+      "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.",
+      "solutionCode": "bash .zoeskoul/setup.sh\ngit diff",
+      "fixedLanguage": "bash",
+      "recipeType": "shell_task",
+      "mode": "terminal_workspace",
+      "entryFilePath": "main.sh",
+      "instructions": "In a collaborative project, you've modified `README.md`. Use `git diff` to ensure your changes are clear and focused before committing. Type the command and press Enter to see the differences.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 4\\n' > README.md\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "bash .zoeskoul/setup.sh\ngit diff\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 4\\n' > README.md\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
+          },
+          {
+            "pattern": "^git\\s+diff$"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "Do not rewrite shared history in this Git practice task."
+          }
+        ]
+      },
+      "gitExpectations": {
+        "repositoryInitialized": true,
+        "currentBranch": "main"
+      }
+    }
+  ]
+}

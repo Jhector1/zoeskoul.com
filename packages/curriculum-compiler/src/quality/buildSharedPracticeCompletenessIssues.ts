@@ -305,13 +305,20 @@ export function buildSharedPracticeCompletenessIssues(args: {
     }
 
     const profile = getCurriculumProfile(args.seed.profileId);
+    const topicKind = resolveTopicProjectKind(args.seed);
+    const isProjectOnlyTopic = topicKind !== null && Boolean(profile.project);
     const codeInputs = args.draft.quizDraft.filter(isCodeInput);
 
     for (const exercise of codeInputs) {
         issues.push(...buildMultiFileSolutionIssues(exercise));
     }
 
-    if (args.seed.practice?.tryIt === true) {
+    // Project and capstone topics publish their code_input items as ordered
+    // project steps. Their single learner-facing sketch is a reading-only
+    // synopsis, so it must not be validated as an embedded Try It card.
+    // This mirrors buildTopicBundleFromDraft/buildMessagesFromDraft, which
+    // intentionally disable sketch Try Its for project-only topics.
+    if (args.seed.practice?.tryIt === true && !isProjectOnlyTopic) {
         const tryItSketchIndexes = resolveTryItSketchIndexes(
             args.draft,
             args.seed,

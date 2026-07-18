@@ -1,0 +1,408 @@
+{
+  "title": "Project: Start the Field Notes Repository",
+  "summary": "Turn a small set of neighborhood field notes into a trustworthy first Git repository with a clean initial commit.",
+  "minutes": 55,
+  "sketchBlocks": [
+    {
+      "id": "intro-to-git-repository",
+      "title": "Understanding Git Repositories",
+      "bodyMarkdown": "A Git repository is a storage space where your project files and their history are kept. It allows you to track changes, collaborate with others, and revert to previous states if needed. In this project, you'll learn how to set up a Git repository for a neighborhood garden's field notes, ensuring that all changes are tracked and the initial state is preserved.\n\n### Project Brief\n\n\n\n**Scenario:** A neighborhood garden coordinator keeps plot observations in a folder, but every revision currently replaces the previous one. The next volunteer needs a trustworthy starting point before more notes are added.\n\n**Your role:** Junior developer preparing the garden field-notes repository\n\n**Workspace:** One cumulative terminal workspace rooted at garden-notes/ with README.md, observations/, and a deterministic local Git identity\n\n**Deliverable:** A five-step repository setup ending with an initialized main branch, tracked project files, one meaningful initial commit, and a clean working tree."
+    },
+    {
+      "id": "working-with-git",
+      "title": "Configuring and Initializing a Repository",
+      "bodyMarkdown": "To start using Git, you need to configure your identity and initialize a repository. This involves setting your name and email, which will be associated with your commits. Once configured, you can initialize a repository, which creates a .git directory to track changes. \n\nWorked example:\n\n```bash\ngit config --local user.name \"ZoeSkoul Learner\"\ngit config --local user.email \"learner@zoeskoul.local\"\ngit init -b main\n```\n\nThis example sets the local Git identity and initializes a new repository on the main branch. The `git init` command creates a new Git repository, and the `-b main` option sets the initial branch to main.\n\nStep by step, read the commands in the order shown. The first line stores the commit author name in this repository's local Git configuration. The second line stores the matching author email in the same local configuration. The third line creates the repository metadata that lets Git track this directory. Together, the lines form one complete example rather than unrelated commands."
+    },
+    {
+      "id": "tracking-changes",
+      "title": "Staging and Committing Files",
+      "bodyMarkdown": "Once your repository is initialized, you can start tracking changes. This involves staging files you want to include in your next commit and then committing them to the repository. Staging allows you to prepare a snapshot of your changes, and committing saves this snapshot to the repository's history.\n\nWorked example:\n\n```bash\ngit add README.md observations/\ngit commit -m \"Start garden field notes\"\n```\n\nIn this example, the `git add` command stages the README.md and all files in the observations/ directory. The `git commit` command then saves these changes with a descriptive message."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "try-git-repo-inspection",
+      "kind": "code_input",
+      "title": "Inspect the Garden Notes Workspace",
+      "prompt": "Use `pwd` and `ls` to inspect the `garden-notes/` directory. Read the provided `README.md` and observation files before making any changes. Type each command and press Enter.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+      "hint": "Use `pwd` to check your current directory and `ls` to list files.",
+      "help": {
+        "concept": "Understanding the current directory and its contents is crucial before initializing a repository.",
+        "hint_1": "Use `pwd` to confirm you're in the correct directory.",
+        "hint_2": "Use `ls` to see the files available in the directory."
+      },
+      "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.",
+      "solutionCode": "bash .zoeskoul/setup.sh\ngit status",
+      "fixedLanguage": "bash",
+      "recipeType": "shell_task",
+      "mode": "terminal_workspace",
+      "entryFilePath": "main.sh",
+      "instructions": "Use `pwd` and `ls` to inspect the `garden-notes/` directory. Read the provided `README.md` and observation files before making any changes. Type each command and press Enter.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 1\\n' > README.md\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "bash .zoeskoul/setup.sh\ngit status\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 1\\n' > README.md\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
+          },
+          {
+            "pattern": "^git\\s+status$"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "Do not rewrite shared history in this Git practice task."
+          }
+        ]
+      },
+      "gitExpectations": {
+        "repositoryInitialized": true,
+        "currentBranch": "main"
+      }
+    },
+    {
+      "id": "try-git-config",
+      "kind": "code_input",
+      "title": "Configure the Local Author Identity",
+      "prompt": "Set the local Git identity for the `garden-notes/` repository. Use `git config --local` to set `user.name` to \"ZoeSkoul Learner\" and `user.email` to \"learner@zoeskoul.local\". Type each command and press Enter.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      },
+      "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.",
+      "solutionCode": "bash .zoeskoul/setup.sh\ngit config --local\ngit config --local user.name \"ZoeSkoul Learner\"\ngit config --local user.email \"learner@zoeskoul.local\"",
+      "fixedLanguage": "bash",
+      "recipeType": "shell_task",
+      "mode": "terminal_workspace",
+      "entryFilePath": "main.sh",
+      "instructions": "Set the local Git identity for the `garden-notes/` repository. Use `git config --local` to set `user.name` to \"ZoeSkoul Learner\" and `user.email` to \"learner@zoeskoul.local\". Type each command and press Enter.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 2\\n' > user.name\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "bash .zoeskoul/setup.sh\ngit config --local\ngit config --local user.name \"ZoeSkoul Learner\"\ngit config --local user.email \"learner@zoeskoul.local\"\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 2\\n' > user.name\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
+          },
+          {
+            "pattern": "^git\\s+config\\s+--local$"
+          },
+          {
+            "pattern": "^git\\s+config\\s+--local\\s+user\\.name\\s+\"ZoeSkoul\\s+Learner\"$"
+          },
+          {
+            "pattern": "^git\\s+config\\s+--local\\s+user\\.email\\s+\"learner@zoeskoul\\.local\"$"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "Do not rewrite shared history in this Git practice task."
+          }
+        ]
+      },
+      "gitExpectations": {
+        "repositoryInitialized": true,
+        "currentBranch": "main"
+      }
+    },
+    {
+      "id": "try-git-init",
+      "kind": "code_input",
+      "title": "Initialize the Repository on main",
+      "prompt": "Initialize the `garden-notes/` directory as a Git repository with the main branch. Use `git init -b main` and inspect the untracked files with `git status`. Type each command and press Enter.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      },
+      "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.",
+      "solutionCode": "bash .zoeskoul/setup.sh\ngit init -b main\ngit status",
+      "fixedLanguage": "bash",
+      "recipeType": "shell_task",
+      "mode": "terminal_workspace",
+      "entryFilePath": "main.sh",
+      "instructions": "Initialize the `garden-notes/` directory as a Git repository with the main branch. Use `git init -b main` and inspect the untracked files with `git status`. Type each command and press Enter.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 3\\n' > practice-3.txt\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "bash .zoeskoul/setup.sh\ngit init -b main\ngit status\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 3\\n' > practice-3.txt\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
+          },
+          {
+            "pattern": "^git\\s+init\\s+-b\\s+main$"
+          },
+          {
+            "pattern": "^git\\s+status$"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "Do not rewrite shared history in this Git practice task."
+          }
+        ]
+      },
+      "gitExpectations": {
+        "repositoryInitialized": true,
+        "currentBranch": "main"
+      }
+    },
+    {
+      "id": "try-git-stage-files",
+      "kind": "code_input",
+      "title": "Stage the Initial Project Files",
+      "prompt": "Stage the `README.md` and all files in the `observations/` directory. Use `git add` to prepare these files for commit. Type each command and press Enter.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+      "hint": "Read the Git task \"Stage the Initial Project Files\" and identify the repository state you need to create.",
+      "help": {
+        "concept": "This Git exercise checks the repository state produced by \"Stage the Initial Project Files\".",
+        "hint_1": "Use git status before and after each small change so you can see what moved between the working tree, staging area, and history.",
+        "hint_2": "Match the requested file names, branch names, and commit purpose before clicking Check Answer."
+      },
+      "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.",
+      "solutionCode": "bash .zoeskoul/setup.sh\ngit add\ngit add README.md\ngit add observations/",
+      "fixedLanguage": "bash",
+      "recipeType": "shell_task",
+      "mode": "terminal_workspace",
+      "entryFilePath": "main.sh",
+      "instructions": "Stage the `README.md` and all files in the `observations/` directory. Use `git add` to prepare these files for commit. Type each command and press Enter.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 4\\n' > README.md\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "bash .zoeskoul/setup.sh\ngit add\ngit add README.md\ngit add observations/\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 4\\n' > README.md\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
+          },
+          {
+            "pattern": "^git\\s+add$"
+          },
+          {
+            "pattern": "^git\\s+add\\s+README\\.md$"
+          },
+          {
+            "pattern": "^git\\s+add\\s+observations/$"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "Do not rewrite shared history in this Git practice task."
+          }
+        ]
+      },
+      "gitExpectations": {
+        "repositoryInitialized": true,
+        "currentBranch": "main"
+      }
+    },
+    {
+      "id": "try-git-commit",
+      "kind": "code_input",
+      "title": "Create and Verify the First Commit",
+      "prompt": "Commit the staged files with the message \"Start garden field notes\". Use `git commit` and verify the commit with `git log --oneline`. Type each command and press Enter.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      },
+      "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.",
+      "solutionCode": "bash .zoeskoul/setup.sh\ngit commit\ngit log --oneline\ngit commit -m\ngit commit -m \"Start garden field notes\"",
+      "fixedLanguage": "bash",
+      "recipeType": "shell_task",
+      "mode": "terminal_workspace",
+      "entryFilePath": "main.sh",
+      "instructions": "Commit the staged files with the message \"Start garden field notes\". Use `git commit` and verify the commit with `git log --oneline`. Type each command and press Enter.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 5\\n' > practice-5.txt\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "bash .zoeskoul/setup.sh\ngit commit\ngit log --oneline\ngit commit -m\ngit commit -m \"Start garden field notes\"\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 5\\n' > practice-5.txt\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
+          },
+          {
+            "pattern": "^git\\s+commit$"
+          },
+          {
+            "pattern": "^git\\s+log\\s+--oneline$"
+          },
+          {
+            "pattern": "^git\\s+commit\\s+-m$"
+          },
+          {
+            "pattern": "^git\\s+commit\\s+-m\\s+\"Start\\s+garden\\s+field\\s+notes\"$"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "Do not rewrite shared history in this Git practice task."
+          }
+        ]
+      },
+      "gitExpectations": {
+        "repositoryInitialized": true,
+        "currentBranch": "main"
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Start the Field Notes Repository",
+    "stepIds": [
+      "try-git-repo-inspection",
+      "try-git-config",
+      "try-git-init",
+      "try-git-stage-files",
+      "try-git-commit"
+    ]
+  }
+}

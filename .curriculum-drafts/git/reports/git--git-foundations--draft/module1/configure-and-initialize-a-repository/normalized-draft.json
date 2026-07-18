@@ -1,0 +1,300 @@
+{
+  "title": "Configure and Initialize a Repository",
+  "summary": "Set a repository-local author identity and turn an existing project folder into a repository on main.",
+  "minutes": 22,
+  "sketchBlocks": [
+    {
+      "id": "sketch0",
+      "title": "Configure Local Git Identity",
+      "bodyMarkdown": "To start using Git effectively, it's crucial to set up your local identity. This involves configuring your name and email address, which will be associated with your commits. This information is stored in the repository's configuration file and helps identify the author of changes.\n\nWorked example:\n\n```bash\ngit config --local user.name \"ZoeSkoul Learner\"\ngit config --local user.email \"learner@zoeskoul.local\"\n```\n\nThis command sets the local user name and email for the repository. It's important to use `--local` to ensure these settings apply only to the current repository, not globally. This setup is essential for tracking contributions accurately."
+    },
+    {
+      "id": "sketch1",
+      "title": "Initialize a Git Repository",
+      "bodyMarkdown": "Once your identity is configured, the next step is to initialize a Git repository. This process creates a `.git` directory in your project folder, which contains all the metadata and history for your project.\n\nWorked example:\n\n```bash\ngit init\n```\n\nThis command initializes a new Git repository in the current directory. By default, it sets the initial branch to `main`. This step is crucial as it transforms your project folder into a version-controlled repository, allowing you to track changes over time."
+    },
+    {
+      "id": "sketch2",
+      "title": "Explore the .git Directory",
+      "bodyMarkdown": "The `.git` directory is the heart of a Git repository. It contains all the metadata, including configuration, commit history, and references to branches and tags. Understanding its structure helps in managing the repository effectively.\n\nWorked example:\n\n```bash\nls -a .git\n```\n\nThis command lists the contents of the `.git` directory. It's important to note that while you can view these files, you should not edit them directly. They are managed by Git and any manual changes can corrupt the repository."
+    },
+    {
+      "id": "sketch3",
+      "title": "Verify Repository Status",
+      "bodyMarkdown": "After initializing a repository, it's important to check its status to understand the current state of your working directory and staging area. This helps in identifying untracked files and changes that need to be committed.\n\nWorked example:\n\n```bash\ngit status\n```\n\nThis command provides a summary of the repository's status, showing which files are staged, unstaged, or untracked. It's a vital tool for managing your workflow and ensuring that all changes are tracked and committed properly."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "try-configure-and-initialize-a-repository-sketch0",
+      "kind": "code_input",
+      "title": "Configure Local Identity",
+      "prompt": "Set the local Git identity for the current repository to ZoeSkoul Learner with the email learner@zoeskoul.local. Type the command and press Enter.",
+      "starterCode": "# Set the local Git identity",
+      "entryFilePath": "main.sh",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Set the local Git identity",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "git config --local user.name \"ZoeSkoul Learner\"\ngit config --local user.email \"learner@zoeskoul.local\"",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionCode": "git config --local user.name \"ZoeSkoul Learner\"\ngit config --local user.email \"learner@zoeskoul.local\"",
+      "recipeType": "sql_query",
+      "hint": "Use git config with --local to set user details.",
+      "help": {
+        "concept": "Configuring a local Git identity ensures that your commits are associated with the correct author information.",
+        "hint_1": "Use git config --local user.name and user.email to set the identity.",
+        "hint_2": "Ensure you use the correct name and email format in the command."
+      }
+    },
+    {
+      "id": "try-configure-and-initialize-a-repository-sketch1",
+      "kind": "code_input",
+      "title": "Initialize a Repository",
+      "prompt": "Initialize a new Git repository in the current directory. Type the command and press Enter.",
+      "starterCode": "# Initialize a new Git repository",
+      "entryFilePath": "main.sh",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Initialize a new Git repository",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "git init",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionCode": "git init",
+      "recipeType": "sql_query",
+      "hint": "Use git init to start a new repository.",
+      "help": {
+        "concept": "Initializing a repository creates the .git directory, which stores all the metadata for version control.",
+        "hint_1": "The command to initialize a repository is simple and direct.",
+        "hint_2": "Ensure you are in the correct directory before running the command."
+      }
+    },
+    {
+      "id": "try-configure-and-initialize-a-repository-sketch2",
+      "kind": "code_input",
+      "title": "Explore the .git Directory",
+      "prompt": "List the contents of the .git directory to understand its structure. Type the command and press Enter.",
+      "starterCode": "# List the contents of the .git directory",
+      "entryFilePath": "main.sh",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# List the contents of the .git directory",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "ls -a .git",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionCode": "ls -a .git",
+      "recipeType": "sql_query",
+      "hint": "Use ls -a to view hidden files and directories.",
+      "help": {
+        "concept": "The .git directory contains all the metadata for the repository, including configuration and history.",
+        "hint_1": "Ensure you are in the root of the repository before listing the .git directory.",
+        "hint_2": "Use the correct option to list all files, including hidden ones."
+      }
+    },
+    {
+      "id": "try-configure-and-initialize-a-repository-sketch3",
+      "kind": "code_input",
+      "title": "Check Repository Status",
+      "prompt": "Check the status of your Git repository to see the current state of your working directory. Type the command and press Enter.",
+      "starterCode": "# Check the status of the Git repository",
+      "entryFilePath": "main.sh",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Check the status of the Git repository",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "git status",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionCode": "git status",
+      "recipeType": "sql_query",
+      "hint": "Use git status to view the repository status.",
+      "help": {
+        "concept": "Checking the repository status helps you understand which files are staged, unstaged, or untracked.",
+        "hint_1": "The command provides a summary of the current state of the repository.",
+        "hint_2": "Ensure you are in the correct directory before running the command."
+      }
+    },
+    {
+      "id": "single-choice-1",
+      "kind": "single_choice",
+      "title": "Purpose of Version Control",
+      "prompt": "What is the primary purpose of version control systems like Git?",
+      "options": [
+        "To track changes and collaborate on projects",
+        "To permanently delete files",
+        "To increase file size",
+        "To encrypt files"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Think about how version control helps manage changes over time.",
+      "help": {
+        "concept": "Version control systems help manage changes to files and coordinate work on those files among multiple people.",
+        "hint_1": "Version control allows you to track changes and collaborate with others.",
+        "hint_2": "It helps prevent data loss and manage project history."
+      }
+    },
+    {
+      "id": "single-choice-2",
+      "kind": "single_choice",
+      "title": "Repository Initialization",
+      "prompt": "What command is used to initialize a new Git repository?",
+      "options": [
+        "git init",
+        "git start",
+        "git create",
+        "git new"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "This command sets up the .git directory.",
+      "help": {
+        "concept": "Initializing a repository is the first step in using Git for version control.",
+        "hint_1": "The command is short and starts with 'git'.",
+        "hint_2": "It creates the necessary metadata for version control."
+      }
+    },
+    {
+      "id": "multi-choice-1",
+      "kind": "multi_choice",
+      "title": "Components of a Git Repository",
+      "prompt": "Which of the following are components of a Git repository? Select all that apply.",
+      "options": [
+        ".git directory",
+        "Working tree",
+        "Staging area",
+        "Remote server"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "hint": "Think about the parts that make up the repository's structure.",
+      "help": {
+        "concept": "A Git repository consists of several components that manage the project's history and configuration.",
+        "hint_1": "Consider what stores the history and configuration of the repository.",
+        "hint_2": "These components are essential for tracking changes and managing the repository."
+      }
+    },
+    {
+      "id": "drag-reorder-1",
+      "kind": "drag_reorder",
+      "title": "Order of Git Setup Steps",
+      "prompt": "Arrange the steps to set up a new Git repository in the correct order.",
+      "tokens": [
+        "Configure local identity",
+        "Initialize the repository",
+        "Check repository status"
+      ],
+      "correctOrder": [
+        "Configure local identity",
+        "Initialize the repository",
+        "Check repository status"
+      ],
+      "hint": "Start with configuring the identity and end with checking the status.",
+      "help": {
+        "concept": "Setting up a Git repository involves several key steps to ensure it's ready for version control.",
+        "hint_1": "Begin with identity configuration and end with verifying the setup.",
+        "hint_2": "Think about the logical sequence of preparing a repository."
+      }
+    },
+    {
+      "id": "fill-blank-choice-1",
+      "kind": "fill_blank_choice",
+      "title": "Git Identity Configuration",
+      "prompt": "Complete the command to set the local Git user name: `git config --local user.name [blank1]`",
+      "template": "git config --local user.name [blank1]",
+      "choices": [
+        "\"ZoeSkoul Learner\"",
+        "\"John Doe\"",
+        "\"Jane Smith\"",
+        "\"Git User\""
+      ],
+      "correctValue": "\"ZoeSkoul Learner\"",
+      "hint": "The name should be enclosed in quotes.",
+      "help": {
+        "concept": "Setting the local user name is crucial for identifying the author of commits.",
+        "hint_1": "The name should match the format used in the example.",
+        "hint_2": "Ensure the name is enclosed in quotes."
+      }
+    },
+    {
+      "id": "fill-blank-choice-2",
+      "kind": "fill_blank_choice",
+      "title": "Git Email Configuration",
+      "prompt": "Complete the command to set the local Git user email: `git config --local user.email [blank1]`",
+      "template": "git config --local user.email [blank1]",
+      "choices": [
+        "\"learner@zoeskoul.local\"",
+        "\"user@example.com\"",
+        "\"admin@domain.com\"",
+        "\"contact@website.com\""
+      ],
+      "correctValue": "\"learner@zoeskoul.local\"",
+      "hint": "The email should be enclosed in quotes.",
+      "help": {
+        "concept": "Setting the local user email is crucial for identifying the author of commits.",
+        "hint_1": "The email should match the format used in the example.",
+        "hint_2": "Ensure the email is enclosed in quotes."
+      }
+    }
+  ]
+}

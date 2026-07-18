@@ -1,0 +1,6 @@
+{
+  "ok": false,
+  "errors": [
+    "Invalid TopicAuthoringDraft: quizDraft[6] fill_blank_choice needs exactly 1 blank placeholder"
+  ]
+}

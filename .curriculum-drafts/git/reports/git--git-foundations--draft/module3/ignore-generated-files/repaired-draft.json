@@ -1,0 +1,442 @@
+{
+  "title": "Ignore Generated Files",
+  "summary": "Write focused .gitignore rules and verify that generated artifacts remain outside the repository history.",
+  "minutes": 24,
+  "sketchBlocks": [
+    {
+      "id": "ignore-generated-files-sketch0",
+      "title": "The Role of .gitignore in Git",
+      "bodyMarkdown": "In Git, the `.gitignore` file is crucial for managing which files and directories should be ignored by version control. This is particularly useful for excluding generated files, such as build artifacts or temporary files, that do not need to be tracked. \n\nWorked example: Consider a project where you have a `build/` directory that contains compiled files. You can create a `.gitignore` file with the line `build/` to ensure that all files within this directory are ignored by Git. This prevents unnecessary clutter in your repository and keeps your version history clean."
+    },
+    {
+      "id": "ignore-generated-files-sketch1",
+      "title": "Using git check-ignore",
+      "bodyMarkdown": "The `git check-ignore` command is a powerful tool to verify if a specific file or directory is being ignored by your `.gitignore` rules. This command helps you understand why certain files are not being tracked.\n\nWorked example: Suppose you have a `.gitignore` file that includes `*.log` to ignore all log files. You can use `git check-ignore -v debug.log` to check if `debug.log` is ignored and see which rule is responsible for it."
+    },
+    {
+      "id": "ignore-generated-files-sketch2",
+      "title": "Why .gitignore Doesn't Untrack Files",
+      "bodyMarkdown": "A common misconception is that adding a file to `.gitignore` will automatically untrack it if it has already been committed. However, `.gitignore` only affects untracked files. To stop tracking a file that has already been committed, you need to use `git rm --cached`.\n\nWorked example: If `config.json` was committed by mistake and you want to ignore it, first add `config.json` to your `.gitignore`, then run `git rm --cached config.json` to untrack it while keeping it in your working directory."
+    },
+    {
+      "id": "ignore-generated-files-sketch3",
+      "title": "Creating Effective .gitignore Rules",
+      "bodyMarkdown": "Creating effective `.gitignore` rules involves understanding the patterns that match the files you want to ignore. You can use wildcards and directory patterns to specify which files should be excluded.\n\nWorked example: To ignore all `.tmp` files in any directory, you can add `*.tmp` to your `.gitignore`. For ignoring all files in a specific directory, such as `temp/`, simply add `temp/` to the file. This ensures that any temporary files or directories are not included in your version control."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "ignore-generated-files-single-choice-0",
+      "kind": "single_choice",
+      "title": "Purpose of .gitignore",
+      "prompt": "What is the primary purpose of a `.gitignore` file in a Git repository?",
+      "options": [
+        "To track changes in all files",
+        "To ignore specific files and directories",
+        "To delete files from the repository",
+        "To rename files in the repository"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Think about what files you want to exclude from version control.",
+      "help": {
+        "concept": "The `.gitignore` file specifies which files and directories should be ignored by Git.",
+        "hint_1": "It helps keep unnecessary files out of the repository.",
+        "hint_2": "It prevents clutter from generated or temporary files."
+      }
+    },
+    {
+      "id": "ignore-generated-files-single-choice-1",
+      "kind": "single_choice",
+      "title": "Effect of Adding to .gitignore",
+      "prompt": "What happens when you add a file to `.gitignore` that has already been committed?",
+      "options": [
+        "The file is automatically deleted from the repository",
+        "The file is untracked and removed from history",
+        "The file remains tracked and in history",
+        "The file is renamed in the repository"
+      ],
+      "correctOptionIds": [
+        "c"
+      ],
+      "hint": "Consider the difference between tracked and untracked files.",
+      "help": {
+        "concept": "Adding a file to `.gitignore` does not untrack it if it has already been committed.",
+        "hint_1": "The file remains in the repository history.",
+        "hint_2": "You need to untrack it manually if it's already committed."
+      }
+    },
+    {
+      "id": "ignore-generated-files-multi-choice-0",
+      "kind": "multi_choice",
+      "title": "Common .gitignore Patterns",
+      "prompt": "Which of the following patterns are commonly used in a `.gitignore` file? Select all that apply.",
+      "options": [
+        "*.log",
+        "/node_modules",
+        "*.tmp",
+        "README.md"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "hint": "Consider patterns that exclude files or directories.",
+      "help": {
+        "concept": "Common `.gitignore` patterns include wildcards and directory names to exclude files.",
+        "hint_1": "Patterns often include wildcards like `*` and directory names.",
+        "hint_2": "Look for patterns that exclude specific file types or directories."
+      }
+    },
+    {
+      "id": "ignore-generated-files-drag-reorder-0",
+      "kind": "drag_reorder",
+      "title": "Order of Operations for Ignoring a Committed File",
+      "prompt": "Arrange the steps to ignore a file that has already been committed.",
+      "tokens": [
+        "Add file to .gitignore",
+        "Run git rm --cached",
+        "Commit changes"
+      ],
+      "correctOrder": [
+        "Add file to .gitignore",
+        "Run git rm --cached",
+        "Commit changes"
+      ],
+      "hint": "Consider the sequence of adding to `.gitignore` and untracking.",
+      "help": {
+        "concept": "To ignore a committed file, add it to `.gitignore` and untrack it.",
+        "hint_1": "First, add the file to `.gitignore`.",
+        "hint_2": "Then, untrack it using `git rm --cached`."
+      }
+    },
+    {
+      "id": "ignore-generated-files-fill-blank-0",
+      "kind": "fill_blank_choice",
+      "title": "Ignoring a Directory",
+      "prompt": "To ignore all files in the `cache/` directory, you should add `[blank1]` to your `.gitignore`.",
+      "template": "cache/[blank1]",
+      "choices": [
+        "*",
+        "/",
+        "cache/",
+        "cache"
+      ],
+      "correctValue": "cache/",
+      "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+      "help": {
+        "concept": "The blank should be filled with the term that makes the statement accurate.",
+        "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+        "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+      }
+    },
+    {
+      "id": "ignore-generated-files-fill-blank-1",
+      "kind": "fill_blank_choice",
+      "title": "Ignoring File Types",
+      "prompt": "To ignore all `.bak` files, you should add `[blank1]` to your `.gitignore`.",
+      "template": "[blank1]",
+      "choices": [
+        "*.bak",
+        "*.tmp",
+        "*.log",
+        "*.txt"
+      ],
+      "correctValue": "*.bak",
+      "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+      "help": {
+        "concept": "The blank should be filled with the term that makes the statement accurate.",
+        "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+        "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+      }
+    },
+    {
+      "id": "try-ignore-generated-files-sketch0",
+      "kind": "code_input",
+      "title": "Create a .gitignore Rule",
+      "prompt": "Create a `.gitignore` rule to ignore all files in the `dist/` directory. Verify that the rule works by checking the status of a file `dist/output.js`.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      },
+      "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.",
+      "solutionCode": "bash .zoeskoul/setup.sh\ngit status",
+      "fixedLanguage": "bash",
+      "recipeType": "shell_task",
+      "mode": "terminal_workspace",
+      "entryFilePath": "main.sh",
+      "instructions": "Create a `.gitignore` rule to ignore all files in the `dist/` directory. Verify that the rule works by checking the status of a file `dist/output.js`.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 1\\n' > dist/output.js\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "bash .zoeskoul/setup.sh\ngit status\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 1\\n' > dist/output.js\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
+          },
+          {
+            "pattern": "^git\\s+status$"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "Do not rewrite shared history in this Git practice task."
+          }
+        ]
+      },
+      "gitExpectations": {
+        "repositoryInitialized": true,
+        "currentBranch": "main"
+      }
+    },
+    {
+      "id": "try-ignore-generated-files-sketch1",
+      "kind": "code_input",
+      "title": "Verify Ignored Files",
+      "prompt": "Use `git check-ignore` to verify that `logs/error.log` is ignored by the `.gitignore` rule `logs/`.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+      "hint": "Read the Git task \"Verify Ignored Files\" and identify the repository state you need to create.",
+      "help": {
+        "concept": "This Git exercise checks the repository state produced by \"Verify Ignored Files\".",
+        "hint_1": "Use git status before and after each small change so you can see what moved between the working tree, staging area, and history.",
+        "hint_2": "Match the requested file names, branch names, and commit purpose before clicking Check Answer."
+      },
+      "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.",
+      "solutionCode": "bash .zoeskoul/setup.sh\ngit check-ignore\ngit check-ignore logs/error.log",
+      "fixedLanguage": "bash",
+      "recipeType": "shell_task",
+      "mode": "terminal_workspace",
+      "entryFilePath": "main.sh",
+      "instructions": "Use `git check-ignore` to verify that `logs/error.log` is ignored by the `.gitignore` rule `logs/`.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 2\\n' > logs/error.log\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "bash .zoeskoul/setup.sh\ngit check-ignore\ngit check-ignore logs/error.log\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 2\\n' > logs/error.log\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
+          },
+          {
+            "pattern": "^git\\s+check-ignore$"
+          },
+          {
+            "pattern": "^git\\s+check-ignore\\s+logs/error\\.log$"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "Do not rewrite shared history in this Git practice task."
+          }
+        ]
+      },
+      "gitExpectations": {
+        "repositoryInitialized": true,
+        "currentBranch": "main"
+      }
+    },
+    {
+      "id": "try-ignore-generated-files-sketch2",
+      "kind": "code_input",
+      "title": "Untrack a Committed File",
+      "prompt": "A file `config/settings.json` was committed by mistake. Add it to `.gitignore` and untrack it without deleting it from the working directory.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+      "hint": "Read the Git task \"Untrack a Committed File\" and identify the repository state you need to create.",
+      "help": {
+        "concept": "This Git exercise checks the repository state produced by \"Untrack a Committed File\".",
+        "hint_1": "Use git status before and after each small change so you can see what moved between the working tree, staging area, and history.",
+        "hint_2": "Match the requested file names, branch names, and commit purpose before clicking Check Answer."
+      },
+      "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.",
+      "solutionCode": "bash .zoeskoul/setup.sh\ngit rm --cached\ngit rm --cached config/settings.json",
+      "fixedLanguage": "bash",
+      "recipeType": "shell_task",
+      "mode": "terminal_workspace",
+      "entryFilePath": "main.sh",
+      "instructions": "A file `config/settings.json` was committed by mistake. Add it to `.gitignore` and untrack it without deleting it from the working directory.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 3\\n' > config/settings.json\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "bash .zoeskoul/setup.sh\ngit rm --cached\ngit rm --cached config/settings.json\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 3\\n' > config/settings.json\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
+          },
+          {
+            "pattern": "^git\\s+rm\\s+--cached$"
+          },
+          {
+            "pattern": "^git\\s+rm\\s+--cached\\s+config/settings\\.json$"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "Do not rewrite shared history in this Git practice task."
+          }
+        ]
+      },
+      "gitExpectations": {
+        "repositoryInitialized": true,
+        "currentBranch": "main"
+      }
+    },
+    {
+      "id": "try-ignore-generated-files-sketch3",
+      "kind": "code_input",
+      "title": "Create a Pattern for Temporary Files",
+      "prompt": "Add a `.gitignore` rule to ignore all `.tmp` files in the project. Verify that `temp/data.tmp` is ignored.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+      "hint": "Read the Git task \"Create a Pattern for Temporary Files\" and identify the repository state you need to create.",
+      "help": {
+        "concept": "This Git exercise checks the repository state produced by \"Create a Pattern for Temporary Files\".",
+        "hint_1": "Use git status before and after each small change so you can see what moved between the working tree, staging area, and history.",
+        "hint_2": "Match the requested file names, branch names, and commit purpose before clicking Check Answer."
+      },
+      "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.",
+      "solutionCode": "bash .zoeskoul/setup.sh\ngit check-ignore",
+      "fixedLanguage": "bash",
+      "recipeType": "shell_task",
+      "mode": "terminal_workspace",
+      "entryFilePath": "main.sh",
+      "instructions": "Add a `.gitignore` rule to ignore all `.tmp` files in the project. Verify that `temp/data.tmp` is ignored.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 4\\n' > temp/data.tmp\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "bash .zoeskoul/setup.sh\ngit check-ignore\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 4\\n' > temp/data.tmp\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
+          },
+          {
+            "pattern": "^git\\s+check-ignore$"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "Do not rewrite shared history in this Git practice task."
+          }
+        ]
+      },
+      "gitExpectations": {
+        "repositoryInitialized": true,
+        "currentBranch": "main"
+      }
+    }
+  ]
+}

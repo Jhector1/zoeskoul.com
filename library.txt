@@ -78,7 +78,7 @@ docker compose -f docker-compose.prod.yml logs -f runner
 
 
 
-pnpm curr:course -- publish sql sql-data-management  --live-subject  sql-data-management   --force
+pnpm curr:course -- publish git git-foundations  --live-subject git-foundations   --force
 
 
 
@@ -156,7 +156,7 @@ sudo docker compose up -d judge0 worker
 
 
 
-RUN_DRAFT_CODE_INPUT_GOLDENS=1 pnpm curr:course -- draft-goldens sql sql-data-management
+RUN_DRAFT_CODE_INPUT_GOLDENS=1 pnpm curr:course -- draft-goldens git git-foundations
 
 sudo scp -r deploy@5.78.159.224:/opt/edge-proxy ~/Downloads/
 
@@ -205,7 +205,7 @@ pnpm curr:course -- check sql sql-data-management --resume \
   AI_MODEL=gpt-4o \
   TRANSLATION_PROVIDER=deepseek \
   TRANSLATION_MODEL=deepseek-v4-flash \
-  pnpm curr:course -- check sql sql-data-management --resume < /dev/null
+  pnpm curr:course -- check git git-foundations --resume < /dev/null
 
 ssh deploy@5.78.227.155
 
@@ -267,39 +267,3 @@ cd /Users/admin/Documents/NextJSProject/zoeskoul.com && \
 for course in python-v2 python-data-functions applied-python-projects; do
  RUN_DRAFT_CODE_INPUT_GOLDENS=1 pnpm curr:course -- draft-goldens python  "$course"
 done
-
-
-First:
-- inspect the current authoring course, draft subject, draft messages, and any recent changes before editing
-- infer the current state from the files instead of assuming
-- preserve existing ids, keys, slugs, exercise wiring, and validation expectations unless a change is truly required
-
-What I want:
-- review the learner-facing copy for the relevant draft content
-- rewrite anything that sounds robotic, repetitive, meta, over-explained, or like internal curriculum machinery
-- avoid wording that explains the exercise structure to the learner unless it is truly necessary
-- avoid phrases like:
-  - “keep one query alive”
-  - “working version”
-  - “progressive project”
-  - “isolated drill”
-  - “this step builds on the previous step”
-  - or any similar process-heavy language
-- make the writing feel smooth, clear, practical, and natural
-- prefer story-based or real-task framing when appropriate
-- keep prompts concise
-- do not break message keys, topic ids, section slugs, exercise ids, or project wiring
-
-If the work involves projects or capstones:
-- make each project feel like a real task with a clean learner-facing setup
-- keep step instructions focused on the task outcome, not the mechanics
-- make the sequence feel natural and cumulative without saying that explicitly over and over
-
-After edits:
-- run the relevant validation and golden tests for that subject/course
-- fix any issues caused by the copy changes
-- summarize what changed
-- point out any remaining awkward copy that may still need a second pass
-
-
-http://localhost:3000/en/practice/trial?challenge=eyJ2IjoxLCJzdWJqZWN0U2x1ZyI6InB5dGhvbi12MiIsIm1vZHVsZVNsdWciOiJweXRob24tdjItMCIsInNlY3Rpb25TbHVnIjoicHl0aG9uLXYyLXB5dGhvbi12Mi0wLXNldHVwLWFuZC1maXJzdC1wcm9ncmFtcyIsInRvcGljU2x1ZyI6IndoYXQtcHl0aG9uLWlzIiwiZXhlcmNpc2VLZXkiOiJjaS10d28tdXNlY2FzZXMiLCJleGVyY2lzZVB1cnBvc2UiOiJwcm9qZWN0IiwiaWF0IjoxNzgzMjE0MzQ1LCJleHAiOjE4MTQ3NTAzNDV9.kejj9BwMX1h9T-sgx7B8AyznymDlqGDXn5nBYIJJ7Gg

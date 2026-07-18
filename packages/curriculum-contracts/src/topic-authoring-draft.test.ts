@@ -608,3 +608,72 @@ describe("TopicAuthoringDraft SQL multi-file workspaces", () => {
         );
     });
 });
+
+describe("TopicAuthoringDraft Git expectations", () => {
+    it("accepts typed Git repository expectations for terminal workspace tasks", () => {
+        const draft = {
+            ...makeValidMinimalDraft(),
+            quizDraft: [
+                {
+                    id: "git-1",
+                    kind: "code_input" as const,
+                    title: "Create a first commit",
+                    prompt: "Initialize the repository and commit README.md.",
+                    hint: "Inspect the repository with git status.",
+                    help: {
+                        concept: "Git records repository state in commits.",
+                        hint_1: "Initialize the repository first.",
+                        hint_2: "Stage README.md before committing it.",
+                    },
+                    starterCode: "# Use the terminal for this Git task.\n",
+                    solutionCode: "git init\ngit add README.md\ngit commit -m 'Add README'\n",
+                    fixedLanguage: "bash" as const,
+                    recipeType: "shell_task" as const,
+                    mode: "terminal_workspace" as const,
+                    gitExpectations: {
+                        repositoryInitialized: true,
+                        currentBranch: "main",
+                        exactCommitCount: 1,
+                        trackedFiles: ["README.md"],
+                        commitMessages: [
+                            { position: 0, matches: "^Add README$" },
+                        ],
+                    },
+                },
+            ],
+        };
+
+        expect(() => assertTopicAuthoringDraft(draft)).not.toThrow();
+    });
+
+    it("rejects Git expectations outside shell_task terminal_workspace", () => {
+        const draft = {
+            ...makeValidMinimalDraft(),
+            quizDraft: [
+                {
+                    id: "git-1",
+                    kind: "code_input" as const,
+                    title: "Create a first commit",
+                    prompt: "Initialize the repository.",
+                    hint: "Use git init.",
+                    help: {
+                        concept: "Git repositories store history.",
+                        hint_1: "Initialize the folder.",
+                        hint_2: "Inspect it afterward.",
+                    },
+                    starterCode: "# start\n",
+                    solutionCode: "git init\n",
+                    fixedLanguage: "bash" as const,
+                    recipeType: "fixed_tests" as const,
+                    gitExpectations: {
+                        repositoryInitialized: true,
+                    },
+                },
+            ],
+        };
+
+        expect(() => assertTopicAuthoringDraft(draft as any)).toThrow(
+            /gitExpectations is only supported for shell_task terminal_workspace/i,
+        );
+    });
+});

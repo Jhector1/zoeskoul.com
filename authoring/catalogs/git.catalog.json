@@ -1,0 +1,23 @@
+{
+  "catalog": {
+    "slug": "git",
+    "order": 40,
+    "title": "Git & GitHub",
+    "defaultSubjectSlug": "git-foundations",
+    "description": "A practical version-control path from local Git history through branches, recovery, remotes, pull requests, and collaborative review.",
+    "imageAlt": "Git and GitHub catalog cover",
+    "status": "active",
+    "subjectSlugs": [
+      "git-foundations"
+    ],
+    "meta": {
+      "family": "developer-tools",
+      "featured": true
+    }
+  },
+  "subjectSlugs": [
+    "git-foundations"
+
+  ],
+  "defaultSubjectSlug": "git-foundations"
+}

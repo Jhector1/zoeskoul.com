@@ -1,10 +1,12 @@
 import type { ProfileServices } from "./shared/profileServices.js";
 import { bashProfileServices } from "./bash/profileServices.js";
+import { gitProfileServices } from "./git/profileServices.js";
 import { sqlProfileServices } from "./sql/profileServices.js";
 import { pythonProfileServices } from "./python/profileServices.js";
 
 const PROFILE_SERVICES: Record<string, ProfileServices> = {
     bash: bashProfileServices,
+    git: gitProfileServices,
     sql: sqlProfileServices,
     python: pythonProfileServices,
 };

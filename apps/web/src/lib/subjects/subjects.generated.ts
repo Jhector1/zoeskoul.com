@@ -7,6 +7,8 @@ import type {
   TopicManifestRefMap,
 } from "@/lib/subjects/_core/subjectManifestTypes";
 
+import gitFoundations from "./git/git-foundations/subject.manifest.json";
+import { TOPIC_MANIFESTS as gitFoundationsTopicManifests } from "./git/git-foundations/topics.generated";
 import linuxTerminalFundamentals from "./linux/linux-terminal-fundamentals/subject.manifest.json";
 import { TOPIC_MANIFESTS as linuxTerminalFundamentalsTopicManifests } from "./linux/linux-terminal-fundamentals/topics.generated";
 import appliedPythonProjects from "./python/applied-python-projects/subject.manifest.json";
@@ -29,9 +31,10 @@ import sql from "./sql/sql/subject.manifest.json";
 import { TOPIC_MANIFESTS as sqlTopicManifests } from "./sql/sql/topics.generated";
 
 
-export type GeneratedSubjectGenKey = "bash_course" | "python_part1" | "sql_for_beginners";
+export type GeneratedSubjectGenKey = "git_course" | "bash_course" | "python_part1" | "sql_for_beginners";
 
 export const SUBJECT_MANIFESTS: Record<string, SubjectManifest> = {
+  "git-foundations": gitFoundations as SubjectManifest,
   "linux-terminal-fundamentals": linuxTerminalFundamentals as SubjectManifest,
   "applied-python-projects": appliedPythonProjects as SubjectManifest,
   "python-data-functions": pythonDataFunctions as SubjectManifest,
@@ -53,6 +56,12 @@ export const SUBJECT_GENERATOR_SOURCES: Record<
     topicManifests: TopicManifestRefMap;
   }
 > = {
+  "git-foundations": {
+    subjectSlug: "git-foundations",
+    genKey: "git_course",
+    manifest: gitFoundations as SubjectManifest,
+    topicManifests: gitFoundationsTopicManifests as TopicManifestRefMap,
+  },
   "linux-terminal-fundamentals": {
     subjectSlug: "linux-terminal-fundamentals",
     genKey: "bash_course",
@@ -119,6 +128,7 @@ export const SUBJECT_GENERATOR_SOURCES_BY_GENKEY: Record<
   GeneratedSubjectGenKey,
   Array<(typeof SUBJECT_GENERATOR_SOURCES)[keyof typeof SUBJECT_GENERATOR_SOURCES]>
 > = {
+  "git_course": [SUBJECT_GENERATOR_SOURCES["git-foundations"]],
   "bash_course": [SUBJECT_GENERATOR_SOURCES["linux-terminal-fundamentals"]],
   "python_part1": [SUBJECT_GENERATOR_SOURCES["applied-python-projects"], SUBJECT_GENERATOR_SOURCES["python-data-functions"], SUBJECT_GENERATOR_SOURCES["python-v2"], SUBJECT_GENERATOR_SOURCES["python"]],
   "sql_for_beginners": [SUBJECT_GENERATOR_SOURCES["multi-table-sql"], SUBJECT_GENERATOR_SOURCES["sql-analysis-reporting"], SUBJECT_GENERATOR_SOURCES["sql-data-management"], SUBJECT_GENERATOR_SOURCES["sql-v2"], SUBJECT_GENERATOR_SOURCES["sql"]],

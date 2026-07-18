@@ -1,0 +1,26 @@
+{
+  "subjectSlug": "git",
+  "catalogSlug": "git",
+  "profileId": "git",
+  "title": "Git & GitHub",
+  "summary": "A cumulative developer-tools path from trustworthy local history through parallel branch work and complete pull-request collaboration.",
+  "courseOrder": [
+    "git-foundations",
+    "git-branches-merges-recovery",
+    "github-collaboration"
+  ],
+  "milestones": [
+    {
+      "courseSlug": "git-foundations",
+      "outcome": "Build, inspect, clean, and hand off a meaningful local repository history."
+    },
+    {
+      "courseSlug": "git-branches-merges-recovery",
+      "outcome": "Isolate parallel work, merge safely, resolve conflicts, and recover without erasing history."
+    },
+    {
+      "courseSlug": "github-collaboration",
+      "outcome": "Publish branches, synchronize remotes, and complete an issue-to-review-to-merge collaboration cycle."
+    }
+  ]
+}

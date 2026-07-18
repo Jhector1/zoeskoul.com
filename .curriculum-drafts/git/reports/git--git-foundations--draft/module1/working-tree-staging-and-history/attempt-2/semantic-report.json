@@ -1,0 +1,18 @@
+{
+  "topicId": "working-tree-staging-and-history",
+  "ok": false,
+  "issues": [
+    {
+      "code": "PROGRAMMING_TRY_IT_COVERAGE_MISSING",
+      "category": "pedagogy",
+      "severity": "error",
+      "message": "Programming profile \"code-family\" requires Try It coverage for this hands-on topic, but draft.quizDraft does not contain a code_input practice path."
+    },
+    {
+      "code": "PROGRAMMING_TRY_IT_PER_SKETCH_MISSING",
+      "category": "pedagogy",
+      "severity": "error",
+      "message": "Programming profile \"code-family\" uses all_sketches Try It policy, but has 0 code_input exercise(s) for 4 sketch block(s)."
+    }
+  ]
+}

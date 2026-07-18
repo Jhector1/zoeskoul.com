@@ -1,0 +1,299 @@
+{
+  "topics": {
+    "git-foundations": {
+      "git-foundations-module-1-start-tracking": {
+        "configure-and-initialize-a-repository": {
+          "label": "Configure and Initialize a Repository",
+          "summary": "Set a repository-local author identity and turn an existing project folder into a repository on main.",
+          "cards": {
+            "sketch0": {
+              "title": "Configure Local Git Identity"
+            },
+            "sketch1": {
+              "title": "Initialize a Git Repository"
+            },
+            "sketch2": {
+              "title": "Explore the .git Directory"
+            },
+            "sketch3": {
+              "title": "Verify Repository Status"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_configure_and_initialize_a_repository_sketch0": {
+              "title": "Try it yourself: Configure Local Identity",
+              "prompt": "Right after the sketch \"Configure Local Git Identity\", practice that exact idea with this task. Initialize a new Git repository in the `project_alpha` directory with `main` as its initial branch.\n\nFirst type `bash .zoeskoul/setup.sh` and press Enter to create the empty directory. Then enter the directory, initialize Git with the requested branch name, and press Enter after each command. Produce the result for configure Local Identity so it reinforces Configure and Initialize a Repository.",
+              "hint": "Read the Git task \"Configure Local Identity\" and identify the repository state you need to create.",
+              "help": {
+                "concept": "This Git exercise checks the repository state produced by \"Configure Local Identity\".",
+                "hint_1": "Use git status before and after each small change so you can see what moved between the working tree, staging area, and history.",
+                "hint_2": "Match the requested file names, branch names, and commit purpose before clicking Check Answer."
+              },
+              "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then follow the task in the lesson prompt.",
+              "solutionCode": "bash .zoeskoul/setup.sh\ncd project_alpha\ngit init -b main",
+              "instructions": "Initialize a new Git repository in the `project_alpha` directory with `main` as its initial branch.\n\nFirst type `bash .zoeskoul/setup.sh` and press Enter to create the empty directory. Then enter the directory, initialize Git with the requested branch name, and press Enter after each command.",
+              "starterFiles": {
+                "main_sh": {
+                  "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then follow the task in the lesson prompt.\n"
+                },
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"project_alpha\"\nmkdir -p -- \"project_alpha\"\n"
+                }
+              },
+              "solutionFiles": {
+                "main_sh": {
+                  "content": "bash .zoeskoul/setup.sh\ncd project_alpha\ngit init -b main\n"
+                },
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"project_alpha\"\nmkdir -p -- \"project_alpha\"\n"
+                }
+              },
+              "terminalExpectations": {
+                "forbiddenCommands": {
+                  "0": {
+                    "message": "Do not rewrite shared history in this Git practice task."
+                  }
+                }
+              }
+            },
+            "try_configure_and_initialize_a_repository_sketch1": {
+              "title": "Try it yourself: Initialize a Repository",
+              "prompt": "Right after the sketch \"Initialize a Git Repository\", practice that exact idea with this task. Inspect the repository metadata in `project_beta` and confirm which branch `HEAD` points to.\n\nFirst type `bash .zoeskoul/setup.sh` and press Enter. Enter project_beta, type `ls .git` and press Enter, then type `cat .git/HEAD` and press Enter. The final output should show `ref: refs/heads/main`. Produce the result for initialize a Repository so it reinforces Configure and Initialize a Repository.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then follow the task in the lesson prompt.",
+              "solutionCode": "bash .zoeskoul/setup.sh\ncd project_beta\nls .git\ncat .git/HEAD",
+              "instructions": "Inspect the repository metadata in `project_beta` and confirm which branch `HEAD` points to.\n\nFirst type `bash .zoeskoul/setup.sh` and press Enter. Enter project_beta, type `ls .git` and press Enter, then type `cat .git/HEAD` and press Enter. The final output should show `ref: refs/heads/main`.",
+              "starterFiles": {
+                "main_sh": {
+                  "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then follow the task in the lesson prompt.\n"
+                },
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"project_beta\"\nmkdir -p -- \"project_beta\"\ngit -C \"project_beta\" init -q -b main\ngit -C \"project_beta\" config user.name \"ZoeSkoul Learner\"\ngit -C \"project_beta\" config user.email \"learner@zoeskoul.local\"\n"
+                }
+              },
+              "solutionFiles": {
+                "main_sh": {
+                  "content": "bash .zoeskoul/setup.sh\ncd project_beta\nls .git\ncat .git/HEAD\n"
+                },
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"project_beta\"\nmkdir -p -- \"project_beta\"\ngit -C \"project_beta\" init -q -b main\ngit -C \"project_beta\" config user.name \"ZoeSkoul Learner\"\ngit -C \"project_beta\" config user.email \"learner@zoeskoul.local\"\n"
+                }
+              },
+              "terminalExpectations": {
+                "forbiddenCommands": {
+                  "0": {
+                    "message": "Do not rewrite shared history in this Git practice task."
+                  }
+                }
+              }
+            },
+            "try_configure_and_initialize_a_repository_sketch2": {
+              "title": "Try it yourself: Explore the .git Directory",
+              "prompt": "Right after the sketch \"Explore the .git Directory\", practice that exact idea with this task. Inspect the status of `project_gamma` and identify its untracked file.\n\nFirst type `bash .zoeskoul/setup.sh` and press Enter. Enter project_gamma, type `git status --short`, and press Enter. The output should include `?? launch-notes.txt`. Produce the result for explore the .git Directory so it reinforces Configure and Initialize a Repository.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then follow the task in the lesson prompt.",
+              "solutionCode": "bash .zoeskoul/setup.sh\ncd project_gamma\ngit status --short",
+              "instructions": "Inspect the status of `project_gamma` and identify its untracked file.\n\nFirst type `bash .zoeskoul/setup.sh` and press Enter. Enter project_gamma, type `git status --short`, and press Enter. The output should include `?? launch-notes.txt`.",
+              "starterFiles": {
+                "main_sh": {
+                  "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then follow the task in the lesson prompt.\n"
+                },
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"project_gamma\"\nmkdir -p -- \"project_gamma\"\ngit -C \"project_gamma\" init -q -b main\ngit -C \"project_gamma\" config user.name \"ZoeSkoul Learner\"\ngit -C \"project_gamma\" config user.email \"learner@zoeskoul.local\"\nprintf %s \"Draft launch checklist\\n\" > \"project_gamma/launch-notes.txt\"\n"
+                }
+              },
+              "solutionFiles": {
+                "main_sh": {
+                  "content": "bash .zoeskoul/setup.sh\ncd project_gamma\ngit status --short\n"
+                },
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"project_gamma\"\nmkdir -p -- \"project_gamma\"\ngit -C \"project_gamma\" init -q -b main\ngit -C \"project_gamma\" config user.name \"ZoeSkoul Learner\"\ngit -C \"project_gamma\" config user.email \"learner@zoeskoul.local\"\nprintf %s \"Draft launch checklist\\n\" > \"project_gamma/launch-notes.txt\"\n"
+                }
+              },
+              "terminalExpectations": {
+                "forbiddenCommands": {
+                  "0": {
+                    "message": "Do not rewrite shared history in this Git practice task."
+                  }
+                }
+              }
+            },
+            "try_configure_and_initialize_a_repository_sketch3": {
+              "title": "Try it yourself: Check Repository Status",
+              "prompt": "Right after the sketch \"Verify Repository Status\", practice that exact idea with this task. Configure a repository-only Git identity in `project_delta` using the name `ZoeSkoul Learner` and email `learner@zoeskoul.local`.\n\nFirst type `bash .zoeskoul/setup.sh` and press Enter. Enter project_delta, run each local Git configuration command, and press Enter after each one. Produce the result for check Repository Status so it reinforces Configure and Initialize a Repository.",
+              "hint": "Read the Git task \"Check Repository Status\" and identify the repository state you need to create.",
+              "help": {
+                "concept": "This Git exercise checks the repository state produced by \"Check Repository Status\".",
+                "hint_1": "Use git status before and after each small change so you can see what moved between the working tree, staging area, and history.",
+                "hint_2": "Match the requested file names, branch names, and commit purpose before clicking Check Answer."
+              },
+              "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then follow the task in the lesson prompt.",
+              "solutionCode": "bash .zoeskoul/setup.sh\ncd project_delta\ngit config --local user.name \"ZoeSkoul Learner\"\ngit config --local user.email \"learner@zoeskoul.local\"",
+              "instructions": "Configure a repository-only Git identity in `project_delta` using the name `ZoeSkoul Learner` and email `learner@zoeskoul.local`.\n\nFirst type `bash .zoeskoul/setup.sh` and press Enter. Enter project_delta, run each local Git configuration command, and press Enter after each one.",
+              "starterFiles": {
+                "main_sh": {
+                  "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then follow the task in the lesson prompt.\n"
+                },
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"project_delta\"\nmkdir -p -- \"project_delta\"\ngit -C \"project_delta\" init -q -b main\n"
+                }
+              },
+              "solutionFiles": {
+                "main_sh": {
+                  "content": "bash .zoeskoul/setup.sh\ncd project_delta\ngit config --local user.name \"ZoeSkoul Learner\"\ngit config --local user.email \"learner@zoeskoul.local\"\n"
+                },
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"project_delta\"\nmkdir -p -- \"project_delta\"\ngit -C \"project_delta\" init -q -b main\n"
+                }
+              },
+              "terminalExpectations": {
+                "forbiddenCommands": {
+                  "0": {
+                    "message": "Do not rewrite shared history in this Git practice task."
+                  }
+                }
+              }
+            }
+          },
+          "practice": {
+            "single-choice-1": {
+              "title": "Purpose of Version Control",
+              "prompt": "What is the primary purpose of version control systems like Git?",
+              "hint": "Think about how version control helps manage changes over time.",
+              "help": {
+                "concept": "Version control systems help manage changes to files and coordinate work on those files among multiple people.",
+                "hint_1": "Version control allows you to track changes and collaborate with others.",
+                "hint_2": "It helps prevent data loss and manage project history."
+              },
+              "options": {
+                "a": "To track changes and collaborate on projects",
+                "b": "To permanently delete files",
+                "c": "To increase file size",
+                "d": "To encrypt files"
+              }
+            },
+            "single-choice-2": {
+              "title": "Repository Initialization",
+              "prompt": "What command is used to initialize a new Git repository?",
+              "hint": "This command sets up the .git directory.",
+              "help": {
+                "concept": "Initializing a repository is the first step in using Git for version control.",
+                "hint_1": "The command is short and starts with 'git'.",
+                "hint_2": "It creates the necessary metadata for version control."
+              },
+              "options": {
+                "a": "git init",
+                "b": "git start",
+                "c": "git create",
+                "d": "git new"
+              }
+            },
+            "multi-choice-1": {
+              "title": "Components of a Git Repository",
+              "prompt": "Which of the following are components of a Git repository? Select all that apply.",
+              "hint": "Think about the parts that make up the repository's structure.",
+              "help": {
+                "concept": "A Git repository consists of several components that manage the project's history and configuration.",
+                "hint_1": "Consider what stores the history and configuration of the repository.",
+                "hint_2": "These components are essential for tracking changes and managing the repository."
+              },
+              "options": {
+                "a": ".git directory",
+                "b": "Working tree",
+                "c": "Staging area",
+                "d": "Remote server"
+              }
+            },
+            "drag-reorder-1": {
+              "title": "Order of Git Setup Steps",
+              "prompt": "Arrange the steps to set up a new Git repository in the correct order.",
+              "hint": "Start with configuring the identity and end with checking the status.",
+              "help": {
+                "concept": "Setting up a Git repository involves several key steps to ensure it's ready for version control.",
+                "hint_1": "Begin with identity configuration and end with verifying the setup.",
+                "hint_2": "Think about the logical sequence of preparing a repository."
+              },
+              "tokens": {
+                "t1": "Configure local identity",
+                "t2": "Initialize the repository",
+                "t3": "Check repository status"
+              }
+            },
+            "fill-blank-choice-1": {
+              "title": "Git Identity Configuration",
+              "prompt": "Complete the command to set the local Git user name: `git config --local user.name [blank1]`",
+              "hint": "The name should be enclosed in quotes.",
+              "help": {
+                "concept": "Setting the local user name is crucial for identifying the author of commits.",
+                "hint_1": "The name should match the format used in the example.",
+                "hint_2": "Ensure the name is enclosed in quotes."
+              },
+              "template": "git config --local user.name [blank1]",
+              "choices": [
+                "\"ZoeSkoul Learner\"",
+                "\"John Doe\"",
+                "\"Jane Smith\"",
+                "\"Git User\""
+              ]
+            },
+            "fill-blank-choice-2": {
+              "title": "Git Email Configuration",
+              "prompt": "Complete the command to set the local Git user email: `git config --local user.email [blank1]`",
+              "hint": "The email should be enclosed in quotes.",
+              "help": {
+                "concept": "Setting the local user email is crucial for identifying the author of commits.",
+                "hint_1": "The email should match the format used in the example.",
+                "hint_2": "Ensure the email is enclosed in quotes."
+              },
+              "template": "git config --local user.email [blank1]",
+              "choices": [
+                "\"learner@zoeskoul.local\"",
+                "\"user@example.com\"",
+                "\"admin@domain.com\"",
+                "\"contact@website.com\""
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "git-foundations": {
+      "git-foundations-module-1-start-tracking": {
+        "configure-and-initialize-a-repository": {
+          "sketch0": {
+            "title": "Configure Local Git Identity",
+            "bodyMarkdown": "To start using Git effectively, it's crucial to set up your local identity. This involves configuring your name and email address, which will be associated with your commits. This information is stored in the repository's configuration file and helps identify the author of changes.\n\nWorked example:\n\n```bash\ngit config --local user.name \"ZoeSkoul Learner\"\ngit config --local user.email \"learner@zoeskoul.local\"\n```\n\nThis command sets the local user name and email for the repository. It's important to use `--local` to ensure these settings apply only to the current repository, not globally. This setup is essential for tracking contributions accurately.\n\nStep by step, read the commands in the order shown. The first line stores the commit author name in this repository's local Git configuration. The second line stores the matching author email in the same local configuration. Together, the lines form one complete example rather than unrelated commands."
+          },
+          "sketch1": {
+            "title": "Initialize a Git Repository",
+            "bodyMarkdown": "Once your identity is configured, the next step is to initialize a Git repository. This process creates a `.git` directory in your project folder, which contains all the metadata and history for your project.\n\nWorked example:\n\n```bash\ngit init\n```\n\nThis command initializes a new Git repository in the current directory. By default, it sets the initial branch to `main`. This step is crucial as it transforms your project folder into a version-controlled repository, allowing you to track changes over time."
+          },
+          "sketch2": {
+            "title": "Explore the .git Directory",
+            "bodyMarkdown": "The `.git` directory is the heart of a Git repository. It contains all the metadata, including configuration, commit history, and references to branches and tags. Understanding its structure helps in managing the repository effectively.\n\nWorked example:\n\n```bash\nls -a .git\n```\n\nThis command lists the contents of the `.git` directory. It's important to note that while you can view these files, you should not edit them directly. They are managed by Git and any manual changes can corrupt the repository."
+          },
+          "sketch3": {
+            "title": "Verify Repository Status",
+            "bodyMarkdown": "After initializing a repository, it's important to check its status to understand the current state of your working directory and staging area. This helps in identifying untracked files and changes that need to be committed.\n\nWorked example:\n\n```bash\ngit status\n```\n\nThis command provides a summary of the repository's status, showing which files are staged, unstaged, or untracked. It's a vital tool for managing your workflow and ensuring that all changes are tracked and committed properly."
+          }
+        }
+      }
+    }
+  }
+}

@@ -7,8 +7,10 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useTheme } from "next-themes";
 import {
     ArrowRight,
+    ArrowUpRight,
     Check,
     ChevronRight,
+    Code2,
     Globe,
     GraduationCap,
     MessageCircleMore,
@@ -34,6 +36,7 @@ import { resolveDeepTagged } from "@/i18n/resolveDeepTagged";
 import { useTaggedT } from "@/i18n/tagged";
 import RedirectOverlay from "@/components/shared/RedirectOverlay";
 import {useAuthHref} from "@/hooks/useAuthHref";
+import type { PublicChallengeCardData } from "@/lib/practice/challenges/types";
 
 type Choice = {
     label: string;
@@ -364,6 +367,92 @@ function SparkDot({ className }: { className?: string }) {
     );
 }
 
+function LatestChallengeCard({
+                                 challenge,
+                             }: {
+    challenge: PublicChallengeCardData;
+}) {
+    const { t } = useTaggedT("homeOnboarding");
+
+    return (
+        <motion.div
+            initial={{ opacity: 0, x: -14, y: 8 }}
+            animate={{ opacity: 1, x: 0, y: 0 }}
+            transition={{ delay: 0.08, duration: 0.45 }}
+            className="relative mx-auto w-full max-w-[290px] xl:-ml-10 xl:mt-4 xl:-rotate-1 xl:transition-transform xl:duration-300 xl:hover:-translate-y-1 xl:hover:rotate-0"
+        >
+            <div
+                aria-hidden
+                className="absolute -inset-3 rounded-[28px] bg-emerald-400/10 blur-2xl dark:bg-emerald-300/8"
+            />
+
+            <Link
+                href={challenge.href}
+                className="group relative block overflow-hidden rounded-2xl border border-[rgb(var(--ui-border)/0.92)] bg-[rgb(var(--ui-surface)/0.98)] shadow-[0_18px_48px_rgba(0,0,0,0.16)] outline-none transition-shadow hover:shadow-[0_22px_58px_rgba(0,0,0,0.22)] focus-visible:ring-2 focus-visible:ring-[rgb(var(--ui-ring)/0.35)]"
+            >
+                <div className="relative aspect-[16/9] overflow-hidden border-b border-[rgb(var(--ui-border)/0.82)] bg-[rgb(var(--ui-surface-2)/1)]">
+                    {challenge.imageUrl ? (
+                        <Image
+                            src={challenge.imageUrl}
+                            alt={challenge.imageAlt}
+                            fill
+                            sizes="(max-width: 1280px) 90vw, 290px"
+                            className="object-cover transition-transform duration-500 group-hover:scale-[1.035]"
+                        />
+                    ) : (
+                        <div className="absolute inset-0 p-3.5">
+                            <div className="flex items-center gap-1.5 border-b border-[rgb(var(--ui-border)/0.78)] pb-2">
+                                <span className="size-2 rounded-full bg-[rgb(var(--ui-danger)/0.58)]" />
+                                <span className="size-2 rounded-full bg-[rgb(var(--ui-warn)/0.68)]" />
+                                <span className="size-2 rounded-full bg-[rgb(var(--ui-accent)/0.58)]" />
+                                <span className="ml-auto text-[9px] font-medium text-[rgb(var(--ui-text-muted)/0.7)]">
+                                    challenge.py
+                                </span>
+                            </div>
+                            <div className="mt-3 space-y-1.5 font-mono text-[10px] leading-4 text-[rgb(var(--ui-text-muted)/0.88)]">
+                                <div>
+                                    <span className="text-emerald-600 dark:text-emerald-300">def</span>{" "}
+                                    solve_challenge():
+                                </div>
+                                <div className="pl-4"># build your solution</div>
+                                <div className="pl-4 text-[rgb(var(--ui-text)/0.9)]">return result</div>
+                            </div>
+                        </div>
+                    )}
+
+                    <div className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-black/55 px-2.5 py-1 text-[10px] font-semibold text-white shadow-sm backdrop-blur-md">
+                        <Code2 className="size-3" />
+                        {t("latestChallenge.eyebrow")}
+                    </div>
+                </div>
+
+                <div className="p-3.5">
+                    <div className="flex items-center justify-between gap-2">
+                        <span className="text-[10px] font-semibold uppercase tracking-[0.14em] text-[rgb(var(--ui-text-muted)/0.72)]">
+                            zoeskoul.com
+                        </span>
+                        <span className="rounded-full bg-[rgb(var(--ui-accent)/0.09)] px-2 py-1 text-[9px] font-semibold text-[rgb(var(--ui-text)/0.82)]">
+                            {t("latestChallenge.noAccount")}
+                        </span>
+                    </div>
+
+                    <h2 className="mt-2 line-clamp-2 text-sm font-semibold leading-5 text-[rgb(var(--ui-text)/0.96)]">
+                        {challenge.title}
+                    </h2>
+                    <p className="mt-1.5 line-clamp-2 text-[11px] leading-[1.1rem] text-[rgb(var(--ui-text-muted)/0.86)]">
+                        {challenge.description}
+                    </p>
+
+                    <div className="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-[rgb(var(--ui-accent)/1)]">
+                        {t("latestChallenge.cta")}
+                        <ArrowUpRight className="size-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                    </div>
+                </div>
+            </Link>
+        </motion.div>
+    );
+}
+
 /* -------------------- storage / formatting -------------------- */
 
 function readStoredOnboarding(): StoredOnboardingSnapshot {
@@ -521,20 +610,10 @@ function buildWelcomeMessage(
         : t("welcome.fallbackGoals");
 
     if (returning) {
-        return t("welcome.returning", {
-            appName: APP_NAME,
-            interestText,
-            level: mapLevelLabel(data.level, t).toLowerCase(),
-            studyTime: mapTimeLabel(data.studyTime, t).toLowerCase(),
-            theme: mapThemeLabel(data.themePreference, t).toLowerCase(),
-        });
+        return t("welcome.returning", { interestText });
     }
 
-    return t("welcome.new", {
-        appName: APP_NAME,
-        interestText,
-        language: mapLanguageLabel(data.preferredLanguage, t),
-    });
+    return t("welcome.new", { interestText });
 }
 
 /* -------------------- avatar / speech -------------------- */
@@ -1327,10 +1406,12 @@ export default function HomePageAvatarOnboardingClient({
                                                            initialSubjects,
                                                            locale,
                                                            isAuthenticated,
+                                                           latestChallenge,
                                                        }: {
     initialSubjects: SubjectCard[];
     locale: string;
     isAuthenticated: boolean;
+    latestChallenge: PublicChallengeCardData | null;
 }) {
     const { t, resolve } = useTaggedT("homeOnboarding");
     const reduceMotion = useReducedMotion();
@@ -1919,16 +2000,39 @@ export default function HomePageAvatarOnboardingClient({
                                     transition={{ duration: 0.32 }}
                                     className="grid gap-4 lg:gap-6"
                                 >
-                                    <Surface className="p-4 sm:p-5 lg:p-6">
-                                        <div className="grid items-center gap-8 xl:grid-cols-[minmax(0,1.05fr)_minmax(220px,0.95fr)] xl:gap-10">
-                                            <div className="order-2 min-w-0 xl:order-1">
+                                    <Surface className="relative overflow-visible p-4 sm:p-5 lg:p-6">
+                                        <div
+                                            className={cn(
+                                                "grid items-center gap-8 xl:gap-8",
+                                                latestChallenge
+                                                    ? "xl:grid-cols-[minmax(220px,0.78fr)_minmax(0,1.42fr)_minmax(220px,0.8fr)]"
+                                                    : "xl:grid-cols-[minmax(0,1.05fr)_minmax(220px,0.95fr)] xl:gap-10",
+                                            )}
+                                        >
+                                            {latestChallenge ? (
+                                                <div className="order-2 self-start xl:order-1">
+                                                    <LatestChallengeCard challenge={latestChallenge} />
+                                                </div>
+                                            ) : null}
+
+                                            <div
+                                                className={cn(
+                                                    "min-w-0",
+                                                    latestChallenge
+                                                        ? "order-1 xl:order-2"
+                                                        : "order-2 xl:order-1",
+                                                )}
+                                            >
                                                 <SectionKicker>{t("hero.kicker")}</SectionKicker>
 
                                                 <motion.h1
                                                     initial={{ opacity: 0, y: 14 }}
                                                     animate={{ opacity: 1, y: 0 }}
                                                     transition={{ duration: 0.5 }}
-                                                    className="mt-2 max-w-4xl text-3xl font-semibold tracking-tight sm:text-4xl lg:text-5xl"
+                                                    className={cn(
+                                                        "mt-2 max-w-4xl text-3xl font-semibold tracking-tight sm:text-4xl",
+                                                        latestChallenge ? "lg:text-[2.65rem]" : "lg:text-5xl",
+                                                    )}
                                                     style={{ color: "rgb(var(--ui-text) / 0.96)" }}
                                                 >
                                                     {t("hero.title", { appName: APP_NAME })}
@@ -2059,7 +2163,13 @@ export default function HomePageAvatarOnboardingClient({
                                                 ) : null}
                                             </div>
 
-                                            <div className="order-1 xl:order-2">
+                                            <div
+                                                className={cn(
+                                                    latestChallenge
+                                                        ? "order-3 xl:order-3"
+                                                        : "order-1 xl:order-2",
+                                                )}
+                                            >
                                                 <motion.div
                                                     initial={{ opacity: 0, scale: 0.98 }}
                                                     animate={{ opacity: 1, scale: 1 }}

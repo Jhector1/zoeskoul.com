@@ -1,0 +1,176 @@
+{
+  "title": "Project: Prepare a Clean Release Snapshot",
+  "summary": "Clean a release folder by renaming tracked work, removing an obsolete file, ignoring generated previews, and restoring accidental edits safely.",
+  "minutes": 80,
+  "sketchBlocks": [
+    {
+      "id": "intro-sketch",
+      "cardTitle": "Project Overview",
+      "title": "Prepare a Clean Release Snapshot",
+      "bodyMarkdown": "In this project, you will take on the role of a release assistant tasked with preparing a clean snapshot of a volunteer handbook repository. The repository currently contains a draft filename, an obsolete checklist, a generated preview log, and an accidental edit to the approved introduction. Your goal is to clean up the repository by renaming tracked files, removing unnecessary files, ignoring generated artifacts, and restoring any accidental changes without rewriting history. This project will help you understand how to manage tracked files safely using Git commands."
+    },
+    {
+      "id": "sketch-1",
+      "cardTitle": "Audit the Release Workspace",
+      "title": "Inspect the Current Repository State",
+      "bodyMarkdown": "Worked example: Before making any changes to the repository, it's crucial to understand its current state. Use `git status` to see the working tree status and `git diff` to view any changes that have not been staged. This will help you identify which files are modified, added, or deleted. Understanding the current state ensures that you only commit the intended changes and avoid accidental data loss."
+    },
+    {
+      "id": "sketch-2",
+      "cardTitle": "Rename the Approved Guide",
+      "title": "Use Git to Rename Files",
+      "bodyMarkdown": "Worked example: To rename a file in a Git repository, use the `git mv` command. This command updates the index to reflect the new filename, ensuring that the change is tracked. For instance, renaming `docs/guide-draft.md` to `docs/volunteer-guide.md` can be done with `git mv docs/guide-draft.md docs/volunteer-guide.md`. This command stages the rename, making it ready for the next commit."
+    },
+    {
+      "id": "sketch-3",
+      "cardTitle": "Remove the Obsolete Checklist",
+      "title": "Safely Remove Tracked Files",
+      "bodyMarkdown": "Worked example: Removing a file from a Git repository should be done using `git rm`. This command removes the file from the working directory and stages the deletion. For example, to remove `docs/old-checklist.md`, use `git rm docs/old-checklist.md`. This ensures that the file is deleted and the change is tracked for the next commit."
+    },
+    {
+      "id": "sketch-4",
+      "cardTitle": "Ignore Generated Preview Output",
+      "title": "Create and Verify .gitignore Rules",
+      "bodyMarkdown": "Worked example: To prevent certain files from being tracked by Git, you can add them to a `.gitignore` file. For instance, if you want to ignore `preview.log`, add it to `.gitignore`. Verify the rule with `git check-ignore -v preview.log` to ensure it's correctly ignored. This prevents unnecessary files from cluttering your repository."
+    },
+    {
+      "id": "sketch-5",
+      "cardTitle": "Restore the Accidental Introduction Edit",
+      "title": "Undo Mistakes Without Rewriting History",
+      "bodyMarkdown": "Worked example: If you accidentally modify a file, you can restore it using `git restore`. For staged changes, use `git restore --staged`. This command reverts the file to its last committed state without affecting other changes. For example, if `README.md` was accidentally edited, use `git restore README.md` to undo the changes."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "try-module-3-sketch0",
+      "kind": "fill_blank_choice",
+      "title": "Audit the Release Workspace",
+      "prompt": "Inspect the current state of the repository using Git commands. Identify the status of tracked files and any unstaged changes.",
+      "hint": "Use `git status` and `git diff` to inspect the repository.",
+      "help": {
+        "concept": "Understanding the current state of the repository is crucial before making changes.",
+        "hint_1": "Use `git status` to see the working tree status.",
+        "hint_2": "Use `git diff` to view changes that have not been staged."
+      },
+      "template": "A file-writing code exercise should also ____ so automated tests can check it.",
+      "choices": [
+        "print an observable result",
+        "hide all output",
+        "delete the file immediately",
+        "skip the program"
+      ],
+      "correctValue": "print an observable result"
+    },
+    {
+      "id": "try-module-3-sketch1",
+      "kind": "fill_blank_choice",
+      "title": "Rename the Approved Guide",
+      "prompt": "Rename the file `docs/guide-draft.md` to `docs/volunteer-guide.md` using Git commands. Verify the rename is staged.",
+      "hint": "Use `git mv` to rename the file and stage the change.",
+      "help": {
+        "concept": "Renaming a file with Git ensures the change is tracked and staged for commit.",
+        "hint_1": "Use `git mv` to rename and stage the file.",
+        "hint_2": "Check the status to verify the rename is staged."
+      },
+      "template": "A file-writing code exercise should also ____ so automated tests can check it.",
+      "choices": [
+        "print an observable result",
+        "hide all output",
+        "delete the file immediately",
+        "skip the program"
+      ],
+      "correctValue": "print an observable result"
+    },
+    {
+      "id": "try-module-3-sketch2",
+      "kind": "fill_blank_choice",
+      "title": "Remove the Obsolete Checklist",
+      "prompt": "Remove the file `docs/old-checklist.md` from the repository using Git commands. Ensure the removal is staged.",
+      "hint": "Use `git rm` to remove the file and stage the deletion.",
+      "help": {
+        "concept": "Removing a file with Git ensures the deletion is tracked and staged for commit.",
+        "hint_1": "Use `git rm` to remove and stage the file.",
+        "hint_2": "Check the status to verify the removal is staged."
+      },
+      "template": "A file-writing code exercise should also ____ so automated tests can check it.",
+      "choices": [
+        "print an observable result",
+        "hide all output",
+        "delete the file immediately",
+        "skip the program"
+      ],
+      "correctValue": "print an observable result"
+    },
+    {
+      "id": "try-module-3-sketch3",
+      "kind": "fill_blank_choice",
+      "title": "Ignore Generated Preview Output",
+      "prompt": "Add `preview.log` to `.gitignore` and verify it is ignored using Git commands.",
+      "hint": "Add the file to `.gitignore` and use `git check-ignore` to verify.",
+      "help": {
+        "concept": "Ignoring files prevents them from being tracked by Git, keeping the repository clean.",
+        "hint_1": "Add `preview.log` to `.gitignore`.",
+        "hint_2": "Use `git check-ignore -v preview.log` to verify it's ignored."
+      },
+      "template": "A file-writing code exercise should also ____ so automated tests can check it.",
+      "choices": [
+        "print an observable result",
+        "hide all output",
+        "delete the file immediately",
+        "skip the program"
+      ],
+      "correctValue": "print an observable result"
+    },
+    {
+      "id": "try-module-3-sketch4",
+      "kind": "fill_blank_choice",
+      "title": "Restore the Accidental Introduction Edit",
+      "prompt": "Restore the accidental edit in `README.md` using Git commands without affecting other changes.",
+      "hint": "Use `git restore` to undo changes to the file.",
+      "help": {
+        "concept": "Restoring changes allows you to revert files to their last committed state without affecting other staged changes.",
+        "hint_1": "Use `git restore README.md` to undo the changes.",
+        "hint_2": "Ensure other changes remain unaffected."
+      },
+      "template": "A file-writing code exercise should also ____ so automated tests can check it.",
+      "choices": [
+        "print an observable result",
+        "hide all output",
+        "delete the file immediately",
+        "skip the program"
+      ],
+      "correctValue": "print an observable result"
+    },
+    {
+      "id": "try-module-3-sketch5",
+      "kind": "fill_blank_choice",
+      "title": "Commit and Verify the Release Cleanup",
+      "prompt": "Commit the changes with the message 'Prepare handbook release' and verify the repository state is clean.",
+      "hint": "Use `git commit` to save changes and `git status` to verify the state.",
+      "help": {
+        "concept": "Committing changes saves them to the repository history, and a clean state ensures no pending changes.",
+        "hint_1": "Use `git commit -m 'Prepare handbook release'`.",
+        "hint_2": "Verify with `git status` to ensure the working tree is clean."
+      },
+      "template": "A file-writing code exercise should also ____ so automated tests can check it.",
+      "choices": [
+        "print an observable result",
+        "hide all output",
+        "delete the file immediately",
+        "skip the program"
+      ],
+      "correctValue": "print an observable result"
+    }
+  ],
+  "projectDraft": {
+    "title": "Prepare a Clean Release Snapshot",
+    "stepIds": [
+      "try-module-3-sketch0",
+      "try-module-3-sketch1",
+      "try-module-3-sketch2",
+      "try-module-3-sketch3",
+      "try-module-3-sketch4",
+      "try-module-3-sketch5"
+    ]
+  }
+}

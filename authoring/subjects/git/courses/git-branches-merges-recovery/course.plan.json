@@ -1,0 +1,778 @@
+{
+  "subjectSlug": "git",
+  "courseSlug": "git-branches-merges-recovery",
+  "catalogSlug": "git",
+  "trackSlug": "git",
+  "profileId": "git",
+  "workspaceProfileId": "terminal-workspace-runner",
+  "workspacePolicyId": "git-terminal-workspace",
+  "title": "Git Branches, Merges, and Recovery",
+  "description": "A focused second Git course with three standard modules and one final capstone. Learners isolate work with branches, integrate changes with merges, resolve controlled conflicts, and recover safely without destructive history rewriting.",
+  "moduleOrder": [
+    "git-branches-merges-recovery-module-1-branch-work",
+    "git-branches-merges-recovery-module-2-merge-work",
+    "git-branches-merges-recovery-module-3-recovery",
+    "git-branches-merges-recovery-module-4-final-capstone"
+  ],
+  "modules": [
+    {
+      "moduleNumber": 1,
+      "moduleSlug": "git-branches-merges-recovery-module-1-branch-work",
+      "prefix": "git_branches_merges_recovery_module_1",
+      "title": "Work on Branches",
+      "description": "Create an independent line of work without changing the stable main branch.",
+      "purpose": "Understand branches as movable commit references, create and switch branches, commit independently, compare histories, and delete only merged branches safely.",
+      "learningObjectives": [
+        "Explain a branch as a movable name pointing to a commit.",
+        "Inspect, create, and switch branches with git branch and git switch.",
+        "Commit work independently from main.",
+        "Compare branches and delete a completed merged branch safely."
+      ],
+      "guidedExercises": [
+        "Trace HEAD as the learner switches branches.",
+        "Create one feature commit without changing main.",
+        "Compare branch histories before cleanup."
+      ],
+      "quizFocus": [
+        "branch pointer model",
+        "current branch and HEAD",
+        "independent commits",
+        "safe branch deletion"
+      ],
+      "moduleProject": "Build an isolated weekend schedule feature while main remains stable.",
+      "sections": [
+        {
+          "sectionSlug": "git-branches-merges-recovery-section-1-branch-work",
+          "title": "One Project, Several Lines of Work",
+          "summary": "Begin with the need to protect stable work, then follow one feature branch from creation to a review-ready handoff.",
+          "topics": [
+            {
+              "topicId": "why-branches-exist",
+              "title": "Why Branches Exist",
+              "summary": "Open with a project story in which stable work and a new feature must move forward at the same time, then model branches as movable commit references rather than copied folders.",
+              "minutes": 18,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Explain why a branch is safer than duplicating a project folder.",
+                "Describe HEAD and the current branch in practical language.",
+                "Predict which branch receives the next commit."
+              ],
+              "practice": {
+                "conceptualOnly": true,
+                "requiresTryIt": true,
+                "tryIt": true,
+                "tryItPlacement": "none",
+                "runtimeMode": "terminal_workspace",
+                "terminalSessionScope": "exercise",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "fill_blank_choice"
+                ]
+              }
+            },
+            {
+              "topicId": "create-and-switch-branches",
+              "title": "Create and Switch Branches",
+              "summary": "Inspect branch names, create a focused feature branch, and move the working tree with git switch.",
+              "minutes": 24,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Read the current branch with git branch --show-current.",
+                "Create and switch with git switch -c.",
+                "Switch between existing branches without carrying unintended changes."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "terminal_workspace",
+                "terminalSessionScope": "exercise",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "commit-independently-on-a-branch",
+              "title": "Commit Independently on a Branch",
+              "summary": "Create a feature commit and verify that main still points to the stable history.",
+              "minutes": 24,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Create a commit on the intended feature branch.",
+                "Compare commit counts and HEAD content between main and the feature branch.",
+                "Avoid committing a feature on the wrong branch."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "terminal_workspace",
+                "terminalSessionScope": "exercise",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "compare-and-delete-branches-safely",
+              "title": "Compare and Delete Branches Safely",
+              "summary": "Use branch comparison and merged-state evidence before removing a completed branch name.",
+              "minutes": 24,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Compare branch changes and unique commits.",
+                "Use git branch --merged to identify integrated work.",
+                "Delete only a branch whose work is safely merged."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "terminal_workspace",
+                "terminalSessionScope": "exercise",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "sectionSlug": "git-branches-merges-recovery-section-1-module-project",
+          "role": "module_project",
+          "title": "Module Project",
+          "summary": "Build an isolated weekend schedule feature while main remains stable.",
+          "topics": [
+            {
+              "topicId": "module-1-isolated-schedule-feature",
+              "title": "Project: Isolate a Schedule Feature",
+              "summary": "Develop a schedule update on its own branch while keeping main stable and easy to compare.",
+              "minutes": 65,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Create and switch to a focused feature branch.",
+                "Commit work independently from main.",
+                "Compare branch histories and leave a clear handoff state."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "terminal_workspace",
+                "terminalSessionScope": "project",
+                "projectFlow": "progressive",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ]
+              },
+              "projectBrief": {
+                "scenario": "A community events site is stable on main, but a new weekend schedule still needs review. The change must be developed without altering the version visitors currently rely on.",
+                "role": "Junior developer preparing an isolated feature for review",
+                "workspace": "One cumulative terminal workspace rooted at events-site/ with an existing main history and schedule files",
+                "deliverable": "A five-step feature-branch handoff where main remains unchanged, feature/weekend-schedule contains one focused commit, both branches are preserved, and the working tree is clean.",
+                "stepCountTarget": 5,
+                "flow": "progressive",
+                "requirements": [
+                  "Begin from the provided main branch and preserve its committed files.",
+                  "Create the exact branch feature/weekend-schedule.",
+                  "Keep the feature commit off main throughout this project.",
+                  "Use gitExpectations to grade currentBranch, requiredBranches, commit count, commit message, branch-specific HEAD content, and clean state.",
+                  "Do not merge or delete the feature branch in this module project."
+                ],
+                "stepLadder": [
+                  {
+                    "step": 1,
+                    "title": "Inspect the Stable main Branch",
+                    "requirement": "Read the current branch, status, and compact history before creating new work."
+                  },
+                  {
+                    "step": 2,
+                    "title": "Create the Weekend Schedule Branch",
+                    "requirement": "Create and switch to feature/weekend-schedule, then verify that main and the feature branch point to the same starting commit."
+                  },
+                  {
+                    "step": 3,
+                    "title": "Build the Schedule Update",
+                    "requirement": "Add the authored weekend schedule content and inspect the working-tree diff on the feature branch."
+                  },
+                  {
+                    "step": 4,
+                    "title": "Commit the Feature Independently",
+                    "requirement": "Stage the schedule change and commit Add weekend event schedule without changing main."
+                  },
+                  {
+                    "step": 5,
+                    "title": "Compare and Prepare the Handoff",
+                    "requirement": "Compare main with feature/weekend-schedule, verify the feature commit exists only on the feature branch, and finish clean on feature/weekend-schedule."
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleNumber": 2,
+      "moduleSlug": "git-branches-merges-recovery-module-2-merge-work",
+      "prefix": "git_branches_merges_recovery_module_2",
+      "title": "Merge Work Together",
+      "description": "Integrate reviewed branches and resolve text conflicts without losing accepted work.",
+      "purpose": "Distinguish fast-forward and divergent merges, read conflict markers, resolve the file intentionally, and verify or abort safely.",
+      "learningObjectives": [
+        "Explain what changes during a fast-forward merge.",
+        "Recognize when divergent histories require a merge commit.",
+        "Read and resolve text conflict markers.",
+        "Verify a completed merge or abort an unsafe in-progress merge."
+      ],
+      "guidedExercises": [
+        "Compare a fast-forward with a divergent merge.",
+        "Resolve one controlled text conflict.",
+        "Inspect final content and graph before deleting branches."
+      ],
+      "quizFocus": [
+        "fast-forward condition",
+        "merge commit purpose",
+        "conflict marker meaning",
+        "merge verification and abort"
+      ],
+      "moduleProject": "Integrate accessibility and welcome branches into one clean event website history.",
+      "sections": [
+        {
+          "sectionSlug": "git-branches-merges-recovery-section-2-merging",
+          "title": "When Parallel Work Meets",
+          "summary": "Move from a simple fast-forward to a deliberate conflict whose resolution preserves accepted work from both histories.",
+          "topics": [
+            {
+              "topicId": "fast-forward-merges",
+              "title": "Fast-Forward Merges",
+              "summary": "Merge a branch when main has not moved and watch the branch pointer advance without creating a merge commit.",
+              "minutes": 22,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Identify the history shape that permits a fast-forward.",
+                "Perform a fast-forward merge from the correct target branch.",
+                "Verify merged content and branch ancestry afterward."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "terminal_workspace",
+                "terminalSessionScope": "exercise",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "divergent-histories-and-merge-commits",
+              "title": "Divergent Histories and Merge Commits",
+              "summary": "Combine histories that both moved forward and understand why the resulting merge commit has two parents.",
+              "minutes": 24,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Recognize divergent branch histories.",
+                "Perform a non-conflicting merge that creates a merge commit.",
+                "Read the integration point in a compact graph."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "terminal_workspace",
+                "terminalSessionScope": "exercise",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "read-and-resolve-conflict-markers",
+              "title": "Read and Resolve Conflict Markers",
+              "summary": "Treat conflict markers as temporary evidence, edit the file to the intended final content, and stage the resolution.",
+              "minutes": 28,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Identify current, incoming, and separator regions in a text conflict.",
+                "Write the accepted final content instead of choosing a whole side blindly.",
+                "Remove every conflict marker and stage the resolved file."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "terminal_workspace",
+                "terminalSessionScope": "exercise",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "verify-or-abort-a-merge",
+              "title": "Verify or Abort a Merge",
+              "summary": "Inspect merge state before committing and use git merge --abort when the integration should not continue.",
+              "minutes": 24,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Use status and diff to verify an in-progress merge.",
+                "Abort a controlled practice merge and return to the pre-merge state.",
+                "Verify clean state and expected branch content after a completed merge."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "terminal_workspace",
+                "terminalSessionScope": "exercise",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "sectionSlug": "git-branches-merges-recovery-section-2-module-project",
+          "role": "module_project",
+          "title": "Module Project",
+          "summary": "Integrate accessibility and welcome branches into one clean event website history.",
+          "topics": [
+            {
+              "topicId": "module-2-event-website-integration",
+              "title": "Project: Integrate the Event Website",
+              "summary": "Merge two parallel website changes, resolve one deliberate text conflict, and finish with an understandable clean history.",
+              "minutes": 85,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Recognize fast-forward and true merge situations.",
+                "Resolve a conflict by editing the file rather than deleting markers blindly.",
+                "Verify merged content, branch state, and final history."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "terminal_workspace",
+                "terminalSessionScope": "project",
+                "projectFlow": "progressive",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ]
+              },
+              "projectBrief": {
+                "scenario": "Two volunteers updated the same event website. One branch improves accessibility notes, while another revises the welcome message. Both changes are needed, but the welcome text now conflicts with a change already merged into main.",
+                "role": "Integration developer combining reviewed website changes",
+                "workspace": "One cumulative terminal workspace rooted at festival-site/ with main, feature/accessibility, and feature/welcome branches",
+                "deliverable": "A six-step integration with one fast-forward merge, one resolved content conflict, preserved authored text from both branches, required merge history, and a clean main branch.",
+                "stepCountTarget": 6,
+                "flow": "progressive",
+                "requirements": [
+                  "Merge only the authored branches and preserve all accepted content.",
+                  "Read conflict markers as temporary evidence and remove every marker before completing the merge.",
+                  "Use git merge --abort only in the dedicated verification exercise, not as the final project result.",
+                  "Do not use rebase, reset --hard, ours/theirs blanket replacement, or force operations.",
+                  "Grade required branches, commit messages, HEAD file content, and clean state with gitExpectations."
+                ],
+                "stepLadder": [
+                  {
+                    "step": 1,
+                    "title": "Review the Parallel Histories",
+                    "requirement": "Inspect main, feature/accessibility, and feature/welcome so the expected integration order is clear."
+                  },
+                  {
+                    "step": 2,
+                    "title": "Fast-Forward the Accessibility Work",
+                    "requirement": "Switch to main and merge feature/accessibility, then verify the accepted accessibility content."
+                  },
+                  {
+                    "step": 3,
+                    "title": "Start the Welcome Merge",
+                    "requirement": "Merge feature/welcome into main and identify the deliberate conflict in index.html."
+                  },
+                  {
+                    "step": 4,
+                    "title": "Resolve the Welcome Conflict",
+                    "requirement": "Edit index.html to preserve the authored greeting and accessibility line, remove all conflict markers, and stage the resolution."
+                  },
+                  {
+                    "step": 5,
+                    "title": "Complete the Merge Commit",
+                    "requirement": "Finish the merge with the authored merge message Integrate welcome update and verify both changes in HEAD."
+                  },
+                  {
+                    "step": 6,
+                    "title": "Audit the Integrated Repository",
+                    "requirement": "Inspect the compact graph, required branches, final files, and clean main working tree."
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleNumber": 3,
+      "moduleSlug": "git-branches-merges-recovery-module-3-recovery",
+      "prefix": "git_branches_merges_recovery_module_3",
+      "title": "Recover without Panic",
+      "description": "Choose a recovery tool based on whether the mistake is unstaged, staged, committed, or temporarily interrupted.",
+      "purpose": "Restore local mistakes, revert committed mistakes, stash interrupted work, and inspect reflog without rewriting shared history.",
+      "learningObjectives": [
+        "Classify a mistake by repository area before recovering it.",
+        "Restore working-tree and staging mistakes narrowly.",
+        "Revert a committed mistake with a compensating commit.",
+        "Temporarily store work with stash and inspect recent movements with reflog."
+      ],
+      "guidedExercises": [
+        "Repair one mistake in each repository area.",
+        "Preserve visible history while reversing a bad commit.",
+        "Set aside and restore unfinished work safely."
+      ],
+      "quizFocus": [
+        "mistake location",
+        "restore scope",
+        "revert versus erase",
+        "stash and reflog purpose"
+      ],
+      "moduleProject": "Repair a documentation release while preserving an understandable recovery trail.",
+      "sections": [
+        {
+          "sectionSlug": "git-branches-merges-recovery-section-3-recovery",
+          "title": "Find Where the Mistake Lives",
+          "summary": "Begin with diagnosis, then apply the narrowest safe recovery tool for each repository area.",
+          "topics": [
+            {
+              "topicId": "classify-working-staged-and-committed-mistakes",
+              "title": "Classify Working, Staged, and Committed Mistakes",
+              "summary": "Read status, diff, staged diff, and history to locate a mistake before choosing a recovery command.",
+              "minutes": 20,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Distinguish an unstaged edit, staged snapshot, and committed change.",
+                "Select evidence that reveals each kind of mistake.",
+                "Avoid using a history-level tool for a working-tree-only problem."
+              ],
+              "practice": {
+                "conceptualOnly": true,
+                "requiresTryIt": true,
+                "tryIt": true,
+                "tryItPlacement": "none",
+                "runtimeMode": "terminal_workspace",
+                "terminalSessionScope": "exercise",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "fill_blank_choice"
+                ]
+              }
+            },
+            {
+              "topicId": "restore-working-tree-and-staging-mistakes",
+              "title": "Restore Working-Tree and Staging Mistakes",
+              "summary": "Use git restore and git restore --staged to repair only the repository area named in the prompt.",
+              "minutes": 24,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Restore one accidental working-tree edit.",
+                "Unstage one file while preserving its content.",
+                "Verify intended work remains untouched."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "terminal_workspace",
+                "terminalSessionScope": "exercise",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "revert-a-committed-mistake",
+              "title": "Revert a Committed Mistake",
+              "summary": "Create a new commit that reverses an earlier public-style change while keeping the original history visible.",
+              "minutes": 26,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Use git revert on the authored target commit.",
+                "Explain why revert preserves collaboration history.",
+                "Verify the compensating commit and final file content."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "terminal_workspace",
+                "terminalSessionScope": "exercise",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "stash-interrupted-work-and-read-reflog",
+              "title": "Stash Interrupted Work and Read reflog",
+              "summary": "Temporarily clear the working tree, restore the saved work, and use reflog as a record of recent reference movement.",
+              "minutes": 28,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Create a named stash and verify the clean working tree.",
+                "Reapply or pop the intended stash and finish the work.",
+                "Inspect reflog without depending on exact hashes or resetting history."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "terminal_workspace",
+                "terminalSessionScope": "exercise",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "sectionSlug": "git-branches-merges-recovery-section-3-module-project",
+          "role": "module_project",
+          "title": "Module Project",
+          "summary": "Repair a documentation release while preserving an understandable recovery trail.",
+          "topics": [
+            {
+              "topicId": "module-3-release-repair",
+              "title": "Project: Repair the Release without Panic",
+              "summary": "Recover from working-tree, staging, and committed mistakes while preserving the history that explains the repair.",
+              "minutes": 90,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Choose recovery tools based on where a mistake lives.",
+                "Revert a committed mistake instead of erasing shared history.",
+                "Use stash and reflog as controlled safety tools."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "terminal_workspace",
+                "terminalSessionScope": "project",
+                "projectFlow": "progressive",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ]
+              },
+              "projectBrief": {
+                "scenario": "A documentation release was interrupted by three different problems: an accidental local edit, a file staged too early, and a committed notice that should not ship. A second unfinished change must be set aside while the repair is completed.",
+                "role": "Release support developer restoring a safe documentation state",
+                "workspace": "One cumulative terminal workspace rooted at docs-release/ with an existing shared-style history and deterministic recovery fixtures",
+                "deliverable": "A six-step recovery with the approved files restored, one bad commit reverted, interrupted work safely stashed and reapplied, one recovery commit, visible reflog evidence, and a clean final state.",
+                "stepCountTarget": 6,
+                "flow": "progressive",
+                "requirements": [
+                  "Classify each mistake as working-tree, staged, or committed before selecting a command.",
+                  "Use narrow git restore operations for uncommitted mistakes.",
+                  "Use git revert for the authored committed mistake so the original commit remains visible.",
+                  "Use stash only for the authored interrupted work and reapply it before the final recovery commit.",
+                  "Inspect reflog without resetting history or grading exact hashes."
+                ],
+                "stepLadder": [
+                  {
+                    "step": 1,
+                    "title": "Restore the Accidental Local Edit",
+                    "requirement": "Inspect and restore the unstaged accidental edit to release-notes.md while preserving every committed snapshot."
+                  },
+                  {
+                    "step": 2,
+                    "title": "Unstage the Early Checklist",
+                    "requirement": "Use git restore --staged on checklist.md and verify that its content remains in the working tree."
+                  },
+                  {
+                    "step": 3,
+                    "title": "Revert the Faulty Published Notice",
+                    "requirement": "Revert the provided Add premature closure notice commit and verify the compensating commit and approved HEAD content."
+                  },
+                  {
+                    "step": 4,
+                    "title": "Stash the Interrupted Draft",
+                    "requirement": "Stash the authored draft FAQ change with a descriptive message so the working tree becomes clean for the release repair."
+                  },
+                  {
+                    "step": 5,
+                    "title": "Reapply and Finish the Draft",
+                    "requirement": "Reapply the stash, finish the FAQ text, stage it, and commit Complete release FAQ."
+                  },
+                  {
+                    "step": 6,
+                    "title": "Inspect the Recovery Trail",
+                    "requirement": "Use git reflog and git log to confirm the recovery sequence, then finish with required content and a clean working tree."
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleNumber": 4,
+      "moduleSlug": "git-branches-merges-recovery-module-4-final-capstone",
+      "role": "capstone",
+      "prefix": "git_branches_merges_recovery_module_4",
+      "title": "Final Capstone",
+      "description": "Rescue a release by coordinating parallel work, resolving a conflict, and preserving the recovery trail.",
+      "purpose": "Integrate branching, comparison, merging, conflict resolution, revert, and final repository verification in one realistic release story.",
+      "learningObjectives": [
+        "Build two independent lines of release work.",
+        "Integrate both branches while preserving accepted content.",
+        "Resolve one conflict and revert one committed mistake.",
+        "Finish with an understandable history and clean main branch."
+      ],
+      "guidedExercises": [
+        "Inspect the stable release starting point.",
+        "Complete the rescue in seven exact cumulative steps.",
+        "Validate branches, commits, content, conflict cleanup, revert result, and clean state."
+      ],
+      "quizFocus": [],
+      "moduleProject": "Complete the Release-Day Rescue through seven cumulative milestones.",
+      "sections": [
+        {
+          "sectionSlug": "git-branches-merges-recovery-section-4-final-capstone",
+          "role": "capstone",
+          "title": "Final Capstone",
+          "summary": "Rescue a release by coordinating parallel work, resolving a conflict, and preserving the recovery trail.",
+          "topics": [
+            {
+              "topicId": "final-release-day-rescue",
+              "title": "Final Capstone: Release-Day Rescue",
+              "summary": "Coordinate parallel release work, resolve a conflict, revert a faulty announcement, and hand off a clean stable main branch.",
+              "minutes": 135,
+              "difficulty": "intermediate",
+              "technical": true,
+              "learningGoals": [
+                "Create and compare parallel feature branches.",
+                "Merge reviewed work and resolve one deliberate conflict safely.",
+                "Preserve public history by reverting a committed mistake.",
+                "Verify the final branch map, content, and clean state."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "terminal_workspace",
+                "terminalSessionScope": "project",
+                "projectFlow": "progressive",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ]
+              },
+              "projectBrief": {
+                "scenario": "A neighborhood festival site must be ready before doors open. The schedule update and navigation fix were developed separately, a conflict appears when they meet, and a premature cancellation notice was already committed to main. The final handoff must preserve the useful work and the repair trail.",
+                "role": "Release integrator responsible for the festival website handoff",
+                "workspace": "One cumulative terminal workspace rooted at festival-release/ with a stable main branch and authored feature fixtures",
+                "deliverable": "One seven-step rescue ending with schedule and navigation work integrated, the conflict resolved, the faulty announcement reverted, required branch history preserved, final content correct, and main clean.",
+                "stepCountTarget": 7,
+                "flow": "progressive",
+                "requirements": [
+                  "Keep the capstone in exactly one capstone section and one capstone topic.",
+                  "Carry the complete repository forward through all seven steps.",
+                  "Use only branches, switch, diff, merge, conflict resolution, restore, revert, stash, reflog inspection, log, and status concepts taught in this course.",
+                  "Do not use reset --hard, rebase, cherry-pick, force push, or history rewriting.",
+                  "Use exact authored branch and commit names but never exact hashes or timestamps.",
+                  "Finish on main with a clean working tree and required feature content in HEAD."
+                ],
+                "stepLadder": [
+                  {
+                    "step": 1,
+                    "title": "Create the Schedule Release Branch",
+                    "requirement": "Create feature/schedule from stable main and verify the clean branch starting point."
+                  },
+                  {
+                    "step": 2,
+                    "title": "Build and Commit the Schedule Feature",
+                    "requirement": "Add the authored schedule content and commit Publish festival schedule on feature/schedule."
+                  },
+                  {
+                    "step": 3,
+                    "title": "Build the Navigation Fix Separately",
+                    "requirement": "Return to main, create fix/navigation, apply the authored navigation change, and commit Improve mobile navigation."
+                  },
+                  {
+                    "step": 4,
+                    "title": "Merge the Schedule Feature",
+                    "requirement": "Return to main and merge feature/schedule so the schedule is part of the stable branch."
+                  },
+                  {
+                    "step": 5,
+                    "title": "Resolve the Navigation Conflict",
+                    "requirement": "Merge fix/navigation, resolve the deliberate index.html conflict by preserving both accepted changes, stage the file, and complete the merge."
+                  },
+                  {
+                    "step": 6,
+                    "title": "Revert the Faulty Announcement",
+                    "requirement": "Revert the provided premature cancellation commit so the original mistake and compensating repair remain visible."
+                  },
+                  {
+                    "step": 7,
+                    "title": "Verify the Release Handoff",
+                    "requirement": "Inspect the branch map and history, verify final schedule and navigation content, confirm the cancellation text is absent, and finish clean on main."
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

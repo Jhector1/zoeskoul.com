@@ -70,6 +70,29 @@
           "path": "subjects/linux/courses/linux-terminal-fundamentals/course.spec.json"
         }
       ]
+    },
+    {
+      "subjectSlug": "git",
+      "path": "subjects/git",
+      "courseOrder": [
+        "git-foundations",
+        "git-branches-merges-recovery",
+        "github-collaboration"
+      ],
+      "courses": [
+        {
+          "courseSlug": "git-foundations",
+          "path": "subjects/git/courses/git-foundations/course.spec.json"
+        },
+        {
+          "courseSlug": "git-branches-merges-recovery",
+          "path": "subjects/git/courses/git-branches-merges-recovery/course.spec.json"
+        },
+        {
+          "courseSlug": "github-collaboration",
+          "path": "subjects/git/courses/github-collaboration/course.spec.json"
+        }
+      ]
     }
   ]
 }

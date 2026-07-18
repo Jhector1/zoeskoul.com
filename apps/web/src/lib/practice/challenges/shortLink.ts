@@ -1,8 +1,7 @@
 import "server-only";
 
 import crypto from "node:crypto";
-
-import { prisma } from "@/lib/prisma";
+import { prisma, type Prisma } from "@/lib/prisma";
 
 const CODE_PATTERN = /^[A-Za-z0-9_-]{8,24}$/;
 
@@ -22,6 +21,15 @@ export function practiceChallengePath(code: string) {
   return `/c/${encodeURIComponent(normalized)}`;
 }
 
+function activePracticeChallengeWhere(
+  now = new Date(),
+): Prisma.PracticeChallengeLinkWhereInput {
+  return {
+    revokedAt: null,
+    OR: [{ expiresAt: null }, { expiresAt: { gt: now } }],
+  };
+}
+
 export async function getActivePracticeChallengeLink(codeValue: unknown) {
   const code = normalizePracticeChallengeCode(codeValue);
   if (!code) return null;
@@ -29,8 +37,29 @@ export async function getActivePracticeChallengeLink(codeValue: unknown) {
   return prisma.practiceChallengeLink.findFirst({
     where: {
       code,
-      revokedAt: null,
-      OR: [{ expiresAt: null }, { expiresAt: { gt: new Date() } }],
+      ...activePracticeChallengeWhere(),
     },
+  });
+}
+
+export async function getLatestActivePracticeChallengeLink(locale?: string) {
+  const activeWhere = activePracticeChallengeWhere();
+  const normalizedLocale = String(locale ?? "").trim();
+
+  if (normalizedLocale) {
+    const localized = await prisma.practiceChallengeLink.findFirst({
+      where: {
+        ...activeWhere,
+        locale: normalizedLocale,
+      },
+      orderBy: { createdAt: "desc" },
+    });
+
+    if (localized) return localized;
+  }
+
+  return prisma.practiceChallengeLink.findFirst({
+    where: activeWhere,
+    orderBy: { createdAt: "desc" },
   });
 }

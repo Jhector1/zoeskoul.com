@@ -1,0 +1,47 @@
+{
+  "topicId": "module-3-clean-release-snapshot",
+  "repairs": [
+    {
+      "code": "GIT_TRY_IT_KIND_PROMOTED",
+      "category": "other",
+      "severity": "low",
+      "field": "quizDraft.try-module-3-sketch0",
+      "message": "Converted generated Try It \"try-module-3-sketch0\" into the Git code_input required by plannedExerciseCounts."
+    },
+    {
+      "code": "GIT_TRY_IT_KIND_PROMOTED",
+      "category": "other",
+      "severity": "low",
+      "field": "quizDraft.try-module-3-sketch1",
+      "message": "Converted generated Try It \"try-module-3-sketch1\" into the Git code_input required by plannedExerciseCounts."
+    },
+    {
+      "code": "GIT_TRY_IT_KIND_PROMOTED",
+      "category": "other",
+      "severity": "low",
+      "field": "quizDraft.try-module-3-sketch2",
+      "message": "Converted generated Try It \"try-module-3-sketch2\" into the Git code_input required by plannedExerciseCounts."
+    },
+    {
+      "code": "GIT_TRY_IT_KIND_PROMOTED",
+      "category": "other",
+      "severity": "low",
+      "field": "quizDraft.try-module-3-sketch3",
+      "message": "Converted generated Try It \"try-module-3-sketch3\" into the Git code_input required by plannedExerciseCounts."
+    },
+    {
+      "code": "GIT_TRY_IT_KIND_PROMOTED",
+      "category": "other",
+      "severity": "low",
+      "field": "quizDraft.try-module-3-sketch4",
+      "message": "Converted generated Try It \"try-module-3-sketch4\" into the Git code_input required by plannedExerciseCounts."
+    },
+    {
+      "code": "GIT_TRY_IT_KIND_PROMOTED",
+      "category": "other",
+      "severity": "low",
+      "field": "quizDraft.try-module-3-sketch5",
+      "message": "Converted generated Try It \"try-module-3-sketch5\" into the Git code_input required by plannedExerciseCounts."
+    }
+  ]
+}

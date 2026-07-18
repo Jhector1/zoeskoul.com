@@ -1,0 +1,33 @@
+{
+  "topicId": "working-tree-staging-and-history",
+  "repairs": [
+    {
+      "code": "GIT_TRY_IT_KIND_PROMOTED",
+      "category": "other",
+      "severity": "low",
+      "field": "quizDraft.try-working-tree-sketch0",
+      "message": "Converted generated Try It \"try-working-tree-sketch0\" into the Git code_input required by plannedExerciseCounts."
+    },
+    {
+      "code": "GIT_TRY_IT_KIND_PROMOTED",
+      "category": "other",
+      "severity": "low",
+      "field": "quizDraft.try-staging-area-sketch1",
+      "message": "Converted generated Try It \"try-staging-area-sketch1\" into the Git code_input required by plannedExerciseCounts."
+    },
+    {
+      "code": "GIT_TRY_IT_KIND_PROMOTED",
+      "category": "other",
+      "severity": "low",
+      "field": "quizDraft.try-commit-history-sketch2",
+      "message": "Converted generated Try It \"try-commit-history-sketch2\" into the Git code_input required by plannedExerciseCounts."
+    },
+    {
+      "code": "GIT_TRY_IT_KIND_PROMOTED",
+      "category": "other",
+      "severity": "low",
+      "field": "quizDraft.try-git-status-sketch3",
+      "message": "Converted generated Try It \"try-git-status-sketch3\" into the Git code_input required by plannedExerciseCounts."
+    }
+  ]
+}

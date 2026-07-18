@@ -1,3 +1,15 @@
+const PROGRAMMING_PROFILES = new Set([
+    "python",
+    "java",
+    "javascript",
+    "typescript",
+    "c",
+    "cpp",
+    "sql",
+    "bash",
+    "git",
+]);
+
 export function toolsPolicyForSubject(
     _subjectSlug: string,
     meta?: any,
@@ -8,17 +20,6 @@ export function toolsPolicyForSubject(
     if (typeof metaEnabled === "boolean") {
         return { codeEnabled: metaEnabled };
     }
-
-    const PROGRAMMING_PROFILES = new Set([
-        "python",
-        "java",
-        "javascript",
-        "typescript",
-        "c",
-        "cpp",
-        "sql",
-        "bash",
-    ]);
 
     const profile = String(profileId ?? "").trim().toLowerCase();
 

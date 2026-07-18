@@ -1,0 +1,46 @@
+{
+  "policyId": "git-shared-validation",
+  "extendsValidation": [
+    "course-structure",
+    "versioning",
+    "workspace-language"
+  ],
+  "runtime": {
+    "language": "bash",
+    "backend": "pty",
+    "mode": "terminal_workspace"
+  },
+  "validationRequirements": {
+    "shellTaskRecipeRequiredForCodeInput": true,
+    "terminalWorkspaceModeRequired": true,
+    "gitExpectationsRequiredForRepositoryTasks": true,
+    "workspaceExpectationsAllowedForFileTasks": true,
+    "terminalExpectationsAllowedForSpecificCommandEvidence": true,
+    "judge0BashNotRequired": true,
+    "publicNetworkForbidden": true,
+    "exactCommitHashesForbidden": true,
+    "deterministicIdentityRequired": true,
+    "localBareRemoteRequiredForRemoteLabs": true
+  },
+  "rules": {
+    "executionValidation": [
+      "Every Git code_input uses fixedLanguage bash, recipeType shell_task, and mode terminal_workspace.",
+      "Every repository task includes gitExpectations or a generated hiddenShellCheck derived from gitExpectations.",
+      "Do not use terminal command history as the only proof that repository state is correct.",
+      "Use workspaceExpectations for ordinary file fixtures and gitExpectations for repository semantics.",
+      "Do not require Judge0 for Git terminal-workspace checks."
+    ],
+    "determinism": [
+      "Configure ZoeSkoul Learner and learner@zoeskoul.local locally before commits.",
+      "Set main explicitly whenever the default branch matters.",
+      "Never compare exact commit hashes or uncontrolled dates.",
+      "Seed all merge conflicts and collaborator updates deterministically.",
+      "Use local bare repositories for origin and remote-tracking exercises."
+    ],
+    "pedagogy": [
+      "Keep lessons repository-state-first rather than command-list-first.",
+      "Use a different scenario for worked examples, Try It, module projects, and capstones.",
+      "Tell the learner to press Enter in every terminal prompt."
+    ]
+  }
+}

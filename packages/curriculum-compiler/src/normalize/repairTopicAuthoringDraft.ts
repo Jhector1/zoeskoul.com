@@ -548,7 +548,14 @@ function ensureAuthoredProjectSynopsis(args: {
     );
 
     if (firstSketch && hasEveryAuthoredFact) {
-        return args.draft;
+        return {
+            ...args.draft,
+            // Project and capstone work is represented by projectDraft steps.
+            // Keep only the authored synopsis sketch so model-generated step
+            // sketches cannot become duplicate lesson cards or demand extra
+            // embedded Try It exercises.
+            sketchBlocks: [firstSketch],
+        };
     }
 
     const repairedFirstSketch = firstSketch
@@ -569,10 +576,9 @@ function ensureAuthoredProjectSynopsis(args: {
 
     return {
         ...args.draft,
-        sketchBlocks: [
-            repairedFirstSketch,
-            ...sketchBlocks.slice(1),
-        ],
+        // The project brief is the only teaching sketch. The actual learner
+        // work remains in the ordered projectDraft steps.
+        sketchBlocks: [repairedFirstSketch],
     };
 }
 

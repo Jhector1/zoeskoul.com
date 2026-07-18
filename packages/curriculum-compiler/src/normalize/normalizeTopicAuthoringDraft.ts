@@ -1,4 +1,7 @@
 import {
+    normalizeGitExpectations,
+    normalizeHiddenShellCheck,
+    normalizeTerminalExpectations,
     normalizeWorkspaceExpectations,
     normalizeWorkspacePath,
     ProgrammingCodeInputFileDraft,
@@ -878,6 +881,18 @@ function normalizeCodeInput(
                 item.workspaceExpectations,
                 "workspaceExpectations",
             );
+    const terminalExpectations = normalizeTerminalExpectations(
+        item.terminalExpectations,
+        "terminalExpectations",
+    );
+    const hiddenShellCheck = normalizeHiddenShellCheck(
+        item.hiddenShellCheck,
+        "hiddenShellCheck",
+    );
+    const gitExpectations = normalizeGitExpectations(
+        item.gitExpectations,
+        "gitExpectations",
+    );
     return {
         id: String(item.id ?? "").trim(),
         kind: "code_input",
@@ -893,6 +908,9 @@ function normalizeCodeInput(
         ...(sqlFileOrder?.length ? { sqlFileOrder } : {}),
         ...(sourceChecks?.length ? { sourceChecks } : {}),
         ...(workspaceExpectations ? { workspaceExpectations } : {}),
+        ...(terminalExpectations ? { terminalExpectations } : {}),
+        ...(hiddenShellCheck ? { hiddenShellCheck } : {}),
+        ...(gitExpectations ? { gitExpectations } : {}),
         solutionCode,
         ...(recipeType !== "semantic" && tests?.length ? { tests } : {}),
         ...(files?.length ? { files } : {}),

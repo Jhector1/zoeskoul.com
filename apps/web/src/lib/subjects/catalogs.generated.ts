@@ -5,6 +5,25 @@
 import type { CatalogManifest } from "@/lib/subjects/_core/subjectManifestTypes";
 
 export const CATALOG_MANIFESTS: Record<string, CatalogManifest> = {
+  "git": {
+    "catalog": {
+      "slug": "git",
+      "order": 40,
+      "title": "Git & GitHub",
+      "description": "A practical version-control path from local Git history through branches, recovery, remotes, pull requests, and collaborative review.",
+      "imagePublicId": null,
+      "imageAlt": "Git and GitHub catalog cover",
+      "defaultSubjectSlug": "git-foundations",
+      "status": "active",
+      "subjectSlugs": [
+        "git-foundations"
+      ],
+      "meta": {
+        "family": "developer-tools",
+        "featured": true
+      }
+    }
+  },
   "linux": {
     "catalog": {
       "slug": "linux",
@@ -72,6 +91,7 @@ export const CATALOG_MANIFESTS: Record<string, CatalogManifest> = {
 
 export const SUBJECT_CATALOG_SLUGS: Record<string, string> = {
   "applied-python-projects": "python",
+  "git-foundations": "git",
   "linux-terminal-fundamentals": "linux",
   "multi-table-sql": "sql",
   "python": "python",

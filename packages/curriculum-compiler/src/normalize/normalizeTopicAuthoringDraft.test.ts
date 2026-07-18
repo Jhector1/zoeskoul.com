@@ -111,6 +111,60 @@ describe("normalizeTopicAuthoringDraft", () => {
         });
     });
 
+    it("preserves terminal, hidden shell, and Git expectations for terminal tasks", () => {
+        const normalized = normalizeTopicAuthoringDraft({
+            title: "Topic",
+            summary: "Summary",
+            minutes: 20,
+            sketchBlocks: [],
+            quizDraft: [
+                {
+                    id: "git-1",
+                    kind: "code_input",
+                    title: "Git task",
+                    prompt: "Create a commit.",
+                    starterCode: "# terminal task\n",
+                    solutionCode: "git init\n",
+                    fixedLanguage: "bash",
+                    recipeType: "shell_task",
+                    mode: "terminal_workspace",
+                    terminalExpectations: {
+                        requiredCommands: [{ pattern: "^git status$" }],
+                    },
+                    hiddenShellCheck: {
+                        script: "test -d .git",
+                        timeoutMs: 5000,
+                    },
+                    gitExpectations: {
+                        repositoryInitialized: true,
+                        currentBranch: "main",
+                        trackedFiles: ["README.md"],
+                    },
+                    hint: "Hint",
+                    help: {
+                        concept: "Concept",
+                        hint_1: "Hint 1",
+                        hint_2: "Hint 2",
+                    },
+                },
+            ],
+        } as any);
+
+        const exercise = normalized.quizDraft[0] as any;
+        expect(exercise.terminalExpectations).toEqual({
+            requiredCommands: [{ pattern: "^git status$" }],
+        });
+        expect(exercise.hiddenShellCheck).toEqual({
+            script: "test -d .git",
+            timeoutMs: 5000,
+        });
+        expect(exercise.gitExpectations).toEqual({
+            repositoryInitialized: true,
+            currentBranch: "main",
+            trackedFiles: ["README.md"],
+        });
+    });
+
     it("preserves authored solutionFiles and sourceChecks for code_input exercises", () => {
         const normalized = normalizeTopicAuthoringDraft({
             title: "Topic",

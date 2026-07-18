@@ -1,0 +1,35 @@
+{
+  "validationSuite": "gitSubjectValidation",
+  "appliesTo": "git_courses",
+  "runtime": {
+    "language": "bash",
+    "backend": "pty",
+    "mode": "terminal_workspace"
+  },
+  "rules": {
+    "executionValidation": [
+      "Every Git code_input uses profileId git, fixedLanguage bash, recipeType shell_task, and mode terminal_workspace.",
+      "Repository outcomes use gitExpectations as the primary proof of completion.",
+      "Ordinary file-tree outcomes may use workspaceExpectations, and exact safe command evidence may use terminalExpectations.",
+      "Independent exercises use per-exercise workspaces; progressive projects and capstones use project-scoped workspaces.",
+      "Every terminal exercise prompt tells the learner to type each command and press Enter."
+    ],
+    "repositoryValidation": [
+      "Never grade exact commit hashes, environment-dependent dates, absolute paths, or decorative log formatting.",
+      "Set a deterministic local identity and main branch when commits or branch names matter.",
+      "Use local bare repositories for remote workflows and forbid public network dependencies.",
+      "Validate final files, branches, commit counts/messages, ignored paths, remote branches, and clean state from repository state."
+    ],
+    "progression": [
+      "Git Foundations contains no branches, merges, remotes, or GitHub collaboration.",
+      "Git Branches, Merges, and Recovery assumes the local commit workflow and contains no hosted collaboration dependency.",
+      "GitHub Collaboration assumes branch, merge, conflict, and recovery skills and does not re-teach them as standalone topics."
+    ],
+    "pedagogy": [
+      "Open each course with a story-led standalone introduction, not an internal curriculum checklist.",
+      "Every standard module has exactly one cumulative module project.",
+      "Every final module has exactly one capstone section and one capstone topic.",
+      "Project and capstone step counts come exactly from projectBrief.stepCountTarget."
+    ]
+  }
+}

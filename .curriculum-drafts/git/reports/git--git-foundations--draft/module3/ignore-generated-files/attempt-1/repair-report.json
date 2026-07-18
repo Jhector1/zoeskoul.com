@@ -1,0 +1,33 @@
+{
+  "topicId": "ignore-generated-files",
+  "repairs": [
+    {
+      "code": "GIT_TRY_IT_KIND_PROMOTED",
+      "category": "other",
+      "severity": "low",
+      "field": "quizDraft.try-ignore-generated-files-sketch0",
+      "message": "Converted generated Try It \"try-ignore-generated-files-sketch0\" into the Git code_input required by plannedExerciseCounts."
+    },
+    {
+      "code": "GIT_TRY_IT_KIND_PROMOTED",
+      "category": "other",
+      "severity": "low",
+      "field": "quizDraft.try-ignore-generated-files-sketch1",
+      "message": "Converted generated Try It \"try-ignore-generated-files-sketch1\" into the Git code_input required by plannedExerciseCounts."
+    },
+    {
+      "code": "GIT_TRY_IT_KIND_PROMOTED",
+      "category": "other",
+      "severity": "low",
+      "field": "quizDraft.try-ignore-generated-files-sketch2",
+      "message": "Converted generated Try It \"try-ignore-generated-files-sketch2\" into the Git code_input required by plannedExerciseCounts."
+    },
+    {
+      "code": "GIT_TRY_IT_KIND_PROMOTED",
+      "category": "other",
+      "severity": "low",
+      "field": "quizDraft.try-ignore-generated-files-sketch3",
+      "message": "Converted generated Try It \"try-ignore-generated-files-sketch3\" into the Git code_input required by plannedExerciseCounts."
+    }
+  ]
+}

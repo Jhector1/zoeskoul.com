@@ -46,7 +46,7 @@ describe("compile validation state", () => {
                 draftOnly: false,
                 publishToLive: false,
             }),
-        ).toThrow(/requires --draft-only/);
+        ).toThrow(/require --draft-only/);
     });
 
     it("rejects validation bypass for publish flows", () => {

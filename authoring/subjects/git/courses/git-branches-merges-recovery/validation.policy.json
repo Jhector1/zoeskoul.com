@@ -1,0 +1,102 @@
+{
+  "policyId": "git-branches-merges-recovery-validation",
+  "allowedConcepts": [
+    "branch",
+    "HEAD",
+    "git branch",
+    "git branch --show-current",
+    "git switch",
+    "git switch -c",
+    "branch comparison",
+    "git branch --merged",
+    "git branch -d",
+    "fast-forward merge",
+    "merge commit",
+    "git merge",
+    "git merge --abort",
+    "conflict markers",
+    "conflict resolution",
+    "git restore",
+    "git restore --staged",
+    "git revert",
+    "git stash",
+    "git stash pop",
+    "git reflog",
+    "git log --graph"
+  ],
+  "disallowedConcepts": [
+    "public remote",
+    "GitHub issue",
+    "pull request",
+    "fork",
+    "personal access token",
+    "reset --hard",
+    "interactive rebase",
+    "cherry-pick",
+    "force push",
+    "GitHub Actions"
+  ],
+  "validationRequirements": {
+    "profileId": "git",
+    "language": "bash",
+    "recipeType": "shell_task",
+    "mode": "terminal_workspace",
+    "repositoryStateUsesGitExpectations": true,
+    "deterministicConflictFixtures": true,
+    "moduleCount": 4,
+    "standardModuleProjectCount": 3,
+    "finalCapstoneStepCount": 7
+  },
+  "globalRules": [
+    "Do not re-teach Git Foundations concepts as standalone modules.",
+    "Every conflict exercise creates one deterministic text conflict and requires all markers to be removed.",
+    "Recovery tools are selected from the location of the mistake, not from a generic undo list.",
+    "Revert preserves the target commit in history and adds a compensating commit.",
+    "The final module contains one capstone section and one capstone topic."
+  ],
+  "moduleRules": {
+    "1": {
+      "focus": [
+        "branch model",
+        "switch",
+        "independent commits",
+        "comparison",
+        "safe deletion"
+      ],
+      "forbidden": [
+        "merge conflict",
+        "remote collaboration"
+      ]
+    },
+    "2": {
+      "focus": [
+        "fast-forward",
+        "merge commits",
+        "conflicts",
+        "abort and verify"
+      ],
+      "forbidden": [
+        "rebase",
+        "force operations"
+      ]
+    },
+    "3": {
+      "focus": [
+        "restore",
+        "revert",
+        "stash",
+        "reflog inspection"
+      ],
+      "forbidden": [
+        "reset --hard",
+        "history rewriting"
+      ]
+    },
+    "4": {
+      "focus": [
+        "integrated release rescue"
+      ],
+      "requiredStepCount": 7
+    }
+  }
+}

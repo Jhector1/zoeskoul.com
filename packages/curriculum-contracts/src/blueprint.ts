@@ -5,6 +5,8 @@ import {SqlDialect} from "./manifest";
 import type { ToolPresentationPolicy } from "./tool-presentation.js";
 
 export type BuiltinCourseProfileId =
+    | "bash"
+    | "git"
     | "sql"
     | "python"
     | "math"

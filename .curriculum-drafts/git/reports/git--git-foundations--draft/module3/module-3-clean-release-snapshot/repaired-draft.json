@@ -1,0 +1,460 @@
+{
+  "title": "Project: Prepare a Clean Release Snapshot",
+  "summary": "Clean a release folder by renaming tracked work, removing an obsolete file, ignoring generated previews, and restoring accidental edits safely.",
+  "minutes": 80,
+  "sketchBlocks": [
+    {
+      "id": "intro-sketch",
+      "title": "Prepare a Clean Release Snapshot",
+      "bodyMarkdown": "In this project, you will take on the role of a release assistant tasked with preparing a clean snapshot of a volunteer handbook repository. The repository currently contains a draft filename, an obsolete checklist, a generated preview log, and an accidental edit to the approved introduction. Your goal is to clean up the repository by renaming tracked files, removing unnecessary files, ignoring generated artifacts, and restoring any accidental changes without rewriting history. This project will help you understand how to manage tracked files safely using Git commands.\n\n### Project Brief\n\n\n\n**Scenario:** A volunteer handbook is ready for release, but the repository still contains a draft filename, an obsolete checklist, a generated preview log, and one accidental edit to the approved introduction.\n\n**Your role:** Release assistant preparing a clean handbook snapshot\n\n**Workspace:** One cumulative terminal workspace rooted at volunteer-handbook/ with tracked docs/, generated preview output, and an existing baseline history\n\n**Deliverable:** A six-step cleanup ending with the correct tracked files, ignored generated output, restored approved content, one focused cleanup commit, and a clean working tree."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "try-module-3-sketch0",
+      "kind": "code_input",
+      "title": "Audit the Release Workspace",
+      "prompt": "Inspect the current state of the repository using Git commands. Identify the status of tracked files and any unstaged changes.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      },
+      "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.",
+      "solutionCode": "bash .zoeskoul/setup.sh\ngit status\ngit diff",
+      "fixedLanguage": "bash",
+      "recipeType": "shell_task",
+      "mode": "terminal_workspace",
+      "entryFilePath": "main.sh",
+      "instructions": "Inspect the current state of the repository using Git commands. Identify the status of tracked files and any unstaged changes.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 1\\n' > practice-1.txt\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "bash .zoeskoul/setup.sh\ngit status\ngit diff\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 1\\n' > practice-1.txt\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
+          },
+          {
+            "pattern": "^git\\s+status$"
+          },
+          {
+            "pattern": "^git\\s+diff$"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "Do not rewrite shared history in this Git practice task."
+          }
+        ]
+      },
+      "gitExpectations": {
+        "repositoryInitialized": true,
+        "currentBranch": "main"
+      }
+    },
+    {
+      "id": "try-module-3-sketch1",
+      "kind": "code_input",
+      "title": "Rename the Approved Guide",
+      "prompt": "Rename the file `docs/guide-draft.md` to `docs/volunteer-guide.md` using Git commands. Verify the rename is staged.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+      "hint": "Use `git mv` to rename the file and stage the change.",
+      "help": {
+        "concept": "Renaming a file with Git ensures the change is tracked and staged for commit.",
+        "hint_1": "Use `git mv` to rename and stage the file.",
+        "hint_2": "Check the status to verify the rename is staged."
+      },
+      "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.",
+      "solutionCode": "bash .zoeskoul/setup.sh\ngit mv",
+      "fixedLanguage": "bash",
+      "recipeType": "shell_task",
+      "mode": "terminal_workspace",
+      "entryFilePath": "main.sh",
+      "instructions": "Rename the file `docs/guide-draft.md` to `docs/volunteer-guide.md` using Git commands. Verify the rename is staged.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 2\\n' > docs/guide-draft.md\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "bash .zoeskoul/setup.sh\ngit mv\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 2\\n' > docs/guide-draft.md\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
+          },
+          {
+            "pattern": "^git\\s+mv$"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "Do not rewrite shared history in this Git practice task."
+          }
+        ]
+      },
+      "gitExpectations": {
+        "repositoryInitialized": true,
+        "currentBranch": "main"
+      }
+    },
+    {
+      "id": "try-module-3-sketch2",
+      "kind": "code_input",
+      "title": "Remove the Obsolete Checklist",
+      "prompt": "Remove the file `docs/old-checklist.md` from the repository using Git commands. Ensure the removal is staged.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+      "hint": "Use `git rm` to remove the file and stage the deletion.",
+      "help": {
+        "concept": "Removing a file with Git ensures the deletion is tracked and staged for commit.",
+        "hint_1": "Use `git rm` to remove and stage the file.",
+        "hint_2": "Check the status to verify the removal is staged."
+      },
+      "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.",
+      "solutionCode": "bash .zoeskoul/setup.sh\ngit rm",
+      "fixedLanguage": "bash",
+      "recipeType": "shell_task",
+      "mode": "terminal_workspace",
+      "entryFilePath": "main.sh",
+      "instructions": "Remove the file `docs/old-checklist.md` from the repository using Git commands. Ensure the removal is staged.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 3\\n' > docs/old-checklist.md\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "bash .zoeskoul/setup.sh\ngit rm\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 3\\n' > docs/old-checklist.md\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
+          },
+          {
+            "pattern": "^git\\s+rm$"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "Do not rewrite shared history in this Git practice task."
+          }
+        ]
+      },
+      "gitExpectations": {
+        "repositoryInitialized": true,
+        "currentBranch": "main"
+      }
+    },
+    {
+      "id": "try-module-3-sketch3",
+      "kind": "code_input",
+      "title": "Ignore Generated Preview Output",
+      "prompt": "Add `preview.log` to `.gitignore` and verify it is ignored using Git commands.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+      "hint": "Read the Git task \"Ignore Generated Preview Output\" and identify the repository state you need to create.",
+      "help": {
+        "concept": "This Git exercise checks the repository state produced by \"Ignore Generated Preview Output\".",
+        "hint_1": "Use git status before and after each small change so you can see what moved between the working tree, staging area, and history.",
+        "hint_2": "Match the requested file names, branch names, and commit purpose before clicking Check Answer."
+      },
+      "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.",
+      "solutionCode": "bash .zoeskoul/setup.sh\ngit check-ignore\ngit check-ignore -v preview.log",
+      "fixedLanguage": "bash",
+      "recipeType": "shell_task",
+      "mode": "terminal_workspace",
+      "entryFilePath": "main.sh",
+      "instructions": "Add `preview.log` to `.gitignore` and verify it is ignored using Git commands.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 4\\n' > preview.log\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "bash .zoeskoul/setup.sh\ngit check-ignore\ngit check-ignore -v preview.log\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 4\\n' > preview.log\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
+          },
+          {
+            "pattern": "^git\\s+check-ignore$"
+          },
+          {
+            "pattern": "^git\\s+check-ignore\\s+-v\\s+preview\\.log$"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "Do not rewrite shared history in this Git practice task."
+          }
+        ]
+      },
+      "gitExpectations": {
+        "repositoryInitialized": true,
+        "currentBranch": "main"
+      }
+    },
+    {
+      "id": "try-module-3-sketch4",
+      "kind": "code_input",
+      "title": "Restore the Accidental Introduction Edit",
+      "prompt": "Restore the accidental edit in `README.md` using Git commands without affecting other changes.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      },
+      "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.",
+      "solutionCode": "bash .zoeskoul/setup.sh\ngit restore\ngit restore README.md",
+      "fixedLanguage": "bash",
+      "recipeType": "shell_task",
+      "mode": "terminal_workspace",
+      "entryFilePath": "main.sh",
+      "instructions": "Restore the accidental edit in `README.md` using Git commands without affecting other changes.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 5\\n' > README.md\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "bash .zoeskoul/setup.sh\ngit restore\ngit restore README.md\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 5\\n' > README.md\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
+          },
+          {
+            "pattern": "^git\\s+restore$"
+          },
+          {
+            "pattern": "^git\\s+restore\\s+README\\.md$"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "Do not rewrite shared history in this Git practice task."
+          }
+        ]
+      },
+      "gitExpectations": {
+        "repositoryInitialized": true,
+        "currentBranch": "main"
+      }
+    },
+    {
+      "id": "try-module-3-sketch5",
+      "kind": "code_input",
+      "title": "Commit and Verify the Release Cleanup",
+      "prompt": "Commit the changes with the message 'Prepare handbook release' and verify the repository state is clean.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      },
+      "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.",
+      "solutionCode": "bash .zoeskoul/setup.sh\ngit commit\ngit status\ngit commit -m 'Prepare handbook release'",
+      "fixedLanguage": "bash",
+      "recipeType": "shell_task",
+      "mode": "terminal_workspace",
+      "entryFilePath": "main.sh",
+      "instructions": "Commit the changes with the message 'Prepare handbook release' and verify the repository state is clean.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 6\\n' > practice-6.txt\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "bash .zoeskoul/setup.sh\ngit commit\ngit status\ngit commit -m 'Prepare handbook release'\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 6\\n' > practice-6.txt\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
+          },
+          {
+            "pattern": "^git\\s+commit$"
+          },
+          {
+            "pattern": "^git\\s+status$"
+          },
+          {
+            "pattern": "^git\\s+commit\\s+-m\\s+'Prepare\\s+handbook\\s+release'$"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "Do not rewrite shared history in this Git practice task."
+          }
+        ]
+      },
+      "gitExpectations": {
+        "repositoryInitialized": true,
+        "currentBranch": "main"
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Prepare a Clean Release Snapshot",
+    "stepIds": [
+      "try-module-3-sketch0",
+      "try-module-3-sketch1",
+      "try-module-3-sketch2",
+      "try-module-3-sketch3",
+      "try-module-3-sketch4",
+      "try-module-3-sketch5"
+    ]
+  }
+}

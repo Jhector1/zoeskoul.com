@@ -1,0 +1,40 @@
+{
+  "topicId": "module-1-field-notes-repository",
+  "repairs": [
+    {
+      "code": "GIT_TRY_IT_KIND_PROMOTED",
+      "category": "other",
+      "severity": "low",
+      "field": "quizDraft.try-git-repo-inspection",
+      "message": "Converted generated Try It \"try-git-repo-inspection\" into the Git code_input required by plannedExerciseCounts."
+    },
+    {
+      "code": "GIT_TRY_IT_KIND_PROMOTED",
+      "category": "other",
+      "severity": "low",
+      "field": "quizDraft.try-git-config",
+      "message": "Converted generated Try It \"try-git-config\" into the Git code_input required by plannedExerciseCounts."
+    },
+    {
+      "code": "GIT_TRY_IT_KIND_PROMOTED",
+      "category": "other",
+      "severity": "low",
+      "field": "quizDraft.try-git-init",
+      "message": "Converted generated Try It \"try-git-init\" into the Git code_input required by plannedExerciseCounts."
+    },
+    {
+      "code": "GIT_TRY_IT_KIND_PROMOTED",
+      "category": "other",
+      "severity": "low",
+      "field": "quizDraft.try-git-stage-files",
+      "message": "Converted generated Try It \"try-git-stage-files\" into the Git code_input required by plannedExerciseCounts."
+    },
+    {
+      "code": "GIT_TRY_IT_KIND_PROMOTED",
+      "category": "other",
+      "severity": "low",
+      "field": "quizDraft.try-git-commit",
+      "message": "Converted generated Try It \"try-git-commit\" into the Git code_input required by plannedExerciseCounts."
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "rubricId": "git-capstone",
+  "criteria": [
+    {
+      "name": "Complete cumulative repository workflow",
+      "weight": 0.35
+    },
+    {
+      "name": "Accurate files, branches, commits, and remotes",
+      "weight": 0.3
+    },
+    {
+      "name": "Safe integration and recovery decisions",
+      "weight": 0.2
+    },
+    {
+      "name": "Readable history and collaboration handoff",
+      "weight": 0.15
+    }
+  ]
+}

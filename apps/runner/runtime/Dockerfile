@@ -30,6 +30,7 @@ RUN apt-get update \
     findutils \
     gcc \
     g++ \
+    git \
     libc6-dev \
     make \
     nodejs \

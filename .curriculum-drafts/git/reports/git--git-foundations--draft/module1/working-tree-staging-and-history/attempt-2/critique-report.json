@@ -1,0 +1,24 @@
+{
+  "topicId": "working-tree-staging-and-history",
+  "ok": false,
+  "issues": [
+    {
+      "code": "EXERCISE_POLICY_CODE_INPUT_UNDER_TARGET",
+      "category": "clarity",
+      "severity": "error",
+      "message": "Exercise policy expects 4 \"code_input\" exercise(s), but the draft has 0."
+    },
+    {
+      "code": "EXERCISE_POLICY_DOMINANT_KIND_MISMATCH",
+      "category": "clarity",
+      "severity": "warn",
+      "message": "Exercise policy expects \"code_input\" to be dominant, but the draft is dominated by \"single_choice / fill_blank_choice\"."
+    },
+    {
+      "code": "EXERCISE_POLICY_TOTAL_MISMATCH",
+      "category": "clarity",
+      "severity": "warn",
+      "message": "Exercise policy expects 10 total exercise(s), but the draft has 6."
+    }
+  ]
+}

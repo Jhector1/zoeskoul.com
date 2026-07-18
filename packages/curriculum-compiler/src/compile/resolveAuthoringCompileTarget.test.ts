@@ -11,9 +11,9 @@ describe("authoring compile target resolution", () => {
     it("compileSubject uses subject.plan publishTarget courseSlug for SQL", async () => {
         const target = await resolveSubjectPublishTarget("sql");
 
-        expect(target.courseSlug).toBe("sql-foundations");
+        expect(target.courseSlug).toBe("sql-v2");
         expect(target.liveSubjectSlug).toBe("sql-v2");
-        expect(target.spec.courseSlug).toBe("sql-foundations");
+        expect(target.spec.courseSlug).toBe("sql-v2");
         expect(target.blueprint.subjectSlug).toBe("sql-v2");
     });
 
@@ -185,6 +185,26 @@ describe("authoring compile target resolution", () => {
             status: "active",
             defaultForNewEnrollments: true,
             supersedes: "python",
+            supersededBy: null,
+        });
+    });
+
+    it("uses subject.plan as the single versioning source for Git Foundations", async () => {
+        const target = await resolveAuthoringCompileTarget({
+            subjectSlug: "git",
+            courseSlug: "git-foundations",
+            options: {
+                draftOnly: true,
+            },
+        });
+
+        expect(target.spec.versioning).toBeUndefined();
+        expect(target.blueprint.versioning).toEqual({
+            family: "git-foundations",
+            version: 1,
+            status: "draft",
+            defaultForNewEnrollments: false,
+            supersedes: null,
             supersededBy: null,
         });
     });

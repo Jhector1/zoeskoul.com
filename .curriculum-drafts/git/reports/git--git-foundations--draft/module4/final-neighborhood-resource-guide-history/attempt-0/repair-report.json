@@ -1,0 +1,47 @@
+{
+  "topicId": "final-neighborhood-resource-guide-history",
+  "repairs": [
+    {
+      "code": "GIT_CODE_INPUT_WORKSPACE_REBUILT",
+      "category": "other",
+      "severity": "low",
+      "field": "quizDraft.try-final-neighborhood-resource-guide-history-sketch0",
+      "message": "Rebuilt generated Git exercise \"try-final-neighborhood-resource-guide-history-sketch0\" as a self-contained terminal workspace with deterministic setup and grading evidence."
+    },
+    {
+      "code": "GIT_CODE_INPUT_WORKSPACE_REBUILT",
+      "category": "other",
+      "severity": "low",
+      "field": "quizDraft.try-final-neighborhood-resource-guide-history-sketch1",
+      "message": "Rebuilt generated Git exercise \"try-final-neighborhood-resource-guide-history-sketch1\" as a self-contained terminal workspace with deterministic setup and grading evidence."
+    },
+    {
+      "code": "GIT_CODE_INPUT_WORKSPACE_REBUILT",
+      "category": "other",
+      "severity": "low",
+      "field": "quizDraft.try-final-neighborhood-resource-guide-history-sketch2",
+      "message": "Rebuilt generated Git exercise \"try-final-neighborhood-resource-guide-history-sketch2\" as a self-contained terminal workspace with deterministic setup and grading evidence."
+    },
+    {
+      "code": "GIT_CODE_INPUT_WORKSPACE_REBUILT",
+      "category": "other",
+      "severity": "low",
+      "field": "quizDraft.try-final-neighborhood-resource-guide-history-sketch3",
+      "message": "Rebuilt generated Git exercise \"try-final-neighborhood-resource-guide-history-sketch3\" as a self-contained terminal workspace with deterministic setup and grading evidence."
+    },
+    {
+      "code": "GIT_CODE_INPUT_WORKSPACE_REBUILT",
+      "category": "other",
+      "severity": "low",
+      "field": "quizDraft.try-final-neighborhood-resource-guide-history-sketch4",
+      "message": "Rebuilt generated Git exercise \"try-final-neighborhood-resource-guide-history-sketch4\" as a self-contained terminal workspace with deterministic setup and grading evidence."
+    },
+    {
+      "code": "GIT_CODE_INPUT_WORKSPACE_REBUILT",
+      "category": "other",
+      "severity": "low",
+      "field": "quizDraft.try-final-neighborhood-resource-guide-history-sketch5",
+      "message": "Rebuilt generated Git exercise \"try-final-neighborhood-resource-guide-history-sketch5\" as a self-contained terminal workspace with deterministic setup and grading evidence."
+    }
+  ]
+}

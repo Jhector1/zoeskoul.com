@@ -1,0 +1,362 @@
+{
+  "title": "Rename and Remove Tracked Files",
+  "summary": "Use git mv and git rm so a project cleanup is immediately represented in the staging area.",
+  "minutes": 22,
+  "sketchBlocks": [
+    {
+      "id": "sketch0",
+      "title": "How to Rename Files in Git",
+      "bodyMarkdown": "Renaming a file in Git is more than just changing its name in the filesystem. Git needs to track this change to maintain the history of the file. The `git mv` command is used to rename files while keeping Git informed.\n\nWorked example: Suppose you have a file named `old_name.txt` that you want to rename to `new_name.txt`. You can achieve this by running the command:\n\n```bash\ngit mv old_name.txt new_name.txt\n```\n\nThis command renames the file and stages the change for the next commit. It ensures that the rename is tracked in the version history, preserving the file's history under the new name."
+    },
+    {
+      "id": "sketch1",
+      "title": "How to Remove Files in Git",
+      "bodyMarkdown": "When a file is no longer needed, you can remove it from your project using Git. The `git rm` command removes the file from the working directory and stages the deletion for the next commit.\n\nWorked example: If you have a file named `obsolete_file.txt` that you want to remove, you can use the following command:\n\n```bash\ngit rm obsolete_file.txt\n```\n\nThis command deletes the file and stages the removal. The file will be removed from the repository in the next commit, ensuring that the deletion is tracked in the version history."
+    },
+    {
+      "id": "sketch2",
+      "title": "Check Staged Renames and Deletions",
+      "bodyMarkdown": "Before committing changes, it's crucial to verify what has been staged. The `git status` command provides a summary of changes in the working directory and staging area.\n\nWorked example: After renaming or removing files, you can check the status with:\n\n```bash\ngit status\n```\n\nThis command will show renamed and deleted files under the 'Changes to be committed' section, allowing you to confirm that the intended changes are staged correctly."
+    },
+    {
+      "id": "sketch3",
+      "title": "Ignoring Unwanted Files",
+      "bodyMarkdown": "The `.gitignore` file is used to specify files and directories that Git should ignore. This is useful for excluding temporary files, build artifacts, or other files that should not be tracked.\n\nWorked example: To ignore all `.log` files in your project, add the following line to your `.gitignore` file:\n\n```\n*.log\n```\n\nThis ensures that any file with a `.log` extension will not be tracked by Git, keeping your repository clean from unnecessary files."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "single-choice-1",
+      "kind": "single_choice",
+      "title": "Purpose of git mv",
+      "prompt": "What is the primary purpose of the `git mv` command?",
+      "options": [
+        "To move files between directories",
+        "To rename files and stage the change",
+        "To delete files from the repository",
+        "To create a new branch"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Think about how Git tracks file changes.",
+      "help": {
+        "concept": "The `git mv` command is used to rename files while keeping Git informed of the change.",
+        "hint_1": "It involves renaming files in a way that Git can track.",
+        "hint_2": "It stages the rename for the next commit."
+      }
+    },
+    {
+      "id": "single-choice-2",
+      "kind": "single_choice",
+      "title": "Effect of git rm",
+      "prompt": "What happens when you use the `git rm` command?",
+      "options": [
+        "The file is moved to a different directory",
+        "The file is renamed",
+        "The file is deleted and the deletion is staged",
+        "The file is ignored"
+      ],
+      "correctOptionIds": [
+        "c"
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "multi-choice-1",
+      "kind": "multi_choice",
+      "title": "Commands for File Management",
+      "prompt": "Which commands can be used to manage tracked files in Git? Select all that apply.",
+      "options": [
+        "git mv",
+        "git rm",
+        "git branch",
+        "git clone"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "drag-reorder-1",
+      "kind": "drag_reorder",
+      "title": "Order of Operations for Renaming a File",
+      "prompt": "Arrange the steps to rename a file in Git correctly.",
+      "tokens": [
+        "Check current status with git status",
+        "Rename the file with git mv",
+        "Verify changes with git status",
+        "Commit the changes"
+      ],
+      "correctOrder": [
+        "Check current status with git status",
+        "Rename the file with git mv",
+        "Verify changes with git status",
+        "Commit the changes"
+      ],
+      "hint": "Consider the sequence from checking the status to committing the change.",
+      "help": {
+        "concept": "Renaming a file involves using `git mv`, checking the status, and committing the change.",
+        "hint_1": "Start with checking the current status.",
+        "hint_2": "End with committing the change."
+      }
+    },
+    {
+      "id": "fill-blank-choice-1",
+      "kind": "fill_blank_choice",
+      "title": "Staging Area Verification",
+      "prompt": "To verify staged changes, use the command `[blank1]`.",
+      "template": "To verify staged changes, use the command `[blank1]`.",
+      "choices": [
+        "git status",
+        "git log",
+        "git commit",
+        "git diff"
+      ],
+      "correctValue": "git status",
+      "hint": "This command shows the status of the working directory and staging area.",
+      "help": {
+        "concept": "The `the missing term` command provides a summary of changes in the working directory and staging area.",
+        "hint_1": "It shows what changes are staged for commit.",
+        "hint_2": "The command is `the missing term`."
+      }
+    },
+    {
+      "id": "fill-blank-choice-2",
+      "kind": "fill_blank_choice",
+      "title": "Ignoring Files",
+      "prompt": "To ignore all `.bak` files, add `[blank1]` to the `.gitignore` file.",
+      "template": "To ignore all `.bak` files, add `[blank1]` to the `.gitignore` file.",
+      "choices": [
+        "*.bak",
+        "*.tmp",
+        "*.log",
+        "*.txt"
+      ],
+      "correctValue": "*.bak",
+      "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+      "help": {
+        "concept": "The blank should be filled with the term that makes the statement accurate.",
+        "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+        "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+      }
+    },
+    {
+      "id": "try-rename-and-remove-tracked-files-sketch0",
+      "kind": "code_input",
+      "title": "Rename a File with Git",
+      "prompt": "Rename the file `report.txt` to `summary.txt` using Git commands. Ensure the rename is staged for commit.",
+      "starterCode": "# Rename the file using Git",
+      "entryFilePath": "main.sh",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Rename the file using Git",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "git mv report.txt summary.txt",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionCode": "git mv report.txt summary.txt",
+      "recipeType": "shell_task",
+      "hint": "Read the Git task \"Rename a File with Git\" and identify the repository state you need to create.",
+      "help": {
+        "concept": "This Git exercise checks the repository state produced by \"Rename a File with Git\".",
+        "hint_1": "Use git status before and after each small change so you can see what moved between the working tree, staging area, and history.",
+        "hint_2": "Match the requested file names, branch names, and commit purpose before clicking Check Answer."
+      },
+      "fixedLanguage": "bash",
+      "mode": "terminal_workspace",
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^git\\s+mv\\s+report\\.txt\\s+summary\\.txt$"
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-rename-and-remove-tracked-files-sketch1",
+      "kind": "code_input",
+      "title": "Remove a File with Git",
+      "prompt": "Remove the file `draft.txt` from the repository using Git commands. Ensure the removal is staged for commit.",
+      "starterCode": "# Remove the file using Git",
+      "entryFilePath": "main.sh",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Remove the file using Git",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "git rm draft.txt",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionCode": "git rm draft.txt",
+      "recipeType": "shell_task",
+      "hint": "Read the Git task \"Remove a File with Git\" and identify the repository state you need to create.",
+      "help": {
+        "concept": "This Git exercise checks the repository state produced by \"Remove a File with Git\".",
+        "hint_1": "Use git status before and after each small change so you can see what moved between the working tree, staging area, and history.",
+        "hint_2": "Match the requested file names, branch names, and commit purpose before clicking Check Answer."
+      },
+      "fixedLanguage": "bash",
+      "mode": "terminal_workspace",
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^git\\s+rm\\s+draft\\.txt$"
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-rename-and-remove-tracked-files-sketch2",
+      "kind": "code_input",
+      "title": "Verify Staged Changes",
+      "prompt": "After renaming and removing files, verify the staged changes using Git commands.",
+      "starterCode": "# Verify staged changes",
+      "entryFilePath": "main.sh",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Verify staged changes",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "git status",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionCode": "git status",
+      "recipeType": "shell_task",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      },
+      "fixedLanguage": "bash",
+      "mode": "terminal_workspace",
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^git\\s+status$"
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-rename-and-remove-tracked-files-sketch3",
+      "kind": "code_input",
+      "title": "Create a .gitignore File",
+      "prompt": "Create a `.gitignore` file to ignore all `.tmp` files in the repository.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      },
+      "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.",
+      "solutionCode": "bash .zoeskoul/setup.sh\ngit remote -v",
+      "fixedLanguage": "bash",
+      "recipeType": "shell_task",
+      "mode": "terminal_workspace",
+      "entryFilePath": "main.sh",
+      "instructions": "Create a `.gitignore` file to ignore all `.tmp` files in the repository.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 4\\n' > practice-4.txt\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "bash .zoeskoul/setup.sh\ngit remote -v\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 4\\n' > practice-4.txt\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
+          },
+          {
+            "pattern": "^git\\s+remote\\s+-v$"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "Do not rewrite shared history in this Git practice task."
+          }
+        ]
+      },
+      "gitExpectations": {
+        "repositoryInitialized": true,
+        "currentBranch": "main"
+      }
+    }
+  ]
+}

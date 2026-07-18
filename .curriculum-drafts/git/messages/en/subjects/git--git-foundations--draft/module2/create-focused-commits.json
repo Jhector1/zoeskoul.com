@@ -1,0 +1,297 @@
+{
+  "topics": {
+    "git--git-foundations--draft": {
+      "git-foundations-module-2-meaningful-history": {
+        "create-focused-commits": {
+          "label": "Create Focused Commits",
+          "summary": "Record one coherent change with a message that explains the purpose of the snapshot.",
+          "cards": {
+            "sketch0": {
+              "title": "The Role of Commits in Version Control"
+            },
+            "sketch1": {
+              "title": "Preparing Changes for a Commit"
+            },
+            "sketch2": {
+              "title": "Crafting Effective Commit Messages"
+            },
+            "sketch3": {
+              "title": "Inspecting Past Commits"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_create_focused_commits_sketch0": {
+              "title": "Try it yourself: Create a Commit with a Message",
+              "prompt": "Right after the sketch \"The Role of Commits in Version Control\", practice that exact idea with this task. Stage the changes in `feature.txt` and commit them with the message 'Add new feature'.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter. Produce the result for create a Commit with a Message so it reinforces Create Focused Commits.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.",
+              "solutionCode": "bash .zoeskoul/setup.sh\ngit add\ngit commit\ngit add feature.txt\ngit commit -m 'Add new feature'",
+              "instructions": "Stage the changes in `feature.txt` and commit them with the message 'Add new feature'.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+              "starterFiles": {
+                "main_sh": {
+                  "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.\n"
+                },
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 1\\n' > feature.txt\n"
+                }
+              },
+              "solutionFiles": {
+                "main_sh": {
+                  "content": "bash .zoeskoul/setup.sh\ngit add\ngit commit\ngit add feature.txt\ngit commit -m 'Add new feature'\n"
+                },
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 1\\n' > feature.txt\n"
+                }
+              },
+              "terminalExpectations": {
+                "forbiddenCommands": {
+                  "0": {
+                    "message": "Do not rewrite shared history in this Git practice task."
+                  }
+                }
+              }
+            },
+            "try_create_focused_commits_sketch1": {
+              "title": "Try it yourself: Stage Specific Changes",
+              "prompt": "Right after the sketch \"Preparing Changes for a Commit\", practice that exact idea with this task. Stage only the changes in `index.html` for the next commit.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter. Produce the result for stage Specific Changes so it reinforces Create Focused Commits.",
+              "hint": "Read the Git task \"Stage Specific Changes\" and identify the repository state you need to create.",
+              "help": {
+                "concept": "This Git exercise checks the repository state produced by \"Stage Specific Changes\".",
+                "hint_1": "Use git status before and after each small change so you can see what moved between the working tree, staging area, and history.",
+                "hint_2": "Match the requested file names, branch names, and commit purpose before clicking Check Answer."
+              },
+              "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.",
+              "solutionCode": "bash .zoeskoul/setup.sh\ngit add\ngit add index.html",
+              "instructions": "Stage only the changes in `index.html` for the next commit.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+              "starterFiles": {
+                "main_sh": {
+                  "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.\n"
+                },
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 2\\n' > index.html\n"
+                }
+              },
+              "solutionFiles": {
+                "main_sh": {
+                  "content": "bash .zoeskoul/setup.sh\ngit add\ngit add index.html\n"
+                },
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 2\\n' > index.html\n"
+                }
+              },
+              "terminalExpectations": {
+                "forbiddenCommands": {
+                  "0": {
+                    "message": "Do not rewrite shared history in this Git practice task."
+                  }
+                }
+              }
+            },
+            "try_create_focused_commits_sketch2": {
+              "title": "Try it yourself: Write a Commit Message",
+              "prompt": "Right after the sketch \"Crafting Effective Commit Messages\", practice that exact idea with this task. Commit the staged changes with the message 'Fix login bug'.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter. Produce the result for write a Commit Message so it reinforces Create Focused Commits.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.",
+              "solutionCode": "bash .zoeskoul/setup.sh\ngit commit -m\ngit commit -m 'Fix login bug'",
+              "instructions": "Commit the staged changes with the message 'Fix login bug'.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+              "starterFiles": {
+                "main_sh": {
+                  "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.\n"
+                },
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 3\\n' > practice-3.txt\n"
+                }
+              },
+              "solutionFiles": {
+                "main_sh": {
+                  "content": "bash .zoeskoul/setup.sh\ngit commit -m\ngit commit -m 'Fix login bug'\n"
+                },
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 3\\n' > practice-3.txt\n"
+                }
+              },
+              "terminalExpectations": {
+                "forbiddenCommands": {
+                  "0": {
+                    "message": "Do not rewrite shared history in this Git practice task."
+                  }
+                }
+              }
+            },
+            "try_create_focused_commits_sketch3": {
+              "title": "Try it yourself: Review Commit History",
+              "prompt": "Right after the sketch \"Inspecting Past Commits\", practice that exact idea with this task. Use a command to view the commit history in a concise format.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter. Produce the result for review Commit History so it reinforces Create Focused Commits.",
+              "hint": "Read the Git task \"Review Commit History\" and identify the repository state you need to create.",
+              "help": {
+                "concept": "This Git exercise checks the repository state produced by \"Review Commit History\".",
+                "hint_1": "Use git status before and after each small change so you can see what moved between the working tree, staging area, and history.",
+                "hint_2": "Match the requested file names, branch names, and commit purpose before clicking Check Answer."
+              },
+              "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.",
+              "solutionCode": "bash .zoeskoul/setup.sh\ngit log --oneline",
+              "instructions": "Use a command to view the commit history in a concise format.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+              "starterFiles": {
+                "main_sh": {
+                  "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.\n"
+                },
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 4\\n' > practice-4.txt\n"
+                }
+              },
+              "solutionFiles": {
+                "main_sh": {
+                  "content": "bash .zoeskoul/setup.sh\ngit log --oneline\n"
+                },
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 4\\n' > practice-4.txt\n"
+                }
+              },
+              "terminalExpectations": {
+                "forbiddenCommands": {
+                  "0": {
+                    "message": "Do not rewrite shared history in this Git practice task."
+                  }
+                }
+              }
+            }
+          },
+          "practice": {
+            "single-choice-1": {
+              "title": "Commit History Inspection",
+              "prompt": "Which command provides a concise view of the commit history?",
+              "hint": "Look for a command that summarizes commit messages.",
+              "help": {
+                "concept": "A concise history view helps quickly understand changes.",
+                "hint_1": "The command uses `git log`.",
+                "hint_2": "It includes the `--oneline` option for brevity."
+              },
+              "options": {
+                "a": "git log --oneline",
+                "b": "git status",
+                "c": "git diff",
+                "d": "git show"
+              }
+            },
+            "multi-choice-1": {
+              "title": "Purpose of Commits",
+              "prompt": "What is the primary purpose of creating commits in Git?",
+              "hint": "Think about how commits help in tracking changes.",
+              "help": {
+                "concept": "Commits are snapshots of your project at a point in time.",
+                "hint_1": "Commits help in tracking changes and reverting to previous states.",
+                "hint_2": "They are essential for collaboration and understanding project history."
+              },
+              "options": {
+                "a": "To track changes over time",
+                "b": "To permanently delete files",
+                "c": "To merge branches",
+                "d": "To create backups"
+              }
+            },
+            "multi-choice-2": {
+              "title": "Commit Message Best Practices",
+              "prompt": "Which of the following are best practices for writing commit messages?",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "options": {
+                "a": "Use imperative mood",
+                "b": "Include detailed code changes",
+                "c": "Be concise",
+                "d": "Describe the change's purpose"
+              }
+            },
+            "drag-reorder-1": {
+              "title": "Commit Process Steps",
+              "prompt": "Arrange the steps to create a commit in the correct order.",
+              "hint": "Think about the sequence from making changes to committing them.",
+              "help": {
+                "concept": "Creating a commit involves staging changes and then committing them.",
+                "hint_1": "Staging comes before committing.",
+                "hint_2": "You need to write a commit message after staging."
+              },
+              "tokens": {
+                "t1": "Make changes in the working directory",
+                "t2": "Stage changes with git add",
+                "t3": "Commit changes with git commit"
+              }
+            },
+            "fill-blank-1": {
+              "title": "Staging Command",
+              "prompt": "Complete the command to stage a file named `app.js`.",
+              "hint": "Use the `git add` command to stage files.",
+              "help": {
+                "concept": "Staging prepares files for a commit.",
+                "hint_1": "The command starts with `git add`.",
+                "hint_2": "You need to specify the file name after `git add`."
+              },
+              "template": "git add [blank1]",
+              "choices": [
+                "app.js",
+                "index.html",
+                "style.css"
+              ]
+            },
+            "fill-blank-2": {
+              "title": "Commit Message Format",
+              "prompt": "Fill in the blank to complete the commit message: `git commit -m '[blank1]'`.",
+              "hint": "Commit messages should be in imperative form.",
+              "help": {
+                "concept": "Commit messages describe the change's purpose.",
+                "hint_1": "The message should be concise and imperative.",
+                "hint_2": "Think about what the commit achieves."
+              },
+              "template": "git commit -m '[blank1]'",
+              "choices": [
+                "Add new feature",
+                "Fixed bug",
+                "Update README"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "git--git-foundations--draft": {
+      "git-foundations-module-2-meaningful-history": {
+        "create-focused-commits": {
+          "sketch0": {
+            "title": "The Role of Commits in Version Control",
+            "bodyMarkdown": "Commits are the fundamental units of change in a Git repository. Each commit represents a snapshot of your project at a specific point in time. By creating commits, you can track changes, revert to previous states, and collaborate with others more effectively. \n\nWorked example: Imagine you're working on a project where you've just added a new feature and fixed a bug. Instead of committing both changes together, you should create separate commits for each. This way, each commit has a clear purpose and can be easily understood by others reviewing the history.\n\nTo create a commit, you first need to stage your changes using `git add`. Once staged, you can commit them with `git commit -m \"Your commit message\"`. The message should be concise and imperative, summarizing the change's purpose."
+          },
+          "sketch1": {
+            "title": "Preparing Changes for a Commit",
+            "bodyMarkdown": "Before you can commit changes, you need to stage them. Staging allows you to select which changes you want to include in your next commit. This is particularly useful when you have multiple changes in your working directory but only want to commit some of them.\n\nWorked example: Suppose you've modified two files, `index.html` and `style.css`. If you only want to commit the changes in `index.html`, you would stage it using `git add index.html`. You can then commit this change separately from any others.\n\nStaging helps maintain a clean and understandable commit history by allowing you to group related changes together."
+          },
+          "sketch2": {
+            "title": "Crafting Effective Commit Messages",
+            "bodyMarkdown": "A good commit message is crucial for understanding the history of a project. It should be short, descriptive, and written in the imperative mood. This style helps convey what the commit does, rather than what was done.\n\nWorked example: If you fixed a bug in the login feature, a good commit message might be `Fix login bug causing crash`. This message clearly states what the commit achieves, making it easier for others to understand the change.\n\nCommit messages are not just for you; they are for anyone who might work on the project in the future. Clear messages help maintain a project's readability and manageability."
+          },
+          "sketch3": {
+            "title": "Inspecting Past Commits",
+            "bodyMarkdown": "Once you've made several commits, you can review them to understand the project's evolution. Git provides several commands to inspect commit history, such as `git log` and `git show`.\n\nWorked example: Using `git log --oneline`, you can see a condensed view of your commit history, showing each commit's hash and message. This view helps you quickly understand the sequence of changes.\n\nFor more detailed information about a specific commit, use `git show <commit-hash>`. This command displays the changes introduced by the commit, along with the commit message and metadata. Reviewing commit history is essential for tracking progress and identifying when specific changes were made."
+          }
+        }
+      }
+    }
+  }
+}

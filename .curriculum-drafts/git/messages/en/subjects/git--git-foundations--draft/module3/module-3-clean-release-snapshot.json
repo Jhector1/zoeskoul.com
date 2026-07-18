@@ -1,0 +1,272 @@
+{
+  "topics": {
+    "git--git-foundations--draft": {
+      "git-foundations-module-3-manage-tracked-files": {
+        "module-3-clean-release-snapshot": {
+          "label": "Project: Prepare a Clean Release Snapshot",
+          "summary": "Clean a release folder by renaming tracked work, removing an obsolete file, ignoring generated previews, and restoring accidental edits safely.",
+          "cards": {
+            "sketch0": {
+              "title": "Prepare a Clean Release Snapshot"
+            },
+            "project": {
+              "title": "Prepare a Clean Release Snapshot"
+            }
+          },
+          "projectSteps": {
+            "try_module_3_sketch0": {
+              "title": "Audit the Release Workspace"
+            },
+            "try_module_3_sketch1": {
+              "title": "Rename the Approved Guide"
+            },
+            "try_module_3_sketch2": {
+              "title": "Remove the Obsolete Checklist"
+            },
+            "try_module_3_sketch3": {
+              "title": "Ignore Generated Preview Output"
+            },
+            "try_module_3_sketch4": {
+              "title": "Restore the Accidental Introduction Edit"
+            },
+            "try_module_3_sketch5": {
+              "title": "Commit and Verify the Release Cleanup"
+            }
+          },
+          "moduleProject": {
+            "steps": {
+              "try_module_3_sketch0": {
+                "title": "Audit the Release Workspace",
+                "prompt": "Start the module project. In step 1 of 6, Inspect the current state of the repository using Git commands. Identify the status of tracked files and any unstaged changes.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+                "hint": "This is the first project step. Build a clean starting version, then run it before moving on.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "This is the first project step. Build a clean starting version, then run it before moving on.",
+                  "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+                },
+                "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.",
+                "solutionCode": "bash .zoeskoul/setup.sh\ngit status\ngit diff",
+                "instructions": "Inspect the current state of the repository using Git commands. Identify the status of tracked files and any unstaged changes.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+                "starterFiles": {
+                  "main_sh": {
+                    "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.\n"
+                  },
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 1\\n' > practice-1.txt\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_sh": {
+                    "content": "bash .zoeskoul/setup.sh\ngit status\ngit diff\n"
+                  },
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 1\\n' > practice-1.txt\n"
+                  }
+                },
+                "terminalExpectations": {
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "Do not rewrite shared history in this Git practice task."
+                    }
+                  }
+                }
+              },
+              "try_module_3_sketch1": {
+                "title": "Rename the Approved Guide",
+                "prompt": "Continue the same module project from the previous working step. In step 2 of 6, Rename the file `docs/guide-draft.md` to `docs/volunteer-guide.md` using Git commands. Verify the rename is staged.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                  "hint_2": "Run the previous working code first, then make only the focused change for this step."
+                },
+                "starterCode": "bash .zoeskoul/setup.sh\ngit status\ngit diff\n# Project step 2: Rename the Approved Guide\n# Keep the working code above from the previous step.\n# Next, Rename the file `docs/guide-draft.md` to `docs/volunteer-guide.md` using Git commands\n# Add only the focused change for this step inside the existing work.\n",
+                "solutionCode": "bash .zoeskoul/setup.sh\ngit status\ngit diff\nbash .zoeskoul/setup.sh\ngit mv\n",
+                "instructions": "Rename the file `docs/guide-draft.md` to `docs/volunteer-guide.md` using Git commands. Verify the rename is staged.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+                "starterFiles": {
+                  "main_sh": {
+                    "content": "bash .zoeskoul/setup.sh\ngit status\ngit diff\n# Project step 2: Rename the Approved Guide\n# Keep the working code above from the previous step.\n# Next, Rename the file `docs/guide-draft.md` to `docs/volunteer-guide.md` using Git commands\n# Add only the focused change for this step inside the existing work.\n"
+                  },
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 1\\n' > practice-1.txt\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_sh": {
+                    "content": "bash .zoeskoul/setup.sh\ngit status\ngit diff\nbash .zoeskoul/setup.sh\ngit mv\n"
+                  },
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 2\\n' > docs/guide-draft.md\n"
+                  }
+                },
+                "terminalExpectations": {
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "Do not rewrite shared history in this Git practice task."
+                    }
+                  }
+                }
+              },
+              "try_module_3_sketch2": {
+                "title": "Remove the Obsolete Checklist",
+                "prompt": "Continue the same module project from the previous working step. In step 3 of 6, Remove the file `docs/old-checklist.md` from the repository using Git commands. Ensure the removal is staged.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                  "hint_2": "Run the previous working code first, then make only the focused change for this step."
+                },
+                "starterCode": "bash .zoeskoul/setup.sh\ngit status\ngit diff\nbash .zoeskoul/setup.sh\ngit mv\n# Project step 3: Remove the Obsolete Checklist\n# Keep the working code above from the previous step.\n# Next, Remove the file `docs/old-checklist.md` from the repository using Git commands\n# Add only the focused change for this step inside the existing work.\n",
+                "solutionCode": "bash .zoeskoul/setup.sh\ngit status\ngit diff\nbash .zoeskoul/setup.sh\ngit mv\nbash .zoeskoul/setup.sh\ngit rm\n",
+                "instructions": "Remove the file `docs/old-checklist.md` from the repository using Git commands. Ensure the removal is staged.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+                "starterFiles": {
+                  "main_sh": {
+                    "content": "bash .zoeskoul/setup.sh\ngit status\ngit diff\nbash .zoeskoul/setup.sh\ngit mv\n# Project step 3: Remove the Obsolete Checklist\n# Keep the working code above from the previous step.\n# Next, Remove the file `docs/old-checklist.md` from the repository using Git commands\n# Add only the focused change for this step inside the existing work.\n"
+                  },
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 2\\n' > docs/guide-draft.md\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_sh": {
+                    "content": "bash .zoeskoul/setup.sh\ngit status\ngit diff\nbash .zoeskoul/setup.sh\ngit mv\nbash .zoeskoul/setup.sh\ngit rm\n"
+                  },
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 3\\n' > docs/old-checklist.md\n"
+                  }
+                },
+                "terminalExpectations": {
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "Do not rewrite shared history in this Git practice task."
+                    }
+                  }
+                }
+              },
+              "try_module_3_sketch3": {
+                "title": "Ignore Generated Preview Output",
+                "prompt": "Continue the same module project from the previous working step. In step 4 of 6, Add `preview.log` to `.gitignore` and verify it is ignored using Git commands.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                  "hint_2": "Run the previous working code first, then make only the focused change for this step."
+                },
+                "starterCode": "bash .zoeskoul/setup.sh\ngit status\ngit diff\nbash .zoeskoul/setup.sh\ngit mv\nbash .zoeskoul/setup.sh\ngit rm\n# Project step 4: Ignore Generated Preview Output\n# Keep the working code above from the previous step.\n# Next, Add `preview.log` to `.gitignore` and verify it is ignored using Git commands\n# Add only the focused change for this step inside the existing work.\n",
+                "solutionCode": "bash .zoeskoul/setup.sh\ngit status\ngit diff\nbash .zoeskoul/setup.sh\ngit mv\nbash .zoeskoul/setup.sh\ngit rm\nbash .zoeskoul/setup.sh\ngit check-ignore\ngit check-ignore -v preview.log\n",
+                "instructions": "Add `preview.log` to `.gitignore` and verify it is ignored using Git commands.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+                "starterFiles": {
+                  "main_sh": {
+                    "content": "bash .zoeskoul/setup.sh\ngit status\ngit diff\nbash .zoeskoul/setup.sh\ngit mv\nbash .zoeskoul/setup.sh\ngit rm\n# Project step 4: Ignore Generated Preview Output\n# Keep the working code above from the previous step.\n# Next, Add `preview.log` to `.gitignore` and verify it is ignored using Git commands\n# Add only the focused change for this step inside the existing work.\n"
+                  },
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 3\\n' > docs/old-checklist.md\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_sh": {
+                    "content": "bash .zoeskoul/setup.sh\ngit status\ngit diff\nbash .zoeskoul/setup.sh\ngit mv\nbash .zoeskoul/setup.sh\ngit rm\nbash .zoeskoul/setup.sh\ngit check-ignore\ngit check-ignore -v preview.log\n"
+                  },
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 4\\n' > preview.log\n"
+                  }
+                },
+                "terminalExpectations": {
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "Do not rewrite shared history in this Git practice task."
+                    }
+                  }
+                }
+              },
+              "try_module_3_sketch4": {
+                "title": "Restore the Accidental Introduction Edit",
+                "prompt": "Continue the same module project from the previous working step. In step 5 of 6, Restore the accidental edit in `README.md` using Git commands without affecting other changes.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                  "hint_2": "Run the previous working code first, then make only the focused change for this step."
+                },
+                "starterCode": "bash .zoeskoul/setup.sh\ngit status\ngit diff\nbash .zoeskoul/setup.sh\ngit mv\nbash .zoeskoul/setup.sh\ngit rm\nbash .zoeskoul/setup.sh\ngit check-ignore\ngit check-ignore -v preview.log\n# Project step 5: Restore the Accidental Introduction Edit\n# Keep the working code above from the previous step.\n# Next, Restore the accidental edit in `README.md` using Git commands without affecting other changes\n# Add only the focused change for this step inside the existing work.\n",
+                "solutionCode": "bash .zoeskoul/setup.sh\ngit status\ngit diff\nbash .zoeskoul/setup.sh\ngit mv\nbash .zoeskoul/setup.sh\ngit rm\nbash .zoeskoul/setup.sh\ngit check-ignore\ngit check-ignore -v preview.log\nbash .zoeskoul/setup.sh\ngit restore\ngit restore README.md\n",
+                "instructions": "Restore the accidental edit in `README.md` using Git commands without affecting other changes.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+                "starterFiles": {
+                  "main_sh": {
+                    "content": "bash .zoeskoul/setup.sh\ngit status\ngit diff\nbash .zoeskoul/setup.sh\ngit mv\nbash .zoeskoul/setup.sh\ngit rm\nbash .zoeskoul/setup.sh\ngit check-ignore\ngit check-ignore -v preview.log\n# Project step 5: Restore the Accidental Introduction Edit\n# Keep the working code above from the previous step.\n# Next, Restore the accidental edit in `README.md` using Git commands without affecting other changes\n# Add only the focused change for this step inside the existing work.\n"
+                  },
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 4\\n' > preview.log\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_sh": {
+                    "content": "bash .zoeskoul/setup.sh\ngit status\ngit diff\nbash .zoeskoul/setup.sh\ngit mv\nbash .zoeskoul/setup.sh\ngit rm\nbash .zoeskoul/setup.sh\ngit check-ignore\ngit check-ignore -v preview.log\nbash .zoeskoul/setup.sh\ngit restore\ngit restore README.md\n"
+                  },
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 5\\n' > README.md\n"
+                  }
+                },
+                "terminalExpectations": {
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "Do not rewrite shared history in this Git practice task."
+                    }
+                  }
+                }
+              },
+              "try_module_3_sketch5": {
+                "title": "Commit and Verify the Release Cleanup",
+                "prompt": "Continue the same module project from the previous working step. In step 6 of 6, Commit the changes with the message 'Prepare handbook release' and verify the repository state is clean.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                  "hint_2": "Run the previous working code first, then make only the focused change for this step."
+                },
+                "starterCode": "bash .zoeskoul/setup.sh\ngit status\ngit diff\nbash .zoeskoul/setup.sh\ngit mv\nbash .zoeskoul/setup.sh\ngit rm\nbash .zoeskoul/setup.sh\ngit check-ignore\ngit check-ignore -v preview.log\nbash .zoeskoul/setup.sh\ngit restore\ngit restore README.md\n# Project step 6: Commit and Verify the Release Cleanup\n# Keep the working code above from the previous step.\n# Next, Commit the changes with the message 'Prepare handbook release' and verify the repository state is clean\n# Add only the focused change for this step inside the existing work.\n",
+                "solutionCode": "bash .zoeskoul/setup.sh\ngit status\ngit diff\nbash .zoeskoul/setup.sh\ngit mv\nbash .zoeskoul/setup.sh\ngit rm\nbash .zoeskoul/setup.sh\ngit check-ignore\ngit check-ignore -v preview.log\nbash .zoeskoul/setup.sh\ngit restore\ngit restore README.md\nbash .zoeskoul/setup.sh\ngit commit\ngit status\ngit commit -m 'Prepare handbook release'\n",
+                "instructions": "Commit the changes with the message 'Prepare handbook release' and verify the repository state is clean.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+                "starterFiles": {
+                  "main_sh": {
+                    "content": "bash .zoeskoul/setup.sh\ngit status\ngit diff\nbash .zoeskoul/setup.sh\ngit mv\nbash .zoeskoul/setup.sh\ngit rm\nbash .zoeskoul/setup.sh\ngit check-ignore\ngit check-ignore -v preview.log\nbash .zoeskoul/setup.sh\ngit restore\ngit restore README.md\n# Project step 6: Commit and Verify the Release Cleanup\n# Keep the working code above from the previous step.\n# Next, Commit the changes with the message 'Prepare handbook release' and verify the repository state is clean\n# Add only the focused change for this step inside the existing work.\n"
+                  },
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 5\\n' > README.md\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_sh": {
+                    "content": "bash .zoeskoul/setup.sh\ngit status\ngit diff\nbash .zoeskoul/setup.sh\ngit mv\nbash .zoeskoul/setup.sh\ngit rm\nbash .zoeskoul/setup.sh\ngit check-ignore\ngit check-ignore -v preview.log\nbash .zoeskoul/setup.sh\ngit restore\ngit restore README.md\nbash .zoeskoul/setup.sh\ngit commit\ngit status\ngit commit -m 'Prepare handbook release'\n"
+                  },
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 6\\n' > practice-6.txt\n"
+                  }
+                },
+                "terminalExpectations": {
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "Do not rewrite shared history in this Git practice task."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "git--git-foundations--draft": {
+      "git-foundations-module-3-manage-tracked-files": {
+        "module-3-clean-release-snapshot": {
+          "intro-sketch": {
+            "title": "Prepare a Clean Release Snapshot",
+            "bodyMarkdown": "In this project, you will take on the role of a release assistant tasked with preparing a clean snapshot of a volunteer handbook repository. The repository currently contains a draft filename, an obsolete checklist, a generated preview log, and an accidental edit to the approved introduction. Your goal is to clean up the repository by renaming tracked files, removing unnecessary files, ignoring generated artifacts, and restoring any accidental changes without rewriting history. This project will help you understand how to manage tracked files safely using Git commands.\n\n### Project Brief\n\n\n\n**Scenario:** A volunteer handbook is ready for release, but the repository still contains a draft filename, an obsolete checklist, a generated preview log, and one accidental edit to the approved introduction.\n\n**Your role:** Release assistant preparing a clean handbook snapshot\n\n**Workspace:** One cumulative terminal workspace rooted at volunteer-handbook/ with tracked docs/, generated preview output, and an existing baseline history\n\n**Deliverable:** A six-step cleanup ending with the correct tracked files, ignored generated output, restored approved content, one focused cleanup commit, and a clean working tree."
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "topicId": "restore-without-rewriting-history",
+  "repairs": [
+    {
+      "code": "GIT_TRY_IT_KIND_PROMOTED",
+      "category": "other",
+      "severity": "low",
+      "field": "quizDraft.try-restore-sketch0",
+      "message": "Converted generated Try It \"try-restore-sketch0\" into the Git code_input required by plannedExerciseCounts."
+    },
+    {
+      "code": "GIT_TRY_IT_KIND_PROMOTED",
+      "category": "other",
+      "severity": "low",
+      "field": "quizDraft.try-restore-sketch1",
+      "message": "Converted generated Try It \"try-restore-sketch1\" into the Git code_input required by plannedExerciseCounts."
+    },
+    {
+      "code": "GIT_TRY_IT_KIND_PROMOTED",
+      "category": "other",
+      "severity": "low",
+      "field": "quizDraft.try-restore-sketch2",
+      "message": "Converted generated Try It \"try-restore-sketch2\" into the Git code_input required by plannedExerciseCounts."
+    },
+    {
+      "code": "GIT_TRY_IT_KIND_PROMOTED",
+      "category": "other",
+      "severity": "low",
+      "field": "quizDraft.try-restore-sketch3",
+      "message": "Converted generated Try It \"try-restore-sketch3\" into the Git code_input required by plannedExerciseCounts."
+    }
+  ]
+}

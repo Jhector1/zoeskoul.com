@@ -155,6 +155,9 @@ async function makeAuthoringFixture(overrides: {
                 qualityPolicy: {
                     requireModuleProject: false,
                 },
+                projectPolicy: {
+                    capstoneRequired: false,
+                },
             },
             modules: [
                 {

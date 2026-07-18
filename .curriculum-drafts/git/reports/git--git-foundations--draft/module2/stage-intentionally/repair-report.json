@@ -1,0 +1,33 @@
+{
+  "topicId": "stage-intentionally",
+  "repairs": [
+    {
+      "code": "GIT_CODE_INPUT_WORKSPACE_REBUILT",
+      "category": "other",
+      "severity": "low",
+      "field": "quizDraft.try-stage-intentionally-sketch0",
+      "message": "Rebuilt generated Git exercise \"try-stage-intentionally-sketch0\" as a self-contained terminal workspace with deterministic setup and grading evidence."
+    },
+    {
+      "code": "GIT_CODE_INPUT_WORKSPACE_REBUILT",
+      "category": "other",
+      "severity": "low",
+      "field": "quizDraft.try-stage-intentionally-sketch1",
+      "message": "Rebuilt generated Git exercise \"try-stage-intentionally-sketch1\" as a self-contained terminal workspace with deterministic setup and grading evidence."
+    },
+    {
+      "code": "GIT_CODE_INPUT_WORKSPACE_REBUILT",
+      "category": "other",
+      "severity": "low",
+      "field": "quizDraft.try-stage-intentionally-sketch2",
+      "message": "Rebuilt generated Git exercise \"try-stage-intentionally-sketch2\" as a self-contained terminal workspace with deterministic setup and grading evidence."
+    },
+    {
+      "code": "GIT_CODE_INPUT_WORKSPACE_REBUILT",
+      "category": "other",
+      "severity": "low",
+      "field": "quizDraft.try-stage-intentionally-sketch3",
+      "message": "Rebuilt generated Git exercise \"try-stage-intentionally-sketch3\" as a self-contained terminal workspace with deterministic setup and grading evidence."
+    }
+  ]
+}

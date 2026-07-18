@@ -92,6 +92,61 @@ describe("buildSharedPracticeCompletenessIssues", () => {
         expect(issues.map((issue) => issue.code)).toContain("TRY_IT_SKETCH_EXERCISE_MISSING");
     });
 
+    it("does not require project synopsis sketches to map to embedded Try It exercises", () => {
+        const projectSteps = Array.from({ length: 6 }, (_, index) =>
+            codeInput(
+                `try-final-capstone-sketch${index}`,
+                `Complete cumulative capstone step ${index + 1} for the neighborhood guide.`,
+            ),
+        );
+
+        const issues = buildSharedPracticeCompletenessIssues({
+            seed: makeSeed({
+                title: "Neighborhood Resource Guide History",
+                sectionRole: "capstone",
+                moduleRole: "capstone",
+                projectBrief: {
+                    scenario: "A neighborhood help desk needs a maintained resource guide.",
+                    role: "Junior developer",
+                    workspace: "One cumulative terminal workspace",
+                    deliverable: "A six-step local Git history",
+                    stepCountTarget: 6,
+                },
+                practice: {
+                    tryIt: true,
+                    requiresTryIt: true,
+                    tryItPlacement: "all_sketches",
+                    projectFlow: "progressive",
+                },
+            }),
+            draft: {
+                title: "Neighborhood Resource Guide History",
+                summary: "Prepare a trustworthy resource-guide handoff for volunteers.",
+                minutes: 120,
+                sketchBlocks: [
+                    { id: "intro", title: "Project Brief", bodyMarkdown: "A neighborhood help desk needs a maintained resource guide." },
+                    ...Array.from({ length: 6 }, (_, index) => ({
+                        id: `step-${index + 1}`,
+                        title: `Step ${index + 1}`,
+                        bodyMarkdown: `Prepare cumulative project step ${index + 1}.`,
+                    })),
+                ],
+                quizDraft: projectSteps,
+                projectDraft: {
+                    title: "Neighborhood Resource Guide History",
+                    stepIds: projectSteps.map((exercise) => exercise.id),
+                },
+            } as any,
+        });
+
+        expect(issues.map((issue) => issue.code)).not.toContain(
+            "TRY_IT_SKETCH_EXERCISE_MISSING",
+        );
+        expect(issues.map((issue) => issue.code)).not.toContain(
+            "TRY_IT_SKETCH_COVERAGE_MISSING",
+        );
+    });
+
     it("rejects incomplete multi-file reveal/fill solutions", () => {
         const issues = buildSharedPracticeCompletenessIssues({
             seed: makeSeed({

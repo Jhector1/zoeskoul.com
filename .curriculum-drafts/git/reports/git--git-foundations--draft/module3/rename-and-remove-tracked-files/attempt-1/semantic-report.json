@@ -1,0 +1,13 @@
+{
+  "topicId": "rename-and-remove-tracked-files",
+  "ok": false,
+  "issues": [
+    {
+      "code": "WORKED_EXAMPLE_TRY_IT_DUPLICATE",
+      "category": "pedagogy",
+      "severity": "error",
+      "exerciseId": "try-rename-and-remove-tracked-files-sketch2",
+      "message": "Try It exercise \"try-rename-and-remove-tracked-files-sketch2\" reproduces the worked example in \"Verify Staged Renames and Deletions\" (sketch2) through solutionCode. Change a meaningful expectation such as the requested output, source entity, filter, aggregate, input, inserted/updated values, or relationship path. Formatting, capitalization, aliases, and ORDER BY alone do not make it a different exercise."
+    }
+  ]
+}

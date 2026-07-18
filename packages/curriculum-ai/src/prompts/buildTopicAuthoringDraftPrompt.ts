@@ -31,6 +31,16 @@ function renderRetryGuidance(seed: TopicSeed, retry?: TopicRetryContext) {
         retry.qualityIssues?.filter(
             (issue) => issue.code === "WORKED_EXAMPLE_TRY_IT_DUPLICATE",
         ) ?? [];
+    const missingGitEvidence =
+        seed.profileId === "git" &&
+        [
+            retry.previousErrorMessage,
+            ...(retry.qualityIssues?.map((issue) => issue.message) ?? []),
+        ].some((message) =>
+            /shell_task terminal_workspace expected needs workspaceExpectations, terminalExpectations, or hiddenShellCheck/i.test(
+                message,
+            ),
+        );
 
     const terminalAvailable =
         seed.workspacePolicy?.workspace.capabilities?.terminal.enabled === true;
@@ -82,8 +92,10 @@ function renderRetryGuidance(seed: TopicSeed, retry?: TopicRetryContext) {
         "If the failure mentions exercise policy targets or over target:",
         "- The previous draft used the wrong exercise-kind counts.",
         "- Regenerate quizDraft so each kind exactly matches the Required exercise counts.",
-        "- quizDraft is the authoring source for ALL exercises, including code_input.",
+        "- quizDraft is the authoring source for ALL exercises, including code_input; it is not the final learner quiz card.",
+        "- Policy flags such as quizzesDoNotUseCodeInput or quizDefaults.allowCodeInput=false apply only to the final learner quiz card, never to required runtime practice items inside quizDraft.",
         "- If the failure says expected code_input but draft has 0, add code_input objects directly inside quizDraft.",
+        "- Replace any try-* single_choice, multi_choice, drag_reorder, or fill_blank_choice substitute with a real code_input when code_input is under target.",
         "- Do not put code_input only in projectDraft.",
         "- Do not preserve the same total by replacing missing code_input exercises with extra fill_blank_choice exercises.",
         "- Do not preserve the same total by replacing missing non-code exercises with extra code_input exercises.",
@@ -91,6 +103,18 @@ function renderRetryGuidance(seed: TopicSeed, retry?: TopicRetryContext) {
         "- If code_input is over target, remove extra code_input exercises and add the missing non-code exercise kinds.",
         "- For Bash/Linux missing code_input, use fixedLanguage bash, recipeType shell_task, mode terminal_workspace, and workspaceExpectations or terminalExpectations.",
         "",
+        ...(missingGitEvidence
+            ? [
+                "ACTIVE REPAIR — missing Git grading evidence:",
+                "- Every failing Git code_input must include at least one non-empty gitExpectations, workspaceExpectations, terminalExpectations, or hiddenShellCheck object.",
+                "- A shell_task with only starterCode, solutionCode, starterFiles, solutionFiles, or tests is invalid because none of those fields prove terminal or repository completion.",
+                "- For command-observation tasks such as git status or git log, add terminalExpectations.requiredCommands with a regex for the exact safe Git command.",
+                "- Example: terminalExpectations: { requiredCommands: [{ pattern: '^git\\s+status$' }] }.",
+                "- For repository-state tasks such as init, add, commit, branch, merge, or remote work, prefer gitExpectations that describe the final repository state.",
+                "- Do not return any failing Git code_input until its grading-evidence object is present and non-empty.",
+                "",
+            ]
+            : []),
         "",
         "If the failure mentions PROGRAMMING_TRY_IT_COVERAGE_MISSING, TRY_IT_SKETCH_EXERCISE_MISSING, or missing Try It coverage:",
         "- Make sure the topic includes a real practice exercise that can serve as the embedded try-it activity.",
@@ -422,6 +446,37 @@ function renderFinalExerciseCountChecklist(seed: TopicSeed): string {
     ].join("\n");
 }
 
+function buildPromptSeed(seed: TopicSeed): unknown {
+    if (seed.profileId !== "git") return seed;
+
+    const authoringPolicy = seed.authoringPolicy as
+        | (Record<string, unknown> & {
+              validationRequirements?: Record<string, unknown>;
+          })
+        | undefined;
+    const validationRequirements = authoringPolicy?.validationRequirements;
+
+    if (!validationRequirements) return seed;
+
+    const {
+        quizzesDoNotUseCodeInput,
+        ...unambiguousValidationRequirements
+    } = validationRequirements;
+
+    return {
+        ...seed,
+        authoringPolicy: {
+            ...authoringPolicy,
+            validationRequirements: {
+                ...unambiguousValidationRequirements,
+                ...(quizzesDoNotUseCodeInput === true
+                    ? { finalLearnerQuizExcludesCodeInput: true }
+                    : {}),
+            },
+        },
+    };
+}
+
 export function buildTopicAuthoringDraftPrompt(args: {
     seed: TopicSeed;
     locale: string;
@@ -614,7 +669,7 @@ export function buildTopicAuthoringDraftPrompt(args: {
         user: JSON.stringify(
             {
                 locale: args.locale,
-                seed: args.seed,
+                seed: buildPromptSeed(args.seed),
                 shape: args.shape,
             },
             null,

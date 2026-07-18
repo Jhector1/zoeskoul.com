@@ -1,0 +1,301 @@
+{
+  "title": "Stage Intentionally",
+  "summary": "Use git add to prepare selected files and git diff --staged to verify the exact snapshot before committing.",
+  "minutes": 22,
+  "sketchBlocks": [
+    {
+      "id": "stage-intentionally-sketch0",
+      "cardTitle": "Understanding Staging",
+      "title": "The Role of Staging in Git",
+      "bodyMarkdown": "Staging in Git is a crucial step in the version control process. It allows you to prepare specific changes for a commit, ensuring that only the desired modifications are included. This selective staging helps maintain a clean and understandable commit history.\n\nWorked example: Suppose you have modified two files, `index.html` and `style.css`. You only want to commit changes from `index.html`. By using `git add index.html`, you stage only this file, leaving `style.css` unstaged. This way, your commit will only include the changes from `index.html`, keeping your history focused and relevant."
+    },
+    {
+      "id": "stage-intentionally-sketch1",
+      "cardTitle": "Using git diff --staged",
+      "title": "Inspecting Staged Changes",
+      "bodyMarkdown": "Once you've staged your changes, it's important to verify them before committing. The `git diff --staged` command allows you to see the differences between the staged snapshot and the last commit.\n\nWorked example: After staging `index.html`, running `git diff --staged` will show you the exact changes that are ready to be committed. This ensures that you are aware of what will be included in your next commit, preventing accidental inclusion of unwanted changes."
+    },
+    {
+      "id": "stage-intentionally-sketch2",
+      "cardTitle": "Moving Files Between States",
+      "title": "Transitioning Files Between Staged and Unstaged",
+      "bodyMarkdown": "Sometimes, you may need to move files between staged and unstaged states without altering their content. This flexibility is crucial for managing your commit preparation effectively.\n\nWorked example: If you have staged `index.html` but decide to make further edits before committing, you can use `git restore --staged index.html` to unstage it. This command moves the file back to the unstaged state, allowing you to continue editing without committing prematurely."
+    },
+    {
+      "id": "stage-intentionally-sketch3",
+      "cardTitle": "Practical Staging Workflow",
+      "title": "Applying Staging in Real Projects",
+      "bodyMarkdown": "In real-world projects, staging helps manage complex changes by allowing you to focus on specific parts of your work. This practice leads to more meaningful and manageable commit histories.\n\nWorked example: Imagine working on a project where you need to update documentation and fix a bug simultaneously. By staging only the documentation changes first, you can commit them separately from the bug fix, resulting in a clear and organized history that reflects the distinct purposes of each change."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "try-stage-intentionally-sketch0",
+      "kind": "code_input",
+      "title": "Stage a Specific File",
+      "prompt": "Stage the file `index.html` without staging any other changes in the workspace. Verify the staged changes using `git diff --staged`.",
+      "hint": "Use `git add` to stage the specific file and `git diff --staged` to verify.",
+      "help": {
+        "concept": "Staging allows you to prepare specific changes for a commit.",
+        "hint_1": "Use `git add <file>` to stage a specific file.",
+        "hint_2": "Verify staged changes with `git diff --staged`."
+      },
+      "starterCode": "# Stage the file index.html\n# Verify the staged changes",
+      "solutionCode": "git add index.html\ngit diff --staged",
+      "entryFilePath": "main.sh",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Stage the file index.html\n# Verify the staged changes",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "git add index.html\ngit diff --staged",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "try-stage-intentionally-sketch1",
+      "kind": "code_input",
+      "title": "Inspect Staged Changes",
+      "prompt": "After staging `index.html`, inspect the staged changes to ensure only this file is prepared for commit.",
+      "hint": "Use `git diff --staged` to see the staged changes.",
+      "help": {
+        "concept": "Inspecting staged changes helps verify what will be committed.",
+        "hint_1": "Run `git diff --staged` to view staged changes.",
+        "hint_2": "Ensure only `index.html` is staged."
+      },
+      "starterCode": "# Inspect the staged changes",
+      "solutionCode": "git diff --staged",
+      "entryFilePath": "main.sh",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Inspect the staged changes",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "git diff --staged",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "try-stage-intentionally-sketch2",
+      "kind": "code_input",
+      "title": "Unstage a File",
+      "prompt": "Unstage the file `index.html` after it has been staged, without losing any changes.",
+      "hint": "Use `git restore --staged` to unstage a file.",
+      "help": {
+        "concept": "Unstaging a file moves it back to the working directory without losing changes.",
+        "hint_1": "Use `git restore --staged <file>` to unstage.",
+        "hint_2": "Ensure the file remains in the working directory."
+      },
+      "starterCode": "# Unstage the file index.html",
+      "solutionCode": "git restore --staged index.html",
+      "entryFilePath": "main.sh",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Unstage the file index.html",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "git restore --staged index.html",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "try-stage-intentionally-sketch3",
+      "kind": "code_input",
+      "title": "Stage and Commit Documentation",
+      "prompt": "Stage only the changes in `README.md` and commit them with the message 'Update documentation'.",
+      "hint": "Stage the file and use `git commit` with a message.",
+      "help": {
+        "concept": "Staging specific files allows for focused commits.",
+        "hint_1": "Use `git add <file>` to stage.",
+        "hint_2": "Commit with `git commit -m 'message'`."
+      },
+      "starterCode": "# Stage the README.md file\n# Commit with a message",
+      "solutionCode": "git add README.md\ngit commit -m 'Update documentation'",
+      "entryFilePath": "main.sh",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Stage the README.md file\n# Commit with a message",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "git add README.md\ngit commit -m 'Update documentation'",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "multi-choice-1",
+      "kind": "multi_choice",
+      "title": "Purpose of Staging",
+      "prompt": "What is the purpose of staging in Git? Select all that apply.",
+      "hint": "Consider how staging affects the commit process.",
+      "help": {
+        "concept": "Staging allows you to prepare specific changes for a commit.",
+        "hint_1": "Staging helps manage what changes are included in a commit.",
+        "hint_2": "Staging can prevent unwanted changes from being committed."
+      },
+      "options": [
+        "To prepare specific changes for a commit",
+        "To automatically commit all changes",
+        "To review changes before committing",
+        "To discard unwanted changes"
+      ],
+      "correctOptionIds": [
+        "a",
+        "c"
+      ]
+    },
+    {
+      "id": "multi-choice-2",
+      "kind": "multi_choice",
+      "title": "Inspecting Staged Changes",
+      "prompt": "Which command allows you to inspect staged changes in Git?",
+      "hint": "Think about the command that shows differences between staged changes and the last commit.",
+      "help": {
+        "concept": "Inspecting staged changes helps verify what will be committed.",
+        "hint_1": "The command shows differences between staged changes and the last commit.",
+        "hint_2": "It is similar to `git diff` but for staged changes."
+      },
+      "options": [
+        "git diff",
+        "git diff --staged",
+        "git status",
+        "git log"
+      ],
+      "correctOptionIds": [
+        "b"
+      ]
+    },
+    {
+      "id": "fill-blank-1",
+      "kind": "fill_blank_choice",
+      "title": "Command to Stage a File",
+      "prompt": "Fill in the blank to stage a file named `index.html`.",
+      "hint": "Use the `git add` command.",
+      "help": {
+        "concept": "Staging a file prepares it for commit.",
+        "hint_1": "The command starts with `git add`.",
+        "hint_2": "Specify the file name after `git add`."
+      },
+      "template": "git add [blank1]",
+      "choices": [
+        "index.html",
+        "README.md",
+        "style.css"
+      ],
+      "correctValue": "index.html"
+    },
+    {
+      "id": "fill-blank-2",
+      "kind": "fill_blank_choice",
+      "title": "Unstaging a File",
+      "prompt": "Fill in the blank to unstage a file named `index.html`.",
+      "hint": "Use the `git restore --staged` command.",
+      "help": {
+        "concept": "Unstaging a file moves it back to the working directory without losing changes.",
+        "hint_1": "The command starts with `git restore --staged`.",
+        "hint_2": "Specify the file name after `git restore --staged`."
+      },
+      "template": "git restore --staged [blank1]",
+      "choices": [
+        "index.html",
+        "README.md",
+        "style.css"
+      ],
+      "correctValue": "index.html"
+    },
+    {
+      "id": "single-choice-1",
+      "kind": "single_choice",
+      "title": "Staging Area Purpose",
+      "prompt": "What is the primary purpose of the staging area in Git?",
+      "hint": "Consider how the staging area affects commits.",
+      "help": {
+        "concept": "The staging area allows you to prepare specific changes for a commit.",
+        "hint_1": "The staging area helps manage what changes are included in a commit.",
+        "hint_2": "It acts as a buffer between the working directory and the commit."
+      },
+      "options": [
+        "To prepare changes for a commit",
+        "To automatically commit changes",
+        "To discard changes",
+        "To merge branches"
+      ],
+      "correctOptionIds": [
+        "a"
+      ]
+    },
+    {
+      "id": "drag-reorder-1",
+      "kind": "drag_reorder",
+      "title": "Staging Workflow Steps",
+      "prompt": "Arrange the steps in the correct order for staging and committing a file in Git.",
+      "hint": "Start with staging the file and end with committing it.",
+      "help": {
+        "concept": "Staging and committing involve specific steps in Git.",
+        "hint_1": "Begin with adding the file to the staging area.",
+        "hint_2": "End with committing the staged changes."
+      },
+      "tokens": [
+        "Stage the file",
+        "Verify staged changes",
+        "Commit the changes"
+      ],
+      "correctOrder": [
+        "Stage the file",
+        "Verify staged changes",
+        "Commit the changes"
+      ]
+    }
+  ]
+}

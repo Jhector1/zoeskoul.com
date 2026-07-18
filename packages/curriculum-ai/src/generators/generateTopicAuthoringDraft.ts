@@ -40,7 +40,9 @@ export async function generateTopicAuthoringDraftAttempt(
             schemaName: "TopicAuthoringDraft",
         });
 
-        const sanitizedValue = sanitizeGeneratedTopicAuthoringDraft(generation.value);
+        const sanitizedValue = sanitizeGeneratedTopicAuthoringDraft(generation.value, {
+            profileId: args.seed.profileId,
+        });
 
         const sanitizedGeneration: GeneratedJsonResult<TopicAuthoringDraft> = {
             ...generation,

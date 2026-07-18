@@ -1,0 +1,21 @@
+{
+  "rubricId": "git-module-project",
+  "criteria": [
+    {
+      "name": "Correct repository state",
+      "weight": 0.4
+    },
+    {
+      "name": "Focused history or branch workflow",
+      "weight": 0.25
+    },
+    {
+      "name": "Safe command and recovery choices",
+      "weight": 0.2
+    },
+    {
+      "name": "Verification and handoff clarity",
+      "weight": 0.15
+    }
+  ]
+}

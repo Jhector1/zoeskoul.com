@@ -1,0 +1,13 @@
+{
+  "topicId": "stage-intentionally",
+  "ok": false,
+  "issues": [
+    {
+      "code": "WORKED_EXAMPLE_TRY_IT_DUPLICATE",
+      "category": "pedagogy",
+      "severity": "error",
+      "exerciseId": "try-stage-intentionally-sketch1",
+      "message": "Try It exercise \"try-stage-intentionally-sketch1\" reproduces the worked example in \"Using git diff --staged\" (stage-intentionally-sketch1) through solutionCode. Change a meaningful expectation such as the requested output, source entity, filter, aggregate, input, inserted/updated values, or relationship path. Formatting, capitalization, aliases, and ORDER BY alone do not make it a different exercise."
+    }
+  ]
+}

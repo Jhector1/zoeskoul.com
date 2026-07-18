@@ -1,0 +1,971 @@
+{
+  "authoringFormatVersion": "2.0",
+  "subjectSlug": "git",
+  "courseSlug": "git-foundations",
+  "catalogSlug": "git",
+  "trackSlug": "git",
+  "profileId": "git",
+  "workspaceProfileId": "terminal-workspace-runner",
+  "workspacePolicyId": "git-terminal-workspace",
+  "courseNumber": 1,
+  "title": "Git Foundations",
+  "subtitle": "Build a clean local history before sharing work anywhere.",
+  "description": "A beginner Git course with three standard modules and one final capstone. Learners work locally first, moving from an ordinary folder to a readable repository history without introducing branches, remotes, GitHub, or advanced history rewriting.",
+  "level": "beginner",
+  "sourceLocale": "en",
+  "targetLocales": [],
+  "accessPolicy": "paid",
+  "moduleAccessOverrideDefault": null,
+  "moduleCount": 4,
+  "moduleRange": {
+    "start": 1,
+    "end": 4,
+    "label": "Modules 1-4"
+  },
+  "prerequisites": [
+    "Complete Linux Terminal Fundamentals or demonstrate equivalent comfort with pwd, ls, cd, mkdir, touch, cat, cp, mv, and rm.",
+    "Read and edit simple text files in the provided workspace.",
+    "No Python, GitHub account, public network access, or prior version-control experience is required."
+  ],
+  "intendedFor": "Beginners who can navigate files in the terminal and want to understand local Git before adding branches or GitHub collaboration.",
+  "learningGoals": [
+    "Explain the working tree, staging area, commits, and HEAD in practical language.",
+    "Initialize a repository and read tracked, untracked, staged, and clean state.",
+    "Inspect changes, stage intentionally, and create meaningful commits.",
+    "Read history and inspect committed snapshots.",
+    "Rename, remove, ignore, and restore files safely.",
+    "Complete three cumulative module projects and one integrated local-history capstone."
+  ],
+  "practiceDefaults": {
+    "tryIt": true,
+    "requiresTryIt": true,
+    "tryItPlacement": "all_sketches",
+    "runtimeMode": "terminal_workspace",
+    "terminalSessionScope": "exercise",
+    "expectedPracticeKinds": [
+      "single_choice",
+      "multi_choice",
+      "fill_blank_choice",
+      "code_input"
+    ]
+  },
+  "courseOverview": {
+    "recommendedSequence": "Complete the three standard modules in order, including each cumulative module project, before beginning the final capstone.",
+    "summary": "A beginner Git course with three standard modules and one final capstone. Learners work locally first, moving from an ordinary folder to a readable repository history without introducing branches, remotes, GitHub, or advanced history rewriting.",
+    "moduleSummary": [
+      {
+        "moduleNumber": 1,
+        "title": "Start Tracking a Project",
+        "coreSkill": "Understand the local repository model, configure a safe identity, initialize main, and read tracked and untracked state.",
+        "outputFocus": "Build a Field Notes repository with one meaningful initial commit and a clean working tree."
+      },
+      {
+        "moduleNumber": 2,
+        "title": "Build Meaningful History",
+        "coreSkill": "Inspect differences, stage intentionally, write meaningful commit messages, and read the resulting history.",
+        "outputFocus": "Build a two-change Community Website history with focused commits and a clean final state."
+      },
+      {
+        "moduleNumber": 3,
+        "title": "Manage Tracked Files Safely",
+        "coreSkill": "Use Git-aware file operations, ignore generated artifacts, and recover from staged or unstaged mistakes without rewriting history.",
+        "outputFocus": "Prepare a clean Volunteer Handbook release snapshot with ignored previews and a focused cleanup commit."
+      },
+      {
+        "moduleNumber": 4,
+        "title": "Final Capstone",
+        "coreSkill": "Combine initialization, status, diff, staging, commits, history inspection, ignore rules, Git-aware file operations, and safe restore habits.",
+        "outputFocus": "Build the Neighborhood Resource Guide history through six cumulative milestones."
+      }
+    ]
+  },
+  "releasePlan": {
+    "currentRelease": {
+      "name": "git-foundations",
+      "startModuleNumber": 1,
+      "endModuleNumber": 4
+    },
+    "releases": [
+      {
+        "name": "git-foundations",
+        "startModuleNumber": 1,
+        "endModuleNumber": 4
+      }
+    ]
+  },
+  "policy": {
+    "exercisePolicy": {
+      "defaultMix": {
+        "single_choice": 0.2,
+        "multi_choice": 0.1,
+        "drag_reorder": 0.05,
+        "fill_blank_choice": 0.15,
+        "code_input": 0.5
+      },
+      "minimums": {
+        "technicalTopicCodeInputMin": 1,
+        "topicExerciseMin": 4
+      },
+      "generationTargets": {
+        "quizBankMin": 4,
+        "quizBankTarget": 6,
+        "quizVisibleDefault": 4,
+        "quizVisibleMax": 6,
+        "projectCodeInputMin": 2,
+        "projectCodeInputTarget": 4,
+        "projectCodeInputMax": 8,
+        "maxAttempts": null
+      }
+    },
+    "projectPolicy": {
+      "minProjectsBeforeCapstone": 3,
+      "capstoneRequired": true
+    },
+    "qualityPolicy": {
+      "allowBlankTopicIds": false,
+      "allowDuplicateTopicIds": false,
+      "requireUniqueModuleSlugs": true,
+      "requireUniqueSectionSlugs": true,
+      "requireModuleProject": true,
+      "maxModuleProjectLength": 420
+    }
+  },
+  "authoringGuidance": [
+    "Use profileId git, fixedLanguage bash, recipeType shell_task, and mode terminal_workspace for every Git code_input.",
+    "Use the existing terminal-workspace runner; do not create a Git-specific IDE, runner, recipe type, or programming language.",
+    "Grade final repository state with gitExpectations. Use terminalExpectations only when the exact safe command is itself part of the learning goal.",
+    "Every terminal instruction must explicitly tell the learner to type the command and press Enter.",
+    "Configure the local repository identity as ZoeSkoul Learner and learner@zoeskoul.local before the first commit.",
+    "Set the initial branch to main whenever branch naming matters.",
+    "Never grade exact commit hashes, machine-dependent timestamps, absolute workspace paths, or decorative git log graph spacing.",
+    "Keep independent Try It workspaces isolated with terminalSessionScope exercise; use terminalSessionScope project only for authored progressive projects and capstones.",
+    "Use one synopsis sketch for each module project and capstone, followed by exactly the number of cumulative steps declared in projectBrief.stepCountTarget.",
+    "The complete solution from project step N becomes the complete starter workspace for step N+1.",
+    "Worked examples, Try It tasks, module projects, and final capstones must use different repository stories and different requested outcomes.",
+    "Write lessons like a short practical book chapter: begin with the project situation, define the Git idea, show the command shape, trace the repository-state change, warn about one common mistake, and transition naturally into practice.",
+    "Do not open lessons with internal curriculum language such as learning contract, milestone count, assessment checklist, or concepts you will demonstrate.",
+    "Prepend one standalone reading-only course introduction before the first technical sketch without replacing the first technical lesson.",
+    "The final module contains exactly one capstone section and one capstone topic.",
+    "Do not require public network access, GitHub credentials, personal access tokens, learner secrets, or an external repository.",
+    "Keep the complete course local. Do not require or simulate GitHub concepts yet.",
+    "Use small text-based projects whose final state can be checked deterministically.",
+    "Every commit message required by a project must be authored explicitly in projectBrief.stepLadder.",
+    "Use gitExpectations.repositoryInitialized, currentBranch, exactCommitCount or minimumCommitCount, trackedFiles, ignoredFiles, forbiddenTrackedFiles, commitMessages, headFiles, and cleanWorkingTree as the primary grading contract."
+  ],
+  "courseGenerationPolicy": {
+    "studentActionStyle": "terminal-workspace",
+    "forbidUnavailableWorkspaceActions": true,
+    "preferredTerms": {
+      "editor": "terminal",
+      "run button": "type the command and press Enter",
+      "output panel": "terminal output",
+      "repository state": "the files, staging area, branches, commits, and remotes Git currently records"
+    },
+    "notes": [
+      "Use profileId git, fixedLanguage bash, recipeType shell_task, and mode terminal_workspace for every Git code_input.",
+      "Use the existing terminal-workspace runner; do not create a Git-specific IDE, runner, recipe type, or programming language.",
+      "Grade final repository state with gitExpectations. Use terminalExpectations only when the exact safe command is itself part of the learning goal.",
+      "Every terminal instruction must explicitly tell the learner to type the command and press Enter.",
+      "Configure the local repository identity as ZoeSkoul Learner and learner@zoeskoul.local before the first commit.",
+      "Set the initial branch to main whenever branch naming matters.",
+      "Never grade exact commit hashes, machine-dependent timestamps, absolute workspace paths, or decorative git log graph spacing.",
+      "Keep independent Try It workspaces isolated with terminalSessionScope exercise; use terminalSessionScope project only for authored progressive projects and capstones.",
+      "Use one synopsis sketch for each module project and capstone, followed by exactly the number of cumulative steps declared in projectBrief.stepCountTarget.",
+      "The complete solution from project step N becomes the complete starter workspace for step N+1.",
+      "Worked examples, Try It tasks, module projects, and final capstones must use different repository stories and different requested outcomes.",
+      "Write lessons like a short practical book chapter: begin with the project situation, define the Git idea, show the command shape, trace the repository-state change, warn about one common mistake, and transition naturally into practice.",
+      "Do not open lessons with internal curriculum language such as learning contract, milestone count, assessment checklist, or concepts you will demonstrate.",
+      "Prepend one standalone reading-only course introduction before the first technical sketch without replacing the first technical lesson.",
+      "The final module contains exactly one capstone section and one capstone topic.",
+      "Do not require public network access, GitHub credentials, personal access tokens, learner secrets, or an external repository.",
+      "Do not introduce branches, merges, remotes, clone, fetch, pull, push, GitHub, stash, reflog, revert, reset, rebase, tags, or force operations in Git Foundations.",
+      "Treat main as environment setup, not as a branching lesson.",
+      "The final capstone must contain exactly six progressive steps and exactly four authored commits."
+    ]
+  },
+  "topicPolicies": {
+    "why-version-control-matters": {
+      "notes": [
+        "Prepend one reading-only course-introduction sketch titled A project needs a memory with no Try It.",
+        "Preserve the first technical sketch after the introduction instead of replacing it.",
+        "The introduction must establish the learner role, project problem, prerequisites, safe workspace, course journey, and final deliverable in natural prose.",
+        "Do not duplicate the outer topic title as the inner sketch title.",
+        "After the introduction, add a separate technical teaching sketch with a title beginning Worked example: and a body that explicitly begins Worked example:.",
+        "In that worked example, trace one project through an original file state, an accidental overwrite, and recovery from a recorded snapshot; contrast that reliable history with ambiguous final-copy folder names.",
+        "Keep the worked example command-free because this opening topic explains the problem Git solves before command instruction begins.",
+        "practice.conceptualOnly removes code_input practice for this topic; it does not remove the concrete worked-example walkthrough."
+      ]
+    }
+  },
+  "assessmentAndDelivery": {
+    "suggestedBeginnerRhythm": "Complete two lesson topics and their Try It exercises per study session, then finish each module with its cumulative repository project.",
+    "recommendedCourseDeliverables": [
+      "Book-like concept sketches",
+      "Repository-state Try It exercises",
+      "Command-purpose learner quiz cards use non-code kinds; runtime Try It code_input remains in quizDraft authoring",
+      "Three cumulative module projects",
+      "One final capstone"
+    ],
+    "toolingSuggestions": [
+      "ZoeSkoul terminal",
+      "File explorer",
+      "Check Answer repository validation"
+    ],
+    "closingNote": "Learners finish with a reliable local Git workflow and are ready to isolate work with branches."
+  },
+  "modules": [
+    {
+      "moduleNumber": 1,
+      "moduleSlug": "git-foundations-module-1-start-tracking",
+      "prefix": "git_foundations_module_1",
+      "title": "Start Tracking a Project",
+      "description": "Move from an ordinary folder to a repository whose current state Git can explain.",
+      "purpose": "Understand the local repository model, configure a safe identity, initialize main, and read tracked and untracked state.",
+      "learningObjectives": [
+        "Explain why version control is more reliable than duplicate final folders.",
+        "Distinguish the working tree, staging area, and commit history.",
+        "Configure a local Git identity and initialize a repository on main.",
+        "Use git status and git status --short to read tracked and untracked state."
+      ],
+      "guidedExercises": [
+        "Inspect an ordinary project folder before initialization.",
+        "Initialize a repository and trace its first status changes.",
+        "Use repository-state checks instead of memorizing command output."
+      ],
+      "quizFocus": [
+        "version-control purpose",
+        "repository vocabulary",
+        "safe local configuration",
+        "tracked versus untracked state"
+      ],
+      "moduleProject": "Build a Field Notes repository with one meaningful initial commit and a clean working tree.",
+      "sections": [
+        {
+          "sectionSlug": "git-foundations-section-1-repository-basics",
+          "title": "A Project Needs a Memory",
+          "summary": "Begin with the problem version control solves, then trace how Git describes an ordinary project folder.",
+          "topics": [
+            {
+              "topicId": "why-version-control-matters",
+              "title": "Why Version Control Matters",
+              "summary": "Open with a standalone story about a project losing its history, then distinguish Git from duplicate final folders and explain the safe local course workspace.",
+              "minutes": 16,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Explain the problem Git solves for a changing project.",
+                "Distinguish Git as a local version-control system from GitHub as a hosted collaboration platform.",
+                "Describe the inspect, change, verify habit used throughout the course."
+              ],
+              "practice": {
+                "conceptualOnly": true,
+                "requiresTryIt": true,
+                "tryIt": true,
+                "tryItPlacement": "none",
+                "runtimeMode": "terminal_workspace",
+                "terminalSessionScope": "exercise",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "fill_blank_choice"
+                ]
+              }
+            },
+            {
+              "topicId": "working-tree-staging-and-history",
+              "title": "Working Tree, Staging Area, and History",
+              "summary": "Follow one file from an ordinary edit through the staging area into a committed snapshot.",
+              "minutes": 20,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Describe the working tree, staging area, and commit history in plain language.",
+                "Predict which repository area changes after editing, staging, and committing.",
+                "Use git status as the bridge between the three areas."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "terminal_workspace",
+                "terminalSessionScope": "exercise",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "configure-and-initialize-a-repository",
+              "title": "Configure and Initialize a Repository",
+              "summary": "Set a repository-local author identity and turn an existing project folder into a repository on main.",
+              "minutes": 22,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Configure user.name and user.email inside one repository.",
+                "Initialize a repository with main as the starting branch.",
+                "Verify that the .git directory represents repository metadata without editing it directly."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "terminal_workspace",
+                "terminalSessionScope": "exercise",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "read-tracked-and-untracked-state",
+              "title": "Read Tracked and Untracked State",
+              "summary": "Use full and short status views to tell which files Git knows, which files are new, and which changes still need attention.",
+              "minutes": 22,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Interpret the main sections of git status.",
+                "Use git status --short to read compact working-tree state.",
+                "Distinguish untracked files from tracked files with modifications."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "terminal_workspace",
+                "terminalSessionScope": "exercise",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "sectionSlug": "git-foundations-section-1-module-project",
+          "role": "module_project",
+          "title": "Module Project",
+          "summary": "Build a Field Notes repository with one meaningful initial commit and a clean working tree.",
+          "topics": [
+            {
+              "topicId": "module-1-field-notes-repository",
+              "title": "Project: Start the Field Notes Repository",
+              "summary": "Turn a small set of neighborhood field notes into a trustworthy first Git repository with a clean initial commit.",
+              "minutes": 55,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Configure a local Git identity without changing machine-wide settings.",
+                "Initialize a repository on main and distinguish untracked, staged, and committed files.",
+                "Finish with a clean working tree and a meaningful first commit."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "terminal_workspace",
+                "terminalSessionScope": "project",
+                "projectFlow": "progressive",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ]
+              },
+              "projectBrief": {
+                "scenario": "A neighborhood garden coordinator keeps plot observations in a folder, but every revision currently replaces the previous one. The next volunteer needs a trustworthy starting point before more notes are added.",
+                "role": "Junior developer preparing the garden field-notes repository",
+                "workspace": "One cumulative terminal workspace rooted at garden-notes/ with README.md, observations/, and a deterministic local Git identity",
+                "deliverable": "A five-step repository setup ending with an initialized main branch, tracked project files, one meaningful initial commit, and a clean working tree.",
+                "stepCountTarget": 5,
+                "flow": "progressive",
+                "requirements": [
+                  "Keep every step inside garden-notes/ and carry the full repository state forward.",
+                  "Use only local repository configuration for user.name and user.email.",
+                  "Use gitExpectations to grade initialization, tracked files, commit count, commit message, and clean working state.",
+                  "Do not grade exact commit hashes, timestamps, or absolute paths.",
+                  "Every prompt must tell the learner to type each command and press Enter."
+                ],
+                "stepLadder": [
+                  {
+                    "step": 1,
+                    "title": "Inspect the Garden Notes Workspace",
+                    "requirement": "Use pwd and ls to inspect garden-notes/, then read the provided README.md and observation files before changing repository state."
+                  },
+                  {
+                    "step": 2,
+                    "title": "Configure the Local Author Identity",
+                    "requirement": "Set user.name to ZoeSkoul Learner and user.email to learner@zoeskoul.local inside this repository only."
+                  },
+                  {
+                    "step": 3,
+                    "title": "Initialize the Repository on main",
+                    "requirement": "Initialize garden-notes/ as a Git repository whose current branch is main, then inspect the untracked files with git status."
+                  },
+                  {
+                    "step": 4,
+                    "title": "Stage the Initial Project Files",
+                    "requirement": "Stage README.md and the observations/ files, then verify that the intended files are staged and no unrelated file is tracked."
+                  },
+                  {
+                    "step": 5,
+                    "title": "Create and Verify the First Commit",
+                    "requirement": "Commit the staged files with the message Start garden field notes, then verify one commit and a clean working tree."
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleNumber": 2,
+      "moduleSlug": "git-foundations-module-2-meaningful-history",
+      "prefix": "git_foundations_module_2",
+      "title": "Build Meaningful History",
+      "description": "Turn related edits into focused commits that another developer can read and inspect.",
+      "purpose": "Inspect differences, stage intentionally, write meaningful commit messages, and read the resulting history.",
+      "learningObjectives": [
+        "Use git diff to inspect unstaged changes.",
+        "Use git add and git diff --staged to prepare one focused snapshot.",
+        "Create cohesive commits with meaningful imperative messages.",
+        "Read history with git log --oneline and inspect a commit with git show."
+      ],
+      "guidedExercises": [
+        "Separate two unrelated edits before staging.",
+        "Compare working-tree and staged differences.",
+        "Build and inspect a readable multi-commit history."
+      ],
+      "quizFocus": [
+        "unstaged versus staged diff",
+        "selective staging",
+        "commit purpose",
+        "history inspection"
+      ],
+      "moduleProject": "Build a two-change Community Website history with focused commits and a clean final state.",
+      "sections": [
+        {
+          "sectionSlug": "git-foundations-section-2-history-workflow",
+          "title": "From Edits to Understandable Snapshots",
+          "summary": "Follow a small change from diff to staging to commit, then read the history it creates.",
+          "topics": [
+            {
+              "topicId": "inspect-unstaged-changes-with-diff",
+              "title": "Inspect Unstaged Changes with git diff",
+              "summary": "Read line-level differences before deciding what belongs in the next commit.",
+              "minutes": 20,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Use git diff to inspect tracked unstaged edits.",
+                "Read added and removed lines without treating the diff header as file content.",
+                "Notice unrelated edits before they are accidentally grouped together."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "terminal_workspace",
+                "terminalSessionScope": "exercise",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "stage-intentionally",
+              "title": "Stage Intentionally",
+              "summary": "Use git add to prepare selected files and git diff --staged to verify the exact snapshot before committing.",
+              "minutes": 22,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Stage one file without automatically staging every workspace change.",
+                "Use git diff --staged to inspect the proposed commit.",
+                "Move a file between unstaged and staged state without losing its content."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "terminal_workspace",
+                "terminalSessionScope": "exercise",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "create-focused-commits",
+              "title": "Create Focused Commits",
+              "summary": "Record one coherent change with a message that explains the purpose of the snapshot.",
+              "minutes": 24,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Create a commit from staged changes.",
+                "Write a concise imperative commit subject.",
+                "Explain why commit boundaries should match one meaningful purpose."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "terminal_workspace",
+                "terminalSessionScope": "exercise",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "read-history-with-log-and-show",
+              "title": "Read History with log and show",
+              "summary": "Use compact history and commit inspection to understand what changed without opening every file manually.",
+              "minutes": 22,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Read commit order with git log --oneline.",
+                "Inspect one commit with git show.",
+                "Relate the current HEAD snapshot to earlier commits."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "terminal_workspace",
+                "terminalSessionScope": "exercise",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "sectionSlug": "git-foundations-section-2-module-project",
+          "role": "module_project",
+          "title": "Module Project",
+          "summary": "Build a two-change Community Website history with focused commits and a clean final state.",
+          "topics": [
+            {
+              "topicId": "module-2-community-website-history",
+              "title": "Project: Build the Community Website History",
+              "summary": "Create a readable sequence of cohesive commits for a small community website instead of saving unrelated changes in one snapshot.",
+              "minutes": 70,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Use diff views to separate unrelated edits before staging.",
+                "Create focused commits with meaningful messages.",
+                "Read the finished history and explain what changed in each snapshot."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "terminal_workspace",
+                "terminalSessionScope": "project",
+                "projectFlow": "progressive",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ]
+              },
+              "projectBrief": {
+                "scenario": "A community center website has a plain home page and an events page. Staff want the next updates recorded as a history that another developer can understand without opening every file.",
+                "role": "Junior web maintainer organizing a readable local history",
+                "workspace": "One cumulative terminal workspace rooted at community-site/ with index.html, events.html, styles.css, and an initialized repository",
+                "deliverable": "A six-step history with separate navigation and events commits, exact authored messages, preserved file content, and a clean final working tree.",
+                "stepCountTarget": 6,
+                "flow": "progressive",
+                "requirements": [
+                  "Keep each commit focused on one visible purpose.",
+                  "Inspect unstaged and staged differences before every commit.",
+                  "Use the previous complete repository state as the next step starter.",
+                  "Grade commit count, commit messages, HEAD file content, and clean state with gitExpectations.",
+                  "Do not require an exact git log hash or timestamp."
+                ],
+                "stepLadder": [
+                  {
+                    "step": 1,
+                    "title": "Inspect the First Website Change",
+                    "requirement": "Read git status and git diff to identify the provided navigation edit without staging it."
+                  },
+                  {
+                    "step": 2,
+                    "title": "Stage Only the Navigation Update",
+                    "requirement": "Stage index.html, inspect git diff --staged, and leave the unrelated events draft unstaged."
+                  },
+                  {
+                    "step": 3,
+                    "title": "Commit the Navigation Update",
+                    "requirement": "Create the commit Add primary navigation and verify that events.html still has an unstaged change."
+                  },
+                  {
+                    "step": 4,
+                    "title": "Prepare the Events Update",
+                    "requirement": "Finish the requested events copy, inspect its unstaged diff, and stage only events.html."
+                  },
+                  {
+                    "step": 5,
+                    "title": "Commit the Events Update",
+                    "requirement": "Create the commit Publish weekend events while preserving the earlier navigation commit."
+                  },
+                  {
+                    "step": 6,
+                    "title": "Read and Verify the Finished History",
+                    "requirement": "Use git log --oneline and git show to inspect the two new commits, then finish with the authored files and a clean working tree."
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleNumber": 3,
+      "moduleSlug": "git-foundations-module-3-manage-tracked-files",
+      "prefix": "git_foundations_module_3",
+      "title": "Manage Tracked Files Safely",
+      "description": "Keep a repository clean as files are renamed, removed, ignored, or restored.",
+      "purpose": "Use Git-aware file operations, ignore generated artifacts, and recover from staged or unstaged mistakes without rewriting history.",
+      "learningObjectives": [
+        "Read how tracked file modifications appear before and after staging.",
+        "Rename and remove tracked files with git mv and git rm.",
+        "Create and verify .gitignore rules for generated files.",
+        "Restore staged and unstaged mistakes safely."
+      ],
+      "guidedExercises": [
+        "Trace a tracked file through modification and staging.",
+        "Clean a release tree with Git-aware file operations.",
+        "Recover an accidental edit while preserving intended work."
+      ],
+      "quizFocus": [
+        "tracked file lifecycle",
+        "rename and deletion state",
+        ".gitignore behavior",
+        "safe restore scope"
+      ],
+      "moduleProject": "Prepare a clean Volunteer Handbook release snapshot with ignored previews and a focused cleanup commit.",
+      "sections": [
+        {
+          "sectionSlug": "git-foundations-section-3-safe-file-management",
+          "title": "A Repository Changes Shape",
+          "summary": "Manage a project whose files are changing names and purposes without losing the history that explains them.",
+          "topics": [
+            {
+              "topicId": "modify-and-verify-tracked-files",
+              "title": "Modify and Verify Tracked Files",
+              "summary": "Follow an already tracked file through editing, diff inspection, staging, and status verification.",
+              "minutes": 20,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Recognize modified tracked files in full and short status.",
+                "Inspect content changes before staging them.",
+                "Verify which version is in the working tree and which version is staged."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "terminal_workspace",
+                "terminalSessionScope": "exercise",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "rename-and-remove-tracked-files",
+              "title": "Rename and Remove Tracked Files",
+              "summary": "Use git mv and git rm so a project cleanup is immediately represented in the staging area.",
+              "minutes": 22,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Rename a tracked file with git mv.",
+                "Remove an obsolete tracked file with git rm.",
+                "Verify staged rename and deletion state before committing."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "terminal_workspace",
+                "terminalSessionScope": "exercise",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "ignore-generated-files",
+              "title": "Ignore Generated Files",
+              "summary": "Write focused .gitignore rules and verify that generated artifacts remain outside the repository history.",
+              "minutes": 24,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Create an exact .gitignore rule for a generated file or folder.",
+                "Use git check-ignore to verify why a path is ignored.",
+                "Explain why .gitignore does not automatically untrack a file already committed."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "terminal_workspace",
+                "terminalSessionScope": "exercise",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "restore-without-rewriting-history",
+              "title": "Restore without Rewriting History",
+              "summary": "Undo an unstaged edit or unstage a file while keeping the committed history intact.",
+              "minutes": 24,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Use git restore to return one working-tree file to the staged or committed version.",
+                "Use git restore --staged to unstage a file while keeping its content.",
+                "Choose the narrowest restore operation for the mistake described."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "terminal_workspace",
+                "terminalSessionScope": "exercise",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "sectionSlug": "git-foundations-section-3-module-project",
+          "role": "module_project",
+          "title": "Module Project",
+          "summary": "Prepare a clean Volunteer Handbook release snapshot with ignored previews and a focused cleanup commit.",
+          "topics": [
+            {
+              "topicId": "module-3-clean-release-snapshot",
+              "title": "Project: Prepare a Clean Release Snapshot",
+              "summary": "Clean a release folder by renaming tracked work, removing an obsolete file, ignoring generated previews, and restoring accidental edits safely.",
+              "minutes": 80,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Use Git-aware rename and removal commands for tracked files.",
+                "Create an effective .gitignore rule and verify ignored artifacts.",
+                "Restore staged and unstaged mistakes without rewriting commit history."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "terminal_workspace",
+                "terminalSessionScope": "project",
+                "projectFlow": "progressive",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ]
+              },
+              "projectBrief": {
+                "scenario": "A volunteer handbook is ready for release, but the repository still contains a draft filename, an obsolete checklist, a generated preview log, and one accidental edit to the approved introduction.",
+                "role": "Release assistant preparing a clean handbook snapshot",
+                "workspace": "One cumulative terminal workspace rooted at volunteer-handbook/ with tracked docs/, generated preview output, and an existing baseline history",
+                "deliverable": "A six-step cleanup ending with the correct tracked files, ignored generated output, restored approved content, one focused cleanup commit, and a clean working tree.",
+                "stepCountTarget": 6,
+                "flow": "progressive",
+                "requirements": [
+                  "Use git mv and git rm for the authored tracked rename and deletion.",
+                  "Keep preview.log present but ignored and untracked.",
+                  "Use git restore and git restore --staged only for the authored recoverable mistakes.",
+                  "Preserve the baseline commit and add exactly one cleanup commit.",
+                  "Grade final files, ignored files, forbidden tracked files, commit message, and clean state with gitExpectations."
+                ],
+                "stepLadder": [
+                  {
+                    "step": 1,
+                    "title": "Audit the Release Workspace",
+                    "requirement": "Inspect status, tracked files, and the existing diff before changing the handbook repository."
+                  },
+                  {
+                    "step": 2,
+                    "title": "Rename the Approved Guide",
+                    "requirement": "Rename docs/guide-draft.md to docs/volunteer-guide.md with git mv and verify the staged rename."
+                  },
+                  {
+                    "step": 3,
+                    "title": "Remove the Obsolete Checklist",
+                    "requirement": "Remove docs/old-checklist.md with git rm while preserving the approved guide and README."
+                  },
+                  {
+                    "step": 4,
+                    "title": "Ignore Generated Preview Output",
+                    "requirement": "Add preview.log to .gitignore, verify it with git check-ignore, and ensure preview.log is not tracked."
+                  },
+                  {
+                    "step": 5,
+                    "title": "Restore the Accidental Introduction Edit",
+                    "requirement": "Unstage and restore the authored accidental README.md edit without discarding the intended rename, deletion, or .gitignore work."
+                  },
+                  {
+                    "step": 6,
+                    "title": "Commit and Verify the Release Cleanup",
+                    "requirement": "Commit with Prepare handbook release and finish with the required files, ignored preview.log, two total commits, and a clean working tree."
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleNumber": 4,
+      "moduleSlug": "git-foundations-module-4-final-capstone",
+      "role": "capstone",
+      "prefix": "git_foundations_module_4",
+      "title": "Final Capstone",
+      "description": "Build and hand off one complete local history for a neighborhood resource guide.",
+      "purpose": "Combine initialization, status, diff, staging, commits, history inspection, ignore rules, Git-aware file operations, and safe restore habits.",
+      "learningObjectives": [
+        "Create a clean repository from an ordinary project folder.",
+        "Build four purposeful commits whose boundaries match the requested work.",
+        "Keep generated output ignored and obsolete files out of HEAD.",
+        "Verify the final history and clean working state before handoff."
+      ],
+      "guidedExercises": [
+        "Inspect the complete starter workspace before initialization.",
+        "Build the final repository in six exact cumulative steps.",
+        "Validate files, commit messages, ignored paths, forbidden tracked paths, commit count, and clean state."
+      ],
+      "quizFocus": [],
+      "moduleProject": "Build the Neighborhood Resource Guide history through six cumulative milestones.",
+      "sections": [
+        {
+          "sectionSlug": "git-foundations-section-4-final-capstone",
+          "role": "capstone",
+          "title": "Final Capstone",
+          "summary": "Build and hand off one complete local history for a neighborhood resource guide.",
+          "topics": [
+            {
+              "topicId": "final-neighborhood-resource-guide-history",
+              "title": "Final Capstone: Neighborhood Resource Guide History",
+              "summary": "Build a complete local history for a neighborhood resource guide while keeping changes focused, generated artifacts ignored, and the final repository easy to hand off.",
+              "minutes": 120,
+              "difficulty": "intermediate",
+              "technical": true,
+              "learningGoals": [
+                "Initialize and grow one repository through a sequence of purposeful commits.",
+                "Separate content changes from release cleanup work.",
+                "Use status, diff, staging, restore, ignore, rename, removal, log, and show together."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "terminal_workspace",
+                "terminalSessionScope": "project",
+                "projectFlow": "progressive",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ]
+              },
+              "projectBrief": {
+                "scenario": "A neighborhood help desk is replacing a folder of loose text files with a maintained resource guide. Future volunteers must be able to see when service information changed, recover from small mistakes, and trust the final handoff.",
+                "role": "Junior developer preparing the neighborhood resource guide for long-term maintenance",
+                "workspace": "One cumulative terminal workspace rooted at resource-guide/ with pages/, notes/, generated/, README.md, and no starting repository",
+                "deliverable": "One six-step local Git capstone with four meaningful commits, ignored generated previews, a tracked file rename, a safe obsolete-file removal, required final content, and a clean handoff state.",
+                "stepCountTarget": 6,
+                "flow": "progressive",
+                "requirements": [
+                  "Keep the capstone in exactly one capstone section and one capstone topic.",
+                  "Carry the complete repository and workspace forward through all six steps.",
+                  "Use only concepts taught in Git Foundations; do not use branches, merges, remotes, stash, revert, reset, rebase, or force operations.",
+                  "Use local identity configuration and main as the initial branch.",
+                  "The final history must contain exactly four commits with the authored commit messages.",
+                  "Grade repository state with gitExpectations and never grade exact hashes or timestamps."
+                ],
+                "stepLadder": [
+                  {
+                    "step": 1,
+                    "title": "Create the Guide Baseline",
+                    "requirement": "Inspect resource-guide/, configure the local identity, initialize main, stage the initial README and pages, and commit Start neighborhood resource guide."
+                  },
+                  {
+                    "step": 2,
+                    "title": "Add the Services Page",
+                    "requirement": "Create and validate pages/services.md, stage only that focused change, and commit Add local services page."
+                  },
+                  {
+                    "step": 3,
+                    "title": "Publish Updated Help Desk Hours",
+                    "requirement": "Update pages/contact.md with the authored hours, inspect the diff, and commit Update help desk hours."
+                  },
+                  {
+                    "step": 4,
+                    "title": "Ignore Generated Preview Files",
+                    "requirement": "Create the authored .gitignore rules for generated/ previews, verify the preview file is ignored, and keep the repository changes staged for the release cleanup commit."
+                  },
+                  {
+                    "step": 5,
+                    "title": "Rename the Guide and Remove the Obsolete Note",
+                    "requirement": "Use git mv to rename pages/guide-draft.md to pages/getting-help.md, use git rm to remove notes/old-phone-tree.txt, and preserve all earlier content."
+                  },
+                  {
+                    "step": 6,
+                    "title": "Commit and Verify the Final Handoff",
+                    "requirement": "Commit Prepare resource guide handoff, then verify the four-commit history, required HEAD files, ignored preview artifact, forbidden obsolete paths, and a clean working tree."
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

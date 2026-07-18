@@ -1,0 +1,178 @@
+{
+  "ok": true,
+  "profileId": "git",
+  "subjectSlug": "git--git-foundations--draft",
+  "courseSlug": "git-foundations",
+  "summary": {
+    "modules": 4,
+    "topicsTotal": 16,
+    "exercises": 139,
+    "exerciseKinds": {
+      "single_choice": 20,
+      "multi_choice": 16,
+      "drag_reorder": 12,
+      "fill_blank_choice": 24,
+      "code_input": 67
+    },
+    "codeInputs": 67,
+    "projects": 67,
+    "capstones": 67,
+    "thinFixedTestCount": 0,
+    "blockers": 0,
+    "errors": 0,
+    "warnings": 16,
+    "infos": 0
+  },
+  "severityCounts": {
+    "blocker": 0,
+    "error": 0,
+    "warning": 16,
+    "info": 0
+  },
+  "issues": [
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "git-foundations-module-1-start-tracking/git-foundations-section-1-repository-basics/why-version-control-matters",
+      "profileId": "git",
+      "moduleId": "git-foundations-module-1-start-tracking",
+      "topicId": "why-version-control-matters",
+      "message": "Topic \"why-version-control-matters\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "git-foundations-module-1-start-tracking/git-foundations-section-1-repository-basics/working-tree-staging-and-history",
+      "profileId": "git",
+      "moduleId": "git-foundations-module-1-start-tracking",
+      "topicId": "working-tree-staging-and-history",
+      "message": "Topic \"working-tree-staging-and-history\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "git-foundations-module-1-start-tracking/git-foundations-section-1-repository-basics/configure-and-initialize-a-repository",
+      "profileId": "git",
+      "moduleId": "git-foundations-module-1-start-tracking",
+      "topicId": "configure-and-initialize-a-repository",
+      "message": "Topic \"configure-and-initialize-a-repository\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "git-foundations-module-1-start-tracking/git-foundations-section-1-repository-basics/read-tracked-and-untracked-state",
+      "profileId": "git",
+      "moduleId": "git-foundations-module-1-start-tracking",
+      "topicId": "read-tracked-and-untracked-state",
+      "message": "Topic \"read-tracked-and-untracked-state\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "git-foundations-module-1-start-tracking/git-foundations-section-1-module-project/module-1-field-notes-repository",
+      "profileId": "git",
+      "moduleId": "git-foundations-module-1-start-tracking",
+      "topicId": "module-1-field-notes-repository",
+      "message": "Topic \"module-1-field-notes-repository\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "git-foundations-module-2-meaningful-history/git-foundations-section-2-history-workflow/inspect-unstaged-changes-with-diff",
+      "profileId": "git",
+      "moduleId": "git-foundations-module-2-meaningful-history",
+      "topicId": "inspect-unstaged-changes-with-diff",
+      "message": "Topic \"inspect-unstaged-changes-with-diff\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "git-foundations-module-2-meaningful-history/git-foundations-section-2-history-workflow/stage-intentionally",
+      "profileId": "git",
+      "moduleId": "git-foundations-module-2-meaningful-history",
+      "topicId": "stage-intentionally",
+      "message": "Topic \"stage-intentionally\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "git-foundations-module-2-meaningful-history/git-foundations-section-2-history-workflow/create-focused-commits",
+      "profileId": "git",
+      "moduleId": "git-foundations-module-2-meaningful-history",
+      "topicId": "create-focused-commits",
+      "message": "Topic \"create-focused-commits\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "git-foundations-module-2-meaningful-history/git-foundations-section-2-history-workflow/read-history-with-log-and-show",
+      "profileId": "git",
+      "moduleId": "git-foundations-module-2-meaningful-history",
+      "topicId": "read-history-with-log-and-show",
+      "message": "Topic \"read-history-with-log-and-show\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "git-foundations-module-2-meaningful-history/git-foundations-section-2-module-project/module-2-community-website-history",
+      "profileId": "git",
+      "moduleId": "git-foundations-module-2-meaningful-history",
+      "topicId": "module-2-community-website-history",
+      "message": "Topic \"module-2-community-website-history\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "git-foundations-module-3-manage-tracked-files/git-foundations-section-3-safe-file-management/modify-and-verify-tracked-files",
+      "profileId": "git",
+      "moduleId": "git-foundations-module-3-manage-tracked-files",
+      "topicId": "modify-and-verify-tracked-files",
+      "message": "Topic \"modify-and-verify-tracked-files\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "git-foundations-module-3-manage-tracked-files/git-foundations-section-3-safe-file-management/rename-and-remove-tracked-files",
+      "profileId": "git",
+      "moduleId": "git-foundations-module-3-manage-tracked-files",
+      "topicId": "rename-and-remove-tracked-files",
+      "message": "Topic \"rename-and-remove-tracked-files\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "git-foundations-module-3-manage-tracked-files/git-foundations-section-3-safe-file-management/ignore-generated-files",
+      "profileId": "git",
+      "moduleId": "git-foundations-module-3-manage-tracked-files",
+      "topicId": "ignore-generated-files",
+      "message": "Topic \"ignore-generated-files\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "git-foundations-module-3-manage-tracked-files/git-foundations-section-3-safe-file-management/restore-without-rewriting-history",
+      "profileId": "git",
+      "moduleId": "git-foundations-module-3-manage-tracked-files",
+      "topicId": "restore-without-rewriting-history",
+      "message": "Topic \"restore-without-rewriting-history\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "git-foundations-module-3-manage-tracked-files/git-foundations-section-3-module-project/module-3-clean-release-snapshot",
+      "profileId": "git",
+      "moduleId": "git-foundations-module-3-manage-tracked-files",
+      "topicId": "module-3-clean-release-snapshot",
+      "message": "Topic \"module-3-clean-release-snapshot\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "git-foundations-module-4-final-capstone/git-foundations-section-4-final-capstone/final-neighborhood-resource-guide-history",
+      "profileId": "git",
+      "moduleId": "git-foundations-module-4-final-capstone",
+      "topicId": "final-neighborhood-resource-guide-history",
+      "message": "Topic \"final-neighborhood-resource-guide-history\" has no learning goals on its seed metadata."
+    }
+  ]
+}

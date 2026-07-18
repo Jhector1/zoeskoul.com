@@ -1,0 +1,46 @@
+{
+  "subjectSlug": "git",
+  "catalogSlug": "git",
+  "profileId": "git",
+  "accessPolicy": "paid",
+  "courseOrder": [
+    "git-foundations",
+    "git-branches-merges-recovery",
+    "github-collaboration"
+  ],
+  "publishTarget": {
+    "liveSubjectSlug": "git-foundations",
+    "courseSlug": "git-foundations",
+    "channel": "draft"
+  },
+  "versioning": {
+    "family": "git-foundations",
+    "version": 1,
+    "status": "draft",
+    "defaultForNewEnrollments": false,
+    "supersedes": null,
+    "supersededBy": null
+  },
+  "courses": [
+    {
+      "courseSlug": "git-foundations",
+      "title": "Git Foundations",
+      "order": 1,
+      "path": "courses/git-foundations/course.spec.json"
+    },
+    {
+      "courseSlug": "git-branches-merges-recovery",
+      "title": "Git Branches, Merges, and Recovery",
+      "order": 2,
+      "path": "courses/git-branches-merges-recovery/course.spec.json",
+      "prerequisiteCourseSlug": "git-foundations"
+    },
+    {
+      "courseSlug": "github-collaboration",
+      "title": "GitHub Collaboration and Pull Requests",
+      "order": 3,
+      "path": "courses/github-collaboration/course.spec.json",
+      "prerequisiteCourseSlug": "git-branches-merges-recovery"
+    }
+  ]
+}

@@ -1,0 +1,234 @@
+{
+  "title": "Create Focused Commits",
+  "summary": "Record one coherent change with a message that explains the purpose of the snapshot.",
+  "minutes": 24,
+  "sketchBlocks": [
+    {
+      "id": "sketch0",
+      "title": "The Role of Commits in Version Control",
+      "bodyMarkdown": "Commits are the fundamental units of change in a Git repository. Each commit represents a snapshot of your project at a specific point in time. By creating commits, you can track changes, revert to previous states, and collaborate with others more effectively. \n\nWorked example: Imagine you're working on a project where you've just added a new feature and fixed a bug. Instead of committing both changes together, you should create separate commits for each. This way, each commit has a clear purpose and can be easily understood by others reviewing the history.\n\nTo create a commit, you first need to stage your changes using `git add`. Once staged, you can commit them with `git commit -m \"Your commit message\"`. The message should be concise and imperative, summarizing the change's purpose."
+    },
+    {
+      "id": "sketch1",
+      "title": "Preparing Changes for a Commit",
+      "bodyMarkdown": "Before you can commit changes, you need to stage them. Staging allows you to select which changes you want to include in your next commit. This is particularly useful when you have multiple changes in your working directory but only want to commit some of them.\n\nWorked example: Suppose you've modified two files, `index.html` and `style.css`. If you only want to commit the changes in `index.html`, you would stage it using `git add index.html`. You can then commit this change separately from any others.\n\nStaging helps maintain a clean and understandable commit history by allowing you to group related changes together."
+    },
+    {
+      "id": "sketch2",
+      "title": "Crafting Effective Commit Messages",
+      "bodyMarkdown": "A good commit message is crucial for understanding the history of a project. It should be short, descriptive, and written in the imperative mood. This style helps convey what the commit does, rather than what was done.\n\nWorked example: If you fixed a bug in the login feature, a good commit message might be `Fix login bug causing crash`. This message clearly states what the commit achieves, making it easier for others to understand the change.\n\nCommit messages are not just for you; they are for anyone who might work on the project in the future. Clear messages help maintain a project's readability and manageability."
+    },
+    {
+      "id": "sketch3",
+      "title": "Inspecting Past Commits",
+      "bodyMarkdown": "Once you've made several commits, you can review them to understand the project's evolution. Git provides several commands to inspect commit history, such as `git log` and `git show`.\n\nWorked example: Using `git log --oneline`, you can see a condensed view of your commit history, showing each commit's hash and message. This view helps you quickly understand the sequence of changes.\n\nFor more detailed information about a specific commit, use `git show <commit-hash>`. This command displays the changes introduced by the commit, along with the commit message and metadata. Reviewing commit history is essential for tracking progress and identifying when specific changes were made."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "try-create-focused-commits-sketch0",
+      "kind": "fill_blank_choice",
+      "title": "Create a Commit with a Message",
+      "prompt": "Stage the changes in `feature.txt` and commit them with the message 'Add new feature'.",
+      "template": "A file-writing code exercise should also ____ so automated tests can check it.",
+      "choices": [
+        "print an observable result",
+        "hide all output",
+        "delete the file immediately",
+        "skip the program"
+      ],
+      "correctValue": "print an observable result",
+      "hint": "Use `git add` to stage and `git commit` to commit with a message.",
+      "help": {
+        "concept": "Staging changes prepares them for a commit, which records them in the repository.",
+        "hint_1": "Stage the file using `git add feature.txt`.",
+        "hint_2": "Commit the staged changes with `git commit -m 'Add new feature'`."
+      }
+    },
+    {
+      "id": "try-create-focused-commits-sketch1",
+      "kind": "fill_blank_choice",
+      "title": "Stage Specific Changes",
+      "prompt": "Stage only the changes in `index.html` for the next commit.",
+      "template": "A file-writing code exercise should also ____ so automated tests can check it.",
+      "choices": [
+        "print an observable result",
+        "hide all output",
+        "delete the file immediately",
+        "skip the program"
+      ],
+      "correctValue": "print an observable result",
+      "hint": "Use `git add` to stage specific files.",
+      "help": {
+        "concept": "Staging allows you to select specific changes for your next commit.",
+        "hint_1": "Use `git add index.html` to stage the file.",
+        "hint_2": "Ensure only `index.html` is staged, not other files."
+      }
+    },
+    {
+      "id": "try-create-focused-commits-sketch2",
+      "kind": "fill_blank_choice",
+      "title": "Write a Commit Message",
+      "prompt": "Commit the staged changes with the message 'Fix login bug'.",
+      "template": "A file-writing code exercise should also ____ so automated tests can check it.",
+      "choices": [
+        "print an observable result",
+        "hide all output",
+        "delete the file immediately",
+        "skip the program"
+      ],
+      "correctValue": "print an observable result",
+      "hint": "Use `git commit -m` to commit with a message.",
+      "help": {
+        "concept": "Commit messages should be concise and describe the change.",
+        "hint_1": "Use `git commit -m 'Fix login bug'`.",
+        "hint_2": "Ensure the message is in imperative form."
+      }
+    },
+    {
+      "id": "try-create-focused-commits-sketch3",
+      "kind": "fill_blank_choice",
+      "title": "Review Commit History",
+      "prompt": "Use a command to view the commit history in a concise format.",
+      "template": "A file-writing code exercise should also ____ so automated tests can check it.",
+      "choices": [
+        "print an observable result",
+        "hide all output",
+        "delete the file immediately",
+        "skip the program"
+      ],
+      "correctValue": "print an observable result",
+      "hint": "Use `git log --oneline` to view a simplified history.",
+      "help": {
+        "concept": "Viewing commit history helps track changes over time.",
+        "hint_1": "Use `git log --oneline` for a brief history view.",
+        "hint_2": "This command shows each commit's hash and message."
+      }
+    },
+    {
+      "id": "multi-choice-1",
+      "kind": "multi_choice",
+      "title": "Purpose of Commits",
+      "prompt": "What is the primary purpose of creating commits in Git?",
+      "options": [
+        "To track changes over time",
+        "To permanently delete files",
+        "To merge branches",
+        "To create backups"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Think about how commits help in tracking changes.",
+      "help": {
+        "concept": "Commits are snapshots of your project at a point in time.",
+        "hint_1": "Commits help in tracking changes and reverting to previous states.",
+        "hint_2": "They are essential for collaboration and understanding project history."
+      }
+    },
+    {
+      "id": "multi-choice-2",
+      "kind": "multi_choice",
+      "title": "Commit Message Best Practices",
+      "prompt": "Which of the following are best practices for writing commit messages?",
+      "options": [
+        "Use imperative mood",
+        "Include detailed code changes",
+        "Be concise",
+        "Describe the change's purpose"
+      ],
+      "correctOptionIds": [
+        "a",
+        "c",
+        "d"
+      ],
+      "hint": "Consider what makes a commit message clear and useful.",
+      "help": {
+        "concept": "Commit messages should be clear and descriptive.",
+        "hint_1": "Commit messages should be concise and in imperative form.",
+        "hint_2": "They should describe what the commit does, not how it was done."
+      }
+    },
+    {
+      "id": "fill-blank-1",
+      "kind": "fill_blank_choice",
+      "title": "Staging Command",
+      "prompt": "Complete the command to stage a file named `app.js`.",
+      "template": "git add [blank1]",
+      "choices": [
+        "app.js",
+        "index.html",
+        "style.css"
+      ],
+      "correctValue": "app.js",
+      "hint": "Use the `git add` command to stage files.",
+      "help": {
+        "concept": "Staging prepares files for a commit.",
+        "hint_1": "The command starts with `git add`.",
+        "hint_2": "You need to specify the file name after `git add`."
+      }
+    },
+    {
+      "id": "fill-blank-2",
+      "kind": "fill_blank_choice",
+      "title": "Commit Message Format",
+      "prompt": "Fill in the blank to complete the commit message: `git commit -m '[blank1]'`.",
+      "template": "git commit -m '[blank1]'",
+      "choices": [
+        "Add new feature",
+        "Fixed bug",
+        "Update README"
+      ],
+      "correctValue": "Add new feature",
+      "hint": "Commit messages should be in imperative form.",
+      "help": {
+        "concept": "Commit messages describe the change's purpose.",
+        "hint_1": "The message should be concise and imperative.",
+        "hint_2": "Think about what the commit achieves."
+      }
+    },
+    {
+      "id": "single-choice-1",
+      "kind": "single_choice",
+      "title": "Commit History Inspection",
+      "prompt": "Which command provides a concise view of the commit history?",
+      "options": [
+        "git log --oneline",
+        "git status",
+        "git diff",
+        "git show"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Look for a command that summarizes commit messages.",
+      "help": {
+        "concept": "A concise history view helps quickly understand changes.",
+        "hint_1": "The command uses `git log`.",
+        "hint_2": "It includes the `--oneline` option for brevity."
+      }
+    },
+    {
+      "id": "drag-reorder-1",
+      "kind": "drag_reorder",
+      "title": "Commit Process Steps",
+      "prompt": "Arrange the steps to create a commit in the correct order.",
+      "tokens": [
+        "Make changes in the working directory",
+        "Stage changes with git add",
+        "Commit changes with git commit"
+      ],
+      "correctOrder": [
+        "Make changes in the working directory",
+        "Stage changes with git add",
+        "Commit changes with git commit"
+      ],
+      "hint": "Think about the sequence from making changes to committing them.",
+      "help": {
+        "concept": "Creating a commit involves staging changes and then committing them.",
+        "hint_1": "Staging comes before committing.",
+        "hint_2": "You need to write a commit message after staging."
+      }
+    }
+  ]
+}

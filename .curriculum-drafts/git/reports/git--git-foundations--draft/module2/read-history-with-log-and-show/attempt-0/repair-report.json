@@ -1,0 +1,33 @@
+{
+  "topicId": "read-history-with-log-and-show",
+  "repairs": [
+    {
+      "code": "GIT_TRY_IT_KIND_PROMOTED",
+      "category": "other",
+      "severity": "low",
+      "field": "quizDraft.try-read-history-with-log-and-show-sketch0",
+      "message": "Converted generated Try It \"try-read-history-with-log-and-show-sketch0\" into the Git code_input required by plannedExerciseCounts."
+    },
+    {
+      "code": "GIT_TRY_IT_KIND_PROMOTED",
+      "category": "other",
+      "severity": "low",
+      "field": "quizDraft.try-read-history-with-log-and-show-sketch1",
+      "message": "Converted generated Try It \"try-read-history-with-log-and-show-sketch1\" into the Git code_input required by plannedExerciseCounts."
+    },
+    {
+      "code": "GIT_TRY_IT_KIND_PROMOTED",
+      "category": "other",
+      "severity": "low",
+      "field": "quizDraft.try-read-history-with-log-and-show-sketch2",
+      "message": "Converted generated Try It \"try-read-history-with-log-and-show-sketch2\" into the Git code_input required by plannedExerciseCounts."
+    },
+    {
+      "code": "GIT_TRY_IT_KIND_PROMOTED",
+      "category": "other",
+      "severity": "low",
+      "field": "quizDraft.try-read-history-with-log-and-show-sketch3",
+      "message": "Converted generated Try It \"try-read-history-with-log-and-show-sketch3\" into the Git code_input required by plannedExerciseCounts."
+    }
+  ]
+}

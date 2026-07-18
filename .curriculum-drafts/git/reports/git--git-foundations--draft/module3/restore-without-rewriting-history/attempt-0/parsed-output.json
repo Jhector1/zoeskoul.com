@@ -1,0 +1,238 @@
+{
+  "title": "Restore without Rewriting History",
+  "summary": "Undo an unstaged edit or unstage a file while keeping the committed history intact.",
+  "minutes": 24,
+  "sketchBlocks": [
+    {
+      "id": "restore-intro",
+      "cardTitle": "Introduction to Restore",
+      "title": "Understanding Restore Operations",
+      "bodyMarkdown": "In Git, the `restore` command is a powerful tool that allows you to undo changes in your working directory or staging area without altering the commit history. This is crucial for maintaining a clean and accurate project history while correcting mistakes. \n\nWorked example: Suppose you have modified a file named `report.txt` but realize you want to discard these changes. You can use `git restore report.txt` to revert the file to its last committed state. This operation only affects the working directory, leaving the commit history untouched."
+    },
+    {
+      "id": "restore-working-tree",
+      "cardTitle": "Restoring the Working Tree",
+      "title": "Reverting Changes in the Working Tree",
+      "bodyMarkdown": "The working tree is where you make changes to your files. If you make a mistake or change your mind about an edit, you can use `git restore` to revert the file to its last committed state.\n\nWorked example: Imagine you have edited `summary.md` but decide to discard these changes. By executing `git restore summary.md`, the file will revert to its last committed version, effectively undoing your edits without affecting the staging area or commit history."
+    },
+    {
+      "id": "restore-staging-area",
+      "cardTitle": "Unstaging Files",
+      "title": "Unstaging Changes with Restore",
+      "bodyMarkdown": "Sometimes, you might stage changes that you later decide not to commit. The `git restore --staged` command allows you to unstage these changes while keeping them in the working directory.\n\nWorked example: You have staged changes to `index.html` but want to review them further before committing. By running `git restore --staged index.html`, the file is removed from the staging area but remains in the working directory with your changes intact."
+    },
+    {
+      "id": "restore-scope",
+      "cardTitle": "Choosing the Right Restore Scope",
+      "title": "Selecting the Appropriate Restore Operation",
+      "bodyMarkdown": "Choosing the correct restore operation depends on your current situation. If you need to discard changes in the working directory, use `git restore`. To unstage changes, use `git restore --staged`. Understanding these distinctions helps maintain a clean commit history.\n\nWorked example: You have both staged and unstaged changes in `app.js`. To unstage the changes but keep them in the working directory, use `git restore --staged app.js`. If you decide to discard the unstaged changes as well, follow up with `git restore app.js`."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "try-restore-intro-sketch0",
+      "kind": "fill_blank_choice",
+      "title": "Try Restoring a File",
+      "prompt": "You have modified `notes.txt` but want to revert it to its last committed state. Use the appropriate Git command to restore the file.",
+      "hint": "Use the `git restore` command to revert changes in the working directory.",
+      "help": {
+        "concept": "The `git restore` command reverts changes in the working directory to the last committed state.",
+        "hint_1": "The command should target the specific file you want to restore.",
+        "hint_2": "Type `git restore notes.txt` and press Enter."
+      },
+      "template": "A file-writing code exercise should also ____ so automated tests can check it.",
+      "choices": [
+        "print an observable result",
+        "hide all output",
+        "delete the file immediately",
+        "skip the program"
+      ],
+      "correctValue": "print an observable result"
+    },
+    {
+      "id": "try-restore-working-tree-sketch1",
+      "kind": "fill_blank_choice",
+      "title": "Revert Working Tree Changes",
+      "prompt": "You have edited `draft.md` and want to discard these changes. Use the correct Git command to restore the file to its last committed state.",
+      "hint": "Use `git restore` to revert changes in the working directory.",
+      "help": {
+        "concept": "The `git restore` command reverts changes in the working directory to the last committed state.",
+        "hint_1": "Ensure the command targets the specific file you want to restore.",
+        "hint_2": "Type `git restore draft.md` and press Enter."
+      },
+      "template": "A file-writing code exercise should also ____ so automated tests can check it.",
+      "choices": [
+        "print an observable result",
+        "hide all output",
+        "delete the file immediately",
+        "skip the program"
+      ],
+      "correctValue": "print an observable result"
+    },
+    {
+      "id": "try-restore-staging-area-sketch2",
+      "kind": "fill_blank_choice",
+      "title": "Unstage a File",
+      "prompt": "You have staged changes to `style.css` but want to unstage them while keeping the changes in the working directory. Use the appropriate Git command.",
+      "hint": "Use `git restore --staged` to unstage changes.",
+      "help": {
+        "concept": "The `git restore --staged` command removes changes from the staging area but keeps them in the working directory.",
+        "hint_1": "Ensure the command targets the specific file you want to unstage.",
+        "hint_2": "Type `git restore --staged style.css` and press Enter."
+      },
+      "template": "A file-writing code exercise should also ____ so automated tests can check it.",
+      "choices": [
+        "print an observable result",
+        "hide all output",
+        "delete the file immediately",
+        "skip the program"
+      ],
+      "correctValue": "print an observable result"
+    },
+    {
+      "id": "try-restore-scope-sketch3",
+      "kind": "fill_blank_choice",
+      "title": "Choose the Correct Restore Operation",
+      "prompt": "You have both staged and unstaged changes in `main.py`. Unstage the changes but keep them in the working directory. What command should you use?",
+      "hint": "Use `git restore --staged` to unstage changes.",
+      "help": {
+        "concept": "The `git restore --staged` command removes changes from the staging area but keeps them in the working directory.",
+        "hint_1": "Ensure the command targets the specific file you want to unstage.",
+        "hint_2": "Type `git restore --staged main.py` and press Enter."
+      },
+      "template": "A file-writing code exercise should also ____ so automated tests can check it.",
+      "choices": [
+        "print an observable result",
+        "hide all output",
+        "delete the file immediately",
+        "skip the program"
+      ],
+      "correctValue": "print an observable result"
+    },
+    {
+      "id": "single-choice-restore-concept",
+      "kind": "single_choice",
+      "title": "Understanding Git Restore",
+      "prompt": "What does the `git restore` command do?",
+      "hint": "Think about the effect of `git restore` on the working directory.",
+      "help": {
+        "concept": "The `git restore` command reverts changes in the working directory to the last committed state.",
+        "hint_1": "It affects the working directory, not the commit history.",
+        "hint_2": "It reverts changes to the last committed state."
+      },
+      "options": [
+        "Reverts changes in the working directory to the last committed state",
+        "Commits changes to the repository",
+        "Deletes files from the repository",
+        "Creates a new branch"
+      ],
+      "correctOptionIds": [
+        "a"
+      ]
+    },
+    {
+      "id": "single-choice-restore-staged",
+      "kind": "single_choice",
+      "title": "Unstaging with Git Restore",
+      "prompt": "What does the `git restore --staged` command do?",
+      "hint": "Consider the effect of `git restore --staged` on the staging area.",
+      "help": {
+        "concept": "The `git restore --staged` command removes changes from the staging area but keeps them in the working directory.",
+        "hint_1": "It affects the staging area, not the working directory content.",
+        "hint_2": "It removes changes from the staging area."
+      },
+      "options": [
+        "Removes changes from the staging area but keeps them in the working directory",
+        "Commits changes to the repository",
+        "Deletes files from the repository",
+        "Creates a new branch"
+      ],
+      "correctOptionIds": [
+        "a"
+      ]
+    },
+    {
+      "id": "fill-blank-choice-restore-command",
+      "kind": "fill_blank_choice",
+      "title": "Fill in the Restore Command",
+      "prompt": "Complete the command to unstage changes in `file.txt` while keeping them in the working directory: `git restore [blank1] file.txt`.",
+      "hint": "The option unstages changes but keeps them in the working directory.",
+      "help": {
+        "concept": "The `git restore --staged` command removes changes from the staging area but keeps them in the working directory.",
+        "hint_1": "The option is used to unstage changes.",
+        "hint_2": "The option is `--staged`."
+      },
+      "template": "git restore [blank1] file.txt",
+      "choices": [
+        "--staged",
+        "--hard",
+        "--soft",
+        "--mixed"
+      ],
+      "correctValue": "--staged"
+    },
+    {
+      "id": "fill-blank-choice-restore-working",
+      "kind": "fill_blank_choice",
+      "title": "Fill in the Working Tree Restore Command",
+      "prompt": "Complete the command to restore `document.md` to its last committed state: `git restore [blank1] document.md`.",
+      "hint": "The command should revert changes in the working directory.",
+      "help": {
+        "concept": "The `git restore` command reverts changes in the working directory to the last committed state.",
+        "hint_1": "No additional options are needed for reverting working directory changes.",
+        "hint_2": "The command is simply `git restore document.md`."
+      },
+      "template": "git restore [blank1] document.md",
+      "choices": [
+        "--staged",
+        "--hard",
+        "--soft"
+      ],
+      "correctValue": ""
+    },
+    {
+      "id": "multi-choice-restore-scenarios",
+      "kind": "multi_choice",
+      "title": "Choosing Restore Operations",
+      "prompt": "Which scenarios are appropriate for using `git restore`? Select all that apply.",
+      "hint": "Consider when you would want to revert changes in the working directory or unstage changes.",
+      "help": {
+        "concept": "The `git restore` command is used to revert changes in the working directory or unstage changes.",
+        "hint_1": "Think about scenarios involving unwanted changes or staging errors.",
+        "hint_2": "Consider both working directory and staging area corrections."
+      },
+      "options": [
+        "Reverting unwanted changes in the working directory",
+        "Unstaging changes while keeping them in the working directory",
+        "Committing changes to the repository",
+        "Creating a new branch"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ]
+    },
+    {
+      "id": "drag-reorder-restore-steps",
+      "kind": "drag_reorder",
+      "title": "Order of Restore Operations",
+      "prompt": "Arrange the steps to unstage changes in a file while keeping them in the working directory.",
+      "hint": "Consider the sequence of commands needed to unstage changes.",
+      "help": {
+        "concept": "Unstaging changes involves using `git restore --staged` to remove them from the staging area.",
+        "hint_1": "Start with the command that targets the staging area.",
+        "hint_2": "Ensure the command sequence correctly unstages the file."
+      },
+      "tokens": [
+        "git restore --staged file.txt",
+        "Check the status with git status",
+        "Verify changes are unstaged"
+      ],
+      "correctOrder": [
+        "git restore --staged file.txt",
+        "Check the status with git status",
+        "Verify changes are unstaged"
+      ]
+    }
+  ]
+}

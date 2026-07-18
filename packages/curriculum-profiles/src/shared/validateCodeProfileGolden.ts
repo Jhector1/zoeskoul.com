@@ -3,6 +3,7 @@ import type {
     ManifestStarterFile,
     ManifestFileFixture,
     ManifestStarterFiles,
+    TopicAuthoringDraft,
     TopicBundleManifest,
     WorkspaceLanguage,
 } from "@zoeskoul/curriculum-contracts";
@@ -126,6 +127,136 @@ function collectExerciseWorkspaceFiles(
 }
 
 
+type AuthoredCodeInput = Extract<
+    TopicAuthoringDraft["quizDraft"][number],
+    { kind: "code_input" }
+>;
+
+function findAuthoredCodeInput(
+    draft: TopicAuthoringDraft | undefined,
+    exerciseId: string,
+): AuthoredCodeInput | undefined {
+    return draft?.quizDraft?.find(
+        (exercise): exercise is AuthoredCodeInput =>
+            exercise.kind === "code_input" && exercise.id === exerciseId,
+    );
+}
+
+function overlayAuthoredFileContents(args: {
+    manifestFiles: ManifestStarterFiles | undefined;
+    authoredFiles: ManifestStarterFiles | undefined;
+}): ManifestStarterFile[] | undefined {
+    const manifestFiles = normalizeStarterFileRecords(args.manifestFiles);
+    const authoredFiles = normalizeStarterFileRecords(args.authoredFiles);
+
+    if (authoredFiles.length === 0) {
+        return manifestFiles.length > 0 ? manifestFiles : undefined;
+    }
+
+    const authoredByPath = new Map(
+        authoredFiles.map((file) => [file.path, file] as const),
+    );
+
+    if (manifestFiles.length === 0) {
+        return authoredFiles;
+    }
+
+    return manifestFiles.map((file) => {
+        const authored = authoredByPath.get(file.path);
+        return authored
+            ? {
+                ...file,
+                content: authored.content,
+            }
+            : file;
+    });
+}
+
+function resolveAuthoredSolutionCode(args: {
+    exercise: ManifestCodeInput;
+    authored: AuthoredCodeInput;
+    authoredSolutionFiles: ManifestStarterFile[] | undefined;
+}): string | undefined {
+    const entryFilePath =
+        args.exercise.workspace?.entryFilePath ??
+        args.authored.entryFilePath ??
+        args.authoredSolutionFiles?.find(
+            (file) => file.isEntry === true || file.entry === true,
+        )?.path;
+    const entrySolution = entryFilePath
+        ? args.authoredSolutionFiles?.find((file) => file.path === entryFilePath)
+        : undefined;
+
+    if (
+        Array.isArray(args.authored.solutionFiles) &&
+        args.authored.solutionFiles.length > 0 &&
+        typeof entrySolution?.content === "string"
+    ) {
+        return entrySolution.content;
+    }
+
+    return typeof args.authored.solutionCode === "string"
+        ? args.authored.solutionCode
+        : undefined;
+}
+
+/**
+ * Topic bundles intentionally store translatable code as message references.
+ * Golden validation runs before messages are emitted, so it must execute the
+ * authored code rather than the unresolved @: message tags.
+ */
+function hydrateAuthoredCodeForGolden(args: {
+    exercise: ManifestCodeInput;
+    draft?: TopicAuthoringDraft;
+}): ManifestCodeInput {
+    const authored = findAuthoredCodeInput(args.draft, args.exercise.id);
+    if (!authored) return args.exercise;
+
+    const starterFiles = overlayAuthoredFileContents({
+        manifestFiles:
+            args.exercise.starterFiles ?? args.exercise.workspace?.starterFiles,
+        authoredFiles: authored.starterFiles,
+    });
+    const solutionFiles = overlayAuthoredFileContents({
+        manifestFiles:
+            args.exercise.solutionFiles ??
+            (args.exercise.recipe.type === "fixed_tests" ||
+            args.exercise.recipe.type === "semantic"
+                ? args.exercise.recipe.solutionFiles
+                : undefined),
+        authoredFiles: authored.solutionFiles,
+    });
+    const solutionCode = resolveAuthoredSolutionCode({
+        exercise: args.exercise,
+        authored,
+        authoredSolutionFiles: solutionFiles,
+    });
+    const recipe =
+        args.exercise.recipe.type === "fixed_tests" ||
+        args.exercise.recipe.type === "semantic"
+            ? {
+                ...args.exercise.recipe,
+                ...(solutionCode ? { solutionCode } : {}),
+                ...(solutionFiles ? { solutionFiles } : {}),
+            }
+            : args.exercise.recipe;
+
+    return {
+        ...args.exercise,
+        ...(starterFiles ? { starterFiles } : {}),
+        ...(solutionFiles ? { solutionFiles } : {}),
+        ...(args.exercise.workspace
+            ? {
+                workspace: {
+                    ...args.exercise.workspace,
+                    ...(starterFiles ? { starterFiles } : {}),
+                },
+            }
+            : {}),
+        recipe,
+    };
+}
+
 function semanticModuleNameForPath(filePath: string): string | null {
     const normalized = String(filePath ?? "")
         .trim()
@@ -237,6 +368,7 @@ export async function validateCodeProfileGolden(args: {
     expectedLanguage: Exclude<WorkspaceLanguage, "sql">;
     allowedRecipeTypes: Array<ManifestCodeInput["recipe"]["type"]>;
     topicBundle: TopicBundleManifest;
+    draft?: TopicAuthoringDraft;
 }): Promise<GoldenValidationIssue[]> {
     const issues: GoldenValidationIssue[] = [];
 
@@ -267,8 +399,13 @@ export async function validateCodeProfileGolden(args: {
         });
     }
 
-    for (const exercise of args.topicBundle.exercises) {
-        if (exercise.kind !== "code_input") continue;
+    for (const manifestExercise of args.topicBundle.exercises) {
+        if (manifestExercise.kind !== "code_input") continue;
+
+        const exercise = hydrateAuthoredCodeForGolden({
+            exercise: manifestExercise,
+            draft: args.draft,
+        });
 
         if (!exercise.language) {
             issues.push({

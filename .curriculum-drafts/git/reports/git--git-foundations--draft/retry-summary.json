@@ -1,0 +1,163 @@
+{
+  "subjectSlug": "git--git-foundations--draft",
+  "generatedAt": "2026-07-18T13:28:59.759Z",
+  "validationState": {
+    "unsafeSkipValidation": false,
+    "requested": {
+      "skipQualityGates": false,
+      "skipSemantic": false,
+      "skipGolden": false,
+      "unsafeSkipValidation": false
+    },
+    "structural": {
+      "ran": true,
+      "skipped": false,
+      "required": true
+    },
+    "qualityGates": {
+      "ran": true,
+      "skipped": false,
+      "required": true
+    },
+    "semantic": {
+      "ran": true,
+      "skipped": false,
+      "required": true
+    },
+    "golden": {
+      "ran": true,
+      "skipped": false,
+      "required": true
+    }
+  },
+  "topics": [
+    {
+      "moduleSlug": "git-foundations-module-1-start-tracking",
+      "sectionSlug": "git-foundations-section-1-repository-basics",
+      "topicId": "why-version-control-matters",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "git-foundations-module-1-start-tracking",
+      "sectionSlug": "git-foundations-section-1-repository-basics",
+      "topicId": "working-tree-staging-and-history",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "git-foundations-module-1-start-tracking",
+      "sectionSlug": "git-foundations-section-1-repository-basics",
+      "topicId": "configure-and-initialize-a-repository",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "git-foundations-module-1-start-tracking",
+      "sectionSlug": "git-foundations-section-1-repository-basics",
+      "topicId": "read-tracked-and-untracked-state",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "git-foundations-module-1-start-tracking",
+      "sectionSlug": "git-foundations-section-1-module-project",
+      "topicId": "module-1-field-notes-repository",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "git-foundations-module-2-meaningful-history",
+      "sectionSlug": "git-foundations-section-2-history-workflow",
+      "topicId": "inspect-unstaged-changes-with-diff",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "git-foundations-module-2-meaningful-history",
+      "sectionSlug": "git-foundations-section-2-history-workflow",
+      "topicId": "stage-intentionally",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "git-foundations-module-2-meaningful-history",
+      "sectionSlug": "git-foundations-section-2-history-workflow",
+      "topicId": "create-focused-commits",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "git-foundations-module-2-meaningful-history",
+      "sectionSlug": "git-foundations-section-2-history-workflow",
+      "topicId": "read-history-with-log-and-show",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "git-foundations-module-2-meaningful-history",
+      "sectionSlug": "git-foundations-section-2-module-project",
+      "topicId": "module-2-community-website-history",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "git-foundations-module-3-manage-tracked-files",
+      "sectionSlug": "git-foundations-section-3-safe-file-management",
+      "topicId": "modify-and-verify-tracked-files",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "git-foundations-module-3-manage-tracked-files",
+      "sectionSlug": "git-foundations-section-3-safe-file-management",
+      "topicId": "rename-and-remove-tracked-files",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "git-foundations-module-3-manage-tracked-files",
+      "sectionSlug": "git-foundations-section-3-safe-file-management",
+      "topicId": "ignore-generated-files",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "git-foundations-module-3-manage-tracked-files",
+      "sectionSlug": "git-foundations-section-3-safe-file-management",
+      "topicId": "restore-without-rewriting-history",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "git-foundations-module-3-manage-tracked-files",
+      "sectionSlug": "git-foundations-section-3-module-project",
+      "topicId": "module-3-clean-release-snapshot",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "git-foundations-module-4-final-capstone",
+      "sectionSlug": "git-foundations-section-4-final-capstone",
+      "topicId": "final-neighborhood-resource-guide-history",
+      "status": "success",
+      "attempts": 1,
+      "retryCodes": []
+    }
+  ]
+}

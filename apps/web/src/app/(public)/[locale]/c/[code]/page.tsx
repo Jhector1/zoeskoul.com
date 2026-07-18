@@ -3,8 +3,8 @@ import { notFound } from "next/navigation";
 import { cache } from "react";
 
 import TrialPracticeClient from "@/app/(public)/[locale]/(learningZone)/practice/trial/trial-practice-client";
-import { cloudinaryServerImageUrl } from "@/lib/cloudinary/server";
 import { assertEligiblePublicChallengeTarget } from "@/lib/practice/challenges/eligibility";
+import { buildPublicChallengePresentation } from "@/lib/practice/challenges/presentation";
 import { getActivePracticeChallengeLink } from "@/lib/practice/challenges/shortLink";
 import { resolveSharedChallengeTarget } from "@/lib/practice/challenges/target";
 import { verifySharedChallenge } from "@/lib/practice/challenges/token";
@@ -68,32 +68,22 @@ export async function generateMetadata({
   }
 
   const { link, target } = resolved;
-  const title = link.shareTitle || `${target.exerciseTitle} · ZoeSkoul challenge`;
-  const description =
-    link.shareDescription ||
-    "Can you complete this coding project challenge? No account is required to try it.";
-  const imageUrl = link.ogImagePublicId
-    ? cloudinaryServerImageUrl(link.ogImagePublicId, {
-        w: 1200,
-        h: 630,
-        crop: "fill",
-        gravity: "auto",
-        quality: "auto",
-        format: "jpg",
-      })
-    : undefined;
+  const presentation = buildPublicChallengePresentation({
+    source: link,
+    fallbackTitle: `${target.exerciseTitle} · ZoeSkoul challenge`,
+  });
 
   return buildMetadata({
     locale,
     path: `/c/${link.code}`,
-    title,
-    description,
-    ogTitle: title,
-    ogDescription: description,
-    twitterTitle: title,
-    twitterDescription: description,
-    imageUrl: imageUrl || undefined,
-    imageAlt: link.ogImageAlt || `${title} preview`,
+    title: presentation.title,
+    description: presentation.description,
+    ogTitle: presentation.title,
+    ogDescription: presentation.description,
+    twitterTitle: presentation.title,
+    twitterDescription: presentation.description,
+    imageUrl: presentation.imageUrl || undefined,
+    imageAlt: presentation.imageAlt,
   });
 }
 

@@ -9,6 +9,7 @@ const NON_LEARNER_FACING_KEYS = new Set([
     "starterFiles",
     "fixedTests",
     "hiddenShellCheck",
+    "gitExpectations",
     "checker",
 ]);
 

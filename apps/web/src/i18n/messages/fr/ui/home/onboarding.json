@@ -29,12 +29,12 @@
     },
     "welcome": {
       "fallbackGoals": "vos objectifs d’apprentissage",
-      "new": "Bienvenue. Je vais organiser votre espace {appName} autour de {interestText}, en {language}, avec un rythme réaliste dès le premier jour.",
-      "returning": "Bon retour. Votre espace {appName} reste centré sur {interestText}, avec un parcours {level}, un rythme d’étude de {studyTime} et un thème {theme}."
+      "new": "Vous êtes prêt à commencer avec {interestText}. Lancez une courte leçon, relevez un défi, puis avancez à votre rythme.",
+      "returning": "Bon retour. Reprenez {interestText}, essayez le dernier défi ou découvrez quelque chose de nouveau."
     },
     "interestSummary": {
-      "empty": "Choisissez une matière et {appName} affichera la prochaine leçon, la bonne série d’exercices et un essai adapté.",
-      "focused": "Axé sur {interests}. Commencez par ce qui compte le plus."
+      "empty": "Choisissez une matière et nous vous aiderons à trouver un point de départ clair.",
+      "focused": "Vous apprenez {interests}. Gardons cet élan."
     },
     "gate": {
       "kicker": "Bienvenue",
@@ -42,18 +42,18 @@
       "description": "Répondez à quelques questions rapides pour personnaliser la langue, les matières, le niveau, le rythme et le thème. Vous pourrez tout modifier plus tard."
     },
     "hero": {
-      "kicker": "Apprentissage personnalisé",
-      "title": "{appName} organise votre accueil autour des matières que vous voulez maîtriser.",
-      "descriptionFresh": "{appName} commence par une courte configuration guidée, puis recommande les bonnes matières, les meilleurs points d’entrée et des questions d’essai selon votre langue, votre niveau et votre rythme hebdomadaire.",
+      "kicker": "Votre espace d’apprentissage",
+      "title": "Apprenez en pratiquant, une étape claire à la fois.",
+      "descriptionFresh": "Choisissez ce que vous voulez apprendre, adoptez un rythme qui convient à votre semaine, puis lancez une leçon ou un défi quand vous êtes prêt.",
       "chooseSubject": "Choisissez une matière à essayer",
-      "continueLearning": "Continuer à apprendre",
+      "continueLearning": "Continuer",
       "try3Questions": "Essayer 3 questions",
       "startingTrial": "Démarrage de l’essai...",
-      "openGuide": "Ouvrir le guide d’accueil",
-      "exploreSubjects": "Explorer les matières",
-      "editPreferences": "Modifier les préférences",
-      "editAnswers": "Modifier les réponses",
-      "currentTheme": "Thème actuel : {theme}"
+      "openGuide": "Configurer mon apprentissage",
+      "exploreSubjects": "Parcourir les matières",
+      "editPreferences": "Ajuster ma configuration",
+      "editAnswers": "Modifier mes réponses",
+      "currentTheme": "Thème : {theme}"
     },
     "steps": {
       "preferredLanguage": {
@@ -108,39 +108,39 @@
       "finish": "Terminer la configuration"
     },
     "guideCard": {
-      "personalized": "Votre espace est personnalisé",
-      "ready": "Le guide d’accueil est prêt",
+      "personalized": "Prêt quand vous l’êtes",
+      "ready": "Trouvons votre point de départ",
       "start": "Commencer",
-      "updatePreferences": "Mettre à jour les préférences"
+      "updatePreferences": "Ajuster la configuration"
     },
     "highlights": {
-      "kicker": "Accueil personnalisé",
-      "title": "Minimal au départ. Plus intelligent avec vos progrès.",
-      "description": "{appName} commence par un tableau de bord clair, puis s’adapte à vos intérêts, vos inscriptions et votre activité de pratique pour rendre la prochaine étape évidente.",
+      "kicker": "Pensé pour vous",
+      "title": "Un accueil simple qui devient plus utile à mesure que vous progressez.",
+      "description": "Vos leçons, vos exercices et vos progrès restent au même endroit, pour que la prochaine étape soit toujours facile à trouver.",
       "cards": {
         "language": {
           "title": "Langue",
-          "text": "Utilisez la langue qui vous semble la plus naturelle pendant que vous explorez les matières et commencez vos exercices."
+          "text": "Apprenez dans la langue qui vous semble la plus naturelle."
         },
         "level": {
           "title": "Niveau",
-          "text": "Les premières recommandations peuvent être plus fondamentales ou plus avancées selon votre niveau actuel."
+          "text": "Commencez au bon niveau sans revoir inutilement ce que vous maîtrisez déjà."
         },
         "pace": {
           "title": "Rythme hebdomadaire",
-          "text": "{appName} peut garder la prochaine étape réaliste pour que la page d’accueil reste utile et non surchargée."
+          "text": "Choisissez un rythme hebdomadaire que vous pouvez vraiment tenir."
         }
       }
     },
     "recommended": {
-      "kicker": "Parcours recommandés",
-      "title": "Commencez par les matières que vous voulez vraiment apprendre.",
+      "kicker": "Choisissez la suite",
+      "title": "Commencez par quelque chose que vous avez envie de construire.",
       "viewAll": "Voir toutes les matières",
       "exploreSubject": "Explorer la matière"
     },
     "floatingAssistant": {
-      "title": "Besoin d’ajuster votre configuration ?",
-      "subtitle": "Mettez à jour vos préférences"
+      "title": "Vous voulez modifier votre configuration ?",
+      "subtitle": "Langue, niveau, rythme et plus"
     },
     "trial": {
       "chooseSubjectError": "Choisissez d’abord une matière.",
@@ -156,6 +156,11 @@
       "newUser": "Je suis nouveau ici",
       "returningUser": "J’ai déjà un compte",
       "helper": "Les nouveaux utilisateurs commencent par l’onboarding. Les utilisateurs existants vont à la connexion."
+    },
+    "latestChallenge": {
+      "eyebrow": "Dernier défi quotidien",
+      "noAccount": "Aucun compte requis",
+      "cta": "Relever le défi"
     }
   }
 }

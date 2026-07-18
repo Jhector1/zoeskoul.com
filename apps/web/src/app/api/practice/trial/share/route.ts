@@ -13,6 +13,7 @@ import {
   readJsonSafe,
 } from "@/lib/practice/api/shared/http";
 import { assertEligiblePublicChallengeTarget } from "@/lib/practice/challenges/eligibility";
+import { DEFAULT_PUBLIC_CHALLENGE_DESCRIPTION } from "@/lib/practice/challenges/presentation";
 import { assertPublishedChallengeTargetAvailable } from "@/lib/practice/challenges/publishedAvailability";
 import { requireChallengePublisherAccessApi } from "@/lib/practice/challenges/publisherAccess";
 import {
@@ -202,10 +203,9 @@ export async function POST(req: Request) {
       Date.now() + challengeTtlDays() * 24 * 60 * 60 * 1000,
     );
     const token = signSharedChallenge(target, { expiresAt });
-    const defaultDescription =
-      "Can you complete this coding project challenge? No account is required to try it.";
     const shareTitle = parsed.data.shareTitle ?? target.exerciseTitle;
-    const shareDescription = parsed.data.shareDescription ?? defaultDescription;
+    const shareDescription =
+      parsed.data.shareDescription ?? DEFAULT_PUBLIC_CHALLENGE_DESCRIPTION;
 
     if (request.image) {
       const uploaded = await uploadChallengeOgImage(request.image);

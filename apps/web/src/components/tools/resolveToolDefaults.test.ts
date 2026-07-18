@@ -47,3 +47,20 @@ describe("resolveToolDefaults", () => {
         expect(resolved.defaultCode).toContain('print("Hello Python!")');
     });
 });
+
+it("resolves Git terminal courses to Bash defaults", () => {
+    const resolved = resolveToolDefaults({
+        subjectSlug: "git-foundations",
+        profileId: "git",
+        versionFamily: "git-foundations",
+        runtimeDefaults: {
+            kind: "code",
+            language: "bash",
+            supportsTerminal: true,
+        },
+    });
+
+    expect(resolved.defaultLang).toBe("bash");
+    expect(resolved.defaultCode).toContain("#!/usr/bin/env bash");
+    expect(resolved.defaultCode).not.toContain("Hello Python");
+});

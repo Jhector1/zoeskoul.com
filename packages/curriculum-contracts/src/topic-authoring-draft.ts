@@ -4,6 +4,14 @@ import {
     type SemanticCheck,
     type TerminalExpectations,
 } from "@zoeskoul/practice-checks";
+import {
+    type GitExpectations,
+    normalizeGitExpectations,
+} from "./git-expectations.js";
+import {
+    normalizeHiddenShellCheck,
+    normalizeTerminalExpectations,
+} from "./terminal-expectations.js";
 import type {
     ExerciseKind,
     ManifestFileFixture,
@@ -128,6 +136,7 @@ export type TopicAuthoringDraft = {
         workspaceExpectations?: ManifestWorkspaceExpectations;
         terminalExpectations?: TerminalExpectations;
         hiddenShellCheck?: HiddenShellCheck;
+        gitExpectations?: GitExpectations;
         solutionFiles?: ProgrammingCodeInputStarterFileDraft[];
         /** Ordered SQL workspace execution paths, for example schema.sql, seed.sql, query.sql. */
         sqlFileOrder?: string[];
@@ -534,6 +543,95 @@ export const TOPIC_AUTHORING_DRAFT_JSON_SCHEMA = {
                                     timeoutMs: { type: "number" },
                                 },
                             },
+                            gitExpectations: {
+                                type: "object",
+                                additionalProperties: false,
+                                properties: {
+                                    repositoryPath: { type: "string" },
+                                    repositoryInitialized: { type: "boolean" },
+                                    currentBranch: { type: "string" },
+                                    cleanWorkingTree: { type: "boolean" },
+                                    minimumCommitCount: {
+                                        type: "integer",
+                                        minimum: 0,
+                                    },
+                                    exactCommitCount: {
+                                        type: "integer",
+                                        minimum: 0,
+                                    },
+                                    trackedFiles: {
+                                        type: "array",
+                                        items: { type: "string" },
+                                    },
+                                    untrackedFiles: {
+                                        type: "array",
+                                        items: { type: "string" },
+                                    },
+                                    ignoredFiles: {
+                                        type: "array",
+                                        items: { type: "string" },
+                                    },
+                                    forbiddenTrackedFiles: {
+                                        type: "array",
+                                        items: { type: "string" },
+                                    },
+                                    requiredBranches: {
+                                        type: "array",
+                                        items: { type: "string" },
+                                    },
+                                    forbiddenBranches: {
+                                        type: "array",
+                                        items: { type: "string" },
+                                    },
+                                    commitMessages: {
+                                        type: "array",
+                                        items: {
+                                            type: "object",
+                                            additionalProperties: false,
+                                            required: ["matches"],
+                                            properties: {
+                                                position: {
+                                                    type: "integer",
+                                                    minimum: 0,
+                                                },
+                                                matches: { type: "string" },
+                                                message: { type: "string" },
+                                            },
+                                        },
+                                    },
+                                    headFiles: {
+                                        type: "array",
+                                        items: {
+                                            type: "object",
+                                            additionalProperties: false,
+                                            required: ["path"],
+                                            properties: {
+                                                path: { type: "string" },
+                                                contains: { type: "string" },
+                                                equals: { type: "string" },
+                                                message: { type: "string" },
+                                            },
+                                        },
+                                    },
+                                    remotes: {
+                                        type: "array",
+                                        items: {
+                                            type: "object",
+                                            additionalProperties: false,
+                                            required: ["name"],
+                                            properties: {
+                                                name: { type: "string" },
+                                                urlContains: { type: "string" },
+                                                requiredBranches: {
+                                                    type: "array",
+                                                    items: { type: "string" },
+                                                },
+                                                message: { type: "string" },
+                                            },
+                                        },
+                                    },
+                                },
+                            },
                             datasetId: { type: "string" },
                             recipeType: {
                                 type: "string",
@@ -635,115 +733,28 @@ function assertWorkspaceExpectations(value: unknown, label: string) {
     }
 }
 
-function assertTerminalCommandExpectations(
-    value: unknown,
-    label: string,
-) {
-    if (!Array.isArray(value)) {
-        fail(`${label} must be an array when provided`);
-    }
-
-    value.forEach((entry, index) => {
-        if (!isRecord(entry)) {
-            fail(`${label}[${index}] must be an object`);
-        }
-
-        assertOnlyKeys(entry, ["pattern", "message"], `${label}[${index}]`);
-
-        if (!isNonEmptyString(entry.pattern)) {
-            fail(`${label}[${index}].pattern must be a non-empty string`);
-        }
-
-        if (
-            typeof entry.message !== "undefined" &&
-            !isNonEmptyString(entry.message)
-        ) {
-            fail(`${label}[${index}].message must be a non-empty string when provided`);
-        }
-    });
-}
 
 function assertTerminalExpectations(value: unknown, label: string) {
-    if (!isRecord(value)) {
-        fail(`${label} must be an object`);
-    }
-
-    assertOnlyKeys(
-        value,
-        [
-            "requiredCommands",
-            "forbiddenCommands",
-            "outputContains",
-            "outputRegex",
-            "cwdContains",
-            "cwdEndsWith",
-        ],
-        label,
-    );
-
-    if (typeof value.requiredCommands !== "undefined") {
-        assertTerminalCommandExpectations(
-            value.requiredCommands,
-            `${label}.requiredCommands`,
-        );
-    }
-
-    if (typeof value.forbiddenCommands !== "undefined") {
-        assertTerminalCommandExpectations(
-            value.forbiddenCommands,
-            `${label}.forbiddenCommands`,
-        );
-    }
-
-    if (
-        typeof value.outputContains !== "undefined" &&
-        (!Array.isArray(value.outputContains) ||
-            value.outputContains.some((entry) => !isNonEmptyString(entry)))
-    ) {
-        fail(`${label}.outputContains must be an array of non-empty strings when provided`);
-    }
-
-    if (
-        typeof value.outputRegex !== "undefined" &&
-        (!Array.isArray(value.outputRegex) ||
-            value.outputRegex.some((entry) => !isNonEmptyString(entry)))
-    ) {
-        fail(`${label}.outputRegex must be an array of non-empty strings when provided`);
-    }
-
-    if (
-        typeof value.cwdContains !== "undefined" &&
-        !isNonEmptyString(value.cwdContains)
-    ) {
-        fail(`${label}.cwdContains must be a non-empty string when provided`);
-    }
-
-    if (
-        typeof value.cwdEndsWith !== "undefined" &&
-        !isNonEmptyString(value.cwdEndsWith)
-    ) {
-        fail(`${label}.cwdEndsWith must be a non-empty string when provided`);
+    try {
+        normalizeTerminalExpectations(value, label);
+    } catch (error) {
+        fail((error as Error).message);
     }
 }
 
 function assertHiddenShellCheck(value: unknown, label: string) {
-    if (!isRecord(value)) {
-        fail(`${label} must be an object`);
+    try {
+        normalizeHiddenShellCheck(value, label);
+    } catch (error) {
+        fail((error as Error).message);
     }
+}
 
-    assertOnlyKeys(value, ["script", "timeoutMs"], label);
-
-    if (!isNonEmptyString(value.script)) {
-        fail(`${label}.script must be a non-empty string`);
-    }
-
-    if (
-        typeof value.timeoutMs !== "undefined" &&
-        (typeof value.timeoutMs !== "number" ||
-            !Number.isInteger(value.timeoutMs) ||
-            value.timeoutMs < 1)
-    ) {
-        fail(`${label}.timeoutMs must be a positive integer when provided`);
+function assertGitExpectations(value: unknown, label: string) {
+    try {
+        normalizeGitExpectations(value, label);
+    } catch (error) {
+        fail((error as Error).message);
     }
 }
 
@@ -1008,6 +1019,7 @@ export function assertTopicAuthoringDraft(
                         "workspaceExpectations",
                         "terminalExpectations",
                         "hiddenShellCheck",
+                        "gitExpectations",
                         "solutionCode",
                         "tests",
                         "files",
@@ -1108,6 +1120,29 @@ export function assertTopicAuthoringDraft(
                     fail(
                         `${label} hiddenShellCheck is only supported for shell_task terminal_workspace exercises`,
                     );
+                }
+            }
+
+            if (typeof exercise.gitExpectations !== "undefined") {
+                assertGitExpectations(
+                    exercise.gitExpectations,
+                    `${label}.gitExpectations`,
+                );
+
+                if (
+                    exercise.recipeType !== "shell_task" ||
+                    exercise.mode !== "terminal_workspace"
+                ) {
+                    fail(
+                        `${label} gitExpectations is only supported for shell_task terminal_workspace exercises`,
+                    );
+                }
+
+                if (
+                    typeof exercise.fixedLanguage !== "undefined" &&
+                    exercise.fixedLanguage !== "bash"
+                ) {
+                    fail(`${label} gitExpectations requires fixedLanguage "bash"`);
                 }
             }
 

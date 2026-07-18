@@ -1,0 +1,13 @@
+{
+  "topicId": "configure-and-initialize-a-repository",
+  "ok": false,
+  "issues": [
+    {
+      "code": "GOLDEN_RECIPE_BUILD_FAILED",
+      "category": "recipe",
+      "severity": "error",
+      "exerciseId": "try-configure-and-initialize-a-repository-sketch1",
+      "message": "Exercise \"try-configure-and-initialize-a-repository-sketch1\" failed shared golden recipe validation: shell_task terminal_workspace expected needs workspaceExpectations, terminalExpectations, or hiddenShellCheck."
+    }
+  ]
+}

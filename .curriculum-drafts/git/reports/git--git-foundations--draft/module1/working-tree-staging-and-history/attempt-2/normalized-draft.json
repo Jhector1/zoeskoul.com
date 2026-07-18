@@ -1,0 +1,236 @@
+{
+  "title": "Working Tree, Staging Area, and History",
+  "summary": "Follow one file from an ordinary edit through the staging area into a committed snapshot.",
+  "minutes": 20,
+  "sketchBlocks": [
+    {
+      "id": "working-tree-staging-and-history-sketch0",
+      "title": "The Working Tree Explained",
+      "bodyMarkdown": "The working tree is the directory where you make changes to your files. It's the first area where your files reside before they are staged or committed. When you edit a file, it changes in the working tree. \n\nWorked example: Suppose you have a file named `notes.txt` in your project directory. You open it and add a new line of text. This change is now in the working tree. To see the status of your working tree, you can use the command `git status`. This command will show you which files have been modified but not yet staged for commit."
+    },
+    {
+      "id": "working-tree-staging-and-history-sketch1",
+      "title": "What is the Staging Area?",
+      "bodyMarkdown": "The staging area, also known as the index, is where you prepare your changes before committing them. It's like a clipboard where you gather all the changes you want to include in your next commit.\n\nWorked example: After modifying `notes.txt`, you decide to stage it. You use the command `git add notes.txt`. This moves the changes from the working tree to the staging area. Now, if you run `git status`, it will show `notes.txt` as staged for commit."
+    },
+    {
+      "id": "working-tree-staging-and-history-sketch2",
+      "title": "How to Commit Changes",
+      "bodyMarkdown": "Committing is the process of saving your staged changes to the repository's history. Each commit is a snapshot of your project at a point in time.\n\nWorked example: With `notes.txt` staged, you commit the changes using `git commit -m \"Add new line to notes\"`. This command creates a new commit in the repository's history. You can view the commit history with `git log --oneline`, which will show a list of commits, including your latest one."
+    },
+    {
+      "id": "working-tree-staging-and-history-sketch3",
+      "title": "Exploring the Commit History",
+      "bodyMarkdown": "The commit history is a record of all the changes made to the repository. It allows you to see what changes were made, when, and by whom.\n\nWorked example: To view the commit history, use `git log --oneline`. This command provides a concise view of the commit history, showing each commit's hash and message. You can also use `git show` to see detailed information about a specific commit, including the changes made."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "try-working-tree-staging-and-history-sketch0",
+      "kind": "fill_blank_choice",
+      "title": "Track Changes in the Working Tree",
+      "prompt": "You have a file named `project.txt` in your working directory. Modify the file by adding a line of text, then check the status of your working tree to see the changes.",
+      "template": "A file-writing code exercise should also ____ so automated tests can check it.",
+      "choices": [
+        "print an observable result",
+        "hide all output",
+        "delete the file immediately",
+        "skip the program"
+      ],
+      "correctValue": "print an observable result",
+      "hint": "Edit the file and use `git status` to check changes.",
+      "help": {
+        "concept": "The working tree is where you make changes to files before staging them.",
+        "hint_1": "Modify `project.txt` and use `git status`.",
+        "hint_2": "Add a line to `project.txt` and run `git status` to see the changes."
+      }
+    },
+    {
+      "id": "try-working-tree-staging-and-history-sketch1",
+      "kind": "fill_blank_choice",
+      "title": "Stage Changes for Commit",
+      "prompt": "You have modified `project.txt`. Stage this file for commit and verify its status in the staging area.",
+      "template": "A file-writing code exercise should also ____ so automated tests can check it.",
+      "choices": [
+        "print an observable result",
+        "hide all output",
+        "delete the file immediately",
+        "skip the program"
+      ],
+      "correctValue": "print an observable result",
+      "hint": "Use `git add` to stage the file.",
+      "help": {
+        "concept": "The staging area holds changes before they are committed.",
+        "hint_1": "Use `git add project.txt` to stage the file.",
+        "hint_2": "After staging, use `git status` to verify the file is staged."
+      }
+    },
+    {
+      "id": "try-working-tree-staging-and-history-sketch2",
+      "kind": "fill_blank_choice",
+      "title": "Commit Staged Changes",
+      "prompt": "Commit the staged changes in `project.txt` with a message 'Update project file'. Verify the commit in the history.",
+      "template": "A file-writing code exercise should also ____ so automated tests can check it.",
+      "choices": [
+        "print an observable result",
+        "hide all output",
+        "delete the file immediately",
+        "skip the program"
+      ],
+      "correctValue": "print an observable result",
+      "hint": "Use `git commit` with a message.",
+      "help": {
+        "concept": "Committing saves staged changes to the repository history.",
+        "hint_1": "Use `git commit -m 'Update project file'`.",
+        "hint_2": "Check the commit with `git log --oneline`."
+      }
+    },
+    {
+      "id": "try-working-tree-staging-and-history-sketch3",
+      "kind": "fill_blank_choice",
+      "title": "Explore Commit History",
+      "prompt": "View the commit history to see the latest changes. Use a command that provides a concise view of the history.",
+      "template": "A file-writing code exercise should also ____ so automated tests can check it.",
+      "choices": [
+        "print an observable result",
+        "hide all output",
+        "delete the file immediately",
+        "skip the program"
+      ],
+      "correctValue": "print an observable result",
+      "hint": "Use `git log --oneline` to view the history.",
+      "help": {
+        "concept": "The commit history shows all changes made to the repository.",
+        "hint_1": "Use `git log --oneline` for a concise history.",
+        "hint_2": "This command shows commit hashes and messages."
+      }
+    },
+    {
+      "id": "single-choice-1",
+      "kind": "single_choice",
+      "title": "Identify the Working Tree",
+      "prompt": "Which area of a Git repository is directly modified when you edit a file?",
+      "options": [
+        "Working tree",
+        "Staging area",
+        "Commit history",
+        "Remote repository"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Think about where changes first appear before staging.",
+      "help": {
+        "concept": "The working tree is where files are modified before staging.",
+        "hint_1": "The working tree is the first area affected by file edits.",
+        "hint_2": "Changes appear in the working tree before being staged."
+      }
+    },
+    {
+      "id": "single-choice-2",
+      "kind": "single_choice",
+      "title": "Purpose of the Staging Area",
+      "prompt": "What is the primary purpose of the staging area in Git?",
+      "options": [
+        "To store committed changes",
+        "To prepare changes for commit",
+        "To track remote changes",
+        "To manage branches"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Consider what happens to changes before they are committed.",
+      "help": {
+        "concept": "The staging area prepares changes for commit.",
+        "hint_1": "The staging area holds changes before committing.",
+        "hint_2": "It's like a clipboard for changes to be committed."
+      }
+    },
+    {
+      "id": "fill-blank-choice-1",
+      "kind": "fill_blank_choice",
+      "title": "Command to Stage Files",
+      "prompt": "Fill in the blank: To stage a file named `example.txt`, use the command `[blank1] example.txt`.",
+      "template": "To stage a file named `example.txt`, use the command `[blank1] example.txt`.",
+      "choices": [
+        "git add",
+        "git commit",
+        "git status",
+        "git log"
+      ],
+      "correctValue": "git add",
+      "hint": "The command adds files to the staging area.",
+      "help": {
+        "concept": "`the missing term` stages files for commit.",
+        "hint_1": "The command starts with `git`.",
+        "hint_2": "Use `the missing term` to stage files."
+      }
+    },
+    {
+      "id": "fill-blank-choice-2",
+      "kind": "fill_blank_choice",
+      "title": "Viewing Commit History",
+      "prompt": "Fill in the blank: To view a concise commit history, use the command `[blank1]`.",
+      "template": "To view a concise commit history, use the command `[blank1]`.",
+      "choices": [
+        "git log --oneline",
+        "git status",
+        "git diff",
+        "git show"
+      ],
+      "correctValue": "git log --oneline",
+      "hint": "This command shows a brief list of commits.",
+      "help": {
+        "concept": "`the missing term` shows a concise commit history.",
+        "hint_1": "The command starts with `git log`.",
+        "hint_2": "Use `--oneline` for a brief view."
+      }
+    },
+    {
+      "id": "multi-choice-1",
+      "kind": "multi_choice",
+      "title": "Areas of a Git Repository",
+      "prompt": "Which of the following are areas of a Git repository? Select all that apply.",
+      "options": [
+        "Working tree",
+        "Staging area",
+        "Commit history",
+        "Remote repository"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "hint": "Think about the main components of a Git repository.",
+      "help": {
+        "concept": "A Git repository consists of the working tree, staging area, and commit history.",
+        "hint_1": "Consider where changes are made, staged, and committed.",
+        "hint_2": "The repository includes areas for editing, staging, and history."
+      }
+    },
+    {
+      "id": "drag-reorder-1",
+      "kind": "drag_reorder",
+      "title": "Order of Operations in Git",
+      "prompt": "Arrange the following operations in the correct order for tracking changes in Git.",
+      "tokens": [
+        "Edit file",
+        "Stage changes",
+        "Commit changes"
+      ],
+      "correctOrder": [
+        "Edit file",
+        "Stage changes",
+        "Commit changes"
+      ],
+      "hint": "Consider the sequence from editing to committing.",
+      "help": {
+        "concept": "The correct order is editing, staging, then committing.",
+        "hint_1": "Start with editing the file.",
+        "hint_2": "Staging comes before committing."
+      }
+    }
+  ]
+}

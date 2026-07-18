@@ -1,0 +1,304 @@
+{
+  "title": "Ignore Generated Files",
+  "summary": "Write focused .gitignore rules and verify that generated artifacts remain outside the repository history.",
+  "minutes": 24,
+  "sketchBlocks": [
+    {
+      "id": "ignore-generated-files-sketch0",
+      "cardTitle": "Understanding .gitignore",
+      "title": "The Role of .gitignore in Git",
+      "bodyMarkdown": "In Git, the `.gitignore` file plays a crucial role in managing which files and directories should be ignored by version control. This is particularly useful for excluding generated files, such as build artifacts or temporary files, that do not need to be tracked in the repository. By specifying patterns in a `.gitignore` file, you can ensure that these files are not accidentally added to the repository, keeping your version history clean and focused on source files.\n\nWorked example:\n\nConsider a project where you have a `build/` directory that contains compiled files. You can create a `.gitignore` file with the following content:\n\n```\nbuild/\n```\n\nThis rule tells Git to ignore the entire `build/` directory. When you run `git status`, these files will not appear in the list of untracked files, preventing them from being staged or committed.\n\nThis approach helps maintain a clean repository by excluding files that are not part of the source code, reducing clutter and potential merge conflicts."
+    },
+    {
+      "id": "ignore-generated-files-sketch1",
+      "cardTitle": "Verifying Ignored Files",
+      "title": "Using git check-ignore",
+      "bodyMarkdown": "Once you have set up your `.gitignore` file, it's important to verify that the rules are working as expected. The `git check-ignore` command allows you to check if a specific file or directory is being ignored by Git.\n\nWorked example:\n\nSuppose you have a `.gitignore` file with the following content:\n\n```\n*.log\n```\n\nThis rule is intended to ignore all log files. To verify if a specific log file, such as `error.log`, is ignored, you can use the command:\n\n```\ngit check-ignore error.log\n```\n\nIf the file is ignored, the command will output the file name, confirming that the `.gitignore` rule is applied correctly. This tool is particularly useful for debugging `.gitignore` patterns and ensuring that your repository remains clean from unwanted files."
+    },
+    {
+      "id": "ignore-generated-files-sketch2",
+      "cardTitle": "Common Pitfalls with .gitignore",
+      "title": "Why .gitignore Doesn't Untrack Files",
+      "bodyMarkdown": "A common misconception is that adding a file to `.gitignore` will automatically remove it from the repository if it has already been committed. However, `.gitignore` only affects untracked files. If a file is already tracked by Git, adding it to `.gitignore` will not stop it from being tracked.\n\nWorked example:\n\nImagine you have a file `config.json` that was mistakenly committed to the repository. Adding `config.json` to `.gitignore` will prevent it from being staged in the future, but it will not remove it from the repository's history.\n\nTo stop tracking a file that is already committed, you need to remove it from the index with:\n\n```\ngit rm --cached config.json\n```\n\nThis command removes the file from the staging area, but keeps it in your working directory. After running this command, `config.json` will be ignored by Git, as specified in your `.gitignore` file."
+    },
+    {
+      "id": "ignore-generated-files-sketch3",
+      "cardTitle": "Practical Use of .gitignore",
+      "title": "Creating Effective .gitignore Rules",
+      "bodyMarkdown": "Creating effective `.gitignore` rules requires understanding the structure of your project and the types of files that should be excluded. It's important to tailor your `.gitignore` file to the specific needs of your project to avoid unnecessary clutter in your repository.\n\nWorked example:\n\nConsider a Node.js project where you want to ignore `node_modules/` and all `.env` files. Your `.gitignore` file might look like this:\n\n```\nnode_modules/\n*.env\n```\n\nThese rules ensure that the `node_modules` directory, which contains dependencies, and any environment files are not tracked by Git. This keeps your repository clean and focused on the source code and configuration files that are essential for the project.\n\nBy carefully crafting your `.gitignore` file, you can maintain a clean and efficient repository, making collaboration and version control more manageable."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "try-ignore-generated-files-sketch0",
+      "kind": "code_input",
+      "title": "Create a .gitignore Rule",
+      "prompt": "Create a `.gitignore` rule to ignore all files in the `dist/` directory. Verify that the rule works by checking the status of the directory.",
+      "hint": "Add a rule to ignore the `dist/` directory and check its status.",
+      "help": {
+        "concept": "The `.gitignore` file specifies patterns for files and directories to ignore.",
+        "hint_1": "Add `dist/` to your `.gitignore` file.",
+        "hint_2": "Use `git status` to verify that `dist/` is ignored."
+      },
+      "starterCode": "# Create a .gitignore file\n# Add a rule to ignore the dist/ directory",
+      "solutionCode": "echo 'dist/' > .gitignore\ngit status",
+      "entryFilePath": "main.sh",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Create a .gitignore file\n# Add a rule to ignore the dist/ directory",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "echo 'dist/' > .gitignore\ngit status",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "try-ignore-generated-files-sketch1",
+      "kind": "code_input",
+      "title": "Verify Ignored Files",
+      "prompt": "Use `git check-ignore` to verify that `temp.log` is ignored by your `.gitignore` rule.",
+      "hint": "Check if `temp.log` is ignored using `git check-ignore`.",
+      "help": {
+        "concept": "`git check-ignore` checks if a file is ignored by `.gitignore`.",
+        "hint_1": "Run `git check-ignore temp.log`.",
+        "hint_2": "Ensure `temp.log` is listed in `.gitignore`."
+      },
+      "starterCode": "# Verify if temp.log is ignored",
+      "solutionCode": "echo '*.log' > .gitignore\ngit check-ignore temp.log",
+      "entryFilePath": "main.sh",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Verify if temp.log is ignored",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "echo '*.log' > .gitignore\ngit check-ignore temp.log",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "try-ignore-generated-files-sketch2",
+      "kind": "code_input",
+      "title": "Untrack a Committed File",
+      "prompt": "Remove `config.json` from tracking while keeping it in the working directory. Ensure it is ignored by `.gitignore`.",
+      "hint": "Use `git rm --cached` to untrack the file.",
+      "help": {
+        "concept": "Untracking a file requires removing it from the index.",
+        "hint_1": "Run `git rm --cached config.json`.",
+        "hint_2": "Add `config.json` to `.gitignore` to prevent future tracking."
+      },
+      "starterCode": "# Untrack config.json and ensure it's ignored",
+      "solutionCode": "echo 'config.json' > .gitignore\ngit rm --cached config.json",
+      "entryFilePath": "main.sh",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Untrack config.json and ensure it's ignored",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "echo 'config.json' > .gitignore\ngit rm --cached config.json",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "try-ignore-generated-files-sketch3",
+      "kind": "code_input",
+      "title": "Crafting .gitignore for a Node.js Project",
+      "prompt": "Create a `.gitignore` file for a Node.js project to ignore `node_modules/` and `.env` files. Verify the rules are applied.",
+      "hint": "Add rules for `node_modules/` and `.env` files.",
+      "help": {
+        "concept": "Ignoring directories and specific file types helps keep the repository clean.",
+        "hint_1": "Add `node_modules/` and `*.env` to `.gitignore`.",
+        "hint_2": "Use `git status` to verify the rules."
+      },
+      "starterCode": "# Create .gitignore for Node.js project",
+      "solutionCode": "echo 'node_modules/' > .gitignore\necho '*.env' >> .gitignore\ngit status",
+      "entryFilePath": "main.sh",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Create .gitignore for Node.js project",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "echo 'node_modules/' > .gitignore\necho '*.env' >> .gitignore\ngit status",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "single-choice-1",
+      "kind": "single_choice",
+      "title": "Purpose of .gitignore",
+      "prompt": "What is the primary purpose of a `.gitignore` file in a Git repository?",
+      "hint": "Think about what files you want to exclude from version control.",
+      "help": {
+        "concept": "A `.gitignore` file specifies which files and directories should be ignored by Git.",
+        "hint_1": "It helps keep unnecessary files out of the repository.",
+        "hint_2": "Focus on excluding generated or temporary files."
+      },
+      "options": [
+        "To track changes in files",
+        "To ignore specific files and directories",
+        "To delete files from the repository",
+        "To rename files in the repository"
+      ],
+      "correctOptionIds": [
+        "b"
+      ]
+    },
+    {
+      "id": "single-choice-2",
+      "kind": "single_choice",
+      "title": "Effect of .gitignore on Tracked Files",
+      "prompt": "Does adding a file to `.gitignore` automatically remove it from the repository if it has already been committed?",
+      "hint": "Consider the difference between tracked and untracked files.",
+      "help": {
+        "concept": "`.gitignore` affects only untracked files.",
+        "hint_1": "Tracked files remain in the repository history.",
+        "hint_2": "`.gitignore` does not untrack files already committed."
+      },
+      "options": [
+        "Yes, it removes the file from the repository",
+        "No, it only prevents future tracking",
+        "Yes, it deletes the file from the working directory",
+        "No, it has no effect on already tracked files"
+      ],
+      "correctOptionIds": [
+        "d"
+      ]
+    },
+    {
+      "id": "fill-blank-choice-1",
+      "kind": "fill_blank_choice",
+      "title": "Ignoring Log Files",
+      "prompt": "Complete the `.gitignore` rule to ignore all log files: `[blank1]`",
+      "hint": "Use a wildcard to match all log files.",
+      "help": {
+        "concept": "Wildcards in `.gitignore` help match multiple files.",
+        "hint_1": "Use `*` to match any characters.",
+        "hint_2": "The rule should match any file ending with `.log`."
+      },
+      "template": "*.log",
+      "choices": [
+        "*.log",
+        "log.*",
+        "log",
+        "*.txt"
+      ],
+      "correctValue": "*.log"
+    },
+    {
+      "id": "fill-blank-choice-2",
+      "kind": "fill_blank_choice",
+      "title": "Ignoring Directories",
+      "prompt": "Complete the `.gitignore` rule to ignore the `build/` directory: `[blank1]`",
+      "hint": "Directories are ignored by specifying their path.",
+      "help": {
+        "concept": "Ignoring directories requires specifying the directory path in `.gitignore`.",
+        "hint_1": "Use a trailing slash to indicate a directory.",
+        "hint_2": "The rule should match the `build/` directory."
+      },
+      "template": "build/",
+      "choices": [
+        "build/",
+        "/build",
+        "build",
+        "build/*"
+      ],
+      "correctValue": "build/"
+    },
+    {
+      "id": "multi-choice-1",
+      "kind": "multi_choice",
+      "title": "Common Uses of .gitignore",
+      "prompt": "Which of the following are common uses for a `.gitignore` file? Select all that apply.",
+      "hint": "Think about files that should not be tracked in a repository.",
+      "help": {
+        "concept": "`.gitignore` is used to exclude unnecessary files from version control.",
+        "hint_1": "Consider files that are generated or temporary.",
+        "hint_2": "Focus on files that do not need to be part of the version history."
+      },
+      "options": [
+        "Ignoring build artifacts",
+        "Ignoring source code files",
+        "Ignoring temporary files",
+        "Ignoring configuration files"
+      ],
+      "correctOptionIds": [
+        "a",
+        "c",
+        "d"
+      ]
+    },
+    {
+      "id": "drag-reorder-1",
+      "kind": "drag_reorder",
+      "title": "Order of Operations for Ignoring a File",
+      "prompt": "Arrange the steps to ignore a file that has already been committed.",
+      "hint": "Consider the steps needed to stop tracking a file and ensure it's ignored.",
+      "help": {
+        "concept": "Stopping tracking involves removing the file from the index and ensuring it's ignored.",
+        "hint_1": "First, remove the file from the index.",
+        "hint_2": "Then, add it to `.gitignore` to prevent future tracking."
+      },
+      "tokens": [
+        "Remove the file from the index using `git rm --cached`",
+        "Add the file to `.gitignore`",
+        "Commit the changes to the repository"
+      ],
+      "correctOrder": [
+        "Remove the file from the index using `git rm --cached`",
+        "Add the file to `.gitignore`",
+        "Commit the changes to the repository"
+      ]
+    }
+  ]
+}

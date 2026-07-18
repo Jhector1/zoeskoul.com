@@ -1,0 +1,43 @@
+{
+  "profileId": "git",
+  "language": "bash",
+  "runtime": {
+    "kind": "shell",
+    "backend": "pty",
+    "terminalOnly": true,
+    "defaultSessionScope": "exercise"
+  },
+  "workspaceProfileId": "terminal-workspace-runner",
+  "workspacePolicyId": "git-terminal-workspace",
+  "checker": {
+    "defaultRecipe": "shell_task",
+    "defaultMode": "terminal_workspace",
+    "repositoryTaskExpectations": "gitExpectations",
+    "fileTaskExpectations": "workspaceExpectations",
+    "commandAndOutputExpectations": "terminalExpectations",
+    "optionalCustomCheck": "hiddenShellCheck",
+    "judge0Required": false
+  },
+  "authoringContract": {
+    "codeInputKind": "code_input",
+    "fixedLanguage": "bash",
+    "recipeType": "shell_task",
+    "mode": "terminal_workspace",
+    "defaultEntryFilePath": "main.sh",
+    "grading": {
+      "repositoryState": "gitExpectations",
+      "fileTree": "workspaceExpectations",
+      "specificCommandAndOutput": "terminalExpectations",
+      "optionalCustomCheck": "hiddenShellCheck"
+    },
+    "doNotUse": [
+      "a new git programming language",
+      "a git_task recipe",
+      "Judge0 Bash for terminal repository labs",
+      "exact commit hashes",
+      "machine-dependent timestamps",
+      "public network access",
+      "learner GitHub credentials"
+    ]
+  }
+}

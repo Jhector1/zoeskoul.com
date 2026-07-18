@@ -1,0 +1,485 @@
+{
+  "topicId": "stage-intentionally",
+  "subjectSlug": "git--git-foundations--draft",
+  "moduleSlug": "git-foundations-module-2-meaningful-history",
+  "sectionSlug": "git--git-foundations--draft-git-foundations-section-2-history-workflow",
+  "prefix": "git_foundations_module_2",
+  "minutes": 22,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "bash",
+    "supportsTerminal": true,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "runnerBackend": "pty",
+    "layoutMode": "terminal_workspace",
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": true
+    }
+  },
+  "topic": {
+    "labelKey": "topics.git--git-foundations--draft.git-foundations-module-2-meaningful-history.stage-intentionally.label",
+    "summaryKey": "topics.git--git-foundations--draft.git-foundations-module-2-meaningful-history.stage-intentionally.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.git--git-foundations--draft.git-foundations-module-2-meaningful-history.stage-intentionally.cards.sketch0.title",
+      "sketchId": "stage-intentionally-sketch0",
+      "height": 420,
+      "tryIt": {
+        "id": "try-stage-intentionally-sketch0",
+        "titleKey": "topics.git--git-foundations--draft.git-foundations-module-2-meaningful-history.stage-intentionally.tryIt.try_stage_intentionally_sketch0.title",
+        "promptKey": "topics.git--git-foundations--draft.git-foundations-module-2-meaningful-history.stage-intentionally.tryIt.try_stage_intentionally_sketch0.prompt",
+        "exerciseKey": "try-stage-intentionally-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.git--git-foundations--draft.git-foundations-module-2-meaningful-history.stage-intentionally.cards.sketch1.title",
+      "sketchId": "stage-intentionally-sketch1",
+      "height": 420,
+      "tryIt": {
+        "id": "try-stage-intentionally-sketch1",
+        "titleKey": "topics.git--git-foundations--draft.git-foundations-module-2-meaningful-history.stage-intentionally.tryIt.try_stage_intentionally_sketch1.title",
+        "promptKey": "topics.git--git-foundations--draft.git-foundations-module-2-meaningful-history.stage-intentionally.tryIt.try_stage_intentionally_sketch1.prompt",
+        "exerciseKey": "try-stage-intentionally-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.git--git-foundations--draft.git-foundations-module-2-meaningful-history.stage-intentionally.cards.sketch2.title",
+      "sketchId": "stage-intentionally-sketch2",
+      "height": 420,
+      "tryIt": {
+        "id": "try-stage-intentionally-sketch2",
+        "titleKey": "topics.git--git-foundations--draft.git-foundations-module-2-meaningful-history.stage-intentionally.tryIt.try_stage_intentionally_sketch2.title",
+        "promptKey": "topics.git--git-foundations--draft.git-foundations-module-2-meaningful-history.stage-intentionally.tryIt.try_stage_intentionally_sketch2.prompt",
+        "exerciseKey": "try-stage-intentionally-sketch2",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch3",
+      "kind": "sketch",
+      "titleKey": "topics.git--git-foundations--draft.git-foundations-module-2-meaningful-history.stage-intentionally.cards.sketch3.title",
+      "sketchId": "stage-intentionally-sketch3",
+      "height": 420,
+      "tryIt": {
+        "id": "try-stage-intentionally-sketch3",
+        "titleKey": "topics.git--git-foundations--draft.git-foundations-module-2-meaningful-history.stage-intentionally.tryIt.try_stage_intentionally_sketch3.title",
+        "promptKey": "topics.git--git-foundations--draft.git-foundations-module-2-meaningful-history.stage-intentionally.tryIt.try_stage_intentionally_sketch3.prompt",
+        "exerciseKey": "try-stage-intentionally-sketch3",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.git--git-foundations--draft.git-foundations-module-2-meaningful-history.stage-intentionally.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "stage-intentionally-sketch0",
+      "archetype": "paragraph",
+      "titleKey": "sketches.git--git-foundations--draft.git-foundations-module-2-meaningful-history.stage-intentionally.stage-intentionally-sketch0.title",
+      "bodyKey": "sketches.git--git-foundations--draft.git-foundations-module-2-meaningful-history.stage-intentionally.stage-intentionally-sketch0.bodyMarkdown"
+    },
+    {
+      "id": "stage-intentionally-sketch1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.git--git-foundations--draft.git-foundations-module-2-meaningful-history.stage-intentionally.stage-intentionally-sketch1.title",
+      "bodyKey": "sketches.git--git-foundations--draft.git-foundations-module-2-meaningful-history.stage-intentionally.stage-intentionally-sketch1.bodyMarkdown"
+    },
+    {
+      "id": "stage-intentionally-sketch2",
+      "archetype": "paragraph",
+      "titleKey": "sketches.git--git-foundations--draft.git-foundations-module-2-meaningful-history.stage-intentionally.stage-intentionally-sketch2.title",
+      "bodyKey": "sketches.git--git-foundations--draft.git-foundations-module-2-meaningful-history.stage-intentionally.stage-intentionally-sketch2.bodyMarkdown"
+    },
+    {
+      "id": "stage-intentionally-sketch3",
+      "archetype": "paragraph",
+      "titleKey": "sketches.git--git-foundations--draft.git-foundations-module-2-meaningful-history.stage-intentionally.stage-intentionally-sketch3.title",
+      "bodyKey": "sketches.git--git-foundations--draft.git-foundations-module-2-meaningful-history.stage-intentionally.stage-intentionally-sketch3.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "single-choice-1",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.git--git-foundations--draft.git-foundations-module-2-meaningful-history.stage-intentionally.practice.single-choice-1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "multi-choice-1",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.git--git-foundations--draft.git-foundations-module-2-meaningful-history.stage-intentionally.practice.multi-choice-1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "multi-choice-2",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.git--git-foundations--draft.git-foundations-module-2-meaningful-history.stage-intentionally.practice.multi-choice-2",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "drag-reorder-1",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.git--git-foundations--draft.git-foundations-module-2-meaningful-history.stage-intentionally.practice.drag-reorder-1",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
+      }
+    },
+    {
+      "id": "fill-blank-1",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.git--git-foundations--draft.git-foundations-module-2-meaningful-history.stage-intentionally.practice.fill-blank-1",
+      "choiceCount": 3,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "index.html"
+      }
+    },
+    {
+      "id": "fill-blank-2",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.git--git-foundations--draft.git-foundations-module-2-meaningful-history.stage-intentionally.practice.fill-blank-2",
+      "choiceCount": 3,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "index.html"
+      }
+    },
+    {
+      "id": "try-stage-intentionally-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.git--git-foundations--draft.git-foundations-module-2-meaningful-history.stage-intentionally.tryIt.try_stage_intentionally_sketch0",
+      "language": "bash",
+      "starterCode": "@:topics.git--git-foundations--draft.git-foundations-module-2-meaningful-history.stage-intentionally.tryIt.try_stage_intentionally_sketch0.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "@:topics.git--git-foundations--draft.git-foundations-module-2-meaningful-history.stage-intentionally.tryIt.try_stage_intentionally_sketch0.starterCode",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "git add index.html\ngit diff --staged",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^git\\s+add\\s+index\\.html$"
+          },
+          {
+            "pattern": "^git\\s+diff\\s+--staged$"
+          }
+        ]
+      },
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "main.sh",
+        "starterCode": "@:topics.git--git-foundations--draft.git-foundations-module-2-meaningful-history.stage-intentionally.tryIt.try_stage_intentionally_sketch0.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.sh",
+            "content": "@:topics.git--git-foundations--draft.git-foundations-module-2-meaningful-history.stage-intentionally.tryIt.try_stage_intentionally_sketch0.starterCode",
+            "language": "bash",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "@:topics.git--git-foundations--draft.git-foundations-module-2-meaningful-history.stage-intentionally.tryIt.try_stage_intentionally_sketch0.prompt"
+      }
+    },
+    {
+      "id": "try-stage-intentionally-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.git--git-foundations--draft.git-foundations-module-2-meaningful-history.stage-intentionally.tryIt.try_stage_intentionally_sketch1",
+      "language": "bash",
+      "starterCode": "@:topics.git--git-foundations--draft.git-foundations-module-2-meaningful-history.stage-intentionally.tryIt.try_stage_intentionally_sketch1.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "@:topics.git--git-foundations--draft.git-foundations-module-2-meaningful-history.stage-intentionally.tryIt.try_stage_intentionally_sketch1.starterCode",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "git diff --staged",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^git\\s+diff\\s+--staged$"
+          }
+        ]
+      },
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "main.sh",
+        "starterCode": "@:topics.git--git-foundations--draft.git-foundations-module-2-meaningful-history.stage-intentionally.tryIt.try_stage_intentionally_sketch1.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.sh",
+            "content": "@:topics.git--git-foundations--draft.git-foundations-module-2-meaningful-history.stage-intentionally.tryIt.try_stage_intentionally_sketch1.starterCode",
+            "language": "bash",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "@:topics.git--git-foundations--draft.git-foundations-module-2-meaningful-history.stage-intentionally.tryIt.try_stage_intentionally_sketch1.prompt"
+      }
+    },
+    {
+      "id": "try-stage-intentionally-sketch2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.git--git-foundations--draft.git-foundations-module-2-meaningful-history.stage-intentionally.tryIt.try_stage_intentionally_sketch2",
+      "language": "bash",
+      "starterCode": "@:topics.git--git-foundations--draft.git-foundations-module-2-meaningful-history.stage-intentionally.tryIt.try_stage_intentionally_sketch2.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "@:topics.git--git-foundations--draft.git-foundations-module-2-meaningful-history.stage-intentionally.tryIt.try_stage_intentionally_sketch2.starterCode",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "git restore --staged index.html",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^git\\s+restore\\s+--staged\\s+index\\.html$"
+          }
+        ]
+      },
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "main.sh",
+        "starterCode": "@:topics.git--git-foundations--draft.git-foundations-module-2-meaningful-history.stage-intentionally.tryIt.try_stage_intentionally_sketch2.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.sh",
+            "content": "@:topics.git--git-foundations--draft.git-foundations-module-2-meaningful-history.stage-intentionally.tryIt.try_stage_intentionally_sketch2.starterCode",
+            "language": "bash",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "@:topics.git--git-foundations--draft.git-foundations-module-2-meaningful-history.stage-intentionally.tryIt.try_stage_intentionally_sketch2.prompt"
+      }
+    },
+    {
+      "id": "try-stage-intentionally-sketch3",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.git--git-foundations--draft.git-foundations-module-2-meaningful-history.stage-intentionally.tryIt.try_stage_intentionally_sketch3",
+      "language": "bash",
+      "starterCode": "@:topics.git--git-foundations--draft.git-foundations-module-2-meaningful-history.stage-intentionally.tryIt.try_stage_intentionally_sketch3.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "@:topics.git--git-foundations--draft.git-foundations-module-2-meaningful-history.stage-intentionally.tryIt.try_stage_intentionally_sketch3.starterCode",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "git add README.md\ngit commit -m 'Update documentation'",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^git\\s+add\\s+README\\.md$"
+          },
+          {
+            "pattern": "^git\\s+commit\\s+-m\\s+'Update\\s+documentation'$"
+          }
+        ]
+      },
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "main.sh",
+        "starterCode": "@:topics.git--git-foundations--draft.git-foundations-module-2-meaningful-history.stage-intentionally.tryIt.try_stage_intentionally_sketch3.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.sh",
+            "content": "@:topics.git--git-foundations--draft.git-foundations-module-2-meaningful-history.stage-intentionally.tryIt.try_stage_intentionally_sketch3.starterCode",
+            "language": "bash",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "@:topics.git--git-foundations--draft.git-foundations-module-2-meaningful-history.stage-intentionally.tryIt.try_stage_intentionally_sketch3.prompt"
+      }
+    }
+  ]
+}

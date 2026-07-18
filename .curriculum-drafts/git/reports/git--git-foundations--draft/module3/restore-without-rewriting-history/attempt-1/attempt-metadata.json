@@ -1,0 +1,18 @@
+{
+  "profileId": "git",
+  "subjectSlug": "git--git-foundations--draft",
+  "courseSlug": "git-foundations",
+  "moduleSlug": "git-foundations-module-3-manage-tracked-files",
+  "sectionSlug": "git-foundations-section-3-safe-file-management",
+  "topicId": "restore-without-rewriting-history",
+  "provider": "openai",
+  "model": "gpt-4o",
+  "temperature": 0,
+  "modelSeed": 0,
+  "generatorVersion": "2026-05-23-topic-authoring-draft-generator-v1",
+  "schemaName": "TopicAuthoringDraft",
+  "schemaVersion": "2026-07-16-topic-authoring-draft-v2",
+  "strictSchema": true,
+  "retryAttempt": 1,
+  "maxRetries": 2
+}

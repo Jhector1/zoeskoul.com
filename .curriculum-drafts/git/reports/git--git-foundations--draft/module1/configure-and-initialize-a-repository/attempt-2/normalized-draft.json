@@ -1,0 +1,302 @@
+{
+  "title": "Configure and Initialize a Repository",
+  "summary": "Set a repository-local author identity and turn an existing project folder into a repository on main.",
+  "minutes": 22,
+  "sketchBlocks": [
+    {
+      "id": "configure-and-initialize-a-repository-sketch0",
+      "title": "Configuring User Identity in Git",
+      "bodyMarkdown": "To start using Git effectively, it's crucial to configure your user identity. This involves setting your name and email address, which will be associated with your commits. This configuration can be done globally or locally within a specific repository. \n\nWorked example:\n\n```bash\ngit config --local user.name \"ZoeSkoul Learner\"\ngit config --local user.email \"learner@zoeskoul.local\"\n```\n\nIn this example, we set the user name and email for the current repository. This ensures that all commits made in this repository will be attributed to this identity. It's important to configure this correctly to maintain a clear commit history."
+    },
+    {
+      "id": "configure-and-initialize-a-repository-sketch1",
+      "title": "Turning a Folder into a Git Repository",
+      "bodyMarkdown": "Initializing a Git repository is the first step in tracking your project's history. This process creates a `.git` directory in your project folder, which contains all the metadata and object database for your repository.\n\nWorked example:\n\n```bash\ngit init\n```\n\nThis command initializes a new Git repository in the current directory. After running this command, your project folder becomes a Git repository, and you can start tracking changes. The initial branch is set to `main`, which is a common convention."
+    },
+    {
+      "id": "configure-and-initialize-a-repository-sketch2",
+      "title": "Understanding the Git Status Command",
+      "bodyMarkdown": "Once your repository is initialized, it's important to understand the state of your working directory. The `git status` command provides a summary of changes in your working directory and staging area.\n\nWorked example:\n\n```bash\ngit status\n```\n\nThis command shows which files are staged for the next commit, which are modified but unstaged, and which are untracked. It's a crucial tool for understanding what changes are ready to be committed and what still needs attention."
+    },
+    {
+      "id": "configure-and-initialize-a-repository-sketch3",
+      "title": "The Role of the .git Directory",
+      "bodyMarkdown": "The `.git` directory is the heart of any Git repository. It contains all the metadata and object database for your project. Understanding its structure can help you appreciate how Git manages your project's history.\n\nWorked example:\n\n```bash\nls -a .git\n```\n\nThis command lists the contents of the `.git` directory, revealing various subdirectories and files that store information about branches, configurations, and the commit history. While you should not manually edit these files, knowing their purpose is beneficial for advanced Git usage."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "try-configure-and-initialize-a-repository-sketch0",
+      "kind": "code_input",
+      "title": "Set Local Git Identity",
+      "prompt": "Configure the local Git identity for the current repository with the name 'ZoeSkoul Learner' and email 'learner@zoeskoul.local'.",
+      "starterCode": "# Set the local Git identity",
+      "entryFilePath": "main.sh",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Set the local Git identity",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "git config --local user.name \"ZoeSkoul Learner\"\ngit config --local user.email \"learner@zoeskoul.local\"",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionCode": "git config --local user.name \"ZoeSkoul Learner\"\ngit config --local user.email \"learner@zoeskoul.local\"",
+      "recipeType": "sql_query",
+      "hint": "Use git config with --local to set user.name and user.email.",
+      "help": {
+        "concept": "Configuring a local Git identity ensures commits are attributed correctly.",
+        "hint_1": "Use git config --local to set the user name and email for the repository.",
+        "hint_2": "The command should specify user.name and user.email with the correct values."
+      }
+    },
+    {
+      "id": "try-configure-and-initialize-a-repository-sketch1",
+      "kind": "code_input",
+      "title": "Initialize a Git Repository",
+      "prompt": "Initialize a new Git repository in the current directory and ensure the initial branch is set to 'main'.",
+      "starterCode": "# Initialize a new Git repository",
+      "entryFilePath": "main.sh",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Initialize a new Git repository",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "git init",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionCode": "git init",
+      "recipeType": "sql_query",
+      "hint": "Use git init to start a new repository.",
+      "help": {
+        "concept": "Initializing a repository sets up the .git directory to track changes.",
+        "hint_1": "The git init command creates a new repository in the current directory.",
+        "hint_2": "Ensure the initial branch is set to 'main' after initialization."
+      }
+    },
+    {
+      "id": "try-configure-and-initialize-a-repository-sketch2",
+      "kind": "code_input",
+      "title": "Check Repository Status",
+      "prompt": "After initializing your repository, check the status to see the current state of your working directory.",
+      "starterCode": "# Check the status of the repository",
+      "entryFilePath": "main.sh",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Check the status of the repository",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "git status",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionCode": "git status",
+      "recipeType": "sql_query",
+      "hint": "Use git status to view the current state of the repository.",
+      "help": {
+        "concept": "The git status command shows the state of the working directory and staging area.",
+        "hint_1": "Run git status to see which files are staged, modified, or untracked.",
+        "hint_2": "This command helps you understand what changes are ready to be committed."
+      }
+    },
+    {
+      "id": "try-configure-and-initialize-a-repository-sketch3",
+      "kind": "code_input",
+      "title": "Explore the .git Directory",
+      "prompt": "List the contents of the .git directory to understand its structure and purpose.",
+      "starterCode": "# List the contents of the .git directory",
+      "entryFilePath": "main.sh",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# List the contents of the .git directory",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "ls -a .git",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionCode": "ls -a .git",
+      "recipeType": "sql_query",
+      "hint": "Use ls -a to list all files, including hidden ones.",
+      "help": {
+        "concept": "The .git directory contains all the metadata for the repository.",
+        "hint_1": "Use ls -a .git to see the contents of the .git directory.",
+        "hint_2": "This directory holds the configuration, branches, and commit history."
+      }
+    },
+    {
+      "id": "single-choice-1",
+      "kind": "single_choice",
+      "title": "Purpose of Version Control",
+      "prompt": "What is the primary purpose of version control systems like Git?",
+      "options": [
+        "To track changes and manage project history",
+        "To compile code into executables",
+        "To provide a user interface for coding",
+        "To host websites"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Think about how version control helps manage changes in projects.",
+      "help": {
+        "concept": "Version control systems track changes to files over time, allowing for collaboration and history tracking.",
+        "hint_1": "Version control helps manage changes and track history in projects.",
+        "hint_2": "It allows multiple people to work on a project simultaneously without losing track of changes."
+      }
+    },
+    {
+      "id": "single-choice-2",
+      "kind": "single_choice",
+      "title": "Git Repository Initialization",
+      "prompt": "What command is used to initialize a new Git repository?",
+      "options": [
+        "git start",
+        "git init",
+        "git create",
+        "git new"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Consider the command that sets up a new repository in the current directory.",
+      "help": {
+        "concept": "Initializing a repository sets up the necessary structure for Git to track changes.",
+        "hint_1": "The command creates a .git directory in the current folder.",
+        "hint_2": "It is the first step in starting to track a project with Git."
+      }
+    },
+    {
+      "id": "multi-choice-1",
+      "kind": "multi_choice",
+      "title": "Components of a Git Repository",
+      "prompt": "Which of the following are components of a Git repository? Select all that apply.",
+      "options": [
+        "Working tree",
+        "Staging area",
+        "Commit history",
+        "Remote server"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "hint": "Think about the elements that make up the structure of a Git repository.",
+      "help": {
+        "concept": "A Git repository consists of several components that manage and track changes.",
+        "hint_1": "Consider the parts that store metadata and track changes.",
+        "hint_2": "These components include areas for staging, history, and configuration."
+      }
+    },
+    {
+      "id": "drag-reorder-1",
+      "kind": "drag_reorder",
+      "title": "Order of Git Initialization Steps",
+      "prompt": "Arrange the steps to initialize a Git repository in the correct order.",
+      "tokens": [
+        "Create a project directory",
+        "Navigate to the project directory",
+        "Initialize the Git repository",
+        "Configure user identity"
+      ],
+      "correctOrder": [
+        "Create a project directory",
+        "Navigate to the project directory",
+        "Initialize the Git repository",
+        "Configure user identity"
+      ],
+      "hint": "Think about the sequence of actions needed to start tracking a project with Git.",
+      "help": {
+        "concept": "Initializing a repository involves setting up the environment and starting tracking.",
+        "hint_1": "Consider the initial setup and configuration steps.",
+        "hint_2": "The process begins with setting up the directory and configuring identity."
+      }
+    },
+    {
+      "id": "fill-blank-choice-1",
+      "kind": "fill_blank_choice",
+      "title": "Git Command for Status",
+      "prompt": "The command to check the current status of the repository is [blank1].",
+      "template": "The command to check the current status of the repository is [blank1].",
+      "choices": [
+        "git status",
+        "git check",
+        "git log",
+        "git diff"
+      ],
+      "correctValue": "git status",
+      "hint": "Think about the command that shows the state of the working directory and staging area.",
+      "help": {
+        "concept": "The the missing term command provides information about the current state of the repository.",
+        "hint_1": "This command shows which files are staged, modified, or untracked.",
+        "hint_2": "It helps you understand what changes are ready to be committed."
+      }
+    },
+    {
+      "id": "fill-blank-choice-2",
+      "kind": "fill_blank_choice",
+      "title": "Git Directory Listing",
+      "prompt": "To list all files, including hidden ones, in the .git directory, use [blank1].",
+      "template": "To list all files, including hidden ones, in the .git directory, use [blank1].",
+      "choices": [
+        "ls -a .git",
+        "ls .git",
+        "dir .git",
+        "list .git"
+      ],
+      "correctValue": "ls -a .git",
+      "hint": "Consider the command that lists all files in a directory, including hidden ones.",
+      "help": {
+        "concept": "Listing files in the .git directory helps understand its structure.",
+        "hint_1": "Use a command that reveals all files, even those starting with a dot.",
+        "hint_2": "This command is useful for exploring the contents of the .git directory."
+      }
+    }
+  ]
+}

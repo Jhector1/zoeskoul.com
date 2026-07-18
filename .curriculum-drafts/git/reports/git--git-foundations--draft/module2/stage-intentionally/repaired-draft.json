@@ -1,0 +1,433 @@
+{
+  "title": "Stage Intentionally",
+  "summary": "Use git add to prepare selected files and git diff --staged to verify the exact snapshot before committing.",
+  "minutes": 22,
+  "sketchBlocks": [
+    {
+      "id": "stage-intentionally-sketch0",
+      "title": "The Role of Staging in Git",
+      "bodyMarkdown": "Staging in Git is a crucial step in the version control process. It allows you to prepare specific changes for a commit, ensuring that only the desired modifications are included. This selective staging helps maintain a clean and understandable commit history.\n\nWorked example: Suppose you have modified two files, `index.html` and `style.css`. You only want to commit changes from `index.html`. By using `git add index.html`, you stage only this file, leaving `style.css` unstaged. This way, your commit will only include the changes from `index.html`, keeping your history focused and relevant."
+    },
+    {
+      "id": "stage-intentionally-sketch1",
+      "title": "Inspecting Staged Changes",
+      "bodyMarkdown": "Once you've staged your changes, it's important to verify them before committing. The `git diff --staged` command allows you to see the differences between the staged snapshot and the last commit.\n\nWorked example: After staging `index.html`, running `git diff --staged` will show you the exact changes that are ready to be committed. This ensures that you are aware of what will be included in your next commit, preventing accidental inclusion of unwanted changes."
+    },
+    {
+      "id": "stage-intentionally-sketch2",
+      "title": "Transitioning Files Between Staged and Unstaged",
+      "bodyMarkdown": "Sometimes, you may need to move files between staged and unstaged states without altering their content. This flexibility is crucial for managing your commit preparation effectively.\n\nWorked example: If you have staged `index.html` but decide to make further edits before committing, you can use `git restore --staged index.html` to unstage it. This command moves the file back to the unstaged state, allowing you to continue editing without committing prematurely."
+    },
+    {
+      "id": "stage-intentionally-sketch3",
+      "title": "Applying Staging in Real Projects",
+      "bodyMarkdown": "In real-world projects, staging helps manage complex changes by allowing you to focus on specific parts of your work. This practice leads to more meaningful and manageable commit histories.\n\nWorked example: Imagine working on a project where you need to update documentation and fix a bug simultaneously. By staging only the documentation changes first, you can commit them separately from the bug fix, resulting in a clear and organized history that reflects the distinct purposes of each change."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "single-choice-1",
+      "kind": "single_choice",
+      "title": "Staging Area Purpose",
+      "prompt": "What is the primary purpose of the staging area in Git?",
+      "options": [
+        "To prepare changes for a commit",
+        "To automatically commit changes",
+        "To discard changes",
+        "To merge branches"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Consider how the staging area affects commits.",
+      "help": {
+        "concept": "The staging area allows you to prepare specific changes for a commit.",
+        "hint_1": "The staging area helps manage what changes are included in a commit.",
+        "hint_2": "It acts as a buffer between the working directory and the commit."
+      }
+    },
+    {
+      "id": "multi-choice-1",
+      "kind": "multi_choice",
+      "title": "Purpose of Staging",
+      "prompt": "What is the purpose of staging in Git? Select all that apply.",
+      "options": [
+        "To prepare specific changes for a commit",
+        "To automatically commit all changes",
+        "To review changes before committing",
+        "To discard unwanted changes"
+      ],
+      "correctOptionIds": [
+        "a",
+        "c"
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "multi-choice-2",
+      "kind": "multi_choice",
+      "title": "Inspecting Staged Changes",
+      "prompt": "Which command allows you to inspect staged changes in Git?",
+      "options": [
+        "git diff",
+        "git diff --staged",
+        "git status",
+        "git log"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Think about the command that shows differences between staged changes and the last commit.",
+      "help": {
+        "concept": "Inspecting staged changes helps verify what will be committed.",
+        "hint_1": "The command shows differences between staged changes and the last commit.",
+        "hint_2": "It is similar to `git diff` but for staged changes."
+      }
+    },
+    {
+      "id": "drag-reorder-1",
+      "kind": "drag_reorder",
+      "title": "Staging Workflow Steps",
+      "prompt": "Arrange the steps in the correct order for staging and committing a file in Git.",
+      "tokens": [
+        "Stage the file",
+        "Verify staged changes",
+        "Commit the changes"
+      ],
+      "correctOrder": [
+        "Stage the file",
+        "Verify staged changes",
+        "Commit the changes"
+      ],
+      "hint": "Start with staging the file and end with committing it.",
+      "help": {
+        "concept": "Staging and committing involve specific steps in Git.",
+        "hint_1": "Begin with adding the file to the staging area.",
+        "hint_2": "End with committing the staged changes."
+      }
+    },
+    {
+      "id": "fill-blank-1",
+      "kind": "fill_blank_choice",
+      "title": "Command to Stage a File",
+      "prompt": "Fill in the blank to stage a file named `index.html`.",
+      "template": "git add [blank1]",
+      "choices": [
+        "index.html",
+        "README.md",
+        "style.css"
+      ],
+      "correctValue": "index.html",
+      "hint": "Use the `git add` command.",
+      "help": {
+        "concept": "Staging a file prepares it for commit.",
+        "hint_1": "The command starts with `git add`.",
+        "hint_2": "Specify the file name after `git add`."
+      }
+    },
+    {
+      "id": "fill-blank-2",
+      "kind": "fill_blank_choice",
+      "title": "Unstaging a File",
+      "prompt": "Fill in the blank to unstage a file named `index.html`.",
+      "template": "git restore --staged [blank1]",
+      "choices": [
+        "index.html",
+        "README.md",
+        "style.css"
+      ],
+      "correctValue": "index.html",
+      "hint": "Use the `git restore --staged` command.",
+      "help": {
+        "concept": "Unstaging a file moves it back to the working directory without losing changes.",
+        "hint_1": "The command starts with `git restore --staged`.",
+        "hint_2": "Specify the file name after `git restore --staged`."
+      }
+    },
+    {
+      "id": "try-stage-intentionally-sketch0",
+      "kind": "code_input",
+      "title": "Stage a Specific File",
+      "prompt": "Stage the file `index.html` without staging any other changes in the workspace. Verify the staged changes using `git diff --staged`.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+      "hint": "Read the Git task \"Stage a Specific File\" and identify the repository state you need to create.",
+      "help": {
+        "concept": "This Git exercise checks the repository state produced by \"Stage a Specific File\".",
+        "hint_1": "Use git status before and after each small change so you can see what moved between the working tree, staging area, and history.",
+        "hint_2": "Match the requested file names, branch names, and commit purpose before clicking Check Answer."
+      },
+      "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.",
+      "solutionCode": "bash .zoeskoul/setup.sh\ngit diff --staged",
+      "fixedLanguage": "bash",
+      "recipeType": "shell_task",
+      "mode": "terminal_workspace",
+      "entryFilePath": "main.sh",
+      "instructions": "Stage the file `index.html` without staging any other changes in the workspace. Verify the staged changes using `git diff --staged`.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 1\\n' > index.html\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "bash .zoeskoul/setup.sh\ngit diff --staged\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 1\\n' > index.html\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
+          },
+          {
+            "pattern": "^git\\s+diff\\s+--staged$"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "Do not rewrite shared history in this Git practice task."
+          }
+        ]
+      },
+      "gitExpectations": {
+        "repositoryInitialized": true,
+        "currentBranch": "main"
+      }
+    },
+    {
+      "id": "try-stage-intentionally-sketch1",
+      "kind": "code_input",
+      "title": "Inspect Staged Changes",
+      "prompt": "After staging `index.html`, inspect the staged changes to ensure only this file is prepared for commit.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+      "hint": "Read the Git task \"Inspect Staged Changes\" and identify the repository state you need to create.",
+      "help": {
+        "concept": "This Git exercise checks the repository state produced by \"Inspect Staged Changes\".",
+        "hint_1": "Use git status before and after each small change so you can see what moved between the working tree, staging area, and history.",
+        "hint_2": "Match the requested file names, branch names, and commit purpose before clicking Check Answer."
+      },
+      "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.",
+      "solutionCode": "bash .zoeskoul/setup.sh\ngit log --oneline",
+      "fixedLanguage": "bash",
+      "recipeType": "shell_task",
+      "mode": "terminal_workspace",
+      "entryFilePath": "main.sh",
+      "instructions": "After staging `index.html`, inspect the staged changes to ensure only this file is prepared for commit.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 2\\n' > index.html\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "bash .zoeskoul/setup.sh\ngit log --oneline\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 2\\n' > index.html\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
+          },
+          {
+            "pattern": "^git\\s+log\\s+--oneline$"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "Do not rewrite shared history in this Git practice task."
+          }
+        ]
+      },
+      "gitExpectations": {
+        "repositoryInitialized": true,
+        "currentBranch": "main"
+      }
+    },
+    {
+      "id": "try-stage-intentionally-sketch2",
+      "kind": "code_input",
+      "title": "Unstage a File",
+      "prompt": "Unstage the file `index.html` after it has been staged, without losing any changes.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+      "hint": "Read the Git task \"Unstage a File\" and identify the repository state you need to create.",
+      "help": {
+        "concept": "This Git exercise checks the repository state produced by \"Unstage a File\".",
+        "hint_1": "Use git status before and after each small change so you can see what moved between the working tree, staging area, and history.",
+        "hint_2": "Match the requested file names, branch names, and commit purpose before clicking Check Answer."
+      },
+      "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.",
+      "solutionCode": "bash .zoeskoul/setup.sh\ngit restore --staged index.html",
+      "fixedLanguage": "bash",
+      "recipeType": "shell_task",
+      "mode": "terminal_workspace",
+      "entryFilePath": "main.sh",
+      "instructions": "Unstage the file `index.html` after it has been staged, without losing any changes.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 3\\n' > index.html\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "bash .zoeskoul/setup.sh\ngit restore --staged index.html\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 3\\n' > index.html\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
+          },
+          {
+            "pattern": "^git\\s+restore\\s+--staged\\s+index\\.html$"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "Do not rewrite shared history in this Git practice task."
+          }
+        ]
+      },
+      "gitExpectations": {
+        "repositoryInitialized": true,
+        "currentBranch": "main"
+      }
+    },
+    {
+      "id": "try-stage-intentionally-sketch3",
+      "kind": "code_input",
+      "title": "Stage and Commit Documentation",
+      "prompt": "Stage only the changes in `README.md` and commit them with the message 'Update documentation'.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      },
+      "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.",
+      "solutionCode": "bash .zoeskoul/setup.sh\ngit add README.md",
+      "fixedLanguage": "bash",
+      "recipeType": "shell_task",
+      "mode": "terminal_workspace",
+      "entryFilePath": "main.sh",
+      "instructions": "Stage only the changes in `README.md` and commit them with the message 'Update documentation'.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 4\\n' > README.md\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "bash .zoeskoul/setup.sh\ngit add README.md\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 4\\n' > README.md\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
+          },
+          {
+            "pattern": "^git\\s+add\\s+README\\.md$"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "Do not rewrite shared history in this Git practice task."
+          }
+        ]
+      },
+      "gitExpectations": {
+        "repositoryInitialized": true,
+        "currentBranch": "main"
+      }
+    }
+  ]
+}

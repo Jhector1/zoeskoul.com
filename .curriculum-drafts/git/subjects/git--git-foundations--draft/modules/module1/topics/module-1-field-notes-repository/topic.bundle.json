@@ -1,0 +1,562 @@
+{
+  "topicId": "module-1-field-notes-repository",
+  "subjectSlug": "git--git-foundations--draft",
+  "moduleSlug": "git-foundations-module-1-start-tracking",
+  "sectionSlug": "git--git-foundations--draft-git-foundations-section-1-module-project",
+  "prefix": "git_foundations_module_1",
+  "minutes": 55,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "bash",
+    "supportsTerminal": true,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "runnerBackend": "pty",
+    "layoutMode": "terminal_workspace",
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": true
+    }
+  },
+  "topic": {
+    "labelKey": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.module-1-field-notes-repository.label",
+    "summaryKey": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.module-1-field-notes-repository.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.module-1-field-notes-repository.cards.sketch0.title",
+      "sketchId": "intro-to-git-repository",
+      "height": 420
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.module-1-field-notes-repository.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "try_git_repo_inspection",
+            "titleKey": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.module-1-field-notes-repository.projectSteps.try_git_repo_inspection.title",
+            "exerciseKey": "try-git-repo-inspection",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "try_git_config",
+            "titleKey": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.module-1-field-notes-repository.projectSteps.try_git_config.title",
+            "exerciseKey": "try-git-config",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "try_git_init",
+            "titleKey": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.module-1-field-notes-repository.projectSteps.try_git_init.title",
+            "exerciseKey": "try-git-init",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "try_git_stage_files",
+            "titleKey": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.module-1-field-notes-repository.projectSteps.try_git_stage_files.title",
+            "exerciseKey": "try-git-stage-files",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "try_git_commit",
+            "titleKey": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.module-1-field-notes-repository.projectSteps.try_git_commit.title",
+            "exerciseKey": "try-git-commit",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "intro-to-git-repository",
+      "archetype": "paragraph",
+      "titleKey": "sketches.git--git-foundations--draft.git-foundations-module-1-start-tracking.module-1-field-notes-repository.intro-to-git-repository.title",
+      "bodyKey": "sketches.git--git-foundations--draft.git-foundations-module-1-start-tracking.module-1-field-notes-repository.intro-to-git-repository.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "try-git-repo-inspection",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_repo_inspection",
+      "language": "bash",
+      "starterCode": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_repo_inspection.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_repo_inspection.starterCode",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_repo_inspection.starterFiles.zoeskoul_setup_sh.content",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "bash .zoeskoul/setup.sh\ngit status\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 1\\n' > README.md\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
+          },
+          {
+            "pattern": "^git\\s+status$"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_repo_inspection.terminalExpectations.forbiddenCommands.0.message"
+          }
+        ]
+      },
+      "hiddenShellCheck": {
+        "script": "set -eu\nrepo='.'\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ncommand -v git >/dev/null 2>&1 || fail \"Git is not available in this workspace.\"\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail 'Initialize a Git repository in ..'\nactual_branch=$(git -C \"$repo\" branch --show-current 2>/dev/null || true)\n[ \"$actual_branch\" = 'main' ] || fail 'Switch to the main branch.'",
+        "timeoutMs": 15000
+      },
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "main.sh",
+        "starterCode": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_repo_inspection.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.sh",
+            "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_repo_inspection.starterCode",
+            "language": "bash",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          },
+          {
+            "path": ".zoeskoul/setup.sh",
+            "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_repo_inspection.starterFiles.zoeskoul_setup_sh.content",
+            "language": "bash",
+            "readOnly": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_repo_inspection.instructions"
+      }
+    },
+    {
+      "id": "try-git-config",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_config",
+      "language": "bash",
+      "starterCode": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_config.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_config.starterCode",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_config.starterFiles.zoeskoul_setup_sh.content",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "bash .zoeskoul/setup.sh\ngit status\nbash .zoeskoul/setup.sh\ngit config --local\ngit config --local user.name \"ZoeSkoul Learner\"\ngit config --local user.email \"learner@zoeskoul.local\"\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 2\\n' > user.name\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
+          },
+          {
+            "pattern": "^git\\s+config\\s+--local$"
+          },
+          {
+            "pattern": "^git\\s+config\\s+--local\\s+user\\.name\\s+\"ZoeSkoul\\s+Learner\"$"
+          },
+          {
+            "pattern": "^git\\s+config\\s+--local\\s+user\\.email\\s+\"learner@zoeskoul\\.local\"$"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_config.terminalExpectations.forbiddenCommands.0.message"
+          }
+        ]
+      },
+      "hiddenShellCheck": {
+        "script": "set -eu\nrepo='.'\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ncommand -v git >/dev/null 2>&1 || fail \"Git is not available in this workspace.\"\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail 'Initialize a Git repository in ..'\nactual_branch=$(git -C \"$repo\" branch --show-current 2>/dev/null || true)\n[ \"$actual_branch\" = 'main' ] || fail 'Switch to the main branch.'",
+        "timeoutMs": 15000
+      },
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "main.sh",
+        "starterCode": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_config.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.sh",
+            "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_config.starterCode",
+            "language": "bash",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": ".zoeskoul/setup.sh",
+            "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_config.starterFiles.zoeskoul_setup_sh.content",
+            "language": "bash",
+            "readOnly": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_config.instructions"
+      }
+    },
+    {
+      "id": "try-git-init",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_init",
+      "language": "bash",
+      "starterCode": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_init.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_init.starterCode",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_init.starterFiles.zoeskoul_setup_sh.content",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "bash .zoeskoul/setup.sh\ngit status\nbash .zoeskoul/setup.sh\ngit config --local\ngit config --local user.name \"ZoeSkoul Learner\"\ngit config --local user.email \"learner@zoeskoul.local\"\nbash .zoeskoul/setup.sh\ngit init -b main\ngit status\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 3\\n' > practice-3.txt\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
+          },
+          {
+            "pattern": "^git\\s+init\\s+-b\\s+main$"
+          },
+          {
+            "pattern": "^git\\s+status$"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_init.terminalExpectations.forbiddenCommands.0.message"
+          }
+        ]
+      },
+      "hiddenShellCheck": {
+        "script": "set -eu\nrepo='.'\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ncommand -v git >/dev/null 2>&1 || fail \"Git is not available in this workspace.\"\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail 'Initialize a Git repository in ..'\nactual_branch=$(git -C \"$repo\" branch --show-current 2>/dev/null || true)\n[ \"$actual_branch\" = 'main' ] || fail 'Switch to the main branch.'",
+        "timeoutMs": 15000
+      },
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "main.sh",
+        "starterCode": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_init.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.sh",
+            "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_init.starterCode",
+            "language": "bash",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": ".zoeskoul/setup.sh",
+            "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_init.starterFiles.zoeskoul_setup_sh.content",
+            "language": "bash",
+            "readOnly": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_init.instructions"
+      }
+    },
+    {
+      "id": "try-git-stage-files",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_stage_files",
+      "language": "bash",
+      "starterCode": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_stage_files.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_stage_files.starterCode",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_stage_files.starterFiles.zoeskoul_setup_sh.content",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "bash .zoeskoul/setup.sh\ngit status\nbash .zoeskoul/setup.sh\ngit config --local\ngit config --local user.name \"ZoeSkoul Learner\"\ngit config --local user.email \"learner@zoeskoul.local\"\nbash .zoeskoul/setup.sh\ngit init -b main\ngit status\nbash .zoeskoul/setup.sh\ngit add\ngit add README.md\ngit add observations/\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 4\\n' > README.md\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
+          },
+          {
+            "pattern": "^git\\s+add$"
+          },
+          {
+            "pattern": "^git\\s+add\\s+README\\.md$"
+          },
+          {
+            "pattern": "^git\\s+add\\s+observations/$"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_stage_files.terminalExpectations.forbiddenCommands.0.message"
+          }
+        ]
+      },
+      "hiddenShellCheck": {
+        "script": "set -eu\nrepo='.'\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ncommand -v git >/dev/null 2>&1 || fail \"Git is not available in this workspace.\"\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail 'Initialize a Git repository in ..'\nactual_branch=$(git -C \"$repo\" branch --show-current 2>/dev/null || true)\n[ \"$actual_branch\" = 'main' ] || fail 'Switch to the main branch.'",
+        "timeoutMs": 15000
+      },
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "main.sh",
+        "starterCode": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_stage_files.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.sh",
+            "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_stage_files.starterCode",
+            "language": "bash",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": ".zoeskoul/setup.sh",
+            "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_stage_files.starterFiles.zoeskoul_setup_sh.content",
+            "language": "bash",
+            "readOnly": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_stage_files.instructions"
+      }
+    },
+    {
+      "id": "try-git-commit",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_commit",
+      "language": "bash",
+      "starterCode": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_commit.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_commit.starterCode",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_commit.starterFiles.zoeskoul_setup_sh.content",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "bash .zoeskoul/setup.sh\ngit status\nbash .zoeskoul/setup.sh\ngit config --local\ngit config --local user.name \"ZoeSkoul Learner\"\ngit config --local user.email \"learner@zoeskoul.local\"\nbash .zoeskoul/setup.sh\ngit init -b main\ngit status\nbash .zoeskoul/setup.sh\ngit add\ngit add README.md\ngit add observations/\nbash .zoeskoul/setup.sh\ngit commit\ngit log --oneline\ngit commit -m\ngit commit -m \"Start garden field notes\"\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 5\\n' > practice-5.txt\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
+          },
+          {
+            "pattern": "^git\\s+commit$"
+          },
+          {
+            "pattern": "^git\\s+log\\s+--oneline$"
+          },
+          {
+            "pattern": "^git\\s+commit\\s+-m$"
+          },
+          {
+            "pattern": "^git\\s+commit\\s+-m\\s+\"Start\\s+garden\\s+field\\s+notes\"$"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_commit.terminalExpectations.forbiddenCommands.0.message"
+          }
+        ]
+      },
+      "hiddenShellCheck": {
+        "script": "set -eu\nrepo='.'\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ncommand -v git >/dev/null 2>&1 || fail \"Git is not available in this workspace.\"\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail 'Initialize a Git repository in ..'\nactual_branch=$(git -C \"$repo\" branch --show-current 2>/dev/null || true)\n[ \"$actual_branch\" = 'main' ] || fail 'Switch to the main branch.'",
+        "timeoutMs": 15000
+      },
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "main.sh",
+        "starterCode": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_commit.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.sh",
+            "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_commit.starterCode",
+            "language": "bash",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": ".zoeskoul/setup.sh",
+            "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_commit.starterFiles.zoeskoul_setup_sh.content",
+            "language": "bash",
+            "readOnly": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_commit.instructions"
+      }
+    }
+  ]
+}

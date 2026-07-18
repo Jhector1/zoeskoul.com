@@ -19,6 +19,8 @@ export * from "./workspace.js";
 export * from "./exercise-policy.js";
 export * from "./ide-services.js";
 export * from "./workspace-path.js";
+export * from "./terminal-expectations.js";
+export * from "./git-expectations.js";
 export * from "./tool-presentation.js";
 
 export {

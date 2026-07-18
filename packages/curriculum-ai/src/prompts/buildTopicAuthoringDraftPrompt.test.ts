@@ -45,6 +45,121 @@ describe("buildTopicAuthoringDraftPrompt", () => {
         expect(prompt.system).toContain("Required exercise counts");
         expect(prompt.system).toContain("fill_blank_choice: 2");
     });
+    it("disambiguates quizDraft from the final learner quiz card when code_input is under target", () => {
+        const prompt = buildTopicAuthoringDraftPrompt({
+            locale: "en",
+            seed: {
+                profileId: "git",
+                plannedExerciseCounts: {
+                    total: 4,
+                    dominantKind: "code_input",
+                    counts: {
+                        single_choice: 0,
+                        multi_choice: 0,
+                        drag_reorder: 0,
+                        fill_blank_choice: 0,
+                        code_input: 4,
+                    },
+                },
+            } as any,
+            shape: {} as any,
+            retry: {
+                attempt: 1,
+                maxRetries: 2,
+                previousErrorCode: "CRITIQUE_VALIDATION_FAILED",
+                previousErrorMessage:
+                    'Exercise policy expects 4 "code_input" exercise(s), but the draft has 0.',
+                qualityIssues: [
+                    {
+                        code: "EXERCISE_POLICY_CODE_INPUT_UNDER_TARGET",
+                        message:
+                            'Exercise policy expects 4 "code_input" exercise(s), but the draft has 0.',
+                    },
+                ],
+            },
+        });
+
+        expect(prompt.system).toContain(
+            "quizDraft is the authoring source for ALL exercises, including code_input; it is not the final learner quiz card.",
+        );
+        expect(prompt.system).toContain(
+            "quizzesDoNotUseCodeInput or quizDefaults.allowCodeInput=false apply only to the final learner quiz card",
+        );
+        expect(prompt.system).toContain(
+            "Replace any try-* single_choice, multi_choice, drag_reorder, or fill_blank_choice substitute with a real code_input",
+        );
+    });
+
+    it("removes the ambiguous Git quiz policy key from the model-facing seed", () => {
+        const prompt = buildTopicAuthoringDraftPrompt({
+            locale: "en",
+            seed: {
+                profileId: "git",
+                authoringPolicy: {
+                    validationRequirements: {
+                        quizzesDoNotUseCodeInput: true,
+                        requireTryItForEverySketch: true,
+                    },
+                },
+            } as any,
+            shape: {} as any,
+        });
+
+        const payload = JSON.parse(prompt.user);
+        expect(
+            payload.seed.authoringPolicy.validationRequirements,
+        ).toMatchObject({
+            finalLearnerQuizExcludesCodeInput: true,
+            requireTryItForEverySketch: true,
+        });
+        expect(
+            payload.seed.authoringPolicy.validationRequirements,
+        ).not.toHaveProperty("quizzesDoNotUseCodeInput");
+        expect(prompt.system).toContain(
+            "quizDraft must include every Git code_input required by the exercise policy",
+        );
+    });
+
+    it("turns missing Git terminal-workspace evidence into explicit retry guidance", () => {
+        const message =
+            'Exercise "try-status-sketch0" failed shared golden recipe validation: shell_task terminal_workspace expected needs workspaceExpectations, terminalExpectations, or hiddenShellCheck.';
+        const prompt = buildTopicAuthoringDraftPrompt({
+            locale: "en",
+            seed: {
+                profileId: "git",
+                topicId: "status",
+            } as any,
+            shape: {} as any,
+            retry: {
+                attempt: 1,
+                maxRetries: 2,
+                previousErrorCode: "GOLDEN_VALIDATION_FAILED",
+                previousErrorMessage: message,
+                qualityIssues: [
+                    {
+                        code: "GOLDEN_RECIPE_BUILD_FAILED",
+                        exerciseId: "try-status-sketch0",
+                        message,
+                    },
+                ],
+            },
+        });
+
+        expect(prompt.system).toContain(
+            "ACTIVE REPAIR — missing Git grading evidence:",
+        );
+        expect(prompt.system).toContain(
+            "Every failing Git code_input must include at least one non-empty gitExpectations, workspaceExpectations, terminalExpectations, or hiddenShellCheck object.",
+        );
+        expect(prompt.system).toContain(
+            "terminalExpectations.requiredCommands",
+        );
+        expect(prompt.system).toContain("^git\\s+status$");
+        expect(prompt.system).toContain(
+            "starterCode, solutionCode, starterFiles, solutionFiles, or tests is invalid",
+        );
+    });
+
     it("does not include SQL-specific hint wording for Python authoring prompts", () => {
         const prompt = buildTopicAuthoringDraftPrompt({
             locale: "en",
@@ -74,10 +189,13 @@ describe("buildTopicAuthoringDraftPrompt", () => {
         expect(prompt.system).toContain("SQL dataset grounding rules:");
         expect(prompt.system).toContain('For SQL code_input, recipeType must be "sql_query".');
         expect(prompt.system).toContain(
-            "every later solutionCode must be one complete cumulative SQL statement",
+            "progressive single-file SQL projects and capstones",
         );
         expect(prompt.system).toContain(
-            "Never concatenate multiple SELECT statements",
+            "complete cumulative SQL script",
+        );
+        expect(prompt.system).toContain(
+            "Never concatenate historical alternative SELECT answers",
         );
     });
 
@@ -269,7 +387,12 @@ describe("buildTopicAuthoringDraftPrompt", () => {
             "try-foreign-keys-and-references-sketch0",
         );
         expect(prompt.system).toContain(
-            "Update the exercise prompt, solutionCode, checkSql, starterCode, starterFiles/query.sql, and solutionFiles/query.sql coherently",
+            "Update the exercise prompt, solutionCode, checkSql, starterCode",
+        );
+        expect(prompt.system).toContain("the active workspace file");
+        expect(prompt.system).toContain("query.sql verification");
+        expect(prompt.system).toContain(
+            "every relevant starterFiles/solutionFiles entry coherently",
         );
         expect(prompt.system).toContain(
             "normalized SELECT/FROM/JOIN/WHERE/GROUP BY expectation",
@@ -474,10 +597,16 @@ describe("buildTopicAuthoringDraftPrompt", () => {
             "aliases, or ORDER BY alone do not make a different exercise",
         );
         expect(prompt.system).toContain(
-            "self-audit every code_input solutionCode against every fenced worked example",
+            "self-audit every code_input solutionCode",
         );
         expect(prompt.system).toContain(
-            "keep prompt, solutionCode, checkSql, starterFiles/query.sql, and solutionFiles/query.sql aligned",
+            "every solutionFiles[].content value against every fenced worked example",
+        );
+        expect(prompt.system).toContain(
+            "When a SQL exercise uses workspace files",
+        );
+        expect(prompt.system).toContain(
+            "every relevant solutionFiles entry aligned with the distinct expectation",
         );
     });
 

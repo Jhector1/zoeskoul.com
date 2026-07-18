@@ -447,6 +447,7 @@ export async function validatePythonGolden(args: {
         profileId: "python",
         expectedLanguage: "python",
         allowedRecipeTypes: ["fixed_tests", "template_io", "semantic", "shell_task"],
+        draft: args.draft,
         topicBundle: {
             ...args.topicBundle,
             exercises: args.topicBundle.exercises.filter(

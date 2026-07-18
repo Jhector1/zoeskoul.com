@@ -47,6 +47,10 @@ export function resolveToolDefaults(args: {
         return sqlDefaults();
     }
 
+    if (resolvedLanguage === "bash") {
+        return bashDefaults();
+    }
+
     const profile = getCourseProfile({
         subjectSlug,
         language,
@@ -143,10 +147,27 @@ function pythonDefaults(): ToolDefaults {
     };
 }
 
+function bashDefaults(): ToolDefaults {
+    return {
+        defaultLang: "bash",
+        defaultCode: [
+            "#!/usr/bin/env bash",
+            "# Run the requested Git commands in the terminal.",
+        ].join("\n"),
+        defaultStdin: "",
+        defaultSqlDialect: DEFAULT_SQL_DIALECT,
+    };
+}
+
 function starterFor(lang: WorkspaceLanguage): string {
     switch (lang) {
         case "sql":
             return `SELECT 'Hello SQL' AS message;`;
+        case "bash":
+            return [
+                "#!/usr/bin/env bash",
+                "# Run the requested Git commands in the terminal.",
+            ].join("\n");
         case "java":
             return [
                 "public class Main {",

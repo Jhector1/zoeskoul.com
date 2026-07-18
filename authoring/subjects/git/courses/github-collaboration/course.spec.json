@@ -1,0 +1,1003 @@
+{
+  "authoringFormatVersion": "2.0",
+  "subjectSlug": "git",
+  "courseSlug": "github-collaboration",
+  "catalogSlug": "git",
+  "trackSlug": "git",
+  "profileId": "git",
+  "workspaceProfileId": "terminal-workspace-runner",
+  "workspacePolicyId": "git-terminal-workspace",
+  "courseNumber": 3,
+  "title": "GitHub Collaboration and Pull Requests",
+  "subtitle": "Share branches, review changes, and complete an issue-to-merge workflow safely.",
+  "description": "A collaboration course with three standard modules and one final capstone. Learners use real local Git operations and local bare remotes to practice publishing, synchronization, issue-linked branches, pull-request communication, review, revision, merge, and cleanup without exposing credentials or depending on public network access.",
+  "level": "intermediate",
+  "sourceLocale": "en",
+  "targetLocales": [],
+  "accessPolicy": "paid",
+  "moduleAccessOverrideDefault": null,
+  "moduleCount": 4,
+  "moduleRange": {
+    "start": 1,
+    "end": 4,
+    "label": "Modules 1-4"
+  },
+  "prerequisites": [
+    "Complete Git Branches, Merges, and Recovery.",
+    "Create and compare branches, merge work, resolve text conflicts, and recover safely.",
+    "Understand local commits, status, diff, history, and clean working-tree verification."
+  ],
+  "intendedFor": "Learners with reliable local branch, merge, conflict, and recovery skills who are ready to practice shared repository workflows.",
+  "learningGoals": [
+    "Distinguish Git’s local role from GitHub’s hosted collaboration role.",
+    "Connect or clone remotes, publish branches, fetch, compare, and pull intentionally.",
+    "Turn issue acceptance criteria into traceable branch and commit work.",
+    "Prepare pull-request summaries and actionable review feedback.",
+    "Revise, synchronize, resolve one remote conflict, merge, push, and clean up.",
+    "Complete three cumulative module projects and one integrated issue-to-merge capstone."
+  ],
+  "versioning": {
+    "family": "github-collaboration",
+    "version": 1,
+    "status": "draft",
+    "defaultForNewEnrollments": false,
+    "supersedes": null,
+    "supersededBy": null
+  },
+  "practiceDefaults": {
+    "tryIt": true,
+    "requiresTryIt": true,
+    "tryItPlacement": "all_sketches",
+    "runtimeMode": "terminal_workspace",
+    "terminalSessionScope": "exercise",
+    "expectedPracticeKinds": [
+      "single_choice",
+      "multi_choice",
+      "fill_blank_choice",
+      "code_input"
+    ]
+  },
+  "courseOverview": {
+    "recommendedSequence": "Complete the three standard modules in order, including each cumulative module project, before beginning the final capstone.",
+    "summary": "A collaboration course with three standard modules and one final capstone. Learners use real local Git operations and local bare remotes to practice publishing, synchronization, issue-linked branches, pull-request communication, review, revision, merge, and cleanup without exposing credentials or depending on public network access.",
+    "moduleSummary": [
+      {
+        "moduleNumber": 1,
+        "title": "Connect Local and Remote Repositories",
+        "coreSkill": "Understand remotes, clone or connect origin, publish branches, fetch remote-tracking updates, compare histories, and pull intentionally.",
+        "outputFocus": "Publish and synchronize a Volunteer Handbook through a local bare origin."
+      },
+      {
+        "moduleNumber": 2,
+        "title": "Organize Work with Issues",
+        "coreSkill": "Write useful issue context, create a focused issue branch, link implementation commits, publish the branch, and close the handoff loop with evidence.",
+        "outputFocus": "Move issue #14 from report to a published weekend-hours branch."
+      },
+      {
+        "moduleNumber": 3,
+        "title": "Pull Requests and Review",
+        "coreSkill": "Prepare a pull-request brief, review changed files, respond with a new commit, merge and publish accepted work, and understand when forks are needed.",
+        "outputFocus": "Review and merge a Community Guide contribution through a complete simulated pull-request cycle."
+      },
+      {
+        "moduleNumber": 4,
+        "title": "Final Capstone",
+        "coreSkill": "Integrate issue planning, branch publication, pull-request communication, review response, fetch, conflict resolution, merge, closure evidence, and branch cleanup.",
+        "outputFocus": "Complete the Community Guide Contribution through eight cumulative milestones."
+      }
+    ]
+  },
+  "releasePlan": {
+    "currentRelease": {
+      "name": "github-collaboration",
+      "startModuleNumber": 1,
+      "endModuleNumber": 4
+    },
+    "releases": [
+      {
+        "name": "github-collaboration",
+        "startModuleNumber": 1,
+        "endModuleNumber": 4
+      }
+    ]
+  },
+  "policy": {
+    "exercisePolicy": {
+      "defaultMix": {
+        "single_choice": 0.2,
+        "multi_choice": 0.1,
+        "drag_reorder": 0.05,
+        "fill_blank_choice": 0.15,
+        "code_input": 0.5
+      },
+      "minimums": {
+        "technicalTopicCodeInputMin": 1,
+        "topicExerciseMin": 4
+      },
+      "generationTargets": {
+        "quizBankMin": 4,
+        "quizBankTarget": 6,
+        "quizVisibleDefault": 4,
+        "quizVisibleMax": 6,
+        "projectCodeInputMin": 2,
+        "projectCodeInputTarget": 4,
+        "projectCodeInputMax": 8,
+        "maxAttempts": null
+      }
+    },
+    "projectPolicy": {
+      "minProjectsBeforeCapstone": 3,
+      "capstoneRequired": true
+    },
+    "qualityPolicy": {
+      "allowBlankTopicIds": false,
+      "allowDuplicateTopicIds": false,
+      "requireUniqueModuleSlugs": true,
+      "requireUniqueSectionSlugs": true,
+      "requireModuleProject": true,
+      "maxModuleProjectLength": 420
+    }
+  },
+  "authoringGuidance": [
+    "Use profileId git, fixedLanguage bash, recipeType shell_task, and mode terminal_workspace for every Git code_input.",
+    "Use the existing terminal-workspace runner; do not create a Git-specific IDE, runner, recipe type, or programming language.",
+    "Grade final repository state with gitExpectations. Use terminalExpectations only when the exact safe command is itself part of the learning goal.",
+    "Every terminal instruction must explicitly tell the learner to type the command and press Enter.",
+    "Configure the local repository identity as ZoeSkoul Learner and learner@zoeskoul.local before the first commit.",
+    "Set the initial branch to main whenever branch naming matters.",
+    "Never grade exact commit hashes, machine-dependent timestamps, absolute workspace paths, or decorative git log graph spacing.",
+    "Keep independent Try It workspaces isolated with terminalSessionScope exercise; use terminalSessionScope project only for authored progressive projects and capstones.",
+    "Use one synopsis sketch for each module project and capstone, followed by exactly the number of cumulative steps declared in projectBrief.stepCountTarget.",
+    "The complete solution from project step N becomes the complete starter workspace for step N+1.",
+    "Worked examples, Try It tasks, module projects, and final capstones must use different repository stories and different requested outcomes.",
+    "Write lessons like a short practical book chapter: begin with the project situation, define the Git idea, show the command shape, trace the repository-state change, warn about one common mistake, and transition naturally into practice.",
+    "Do not open lessons with internal curriculum language such as learning contract, milestone count, assessment checklist, or concepts you will demonstrate.",
+    "Prepend one standalone reading-only course introduction before the first technical sketch without replacing the first technical lesson.",
+    "The final module contains exactly one capstone section and one capstone topic.",
+    "Do not require public network access, GitHub credentials, personal access tokens, learner secrets, or an external repository.",
+    "Keep every graded remote workflow deterministic with local bare repositories.",
+    "State clearly when an issue, pull request, review, or fork is being explained conceptually versus simulated with local markdown records.",
+    "Do not ask learners to click unavailable GitHub UI controls in a terminal-only graded exercise.",
+    "Remote exercises must fetch and compare before integration when that decision is part of the lesson.",
+    "Use gitExpectations.remotes, requiredBranches, currentBranch, commitMessages, headFiles, and cleanWorkingTree as the primary repository grading contract."
+  ],
+  "courseGenerationPolicy": {
+    "studentActionStyle": "terminal-workspace",
+    "forbidUnavailableWorkspaceActions": true,
+    "preferredTerms": {
+      "editor": "terminal",
+      "run button": "type the command and press Enter",
+      "output panel": "terminal output",
+      "repository state": "the files, staging area, branches, commits, and remotes Git currently records"
+    },
+    "notes": [
+      "Use profileId git, fixedLanguage bash, recipeType shell_task, and mode terminal_workspace for every Git code_input.",
+      "Use the existing terminal-workspace runner; do not create a Git-specific IDE, runner, recipe type, or programming language.",
+      "Grade final repository state with gitExpectations. Use terminalExpectations only when the exact safe command is itself part of the learning goal.",
+      "Every terminal instruction must explicitly tell the learner to type the command and press Enter.",
+      "Configure the local repository identity as ZoeSkoul Learner and learner@zoeskoul.local before the first commit.",
+      "Set the initial branch to main whenever branch naming matters.",
+      "Never grade exact commit hashes, machine-dependent timestamps, absolute workspace paths, or decorative git log graph spacing.",
+      "Keep independent Try It workspaces isolated with terminalSessionScope exercise; use terminalSessionScope project only for authored progressive projects and capstones.",
+      "Use one synopsis sketch for each module project and capstone, followed by exactly the number of cumulative steps declared in projectBrief.stepCountTarget.",
+      "The complete solution from project step N becomes the complete starter workspace for step N+1.",
+      "Worked examples, Try It tasks, module projects, and final capstones must use different repository stories and different requested outcomes.",
+      "Write lessons like a short practical book chapter: begin with the project situation, define the Git idea, show the command shape, trace the repository-state change, warn about one common mistake, and transition naturally into practice.",
+      "Do not open lessons with internal curriculum language such as learning contract, milestone count, assessment checklist, or concepts you will demonstrate.",
+      "Prepend one standalone reading-only course introduction before the first technical sketch without replacing the first technical lesson.",
+      "The final module contains exactly one capstone section and one capstone topic.",
+      "Do not require public network access, GitHub credentials, personal access tokens, learner secrets, or an external repository.",
+      "Use local bare repositories as deterministic origins for every graded remote workflow.",
+      "Issue, pull-request, and review markdown records are explicit offline simulations; never describe them as real GitHub objects created by the platform.",
+      "Teach actual GitHub vocabulary and workflow decisions, but keep graded state local and credential-free.",
+      "Do not introduce GitHub Actions, protected branches, CODEOWNERS, releases, semantic versioning, advanced rebase, force push, or organization administration.",
+      "The final capstone must contain exactly eight progressive steps."
+    ]
+  },
+  "topicPolicies": {
+    "git-and-github-have-different-jobs": {
+      "notes": [
+        "Prepend one reading-only course-introduction sketch titled From local history to shared work with no Try It.",
+        "Preserve the first technical sketch after the introduction instead of replacing it.",
+        "The introduction must establish the learner role, project problem, prerequisites, safe workspace, course journey, and final deliverable in natural prose.",
+        "Do not duplicate the outer topic title as the inner sketch title.",
+        "After the introduction, add a separate technical teaching sketch with a title beginning Worked example: and a body that explicitly begins Worked example:.",
+        "In that worked example, trace a commit that exists only in one local repository, then a publication to the course local bare origin, then a teammate fetching that published branch. State clearly which part is Git and which part models GitHub collaboration.",
+        "Keep the example credential-free and offline; do not imply that ZoeSkoul creates a real GitHub repository or pull request.",
+        "practice.conceptualOnly removes code_input practice for this topic; it does not remove the concrete worked-example walkthrough."
+      ]
+    }
+  },
+  "assessmentAndDelivery": {
+    "suggestedBeginnerRhythm": "Complete two lesson topics and their Try It exercises per study session, then finish each module with its cumulative repository project.",
+    "recommendedCourseDeliverables": [
+      "Book-like concept sketches",
+      "Repository-state Try It exercises",
+      "Command-purpose learner quiz cards use non-code kinds; runtime Try It code_input remains in quizDraft authoring",
+      "Three cumulative module projects",
+      "One final capstone"
+    ],
+    "toolingSuggestions": [
+      "ZoeSkoul terminal",
+      "File explorer",
+      "Check Answer repository validation"
+    ],
+    "closingNote": "Learners finish able to carry a change from a clear issue through branch publication, review, revision, merge, and cleanup."
+  },
+  "modules": [
+    {
+      "moduleNumber": 1,
+      "moduleSlug": "github-collaboration-module-1-remotes",
+      "prefix": "github_collaboration_module_1",
+      "title": "Connect Local and Remote Repositories",
+      "description": "Move from a private local history to a shared origin without hiding fetch, comparison, or integration decisions.",
+      "purpose": "Understand remotes, clone or connect origin, publish branches, fetch remote-tracking updates, compare histories, and pull intentionally.",
+      "learningObjectives": [
+        "Distinguish local branches from remote-tracking branches.",
+        "Clone a repository or add and inspect origin.",
+        "Push a branch and establish upstream tracking.",
+        "Fetch, compare, and integrate a remote update with a fast-forward-only pull."
+      ],
+      "guidedExercises": [
+        "Publish main to a local bare origin.",
+        "Receive a deterministic collaborator commit.",
+        "Fetch and inspect before pulling."
+      ],
+      "quizFocus": [
+        "local versus remote state",
+        "origin and upstream",
+        "fetch versus pull",
+        "remote-tracking comparison"
+      ],
+      "moduleProject": "Publish and synchronize a Volunteer Handbook through a local bare origin.",
+      "sections": [
+        {
+          "sectionSlug": "github-collaboration-section-1-remotes",
+          "title": "From Local History to Shared Work",
+          "summary": "Begin with a project no one else can see, then follow its first safe publication and synchronization cycle.",
+          "topics": [
+            {
+              "topicId": "git-and-github-have-different-jobs",
+              "title": "Git and GitHub Have Different Jobs",
+              "summary": "Open with a team that cannot see one developer’s local history, then distinguish Git’s local repository model from GitHub’s hosted collaboration layer and explain the offline simulation used in this course.",
+              "minutes": 18,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Distinguish Git from GitHub without treating the names as interchangeable.",
+                "Explain what a remote adds to a local repository.",
+                "Describe why the graded labs use local bare origins instead of learner credentials."
+              ],
+              "practice": {
+                "conceptualOnly": true,
+                "requiresTryIt": true,
+                "tryIt": true,
+                "tryItPlacement": "none",
+                "runtimeMode": "terminal_workspace",
+                "terminalSessionScope": "exercise",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "fill_blank_choice"
+                ]
+              }
+            },
+            {
+              "topicId": "clone-and-inspect-origin",
+              "title": "Clone and Inspect origin",
+              "summary": "Create a local working copy from a shared repository and inspect the origin configuration Git records.",
+              "minutes": 26,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Clone from the provided local bare repository.",
+                "Inspect origin with git remote -v and git remote get-url.",
+                "Relate the local main branch to origin/main."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "terminal_workspace",
+                "terminalSessionScope": "exercise",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "push-and-set-upstream",
+              "title": "Push and Set Upstream Tracking",
+              "summary": "Publish a branch and connect its default push and pull destination without memorizing repeated remote arguments.",
+              "minutes": 26,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Push main or a feature branch to origin.",
+                "Set upstream tracking with git push -u.",
+                "Verify the branch and remote-tracking relationship."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "terminal_workspace",
+                "terminalSessionScope": "exercise",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "fetch-compare-and-pull-intentionally",
+              "title": "Fetch, Compare, and Pull Intentionally",
+              "summary": "Update remote-tracking references first, inspect incoming work, and integrate only after the difference is understood.",
+              "minutes": 30,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Use git fetch without changing local HEAD.",
+                "Compare local and remote-tracking histories.",
+                "Use git pull --ff-only for the authored safe synchronization case."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "terminal_workspace",
+                "terminalSessionScope": "exercise",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "sectionSlug": "github-collaboration-section-1-module-project",
+          "role": "module_project",
+          "title": "Module Project",
+          "summary": "Publish and synchronize a Volunteer Handbook through a local bare origin.",
+          "topics": [
+            {
+              "topicId": "module-1-publish-volunteer-handbook",
+              "title": "Project: Publish the Volunteer Handbook",
+              "summary": "Connect a local handbook to a simulated origin, publish main, receive a collaborator update, and synchronize intentionally.",
+              "minutes": 85,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Inspect and configure a remote named origin.",
+                "Push a branch with upstream tracking.",
+                "Fetch, compare, and fast-forward pull a collaborator change."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "terminal_workspace",
+                "terminalSessionScope": "project",
+                "projectFlow": "progressive",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ]
+              },
+              "projectBrief": {
+                "scenario": "A volunteer handbook exists only on one coordinator’s laptop. A local bare repository represents the team’s shared GitHub origin so the handbook can be published and synchronized without using credentials or public network access.",
+                "role": "Repository coordinator publishing the first shared handbook",
+                "workspace": "One cumulative terminal workspace with handbook-local/, a provided local bare remote at remotes/volunteer-handbook.git, and a deterministic collaborator fixture",
+                "deliverable": "A six-step remote workflow ending with origin configured, main published and tracking origin/main, the collaborator update fetched and integrated with a fast-forward-only pull, required content present, and a clean synchronized state.",
+                "stepCountTarget": 6,
+                "flow": "progressive",
+                "requirements": [
+                  "Use only the provided local bare repository as origin.",
+                  "Do not require GitHub credentials, tokens, browser actions, or external network access.",
+                  "Fetch and inspect remote-tracking state before integrating the collaborator update.",
+                  "Use git pull --ff-only for the authored synchronization step.",
+                  "Grade origin URL, required remote branches, local HEAD content, current branch, and clean state with gitExpectations."
+                ],
+                "stepLadder": [
+                  {
+                    "step": 1,
+                    "title": "Inspect the Local and Shared Starting Points",
+                    "requirement": "Inspect handbook-local/, its current history, and the provided bare remote path before configuring origin."
+                  },
+                  {
+                    "step": 2,
+                    "title": "Connect origin",
+                    "requirement": "Add the provided local bare repository as origin and verify the configured fetch and push URLs."
+                  },
+                  {
+                    "step": 3,
+                    "title": "Publish main with Upstream Tracking",
+                    "requirement": "Push main with -u so the local branch tracks origin/main, then verify the remote branch exists."
+                  },
+                  {
+                    "step": 4,
+                    "title": "Receive the Collaborator Update",
+                    "requirement": "Run the provided deterministic collaborator fixture so origin/main gains the authored safety contact update."
+                  },
+                  {
+                    "step": 5,
+                    "title": "Fetch and Compare before Integrating",
+                    "requirement": "Fetch origin, compare local main with origin/main, and inspect the incoming commit and file change without changing local HEAD."
+                  },
+                  {
+                    "step": 6,
+                    "title": "Pull Safely and Verify Synchronization",
+                    "requirement": "Use git pull --ff-only, verify the safety contact content, confirm local main matches origin/main, and finish clean."
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleNumber": 2,
+      "moduleSlug": "github-collaboration-module-2-issues-and-planning",
+      "prefix": "github_collaboration_module_2",
+      "title": "Organize Work with Issues",
+      "description": "Turn a reported problem into clear acceptance criteria, a traceable branch, linked commits, and review evidence.",
+      "purpose": "Write useful issue context, create a focused issue branch, link implementation commits, publish the branch, and close the handoff loop with evidence.",
+      "learningObjectives": [
+        "Write an issue that explains the problem and observable acceptance criteria.",
+        "Create a branch whose name traces back to the issue.",
+        "Use commit and handoff text that connects the change to the reported problem.",
+        "Publish the branch and record verification evidence."
+      ],
+      "guidedExercises": [
+        "Improve an incomplete issue brief.",
+        "Build and publish an issue-linked branch.",
+        "Document what changed and how it was verified."
+      ],
+      "quizFocus": [
+        "issue quality",
+        "acceptance criteria",
+        "traceable branch and commit",
+        "handoff evidence"
+      ],
+      "moduleProject": "Move issue #14 from report to a published weekend-hours branch.",
+      "sections": [
+        {
+          "sectionSlug": "github-collaboration-section-2-issues",
+          "title": "A Good Change Starts with a Clear Problem",
+          "summary": "Treat the issue as a shared understanding of the work, then make every branch and commit trace back to that purpose.",
+          "topics": [
+            {
+              "topicId": "write-a-useful-issue-brief",
+              "title": "Write a Useful Issue Brief",
+              "summary": "Describe the problem, affected area, acceptance criteria, and verification evidence so another contributor can act without guessing.",
+              "minutes": 24,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Separate the problem from a proposed solution.",
+                "Write observable acceptance criteria.",
+                "Record enough context for a reviewer to verify the change."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "terminal_workspace",
+                "terminalSessionScope": "exercise",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "create-an-issue-linked-branch",
+              "title": "Create an Issue-Linked Branch",
+              "summary": "Start focused work from synchronized main and use a branch name that reveals the issue and purpose.",
+              "minutes": 24,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Update remote-tracking state before branching.",
+                "Create the authored issue branch from the correct base.",
+                "Verify the branch has not inherited unrelated local work."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "terminal_workspace",
+                "terminalSessionScope": "exercise",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "link-commits-to-the-request",
+              "title": "Link Commits to the Request",
+              "summary": "Write a focused implementation commit whose message and changed files match the issue acceptance criteria.",
+              "minutes": 26,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Keep the commit scope aligned with one issue.",
+                "Use the authored issue reference in the commit message.",
+                "Verify the committed diff satisfies the acceptance criteria."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "terminal_workspace",
+                "terminalSessionScope": "exercise",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "publish-and-close-with-evidence",
+              "title": "Publish and Close with Evidence",
+              "summary": "Push the issue branch and prepare a handoff that tells reviewers what changed and how it was checked.",
+              "minutes": 26,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Publish an issue branch with upstream tracking.",
+                "Record summary and testing evidence in the simulated collaboration record.",
+                "Distinguish a review-ready handoff from a completed merge."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "terminal_workspace",
+                "terminalSessionScope": "exercise",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "sectionSlug": "github-collaboration-section-2-module-project",
+          "role": "module_project",
+          "title": "Module Project",
+          "summary": "Move issue #14 from report to a published weekend-hours branch.",
+          "topics": [
+            {
+              "topicId": "module-2-issue-to-published-branch",
+              "title": "Project: Move from Issue to Published Branch",
+              "summary": "Turn a structured issue brief into a focused branch, linked commit, remote publication, and evidence-based handoff.",
+              "minutes": 95,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Write a useful issue brief with acceptance criteria.",
+                "Name and publish a branch that traces back to the issue.",
+                "Connect the commit and handoff evidence to the requested work."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "terminal_workspace",
+                "terminalSessionScope": "project",
+                "projectFlow": "progressive",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ]
+              },
+              "projectBrief": {
+                "scenario": "The community guide team reports that the emergency contacts page is missing weekend hours. The repository uses local markdown records to simulate the issue and handoff details that would normally live in GitHub.",
+                "role": "Contributor turning a reported documentation problem into review-ready work",
+                "workspace": "One cumulative terminal workspace with community-guide/, origin at a local bare repository, issues/issue-14.md, and handoffs/ for review evidence",
+                "deliverable": "A six-step issue workflow ending with a complete issue brief, branch issue-14-weekend-hours, one linked implementation commit, the branch published to origin, updated handoff evidence, and a clean working tree.",
+                "stepCountTarget": 6,
+                "flow": "progressive",
+                "requirements": [
+                  "Treat issues/issue-14.md and handoffs/ as a deterministic simulation of GitHub issue and pull-request metadata.",
+                  "Keep repository work real: branch, commit, push, remote branch, and file content must be validated in Git.",
+                  "Use the exact branch issue-14-weekend-hours and commit message Fix #14 weekend contact hours.",
+                  "Do not claim that editing the local issue file creates a real GitHub issue.",
+                  "Grade issue artifact content with workspace or HEAD checks and repository state with gitExpectations."
+                ],
+                "stepLadder": [
+                  {
+                    "step": 1,
+                    "title": "Complete the Issue Brief",
+                    "requirement": "Fill issues/issue-14.md with the problem, affected page, acceptance criteria, and verification notes."
+                  },
+                  {
+                    "step": 2,
+                    "title": "Create the Issue Branch",
+                    "requirement": "Create and switch to issue-14-weekend-hours from synchronized main."
+                  },
+                  {
+                    "step": 3,
+                    "title": "Implement the Weekend Hours Fix",
+                    "requirement": "Update pages/emergency-contacts.md to satisfy every authored acceptance criterion and inspect the diff."
+                  },
+                  {
+                    "step": 4,
+                    "title": "Commit with the Issue Reference",
+                    "requirement": "Stage the focused change and commit Fix #14 weekend contact hours."
+                  },
+                  {
+                    "step": 5,
+                    "title": "Publish the Issue Branch",
+                    "requirement": "Push issue-14-weekend-hours to origin with upstream tracking and verify the remote branch."
+                  },
+                  {
+                    "step": 6,
+                    "title": "Record the Review Handoff",
+                    "requirement": "Complete handoffs/issue-14.md with summary, testing evidence, and branch name, commit the handoff, push again, and finish clean."
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleNumber": 3,
+      "moduleSlug": "github-collaboration-module-3-pull-requests-and-review",
+      "prefix": "github_collaboration_module_3",
+      "title": "Pull Requests and Review",
+      "description": "Propose a change, inspect its diff, leave actionable feedback, revise the branch, merge accepted work, and clean up.",
+      "purpose": "Prepare a pull-request brief, review changed files, respond with a new commit, merge and publish accepted work, and understand when forks are needed.",
+      "learningObjectives": [
+        "Write a concise pull-request summary and testing section.",
+        "Inspect the complete branch diff and commit list before review.",
+        "Leave specific actionable feedback and respond with a separate revision commit.",
+        "Merge, publish, and clean up accepted branches; explain the purpose of forks when write access is unavailable."
+      ],
+      "guidedExercises": [
+        "Review a deterministic contribution branch.",
+        "Revise the work in response to one clear request.",
+        "Merge to main and remove the completed branch locally and remotely."
+      ],
+      "quizFocus": [
+        "pull-request scope",
+        "diff review",
+        "actionable feedback",
+        "revision and branch cleanup"
+      ],
+      "moduleProject": "Review and merge a Community Guide contribution through a complete simulated pull-request cycle.",
+      "sections": [
+        {
+          "sectionSlug": "github-collaboration-section-3-pull-requests",
+          "title": "A Change Becomes a Conversation",
+          "summary": "Follow one proposed change from explanation through review, revision, acceptance, and cleanup.",
+          "topics": [
+            {
+              "topicId": "prepare-a-clear-pull-request",
+              "title": "Prepare a Clear Pull Request",
+              "summary": "Explain the problem, solution, changed files, and testing evidence before asking someone to review the branch.",
+              "minutes": 24,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Write a concise title and summary tied to the issue.",
+                "List the important changed files without copying the entire diff.",
+                "Describe concrete verification performed."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "terminal_workspace",
+                "terminalSessionScope": "exercise",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "review-changed-files-and-commits",
+              "title": "Review Changed Files and Commits",
+              "summary": "Inspect the full branch diff and commit list against origin/main before judging the proposal.",
+              "minutes": 28,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Use the three-dot diff to review the proposed branch change.",
+                "Inspect commit order and scope.",
+                "Separate required corrections from optional suggestions."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "terminal_workspace",
+                "terminalSessionScope": "exercise",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "respond-to-review-with-a-new-commit",
+              "title": "Respond to Review with a New Commit",
+              "summary": "Make the requested correction, verify it, and add a separate commit that keeps the review trail visible.",
+              "minutes": 28,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Translate review feedback into a specific file change.",
+                "Create a new revision commit instead of rewriting the reviewed commit.",
+                "Update the pull-request response with evidence."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "terminal_workspace",
+                "terminalSessionScope": "exercise",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "merge-clean-up-and-understand-forks",
+              "title": "Merge, Clean Up, and Understand Forks",
+              "summary": "Merge accepted work, publish main, remove completed branches, and distinguish the fork workflow used when a contributor cannot push to the original repository.",
+              "minutes": 28,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Merge the accepted branch from synchronized main.",
+                "Delete local and remote feature branch names after verification.",
+                "Explain when a fork replaces direct branch publication without requiring a real GitHub account in the lab."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "terminal_workspace",
+                "terminalSessionScope": "exercise",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "sectionSlug": "github-collaboration-section-3-module-project",
+          "role": "module_project",
+          "title": "Module Project",
+          "summary": "Review and merge a Community Guide contribution through a complete simulated pull-request cycle.",
+          "topics": [
+            {
+              "topicId": "module-3-review-community-contribution",
+              "title": "Project: Review a Community Contribution",
+              "summary": "Inspect a proposed change, write actionable review feedback, revise the branch, merge accepted work, and clean up the remote branch.",
+              "minutes": 110,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Use a pull-request brief to explain scope and testing.",
+                "Review changed files and leave specific actionable feedback.",
+                "Revise, merge, push, and clean up the accepted branch."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "terminal_workspace",
+                "terminalSessionScope": "project",
+                "projectFlow": "progressive",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ]
+              },
+              "projectBrief": {
+                "scenario": "A contributor proposes a new food-assistance section for the community guide. The code change is useful, but the first draft omits the eligibility note required by the issue. Local markdown records simulate the GitHub pull request and review conversation while Git validates the real branch workflow.",
+                "role": "Contributor and reviewer completing one pull-request cycle",
+                "workspace": "One cumulative terminal workspace with community-guide/, local bare origin, pull-requests/pr-22.md, reviews/pr-22-review.md, main, and contribution/food-assistance",
+                "deliverable": "A seven-step review cycle ending with a complete PR brief, actionable review, corrected contribution commit, merged and pushed main, deleted local and remote feature branches, required final content, and a clean repository.",
+                "stepCountTarget": 7,
+                "flow": "progressive",
+                "requirements": [
+                  "Treat pull-requests/ and reviews/ markdown files as an explicit offline simulation, not as real GitHub API objects.",
+                  "Use git diff origin/main...contribution/food-assistance to inspect the proposed change.",
+                  "Review feedback must name the missing eligibility note and the exact file to revise.",
+                  "Preserve the contributor commit and add a separate review-response commit.",
+                  "Delete the feature branch only after main contains the accepted work and origin/main is updated."
+                ],
+                "stepLadder": [
+                  {
+                    "step": 1,
+                    "title": "Write the Pull-Request Brief",
+                    "requirement": "Complete pull-requests/pr-22.md with problem, solution, changed files, and testing evidence for contribution/food-assistance."
+                  },
+                  {
+                    "step": 2,
+                    "title": "Inspect the Proposed Change",
+                    "requirement": "Fetch origin and inspect the branch diff and commit list against origin/main without merging it."
+                  },
+                  {
+                    "step": 3,
+                    "title": "Leave Actionable Review Feedback",
+                    "requirement": "Complete reviews/pr-22-review.md with the missing eligibility requirement, file path, and a clear requested change."
+                  },
+                  {
+                    "step": 4,
+                    "title": "Revise the Contribution",
+                    "requirement": "Switch to contribution/food-assistance, add the required eligibility note, and commit Address PR #22 eligibility review."
+                  },
+                  {
+                    "step": 5,
+                    "title": "Update the Pull-Request Response",
+                    "requirement": "Record the revision and verification in pull-requests/pr-22.md, commit Update PR #22 review response, and push the branch."
+                  },
+                  {
+                    "step": 6,
+                    "title": "Merge and Publish the Accepted Work",
+                    "requirement": "Switch to main, merge contribution/food-assistance with the authored merge message, and push main to origin."
+                  },
+                  {
+                    "step": 7,
+                    "title": "Clean Up and Verify",
+                    "requirement": "Delete the local and remote feature branches, verify required final content and review records, and finish clean on synchronized main."
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleNumber": 4,
+      "moduleSlug": "github-collaboration-module-4-final-capstone",
+      "role": "capstone",
+      "prefix": "github_collaboration_module_4",
+      "title": "Final Capstone",
+      "description": "Complete an issue-to-merge contribution while incorporating review and a collaborator update.",
+      "purpose": "Integrate issue planning, branch publication, pull-request communication, review response, fetch, conflict resolution, merge, closure evidence, and branch cleanup.",
+      "learningObjectives": [
+        "Translate issue acceptance criteria into focused repository work.",
+        "Publish the branch and prepare a useful review handoff.",
+        "Respond to review without rewriting the trail.",
+        "Synchronize with remote work, resolve one conflict, merge, close, and clean up."
+      ],
+      "guidedExercises": [
+        "Inspect the shared repository and collaboration records.",
+        "Complete the contribution in eight exact cumulative steps.",
+        "Validate local and remote branches, commit messages, collaboration records, final content, conflict cleanup, and synchronized clean state."
+      ],
+      "quizFocus": [],
+      "moduleProject": "Complete the Community Guide Contribution through eight cumulative milestones.",
+      "sections": [
+        {
+          "sectionSlug": "github-collaboration-section-4-final-capstone",
+          "role": "capstone",
+          "title": "Final Capstone",
+          "summary": "Complete an issue-to-merge contribution while incorporating review and a collaborator update.",
+          "topics": [
+            {
+              "topicId": "final-community-guide-contribution",
+              "title": "Final Capstone: Community Guide Contribution",
+              "summary": "Complete one issue-to-merge collaboration cycle with a local origin, review evidence, a collaborator conflict, and a clean final handoff.",
+              "minutes": 150,
+              "difficulty": "intermediate",
+              "technical": true,
+              "learningGoals": [
+                "Translate an issue into a focused branch and meaningful commits.",
+                "Publish work and prepare a clear pull-request brief.",
+                "Respond to review and synchronize with a collaborator update.",
+                "Resolve the conflict, merge accepted work, close the issue record, and clean up branches."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "terminal_workspace",
+                "terminalSessionScope": "project",
+                "projectFlow": "progressive",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ]
+              },
+              "projectBrief": {
+                "scenario": "The neighborhood resource team asks for a cooling-center page before a summer heat advisory. A second contributor updates the shared safety wording while the feature is under review, so the final contribution must incorporate feedback and resolve one controlled conflict before it can merge.",
+                "role": "Open-source-style contributor completing a review-ready community guide change",
+                "workspace": "One cumulative terminal workspace with community-guide/, a provided local bare origin, issue and pull-request simulation records, review notes, and a deterministic collaborator fixture",
+                "deliverable": "One eight-step collaboration capstone ending with issue #31 documented, contribution/issue-31-cooling-centers published, review feedback addressed, collaborator wording integrated through a resolved conflict, accepted work merged and pushed to main, issue record closed, feature branches removed, and a clean synchronized repository.",
+                "stepCountTarget": 8,
+                "flow": "progressive",
+                "requirements": [
+                  "Keep the capstone in exactly one capstone section and one capstone topic.",
+                  "Carry the full local repository, origin, and collaboration records through all eight steps.",
+                  "Use the local bare remote only; do not require a GitHub account, browser interaction, token, API call, or public network access.",
+                  "State clearly in learner prose that issue, pull-request, and review markdown files simulate hosted collaboration records while branch, commit, fetch, push, merge, and conflict behavior are real Git operations.",
+                  "Use the previous complete solution as the next step starter and preserve all earlier accepted work.",
+                  "Never grade exact hashes or timestamps; grade repository state, authored messages, required files, remote branches, and clean synchronization."
+                ],
+                "stepLadder": [
+                  {
+                    "step": 1,
+                    "title": "Document Issue #31",
+                    "requirement": "Complete issues/issue-31.md with the cooling-center problem, acceptance criteria, affected files, and verification plan."
+                  },
+                  {
+                    "step": 2,
+                    "title": "Create the Contribution Branch",
+                    "requirement": "Create contribution/issue-31-cooling-centers from synchronized main and verify upstream starting state."
+                  },
+                  {
+                    "step": 3,
+                    "title": "Implement and Commit the Cooling-Center Page",
+                    "requirement": "Create the authored page and navigation entry, inspect the diff, and commit Add cooling center guide for #31."
+                  },
+                  {
+                    "step": 4,
+                    "title": "Publish and Prepare the Pull Request",
+                    "requirement": "Push the contribution branch, complete pull-requests/pr-31.md with summary and testing evidence, commit Record PR #31 handoff, and push again."
+                  },
+                  {
+                    "step": 5,
+                    "title": "Respond to Review Feedback",
+                    "requirement": "Read reviews/pr-31-review.md, add the requested accessibility note, commit Address PR #31 accessibility review, update the PR response, and push."
+                  },
+                  {
+                    "step": 6,
+                    "title": "Fetch the Collaborator Update",
+                    "requirement": "Run the deterministic collaborator fixture, fetch origin/main, compare the histories, and begin integrating origin/main into the contribution branch."
+                  },
+                  {
+                    "step": 7,
+                    "title": "Resolve the Shared-Wording Conflict",
+                    "requirement": "Resolve the controlled conflict by preserving the collaborator safety wording and the reviewed cooling-center link, commit the integration, and push the updated contribution branch."
+                  },
+                  {
+                    "step": 8,
+                    "title": "Merge, Close, and Clean Up",
+                    "requirement": "Merge the accepted contribution into main, push main, mark issue #31 closed with evidence, remove local and remote feature branches, and verify a clean synchronized handoff."
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

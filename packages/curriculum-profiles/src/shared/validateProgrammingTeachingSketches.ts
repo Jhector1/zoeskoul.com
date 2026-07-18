@@ -1,5 +1,6 @@
 import type { TopicAuthoringDraft, TopicSeed } from "@zoeskoul/curriculum-contracts";
 import type { SemanticValidationIssue } from "./profileServices.js";
+import { isProjectLikeTopic } from "./isProjectLikeTopic.js";
 import { validateTeachingProseQuality } from "./validateTeachingProseQuality.js";
 import { validateWorkedExampleTryItDistinctness } from "./validateWorkedExampleTryItDistinctness.js";
 
@@ -90,7 +91,7 @@ export function validateProgrammingTeachingSketches(args: {
         String(block.bodyMarkdown ?? ""),
     );
     const combined = bodies.join("\n\n");
-    const projectLike = isProjectLikeTopic(args.seed);
+    const projectLike = isProjectLikeTopic({ seed: args.seed, draft: args.draft });
 
     issues.push(
         ...validateTeachingProseQuality({
@@ -165,23 +166,4 @@ export function validateProgrammingTeachingSketches(args: {
     );
 
     return issues;
-}
-
-function isProjectLikeTopic(seed: any): boolean {
-    const topicId = String(seed?.topicId ?? seed?.topic?.id ?? "").toLowerCase();
-    const sectionId = String(seed?.sectionId ?? seed?.section?.id ?? "").toLowerCase();
-    const topicType = String(seed?.topicType ?? seed?.topic?.type ?? seed?.type ?? "").toLowerCase();
-    const projectType = String(seed?.projectType ?? seed?.topic?.projectType ?? "").toLowerCase();
-
-    return (
-        topicType === "project" ||
-        topicType === "module_project" ||
-        topicType === "capstone" ||
-        projectType === "module_project" ||
-        projectType === "capstone" ||
-        topicId.includes("project") ||
-        topicId.includes("capstone") ||
-        sectionId.includes("project") ||
-        sectionId.includes("capstone")
-    );
 }

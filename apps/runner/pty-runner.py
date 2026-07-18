@@ -195,6 +195,9 @@ def build_env() -> dict[str, str]:
     env.setdefault("HOME", "/workspace")
     env.setdefault("LANG", "C.UTF-8")
     env.setdefault("PYTHONUNBUFFERED", "1")
+    env.setdefault("GIT_PAGER", "cat")
+    env.setdefault("PAGER", "cat")
+    env.setdefault("GIT_TERMINAL_PROMPT", "0")
     env.setdefault("BASH_ENV", "/dev/null")
     env.setdefault("ENV", "/dev/null")
 

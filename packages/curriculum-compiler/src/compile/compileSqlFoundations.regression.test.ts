@@ -160,7 +160,7 @@ describe("compileSubjectPipeline SQL Foundations regression", () => {
 
         const target = await resolveAuthoringCompileTarget({
             subjectSlug: "sql",
-            courseSlug: "sql-foundations",
+            courseSlug: "sql-v2",
         });
 
         const plan = buildPlanFromSpec({

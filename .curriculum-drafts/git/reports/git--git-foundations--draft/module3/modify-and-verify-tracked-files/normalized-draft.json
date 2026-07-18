@@ -1,0 +1,235 @@
+{
+  "title": "Modify and Verify Tracked Files",
+  "summary": "Follow an already tracked file through editing, diff inspection, staging, and status verification.",
+  "minutes": 20,
+  "sketchBlocks": [
+    {
+      "id": "sketch0",
+      "title": "Recognizing Changes with Git Status",
+      "bodyMarkdown": "Git status is a powerful command that helps you understand the current state of your working directory and staging area. It shows which changes have been staged, which haven't, and which files aren't being tracked by Git.\n\nWorked example: Suppose you have a file `report.txt` that you've modified. Running `git status` will show this file under the \"Changes not staged for commit\" section, indicating that the file has been modified but not yet staged. This helps you decide what to do next, whether to stage the changes or discard them.\n\nBy using `git status`, you can keep track of your changes and ensure that you only commit what you intend to. This prevents accidental commits of incomplete or incorrect changes."
+    },
+    {
+      "id": "sketch1",
+      "title": "Using Git Diff to Inspect Changes",
+      "bodyMarkdown": "The `git diff` command allows you to see the exact changes made to your files. This is crucial for reviewing your work before staging it.\n\nWorked example: Imagine you've edited `report.txt` and want to see what you've changed. By running `git diff report.txt`, you can view the line-by-line differences between your working directory and the last commit. This helps you verify your changes and ensure they are correct before staging them.\n\nUnderstanding the output of `git diff` is essential for maintaining code quality and avoiding errors in your commits."
+    },
+    {
+      "id": "sketch2",
+      "title": "Staging Files with Git Add",
+      "bodyMarkdown": "Once you're satisfied with your changes, you can stage them using `git add`. This moves your changes from the working directory to the staging area, preparing them for the next commit.\n\nWorked example: After reviewing your changes in `report.txt` with `git diff`, you decide to stage them. Running `git add report.txt` will move the changes to the staging area. You can confirm this by running `git status` again, which will now show `report.txt` under the \"Changes to be committed\" section.\n\nStaging changes allows you to build up a set of changes that you want to commit together, ensuring that your commits are logical and organized."
+    },
+    {
+      "id": "sketch3",
+      "title": "Finalizing Changes with Git Commit",
+      "bodyMarkdown": "After staging your changes, the next step is to commit them to your repository. This creates a new snapshot of your project at its current state.\n\nWorked example: With `report.txt` staged, you can commit your changes using `git commit -m \"Updated report with latest data\"`. This command creates a new commit with a message describing the changes. You can verify the commit by running `git log --oneline`, which will show the latest commit at the top of the list.\n\nCommitting changes is a crucial step in version control, as it allows you to save your progress and create a history of your project."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "try-modify-and-verify-tracked-files-sketch0",
+      "kind": "fill_blank_choice",
+      "title": "Practice Recognizing Changes with Git Status",
+      "prompt": "Modify the file `notes.txt` and use `git status` to verify the changes. Ensure the file appears under \"Changes not staged for commit.\"",
+      "template": "A file-writing code exercise should also ____ so automated tests can check it.",
+      "choices": [
+        "print an observable result",
+        "hide all output",
+        "delete the file immediately",
+        "skip the program"
+      ],
+      "correctValue": "print an observable result",
+      "hint": "Edit `notes.txt` and run `git status` to see the changes.",
+      "help": {
+        "concept": "The `git status` command shows the state of the working directory and staging area.",
+        "hint_1": "Make a change to `notes.txt` and save it.",
+        "hint_2": "Run `git status` to see the file listed under changes not staged for commit."
+      }
+    },
+    {
+      "id": "try-modify-and-verify-tracked-files-sketch1",
+      "kind": "fill_blank_choice",
+      "title": "Inspect Changes with Git Diff",
+      "prompt": "Edit `summary.txt` and use `git diff` to inspect the changes. Ensure you can see the differences between the working directory and the last commit.",
+      "template": "A file-writing code exercise should also ____ so automated tests can check it.",
+      "choices": [
+        "print an observable result",
+        "hide all output",
+        "delete the file immediately",
+        "skip the program"
+      ],
+      "correctValue": "print an observable result",
+      "hint": "Edit `summary.txt` and run `git diff` to see the changes.",
+      "help": {
+        "concept": "The `git diff` command shows the differences between the working directory and the last commit.",
+        "hint_1": "Make a change to `summary.txt` and save it.",
+        "hint_2": "Run `git diff` to see the differences."
+      }
+    },
+    {
+      "id": "try-modify-and-verify-tracked-files-sketch2",
+      "kind": "fill_blank_choice",
+      "title": "Stage Changes with Git Add",
+      "prompt": "Stage the changes made to `draft.txt` using `git add`. Verify the file is now in the staging area using `git status`.",
+      "template": "A file-writing code exercise should also ____ so automated tests can check it.",
+      "choices": [
+        "print an observable result",
+        "hide all output",
+        "delete the file immediately",
+        "skip the program"
+      ],
+      "correctValue": "print an observable result",
+      "hint": "Use `git add` to stage the changes and `git status` to verify.",
+      "help": {
+        "concept": "Staging changes prepares them for the next commit.",
+        "hint_1": "Run `git add draft.txt` to stage the changes.",
+        "hint_2": "Use `git status` to confirm the file is staged."
+      }
+    },
+    {
+      "id": "try-modify-and-verify-tracked-files-sketch3",
+      "kind": "fill_blank_choice",
+      "title": "Commit Changes with Git Commit",
+      "prompt": "Commit the staged changes in `update.txt` with a message. Verify the commit using `git log --oneline`.",
+      "template": "A file-writing code exercise should also ____ so automated tests can check it.",
+      "choices": [
+        "print an observable result",
+        "hide all output",
+        "delete the file immediately",
+        "skip the program"
+      ],
+      "correctValue": "print an observable result",
+      "hint": "Use `git commit` with a message to commit the changes.",
+      "help": {
+        "concept": "Committing saves the staged changes to the repository.",
+        "hint_1": "Run `git commit -m 'Updated update.txt'`.",
+        "hint_2": "Use `git log --oneline` to verify the commit."
+      }
+    },
+    {
+      "id": "single-choice-1",
+      "kind": "single_choice",
+      "title": "Understanding Git Status Output",
+      "prompt": "What does the `git status` command show you?",
+      "options": [
+        "The current branch name",
+        "The differences between commits",
+        "The state of the working directory and staging area",
+        "The commit history"
+      ],
+      "correctOptionIds": [
+        "c"
+      ],
+      "hint": "Think about the information `git status` provides about your files.",
+      "help": {
+        "concept": "`git status` provides information about the current state of the working directory and staging area.",
+        "hint_1": "It shows which files are staged, unstaged, or untracked.",
+        "hint_2": "It helps you understand what changes are ready to be committed."
+      }
+    },
+    {
+      "id": "single-choice-2",
+      "kind": "single_choice",
+      "title": "Purpose of Git Diff",
+      "prompt": "What is the primary purpose of the `git diff` command?",
+      "options": [
+        "To stage changes",
+        "To show differences between commits",
+        "To display the commit history",
+        "To show differences between the working directory and the last commit"
+      ],
+      "correctOptionIds": [
+        "d"
+      ],
+      "hint": "Consider what `git diff` helps you see about your files.",
+      "help": {
+        "concept": "`git diff` shows the differences between the working directory and the last commit.",
+        "hint_1": "It helps you review changes before staging them.",
+        "hint_2": "It shows line-by-line differences in files."
+      }
+    },
+    {
+      "id": "fill-blank-choice-1",
+      "kind": "fill_blank_choice",
+      "title": "Staging Changes",
+      "prompt": "Complete the command to stage changes in `file.txt`: `git [blank1] file.txt`.",
+      "template": "git [blank1] file.txt",
+      "choices": [
+        "add",
+        "commit",
+        "status",
+        "diff"
+      ],
+      "correctValue": "add",
+      "hint": "Think about the command used to stage changes.",
+      "help": {
+        "concept": "The `git the missing term` command stages changes for the next commit.",
+        "hint_1": "The command moves changes to the staging area.",
+        "hint_2": "It's the command used before committing changes."
+      }
+    },
+    {
+      "id": "fill-blank-choice-2",
+      "kind": "fill_blank_choice",
+      "title": "Committing Changes",
+      "prompt": "Complete the command to commit changes with a message: `git commit -m [blank1]`.",
+      "template": "git commit -m [blank1]",
+      "choices": [
+        "\"Initial commit\"",
+        "\"Update file\"",
+        "\"Fix bug\"",
+        "\"Add feature\""
+      ],
+      "correctValue": "\"Update file\"",
+      "hint": "Think about how to include a message with your commit.",
+      "help": {
+        "concept": "The `-m` option allows you to add a commit message directly in the command.",
+        "hint_1": "The message should describe the changes made.",
+        "hint_2": "It's enclosed in quotes."
+      }
+    },
+    {
+      "id": "multi-choice-1",
+      "kind": "multi_choice",
+      "title": "Git Status Information",
+      "prompt": "Which of the following does `git status` provide information about? Select all that apply.",
+      "options": [
+        "Staged changes",
+        "Untracked files",
+        "Commit history",
+        "Current branch"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ],
+      "hint": "Consider what `git status` tells you about your files and repository.",
+      "help": {
+        "concept": "`git status` provides information about the working directory and staging area.",
+        "hint_1": "It shows which files are staged, unstaged, or untracked.",
+        "hint_2": "It helps you understand what changes are ready to be committed."
+      }
+    },
+    {
+      "id": "drag-reorder-1",
+      "kind": "drag_reorder",
+      "title": "Git Workflow Steps",
+      "prompt": "Arrange the steps of a typical Git workflow in the correct order.",
+      "tokens": [
+        "Modify file",
+        "Stage changes",
+        "Commit changes"
+      ],
+      "correctOrder": [
+        "Modify file",
+        "Stage changes",
+        "Commit changes"
+      ],
+      "hint": "Think about the sequence of actions from modifying a file to committing it.",
+      "help": {
+        "concept": "A typical Git workflow involves modifying files, staging changes, and committing them.",
+        "hint_1": "Start with modifying the file.",
+        "hint_2": "End with committing the changes."
+      }
+    }
+  ]
+}

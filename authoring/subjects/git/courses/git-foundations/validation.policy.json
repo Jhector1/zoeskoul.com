@@ -1,0 +1,119 @@
+{
+  "policyId": "git-foundations-validation",
+  "allowedConcepts": [
+    "version control",
+    "repository",
+    "working tree",
+    "staging area",
+    "commit history",
+    "HEAD",
+    "git config --local",
+    "git init",
+    "main",
+    "git status",
+    "git status --short",
+    "git diff",
+    "git add",
+    "git diff --staged",
+    "git commit",
+    "git log --oneline",
+    "git show",
+    "git mv",
+    "git rm",
+    ".gitignore",
+    "git check-ignore",
+    "git restore",
+    "git restore --staged"
+  ],
+  "disallowedConcepts": [
+    "branch creation",
+    "git switch",
+    "merge",
+    "merge conflict",
+    "remote",
+    "origin",
+    "clone",
+    "fetch",
+    "pull",
+    "push",
+    "GitHub issue",
+    "pull request",
+    "fork",
+    "stash",
+    "reflog",
+    "revert",
+    "reset --hard",
+    "rebase",
+    "cherry-pick",
+    "force push",
+    "tag",
+    "release"
+  ],
+  "validationRequirements": {
+    "profileId": "git",
+    "language": "bash",
+    "recipeType": "shell_task",
+    "mode": "terminal_workspace",
+    "repositoryStateUsesGitExpectations": true,
+    "moduleCount": 4,
+    "standardModuleProjectCount": 3,
+    "finalCapstoneStepCount": 6,
+    "publicNetworkForbidden": true
+  },
+  "globalRules": [
+    "Every technical sketch has an aligned Git terminal Try It.",
+    "Final learner quiz cards contain no code_input. quizDraft is the shared authoring exercise collection and must still contain every runtime Try It code_input required by plannedExerciseCounts.",
+    "Every standard module contains exactly one role=module_project section.",
+    "The final module contains exactly one role=capstone section and one capstone topic.",
+    "Every project step N+1 starts from the complete repository state produced by step N.",
+    "No exercise requires branch, remote, or hosted collaboration knowledge."
+  ],
+  "moduleRules": {
+    "1": {
+      "focus": [
+        "repository model",
+        "local identity",
+        "init",
+        "status"
+      ],
+      "forbidden": [
+        "commits beyond the initial project workflow",
+        "branches",
+        "remotes"
+      ]
+    },
+    "2": {
+      "focus": [
+        "diff",
+        "staging",
+        "focused commits",
+        "log",
+        "show"
+      ],
+      "forbidden": [
+        "branches",
+        "remotes"
+      ]
+    },
+    "3": {
+      "focus": [
+        "tracked rename",
+        "tracked removal",
+        "ignore rules",
+        "restore"
+      ],
+      "forbidden": [
+        "branches",
+        "remotes",
+        "history rewriting"
+      ]
+    },
+    "4": {
+      "focus": [
+        "integrated local-history capstone"
+      ],
+      "requiredStepCount": 6,
+      "requiredCommitCount": 4
+    }
+  }
+}

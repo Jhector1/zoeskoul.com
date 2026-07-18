@@ -40,14 +40,6 @@
     "python-10-testing-debugging-oop-projects",
     "python-11-oop-capstone-project"
   ],
-  "versioning": {
-    "family": "python",
-    "version": 2,
-    "status": "active",
-    "defaultForNewEnrollments": true,
-    "supersedes": "python",
-    "supersededBy": null
-  },
   "courseGenerationPolicy": {
     "studentActionStyle": "multifile_editor_workspace",
     "forbidUnavailableWorkspaceActions": true,

@@ -1,0 +1,438 @@
+{
+  "title": "Read Tracked and Untracked State",
+  "summary": "Use full and short status views to tell which files Git knows, which files are new, and which changes still need attention.",
+  "minutes": 22,
+  "sketchBlocks": [
+    {
+      "id": "sketch0",
+      "title": "Decoding git status",
+      "bodyMarkdown": "The `git status` command is a powerful tool that provides a snapshot of the current state of your working directory and staging area. It helps you understand which changes are staged for the next commit, which are not, and which files are not being tracked by Git.\n\nWorked example: Imagine you have a project with several files. After making some changes, you run `git status`. The output shows:\n\n```\nOn branch main\nYour branch is up to date with 'origin/main'.\n\nChanges not staged for commit:\n  (use \"git add <file>...\" to update what will be committed)\n  (use \"git restore <file>...\" to discard changes in working directory)\n\tmodified:   file1.txt\n\nUntracked files:\n  (use \"git add <file>...\" to include in what will be committed)\n\tfile2.txt\n```\n\nThis output tells you that `file1.txt` has been modified but not staged, and `file2.txt` is a new file that Git is not tracking yet. Understanding this output helps you decide your next steps, such as staging changes or adding new files to the repository.\n\nStep by step, read the commands in the order shown. The first line runs `On branch main` as the next repository step in the example. The second line runs `Your branch is up to date with 'origin/main'.` as the next repository step in the example. The third line runs `Changes not staged for commit:` as the next repository step in the example. The fourth line runs `(use \"git add <file>...\" to update what will be committed)` as the next repository step in the example. The next line runs `(use \"git restore <file>...\" to discard changes in working directory)` as the next repository step in the example. The next line runs `modified:   file1.txt` as the next repository step in the example. The next line runs `Untracked files:` as the next repository step in the example. The next line runs `(use \"git add <file>...\" to include in what will be committed)` as the next repository step in the example. The next line runs `file2.txt` as the next repository step in the example. Together, the lines form one complete example rather than unrelated commands."
+    },
+    {
+      "id": "sketch1",
+      "title": "Compact View with git status --short",
+      "bodyMarkdown": "For a more concise view of your repository's status, you can use `git status --short`. This command provides a brief overview of the changes in your working directory and staging area, using symbols to indicate the state of each file.\n\nWorked example: After making changes to your project, you run `git status --short` and see:\n\n```\n M file1.txt\n?? file2.txt\n```\n\nIn this output, `M` indicates that `file1.txt` has been modified, and `??` shows that `file2.txt` is untracked. This shorthand view is particularly useful when you want a quick overview without the detailed explanations provided by the full `git status` command."
+    },
+    {
+      "id": "sketch2",
+      "title": "Tracked vs. Untracked Files",
+      "bodyMarkdown": "Understanding the difference between tracked and untracked files is crucial in Git. Tracked files are those that Git is aware of and are part of the repository's history. Untracked files, on the other hand, are new files that Git has not yet been told to track.\n\nWorked example: Suppose you have a directory with several files. You run `git status` and see:\n\n```\nUntracked files:\n  (use \"git add <file>...\" to include in what will be committed)\n\tnewfile.txt\n```\n\nThis indicates that `newfile.txt` is not yet tracked by Git. To start tracking it, you would use `git add newfile.txt`. Once added, it becomes a tracked file and will be included in future commits."
+    },
+    {
+      "id": "sketch3",
+      "title": "Applying git status in Real Projects",
+      "bodyMarkdown": "Using `git status` effectively can prevent many common mistakes in version control. It helps ensure that you are aware of all changes before committing, reducing the risk of accidentally omitting important updates or including unwanted changes.\n\nWorked example: You're working on a project and have made several changes. Before committing, you run `git status` to review the current state. You notice a file you forgot to stage. By catching this oversight, you can stage the file and ensure it is included in your next commit, maintaining a complete and accurate project history."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "single-choice-1",
+      "kind": "single_choice",
+      "title": "Purpose of git status",
+      "prompt": "What is the primary purpose of the `git status` command?",
+      "options": [
+        "To commit changes to the repository",
+        "To show the current branch and changes",
+        "To merge branches",
+        "To delete files from the repository"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Think about what information `git status` provides about your repository.",
+      "help": {
+        "concept": "`git status` provides information about the current state of the working directory and staging area.",
+        "hint_1": "It shows which changes are staged, unstaged, or untracked.",
+        "hint_2": "It helps you understand what will be included in the next commit."
+      }
+    },
+    {
+      "id": "single-choice-2",
+      "kind": "single_choice",
+      "title": "Understanding git status --short",
+      "prompt": "What does the `??` symbol indicate in the output of `git status --short`?",
+      "options": [
+        "A modified file",
+        "A deleted file",
+        "An untracked file",
+        "A staged file"
+      ],
+      "correctOptionIds": [
+        "c"
+      ],
+      "hint": "Consider what `??` might mean about a file's status in the repository.",
+      "help": {
+        "concept": "The `??` symbol indicates untracked files in `git status --short`.",
+        "hint_1": "Untracked files are those not yet added to the staging area.",
+        "hint_2": "`??` means the file is new and not tracked by Git."
+      }
+    },
+    {
+      "id": "multi-choice-1",
+      "kind": "multi_choice",
+      "title": "Components of git status output",
+      "prompt": "Which of the following are components of the `git status` output? Select all that apply.",
+      "options": [
+        "Current branch",
+        "Staged changes",
+        "Untracked files",
+        "Remote branches"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "drag-reorder-1",
+      "kind": "drag_reorder",
+      "title": "Order of git status sections",
+      "prompt": "Arrange the sections of the `git status` output in the correct order.",
+      "tokens": [
+        "Current branch",
+        "Staged changes",
+        "Unstaged changes",
+        "Untracked files"
+      ],
+      "correctOrder": [
+        "Current branch",
+        "Staged changes",
+        "Unstaged changes",
+        "Untracked files"
+      ],
+      "hint": "Read each piece and arrange them in the order the statement should be understood.",
+      "help": {
+        "concept": "The pieces should form a valid statement in a logical order.",
+        "hint_1": "Start with the piece that introduces the idea or action.",
+        "hint_2": "Place dependent pieces after the part they describe or complete."
+      }
+    },
+    {
+      "id": "fill-blank-choice-1",
+      "kind": "fill_blank_choice",
+      "title": "Symbol for modified files",
+      "prompt": "In `git status --short`, the symbol for a modified file is `[blank1]`.",
+      "template": "In `git status --short`, the symbol for a modified file is `[blank1]`.",
+      "choices": [
+        "M",
+        "A",
+        "D",
+        "U"
+      ],
+      "correctValue": "M",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Think about what the missing part needs to do in the statement.",
+        "hint_2": "Choose the term that best completes the meaning of the statement."
+      }
+    },
+    {
+      "id": "fill-blank-choice-2",
+      "kind": "fill_blank_choice",
+      "title": "Symbol for untracked files",
+      "prompt": "In `git status --short`, the symbol for an untracked file is `[blank1]`.",
+      "template": "In `git status --short`, the symbol for an untracked file is `[blank1]`.",
+      "choices": [
+        "M",
+        "A",
+        "??",
+        "U"
+      ],
+      "correctValue": "A",
+      "hint": "Focus on the missing concept rather than the exact missing term.",
+      "help": {
+        "concept": "The blank should be completed with the term that fits the job being described.",
+        "hint_1": "Think about what the missing part needs to do in the statement.",
+        "hint_2": "Choose the term that best completes the meaning of the statement."
+      }
+    },
+    {
+      "id": "try-read-tracked-and-untracked-state-sketch0",
+      "kind": "code_input",
+      "title": "Practice with git status",
+      "prompt": "Initialize a new Git repository and create two files: `tracked.txt` and `untracked.txt`. Add `tracked.txt` to the staging area. Use `git status` to verify the state of your repository. What does the output show?\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      },
+      "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.",
+      "solutionCode": "bash .zoeskoul/setup.sh\ngit status",
+      "fixedLanguage": "bash",
+      "recipeType": "shell_task",
+      "mode": "terminal_workspace",
+      "entryFilePath": "main.sh",
+      "instructions": "Initialize a new Git repository and create two files: `tracked.txt` and `untracked.txt`. Add `tracked.txt` to the staging area. Use `git status` to verify the state of your repository. What does the output show?\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 1\\n' > tracked.txt\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "bash .zoeskoul/setup.sh\ngit status\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 1\\n' > tracked.txt\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
+          },
+          {
+            "pattern": "^git\\s+status$"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "Do not rewrite shared history in this Git practice task."
+          }
+        ]
+      },
+      "gitExpectations": {
+        "repositoryInitialized": true,
+        "currentBranch": "main"
+      }
+    },
+    {
+      "id": "try-read-tracked-and-untracked-state-sketch1",
+      "kind": "code_input",
+      "title": "Using git status --short",
+      "prompt": "Create a new Git repository and two files: `fileA.txt` and `fileB.txt`. Modify `fileA.txt` and leave `fileB.txt` untracked. Use `git status --short` to check the status. What does the output show?\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      },
+      "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.",
+      "solutionCode": "bash .zoeskoul/setup.sh\ngit status --short",
+      "fixedLanguage": "bash",
+      "recipeType": "shell_task",
+      "mode": "terminal_workspace",
+      "entryFilePath": "main.sh",
+      "instructions": "Create a new Git repository and two files: `fileA.txt` and `fileB.txt`. Modify `fileA.txt` and leave `fileB.txt` untracked. Use `git status --short` to check the status. What does the output show?\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 2\\n' > fileA.txt\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "bash .zoeskoul/setup.sh\ngit status --short\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 2\\n' > fileA.txt\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
+          },
+          {
+            "pattern": "^git\\s+status\\s+--short$"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "Do not rewrite shared history in this Git practice task."
+          }
+        ]
+      },
+      "gitExpectations": {
+        "repositoryInitialized": true,
+        "currentBranch": "main"
+      }
+    },
+    {
+      "id": "try-read-tracked-and-untracked-state-sketch2",
+      "kind": "code_input",
+      "title": "Distinguishing Tracked and Untracked Files",
+      "prompt": "Initialize a Git repository and create a file `example.txt`. Do not add it to the staging area. Use `git status` to determine if the file is tracked or untracked.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      },
+      "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.",
+      "solutionCode": "bash .zoeskoul/setup.sh\ngit status",
+      "fixedLanguage": "bash",
+      "recipeType": "shell_task",
+      "mode": "terminal_workspace",
+      "entryFilePath": "main.sh",
+      "instructions": "Initialize a Git repository and create a file `example.txt`. Do not add it to the staging area. Use `git status` to determine if the file is tracked or untracked.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 3\\n' > example.txt\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "bash .zoeskoul/setup.sh\ngit status\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 3\\n' > example.txt\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
+          },
+          {
+            "pattern": "^git\\s+status$"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "Do not rewrite shared history in this Git practice task."
+          }
+        ]
+      },
+      "gitExpectations": {
+        "repositoryInitialized": true,
+        "currentBranch": "main"
+      }
+    },
+    {
+      "id": "try-read-tracked-and-untracked-state-sketch3",
+      "kind": "code_input",
+      "title": "Practical Use of git status",
+      "prompt": "You have a Git repository with several changes. Create a file `important.txt` and modify an existing file `notes.txt`. Use `git status` to ensure all changes are accounted for before committing.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      },
+      "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.",
+      "solutionCode": "bash .zoeskoul/setup.sh\ngit status",
+      "fixedLanguage": "bash",
+      "recipeType": "shell_task",
+      "mode": "terminal_workspace",
+      "entryFilePath": "main.sh",
+      "instructions": "You have a Git repository with several changes. Create a file `important.txt` and modify an existing file `notes.txt`. Use `git status` to ensure all changes are accounted for before committing.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 4\\n' > important.txt\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "bash .zoeskoul/setup.sh\ngit status\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 4\\n' > important.txt\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
+          },
+          {
+            "pattern": "^git\\s+status$"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "Do not rewrite shared history in this Git practice task."
+          }
+        ]
+      },
+      "gitExpectations": {
+        "repositoryInitialized": true,
+        "currentBranch": "main"
+      }
+    }
+  ]
+}

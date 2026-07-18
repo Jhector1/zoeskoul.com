@@ -1,0 +1,129 @@
+{
+  "subjectSlug": "git",
+  "courseSlug": "git-foundations",
+  "catalogSlug": "git",
+  "trackSlug": "git",
+  "profileId": "git",
+  "workspaceProfileId": "terminal-workspace-runner",
+  "workspacePolicyId": "git-terminal-workspace",
+  "title": "Git Foundations",
+  "subtitle": "Build a clean local history before sharing work anywhere.",
+  "level": "beginner",
+  "moduleCount": 4,
+  "description": "A beginner Git course with three standard modules and one final capstone. Learners work locally first, moving from an ordinary folder to a readable repository history without introducing branches, remotes, GitHub, or advanced history rewriting.",
+  "sourceLocale": "en",
+  "targetLocales": [],
+  "accessPolicy": "paid",
+  "moduleAccessOverrideDefault": null,
+  "audience": [
+    "Absolute beginners who completed Linux Terminal Fundamentals.",
+    "Programming learners who want reliable project history before using GitHub.",
+    "New developers replacing duplicate final folders with a real version-control workflow."
+  ],
+  "prerequisites": [
+    "Complete Linux Terminal Fundamentals or demonstrate equivalent comfort with pwd, ls, cd, mkdir, touch, cat, cp, mv, and rm.",
+    "Read and edit simple text files in the provided workspace.",
+    "No Python, GitHub account, public network access, or prior version-control experience is required."
+  ],
+  "goals": [
+    "Explain the working tree, staging area, commits, and HEAD in practical language.",
+    "Initialize a repository and read tracked, untracked, staged, and clean state.",
+    "Inspect changes, stage intentionally, and create meaningful commits.",
+    "Read history and inspect committed snapshots.",
+    "Rename, remove, ignore, and restore files safely.",
+    "Complete three cumulative module projects and one integrated local-history capstone."
+  ],
+  "teachingStyle": {
+    "tone": "story-led, book-like, practical, calm, cumulative, and repository-state-first",
+    "quizWeight": 0.2,
+    "projectWeight": 0.35,
+    "codeInputWeight": 0.45
+  },
+  "constraints": {
+    "moduleCount": 4,
+    "topicsPerModuleMin": 1,
+    "topicsPerModuleMax": 5,
+    "standardModuleCount": 3,
+    "topicsPerStandardModule": 5,
+    "finalModuleTopics": 1,
+    "moduleSlugFormat": "<courseSlug>-module-<number>-<short-topic-area>",
+    "sectionSlugFormat": "<courseSlug>-section-<number>-<short-section-role>",
+    "prefixFormat": "<course_slug_with_underscores>_module_<number>"
+  },
+  "seedModules": [
+    "git-foundations-module-1-start-tracking",
+    "git-foundations-module-2-meaningful-history",
+    "git-foundations-module-3-manage-tracked-files",
+    "git-foundations-module-4-final-capstone"
+  ],
+  "courseGenerationPolicy": {
+    "studentActionStyle": "terminal-workspace",
+    "forbidUnavailableWorkspaceActions": true,
+    "avoidTerms": [
+      "GitHub account",
+      "personal access token",
+      "public repository",
+      "branch workflow",
+      "merge conflict",
+      "force push",
+      "reset --hard",
+      "interactive rebase"
+    ],
+    "preferredTerms": {
+      "editor": "terminal",
+      "run button": "type the command and press Enter",
+      "output panel": "terminal output",
+      "repository state": "the files, staging area, branches, commits, and remotes Git currently records",
+      "check": "click Check Answer after verifying the repository state"
+    },
+    "notes": [
+      "Use profileId git, fixedLanguage bash, recipeType shell_task, and mode terminal_workspace for every Git code_input.",
+      "Use the existing terminal-workspace runner; do not create a Git-specific IDE, runner, recipe type, or programming language.",
+      "Grade final repository state with gitExpectations. Use terminalExpectations only when the exact safe command is itself part of the learning goal.",
+      "Every terminal instruction must explicitly tell the learner to type the command and press Enter.",
+      "Configure the local repository identity as ZoeSkoul Learner and learner@zoeskoul.local before the first commit.",
+      "Set the initial branch to main whenever branch naming matters.",
+      "Never grade exact commit hashes, machine-dependent timestamps, absolute workspace paths, or decorative git log graph spacing.",
+      "Keep independent Try It workspaces isolated with terminalSessionScope exercise; use terminalSessionScope project only for authored progressive projects and capstones.",
+      "Use one synopsis sketch for each module project and capstone, followed by exactly the number of cumulative steps declared in projectBrief.stepCountTarget.",
+      "The complete solution from project step N becomes the complete starter workspace for step N+1.",
+      "Worked examples, Try It tasks, module projects, and final capstones must use different repository stories and different requested outcomes.",
+      "Write lessons like a short practical book chapter: begin with the project situation, define the Git idea, show the command shape, trace the repository-state change, warn about one common mistake, and transition naturally into practice.",
+      "Do not open lessons with internal curriculum language such as learning contract, milestone count, assessment checklist, or concepts you will demonstrate.",
+      "Prepend one standalone reading-only course introduction before the first technical sketch without replacing the first technical lesson.",
+      "The final module contains exactly one capstone section and one capstone topic.",
+      "Do not require public network access, GitHub credentials, personal access tokens, learner secrets, or an external repository.",
+      "Do not introduce branches, merges, remotes, clone, fetch, pull, push, GitHub, stash, reflog, revert, reset, rebase, tags, or force operations in Git Foundations.",
+      "Treat main as environment setup, not as a branching lesson.",
+      "The final capstone must contain exactly six progressive steps and exactly four authored commits."
+    ]
+  },
+  "practiceDefaults": {
+    "tryIt": true,
+    "requiresTryIt": true,
+    "tryItPlacement": "all_sketches",
+    "runtimeMode": "terminal_workspace",
+    "terminalSessionScope": "exercise",
+    "expectedPracticeKinds": [
+      "single_choice",
+      "multi_choice",
+      "fill_blank_choice",
+      "code_input"
+    ]
+  },
+  "runtimePolicy": {
+    "language": "bash",
+    "backend": "pty",
+    "mode": "terminal_workspace",
+    "terminalOnly": true,
+    "defaultTerminalSessionScope": "exercise",
+    "networkAccess": false,
+    "remoteStrategy": "local-bare-repository",
+    "defaultBranch": "main",
+    "localIdentity": {
+      "name": "ZoeSkoul Learner",
+      "email": "learner@zoeskoul.local"
+    },
+    "primaryExpectationPayload": "gitExpectations"
+  }
+}

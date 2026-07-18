@@ -1,0 +1,290 @@
+{
+  "title": "Final Capstone: Neighborhood Resource Guide History",
+  "summary": "Build a complete local history for a neighborhood resource guide while keeping changes focused, generated artifacts ignored, and the final repository easy to hand off.",
+  "minutes": 120,
+  "sketchBlocks": [
+    {
+      "id": "intro",
+      "cardTitle": "Capstone Introduction",
+      "title": "Welcome to the Final Capstone",
+      "bodyMarkdown": "In this final capstone, you will apply your Git skills to create a local history for a neighborhood resource guide. Your task is to ensure that the guide is well-maintained, with clear commit history and ignored generated artifacts. This project will help future volunteers understand changes, recover from mistakes, and trust the final handoff."
+    },
+    {
+      "id": "step1",
+      "cardTitle": "Create the Guide Baseline",
+      "title": "Step 1: Initialize the Repository",
+      "bodyMarkdown": "Worked example: Begin by inspecting the `resource-guide/` directory. Configure the local Git identity as ZoeSkoul Learner with the email learner@zoeskoul.local. Initialize a new Git repository with `git init` and set the initial branch to `main`. Stage the initial `README.md` and `pages/` files, then commit with the message `Start neighborhood resource guide`. This establishes the baseline for your project."
+    },
+    {
+      "id": "step2",
+      "cardTitle": "Add the Services Page",
+      "title": "Step 2: Expand the Guide",
+      "bodyMarkdown": "Worked example: Create a new file `pages/services.md` to list local services. After creating the file, stage it using `git add pages/services.md`. Commit this change with the message `Add local services page`. This step focuses on adding new content to the guide while maintaining a clear commit history."
+    },
+    {
+      "id": "step3",
+      "cardTitle": "Publish Updated Help Desk Hours",
+      "title": "Step 3: Update Contact Information",
+      "bodyMarkdown": "Worked example: Update the `pages/contact.md` file with the latest help desk hours. Use `git diff` to review your changes before staging them. Once satisfied, stage the changes and commit with the message `Update help desk hours`. This ensures that all updates are tracked and documented."
+    },
+    {
+      "id": "step4",
+      "cardTitle": "Ignore Generated Preview Files",
+      "title": "Step 4: Manage Ignored Files",
+      "bodyMarkdown": "Worked example: Create a `.gitignore` file to exclude `generated/` preview files from being tracked. Use `git check-ignore` to verify that the files are correctly ignored. Keep the repository changes staged for the next commit. This step helps maintain a clean repository by ignoring unnecessary files."
+    },
+    {
+      "id": "step5",
+      "cardTitle": "Rename the Guide and Remove the Obsolete Note",
+      "title": "Step 5: Organize and Clean Up",
+      "bodyMarkdown": "Worked example: Use `git mv` to rename `pages/guide-draft.md` to `pages/getting-help.md`. Then, use `git rm` to remove `notes/old-phone-tree.txt`. These operations help keep the guide organized and remove outdated information."
+    },
+    {
+      "id": "step6",
+      "cardTitle": "Commit and Verify the Final Handoff",
+      "title": "Step 6: Finalize the Project",
+      "bodyMarkdown": "Worked example: Commit all staged changes with the message `Prepare resource guide handoff`. Verify the repository's history with `git log --oneline` to ensure it contains exactly four commits. Check that the working tree is clean and that all required files are present. This final step ensures the guide is ready for handoff."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "try-final-neighborhood-resource-guide-history-sketch0",
+      "kind": "code_input",
+      "title": "Initialize the Repository",
+      "prompt": "Initialize a new Git repository in the `resource-guide/` directory, configure the local identity, and commit the initial files.",
+      "hint": "Use `git init` to start the repository and `git commit` to save changes.",
+      "help": {
+        "concept": "Initializing a repository sets up a new Git project, allowing you to track changes.",
+        "hint_1": "Ensure you are in the correct directory before initializing.",
+        "hint_2": "Remember to stage files before committing."
+      },
+      "starterCode": "# Navigate to the resource-guide directory\ncd resource-guide\n\n# Initialize the repository\n# Configure the local identity\n# Stage the initial files\n# Commit the changes\n",
+      "solutionCode": "cd resource-guide\ngit init\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\ngit add README.md pages/\ngit commit -m \"Start neighborhood resource guide\"\n",
+      "entryFilePath": "main.sh",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Navigate to the resource-guide directory\ncd resource-guide\n\n# Initialize the repository\n# Configure the local identity\n# Stage the initial files\n# Commit the changes",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "cd resource-guide\ngit init\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\ngit add README.md pages/\ngit commit -m \"Start neighborhood resource guide\"",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "recipeType": "shell_task",
+      "fixedLanguage": "bash",
+      "mode": "terminal_workspace"
+    },
+    {
+      "id": "try-final-neighborhood-resource-guide-history-sketch1",
+      "kind": "code_input",
+      "title": "Add the Services Page",
+      "prompt": "Create a new `services.md` file in the `pages/` directory, stage it, and commit the change.",
+      "hint": "Use `touch` to create the file and `git add` to stage it.",
+      "help": {
+        "concept": "Staging files prepares them for a commit, which records the changes in the repository.",
+        "hint_1": "Ensure the file is created in the correct directory.",
+        "hint_2": "Stage the file before committing."
+      },
+      "starterCode": "# Navigate to the pages directory\ncd pages\n\n# Create the services.md file\n# Stage the file\n# Commit the change\n",
+      "solutionCode": "cd pages\ntouch services.md\ngit add services.md\ngit commit -m \"Add local services page\"\n",
+      "entryFilePath": "main.sh",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Navigate to the pages directory\ncd pages\n\n# Create the services.md file\n# Stage the file\n# Commit the change",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "cd pages\ntouch services.md\ngit add services.md\ngit commit -m \"Add local services page\"",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "recipeType": "shell_task",
+      "fixedLanguage": "bash",
+      "mode": "terminal_workspace"
+    },
+    {
+      "id": "try-final-neighborhood-resource-guide-history-sketch2",
+      "kind": "code_input",
+      "title": "Publish Updated Help Desk Hours",
+      "prompt": "Update the `contact.md` file with new hours, review the changes, and commit them.",
+      "hint": "Use `git diff` to review changes before committing.",
+      "help": {
+        "concept": "Reviewing changes before committing helps ensure accuracy and clarity in the commit history.",
+        "hint_1": "Use `git diff` to see what has changed.",
+        "hint_2": "Stage the changes before committing."
+      },
+      "starterCode": "# Update the contact.md file\n\n# Review the changes\n# Stage the changes\n# Commit the update\n",
+      "solutionCode": "echo \"Updated hours: 9 AM - 5 PM\" >> pages/contact.md\ngit diff\ngit add pages/contact.md\ngit commit -m \"Update help desk hours\"\n",
+      "entryFilePath": "main.sh",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Update the contact.md file\n\n# Review the changes\n# Stage the changes\n# Commit the update",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "echo \"Updated hours: 9 AM - 5 PM\" >> pages/contact.md\ngit diff\ngit add pages/contact.md\ngit commit -m \"Update help desk hours\"",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "recipeType": "shell_task",
+      "fixedLanguage": "bash",
+      "mode": "terminal_workspace"
+    },
+    {
+      "id": "try-final-neighborhood-resource-guide-history-sketch3",
+      "kind": "code_input",
+      "title": "Ignore Generated Preview Files",
+      "prompt": "Create a `.gitignore` file to exclude `generated/` files and verify they are ignored.",
+      "hint": "Use `git check-ignore` to verify ignored files.",
+      "help": {
+        "concept": "Ignoring files prevents unnecessary files from cluttering the repository.",
+        "hint_1": "Ensure the `.gitignore` file is in the correct location.",
+        "hint_2": "Use `git check-ignore` to confirm the ignore rule works."
+      },
+      "starterCode": "# Create a .gitignore file\n\n# Add the ignore rule for generated/\n# Verify the rule\n",
+      "solutionCode": "echo \"generated/\" > .gitignore\ngit check-ignore -v generated/sample.txt\n",
+      "entryFilePath": "main.sh",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Create a .gitignore file\n\n# Add the ignore rule for generated/\n# Verify the rule",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "echo \"generated/\" > .gitignore\ngit check-ignore -v generated/sample.txt",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "recipeType": "shell_task",
+      "fixedLanguage": "bash",
+      "mode": "terminal_workspace"
+    },
+    {
+      "id": "try-final-neighborhood-resource-guide-history-sketch4",
+      "kind": "code_input",
+      "title": "Rename the Guide and Remove the Obsolete Note",
+      "prompt": "Rename `guide-draft.md` to `getting-help.md` and remove `old-phone-tree.txt`.",
+      "hint": "Use `git mv` for renaming and `git rm` for removal.",
+      "help": {
+        "concept": "Renaming and removing files in Git helps maintain an organized and relevant repository.",
+        "hint_1": "Ensure you use `git mv` to track the rename.",
+        "hint_2": "Use `git rm` to remove the file from the repository."
+      },
+      "starterCode": "# Rename the guide-draft.md file\n\n# Remove the old-phone-tree.txt file\n",
+      "solutionCode": "git mv pages/guide-draft.md pages/getting-help.md\ngit rm notes/old-phone-tree.txt\n",
+      "entryFilePath": "main.sh",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Rename the guide-draft.md file\n\n# Remove the old-phone-tree.txt file",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "git mv pages/guide-draft.md pages/getting-help.md\ngit rm notes/old-phone-tree.txt",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "recipeType": "shell_task",
+      "fixedLanguage": "bash",
+      "mode": "terminal_workspace"
+    },
+    {
+      "id": "try-final-neighborhood-resource-guide-history-sketch5",
+      "kind": "code_input",
+      "title": "Commit and Verify the Final Handoff",
+      "prompt": "Commit all changes and verify the repository's final state.",
+      "hint": "Use `git log --oneline` to check the commit history.",
+      "help": {
+        "concept": "Verifying the final state ensures the repository is ready for handoff.",
+        "hint_1": "Check that all changes are committed.",
+        "hint_2": "Ensure the working tree is clean before finalizing."
+      },
+      "starterCode": "# Commit all staged changes\n\n# Verify the commit history\n# Ensure the working tree is clean\n",
+      "solutionCode": "git commit -m \"Prepare resource guide handoff\"\ngit log --oneline\ngit status\n",
+      "entryFilePath": "main.sh",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Commit all staged changes\n\n# Verify the commit history\n# Ensure the working tree is clean",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "git commit -m \"Prepare resource guide handoff\"\ngit log --oneline\ngit status",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "recipeType": "shell_task",
+      "fixedLanguage": "bash",
+      "mode": "terminal_workspace"
+    }
+  ],
+  "projectDraft": {
+    "title": "Neighborhood Resource Guide History",
+    "stepIds": [
+      "try-final-neighborhood-resource-guide-history-sketch0",
+      "try-final-neighborhood-resource-guide-history-sketch1",
+      "try-final-neighborhood-resource-guide-history-sketch2",
+      "try-final-neighborhood-resource-guide-history-sketch3",
+      "try-final-neighborhood-resource-guide-history-sketch4",
+      "try-final-neighborhood-resource-guide-history-sketch5"
+    ]
+  }
+}

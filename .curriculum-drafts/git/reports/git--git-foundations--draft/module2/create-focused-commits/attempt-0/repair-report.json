@@ -1,0 +1,33 @@
+{
+  "topicId": "create-focused-commits",
+  "repairs": [
+    {
+      "code": "GIT_TRY_IT_KIND_PROMOTED",
+      "category": "other",
+      "severity": "low",
+      "field": "quizDraft.try-create-focused-commits-sketch0",
+      "message": "Converted generated Try It \"try-create-focused-commits-sketch0\" into the Git code_input required by plannedExerciseCounts."
+    },
+    {
+      "code": "GIT_TRY_IT_KIND_PROMOTED",
+      "category": "other",
+      "severity": "low",
+      "field": "quizDraft.try-create-focused-commits-sketch1",
+      "message": "Converted generated Try It \"try-create-focused-commits-sketch1\" into the Git code_input required by plannedExerciseCounts."
+    },
+    {
+      "code": "GIT_TRY_IT_KIND_PROMOTED",
+      "category": "other",
+      "severity": "low",
+      "field": "quizDraft.try-create-focused-commits-sketch2",
+      "message": "Converted generated Try It \"try-create-focused-commits-sketch2\" into the Git code_input required by plannedExerciseCounts."
+    },
+    {
+      "code": "GIT_TRY_IT_KIND_PROMOTED",
+      "category": "other",
+      "severity": "low",
+      "field": "quizDraft.try-create-focused-commits-sketch3",
+      "message": "Converted generated Try It \"try-create-focused-commits-sketch3\" into the Git code_input required by plannedExerciseCounts."
+    }
+  ]
+}

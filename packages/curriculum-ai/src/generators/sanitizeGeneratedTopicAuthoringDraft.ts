@@ -5,6 +5,7 @@ const VALID_RECIPE_TYPES = new Set([
     "fixed_tests",
     "semantic",
     "template_io",
+    "shell_task",
 ]);
 
 const VALID_MATCH_TYPES = new Set(["exact", "includes"]);
@@ -818,8 +819,13 @@ function resolveRecipeType(args: {
     return "fixed_tests";
 }
 
+type SanitizeGeneratedTopicAuthoringDraftOptions = {
+    profileId?: string;
+};
+
 function sanitizeCodeInputExercise(
     exercise: Record<string, unknown>,
+    options: SanitizeGeneratedTopicAuthoringDraftOptions,
 ): Record<string, unknown> {
     const tests = Array.isArray(exercise.tests)
         ? exercise.tests
@@ -831,11 +837,20 @@ function sanitizeCodeInputExercise(
 
     const hasTests = tests.length > 0;
     const hasSemanticChecks = semanticChecks.length > 0;
-    const declaredRecipeType =
+    const rawDeclaredRecipeType =
         typeof exercise.recipeType === "string"
             ? normalizeText(exercise.recipeType)
             : undefined;
-    const recipeRunsWithoutAuthoredTests = declaredRecipeType === "sql_query";
+    // Structured-output models occasionally leak SQL recipe metadata into
+    // non-SQL profiles. The profile is already known at generation time, so
+    // keep the exercise as code_input and move it onto the Git shell contract
+    // before the generic draft schema applies SQL-only workspace validation.
+    const declaredRecipeType =
+        options.profileId === "git" && rawDeclaredRecipeType === "sql_query"
+            ? "shell_task"
+            : rawDeclaredRecipeType;
+    const recipeRunsWithoutAuthoredTests =
+        declaredRecipeType === "sql_query" || declaredRecipeType === "shell_task";
 
     // SQL query recipes are graded from their result-table contract and do not
     // require fixed stdout tests or semantic checks. Do not replace a valid SQL
@@ -846,7 +861,18 @@ function sanitizeCodeInputExercise(
 
     const next: Record<string, unknown> = {
         ...exercise,
+        ...(declaredRecipeType ? { recipeType: declaredRecipeType } : {}),
     };
+
+    if (options.profileId === "git") {
+        next.fixedLanguage = "bash";
+        next.recipeType = "shell_task";
+        next.mode = "terminal_workspace";
+        next.entryFilePath = "main.sh";
+        delete next.datasetId;
+        delete next.checkSql;
+        delete next.sqlFileOrder;
+    }
 
     const fixtureFiles = sanitizeFixtureList(exercise.files);
     const starterFiles = sanitizeWorkspaceFileList(exercise.starterFiles);
@@ -927,6 +953,7 @@ function sanitizeCodeInputExercise(
 
 function sanitizeGeneratedTopicAuthoringDraftBase(
     value: TopicAuthoringDraft,
+    options: SanitizeGeneratedTopicAuthoringDraftOptions = {},
 ): TopicAuthoringDraft {
     const quizDraft = Array.isArray(value.quizDraft)
         ? value.quizDraft.map((exercise) => {
@@ -935,7 +962,7 @@ function sanitizeGeneratedTopicAuthoringDraftBase(
             const kind = normalizeText(exercise.kind);
 
             if (kind === "code_input") {
-                return sanitizeCodeInputExercise(exercise);
+                return sanitizeCodeInputExercise(exercise, options);
             }
 
             return sanitizeNonCodeExercise(exercise);

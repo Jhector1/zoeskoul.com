@@ -1,0 +1,6 @@
+{
+  "ok": false,
+  "errors": [
+    "Invalid TopicAuthoringDraft: quizDraft[7] fill_blank_choice needs correctValue"
+  ]
+}

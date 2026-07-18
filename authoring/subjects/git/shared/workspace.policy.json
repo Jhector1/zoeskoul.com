@@ -1,0 +1,51 @@
+{
+  "policyId": "git-terminal-workspace",
+  "workspaceProfileId": "terminal-workspace-runner",
+  "workspacePolicyId": "git-terminal-workspace",
+  "uiTerms": {
+    "terminal": "terminal",
+    "editor": "terminal",
+    "explorer": "file explorer",
+    "checkButton": "Check Answer",
+    "runButton": "type the command and press Enter"
+  },
+  "preferredTerms": {
+    "editor": "terminal",
+    "run button": "type the command and press Enter",
+    "output panel": "terminal output",
+    "remote": "shared repository location",
+    "repository state": "working tree, staging area, branches, commits, and remotes"
+  },
+  "learnerInstructions": [
+    "Use the terminal to complete the Git task.",
+    "Inspect with pwd, ls, git status, and the lesson-specific Git view before making changes.",
+    "Type each command and press Enter so the terminal runs it.",
+    "Use the file explorer to confirm files and folders, but use Git state to confirm tracked, staged, committed, ignored, branch, and remote outcomes.",
+    "Click Check Answer after the repository matches the requested final state."
+  ],
+  "forbiddenActions": [
+    "Use sudo",
+    "Install packages",
+    "Change system directories",
+    "Depend on public network access",
+    "Enter personal GitHub credentials or tokens",
+    "Use recursive destructive deletion outside the authored workspace",
+    "Use force push or destructive history rewriting in the beginner path"
+  ],
+  "notes": [
+    "Git courses reuse the same terminal-workspace runner as Linux while using profileId git for Git-specific authoring and repository-state checks.",
+    "Independent exercises receive fresh repositories. Only authored project and capstone steps share repository state.",
+    "Remote lessons use local bare repositories that behave like origin without external network access.",
+    "The terminal is the primary learner surface; the code editor remains hidden for Git repository labs."
+  ],
+  "validationRequirements": {
+    "terminalOnly": true,
+    "terminalSessionScopeDefault": "exercise",
+    "fileExplorerVisible": true,
+    "editorHidden": true,
+    "networkAccessRequired": false,
+    "localBareRemoteRequiredForRemoteLabs": true,
+    "deterministicLocalIdentityRequired": true,
+    "defaultBranchWhenRelevant": "main"
+  }
+}

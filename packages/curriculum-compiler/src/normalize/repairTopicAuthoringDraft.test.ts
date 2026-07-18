@@ -143,6 +143,67 @@ describe("repairTopicAuthoringDraft", () => {
         ).toHaveLength(1);
     });
 
+    it("collapses model-generated project step sketches into one authored synopsis", () => {
+        const stepIds = Array.from({ length: 6 }, (_, index) => `step-${index + 1}`);
+        const repaired = repairTopicAuthoringDraft(
+            {
+                title: "Neighborhood Resource Guide History",
+                summary: "Prepare a trustworthy handoff.",
+                minutes: 120,
+                sketchBlocks: [
+                    {
+                        id: "intro",
+                        title: "Welcome to the Final Capstone",
+                        bodyMarkdown: [
+                            "A neighborhood help desk needs a maintained resource guide.",
+                            "### Project Brief",
+                            "**Scenario:** A neighborhood help desk needs a maintained resource guide.",
+                            "**Your role:** Junior developer",
+                            "**Workspace:** One cumulative terminal workspace",
+                            "**Deliverable:** A six-step local Git history",
+                        ].join("\n\n"),
+                    },
+                    ...stepIds.map((id, index) => ({
+                        id: `${id}-sketch`,
+                        title: `Step ${index + 1}`,
+                        bodyMarkdown: `Worked example for project step ${index + 1}.`,
+                    })),
+                ],
+                quizDraft: stepIds.map((id) => ({
+                    id,
+                    kind: "code_input",
+                    title: id,
+                    prompt: `Complete ${id}.`,
+                    hint: "Use the project brief.",
+                    help: { concept: "Project step", hint_1: "Inspect state.", hint_2: "Complete the requested change." },
+                    starterCode: "# starter\n",
+                    solutionCode: "git status\n",
+                })),
+                projectDraft: {
+                    title: "Neighborhood Resource Guide History",
+                    stepIds,
+                },
+            } as any,
+            {
+                profileId: "git",
+                sectionRole: "capstone",
+                moduleRole: "capstone",
+                projectBrief: {
+                    scenario: "A neighborhood help desk needs a maintained resource guide.",
+                    role: "Junior developer",
+                    workspace: "One cumulative terminal workspace",
+                    deliverable: "A six-step local Git history",
+                    stepCountTarget: 6,
+                },
+            } as any,
+        );
+
+        expect(repaired.sketchBlocks).toHaveLength(1);
+        expect(repaired.sketchBlocks[0]?.id).toBe("intro");
+        expect(repaired.projectDraft?.stepIds).toEqual(stepIds);
+        expect(repaired.quizDraft).toHaveLength(6);
+    });
+
     it("creates a project synopsis sketch when authoring supplies a brief but the model omits the sketch", () => {
         const repaired = repairTopicAuthoringDraft(
             {

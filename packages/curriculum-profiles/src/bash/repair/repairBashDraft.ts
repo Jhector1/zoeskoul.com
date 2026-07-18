@@ -1,8 +1,9 @@
-import type {
-    TopicAuthoringDraft,
-    TopicSeed,
+import {
+    normalizeTerminalExpectations,
+    type TerminalExpectations,
+    type TopicAuthoringDraft,
+    type TopicSeed,
 } from "@zoeskoul/curriculum-contracts";
-import type { TerminalExpectations } from "@zoeskoul/practice-checks";
 import type { RepairReport } from "../../shared/profileServices.js";
 import {
     type CodeInputDraft,
@@ -42,14 +43,19 @@ function forbiddenSudoExpectation() {
     ];
 }
 
-function normalizeTerminalExpectations(
+function withBashSafetyExpectations(
     expectations: TerminalExpectations | undefined,
 ): TerminalExpectations {
+    const normalized = normalizeTerminalExpectations(
+        expectations,
+        "Bash terminalExpectations",
+    ) ?? {};
+
     return {
-        ...(expectations ?? {}),
+        ...normalized,
         forbiddenCommands:
-            expectations?.forbiddenCommands && expectations.forbiddenCommands.length > 0
-                ? expectations.forbiddenCommands
+            normalized.forbiddenCommands && normalized.forbiddenCommands.length > 0
+                ? normalized.forbiddenCommands
                 : forbiddenSudoExpectation(),
     };
 }
@@ -85,7 +91,9 @@ function normalizeBashCodeInput(exercise: CodeInputDraft): CodeInputDraft {
             "Use the exact file and folder names from the prompt, then inspect the result with ls.",
         help: exercise.help ?? commonHelp(exercise.title || "this Linux task"),
         instructions: exercise.instructions || prompt,
-        terminalExpectations: normalizeTerminalExpectations(exercise.terminalExpectations),
+        terminalExpectations: withBashSafetyExpectations(
+            exercise.terminalExpectations,
+        ),
     };
 }
 

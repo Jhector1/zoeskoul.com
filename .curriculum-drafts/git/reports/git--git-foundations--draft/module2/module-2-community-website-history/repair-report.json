@@ -1,0 +1,47 @@
+{
+  "topicId": "module-2-community-website-history",
+  "repairs": [
+    {
+      "code": "GIT_TRY_IT_KIND_PROMOTED",
+      "category": "other",
+      "severity": "low",
+      "field": "quizDraft.try-module-2-community-website-history-sketch0",
+      "message": "Converted generated Try It \"try-module-2-community-website-history-sketch0\" into the Git code_input required by plannedExerciseCounts."
+    },
+    {
+      "code": "GIT_TRY_IT_KIND_PROMOTED",
+      "category": "other",
+      "severity": "low",
+      "field": "quizDraft.try-module-2-community-website-history-sketch1",
+      "message": "Converted generated Try It \"try-module-2-community-website-history-sketch1\" into the Git code_input required by plannedExerciseCounts."
+    },
+    {
+      "code": "GIT_TRY_IT_KIND_PROMOTED",
+      "category": "other",
+      "severity": "low",
+      "field": "quizDraft.try-module-2-community-website-history-sketch2",
+      "message": "Converted generated Try It \"try-module-2-community-website-history-sketch2\" into the Git code_input required by plannedExerciseCounts."
+    },
+    {
+      "code": "GIT_TRY_IT_KIND_PROMOTED",
+      "category": "other",
+      "severity": "low",
+      "field": "quizDraft.try-module-2-community-website-history-sketch3",
+      "message": "Converted generated Try It \"try-module-2-community-website-history-sketch3\" into the Git code_input required by plannedExerciseCounts."
+    },
+    {
+      "code": "GIT_TRY_IT_KIND_PROMOTED",
+      "category": "other",
+      "severity": "low",
+      "field": "quizDraft.try-module-2-community-website-history-sketch4",
+      "message": "Converted generated Try It \"try-module-2-community-website-history-sketch4\" into the Git code_input required by plannedExerciseCounts."
+    },
+    {
+      "code": "GIT_TRY_IT_KIND_PROMOTED",
+      "category": "other",
+      "severity": "low",
+      "field": "quizDraft.try-module-2-community-website-history-sketch5",
+      "message": "Converted generated Try It \"try-module-2-community-website-history-sketch5\" into the Git code_input required by plannedExerciseCounts."
+    }
+  ]
+}

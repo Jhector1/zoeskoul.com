@@ -119,13 +119,16 @@ describe("pythonProfile", () => {
         expect(manifest.solutionFiles).toEqual([
             {
                 path: "main.py",
-                content: "from tools.names import clean_name\nprint(clean_name(' ava '))\n",
+                content:
+                    "@:topics.python.python-1.helper-modules.quiz.code-1.solutionFiles.main_py.content",
                 language: "python",
                 isEntry: true,
+                entry: true,
             },
             {
                 path: "tools/names.py",
-                content: "def clean_name(text):\n    return text.strip().title()\n",
+                content:
+                    "@:topics.python.python-1.helper-modules.quiz.code-1.solutionFiles.tools_names_py.content",
                 language: "python",
             },
         ]);

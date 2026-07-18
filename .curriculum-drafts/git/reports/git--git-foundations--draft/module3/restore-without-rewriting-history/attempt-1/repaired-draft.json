@@ -1,0 +1,445 @@
+{
+  "title": "Restore without Rewriting History",
+  "summary": "Undo an unstaged edit or unstage a file while keeping the committed history intact.",
+  "minutes": 24,
+  "sketchBlocks": [
+    {
+      "id": "restore-sketch-0",
+      "title": "Using git restore for Working Tree Files",
+      "bodyMarkdown": "Git provides a powerful command called `git restore` that allows you to revert changes in your working directory. This command is particularly useful when you want to discard changes in a file that you haven't staged yet. \n\nWorked example: Suppose you have a file `report.txt` that you've modified but now wish to revert to its last committed state. You can use the command `git restore report.txt` to discard the changes and restore the file to its committed version. This operation affects only the working tree and does not alter the staging area or commit history."
+    },
+    {
+      "id": "restore-sketch-1",
+      "title": "Using git restore --staged to Unstage Files",
+      "bodyMarkdown": "The `git restore --staged` command is used to unstage files that have been added to the staging area. This is useful when you realize that a file should not be included in the next commit.\n\nWorked example: Imagine you have staged a file `draft.txt` using `git add draft.txt`, but you decide it should not be part of the next commit. You can run `git restore --staged draft.txt` to remove it from the staging area while keeping the changes in your working directory."
+    },
+    {
+      "id": "restore-sketch-2",
+      "title": "Deciding Between git restore and git restore --staged",
+      "bodyMarkdown": "Choosing the correct restore operation depends on your current situation. If you need to discard changes in the working directory, use `git restore`. If you need to unstage a file but keep its changes, use `git restore --staged`.\n\nWorked example: You have modified and staged `summary.txt`, but you want to keep the changes without including them in the next commit. Use `git restore --staged summary.txt` to unstage it."
+    },
+    {
+      "id": "restore-sketch-3",
+      "title": "Avoiding Common Mistakes with git restore",
+      "bodyMarkdown": "A common mistake when using `git restore` is misunderstanding its scope. Remember, `git restore` affects only the working directory, while `git restore --staged` affects the staging area.\n\nWorked example: If you mistakenly use `git restore` on a staged file, it will not unstage it. Instead, use `git restore --staged` to correctly unstage the file while preserving its changes."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "single-choice-1",
+      "kind": "single_choice",
+      "title": "Purpose of git restore",
+      "prompt": "What is the primary purpose of the `git restore` command?",
+      "options": [
+        "To revert changes in the working directory",
+        "To commit changes to the repository",
+        "To create a new branch",
+        "To merge branches"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "single-choice-2",
+      "kind": "single_choice",
+      "title": "Effect of git restore --staged",
+      "prompt": "What happens when you use `git restore --staged` on a file?",
+      "options": [
+        "The file is removed from the staging area but changes are kept",
+        "The file is deleted from the repository",
+        "The file is committed to the repository",
+        "The file is reverted to the last committed state"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Consider what `git restore --staged` does to the staging area.",
+      "help": {
+        "concept": "The `git restore --staged` command is used to unstage files while keeping their changes.",
+        "hint_1": "Think about how `git restore --staged` affects the staging area.",
+        "hint_2": "`git restore --staged` removes the file from the staging area but keeps its changes."
+      }
+    },
+    {
+      "id": "multi-choice-1",
+      "kind": "multi_choice",
+      "title": "Choosing the Correct Restore Command",
+      "prompt": "Which commands can be used to revert changes in the working directory and unstage a file?",
+      "options": [
+        "git restore",
+        "git restore --staged",
+        "git commit",
+        "git add"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "drag-reorder-1",
+      "kind": "drag_reorder",
+      "title": "Order of Operations for Restoring Files",
+      "prompt": "Arrange the steps to revert changes in the working directory and unstage a file.",
+      "tokens": [
+        "Revert changes in the working directory",
+        "Unstage the file"
+      ],
+      "correctOrder": [
+        "Revert changes in the working directory",
+        "Unstage the file"
+      ],
+      "hint": "Read each piece and arrange them in the order the statement should be understood.",
+      "help": {
+        "concept": "The pieces should form a valid statement in a logical order.",
+        "hint_1": "Start with the piece that introduces the idea or action.",
+        "hint_2": "Place dependent pieces after the part they describe or complete."
+      }
+    },
+    {
+      "id": "fill-blank-1",
+      "kind": "fill_blank_choice",
+      "title": "Command to Unstage a File",
+      "prompt": "Fill in the blank to unstage a file while keeping its changes: `git restore --[blank1] <filename>`",
+      "template": "git restore --[blank1] <filename>",
+      "choices": [
+        "staged",
+        "commit",
+        "branch",
+        "reset"
+      ],
+      "correctValue": "staged",
+      "hint": "The option to unstage a file is `--the missing term`.",
+      "help": {
+        "concept": "The `git restore --the missing term` command is used to unstage files while keeping their changes.",
+        "hint_1": "The option to unstage a file is `--the missing term`.",
+        "hint_2": "Use `--the missing term` to unstage a file."
+      }
+    },
+    {
+      "id": "fill-blank-2",
+      "kind": "fill_blank_choice",
+      "title": "Command to Revert Changes",
+      "prompt": "Fill in the blank to revert changes in the working directory: `git [blank1] <filename>`",
+      "template": "git [blank1] <filename>",
+      "choices": [
+        "restore",
+        "commit",
+        "add",
+        "reset"
+      ],
+      "correctValue": "restore",
+      "hint": "The command to revert changes is `the missing term`.",
+      "help": {
+        "concept": "The `git the missing term` command is used to revert changes in the working directory.",
+        "hint_1": "The command to revert changes is `the missing term`.",
+        "hint_2": "Use `the missing term` to revert changes."
+      }
+    },
+    {
+      "id": "try-restore-sketch0",
+      "kind": "code_input",
+      "title": "Revert Changes in Working Directory",
+      "prompt": "You have modified a file named `notes.txt` in your working directory but want to discard these changes. Use the appropriate Git command to revert `notes.txt` to its last committed state.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+      "hint": "Read the Git task \"Revert Changes in Working Directory\" and identify the repository state you need to create.",
+      "help": {
+        "concept": "This Git exercise checks the repository state produced by \"Revert Changes in Working Directory\".",
+        "hint_1": "Use git status before and after each small change so you can see what moved between the working tree, staging area, and history.",
+        "hint_2": "Match the requested file names, branch names, and commit purpose before clicking Check Answer."
+      },
+      "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.",
+      "solutionCode": "bash .zoeskoul/setup.sh\ngit restore\ngit restore <filename>",
+      "fixedLanguage": "bash",
+      "recipeType": "shell_task",
+      "mode": "terminal_workspace",
+      "entryFilePath": "main.sh",
+      "instructions": "You have modified a file named `notes.txt` in your working directory but want to discard these changes. Use the appropriate Git command to revert `notes.txt` to its last committed state.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 1\\n' > notes.txt\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "bash .zoeskoul/setup.sh\ngit restore\ngit restore <filename>\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 1\\n' > notes.txt\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
+          },
+          {
+            "pattern": "^git\\s+restore$"
+          },
+          {
+            "pattern": "^git\\s+restore\\s+<filename>$"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "Do not rewrite shared history in this Git practice task."
+          }
+        ]
+      },
+      "gitExpectations": {
+        "repositoryInitialized": true,
+        "currentBranch": "main"
+      }
+    },
+    {
+      "id": "try-restore-sketch1",
+      "kind": "code_input",
+      "title": "Unstage a File",
+      "prompt": "You have staged a file named `draft.txt` but decide it should not be part of the next commit. Use the appropriate Git command to unstage `draft.txt` while keeping its changes in the working directory.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+      "hint": "Read the Git task \"Unstage a File\" and identify the repository state you need to create.",
+      "help": {
+        "concept": "This Git exercise checks the repository state produced by \"Unstage a File\".",
+        "hint_1": "Use git status before and after each small change so you can see what moved between the working tree, staging area, and history.",
+        "hint_2": "Match the requested file names, branch names, and commit purpose before clicking Check Answer."
+      },
+      "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.",
+      "solutionCode": "bash .zoeskoul/setup.sh\ngit restore --staged\ngit restore --staged <filename>",
+      "fixedLanguage": "bash",
+      "recipeType": "shell_task",
+      "mode": "terminal_workspace",
+      "entryFilePath": "main.sh",
+      "instructions": "You have staged a file named `draft.txt` but decide it should not be part of the next commit. Use the appropriate Git command to unstage `draft.txt` while keeping its changes in the working directory.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 2\\n' > draft.txt\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "bash .zoeskoul/setup.sh\ngit restore --staged\ngit restore --staged <filename>\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 2\\n' > draft.txt\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
+          },
+          {
+            "pattern": "^git\\s+restore\\s+--staged$"
+          },
+          {
+            "pattern": "^git\\s+restore\\s+--staged\\s+<filename>$"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "Do not rewrite shared history in this Git practice task."
+          }
+        ]
+      },
+      "gitExpectations": {
+        "repositoryInitialized": true,
+        "currentBranch": "main"
+      }
+    },
+    {
+      "id": "try-restore-sketch2",
+      "kind": "code_input",
+      "title": "Decide the Correct Restore Command",
+      "prompt": "You have modified and staged a file named `summary.txt`. You want to keep the changes but not include them in the next commit. Use the appropriate Git command to achieve this.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      },
+      "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.",
+      "solutionCode": "bash .zoeskoul/setup.sh\ngit restore --staged <filename>",
+      "fixedLanguage": "bash",
+      "recipeType": "shell_task",
+      "mode": "terminal_workspace",
+      "entryFilePath": "main.sh",
+      "instructions": "You have modified and staged a file named `summary.txt`. You want to keep the changes but not include them in the next commit. Use the appropriate Git command to achieve this.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 3\\n' > summary.txt\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "bash .zoeskoul/setup.sh\ngit restore --staged <filename>\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 3\\n' > summary.txt\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
+          },
+          {
+            "pattern": "^git\\s+restore\\s+--staged\\s+<filename>$"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "Do not rewrite shared history in this Git practice task."
+          }
+        ]
+      },
+      "gitExpectations": {
+        "repositoryInitialized": true,
+        "currentBranch": "main"
+      }
+    },
+    {
+      "id": "try-restore-sketch3",
+      "kind": "code_input",
+      "title": "Avoid Common Mistakes with git restore",
+      "prompt": "You mistakenly staged a file named `config.txt` and want to unstage it while keeping its changes. Use the correct Git command to unstage `config.txt`.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      },
+      "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.",
+      "solutionCode": "bash .zoeskoul/setup.sh\ngit restore\ngit restore --staged\ngit restore --staged <filename>",
+      "fixedLanguage": "bash",
+      "recipeType": "shell_task",
+      "mode": "terminal_workspace",
+      "entryFilePath": "main.sh",
+      "instructions": "You mistakenly staged a file named `config.txt` and want to unstage it while keeping its changes. Use the correct Git command to unstage `config.txt`.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 4\\n' > config.txt\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "bash .zoeskoul/setup.sh\ngit restore\ngit restore --staged\ngit restore --staged <filename>\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 4\\n' > config.txt\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
+          },
+          {
+            "pattern": "^git\\s+restore$"
+          },
+          {
+            "pattern": "^git\\s+restore\\s+--staged$"
+          },
+          {
+            "pattern": "^git\\s+restore\\s+--staged\\s+<filename>$"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "Do not rewrite shared history in this Git practice task."
+          }
+        ]
+      },
+      "gitExpectations": {
+        "repositoryInitialized": true,
+        "currentBranch": "main"
+      }
+    }
+  ]
+}

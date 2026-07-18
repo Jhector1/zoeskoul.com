@@ -13,7 +13,7 @@ describe("resolveAuthoringPolicyChain", () => {
     it("resolves subject shared profile/workspace/validation and SQL course validation policy in order", async () => {
         const policy = await resolveAuthoringPolicyChain({
             subjectSlug: "sql",
-            courseSlug: "sql-foundations",
+            courseSlug: "sql-v2",
             includeProjectPolicy: true,
         });
 
@@ -22,7 +22,7 @@ describe("resolveAuthoringPolicyChain", () => {
                 expect.stringContaining("authoring/subjects/sql/shared/profile.json"),
                 expect.stringContaining("authoring/subjects/sql/shared/workspace.policy.json"),
                 expect.stringContaining("authoring/subjects/sql/shared/validation.policy.json"),
-                expect.stringContaining("authoring/subjects/sql/courses/sql-foundations/validation.policy.json"),
+                expect.stringContaining("authoring/subjects/sql/courses/sql-v2/validation.policy.json"),
             ]),
         );
         expect(policy.workspaceProfileId).toBe("browser-sql-runner");

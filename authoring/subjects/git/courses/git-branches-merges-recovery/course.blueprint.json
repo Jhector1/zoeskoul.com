@@ -1,0 +1,138 @@
+{
+  "subjectSlug": "git",
+  "courseSlug": "git-branches-merges-recovery",
+  "catalogSlug": "git",
+  "trackSlug": "git",
+  "profileId": "git",
+  "workspaceProfileId": "terminal-workspace-runner",
+  "workspacePolicyId": "git-terminal-workspace",
+  "title": "Git Branches, Merges, and Recovery",
+  "subtitle": "Work in parallel, integrate safely, and recover without erasing history.",
+  "level": "intermediate",
+  "moduleCount": 4,
+  "description": "A focused second Git course with three standard modules and one final capstone. Learners isolate work with branches, integrate changes with merges, resolve controlled conflicts, and recover safely without destructive history rewriting.",
+  "sourceLocale": "en",
+  "targetLocales": [],
+  "accessPolicy": "paid",
+  "moduleAccessOverrideDefault": null,
+  "audience": [
+    "Learners who completed Git Foundations.",
+    "Developers preparing to collaborate without yet depending on a hosted platform.",
+    "Students who need a calm, state-based recovery model instead of command memorization."
+  ],
+  "prerequisites": [
+    "Complete Git Foundations.",
+    "Initialize repositories, read status and diffs, stage intentionally, create commits, and inspect history.",
+    "Rename, remove, ignore, and restore tracked files safely."
+  ],
+  "goals": [
+    "Create, switch, compare, and safely clean up branches.",
+    "Commit independent work without changing stable main.",
+    "Perform fast-forward and divergent merges.",
+    "Read and resolve text conflicts intentionally.",
+    "Restore, revert, stash, and inspect reflog based on the location of a mistake.",
+    "Complete three cumulative module projects and one integrated release-rescue capstone."
+  ],
+  "teachingStyle": {
+    "tone": "story-led, book-like, practical, calm, cumulative, and repository-state-first",
+    "quizWeight": 0.2,
+    "projectWeight": 0.35,
+    "codeInputWeight": 0.45
+  },
+  "constraints": {
+    "moduleCount": 4,
+    "topicsPerModuleMin": 1,
+    "topicsPerModuleMax": 5,
+    "standardModuleCount": 3,
+    "topicsPerStandardModule": 5,
+    "finalModuleTopics": 1,
+    "moduleSlugFormat": "<courseSlug>-module-<number>-<short-topic-area>",
+    "sectionSlugFormat": "<courseSlug>-section-<number>-<short-section-role>",
+    "prefixFormat": "<course_slug_with_underscores>_module_<number>"
+  },
+  "seedModules": [
+    "git-branches-merges-recovery-module-1-branch-work",
+    "git-branches-merges-recovery-module-2-merge-work",
+    "git-branches-merges-recovery-module-3-recovery",
+    "git-branches-merges-recovery-module-4-final-capstone"
+  ],
+  "versioning": {
+    "family": "git-branches-merges-recovery",
+    "version": 1,
+    "status": "draft",
+    "defaultForNewEnrollments": false,
+    "supersedes": null,
+    "supersededBy": null
+  },
+  "courseGenerationPolicy": {
+    "studentActionStyle": "terminal-workspace",
+    "forbidUnavailableWorkspaceActions": true,
+    "avoidTerms": [
+      "GitHub issue",
+      "pull request",
+      "public remote",
+      "personal access token",
+      "reset --hard",
+      "interactive rebase",
+      "force push",
+      "cherry-pick"
+    ],
+    "preferredTerms": {
+      "editor": "terminal",
+      "run button": "type the command and press Enter",
+      "output panel": "terminal output",
+      "repository state": "the files, staging area, branches, commits, and remotes Git currently records",
+      "check": "click Check Answer after verifying the repository state"
+    },
+    "notes": [
+      "Use profileId git, fixedLanguage bash, recipeType shell_task, and mode terminal_workspace for every Git code_input.",
+      "Use the existing terminal-workspace runner; do not create a Git-specific IDE, runner, recipe type, or programming language.",
+      "Grade final repository state with gitExpectations. Use terminalExpectations only when the exact safe command is itself part of the learning goal.",
+      "Every terminal instruction must explicitly tell the learner to type the command and press Enter.",
+      "Configure the local repository identity as ZoeSkoul Learner and learner@zoeskoul.local before the first commit.",
+      "Set the initial branch to main whenever branch naming matters.",
+      "Never grade exact commit hashes, machine-dependent timestamps, absolute workspace paths, or decorative git log graph spacing.",
+      "Keep independent Try It workspaces isolated with terminalSessionScope exercise; use terminalSessionScope project only for authored progressive projects and capstones.",
+      "Use one synopsis sketch for each module project and capstone, followed by exactly the number of cumulative steps declared in projectBrief.stepCountTarget.",
+      "The complete solution from project step N becomes the complete starter workspace for step N+1.",
+      "Worked examples, Try It tasks, module projects, and final capstones must use different repository stories and different requested outcomes.",
+      "Write lessons like a short practical book chapter: begin with the project situation, define the Git idea, show the command shape, trace the repository-state change, warn about one common mistake, and transition naturally into practice.",
+      "Do not open lessons with internal curriculum language such as learning contract, milestone count, assessment checklist, or concepts you will demonstrate.",
+      "Prepend one standalone reading-only course introduction before the first technical sketch without replacing the first technical lesson.",
+      "The final module contains exactly one capstone section and one capstone topic.",
+      "Do not require public network access, GitHub credentials, personal access tokens, learner secrets, or an external repository.",
+      "Do not re-teach repository initialization, basic staging, basic commits, .gitignore, or basic log as standalone lessons; use them as prerequisite tools inside branch, merge, and recovery problems.",
+      "Use git switch rather than git checkout in beginner instructions.",
+      "Do not teach reset --hard, interactive rebase, cherry-pick, force push, or remote collaboration in this course.",
+      "The final capstone must contain exactly seven progressive steps."
+    ]
+  },
+  "practiceDefaults": {
+    "tryIt": true,
+    "requiresTryIt": true,
+    "tryItPlacement": "all_sketches",
+    "runtimeMode": "terminal_workspace",
+    "terminalSessionScope": "exercise",
+    "expectedPracticeKinds": [
+      "single_choice",
+      "multi_choice",
+      "fill_blank_choice",
+      "code_input"
+    ]
+  },
+  "runtimePolicy": {
+    "language": "bash",
+    "backend": "pty",
+    "mode": "terminal_workspace",
+    "terminalOnly": true,
+    "defaultTerminalSessionScope": "exercise",
+    "networkAccess": false,
+    "remoteStrategy": "local-bare-repository",
+    "defaultBranch": "main",
+    "localIdentity": {
+      "name": "ZoeSkoul Learner",
+      "email": "learner@zoeskoul.local"
+    },
+    "primaryExpectationPayload": "gitExpectations"
+  }
+}

@@ -1,0 +1,272 @@
+{
+  "topics": {
+    "git--git-foundations--draft": {
+      "git-foundations-module-4-final-capstone": {
+        "final-neighborhood-resource-guide-history": {
+          "label": "Final Capstone: Neighborhood Resource Guide History",
+          "summary": "Build a complete local history for a neighborhood resource guide while keeping changes focused, generated artifacts ignored, and the final repository easy to hand off.",
+          "cards": {
+            "sketch0": {
+              "title": "Welcome to the Final Capstone"
+            },
+            "project": {
+              "title": "Neighborhood Resource Guide History"
+            }
+          },
+          "projectSteps": {
+            "try_final_neighborhood_resource_guide_history_sketch0": {
+              "title": "Create the Guide Baseline"
+            },
+            "try_final_neighborhood_resource_guide_history_sketch1": {
+              "title": "Add the Services Page"
+            },
+            "try_final_neighborhood_resource_guide_history_sketch2": {
+              "title": "Publish Updated Help Desk Hours"
+            },
+            "try_final_neighborhood_resource_guide_history_sketch3": {
+              "title": "Ignore Generated Preview Files"
+            },
+            "try_final_neighborhood_resource_guide_history_sketch4": {
+              "title": "Rename the Guide and Remove the Obsolete Note"
+            },
+            "try_final_neighborhood_resource_guide_history_sketch5": {
+              "title": "Commit and Verify the Final Handoff"
+            }
+          },
+          "finalCapstone": {
+            "steps": {
+              "try_final_neighborhood_resource_guide_history_sketch0": {
+                "title": "Create the Guide Baseline",
+                "prompt": "Start the final capstone project. In step 1 of 6, Turn the existing `resource-guide/` folder into a Git repository on `main`, configure the repository-only learner identity, stage the initial guide files, and commit `Start neighborhood resource guide`.\n\nFirst type `bash .zoeskoul/setup.sh` and press Enter. Then enter `resource-guide/`, type each Git command, and press Enter after every command.",
+                "hint": "This is the first project step. Build a clean starting version, then run it before moving on.",
+                "help": {
+                  "concept": "The final capstone is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "This is the first project step. Build a clean starting version, then run it before moving on.",
+                  "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+                },
+                "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then follow the capstone step in the prompt.",
+                "solutionCode": "bash .zoeskoul/setup.sh\ncd resource-guide\ngit init -b main\ngit config --local user.name \"ZoeSkoul Learner\"\ngit config --local user.email \"learner@zoeskoul.local\"\ngit add README.md pages/contact.md pages/guide-draft.md notes/old-phone-tree.txt\ngit commit -m \"Start neighborhood resource guide\"",
+                "instructions": "Turn the existing `resource-guide/` folder into a Git repository on `main`, configure the repository-only learner identity, stage the initial guide files, and commit `Start neighborhood resource guide`.\n\nFirst type `bash .zoeskoul/setup.sh` and press Enter. Then enter `resource-guide/`, type each Git command, and press Enter after every command.",
+                "starterFiles": {
+                  "main_sh": {
+                    "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then follow the capstone step in the prompt.\n"
+                  },
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"resource-guide\"\nmkdir -p -- \"resource-guide/pages\" \"resource-guide/notes\" \"resource-guide/generated\"\nprintf '%s\\n' '# Neighborhood Resource Guide' '' 'Welcome to the neighborhood resource guide.' > \"resource-guide/README.md\"\nprintf '%s\\n' '# Contact Information' '' 'Help Desk Hours: 9 AM - 4 PM, Monday to Friday' > \"resource-guide/pages/contact.md\"\nprintf '%s\\n' '# Guide Draft' '' 'Use this page to find neighborhood help.' > \"resource-guide/pages/guide-draft.md\"\nprintf '%s\\n' 'Legacy volunteer phone tree' > \"resource-guide/notes/old-phone-tree.txt\"\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_sh": {
+                    "content": "bash .zoeskoul/setup.sh\ncd resource-guide\ngit init -b main\ngit config --local user.name \"ZoeSkoul Learner\"\ngit config --local user.email \"learner@zoeskoul.local\"\ngit add README.md pages/contact.md pages/guide-draft.md notes/old-phone-tree.txt\ngit commit -m \"Start neighborhood resource guide\"\n"
+                  },
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"resource-guide\"\nmkdir -p -- \"resource-guide/pages\" \"resource-guide/notes\" \"resource-guide/generated\"\nprintf '%s\\n' '# Neighborhood Resource Guide' '' 'Welcome to the neighborhood resource guide.' > \"resource-guide/README.md\"\nprintf '%s\\n' '# Contact Information' '' 'Help Desk Hours: 9 AM - 4 PM, Monday to Friday' > \"resource-guide/pages/contact.md\"\nprintf '%s\\n' '# Guide Draft' '' 'Use this page to find neighborhood help.' > \"resource-guide/pages/guide-draft.md\"\nprintf '%s\\n' 'Legacy volunteer phone tree' > \"resource-guide/notes/old-phone-tree.txt\"\n"
+                  }
+                },
+                "terminalExpectations": {
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "Do not rewrite shared history in this Git practice task."
+                    }
+                  }
+                }
+              },
+              "try_final_neighborhood_resource_guide_history_sketch1": {
+                "title": "Add the Services Page",
+                "prompt": "Continue the final capstone project from the previous working step. In step 2 of 6, Continue the same guide by creating `pages/services.md` with the authored local-services list, stage only that file, and commit `Add local services page`.\n\nFirst type `bash .zoeskoul/setup.sh` and press Enter to restore the completed baseline. Then enter `resource-guide/`, create the page, run the Git commands, and press Enter after each command.",
+                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "help": {
+                  "concept": "The final capstone is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                  "hint_2": "Run the previous working code first, then make only the focused change for this step."
+                },
+                "starterCode": "bash .zoeskoul/setup.sh\ncd resource-guide\ngit init -b main\ngit config --local user.name \"ZoeSkoul Learner\"\ngit config --local user.email \"learner@zoeskoul.local\"\ngit add README.md pages/contact.md pages/guide-draft.md notes/old-phone-tree.txt\ngit commit -m \"Start neighborhood resource guide\"\n# Capstone step 2: Add the Services Page\n# Keep the working code above from the previous step.\n# Next, Continue the same guide by creating `pages/services.md` with the authored local-services list, stage only that file, and commit `Add local services page`\n# Add only the focused change for this step inside the existing work.\n",
+                "solutionCode": "bash .zoeskoul/setup.sh\ncd resource-guide\ngit init -b main\ngit config --local user.name \"ZoeSkoul Learner\"\ngit config --local user.email \"learner@zoeskoul.local\"\ngit add README.md pages/contact.md pages/guide-draft.md notes/old-phone-tree.txt\ngit commit -m \"Start neighborhood resource guide\"\nbash .zoeskoul/setup.sh\ncd resource-guide\nprintf '%s\\n' '# Local Services' '' '- Community pantry' '- Senior transport' > pages/services.md\ngit add pages/services.md\ngit commit -m \"Add local services page\"\n",
+                "instructions": "Continue the same guide by creating `pages/services.md` with the authored local-services list, stage only that file, and commit `Add local services page`.\n\nFirst type `bash .zoeskoul/setup.sh` and press Enter to restore the completed baseline. Then enter `resource-guide/`, create the page, run the Git commands, and press Enter after each command.",
+                "starterFiles": {
+                  "main_sh": {
+                    "content": "bash .zoeskoul/setup.sh\ncd resource-guide\ngit init -b main\ngit config --local user.name \"ZoeSkoul Learner\"\ngit config --local user.email \"learner@zoeskoul.local\"\ngit add README.md pages/contact.md pages/guide-draft.md notes/old-phone-tree.txt\ngit commit -m \"Start neighborhood resource guide\"\n# Capstone step 2: Add the Services Page\n# Keep the working code above from the previous step.\n# Next, Continue the same guide by creating `pages/services.md` with the authored local-services list, stage only that file, and commit `Add local services page`\n# Add only the focused change for this step inside the existing work.\n"
+                  },
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"resource-guide\"\nmkdir -p -- \"resource-guide/pages\" \"resource-guide/notes\" \"resource-guide/generated\"\nprintf '%s\\n' '# Neighborhood Resource Guide' '' 'Welcome to the neighborhood resource guide.' > \"resource-guide/README.md\"\nprintf '%s\\n' '# Contact Information' '' 'Help Desk Hours: 9 AM - 4 PM, Monday to Friday' > \"resource-guide/pages/contact.md\"\nprintf '%s\\n' '# Guide Draft' '' 'Use this page to find neighborhood help.' > \"resource-guide/pages/guide-draft.md\"\nprintf '%s\\n' 'Legacy volunteer phone tree' > \"resource-guide/notes/old-phone-tree.txt\"\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_sh": {
+                    "content": "bash .zoeskoul/setup.sh\ncd resource-guide\ngit init -b main\ngit config --local user.name \"ZoeSkoul Learner\"\ngit config --local user.email \"learner@zoeskoul.local\"\ngit add README.md pages/contact.md pages/guide-draft.md notes/old-phone-tree.txt\ngit commit -m \"Start neighborhood resource guide\"\nbash .zoeskoul/setup.sh\ncd resource-guide\nprintf '%s\\n' '# Local Services' '' '- Community pantry' '- Senior transport' > pages/services.md\ngit add pages/services.md\ngit commit -m \"Add local services page\"\n"
+                  },
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"resource-guide\"\nmkdir -p -- \"resource-guide/pages\" \"resource-guide/notes\" \"resource-guide/generated\"\nprintf '%s\\n' '# Neighborhood Resource Guide' '' 'Welcome to the neighborhood resource guide.' > \"resource-guide/README.md\"\nprintf '%s\\n' '# Contact Information' '' 'Help Desk Hours: 9 AM - 4 PM, Monday to Friday' > \"resource-guide/pages/contact.md\"\nprintf '%s\\n' '# Guide Draft' '' 'Use this page to find neighborhood help.' > \"resource-guide/pages/guide-draft.md\"\nprintf '%s\\n' 'Legacy volunteer phone tree' > \"resource-guide/notes/old-phone-tree.txt\"\ngit -C \"resource-guide\" init -q -b main\ngit -C \"resource-guide\" config user.name \"ZoeSkoul Learner\"\ngit -C \"resource-guide\" config user.email \"learner@zoeskoul.local\"\ngit -C \"resource-guide\" add README.md pages/contact.md pages/guide-draft.md notes/old-phone-tree.txt\ngit -C \"resource-guide\" commit -q -m \"Start neighborhood resource guide\"\n"
+                  }
+                },
+                "terminalExpectations": {
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "Do not rewrite shared history in this Git practice task."
+                    }
+                  }
+                }
+              },
+              "try_final_neighborhood_resource_guide_history_sketch2": {
+                "title": "Publish Updated Help Desk Hours",
+                "prompt": "Continue the final capstone project from the previous working step. In step 3 of 6, Change `pages/contact.md` so the help desk closes at 5 PM, inspect the unstaged diff, then commit `Update help desk hours`.\n\nFirst type `bash .zoeskoul/setup.sh` and press Enter to restore the first two commits. Enter `resource-guide/`, update the page, type `git diff` and press Enter, then stage and commit the change.",
+                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "help": {
+                  "concept": "The final capstone is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                  "hint_2": "Run the previous working code first, then make only the focused change for this step."
+                },
+                "starterCode": "bash .zoeskoul/setup.sh\ncd resource-guide\ngit init -b main\ngit config --local user.name \"ZoeSkoul Learner\"\ngit config --local user.email \"learner@zoeskoul.local\"\ngit add README.md pages/contact.md pages/guide-draft.md notes/old-phone-tree.txt\ngit commit -m \"Start neighborhood resource guide\"\nbash .zoeskoul/setup.sh\ncd resource-guide\nprintf '%s\\n' '# Local Services' '' '- Community pantry' '- Senior transport' > pages/services.md\ngit add pages/services.md\ngit commit -m \"Add local services page\"\n# Capstone step 3: Publish Updated Help Desk Hours\n# Keep the working code above from the previous step.\n# Next, Change `pages/contact.md` so the help desk closes at 5 PM, inspect the unstaged diff, then commit `Update help desk hours`\n# Add only the focused change for this step inside the existing work.\n",
+                "solutionCode": "bash .zoeskoul/setup.sh\ncd resource-guide\ngit init -b main\ngit config --local user.name \"ZoeSkoul Learner\"\ngit config --local user.email \"learner@zoeskoul.local\"\ngit add README.md pages/contact.md pages/guide-draft.md notes/old-phone-tree.txt\ngit commit -m \"Start neighborhood resource guide\"\nbash .zoeskoul/setup.sh\ncd resource-guide\nprintf '%s\\n' '# Local Services' '' '- Community pantry' '- Senior transport' > pages/services.md\ngit add pages/services.md\ngit commit -m \"Add local services page\"\nbash .zoeskoul/setup.sh\ncd resource-guide\nprintf '%s\\n' '# Contact Information' '' 'Help Desk Hours: 9 AM - 5 PM, Monday to Friday' > pages/contact.md\ngit diff\ngit add pages/contact.md\ngit commit -m \"Update help desk hours\"\n",
+                "instructions": "Change `pages/contact.md` so the help desk closes at 5 PM, inspect the unstaged diff, then commit `Update help desk hours`.\n\nFirst type `bash .zoeskoul/setup.sh` and press Enter to restore the first two commits. Enter `resource-guide/`, update the page, type `git diff` and press Enter, then stage and commit the change.",
+                "starterFiles": {
+                  "main_sh": {
+                    "content": "bash .zoeskoul/setup.sh\ncd resource-guide\ngit init -b main\ngit config --local user.name \"ZoeSkoul Learner\"\ngit config --local user.email \"learner@zoeskoul.local\"\ngit add README.md pages/contact.md pages/guide-draft.md notes/old-phone-tree.txt\ngit commit -m \"Start neighborhood resource guide\"\nbash .zoeskoul/setup.sh\ncd resource-guide\nprintf '%s\\n' '# Local Services' '' '- Community pantry' '- Senior transport' > pages/services.md\ngit add pages/services.md\ngit commit -m \"Add local services page\"\n# Capstone step 3: Publish Updated Help Desk Hours\n# Keep the working code above from the previous step.\n# Next, Change `pages/contact.md` so the help desk closes at 5 PM, inspect the unstaged diff, then commit `Update help desk hours`\n# Add only the focused change for this step inside the existing work.\n"
+                  },
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"resource-guide\"\nmkdir -p -- \"resource-guide/pages\" \"resource-guide/notes\" \"resource-guide/generated\"\nprintf '%s\\n' '# Neighborhood Resource Guide' '' 'Welcome to the neighborhood resource guide.' > \"resource-guide/README.md\"\nprintf '%s\\n' '# Contact Information' '' 'Help Desk Hours: 9 AM - 4 PM, Monday to Friday' > \"resource-guide/pages/contact.md\"\nprintf '%s\\n' '# Guide Draft' '' 'Use this page to find neighborhood help.' > \"resource-guide/pages/guide-draft.md\"\nprintf '%s\\n' 'Legacy volunteer phone tree' > \"resource-guide/notes/old-phone-tree.txt\"\ngit -C \"resource-guide\" init -q -b main\ngit -C \"resource-guide\" config user.name \"ZoeSkoul Learner\"\ngit -C \"resource-guide\" config user.email \"learner@zoeskoul.local\"\ngit -C \"resource-guide\" add README.md pages/contact.md pages/guide-draft.md notes/old-phone-tree.txt\ngit -C \"resource-guide\" commit -q -m \"Start neighborhood resource guide\"\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_sh": {
+                    "content": "bash .zoeskoul/setup.sh\ncd resource-guide\ngit init -b main\ngit config --local user.name \"ZoeSkoul Learner\"\ngit config --local user.email \"learner@zoeskoul.local\"\ngit add README.md pages/contact.md pages/guide-draft.md notes/old-phone-tree.txt\ngit commit -m \"Start neighborhood resource guide\"\nbash .zoeskoul/setup.sh\ncd resource-guide\nprintf '%s\\n' '# Local Services' '' '- Community pantry' '- Senior transport' > pages/services.md\ngit add pages/services.md\ngit commit -m \"Add local services page\"\nbash .zoeskoul/setup.sh\ncd resource-guide\nprintf '%s\\n' '# Contact Information' '' 'Help Desk Hours: 9 AM - 5 PM, Monday to Friday' > pages/contact.md\ngit diff\ngit add pages/contact.md\ngit commit -m \"Update help desk hours\"\n"
+                  },
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"resource-guide\"\nmkdir -p -- \"resource-guide/pages\" \"resource-guide/notes\" \"resource-guide/generated\"\nprintf '%s\\n' '# Neighborhood Resource Guide' '' 'Welcome to the neighborhood resource guide.' > \"resource-guide/README.md\"\nprintf '%s\\n' '# Contact Information' '' 'Help Desk Hours: 9 AM - 4 PM, Monday to Friday' > \"resource-guide/pages/contact.md\"\nprintf '%s\\n' '# Guide Draft' '' 'Use this page to find neighborhood help.' > \"resource-guide/pages/guide-draft.md\"\nprintf '%s\\n' 'Legacy volunteer phone tree' > \"resource-guide/notes/old-phone-tree.txt\"\ngit -C \"resource-guide\" init -q -b main\ngit -C \"resource-guide\" config user.name \"ZoeSkoul Learner\"\ngit -C \"resource-guide\" config user.email \"learner@zoeskoul.local\"\ngit -C \"resource-guide\" add README.md pages/contact.md pages/guide-draft.md notes/old-phone-tree.txt\ngit -C \"resource-guide\" commit -q -m \"Start neighborhood resource guide\"\nprintf '%s\\n' '# Local Services' '' '- Community pantry' '- Senior transport' > \"resource-guide/pages/services.md\"\ngit -C \"resource-guide\" add pages/services.md\ngit -C \"resource-guide\" commit -q -m \"Add local services page\"\n"
+                  }
+                },
+                "terminalExpectations": {
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "Do not rewrite shared history in this Git practice task."
+                    }
+                  }
+                }
+              },
+              "try_final_neighborhood_resource_guide_history_sketch3": {
+                "title": "Ignore Generated Preview Files",
+                "prompt": "Continue the final capstone project from the previous working step. In step 4 of 6, Create `.gitignore` with the rule `generated/`, stage `.gitignore`, and verify that `generated/preview.html` is ignored. Do not commit yet; this staged rule belongs with the final cleanup commit.\n\nFirst type `bash .zoeskoul/setup.sh` and press Enter to restore the three committed milestones. Enter `resource-guide/`, type each command, and press Enter after every command.",
+                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "help": {
+                  "concept": "The final capstone is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                  "hint_2": "Run the previous working code first, then make only the focused change for this step."
+                },
+                "starterCode": "bash .zoeskoul/setup.sh\ncd resource-guide\ngit init -b main\ngit config --local user.name \"ZoeSkoul Learner\"\ngit config --local user.email \"learner@zoeskoul.local\"\ngit add README.md pages/contact.md pages/guide-draft.md notes/old-phone-tree.txt\ngit commit -m \"Start neighborhood resource guide\"\nbash .zoeskoul/setup.sh\ncd resource-guide\nprintf '%s\\n' '# Local Services' '' '- Community pantry' '- Senior transport' > pages/services.md\ngit add pages/services.md\ngit commit -m \"Add local services page\"\nbash .zoeskoul/setup.sh\ncd resource-guide\nprintf '%s\\n' '# Contact Information' '' 'Help Desk Hours: 9 AM - 5 PM, Monday to Friday' > pages/contact.md\ngit diff\ngit add pages/contact.md\ngit commit -m \"Update help desk hours\"\n# Capstone step 4: Ignore Generated Preview Files\n# Keep the working code above from the previous step.\n# Next, Create `.gitignore` with the rule `generated/`, stage `.gitignore`, and verify that `generated/preview.html` is ignored\n# Add only the focused change for this step inside the existing work.\n",
+                "solutionCode": "bash .zoeskoul/setup.sh\ncd resource-guide\ngit init -b main\ngit config --local user.name \"ZoeSkoul Learner\"\ngit config --local user.email \"learner@zoeskoul.local\"\ngit add README.md pages/contact.md pages/guide-draft.md notes/old-phone-tree.txt\ngit commit -m \"Start neighborhood resource guide\"\nbash .zoeskoul/setup.sh\ncd resource-guide\nprintf '%s\\n' '# Local Services' '' '- Community pantry' '- Senior transport' > pages/services.md\ngit add pages/services.md\ngit commit -m \"Add local services page\"\nbash .zoeskoul/setup.sh\ncd resource-guide\nprintf '%s\\n' '# Contact Information' '' 'Help Desk Hours: 9 AM - 5 PM, Monday to Friday' > pages/contact.md\ngit diff\ngit add pages/contact.md\ngit commit -m \"Update help desk hours\"\nbash .zoeskoul/setup.sh\ncd resource-guide\nprintf '%s\\n' 'generated/' > .gitignore\ngit add .gitignore\ngit check-ignore generated/preview.html\n",
+                "instructions": "Create `.gitignore` with the rule `generated/`, stage `.gitignore`, and verify that `generated/preview.html` is ignored. Do not commit yet; this staged rule belongs with the final cleanup commit.\n\nFirst type `bash .zoeskoul/setup.sh` and press Enter to restore the three committed milestones. Enter `resource-guide/`, type each command, and press Enter after every command.",
+                "starterFiles": {
+                  "main_sh": {
+                    "content": "bash .zoeskoul/setup.sh\ncd resource-guide\ngit init -b main\ngit config --local user.name \"ZoeSkoul Learner\"\ngit config --local user.email \"learner@zoeskoul.local\"\ngit add README.md pages/contact.md pages/guide-draft.md notes/old-phone-tree.txt\ngit commit -m \"Start neighborhood resource guide\"\nbash .zoeskoul/setup.sh\ncd resource-guide\nprintf '%s\\n' '# Local Services' '' '- Community pantry' '- Senior transport' > pages/services.md\ngit add pages/services.md\ngit commit -m \"Add local services page\"\nbash .zoeskoul/setup.sh\ncd resource-guide\nprintf '%s\\n' '# Contact Information' '' 'Help Desk Hours: 9 AM - 5 PM, Monday to Friday' > pages/contact.md\ngit diff\ngit add pages/contact.md\ngit commit -m \"Update help desk hours\"\n# Capstone step 4: Ignore Generated Preview Files\n# Keep the working code above from the previous step.\n# Next, Create `.gitignore` with the rule `generated/`, stage `.gitignore`, and verify that `generated/preview.html` is ignored\n# Add only the focused change for this step inside the existing work.\n"
+                  },
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"resource-guide\"\nmkdir -p -- \"resource-guide/pages\" \"resource-guide/notes\" \"resource-guide/generated\"\nprintf '%s\\n' '# Neighborhood Resource Guide' '' 'Welcome to the neighborhood resource guide.' > \"resource-guide/README.md\"\nprintf '%s\\n' '# Contact Information' '' 'Help Desk Hours: 9 AM - 4 PM, Monday to Friday' > \"resource-guide/pages/contact.md\"\nprintf '%s\\n' '# Guide Draft' '' 'Use this page to find neighborhood help.' > \"resource-guide/pages/guide-draft.md\"\nprintf '%s\\n' 'Legacy volunteer phone tree' > \"resource-guide/notes/old-phone-tree.txt\"\ngit -C \"resource-guide\" init -q -b main\ngit -C \"resource-guide\" config user.name \"ZoeSkoul Learner\"\ngit -C \"resource-guide\" config user.email \"learner@zoeskoul.local\"\ngit -C \"resource-guide\" add README.md pages/contact.md pages/guide-draft.md notes/old-phone-tree.txt\ngit -C \"resource-guide\" commit -q -m \"Start neighborhood resource guide\"\nprintf '%s\\n' '# Local Services' '' '- Community pantry' '- Senior transport' > \"resource-guide/pages/services.md\"\ngit -C \"resource-guide\" add pages/services.md\ngit -C \"resource-guide\" commit -q -m \"Add local services page\"\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_sh": {
+                    "content": "bash .zoeskoul/setup.sh\ncd resource-guide\ngit init -b main\ngit config --local user.name \"ZoeSkoul Learner\"\ngit config --local user.email \"learner@zoeskoul.local\"\ngit add README.md pages/contact.md pages/guide-draft.md notes/old-phone-tree.txt\ngit commit -m \"Start neighborhood resource guide\"\nbash .zoeskoul/setup.sh\ncd resource-guide\nprintf '%s\\n' '# Local Services' '' '- Community pantry' '- Senior transport' > pages/services.md\ngit add pages/services.md\ngit commit -m \"Add local services page\"\nbash .zoeskoul/setup.sh\ncd resource-guide\nprintf '%s\\n' '# Contact Information' '' 'Help Desk Hours: 9 AM - 5 PM, Monday to Friday' > pages/contact.md\ngit diff\ngit add pages/contact.md\ngit commit -m \"Update help desk hours\"\nbash .zoeskoul/setup.sh\ncd resource-guide\nprintf '%s\\n' 'generated/' > .gitignore\ngit add .gitignore\ngit check-ignore generated/preview.html\n"
+                  },
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"resource-guide\"\nmkdir -p -- \"resource-guide/pages\" \"resource-guide/notes\" \"resource-guide/generated\"\nprintf '%s\\n' '# Neighborhood Resource Guide' '' 'Welcome to the neighborhood resource guide.' > \"resource-guide/README.md\"\nprintf '%s\\n' '# Contact Information' '' 'Help Desk Hours: 9 AM - 4 PM, Monday to Friday' > \"resource-guide/pages/contact.md\"\nprintf '%s\\n' '# Guide Draft' '' 'Use this page to find neighborhood help.' > \"resource-guide/pages/guide-draft.md\"\nprintf '%s\\n' 'Legacy volunteer phone tree' > \"resource-guide/notes/old-phone-tree.txt\"\ngit -C \"resource-guide\" init -q -b main\ngit -C \"resource-guide\" config user.name \"ZoeSkoul Learner\"\ngit -C \"resource-guide\" config user.email \"learner@zoeskoul.local\"\ngit -C \"resource-guide\" add README.md pages/contact.md pages/guide-draft.md notes/old-phone-tree.txt\ngit -C \"resource-guide\" commit -q -m \"Start neighborhood resource guide\"\nprintf '%s\\n' '# Local Services' '' '- Community pantry' '- Senior transport' > \"resource-guide/pages/services.md\"\ngit -C \"resource-guide\" add pages/services.md\ngit -C \"resource-guide\" commit -q -m \"Add local services page\"\nprintf '%s\\n' '# Contact Information' '' 'Help Desk Hours: 9 AM - 5 PM, Monday to Friday' > \"resource-guide/pages/contact.md\"\ngit -C \"resource-guide\" add pages/contact.md\ngit -C \"resource-guide\" commit -q -m \"Update help desk hours\"\nprintf '%s\\n' '<html>generated preview</html>' > \"resource-guide/generated/preview.html\"\n"
+                  }
+                },
+                "terminalExpectations": {
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "Do not rewrite shared history in this Git practice task."
+                    }
+                  }
+                }
+              },
+              "try_final_neighborhood_resource_guide_history_sketch4": {
+                "title": "Rename the Guide and Remove the Obsolete Note",
+                "prompt": "Continue the final capstone project from the previous working step. In step 5 of 6, Use Git-aware file operations to rename `pages/guide-draft.md` to `pages/getting-help.md` and remove `notes/old-phone-tree.txt`. Keep these staged changes together with the staged `.gitignore`; do not commit yet.\n\nFirst type `bash .zoeskoul/setup.sh` and press Enter to restore the staged ignore rule. Enter `resource-guide/`, type `git mv` and press Enter, then type `git rm` and press Enter.",
+                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "help": {
+                  "concept": "The final capstone is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                  "hint_2": "Run the previous working code first, then make only the focused change for this step."
+                },
+                "starterCode": "bash .zoeskoul/setup.sh\ncd resource-guide\ngit init -b main\ngit config --local user.name \"ZoeSkoul Learner\"\ngit config --local user.email \"learner@zoeskoul.local\"\ngit add README.md pages/contact.md pages/guide-draft.md notes/old-phone-tree.txt\ngit commit -m \"Start neighborhood resource guide\"\nbash .zoeskoul/setup.sh\ncd resource-guide\nprintf '%s\\n' '# Local Services' '' '- Community pantry' '- Senior transport' > pages/services.md\ngit add pages/services.md\ngit commit -m \"Add local services page\"\nbash .zoeskoul/setup.sh\ncd resource-guide\nprintf '%s\\n' '# Contact Information' '' 'Help Desk Hours: 9 AM - 5 PM, Monday to Friday' > pages/contact.md\ngit diff\ngit add pages/contact.md\ngit commit -m \"Update help desk hours\"\nbash .zoeskoul/setup.sh\ncd resource-guide\nprintf '%s\\n' 'generated/' > .gitignore\ngit add .gitignore\ngit check-ignore generated/preview.html\n# Capstone step 5: Rename the Guide and Remove the Obsolete Note\n# Keep the working code above from the previous step.\n# Next, Use Git-aware file operations to rename `pages/guide-draft.md` to `pages/getting-help.md` and remove `notes/old-phone-tree.txt`\n# Add only the focused change for this step inside the existing work.\n",
+                "solutionCode": "bash .zoeskoul/setup.sh\ncd resource-guide\ngit init -b main\ngit config --local user.name \"ZoeSkoul Learner\"\ngit config --local user.email \"learner@zoeskoul.local\"\ngit add README.md pages/contact.md pages/guide-draft.md notes/old-phone-tree.txt\ngit commit -m \"Start neighborhood resource guide\"\nbash .zoeskoul/setup.sh\ncd resource-guide\nprintf '%s\\n' '# Local Services' '' '- Community pantry' '- Senior transport' > pages/services.md\ngit add pages/services.md\ngit commit -m \"Add local services page\"\nbash .zoeskoul/setup.sh\ncd resource-guide\nprintf '%s\\n' '# Contact Information' '' 'Help Desk Hours: 9 AM - 5 PM, Monday to Friday' > pages/contact.md\ngit diff\ngit add pages/contact.md\ngit commit -m \"Update help desk hours\"\nbash .zoeskoul/setup.sh\ncd resource-guide\nprintf '%s\\n' 'generated/' > .gitignore\ngit add .gitignore\ngit check-ignore generated/preview.html\nbash .zoeskoul/setup.sh\ncd resource-guide\ngit mv pages/guide-draft.md pages/getting-help.md\ngit rm notes/old-phone-tree.txt\n",
+                "instructions": "Use Git-aware file operations to rename `pages/guide-draft.md` to `pages/getting-help.md` and remove `notes/old-phone-tree.txt`. Keep these staged changes together with the staged `.gitignore`; do not commit yet.\n\nFirst type `bash .zoeskoul/setup.sh` and press Enter to restore the staged ignore rule. Enter `resource-guide/`, type `git mv` and press Enter, then type `git rm` and press Enter.",
+                "starterFiles": {
+                  "main_sh": {
+                    "content": "bash .zoeskoul/setup.sh\ncd resource-guide\ngit init -b main\ngit config --local user.name \"ZoeSkoul Learner\"\ngit config --local user.email \"learner@zoeskoul.local\"\ngit add README.md pages/contact.md pages/guide-draft.md notes/old-phone-tree.txt\ngit commit -m \"Start neighborhood resource guide\"\nbash .zoeskoul/setup.sh\ncd resource-guide\nprintf '%s\\n' '# Local Services' '' '- Community pantry' '- Senior transport' > pages/services.md\ngit add pages/services.md\ngit commit -m \"Add local services page\"\nbash .zoeskoul/setup.sh\ncd resource-guide\nprintf '%s\\n' '# Contact Information' '' 'Help Desk Hours: 9 AM - 5 PM, Monday to Friday' > pages/contact.md\ngit diff\ngit add pages/contact.md\ngit commit -m \"Update help desk hours\"\nbash .zoeskoul/setup.sh\ncd resource-guide\nprintf '%s\\n' 'generated/' > .gitignore\ngit add .gitignore\ngit check-ignore generated/preview.html\n# Capstone step 5: Rename the Guide and Remove the Obsolete Note\n# Keep the working code above from the previous step.\n# Next, Use Git-aware file operations to rename `pages/guide-draft.md` to `pages/getting-help.md` and remove `notes/old-phone-tree.txt`\n# Add only the focused change for this step inside the existing work.\n"
+                  },
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"resource-guide\"\nmkdir -p -- \"resource-guide/pages\" \"resource-guide/notes\" \"resource-guide/generated\"\nprintf '%s\\n' '# Neighborhood Resource Guide' '' 'Welcome to the neighborhood resource guide.' > \"resource-guide/README.md\"\nprintf '%s\\n' '# Contact Information' '' 'Help Desk Hours: 9 AM - 4 PM, Monday to Friday' > \"resource-guide/pages/contact.md\"\nprintf '%s\\n' '# Guide Draft' '' 'Use this page to find neighborhood help.' > \"resource-guide/pages/guide-draft.md\"\nprintf '%s\\n' 'Legacy volunteer phone tree' > \"resource-guide/notes/old-phone-tree.txt\"\ngit -C \"resource-guide\" init -q -b main\ngit -C \"resource-guide\" config user.name \"ZoeSkoul Learner\"\ngit -C \"resource-guide\" config user.email \"learner@zoeskoul.local\"\ngit -C \"resource-guide\" add README.md pages/contact.md pages/guide-draft.md notes/old-phone-tree.txt\ngit -C \"resource-guide\" commit -q -m \"Start neighborhood resource guide\"\nprintf '%s\\n' '# Local Services' '' '- Community pantry' '- Senior transport' > \"resource-guide/pages/services.md\"\ngit -C \"resource-guide\" add pages/services.md\ngit -C \"resource-guide\" commit -q -m \"Add local services page\"\nprintf '%s\\n' '# Contact Information' '' 'Help Desk Hours: 9 AM - 5 PM, Monday to Friday' > \"resource-guide/pages/contact.md\"\ngit -C \"resource-guide\" add pages/contact.md\ngit -C \"resource-guide\" commit -q -m \"Update help desk hours\"\nprintf '%s\\n' '<html>generated preview</html>' > \"resource-guide/generated/preview.html\"\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_sh": {
+                    "content": "bash .zoeskoul/setup.sh\ncd resource-guide\ngit init -b main\ngit config --local user.name \"ZoeSkoul Learner\"\ngit config --local user.email \"learner@zoeskoul.local\"\ngit add README.md pages/contact.md pages/guide-draft.md notes/old-phone-tree.txt\ngit commit -m \"Start neighborhood resource guide\"\nbash .zoeskoul/setup.sh\ncd resource-guide\nprintf '%s\\n' '# Local Services' '' '- Community pantry' '- Senior transport' > pages/services.md\ngit add pages/services.md\ngit commit -m \"Add local services page\"\nbash .zoeskoul/setup.sh\ncd resource-guide\nprintf '%s\\n' '# Contact Information' '' 'Help Desk Hours: 9 AM - 5 PM, Monday to Friday' > pages/contact.md\ngit diff\ngit add pages/contact.md\ngit commit -m \"Update help desk hours\"\nbash .zoeskoul/setup.sh\ncd resource-guide\nprintf '%s\\n' 'generated/' > .gitignore\ngit add .gitignore\ngit check-ignore generated/preview.html\nbash .zoeskoul/setup.sh\ncd resource-guide\ngit mv pages/guide-draft.md pages/getting-help.md\ngit rm notes/old-phone-tree.txt\n"
+                  },
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"resource-guide\"\nmkdir -p -- \"resource-guide/pages\" \"resource-guide/notes\" \"resource-guide/generated\"\nprintf '%s\\n' '# Neighborhood Resource Guide' '' 'Welcome to the neighborhood resource guide.' > \"resource-guide/README.md\"\nprintf '%s\\n' '# Contact Information' '' 'Help Desk Hours: 9 AM - 4 PM, Monday to Friday' > \"resource-guide/pages/contact.md\"\nprintf '%s\\n' '# Guide Draft' '' 'Use this page to find neighborhood help.' > \"resource-guide/pages/guide-draft.md\"\nprintf '%s\\n' 'Legacy volunteer phone tree' > \"resource-guide/notes/old-phone-tree.txt\"\ngit -C \"resource-guide\" init -q -b main\ngit -C \"resource-guide\" config user.name \"ZoeSkoul Learner\"\ngit -C \"resource-guide\" config user.email \"learner@zoeskoul.local\"\ngit -C \"resource-guide\" add README.md pages/contact.md pages/guide-draft.md notes/old-phone-tree.txt\ngit -C \"resource-guide\" commit -q -m \"Start neighborhood resource guide\"\nprintf '%s\\n' '# Local Services' '' '- Community pantry' '- Senior transport' > \"resource-guide/pages/services.md\"\ngit -C \"resource-guide\" add pages/services.md\ngit -C \"resource-guide\" commit -q -m \"Add local services page\"\nprintf '%s\\n' '# Contact Information' '' 'Help Desk Hours: 9 AM - 5 PM, Monday to Friday' > \"resource-guide/pages/contact.md\"\ngit -C \"resource-guide\" add pages/contact.md\ngit -C \"resource-guide\" commit -q -m \"Update help desk hours\"\nprintf '%s\\n' '<html>generated preview</html>' > \"resource-guide/generated/preview.html\"\nprintf '%s\\n' 'generated/' > \"resource-guide/.gitignore\"\ngit -C \"resource-guide\" add .gitignore\n"
+                  }
+                },
+                "terminalExpectations": {
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "Do not rewrite shared history in this Git practice task."
+                    }
+                  }
+                }
+              },
+              "try_final_neighborhood_resource_guide_history_sketch5": {
+                "title": "Commit and Verify the Final Handoff",
+                "prompt": "Continue the final capstone project from the previous working step. In step 6 of 6, Commit the staged ignore rule, tracked rename, and obsolete-note removal with `Prepare resource guide handoff`. Then inspect the four-commit history and confirm the working tree is clean.\n\nFirst type `bash .zoeskoul/setup.sh` and press Enter to restore all staged cleanup changes. Enter `resource-guide/`, commit them, then type the verification commands and press Enter after each one.",
+                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "help": {
+                  "concept": "The final capstone is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                  "hint_2": "Run the previous working code first, then make only the focused change for this step."
+                },
+                "starterCode": "bash .zoeskoul/setup.sh\ncd resource-guide\ngit init -b main\ngit config --local user.name \"ZoeSkoul Learner\"\ngit config --local user.email \"learner@zoeskoul.local\"\ngit add README.md pages/contact.md pages/guide-draft.md notes/old-phone-tree.txt\ngit commit -m \"Start neighborhood resource guide\"\nbash .zoeskoul/setup.sh\ncd resource-guide\nprintf '%s\\n' '# Local Services' '' '- Community pantry' '- Senior transport' > pages/services.md\ngit add pages/services.md\ngit commit -m \"Add local services page\"\nbash .zoeskoul/setup.sh\ncd resource-guide\nprintf '%s\\n' '# Contact Information' '' 'Help Desk Hours: 9 AM - 5 PM, Monday to Friday' > pages/contact.md\ngit diff\ngit add pages/contact.md\ngit commit -m \"Update help desk hours\"\nbash .zoeskoul/setup.sh\ncd resource-guide\nprintf '%s\\n' 'generated/' > .gitignore\ngit add .gitignore\ngit check-ignore generated/preview.html\nbash .zoeskoul/setup.sh\ncd resource-guide\ngit mv pages/guide-draft.md pages/getting-help.md\ngit rm notes/old-phone-tree.txt\n# Capstone step 6: Commit and Verify the Final Handoff\n# Keep the working code above from the previous step.\n# Next, Commit the staged ignore rule, tracked rename, and obsolete-note removal with `Prepare resource guide handoff`\n# Add only the focused change for this step inside the existing work.\n",
+                "solutionCode": "bash .zoeskoul/setup.sh\ncd resource-guide\ngit init -b main\ngit config --local user.name \"ZoeSkoul Learner\"\ngit config --local user.email \"learner@zoeskoul.local\"\ngit add README.md pages/contact.md pages/guide-draft.md notes/old-phone-tree.txt\ngit commit -m \"Start neighborhood resource guide\"\nbash .zoeskoul/setup.sh\ncd resource-guide\nprintf '%s\\n' '# Local Services' '' '- Community pantry' '- Senior transport' > pages/services.md\ngit add pages/services.md\ngit commit -m \"Add local services page\"\nbash .zoeskoul/setup.sh\ncd resource-guide\nprintf '%s\\n' '# Contact Information' '' 'Help Desk Hours: 9 AM - 5 PM, Monday to Friday' > pages/contact.md\ngit diff\ngit add pages/contact.md\ngit commit -m \"Update help desk hours\"\nbash .zoeskoul/setup.sh\ncd resource-guide\nprintf '%s\\n' 'generated/' > .gitignore\ngit add .gitignore\ngit check-ignore generated/preview.html\nbash .zoeskoul/setup.sh\ncd resource-guide\ngit mv pages/guide-draft.md pages/getting-help.md\ngit rm notes/old-phone-tree.txt\nbash .zoeskoul/setup.sh\ncd resource-guide\ngit commit -m \"Prepare resource guide handoff\"\ngit log --oneline\ngit status --short\n",
+                "instructions": "Commit the staged ignore rule, tracked rename, and obsolete-note removal with `Prepare resource guide handoff`. Then inspect the four-commit history and confirm the working tree is clean.\n\nFirst type `bash .zoeskoul/setup.sh` and press Enter to restore all staged cleanup changes. Enter `resource-guide/`, commit them, then type the verification commands and press Enter after each one.",
+                "starterFiles": {
+                  "main_sh": {
+                    "content": "bash .zoeskoul/setup.sh\ncd resource-guide\ngit init -b main\ngit config --local user.name \"ZoeSkoul Learner\"\ngit config --local user.email \"learner@zoeskoul.local\"\ngit add README.md pages/contact.md pages/guide-draft.md notes/old-phone-tree.txt\ngit commit -m \"Start neighborhood resource guide\"\nbash .zoeskoul/setup.sh\ncd resource-guide\nprintf '%s\\n' '# Local Services' '' '- Community pantry' '- Senior transport' > pages/services.md\ngit add pages/services.md\ngit commit -m \"Add local services page\"\nbash .zoeskoul/setup.sh\ncd resource-guide\nprintf '%s\\n' '# Contact Information' '' 'Help Desk Hours: 9 AM - 5 PM, Monday to Friday' > pages/contact.md\ngit diff\ngit add pages/contact.md\ngit commit -m \"Update help desk hours\"\nbash .zoeskoul/setup.sh\ncd resource-guide\nprintf '%s\\n' 'generated/' > .gitignore\ngit add .gitignore\ngit check-ignore generated/preview.html\nbash .zoeskoul/setup.sh\ncd resource-guide\ngit mv pages/guide-draft.md pages/getting-help.md\ngit rm notes/old-phone-tree.txt\n# Capstone step 6: Commit and Verify the Final Handoff\n# Keep the working code above from the previous step.\n# Next, Commit the staged ignore rule, tracked rename, and obsolete-note removal with `Prepare resource guide handoff`\n# Add only the focused change for this step inside the existing work.\n"
+                  },
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"resource-guide\"\nmkdir -p -- \"resource-guide/pages\" \"resource-guide/notes\" \"resource-guide/generated\"\nprintf '%s\\n' '# Neighborhood Resource Guide' '' 'Welcome to the neighborhood resource guide.' > \"resource-guide/README.md\"\nprintf '%s\\n' '# Contact Information' '' 'Help Desk Hours: 9 AM - 4 PM, Monday to Friday' > \"resource-guide/pages/contact.md\"\nprintf '%s\\n' '# Guide Draft' '' 'Use this page to find neighborhood help.' > \"resource-guide/pages/guide-draft.md\"\nprintf '%s\\n' 'Legacy volunteer phone tree' > \"resource-guide/notes/old-phone-tree.txt\"\ngit -C \"resource-guide\" init -q -b main\ngit -C \"resource-guide\" config user.name \"ZoeSkoul Learner\"\ngit -C \"resource-guide\" config user.email \"learner@zoeskoul.local\"\ngit -C \"resource-guide\" add README.md pages/contact.md pages/guide-draft.md notes/old-phone-tree.txt\ngit -C \"resource-guide\" commit -q -m \"Start neighborhood resource guide\"\nprintf '%s\\n' '# Local Services' '' '- Community pantry' '- Senior transport' > \"resource-guide/pages/services.md\"\ngit -C \"resource-guide\" add pages/services.md\ngit -C \"resource-guide\" commit -q -m \"Add local services page\"\nprintf '%s\\n' '# Contact Information' '' 'Help Desk Hours: 9 AM - 5 PM, Monday to Friday' > \"resource-guide/pages/contact.md\"\ngit -C \"resource-guide\" add pages/contact.md\ngit -C \"resource-guide\" commit -q -m \"Update help desk hours\"\nprintf '%s\\n' '<html>generated preview</html>' > \"resource-guide/generated/preview.html\"\nprintf '%s\\n' 'generated/' > \"resource-guide/.gitignore\"\ngit -C \"resource-guide\" add .gitignore\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_sh": {
+                    "content": "bash .zoeskoul/setup.sh\ncd resource-guide\ngit init -b main\ngit config --local user.name \"ZoeSkoul Learner\"\ngit config --local user.email \"learner@zoeskoul.local\"\ngit add README.md pages/contact.md pages/guide-draft.md notes/old-phone-tree.txt\ngit commit -m \"Start neighborhood resource guide\"\nbash .zoeskoul/setup.sh\ncd resource-guide\nprintf '%s\\n' '# Local Services' '' '- Community pantry' '- Senior transport' > pages/services.md\ngit add pages/services.md\ngit commit -m \"Add local services page\"\nbash .zoeskoul/setup.sh\ncd resource-guide\nprintf '%s\\n' '# Contact Information' '' 'Help Desk Hours: 9 AM - 5 PM, Monday to Friday' > pages/contact.md\ngit diff\ngit add pages/contact.md\ngit commit -m \"Update help desk hours\"\nbash .zoeskoul/setup.sh\ncd resource-guide\nprintf '%s\\n' 'generated/' > .gitignore\ngit add .gitignore\ngit check-ignore generated/preview.html\nbash .zoeskoul/setup.sh\ncd resource-guide\ngit mv pages/guide-draft.md pages/getting-help.md\ngit rm notes/old-phone-tree.txt\nbash .zoeskoul/setup.sh\ncd resource-guide\ngit commit -m \"Prepare resource guide handoff\"\ngit log --oneline\ngit status --short\n"
+                  },
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"resource-guide\"\nmkdir -p -- \"resource-guide/pages\" \"resource-guide/notes\" \"resource-guide/generated\"\nprintf '%s\\n' '# Neighborhood Resource Guide' '' 'Welcome to the neighborhood resource guide.' > \"resource-guide/README.md\"\nprintf '%s\\n' '# Contact Information' '' 'Help Desk Hours: 9 AM - 4 PM, Monday to Friday' > \"resource-guide/pages/contact.md\"\nprintf '%s\\n' '# Guide Draft' '' 'Use this page to find neighborhood help.' > \"resource-guide/pages/guide-draft.md\"\nprintf '%s\\n' 'Legacy volunteer phone tree' > \"resource-guide/notes/old-phone-tree.txt\"\ngit -C \"resource-guide\" init -q -b main\ngit -C \"resource-guide\" config user.name \"ZoeSkoul Learner\"\ngit -C \"resource-guide\" config user.email \"learner@zoeskoul.local\"\ngit -C \"resource-guide\" add README.md pages/contact.md pages/guide-draft.md notes/old-phone-tree.txt\ngit -C \"resource-guide\" commit -q -m \"Start neighborhood resource guide\"\nprintf '%s\\n' '# Local Services' '' '- Community pantry' '- Senior transport' > \"resource-guide/pages/services.md\"\ngit -C \"resource-guide\" add pages/services.md\ngit -C \"resource-guide\" commit -q -m \"Add local services page\"\nprintf '%s\\n' '# Contact Information' '' 'Help Desk Hours: 9 AM - 5 PM, Monday to Friday' > \"resource-guide/pages/contact.md\"\ngit -C \"resource-guide\" add pages/contact.md\ngit -C \"resource-guide\" commit -q -m \"Update help desk hours\"\nprintf '%s\\n' '<html>generated preview</html>' > \"resource-guide/generated/preview.html\"\nprintf '%s\\n' 'generated/' > \"resource-guide/.gitignore\"\ngit -C \"resource-guide\" add .gitignore\ngit -C \"resource-guide\" mv pages/guide-draft.md pages/getting-help.md\ngit -C \"resource-guide\" rm -q notes/old-phone-tree.txt\n"
+                  }
+                },
+                "terminalExpectations": {
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "Do not rewrite shared history in this Git practice task."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "git--git-foundations--draft": {
+      "git-foundations-module-4-final-capstone": {
+        "final-neighborhood-resource-guide-history": {
+          "intro": {
+            "title": "Welcome to the Final Capstone",
+            "bodyMarkdown": "In this final capstone, you will apply your Git skills to create a local history for a neighborhood resource guide. Your task is to ensure that the guide is well-maintained, with clear commit history and ignored generated artifacts. This project will help future volunteers understand changes, recover from mistakes, and trust the final handoff.\n\n### Project Brief\n\n\n\n**Scenario:** A neighborhood help desk is replacing a folder of loose text files with a maintained resource guide. Future volunteers must be able to see when service information changed, recover from small mistakes, and trust the final handoff.\n\n**Your role:** Junior developer preparing the neighborhood resource guide for long-term maintenance\n\n**Workspace:** One cumulative terminal workspace rooted at resource-guide/ with pages/, notes/, generated/, README.md, and no starting repository\n\n**Deliverable:** One six-step local Git capstone with four meaningful commits, ignored generated previews, a tracked file rename, a safe obsolete-file removal, required final content, and a clean handoff state."
+          }
+        }
+      }
+    }
+  }
+}

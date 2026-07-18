@@ -4,6 +4,7 @@ import type {
     WorkspaceLanguage,
 } from "@zoeskoul/curriculum-contracts";
 import type { SemanticValidationIssue } from "./profileServices.js";
+import { isProjectLikeTopic } from "./isProjectLikeTopic.js";
 
 type CodeInputDraft = Extract<
     TopicAuthoringDraft["quizDraft"][number],
@@ -34,30 +35,6 @@ const RESERVED_SQL_ALIAS_WORDS = new Set([
     "limit",
     "union",
 ]);
-
-function isProjectLikeTopic(seed?: TopicSeed): boolean {
-    const record = seed as TopicSeed & {
-        topicType?: unknown;
-        projectType?: unknown;
-        sectionId?: unknown;
-    };
-    const topicId = String(seed?.topicId ?? "").toLowerCase();
-    const sectionId = String(record.sectionId ?? seed?.sectionSlug ?? "").toLowerCase();
-    const topicType = String(record.topicType ?? "").toLowerCase();
-    const projectType = String(record.projectType ?? "").toLowerCase();
-
-    return (
-        topicType === "project" ||
-        topicType === "module_project" ||
-        topicType === "capstone" ||
-        projectType === "module_project" ||
-        projectType === "capstone" ||
-        topicId.includes("project") ||
-        topicId.includes("capstone") ||
-        sectionId.includes("project") ||
-        sectionId.includes("capstone")
-    );
-}
 
 function extractFencedCodeBlocks(
     sketchBlocks: TopicAuthoringDraft["sketchBlocks"],
@@ -236,7 +213,7 @@ export function validateWorkedExampleTryItDistinctness(args: {
     draft: TopicAuthoringDraft;
 }): SemanticValidationIssue[] {
     if (
-        isProjectLikeTopic(args.seed) ||
+        isProjectLikeTopic({ seed: args.seed, draft: args.draft }) ||
         args.seed?.practice?.conceptualOnly === true
     ) {
         return [];

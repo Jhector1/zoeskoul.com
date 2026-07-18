@@ -1,0 +1,35 @@
+{
+  "reportDir": "/Users/admin/Documents/NextJSProject/zoeskoul.com/.curriculum-drafts/git/reports/git--git-foundations--draft/module3/restore-without-rewriting-history",
+  "status": "success",
+  "attempts": 2,
+  "finalAttempt": 1,
+  "validationState": {
+    "unsafeSkipValidation": false,
+    "requested": {
+      "skipQualityGates": false,
+      "skipSemantic": false,
+      "skipGolden": false,
+      "unsafeSkipValidation": false
+    },
+    "structural": {
+      "ran": true,
+      "skipped": false,
+      "required": true
+    },
+    "qualityGates": {
+      "ran": true,
+      "skipped": false,
+      "required": true
+    },
+    "semantic": {
+      "ran": true,
+      "skipped": false,
+      "required": true
+    },
+    "golden": {
+      "ran": true,
+      "skipped": false,
+      "required": true
+    }
+  }
+}

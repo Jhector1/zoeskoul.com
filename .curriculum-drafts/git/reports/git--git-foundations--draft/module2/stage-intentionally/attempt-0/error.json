@@ -1,0 +1,20 @@
+{
+  "name": "RetryableTopicValidationError",
+  "message": "Semantic validation failed for topic \"stage-intentionally\"\nModule: git-foundations-module-2-meaningful-history\nSection: git-foundations-section-2-history-workflow\nReport dir: /Users/admin/Documents/NextJSProject/zoeskoul.com/.curriculum-drafts/git/reports/git--git-foundations--draft/module2/stage-intentionally\n- Try It exercise \"try-stage-intentionally-sketch1\" reproduces the worked example in \"Using git diff --staged\" (stage-intentionally-sketch1) through solutionCode. Change a meaningful expectation such as the requested output, source entity, filter, aggregate, input, inserted/updated values, or relationship path. Formatting, capitalization, aliases, and ORDER BY alone do not make it a different exercise.",
+  "stack": "RetryableTopicValidationError: Semantic validation failed for topic \"stage-intentionally\"\nModule: git-foundations-module-2-meaningful-history\nSection: git-foundations-section-2-history-workflow\nReport dir: /Users/admin/Documents/NextJSProject/zoeskoul.com/.curriculum-drafts/git/reports/git--git-foundations--draft/module2/stage-intentionally\n- Try It exercise \"try-stage-intentionally-sketch1\" reproduces the worked example in \"Using git diff --staged\" (stage-intentionally-sketch1) through solutionCode. Change a meaningful expectation such as the requested output, source entity, filter, aggregate, input, inserted/updated values, or relationship path. Formatting, capitalization, aliases, and ORDER BY alone do not make it a different exercise.\n    at throwRetryableReportFailure (file:///Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-compiler/dist/compile/compileSubjectPipeline.js:85:11)\n    at compileSubjectPipeline (file:///Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-compiler/dist/compile/compileSubjectPipeline.js:393:25)\n    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at async compileCourse (file:///Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-compiler/dist/compile/compileCourse.js:91:11)\n    at async runCompileCourse (file:///Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-cli/dist/commands/compile-course.js:79:21)\n    at async main (file:///Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-cli/dist/index.js:81:13)",
+  "code": "SEMANTIC_VALIDATION_FAILED",
+  "retryable": true,
+  "details": {
+    "topicId": "stage-intentionally",
+    "ok": false,
+    "issues": [
+      {
+        "code": "WORKED_EXAMPLE_TRY_IT_DUPLICATE",
+        "category": "pedagogy",
+        "severity": "error",
+        "exerciseId": "try-stage-intentionally-sketch1",
+        "message": "Try It exercise \"try-stage-intentionally-sketch1\" reproduces the worked example in \"Using git diff --staged\" (stage-intentionally-sketch1) through solutionCode. Change a meaningful expectation such as the requested output, source entity, filter, aggregate, input, inserted/updated values, or relationship path. Formatting, capitalization, aliases, and ORDER BY alone do not make it a different exercise."
+      }
+    ]
+  }
+}

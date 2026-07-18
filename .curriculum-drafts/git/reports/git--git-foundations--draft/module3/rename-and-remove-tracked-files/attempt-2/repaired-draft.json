@@ -1,0 +1,336 @@
+{
+  "title": "Rename and Remove Tracked Files",
+  "summary": "Use git mv and git rm so a project cleanup is immediately represented in the staging area.",
+  "minutes": 22,
+  "sketchBlocks": [
+    {
+      "id": "sketch0",
+      "title": "How to Rename Files Using git mv",
+      "bodyMarkdown": "Renaming files in a Git repository is more than just changing the file name. Git needs to track this change to maintain the history and integrity of the repository. The `git mv` command is used to rename files while keeping Git informed of the change.\n\nWorked example:\n\nSuppose you have a file named `old_name.txt` that you want to rename to `new_name.txt`. You can use the following command:\n\n```bash\ngit mv old_name.txt new_name.txt\n```\n\nThis command renames the file and stages the change for the next commit. It's equivalent to running `mv old_name.txt new_name.txt` followed by `git add new_name.txt` and `git rm old_name.txt`. This ensures that the rename is tracked in the next commit."
+    },
+    {
+      "id": "sketch1",
+      "title": "How to Remove Files Using git rm",
+      "bodyMarkdown": "Removing files from a Git repository should be done in a way that Git can track the deletion. The `git rm` command is used to remove files from both the working directory and the staging area.\n\nWorked example:\n\nImagine you have a file named `obsolete_file.txt` that you no longer need. To remove it, you would use:\n\n```bash\ngit rm obsolete_file.txt\n```\n\nThis command deletes the file from the working directory and stages the deletion for the next commit. It's important to use `git rm` instead of just `rm` to ensure that the file removal is recorded in the repository's history."
+    },
+    {
+      "id": "sketch2",
+      "title": "Check Staged Renames and Deletions",
+      "bodyMarkdown": "Before committing changes, it's crucial to verify what has been staged. This ensures that only the intended changes are committed. You can use `git status` and `git diff --staged` to review staged changes.\n\nWorked example:\n\nAfter renaming a file with `git mv` and removing another with `git rm`, you can check the status with:\n\n```bash\ngit status\n```\n\nThis command shows the current state of the working directory and staging area. To see the exact changes that are staged, use:\n\n```bash\ngit diff --staged\n```\n\nThis will display the differences between the staged changes and the last commit, allowing you to verify the renames and deletions."
+    },
+    {
+      "id": "sketch3",
+      "title": "Commit Renames and Deletions",
+      "bodyMarkdown": "Once you've verified the staged changes, the next step is to commit them. Committing records the changes in the repository's history.\n\nWorked example:\n\nTo commit the staged renames and deletions, use:\n\n```bash\ngit commit -m \"Renamed and removed obsolete files\"\n```\n\nThis command creates a new commit with a message describing the changes. It's important to write clear commit messages to maintain a comprehensible project history."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "single-choice-1",
+      "kind": "single_choice",
+      "title": "Purpose of git mv",
+      "prompt": "What is the primary purpose of the `git mv` command?",
+      "options": [
+        "To move a file without tracking",
+        "To rename a file and stage the change",
+        "To delete a file",
+        "To create a new file"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Think about how Git tracks file changes.",
+      "help": {
+        "concept": "The `git mv` command is used to rename files while keeping Git informed of the change.",
+        "hint_1": "It combines moving a file and staging the change.",
+        "hint_2": "It ensures the rename is tracked in the next commit."
+      }
+    },
+    {
+      "id": "single-choice-2",
+      "kind": "single_choice",
+      "title": "Effect of git rm",
+      "prompt": "What happens when you use the `git rm` command?",
+      "options": [
+        "The file is moved to a new location",
+        "The file is removed from the working directory and staged for deletion",
+        "The file is renamed",
+        "The file is ignored"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Consider what happens to the file in the working directory and staging area.",
+      "help": {
+        "concept": "The `git rm` command removes a file from both the working directory and the staging area.",
+        "hint_1": "It stages the file for deletion in the next commit.",
+        "hint_2": "The file is removed from the working directory."
+      }
+    },
+    {
+      "id": "multi-choice-1",
+      "kind": "multi_choice",
+      "title": "Commands to Verify Staged Changes",
+      "prompt": "Which commands can you use to verify staged changes before committing?",
+      "options": [
+        "git status",
+        "git diff",
+        "git diff --staged",
+        "git log"
+      ],
+      "correctOptionIds": [
+        "a",
+        "c"
+      ],
+      "hint": "Think about commands that show the status and differences of staged changes.",
+      "help": {
+        "concept": "Verifying staged changes ensures that only intended modifications are committed.",
+        "hint_1": "Check the status of the working directory and staging area.",
+        "hint_2": "Use commands that show differences between staged changes and the last commit."
+      }
+    },
+    {
+      "id": "drag-reorder-1",
+      "kind": "drag_reorder",
+      "title": "Steps to Rename and Commit a File",
+      "prompt": "Arrange the steps to rename a file and commit the change using Git.",
+      "tokens": [
+        "Use git mv to rename the file",
+        "Check the status with git status",
+        "Commit the change with git commit"
+      ],
+      "correctOrder": [
+        "Use git mv to rename the file",
+        "Check the status with git status",
+        "Commit the change with git commit"
+      ],
+      "hint": "Consider the order of operations from renaming to committing.",
+      "help": {
+        "concept": "Renaming and committing a file involves several steps to ensure the change is tracked and recorded.",
+        "hint_1": "Start with renaming the file using Git.",
+        "hint_2": "End with committing the change with a message."
+      }
+    },
+    {
+      "id": "fill-blank-choice-1",
+      "kind": "fill_blank_choice",
+      "title": "Command for Renaming a File",
+      "prompt": "Complete the command to rename `file1.txt` to `file2.txt` using Git.",
+      "template": "git mv [blank1] file2.txt",
+      "choices": [
+        "file1.txt",
+        "file3.txt",
+        "file4.txt"
+      ],
+      "correctValue": "file1.txt",
+      "hint": "Use git mv followed by the old and new file names.",
+      "help": {
+        "concept": "Renaming a file in Git requires using git mv to ensure the change is tracked.",
+        "hint_1": "The command should rename and stage the file in one step.",
+        "hint_2": "Use git mv followed by the old and new file names."
+      }
+    },
+    {
+      "id": "fill-blank-choice-2",
+      "kind": "fill_blank_choice",
+      "title": "Command for Removing a File",
+      "prompt": "Complete the command to remove `old_file.txt` using Git.",
+      "template": "git rm [blank1]",
+      "choices": [
+        "old_file.txt",
+        "new_file.txt",
+        "temp_file.txt"
+      ],
+      "correctValue": "old_file.txt",
+      "hint": "Use git rm followed by the file name.",
+      "help": {
+        "concept": "Removing a file in Git requires using git rm to ensure the change is tracked.",
+        "hint_1": "The command should remove and stage the file in one step.",
+        "hint_2": "Use git rm followed by the file name to remove it."
+      }
+    },
+    {
+      "id": "try-rename-and-remove-tracked-files-sketch0",
+      "kind": "code_input",
+      "title": "Practice Renaming a File with git mv",
+      "prompt": "Rename the file `example.txt` to `sample.txt` using Git commands. Ensure the rename is staged for commit.",
+      "starterCode": "# Rename example.txt to sample.txt",
+      "entryFilePath": "main.sh",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Rename example.txt to sample.txt",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "git mv example.txt sample.txt",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionCode": "git mv example.txt sample.txt",
+      "recipeType": "shell_task",
+      "hint": "Use git mv to rename and stage the file.",
+      "help": {
+        "concept": "Renaming a file in Git requires using git mv to ensure the change is tracked.",
+        "hint_1": "The command should rename and stage the file in one step.",
+        "hint_2": "Use git mv followed by the old and new file names."
+      },
+      "fixedLanguage": "bash",
+      "mode": "terminal_workspace",
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^git\\s+mv\\s+example\\.txt\\s+sample\\.txt$"
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-rename-and-remove-tracked-files-sketch1",
+      "kind": "code_input",
+      "title": "Practice Removing a File with git rm",
+      "prompt": "Remove the file `unnecessary.txt` from the repository using Git commands. Ensure the removal is staged for commit.",
+      "starterCode": "# Remove unnecessary.txt",
+      "entryFilePath": "main.sh",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Remove unnecessary.txt",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "git rm unnecessary.txt",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionCode": "git rm unnecessary.txt",
+      "recipeType": "shell_task",
+      "hint": "Use git rm to remove and stage the file.",
+      "help": {
+        "concept": "Removing a file in Git requires using git rm to ensure the change is tracked.",
+        "hint_1": "The command should remove and stage the file in one step.",
+        "hint_2": "Use git rm followed by the file name to remove it."
+      },
+      "fixedLanguage": "bash",
+      "mode": "terminal_workspace",
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^git\\s+rm\\s+unnecessary\\.txt$"
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-rename-and-remove-tracked-files-sketch2",
+      "kind": "code_input",
+      "title": "Verify Staged Changes",
+      "prompt": "After renaming `old_file.txt` to `new_file.txt` and removing `delete_me.txt`, verify the staged changes using Git commands.",
+      "starterCode": "# Verify staged changes",
+      "entryFilePath": "main.sh",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Verify staged changes",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "git status\ngit diff --staged",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionCode": "git status\ngit diff --staged",
+      "recipeType": "shell_task",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      },
+      "fixedLanguage": "bash",
+      "mode": "terminal_workspace",
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^git\\s+status$"
+          },
+          {
+            "pattern": "^git\\s+diff\\s+--staged$"
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-rename-and-remove-tracked-files-sketch3",
+      "kind": "code_input",
+      "title": "Commit Staged Changes",
+      "prompt": "Commit the staged changes with a message 'Updated project files'.",
+      "starterCode": "# Commit staged changes",
+      "entryFilePath": "main.sh",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Commit staged changes",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "git commit -m \"Updated project files\"",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionCode": "git commit -m \"Updated project files\"",
+      "recipeType": "shell_task",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      },
+      "fixedLanguage": "bash",
+      "mode": "terminal_workspace",
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^git\\s+commit\\s+-m\\s+\"Updated\\s+project\\s+files\"$"
+          }
+        ]
+      }
+    }
+  ]
+}

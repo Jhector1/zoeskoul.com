@@ -126,6 +126,102 @@ describe("generateTopicAuthoringDraftAttempt", () => {
         expect(validateTopicAuthoringDraft(result.generation.value).ok).toBe(true);
     });
 
+    it("moves leaked SQL metadata onto the Git shell-task contract before schema validation", async () => {
+        const result = await generateTopicAuthoringDraftAttempt(
+            {
+                async generateJson<T>() {
+                    throw new Error("generateJson should not be called in this test");
+                },
+                async generateJsonDetailed<T>() {
+                    return {
+                        provider: "test",
+                        model: "test",
+                        temperature: 0,
+                        schemaName: "TopicAuthoringDraft",
+                        strictSchema: false,
+                        rawText: "{}",
+                        parsedJson: {},
+                        value: {
+                            title: "Neighborhood Resource Guide History",
+                            summary: "Build a cumulative Git history.",
+                            minutes: 120,
+                            sketchBlocks: [
+                                {
+                                    id: "intro",
+                                    title: "Project brief",
+                                    bodyMarkdown: "Prepare the guide for a clean handoff.",
+                                },
+                            ],
+                            quizDraft: [
+                                {
+                                    id: "step-5",
+                                    kind: "code_input",
+                                    title: "Rename and remove",
+                                    prompt: "Use git mv and git rm, then press Enter after each command.",
+                                    hint: "Keep the repository history intact.",
+                                    help: {
+                                        concept: "Git-aware file operations stage the requested changes.",
+                                        hint_1: "Rename the tracked guide with git mv.",
+                                        hint_2: "Remove the obsolete tracked note with git rm.",
+                                    },
+                                    recipeType: "sql_query",
+                                    datasetId: "accidental-sql-dataset",
+                                    checkSql: "SELECT 1",
+                                    entryFilePath: "main.sh",
+                                    starterCode: "# Complete the Git task.\n",
+                                    solutionCode: "git mv pages/guide-draft.md pages/getting-help.md\ngit rm notes/old-phone-tree.txt\n",
+                                    starterFiles: [
+                                        { path: "resource-guide/pages/guide-draft.md", content: "draft" },
+                                        { path: "resource-guide/notes/old-phone-tree.txt", content: "old" },
+                                    ],
+                                    solutionFiles: [
+                                        { path: "resource-guide/pages/getting-help.md", content: "draft" },
+                                    ],
+                                },
+                            ],
+                            projectDraft: {
+                                title: "Neighborhood Resource Guide History",
+                                stepIds: ["step-5"],
+                            },
+                        },
+                    } as any;
+                },
+            },
+            {
+                seed: {
+                    profileId: "git",
+                    subjectSlug: "git--git-foundations--draft",
+                    courseSlug: "git-foundations",
+                    moduleSlug: "git-foundations-module-4-final-capstone",
+                    modulePrefix: "git_foundations_module_4",
+                    moduleOrder: 4,
+                    sectionSlug: "git-foundations-section-4-final-capstone",
+                    sectionOrder: 1,
+                    topicId: "final-neighborhood-resource-guide-history",
+                    order: 1,
+                    title: "Final Capstone: Neighborhood Resource Guide History",
+                    summary: "Build a cumulative Git history.",
+                    minutes: 120,
+                    sourceLocale: "en",
+                    targetLocales: [],
+                } as any,
+                locale: "en",
+                shape: sqlShape,
+            },
+        );
+
+        const exercise = result.generation.value.quizDraft[0] as any;
+        expect(exercise.kind).toBe("code_input");
+        expect(exercise.recipeType).toBe("shell_task");
+        expect(exercise.mode).toBe("terminal_workspace");
+        expect(exercise.fixedLanguage).toBe("bash");
+        expect(exercise.entryFilePath).toBe("main.sh");
+        expect(exercise.datasetId).toBeUndefined();
+        expect(exercise.checkSql).toBeUndefined();
+        expect(exercise.sqlFileOrder).toBeUndefined();
+        expect(validateTopicAuthoringDraft(result.generation.value).ok).toBe(true);
+    });
+
     it("sanitizes empty-stdout generated code_input tests before validation", async () => {
         const result = await generateTopicAuthoringDraftAttempt(
             {

@@ -1,0 +1,134 @@
+{
+  "title": "Project: Start the Field Notes Repository",
+  "summary": "Turn a small set of neighborhood field notes into a trustworthy first Git repository with a clean initial commit.",
+  "minutes": 55,
+  "sketchBlocks": [
+    {
+      "id": "intro-to-git-repository",
+      "title": "Understanding Git Repositories",
+      "bodyMarkdown": "A Git repository is a storage space where your project files and their history are kept. It allows you to track changes, collaborate with others, and revert to previous states if needed. In this project, you'll learn how to set up a Git repository for a neighborhood garden's field notes, ensuring that all changes are tracked and the initial state is preserved."
+    },
+    {
+      "id": "working-with-git",
+      "title": "Configuring and Initializing a Repository",
+      "bodyMarkdown": "To start using Git, you need to configure your identity and initialize a repository. This involves setting your name and email, which will be associated with your commits. Once configured, you can initialize a repository, which creates a .git directory to track changes. \n\nWorked example:\n\n```bash\ngit config --local user.name \"ZoeSkoul Learner\"\ngit config --local user.email \"learner@zoeskoul.local\"\ngit init -b main\n```\n\nThis example sets the local Git identity and initializes a new repository on the main branch. The `git init` command creates a new Git repository, and the `-b main` option sets the initial branch to main."
+    },
+    {
+      "id": "tracking-changes",
+      "title": "Staging and Committing Files",
+      "bodyMarkdown": "Once your repository is initialized, you can start tracking changes. This involves staging files you want to include in your next commit and then committing them to the repository. Staging allows you to prepare a snapshot of your changes, and committing saves this snapshot to the repository's history.\n\nWorked example:\n\n```bash\ngit add README.md observations/\ngit commit -m \"Start garden field notes\"\n```\n\nIn this example, the `git add` command stages the README.md and all files in the observations/ directory. The `git commit` command then saves these changes with a descriptive message."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "try-git-repo-inspection",
+      "kind": "fill_blank_choice",
+      "title": "Inspect the Garden Notes Workspace",
+      "prompt": "Use `pwd` and `ls` to inspect the `garden-notes/` directory. Read the provided `README.md` and observation files before making any changes. Type each command and press Enter.",
+      "template": "A file-writing code exercise should also ____ so automated tests can check it.",
+      "choices": [
+        "print an observable result",
+        "hide all output",
+        "delete the file immediately",
+        "skip the program"
+      ],
+      "correctValue": "print an observable result",
+      "hint": "Use `pwd` to check your current directory and `ls` to list files.",
+      "help": {
+        "concept": "Understanding the current directory and its contents is crucial before initializing a repository.",
+        "hint_1": "Use `pwd` to confirm you're in the correct directory.",
+        "hint_2": "Use `ls` to see the files available in the directory."
+      }
+    },
+    {
+      "id": "try-git-config",
+      "kind": "fill_blank_choice",
+      "title": "Configure the Local Author Identity",
+      "prompt": "Set the local Git identity for the `garden-notes/` repository. Use `git config --local` to set `user.name` to \"ZoeSkoul Learner\" and `user.email` to \"learner@zoeskoul.local\". Type each command and press Enter.",
+      "template": "A file-writing code exercise should also ____ so automated tests can check it.",
+      "choices": [
+        "print an observable result",
+        "hide all output",
+        "delete the file immediately",
+        "skip the program"
+      ],
+      "correctValue": "print an observable result",
+      "hint": "Use `git config --local` to set the user name and email.",
+      "help": {
+        "concept": "Configuring a local Git identity ensures that your commits are associated with the correct author.",
+        "hint_1": "Use `git config --local user.name \"ZoeSkoul Learner\"`.",
+        "hint_2": "Use `git config --local user.email \"learner@zoeskoul.local\"`."
+      }
+    },
+    {
+      "id": "try-git-init",
+      "kind": "fill_blank_choice",
+      "title": "Initialize the Repository on main",
+      "prompt": "Initialize the `garden-notes/` directory as a Git repository with the main branch. Use `git init -b main` and inspect the untracked files with `git status`. Type each command and press Enter.",
+      "template": "A file-writing code exercise should also ____ so automated tests can check it.",
+      "choices": [
+        "print an observable result",
+        "hide all output",
+        "delete the file immediately",
+        "skip the program"
+      ],
+      "correctValue": "print an observable result",
+      "hint": "Use `git init -b main` to initialize the repository on the main branch.",
+      "help": {
+        "concept": "Initializing a repository creates a .git directory to track changes.",
+        "hint_1": "Use `git init -b main` to start the repository.",
+        "hint_2": "Use `git status` to check the status of your files."
+      }
+    },
+    {
+      "id": "try-git-stage-files",
+      "kind": "fill_blank_choice",
+      "title": "Stage the Initial Project Files",
+      "prompt": "Stage the `README.md` and all files in the `observations/` directory. Use `git add` to prepare these files for commit. Type each command and press Enter.",
+      "template": "A file-writing code exercise should also ____ so automated tests can check it.",
+      "choices": [
+        "print an observable result",
+        "hide all output",
+        "delete the file immediately",
+        "skip the program"
+      ],
+      "correctValue": "print an observable result",
+      "hint": "Use `git add` to stage files for commit.",
+      "help": {
+        "concept": "Staging files prepares them to be included in the next commit.",
+        "hint_1": "Use `git add README.md` to stage the README file.",
+        "hint_2": "Use `git add observations/` to stage all files in the directory."
+      }
+    },
+    {
+      "id": "try-git-commit",
+      "kind": "fill_blank_choice",
+      "title": "Create and Verify the First Commit",
+      "prompt": "Commit the staged files with the message \"Start garden field notes\". Use `git commit` and verify the commit with `git log --oneline`. Type each command and press Enter.",
+      "template": "A file-writing code exercise should also ____ so automated tests can check it.",
+      "choices": [
+        "print an observable result",
+        "hide all output",
+        "delete the file immediately",
+        "skip the program"
+      ],
+      "correctValue": "print an observable result",
+      "hint": "Use `git commit -m` to commit with a message.",
+      "help": {
+        "concept": "Committing saves the staged changes to the repository's history.",
+        "hint_1": "Use `git commit -m \"Start garden field notes\"`.",
+        "hint_2": "Use `git log --oneline` to verify the commit."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Start the Field Notes Repository",
+    "stepIds": [
+      "try-git-repo-inspection",
+      "try-git-config",
+      "try-git-init",
+      "try-git-stage-files",
+      "try-git-commit"
+    ]
+  }
+}

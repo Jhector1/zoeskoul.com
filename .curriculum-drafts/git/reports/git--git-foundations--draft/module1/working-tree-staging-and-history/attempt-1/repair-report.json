@@ -1,0 +1,40 @@
+{
+  "topicId": "working-tree-staging-and-history",
+  "repairs": [
+    {
+      "code": "EXERCISE_POLICY_KIND_OVER_TARGET_TRIMMED",
+      "category": "other",
+      "severity": "medium",
+      "field": "quizDraft",
+      "message": "Trimmed 4 extra fill_blank_choice exercise(s) to match the shared planned exercise policy."
+    },
+    {
+      "code": "EXERCISE_POLICY_CODE_INPUT_FALLBACK_NOT_AVAILABLE",
+      "category": "other",
+      "severity": "high",
+      "field": "quizDraft",
+      "message": "Shared policy could not add missing code_input exercise 1; code_input recipe details must come from the specific course profile."
+    },
+    {
+      "code": "EXERCISE_POLICY_CODE_INPUT_FALLBACK_NOT_AVAILABLE",
+      "category": "other",
+      "severity": "high",
+      "field": "quizDraft",
+      "message": "Shared policy could not add missing code_input exercise 2; code_input recipe details must come from the specific course profile."
+    },
+    {
+      "code": "EXERCISE_POLICY_CODE_INPUT_FALLBACK_NOT_AVAILABLE",
+      "category": "other",
+      "severity": "high",
+      "field": "quizDraft",
+      "message": "Shared policy could not add missing code_input exercise 3; code_input recipe details must come from the specific course profile."
+    },
+    {
+      "code": "EXERCISE_POLICY_CODE_INPUT_FALLBACK_NOT_AVAILABLE",
+      "category": "other",
+      "severity": "high",
+      "field": "quizDraft",
+      "message": "Shared policy could not add missing code_input exercise 4; code_input recipe details must come from the specific course profile."
+    }
+  ]
+}

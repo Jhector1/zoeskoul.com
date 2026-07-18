@@ -1202,14 +1202,6 @@
     "end": 11,
     "label": "Modules 8-11"
   },
-  "versioning": {
-    "family": "python",
-    "version": 2,
-    "status": "active",
-    "defaultForNewEnrollments": true,
-    "supersedes": "python",
-    "supersededBy": null
-  },
   "practiceDefaults": {
     "tryIt": true,
     "requiresTryIt": true,

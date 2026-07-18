@@ -1,0 +1,19 @@
+{
+  "topicId": "configure-and-initialize-a-repository",
+  "ok": false,
+  "issues": [
+    {
+      "code": "PROGRAMMING_LINE_BY_LINE_EXPLANATION_MISSING",
+      "category": "pedagogy",
+      "severity": "error",
+      "message": "Programming profile \"code-family\" includes a multi-line code example but does not explain it step by step or line by line in sketchBlocks."
+    },
+    {
+      "code": "WORKED_EXAMPLE_TRY_IT_DUPLICATE",
+      "category": "pedagogy",
+      "severity": "error",
+      "exerciseId": "try-configure-and-initialize-a-repository-sketch2",
+      "message": "Try It exercise \"try-configure-and-initialize-a-repository-sketch2\" reproduces the worked example in \"Checking the Status of Your Repository\" (configure-and-initialize-a-repository-sketch2) through solutionCode. Change a meaningful expectation such as the requested output, source entity, filter, aggregate, input, inserted/updated values, or relationship path. Formatting, capitalization, aliases, and ORDER BY alone do not make it a different exercise."
+    }
+  ]
+}

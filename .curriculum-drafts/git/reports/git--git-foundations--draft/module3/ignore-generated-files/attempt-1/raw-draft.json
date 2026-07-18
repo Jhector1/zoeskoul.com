@@ -1,0 +1,240 @@
+{
+  "title": "Ignore Generated Files",
+  "summary": "Write focused .gitignore rules and verify that generated artifacts remain outside the repository history.",
+  "minutes": 24,
+  "sketchBlocks": [
+    {
+      "id": "ignore-generated-files-sketch0",
+      "cardTitle": "Understanding .gitignore",
+      "title": "The Role of .gitignore in Git",
+      "bodyMarkdown": "In Git, the `.gitignore` file is crucial for managing which files and directories should be ignored by version control. This is particularly useful for excluding generated files, such as build artifacts or temporary files, that do not need to be tracked. \n\nWorked example: Consider a project where you have a `build/` directory that contains compiled files. You can create a `.gitignore` file with the line `build/` to ensure that all files within this directory are ignored by Git. This prevents unnecessary clutter in your repository and keeps your version history clean."
+    },
+    {
+      "id": "ignore-generated-files-sketch1",
+      "cardTitle": "Verifying Ignored Files",
+      "title": "Using git check-ignore",
+      "bodyMarkdown": "The `git check-ignore` command is a powerful tool to verify if a specific file or directory is being ignored by your `.gitignore` rules. This command helps you understand why certain files are not being tracked.\n\nWorked example: Suppose you have a `.gitignore` file that includes `*.log` to ignore all log files. You can use `git check-ignore -v debug.log` to check if `debug.log` is ignored and see which rule is responsible for it."
+    },
+    {
+      "id": "ignore-generated-files-sketch2",
+      "cardTitle": "Common Mistakes with .gitignore",
+      "title": "Why .gitignore Doesn't Untrack Files",
+      "bodyMarkdown": "A common misconception is that adding a file to `.gitignore` will automatically untrack it if it has already been committed. However, `.gitignore` only affects untracked files. To stop tracking a file that has already been committed, you need to use `git rm --cached`.\n\nWorked example: If `config.json` was committed by mistake and you want to ignore it, first add `config.json` to your `.gitignore`, then run `git rm --cached config.json` to untrack it while keeping it in your working directory."
+    },
+    {
+      "id": "ignore-generated-files-sketch3",
+      "cardTitle": "Practical .gitignore Patterns",
+      "title": "Creating Effective .gitignore Rules",
+      "bodyMarkdown": "Creating effective `.gitignore` rules involves understanding the patterns that match the files you want to ignore. You can use wildcards and directory patterns to specify which files should be excluded.\n\nWorked example: To ignore all `.tmp` files in any directory, you can add `*.tmp` to your `.gitignore`. For ignoring all files in a specific directory, such as `temp/`, simply add `temp/` to the file. This ensures that any temporary files or directories are not included in your version control."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "try-ignore-generated-files-sketch0",
+      "kind": "fill_blank_choice",
+      "title": "Create a .gitignore Rule",
+      "prompt": "Create a `.gitignore` rule to ignore all files in the `dist/` directory. Verify that the rule works by checking the status of a file `dist/output.js`.",
+      "hint": "Add a directory pattern to `.gitignore`.",
+      "help": {
+        "concept": "Use `.gitignore` to exclude directories from version control.",
+        "hint_1": "Add `dist/` to `.gitignore`.",
+        "hint_2": "Use `git status` to verify that `dist/output.js` is ignored."
+      },
+      "template": "A file-writing code exercise should also ____ so automated tests can check it.",
+      "choices": [
+        "print an observable result",
+        "hide all output",
+        "delete the file immediately",
+        "skip the program"
+      ],
+      "correctValue": "print an observable result"
+    },
+    {
+      "id": "try-ignore-generated-files-sketch1",
+      "kind": "fill_blank_choice",
+      "title": "Verify Ignored Files",
+      "prompt": "Use `git check-ignore` to verify that `logs/error.log` is ignored by the `.gitignore` rule `logs/`.",
+      "hint": "Use the `git check-ignore` command with the file path.",
+      "help": {
+        "concept": "Verify ignored files using `git check-ignore`.",
+        "hint_1": "Run `git check-ignore logs/error.log`.",
+        "hint_2": "Ensure `logs/` is in `.gitignore`."
+      },
+      "template": "A file-writing code exercise should also ____ so automated tests can check it.",
+      "choices": [
+        "print an observable result",
+        "hide all output",
+        "delete the file immediately",
+        "skip the program"
+      ],
+      "correctValue": "print an observable result"
+    },
+    {
+      "id": "try-ignore-generated-files-sketch2",
+      "kind": "fill_blank_choice",
+      "title": "Untrack a Committed File",
+      "prompt": "A file `config/settings.json` was committed by mistake. Add it to `.gitignore` and untrack it without deleting it from the working directory.",
+      "hint": "Use `git rm --cached` to untrack the file.",
+      "help": {
+        "concept": "Untrack committed files using `git rm --cached`.",
+        "hint_1": "Add `config/settings.json` to `.gitignore`.",
+        "hint_2": "Run `git rm --cached config/settings.json`."
+      },
+      "template": "A file-writing code exercise should also ____ so automated tests can check it.",
+      "choices": [
+        "print an observable result",
+        "hide all output",
+        "delete the file immediately",
+        "skip the program"
+      ],
+      "correctValue": "print an observable result"
+    },
+    {
+      "id": "try-ignore-generated-files-sketch3",
+      "kind": "fill_blank_choice",
+      "title": "Create a Pattern for Temporary Files",
+      "prompt": "Add a `.gitignore` rule to ignore all `.tmp` files in the project. Verify that `temp/data.tmp` is ignored.",
+      "hint": "Use a wildcard pattern in `.gitignore`.",
+      "help": {
+        "concept": "Use wildcards in `.gitignore` to ignore file types.",
+        "hint_1": "Add `*.tmp` to `.gitignore`.",
+        "hint_2": "Check `temp/data.tmp` with `git check-ignore`."
+      },
+      "template": "A file-writing code exercise should also ____ so automated tests can check it.",
+      "choices": [
+        "print an observable result",
+        "hide all output",
+        "delete the file immediately",
+        "skip the program"
+      ],
+      "correctValue": "print an observable result"
+    },
+    {
+      "id": "ignore-generated-files-single-choice-0",
+      "kind": "single_choice",
+      "title": "Purpose of .gitignore",
+      "prompt": "What is the primary purpose of a `.gitignore` file in a Git repository?",
+      "hint": "Think about what files you want to exclude from version control.",
+      "help": {
+        "concept": "The `.gitignore` file specifies which files and directories should be ignored by Git.",
+        "hint_1": "It helps keep unnecessary files out of the repository.",
+        "hint_2": "It prevents clutter from generated or temporary files."
+      },
+      "options": [
+        "To track changes in all files",
+        "To ignore specific files and directories",
+        "To delete files from the repository",
+        "To rename files in the repository"
+      ],
+      "correctOptionIds": [
+        "b"
+      ]
+    },
+    {
+      "id": "ignore-generated-files-single-choice-1",
+      "kind": "single_choice",
+      "title": "Effect of Adding to .gitignore",
+      "prompt": "What happens when you add a file to `.gitignore` that has already been committed?",
+      "hint": "Consider the difference between tracked and untracked files.",
+      "help": {
+        "concept": "Adding a file to `.gitignore` does not untrack it if it has already been committed.",
+        "hint_1": "The file remains in the repository history.",
+        "hint_2": "You need to untrack it manually if it's already committed."
+      },
+      "options": [
+        "The file is automatically deleted from the repository",
+        "The file is untracked and removed from history",
+        "The file remains tracked and in history",
+        "The file is renamed in the repository"
+      ],
+      "correctOptionIds": [
+        "c"
+      ]
+    },
+    {
+      "id": "ignore-generated-files-fill-blank-0",
+      "kind": "fill_blank_choice",
+      "title": "Ignoring a Directory",
+      "prompt": "To ignore all files in the `cache/` directory, you should add `[blank1]` to your `.gitignore`.",
+      "hint": "Use a directory pattern in `.gitignore`.",
+      "help": {
+        "concept": "Use directory patterns in `.gitignore` to ignore all files within a directory.",
+        "hint_1": "Add the directory name followed by a slash.",
+        "hint_2": "The correct pattern is `cache/`."
+      },
+      "template": "cache/[blank1]",
+      "choices": [
+        "*",
+        "/",
+        "cache/",
+        "cache"
+      ],
+      "correctValue": "cache/"
+    },
+    {
+      "id": "ignore-generated-files-fill-blank-1",
+      "kind": "fill_blank_choice",
+      "title": "Ignoring File Types",
+      "prompt": "To ignore all `.bak` files, you should add `[blank1]` to your `.gitignore`.",
+      "hint": "Use a wildcard pattern in `.gitignore`.",
+      "help": {
+        "concept": "Use wildcard patterns in `.gitignore` to ignore specific file types.",
+        "hint_1": "Use `*` to match any file name with the extension.",
+        "hint_2": "The correct pattern is `*.bak`."
+      },
+      "template": "[blank1]",
+      "choices": [
+        "*.bak",
+        "*.tmp",
+        "*.log",
+        "*.txt"
+      ],
+      "correctValue": "*.bak"
+    },
+    {
+      "id": "ignore-generated-files-multi-choice-0",
+      "kind": "multi_choice",
+      "title": "Common .gitignore Patterns",
+      "prompt": "Which of the following patterns are commonly used in a `.gitignore` file? Select all that apply.",
+      "hint": "Consider patterns that exclude files or directories.",
+      "help": {
+        "concept": "Common `.gitignore` patterns include wildcards and directory names to exclude files.",
+        "hint_1": "Patterns often include wildcards like `*` and directory names.",
+        "hint_2": "Look for patterns that exclude specific file types or directories."
+      },
+      "options": [
+        "*.log",
+        "/node_modules",
+        "*.tmp",
+        "README.md"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c"
+      ]
+    },
+    {
+      "id": "ignore-generated-files-drag-reorder-0",
+      "kind": "drag_reorder",
+      "title": "Order of Operations for Ignoring a Committed File",
+      "prompt": "Arrange the steps to ignore a file that has already been committed.",
+      "hint": "Consider the sequence of adding to `.gitignore` and untracking.",
+      "help": {
+        "concept": "To ignore a committed file, add it to `.gitignore` and untrack it.",
+        "hint_1": "First, add the file to `.gitignore`.",
+        "hint_2": "Then, untrack it using `git rm --cached`."
+      },
+      "tokens": [
+        "Add file to .gitignore",
+        "Run git rm --cached",
+        "Commit changes"
+      ],
+      "correctOrder": [
+        "Add file to .gitignore",
+        "Run git rm --cached",
+        "Commit changes"
+      ]
+    }
+  ]
+}

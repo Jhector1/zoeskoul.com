@@ -1,0 +1,12 @@
+{
+  "topicId": "rename-and-remove-tracked-files",
+  "repairs": [
+    {
+      "code": "GIT_CODE_INPUT_WORKSPACE_REBUILT",
+      "category": "other",
+      "severity": "low",
+      "field": "quizDraft.try-rename-and-remove-tracked-files-sketch3",
+      "message": "Rebuilt generated Git exercise \"try-rename-and-remove-tracked-files-sketch3\" as a self-contained terminal workspace with deterministic setup and grading evidence."
+    }
+  ]
+}

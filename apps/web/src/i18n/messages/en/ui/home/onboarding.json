@@ -29,12 +29,12 @@
     },
     "welcome": {
       "fallbackGoals": "your learning goals",
-      "new": "Welcome. I’ll shape your {appName} home around {interestText}, in {language}, with a pace that feels realistic from day one.",
-      "returning": "Welcome back. Your dashboard is still focused on {interestText}, with a {level} path, a {studyTime} study pace, and a {theme} theme."
+      "new": "You’re ready to begin with {interestText}. Start with a short lesson, try a challenge, and build from there.",
+      "returning": "Welcome back. Pick up with {interestText}, try the latest challenge, or explore something new."
     },
     "interestSummary": {
-      "empty": "Choose a subject and {appName} will surface the right next lesson, practice set, and trial.",
-      "focused": "Focused on {interests}. Start where it matters most."
+      "empty": "Choose a subject and we’ll help you find a clear place to start.",
+      "focused": "You’re learning {interests}. Let’s keep the momentum going."
     },
     "gate": {
       "kicker": "Welcome",
@@ -42,18 +42,18 @@
       "description": "Answer a few quick questions to personalize language, subjects, level, pace, and theme. You can change everything later."
     },
     "hero": {
-      "kicker": "Personalized learning",
-      "title": "{appName} organizes your dashboard around the subjects you want to learn.",
-      "descriptionFresh": "{appName} starts with a short guided setup, then recommends the right subjects, practice entry points, and trial questions based on your language, level, and weekly pace.",
+      "kicker": "Your learning space",
+      "title": "Learn by doing, one clear step at a time.",
+      "descriptionFresh": "Choose what you want to learn, set a pace that fits your week, and jump into a lesson or challenge when you’re ready.",
       "chooseSubject": "Choose a subject to try",
-      "continueLearning": "Continue learning",
+      "continueLearning": "Keep learning",
       "try3Questions": "Try 3 questions",
       "startingTrial": "Starting trial...",
-      "openGuide": "Open welcome guide",
-      "exploreSubjects": "Explore subjects",
-      "editPreferences": "Edit preferences",
-      "editAnswers": "Edit answers",
-      "currentTheme": "Current theme: {theme}"
+      "openGuide": "Set up my learning",
+      "exploreSubjects": "Browse subjects",
+      "editPreferences": "Adjust my setup",
+      "editAnswers": "Adjust my answers",
+      "currentTheme": "Theme: {theme}"
     },
     "steps": {
       "preferredLanguage": {
@@ -108,39 +108,39 @@
       "finish": "Finish setup"
     },
     "guideCard": {
-      "personalized": "Your space is personalized",
-      "ready": "Welcome guide is ready",
-      "start": "Start",
-      "updatePreferences": "Update preferences"
+      "personalized": "Ready when you are",
+      "ready": "Let’s find your starting point",
+      "start": "Get started",
+      "updatePreferences": "Adjust setup"
     },
     "highlights": {
-      "kicker": "Personalized home",
-      "title": "Minimal on day one. Smarter with progress.",
-      "description": "{appName} begins with a clean dashboard, then adapts using your interests, enrollments, and practice activity so the next step stays obvious.",
+      "kicker": "Built around you",
+      "title": "A simple home that gets more useful as you learn.",
+      "description": "Your lessons, practice, and progress stay in one place, so it’s easy to see what to do next.",
       "cards": {
         "language": {
           "title": "Language",
-          "text": "Use the language that feels most natural while you browse subjects and start your learning journey."
+          "text": "Learn in the language that feels most comfortable."
         },
         "level": {
           "title": "Level",
-          "text": "Your first recommendations can lean more foundational or more advanced based on your current comfort level."
+          "text": "Start at the right depth without repeating what you already know."
         },
         "pace": {
           "title": "Weekly pace",
-          "text": "Set a realistic weekly schedule and come back regularly. You’ll learn better and faster through consistent practice, so make it a habit."
+          "text": "Choose a weekly pace you can actually keep."
         }
       }
     },
     "recommended": {
-      "kicker": "Recommended paths",
-      "title": "Start with the subjects you actually want to learn.",
+      "kicker": "Choose your next path",
+      "title": "Start with something you’re excited to build.",
       "viewAll": "View all subjects",
       "exploreSubject": "Explore subject"
     },
     "floatingAssistant": {
-      "title": "Need to adjust your setup?",
-      "subtitle": "Update your preferences"
+      "title": "Want to change your setup?",
+      "subtitle": "Language, level, pace, and more"
     },
     "trial": {
       "chooseSubjectError": "Choose a subject first.",
@@ -156,6 +156,11 @@
       "newUser": "I’m new here",
       "returningUser": "I already have an account",
       "helper": "New users start onboarding. Returning users go to sign in."
+    },
+    "latestChallenge": {
+      "eyebrow": "Latest daily challenge",
+      "noAccount": "No account needed",
+      "cta": "Try the challenge"
     }
   }
 }
