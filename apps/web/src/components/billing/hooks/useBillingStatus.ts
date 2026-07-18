@@ -3,8 +3,8 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useLocale } from "next-intl";
 import type { BillingStatus } from "@/lib/billing/types";
-import { fmtShortDate } from "@/lib/billing/format";
 import { formatMoneyMinor, toIntlLocale } from "@/i18n/money";
+import { deriveBillingHeadline } from "@/components/billing/deriveBillingHeadline";
 
 function hasRawPricing(s: BillingStatus | null) {
     return Boolean(
@@ -77,34 +77,10 @@ export function useBillingStatus() {
 
     const canUseTrial = Boolean(derivedStatus?.trialEligible) && !trialState.trialEnded;
 
-    const headlineBadge = useMemo(() => {
-        if (!derivedStatus) return null;
-
-        if (derivedStatus.stripeStatus === "trialing") {
-            return {
-                tone: "good" as const,
-                text: `🕒 Trialing • ends ${fmtShortDate(derivedStatus.trialEndsAt, intlLocale)}`,
-            };
-        }
-
-        if (derivedStatus.stripeStatus === "active") {
-            return { tone: "good" as const, text: "✅ Active subscription" };
-        }
-
-        if (derivedStatus.stripeStatus === "past_due") {
-            return { tone: "warn" as const, text: "⚠️ Past due — update payment method" };
-        }
-
-        if (derivedStatus.stripeStatus === "unpaid") {
-            return { tone: "warn" as const, text: "⚠️ Unpaid — update payment method" };
-        }
-
-        if (derivedStatus.stripeStatus === "canceled") {
-            return { tone: "neutral" as const, text: "Canceled" };
-        }
-
-        return { tone: "neutral" as const, text: "Not subscribed" };
-    }, [derivedStatus, intlLocale]);
+    const headlineBadge = useMemo(
+        () => deriveBillingHeadline(derivedStatus, intlLocale),
+        [derivedStatus, intlLocale],
+    );
 
     return {
         status: derivedStatus,

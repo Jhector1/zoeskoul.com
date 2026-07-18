@@ -381,7 +381,19 @@ export default function HeaderSlick({
 
                 {headlineBadge && isBillingStatus ? (
                     <div className="hidden md:block">
-                      <Badge tone={headlineBadge.tone}>{headlineBadge.text}</Badge>
+                      {headlineBadge.href ? (
+                          <Link
+                              href={headlineBadge.href}
+                              aria-label={headlineBadge.text}
+                              className="inline-flex rounded-full focus:outline-none focus:ring-2 focus:ring-emerald-400/35"
+                          >
+                            <Badge tone={headlineBadge.tone} className="cursor-pointer whitespace-nowrap">
+                              {headlineBadge.text}
+                            </Badge>
+                          </Link>
+                      ) : (
+                          <Badge tone={headlineBadge.tone}>{headlineBadge.text}</Badge>
+                      )}
                     </div>
                 ) : null}
               </div>

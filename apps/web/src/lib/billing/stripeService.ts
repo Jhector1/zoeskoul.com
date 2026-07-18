@@ -337,6 +337,32 @@ export async function upsertFromStripeSubscription(sub: Stripe.Subscription, hin
     return {userId: user.id, status: sub.status, priceId, currentPeriodEnd, trialEnd, subscriptionId: sub.id};
 }
 
+async function expireLocalSubscriptionsMissingFromStripe(
+    userId: string,
+    stripeSubscriptionIds: string[],
+) {
+    const staleWhere = stripeSubscriptionIds.length
+        ? {
+            userId,
+            stripeSubscriptionId: { notIn: stripeSubscriptionIds },
+            status: { in: ["active", "trialing", "past_due"] as StripeSubscriptionStatus[] },
+        }
+        : {
+            userId,
+            status: { in: ["active", "trialing", "past_due"] as StripeSubscriptionStatus[] },
+        };
+
+    await prisma.subscription.updateMany({
+        where: staleWhere,
+        data: {
+            status: "canceled",
+            currentPeriodEnd: new Date(0),
+            trialEnd: null,
+            cancelAtPeriodEnd: false,
+        },
+    });
+}
+
 /**
  * Optional but recommended: “sync-on-read”
  * Pull Stripe subscriptions and upsert them so UI/entitlement reflects Stripe immediately
@@ -350,7 +376,10 @@ export async function syncSubscriptionsForUser(userId: string) {
     });
 
     const customerId = u?.stripeCustomerId ?? null;
-    if (!customerId) return;
+    if (!customerId) {
+        await expireLocalSubscriptionsMissingFromStripe(userId, []);
+        return;
+    }
 
     // ✅ if stale/missing, clear and stop (prevents 500s in /status)
     try {
@@ -360,6 +389,7 @@ export async function syncSubscriptionsForUser(userId: string) {
                 where: {id: userId},
                 data: {stripeCustomerId: null},
             });
+            await expireLocalSubscriptionsMissingFromStripe(userId, []);
             return;
         }
     } catch (e: any) {
@@ -368,6 +398,7 @@ export async function syncSubscriptionsForUser(userId: string) {
                 where: {id: userId},
                 data: {stripeCustomerId: null},
             });
+            await expireLocalSubscriptionsMissingFromStripe(userId, []);
             return;
         }
         throw e;
@@ -383,6 +414,11 @@ export async function syncSubscriptionsForUser(userId: string) {
     for (const sub of list.data) {
         await upsertFromStripeSubscription(sub, userId);
     }
+
+    await expireLocalSubscriptionsMissingFromStripe(
+        userId,
+        list.data.map((sub) => sub.id),
+    );
 }
 
 

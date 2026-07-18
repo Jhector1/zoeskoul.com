@@ -56,8 +56,22 @@ export async function getEntitlementForUser(userId: string): Promise<Entitlement
 
   if (!subs.length) return { ok: false, reason: "none" };
 
-  // Prefer active/trialing if any exist, else newest
-  const preferred = subs.find((s) => s.status === "active" || s.status === "trialing");
+  // Prefer a subscription that is entitled right now. A stale local row with
+  // status=active but no valid Stripe period must never win over fresher data.
+  const preferred =
+    subs.find(
+      (s) =>
+        s.status === "trialing" &&
+        (isFuture(s.trialEnd) || isFuture(s.currentPeriodEnd)),
+    ) ??
+    subs.find(
+      (s) => s.status === "active" && isFuture(s.currentPeriodEnd),
+    ) ??
+    subs.find(
+      (s) =>
+        (s.status === "past_due" || s.status === "canceled") &&
+        isFuture(s.currentPeriodEnd),
+    );
   const sub = preferred ?? subs[0];
 
   const withinPeriod = isFuture(sub.currentPeriodEnd);
@@ -85,9 +99,11 @@ export async function getEntitlementForUser(userId: string): Promise<Entitlement
   }
 
   if (sub.status === "active") {
-    // allow if within period; if missing periodEnd, allow (some setups)
-    if (withinPeriod || !sub.currentPeriodEnd) return { ok: true, reason: "active", ...base };
-    return { ok: false, reason: "expired", ...base };
+    // Stripe subscriptions always have a billing period. Treat a missing or
+    // expired period as stale data instead of granting premium access.
+    return withinPeriod
+      ? { ok: true, reason: "active", ...base }
+      : { ok: false, reason: "expired", ...base };
   }
 
   if (sub.status === "past_due") {
@@ -100,6 +116,6 @@ export async function getEntitlementForUser(userId: string): Promise<Entitlement
     return withinPeriod ? { ok: true, reason: "active", ...base } : { ok: false, reason: "canceled", ...base };
   }
 
-  // fallback
-  return withinPeriod ? { ok: true, reason: "active", ...base } : { ok: false, reason: "expired", ...base };
+  // Unknown Stripe states must fail closed.
+  return { ok: false, reason: "expired", ...base };
 }
