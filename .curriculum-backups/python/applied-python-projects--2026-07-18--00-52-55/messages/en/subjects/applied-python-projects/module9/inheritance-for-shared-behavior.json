@@ -1,0 +1,257 @@
+{
+  "topics": {
+    "applied-python-projects": {
+      "python-9-inheritance-polymorphism-and-abstraction": {
+        "inheritance-for-shared-behavior": {
+          "label": "Inheritance for Shared Behavior",
+          "summary": "Reuse parent setup, call it with `super()`, and extend inherited behavior without copying the parent code.",
+          "cards": {
+            "sketch0": {
+              "title": "Shared parent setup"
+            },
+            "sketch1": {
+              "title": "Call the parent with super()"
+            },
+            "sketch2": {
+              "title": "Extend a parent method"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_inheritance_for_shared_behavior_sketch0": {
+              "title": "Build the shared CatalogItem parent",
+              "prompt": "In `models/catalog_item.py`, complete `CatalogItem` so `__init__` stores `title` on `self.title` and `label(self)` returns the title. In `main.py`, create `CatalogItem(\"Hidden Figures\")` and print its label. This gives the child classes shared setup to reuse next.",
+              "hint": "Complete the model first, then finish the small main script. The starter is intentionally unfinished.",
+              "help": {
+                "concept": "A parent/base class keeps shared setup in one place. Here, CatalogItem is the parent class that future catalog types can inherit from.",
+                "hint_1": "The constructor should save the incoming `title` on `self`.",
+                "hint_2": "The `label()` method should return that stored title."
+              },
+              "starterCode": "from models.catalog_item import CatalogItem\n\n# TODO: create one CatalogItem for \"Hidden Figures\".\n# TODO: print the item label.\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "from models.catalog_item import CatalogItem\n\n# TODO: create one CatalogItem for \"Hidden Figures\".\n# TODO: print the item label.\n"
+                },
+                "models_catalog_item_py": {
+                  "content": "class CatalogItem:\n    def __init__(self, title):\n        # TODO: store title on this object.\n        pass\n\n    def label(self):\n        # TODO: return the stored title.\n        pass\n"
+                }
+              },
+              "solutionCode": "from models.catalog_item import CatalogItem\n\nitem = CatalogItem(\"Hidden Figures\")\nprint(item.label())\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from models.catalog_item import CatalogItem\n\nitem = CatalogItem(\"Hidden Figures\")\nprint(item.label())\n"
+                },
+                "models_catalog_item_py": {
+                  "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        return self.title\n"
+                }
+              },
+              "checks": {
+                "0": {
+                  "message": "Define the CatalogItem class."
+                },
+                "1": {
+                  "message": "CatalogItem should accept a title."
+                },
+                "2": {
+                  "message": "Store the title on each CatalogItem object."
+                },
+                "3": {
+                  "message": "label() should return the stored title."
+                }
+              },
+              "expectedOutput": "Hidden Figures"
+            },
+            "try_inheritance_for_shared_behavior_sketch1": {
+              "title": "Call the parent constructor with super()",
+              "prompt": "The `CatalogItem` parent already stores `title`. In `models/book.py`, make `Book` inherit from `CatalogItem`. Add `__init__(self, title, author)`, call `super().__init__(title)`, then store `author` on `self.author`. In `main.py`, create `Book(\"The Martian\", \"Andy Weir\")` and print the title and author on separate lines.",
+              "hint": "Use `super().__init__(title)` before storing the Book-specific attribute.",
+              "help": {
+                "concept": "`super()` gives the child access to the next implementation in Python's inheritance chain. Calling the parent constructor avoids repeating shared setup.",
+                "hint_1": "Write `class Book(CatalogItem):`.",
+                "hint_2": "Inside Book.__init__, call `super().__init__(title)` and then assign `self.author = author`."
+              },
+              "starterCode": "from models.book import Book\n\n# Create The Martian by Andy Weir, then print its title and author.\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "from models.book import Book\n\n# Create Book(\"The Martian\", \"Andy Weir\").\n# Print the inherited title and the Book-specific author.\n"
+                },
+                "models_catalog_item_py": {
+                  "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n"
+                },
+                "models_book_py": {
+                  "content": "from models.catalog_item import CatalogItem\n\nclass Book(CatalogItem):\n    def __init__(self, title, author):\n        # TODO: call the parent constructor for title.\n        # TODO: store author on this Book.\n        pass\n"
+                }
+              },
+              "solutionCode": "from models.book import Book\n\nbook = Book(\"The Martian\", \"Andy Weir\")\nprint(book.title)\nprint(book.author)\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from models.book import Book\n\nbook = Book(\"The Martian\", \"Andy Weir\")\nprint(book.title)\nprint(book.author)\n"
+                },
+                "models_catalog_item_py": {
+                  "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n"
+                },
+                "models_book_py": {
+                  "content": "from models.catalog_item import CatalogItem\n\nclass Book(CatalogItem):\n    def __init__(self, title, author):\n        super().__init__(title)\n        self.author = author\n"
+                }
+              },
+              "checks": {
+                "0": {
+                  "message": "Define Book as a child of CatalogItem."
+                },
+                "1": {
+                  "message": "Book should accept title and author."
+                },
+                "2": {
+                  "message": "The parent constructor should provide title, and Book should store author."
+                },
+                "3": {
+                  "message": "Print the title and author on separate lines."
+                }
+              },
+              "expectedOutput": "The Martian\nAndy Weir"
+            },
+            "try_inheritance_for_shared_behavior_sketch2": {
+              "title": "Extend a parent method with super()",
+              "prompt": "Add `label(self)` to `Book`. Start with `base_label = super().label()`, then return `f\"{base_label} by {self.author}\"`. In `main.py`, create `Book(\"The Hobbit\", \"J. R. R. Tolkien\")` and print its label.",
+              "hint": "Call `super().label()` to reuse the parent result before adding the author.",
+              "help": {
+                "concept": "A child can override a method and still reuse the parent implementation. `super().label()` gets the parent result; the child adds its specialized detail.",
+                "hint_1": "Keep the Book constructor that calls `super().__init__(title)`.",
+                "hint_2": "Return the parent label followed by ` by ` and the author."
+              },
+              "starterCode": "from models.book import Book\n\n# Create The Hobbit and print the extended label.\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "from models.book import Book\n\n# Create Book(\"The Hobbit\", \"J. R. R. Tolkien\").\n# Print book.label().\n"
+                },
+                "models_catalog_item_py": {
+                  "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        return self.title\n"
+                },
+                "models_book_py": {
+                  "content": "from models.catalog_item import CatalogItem\n\nclass Book(CatalogItem):\n    def __init__(self, title, author):\n        super().__init__(title)\n        self.author = author\n\n    def label(self):\n        # TODO: reuse the parent label and add the author.\n        pass\n"
+                }
+              },
+              "solutionCode": "from models.book import Book\n\nbook = Book(\"The Hobbit\", \"J. R. R. Tolkien\")\nprint(book.label())\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from models.book import Book\n\nbook = Book(\"The Hobbit\", \"J. R. R. Tolkien\")\nprint(book.label())\n"
+                },
+                "models_catalog_item_py": {
+                  "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        return self.title\n"
+                },
+                "models_book_py": {
+                  "content": "from models.catalog_item import CatalogItem\n\nclass Book(CatalogItem):\n    def __init__(self, title, author):\n        super().__init__(title)\n        self.author = author\n\n    def label(self):\n        base_label = super().label()\n        return f\"{base_label} by {self.author}\"\n"
+                }
+              },
+              "checks": {
+                "0": {
+                  "message": "Book should accept title and author."
+                },
+                "1": {
+                  "message": "Book.label() should extend the parent label with the author."
+                },
+                "2": {
+                  "message": "Create the Book object in main.py."
+                },
+                "3": {
+                  "message": "Print the extended label."
+                }
+              },
+              "expectedOutput": "The Hobbit by J. R. R. Tolkien"
+            }
+          },
+          "practice": {
+            "sc-inheritance-shared-work": {
+              "title": "Choose why a base class helps here",
+              "prompt": "Book and Movie both need the same `title` setup. Why is a base class helpful?",
+              "hint": "Pick the answer about reusing shared code.",
+              "help": {
+                "concept": "Inheritance is helpful when related classes share the same core behavior.",
+                "hint_1": "Look for the choice about storing shared setup once.",
+                "hint_2": "Avoid answers about unrelated classes or identical output forever."
+              },
+              "options": {
+                "a": "It prevents any subclass from having its own behavior.",
+                "b": "It stores shared setup once so related subclasses can reuse it.",
+                "c": "It turns every object into the same subclass.",
+                "d": "It removes the need to create objects."
+              }
+            },
+            "fb-inheritance-subclass-name": {
+              "title": "Call the parent constructor",
+              "prompt": "Fill in the function used to reach the parent constructor.",
+              "hint": "It returns access to the next class in the inheritance chain.",
+              "help": {
+                "concept": "`super()` lets a child call a parent implementation without naming the parent class directly.",
+                "hint_1": "It is followed by `.__init__(title)`.",
+                "hint_2": "Include the parentheses."
+              },
+              "template": "[blank1].__init__(title)",
+              "choices": [
+                "super()",
+                "self",
+                "CatalogItem()",
+                "parent"
+              ]
+            },
+            "dr-inheritance-build-order": {
+              "title": "Order a child constructor",
+              "prompt": "Put these steps in a clear order.",
+              "hint": "Connect the child to the parent before adding child-only state.",
+              "help": {
+                "concept": "The child class inherits first, then its constructor calls the parent setup, then it stores specialized state.",
+                "hint_1": "The class header comes first.",
+                "hint_2": "Call super before using the completed object."
+              },
+              "tokens": {
+                "t1": "Define the child class with the parent in parentheses",
+                "t2": "Define the child constructor",
+                "t3": "Call `super().__init__(...)` for shared setup",
+                "t4": "Store the child-specific attributes"
+              }
+            },
+            "sc-inheritance-method-reuse": {
+              "title": "What does super() do here?",
+              "prompt": "Inside `Book.label()`, why call `super().label()`?",
+              "hint": "The child wants to reuse the parent result and add more detail.",
+              "help": {
+                "concept": "`super()` can call the parent method as part of an override.",
+                "hint_1": "The child does not need to copy the parent logic.",
+                "hint_2": "It can extend the returned text."
+              },
+              "options": {
+                "a": "It gets the parent label so Book can extend it.",
+                "b": "It creates an unrelated object.",
+                "c": "It deletes the parent method.",
+                "d": "It turns label into a static method."
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "applied-python-projects": {
+      "python-9-inheritance-polymorphism-and-abstraction": {
+        "inheritance-for-shared-behavior": {
+          "sketch-0": {
+            "title": "Put shared setup in the parent",
+            "bodyMarkdown": "Inheritance is useful when related classes share state or behavior.\n\n```python\nclass Vehicle:\n    def __init__(self, make):\n        self.make = make\n```\n\nThe parent owns the setup every child needs. Child classes can add only what makes them different.\n\nBefore introducing a parent class, identify behavior that is truly identical across the child types. Inheritance should remove meaningful duplication while leaving each subclass’s special state and output visible."
+          },
+          "sketch-1": {
+            "title": "Use super() to run the parent constructor",
+            "bodyMarkdown": "When a child defines its own constructor, call the parent constructor for the shared part.\n\n```python\nclass ElectricCar(Vehicle):\n    def __init__(self, make, battery_level):\n        super().__init__(make)\n        self.battery_level = battery_level\n```\n\n`super().__init__(make)` runs the next constructor in Python's inheritance chain. The child avoids copying `self.make = make`.\n\nBefore introducing a parent class, identify behavior that is truly identical across the child types. Inheritance should remove meaningful duplication while leaving each subclass’s special state and output visible."
+          },
+          "sketch-2": {
+            "title": "A child can extend a parent method",
+            "bodyMarkdown": "A child can override a method and still build on the parent implementation.\n\n```python\nclass Vehicle:\n    def description(self):\n        return self.make\n\nclass ElectricCar(Vehicle):\n    def description(self):\n        base = super().description()\n        return f\"{base} - electric\"\n```\n\nThis keeps shared behavior in one place while the child adds its own detail.\n\nBefore introducing a parent class, identify behavior that is truly identical across the child types. Inheritance should remove meaningful duplication while leaving each subclass’s special state and output visible."
+          }
+        }
+      }
+    }
+  }
+}

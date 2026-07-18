@@ -1,8 +1,9 @@
 import type { BillingStatus } from "@/lib/billing/types";
+import type { BadgeTone } from "./Badge";
 import { fmtShortDate } from "@/lib/billing/format";
 
 export type BillingHeadline = {
-  tone: "neutral" | "good" | "warn" | "danger" | "info";
+  tone: BadgeTone;
   text: string;
   href?: string;
 };

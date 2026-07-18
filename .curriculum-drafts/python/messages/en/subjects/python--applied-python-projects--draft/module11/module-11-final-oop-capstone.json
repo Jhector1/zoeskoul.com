@@ -7,7 +7,7 @@
           "summary": "Build a neighborhood pantry application through six clearly scoped milestones, from one abstract request contract to a tested and documented final handoff.",
           "cards": {
             "sketch0": {
-              "title": "Your final OOP build"
+              "title": "Final OOP Capstone"
             },
             "project": {
               "title": "Neighborhood Pantry Request Coordinator"
@@ -619,8 +619,8 @@
       "python-11-oop-capstone-project": {
         "module-11-final-oop-capstone": {
           "module-11-final-oop-capstone-sketch-1": {
-            "title": "One application, one object-oriented design",
-            "bodyMarkdown": "The final course project is one continuous build, not a collection of unrelated capstone lessons. You will work inside a single topic and carry the same workspace through six milestones until it becomes a complete Neighborhood Pantry Request Coordinator.\n\nThe project must demonstrate the central ideas from the course:\n\n- an **abstract base class** that defines a real interface\n- **encapsulated validation** and protected state\n- concrete subclasses that use **inheritance** and **overriding**\n- a mixed collection processed through **polymorphism**\n- a service that owns collection behavior\n- CSV storage that reconstructs domain objects\n- reports that call the shared interface instead of branching by type\n- regression tests that protect both behavior and design\n- a README that explains the architecture and run command\n\nThe pantry scenario is deliberately different from the lesson examples. Your job is to transfer the design ideas, not copy a familiar class. Every milestone remains runnable, and every new step starts from the complete solution of the previous step."
+            "title": "A neighborhood pantry needs a better system",
+            "bodyMarkdown": "Saturday mornings at the neighborhood pantry begin before the doors open. Volunteers unpack food, arrange hygiene supplies, and prepare to welcome families who may need very different kinds of help. One household might request fresh produce. Another may need soap, toothpaste, or diapers. Every request matters, and the team needs a reliable way to keep track of each one.\n\nFor a while, handwritten notes and a small spreadsheet were enough. As the pantry grew, that system became harder to trust. Names were entered differently, priorities were easy to miss, and volunteers could not always tell whether a request had already been fulfilled. When the application restarted, yesterday's records also had to be rebuilt by hand.\n\nThe pantry has asked you to create the **Neighborhood Pantry Request Coordinator**. The program will represent every request as an object, protect the information each request needs, and let the rest of the application work with food and hygiene requests in a consistent way.\n\nBy the time the coordinator is complete, volunteers will be able to:\n\n- record food and hygiene requests\n- validate household names and priority levels\n- mark requests as fulfilled\n- save requests to a CSV file and load them again later\n- create one daily report from different request types\n- run tests that protect the application as it changes\n\nYou will build the coordinator in stages. The first version begins with the common rules every pantry request must follow. From there, the application will grow to support specialized request types, a service that manages the queue, persistent storage, reporting, and tests. Each stage continues from the working application you completed before it.\n\nYour first task is to design the shared request foundation that every future request type can trust."
           }
         }
       }

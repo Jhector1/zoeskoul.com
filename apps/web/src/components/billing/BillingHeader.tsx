@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import { cn } from "@/lib/cn";
 import type { BillingStatus } from "@/lib/billing/types";
 import Badge from "./Badge";
+import type { BillingHeadline } from "./deriveBillingHeadline";
 import { SECTION_HEADER } from "./styles";
 
 export default function BillingHeader({
@@ -18,7 +19,7 @@ export default function BillingHeader({
     busy: boolean;
     loading: boolean;
     status: BillingStatus | null;
-    headlineBadge: { tone: "neutral" | "good" | "warn"; text: string } | null;
+    headlineBadge: BillingHeadline | null;
     onManageBilling: () => void;
     onSignIn: () => void;
 }) {
