@@ -3,13 +3,9 @@ import { Link } from "@/i18n/navigation";
 import { cloudinaryImageUrl } from "@/lib/cloudinary/url";
 import { ROUTES } from "@/utils";
 import { getAvailableVisibleCatalogsForActor } from "@/lib/subjects/server/catalogVisibility";
+import { resolveCatalogCourseStatusPresentation } from "@/lib/subjects/catalogCourseStatus";
 
 export const runtime = "nodejs";
-
-function statusLabel(status?: string | null) {
-    if (!status) return "Track";
-    return `${status.charAt(0).toUpperCase()}${status.slice(1)}`;
-}
 
 export default async function CatalogsPage() {
     const catalogs = await getAvailableVisibleCatalogsForActor();
@@ -42,9 +38,9 @@ export default async function CatalogsPage() {
                     </h1>
 
                     <p className="mt-3 max-w-2xl text-sm leading-6 text-neutral-600 dark:text-white/65 sm:text-base">
-                        Catalogs group related course tracks together. A catalog can
-                        contain beginner, advanced, legacy, draft, and future versions
-                        without mixing up learner progress.
+                        Catalogs group related courses together. A catalog can contain
+                        current, legacy, draft, and upcoming course versions without
+                        mixing up learner progress.
                     </p>
 
                     <div className="mt-5 flex flex-wrap gap-2 text-sm text-neutral-600 dark:text-white/55">
@@ -55,7 +51,7 @@ export default async function CatalogsPage() {
                             {totalSubjects} course{totalSubjects === 1 ? "" : "s"}
                         </span>
                         <span className="rounded-full border border-neutral-200 bg-white px-3 py-1 dark:border-white/10 dark:bg-white/[0.04]">
-                            Versioned tracks
+                            Course versions
                         </span>
                     </div>
                 </section>
@@ -145,7 +141,7 @@ export default async function CatalogsPage() {
                                     <div className="rounded-xl border border-neutral-200 bg-neutral-50 p-3 dark:border-white/10 dark:bg-black/20">
                                         <div className="mb-2 flex items-center justify-between gap-3">
                                             <div className="text-[11px] font-bold uppercase tracking-[0.14em] text-neutral-500 dark:text-white/40">
-                                                Tracks
+                                                Courses
                                             </div>
                                             <div className="text-xs text-neutral-500 dark:text-white/40">
                                                 View catalog →
@@ -153,47 +149,57 @@ export default async function CatalogsPage() {
                                         </div>
 
                                         <div className="grid gap-1.5">
-                                            {previewSubjects.map((subject) => (
-                                                <div
-                                                    key={subject.slug}
-                                                    className="flex min-w-0 items-center justify-between gap-3 rounded-lg bg-white px-3 py-2 text-sm dark:bg-white/[0.04]"
-                                                >
-                                                    <div className="min-w-0">
-                                                        <div className="truncate font-medium">
-                                                            {subject.title}
+                                            {previewSubjects.map((subject) => {
+                                                const statusPresentation =
+                                                    resolveCatalogCourseStatusPresentation(subject);
+
+                                                return (
+                                                    <div
+                                                        key={subject.slug}
+                                                        className="flex min-w-0 items-center justify-between gap-3 rounded-lg bg-white px-3 py-2 text-sm dark:bg-white/[0.04]"
+                                                    >
+                                                        <div className="min-w-0">
+                                                            <div className="truncate font-medium">
+                                                                {subject.title}
+                                                            </div>
+                                                            <div className="mt-0.5 flex flex-wrap items-center gap-1.5 text-xs text-neutral-500 dark:text-white/40">
+                                                                <span>
+                                                                    {statusPresentation.availabilityLabel}
+                                                                </span>
+
+                                                                {catalog.actorAccess.canSeeAllCatalogSubjects ? (
+                                                                    <>
+                                                                        <span>·</span>
+                                                                        <span>
+                                                                            {statusPresentation.lifecycleLabel ??
+                                                                                (subject.versioning
+                                                                                    ? "Active version"
+                                                                                    : "Unversioned")}
+                                                                        </span>
+                                                                        <span>·</span>
+                                                                        <span>
+                                                                            {subject.availabilityStatus === "seeded"
+                                                                                ? "Seeded"
+                                                                                : "Not seeded"}
+                                                                        </span>
+                                                                    </>
+                                                                ) : null}
+                                                            </div>
                                                         </div>
-                                                        <div className="mt-0.5 flex flex-wrap items-center gap-1.5 text-xs text-neutral-500 dark:text-white/40">
-                                                            <span>
-                                                                {subject.status === "coming_soon"
-                                                                    ? "Coming soon"
-                                                                    : statusLabel(subject.versioning?.status)}
+
+                                                        {catalog.actorAccess.canSeeAllCatalogSubjects &&
+                                                        subject.availabilityStatus === "unseeded" ? (
+                                                            <span className="shrink-0 rounded-full bg-red-50 px-2 py-0.5 text-[11px] font-semibold text-red-700 dark:bg-red-400/10 dark:text-red-200">
+                                                                Unseeded
                                                             </span>
-
-                                                            {catalog.actorAccess.canSeeAllCatalogSubjects ? (
-                                                                <>
-                                                                    <span>·</span>
-                                                                    <span>
-                                                                        {subject.availabilityStatus === "seeded"
-                                                                            ? "Seeded"
-                                                                            : "Not seeded"}
-                                                                    </span>
-                                                                </>
-                                                            ) : null}
-                                                        </div>
+                                                        ) : null}
                                                     </div>
-
-                                                    {catalog.actorAccess.canSeeAllCatalogSubjects &&
-                                                    subject.availabilityStatus === "unseeded" ? (
-                                                        <span className="shrink-0 rounded-full bg-red-50 px-2 py-0.5 text-[11px] font-semibold text-red-700 dark:bg-red-400/10 dark:text-red-200">
-                                                            Unseeded
-                                                        </span>
-                                                    ) : null}
-                                                </div>
-                                            ))}
+                                                );
+                                            })}
 
                                             {courseCount > previewSubjects.length ? (
                                                 <div className="px-3 pt-1 text-xs text-neutral-500 dark:text-white/40">
-                                                    +{courseCount - previewSubjects.length} more track
+                                                    +{courseCount - previewSubjects.length} more course
                                                     {courseCount - previewSubjects.length === 1 ? "" : "s"}
                                                 </div>
                                             ) : null}

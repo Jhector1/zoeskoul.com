@@ -22,7 +22,16 @@
         "requireAllPublishedModules": true,
         "rewardEnabledByDefault": true,
         "certificateEnabledByDefault": true
+      },
+      "versioning": {
+        "family": "python-data-functions",
+        "version": 1,
+        "status": "active",
+        "defaultForNewEnrollments": true,
+        "supersedes": null,
+        "supersededBy": null
       }
+
     }
   },
   "modules": [

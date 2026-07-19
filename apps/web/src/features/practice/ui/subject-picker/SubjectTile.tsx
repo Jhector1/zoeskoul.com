@@ -7,6 +7,7 @@ import { cloudinaryImageUrl } from "@/lib/cloudinary/url";
 import { cn } from "@/lib/cn";
 import Pill from "./Pill";
 import { useTaggedT } from "@/i18n/tagged";
+import { resolveCatalogCourseStatusPresentation } from "@/lib/subjects/catalogCourseStatus";
 
 export default function SubjectTile({
                                       s,
@@ -22,6 +23,7 @@ export default function SubjectTile({
     const isEnterable = Boolean(s.subjectId) && !isComingSoon;
     const isMissingFromDb = !s.subjectId && !isComingSoon;
     const disabled = !isEnterable || !s.defaultModuleSlug || enrolling || isComingSoon;
+    const statusPresentation = resolveCatalogCourseStatusPresentation(s);
     const imageUrl = s.imagePublicId
       ? cloudinaryImageUrl(s.imagePublicId, {
           w: 1400,
@@ -90,8 +92,8 @@ export default function SubjectTile({
                       <Pill tone="warn">Not seeded</Pill>
                   ) : null}
 
-                  {s.versioning?.status ? (
-                      <Pill tone="neutral">{s.versioning.status}</Pill>
+                  {statusPresentation.lifecycleLabel ? (
+                      <Pill tone="neutral">{statusPresentation.lifecycleLabel}</Pill>
                   ) : null}
 
                   {isComingSoon ? <Pill tone="warn">{t("comingSoon")}</Pill> : null}
