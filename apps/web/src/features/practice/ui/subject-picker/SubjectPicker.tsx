@@ -1,35 +1,20 @@
 "use client";
 
 import React, { useMemo, useState } from "react";
-import { Link, useRouter } from "@/i18n/navigation";
-import SubjectTile from "./SubjectTile";
+import { Link } from "@/i18n/navigation";
+import SubjectCardGrid from "./SubjectCardGrid";
 import Pill from "./Pill";
-import { ROUTES } from "@/utils";
+import type { SubjectCard } from "./subjectCardTypes";
+import { useSubjectCardController } from "./useSubjectCardController";
 import { cn } from "@/lib/cn";
 import { useTaggedT } from "@/i18n/tagged";
 
-export type SubjectCard = {
-    slug: string;
-    subjectId?: string | null;
-    title: string;
-    description: string;
-    defaultModuleSlug: string | null;
-    imagePublicId: string | null;
-    imageAlt: string | null;
-    enrolled: boolean;
-    status: "active" | "coming_soon" | "disabled" | "draft" | "legacy";
-    availabilityStatus?: "seeded" | "unseeded";
-    versioning?: {
-        family?: string;
-        status?: "draft" | "active" | "legacy" | "disabled";
-        defaultForNewEnrollments?: boolean;
-    } | null;
-};
+export type { SubjectCard } from "./subjectCardTypes";
 
 function Surface({
-                     children,
-                     className,
-                 }: {
+    children,
+    className,
+}: {
     children: React.ReactNode;
     className?: string;
 }) {
@@ -41,16 +26,16 @@ function SectionKicker({ children }: { children: React.ReactNode }) {
 }
 
 export default function SubjectPicker({
-                                          initialSubjects,
-                                          pageTitle,
-                                          pageKicker,
-                                          pageSubtitle,
-                                          emptyTitle,
-                                          emptySubtitle,
-                                          browseHref,
-                                          browseLabel,
-                                          allowEnrollment = true,
-                                      }: {
+    initialSubjects,
+    pageTitle,
+    pageKicker,
+    pageSubtitle,
+    emptyTitle,
+    emptySubtitle,
+    browseHref,
+    browseLabel,
+    allowEnrollment = true,
+}: {
     initialSubjects: SubjectCard[];
     pageTitle?: string;
     pageKicker?: string;
@@ -61,68 +46,34 @@ export default function SubjectPicker({
     browseLabel?: string;
     allowEnrollment?: boolean;
 }) {
-    const router = useRouter();
     const { t } = useTaggedT("subjectsUi");
-
     const [q, setQ] = useState("");
-    const [subjects, setSubjects] = useState<SubjectCard[]>(initialSubjects);
-    const [enrollingSlug, setEnrollingSlug] = useState<string | null>(null);
+    const { subjects, enrollingSlug, pickSubject } = useSubjectCardController({
+        initialSubjects,
+        allowEnrollment,
+    });
 
     const filtered = useMemo(() => {
-        const s = q.trim().toLowerCase();
-        if (!s) return subjects;
+        const search = q.trim().toLowerCase();
+        if (!search) return subjects;
 
         return subjects.filter(
-            (x) =>
-                x.title.toLowerCase().includes(s) ||
-                x.slug.toLowerCase().includes(s) ||
-                x.description.toLowerCase().includes(s),
+            (subject) =>
+                subject.title.toLowerCase().includes(search) ||
+                subject.slug.toLowerCase().includes(search) ||
+                subject.description.toLowerCase().includes(search),
         );
     }, [q, subjects]);
 
     const counts = useMemo(() => {
-        const active = subjects.filter((x) => x.status === "active").length;
-        const enrolled = subjects.filter((x) => x.enrolled).length;
-        const comingSoon = subjects.filter((x) => x.status === "coming_soon").length;
+        const active = subjects.filter((subject) => subject.status === "active").length;
+        const enrolled = subjects.filter((subject) => subject.enrolled).length;
+        const comingSoon = subjects.filter(
+            (subject) => subject.status === "coming_soon",
+        ).length;
 
         return { active, enrolled, comingSoon };
     }, [subjects]);
-
-    async function enrollSubject(slug: string) {
-        const res = await fetch(`/api/subjects/${encodeURIComponent(slug)}/enroll`, {
-            method: "POST",
-            headers: { "content-type": "application/json" },
-            cache: "no-store",
-        });
-
-        if (!res.ok) throw new Error("Enroll failed");
-        return res;
-    }
-
-    async function pickSubject(s: SubjectCard) {
-        if (!s.subjectId) return;
-        if (s.status !== "active") return;
-        if (!s.defaultModuleSlug) return;
-        if (enrollingSlug) return;
-
-        if (allowEnrollment && !s.enrolled) {
-            setEnrollingSlug(s.slug);
-
-            try {
-                await enrollSubject(s.slug);
-                setSubjects((prev) =>
-                    prev.map((x) => (x.slug === s.slug ? { ...x, enrolled: true } : x)),
-                );
-            } catch {
-                setEnrollingSlug(null);
-                return;
-            } finally {
-                setEnrollingSlug(null);
-            }
-        }
-
-        router.push(ROUTES.subjectModules(encodeURIComponent(s.slug)));
-    }
 
     return (
         <div className="min-h-screen bg-neutral-50 text-neutral-900 dark:bg-[#0b0d12] dark:text-white/90">
@@ -148,7 +99,9 @@ export default function SubjectPicker({
                                     <Pill tone="good">{counts.enrolled} enrolled</Pill>
                                     <Pill tone="neutral">{counts.active} active</Pill>
                                     {counts.comingSoon > 0 ? (
-                                        <Pill tone="warn">{counts.comingSoon} coming soon</Pill>
+                                        <Pill tone="warn">
+                                            {counts.comingSoon} coming soon
+                                        </Pill>
                                     ) : null}
                                     {browseHref && browseLabel ? (
                                         <Link href={browseHref} className="ui-btn-secondary">
@@ -165,7 +118,7 @@ export default function SubjectPicker({
                                     <div className="relative">
                                         <input
                                             value={q}
-                                            onChange={(e) => setQ(e.target.value)}
+                                            onChange={(event) => setQ(event.target.value)}
                                             placeholder={t("searchPlaceholder")}
                                             className="ui-input-ide min-h-12 w-full pr-14"
                                         />
@@ -191,16 +144,11 @@ export default function SubjectPicker({
                     </Surface>
 
                     {filtered.length ? (
-                        <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
-                            {filtered.map((s) => (
-                                <SubjectTile
-                                    key={s.slug}
-                                    s={s}
-                                    onPick={pickSubject}
-                                    enrolling={enrollingSlug === s.slug}
-                                />
-                            ))}
-                        </div>
+                        <SubjectCardGrid
+                            subjects={filtered}
+                            onPick={pickSubject}
+                            enrollingSlug={enrollingSlug}
+                        />
                     ) : (
                         <Surface className="p-6 text-center">
                             <div className="ui-icon-box mx-auto h-12 w-12 text-neutral-700 dark:text-white/80">
@@ -212,7 +160,8 @@ export default function SubjectPicker({
                             </div>
 
                             <div className="mt-2 text-sm text-neutral-600 dark:text-white/65">
-                                {emptySubtitle ?? "Try a different keyword or clear the search field."}
+                                {emptySubtitle ??
+                                    "Try a different keyword or clear the search field."}
                             </div>
 
                             {q.trim() ? (

@@ -54,11 +54,11 @@ export type ResolvedSubjectCatalogItem = {
     versioning?: ResolvedSubjectVersioning;
 };
 
-export type ResolvedSubjectCatalogMap = Record<string, ResolvedSubjectCatalogItem>;
-
 export type ResolvedCatalogSubjectItem = ResolvedSubjectCatalogItem & {
     status: "active" | "coming_soon" | "disabled";
 };
+
+export type ResolvedSubjectCatalogMap = Record<string, ResolvedCatalogSubjectItem>;
 
 export type ResolvedCatalogItem = {
     slug: string;

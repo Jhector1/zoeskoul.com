@@ -2,7 +2,7 @@
 
 import React, { useMemo } from "react";
 import Image from "next/image";
-import type { SubjectCard } from "./SubjectPicker";
+import type { SubjectCard } from "./subjectCardTypes";
 import { cloudinaryImageUrl } from "@/lib/cloudinary/url";
 import { cn } from "@/lib/cn";
 import Pill from "./Pill";

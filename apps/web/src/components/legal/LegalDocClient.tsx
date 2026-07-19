@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useRef } from "react";
 import { Link } from "@/i18n/navigation";
 import { useTaggedT } from "@/i18n/tagged";
 import type { LegalDocumentData } from "@/lib/legal/content";
@@ -31,6 +31,7 @@ export default function LegalDocClient({
     values: Record<string, any>;
 }) {
     const { t } = useTaggedT();
+    const desktopContentScrollRef = useRef<HTMLDivElement | null>(null);
 
     const resolved = useMemo(() => {
         return resolveDeepTagged(
@@ -46,7 +47,7 @@ export default function LegalDocClient({
     }));
 
     return (
-        <article className="space-y-6">
+        <article className="space-y-6 lg:space-y-0">
             {/* Mobile / tablet */}
             <div className="lg:hidden">
                 <LegalSectionNav
@@ -55,19 +56,23 @@ export default function LegalDocClient({
                 />
             </div>
 
-            <div className="grid grid-cols-1 gap-8 lg:grid-cols-[280px_minmax(0,1fr)] lg:items-start">
-                {/* Desktop sticky sidebar */}
-                <aside className="hidden lg:sticky lg:top-24 lg:block lg:self-start">
-                    <div className="max-h-[calc(100svh-6rem)] overflow-y-auto">
+            <div className="grid grid-cols-1 gap-8 lg:h-[calc(100svh-11rem)] lg:min-h-[32rem] lg:grid-cols-[280px_minmax(0,1fr)] lg:items-stretch lg:overflow-hidden">
+                {/* Desktop sidebar remains still while only the document pane scrolls. */}
+                <aside className="hidden lg:block lg:min-h-0 lg:self-stretch">
+                    <div className="h-full overflow-y-auto overscroll-contain pr-1">
                         <LegalSectionNav
                             docTitle={resolved.title}
                             sections={sectionItems}
                             desktop
+                            scrollContainerRef={desktopContentScrollRef}
                         />
                     </div>
                 </aside>
 
-                <div className="min-w-0 ui-page-surface overflow-hidden">
+                <div
+                    ref={desktopContentScrollRef}
+                    className="min-w-0 ui-page-surface overflow-hidden lg:h-full lg:min-h-0 lg:overflow-y-auto lg:overscroll-contain"
+                >
                     <div className="border-b border-[rgb(var(--ui-border)/0.9)] bg-[rgb(var(--ui-surface-2)/0.72)] px-5 py-5 sm:px-8">
                         <nav aria-label="Breadcrumb" className="ui-meta">
                             <Link
@@ -106,7 +111,7 @@ export default function LegalDocClient({
                             <section
                                 key={section.id}
                                 id={section.id}
-                                className="ui-surface-soft scroll-mt-28 p-5"
+                                className="ui-surface-soft scroll-mt-28 p-5 lg:scroll-mt-4"
                             >
                                 <h2 className="text-xl font-semibold tracking-tight">
                                     {section.title}

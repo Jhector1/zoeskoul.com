@@ -8,12 +8,12 @@ import {
     getResolvedSubjectCardMap,
     type ResolvedCatalogItem,
     type ResolvedCatalogSubjectItem,
-    type ResolvedSubjectCatalogItem,
 } from "@/lib/subjects/server/resolveSubjectPresentation";
 import {
-    withSubjectEnrollment,
-    type SubjectEnrollmentFields,
+    withSubjectCardState,
+    type SubjectDatabaseStateFields,
 } from "@/lib/subjects/server/subjectVisibility";
+import type { SubjectCardPresentation } from "@/lib/subjects/subjectCardPresentation";
 import {
     selectCatalogSubjectsForMode,
     type CatalogVisibilityMode,
@@ -26,7 +26,7 @@ export type CatalogActorAccess = {
 };
 
 export type CatalogSubjectWithAvailability<T> = T &
-    SubjectEnrollmentFields & {
+    SubjectDatabaseStateFields & {
     availabilityStatus: "seeded" | "unseeded";
 };
 
@@ -34,7 +34,7 @@ export type VisibleCatalogSubject =
     CatalogSubjectWithAvailability<ResolvedCatalogSubjectItem>;
 
 export type VisibleSubjectCard =
-    CatalogSubjectWithAvailability<ResolvedSubjectCatalogItem>;
+    CatalogSubjectWithAvailability<ResolvedCatalogSubjectItem>;
 
 export type VisibleCatalog = Omit<ResolvedCatalogItem, "subjects"> & {
     subjects: VisibleCatalogSubject[];
@@ -67,8 +67,8 @@ async function getCatalogActorAccess(): Promise<CatalogActorAccess> {
 }
 
 function withAvailabilityStatus<T>(
-    subject: T & SubjectEnrollmentFields,
-): T & SubjectEnrollmentFields & {
+    subject: T & SubjectDatabaseStateFields,
+): T & SubjectDatabaseStateFields & {
     availabilityStatus: "seeded" | "unseeded";
 } {
     return {
@@ -91,15 +91,17 @@ function getCatalogDefaultSubjectSlug(
     return subjects[0]?.slug ?? null;
 }
 
-export async function selectCatalogSubjectsForActor<T extends { slug: string }>(
+export async function selectCatalogSubjectsForActor<
+    T extends SubjectCardPresentation,
+>(
     subjects: readonly T[],
     actorAccess?: CatalogActorAccess,
 ): Promise<Array<CatalogSubjectWithAvailability<T>>> {
     const access = actorAccess ?? (await getCatalogActorAccess());
-    const subjectsWithEnrollment = await withSubjectEnrollment(subjects);
+    const subjectsWithState = await withSubjectCardState(subjects);
 
     const selected = selectCatalogSubjectsForMode(
-        subjectsWithEnrollment,
+        subjectsWithState,
         access.mode,
     );
 
@@ -119,6 +121,33 @@ export async function getAvailableVisibleSubjectCardsForActor(): Promise<
         Object.values(subjectMap),
         actorAccess,
     );
+}
+
+export async function getEnrolledVisibleSubjectCardsForActor(): Promise<
+    VisibleSubjectCard[]
+> {
+    const subjectMap = await getResolvedSubjectCardMap();
+    const subjectsWithState = await withSubjectCardState(
+        Object.values(subjectMap),
+    );
+
+    return subjectsWithState
+        .filter((subject) => {
+            const lifecycleStatus = subject.versioning?.status;
+
+            return (
+                subject.enrolled &&
+                subject.status !== "disabled" &&
+                lifecycleStatus !== "draft" &&
+                lifecycleStatus !== "disabled"
+            );
+        })
+        .sort(
+            (left, right) =>
+                (left.subjectOrder ?? Number.MAX_SAFE_INTEGER) -
+                (right.subjectOrder ?? Number.MAX_SAFE_INTEGER),
+        )
+        .map((subject) => withAvailabilityStatus(subject));
 }
 
 export async function getAvailableVisibleCatalogsForActor(): Promise<

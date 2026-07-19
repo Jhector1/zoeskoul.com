@@ -1,6 +1,14 @@
 "use client";
 
-import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
+import {
+    useCallback,
+    useEffect,
+    useLayoutEffect,
+    useMemo,
+    useRef,
+    useState,
+    type RefObject,
+} from "react";
 import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/cn";
 
@@ -9,14 +17,18 @@ type SectionItem = {
     title: string;
 };
 
+type ScrollBehavior = "auto" | "smooth";
+
 export default function LegalSectionNav({
                                             docTitle,
                                             sections,
                                             desktop = false,
+                                            scrollContainerRef,
                                         }: {
     docTitle: string;
     sections: SectionItem[];
     desktop?: boolean;
+    scrollContainerRef?: RefObject<HTMLElement | null>;
 }) {
     const [activeId, setActiveId] = useState(sections[0]?.id ?? "");
     const [marker, setMarker] = useState({ top: 0, height: 0, ready: false });
@@ -47,6 +59,38 @@ export default function LegalSectionNav({
             ready: true,
         });
     }
+
+    const scrollToSection = useCallback((id: string, behavior: ScrollBehavior) => {
+        const sectionEl = document.getElementById(id);
+        if (!sectionEl) return;
+
+        const scrollContainer = scrollContainerRef?.current;
+        if (!scrollContainer) {
+            sectionEl.scrollIntoView({
+                behavior,
+                block: "start",
+                inline: "nearest",
+            });
+            return;
+        }
+
+        const containerRect = scrollContainer.getBoundingClientRect();
+        const sectionRect = sectionEl.getBoundingClientRect();
+        const scrollMarginTop = Number.parseFloat(
+            window.getComputedStyle(sectionEl).scrollMarginTop,
+        ) || 0;
+
+        scrollContainer.scrollTo({
+            top: Math.max(
+                0,
+                scrollContainer.scrollTop
+                + sectionRect.top
+                - containerRect.top
+                - scrollMarginTop,
+            ),
+            behavior,
+        });
+    }, [scrollContainerRef]);
 
     useLayoutEffect(() => {
         updateMarker();
@@ -81,10 +125,14 @@ export default function LegalSectionNav({
 
         if (!elements.length) return;
 
+        const scrollRoot = scrollContainerRef?.current ?? null;
         const hash = window.location.hash.replace("#", "");
         if (hash && ids.includes(hash)) {
             setActiveId(hash);
-            requestAnimationFrame(() => updateMarker(hash));
+            requestAnimationFrame(() => {
+                updateMarker(hash);
+                scrollToSection(hash, "auto");
+            });
         } else if (elements[0]) {
             setActiveId(elements[0].id);
             requestAnimationFrame(() => updateMarker(elements[0].id));
@@ -105,16 +153,21 @@ export default function LegalSectionNav({
                     return;
                 }
 
+                const activationTop = scrollRoot
+                    ? scrollRoot.getBoundingClientRect().top + 16
+                    : 140;
                 const passed = elements.filter(
-                    (el) => el.getBoundingClientRect().top <= 140,
+                    (el) => el.getBoundingClientRect().top <= activationTop,
                 );
                 if (passed.length) {
                     setActiveId(passed[passed.length - 1].id);
                 }
             },
             {
-                root: null,
-                rootMargin: "-120px 0px -55% 0px",
+                root: scrollRoot,
+                rootMargin: scrollRoot
+                    ? "-16px 0px -55% 0px"
+                    : "-120px 0px -55% 0px",
                 threshold: [0, 0.1, 0.25, 0.5, 0.75],
             },
         );
@@ -125,7 +178,10 @@ export default function LegalSectionNav({
             const nextHash = window.location.hash.replace("#", "");
             if (nextHash && ids.includes(nextHash)) {
                 setActiveId(nextHash);
-                requestAnimationFrame(() => updateMarker(nextHash));
+                requestAnimationFrame(() => {
+                    updateMarker(nextHash);
+                    scrollToSection(nextHash, "auto");
+                });
             }
         };
 
@@ -135,20 +191,16 @@ export default function LegalSectionNav({
             observer.disconnect();
             window.removeEventListener("hashchange", onHashChange);
         };
-    }, [ids]);
+    }, [ids, scrollContainerRef, scrollToSection]);
 
     function handleJump(id: string) {
-        const el = document.getElementById(id);
-        if (!el) return;
-
         setActiveId(id);
         updateMarker(id);
 
-        el.scrollIntoView({
-            behavior: prefersReducedMotion() ? "auto" : "smooth",
-            block: "start",
-            inline: "nearest",
-        });
+        scrollToSection(
+            id,
+            prefersReducedMotion() ? "auto" : "smooth",
+        );
 
         window.history.replaceState(null, "", `#${id}`);
     }
