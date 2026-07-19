@@ -12,6 +12,7 @@ import StandaloneReviewExerciseCard from "./StandaloneReviewExerciseCard";
 import {
   isStandaloneAnswerResolved,
   resolveStandaloneAutoAdvanceEnabled,
+  resolveStandaloneFinalizedAction,
   supportsStandaloneAutoAdvance,
 } from "./standaloneAutoAdvance";
 
@@ -88,11 +89,35 @@ export default function StandaloneReviewExerciseFlow({
     submittedExerciseRef.current = exerciseIdentity;
   }, [exerciseIdentity, supportsAutoAdvance]);
 
+  const finalizedAction = resolveStandaloneFinalizedAction({
+    phase: props.phase,
+    currentIndex: props.idx,
+    sessionSize: props.sessionSize,
+    canGoNext: props.canGoNext,
+    pendingRevealCompletion: props.pendingRevealCompletion,
+    hasFinishRevealedSession: Boolean(props.finishRevealedSession),
+  });
+
+  const handleFinalizedNext = useCallback(async () => {
+    if (props.pendingRevealCompletion && props.finishRevealedSession) {
+      await props.finishRevealedSession();
+      return;
+    }
+
+    await props.goNext();
+  }, [
+    props.finishRevealedSession,
+    props.goNext,
+    props.pendingRevealCompletion,
+  ]);
+
   return (
     <StandaloneReviewExerciseCard
       props={props}
       surface={surface}
       onSubmitStart={markSubmitAction}
+      finalizedAction={finalizedAction}
+      onFinalizedNext={finalizedAction ? handleFinalizedNext : undefined}
     />
   );
 }

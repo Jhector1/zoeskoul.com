@@ -3,6 +3,7 @@ import type { QItem } from "@/lib/practice/uiTypes";
 import {
   isStandaloneAnswerResolved,
   resolveStandaloneAutoAdvanceEnabled,
+  resolveStandaloneFinalizedAction,
   supportsStandaloneAutoAdvance,
 } from "./standaloneAutoAdvance";
 
@@ -89,6 +90,41 @@ describe("standalone Review-style auto advance", () => {
         maxAttempts: 3,
       }),
     ).toBe(true);
+  });
+
+  it("shows Next after reveal when another onboarding question remains", () => {
+    expect(
+      resolveStandaloneFinalizedAction({
+        phase: "practice",
+        currentIndex: 1,
+        sessionSize: 3,
+        canGoNext: true,
+      }),
+    ).toBe("next");
+  });
+
+  it("shows Finish for a deferred reveal on the final question", () => {
+    expect(
+      resolveStandaloneFinalizedAction({
+        phase: "practice",
+        currentIndex: 2,
+        sessionSize: 3,
+        canGoNext: false,
+        pendingRevealCompletion: true,
+        hasFinishRevealedSession: true,
+      }),
+    ).toBe("finish");
+  });
+
+  it("does not expose a dead-end finalized action when navigation is unavailable", () => {
+    expect(
+      resolveStandaloneFinalizedAction({
+        phase: "practice",
+        currentIndex: 1,
+        sessionSize: 3,
+        canGoNext: false,
+      }),
+    ).toBeNull();
   });
 
   it("does not auto advance after reveal", () => {

@@ -1,5 +1,9 @@
 import type { PracticeExperienceMode } from "@/lib/practice/experience/types";
 import type { QItem } from "@/lib/practice/uiTypes";
+import {
+  resolveReviewFinalizedNavigationAction,
+  type ReviewFinalizedPracticeAction,
+} from "@/components/review/quiz/reviewQuizCompletion";
 
 const STANDALONE_AUTO_ADVANCE_MODES = new Set<PracticeExperienceMode>([
   "practice",
@@ -25,6 +29,34 @@ export function resolveStandaloneAutoAdvanceEnabled(args: {
   if (!supportsStandaloneAutoAdvance(args.mode)) return false;
   if (args.mode === "onboarding_trial") return true;
   return args.preferenceEnabled;
+}
+
+export function resolveStandaloneFinalizedAction(args: {
+  phase: "practice" | "summary";
+  currentIndex: number;
+  sessionSize: number;
+  canGoNext: boolean;
+  pendingRevealCompletion?: boolean;
+  hasFinishRevealedSession?: boolean;
+}): ReviewFinalizedPracticeAction | null {
+  if (args.phase !== "practice") return null;
+
+  /**
+   * The final revealed question is intentionally held on screen so the learner
+   * can inspect the solution. Its explicit action completes the deferred session
+   * instead of asking the engine to load another exercise.
+   */
+  if (args.pendingRevealCompletion && args.hasFinishRevealedSession) {
+    return "finish";
+  }
+
+  if (!args.canGoNext) return null;
+
+  return resolveReviewFinalizedNavigationAction({
+    isLastQuestion:
+      args.currentIndex >= Math.max(0, Math.max(1, args.sessionSize) - 1),
+    isLastTopicCard: true,
+  });
 }
 
 /**

@@ -6,6 +6,7 @@ import type { ReviewQuestion } from "@/lib/subjects/types";
 import type { PracticeState } from "@/components/review/quiz/hooks/useQuizPracticeBank";
 import QuizPracticeCard from "@/components/review/quiz/components/QuizPracticeCard";
 import type { PracticeShellProps } from "@/components/practice/PracticeShell";
+import type { ReviewFinalizedPracticeAction } from "@/components/review/quiz/reviewQuizCompletion";
 import { DEFAULT_PRACTICE_HELP_POLICY } from "@/lib/practice/help/steps";
 import { resolveStablePracticeExerciseId } from "@/lib/practice/exerciseIdentity";
 import { isExcusedPracticeItem } from "@/lib/flow/excuse";
@@ -21,10 +22,14 @@ export default function StandaloneReviewExerciseCard({
   props,
   surface,
   onSubmitStart,
+  finalizedAction,
+  onFinalizedNext,
 }: {
   props: PracticeShellProps;
   surface: "embedded" | "tools";
   onSubmitStart?: () => void;
+  finalizedAction?: ReviewFinalizedPracticeAction | null;
+  onFinalizedNext?: () => void | Promise<void>;
 }) {
   const t = useTranslations("Practice.workspace");
   const question = useMemo<Extract<ReviewQuestion, { kind: "practice" }> | null>(() => {
@@ -165,6 +170,8 @@ export default function StandaloneReviewExerciseCard({
           onSubmitStart?.();
           void props.submit();
         }}
+        finalizedAction={finalizedAction}
+        onFinalizedNext={onFinalizedNext}
         onHelp={(stepKey) => {
           void props.openHelp(stepKey);
         }}
