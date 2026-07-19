@@ -74,7 +74,11 @@ export async function replaceWorkspaceFiles(
     currentEntries.filter((e) => e.kind === "directory").map((e) => e.path),
   );
 
-  const desiredFiles = new Map<string, string>();
+  const desiredFiles = new Map<
+    string,
+    | { storage: "text"; content: string }
+    | { storage: "binary"; bytes: Buffer }
+  >();
   const desiredDirs = new Set<string>();
 
   for (const entry of normalized) {
@@ -84,7 +88,12 @@ export async function replaceWorkspaceFiles(
       continue;
     }
 
-    desiredFiles.set(entry.path, entry.content);
+    desiredFiles.set(
+      entry.path,
+      entry.storage === "binary"
+        ? { storage: "binary", bytes: entry.bytes }
+        : { storage: "text", content: entry.content },
+    );
     for (const parent of parentDirsOf(entry.path)) desiredDirs.add(parent);
   }
 
@@ -110,7 +119,7 @@ export async function replaceWorkspaceFiles(
   }
 
   // 2) Write/update desired files. If a directory is in the way, remove it first.
-  for (const [relPath, content] of desiredFiles) {
+  for (const [relPath, file] of desiredFiles) {
     const abs = path.join(workspaceDir, relPath);
 
     if (currentDirs.has(relPath)) {
@@ -119,7 +128,11 @@ export async function replaceWorkspaceFiles(
     }
 
     await fs.mkdir(path.dirname(abs), { recursive: true });
-    await fs.writeFile(abs, content, "utf8");
+    if (file.storage === "binary") {
+      await fs.writeFile(abs, file.bytes);
+    } else {
+      await fs.writeFile(abs, file.content, "utf8");
+    }
     await fs.chmod(abs, 0o666).catch(() => {});
     currentFiles.add(relPath);
   }

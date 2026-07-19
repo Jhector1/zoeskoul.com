@@ -123,6 +123,16 @@ function contentAtPath(workspace: WorkspaceStateV2, wantedPath: string) {
     return node && node.kind === "file" ? node.content : null;
 }
 
+function binaryAtPath(workspace: WorkspaceStateV2, wantedPath: string) {
+    const node = workspace.nodes.find(
+        (candidate) =>
+            candidate.kind === "file" &&
+            pathOf(workspace.nodes, candidate.id) === wantedPath,
+    );
+
+    return node && node.kind === "file" ? node.binary ?? null : null;
+}
+
 describe("mergeTerminalSnapshotIntoWorkspace", () => {
     it("treats runner snapshots as partial and preserves hidden bootstrap state", () => {
         const prior = gitWorkspaceWithHiddenBootstrap();
@@ -364,4 +374,64 @@ describe("mergeTerminalSnapshotIntoWorkspace", () => {
         expect(allPaths(next)).not.toContain(".bash_history");
         expect(allPaths(next)).not.toContain("src/src");
     });
+
+    it("merges binary snapshots without changing bytes or remounting unchanged workspaces", () => {
+        const prior = workspaceWithSyntheticSrc([
+            { id: "file:main", name: "main.py", content: "print('ok')" },
+        ]);
+        const snapshotFiles = [
+            { kind: "file" as const, path: "src/main.py", content: "print('ok')" },
+            {
+                kind: "file" as const,
+                path: "assets/pixel.png",
+                encoding: "base64" as const,
+                data: "AAECAw==",
+                mimeType: "image/png",
+                sizeBytes: 4,
+                checksum:
+                    "sha256:054edec1d0211f624fed0cbca9d4f9400b0e491c43742af2c5b0abebf0c990d8",
+            },
+        ];
+
+        const next = mergeTerminalSnapshotIntoWorkspace({ prior, snapshotFiles });
+        expect(binaryAtPath(next, "assets/pixel.png")).toEqual({
+            encoding: "base64",
+            data: "AAECAw==",
+            mimeType: "image/png",
+            sizeBytes: 4,
+            checksum:
+                "sha256:054edec1d0211f624fed0cbca9d4f9400b0e491c43742af2c5b0abebf0c990d8",
+        });
+        expect(next.entryFileId).toBe("file:main");
+
+        const unchanged = mergeTerminalSnapshotIntoWorkspace({
+            prior: next,
+            snapshotFiles,
+        });
+        expect(unchanged).toBe(next);
+    });
+
+    it("rejects malformed binary snapshots instead of silently converting them", () => {
+        const prior = workspaceWithSyntheticSrc([
+            { id: "file:main", name: "main.py", content: "print('ok')" },
+        ]);
+
+        expect(() =>
+            mergeTerminalSnapshotIntoWorkspace({
+                prior,
+                snapshotFiles: [
+                    { kind: "file", path: "src/main.py", content: "print('ok')" },
+                    {
+                        kind: "file",
+                        path: "assets/pixel.png",
+                        encoding: "base64",
+                        data: "AAECAw==",
+                        mimeType: "image/png",
+                        sizeBytes: 3,
+                    },
+                ],
+            }),
+        ).toThrow(/invalid binary workspace snapshot/i);
+    });
+
 });

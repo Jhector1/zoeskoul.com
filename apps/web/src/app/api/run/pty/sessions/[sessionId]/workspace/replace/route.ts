@@ -1,12 +1,9 @@
 import { requireRunnerActorKey } from "@/lib/server/runnerActorKey";
 import { runnerPost, RunnerHttpError } from "@/lib/server/runnerClient";
+import type { WorkspaceSyncEntry } from "@zoeskoul/code-contracts";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
-
-type WorkspaceSyncEntry =
-    | { kind?: "file"; path: string; content: string }
-    | { kind: "directory"; path: string };
 
 type ReplaceWorkspaceRequest = {
     files: WorkspaceSyncEntry[];

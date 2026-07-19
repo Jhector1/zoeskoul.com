@@ -4,7 +4,7 @@
   "moduleSlug": "git-foundations-module-3-manage-tracked-files",
   "sectionSlug": "git-foundations-section-3-module-project",
   "prefix": "git_foundations_module_3",
-  "minutes": 80,
+  "minutes": 65,
   "runtimeDefaults": {
     "kind": "code",
     "language": "bash",
@@ -159,13 +159,12 @@
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
+            "pattern": "^git\\s+status\\s+(?:\\-\\-short|\\-s)$",
+            "message": "@:topics.git.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch0.terminalExpectations.requiredCommands.0.message"
           },
           {
-            "pattern": "^git\\s+status$"
-          },
-          {
-            "pattern": "^git\\s+diff$"
+            "pattern": "^git\\s+log\\s+\\-\\-oneline$",
+            "message": "@:topics.git.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch0.terminalExpectations.requiredCommands.1.message"
           }
         ],
         "forbiddenCommands": [
@@ -418,13 +417,16 @@
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
+            "pattern": "^git\\s+add\\s+(?:\\-\\-\\s+)?\\.gitignore$",
+            "message": "@:topics.git.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch3.terminalExpectations.requiredCommands.0.message"
           },
           {
-            "pattern": "^git\\s+check-ignore$"
+            "pattern": "^git\\s+status\\s+(?:\\-\\-short|\\-s)$",
+            "message": "@:topics.git.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch3.terminalExpectations.requiredCommands.1.message"
           },
           {
-            "pattern": "^git\\s+check-ignore\\s+-v\\s+preview\\.log$"
+            "pattern": "^git\\s+diff\\s+(?:\\-\\-staged|\\-\\-cached)\\s+\\-\\-name\\-only$",
+            "message": "@:topics.git.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch3.terminalExpectations.requiredCommands.2.message"
           }
         ],
         "forbiddenCommands": [
@@ -598,16 +600,16 @@
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
+            "pattern": "^git\\s+commit\\s+\\-m\\s+(?:\"Prepare clean volunteer release\"|\\'Prepare clean volunteer release\\')$",
+            "message": "@:topics.git.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch5.terminalExpectations.requiredCommands.0.message"
           },
           {
-            "pattern": "^git\\s+commit$"
+            "pattern": "^git\\s+log\\s+\\-\\-oneline$",
+            "message": "@:topics.git.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch5.terminalExpectations.requiredCommands.1.message"
           },
           {
-            "pattern": "^git\\s+status$"
-          },
-          {
-            "pattern": "^git\\s+commit\\s+-m\\s+'Prepare\\s+handbook\\s+release'$"
+            "pattern": "^git\\s+status\\s+(?:\\-\\-short|\\-s)$",
+            "message": "@:topics.git.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch5.terminalExpectations.requiredCommands.2.message"
           }
         ],
         "forbiddenCommands": [
@@ -648,5 +650,14 @@
         "instructions": "@:topics.git.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch5.instructions"
       }
     }
-  ]
+  ],
+  "topicMeta": {
+    "learningGoals": [
+      "Audit the repository before structural work begins",
+      "Stage a related rename and removal",
+      "Create and verify a precise ignore policy",
+      "Restore an unrelated accidental edit without disturbing staged cleanup",
+      "Commit and verify the final clean release snapshot"
+    ]
+  }
 }

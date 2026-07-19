@@ -73,12 +73,34 @@ function normalizeStarterFileDrafts(
             const path = normalizeOptionalWorkspacePath(item.path, "starterFiles[].path");
             if (!path) return null;
 
+            const isBinary = item.encoding === "base64";
             return {
                 path,
                 content:
-                    typeof item.content === "string"
-                        ? item.content
-                        : "",
+                    isBinary
+                        ? ""
+                        : typeof item.content === "string"
+                            ? item.content
+                            : "",
+                ...(isBinary
+                    ? {
+                        encoding: "base64" as const,
+                        data: typeof item.data === "string" ? item.data : "",
+                        mimeType:
+                            typeof item.mimeType === "string" && item.mimeType.trim()
+                                ? item.mimeType.trim()
+                                : "application/octet-stream",
+                        sizeBytes:
+                            typeof item.sizeBytes === "number" &&
+                            Number.isInteger(item.sizeBytes) &&
+                            item.sizeBytes >= 0
+                                ? item.sizeBytes
+                                : 0,
+                        ...(typeof item.checksum === "string" && item.checksum.trim()
+                            ? { checksum: item.checksum.trim() }
+                            : {}),
+                      }
+                    : {}),
                 ...(typeof item.language === "string" && item.language.trim()
                     ? { language: item.language.trim() as any }
                     : {}),
@@ -144,9 +166,12 @@ function inferChangedSqlEntryFile(args: {
     }
 
     const solutionByPath = new Map(
-        solutionFiles.map((file) => [file.path, file.content]),
+        solutionFiles
+            .filter((file) => typeof file.content === "string")
+            .map((file) => [file.path, file.content as string]),
     );
     const changedPaths = starterFiles
+        .filter((file) => typeof file.content === "string")
         .filter((file) => solutionByPath.has(file.path))
         .filter(
             (file) =>

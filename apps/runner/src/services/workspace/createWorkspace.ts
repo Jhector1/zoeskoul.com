@@ -34,9 +34,15 @@ async function ensureWorkspaceDir(dir: string) {
   await fs.chmod(dir, DIR_MODE).catch(() => {});
 }
 
-async function writeWorkspaceFile(abs: string, content: string) {
+async function writeWorkspaceTextFile(abs: string, content: string) {
   await ensureWorkspaceDir(path.dirname(abs));
   await fs.writeFile(abs, content, "utf8");
+  await fs.chmod(abs, FILE_MODE).catch(() => {});
+}
+
+async function writeWorkspaceBinaryFile(abs: string, bytes: Buffer) {
+  await ensureWorkspaceDir(path.dirname(abs));
+  await fs.writeFile(abs, bytes);
   await fs.chmod(abs, FILE_MODE).catch(() => {});
 }
 
@@ -74,7 +80,11 @@ async function writeInitialEntries(
       continue;
     }
 
-    await writeWorkspaceFile(abs, entry.content);
+    if (entry.storage === "binary") {
+      await writeWorkspaceBinaryFile(abs, entry.bytes);
+    } else {
+      await writeWorkspaceTextFile(abs, entry.content);
+    }
   }
 }
 

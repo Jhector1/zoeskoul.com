@@ -4,7 +4,7 @@
   "moduleSlug": "git-foundations-module-1-start-tracking",
   "sectionSlug": "git-foundations-git-foundations-section-1-repository-basics",
   "prefix": "git_foundations_module_1",
-  "minutes": 20,
+  "minutes": 22,
   "runtimeDefaults": {
     "kind": "code",
     "language": "bash",
@@ -92,25 +92,6 @@
       }
     },
     {
-      "id": "sketch3",
-      "kind": "sketch",
-      "titleKey": "topics.git-foundations.git-foundations-module-1-start-tracking.working-tree-staging-and-history.cards.sketch3.title",
-      "sketchId": "git-status-bridge",
-      "height": 420,
-      "tryIt": {
-        "id": "try-working-tree-staging-and-history-sketch3",
-        "titleKey": "topics.git-foundations.git-foundations-module-1-start-tracking.working-tree-staging-and-history.tryIt.try_working_tree_staging_and_history_sketch3.title",
-        "promptKey": "topics.git-foundations.git-foundations-module-1-start-tracking.working-tree-staging-and-history.tryIt.try_working_tree_staging_and_history_sketch3.prompt",
-        "exerciseKey": "try-working-tree-staging-and-history-sketch3",
-        "difficulty": "easy",
-        "preferKind": "code_input",
-        "seedPolicy": "global",
-        "required": true,
-        "allowReveal": true,
-        "maxAttempts": null
-      }
-    },
-    {
       "id": "quiz",
       "kind": "quiz",
       "titleKey": "topics.git-foundations.git-foundations-module-1-start-tracking.working-tree-staging-and-history.cards.quiz.title",
@@ -118,7 +99,7 @@
         "difficulty": "easy",
         "n": 4,
         "min": 4,
-        "max": 6,
+        "max": 4,
         "selectionMode": "random",
         "allowReveal": true,
         "preferKind": null,
@@ -144,12 +125,6 @@
       "archetype": "paragraph",
       "titleKey": "sketches.git-foundations.git-foundations-module-1-start-tracking.working-tree-staging-and-history.commit-history-intro.title",
       "bodyKey": "sketches.git-foundations.git-foundations-module-1-start-tracking.working-tree-staging-and-history.commit-history-intro.bodyMarkdown"
-    },
-    {
-      "id": "git-status-bridge",
-      "archetype": "paragraph",
-      "titleKey": "sketches.git-foundations.git-foundations-module-1-start-tracking.working-tree-staging-and-history.git-status-bridge.title",
-      "bodyKey": "sketches.git-foundations.git-foundations-module-1-start-tracking.working-tree-staging-and-history.git-status-bridge.bodyMarkdown"
     }
   ],
   "exercises": [
@@ -204,7 +179,7 @@
         "optionIds": [
           "a",
           "b",
-          "c"
+          "d"
         ]
       }
     },
@@ -229,30 +204,6 @@
       }
     },
     {
-      "id": "fill-blank-choice-1",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.git-foundations.git-foundations-module-1-start-tracking.working-tree-staging-and-history.practice.fill-blank-choice-1",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "add"
-      }
-    },
-    {
-      "id": "fill-blank-choice-2",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.git-foundations.git-foundations-module-1-start-tracking.working-tree-staging-and-history.practice.fill-blank-choice-2",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "log"
-      }
-    },
-    {
       "id": "try-working-tree-staging-and-history-sketch0",
       "kind": "code_input",
       "purpose": "project",
@@ -272,12 +223,8 @@
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^git\\s+status\\s+\\-\\-short$",
+            "pattern": "^git\\s+status\\s+(?:\\-\\-short|\\-s)$",
             "message": "@:topics.git-foundations.git-foundations-module-1-start-tracking.working-tree-staging-and-history.tryIt.try_working_tree_staging_and_history_sketch0.terminalExpectations.requiredCommands.0.message"
-          },
-          {
-            "pattern": "^git\\s+diff\\s+\\-\\-\\s+notes\\.txt$",
-            "message": "@:topics.git-foundations.git-foundations-module-1-start-tracking.working-tree-staging-and-history.tryIt.try_working_tree_staging_and_history_sketch0.terminalExpectations.requiredCommands.1.message"
           }
         ],
         "forbiddenCommands": [
@@ -408,11 +355,11 @@
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^git\\s+add\\s+notes\\.txt$",
+            "pattern": "^git\\s+add\\s+(?:\\-\\-\\s+)?notes\\.txt$",
             "message": "@:topics.git-foundations.git-foundations-module-1-start-tracking.working-tree-staging-and-history.tryIt.try_working_tree_staging_and_history_sketch1.terminalExpectations.requiredCommands.0.message"
           },
           {
-            "pattern": "^git\\s+diff\\s+\\-\\-staged\\s+\\-\\-name\\-only$",
+            "pattern": "^git\\s+status\\s+(?:\\-\\-short|\\-s)$",
             "message": "@:topics.git-foundations.git-foundations-module-1-start-tracking.working-tree-staging-and-history.tryIt.try_working_tree_staging_and_history_sketch1.terminalExpectations.requiredCommands.1.message"
           }
         ],
@@ -544,11 +491,11 @@
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^git\\s+commit\\s+\\-m\\s+\"Explain\\s+the\\s+staging\\s+area\"$",
+            "pattern": "^git\\s+commit\\s+\\-m\\s+(?:\"Explain the staging area\"|\\'Explain the staging area\\')$",
             "message": "@:topics.git-foundations.git-foundations-module-1-start-tracking.working-tree-staging-and-history.tryIt.try_working_tree_staging_and_history_sketch2.terminalExpectations.requiredCommands.0.message"
           },
           {
-            "pattern": "^git\\s+log\\s+\\-1\\s+\\-\\-oneline$",
+            "pattern": "^git\\s+status\\s+(?:\\-\\-short|\\-s)$",
             "message": "@:topics.git-foundations.git-foundations-module-1-start-tracking.working-tree-staging-and-history.tryIt.try_working_tree_staging_and_history_sketch2.terminalExpectations.requiredCommands.1.message"
           }
         ],
@@ -659,142 +606,14 @@
           "language": "text"
         }
       ]
-    },
-    {
-      "id": "try-working-tree-staging-and-history-sketch3",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.git-foundations.git-foundations-module-1-start-tracking.working-tree-staging-and-history.tryIt.try_working_tree_staging_and_history_sketch3",
-      "language": "bash",
-      "starterCode": "Git tracks snapshots.\nThe staging area selects the next snapshot.\n",
-      "starterFiles": [
-        {
-          "path": "study-notes/notes.txt",
-          "content": "Git tracks snapshots.\nThe staging area selects the next snapshot.\n",
-          "language": "text",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "terminalExpectations": {
-        "requiredCommands": [
-          {
-            "pattern": "^git\\s+status\\s+\\-\\-short$",
-            "message": "@:topics.git-foundations.git-foundations-module-1-start-tracking.working-tree-staging-and-history.tryIt.try_working_tree_staging_and_history_sketch3.terminalExpectations.requiredCommands.0.message"
-          },
-          {
-            "pattern": "^git\\s+log\\s+\\-\\-oneline$",
-            "message": "@:topics.git-foundations.git-foundations-module-1-start-tracking.working-tree-staging-and-history.tryIt.try_working_tree_staging_and_history_sketch3.terminalExpectations.requiredCommands.1.message"
-          }
-        ],
-        "forbiddenCommands": [
-          {
-            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
-            "message": "@:topics.git-foundations.git-foundations-module-1-start-tracking.working-tree-staging-and-history.tryIt.try_working_tree_staging_and_history_sketch3.terminalExpectations.forbiddenCommands.0.message"
-          }
-        ]
-      },
-      "hiddenShellCheck": {
-        "script": "set -eu\nrepo=study-notes\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" branch --show-current)\" = main ] || fail \"The repository is not on main.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = 2 ] || fail \"The repository has the wrong number of commits.\"\n[ -z \"$(git -C \"$repo\" status --porcelain)\" ] || fail \"The working tree is not clean.\"\nexpected=$(printf \"%s\\n\" notes.txt | sort)\nactual=$(git -C \"$repo\" ls-files | sort)\n[ \"$actual\" = \"$expected\" ] || fail \"The tracked file set is not correct.\"",
-        "timeoutMs": 15000
-      },
-      "workspace": {
-        "language": "bash",
-        "entryFilePath": "study-notes/notes.txt",
-        "starterCode": "Git tracks snapshots.\nThe staging area selects the next snapshot.\n",
-        "starterFiles": [
-          {
-            "path": "study-notes/notes.txt",
-            "content": "Git tracks snapshots.\nThe staging area selects the next snapshot.\n",
-            "language": "text",
-            "isEntry": true,
-            "entry": true
-          }
-        ],
-        "fixtureFiles": [
-          {
-            "path": ".zoeskoul/setup.sh",
-            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf study-notes\nmkdir -p study-notes\ngit -C study-notes init -q -b main\ngit -C study-notes config --local user.name \"ZoeSkoul Learner\"\ngit -C study-notes config --local user.email \"learner@zoeskoul.local\"\ncd study-notes\nprintf %s 'Git tracks snapshots.\n' > notes.txt\ncd ..\ngit -C study-notes add -A\ngit -C study-notes commit -q -m 'Start study notes'\ncd study-notes\nprintf %s 'Git tracks snapshots.\nThe staging area selects the next snapshot.\n' > notes.txt\ncd ..\ngit -C study-notes add -A\ngit -C study-notes commit -q -m 'Explain the staging area'\n",
-            "language": "bash",
-            "readOnly": true
-          },
-          {
-            "path": "study-notes/notes.txt",
-            "content": "Git tracks snapshots.\nThe staging area selects the next snapshot.\n",
-            "language": "text"
-          }
-        ]
-      },
-      "showExpectedExample": false,
-      "recipe": {
-        "type": "shell_task",
-        "mode": "terminal_workspace",
-        "instructions": "@:topics.git-foundations.git-foundations-module-1-start-tracking.working-tree-staging-and-history.tryIt.try_working_tree_staging_and_history_sketch3.instructions"
-      },
-      "ideConfig": {
-        "preset": "runner",
-        "runnerBackend": "pty",
-        "layoutMode": "default",
-        "terminalSessionScope": "exercise",
-        "terminalCwd": "/workspace/study-notes",
-        "fileActions": {
-          "enabled": true,
-          "createFile": true,
-          "createFolder": true,
-          "rename": true,
-          "delete": true,
-          "dragDrop": false
-        },
-        "requires": {
-          "files": true,
-          "multiFile": true,
-          "terminal": true
-        },
-        "terminalBootstrap": {
-          "gitSafeDirectories": [
-            "/workspace/*"
-          ]
-        }
-      },
-      "serviceOverrides": {
-        "preset": "runner",
-        "runnerBackend": "pty",
-        "layoutMode": "default",
-        "terminalSessionScope": "exercise",
-        "terminalCwd": "/workspace/study-notes",
-        "fileActions": {
-          "enabled": true,
-          "createFile": true,
-          "createFolder": true,
-          "rename": true,
-          "delete": true,
-          "dragDrop": false
-        },
-        "requires": {
-          "files": true,
-          "multiFile": true,
-          "terminal": true
-        },
-        "terminalBootstrap": {
-          "gitSafeDirectories": [
-            "/workspace/*"
-          ]
-        }
-      },
-      "fixtureFiles": [
-        {
-          "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf study-notes\nmkdir -p study-notes\ngit -C study-notes init -q -b main\ngit -C study-notes config --local user.name \"ZoeSkoul Learner\"\ngit -C study-notes config --local user.email \"learner@zoeskoul.local\"\ncd study-notes\nprintf %s 'Git tracks snapshots.\n' > notes.txt\ncd ..\ngit -C study-notes add -A\ngit -C study-notes commit -q -m 'Start study notes'\ncd study-notes\nprintf %s 'Git tracks snapshots.\nThe staging area selects the next snapshot.\n' > notes.txt\ncd ..\ngit -C study-notes add -A\ngit -C study-notes commit -q -m 'Explain the staging area'\n",
-          "language": "bash",
-          "readOnly": true
-        },
-        {
-          "path": "study-notes/notes.txt",
-          "content": "Git tracks snapshots.\nThe staging area selects the next snapshot.\n",
-          "language": "text"
-        }
-      ]
     }
-  ]
+  ],
+  "topicMeta": {
+    "learningGoals": [
+      "Distinguish the working tree, staging area, and committed history",
+      "Stage a selected path with git add",
+      "Record the staged snapshot with git commit",
+      "Verify the remaining work with short status"
+    ]
+  }
 }

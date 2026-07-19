@@ -1,0 +1,138 @@
+{
+  "topics": {
+    "git-foundations": {
+      "git-foundations-module-1-start-tracking": {
+        "why-version-control-matters": {
+          "label": "Why a Project Needs History",
+          "summary": "Understand the problem Git solves before learning commands: one project, deliberate snapshots, and a history you can explain.",
+          "cards": {
+            "sketch0": {
+              "title": "When “Final” Stops Meaning Final"
+            },
+            "sketch1": {
+              "title": "A Timeline You Can Inspect"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "practice": {
+            "sc-1": {
+              "title": "Purpose of Version Control",
+              "prompt": "What is the primary purpose of a version control system like Git?",
+              "hint": "Focus on what the command or concept observes or changes at this point in the workflow.",
+              "help": {
+                "concept": "Understand the problem Git solves before learning commands: one project, deliberate snapshots, and a history you can explain.",
+                "hint_1": "Remove options that act on a different repository layer than the one named in the question.",
+                "hint_2": "Choose the answer that remains accurate even when other unrelated files exist."
+              },
+              "options": {
+                "a": "To manage changes and track project history",
+                "b": "To create backups of files",
+                "c": "To increase the speed of development",
+                "d": "To replace the need for project management tools"
+              }
+            },
+            "sc-2": {
+              "title": "Git vs. GitHub",
+              "prompt": "How does Git differ from GitHub?",
+              "hint": "Focus on what the command or concept observes or changes at this point in the workflow.",
+              "help": {
+                "concept": "Understand the problem Git solves before learning commands: one project, deliberate snapshots, and a history you can explain.",
+                "hint_1": "Remove options that act on a different repository layer than the one named in the question.",
+                "hint_2": "Choose the answer that remains accurate even when other unrelated files exist."
+              },
+              "options": {
+                "a": "Git is a local version control system, while GitHub is a hosted platform for collaboration",
+                "b": "Git and GitHub are the same",
+                "c": "GitHub is a version control system, while Git is a platform for collaboration",
+                "d": "Git is used for managing code, while GitHub is used for managing documents"
+              }
+            },
+            "mc-1": {
+              "title": "Benefits of Using Git",
+              "prompt": "Which of the following are benefits of using Git? Select all that apply.",
+              "hint": "Focus on what the command or concept observes or changes at this point in the workflow.",
+              "help": {
+                "concept": "Understand the problem Git solves before learning commands: one project, deliberate snapshots, and a history you can explain.",
+                "hint_1": "Remove options that act on a different repository layer than the one named in the question.",
+                "hint_2": "Choose the answer that remains accurate even when other unrelated files exist."
+              },
+              "options": {
+                "a": "Tracks changes to files over time",
+                "b": "Allows multiple people to work on the same project",
+                "c": "Requires internet access to function",
+                "d": "Automatically resolves all conflicts"
+              }
+            },
+            "dr-1": {
+              "title": "From Work to a Trustworthy Checkpoint",
+              "prompt": "Arrange the ideas in the order a deliberate project checkpoint is created.",
+              "hint": "Focus on what the command or concept observes or changes at this point in the workflow.",
+              "help": {
+                "concept": "Understand the problem Git solves before learning commands: one project, deliberate snapshots, and a history you can explain.",
+                "hint_1": "Remove options that act on a different repository layer than the one named in the question.",
+                "hint_2": "Choose the answer that remains accurate even when other unrelated files exist."
+              },
+              "tokens": {
+                "t1": "Make a meaningful project change",
+                "t2": "Select the work that belongs together",
+                "t3": "Record the named snapshot"
+              }
+            },
+            "fbc-1": {
+              "title": "A Recorded Project State",
+              "prompt": "Choose the word that completes the idea: a deliberate recorded project state is a `[blank1]`.",
+              "hint": "Focus on what the command or concept observes or changes at this point in the workflow.",
+              "help": {
+                "concept": "Understand the problem Git solves before learning commands: one project, deliberate snapshots, and a history you can explain.",
+                "hint_1": "Remove options that act on a different repository layer than the one named in the question.",
+                "hint_2": "Choose the answer that remains accurate even when other unrelated files exist."
+              },
+              "template": "A deliberate recorded project state is a `[blank1]`.",
+              "choices": [
+                "snapshot",
+                "duplicate",
+                "server",
+                "folder name"
+              ]
+            },
+            "fbc-2": {
+              "title": "Where Git Works",
+              "prompt": "Git can record project history `[blank1]` without an internet connection.",
+              "hint": "Focus on what the command or concept observes or changes at this point in the workflow.",
+              "help": {
+                "concept": "Understand the problem Git solves before learning commands: one project, deliberate snapshots, and a history you can explain.",
+                "hint_1": "Remove options that act on a different repository layer than the one named in the question.",
+                "hint_2": "Choose the answer that remains accurate even when other unrelated files exist."
+              },
+              "template": "Git can record project history `[blank1]` without an internet connection.",
+              "choices": [
+                "locally",
+                "only on GitHub",
+                "only in a browser",
+                "only after upload"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "git-foundations": {
+      "git-foundations-module-1-start-tracking": {
+        "why-version-control-matters": {
+          "intro-memory": {
+            "title": "When “Final” Stops Meaning Final",
+            "bodyMarkdown": "A volunteer team is preparing a neighborhood guide. By Friday, the shared folder contains `guide-final.md`, `guide-final-fixed.md`, and `guide-final-really-final.md`. Each copy looks plausible, but nobody can explain which one contains the corrected phone number.\n\nThe problem is not a lack of files. It is a lack of history. A useful history answers three questions: **what changed, why did it change, and which state can the team trust now?**\n\nGit keeps one project and records deliberate snapshots of it. You still work in ordinary files and folders. When a state is worth keeping, Git records that state with a message. Earlier snapshots remain available, so improving today’s version does not erase yesterday’s story."
+          },
+          "worked-example": {
+            "title": "A Timeline You Can Read",
+            "bodyMarkdown": "Imagine the guide begins with one page, gains an accessibility note, and later corrects an address. A readable history might look like this:\n\n```text\nCorrect library address\nAdd accessibility note\nStart neighborhood guide\n```\n\nThe newest checkpoint appears first. Each line describes a result, not a button press or an automatic save. A maintainer can scan the timeline, choose a checkpoint, and inspect what changed there.\n\nGit creates and reads this history locally. GitHub is a separate online service that can host Git repositories and support collaboration. This course stays local so the repository model is clear before remotes, accounts, or network workflows enter the picture."
+          }
+        }
+      }
+    }
+  }
+}

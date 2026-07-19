@@ -1,4 +1,9 @@
-import type { FSNode, WorkspaceStateV2 } from "@/components/ide/types";
+import type { BinaryFileContent, FSNode, WorkspaceStateV2 } from "@/components/ide/types";
+import { normalizeBinaryFileContent } from "@/lib/ide/workspaceFileContent";
+import {
+    resolveWorkspaceFileCapability,
+    workspaceBase64DecodedByteLength,
+} from "@zoeskoul/code-contracts";
 import type { IdeWorkspaceAccess } from "@/components/ide/workspaceHook/workspace.types";
 import type { WorkspaceLanguage } from "@/lib/practice/types";
 
@@ -27,6 +32,7 @@ export type IdeWorkspacePolicy = {
     canDeleteNodes: boolean;
     canMoveNodes: boolean;
     canUploadFiles: boolean;
+    canUploadBinaryFiles: boolean;
     maxImportFiles: number;
     maxUploadFileBytes: number;
     maxWorkspaceBytes: number;
@@ -40,6 +46,7 @@ export type IdeWorkspacePolicy = {
 export type ImportedWorkspaceFile = {
     path: string;
     content: string;
+    binary?: BinaryFileContent;
 };
 
 export const DEFAULT_WORKSPACE_FILE_CONTENT_BYTES = 1 * 1024 * 1024;
@@ -93,6 +100,8 @@ export function resolveWorkspacePolicy(
         canDeleteNodes: policy.canDeleteNodes && resolvedFileActions.delete,
         canMoveNodes: policy.canMoveNodes && resolvedFileActions.dragDrop,
         canUploadFiles: policy.canUploadFiles && resolvedFileActions.enabled,
+        canUploadBinaryFiles:
+            policy.canUploadBinaryFiles && resolvedFileActions.enabled,
     });
 
     if (!access.hasUser) {
@@ -104,6 +113,7 @@ export function resolveWorkspacePolicy(
                 canDeleteNodes: false,
                 canMoveNodes: false,
                 canUploadFiles: false,
+                canUploadBinaryFiles: false,
                 maxImportFiles: 0,
                 maxUploadFileBytes: 0,
                 maxWorkspaceBytes: 512 * 1024,
@@ -122,6 +132,7 @@ export function resolveWorkspacePolicy(
             canDeleteNodes: false,
             canMoveNodes: false,
             canUploadFiles: false,
+            canUploadBinaryFiles: false,
             maxImportFiles: 0,
             maxUploadFileBytes: 0,
             maxWorkspaceBytes: 256 * 1024,
@@ -141,9 +152,10 @@ export function resolveWorkspacePolicy(
             canDeleteNodes: false,
             canMoveNodes: false,
             canUploadFiles: true,
+            canUploadBinaryFiles: false,
             maxImportFiles: 1,
-            maxUploadFileBytes: 512 * 1024,
-            maxWorkspaceBytes: 512 * 1024,
+            maxUploadFileBytes: 5 * 1024 * 1024,
+            maxWorkspaceBytes: 5 * 1024 * 1024,
             maxNodes: 1,
             maxFiles: 1,
             maxDepth: 1,
@@ -159,9 +171,10 @@ export function resolveWorkspacePolicy(
         canDeleteNodes: true,
         canMoveNodes: true,
         canUploadFiles: true,
+        canUploadBinaryFiles: true,
         maxImportFiles: 20,
-        maxUploadFileBytes: 1 * 1024 * 1024,
-        maxWorkspaceBytes: 5 * 1024 * 1024,
+        maxUploadFileBytes: 5 * 1024 * 1024,
+        maxWorkspaceBytes: 8 * 1024 * 1024,
         maxNodes: 250,
         maxFiles: 150,
         maxDepth: 8,
@@ -203,7 +216,11 @@ export function estimateWorkspaceUsage(nodes: FSNode[]) {
         (node): node is Extract<FSNode, { kind: "file" }> => node.kind === "file",
     );
     const totalBytes = fileNodes.reduce(
-        (sum, file) => sum + bytesOfText(file.content ?? ""),
+        (sum, file) =>
+            sum +
+            (file.binary?.encoding === "base64"
+                ? workspaceBase64DecodedByteLength(file.binary.data) ?? Number.POSITIVE_INFINITY
+                : bytesOfText(file.content ?? "")),
         0,
     );
     const maxDepth = Math.max(0, ...Array.from(nodeDepthMap(nodes).values()));
@@ -234,6 +251,35 @@ export function validateWorkspaceNodes(
         return `Workspace limit reached: max depth ${policy.maxDepth}.`;
     }
 
+    for (const node of nodes) {
+        if (node.kind !== "file") continue;
+
+        const capability = resolveWorkspaceFileCapability(node.name);
+        if (!capability) {
+            return `${node.name} is not a supported workspace file type.`;
+        }
+
+        if (node.binary) {
+            const binary = normalizeBinaryFileContent(node.binary, node.name);
+            if (!binary || capability.storage !== "binary") {
+                return `${node.name} contains invalid binary data.`;
+            }
+            if (binary.sizeBytes > policy.maxUploadFileBytes) {
+                return `${node.name} exceeds the ${(policy.maxUploadFileBytes / 1024 / 1024).toFixed(1)} MB binary-file limit.`;
+            }
+            continue;
+        }
+
+        if (capability.storage !== "text") {
+            return `${node.name} must be uploaded as a binary file.`;
+        }
+
+        const contentBytes = bytesOfText(node.content ?? "");
+        if (contentBytes > policy.maxFileContentBytes) {
+            return `${node.name} exceeds the ${policy.maxFileContentBytes} byte text-file limit.`;
+        }
+    }
+
     if (usage.totalBytes > policy.maxWorkspaceBytes) {
         return `Workspace limit reached: max ${(policy.maxWorkspaceBytes / 1024 / 1024).toFixed(1)} MB total content.`;
     }
@@ -258,16 +304,40 @@ export function validateImportedFiles(
     }
 
     for (const file of files) {
-        const size = bytesOfText(file.content ?? "");
+        const capability = resolveWorkspaceFileCapability(file.path);
+        if (!capability) {
+            return `${file.path || "File"} is not a supported workspace file type.`;
+        }
+
+        const isBinary = file.binary?.encoding === "base64";
+        if (isBinary && !policy.canUploadBinaryFiles) {
+            return `${file.path || "File"} requires a multi-file workspace to preserve binary assets.`;
+        }
+        if ((capability.storage === "binary") !== isBinary) {
+            return `${file.path || "File"} does not match its expected ${capability.storage} encoding.`;
+        }
+
+        const normalizedBinary = isBinary
+            ? normalizeBinaryFileContent(file.binary, file.path)
+            : undefined;
+        if (isBinary && !normalizedBinary) {
+            return `${file.path || "File"} contains invalid binary data.`;
+        }
+
+        const size = normalizedBinary
+            ? normalizedBinary.sizeBytes
+            : bytesOfText(file.content ?? "");
         if (size > policy.maxUploadFileBytes) {
             return `${file.path || "File"} exceeds the ${(policy.maxUploadFileBytes / 1024 / 1024).toFixed(1)} MB upload limit.`;
         }
     }
 
-    const totalImportBytes = files.reduce(
-        (sum, file) => sum + bytesOfText(file.content ?? ""),
-        0,
-    );
+    const totalImportBytes = files.reduce((sum, file) => {
+        const binary = file.binary
+            ? normalizeBinaryFileContent(file.binary, file.path)
+            : undefined;
+        return sum + (binary ? binary.sizeBytes : bytesOfText(file.content ?? ""));
+    }, 0);
 
     if (totalImportBytes > policy.maxWorkspaceBytes) {
         return `Imported content exceeds the ${(policy.maxWorkspaceBytes / 1024 / 1024).toFixed(1)} MB workspace limit.`;
@@ -367,9 +437,30 @@ export function validateWorkspaceState(
                 return [`Workspace file "${id}" content must be a string.`];
             }
 
-            const contentBytes = bytesOfText(node.content);
-            if (contentBytes > policy.maxFileContentBytes) {
-                return [`Workspace file "${id}" exceeds the ${policy.maxFileContentBytes} byte limit.`];
+            const capability = resolveWorkspaceFileCapability(String(node.name));
+            if (!capability) {
+                return [`Workspace file "${id}" has an unsupported file type.`];
+            }
+
+            if (typeof node.binary !== "undefined") {
+                const binary = normalizeBinaryFileContent(node.binary, String(node.name));
+                if (!binary || capability.storage !== "binary") {
+                    return [`Workspace file "${id}" contains invalid binary data.`];
+                }
+                if (node.content !== "") {
+                    return [`Workspace binary file "${id}" content must be empty.`];
+                }
+                if (binary.sizeBytes > policy.maxUploadFileBytes) {
+                    return [`Workspace binary file "${id}" exceeds the ${policy.maxUploadFileBytes} byte limit.`];
+                }
+            } else {
+                if (capability.storage !== "text") {
+                    return [`Workspace file "${id}" must use binary storage.`];
+                }
+                const contentBytes = bytesOfText(node.content);
+                if (contentBytes > policy.maxFileContentBytes) {
+                    return [`Workspace file "${id}" exceeds the ${policy.maxFileContentBytes} byte limit.`];
+                }
             }
 
             fileIds.add(id);
@@ -403,6 +494,13 @@ export function validateWorkspaceState(
 
     if (!fileIds.has(workspace.entryFileId)) {
         return ["Workspace entryFileId must reference an existing file."];
+    }
+
+    const entryNode = (workspace.nodes as Array<Record<string, unknown>>).find(
+        (node) => node.id === workspace.entryFileId,
+    );
+    if (entryNode?.binary) {
+        return ["Workspace entryFileId must reference a text file."];
     }
 
     const limitError = validateWorkspaceNodes(workspace.nodes as FSNode[], policy);

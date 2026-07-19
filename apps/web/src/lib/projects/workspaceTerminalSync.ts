@@ -1,16 +1,8 @@
 import type { WorkspaceStateV2 } from "@/components/ide/types";
+import type { WorkspaceSyncEntry } from "@zoeskoul/code-contracts";
 import { mergeTerminalSnapshotIntoWorkspace } from "@/lib/projects/mergeTerminalSnapshotIntoWorkspace";
 
-export type TerminalSnapshotFile =
-    | {
-          path: string;
-          content: string;
-          kind?: "file";
-      }
-    | {
-          kind: "directory";
-          path: string;
-      };
+export type TerminalSnapshotFile = WorkspaceSyncEntry;
 
 export function mergeWorkspaceWithTerminalSnapshot(args: {
     prior: WorkspaceStateV2;

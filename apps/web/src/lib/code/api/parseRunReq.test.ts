@@ -95,4 +95,85 @@ describe("parseRunReq", () => {
         }
         expect(parsed.limits?.enable_network).toBe(true);
     });
+
+    it("accepts a bounded binary project asset and derives its MIME type", () => {
+        const parsed = parseRunReq({
+            language: "python",
+            entry: "main.py",
+            files: [
+                { path: "main.py", content: "print('ok')" },
+                {
+                    kind: "file",
+                    path: "assets/pixel.png",
+                    encoding: "base64",
+                    data: "AAECAw==",
+                    mimeType: "text/plain",
+                    sizeBytes: 4,
+                    checksum:
+                        "sha256:054edec1d0211f624fed0cbca9d4f9400b0e491c43742af2c5b0abebf0c990d8",
+                },
+            ],
+        });
+
+        expect(parsed.kind).toBe("code");
+        if (parsed.kind !== "code" || !("files" in parsed) || !Array.isArray(parsed.files)) {
+            throw new Error("Expected a multi-file code request.");
+        }
+        expect(parsed.files[1]).toMatchObject({
+            encoding: "base64",
+            mimeType: "image/png",
+            sizeBytes: 4,
+        });
+    });
+
+    it("rejects binary files in the legacy object form", () => {
+        expect(() =>
+            parseRunReq({
+                language: "python",
+                entry: "main.py",
+                files: {
+                    "main.py": "print('ok')",
+                    "assets/pixel.png": "AAECAw==",
+                },
+            }),
+        ).toThrow(/array form for binary files/i);
+    });
+
+    it("rejects binary payloads with incorrect sizes or checksums", () => {
+        expect(() =>
+            parseRunReq({
+                language: "python",
+                entry: "main.py",
+                files: [
+                    { path: "main.py", content: "print('ok')" },
+                    {
+                        path: "assets/pixel.png",
+                        encoding: "base64",
+                        data: "AAECAw==",
+                        mimeType: "image/png",
+                        sizeBytes: 3,
+                    },
+                ],
+            }),
+        ).toThrow(/sizeBytes/i);
+
+        expect(() =>
+            parseRunReq({
+                language: "python",
+                entry: "main.py",
+                files: [
+                    { path: "main.py", content: "print('ok')" },
+                    {
+                        path: "assets/pixel.png",
+                        encoding: "base64",
+                        data: "AAECAw==",
+                        mimeType: "image/png",
+                        sizeBytes: 4,
+                        checksum: `sha256:${"0".repeat(64)}`,
+                    },
+                ],
+            }),
+        ).toThrow(/checksum/i);
+    });
+
 });

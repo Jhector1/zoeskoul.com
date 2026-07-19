@@ -1,6 +1,7 @@
 // src/lib/practice/api/validate/grade/codeInput.semantic.python.ts
 import { runCode } from "@/lib/code/runCode";
 import type { FileEntry } from "@/lib/code/types";
+import { isTextWorkspaceFileEntry } from "@zoeskoul/code-contracts";
 import { replaceEntryFileContent } from "@/lib/code/workspaceSubmission";
 import type { GradeResult } from "@/lib/practice/api/validate/grade/index";
 import type { ProgrammingExpected } from "@/lib/practice/api/validate/schemas";
@@ -198,20 +199,24 @@ function resolveSemanticCheckGroups(args: {
                         normalizeSemanticCheckPath(candidate.path) === path,
                 );
 
-                if (!file) {
+                if (!file || !isTextWorkspaceFileEntry(file)) {
                     return {
                         error: {
                             ok: false,
-                            explanation: `Missing file: ${path}`,
+                            explanation: `Missing text source file: ${path}`,
                             feedback: {
                                 area: "code",
                                 source: "check",
                                 kind: "logic",
                                 tone: "warning",
-                                title: "File missing",
-                                message: `Create or restore ${path}, then check your answer again.`,
+                                title: "Source file unavailable",
+                                message: `Create or restore the text source file ${path}, then check your answer again.`,
                                 raw: args.showDebug
-                                    ? debugRaw({ index, path })
+                                    ? debugRaw({
+                                          index,
+                                          path,
+                                          binary: Boolean(file),
+                                      })
                                     : null,
                             },
                         },

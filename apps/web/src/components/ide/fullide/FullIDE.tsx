@@ -8,7 +8,8 @@ import { DEFAULT_SQL_DIALECT } from "@/components/code/runner/constants";
 import { useProjectDirtyState } from "@/components/code/projects/hooks/useProjectDirtyState";
 import { useProjectsList } from "@/components/code/projects/hooks/useProjectsList";
 
-import {pathOf, WorkspaceSyncEntry} from "../fsTree";
+import { pathOf } from "../fsTree";
+import type { WorkspaceSyncEntry } from "@zoeskoul/code-contracts";
 import { useIdeWorkspace } from "../workspaceHook/useIdeWorkspace";
 import { cn } from "../utils";
 import IdeDesktopLayout from "@/components/ide/fullide/chrome/IdeDesktopLayout";
@@ -211,7 +212,7 @@ function FullIDEInner({
     const visibleTabFiles = learnerWorkspace.tabFiles;
     const activeFileId = learnerWorkspace.activeFileId ?? "";
     const entryFileId = learnerWorkspace.entryFileId ?? "";
-    const activeFile = learnerWorkspace.activeFile ?? undefined;
+    const activeFile = learnerWorkspace.activeFile ?? null;
     const entryFile = learnerWorkspace.entryFile ?? undefined;
     const [explorerCollapsed, setExplorerCollapsed] = useState(false);
     const [workspaceFileSelectionVersion, setWorkspaceFileSelectionVersion] =
@@ -259,7 +260,7 @@ function FullIDEInner({
             const nextWorkspace: WorkspaceStateV2 = {
                 ...current,
                 nodes: current.nodes.map((node) => {
-                    if (node.kind !== "file" || node.id !== fileId) {
+                    if (node.kind !== "file" || node.id !== fileId || node.binary) {
                         return node;
                     }
 
@@ -778,7 +779,16 @@ function workspaceNotifyKey(workspace: WorkspaceStateV2 | null | undefined) {
                     kind: node.kind,
                     name: node.name,
                     parentId: node.parentId ?? null,
-                    content: node.content ?? "",
+                    content: node.binary ? "" : node.content ?? "",
+                    binary: node.binary
+                        ? {
+                            encoding: node.binary.encoding,
+                            data: node.binary.data,
+                            mimeType: node.binary.mimeType,
+                            sizeBytes: node.binary.sizeBytes,
+                            checksum: node.binary.checksum ?? null,
+                          }
+                        : null,
                 };
             }
 

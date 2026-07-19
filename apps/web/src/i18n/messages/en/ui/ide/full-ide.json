@@ -91,7 +91,7 @@
         "logInToUpload": "Log in to upload files.",
         "uploadUnavailable": "Uploading files is not available in this workspace.",
         "folderImportUnavailable": "Folder import is not available in this workspace.",
-        "uploadLimit": "Upload limit: {perFile} per file, {count} {fileWord} at a time.",
+        "uploadLimit": "Upload limits: {textPerFile} per text file, {binaryPerFile} per binary file, {count} {fileWord} at a time.",
         "upgrade": "Upgrade",
         "sqlMode": "SQL Mode",
         "activeDialect": "Active dialect:",
@@ -109,6 +109,21 @@
         "noSqlFile": "No SQL file selected.",
         "noWebFile": "No web file selected.",
         "noFile": "No file selected."
+      },
+      "binary": {
+        "loading": "Preparing preview…",
+        "invalidData": "This binary file could not be decoded safely.",
+        "imageAlt": "Preview of {fileName}",
+        "pdfTitle": "PDF preview of {fileName}",
+        "audioUnsupported": "Your browser cannot play this audio file.",
+        "videoUnsupported": "Your browser cannot play this video file.",
+        "fontSample": "Font preview",
+        "archiveTitle": "Archive file",
+        "archiveMessage": "Archives are preserved exactly in the workspace. Download the file to inspect or extract its contents.",
+        "detailsTitle": "Binary file",
+        "detailsMessage": "This file is preserved exactly, but ZoeSkoul does not have an inline preview for this format.",
+        "download": "Download",
+        "pdfUnsupported": "Your browser cannot display this PDF inline. Download it to open it locally."
       }
     },
     "terminal": {

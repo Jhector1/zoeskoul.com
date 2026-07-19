@@ -1,6 +1,7 @@
 import type { WorkspaceStateV2 } from "@/components/ide/types";
 import { exportProjectFiles, relativeProjectPathOf } from "@/components/ide/fsTree";
 import type { FileEntry } from "@/lib/code/types";
+import { isBinaryWorkspaceEntry } from "@/lib/ide/workspaceFileContent";
 
 export type WorkspaceCodeSubmission = {
     entry: string;
@@ -21,10 +22,14 @@ export function serializeWorkspaceForCodeRun(
 
     const preferredId = workspace.entryFileId || workspace.activeFileId;
     const entryNode =
-        workspace.nodes.find((node) => node.kind === "file" && node.id === preferredId) ??
-        workspace.nodes.find((node) => node.kind === "file");
+        workspace.nodes.find(
+            (node) =>
+                node.kind === "file" &&
+                node.id === preferredId &&
+                !node.binary,
+        ) ?? workspace.nodes.find((node) => node.kind === "file" && !node.binary);
 
-    if (!entryNode || entryNode.kind !== "file") return null;
+    if (!entryNode || entryNode.kind !== "file" || entryNode.binary) return null;
 
     const entry = relativeProjectPathOf(workspace.nodes, entryNode.id);
     if (!entry) return null;
@@ -43,13 +48,14 @@ export function replaceEntryFileContent(args: {
     const nextFiles = args.files.map((file) =>
         file.path === args.entry
             ? {
+                kind: "file" as const,
                 path: file.path,
                 content: args.content,
               }
             : file,
     );
 
-    if (nextFiles.some((file) => file.path === args.entry)) {
+    if (nextFiles.some((file) => file.path === args.entry && !isBinaryWorkspaceEntry(file))) {
         return nextFiles;
     }
 

@@ -1,14 +1,12 @@
 import type { FSNode, FileNode, FolderNode, NodeId } from "./types";
+import type { FileEntry, WorkspaceSyncEntry } from "@zoeskoul/code-contracts";
+import { workspaceFileToSyncEntry } from "@/lib/ide/workspaceFileContent";
 import {
     detectSyntheticSrcRoot,
     normalizeSafeRelativePath,
     normalizeUiProjectPath,
     splitSafeRelativePath,
 } from "@/lib/projects/workspacePathMapping";
-
-export type WorkspaceSyncEntry =
-    | { kind?: "file"; path: string; content: string }
-    | { kind: "directory"; path: string };
 
 type FsIndex = {
     byId: Map<NodeId, FSNode>;
@@ -143,17 +141,17 @@ export function pathOf(nodes: FSNode[], id: NodeId): string {
 export function exportProjectFiles(
     nodes: FSNode[],
     options?: ProjectPathOptions,
-): Array<{ path: string; content: string }> {
+): FileEntry[] {
     const files = nodes.filter((n): n is FileNode => n.kind === "file");
 
-    const out = files.map((f) => ({
-        path: relativeProjectPathOf(nodes, f.id, options),
-        content: f.content ?? "",
-    }));
+    const out = files.map((file) => {
+        const path = relativeProjectPathOf(nodes, file.id, options);
+        return workspaceFileToSyncEntry({ path, file }) as FileEntry;
+    });
 
-    for (const f of out) {
-        if (!isSafeRelPath(f.path)) {
-            throw new Error(`Unsafe file path: ${f.path}`);
+    for (const file of out) {
+        if (!isSafeRelPath(file.path)) {
+            throw new Error(`Unsafe file path: ${file.path}`);
         }
     }
 
@@ -177,11 +175,10 @@ export function exportWorkspaceEntries(nodes: FSNode[]): WorkspaceSyncEntry[] {
 
     const files = nodes
         .filter((n): n is FileNode => n.kind === "file")
-        .map((file) => ({
-            kind: "file" as const,
-            path: rawNodePathOf(nodes, file.id),
-            content: file.content ?? "",
-        }))
+        .map((file) => {
+            const path = rawNodePathOf(nodes, file.id);
+            return workspaceFileToSyncEntry({ path, file });
+        })
         .filter((entry) => !!entry.path && isSafeRelPath(entry.path))
         .sort((a, b) => a.path.localeCompare(b.path));
 

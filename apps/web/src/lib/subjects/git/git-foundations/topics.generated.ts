@@ -14,10 +14,8 @@ import workingTreeStagingAndHistoryJson from "./modules/module1/topics/working-t
 import module1FieldNotesRepositoryJson from "./modules/module1/topics/module-1-field-notes-repository/topic.bundle.json";
 import inspectUnstagedChangesWithDiffJson from "./modules/module2/topics/inspect-unstaged-changes-with-diff/topic.bundle.json";
 import stageIntentionallyJson from "./modules/module2/topics/stage-intentionally/topic.bundle.json";
-import createFocusedCommitsJson from "./modules/module2/topics/create-focused-commits/topic.bundle.json";
 import readHistoryWithLogAndShowJson from "./modules/module2/topics/read-history-with-log-and-show/topic.bundle.json";
 import module2CommunityWebsiteHistoryJson from "./modules/module2/topics/module-2-community-website-history/topic.bundle.json";
-import modifyAndVerifyTrackedFilesJson from "./modules/module3/topics/modify-and-verify-tracked-files/topic.bundle.json";
 import renameAndRemoveTrackedFilesJson from "./modules/module3/topics/rename-and-remove-tracked-files/topic.bundle.json";
 import ignoreGeneratedFilesJson from "./modules/module3/topics/ignore-generated-files/topic.bundle.json";
 import restoreWithoutRewritingHistoryJson from "./modules/module3/topics/restore-without-rewriting-history/topic.bundle.json";
@@ -32,10 +30,8 @@ const workingTreeStagingAndHistory = workingTreeStagingAndHistoryJson as SlimTop
 const module1FieldNotesRepository = module1FieldNotesRepositoryJson as SlimTopicManifest;
 const inspectUnstagedChangesWithDiff = inspectUnstagedChangesWithDiffJson as SlimTopicManifest;
 const stageIntentionally = stageIntentionallyJson as SlimTopicManifest;
-const createFocusedCommits = createFocusedCommitsJson as SlimTopicManifest;
 const readHistoryWithLogAndShow = readHistoryWithLogAndShowJson as SlimTopicManifest;
 const module2CommunityWebsiteHistory = module2CommunityWebsiteHistoryJson as SlimTopicManifest;
-const modifyAndVerifyTrackedFiles = modifyAndVerifyTrackedFilesJson as SlimTopicManifest;
 const renameAndRemoveTrackedFiles = renameAndRemoveTrackedFilesJson as SlimTopicManifest;
 const ignoreGeneratedFiles = ignoreGeneratedFilesJson as SlimTopicManifest;
 const restoreWithoutRewritingHistory = restoreWithoutRewritingHistoryJson as SlimTopicManifest;
@@ -50,10 +46,8 @@ export const TOPIC_MANIFESTS: TopicManifestRefMap = {
   "module-1-field-notes-repository": module1FieldNotesRepository,
   "inspect-unstaged-changes-with-diff": inspectUnstagedChangesWithDiff,
   "stage-intentionally": stageIntentionally,
-  "create-focused-commits": createFocusedCommits,
   "read-history-with-log-and-show": readHistoryWithLogAndShow,
   "module-2-community-website-history": module2CommunityWebsiteHistory,
-  "modify-and-verify-tracked-files": modifyAndVerifyTrackedFiles,
   "rename-and-remove-tracked-files": renameAndRemoveTrackedFiles,
   "ignore-generated-files": ignoreGeneratedFiles,
   "restore-without-rewriting-history": restoreWithoutRewritingHistory,

@@ -44,4 +44,25 @@ describe("createWorkspace", () => {
             fs.readFile(path.join(root, "README.md"), "utf8"),
         ).resolves.toBe("terminal workspace\n");
     });
+
+    it("writes binary starter files without UTF-8 conversion", async () => {
+        const bytes = Buffer.from([0, 255, 1, 2, 3, 128]);
+        const root = await createWorkspace([
+            {
+                kind: "file",
+                path: "assets/pixel.png",
+                encoding: "base64",
+                data: bytes.toString("base64"),
+                mimeType: "image/png",
+                sizeBytes: bytes.byteLength,
+            },
+        ]);
+
+        createdRoots.push(root);
+
+        await expect(
+            fs.readFile(path.join(root, "assets", "pixel.png")),
+        ).resolves.toEqual(bytes);
+    });
+
 });

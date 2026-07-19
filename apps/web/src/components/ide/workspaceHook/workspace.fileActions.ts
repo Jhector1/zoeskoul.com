@@ -1,6 +1,7 @@
 "use client";
 
 import type React from "react";
+import { resolveWorkspaceFileCapability } from "@zoeskoul/code-contracts";
 import type { WorkspaceLanguage } from "@/lib/practice/types";
 
 import type {
@@ -154,7 +155,7 @@ export function onChangeCode(args: {
   setNodes: Setters["setNodes"];
 }) {
   const { activeFile, code, setNodes } = args;
-  if (!activeFile) return;
+  if (!activeFile || activeFile.binary) return;
 
   setNodes((prev) =>
       prev.map((n) =>
@@ -443,6 +444,21 @@ export function commitInlineEdit(args: {
     }
 
     const id = inlineEdit.targetId!;
+    const current = nodes.find((node) => node.id === id);
+    if (current?.kind === "file") {
+      const capability = resolveWorkspaceFileCapability(raw);
+      const currentStorage = current.binary ? "binary" : "text";
+      if (!capability || capability.storage !== currentStorage) {
+        setToast({
+          kind: "error",
+          text:
+              currentStorage === "binary"
+                  ? "Keep a binary file extension that matches its stored bytes."
+                  : "Create binary files by uploading them instead of renaming a text file.",
+        });
+        return;
+      }
+    }
 
     setNodes((prev) => {
       const cur = prev.find((x) => x.id === id);
@@ -529,6 +545,17 @@ export function commitInlineEdit(args: {
             : "Log in to create files.",
     );
     setInlineEdit(null);
+    return;
+  }
+
+  const newFileCapability = resolveWorkspaceFileCapability(split.leafName);
+  if (!newFileCapability || newFileCapability.storage !== "text") {
+    setToast({
+      kind: "error",
+      text: newFileCapability?.storage === "binary"
+          ? "Create binary files by uploading them so their bytes stay intact."
+          : "Choose a supported text file type.",
+    });
     return;
   }
 
@@ -704,11 +731,12 @@ export function importExternalFiles(args: {
   } = args;
 
   const cleaned = files
-      .map((f) => ({
-        path: normalizeImportPath(f.path).join("/"),
-        content: String(f.content ?? ""),
+      .map((file) => ({
+        path: normalizeImportPath(file.path).join("/"),
+        content: file.binary ? "" : String(file.content ?? ""),
+        ...(file.binary ? { binary: file.binary } : {}),
       }))
-      .filter((f) => !!f.path);
+      .filter((file) => !!file.path);
 
   const importError = validateImportedFiles(cleaned, policy);
   if (importError) {
@@ -733,7 +761,8 @@ export function importExternalFiles(args: {
         kind: "file",
         name: fileName,
         parentId: null,
-        content: imported.content,
+        content: imported.binary ? "" : imported.content,
+        ...(imported.binary ? { binary: imported.binary } : {}),
         createdAt: target?.createdAt ?? Date.now(),
         updatedAt: Date.now(),
       } as FileNode,
@@ -800,7 +829,8 @@ export function importExternalFiles(args: {
       kind: "file",
       name: fileName,
       parentId,
-      content: imported.content,
+      content: imported.binary ? "" : imported.content,
+      ...(imported.binary ? { binary: imported.binary } : {}),
       createdAt: Date.now(),
       updatedAt: Date.now(),
     } as FileNode);

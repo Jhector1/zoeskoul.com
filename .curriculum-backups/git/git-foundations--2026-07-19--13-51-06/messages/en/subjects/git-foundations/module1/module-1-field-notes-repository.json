@@ -1,0 +1,242 @@
+{
+  "topics": {
+    "git-foundations": {
+      "git-foundations-module-1-start-tracking": {
+        "module-1-field-notes-repository": {
+          "label": "Project: Build the Field Notes Repository",
+          "summary": "Carry one garden-notes project from an ordinary folder to a clean first snapshot, using the same inspect–act–verify rhythm from the module.",
+          "cards": {
+            "sketch0": {
+              "title": "The Garden Notes Need a Beginning"
+            },
+            "project": {
+              "title": "Build the Field Notes Repository"
+            }
+          },
+          "projectSteps": {
+            "try_git_repo_inspection": {
+              "title": "Initialize the Repository"
+            },
+            "try_git_config": {
+              "title": "Set the Local Identity"
+            },
+            "try_git_init": {
+              "title": "Read the Untracked Files"
+            },
+            "try_git_stage_files": {
+              "title": "Stage the Field Notes"
+            },
+            "try_git_commit": {
+              "title": "Create the First Snapshot"
+            }
+          },
+          "moduleProject": {
+            "steps": {
+              "try_git_repo_inspection": {
+                "title": "Initialize the Field Notes Repository",
+                "prompt": "You are already inside the prepared `garden-notes/` project folder. It contains field-note files but is not a Git repository yet.\n\nInitialize this folder with `main` as the first branch. Do not change directories; the terminal starts in the correct folder.",
+                "hint": "Create the repository in the current folder and choose the requested first branch at the same time.",
+                "help": {
+                  "concept": "Initialization creates repository metadata inside the current folder; it does not stage files or create a commit.",
+                  "hint_1": "The terminal is already inside `garden-notes/`, so the repository should be created here.",
+                  "hint_2": "Use the initialization option that names `main` as the first branch."
+                },
+                "starterCode": "# Garden Field Notes\n",
+                "solutionCode": "git init -b main",
+                "instructions": "You are already inside the prepared `garden-notes/` project folder. It contains field-note files but is not a Git repository yet.\n\nInitialize this folder with `main` as the first branch. Do not change directories; the terminal starts in the correct folder.",
+                "starterFiles": {
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf garden-notes\nmkdir -p garden-notes/observations\nprintf '# Garden Field Notes\\n' > garden-notes/README.md\nprintf 'Plot A: soil is damp after rain.\\n' > garden-notes/observations/plot-a.txt\nprintf 'Plot B: seedlings need labels.\\n' > garden-notes/observations/plot-b.txt\n"
+                  }
+                },
+                "solutionFiles": {
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf garden-notes\nmkdir -p garden-notes/observations\nprintf '# Garden Field Notes\\n' > garden-notes/README.md\nprintf 'Plot A: soil is damp after rain.\\n' > garden-notes/observations/plot-a.txt\nprintf 'Plot B: seedlings need labels.\\n' > garden-notes/observations/plot-b.txt\n"
+                  }
+                },
+                "terminalExpectations": {
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "That action can discard or rewrite history. Use the safe, layer-specific workflow taught in this course."
+                    }
+                  },
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Did you initialize `garden-notes/` with `main` as its first branch?"
+                    }
+                  }
+                }
+              },
+              "try_git_config": {
+                "title": "Set the Repository Identity",
+                "prompt": "You are working in the prepared `garden-notes/` repository.\n\nThe repository now exists. Set `user.name` to `ZoeSkoul Learner` and `user.email` to `learner@zoeskoul.local` for this repository only, then print both local values.",
+                "hint": "Keep the author identity inside this repository rather than changing machine-wide settings.",
+                "help": {
+                  "concept": "Repository-local configuration gives commits an author without changing machine-wide Git settings.",
+                  "hint_1": "Both the name and email need repository-local values.",
+                  "hint_2": "Read the stored values back to catch spelling or scope mistakes."
+                },
+                "starterCode": "# Garden Field Notes\n",
+                "solutionCode": "git config --local user.name \"ZoeSkoul Learner\"\ngit config --local user.email \"learner@zoeskoul.local\"\ngit config --local --get user.name\ngit config --local --get user.email",
+                "instructions": "You are working in the prepared `garden-notes/` repository.\n\nThe repository now exists. Set `user.name` to `ZoeSkoul Learner` and `user.email` to `learner@zoeskoul.local` for this repository only, then print both local values.",
+                "starterFiles": {
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf garden-notes\nmkdir -p garden-notes/observations\nprintf '# Garden Field Notes\\n' > garden-notes/README.md\nprintf 'Plot A: soil is damp after rain.\\n' > garden-notes/observations/plot-a.txt\nprintf 'Plot B: seedlings need labels.\\n' > garden-notes/observations/plot-b.txt\ngit -C garden-notes init -q -b main\n"
+                  }
+                },
+                "solutionFiles": {
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf garden-notes\nmkdir -p garden-notes/observations\nprintf '# Garden Field Notes\\n' > garden-notes/README.md\nprintf 'Plot A: soil is damp after rain.\\n' > garden-notes/observations/plot-a.txt\nprintf 'Plot B: seedlings need labels.\\n' > garden-notes/observations/plot-b.txt\ngit -C garden-notes init -q -b main\n"
+                  }
+                },
+                "terminalExpectations": {
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "That action can discard or rewrite history. Use the safe, layer-specific workflow taught in this course."
+                    }
+                  },
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Did you save the requested author value for this repository only?"
+                    },
+                    "1": {
+                      "message": "Did you save the requested author value for this repository only?"
+                    }
+                  }
+                }
+              },
+              "try_git_init": {
+                "title": "Read the Untracked Project Files",
+                "prompt": "You are working in the prepared `garden-notes/` repository.\n\nThe identity is ready, but Git is not tracking the notes yet. Use short status and identify the README plus both observation files as untracked.",
+                "hint": "Use the compact repository report and read both status columns.",
+                "help": {
+                  "concept": "Carry one garden-notes project from an ordinary folder to a clean first snapshot, using the same inspect–act–verify rhythm from the module.",
+                  "hint_1": "Focus on the path named in the task and decide whether it is untracked, staged, or modified.",
+                  "hint_2": "Compare the final status with the exact state the prompt asks you to prove."
+                },
+                "starterCode": "# Garden Field Notes\n",
+                "solutionCode": "git status --short",
+                "instructions": "You are working in the prepared `garden-notes/` repository.\n\nThe identity is ready, but Git is not tracking the notes yet. Use short status and identify the README plus both observation files as untracked.",
+                "starterFiles": {
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf garden-notes\nmkdir -p garden-notes/observations\nprintf '# Garden Field Notes\\n' > garden-notes/README.md\nprintf 'Plot A: soil is damp after rain.\\n' > garden-notes/observations/plot-a.txt\nprintf 'Plot B: seedlings need labels.\\n' > garden-notes/observations/plot-b.txt\ngit -C garden-notes init -q -b main\ngit -C garden-notes config --local user.name \"ZoeSkoul Learner\"\ngit -C garden-notes config --local user.email \"learner@zoeskoul.local\"\n"
+                  }
+                },
+                "solutionFiles": {
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf garden-notes\nmkdir -p garden-notes/observations\nprintf '# Garden Field Notes\\n' > garden-notes/README.md\nprintf 'Plot A: soil is damp after rain.\\n' > garden-notes/observations/plot-a.txt\nprintf 'Plot B: seedlings need labels.\\n' > garden-notes/observations/plot-b.txt\ngit -C garden-notes init -q -b main\ngit -C garden-notes config --local user.name \"ZoeSkoul Learner\"\ngit -C garden-notes config --local user.email \"learner@zoeskoul.local\"\n"
+                  }
+                },
+                "terminalExpectations": {
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "That action can discard or rewrite history. Use the safe, layer-specific workflow taught in this course."
+                    }
+                  },
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Did you use the compact status view and read the entry for `garden-notes/`?"
+                    }
+                  }
+                }
+              },
+              "try_git_stage_files": {
+                "title": "Stage the Field Notes",
+                "prompt": "You are working in the prepared `garden-notes/` repository.\n\nPrepare the first snapshot by staging `README.md` and everything under `observations/`. Then list the staged file names so you can verify the boundary before committing.",
+                "hint": "Choose only the paths that belong to this checkpoint.",
+                "help": {
+                  "concept": "A commit records only the staged snapshot and gives it a message another reader can understand.",
+                  "hint_1": "Do not broaden the staging boundary just to make status quieter.",
+                  "hint_2": "Review the staged paths or patch before moving on."
+                },
+                "starterCode": "# Garden Field Notes\n",
+                "solutionCode": "git add README.md observations/\ngit diff --staged --name-only",
+                "instructions": "You are working in the prepared `garden-notes/` repository.\n\nPrepare the first snapshot by staging `README.md` and everything under `observations/`. Then list the staged file names so you can verify the boundary before committing.",
+                "starterFiles": {
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf garden-notes\nmkdir -p garden-notes/observations\nprintf '# Garden Field Notes\\n' > garden-notes/README.md\nprintf 'Plot A: soil is damp after rain.\\n' > garden-notes/observations/plot-a.txt\nprintf 'Plot B: seedlings need labels.\\n' > garden-notes/observations/plot-b.txt\ngit -C garden-notes init -q -b main\ngit -C garden-notes config --local user.name \"ZoeSkoul Learner\"\ngit -C garden-notes config --local user.email \"learner@zoeskoul.local\"\n"
+                  }
+                },
+                "solutionFiles": {
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf garden-notes\nmkdir -p garden-notes/observations\nprintf '# Garden Field Notes\\n' > garden-notes/README.md\nprintf 'Plot A: soil is damp after rain.\\n' > garden-notes/observations/plot-a.txt\nprintf 'Plot B: seedlings need labels.\\n' > garden-notes/observations/plot-b.txt\ngit -C garden-notes init -q -b main\ngit -C garden-notes config --local user.name \"ZoeSkoul Learner\"\ngit -C garden-notes config --local user.email \"learner@zoeskoul.local\"\n"
+                  }
+                },
+                "terminalExpectations": {
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "That action can discard or rewrite history. Use the safe, layer-specific workflow taught in this course."
+                    }
+                  },
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Did you stage only the path or paths that belong to this checkpoint?"
+                    },
+                    "1": {
+                      "message": "Did you review the staged path list and confirm that only the requested files are selected?"
+                    }
+                  }
+                }
+              },
+              "try_git_commit": {
+                "title": "Create the First Snapshot",
+                "prompt": "You are working in the prepared `garden-notes/` repository.\n\nThe three project files are staged. Commit them with the message `Start garden field notes`, read the one-line history, and finish by checking that the working tree is clean.",
+                "hint": "Record only the staged snapshot and use the message requested by the scenario.",
+                "help": {
+                  "concept": "Log gives the timeline overview; show opens the contents of one recorded snapshot.",
+                  "hint_1": "The message should describe the project result, not the commands you used.",
+                  "hint_2": "After recording it, inspect history and any work that remains."
+                },
+                "starterCode": "# Garden Field Notes\n",
+                "solutionCode": "git commit -m \"Start garden field notes\"\ngit log --oneline\ngit status --short",
+                "instructions": "You are working in the prepared `garden-notes/` repository.\n\nThe three project files are staged. Commit them with the message `Start garden field notes`, read the one-line history, and finish by checking that the working tree is clean.",
+                "starterFiles": {
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf garden-notes\nmkdir -p garden-notes/observations\nprintf '# Garden Field Notes\\n' > garden-notes/README.md\nprintf 'Plot A: soil is damp after rain.\\n' > garden-notes/observations/plot-a.txt\nprintf 'Plot B: seedlings need labels.\\n' > garden-notes/observations/plot-b.txt\ngit -C garden-notes init -q -b main\ngit -C garden-notes config --local user.name \"ZoeSkoul Learner\"\ngit -C garden-notes config --local user.email \"learner@zoeskoul.local\"\ngit -C garden-notes add README.md observations/\n"
+                  }
+                },
+                "solutionFiles": {
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf garden-notes\nmkdir -p garden-notes/observations\nprintf '# Garden Field Notes\\n' > garden-notes/README.md\nprintf 'Plot A: soil is damp after rain.\\n' > garden-notes/observations/plot-a.txt\nprintf 'Plot B: seedlings need labels.\\n' > garden-notes/observations/plot-b.txt\ngit -C garden-notes init -q -b main\ngit -C garden-notes config --local user.name \"ZoeSkoul Learner\"\ngit -C garden-notes config --local user.email \"learner@zoeskoul.local\"\ngit -C garden-notes add README.md observations/\n"
+                  }
+                },
+                "terminalExpectations": {
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "That action can discard or rewrite history. Use the safe, layer-specific workflow taught in this course."
+                    }
+                  },
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Did you record the staged snapshot with the message named in the task?"
+                    },
+                    "1": {
+                      "message": "Did you read the one-line history and confirm the newest checkpoint?"
+                    },
+                    "2": {
+                      "message": "Did you use the compact status view to confirm that no unfinished change remains?"
+                    }
+                  }
+                }
+              }
+            },
+            "title": "Build the Field Notes Repository",
+            "description": "The garden team has three useful files but no trustworthy beginning. Build the repository in five cumulative milestones: initialize on `main`, keep the author identity local, inspect the untracked set, select the first snapshot, and record it.\n\nFinish with one commit named `Start garden field notes`, all three project files tracked, and a clean short-status result."
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "git-foundations": {
+      "git-foundations-module-1-start-tracking": {
+        "module-1-field-notes-repository": {
+          "intro-to-git-repository": {
+            "title": "A Field Notebook Becomes a Repository",
+            "bodyMarkdown": "The neighborhood garden has useful observations, but the folder has no dependable beginning. A new volunteer can see today’s files yet cannot tell when the notebook started or which version should be trusted.\n\nYou will build that beginning in five milestones: initialize the folder, set a local identity, inspect the untracked notes, stage the intended project files, and record one first snapshot. Each milestone begins from the completed state of the previous one, so the project remains cumulative without exposing platform setup.\n\nThe final repository should contain one commit named `Start garden field notes` and no unfinished changes."
+          }
+        }
+      }
+    }
+  }
+}

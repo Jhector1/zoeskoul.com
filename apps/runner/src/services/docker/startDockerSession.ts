@@ -119,6 +119,20 @@ function normalizeFilesMap(
           };
         }
 
+        if ((entry as any)?.encoding === "base64") {
+          return {
+            kind: "file" as const,
+            path: entryPath(entry),
+            encoding: "base64" as const,
+            data: String((entry as any).data ?? ""),
+            mimeType: String((entry as any).mimeType ?? "application/octet-stream"),
+            sizeBytes: Math.max(0, Number((entry as any).sizeBytes ?? 0)),
+            ...((entry as any).checksum
+              ? { checksum: String((entry as any).checksum) }
+              : {}),
+          };
+        }
+
         return {
           kind: "file" as const,
           path: entryPath(entry),
@@ -142,12 +156,7 @@ function normalizeFilesMap(
 }
 
 function onlyFileEntries(entries: WorkspaceSyncEntry[]): FileEntry[] {
-  return entries
-    .filter((entry): entry is FileEntry => entry.kind !== "directory")
-    .map((entry) => ({
-      path: entry.path,
-      content: String((entry as any).content ?? ""),
-    }));
+  return entries.filter((entry): entry is FileEntry => entry.kind !== "directory");
 }
 
 function defaultEntry(language: InteractiveLanguage) {

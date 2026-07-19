@@ -1908,12 +1908,20 @@ for book in books:
             Array.isArray(secondRequest.files)
                 ? secondRequest.files
                 : undefined;
-        const firstHarness = firstFiles?.find(
+        const firstHarnessFile = firstFiles?.find(
             (file) => file.path === "main.py",
-        )?.content;
-        const secondHarness = secondFiles?.find(
+        );
+        const secondHarnessFile = secondFiles?.find(
             (file) => file.path === "main.py",
-        )?.content;
+        );
+        const firstHarness =
+            firstHarnessFile && "content" in firstHarnessFile
+                ? firstHarnessFile.content
+                : undefined;
+        const secondHarness =
+            secondHarnessFile && "content" in secondHarnessFile
+                ? secondHarnessFile.content
+                : undefined;
 
         const modelChecks = expected.semanticChecks?.slice(0, 2);
         const mainChecks = expected.semanticChecks?.slice(2);

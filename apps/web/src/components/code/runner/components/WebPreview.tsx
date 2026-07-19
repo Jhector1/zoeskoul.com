@@ -2,6 +2,7 @@
 
 import React, { useMemo } from "react";
 import type { WorkspaceSyncEntry } from "@/components/code/runner/runtime";
+import { isBinaryWorkspaceEntry } from "@/lib/ide/workspaceFileContent";
 
 function normalizePath(input: string) {
     return String(input ?? "")
@@ -32,8 +33,11 @@ function resolveRelativePath(fromFile: string, target: string) {
         return raw;
     }
 
+    const cleanTarget = raw.split(/[?#]/, 1)[0] ?? "";
     const baseDir = dirname(fromFile);
-    const joined = normalizePath(baseDir ? `${baseDir}/${raw}` : raw);
+    const joined = normalizePath(
+        baseDir ? `${baseDir}/${cleanTarget}` : cleanTarget,
+    );
     const parts = joined.split("/");
     const out: string[] = [];
 
@@ -49,12 +53,45 @@ function resolveRelativePath(fromFile: string, target: string) {
     return out.join("/");
 }
 
-function buildSrcDoc(entries: WorkspaceSyncEntry[]) {
+function buildBinaryDataUrl(entry: WorkspaceSyncEntry) {
+    if (!isBinaryWorkspaceEntry(entry)) return "";
+    return `data:${entry.mimeType || "application/octet-stream"};base64,${entry.data}`;
+}
+
+function rewriteCssAssets(args: {
+    css: string;
+    cssPath: string;
+    assetMap: Map<string, string>;
+}) {
+    return args.css.replace(
+        /url\(\s*(["']?)([^"')]+)\1\s*\)/gi,
+        (full, quote, target) => {
+            const resolved = resolveRelativePath(args.cssPath, target);
+            const dataUrl = args.assetMap.get(resolved);
+            return dataUrl ? `url("${dataUrl}")` : full;
+        },
+    );
+}
+
+export function buildWebPreviewSrcDoc(entries: WorkspaceSyncEntry[]) {
     const fileMap = new Map<string, string>();
+    const assetMap = new Map<string, string>();
 
     for (const entry of entries) {
         if (entry.kind === "directory") continue;
-        fileMap.set(normalizePath(entry.path), String(entry.content ?? ""));
+        const path = normalizePath(entry.path);
+        if (isBinaryWorkspaceEntry(entry)) {
+            assetMap.set(path, buildBinaryDataUrl(entry));
+        } else {
+            const content = String(entry.content ?? "");
+            fileMap.set(path, content);
+            if (path.toLowerCase().endsWith(".svg")) {
+                assetMap.set(
+                    path,
+                    `data:image/svg+xml;charset=utf-8,${encodeURIComponent(content)}`,
+                );
+            }
+        }
     }
 
     const htmlPath =
@@ -89,8 +126,13 @@ function buildSrcDoc(entries: WorkspaceSyncEntry[]) {
 
             const css = fileMap.get(resolved);
             if (typeof css !== "string") return full;
+            const rewrittenCss = rewriteCssAssets({
+                css,
+                cssPath: resolved,
+                assetMap,
+            });
 
-            return `<style data-inline-href="${resolved}">\n${css}\n</style>`;
+            return `<style data-inline-href="${resolved}">\n${rewrittenCss}\n</style>`;
         },
     );
 
@@ -104,6 +146,15 @@ function buildSrcDoc(entries: WorkspaceSyncEntry[]) {
             if (typeof js !== "string") return full;
 
             return `<script${before ?? ""}${after ?? ""} data-inline-src="${resolved}">\n${js}\n<\/script>`;
+        },
+    );
+
+    out = out.replace(
+        /\b(src|poster|href)=(['"])([^'"]+)\2/gi,
+        (full, attribute, quote, target) => {
+            const resolved = resolveRelativePath(htmlPath || "index.html", target);
+            const dataUrl = assetMap.get(resolved);
+            return dataUrl ? `${attribute}=${quote}${dataUrl}${quote}` : full;
         },
     );
 
@@ -130,7 +181,7 @@ export default function WebPreview(props: {
     entries: WorkspaceSyncEntry[];
     title?: string;
 }) {
-    const srcDoc = useMemo(() => buildSrcDoc(props.entries), [props.entries]);
+    const srcDoc = useMemo(() => buildWebPreviewSrcDoc(props.entries), [props.entries]);
 
     return (
         <div className="h-full min-h-0 border-t border-neutral-200 bg-white/80  dark:border-white/10 dark:bg-black/40">

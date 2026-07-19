@@ -4,19 +4,16 @@
       "git-foundations-module-1-start-tracking": {
         "configure-and-initialize-a-repository": {
           "label": "Initialize Your First Repository",
-          "summary": "Turn an ordinary project folder into a Git repository on main, inspect the metadata Git created, and set a repository-only author identity.",
+          "summary": "Create a repository in the correct folder, confirm its initial state, and keep the author identity local to that project.",
           "cards": {
             "sketch0": {
-              "title": "Create the Repository"
+              "title": "Create the Repository in the Right Place"
             },
             "sketch1": {
-              "title": "What Git Added"
+              "title": "Confirm the Initial State"
             },
             "sketch2": {
-              "title": "Set a Local Identity"
-            },
-            "sketch3": {
-              "title": "Ask Git for the First Status"
+              "title": "Set the Repository Identity"
             },
             "quiz": {
               "title": "Practice"
@@ -26,16 +23,16 @@
             "allowReveal": true,
             "try_configure_and_initialize_a_repository_sketch0": {
               "title": "Initialize an Ordinary Folder",
-              "prompt": "The terminal opens inside the prepared `trail-journal/` project folder.\n\nThe `trail-journal/` folder already contains a README but has no history. Initialize Git with `main` as the first branch, and print the current branch.\n\nType each command in the terminal and press Enter.",
-              "hint": "Read the repository state first, then use the Git command that changes only the requested boundary.",
+              "prompt": "You are working in the prepared `trail-journal/` project folder.\n\nThe folder already contains a README but has no history. Initialize Git with `main` as the first branch. This exercise asks for only the initialization step.",
+              "hint": "Choose the initial branch while Git creates the repository metadata.",
               "help": {
-                "concept": "git init creates repository metadata without changing the project files already in the folder.",
-                "hint_1": "Use the exact file or repository named in the task; avoid broad commands that include unrelated work.",
-                "hint_2": "After the action, run the requested inspection command to confirm the final state."
+                "concept": "`git init -b main` creates repository metadata in the current folder and names its first branch in one step.",
+                "hint_1": "The terminal is already inside the project folder, so do not change directories.",
+                "hint_2": "The task asks for one action: initialize this folder with the requested first branch."
               },
               "starterCode": "# Trail Journal\n",
-              "solutionCode": "git init -b main\ngit branch --show-current",
-              "instructions": "The terminal opens inside the prepared `trail-journal/` project folder.\n\nThe `trail-journal/` folder already contains a README but has no history. Initialize Git with `main` as the first branch, and print the current branch.\n\nType each command in the terminal and press Enter.",
+              "solutionCode": "git init -b main",
+              "instructions": "You are working in the prepared `trail-journal/` project folder.\n\nThe folder already contains a README but has no history. Initialize Git with `main` as the first branch. This exercise asks for only the initialization step.",
               "starterFiles": {
                 "zoeskoul_setup_sh": {
                   "content": "#!/usr/bin/env bash\nset -eu\nrm -rf trail-journal\nmkdir -p trail-journal\ncd trail-journal\nprintf %s '# Trail Journal\n' > README.md\ncd ..\n"
@@ -49,31 +46,28 @@
               "terminalExpectations": {
                 "forbiddenCommands": {
                   "0": {
-                    "message": "Do not rewrite shared history in this Git practice task."
+                    "message": "That action can discard or rewrite history. Use the safe, layer-specific workflow taught in this course."
                   }
                 },
                 "requiredCommands": {
                   "0": {
-                    "message": "Run `git init -b main`, then check your answer again."
-                  },
-                  "1": {
-                    "message": "Run `git branch --show-current`, then check your answer again."
+                    "message": "Did you initialize this project folder with `main` as its first branch?"
                   }
                 }
               }
             },
             "try_configure_and_initialize_a_repository_sketch1": {
-              "title": "Read What Git Created",
-              "prompt": "The terminal opens inside the prepared `trail-journal/` project folder.\n\n`trail-journal/` is now a repository. List its `.git` directory, then read `.git/HEAD` to confirm that HEAD points to `main`.\n\nType each command in the terminal and press Enter.",
-              "hint": "Read the repository state first, then use the Git command that changes only the requested boundary.",
+              "title": "Confirm the New Repository",
+              "prompt": "You are working in the prepared `trail-journal/` project folder.\n\nGit has already initialized this folder on `main`. Use the full repository report to confirm three facts: the current branch is `main`, no commits exist yet, and `README.md` is still untracked.",
+              "hint": "Ask Git for the detailed repository report; this step should only inspect the project.",
               "help": {
-                "concept": "The .git directory stores repository metadata, and HEAD identifies the currently checked-out branch reference.",
-                "hint_1": "Use the exact file or repository named in the task; avoid broad commands that include unrelated work.",
-                "hint_2": "After the action, run the requested inspection command to confirm the final state."
+                "concept": "The full status report confirms the branch, whether history exists, and which files are still untracked without changing repository state.",
+                "hint_1": "Look for the branch line and the message explaining that no commits exist yet.",
+                "hint_2": "The same report should list `README.md` under untracked files."
               },
               "starterCode": "# Trail Journal\n",
-              "solutionCode": "ls .git\ncat .git/HEAD",
-              "instructions": "The terminal opens inside the prepared `trail-journal/` project folder.\n\n`trail-journal/` is now a repository. List its `.git` directory, then read `.git/HEAD` to confirm that HEAD points to `main`.\n\nType each command in the terminal and press Enter.",
+              "solutionCode": "git status",
+              "instructions": "You are working in the prepared `trail-journal/` project folder.\n\nGit has already initialized this folder on `main`. Use the full repository report to confirm three facts: the current branch is `main`, no commits exist yet, and `README.md` is still untracked.",
               "starterFiles": {
                 "zoeskoul_setup_sh": {
                   "content": "#!/usr/bin/env bash\nset -eu\nrm -rf trail-journal\nmkdir -p trail-journal\ncd trail-journal\nprintf %s '# Trail Journal\n' > README.md\ncd ..\ngit -C trail-journal init -q -b main\n"
@@ -87,31 +81,28 @@
               "terminalExpectations": {
                 "forbiddenCommands": {
                   "0": {
-                    "message": "Do not rewrite shared history in this Git practice task."
+                    "message": "That action can discard or rewrite history. Use the safe, layer-specific workflow taught in this course."
                   }
                 },
                 "requiredCommands": {
                   "0": {
-                    "message": "Run `ls .git`, then check your answer again."
-                  },
-                  "1": {
-                    "message": "Run `cat .git/HEAD`, then check your answer again."
+                    "message": "Did you ask Git for the full repository report and confirm the branch, empty history, and untracked README?"
                   }
                 }
               }
             },
             "try_configure_and_initialize_a_repository_sketch2": {
               "title": "Set a Repository-Only Identity",
-              "prompt": "The terminal opens inside the prepared `trail-journal/` project folder.\n\nSet the author name to `ZoeSkoul Learner` and the email to `learner@zoeskoul.local` inside `trail-journal/` only. Print both local values afterward.\n\nType each command in the terminal and press Enter.",
-              "hint": "Read the repository state first, then use the Git command that changes only the requested boundary.",
+              "prompt": "You are working in the prepared `trail-journal/` project folder.\n\nSet the author name to `ZoeSkoul Learner` and the email to `learner@zoeskoul.local` inside `trail-journal/` only. Print both local values afterward.",
+              "hint": "Keep the author identity inside this repository rather than changing machine-wide settings.",
               "help": {
                 "concept": "Repository-local identity applies only to this project and does not alter the machine-wide Git configuration.",
-                "hint_1": "Use the exact file or repository named in the task; avoid broad commands that include unrelated work.",
-                "hint_2": "After the action, run the requested inspection command to confirm the final state."
+                "hint_1": "Both the name and email need repository-local values.",
+                "hint_2": "Read the stored values back to catch spelling or scope mistakes."
               },
               "starterCode": "# Trail Journal\n",
               "solutionCode": "git config --local user.name \"ZoeSkoul Learner\"\ngit config --local user.email \"learner@zoeskoul.local\"\ngit config --local --get user.name\ngit config --local --get user.email",
-              "instructions": "The terminal opens inside the prepared `trail-journal/` project folder.\n\nSet the author name to `ZoeSkoul Learner` and the email to `learner@zoeskoul.local` inside `trail-journal/` only. Print both local values afterward.\n\nType each command in the terminal and press Enter.",
+              "instructions": "You are working in the prepared `trail-journal/` project folder.\n\nSet the author name to `ZoeSkoul Learner` and the email to `learner@zoeskoul.local` inside `trail-journal/` only. Print both local values afterward.",
               "starterFiles": {
                 "zoeskoul_setup_sh": {
                   "content": "#!/usr/bin/env bash\nset -eu\nrm -rf trail-journal\nmkdir -p trail-journal\ncd trail-journal\nprintf %s '# Trail Journal\n' > README.md\ncd ..\ngit -C trail-journal init -q -b main\n"
@@ -125,50 +116,15 @@
               "terminalExpectations": {
                 "forbiddenCommands": {
                   "0": {
-                    "message": "Do not rewrite shared history in this Git practice task."
+                    "message": "That action can discard or rewrite history. Use the safe, layer-specific workflow taught in this course."
                   }
                 },
                 "requiredCommands": {
                   "0": {
-                    "message": "Run `git config --local user.name \"ZoeSkoul Learner\"`, then check your answer again."
+                    "message": "Did you save the requested author value for this repository only?"
                   },
                   "1": {
-                    "message": "Run `git config --local user.email \"learner@zoeskoul.local\"`, then check your answer again."
-                  }
-                }
-              }
-            },
-            "try_configure_and_initialize_a_repository_sketch3": {
-              "title": "Ask Git What It Sees",
-              "prompt": "The terminal opens inside the prepared `trail-journal/` project folder.\n\nThe repository and local identity are ready. Use short status to see the untracked `README.md` before staging anything.\n\nType each command in the terminal and press Enter.",
-              "hint": "Read the repository state first, then use the Git command that changes only the requested boundary.",
-              "help": {
-                "concept": "git status --short summarizes the relationship between the working tree and the staging area.",
-                "hint_1": "Use the exact file or repository named in the task; avoid broad commands that include unrelated work.",
-                "hint_2": "After the action, run the requested inspection command to confirm the final state."
-              },
-              "starterCode": "# Trail Journal\n",
-              "solutionCode": "git status --short",
-              "instructions": "The terminal opens inside the prepared `trail-journal/` project folder.\n\nThe repository and local identity are ready. Use short status to see the untracked `README.md` before staging anything.\n\nType each command in the terminal and press Enter.",
-              "starterFiles": {
-                "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf trail-journal\nmkdir -p trail-journal\ncd trail-journal\nprintf %s '# Trail Journal\n' > README.md\ncd ..\ngit -C trail-journal init -q -b main\ngit -C trail-journal config --local user.name \"ZoeSkoul Learner\"\ngit -C trail-journal config --local user.email \"learner@zoeskoul.local\"\n"
-                }
-              },
-              "solutionFiles": {
-                "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf trail-journal\nmkdir -p trail-journal\ncd trail-journal\nprintf %s '# Trail Journal\n' > README.md\ncd ..\ngit -C trail-journal init -q -b main\ngit -C trail-journal config --local user.name \"ZoeSkoul Learner\"\ngit -C trail-journal config --local user.email \"learner@zoeskoul.local\"\n"
-                }
-              },
-              "terminalExpectations": {
-                "forbiddenCommands": {
-                  "0": {
-                    "message": "Do not rewrite shared history in this Git practice task."
-                  }
-                },
-                "requiredCommands": {
-                  "0": {
-                    "message": "Run `git status --short`, then check your answer again."
+                    "message": "Did you save the requested author value for this repository only?"
                   }
                 }
               }
@@ -178,11 +134,11 @@
             "single-choice-1": {
               "title": "Purpose of Version Control",
               "prompt": "What is the primary purpose of version control systems like Git?",
-              "hint": "Think about how version control helps manage changes over time.",
+              "hint": "Focus on what the command or concept observes or changes at this point in the workflow.",
               "help": {
-                "concept": "Version control systems help manage changes to files and coordinate work on those files among multiple people.",
-                "hint_1": "Version control allows you to track changes and collaborate with others.",
-                "hint_2": "It helps prevent data loss and manage project history."
+                "concept": "Turn an ordinary project folder into a Git repository on `main`, inspect the metadata Git created, and keep the author identity local to that repository.",
+                "hint_1": "Remove options that act on a different repository layer than the one named in the question.",
+                "hint_2": "Choose the answer that remains accurate even when other unrelated files exist."
               },
               "options": {
                 "a": "To track changes and collaborate on projects",
@@ -194,11 +150,11 @@
             "single-choice-2": {
               "title": "Repository Initialization",
               "prompt": "What command is used to initialize a new Git repository?",
-              "hint": "This command sets up the .git directory.",
+              "hint": "Focus on what the command or concept observes or changes at this point in the workflow.",
               "help": {
-                "concept": "Initializing a repository is the first step in using Git for version control.",
-                "hint_1": "The command is short and starts with 'git'.",
-                "hint_2": "It creates the necessary metadata for version control."
+                "concept": "Turn an ordinary project folder into a Git repository on `main`, inspect the metadata Git created, and keep the author identity local to that repository.",
+                "hint_1": "Remove options that act on a different repository layer than the one named in the question.",
+                "hint_2": "Choose the answer that remains accurate even when other unrelated files exist."
               },
               "options": {
                 "a": "git init",
@@ -207,45 +163,29 @@
                 "d": "git new"
               }
             },
-            "multi-choice-1": {
-              "title": "Components of a Git Repository",
-              "prompt": "Which of the following are components of a Git repository? Select all that apply.",
-              "hint": "Think about the parts that make up the repository's structure.",
-              "help": {
-                "concept": "A Git repository consists of several components that manage the project's history and configuration.",
-                "hint_1": "Consider what stores the history and configuration of the repository.",
-                "hint_2": "These components are essential for tracking changes and managing the repository."
-              },
-              "options": {
-                "a": ".git directory",
-                "b": "Working tree",
-                "c": "Staging area",
-                "d": "Remote server"
-              }
-            },
             "drag-reorder-1": {
-              "title": "Order of Git Setup Steps",
-              "prompt": "Arrange the steps to set up a new Git repository in the correct order.",
-              "hint": "Start with configuring the identity and end with checking the status.",
+              "title": "Order the First Repository Setup",
+              "prompt": "Arrange the setup steps in an order that can actually work.",
+              "hint": "Start with the state that must exist before the next action can make sense.",
               "help": {
-                "concept": "Setting up a Git repository involves several key steps to ensure it's ready for version control.",
-                "hint_1": "Begin with identity configuration and end with verifying the setup.",
-                "hint_2": "Think about the logical sequence of preparing a repository."
+                "concept": "Turn an ordinary project folder into a Git repository on `main`, inspect the metadata Git created, and keep the author identity local to that repository.",
+                "hint_1": "Track how the project moves from working files to a proposed snapshot and then to history.",
+                "hint_2": "Read the ordered steps as one continuous repository story."
               },
               "tokens": {
-                "t1": "Configure local identity",
-                "t2": "Initialize the repository",
-                "t3": "Check repository status"
+                "t1": "Initialize the project folder as a repository",
+                "t2": "Store the repository-local author identity",
+                "t3": "Inspect the branch and current status"
               }
             },
             "fill-blank-choice-1": {
               "title": "Git Identity Configuration",
               "prompt": "Complete the command to set the local Git user name: `git config --local user.name [blank1]`",
-              "hint": "The name should be enclosed in quotes.",
+              "hint": "Choose the term or symbol that matches the exact state described, not a nearby Git concept.",
               "help": {
-                "concept": "Setting the local user name is crucial for identifying the author of commits.",
-                "hint_1": "The name should match the format used in the example.",
-                "hint_2": "Ensure the name is enclosed in quotes."
+                "concept": "Turn an ordinary project folder into a Git repository on `main`, inspect the metadata Git created, and keep the author identity local to that repository.",
+                "hint_1": "Pay attention to whether the prompt describes an untracked path, a working-tree edit, staged work, or history.",
+                "hint_2": "Read spaces, punctuation, and status columns as meaningful when the question shows Git output."
               },
               "template": "git config --local user.name [blank1]",
               "choices": [
@@ -253,23 +193,6 @@
                 "\"John Doe\"",
                 "\"Jane Smith\"",
                 "\"Git User\""
-              ]
-            },
-            "fill-blank-choice-2": {
-              "title": "Git Email Configuration",
-              "prompt": "Complete the command to set the local Git user email: `git config --local user.email [blank1]`",
-              "hint": "The email should be enclosed in quotes.",
-              "help": {
-                "concept": "Setting the local user email is crucial for identifying the author of commits.",
-                "hint_1": "The email should match the format used in the example.",
-                "hint_2": "Ensure the email is enclosed in quotes."
-              },
-              "template": "git config --local user.email [blank1]",
-              "choices": [
-                "\"learner@zoeskoul.local\"",
-                "\"user@example.com\"",
-                "\"admin@domain.com\"",
-                "\"contact@website.com\""
               ]
             }
           }
@@ -282,20 +205,16 @@
       "git-foundations-module-1-start-tracking": {
         "configure-and-initialize-a-repository": {
           "sketch0": {
-            "title": "Create the Repository",
-            "bodyMarkdown": "A Git project begins as an ordinary folder. Nothing is tracked until you initialize the folder as a repository. Enter the project directory first, then run:\n\n```bash\ngit init -b main\n```\n\nThe command creates Git’s private metadata inside the current folder and names the first branch `main`. It does not upload anything, change your project files, or create a commit.\n\nRead the command from left to right: `git init` creates the repository; `-b main` chooses the initial branch name. The location matters. Running it one directory too high would make the wrong folder the repository."
+            "title": "Create the Repository in the Right Place",
+            "bodyMarkdown": "A Git repository belongs to one project folder. Initialize too high and unrelated files become part of the same project; initialize too low and part of the project is left outside.\n\nOnce the terminal is inside the intended folder, create the repository and name its first branch in one step:\n\n```bash\ngit init -b main\n```\n\nGit adds private metadata without changing the visible project files or creating a commit. This command is taught here once; later projects will reuse it without another introduction."
           },
           "sketch1": {
-            "title": "What Git Added",
-            "bodyMarkdown": "Initialization adds a hidden `.git` directory. Your visible project files remain where they were, while `.git` stores repository configuration, references, and future commit objects.\n\nYou can confirm that Git recognizes the folder without editing its internals:\n\n```bash\ngit rev-parse --is-inside-work-tree\ngit branch --show-current\n```\n\nThe first command prints `true`; the second prints `main`. Treat `.git` as Git-managed data. Looking is safe, but manually changing files inside it can damage the repository."
+            "title": "Confirm the Initial State",
+            "bodyMarkdown": "Initialization creates a repository, but not history. The safest confirmation is Git's full report:\n\n```bash\ngit status\n```\n\nImmediately after initialization, the report identifies `main`, explains that no commits exist yet, and lists project files that are still untracked. It only reads the repository; it does not stage or record anything.\n\nThis is the one full introduction to `git status`. Later lessons will use it as evidence rather than explain it again."
           },
           "sketch2": {
-            "title": "Ask Git for the First Status",
-            "bodyMarkdown": "A new repository usually contains project files that Git has not started tracking. Ask Git to describe the situation:\n\n```bash\ngit status --short\n```\n\nSuppose the folder contains `route-notes.txt`. Git prints:\n\n```text\n?? route-notes.txt\n```\n\nThe two question marks mean the file is untracked. Git can see it in the working folder, but no snapshot contains it yet. Status is a reading command: it tells you what Git knows before you decide what to stage or commit."
-          },
-          "sketch3": {
-            "title": "Set a Local Identity",
-            "bodyMarkdown": "Commits record an author name and email. In a learning workspace, keep that identity inside the repository instead of changing the entire machine:\n\n```bash\ngit config --local user.name \"Avery Chen\"\ngit config --local user.email \"avery@example.test\"\n```\n\nThe first line stores the author name. The second stores the matching email. Because both commands use `--local`, the values apply only to the current repository.\n\nIdentity configuration does not create a commit. It prepares Git to attach clear authorship when you create one later."
+            "title": "Set the Repository Identity",
+            "bodyMarkdown": "Every commit records an author name and email. In a learning workspace, keep those values inside the current repository:\n\n```bash\ngit config --local user.name \"ZoeSkoul Learner\"\ngit config --local user.email \"learner@zoeskoul.local\"\n```\n\nRead the values back with `git config --local --get ...` before the first commit. The `--local` scope protects machine-wide settings and makes the project self-contained."
           }
         }
       }

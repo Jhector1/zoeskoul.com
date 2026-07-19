@@ -55,8 +55,8 @@ describe("fsTree path mapping", () => {
         expect(
             exportProjectFiles(nodes).sort((a, b) => a.path.localeCompare(b.path)),
         ).toEqual([
-            { path: "src/dem.txt", content: "demo" },
-            { path: "src/main.py", content: "print('main')" },
+            { kind: "file", path: "src/dem.txt", content: "demo" },
+            { kind: "file", path: "src/main.py", content: "print('main')" },
         ]);
 
         expect(exportWorkspaceEntries(nodes)).toEqual([
@@ -87,8 +87,8 @@ describe("fsTree path mapping", () => {
                 a.path.localeCompare(b.path),
             ),
         ).toEqual([
-            { path: "dem.txt", content: "demo" },
-            { path: "main.py", content: "print('main')" },
+            { kind: "file", path: "dem.txt", content: "demo" },
+            { kind: "file", path: "main.py", content: "print('main')" },
         ]);
     });
 
@@ -101,7 +101,57 @@ describe("fsTree path mapping", () => {
 
         expect(relativeProjectPathOf(nodes, "file:main")).toBe("src/main.py");
         expect(exportProjectFiles(nodes)).toEqual([
-            { path: "src/main.py", content: "print('main')" },
+            { kind: "file", path: "src/main.py", content: "print('main')" },
         ]);
     });
+
+    it("exports binary files without converting their bytes to text", () => {
+        const nodes: FSNode[] = [
+            folderNode("folder:assets", "assets", null),
+            {
+                id: "file:image",
+                kind: "file",
+                name: "pixel.png",
+                parentId: "folder:assets",
+                content: "",
+                binary: {
+                    encoding: "base64",
+                    data: "AAECAw==",
+                    mimeType: "image/png",
+                    sizeBytes: 4,
+                    checksum:
+                        "sha256:054edec1d0211f624fed0cbca9d4f9400b0e491c43742af2c5b0abebf0c990d8",
+                },
+                createdAt: 0,
+                updatedAt: 0,
+            },
+        ];
+
+        expect(exportProjectFiles(nodes)).toEqual([
+            {
+                kind: "file",
+                path: "assets/pixel.png",
+                encoding: "base64",
+                data: "AAECAw==",
+                mimeType: "image/png",
+                sizeBytes: 4,
+                checksum:
+                    "sha256:054edec1d0211f624fed0cbca9d4f9400b0e491c43742af2c5b0abebf0c990d8",
+            },
+        ]);
+        expect(exportWorkspaceEntries(nodes)).toEqual([
+            { kind: "directory", path: "assets" },
+            {
+                kind: "file",
+                path: "assets/pixel.png",
+                encoding: "base64",
+                data: "AAECAw==",
+                mimeType: "image/png",
+                sizeBytes: 4,
+                checksum:
+                    "sha256:054edec1d0211f624fed0cbca9d4f9400b0e491c43742af2c5b0abebf0c990d8",
+            },
+        ]);
+    });
+
 });

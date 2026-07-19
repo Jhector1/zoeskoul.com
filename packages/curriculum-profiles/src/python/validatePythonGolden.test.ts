@@ -1,5 +1,9 @@
 import { afterEach, describe, expect, it } from "vitest";
-import { clearCodeRunner, setCodeRunner } from "@zoeskoul/curriculum-runtime";
+import {
+    clearCodeRunner,
+    isTextRunCodeFile,
+    setCodeRunner,
+} from "@zoeskoul/curriculum-runtime";
 import { validatePythonGolden } from "./validatePythonGolden.js";
 
 describe("validatePythonGolden", () => {
@@ -201,7 +205,12 @@ describe("validatePythonGolden", () => {
             ok: true,
             stdout:
                 Array.isArray(files) &&
-                files.some((file) => file.path === "names.txt" && file.content.includes("Ada"))
+                files.some(
+                    (file) =>
+                        isTextRunCodeFile(file) &&
+                        file.path === "names.txt" &&
+                        file.content.includes("Ada"),
+                )
                     ? "Ada\n"
                     : "",
             stderr: "",

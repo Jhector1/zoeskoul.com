@@ -1,5 +1,9 @@
 import type { WorkspaceLanguage, SqlDialect } from "@/lib/practice/types";
 import type { InteractiveLanguage } from "@/lib/code/types/common";
+import type {
+    FileEntry as ContractFileEntry,
+    WorkspaceSyncEntry as ContractWorkspaceSyncEntry,
+} from "@zoeskoul/code-contracts";
 
 export type SqlScalar = string | number | boolean | null;
 
@@ -8,20 +12,8 @@ export type SqlColumn = {
     type?: string | null;
 };
 
-export type FileEntry = {
-    path: string;
-    content: string;
-};
-export type WorkspaceSyncEntry =
-    | {
-    kind?: "file";
-    path: string;
-    content: string;
-}
-    | {
-    kind: "directory";
-    path: string;
-};
+export type FileEntry = ContractFileEntry;
+export type WorkspaceSyncEntry = ContractWorkspaceSyncEntry;
 export type RunLimits = {
     cpu_time_limit?: number;
     cpu_extra_time?: number;
@@ -54,7 +46,7 @@ export type CodeRunReq =
     code?: string;
     entry: string;
     files:
-        | Array<{ path: string; content: string }>
+        | FileEntry[]
         | Record<string, string>;
     stdin?: string;
     limits?: RunLimits;

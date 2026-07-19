@@ -4,7 +4,7 @@
   "moduleSlug": "git-foundations-module-1-start-tracking",
   "sectionSlug": "git-foundations-section-1-repository-basics",
   "prefix": "git_foundations_module_1",
-  "minutes": 22,
+  "minutes": 18,
   "runtimeDefaults": {
     "kind": "code",
     "language": "bash",
@@ -86,25 +86,6 @@
       }
     },
     {
-      "id": "sketch3",
-      "kind": "sketch",
-      "titleKey": "topics.git.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.cards.sketch3.title",
-      "sketchId": "sketch3",
-      "height": 420,
-      "tryIt": {
-        "id": "try-configure-and-initialize-a-repository-sketch3",
-        "titleKey": "topics.git.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch3.title",
-        "promptKey": "topics.git.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch3.prompt",
-        "exerciseKey": "try-configure-and-initialize-a-repository-sketch3",
-        "difficulty": "easy",
-        "preferKind": "code_input",
-        "seedPolicy": "global",
-        "required": true,
-        "allowReveal": true,
-        "maxAttempts": null
-      }
-    },
-    {
       "id": "quiz",
       "kind": "quiz",
       "titleKey": "topics.git.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.cards.quiz.title",
@@ -112,7 +93,7 @@
         "difficulty": "easy",
         "n": 4,
         "min": 4,
-        "max": 6,
+        "max": 4,
         "selectionMode": "random",
         "allowReveal": true,
         "preferKind": null,
@@ -138,12 +119,6 @@
       "archetype": "paragraph",
       "titleKey": "sketches.git.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.sketch2.title",
       "bodyKey": "sketches.git.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.sketch2.bodyMarkdown"
-    },
-    {
-      "id": "sketch3",
-      "archetype": "paragraph",
-      "titleKey": "sketches.git.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.sketch3.title",
-      "bodyKey": "sketches.git.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.sketch3.bodyMarkdown"
     }
   ],
   "exercises": [
@@ -182,27 +157,6 @@
       }
     },
     {
-      "id": "multi-choice-1",
-      "kind": "multi_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.git.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.practice.multi-choice-1",
-      "optionIds": [
-        "a",
-        "b",
-        "c",
-        "d"
-      ],
-      "expected": {
-        "kind": "multi_choice",
-        "optionIds": [
-          "a",
-          "b",
-          "c"
-        ]
-      }
-    },
-    {
       "id": "drag-reorder-1",
       "kind": "drag_reorder",
       "purpose": "quiz",
@@ -232,18 +186,6 @@
       "expected": {
         "kind": "fill_blank_choice",
         "value": "\"ZoeSkoul Learner\""
-      }
-    },
-    {
-      "id": "fill-blank-choice-2",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.git.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.practice.fill-blank-choice-2",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "\"learner@zoeskoul.local\""
       }
     },
     {
@@ -509,96 +451,13 @@
         "mode": "terminal_workspace",
         "instructions": "@:topics.git.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch2.instructions"
       }
-    },
-    {
-      "id": "try-configure-and-initialize-a-repository-sketch3",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.git.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch3",
-      "language": "bash",
-      "starterCode": "@:topics.git.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch3.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.sh",
-          "content": "@:topics.git.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch3.starterCode",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        },
-        {
-          "path": ".zoeskoul/setup.sh",
-          "content": "@:topics.git.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch3.starterFiles.zoeskoul_setup_sh.content",
-          "language": "bash",
-          "readOnly": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "main.sh",
-          "content": "bash .zoeskoul/setup.sh\ncd project_delta\ngit config --local user.name \"ZoeSkoul Learner\"\ngit config --local user.email \"learner@zoeskoul.local\"\n",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"project_delta\"\nmkdir -p -- \"project_delta\"\ngit -C \"project_delta\" init -q -b main\n",
-          "language": "bash",
-          "readOnly": true
-        }
-      ],
-      "terminalExpectations": {
-        "requiredCommands": [
-          {
-            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
-          },
-          {
-            "pattern": "^git\\s+config\\s+--local\\s+user\\.name\\s+\"ZoeSkoul\\s+Learner\"$"
-          },
-          {
-            "pattern": "^git\\s+config\\s+--local\\s+user\\.email\\s+\"learner@zoeskoul\\.local\"$"
-          }
-        ],
-        "forbiddenCommands": [
-          {
-            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
-            "message": "@:topics.git.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch3.terminalExpectations.forbiddenCommands.0.message"
-          }
-        ]
-      },
-      "hiddenShellCheck": {
-        "script": "set -eu\n(\ntest \"$(git -C project_delta config --local user.name)\" = \"ZoeSkoul Learner\" && test \"$(git -C project_delta config --local user.email)\" = \"learner@zoeskoul.local\"\n)\n(\nset -eu\nrepo='project_delta'\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ncommand -v git >/dev/null 2>&1 || fail \"Git is not available in this workspace.\"\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail 'Initialize a Git repository in project_delta.'\nactual_branch=$(git -C \"$repo\" branch --show-current 2>/dev/null || true)\n[ \"$actual_branch\" = 'main' ] || fail 'Switch to the main branch.'\n)",
-        "timeoutMs": 15000
-      },
-      "workspace": {
-        "language": "bash",
-        "entryFilePath": "main.sh",
-        "starterCode": "@:topics.git.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch3.starterCode",
-        "starterFiles": [
-          {
-            "path": "main.sh",
-            "content": "@:topics.git.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch3.starterCode",
-            "language": "bash",
-            "isEntry": true,
-            "entry": true,
-            "readOnly": false
-          },
-          {
-            "path": ".zoeskoul/setup.sh",
-            "content": "@:topics.git.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch3.starterFiles.zoeskoul_setup_sh.content",
-            "language": "bash",
-            "readOnly": true
-          }
-        ]
-      },
-      "showExpectedExample": false,
-      "recipe": {
-        "type": "shell_task",
-        "mode": "terminal_workspace",
-        "instructions": "@:topics.git.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch3.instructions"
-      }
     }
-  ]
+  ],
+  "topicMeta": {
+    "learningGoals": [
+      "Initialize the current project folder with main as its first branch",
+      "Use the full status report to confirm a new repository state",
+      "Set and verify repository-local author identity"
+    ]
+  }
 }

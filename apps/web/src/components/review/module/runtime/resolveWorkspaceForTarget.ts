@@ -13,6 +13,9 @@ import {
   isUsableStarterCode,
   mergeStarterFileSources,
   pickEntryFileFromStarterFilesValue,
+  starterFileNodePayload,
+  starterFileSemanticValue,
+  type NormalizedStarterFile,
 } from "@/components/review/module/runtime/starterContent";
 import { languagesCompatible } from "@/components/review/module/utils";
 
@@ -27,8 +30,8 @@ export type ManifestWorkspaceDefinition = {
   seedSource: "starter" | "default" | "none";
   stdin: string;
   starterCode: string;
-  starterFiles: Array<{ path: string; content: string }>;
-  fixtureFiles: Array<{ path: string; content: string }>;
+  starterFiles: NormalizedStarterFile[];
+  fixtureFiles: NormalizedStarterFile[];
   manifestWorkspace: WorkspaceStateV2 | null;
   starterHash: string;
 };
@@ -157,7 +160,7 @@ function normalizePath(input: unknown, fallback: string) {
 function mergeNormalizedStarterFiles(
   sources: Array<unknown>,
   fallbackEntryFile: string,
-): Array<{ path: string; content: string }> {
+): NormalizedStarterFile[] {
   return mergeStarterFileSources(sources, fallbackEntryFile);
 }
 
@@ -292,7 +295,7 @@ function stableStarterNodeId(kind: "file" | "folder", path: string): NodeId {
 function buildWorkspaceFromFiles(args: {
   language: WorkspaceLanguage;
   entryFile: string;
-  files: Array<{ path: string; content: string }>;
+  files: NormalizedStarterFile[];
   stdin: string;
 }): WorkspaceStateV2 {
   const now = 0;
@@ -350,7 +353,7 @@ function buildWorkspaceFromFiles(args: {
       kind: "file",
       name,
       parentId,
-      content: file.content ?? "",
+      ...starterFileNodePayload(file),
       createdAt: now,
       updatedAt: now,
     };
@@ -511,7 +514,7 @@ function ensureWorkspaceFolder(args: {
 
 function mergeMissingFilesIntoWorkspace(args: {
   base: WorkspaceStateV2;
-  fixtureFiles: Array<{ path: string; content: string }>;
+  fixtureFiles: NormalizedStarterFile[];
 }): WorkspaceStateV2 {
   if (args.fixtureFiles.length === 0) {
     return cloneWorkspace(args.base);
@@ -536,7 +539,7 @@ function mergeMissingFilesIntoWorkspace(args: {
       kind: "file",
       name,
       parentId,
-      content: file.content ?? "",
+      ...starterFileNodePayload(file),
       createdAt: 0,
       updatedAt: 0,
     });
@@ -550,7 +553,7 @@ function mergeMissingFilesIntoWorkspace(args: {
 
 function workspaceFileEntries(
   workspace: WorkspaceStateV2 | null | undefined,
-): Array<{ path: string; content: string }> {
+): NormalizedStarterFile[] {
   if (!isWorkspace(workspace)) return [];
 
   return workspace.nodes
@@ -563,7 +566,8 @@ function workspaceFileEntries(
 
       return {
         path,
-        content: String(node.content ?? ""),
+        content: node.binary ? "" : String(node.content ?? ""),
+        ...(node.binary ? { binary: node.binary } : {}),
       };
     })
     .filter((file) => file.path.trim().length > 0);
@@ -729,7 +733,7 @@ function sanitizeLegacyWorkspaceArtifacts(args: {
 
 function manifestFilesForMissingMerge(
   manifest: ManifestWorkspaceDefinition,
-): Array<{ path: string; content: string }> {
+): NormalizedStarterFile[] {
   /**
    * Saved/user workspaces are authoritative. Only runtime fixture files
    * should be merged back into a saved workspace. Do not merge the full
@@ -754,8 +758,9 @@ function deriveEntryCode(workspace: WorkspaceStateV2 | null | undefined) {
 
   const entryId = workspace.entryFileId || workspace.activeFileId;
   const entryNode =
-    workspace.nodes.find((node) => node.kind === "file" && node.id === entryId) ??
-    workspace.nodes.find((node) => node.kind === "file");
+    workspace.nodes.find(
+      (node) => node.kind === "file" && node.id === entryId && !node.binary,
+    ) ?? workspace.nodes.find((node) => node.kind === "file" && !node.binary);
 
   return entryNode && entryNode.kind === "file"
     ? String(entryNode.content ?? "")
@@ -773,7 +778,8 @@ function workspaceHasNonBlankFile(workspace: WorkspaceStateV2 | null | undefined
 
   return workspace.nodes.some((node: any) => {
     if (node?.kind !== "file") return false;
-    return String(node.content ?? "").trim().length > 0;
+    return node.binary?.encoding === "base64" ||
+      String(node.content ?? "").trim().length > 0;
   });
 }
 
@@ -797,13 +803,17 @@ function isCollapsedMultiFileStarterSnapshot(args: {
   const manifestByPath = new Map(
     manifestFiles.map((file) => [
       file.path,
-      normalizeWorkspaceFileContent(file.content),
+      file.binary
+        ? starterFileSemanticValue(file)
+        : `text:${normalizeWorkspaceFileContent(file.content)}`,
     ]),
   );
   const savedByPath = new Map(
     savedFiles.map((file) => [
       file.path,
-      normalizeWorkspaceFileContent(file.content),
+      file.binary
+        ? starterFileSemanticValue(file)
+        : `text:${normalizeWorkspaceFileContent(file.content)}`,
     ]),
   );
 
@@ -869,6 +879,7 @@ function workspaceHasMeaningfulSavedContent(workspace: WorkspaceStateV2 | null |
 
   return workspace.nodes.some((node: any) => {
     if (node?.kind !== "file") return false;
+    if (node.binary?.encoding === "base64") return true;
 
     const content = String(node.content ?? "").trim();
     if (!content) return false;

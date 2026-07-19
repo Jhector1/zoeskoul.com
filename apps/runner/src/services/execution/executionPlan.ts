@@ -60,8 +60,11 @@ function getJavaMainClass(files: FileEntry[], entryFile: string): string {
     const entry = assertStrictRelPath(entryFile);
     const simpleName = entry.split("/").pop()?.replace(/\.java$/, "") || "Main";
 
+    const entryFileNode = files.find((file) => normalizeRelPath(file.path) === entry);
     const source =
-        files.find((f) => normalizeRelPath(f.path) === entry)?.content ?? "";
+        entryFileNode && (entryFileNode as any).encoding !== "base64"
+            ? String((entryFileNode as any).content ?? "")
+            : "";
 
     const pkgMatch = source.match(
         /^\s*package\s+([A-Za-z_]\w*(?:\.[A-Za-z_]\w*)*)\s*;/m,

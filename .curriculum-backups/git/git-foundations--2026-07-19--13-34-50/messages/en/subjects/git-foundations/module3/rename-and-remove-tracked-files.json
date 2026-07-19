@@ -1,0 +1,308 @@
+{
+  "topics": {
+    "git-foundations": {
+      "git-foundations-module-3-manage-tracked-files": {
+        "rename-and-remove-tracked-files": {
+          "label": "Rename and Remove Tracked Files",
+          "summary": "Use Git-aware structural operations, review the staged paths, and record a cleanup without losing earlier versions.",
+          "cards": {
+            "sketch0": {
+              "title": "Rename a Path Through Git"
+            },
+            "sketch1": {
+              "title": "Remove a Path Without Erasing History"
+            },
+            "sketch2": {
+              "title": "Review the New Repository Shape"
+            },
+            "sketch3": {
+              "title": "Describe the Cleanup as a Result"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_rename_and_remove_tracked_files_sketch0": {
+              "title": "Rename a Tracked Guide",
+              "prompt": "You are working in the prepared `release-kit/` repository.\n\nRename `docs/guide-draft.md` to `docs/volunteer-guide.md` with Git, then inspect short status.",
+              "hint": "Move the tracked path through Git so the structural change is staged.",
+              "help": {
+                "concept": "git mv changes the working tree path and stages the removal/addition pair as one intentional rename.",
+                "hint_1": "Confirm that the new path exists and the old path no longer appears as tracked.",
+                "hint_2": "Review the staged name-status summary before committing."
+              },
+              "starterCode": "# Draft Guide\n",
+              "solutionCode": "git mv docs/guide-draft.md docs/volunteer-guide.md\ngit status --short",
+              "starterFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-kit\nmkdir -p release-kit\ngit -C release-kit init -q -b main\ngit -C release-kit config --local user.name \"ZoeSkoul Learner\"\ngit -C release-kit config --local user.email \"learner@zoeskoul.local\"\ncd release-kit\nmkdir -p docs\nprintf %s '# Draft Guide\n' > docs/guide-draft.md\ncd ..\ncd release-kit\nmkdir -p docs\nprintf %s 'Old checklist\n' > docs/old-checklist.md\ncd ..\ngit -C release-kit add -A\ngit -C release-kit commit -q -m 'Add project baseline'\n"
+                }
+              },
+              "solutionFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-kit\nmkdir -p release-kit\ngit -C release-kit init -q -b main\ngit -C release-kit config --local user.name \"ZoeSkoul Learner\"\ngit -C release-kit config --local user.email \"learner@zoeskoul.local\"\ncd release-kit\nmkdir -p docs\nprintf %s '# Draft Guide\n' > docs/guide-draft.md\ncd ..\ncd release-kit\nmkdir -p docs\nprintf %s 'Old checklist\n' > docs/old-checklist.md\ncd ..\ngit -C release-kit add -A\ngit -C release-kit commit -q -m 'Add project baseline'\n"
+                }
+              },
+              "instructions": "You are working in the prepared `release-kit/` repository.\n\nRename `docs/guide-draft.md` to `docs/volunteer-guide.md` with Git, then inspect short status.",
+              "terminalExpectations": {
+                "forbiddenCommands": {
+                  "0": {
+                    "message": "That action can discard or rewrite history. Use the safe, layer-specific workflow taught in this course."
+                  }
+                },
+                "requiredCommands": {
+                  "0": {
+                    "message": "Did you rename the tracked path through Git and verify the staged structural change?"
+                  },
+                  "1": {
+                    "message": "Did you use the compact status view and read the entry for `docs/guide-draft.md`?"
+                  }
+                }
+              }
+            },
+            "try_rename_and_remove_tracked_files_sketch1": {
+              "title": "Remove an Obsolete Checklist",
+              "prompt": "You are working in the prepared `release-kit/` repository.\n\nRemove `docs/old-checklist.md` with Git and verify that the deletion is staged.",
+              "hint": "Remove the obsolete tracked path through Git so the deletion is staged.",
+              "help": {
+                "concept": "git rm removes a tracked file from the working tree and stages that deletion for the next commit.",
+                "hint_1": "Earlier commits will still preserve the old file.",
+                "hint_2": "Verify the deletion alongside any related rename before recording the cleanup."
+              },
+              "starterCode": "# Guide\n",
+              "solutionCode": "git rm docs/old-checklist.md\ngit status --short",
+              "starterFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-kit\nmkdir -p release-kit\ngit -C release-kit init -q -b main\ngit -C release-kit config --local user.name \"ZoeSkoul Learner\"\ngit -C release-kit config --local user.email \"learner@zoeskoul.local\"\ncd release-kit\nmkdir -p docs\nprintf %s '# Guide\n' > docs/guide.md\ncd ..\ncd release-kit\nmkdir -p docs\nprintf %s 'Old checklist\n' > docs/old-checklist.md\ncd ..\ngit -C release-kit add -A\ngit -C release-kit commit -q -m 'Add project baseline'\n"
+                }
+              },
+              "solutionFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-kit\nmkdir -p release-kit\ngit -C release-kit init -q -b main\ngit -C release-kit config --local user.name \"ZoeSkoul Learner\"\ngit -C release-kit config --local user.email \"learner@zoeskoul.local\"\ncd release-kit\nmkdir -p docs\nprintf %s '# Guide\n' > docs/guide.md\ncd ..\ncd release-kit\nmkdir -p docs\nprintf %s 'Old checklist\n' > docs/old-checklist.md\ncd ..\ngit -C release-kit add -A\ngit -C release-kit commit -q -m 'Add project baseline'\n"
+                }
+              },
+              "instructions": "You are working in the prepared `release-kit/` repository.\n\nRemove `docs/old-checklist.md` with Git and verify that the deletion is staged.",
+              "terminalExpectations": {
+                "forbiddenCommands": {
+                  "0": {
+                    "message": "That action can discard or rewrite history. Use the safe, layer-specific workflow taught in this course."
+                  }
+                },
+                "requiredCommands": {
+                  "0": {
+                    "message": "Did you remove the obsolete tracked path through Git and verify the staged deletion?"
+                  },
+                  "1": {
+                    "message": "Did you use the compact status view and read the entry for `docs/old-checklist.md`?"
+                  }
+                }
+              }
+            },
+            "try_rename_and_remove_tracked_files_sketch2": {
+              "title": "Review a Rename and Removal Together",
+              "prompt": "You are working in the prepared `release-kit/` repository.\n\nA guide rename and obsolete-file removal are already staged. Use name-status output to review both changes before committing.",
+              "hint": "Review the staged structural summary.",
+              "help": {
+                "concept": "A staged name-status view makes structural changes visible before they become history.",
+                "hint_1": "Look for the old path, new path, and any deletion named in the task.",
+                "hint_2": "No unrelated path should appear in the staged cleanup."
+              },
+              "starterCode": "# Draft Guide\n",
+              "solutionCode": "git diff --staged --name-status\ngit status --short",
+              "starterFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-kit\nmkdir -p release-kit\ngit -C release-kit init -q -b main\ngit -C release-kit config --local user.name \"ZoeSkoul Learner\"\ngit -C release-kit config --local user.email \"learner@zoeskoul.local\"\ncd release-kit\nmkdir -p docs\nprintf %s '# Draft Guide\n' > docs/guide-draft.md\ncd ..\ncd release-kit\nmkdir -p docs\nprintf %s 'Old checklist\n' > docs/old-checklist.md\ncd ..\ngit -C release-kit add -A\ngit -C release-kit commit -q -m 'Add project baseline'\ngit -C release-kit mv docs/guide-draft.md docs/volunteer-guide.md\ngit -C release-kit rm -q docs/old-checklist.md\n"
+                }
+              },
+              "solutionFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-kit\nmkdir -p release-kit\ngit -C release-kit init -q -b main\ngit -C release-kit config --local user.name \"ZoeSkoul Learner\"\ngit -C release-kit config --local user.email \"learner@zoeskoul.local\"\ncd release-kit\nmkdir -p docs\nprintf %s '# Draft Guide\n' > docs/guide-draft.md\ncd ..\ncd release-kit\nmkdir -p docs\nprintf %s 'Old checklist\n' > docs/old-checklist.md\ncd ..\ngit -C release-kit add -A\ngit -C release-kit commit -q -m 'Add project baseline'\ngit -C release-kit mv docs/guide-draft.md docs/volunteer-guide.md\ngit -C release-kit rm -q docs/old-checklist.md\n"
+                }
+              },
+              "instructions": "You are working in the prepared `release-kit/` repository.\n\nA guide rename and obsolete-file removal are already staged. Use name-status output to review both changes before committing.",
+              "terminalExpectations": {
+                "forbiddenCommands": {
+                  "0": {
+                    "message": "That action can discard or rewrite history. Use the safe, layer-specific workflow taught in this course."
+                  }
+                },
+                "requiredCommands": {
+                  "0": {
+                    "message": "Did you review the staged name-and-status summary so every rename or deletion is visible?"
+                  },
+                  "1": {
+                    "message": "Did you use the compact status view and read the entry for `release-kit/`?"
+                  }
+                }
+              }
+            },
+            "try_rename_and_remove_tracked_files_sketch3": {
+              "title": "Commit the File Cleanup",
+              "prompt": "You are working in the prepared `release-kit/` repository.\n\nThe rename and removal are staged. Commit them as `Organize release documentation`, then verify the tracked files and clean state.",
+              "hint": "Record only the staged snapshot and use the message requested by the scenario.",
+              "help": {
+                "concept": "A focused cleanup commit records the project’s new file structure without rewriting earlier snapshots.",
+                "hint_1": "The message should describe the project result, not the commands you used.",
+                "hint_2": "After recording it, inspect history and any work that remains."
+              },
+              "starterCode": "# Draft Guide\n",
+              "solutionCode": "git commit -m \"Organize release documentation\"\ngit ls-files\ngit status --short",
+              "starterFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-kit\nmkdir -p release-kit\ngit -C release-kit init -q -b main\ngit -C release-kit config --local user.name \"ZoeSkoul Learner\"\ngit -C release-kit config --local user.email \"learner@zoeskoul.local\"\ncd release-kit\nmkdir -p docs\nprintf %s '# Draft Guide\n' > docs/guide-draft.md\ncd ..\ncd release-kit\nmkdir -p docs\nprintf %s 'Old checklist\n' > docs/old-checklist.md\ncd ..\ngit -C release-kit add -A\ngit -C release-kit commit -q -m 'Add project baseline'\ngit -C release-kit mv docs/guide-draft.md docs/volunteer-guide.md\ngit -C release-kit rm -q docs/old-checklist.md\n"
+                }
+              },
+              "solutionFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-kit\nmkdir -p release-kit\ngit -C release-kit init -q -b main\ngit -C release-kit config --local user.name \"ZoeSkoul Learner\"\ngit -C release-kit config --local user.email \"learner@zoeskoul.local\"\ncd release-kit\nmkdir -p docs\nprintf %s '# Draft Guide\n' > docs/guide-draft.md\ncd ..\ncd release-kit\nmkdir -p docs\nprintf %s 'Old checklist\n' > docs/old-checklist.md\ncd ..\ngit -C release-kit add -A\ngit -C release-kit commit -q -m 'Add project baseline'\ngit -C release-kit mv docs/guide-draft.md docs/volunteer-guide.md\ngit -C release-kit rm -q docs/old-checklist.md\n"
+                }
+              },
+              "instructions": "You are working in the prepared `release-kit/` repository.\n\nThe rename and removal are staged. Commit them as `Organize release documentation`, then verify the tracked files and clean state.",
+              "terminalExpectations": {
+                "forbiddenCommands": {
+                  "0": {
+                    "message": "That action can discard or rewrite history. Use the safe, layer-specific workflow taught in this course."
+                  }
+                },
+                "requiredCommands": {
+                  "0": {
+                    "message": "Did you record the staged snapshot with the message named in the task?"
+                  },
+                  "1": {
+                    "message": "Did you inspect the tracked path list and compare it with the requested final repository shape?"
+                  },
+                  "2": {
+                    "message": "Did you use the compact status view to confirm that no unfinished change remains?"
+                  }
+                }
+              }
+            }
+          },
+          "practice": {
+            "single-choice-1": {
+              "title": "Purpose of git mv",
+              "prompt": "What is the primary purpose of the `git mv` command?",
+              "hint": "Focus on what the command or concept observes or changes at this point in the workflow.",
+              "help": {
+                "concept": "Use Git-aware structural operations, review the staged paths, and record a cleanup without losing earlier versions.",
+                "hint_1": "Remove options that act on a different repository layer than the one named in the question.",
+                "hint_2": "Choose the answer that remains accurate even when other unrelated files exist."
+              },
+              "options": {
+                "a": "To move a file without tracking",
+                "b": "To rename a file and stage the change",
+                "c": "To delete a file",
+                "d": "To create a new file"
+              }
+            },
+            "single-choice-2": {
+              "title": "Effect of git rm",
+              "prompt": "What happens when you use the `git rm` command?",
+              "hint": "Focus on what the command or concept observes or changes at this point in the workflow.",
+              "help": {
+                "concept": "Use Git-aware structural operations, review the staged paths, and record a cleanup without losing earlier versions.",
+                "hint_1": "Remove options that act on a different repository layer than the one named in the question.",
+                "hint_2": "Choose the answer that remains accurate even when other unrelated files exist."
+              },
+              "options": {
+                "a": "The file is moved to a new location",
+                "b": "The file is removed from the working directory and staged for deletion",
+                "c": "The file is renamed",
+                "d": "The file is ignored"
+              }
+            },
+            "multi-choice-1": {
+              "title": "Commands to Verify Staged Changes",
+              "prompt": "Which commands can you use to verify staged changes before committing?",
+              "hint": "Judge each option independently; choose only the statements that stay true in this exact repository state.",
+              "help": {
+                "concept": "Use Git-aware structural operations, review the staged paths, and record a cleanup without losing earlier versions.",
+                "hint_1": "A partly true option is still wrong if it adds an effect Git does not guarantee.",
+                "hint_2": "Use the layer named in the prompt—working tree, staging area, or history—to test each choice."
+              },
+              "options": {
+                "a": "git status",
+                "b": "git diff",
+                "c": "git diff --staged",
+                "d": "git log"
+              }
+            },
+            "drag-reorder-1": {
+              "title": "Steps to Rename and Commit a File",
+              "prompt": "Arrange the steps to rename a file and commit the change using Git.",
+              "hint": "Start with the state that must exist before the next action can make sense.",
+              "help": {
+                "concept": "Use Git-aware structural operations, review the staged paths, and record a cleanup without losing earlier versions.",
+                "hint_1": "Track how the project moves from working files to a proposed snapshot and then to history.",
+                "hint_2": "Read the ordered steps as one continuous repository story."
+              },
+              "tokens": {
+                "t1": "Use git mv to rename the file",
+                "t2": "Check the status with git status",
+                "t3": "Commit the change with git commit"
+              }
+            },
+            "fill-blank-choice-1": {
+              "title": "Command for Renaming a File",
+              "prompt": "Complete the command to rename `file1.txt` to `file2.txt` using Git.",
+              "hint": "Choose the term or symbol that matches the exact state described, not a nearby Git concept.",
+              "help": {
+                "concept": "Use Git-aware structural operations, review the staged paths, and record a cleanup without losing earlier versions.",
+                "hint_1": "Pay attention to whether the prompt describes an untracked path, a working-tree edit, staged work, or history.",
+                "hint_2": "Read spaces, punctuation, and status columns as meaningful when the question shows Git output."
+              },
+              "template": "git mv [blank1] file2.txt",
+              "choices": [
+                "file1.txt",
+                "file3.txt",
+                "file4.txt"
+              ]
+            },
+            "fill-blank-choice-2": {
+              "title": "Command for Removing a File",
+              "prompt": "Complete the command to remove `old_file.txt` using Git.",
+              "hint": "Choose the term or symbol that matches the exact state described, not a nearby Git concept.",
+              "help": {
+                "concept": "Use Git-aware structural operations, review the staged paths, and record a cleanup without losing earlier versions.",
+                "hint_1": "Pay attention to whether the prompt describes an untracked path, a working-tree edit, staged work, or history.",
+                "hint_2": "Read spaces, punctuation, and status columns as meaningful when the question shows Git output."
+              },
+              "template": "git rm [blank1]",
+              "choices": [
+                "old_file.txt",
+                "new_file.txt",
+                "temp_file.txt"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "git-foundations": {
+      "git-foundations-module-3-manage-tracked-files": {
+        "rename-and-remove-tracked-files": {
+          "sketch0": {
+            "title": "Rename a Path Through Git",
+            "bodyMarkdown": "A tracked file can move without losing its story. A Git-aware rename updates the working tree and stages the old-path/new-path relationship in one step.\n\nGit ultimately detects renames by comparing content, so a staged summary may show a similarity percentage rather than a permanent “rename object.” Keeping the content recognizable makes that relationship clear.\n\nAlways inspect both the new path and the disappearance of the old one before committing."
+          },
+          "sketch1": {
+            "title": "Remove a Path Without Erasing History",
+            "bodyMarkdown": "Removing a tracked file stages its deletion from the next snapshot and removes it from the working tree. Earlier commits still contain the file, so the project history remains intact.\n\nThis is different from ignoring a path. Use removal when the project should no longer contain the file; use ignore rules for untracked output that should stay local.\n\nThe staged report should make the deletion visible before it becomes history."
+          },
+          "sketch2": {
+            "title": "Review the New Repository Shape",
+            "bodyMarkdown": "Structural work is easier to review as names and statuses. A staged name-status report can show the renamed guide and the deleted checklist without burying the shape inside a long content patch.\n\nConfirm three facts: the new path exists, the old path is gone, and no unrelated file is staged.\n\nThe goal is a repository whose current structure matches the story told by the next commit."
+          },
+          "sketch3": {
+            "title": "Describe the Cleanup as a Result",
+            "bodyMarkdown": "When a rename and removal serve the same cleanup goal, they can share one focused commit. The message should describe the result—such as organizing release documentation—not repeat the shell operations.\n\nAfter committing, inspect the tracked file list and status. The new path should be tracked, the obsolete path should be absent, and no unfinished work should remain.\n\nHistory preserves where the files came from even though the current snapshot has changed."
+          }
+        }
+      }
+    }
+  }
+}

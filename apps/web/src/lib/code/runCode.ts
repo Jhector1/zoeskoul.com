@@ -6,6 +6,7 @@ import { getSingleFileLanguageId } from "./langIds";
 import { executeSqlRun } from "./sql/executeSql";
 import type {
   CodeRunReq,
+  FileEntry,
   RunLimits,
   RunPollResult,
   RunReq,
@@ -13,6 +14,7 @@ import type {
   RunSubmitResult,
 } from "./types";
 import { isSqlRunReq } from "./types";
+import { isBinaryWorkspaceFileEntry } from "@zoeskoul/code-contracts";
 
 const DEFAULT_POLL_INTERVAL_MS = 250;
 const DEFAULT_MAX_POLLS = 120;
@@ -142,33 +144,51 @@ function syntheticEntryFor(language: string) {
 }
 
 function normalizeFileEntries(
-    files:
-        | Array<{ path: string; content: string }>
-        | Record<string, string>
-        | undefined,
-) {
+    files: FileEntry[] | Record<string, string> | undefined,
+): FileEntry[] {
   if (!files) return [];
 
-  return Array.isArray(files)
-      ? files.map((file) => ({
-        path: file.path,
-        content: String(file.content ?? ""),
-      }))
-      : recordToFileEntries(files);
+  if (!Array.isArray(files)) {
+    return recordToFileEntries(files);
+  }
+
+  return files.map((file: FileEntry) => {
+    if ((file as any).encoding === "base64") {
+      return {
+        kind: "file",
+        path: String(file.path ?? ""),
+        encoding: "base64",
+        data: String((file as any).data ?? ""),
+        mimeType: String((file as any).mimeType ?? "application/octet-stream"),
+        sizeBytes: Math.max(0, Number((file as any).sizeBytes ?? 0)),
+        ...((file as any).checksum ? { checksum: String((file as any).checksum) } : {}),
+      };
+    }
+
+    return {
+      kind: "file",
+      path: String(file.path ?? ""),
+      content: String((file as any).content ?? ""),
+    };
+  });
 }
 
 function replaceEntryContent(args: {
-  files: Array<{ path: string; content: string }>;
+  files: FileEntry[];
   entry: string;
   code: string;
-}) {
+}): FileEntry[] {
   let replaced = false;
 
   const next = args.files.map((file) => {
     if (file.path !== args.entry) return file;
+    if (isBinaryWorkspaceFileEntry(file)) {
+      throw new Error("Project entry files must be text files.");
+    }
 
     replaced = true;
     return {
+      kind: "file" as const,
       path: file.path,
       content: args.code,
     };
@@ -176,6 +196,7 @@ function replaceEntryContent(args: {
 
   if (!replaced) {
     next.push({
+      kind: "file",
       path: args.entry,
       content: args.code,
     });
@@ -200,7 +221,6 @@ async function buildSubmissionBody(req: CodeRunReq) {
 
     const baseFiles =
         "files" in req ? normalizeFileEntries(req.files) : [];
-//0
     const fileEntries =
         typeof req.code === "string"
             ? replaceEntryContent({

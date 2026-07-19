@@ -2,10 +2,7 @@ import type { RequestHandler } from "express";
 import { getRequiredActorKey } from "../middleware/serviceAuth.js";
 import { getSession } from "../services/sessions/sessionStore.js";
 import { replaceWorkspaceFiles } from "../services/workspace/replaceWorkspaceFiles.js";
-
-type WorkspaceSyncEntry =
-    | { kind?: "file"; path: string; content: string }
-    | { kind: "directory"; path: string };
+import type { WorkspaceSyncEntry } from "@zoeskoul/code-contracts";
 
 type ReplaceWorkspaceBody = {
     files?: WorkspaceSyncEntry[];

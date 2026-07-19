@@ -1,53 +1,67 @@
+import crypto from "node:crypto";
 import JSZip from "jszip";
 import type { FileEntry } from "./types";
-import type { InteractiveLanguage } from "@zoeskoul/code-contracts";
+import type {
+    BinaryWorkspaceFileEntry,
+    InteractiveLanguage,
+} from "@zoeskoul/code-contracts";
+import {
+    WORKSPACE_BINARY_CAPABILITIES,
+    WORKSPACE_DENIED_HIDDEN_BASENAMES,
+    WORKSPACE_TEXT_BASENAMES,
+    WORKSPACE_TEXT_EXTENSIONS,
+    assertWorkspaceRelativePath,
+    normalizeWorkspaceBase64,
+    resolveWorkspaceFileCapability,
+    workspaceBase64DecodedByteLength,
+} from "@zoeskoul/code-contracts";
 
 type ProjectLanguage = InteractiveLanguage | "bash";
 
+
+const PY_TEXT_EXTENSIONS = JSON.stringify(JSON.stringify([...WORKSPACE_TEXT_EXTENSIONS]));
+const PY_TEXT_BASENAMES = JSON.stringify(JSON.stringify([...WORKSPACE_TEXT_BASENAMES]));
+const PY_BINARY_MIME = JSON.stringify(
+    JSON.stringify(
+        Object.fromEntries(
+            (
+                Object.entries(WORKSPACE_BINARY_CAPABILITIES) as Array<
+                    [string, { mimeType: string }]
+                >
+            ).map(([extension, value]) => [extension, value.mimeType]),
+        ),
+    ),
+);
+const PY_DENIED_HIDDEN_BASENAMES = JSON.stringify(
+    JSON.stringify([...WORKSPACE_DENIED_HIDDEN_BASENAMES]),
+);
+
 const SNAPSHOT_SCRIPT = String.raw`#!/usr/bin/env python3
 import base64
+import hashlib
 import json
+import mimetypes
 import os
 import sys
 
 MAX_ENTRIES = 400
-MAX_FILE_BYTES = 256 * 1024
-MAX_TOTAL_BYTES = 5 * 1024 * 1024
+MAX_TEXT_FILE_BYTES = 256 * 1024
+MAX_BINARY_FILE_BYTES = 5 * 1024 * 1024
+MAX_TEXT_TOTAL_BYTES = 5 * 1024 * 1024
+MAX_BINARY_TOTAL_BYTES = 8 * 1024 * 1024
 
 IGNORED_DIRS = {
-    ".git",
-    "node_modules",
-    ".next",
-    "dist",
-    "build",
-    "target",
-    "__pycache__",
-    ".cache",
+    ".git", "node_modules", ".next", "dist", "build", "target",
+    "__pycache__", ".cache", ".zoeskoul",
 }
-
 IGNORED_FILES = {
-    "run",
-    "run.sh",
-    "compile",
-    "compile.sh",
-    ".zoe_capture_workspace.py",
+    "run", "run.sh", "compile", "compile.sh", ".zoe_capture_workspace.py",
 }
+TEXT_EXTENSIONS = set(json.loads(${PY_TEXT_EXTENSIONS}))
+TEXT_BASENAMES = set(json.loads(${PY_TEXT_BASENAMES}))
+BINARY_MIME = json.loads(${PY_BINARY_MIME})
+DENIED_HIDDEN_BASENAMES = set(json.loads(${PY_DENIED_HIDDEN_BASENAMES}))
 
-ALLOWED_EXTENSIONS = {
-    ".py", ".js", ".ts", ".java",
-    ".c", ".cc", ".cpp", ".cxx",
-    ".h", ".hh", ".hpp",
-    ".sh", ".txt", ".md", ".json",
-    ".yaml", ".yml", ".xml", ".csv", ".sql",
-    ".tmp", ".log",
-}
-
-ALLOWED_BASENAMES = {
-    "Makefile",
-    "README",
-    "README.md",
-    "readme.md",
-}
 
 def safe_rel(path):
     rel = os.path.relpath(path, ".").replace(os.sep, "/")
@@ -55,26 +69,33 @@ def safe_rel(path):
         return ""
     if rel.startswith("../") or rel.startswith("/") or "\x00" in rel:
         return ""
-    parts = [p for p in rel.split("/") if p]
-    if any(p in {".", ".."} for p in parts):
+    parts = [part for part in rel.split("/") if part]
+    if any(part in {".", ".."} for part in parts):
         return ""
     return "/".join(parts)
 
-def allowed_file(rel):
+
+def classify_file(rel):
     base = os.path.basename(rel)
     if base in IGNORED_FILES:
-        return False
-    if base in ALLOWED_BASENAMES:
-        return True
-    _, ext = os.path.splitext(base)
-    return ext.lower() in ALLOWED_EXTENSIONS
+        return None
+    ext = os.path.splitext(base)[1].lower()
+    if base in TEXT_BASENAMES or ext in TEXT_EXTENSIONS:
+        return ("text", mimetypes.guess_type(base)[0] or "text/plain")
+    if ext in BINARY_MIME:
+        return ("binary", BINARY_MIME[ext])
+    if base.startswith(".") and base not in DENIED_HIDDEN_BASENAMES and not base.startswith(".env."):
+        return ("text", "text/plain")
+    return None
+
 
 def main():
     entries = []
-    total = 0
+    text_total = 0
+    binary_total = 0
 
     for root, dirs, files in os.walk("."):
-        dirs[:] = sorted([d for d in dirs if d not in IGNORED_DIRS])
+        dirs[:] = sorted([directory for directory in dirs if directory not in IGNORED_DIRS])
 
         rel_root = safe_rel(root)
         if rel_root:
@@ -83,7 +104,8 @@ def main():
         for name in sorted(files):
             full = os.path.join(root, name)
             rel = safe_rel(full)
-            if not rel or not allowed_file(rel):
+            classification = classify_file(rel) if rel else None
+            if not classification:
                 continue
 
             try:
@@ -91,80 +113,68 @@ def main():
             except OSError:
                 continue
 
-            if size > MAX_FILE_BYTES:
-                continue
+            storage, mime_type = classification
+            if storage == "text":
+                if size > MAX_TEXT_FILE_BYTES:
+                    raise RuntimeError("Workspace text file exceeds the per-file snapshot limit: " + rel)
+                if text_total + size > MAX_TEXT_TOTAL_BYTES:
+                    raise RuntimeError("Workspace text snapshot exceeds the total size limit")
+                try:
+                    with open(full, "r", encoding="utf-8") as source:
+                        content = source.read()
+                except UnicodeDecodeError as error:
+                    raise RuntimeError("Workspace text file is not valid UTF-8: " + rel) from error
+                except OSError:
+                    continue
+                text_total += size
+                entries.append({"kind": "file", "path": rel, "content": content})
+            else:
+                if size > MAX_BINARY_FILE_BYTES:
+                    raise RuntimeError("Workspace binary file exceeds the per-file snapshot limit: " + rel)
+                if binary_total + size > MAX_BINARY_TOTAL_BYTES:
+                    raise RuntimeError("Workspace binary snapshot exceeds the total size limit")
+                try:
+                    with open(full, "rb") as source:
+                        data = source.read()
+                except Exception:
+                    continue
+                binary_total += size
+                entries.append({
+                    "kind": "file",
+                    "path": rel,
+                    "encoding": "base64",
+                    "data": base64.b64encode(data).decode("ascii"),
+                    "mimeType": mime_type,
+                    "sizeBytes": len(data),
+                    "checksum": "sha256:" + hashlib.sha256(data).hexdigest(),
+                })
 
-            if total + size > MAX_TOTAL_BYTES:
-                continue
+            if len(entries) > MAX_ENTRIES:
+                raise RuntimeError("Workspace snapshot exceeds the entry limit")
 
-            try:
-                with open(full, "r", encoding="utf-8") as f:
-                    content = f.read()
-            except Exception:
-                continue
+        if len(entries) > MAX_ENTRIES:
+            raise RuntimeError("Workspace snapshot exceeds the entry limit")
 
-            total += size
-            entries.append({
-                "kind": "file",
-                "path": rel,
-                "content": content,
-            })
-
-            if len(entries) >= MAX_ENTRIES:
-                break
-
-        if len(entries) >= MAX_ENTRIES:
-            break
-
-    entries.sort(key=lambda e: (e.get("path", ""), 0 if e.get("kind") == "directory" else 1))
+    entries.sort(key=lambda entry: (entry.get("path", ""), 0 if entry.get("kind") == "directory" else 1))
     payload = base64.b64encode(json.dumps(entries, separators=(",", ":")).encode("utf-8")).decode("ascii")
 
     sys.stdout.write("\n__ZOE_WORKSPACE_SNAPSHOT_B64__")
     sys.stdout.write(payload)
     sys.stdout.write("__END_ZOE_WORKSPACE_SNAPSHOT_B64__\n")
 
+
 if __name__ == "__main__":
     main()
 `;
 
-function normalizeRelPath(input: string) {
-    return String(input ?? "").replace(/\\/g, "/").trim();
-}
 
-function assertSafeRelPath(p: string) {
-    const normalized = normalizeRelPath(p);
-
-    if (!normalized) {
-        throw new Error("Unsafe empty path.");
-    }
-
-    if (
-        normalized.startsWith("/") ||
-        normalized.includes("\0") ||
-        /^[A-Za-z]:[\\/]/.test(normalized)
-    ) {
-        throw new Error(`Unsafe path: ${p}`);
-    }
-
-    const parts = normalized.split("/");
-
-    if (
-        parts.some(
-            (part) =>
-                !part ||
-                part === "." ||
-                part === ".." ||
-                part.includes("\0"),
-        )
-    ) {
-        throw new Error(`Unsafe path: ${p}`);
-    }
-
-    return parts.join("/");
+function isBinaryFileEntry(file: FileEntry): file is BinaryWorkspaceFileEntry {
+    return (file as BinaryWorkspaceFileEntry).encoding === "base64";
 }
 
 function pickJavaMainClass(entryPath: string, files: FileEntry[]): string {
-    const src = files.find((f) => f.path === entryPath)?.content ?? "";
+    const entry = files.find((file) => file.path === entryPath);
+    const src = entry && !isBinaryFileEntry(entry) ? entry.content ?? "" : "";
     const pkg = /package\s+([a-zA-Z0-9_.]+)\s*;/.exec(src)?.[1];
 
     const cls =
@@ -191,6 +201,10 @@ ${body}
 `;
 }
 
+function unreachableProjectLanguage(value: never): never {
+    throw new Error(`Unsupported project language: ${String(value)}`);
+}
+
 function scriptsFor(lang: ProjectLanguage, entry: string, files: FileEntry[]) {
     const mainClass = lang === "java" ? pickJavaMainClass(entry, files) : "";
 
@@ -215,6 +229,8 @@ node "$ENTRY"
             case "bash":
                 return `bash "${entry}"
 `;
+            default:
+                return unreachableProjectLanguage(lang);
         }
     })();
 
@@ -247,6 +263,8 @@ g++ -O2 -std=c++17 -I. -o build/app $FILES
             case "javascript":
             case "bash":
                 return null;
+            default:
+                return unreachableProjectLanguage(lang);
         }
     })();
 
@@ -258,16 +276,90 @@ export async function zipProject(
     entry: string,
     files: FileEntry[],
 ) {
-    const safeEntry = assertSafeRelPath(entry);
+    const safeEntry = assertWorkspaceRelativePath(entry);
     const zip = new JSZip();
 
-    const normalizedFiles = files.map((file) => ({
-        path: assertSafeRelPath(file.path),
-        content: String(file.content ?? ""),
-    }));
+    const seenPaths = new Set<string>();
+    const normalizedFiles: FileEntry[] = files.map((file) => {
+        const path = assertWorkspaceRelativePath(file.path);
+        if (seenPaths.has(path)) {
+            throw new Error(`Duplicate project file path: ${path}`);
+        }
+        seenPaths.add(path);
+
+        const capability = resolveWorkspaceFileCapability(path);
+        if (!capability) {
+            throw new Error(`Unsupported project file type: ${path}`);
+        }
+
+        if (isBinaryFileEntry(file)) {
+            const data = normalizeWorkspaceBase64(file.data);
+            const sizeBytes = workspaceBase64DecodedByteLength(file.data);
+            if (
+                capability.storage !== "binary" ||
+                data == null ||
+                sizeBytes == null ||
+                sizeBytes !== file.sizeBytes
+            ) {
+                throw new Error(`Invalid binary project file: ${path}`);
+            }
+
+            const bytes = Buffer.from(data, "base64");
+            const declaredChecksum =
+                typeof file.checksum === "string" && file.checksum.trim()
+                    ? file.checksum.trim().toLowerCase()
+                    : undefined;
+            if (
+                declaredChecksum &&
+                !/^sha256:[a-f0-9]{64}$/.test(declaredChecksum)
+            ) {
+                throw new Error(`Invalid binary checksum: ${path}`);
+            }
+
+            const actualChecksum = `sha256:${crypto
+                .createHash("sha256")
+                .update(bytes)
+                .digest("hex")}`;
+            if (declaredChecksum && declaredChecksum !== actualChecksum) {
+                throw new Error(`Binary checksum mismatch: ${path}`);
+            }
+
+            return {
+                kind: "file",
+                path,
+                encoding: "base64",
+                data,
+                mimeType: capability.mimeType,
+                sizeBytes,
+                checksum: declaredChecksum ?? actualChecksum,
+            };
+        }
+
+        if (capability.storage !== "text") {
+            throw new Error(`Binary project file must use base64 encoding: ${path}`);
+        }
+
+        return {
+            kind: "file",
+            path,
+            content: String(file.content ?? ""),
+        };
+    });
+
+    const entryFile = normalizedFiles.find((file) => file.path === safeEntry);
+    if (!entryFile) {
+        throw new Error(`Project entry file is missing: ${safeEntry}`);
+    }
+    if (isBinaryFileEntry(entryFile)) {
+        throw new Error("Project entry files must be text files.");
+    }
 
     for (const file of normalizedFiles) {
-        zip.file(file.path, file.content);
+        if (isBinaryFileEntry(file)) {
+            zip.file(file.path, file.data, { base64: true, binary: true });
+        } else {
+            zip.file(file.path, file.content);
+        }
     }
 
     const { compile, run } = scriptsFor(lang, safeEntry, normalizedFiles);

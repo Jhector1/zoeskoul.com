@@ -1,6 +1,15 @@
+import crypto from "node:crypto";
 import fs from "node:fs/promises";
 import path from "node:path";
 import type { WorkspaceSyncEntry } from "@zoeskoul/code-contracts";
+import {
+  assertWorkspaceRelativePath,
+  isSafeWorkspaceRelativePath,
+  normalizeWorkspaceBase64,
+  normalizeWorkspaceRelativePath,
+  resolveWorkspaceFileCapability,
+  workspaceBase64DecodedByteLength,
+} from "@zoeskoul/code-contracts";
 import { env } from "../../lib/env.js";
 import {
   isRunnerManagedDirPath,
@@ -9,79 +18,21 @@ import {
 
 export type NormalizedWorkspaceEntry =
   | { kind: "directory"; path: string }
-  | { kind: "file"; path: string; content: string };
-
-const ALLOWED_EXTENSIONS = new Set([
-  ".py",
-  ".js",
-  ".ts",
-  ".java",
-  ".c",
-  ".cc",
-  ".cpp",
-  ".cxx",
-  ".h",
-  ".hh",
-  ".hpp",
-  ".sh",
-  ".txt",
-  ".md",
-  ".json",
-  ".yaml",
-  ".yml",
-  ".xml",
-  ".csv",
-  ".sql",
-
-  // Linux terminal labs use these as safe text files.
-  ".tmp",
-  ".log",
-]);
-
-const ALLOWED_BASENAMES = new Set([
-  "Makefile",
-  "README",
-  "README.md",
-  "readme.md",
-  ".keep",
-]);
-
-const DENIED_HIDDEN_TEXT_BASENAMES = new Set([
-  ".bash_history",
-  ".git",
-  ".DS_Store",
-]);
-
-function isAllowedHiddenTextFile(base: string) {
-  if (!base.startsWith(".")) return false;
-  if (base.length <= 1) return false;
-  if (DENIED_HIDDEN_TEXT_BASENAMES.has(base)) return false;
-
-  // Linux terminal lessons commonly use hidden text files such as
-  // desk/.locker. They are normal learner-visible filesystem content,
-  // not executable/runtime metadata. Keep the path character policy strict
-  // and the file-size limits below as the safety boundary.
-  return /^\.[A-Za-z0-9._-]+$/.test(base);
-}
-
-
-const DENIED_HIDDEN_LESSON_BASENAMES = new Set([
-  ".bash_history",
-  ".git",
-  ".DS_Store",
-  ".ssh",
-  ".env",
-]);
-
-function isAllowedHiddenLessonTextFile(base: string) {
-  if (!base.startsWith(".")) return false;
-  if (base.length <= 1) return false;
-  if (DENIED_HIDDEN_LESSON_BASENAMES.has(base)) return false;
-
-  // Linux lessons need safe hidden text files such as desk/.locker.
-  // Keep the path-name policy strict; file-size/content limits still apply.
-  return /^\.[A-Za-z0-9._-]+$/.test(base);
-}
+  | {
+      kind: "file";
+      storage: "text";
+      path: string;
+      content: string;
+      mimeType: string;
+    }
+  | {
+      kind: "file";
+      storage: "binary";
+      path: string;
+      bytes: Buffer;
+      mimeType: string;
+      checksum?: string;
+    };
 
 export const IGNORED_SNAPSHOT_DIRS = new Set([
   ".git",
@@ -94,37 +45,19 @@ export const IGNORED_SNAPSHOT_DIRS = new Set([
 ]);
 
 export function isAllowedWorkspaceFile(relPath: string) {
-  const base = path.basename(relPath);
-  if (isAllowedHiddenLessonTextFile(base)) return true;
-  if (ALLOWED_BASENAMES.has(base)) return true;
-  if (isAllowedHiddenTextFile(base)) return true;
-
-  const ext = path.extname(base).toLowerCase();
-  return ALLOWED_EXTENSIONS.has(ext);
+  return resolveWorkspaceFileCapability(relPath) !== null;
 }
 
 export function normalizeWorkspacePath(input: string) {
-  return String(input ?? "")
-    .replace(/\\/g, "/")
-    .trim();
+  return normalizeWorkspaceRelativePath(input);
 }
 
 export function isSafeRelativePath(relPath: string) {
-  const normalized = normalizeWorkspacePath(relPath);
-  if (!normalized) return false;
-  if (normalized.startsWith("/")) return false;
-  if (normalized.includes("\0")) return false;
-
-  const parts = normalized.split("/");
-  return parts.every((part) => !!part && part !== "." && part !== "..");
+  return isSafeWorkspaceRelativePath(relPath);
 }
 
 export function assertSafeWorkspacePath(input: string) {
-  const normalized = normalizeWorkspacePath(input);
-  if (!isSafeRelativePath(normalized)) {
-    throw new Error(`Unsafe path: ${String(input ?? "")}`);
-  }
-  return normalized;
+  return assertWorkspaceRelativePath(input);
 }
 
 function entryKind(entry: WorkspaceSyncEntry) {
@@ -145,6 +78,24 @@ export function sortWorkspaceEntries<T extends { path: string; kind?: string }>(
   });
 }
 
+function decodeBase64Strict(value: unknown, relPath: string) {
+  const source = normalizeWorkspaceBase64(value);
+  const expectedBytes = workspaceBase64DecodedByteLength(value);
+  if (source == null || expectedBytes == null) {
+    throw new Error(`Invalid base64 content: ${relPath}`);
+  }
+
+  const bytes = Buffer.from(source, "base64");
+  if (
+    bytes.byteLength !== expectedBytes ||
+    bytes.toString("base64") !== source
+  ) {
+    throw new Error(`Invalid base64 content: ${relPath}`);
+  }
+
+  return bytes;
+}
+
 export function normalizeWorkspaceEntries(
   files: WorkspaceSyncEntry[],
   args: { dropRunnerManaged?: boolean } = {},
@@ -158,11 +109,12 @@ export function normalizeWorkspaceEntries(
   }
 
   let fileCount = 0;
-  let totalBytes = 0;
+  let textBytes = 0;
+  let binaryBytes = 0;
   const seenPaths = new Set<string>();
 
   const normalized = files
-    .map((entry) => {
+    .map<NormalizedWorkspaceEntry | null>((entry): NormalizedWorkspaceEntry | null => {
       const relPath = assertSafeWorkspacePath(entry?.path ?? "");
 
       if (
@@ -189,8 +141,72 @@ export function normalizeWorkspaceEntries(
         throw new Error(`Workspace limit reached: max ${env.maxFiles} files.`);
       }
 
-      if (!isAllowedWorkspaceFile(relPath)) {
+      const capability = resolveWorkspaceFileCapability(relPath);
+      if (!capability) {
         throw new Error(`Unsupported file type: ${relPath}`);
+      }
+
+      if (capability.storage === "binary") {
+        if ((entry as any)?.encoding !== "base64") {
+          throw new Error(
+            `Binary workspace file must use base64 encoding: ${relPath}`,
+          );
+        }
+
+        const bytes = decodeBase64Strict((entry as any)?.data, relPath);
+        if (bytes.byteLength > env.maxBinaryFileBytes) {
+          throw new Error(
+            `Workspace binary file too large: ${relPath} exceeds ${(env.maxBinaryFileBytes / 1024 / 1024).toFixed(1)} MB.`,
+          );
+        }
+
+        const declaredSize = (entry as any)?.sizeBytes;
+        if (
+          typeof declaredSize !== "number" ||
+          !Number.isInteger(declaredSize) ||
+          declaredSize < 0 ||
+          declaredSize !== bytes.byteLength
+        ) {
+          throw new Error(`Binary size mismatch: ${relPath}`);
+        }
+
+        const declaredChecksum = (entry as any)?.checksum;
+        if (typeof declaredChecksum === "string" && declaredChecksum.trim()) {
+          const normalizedChecksum = declaredChecksum.trim().toLowerCase();
+          if (!/^sha256:[a-f0-9]{64}$/.test(normalizedChecksum)) {
+            throw new Error(`Invalid binary checksum: ${relPath}`);
+          }
+          const actualChecksum = `sha256:${crypto
+            .createHash("sha256")
+            .update(bytes)
+            .digest("hex")}`;
+          if (actualChecksum !== normalizedChecksum) {
+            throw new Error(`Binary checksum mismatch: ${relPath}`);
+          }
+        }
+
+        binaryBytes += bytes.byteLength;
+        if (binaryBytes > env.maxBinaryTotalBytes) {
+          throw new Error(
+            `Workspace binary limit reached: max ${(env.maxBinaryTotalBytes / 1024 / 1024).toFixed(1)} MB.`,
+          );
+        }
+
+        return {
+          kind: "file" as const,
+          storage: "binary" as const,
+          path: relPath,
+          bytes,
+          mimeType: capability.mimeType,
+          ...(typeof (entry as any)?.checksum === "string" &&
+          (entry as any).checksum.trim()
+            ? { checksum: (entry as any).checksum.trim() }
+            : {}),
+        };
+      }
+
+      if ((entry as any)?.encoding === "base64") {
+        throw new Error(`Text workspace file cannot use base64 encoding: ${relPath}`);
       }
 
       const content = String((entry as any)?.content ?? "");
@@ -201,17 +217,19 @@ export function normalizeWorkspaceEntries(
         );
       }
 
-      totalBytes += bytes;
-      if (totalBytes > env.maxTotalBytes) {
+      textBytes += bytes;
+      if (textBytes > env.maxTotalBytes) {
         throw new Error(
-          `Workspace limit reached: max ${(env.maxTotalBytes / 1024 / 1024).toFixed(1)} MB total content.`,
+          `Workspace text limit reached: max ${(env.maxTotalBytes / 1024 / 1024).toFixed(1)} MB.`,
         );
       }
 
       return {
         kind: "file" as const,
+        storage: "text" as const,
         path: relPath,
         content,
+        mimeType: capability.mimeType,
       };
     })
     .filter((entry): entry is NormalizedWorkspaceEntry => entry !== null);
@@ -272,9 +290,9 @@ export async function assertWorkspaceRootHasCapacity(root: string) {
 
 export async function assertWorkspaceUnderQuota(workspaceDir: string) {
   const usedBytes = await getDirectoryBytes(workspaceDir);
-  if (usedBytes > env.maxTotalBytes) {
+  if (usedBytes > env.maxWorkspaceBytes) {
     throw new Error(
-      `Workspace limit reached: max ${(env.maxTotalBytes / 1024 / 1024).toFixed(1)} MB on disk.`,
+      `Workspace limit reached: max ${(env.maxWorkspaceBytes / 1024 / 1024).toFixed(1)} MB on disk.`,
     );
   }
 }

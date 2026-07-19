@@ -180,4 +180,28 @@ describe("replaceWorkspaceFiles", () => {
         await expect(fs.access(path.join(root, "old-visible.txt"))).rejects.toThrow();
     });
 
+
+    it("replaces binary files with exact bytes", async () => {
+        const before = Buffer.from([1, 2, 3]);
+        const after = Buffer.from([0, 255, 9, 8, 7]);
+        await fs.mkdir(path.join(root, "assets"), { recursive: true });
+        await fs.writeFile(path.join(root, "assets", "photo.png"), before);
+
+        const result = await replaceWorkspaceFiles(root, [
+            {
+                kind: "file",
+                path: "assets/photo.png",
+                encoding: "base64",
+                data: after.toString("base64"),
+                mimeType: "image/png",
+                sizeBytes: after.byteLength,
+            },
+        ]);
+
+        await expect(
+            fs.readFile(path.join(root, "assets", "photo.png")),
+        ).resolves.toEqual(after);
+        expect(result).toEqual({ fileCount: 1 });
+    });
+
 });

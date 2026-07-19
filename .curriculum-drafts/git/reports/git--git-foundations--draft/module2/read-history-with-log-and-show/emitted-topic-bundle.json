@@ -4,7 +4,7 @@
   "moduleSlug": "git-foundations-module-2-meaningful-history",
   "sectionSlug": "git-foundations-section-2-history-workflow",
   "prefix": "git_foundations_module_2",
-  "minutes": 22,
+  "minutes": 18,
   "runtimeDefaults": {
     "kind": "code",
     "language": "bash",
@@ -86,25 +86,6 @@
       }
     },
     {
-      "id": "sketch3",
-      "kind": "sketch",
-      "titleKey": "topics.git.git-foundations-module-2-meaningful-history.read-history-with-log-and-show.cards.sketch3.title",
-      "sketchId": "sketch3",
-      "height": 420,
-      "tryIt": {
-        "id": "try-read-history-with-log-and-show-sketch3",
-        "titleKey": "topics.git.git-foundations-module-2-meaningful-history.read-history-with-log-and-show.tryIt.try_read_history_with_log_and_show_sketch3.title",
-        "promptKey": "topics.git.git-foundations-module-2-meaningful-history.read-history-with-log-and-show.tryIt.try_read_history_with_log_and_show_sketch3.prompt",
-        "exerciseKey": "try-read-history-with-log-and-show-sketch3",
-        "difficulty": "easy",
-        "preferKind": "code_input",
-        "seedPolicy": "global",
-        "required": true,
-        "allowReveal": true,
-        "maxAttempts": null
-      }
-    },
-    {
       "id": "quiz",
       "kind": "quiz",
       "titleKey": "topics.git.git-foundations-module-2-meaningful-history.read-history-with-log-and-show.cards.quiz.title",
@@ -112,7 +93,7 @@
         "difficulty": "easy",
         "n": 4,
         "min": 4,
-        "max": 6,
+        "max": 4,
         "selectionMode": "random",
         "allowReveal": true,
         "preferKind": null,
@@ -138,12 +119,6 @@
       "archetype": "paragraph",
       "titleKey": "sketches.git.git-foundations-module-2-meaningful-history.read-history-with-log-and-show.sketch2.title",
       "bodyKey": "sketches.git.git-foundations-module-2-meaningful-history.read-history-with-log-and-show.sketch2.bodyMarkdown"
-    },
-    {
-      "id": "sketch3",
-      "archetype": "paragraph",
-      "titleKey": "sketches.git.git-foundations-module-2-meaningful-history.read-history-with-log-and-show.sketch3.title",
-      "bodyKey": "sketches.git.git-foundations-module-2-meaningful-history.read-history-with-log-and-show.sketch3.bodyMarkdown"
     }
   ],
   "exercises": [
@@ -166,7 +141,7 @@
     },
     {
       "id": "multi-choice-1",
-      "kind": "multi_choice",
+      "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "topics.git.git-foundations-module-2-meaningful-history.read-history-with-log-and-show.practice.multi-choice-1",
@@ -177,15 +152,13 @@
         "d"
       ],
       "expected": {
-        "kind": "multi_choice",
-        "optionIds": [
-          "b"
-        ]
+        "kind": "single_choice",
+        "optionId": "b"
       }
     },
     {
       "id": "multi-choice-2",
-      "kind": "multi_choice",
+      "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "topics.git.git-foundations-module-2-meaningful-history.read-history-with-log-and-show.practice.multi-choice-2",
@@ -196,10 +169,8 @@
         "d"
       ],
       "expected": {
-        "kind": "multi_choice",
-        "optionIds": [
-          "b"
-        ]
+        "kind": "single_choice",
+        "optionId": "b"
       }
     },
     {
@@ -218,30 +189,6 @@
           "t1",
           "t2"
         ]
-      }
-    },
-    {
-      "id": "fill-blank-1",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.git.git-foundations-module-2-meaningful-history.read-history-with-log-and-show.practice.fill-blank-1",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "log"
-      }
-    },
-    {
-      "id": "fill-blank-2",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.git.git-foundations-module-2-meaningful-history.read-history-with-log-and-show.practice.fill-blank-2",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "show"
       }
     },
     {
@@ -507,99 +454,13 @@
         "mode": "terminal_workspace",
         "instructions": "@:topics.git.git-foundations-module-2-meaningful-history.read-history-with-log-and-show.tryIt.try_read_history_with_log_and_show_sketch2.instructions"
       }
-    },
-    {
-      "id": "try-read-history-with-log-and-show-sketch3",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.git.git-foundations-module-2-meaningful-history.read-history-with-log-and-show.tryIt.try_read_history_with_log_and_show_sketch3",
-      "language": "bash",
-      "starterCode": "@:topics.git.git-foundations-module-2-meaningful-history.read-history-with-log-and-show.tryIt.try_read_history_with_log_and_show_sketch3.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.sh",
-          "content": "@:topics.git.git-foundations-module-2-meaningful-history.read-history-with-log-and-show.tryIt.try_read_history_with_log_and_show_sketch3.starterCode",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        },
-        {
-          "path": ".zoeskoul/setup.sh",
-          "content": "@:topics.git.git-foundations-module-2-meaningful-history.read-history-with-log-and-show.tryIt.try_read_history_with_log_and_show_sketch3.starterFiles.zoeskoul_setup_sh.content",
-          "language": "bash",
-          "readOnly": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "main.sh",
-          "content": "bash .zoeskoul/setup.sh\ngit log --oneline\ngit show\ngit show <commit-hash>\n",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 4\\n' > practice-4.txt\n",
-          "language": "bash",
-          "readOnly": true
-        }
-      ],
-      "terminalExpectations": {
-        "requiredCommands": [
-          {
-            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
-          },
-          {
-            "pattern": "^git\\s+log\\s+--oneline$"
-          },
-          {
-            "pattern": "^git\\s+show$"
-          },
-          {
-            "pattern": "^git\\s+show\\s+<commit-hash>$"
-          }
-        ],
-        "forbiddenCommands": [
-          {
-            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
-            "message": "@:topics.git.git-foundations-module-2-meaningful-history.read-history-with-log-and-show.tryIt.try_read_history_with_log_and_show_sketch3.terminalExpectations.forbiddenCommands.0.message"
-          }
-        ]
-      },
-      "hiddenShellCheck": {
-        "script": "set -eu\nrepo='.'\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ncommand -v git >/dev/null 2>&1 || fail \"Git is not available in this workspace.\"\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail 'Initialize a Git repository in ..'\nactual_branch=$(git -C \"$repo\" branch --show-current 2>/dev/null || true)\n[ \"$actual_branch\" = 'main' ] || fail 'Switch to the main branch.'",
-        "timeoutMs": 15000
-      },
-      "workspace": {
-        "language": "bash",
-        "entryFilePath": "main.sh",
-        "starterCode": "@:topics.git.git-foundations-module-2-meaningful-history.read-history-with-log-and-show.tryIt.try_read_history_with_log_and_show_sketch3.starterCode",
-        "starterFiles": [
-          {
-            "path": "main.sh",
-            "content": "@:topics.git.git-foundations-module-2-meaningful-history.read-history-with-log-and-show.tryIt.try_read_history_with_log_and_show_sketch3.starterCode",
-            "language": "bash",
-            "isEntry": true,
-            "entry": true,
-            "readOnly": false
-          },
-          {
-            "path": ".zoeskoul/setup.sh",
-            "content": "@:topics.git.git-foundations-module-2-meaningful-history.read-history-with-log-and-show.tryIt.try_read_history_with_log_and_show_sketch3.starterFiles.zoeskoul_setup_sh.content",
-            "language": "bash",
-            "readOnly": true
-          }
-        ]
-      },
-      "showExpectedExample": false,
-      "recipe": {
-        "type": "shell_task",
-        "mode": "terminal_workspace",
-        "instructions": "@:topics.git.git-foundations-module-2-meaningful-history.read-history-with-log-and-show.tryIt.try_read_history_with_log_and_show_sketch3.instructions"
-      }
     }
-  ]
+  ],
+  "topicMeta": {
+    "learningGoals": [
+      "Read a compact commit timeline with git log --oneline",
+      "Inspect one commit with git show --stat",
+      "Use HEAD and HEAD~1 to select the current and previous snapshots"
+    ]
+  }
 }

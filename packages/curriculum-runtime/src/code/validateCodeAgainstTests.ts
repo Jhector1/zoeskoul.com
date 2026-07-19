@@ -1,19 +1,20 @@
 import { runLocalCode } from "./localRunner.js";
-import { getCodeRunner, type RunCodeFn, type RunCodeLimits } from "./runner.js";
+import {
+    getCodeRunner,
+    normalizeRunCodeFiles,
+    type RunCodeFile,
+    type RunCodeFiles,
+    type RunCodeFn,
+    type RunCodeLimits,
+} from "./runner.js";
 import { createJudge0CodeRunnerFromEnv } from "./judge0Runner.js";
 import { stdoutMatches } from "@zoeskoul/practice-checks";
 
 export const DEFAULT_PROGRAMMING_MAX_TESTS = 12;
 
-export type RuntimeCodeFileFixture = {
-    path: string;
-    content: string;
-    readOnly?: boolean;
-};
+export type RuntimeCodeFileFixture = RunCodeFile;
 
-export type RuntimeCodeWorkspaceFiles =
-    | RuntimeCodeFileFixture[]
-    | Record<string, string>;
+export type RuntimeCodeWorkspaceFiles = RunCodeFiles;
 
 export type RuntimeCodeTest = {
     stdin?: string;
@@ -25,30 +26,7 @@ export type RuntimeCodeTest = {
 function normalizeWorkspaceFiles(
     files: RuntimeCodeWorkspaceFiles | undefined,
 ): RuntimeCodeFileFixture[] {
-    if (!files) return [];
-
-    if (Array.isArray(files)) {
-        return files
-            .map((file) => {
-                const path =
-                    typeof file.path === "string" ? file.path.trim() : "";
-                if (!path) return null;
-
-                return {
-                    path,
-                    content: String(file.content ?? ""),
-                    ...(typeof file.readOnly === "boolean"
-                        ? { readOnly: file.readOnly }
-                        : {}),
-                };
-            })
-            .filter((file): file is RuntimeCodeFileFixture => Boolean(file));
-    }
-
-    return Object.entries(files).map(([path, content]) => ({
-        path,
-        content,
-    }));
+    return normalizeRunCodeFiles(files);
 }
 
 function mergeWorkspaceFiles(

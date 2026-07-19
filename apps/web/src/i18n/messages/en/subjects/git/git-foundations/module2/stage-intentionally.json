@@ -3,20 +3,20 @@
     "git-foundations": {
       "git-foundations-module-2-meaningful-history": {
         "stage-intentionally": {
-          "label": "Stage Intentionally",
-          "summary": "Choose the exact files for the next commit and verify the staged snapshot before recording it.",
+          "label": "Stage and Commit One Purpose",
+          "summary": "Choose a coherent snapshot, review its staged content, and record it with a message that matches the boundary.",
           "cards": {
             "sketch0": {
-              "title": "Build the Next Snapshot"
+              "title": "Choose One Purpose"
             },
             "sketch1": {
-              "title": "Inspect What Is Staged"
+              "title": "Review the Proposed Snapshot"
             },
             "sketch2": {
-              "title": "Unstage Without Losing Work"
+              "title": "Keep Related Files Together"
             },
             "sketch3": {
-              "title": "Keep One Purpose Together"
+              "title": "Commit the Boundary You Chose"
             },
             "quiz": {
               "title": "Practice"
@@ -26,12 +26,12 @@
             "allowReveal": true,
             "try_stage_intentionally_sketch0": {
               "title": "Stage One File, Not Everything",
-              "prompt": "The terminal opens inside the prepared `community-site/` repository.\n\n`index.html` and `styles.css` both changed, but the next snapshot is only about navigation. Stage `index.html` and list the staged names.\n\nType each command in the terminal and press Enter.",
-              "hint": "Read the repository state first, then use the Git command that changes only the requested boundary.",
+              "prompt": "You are working in the prepared `community-site/` repository.\n\n`index.html` and `styles.css` both changed, but the next snapshot is only about navigation. Stage `index.html` and list the staged names.",
+              "hint": "Choose only the paths that belong to this checkpoint.",
               "help": {
                 "concept": "Path-specific staging selects one coherent change while leaving unrelated working-tree edits outside the next commit.",
-                "hint_1": "Use the exact file or repository named in the task; avoid broad commands that include unrelated work.",
-                "hint_2": "After the action, run the requested inspection command to confirm the final state."
+                "hint_1": "Do not broaden the staging boundary just to make status quieter.",
+                "hint_2": "Review the staged paths or patch before moving on."
               },
               "starterCode": "<nav>Home Events</nav>\n",
               "solutionCode": "git add index.html\ngit diff --staged --name-only",
@@ -45,31 +45,31 @@
                   "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-site\nmkdir -p community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name \"ZoeSkoul Learner\"\ngit -C community-site config --local user.email \"learner@zoeskoul.local\"\ncd community-site\nprintf %s '<nav>Home</nav>\n' > index.html\ncd ..\ncd community-site\nprintf %s 'nav { color: navy; }\n' > styles.css\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Add project baseline'\ncd community-site\nprintf %s '<nav>Home Events</nav>\n' > index.html\ncd ..\ncd community-site\nprintf %s 'nav { color: teal; }\n' > styles.css\ncd ..\n"
                 }
               },
-              "instructions": "The terminal opens inside the prepared `community-site/` repository.\n\n`index.html` and `styles.css` both changed, but the next snapshot is only about navigation. Stage `index.html` and list the staged names.\n\nType each command in the terminal and press Enter.",
+              "instructions": "You are working in the prepared `community-site/` repository.\n\n`index.html` and `styles.css` both changed, but the next snapshot is only about navigation. Stage `index.html` and list the staged names.",
               "terminalExpectations": {
                 "forbiddenCommands": {
                   "0": {
-                    "message": "Do not use destructive history-rewriting commands in this course."
+                    "message": "That action can discard or rewrite history. Use the safe, layer-specific workflow taught in this course."
                   }
                 },
                 "requiredCommands": {
                   "0": {
-                    "message": "Run `git add index.html`, then check your answer again."
+                    "message": "Did you stage only the path or paths that belong to this checkpoint?"
                   },
                   "1": {
-                    "message": "Run `git diff --staged --name-only`, then check your answer again."
+                    "message": "Did you review the staged path list and confirm that only the requested files are selected?"
                   }
                 }
               }
             },
             "try_stage_intentionally_sketch1": {
               "title": "Inspect the Exact Staged Patch",
-              "prompt": "The terminal opens inside the prepared `community-site/` repository.\n\n`index.html` is already staged while `styles.css` remains unstaged. Inspect the staged patch and then compare it with short status.\n\nType each command in the terminal and press Enter.",
-              "hint": "Read the repository state first, then use the Git command that changes only the requested boundary.",
+              "prompt": "You are working in the prepared `community-site/` repository.\n\n`index.html` is already staged while `styles.css` remains unstaged. Inspect the staged patch and then compare it with short status.",
+              "hint": "Inspect the exact version currently selected for the next commit.",
               "help": {
                 "concept": "git diff --staged previews what the next commit would record, not every working-tree edit.",
-                "hint_1": "Use the exact file or repository named in the task; avoid broad commands that include unrelated work.",
-                "hint_2": "After the action, run the requested inspection command to confirm the final state."
+                "hint_1": "A staged patch is different from the unstaged working-tree patch.",
+                "hint_2": "Confirm that the selected content matches the task before recording it."
               },
               "starterCode": "<nav>Home Events</nav>\n",
               "solutionCode": "git diff --staged -- index.html\ngit status --short",
@@ -83,31 +83,31 @@
                   "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-site\nmkdir -p community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name \"ZoeSkoul Learner\"\ngit -C community-site config --local user.email \"learner@zoeskoul.local\"\ncd community-site\nprintf %s '<nav>Home</nav>\n' > index.html\ncd ..\ncd community-site\nprintf %s 'nav { color: navy; }\n' > styles.css\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Add project baseline'\ncd community-site\nprintf %s '<nav>Home Events</nav>\n' > index.html\ncd ..\ncd community-site\nprintf %s 'nav { color: teal; }\n' > styles.css\ncd ..\ngit -C community-site add -- index.html\n"
                 }
               },
-              "instructions": "The terminal opens inside the prepared `community-site/` repository.\n\n`index.html` is already staged while `styles.css` remains unstaged. Inspect the staged patch and then compare it with short status.\n\nType each command in the terminal and press Enter.",
+              "instructions": "You are working in the prepared `community-site/` repository.\n\n`index.html` is already staged while `styles.css` remains unstaged. Inspect the staged patch and then compare it with short status.",
               "terminalExpectations": {
                 "forbiddenCommands": {
                   "0": {
-                    "message": "Do not use destructive history-rewriting commands in this course."
+                    "message": "That action can discard or rewrite history. Use the safe, layer-specific workflow taught in this course."
                   }
                 },
                 "requiredCommands": {
                   "0": {
-                    "message": "Run `git diff --staged -- index.html`, then check your answer again."
+                    "message": "Did you inspect the staged version of `index.html` before checking?"
                   },
                   "1": {
-                    "message": "Run `git status --short`, then check your answer again."
+                    "message": "Did you use the compact status view and read the entry for `index.html`?"
                   }
                 }
               }
             },
             "try_stage_intentionally_sketch2": {
               "title": "Add a Second Related File",
-              "prompt": "The terminal opens inside the prepared `community-site/` repository.\n\nThe staged navigation change also needs `nav.js`; `styles.css` is still unrelated. Stage `nav.js` and verify that exactly two files are staged.\n\nType each command in the terminal and press Enter.",
-              "hint": "Read the repository state first, then use the Git command that changes only the requested boundary.",
+              "prompt": "You are working in the prepared `community-site/` repository.\n\nThe staged navigation change also needs `nav.js`; `styles.css` is still unrelated. Stage `nav.js` and verify that exactly two files are staged.",
+              "hint": "Choose only the paths that belong to this checkpoint.",
               "help": {
                 "concept": "A focused snapshot may contain several files when they serve the same change.",
-                "hint_1": "Use the exact file or repository named in the task; avoid broad commands that include unrelated work.",
-                "hint_2": "After the action, run the requested inspection command to confirm the final state."
+                "hint_1": "Do not broaden the staging boundary just to make status quieter.",
+                "hint_2": "Review the staged paths or patch before moving on."
               },
               "starterCode": "<nav>Home Events</nav>\n",
               "solutionCode": "git add nav.js\ngit diff --staged --name-only",
@@ -121,34 +121,34 @@
                   "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-site\nmkdir -p community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name \"ZoeSkoul Learner\"\ngit -C community-site config --local user.email \"learner@zoeskoul.local\"\ncd community-site\nprintf %s '<nav>Home</nav>\n' > index.html\ncd ..\ncd community-site\nprintf %s 'export const links = [\"Home\"];\n' > nav.js\ncd ..\ncd community-site\nprintf %s 'nav { color: navy; }\n' > styles.css\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Add project baseline'\ncd community-site\nprintf %s '<nav>Home Events</nav>\n' > index.html\ncd ..\ncd community-site\nprintf %s 'export const links = [\"Home\", \"Events\"];\n' > nav.js\ncd ..\ncd community-site\nprintf %s 'nav { color: teal; }\n' > styles.css\ncd ..\ngit -C community-site add -- index.html\n"
                 }
               },
-              "instructions": "The terminal opens inside the prepared `community-site/` repository.\n\nThe staged navigation change also needs `nav.js`; `styles.css` is still unrelated. Stage `nav.js` and verify that exactly two files are staged.\n\nType each command in the terminal and press Enter.",
+              "instructions": "You are working in the prepared `community-site/` repository.\n\nThe staged navigation change also needs `nav.js`; `styles.css` is still unrelated. Stage `nav.js` and verify that exactly two files are staged.",
               "terminalExpectations": {
                 "forbiddenCommands": {
                   "0": {
-                    "message": "Do not use destructive history-rewriting commands in this course."
+                    "message": "That action can discard or rewrite history. Use the safe, layer-specific workflow taught in this course."
                   }
                 },
                 "requiredCommands": {
                   "0": {
-                    "message": "Run `git add nav.js`, then check your answer again."
+                    "message": "Did you stage only the path or paths that belong to this checkpoint?"
                   },
                   "1": {
-                    "message": "Run `git diff --staged --name-only`, then check your answer again."
+                    "message": "Did you review the staged path list and confirm that only the requested files are selected?"
                   }
                 }
               }
             },
             "try_stage_intentionally_sketch3": {
-              "title": "Verify the Boundary Before Commit",
-              "prompt": "The terminal opens inside the prepared `community-site/` repository.\n\nThe navigation files are staged and the palette edit is not. Use staged and unstaged name-only views to prove the boundary.\n\nType each command in the terminal and press Enter.",
-              "hint": "Read the repository state first, then use the Git command that changes only the requested boundary.",
+              "title": "Commit One Purpose and Leave the Rest",
+              "prompt": "You are working in the prepared `community-site/` repository. Only `README.md` is staged; `styles.css` is an unrelated working-tree experiment. Commit the documentation change as `Clarify volunteer hours`, then use short status to confirm that the style edit remains outside the commit.",
+              "hint": "Record the staged documentation change without trying to make the whole repository quiet.",
               "help": {
-                "concept": "Checking both sides of the index confirms what will be committed and what will remain for later.",
-                "hint_1": "Use the exact file or repository named in the task; avoid broad commands that include unrelated work.",
-                "hint_2": "After the action, run the requested inspection command to confirm the final state."
+                "concept": "A focused commit can finish one purpose while unrelated work remains in the working tree.",
+                "hint_1": "The staged boundary is already prepared.",
+                "hint_2": "After committing, short status should still name the unrelated style file."
               },
               "starterCode": "<nav>Home Events</nav>\n",
-              "solutionCode": "git diff --staged --name-only\ngit diff --name-only",
+              "solutionCode": "git commit -m \"Clarify volunteer hours\"\ngit status --short",
               "starterFiles": {
                 "zoeskoul_setup_sh": {
                   "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-site\nmkdir -p community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name \"ZoeSkoul Learner\"\ngit -C community-site config --local user.email \"learner@zoeskoul.local\"\ncd community-site\nprintf %s '<nav>Home</nav>\n' > index.html\ncd ..\ncd community-site\nprintf %s 'export const links = [\"Home\"];\n' > nav.js\ncd ..\ncd community-site\nprintf %s 'nav { color: navy; }\n' > styles.css\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Add project baseline'\ncd community-site\nprintf %s '<nav>Home Events</nav>\n' > index.html\ncd ..\ncd community-site\nprintf %s 'export const links = [\"Home\", \"Events\"];\n' > nav.js\ncd ..\ncd community-site\nprintf %s 'nav { color: teal; }\n' > styles.css\ncd ..\ngit -C community-site add -- index.html nav.js\n"
@@ -159,19 +159,19 @@
                   "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-site\nmkdir -p community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name \"ZoeSkoul Learner\"\ngit -C community-site config --local user.email \"learner@zoeskoul.local\"\ncd community-site\nprintf %s '<nav>Home</nav>\n' > index.html\ncd ..\ncd community-site\nprintf %s 'export const links = [\"Home\"];\n' > nav.js\ncd ..\ncd community-site\nprintf %s 'nav { color: navy; }\n' > styles.css\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Add project baseline'\ncd community-site\nprintf %s '<nav>Home Events</nav>\n' > index.html\ncd ..\ncd community-site\nprintf %s 'export const links = [\"Home\", \"Events\"];\n' > nav.js\ncd ..\ncd community-site\nprintf %s 'nav { color: teal; }\n' > styles.css\ncd ..\ngit -C community-site add -- index.html nav.js\n"
                 }
               },
-              "instructions": "The terminal opens inside the prepared `community-site/` repository.\n\nThe navigation files are staged and the palette edit is not. Use staged and unstaged name-only views to prove the boundary.\n\nType each command in the terminal and press Enter.",
+              "instructions": "You are working in the prepared `community-site/` repository. Only `README.md` is staged; `styles.css` is an unrelated working-tree experiment. Commit the documentation change as `Clarify volunteer hours`, then use short status to confirm that the style edit remains outside the commit.",
               "terminalExpectations": {
                 "forbiddenCommands": {
                   "0": {
-                    "message": "Do not use destructive history-rewriting commands in this course."
+                    "message": "That action can discard or rewrite history. Use the safe, layer-specific workflow taught in this course."
                   }
                 },
                 "requiredCommands": {
                   "0": {
-                    "message": "Run `git diff --staged --name-only`, then check your answer again."
+                    "message": "Did you record the staged documentation change with the requested subject?"
                   },
                   "1": {
-                    "message": "Run `git diff --name-only`, then check your answer again."
+                    "message": "Did you confirm that the unrelated style edit remains outside the commit?"
                   }
                 }
               }
@@ -181,11 +181,11 @@
             "single-choice-1": {
               "title": "Staging Area Purpose",
               "prompt": "What is the primary purpose of the staging area in Git?",
-              "hint": "Consider how the staging area affects commits.",
+              "hint": "Focus on what the command or concept observes or changes at this point in the workflow.",
               "help": {
-                "concept": "The staging area allows you to prepare specific changes for a commit.",
-                "hint_1": "The staging area helps manage what changes are included in a commit.",
-                "hint_2": "It acts as a buffer between the working directory and the commit."
+                "concept": "Build the next snapshot one purpose at a time, review the staged version, and reverse a staging decision without losing work.",
+                "hint_1": "Remove options that act on a different repository layer than the one named in the question.",
+                "hint_2": "Choose the answer that remains accurate even when other unrelated files exist."
               },
               "options": {
                 "a": "To prepare changes for a commit",
@@ -195,82 +195,52 @@
               }
             },
             "multi-choice-1": {
-              "title": "Purpose of Staging",
-              "prompt": "What is the purpose of staging in Git? Select all that apply.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "title": "A Coherent Snapshot",
+              "prompt": "Which practices help keep a commit focused? Select all that apply.",
+              "hint": "Judge each option independently; choose only the statements that stay true in this exact repository state.",
               "help": {
-                "concept": "The staging area selects exactly what the next commit will contain, so unrelated edits can remain outside the snapshot.",
-                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+                "concept": "Build the next snapshot one purpose at a time, review the staged version, and reverse a staging decision without losing work.",
+                "hint_1": "A partly true option is still wrong if it adds an effect Git does not guarantee.",
+                "hint_2": "Use the layer named in the prompt—working tree, staging area, or history—to test each choice."
               },
               "options": {
-                "a": "To prepare specific changes for a commit",
-                "b": "To automatically commit all changes",
-                "c": "To review changes before committing",
-                "d": "To discard unwanted changes"
+                "a": "Stage files that serve the same project result.",
+                "b": "Review the staged snapshot before committing.",
+                "c": "Stage every changed file so status becomes quiet.",
+                "d": "Use a subject that describes the result."
               }
             },
             "multi-choice-2": {
-              "title": "Inspecting Staged Changes",
-              "prompt": "Which command allows you to inspect staged changes in Git?",
-              "hint": "Think about the command that shows differences between staged changes and the last commit.",
+              "title": "Inspect the Staged Boundary",
+              "prompt": "Which commands can help verify what is staged?",
+              "hint": "Choose the one answer that describes this command or concept precisely.",
               "help": {
-                "concept": "Inspecting staged changes helps verify what will be committed.",
-                "hint_1": "The command shows differences between staged changes and the last commit.",
-                "hint_2": "It is similar to `git diff` but for staged changes."
+                "concept": "Build the next snapshot one purpose at a time, review the staged version, and reverse a staging decision without losing work.",
+                "hint_1": "Remove choices that act on a different repository layer or promise behavior Git does not provide.",
+                "hint_2": "Prefer the exact definition used in this chapter over a nearby Git idea."
               },
               "options": {
-                "a": "git diff",
-                "b": "git diff --staged",
-                "c": "git status",
-                "d": "git log"
-              }
-            },
-            "drag-reorder-1": {
-              "title": "Staging Workflow Steps",
-              "prompt": "Arrange the steps in the correct order for staging and committing a file in Git.",
-              "hint": "Start with staging the file and end with committing it.",
-              "help": {
-                "concept": "Staging and committing involve specific steps in Git.",
-                "hint_1": "Begin with adding the file to the staging area.",
-                "hint_2": "End with committing the staged changes."
-              },
-              "tokens": {
-                "t1": "Stage the file",
-                "t2": "Verify staged changes",
-                "t3": "Commit the changes"
+                "a": "git diff --staged",
+                "b": "git diff --staged --name-only",
+                "c": "git status --short",
+                "d": "git init"
               }
             },
             "fill-blank-1": {
-              "title": "Command to Stage a File",
-              "prompt": "Fill in the blank to stage a file named `index.html`.",
-              "hint": "Use the `git add` command.",
+              "title": "Write a Focused Commit Subject",
+              "prompt": "The staged change adds event navigation. Complete the subject: `git commit -m \"[blank1]\"`.",
+              "hint": "Choose the term or symbol that matches the exact state described, not a nearby Git concept.",
               "help": {
-                "concept": "Staging a file prepares it for commit.",
-                "hint_1": "The command starts with `git add`.",
-                "hint_2": "Specify the file name after `git add`."
+                "concept": "Build the next snapshot one purpose at a time, review the staged version, and reverse a staging decision without losing work.",
+                "hint_1": "Pay attention to whether the prompt describes an untracked path, a working-tree edit, staged work, or history.",
+                "hint_2": "Read spaces, punctuation, and status columns as meaningful when the question shows Git output."
               },
-              "template": "git add [blank1]",
+              "template": "git commit -m \"[blank1]\"",
               "choices": [
-                "index.html",
-                "README.md",
-                "style.css"
-              ]
-            },
-            "fill-blank-2": {
-              "title": "Unstaging a File",
-              "prompt": "Fill in the blank to unstage a file named `index.html`.",
-              "hint": "Use the `git restore --staged` command.",
-              "help": {
-                "concept": "Unstaging a file moves it back to the working directory without losing changes.",
-                "hint_1": "The command starts with `git restore --staged`.",
-                "hint_2": "Specify the file name after `git restore --staged`."
-              },
-              "template": "git restore --staged [blank1]",
-              "choices": [
-                "index.html",
-                "README.md",
-                "style.css"
+                "Add events navigation",
+                "changes",
+                "update files",
+                "work in progress"
               ]
             }
           }
@@ -283,20 +253,20 @@
       "git-foundations-module-2-meaningful-history": {
         "stage-intentionally": {
           "stage-intentionally-sketch0": {
-            "title": "Build the Next Snapshot",
-            "bodyMarkdown": "`git add` copies the current version of a path into the staging area. Stage the file that belongs to the next commit instead of staging everything by habit.\n\n```bash\ngit add navigation.html\n```\n\nThe working file remains editable. The staging area now holds a proposed snapshot of `navigation.html`.\n\nSelective staging gives you control over commit boundaries, especially when several files changed for different reasons."
+            "title": "Choose One Purpose",
+            "bodyMarkdown": "You already know how to stage a file. The new skill is deciding **which** files belong together. When navigation and palette edits are both valid, stage only the paths that serve the next project result.\n\nA focused snapshot is easier to review, explain, and reverse than a bundle of unrelated work."
           },
           "stage-intentionally-sketch1": {
-            "title": "Inspect What Is Staged",
-            "bodyMarkdown": "Use the staged diff to review the exact snapshot Git will commit:\n\n```bash\ngit diff --staged\n```\n\nThis view is different from plain `git diff`. The staged form compares the staging area with the latest commit; the plain form compares the working tree with the staging area.\n\nA final staged review catches missing files and accidental additions before history is changed."
+            "title": "Review the Proposed Snapshot",
+            "bodyMarkdown": "A staged diff answers one precise question: what would the next commit record?\n\n```bash\ngit diff --staged -- index.html\n```\n\nThis is the staged counterpart to the plain diff taught earlier. Review the content and the path list before committing."
           },
           "stage-intentionally-sketch2": {
-            "title": "Unstage Without Losing Work",
-            "bodyMarkdown": "Staging is reversible. To remove a file from the proposed snapshot while keeping its edits in the working tree, run:\n\n```bash\ngit restore --staged navigation.html\n```\n\nThe file returns to the unstaged section of status. Its contents are not discarded.\n\nThis command changes the staging decision, not the work itself—a useful distinction when reorganizing a commit."
+            "title": "Keep Related Files Together",
+            "bodyMarkdown": "A focused commit is not necessarily one file. A navigation page and the script that makes it work may represent one result, while an unrelated style experiment should wait.\n\nUse the staged path list to prove the boundary. The decision—not the number of files—is what makes the snapshot coherent."
           },
           "stage-intentionally-sketch3": {
-            "title": "Keep One Purpose Together",
-            "bodyMarkdown": "A strong commit groups files that serve one purpose. A navigation link and its matching style may belong together; an unrelated event correction probably does not.\n\nUse status, `git diff`, and `git diff --staged` as three views of the same decision. The goal is not the smallest possible commit. The goal is a coherent snapshot another developer can understand later."
+            "title": "Commit the Boundary You Chose",
+            "bodyMarkdown": "A clear subject completes the boundary. Write it as a concise action—`Clarify volunteer hours`, not `changes` or `worked on site`.\n\nThe commit records only the staged snapshot. Short status afterward should still show any unrelated edit you intentionally left outside. That remaining work is evidence that the focused boundary worked."
           }
         }
       }

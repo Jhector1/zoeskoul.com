@@ -19,6 +19,7 @@ import {
 } from "@/components/code/runner/types";
 // import HeaderBar from "./runner/components/HeaderBar";
 import EditorPane from "@/components/code/runner/components/EditorPane";
+import BinaryFileViewer from "@/components/ide/fullide/panes/BinaryFileViewer";
 import OutputSurface, {
     type OutputSurfaceModel,
 } from "@/components/code/runner/components/OutputSurface";
@@ -449,6 +450,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         toolScopeKey,
         exerciseStateKey,
         workspace,
+        activeBinaryFile,
         onBeforeRun,
         isAuthenticated,
         editorLanguage,
@@ -682,6 +684,8 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
     };
 
     const setCode = (c: string) => {
+        if (activeBinaryFile) return;
+
         if (props.workspace && props.onChangeWorkspace) {
             const entryId = resolveEditableWorkspaceFileId(
                 props.workspace,
@@ -765,6 +769,8 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         useState<number | null>(null);
 
     const readLiveEditorCode = useCallback(() => {
+        if (activeBinaryFile) return code;
+
         const editor = monacoEditorRef.current;
 
         try {
@@ -777,7 +783,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         } catch {}
 
         return code;
-    }, [code]);
+    }, [activeBinaryFile, code]);
 
     const layoutRafRef = useRef<number | null>(null);
 
@@ -1028,7 +1034,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
     }, []);
 
     const runnerLang = (isWeb ? "javascript" : lang) as any;
-    const effectiveAllowRun = allowRun && !isWeb;
+    const effectiveAllowRun = allowRun && !isWeb && !activeBinaryFile;
 
     const workspaceFileIdForIdentity =
         workspace && typeof workspace === "object"
@@ -1723,38 +1729,47 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
             className={PANEL_EDITOR}
             style={{ touchAction: isNarrowScreen ? "pan-y" : "auto", height: "100%" }}
         >
-            {process.env.NODE_ENV !== "production" ? (
-                <textarea
-                    data-testid="code-editor-e2e-input"
-                    aria-label="E2E code editor input"
-                    value={code}
-                    onChange={(e) => setCode(e.target.value)}
-                    style={{
-                        position: "absolute",
-                        width: 1,
-                        height: 1,
-                        opacity: 0,
-                        pointerEvents: "auto",
-                    }}
+            {activeBinaryFile ? (
+                <BinaryFileViewer
+                    fileName={activeBinaryFile.name}
+                    binary={activeBinaryFile.binary}
                 />
-            ) : null}
-            <EditorPane
-                frame={frame}
-                lang={effectiveEditorLanguage}
-                mobileEditMode="auto"
-                code={code}
-                onChange={setCode}
-                theme={editorTheme}
-                height={editorHeight}
-                disabled={disabled || term.busy}
-                modelKey={effectiveEditorModelKey}
-                exerciseStateKey={effectiveExerciseStateKey}
-                workspace={workspace}
-                onMount={(ed) => {
-                    monacoEditorRef.current = ed;
-                    requestLayout();
-                }}
-            />
+            ) : (
+                <>
+                    {process.env.NODE_ENV !== "production" ? (
+                        <textarea
+                            data-testid="code-editor-e2e-input"
+                            aria-label="E2E code editor input"
+                            value={code}
+                            onChange={(e) => setCode(e.target.value)}
+                            style={{
+                                position: "absolute",
+                                width: 1,
+                                height: 1,
+                                opacity: 0,
+                                pointerEvents: "auto",
+                            }}
+                        />
+                    ) : null}
+                    <EditorPane
+                        frame={frame}
+                        lang={effectiveEditorLanguage}
+                        mobileEditMode="auto"
+                        code={code}
+                        onChange={setCode}
+                        theme={editorTheme}
+                        height={editorHeight}
+                        disabled={disabled || term.busy}
+                        modelKey={effectiveEditorModelKey}
+                        exerciseStateKey={effectiveExerciseStateKey}
+                        workspace={workspace}
+                        onMount={(ed) => {
+                            monacoEditorRef.current = ed;
+                            requestLayout();
+                        }}
+                    />
+                </>
+            )}
         </div>
     );
 

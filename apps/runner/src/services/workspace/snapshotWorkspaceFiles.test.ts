@@ -54,6 +54,64 @@ describe("snapshotWorkspaceFiles", () => {
         );
     });
 
+    it("round-trips common web project text files", async () => {
+        await fs.mkdir(path.join(root, "site", "styles"), { recursive: true });
+        await fs.mkdir(path.join(root, "site", "scripts"), { recursive: true });
+        await fs.mkdir(path.join(root, "site", "assets"), { recursive: true });
+        await fs.writeFile(
+            path.join(root, "site", "index.html"),
+            '<script type="module" src="scripts/app.js"></script>\n',
+        );
+        await fs.writeFile(
+            path.join(root, "site", "styles", "app.css"),
+            "body { margin: 0; }\n",
+        );
+        await fs.writeFile(
+            path.join(root, "site", "scripts", "app.js"),
+            'import { ready } from "./ready.mjs";\n',
+        );
+        await fs.writeFile(
+            path.join(root, "site", "scripts", "ready.mjs"),
+            "export const ready = true;\n",
+        );
+        await fs.writeFile(
+            path.join(root, "site", "assets", "logo.svg"),
+            '<svg xmlns="http://www.w3.org/2000/svg"></svg>\n',
+        );
+
+        const snapshot = await snapshotWorkspaceFiles(root);
+
+        expect(snapshot).toEqual(
+            expect.arrayContaining([
+                {
+                    kind: "file",
+                    path: "site/index.html",
+                    content: '<script type="module" src="scripts/app.js"></script>\n',
+                },
+                {
+                    kind: "file",
+                    path: "site/styles/app.css",
+                    content: "body { margin: 0; }\n",
+                },
+                {
+                    kind: "file",
+                    path: "site/scripts/app.js",
+                    content: 'import { ready } from "./ready.mjs";\n',
+                },
+                {
+                    kind: "file",
+                    path: "site/scripts/ready.mjs",
+                    content: "export const ready = true;\n",
+                },
+                {
+                    kind: "file",
+                    path: "site/assets/logo.svg",
+                    content: '<svg xmlns="http://www.w3.org/2000/svg"></svg>\n',
+                },
+            ]),
+        );
+    });
+
     it("captures empty nested directories", async () => {
         await fs.mkdir(path.join(root, "site", "assets"), { recursive: true });
         await fs.mkdir(path.join(root, "site", "pages"), { recursive: true });
@@ -208,6 +266,36 @@ describe("snapshotWorkspaceFiles", () => {
         );
         expect(paths.some((entryPath) => entryPath.includes(".git"))).toBe(false);
         expect(paths.some((entryPath) => entryPath.includes(".zoeskoul"))).toBe(false);
+    });
+
+
+    it("snapshots binary files as exact base64 with MIME, size, and checksum", async () => {
+        const bytes = Buffer.from([0, 255, 1, 2, 3, 128]);
+        await fs.mkdir(path.join(root, "assets"), { recursive: true });
+        await fs.writeFile(path.join(root, "assets", "pixel.png"), bytes);
+
+        const snapshot = await snapshotWorkspaceFiles(root);
+        const entry = snapshot.find((item) => item.path === "assets/pixel.png");
+
+        expect(entry).toMatchObject({
+            kind: "file",
+            path: "assets/pixel.png",
+            encoding: "base64",
+            data: bytes.toString("base64"),
+            mimeType: "image/png",
+            sizeBytes: bytes.byteLength,
+        });
+        expect(
+            entry && entry.kind === "file" && entry.encoding === "base64"
+                ? entry.checksum
+                : null,
+        ).toMatch(/^sha256:[a-f0-9]{64}$/);
+    });
+
+    it("fails instead of silently corrupting invalid UTF-8 text", async () => {
+        await fs.writeFile(path.join(root, "README.md"), Buffer.from([0xff, 0xfe]));
+
+        await expect(snapshotWorkspaceFiles(root)).rejects.toThrow(/not valid UTF-8/i);
     });
 
 });

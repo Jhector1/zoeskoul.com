@@ -8,7 +8,9 @@ function isExistingWorkspaceFileId(
         return false;
     }
 
-    return workspace.nodes.some((node) => node.kind === "file" && node.id === fileId);
+    return workspace.nodes.some(
+        (node) => node.kind === "file" && node.id === fileId && !node.binary,
+    );
 }
 
 export function resolveEditableWorkspaceFileId(
@@ -31,5 +33,5 @@ export function resolveEditableWorkspaceFileId(
         return workspace.entryFileId;
     }
 
-    return workspace.nodes.find((node) => node.kind === "file")?.id ?? null;
+    return workspace.nodes.find((node) => node.kind === "file" && !node.binary)?.id ?? null;
 }

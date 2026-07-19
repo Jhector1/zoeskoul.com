@@ -1,0 +1,301 @@
+{
+  "topics": {
+    "git-foundations": {
+      "git-foundations-module-2-meaningful-history": {
+        "inspect-unstaged-changes-with-diff": {
+          "label": "Inspect Unstaged Changes with Diff",
+          "summary": "Move from a file-level status report to a line-level review, and separate unrelated edits before they reach the staging area.",
+          "cards": {
+            "sketch0": {
+              "title": "Status Names the File; Diff Shows the Edit"
+            },
+            "sketch1": {
+              "title": "Read a Patch Without Guessing"
+            },
+            "sketch2": {
+              "title": "Separate Work Before It Becomes History"
+            },
+            "sketch3": {
+              "title": "Make Review the Default"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_inspect_unstaged_changes_with_diff_sketch0": {
+              "title": "Read One Unstaged Edit",
+              "prompt": "You are working in the prepared `community-site/` repository.\n\nThe community site heading changed in `index.html`. Inspect only that file’s unstaged diff.",
+              "hint": "Inspect the working-tree patch before changing the staging area.",
+              "help": {
+                "concept": "git diff shows working-tree changes that have not been staged.",
+                "hint_1": "Focus on the removed and added lines for the path named in the task.",
+                "hint_2": "The patch should contain only the edit described in the scenario."
+              },
+              "starterCode": "<h1>Neighborhood Hub</h1>\n",
+              "solutionCode": "git diff -- index.html",
+              "starterFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-site\nmkdir -p community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name \"ZoeSkoul Learner\"\ngit -C community-site config --local user.email \"learner@zoeskoul.local\"\ncd community-site\nprintf %s '<h1>Community Hub</h1>\n' > index.html\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Add project baseline'\ncd community-site\nprintf %s '<h1>Neighborhood Hub</h1>\n' > index.html\ncd ..\n"
+                }
+              },
+              "solutionFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-site\nmkdir -p community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name \"ZoeSkoul Learner\"\ngit -C community-site config --local user.email \"learner@zoeskoul.local\"\ncd community-site\nprintf %s '<h1>Community Hub</h1>\n' > index.html\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Add project baseline'\ncd community-site\nprintf %s '<h1>Neighborhood Hub</h1>\n' > index.html\ncd ..\n"
+                }
+              },
+              "instructions": "You are working in the prepared `community-site/` repository.\n\nThe community site heading changed in `index.html`. Inspect only that file’s unstaged diff.",
+              "terminalExpectations": {
+                "forbiddenCommands": {
+                  "0": {
+                    "message": "That action can discard or rewrite history. Use the safe, layer-specific workflow taught in this course."
+                  }
+                },
+                "requiredCommands": {
+                  "0": {
+                    "message": "Did you inspect the unstaged line changes in `index.html`?"
+                  }
+                }
+              }
+            },
+            "try_inspect_unstaged_changes_with_diff_sketch1": {
+              "title": "Compare a Style Change",
+              "prompt": "You are working in the prepared `community-site/` repository.\n\nThe site palette changed in `styles.css`. Inspect that file without including the unrelated README edit.",
+              "hint": "Inspect the working-tree patch before changing the staging area.",
+              "help": {
+                "concept": "A path-limited diff narrows review to one file without altering any changes.",
+                "hint_1": "Focus on the removed and added lines for the path named in the task.",
+                "hint_2": "The patch should contain only the edit described in the scenario."
+              },
+              "starterCode": "# Community Website\n",
+              "solutionCode": "git diff -- styles.css",
+              "starterFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-site\nmkdir -p community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name \"ZoeSkoul Learner\"\ngit -C community-site config --local user.email \"learner@zoeskoul.local\"\ncd community-site\nprintf %s 'color: navy;\n' > styles.css\ncd ..\ncd community-site\nprintf %s '# Community Site\n' > README.md\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Add project baseline'\ncd community-site\nprintf %s 'color: teal;\n' > styles.css\ncd ..\ncd community-site\nprintf %s '# Community Website\n' > README.md\ncd ..\n"
+                }
+              },
+              "solutionFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-site\nmkdir -p community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name \"ZoeSkoul Learner\"\ngit -C community-site config --local user.email \"learner@zoeskoul.local\"\ncd community-site\nprintf %s 'color: navy;\n' > styles.css\ncd ..\ncd community-site\nprintf %s '# Community Site\n' > README.md\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Add project baseline'\ncd community-site\nprintf %s 'color: teal;\n' > styles.css\ncd ..\ncd community-site\nprintf %s '# Community Website\n' > README.md\ncd ..\n"
+                }
+              },
+              "instructions": "You are working in the prepared `community-site/` repository.\n\nThe site palette changed in `styles.css`. Inspect that file without including the unrelated README edit.",
+              "terminalExpectations": {
+                "forbiddenCommands": {
+                  "0": {
+                    "message": "That action can discard or rewrite history. Use the safe, layer-specific workflow taught in this course."
+                  }
+                },
+                "requiredCommands": {
+                  "0": {
+                    "message": "Did you inspect the unstaged line changes in `styles.css`?"
+                  }
+                }
+              }
+            },
+            "try_inspect_unstaged_changes_with_diff_sketch2": {
+              "title": "List the Files That Changed",
+              "prompt": "You are working in the prepared `community-site/` repository.\n\nTwo tracked files changed. Use the name-only diff view first, then inspect `app.js` in detail.",
+              "hint": "Inspect the working-tree patch before changing the staging area.",
+              "help": {
+                "concept": "The name-only view reveals the scope of an edit before a detailed diff explains one file.",
+                "hint_1": "Focus on the removed and added lines for the path named in the task.",
+                "hint_2": "The patch should contain only the edit described in the scenario."
+              },
+              "starterCode": "const open = true;\n",
+              "solutionCode": "git diff --name-only\ngit diff -- app.js",
+              "starterFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-site\nmkdir -p community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name \"ZoeSkoul Learner\"\ngit -C community-site config --local user.email \"learner@zoeskoul.local\"\ncd community-site\nprintf %s 'const open = false;\n' > app.js\ncd ..\ncd community-site\nprintf %s 'export const theme = \"light\";\n' > config.js\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Add project baseline'\ncd community-site\nprintf %s 'const open = true;\n' > app.js\ncd ..\ncd community-site\nprintf %s 'export const theme = \"dark\";\n' > config.js\ncd ..\n"
+                }
+              },
+              "solutionFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-site\nmkdir -p community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name \"ZoeSkoul Learner\"\ngit -C community-site config --local user.email \"learner@zoeskoul.local\"\ncd community-site\nprintf %s 'const open = false;\n' > app.js\ncd ..\ncd community-site\nprintf %s 'export const theme = \"light\";\n' > config.js\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Add project baseline'\ncd community-site\nprintf %s 'const open = true;\n' > app.js\ncd ..\ncd community-site\nprintf %s 'export const theme = \"dark\";\n' > config.js\ncd ..\n"
+                }
+              },
+              "instructions": "You are working in the prepared `community-site/` repository.\n\nTwo tracked files changed. Use the name-only diff view first, then inspect `app.js` in detail.",
+              "terminalExpectations": {
+                "forbiddenCommands": {
+                  "0": {
+                    "message": "That action can discard or rewrite history. Use the safe, layer-specific workflow taught in this course."
+                  }
+                },
+                "requiredCommands": {
+                  "0": {
+                    "message": "Did you inspect the unstaged line changes in `app.js`?"
+                  },
+                  "1": {
+                    "message": "Did you inspect the unstaged line changes in `app.js`?"
+                  }
+                }
+              }
+            },
+            "try_inspect_unstaged_changes_with_diff_sketch3": {
+              "title": "Review Before You Stage",
+              "prompt": "You are working in the prepared `community-site/` repository.\n\nThe volunteer instructions changed in `README.md`. Read the diff and then use short status; leave the change unstaged.",
+              "hint": "Inspect the working-tree patch before changing the staging area.",
+              "help": {
+                "concept": "Reviewing before staging helps keep accidental or unrelated edits out of the next snapshot.",
+                "hint_1": "Focus on the removed and added lines for the path named in the task.",
+                "hint_2": "The patch should contain only the edit described in the scenario."
+              },
+              "starterCode": "Open Saturdays from 9 AM to noon.\n",
+              "solutionCode": "git diff -- README.md\ngit status --short",
+              "starterFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-site\nmkdir -p community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name \"ZoeSkoul Learner\"\ngit -C community-site config --local user.email \"learner@zoeskoul.local\"\ncd community-site\nprintf %s 'Open Saturdays.\n' > README.md\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Add project baseline'\ncd community-site\nprintf %s 'Open Saturdays from 9 AM to noon.\n' > README.md\ncd ..\n"
+                }
+              },
+              "solutionFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-site\nmkdir -p community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name \"ZoeSkoul Learner\"\ngit -C community-site config --local user.email \"learner@zoeskoul.local\"\ncd community-site\nprintf %s 'Open Saturdays.\n' > README.md\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Add project baseline'\ncd community-site\nprintf %s 'Open Saturdays from 9 AM to noon.\n' > README.md\ncd ..\n"
+                }
+              },
+              "instructions": "You are working in the prepared `community-site/` repository.\n\nThe volunteer instructions changed in `README.md`. Read the diff and then use short status; leave the change unstaged.",
+              "terminalExpectations": {
+                "forbiddenCommands": {
+                  "0": {
+                    "message": "That action can discard or rewrite history. Use the safe, layer-specific workflow taught in this course."
+                  }
+                },
+                "requiredCommands": {
+                  "0": {
+                    "message": "Did you inspect the unstaged line changes in `README.md`?"
+                  },
+                  "1": {
+                    "message": "Did you use the compact status view and read the entry for `README.md`?"
+                  }
+                }
+              }
+            }
+          },
+          "practice": {
+            "single-choice-1": {
+              "title": "Using git diff",
+              "prompt": "When should you use `git diff`?",
+              "hint": "Focus on what the command or concept observes or changes at this point in the workflow.",
+              "help": {
+                "concept": "Move from a file-level status report to a line-level review, and separate unrelated edits before they reach the staging area.",
+                "hint_1": "Remove options that act on a different repository layer than the one named in the question.",
+                "hint_2": "Choose the answer that remains accurate even when other unrelated files exist."
+              },
+              "options": {
+                "a": "After committing changes",
+                "b": "Before staging changes",
+                "c": "After pushing to remote",
+                "d": "Before creating a branch"
+              }
+            },
+            "multi-choice-1": {
+              "title": "Understanding git diff",
+              "prompt": "What does the `git diff` command do?",
+              "hint": "Choose the one answer that describes this command or concept precisely.",
+              "help": {
+                "concept": "Move from a file-level status report to a line-level review, and separate unrelated edits before they reach the staging area.",
+                "hint_1": "Remove choices that act on a different repository layer or promise behavior Git does not provide.",
+                "hint_2": "Prefer the exact definition used in this chapter over a nearby Git idea."
+              },
+              "options": {
+                "a": "Shows the commit history",
+                "b": "Displays changes in the working directory not yet staged",
+                "c": "Lists all branches",
+                "d": "Shows the current branch"
+              }
+            },
+            "multi-choice-2": {
+              "title": "Interpreting Diff Output",
+              "prompt": "Which symbol in `git diff` output indicates a line has been added?",
+              "hint": "Choose the one answer that describes this command or concept precisely.",
+              "help": {
+                "concept": "Move from a file-level status report to a line-level review, and separate unrelated edits before they reach the staging area.",
+                "hint_1": "Remove choices that act on a different repository layer or promise behavior Git does not provide.",
+                "hint_2": "Prefer the exact definition used in this chapter over a nearby Git idea."
+              },
+              "options": {
+                "a": "-",
+                "b": "+",
+                "c": "*",
+                "d": "/"
+              }
+            },
+            "drag-reorder-1": {
+              "title": "Steps to Use git diff",
+              "prompt": "Arrange the steps to use `git diff` to inspect changes.",
+              "hint": "Start with the state that must exist before the next action can make sense.",
+              "help": {
+                "concept": "Move from a file-level status report to a line-level review, and separate unrelated edits before they reach the staging area.",
+                "hint_1": "Track how the project moves from working files to a proposed snapshot and then to history.",
+                "hint_2": "Read the ordered steps as one continuous repository story."
+              },
+              "tokens": {
+                "t1": "Navigate to the project directory",
+                "t2": "Run `git diff`",
+                "t3": "Review the output"
+              }
+            },
+            "fill-blank-choice-1": {
+              "title": "Symbol for Removed Lines",
+              "prompt": "In `git diff`, lines that have been removed are indicated by the symbol `[blank1]`.",
+              "hint": "Choose the term or symbol that matches the exact state described, not a nearby Git concept.",
+              "help": {
+                "concept": "Move from a file-level status report to a line-level review, and separate unrelated edits before they reach the staging area.",
+                "hint_1": "Pay attention to whether the prompt describes an untracked path, a working-tree edit, staged work, or history.",
+                "hint_2": "Read spaces, punctuation, and status columns as meaningful when the question shows Git output."
+              },
+              "template": "In `git diff`, lines that have been removed are indicated by the symbol `[blank1]`.",
+              "choices": [
+                "-",
+                "+",
+                "*",
+                "/"
+              ]
+            },
+            "fill-blank-choice-2": {
+              "title": "Purpose of git diff",
+              "prompt": "The primary purpose of `git diff` is to show changes in the [blank1] that are not yet staged.",
+              "hint": "Choose the term or symbol that matches the exact state described, not a nearby Git concept.",
+              "help": {
+                "concept": "Move from a file-level status report to a line-level review, and separate unrelated edits before they reach the staging area.",
+                "hint_1": "Pay attention to whether the prompt describes an untracked path, a working-tree edit, staged work, or history.",
+                "hint_2": "Read spaces, punctuation, and status columns as meaningful when the question shows Git output."
+              },
+              "template": "The primary purpose of `git diff` is to show changes in the [blank1] that are not yet staged.",
+              "choices": [
+                "working directory",
+                "staging area",
+                "commit history",
+                "remote repository"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "git-foundations": {
+      "git-foundations-module-2-meaningful-history": {
+        "inspect-unstaged-changes-with-diff": {
+          "sketch0": {
+            "title": "Status Names the File; Diff Shows the Edit",
+            "bodyMarkdown": "Short status tells you **which** tracked file changed. A plain diff tells you **how** its working copy differs from the staging area.\n\nIf `menu.txt` changes from `Tea` to `Tea and coffee`, the diff marks the old line with `-` and the new line with `+`. Those marks describe the comparison; they are not stored in the file.\n\nUse the file-level map first, then open the line-level evidence for the path you intend to review.\n\nTo review one file without mixing in other edits, name the path explicitly:\n\n```bash\ngit diff -- menu.txt\n```\n\nThis shows only the unstaged patch for `menu.txt`. The exercise uses a different file, but the review decision is the same."
+          },
+          "sketch1": {
+            "title": "Read a Patch Without Guessing",
+            "bodyMarkdown": "A patch contains file headers and one or more change blocks. In each block, unchanged context lines help you locate the edit, removed lines begin with `-`, and added lines begin with `+`.\n\nStart with the body of the change. Ask: which sentence disappeared, which sentence replaced it, and does that match the task? The surrounding metadata becomes easier once the core edit is clear.\n\nA diff is a review document, not merely command output.\n\nA focused patch is easier to read than a repository-wide one:\n\n```bash\ngit diff -- colors.css\n```\n\nRead the removed lines first, then the added lines, and use the unchanged context to locate the edit. The command leaves the file untouched."
+          },
+          "sketch2": {
+            "title": "Separate Work Before It Becomes History",
+            "bodyMarkdown": "A repository may contain several valid edits that do not belong in the same commit. A navigation update and a corrected phone number can both be useful while still representing different purposes.\n\nReviewing unstaged diffs exposes those boundaries early. You can stage one file, leave the other for later, and write a message that accurately describes the resulting snapshot.\n\nFocused history begins before staging, while the work is still easy to separate.\n\nWhen several files changed, begin with a map and then open one patch:\n\n```bash\ngit diff --name-only\ngit diff -- footer.txt\n```\n\nThe first command lists every path with an unstaged tracked change. The second narrows the review to the file that belongs to the current purpose."
+          },
+          "sketch3": {
+            "title": "Make Review the Default",
+            "bodyMarkdown": "A calm review loop uses short status for the map and diff for the detail. It catches debug text, unfinished wording, and unrelated edits before they enter the staging area.\n\nWhen the patch matches the requested outcome, you can stage with confidence. When it does not, fix the file while the mistake is still only a working-tree draft.\n\nThe goal is not to run more commands. It is to make each later decision from evidence.\n\nA final pre-staging review can pair detail with state:\n\n```bash\ngit diff -- README.md\ngit status --short\n```\n\nThe diff proves the wording is correct. Status confirms that the change remains in the working tree and has not been staged accidentally."
+          }
+        }
+      }
+    }
+  }
+}

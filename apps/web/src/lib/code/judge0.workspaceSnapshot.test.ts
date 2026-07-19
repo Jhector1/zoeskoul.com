@@ -165,6 +165,91 @@ describe("Judge0 workspace snapshot parsing", () => {
         ]);
     });
 
+
+
+    it("preserves valid binary snapshots with authoritative MIME and checksum", async () => {
+        const marker = makeSnapshotMarker([
+            {
+                kind: "file",
+                path: "assets/pixel.png",
+                encoding: "base64",
+                data: "AAECAw==",
+                mimeType: "text/plain",
+                sizeBytes: 4,
+                checksum:
+                    "sha256:054edec1d0211f624fed0cbca9d4f9400b0e491c43742af2c5b0abebf0c990d8",
+            },
+        ]);
+
+        vi.mocked(globalThis.fetch).mockResolvedValue({
+            ok: true,
+            text: async () =>
+                JSON.stringify({
+                    token: "abc",
+                    status: { id: 3, description: "Accepted" },
+                    stdout: b64(marker),
+                }),
+        } as Response);
+
+        const result = await getJudge0Submission(
+            "https://judge0.example/submissions/abc?base64_encoded=true",
+        );
+
+        expect(result.workspaceFiles).toEqual([
+            {
+                kind: "file",
+                path: "assets/pixel.png",
+                encoding: "base64",
+                data: "AAECAw==",
+                mimeType: "image/png",
+                sizeBytes: 4,
+                checksum:
+                    "sha256:054edec1d0211f624fed0cbca9d4f9400b0e491c43742af2c5b0abebf0c990d8",
+            },
+        ]);
+    });
+
+    it("drops malformed binary snapshots and control-plane paths", async () => {
+        const marker = makeSnapshotMarker([
+            {
+                kind: "file",
+                path: "assets/bad.png",
+                encoding: "base64",
+                data: "AAECAw==",
+                mimeType: "image/png",
+                sizeBytes: 3,
+            },
+            {
+                kind: "file",
+                path: ".git/README.md",
+                content: "hidden",
+            },
+            {
+                kind: "file",
+                path: "safe.txt",
+                content: "good",
+            },
+        ]);
+
+        vi.mocked(globalThis.fetch).mockResolvedValue({
+            ok: true,
+            text: async () =>
+                JSON.stringify({
+                    token: "abc",
+                    status: { id: 3, description: "Accepted" },
+                    stdout: b64(marker),
+                }),
+        } as Response);
+
+        const result = await getJudge0Submission(
+            "https://judge0.example/submissions/abc?base64_encoded=true",
+        );
+
+        expect(result.workspaceFiles).toEqual([
+            { kind: "file", path: "safe.txt", content: "good" },
+        ]);
+    });
+
     it("leaves normal stdout alone when no marker exists", async () => {
         vi.mocked(globalThis.fetch).mockResolvedValue({
             ok: true,

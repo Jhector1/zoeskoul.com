@@ -348,7 +348,7 @@
             "pattern": "^git\\s+commit\\s+-m$"
           },
           {
-            "pattern": "^git\\s+commit\\s+-m\\s+\"Add\\s+primary\\s+navigation\"$"
+            "pattern": "^git\\s+commit\\s+-m\\s+(?:\"Add\\s+primary\\s+navigation\"|\\'Add\\s+primary\\s+navigation\\')$"
           }
         ],
         "forbiddenCommands": [
@@ -530,7 +530,7 @@
             "pattern": "^git\\s+commit\\s+-m$"
           },
           {
-            "pattern": "^git\\s+commit\\s+-m\\s+\"Publish\\s+weekend\\s+events\"$"
+            "pattern": "^git\\s+commit\\s+-m\\s+(?:\"Publish\\s+weekend\\s+events\"|\\'Publish\\s+weekend\\s+events\\')$"
           }
         ],
         "forbiddenCommands": [
@@ -662,5 +662,13 @@
         "instructions": "@:topics.git.git-foundations-module-2-meaningful-history.module-2-community-website-history.moduleProject.steps.try_module_2_community_website_history_sketch5.instructions"
       }
     }
-  ]
+  ],
+  "topicMeta": {
+    "learningGoals": [
+      "Inspect two unrelated working-tree changes before staging",
+      "Stage and commit the navigation update as one purpose",
+      "Stage and commit the palette update as a separate purpose",
+      "Verify that the final two-commit history is readable and the tree is clean"
+    ]
+  }
 }

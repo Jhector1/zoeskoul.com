@@ -22,6 +22,14 @@ import {
     shouldProbeTerminalOnVisibilityRestore,
 } from "../../runtime";
 import { isWorkspaceInternalPath } from "@/lib/projects/workspaceInternalPaths";
+import {
+    normalizeWorkspaceSyncEntry,
+    normalizeWorkspaceSyncPath,
+    sortWorkspaceSyncEntries,
+    workspaceSyncEntriesEqual,
+    workspaceSyncEntryValue,
+} from "@/lib/projects/workspaceSyncEntries";
+
 import { useRunSession } from "../useRunSession";
 import {
     deleteTerminalHistory,
@@ -222,8 +230,8 @@ function workspaceSnapshotHasEntries(
 
         if ((actual as any).kind === "directory") return false;
 
-        return String((actual as any).content ?? "") ===
-            String((expected as any).content ?? "");
+        return workspaceSyncEntryValue(actual) ===
+            workspaceSyncEntryValue(expected);
     });
 }
 
@@ -375,20 +383,7 @@ function normalizeEntries(
     if (!files) return undefined;
 
     if (Array.isArray(files)) {
-        return files.map((entry): WorkspaceSyncEntry => {
-            if ((entry as any)?.kind === "directory") {
-                return {
-                    kind: "directory",
-                    path: String((entry as any).path ?? ""),
-                };
-            }
-
-            return {
-                kind: "file",
-                path: String((entry as any).path ?? ""),
-                content: String((entry as any).content ?? ""),
-            };
-        });
+        return files.map(normalizeWorkspaceSyncEntry);
     }
 
     return Object.entries(files).map(
@@ -586,49 +581,11 @@ export function buildWorkspaceTerminalStartupInput(args: {
 }
 
 function sortEntries(entries: WorkspaceSyncEntry[]): WorkspaceSyncEntry[] {
-    return [...entries]
-        .map((entry): WorkspaceSyncEntry => {
-            if (entry.kind === "directory") {
-                return {
-                    kind: "directory",
-                    path: normalizePath(entry.path),
-                };
-            }
-
-            return {
-                kind: "file",
-                path: normalizePath(entry.path),
-                content: String((entry as any).content ?? ""),
-            };
-        })
-        .filter((entry): entry is WorkspaceSyncEntry => !!entry.path)
-        .sort((a, b) => {
-            const pathCmp = a.path.localeCompare(b.path);
-            if (pathCmp !== 0) return pathCmp;
-            if (a.kind === b.kind) return 0;
-            return a.kind === "directory" ? -1 : 1;
-        });
+    return sortWorkspaceSyncEntries(entries);
 }
 
 function entriesEqual(a: WorkspaceSyncEntry[], b: WorkspaceSyncEntry[]) {
-    const aa = sortEntries(a);
-    const bb = sortEntries(b);
-
-    if (aa.length !== bb.length) return false;
-
-    for (let i = 0; i < aa.length; i++) {
-        const left = aa[i];
-        const right = bb[i];
-
-        if (left.kind !== right.kind) return false;
-        if (left.path !== right.path) return false;
-
-        if (left.kind !== "directory" && right.kind !== "directory") {
-            if (left.content !== right.content) return false;
-        }
-    }
-
-    return true;
+    return workspaceSyncEntriesEqual(a, b);
 }
 
 function diffDirtyUiPaths(
@@ -640,14 +597,14 @@ function diffDirtyUiPaths(
     const current = new Map(
         sortEntries(currentUiEntries).map((entry) => [
             entry.path,
-            entry.kind === "directory" ? "__DIR__" : `__FILE__:${entry.content}`,
+            workspaceSyncEntryValue(entry),
         ]),
     );
 
     const baseline = new Map(
         sortEntries(baselineEntries).map((entry) => [
             entry.path,
-            entry.kind === "directory" ? "__DIR__" : `__FILE__:${entry.content}`,
+            workspaceSyncEntryValue(entry),
         ]),
     );
 

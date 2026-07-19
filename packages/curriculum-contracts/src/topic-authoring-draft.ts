@@ -58,7 +58,14 @@ export type ProgrammingCodeInputStarterFileDraft = {
      */
     path: string;
 
+    /** UTF-8 source content. Keep this empty for binary files. */
     content: string;
+    /** Binary starter files use an explicit base64 payload. */
+    encoding?: "base64";
+    data?: string;
+    mimeType?: string;
+    sizeBytes?: number;
+    checksum?: string;
     language?: WorkspaceLanguage;
     isEntry?: boolean;
     entry?: boolean;
@@ -439,6 +446,11 @@ export const TOPIC_AUTHORING_DRAFT_JSON_SCHEMA = {
                                     properties: {
                                         path: { type: "string" },
                                         content: { type: "string" },
+                                        encoding: { type: "string", enum: ["base64"] },
+                                        data: { type: "string" },
+                                        mimeType: { type: "string" },
+                                        sizeBytes: { type: "number", minimum: 0 },
+                                        checksum: { type: "string" },
                                         language: { type: "string" },
                                         isEntry: { type: "boolean" },
                                         entry: { type: "boolean" },
@@ -455,6 +467,11 @@ export const TOPIC_AUTHORING_DRAFT_JSON_SCHEMA = {
                                     properties: {
                                         path: { type: "string" },
                                         content: { type: "string" },
+                                        encoding: { type: "string", enum: ["base64"] },
+                                        data: { type: "string" },
+                                        mimeType: { type: "string" },
+                                        sizeBytes: { type: "number", minimum: 0 },
+                                        checksum: { type: "string" },
                                         language: { type: "string" },
                                         isEntry: { type: "boolean" },
                                         entry: { type: "boolean" },
@@ -687,6 +704,18 @@ function isRecord(value: unknown): value is Record<string, unknown> {
 function isNonEmptyString(value: unknown): value is string {
     return typeof value === "string" && value.trim().length > 0;
 }
+
+function canonicalBase64ByteLength(value: unknown): number | null {
+    if (typeof value !== "string") return null;
+    const source = value.replace(/\s+/g, "");
+    if (!source) return 0;
+    if (source.length % 4 !== 0) return null;
+    if (!/^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$/.test(source)) {
+        return null;
+    }
+    const padding = source.endsWith("==") ? 2 : source.endsWith("=") ? 1 : 0;
+    return (source.length / 4) * 3 - padding;
+}
 function assertWorkspacePath(value: unknown, label: string): string {
     if (!isNonEmptyString(value)) {
         fail(`${label} must be a non-empty workspace-relative path`);
@@ -711,8 +740,52 @@ function assertFileDraft(
     assertOnlyKeys(file, allowedKeys, label);
     assertWorkspacePath(file.path, `${label}.path`);
 
-    if (typeof file.content !== "string") {
-        fail(`${label}.content must be a string`);
+    const binary = file.encoding === "base64";
+    if (binary) {
+        const decodedBytes = canonicalBase64ByteLength(file.data);
+        if (decodedBytes == null) {
+            fail(`${label}.data must be canonical base64 for binary files`);
+        }
+        if (typeof file.mimeType !== "string" || !file.mimeType.trim()) {
+            fail(`${label}.mimeType must be a non-empty string for binary files`);
+        }
+        if (
+            typeof file.sizeBytes !== "number" ||
+            !Number.isInteger(file.sizeBytes) ||
+            file.sizeBytes < 0
+        ) {
+            fail(`${label}.sizeBytes must be a non-negative integer for binary files`);
+        }
+        if (file.sizeBytes !== decodedBytes) {
+            fail(`${label}.sizeBytes must match the decoded binary payload`);
+        }
+        if (file.content !== "") {
+            fail(`${label}.content must be an empty string for binary files`);
+        }
+    } else {
+        if (typeof file.encoding !== "undefined") {
+            fail(`${label}.encoding must be "base64" when provided`);
+        }
+        if (typeof file.content !== "string") {
+            fail(`${label}.content must be a string for text files`);
+        }
+        if (
+            typeof file.data !== "undefined" ||
+            typeof file.mimeType !== "undefined" ||
+            typeof file.sizeBytes !== "undefined" ||
+            typeof file.checksum !== "undefined"
+        ) {
+            fail(`${label} binary metadata requires encoding "base64"`);
+        }
+    }
+
+    if (typeof file.checksum !== "undefined") {
+        if (
+            typeof file.checksum !== "string" ||
+            !/^sha256:[a-f0-9]{64}$/i.test(file.checksum.trim())
+        ) {
+            fail(`${label}.checksum must be a SHA-256 checksum when provided`);
+        }
     }
 
     if (
@@ -1163,7 +1236,7 @@ export function assertTopicAuthoringDraft(
                     assertFileDraft(
                         file,
                         `${label} starterFiles[${fileIndex}]`,
-                        ["path", "content", "language", "isEntry", "entry", "readOnly"],
+                        ["path", "content", "encoding", "data", "mimeType", "sizeBytes", "checksum", "language", "isEntry", "entry", "readOnly"],
                     );
 
                     const record = file as Record<string, unknown>;
@@ -1200,7 +1273,7 @@ export function assertTopicAuthoringDraft(
                     assertFileDraft(
                         file,
                         `${label} solutionFiles[${fileIndex}]`,
-                        ["path", "content", "language", "isEntry", "entry", "readOnly"],
+                        ["path", "content", "encoding", "data", "mimeType", "sizeBytes", "checksum", "language", "isEntry", "entry", "readOnly"],
                     );
 
                     const record = file as Record<string, unknown>;

@@ -1,0 +1,940 @@
+{
+  "topicId": "ignore-generated-files",
+  "subjectSlug": "git-foundations",
+  "moduleSlug": "git-foundations-module-3-manage-tracked-files",
+  "sectionSlug": "git-foundations-git-foundations-section-3-safe-file-management",
+  "prefix": "git_foundations_module_3",
+  "minutes": 24,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "bash",
+    "supportsTerminal": true,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "runnerBackend": "pty",
+    "layoutMode": "default",
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": true
+    },
+    "preset": "runner",
+    "terminalBootstrap": {
+      "gitSafeDirectories": [
+        "/workspace/*"
+      ]
+    }
+  },
+  "topic": {
+    "labelKey": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.ignore-generated-files.label",
+    "summaryKey": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.ignore-generated-files.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.ignore-generated-files.cards.sketch0.title",
+      "sketchId": "ignore-generated-files-sketch0",
+      "height": 420,
+      "tryIt": {
+        "id": "try-ignore-generated-files-sketch0",
+        "titleKey": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.ignore-generated-files.tryIt.try_ignore_generated_files_sketch0.title",
+        "promptKey": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.ignore-generated-files.tryIt.try_ignore_generated_files_sketch0.prompt",
+        "exerciseKey": "try-ignore-generated-files-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.ignore-generated-files.cards.sketch1.title",
+      "sketchId": "ignore-generated-files-sketch1",
+      "height": 420,
+      "tryIt": {
+        "id": "try-ignore-generated-files-sketch1",
+        "titleKey": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.ignore-generated-files.tryIt.try_ignore_generated_files_sketch1.title",
+        "promptKey": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.ignore-generated-files.tryIt.try_ignore_generated_files_sketch1.prompt",
+        "exerciseKey": "try-ignore-generated-files-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.ignore-generated-files.cards.sketch2.title",
+      "sketchId": "ignore-generated-files-sketch2",
+      "height": 420,
+      "tryIt": {
+        "id": "try-ignore-generated-files-sketch2",
+        "titleKey": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.ignore-generated-files.tryIt.try_ignore_generated_files_sketch2.title",
+        "promptKey": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.ignore-generated-files.tryIt.try_ignore_generated_files_sketch2.prompt",
+        "exerciseKey": "try-ignore-generated-files-sketch2",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch3",
+      "kind": "sketch",
+      "titleKey": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.ignore-generated-files.cards.sketch3.title",
+      "sketchId": "ignore-generated-files-sketch3",
+      "height": 420,
+      "tryIt": {
+        "id": "try-ignore-generated-files-sketch3",
+        "titleKey": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.ignore-generated-files.tryIt.try_ignore_generated_files_sketch3.title",
+        "promptKey": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.ignore-generated-files.tryIt.try_ignore_generated_files_sketch3.prompt",
+        "exerciseKey": "try-ignore-generated-files-sketch3",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.ignore-generated-files.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "ignore-generated-files-sketch0",
+      "archetype": "paragraph",
+      "titleKey": "sketches.git-foundations.git-foundations-module-3-manage-tracked-files.ignore-generated-files.ignore-generated-files-sketch0.title",
+      "bodyKey": "sketches.git-foundations.git-foundations-module-3-manage-tracked-files.ignore-generated-files.ignore-generated-files-sketch0.bodyMarkdown"
+    },
+    {
+      "id": "ignore-generated-files-sketch1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.git-foundations.git-foundations-module-3-manage-tracked-files.ignore-generated-files.ignore-generated-files-sketch1.title",
+      "bodyKey": "sketches.git-foundations.git-foundations-module-3-manage-tracked-files.ignore-generated-files.ignore-generated-files-sketch1.bodyMarkdown"
+    },
+    {
+      "id": "ignore-generated-files-sketch2",
+      "archetype": "paragraph",
+      "titleKey": "sketches.git-foundations.git-foundations-module-3-manage-tracked-files.ignore-generated-files.ignore-generated-files-sketch2.title",
+      "bodyKey": "sketches.git-foundations.git-foundations-module-3-manage-tracked-files.ignore-generated-files.ignore-generated-files-sketch2.bodyMarkdown"
+    },
+    {
+      "id": "ignore-generated-files-sketch3",
+      "archetype": "paragraph",
+      "titleKey": "sketches.git-foundations.git-foundations-module-3-manage-tracked-files.ignore-generated-files.ignore-generated-files-sketch3.title",
+      "bodyKey": "sketches.git-foundations.git-foundations-module-3-manage-tracked-files.ignore-generated-files.ignore-generated-files-sketch3.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "ignore-generated-files-single-choice-0",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.ignore-generated-files.practice.ignore-generated-files-single-choice-0",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "ignore-generated-files-single-choice-1",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.ignore-generated-files.practice.ignore-generated-files-single-choice-1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "c"
+      }
+    },
+    {
+      "id": "ignore-generated-files-multi-choice-0",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.ignore-generated-files.practice.ignore-generated-files-multi-choice-0",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "ignore-generated-files-drag-reorder-0",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.ignore-generated-files.practice.ignore-generated-files-drag-reorder-0",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
+      }
+    },
+    {
+      "id": "ignore-generated-files-fill-blank-0",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.ignore-generated-files.practice.ignore-generated-files-fill-blank-0",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "cache/"
+      }
+    },
+    {
+      "id": "ignore-generated-files-fill-blank-1",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.ignore-generated-files.practice.ignore-generated-files-fill-blank-1",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "*.bak"
+      }
+    },
+    {
+      "id": "try-ignore-generated-files-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.ignore-generated-files.tryIt.try_ignore_generated_files_sketch0",
+      "language": "bash",
+      "starterCode": "# Release Kit\n",
+      "starterFiles": [
+        {
+          "path": "release-kit/README.md",
+          "content": "# Release Kit\n",
+          "language": "markdown",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "release-kit/dist/app.js",
+          "content": "bundled output\n",
+          "language": "javascript"
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^git\\s+status\\s+\\-\\-short$",
+            "message": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.ignore-generated-files.tryIt.try_ignore_generated_files_sketch0.terminalExpectations.requiredCommands.0.message"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.ignore-generated-files.tryIt.try_ignore_generated_files_sketch0.terminalExpectations.forbiddenCommands.0.message"
+          }
+        ]
+      },
+      "hiddenShellCheck": {
+        "script": "set -eu\nrepo=release-kit\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" branch --show-current)\" = main ] || fail \"The repository is not on main.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = 1 ] || fail \"The repository has the wrong number of commits.\"\n[ -n \"$(git -C \"$repo\" status --porcelain)\" ] || fail \"The exercise change is missing.\"\nexpected=$(printf \"%s\\n\" README.md | sort)\nactual=$(git -C \"$repo\" ls-files | sort)\n[ \"$actual\" = \"$expected\" ] || fail \"The tracked file set is not correct.\"\nexpected_untracked=$(printf \"%s\\n\" .gitignore | sort)\nactual_untracked=$(git -C \"$repo\" ls-files --others --exclude-standard | sort)\n[ \"$actual_untracked\" = \"$expected_untracked\" ] || fail \"The untracked file set is not correct.\"\ngit -C \"$repo\" check-ignore -q dist/app.js",
+        "timeoutMs": 15000
+      },
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "release-kit/README.md",
+        "starterCode": "# Release Kit\n",
+        "starterFiles": [
+          {
+            "path": "release-kit/README.md",
+            "content": "# Release Kit\n",
+            "language": "markdown",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "release-kit/dist/app.js",
+            "content": "bundled output\n",
+            "language": "javascript"
+          }
+        ],
+        "fixtureFiles": [
+          {
+            "path": ".zoeskoul/setup.sh",
+            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-kit\nmkdir -p release-kit\ngit -C release-kit init -q -b main\ngit -C release-kit config --local user.name \"ZoeSkoul Learner\"\ngit -C release-kit config --local user.email \"learner@zoeskoul.local\"\ncd release-kit\nprintf %s '# Release Kit\n' > README.md\ncd ..\ngit -C release-kit add -A\ngit -C release-kit commit -q -m 'Add project baseline'\ncd release-kit\nmkdir -p dist\nprintf %s 'bundled output\n' > dist/app.js\ncd ..\n",
+            "language": "bash",
+            "readOnly": true
+          },
+          {
+            "path": "release-kit/README.md",
+            "content": "# Release Kit\n",
+            "language": "markdown"
+          },
+          {
+            "path": "release-kit/dist/app.js",
+            "content": "bundled output\n",
+            "language": "javascript"
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.ignore-generated-files.tryIt.try_ignore_generated_files_sketch0.instructions"
+      },
+      "ideConfig": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/release-kit",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "serviceOverrides": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/release-kit",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "fixtureFiles": [
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-kit\nmkdir -p release-kit\ngit -C release-kit init -q -b main\ngit -C release-kit config --local user.name \"ZoeSkoul Learner\"\ngit -C release-kit config --local user.email \"learner@zoeskoul.local\"\ncd release-kit\nprintf %s '# Release Kit\n' > README.md\ncd ..\ngit -C release-kit add -A\ngit -C release-kit commit -q -m 'Add project baseline'\ncd release-kit\nmkdir -p dist\nprintf %s 'bundled output\n' > dist/app.js\ncd ..\n",
+          "language": "bash",
+          "readOnly": true
+        },
+        {
+          "path": "release-kit/README.md",
+          "content": "# Release Kit\n",
+          "language": "markdown"
+        },
+        {
+          "path": "release-kit/dist/app.js",
+          "content": "bundled output\n",
+          "language": "javascript"
+        }
+      ],
+      "tools": {
+        "defaultSurface": "editor",
+        "compactDefaultSurface": "editor"
+      }
+    },
+    {
+      "id": "try-ignore-generated-files-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.ignore-generated-files.tryIt.try_ignore_generated_files_sketch1",
+      "language": "bash",
+      "starterCode": "# Release Kit\n",
+      "starterFiles": [
+        {
+          "path": "release-kit/.gitignore",
+          "content": "logs/\n",
+          "language": "text"
+        },
+        {
+          "path": "release-kit/README.md",
+          "content": "# Release Kit\n",
+          "language": "markdown",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "release-kit/logs/error.log",
+          "content": "preview warning\n",
+          "language": "text"
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^git\\s+check\\-ignore\\s+\\-v\\s+logs/error\\.log$",
+            "message": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.ignore-generated-files.tryIt.try_ignore_generated_files_sketch1.terminalExpectations.requiredCommands.0.message"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.ignore-generated-files.tryIt.try_ignore_generated_files_sketch1.terminalExpectations.forbiddenCommands.0.message"
+          }
+        ]
+      },
+      "hiddenShellCheck": {
+        "script": "set -eu\nrepo=release-kit\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" branch --show-current)\" = main ] || fail \"The repository is not on main.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = 1 ] || fail \"The repository has the wrong number of commits.\"\n[ -z \"$(git -C \"$repo\" status --porcelain)\" ] || fail \"The working tree is not clean.\"\nexpected=$(printf \"%s\\n\" .gitignore README.md | sort)\nactual=$(git -C \"$repo\" ls-files | sort)\n[ \"$actual\" = \"$expected\" ] || fail \"The tracked file set is not correct.\"\ngit -C \"$repo\" check-ignore -q logs/error.log",
+        "timeoutMs": 15000
+      },
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "release-kit/README.md",
+        "starterCode": "# Release Kit\n",
+        "starterFiles": [
+          {
+            "path": "release-kit/.gitignore",
+            "content": "logs/\n",
+            "language": "text"
+          },
+          {
+            "path": "release-kit/README.md",
+            "content": "# Release Kit\n",
+            "language": "markdown",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "release-kit/logs/error.log",
+            "content": "preview warning\n",
+            "language": "text"
+          }
+        ],
+        "fixtureFiles": [
+          {
+            "path": ".zoeskoul/setup.sh",
+            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-kit\nmkdir -p release-kit\ngit -C release-kit init -q -b main\ngit -C release-kit config --local user.name \"ZoeSkoul Learner\"\ngit -C release-kit config --local user.email \"learner@zoeskoul.local\"\ncd release-kit\nprintf %s '# Release Kit\n' > README.md\ncd ..\ncd release-kit\nprintf %s 'logs/\n' > .gitignore\ncd ..\ngit -C release-kit add -A\ngit -C release-kit commit -q -m 'Add project baseline'\ncd release-kit\nmkdir -p logs\nprintf %s 'preview warning\n' > logs/error.log\ncd ..\n",
+            "language": "bash",
+            "readOnly": true
+          },
+          {
+            "path": "release-kit/.gitignore",
+            "content": "logs/\n",
+            "language": "text"
+          },
+          {
+            "path": "release-kit/README.md",
+            "content": "# Release Kit\n",
+            "language": "markdown"
+          },
+          {
+            "path": "release-kit/logs/error.log",
+            "content": "preview warning\n",
+            "language": "text"
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.ignore-generated-files.tryIt.try_ignore_generated_files_sketch1.instructions"
+      },
+      "ideConfig": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/release-kit",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "serviceOverrides": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/release-kit",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "fixtureFiles": [
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-kit\nmkdir -p release-kit\ngit -C release-kit init -q -b main\ngit -C release-kit config --local user.name \"ZoeSkoul Learner\"\ngit -C release-kit config --local user.email \"learner@zoeskoul.local\"\ncd release-kit\nprintf %s '# Release Kit\n' > README.md\ncd ..\ncd release-kit\nprintf %s 'logs/\n' > .gitignore\ncd ..\ngit -C release-kit add -A\ngit -C release-kit commit -q -m 'Add project baseline'\ncd release-kit\nmkdir -p logs\nprintf %s 'preview warning\n' > logs/error.log\ncd ..\n",
+          "language": "bash",
+          "readOnly": true
+        },
+        {
+          "path": "release-kit/.gitignore",
+          "content": "logs/\n",
+          "language": "text"
+        },
+        {
+          "path": "release-kit/README.md",
+          "content": "# Release Kit\n",
+          "language": "markdown"
+        },
+        {
+          "path": "release-kit/logs/error.log",
+          "content": "preview warning\n",
+          "language": "text"
+        }
+      ]
+    },
+    {
+      "id": "try-ignore-generated-files-sketch2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.ignore-generated-files.tryIt.try_ignore_generated_files_sketch2",
+      "language": "bash",
+      "starterCode": "config/local.json\n",
+      "starterFiles": [
+        {
+          "path": "release-kit/.gitignore",
+          "content": "config/local.json\n",
+          "language": "text",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "release-kit/config/local.json",
+          "content": "{\"port\":3000}\n",
+          "language": "json"
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^git\\s+rm\\s+\\-\\-cached\\s+config/local\\.json$",
+            "message": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.ignore-generated-files.tryIt.try_ignore_generated_files_sketch2.terminalExpectations.requiredCommands.0.message"
+          },
+          {
+            "pattern": "^git\\s+status\\s+\\-\\-short$",
+            "message": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.ignore-generated-files.tryIt.try_ignore_generated_files_sketch2.terminalExpectations.requiredCommands.1.message"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.ignore-generated-files.tryIt.try_ignore_generated_files_sketch2.terminalExpectations.forbiddenCommands.0.message"
+          }
+        ]
+      },
+      "hiddenShellCheck": {
+        "script": "set -eu\nrepo=release-kit\nfail() { printf \"%s\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD)\" = \"2\" ] || fail \"The repository history changed unexpectedly.\"\n[ -f \"$repo/config/local.json\" ] || fail \"Keep the local file in the working tree.\"\n! git -C \"$repo\" ls-files --error-unmatch config/local.json >/dev/null 2>&1 || fail \"Remove config/local.json from Git's index.\"\ngit -C \"$repo\" check-ignore -q config/local.json || fail \"The local file is not ignored.\"\ngit -C \"$repo\" diff --cached --name-only | grep -Fxq config/local.json || fail \"Stage the tracked-file removal.\"",
+        "timeoutMs": 15000
+      },
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "release-kit/.gitignore",
+        "starterCode": "config/local.json\n",
+        "starterFiles": [
+          {
+            "path": "release-kit/.gitignore",
+            "content": "config/local.json\n",
+            "language": "text",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "release-kit/config/local.json",
+            "content": "{\"port\":3000}\n",
+            "language": "json"
+          }
+        ],
+        "fixtureFiles": [
+          {
+            "path": ".zoeskoul/setup.sh",
+            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-kit\nmkdir -p release-kit/config\ngit -C release-kit init -q -b main\ngit -C release-kit config --local user.name \"ZoeSkoul Learner\"\ngit -C release-kit config --local user.email \"learner@zoeskoul.local\"\nprintf '%s\n' '{\"port\":3000}' > release-kit/config/local.json\ngit -C release-kit add config/local.json\ngit -C release-kit commit -q -m \"Add local configuration\"\nprintf '%s\n' 'config/local.json' > release-kit/.gitignore\ngit -C release-kit add .gitignore\ngit -C release-kit commit -q -m \"Ignore local configuration\"\n",
+            "language": "bash",
+            "readOnly": true
+          },
+          {
+            "path": "release-kit/.gitignore",
+            "content": "config/local.json\n",
+            "language": "text"
+          },
+          {
+            "path": "release-kit/config/local.json",
+            "content": "{\"port\":3000}\n",
+            "language": "json"
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.ignore-generated-files.tryIt.try_ignore_generated_files_sketch2.instructions"
+      },
+      "ideConfig": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/release-kit",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "serviceOverrides": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/release-kit",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "fixtureFiles": [
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-kit\nmkdir -p release-kit/config\ngit -C release-kit init -q -b main\ngit -C release-kit config --local user.name \"ZoeSkoul Learner\"\ngit -C release-kit config --local user.email \"learner@zoeskoul.local\"\nprintf '%s\n' '{\"port\":3000}' > release-kit/config/local.json\ngit -C release-kit add config/local.json\ngit -C release-kit commit -q -m \"Add local configuration\"\nprintf '%s\n' 'config/local.json' > release-kit/.gitignore\ngit -C release-kit add .gitignore\ngit -C release-kit commit -q -m \"Ignore local configuration\"\n",
+          "language": "bash",
+          "readOnly": true
+        },
+        {
+          "path": "release-kit/.gitignore",
+          "content": "config/local.json\n",
+          "language": "text"
+        },
+        {
+          "path": "release-kit/config/local.json",
+          "content": "{\"port\":3000}\n",
+          "language": "json"
+        }
+      ]
+    },
+    {
+      "id": "try-ignore-generated-files-sketch3",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.ignore-generated-files.tryIt.try_ignore_generated_files_sketch3",
+      "language": "bash",
+      "starterCode": "# Release Kit\n",
+      "starterFiles": [
+        {
+          "path": "release-kit/.gitignore",
+          "content": "dist/\n*.log\n",
+          "language": "text"
+        },
+        {
+          "path": "release-kit/README.md",
+          "content": "# Release Kit\n",
+          "language": "markdown",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "release-kit/debug.log",
+          "content": "local log\n",
+          "language": "text"
+        },
+        {
+          "path": "release-kit/dist/app.js",
+          "content": "bundled output\n",
+          "language": "javascript"
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^git\\s+commit\\s+\\-m\\s+\"Ignore\\s+generated\\s+output\"$",
+            "message": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.ignore-generated-files.tryIt.try_ignore_generated_files_sketch3.terminalExpectations.requiredCommands.0.message"
+          },
+          {
+            "pattern": "^git\\s+check\\-ignore\\s+dist/app\\.js\\s+debug\\.log$",
+            "message": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.ignore-generated-files.tryIt.try_ignore_generated_files_sketch3.terminalExpectations.requiredCommands.1.message"
+          },
+          {
+            "pattern": "^git\\s+status\\s+\\-\\-short$",
+            "message": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.ignore-generated-files.tryIt.try_ignore_generated_files_sketch3.terminalExpectations.requiredCommands.2.message"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.ignore-generated-files.tryIt.try_ignore_generated_files_sketch3.terminalExpectations.forbiddenCommands.0.message"
+          }
+        ]
+      },
+      "hiddenShellCheck": {
+        "script": "set -eu\nrepo=release-kit\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" branch --show-current)\" = main ] || fail \"The repository is not on main.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = 2 ] || fail \"The repository has the wrong number of commits.\"\n[ -z \"$(git -C \"$repo\" status --porcelain)\" ] || fail \"The working tree is not clean.\"\nexpected=$(printf \"%s\\n\" .gitignore README.md | sort)\nactual=$(git -C \"$repo\" ls-files | sort)\n[ \"$actual\" = \"$expected\" ] || fail \"The tracked file set is not correct.\"\n[ \"$(git -C \"$repo\" log -1 --format=%s)\" = 'Ignore generated output' ] || fail \"The latest commit message is not correct.\"\ngit -C \"$repo\" check-ignore -q dist/app.js\ngit -C \"$repo\" check-ignore -q debug.log",
+        "timeoutMs": 15000
+      },
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "release-kit/README.md",
+        "starterCode": "# Release Kit\n",
+        "starterFiles": [
+          {
+            "path": "release-kit/.gitignore",
+            "content": "dist/\n*.log\n",
+            "language": "text"
+          },
+          {
+            "path": "release-kit/README.md",
+            "content": "# Release Kit\n",
+            "language": "markdown",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "release-kit/debug.log",
+            "content": "local log\n",
+            "language": "text"
+          },
+          {
+            "path": "release-kit/dist/app.js",
+            "content": "bundled output\n",
+            "language": "javascript"
+          }
+        ],
+        "fixtureFiles": [
+          {
+            "path": ".zoeskoul/setup.sh",
+            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-kit\nmkdir -p release-kit\ngit -C release-kit init -q -b main\ngit -C release-kit config --local user.name \"ZoeSkoul Learner\"\ngit -C release-kit config --local user.email \"learner@zoeskoul.local\"\ncd release-kit\nprintf %s '# Release Kit\n' > README.md\ncd ..\ngit -C release-kit add -A\ngit -C release-kit commit -q -m 'Add project baseline'\ncd release-kit\nprintf %s 'dist/\n*.log\n' > .gitignore\ncd ..\ncd release-kit\nmkdir -p dist\nprintf %s 'bundled output\n' > dist/app.js\ncd ..\ncd release-kit\nprintf %s 'local log\n' > debug.log\ncd ..\ngit -C release-kit add -- .gitignore\n",
+            "language": "bash",
+            "readOnly": true
+          },
+          {
+            "path": "release-kit/.gitignore",
+            "content": "dist/\n*.log\n",
+            "language": "text"
+          },
+          {
+            "path": "release-kit/README.md",
+            "content": "# Release Kit\n",
+            "language": "markdown"
+          },
+          {
+            "path": "release-kit/debug.log",
+            "content": "local log\n",
+            "language": "text"
+          },
+          {
+            "path": "release-kit/dist/app.js",
+            "content": "bundled output\n",
+            "language": "javascript"
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.ignore-generated-files.tryIt.try_ignore_generated_files_sketch3.instructions"
+      },
+      "ideConfig": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/release-kit",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "serviceOverrides": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/release-kit",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "fixtureFiles": [
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-kit\nmkdir -p release-kit\ngit -C release-kit init -q -b main\ngit -C release-kit config --local user.name \"ZoeSkoul Learner\"\ngit -C release-kit config --local user.email \"learner@zoeskoul.local\"\ncd release-kit\nprintf %s '# Release Kit\n' > README.md\ncd ..\ngit -C release-kit add -A\ngit -C release-kit commit -q -m 'Add project baseline'\ncd release-kit\nprintf %s 'dist/\n*.log\n' > .gitignore\ncd ..\ncd release-kit\nmkdir -p dist\nprintf %s 'bundled output\n' > dist/app.js\ncd ..\ncd release-kit\nprintf %s 'local log\n' > debug.log\ncd ..\ngit -C release-kit add -- .gitignore\n",
+          "language": "bash",
+          "readOnly": true
+        },
+        {
+          "path": "release-kit/.gitignore",
+          "content": "dist/\n*.log\n",
+          "language": "text"
+        },
+        {
+          "path": "release-kit/README.md",
+          "content": "# Release Kit\n",
+          "language": "markdown"
+        },
+        {
+          "path": "release-kit/debug.log",
+          "content": "local log\n",
+          "language": "text"
+        },
+        {
+          "path": "release-kit/dist/app.js",
+          "content": "bundled output\n",
+          "language": "javascript"
+        }
+      ]
+    }
+  ]
+}

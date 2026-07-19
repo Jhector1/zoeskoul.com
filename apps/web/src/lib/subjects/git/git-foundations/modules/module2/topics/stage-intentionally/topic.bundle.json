@@ -4,7 +4,7 @@
   "moduleSlug": "git-foundations-module-2-meaningful-history",
   "sectionSlug": "git-foundations-git-foundations-section-2-history-workflow",
   "prefix": "git_foundations_module_2",
-  "minutes": 22,
+  "minutes": 24,
   "runtimeDefaults": {
     "kind": "code",
     "language": "bash",
@@ -118,7 +118,7 @@
         "difficulty": "easy",
         "n": 4,
         "min": 4,
-        "max": 6,
+        "max": 4,
         "selectionMode": "random",
         "allowReveal": true,
         "preferKind": null,
@@ -186,7 +186,8 @@
         "kind": "multi_choice",
         "optionIds": [
           "a",
-          "c"
+          "b",
+          "d"
         ]
       }
     },
@@ -205,27 +206,9 @@
       "expected": {
         "kind": "multi_choice",
         "optionIds": [
-          "b"
-        ]
-      }
-    },
-    {
-      "id": "drag-reorder-1",
-      "kind": "drag_reorder",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.git-foundations.git-foundations-module-2-meaningful-history.stage-intentionally.practice.drag-reorder-1",
-      "tokenIds": [
-        "t1",
-        "t2",
-        "t3"
-      ],
-      "expected": {
-        "kind": "drag_reorder",
-        "tokenIds": [
-          "t1",
-          "t2",
-          "t3"
+          "a",
+          "b",
+          "c"
         ]
       }
     },
@@ -238,19 +221,7 @@
       "choiceCount": 3,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "index.html"
-      }
-    },
-    {
-      "id": "fill-blank-2",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.git-foundations.git-foundations-module-2-meaningful-history.stage-intentionally.practice.fill-blank-2",
-      "choiceCount": 3,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "index.html"
+        "value": "Add events navigation"
       }
     },
     {
@@ -282,7 +253,7 @@
             "message": "@:topics.git-foundations.git-foundations-module-2-meaningful-history.stage-intentionally.tryIt.try_stage_intentionally_sketch0.terminalExpectations.requiredCommands.0.message"
           },
           {
-            "pattern": "^git\\s+diff\\s+\\-\\-staged\\s+\\-\\-name\\-only$",
+            "pattern": "^git\\s+diff\\s+(?:\\-\\-staged|\\-\\-cached)\\s+\\-\\-name\\-only$",
             "message": "@:topics.git-foundations.git-foundations-module-2-meaningful-history.stage-intentionally.tryIt.try_stage_intentionally_sketch0.terminalExpectations.requiredCommands.1.message"
           }
         ],
@@ -434,11 +405,11 @@
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^git\\s+diff\\s+\\-\\-staged\\s+\\-\\-\\s+index\\.html$",
+            "pattern": "^git\\s+diff\\s+(?:\\-\\-staged|\\-\\-cached)\\s+(?:\\-\\-\\s+)?index\\.html$",
             "message": "@:topics.git-foundations.git-foundations-module-2-meaningful-history.stage-intentionally.tryIt.try_stage_intentionally_sketch1.terminalExpectations.requiredCommands.0.message"
           },
           {
-            "pattern": "^git\\s+status\\s+\\-\\-short$",
+            "pattern": "^git\\s+status\\s+(?:\\-\\-short|\\-s)$",
             "message": "@:topics.git-foundations.git-foundations-module-2-meaningful-history.stage-intentionally.tryIt.try_stage_intentionally_sketch1.terminalExpectations.requiredCommands.1.message"
           }
         ],
@@ -599,7 +570,7 @@
             "message": "@:topics.git-foundations.git-foundations-module-2-meaningful-history.stage-intentionally.tryIt.try_stage_intentionally_sketch2.terminalExpectations.requiredCommands.0.message"
           },
           {
-            "pattern": "^git\\s+diff\\s+\\-\\-staged\\s+\\-\\-name\\-only$",
+            "pattern": "^git\\s+diff\\s+(?:\\-\\-staged|\\-\\-cached)\\s+\\-\\-name\\-only$",
             "message": "@:topics.git-foundations.git-foundations-module-2-meaningful-history.stage-intentionally.tryIt.try_stage_intentionally_sketch2.terminalExpectations.requiredCommands.1.message"
           }
         ],
@@ -748,34 +719,29 @@
       "weight": 1,
       "messageBase": "topics.git-foundations.git-foundations-module-2-meaningful-history.stage-intentionally.tryIt.try_stage_intentionally_sketch3",
       "language": "bash",
-      "starterCode": "<nav>Home Events</nav>\n",
+      "starterCode": "Open Saturdays from 9 AM to noon.\n",
       "starterFiles": [
         {
-          "path": "community-site/index.html",
-          "content": "<nav>Home Events</nav>\n",
-          "language": "html",
+          "path": "community-site/README.md",
+          "content": "Open Saturdays from 9 AM to noon.\n",
+          "language": "markdown",
           "isEntry": true,
           "entry": true
         },
         {
-          "path": "community-site/nav.js",
-          "content": "export const links = [\"Home\", \"Events\"];\n",
-          "language": "javascript"
-        },
-        {
           "path": "community-site/styles.css",
-          "content": "nav { color: teal; }\n",
+          "content": "body { color: teal; }\n",
           "language": "css"
         }
       ],
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^git\\s+diff\\s+\\-\\-staged\\s+\\-\\-name\\-only$",
+            "pattern": "^git\\s+commit\\s+\\-m\\s+(?:\"Clarify volunteer hours\"|\\'Clarify volunteer hours\\')$",
             "message": "@:topics.git-foundations.git-foundations-module-2-meaningful-history.stage-intentionally.tryIt.try_stage_intentionally_sketch3.terminalExpectations.requiredCommands.0.message"
           },
           {
-            "pattern": "^git\\s+diff\\s+\\-\\-name\\-only$",
+            "pattern": "^git\\s+status\\s+(?:\\-\\-short|\\-s)$",
             "message": "@:topics.git-foundations.git-foundations-module-2-meaningful-history.stage-intentionally.tryIt.try_stage_intentionally_sketch3.terminalExpectations.requiredCommands.1.message"
           }
         ],
@@ -786,49 +752,43 @@
           }
         ]
       },
+      "hiddenShellCheck": {
+        "script": "set -eu\nrepo=community-site\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" branch --show-current)\" = main ] || fail \"The repository is not on main.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = 2 ] || fail \"The repository has the wrong number of commits.\"\n[ -n \"$(git -C \"$repo\" status --porcelain)\" ] || fail \"The exercise change is missing.\"\nexpected=$(printf \"%s\\n\" README.md styles.css | sort)\nactual=$(git -C \"$repo\" ls-files | sort)\n[ \"$actual\" = \"$expected\" ] || fail \"The tracked file set is not correct.\"\nexpected_staged=$(printf \"%s\\n\"  | sort)\nactual_staged=$(git -C \"$repo\" diff --cached --name-only | sort)\n[ \"$actual_staged\" = \"$expected_staged\" ] || fail \"The staged file set is not correct.\"\n[ \"$(git -C \"$repo\" log -1 --format=%s)\" = 'Clarify volunteer hours' ] || fail \"The latest commit message is not correct.\"",
+        "timeoutMs": 15000
+      },
       "workspace": {
         "language": "bash",
-        "entryFilePath": "community-site/index.html",
-        "starterCode": "<nav>Home Events</nav>\n",
+        "entryFilePath": "community-site/README.md",
+        "starterCode": "Open Saturdays from 9 AM to noon.\n",
         "starterFiles": [
           {
-            "path": "community-site/index.html",
-            "content": "<nav>Home Events</nav>\n",
-            "language": "html",
+            "path": "community-site/README.md",
+            "content": "Open Saturdays from 9 AM to noon.\n",
+            "language": "markdown",
             "isEntry": true,
             "entry": true
           },
           {
-            "path": "community-site/nav.js",
-            "content": "export const links = [\"Home\", \"Events\"];\n",
-            "language": "javascript"
-          },
-          {
             "path": "community-site/styles.css",
-            "content": "nav { color: teal; }\n",
+            "content": "body { color: teal; }\n",
             "language": "css"
           }
         ],
         "fixtureFiles": [
           {
             "path": ".zoeskoul/setup.sh",
-            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-site\nmkdir -p community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name \"ZoeSkoul Learner\"\ngit -C community-site config --local user.email \"learner@zoeskoul.local\"\ncd community-site\nprintf %s '<nav>Home</nav>\n' > index.html\ncd ..\ncd community-site\nprintf %s 'export const links = [\"Home\"];\n' > nav.js\ncd ..\ncd community-site\nprintf %s 'nav { color: navy; }\n' > styles.css\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Add project baseline'\ncd community-site\nprintf %s '<nav>Home Events</nav>\n' > index.html\ncd ..\ncd community-site\nprintf %s 'export const links = [\"Home\", \"Events\"];\n' > nav.js\ncd ..\ncd community-site\nprintf %s 'nav { color: teal; }\n' > styles.css\ncd ..\ngit -C community-site add -- index.html nav.js\n",
+            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-site\nmkdir -p community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name \"ZoeSkoul Learner\"\ngit -C community-site config --local user.email \"learner@zoeskoul.local\"\ncd community-site\nprintf %s 'Open Saturdays.\n' > README.md\ncd ..\ncd community-site\nprintf %s 'body { color: navy; }\n' > styles.css\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Add project baseline'\ncd community-site\nprintf %s 'Open Saturdays from 9 AM to noon.\n' > README.md\ncd ..\ncd community-site\nprintf %s 'body { color: teal; }\n' > styles.css\ncd ..\ngit -C community-site add -- README.md\n",
             "language": "bash",
             "readOnly": true
           },
           {
-            "path": "community-site/index.html",
-            "content": "<nav>Home Events</nav>\n",
-            "language": "html"
-          },
-          {
-            "path": "community-site/nav.js",
-            "content": "export const links = [\"Home\", \"Events\"];\n",
-            "language": "javascript"
+            "path": "community-site/README.md",
+            "content": "Open Saturdays from 9 AM to noon.\n",
+            "language": "markdown"
           },
           {
             "path": "community-site/styles.css",
-            "content": "nav { color: teal; }\n",
+            "content": "body { color: teal; }\n",
             "language": "css"
           }
         ]
@@ -838,10 +798,6 @@
         "type": "shell_task",
         "mode": "terminal_workspace",
         "instructions": "@:topics.git-foundations.git-foundations-module-2-meaningful-history.stage-intentionally.tryIt.try_stage_intentionally_sketch3.instructions"
-      },
-      "hiddenShellCheck": {
-        "script": "set -eu\nrepo=community-site\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" branch --show-current)\" = main ] || fail \"The repository is not on main.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = 1 ] || fail \"The repository has the wrong number of commits.\"\n[ -n \"$(git -C \"$repo\" status --porcelain)\" ] || fail \"The exercise change is missing.\"\nexpected=$(printf \"%s\\n\" index.html nav.js styles.css | sort)\nactual=$(git -C \"$repo\" ls-files | sort)\n[ \"$actual\" = \"$expected\" ] || fail \"The tracked file set is not correct.\"\nexpected_staged=$(printf \"%s\\n\" index.html nav.js | sort)\nactual_staged=$(git -C \"$repo\" diff --cached --name-only | sort)\n[ \"$actual_staged\" = \"$expected_staged\" ] || fail \"The staged file set is not correct.\"",
-        "timeoutMs": 15000
       },
       "ideConfig": {
         "preset": "runner",
@@ -896,26 +852,29 @@
       "fixtureFiles": [
         {
           "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-site\nmkdir -p community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name \"ZoeSkoul Learner\"\ngit -C community-site config --local user.email \"learner@zoeskoul.local\"\ncd community-site\nprintf %s '<nav>Home</nav>\n' > index.html\ncd ..\ncd community-site\nprintf %s 'export const links = [\"Home\"];\n' > nav.js\ncd ..\ncd community-site\nprintf %s 'nav { color: navy; }\n' > styles.css\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Add project baseline'\ncd community-site\nprintf %s '<nav>Home Events</nav>\n' > index.html\ncd ..\ncd community-site\nprintf %s 'export const links = [\"Home\", \"Events\"];\n' > nav.js\ncd ..\ncd community-site\nprintf %s 'nav { color: teal; }\n' > styles.css\ncd ..\ngit -C community-site add -- index.html nav.js\n",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-site\nmkdir -p community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name \"ZoeSkoul Learner\"\ngit -C community-site config --local user.email \"learner@zoeskoul.local\"\ncd community-site\nprintf %s 'Open Saturdays.\n' > README.md\ncd ..\ncd community-site\nprintf %s 'body { color: navy; }\n' > styles.css\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Add project baseline'\ncd community-site\nprintf %s 'Open Saturdays from 9 AM to noon.\n' > README.md\ncd ..\ncd community-site\nprintf %s 'body { color: teal; }\n' > styles.css\ncd ..\ngit -C community-site add -- README.md\n",
           "language": "bash",
           "readOnly": true
         },
         {
-          "path": "community-site/index.html",
-          "content": "<nav>Home Events</nav>\n",
-          "language": "html"
-        },
-        {
-          "path": "community-site/nav.js",
-          "content": "export const links = [\"Home\", \"Events\"];\n",
-          "language": "javascript"
+          "path": "community-site/README.md",
+          "content": "Open Saturdays from 9 AM to noon.\n",
+          "language": "markdown"
         },
         {
           "path": "community-site/styles.css",
-          "content": "nav { color: teal; }\n",
+          "content": "body { color: teal; }\n",
           "language": "css"
         }
       ]
     }
-  ]
+  ],
+  "topicMeta": {
+    "learningGoals": [
+      "Select only files that serve one commit purpose",
+      "Review the staged snapshot with git diff --staged",
+      "Write a concise imperative commit subject",
+      "Commit one purpose while leaving unrelated work outside"
+    ]
+  }
 }

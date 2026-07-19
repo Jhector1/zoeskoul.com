@@ -2,7 +2,11 @@ import fs from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import { spawn } from "node:child_process";
-import type { RunCodeFn } from "./runner.js";
+import {
+    isBinaryRunCodeFile,
+    normalizeRunCodeFiles,
+    type RunCodeFn,
+} from "./runner.js";
 
 function resolveCommand(language: string):
     | { command: string; args: string[] }
@@ -31,17 +35,16 @@ export const runLocalCode: RunCodeFn = async (args) => {
     const tempDir = args.files ? await fs.mkdtemp(path.join(os.tmpdir(), "curr-code-")) : null;
 
     if (tempDir && args.files) {
-        const entries = Array.isArray(args.files)
-            ? args.files
-            : Object.entries(args.files).map(([filePath, content]) => ({
-                path: filePath,
-                content,
-            }));
+        const entries = normalizeRunCodeFiles(args.files);
 
         for (const entry of entries) {
             const filePath = path.join(tempDir, entry.path);
             await fs.mkdir(path.dirname(filePath), { recursive: true });
-            await fs.writeFile(filePath, entry.content, "utf8");
+            if (isBinaryRunCodeFile(entry)) {
+                await fs.writeFile(filePath, Buffer.from(entry.data, "base64"));
+            } else {
+                await fs.writeFile(filePath, entry.content, "utf8");
+            }
         }
     }
 

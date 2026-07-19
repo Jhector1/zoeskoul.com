@@ -16,6 +16,7 @@ import { cn } from "@/lib/cn";
 import { PlusIcon, Redo2, Undo2 } from "lucide-react";
 import Tooltip from "@/components/ui/Tooltip";
 import type { FullIDEServices } from "@/components/ide/fullide/services";
+import { resolveWorkspaceFileCapability } from "@zoeskoul/code-contracts";
 
 type Props = {
     isSql: boolean;
@@ -58,6 +59,91 @@ type Props = {
     };
 };
 
+
+function arrayBufferToBase64(buffer: ArrayBuffer) {
+    const bytes = new Uint8Array(buffer);
+    const chunkSize = 0x8000;
+    let binary = "";
+
+    for (let offset = 0; offset < bytes.length; offset += chunkSize) {
+        const chunk = bytes.subarray(offset, offset + chunkSize);
+        binary += String.fromCharCode(...chunk);
+    }
+
+    return window.btoa(binary);
+}
+
+async function sha256Checksum(buffer: ArrayBuffer) {
+    const subtle = globalThis.crypto?.subtle;
+    if (!subtle) return undefined;
+
+    const digest = await subtle.digest("SHA-256", buffer);
+    const hex = Array.from(new Uint8Array(digest), (byte) =>
+        byte.toString(16).padStart(2, "0"),
+    ).join("");
+    return `sha256:${hex}`;
+}
+
+type ImportReadLimits = {
+    maxFiles: number;
+    maxTextFileBytes: number;
+    maxBinaryFileBytes: number;
+    allowBinaryFiles: boolean;
+};
+
+function assertImportCount(count: number, limits: ImportReadLimits) {
+    if (count > limits.maxFiles) {
+        throw new Error(
+            `You can import up to ${limits.maxFiles} file${limits.maxFiles === 1 ? "" : "s"} at a time.`,
+        );
+    }
+}
+
+async function readBrowserFile(
+    file: File,
+    path: string,
+    limits: ImportReadLimits,
+): Promise<ImportedWorkspaceFile> {
+    const capability = resolveWorkspaceFileCapability(path);
+    if (!capability) {
+        throw new Error(`${path || file.name} is not a supported workspace file type.`);
+    }
+
+    if (capability.storage === "binary" && !limits.allowBinaryFiles) {
+        throw new Error(
+            `${path || file.name} requires a multi-file workspace to preserve binary assets.`,
+        );
+    }
+
+    const maxBytes =
+        capability.storage === "binary"
+            ? limits.maxBinaryFileBytes
+            : limits.maxTextFileBytes;
+    if (file.size > maxBytes) {
+        throw new Error(
+            `${path || file.name} exceeds the ${(maxBytes / 1024 / 1024).toFixed(1)} MB ${capability.storage}-file limit.`,
+        );
+    }
+
+    if (capability.storage === "text") {
+        return { path, content: await file.text() };
+    }
+
+    const buffer = await file.arrayBuffer();
+    const checksum = await sha256Checksum(buffer);
+    return {
+        path,
+        content: "",
+        binary: {
+            encoding: "base64",
+            data: arrayBufferToBase64(buffer),
+            mimeType: capability.mimeType,
+            sizeBytes: buffer.byteLength,
+            ...(checksum ? { checksum } : {}),
+        },
+    };
+}
+
 type FsPickerWindow = Window & {
     showOpenFilePicker?: (options?: any) => Promise<any[]>;
     showDirectoryPicker?: (options?: any) => Promise<any>;
@@ -66,8 +152,10 @@ type FsPickerWindow = Window & {
 async function readFileList(
     list: FileList | null,
     useRelativePath: boolean,
+    limits: ImportReadLimits,
 ): Promise<ImportedWorkspaceFile[]> {
     const files = Array.from(list ?? []);
+    assertImportCount(files.length, limits);
     return Promise.all(
         files.map(async (file) => {
             const relative =
@@ -78,34 +166,29 @@ async function readFileList(
                     ? (file as File & { webkitRelativePath?: string }).webkitRelativePath || file.name
                     : file.name;
 
-            return {
-                path: relative || file.name,
-                content: await file.text(),
-            };
+            return readBrowserFile(file, relative || file.name, limits);
         }),
     );
 }
 
 async function readDirectoryHandleRecursive(
     handle: any,
-    basePath = handle?.name ?? "",
+    basePath: string,
+    limits: ImportReadLimits,
+    out: ImportedWorkspaceFile[] = [],
 ): Promise<ImportedWorkspaceFile[]> {
-    const out: ImportedWorkspaceFile[] = [];
-
     for await (const entry of handle.values()) {
         const nextPath = basePath ? `${basePath}/${entry.name}` : entry.name;
 
         if (entry.kind === "file") {
+            assertImportCount(out.length + 1, limits);
             const file = await entry.getFile();
-            out.push({
-                path: nextPath,
-                content: await file.text(),
-            });
+            out.push(await readBrowserFile(file, nextPath, limits));
             continue;
         }
 
         if (entry.kind === "directory") {
-            out.push(...(await readDirectoryHandleRecursive(entry, nextPath)));
+            await readDirectoryHandleRecursive(entry, nextPath, limits, out);
         }
     }
 
@@ -145,6 +228,20 @@ export default function IdeExplorerPane({
     const t = useTranslations("ide.explorer.pane");
     const fileInputRef = useRef<HTMLInputElement | null>(null);
     const folderInputRef = useRef<HTMLInputElement | null>(null);
+    const importReadLimits = useMemo<ImportReadLimits>(
+        () => ({
+            maxFiles: policy.maxImportFiles,
+            maxTextFileBytes: policy.maxFileContentBytes,
+            maxBinaryFileBytes: policy.maxUploadFileBytes,
+            allowBinaryFiles: policy.canUploadBinaryFiles,
+        }),
+        [
+            policy.canUploadBinaryFiles,
+            policy.maxFileContentBytes,
+            policy.maxImportFiles,
+            policy.maxUploadFileBytes,
+        ],
+    );
 
     const showNewFile = policy.canCreateFiles;
     const showNewFolder = policy.canCreateFolders;
@@ -165,10 +262,12 @@ export default function IdeExplorerPane({
                 : t("logInToUpload");
         }
 
-        const perFile = formatMb(policy.maxUploadFileBytes);
+        const textPerFile = formatMb(policy.maxFileContentBytes);
+        const binaryPerFile = formatMb(policy.maxUploadFileBytes);
         const atOnce = policy.maxImportFiles;
         return t("uploadLimit", {
-            perFile,
+            textPerFile,
+            binaryPerFile,
             count: atOnce,
             fileWord: atOnce === 1 ? "file" : "files",
         });
@@ -203,13 +302,11 @@ export default function IdeExplorerPane({
                     multiple: policy.maxImportFiles > 1,
                 });
 
+                assertImportCount(handles.length, importReadLimits);
                 const imported = await Promise.all(
                     handles.map(async (handle) => {
                         const file = await handle.getFile();
-                        return {
-                            path: file.name,
-                            content: await file.text(),
-                        };
+                        return readBrowserFile(file, file.name, importReadLimits);
                     }),
                 );
 
@@ -221,6 +318,10 @@ export default function IdeExplorerPane({
         } catch (err: any) {
             if (err?.name === "AbortError") return;
             console.error("[explorer] open local files failed", err);
+            actions.setToast({
+                kind: "error",
+                text: err instanceof Error ? err.message : t("uploadUnavailable"),
+            });
         }
     };
 
@@ -238,7 +339,11 @@ export default function IdeExplorerPane({
 
             if (typeof w.showDirectoryPicker === "function") {
                 const handle = await w.showDirectoryPicker();
-                const imported = await readDirectoryHandleRecursive(handle, handle.name);
+                const imported = await readDirectoryHandleRecursive(
+                    handle,
+                    handle.name,
+                    importReadLimits,
+                );
                 actions.importExternalFiles(imported);
                 return;
             }
@@ -247,6 +352,10 @@ export default function IdeExplorerPane({
         } catch (err: any) {
             if (err?.name === "AbortError") return;
             console.error("[explorer] open local folder failed", err);
+            actions.setToast({
+                kind: "error",
+                text: err instanceof Error ? err.message : t("folderImportUnavailable"),
+            });
         }
     };
 
@@ -392,9 +501,25 @@ export default function IdeExplorerPane({
                             multiple={policy.maxImportFiles > 1}
                             className="hidden"
                             onChange={async (e) => {
-                                const imported = await readFileList(e.currentTarget.files, false);
-                                actions.importExternalFiles(imported);
-                                e.currentTarget.value = "";
+                                const input = e.currentTarget;
+                                try {
+                                    const imported = await readFileList(
+                                        input.files,
+                                        false,
+                                        importReadLimits,
+                                    );
+                                    actions.importExternalFiles(imported);
+                                } catch (error) {
+                                    actions.setToast({
+                                        kind: "error",
+                                        text:
+                                            error instanceof Error
+                                                ? error.message
+                                                : t("uploadUnavailable"),
+                                    });
+                                } finally {
+                                    input.value = "";
+                                }
                             }}
                         />
                     ) : null}
@@ -406,9 +531,25 @@ export default function IdeExplorerPane({
                             multiple
                             className="hidden"
                             onChange={async (e) => {
-                                const imported = await readFileList(e.currentTarget.files, true);
-                                actions.importExternalFiles(imported);
-                                e.currentTarget.value = "";
+                                const input = e.currentTarget;
+                                try {
+                                    const imported = await readFileList(
+                                        input.files,
+                                        true,
+                                        importReadLimits,
+                                    );
+                                    actions.importExternalFiles(imported);
+                                } catch (error) {
+                                    actions.setToast({
+                                        kind: "error",
+                                        text:
+                                            error instanceof Error
+                                                ? error.message
+                                                : t("folderImportUnavailable"),
+                                    });
+                                } finally {
+                                    input.value = "";
+                                }
                             }}
                         />
                     ) : null}

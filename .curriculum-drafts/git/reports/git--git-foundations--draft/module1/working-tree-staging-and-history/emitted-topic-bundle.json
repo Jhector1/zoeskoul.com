@@ -4,7 +4,7 @@
   "moduleSlug": "git-foundations-module-1-start-tracking",
   "sectionSlug": "git-foundations-section-1-repository-basics",
   "prefix": "git_foundations_module_1",
-  "minutes": 20,
+  "minutes": 22,
   "runtimeDefaults": {
     "kind": "code",
     "language": "bash",
@@ -86,25 +86,6 @@
       }
     },
     {
-      "id": "sketch3",
-      "kind": "sketch",
-      "titleKey": "topics.git.git-foundations-module-1-start-tracking.working-tree-staging-and-history.cards.sketch3.title",
-      "sketchId": "git-status-bridge",
-      "height": 420,
-      "tryIt": {
-        "id": "try-working-tree-staging-and-history-sketch3",
-        "titleKey": "topics.git.git-foundations-module-1-start-tracking.working-tree-staging-and-history.tryIt.try_working_tree_staging_and_history_sketch3.title",
-        "promptKey": "topics.git.git-foundations-module-1-start-tracking.working-tree-staging-and-history.tryIt.try_working_tree_staging_and_history_sketch3.prompt",
-        "exerciseKey": "try-working-tree-staging-and-history-sketch3",
-        "difficulty": "easy",
-        "preferKind": "code_input",
-        "seedPolicy": "global",
-        "required": true,
-        "allowReveal": true,
-        "maxAttempts": null
-      }
-    },
-    {
       "id": "quiz",
       "kind": "quiz",
       "titleKey": "topics.git.git-foundations-module-1-start-tracking.working-tree-staging-and-history.cards.quiz.title",
@@ -112,7 +93,7 @@
         "difficulty": "easy",
         "n": 4,
         "min": 4,
-        "max": 6,
+        "max": 4,
         "selectionMode": "random",
         "allowReveal": true,
         "preferKind": null,
@@ -138,12 +119,6 @@
       "archetype": "paragraph",
       "titleKey": "sketches.git.git-foundations-module-1-start-tracking.working-tree-staging-and-history.commit-history-intro.title",
       "bodyKey": "sketches.git.git-foundations-module-1-start-tracking.working-tree-staging-and-history.commit-history-intro.bodyMarkdown"
-    },
-    {
-      "id": "git-status-bridge",
-      "archetype": "paragraph",
-      "titleKey": "sketches.git.git-foundations-module-1-start-tracking.working-tree-staging-and-history.git-status-bridge.title",
-      "bodyKey": "sketches.git.git-foundations-module-1-start-tracking.working-tree-staging-and-history.git-status-bridge.bodyMarkdown"
     }
   ],
   "exercises": [
@@ -198,7 +173,7 @@
         "optionIds": [
           "a",
           "b",
-          "c"
+          "d"
         ]
       }
     },
@@ -220,30 +195,6 @@
           "t2",
           "t3"
         ]
-      }
-    },
-    {
-      "id": "fill-blank-choice-1",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.git.git-foundations-module-1-start-tracking.working-tree-staging-and-history.practice.fill-blank-choice-1",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "add"
-      }
-    },
-    {
-      "id": "fill-blank-choice-2",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.git.git-foundations-module-1-start-tracking.working-tree-staging-and-history.practice.fill-blank-choice-2",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "log"
       }
     },
     {
@@ -288,10 +239,8 @@
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
-          },
-          {
-            "pattern": "^git\\s+status$"
+            "pattern": "^git\\s+status\\s+(?:\\-\\-short|\\-s)$",
+            "message": "@:topics.git.git-foundations-module-1-start-tracking.working-tree-staging-and-history.tryIt.try_working_tree_staging_and_history_sketch0.terminalExpectations.requiredCommands.0.message"
           }
         ],
         "forbiddenCommands": [
@@ -375,13 +324,12 @@
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
+            "pattern": "^git\\s+add\\s+(?:\\-\\-\\s+)?notes\\.txt$",
+            "message": "@:topics.git.git-foundations-module-1-start-tracking.working-tree-staging-and-history.tryIt.try_working_tree_staging_and_history_sketch1.terminalExpectations.requiredCommands.0.message"
           },
           {
-            "pattern": "^git\\s+add\\s+example\\.txt$"
-          },
-          {
-            "pattern": "^git\\s+status$"
+            "pattern": "^git\\s+status\\s+(?:\\-\\-short|\\-s)$",
+            "message": "@:topics.git.git-foundations-module-1-start-tracking.working-tree-staging-and-history.tryIt.try_working_tree_staging_and_history_sketch1.terminalExpectations.requiredCommands.1.message"
           }
         ],
         "forbiddenCommands": [
@@ -465,13 +413,12 @@
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
+            "pattern": "^git\\s+commit\\s+\\-m\\s+(?:\"Explain the staging area\"|\\'Explain the staging area\\')$",
+            "message": "@:topics.git.git-foundations-module-1-start-tracking.working-tree-staging-and-history.tryIt.try_working_tree_staging_and_history_sketch2.terminalExpectations.requiredCommands.0.message"
           },
           {
-            "pattern": "^git\\s+commit\\s+-m\\s+\"Update\\s+project\\s+file\"$"
-          },
-          {
-            "pattern": "^git\\s+log\\s+--oneline$"
+            "pattern": "^git\\s+status\\s+(?:\\-\\-short|\\-s)$",
+            "message": "@:topics.git.git-foundations-module-1-start-tracking.working-tree-staging-and-history.tryIt.try_working_tree_staging_and_history_sketch2.terminalExpectations.requiredCommands.1.message"
           }
         ],
         "forbiddenCommands": [
@@ -512,93 +459,14 @@
         "mode": "terminal_workspace",
         "instructions": "@:topics.git.git-foundations-module-1-start-tracking.working-tree-staging-and-history.tryIt.try_working_tree_staging_and_history_sketch2.instructions"
       }
-    },
-    {
-      "id": "try-working-tree-staging-and-history-sketch3",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.git.git-foundations-module-1-start-tracking.working-tree-staging-and-history.tryIt.try_working_tree_staging_and_history_sketch3",
-      "language": "bash",
-      "starterCode": "@:topics.git.git-foundations-module-1-start-tracking.working-tree-staging-and-history.tryIt.try_working_tree_staging_and_history_sketch3.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.sh",
-          "content": "@:topics.git.git-foundations-module-1-start-tracking.working-tree-staging-and-history.tryIt.try_working_tree_staging_and_history_sketch3.starterCode",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        },
-        {
-          "path": ".zoeskoul/setup.sh",
-          "content": "@:topics.git.git-foundations-module-1-start-tracking.working-tree-staging-and-history.tryIt.try_working_tree_staging_and_history_sketch3.starterFiles.zoeskoul_setup_sh.content",
-          "language": "bash",
-          "readOnly": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "main.sh",
-          "content": "bash .zoeskoul/setup.sh\ngit log --oneline\n",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'First project note\\n' > project.txt\ngit add project.txt\ngit commit -q -m \"Add first project note\"\nprintf 'Second project note\\n' >> project.txt\ngit add project.txt\ngit commit -q -m \"Add second project note\"\n",
-          "language": "bash",
-          "readOnly": true
-        }
-      ],
-      "terminalExpectations": {
-        "requiredCommands": [
-          {
-            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
-          },
-          {
-            "pattern": "^git\\s+log\\s+--oneline$"
-          }
-        ],
-        "forbiddenCommands": [
-          {
-            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
-            "message": "@:topics.git.git-foundations-module-1-start-tracking.working-tree-staging-and-history.tryIt.try_working_tree_staging_and_history_sketch3.terminalExpectations.forbiddenCommands.0.message"
-          }
-        ]
-      },
-      "hiddenShellCheck": {
-        "script": "set -eu\nrepo='.'\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ncommand -v git >/dev/null 2>&1 || fail \"Git is not available in this workspace.\"\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail 'Initialize a Git repository in ..'\nactual_branch=$(git -C \"$repo\" branch --show-current 2>/dev/null || true)\n[ \"$actual_branch\" = 'main' ] || fail 'Switch to the main branch.'\nstatus_output=$(git -C \"$repo\" status --porcelain --untracked-files=all)\n[ -z \"$status_output\" ] || fail 'Commit, restore, or remove the remaining workspace changes so the working tree is clean.'\nif git -C \"$repo\" rev-parse --verify HEAD >/dev/null 2>&1; then\n  commit_count=$(git -C \"$repo\" rev-list --count HEAD)\nelse\n  commit_count=0\nfi\n[ \"$commit_count\" -eq 2 ] || fail 'The repository must contain exactly 2 commit(s).'\ngit -C \"$repo\" ls-files --error-unmatch -- 'project.txt' >/dev/null 2>&1 || fail 'Track project.txt with Git.'",
-        "timeoutMs": 15000
-      },
-      "workspace": {
-        "language": "bash",
-        "entryFilePath": "main.sh",
-        "starterCode": "@:topics.git.git-foundations-module-1-start-tracking.working-tree-staging-and-history.tryIt.try_working_tree_staging_and_history_sketch3.starterCode",
-        "starterFiles": [
-          {
-            "path": "main.sh",
-            "content": "@:topics.git.git-foundations-module-1-start-tracking.working-tree-staging-and-history.tryIt.try_working_tree_staging_and_history_sketch3.starterCode",
-            "language": "bash",
-            "isEntry": true,
-            "entry": true,
-            "readOnly": false
-          },
-          {
-            "path": ".zoeskoul/setup.sh",
-            "content": "@:topics.git.git-foundations-module-1-start-tracking.working-tree-staging-and-history.tryIt.try_working_tree_staging_and_history_sketch3.starterFiles.zoeskoul_setup_sh.content",
-            "language": "bash",
-            "readOnly": true
-          }
-        ]
-      },
-      "showExpectedExample": false,
-      "recipe": {
-        "type": "shell_task",
-        "mode": "terminal_workspace",
-        "instructions": "@:topics.git.git-foundations-module-1-start-tracking.working-tree-staging-and-history.tryIt.try_working_tree_staging_and_history_sketch3.instructions"
-      }
     }
-  ]
+  ],
+  "topicMeta": {
+    "learningGoals": [
+      "Distinguish the working tree, staging area, and committed history",
+      "Stage a selected path with git add",
+      "Record the staged snapshot with git commit",
+      "Verify the remaining work with short status"
+    ]
+  }
 }

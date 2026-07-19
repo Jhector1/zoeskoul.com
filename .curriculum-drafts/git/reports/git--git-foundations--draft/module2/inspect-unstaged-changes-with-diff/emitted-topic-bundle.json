@@ -4,7 +4,7 @@
   "moduleSlug": "git-foundations-module-2-meaningful-history",
   "sectionSlug": "git-foundations-section-2-history-workflow",
   "prefix": "git_foundations_module_2",
-  "minutes": 20,
+  "minutes": 18,
   "runtimeDefaults": {
     "kind": "code",
     "language": "bash",
@@ -39,25 +39,6 @@
         "titleKey": "topics.git.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.tryIt.try_inspect_unstaged_changes_with_diff_sketch0.title",
         "promptKey": "topics.git.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.tryIt.try_inspect_unstaged_changes_with_diff_sketch0.prompt",
         "exerciseKey": "try-inspect-unstaged-changes-with-diff-sketch0",
-        "difficulty": "easy",
-        "preferKind": "code_input",
-        "seedPolicy": "global",
-        "required": true,
-        "allowReveal": true,
-        "maxAttempts": null
-      }
-    },
-    {
-      "id": "sketch1",
-      "kind": "sketch",
-      "titleKey": "topics.git.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.cards.sketch1.title",
-      "sketchId": "sketch1",
-      "height": 420,
-      "tryIt": {
-        "id": "try-inspect-unstaged-changes-with-diff-sketch1",
-        "titleKey": "topics.git.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.tryIt.try_inspect_unstaged_changes_with_diff_sketch1.title",
-        "promptKey": "topics.git.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.tryIt.try_inspect_unstaged_changes_with_diff_sketch1.prompt",
-        "exerciseKey": "try-inspect-unstaged-changes-with-diff-sketch1",
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -112,7 +93,7 @@
         "difficulty": "easy",
         "n": 4,
         "min": 4,
-        "max": 6,
+        "max": 4,
         "selectionMode": "random",
         "allowReveal": true,
         "preferKind": null,
@@ -126,12 +107,6 @@
       "archetype": "paragraph",
       "titleKey": "sketches.git.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.sketch0.title",
       "bodyKey": "sketches.git.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.sketch0.bodyMarkdown"
-    },
-    {
-      "id": "sketch1",
-      "archetype": "paragraph",
-      "titleKey": "sketches.git.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.sketch1.title",
-      "bodyKey": "sketches.git.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.sketch1.bodyMarkdown"
     },
     {
       "id": "sketch2",
@@ -165,27 +140,8 @@
       }
     },
     {
-      "id": "multi-choice-1",
-      "kind": "multi_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.git.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.practice.multi-choice-1",
-      "optionIds": [
-        "a",
-        "b",
-        "c",
-        "d"
-      ],
-      "expected": {
-        "kind": "multi_choice",
-        "optionIds": [
-          "b"
-        ]
-      }
-    },
-    {
       "id": "multi-choice-2",
-      "kind": "multi_choice",
+      "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "topics.git.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.practice.multi-choice-2",
@@ -196,30 +152,8 @@
         "d"
       ],
       "expected": {
-        "kind": "multi_choice",
-        "optionIds": [
-          "b"
-        ]
-      }
-    },
-    {
-      "id": "drag-reorder-1",
-      "kind": "drag_reorder",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.git.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.practice.drag-reorder-1",
-      "tokenIds": [
-        "t1",
-        "t2",
-        "t3"
-      ],
-      "expected": {
-        "kind": "drag_reorder",
-        "tokenIds": [
-          "t1",
-          "t2",
-          "t3"
-        ]
+        "kind": "single_choice",
+        "optionId": "b"
       }
     },
     {
@@ -331,93 +265,6 @@
         "type": "shell_task",
         "mode": "terminal_workspace",
         "instructions": "@:topics.git.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.tryIt.try_inspect_unstaged_changes_with_diff_sketch0.instructions"
-      }
-    },
-    {
-      "id": "try-inspect-unstaged-changes-with-diff-sketch1",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.git.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.tryIt.try_inspect_unstaged_changes_with_diff_sketch1",
-      "language": "bash",
-      "starterCode": "@:topics.git.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.tryIt.try_inspect_unstaged_changes_with_diff_sketch1.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.sh",
-          "content": "@:topics.git.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.tryIt.try_inspect_unstaged_changes_with_diff_sketch1.starterCode",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        },
-        {
-          "path": ".zoeskoul/setup.sh",
-          "content": "@:topics.git.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.tryIt.try_inspect_unstaged_changes_with_diff_sketch1.starterFiles.zoeskoul_setup_sh.content",
-          "language": "bash",
-          "readOnly": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "main.sh",
-          "content": "bash .zoeskoul/setup.sh\ngit diff\n",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 2\\n' > style.css\n",
-          "language": "bash",
-          "readOnly": true
-        }
-      ],
-      "terminalExpectations": {
-        "requiredCommands": [
-          {
-            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
-          },
-          {
-            "pattern": "^git\\s+diff$"
-          }
-        ],
-        "forbiddenCommands": [
-          {
-            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
-            "message": "@:topics.git.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.tryIt.try_inspect_unstaged_changes_with_diff_sketch1.terminalExpectations.forbiddenCommands.0.message"
-          }
-        ]
-      },
-      "hiddenShellCheck": {
-        "script": "set -eu\nrepo='.'\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ncommand -v git >/dev/null 2>&1 || fail \"Git is not available in this workspace.\"\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail 'Initialize a Git repository in ..'\nactual_branch=$(git -C \"$repo\" branch --show-current 2>/dev/null || true)\n[ \"$actual_branch\" = 'main' ] || fail 'Switch to the main branch.'",
-        "timeoutMs": 15000
-      },
-      "workspace": {
-        "language": "bash",
-        "entryFilePath": "main.sh",
-        "starterCode": "@:topics.git.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.tryIt.try_inspect_unstaged_changes_with_diff_sketch1.starterCode",
-        "starterFiles": [
-          {
-            "path": "main.sh",
-            "content": "@:topics.git.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.tryIt.try_inspect_unstaged_changes_with_diff_sketch1.starterCode",
-            "language": "bash",
-            "isEntry": true,
-            "entry": true,
-            "readOnly": false
-          },
-          {
-            "path": ".zoeskoul/setup.sh",
-            "content": "@:topics.git.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.tryIt.try_inspect_unstaged_changes_with_diff_sketch1.starterFiles.zoeskoul_setup_sh.content",
-            "language": "bash",
-            "readOnly": true
-          }
-        ]
-      },
-      "showExpectedExample": false,
-      "recipe": {
-        "type": "shell_task",
-        "mode": "terminal_workspace",
-        "instructions": "@:topics.git.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.tryIt.try_inspect_unstaged_changes_with_diff_sketch1.instructions"
       }
     },
     {
@@ -594,5 +441,12 @@
         "instructions": "@:topics.git.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.tryIt.try_inspect_unstaged_changes_with_diff_sketch3.instructions"
       }
     }
-  ]
+  ],
+  "topicMeta": {
+    "learningGoals": [
+      "Use git diff to review unstaged content",
+      "Read added and removed lines in a patch",
+      "Use name-only output and a path filter to separate unrelated edits"
+    ]
+  }
 }

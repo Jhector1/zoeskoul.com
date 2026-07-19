@@ -4,6 +4,7 @@ import { runnerPost, RunnerHttpError } from "@/lib/server/runnerClient";
 import { mergeWorkspaceWithTerminalSnapshot } from "@/lib/projects/workspaceTerminalSync";
 
 import type { WorkspaceStateV2 } from "@/components/ide/types";
+import type { WorkspaceSyncEntry } from "@zoeskoul/code-contracts";
 import { pathOf } from "@/components/ide/fsTree";
 import {
     resolveWorkspacePolicy,
@@ -29,7 +30,7 @@ type TerminalSyncRequest = {
 type SnapshotWorkspaceResponse =
     | {
     ok: true;
-    files: Array<{ path: string; content: string }>;
+    files: WorkspaceSyncEntry[];
 }
     | {
     ok: false;

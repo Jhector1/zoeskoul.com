@@ -53,4 +53,28 @@ describe("resolveEditableWorkspaceFileId", () => {
 
         expect(resolveEditableWorkspaceFileId(workspace, null)).toBe("main");
     });
+
+    it("never resolves a binary file as Monaco-editable", () => {
+        const workspace = buildWorkspace();
+        workspace.nodes.push({
+            id: "image",
+            kind: "file",
+            name: "pixel.png",
+            parentId: null,
+            content: "",
+            binary: {
+                encoding: "base64",
+                data: "AAECAw==",
+                mimeType: "image/png",
+                sizeBytes: 4,
+            },
+            createdAt: 1,
+            updatedAt: 1,
+        });
+        workspace.activeFileId = "image";
+        workspace.openTabs.push("image");
+
+        expect(resolveEditableWorkspaceFileId(workspace, "image")).toBe("main");
+    });
+
 });

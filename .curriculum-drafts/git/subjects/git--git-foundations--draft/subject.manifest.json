@@ -76,10 +76,8 @@
         }
       },
       "meta": {
-        "estimatedMinutes": 135,
-        "prereqKeys": [
-          "modules.git--git-foundations--draft.git-foundations-module-1-start-tracking.title"
-        ],
+        "estimatedMinutes": 119,
+        "prereqKeys": [],
         "outcomeKeys": [
           "modules.git--git-foundations--draft.git-foundations-module-1-start-tracking.outcomes.0",
           "modules.git--git-foundations--draft.git-foundations-module-1-start-tracking.outcomes.1",
@@ -200,9 +198,9 @@
         }
       },
       "meta": {
-        "estimatedMinutes": 158,
+        "estimatedMinutes": 130,
         "prereqKeys": [
-          "modules.git--git-foundations--draft.git-foundations-module-2-meaningful-history.title"
+          "modules.git--git-foundations--draft.git-foundations-module-1-start-tracking.title"
         ],
         "outcomeKeys": [
           "modules.git--git-foundations--draft.git-foundations-module-2-meaningful-history.outcomes.0",
@@ -249,7 +247,6 @@
           "topics": [
             "inspect-unstaged-changes-with-diff",
             "stage-intentionally",
-            "create-focused-commits",
             "read-history-with-log-and-show"
           ]
         },
@@ -324,9 +321,9 @@
         }
       },
       "meta": {
-        "estimatedMinutes": 170,
+        "estimatedMinutes": 125,
         "prereqKeys": [
-          "modules.git--git-foundations--draft.git-foundations-module-3-manage-tracked-files.title"
+          "modules.git--git-foundations--draft.git-foundations-module-2-meaningful-history.title"
         ],
         "outcomeKeys": [
           "modules.git--git-foundations--draft.git-foundations-module-3-manage-tracked-files.outcomes.0",
@@ -371,7 +368,6 @@
             }
           },
           "topics": [
-            "modify-and-verify-tracked-files",
             "rename-and-remove-tracked-files",
             "ignore-generated-files",
             "restore-without-rewriting-history"
@@ -451,7 +447,7 @@
       "meta": {
         "estimatedMinutes": 120,
         "prereqKeys": [
-          "modules.git--git-foundations--draft.git-foundations-module-4-final-capstone.title"
+          "modules.git--git-foundations--draft.git-foundations-module-3-manage-tracked-files.title"
         ],
         "outcomeKeys": [
           "modules.git--git-foundations--draft.git-foundations-module-4-final-capstone.outcomes.0",

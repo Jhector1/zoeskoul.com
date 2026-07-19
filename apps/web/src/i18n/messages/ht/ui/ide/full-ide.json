@@ -91,7 +91,7 @@
         "logInToUpload": "Konekte pou w ka televèse fichye.",
         "uploadUnavailable": "Televèsman fichye pa disponib nan espas travay sa a.",
         "folderImportUnavailable": "Enpòtasyon dosye pa disponib nan espas travay sa a.",
-        "uploadLimit": "Limit televèsman: {perFile} pou chak fichye, {count} {fileWord} alafwa.",
+        "uploadLimit": "Limit televèsman: {textPerFile} pou chak fichye tèks, {binaryPerFile} pou chak fichye binè, {count} {fileWord} alafwa.",
         "upgrade": "Amelyore",
         "sqlMode": "Mòd SQL",
         "activeDialect": "Dyalèk aktif:",
@@ -109,6 +109,21 @@
         "noSqlFile": "Pa gen okenn fichye SQL ki chwazi.",
         "noWebFile": "Pa gen okenn fichye web ki chwazi.",
         "noFile": "Pa gen okenn fichye ki chwazi."
+      },
+      "binary": {
+        "loading": "N ap prepare aperçu a…",
+        "invalidData": "Fichye binè sa a pa t kapab dekode san danje.",
+        "imageAlt": "Aperçu {fileName}",
+        "pdfTitle": "Aperçu PDF {fileName}",
+        "audioUnsupported": "Navigatè ou a pa ka jwe fichye odyo sa a.",
+        "videoUnsupported": "Navigatè ou a pa ka jwe fichye videyo sa a.",
+        "fontSample": "Aperçu polis",
+        "archiveTitle": "Fichye achiv",
+        "archiveMessage": "Achiv la konsève egzakteman nan espas travay la. Telechaje li pou enspekte oswa ekstrè sa ki ladan l.",
+        "detailsTitle": "Fichye binè",
+        "detailsMessage": "Fichye sa a konsève egzakteman, men ZoeSkoul pa gen yon aperçu entegre pou fòma sa a.",
+        "download": "Telechaje",
+        "pdfUnsupported": "Navigatè ou a pa ka montre PDF sa a dirèkteman. Telechaje li pou ouvri li sou aparèy ou."
       }
     },
     "terminal": {

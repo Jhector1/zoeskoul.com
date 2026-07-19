@@ -1,12 +1,16 @@
 import JSZip from "jszip";
-import type { RunCodeFn, RunCodeLimits } from "./runner.js";
+import {
+    isBinaryRunCodeFile,
+    isTextRunCodeFile,
+    normalizeRunCodeFiles,
+    type RunCodeFile,
+    type RunCodeFiles,
+    type RunCodeFn,
+    type RunCodeLimits,
+} from "./runner.js";
 import {buildJudge0Headers} from "./serviceAuthHeaders.js";
 
-type FileEntry = {
-    path: string;
-    content: string;
-    readOnly?: boolean;
-};
+type FileEntry = RunCodeFile;
 
 type Judge0SubmitResult =
     | {
@@ -191,35 +195,8 @@ function assertSafeRelPath(filePath: string) {
     return parts.join("/");
 }
 
-function normalizeFiles(
-    files:
-        | Array<{ path: string; content: string; readOnly?: boolean }>
-        | Record<string, string>
-        | undefined,
-): FileEntry[] {
-    if (!files) return [];
-
-    if (Array.isArray(files)) {
-        return files
-            .map((file) => {
-                const path = String(file.path ?? "").trim();
-                if (!path) return null;
-
-                return {
-                    path,
-                    content: String(file.content ?? ""),
-                    ...(typeof file.readOnly === "boolean"
-                        ? { readOnly: file.readOnly }
-                        : {}),
-                };
-            })
-            .filter((file): file is FileEntry => Boolean(file));
-    }
-
-    return Object.entries(files).map(([path, content]) => ({
-        path,
-        content: String(content ?? ""),
-    }));
+function normalizeFiles(files: RunCodeFiles | undefined): FileEntry[] {
+    return normalizeRunCodeFiles(files);
 }
 
 function syntheticEntryFor(language: string) {
@@ -240,7 +217,9 @@ function syntheticEntryFor(language: string) {
 }
 
 function pickJavaMainClass(entryPath: string, files: FileEntry[]) {
-    const source = files.find((file) => file.path === entryPath)?.content ?? "";
+    const entryFile = files.find((file) => file.path === entryPath);
+    const source =
+        entryFile && isTextRunCodeFile(entryFile) ? entryFile.content : "";
 
     const pkg = /package\s+([a-zA-Z0-9_.]+)\s*;/.exec(source)?.[1];
     const cls =
@@ -325,13 +304,24 @@ async function zipProject(language: string, entry: string, files: FileEntry[]) {
     const safeEntry = assertSafeRelPath(entry);
     const zip = new JSZip();
 
-    const normalizedFiles = files.map((file) => ({
-        path: assertSafeRelPath(file.path),
-        content: String(file.content ?? ""),
-    }));
+    const normalizedFiles = files.map((file): FileEntry => {
+        const path = assertSafeRelPath(file.path);
+        if (isBinaryRunCodeFile(file)) {
+            return { ...file, path };
+        }
+        return {
+            ...file,
+            path,
+            content: String(file.content ?? ""),
+        };
+    });
 
     for (const file of normalizedFiles) {
-        zip.file(file.path, file.content);
+        if (isBinaryRunCodeFile(file)) {
+            zip.file(file.path, file.data, { base64: true, binary: true });
+        } else {
+            zip.file(file.path, file.content);
+        }
     }
 
     const { compile, run } = scriptsFor(language, safeEntry, normalizedFiles);
@@ -352,7 +342,7 @@ function makeProjectFiles(args: {
     language: string;
     code: string;
     entry?: string;
-    files?: Array<{ path: string; content: string; readOnly?: boolean }> | Record<string, string>;
+    files?: RunCodeFiles;
 }) {
     const files = normalizeFiles(args.files);
     const entry = args.entry?.trim() || syntheticEntryFor(args.language);
@@ -360,13 +350,7 @@ function makeProjectFiles(args: {
     const merged = new Map<string, FileEntry>();
 
     for (const file of files) {
-        merged.set(file.path, {
-            path: file.path,
-            content: file.content,
-            ...(typeof file.readOnly === "boolean"
-                ? { readOnly: file.readOnly }
-                : {}),
-        });
+        merged.set(file.path, file);
     }
 
     // Important:
@@ -389,7 +373,7 @@ async function buildJudge0SubmissionBody(args: {
     code: string;
     entry?: string;
     stdin?: string;
-    files?: Array<{ path: string; content: string; readOnly?: boolean }> | Record<string, string>;
+    files?: RunCodeFiles;
     limits?: RunCodeLimits;
 }) {
     const language = String(args.language ?? "").toLowerCase();

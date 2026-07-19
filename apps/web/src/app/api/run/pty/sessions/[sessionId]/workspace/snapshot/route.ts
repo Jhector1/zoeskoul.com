@@ -1,13 +1,10 @@
 import { requireRunnerActorKey } from "@/lib/server/runnerActorKey";
 import { runnerPost, RunnerHttpError } from "@/lib/server/runnerClient";
 import { forgetPtyLeaseBySession } from "@/lib/server/ptySessionLeases";
+import type { WorkspaceSyncEntry } from "@zoeskoul/code-contracts";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
-
-type WorkspaceSyncEntry =
-    | { kind?: "file"; path: string; content: string }
-    | { kind: "directory"; path: string };
 
 type SnapshotWorkspaceResponse =
     | {

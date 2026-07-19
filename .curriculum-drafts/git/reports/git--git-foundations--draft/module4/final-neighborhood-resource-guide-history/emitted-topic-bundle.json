@@ -126,21 +126,29 @@
       "weight": 1,
       "messageBase": "topics.git.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch0",
       "language": "bash",
-      "starterCode": "@:topics.git.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch0.starterCode",
+      "starterCode": "# Neighborhood Resource Guide\n",
       "starterFiles": [
         {
-          "path": "main.sh",
-          "content": "@:topics.git.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch0.starterCode",
-          "language": "bash",
+          "path": "resource-guide/README.md",
+          "content": "# Neighborhood Resource Guide\n",
+          "language": "markdown",
           "isEntry": true,
-          "entry": true,
-          "readOnly": false
+          "entry": true
         },
         {
-          "path": ".zoeskoul/setup.sh",
-          "content": "@:topics.git.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch0.starterFiles.zoeskoul_setup_sh.content",
-          "language": "bash",
-          "readOnly": true
+          "path": "resource-guide/pages/contact.md",
+          "content": "Help desk closes at 6 PM.\n",
+          "language": "markdown"
+        },
+        {
+          "path": "resource-guide/pages/welcome.md",
+          "content": "Welcome to the neighborhood guide.\n",
+          "language": "markdown"
+        },
+        {
+          "path": "resource-guide/pages/old-note.md",
+          "content": "Temporary launch note.\n",
+          "language": "markdown"
         }
       ],
       "solutionFiles": [
@@ -167,16 +175,16 @@
             "pattern": "^git\\s+init\\s+-b\\s+main$"
           },
           {
-            "pattern": "^git\\s+config\\s+--local\\s+user\\.name\\s+\"ZoeSkoul\\s+Learner\"$"
+            "pattern": "^git\\s+config\\s+--local\\s+user\\.name\\s+(?:\"ZoeSkoul\\s+Learner\"|\\'ZoeSkoul\\s+Learner\\')$"
           },
           {
-            "pattern": "^git\\s+config\\s+--local\\s+user\\.email\\s+\"learner@zoeskoul\\.local\"$"
+            "pattern": "^git\\s+config\\s+--local\\s+user\\.email\\s+(?:\"learner@zoeskoul\\.local\"|\\'learner@zoeskoul\\.local\\')$"
           },
           {
             "pattern": "^git\\s+add\\s+README\\.md\\s+pages/contact\\.md\\s+pages/guide-draft\\.md\\s+notes/old-phone-tree\\.txt$"
           },
           {
-            "pattern": "^git\\s+commit\\s+-m\\s+\"Start\\s+neighborhood\\s+resource\\s+guide\"$"
+            "pattern": "^git\\s+commit\\s+-m\\s+(?:\"Start\\s+neighborhood\\s+resource\\s+guide\"|\\'Start\\s+neighborhood\\s+resource\\s+guide\\')$"
           }
         ],
         "forbiddenCommands": [
@@ -187,27 +195,63 @@
         ]
       },
       "hiddenShellCheck": {
-        "script": "set -eu\nrepo='resource-guide'\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ncommand -v git >/dev/null 2>&1 || fail \"Git is not available in this workspace.\"\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail 'Initialize a Git repository in resource-guide.'\nactual_branch=$(git -C \"$repo\" branch --show-current 2>/dev/null || true)\n[ \"$actual_branch\" = 'main' ] || fail 'Switch to the main branch.'\nstatus_output=$(git -C \"$repo\" status --porcelain --untracked-files=all)\n[ -z \"$status_output\" ] || fail 'Commit, restore, or remove the remaining workspace changes so the working tree is clean.'\nif git -C \"$repo\" rev-parse --verify HEAD >/dev/null 2>&1; then\n  commit_count=$(git -C \"$repo\" rev-list --count HEAD)\nelse\n  commit_count=0\nfi\n[ \"$commit_count\" -eq 1 ] || fail 'The repository must contain exactly 1 commit(s).'\ngit -C \"$repo\" ls-files --error-unmatch -- 'README.md' >/dev/null 2>&1 || fail 'Track README.md with Git.'\ngit -C \"$repo\" ls-files --error-unmatch -- 'pages/contact.md' >/dev/null 2>&1 || fail 'Track pages/contact.md with Git.'\ngit -C \"$repo\" ls-files --error-unmatch -- 'pages/guide-draft.md' >/dev/null 2>&1 || fail 'Track pages/guide-draft.md with Git.'\ngit -C \"$repo\" ls-files --error-unmatch -- 'notes/old-phone-tree.txt' >/dev/null 2>&1 || fail 'Track notes/old-phone-tree.txt with Git.'\ngit -C \"$repo\" rev-parse --verify 'HEAD~0^{commit}' >/dev/null 2>&1 || fail 'Create HEAD before checking its message.'\ncommit_subject=$(git -C \"$repo\" log -1 --skip=0 --pretty=%s)\nprintf '%s\\n' \"$commit_subject\" | grep -Eq -- '^Start neighborhood resource guide$' || fail 'Commit HEAD must have the expected message.'",
+        "script": "set -eu\nrepo=resource-guide\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" branch --show-current)\" = main ] || fail \"The repository is not on main.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD)\" = 1 ] || fail \"The baseline should contain one commit.\"\n[ \"$(git -C \"$repo\" log -1 --format=%s)\" = 'Start neighborhood resource guide' ] || fail \"The baseline commit message is not correct.\"\n[ -z \"$(git -C \"$repo\" status --porcelain)\" ] || fail \"The baseline is recorded, but unfinished work remains.\"\nexpected=$(printf \"%s\\n\" README.md pages/contact.md pages/old-note.md pages/welcome.md | sort)\nactual=$(git -C \"$repo\" ls-files | sort)\n[ \"$actual\" = \"$expected\" ] || fail \"The baseline tracked file set is not correct.\"\n",
         "timeoutMs": 15000
       },
       "workspace": {
         "language": "bash",
-        "entryFilePath": "main.sh",
-        "starterCode": "@:topics.git.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch0.starterCode",
+        "entryFilePath": "resource-guide/README.md",
+        "starterCode": "# Neighborhood Resource Guide\n",
         "starterFiles": [
           {
-            "path": "main.sh",
-            "content": "@:topics.git.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch0.starterCode",
-            "language": "bash",
+            "path": "resource-guide/README.md",
+            "content": "# Neighborhood Resource Guide\n",
+            "language": "markdown",
             "isEntry": true,
-            "entry": true,
-            "readOnly": false
+            "entry": true
           },
           {
+            "path": "resource-guide/pages/contact.md",
+            "content": "Help desk closes at 6 PM.\n",
+            "language": "markdown"
+          },
+          {
+            "path": "resource-guide/pages/welcome.md",
+            "content": "Welcome to the neighborhood guide.\n",
+            "language": "markdown"
+          },
+          {
+            "path": "resource-guide/pages/old-note.md",
+            "content": "Temporary launch note.\n",
+            "language": "markdown"
+          }
+        ],
+        "fixtureFiles": [
+          {
             "path": ".zoeskoul/setup.sh",
-            "content": "@:topics.git.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch0.starterFiles.zoeskoul_setup_sh.content",
+            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf resource-guide\nmkdir -p resource-guide/pages\nprintf '%s\\n' '# Neighborhood Resource Guide' > resource-guide/README.md\nprintf '%s\\n' 'Help desk closes at 6 PM.' > resource-guide/pages/contact.md\nprintf '%s\\n' 'Welcome to the neighborhood guide.' > resource-guide/pages/welcome.md\nprintf '%s\\n' 'Temporary launch note.' > resource-guide/pages/old-note.md\n",
             "language": "bash",
             "readOnly": true
+          },
+          {
+            "path": "resource-guide/README.md",
+            "content": "# Neighborhood Resource Guide\n",
+            "language": "markdown"
+          },
+          {
+            "path": "resource-guide/pages/contact.md",
+            "content": "Help desk closes at 6 PM.\n",
+            "language": "markdown"
+          },
+          {
+            "path": "resource-guide/pages/welcome.md",
+            "content": "Welcome to the neighborhood guide.\n",
+            "language": "markdown"
+          },
+          {
+            "path": "resource-guide/pages/old-note.md",
+            "content": "Temporary launch note.\n",
+            "language": "markdown"
           }
         ]
       },
@@ -216,7 +260,35 @@
         "type": "shell_task",
         "mode": "terminal_workspace",
         "instructions": "@:topics.git.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch0.instructions"
-      }
+      },
+      "fixtureFiles": [
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf resource-guide\nmkdir -p resource-guide/pages\nprintf '%s\\n' '# Neighborhood Resource Guide' > resource-guide/README.md\nprintf '%s\\n' 'Help desk closes at 6 PM.' > resource-guide/pages/contact.md\nprintf '%s\\n' 'Welcome to the neighborhood guide.' > resource-guide/pages/welcome.md\nprintf '%s\\n' 'Temporary launch note.' > resource-guide/pages/old-note.md\n",
+          "language": "bash",
+          "readOnly": true
+        },
+        {
+          "path": "resource-guide/README.md",
+          "content": "# Neighborhood Resource Guide\n",
+          "language": "markdown"
+        },
+        {
+          "path": "resource-guide/pages/contact.md",
+          "content": "Help desk closes at 6 PM.\n",
+          "language": "markdown"
+        },
+        {
+          "path": "resource-guide/pages/welcome.md",
+          "content": "Welcome to the neighborhood guide.\n",
+          "language": "markdown"
+        },
+        {
+          "path": "resource-guide/pages/old-note.md",
+          "content": "Temporary launch note.\n",
+          "language": "markdown"
+        }
+      ]
     },
     {
       "id": "try-final-neighborhood-resource-guide-history-sketch1",
@@ -225,20 +297,34 @@
       "weight": 1,
       "messageBase": "topics.git.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch1",
       "language": "bash",
-      "starterCode": "@:topics.git.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch1.starterCode",
+      "starterCode": "<!-- Replace with the local services list -->\n",
       "starterFiles": [
         {
-          "path": "main.sh",
-          "content": "@:topics.git.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch1.starterCode",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true
+          "path": "resource-guide/README.md",
+          "content": "# Neighborhood Resource Guide\n",
+          "language": "markdown"
         },
         {
-          "path": ".zoeskoul/setup.sh",
-          "content": "@:topics.git.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch1.starterFiles.zoeskoul_setup_sh.content",
-          "language": "bash",
-          "readOnly": true
+          "path": "resource-guide/pages/contact.md",
+          "content": "Help desk closes at 6 PM.\n",
+          "language": "markdown"
+        },
+        {
+          "path": "resource-guide/pages/welcome.md",
+          "content": "Welcome to the neighborhood guide.\n",
+          "language": "markdown"
+        },
+        {
+          "path": "resource-guide/pages/old-note.md",
+          "content": "Temporary launch note.\n",
+          "language": "markdown"
+        },
+        {
+          "path": "resource-guide/pages/services.md",
+          "content": "<!-- Replace with the local services list -->\n",
+          "language": "markdown",
+          "isEntry": true,
+          "entry": true
         }
       ],
       "solutionFiles": [
@@ -268,7 +354,7 @@
             "pattern": "^git\\s+add\\s+pages/services\\.md$"
           },
           {
-            "pattern": "^git\\s+commit\\s+-m\\s+\"Add\\s+local\\s+services\\s+page\"$"
+            "pattern": "^git\\s+commit\\s+-m\\s+(?:\"Add\\s+local\\s+services\\s+page\"|\\'Add\\s+local\\s+services\\s+page\\')$"
           }
         ],
         "forbiddenCommands": [
@@ -279,26 +365,73 @@
         ]
       },
       "hiddenShellCheck": {
-        "script": "set -eu\nrepo='resource-guide'\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ncommand -v git >/dev/null 2>&1 || fail \"Git is not available in this workspace.\"\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail 'Initialize a Git repository in resource-guide.'\nactual_branch=$(git -C \"$repo\" branch --show-current 2>/dev/null || true)\n[ \"$actual_branch\" = 'main' ] || fail 'Switch to the main branch.'\nstatus_output=$(git -C \"$repo\" status --porcelain --untracked-files=all)\n[ -z \"$status_output\" ] || fail 'Commit, restore, or remove the remaining workspace changes so the working tree is clean.'\nif git -C \"$repo\" rev-parse --verify HEAD >/dev/null 2>&1; then\n  commit_count=$(git -C \"$repo\" rev-list --count HEAD)\nelse\n  commit_count=0\nfi\n[ \"$commit_count\" -eq 2 ] || fail 'The repository must contain exactly 2 commit(s).'\ngit -C \"$repo\" ls-files --error-unmatch -- 'pages/services.md' >/dev/null 2>&1 || fail 'Track pages/services.md with Git.'\ngit -C \"$repo\" rev-parse --verify 'HEAD~0^{commit}' >/dev/null 2>&1 || fail 'Create HEAD before checking its message.'\ncommit_subject=$(git -C \"$repo\" log -1 --skip=0 --pretty=%s)\nprintf '%s\\n' \"$commit_subject\" | grep -Eq -- '^Add local services page$' || fail 'Commit HEAD must have the expected message.'\ngit -C \"$repo\" rev-parse --verify 'HEAD~1^{commit}' >/dev/null 2>&1 || fail 'Create the commit at position 1 before checking its message.'\ncommit_subject=$(git -C \"$repo\" log -1 --skip=1 --pretty=%s)\nprintf '%s\\n' \"$commit_subject\" | grep -Eq -- '^Start neighborhood resource guide$' || fail 'Commit at position 1 must have the expected message.'\ntmp_dir=$(mktemp -d)\ntrap 'rm -rf \"$tmp_dir\"' EXIT HUP INT TERM\ngit -C \"$repo\" show 'HEAD:pages/services.md' > \"$tmp_dir/head-file-0.actual\" 2>/dev/null || fail 'Commit pages/services.md before checking the task.'\ngrep -Fq -- 'Community pantry' \"$tmp_dir/head-file-0.actual\" || fail 'pages/services.md at HEAD is missing required content.'",
+        "script": "set -eu\nrepo=resource-guide\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" branch --show-current)\" = main ] || fail \"The repository is not on main.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD)\" = 2 ] || fail \"The repository should contain two commits.\"\n[ \"$(git -C \"$repo\" log -1 --format=%s)\" = 'Add local services page' ] || fail \"The newest commit message does not match the requested services checkpoint.\"\nexpected_services=$(printf '%s\\n' '- Food pantry' '- Health clinic' '- Job center')\nactual_services=$(git -C \"$repo\" show HEAD:pages/services.md)\n[ \"$actual_services\" = \"$expected_services\" ] || fail \"The services page does not contain the requested three-item list.\"\n[ -z \"$(git -C \"$repo\" status --porcelain)\" ] || fail \"The services checkpoint is recorded, but unfinished work remains.\"\nexpected=$(printf \"%s\\n\" README.md pages/contact.md pages/old-note.md pages/services.md pages/welcome.md | sort)\nactual=$(git -C \"$repo\" ls-files | sort)\n[ \"$actual\" = \"$expected\" ] || fail \"The tracked file set is not correct after the services checkpoint.\"\n",
         "timeoutMs": 15000
       },
       "workspace": {
         "language": "bash",
-        "entryFilePath": "main.sh",
-        "starterCode": "@:topics.git.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch1.starterCode",
+        "entryFilePath": "resource-guide/pages/services.md",
+        "starterCode": "<!-- Replace with the local services list -->\n",
         "starterFiles": [
           {
-            "path": "main.sh",
-            "content": "@:topics.git.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch1.starterCode",
-            "language": "bash",
-            "isEntry": true,
-            "entry": true
+            "path": "resource-guide/README.md",
+            "content": "# Neighborhood Resource Guide\n",
+            "language": "markdown"
           },
           {
+            "path": "resource-guide/pages/contact.md",
+            "content": "Help desk closes at 6 PM.\n",
+            "language": "markdown"
+          },
+          {
+            "path": "resource-guide/pages/welcome.md",
+            "content": "Welcome to the neighborhood guide.\n",
+            "language": "markdown"
+          },
+          {
+            "path": "resource-guide/pages/old-note.md",
+            "content": "Temporary launch note.\n",
+            "language": "markdown"
+          },
+          {
+            "path": "resource-guide/pages/services.md",
+            "content": "<!-- Replace with the local services list -->\n",
+            "language": "markdown",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "fixtureFiles": [
+          {
             "path": ".zoeskoul/setup.sh",
-            "content": "@:topics.git.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch1.starterFiles.zoeskoul_setup_sh.content",
+            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf resource-guide\nmkdir -p resource-guide/pages\ngit -C resource-guide init -q -b main\ngit -C resource-guide config --local user.name \"ZoeSkoul Learner\"\ngit -C resource-guide config --local user.email \"learner@zoeskoul.local\"\nprintf '%s\\n' '# Neighborhood Resource Guide' > resource-guide/README.md\nprintf '%s\\n' 'Help desk closes at 6 PM.' > resource-guide/pages/contact.md\nprintf '%s\\n' 'Welcome to the neighborhood guide.' > resource-guide/pages/welcome.md\nprintf '%s\\n' 'Temporary launch note.' > resource-guide/pages/old-note.md\ngit -C resource-guide add -A\ngit -C resource-guide commit -q -m 'Start neighborhood resource guide'\n",
             "language": "bash",
             "readOnly": true
+          },
+          {
+            "path": "resource-guide/README.md",
+            "content": "# Neighborhood Resource Guide\n",
+            "language": "markdown"
+          },
+          {
+            "path": "resource-guide/pages/contact.md",
+            "content": "Help desk closes at 6 PM.\n",
+            "language": "markdown"
+          },
+          {
+            "path": "resource-guide/pages/welcome.md",
+            "content": "Welcome to the neighborhood guide.\n",
+            "language": "markdown"
+          },
+          {
+            "path": "resource-guide/pages/old-note.md",
+            "content": "Temporary launch note.\n",
+            "language": "markdown"
+          },
+          {
+            "path": "resource-guide/pages/services.md",
+            "content": "<!-- Replace with the local services list -->\n",
+            "language": "markdown"
           }
         ]
       },
@@ -307,6 +440,43 @@
         "type": "shell_task",
         "mode": "terminal_workspace",
         "instructions": "@:topics.git.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch1.instructions"
+      },
+      "fixtureFiles": [
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf resource-guide\nmkdir -p resource-guide/pages\ngit -C resource-guide init -q -b main\ngit -C resource-guide config --local user.name \"ZoeSkoul Learner\"\ngit -C resource-guide config --local user.email \"learner@zoeskoul.local\"\nprintf '%s\\n' '# Neighborhood Resource Guide' > resource-guide/README.md\nprintf '%s\\n' 'Help desk closes at 6 PM.' > resource-guide/pages/contact.md\nprintf '%s\\n' 'Welcome to the neighborhood guide.' > resource-guide/pages/welcome.md\nprintf '%s\\n' 'Temporary launch note.' > resource-guide/pages/old-note.md\ngit -C resource-guide add -A\ngit -C resource-guide commit -q -m 'Start neighborhood resource guide'\n",
+          "language": "bash",
+          "readOnly": true
+        },
+        {
+          "path": "resource-guide/README.md",
+          "content": "# Neighborhood Resource Guide\n",
+          "language": "markdown"
+        },
+        {
+          "path": "resource-guide/pages/contact.md",
+          "content": "Help desk closes at 6 PM.\n",
+          "language": "markdown"
+        },
+        {
+          "path": "resource-guide/pages/welcome.md",
+          "content": "Welcome to the neighborhood guide.\n",
+          "language": "markdown"
+        },
+        {
+          "path": "resource-guide/pages/old-note.md",
+          "content": "Temporary launch note.\n",
+          "language": "markdown"
+        },
+        {
+          "path": "resource-guide/pages/services.md",
+          "content": "<!-- Replace with the local services list -->\n",
+          "language": "markdown"
+        }
+      ],
+      "tools": {
+        "defaultSurface": "editor",
+        "compactDefaultSurface": "editor"
       }
     },
     {
@@ -316,20 +486,34 @@
       "weight": 1,
       "messageBase": "topics.git.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch2",
       "language": "bash",
-      "starterCode": "@:topics.git.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch2.starterCode",
+      "starterCode": "Help desk closes at 6 PM.\n",
       "starterFiles": [
         {
-          "path": "main.sh",
-          "content": "@:topics.git.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch2.starterCode",
-          "language": "bash",
+          "path": "resource-guide/README.md",
+          "content": "# Neighborhood Resource Guide\n",
+          "language": "markdown"
+        },
+        {
+          "path": "resource-guide/pages/contact.md",
+          "content": "Help desk closes at 6 PM.\n",
+          "language": "markdown",
           "isEntry": true,
           "entry": true
         },
         {
-          "path": ".zoeskoul/setup.sh",
-          "content": "@:topics.git.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch2.starterFiles.zoeskoul_setup_sh.content",
-          "language": "bash",
-          "readOnly": true
+          "path": "resource-guide/pages/welcome.md",
+          "content": "Welcome to the neighborhood guide.\n",
+          "language": "markdown"
+        },
+        {
+          "path": "resource-guide/pages/old-note.md",
+          "content": "Temporary launch note.\n",
+          "language": "markdown"
+        },
+        {
+          "path": "resource-guide/pages/services.md",
+          "content": "- Food pantry\n- Health clinic\n- Job center\n",
+          "language": "markdown"
         }
       ],
       "solutionFiles": [
@@ -362,7 +546,7 @@
             "pattern": "^git\\s+add\\s+pages/contact\\.md$"
           },
           {
-            "pattern": "^git\\s+commit\\s+-m\\s+\"Update\\s+help\\s+desk\\s+hours\"$"
+            "pattern": "^git\\s+commit\\s+-m\\s+(?:\"Update\\s+help\\s+desk\\s+hours\"|\\'Update\\s+help\\s+desk\\s+hours\\')$"
           }
         ],
         "forbiddenCommands": [
@@ -373,26 +557,73 @@
         ]
       },
       "hiddenShellCheck": {
-        "script": "set -eu\nrepo='resource-guide'\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ncommand -v git >/dev/null 2>&1 || fail \"Git is not available in this workspace.\"\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail 'Initialize a Git repository in resource-guide.'\nactual_branch=$(git -C \"$repo\" branch --show-current 2>/dev/null || true)\n[ \"$actual_branch\" = 'main' ] || fail 'Switch to the main branch.'\nstatus_output=$(git -C \"$repo\" status --porcelain --untracked-files=all)\n[ -z \"$status_output\" ] || fail 'Commit, restore, or remove the remaining workspace changes so the working tree is clean.'\nif git -C \"$repo\" rev-parse --verify HEAD >/dev/null 2>&1; then\n  commit_count=$(git -C \"$repo\" rev-list --count HEAD)\nelse\n  commit_count=0\nfi\n[ \"$commit_count\" -eq 3 ] || fail 'The repository must contain exactly 3 commit(s).'\ngit -C \"$repo\" ls-files --error-unmatch -- 'pages/contact.md' >/dev/null 2>&1 || fail 'Track pages/contact.md with Git.'\ngit -C \"$repo\" rev-parse --verify 'HEAD~0^{commit}' >/dev/null 2>&1 || fail 'Create HEAD before checking its message.'\ncommit_subject=$(git -C \"$repo\" log -1 --skip=0 --pretty=%s)\nprintf '%s\\n' \"$commit_subject\" | grep -Eq -- '^Update help desk hours$' || fail 'Commit HEAD must have the expected message.'\ngit -C \"$repo\" rev-parse --verify 'HEAD~1^{commit}' >/dev/null 2>&1 || fail 'Create the commit at position 1 before checking its message.'\ncommit_subject=$(git -C \"$repo\" log -1 --skip=1 --pretty=%s)\nprintf '%s\\n' \"$commit_subject\" | grep -Eq -- '^Add local services page$' || fail 'Commit at position 1 must have the expected message.'\ngit -C \"$repo\" rev-parse --verify 'HEAD~2^{commit}' >/dev/null 2>&1 || fail 'Create the commit at position 2 before checking its message.'\ncommit_subject=$(git -C \"$repo\" log -1 --skip=2 --pretty=%s)\nprintf '%s\\n' \"$commit_subject\" | grep -Eq -- '^Start neighborhood resource guide$' || fail 'Commit at position 2 must have the expected message.'\ntmp_dir=$(mktemp -d)\ntrap 'rm -rf \"$tmp_dir\"' EXIT HUP INT TERM\ngit -C \"$repo\" show 'HEAD:pages/contact.md' > \"$tmp_dir/head-file-0.actual\" 2>/dev/null || fail 'Commit pages/contact.md before checking the task.'\ngrep -Fq -- '9 AM - 5 PM' \"$tmp_dir/head-file-0.actual\" || fail 'pages/contact.md at HEAD is missing required content.'",
+        "script": "set -eu\nrepo=resource-guide\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD)\" = 3 ] || fail \"The repository should contain three commits.\"\n[ \"$(git -C \"$repo\" log -1 --format=%s)\" = 'Update help desk hours' ] || fail \"The newest commit message does not match the contact-page update.\"\n[ \"$(git -C \"$repo\" show HEAD:pages/contact.md)\" = 'Help desk closes at 5 PM.' ] || fail \"The committed contact page does not use the requested closing time.\"\n[ -z \"$(git -C \"$repo\" status --porcelain)\" ] || fail \"The contact-page checkpoint is recorded, but unfinished work remains.\"\n",
         "timeoutMs": 15000
       },
       "workspace": {
         "language": "bash",
-        "entryFilePath": "main.sh",
-        "starterCode": "@:topics.git.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch2.starterCode",
+        "entryFilePath": "resource-guide/pages/contact.md",
+        "starterCode": "Help desk closes at 6 PM.\n",
         "starterFiles": [
           {
-            "path": "main.sh",
-            "content": "@:topics.git.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch2.starterCode",
-            "language": "bash",
+            "path": "resource-guide/README.md",
+            "content": "# Neighborhood Resource Guide\n",
+            "language": "markdown"
+          },
+          {
+            "path": "resource-guide/pages/contact.md",
+            "content": "Help desk closes at 6 PM.\n",
+            "language": "markdown",
             "isEntry": true,
             "entry": true
           },
           {
+            "path": "resource-guide/pages/welcome.md",
+            "content": "Welcome to the neighborhood guide.\n",
+            "language": "markdown"
+          },
+          {
+            "path": "resource-guide/pages/old-note.md",
+            "content": "Temporary launch note.\n",
+            "language": "markdown"
+          },
+          {
+            "path": "resource-guide/pages/services.md",
+            "content": "- Food pantry\n- Health clinic\n- Job center\n",
+            "language": "markdown"
+          }
+        ],
+        "fixtureFiles": [
+          {
             "path": ".zoeskoul/setup.sh",
-            "content": "@:topics.git.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch2.starterFiles.zoeskoul_setup_sh.content",
+            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf resource-guide\nmkdir -p resource-guide/pages\ngit -C resource-guide init -q -b main\ngit -C resource-guide config --local user.name \"ZoeSkoul Learner\"\ngit -C resource-guide config --local user.email \"learner@zoeskoul.local\"\nprintf '%s\\n' '# Neighborhood Resource Guide' > resource-guide/README.md\nprintf '%s\\n' 'Help desk closes at 6 PM.' > resource-guide/pages/contact.md\nprintf '%s\\n' 'Welcome to the neighborhood guide.' > resource-guide/pages/welcome.md\nprintf '%s\\n' 'Temporary launch note.' > resource-guide/pages/old-note.md\ngit -C resource-guide add -A\ngit -C resource-guide commit -q -m 'Start neighborhood resource guide'\nprintf '%s\\n' '- Food pantry' '- Health clinic' '- Job center' > resource-guide/pages/services.md\ngit -C resource-guide add -- pages/services.md\ngit -C resource-guide commit -q -m 'Add local services page'\n",
             "language": "bash",
             "readOnly": true
+          },
+          {
+            "path": "resource-guide/README.md",
+            "content": "# Neighborhood Resource Guide\n",
+            "language": "markdown"
+          },
+          {
+            "path": "resource-guide/pages/contact.md",
+            "content": "Help desk closes at 6 PM.\n",
+            "language": "markdown"
+          },
+          {
+            "path": "resource-guide/pages/welcome.md",
+            "content": "Welcome to the neighborhood guide.\n",
+            "language": "markdown"
+          },
+          {
+            "path": "resource-guide/pages/old-note.md",
+            "content": "Temporary launch note.\n",
+            "language": "markdown"
+          },
+          {
+            "path": "resource-guide/pages/services.md",
+            "content": "- Food pantry\n- Health clinic\n- Job center\n",
+            "language": "markdown"
           }
         ]
       },
@@ -401,6 +632,43 @@
         "type": "shell_task",
         "mode": "terminal_workspace",
         "instructions": "@:topics.git.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch2.instructions"
+      },
+      "fixtureFiles": [
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf resource-guide\nmkdir -p resource-guide/pages\ngit -C resource-guide init -q -b main\ngit -C resource-guide config --local user.name \"ZoeSkoul Learner\"\ngit -C resource-guide config --local user.email \"learner@zoeskoul.local\"\nprintf '%s\\n' '# Neighborhood Resource Guide' > resource-guide/README.md\nprintf '%s\\n' 'Help desk closes at 6 PM.' > resource-guide/pages/contact.md\nprintf '%s\\n' 'Welcome to the neighborhood guide.' > resource-guide/pages/welcome.md\nprintf '%s\\n' 'Temporary launch note.' > resource-guide/pages/old-note.md\ngit -C resource-guide add -A\ngit -C resource-guide commit -q -m 'Start neighborhood resource guide'\nprintf '%s\\n' '- Food pantry' '- Health clinic' '- Job center' > resource-guide/pages/services.md\ngit -C resource-guide add -- pages/services.md\ngit -C resource-guide commit -q -m 'Add local services page'\n",
+          "language": "bash",
+          "readOnly": true
+        },
+        {
+          "path": "resource-guide/README.md",
+          "content": "# Neighborhood Resource Guide\n",
+          "language": "markdown"
+        },
+        {
+          "path": "resource-guide/pages/contact.md",
+          "content": "Help desk closes at 6 PM.\n",
+          "language": "markdown"
+        },
+        {
+          "path": "resource-guide/pages/welcome.md",
+          "content": "Welcome to the neighborhood guide.\n",
+          "language": "markdown"
+        },
+        {
+          "path": "resource-guide/pages/old-note.md",
+          "content": "Temporary launch note.\n",
+          "language": "markdown"
+        },
+        {
+          "path": "resource-guide/pages/services.md",
+          "content": "- Food pantry\n- Health clinic\n- Job center\n",
+          "language": "markdown"
+        }
+      ],
+      "tools": {
+        "defaultSurface": "editor",
+        "compactDefaultSurface": "editor"
       }
     },
     {
@@ -410,20 +678,44 @@
       "weight": 1,
       "messageBase": "topics.git.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch3",
       "language": "bash",
-      "starterCode": "@:topics.git.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch3.starterCode",
+      "starterCode": "",
       "starterFiles": [
         {
-          "path": "main.sh",
-          "content": "@:topics.git.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch3.starterCode",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true
+          "path": "resource-guide/README.md",
+          "content": "# Neighborhood Resource Guide\n",
+          "language": "markdown"
         },
         {
-          "path": ".zoeskoul/setup.sh",
-          "content": "@:topics.git.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch3.starterFiles.zoeskoul_setup_sh.content",
-          "language": "bash",
-          "readOnly": true
+          "path": "resource-guide/pages/contact.md",
+          "content": "Help desk closes at 5 PM.\n",
+          "language": "markdown"
+        },
+        {
+          "path": "resource-guide/pages/welcome.md",
+          "content": "Welcome to the neighborhood guide.\n",
+          "language": "markdown"
+        },
+        {
+          "path": "resource-guide/pages/old-note.md",
+          "content": "Temporary launch note.\n",
+          "language": "markdown"
+        },
+        {
+          "path": "resource-guide/pages/services.md",
+          "content": "- Food pantry\n- Health clinic\n- Job center\n",
+          "language": "markdown"
+        },
+        {
+          "path": "resource-guide/generated/preview.html",
+          "content": "<p>Generated preview</p>\n",
+          "language": "html"
+        },
+        {
+          "path": "resource-guide/.gitignore",
+          "content": "",
+          "language": "text",
+          "isEntry": true,
+          "entry": true
         }
       ],
       "solutionFiles": [
@@ -444,16 +736,16 @@
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
+            "pattern": "^git\\s+add\\s+(?:\\-\\-\\s+)?\\.gitignore$",
+            "message": "@:topics.git.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch3.terminalExpectations.requiredCommands.0.message"
           },
           {
-            "pattern": "^printf\\s+'%s\\\\n'\\s+'generated/'\\s+>\\s+\\.gitignore$"
+            "pattern": "^git\\s+status\\s+(?:\\-\\-short|\\-s)$",
+            "message": "@:topics.git.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch3.terminalExpectations.requiredCommands.1.message"
           },
           {
-            "pattern": "^git\\s+add\\s+\\.gitignore$"
-          },
-          {
-            "pattern": "^git\\s+check-ignore\\s+generated/preview\\.html$"
+            "pattern": "^git\\s+diff\\s+(?:\\-\\-staged|\\-\\-cached)\\s+\\-\\-name\\-only$",
+            "message": "@:topics.git.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch3.terminalExpectations.requiredCommands.2.message"
           }
         ],
         "forbiddenCommands": [
@@ -464,26 +756,93 @@
         ]
       },
       "hiddenShellCheck": {
-        "script": "set -eu\n(\ngit -C resource-guide diff --cached --name-only | grep -Fxq -- .gitignore\n)\n(\nset -eu\nrepo='resource-guide'\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ncommand -v git >/dev/null 2>&1 || fail \"Git is not available in this workspace.\"\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail 'Initialize a Git repository in resource-guide.'\nactual_branch=$(git -C \"$repo\" branch --show-current 2>/dev/null || true)\n[ \"$actual_branch\" = 'main' ] || fail 'Switch to the main branch.'\nstatus_output=$(git -C \"$repo\" status --porcelain --untracked-files=all)\n[ -n \"$status_output\" ] || fail 'Make the requested repository change before checking the task.'\nif git -C \"$repo\" rev-parse --verify HEAD >/dev/null 2>&1; then\n  commit_count=$(git -C \"$repo\" rev-list --count HEAD)\nelse\n  commit_count=0\nfi\n[ \"$commit_count\" -eq 3 ] || fail 'The repository must contain exactly 3 commit(s).'\ngit -C \"$repo\" ls-files --error-unmatch -- '.gitignore' >/dev/null 2>&1 || fail 'Track .gitignore with Git.'\ngit -C \"$repo\" check-ignore -q -- 'generated/preview.html' || fail 'Configure .gitignore so Git ignores generated/preview.html.'\nif git -C \"$repo\" ls-files --error-unmatch -- 'generated/preview.html' >/dev/null 2>&1; then\n  fail 'Do not track generated/preview.html.'\nfi\n)",
+        "script": "set -eu\nrepo=resource-guide\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\n[ \"$(git -C \"$repo\" rev-list --count HEAD)\" = 3 ] || fail \"The existing history should contain three commits.\"\n[ \"$(cat \"$repo/.gitignore\")\" = 'generated/' ] || fail \"The ignore policy does not contain the requested generated directory rule.\"\nexpected_staged=$(printf \"%s\\n\" .gitignore)\nactual_staged=$(git -C \"$repo\" diff --cached --name-only)\n[ \"$actual_staged\" = \"$expected_staged\" ] || fail \"Only the ignore policy should be staged at this milestone.\"\ngit -C \"$repo\" check-ignore -q generated/preview.html || fail \"The generated preview is not ignored.\"\nexpected=$(printf \"%s\\n\" .gitignore README.md pages/contact.md pages/old-note.md pages/services.md pages/welcome.md | sort)\nactual=$(git -C \"$repo\" ls-files | sort)\n[ \"$actual\" = \"$expected\" ] || fail \"The tracked source files changed before the cleanup milestone.\"\n",
         "timeoutMs": 15000
       },
       "workspace": {
         "language": "bash",
-        "entryFilePath": "main.sh",
-        "starterCode": "@:topics.git.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch3.starterCode",
+        "entryFilePath": "resource-guide/.gitignore",
+        "starterCode": "",
         "starterFiles": [
           {
-            "path": "main.sh",
-            "content": "@:topics.git.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch3.starterCode",
-            "language": "bash",
-            "isEntry": true,
-            "entry": true
+            "path": "resource-guide/README.md",
+            "content": "# Neighborhood Resource Guide\n",
+            "language": "markdown"
           },
           {
+            "path": "resource-guide/pages/contact.md",
+            "content": "Help desk closes at 5 PM.\n",
+            "language": "markdown"
+          },
+          {
+            "path": "resource-guide/pages/welcome.md",
+            "content": "Welcome to the neighborhood guide.\n",
+            "language": "markdown"
+          },
+          {
+            "path": "resource-guide/pages/old-note.md",
+            "content": "Temporary launch note.\n",
+            "language": "markdown"
+          },
+          {
+            "path": "resource-guide/pages/services.md",
+            "content": "- Food pantry\n- Health clinic\n- Job center\n",
+            "language": "markdown"
+          },
+          {
+            "path": "resource-guide/generated/preview.html",
+            "content": "<p>Generated preview</p>\n",
+            "language": "html"
+          },
+          {
+            "path": "resource-guide/.gitignore",
+            "content": "",
+            "language": "text",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "fixtureFiles": [
+          {
             "path": ".zoeskoul/setup.sh",
-            "content": "@:topics.git.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch3.starterFiles.zoeskoul_setup_sh.content",
+            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf resource-guide\nmkdir -p resource-guide/pages\ngit -C resource-guide init -q -b main\ngit -C resource-guide config --local user.name \"ZoeSkoul Learner\"\ngit -C resource-guide config --local user.email \"learner@zoeskoul.local\"\nprintf '%s\\n' '# Neighborhood Resource Guide' > resource-guide/README.md\nprintf '%s\\n' 'Help desk closes at 6 PM.' > resource-guide/pages/contact.md\nprintf '%s\\n' 'Welcome to the neighborhood guide.' > resource-guide/pages/welcome.md\nprintf '%s\\n' 'Temporary launch note.' > resource-guide/pages/old-note.md\ngit -C resource-guide add -A\ngit -C resource-guide commit -q -m 'Start neighborhood resource guide'\nprintf '%s\\n' '- Food pantry' '- Health clinic' '- Job center' > resource-guide/pages/services.md\ngit -C resource-guide add -- pages/services.md\ngit -C resource-guide commit -q -m 'Add local services page'\nprintf '%s\\n' 'Help desk closes at 5 PM.' > resource-guide/pages/contact.md\ngit -C resource-guide add -- pages/contact.md\ngit -C resource-guide commit -q -m 'Update help desk hours'\nmkdir -p resource-guide/generated\nprintf '%s\\n' '<p>Generated preview</p>' > resource-guide/generated/preview.html\n: > resource-guide/.gitignore\n",
             "language": "bash",
             "readOnly": true
+          },
+          {
+            "path": "resource-guide/README.md",
+            "content": "# Neighborhood Resource Guide\n",
+            "language": "markdown"
+          },
+          {
+            "path": "resource-guide/pages/contact.md",
+            "content": "Help desk closes at 5 PM.\n",
+            "language": "markdown"
+          },
+          {
+            "path": "resource-guide/pages/welcome.md",
+            "content": "Welcome to the neighborhood guide.\n",
+            "language": "markdown"
+          },
+          {
+            "path": "resource-guide/pages/old-note.md",
+            "content": "Temporary launch note.\n",
+            "language": "markdown"
+          },
+          {
+            "path": "resource-guide/pages/services.md",
+            "content": "- Food pantry\n- Health clinic\n- Job center\n",
+            "language": "markdown"
+          },
+          {
+            "path": "resource-guide/generated/preview.html",
+            "content": "<p>Generated preview</p>\n",
+            "language": "html"
+          },
+          {
+            "path": "resource-guide/.gitignore",
+            "content": "",
+            "language": "text"
           }
         ]
       },
@@ -496,7 +855,50 @@
       "tools": {
         "defaultSurface": "editor",
         "compactDefaultSurface": "editor"
-      }
+      },
+      "fixtureFiles": [
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf resource-guide\nmkdir -p resource-guide/pages\ngit -C resource-guide init -q -b main\ngit -C resource-guide config --local user.name \"ZoeSkoul Learner\"\ngit -C resource-guide config --local user.email \"learner@zoeskoul.local\"\nprintf '%s\\n' '# Neighborhood Resource Guide' > resource-guide/README.md\nprintf '%s\\n' 'Help desk closes at 6 PM.' > resource-guide/pages/contact.md\nprintf '%s\\n' 'Welcome to the neighborhood guide.' > resource-guide/pages/welcome.md\nprintf '%s\\n' 'Temporary launch note.' > resource-guide/pages/old-note.md\ngit -C resource-guide add -A\ngit -C resource-guide commit -q -m 'Start neighborhood resource guide'\nprintf '%s\\n' '- Food pantry' '- Health clinic' '- Job center' > resource-guide/pages/services.md\ngit -C resource-guide add -- pages/services.md\ngit -C resource-guide commit -q -m 'Add local services page'\nprintf '%s\\n' 'Help desk closes at 5 PM.' > resource-guide/pages/contact.md\ngit -C resource-guide add -- pages/contact.md\ngit -C resource-guide commit -q -m 'Update help desk hours'\nmkdir -p resource-guide/generated\nprintf '%s\\n' '<p>Generated preview</p>' > resource-guide/generated/preview.html\n: > resource-guide/.gitignore\n",
+          "language": "bash",
+          "readOnly": true
+        },
+        {
+          "path": "resource-guide/README.md",
+          "content": "# Neighborhood Resource Guide\n",
+          "language": "markdown"
+        },
+        {
+          "path": "resource-guide/pages/contact.md",
+          "content": "Help desk closes at 5 PM.\n",
+          "language": "markdown"
+        },
+        {
+          "path": "resource-guide/pages/welcome.md",
+          "content": "Welcome to the neighborhood guide.\n",
+          "language": "markdown"
+        },
+        {
+          "path": "resource-guide/pages/old-note.md",
+          "content": "Temporary launch note.\n",
+          "language": "markdown"
+        },
+        {
+          "path": "resource-guide/pages/services.md",
+          "content": "- Food pantry\n- Health clinic\n- Job center\n",
+          "language": "markdown"
+        },
+        {
+          "path": "resource-guide/generated/preview.html",
+          "content": "<p>Generated preview</p>\n",
+          "language": "html"
+        },
+        {
+          "path": "resource-guide/.gitignore",
+          "content": "",
+          "language": "text"
+        }
+      ]
     },
     {
       "id": "try-final-neighborhood-resource-guide-history-sketch4",
@@ -505,20 +907,44 @@
       "weight": 1,
       "messageBase": "topics.git.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch4",
       "language": "bash",
-      "starterCode": "@:topics.git.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch4.starterCode",
+      "starterCode": "# Neighborhood Resource Guide — accidental draft\n",
       "starterFiles": [
         {
-          "path": "main.sh",
-          "content": "@:topics.git.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch4.starterCode",
-          "language": "bash",
+          "path": "resource-guide/README.md",
+          "content": "# Neighborhood Resource Guide — accidental draft\n",
+          "language": "markdown",
           "isEntry": true,
           "entry": true
         },
         {
-          "path": ".zoeskoul/setup.sh",
-          "content": "@:topics.git.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch4.starterFiles.zoeskoul_setup_sh.content",
-          "language": "bash",
-          "readOnly": true
+          "path": "resource-guide/pages/contact.md",
+          "content": "Help desk closes at 5 PM.\n",
+          "language": "markdown"
+        },
+        {
+          "path": "resource-guide/pages/welcome.md",
+          "content": "Welcome to the neighborhood guide.\n",
+          "language": "markdown"
+        },
+        {
+          "path": "resource-guide/pages/old-note.md",
+          "content": "Temporary launch note.\n",
+          "language": "markdown"
+        },
+        {
+          "path": "resource-guide/pages/services.md",
+          "content": "- Food pantry\n- Health clinic\n- Job center\n",
+          "language": "markdown"
+        },
+        {
+          "path": "resource-guide/generated/preview.html",
+          "content": "<p>Generated preview</p>\n",
+          "language": "html"
+        },
+        {
+          "path": "resource-guide/.gitignore",
+          "content": "generated/\n",
+          "language": "text"
         }
       ],
       "solutionFiles": [
@@ -539,13 +965,24 @@
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
+            "pattern": "^git\\s+restore\\s+(?:\\-\\-staged|\\-\\-cached)\\s+README\\.md$",
+            "message": "@:topics.git--git-foundations--draft.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch4.terminalExpectations.requiredCommands.0.message"
           },
           {
-            "pattern": "^git\\s+mv\\s+pages/guide-draft\\.md\\s+pages/getting-help\\.md$"
+            "pattern": "^git\\s+restore\\s+README\\.md$",
+            "message": "@:topics.git--git-foundations--draft.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch4.terminalExpectations.requiredCommands.1.message"
           },
           {
-            "pattern": "^git\\s+rm\\s+notes/old-phone-tree\\.txt$"
+            "pattern": "^git\\s+mv\\s+pages/welcome\\.md\\s+pages/getting\\-help\\.md$",
+            "message": "@:topics.git--git-foundations--draft.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch4.terminalExpectations.requiredCommands.2.message"
+          },
+          {
+            "pattern": "^git\\s+rm\\s+pages/old\\-note\\.md$",
+            "message": "@:topics.git--git-foundations--draft.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch4.terminalExpectations.requiredCommands.3.message"
+          },
+          {
+            "pattern": "^git\\s+diff\\s+(?:\\-\\-staged|\\-\\-cached)\\s+\\-\\-name\\-status$",
+            "message": "@:topics.git--git-foundations--draft.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch4.terminalExpectations.requiredCommands.4.message"
           }
         ],
         "forbiddenCommands": [
@@ -556,26 +993,93 @@
         ]
       },
       "hiddenShellCheck": {
-        "script": "set -eu\n(\ngit -C resource-guide diff --cached --name-status | grep -Eq \"^R[0-9]*[[:space:]]+pages/guide-draft.md[[:space:]]+pages/getting-help.md$\" && git -C resource-guide diff --cached --name-status | grep -Eq \"^D[[:space:]]+notes/old-phone-tree.txt$\"\n)\n(\nset -eu\nrepo='resource-guide'\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ncommand -v git >/dev/null 2>&1 || fail \"Git is not available in this workspace.\"\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail 'Initialize a Git repository in resource-guide.'\nactual_branch=$(git -C \"$repo\" branch --show-current 2>/dev/null || true)\n[ \"$actual_branch\" = 'main' ] || fail 'Switch to the main branch.'\nstatus_output=$(git -C \"$repo\" status --porcelain --untracked-files=all)\n[ -n \"$status_output\" ] || fail 'Make the requested repository change before checking the task.'\nif git -C \"$repo\" rev-parse --verify HEAD >/dev/null 2>&1; then\n  commit_count=$(git -C \"$repo\" rev-list --count HEAD)\nelse\n  commit_count=0\nfi\n[ \"$commit_count\" -eq 3 ] || fail 'The repository must contain exactly 3 commit(s).'\ngit -C \"$repo\" ls-files --error-unmatch -- '.gitignore' >/dev/null 2>&1 || fail 'Track .gitignore with Git.'\ngit -C \"$repo\" ls-files --error-unmatch -- 'pages/getting-help.md' >/dev/null 2>&1 || fail 'Track pages/getting-help.md with Git.'\ngit -C \"$repo\" check-ignore -q -- 'generated/preview.html' || fail 'Configure .gitignore so Git ignores generated/preview.html.'\nif git -C \"$repo\" ls-files --error-unmatch -- 'generated/preview.html' >/dev/null 2>&1; then\n  fail 'Do not track generated/preview.html.'\nfi\nif git -C \"$repo\" ls-files --error-unmatch -- 'pages/guide-draft.md' >/dev/null 2>&1; then\n  fail 'Do not track pages/guide-draft.md.'\nfi\nif git -C \"$repo\" ls-files --error-unmatch -- 'notes/old-phone-tree.txt' >/dev/null 2>&1; then\n  fail 'Do not track notes/old-phone-tree.txt.'\nfi\n)",
+        "script": "set -eu\nrepo=resource-guide\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\n[ \"$(git -C \"$repo\" rev-list --count HEAD)\" = 3 ] || fail \"Existing history should still contain three commits at this milestone.\"\n[ \"$(cat \"$repo/README.md\")\" = '# Neighborhood Resource Guide' ] || fail \"The accidental README edit was not fully restored.\"\n! git -C \"$repo\" diff --cached --name-only | grep -qx 'README.md' || fail \"README.md is still staged.\"\nexpected=$(printf \"%s\\n\" .gitignore pages/getting-help.md pages/old-note.md | sort)\nactual=$(git -C \"$repo\" diff --cached --name-only | sort)\n[ \"$actual\" = \"$expected\" ] || fail \"The staged cleanup does not contain exactly the ignore policy, rename, and obsolete-note removal.\"\n[ ! -e \"$repo/pages/welcome.md\" ] || fail \"The old welcome-page path still exists.\"\n[ -f \"$repo/pages/getting-help.md\" ] || fail \"The renamed getting-help page is missing.\"\n[ ! -e \"$repo/pages/old-note.md\" ] || fail \"The obsolete note still exists in the working tree.\"\ngit -C \"$repo\" check-ignore -q generated/preview.html || fail \"The generated preview is not ignored.\"\n",
         "timeoutMs": 15000
       },
       "workspace": {
         "language": "bash",
-        "entryFilePath": "main.sh",
-        "starterCode": "@:topics.git.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch4.starterCode",
+        "entryFilePath": "resource-guide/README.md",
+        "starterCode": "# Neighborhood Resource Guide — accidental draft\n",
         "starterFiles": [
           {
-            "path": "main.sh",
-            "content": "@:topics.git.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch4.starterCode",
-            "language": "bash",
+            "path": "resource-guide/README.md",
+            "content": "# Neighborhood Resource Guide — accidental draft\n",
+            "language": "markdown",
             "isEntry": true,
             "entry": true
           },
           {
+            "path": "resource-guide/pages/contact.md",
+            "content": "Help desk closes at 5 PM.\n",
+            "language": "markdown"
+          },
+          {
+            "path": "resource-guide/pages/welcome.md",
+            "content": "Welcome to the neighborhood guide.\n",
+            "language": "markdown"
+          },
+          {
+            "path": "resource-guide/pages/old-note.md",
+            "content": "Temporary launch note.\n",
+            "language": "markdown"
+          },
+          {
+            "path": "resource-guide/pages/services.md",
+            "content": "- Food pantry\n- Health clinic\n- Job center\n",
+            "language": "markdown"
+          },
+          {
+            "path": "resource-guide/generated/preview.html",
+            "content": "<p>Generated preview</p>\n",
+            "language": "html"
+          },
+          {
+            "path": "resource-guide/.gitignore",
+            "content": "generated/\n",
+            "language": "text"
+          }
+        ],
+        "fixtureFiles": [
+          {
             "path": ".zoeskoul/setup.sh",
-            "content": "@:topics.git.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch4.starterFiles.zoeskoul_setup_sh.content",
+            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf resource-guide\nmkdir -p resource-guide/pages\ngit -C resource-guide init -q -b main\ngit -C resource-guide config --local user.name \"ZoeSkoul Learner\"\ngit -C resource-guide config --local user.email \"learner@zoeskoul.local\"\nprintf '%s\\n' '# Neighborhood Resource Guide' > resource-guide/README.md\nprintf '%s\\n' 'Help desk closes at 6 PM.' > resource-guide/pages/contact.md\nprintf '%s\\n' 'Welcome to the neighborhood guide.' > resource-guide/pages/welcome.md\nprintf '%s\\n' 'Temporary launch note.' > resource-guide/pages/old-note.md\ngit -C resource-guide add -A\ngit -C resource-guide commit -q -m 'Start neighborhood resource guide'\nprintf '%s\\n' '- Food pantry' '- Health clinic' '- Job center' > resource-guide/pages/services.md\ngit -C resource-guide add -- pages/services.md\ngit -C resource-guide commit -q -m 'Add local services page'\nprintf '%s\\n' 'Help desk closes at 5 PM.' > resource-guide/pages/contact.md\ngit -C resource-guide add -- pages/contact.md\ngit -C resource-guide commit -q -m 'Update help desk hours'\nmkdir -p resource-guide/generated\nprintf '%s\\n' '<p>Generated preview</p>' > resource-guide/generated/preview.html\nprintf '%s\\n' 'generated/' > resource-guide/.gitignore\ngit -C resource-guide add -- .gitignore\nprintf '%s\\n' '# Neighborhood Resource Guide — accidental draft' > resource-guide/README.md\ngit -C resource-guide add -- README.md\n",
             "language": "bash",
             "readOnly": true
+          },
+          {
+            "path": "resource-guide/README.md",
+            "content": "# Neighborhood Resource Guide — accidental draft\n",
+            "language": "markdown"
+          },
+          {
+            "path": "resource-guide/pages/contact.md",
+            "content": "Help desk closes at 5 PM.\n",
+            "language": "markdown"
+          },
+          {
+            "path": "resource-guide/pages/welcome.md",
+            "content": "Welcome to the neighborhood guide.\n",
+            "language": "markdown"
+          },
+          {
+            "path": "resource-guide/pages/old-note.md",
+            "content": "Temporary launch note.\n",
+            "language": "markdown"
+          },
+          {
+            "path": "resource-guide/pages/services.md",
+            "content": "- Food pantry\n- Health clinic\n- Job center\n",
+            "language": "markdown"
+          },
+          {
+            "path": "resource-guide/generated/preview.html",
+            "content": "<p>Generated preview</p>\n",
+            "language": "html"
+          },
+          {
+            "path": "resource-guide/.gitignore",
+            "content": "generated/\n",
+            "language": "text"
           }
         ]
       },
@@ -584,7 +1088,50 @@
         "type": "shell_task",
         "mode": "terminal_workspace",
         "instructions": "@:topics.git.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch4.instructions"
-      }
+      },
+      "fixtureFiles": [
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf resource-guide\nmkdir -p resource-guide/pages\ngit -C resource-guide init -q -b main\ngit -C resource-guide config --local user.name \"ZoeSkoul Learner\"\ngit -C resource-guide config --local user.email \"learner@zoeskoul.local\"\nprintf '%s\\n' '# Neighborhood Resource Guide' > resource-guide/README.md\nprintf '%s\\n' 'Help desk closes at 6 PM.' > resource-guide/pages/contact.md\nprintf '%s\\n' 'Welcome to the neighborhood guide.' > resource-guide/pages/welcome.md\nprintf '%s\\n' 'Temporary launch note.' > resource-guide/pages/old-note.md\ngit -C resource-guide add -A\ngit -C resource-guide commit -q -m 'Start neighborhood resource guide'\nprintf '%s\\n' '- Food pantry' '- Health clinic' '- Job center' > resource-guide/pages/services.md\ngit -C resource-guide add -- pages/services.md\ngit -C resource-guide commit -q -m 'Add local services page'\nprintf '%s\\n' 'Help desk closes at 5 PM.' > resource-guide/pages/contact.md\ngit -C resource-guide add -- pages/contact.md\ngit -C resource-guide commit -q -m 'Update help desk hours'\nmkdir -p resource-guide/generated\nprintf '%s\\n' '<p>Generated preview</p>' > resource-guide/generated/preview.html\nprintf '%s\\n' 'generated/' > resource-guide/.gitignore\ngit -C resource-guide add -- .gitignore\nprintf '%s\\n' '# Neighborhood Resource Guide — accidental draft' > resource-guide/README.md\ngit -C resource-guide add -- README.md\n",
+          "language": "bash",
+          "readOnly": true
+        },
+        {
+          "path": "resource-guide/README.md",
+          "content": "# Neighborhood Resource Guide — accidental draft\n",
+          "language": "markdown"
+        },
+        {
+          "path": "resource-guide/pages/contact.md",
+          "content": "Help desk closes at 5 PM.\n",
+          "language": "markdown"
+        },
+        {
+          "path": "resource-guide/pages/welcome.md",
+          "content": "Welcome to the neighborhood guide.\n",
+          "language": "markdown"
+        },
+        {
+          "path": "resource-guide/pages/old-note.md",
+          "content": "Temporary launch note.\n",
+          "language": "markdown"
+        },
+        {
+          "path": "resource-guide/pages/services.md",
+          "content": "- Food pantry\n- Health clinic\n- Job center\n",
+          "language": "markdown"
+        },
+        {
+          "path": "resource-guide/generated/preview.html",
+          "content": "<p>Generated preview</p>\n",
+          "language": "html"
+        },
+        {
+          "path": "resource-guide/.gitignore",
+          "content": "generated/\n",
+          "language": "text"
+        }
+      ]
     },
     {
       "id": "try-final-neighborhood-resource-guide-history-sketch5",
@@ -593,20 +1140,39 @@
       "weight": 1,
       "messageBase": "topics.git.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch5",
       "language": "bash",
-      "starterCode": "@:topics.git.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch5.starterCode",
+      "starterCode": "Welcome to the neighborhood guide.\n",
       "starterFiles": [
         {
-          "path": "main.sh",
-          "content": "@:topics.git.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch5.starterCode",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true
+          "path": "resource-guide/README.md",
+          "content": "# Neighborhood Resource Guide\n",
+          "language": "markdown"
         },
         {
-          "path": ".zoeskoul/setup.sh",
-          "content": "@:topics.git.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch5.starterFiles.zoeskoul_setup_sh.content",
-          "language": "bash",
-          "readOnly": true
+          "path": "resource-guide/pages/contact.md",
+          "content": "Help desk closes at 5 PM.\n",
+          "language": "markdown"
+        },
+        {
+          "path": "resource-guide/pages/services.md",
+          "content": "- Food pantry\n- Health clinic\n- Job center\n",
+          "language": "markdown"
+        },
+        {
+          "path": "resource-guide/generated/preview.html",
+          "content": "<p>Generated preview</p>\n",
+          "language": "html"
+        },
+        {
+          "path": "resource-guide/.gitignore",
+          "content": "generated/\n",
+          "language": "text"
+        },
+        {
+          "path": "resource-guide/pages/getting-help.md",
+          "content": "Welcome to the neighborhood guide.\n",
+          "language": "markdown",
+          "isEntry": true,
+          "entry": true
         }
       ],
       "solutionFiles": [
@@ -627,16 +1193,20 @@
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
+            "pattern": "^git\\s+commit\\s+\\-m\\s+(?:\"Prepare resource guide handoff\"|\\'Prepare resource guide handoff\\')$",
+            "message": "@:topics.git.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch5.terminalExpectations.requiredCommands.0.message"
           },
           {
-            "pattern": "^git\\s+commit\\s+-m\\s+\"Prepare\\s+resource\\s+guide\\s+handoff\"$"
+            "pattern": "^git\\s+log\\s+\\-\\-oneline$",
+            "message": "@:topics.git.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch5.terminalExpectations.requiredCommands.1.message"
           },
           {
-            "pattern": "^git\\s+log\\s+--oneline$"
+            "pattern": "^git\\s+show\\s+\\-\\-stat\\s+HEAD$",
+            "message": "@:topics.git.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch5.terminalExpectations.requiredCommands.2.message"
           },
           {
-            "pattern": "^git\\s+status\\s+--short$"
+            "pattern": "^git\\s+status\\s+(?:\\-\\-short|\\-s)$",
+            "message": "@:topics.git.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch5.terminalExpectations.requiredCommands.3.message"
           }
         ],
         "forbiddenCommands": [
@@ -647,26 +1217,83 @@
         ]
       },
       "hiddenShellCheck": {
-        "script": "set -eu\nrepo='resource-guide'\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ncommand -v git >/dev/null 2>&1 || fail \"Git is not available in this workspace.\"\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail 'Initialize a Git repository in resource-guide.'\nactual_branch=$(git -C \"$repo\" branch --show-current 2>/dev/null || true)\n[ \"$actual_branch\" = 'main' ] || fail 'Switch to the main branch.'\nstatus_output=$(git -C \"$repo\" status --porcelain --untracked-files=all)\n[ -z \"$status_output\" ] || fail 'Commit, restore, or remove the remaining workspace changes so the working tree is clean.'\nif git -C \"$repo\" rev-parse --verify HEAD >/dev/null 2>&1; then\n  commit_count=$(git -C \"$repo\" rev-list --count HEAD)\nelse\n  commit_count=0\nfi\n[ \"$commit_count\" -eq 4 ] || fail 'The repository must contain exactly 4 commit(s).'\ngit -C \"$repo\" ls-files --error-unmatch -- '.gitignore' >/dev/null 2>&1 || fail 'Track .gitignore with Git.'\ngit -C \"$repo\" ls-files --error-unmatch -- 'README.md' >/dev/null 2>&1 || fail 'Track README.md with Git.'\ngit -C \"$repo\" ls-files --error-unmatch -- 'pages/contact.md' >/dev/null 2>&1 || fail 'Track pages/contact.md with Git.'\ngit -C \"$repo\" ls-files --error-unmatch -- 'pages/getting-help.md' >/dev/null 2>&1 || fail 'Track pages/getting-help.md with Git.'\ngit -C \"$repo\" ls-files --error-unmatch -- 'pages/services.md' >/dev/null 2>&1 || fail 'Track pages/services.md with Git.'\ngit -C \"$repo\" check-ignore -q -- 'generated/preview.html' || fail 'Configure .gitignore so Git ignores generated/preview.html.'\nif git -C \"$repo\" ls-files --error-unmatch -- 'generated/preview.html' >/dev/null 2>&1; then\n  fail 'Do not track generated/preview.html.'\nfi\nif git -C \"$repo\" ls-files --error-unmatch -- 'pages/guide-draft.md' >/dev/null 2>&1; then\n  fail 'Do not track pages/guide-draft.md.'\nfi\nif git -C \"$repo\" ls-files --error-unmatch -- 'notes/old-phone-tree.txt' >/dev/null 2>&1; then\n  fail 'Do not track notes/old-phone-tree.txt.'\nfi\ngit -C \"$repo\" rev-parse --verify 'HEAD~0^{commit}' >/dev/null 2>&1 || fail 'Create HEAD before checking its message.'\ncommit_subject=$(git -C \"$repo\" log -1 --skip=0 --pretty=%s)\nprintf '%s\\n' \"$commit_subject\" | grep -Eq -- '^Prepare resource guide handoff$' || fail 'Commit HEAD must have the expected message.'\ngit -C \"$repo\" rev-parse --verify 'HEAD~1^{commit}' >/dev/null 2>&1 || fail 'Create the commit at position 1 before checking its message.'\ncommit_subject=$(git -C \"$repo\" log -1 --skip=1 --pretty=%s)\nprintf '%s\\n' \"$commit_subject\" | grep -Eq -- '^Update help desk hours$' || fail 'Commit at position 1 must have the expected message.'\ngit -C \"$repo\" rev-parse --verify 'HEAD~2^{commit}' >/dev/null 2>&1 || fail 'Create the commit at position 2 before checking its message.'\ncommit_subject=$(git -C \"$repo\" log -1 --skip=2 --pretty=%s)\nprintf '%s\\n' \"$commit_subject\" | grep -Eq -- '^Add local services page$' || fail 'Commit at position 2 must have the expected message.'\ngit -C \"$repo\" rev-parse --verify 'HEAD~3^{commit}' >/dev/null 2>&1 || fail 'Create the commit at position 3 before checking its message.'\ncommit_subject=$(git -C \"$repo\" log -1 --skip=3 --pretty=%s)\nprintf '%s\\n' \"$commit_subject\" | grep -Eq -- '^Start neighborhood resource guide$' || fail 'Commit at position 3 must have the expected message.'\ntmp_dir=$(mktemp -d)\ntrap 'rm -rf \"$tmp_dir\"' EXIT HUP INT TERM\ngit -C \"$repo\" show 'HEAD:pages/contact.md' > \"$tmp_dir/head-file-0.actual\" 2>/dev/null || fail 'Commit pages/contact.md before checking the task.'\ngrep -Fq -- '9 AM - 5 PM' \"$tmp_dir/head-file-0.actual\" || fail 'pages/contact.md at HEAD is missing required content.'\ngit -C \"$repo\" show 'HEAD:pages/getting-help.md' > \"$tmp_dir/head-file-1.actual\" 2>/dev/null || fail 'Commit pages/getting-help.md before checking the task.'\ngrep -Fq -- 'neighborhood help' \"$tmp_dir/head-file-1.actual\" || fail 'pages/getting-help.md at HEAD is missing required content.'\ngit -C \"$repo\" show 'HEAD:pages/services.md' > \"$tmp_dir/head-file-2.actual\" 2>/dev/null || fail 'Commit pages/services.md before checking the task.'\ngrep -Fq -- 'Community pantry' \"$tmp_dir/head-file-2.actual\" || fail 'pages/services.md at HEAD is missing required content.'\ngit -C \"$repo\" show 'HEAD:.gitignore' > \"$tmp_dir/head-file-3.actual\" 2>/dev/null || fail 'Commit .gitignore before checking the task.'\nprintf '%s' 'generated/\n' > \"$tmp_dir/head-file-3.expected\"\ncmp -s \"$tmp_dir/head-file-3.actual\" \"$tmp_dir/head-file-3.expected\" || fail '.gitignore at HEAD does not match the required content.'",
+        "script": "set -eu\nrepo=resource-guide\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\n[ \"$(git -C \"$repo\" rev-list --count HEAD)\" = 4 ] || fail \"The final history should contain four commits.\"\n[ \"$(git -C \"$repo\" log -1 --format=%s)\" = 'Prepare resource guide handoff' ] || fail \"The final handoff commit message is not correct.\"\n[ -z \"$(git -C \"$repo\" status --porcelain)\" ] || fail \"The final repository is not clean.\"\nexpected=$(printf \"%s\\n\" .gitignore README.md pages/contact.md pages/getting-help.md pages/services.md | sort)\nactual=$(git -C \"$repo\" ls-files | sort)\n[ \"$actual\" = \"$expected\" ] || fail \"The final tracked file set is not correct.\"\n[ \"$(git -C \"$repo\" show HEAD:README.md)\" = '# Neighborhood Resource Guide' ] || fail \"README.md should remain in the final handoff.\"\n[ \"$(git -C \"$repo\" show HEAD:pages/contact.md)\" = 'Help desk closes at 5 PM.' ] || fail \"The final contact page has the wrong closing time.\"\ngit -C \"$repo\" check-ignore -q generated/preview.html || fail \"The generated preview is not ignored.\"\n[ ! -e \"$repo/pages/old-note.md\" ] || fail \"The obsolete note still exists.\"\n[ ! -e \"$repo/pages/welcome.md\" ] || fail \"The old welcome-page path still exists.\"\n",
         "timeoutMs": 15000
       },
       "workspace": {
         "language": "bash",
-        "entryFilePath": "main.sh",
-        "starterCode": "@:topics.git.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch5.starterCode",
+        "entryFilePath": "resource-guide/pages/getting-help.md",
+        "starterCode": "Welcome to the neighborhood guide.\n",
         "starterFiles": [
           {
-            "path": "main.sh",
-            "content": "@:topics.git.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch5.starterCode",
-            "language": "bash",
-            "isEntry": true,
-            "entry": true
+            "path": "resource-guide/README.md",
+            "content": "# Neighborhood Resource Guide\n",
+            "language": "markdown"
           },
           {
+            "path": "resource-guide/pages/contact.md",
+            "content": "Help desk closes at 5 PM.\n",
+            "language": "markdown"
+          },
+          {
+            "path": "resource-guide/pages/services.md",
+            "content": "- Food pantry\n- Health clinic\n- Job center\n",
+            "language": "markdown"
+          },
+          {
+            "path": "resource-guide/generated/preview.html",
+            "content": "<p>Generated preview</p>\n",
+            "language": "html"
+          },
+          {
+            "path": "resource-guide/.gitignore",
+            "content": "generated/\n",
+            "language": "text"
+          },
+          {
+            "path": "resource-guide/pages/getting-help.md",
+            "content": "Welcome to the neighborhood guide.\n",
+            "language": "markdown",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "fixtureFiles": [
+          {
             "path": ".zoeskoul/setup.sh",
-            "content": "@:topics.git.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch5.starterFiles.zoeskoul_setup_sh.content",
+            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf resource-guide\nmkdir -p resource-guide/pages\ngit -C resource-guide init -q -b main\ngit -C resource-guide config --local user.name \"ZoeSkoul Learner\"\ngit -C resource-guide config --local user.email \"learner@zoeskoul.local\"\nprintf '%s\\n' '# Neighborhood Resource Guide' > resource-guide/README.md\nprintf '%s\\n' 'Help desk closes at 6 PM.' > resource-guide/pages/contact.md\nprintf '%s\\n' 'Welcome to the neighborhood guide.' > resource-guide/pages/welcome.md\nprintf '%s\\n' 'Temporary launch note.' > resource-guide/pages/old-note.md\ngit -C resource-guide add -A\ngit -C resource-guide commit -q -m 'Start neighborhood resource guide'\nprintf '%s\\n' '- Food pantry' '- Health clinic' '- Job center' > resource-guide/pages/services.md\ngit -C resource-guide add -- pages/services.md\ngit -C resource-guide commit -q -m 'Add local services page'\nprintf '%s\\n' 'Help desk closes at 5 PM.' > resource-guide/pages/contact.md\ngit -C resource-guide add -- pages/contact.md\ngit -C resource-guide commit -q -m 'Update help desk hours'\nmkdir -p resource-guide/generated\nprintf '%s\\n' '<p>Generated preview</p>' > resource-guide/generated/preview.html\nprintf '%s\\n' 'generated/' > resource-guide/.gitignore\ngit -C resource-guide add -- .gitignore\ngit -C resource-guide mv pages/welcome.md pages/getting-help.md\ngit -C resource-guide rm -q pages/old-note.md\n",
             "language": "bash",
             "readOnly": true
+          },
+          {
+            "path": "resource-guide/README.md",
+            "content": "# Neighborhood Resource Guide\n",
+            "language": "markdown"
+          },
+          {
+            "path": "resource-guide/pages/contact.md",
+            "content": "Help desk closes at 5 PM.\n",
+            "language": "markdown"
+          },
+          {
+            "path": "resource-guide/pages/services.md",
+            "content": "- Food pantry\n- Health clinic\n- Job center\n",
+            "language": "markdown"
+          },
+          {
+            "path": "resource-guide/generated/preview.html",
+            "content": "<p>Generated preview</p>\n",
+            "language": "html"
+          },
+          {
+            "path": "resource-guide/.gitignore",
+            "content": "generated/\n",
+            "language": "text"
+          },
+          {
+            "path": "resource-guide/pages/getting-help.md",
+            "content": "Welcome to the neighborhood guide.\n",
+            "language": "markdown"
           }
         ]
       },
@@ -675,7 +1302,54 @@
         "type": "shell_task",
         "mode": "terminal_workspace",
         "instructions": "@:topics.git.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch5.instructions"
-      }
+      },
+      "fixtureFiles": [
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf resource-guide\nmkdir -p resource-guide/pages\ngit -C resource-guide init -q -b main\ngit -C resource-guide config --local user.name \"ZoeSkoul Learner\"\ngit -C resource-guide config --local user.email \"learner@zoeskoul.local\"\nprintf '%s\\n' '# Neighborhood Resource Guide' > resource-guide/README.md\nprintf '%s\\n' 'Help desk closes at 6 PM.' > resource-guide/pages/contact.md\nprintf '%s\\n' 'Welcome to the neighborhood guide.' > resource-guide/pages/welcome.md\nprintf '%s\\n' 'Temporary launch note.' > resource-guide/pages/old-note.md\ngit -C resource-guide add -A\ngit -C resource-guide commit -q -m 'Start neighborhood resource guide'\nprintf '%s\\n' '- Food pantry' '- Health clinic' '- Job center' > resource-guide/pages/services.md\ngit -C resource-guide add -- pages/services.md\ngit -C resource-guide commit -q -m 'Add local services page'\nprintf '%s\\n' 'Help desk closes at 5 PM.' > resource-guide/pages/contact.md\ngit -C resource-guide add -- pages/contact.md\ngit -C resource-guide commit -q -m 'Update help desk hours'\nmkdir -p resource-guide/generated\nprintf '%s\\n' '<p>Generated preview</p>' > resource-guide/generated/preview.html\nprintf '%s\\n' 'generated/' > resource-guide/.gitignore\ngit -C resource-guide add -- .gitignore\ngit -C resource-guide mv pages/welcome.md pages/getting-help.md\ngit -C resource-guide rm -q pages/old-note.md\n",
+          "language": "bash",
+          "readOnly": true
+        },
+        {
+          "path": "resource-guide/README.md",
+          "content": "# Neighborhood Resource Guide\n",
+          "language": "markdown"
+        },
+        {
+          "path": "resource-guide/pages/contact.md",
+          "content": "Help desk closes at 5 PM.\n",
+          "language": "markdown"
+        },
+        {
+          "path": "resource-guide/pages/services.md",
+          "content": "- Food pantry\n- Health clinic\n- Job center\n",
+          "language": "markdown"
+        },
+        {
+          "path": "resource-guide/generated/preview.html",
+          "content": "<p>Generated preview</p>\n",
+          "language": "html"
+        },
+        {
+          "path": "resource-guide/.gitignore",
+          "content": "generated/\n",
+          "language": "text"
+        },
+        {
+          "path": "resource-guide/pages/getting-help.md",
+          "content": "Welcome to the neighborhood guide.\n",
+          "language": "markdown"
+        }
+      ]
     }
-  ]
+  ],
+  "topicMeta": {
+    "learningGoals": [
+      "Create and configure a repository from an ordinary project folder",
+      "Edit, inspect, stage, and commit two focused content changes",
+      "Create and verify an ignore policy for generated previews",
+      "Unstage and restore an accidental edit before structural cleanup",
+      "Rename and remove tracked paths, then audit the four-commit handoff"
+    ]
+  }
 }

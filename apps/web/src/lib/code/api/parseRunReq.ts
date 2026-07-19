@@ -1,8 +1,20 @@
 import "server-only";
 
+import crypto from "node:crypto";
+
 import type { RunLimits, RunReq, SqlRunLimits } from "@/lib/code/types";
 import type { SqlDialect } from "@/lib/practice/types";
-import type { InteractiveLanguage } from "@zoeskoul/code-contracts";
+import type {
+    BinaryWorkspaceFileEntry,
+    FileEntry,
+    InteractiveLanguage,
+} from "@zoeskoul/code-contracts";
+import {
+    assertWorkspaceRelativePath,
+    normalizeWorkspaceBase64,
+    resolveWorkspaceFileCapability,
+    workspaceBase64DecodedByteLength,
+} from "@zoeskoul/code-contracts";
 
 const CODE_LANGS = new Set<InteractiveLanguage>([
     "python",
@@ -20,7 +32,9 @@ const SQL_DIALECTS = new Set<SqlDialect>([
 ]);
 
 const MAX_MULTI_FILE_RUN_FILES = 20;
-const MAX_MULTI_FILE_RUN_TOTAL_BYTES = 1_000_000;
+const MAX_MULTI_FILE_RUN_TEXT_TOTAL_BYTES = 1_000_000;
+const MAX_MULTI_FILE_RUN_BINARY_TOTAL_BYTES = 8 * 1024 * 1024;
+const MAX_MULTI_FILE_RUN_BINARY_FILE_BYTES = 5 * 1024 * 1024;
 
 function isRecord(v: unknown): v is Record<string, unknown> {
     return Boolean(v) && typeof v === "object" && !Array.isArray(v);
@@ -201,26 +215,115 @@ function parseSqlLimits(v: unknown): SqlRunLimits | undefined {
     return out;
 }
 
+function strictBase64Bytes(value: unknown, field: string) {
+    const data = normalizeWorkspaceBase64(value);
+    const sizeBytes = workspaceBase64DecodedByteLength(value);
+    if (data == null || sizeBytes == null) {
+        throw new Error(`${field} must be canonical base64.`);
+    }
+    return { data, sizeBytes };
+}
+
+function parseFileEntry(item: unknown, index: number): FileEntry {
+    if (!isRecord(item)) throw new Error(`files[${index}] must be an object.`);
+
+    const path = assertWorkspaceRelativePath(
+        asString(item.path, `files[${index}].path`, 512),
+    );
+    const capability = resolveWorkspaceFileCapability(path);
+    if (!capability) {
+        throw new Error(`files[${index}] has an unsupported file type.`);
+    }
+
+    if (capability.storage === "binary") {
+        if (item.encoding !== "base64") {
+            throw new Error(`files[${index}] must use base64 encoding.`);
+        }
+
+        const { data, sizeBytes } = strictBase64Bytes(
+            item.data,
+            `files[${index}].data`,
+        );
+        if (sizeBytes > MAX_MULTI_FILE_RUN_BINARY_FILE_BYTES) {
+            throw new Error(
+                `files[${index}] exceeds the ${MAX_MULTI_FILE_RUN_BINARY_FILE_BYTES} byte binary-file limit.`,
+            );
+        }
+        if (
+            typeof item.sizeBytes !== "number" ||
+            !Number.isInteger(item.sizeBytes) ||
+            item.sizeBytes !== sizeBytes
+        ) {
+            throw new Error(`files[${index}].sizeBytes does not match its binary payload.`);
+        }
+
+        const checksum =
+            typeof item.checksum === "string" && item.checksum.trim()
+                ? item.checksum.trim().toLowerCase()
+                : undefined;
+        if (checksum && !/^sha256:[a-f0-9]{64}$/.test(checksum)) {
+            throw new Error(`files[${index}].checksum must be a SHA-256 checksum.`);
+        }
+        if (checksum) {
+            const actual = `sha256:${crypto
+                .createHash("sha256")
+                .update(Buffer.from(data, "base64"))
+                .digest("hex")}`;
+            if (actual !== checksum) {
+                throw new Error(`files[${index}].checksum does not match its binary payload.`);
+            }
+        }
+
+        const binary: BinaryWorkspaceFileEntry = {
+            kind: "file",
+            path,
+            encoding: "base64",
+            data,
+            mimeType: capability.mimeType,
+            sizeBytes,
+            ...(checksum ? { checksum } : {}),
+        };
+        return binary;
+    }
+
+    if (item.encoding === "base64") {
+        throw new Error(`files[${index}] is a text file and cannot use base64 encoding.`);
+    }
+
+    return {
+        kind: "file",
+        path,
+        content: asString(item.content, `files[${index}].content`, 300_000),
+    };
+}
+
 function parseFiles(v: unknown) {
     if (Array.isArray(v)) {
         if (v.length > MAX_MULTI_FILE_RUN_FILES) {
             throw new Error(`files must contain at most ${MAX_MULTI_FILE_RUN_FILES} files.`);
         }
 
-        const files = v.map((item, i) => {
-            if (!isRecord(item)) throw new Error(`files[${i}] must be an object.`);
-            return {
-                path: asString(item.path, `files[${i}].path`, 512),
-                content: asString(item.content, `files[${i}].content`, 300_000),
-            };
-        });
+        const files = v.map(parseFileEntry);
+        let textBytes = 0;
+        let binaryBytes = 0;
 
-        const totalBytes = files.reduce(
-            (sum, file) => sum + bytesOfText(file.content),
-            0,
-        );
-        if (totalBytes > MAX_MULTI_FILE_RUN_TOTAL_BYTES) {
-            throw new Error(`files total content exceeds the ${MAX_MULTI_FILE_RUN_TOTAL_BYTES} byte limit.`);
+        for (const file of files) {
+            if (file.encoding === "base64") {
+                binaryBytes += file.sizeBytes;
+            } else {
+                textBytes += bytesOfText(file.content);
+            }
+        }
+
+        if (textBytes > MAX_MULTI_FILE_RUN_TEXT_TOTAL_BYTES) {
+            throw new Error(
+                `files total content exceeds the ${MAX_MULTI_FILE_RUN_TEXT_TOTAL_BYTES} byte text limit.`,
+            );
+        }
+        if (binaryBytes > MAX_MULTI_FILE_RUN_BINARY_TOTAL_BYTES) {
+            throw new Error(
+                `files binary content exceeds the ${MAX_MULTI_FILE_RUN_BINARY_TOTAL_BYTES} byte limit.`,
+            );
         }
 
         return files;
@@ -236,7 +339,15 @@ function parseFiles(v: unknown) {
         let totalBytes = 0;
 
         for (const [path, content] of entries) {
-            const safePath = asString(path, "files key", 512);
+            const safePath = assertWorkspaceRelativePath(
+                asString(path, "files key", 512),
+            );
+            const capability = resolveWorkspaceFileCapability(safePath);
+            if (!capability || capability.storage !== "text") {
+                throw new Error(
+                    `files["${path}"] must be a supported text file; use the array form for binary files.`,
+                );
+            }
             const safeContent = asString(
                 content,
                 `files["${path}"]`,
@@ -246,8 +357,10 @@ function parseFiles(v: unknown) {
             out[safePath] = safeContent;
         }
 
-        if (totalBytes > MAX_MULTI_FILE_RUN_TOTAL_BYTES) {
-            throw new Error(`files total content exceeds the ${MAX_MULTI_FILE_RUN_TOTAL_BYTES} byte limit.`);
+        if (totalBytes > MAX_MULTI_FILE_RUN_TEXT_TOTAL_BYTES) {
+            throw new Error(
+                `files total content exceeds the ${MAX_MULTI_FILE_RUN_TEXT_TOTAL_BYTES} byte limit.`,
+            );
         }
 
         return out;
@@ -299,7 +412,9 @@ export function parseRunReq(input: unknown): RunReq {
                 typeof input.code === "string"
                     ? asString(input.code, "code", 300_000)
                     : undefined,
-            entry: asString(input.entry, "entry", 512),
+            entry: assertWorkspaceRelativePath(
+                asString(input.entry, "entry", 512),
+            ),
             files: parseFiles(input.files),
             stdin: asOptionalString(input.stdin, "stdin", 100_000),
             limits: parseRunLimits(input.limits),

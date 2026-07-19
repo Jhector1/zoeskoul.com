@@ -7,16 +7,20 @@ import type {
 } from "@/lib/practice/types";
 import type { QItem } from "@/lib/practice/uiTypes";
 import { serializeWorkspaceForCodeRun } from "@/lib/code/workspaceSubmission";
+import type { FileEntry } from "@/lib/code/types";
+import { isTextWorkspaceFileEntry } from "@zoeskoul/code-contracts";
 import { exportWorkspaceEntries } from "@/components/ide/fsTree";
 import { applyTerminalWorkspaceHintsToEntries } from "@/lib/practice/terminalWorkspaceHints";
 import { normalizeVisibleTerminalTranscriptText } from "@/lib/practice/visibleTerminalTranscript";
 
 function getWorkspaceEntryContent(args: {
     entry: string;
-    files: Array<{ path: string; content: string }>;
+    files: FileEntry[];
 }) {
     const match = args.files.find((file) => file.path === args.entry);
-    return match ? String(match.content ?? "") : "";
+    return match && isTextWorkspaceFileEntry(match)
+        ? String(match.content ?? "")
+        : "";
 }
 
 function getTerminalEvidence(value: unknown) {

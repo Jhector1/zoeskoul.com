@@ -4,7 +4,7 @@
   "moduleSlug": "git-foundations-module-3-manage-tracked-files",
   "sectionSlug": "git-foundations-section-3-safe-file-management",
   "prefix": "git_foundations_module_3",
-  "minutes": 24,
+  "minutes": 22,
   "runtimeDefaults": {
     "kind": "code",
     "language": "bash",
@@ -39,25 +39,6 @@
         "titleKey": "topics.git.git-foundations-module-3-manage-tracked-files.ignore-generated-files.tryIt.try_ignore_generated_files_sketch0.title",
         "promptKey": "topics.git.git-foundations-module-3-manage-tracked-files.ignore-generated-files.tryIt.try_ignore_generated_files_sketch0.prompt",
         "exerciseKey": "try-ignore-generated-files-sketch0",
-        "difficulty": "easy",
-        "preferKind": "code_input",
-        "seedPolicy": "global",
-        "required": true,
-        "allowReveal": true,
-        "maxAttempts": null
-      }
-    },
-    {
-      "id": "sketch1",
-      "kind": "sketch",
-      "titleKey": "topics.git.git-foundations-module-3-manage-tracked-files.ignore-generated-files.cards.sketch1.title",
-      "sketchId": "ignore-generated-files-sketch1",
-      "height": 420,
-      "tryIt": {
-        "id": "try-ignore-generated-files-sketch1",
-        "titleKey": "topics.git.git-foundations-module-3-manage-tracked-files.ignore-generated-files.tryIt.try_ignore_generated_files_sketch1.title",
-        "promptKey": "topics.git.git-foundations-module-3-manage-tracked-files.ignore-generated-files.tryIt.try_ignore_generated_files_sketch1.prompt",
-        "exerciseKey": "try-ignore-generated-files-sketch1",
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -112,7 +93,7 @@
         "difficulty": "easy",
         "n": 4,
         "min": 4,
-        "max": 6,
+        "max": 4,
         "selectionMode": "random",
         "allowReveal": true,
         "preferKind": null,
@@ -126,12 +107,6 @@
       "archetype": "paragraph",
       "titleKey": "sketches.git.git-foundations-module-3-manage-tracked-files.ignore-generated-files.ignore-generated-files-sketch0.title",
       "bodyKey": "sketches.git.git-foundations-module-3-manage-tracked-files.ignore-generated-files.ignore-generated-files-sketch0.bodyMarkdown"
-    },
-    {
-      "id": "ignore-generated-files-sketch1",
-      "archetype": "paragraph",
-      "titleKey": "sketches.git.git-foundations-module-3-manage-tracked-files.ignore-generated-files.ignore-generated-files-sketch1.title",
-      "bodyKey": "sketches.git.git-foundations-module-3-manage-tracked-files.ignore-generated-files.ignore-generated-files-sketch1.bodyMarkdown"
     },
     {
       "id": "ignore-generated-files-sketch2",
@@ -223,30 +198,6 @@
       }
     },
     {
-      "id": "ignore-generated-files-fill-blank-0",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.git.git-foundations-module-3-manage-tracked-files.ignore-generated-files.practice.ignore-generated-files-fill-blank-0",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "cache/"
-      }
-    },
-    {
-      "id": "ignore-generated-files-fill-blank-1",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.git.git-foundations-module-3-manage-tracked-files.ignore-generated-files.practice.ignore-generated-files-fill-blank-1",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "*.bak"
-      }
-    },
-    {
       "id": "try-ignore-generated-files-sketch0",
       "kind": "code_input",
       "purpose": "project",
@@ -335,96 +286,6 @@
       "tools": {
         "defaultSurface": "editor",
         "compactDefaultSurface": "editor"
-      }
-    },
-    {
-      "id": "try-ignore-generated-files-sketch1",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.git.git-foundations-module-3-manage-tracked-files.ignore-generated-files.tryIt.try_ignore_generated_files_sketch1",
-      "language": "bash",
-      "starterCode": "@:topics.git.git-foundations-module-3-manage-tracked-files.ignore-generated-files.tryIt.try_ignore_generated_files_sketch1.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.sh",
-          "content": "@:topics.git.git-foundations-module-3-manage-tracked-files.ignore-generated-files.tryIt.try_ignore_generated_files_sketch1.starterCode",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        },
-        {
-          "path": ".zoeskoul/setup.sh",
-          "content": "@:topics.git.git-foundations-module-3-manage-tracked-files.ignore-generated-files.tryIt.try_ignore_generated_files_sketch1.starterFiles.zoeskoul_setup_sh.content",
-          "language": "bash",
-          "readOnly": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "main.sh",
-          "content": "bash .zoeskoul/setup.sh\ngit check-ignore\ngit check-ignore logs/error.log\n",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 2\\n' > logs/error.log\n",
-          "language": "bash",
-          "readOnly": true
-        }
-      ],
-      "terminalExpectations": {
-        "requiredCommands": [
-          {
-            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
-          },
-          {
-            "pattern": "^git\\s+check-ignore$"
-          },
-          {
-            "pattern": "^git\\s+check-ignore\\s+logs/error\\.log$"
-          }
-        ],
-        "forbiddenCommands": [
-          {
-            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
-            "message": "@:topics.git.git-foundations-module-3-manage-tracked-files.ignore-generated-files.tryIt.try_ignore_generated_files_sketch1.terminalExpectations.forbiddenCommands.0.message"
-          }
-        ]
-      },
-      "hiddenShellCheck": {
-        "script": "set -eu\nrepo='.'\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ncommand -v git >/dev/null 2>&1 || fail \"Git is not available in this workspace.\"\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail 'Initialize a Git repository in ..'\nactual_branch=$(git -C \"$repo\" branch --show-current 2>/dev/null || true)\n[ \"$actual_branch\" = 'main' ] || fail 'Switch to the main branch.'",
-        "timeoutMs": 15000
-      },
-      "workspace": {
-        "language": "bash",
-        "entryFilePath": "main.sh",
-        "starterCode": "@:topics.git.git-foundations-module-3-manage-tracked-files.ignore-generated-files.tryIt.try_ignore_generated_files_sketch1.starterCode",
-        "starterFiles": [
-          {
-            "path": "main.sh",
-            "content": "@:topics.git.git-foundations-module-3-manage-tracked-files.ignore-generated-files.tryIt.try_ignore_generated_files_sketch1.starterCode",
-            "language": "bash",
-            "isEntry": true,
-            "entry": true,
-            "readOnly": false
-          },
-          {
-            "path": ".zoeskoul/setup.sh",
-            "content": "@:topics.git.git-foundations-module-3-manage-tracked-files.ignore-generated-files.tryIt.try_ignore_generated_files_sketch1.starterFiles.zoeskoul_setup_sh.content",
-            "language": "bash",
-            "readOnly": true
-          }
-        ]
-      },
-      "showExpectedExample": false,
-      "recipe": {
-        "type": "shell_task",
-        "mode": "terminal_workspace",
-        "instructions": "@:topics.git.git-foundations-module-3-manage-tracked-files.ignore-generated-files.tryIt.try_ignore_generated_files_sketch1.instructions"
       }
     },
     {
@@ -559,10 +420,12 @@
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
+            "pattern": "^git\\s+commit\\s+\\-m\\s+(?:\"Ignore generated output\"|\\'Ignore generated output\\')$",
+            "message": "@:topics.git.git-foundations-module-3-manage-tracked-files.ignore-generated-files.tryIt.try_ignore_generated_files_sketch3.terminalExpectations.requiredCommands.0.message"
           },
           {
-            "pattern": "^git\\s+check-ignore$"
+            "pattern": "^git\\s+status\\s+(?:\\-\\-short|\\-s)$",
+            "message": "@:topics.git.git-foundations-module-3-manage-tracked-files.ignore-generated-files.tryIt.try_ignore_generated_files_sketch3.terminalExpectations.requiredCommands.1.message"
           }
         ],
         "forbiddenCommands": [
@@ -604,5 +467,13 @@
         "instructions": "@:topics.git.git-foundations-module-3-manage-tracked-files.ignore-generated-files.tryIt.try_ignore_generated_files_sketch3.instructions"
       }
     }
-  ]
+  ],
+  "topicMeta": {
+    "learningGoals": [
+      "Write narrow .gitignore rules for generated output",
+      "Explain why ignore rules do not affect already-tracked files",
+      "Stop tracking a local-only file while keeping its working copy",
+      "Commit and verify an ignore policy with status"
+    ]
+  }
 }

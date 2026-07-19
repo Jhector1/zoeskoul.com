@@ -3,20 +3,17 @@
     "git-foundations": {
       "git-foundations-module-2-meaningful-history": {
         "read-history-with-log-and-show": {
-          "label": "Read History with log and show",
-          "summary": "Scan the timeline with log, inspect one snapshot with show, and relate HEAD to the current project state.",
+          "label": "Read History with Log and Show",
+          "summary": "Read the history overview, open one checkpoint, and select the current or previous snapshot with HEAD notation.",
           "cards": {
             "sketch0": {
-              "title": "Scan the Timeline"
+              "title": "Use the Log as a Table of Contents"
             },
             "sketch1": {
-              "title": "Open One Commit"
+              "title": "Open One Checkpoint"
             },
             "sketch2": {
-              "title": "Understand HEAD"
-            },
-            "sketch3": {
-              "title": "Move Between Overview and Detail"
+              "title": "Understand Where HEAD Points"
             },
             "quiz": {
               "title": "Practice"
@@ -26,16 +23,16 @@
             "allowReveal": true,
             "try_read_history_with_log_and_show_sketch0": {
               "title": "Scan the One-Line History",
-              "prompt": "The terminal opens inside the prepared `community-site/` repository.\n\nRead the three-entry history of `community-site/` in compact form.\n\nType each command in the terminal and press Enter.",
-              "hint": "Read the repository state first, then use the Git command that changes only the requested boundary.",
+              "prompt": "You are working in the prepared `community-site/` repository.\n\nRead the three-entry history of `community-site/` in compact form.",
+              "hint": "Read the timeline from newest checkpoint to oldest.",
               "help": {
                 "concept": "git log --oneline compresses each snapshot to an identifier and subject so the project story is easy to scan.",
-                "hint_1": "Use the exact file or repository named in the task; avoid broad commands that include unrelated work.",
-                "hint_2": "After the action, run the requested inspection command to confirm the final state."
+                "hint_1": "Focus on commit order and subject lines rather than machine-specific hashes.",
+                "hint_2": "The newest entry should describe the result from this milestone."
               },
               "starterCode": "Open Saturdays from 9 AM to noon.\n",
               "solutionCode": "git log --oneline",
-              "instructions": "The terminal opens inside the prepared `community-site/` repository.\n\nRead the three-entry history of `community-site/` in compact form.\n\nType each command in the terminal and press Enter.",
+              "instructions": "You are working in the prepared `community-site/` repository.\n\nRead the three-entry history of `community-site/` in compact form.",
               "starterFiles": {
                 "zoeskoul_setup_sh": {
                   "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-site\nmkdir -p community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name \"ZoeSkoul Learner\"\ngit -C community-site config --local user.email \"learner@zoeskoul.local\"\ncd community-site\nprintf %s '<h1>Community Hub</h1>\n' > index.html\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Start community site'\ncd community-site\nprintf %s 'export const links = [\"Home\", \"Events\"];\n' > nav.js\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Add events navigation'\ncd community-site\nprintf %s 'Open Saturdays from 9 AM to noon.\n' > README.md\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Clarify volunteer hours'\n"
@@ -49,28 +46,28 @@
               "terminalExpectations": {
                 "forbiddenCommands": {
                   "0": {
-                    "message": "Do not rewrite shared history in this Git practice task."
+                    "message": "That action can discard or rewrite history. Use the safe, layer-specific workflow taught in this course."
                   }
                 },
                 "requiredCommands": {
                   "0": {
-                    "message": "Run `git log --oneline`, then check your answer again."
+                    "message": "Did you read the one-line history and confirm the newest checkpoint?"
                   }
                 }
               }
             },
             "try_read_history_with_log_and_show_sketch1": {
               "title": "Inspect the Latest Snapshot",
-              "prompt": "The terminal opens inside the prepared `community-site/` repository.\n\nUse `git show --stat HEAD` to see the latest commit message and the files it changed.\n\nType each command in the terminal and press Enter.",
-              "hint": "Read the repository state first, then use the Git command that changes only the requested boundary.",
+              "prompt": "You are working in the prepared `community-site/` repository.\n\nUse `git show --stat HEAD` to see the latest commit message and the files it changed.",
+              "hint": "Open the checkpoint named in the task and inspect its evidence.",
               "help": {
                 "concept": "git show connects a commit’s message to the exact snapshot and patch it introduced.",
-                "hint_1": "Use the exact file or repository named in the task; avoid broad commands that include unrelated work.",
-                "hint_2": "After the action, run the requested inspection command to confirm the final state."
+                "hint_1": "Choose a summary view for file shape or a full patch for line-level detail.",
+                "hint_2": "Confirm that the snapshot contents support its message."
               },
               "starterCode": "Open Saturdays from 9 AM to noon.\n",
               "solutionCode": "git show --stat HEAD",
-              "instructions": "The terminal opens inside the prepared `community-site/` repository.\n\nUse `git show --stat HEAD` to see the latest commit message and the files it changed.\n\nType each command in the terminal and press Enter.",
+              "instructions": "You are working in the prepared `community-site/` repository.\n\nUse `git show --stat HEAD` to see the latest commit message and the files it changed.",
               "starterFiles": {
                 "zoeskoul_setup_sh": {
                   "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-site\nmkdir -p community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name \"ZoeSkoul Learner\"\ngit -C community-site config --local user.email \"learner@zoeskoul.local\"\ncd community-site\nprintf %s '<h1>Community Hub</h1>\n' > index.html\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Start community site'\ncd community-site\nprintf %s 'Open Saturdays from 9 AM to noon.\n' > README.md\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Clarify volunteer hours'\n"
@@ -84,28 +81,28 @@
               "terminalExpectations": {
                 "forbiddenCommands": {
                   "0": {
-                    "message": "Do not rewrite shared history in this Git practice task."
+                    "message": "That action can discard or rewrite history. Use the safe, layer-specific workflow taught in this course."
                   }
                 },
                 "requiredCommands": {
                   "0": {
-                    "message": "Run `git show --stat HEAD`, then check your answer again."
+                    "message": "Did you open the requested checkpoint and inspect its file summary or patch?"
                   }
                 }
               }
             },
             "try_read_history_with_log_and_show_sketch2": {
               "title": "Inspect the Previous Snapshot",
-              "prompt": "The terminal opens inside the prepared `community-site/` repository.\n\nThe newest commit changed the README. Inspect `HEAD~1` to review the snapshot immediately before it.\n\nType each command in the terminal and press Enter.",
-              "hint": "Read the repository state first, then use the Git command that changes only the requested boundary.",
+              "prompt": "You are working in the prepared `community-site/` repository.\n\nThe newest commit changed the README. Inspect `HEAD~1` to review the snapshot immediately before it.",
+              "hint": "Open the checkpoint named in the task and inspect its evidence.",
               "help": {
                 "concept": "HEAD~1 names the first parent of the current commit, which is the snapshot immediately before HEAD in this linear history.",
-                "hint_1": "Use the exact file or repository named in the task; avoid broad commands that include unrelated work.",
-                "hint_2": "After the action, run the requested inspection command to confirm the final state."
+                "hint_1": "Choose a summary view for file shape or a full patch for line-level detail.",
+                "hint_2": "Confirm that the snapshot contents support its message."
               },
               "starterCode": "Open Saturdays from 9 AM to noon.\n",
               "solutionCode": "git show --stat HEAD~1",
-              "instructions": "The terminal opens inside the prepared `community-site/` repository.\n\nThe newest commit changed the README. Inspect `HEAD~1` to review the snapshot immediately before it.\n\nType each command in the terminal and press Enter.",
+              "instructions": "You are working in the prepared `community-site/` repository.\n\nThe newest commit changed the README. Inspect `HEAD~1` to review the snapshot immediately before it.",
               "starterFiles": {
                 "zoeskoul_setup_sh": {
                   "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-site\nmkdir -p community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name \"ZoeSkoul Learner\"\ngit -C community-site config --local user.email \"learner@zoeskoul.local\"\ncd community-site\nprintf %s '<h1>Community Hub</h1>\n' > index.html\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Start community site'\ncd community-site\nprintf %s 'Open Saturdays from 9 AM to noon.\n' > README.md\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Clarify volunteer hours'\n"
@@ -119,53 +116,12 @@
               "terminalExpectations": {
                 "forbiddenCommands": {
                   "0": {
-                    "message": "Do not rewrite shared history in this Git practice task."
+                    "message": "That action can discard or rewrite history. Use the safe, layer-specific workflow taught in this course."
                   }
                 },
                 "requiredCommands": {
                   "0": {
-                    "message": "Run `git show --stat HEAD~1`, then check your answer again."
-                  }
-                }
-              }
-            },
-            "try_read_history_with_log_and_show_sketch3": {
-              "title": "Connect History to Current State",
-              "prompt": "The terminal opens inside the prepared `community-site/` repository.\n\nRead the one-line history, inspect the latest snapshot, and finish with short status to confirm that inspection changed nothing.\n\nType each command in the terminal and press Enter.",
-              "hint": "Read the repository state first, then use the Git command that changes only the requested boundary.",
-              "help": {
-                "concept": "History inspection is read-only: log and show explain snapshots without changing the working tree.",
-                "hint_1": "Use the exact file or repository named in the task; avoid broad commands that include unrelated work.",
-                "hint_2": "After the action, run the requested inspection command to confirm the final state."
-              },
-              "starterCode": "Open Saturdays from 9 AM to noon.\n",
-              "solutionCode": "git log --oneline\ngit show --stat HEAD\ngit status --short",
-              "instructions": "The terminal opens inside the prepared `community-site/` repository.\n\nRead the one-line history, inspect the latest snapshot, and finish with short status to confirm that inspection changed nothing.\n\nType each command in the terminal and press Enter.",
-              "starterFiles": {
-                "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-site\nmkdir -p community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name \"ZoeSkoul Learner\"\ngit -C community-site config --local user.email \"learner@zoeskoul.local\"\ncd community-site\nprintf %s '<h1>Community Hub</h1>\n' > index.html\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Start community site'\ncd community-site\nprintf %s 'Open Saturdays from 9 AM to noon.\n' > README.md\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Clarify volunteer hours'\n"
-                }
-              },
-              "solutionFiles": {
-                "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-site\nmkdir -p community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name \"ZoeSkoul Learner\"\ngit -C community-site config --local user.email \"learner@zoeskoul.local\"\ncd community-site\nprintf %s '<h1>Community Hub</h1>\n' > index.html\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Start community site'\ncd community-site\nprintf %s 'Open Saturdays from 9 AM to noon.\n' > README.md\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Clarify volunteer hours'\n"
-                }
-              },
-              "terminalExpectations": {
-                "forbiddenCommands": {
-                  "0": {
-                    "message": "Do not rewrite shared history in this Git practice task."
-                  }
-                },
-                "requiredCommands": {
-                  "0": {
-                    "message": "Run `git log --oneline`, then check your answer again."
-                  },
-                  "1": {
-                    "message": "Run `git show --stat HEAD`, then check your answer again."
-                  },
-                  "2": {
-                    "message": "Run `git status --short`, then check your answer again."
+                    "message": "Did you open the requested checkpoint and inspect its file summary or patch?"
                   }
                 }
               }
@@ -175,11 +131,11 @@
             "single-choice-1": {
               "title": "HEAD in Git",
               "prompt": "What does `HEAD` refer to in Git?",
-              "hint": "Think about the current state of your working directory.",
+              "hint": "Focus on what the command or concept observes or changes at this point in the workflow.",
               "help": {
-                "concept": "`HEAD` points to the current commit in your branch.",
-                "hint_1": "It usually points to the latest commit in your branch.",
-                "hint_2": "`HEAD` helps you understand the current state of your project."
+                "concept": "Scan the repository timeline, open one checkpoint, understand `HEAD`, and move between overview and detail.",
+                "hint_1": "Remove options that act on a different repository layer than the one named in the question.",
+                "hint_2": "Choose the answer that remains accurate even when other unrelated files exist."
               },
               "options": {
                 "a": "The first commit in the repository",
@@ -191,11 +147,11 @@
             "multi-choice-1": {
               "title": "Understanding git log --oneline",
               "prompt": "What information does `git log --oneline` provide?",
-              "hint": "Think about the format and details shown by this command.",
+              "hint": "Choose the one answer that describes this command or concept precisely.",
               "help": {
-                "concept": "`git log --oneline` provides a brief overview of the commit history.",
-                "hint_1": "It shows each commit on a single line.",
-                "hint_2": "Each line includes a short hash and the commit message."
+                "concept": "Scan the repository timeline, open one checkpoint, understand `HEAD`, and move between overview and detail.",
+                "hint_1": "Remove choices that act on a different repository layer or promise behavior Git does not provide.",
+                "hint_2": "Prefer the exact definition used in this chapter over a nearby Git idea."
               },
               "options": {
                 "a": "A detailed diff of each commit",
@@ -207,11 +163,11 @@
             "multi-choice-2": {
               "title": "Purpose of git show",
               "prompt": "What is the primary purpose of the `git show` command?",
-              "hint": "Consider what details this command reveals about a commit.",
+              "hint": "Choose the one answer that describes this command or concept precisely.",
               "help": {
-                "concept": "`git show` provides detailed information about a specific commit.",
-                "hint_1": "It shows the changes made in a commit.",
-                "hint_2": "It includes the commit message, author, and date."
+                "concept": "Scan the repository timeline, open one checkpoint, understand `HEAD`, and move between overview and detail.",
+                "hint_1": "Remove choices that act on a different repository layer or promise behavior Git does not provide.",
+                "hint_2": "Prefer the exact definition used in this chapter over a nearby Git idea."
               },
               "options": {
                 "a": "To list all commits in a branch",
@@ -223,50 +179,16 @@
             "drag-reorder-1": {
               "title": "Order of Git Commands",
               "prompt": "Arrange the following Git commands in the order you would use them to inspect a commit's history and details.",
-              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "hint": "Start with the state that must exist before the next action can make sense.",
               "help": {
-                "concept": "The pieces should form a valid statement in a logical order.",
-                "hint_1": "Start with the piece that introduces the idea or action.",
-                "hint_2": "Place dependent pieces after the part they describe or complete."
+                "concept": "Scan the repository timeline, open one checkpoint, understand `HEAD`, and move between overview and detail.",
+                "hint_1": "Track how the project moves from working files to a proposed snapshot and then to history.",
+                "hint_2": "Read the ordered steps as one continuous repository story."
               },
               "tokens": {
                 "t1": "git log --oneline",
                 "t2": "git show HEAD"
               }
-            },
-            "fill-blank-1": {
-              "title": "Command for concise commit history",
-              "prompt": "Fill in the blank: The command `git [blank1] --oneline` provides a concise view of the commit history.",
-              "hint": "This command is used to list commits briefly.",
-              "help": {
-                "concept": "`git the missing term --oneline` is used to view a brief commit history.",
-                "hint_1": "The command starts with `git` and is followed by a word that means 'record'.",
-                "hint_2": "The missing word is `the missing term`."
-              },
-              "template": "The command `git [blank1] --oneline` provides a concise view of the commit history.",
-              "choices": [
-                "log",
-                "show",
-                "status",
-                "commit"
-              ]
-            },
-            "fill-blank-2": {
-              "title": "Command to inspect a commit",
-              "prompt": "Fill in the blank: Use `git [blank1] HEAD` to inspect the details of a specific commit.",
-              "hint": "This command reveals detailed information about a commit.",
-              "help": {
-                "concept": "`git the missing term` is used to inspect a specific commit.",
-                "hint_1": "The command starts with `git` and is followed by a word that means 'display'.",
-                "hint_2": "The missing word is `the missing term`."
-              },
-              "template": "Use `git [blank1] HEAD` to inspect the details of a specific commit.",
-              "choices": [
-                "log",
-                "show",
-                "status",
-                "commit"
-              ]
             }
           }
         }
@@ -278,20 +200,16 @@
       "git-foundations-module-2-meaningful-history": {
         "read-history-with-log-and-show": {
           "sketch0": {
-            "title": "Scan the Timeline",
-            "bodyMarkdown": "`git log --oneline` turns the commit history into a compact list:\n\n```bash\ngit log --oneline\n```\n\nEach row pairs a shortened identifier with a subject. Newest appears first. The identifier is useful for selecting a commit, but the message and order are what make the history understandable.\n\nUse the list to find the checkpoint you want to investigate."
+            "title": "Read the Timeline",
+            "bodyMarkdown": "The one-line log is the table of contents for repository history:\n\n```bash\ngit log --oneline\n```\n\nEach row pairs a shortened identifier with a subject, newest first. This is the one introduction to `git log`; later projects will use it as an audit step."
           },
           "sketch1": {
-            "title": "Open One Commit",
-            "bodyMarkdown": "`git show` opens a commit and displays its metadata and patch:\n\n```bash\ngit show --stat --oneline HEAD\n```\n\n`HEAD` selects the current commit. `--stat` summarizes which files changed, while `--oneline` keeps the heading compact.\n\nRemove `--stat` when you need the full line-by-line patch."
+            "title": "Open One Checkpoint",
+            "bodyMarkdown": "`git show` opens one recorded snapshot. A statistics view gives a compact shape—subject, files, and line counts:\n\n```bash\ngit show --stat HEAD\n```\n\nUse it when the timeline points to a commit that deserves closer inspection."
           },
           "sketch2": {
-            "title": "Understand HEAD",
-            "bodyMarkdown": "HEAD is Git’s name for the commit currently checked out. On `main`, it normally points to the newest commit on that branch.\n\n```bash\ngit rev-parse --short HEAD\n```\n\nThe output is an identifier, not a version number you should memorize. As new commits are created, HEAD moves forward.\n\nThinking of HEAD as “the snapshot I am currently standing on” makes status and history easier to connect."
-          },
-          "sketch3": {
-            "title": "Move Between Overview and Detail",
-            "bodyMarkdown": "History inspection works like a table of contents and a chapter. Start with `git log --oneline` for the overview, then use `git show` for the selected detail.\n\nThis is faster and safer than opening every file and guessing what changed. It also lets you verify whether a commit message accurately describes its snapshot.\n\nA readable history supports both views without surprises."
+            "title": "Select the Current or Previous Snapshot",
+            "bodyMarkdown": "`HEAD` names the commit currently checked out. `HEAD~1` names its first parent—the snapshot immediately before it.\n\nThese names let you move from the timeline to a specific checkpoint without copying a generated identifier. They select history; they do not change it."
           }
         }
       }

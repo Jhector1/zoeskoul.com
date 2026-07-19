@@ -194,10 +194,20 @@ function nodeHydrationSnapshots(nodes: readonly FSNode[]) {
         .map((node) => {
             const nodePath = pathOf(nodes as FSNode[], (node as any).id);
             if ((node as any).kind === "file") {
+                const binary = (node as any).binary;
                 return {
                     path: nodePath,
                     kind: (node as any).kind,
-                    content: (node as any).content ?? "",
+                    content: binary ? "" : (node as any).content ?? "",
+                    binary: binary
+                        ? {
+                            encoding: binary.encoding,
+                            data: binary.data,
+                            mimeType: binary.mimeType,
+                            sizeBytes: binary.sizeBytes,
+                            checksum: binary.checksum ?? null,
+                          }
+                        : null,
                 };
             }
 

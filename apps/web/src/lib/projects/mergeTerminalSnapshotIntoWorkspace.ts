@@ -15,10 +15,15 @@ import {
     normalizeUiProjectPath,
 } from "@/lib/projects/workspacePathMapping";
 import { isWorkspaceInternalPath } from "@/lib/projects/workspaceInternalPaths";
+import type { WorkspaceSyncEntry } from "@zoeskoul/code-contracts";
+import {
+    isBinaryWorkspaceEntry,
+    normalizeBinaryFileContent,
+    workspaceFileSemanticValue,
+    workspaceFileToSyncEntry,
+} from "@/lib/ide/workspaceFileContent";
 
-type SnapshotEntry =
-    | { kind?: "file"; path: string; content: string }
-    | { kind: "directory"; path: string };
+type SnapshotEntry = WorkspaceSyncEntry;
 
 type MergeArgs = {
     prior: WorkspaceStateV2;
@@ -108,15 +113,33 @@ function normalizeSnapshotEntries(
         if (isRunnerManagedWorkspacePath(rel, syntheticRootName)) continue;
         if (isWorkspaceInternalPath(rel)) continue;
 
-        if ((entry as any)?.kind === "directory") {
+        if (entry.kind === "directory") {
             out.set(rel, { kind: "directory", path: rel });
-        } else {
+            continue;
+        }
+
+        if (isBinaryWorkspaceEntry(entry)) {
+            const binary = normalizeBinaryFileContent(entry, rel);
+            if (!binary) {
+                throw new Error(`Invalid binary workspace snapshot: ${rel}`);
+            }
             out.set(rel, {
                 kind: "file",
                 path: rel,
-                content: String((entry as any)?.content ?? ""),
+                encoding: "base64",
+                data: binary.data,
+                mimeType: binary.mimeType,
+                sizeBytes: binary.sizeBytes,
+                ...(binary.checksum ? { checksum: binary.checksum } : {}),
             });
+            continue;
         }
+
+        out.set(rel, {
+            kind: "file",
+            path: rel,
+            content: String(entry.content ?? ""),
+        });
     }
 
     return out;
@@ -143,11 +166,7 @@ function priorInternalEntries(
             continue;
         }
 
-        entries.push({
-            kind: "file",
-            path: rel,
-            content: node.content ?? "",
-        });
+        entries.push(workspaceFileToSyncEntry({ path: rel, file: node }));
     }
 
     return entries;
@@ -171,11 +190,7 @@ function buildDesiredEntries(args: {
         const priorFolder = args.priorFolders.get(rel);
 
         if (priorFile) {
-            map.set(rel, {
-                kind: "file",
-                path: rel,
-                content: priorFile.content ?? "",
-            });
+            map.set(rel, workspaceFileToSyncEntry({ path: rel, file: priorFile }));
             continue;
         }
 
@@ -221,7 +236,7 @@ function workspaceSemanticKey(workspace: WorkspaceStateV2) {
                 return {
                     path,
                     kind: "file" as const,
-                    content: node.content ?? "",
+                    value: workspaceFileSemanticValue(node),
                 };
             }
 
@@ -332,8 +347,8 @@ export function mergeTerminalSnapshotIntoWorkspace(
 
     const desiredFolderRelPaths = new Set<string>();
     const desiredFiles = desiredEntries.filter(
-        (entry): entry is { kind?: "file"; path: string; content: string } =>
-            (entry.kind ?? "file") !== "directory",
+        (entry): entry is Exclude<WorkspaceSyncEntry, { kind: "directory" }> =>
+            entry.kind !== "directory",
     );
 
     for (const entry of desiredEntries) {
@@ -403,9 +418,18 @@ export function mergeTerminalSnapshotIntoWorkspace(
         const priorFile = priorFiles.get(file.path);
         const name = file.path.split("/").filter(Boolean).pop() ?? file.path;
         const parentRel = parentRelPath(file.path);
-        const content = file.content ?? "";
+        const binary = isBinaryWorkspaceEntry(file)
+            ? normalizeBinaryFileContent(file, name)
+            : undefined;
+        if (isBinaryWorkspaceEntry(file) && !binary) {
+            throw new Error(`Invalid binary workspace snapshot: ${file.path}`);
+        }
+        const content = binary ? "" : String((file as any).content ?? "");
+        const nextSemanticValue = binary
+            ? workspaceFileSemanticValue({ content: "", binary })
+            : workspaceFileSemanticValue({ content });
         const contentChanged = priorFile
-            ? (priorFile.content ?? "") !== content
+            ? workspaceFileSemanticValue(priorFile) !== nextSemanticValue
             : true;
 
         const node: FileNode = {
@@ -419,6 +443,7 @@ export function mergeTerminalSnapshotIntoWorkspace(
                         : null
                     : folderIdByRelPath.get(parentRel) ?? null,
             content,
+            ...(binary ? { binary } : {}),
             createdAt: priorFile?.createdAt ?? timestamp,
             updatedAt: contentChanged
                 ? timestamp

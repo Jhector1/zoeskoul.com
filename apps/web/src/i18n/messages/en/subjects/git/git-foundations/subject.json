@@ -2,7 +2,7 @@
   "subjects": {
     "git-foundations": {
       "title": "Git Foundations",
-      "description": "Learn Git by building one local repository at a time—from `git init` to a clean, readable history—without remotes, GitHub, or hidden learner setup commands.",
+      "description": "Learn the essential local Git workflow: create a repository, read its state, inspect and select changes, record focused commits, manage files safely, and verify a clean handoff.",
       "moreComingSoon": "More Git Foundations lessons are coming soon."
     }
   },
@@ -10,7 +10,7 @@
     "git-foundations": {
       "git-foundations-module-1-start-tracking": {
         "title": "Create Your First Repository",
-        "description": "Start with an ordinary folder, initialize Git on main, read its state, and record the first meaningful snapshot.",
+        "description": "Turn an ordinary folder into a repository, read its state, and record a trustworthy first snapshot.",
         "outcomes": [
           "Explain why one project with history is safer than duplicate “final” folders.",
           "Initialize an ordinary folder as a Git repository on main.",
@@ -24,11 +24,11 @@
       },
       "git-foundations-module-2-meaningful-history": {
         "title": "Build Meaningful History",
-        "description": "Turn related edits into focused commits that another developer can read and inspect.",
+        "description": "Review real edits, choose one coherent snapshot at a time, and read the history those decisions create.",
         "outcomes": [
-          "Use git diff to inspect unstaged changes.",
-          "Use git add and git diff --staged to prepare one focused snapshot.",
-          "Create cohesive commits with meaningful imperative messages.",
+          "Use git diff to review unstaged and staged content.",
+          "Choose related files for one focused snapshot.",
+          "Create concise commits while leaving unrelated work outside them.",
           "Read history with git log --oneline and inspect a commit with git show."
         ],
         "why": [
@@ -38,12 +38,12 @@
       },
       "git-foundations-module-3-manage-tracked-files": {
         "title": "Manage Tracked Files Safely",
-        "description": "Keep a repository clean as files are renamed, removed, ignored, or restored.",
+        "description": "Rename, remove, ignore, and restore files without losing the history that already exists.",
         "outcomes": [
-          "Read how tracked file modifications appear before and after staging.",
-          "Rename and remove tracked files with git mv and git rm.",
-          "Create and verify .gitignore rules for generated files.",
-          "Restore staged and unstaged mistakes safely."
+          "Rename and remove tracked files with Git-aware commands.",
+          "Keep generated and local-only files outside future snapshots.",
+          "Stop tracking a file while preserving its working copy.",
+          "Correct staged and unstaged mistakes without rewriting commits."
         ],
         "why": [
           "Keeps the repository accurate as files change names, disappear, or become generated output.",
@@ -52,7 +52,7 @@
       },
       "git-foundations-module-4-final-capstone": {
         "title": "Final Capstone",
-        "description": "Build and hand off one complete local history for a neighborhood resource guide.",
+        "description": "Build and audit a complete four-commit local history for a neighborhood resource guide.",
         "outcomes": [
           "Create a clean repository from an ordinary project folder.",
           "Build four purposeful commits whose boundaries match the requested work.",
@@ -92,12 +92,11 @@
       "git-foundations-module-2-meaningful-history": {
         "git-foundations-git-foundations-section-2-history-workflow": {
           "title": "From Edits to Understandable Snapshots",
-          "description": "Inspect changes, choose what belongs together, commit one idea at a time, and read the history you created.",
+          "description": "Review changes, select one coherent snapshot, record it clearly, and read the resulting history.",
           "weeks": null,
           "bullets": [
             "Inspect Unstaged Changes with git diff",
-            "Stage Intentionally",
-            "Create Focused Commits",
+            "Stage and Commit One Purpose",
             "Read History with log and show"
           ]
         },
@@ -113,10 +112,9 @@
       "git-foundations-module-3-manage-tracked-files": {
         "git-foundations-git-foundations-section-3-safe-file-management": {
           "title": "Keep the Repository Honest",
-          "description": "Rename and remove tracked files, ignore generated output, and recover from staging or working-tree mistakes safely.",
+          "description": "Change the repository shape, keep generated output out, and recover safely from current-state mistakes.",
           "weeks": null,
           "bullets": [
-            "Modify and Verify Tracked Files",
             "Rename and Remove Tracked Files",
             "Ignore Generated Files",
             "Restore without Rewriting History"

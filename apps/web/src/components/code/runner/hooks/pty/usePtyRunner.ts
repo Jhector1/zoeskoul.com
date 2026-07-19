@@ -16,6 +16,12 @@ import {
     type InteractiveLanguage,
 } from "@zoeskoul/code-contracts";
 import { exportWorkspaceEntries, pathOf } from "@/components/ide/fsTree";
+import { isBinaryWorkspaceEntry } from "@/lib/ide/workspaceFileContent";
+import {
+    normalizeWorkspaceSyncPath,
+    sortWorkspaceSyncEntries,
+    workspaceSyncEntriesEqual,
+} from "@/lib/projects/workspaceSyncEntries";
 
 type StartedInteractiveSession = {
     ok?: true;
@@ -73,60 +79,16 @@ function normalizePath(input: string) {
 }
 
 function sortEntries(entries: WorkspaceSyncEntry[]): WorkspaceSyncEntry[] {
-    return [...entries]
-        .map((entry): WorkspaceSyncEntry => {
-            if ((entry as any).kind === "directory") {
-                return {
-                    kind: "directory",
-                    path: normalizePath((entry as any).path),
-                };
-            }
-
-            return {
-                kind: "file",
-                path: normalizePath((entry as any).path),
-                content: String((entry as any).content ?? ""),
-            };
-        })
-        .filter((entry): entry is WorkspaceSyncEntry => !!entry.path)
-        .sort((a, b) => {
-            const pathCmp = a.path.localeCompare(b.path);
-            if (pathCmp !== 0) return pathCmp;
-
-            const ak = (a as any).kind ?? "file";
-            const bk = (b as any).kind ?? "file";
-
-            if (ak === bk) return 0;
-            return ak === "directory" ? -1 : 1;
-        });
-}
-
-function entryKey(entry: WorkspaceSyncEntry) {
-    const kind = (entry as any).kind === "directory" ? "directory" : "file";
-    return `${kind}:${normalizePath((entry as any).path)}`;
+    return sortWorkspaceSyncEntries(entries);
 }
 
 function entriesEqual(a: WorkspaceSyncEntry[], b: WorkspaceSyncEntry[]) {
-    const aa = sortEntries(a);
-    const bb = sortEntries(b);
+    return workspaceSyncEntriesEqual(a, b);
+}
 
-    if (aa.length !== bb.length) return false;
-
-    for (let i = 0; i < aa.length; i += 1) {
-        const left = aa[i] as any;
-        const right = bb[i] as any;
-
-        if ((left.kind ?? "file") !== (right.kind ?? "file")) return false;
-        if (left.path !== right.path) return false;
-
-        if ((left.kind ?? "file") !== "directory") {
-            if (String(left.content ?? "") !== String(right.content ?? "")) {
-                return false;
-            }
-        }
-    }
-
-    return true;
+function entryKey(entry: WorkspaceSyncEntry) {
+    const kind = entry.kind === "directory" ? "directory" : "file";
+    return `${kind}:${normalizeWorkspaceSyncPath(entry.path)}`;
 }
 
 function diffDirtyUiPaths(
@@ -184,9 +146,10 @@ function patchWorkspaceEntriesWithRunCode(args: {
 
     let changed = false;
     const patchedEntries = entries.map((entry) => {
-        if ((entry as any).kind === "directory") return entry;
-        if (normalizePath((entry as any).path) !== activePath) return entry;
-        if (String((entry as any).content ?? "") === runCode) return entry;
+        if (entry.kind === "directory") return entry;
+        if (normalizePath(entry.path) !== activePath) return entry;
+        if (isBinaryWorkspaceEntry(entry)) return entry;
+        if (String(entry.content ?? "") === runCode) return entry;
 
         changed = true;
         return {
@@ -230,11 +193,11 @@ function readRunCodeFromWorkspaceEntries(args: {
         normalizePath((entry as any).path) === activePath,
     );
 
-    if (!match || (match as any).kind === "directory") {
+    if (!match || match.kind === "directory" || isBinaryWorkspaceEntry(match)) {
         return null;
     }
 
-    return String((match as any).content ?? "");
+    return String(match.content ?? "");
 }
 
 async function postJson<T>(url: string, body: unknown): Promise<T> {

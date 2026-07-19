@@ -15,12 +15,23 @@ export type FolderNode = {
     updatedAt: number;
 };
 
+export type BinaryFileContent = {
+    encoding: "base64";
+    data: string;
+    mimeType: string;
+    sizeBytes: number;
+    checksum?: string;
+};
+
 export type FileNode = {
     id: NodeId;
     kind: "file";
     name: string;
     parentId: NodeId | null;
+    /** UTF-8 content for Monaco-editable text files. Empty for binary files. */
     content: string;
+    /** Binary bytes stay outside Monaco and are rendered by a dedicated viewer. */
+    binary?: BinaryFileContent;
     createdAt: number;
     updatedAt: number;
 };

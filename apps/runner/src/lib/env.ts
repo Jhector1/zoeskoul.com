@@ -37,6 +37,8 @@ const envSchema = z.object({
   RUNNER_MAX_FILES: intEnv(32),
   RUNNER_MAX_TOTAL_BYTES: intEnv(262144),
   RUNNER_MAX_FILE_BYTES: intEnv(65536),
+  RUNNER_MAX_BINARY_TOTAL_BYTES: intEnv(8 * 1024 * 1024),
+  RUNNER_MAX_BINARY_FILE_BYTES: intEnv(5 * 1024 * 1024),
   RUNNER_MAX_ENTRIES: intEnv(200),
   RUNNER_MAX_CONCURRENT_PER_ACTOR: z.coerce.number().int().positive().optional(),
   MAX_ACTIVE_SESSIONS_PER_USER: intEnv(4),
@@ -84,6 +86,10 @@ export const env = {
   maxFiles: parsed.RUNNER_MAX_FILES,
   maxTotalBytes: parsed.RUNNER_MAX_TOTAL_BYTES,
   maxFileBytes: parsed.RUNNER_MAX_FILE_BYTES,
+  maxBinaryTotalBytes: parsed.RUNNER_MAX_BINARY_TOTAL_BYTES,
+  maxBinaryFileBytes: parsed.RUNNER_MAX_BINARY_FILE_BYTES,
+  maxWorkspaceBytes:
+    parsed.RUNNER_MAX_TOTAL_BYTES + parsed.RUNNER_MAX_BINARY_TOTAL_BYTES,
   maxEntries: parsed.RUNNER_MAX_ENTRIES,
   maxConcurrentPerActor:
     parsed.RUNNER_MAX_CONCURRENT_PER_ACTOR ??

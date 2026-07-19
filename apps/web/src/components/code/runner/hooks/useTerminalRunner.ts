@@ -14,6 +14,11 @@ import { expandPrompts, prettyPrompt, splitStdoutByPrompts } from "../utils/prom
 import type { WorkspaceLanguage, SqlDialect } from "@/lib/practice/types";
 import {RunnerLanguage} from "@zoeskoul/code-contracts";
 import { pathOf } from "@/components/ide/fsTree";
+import { isBinaryWorkspaceEntry } from "@/lib/ide/workspaceFileContent";
+import {
+    sortWorkspaceSyncEntries,
+    workspaceSyncEntryValue,
+} from "@/lib/projects/workspaceSyncEntries";
 
 function needsMoreInput(lang: RunnerLanguage, r: RunResult) {
     const blob = cleanTermText(
@@ -211,35 +216,7 @@ function normalizeWorkspacePath(input: string) {
 function sortWorkspaceEntries(
     entries: WorkspaceSyncEntry[] | undefined,
 ): WorkspaceSyncEntry[] {
-    return [...(entries ?? [])]
-        .map((entry): WorkspaceSyncEntry | null => {
-            const path = normalizeWorkspacePath((entry as any).path);
-            if (!path) return null;
-
-            if ((entry as any).kind === "directory") {
-                return {
-                    kind: "directory",
-                    path,
-                };
-            }
-
-            return {
-                kind: "file",
-                path,
-                content: String((entry as any).content ?? ""),
-            };
-        })
-        .filter((entry): entry is WorkspaceSyncEntry => Boolean(entry))
-        .sort((a, b) => {
-            const pathCmp = a.path.localeCompare(b.path);
-            if (pathCmp !== 0) return pathCmp;
-
-            const ak = (a as any).kind === "directory" ? "directory" : "file";
-            const bk = (b as any).kind === "directory" ? "directory" : "file";
-
-            if (ak === bk) return 0;
-            return ak === "directory" ? -1 : 1;
-        });
+    return sortWorkspaceSyncEntries(entries ?? []);
 }
 
 function workspaceEntryKey(entry: WorkspaceSyncEntry) {
@@ -248,17 +225,14 @@ function workspaceEntryKey(entry: WorkspaceSyncEntry) {
 }
 
 function workspaceEntryEqual(a: WorkspaceSyncEntry, b: WorkspaceSyncEntry) {
-    const ak = (a as any).kind === "directory" ? "directory" : "file";
-    const bk = (b as any).kind === "directory" ? "directory" : "file";
+    const ak = a.kind === "directory" ? "directory" : "file";
+    const bk = b.kind === "directory" ? "directory" : "file";
 
-    if (ak !== bk) return false;
-    if (normalizeWorkspacePath((a as any).path) !== normalizeWorkspacePath((b as any).path)) {
-        return false;
-    }
-
-    if (ak === "directory") return true;
-
-    return String((a as any).content ?? "") === String((b as any).content ?? "");
+    return (
+        ak === bk &&
+        normalizeWorkspacePath(a.path) === normalizeWorkspacePath(b.path) &&
+        workspaceSyncEntryValue(a) === workspaceSyncEntryValue(b)
+    );
 }
 
 function diffWorkspaceDirtyPaths(
@@ -322,9 +296,10 @@ function patchWorkspaceEntriesWithRunCode(args: {
 
     let changed = false;
     const patchedEntries = entries.map((entry) => {
-        if ((entry as any).kind === "directory") return entry;
-        if (normalizeWorkspacePath((entry as any).path) !== activePath) return entry;
-        if (String((entry as any).content ?? "") === runCode) return entry;
+        if (entry.kind === "directory") return entry;
+        if (normalizeWorkspacePath(entry.path) !== activePath) return entry;
+        if (isBinaryWorkspaceEntry(entry)) return entry;
+        if (String(entry.content ?? "") === runCode) return entry;
 
         changed = true;
         return {

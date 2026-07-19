@@ -7,6 +7,7 @@ import {
 import { gradeSemanticCodeInput } from "./codeInput.semantic";
 import { GradeResult } from "@/lib/practice/api/validate/grade/index";
 import type { FileEntry } from "@/lib/code/types";
+import { isTextWorkspaceFileEntry } from "@zoeskoul/code-contracts";
 import { replaceEntryFileContent } from "@/lib/code/workspaceSubmission";
 import {
     createJudge0CodeRunnerFromEnv,
@@ -39,6 +40,12 @@ function toSubmittedFileEntries(
     return files?.filter(
         (file): file is FileEntry => !isDirectorySubmissionEntry(file),
     );
+}
+
+function submittedTextContent(
+    file: FileEntry | null | undefined,
+): string | undefined {
+    return file && isTextWorkspaceFileEntry(file) ? file.content : undefined;
 }
 
 type WorkspaceExpectationInput = {
@@ -836,13 +843,14 @@ function getSubmittedSourceForCheck(args: {
 
     if (requestedPath) {
         const file = files.find((candidate) => normalizeSubmittedFilePath(candidate.path) === requestedPath);
-        return typeof file?.content === "string" ? file.content : "";
+        return submittedTextContent(file) ?? "";
     }
 
     if (args.entry && files.length) {
         const entryPath = normalizeSubmittedFilePath(args.entry);
         const file = files.find((candidate) => normalizeSubmittedFilePath(candidate.path) === entryPath);
-        if (typeof file?.content === "string") return file.content;
+        const content = submittedTextContent(file);
+        if (content !== undefined) return content;
     }
 
     return args.code;

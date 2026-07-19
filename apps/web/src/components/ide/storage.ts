@@ -1,4 +1,5 @@
 import type { FSNode, FileNode, FolderNode, WorkspaceStateV2, NodeId } from "./types";
+import { normalizeBinaryFileContent } from "@/lib/ide/workspaceFileContent";
 import { uid } from "./utils";
 import {
     defaultMainFile,
@@ -263,12 +264,14 @@ function normalizeNode(raw: unknown): FSNode | null {
     }
 
     if (kind === "file") {
+        const binary = normalizeBinaryFileContent(raw.binary, name);
         const node: FileNode = {
             id,
             kind: "file",
             name,
             parentId,
-            content: asString(raw.content),
+            content: binary ? "" : asString(raw.content),
+            ...(binary ? { binary } : {}),
             createdAt,
             updatedAt,
         };
@@ -328,9 +331,21 @@ export function repairWorkspaceStateV2(
         nodes = fresh.nodes;
         fileNodes = fresh.nodes.filter((n): n is FileNode => n.kind === "file");
         folderNodes = fresh.nodes.filter((n): n is FolderNode => n.kind === "folder");
+    } else if (!fileNodes.some((node) => !node.binary)) {
+        // Binary-only workspaces can still be viewed, but execution always needs
+        // a UTF-8 entry file. Add the language defaults without discarding assets.
+        const fresh = buildDefaultWorkspace(language);
+        const existingIds = new Set(nodes.map((node) => node.id));
+        const freshNodes = fresh.nodes.filter((node) => !existingIds.has(node.id));
+        nodes = [...nodes, ...freshNodes];
+        fileNodes = nodes.filter((n): n is FileNode => n.kind === "file");
+        folderNodes = nodes.filter((n): n is FolderNode => n.kind === "folder");
     }
 
     const fileIds = new Set(fileNodes.map((n) => n.id));
+    const textFileIds = new Set(
+        fileNodes.filter((node) => !node.binary).map((node) => node.id),
+    );
     const folderIds = new Set(folderNodes.map((n) => n.id));
 
     const rawOpenTabs = Array.isArray(raw.openTabs) ? raw.openTabs : [];
@@ -346,9 +361,9 @@ export function repairWorkspaceStateV2(
             : fallbackActive;
 
     const entryFileId =
-        typeof raw.entryFileId === "string" && fileIds.has(raw.entryFileId)
+        typeof raw.entryFileId === "string" && textFileIds.has(raw.entryFileId)
             ? raw.entryFileId
-            : activeFileId;
+            : fileNodes.find((node) => !node.binary)?.id ?? activeFileId;
 
     const finalOpenTabs = openTabs.length ? openTabs : [activeFileId];
     if (!finalOpenTabs.includes(activeFileId)) finalOpenTabs.unshift(activeFileId);

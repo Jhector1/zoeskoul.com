@@ -683,3 +683,89 @@ describe("TopicAuthoringDraft Git expectations", () => {
         );
     });
 });
+
+describe("TopicAuthoringDraft binary workspace files", () => {
+    it("accepts size-matched binary starter and solution files", () => {
+        const draft = {
+            ...makeValidMinimalDraft(),
+            quizDraft: [
+                {
+                    id: "binary-1",
+                    kind: "code_input" as const,
+                    title: "Use a project image",
+                    prompt: "Inspect the supplied image asset.",
+                    hint: "Open the asset from the Explorer.",
+                    help: {
+                        concept: "Binary assets are previewed without opening them as text.",
+                        hint_1: "Find the assets folder.",
+                        hint_2: "Open pixel.png.",
+                    },
+                    starterCode: "print('ready')\n",
+                    solutionCode: "print('ready')\n",
+                    fixedLanguage: "python" as const,
+                    starterFiles: [
+                        { path: "main.py", content: "print('ready')\n", isEntry: true },
+                        {
+                            path: "assets/pixel.png",
+                            content: "",
+                            encoding: "base64" as const,
+                            data: "AAECAw==",
+                            mimeType: "image/png",
+                            sizeBytes: 4,
+                        },
+                    ],
+                    solutionFiles: [
+                        { path: "main.py", content: "print('ready')\n", isEntry: true },
+                        {
+                            path: "assets/pixel.png",
+                            content: "",
+                            encoding: "base64" as const,
+                            data: "AAECAw==",
+                            mimeType: "image/png",
+                            sizeBytes: 4,
+                        },
+                    ],
+                },
+            ],
+        };
+
+        expect(() => assertTopicAuthoringDraft(draft)).not.toThrow();
+    });
+
+    it("rejects binary files whose declared size does not match their payload", () => {
+        const draft = {
+            ...makeValidMinimalDraft(),
+            quizDraft: [
+                {
+                    id: "binary-1",
+                    kind: "code_input" as const,
+                    title: "Use a project image",
+                    prompt: "Inspect the supplied image asset.",
+                    hint: "Open the asset from the Explorer.",
+                    help: {
+                        concept: "Binary assets are previewed without opening them as text.",
+                        hint_1: "Find the assets folder.",
+                        hint_2: "Open pixel.png.",
+                    },
+                    starterCode: "print('ready')\n",
+                    solutionCode: "print('ready')\n",
+                    fixedLanguage: "python" as const,
+                    starterFiles: [
+                        {
+                            path: "assets/pixel.png",
+                            content: "",
+                            encoding: "base64" as const,
+                            data: "AAECAw==",
+                            mimeType: "image/png",
+                            sizeBytes: 3,
+                        },
+                    ],
+                },
+            ],
+        };
+
+        expect(() => assertTopicAuthoringDraft(draft)).toThrow(
+            /sizeBytes must match the decoded binary payload/i,
+        );
+    });
+});

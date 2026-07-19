@@ -1,11 +1,25 @@
-import type { WorkspaceStateV2 } from "@/components/ide/types";
+import type { BinaryFileContent, WorkspaceStateV2 } from "@/components/ide/types";
+import { normalizeBinaryFileContent } from "@/lib/ide/workspaceFileContent";
 import { defaultMainFile } from "@/components/ide/languageDefaults";
 import type { WorkspaceLanguage } from "@/lib/practice/types";
 
 export type NormalizedStarterFile = {
     path: string;
     content: string;
+    binary?: BinaryFileContent;
 };
+
+export function starterFileNodePayload(file: NormalizedStarterFile) {
+    return file.binary
+        ? { content: "", binary: file.binary }
+        : { content: file.content ?? "" };
+}
+
+export function starterFileSemanticValue(file: NormalizedStarterFile) {
+    return file.binary
+        ? `binary:${file.binary.checksum ?? ""}:${file.binary.mimeType}:${file.binary.sizeBytes}:${file.binary.data}`
+        : `text:${file.content ?? ""}`;
+}
 
 export function isI18nAliasString(value: unknown): value is string {
     return typeof value === "string" && value.trim().startsWith("@:");
@@ -112,6 +126,14 @@ export function starterFileContent(value: unknown): string {
     return "";
 }
 
+export function starterFileBinary(
+    value: unknown,
+    path: string,
+): BinaryFileContent | undefined {
+    if (!isRecord(value) || value.encoding !== "base64") return undefined;
+    return normalizeBinaryFileContent(value, path);
+}
+
 export function unwrapStarterFilesValue(raw: unknown): unknown {
     if (!isRecord(raw)) return raw;
 
@@ -138,9 +160,12 @@ export function normalizeStarterFilesValue(
             const fallback =
                 index === 0 ? fallbackEntryFile : `file-${String(index + 1)}.txt`;
 
+            const path = normalizeStarterPath(starterFilePath(file, fallback), fallback);
+            const binary = starterFileBinary(file, path);
             files.push({
-                path: normalizeStarterPath(starterFilePath(file, fallback), fallback),
-                content: starterFileContent(file),
+                path,
+                content: binary ? "" : starterFileContent(file),
+                ...(binary ? { binary } : {}),
             });
         });
 
@@ -151,14 +176,18 @@ export function normalizeStarterFilesValue(
         for (const [path, value] of Object.entries(source)) {
             if (STARTER_FILE_META_KEYS.has(path)) continue;
 
+            const normalizedPath = normalizeStarterPath(path, fallbackEntryFile);
+            const binary = starterFileBinary(value, normalizedPath);
             files.push({
-                path: normalizeStarterPath(path, fallbackEntryFile),
-                content:
-                    typeof value === "string"
+                path: normalizedPath,
+                content: binary
+                    ? ""
+                    : typeof value === "string"
                         ? isUsableStarterCode(value)
                             ? value
                             : ""
                         : starterFileContent(value),
+                ...(binary ? { binary } : {}),
             });
         }
     }
@@ -187,7 +216,8 @@ export function mergeStarterFileSources(
 
             const next: NormalizedStarterFile = {
                 path,
-                content: file.content ?? "",
+                content: file.binary ? "" : file.content ?? "",
+                ...(file.binary ? { binary: file.binary } : {}),
             };
             const existing = byPath.get(path);
 
@@ -196,7 +226,9 @@ export function mergeStarterFileSources(
                 continue;
             }
 
-            if (!isUsableStarterCode(existing.content) && isUsableStarterCode(next.content)) {
+            const existingUsable = Boolean(existing.binary) || isUsableStarterCode(existing.content);
+            const nextUsable = Boolean(next.binary) || isUsableStarterCode(next.content);
+            if (!existingUsable && nextUsable) {
                 byPath.set(path, next);
             }
         }
@@ -271,7 +303,10 @@ export function hasUsableStarterFilesValue(value: unknown): boolean {
         // In starterFiles arrays, a bare string is a path, not file content.
         return value.some((entry) => {
             if (typeof entry === "string") return false;
-            return isUsableStarterCode(starterFileContent(entry));
+            if (!isRecord(entry)) return false;
+            const path = starterFilePath(entry, "file.bin");
+            return Boolean(starterFileBinary(entry, path)) ||
+                isUsableStarterCode(starterFileContent(entry));
         });
     }
 
@@ -279,7 +314,8 @@ export function hasUsableStarterFilesValue(value: unknown): boolean {
         return Object.entries(value).some(([key, entry]) => {
             if (STARTER_FILE_META_KEYS.has(key)) return false;
             if (typeof entry === "string") return isUsableStarterCode(entry);
-            return isUsableStarterCode(starterFileContent(entry));
+            return Boolean(starterFileBinary(entry, key)) ||
+                isUsableStarterCode(starterFileContent(entry));
         });
     }
 
@@ -303,6 +339,7 @@ export function workspaceHasUsableStarterContent(
 
     return workspace.nodes.some((node: any) => {
         if (node?.kind !== "file") return false;
-        return isUsableStarterCode(node.content);
+        return node.binary?.encoding === "base64" ||
+            isUsableStarterCode(node.content);
     });
 }

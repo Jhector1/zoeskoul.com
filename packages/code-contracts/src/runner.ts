@@ -1,4 +1,9 @@
 import { z } from "zod";
+import {
+    binaryWorkspaceFileEntrySchema,
+    textWorkspaceFileEntrySchema,
+    type WorkspaceFileEntry,
+} from "./workspaceFiles.js";
 
 export const WORKSPACE_LANGUAGES = [
     "python",
@@ -99,11 +104,10 @@ export type CodeLanguage = WorkspaceLanguage;
 export type TerminalRunnerLanguage = RunnerLanguage;
 export type NonSqlWorkspaceLanguage = FileWorkspaceLanguage;
 
-export const fileEntrySchema = z.object({
-    kind: z.literal("file").optional(),
-    path: z.string().min(1),
-    content: z.string(),
-});
+export const fileEntrySchema = z.union([
+    textWorkspaceFileEntrySchema,
+    binaryWorkspaceFileEntrySchema,
+]);
 
 export const directoryEntrySchema = z.object({
     kind: z.literal("directory"),
@@ -115,7 +119,7 @@ export const workspaceSyncEntrySchema = z.union([
     directoryEntrySchema,
 ]);
 
-export type FileEntry = z.infer<typeof fileEntrySchema>;
+export type FileEntry = WorkspaceFileEntry;
 export type DirectoryEntry = z.infer<typeof directoryEntrySchema>;
 export type WorkspaceSyncEntry = z.infer<typeof workspaceSyncEntrySchema>;
 

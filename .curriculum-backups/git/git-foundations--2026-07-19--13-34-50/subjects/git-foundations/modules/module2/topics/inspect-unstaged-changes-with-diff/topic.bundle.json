@@ -1,0 +1,836 @@
+{
+  "topicId": "inspect-unstaged-changes-with-diff",
+  "subjectSlug": "git-foundations",
+  "moduleSlug": "git-foundations-module-2-meaningful-history",
+  "sectionSlug": "git-foundations-git-foundations-section-2-history-workflow",
+  "prefix": "git_foundations_module_2",
+  "minutes": 20,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "bash",
+    "supportsTerminal": true,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "runnerBackend": "pty",
+    "layoutMode": "default",
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": true
+    },
+    "preset": "runner",
+    "terminalBootstrap": {
+      "gitSafeDirectories": [
+        "/workspace/*"
+      ]
+    }
+  },
+  "topic": {
+    "labelKey": "topics.git-foundations.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.label",
+    "summaryKey": "topics.git-foundations.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.git-foundations.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.cards.sketch0.title",
+      "sketchId": "sketch0",
+      "height": 420,
+      "tryIt": {
+        "id": "try-inspect-unstaged-changes-with-diff-sketch0",
+        "titleKey": "topics.git-foundations.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.tryIt.try_inspect_unstaged_changes_with_diff_sketch0.title",
+        "promptKey": "topics.git-foundations.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.tryIt.try_inspect_unstaged_changes_with_diff_sketch0.prompt",
+        "exerciseKey": "try-inspect-unstaged-changes-with-diff-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.git-foundations.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.cards.sketch1.title",
+      "sketchId": "sketch1",
+      "height": 420,
+      "tryIt": {
+        "id": "try-inspect-unstaged-changes-with-diff-sketch1",
+        "titleKey": "topics.git-foundations.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.tryIt.try_inspect_unstaged_changes_with_diff_sketch1.title",
+        "promptKey": "topics.git-foundations.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.tryIt.try_inspect_unstaged_changes_with_diff_sketch1.prompt",
+        "exerciseKey": "try-inspect-unstaged-changes-with-diff-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.git-foundations.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.cards.sketch2.title",
+      "sketchId": "sketch2",
+      "height": 420,
+      "tryIt": {
+        "id": "try-inspect-unstaged-changes-with-diff-sketch2",
+        "titleKey": "topics.git-foundations.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.tryIt.try_inspect_unstaged_changes_with_diff_sketch2.title",
+        "promptKey": "topics.git-foundations.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.tryIt.try_inspect_unstaged_changes_with_diff_sketch2.prompt",
+        "exerciseKey": "try-inspect-unstaged-changes-with-diff-sketch2",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch3",
+      "kind": "sketch",
+      "titleKey": "topics.git-foundations.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.cards.sketch3.title",
+      "sketchId": "sketch3",
+      "height": 420,
+      "tryIt": {
+        "id": "try-inspect-unstaged-changes-with-diff-sketch3",
+        "titleKey": "topics.git-foundations.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.tryIt.try_inspect_unstaged_changes_with_diff_sketch3.title",
+        "promptKey": "topics.git-foundations.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.tryIt.try_inspect_unstaged_changes_with_diff_sketch3.prompt",
+        "exerciseKey": "try-inspect-unstaged-changes-with-diff-sketch3",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.git-foundations.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch0",
+      "archetype": "paragraph",
+      "titleKey": "sketches.git-foundations.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.sketch0.title",
+      "bodyKey": "sketches.git-foundations.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.sketch0.bodyMarkdown"
+    },
+    {
+      "id": "sketch1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.git-foundations.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.sketch1.title",
+      "bodyKey": "sketches.git-foundations.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.sketch1.bodyMarkdown"
+    },
+    {
+      "id": "sketch2",
+      "archetype": "paragraph",
+      "titleKey": "sketches.git-foundations.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.sketch2.title",
+      "bodyKey": "sketches.git-foundations.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.sketch2.bodyMarkdown"
+    },
+    {
+      "id": "sketch3",
+      "archetype": "paragraph",
+      "titleKey": "sketches.git-foundations.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.sketch3.title",
+      "bodyKey": "sketches.git-foundations.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.sketch3.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "single-choice-1",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.git-foundations.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.practice.single-choice-1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "multi-choice-1",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.git-foundations.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.practice.multi-choice-1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "multi-choice-2",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.git-foundations.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.practice.multi-choice-2",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "drag-reorder-1",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.git-foundations.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.practice.drag-reorder-1",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
+      }
+    },
+    {
+      "id": "fill-blank-choice-1",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.git-foundations.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.practice.fill-blank-choice-1",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "-"
+      }
+    },
+    {
+      "id": "fill-blank-choice-2",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.git-foundations.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.practice.fill-blank-choice-2",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "working directory"
+      }
+    },
+    {
+      "id": "try-inspect-unstaged-changes-with-diff-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.git-foundations.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.tryIt.try_inspect_unstaged_changes_with_diff_sketch0",
+      "language": "bash",
+      "starterCode": "<h1>Neighborhood Hub</h1>\n",
+      "starterFiles": [
+        {
+          "path": "community-site/index.html",
+          "content": "<h1>Neighborhood Hub</h1>\n",
+          "language": "html",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^git\\s+diff\\s+(?:\\-\\-\\s+)?index\\.html$",
+            "message": "@:topics.git-foundations.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.tryIt.try_inspect_unstaged_changes_with_diff_sketch0.terminalExpectations.requiredCommands.0.message"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "@:topics.git-foundations.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.tryIt.try_inspect_unstaged_changes_with_diff_sketch0.terminalExpectations.forbiddenCommands.0.message"
+          }
+        ]
+      },
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "community-site/index.html",
+        "starterCode": "<h1>Neighborhood Hub</h1>\n",
+        "starterFiles": [
+          {
+            "path": "community-site/index.html",
+            "content": "<h1>Neighborhood Hub</h1>\n",
+            "language": "html",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "fixtureFiles": [
+          {
+            "path": ".zoeskoul/setup.sh",
+            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-site\nmkdir -p community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name \"ZoeSkoul Learner\"\ngit -C community-site config --local user.email \"learner@zoeskoul.local\"\ncd community-site\nprintf %s '<h1>Community Hub</h1>\n' > index.html\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Add project baseline'\ncd community-site\nprintf %s '<h1>Neighborhood Hub</h1>\n' > index.html\ncd ..\n",
+            "language": "bash",
+            "readOnly": true
+          },
+          {
+            "path": "community-site/index.html",
+            "content": "<h1>Neighborhood Hub</h1>\n",
+            "language": "html"
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "@:topics.git-foundations.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.tryIt.try_inspect_unstaged_changes_with_diff_sketch0.instructions"
+      },
+      "hiddenShellCheck": {
+        "script": "set -eu\nrepo=community-site\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" branch --show-current)\" = main ] || fail \"The repository is not on main.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = 1 ] || fail \"The repository has the wrong number of commits.\"\n[ -n \"$(git -C \"$repo\" status --porcelain)\" ] || fail \"The exercise change is missing.\"\nexpected=$(printf \"%s\\n\" index.html | sort)\nactual=$(git -C \"$repo\" ls-files | sort)\n[ \"$actual\" = \"$expected\" ] || fail \"The tracked file set is not correct.\"\nexpected_staged=$(printf \"%s\\n\"  | sort)\nactual_staged=$(git -C \"$repo\" diff --cached --name-only | sort)\n[ \"$actual_staged\" = \"$expected_staged\" ] || fail \"The staged file set is not correct.\"",
+        "timeoutMs": 15000
+      },
+      "ideConfig": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/community-site",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "serviceOverrides": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/community-site",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "fixtureFiles": [
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-site\nmkdir -p community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name \"ZoeSkoul Learner\"\ngit -C community-site config --local user.email \"learner@zoeskoul.local\"\ncd community-site\nprintf %s '<h1>Community Hub</h1>\n' > index.html\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Add project baseline'\ncd community-site\nprintf %s '<h1>Neighborhood Hub</h1>\n' > index.html\ncd ..\n",
+          "language": "bash",
+          "readOnly": true
+        },
+        {
+          "path": "community-site/index.html",
+          "content": "<h1>Neighborhood Hub</h1>\n",
+          "language": "html"
+        }
+      ]
+    },
+    {
+      "id": "try-inspect-unstaged-changes-with-diff-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.git-foundations.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.tryIt.try_inspect_unstaged_changes_with_diff_sketch1",
+      "language": "bash",
+      "starterCode": "# Community Website\n",
+      "starterFiles": [
+        {
+          "path": "community-site/README.md",
+          "content": "# Community Website\n",
+          "language": "markdown",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "community-site/styles.css",
+          "content": "color: teal;\n",
+          "language": "css"
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^git\\s+diff\\s+(?:\\-\\-\\s+)?styles\\.css$",
+            "message": "@:topics.git-foundations.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.tryIt.try_inspect_unstaged_changes_with_diff_sketch1.terminalExpectations.requiredCommands.0.message"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "@:topics.git-foundations.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.tryIt.try_inspect_unstaged_changes_with_diff_sketch1.terminalExpectations.forbiddenCommands.0.message"
+          }
+        ]
+      },
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "community-site/README.md",
+        "starterCode": "# Community Website\n",
+        "starterFiles": [
+          {
+            "path": "community-site/README.md",
+            "content": "# Community Website\n",
+            "language": "markdown",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "community-site/styles.css",
+            "content": "color: teal;\n",
+            "language": "css"
+          }
+        ],
+        "fixtureFiles": [
+          {
+            "path": ".zoeskoul/setup.sh",
+            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-site\nmkdir -p community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name \"ZoeSkoul Learner\"\ngit -C community-site config --local user.email \"learner@zoeskoul.local\"\ncd community-site\nprintf %s 'color: navy;\n' > styles.css\ncd ..\ncd community-site\nprintf %s '# Community Site\n' > README.md\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Add project baseline'\ncd community-site\nprintf %s 'color: teal;\n' > styles.css\ncd ..\ncd community-site\nprintf %s '# Community Website\n' > README.md\ncd ..\n",
+            "language": "bash",
+            "readOnly": true
+          },
+          {
+            "path": "community-site/README.md",
+            "content": "# Community Website\n",
+            "language": "markdown"
+          },
+          {
+            "path": "community-site/styles.css",
+            "content": "color: teal;\n",
+            "language": "css"
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "@:topics.git-foundations.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.tryIt.try_inspect_unstaged_changes_with_diff_sketch1.instructions"
+      },
+      "hiddenShellCheck": {
+        "script": "set -eu\nrepo=community-site\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" branch --show-current)\" = main ] || fail \"The repository is not on main.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = 1 ] || fail \"The repository has the wrong number of commits.\"\n[ -n \"$(git -C \"$repo\" status --porcelain)\" ] || fail \"The exercise change is missing.\"\nexpected=$(printf \"%s\\n\" README.md styles.css | sort)\nactual=$(git -C \"$repo\" ls-files | sort)\n[ \"$actual\" = \"$expected\" ] || fail \"The tracked file set is not correct.\"\nexpected_staged=$(printf \"%s\\n\"  | sort)\nactual_staged=$(git -C \"$repo\" diff --cached --name-only | sort)\n[ \"$actual_staged\" = \"$expected_staged\" ] || fail \"The staged file set is not correct.\"",
+        "timeoutMs": 15000
+      },
+      "ideConfig": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/community-site",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "serviceOverrides": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/community-site",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "fixtureFiles": [
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-site\nmkdir -p community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name \"ZoeSkoul Learner\"\ngit -C community-site config --local user.email \"learner@zoeskoul.local\"\ncd community-site\nprintf %s 'color: navy;\n' > styles.css\ncd ..\ncd community-site\nprintf %s '# Community Site\n' > README.md\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Add project baseline'\ncd community-site\nprintf %s 'color: teal;\n' > styles.css\ncd ..\ncd community-site\nprintf %s '# Community Website\n' > README.md\ncd ..\n",
+          "language": "bash",
+          "readOnly": true
+        },
+        {
+          "path": "community-site/README.md",
+          "content": "# Community Website\n",
+          "language": "markdown"
+        },
+        {
+          "path": "community-site/styles.css",
+          "content": "color: teal;\n",
+          "language": "css"
+        }
+      ]
+    },
+    {
+      "id": "try-inspect-unstaged-changes-with-diff-sketch2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.git-foundations.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.tryIt.try_inspect_unstaged_changes_with_diff_sketch2",
+      "language": "bash",
+      "starterCode": "const open = true;\n",
+      "starterFiles": [
+        {
+          "path": "community-site/app.js",
+          "content": "const open = true;\n",
+          "language": "javascript",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "community-site/config.js",
+          "content": "export const theme = \"dark\";\n",
+          "language": "javascript"
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^git\\s+diff\\s+\\-\\-name\\-only$",
+            "message": "@:topics.git-foundations.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.tryIt.try_inspect_unstaged_changes_with_diff_sketch2.terminalExpectations.requiredCommands.0.message"
+          },
+          {
+            "pattern": "^git\\s+diff\\s+(?:\\-\\-\\s+)?app\\.js$",
+            "message": "@:topics.git-foundations.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.tryIt.try_inspect_unstaged_changes_with_diff_sketch2.terminalExpectations.requiredCommands.1.message"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "@:topics.git-foundations.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.tryIt.try_inspect_unstaged_changes_with_diff_sketch2.terminalExpectations.forbiddenCommands.0.message"
+          }
+        ]
+      },
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "community-site/app.js",
+        "starterCode": "const open = true;\n",
+        "starterFiles": [
+          {
+            "path": "community-site/app.js",
+            "content": "const open = true;\n",
+            "language": "javascript",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "community-site/config.js",
+            "content": "export const theme = \"dark\";\n",
+            "language": "javascript"
+          }
+        ],
+        "fixtureFiles": [
+          {
+            "path": ".zoeskoul/setup.sh",
+            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-site\nmkdir -p community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name \"ZoeSkoul Learner\"\ngit -C community-site config --local user.email \"learner@zoeskoul.local\"\ncd community-site\nprintf %s 'const open = false;\n' > app.js\ncd ..\ncd community-site\nprintf %s 'export const theme = \"light\";\n' > config.js\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Add project baseline'\ncd community-site\nprintf %s 'const open = true;\n' > app.js\ncd ..\ncd community-site\nprintf %s 'export const theme = \"dark\";\n' > config.js\ncd ..\n",
+            "language": "bash",
+            "readOnly": true
+          },
+          {
+            "path": "community-site/app.js",
+            "content": "const open = true;\n",
+            "language": "javascript"
+          },
+          {
+            "path": "community-site/config.js",
+            "content": "export const theme = \"dark\";\n",
+            "language": "javascript"
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "@:topics.git-foundations.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.tryIt.try_inspect_unstaged_changes_with_diff_sketch2.instructions"
+      },
+      "hiddenShellCheck": {
+        "script": "set -eu\nrepo=community-site\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" branch --show-current)\" = main ] || fail \"The repository is not on main.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = 1 ] || fail \"The repository has the wrong number of commits.\"\n[ -n \"$(git -C \"$repo\" status --porcelain)\" ] || fail \"The exercise change is missing.\"\nexpected=$(printf \"%s\\n\" app.js config.js | sort)\nactual=$(git -C \"$repo\" ls-files | sort)\n[ \"$actual\" = \"$expected\" ] || fail \"The tracked file set is not correct.\"\nexpected_staged=$(printf \"%s\\n\"  | sort)\nactual_staged=$(git -C \"$repo\" diff --cached --name-only | sort)\n[ \"$actual_staged\" = \"$expected_staged\" ] || fail \"The staged file set is not correct.\"",
+        "timeoutMs": 15000
+      },
+      "ideConfig": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/community-site",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "serviceOverrides": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/community-site",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "fixtureFiles": [
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-site\nmkdir -p community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name \"ZoeSkoul Learner\"\ngit -C community-site config --local user.email \"learner@zoeskoul.local\"\ncd community-site\nprintf %s 'const open = false;\n' > app.js\ncd ..\ncd community-site\nprintf %s 'export const theme = \"light\";\n' > config.js\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Add project baseline'\ncd community-site\nprintf %s 'const open = true;\n' > app.js\ncd ..\ncd community-site\nprintf %s 'export const theme = \"dark\";\n' > config.js\ncd ..\n",
+          "language": "bash",
+          "readOnly": true
+        },
+        {
+          "path": "community-site/app.js",
+          "content": "const open = true;\n",
+          "language": "javascript"
+        },
+        {
+          "path": "community-site/config.js",
+          "content": "export const theme = \"dark\";\n",
+          "language": "javascript"
+        }
+      ]
+    },
+    {
+      "id": "try-inspect-unstaged-changes-with-diff-sketch3",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.git-foundations.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.tryIt.try_inspect_unstaged_changes_with_diff_sketch3",
+      "language": "bash",
+      "starterCode": "Open Saturdays from 9 AM to noon.\n",
+      "starterFiles": [
+        {
+          "path": "community-site/README.md",
+          "content": "Open Saturdays from 9 AM to noon.\n",
+          "language": "markdown",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^git\\s+diff\\s+(?:\\-\\-\\s+)?README\\.md$",
+            "message": "@:topics.git-foundations.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.tryIt.try_inspect_unstaged_changes_with_diff_sketch3.terminalExpectations.requiredCommands.0.message"
+          },
+          {
+            "pattern": "^git\\s+status\\s+(?:\\-\\-short|\\-s)$",
+            "message": "@:topics.git-foundations.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.tryIt.try_inspect_unstaged_changes_with_diff_sketch3.terminalExpectations.requiredCommands.1.message"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "@:topics.git-foundations.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.tryIt.try_inspect_unstaged_changes_with_diff_sketch3.terminalExpectations.forbiddenCommands.0.message"
+          }
+        ]
+      },
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "community-site/README.md",
+        "starterCode": "Open Saturdays from 9 AM to noon.\n",
+        "starterFiles": [
+          {
+            "path": "community-site/README.md",
+            "content": "Open Saturdays from 9 AM to noon.\n",
+            "language": "markdown",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "fixtureFiles": [
+          {
+            "path": ".zoeskoul/setup.sh",
+            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-site\nmkdir -p community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name \"ZoeSkoul Learner\"\ngit -C community-site config --local user.email \"learner@zoeskoul.local\"\ncd community-site\nprintf %s 'Open Saturdays.\n' > README.md\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Add project baseline'\ncd community-site\nprintf %s 'Open Saturdays from 9 AM to noon.\n' > README.md\ncd ..\n",
+            "language": "bash",
+            "readOnly": true
+          },
+          {
+            "path": "community-site/README.md",
+            "content": "Open Saturdays from 9 AM to noon.\n",
+            "language": "markdown"
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "@:topics.git-foundations.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.tryIt.try_inspect_unstaged_changes_with_diff_sketch3.instructions"
+      },
+      "hiddenShellCheck": {
+        "script": "set -eu\nrepo=community-site\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" branch --show-current)\" = main ] || fail \"The repository is not on main.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = 1 ] || fail \"The repository has the wrong number of commits.\"\n[ -n \"$(git -C \"$repo\" status --porcelain)\" ] || fail \"The exercise change is missing.\"\nexpected=$(printf \"%s\\n\" README.md | sort)\nactual=$(git -C \"$repo\" ls-files | sort)\n[ \"$actual\" = \"$expected\" ] || fail \"The tracked file set is not correct.\"\nexpected_staged=$(printf \"%s\\n\"  | sort)\nactual_staged=$(git -C \"$repo\" diff --cached --name-only | sort)\n[ \"$actual_staged\" = \"$expected_staged\" ] || fail \"The staged file set is not correct.\"",
+        "timeoutMs": 15000
+      },
+      "ideConfig": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/community-site",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "serviceOverrides": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/community-site",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "fixtureFiles": [
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-site\nmkdir -p community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name \"ZoeSkoul Learner\"\ngit -C community-site config --local user.email \"learner@zoeskoul.local\"\ncd community-site\nprintf %s 'Open Saturdays.\n' > README.md\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Add project baseline'\ncd community-site\nprintf %s 'Open Saturdays from 9 AM to noon.\n' > README.md\ncd ..\n",
+          "language": "bash",
+          "readOnly": true
+        },
+        {
+          "path": "community-site/README.md",
+          "content": "Open Saturdays from 9 AM to noon.\n",
+          "language": "markdown"
+        }
+      ]
+    }
+  ],
+  "topicMeta": {
+    "learningGoals": [
+      "Use status to locate modified tracked files",
+      "Read removed, added, and context lines in an unstaged diff",
+      "Limit a diff to the path relevant to the task",
+      "Identify unrelated work before staging"
+    ]
+  }
+}

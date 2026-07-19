@@ -1,11 +1,9 @@
 import type { WorkspaceLanguage, SqlDialect } from "@/lib/practice/types";
 import {InteractiveLanguage} from "@zoeskoul/code-contracts"
+import type { FileEntry as ContractFileEntry } from "@zoeskoul/code-contracts"
 export type SqlScalar = string | number | boolean | null;
 
-export type FileEntry = {
-    path: string;
-    content: string;
-};
+export type FileEntry = ContractFileEntry;
 
 export type RunLimits = {
     cpu_time_limit?: number;

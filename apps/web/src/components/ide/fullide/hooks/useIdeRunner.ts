@@ -9,6 +9,8 @@ import { exportProjectFiles } from "../../fsTree";
 import { runBatchClient } from "@/components/code/runner/hooks/useBatchRun";
 import { startInteractiveProjectRun } from "@/components/ide/fullide/runtime/startInteractiveProjectRun";
 import {InteractiveLanguage, StartSessionResult} from "@zoeskoul/code-contracts";
+import type { FileEntry } from "@zoeskoul/code-contracts";
+import { isBinaryWorkspaceEntry } from "@/lib/ide/workspaceFileContent";
 import { serializeWorkspaceForCodeRun } from "@/lib/code/workspaceSubmission";
 
 type Args = {
@@ -49,10 +51,7 @@ type IdeRunArgs =
 
 type IdeRunResponse = RunResult | StartSessionResult;
 
-type ProjectFile = {
-    path: string;
-    content: string;
-};
+type ProjectFile = FileEntry;
 
 function patchNodesWithAuthoritativeCode(args: {
     nodes: any[];
@@ -68,7 +67,7 @@ function patchNodesWithAuthoritativeCode(args: {
     let changed = false;
 
     const patchedNodes = nodes.map((node) => {
-        if (node.kind !== "file" || node.id !== activeFileId) {
+        if (node.kind !== "file" || node.id !== activeFileId || node.binary) {
             return node;
         }
 
@@ -161,16 +160,17 @@ export function buildProjectRunRequest(args: {
         activeFileId,
         code,
     });
-    const files = exportProjectFiles(patchedNodes) as ProjectFile[];
+    const files = exportProjectFiles(patchedNodes);
+    const textFiles = files.filter((file) => !isBinaryWorkspaceEntry(file));
 
     if (language === "sql") {
-        const schemaFile = files.find((f) =>
+        const schemaFile = textFiles.find((f) =>
             f.path.toLowerCase().endsWith("schema.sql"),
         );
-        const seedFile = files.find((f) =>
+        const seedFile = textFiles.find((f) =>
             f.path.toLowerCase().endsWith("seed.sql"),
         );
-        const queryFile = files.find((f) =>
+        const queryFile = textFiles.find((f) =>
             f.path.toLowerCase().endsWith("query.sql"),
         );
 
@@ -183,7 +183,7 @@ export function buildProjectRunRequest(args: {
 
         const activeQuery =
             !activeIsSchema && !activeIsSeed
-                ? (code ?? activeFile?.content ?? "")
+                ? (code ?? (activeFile?.binary ? "" : activeFile?.content) ?? "")
                 : (queryFile?.content ?? code ?? "");
 
         return {
@@ -212,7 +212,11 @@ export function buildProjectRunRequest(args: {
         return {
             kind: "code",
             language,
-            code: code ?? activeFile?.content ?? entryFile?.content ?? "",
+            code:
+                code ??
+                (activeFile?.binary ? undefined : activeFile?.content) ??
+                (entryFile?.binary ? undefined : entryFile?.content) ??
+                "",
         };
     }
 
@@ -232,7 +236,11 @@ export function buildProjectRunRequest(args: {
         return {
             kind: "code",
             language,
-            code: code ?? activeFile?.content ?? entryFile?.content ?? "",
+            code:
+                code ??
+                (activeFile?.binary ? undefined : activeFile?.content) ??
+                (entryFile?.binary ? undefined : entryFile?.content) ??
+                "",
         };
     }
 

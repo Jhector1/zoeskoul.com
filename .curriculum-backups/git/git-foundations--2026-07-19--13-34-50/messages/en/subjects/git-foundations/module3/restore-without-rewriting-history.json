@@ -1,0 +1,309 @@
+{
+  "topics": {
+    "git-foundations": {
+      "git-foundations-module-3-manage-tracked-files": {
+        "restore-without-rewriting-history": {
+          "label": "Restore without Rewriting History",
+          "summary": "Correct working-tree and staging mistakes at the right layer while leaving existing commits untouched.",
+          "cards": {
+            "sketch0": {
+              "title": "Restore an Unstaged File"
+            },
+            "sketch1": {
+              "title": "Unstage Without Discarding"
+            },
+            "sketch2": {
+              "title": "Choose the Layer You Mean"
+            },
+            "sketch3": {
+              "title": "Verify Before Moving On"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_restore_without_rewriting_history_sketch0": {
+              "title": "Discard One Unstaged Mistake",
+              "prompt": "You are working in the prepared `release-kit/` repository.\n\n`notes.txt` has an unwanted working-tree edit. Restore it from HEAD, then verify that the repository is clean.",
+              "hint": "Return the working file to the recorded version only after confirming the local edit is unwanted.",
+              "help": {
+                "concept": "git restore PATH replaces an unstaged working-tree version with the version recorded in the index/HEAD.",
+                "hint_1": "This operation targets the working tree, not existing commits.",
+                "hint_2": "Verify that the unstaged patch disappears while unrelated staged work remains."
+              },
+              "starterCode": "Accidental replacement.\n",
+              "solutionCode": "git restore notes.txt\ngit status --short",
+              "instructions": "You are working in the prepared `release-kit/` repository.\n\n`notes.txt` has an unwanted working-tree edit. Restore it from HEAD, then verify that the repository is clean.",
+              "starterFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-kit\nmkdir -p release-kit\ngit -C release-kit init -q -b main\ngit -C release-kit config --local user.name \"ZoeSkoul Learner\"\ngit -C release-kit config --local user.email \"learner@zoeskoul.local\"\ncd release-kit\nprintf %s 'Approved release note.\n' > notes.txt\ncd ..\ngit -C release-kit add -A\ngit -C release-kit commit -q -m 'Add project baseline'\ncd release-kit\nprintf %s 'Accidental replacement.\n' > notes.txt\ncd ..\n"
+                }
+              },
+              "solutionFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-kit\nmkdir -p release-kit\ngit -C release-kit init -q -b main\ngit -C release-kit config --local user.name \"ZoeSkoul Learner\"\ngit -C release-kit config --local user.email \"learner@zoeskoul.local\"\ncd release-kit\nprintf %s 'Approved release note.\n' > notes.txt\ncd ..\ngit -C release-kit add -A\ngit -C release-kit commit -q -m 'Add project baseline'\ncd release-kit\nprintf %s 'Accidental replacement.\n' > notes.txt\ncd ..\n"
+                }
+              },
+              "terminalExpectations": {
+                "forbiddenCommands": {
+                  "0": {
+                    "message": "That action can discard or rewrite history. Use the safe, layer-specific workflow taught in this course."
+                  }
+                },
+                "requiredCommands": {
+                  "0": {
+                    "message": "Did you return the unwanted working-tree edit to the recorded version?"
+                  },
+                  "1": {
+                    "message": "Did you use the compact status view to confirm that no unfinished change remains?"
+                  }
+                }
+              }
+            },
+            "try_restore_without_rewriting_history_sketch1": {
+              "title": "Unstage Without Losing the Edit",
+              "prompt": "You are working in the prepared `release-kit/` repository.\n\n`draft.txt` is staged, but it should not be in the next commit. Unstage it while keeping its working-tree content, then read short status.",
+              "hint": "Change the staging decision without discarding the file’s contents.",
+              "help": {
+                "concept": "git restore --staged moves the selected path out of the index while preserving the working-tree edit.",
+                "hint_1": "The path should move out of the proposed snapshot and remain in the working tree.",
+                "hint_2": "Read both status columns afterward to verify the layer changed."
+              },
+              "starterCode": "Draft v2\n",
+              "solutionCode": "git restore --staged draft.txt\ngit status --short",
+              "instructions": "You are working in the prepared `release-kit/` repository.\n\n`draft.txt` is staged, but it should not be in the next commit. Unstage it while keeping its working-tree content, then read short status.",
+              "starterFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-kit\nmkdir -p release-kit\ngit -C release-kit init -q -b main\ngit -C release-kit config --local user.name \"ZoeSkoul Learner\"\ngit -C release-kit config --local user.email \"learner@zoeskoul.local\"\ncd release-kit\nprintf %s 'Draft v1\n' > draft.txt\ncd ..\ngit -C release-kit add -A\ngit -C release-kit commit -q -m 'Add project baseline'\ncd release-kit\nprintf %s 'Draft v2\n' > draft.txt\ncd ..\ngit -C release-kit add -- draft.txt\n"
+                }
+              },
+              "solutionFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-kit\nmkdir -p release-kit\ngit -C release-kit init -q -b main\ngit -C release-kit config --local user.name \"ZoeSkoul Learner\"\ngit -C release-kit config --local user.email \"learner@zoeskoul.local\"\ncd release-kit\nprintf %s 'Draft v1\n' > draft.txt\ncd ..\ngit -C release-kit add -A\ngit -C release-kit commit -q -m 'Add project baseline'\ncd release-kit\nprintf %s 'Draft v2\n' > draft.txt\ncd ..\ngit -C release-kit add -- draft.txt\n"
+                }
+              },
+              "terminalExpectations": {
+                "forbiddenCommands": {
+                  "0": {
+                    "message": "That action can discard or rewrite history. Use the safe, layer-specific workflow taught in this course."
+                  }
+                },
+                "requiredCommands": {
+                  "0": {
+                    "message": "Did you remove the path from the proposed snapshot while keeping its working copy?"
+                  },
+                  "1": {
+                    "message": "Did you use the compact status view and read the entry for `draft.txt`?"
+                  }
+                }
+              }
+            },
+            "try_restore_without_rewriting_history_sketch2": {
+              "title": "Unstage, Then Discard",
+              "prompt": "You are working in the prepared `release-kit/` repository.\n\n`summary.txt` is staged with an accidental rewrite. First unstage it, then restore the working file from HEAD and confirm a clean state.",
+              "hint": "Change the staging decision without discarding the file’s contents.",
+              "help": {
+                "concept": "Staged and working-tree state are separate boundaries, so a staged mistake may require two deliberate restore commands.",
+                "hint_1": "The path should move out of the proposed snapshot and remain in the working tree.",
+                "hint_2": "Read both status columns afterward to verify the layer changed."
+              },
+              "starterCode": "Accidental rewrite.\n",
+              "solutionCode": "git restore --staged summary.txt\ngit restore summary.txt\ngit status --short",
+              "instructions": "You are working in the prepared `release-kit/` repository.\n\n`summary.txt` is staged with an accidental rewrite. First unstage it, then restore the working file from HEAD and confirm a clean state.",
+              "starterFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-kit\nmkdir -p release-kit\ngit -C release-kit init -q -b main\ngit -C release-kit config --local user.name \"ZoeSkoul Learner\"\ngit -C release-kit config --local user.email \"learner@zoeskoul.local\"\ncd release-kit\nprintf %s 'Approved summary.\n' > summary.txt\ncd ..\ngit -C release-kit add -A\ngit -C release-kit commit -q -m 'Add project baseline'\ncd release-kit\nprintf %s 'Accidental rewrite.\n' > summary.txt\ncd ..\ngit -C release-kit add -- summary.txt\n"
+                }
+              },
+              "solutionFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-kit\nmkdir -p release-kit\ngit -C release-kit init -q -b main\ngit -C release-kit config --local user.name \"ZoeSkoul Learner\"\ngit -C release-kit config --local user.email \"learner@zoeskoul.local\"\ncd release-kit\nprintf %s 'Approved summary.\n' > summary.txt\ncd ..\ngit -C release-kit add -A\ngit -C release-kit commit -q -m 'Add project baseline'\ncd release-kit\nprintf %s 'Accidental rewrite.\n' > summary.txt\ncd ..\ngit -C release-kit add -- summary.txt\n"
+                }
+              },
+              "terminalExpectations": {
+                "forbiddenCommands": {
+                  "0": {
+                    "message": "That action can discard or rewrite history. Use the safe, layer-specific workflow taught in this course."
+                  }
+                },
+                "requiredCommands": {
+                  "0": {
+                    "message": "Did you remove the path from the proposed snapshot while keeping its working copy?"
+                  },
+                  "1": {
+                    "message": "Did you return the unwanted working-tree edit to the recorded version?"
+                  },
+                  "2": {
+                    "message": "Did you use the compact status view to confirm that no unfinished change remains?"
+                  }
+                }
+              }
+            },
+            "try_restore_without_rewriting_history_sketch3": {
+              "title": "Verify History Was Not Rewritten",
+              "prompt": "You are working in the prepared `release-kit/` repository.\n\nA mistaken edit has already been restored. Read the latest commit and clean status to confirm that correction changed the working tree, not existing history.",
+              "hint": "Read the timeline from newest checkpoint to oldest.",
+              "help": {
+                "concept": "Safe restore operations adjust the index or working tree; they do not alter the commit already stored in history.",
+                "hint_1": "Focus on commit order and subject lines rather than machine-specific hashes.",
+                "hint_2": "The newest entry should describe the result from this milestone."
+              },
+              "starterCode": "mode=production\n",
+              "solutionCode": "git log -1 --oneline\ngit status --short",
+              "instructions": "You are working in the prepared `release-kit/` repository.\n\nA mistaken edit has already been restored. Read the latest commit and clean status to confirm that correction changed the working tree, not existing history.",
+              "starterFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-kit\nmkdir -p release-kit\ngit -C release-kit init -q -b main\ngit -C release-kit config --local user.name \"ZoeSkoul Learner\"\ngit -C release-kit config --local user.email \"learner@zoeskoul.local\"\ncd release-kit\nprintf %s 'mode=production\n' > config.txt\ncd ..\ngit -C release-kit add -A\ngit -C release-kit commit -q -m 'Add release configuration'\n"
+                }
+              },
+              "solutionFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-kit\nmkdir -p release-kit\ngit -C release-kit init -q -b main\ngit -C release-kit config --local user.name \"ZoeSkoul Learner\"\ngit -C release-kit config --local user.email \"learner@zoeskoul.local\"\ncd release-kit\nprintf %s 'mode=production\n' > config.txt\ncd ..\ngit -C release-kit add -A\ngit -C release-kit commit -q -m 'Add release configuration'\n"
+                }
+              },
+              "terminalExpectations": {
+                "forbiddenCommands": {
+                  "0": {
+                    "message": "That action can discard or rewrite history. Use the safe, layer-specific workflow taught in this course."
+                  }
+                },
+                "requiredCommands": {
+                  "0": {
+                    "message": "Did you read the one-line history and confirm the newest checkpoint?"
+                  },
+                  "1": {
+                    "message": "Did you use the compact status view to confirm that no unfinished change remains?"
+                  }
+                }
+              }
+            }
+          },
+          "practice": {
+            "single-choice-1": {
+              "title": "Purpose of git restore",
+              "prompt": "What is the primary purpose of the `git restore` command?",
+              "hint": "Focus on what the command or concept observes or changes at this point in the workflow.",
+              "help": {
+                "concept": "Correct working-tree and staging mistakes at the right layer while leaving existing commits untouched.",
+                "hint_1": "Remove options that act on a different repository layer than the one named in the question.",
+                "hint_2": "Choose the answer that remains accurate even when other unrelated files exist."
+              },
+              "options": {
+                "a": "To revert changes in the working directory",
+                "b": "To commit changes to the repository",
+                "c": "To create a new branch",
+                "d": "To merge branches"
+              }
+            },
+            "single-choice-2": {
+              "title": "Effect of git restore --staged",
+              "prompt": "What happens when you use `git restore --staged` on a file?",
+              "hint": "Focus on what the command or concept observes or changes at this point in the workflow.",
+              "help": {
+                "concept": "Correct working-tree and staging mistakes at the right layer while leaving existing commits untouched.",
+                "hint_1": "Remove options that act on a different repository layer than the one named in the question.",
+                "hint_2": "Choose the answer that remains accurate even when other unrelated files exist."
+              },
+              "options": {
+                "a": "The file is removed from the staging area but changes are kept",
+                "b": "The file is deleted from the repository",
+                "c": "The file is committed to the repository",
+                "d": "The file is reverted to the last committed state"
+              }
+            },
+            "multi-choice-1": {
+              "title": "Choosing the Correct Restore Command",
+              "prompt": "Which commands can be used to revert changes in the working directory and unstage a file?",
+              "hint": "Judge each option independently; choose only the statements that stay true in this exact repository state.",
+              "help": {
+                "concept": "Correct working-tree and staging mistakes at the right layer while leaving existing commits untouched.",
+                "hint_1": "A partly true option is still wrong if it adds an effect Git does not guarantee.",
+                "hint_2": "Use the layer named in the prompt—working tree, staging area, or history—to test each choice."
+              },
+              "options": {
+                "a": "git restore",
+                "b": "git restore --staged",
+                "c": "git commit",
+                "d": "git add"
+              }
+            },
+            "drag-reorder-1": {
+              "title": "Discard a Change That Is Already Staged",
+              "prompt": "Arrange the safe correction steps for a file whose accidental rewrite is both staged and present in the working tree.",
+              "hint": "Start with the state that must exist before the next action can make sense.",
+              "help": {
+                "concept": "Correct working-tree and staging mistakes at the right layer while leaving existing commits untouched.",
+                "hint_1": "Track how the project moves from working files to a proposed snapshot and then to history.",
+                "hint_2": "Read the ordered steps as one continuous repository story."
+              },
+              "tokens": {
+                "t1": "Remove the accidental version from the staging area",
+                "t2": "Restore the working file from the recorded version"
+              }
+            },
+            "fill-blank-1": {
+              "title": "Command to Unstage a File",
+              "prompt": "Fill in the blank to unstage a file while keeping its changes: `git restore --[blank1] notes.txt`",
+              "hint": "Choose the term or symbol that matches the exact state described, not a nearby Git concept.",
+              "help": {
+                "concept": "Correct working-tree and staging mistakes at the right layer while leaving existing commits untouched.",
+                "hint_1": "Pay attention to whether the prompt describes an untracked path, a working-tree edit, staged work, or history.",
+                "hint_2": "Read spaces, punctuation, and status columns as meaningful when the question shows Git output."
+              },
+              "template": "git restore --[blank1] notes.txt",
+              "choices": [
+                "staged",
+                "commit",
+                "branch",
+                "reset"
+              ]
+            },
+            "fill-blank-2": {
+              "title": "Command to Revert Changes",
+              "prompt": "Fill in the blank to revert changes in the working directory: `git [blank1] notes.txt`",
+              "hint": "Choose the term or symbol that matches the exact state described, not a nearby Git concept.",
+              "help": {
+                "concept": "Correct working-tree and staging mistakes at the right layer while leaving existing commits untouched.",
+                "hint_1": "Pay attention to whether the prompt describes an untracked path, a working-tree edit, staged work, or history.",
+                "hint_2": "Read spaces, punctuation, and status columns as meaningful when the question shows Git output."
+              },
+              "template": "git [blank1] notes.txt",
+              "choices": [
+                "restore",
+                "commit",
+                "add",
+                "reset"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "git-foundations": {
+      "git-foundations-module-3-manage-tracked-files": {
+        "restore-without-rewriting-history": {
+          "restore-sketch-0": {
+            "title": "Restore an Unstaged Working Copy",
+            "bodyMarkdown": "A plain restore updates the working file from the staged or committed version. Use it only after reviewing the diff, because the unwanted local text will not become a new commit.\n\nThis operation changes the working-tree layer. It does not rewrite the latest commit and does not alter unrelated files.\n\nAfterward, the unstaged diff for that path should disappear."
+          },
+          "restore-sketch-1": {
+            "title": "Unstage Without Throwing Work Away",
+            "bodyMarkdown": "A staged file may be correct work that simply does not belong in the next commit. In that case, change the staging decision while keeping the working copy.\n\nThe status mark should move from the staging column to the working-tree column. The file contents remain available for a later checkpoint.\n\nThis is the safe correction when the boundary is wrong but the work is still valuable."
+          },
+          "restore-sketch-2": {
+            "title": "Choose the Layer in the Right Order",
+            "bodyMarkdown": "When an accidental rewrite is already staged, correct the staging area first. Then restore the working copy.\n\nThe order matters because the two operations target different layers. Unstaging preserves the current file while removing it from the proposal; restoring afterward returns that file to the recorded version.\n\nRead both status columns before acting so you know which layer still contains the mistake."
+          },
+          "restore-sketch-3": {
+            "title": "Verify That History Stayed Intact",
+            "bodyMarkdown": "A safe restore workflow changes the working tree or staging area, not the commits that already exist. Read the latest history entry and then check status.\n\nThe commit should still be present with the same message. The unwanted current-state change should be gone or moved to the intended layer.\n\nThat evidence distinguishes correction from history rewriting."
+          }
+        }
+      }
+    }
+  }
+}

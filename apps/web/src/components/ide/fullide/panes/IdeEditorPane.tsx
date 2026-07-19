@@ -11,6 +11,10 @@ import {
     type CodeRunnerRuntime,
 } from "@/components/code/runner/runtime";
 import type { FullIDEServices } from "@/components/ide/fullide/services";
+import type { FileNode } from "@/components/ide/types";
+import type { WorkspaceSyncEntry } from "@zoeskoul/code-contracts";
+import { resolveWorkspaceEditorLanguage } from "@zoeskoul/code-contracts";
+import { isBinaryFileNode } from "@/lib/ide/workspaceFileContent";
 
 import TabsBar from "../TabsBar";
 import { PANEL_CARD_CLASS } from "../../constants";
@@ -19,10 +23,10 @@ import { exportWorkspaceEntries } from "../../fsTree";
 
 type Props = {
     panelRef: React.RefObject<HTMLDivElement | null>;
-    nodes: any[];
-    tabFiles: any[];
+    nodes: import("@/components/ide/types").FSNode[];
+    tabFiles: FileNode[];
     activeFileId: string | null;
-    activeFile: any | null;
+    activeFile: FileNode | null;
     runnerHeight: number | "auto";
     title: string;
     isSql: boolean;
@@ -34,10 +38,7 @@ type Props = {
     exerciseStateKey?: string;
     terminalHistoryScopeKey?: string;
     onApplyTerminalSnapshotFiles?: (
-        files: Array<
-            | { kind?: "file"; path: string; content: string }
-            | { kind: "directory"; path: string }
-        >,
+        files: WorkspaceSyncEntry[],
         meta: { dirtyUiPaths: Set<string> },
     ) => void | Promise<void>;
     onTerminalEvidenceChange?: (evidence: import("@/lib/practice/types").TerminalEvidence) => void;
@@ -73,62 +74,46 @@ type Props = {
     >;
 };
 
-function resolveEditorLanguage(workspaceLanguage: string, fileName?: string | null) {
-    const lower = String(fileName ?? "").toLowerCase();
-
-    if (workspaceLanguage === "web") {
-        if (lower.endsWith(".html") || lower.endsWith(".htm")) return "html";
-        if (lower.endsWith(".css")) return "css";
-        if (lower.endsWith(".js") || lower.endsWith(".mjs") || lower.endsWith(".cjs")) {
-            return "javascript";
-        }
-        if (lower.endsWith(".json")) return "json";
-        return "html";
-    }
-
-    return workspaceLanguage;
-}
-
 export default function IdeEditorPane({
-                                          panelRef,
-                                          nodes,
-                                          tabFiles,
-                                          activeFileId,
-                                          activeFile,
-                                          runnerHeight,
-                                          title,
-                                          isSql,
-                                          language,
-                                          sqlDialect,
-                                          runtime,
-                                          projectId,
+    panelRef,
+    nodes,
+    tabFiles,
+    activeFileId,
+    activeFile,
+    runnerHeight,
+    title,
+    isSql,
+    language,
+    sqlDialect,
+    runtime,
+    projectId,
     exerciseStateKey,
-                                          terminalHistoryScopeKey,
-                                          onApplyTerminalSnapshotFiles,
-                                          onChangeLanguage,
-                                          onChangeFileCode,
-                                          onChangeSqlDialect,
-                                          onBeforeRun,
-                                          onRunResult,
-                                          onRun,
-                                          setActiveFileId,
-                                          workspaceFileSelectionVersion,
-                                          closeTab,
-                                          isDesktop,
-                                          isAuthenticated,
-                                          services,
-                                          sqlDatasetId,
-                                          sqlResultShape,
-                                          sqlPaneOptions,
-                                          runnerPaneOptions,
-                                          defaultSurface,
-                                          sqlSchemaSql,
-                                          sqlSeedSql,
-                                          sqlSetupSql,
-                                          sqlInitialTableSnapshots,
-                                          onTerminalEvidenceChange,
-                                      onTerminalSyncReady
-                                      }: Props) {
+    terminalHistoryScopeKey,
+    onApplyTerminalSnapshotFiles,
+    onChangeLanguage,
+    onChangeFileCode,
+    onChangeSqlDialect,
+    onBeforeRun,
+    onRunResult,
+    onRun,
+    setActiveFileId,
+    workspaceFileSelectionVersion,
+    closeTab,
+    isDesktop,
+    isAuthenticated,
+    services,
+    sqlDatasetId,
+    sqlResultShape,
+    sqlPaneOptions,
+    runnerPaneOptions,
+    defaultSurface,
+    sqlSchemaSql,
+    sqlSeedSql,
+    sqlSetupSql,
+    sqlInitialTableSnapshots,
+    onTerminalEvidenceChange,
+    onTerminalSyncReady,
+}: Props) {
     const t = useTranslations("ide.editor");
     const terminalT = useTranslations("ide.terminal");
     const isWeb = language === "web";
@@ -143,7 +128,9 @@ export default function IdeEditorPane({
             (n: any) =>
                 n?.kind === "file" && String(n?.name ?? "").toLowerCase() === "schema.sql",
         );
-        return file?.content ?? sqlSchemaSql ?? sqlSetupSql ?? "";
+        return file?.kind === "file" && !isBinaryFileNode(file)
+            ? file.content ?? sqlSchemaSql ?? sqlSetupSql ?? ""
+            : sqlSchemaSql ?? sqlSetupSql ?? "";
     }, [nodes, sqlSchemaSql, sqlSetupSql]);
 
     const seedSql = React.useMemo(() => {
@@ -151,7 +138,9 @@ export default function IdeEditorPane({
             (n: any) =>
                 n?.kind === "file" && String(n?.name ?? "").toLowerCase() === "seed.sql",
         );
-        return file?.content ?? sqlSeedSql ?? "";
+        return file?.kind === "file" && !isBinaryFileNode(file)
+            ? file.content ?? sqlSeedSql ?? ""
+            : sqlSeedSql ?? "";
     }, [nodes, sqlSeedSql]);
 
     const workspaceEntries = React.useMemo(() => {
@@ -172,11 +161,16 @@ export default function IdeEditorPane({
     );
 
     const editorLanguage = React.useMemo(
-        () => resolveEditorLanguage(language, activeFile?.name ?? null),
-        [language, activeFile?.name],
+        () =>
+            activeFile
+                ? resolveWorkspaceEditorLanguage(activeFile.name, String(language))
+                : String(language),
+        [activeFile?.name, language],
     );
     const handleBoundCodeChange = React.useCallback(
         (nextCode: string) => {
+            if (isBinaryFileNode(activeFile)) return;
+
             const fileId = String(activeFile?.id ?? activeFileId ?? "");
 
             if (!fileId) {
@@ -185,7 +179,7 @@ export default function IdeEditorPane({
 
             onChangeFileCode(fileId, nextCode);
         },
-        [activeFile?.id, activeFileId, onChangeFileCode],
+        [activeFile?.binary, activeFile?.id, activeFileId, onChangeFileCode],
     );
     const terminalWorkspaceKey = React.useMemo(
         () =>
@@ -224,7 +218,9 @@ export default function IdeEditorPane({
             ) : null}
 
             <div ref={panelRef} className="min-h-0 min-w-0 flex-1 overflow-hidden">
-                {process.env.NODE_ENV !== "production" && activeFile ? (
+                {process.env.NODE_ENV !== "production" &&
+                activeFile &&
+                !isBinaryFileNode(activeFile) ? (
                     <textarea
                         data-testid="fullide-editor-e2e-input"
                         aria-label={t("e2eInputLabel")}
@@ -241,16 +237,30 @@ export default function IdeEditorPane({
                 ) : null}
 
                 {activeFile || terminalWorkspaceOnly ? (
-                    <div className={cn("h-full overflow-hidden  pt-2", PANEL_CARD_CLASS)}>
+                    <div className={cn("h-full overflow-hidden pt-2", PANEL_CARD_CLASS)}>
                         <CodeRunner
                             frame="plain"
-                            title={isSql ? `SQL · ${title}` : isWeb ? `Web · ${title}` : title}
+                            title={
+                                isSql ? `SQL · ${title}` : isWeb ? `Web · ${title}` : title
+                            }
                             height={runnerHeight}
                             language={language}
                             editorLanguage={editorLanguage}
                             onChangeLanguage={onChangeLanguage}
-                            code={activeFile?.content ?? ""}
+                            code={
+                                isBinaryFileNode(activeFile)
+                                    ? ""
+                                    : activeFile?.content ?? ""
+                            }
                             onChangeCode={handleBoundCodeChange}
+                            activeBinaryFile={
+                                isBinaryFileNode(activeFile)
+                                    ? {
+                                          name: activeFile.name,
+                                          binary: activeFile.binary,
+                                      }
+                                    : null
+                            }
                             sqlDialect={sqlDialect}
                             onChangeSqlDialect={onChangeSqlDialect}
                             sqlDatasetId={sqlDatasetId}
@@ -267,7 +277,11 @@ export default function IdeEditorPane({
 
                             showSqlDialectPicker={services.runner.showSqlDialectPicker}
                             allowReset={isDesktop && !learnerUiFlags.compactLearnerUi}
-                            allowRun={services.runner.allowRun && !isWeb}
+                            allowRun={
+                                services.runner.allowRun &&
+                                !isWeb &&
+                                !isBinaryFileNode(activeFile)
+                            }
                             runtime={runtime}
                             showTerminal={services.runner.showTerminal}
                             showEditorThemeToggle={services.runner.showThemeToggle}
@@ -288,7 +302,9 @@ export default function IdeEditorPane({
                                     : activeFileId ?? "no-file"
                             }
                             showEditor={services.editor.showEditor !== false}
-                            activeWorkspaceFileId={activeFile?.id ?? activeFileId ?? undefined}
+                            activeWorkspaceFileId={
+                                activeFile?.id ?? activeFileId ?? undefined
+                            }
                             workspaceFileSelectionVersion={workspaceFileSelectionVersion}
                             onBeforeRun={onBeforeRun}
                             onRun={
@@ -316,7 +332,8 @@ export default function IdeEditorPane({
                                         bootstrap: terminalBootstrap,
                                         initialFiles: workspaceEntries,
                                         getWorkspaceFiles: () => workspaceEntries,
-                                        onTerminalSnapshotFiles: onApplyTerminalSnapshotFiles,
+                                        onTerminalSnapshotFiles:
+                                            onApplyTerminalSnapshotFiles,
                                         lazy: true,
                                         title: terminalT("title"),
                                         historyScopeKey: terminalHistoryScopeKey,
@@ -325,12 +342,15 @@ export default function IdeEditorPane({
                             }
                             onTerminalEvidenceChange={onTerminalEvidenceChange}
                             onTerminalSyncReady={onTerminalSyncReady}
-
                         />
                     </div>
                 ) : (
                     <div className="flex h-full min-h-[280px] items-center justify-center rounded-none border border-dashed border-neutral-300 bg-white p-6 text-sm font-extrabold text-neutral-600 sm:rounded-xl dark:border-white/10 dark:bg-black/30 dark:text-white/70">
-                        {isSql ? t("emptyState.noSqlFile") : isWeb ? t("emptyState.noWebFile") : t("emptyState.noFile")}
+                        {isSql
+                            ? t("emptyState.noSqlFile")
+                            : isWeb
+                              ? t("emptyState.noWebFile")
+                              : t("emptyState.noFile")}
                     </div>
                 )}
             </div>

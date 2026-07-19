@@ -1,0 +1,304 @@
+{
+  "topics": {
+    "git-foundations": {
+      "git-foundations-module-3-manage-tracked-files": {
+        "ignore-generated-files": {
+          "label": "Ignore Generated Files",
+          "summary": "Write narrow ignore rules, prove which rule matches, and separate “ignored” from “already tracked.”",
+          "cards": {
+            "sketch0": {
+              "title": "Keep Rebuildable Output Out of History"
+            },
+            "sketch1": {
+              "title": "Prove a Rule Matches"
+            },
+            "sketch2": {
+              "title": "Ignoring Is Not Untracking"
+            },
+            "sketch3": {
+              "title": "Prefer Narrow Rules"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_ignore_generated_files_sketch0": {
+              "title": "Add an Ignore Rule for Build Output",
+              "prompt": "You are working in the prepared `release-kit/` repository.\n\n`dist/app.js` is generated output. Create `.gitignore` in the repository root and add one line: `dist/`.\n\nThen open Terminal, run `git status --short`, and confirm that the generated file disappears while `.gitignore` remains visible.",
+              "hint": "Start in the editor and make only the content change described in the task.",
+              "help": {
+                "concept": ".gitignore rules keep matching untracked generated files out of normal status and staging workflows.",
+                "hint_1": "Keep the file path and exact requested text in view.",
+                "hint_2": "Switch to the terminal only after the saved file matches the scenario."
+              },
+              "starterCode": "# Release Kit\n",
+              "solutionCode": "printf \"dist/\\n\" > .gitignore\ngit status --short",
+              "instructions": "You are working in the prepared `release-kit/` repository.\n\n`dist/app.js` is generated output. Create `.gitignore` in the repository root and add one line: `dist/`.\n\nThen open Terminal, run `git status --short`, and confirm that the generated file disappears while `.gitignore` remains visible.",
+              "starterFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-kit\nmkdir -p release-kit\ngit -C release-kit init -q -b main\ngit -C release-kit config --local user.name \"ZoeSkoul Learner\"\ngit -C release-kit config --local user.email \"learner@zoeskoul.local\"\ncd release-kit\nprintf %s '# Release Kit\n' > README.md\ncd ..\ngit -C release-kit add -A\ngit -C release-kit commit -q -m 'Add project baseline'\ncd release-kit\nmkdir -p dist\nprintf %s 'bundled output\n' > dist/app.js\ncd ..\n"
+                }
+              },
+              "solutionFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-kit\nmkdir -p release-kit\ngit -C release-kit init -q -b main\ngit -C release-kit config --local user.name \"ZoeSkoul Learner\"\ngit -C release-kit config --local user.email \"learner@zoeskoul.local\"\ncd release-kit\nprintf %s '# Release Kit\n' > README.md\ncd ..\ngit -C release-kit add -A\ngit -C release-kit commit -q -m 'Add project baseline'\ncd release-kit\nmkdir -p dist\nprintf %s 'bundled output\n' > dist/app.js\ncd ..\n"
+                }
+              },
+              "terminalExpectations": {
+                "forbiddenCommands": {
+                  "0": {
+                    "message": "That action can discard or rewrite history. Use the safe, layer-specific workflow taught in this course."
+                  }
+                },
+                "requiredCommands": {
+                  "0": {
+                    "message": "Did you use the compact status view and read the entry for `dist/app.js`?"
+                  }
+                }
+              }
+            },
+            "try_ignore_generated_files_sketch1": {
+              "title": "Explain Why a File Is Ignored",
+              "prompt": "You are working in the prepared `release-kit/` repository.\n\nThe repository already ignores `logs/`. Use `git check-ignore -v` to identify the rule that matches `logs/error.log`.",
+              "hint": "Ask Git to explain whether the generated path matches an ignore rule.",
+              "help": {
+                "concept": "git check-ignore -v reports the matching rule and file, which makes ignore behavior explainable instead of mysterious.",
+                "hint_1": "Use the exact generated path from the scenario.",
+                "hint_2": "The result should identify the intended policy rather than a broader accidental rule."
+              },
+              "starterCode": "# Release Kit\n",
+              "solutionCode": "git check-ignore -v logs/error.log",
+              "instructions": "You are working in the prepared `release-kit/` repository.\n\nThe repository already ignores `logs/`. Use `git check-ignore -v` to identify the rule that matches `logs/error.log`.",
+              "starterFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-kit\nmkdir -p release-kit\ngit -C release-kit init -q -b main\ngit -C release-kit config --local user.name \"ZoeSkoul Learner\"\ngit -C release-kit config --local user.email \"learner@zoeskoul.local\"\ncd release-kit\nprintf %s '# Release Kit\n' > README.md\ncd ..\ncd release-kit\nprintf %s 'logs/\n' > .gitignore\ncd ..\ngit -C release-kit add -A\ngit -C release-kit commit -q -m 'Add project baseline'\ncd release-kit\nmkdir -p logs\nprintf %s 'preview warning\n' > logs/error.log\ncd ..\n"
+                }
+              },
+              "solutionFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-kit\nmkdir -p release-kit\ngit -C release-kit init -q -b main\ngit -C release-kit config --local user.name \"ZoeSkoul Learner\"\ngit -C release-kit config --local user.email \"learner@zoeskoul.local\"\ncd release-kit\nprintf %s '# Release Kit\n' > README.md\ncd ..\ncd release-kit\nprintf %s 'logs/\n' > .gitignore\ncd ..\ngit -C release-kit add -A\ngit -C release-kit commit -q -m 'Add project baseline'\ncd release-kit\nmkdir -p logs\nprintf %s 'preview warning\n' > logs/error.log\ncd ..\n"
+                }
+              },
+              "terminalExpectations": {
+                "forbiddenCommands": {
+                  "0": {
+                    "message": "That action can discard or rewrite history. Use the safe, layer-specific workflow taught in this course."
+                  }
+                },
+                "requiredCommands": {
+                  "0": {
+                    "message": "Did you ask Git whether the generated path matches the intended ignore rule?"
+                  }
+                }
+              }
+            },
+            "try_ignore_generated_files_sketch2": {
+              "title": "Stop Tracking a Local Configuration File",
+              "prompt": "You are working in the prepared `release-kit/` repository.\n\n`config/local.json` was committed by mistake. The ignore rule now exists. Remove the file from Git’s index without deleting the working copy, then check status.",
+              "hint": "Remove the path from Git’s index while keeping the local working copy.",
+              "help": {
+                "concept": "An ignore rule does not automatically untrack a file; git rm --cached removes it from the index while preserving the working copy.",
+                "hint_1": "The ignore rule should already exist before you stop tracking the file.",
+                "hint_2": "Verify that the repository records a removal while the local file remains."
+              },
+              "starterCode": "config/local.json\n",
+              "solutionCode": "git rm --cached config/local.json\ngit status --short",
+              "instructions": "You are working in the prepared `release-kit/` repository.\n\n`config/local.json` was committed by mistake. The ignore rule now exists. Remove the file from Git’s index without deleting the working copy, then check status.",
+              "starterFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-kit\nmkdir -p release-kit/config\ngit -C release-kit init -q -b main\ngit -C release-kit config --local user.name \"ZoeSkoul Learner\"\ngit -C release-kit config --local user.email \"learner@zoeskoul.local\"\nprintf '%s\n' '{\"port\":3000}' > release-kit/config/local.json\ngit -C release-kit add config/local.json\ngit -C release-kit commit -q -m \"Add local configuration\"\nprintf '%s\n' 'config/local.json' > release-kit/.gitignore\ngit -C release-kit add .gitignore\ngit -C release-kit commit -q -m \"Ignore local configuration\"\n"
+                }
+              },
+              "solutionFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-kit\nmkdir -p release-kit/config\ngit -C release-kit init -q -b main\ngit -C release-kit config --local user.name \"ZoeSkoul Learner\"\ngit -C release-kit config --local user.email \"learner@zoeskoul.local\"\nprintf '%s\n' '{\"port\":3000}' > release-kit/config/local.json\ngit -C release-kit add config/local.json\ngit -C release-kit commit -q -m \"Add local configuration\"\nprintf '%s\n' 'config/local.json' > release-kit/.gitignore\ngit -C release-kit add .gitignore\ngit -C release-kit commit -q -m \"Ignore local configuration\"\n"
+                }
+              },
+              "terminalExpectations": {
+                "forbiddenCommands": {
+                  "0": {
+                    "message": "That action can discard or rewrite history. Use the safe, layer-specific workflow taught in this course."
+                  }
+                },
+                "requiredCommands": {
+                  "0": {
+                    "message": "Did you stop tracking the local-only file without deleting its working copy?"
+                  },
+                  "1": {
+                    "message": "Did you use the compact status view and read the entry for `config/local.json`?"
+                  }
+                }
+              }
+            },
+            "try_ignore_generated_files_sketch3": {
+              "title": "Commit the Ignore Policy",
+              "prompt": "You are working in the prepared `release-kit/` repository.\n\n`.gitignore` is staged with rules for `dist/` and `*.log`. Commit it as `Ignore generated output`, then verify that build and log files remain ignored.",
+              "hint": "Record only the staged snapshot and use the message requested by the scenario.",
+              "help": {
+                "concept": "Committing .gitignore shares the project policy while ignored generated files remain outside history.",
+                "hint_1": "The message should describe the project result, not the commands you used.",
+                "hint_2": "After recording it, inspect history and any work that remains."
+              },
+              "starterCode": "# Release Kit\n",
+              "solutionCode": "git commit -m \"Ignore generated output\"\ngit check-ignore dist/app.js debug.log\ngit status --short",
+              "instructions": "You are working in the prepared `release-kit/` repository.\n\n`.gitignore` is staged with rules for `dist/` and `*.log`. Commit it as `Ignore generated output`, then verify that build and log files remain ignored.",
+              "starterFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-kit\nmkdir -p release-kit\ngit -C release-kit init -q -b main\ngit -C release-kit config --local user.name \"ZoeSkoul Learner\"\ngit -C release-kit config --local user.email \"learner@zoeskoul.local\"\ncd release-kit\nprintf %s '# Release Kit\n' > README.md\ncd ..\ngit -C release-kit add -A\ngit -C release-kit commit -q -m 'Add project baseline'\ncd release-kit\nprintf %s 'dist/\n*.log\n' > .gitignore\ncd ..\ncd release-kit\nmkdir -p dist\nprintf %s 'bundled output\n' > dist/app.js\ncd ..\ncd release-kit\nprintf %s 'local log\n' > debug.log\ncd ..\ngit -C release-kit add -- .gitignore\n"
+                }
+              },
+              "solutionFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-kit\nmkdir -p release-kit\ngit -C release-kit init -q -b main\ngit -C release-kit config --local user.name \"ZoeSkoul Learner\"\ngit -C release-kit config --local user.email \"learner@zoeskoul.local\"\ncd release-kit\nprintf %s '# Release Kit\n' > README.md\ncd ..\ngit -C release-kit add -A\ngit -C release-kit commit -q -m 'Add project baseline'\ncd release-kit\nprintf %s 'dist/\n*.log\n' > .gitignore\ncd ..\ncd release-kit\nmkdir -p dist\nprintf %s 'bundled output\n' > dist/app.js\ncd ..\ncd release-kit\nprintf %s 'local log\n' > debug.log\ncd ..\ngit -C release-kit add -- .gitignore\n"
+                }
+              },
+              "terminalExpectations": {
+                "forbiddenCommands": {
+                  "0": {
+                    "message": "That action can discard or rewrite history. Use the safe, layer-specific workflow taught in this course."
+                  }
+                },
+                "requiredCommands": {
+                  "0": {
+                    "message": "Did you record the staged snapshot with the message named in the task?"
+                  },
+                  "1": {
+                    "message": "Did you ask Git whether the generated path matches the intended ignore rule?"
+                  },
+                  "2": {
+                    "message": "Did you use the compact status view and read the entry for `release-kit/`?"
+                  }
+                }
+              }
+            }
+          },
+          "practice": {
+            "ignore-generated-files-single-choice-0": {
+              "title": "Purpose of .gitignore",
+              "prompt": "What is the primary purpose of a `.gitignore` file in a Git repository?",
+              "hint": "Focus on what the command or concept observes or changes at this point in the workflow.",
+              "help": {
+                "concept": "Write narrow ignore rules, prove which rule matches, and separate “ignored” from “already tracked.”",
+                "hint_1": "Remove options that act on a different repository layer than the one named in the question.",
+                "hint_2": "Choose the answer that remains accurate even when other unrelated files exist."
+              },
+              "options": {
+                "a": "To track changes in all files",
+                "b": "To ignore specific files and directories",
+                "c": "To delete files from the repository",
+                "d": "To rename files in the repository"
+              }
+            },
+            "ignore-generated-files-single-choice-1": {
+              "title": "Effect of Adding to .gitignore",
+              "prompt": "What happens when you add a file to `.gitignore` that has already been committed?",
+              "hint": "Focus on what the command or concept observes or changes at this point in the workflow.",
+              "help": {
+                "concept": "Write narrow ignore rules, prove which rule matches, and separate “ignored” from “already tracked.”",
+                "hint_1": "Remove options that act on a different repository layer than the one named in the question.",
+                "hint_2": "Choose the answer that remains accurate even when other unrelated files exist."
+              },
+              "options": {
+                "a": "The file is automatically deleted from the repository",
+                "b": "The file is untracked and removed from history",
+                "c": "The file remains tracked and in history",
+                "d": "The file is renamed in the repository"
+              }
+            },
+            "ignore-generated-files-multi-choice-0": {
+              "title": "Common .gitignore Patterns",
+              "prompt": "Which of the following patterns are commonly used in a `.gitignore` file? Select all that apply.",
+              "hint": "Judge each option independently; choose only the statements that stay true in this exact repository state.",
+              "help": {
+                "concept": "Write narrow ignore rules, prove which rule matches, and separate “ignored” from “already tracked.”",
+                "hint_1": "A partly true option is still wrong if it adds an effect Git does not guarantee.",
+                "hint_2": "Use the layer named in the prompt—working tree, staging area, or history—to test each choice."
+              },
+              "options": {
+                "a": "*.log",
+                "b": "/node_modules",
+                "c": "*.tmp",
+                "d": "README.md"
+              }
+            },
+            "ignore-generated-files-drag-reorder-0": {
+              "title": "Order of Operations for Ignoring a Committed File",
+              "prompt": "Arrange the steps to ignore a file that has already been committed.",
+              "hint": "Start with the state that must exist before the next action can make sense.",
+              "help": {
+                "concept": "Write narrow ignore rules, prove which rule matches, and separate “ignored” from “already tracked.”",
+                "hint_1": "Track how the project moves from working files to a proposed snapshot and then to history.",
+                "hint_2": "Read the ordered steps as one continuous repository story."
+              },
+              "tokens": {
+                "t1": "Add file to .gitignore",
+                "t2": "Run git rm --cached",
+                "t3": "Commit changes"
+              }
+            },
+            "ignore-generated-files-fill-blank-0": {
+              "title": "Ignoring a Directory",
+              "prompt": "To ignore all files in the `cache/` directory, you should add `[blank1]` to your `.gitignore`.",
+              "hint": "Choose the term or symbol that matches the exact state described, not a nearby Git concept.",
+              "help": {
+                "concept": "Write narrow ignore rules, prove which rule matches, and separate “ignored” from “already tracked.”",
+                "hint_1": "Pay attention to whether the prompt describes an untracked path, a working-tree edit, staged work, or history.",
+                "hint_2": "Read spaces, punctuation, and status columns as meaningful when the question shows Git output."
+              },
+              "template": "cache/[blank1]",
+              "choices": [
+                "*",
+                "/",
+                "cache/",
+                "cache"
+              ]
+            },
+            "ignore-generated-files-fill-blank-1": {
+              "title": "Ignoring File Types",
+              "prompt": "To ignore all `.bak` files, you should add `[blank1]` to your `.gitignore`.",
+              "hint": "Choose the term or symbol that matches the exact state described, not a nearby Git concept.",
+              "help": {
+                "concept": "Write narrow ignore rules, prove which rule matches, and separate “ignored” from “already tracked.”",
+                "hint_1": "Pay attention to whether the prompt describes an untracked path, a working-tree edit, staged work, or history.",
+                "hint_2": "Read spaces, punctuation, and status columns as meaningful when the question shows Git output."
+              },
+              "template": "[blank1]",
+              "choices": [
+                "*.bak",
+                "*.tmp",
+                "*.log",
+                "*.txt"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "git-foundations": {
+      "git-foundations-module-3-manage-tracked-files": {
+        "ignore-generated-files": {
+          "ignore-generated-files-sketch0": {
+            "title": "Keep Rebuildable Output Out of History",
+            "bodyMarkdown": "Build artifacts, previews, caches, and logs can usually be recreated. Recording them adds noise, larger commits, and avoidable conflicts without preserving meaningful source work.\n\nA `.gitignore` rule describes paths Git should leave untracked. A directory rule such as `dist/` is clearer and safer than an overly broad file-type rule when only one generated directory should be excluded.\n\nCommit the policy file itself so every contributor shares the same boundary.\n\nSuppose a build creates `build/app.js`. Add `build/` as a line in the repository’s `.gitignore`, then inspect the state:\n\n```bash\ngit status --short\n```\n\nThe generated file should disappear from the untracked list while `.gitignore` itself remains visible as meaningful project configuration."
+          },
+          "ignore-generated-files-sketch1": {
+            "title": "Prove Which Rule Matches",
+            "bodyMarkdown": "Do not assume an ignore rule works merely because a file disappeared from status. Ask Git to explain the match. The verbose ignore check identifies both the path and the rule responsible.\n\nThat evidence is especially useful when several ignore files or patterns overlap. A silent result means the path did not match an active rule.\n\nVerification turns `.gitignore` from guesswork into an inspectable policy.\n\nAsk Git which rule ignores a path:\n\n```bash\ngit check-ignore -v cache/output.tmp\n```\n\nThe verbose result names the ignore file, the matching rule, and the path. That is stronger evidence than simply noticing that status is quiet."
+          },
+          "ignore-generated-files-sketch2": {
+            "title": "Ignoring Is Not the Same as Untracking",
+            "bodyMarkdown": "Ignore rules affect paths Git is not already tracking. If `config/local.json` was committed earlier, adding a rule does not remove it from the index or from future snapshots.\n\nTo correct the boundary, stop tracking the path while keeping the local working copy. The next commit records the repository-level removal, and the ignore rule prevents the local file from returning as untracked work.\n\nReview this carefully: the file stays on disk, but it leaves the project’s tracked state.\n\nWhen a local settings file was already committed, remove only its index entry:\n\n```bash\ngit rm --cached settings/local.json\ngit status --short\n```\n\n`--cached` keeps the working copy on disk while staging its removal from future snapshots. The ignore rule can then keep it untracked."
+          },
+          "ignore-generated-files-sketch3": {
+            "title": "Prefer the Narrowest Useful Rule",
+            "bodyMarkdown": "An ignore rule can hide too much. `dist/` protects one generated directory; `*.html` might hide source pages the project needs.\n\nUse status to see the repository-level effect and an ignore check to see the rule-level explanation. Together they prove that the policy excludes the intended output and nothing broader.\n\nA production-ready ignore file is small, specific, and tied to real generated artifacts.\n\nRecord the ignore policy, then verify representative generated paths:\n\n```bash\ngit commit -m \"Ignore build output\"\ngit check-ignore build/app.js debug.log\ngit status --short\n```\n\nThe commit preserves the policy, `check-ignore` proves the paths match, and status reveals whether any meaningful configuration change remains."
+          }
+        }
+      }
+    }
+  }
+}

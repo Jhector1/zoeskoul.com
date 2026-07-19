@@ -10,7 +10,11 @@ import { defaultMainFile } from "@/components/ide/languageDefaults";
 import {
   cleanStarterCode,
   hasUsableStarterFilesValue,
-  isUsableStarterCode
+  isUsableStarterCode,
+  mergeStarterFileSources,
+  normalizeStarterFilesValue,
+  starterFileNodePayload,
+  type NormalizedStarterFile,
 } from "@/components/review/module/runtime/starterContent";
 import { resolveWorkspaceForTarget } from "@/components/review/module/runtime/resolveWorkspaceForTarget";
 
@@ -198,7 +202,7 @@ function ensureWorkspaceFolder(args: {
 function mergeMissingFixtureFilesIntoSavedWorkspace(args: {
   saved: WorkspaceStateV2;
   language: WorkspaceLanguage;
-  fixtureFiles: Array<{ path: string; content: string }>;
+  fixtureFiles: NormalizedStarterFile[];
 }): WorkspaceStateV2 {
   if (args.fixtureFiles.length === 0) {
     return cloneWorkspace(args.saved);
@@ -223,7 +227,7 @@ function mergeMissingFixtureFilesIntoSavedWorkspace(args: {
       kind: "file",
       name,
       parentId,
-      content: file.content ?? "",
+      ...starterFileNodePayload(file),
       createdAt: 0,
       updatedAt: 0,
     });
@@ -299,96 +303,13 @@ function unwrapStarterFiles(raw: unknown): unknown {
 function normalizeStarterFiles(
     raw: unknown,
     fallbackEntryFile: string,
-): Array<{ path: string; content: string }> {
-  const files: Array<{ path: string; content: string }> = [];
-  const source = unwrapStarterFiles(raw);
-
-  if (Array.isArray(source)) {
-    source.forEach((file, index) => {
-      const fallback =
-          index === 0 ? fallbackEntryFile : `file-${String(index + 1)}.txt`;
-
-      files.push({
-        path: normalizePath(starterFilePath(file as StarterFile, fallback), fallback),
-        content: starterFileContent(file as StarterFile),
-      });
-    });
-
-    return files.filter((file) => file.path);
-  }
-
-  if (isRecord(source)) {
-    for (const [path, value] of Object.entries(source)) {
-      if (
-          [
-            "entryFile",
-            "entryFilePath",
-            "mainFile",
-            "mainFilePath",
-            "language",
-            "lang",
-          ].includes(path)
-      ) {
-        continue;
-      }
-
-      files.push({
-        path: normalizePath(path, fallbackEntryFile),
-        content:
-            typeof value === "string"
-                ? isUsableStarterCode(value)
-                    ? value
-                    : ""
-                : isRecord(value)
-                    ? starterFileContent(value as StarterFile)
-                    : "",
-      });
-    }
-  }
-
-  return files.filter((file) => file.path);
-}
-
-function getEntryFile(args: {
-  manifest: UnknownRecord;
-  language: WorkspaceLanguage;
-}) {
-  const { manifest, language } = args;
-  const workspace = isRecord(manifest.workspace) ? manifest.workspace : {};
-  const recipe = isRecord(manifest.recipe) ? manifest.recipe : {};
-
-  return normalizePath(
-      workspace.entryFile ??
-      manifest.entryFile ??
-      manifest.entryFilePath ??
-      manifest.mainFile ??
-      manifest.mainFilePath ??
-      recipe.entryFile ??
-      recipe.entryFilePath,
-      defaultMainFile(language),
-  );
-}
-
-function getInitialStdin(manifest: UnknownRecord) {
-  const workspace = isRecord(manifest.workspace) ? manifest.workspace : {};
-  const recipe = isRecord(manifest.recipe) ? manifest.recipe : {};
-  return (
-      workspace.initialStdin ??
-      manifest.initialStdin ??
-      manifest.stdin ??
-      recipe.initialStdin ??
-      recipe.stdin ??
-      ""
-  );
-}
-
-function hasUsableStarterFilesSource(value: unknown): boolean {
-  return hasUsableStarterFilesValue(unwrapStarterFiles(value));
+): NormalizedStarterFile[] {
+  return normalizeStarterFilesValue(raw, fallbackEntryFile);
 }
 
 function firstUsableStarterFilesSource(...values: Array<unknown>) {
   for (const value of values) {
-    if (hasUsableStarterFilesSource(value)) return value;
+    if (hasUsableStarterFilesValue(value)) return value;
   }
 
   return null;
@@ -461,24 +382,8 @@ export function getStarterFilesSource(manifest: UnknownRecord) {
 function mergeNormalizedStarterFiles(
     sources: Array<unknown>,
     fallbackEntryFile: string,
-): Array<{ path: string; content: string }> {
-  const byPath = new Map<string, { path: string; content: string }>();
-
-  for (const source of sources) {
-    const normalized = normalizeStarterFiles(source, fallbackEntryFile);
-
-    for (const file of normalized) {
-      const path = normalizePath(file.path, fallbackEntryFile);
-      if (!path || byPath.has(path)) continue;
-
-      byPath.set(path, {
-        path,
-        content: file.content ?? "",
-      });
-    }
-  }
-
-  return Array.from(byPath.values());
+): NormalizedStarterFile[] {
+  return mergeStarterFileSources(sources, fallbackEntryFile);
 }
 
 function collectEntryFileSources(args: {
@@ -523,7 +428,7 @@ function stableStarterNodeId(kind: "file" | "folder", path: string): NodeId {
 function buildWorkspaceFromStarterFiles(args: {
   language: WorkspaceLanguage;
   entryFile: string;
-  starterFiles: Array<{ path: string; content: string }>;
+  starterFiles: NormalizedStarterFile[];
   stdin: string;
 }): WorkspaceStateV2 {
   const now = 0;
@@ -581,7 +486,7 @@ function buildWorkspaceFromStarterFiles(args: {
       kind: "file",
       name,
       parentId,
-      content: file.content ?? "",
+      ...starterFileNodePayload(file),
       createdAt: now,
       updatedAt: now,
     };

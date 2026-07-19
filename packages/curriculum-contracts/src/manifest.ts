@@ -332,7 +332,14 @@ export type ManifestStarterFile = {
    */
   name?: string;
 
+  /** UTF-8 source content. Omit for binary files. */
   content?: string;
+  /** Binary bytes encoded losslessly for workspace transport. */
+  encoding?: "base64";
+  data?: string;
+  mimeType?: string;
+  sizeBytes?: number;
+  checksum?: string;
   language?: WorkspaceLanguage;
   isEntry?: boolean;
 
@@ -367,6 +374,11 @@ export type ManifestStarterFiles =
     | string
     | {
   content?: string;
+  encoding?: "base64";
+  data?: string;
+  mimeType?: string;
+  sizeBytes?: number;
+  checksum?: string;
   language?: WorkspaceLanguage;
   isEntry?: boolean;
   entry?: boolean;

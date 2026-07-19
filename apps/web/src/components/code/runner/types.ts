@@ -6,7 +6,7 @@ import type {
 } from "@/lib/practice/types";
 import { CodeRunnerRuntime } from "@/components/code/runner/runtime";
 import { InteractiveLanguage } from "@zoeskoul/code-contracts";
-import type { WorkspaceStateV2 } from "@/components/ide/types";
+import type { BinaryFileContent, WorkspaceStateV2 } from "@/components/ide/types";
 import type { SqlPaneOptions } from "@/components/code/runner/components/sql/results-pane";
 import type { ToolRunnerPanePolicy } from "@zoeskoul/curriculum-contracts";
 
@@ -97,6 +97,11 @@ export type CommonProps = {
     exerciseStateKey?: string;
     workspace?: WorkspaceStateV2 | null;
     activeWorkspaceFileId?: string;
+    /** Binary files bypass Monaco and use a capability-specific read-only preview. */
+    activeBinaryFile?: {
+        name: string;
+        binary: BinaryFileContent;
+    } | null;
     /**
      * Increments whenever the learner explicitly selects a workspace file.
      * The file id alone cannot represent a second click on the active file.

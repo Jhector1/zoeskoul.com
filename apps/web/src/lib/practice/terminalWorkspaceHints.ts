@@ -1,19 +1,12 @@
+import type { WorkspaceSyncEntry } from "@zoeskoul/code-contracts";
+
 export type TerminalWorkspaceEvidenceLike = {
     commands?: unknown;
     outputText?: unknown;
     cwd?: unknown;
 };
 
-export type TerminalWorkspaceEntry =
-    | {
-          kind?: "file";
-          path: string;
-          content: string;
-      }
-    | {
-          kind: "directory";
-          path: string;
-      };
+export type TerminalWorkspaceEntry = WorkspaceSyncEntry;
 
 type WorkspaceHintState = {
     hasFile(path: string): boolean;

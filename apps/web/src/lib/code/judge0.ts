@@ -1,11 +1,23 @@
+import crypto from "node:crypto";
 import type {
     RunPollResult,
     RunSubmitResult,
     WorkspaceSyncEntry,
 } from "./types";
 import { buildJudge0Headers } from "@zoeskoul/curriculum-runtime";
+import {
+    assertWorkspaceRelativePath,
+    normalizeWorkspaceBase64,
+    resolveWorkspaceFileCapability,
+    workspaceBase64DecodedByteLength,
+} from "@zoeskoul/code-contracts";
 const SNAPSHOT_RE =
     /\r?\n?__ZOE_WORKSPACE_SNAPSHOT_B64__([A-Za-z0-9+/=]+)__END_ZOE_WORKSPACE_SNAPSHOT_B64__\r?\n?/g;
+const MAX_SNAPSHOT_ENTRIES = 400;
+const MAX_SNAPSHOT_TEXT_FILE_BYTES = 256 * 1024;
+const MAX_SNAPSHOT_BINARY_FILE_BYTES = 5 * 1024 * 1024;
+const MAX_SNAPSHOT_TEXT_TOTAL_BYTES = 5 * 1024 * 1024;
+const MAX_SNAPSHOT_BINARY_TOTAL_BYTES = 8 * 1024 * 1024;
 
 function fromB64(s: unknown): string | null {
     if (s == null) return null;
@@ -28,38 +40,82 @@ function makeError(status: number, text: string, fallback: string) {
 }
 
 function normalizeSnapshotEntry(entry: any): WorkspaceSyncEntry | null {
-    const path = String(entry?.path ?? "")
-        .replace(/\\/g, "/")
-        .trim();
-
-    if (!path) return null;
-    if (path.startsWith("/") || path.includes("\0")) return null;
-
-    const parts = path.split("/");
-
-    if (
-        parts.some(
-            (part) =>
-                !part ||
-                part === "." ||
-                part === ".." ||
-                part.includes("\0"),
-        )
-    ) {
+    let path: string;
+    try {
+        path = assertWorkspaceRelativePath(entry?.path ?? "");
+    } catch {
         return null;
     }
 
     if (entry?.kind === "directory") {
         return {
             kind: "directory",
-            path: parts.join("/"),
+            path,
         };
+    }
+
+    const capability = resolveWorkspaceFileCapability(path);
+    if (!capability) return null;
+
+    if (entry?.encoding === "base64") {
+        if (capability.storage !== "binary") return null;
+
+        const data = normalizeWorkspaceBase64(entry?.data);
+        const decodedSize = workspaceBase64DecodedByteLength(entry?.data);
+        const sizeBytes = Number(entry?.sizeBytes);
+        if (
+            data == null ||
+            decodedSize == null ||
+            !Number.isInteger(sizeBytes) ||
+            sizeBytes < 0 ||
+            sizeBytes !== decodedSize ||
+            sizeBytes > MAX_SNAPSHOT_BINARY_FILE_BYTES
+        ) {
+            return null;
+        }
+
+        const bytes = Buffer.from(data, "base64");
+        if (
+            bytes.byteLength !== sizeBytes ||
+            bytes.toString("base64") !== data
+        ) {
+            return null;
+        }
+
+        const checksum =
+            typeof entry?.checksum === "string" && entry.checksum.trim()
+                ? entry.checksum.trim().toLowerCase()
+                : undefined;
+        if (checksum && !/^sha256:[a-f0-9]{64}$/.test(checksum)) return null;
+
+        const actualChecksum = `sha256:${crypto
+            .createHash("sha256")
+            .update(bytes)
+            .digest("hex")}`;
+        if (checksum && checksum !== actualChecksum) return null;
+
+        return {
+            kind: "file",
+            path,
+            encoding: "base64",
+            data,
+            mimeType: capability.mimeType,
+            sizeBytes,
+            checksum: checksum ?? actualChecksum,
+        };
+    }
+
+    if (capability.storage !== "text") return null;
+
+    const content = String(entry?.content ?? "");
+    if (Buffer.byteLength(content, "utf8") > MAX_SNAPSHOT_TEXT_FILE_BYTES) {
+        return null;
     }
 
     return {
         kind: "file",
-        path: parts.join("/"),
-        content: String(entry?.content ?? ""),
+        path,
+        content,
     };
 }
 
@@ -94,9 +150,32 @@ function parseWorkspaceSnapshot(stdout: string | null | undefined): {
             return { stdout: cleaned };
         }
 
-        const workspaceFiles = parsed
-            .map(normalizeSnapshotEntry)
-            .filter((entry): entry is WorkspaceSyncEntry => Boolean(entry));
+        if (parsed.length > MAX_SNAPSHOT_ENTRIES) {
+            return { stdout: cleaned };
+        }
+
+        const workspaceFiles: WorkspaceSyncEntry[] = [];
+        let textBytes = 0;
+        let binaryBytes = 0;
+
+        for (const rawEntry of parsed) {
+            const entry = normalizeSnapshotEntry(rawEntry);
+            if (!entry) continue;
+
+            if (entry.kind !== "directory" && entry.encoding === "base64") {
+                binaryBytes += entry.sizeBytes;
+                if (binaryBytes > MAX_SNAPSHOT_BINARY_TOTAL_BYTES) {
+                    return { stdout: cleaned };
+                }
+            } else if (entry.kind !== "directory") {
+                textBytes += Buffer.byteLength(entry.content, "utf8");
+                if (textBytes > MAX_SNAPSHOT_TEXT_TOTAL_BYTES) {
+                    return { stdout: cleaned };
+                }
+            }
+
+            workspaceFiles.push(entry);
+        }
 
         return {
             stdout: cleaned,

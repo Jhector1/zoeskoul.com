@@ -56,7 +56,7 @@
         "difficulty": "easy",
         "n": 4,
         "min": 4,
-        "max": 6,
+        "max": 4,
         "selectionMode": "random",
         "allowReveal": true,
         "preferKind": null,
@@ -134,38 +134,6 @@
       }
     },
     {
-      "id": "dr-1",
-      "kind": "drag_reorder",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.why-version-control-matters.practice.dr-1",
-      "tokenIds": [
-        "t1",
-        "t2",
-        "t3"
-      ],
-      "expected": {
-        "kind": "drag_reorder",
-        "tokenIds": [
-          "t1",
-          "t2",
-          "t3"
-        ]
-      }
-    },
-    {
-      "id": "fbc-1",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.why-version-control-matters.practice.fbc-1",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "git init"
-      }
-    },
-    {
       "id": "fbc-2",
       "kind": "fill_blank_choice",
       "purpose": "quiz",
@@ -174,8 +142,15 @@
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "git status"
+        "value": "locally"
       }
     }
-  ]
+  ],
+  "topicMeta": {
+    "learningGoals": [
+      "Explain why named snapshots are safer than duplicate “final” folders",
+      "Distinguish local Git from hosted collaboration services such as GitHub",
+      "Recognize a focused checkpoint as a meaningful project state"
+    ]
+  }
 }

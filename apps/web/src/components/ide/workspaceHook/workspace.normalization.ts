@@ -37,9 +37,10 @@ export function buildSingleFileWorkspace(
   const file: FileNode = {
     id: seedMain.id,
     kind: "file",
-    name: seedMain.name,
+    name: sourceFile?.binary ? sourceFile.name : seedMain.name,
     parentId: null,
-    content: sourceFile?.content ?? seedMain.content ?? "",
+    content: sourceFile?.binary ? "" : sourceFile?.content ?? seedMain.content ?? "",
+    ...(sourceFile?.binary ? { binary: sourceFile.binary } : {}),
     createdAt: seedMain.createdAt ?? Date.now(),
     updatedAt: Date.now(),
   };

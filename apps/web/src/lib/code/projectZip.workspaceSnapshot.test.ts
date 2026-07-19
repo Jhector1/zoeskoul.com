@@ -39,7 +39,8 @@ describe("Judge0 project zip workspace capture", () => {
 
         expect(capture).toContain("__ZOE_WORKSPACE_SNAPSHOT_B64__");
         expect(capture).toContain("__END_ZOE_WORKSPACE_SNAPSHOT_B64__");
-        expect(capture).toContain("MAX_FILE_BYTES");
+        expect(capture).toContain("MAX_TEXT_FILE_BYTES");
+        expect(capture).toContain("MAX_BINARY_FILE_BYTES");
     });
 
     it("adds the capture script for JavaScript project runs", async () => {
@@ -75,6 +76,61 @@ describe("Judge0 project zip workspace capture", () => {
         expect(run).toContain("trap");
         expect(run).toContain("__zoe_capture_workspace");
         expect(run).toContain('bash "main.sh"');
+    });
+
+
+
+    it("preserves binary project bytes and verifies checksums", async () => {
+        const data = Buffer.from([0, 1, 2, 3]);
+        const encoded = await zipProject("javascript", "main.js", [
+            {
+                path: "main.js",
+                content: "console.log('ok');\n",
+            },
+            {
+                path: "assets/pixel.png",
+                encoding: "base64",
+                data: data.toString("base64"),
+                mimeType: "text/plain",
+                sizeBytes: data.byteLength,
+                checksum:
+                    "sha256:054edec1d0211f624fed0cbca9d4f9400b0e491c43742af2c5b0abebf0c990d8",
+            },
+        ]);
+
+        const zip = await JSZip.loadAsync(Buffer.from(encoded, "base64"));
+        await expect(zip.file("assets/pixel.png")?.async("nodebuffer")).resolves.toEqual(
+            data,
+        );
+
+        await expect(
+            zipProject("javascript", "main.js", [
+                { path: "main.js", content: "console.log('ok');\n" },
+                {
+                    path: "assets/pixel.png",
+                    encoding: "base64",
+                    data: data.toString("base64"),
+                    mimeType: "image/png",
+                    sizeBytes: data.byteLength,
+                    checksum: `sha256:${"0".repeat(64)}`,
+                },
+            ]),
+        ).rejects.toThrow(/checksum mismatch/i);
+    });
+
+    it("requires a unique text entry file", async () => {
+        await expect(
+            zipProject("javascript", "main.js", [
+                { path: "other.js", content: "console.log('other');\n" },
+            ]),
+        ).rejects.toThrow(/entry file is missing/i);
+
+        await expect(
+            zipProject("javascript", "main.js", [
+                { path: "main.js", content: "console.log('first');\n" },
+                { path: "main.js", content: "console.log('second');\n" },
+            ]),
+        ).rejects.toThrow(/duplicate project file path/i);
     });
 
     it("rejects unsafe project paths", async () => {

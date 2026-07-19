@@ -4,7 +4,7 @@
   "moduleSlug": "git-foundations-module-3-manage-tracked-files",
   "sectionSlug": "git-foundations-git-foundations-section-3-safe-file-management",
   "prefix": "git_foundations_module_3",
-  "minutes": 24,
+  "minutes": 20,
   "runtimeDefaults": {
     "kind": "code",
     "language": "bash",
@@ -92,25 +92,6 @@
       }
     },
     {
-      "id": "sketch3",
-      "kind": "sketch",
-      "titleKey": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.restore-without-rewriting-history.cards.sketch3.title",
-      "sketchId": "restore-sketch-3",
-      "height": 420,
-      "tryIt": {
-        "id": "try-restore-without-rewriting-history-sketch3",
-        "titleKey": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.restore-without-rewriting-history.tryIt.try_restore_without_rewriting_history_sketch3.title",
-        "promptKey": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.restore-without-rewriting-history.tryIt.try_restore_without_rewriting_history_sketch3.prompt",
-        "exerciseKey": "try-restore-without-rewriting-history-sketch3",
-        "difficulty": "easy",
-        "preferKind": "code_input",
-        "seedPolicy": "global",
-        "required": true,
-        "allowReveal": true,
-        "maxAttempts": null
-      }
-    },
-    {
       "id": "quiz",
       "kind": "quiz",
       "titleKey": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.restore-without-rewriting-history.cards.quiz.title",
@@ -118,7 +99,7 @@
         "difficulty": "easy",
         "n": 4,
         "min": 4,
-        "max": 6,
+        "max": 4,
         "selectionMode": "random",
         "allowReveal": true,
         "preferKind": null,
@@ -144,12 +125,6 @@
       "archetype": "paragraph",
       "titleKey": "sketches.git-foundations.git-foundations-module-3-manage-tracked-files.restore-without-rewriting-history.restore-sketch-2.title",
       "bodyKey": "sketches.git-foundations.git-foundations-module-3-manage-tracked-files.restore-without-rewriting-history.restore-sketch-2.bodyMarkdown"
-    },
-    {
-      "id": "restore-sketch-3",
-      "archetype": "paragraph",
-      "titleKey": "sketches.git-foundations.git-foundations-module-3-manage-tracked-files.restore-without-rewriting-history.restore-sketch-3.title",
-      "bodyKey": "sketches.git-foundations.git-foundations-module-3-manage-tracked-files.restore-without-rewriting-history.restore-sketch-3.bodyMarkdown"
     }
   ],
   "exercises": [
@@ -226,30 +201,6 @@
       }
     },
     {
-      "id": "fill-blank-1",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.restore-without-rewriting-history.practice.fill-blank-1",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "staged"
-      }
-    },
-    {
-      "id": "fill-blank-2",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.restore-without-rewriting-history.practice.fill-blank-2",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "restore"
-      }
-    },
-    {
       "id": "try-restore-without-rewriting-history-sketch0",
       "kind": "code_input",
       "purpose": "project",
@@ -273,7 +224,7 @@
             "message": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.restore-without-rewriting-history.tryIt.try_restore_without_rewriting_history_sketch0.terminalExpectations.requiredCommands.0.message"
           },
           {
-            "pattern": "^git\\s+status\\s+\\-\\-short$",
+            "pattern": "^git\\s+status\\s+(?:\\-\\-short|\\-s)$",
             "message": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.restore-without-rewriting-history.tryIt.try_restore_without_rewriting_history_sketch0.terminalExpectations.requiredCommands.1.message"
           }
         ],
@@ -405,11 +356,11 @@
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^git\\s+restore\\s+\\-\\-staged\\s+draft\\.txt$",
+            "pattern": "^git\\s+restore\\s+(?:\\-\\-staged|\\-\\-cached)\\s+draft\\.txt$",
             "message": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.restore-without-rewriting-history.tryIt.try_restore_without_rewriting_history_sketch1.terminalExpectations.requiredCommands.0.message"
           },
           {
-            "pattern": "^git\\s+status\\s+\\-\\-short$",
+            "pattern": "^git\\s+status\\s+(?:\\-\\-short|\\-s)$",
             "message": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.restore-without-rewriting-history.tryIt.try_restore_without_rewriting_history_sketch1.terminalExpectations.requiredCommands.1.message"
           }
         ],
@@ -541,7 +492,7 @@
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^git\\s+restore\\s+\\-\\-staged\\s+summary\\.txt$",
+            "pattern": "^git\\s+restore\\s+(?:\\-\\-staged|\\-\\-cached)\\s+summary\\.txt$",
             "message": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.restore-without-rewriting-history.tryIt.try_restore_without_rewriting_history_sketch2.terminalExpectations.requiredCommands.0.message"
           },
           {
@@ -549,7 +500,7 @@
             "message": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.restore-without-rewriting-history.tryIt.try_restore_without_rewriting_history_sketch2.terminalExpectations.requiredCommands.1.message"
           },
           {
-            "pattern": "^git\\s+status\\s+\\-\\-short$",
+            "pattern": "^git\\s+status\\s+(?:\\-\\-short|\\-s)$",
             "message": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.restore-without-rewriting-history.tryIt.try_restore_without_rewriting_history_sketch2.terminalExpectations.requiredCommands.2.message"
           }
         ],
@@ -660,142 +611,14 @@
           "language": "text"
         }
       ]
-    },
-    {
-      "id": "try-restore-without-rewriting-history-sketch3",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.restore-without-rewriting-history.tryIt.try_restore_without_rewriting_history_sketch3",
-      "language": "bash",
-      "starterCode": "mode=production\n",
-      "starterFiles": [
-        {
-          "path": "release-kit/config.txt",
-          "content": "mode=production\n",
-          "language": "text",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "terminalExpectations": {
-        "requiredCommands": [
-          {
-            "pattern": "^git\\s+log\\s+\\-1\\s+\\-\\-oneline$",
-            "message": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.restore-without-rewriting-history.tryIt.try_restore_without_rewriting_history_sketch3.terminalExpectations.requiredCommands.0.message"
-          },
-          {
-            "pattern": "^git\\s+status\\s+\\-\\-short$",
-            "message": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.restore-without-rewriting-history.tryIt.try_restore_without_rewriting_history_sketch3.terminalExpectations.requiredCommands.1.message"
-          }
-        ],
-        "forbiddenCommands": [
-          {
-            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
-            "message": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.restore-without-rewriting-history.tryIt.try_restore_without_rewriting_history_sketch3.terminalExpectations.forbiddenCommands.0.message"
-          }
-        ]
-      },
-      "hiddenShellCheck": {
-        "script": "set -eu\nrepo=release-kit\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" branch --show-current)\" = main ] || fail \"The repository is not on main.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = 1 ] || fail \"The repository has the wrong number of commits.\"\n[ -z \"$(git -C \"$repo\" status --porcelain)\" ] || fail \"The working tree is not clean.\"\nexpected=$(printf \"%s\\n\" config.txt | sort)\nactual=$(git -C \"$repo\" ls-files | sort)\n[ \"$actual\" = \"$expected\" ] || fail \"The tracked file set is not correct.\"\n[ \"$(git -C \"$repo\" log -1 --format=%s)\" = 'Add release configuration' ] || fail \"The latest commit message is not correct.\"",
-        "timeoutMs": 15000
-      },
-      "workspace": {
-        "language": "bash",
-        "entryFilePath": "release-kit/config.txt",
-        "starterCode": "mode=production\n",
-        "starterFiles": [
-          {
-            "path": "release-kit/config.txt",
-            "content": "mode=production\n",
-            "language": "text",
-            "isEntry": true,
-            "entry": true
-          }
-        ],
-        "fixtureFiles": [
-          {
-            "path": ".zoeskoul/setup.sh",
-            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-kit\nmkdir -p release-kit\ngit -C release-kit init -q -b main\ngit -C release-kit config --local user.name \"ZoeSkoul Learner\"\ngit -C release-kit config --local user.email \"learner@zoeskoul.local\"\ncd release-kit\nprintf %s 'mode=production\n' > config.txt\ncd ..\ngit -C release-kit add -A\ngit -C release-kit commit -q -m 'Add release configuration'\n",
-            "language": "bash",
-            "readOnly": true
-          },
-          {
-            "path": "release-kit/config.txt",
-            "content": "mode=production\n",
-            "language": "text"
-          }
-        ]
-      },
-      "showExpectedExample": false,
-      "recipe": {
-        "type": "shell_task",
-        "mode": "terminal_workspace",
-        "instructions": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.restore-without-rewriting-history.tryIt.try_restore_without_rewriting_history_sketch3.instructions"
-      },
-      "ideConfig": {
-        "preset": "runner",
-        "runnerBackend": "pty",
-        "layoutMode": "default",
-        "terminalSessionScope": "exercise",
-        "terminalCwd": "/workspace/release-kit",
-        "fileActions": {
-          "enabled": true,
-          "createFile": true,
-          "createFolder": true,
-          "rename": true,
-          "delete": true,
-          "dragDrop": false
-        },
-        "requires": {
-          "files": true,
-          "multiFile": true,
-          "terminal": true
-        },
-        "terminalBootstrap": {
-          "gitSafeDirectories": [
-            "/workspace/*"
-          ]
-        }
-      },
-      "serviceOverrides": {
-        "preset": "runner",
-        "runnerBackend": "pty",
-        "layoutMode": "default",
-        "terminalSessionScope": "exercise",
-        "terminalCwd": "/workspace/release-kit",
-        "fileActions": {
-          "enabled": true,
-          "createFile": true,
-          "createFolder": true,
-          "rename": true,
-          "delete": true,
-          "dragDrop": false
-        },
-        "requires": {
-          "files": true,
-          "multiFile": true,
-          "terminal": true
-        },
-        "terminalBootstrap": {
-          "gitSafeDirectories": [
-            "/workspace/*"
-          ]
-        }
-      },
-      "fixtureFiles": [
-        {
-          "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-kit\nmkdir -p release-kit\ngit -C release-kit init -q -b main\ngit -C release-kit config --local user.name \"ZoeSkoul Learner\"\ngit -C release-kit config --local user.email \"learner@zoeskoul.local\"\ncd release-kit\nprintf %s 'mode=production\n' > config.txt\ncd ..\ngit -C release-kit add -A\ngit -C release-kit commit -q -m 'Add release configuration'\n",
-          "language": "bash",
-          "readOnly": true
-        },
-        {
-          "path": "release-kit/config.txt",
-          "content": "mode=production\n",
-          "language": "text"
-        }
-      ]
     }
-  ]
+  ],
+  "topicMeta": {
+    "learningGoals": [
+      "Restore an unwanted unstaged working-tree edit",
+      "Unstage a path without discarding its working copy",
+      "Correct a staged accidental rewrite in the safe layer order",
+      "Preserve existing commits while correcting current state"
+    ]
+  }
 }
