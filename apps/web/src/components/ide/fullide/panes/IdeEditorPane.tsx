@@ -2,6 +2,7 @@
 
 import React from "react";
 import { useTranslations } from "next-intl";
+import { deriveManifestTerminalBootstrap } from "@zoeskoul/curriculum-contracts";
 import CodeRunner from "@/components/code/CodeRunner";
 import { learnerUiFlags } from "@/lib/config/learnerUiFlags";
 import {
@@ -56,6 +57,7 @@ type Props = {
     sqlDatasetId?: string;
     sqlResultShape?: "table";
     sqlPaneOptions?: import("@/components/code/runner/components/sql/results-pane").SqlPaneOptions;
+    runnerPaneOptions?: import("@zoeskoul/curriculum-contracts").ToolRunnerPanePolicy;
     defaultSurface?: import("@zoeskoul/curriculum-contracts").ToolSurface;
     sqlSchemaSql?: string;
     sqlSeedSql?: string;
@@ -118,6 +120,7 @@ export default function IdeEditorPane({
                                           sqlDatasetId,
                                           sqlResultShape,
                                           sqlPaneOptions,
+                                          runnerPaneOptions,
                                           defaultSurface,
                                           sqlSchemaSql,
                                           sqlSeedSql,
@@ -154,6 +157,19 @@ export default function IdeEditorPane({
     const workspaceEntries = React.useMemo(() => {
         return exportWorkspaceEntries(nodes);
     }, [nodes]);
+    const terminalBootstrap = React.useMemo(
+        () =>
+            deriveManifestTerminalBootstrap({
+                bootstrap: services.runner.terminalBootstrap,
+                terminalCwd: services.runner.terminalCwd ?? "/workspace",
+                files: workspaceEntries,
+            }),
+        [
+            services.runner.terminalBootstrap,
+            services.runner.terminalCwd,
+            workspaceEntries,
+        ],
+    );
 
     const editorLanguage = React.useMemo(
         () => resolveEditorLanguage(language, activeFile?.name ?? null),
@@ -180,7 +196,7 @@ export default function IdeEditorPane({
                 terminalSessionScope: services.runner.terminalSessionScope,
                 terminalCwd: services.runner.terminalCwd,
                 terminalBootstrapKey: workspaceTerminalBootstrapKey(
-                    services.runner.terminalBootstrap,
+                    terminalBootstrap,
                 ),
             }),
         [
@@ -189,7 +205,7 @@ export default function IdeEditorPane({
             projectId,
             services.runner.terminalSessionScope,
             services.runner.terminalCwd,
-            services.runner.terminalBootstrap,
+            terminalBootstrap,
         ],
     );
 
@@ -240,6 +256,7 @@ export default function IdeEditorPane({
                             sqlDatasetId={sqlDatasetId}
                             sqlResultShape={sqlResultShape}
                             sqlPaneOptions={sqlPaneOptions}
+                            runnerPaneOptions={runnerPaneOptions}
                             defaultSurface={defaultSurface}
                             sqlSchemaSql={schemaSql}
                             sqlSeedSql={seedSql}
@@ -296,7 +313,7 @@ export default function IdeEditorPane({
                                         workspaceKey: terminalWorkspaceKey,
                                         terminalSessionScope:
                                             services.runner.terminalSessionScope,
-                                        bootstrap: services.runner.terminalBootstrap,
+                                        bootstrap: terminalBootstrap,
                                         initialFiles: workspaceEntries,
                                         getWorkspaceFiles: () => workspaceEntries,
                                         onTerminalSnapshotFiles: onApplyTerminalSnapshotFiles,

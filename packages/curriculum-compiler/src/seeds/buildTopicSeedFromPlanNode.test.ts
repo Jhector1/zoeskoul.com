@@ -801,4 +801,31 @@ describe("buildTopicSeedFromPlanNode", () => {
         });
     });
 
+    it("inherits profile runner defaults before authored course and topic overrides", () => {
+        const seed = buildTopicSeedFromPlanNode(
+            makeBaseArgs({
+                blueprint: {
+                    subjectSlug: "git",
+                    courseSlug: "git-foundations",
+                    profileId: "git",
+                    tools: {
+                        runnerPane: { compactDefaultTab: "output" },
+                    },
+                },
+                topic: {
+                    tools: { defaultSurface: "editor" },
+                },
+            }),
+        );
+
+        expect(seed.tools).toEqual({
+            defaultSurface: "editor",
+            compactDefaultSurface: "results",
+            runnerPane: {
+                defaultTab: "terminal",
+                compactDefaultTab: "output",
+            },
+        });
+    });
+
 });

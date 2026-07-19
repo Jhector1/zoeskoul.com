@@ -11,6 +11,7 @@ import { resolveStablePracticeExerciseId } from "@/lib/practice/exerciseIdentity
 import StandaloneReviewExerciseCard from "./StandaloneReviewExerciseCard";
 import {
   isStandaloneAnswerResolved,
+  resolveStandaloneAutoAdvanceEnabled,
   supportsStandaloneAutoAdvance,
 } from "./standaloneAutoAdvance";
 
@@ -46,6 +47,10 @@ export default function StandaloneReviewExerciseFlow({
   const supportsAutoAdvance = supportsStandaloneAutoAdvance(
     props.experienceMode,
   );
+  const autoAdvanceEnabled = resolveStandaloneAutoAdvanceEnabled({
+    mode: props.experienceMode,
+    preferenceEnabled: autoAdvance,
+  });
   const actionKey = supportsAutoAdvance
     ? submittedExerciseRef.current
     : null;
@@ -63,7 +68,7 @@ export default function StandaloneReviewExerciseFlow({
   useQuizAutoAdvanceController({
     actionKey,
     resolved,
-    enabled: autoAdvance,
+    enabled: autoAdvanceEnabled,
     onAdvance: async (resolvedExerciseId) => {
       // The timer can outlive a fast manual navigation/reset. Re-check the
       // current exercise before advancing so stale success cannot skip ahead.

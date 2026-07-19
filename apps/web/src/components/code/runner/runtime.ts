@@ -41,7 +41,7 @@ export function workspaceTerminalBootstrapKey(
         return undefined;
     }
 
-    return `workspace-bootstrap-v3:${JSON.stringify({
+    return `workspace-bootstrap-v4:${JSON.stringify({
         gitSafeDirectories,
         setupScriptPath,
         workspaceStateKey,

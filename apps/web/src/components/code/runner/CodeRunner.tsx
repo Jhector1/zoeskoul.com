@@ -38,7 +38,11 @@ import { WorkspaceStateV2 } from "@/components/ide/types";
 import { cx } from "@/components/tools/utils/cx";
 import HeaderBar from "@/components/code/runner/components/HeaderBar";
 import type { SqlPaneOptions } from "@/components/code/runner/components/sql/results-pane";
-import type { ToolSurface } from "@zoeskoul/curriculum-contracts";
+import type {
+    RunnerPaneTab,
+    ToolRunnerPanePolicy,
+    ToolSurface,
+} from "@zoeskoul/curriculum-contracts";
 import { resolveEditableWorkspaceFileId } from "@/components/code/runner/workspaceEditing";
 import { learnerUiFlags } from "@/lib/config/learnerUiFlags";
 import type {
@@ -47,26 +51,49 @@ import type {
 } from "@/components/code/runner/runtime";
 
 type MobilePane = "editor" | "output";
-type OutputTab = "output" | "terminal";
+type OutputTab = RunnerPaneTab;
 
 export function resolveSqlMobilePaneDefault(args: {
     language: WorkspaceLanguage;
     defaultSurface?: ToolSurface | null;
     sqlPaneOptions?: SqlPaneOptions | null;
+    runnerPaneOptions?: ToolRunnerPanePolicy | null;
 }): MobilePane {
     if (args.defaultSurface === "results") return "output";
     if (args.defaultSurface === "editor") return "editor";
 
     // Backward compatibility for older bundles that authored only an inner
-    // SQL tab. New compiler output always emits defaultSurface explicitly.
+    // tab. New compiler output should emit defaultSurface explicitly.
+    const hasAuthoredRunnerTab = Boolean(
+        args.runnerPaneOptions?.defaultTab ??
+        args.runnerPaneOptions?.compactDefaultTab,
+    );
     const hasLegacyAuthoredSqlTab = Boolean(
         args.sqlPaneOptions?.defaultTab ??
         args.sqlPaneOptions?.compactDefaultTab,
     );
 
-    return args.language === "sql" && hasLegacyAuthoredSqlTab
+    return hasAuthoredRunnerTab ||
+        (args.language === "sql" && hasLegacyAuthoredSqlTab)
         ? "output"
         : "editor";
+}
+
+export function resolveRunnerPaneDefaultTab(args: {
+    policy?: ToolRunnerPanePolicy | null;
+    compact: boolean;
+    terminalAvailable: boolean;
+    terminalOnlyMode: boolean;
+}): OutputTab {
+    if (args.terminalOnlyMode) return "terminal";
+
+    const authored = args.compact
+        ? args.policy?.compactDefaultTab ?? args.policy?.defaultTab
+        : args.policy?.defaultTab;
+
+    return authored === "terminal" && args.terminalAvailable
+        ? "terminal"
+        : "output";
 }
 
 type IdleOutputCollapseArgs = {
@@ -132,6 +159,7 @@ type CodeRunnerWithStdinProps = CodeRunnerProps & {
         }
     >;
     sqlPaneOptions?: SqlPaneOptions;
+    runnerPaneOptions?: ToolRunnerPanePolicy;
     defaultSurface?: ToolSurface;
 };
 
@@ -432,6 +460,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         webPreviewEntries = [],
         sqlInitialTableSnapshots,
         sqlPaneOptions,
+        runnerPaneOptions,
         defaultSurface,
         stdinPlaceholder = t("stdinPlaceholder"),
         workspaceTerminal,
@@ -463,9 +492,11 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
             language: initialMobilePaneLanguage,
             defaultSurface,
             sqlPaneOptions,
+            runnerPaneOptions,
         }),
     );
     const appliedSqlMobilePaneDefaultKeyRef = useRef<string | null>(null);
+    const appliedRunnerPaneDefaultKeyRef = useRef<string | null>(null);
     const previousWorkspaceFileIdRef = useRef<string | null>(
         typeof props.activeWorkspaceFileId === "string"
             ? props.activeWorkspaceFileId
@@ -569,14 +600,20 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         lang !== "sql" &&
         !isWeb;
     const terminalOnlyMode = !showEditor && showTerminal && workspaceTerminalEnabled;
-    const [outputTab, setOutputTab] = useState<OutputTab>(
-        terminalOnlyMode ? "terminal" : "output",
+    const [outputTab, setOutputTab] = useState<OutputTab>(() =>
+        resolveRunnerPaneDefaultTab({
+            policy: runnerPaneOptions,
+            compact: false,
+            terminalAvailable: workspaceTerminalEnabled,
+            terminalOnlyMode,
+        }),
     );
 
     const sqlMobilePaneDefault = resolveSqlMobilePaneDefault({
         language: lang,
         defaultSurface,
         sqlPaneOptions,
+        runnerPaneOptions,
     });
     const sqlMobilePaneDefaultKey = [
         toolScopeKey ?? "",
@@ -586,6 +623,8 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         defaultSurface ?? "",
         sqlPaneOptions?.defaultTab ?? "",
         sqlPaneOptions?.compactDefaultTab ?? "",
+        runnerPaneOptions?.defaultTab ?? "",
+        runnerPaneOptions?.compactDefaultTab ?? "",
     ].join("::");
 
     useEffect(() => {
@@ -598,10 +637,43 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
 
         appliedSqlMobilePaneDefaultKeyRef.current = sqlMobilePaneDefaultKey;
         setMobilePane(sqlMobilePaneDefault);
-        if (sqlMobilePaneDefault === "output") {
-            setOutputTab("output");
-        }
     }, [sqlMobilePaneDefault, sqlMobilePaneDefaultKey]);
+
+    const runnerPaneDefaultTab = resolveRunnerPaneDefaultTab({
+        policy: runnerPaneOptions,
+        compact: isNarrowScreen,
+        terminalAvailable: workspaceTerminalEnabled,
+        terminalOnlyMode,
+    });
+    // Apply the authored inner-tab default once per lesson/exercise identity.
+    // Active-file changes are not a new curriculum scope and must not reset a
+    // learner's manual Output/Terminal choice.
+    const runnerPaneDefaultKey = [
+        toolScopeKey ?? "",
+        exerciseStateKey ?? "",
+        lang,
+        isNarrowScreen ? "compact" : "desktop",
+        runnerPaneOptions?.defaultTab ?? "",
+        runnerPaneOptions?.compactDefaultTab ?? "",
+        workspaceTerminalEnabled ? "terminal-enabled" : "terminal-disabled",
+        terminalOnlyMode ? "terminal-only" : "editor-terminal",
+    ].join("::");
+
+    useEffect(() => {
+        if (appliedRunnerPaneDefaultKeyRef.current === runnerPaneDefaultKey) {
+            return;
+        }
+
+        appliedRunnerPaneDefaultKeyRef.current = runnerPaneDefaultKey;
+        setOutputTab(runnerPaneDefaultTab);
+        if (isNarrowScreen && runnerPaneDefaultTab === "terminal") {
+            setMobilePane("output");
+        }
+    }, [
+        isNarrowScreen,
+        runnerPaneDefaultKey,
+        runnerPaneDefaultTab,
+    ]);
 
     const setLang = (l: WorkspaceLanguage) => {
         if (fixedLanguage) return;
@@ -1357,7 +1429,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                 setMobilePane("editor");
             }
 
-            setOutputTab(terminalOnlyMode ? "terminal" : "output");
+            setOutputTab(runnerPaneDefaultTab);
             terminalAutoOpenRequestedKeyRef.current = null;
             term.resetTerminal();
         },
@@ -1370,6 +1442,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
             isNarrowScreen,
             showEditor,
             showTerminal,
+            runnerPaneDefaultTab,
             terminalOnlyMode,
             term,
         ],
@@ -1722,7 +1795,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                         allowReset={allowReset}
                         onReset={() => {
                             setCode(DEFAULT_CODE[lang]);
-                            setOutputTab(terminalOnlyMode ? "terminal" : "output");
+                            setOutputTab(runnerPaneDefaultTab);
                             terminalAutoOpenRequestedKeyRef.current = null;
                             releaseTerminalAutoOpenClaim(terminalAutoOpenKey);
                             term.resetTerminal();

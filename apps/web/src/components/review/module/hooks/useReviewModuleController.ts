@@ -2577,6 +2577,7 @@ export function useReviewModuleController({
                 sqlSeedSql: rightRailSqlProps.sqlSeedSql,
                 sqlInitialTableSnapshots: rightRailSqlProps.sqlInitialTableSnapshots,
                 sqlPaneOptions: rightRailSqlProps.sqlPaneOptions,
+                runnerPaneOptions: rightRailSqlProps.runnerPaneOptions,
                 defaultSurface: rightRailSqlProps.defaultSurface,
             },
         },

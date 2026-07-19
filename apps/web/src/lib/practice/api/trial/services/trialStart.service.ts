@@ -318,6 +318,7 @@ export async function startOrResumeOnboardingTrial(ctx: TrialStartContext): Prom
       returnUrl,
       meta,
       targetCount: 3,
+      preferPurpose: "quiz",
     });
 
     return {
@@ -349,6 +350,7 @@ export async function startOrResumeOnboardingTrial(ctx: TrialStartContext): Prom
       returnUrl,
       meta,
       targetCount: 3,
+      preferPurpose: "quiz",
     });
 
     return {
@@ -374,6 +376,7 @@ export async function startOrResumeOnboardingTrial(ctx: TrialStartContext): Prom
       returnUrl,
       meta,
       targetCount: 3,
+      preferPurpose: "quiz",
     });
 
     return {

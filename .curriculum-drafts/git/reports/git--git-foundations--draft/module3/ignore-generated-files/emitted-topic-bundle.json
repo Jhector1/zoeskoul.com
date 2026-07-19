@@ -331,6 +331,10 @@
         "type": "shell_task",
         "mode": "terminal_workspace",
         "instructions": "@:topics.git.git-foundations-module-3-manage-tracked-files.ignore-generated-files.tryIt.try_ignore_generated_files_sketch0.instructions"
+      },
+      "tools": {
+        "defaultSurface": "editor",
+        "compactDefaultSurface": "editor"
       }
     },
     {

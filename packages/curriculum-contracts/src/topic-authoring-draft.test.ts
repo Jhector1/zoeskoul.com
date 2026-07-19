@@ -111,7 +111,13 @@ describe("TopicAuthoringDraft sketch presentation", () => {
                 cardTitle: "Give Every Column an Address",
                 title: "A qualified column names its table and column",
                 bodyMarkdown: "A qualified column identifies its source.",
-                tools: { defaultSurface: "editor" },
+                tools: {
+                    defaultSurface: "results",
+                    runnerPane: {
+                        defaultTab: "terminal",
+                        compactDefaultTab: "output",
+                    },
+                },
             },
         ];
 

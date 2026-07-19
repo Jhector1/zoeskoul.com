@@ -50,4 +50,31 @@ describe("practice purpose policy", () => {
       reason: "practice_modes_use_project_purpose",
     });
   });
+
+  it("forces onboarding trials back to quiz purpose even when stale client or session state says project", () => {
+    const decision = computePurposeDecision({
+      session: {
+        id: "trial-session",
+        mode: "onboarding_trial",
+        preferPurpose: "project",
+        meta: { kind: "onboarding_trial" },
+        section: {
+          module: {
+            practicePreset: { allowedPurposes: ["quiz", "project"] },
+          },
+        },
+      },
+      preferPurposeParam: "project",
+      purposePolicyParam: "strict",
+    });
+
+    expect(decision).toMatchObject({
+      ok: true,
+      effective: "quiz",
+      allowed: ["quiz"],
+      policy: "strict",
+      source: "session",
+      reason: "onboarding_trial_uses_quiz_purpose",
+    });
+  });
 });

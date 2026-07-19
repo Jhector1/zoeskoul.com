@@ -21,6 +21,7 @@ import {coercePurposeMode, coercePurposePolicy} from "@/lib/subjects/quizClient"
 import {PurposeMode, PurposePolicy} from "@/lib/subjects/types";
 import type { PracticeExperienceMode } from "@/lib/practice/experience/types";
 import { resolvePracticeResumePolicy } from "./assignmentResumePolicy";
+import type { SessionStatus } from "./sessionStatus";
 
 type PendingChange =
   | { kind: "topic"; value: TopicValue }
@@ -35,6 +36,7 @@ export function usePracticeController(args: {
   authoritativeSessionId?: boolean;
   expectedExperienceMode?: PracticeExperienceMode;
   clientStatePersistence?: "session" | "off";
+  initialSessionStatus?: SessionStatus | null;
 }) {
   const {
     subjectSlug,
@@ -44,6 +46,7 @@ export function usePracticeController(args: {
     authoritativeSessionId = false,
     expectedExperienceMode,
     clientStatePersistence = "session",
+    initialSessionStatus = null,
   } = args;
 
   const t = useTranslations("Practice");
@@ -73,7 +76,11 @@ export function usePracticeController(args: {
 
     effectiveTopicOptions,
     effectiveDifficultyOptions,
-  } = usePracticeRunMeta({ subjectSlug, moduleSlug });
+  } = usePracticeRunMeta({
+    subjectSlug,
+    moduleSlug,
+    expectedExperienceMode,
+  });
 
   // filters / phase / misc UI state
   const [topic, setTopic] = useState<TopicValue>("all");
@@ -237,6 +244,7 @@ export function usePracticeController(args: {
     resumeHistoryOnBoot: resumePolicy.resumeHistoryOnBoot,
     authoritativeSessionId,
     initialSessionId: initialSessionId ?? null,
+    initialSessionStatus,
   } as any);
 
   // lock selected values when run says so

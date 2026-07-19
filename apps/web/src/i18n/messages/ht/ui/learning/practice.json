@@ -202,6 +202,13 @@
         "summarySubtitle": "{completed} sou {total} kesyon fini.",
         "summaryNote": "{correct} kòrèk • {revealed} repons revele."
       },
+      "onboardingTrial": {
+        "returnLabel": "Kite esè a",
+        "returnTitle": "Kite esè onboarding lan",
+        "returnLoading": "Ap soti…",
+        "completeTitle": "Esè fini",
+        "completeSubtitle": "{correct} repons kòrèk sou {answered} egzèsis ki fini."
+      },
       "scopeTitle": "Zòn pratik",
       "subscriber": "Abòne",
       "locked": "Bloke",

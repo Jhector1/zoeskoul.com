@@ -10,13 +10,16 @@ import { buildSubmitAnswerFromItem } from "@/lib/practice/uiHelpers";
 import SummaryView from "./shell/SummaryView";
 import PracticeView from "./shell/PracticeView";
 import PracticeReviewWorkspace from "./review/PracticeReviewWorkspace";
-import AssignmentReviewWorkspace from "./review/AssignmentReviewWorkspace";
+import EmbeddedPracticeReviewWorkspace from "./review/EmbeddedPracticeReviewWorkspace";
 import { useConceptExplain } from "./hooks/useConceptExplain";
 import { isExcusedPracticeItem } from "@/lib/flow/excuse";
 import { isPracticeItemFinalized } from "@/lib/practice/runtime";
 import type { PracticeExperienceMode, PracticeRunViewer } from "@/lib/practice/experience/types";
 import type { PracticeHelpPolicy } from "@/lib/practice/help/steps";
 import { resolvePracticeExerciseSurface } from "@/lib/practice/experience/surface";
+import {
+  resolveEmbeddedPracticeWorkspacePresentation,
+} from "@/lib/practice/experience/embeddedWorkspace";
 
 export type TFn = (key: string, values?: Record<string, any>) => string;
 
@@ -165,8 +168,17 @@ export default function PracticeShell(props: PracticeShellProps) {
     concept,
   };
 
-  if (props.experienceMode === "assignment") {
-    return <AssignmentReviewWorkspace {...props} />;
+  const embeddedPresentation = resolveEmbeddedPracticeWorkspacePresentation(
+    props.experienceMode,
+  );
+
+  if (embeddedPresentation) {
+    return (
+      <EmbeddedPracticeReviewWorkspace
+        props={props}
+        presentation={embeddedPresentation}
+      />
+    );
   }
 
   if (surface === "tools") {

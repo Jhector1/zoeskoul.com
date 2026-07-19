@@ -355,6 +355,36 @@ describe("buildSubjectManifestFromPlan", () => {
         });
     });
 
+
+    it("uses profile runner defaults as the lowest-priority Tools scope", () => {
+        const manifest = buildSubjectManifestFromPlan(
+            makeArgs({
+                blueprint: {
+                    subjectSlug: "git-foundations",
+                    catalogSlug: "git",
+                    profileId: "git",
+                    tools: {
+                        defaultSurface: "editor",
+                        runnerPane: { compactDefaultTab: "output" },
+                    },
+                },
+            }),
+        );
+
+        expect(manifest.subject.tools).toEqual({
+            defaultSurface: "editor",
+            compactDefaultSurface: "results",
+            runnerPane: {
+                defaultTab: "terminal",
+                compactDefaultTab: "output",
+            },
+        });
+        expect(manifest.modules[0]?.tools).toEqual(manifest.subject.tools);
+        expect(manifest.modules[0]?.sections[0]?.tools).toEqual(
+            manifest.subject.tools,
+        );
+    });
+
     it("lets explicit authored IDE policy override the profile presentation", () => {
         const manifest = buildSubjectManifestFromPlan(
             makeArgs({

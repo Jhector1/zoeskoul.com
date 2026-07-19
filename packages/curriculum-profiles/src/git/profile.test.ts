@@ -10,6 +10,14 @@ describe("gitProfile", () => {
         );
         expect(gitProfile.defaultLanguage).toBe("bash");
         expect(gitProfile.defaultEntryFileName).toBe("README.md");
+        expect(gitProfile.defaultTools).toEqual({
+            defaultSurface: "results",
+            compactDefaultSurface: "results",
+            runnerPane: {
+                defaultTab: "terminal",
+                compactDefaultTab: "terminal",
+            },
+        });
         expect(gitProfile.allowedRecipeTypes).toEqual(["shell_task"]);
         expect(gitProfile.shape.profileId).toBe("git");
         expect(bashProfile.shape.profileId).toBe("bash");

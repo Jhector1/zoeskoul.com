@@ -63,6 +63,7 @@ type FullIDEInnerProps = {
     sqlDatasetId?: FullIDEProps["sqlDatasetId"];
     sqlResultShape?: FullIDEProps["sqlResultShape"];
     sqlPaneOptions?: FullIDEProps["sqlPaneOptions"];
+    runnerPaneOptions?: FullIDEProps["runnerPaneOptions"];
     defaultSurface?: FullIDEProps["defaultSurface"];
     sqlSchemaSql?: FullIDEProps["sqlSchemaSql"];
     sqlSeedSql?: FullIDEProps["sqlSeedSql"];
@@ -164,6 +165,7 @@ function FullIDEInner({
                           sqlDatasetId,
                           sqlResultShape,
                           sqlPaneOptions,
+                          runnerPaneOptions,
                           defaultSurface,
                           sqlSchemaSql,
                           sqlSeedSql,
@@ -439,6 +441,10 @@ function FullIDEInner({
                 dirtyUiPaths: meta.dirtyUiPaths,
             });
 
+            if (nextWorkspace === prior) {
+                return;
+            }
+
             actions.replaceWorkspace(nextWorkspace);
 
             /**
@@ -569,6 +575,7 @@ function FullIDEInner({
             sqlDatasetId={sqlDatasetId}
             sqlResultShape={sqlResultShape}
             sqlPaneOptions={sqlPaneOptions}
+            runnerPaneOptions={runnerPaneOptions}
             defaultSurface={defaultSurface}
             sqlSchemaSql={sqlSchemaSql}
             sqlSeedSql={sqlSeedSql}
@@ -820,6 +827,7 @@ export default function FullIDE(props: FullIDEProps) {
         sqlDatasetId,
         sqlResultShape,
         sqlPaneOptions,
+        runnerPaneOptions,
         defaultSurface,
         sqlSchemaSql,
         sqlSeedSql,
@@ -1109,6 +1117,7 @@ export default function FullIDE(props: FullIDEProps) {
                 sqlDatasetId={sqlDatasetId}
                 sqlResultShape={sqlResultShape}
                 sqlPaneOptions={sqlPaneOptions}
+                runnerPaneOptions={runnerPaneOptions}
                 defaultSurface={defaultSurface}
                 sqlSchemaSql={sqlSchemaSql}
                 sqlSeedSql={sqlSeedSql}

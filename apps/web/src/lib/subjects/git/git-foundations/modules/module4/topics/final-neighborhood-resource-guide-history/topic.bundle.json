@@ -915,7 +915,11 @@
           "content": "Welcome to the neighborhood guide.\n",
           "language": "markdown"
         }
-      ]
+      ],
+      "tools": {
+        "defaultSurface": "editor",
+        "compactDefaultSurface": "editor"
+      }
     },
     {
       "id": "try-final-neighborhood-resource-guide-history-sketch4",

@@ -35,6 +35,100 @@ export type ManifestTerminalBootstrap = {
   workspaceStateKey?: string;
 };
 
+
+export const DEFAULT_TERMINAL_SETUP_SCRIPT_PATH = ".zoeskoul/setup.sh";
+
+export type ManifestTerminalBootstrapFile = {
+  kind?: "file" | "directory";
+  path?: string;
+  name?: string;
+  content?: unknown;
+  language?: unknown;
+  readOnly?: unknown;
+};
+
+function normalizeTerminalBootstrapFilePath(file: ManifestTerminalBootstrapFile) {
+  return String(file.path ?? file.name ?? "")
+    .replace(/\\/g, "/")
+    .replace(/^\.\//, "")
+    .replace(/^\/+/, "")
+    .replace(/\/{2,}/g, "/")
+    .replace(/\/$/, "")
+    .trim();
+}
+
+function stableTerminalBootstrapHash(value: string) {
+  let hash = 0x811c9dc5;
+
+  for (let index = 0; index < value.length; index += 1) {
+    hash ^= value.charCodeAt(index);
+    hash = Math.imul(hash, 0x01000193);
+  }
+
+  return (hash >>> 0).toString(36);
+}
+
+/**
+ * Completes terminal bootstrap metadata from the authored workspace itself.
+ *
+ * Draft rebuilds and older manifests can legitimately carry the hidden setup
+ * file before they carry the newer bootstrap fields. Treat the conventional
+ * `.zoeskoul/setup.sh` file as the durable source of truth, and derive the
+ * state key from the hidden setup recipe so stale PTY leases cannot be reused
+ * after the authored repository state changes. Visible learner edits therefore
+ * never rotate the lease or rerun destructive setup.
+ */
+export function deriveManifestTerminalBootstrap(args: {
+  bootstrap?: ManifestTerminalBootstrap | null;
+  terminalCwd?: string | null;
+  files?: ManifestTerminalBootstrapFile[] | null;
+}): ManifestTerminalBootstrap | undefined {
+  const files = (args.files ?? [])
+    .filter((file) => file?.kind !== "directory")
+    .map((file) => ({
+      path: normalizeTerminalBootstrapFilePath(file),
+      content: String(file?.content ?? ""),
+      language: String(file?.language ?? ""),
+      readOnly: file?.readOnly === true,
+    }))
+    .filter((file) => Boolean(file.path))
+    .sort((left, right) => left.path.localeCompare(right.path));
+
+  const explicit = mergeManifestTerminalBootstraps(args.bootstrap);
+  const setupScriptPath =
+    String(explicit?.setupScriptPath ?? "").trim() ||
+    (files.some((file) => file.path === DEFAULT_TERMINAL_SETUP_SCRIPT_PATH)
+      ? DEFAULT_TERMINAL_SETUP_SCRIPT_PATH
+      : "");
+
+  if (!setupScriptPath) return explicit;
+
+  const existingStateKey = String(explicit?.workspaceStateKey ?? "").trim();
+  const setupFile = files.find((file) => file.path === setupScriptPath);
+  const gitBootstrap = (explicit?.gitSafeDirectories ?? []).length > 0;
+  const derivedStateKey = `${gitBootstrap ? "git-state-v1" : "workspace-state-v1"}-${stableTerminalBootstrapHash(
+    JSON.stringify({
+      terminalCwd: String(args.terminalCwd ?? "/workspace").trim() || "/workspace",
+      setupScriptPath,
+      setupFile: setupFile
+        ? {
+            content: setupFile.content,
+            language: setupFile.language,
+            readOnly: setupFile.readOnly,
+          }
+        : null,
+    }),
+  )}`;
+  const workspaceStateKey = setupFile
+    ? derivedStateKey
+    : existingStateKey || derivedStateKey;
+
+  return mergeManifestTerminalBootstraps(explicit, {
+    setupScriptPath,
+    workspaceStateKey,
+  });
+}
+
 export type ManifestIdeServiceConfig = {
   preset?: ManifestIdeServicePreset;
   runnerBackend?: ManifestIdeRunnerBackend;

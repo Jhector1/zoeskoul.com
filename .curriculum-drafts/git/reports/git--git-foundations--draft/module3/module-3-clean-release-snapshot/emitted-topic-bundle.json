@@ -463,6 +463,10 @@
         "type": "shell_task",
         "mode": "terminal_workspace",
         "instructions": "@:topics.git.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch3.instructions"
+      },
+      "tools": {
+        "defaultSurface": "editor",
+        "compactDefaultSurface": "editor"
       }
     },
     {

@@ -1,6 +1,5 @@
+import { isWorkspaceInternalPath } from "@/lib/projects/workspaceInternalPaths";
 import type { FSNode, FileNode, NodeId } from "../types";
-
-const LEARNER_HIDDEN_WORKSPACE_SEGMENTS = new Set([".zoeskoul", ".git"]);
 
 export type LearnerWorkspacePresentation = {
     nodes: FSNode[];
@@ -12,11 +11,7 @@ export type LearnerWorkspacePresentation = {
 };
 
 export function isLearnerHiddenWorkspacePath(path: string): boolean {
-    return String(path ?? "")
-        .replace(/\\/g, "/")
-        .split("/")
-        .filter(Boolean)
-        .some((segment) => LEARNER_HIDDEN_WORKSPACE_SEGMENTS.has(segment));
+    return isWorkspaceInternalPath(path);
 }
 
 function learnerPresentableNodeIds(nodes: FSNode[]): Set<NodeId> {

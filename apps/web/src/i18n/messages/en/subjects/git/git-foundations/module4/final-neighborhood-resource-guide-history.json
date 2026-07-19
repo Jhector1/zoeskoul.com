@@ -157,8 +157,8 @@
               },
               "try_final_neighborhood_resource_guide_history_sketch3": {
                 "title": "Add the Ignore Policy",
-                "prompt": "The terminal opens inside the prepared `resource-guide/` repository.\n\nAdd `generated/` to `.gitignore`, stage the policy, and verify that `generated/preview.html` is ignored. Leave the policy staged for the final cleanup commit.\n\nType each command in the terminal and press Enter.",
-                "hint": "Read the repository state first, then use the Git command that changes only the requested boundary.",
+                "prompt": "The workspace opens on the prepared `resource-guide/` repository.\n\nCreate `.gitignore` in the repository root and add one line: `generated/`.\n\nThen open Terminal, stage `.gitignore`, verify that `generated/preview.html` is ignored, and leave the policy staged for the final cleanup commit.",
+                "hint": "Use New file to create `.gitignore` beside the `pages/` folder. Put only `generated/` on its own line, then switch to Terminal.",
                 "help": {
                   "concept": "The ignore policy is source-controlled, while generated preview output stays outside history.",
                   "hint_1": "Use the exact file or repository named in the task; avoid broad commands that include unrelated work.",
@@ -166,7 +166,7 @@
                 },
                 "starterCode": "# Neighborhood Resource Guide\n",
                 "solutionCode": "printf \"generated/\\n\" > .gitignore\ngit add .gitignore\ngit check-ignore generated/preview.html\ngit diff --staged --name-only",
-                "instructions": "The terminal opens inside the prepared `resource-guide/` repository.\n\nAdd `generated/` to `.gitignore`, stage the policy, and verify that `generated/preview.html` is ignored. Leave the policy staged for the final cleanup commit.\n\nType each command in the terminal and press Enter.",
+                "instructions": "The workspace opens on the prepared `resource-guide/` repository.\n\nCreate `.gitignore` in the repository root and add one line: `generated/`.\n\nThen open Terminal, stage `.gitignore`, verify that `generated/preview.html` is ignored, and leave the policy staged for the final cleanup commit.",
                 "starterFiles": {
                   "zoeskoul_setup_sh": {
                     "content": "#!/usr/bin/env bash\nset -eu\nrm -rf resource-guide\nmkdir -p resource-guide\ngit -C resource-guide init -q -b main\ngit -C resource-guide config --local user.name \"ZoeSkoul Learner\"\ngit -C resource-guide config --local user.email \"learner@zoeskoul.local\"\ncd resource-guide\nprintf %s '# Neighborhood Resource Guide\n' > README.md\ncd ..\ncd resource-guide\nmkdir -p pages\nprintf %s 'Help desk closes at 6 PM.\n' > pages/contact.md\ncd ..\ncd resource-guide\nmkdir -p pages\nprintf %s 'Welcome to the neighborhood guide.\n' > pages/welcome.md\ncd ..\ngit -C resource-guide add -A\ngit -C resource-guide commit -q -m 'Start neighborhood resource guide'\ncd resource-guide\nmkdir -p pages\nprintf %s '- Food pantry\n- Health clinic\n- Job center\n' > pages/services.md\ncd ..\ngit -C resource-guide add -A\ngit -C resource-guide commit -q -m 'Add local services page'\ncd resource-guide\nmkdir -p pages\nprintf %s 'Help desk closes at 5 PM.\n' > pages/contact.md\ncd ..\ngit -C resource-guide add -A\ngit -C resource-guide commit -q -m 'Update help desk hours'\ncd resource-guide\nmkdir -p generated\nprintf %s '<p>Generated preview</p>\n' > generated/preview.html\ncd ..\n"

@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import type { RunSessionState } from "@zoeskoul/code-contracts";
+import { deriveManifestTerminalBootstrap } from "@zoeskoul/curriculum-contracts";
 import type {
     TerminalConnectionState,
     TerminalEvidence,
@@ -20,6 +21,7 @@ import {
     reuseInFlightPromise,
     shouldProbeTerminalOnVisibilityRestore,
 } from "../../runtime";
+import { isWorkspaceInternalPath } from "@/lib/projects/workspaceInternalPaths";
 import { useRunSession } from "../useRunSession";
 import {
     deleteTerminalHistory,
@@ -49,10 +51,12 @@ const TERMINAL_PROMPT_PRIME_DELAY_MS = 700;
 const TERMINAL_PROMPT_PRIME_MAX_ATTEMPTS = 3;
 
 const STARTUP_CWD_READY_MARKER = "__ZOESKOUL_STARTUP_CWD_READY__";
-const STARTUP_CWD_OUTPUT_SUPPRESSION_MS = 10_000;
+const STARTUP_CWD_OUTPUT_SUPPRESSION_MS = 30_000;
+const STARTUP_CWD_FAILED_MARKER = "__ZOESKOUL_STARTUP_CWD_FAILED__";
 
 type StartupCwdOutputSuppression = {
     marker: string;
+    failureMarker: string;
     buffer: string;
     deadline: number;
     clearLineBeforeRelease?: boolean;
@@ -275,22 +279,47 @@ async function snapshotWorkspaceForSession(sessionId: string) {
     return data.files;
 }
 
+export function resolveWorkspacePreparationEntries(
+    entries: WorkspaceSyncEntry[],
+): {
+    replacementEntries: WorkspaceSyncEntry[];
+    snapshotExpectedEntries: WorkspaceSyncEntry[];
+} {
+    const replacementEntries = entries.filter(
+        (entry) => !isHiddenHistoryEntry(entry),
+    );
+
+    return {
+        replacementEntries,
+        snapshotExpectedEntries: replacementEntries.filter(
+            (entry) => !isWorkspaceInternalPath(entry.path),
+        ),
+    };
+}
+
 async function ensureWorkspaceReadyForInput(args: {
     sessionId: string;
     files: WorkspaceSyncEntry[];
 }) {
-    const expectedFiles = args.files.filter((entry) => !isHiddenHistoryEntry(entry));
+    const { replacementEntries, snapshotExpectedEntries } =
+        resolveWorkspacePreparationEntries(args.files);
 
-    if (!expectedFiles.length) return;
+    if (!replacementEntries.length) return;
 
-    await replaceWorkspaceForSession(args.sessionId, expectedFiles);
+    // Push the complete authored workspace, including hidden bootstrap files.
+    await replaceWorkspaceForSession(args.sessionId, replacementEntries);
+
+    // Runner snapshots intentionally omit runtime-managed paths such as
+    // `.zoeskoul/` and `.git/`. The completed replace request is sufficient
+    // evidence for those files; poll only paths the snapshot API can return.
+    if (!snapshotExpectedEntries.length) return;
 
     const deadline = Date.now() + WORKSPACE_READY_TIMEOUT_MS;
 
     while (Date.now() < deadline) {
         const snapshot = await snapshotWorkspaceForSession(args.sessionId);
 
-        if (workspaceSnapshotHasEntries(snapshot, expectedFiles)) {
+        if (workspaceSnapshotHasEntries(snapshot, snapshotExpectedEntries)) {
             return;
         }
 
@@ -497,49 +526,63 @@ export function buildWorkspaceTerminalStartupInput(args: {
                 ]),
             ]
             : [];
-    const setupCommands = setupScriptPath
-        ? [
-            "cd -- '/workspace'",
-            [
-                "__zoe_prepare_workspace() {",
-                `  __zoe_setup=${shellQuotePosix(`/workspace/${setupScriptPath}`)}`,
-                "  __zoe_setup_marker='/workspace/.zoeskoul/.setup-complete'",
-                "  __zoe_setup_log='/workspace/.zoeskoul/setup.log'",
-                '  if [ ! -f "$__zoe_setup" ]; then',
-                "    return 0",
-                "  fi",
-                "  mkdir -p -- '/workspace/.zoeskoul'",
-                workspaceStateKey
-                    ? `  __zoe_setup_signature=${shellQuotePosix(workspaceStateKey)}`
-                    : `  __zoe_setup_signature=$(cksum "$__zoe_setup" | awk '{print $1 ":" $2}')`,
-                '  __zoe_setup_completed=$(cat "$__zoe_setup_marker" 2>/dev/null || true)',
-                '  if [ "$__zoe_setup_signature" = "$__zoe_setup_completed" ]; then',
-                "    return 0",
-                "  fi",
-                '  rm -f -- "$__zoe_setup_marker"',
-                '  if ! (cd -- /workspace && /bin/bash "$__zoe_setup") >"$__zoe_setup_log" 2>&1; then',
-                '    cat "$__zoe_setup_log" >&2',
-                "    return 1",
-                "  fi",
-                '  printf "%s\\n" "$__zoe_setup_signature" >"$__zoe_setup_marker"',
-                "}",
-            ].join("\n"),
-            "__zoe_prepare_workspace",
-            "unset -f __zoe_prepare_workspace",
-        ]
-        : [];
     const [markerPartA, markerPartB, markerPartC] = args.markerParts;
-    const startupCommands = [
-        ...setupCommands,
-        ...gitTrustCommands,
+    const successMarkerCommand = `printf '%s%s%s\\n' ${shellQuotePosix(markerPartA)} ${shellQuotePosix(markerPartB)} ${shellQuotePosix(markerPartC)}`;
+    const failureMarkerCommand = `printf '%s%s%s%s\\n' ${shellQuotePosix(`${STARTUP_CWD_FAILED_MARKER}_`)} ${shellQuotePosix(markerPartA)} ${shellQuotePosix(markerPartB)} ${shellQuotePosix(markerPartC)}`;
+
+    if (!setupScriptPath && gitTrustCommands.length === 0) {
+        return [
+            `cd -- ${shellQuotePosix(cwd)}`,
+            "export PS1='[zoeskoul]\\w\\$ '",
+            successMarkerCommand,
+        ].join(" && ") + "\n";
+    }
+
+    const setupSignatureCommand = workspaceStateKey
+        ? `__zoe_setup_signature=${shellQuotePosix(workspaceStateKey)}`
+        : `__zoe_setup_signature=$(cksum "$__zoe_setup" | awk '{print $1 ":" $2}')`;
+    const runSetupWhenNeeded = [
+        'if [ "$__zoe_setup_signature" != "$__zoe_setup_completed" ]; then',
+        'rm -f -- "$__zoe_setup_marker";',
+        '(cd -- /workspace && /bin/bash "$__zoe_setup") >"$__zoe_setup_log" 2>&1 || __zoe_setup_status=$?;',
+        'if [ "$__zoe_setup_status" -eq 0 ]; then printf "%s\\n" "$__zoe_setup_signature" >"$__zoe_setup_marker"; fi;',
+        "fi",
+    ].join(" ");
+    const setupCondition = [
+        'if [ ! -f "$__zoe_setup" ]; then',
+        'printf "%s\\n" "The authored terminal setup file is missing." >"$__zoe_setup_log";',
+        "__zoe_setup_status=66;",
+        "else",
+        `${setupSignatureCommand};`,
+        '__zoe_setup_completed=$(cat "$__zoe_setup_marker" 2>/dev/null || true);',
+        `${runSetupWhenNeeded};`,
+        "fi",
+    ].join(" ");
+    const setupScript = setupScriptPath
+        ? [
+            `__zoe_setup=${shellQuotePosix(`/workspace/${setupScriptPath}`)}`,
+            "__zoe_setup_marker='/workspace/.zoeskoul/.setup-complete'",
+            "__zoe_setup_log='/workspace/.zoeskoul/setup.log'",
+            "__zoe_setup_status=0",
+            "mkdir -p -- '/workspace/.zoeskoul'",
+            setupCondition,
+        ].join("; ")
+        : "__zoe_setup_log=''; __zoe_setup_status=0";
+    const bootstrapEnvironment =
+        gitTrustCommands.length > 0 ? gitTrustCommands.join(" && ") : ":";
+    const prepareInteractiveShell = [
         `cd -- ${shellQuotePosix(cwd)}`,
         "export PS1='[zoeskoul]\\w\\$ '",
-        `printf '%s%s%s\\n' ${shellQuotePosix(markerPartA)} ${shellQuotePosix(markerPartB)} ${shellQuotePosix(markerPartC)}`,
-    ];
-    const hideFromShellHistory =
-        setupCommands.length > 0 || gitTrustCommands.length > 0;
+    ].join(" && ");
+    const startupScript = [
+        bootstrapEnvironment,
+        setupScript,
+        `if [ "$__zoe_setup_status" -eq 0 ]; then { ${prepareInteractiveShell}; } || __zoe_setup_status=$?; fi`,
+        `if [ "$__zoe_setup_status" -eq 0 ]; then ${successMarkerCommand}; else ${failureMarkerCommand}; [ -n "$__zoe_setup_log" ] && [ -f "$__zoe_setup_log" ] && cat "$__zoe_setup_log" >&2; fi`,
+        "unset __zoe_setup __zoe_setup_marker __zoe_setup_log __zoe_setup_signature __zoe_setup_completed __zoe_setup_status",
+    ].join("; ");
 
-    return `${hideFromShellHistory ? " " : ""}${startupCommands.join(" && ")}\n`;
+    return ` ${startupScript}\n`;
 }
 
 function sortEntries(entries: WorkspaceSyncEntry[]): WorkspaceSyncEntry[] {
@@ -619,7 +662,7 @@ function diffDirtyUiPaths(
     return out;
 }
 
-function applyDirtyOverridesToSnapshot(
+export function mergeWorkspaceSnapshotBaseline(
     snapshotEntries: WorkspaceSyncEntry[],
     currentUiEntries: WorkspaceSyncEntry[],
     dirtyUiPaths: Set<string>,
@@ -633,6 +676,16 @@ function applyDirtyOverridesToSnapshot(
 
     for (const entry of sortEntries(currentUiEntries)) {
         current.set(entry.path, entry);
+
+        /**
+         * The snapshot endpoint intentionally omits runtime control-plane paths.
+         * Keep them in the local synchronization baseline so every subsequent
+         * Enter does not look like a workspace mismatch and trigger another
+         * replace cycle.
+         */
+        if (isWorkspaceInternalPath(entry.path)) {
+            merged.set(entry.path, entry);
+        }
     }
 
     for (const path of dirtyUiPaths) {
@@ -831,6 +884,15 @@ export function useWorkspaceTerminalController(
         closeSocket,
         probeConnection,
     } = useRunSession();
+    const resolvedBootstrap = React.useMemo(
+        () =>
+            deriveManifestTerminalBootstrap({
+                bootstrap: args.bootstrap,
+                terminalCwd: args.cwd ?? "/workspace",
+                files: normalizeEntries(args.initialFiles) ?? [],
+            }),
+        [args.bootstrap, args.cwd, args.initialFiles],
+    );
     const terminalLeaseKey = React.useMemo(() => {
         const explicit = String((args as any).workspaceKey ?? "").trim();
         if (explicit) return explicit;
@@ -1175,15 +1237,27 @@ export function useWorkspaceTerminalController(
         (kind: TerminalChunk["kind"], data: string) => {
             if (!data) return;
 
+            let outputKind = kind;
             const startupSuppression = startupCwdOutputSuppressionRef.current;
-            if (startupSuppression && kind === "pty") {
+            if (startupSuppression && kind !== "sys") {
                 const combined = startupSuppression.buffer + data;
-                const markerIndex = combined.indexOf(startupSuppression.marker);
+                const successIndex = combined.indexOf(startupSuppression.marker);
+                const failureIndex = combined.indexOf(
+                    startupSuppression.failureMarker,
+                );
+                const failed =
+                    failureIndex >= 0 &&
+                    (successIndex < 0 || failureIndex <= successIndex);
+                const markerIndex = failed ? failureIndex : successIndex;
+                const matchedMarker = failed
+                    ? startupSuppression.failureMarker
+                    : startupSuppression.marker;
 
                 if (markerIndex >= 0) {
                     startupCwdOutputSuppressionRef.current = null;
-                    const shouldClearStalePrompt = startupSuppression.clearLineBeforeRelease === true;
-                    data = combined.slice(markerIndex + startupSuppression.marker.length);
+                    const shouldClearStalePrompt =
+                        startupSuppression.clearLineBeforeRelease === true;
+                    data = combined.slice(markerIndex + matchedMarker.length);
                     data = data.replace(/^(?:\r?\n)+/, "");
 
                     if (shouldClearStalePrompt) {
@@ -1199,6 +1273,22 @@ export function useWorkspaceTerminalController(
                         });
                     }
 
+                    if (failed) {
+                        const message =
+                            "Terminal workspace setup failed. Restart the terminal to try again.";
+                        recoverStateRef.current = "restart_available";
+                        setRecoverState("restart_available");
+                        setRecoverMessage(message);
+                        setInputEnabled(false);
+                        setBusy(false);
+                        outputKind = "err";
+                        data = data.trim()
+                            ? `\r\n${message}\r\n${data}`
+                            : `\r\n${message}\r\n`;
+                    } else {
+                        setInputEnabled(true);
+                    }
+
                     if (!data) {
                         terminalHasVisibleOutputRef.current = true;
                         clearPromptPrimeTimer();
@@ -1207,13 +1297,20 @@ export function useWorkspaceTerminalController(
                 } else if (Date.now() <= startupSuppression.deadline) {
                     startupCwdOutputSuppressionRef.current = {
                         ...startupSuppression,
-                        buffer: combined.slice(-8192),
+                        buffer: combined.slice(-16_384),
                     };
                     return;
                 } else {
-                    // If the marker was lost, fail open instead of hiding learner output forever.
                     startupCwdOutputSuppressionRef.current = null;
-                    return;
+                    const message =
+                        "Terminal workspace setup timed out. Restart the terminal to try again.";
+                    recoverStateRef.current = "restart_available";
+                    setRecoverState("restart_available");
+                    setRecoverMessage(message);
+                    setInputEnabled(false);
+                    setBusy(false);
+                    outputKind = "err";
+                    data = `\r\n${message}\r\n`;
                 }
             }
 
@@ -1224,7 +1321,7 @@ export function useWorkspaceTerminalController(
             setTerminalFeed((prev) => {
                 const next = [
                     ...prev,
-                    { id: nextChunkIdRef.current++, kind, data },
+                    { id: nextChunkIdRef.current++, kind: outputKind, data },
                 ];
                 terminalFeedRef.current = next;
                 return next;
@@ -1458,7 +1555,7 @@ export function useWorkspaceTerminalController(
                 lastPushedEntriesRef.current,
             );
 
-            const nextBaseline = applyDirtyOverridesToSnapshot(
+            const nextBaseline = mergeWorkspaceSnapshotBaseline(
                 snapshot,
                 currentUiEntries,
                 dirtyUiPaths,
@@ -1535,7 +1632,9 @@ export function useWorkspaceTerminalController(
             sessionIdRef.current &&
             !stoppingRef.current &&
             !restartingRef.current &&
-            !terminalProcessExitedRef.current
+            !terminalProcessExitedRef.current &&
+            !startupCwdOutputSuppressionRef.current &&
+            recoverStateRef.current === "none"
         ) {
             setInputEnabled(true);
             schedulePromptPrime();
@@ -1573,7 +1672,7 @@ export function useWorkspaceTerminalController(
         (cwd: string) => {
             const normalizedCwd = resolveWorkspaceTerminalStartupCwd({
                 cwd,
-                bootstrap: args.bootstrap,
+                bootstrap: resolvedBootstrap,
             });
             if (!normalizedCwd) return;
 
@@ -1590,13 +1689,14 @@ export function useWorkspaceTerminalController(
 
             startupCwdOutputSuppressionRef.current = {
                 marker: startupMarker,
+                failureMarker: `${STARTUP_CWD_FAILED_MARKER}_${startupMarker}`,
                 buffer: "",
                 deadline: Date.now() + STARTUP_CWD_OUTPUT_SUPPRESSION_MS,
                 clearLineBeforeRelease: true,
             };
             pendingStartupInputRef.current = buildWorkspaceTerminalStartupInput({
                 cwd: normalizedCwd,
-                bootstrap: args.bootstrap,
+                bootstrap: resolvedBootstrap,
                 markerParts: [markerPartA, markerPartB, markerPartC],
             });
             pendingStartupCwdRef.current = normalizedCwd;
@@ -1616,7 +1716,7 @@ export function useWorkspaceTerminalController(
 
             scheduleStartupCwdFlush();
         },
-        [args.bootstrap, flushPendingStartupInput, scheduleStartupCwdFlush],
+        [resolvedBootstrap, flushPendingStartupInput, scheduleStartupCwdFlush],
     );
 
     const open = React.useCallback(
@@ -1744,7 +1844,7 @@ export function useWorkspaceTerminalController(
 
                 const normalizedInitialCwd = resolveWorkspaceTerminalStartupCwd({
                     cwd: args.cwd,
-                    bootstrap: args.bootstrap,
+                    bootstrap: resolvedBootstrap,
                 });
                 if (normalizedInitialCwd) {
                     queueAuthoredCwd(normalizedInitialCwd);
@@ -1817,7 +1917,7 @@ export function useWorkspaceTerminalController(
 
                     const normalizedStartCwd = resolveWorkspaceTerminalStartupCwd({
                         cwd: args.cwd,
-                        bootstrap: args.bootstrap,
+                        bootstrap: resolvedBootstrap,
                     });
                     if (
                         normalizedStartCwd &&
@@ -2044,7 +2144,7 @@ export function useWorkspaceTerminalController(
     React.useEffect(() => {
         const desiredCwd = resolveWorkspaceTerminalStartupCwd({
             cwd: args.cwd,
-            bootstrap: args.bootstrap,
+            bootstrap: resolvedBootstrap,
         });
         if (!desiredCwd) {
             return;
@@ -2078,7 +2178,7 @@ export function useWorkspaceTerminalController(
 
         queueAuthoredCwd(desiredCwd);
     }, [
-        args.bootstrap,
+        resolvedBootstrap,
         args.cwd,
         queueAuthoredCwd,
         scheduleStartupCwdFlush,

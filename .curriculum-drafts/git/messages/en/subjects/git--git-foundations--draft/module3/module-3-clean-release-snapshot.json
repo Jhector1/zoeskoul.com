@@ -154,8 +154,8 @@
               },
               "try_module_3_sketch3": {
                 "title": "Ignore Preview Output",
-                "prompt": "The terminal opens inside the prepared `release-snapshot/` repository.\n\nThe rename and removal are staged, and `preview.log` is untracked. Add `*.log` to `.gitignore`, stage the policy, and verify the preview is ignored.\n\nType each command in the terminal and press Enter.",
-                "hint": "Read the repository state first, then use the Git command that changes only the requested boundary.",
+                "prompt": "The workspace opens on the prepared `release-snapshot/` repository.\n\nThe rename and removal are staged, and `preview.log` is untracked. Create `.gitignore` in the repository root and add one line: `*.log`.\n\nThen open Terminal, stage `.gitignore`, run `git check-ignore preview.log`, and review the staged file names.",
+                "hint": "Use New file to create `.gitignore` beside `README.md`. Put only `*.log` on its own line, then switch to Terminal.",
                 "help": {
                   "concept": "The ignore policy belongs in history; the generated preview does not.",
                   "hint_1": "Use the exact file or repository named in the task; avoid broad commands that include unrelated work.",
@@ -163,7 +163,7 @@
                 },
                 "starterCode": "# Volunteer Toolkit\n",
                 "solutionCode": "printf \"*.log\\n\" > .gitignore\ngit add .gitignore\ngit check-ignore preview.log\ngit diff --staged --name-only",
-                "instructions": "The terminal opens inside the prepared `release-snapshot/` repository.\n\nThe rename and removal are staged, and `preview.log` is untracked. Add `*.log` to `.gitignore`, stage the policy, and verify the preview is ignored.\n\nType each command in the terminal and press Enter.",
+                "instructions": "The workspace opens on the prepared `release-snapshot/` repository.\n\nThe rename and removal are staged, and `preview.log` is untracked. Create `.gitignore` in the repository root and add one line: `*.log`.\n\nThen open Terminal, stage `.gitignore`, run `git check-ignore preview.log`, and review the staged file names.",
                 "starterFiles": {
                   "zoeskoul_setup_sh": {
                     "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-snapshot\nmkdir -p release-snapshot\ngit -C release-snapshot init -q -b main\ngit -C release-snapshot config --local user.name \"ZoeSkoul Learner\"\ngit -C release-snapshot config --local user.email \"learner@zoeskoul.local\"\ncd release-snapshot\nprintf %s '# Volunteer Toolkit\n' > README.md\ncd ..\ncd release-snapshot\nmkdir -p docs\nprintf %s '# Draft Volunteer Guide\n' > docs/guide-draft.md\ncd ..\ncd release-snapshot\nmkdir -p docs\nprintf %s 'Old checklist\n' > docs/old-checklist.md\ncd ..\ngit -C release-snapshot add -A\ngit -C release-snapshot commit -q -m 'Add project baseline'\ncd release-snapshot\nprintf %s 'local preview\n' > preview.log\ncd ..\ngit -C release-snapshot mv docs/guide-draft.md docs/volunteer-guide.md\ngit -C release-snapshot rm -q docs/old-checklist.md\n"

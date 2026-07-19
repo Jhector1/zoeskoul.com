@@ -318,4 +318,84 @@ describe("normalizeCurrentDraftOutputForSeed", () => {
             "linux--linux-terminal-fundamentals--draft-linux-module-1-orientation",
         ]);
     });
+    it("rehydrates deterministic terminal bootstrap from hidden current-output fixtures", async () => {
+        const { normalizeCurrentDraftOutputForSeed } = await import(
+            "./rebuildSubjectFromDraftReports.js"
+        );
+
+        const normalized = normalizeCurrentDraftOutputForSeed({
+            seed: {
+                subjectSlug: "git--git-foundations--draft",
+                moduleSlug: "git-foundations-module-1-start-tracking",
+                sectionSlug: "git-foundations-section-1-repository-basics",
+                topicId: "configure-and-initialize-a-repository",
+                modulePrefix: "git_foundations_module_1",
+                minutes: 24,
+            } as unknown as ReturnType<
+                typeof import("../seeds/buildTopicSeedFromPlanNode.js").buildTopicSeedFromPlanNode
+            >,
+            topicBundle: {
+                topicId: "configure-and-initialize-a-repository",
+                subjectSlug: "git--git-foundations--draft",
+                moduleSlug: "git-foundations-module-1-start-tracking",
+                sectionSlug:
+                    "git--git-foundations--draft-git-foundations-section-1-repository-basics",
+                prefix: "git_foundations_module_1",
+                minutes: 24,
+                serviceDefaults: {
+                    terminalBootstrap: {
+                        gitSafeDirectories: ["/workspace/*"],
+                    },
+                },
+                exercises: [
+                    {
+                        id: "try-configure-and-initialize-a-repository-sketch1",
+                        kind: "code_input",
+                        language: "bash",
+                        ideConfig: {
+                            runnerBackend: "pty",
+                            terminalCwd: "/workspace/trail-journal",
+                            terminalBootstrap: {
+                                gitSafeDirectories: ["/workspace/*"],
+                            },
+                        },
+                        starterFiles: [
+                            {
+                                path: "trail-journal/README.md",
+                                content: "# Trail Journal\n",
+                                isEntry: true,
+                            },
+                            {
+                                path: ".zoeskoul/setup.sh",
+                                content:
+                                    "git -C trail-journal init -q -b main\n",
+                                readOnly: true,
+                            },
+                        ],
+                        workspace: {
+                            language: "bash",
+                            entryFilePath: "trail-journal/README.md",
+                        },
+                    },
+                ],
+            } as never,
+            messagesByLocale: { en: {} },
+        });
+
+        const exercise = (normalized.topicBundle as unknown as {
+            exercises: Array<Record<string, any>>;
+        }).exercises[0];
+
+        expect(exercise.fixtureFiles).toEqual(
+            expect.arrayContaining([
+                expect.objectContaining({ path: ".zoeskoul/setup.sh" }),
+            ]),
+        );
+        expect(exercise.ideConfig.terminalBootstrap).toEqual({
+            gitSafeDirectories: ["/workspace/*"],
+            setupScriptPath: ".zoeskoul/setup.sh",
+            workspaceStateKey: expect.stringMatching(/^git-state-v1-/),
+        });
+    });
+
 });

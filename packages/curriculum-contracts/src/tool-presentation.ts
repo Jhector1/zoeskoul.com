@@ -1,5 +1,13 @@
 export type ToolSurface = "editor" | "results";
 export type SqlPaneTab = "results" | "tables" | "erd" | "chen";
+export type RunnerPaneTab = "output" | "terminal";
+
+export type ToolRunnerPanePolicy = {
+    /** Preferred runner tab on the full desktop Results surface. */
+    defaultTab?: RunnerPaneTab;
+    /** Preferred runner tab on compact/stacked layouts. */
+    compactDefaultTab?: RunnerPaneTab;
+};
 
 export type ToolSqlPanePolicy = {
     /** Results and Tables are available by default unless explicitly hidden. */
@@ -33,6 +41,8 @@ export type ToolPresentationPolicy = {
     defaultSurface?: ToolSurface;
     /** Editor or Results outer workspace surface on compact layouts. */
     compactDefaultSurface?: ToolSurface;
+    /** Output or interactive terminal inside the non-SQL Results surface. */
+    runnerPane?: ToolRunnerPanePolicy;
     /** SQL-specific tabs inside the Results surface. */
     sqlPane?: ToolSqlPanePolicy;
 };
@@ -53,6 +63,13 @@ export function mergeToolPresentationPolicies(
 
     for (const value of values) {
         if (!isRecord(value)) continue;
+        const incomingRunnerPane = isRecord(value.runnerPane)
+            ? value.runnerPane
+            : undefined;
+        const runnerPane = {
+            ...(merged.runnerPane ?? {}),
+            ...(incomingRunnerPane ?? {}),
+        } as ToolRunnerPanePolicy;
         const incomingSqlPane = isRecord(value.sqlPane)
             ? value.sqlPane
             : undefined;
@@ -63,6 +80,7 @@ export function mergeToolPresentationPolicies(
         merged = {
             ...merged,
             ...(value as ToolPresentationPolicy),
+            ...(hasOwnKeys(runnerPane) ? { runnerPane } : {}),
             ...(hasOwnKeys(sqlPane) ? { sqlPane } : {}),
         };
     }
@@ -98,16 +116,26 @@ export function resolveToolPresentationForLayout(args: {
     const defaultSurface = args.compact
         ? policy.compactDefaultSurface ?? policy.defaultSurface
         : policy.defaultSurface;
-    const defaultTab = args.compact
+    const runnerDefaultTab = args.compact
+        ? policy.runnerPane?.compactDefaultTab ?? policy.runnerPane?.defaultTab
+        : policy.runnerPane?.defaultTab;
+    const sqlDefaultTab = args.compact
         ? policy.sqlPane?.compactDefaultTab ?? policy.sqlPane?.defaultTab
         : policy.sqlPane?.defaultTab;
 
     return mergeToolPresentationPolicies(policy, {
         ...(defaultSurface ? { defaultSurface } : {}),
-        ...(defaultTab
+        ...(runnerDefaultTab
+            ? {
+                runnerPane: {
+                    defaultTab: runnerDefaultTab,
+                },
+            }
+            : {}),
+        ...(sqlDefaultTab
             ? {
                 sqlPane: {
-                    defaultTab,
+                    defaultTab: sqlDefaultTab,
                 },
             }
             : {}),
@@ -115,6 +143,7 @@ export function resolveToolPresentationForLayout(args: {
 }
 
 const TOOL_SURFACES = new Set<ToolSurface>(["editor", "results"]);
+const RUNNER_PANE_TABS = new Set<RunnerPaneTab>(["output", "terminal"]);
 const SQL_PANE_TABS = new Set<SqlPaneTab>([
     "results",
     "tables",
@@ -144,6 +173,12 @@ function optionalBoolean(value: unknown): boolean | undefined {
 function optionalToolSurface(value: unknown): ToolSurface | undefined {
     return TOOL_SURFACES.has(value as ToolSurface)
         ? (value as ToolSurface)
+        : undefined;
+}
+
+function optionalRunnerPaneTab(value: unknown): RunnerPaneTab | undefined {
+    return RUNNER_PANE_TABS.has(value as RunnerPaneTab)
+        ? (value as RunnerPaneTab)
         : undefined;
 }
 
@@ -180,6 +215,22 @@ export function normalizeToolPresentationPolicy(
     );
     if (compactDefaultSurface !== undefined) {
         normalized.compactDefaultSurface = compactDefaultSurface;
+    }
+
+    if (isRecord(value.runnerPane)) {
+        const runnerPane: ToolRunnerPanePolicy = {};
+
+        const defaultTab = optionalRunnerPaneTab(value.runnerPane.defaultTab);
+        if (defaultTab !== undefined) runnerPane.defaultTab = defaultTab;
+
+        const compactDefaultTab = optionalRunnerPaneTab(
+            value.runnerPane.compactDefaultTab,
+        );
+        if (compactDefaultTab !== undefined) {
+            runnerPane.compactDefaultTab = compactDefaultTab;
+        }
+
+        if (hasOwnKeys(runnerPane)) normalized.runnerPane = runnerPane;
     }
 
     if (isRecord(value.sqlPane)) {
@@ -235,49 +286,66 @@ export function validateToolPresentationPolicy(
         }
     }
 
+    const runnerPane = policy.runnerPane;
+    if (runnerPane != null) {
+        if (typeof runnerPane !== "object" || Array.isArray(runnerPane)) {
+            issues.push(`${path}.runnerPane must be an object when provided`);
+        } else {
+            const runner = runnerPane as Record<string, unknown>;
+            for (const field of ["defaultTab", "compactDefaultTab"] as const) {
+                const tab = runner[field];
+                if (tab != null && !RUNNER_PANE_TABS.has(tab as RunnerPaneTab)) {
+                    issues.push(
+                        `${path}.runnerPane.${field} must be "output" or "terminal"`,
+                    );
+                }
+            }
+        }
+    }
+
     const sqlPane = policy.sqlPane;
-    if (sqlPane == null) return issues;
-    if (typeof sqlPane !== "object" || Array.isArray(sqlPane)) {
-        issues.push(`${path}.sqlPane must be an object when provided`);
-        return issues;
-    }
+    if (sqlPane != null) {
+        if (typeof sqlPane !== "object" || Array.isArray(sqlPane)) {
+            issues.push(`${path}.sqlPane must be an object when provided`);
+        } else {
+            const sql = sqlPane as Record<string, unknown>;
+            for (const field of SQL_PANE_BOOLEAN_FIELDS) {
+                if (sql[field] != null && typeof sql[field] !== "boolean") {
+                    issues.push(`${path}.sqlPane.${field} must be a boolean when provided`);
+                }
+            }
 
-    const sql = sqlPane as Record<string, unknown>;
-    for (const field of SQL_PANE_BOOLEAN_FIELDS) {
-        if (sql[field] != null && typeof sql[field] !== "boolean") {
-            issues.push(`${path}.sqlPane.${field} must be a boolean when provided`);
-        }
-    }
+            for (const field of ["defaultTab", "compactDefaultTab"] as const) {
+                const tab = sql[field];
+                if (tab != null && !SQL_PANE_TABS.has(tab as SqlPaneTab)) {
+                    issues.push(
+                        `${path}.sqlPane.${field} must be "results", "tables", "erd", or "chen"`,
+                    );
+                }
+            }
 
-    for (const field of ["defaultTab", "compactDefaultTab"] as const) {
-        const tab = sql[field];
-        if (tab != null && !SQL_PANE_TABS.has(tab as SqlPaneTab)) {
-            issues.push(
-                `${path}.sqlPane.${field} must be "results", "tables", "erd", or "chen"`,
-            );
-        }
-    }
+            const isHidden = (tab: unknown) => {
+                if (tab === "results") return sql.showResults === false;
+                if (tab === "tables") return sql.showTables === false;
+                if (tab === "erd") {
+                    return (
+                        sql.showErd === false &&
+                        sql.showCrowFoot !== true &&
+                        sql.showCrowfoot !== true &&
+                        sql.showCrowsFoot !== true
+                    );
+                }
+                if (tab === "chen") return sql.showChen === false;
+                return false;
+            };
 
-    const isHidden = (tab: unknown) => {
-        if (tab === "results") return sql.showResults === false;
-        if (tab === "tables") return sql.showTables === false;
-        if (tab === "erd") {
-            return (
-                sql.showErd === false &&
-                sql.showCrowFoot !== true &&
-                sql.showCrowfoot !== true &&
-                sql.showCrowsFoot !== true
-            );
-        }
-        if (tab === "chen") return sql.showChen === false;
-        return false;
-    };
-
-    for (const field of ["defaultTab", "compactDefaultTab"] as const) {
-        if (isHidden(sql[field])) {
-            issues.push(
-                `${path}.sqlPane.${field} cannot select a tab hidden by the same policy`,
-            );
+            for (const field of ["defaultTab", "compactDefaultTab"] as const) {
+                if (isHidden(sql[field])) {
+                    issues.push(
+                        `${path}.sqlPane.${field} cannot select a tab hidden by the same policy`,
+                    );
+                }
+            }
         }
     }
 

@@ -2,6 +2,8 @@ import { describe, expect, it } from "vitest";
 
 import {
     buildWorkspaceTerminalStartupInput,
+    mergeWorkspaceSnapshotBaseline,
+    resolveWorkspacePreparationEntries,
     resolveWorkspaceTerminalStartupCwd,
     shouldPrimeWorkspacePrompt,
 } from "./useWorkspaceTerminalController";
@@ -113,6 +115,128 @@ describe("shouldPrimeWorkspacePrompt", () => {
 });
 
 
+describe("resolveWorkspacePreparationEntries", () => {
+    it("pushes hidden bootstrap files but verifies only snapshot-visible files", () => {
+        const result = resolveWorkspacePreparationEntries([
+            {
+                kind: "file",
+                path: ".zoeskoul/setup.sh",
+                content: "git init -b main\n",
+            },
+            {
+                kind: "file",
+                path: "trail-journal/README.md",
+                content: "# Trail Journal\n",
+            },
+            {
+                kind: "file",
+                path: ".bash_history",
+                content: "git status\n",
+            },
+        ]);
+
+        expect(result.replacementEntries.map((entry) => entry.path)).toEqual([
+            ".zoeskoul/setup.sh",
+            "trail-journal/README.md",
+        ]);
+        expect(
+            result.snapshotExpectedEntries.map((entry) => entry.path),
+        ).toEqual(["trail-journal/README.md"]);
+    });
+
+    it("does not wait for a snapshot when a workspace contains only internal bootstrap files", () => {
+        const result = resolveWorkspacePreparationEntries([
+            {
+                kind: "file",
+                path: ".zoeskoul/setup.sh",
+                content: "git init -b main\n",
+            },
+        ]);
+
+        expect(result.replacementEntries).toHaveLength(1);
+        expect(result.snapshotExpectedEntries).toEqual([]);
+    });
+});
+
+describe("mergeWorkspaceSnapshotBaseline", () => {
+    it("keeps snapshot-opaque bootstrap files in the local sync baseline", () => {
+        const result = mergeWorkspaceSnapshotBaseline(
+            [
+                {
+                    kind: "file",
+                    path: "trail-journal/README.md",
+                    content: "# Trail Journal\n",
+                },
+            ],
+            [
+                {
+                    kind: "file",
+                    path: ".zoeskoul/setup.sh",
+                    content: "git init -b main\n",
+                },
+                {
+                    kind: "file",
+                    path: "trail-journal/README.md",
+                    content: "# Trail Journal\n",
+                },
+            ],
+            new Set(),
+        );
+
+        expect(result).toEqual([
+            {
+                kind: "file",
+                path: ".zoeskoul/setup.sh",
+                content: "git init -b main\n",
+            },
+            {
+                kind: "file",
+                path: "trail-journal/README.md",
+                content: "# Trail Journal\n",
+            },
+        ]);
+    });
+
+    it("still applies dirty learner-file overrides without treating internal omission as deletion", () => {
+        const result = mergeWorkspaceSnapshotBaseline(
+            [
+                {
+                    kind: "file",
+                    path: "trail-journal/README.md",
+                    content: "runner copy\n",
+                },
+            ],
+            [
+                {
+                    kind: "file",
+                    path: ".zoeskoul/setup.sh",
+                    content: "git init -b main\n",
+                },
+                {
+                    kind: "file",
+                    path: "trail-journal/README.md",
+                    content: "learner edit\n",
+                },
+            ],
+            new Set(["trail-journal/README.md"]),
+        );
+
+        expect(result).toEqual([
+            {
+                kind: "file",
+                path: ".zoeskoul/setup.sh",
+                content: "git init -b main\n",
+            },
+            {
+                kind: "file",
+                path: "trail-journal/README.md",
+                content: "learner edit\n",
+            },
+        ]);
+    });
+});
+
+
 describe("resolveWorkspaceTerminalStartupCwd", () => {
     it("queues hidden bootstrap even when the terminal starts at workspace root", () => {
         expect(
@@ -162,15 +286,19 @@ describe("buildWorkspaceTerminalStartupInput", () => {
         });
 
         expect(input.startsWith(" ")).toBe(true);
-        expect(input).toContain("__zoe_prepare_workspace() {");
+        expect(input).not.toContain("__zoe_prepare_workspace() {");
         expect(input).toContain(
             "__zoe_setup='/workspace/.zoeskoul/setup.sh'",
         );
+        expect(input).toContain("__zoe_setup_status=0");
         expect(input).toContain(
             "__zoe_setup_signature='git-state-v1-test'",
         );
         expect(input).toContain(
             '(cd -- /workspace && /bin/bash "$__zoe_setup")',
+        );
+        expect(input).toContain(
+            "printf '%s%s%s%s\\n' '__ZOESKOUL_STARTUP_CWD_FAILED___' 'marker-a' 'marker-b' 'marker-c'",
         );
         expect(input).toContain("export GIT_CONFIG_COUNT=1");
         expect(input).toContain("export GIT_CONFIG_KEY_0='safe.directory'");
@@ -179,14 +307,21 @@ describe("buildWorkspaceTerminalStartupInput", () => {
         );
         expect(input).not.toContain("git config --global");
         expect(input).not.toContain("/workspace/*");
-        expect(input.indexOf("__zoe_prepare_workspace")).toBeLessThan(
-            input.indexOf("export GIT_CONFIG_COUNT=1"),
-        );
         expect(input.indexOf("export GIT_CONFIG_COUNT=1")).toBeLessThan(
+            input.indexOf('/bin/bash "$__zoe_setup"'),
+        );
+        expect(input.indexOf('/bin/bash "$__zoe_setup"')).toBeLessThan(
             input.lastIndexOf("cd -- '/workspace/trail-journal'"),
         );
         expect(input).toContain("export PS1='[zoeskoul]\\w\\$ '");
-        expect(input).toContain("printf '%s%s%s\\n' 'marker-a' 'marker-b' 'marker-c'");
+        expect(input).toContain(
+            "printf '%s%s%s\\n' 'marker-a' 'marker-b' 'marker-c'",
+        );
+        expect(input).not.toContain("marker-amarker-bmarker-c");
+        expect(input).not.toContain(
+            "__ZOESKOUL_STARTUP_CWD_FAILED___marker-amarker-bmarker-c",
+        );
+        expect(input.trimEnd().split("\n")).toHaveLength(1);
         expect(input.endsWith("\n")).toBe(true);
     });
 

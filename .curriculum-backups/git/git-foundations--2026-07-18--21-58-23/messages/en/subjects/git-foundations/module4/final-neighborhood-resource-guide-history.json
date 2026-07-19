@@ -1,0 +1,302 @@
+{
+  "topics": {
+    "git-foundations": {
+      "git-foundations-module-4-final-capstone": {
+        "final-neighborhood-resource-guide-history": {
+          "label": "Final Capstone: Build the Resource Guide History",
+          "summary": "Build a neighborhood resource guide from its first repository snapshot to a verified four-commit handoff.",
+          "cards": {
+            "sketch0": {
+              "title": "Turn a Working Folder into a Trustworthy Handoff"
+            },
+            "project": {
+              "title": "Neighborhood Resource Guide History"
+            }
+          },
+          "projectSteps": {
+            "try_final_neighborhood_resource_guide_history_sketch0": {
+              "title": "Create the Guide Baseline"
+            },
+            "try_final_neighborhood_resource_guide_history_sketch1": {
+              "title": "Add the Services Page"
+            },
+            "try_final_neighborhood_resource_guide_history_sketch2": {
+              "title": "Publish Updated Help Desk Hours"
+            },
+            "try_final_neighborhood_resource_guide_history_sketch3": {
+              "title": "Ignore Generated Preview Files"
+            },
+            "try_final_neighborhood_resource_guide_history_sketch4": {
+              "title": "Rename the Guide and Remove the Obsolete Note"
+            },
+            "try_final_neighborhood_resource_guide_history_sketch5": {
+              "title": "Commit and Verify the Final Handoff"
+            }
+          },
+          "finalCapstone": {
+            "steps": {
+              "try_final_neighborhood_resource_guide_history_sketch0": {
+                "title": "Create the First Guide Snapshot",
+                "prompt": "The terminal opens inside the prepared `resource-guide/` repository.\n\nInitialize `resource-guide/` on `main`, set the repository-only learner identity, stage the provided starting files, and commit `Start neighborhood resource guide`.\n\nType each command in the terminal and press Enter.",
+                "hint": "Read the repository state first, then use the Git command that changes only the requested boundary.",
+                "help": {
+                  "concept": "The capstone begins with the same honest sequence as the course: initialize, identify, stage, commit, verify.",
+                  "hint_1": "Use the exact file or repository named in the task; avoid broad commands that include unrelated work.",
+                  "hint_2": "After the action, run the requested inspection command to confirm the final state."
+                },
+                "starterCode": "# Neighborhood Resource Guide\n",
+                "solutionCode": "git init -b main\ngit config --local user.name \"ZoeSkoul Learner\"\ngit config --local user.email \"learner@zoeskoul.local\"\ngit add README.md pages/\ngit commit -m \"Start neighborhood resource guide\"\ngit status --short",
+                "instructions": "The terminal opens inside the prepared `resource-guide/` repository.\n\nInitialize `resource-guide/` on `main`, set the repository-only learner identity, stage the provided starting files, and commit `Start neighborhood resource guide`.\n\nType each command in the terminal and press Enter.",
+                "starterFiles": {
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf resource-guide\nmkdir -p resource-guide\ncd resource-guide\nprintf %s '# Neighborhood Resource Guide\n' > README.md\ncd ..\ncd resource-guide\nmkdir -p pages\nprintf %s 'Help desk closes at 6 PM.\n' > pages/contact.md\ncd ..\ncd resource-guide\nmkdir -p pages\nprintf %s 'Welcome to the neighborhood guide.\n' > pages/welcome.md\ncd ..\n"
+                  }
+                },
+                "solutionFiles": {
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf resource-guide\nmkdir -p resource-guide\ncd resource-guide\nprintf %s '# Neighborhood Resource Guide\n' > README.md\ncd ..\ncd resource-guide\nmkdir -p pages\nprintf %s 'Help desk closes at 6 PM.\n' > pages/contact.md\ncd ..\ncd resource-guide\nmkdir -p pages\nprintf %s 'Welcome to the neighborhood guide.\n' > pages/welcome.md\ncd ..\n"
+                  }
+                },
+                "terminalExpectations": {
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "Do not rewrite shared history in this Git practice task."
+                    }
+                  },
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Run `git init -b main`, then check your answer again."
+                    },
+                    "1": {
+                      "message": "Run `git commit -m \"Start neighborhood resource guide\"`, then check your answer again."
+                    },
+                    "2": {
+                      "message": "Run `git status --short`, then check your answer again."
+                    }
+                  }
+                }
+              },
+              "try_final_neighborhood_resource_guide_history_sketch1": {
+                "title": "Add the Services Page",
+                "prompt": "The terminal opens inside the prepared `resource-guide/` repository.\n\nCreate the supplied `pages/services.md` content, stage only that page, and commit `Add local services page`.\n\nType each command in the terminal and press Enter.",
+                "hint": "Read the repository state first, then use the Git command that changes only the requested boundary.",
+                "help": {
+                  "concept": "A new page earns its own focused snapshot because it is a complete, reviewable addition.",
+                  "hint_1": "Use the exact file or repository named in the task; avoid broad commands that include unrelated work.",
+                  "hint_2": "After the action, run the requested inspection command to confirm the final state."
+                },
+                "starterCode": "# Neighborhood Resource Guide\n",
+                "solutionCode": "git add pages/services.md\ngit commit -m \"Add local services page\"\ngit status --short",
+                "instructions": "The terminal opens inside the prepared `resource-guide/` repository.\n\nCreate the supplied `pages/services.md` content, stage only that page, and commit `Add local services page`.\n\nType each command in the terminal and press Enter.",
+                "starterFiles": {
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf resource-guide\nmkdir -p resource-guide\ngit -C resource-guide init -q -b main\ngit -C resource-guide config --local user.name \"ZoeSkoul Learner\"\ngit -C resource-guide config --local user.email \"learner@zoeskoul.local\"\ncd resource-guide\nprintf %s '# Neighborhood Resource Guide\n' > README.md\ncd ..\ncd resource-guide\nmkdir -p pages\nprintf %s 'Help desk closes at 6 PM.\n' > pages/contact.md\ncd ..\ncd resource-guide\nmkdir -p pages\nprintf %s 'Welcome to the neighborhood guide.\n' > pages/welcome.md\ncd ..\ngit -C resource-guide add -A\ngit -C resource-guide commit -q -m 'Start neighborhood resource guide'\ncd resource-guide\nmkdir -p pages\nprintf %s '- Food pantry\n- Health clinic\n- Job center\n' > pages/services.md\ncd ..\n"
+                  }
+                },
+                "solutionFiles": {
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf resource-guide\nmkdir -p resource-guide\ngit -C resource-guide init -q -b main\ngit -C resource-guide config --local user.name \"ZoeSkoul Learner\"\ngit -C resource-guide config --local user.email \"learner@zoeskoul.local\"\ncd resource-guide\nprintf %s '# Neighborhood Resource Guide\n' > README.md\ncd ..\ncd resource-guide\nmkdir -p pages\nprintf %s 'Help desk closes at 6 PM.\n' > pages/contact.md\ncd ..\ncd resource-guide\nmkdir -p pages\nprintf %s 'Welcome to the neighborhood guide.\n' > pages/welcome.md\ncd ..\ngit -C resource-guide add -A\ngit -C resource-guide commit -q -m 'Start neighborhood resource guide'\ncd resource-guide\nmkdir -p pages\nprintf %s '- Food pantry\n- Health clinic\n- Job center\n' > pages/services.md\ncd ..\n"
+                  }
+                },
+                "terminalExpectations": {
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "Do not rewrite shared history in this Git practice task."
+                    }
+                  },
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Run `git add pages/services.md`, then check your answer again."
+                    },
+                    "1": {
+                      "message": "Run `git commit -m \"Add local services page\"`, then check your answer again."
+                    }
+                  }
+                }
+              },
+              "try_final_neighborhood_resource_guide_history_sketch2": {
+                "title": "Update the Help Desk Hours",
+                "prompt": "The terminal opens inside the prepared `resource-guide/` repository.\n\nInspect the contact-page edit, stage it, and commit `Update help desk hours`.\n\nType each command in the terminal and press Enter.",
+                "hint": "Read the repository state first, then use the Git command that changes only the requested boundary.",
+                "help": {
+                  "concept": "Inspecting before staging keeps a small correction precise and easy to review.",
+                  "hint_1": "Use the exact file or repository named in the task; avoid broad commands that include unrelated work.",
+                  "hint_2": "After the action, run the requested inspection command to confirm the final state."
+                },
+                "starterCode": "# Neighborhood Resource Guide\n",
+                "solutionCode": "git diff -- pages/contact.md\ngit add pages/contact.md\ngit commit -m \"Update help desk hours\"\ngit status --short",
+                "instructions": "The terminal opens inside the prepared `resource-guide/` repository.\n\nInspect the contact-page edit, stage it, and commit `Update help desk hours`.\n\nType each command in the terminal and press Enter.",
+                "starterFiles": {
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf resource-guide\nmkdir -p resource-guide\ngit -C resource-guide init -q -b main\ngit -C resource-guide config --local user.name \"ZoeSkoul Learner\"\ngit -C resource-guide config --local user.email \"learner@zoeskoul.local\"\ncd resource-guide\nprintf %s '# Neighborhood Resource Guide\n' > README.md\ncd ..\ncd resource-guide\nmkdir -p pages\nprintf %s 'Help desk closes at 6 PM.\n' > pages/contact.md\ncd ..\ncd resource-guide\nmkdir -p pages\nprintf %s 'Welcome to the neighborhood guide.\n' > pages/welcome.md\ncd ..\ngit -C resource-guide add -A\ngit -C resource-guide commit -q -m 'Start neighborhood resource guide'\ncd resource-guide\nmkdir -p pages\nprintf %s '- Food pantry\n- Health clinic\n- Job center\n' > pages/services.md\ncd ..\ngit -C resource-guide add -A\ngit -C resource-guide commit -q -m 'Add local services page'\ncd resource-guide\nmkdir -p pages\nprintf %s 'Help desk closes at 5 PM.\n' > pages/contact.md\ncd ..\n"
+                  }
+                },
+                "solutionFiles": {
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf resource-guide\nmkdir -p resource-guide\ngit -C resource-guide init -q -b main\ngit -C resource-guide config --local user.name \"ZoeSkoul Learner\"\ngit -C resource-guide config --local user.email \"learner@zoeskoul.local\"\ncd resource-guide\nprintf %s '# Neighborhood Resource Guide\n' > README.md\ncd ..\ncd resource-guide\nmkdir -p pages\nprintf %s 'Help desk closes at 6 PM.\n' > pages/contact.md\ncd ..\ncd resource-guide\nmkdir -p pages\nprintf %s 'Welcome to the neighborhood guide.\n' > pages/welcome.md\ncd ..\ngit -C resource-guide add -A\ngit -C resource-guide commit -q -m 'Start neighborhood resource guide'\ncd resource-guide\nmkdir -p pages\nprintf %s '- Food pantry\n- Health clinic\n- Job center\n' > pages/services.md\ncd ..\ngit -C resource-guide add -A\ngit -C resource-guide commit -q -m 'Add local services page'\ncd resource-guide\nmkdir -p pages\nprintf %s 'Help desk closes at 5 PM.\n' > pages/contact.md\ncd ..\n"
+                  }
+                },
+                "terminalExpectations": {
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "Do not rewrite shared history in this Git practice task."
+                    }
+                  },
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Run `git diff -- pages/contact.md`, then check your answer again."
+                    },
+                    "1": {
+                      "message": "Run `git add pages/contact.md`, then check your answer again."
+                    },
+                    "2": {
+                      "message": "Run `git commit -m \"Update help desk hours\"`, then check your answer again."
+                    }
+                  }
+                }
+              },
+              "try_final_neighborhood_resource_guide_history_sketch3": {
+                "title": "Add the Ignore Policy",
+                "prompt": "The terminal opens inside the prepared `resource-guide/` repository.\n\nAdd `generated/` to `.gitignore`, stage the policy, and verify that `generated/preview.html` is ignored. Leave the policy staged for the final cleanup commit.\n\nType each command in the terminal and press Enter.",
+                "hint": "Read the repository state first, then use the Git command that changes only the requested boundary.",
+                "help": {
+                  "concept": "The ignore policy is source-controlled, while generated preview output stays outside history.",
+                  "hint_1": "Use the exact file or repository named in the task; avoid broad commands that include unrelated work.",
+                  "hint_2": "After the action, run the requested inspection command to confirm the final state."
+                },
+                "starterCode": "# Neighborhood Resource Guide\n",
+                "solutionCode": "printf \"generated/\\n\" > .gitignore\ngit add .gitignore\ngit check-ignore generated/preview.html\ngit diff --staged --name-only",
+                "instructions": "The terminal opens inside the prepared `resource-guide/` repository.\n\nAdd `generated/` to `.gitignore`, stage the policy, and verify that `generated/preview.html` is ignored. Leave the policy staged for the final cleanup commit.\n\nType each command in the terminal and press Enter.",
+                "starterFiles": {
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf resource-guide\nmkdir -p resource-guide\ngit -C resource-guide init -q -b main\ngit -C resource-guide config --local user.name \"ZoeSkoul Learner\"\ngit -C resource-guide config --local user.email \"learner@zoeskoul.local\"\ncd resource-guide\nprintf %s '# Neighborhood Resource Guide\n' > README.md\ncd ..\ncd resource-guide\nmkdir -p pages\nprintf %s 'Help desk closes at 6 PM.\n' > pages/contact.md\ncd ..\ncd resource-guide\nmkdir -p pages\nprintf %s 'Welcome to the neighborhood guide.\n' > pages/welcome.md\ncd ..\ngit -C resource-guide add -A\ngit -C resource-guide commit -q -m 'Start neighborhood resource guide'\ncd resource-guide\nmkdir -p pages\nprintf %s '- Food pantry\n- Health clinic\n- Job center\n' > pages/services.md\ncd ..\ngit -C resource-guide add -A\ngit -C resource-guide commit -q -m 'Add local services page'\ncd resource-guide\nmkdir -p pages\nprintf %s 'Help desk closes at 5 PM.\n' > pages/contact.md\ncd ..\ngit -C resource-guide add -A\ngit -C resource-guide commit -q -m 'Update help desk hours'\ncd resource-guide\nmkdir -p generated\nprintf %s '<p>Generated preview</p>\n' > generated/preview.html\ncd ..\n"
+                  }
+                },
+                "solutionFiles": {
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf resource-guide\nmkdir -p resource-guide\ngit -C resource-guide init -q -b main\ngit -C resource-guide config --local user.name \"ZoeSkoul Learner\"\ngit -C resource-guide config --local user.email \"learner@zoeskoul.local\"\ncd resource-guide\nprintf %s '# Neighborhood Resource Guide\n' > README.md\ncd ..\ncd resource-guide\nmkdir -p pages\nprintf %s 'Help desk closes at 6 PM.\n' > pages/contact.md\ncd ..\ncd resource-guide\nmkdir -p pages\nprintf %s 'Welcome to the neighborhood guide.\n' > pages/welcome.md\ncd ..\ngit -C resource-guide add -A\ngit -C resource-guide commit -q -m 'Start neighborhood resource guide'\ncd resource-guide\nmkdir -p pages\nprintf %s '- Food pantry\n- Health clinic\n- Job center\n' > pages/services.md\ncd ..\ngit -C resource-guide add -A\ngit -C resource-guide commit -q -m 'Add local services page'\ncd resource-guide\nmkdir -p pages\nprintf %s 'Help desk closes at 5 PM.\n' > pages/contact.md\ncd ..\ngit -C resource-guide add -A\ngit -C resource-guide commit -q -m 'Update help desk hours'\ncd resource-guide\nmkdir -p generated\nprintf %s '<p>Generated preview</p>\n' > generated/preview.html\ncd ..\n"
+                  }
+                },
+                "terminalExpectations": {
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "Do not rewrite shared history in this Git practice task."
+                    }
+                  },
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Run `git add .gitignore`, then check your answer again."
+                    },
+                    "1": {
+                      "message": "Run `git check-ignore generated/preview.html`, then check your answer again."
+                    }
+                  }
+                }
+              },
+              "try_final_neighborhood_resource_guide_history_sketch4": {
+                "title": "Organize and Remove Obsolete Content",
+                "prompt": "The terminal opens inside the prepared `resource-guide/` repository.\n\nWith `.gitignore` already staged, rename `pages/welcome.md` to `pages/getting-help.md`, remove `README.md`, and review all staged structural changes. Do not commit yet.\n\nType each command in the terminal and press Enter.",
+                "hint": "Read the repository state first, then use the Git command that changes only the requested boundary.",
+                "help": {
+                  "concept": "Related cleanup actions can share one final snapshot when they serve the same handoff goal.",
+                  "hint_1": "Use the exact file or repository named in the task; avoid broad commands that include unrelated work.",
+                  "hint_2": "After the action, run the requested inspection command to confirm the final state."
+                },
+                "starterCode": "# Neighborhood Resource Guide\n",
+                "solutionCode": "git mv pages/welcome.md pages/getting-help.md\ngit rm README.md\ngit diff --staged --name-status",
+                "instructions": "The terminal opens inside the prepared `resource-guide/` repository.\n\nWith `.gitignore` already staged, rename `pages/welcome.md` to `pages/getting-help.md`, remove `README.md`, and review all staged structural changes. Do not commit yet.\n\nType each command in the terminal and press Enter.",
+                "starterFiles": {
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf resource-guide\nmkdir -p resource-guide\ngit -C resource-guide init -q -b main\ngit -C resource-guide config --local user.name \"ZoeSkoul Learner\"\ngit -C resource-guide config --local user.email \"learner@zoeskoul.local\"\ncd resource-guide\nprintf %s '# Neighborhood Resource Guide\n' > README.md\ncd ..\ncd resource-guide\nmkdir -p pages\nprintf %s 'Help desk closes at 6 PM.\n' > pages/contact.md\ncd ..\ncd resource-guide\nmkdir -p pages\nprintf %s 'Welcome to the neighborhood guide.\n' > pages/welcome.md\ncd ..\ngit -C resource-guide add -A\ngit -C resource-guide commit -q -m 'Start neighborhood resource guide'\ncd resource-guide\nmkdir -p pages\nprintf %s '- Food pantry\n- Health clinic\n- Job center\n' > pages/services.md\ncd ..\ngit -C resource-guide add -A\ngit -C resource-guide commit -q -m 'Add local services page'\ncd resource-guide\nmkdir -p pages\nprintf %s 'Help desk closes at 5 PM.\n' > pages/contact.md\ncd ..\ngit -C resource-guide add -A\ngit -C resource-guide commit -q -m 'Update help desk hours'\ncd resource-guide\nprintf %s 'generated/\n' > .gitignore\ncd ..\ncd resource-guide\nmkdir -p generated\nprintf %s '<p>Generated preview</p>\n' > generated/preview.html\ncd ..\ngit -C resource-guide add -- .gitignore\n"
+                  }
+                },
+                "solutionFiles": {
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf resource-guide\nmkdir -p resource-guide\ngit -C resource-guide init -q -b main\ngit -C resource-guide config --local user.name \"ZoeSkoul Learner\"\ngit -C resource-guide config --local user.email \"learner@zoeskoul.local\"\ncd resource-guide\nprintf %s '# Neighborhood Resource Guide\n' > README.md\ncd ..\ncd resource-guide\nmkdir -p pages\nprintf %s 'Help desk closes at 6 PM.\n' > pages/contact.md\ncd ..\ncd resource-guide\nmkdir -p pages\nprintf %s 'Welcome to the neighborhood guide.\n' > pages/welcome.md\ncd ..\ngit -C resource-guide add -A\ngit -C resource-guide commit -q -m 'Start neighborhood resource guide'\ncd resource-guide\nmkdir -p pages\nprintf %s '- Food pantry\n- Health clinic\n- Job center\n' > pages/services.md\ncd ..\ngit -C resource-guide add -A\ngit -C resource-guide commit -q -m 'Add local services page'\ncd resource-guide\nmkdir -p pages\nprintf %s 'Help desk closes at 5 PM.\n' > pages/contact.md\ncd ..\ngit -C resource-guide add -A\ngit -C resource-guide commit -q -m 'Update help desk hours'\ncd resource-guide\nprintf %s 'generated/\n' > .gitignore\ncd ..\ncd resource-guide\nmkdir -p generated\nprintf %s '<p>Generated preview</p>\n' > generated/preview.html\ncd ..\ngit -C resource-guide add -- .gitignore\n"
+                  }
+                },
+                "terminalExpectations": {
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "Do not rewrite shared history in this Git practice task."
+                    }
+                  },
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Run `git mv pages/welcome.md pages/getting-help.md`, then check your answer again."
+                    },
+                    "1": {
+                      "message": "Run `git rm README.md`, then check your answer again."
+                    },
+                    "2": {
+                      "message": "Run `git diff --staged --name-status`, then check your answer again."
+                    }
+                  }
+                }
+              },
+              "try_final_neighborhood_resource_guide_history_sketch5": {
+                "title": "Commit and Audit the Final Handoff",
+                "prompt": "The terminal opens inside the prepared `resource-guide/` repository.\n\nCommit the staged cleanup as `Prepare resource guide handoff`, then audit the one-line history, latest snapshot, tracked files, ignore rule, and clean status.\n\nType each command in the terminal and press Enter.",
+                "hint": "Read the repository state first, then use the Git command that changes only the requested boundary.",
+                "help": {
+                  "concept": "A production-ready handoff is proven by its history, current tracked files, ignore behavior, and clean working state.",
+                  "hint_1": "Use the exact file or repository named in the task; avoid broad commands that include unrelated work.",
+                  "hint_2": "After the action, run the requested inspection command to confirm the final state."
+                },
+                "starterCode": "Help desk closes at 5 PM.\n",
+                "solutionCode": "git commit -m \"Prepare resource guide handoff\"\ngit log --oneline\ngit show --stat HEAD\ngit ls-files\ngit check-ignore generated/preview.html\ngit status --short",
+                "instructions": "The terminal opens inside the prepared `resource-guide/` repository.\n\nCommit the staged cleanup as `Prepare resource guide handoff`, then audit the one-line history, latest snapshot, tracked files, ignore rule, and clean status.\n\nType each command in the terminal and press Enter.",
+                "starterFiles": {
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf resource-guide\nmkdir -p resource-guide\ngit -C resource-guide init -q -b main\ngit -C resource-guide config --local user.name \"ZoeSkoul Learner\"\ngit -C resource-guide config --local user.email \"learner@zoeskoul.local\"\ncd resource-guide\nprintf %s '# Neighborhood Resource Guide\n' > README.md\ncd ..\ncd resource-guide\nmkdir -p pages\nprintf %s 'Help desk closes at 6 PM.\n' > pages/contact.md\ncd ..\ncd resource-guide\nmkdir -p pages\nprintf %s 'Welcome to the neighborhood guide.\n' > pages/welcome.md\ncd ..\ngit -C resource-guide add -A\ngit -C resource-guide commit -q -m 'Start neighborhood resource guide'\ncd resource-guide\nmkdir -p pages\nprintf %s '- Food pantry\n- Health clinic\n- Job center\n' > pages/services.md\ncd ..\ngit -C resource-guide add -A\ngit -C resource-guide commit -q -m 'Add local services page'\ncd resource-guide\nmkdir -p pages\nprintf %s 'Help desk closes at 5 PM.\n' > pages/contact.md\ncd ..\ngit -C resource-guide add -A\ngit -C resource-guide commit -q -m 'Update help desk hours'\ncd resource-guide\nprintf %s 'generated/\n' > .gitignore\ncd ..\ncd resource-guide\nmkdir -p generated\nprintf %s '<p>Generated preview</p>\n' > generated/preview.html\ncd ..\ngit -C resource-guide mv pages/welcome.md pages/getting-help.md\ngit -C resource-guide rm -q README.md\ngit -C resource-guide add -- .gitignore\n"
+                  }
+                },
+                "solutionFiles": {
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf resource-guide\nmkdir -p resource-guide\ngit -C resource-guide init -q -b main\ngit -C resource-guide config --local user.name \"ZoeSkoul Learner\"\ngit -C resource-guide config --local user.email \"learner@zoeskoul.local\"\ncd resource-guide\nprintf %s '# Neighborhood Resource Guide\n' > README.md\ncd ..\ncd resource-guide\nmkdir -p pages\nprintf %s 'Help desk closes at 6 PM.\n' > pages/contact.md\ncd ..\ncd resource-guide\nmkdir -p pages\nprintf %s 'Welcome to the neighborhood guide.\n' > pages/welcome.md\ncd ..\ngit -C resource-guide add -A\ngit -C resource-guide commit -q -m 'Start neighborhood resource guide'\ncd resource-guide\nmkdir -p pages\nprintf %s '- Food pantry\n- Health clinic\n- Job center\n' > pages/services.md\ncd ..\ngit -C resource-guide add -A\ngit -C resource-guide commit -q -m 'Add local services page'\ncd resource-guide\nmkdir -p pages\nprintf %s 'Help desk closes at 5 PM.\n' > pages/contact.md\ncd ..\ngit -C resource-guide add -A\ngit -C resource-guide commit -q -m 'Update help desk hours'\ncd resource-guide\nprintf %s 'generated/\n' > .gitignore\ncd ..\ncd resource-guide\nmkdir -p generated\nprintf %s '<p>Generated preview</p>\n' > generated/preview.html\ncd ..\ngit -C resource-guide mv pages/welcome.md pages/getting-help.md\ngit -C resource-guide rm -q README.md\ngit -C resource-guide add -- .gitignore\n"
+                  }
+                },
+                "terminalExpectations": {
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "Do not rewrite shared history in this Git practice task."
+                    }
+                  },
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Run `git commit -m \"Prepare resource guide handoff\"`, then check your answer again."
+                    },
+                    "1": {
+                      "message": "Run `git log --oneline`, then check your answer again."
+                    },
+                    "2": {
+                      "message": "Run `git show --stat HEAD`, then check your answer again."
+                    },
+                    "3": {
+                      "message": "Run `git ls-files`, then check your answer again."
+                    },
+                    "4": {
+                      "message": "Run `git status --short`, then check your answer again."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "git-foundations": {
+      "git-foundations-module-4-final-capstone": {
+        "final-neighborhood-resource-guide-history": {
+          "intro": {
+            "title": "Turn a Working Folder into a Trustworthy Handoff",
+            "bodyMarkdown": "A neighborhood resource guide has useful content, outdated paths, and generated preview files. Over six cumulative steps, you will build a four-commit local history that another maintainer can understand.\n\nThe capstone brings the full course together: initialize the repository, configure local identity, add and update content in focused commits, ignore generated output, rename and remove tracked files safely, then verify the final timeline and clean state.\n\nNothing is uploaded. The result is a complete local repository whose history tells the story of the work."
+          }
+        }
+      }
+    }
+  }
+}

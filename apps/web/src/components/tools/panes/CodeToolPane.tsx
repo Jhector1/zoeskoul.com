@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 import { useTranslations } from "next-intl";
 import type { WorkspaceStateV2 } from "@/components/ide/types";
 import type { SqlPaneOptions } from "@/components/code/runner/components/sql/results-pane";
-import type { ToolSurface } from "@zoeskoul/curriculum-contracts";
+import type { ToolRunnerPanePolicy, ToolSurface } from "@zoeskoul/curriculum-contracts";
 import type {
     SqlDialect,
     TerminalEvidence,
@@ -1257,6 +1257,7 @@ export default function CodeToolPane(props: {
     sqlDatasetId?: string;
     sqlResultShape?: "table";
     sqlPaneOptions?: SqlPaneOptions;
+    runnerPaneOptions?: ToolRunnerPanePolicy;
     defaultSurface?: ToolSurface;
     sqlSchemaSql?: string;
     sqlSeedSql?: string;
@@ -1283,6 +1284,7 @@ export default function CodeToolPane(props: {
         sqlDatasetId,
         sqlResultShape,
         sqlPaneOptions,
+        runnerPaneOptions,
         defaultSurface,
         sqlSchemaSql,
         sqlSeedSql,
@@ -3012,6 +3014,7 @@ export default function CodeToolPane(props: {
                         sqlDatasetId={sqlDatasetId}
                         sqlResultShape={sqlResultShape}
                         sqlPaneOptions={sqlPaneOptions ?? ideShell.sqlPaneOptions}
+                        runnerPaneOptions={runnerPaneOptions}
                         defaultSurface={defaultSurface}
                         sqlSchemaSql={sqlSchemaSql ?? sqlSetupSql}
                         sqlSeedSql={sqlSeedSql}

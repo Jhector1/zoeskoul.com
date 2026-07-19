@@ -80,6 +80,35 @@ function workspaceWithMultipleRoots(): WorkspaceStateV2 {
     };
 }
 
+function gitWorkspaceWithHiddenBootstrap(): WorkspaceStateV2 {
+    return {
+        version: 2,
+        language: "bash",
+        nodes: [
+            folderNode("folder:zoeskoul", ".zoeskoul", null),
+            fileNode(
+                "file:setup",
+                "setup.sh",
+                "folder:zoeskoul",
+                "git init -b main\n",
+            ),
+            folderNode("folder:repo", "trail-journal", null),
+            fileNode(
+                "file:readme",
+                "README.md",
+                "folder:repo",
+                "# Trail Journal\n",
+            ),
+        ],
+        openTabs: ["file:readme"],
+        activeFileId: "file:readme",
+        entryFileId: "file:readme",
+        stdin: "",
+        expanded: ["folder:repo"],
+        leftPct: 26,
+    };
+}
+
 function allPaths(workspace: WorkspaceStateV2) {
     return workspace.nodes.map((node) => pathOf(workspace.nodes, node.id)).sort();
 }
@@ -95,6 +124,79 @@ function contentAtPath(workspace: WorkspaceStateV2, wantedPath: string) {
 }
 
 describe("mergeTerminalSnapshotIntoWorkspace", () => {
+    it("treats runner snapshots as partial and preserves hidden bootstrap state", () => {
+        const prior = gitWorkspaceWithHiddenBootstrap();
+
+        const next = mergeTerminalSnapshotIntoWorkspace({
+            prior,
+            snapshotFiles: [
+                {
+                    kind: "file",
+                    path: "trail-journal/README.md",
+                    content: "# Trail Journal\n",
+                },
+            ],
+        });
+
+        expect(next).toBe(prior);
+        expect(allPaths(next)).toEqual([
+            ".zoeskoul",
+            ".zoeskoul/setup.sh",
+            "trail-journal",
+            "trail-journal/README.md",
+        ]);
+    });
+
+    it("updates learner files without deleting hidden bootstrap state", () => {
+        const prior = gitWorkspaceWithHiddenBootstrap();
+
+        const next = mergeTerminalSnapshotIntoWorkspace({
+            prior,
+            snapshotFiles: [
+                {
+                    kind: "file",
+                    path: "trail-journal/README.md",
+                    content: "# Trail Journal\n\nFirst note.\n",
+                },
+            ],
+        });
+
+        expect(next).not.toBe(prior);
+        expect(contentAtPath(next, ".zoeskoul/setup.sh")).toBe(
+            "git init -b main\n",
+        );
+        expect(contentAtPath(next, "trail-journal/README.md")).toBe(
+            "# Trail Journal\n\nFirst note.\n",
+        );
+        expect(next.activeFileId).toBe("file:readme");
+        expect(next.entryFileId).toBe("file:readme");
+    });
+
+    it("does not allow a snapshot to overwrite authored internal control-plane files", () => {
+        const prior = gitWorkspaceWithHiddenBootstrap();
+
+        const next = mergeTerminalSnapshotIntoWorkspace({
+            prior,
+            snapshotFiles: [
+                {
+                    kind: "file",
+                    path: ".zoeskoul/setup.sh",
+                    content: "echo replaced\n",
+                },
+                {
+                    kind: "file",
+                    path: "trail-journal/README.md",
+                    content: "# Trail Journal\n",
+                },
+            ],
+        });
+
+        expect(next).toBe(prior);
+        expect(contentAtPath(next, ".zoeskoul/setup.sh")).toBe(
+            "git init -b main\n",
+        );
+    });
+
     it("keeps the synthetic src folder exactly once when terminal snapshot already includes src-prefixed files", () => {
         const prior = workspaceWithSyntheticSrc([
             { id: "file:main", name: "main.py", content: "print('old')" },

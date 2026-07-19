@@ -1,9 +1,11 @@
 import fs from "node:fs/promises";
-import type {
-    CourseBlueprint,
-    CoursePlan,
-    CourseSpec,
-    TopicBundleManifest,
+import {
+    deriveManifestTerminalBootstrap,
+    mergeManifestTerminalBootstraps,
+    type CourseBlueprint,
+    type CoursePlan,
+    type CourseSpec,
+    type TopicBundleManifest,
 } from "@zoeskoul/curriculum-contracts";
 import { getDraftTopicMessagesPath } from "@zoeskoul/curriculum-core";
 import {
@@ -662,6 +664,116 @@ function normalizeCurrentOutputStarterSupportFilesAsFixtures(topicBundle: TopicB
     }
 }
 
+function currentOutputTerminalBootstrap(value: unknown) {
+    if (!isCurrentOutputRecord(value)) return undefined;
+
+    const gitSafeDirectories = Array.isArray(value.gitSafeDirectories)
+        ? value.gitSafeDirectories
+              .map((entry) => String(entry ?? "").trim())
+              .filter(Boolean)
+        : [];
+    const setupScriptPath =
+        typeof value.setupScriptPath === "string"
+            ? value.setupScriptPath.trim()
+            : "";
+    const workspaceStateKey =
+        typeof value.workspaceStateKey === "string"
+            ? value.workspaceStateKey.trim()
+            : "";
+
+    return mergeManifestTerminalBootstraps({
+        ...(gitSafeDirectories.length > 0 ? { gitSafeDirectories } : {}),
+        ...(setupScriptPath ? { setupScriptPath } : {}),
+        ...(workspaceStateKey ? { workspaceStateKey } : {}),
+    });
+}
+
+function currentOutputBootstrapFiles(value: unknown) {
+    if (!Array.isArray(value)) return [];
+
+    return value
+        .filter(isCurrentOutputRecord)
+        .map((file) => ({
+            kind:
+                file.kind === "directory"
+                    ? ("directory" as const)
+                    : ("file" as const),
+            path: typeof file.path === "string" ? file.path : "",
+            name: typeof file.name === "string" ? file.name : "",
+            content: file.content,
+            language: file.language,
+            readOnly: file.readOnly === true,
+        }))
+        .filter((file) => Boolean(file.path || file.name));
+}
+
+function normalizeCurrentOutputTerminalBootstraps(topicBundle: TopicBundleManifest) {
+    const bundle = topicBundle as unknown as {
+        serviceDefaults?: unknown;
+        exercises?: unknown;
+    };
+    if (!Array.isArray(bundle.exercises)) return;
+
+    const topicServiceDefaults = isCurrentOutputRecord(bundle.serviceDefaults)
+        ? bundle.serviceDefaults
+        : {};
+    const topicBootstrap = currentOutputTerminalBootstrap(
+        topicServiceDefaults.terminalBootstrap,
+    );
+
+    for (const exercise of bundle.exercises) {
+        if (!isCurrentOutputRecord(exercise)) continue;
+        if (!isCurrentOutputTerminalWorkspaceExercise(exercise)) continue;
+
+        const ideConfig = isCurrentOutputRecord(exercise.ideConfig)
+            ? exercise.ideConfig
+            : {};
+        const serviceOverrides = isCurrentOutputRecord(exercise.serviceOverrides)
+            ? exercise.serviceOverrides
+            : {};
+        const workspace = isCurrentOutputRecord(exercise.workspace)
+            ? exercise.workspace
+            : {};
+        const fixtureFiles = mergeCurrentOutputFileListByPath(
+            exercise.fixtureFiles,
+            Array.isArray(workspace.fixtureFiles)
+                ? workspace.fixtureFiles.filter(isCurrentOutputRecord)
+                : [],
+        );
+        const terminalCwd =
+            typeof ideConfig.terminalCwd === "string"
+                ? ideConfig.terminalCwd
+                : typeof serviceOverrides.terminalCwd === "string"
+                  ? serviceOverrides.terminalCwd
+                  : "/workspace";
+        const terminalBootstrap = deriveManifestTerminalBootstrap({
+            bootstrap: mergeManifestTerminalBootstraps(
+                topicBootstrap,
+                currentOutputTerminalBootstrap(
+                    serviceOverrides.terminalBootstrap,
+                ),
+                currentOutputTerminalBootstrap(ideConfig.terminalBootstrap),
+            ),
+            terminalCwd,
+            files: currentOutputBootstrapFiles(fixtureFiles),
+        });
+
+        if (!terminalBootstrap) continue;
+
+        exercise.ideConfig = {
+            ...ideConfig,
+            terminalBootstrap,
+        };
+
+        if (Object.keys(serviceOverrides).length > 0) {
+            exercise.serviceOverrides = {
+                ...serviceOverrides,
+                terminalBootstrap,
+            };
+        }
+    }
+}
+
 function normalizeCurrentOutputProgressiveProjectTerminalCwd(topicBundle: TopicBundleManifest) {
     const bundle = topicBundle as unknown as { cards?: unknown; exercises?: unknown };
     if (!Array.isArray(bundle.cards) || !Array.isArray(bundle.exercises)) return;
@@ -829,6 +941,7 @@ export function normalizeCurrentDraftOutputForSeed(args: {
 
     normalizeCurrentOutputLearnerFacingRefs(topicBundle, messagesByLocale);
     normalizeCurrentOutputStarterSupportFilesAsFixtures(topicBundle);
+    normalizeCurrentOutputTerminalBootstraps(topicBundle);
     normalizeCurrentOutputTerminalExpectationMessageRefs(topicBundle, messagesByLocale);
 
     return { topicBundle, messagesByLocale, replacements };

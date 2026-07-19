@@ -7,6 +7,8 @@ import { useTranslations } from "next-intl";
 import PracticeShell from "@/components/practice/PracticeShell";
 import { usePracticeController } from "@/features/practice/client/usePracticeController";
 import { buildTrialHref, startTrialSession } from "@/lib/onboarding/client";
+import type { PracticeExperienceMode } from "@/lib/practice/experience/types";
+import type { SessionStatus } from "@/features/practice/client/sessionStatus";
 
 type TrialPracticeClientProps = {
     locale: string;
@@ -120,6 +122,7 @@ async function preflightTrialSession(sessionId: string): Promise<PreflightResult
     const qs = new URLSearchParams({
         sessionId,
         statusOnly: "true",
+        includeMissed: "true",
     });
 
     const res = await fetch(`/api/practice?${qs.toString()}`, {
@@ -137,21 +140,34 @@ async function wait(ms: number) {
     await new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-async function verifyRecoveredSession(sessionId: string) {
+async function verifyRecoveredSession(
+    sessionId: string,
+): Promise<SessionStatus | null> {
     for (let i = 0; i < 5; i++) {
         const { res, data } = await preflightTrialSession(sessionId);
 
         if (res.ok && data?.code !== "SESSION_RECOVERY_REQUIRED") {
-            return true;
+            return data as SessionStatus;
         }
 
         await wait(150);
     }
 
-    return false;
+    return null;
 }
 
-function TrialShellInner({ sessionId }: { sessionId: string }) {
+function TrialShellInner({
+    sessionId,
+    expectedExperienceMode,
+    initialSessionStatus,
+}: {
+    sessionId: string;
+    expectedExperienceMode: Extract<
+        PracticeExperienceMode,
+        "onboarding_trial" | "public_challenge"
+    >;
+    initialSessionStatus: SessionStatus;
+}) {
     const t = useTranslations("Practice");
 
     const { shellProps } = usePracticeController({
@@ -159,6 +175,9 @@ function TrialShellInner({ sessionId }: { sessionId: string }) {
         subjectSlug: undefined,
         moduleSlug: undefined,
         isTrial: true,
+        authoritativeSessionId: true,
+        expectedExperienceMode,
+        initialSessionStatus,
     });
 
     return <PracticeShell {...shellProps} t={t} />;
@@ -253,6 +272,7 @@ export default function TrialPracticeClient({
 
     const [gateState, setGateState] = useState<GateState>("booting");
     const [gateErr, setGateErr] = useState<string | null>(null);
+    const [preflightStatus, setPreflightStatus] = useState<SessionStatus | null>(null);
 
     useEffect(() => {
         const stored = getStoredTrialSessionId(challenge);
@@ -357,6 +377,7 @@ export default function TrialPracticeClient({
 
             setGateState("checking");
             setGateErr(null);
+            setPreflightStatus(null);
 
             const { res, data } = await preflightTrialSession(effectiveSessionId);
 
@@ -398,11 +419,11 @@ export default function TrialPracticeClient({
                 setStoredTrialSessionId(out.sessionId, challenge);
                 setStoredSessionIdState(out.sessionId);
 
-                const ok = await verifyRecoveredSession(out.sessionId);
+                const recoveredStatus = await verifyRecoveredSession(out.sessionId);
 
                 if (cancelled) return;
 
-                if (!ok) {
+                if (!recoveredStatus) {
                     setGateState("error");
                     setGateErr(
                         "We started a fresh trial, but your browser session is still not ready. Please start a new trial again.",
@@ -411,6 +432,7 @@ export default function TrialPracticeClient({
                 }
 
                 clearRecoveryCount(subject, level, challenge);
+                setPreflightStatus(recoveredStatus);
 
                 if (!canonicalPath) {
                     router.replace(
@@ -442,6 +464,7 @@ export default function TrialPracticeClient({
             }
 
             clearRecoveryCount(subject, level, challenge);
+            setPreflightStatus(data as SessionStatus);
             setGateState("ready");
         }
 
@@ -552,7 +575,7 @@ export default function TrialPracticeClient({
     // passed preflight. Keep an explicit runtime guard here so the render path
     // remains safe if URL/storage state changes between effects, and so
     // TrialShellInner always receives the non-null string its contract requires.
-    if (!effectiveSessionId) {
+    if (!effectiveSessionId || !preflightStatus) {
         return (
             <TrialStateCard
                 title={challenge ? "Missing challenge session" : "Missing trial session"}
@@ -575,5 +598,13 @@ export default function TrialPracticeClient({
         );
     }
 
-    return <TrialShellInner sessionId={effectiveSessionId} />;
+    return (
+        <TrialShellInner
+            sessionId={effectiveSessionId}
+            initialSessionStatus={preflightStatus}
+            expectedExperienceMode={
+                challenge ? "public_challenge" : "onboarding_trial"
+            }
+        />
+    );
 }

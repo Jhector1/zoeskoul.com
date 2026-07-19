@@ -202,6 +202,13 @@
         "summarySubtitle": "{completed} questions terminées sur {total}.",
         "summaryNote": "{correct} bonnes réponses • {revealed} réponses révélées."
       },
+      "onboardingTrial": {
+        "returnLabel": "Quitter l’essai",
+        "returnTitle": "Quitter l’essai d’intégration",
+        "returnLoading": "Sortie…",
+        "completeTitle": "Essai terminé",
+        "completeSubtitle": "{correct} bonnes réponses sur {answered} exercices terminés."
+      },
       "scopeTitle": "Portée de la pratique",
       "subscriber": "Abonné",
       "locked": "Verrouillé",

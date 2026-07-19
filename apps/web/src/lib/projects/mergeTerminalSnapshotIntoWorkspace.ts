@@ -14,6 +14,7 @@ import {
     isRunnerManagedWorkspacePath,
     normalizeUiProjectPath,
 } from "@/lib/projects/workspacePathMapping";
+import { isWorkspaceInternalPath } from "@/lib/projects/workspaceInternalPaths";
 
 type SnapshotEntry =
     | { kind?: "file"; path: string; content: string }
@@ -105,6 +106,7 @@ function normalizeSnapshotEntries(
         const rel = normalizeRelPath(entry?.path, syntheticRootName);
         if (!rel) continue;
         if (isRunnerManagedWorkspacePath(rel, syntheticRootName)) continue;
+        if (isWorkspaceInternalPath(rel)) continue;
 
         if ((entry as any)?.kind === "directory") {
             out.set(rel, { kind: "directory", path: rel });
@@ -119,10 +121,43 @@ function normalizeSnapshotEntries(
 
     return out;
 }
+
+function priorInternalEntries(
+    prior: WorkspaceStateV2,
+    syntheticRootName?: string | null,
+): SnapshotEntry[] {
+    const entries: SnapshotEntry[] = [];
+
+    for (const node of prior.nodes) {
+        const rel = relativeNodePathOf(
+            prior.nodes,
+            node.id,
+            syntheticRootName,
+        );
+
+        if (!rel || !isWorkspaceInternalPath(rel)) continue;
+        if (isRunnerManagedWorkspacePath(rel, syntheticRootName)) continue;
+
+        if (node.kind === "folder") {
+            entries.push({ kind: "directory", path: rel });
+            continue;
+        }
+
+        entries.push({
+            kind: "file",
+            path: rel,
+            content: node.content ?? "",
+        });
+    }
+
+    return entries;
+}
+
 function buildDesiredEntries(args: {
     snapshotFiles: SnapshotEntry[];
     priorFiles: Map<string, FileNode>;
     priorFolders: Map<string, FolderNode>;
+    priorInternalEntries: SnapshotEntry[];
     dirtyUiPaths: Set<string>;
     syntheticRootName?: string | null;
 }) {
@@ -155,11 +190,65 @@ function buildDesiredEntries(args: {
         map.delete(rel);
     }
 
+    /**
+     * Runner snapshots intentionally omit runtime control-plane paths such as
+     * `.zoeskoul/` and `.git/`. The snapshot is therefore authoritative only
+     * for learner-managed paths. Preserve any authored/internal nodes already
+     * present in the UI workspace instead of interpreting their omission as a
+     * deletion.
+     */
+    for (const entry of args.priorInternalEntries) {
+        map.set(entry.path, entry);
+    }
+
     return [...map.values()].sort((a, b) => {
         const pathCmp = a.path.localeCompare(b.path);
         if (pathCmp !== 0) return pathCmp;
         if ((a.kind ?? "file") === (b.kind ?? "file")) return 0;
         return (a.kind ?? "file") === "directory" ? -1 : 1;
+    });
+}
+
+function workspaceSemanticKey(workspace: WorkspaceStateV2) {
+    const nodePath = (id: NodeId | null | undefined) =>
+        id ? pathOf(workspace.nodes, id) || null : null;
+
+    const nodes = workspace.nodes
+        .map((node) => {
+            const path = pathOf(workspace.nodes, node.id);
+
+            if (node.kind === "file") {
+                return {
+                    path,
+                    kind: "file" as const,
+                    content: node.content ?? "",
+                };
+            }
+
+            return {
+                path,
+                kind: "folder" as const,
+            };
+        })
+        .sort((a, b) => {
+            const pathCmp = a.path.localeCompare(b.path);
+            if (pathCmp !== 0) return pathCmp;
+            return a.kind.localeCompare(b.kind);
+        });
+
+    return JSON.stringify({
+        version: 2,
+        language: workspace.language,
+        nodes,
+        openTabs: (workspace.openTabs ?? []).map(nodePath),
+        activePath: nodePath(workspace.activeFileId),
+        entryPath: nodePath(workspace.entryFileId),
+        stdin: workspace.stdin ?? "",
+        expanded: (workspace.expanded ?? [])
+            .map(nodePath)
+            .filter(Boolean)
+            .sort(),
+        leftPct: workspace.leftPct ?? 26,
     });
 }
 
@@ -224,6 +313,7 @@ export function mergeTerminalSnapshotIntoWorkspace(
         [...(args.dirtyUiPaths ?? [])]
             .map((path) => normalizeRelPath(path, syntheticRootName))
             .filter((path) => !isRunnerManagedWorkspacePath(path, syntheticRootName))
+            .filter((path) => !isWorkspaceInternalPath(path))
             .filter(Boolean),
     );
 
@@ -233,9 +323,12 @@ export function mergeTerminalSnapshotIntoWorkspace(
         snapshotFiles,
         priorFiles,
         priorFolders,
+        priorInternalEntries: priorInternalEntries(prior, syntheticRootName),
         dirtyUiPaths,
         syntheticRootName,
     });
+
+    const timestamp = now();
 
     const desiredFolderRelPaths = new Set<string>();
     const desiredFiles = desiredEntries.filter(
@@ -294,8 +387,8 @@ export function mergeTerminalSnapshotIntoWorkspace(
                         ? folderIdByRelPath.get("") ?? null
                         : null
                     : folderIdByRelPath.get(parentRel) ?? null,
-            createdAt: priorFolder?.createdAt ?? now(),
-            updatedAt: now(),
+            createdAt: priorFolder?.createdAt ?? timestamp,
+            updatedAt: priorFolder?.updatedAt ?? timestamp,
         };
 
         folderNodes.push(node);
@@ -310,6 +403,10 @@ export function mergeTerminalSnapshotIntoWorkspace(
         const priorFile = priorFiles.get(file.path);
         const name = file.path.split("/").filter(Boolean).pop() ?? file.path;
         const parentRel = parentRelPath(file.path);
+        const content = file.content ?? "";
+        const contentChanged = priorFile
+            ? (priorFile.content ?? "") !== content
+            : true;
 
         const node: FileNode = {
             id: priorFile?.id ?? uid(),
@@ -321,9 +418,11 @@ export function mergeTerminalSnapshotIntoWorkspace(
                         ? folderIdByRelPath.get("") ?? null
                         : null
                     : folderIdByRelPath.get(parentRel) ?? null,
-            content: file.content ?? "",
-            createdAt: priorFile?.createdAt ?? now(),
-            updatedAt: now(),
+            content,
+            createdAt: priorFile?.createdAt ?? timestamp,
+            updatedAt: contentChanged
+                ? timestamp
+                : priorFile?.updatedAt ?? timestamp,
         };
 
         fileNodes.push(node);
@@ -382,5 +481,15 @@ export function mergeTerminalSnapshotIntoWorkspace(
         leftPct: prior.leftPct ?? 26,
     };
 
-    return repairWorkspaceStateV2(next, prior.language);
+    const repaired = repairWorkspaceStateV2(next, prior.language);
+
+    /**
+     * Read-only terminal commands and commands that mutate only `.git/` should
+     * not manufacture a new controlled workspace. Returning the original object
+     * lets callers skip hydration and prevents the learning IDE from remounting
+     * merely because a post-Enter snapshot completed.
+     */
+    return workspaceSemanticKey(repaired) === workspaceSemanticKey(prior)
+        ? prior
+        : repaired;
 }

@@ -464,7 +464,8 @@ Onboarding trial sessions:
 
 * cannot be assignment-backed
 * only support quiz behavior
-* may treat `mixed` as acceptable input but generation still behaves as quiz-only
+* treat the persisted session policy as authoritative over stale client purpose parameters
+* repair an old `preferPurpose=project` session back to `quiz` before generation
 
 ---
 

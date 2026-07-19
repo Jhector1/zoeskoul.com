@@ -10,6 +10,8 @@ import type { TopicValue } from "@/lib/practice/uiTypes";
 import { difficultyOptions } from "@/components/vectorpad/types";
 import { useTopicOptions } from "./topicOptions";
 import { readReturnUrlFromSearchParams } from "./storage";
+import type { PracticeExperienceMode } from "@/lib/practice/experience/types";
+import { resolveClientPracticeExperienceMode } from "./experienceModePolicy";
 
 export type RunMeta = PracticeRunMetaApi;
 export type { TopicValue };
@@ -17,6 +19,7 @@ export type { TopicValue };
 type UsePracticeRunMetaArgs = {
   subjectSlug?: string;
   moduleSlug?: string;
+  expectedExperienceMode?: PracticeExperienceMode;
 };
 
 type TopicOption = { id: TopicValue; label: string };
@@ -25,6 +28,7 @@ type DifficultyOption = (typeof difficultyOptions)[number];
 export function usePracticeRunMeta({
   subjectSlug,
   moduleSlug,
+  expectedExperienceMode,
 }: UsePracticeRunMetaArgs) {
   const sp = useSearchParams();
   const returnUrlFromQuery = useMemo(
@@ -40,9 +44,11 @@ export function usePracticeRunMeta({
   // practice controls. The server run remains authoritative for every other
   // experience.
   const requestedAssignment = sp.get("type") === "assignment";
-  const experienceMode = requestedAssignment
-    ? "assignment"
-    : run?.mode ?? "practice";
+  const experienceMode = resolveClientPracticeExperienceMode({
+    requestedAssignment,
+    runMode: run?.mode ?? null,
+    expectedExperienceMode,
+  });
 
   const isAssignmentRun = experienceMode === "assignment";
   const isPublicChallengeRun = experienceMode === "public_challenge";

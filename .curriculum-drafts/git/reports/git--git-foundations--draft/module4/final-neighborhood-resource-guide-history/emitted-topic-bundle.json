@@ -492,6 +492,10 @@
         "type": "shell_task",
         "mode": "terminal_workspace",
         "instructions": "@:topics.git.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch3.instructions"
+      },
+      "tools": {
+        "defaultSurface": "editor",
+        "compactDefaultSurface": "editor"
       }
     },
     {

@@ -204,6 +204,14 @@ const toolPresentationSchema = {
         allowOpen: { type: "boolean" },
         defaultSurface: { type: "string", enum: ["editor", "results"] },
         compactDefaultSurface: { type: "string", enum: ["editor", "results"] },
+        runnerPane: {
+            type: "object",
+            additionalProperties: false,
+            properties: {
+                defaultTab: { type: "string", enum: ["output", "terminal"] },
+                compactDefaultTab: { type: "string", enum: ["output", "terminal"] },
+            },
+        },
         sqlPane: {
             type: "object",
             additionalProperties: false,

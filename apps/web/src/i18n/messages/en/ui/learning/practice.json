@@ -219,6 +219,13 @@
         "summarySubtitle": "{completed} of {total} questions completed.",
         "summaryNote": "{correct} correct • {revealed} revealed."
       },
+      "onboardingTrial": {
+        "returnLabel": "Exit trial",
+        "returnTitle": "Leave the onboarding trial",
+        "returnLoading": "Leaving…",
+        "completeTitle": "Trial complete",
+        "completeSubtitle": "{correct} correct out of {answered} completed."
+      },
       "scopeTitle": "Practice scope",
       "subscriber": "Subscriber",
       "locked": "Locked",

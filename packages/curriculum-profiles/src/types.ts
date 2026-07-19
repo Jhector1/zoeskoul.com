@@ -7,6 +7,7 @@ import type {
     TopicAuthoringDraft,
     TopicBundleManifest,
     TopicSeed,
+    ToolPresentationPolicy,
     WorkspaceLanguage,
 } from "@zoeskoul/curriculum-contracts";
 import type { SubjectShapePack } from "./shapes/types.js";
@@ -131,6 +132,8 @@ export type CourseProfile = {
     runtimeKind?: ManifestRuntimeDefaults["kind"];
     defaultLanguage?: WorkspaceLanguage;
     defaultEntryFileName?: string;
+    /** Lowest-priority Tools presentation defaults for this profile. */
+    defaultTools?: ToolPresentationPolicy;
     resolveExpectedEntryFileName?(args: {
         seed: TopicSeed;
         exercise: ManifestCodeInput;

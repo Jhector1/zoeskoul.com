@@ -65,6 +65,18 @@ export function computePurposeDecision(args: {
         };
     }
 
+    if (experienceMode === "onboarding_trial") {
+        return {
+            ok: true,
+            effective: "quiz",
+            requested: coercePurposeMode(args.preferPurposeParam),
+            allowed: ["quiz"],
+            policy: "strict",
+            source: "session",
+            reason: "onboarding_trial_uses_quiz_purpose",
+        };
+    }
+
     if (experienceMode === "daily_five" || experienceMode === "standard" || experienceMode === "practice") {
         return {
             ok: true,

@@ -26,8 +26,8 @@
             "allowReveal": true,
             "try_ignore_generated_files_sketch0": {
               "title": "Add an Ignore Rule for Build Output",
-              "prompt": "The terminal opens inside the prepared `release-kit/` repository.\n\n`dist/app.js` is generated output. Write `dist/` to `.gitignore`, then use short status to confirm the generated file disappears while `.gitignore` remains visible.\n\nType each command in the terminal and press Enter.",
-              "hint": "Read the repository state first, then use the Git command that changes only the requested boundary.",
+              "prompt": "The workspace opens on the prepared `release-kit/` repository.\n\n`dist/app.js` is generated output. Create `.gitignore` in the repository root and add one line: `dist/`.\n\nThen open Terminal, run `git status --short`, and confirm that the generated file disappears while `.gitignore` remains visible.",
+              "hint": "Use New file to create `.gitignore` beside `README.md`. Put only `dist/` on its own line, then switch to Terminal.",
               "help": {
                 "concept": ".gitignore rules keep matching untracked generated files out of normal status and staging workflows.",
                 "hint_1": "Use the exact file or repository named in the task; avoid broad commands that include unrelated work.",
@@ -35,7 +35,7 @@
               },
               "starterCode": "# Release Kit\n",
               "solutionCode": "printf \"dist/\\n\" > .gitignore\ngit status --short",
-              "instructions": "The terminal opens inside the prepared `release-kit/` repository.\n\n`dist/app.js` is generated output. Write `dist/` to `.gitignore`, then use short status to confirm the generated file disappears while `.gitignore` remains visible.\n\nType each command in the terminal and press Enter.",
+              "instructions": "The workspace opens on the prepared `release-kit/` repository.\n\n`dist/app.js` is generated output. Create `.gitignore` in the repository root and add one line: `dist/`.\n\nThen open Terminal, run `git status --short`, and confirm that the generated file disappears while `.gitignore` remains visible.",
               "starterFiles": {
                 "zoeskoul_setup_sh": {
                   "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-kit\nmkdir -p release-kit\ngit -C release-kit init -q -b main\ngit -C release-kit config --local user.name \"ZoeSkoul Learner\"\ngit -C release-kit config --local user.email \"learner@zoeskoul.local\"\ncd release-kit\nprintf %s '# Release Kit\n' > README.md\ncd ..\ngit -C release-kit add -A\ngit -C release-kit commit -q -m 'Add project baseline'\ncd release-kit\nmkdir -p dist\nprintf %s 'bundled output\n' > dist/app.js\ncd ..\n"

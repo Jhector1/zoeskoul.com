@@ -73,9 +73,6 @@ export function buildTrialReturnUrl(args: {
 
     return `/${encodeURIComponent(locale)}/subjects`;
 }
-export function sleep(ms: number) {
-    return new Promise((resolve) => setTimeout(resolve, ms));
-}
 export function buildTrialHref(args: {
     locale: string;
     sessionId: string;

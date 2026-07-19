@@ -1,4 +1,9 @@
-import type { ManifestCodeInput, ManifestStarterFile } from "@zoeskoul/curriculum-contracts";
+import {
+    deriveManifestTerminalBootstrap,
+    normalizeWorkspacePath,
+    type ManifestCodeInput,
+    type ManifestStarterFile,
+} from "@zoeskoul/curriculum-contracts";
 import type {
     CodeInputHelpFallback,
     CourseProfile,
@@ -106,31 +111,6 @@ function gitManifestFilePath(file: ManifestStarterFile): string {
     return String(file.path ?? file.name ?? "").trim();
 }
 
-function stableGitWorkspaceStateKey(args: {
-    terminalCwd: string;
-    fixtureFiles: ManifestStarterFile[];
-}): string {
-    const serialized = JSON.stringify({
-        terminalCwd: args.terminalCwd,
-        fixtureFiles: [...args.fixtureFiles]
-            .map((file) => ({
-                path: gitManifestFilePath(file),
-                content: String(file.content ?? ""),
-                language: String(file.language ?? ""),
-                readOnly: file.readOnly === true,
-            }))
-            .sort((a, b) => a.path.localeCompare(b.path)),
-    });
-    let hash = 0x811c9dc5;
-
-    for (let index = 0; index < serialized.length; index += 1) {
-        hash ^= serialized.charCodeAt(index);
-        hash = Math.imul(hash, 0x01000193);
-    }
-
-    return `git-state-v1-${(hash >>> 0).toString(36)}`;
-}
-
 function isInternalGitWorkspaceFile(path: string): boolean {
     return path === "main.sh" || path.startsWith(".zoeskoul/");
 }
@@ -157,6 +137,21 @@ function withoutEntryFlags(file: ManifestStarterFile): ManifestStarterFile {
     } = file;
 
     return rest;
+}
+
+function gitAuthoredBootstrapFiles(
+    exercise: ProfileCodeInputDraft,
+): ManifestStarterFile[] {
+    if (!Array.isArray(exercise.starterFiles)) return [];
+
+    return exercise.starterFiles.map((file) => ({
+        path: normalizeWorkspacePath(file.path),
+        content: String(file.content ?? ""),
+        language: file.language ?? "bash",
+        ...(typeof file.readOnly === "boolean"
+            ? { readOnly: file.readOnly }
+            : {}),
+    }));
 }
 
 function gitFixtureFiles(manifest: ManifestCodeInput): ManifestStarterFile[] {
@@ -234,14 +229,19 @@ function withGitEditorWorkspace(args: {
 }): ManifestCodeInput {
     const terminalCwd = gitRepositoryCwd(args.exercise);
     const fixtureFiles = gitFixtureFiles(args.manifest);
+    const authoredBootstrapFiles = gitAuthoredBootstrapFiles(args.exercise);
     const serviceDefaults = gitLearningServiceDefaults();
-    const terminalBootstrap = {
-        ...serviceDefaults.terminalBootstrap,
-        workspaceStateKey: stableGitWorkspaceStateKey({
-            terminalCwd,
-            fixtureFiles,
-        }),
-    };
+    const terminalBootstrap = deriveManifestTerminalBootstrap({
+        bootstrap: serviceDefaults.terminalBootstrap,
+        terminalCwd,
+        // The compiled starter files contain message references. Hash the
+        // authored hidden setup recipe instead so a repository-state change
+        // rotates the PTY lease while visible learner edits do not.
+        files:
+            authoredBootstrapFiles.length > 0
+                ? authoredBootstrapFiles
+                : fixtureFiles,
+    });
     const visibleFiles = gitVisibleStarterFiles(fixtureFiles);
     const entryFilePath = pickGitEntryFilePath({
         exercise: args.exercise,
@@ -386,6 +386,14 @@ const baseGitBuildManifest = baseGitProfile.codeInput?.buildManifest;
 export const gitProfile: CourseProfile = {
     ...baseGitProfile,
     defaultEntryFileName: "README.md",
+    defaultTools: {
+        defaultSurface: "results",
+        compactDefaultSurface: "results",
+        runnerPane: {
+            defaultTab: "terminal",
+            compactDefaultTab: "terminal",
+        },
+    },
     ...(baseGitProfile.codeInput
         ? {
             codeInput: {

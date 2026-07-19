@@ -1,7 +1,7 @@
 import {WorkspaceLanguage} from "@/lib/practice/types";
 import type { TerminalEvidence } from "@/lib/practice/types";
 import type { SqlPaneOptions } from "@/components/code/runner/components/sql/results-pane";
-import type { ToolSurface } from "@zoeskoul/curriculum-contracts";
+import type { ToolRunnerPanePolicy, ToolSurface } from "@zoeskoul/curriculum-contracts";
 
 
 export type NodeId = string;
@@ -125,6 +125,7 @@ export type FullIDEProps = {
     sqlDatasetId?: string;
     sqlResultShape?: "table";
     sqlPaneOptions?: SqlPaneOptions;
+    runnerPaneOptions?: ToolRunnerPanePolicy;
     defaultSurface?: ToolSurface;
     sqlSchemaSql?: string;
     onTerminalSyncReady?: (sync: (() => Promise<boolean>) | null) => void;

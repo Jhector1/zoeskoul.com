@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useMemo, useRef, useState } from "react";
+import { useRouter as useNextRouter } from "next/navigation";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useTheme } from "next-themes";
 import {
@@ -26,7 +27,6 @@ import { cn } from "@/lib/cn";
 import {
     buildTrialHref,
     saveOnboarding,
-    sleep,
     startTrialSession,
 } from "@/lib/onboarding/client";
 import { persistLocale } from "@/lib/locale/persistLocale";
@@ -1417,6 +1417,7 @@ export default function HomePageAvatarOnboardingClient({
     const reduceMotion = useReducedMotion();
     const { setTheme, resolvedTheme } = useTheme();
     const router = useRouter();
+    const nextRouter = useNextRouter();
     const pathname = usePathname();
 
     const [hydrated, setHydrated] = useState(false);
@@ -1443,13 +1444,9 @@ export default function HomePageAvatarOnboardingClient({
 // 1) add this near your other memo/state setup, after pathname/router
 
     const authHref = useAuthHref() ;
-    async function redirectToTrial(args: {
-        href: string;
-        delayMs?: number;
-    }) {
+    function redirectToTrial(href: string) {
         redirectingRef.current = true;
-        await sleep(args.delayMs ?? 1200);
-        window.location.assign(args.href);
+        nextRouter.replace(href);
     }
 
     const applyThemeChoice = React.useCallback(
@@ -1661,7 +1658,7 @@ export default function HomePageAvatarOnboardingClient({
                 completed: out.completed,
             });
 
-            await redirectToTrial({ href, delayMs: 1200 });
+            redirectToTrial(href);
             return;
         } catch (err) {
             console.error(err);
@@ -1731,7 +1728,7 @@ export default function HomePageAvatarOnboardingClient({
                     completed: out.completed,
                 });
 
-                await redirectToTrial({ href, delayMs: 1200 });
+                redirectToTrial(href);
                 return;
             }
 

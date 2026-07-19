@@ -448,4 +448,46 @@ describe("resolveRightRailSqlProps", () => {
         });
     });
 
+    it("resolves runner output/terminal defaults through the same scope chain", () => {
+        const desktop = resolveRightRailSqlProps({
+            routeCanUseBoundExercise: true,
+            tool: {
+                toolLang: "bash",
+                toolSqlDialect: "sqlite",
+                toolPresentation: {
+                    runnerPane: { defaultTab: "output" },
+                },
+            },
+            topicTools: {
+                defaultSurface: "editor",
+                runnerPane: {
+                    defaultTab: "terminal",
+                    compactDefaultTab: "output",
+                },
+            },
+            cardTools: { defaultSurface: "results" },
+        });
+
+        expect(desktop.defaultSurface).toBe("results");
+        expect(desktop.runnerPaneOptions).toEqual({
+            defaultTab: "output",
+            compactDefaultTab: "output",
+        });
+
+        const compact = resolveRightRailSqlProps({
+            routeCanUseBoundExercise: false,
+            tool: { toolLang: "bash", toolSqlDialect: "sqlite" },
+            topicTools: {
+                runnerPane: {
+                    defaultTab: "terminal",
+                    compactDefaultTab: "output",
+                },
+            },
+            compactLayout: true,
+        });
+
+        expect(compact.defaultSurface).toBe("results");
+        expect(compact.runnerPaneOptions?.defaultTab).toBe("output");
+    });
+
 });

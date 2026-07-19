@@ -829,7 +829,11 @@
           "content": "local preview\n",
           "language": "text"
         }
-      ]
+      ],
+      "tools": {
+        "defaultSurface": "editor",
+        "compactDefaultSurface": "editor"
+      }
     },
     {
       "id": "try-module-3-sketch4",

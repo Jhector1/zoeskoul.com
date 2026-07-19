@@ -165,6 +165,7 @@ export function buildTopicSeedFromPlanNode(args: {
     const authoredProjectBrief =
         specTopic?.projectBrief ?? args.topic.projectBrief ?? undefined;
     const resolvedTools = mergeToolPresentationPolicies(
+        profile.defaultTools,
         args.blueprint.tools,
         args.spec?.tools,
         specModule?.tools,

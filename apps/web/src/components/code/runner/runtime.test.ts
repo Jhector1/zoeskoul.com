@@ -81,7 +81,7 @@ describe("resolveTerminalWorkspaceKey", () => {
         });
 
         expect(bootstrapKey).toBe(
-            'workspace-bootstrap-v3:{"gitSafeDirectories":["/workspace/*","/workspace/trail-journal"],"setupScriptPath":".zoeskoul/setup.sh","workspaceStateKey":"git-state-v1-abc123"}',
+            'workspace-bootstrap-v4:{"gitSafeDirectories":["/workspace/*","/workspace/trail-journal"],"setupScriptPath":".zoeskoul/setup.sh","workspaceStateKey":"git-state-v1-abc123"}',
         );
         expect(
             resolveTerminalWorkspaceKey({

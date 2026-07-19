@@ -8,6 +8,7 @@ import {
     mergeToolPresentationPolicies,
     resolveToolPresentationForLayout,
     type ToolPresentationPolicy,
+    type ToolRunnerPanePolicy,
     type ToolSurface,
 } from "@zoeskoul/curriculum-contracts";
 import type { SqlPaneOptions } from "@/components/code/runner/components/sql/results-pane";
@@ -64,9 +65,14 @@ export type ResolvedRightRailSqlProps = {
     sqlSeedSql?: string;
     sqlInitialTableSnapshots?: SqlInitialTableSnapshots;
     sqlPaneOptions?: SqlPaneOptions;
+    runnerPaneOptions?: ToolRunnerPanePolicy;
     defaultSurface?: ToolSurface;
     toolPresentation?: ToolPresentationPolicy;
 };
+
+function hasOwnKeys(value: object): boolean {
+    return Object.keys(value).length > 0;
+}
 
 function firstNonBlank(...values: Array<string | null | undefined>) {
     for (const value of values) {
@@ -140,24 +146,27 @@ export function resolveRightRailSqlProps({
     });
 
     const authoredDefaultSurface = responsivePolicy?.defaultSurface;
-    const legacySqlTabRequestsResultsSurface = Boolean(
+    const innerTabRequestsResultsSurface = Boolean(
+        responsivePolicy?.runnerPane?.defaultTab ??
         responsivePolicy?.sqlPane?.defaultTab,
     );
     const defaultSurface: ToolSurface | undefined = authoredDefaultSurface ??
         (compactLayout && isSqlTool
             ? "results"
-            : legacySqlTabRequestsResultsSurface
+            : innerTabRequestsResultsSurface
                 ? "results"
                 : undefined);
 
-    const sqlPaneOptions: SqlPaneOptions | undefined = isSqlTool
-        ? {
-            ...(responsivePolicy?.sqlPane ?? {}),
-            ...(compactLayout && !responsivePolicy?.sqlPane?.defaultTab
-                ? { defaultTab: "results" as const }
-                : {}),
-        }
-        : undefined;
+    const sqlPaneCandidate: SqlPaneOptions = {
+        ...(responsivePolicy?.sqlPane ?? {}),
+        ...(compactLayout && isSqlTool && !responsivePolicy?.sqlPane?.defaultTab
+            ? { defaultTab: "results" as const }
+            : {}),
+    };
+    const sqlPaneOptions: SqlPaneOptions | undefined =
+        isSqlTool && hasOwnKeys(sqlPaneCandidate)
+            ? sqlPaneCandidate
+            : undefined;
 
     const toolPresentation = mergeToolPresentationPolicies(
         responsivePolicy,
@@ -165,42 +174,47 @@ export function resolveRightRailSqlProps({
         sqlPaneOptions ? { sqlPane: sqlPaneOptions } : undefined,
     );
 
+    const toolSqlDialect = firstSqlDialect(
+        hasExerciseSqlDataset ? tool.toolSqlDialect : undefined,
+        topicSqlFallback?.sqlDialect,
+        tool.toolSqlDialect,
+    );
+    const sqlDatasetId = firstNonBlank(
+        routeCanUseBoundExercise ? tool.toolSqlDatasetId : undefined,
+        topicSqlFallback?.sqlDatasetId,
+    );
+    const sqlSchemaSql = firstNonBlank(
+        routeCanUseBoundExercise ? tool.toolSqlSchemaSql : undefined,
+        topicSqlFallback?.sqlSchemaSql,
+        tool.toolLang === "sql" ? undefined : STUDENTS_SQL_SCHEMA,
+    );
+    const sqlSeedSql = firstNonBlank(
+        routeCanUseBoundExercise ? tool.toolSqlSeedSql : undefined,
+        topicSqlFallback?.sqlSeedSql,
+        tool.toolLang === "sql" ? undefined : STUDENTS_SQL_SEED,
+    );
+    const sqlInitialTableSnapshots =
+        (routeCanUseBoundExercise
+            ? tool.toolSqlInitialTableSnapshots
+            : undefined) ??
+        topicSqlFallback?.sqlInitialTableSnapshots ??
+        (tool.toolLang === "sql"
+            ? undefined
+            : STUDENTS_INITIAL_TABLE_SNAPSHOTS);
+    const runnerPaneOptions = responsivePolicy?.runnerPane;
+
     return {
-        toolSqlDialect: firstSqlDialect(
-            hasExerciseSqlDataset ? tool.toolSqlDialect : undefined,
-            topicSqlFallback?.sqlDialect,
-            tool.toolSqlDialect,
-        ),
-
-        sqlResultShape: isSqlTool ? "table" : undefined,
-
-        sqlDatasetId: firstNonBlank(
-            routeCanUseBoundExercise ? tool.toolSqlDatasetId : undefined,
-            topicSqlFallback?.sqlDatasetId,
-        ),
-
-        sqlSchemaSql: firstNonBlank(
-            routeCanUseBoundExercise ? tool.toolSqlSchemaSql : undefined,
-            topicSqlFallback?.sqlSchemaSql,
-            tool.toolLang === "sql" ? undefined : STUDENTS_SQL_SCHEMA,
-        ),
-
-        sqlSeedSql: firstNonBlank(
-            routeCanUseBoundExercise ? tool.toolSqlSeedSql : undefined,
-            topicSqlFallback?.sqlSeedSql,
-            tool.toolLang === "sql" ? undefined : STUDENTS_SQL_SEED,
-        ),
-
-        sqlInitialTableSnapshots:
-            (routeCanUseBoundExercise
-                ? tool.toolSqlInitialTableSnapshots
-                : undefined) ??
-            topicSqlFallback?.sqlInitialTableSnapshots ??
-            (tool.toolLang === "sql"
-                ? undefined
-                : STUDENTS_INITIAL_TABLE_SNAPSHOTS),
-        sqlPaneOptions,
-        defaultSurface,
-        toolPresentation,
+        toolSqlDialect,
+        ...(isSqlTool ? { sqlResultShape: "table" as const } : {}),
+        ...(sqlDatasetId ? { sqlDatasetId } : {}),
+        ...(sqlSchemaSql ? { sqlSchemaSql } : {}),
+        ...(sqlSeedSql ? { sqlSeedSql } : {}),
+        ...(sqlInitialTableSnapshots ? { sqlInitialTableSnapshots } : {}),
+        ...(sqlPaneOptions ? { sqlPaneOptions } : {}),
+        ...(runnerPaneOptions && hasOwnKeys(runnerPaneOptions)
+            ? { runnerPaneOptions }
+            : {}),
+        ...(defaultSurface ? { defaultSurface } : {}),
+        ...(toolPresentation ? { toolPresentation } : {}),
     };
 }

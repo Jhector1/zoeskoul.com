@@ -13,16 +13,21 @@ describe("ToolPresentationPolicy", () => {
             {
                 defaultVisible: true,
                 defaultSurface: "editor",
+                runnerPane: { defaultTab: "output" },
                 sqlPane: { showTables: true, showErd: true, showChen: false },
             },
-            { sqlPane: { defaultTab: "tables" } },
+            { runnerPane: { compactDefaultTab: "terminal" }, sqlPane: { defaultTab: "tables" } },
             { defaultSurface: "results" },
-            { sqlPane: { defaultTab: "erd" } },
+            { runnerPane: { defaultTab: "terminal" }, sqlPane: { defaultTab: "erd" } },
         );
 
         expect(resolved).toEqual({
             defaultVisible: true,
             defaultSurface: "results",
+            runnerPane: {
+                defaultTab: "terminal",
+                compactDefaultTab: "terminal",
+            },
             sqlPane: {
                 showTables: true,
                 showErd: true,
@@ -66,6 +71,10 @@ describe("ToolPresentationPolicy", () => {
                 policy: {
                     defaultSurface: "results",
                     compactDefaultSurface: "results",
+                    runnerPane: {
+                        defaultTab: "output",
+                        compactDefaultTab: "terminal",
+                    },
                     sqlPane: {
                         defaultTab: "erd",
                         compactDefaultTab: "results",
@@ -76,6 +85,10 @@ describe("ToolPresentationPolicy", () => {
         ).toMatchObject({
             defaultSurface: "results",
             compactDefaultSurface: "results",
+            runnerPane: {
+                defaultTab: "terminal",
+                compactDefaultTab: "terminal",
+            },
             sqlPane: {
                 defaultTab: "results",
                 compactDefaultTab: "results",
@@ -91,6 +104,10 @@ describe("ToolPresentationPolicy", () => {
                 allowOpen: "yes",
                 defaultSurface: "results",
                 compactDefaultSurface: "workspace",
+                runnerPane: {
+                    defaultTab: "terminal",
+                    compactDefaultTab: "console",
+                },
                 sqlPane: {
                     showResults: true,
                     showTables: "yes",
@@ -101,6 +118,9 @@ describe("ToolPresentationPolicy", () => {
         ).toEqual({
             defaultVisible: true,
             defaultSurface: "results",
+            runnerPane: {
+                defaultTab: "terminal",
+            },
             sqlPane: {
                 showResults: true,
                 defaultTab: "erd",
@@ -112,10 +132,12 @@ describe("ToolPresentationPolicy", () => {
         expect(
             validateToolPresentationPolicy({
                 defaultSurface: "workspace",
+                runnerPane: { defaultTab: "console" },
                 sqlPane: { defaultTab: "erd", showErd: false },
             }),
         ).toEqual([
             'tools.defaultSurface must be "editor" or "results"',
+            'tools.runnerPane.defaultTab must be "output" or "terminal"',
             "tools.sqlPane.defaultTab cannot select a tab hidden by the same policy",
         ]);
     });

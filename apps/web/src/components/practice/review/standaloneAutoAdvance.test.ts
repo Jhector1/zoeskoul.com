@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import type { QItem } from "@/lib/practice/uiTypes";
 import {
   isStandaloneAnswerResolved,
+  resolveStandaloneAutoAdvanceEnabled,
   supportsStandaloneAutoAdvance,
 } from "./standaloneAutoAdvance";
 
@@ -37,19 +38,40 @@ function item(overrides: Partial<QItem> = {}): QItem {
 }
 
 describe("standalone Review-style auto advance", () => {
-  it.each(["practice", "standard", "daily_five", "assignment"] as const)(
+  it.each([
+    "practice",
+    "standard",
+    "daily_five",
+    "assignment",
+    "onboarding_trial",
+  ] as const)(
     "enables auto advance for %s",
     (mode) => {
       expect(supportsStandaloneAutoAdvance(mode)).toBe(true);
     },
   );
 
-  it.each(["public_challenge", "onboarding_trial"] as const)(
-    "keeps %s manual",
-    (mode) => {
-      expect(supportsStandaloneAutoAdvance(mode)).toBe(false);
-    },
-  );
+  it("keeps public challenges manual", () => {
+    expect(supportsStandaloneAutoAdvance("public_challenge")).toBe(false);
+  });
+
+  it("forces onboarding auto advance even when a stored preference is off", () => {
+    expect(
+      resolveStandaloneAutoAdvanceEnabled({
+        mode: "onboarding_trial",
+        preferenceEnabled: false,
+      }),
+    ).toBe(true);
+  });
+
+  it("continues honoring the stored preference for assignments", () => {
+    expect(
+      resolveStandaloneAutoAdvanceEnabled({
+        mode: "assignment",
+        preferenceEnabled: false,
+      }),
+    ).toBe(false);
+  });
 
   it("advances after a correct answer", () => {
     expect(

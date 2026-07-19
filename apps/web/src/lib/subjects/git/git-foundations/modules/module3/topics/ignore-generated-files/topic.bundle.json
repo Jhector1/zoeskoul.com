@@ -402,7 +402,11 @@
           "content": "bundled output\n",
           "language": "javascript"
         }
-      ]
+      ],
+      "tools": {
+        "defaultSurface": "editor",
+        "compactDefaultSurface": "editor"
+      }
     },
     {
       "id": "try-ignore-generated-files-sketch1",

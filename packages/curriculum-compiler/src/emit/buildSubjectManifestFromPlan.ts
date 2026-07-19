@@ -12,7 +12,11 @@ import type {
 
 } from "@zoeskoul/curriculum-contracts";
 import { mergeToolPresentationPolicies } from "@zoeskoul/curriculum-contracts";
-import { getProfileAdapter, type SubjectShapePack } from "@zoeskoul/curriculum-profiles";
+import {
+    getCurriculumProfile,
+    getProfileAdapter,
+    type SubjectShapePack,
+} from "@zoeskoul/curriculum-profiles";
 import { moduleOrderToIndex } from "../spec/moduleOrder.js";
 import {
     resolveModuleRuntimePolicy,
@@ -41,7 +45,9 @@ export function buildSubjectManifestFromPlan(args: {
     const { blueprint, plan, shape } = args;
     const kp = shape.subjectManifest.keyPatterns;
     const profileAdapter = getProfileAdapter(blueprint.profileId);
+    const profile = getCurriculumProfile(blueprint.profileId);
     const subjectTools = mergeToolPresentationPolicies(
+        profile.defaultTools,
         blueprint.tools,
         plan.tools,
     );

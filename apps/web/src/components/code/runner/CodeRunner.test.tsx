@@ -5,12 +5,17 @@ import CodeRunner, {
     restartWorkspaceTerminalSession,
     resolveMobileKeyboardViewport,
     resolveSqlMobilePaneDefault,
+    resolveRunnerPaneDefaultTab,
     shouldCollapseIdleOutputPanel,
     shouldAutoOpenWorkspaceTerminal,
     shouldOpenEditorForWorkspaceFileSelection,
 } from "@/components/code/runner/CodeRunner";
 
 const mockedWorkspaceTerminalControllerCalls: any[] = [];
+
+vi.mock("next-intl", () => ({
+    useTranslations: () => (key: string) => key,
+}));
 
 vi.mock("next-themes", () => ({
     useTheme: () => ({
@@ -154,6 +159,79 @@ describe("CodeRunner SQL narrow-pane defaults", () => {
                 sqlPaneOptions: { defaultTab: "tables" },
             }),
         ).toBe("editor");
+
+        expect(
+            resolveSqlMobilePaneDefault({
+                language: "bash",
+                runnerPaneOptions: { defaultTab: "terminal" },
+            }),
+        ).toBe("output");
+    });
+});
+
+describe("CodeRunner runner-pane defaults", () => {
+    it("selects the authored terminal tab only when a workspace terminal is available", () => {
+        expect(
+            resolveRunnerPaneDefaultTab({
+                policy: { defaultTab: "terminal" },
+                compact: false,
+                terminalAvailable: true,
+                terminalOnlyMode: false,
+            }),
+        ).toBe("terminal");
+
+        expect(
+            resolveRunnerPaneDefaultTab({
+                policy: { defaultTab: "terminal" },
+                compact: false,
+                terminalAvailable: false,
+                terminalOnlyMode: false,
+            }),
+        ).toBe("output");
+    });
+
+    it("resolves compact overrides without changing the desktop default", () => {
+        const policy = {
+            defaultTab: "output" as const,
+            compactDefaultTab: "terminal" as const,
+        };
+
+        expect(
+            resolveRunnerPaneDefaultTab({
+                policy,
+                compact: false,
+                terminalAvailable: true,
+                terminalOnlyMode: false,
+            }),
+        ).toBe("output");
+        expect(
+            resolveRunnerPaneDefaultTab({
+                policy,
+                compact: true,
+                terminalAvailable: true,
+                terminalOnlyMode: false,
+            }),
+        ).toBe("terminal");
+    });
+
+    it("opens the terminal tab for an editor-and-terminal workspace when authored", () => {
+        const html = renderToStaticMarkup(
+            <CodeRunner
+                language="bash"
+                code="git status"
+                onChangeCode={vi.fn()}
+                onChangeLanguage={vi.fn()}
+                showEditor
+                showTerminal
+                workspaceTerminal={{ enabled: true }}
+                runnerPaneOptions={{ defaultTab: "terminal" }}
+                isAuthenticated
+                showHeaderBar={false}
+            />,
+        );
+
+        expect(html).toContain('data-testid="mock-xterm-terminal"');
+        expect(html).not.toContain('data-testid="mock-output-surface"');
     });
 });
 

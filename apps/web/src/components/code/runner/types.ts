@@ -8,6 +8,7 @@ import { CodeRunnerRuntime } from "@/components/code/runner/runtime";
 import { InteractiveLanguage } from "@zoeskoul/code-contracts";
 import type { WorkspaceStateV2 } from "@/components/ide/types";
 import type { SqlPaneOptions } from "@/components/code/runner/components/sql/results-pane";
+import type { ToolRunnerPanePolicy } from "@zoeskoul/curriculum-contracts";
 
 export type TerminalDock = "bottom" | "right";
 
@@ -123,6 +124,7 @@ export type CommonProps = {
     sqlDatasetId?: string;
     sqlResultShape?: "table";
     sqlPaneOptions?: SqlPaneOptions;
+    runnerPaneOptions?: ToolRunnerPanePolicy;
 
     allowReset?: boolean;
     allowRun?: boolean;

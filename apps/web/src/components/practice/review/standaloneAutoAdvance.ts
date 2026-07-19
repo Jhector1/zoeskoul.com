@@ -6,10 +6,25 @@ const STANDALONE_AUTO_ADVANCE_MODES = new Set<PracticeExperienceMode>([
   "standard",
   "daily_five",
   "assignment",
+  "onboarding_trial",
 ]);
 
 export function supportsStandaloneAutoAdvance(mode: PracticeExperienceMode) {
   return STANDALONE_AUTO_ADVANCE_MODES.has(mode);
+}
+
+/**
+ * Onboarding is a short, guided three-question flow with no visible
+ * auto-advance control, so it must not inherit a stale global quiz preference.
+ * Other standalone experiences continue to honor the learner preference.
+ */
+export function resolveStandaloneAutoAdvanceEnabled(args: {
+  mode: PracticeExperienceMode;
+  preferenceEnabled: boolean;
+}) {
+  if (!supportsStandaloneAutoAdvance(args.mode)) return false;
+  if (args.mode === "onboarding_trial") return true;
+  return args.preferenceEnabled;
 }
 
 /**

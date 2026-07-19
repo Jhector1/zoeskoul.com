@@ -20,7 +20,7 @@ import {
 } from "@/lib/practice/uiHelpers";
 import { isExcusedPracticeItem } from "@/lib/flow/excuse";
 import { usePracticeExcuseActions } from "@/lib/flow/usePracticeExcuseActions";
-import { getSessionStatus, SessionStatus } from "./sessionStatus";
+import { getSessionStatus, type SessionStatus } from "./sessionStatus";
 import { SESSION_DEFAULT } from "./constants";
 import type { RunMeta, TopicValue } from "./usePracticeRunMeta";
 import type { VectorPadState } from "@/components/vectorpad/types";
@@ -43,6 +43,7 @@ import { samePracticeExerciseIdentity } from "@/lib/practice/exerciseIdentity";
 import { resolveRevealCompletionTransition } from "@/lib/practice/experience/revealCompletion";
 import type { PracticeExperienceMode } from "@/lib/practice/experience/types";
 import { buildServerResumePlan } from "./assignmentResumePolicy";
+import { resolvePracticePurposeRequestParams } from "./practiceRequestPolicy";
 
 export type Phase = "practice" | "summary";
 
@@ -156,6 +157,7 @@ export function usePracticeEngine(args: {
   resumeHistoryOnBoot?: boolean;
   authoritativeSessionId?: boolean;
   initialSessionId?: string | null;
+  initialSessionStatus?: SessionStatus | null;
 
   hydrated: boolean;
   resolvedSessionIdRef: MutableRefObject<string | null>;
@@ -220,6 +222,7 @@ export function usePracticeEngine(args: {
     resumeHistoryOnBoot = false,
     authoritativeSessionId = false,
     initialSessionId = null,
+    initialSessionStatus = null,
     phase,
     setPhase,
     autoSummarized,
@@ -237,6 +240,10 @@ export function usePracticeEngine(args: {
     setIdx,
     padRef,
   } = args;
+
+  const initialSessionStatusRef = useRef<SessionStatus | null>(
+    initialSessionStatus,
+  );
 
   const abortRef = useRef<AbortController | null>(null);
   const submitLockRef = useRef(false);
@@ -407,6 +414,11 @@ export function usePracticeEngine(args: {
     signal?: AbortSignal;
   }) {
     const useSession = Boolean(args.sid);
+    const purposeRequest = resolvePracticePurposeRequestParams({
+      sessionId: args.sid,
+      preferPurpose: preferPurpose as PurposeMode | undefined,
+      purposePolicy: purposePolicy as PurposePolicy | undefined,
+    });
 
     return {
       sessionId: useSession ? args.sid ?? undefined : undefined,
@@ -418,8 +430,7 @@ export function usePracticeEngine(args: {
       difficulty:
         useSession || difficulty === "all" ? undefined : difficulty,
       section: useSession ? undefined : section ?? undefined,
-      preferPurpose: preferPurpose as any,
-      purposePolicy: purposePolicy as any,
+      ...purposeRequest,
     };
   }
 
@@ -674,12 +685,17 @@ export function usePracticeEngine(args: {
       let shouldLoadCurrent = stack.length === 0;
 
       if (effectiveSid) {
-        const st = await getSessionStatus(String(effectiveSid), {
-          includeMissed: true,
-          includeHistory: resumeHistoryOnBoot,
-          subject: subjectSlug,
-          module: moduleSlug,
-        });
+        const prefetchedStatus = initialSessionStatusRef.current;
+        initialSessionStatusRef.current = null;
+
+        const st =
+          prefetchedStatus ??
+          (await getSessionStatus(String(effectiveSid), {
+            includeMissed: true,
+            includeHistory: resumeHistoryOnBoot,
+            subject: subjectSlug,
+            module: moduleSlug,
+          }));
         if (!alive) return;
 
         if (st) {
@@ -723,8 +739,13 @@ export function usePracticeEngine(args: {
         }
       }
 
-      if (!shouldLoadCurrent) return;
+      if (!shouldLoadCurrent) {
+        bootCompleteRef.current = true;
+        return;
+      }
+
       await loadNextExercise({ forceNew: !effectiveSid });
+      if (alive) bootCompleteRef.current = true;
     })();
 
     return () => {
