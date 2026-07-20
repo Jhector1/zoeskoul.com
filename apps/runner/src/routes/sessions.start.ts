@@ -2,7 +2,6 @@ import type { RequestHandler } from "express";
 import { interactiveRunReqSchema } from "@zoeskoul/code-contracts";
 import { startDockerSession } from "../services/docker/startDockerSession.js";
 import { getRequiredActorKey } from "../middleware/serviceAuth.js";
-import { consumeStartToken } from "../services/sessions/startRateLimit.js";
 
 function statusForError(message: string) {
   if (message === "Unauthorized") return 401;
@@ -28,8 +27,6 @@ function statusForError(message: string) {
 export const startSessionRoute: RequestHandler = async (req, res) => {
   try {
     const actorKey = getRequiredActorKey(req);
-    consumeStartToken(actorKey);
-
     const parsed = interactiveRunReqSchema.parse(req.body);
 
     /**
@@ -51,6 +48,7 @@ export const startSessionRoute: RequestHandler = async (req, res) => {
       typeof raw?.clientWorkspaceKey === "string"
         ? raw.clientWorkspaceKey.trim().slice(0, 500)
         : "";
+    const rawForceNew = raw?.forceNew === true;
     const body =
       parsed.kind === "shell"
         ? {
@@ -62,6 +60,7 @@ export const startSessionRoute: RequestHandler = async (req, res) => {
             ...(rawClientWorkspaceKey
               ? { clientWorkspaceKey: rawClientWorkspaceKey }
               : {}),
+            ...(rawForceNew ? { forceNew: true } : {}),
           }
         : parsed;
 

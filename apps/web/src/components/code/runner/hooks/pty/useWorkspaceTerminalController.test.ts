@@ -6,6 +6,7 @@ import {
     normalizeRecoverableTerminalError,
     resolveWorkspacePreparationEntries,
     resolveWorkspaceTerminalStartupCwd,
+    settleWorkspaceTerminalOpenForCaller,
     shouldPrimeWorkspacePrompt,
 } from "./useWorkspaceTerminalController";
 
@@ -31,6 +32,27 @@ describe("normalizeRecoverableTerminalError", () => {
             state: "blocked_too_many_sessions",
             message: "Too many terminal start attempts. Wait a moment, then restart once.",
         });
+    });
+});
+
+
+describe("settleWorkspaceTerminalOpenForCaller", () => {
+    it("keeps passive auto-open failures quiet after the controller records recovery", async () => {
+        await expect(
+            settleWorkspaceTerminalOpenForCaller(
+                Promise.reject(new Error("Terminal limit reached")),
+                false,
+            ),
+        ).resolves.toBeUndefined();
+    });
+
+    it("preserves the canonical rejection for explicit terminal activation", async () => {
+        await expect(
+            settleWorkspaceTerminalOpenForCaller(
+                Promise.reject(new Error("Terminal limit reached")),
+                true,
+            ),
+        ).rejects.toThrow("Terminal limit reached");
     });
 });
 

@@ -179,6 +179,8 @@ export type WorkspaceTerminalController = {
     interactiveReady: boolean;
     disconnectedInputGuardActive: boolean;
     sessionId: string | null;
+    /** Browser terminal owner currently attached to this controller. */
+    attachedOwnerKey: string | null;
     state: RunSessionState | "idle";
     terminalFeed: TerminalChunk[];
     terminalEvidence: TerminalEvidence;

@@ -11,6 +11,47 @@ export type TerminalCapacity = {
     hostActiveOwnerKeys: string[];
 };
 
+export function isWorkspaceTerminalOwnerReady(args: {
+    activeOwnerKey: string | null;
+    attachedOwnerKey: string | null;
+    sessionId: string | null;
+    interactiveReady: boolean;
+    starting: boolean;
+    stopping: boolean;
+    restarting: boolean;
+}) {
+    return Boolean(
+        args.activeOwnerKey &&
+            args.attachedOwnerKey === args.activeOwnerKey &&
+            args.sessionId &&
+            args.interactiveReady &&
+            !args.starting &&
+            !args.stopping &&
+            !args.restarting,
+    );
+}
+
+export function resolveWorkspaceTerminalActivationFailure(args: {
+    tabs: WorkspaceTerminalTab[];
+    startingTerminalId: string;
+    previousTerminalId: string;
+    mode: "create" | "attach";
+}) {
+    const tabs =
+        args.mode === "create"
+            ? args.tabs.filter((tab) => tab.id !== args.startingTerminalId)
+            : args.tabs;
+    const fallbackTerminalId = tabs.some(
+        (tab) =>
+            tab.id === args.previousTerminalId &&
+            tab.id !== args.startingTerminalId,
+    )
+        ? args.previousTerminalId
+        : null;
+
+    return { tabs, fallbackTerminalId };
+}
+
 export function canCreateWorkspaceTerminalTab(args: {
     activeCount: number;
     terminalTabCount: number;
@@ -54,6 +95,8 @@ export function reconcileWorkspaceTerminalTabs(args: {
 }
 
 const HOST_CLEANUP_GRACE_MS = 5_000;
+const TERMINAL_CAPACITY_CHANNEL = "zoeskoul.terminal.capacity.v1";
+const TERMINAL_CAPACITY_STORAGE_KEY = "zoeskoul.terminal.capacity.signal.v1";
 const hostCleanupTimers = new Map<string, number>();
 let runtimeWindowId: string | null = null;
 
@@ -179,13 +222,126 @@ export async function readTerminalCapacity(
     };
 }
 
+export type TerminalCapacityInvalidationReason =
+    | "session-started"
+    | "session-closed"
+    | "host-closing"
+    | "host-cleaned"
+    | "capacity-changed";
+
+type TerminalCapacityInvalidation = {
+    id: string;
+    reason: TerminalCapacityInvalidationReason;
+    at: number;
+};
+
+/**
+ * Tell every other same-origin IDE tab that the runner capacity may have
+ * changed. The message is only an invalidation signal: receivers always read
+ * the authoritative count from the runner instead of trusting browser state.
+ */
+export function publishTerminalCapacityInvalidation(
+    reason: TerminalCapacityInvalidationReason = "capacity-changed",
+) {
+    const signal: TerminalCapacityInvalidation = {
+        id: randomId("capacity"),
+        reason,
+        at: Date.now(),
+    };
+
+    try {
+        if (typeof BroadcastChannel !== "undefined") {
+            const channel = new BroadcastChannel(TERMINAL_CAPACITY_CHANNEL);
+            channel.postMessage(signal);
+            channel.close();
+        }
+    } catch {
+        // localStorage remains as the cross-tab fallback.
+    }
+
+    try {
+        window.localStorage.setItem(
+            TERMINAL_CAPACITY_STORAGE_KEY,
+            JSON.stringify(signal),
+        );
+        window.localStorage.removeItem(TERMINAL_CAPACITY_STORAGE_KEY);
+    } catch {
+        // Privacy-restricted browsers can disable localStorage. Polling and
+        // focus/visibility refreshes still converge with runner state.
+    }
+}
+
+export function subscribeTerminalCapacityInvalidations(
+    listener: (signal: TerminalCapacityInvalidation) => void,
+) {
+    let channel: BroadcastChannel | null = null;
+
+    const readSignal = (value: unknown): TerminalCapacityInvalidation | null => {
+        if (!value || typeof value !== "object") return null;
+        const candidate = value as Partial<TerminalCapacityInvalidation>;
+        if (
+            typeof candidate.id !== "string" ||
+            typeof candidate.reason !== "string" ||
+            typeof candidate.at !== "number"
+        ) {
+            return null;
+        }
+
+        return candidate as TerminalCapacityInvalidation;
+    };
+
+    try {
+        if (typeof BroadcastChannel !== "undefined") {
+            channel = new BroadcastChannel(TERMINAL_CAPACITY_CHANNEL);
+            channel.onmessage = (event: MessageEvent<unknown>) => {
+                const signal = readSignal(event.data);
+                if (signal) listener(signal);
+            };
+        }
+    } catch {
+        channel = null;
+    }
+
+    const handleStorage = (event: StorageEvent) => {
+        if (
+            event.key !== TERMINAL_CAPACITY_STORAGE_KEY ||
+            !event.newValue
+        ) {
+            return;
+        }
+
+        try {
+            const signal = readSignal(JSON.parse(event.newValue));
+            if (signal) listener(signal);
+        } catch {
+            // Ignore malformed or unrelated storage events.
+        }
+    };
+
+    window.addEventListener("storage", handleStorage);
+
+    return () => {
+        window.removeEventListener("storage", handleStorage);
+        if (channel) {
+            channel.onmessage = null;
+            channel.close();
+        }
+    };
+}
+
 export async function cancelWorkspaceTerminalOwner(ownerKey: string) {
-    await fetch("/api/run/pty/sessions/owners/cancel", {
+    const response = await fetch("/api/run/pty/sessions/owners/cancel", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ownerKey }),
         keepalive: true,
-    }).catch(() => null);
+    });
+
+    if (!response.ok) {
+        throw new Error("Could not close the terminal session.");
+    }
+
+    publishTerminalCapacityInvalidation("session-closed");
 }
 
 export function clearScheduledTerminalHostCleanup(hostKey: string) {
@@ -205,16 +361,26 @@ export async function heartbeatTerminalHost(hostKey: string) {
 }
 
 export async function cancelWorkspaceTerminalHost(hostKey: string) {
-    await fetch("/api/run/pty/sessions/hosts/cancel", {
+    const response = await fetch("/api/run/pty/sessions/hosts/cancel", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ hostKey }),
         keepalive: true,
     });
+
+    if (!response.ok) {
+        throw new Error("Could not close the terminal host.");
+    }
+
+    publishTerminalCapacityInvalidation("host-cleaned");
 }
 
 export function cancelTerminalHostNow(hostKey: string) {
     const body = JSON.stringify({ hostKey });
+
+    // Notify sibling IDE tabs before this browsing context disappears. They
+    // retry the runner read while the beacon cancellation completes.
+    publishTerminalCapacityInvalidation("host-closing");
 
     try {
         if (typeof navigator !== "undefined" && "sendBeacon" in navigator) {
@@ -240,13 +406,18 @@ export function scheduleTerminalHostCleanup(hostKey: string) {
 
     const timer = window.setTimeout(() => {
         hostCleanupTimers.delete(hostKey);
+        publishTerminalCapacityInvalidation("host-closing");
 
         void fetch("/api/run/pty/sessions/hosts/cancel", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ hostKey }),
             keepalive: true,
-        }).catch(() => null);
+        })
+            .catch(() => null)
+            .finally(() => {
+                publishTerminalCapacityInvalidation("host-cleaned");
+            });
     }, HOST_CLEANUP_GRACE_MS);
 
     hostCleanupTimers.set(hostKey, timer);

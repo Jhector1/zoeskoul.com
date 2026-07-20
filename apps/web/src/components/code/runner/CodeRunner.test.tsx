@@ -671,6 +671,15 @@ describe("shouldAutoOpenWorkspaceTerminal", () => {
         ).toBe(false);
     });
 
+    it("lets an explicit terminal-tab activation own the open transaction", () => {
+        expect(
+            shouldAutoOpenWorkspaceTerminal({
+                ...baseArgs,
+                activationPending: true,
+            }),
+        ).toBe(false);
+    });
+
     it("does not auto-open after a failed terminal state", () => {
         expect(
             shouldAutoOpenWorkspaceTerminal({

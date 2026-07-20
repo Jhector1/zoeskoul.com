@@ -12,14 +12,10 @@ import {
     reconcilePtyLeasesWithRunner,
 } from "@/lib/server/runnerPtySessions";
 import {
-    acquirePtyLeaseLock,
-    forgetPtyLeaseBySession,
-    getPtyLeaseByOwner,
     listPtyLeasesByActor,
     maxPtySessionsPerActor,
     normalizePtyIdentityKey,
     normalizeWorkspaceKey,
-    releasePtyLeaseLock,
     rememberPtyLease,
 } from "@/lib/server/ptySessionLeases";
 import {
@@ -28,9 +24,6 @@ import {
 } from "@/lib/server/redis";
 
 export const runtime = "nodejs";
-
-const ENSURE_START_LOCK_WAIT_ATTEMPTS = 80;
-const ENSURE_START_LOCK_WAIT_DELAY_MS = 250;
 
 type WorkspaceSyncEntry =
     | { kind?: "file"; path: string; content: string }
@@ -60,8 +53,6 @@ type EnsureBrowserSessionResult =
           ok: false;
           error: string;
       };
-
-type CancelSessionResponse = { ok: true } | { ok: false; error: string };
 
 function isShellRequest(body: unknown): body is ShellEnsureReq {
     if (!body || typeof body !== "object") return false;
@@ -119,27 +110,48 @@ async function buildSessionResponse(args: {
     state: RunSessionState;
     actorKey: string;
     reused: boolean;
+    capacityHint?: {
+        activeCount?: number;
+        maxActiveSessions?: number;
+    };
 }): Promise<EnsureBrowserSessionResult> {
     const attachToken = createAttachToken({
         sessionId: args.sessionId,
         actorKey: args.actorKey,
     });
+    const hintedActiveCount = Number(args.capacityHint?.activeCount);
+    const hintedMaxActiveSessions = Number(args.capacityHint?.maxActiveSessions);
     let activeCount: number;
     let maxActiveSessions: number;
 
-    try {
-        const capacity = await readRunnerPtyCapacity(args.actorKey);
-        activeCount = capacity.activeCount;
-        maxActiveSessions = capacity.maxActiveSessions;
-        await reconcilePtyLeasesWithRunner({
-            actorKey: args.actorKey,
-            capacity,
-        }).catch(() => {});
-    } catch {
-        // Keep an already-created terminal usable during a rolling deploy where
-        // the new capacity route has not reached every runner yet.
-        activeCount = (await listPtyLeasesByActor({ actorKey: args.actorKey })).length;
-        maxActiveSessions = maxPtySessionsPerActor();
+    if (
+        Number.isFinite(hintedActiveCount) &&
+        hintedActiveCount >= 0 &&
+        Number.isFinite(hintedMaxActiveSessions) &&
+        hintedMaxActiveSessions >= 1
+    ) {
+        /**
+         * /sessions/start already registered the session and returned the
+         * runner-authoritative count. Do not add another runner round trip to the
+         * prompt-critical path merely to reread the same capacity.
+         */
+        activeCount = Math.floor(hintedActiveCount);
+        maxActiveSessions = Math.floor(hintedMaxActiveSessions);
+    } else {
+        try {
+            const capacity = await readRunnerPtyCapacity(args.actorKey);
+            activeCount = capacity.activeCount;
+            maxActiveSessions = capacity.maxActiveSessions;
+            await reconcilePtyLeasesWithRunner({
+                actorKey: args.actorKey,
+                capacity,
+            }).catch(() => {});
+        } catch {
+            // Keep an already-created terminal usable during a rolling deploy where
+            // the new capacity route has not reached every runner yet.
+            activeCount = (await listPtyLeasesByActor({ actorKey: args.actorKey })).length;
+            maxActiveSessions = maxPtySessionsPerActor();
+        }
     }
 
     return {
@@ -168,7 +180,6 @@ function stripLeaseFields(
         leaseKey: _leaseKey,
         hostKey: _hostKey,
         ownerKey: _ownerKey,
-        forceNew: _forceNew,
         ...runnerBody
     } = body as any;
 
@@ -192,76 +203,7 @@ function buildRunnerWorkspaceKey(args: {
     return `${args.hostKey}::workspace::${args.workspaceKey}`;
 }
 
-function isStaleRunnerSessionError(error: unknown) {
-    if (error instanceof RunnerHttpError) {
-        const message = error.message.toLowerCase();
-
-        return (
-            error.status === 403 ||
-            error.status === 404 ||
-            message.includes("no such container") ||
-            message.includes("no such session") ||
-            message.includes("session not found") ||
-            message.includes("forbidden")
-        );
-    }
-
-    const message =
-        error instanceof Error ? error.message.toLowerCase() : String(error).toLowerCase();
-
-    return (
-        message.includes("no such container") ||
-        message.includes("no such session") ||
-        message.includes("session not found") ||
-        message.includes("forbidden")
-    );
-}
-
-async function canReusePtyLease(args: {
-    actorKey: string;
-    sessionId: string;
-}) {
-    try {
-        const out = await runnerPost<{ ok?: boolean }>(
-            `/sessions/${encodeURIComponent(args.sessionId)}/snapshot-workspace`,
-            args.actorKey,
-            {},
-        );
-
-        return out?.ok !== false;
-    } catch (error) {
-        if (isStaleRunnerSessionError(error)) {
-            await forgetPtyLeaseBySession({
-                actorKey: args.actorKey,
-                sessionId: args.sessionId,
-            }).catch(() => {});
-
-            return false;
-        }
-
-        throw error;
-    }
-}
-
-async function cancelOwnedSession(args: {
-    actorKey: string;
-    sessionId: string;
-}) {
-    try {
-        await runnerPost<CancelSessionResponse>(
-            `/sessions/${encodeURIComponent(args.sessionId)}/cancel`,
-            args.actorKey,
-        );
-    } catch (error) {
-        if (!isStaleRunnerSessionError(error)) throw error;
-    } finally {
-        await forgetPtyLeaseBySession(args).catch(() => {});
-    }
-}
-
 export async function POST(req: NextRequest) {
-    let lock: { key: string; token: string } | null = null;
-
     try {
         const actorKey = await requireRunnerActorKey();
         const body = (await req.json()) as InteractiveRunReq | ShellEnsureReq;
@@ -285,6 +227,7 @@ export async function POST(req: NextRequest) {
                     state: out.state,
                     actorKey,
                     reused: false,
+                    capacityHint: out,
                 }),
             );
         }
@@ -310,6 +253,7 @@ export async function POST(req: NextRequest) {
                     state: out.state,
                     actorKey,
                     reused: false,
+                    capacityHint: out,
                 }),
             );
         }
@@ -322,103 +266,6 @@ export async function POST(req: NextRequest) {
             hostKey,
             workspaceKey,
         });
-
-        await reconcilePtyLeasesWithRunner({ actorKey }).catch((error) => {
-            console.warn("PTY ensure lease reconciliation skipped", {
-                message: error instanceof Error ? error.message : String(error),
-            });
-        });
-
-        const findReusableOwnerLease = async () => {
-            const existing = await getPtyLeaseByOwner({ actorKey, ownerKey });
-            if (!existing) return null;
-
-            if (!(await canReusePtyLease({ actorKey, sessionId: existing.sessionId }))) {
-                return null;
-            }
-
-            return await rememberPtyLease({
-                actorKey,
-                hostKey,
-                ownerKey,
-                workspaceKey,
-                sessionId: existing.sessionId,
-                state: existing.state,
-                createdAt: existing.createdAt,
-            });
-        };
-
-        if (!body.forceNew) {
-            const reusable = await findReusableOwnerLease();
-            if (reusable) {
-                return NextResponse.json<EnsureBrowserSessionResult>(
-                    await buildSessionResponse({
-                        sessionId: reusable.sessionId,
-                        state: reusable.state,
-                        actorKey,
-                        reused: true,
-                    }),
-                );
-            }
-        }
-
-        lock = await acquirePtyLeaseLock({ actorKey, ownerKey });
-
-        if (!lock) {
-            for (let attempt = 0; attempt < ENSURE_START_LOCK_WAIT_ATTEMPTS; attempt += 1) {
-                if (!body.forceNew) {
-                    const reusable = await findReusableOwnerLease();
-                    if (reusable) {
-                        return NextResponse.json<EnsureBrowserSessionResult>(
-                            await buildSessionResponse({
-                                sessionId: reusable.sessionId,
-                                state: reusable.state,
-                                actorKey,
-                                reused: true,
-                            }),
-                        );
-                    }
-                }
-
-                await new Promise((resolve) =>
-                    setTimeout(resolve, ENSURE_START_LOCK_WAIT_DELAY_MS),
-                );
-
-                lock = await acquirePtyLeaseLock({ actorKey, ownerKey });
-                if (lock) break;
-            }
-
-            if (!lock) {
-                return NextResponse.json<EnsureBrowserSessionResult>(
-                    {
-                        ok: false,
-                        error: "This terminal is already starting. Please retry in a moment.",
-                    },
-                    { status: 409 },
-                );
-            }
-        }
-
-        const existingAfterLock = await getPtyLeaseByOwner({ actorKey, ownerKey });
-
-        if (body.forceNew && existingAfterLock) {
-            await cancelOwnedSession({
-                actorKey,
-                sessionId: existingAfterLock.sessionId,
-            });
-        } else if (existingAfterLock) {
-            const reusable = await findReusableOwnerLease();
-            if (reusable) {
-                return NextResponse.json<EnsureBrowserSessionResult>(
-                    await buildSessionResponse({
-                        sessionId: reusable.sessionId,
-                        state: reusable.state,
-                        actorKey,
-                        reused: true,
-                    }),
-                );
-            }
-        }
 
         const out = await runnerPost<StartSessionResult>(
             "/sessions/start",
@@ -451,7 +298,8 @@ export async function POST(req: NextRequest) {
                 sessionId: out.sessionId,
                 state: out.state,
                 actorKey,
-                reused: false,
+                reused: out.reused === true,
+                capacityHint: out,
             }),
         );
     } catch (e: any) {
@@ -483,9 +331,5 @@ export async function POST(req: NextRequest) {
             { ok: false, error: e?.message ?? "Failed." },
             { status },
         );
-    } finally {
-        if (lock) {
-            await releasePtyLeaseLock(lock).catch(() => {});
-        }
     }
 }

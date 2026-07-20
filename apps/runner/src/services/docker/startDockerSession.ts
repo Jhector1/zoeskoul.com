@@ -8,6 +8,7 @@ import type {
 } from "@zoeskoul/code-contracts";
 import { env } from "../../lib/env.js";
 import {
+  countActiveSessionsForActor,
   createSession,
   getActiveSessionsForActor,
   getSession,
@@ -23,6 +24,8 @@ import {
   clearAllTimeouts,
 } from "../sessions/timeoutManager.js";
 import { resolveTimeoutPolicy } from "../sessions/timeoutPolicy.js";
+import { consumeStartToken } from "../sessions/startRateLimit.js";
+import { resolveOwnedShellSession } from "../sessions/ownedShellSession.js";
 import {
   createWorkspace,
   ensureWorkspaceRuntimeFiles,
@@ -61,6 +64,7 @@ type NormalizedRequest =
       clientHostKey?: string;
       clientOwnerKey?: string;
       clientWorkspaceKey?: string;
+      forceNew?: boolean;
       wallTimeoutMs?: number;
       idleTimeoutMs?: number;
       cwd?: string;
@@ -192,6 +196,7 @@ function normalizeRequest(req: InteractiveRunReq): NormalizedRequest {
       clientHostKey: req.clientHostKey,
       clientOwnerKey: req.clientOwnerKey,
       clientWorkspaceKey: req.clientWorkspaceKey,
+      forceNew: req.forceNew,
       wallTimeoutMs: req.wallTimeoutMs,
       idleTimeoutMs: req.idleTimeoutMs,
       cwd: req.cwd,
@@ -242,7 +247,7 @@ function isTerminalState(state: string) {
   );
 }
 
-export async function startDockerSession(
+async function startDockerSessionUncoordinated(
   req: InteractiveRunReq,
   ownerKey: string,
 ): Promise<StartSessionResult> {
@@ -507,6 +512,8 @@ export async function startDockerSession(
         ok: true,
         sessionId,
         state: normalized.kind === "shell" ? "waiting_for_input" : "running",
+        activeCount: countActiveSessionsForActor(ownerKey),
+        maxActiveSessions: env.maxConcurrentPerActor,
       };
     } catch (e: any) {
       clearAllTimeouts(sessionId);
@@ -540,5 +547,72 @@ export async function startDockerSession(
       ok: false,
       error: e?.message ?? "Failed.",
     };
+  }
+}
+
+const shellStartsByOwner = new Map<string, Promise<StartSessionResult>>();
+
+/**
+ * The runner owns terminal identity and capacity. A browser reattach or React
+ * remount with the same clientOwnerKey must reuse the live shell instead of
+ * making the web tier probe snapshots, reconcile Redis, and race a second
+ * container start.
+ */
+export async function startDockerSession(
+  req: InteractiveRunReq,
+  ownerKey: string,
+): Promise<StartSessionResult> {
+  if (req.kind !== "shell" || !req.clientOwnerKey) {
+    consumeStartToken(ownerKey);
+    return await startDockerSessionUncoordinated(req, ownerKey);
+  }
+
+  const clientOwnerKey = req.clientOwnerKey;
+  const startKey = `${ownerKey}\0${clientOwnerKey}`;
+  const inFlight = shellStartsByOwner.get(startKey);
+  if (inFlight) return await inFlight;
+
+  const run = (async (): Promise<StartSessionResult> => {
+    const resolution = resolveOwnedShellSession({
+      sessions: getActiveSessionsForActor(ownerKey),
+      clientHostKey: req.clientHostKey,
+      clientOwnerKey,
+      clientWorkspaceKey: req.clientWorkspaceKey,
+      workspaceKey: req.workspaceKey,
+      forceNew: req.forceNew,
+    });
+
+    for (const session of resolution.sessionsToCancel) {
+      await killSession(session.id, "canceled").catch(() => {});
+    }
+
+    if (resolution.reusable) {
+      const reusable = resolution.reusable;
+      return {
+        ok: true,
+        sessionId: reusable.id,
+        state: reusable.state,
+        activeCount: countActiveSessionsForActor(ownerKey),
+        maxActiveSessions: env.maxConcurrentPerActor,
+        reused: true,
+      };
+    }
+
+    consumeStartToken(ownerKey);
+    const started = await startDockerSessionUncoordinated(req, ownerKey);
+    if (started.ok) {
+      return { ...started, reused: false };
+    }
+    return started;
+  })();
+
+  shellStartsByOwner.set(startKey, run);
+
+  try {
+    return await run;
+  } finally {
+    if (shellStartsByOwner.get(startKey) === run) {
+      shellStartsByOwner.delete(startKey);
+    }
   }
 }

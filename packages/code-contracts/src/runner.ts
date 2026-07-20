@@ -163,6 +163,7 @@ export const interactiveRunReqSchema = z.union([
         clientHostKey: z.string().trim().min(1).max(500).optional(),
         clientOwnerKey: z.string().trim().min(1).max(500).optional(),
         clientWorkspaceKey: z.string().trim().min(1).max(500).optional(),
+        forceNew: z.boolean().optional(),
         ...timeoutFields,
     }),
 ]);
@@ -196,6 +197,7 @@ export type InteractiveRunReq =
     clientHostKey?: string;
     clientOwnerKey?: string;
     clientWorkspaceKey?: string;
+    forceNew?: boolean;
     wallTimeoutMs?: number;
     idleTimeoutMs?: number;
 };
@@ -216,6 +218,10 @@ export type StartSessionResult =
     ok: true;
     sessionId: string;
     state: RunSessionState;
+    /** Runner-authoritative capacity after this session was registered. */
+    activeCount?: number;
+    maxActiveSessions?: number;
+    reused?: boolean;
 }
     | {
     ok: false;

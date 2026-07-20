@@ -81,8 +81,6 @@ const TERMINAL_RECYCLE_AUTORESTART_DELAY_MS = 900;
 const TERMINAL_RECYCLE_AUTORESTART_COOLDOWN_MS = 30_000;
 
 const MAX_PENDING_RECOVERY_INPUT_CHARS = 4096;
-const WORKSPACE_READY_TIMEOUT_MS = 8_000;
-const WORKSPACE_READY_POLL_MS = 150;
 const terminalAutoStartAttempts = new Map<string, number>();
 
 const CLIENT_UNMOUNT_CANCEL_GRACE_MS = 5_000;
@@ -147,6 +145,23 @@ type OpenWorkspaceTerminalOptions = {
     throwOnFailure?: boolean;
 };
 
+export async function settleWorkspaceTerminalOpenForCaller(
+    promise: Promise<void>,
+    throwOnFailure: boolean,
+): Promise<void> {
+    if (throwOnFailure) {
+        return await promise;
+    }
+
+    try {
+        await promise;
+    } catch {
+        // The controller already exposes the recovery state and message. Passive
+        // auto-open callers stay quiet, but explicit tab activation can await the
+        // same canonical promise and receive its rejection.
+    }
+}
+
 export function shouldPrimeWorkspacePrompt(args: {
     sessionId: string | null;
     workspaceReady: boolean;
@@ -200,48 +215,6 @@ type WorkspaceReplaceResponse =
 
 function sleep(ms: number) {
     return new Promise((resolve) => window.setTimeout(resolve, ms));
-}
-
-function normalizeWorkspacePathForCompare(path: string) {
-    return String(path ?? "")
-        .replace(/\\/g, "/")
-        .replace(/^\/+/, "")
-        .replace(/\/+/g, "/")
-        .replace(/\/$/, "");
-}
-
-function workspaceSnapshotHasEntries(
-    snapshotEntries: WorkspaceSyncEntry[],
-    expectedEntries: WorkspaceSyncEntry[],
-) {
-    const snapshot = new Map(
-        snapshotEntries.map((entry) => [
-            normalizeWorkspacePathForCompare(entry.path),
-            entry,
-        ]),
-    );
-
-    return expectedEntries.every((expected) => {
-        const expectedPath = normalizeWorkspacePathForCompare(expected.path);
-        if (!expectedPath) return true;
-
-        if ((expected as any).kind === "directory") {
-            if (snapshot.has(expectedPath)) return true;
-
-            const prefix = `${expectedPath}/`;
-            return snapshotEntries.some((entry) =>
-                normalizeWorkspacePathForCompare(entry.path).startsWith(prefix),
-            );
-        }
-
-        const actual = snapshot.get(expectedPath);
-        if (!actual) return false;
-
-        if ((actual as any).kind === "directory") return false;
-
-        return workspaceSyncEntryValue(actual) ===
-            workspaceSyncEntryValue(expected);
-    });
 }
 
 async function replaceWorkspaceForSession(
@@ -313,39 +286,6 @@ export function resolveWorkspacePreparationEntries(
         ),
     };
 }
-
-async function ensureWorkspaceReadyForInput(args: {
-    sessionId: string;
-    files: WorkspaceSyncEntry[];
-}) {
-    const { replacementEntries, snapshotExpectedEntries } =
-        resolveWorkspacePreparationEntries(args.files);
-
-    if (!replacementEntries.length) return;
-
-    // Push the complete authored workspace, including hidden bootstrap files.
-    await replaceWorkspaceForSession(args.sessionId, replacementEntries);
-
-    // Runner snapshots intentionally omit runtime-managed paths such as
-    // `.zoeskoul/` and `.git/`. The completed replace request is sufficient
-    // evidence for those files; poll only paths the snapshot API can return.
-    if (!snapshotExpectedEntries.length) return;
-
-    const deadline = Date.now() + WORKSPACE_READY_TIMEOUT_MS;
-
-    while (Date.now() < deadline) {
-        const snapshot = await snapshotWorkspaceForSession(args.sessionId);
-
-        if (workspaceSnapshotHasEntries(snapshot, snapshotExpectedEntries)) {
-            return;
-        }
-
-        await sleep(WORKSPACE_READY_POLL_MS);
-    }
-
-    throw new Error("Terminal workspace did not finish preparing. Restart the terminal to try again.");
-}
-
 
 function isActiveSessionCapacityMessage(message: string) {
     return /too many\s+active\s+sessions|active\s+session\s+limit/i.test(message);
@@ -947,6 +887,7 @@ export function useWorkspaceTerminalController(
     const [recoverMessage, setRecoverMessage] = React.useState<string | null>(null);
     const [restarting, setRestarting] = React.useState(false);
     const [stopping, setStopping] = React.useState(false);
+    const [attachedOwnerKey, setAttachedOwnerKey] = React.useState<string | null>(null);
 
     const nextChunkIdRef = React.useRef(1);
     const lastHandledSeqRef = React.useRef(0);
@@ -1448,6 +1389,7 @@ export function useWorkspaceTerminalController(
         terminalFeedRef.current = [];
         setTerminalFeed([]);
         setTerminalEvidenceNow(createTerminalEvidence(initialEvidenceCwd));
+        setAttachedOwnerKey(null);
         setInputEnabled(false);
         setBusy(false);
         setState("idle");
@@ -1761,7 +1703,10 @@ export function useWorkspaceTerminalController(
             }
 
             if (openInFlightRef.current) {
-                return await openInFlightRef.current;
+                return await settleWorkspaceTerminalOpenForCaller(
+                    openInFlightRef.current,
+                    options.throwOnFailure === true,
+                );
             }
 
             if (startingRef.current) return;
@@ -1786,6 +1731,7 @@ export function useWorkspaceTerminalController(
                 closeSocket();
                 openedLeaseKeyRef.current = null;
                 openedOwnerKeyRef.current = null;
+                setAttachedOwnerKey(null);
                 setStarted(false);
                 setStarting(false);
                 setBusy(false);
@@ -1811,6 +1757,7 @@ export function useWorkspaceTerminalController(
                 promptPrimeAttemptsRef.current = 0;
                 terminalFeedRef.current = [];
                 setTerminalFeed([]);
+                setAttachedOwnerKey(null);
                 setInputEnabled(false);
                 setBusy(true);
                 stateRef.current = "preparing";
@@ -1913,10 +1860,15 @@ export function useWorkspaceTerminalController(
                         return;
                     }
 
-                    await ensureWorkspaceReadyForInput({
-                        sessionId: nextSessionId,
-                        files: fullEntries,
-                    });
+                    /**
+                     * The runner returns from /sessions/start only after the shared
+                     * workspace exists, is mounted, and the shell container has entered
+                     * waiting_for_input. Replacing and snapshot-polling that same
+                     * workspace here duplicated the full workspace transfer on every
+                     * open/reattach, delayed the prompt, and could overwrite changes made
+                     * by another terminal attached to the shared project.
+                     */
+                    workspaceReadyRef.current = true;
 
                     if (
                         !mountedRef.current ||
@@ -1947,6 +1899,7 @@ export function useWorkspaceTerminalController(
                     workspaceReadyRef.current = true;
                     scheduleStartupCwdFlush();
                     lastPushedEntriesRef.current = visibleEntries;
+                    setAttachedOwnerKey(terminalOwnerKey);
                     startedRef.current = true;
                     releaseAutomaticTerminalStart(terminalStartClaimKey);
                     setStarted(true);
@@ -1992,17 +1945,16 @@ export function useWorkspaceTerminalController(
                     ) {
                         openedLeaseKeyRef.current = null;
                         openedOwnerKeyRef.current = null;
+                        setAttachedOwnerKey(null);
                     }
 
                     /**
-                     * Automatic open remains non-throwing so React remounts cannot fan
-                     * out into repeated starts. The explicit new-tab transaction opts in
-                     * to rejection so it can remove a tab that never acquired a session.
+                     * Keep one canonical rejected promise for this open transaction.
+                     * Passive auto-open callers may suppress it at their call boundary,
+                     * while explicit tab activation must observe it and roll back the
+                     * pending tab instead of remaining stuck on “Opening…”.
                      */
-                    if (options.throwOnFailure) {
-                        throw e;
-                    }
-                    return;
+                    throw e;
                 } finally {
                     clearStaleStartingTimer();
                     startingRef.current = false;
@@ -2012,7 +1964,10 @@ export function useWorkspaceTerminalController(
             })();
 
             openInFlightRef.current = run;
-            return await run;
+            return await settleWorkspaceTerminalOpenForCaller(
+                run,
+                options.throwOnFailure === true,
+            );
         },
         [
             args.enabled,
@@ -2882,6 +2837,7 @@ export function useWorkspaceTerminalController(
         interactiveReady,
         disconnectedInputGuardActive,
         sessionId,
+        attachedOwnerKey,
         state,
         terminalFeed,
         terminalEvidence,

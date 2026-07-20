@@ -1,11 +1,20 @@
-import { describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 
 import {
     buildWorkspaceTerminalHostKey,
     buildWorkspaceTerminalOwnerKey,
     canCreateWorkspaceTerminalTab,
+    isWorkspaceTerminalOwnerReady,
+    publishTerminalCapacityInvalidation,
     reconcileWorkspaceTerminalTabs,
+    resolveWorkspaceTerminalActivationFailure,
+    subscribeTerminalCapacityInvalidations,
 } from "./workspaceTerminalHosts";
+
+
+afterEach(() => {
+    vi.unstubAllGlobals();
+});
 
 describe("workspace terminal identity", () => {
     it("isolates unrelated IDE experiences in the same browser window", () => {
@@ -125,5 +134,126 @@ describe("workspace terminal capacity", () => {
             ],
             activeId: "primary",
         });
+    });
+});
+
+
+describe("workspace terminal owner switching", () => {
+    it("does not treat the previous terminal controller as ready for a newly selected tab", () => {
+        expect(
+            isWorkspaceTerminalOwnerReady({
+                activeOwnerKey: "host:owner:terminal-2",
+                attachedOwnerKey: "host:owner:terminal-1",
+                sessionId: "session-terminal-1",
+                interactiveReady: true,
+                starting: false,
+                stopping: false,
+                restarting: false,
+            }),
+        ).toBe(false);
+    });
+
+    it("marks a terminal ready only after its own owner has attached and become interactive", () => {
+        expect(
+            isWorkspaceTerminalOwnerReady({
+                activeOwnerKey: "host:owner:terminal-2",
+                attachedOwnerKey: "host:owner:terminal-2",
+                sessionId: "session-terminal-2",
+                interactiveReady: true,
+                starting: false,
+                stopping: false,
+                restarting: false,
+            }),
+        ).toBe(true);
+    });
+});
+
+
+describe("workspace terminal activation rollback", () => {
+    const tabs = [
+        { id: "primary", label: "Terminal 1" },
+        { id: "terminal-2", label: "Terminal 2" },
+    ];
+
+    it("removes only a newly created tab when its session fails to start", () => {
+        expect(
+            resolveWorkspaceTerminalActivationFailure({
+                tabs,
+                startingTerminalId: "terminal-2",
+                previousTerminalId: "primary",
+                mode: "create",
+            }),
+        ).toEqual({
+            tabs: [{ id: "primary", label: "Terminal 1" }],
+            fallbackTerminalId: "primary",
+        });
+    });
+
+    it("keeps an existing terminal tab when reattachment temporarily fails", () => {
+        expect(
+            resolveWorkspaceTerminalActivationFailure({
+                tabs,
+                startingTerminalId: "terminal-2",
+                previousTerminalId: "primary",
+                mode: "attach",
+            }),
+        ).toEqual({
+            tabs,
+            fallbackTerminalId: "primary",
+        });
+    });
+});
+
+describe("workspace terminal capacity synchronization", () => {
+    it("notifies another browser tab to reread runner capacity", () => {
+        type ChannelInstance = {
+            name: string;
+            onmessage: ((event: { data: unknown }) => void) | null;
+            close: () => void;
+        };
+        const instances = new Set<ChannelInstance>();
+
+        class FakeBroadcastChannel implements ChannelInstance {
+            onmessage: ((event: { data: unknown }) => void) | null = null;
+
+            constructor(public name: string) {
+                instances.add(this);
+            }
+
+            postMessage(data: unknown) {
+                for (const instance of instances) {
+                    if (instance !== this && instance.name === this.name) {
+                        instance.onmessage?.({ data });
+                    }
+                }
+            }
+
+            close() {
+                instances.delete(this);
+            }
+        }
+
+        vi.stubGlobal("BroadcastChannel", FakeBroadcastChannel);
+        vi.stubGlobal("window", {
+            localStorage: {
+                setItem: vi.fn(),
+                removeItem: vi.fn(),
+            },
+            addEventListener: vi.fn(),
+            removeEventListener: vi.fn(),
+        });
+
+        const listener = vi.fn();
+        const unsubscribe = subscribeTerminalCapacityInvalidations(listener);
+
+        publishTerminalCapacityInvalidation("session-closed");
+
+        expect(listener).toHaveBeenCalledTimes(1);
+        expect(listener).toHaveBeenCalledWith(
+            expect.objectContaining({ reason: "session-closed" }),
+        );
+
+        unsubscribe();
+        expect(instances.size).toBe(0);
     });
 });
