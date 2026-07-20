@@ -8,16 +8,49 @@ export type WorkspaceTerminalTab = {
 export type TerminalCapacity = {
     activeCount: number;
     maxActiveSessions: number;
+    hostActiveOwnerKeys: string[];
 };
 
 export function canCreateWorkspaceTerminalTab(args: {
     activeCount: number;
     terminalTabCount: number;
     maxActiveSessions: number;
+    activeTerminalReady?: boolean;
 }) {
     const max = Math.max(1, Math.floor(args.maxActiveSessions));
 
-    return args.activeCount < max && args.terminalTabCount < max;
+    return (
+        args.activeTerminalReady !== false &&
+        args.activeCount < max &&
+        args.terminalTabCount < max
+    );
+}
+
+export function reconcileWorkspaceTerminalTabs(args: {
+    hostKey: string;
+    tabs: WorkspaceTerminalTab[];
+    activeId: string;
+    liveOwnerKeys: string[];
+}) {
+    const liveOwners = new Set(args.liveOwnerKeys);
+    const tabs = args.tabs.filter((tab) => {
+        if (tab.id === "primary") return true;
+
+        return liveOwners.has(
+            buildWorkspaceTerminalOwnerKey({
+                hostKey: args.hostKey,
+                terminalId: tab.id,
+            }),
+        );
+    });
+    const safeTabs = tabs.length
+        ? tabs
+        : [{ id: "primary", label: "Terminal 1" }];
+    const activeId = safeTabs.some((tab) => tab.id === args.activeId)
+        ? args.activeId
+        : safeTabs[0].id;
+
+    return { tabs: safeTabs, activeId };
 }
 
 const HOST_CLEANUP_GRACE_MS = 5_000;
@@ -116,8 +149,13 @@ export function createWorkspaceTerminalTab(index: number): WorkspaceTerminalTab 
     };
 }
 
-export async function readTerminalCapacity(): Promise<TerminalCapacity> {
-    const response = await fetch("/api/run/pty/sessions/active", {
+export async function readTerminalCapacity(
+    hostKey?: string | null,
+): Promise<TerminalCapacity> {
+    const query = hostKey
+        ? `?hostKey=${encodeURIComponent(hostKey)}`
+        : "";
+    const response = await fetch(`/api/run/pty/sessions/active${query}`, {
         method: "GET",
         cache: "no-store",
     });
@@ -133,6 +171,11 @@ export async function readTerminalCapacity(): Promise<TerminalCapacity> {
     return {
         activeCount: data.activeCount,
         maxActiveSessions: data.maxActiveSessions,
+        hostActiveOwnerKeys: Array.isArray(data.hostActiveOwnerKeys)
+            ? data.hostActiveOwnerKeys.filter((value): value is string =>
+                  typeof value === "string" && Boolean(value),
+              )
+            : [],
     };
 }
 
@@ -159,6 +202,15 @@ export async function heartbeatTerminalHost(hostKey: string) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ hostKey }),
     }).catch(() => null);
+}
+
+export async function cancelWorkspaceTerminalHost(hostKey: string) {
+    await fetch("/api/run/pty/sessions/hosts/cancel", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ hostKey }),
+        keepalive: true,
+    });
 }
 
 export function cancelTerminalHostNow(hostKey: string) {

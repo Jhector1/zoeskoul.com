@@ -134,7 +134,10 @@ async function buildSessionResponse(args: {
     };
 }
 
-function stripLeaseFields(body: ShellEnsureReq): InteractiveRunReq {
+function stripLeaseFields(
+    body: ShellEnsureReq,
+    runnerWorkspaceKey?: string,
+): InteractiveRunReq {
     const {
         workspaceKey: _workspaceKey,
         leaseKey: _leaseKey,
@@ -144,7 +147,17 @@ function stripLeaseFields(body: ShellEnsureReq): InteractiveRunReq {
         ...runnerBody
     } = body as any;
 
-    return runnerBody as InteractiveRunReq;
+    return {
+        ...runnerBody,
+        ...(runnerWorkspaceKey ? { workspaceKey: runnerWorkspaceKey } : {}),
+    } as InteractiveRunReq;
+}
+
+function buildRunnerWorkspaceKey(args: {
+    hostKey: string;
+    workspaceKey: string;
+}) {
+    return `${args.hostKey}::workspace::${args.workspaceKey}`;
 }
 
 function isStaleRunnerSessionError(error: unknown) {
@@ -273,6 +286,10 @@ export async function POST(req: NextRequest) {
             normalizePtyIdentityKey(body.hostKey) ?? `legacy-host:${workspaceKey}`;
         const ownerKey =
             normalizePtyIdentityKey(body.ownerKey) ?? `legacy-owner:${workspaceKey}`;
+        const runnerWorkspaceKey = buildRunnerWorkspaceKey({
+            hostKey,
+            workspaceKey,
+        });
 
         const findReusableOwnerLease = async () => {
             const existing = await getPtyLeaseByOwner({ actorKey, ownerKey });
@@ -368,7 +385,7 @@ export async function POST(req: NextRequest) {
         const out = await runnerPost<StartSessionResult>(
             "/sessions/start",
             actorKey,
-            stripLeaseFields(body),
+            stripLeaseFields(body, runnerWorkspaceKey),
         );
 
         if (!out.ok) {

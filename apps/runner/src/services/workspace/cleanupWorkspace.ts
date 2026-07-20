@@ -2,8 +2,11 @@ import fs from "node:fs/promises";
 import { env } from "../../lib/env.js";
 import {
     deleteSession,
+    getSession,
+    hasOtherSessionsForWorkspaceDir,
     markSessionFinalized,
 } from "../sessions/sessionStore.js";
+import { forgetSharedShellWorkspace } from "./sharedShellWorkspace.js";
 
 const cleanupTimers = new Map<string, NodeJS.Timeout>();
 
@@ -40,16 +43,22 @@ export async function runScheduledWorkspaceCleanupNow(sessionId: string) {
     }
 
     // This helper is intentionally test-friendly and deterministic.
-    // It uses the session's stored workspaceDir instead of waiting for a timer.
-    const { getSession } = await import("../sessions/sessionStore.js");
+    // A shared IDE workspace is deleted only after its final terminal closes.
     const session = getSession(sessionId);
 
     if (!session) return;
 
-    try {
-        await cleanupWorkspaceNow(session.workspaceDir);
-    } finally {
-        deleteSession(sessionId);
+    const workspaceDir = session.workspaceDir;
+    const sharedByAnotherSession = hasOtherSessionsForWorkspaceDir(
+        workspaceDir,
+        sessionId,
+    );
+
+    deleteSession(sessionId);
+
+    if (!sharedByAnotherSession) {
+        forgetSharedShellWorkspace(workspaceDir);
+        await cleanupWorkspaceNow(workspaceDir);
     }
 }
 
@@ -69,9 +78,16 @@ export function scheduleWorkspaceCleanup(
     const timer = setTimeout(() => {
         cleanupTimers.delete(sessionId);
 
-        void cleanupWorkspaceNow(workspaceDir).finally(() => {
-            deleteSession(sessionId);
-        });
+        const sharedByAnotherSession = hasOtherSessionsForWorkspaceDir(
+            workspaceDir,
+            sessionId,
+        );
+        deleteSession(sessionId);
+
+        if (!sharedByAnotherSession) {
+            forgetSharedShellWorkspace(workspaceDir);
+            void cleanupWorkspaceNow(workspaceDir);
+        }
     }, ttlMs);
 
     // Do not unref under tests; fake timers can behave differently with unref'd timers.

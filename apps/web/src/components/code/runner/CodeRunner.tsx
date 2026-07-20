@@ -51,6 +51,7 @@ import {
     buildWorkspaceTerminalOwnerKey,
     canCreateWorkspaceTerminalTab,
     cancelTerminalHostNow,
+    cancelWorkspaceTerminalHost,
     cancelWorkspaceTerminalOwner,
     clearScheduledTerminalHostCleanup,
     createWorkspaceTerminalTab,
@@ -58,6 +59,7 @@ import {
     heartbeatTerminalHost,
     loadWorkspaceTerminalTabs,
     readTerminalCapacity,
+    reconcileWorkspaceTerminalTabs,
     saveWorkspaceTerminalTabs,
     scheduleTerminalHostCleanup,
     type TerminalCapacity,
@@ -626,9 +628,17 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
     const [terminalCapacity, setTerminalCapacity] = useState<TerminalCapacity>({
         activeCount: 0,
         maxActiveSessions: 4,
+        hostActiveOwnerKeys: [],
     });
+    const [pendingTerminalStartId, setPendingTerminalStartId] = useState<string | null>(
+        null,
+    );
     const [terminalTabMessage, setTerminalTabMessage] = useState<string | null>(null);
     const [hydratedTerminalHostKey, setHydratedTerminalHostKey] = useState<string | null>(null);
+    const previousTerminalWorkspaceIdentityRef = useRef<{
+        hostKey: string;
+        workspaceKey: string;
+    } | null>(null);
 
     useEffect(() => {
         setTerminalWindowId(getOrCreateTerminalWindowId());
@@ -650,6 +660,13 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
             workspaceTerminal?.terminalHostKey,
         ],
     );
+    const terminalWorkspaceIdentityKey = String(
+        workspaceTerminal?.workspaceKey ??
+            exerciseStateKey ??
+            workspaceTerminal?.projectId ??
+            `${lang}:${workspaceTerminal?.cwd ?? "/workspace"}`,
+    );
+
     const resolvedTerminalHostKey = useMemo(() => {
         if (!terminalWindowId || !workspaceTerminalEnabled) return null;
 
@@ -674,9 +691,31 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
 
         clearScheduledTerminalHostCleanup(resolvedTerminalHostKey);
         const restored = loadWorkspaceTerminalTabs(resolvedTerminalHostKey);
-        setTerminalTabs(restored.tabs);
-        setActiveTerminalId(restored.activeId);
-        setHydratedTerminalHostKey(resolvedTerminalHostKey);
+        let disposed = false;
+
+        const hydrate = async () => {
+            await heartbeatTerminalHost(resolvedTerminalHostKey);
+            const capacity = await readTerminalCapacity(resolvedTerminalHostKey);
+            if (disposed) return;
+
+            setTerminalCapacity(capacity);
+            const reconciled = reconcileWorkspaceTerminalTabs({
+                hostKey: resolvedTerminalHostKey,
+                tabs: restored.tabs,
+                activeId: restored.activeId,
+                liveOwnerKeys: capacity.hostActiveOwnerKeys,
+            });
+            setTerminalTabs(reconciled.tabs);
+            setActiveTerminalId(reconciled.activeId);
+            setHydratedTerminalHostKey(resolvedTerminalHostKey);
+        };
+
+        void hydrate().catch(() => {
+            if (disposed) return;
+            setTerminalTabs([{ id: "primary", label: "Terminal 1" }]);
+            setActiveTerminalId("primary");
+            setHydratedTerminalHostKey(resolvedTerminalHostKey);
+        });
 
         const handlePageHide = () => {
             cancelTerminalHostNow(resolvedTerminalHostKey);
@@ -684,16 +723,55 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         const heartbeat = () => {
             void heartbeatTerminalHost(resolvedTerminalHostKey);
         };
-        heartbeat();
         const heartbeatTimer = window.setInterval(heartbeat, 25_000);
         window.addEventListener("pagehide", handlePageHide);
 
         return () => {
+            disposed = true;
             window.clearInterval(heartbeatTimer);
             window.removeEventListener("pagehide", handlePageHide);
             scheduleTerminalHostCleanup(resolvedTerminalHostKey);
         };
     }, [resolvedTerminalHostKey]);
+
+    useEffect(() => {
+        if (!resolvedTerminalHostKey) return;
+
+        const current = {
+            hostKey: resolvedTerminalHostKey,
+            workspaceKey: terminalWorkspaceIdentityKey,
+        };
+        const previous = previousTerminalWorkspaceIdentityRef.current;
+        previousTerminalWorkspaceIdentityRef.current = current;
+
+        if (!previous) return;
+        if (previous.hostKey !== current.hostKey) return;
+        if (previous.workspaceKey === current.workspaceKey) return;
+
+        let disposed = false;
+        setHydratedTerminalHostKey(null);
+        setPendingTerminalStartId(null);
+        setTerminalTabMessage(null);
+
+        void cancelWorkspaceTerminalHost(resolvedTerminalHostKey)
+            .catch(() => null)
+            .then(() => {
+                if (disposed) return;
+
+                setTerminalTabs([{ id: "primary", label: "Terminal 1" }]);
+                setActiveTerminalId("primary");
+                setTerminalCapacity((current) => ({
+                    ...current,
+                    hostActiveOwnerKeys: [],
+                }));
+                setHydratedTerminalHostKey(resolvedTerminalHostKey);
+                setPendingTerminalStartId("primary");
+            });
+
+        return () => {
+            disposed = true;
+        };
+    }, [resolvedTerminalHostKey, terminalWorkspaceIdentityKey]);
 
     useEffect(() => {
         if (
@@ -718,13 +796,13 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         if (!workspaceTerminalEnabled) return null;
 
         try {
-            const next = await readTerminalCapacity();
+            const next = await readTerminalCapacity(resolvedTerminalHostKey);
             setTerminalCapacity(next);
             return next;
         } catch {
             return null;
         }
-    }, [workspaceTerminalEnabled]);
+    }, [resolvedTerminalHostKey, workspaceTerminalEnabled]);
 
     useEffect(() => {
         if (!workspaceTerminalEnabled) return;
@@ -1265,6 +1343,64 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         return () => window.clearTimeout(timer);
     }, [refreshTerminalCapacity, workspaceTerm.sessionId]);
 
+    const activeTerminalLeaseLive = Boolean(
+        activeTerminalOwnerKey &&
+            terminalCapacity.hostActiveOwnerKeys.includes(activeTerminalOwnerKey),
+    );
+    const activeWorkspaceTerminalReady = Boolean(
+        activeTerminalLeaseLive &&
+            workspaceTerm.sessionId &&
+            workspaceTerm.interactiveReady &&
+            !workspaceTerm.starting &&
+            !workspaceTerm.stopping &&
+            !workspaceTerm.restarting,
+    );
+
+    useEffect(() => {
+        if (pendingTerminalStartId !== activeTerminalId) return;
+        if (!workspaceTerminalEnabled || disabled) return;
+
+        let disposed = false;
+        const timer = window.setTimeout(() => {
+            void workspaceTerm
+                .open({ userInitiated: true })
+                .catch((error) => {
+                    if (disposed) return;
+                    setPendingTerminalStartId(null);
+                    setTerminalTabMessage(
+                        error instanceof Error
+                            ? error.message
+                            : "Could not start the terminal.",
+                    );
+                });
+        }, 0);
+
+        return () => {
+            disposed = true;
+            window.clearTimeout(timer);
+        };
+    }, [
+        activeTerminalId,
+        disabled,
+        pendingTerminalStartId,
+        workspaceTerm.open,
+        workspaceTerminalEnabled,
+    ]);
+
+    useEffect(() => {
+        if (pendingTerminalStartId !== activeTerminalId) return;
+        if (!activeWorkspaceTerminalReady) return;
+
+        setPendingTerminalStartId(null);
+        setTerminalTabMessage(null);
+        void refreshTerminalCapacity();
+    }, [
+        activeTerminalId,
+        activeWorkspaceTerminalReady,
+        pendingTerminalStartId,
+        refreshTerminalCapacity,
+    ]);
+
     const syncWorkspaceAndTerminalEvidenceNow = useCallback(async () => {
         const ok = await workspaceTerm.syncWorkspaceNow();
 
@@ -1714,14 +1850,31 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
     const selectWorkspaceTerminalTab = useCallback(
         (terminalId: string) => {
             setTerminalTabMessage(null);
+            setPendingTerminalStartId(null);
             setActiveTerminalId(terminalId);
             setOutputTab("terminal");
+
+            if (resolvedTerminalHostKey) {
+                const ownerKey = buildWorkspaceTerminalOwnerKey({
+                    hostKey: resolvedTerminalHostKey,
+                    terminalId,
+                });
+                if (!terminalCapacity.hostActiveOwnerKeys.includes(ownerKey)) {
+                    setPendingTerminalStartId(terminalId);
+                }
+            }
 
             if (isNarrowScreen && showEditor && showTerminal) {
                 setMobilePane("output");
             }
         },
-        [isNarrowScreen, showEditor, showTerminal],
+        [
+            isNarrowScreen,
+            resolvedTerminalHostKey,
+            showEditor,
+            showTerminal,
+            terminalCapacity.hostActiveOwnerKeys,
+        ],
     );
 
     const addWorkspaceTerminalTab = useCallback(async () => {
@@ -1732,11 +1885,19 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
             latestCapacity?.maxActiveSessions ?? terminalCapacity.maxActiveSessions;
         const activeCount = latestCapacity?.activeCount ?? terminalCapacity.activeCount;
 
+        if (!activeWorkspaceTerminalReady || pendingTerminalStartId) {
+            setTerminalTabMessage(
+                "Wait for the current terminal to finish starting before opening another.",
+            );
+            return;
+        }
+
         if (
             !canCreateWorkspaceTerminalTab({
                 activeCount,
                 terminalTabCount: terminalTabs.length,
                 maxActiveSessions,
+                activeTerminalReady: true,
             })
         ) {
             setTerminalTabMessage(
@@ -1754,7 +1915,8 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
 
         setTerminalTabs((current) => [...current, nextTab]);
         setActiveTerminalId(nextTab.id);
-        setTerminalTabMessage(null);
+        setPendingTerminalStartId(nextTab.id);
+        setTerminalTabMessage(`Starting ${nextTab.label}…`);
         setOutputTab("terminal");
         terminalAutoOpenRequestedKeyRef.current = null;
 
@@ -1771,6 +1933,8 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         terminalCapacity.activeCount,
         terminalCapacity.maxActiveSessions,
         terminalTabs,
+        activeWorkspaceTerminalReady,
+        pendingTerminalStartId,
     ]);
 
     const closeWorkspaceTerminalTab = useCallback(
@@ -1790,6 +1954,9 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
 
             setTerminalTabs(remaining);
             setActiveTerminalId(nextActive ?? remaining[0].id);
+            if (pendingTerminalStartId === terminalId) {
+                setPendingTerminalStartId(null);
+            }
             setTerminalTabMessage(null);
             await cancelWorkspaceTerminalOwner(ownerKey);
             await refreshTerminalCapacity();
@@ -1799,6 +1966,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
             refreshTerminalCapacity,
             resolvedTerminalHostKey,
             terminalTabs,
+            pendingTerminalStartId,
         ],
     );
 
@@ -1965,9 +2133,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                                             >
                                                 <span>{tab.label}</span>
                                                 {active &&
-                                                (workspaceTerm.started ||
-                                                    workspaceTerm.busy ||
-                                                    workspaceTerm.starting) ? (
+                                                activeWorkspaceTerminalReady ? (
                                                     <span className="inline-flex h-2 w-2 rounded-full bg-emerald-500" />
                                                 ) : null}
                                             </button>
@@ -2001,6 +2167,9 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                                         terminalTabCount: terminalTabs.length,
                                         maxActiveSessions:
                                             terminalCapacity.maxActiveSessions,
+                                        activeTerminalReady:
+                                            activeWorkspaceTerminalReady &&
+                                            !pendingTerminalStartId,
                                     })
                                 }
                                 className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-neutral-300 text-base font-bold text-neutral-700 disabled:cursor-not-allowed disabled:opacity-40 dark:border-white/15 dark:text-white/80"

@@ -180,6 +180,23 @@ export function getAllSessions() {
   return [...sessions.values()];
 }
 
+export function getSessionsForWorkspaceDir(workspaceDir: string) {
+  return [...sessions.values()].filter(
+    (session) => session.workspaceDir === workspaceDir,
+  );
+}
+
+export function hasOtherSessionsForWorkspaceDir(
+  workspaceDir: string,
+  excludingSessionId: string,
+) {
+  return [...sessions.values()].some(
+    (session) =>
+      session.id !== excludingSessionId &&
+      session.workspaceDir === workspaceDir,
+  );
+}
+
 export function deleteSession(id: string) {
   const session = sessions.get(id);
   sessions.delete(id);

@@ -2105,40 +2105,19 @@ export function useWorkspaceTerminalController(
             return;
         }
 
-        clearQuietTimer();
-        clearStaleStartingTimer();
-        clearRecycleRestartTimer();
-        clearStartupCwdFlushTimer();
-        clearTerminalRecovery();
-        openInFlightRef.current = null;
-        pendingInputLineRef.current = "";
-        escapeSequenceRef.current = "";
-        pendingStartupInputRef.current = null;
-        pendingStartupCwdRef.current = undefined;
-        terminalProcessExitedRef.current = false;
-        terminalExitCodeRef.current = null;
+        // Switching exercise workspaces or terminal tabs detaches only the
+        // active browser socket. The exact owner lease remains alive and can
+        // be reattached later, but no transcript or readiness state may bleed
+        // from the previously selected terminal.
+        closeSocket();
+        clearLocalTerminalState();
         workspaceReadyRef.current = false;
-        stateRef.current = "idle";
-        startedRef.current = false;
-        startingRef.current = false;
-        setBusy(false);
-        setInputEnabled(false);
-        setStarted(false);
-        setStarting(false);
         openedLeaseKeyRef.current = null;
         openedOwnerKeyRef.current = null;
-
-        // Switching exercise workspaces or terminal tabs detaches the socket only.
-        // The server lease stays alive for that exact owner and can be reattached.
-        closeSocket();
     }, [
         terminalLeaseKey,
         terminalOwnerKey,
-        clearQuietTimer,
-        clearRecycleRestartTimer,
-        clearStartupCwdFlushTimer,
-        clearStaleStartingTimer,
-        clearTerminalRecovery,
+        clearLocalTerminalState,
         closeSocket,
     ]);
 

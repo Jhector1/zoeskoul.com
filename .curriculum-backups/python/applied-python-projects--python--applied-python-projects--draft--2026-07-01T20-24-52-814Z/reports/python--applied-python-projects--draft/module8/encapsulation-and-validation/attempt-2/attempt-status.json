@@ -1,6 +1,0 @@
-{
-  "attempt": 2,
-  "status": "failed",
-  "retryable": true,
-  "errorCode": "GOLDEN_VALIDATION_FAILED"
-}

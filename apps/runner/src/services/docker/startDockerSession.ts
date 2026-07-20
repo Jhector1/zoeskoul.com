@@ -36,6 +36,11 @@ import { getExecutionPlan } from "../execution/executionPlan.js";
 import { docker } from "./dockerClient.js";
 import { killSession } from "./killSession.js";
 import { ensureWorkspaceWritableForShellUser } from "../workspace/workspacePermissions.js";
+import {
+  acquireSharedShellWorkspace,
+  releaseSharedShellWorkspaceReservation,
+  type SharedShellWorkspaceReservation,
+} from "../workspace/sharedShellWorkspace.js";
 
 type NormalizedRequest =
   | {
@@ -210,37 +215,15 @@ function normalizeRequest(req: InteractiveRunReq): NormalizedRequest {
   };
 }
 
-function isReplaceableShellSession(session: {
-  kind?: "code" | "shell";
-}) {
-  // Sessions created before this field existed are treated as replaceable
-  // because the original runner only used long-lived interactive PTY sessions.
-  return session.kind === "shell" || session.kind == null;
-}
-
-async function cancelSupersededShellSessionsForActor(args: {
-  ownerKey: string;
-  workspaceKey?: string;
-}) {
-  const active = getActiveSessionsForActor(args.ownerKey).filter(
-    isReplaceableShellSession,
+async function cancelLegacyShellSessionsForActor(ownerKey: string) {
+  const legacySessions = getActiveSessionsForActor(ownerKey).filter(
+    (session) =>
+      (session.kind === "shell" || session.kind == null) &&
+      !session.workspaceKey,
   );
 
-  for (const session of active) {
-    if (args.workspaceKey && session.workspaceKey === args.workspaceKey) {
-      continue;
-    }
-
-    try {
-      await killSession(session.id, "canceled");
-    } catch (err) {
-      console.warn("RUNNER superseded shell session cleanup failed", {
-        sessionId: session.id,
-        ownerKey: args.ownerKey,
-        workspaceKey: session.workspaceKey ?? null,
-        message: err instanceof Error ? err.message : String(err),
-      });
-    }
+  for (const session of legacySessions) {
+    await killSession(session.id, "canceled").catch(() => {});
   }
 }
 
@@ -266,16 +249,15 @@ export async function startDockerSession(
   };
 
   let workspaceDir: string | null = null;
+  let sharedWorkspaceReservation: SharedShellWorkspaceReservation | null = null;
+  let sessionRegistered = false;
   let sessionId = "";
 
   try {
     const normalized = normalizeRequest(req);
 
-    if (normalized.kind === "shell") {
-      await cancelSupersededShellSessionsForActor({
-        ownerKey,
-        workspaceKey: normalized.workspaceKey,
-      });
+    if (normalized.kind === "shell" && !normalized.workspaceKey) {
+      await cancelLegacyShellSessionsForActor(ownerKey);
     }
 
     releaseSlot = reserveSessionSlot(ownerKey);
@@ -284,7 +266,21 @@ export async function startDockerSession(
       requestedIdleTimeoutMs: normalized.idleTimeoutMs,
       requestedWallTimeoutMs: normalized.wallTimeoutMs,
     });
-    workspaceDir = await createWorkspace(normalized.files);
+    if (normalized.kind === "shell" && normalized.workspaceKey) {
+      sharedWorkspaceReservation = await acquireSharedShellWorkspace({
+        ownerKey,
+        workspaceKey: normalized.workspaceKey,
+        files: normalized.files,
+      });
+      workspaceDir = sharedWorkspaceReservation.workspaceDir;
+    } else {
+      workspaceDir = await createWorkspace(normalized.files);
+    }
+
+    if (!workspaceDir) {
+      throw new Error("Runner workspace allocation did not return a directory.");
+    }
+    const resolvedWorkspaceDir = workspaceDir;
 
     const plan =
       normalized.kind === "shell"
@@ -315,8 +311,8 @@ export async function startDockerSession(
     sessionId = `sess_${crypto.randomUUID()}`;
     const containerName = `zoeskoul_${sessionId}`;
 
-    await ensureWorkspaceRuntimeFiles(workspaceDir, plan.prepareDirs ?? []);
-    await ensureWorkspaceWritableForShellUser(workspaceDir);
+    await ensureWorkspaceRuntimeFiles(resolvedWorkspaceDir, plan.prepareDirs ?? []);
+    await ensureWorkspaceWritableForShellUser(resolvedWorkspaceDir);
 
     const container = await docker.createContainer({
       Image: env.runnerImage,
@@ -350,7 +346,7 @@ export async function startDockerSession(
         "PATH=/usr/bin:/bin",
         "BASH_ENV=/dev/null",
         "ENV=/dev/null",
-        "HISTFILE=/workspace/.bash_history",
+        "HISTFILE=/tmp/.bash_history",
         "HISTSIZE=1000",
         "HISTFILESIZE=2000",
         // Startup bootstrap input begins with a space and must never become
@@ -362,7 +358,7 @@ export async function startDockerSession(
       ],
       Cmd: ["python3", "/opt/runner/pty-runner.py"],
       HostConfig: {
-        Binds: [`${workspaceDir}:/workspace`],
+        Binds: [`${resolvedWorkspaceDir}:/workspace`],
         NetworkMode: env.childNetwork,
         ReadonlyRootfs: true,
         CapDrop: ["ALL"],
@@ -387,10 +383,18 @@ export async function startDockerSession(
       workspaceKey:
         normalized.kind === "shell" ? normalized.workspaceKey ?? null : null,
       containerId: container.id,
-      workspaceDir,
+      workspaceDir: resolvedWorkspaceDir,
       idleTimeoutMs: timeouts.idleTimeoutMs,
       hardLifetimeMs: timeouts.hardLifetimeMs,
     });
+    sessionRegistered = true;
+    if (sharedWorkspaceReservation) {
+      await releaseSharedShellWorkspaceReservation({
+        reservation: sharedWorkspaceReservation,
+        keepWorkspace: true,
+      });
+      sharedWorkspaceReservation = null;
+    }
     releaseReservedSlot();
 
     pushEvent(sessionId, { type: "status", state: "preparing" });
@@ -499,7 +503,9 @@ export async function startDockerSession(
         message: e?.message ?? "Failed to start container.",
       });
       pushEvent(sessionId, { type: "status", state: "failed" });
-      if (workspaceDir) await cleanupWorkspaceNow(workspaceDir);
+      if (workspaceDir) {
+        scheduleWorkspaceCleanup(sessionId, workspaceDir);
+      }
       return {
         ok: false,
         error: e?.message ?? "Failed.",
@@ -507,7 +513,17 @@ export async function startDockerSession(
     }
   } catch (e: any) {
     releaseReservedSlot();
-    if (workspaceDir) await cleanupWorkspaceNow(workspaceDir);
+
+    if (sharedWorkspaceReservation) {
+      await releaseSharedShellWorkspaceReservation({
+        reservation: sharedWorkspaceReservation,
+        keepWorkspace: sessionRegistered,
+      });
+      sharedWorkspaceReservation = null;
+    } else if (workspaceDir && !sessionRegistered) {
+      await cleanupWorkspaceNow(workspaceDir);
+    }
+
     return {
       ok: false,
       error: e?.message ?? "Failed.",

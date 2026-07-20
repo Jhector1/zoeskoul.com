@@ -1,6 +1,0 @@
-{
-  "ok": false,
-  "errors": [
-    "Invalid TopicAuthoringDraft: quizDraft[0] code_input needs starterCode"
-  ]
-}

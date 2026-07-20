@@ -4,6 +4,7 @@ import {
     buildWorkspaceTerminalHostKey,
     buildWorkspaceTerminalOwnerKey,
     canCreateWorkspaceTerminalTab,
+    reconcileWorkspaceTerminalTabs,
 } from "./workspaceTerminalHosts";
 
 describe("workspace terminal identity", () => {
@@ -83,5 +84,46 @@ describe("workspace terminal capacity", () => {
                 maxActiveSessions: 4,
             }),
         ).toBe(false);
+    });
+
+    it("does not create a UI-only tab while the current terminal is still starting", () => {
+        expect(
+            canCreateWorkspaceTerminalTab({
+                activeCount: 1,
+                terminalTabCount: 1,
+                maxActiveSessions: 4,
+                activeTerminalReady: false,
+            }),
+        ).toBe(false);
+    });
+
+    it("drops persisted tabs that no longer own a live runner session", () => {
+        const hostKey = buildWorkspaceTerminalHostKey({
+            windowId: "window-a",
+            experienceKey: "project:shared-project",
+        });
+        const liveOwner = buildWorkspaceTerminalOwnerKey({
+            hostKey,
+            terminalId: "terminal-live",
+        });
+
+        expect(
+            reconcileWorkspaceTerminalTabs({
+                hostKey,
+                tabs: [
+                    { id: "primary", label: "Terminal 1" },
+                    { id: "terminal-live", label: "Terminal 2" },
+                    { id: "terminal-stale", label: "Terminal 3" },
+                ],
+                activeId: "terminal-stale",
+                liveOwnerKeys: [liveOwner],
+            }),
+        ).toEqual({
+            tabs: [
+                { id: "primary", label: "Terminal 1" },
+                { id: "terminal-live", label: "Terminal 2" },
+            ],
+            activeId: "primary",
+        });
     });
 });

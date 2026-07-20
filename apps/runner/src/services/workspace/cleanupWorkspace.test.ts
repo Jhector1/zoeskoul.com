@@ -31,8 +31,12 @@ describe("workspace cleanup TTL", () => {
     afterEach(async () => {
         cancelScheduledWorkspaceCleanup("session-ttl-test");
         cancelScheduledWorkspaceCleanup("session-cancel-cleanup");
+        cancelScheduledWorkspaceCleanup("session-shared-a");
+        cancelScheduledWorkspaceCleanup("session-shared-b");
         deleteSession("session-ttl-test");
         deleteSession("session-cancel-cleanup");
+        deleteSession("session-shared-a");
+        deleteSession("session-shared-b");
 
         await fs.rm(root, {
             recursive: true,
@@ -92,5 +96,41 @@ describe("workspace cleanup TTL", () => {
 
         await expectPathExists(workspaceDir);
         expect(getSession(sessionId)).not.toBeNull();
+    });
+
+    it("keeps a shared IDE workspace until the final terminal closes", async () => {
+        const workspaceDir = path.join(root, "workspace-shared");
+        await fs.mkdir(workspaceDir, { recursive: true });
+        await fs.writeFile(path.join(workspaceDir, "shared.txt"), "shared");
+
+        createSession({
+            id: "session-shared-a",
+            ownerKey: "actor",
+            kind: "shell",
+            workspaceKey: "host-a::project-a",
+            containerId: "container-a",
+            workspaceDir,
+        });
+        createSession({
+            id: "session-shared-b",
+            ownerKey: "actor",
+            kind: "shell",
+            workspaceKey: "host-a::project-a",
+            containerId: "container-b",
+            workspaceDir,
+        });
+
+        scheduleWorkspaceCleanup("session-shared-a", workspaceDir, 10_000);
+        await runScheduledWorkspaceCleanupNow("session-shared-a");
+
+        await expectPathExists(workspaceDir);
+        expect(getSession("session-shared-a")).toBeNull();
+        expect(getSession("session-shared-b")).not.toBeNull();
+
+        scheduleWorkspaceCleanup("session-shared-b", workspaceDir, 10_000);
+        await runScheduledWorkspaceCleanupNow("session-shared-b");
+
+        await expectPathMissing(workspaceDir);
+        expect(getSession("session-shared-b")).toBeNull();
     });
 });

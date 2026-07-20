@@ -88,3 +88,5 @@ apps/runner/Archive.zip
 **/.zip.*
 .vercel
 .env*
+
+.curriculum-backups/
