@@ -29,7 +29,10 @@ import { runViaApi } from "@/lib/code/runClient";
 import { useCodeRunnerController } from "@/components/code/runner/hooks/controller/useCodeRunnerController";
 import { resolveRuntime } from "@/components/code/runner/hooks/controller/useResolvedRuntime";
 import XtermTerminal from "@/components/code/runner/components/XtermTerminal";
-import { useWorkspaceTerminalController } from "@/components/code/runner/hooks/pty/useWorkspaceTerminalController";
+import {
+    normalizeRecoverableTerminalError,
+    useWorkspaceTerminalController,
+} from "@/components/code/runner/hooks/pty/useWorkspaceTerminalController";
 import {
     buildTerminalAutoOpenKey,
     type WorkspaceSyncEntry,
@@ -627,18 +630,30 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
     const [activeTerminalId, setActiveTerminalId] = useState("primary");
     const [terminalCapacity, setTerminalCapacity] = useState<TerminalCapacity>({
         activeCount: 0,
-        maxActiveSessions: 4,
+        maxActiveSessions: 0,
         hostActiveOwnerKeys: [],
     });
+    const [terminalCapacityKnown, setTerminalCapacityKnown] = useState(false);
     const [pendingTerminalStartId, setPendingTerminalStartId] = useState<string | null>(
         null,
     );
     const [terminalTabMessage, setTerminalTabMessage] = useState<string | null>(null);
     const [hydratedTerminalHostKey, setHydratedTerminalHostKey] = useState<string | null>(null);
+    const terminalTabAddInFlightRef = useRef(false);
+    const terminalHostMountedRef = useRef(true);
+    const previousActiveTerminalIdRef = useRef("primary");
     const previousTerminalWorkspaceIdentityRef = useRef<{
         hostKey: string;
         workspaceKey: string;
     } | null>(null);
+
+    useEffect(() => {
+        terminalHostMountedRef.current = true;
+
+        return () => {
+            terminalHostMountedRef.current = false;
+        };
+    }, []);
 
     useEffect(() => {
         setTerminalWindowId(getOrCreateTerminalWindowId());
@@ -690,6 +705,12 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         if (!resolvedTerminalHostKey) return;
 
         clearScheduledTerminalHostCleanup(resolvedTerminalHostKey);
+        setTerminalCapacityKnown(false);
+        setTerminalCapacity({
+            activeCount: 0,
+            maxActiveSessions: 0,
+            hostActiveOwnerKeys: [],
+        });
         const restored = loadWorkspaceTerminalTabs(resolvedTerminalHostKey);
         let disposed = false;
 
@@ -699,6 +720,8 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
             if (disposed) return;
 
             setTerminalCapacity(capacity);
+            setTerminalCapacityKnown(true);
+            setTerminalTabMessage(null);
             const reconciled = reconcileWorkspaceTerminalTabs({
                 hostKey: resolvedTerminalHostKey,
                 tabs: restored.tabs,
@@ -712,8 +735,10 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
 
         void hydrate().catch(() => {
             if (disposed) return;
+            setTerminalCapacityKnown(false);
             setTerminalTabs([{ id: "primary", label: "Terminal 1" }]);
             setActiveTerminalId("primary");
+            setTerminalTabMessage("New terminals are temporarily unavailable.");
             setHydratedTerminalHostKey(resolvedTerminalHostKey);
         });
 
@@ -798,6 +823,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         try {
             const next = await readTerminalCapacity(resolvedTerminalHostKey);
             setTerminalCapacity(next);
+            setTerminalCapacityKnown(true);
             return next;
         } catch {
             return null;
@@ -1336,20 +1362,27 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
     useEffect(() => {
         if (!workspaceTerm.sessionId) return;
 
-        const timer = window.setTimeout(() => {
-            void refreshTerminalCapacity();
-        }, 250);
+        // The runner registry is authoritative, but the session can become visible
+        // a few milliseconds after the browser receives its attach response. Retry
+        // briefly so the counter and ownership list converge without requiring a reload.
+        const delays = workspaceTerm.interactiveReady ? [0, 250, 1_000] : [250];
+        const timers = delays.map((delay) =>
+            window.setTimeout(() => {
+                void refreshTerminalCapacity();
+            }, delay),
+        );
 
-        return () => window.clearTimeout(timer);
-    }, [refreshTerminalCapacity, workspaceTerm.sessionId]);
+        return () => {
+            for (const timer of timers) window.clearTimeout(timer);
+        };
+    }, [
+        refreshTerminalCapacity,
+        workspaceTerm.interactiveReady,
+        workspaceTerm.sessionId,
+    ]);
 
-    const activeTerminalLeaseLive = Boolean(
-        activeTerminalOwnerKey &&
-            terminalCapacity.hostActiveOwnerKeys.includes(activeTerminalOwnerKey),
-    );
     const activeWorkspaceTerminalReady = Boolean(
-        activeTerminalLeaseLive &&
-            workspaceTerm.sessionId &&
+        workspaceTerm.sessionId &&
             workspaceTerm.interactiveReady &&
             !workspaceTerm.starting &&
             !workspaceTerm.stopping &&
@@ -1360,29 +1393,48 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         if (pendingTerminalStartId !== activeTerminalId) return;
         if (!workspaceTerminalEnabled || disabled) return;
 
-        let disposed = false;
+        const startingTerminalId = pendingTerminalStartId;
+        const startingOwnerKey = activeTerminalOwnerKey;
         const timer = window.setTimeout(() => {
             void workspaceTerm
-                .open({ userInitiated: true })
-                .catch((error) => {
-                    if (disposed) return;
-                    setPendingTerminalStartId(null);
-                    setTerminalTabMessage(
+                .open({ userInitiated: true, throwOnFailure: true })
+                .catch(async (error) => {
+                    if (!terminalHostMountedRef.current) return;
+
+                    const rawMessage =
                         error instanceof Error
                             ? error.message
-                            : "Could not start the terminal.",
+                            : "Could not start the terminal.";
+                    const message =
+                        normalizeRecoverableTerminalError(rawMessage).message ??
+                        rawMessage;
+                    const fallbackTerminalId = previousActiveTerminalIdRef.current;
+
+                    setTerminalTabs((current) =>
+                        current.filter((tab) => tab.id !== startingTerminalId),
                     );
+                    setActiveTerminalId(fallbackTerminalId);
+                    setPendingTerminalStartId(null);
+                    terminalTabAddInFlightRef.current = false;
+                    setTerminalTabMessage(message);
+                    terminalAutoOpenRequestedKeyRef.current = null;
+
+                    if (startingOwnerKey) {
+                        await cancelWorkspaceTerminalOwner(startingOwnerKey);
+                    }
+                    await refreshTerminalCapacity();
                 });
         }, 0);
 
         return () => {
-            disposed = true;
             window.clearTimeout(timer);
         };
     }, [
         activeTerminalId,
+        activeTerminalOwnerKey,
         disabled,
         pendingTerminalStartId,
+        refreshTerminalCapacity,
         workspaceTerm.open,
         workspaceTerminalEnabled,
     ]);
@@ -1392,6 +1444,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         if (!activeWorkspaceTerminalReady) return;
 
         setPendingTerminalStartId(null);
+        terminalTabAddInFlightRef.current = false;
         setTerminalTabMessage(null);
         void refreshTerminalCapacity();
     }, [
@@ -1400,6 +1453,12 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         pendingTerminalStartId,
         refreshTerminalCapacity,
     ]);
+
+    useEffect(() => {
+        if (!pendingTerminalStartId) {
+            terminalTabAddInFlightRef.current = false;
+        }
+    }, [pendingTerminalStartId]);
 
     const syncWorkspaceAndTerminalEvidenceNow = useCallback(async () => {
         const ok = await workspaceTerm.syncWorkspaceNow();
@@ -1878,50 +1937,67 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
     );
 
     const addWorkspaceTerminalTab = useCallback(async () => {
-        if (!resolvedTerminalHostKey || disabled) return;
-
-        const latestCapacity = await refreshTerminalCapacity();
-        const maxActiveSessions =
-            latestCapacity?.maxActiveSessions ?? terminalCapacity.maxActiveSessions;
-        const activeCount = latestCapacity?.activeCount ?? terminalCapacity.activeCount;
-
-        if (!activeWorkspaceTerminalReady || pendingTerminalStartId) {
-            setTerminalTabMessage(
-                "Wait for the current terminal to finish starting before opening another.",
-            );
+        if (!resolvedTerminalHostKey || disabled || terminalTabAddInFlightRef.current) {
             return;
         }
 
-        if (
-            !canCreateWorkspaceTerminalTab({
-                activeCount,
-                terminalTabCount: terminalTabs.length,
-                maxActiveSessions,
-                activeTerminalReady: true,
-            })
-        ) {
-            setTerminalTabMessage(
-                `Terminal limit reached (${maxActiveSessions}). Close a terminal before opening another.`,
-            );
-            return;
-        }
+        terminalTabAddInFlightRef.current = true;
+        let queuedStart = false;
 
-        const nextNumber =
-            terminalTabs.reduce((max, tab) => {
-                const match = tab.label.match(/(\d+)$/);
-                return Math.max(max, match ? Number(match[1]) : 0);
-            }, 0) + 1;
-        const nextTab = createWorkspaceTerminalTab(nextNumber);
+        try {
+            const latestCapacity = await refreshTerminalCapacity();
+            if (!latestCapacity) {
+                setTerminalTabMessage("New terminals are temporarily unavailable.");
+                return;
+            }
 
-        setTerminalTabs((current) => [...current, nextTab]);
-        setActiveTerminalId(nextTab.id);
-        setPendingTerminalStartId(nextTab.id);
-        setTerminalTabMessage(`Starting ${nextTab.label}…`);
-        setOutputTab("terminal");
-        terminalAutoOpenRequestedKeyRef.current = null;
+            const maxActiveSessions = latestCapacity.maxActiveSessions;
+            const activeCount = latestCapacity.activeCount;
 
-        if (isNarrowScreen && showEditor && showTerminal) {
-            setMobilePane("output");
+            if (!activeWorkspaceTerminalReady || pendingTerminalStartId) {
+                setTerminalTabMessage(
+                    "Wait for the current terminal to finish starting before opening another.",
+                );
+                return;
+            }
+
+            if (
+                !canCreateWorkspaceTerminalTab({
+                    activeCount,
+                    terminalTabCount: terminalTabs.length,
+                    maxActiveSessions,
+                    activeTerminalReady: true,
+                })
+            ) {
+                setTerminalTabMessage(
+                    `Terminal limit reached (${maxActiveSessions}). Close a terminal before opening another.`,
+                );
+                return;
+            }
+
+            const nextNumber =
+                terminalTabs.reduce((max, tab) => {
+                    const match = tab.label.match(/(\d+)$/);
+                    return Math.max(max, match ? Number(match[1]) : 0);
+                }, 0) + 1;
+            const nextTab = createWorkspaceTerminalTab(nextNumber);
+
+            previousActiveTerminalIdRef.current = activeTerminalId;
+            setTerminalTabs((current) => [...current, nextTab]);
+            setActiveTerminalId(nextTab.id);
+            setPendingTerminalStartId(nextTab.id);
+            queuedStart = true;
+            setTerminalTabMessage(`Starting ${nextTab.label}…`);
+            setOutputTab("terminal");
+            terminalAutoOpenRequestedKeyRef.current = null;
+
+            if (isNarrowScreen && showEditor && showTerminal) {
+                setMobilePane("output");
+            }
+        } finally {
+            if (!queuedStart) {
+                terminalTabAddInFlightRef.current = false;
+            }
         }
     }, [
         disabled,
@@ -1930,9 +2006,8 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         resolvedTerminalHostKey,
         showEditor,
         showTerminal,
-        terminalCapacity.activeCount,
-        terminalCapacity.maxActiveSessions,
         terminalTabs,
+        activeTerminalId,
         activeWorkspaceTerminalReady,
         pendingTerminalStartId,
     ]);
@@ -1956,6 +2031,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
             setActiveTerminalId(nextActive ?? remaining[0].id);
             if (pendingTerminalStartId === terminalId) {
                 setPendingTerminalStartId(null);
+                terminalTabAddInFlightRef.current = false;
             }
             setTerminalTabMessage(null);
             await cancelWorkspaceTerminalOwner(ownerKey);
@@ -2042,6 +2118,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         if (outputTab === "terminal" && showWorkspaceTerminalTab) {
             return (
                 <XtermTerminal
+                    key={activeTerminalOwnerKey ?? activeTerminalId}
                     terminalFeed={workspaceTerm.terminalFeed}
                     inputEnabled={workspaceTerm.inputEnabled}
                     busy={workspaceTerm.busy}
@@ -2162,6 +2239,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                                 }}
                                 disabled={
                                     disabled ||
+                                    !terminalCapacityKnown ||
                                     !canCreateWorkspaceTerminalTab({
                                         activeCount: terminalCapacity.activeCount,
                                         terminalTabCount: terminalTabs.length,
@@ -2174,14 +2252,19 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                                 }
                                 className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-neutral-300 text-base font-bold text-neutral-700 disabled:cursor-not-allowed disabled:opacity-40 dark:border-white/15 dark:text-white/80"
                                 aria-label="New terminal"
-                                title={`New terminal (${terminalCapacity.activeCount}/${terminalCapacity.maxActiveSessions} active)`}
+                                title={
+                                    terminalCapacityKnown
+                                        ? `New terminal (${terminalCapacity.activeCount}/${terminalCapacity.maxActiveSessions} active)`
+                                        : "Terminal capacity unavailable"
+                                }
                             >
                                 +
                             </button>
 
                             <span className="shrink-0 text-[10px] font-semibold text-neutral-500 dark:text-white/45">
-                                {terminalCapacity.activeCount}/
-                                {terminalCapacity.maxActiveSessions}
+                                {terminalCapacityKnown
+                                    ? `${terminalCapacity.activeCount}/${terminalCapacity.maxActiveSessions}`
+                                    : "—/—"}
                             </span>
                         </div>
 

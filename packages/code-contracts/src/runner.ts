@@ -160,6 +160,9 @@ export const interactiveRunReqSchema = z.union([
         projectId: z.string().optional(),
         workspaceKey: z.string().min(1).optional(),
         cwd: z.string().min(1).optional(),
+        clientHostKey: z.string().trim().min(1).max(500).optional(),
+        clientOwnerKey: z.string().trim().min(1).max(500).optional(),
+        clientWorkspaceKey: z.string().trim().min(1).max(500).optional(),
         ...timeoutFields,
     }),
 ]);
@@ -190,6 +193,9 @@ export type InteractiveRunReq =
     projectId?: string;
     workspaceKey?: string;
     cwd?: string;
+    clientHostKey?: string;
+    clientOwnerKey?: string;
+    clientWorkspaceKey?: string;
     wallTimeoutMs?: number;
     idleTimeoutMs?: number;
 };

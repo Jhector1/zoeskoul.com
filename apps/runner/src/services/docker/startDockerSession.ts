@@ -58,6 +58,9 @@ type NormalizedRequest =
       files: WorkspaceSyncEntry[];
       entry?: undefined;
       workspaceKey?: string;
+      clientHostKey?: string;
+      clientOwnerKey?: string;
+      clientWorkspaceKey?: string;
       wallTimeoutMs?: number;
       idleTimeoutMs?: number;
       cwd?: string;
@@ -186,6 +189,9 @@ function normalizeRequest(req: InteractiveRunReq): NormalizedRequest {
       language: "bash",
       files: normalizeFilesMap(req.files),
       workspaceKey: req.workspaceKey,
+      clientHostKey: req.clientHostKey,
+      clientOwnerKey: req.clientOwnerKey,
+      clientWorkspaceKey: req.clientWorkspaceKey,
       wallTimeoutMs: req.wallTimeoutMs,
       idleTimeoutMs: req.idleTimeoutMs,
       cwd: req.cwd,
@@ -382,6 +388,12 @@ export async function startDockerSession(
       kind: normalized.kind,
       workspaceKey:
         normalized.kind === "shell" ? normalized.workspaceKey ?? null : null,
+      clientHostKey:
+        normalized.kind === "shell" ? normalized.clientHostKey ?? null : null,
+      clientOwnerKey:
+        normalized.kind === "shell" ? normalized.clientOwnerKey ?? null : null,
+      clientWorkspaceKey:
+        normalized.kind === "shell" ? normalized.clientWorkspaceKey ?? null : null,
       containerId: container.id,
       workspaceDir: resolvedWorkspaceDir,
       idleTimeoutMs: timeouts.idleTimeoutMs,

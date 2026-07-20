@@ -144,6 +144,7 @@ function currentLeaseMountGeneration(workspaceKey: string) {
 
 type OpenWorkspaceTerminalOptions = {
     userInitiated?: boolean;
+    throwOnFailure?: boolean;
 };
 
 export function shouldPrimeWorkspacePrompt(args: {
@@ -346,8 +347,16 @@ async function ensureWorkspaceReadyForInput(args: {
 }
 
 
+function isActiveSessionCapacityMessage(message: string) {
+    return /too many\s+active\s+sessions|active\s+session\s+limit/i.test(message);
+}
+
+function isStartRateLimitMessage(message: string) {
+    return /too many\s+(session\s+starts|terminal\s+starts|start\s+attempts)/i.test(message);
+}
+
 function isTooManySessionsMessage(message: string) {
-    return /too many\s+(active\s+sessions|session\s+starts|sessions)/i.test(message);
+    return isActiveSessionCapacityMessage(message) || isStartRateLimitMessage(message);
 }
 
 function isTerminalStartContentionMessage(message: string) {
@@ -358,13 +367,23 @@ function isStaleRunnerSessionMessage(message: string) {
     return /no such container|no such session|session not found|forbidden/i.test(message);
 }
 
-function normalizeRecoverableTerminalError(message: string): TerminalRecovery {
+export function normalizeRecoverableTerminalError(message: string): TerminalRecovery {
     const text = String(message ?? "").trim() || "Terminal session stopped.";
 
-    if (isTooManySessionsMessage(text)) {
+    if (isActiveSessionCapacityMessage(text)) {
+        const limit = text.match(/limit\s+is\s+(\d+)/i)?.[1];
         return {
             state: "blocked_too_many_sessions",
-            message: "Too many terminal starts. Wait about one minute, then click Restart terminal once.",
+            message: limit
+                ? `Terminal limit reached (${limit}). Close another terminal, then try again.`
+                : "Terminal limit reached. Close another terminal, then try again.",
+        };
+    }
+
+    if (isStartRateLimitMessage(text)) {
+        return {
+            state: "blocked_too_many_sessions",
+            message: "Too many terminal start attempts. Wait a moment, then restart once.",
         };
     }
 
@@ -1821,8 +1840,6 @@ export function useWorkspaceTerminalController(
                     });
                 }, STARTING_STALE_MS);
 
-                pushChunk("sys", "[starting workspace terminal]\r\n");
-
                 const normalizedInitialCwd = resolveWorkspaceTerminalStartupCwd({
                     cwd: args.cwd,
                     bootstrap: resolvedBootstrap,
@@ -1954,7 +1971,7 @@ export function useWorkspaceTerminalController(
                     pendingStartupCwdRef.current = undefined;
                     startupCwdOutputSuppressionRef.current = null;
 
-                        pushChunk("err", `${message}\r\n`);
+                    pushChunk("err", `${message}\r\n`);
                     setTerminalRecovery(normalizeRecoverableTerminalError(message));
 
                     if (tooManySessions) {
@@ -1978,11 +1995,13 @@ export function useWorkspaceTerminalController(
                     }
 
                     /**
-                     * Do not throw here.
-                     *
-                     * If open() throws, the auto-open caller may clear its guard and retry,
-                     * which causes runner session-start rate limiting.
+                     * Automatic open remains non-throwing so React remounts cannot fan
+                     * out into repeated starts. The explicit new-tab transaction opts in
+                     * to rejection so it can remove a tab that never acquired a session.
                      */
+                    if (options.throwOnFailure) {
+                        throw e;
+                    }
                     return;
                 } finally {
                     clearStaleStartingTimer();

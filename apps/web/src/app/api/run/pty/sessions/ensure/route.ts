@@ -8,6 +8,10 @@ import { createAttachToken } from "@/lib/server/ptyAttachToken";
 import { requireRunnerActorKey } from "@/lib/server/runnerActorKey";
 import { RunnerHttpError, runnerPost } from "@/lib/server/runnerClient";
 import {
+    readRunnerPtyCapacity,
+    reconcilePtyLeasesWithRunner,
+} from "@/lib/server/runnerPtySessions";
+import {
     acquirePtyLeaseLock,
     forgetPtyLeaseBySession,
     getPtyLeaseByOwner,
@@ -120,7 +124,23 @@ async function buildSessionResponse(args: {
         sessionId: args.sessionId,
         actorKey: args.actorKey,
     });
-    const activeCount = (await listPtyLeasesByActor({ actorKey: args.actorKey })).length;
+    let activeCount: number;
+    let maxActiveSessions: number;
+
+    try {
+        const capacity = await readRunnerPtyCapacity(args.actorKey);
+        activeCount = capacity.activeCount;
+        maxActiveSessions = capacity.maxActiveSessions;
+        await reconcilePtyLeasesWithRunner({
+            actorKey: args.actorKey,
+            capacity,
+        }).catch(() => {});
+    } catch {
+        // Keep an already-created terminal usable during a rolling deploy where
+        // the new capacity route has not reached every runner yet.
+        activeCount = (await listPtyLeasesByActor({ actorKey: args.actorKey })).length;
+        maxActiveSessions = maxPtySessionsPerActor();
+    }
 
     return {
         ok: true,
@@ -130,13 +150,18 @@ async function buildSessionResponse(args: {
         wsUrl: buildWsUrl(args.sessionId, attachToken),
         reused: args.reused,
         activeCount,
-        maxActiveSessions: maxPtySessionsPerActor(),
+        maxActiveSessions,
     };
 }
 
 function stripLeaseFields(
     body: ShellEnsureReq,
-    runnerWorkspaceKey?: string,
+    metadata?: {
+        runnerWorkspaceKey?: string;
+        hostKey?: string;
+        ownerKey?: string;
+        workspaceKey?: string;
+    },
 ): InteractiveRunReq {
     const {
         workspaceKey: _workspaceKey,
@@ -149,7 +174,14 @@ function stripLeaseFields(
 
     return {
         ...runnerBody,
-        ...(runnerWorkspaceKey ? { workspaceKey: runnerWorkspaceKey } : {}),
+        ...(metadata?.runnerWorkspaceKey
+            ? { workspaceKey: metadata.runnerWorkspaceKey }
+            : {}),
+        ...(metadata?.hostKey ? { clientHostKey: metadata.hostKey } : {}),
+        ...(metadata?.ownerKey ? { clientOwnerKey: metadata.ownerKey } : {}),
+        ...(metadata?.workspaceKey
+            ? { clientWorkspaceKey: metadata.workspaceKey }
+            : {}),
     } as InteractiveRunReq;
 }
 
@@ -291,6 +323,12 @@ export async function POST(req: NextRequest) {
             workspaceKey,
         });
 
+        await reconcilePtyLeasesWithRunner({ actorKey }).catch((error) => {
+            console.warn("PTY ensure lease reconciliation skipped", {
+                message: error instanceof Error ? error.message : String(error),
+            });
+        });
+
         const findReusableOwnerLease = async () => {
             const existing = await getPtyLeaseByOwner({ actorKey, ownerKey });
             if (!existing) return null;
@@ -385,7 +423,12 @@ export async function POST(req: NextRequest) {
         const out = await runnerPost<StartSessionResult>(
             "/sessions/start",
             actorKey,
-            stripLeaseFields(body, runnerWorkspaceKey),
+            stripLeaseFields(body, {
+                runnerWorkspaceKey,
+                hostKey,
+                ownerKey,
+                workspaceKey,
+            }),
         );
 
         if (!out.ok) {

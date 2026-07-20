@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { requireRunnerActorKey } from "@/lib/server/runnerActorKey";
 import {
-    listPtyLeasesByActor,
-    listPtyLeasesByHost,
-    maxPtySessionsPerActor,
-    normalizePtyIdentityKey,
-} from "@/lib/server/ptySessionLeases";
+    readRunnerPtyCapacity,
+    reconcilePtyLeasesWithRunner,
+    runnerSessionsForHost,
+} from "@/lib/server/runnerPtySessions";
+import { normalizePtyIdentityKey } from "@/lib/server/ptySessionLeases";
 
 export const runtime = "nodejs";
 
@@ -24,18 +24,27 @@ export async function GET(req: NextRequest) {
         const hostKey = normalizePtyIdentityKey(
             req.nextUrl.searchParams.get("hostKey"),
         );
-        const [leases, hostLeases] = await Promise.all([
-            listPtyLeasesByActor({ actorKey }),
-            hostKey
-                ? listPtyLeasesByHost({ actorKey, hostKey })
-                : Promise.resolve([]),
-        ]);
+        const capacity = await readRunnerPtyCapacity(actorKey);
+
+        // Capacity must still work if Redis is temporarily unavailable. The
+        // runner registry is the source of truth; lease repair is best effort.
+        await reconcilePtyLeasesWithRunner({ actorKey, capacity }).catch((error) => {
+            console.warn("PTY lease reconciliation skipped", {
+                message: error instanceof Error ? error.message : String(error),
+            });
+        });
+
+        const hostActiveOwnerKeys = hostKey
+            ? runnerSessionsForHost(capacity, hostKey)
+                  .map((session) => session.clientOwnerKey)
+                  .filter((value): value is string => Boolean(value))
+            : [];
 
         return NextResponse.json<Result>({
             ok: true,
-            activeCount: leases.length,
-            maxActiveSessions: maxPtySessionsPerActor(),
-            hostActiveOwnerKeys: hostLeases.map((lease) => lease.ownerKey),
+            activeCount: capacity.activeCount,
+            maxActiveSessions: capacity.maxActiveSessions,
+            hostActiveOwnerKeys: [...new Set(hostActiveOwnerKeys)],
         });
     } catch (error: any) {
         const status = error?.message === "Unauthorized" ? 401 : 500;

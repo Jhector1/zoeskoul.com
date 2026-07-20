@@ -8,6 +8,7 @@ import { resizeSessionRoute } from "./routes/sessions.resize.js";
 import { snapshotWorkspaceRoute } from "./routes/sessions.snapshotWorkspace.js";
 import { sessionsReplaceWorkspaceRoute } from "./routes/sessions.replaceWorkspaceRoute.js";
 import { heartbeatSessionRoute } from "./routes/sessions.heartbeat.js";
+import { activeSessionsRoute } from "./routes/sessions.active.js";
 import { getSessionStats } from "./services/sessions/sessionStore.js";
 
 export const app = express();
@@ -35,6 +36,7 @@ app.get("/metrics", (_req, res) => {
 });
 
 app.post("/sessions/start", startSessionRoute);
+app.post("/sessions/active", activeSessionsRoute);
 app.post("/sessions/:sessionId/input", inputSessionRoute);
 app.post("/sessions/:sessionId/resize", resizeSessionRoute);
 app.post("/sessions/:sessionId/cancel", cancelSessionRoute);

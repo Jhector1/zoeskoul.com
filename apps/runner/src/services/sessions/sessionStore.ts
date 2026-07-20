@@ -13,6 +13,9 @@ export type SessionRecord = {
   ownerKey?: string;
   kind?: "code" | "shell";
   workspaceKey?: string | null;
+  clientHostKey?: string | null;
+  clientOwnerKey?: string | null;
+  clientWorkspaceKey?: string | null;
   containerId: string;
   workspaceDir: string;
   state: RunSessionState;
@@ -135,6 +138,9 @@ export function createSession(args: {
   ownerKey?: string;
   kind?: "code" | "shell";
   workspaceKey?: string | null;
+  clientHostKey?: string | null;
+  clientOwnerKey?: string | null;
+  clientWorkspaceKey?: string | null;
   containerId: string;
   workspaceDir: string;
   idleTimeoutMs?: number | null;
@@ -146,6 +152,9 @@ export function createSession(args: {
     ownerKey: args.ownerKey,
     kind: args.kind,
     workspaceKey: args.workspaceKey ?? null,
+    clientHostKey: args.clientHostKey ?? null,
+    clientOwnerKey: args.clientOwnerKey ?? null,
+    clientWorkspaceKey: args.clientWorkspaceKey ?? null,
     containerId: args.containerId,
     workspaceDir: args.workspaceDir,
     state: "queued",
@@ -166,6 +175,9 @@ export function createSession(args: {
     ownerKey: session.ownerKey ?? "anonymous",
     kind: session.kind ?? null,
     workspaceKey: session.workspaceKey ?? null,
+    clientHostKey: session.clientHostKey ?? null,
+    clientOwnerKey: session.clientOwnerKey ?? null,
+    clientWorkspaceKey: session.clientWorkspaceKey ?? null,
     idleTimeoutMs: session.idleTimeoutMs ?? null,
     hardLifetimeMs: session.hardLifetimeMs ?? null,
   });

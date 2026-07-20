@@ -2,6 +2,11 @@ import { NextRequest, NextResponse } from "next/server";
 import { requireRunnerActorKey } from "@/lib/server/runnerActorKey";
 import { runnerPost } from "@/lib/server/runnerClient";
 import {
+    readRunnerPtyCapacity,
+    reconcilePtyLeasesWithRunner,
+    runnerSessionsForHost,
+} from "@/lib/server/runnerPtySessions";
+import {
     forgetPtyLeaseBySession,
     listPtyLeasesByHost,
     normalizePtyIdentityKey,
@@ -25,26 +30,37 @@ export async function POST(req: NextRequest) {
             );
         }
 
-        const leases = await listPtyLeasesByHost({ actorKey, hostKey });
-        let touched = 0;
+        const targets = new Set<string>();
 
-        for (const lease of leases) {
+        try {
+            const capacity = await readRunnerPtyCapacity(actorKey);
+            await reconcilePtyLeasesWithRunner({ actorKey, capacity });
+            for (const session of runnerSessionsForHost(capacity, hostKey)) {
+                targets.add(session.sessionId);
+            }
+        } catch (error) {
+            console.warn("PTY host heartbeat used lease fallback", {
+                message: error instanceof Error ? error.message : String(error),
+            });
+        }
+
+        // Preserve compatibility during rolling deploys and include any legacy
+        // shell sessions that predate runner-side browser identity metadata.
+        const leases = await listPtyLeasesByHost({ actorKey, hostKey });
+        for (const lease of leases) targets.add(lease.sessionId);
+
+        let touched = 0;
+        for (const sessionId of targets) {
             try {
                 await runnerPost<{ ok: true; state: string }>(
-                    `/sessions/${encodeURIComponent(lease.sessionId)}/heartbeat`,
+                    `/sessions/${encodeURIComponent(sessionId)}/heartbeat`,
                     actorKey,
                     {},
                 );
-                await touchPtyLeaseBySession({
-                    actorKey,
-                    sessionId: lease.sessionId,
-                });
+                await touchPtyLeaseBySession({ actorKey, sessionId });
                 touched += 1;
             } catch {
-                await forgetPtyLeaseBySession({
-                    actorKey,
-                    sessionId: lease.sessionId,
-                }).catch(() => {});
+                await forgetPtyLeaseBySession({ actorKey, sessionId }).catch(() => {});
             }
         }
 

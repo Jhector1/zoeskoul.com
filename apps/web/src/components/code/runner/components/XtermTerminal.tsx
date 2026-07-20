@@ -76,6 +76,8 @@ function measureCell(probe: HTMLSpanElement | null) {
     };
 }
 
+const ERASE_TERMINAL_DISPLAY = "\x1b[3J\x1b[2J\x1b[H";
+
 function writeChunk(term: XTerm, chunk: TerminalChunk) {
     const text = String(chunk.data ?? "").replace(/\r?\n/g, "\r\n");
 
@@ -141,7 +143,7 @@ function terminalRecoveryText(state: TerminalRecoverState, message?: string | nu
     if (state === "blocked_too_many_sessions") {
         return (
             message ??
-            "Too many terminal starts. Wait about one minute, then click Restart terminal once."
+            "Terminal limit reached. Close another terminal, then try again."
         );
     }
     return message ?? "Terminal session stopped. Restart the terminal to continue.";
@@ -698,12 +700,19 @@ export default function XtermTerminal(props: {
          * during that window is what commonly causes the internal
          * "Cannot read properties of undefined (reading 'dimensions')" crash.
          */
+        const prev = prevFeedRef.current;
+
         if (terminalFeed.length === 0) {
+            if (prev.length > 0) {
+                try {
+                    term.write(ERASE_TERMINAL_DISPLAY);
+                } catch (err) {
+                    console.warn("xterm display erase skipped after stale terminal instance", err);
+                }
+            }
             prevFeedRef.current = [];
             return;
         }
-
-        const prev = prevFeedRef.current;
 
         const isAppendOnly =
             prev.length <= terminalFeed.length &&
@@ -725,7 +734,7 @@ export default function XtermTerminal(props: {
                     writeChunk(current, terminalFeed[i]);
                 }
             } else {
-                term.write("\r\n");
+                term.write(ERASE_TERMINAL_DISPLAY);
 
                 for (const chunk of terminalFeed) {
                     const current = termRef.current;

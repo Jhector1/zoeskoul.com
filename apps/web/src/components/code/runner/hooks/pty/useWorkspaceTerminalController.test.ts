@@ -3,10 +3,36 @@ import { describe, expect, it } from "vitest";
 import {
     buildWorkspaceTerminalStartupInput,
     mergeWorkspaceSnapshotBaseline,
+    normalizeRecoverableTerminalError,
     resolveWorkspacePreparationEntries,
     resolveWorkspaceTerminalStartupCwd,
     shouldPrimeWorkspacePrompt,
 } from "./useWorkspaceTerminalController";
+
+
+describe("normalizeRecoverableTerminalError", () => {
+    it("tells the learner to close a terminal when runner capacity is full", () => {
+        expect(
+            normalizeRecoverableTerminalError(
+                "Too many active sessions. Limit is 2 per user.",
+            ),
+        ).toEqual({
+            state: "blocked_too_many_sessions",
+            message: "Terminal limit reached (2). Close another terminal, then try again.",
+        });
+    });
+
+    it("keeps start-rate throttling separate from active terminal capacity", () => {
+        expect(
+            normalizeRecoverableTerminalError(
+                "Too many terminal starts. Limit is 5 per minute.",
+            ),
+        ).toEqual({
+            state: "blocked_too_many_sessions",
+            message: "Too many terminal start attempts. Wait a moment, then restart once.",
+        });
+    });
+});
 
 describe("shouldPrimeWorkspacePrompt", () => {
     it("returns true when the workspace terminal is interactive but still visually blank", () => {

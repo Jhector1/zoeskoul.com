@@ -198,7 +198,11 @@ export type WorkspaceTerminalController = {
     socketReadyState: number | null;
     lastSocketMessageAt: number | null;
 
-    open: (options?: { userInitiated?: boolean }) => Promise<void>;
+    open: (options?: {
+        userInitiated?: boolean;
+        /** Re-throw start failures so transactional UI can roll back phantom tabs. */
+        throwOnFailure?: boolean;
+    }) => Promise<void>;
     stop: () => Promise<void>;
     reset: () => void;
     restart: () => Promise<void>;

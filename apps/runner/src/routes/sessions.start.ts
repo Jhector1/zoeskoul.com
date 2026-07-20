@@ -43,12 +43,25 @@ export const startSessionRoute: RequestHandler = async (req, res) => {
     const rawCwd = typeof raw?.cwd === "string" ? raw.cwd.trim() : "";
     const rawWorkspaceKey =
       typeof raw?.workspaceKey === "string" ? raw.workspaceKey.trim() : "";
+    const rawClientHostKey =
+      typeof raw?.clientHostKey === "string" ? raw.clientHostKey.trim().slice(0, 500) : "";
+    const rawClientOwnerKey =
+      typeof raw?.clientOwnerKey === "string" ? raw.clientOwnerKey.trim().slice(0, 500) : "";
+    const rawClientWorkspaceKey =
+      typeof raw?.clientWorkspaceKey === "string"
+        ? raw.clientWorkspaceKey.trim().slice(0, 500)
+        : "";
     const body =
       parsed.kind === "shell"
         ? {
             ...parsed,
             ...(rawCwd ? { cwd: rawCwd } : {}),
             ...(rawWorkspaceKey ? { workspaceKey: rawWorkspaceKey } : {}),
+            ...(rawClientHostKey ? { clientHostKey: rawClientHostKey } : {}),
+            ...(rawClientOwnerKey ? { clientOwnerKey: rawClientOwnerKey } : {}),
+            ...(rawClientWorkspaceKey
+              ? { clientWorkspaceKey: rawClientWorkspaceKey }
+              : {}),
           }
         : parsed;
 
