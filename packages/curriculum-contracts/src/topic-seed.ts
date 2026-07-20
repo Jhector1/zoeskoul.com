@@ -1,5 +1,5 @@
 import type { CourseProfileId } from "./blueprint.js";
-import type { CourseSpecProjectBrief } from "./course-spec.js";
+import type { CourseSpecProjectBrief, CourseSpecProjectJourney, CourseSpecTopicProjectJourney } from "./course-spec.js";
 import type { PracticeConfig } from "./practice.js";
 import type { SqlDatasetArtifact } from "./sql-dataset.js";
 import { ExerciseKindKey, ResolvedExercisePolicy } from "./exercise-policy.js";
@@ -88,6 +88,8 @@ export type TopicSeed = {
     sectionOrder: number;
     practice?: PracticeConfig;
     projectBrief?: CourseSpecProjectBrief;
+    projectJourney?: CourseSpecTopicProjectJourney;
+    projectJourneys?: CourseSpecProjectJourney[];
     generationTargets?: {
         quizBankMin: number;
         quizBankTarget: number;

@@ -1,6 +1,10 @@
 import "server-only";
 
 import { prisma } from "@/lib/prisma";
+import {
+    CATALOG_MANIFESTS,
+    SUBJECT_CATALOG_SLUGS,
+} from "@/lib/subjects/catalogs.generated";
 import { getResolvedSubjectCatalogMap } from "@/lib/subjects/server/resolveSubjectPresentation";
 
 import {selectVisibleSubjectsForActor, withSubjectEnrollment} from "@/lib/subjects/server/subjectVisibility";
@@ -13,6 +17,9 @@ export type OnboardingSubjectOption = {
     badge: string | null;
     imageUrl?: string | null;
     imageAlt?: string | null;
+    catalogSlug: string;
+    catalogTitle: string;
+    catalogOrder: number;
 };
 
 function badgeFromSubject(input: {
@@ -68,6 +75,8 @@ export async function getOnboardingSubjects(): Promise<OnboardingSubjectOption[]
 
     return visibleSubjects.map(({ db: s, resolved }) => {
         const imagePublicId = resolved?.imagePublicId ?? s.imagePublicId;
+        const catalogSlug = SUBJECT_CATALOG_SLUGS[s.slug] ?? "other";
+        const catalog = CATALOG_MANIFESTS[catalogSlug]?.catalog;
 
         return {
             id: s.id,
@@ -86,6 +95,9 @@ export async function getOnboardingSubjects(): Promise<OnboardingSubjectOption[]
                 s.imageAlt ??
                 resolved?.title ??
                 s.title,
+            catalogSlug,
+            catalogTitle: catalog?.title ?? "Other courses",
+            catalogOrder: catalog?.order ?? Number.MAX_SAFE_INTEGER,
         };
     });
 }

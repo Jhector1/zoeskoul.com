@@ -1,0 +1,218 @@
+{
+  "topics": {
+    "git-foundations": {
+      "git-foundations-module-2-meaningful-history": {
+        "read-history-with-log-and-show": {
+          "label": "Read the History You Built",
+          "summary": "Inspect the community-project history and committed file content without changing state.",
+          "cards": {
+            "sketch0": {
+              "title": "History Is a Sequence of Snapshots"
+            },
+            "sketch1": {
+              "title": "HEAD Names the Current Snapshot"
+            },
+            "sketch2": {
+              "title": "Show Can Read Committed Content"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_read_history_with_log_and_show_sketch0": {
+              "title": "Read the Three-Commit Timeline",
+              "prompt": "The guided repository now has three commits. Read the concise history in newest-first order and leave the repository unchanged.",
+              "hint": "Use the compact history view as a read-only timeline.",
+              "help": {
+                "concept": "git log --oneline summarizes each recorded snapshot with its subject.",
+                "hint_1": "The newest subject should be Update community contacts.",
+                "hint_2": "The oldest subject should be Start community project."
+              },
+              "starterCode": "# Community Project\n\nShared schedules and contact notes.\n",
+              "solutionCode": "git log --oneline",
+              "instructions": "The guided repository now has three commits. Read the concise history in newest-first order and leave the repository unchanged.",
+              "starterFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0100\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Old planning notes\n\nSpring flyer draft.\n' > community-project/old-notes.txt\nmkdir -p -- community-project/generated\nprintf %s 'Generated summary\n\nCreated automatically from project notes.\n' > community-project/generated/summary.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C community-project commit -q -m 'Start community project'\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 9:30 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C community-project commit -q -m 'Update community schedule'\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0130\n' > community-project/contacts.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-03T12:00:00Z GIT_COMMITTER_DATE=2026-01-03T12:00:00Z git -C community-project commit -q -m 'Update community contacts'\n"
+                }
+              },
+              "solutionFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0100\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Old planning notes\n\nSpring flyer draft.\n' > community-project/old-notes.txt\nmkdir -p -- community-project/generated\nprintf %s 'Generated summary\n\nCreated automatically from project notes.\n' > community-project/generated/summary.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C community-project commit -q -m 'Start community project'\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 9:30 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C community-project commit -q -m 'Update community schedule'\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0130\n' > community-project/contacts.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-03T12:00:00Z GIT_COMMITTER_DATE=2026-01-03T12:00:00Z git -C community-project commit -q -m 'Update community contacts'\n"
+                }
+              },
+              "terminalExpectations": {
+                "forbiddenCommands": {
+                  "0": {
+                    "message": "That action can discard or rewrite history. Use the safe, layer-specific workflow taught in this course."
+                  }
+                },
+                "requiredCommands": {
+                  "0": {
+                    "message": "Did you read the newest-first concise timeline?"
+                  }
+                }
+              }
+            },
+            "try_read_history_with_log_and_show_sketch1": {
+              "title": "Inspect the Latest Snapshot Summary",
+              "prompt": "Inspect the commit currently named by `HEAD` with a one-line subject and file statistics. Confirm that the newest snapshot changed `contacts.txt`.",
+              "hint": "Ask Git for the current commit summary, not the working-tree diff.",
+              "help": {
+                "concept": "HEAD identifies the currently checked-out commit.",
+                "hint_1": "The subject should be Update community contacts.",
+                "hint_2": "The stat summary should name contacts.txt."
+              },
+              "starterCode": "Community contacts\n\nHelp desk: 555-0130\n",
+              "solutionCode": "git show --stat --oneline HEAD",
+              "instructions": "Inspect the commit currently named by `HEAD` with a one-line subject and file statistics. Confirm that the newest snapshot changed `contacts.txt`.",
+              "starterFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0100\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Old planning notes\n\nSpring flyer draft.\n' > community-project/old-notes.txt\nmkdir -p -- community-project/generated\nprintf %s 'Generated summary\n\nCreated automatically from project notes.\n' > community-project/generated/summary.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C community-project commit -q -m 'Start community project'\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 9:30 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C community-project commit -q -m 'Update community schedule'\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0130\n' > community-project/contacts.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-03T12:00:00Z GIT_COMMITTER_DATE=2026-01-03T12:00:00Z git -C community-project commit -q -m 'Update community contacts'\n"
+                }
+              },
+              "solutionFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0100\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Old planning notes\n\nSpring flyer draft.\n' > community-project/old-notes.txt\nmkdir -p -- community-project/generated\nprintf %s 'Generated summary\n\nCreated automatically from project notes.\n' > community-project/generated/summary.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C community-project commit -q -m 'Start community project'\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 9:30 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C community-project commit -q -m 'Update community schedule'\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0130\n' > community-project/contacts.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-03T12:00:00Z GIT_COMMITTER_DATE=2026-01-03T12:00:00Z git -C community-project commit -q -m 'Update community contacts'\n"
+                }
+              },
+              "terminalExpectations": {
+                "forbiddenCommands": {
+                  "0": {
+                    "message": "That action can discard or rewrite history. Use the safe, layer-specific workflow taught in this course."
+                  }
+                },
+                "requiredCommands": {
+                  "0": {
+                    "message": "Did you inspect the summary of the commit currently named by `HEAD`?"
+                  }
+                }
+              }
+            },
+            "try_read_history_with_log_and_show_sketch2": {
+              "title": "Read a File from the Latest Snapshot",
+              "prompt": "Read `contacts.txt` directly from `HEAD` and confirm that the committed content includes `Help desk: 555-0130`. Do not open or modify the working copy.",
+              "hint": "Use the commit-and-path form of the history inspection command.",
+              "help": {
+                "concept": "git show can read a file exactly as it exists in a committed snapshot.",
+                "hint_1": "HEAD is the latest community-project commit.",
+                "hint_2": "The path is contacts.txt relative to the repository root."
+              },
+              "starterCode": "Community contacts\n\nHelp desk: 555-0130\n",
+              "solutionCode": "git show HEAD:contacts.txt",
+              "instructions": "Read `contacts.txt` directly from `HEAD` and confirm that the committed content includes `Help desk: 555-0130`. Do not open or modify the working copy.",
+              "starterFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0100\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Old planning notes\n\nSpring flyer draft.\n' > community-project/old-notes.txt\nmkdir -p -- community-project/generated\nprintf %s 'Generated summary\n\nCreated automatically from project notes.\n' > community-project/generated/summary.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C community-project commit -q -m 'Start community project'\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 9:30 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C community-project commit -q -m 'Update community schedule'\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0130\n' > community-project/contacts.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-03T12:00:00Z GIT_COMMITTER_DATE=2026-01-03T12:00:00Z git -C community-project commit -q -m 'Update community contacts'\n"
+                }
+              },
+              "solutionFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0100\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Old planning notes\n\nSpring flyer draft.\n' > community-project/old-notes.txt\nmkdir -p -- community-project/generated\nprintf %s 'Generated summary\n\nCreated automatically from project notes.\n' > community-project/generated/summary.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C community-project commit -q -m 'Start community project'\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 9:30 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C community-project commit -q -m 'Update community schedule'\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0130\n' > community-project/contacts.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-03T12:00:00Z GIT_COMMITTER_DATE=2026-01-03T12:00:00Z git -C community-project commit -q -m 'Update community contacts'\n"
+                }
+              },
+              "terminalExpectations": {
+                "forbiddenCommands": {
+                  "0": {
+                    "message": "That action can discard or rewrite history. Use the safe, layer-specific workflow taught in this course."
+                  }
+                },
+                "requiredCommands": {
+                  "0": {
+                    "message": "Did you read the committed contact file directly from `HEAD`?"
+                  }
+                }
+              }
+            }
+          },
+          "practice": {
+            "single-choice-1": {
+              "title": "HEAD in Git",
+              "prompt": "What does `HEAD` identify in this course?",
+              "hint": "Focus on what the command or concept observes or changes at this point in the workflow.",
+              "help": {
+                "concept": "Scan the repository timeline, open one checkpoint, understand `HEAD`, and move between overview and detail.",
+                "hint_1": "Remove options that act on a different repository layer than the one named in the question.",
+                "hint_2": "Choose the answer that remains accurate even when other unrelated files exist."
+              },
+              "options": {
+                "a": "The first commit ever recorded",
+                "b": "The staging area",
+                "c": "The currently checked-out commit",
+                "d": "The list of ignored paths"
+              }
+            },
+            "multi-choice-1": {
+              "title": "Understanding git log --oneline",
+              "prompt": "What information does `git log --oneline` provide?",
+              "hint": "Choose the one answer that describes this command or concept precisely.",
+              "help": {
+                "concept": "Scan the repository timeline, open one checkpoint, understand `HEAD`, and move between overview and detail.",
+                "hint_1": "Remove choices that act on a different repository layer or promise behavior Git does not provide.",
+                "hint_2": "Prefer the exact definition used in this chapter over a nearby Git idea."
+              },
+              "options": {
+                "a": "A full line-by-line diff for every commit",
+                "b": "A compact one-line summary of each commit",
+                "c": "Only the files currently in the staging area",
+                "d": "Only the untracked files in the working tree"
+              }
+            },
+            "multi-choice-2": {
+              "title": "Purpose of git show",
+              "prompt": "What is the primary purpose of the `git show` command?",
+              "hint": "Choose the one answer that describes this command or concept precisely.",
+              "help": {
+                "concept": "Scan the repository timeline, open one checkpoint, understand `HEAD`, and move between overview and detail.",
+                "hint_1": "Remove choices that act on a different repository layer or promise behavior Git does not provide.",
+                "hint_2": "Prefer the exact definition used in this chapter over a nearby Git idea."
+              },
+              "options": {
+                "a": "To list every commit as one short line",
+                "b": "To display the details of a selected commit",
+                "c": "To initialize an ordinary project folder",
+                "d": "To stage every current file"
+              }
+            },
+            "drag-reorder-1": {
+              "title": "Order of Git Commands",
+              "prompt": "Arrange the following Git commands in the order you would use them to inspect a commit's history and details.",
+              "hint": "Start with the state that must exist before the next action can make sense.",
+              "help": {
+                "concept": "Scan the repository timeline, open one checkpoint, understand `HEAD`, and move between overview and detail.",
+                "hint_1": "Track how the project moves from working files to a proposed snapshot and then to history.",
+                "hint_2": "Read the ordered steps as one continuous repository story."
+              },
+              "tokens": {
+                "t1": "git log --oneline",
+                "t2": "git show HEAD"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "git-foundations": {
+      "git-foundations-module-2-meaningful-history": {
+        "read-history-with-log-and-show": {
+          "sketch0": {
+            "title": "History Is a Sequence of Snapshots",
+            "bodyMarkdown": "`git log --oneline` lists the newest commit first. Short identifiers are useful references, but the course does not grade exact hashes because valid repositories can produce different values."
+          },
+          "sketch1": {
+            "title": "HEAD Names the Current Snapshot",
+            "bodyMarkdown": "`HEAD` points to the currently checked-out commit. `git show --stat --oneline HEAD` combines its subject with a compact file summary."
+          },
+          "sketch2": {
+            "title": "Show Can Read Committed Text",
+            "bodyMarkdown": "`git show HEAD:path` reads a text file from the committed snapshot without changing the working tree. History inspection should leave status unchanged."
+          }
+        }
+      }
+    }
+  }
+}

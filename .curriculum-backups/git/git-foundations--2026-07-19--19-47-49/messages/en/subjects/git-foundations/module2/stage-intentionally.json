@@ -1,0 +1,272 @@
+{
+  "topics": {
+    "git-foundations": {
+      "git-foundations-module-2-meaningful-history": {
+        "stage-intentionally": {
+          "label": "Stage One Purpose at a Time",
+          "summary": "Separate two supplied community-project purposes into focused snapshots.",
+          "cards": {
+            "sketch0": {
+              "title": "One Project Can Hold Several Purposes"
+            },
+            "sketch1": {
+              "title": "Stage the First Purpose by Name"
+            },
+            "sketch2": {
+              "title": "Review the Staged Snapshot"
+            },
+            "sketch3": {
+              "title": "Commit, Then Continue"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_stage_intentionally_sketch0": {
+              "title": "Stage Only the Schedule Purpose",
+              "prompt": "`community-project/schedule.txt` contains the supplied cleanup-time change, and `contacts.txt` contains the supplied help-desk change. Stage only `schedule.txt`. Leave the contact change in the working tree.",
+              "hint": "Name the schedule file explicitly so the unrelated contact edit stays unstaged.",
+              "help": {
+                "concept": "Intentional staging separates unrelated work before a commit exists.",
+                "hint_1": "Name schedule.txt explicitly.",
+                "hint_2": "contacts.txt should remain only in the working tree."
+              },
+              "starterCode": "Community schedule\n\nSaturday cleanup: 9:30 AM\n",
+              "solutionCode": "git add schedule.txt",
+              "starterFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0100\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Old planning notes\n\nSpring flyer draft.\n' > community-project/old-notes.txt\nmkdir -p -- community-project/generated\nprintf %s 'Generated summary\n\nCreated automatically from project notes.\n' > community-project/generated/summary.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C community-project commit -q -m 'Start community project'\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 9:30 AM\n' > community-project/schedule.txt\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0130\n' > community-project/contacts.txt\n"
+                }
+              },
+              "solutionFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0100\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Old planning notes\n\nSpring flyer draft.\n' > community-project/old-notes.txt\nmkdir -p -- community-project/generated\nprintf %s 'Generated summary\n\nCreated automatically from project notes.\n' > community-project/generated/summary.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C community-project commit -q -m 'Start community project'\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 9:30 AM\n' > community-project/schedule.txt\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0130\n' > community-project/contacts.txt\n"
+                }
+              },
+              "instructions": "`community-project/schedule.txt` contains the supplied cleanup-time change, and `contacts.txt` contains the supplied help-desk change. Stage only `schedule.txt`. Leave the contact change in the working tree.",
+              "terminalExpectations": {
+                "forbiddenCommands": {
+                  "0": {
+                    "message": "That action can discard or rewrite history. Use the safe, layer-specific workflow taught in this course."
+                  }
+                },
+                "requiredCommands": {
+                  "0": {
+                    "message": "Did you stage only the schedule purpose and leave the contact edit unstaged?"
+                  }
+                }
+              }
+            },
+            "try_stage_intentionally_sketch1": {
+              "title": "Review the Proposed Schedule Snapshot",
+              "prompt": "The schedule change is staged and the contact change is not. Inspect only the staged patch for `schedule.txt`.",
+              "hint": "Review the staging area, not the remaining working-tree edit.",
+              "help": {
+                "concept": "git diff --staged shows what the next commit would record.",
+                "hint_1": "Only schedule.txt should appear in the staged patch.",
+                "hint_2": "The contacts.txt change must stay outside the proposed snapshot."
+              },
+              "starterCode": "Community schedule\n\nSaturday cleanup: 9:30 AM\n",
+              "solutionCode": "git diff --staged -- schedule.txt",
+              "starterFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0100\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Old planning notes\n\nSpring flyer draft.\n' > community-project/old-notes.txt\nmkdir -p -- community-project/generated\nprintf %s 'Generated summary\n\nCreated automatically from project notes.\n' > community-project/generated/summary.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C community-project commit -q -m 'Start community project'\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 9:30 AM\n' > community-project/schedule.txt\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0130\n' > community-project/contacts.txt\ngit -C community-project add -- schedule.txt\n"
+                }
+              },
+              "solutionFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0100\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Old planning notes\n\nSpring flyer draft.\n' > community-project/old-notes.txt\nmkdir -p -- community-project/generated\nprintf %s 'Generated summary\n\nCreated automatically from project notes.\n' > community-project/generated/summary.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C community-project commit -q -m 'Start community project'\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 9:30 AM\n' > community-project/schedule.txt\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0130\n' > community-project/contacts.txt\ngit -C community-project add -- schedule.txt\n"
+                }
+              },
+              "instructions": "The schedule change is staged and the contact change is not. Inspect only the staged patch for `schedule.txt`.",
+              "terminalExpectations": {
+                "forbiddenCommands": {
+                  "0": {
+                    "message": "That action can discard or rewrite history. Use the safe, layer-specific workflow taught in this course."
+                  }
+                },
+                "requiredCommands": {
+                  "0": {
+                    "message": "Did you inspect only the staged schedule patch?"
+                  }
+                }
+              }
+            },
+            "try_stage_intentionally_sketch2": {
+              "title": "Commit the Schedule Separately",
+              "prompt": "Record the staged schedule change with the message `Update community schedule`. Then read short status and confirm that `contacts.txt` is still modified but unstaged.",
+              "hint": "A focused commit may intentionally leave unrelated work unfinished.",
+              "help": {
+                "concept": "A focused commit can leave unrelated working-tree changes for a later snapshot.",
+                "hint_1": "Use Update community schedule exactly.",
+                "hint_2": "After the commit, contacts.txt should still appear modified."
+              },
+              "starterCode": "Community schedule\n\nSaturday cleanup: 9:30 AM\n",
+              "solutionCode": "git commit -m \"Update community schedule\"\ngit status --short",
+              "starterFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0100\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Old planning notes\n\nSpring flyer draft.\n' > community-project/old-notes.txt\nmkdir -p -- community-project/generated\nprintf %s 'Generated summary\n\nCreated automatically from project notes.\n' > community-project/generated/summary.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C community-project commit -q -m 'Start community project'\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 9:30 AM\n' > community-project/schedule.txt\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0130\n' > community-project/contacts.txt\ngit -C community-project add -- schedule.txt\n"
+                }
+              },
+              "solutionFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0100\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Old planning notes\n\nSpring flyer draft.\n' > community-project/old-notes.txt\nmkdir -p -- community-project/generated\nprintf %s 'Generated summary\n\nCreated automatically from project notes.\n' > community-project/generated/summary.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C community-project commit -q -m 'Start community project'\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 9:30 AM\n' > community-project/schedule.txt\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0130\n' > community-project/contacts.txt\ngit -C community-project add -- schedule.txt\n"
+                }
+              },
+              "instructions": "Record the staged schedule change with the message `Update community schedule`. Then read short status and confirm that `contacts.txt` is still modified but unstaged.",
+              "terminalExpectations": {
+                "forbiddenCommands": {
+                  "0": {
+                    "message": "That action can discard or rewrite history. Use the safe, layer-specific workflow taught in this course."
+                  }
+                },
+                "requiredCommands": {
+                  "0": {
+                    "message": "Did you record the staged schedule purpose with the requested message?"
+                  },
+                  "1": {
+                    "message": "Did you confirm that the contact edit still remains unstaged?"
+                  }
+                }
+              }
+            },
+            "try_stage_intentionally_sketch3": {
+              "title": "Record the Contact Change Separately",
+              "prompt": "Stage `contacts.txt`, inspect its staged patch, and record it with the message `Update community contacts`. The two purposes should now appear as separate commits.",
+              "hint": "Prepare and record only the remaining contact update.",
+              "help": {
+                "concept": "The second focused commit completes the unrelated contact change without mixing it into the schedule commit.",
+                "hint_1": "Review the staged patch before recording it.",
+                "hint_2": "The final message is Update community contacts."
+              },
+              "starterCode": "Community contacts\n\nHelp desk: 555-0130\n",
+              "solutionCode": "git add contacts.txt\ngit diff --staged -- contacts.txt\ngit commit -m \"Update community contacts\"",
+              "starterFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0100\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Old planning notes\n\nSpring flyer draft.\n' > community-project/old-notes.txt\nmkdir -p -- community-project/generated\nprintf %s 'Generated summary\n\nCreated automatically from project notes.\n' > community-project/generated/summary.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C community-project commit -q -m 'Start community project'\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 9:30 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C community-project commit -q -m 'Update community schedule'\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0130\n' > community-project/contacts.txt\n"
+                }
+              },
+              "solutionFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0100\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Old planning notes\n\nSpring flyer draft.\n' > community-project/old-notes.txt\nmkdir -p -- community-project/generated\nprintf %s 'Generated summary\n\nCreated automatically from project notes.\n' > community-project/generated/summary.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C community-project commit -q -m 'Start community project'\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 9:30 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C community-project commit -q -m 'Update community schedule'\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0130\n' > community-project/contacts.txt\n"
+                }
+              },
+              "instructions": "Stage `contacts.txt`, inspect its staged patch, and record it with the message `Update community contacts`. The two purposes should now appear as separate commits.",
+              "terminalExpectations": {
+                "forbiddenCommands": {
+                  "0": {
+                    "message": "That action can discard or rewrite history. Use the safe, layer-specific workflow taught in this course."
+                  }
+                },
+                "requiredCommands": {
+                  "0": {
+                    "message": "Did you stage the remaining contact file?"
+                  },
+                  "1": {
+                    "message": "Did you inspect its staged patch?"
+                  },
+                  "2": {
+                    "message": "Did you record it as a separate purpose?"
+                  }
+                }
+              }
+            }
+          },
+          "practice": {
+            "single-choice-1": {
+              "title": "Choose a Focused Snapshot",
+              "prompt": "Two unrelated files are modified. What best keeps the next commit focused?",
+              "hint": "Focus on what the command or concept observes or changes at this point in the workflow.",
+              "help": {
+                "concept": "Build the next snapshot one purpose at a time, review the staged version, and reverse a staging decision without losing work.",
+                "hint_1": "Remove options that act on a different repository layer than the one named in the question.",
+                "hint_2": "Choose the answer that remains accurate even when other unrelated files exist."
+              },
+              "options": {
+                "a": "To prepare selected changes for a commit",
+                "b": "To commit changes automatically",
+                "c": "To discard every working-tree change",
+                "d": "To list the recorded commit history"
+              }
+            },
+            "multi-choice-1": {
+              "title": "A Coherent Snapshot",
+              "prompt": "Which practices help keep a commit focused? Select all that apply.",
+              "hint": "Judge each option independently; choose only the statements that stay true in this exact repository state.",
+              "help": {
+                "concept": "Build the next snapshot one purpose at a time, review the staged version, and reverse a staging decision without losing work.",
+                "hint_1": "A partly true option is still wrong if it adds an effect Git does not guarantee.",
+                "hint_2": "Use the layer named in the prompt—working tree, staging area, or history—to test each choice."
+              },
+              "options": {
+                "a": "Stage files that serve the same project result.",
+                "b": "Review the staged snapshot before committing.",
+                "c": "Stage every changed file so status becomes quiet.",
+                "d": "Use a subject that describes the result."
+              }
+            },
+            "multi-choice-2": {
+              "title": "Inspect the Staged Boundary",
+              "prompt": "Which commands can help verify what is staged?",
+              "hint": "Choose the one answer that describes this command or concept precisely.",
+              "help": {
+                "concept": "Build the next snapshot one purpose at a time, review the staged version, and reverse a staging decision without losing work.",
+                "hint_1": "Remove choices that act on a different repository layer or promise behavior Git does not provide.",
+                "hint_2": "Prefer the exact definition used in this chapter over a nearby Git idea."
+              },
+              "options": {
+                "a": "git diff --staged",
+                "b": "git diff --staged --name-only",
+                "c": "git status --short",
+                "d": "git init"
+              }
+            },
+            "fill-blank-1": {
+              "title": "Write a Focused Commit Subject",
+              "prompt": "The staged change expands the community cleanup time. Complete the subject: `git commit -m \"[blank1]\"`.",
+              "hint": "Choose the term or symbol that matches the exact state described, not a nearby Git concept.",
+              "help": {
+                "concept": "Build the next snapshot one purpose at a time, review the staged version, and reverse a staging decision without losing work.",
+                "hint_1": "Pay attention to whether the prompt describes an untracked path, a working-tree edit, staged work, or history.",
+                "hint_2": "Read spaces, punctuation, and status columns as meaningful when the question shows Git output."
+              },
+              "template": "git commit -m \"[blank1]\"",
+              "choices": [
+                "Update community cleanup time",
+                "changes",
+                "update files",
+                "work in progress"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "git-foundations": {
+      "git-foundations-module-2-meaningful-history": {
+        "stage-intentionally": {
+          "stage-intentionally-sketch0": {
+            "title": "One Project Can Hold Several Purposes",
+            "bodyMarkdown": "The schedule time and help-desk number are unrelated changes. They may exist together in the working tree without belonging in the same commit."
+          },
+          "stage-intentionally-sketch1": {
+            "title": "Stage the First Purpose by Name",
+            "bodyMarkdown": "Naming `schedule.txt` stages only the cleanup-time change. `contacts.txt` remains outside the proposed snapshot."
+          },
+          "stage-intentionally-sketch2": {
+            "title": "Review the Staged Snapshot",
+            "bodyMarkdown": "`git diff --staged -- path` shows what the next commit would record. Ordinary `git diff` answers a different question about unstaged work."
+          },
+          "stage-intentionally-sketch3": {
+            "title": "Commit, Then Continue",
+            "bodyMarkdown": "After the schedule commit, the contact edit remains available for its own snapshot. This produces history whose entries each explain one purpose."
+          }
+        }
+      }
+    }
+  }
+}

@@ -12,6 +12,26 @@ import type {
 
 export type CourseSpecDifficulty = "beginner" | "intermediate" | "advanced";
 
+export type CourseSpecProjectJourneyRole = "guided" | "module_project" | "capstone";
+
+export type CourseSpecProjectJourney = {
+    id: string;
+    role: CourseSpecProjectJourneyRole;
+    title: string;
+    repositoryPath: string;
+    continuity: "course" | "cross_module" | "topic";
+    supportLevel: "guided" | "reapplication" | "independent";
+    purpose?: string;
+    exactEditInstructionsRequired?: boolean;
+    milestoneOrder: string[];
+};
+
+export type CourseSpecTopicProjectJourney = {
+    journeyId: string;
+    entryMilestone: string;
+    exitMilestone: string;
+};
+
 export type CourseSpecProjectStep = {
     step: number;
     title: string;
@@ -27,6 +47,10 @@ export type CourseSpecProjectBrief = {
     flow?: "standalone" | "progressive";
     requirements?: string[];
     stepLadder?: CourseSpecProjectStep[];
+    journeyId?: string;
+    continuesFromMilestone?: string;
+    finalMilestone?: string;
+    exactEditInstructionsRequired?: boolean;
 };
 
 export type CourseSpecExercisePolicy = {
@@ -101,6 +125,7 @@ export type CourseSpecTopic = {
     learningGoals?: string[];
     practice?: PracticeConfig;
     projectBrief?: CourseSpecProjectBrief;
+    projectJourney?: CourseSpecTopicProjectJourney;
     /** Topic-level Tools presentation override. */
     tools?: ToolPresentationPolicy;
     /** Sparse lesson/card overrides keyed by emitted card id (for example sketch0, quiz, project). */
@@ -219,6 +244,7 @@ export type CourseSpec = {
     releasePlan?: CourseSpecReleasePlan;
     policy?: CourseSpecPolicy;
     authoringGuidance?: string[];
+    projectJourneys?: CourseSpecProjectJourney[];
     modules: CourseSpecModule[];
     assessmentAndDelivery?: CourseSpecAssessmentAndDelivery;
     workspaceProfileId?: string;

@@ -1,0 +1,245 @@
+{
+  "topics": {
+    "git-foundations": {
+      "git-foundations-module-1-start-tracking": {
+        "module-1-field-notes-repository": {
+          "label": "Module Project: Start Volunteer Hub History",
+          "summary": "Begin the cumulative volunteer-hub project and record its first snapshot.",
+          "cards": {
+            "sketch0": {
+              "title": "Parallel Project: Volunteer Hub"
+            },
+            "project": {
+              "title": "Build the Volunteer Hub Baseline"
+            }
+          },
+          "projectSteps": {
+            "try_git_repo_inspection": {
+              "title": "Inspect the Volunteer Hub Folder"
+            },
+            "try_git_config": {
+              "title": "Initialize Volunteer Hub"
+            },
+            "try_git_init": {
+              "title": "Configure the Volunteer Hub Identity"
+            },
+            "try_git_stage_files": {
+              "title": "Stage the Volunteer Hub Baseline"
+            },
+            "try_git_commit": {
+              "title": "Commit the Volunteer Hub Baseline"
+            }
+          },
+          "moduleProject": {
+            "steps": {
+              "try_git_repo_inspection": {
+                "title": "Inspect the Volunteer Hub Folder",
+                "prompt": "Type `pwd` and press Enter. Then type `ls` and press Enter. Confirm you are inside `volunteer-hub/` and can see README.md, index.html, styles.css, and notes/. Do not initialize Git yet.",
+                "hint": "Inspect the prepared folder before changing it.",
+                "help": {
+                  "concept": "A repository begins as an ordinary project folder.",
+                  "hint_1": "The terminal already opens inside volunteer-hub.",
+                  "hint_2": "This step must leave the folder uninitialized."
+                },
+                "starterCode": "# Volunteer Hub\n\nVolunteer signups and schedules.\n",
+                "solutionCode": "pwd\nls",
+                "instructions": "Type `pwd` and press Enter. Then type `ls` and press Enter. Confirm you are inside `volunteer-hub/` and can see README.md, index.html, styles.css, and notes/. Do not initialize Git yet.",
+                "starterFiles": {
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- volunteer-hub\nmkdir -p -- volunteer-hub\nmkdir -p -- volunteer-hub\nprintf %s '# Volunteer Hub\n\nVolunteer signups and schedules.\n' > volunteer-hub/README.md\nmkdir -p -- volunteer-hub\nprintf %s '<!doctype html>\n<title>Volunteer Hub</title>\n<h1>Volunteer Signups</h1>\n' > volunteer-hub/index.html\nmkdir -p -- volunteer-hub\nprintf %s 'body { font-family: sans-serif; }\nfooter { margin-top: 12px; }\n' > volunteer-hub/styles.css\nmkdir -p -- volunteer-hub/notes\nprintf %s 'Orientation: Saturday 10 AM\n' > volunteer-hub/notes/schedule.txt\n"
+                  }
+                },
+                "solutionFiles": {
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- volunteer-hub\nmkdir -p -- volunteer-hub\nmkdir -p -- volunteer-hub\nprintf %s '# Volunteer Hub\n\nVolunteer signups and schedules.\n' > volunteer-hub/README.md\nmkdir -p -- volunteer-hub\nprintf %s '<!doctype html>\n<title>Volunteer Hub</title>\n<h1>Volunteer Signups</h1>\n' > volunteer-hub/index.html\nmkdir -p -- volunteer-hub\nprintf %s 'body { font-family: sans-serif; }\nfooter { margin-top: 12px; }\n' > volunteer-hub/styles.css\nmkdir -p -- volunteer-hub/notes\nprintf %s 'Orientation: Saturday 10 AM\n' > volunteer-hub/notes/schedule.txt\n"
+                  }
+                },
+                "terminalExpectations": {
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "That action can discard or rewrite history. Use the safe, layer-specific workflow taught in this course."
+                    }
+                  },
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Did you run `pwd`?"
+                    },
+                    "1": {
+                      "message": "Did you run `ls`?"
+                    }
+                  }
+                }
+              },
+              "try_git_config": {
+                "title": "Initialize Volunteer Hub",
+                "prompt": "Type `git init -b main` and press Enter inside `volunteer-hub/`.",
+                "hint": "Initialize the current folder on main.",
+                "help": {
+                  "concept": "The parallel project uses the same initialization skill in a different repository.",
+                  "hint_1": "Do not create another directory.",
+                  "hint_2": "No commit should exist yet."
+                },
+                "starterCode": "# Volunteer Hub\n\nVolunteer signups and schedules.\n",
+                "solutionCode": "git init -b main",
+                "instructions": "Type `git init -b main` and press Enter inside `volunteer-hub/`.",
+                "starterFiles": {
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- volunteer-hub\nmkdir -p -- volunteer-hub\nmkdir -p -- volunteer-hub\nprintf %s '# Volunteer Hub\n\nVolunteer signups and schedules.\n' > volunteer-hub/README.md\nmkdir -p -- volunteer-hub\nprintf %s '<!doctype html>\n<title>Volunteer Hub</title>\n<h1>Volunteer Signups</h1>\n' > volunteer-hub/index.html\nmkdir -p -- volunteer-hub\nprintf %s 'body { font-family: sans-serif; }\nfooter { margin-top: 12px; }\n' > volunteer-hub/styles.css\nmkdir -p -- volunteer-hub/notes\nprintf %s 'Orientation: Saturday 10 AM\n' > volunteer-hub/notes/schedule.txt\n"
+                  }
+                },
+                "solutionFiles": {
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- volunteer-hub\nmkdir -p -- volunteer-hub\nmkdir -p -- volunteer-hub\nprintf %s '# Volunteer Hub\n\nVolunteer signups and schedules.\n' > volunteer-hub/README.md\nmkdir -p -- volunteer-hub\nprintf %s '<!doctype html>\n<title>Volunteer Hub</title>\n<h1>Volunteer Signups</h1>\n' > volunteer-hub/index.html\nmkdir -p -- volunteer-hub\nprintf %s 'body { font-family: sans-serif; }\nfooter { margin-top: 12px; }\n' > volunteer-hub/styles.css\nmkdir -p -- volunteer-hub/notes\nprintf %s 'Orientation: Saturday 10 AM\n' > volunteer-hub/notes/schedule.txt\n"
+                  }
+                },
+                "terminalExpectations": {
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "That action can discard or rewrite history. Use the safe, layer-specific workflow taught in this course."
+                    }
+                  },
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Did you run `git init -b main`?"
+                    }
+                  }
+                }
+              },
+              "try_git_init": {
+                "title": "Configure the Volunteer Hub Identity",
+                "prompt": "Type `git config --local user.name \"ZoeSkoul Learner\"` and press Enter. Then type `git config --local user.email \"learner@zoeskoul.local\"` and press Enter.",
+                "hint": "Use the exact repository-local identity.",
+                "help": {
+                  "concept": "Each independent repository needs author identity before its first commit.",
+                  "hint_1": "Keep both settings local.",
+                  "hint_2": "Use the exact supplied values."
+                },
+                "starterCode": "# Volunteer Hub\n\nVolunteer signups and schedules.\n",
+                "solutionCode": "git config --local user.name \"ZoeSkoul Learner\"\ngit config --local user.email \"learner@zoeskoul.local\"",
+                "instructions": "Type `git config --local user.name \"ZoeSkoul Learner\"` and press Enter. Then type `git config --local user.email \"learner@zoeskoul.local\"` and press Enter.",
+                "starterFiles": {
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- volunteer-hub\nmkdir -p -- volunteer-hub\ngit -C volunteer-hub init -q -b main\nmkdir -p -- volunteer-hub\nprintf %s '# Volunteer Hub\n\nVolunteer signups and schedules.\n' > volunteer-hub/README.md\nmkdir -p -- volunteer-hub\nprintf %s '<!doctype html>\n<title>Volunteer Hub</title>\n<h1>Volunteer Signups</h1>\n' > volunteer-hub/index.html\nmkdir -p -- volunteer-hub\nprintf %s 'body { font-family: sans-serif; }\nfooter { margin-top: 12px; }\n' > volunteer-hub/styles.css\nmkdir -p -- volunteer-hub/notes\nprintf %s 'Orientation: Saturday 10 AM\n' > volunteer-hub/notes/schedule.txt\n"
+                  }
+                },
+                "solutionFiles": {
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- volunteer-hub\nmkdir -p -- volunteer-hub\ngit -C volunteer-hub init -q -b main\nmkdir -p -- volunteer-hub\nprintf %s '# Volunteer Hub\n\nVolunteer signups and schedules.\n' > volunteer-hub/README.md\nmkdir -p -- volunteer-hub\nprintf %s '<!doctype html>\n<title>Volunteer Hub</title>\n<h1>Volunteer Signups</h1>\n' > volunteer-hub/index.html\nmkdir -p -- volunteer-hub\nprintf %s 'body { font-family: sans-serif; }\nfooter { margin-top: 12px; }\n' > volunteer-hub/styles.css\nmkdir -p -- volunteer-hub/notes\nprintf %s 'Orientation: Saturday 10 AM\n' > volunteer-hub/notes/schedule.txt\n"
+                  }
+                },
+                "terminalExpectations": {
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "That action can discard or rewrite history. Use the safe, layer-specific workflow taught in this course."
+                    }
+                  },
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Did you run `git config --local user.name \"ZoeSkoul Learner\"`?"
+                    },
+                    "1": {
+                      "message": "Did you run `git config --local user.email \"learner@zoeskoul.local\"`?"
+                    }
+                  }
+                }
+              },
+              "try_git_stage_files": {
+                "title": "Stage the Volunteer Hub Baseline",
+                "prompt": "Type `git add README.md index.html styles.css notes/schedule.txt` and press Enter. Then type `git diff --staged --stat` and press Enter.",
+                "hint": "Stage the four authored files and inspect the proposed snapshot.",
+                "help": {
+                  "concept": "The module project reapplies staging without repeating the full lesson explanation.",
+                  "hint_1": "Use the four exact paths.",
+                  "hint_2": "Do not stage hidden platform files."
+                },
+                "starterCode": "# Volunteer Hub\n\nVolunteer signups and schedules.\n",
+                "solutionCode": "git add README.md index.html styles.css notes/schedule.txt\ngit diff --staged --stat",
+                "instructions": "Type `git add README.md index.html styles.css notes/schedule.txt` and press Enter. Then type `git diff --staged --stat` and press Enter.",
+                "starterFiles": {
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- volunteer-hub\nmkdir -p -- volunteer-hub\ngit -C volunteer-hub init -q -b main\ngit -C volunteer-hub config --local user.name 'ZoeSkoul Learner'\ngit -C volunteer-hub config --local user.email learner@zoeskoul.local\nmkdir -p -- volunteer-hub\nprintf %s '# Volunteer Hub\n\nVolunteer signups and schedules.\n' > volunteer-hub/README.md\nmkdir -p -- volunteer-hub\nprintf %s '<!doctype html>\n<title>Volunteer Hub</title>\n<h1>Volunteer Signups</h1>\n' > volunteer-hub/index.html\nmkdir -p -- volunteer-hub\nprintf %s 'body { font-family: sans-serif; }\nfooter { margin-top: 12px; }\n' > volunteer-hub/styles.css\nmkdir -p -- volunteer-hub/notes\nprintf %s 'Orientation: Saturday 10 AM\n' > volunteer-hub/notes/schedule.txt\n"
+                  }
+                },
+                "solutionFiles": {
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- volunteer-hub\nmkdir -p -- volunteer-hub\ngit -C volunteer-hub init -q -b main\ngit -C volunteer-hub config --local user.name 'ZoeSkoul Learner'\ngit -C volunteer-hub config --local user.email learner@zoeskoul.local\nmkdir -p -- volunteer-hub\nprintf %s '# Volunteer Hub\n\nVolunteer signups and schedules.\n' > volunteer-hub/README.md\nmkdir -p -- volunteer-hub\nprintf %s '<!doctype html>\n<title>Volunteer Hub</title>\n<h1>Volunteer Signups</h1>\n' > volunteer-hub/index.html\nmkdir -p -- volunteer-hub\nprintf %s 'body { font-family: sans-serif; }\nfooter { margin-top: 12px; }\n' > volunteer-hub/styles.css\nmkdir -p -- volunteer-hub/notes\nprintf %s 'Orientation: Saturday 10 AM\n' > volunteer-hub/notes/schedule.txt\n"
+                  }
+                },
+                "terminalExpectations": {
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "That action can discard or rewrite history. Use the safe, layer-specific workflow taught in this course."
+                    }
+                  },
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Did you run `git add README.md index.html styles.css notes/schedule.txt`?"
+                    },
+                    "1": {
+                      "message": "Did you run `git diff --staged --stat`?"
+                    }
+                  }
+                }
+              },
+              "try_git_commit": {
+                "title": "Commit the Volunteer Hub Baseline",
+                "prompt": "Type `git commit -m \"Start volunteer hub\"` and press Enter. Then type `git log --oneline` and press Enter. Type `git status --short` and press Enter.",
+                "hint": "Record the staged baseline with the exact message and verify it.",
+                "help": {
+                  "concept": "The parallel repository now has the canonical state used by the next module project.",
+                  "hint_1": "Use Start volunteer hub exactly.",
+                  "hint_2": "The final short status should be empty."
+                },
+                "starterCode": "# Volunteer Hub\n\nVolunteer signups and schedules.\n",
+                "solutionCode": "git commit -m \"Start volunteer hub\"\ngit log --oneline\ngit status --short",
+                "instructions": "Type `git commit -m \"Start volunteer hub\"` and press Enter. Then type `git log --oneline` and press Enter. Type `git status --short` and press Enter.",
+                "starterFiles": {
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- volunteer-hub\nmkdir -p -- volunteer-hub\ngit -C volunteer-hub init -q -b main\ngit -C volunteer-hub config --local user.name 'ZoeSkoul Learner'\ngit -C volunteer-hub config --local user.email learner@zoeskoul.local\nmkdir -p -- volunteer-hub\nprintf %s '# Volunteer Hub\n\nVolunteer signups and schedules.\n' > volunteer-hub/README.md\nmkdir -p -- volunteer-hub\nprintf %s '<!doctype html>\n<title>Volunteer Hub</title>\n<h1>Volunteer Signups</h1>\n' > volunteer-hub/index.html\nmkdir -p -- volunteer-hub\nprintf %s 'body { font-family: sans-serif; }\nfooter { margin-top: 12px; }\n' > volunteer-hub/styles.css\nmkdir -p -- volunteer-hub/notes\nprintf %s 'Orientation: Saturday 10 AM\n' > volunteer-hub/notes/schedule.txt\ngit -C volunteer-hub add -A\n"
+                  }
+                },
+                "solutionFiles": {
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- volunteer-hub\nmkdir -p -- volunteer-hub\ngit -C volunteer-hub init -q -b main\ngit -C volunteer-hub config --local user.name 'ZoeSkoul Learner'\ngit -C volunteer-hub config --local user.email learner@zoeskoul.local\nmkdir -p -- volunteer-hub\nprintf %s '# Volunteer Hub\n\nVolunteer signups and schedules.\n' > volunteer-hub/README.md\nmkdir -p -- volunteer-hub\nprintf %s '<!doctype html>\n<title>Volunteer Hub</title>\n<h1>Volunteer Signups</h1>\n' > volunteer-hub/index.html\nmkdir -p -- volunteer-hub\nprintf %s 'body { font-family: sans-serif; }\nfooter { margin-top: 12px; }\n' > volunteer-hub/styles.css\nmkdir -p -- volunteer-hub/notes\nprintf %s 'Orientation: Saturday 10 AM\n' > volunteer-hub/notes/schedule.txt\ngit -C volunteer-hub add -A\n"
+                  }
+                },
+                "terminalExpectations": {
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "That action can discard or rewrite history. Use the safe, layer-specific workflow taught in this course."
+                    }
+                  },
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Did you run `git commit -m \"Start volunteer hub\"`?"
+                    },
+                    "1": {
+                      "message": "Did you run `git log --oneline`?"
+                    },
+                    "2": {
+                      "message": "Did you run `git status --short`?"
+                    }
+                  }
+                }
+              }
+            },
+            "title": "Build the Volunteer Hub Baseline",
+            "description": "This project starts a second cumulative repository. It uses different files from the guided community-site work but requires the same Module 1 outcomes: inspect, initialize, configure, stage, commit, and verify. The final state continues into the Module 2 project."
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "git-foundations": {
+      "git-foundations-module-1-start-tracking": {
+        "module-1-field-notes-repository": {
+          "intro-to-git-repository": {
+            "title": "Parallel Project: Volunteer Hub",
+            "bodyMarkdown": "This project starts a second cumulative repository. It uses different files from the guided community-site work but requires the same Module 1 outcomes: inspect, initialize, configure, stage, commit, and verify. The final state continues into the Module 2 project."
+          }
+        }
+      }
+    }
+  }
+}

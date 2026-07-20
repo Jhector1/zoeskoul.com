@@ -377,6 +377,10 @@ function normalizeTopic(
         learningGoals: cleanStringArray(topic?.learningGoals),
         practice: normalizePractice(topic?.practice),
         projectBrief: normalizeProjectBrief(topic?.projectBrief),
+        projectJourney:
+            topic?.projectJourney && typeof topic.projectJourney === "object"
+                ? { ...topic.projectJourney }
+                : undefined,
     };
 }
 
@@ -608,6 +612,14 @@ export function normalizeLegacyCourseSpec(raw: unknown): CourseSpec {
                     },
                 },
         authoringGuidance: cleanStringArray(input.authoringGuidance) ?? [],
+        projectJourneys: Array.isArray(input.projectJourneys)
+            ? input.projectJourneys
+                .filter((journey: unknown) => journey && typeof journey === "object")
+                .map((journey: any) => ({
+                    ...journey,
+                    milestoneOrder: cleanStringArray(journey.milestoneOrder) ?? [],
+                }))
+            : undefined,
         modules: normalizedModules,
         assessmentAndDelivery:
             input.assessmentAndDelivery && typeof input.assessmentAndDelivery === "object"

@@ -1,0 +1,228 @@
+{
+  "topics": {
+    "git-foundations": {
+      "git-foundations-module-3-manage-tracked-files": {
+        "rename-and-remove-tracked-files": {
+          "label": "Rename and Remove Tracked Files",
+          "summary": "Maintain tracked community-site paths safely and record one structural cleanup.",
+          "cards": {
+            "sketch0": {
+              "title": "Tracked Paths Change with the Project"
+            },
+            "sketch1": {
+              "title": "Structural Changes Need Review"
+            },
+            "sketch3": {
+              "title": "Group One Cleanup Purpose"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_rename_and_remove_tracked_files_sketch0": {
+              "title": "Rename the Tracked Page",
+              "prompt": "Type `mkdir -p pages` and press Enter. Then type `git mv index.html pages/events.html` and press Enter.",
+              "hint": "Use Git to move the tracked path into pages/.",
+              "help": {
+                "concept": "git mv updates the working tree and stages the tracked rename.",
+                "hint_1": "The destination is pages/events.html.",
+                "hint_2": "Do not copy the file and leave the old path behind."
+              },
+              "starterCode": "<!doctype html>\n<title>Community Site</title>\n<h1>Community Events and Resources</h1>\n",
+              "solutionCode": "mkdir -p pages\ngit mv index.html pages/events.html",
+              "starterFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-site\nmkdir -p -- community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name 'ZoeSkoul Learner'\ngit -C community-site config --local user.email learner@zoeskoul.local\nmkdir -p -- community-site\nprintf %s '# Community Site\n\nLocal events and resources.\n' > community-site/README.md\nmkdir -p -- community-site\nprintf %s '<!doctype html>\n<title>Community Site</title>\n<h1>Community Events</h1>\n' > community-site/index.html\nmkdir -p -- community-site\nprintf %s 'body { font-family: sans-serif; }\nfooter { margin-top: 12px; }\n' > community-site/styles.css\nmkdir -p -- community-site/notes\nprintf %s 'Archive the spring event list.\n' > community-site/notes/old-events.txt\nmkdir -p -- community-site/dist\nprintf %s 'console.log('\"'\"'legacy preview'\"'\"');\n' > community-site/dist/legacy-preview.js\ngit -C community-site add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C community-site commit -q -m 'Start community site'\nmkdir -p -- community-site\nprintf %s '<!doctype html>\n<title>Community Site</title>\n<h1>Community Events and Resources</h1>\n' > community-site/index.html\ngit -C community-site add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C community-site commit -q -m 'Update community heading'\nmkdir -p -- community-site\nprintf %s 'body { font-family: sans-serif; }\nfooter { margin-top: 24px; }\n' > community-site/styles.css\ngit -C community-site add -A\nGIT_AUTHOR_DATE=2026-01-03T12:00:00Z GIT_COMMITTER_DATE=2026-01-03T12:00:00Z git -C community-site commit -q -m 'Space community footer'\n"
+                }
+              },
+              "solutionFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-site\nmkdir -p -- community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name 'ZoeSkoul Learner'\ngit -C community-site config --local user.email learner@zoeskoul.local\nmkdir -p -- community-site\nprintf %s '# Community Site\n\nLocal events and resources.\n' > community-site/README.md\nmkdir -p -- community-site\nprintf %s '<!doctype html>\n<title>Community Site</title>\n<h1>Community Events</h1>\n' > community-site/index.html\nmkdir -p -- community-site\nprintf %s 'body { font-family: sans-serif; }\nfooter { margin-top: 12px; }\n' > community-site/styles.css\nmkdir -p -- community-site/notes\nprintf %s 'Archive the spring event list.\n' > community-site/notes/old-events.txt\nmkdir -p -- community-site/dist\nprintf %s 'console.log('\"'\"'legacy preview'\"'\"');\n' > community-site/dist/legacy-preview.js\ngit -C community-site add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C community-site commit -q -m 'Start community site'\nmkdir -p -- community-site\nprintf %s '<!doctype html>\n<title>Community Site</title>\n<h1>Community Events and Resources</h1>\n' > community-site/index.html\ngit -C community-site add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C community-site commit -q -m 'Update community heading'\nmkdir -p -- community-site\nprintf %s 'body { font-family: sans-serif; }\nfooter { margin-top: 24px; }\n' > community-site/styles.css\ngit -C community-site add -A\nGIT_AUTHOR_DATE=2026-01-03T12:00:00Z GIT_COMMITTER_DATE=2026-01-03T12:00:00Z git -C community-site commit -q -m 'Space community footer'\n"
+                }
+              },
+              "instructions": "Type `mkdir -p pages` and press Enter. Then type `git mv index.html pages/events.html` and press Enter.",
+              "terminalExpectations": {
+                "forbiddenCommands": {
+                  "0": {
+                    "message": "That action can discard or rewrite history. Use the safe, layer-specific workflow taught in this course."
+                  }
+                },
+                "requiredCommands": {
+                  "0": {
+                    "message": "Did you run `mkdir -p pages`?"
+                  },
+                  "1": {
+                    "message": "Did you run `git mv index.html pages/events.html`?"
+                  }
+                }
+              }
+            },
+            "try_rename_and_remove_tracked_files_sketch1": {
+              "title": "Remove the Obsolete Note",
+              "prompt": "The page rename is already staged. Type `git rm notes/old-events.txt` and press Enter. Then type `git diff --staged --name-status` and press Enter.",
+              "hint": "Remove the tracked obsolete note through Git, then inspect the structural summary.",
+              "help": {
+                "concept": "git rm removes a tracked path from the working tree and stages that removal.",
+                "hint_1": "Keep the staged rename intact.",
+                "hint_2": "The summary should show a rename and a deletion."
+              },
+              "starterCode": "<!doctype html>\n<title>Community Site</title>\n<h1>Community Events and Resources</h1>\n",
+              "solutionCode": "git rm notes/old-events.txt\ngit diff --staged --name-status",
+              "starterFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-site\nmkdir -p -- community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name 'ZoeSkoul Learner'\ngit -C community-site config --local user.email learner@zoeskoul.local\nmkdir -p -- community-site\nprintf %s '# Community Site\n\nLocal events and resources.\n' > community-site/README.md\nmkdir -p -- community-site\nprintf %s '<!doctype html>\n<title>Community Site</title>\n<h1>Community Events</h1>\n' > community-site/index.html\nmkdir -p -- community-site\nprintf %s 'body { font-family: sans-serif; }\nfooter { margin-top: 12px; }\n' > community-site/styles.css\nmkdir -p -- community-site/notes\nprintf %s 'Archive the spring event list.\n' > community-site/notes/old-events.txt\nmkdir -p -- community-site/dist\nprintf %s 'console.log('\"'\"'legacy preview'\"'\"');\n' > community-site/dist/legacy-preview.js\ngit -C community-site add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C community-site commit -q -m 'Start community site'\nmkdir -p -- community-site\nprintf %s '<!doctype html>\n<title>Community Site</title>\n<h1>Community Events and Resources</h1>\n' > community-site/index.html\ngit -C community-site add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C community-site commit -q -m 'Update community heading'\nmkdir -p -- community-site\nprintf %s 'body { font-family: sans-serif; }\nfooter { margin-top: 24px; }\n' > community-site/styles.css\ngit -C community-site add -A\nGIT_AUTHOR_DATE=2026-01-03T12:00:00Z GIT_COMMITTER_DATE=2026-01-03T12:00:00Z git -C community-site commit -q -m 'Space community footer'\nrm -f -- community-site/index.html\nmkdir -p -- community-site/pages\nprintf %s '<!doctype html>\n<title>Community Site</title>\n<h1>Community Events and Resources</h1>\n' > community-site/pages/events.html\ngit -C community-site add -- pages/events.html\ngit -C community-site add -A\n"
+                }
+              },
+              "solutionFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-site\nmkdir -p -- community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name 'ZoeSkoul Learner'\ngit -C community-site config --local user.email learner@zoeskoul.local\nmkdir -p -- community-site\nprintf %s '# Community Site\n\nLocal events and resources.\n' > community-site/README.md\nmkdir -p -- community-site\nprintf %s '<!doctype html>\n<title>Community Site</title>\n<h1>Community Events</h1>\n' > community-site/index.html\nmkdir -p -- community-site\nprintf %s 'body { font-family: sans-serif; }\nfooter { margin-top: 12px; }\n' > community-site/styles.css\nmkdir -p -- community-site/notes\nprintf %s 'Archive the spring event list.\n' > community-site/notes/old-events.txt\nmkdir -p -- community-site/dist\nprintf %s 'console.log('\"'\"'legacy preview'\"'\"');\n' > community-site/dist/legacy-preview.js\ngit -C community-site add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C community-site commit -q -m 'Start community site'\nmkdir -p -- community-site\nprintf %s '<!doctype html>\n<title>Community Site</title>\n<h1>Community Events and Resources</h1>\n' > community-site/index.html\ngit -C community-site add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C community-site commit -q -m 'Update community heading'\nmkdir -p -- community-site\nprintf %s 'body { font-family: sans-serif; }\nfooter { margin-top: 24px; }\n' > community-site/styles.css\ngit -C community-site add -A\nGIT_AUTHOR_DATE=2026-01-03T12:00:00Z GIT_COMMITTER_DATE=2026-01-03T12:00:00Z git -C community-site commit -q -m 'Space community footer'\nrm -f -- community-site/index.html\nmkdir -p -- community-site/pages\nprintf %s '<!doctype html>\n<title>Community Site</title>\n<h1>Community Events and Resources</h1>\n' > community-site/pages/events.html\ngit -C community-site add -- pages/events.html\ngit -C community-site add -A\n"
+                }
+              },
+              "instructions": "The page rename is already staged. Type `git rm notes/old-events.txt` and press Enter. Then type `git diff --staged --name-status` and press Enter.",
+              "terminalExpectations": {
+                "forbiddenCommands": {
+                  "0": {
+                    "message": "That action can discard or rewrite history. Use the safe, layer-specific workflow taught in this course."
+                  }
+                },
+                "requiredCommands": {
+                  "0": {
+                    "message": "Did you run `git rm notes/old-events.txt`?"
+                  },
+                  "1": {
+                    "message": "Did you run `git diff --staged --name-status`?"
+                  }
+                }
+              }
+            },
+            "try_rename_and_remove_tracked_files_sketch3": {
+              "title": "Commit the Structural Cleanup",
+              "prompt": "The rename and removal are staged. Type `git commit -m \"Organize community files\"` and press Enter. Then type `git status --short` and press Enter.",
+              "hint": "Record the related structural changes in one focused commit.",
+              "help": {
+                "concept": "Related path maintenance can form one commit when it serves one cleanup purpose.",
+                "hint_1": "Use Organize community files exactly.",
+                "hint_2": "The short status should be empty afterward."
+              },
+              "starterCode": "<!doctype html>\n<title>Community Site</title>\n<h1>Community Events and Resources</h1>\n",
+              "solutionCode": "git commit -m \"Organize community files\"\ngit status --short",
+              "starterFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-site\nmkdir -p -- community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name 'ZoeSkoul Learner'\ngit -C community-site config --local user.email learner@zoeskoul.local\nmkdir -p -- community-site\nprintf %s '# Community Site\n\nLocal events and resources.\n' > community-site/README.md\nmkdir -p -- community-site\nprintf %s '<!doctype html>\n<title>Community Site</title>\n<h1>Community Events</h1>\n' > community-site/index.html\nmkdir -p -- community-site\nprintf %s 'body { font-family: sans-serif; }\nfooter { margin-top: 12px; }\n' > community-site/styles.css\nmkdir -p -- community-site/notes\nprintf %s 'Archive the spring event list.\n' > community-site/notes/old-events.txt\nmkdir -p -- community-site/dist\nprintf %s 'console.log('\"'\"'legacy preview'\"'\"');\n' > community-site/dist/legacy-preview.js\ngit -C community-site add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C community-site commit -q -m 'Start community site'\nmkdir -p -- community-site\nprintf %s '<!doctype html>\n<title>Community Site</title>\n<h1>Community Events and Resources</h1>\n' > community-site/index.html\ngit -C community-site add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C community-site commit -q -m 'Update community heading'\nmkdir -p -- community-site\nprintf %s 'body { font-family: sans-serif; }\nfooter { margin-top: 24px; }\n' > community-site/styles.css\ngit -C community-site add -A\nGIT_AUTHOR_DATE=2026-01-03T12:00:00Z GIT_COMMITTER_DATE=2026-01-03T12:00:00Z git -C community-site commit -q -m 'Space community footer'\nrm -f -- community-site/index.html\nrm -f -- community-site/notes/old-events.txt\nrmdir -- community-site/notes 2>/dev/null || true\nmkdir -p -- community-site/pages\nprintf %s '<!doctype html>\n<title>Community Site</title>\n<h1>Community Events and Resources</h1>\n' > community-site/pages/events.html\ngit -C community-site add -A\n"
+                }
+              },
+              "solutionFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-site\nmkdir -p -- community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name 'ZoeSkoul Learner'\ngit -C community-site config --local user.email learner@zoeskoul.local\nmkdir -p -- community-site\nprintf %s '# Community Site\n\nLocal events and resources.\n' > community-site/README.md\nmkdir -p -- community-site\nprintf %s '<!doctype html>\n<title>Community Site</title>\n<h1>Community Events</h1>\n' > community-site/index.html\nmkdir -p -- community-site\nprintf %s 'body { font-family: sans-serif; }\nfooter { margin-top: 12px; }\n' > community-site/styles.css\nmkdir -p -- community-site/notes\nprintf %s 'Archive the spring event list.\n' > community-site/notes/old-events.txt\nmkdir -p -- community-site/dist\nprintf %s 'console.log('\"'\"'legacy preview'\"'\"');\n' > community-site/dist/legacy-preview.js\ngit -C community-site add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C community-site commit -q -m 'Start community site'\nmkdir -p -- community-site\nprintf %s '<!doctype html>\n<title>Community Site</title>\n<h1>Community Events and Resources</h1>\n' > community-site/index.html\ngit -C community-site add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C community-site commit -q -m 'Update community heading'\nmkdir -p -- community-site\nprintf %s 'body { font-family: sans-serif; }\nfooter { margin-top: 24px; }\n' > community-site/styles.css\ngit -C community-site add -A\nGIT_AUTHOR_DATE=2026-01-03T12:00:00Z GIT_COMMITTER_DATE=2026-01-03T12:00:00Z git -C community-site commit -q -m 'Space community footer'\nrm -f -- community-site/index.html\nrm -f -- community-site/notes/old-events.txt\nrmdir -- community-site/notes 2>/dev/null || true\nmkdir -p -- community-site/pages\nprintf %s '<!doctype html>\n<title>Community Site</title>\n<h1>Community Events and Resources</h1>\n' > community-site/pages/events.html\ngit -C community-site add -A\n"
+                }
+              },
+              "instructions": "The rename and removal are staged. Type `git commit -m \"Organize community files\"` and press Enter. Then type `git status --short` and press Enter.",
+              "terminalExpectations": {
+                "forbiddenCommands": {
+                  "0": {
+                    "message": "That action can discard or rewrite history. Use the safe, layer-specific workflow taught in this course."
+                  }
+                },
+                "requiredCommands": {
+                  "0": {
+                    "message": "Did you run `git commit -m \"Organize community files\"`?"
+                  },
+                  "1": {
+                    "message": "Did you run `git status --short`?"
+                  }
+                }
+              }
+            }
+          },
+          "practice": {
+            "single-choice-1": {
+              "title": "Purpose of git mv",
+              "prompt": "What is the primary purpose of the `git mv` command?",
+              "hint": "Focus on what the command or concept observes or changes at this point in the workflow.",
+              "help": {
+                "concept": "Use Git-aware structural operations, review the staged paths, and record a cleanup without losing earlier versions.",
+                "hint_1": "Remove options that act on a different repository layer than the one named in the question.",
+                "hint_2": "Choose the answer that remains accurate even when other unrelated files exist."
+              },
+              "options": {
+                "a": "To move a file without tracking",
+                "b": "To rename a file and stage the change",
+                "c": "To delete a file",
+                "d": "To create a new file"
+              }
+            },
+            "single-choice-2": {
+              "title": "Effect of git rm",
+              "prompt": "What happens when you use the `git rm` command?",
+              "hint": "Focus on what the command or concept observes or changes at this point in the workflow.",
+              "help": {
+                "concept": "Use Git-aware structural operations, review the staged paths, and record a cleanup without losing earlier versions.",
+                "hint_1": "Remove options that act on a different repository layer than the one named in the question.",
+                "hint_2": "Choose the answer that remains accurate even when other unrelated files exist."
+              },
+              "options": {
+                "a": "The file is moved to a new location",
+                "b": "The file is removed from the working directory and staged for deletion",
+                "c": "The file is renamed",
+                "d": "The file is ignored"
+              }
+            },
+            "multi-choice-1": {
+              "title": "Commands to Verify Staged Changes",
+              "prompt": "Which commands can you use to verify staged changes before committing?",
+              "hint": "Judge each option independently; choose only the statements that stay true in this exact repository state.",
+              "help": {
+                "concept": "Use Git-aware structural operations, review the staged paths, and record a cleanup without losing earlier versions.",
+                "hint_1": "A partly true option is still wrong if it adds an effect Git does not guarantee.",
+                "hint_2": "Use the layer named in the prompt—working tree, staging area, or history—to test each choice."
+              },
+              "options": {
+                "a": "git status",
+                "b": "git diff",
+                "c": "git diff --staged",
+                "d": "git log"
+              }
+            },
+            "drag-reorder-1": {
+              "title": "Steps to Rename and Commit a File",
+              "prompt": "Arrange the steps to rename a file and commit the change using Git.",
+              "hint": "Start with the state that must exist before the next action can make sense.",
+              "help": {
+                "concept": "Use Git-aware structural operations, review the staged paths, and record a cleanup without losing earlier versions.",
+                "hint_1": "Track how the project moves from working files to a proposed snapshot and then to history.",
+                "hint_2": "Read the ordered steps as one continuous repository story."
+              },
+              "tokens": {
+                "t1": "Use git mv to rename the file",
+                "t2": "Check the status with git status",
+                "t3": "Commit the change with git commit"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "git-foundations": {
+      "git-foundations-module-3-manage-tracked-files": {
+        "rename-and-remove-tracked-files": {
+          "sketch0": {
+            "title": "Tracked Paths Change with the Project",
+            "bodyMarkdown": "Projects reorganize. `git mv` stages a tracked move, and `git rm` stages a tracked removal. The important result is the before-and-after snapshot, not a special rename object stored forever."
+          },
+          "sketch1": {
+            "title": "Structural Changes Need Review",
+            "bodyMarkdown": "`git diff --staged --name-status` summarizes staged additions, deletions, and likely renames. Review the path change before recording it."
+          },
+          "sketch3": {
+            "title": "Group One Cleanup Purpose",
+            "bodyMarkdown": "Moving the community page and removing its obsolete note serve one organization purpose, so they can share one focused commit."
+          }
+        }
+      }
+    }
+  }
+}

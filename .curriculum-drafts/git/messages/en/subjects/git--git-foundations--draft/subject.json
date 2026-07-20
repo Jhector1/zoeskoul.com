@@ -2,20 +2,20 @@
   "subjects": {
     "git--git-foundations--draft": {
       "title": "Git Foundations",
-      "description": "Learn the essential local Git workflow: create a repository, read its state, inspect and select changes, record focused commits, manage files safely, and verify a clean handoff.",
-      "moreComingSoon": "More Git Foundations lessons are coming soon."
+      "description": "Learn essential local Git through three small, cumulative, plain-text projects. No programming or web-development knowledge is required.",
+      "moreComingSoon": "Branches, merges, remotes, and GitHub collaboration belong to later Git courses."
     }
   },
   "modules": {
     "git--git-foundations--draft": {
       "git-foundations-module-1-start-tracking": {
-        "title": "Create Your First Repository",
-        "description": "Turn an ordinary folder into a repository, read its state, and record a trustworthy first snapshot.",
+        "title": "Start the Community Project Repository",
+        "description": "Turn a two-file plain-text project into a configured repository and record its first snapshot.",
         "outcomes": [
-          "Explain why one project with history is safer than duplicate “final” folders.",
-          "Initialize an ordinary folder as a Git repository on main.",
-          "Read untracked, tracked, staged, and clean state with Git status.",
-          "Stage project files and create a clear first commit."
+          "Explain why recorded history is safer than duplicate “final” folders.",
+          "Initialize community-project on main and keep the supplied identity repository-local.",
+          "Read untracked and staged state in a small text-based workspace.",
+          "Record and verify the first clean commit."
         ],
         "why": [
           "Gives every later Git command a concrete repository to work with.",
@@ -24,7 +24,7 @@
       },
       "git-foundations-module-2-meaningful-history": {
         "title": "Build Meaningful History",
-        "description": "Review real edits, choose one coherent snapshot at a time, and read the history those decisions create.",
+        "description": "Add one third file, review exact text edits, build focused commits, and inspect the same repository history.",
         "outcomes": [
           "Use git diff to review unstaged and staged content.",
           "Choose related files for one focused snapshot.",
@@ -37,8 +37,8 @@
         ]
       },
       "git-foundations-module-3-manage-tracked-files": {
-        "title": "Manage Tracked Files Safely",
-        "description": "Rename, remove, ignore, and restore files without losing the history that already exists.",
+        "title": "Maintain a Clean Repository",
+        "description": "Maintain the same compact repository through path changes, one generated folder, one ignore rule, and safe recovery.",
         "outcomes": [
           "Rename and remove tracked files with Git-aware commands.",
           "Keep generated and local-only files outside future snapshots.",
@@ -52,7 +52,7 @@
       },
       "git-foundations-module-4-final-capstone": {
         "title": "Final Capstone",
-        "description": "Build and audit a complete four-commit local history for a neighborhood resource guide.",
+        "description": "Build a fresh text-based neighborhood guide through six cumulative Git steps.",
         "outcomes": [
           "Create a clean repository from an ordinary project folder.",
           "Build four purposeful commits whose boundaries match the requested work.",
@@ -70,72 +70,72 @@
     "git--git-foundations--draft": {
       "git-foundations-module-1-start-tracking": {
         "git--git-foundations--draft-git-foundations-section-1-repository-basics": {
-          "title": "From Folder to First Commit",
-          "description": "Understand the problem Git solves, initialize your first repository, read its state, and move one change into history.",
+          "title": "From Ordinary Folder to First Snapshot",
+          "description": "Carry community-project from a two-file ordinary folder through initialization, staging, its first commit, and clean verification.",
           "weeks": null,
           "bullets": [
-            "Why a Project Needs History",
-            "Initialize Your First Repository",
-            "Read the Repository State",
-            "Move a Change into History"
+            "Why Version Control Matters",
+            "Initialize the Community Project Repository",
+            "Read the Community Project State",
+            "Record the First Community Project Snapshot"
           ]
         },
         "git--git-foundations--draft-git-foundations-section-1-module-project": {
-          "title": "Module Project",
-          "description": "Build a neighborhood field-notes repository from an ordinary folder to a clean first commit.",
+          "title": "Parallel Module Project",
+          "description": "Start volunteer-project with only README.md and assignments.txt, then record its first clean snapshot.",
           "weeks": null,
           "bullets": [
-            "Project: Build the Field Notes Repository"
+            "Module Project: Start Volunteer Project History"
           ]
         }
       },
       "git-foundations-module-2-meaningful-history": {
         "git--git-foundations--draft-git-foundations-section-2-history-workflow": {
-          "title": "From Edits to Understandable Snapshots",
-          "description": "Review changes, select one coherent snapshot, record it clearly, and read the resulting history.",
+          "title": "From Exact Edits to Focused History",
+          "description": "Add contacts.txt as the third file, inspect two exact edits, separate them into focused commits, and read the resulting history.",
           "weeks": null,
           "bullets": [
-            "Inspect Unstaged Changes with git diff",
-            "Stage and Commit One Purpose",
-            "Read History with log and show"
+            "Inspect Exact Project Changes",
+            "Stage One Purpose at a Time",
+            "Read the History You Built"
           ]
         },
         "git--git-foundations--draft-git-foundations-section-2-module-project": {
-          "title": "Module Project",
-          "description": "Build a readable history for a small community website without mixing unrelated changes.",
+          "title": "Parallel Module Project",
+          "description": "Continue volunteer-project and record assignment and meeting-time changes separately.",
           "weeks": null,
           "bullets": [
-            "Project: Build the Community Website History"
+            "Module Project: Build Volunteer Project History"
           ]
         }
       },
       "git-foundations-module-3-manage-tracked-files": {
         "git--git-foundations--draft-git-foundations-section-3-safe-file-management": {
-          "title": "Keep the Repository Honest",
-          "description": "Change the repository shape, keep generated output out, and recover safely from current-state mistakes.",
+          "title": "From Tracked Changes to Clean Handoff",
+          "description": "Keep community-project compact while learning tracked path maintenance, one generated folder, one ignore rule, and safe layer-specific recovery.",
           "weeks": null,
           "bullets": [
             "Rename and Remove Tracked Files",
-            "Ignore Generated Files",
-            "Restore without Rewriting History"
+            "Keep Generated Files Out of History",
+            "Recover from Everyday Mistakes"
           ]
         },
         "git--git-foundations--draft-git-foundations-section-3-module-project": {
-          "title": "Module Project",
-          "description": "Prepare a clean release snapshot while preserving the history that explains how the project changed.",
+          "title": "Parallel Module Project",
+          "description": "Finish the cumulative volunteer-project repository with a clean maintenance snapshot.",
           "weeks": null,
           "bullets": [
-            "Project: Prepare a Clean Release Snapshot"
+            "Module Project: Clean the Volunteer Project Repository"
           ]
         }
       },
       "git-foundations-module-4-final-capstone": {
         "git--git-foundations--draft-git-foundations-section-4-final-capstone": {
           "title": "Final Capstone",
-          "description": "Build and verify a complete local history for a neighborhood resource guide.",
+          "description": "Build one fresh neighborhood-guide repository through six cumulative steps.",
           "weeks": null,
           "bullets": [
-            "Final Capstone: Neighborhood Resource Guide History"
+            "Final Capstone: Neighborhood Guide History"
           ]
         }
       }

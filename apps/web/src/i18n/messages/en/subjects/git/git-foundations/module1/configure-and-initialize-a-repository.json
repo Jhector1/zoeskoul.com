@@ -3,17 +3,17 @@
     "git-foundations": {
       "git-foundations-module-1-start-tracking": {
         "configure-and-initialize-a-repository": {
-          "label": "Initialize Your First Repository",
-          "summary": "Create a repository in the correct folder, confirm its initial state, and keep the author identity local to that project.",
+          "label": "Initialize the Community Project Repository",
+          "summary": "Turn a two-file folder into a repository on main and configure a repository-local identity.",
           "cards": {
             "sketch0": {
-              "title": "Create the Repository in the Right Place"
+              "title": "An Ordinary Folder Becomes a Repository"
             },
             "sketch1": {
-              "title": "Confirm the Initial State"
+              "title": "Repository Metadata Stays Behind the Scenes"
             },
             "sketch2": {
-              "title": "Set the Repository Identity"
+              "title": "Identity Belongs to This Repository"
             },
             "quiz": {
               "title": "Practice"
@@ -22,25 +22,25 @@
           "tryIt": {
             "allowReveal": true,
             "try_configure_and_initialize_a_repository_sketch0": {
-              "title": "Initialize an Ordinary Folder",
-              "prompt": "You are working in the prepared `trail-journal/` project folder.\n\nThe folder already contains a README but has no history. Initialize Git with `main` as the first branch. This exercise asks for only the initialization step.",
-              "hint": "Choose the initial branch while Git creates the repository metadata.",
+              "title": "Initialize the Community Project",
+              "prompt": "The terminal opens inside `community-project/`. The folder contains only `README.md` and `schedule.txt`, and it is not a Git repository yet. Initialize the current folder as a repository whose first branch is `main`. Do not edit or stage either file.",
+              "hint": "Create repository metadata in the current folder and name the first branch `main`.",
               "help": {
-                "concept": "`git init -b main` creates repository metadata in the current folder and names its first branch in one step.",
-                "hint_1": "The terminal is already inside the project folder, so do not change directories.",
-                "hint_2": "The task asks for one action: initialize this folder with the requested first branch."
+                "concept": "`git init -b main` creates the hidden `.git` metadata directory in the current folder and chooses `main` as the first branch. It does not edit, stage, or commit the project files.",
+                "hint_1": "The terminal is already at the project root, so no `cd` command is needed.",
+                "hint_2": "The result should be a repository with zero commits and two untracked files."
               },
-              "starterCode": "# Trail Journal\n",
+              "starterCode": "# Community Project\n\nShared schedules and contact notes.\n",
               "solutionCode": "git init -b main",
-              "instructions": "You are working in the prepared `trail-journal/` project folder.\n\nThe folder already contains a README but has no history. Initialize Git with `main` as the first branch. This exercise asks for only the initialization step.",
+              "instructions": "The terminal opens inside `community-project/`. The folder contains only `README.md` and `schedule.txt`, and it is not a Git repository yet. Initialize the current folder as a repository whose first branch is `main`. Do not edit or stage either file.",
               "starterFiles": {
                 "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf trail-journal\nmkdir -p trail-journal\ncd trail-journal\nprintf %s '# Trail Journal\n' > README.md\ncd ..\n"
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\n"
                 }
               },
               "solutionFiles": {
                 "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf trail-journal\nmkdir -p trail-journal\ncd trail-journal\nprintf %s '# Trail Journal\n' > README.md\ncd ..\n"
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\n"
                 }
               },
               "terminalExpectations": {
@@ -51,31 +51,31 @@
                 },
                 "requiredCommands": {
                   "0": {
-                    "message": "Did you initialize this project folder with `main` as its first branch?"
+                    "message": "Did you turn the current folder into a repository whose first branch is `main`?"
                   }
                 }
               }
             },
             "try_configure_and_initialize_a_repository_sketch1": {
-              "title": "Confirm the New Repository",
-              "prompt": "You are working in the prepared `trail-journal/` project folder.\n\nGit has already initialized this folder on `main`. Use the full repository report to confirm three facts: the current branch is `main`, no commits exist yet, and `README.md` is still untracked.",
-              "hint": "Ask Git for the detailed repository report; this step should only inspect the project.",
+              "title": "Store the Local Author Name",
+              "prompt": "The repository now exists. Store the supplied author name `ZoeSkoul Learner` in this repository only. Do not change machine-wide Git settings.",
+              "hint": "Use repository-local configuration for the exact supplied name.",
               "help": {
-                "concept": "The full status report confirms the branch, whether history exists, and which files are still untracked without changing repository state.",
-                "hint_1": "Look for the branch line and the message explaining that no commits exist yet.",
-                "hint_2": "The same report should list `README.md` under untracked files."
+                "concept": "`git config --local user.name \"ZoeSkoul Learner\"` stores the author name inside this repository. `--local` prevents the course workspace from changing Git settings outside this project.",
+                "hint_1": "Keep quotation marks around the name because it contains a space.",
+                "hint_2": "Do not use `--global`."
               },
-              "starterCode": "# Trail Journal\n",
-              "solutionCode": "git status",
-              "instructions": "You are working in the prepared `trail-journal/` project folder.\n\nGit has already initialized this folder on `main`. Use the full repository report to confirm three facts: the current branch is `main`, no commits exist yet, and `README.md` is still untracked.",
+              "starterCode": "# Community Project\n\nShared schedules and contact notes.\n",
+              "solutionCode": "git config --local user.name \"ZoeSkoul Learner\"",
+              "instructions": "The repository now exists. Store the supplied author name `ZoeSkoul Learner` in this repository only. Do not change machine-wide Git settings.",
               "starterFiles": {
                 "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf trail-journal\nmkdir -p trail-journal\ncd trail-journal\nprintf %s '# Trail Journal\n' > README.md\ncd ..\ngit -C trail-journal init -q -b main\n"
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\n"
                 }
               },
               "solutionFiles": {
                 "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf trail-journal\nmkdir -p trail-journal\ncd trail-journal\nprintf %s '# Trail Journal\n' > README.md\ncd ..\ngit -C trail-journal init -q -b main\n"
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\n"
                 }
               },
               "terminalExpectations": {
@@ -86,31 +86,31 @@
                 },
                 "requiredCommands": {
                   "0": {
-                    "message": "Did you ask Git for the full repository report and confirm the branch, empty history, and untracked README?"
+                    "message": "Did you store the supplied author name in this repository only?"
                   }
                 }
               }
             },
             "try_configure_and_initialize_a_repository_sketch2": {
-              "title": "Set a Repository-Only Identity",
-              "prompt": "You are working in the prepared `trail-journal/` project folder.\n\nSet the author name to `ZoeSkoul Learner` and the email to `learner@zoeskoul.local` inside `trail-journal/` only. Print both local values afterward.",
-              "hint": "Keep the author identity inside this repository rather than changing machine-wide settings.",
+              "title": "Complete and Verify the Local Identity",
+              "prompt": "Store `learner@zoeskoul.local` as the repository-local author email. Then read the local configuration and confirm that both the supplied name and email are present.",
+              "hint": "Add the email in the same local scope, then inspect that scope.",
               "help": {
-                "concept": "Repository-local identity applies only to this project and does not alter the machine-wide Git configuration.",
-                "hint_1": "Both the name and email need repository-local values.",
-                "hint_2": "Read the stored values back to catch spelling or scope mistakes."
+                "concept": "`git config --local user.email VALUE` stores the email for this repository. `git config --local --list` reads the local settings so you can verify both identity values before the first commit.",
+                "hint_1": "Use the exact email `learner@zoeskoul.local`.",
+                "hint_2": "The verification output should include both `user.name` and `user.email`."
               },
-              "starterCode": "# Trail Journal\n",
-              "solutionCode": "git config --local user.name \"ZoeSkoul Learner\"\ngit config --local user.email \"learner@zoeskoul.local\"\ngit config --local --get user.name\ngit config --local --get user.email",
-              "instructions": "You are working in the prepared `trail-journal/` project folder.\n\nSet the author name to `ZoeSkoul Learner` and the email to `learner@zoeskoul.local` inside `trail-journal/` only. Print both local values afterward.",
+              "starterCode": "# Community Project\n\nShared schedules and contact notes.\n",
+              "solutionCode": "git config --local user.email \"learner@zoeskoul.local\"\ngit config --local --list",
+              "instructions": "Store `learner@zoeskoul.local` as the repository-local author email. Then read the local configuration and confirm that both the supplied name and email are present.",
               "starterFiles": {
                 "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf trail-journal\nmkdir -p trail-journal\ncd trail-journal\nprintf %s '# Trail Journal\n' > README.md\ncd ..\ngit -C trail-journal init -q -b main\n"
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\n"
                 }
               },
               "solutionFiles": {
                 "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf trail-journal\nmkdir -p trail-journal\ncd trail-journal\nprintf %s '# Trail Journal\n' > README.md\ncd ..\ngit -C trail-journal init -q -b main\n"
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\n"
                 }
               },
               "terminalExpectations": {
@@ -121,10 +121,10 @@
                 },
                 "requiredCommands": {
                   "0": {
-                    "message": "Did you save the requested author value for this repository only?"
+                    "message": "Did you store the supplied local email?"
                   },
                   "1": {
-                    "message": "Did you save the requested author value for this repository only?"
+                    "message": "Did you read the repository-local configuration to verify both values?"
                   }
                 }
               }
@@ -132,8 +132,8 @@
           },
           "practice": {
             "single-choice-1": {
-              "title": "Purpose of Version Control",
-              "prompt": "What is the primary purpose of version control systems like Git?",
+              "title": "Repository-Local Identity",
+              "prompt": "Why does this course use `git config --local` for the supplied author identity?",
               "hint": "Focus on what the command or concept observes or changes at this point in the workflow.",
               "help": {
                 "concept": "Turn an ordinary project folder into a Git repository on `main`, inspect the metadata Git created, and keep the author identity local to that repository.",
@@ -141,10 +141,10 @@
                 "hint_2": "Choose the answer that remains accurate even when other unrelated files exist."
               },
               "options": {
-                "a": "To track changes and collaborate on projects",
-                "b": "To permanently delete files",
-                "c": "To increase file size",
-                "d": "To encrypt files"
+                "a": "It changes the identity only inside the current repository.",
+                "b": "It deletes any existing project history.",
+                "c": "It stages every file in the project.",
+                "d": "It changes the contents of the project files."
               }
             },
             "single-choice-2": {
@@ -175,7 +175,7 @@
               "tokens": {
                 "t1": "Initialize the project folder as a repository",
                 "t2": "Store the repository-local author identity",
-                "t3": "Inspect the branch and current status"
+                "t3": "Inspect the current repository state"
               }
             },
             "fill-blank-choice-1": {
@@ -205,16 +205,16 @@
       "git-foundations-module-1-start-tracking": {
         "configure-and-initialize-a-repository": {
           "sketch0": {
-            "title": "Create the Repository in the Right Place",
-            "bodyMarkdown": "A Git repository belongs to one project folder. Initialize too high and unrelated files become part of the same project; initialize too low and part of the project is left outside.\n\nOnce the terminal is inside the intended folder, create the repository and name its first branch in one step:\n\n```bash\ngit init -b main\n```\n\nGit adds private metadata without changing the visible project files or creating a commit. This command is taught here once; later projects will reuse it without another introduction."
+            "title": "Turn the Folder into a Repository",
+            "bodyMarkdown": "A Git repository is an ordinary project folder plus hidden history metadata. The command `git init -b main` creates that metadata in the current folder and names the first branch `main`. `git` runs Git, `init` initializes the repository, and `-b main` selects the initial branch. It does **not** edit, stage, or commit `README.md` or `schedule.txt`."
           },
           "sketch1": {
-            "title": "Confirm the Initial State",
-            "bodyMarkdown": "Initialization creates a repository, but not history. The safest confirmation is Git's full report:\n\n```bash\ngit status\n```\n\nImmediately after initialization, the report identifies `main`, explains that no commits exist yet, and lists project files that are still untracked. It only reads the repository; it does not stage or record anything.\n\nThis is the one full introduction to `git status`. Later lessons will use it as evidence rather than explain it again."
+            "title": "Keep the Author Name Local",
+            "bodyMarkdown": "Before Git can create a commit, it needs an author identity. `git config --local user.name \"ZoeSkoul Learner\"` stores the supplied name inside this repository only. The `--local` scope is important: it avoids changing Git settings for unrelated projects or for the learner’s computer."
           },
           "sketch2": {
-            "title": "Set the Repository Identity",
-            "bodyMarkdown": "Every commit records an author name and email. In a learning workspace, keep those values inside the current repository:\n\n```bash\ngit config --local user.name \"ZoeSkoul Learner\"\ngit config --local user.email \"learner@zoeskoul.local\"\n```\n\nRead the values back with `git config --local --get ...` before the first commit. The `--local` scope protects machine-wide settings and makes the project self-contained."
+            "title": "Complete and Verify the Local Identity",
+            "bodyMarkdown": "`git config --local user.email \"learner@zoeskoul.local\"` stores the supplied email in this repository. `git config --local --list` then reads all local settings. Together, the name and email identify future commits; they are not a GitHub login."
           }
         }
       }

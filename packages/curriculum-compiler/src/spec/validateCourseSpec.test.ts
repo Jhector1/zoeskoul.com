@@ -744,4 +744,156 @@ describe("validateCourseSpec", () => {
         );
     });
 
+    it("validates cumulative project journey roots and milestone references", () => {
+        const spec = {
+            authoringFormatVersion: "2.0",
+            subjectSlug: "python",
+            courseSlug: "project-journeys",
+            catalogSlug: "python",
+            profileId: "python",
+            title: "Project Journeys",
+            description: "Test cumulative project metadata.",
+            sourceLocale: "en",
+            targetLocales: [],
+            projectJourneys: [
+                {
+                    id: "guided",
+                    role: "guided",
+                    title: "Guided project",
+                    repositoryPath: "guided-project",
+                    continuity: "course",
+                    supportLevel: "guided",
+                    milestoneOrder: ["start", "finish"],
+                },
+                {
+                    id: "parallel",
+                    role: "module_project",
+                    title: "Parallel project",
+                    repositoryPath: "guided-project",
+                    continuity: "cross_module",
+                    supportLevel: "reapplication",
+                    milestoneOrder: ["start", "finish"],
+                },
+            ],
+            modules: [
+                {
+                    moduleNumber: 1,
+                    moduleSlug: "project-journeys-1",
+                    title: "Module 1",
+                    sections: [
+                        {
+                            sectionSlug: "project-journeys-1-core",
+                            title: "Core",
+                            topics: [
+                                {
+                                    topicId: "guided-step",
+                                    title: "Guided Step",
+                                    projectJourney: {
+                                        journeyId: "guided",
+                                        entryMilestone: "finish",
+                                        exitMilestone: "start",
+                                    },
+                                    projectBrief: {
+                                        journeyId: "parallel",
+                                        continuesFromMilestone: "start",
+                                        finalMilestone: "finish",
+                                    },
+                                },
+                            ],
+                        },
+                    ],
+                },
+            ],
+        } as any;
+
+        const issues = validateCourseSpec(spec);
+
+        expect(issues).toContain(
+            'projectJourneys[1]: repositoryPath "guided-project" is reused by another journey',
+        );
+        expect(issues).toContain(
+            "projectJourneys[1] must be referenced by at least one topic",
+        );
+        expect(issues).toContain(
+            "modules[0].sections[0].topics[0].projectJourney: entryMilestone must not come after exitMilestone",
+        );
+        expect(issues).toContain(
+            "modules[0].sections[0].topics[0].projectJourney: projectBrief.journeyId must match projectJourney.journeyId",
+        );
+        expect(issues).toContain(
+            "modules[0].sections[0].topics[0].projectJourney: projectBrief.continuesFromMilestone must match projectJourney.entryMilestone",
+        );
+        expect(issues).toContain(
+            "modules[0].sections[0].topics[0].projectJourney: projectBrief.finalMilestone must match projectJourney.exitMilestone",
+        );
+    });
+
+
+    it("rejects broken journey handoffs and section-role mismatches", () => {
+        const spec = {
+            authoringFormatVersion: "2.0",
+            subjectSlug: "git",
+            courseSlug: "journey-continuity",
+            catalogSlug: "git",
+            profileId: "git",
+            title: "Journey Continuity",
+            sourceLocale: "en",
+            targetLocales: [],
+            projectJourneys: [
+                {
+                    id: "guided",
+                    role: "guided",
+                    title: "Guided repository",
+                    repositoryPath: "guided-repository",
+                    continuity: "course",
+                    supportLevel: "guided",
+                    milestoneOrder: ["start", "middle", "finish"],
+                },
+            ],
+            modules: [
+                {
+                    moduleNumber: 1,
+                    moduleSlug: "journey-continuity-1",
+                    title: "Module 1",
+                    sections: [
+                        {
+                            sectionSlug: "journey-continuity-1-project",
+                            title: "Project",
+                            role: "module_project",
+                            topics: [
+                                {
+                                    topicId: "first-step",
+                                    title: "First Step",
+                                    projectJourney: {
+                                        journeyId: "guided",
+                                        entryMilestone: "start",
+                                        exitMilestone: "middle",
+                                    },
+                                },
+                                {
+                                    topicId: "second-step",
+                                    title: "Second Step",
+                                    projectJourney: {
+                                        journeyId: "guided",
+                                        entryMilestone: "start",
+                                        exitMilestone: "finish",
+                                    },
+                                },
+                            ],
+                        },
+                    ],
+                },
+            ],
+        } as any;
+
+        const issues = validateCourseSpec(spec);
+
+        expect(issues).toContain(
+            'modules[0].sections[0].topics[0].projectJourney: section role "module_project" requires a "module_project" project journey',
+        );
+        expect(issues).toContain(
+            'modules[0].sections[0].topics[1].projectJourney: entryMilestone "start" must continue from previous exitMilestone "middle" for journey "guided"',
+        );
+    });
+
 });

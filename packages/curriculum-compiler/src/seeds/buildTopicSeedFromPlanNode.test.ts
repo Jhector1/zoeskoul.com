@@ -398,6 +398,52 @@ describe("buildTopicSeedFromPlanNode", () => {
         expect(seed.plannedExerciseCounts?.total).toBe(4);
     });
 
+    it("carries project journey metadata from the course spec into the topic seed", () => {
+        const projectJourney = {
+            journeyId: "guided-community-site",
+            entryMilestone: "first-snapshot",
+            exitMilestone: "edited-page",
+        };
+        const projectJourneys = [
+            {
+                id: "guided-community-site",
+                role: "guided",
+                title: "Community Site",
+                repositoryPath: "community-site",
+                continuity: "course",
+                supportLevel: "guided",
+                milestoneOrder: ["first-snapshot", "edited-page"],
+            },
+        ];
+        const seed = buildTopicSeedFromPlanNode(
+            makeBaseArgs({
+                spec: {
+                    projectJourneys,
+                    modules: [
+                        {
+                            moduleSlug: "m0",
+                            sections: [
+                                {
+                                    sectionSlug: "s0",
+                                    topics: [
+                                        {
+                                            topicId: "t0",
+                                            projectJourney,
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                    ],
+                },
+                topic: { projectJourney },
+            }),
+        );
+
+        expect(seed.projectJourney).toEqual(projectJourney);
+        expect(seed.projectJourneys).toEqual(projectJourneys);
+    });
+
     it("uses profile-owned layouts instead of inferring presentation from capabilities", () => {
         const gitSeed = buildTopicSeedFromPlanNode(
             makeBaseArgs({

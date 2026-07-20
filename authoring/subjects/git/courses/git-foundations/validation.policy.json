@@ -21,9 +21,10 @@
     "git mv",
     "git rm",
     ".gitignore",
-    "git check-ignore",
     "git restore",
-    "git restore --staged"
+    "git restore --staged",
+    "git rm --cached",
+    "git status --ignored --short"
   ],
   "disallowedConcepts": [
     "branch creation",
@@ -46,8 +47,7 @@
     "rebase",
     "cherry-pick",
     "force push",
-    "tag",
-    "release"
+    "tag"
   ],
   "validationRequirements": {
     "profileId": "git",
@@ -61,14 +61,19 @@
     "publicNetworkForbidden": true
   },
   "globalRules": [
-    "The first hands-on repository exercise starts from an ordinary folder and requires the learner to run git init -b main.",
-    "Hidden fixture setup runs automatically and must never appear in learner-facing prompts, hints, starterCode, solutionCode, terminal expectations, or terminal history.",
-    "Every technical lesson after initialization begins from deterministic prerequisite repository state and asks the learner to perform only the newly taught Git action.",
-    "Final learner quiz cards contain no code_input. quizDraft remains the authoring collection for runtime Try It exercises.",
-    "Every standard module contains exactly one role=module_project section.",
-    "The final module contains exactly one role=capstone section and one capstone topic.",
-    "Every project step N+1 starts from the complete repository state produced by step N.",
-    "No exercise requires branch, remote, or hosted collaboration knowledge."
+    "The course uses exactly three non-overlapping project roots: community-site for guided learning, volunteer-hub for all module projects, and neighborhood-guide for the capstone.",
+    "Every technical guided exercise in Modules 1-3 uses community-site and advances its canonical milestone without introducing a new repository story.",
+    "All three module projects use volunteer-hub cumulatively across modules; Module 2 begins from the complete Module 1 project state and Module 3 begins from the complete Module 2 project state.",
+    "The six capstone steps use neighborhood-guide cumulatively and never reuse history from the other two journeys.",
+    "Every exercise is direct-link and reset safe: hidden setup reconstructs the exact prerequisite milestone, while grading checks only the learner transition.",
+    "For every journey, solution milestone N equals starter milestone N+1 across files, commit history, index state, working-tree state, ignored files, and cwd.",
+    "Any required file edit includes the exact path, exact text, and exact insertion or replacement location; no exercise grades HTML, CSS, JavaScript, or creative file-authoring knowledge.",
+    "The first hands-on guided exercise starts from an ordinary community-site folder and requires git init -b main.",
+    "Hidden setup must never appear in prompts, hints, starterCode, solutions, terminal expectations, terminal history, or the visible explorer.",
+    "Final learner quiz cards contain no code_input; runtime Try It exercises remain separate from quiz questions.",
+    "Every standard module contains exactly one module_project section, and the final module contains exactly one capstone section and one capstone topic.",
+    "No exercise requires branches, remotes, hosted collaboration, public network access, or destructive history rewriting.",
+    "Quiz distractors stay inside concepts already taught in this course and do not introduce branches, remotes, GitHub, merges, or other later-course vocabulary."
   ],
   "moduleRules": {
     "1": {

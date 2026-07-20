@@ -1,0 +1,851 @@
+{
+  "topicId": "working-tree-staging-and-history",
+  "subjectSlug": "git-foundations",
+  "moduleSlug": "git-foundations-module-1-start-tracking",
+  "sectionSlug": "git-foundations-git-foundations-section-1-repository-basics",
+  "prefix": "git_foundations_module_1",
+  "minutes": 22,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "bash",
+    "supportsTerminal": true,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "runnerBackend": "pty",
+    "layoutMode": "default",
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": true
+    },
+    "preset": "runner",
+    "terminalBootstrap": {
+      "gitSafeDirectories": [
+        "/workspace/*"
+      ]
+    }
+  },
+  "topic": {
+    "labelKey": "topics.git-foundations.git-foundations-module-1-start-tracking.working-tree-staging-and-history.label",
+    "summaryKey": "topics.git-foundations.git-foundations-module-1-start-tracking.working-tree-staging-and-history.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.git-foundations.git-foundations-module-1-start-tracking.working-tree-staging-and-history.cards.sketch0.title",
+      "sketchId": "working-tree-intro",
+      "height": 420,
+      "tryIt": {
+        "id": "try-working-tree-staging-and-history-sketch0",
+        "titleKey": "topics.git-foundations.git-foundations-module-1-start-tracking.working-tree-staging-and-history.tryIt.try_working_tree_staging_and_history_sketch0.title",
+        "promptKey": "topics.git-foundations.git-foundations-module-1-start-tracking.working-tree-staging-and-history.tryIt.try_working_tree_staging_and_history_sketch0.prompt",
+        "exerciseKey": "try-working-tree-staging-and-history-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.git-foundations.git-foundations-module-1-start-tracking.working-tree-staging-and-history.cards.sketch1.title",
+      "sketchId": "staging-area-intro",
+      "height": 420,
+      "tryIt": {
+        "id": "try-working-tree-staging-and-history-sketch1",
+        "titleKey": "topics.git-foundations.git-foundations-module-1-start-tracking.working-tree-staging-and-history.tryIt.try_working_tree_staging_and_history_sketch1.title",
+        "promptKey": "topics.git-foundations.git-foundations-module-1-start-tracking.working-tree-staging-and-history.tryIt.try_working_tree_staging_and_history_sketch1.prompt",
+        "exerciseKey": "try-working-tree-staging-and-history-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.git-foundations.git-foundations-module-1-start-tracking.working-tree-staging-and-history.cards.sketch2.title",
+      "sketchId": "commit-history-intro",
+      "height": 420,
+      "tryIt": {
+        "id": "try-working-tree-staging-and-history-sketch2",
+        "titleKey": "topics.git-foundations.git-foundations-module-1-start-tracking.working-tree-staging-and-history.tryIt.try_working_tree_staging_and_history_sketch2.title",
+        "promptKey": "topics.git-foundations.git-foundations-module-1-start-tracking.working-tree-staging-and-history.tryIt.try_working_tree_staging_and_history_sketch2.prompt",
+        "exerciseKey": "try-working-tree-staging-and-history-sketch2",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.git-foundations.git-foundations-module-1-start-tracking.working-tree-staging-and-history.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 4,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "working-tree-intro",
+      "archetype": "paragraph",
+      "titleKey": "sketches.git-foundations.git-foundations-module-1-start-tracking.working-tree-staging-and-history.working-tree-intro.title",
+      "bodyKey": "sketches.git-foundations.git-foundations-module-1-start-tracking.working-tree-staging-and-history.working-tree-intro.bodyMarkdown"
+    },
+    {
+      "id": "staging-area-intro",
+      "archetype": "paragraph",
+      "titleKey": "sketches.git-foundations.git-foundations-module-1-start-tracking.working-tree-staging-and-history.staging-area-intro.title",
+      "bodyKey": "sketches.git-foundations.git-foundations-module-1-start-tracking.working-tree-staging-and-history.staging-area-intro.bodyMarkdown"
+    },
+    {
+      "id": "commit-history-intro",
+      "archetype": "paragraph",
+      "titleKey": "sketches.git-foundations.git-foundations-module-1-start-tracking.working-tree-staging-and-history.commit-history-intro.title",
+      "bodyKey": "sketches.git-foundations.git-foundations-module-1-start-tracking.working-tree-staging-and-history.commit-history-intro.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "single-choice-1",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.git-foundations.git-foundations-module-1-start-tracking.working-tree-staging-and-history.practice.single-choice-1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "single-choice-2",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.git-foundations.git-foundations-module-1-start-tracking.working-tree-staging-and-history.practice.single-choice-2",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "multi-choice-1",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.git-foundations.git-foundations-module-1-start-tracking.working-tree-staging-and-history.practice.multi-choice-1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
+      }
+    },
+    {
+      "id": "drag-reorder-1",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.git-foundations.git-foundations-module-1-start-tracking.working-tree-staging-and-history.practice.drag-reorder-1",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
+      }
+    },
+    {
+      "id": "try-working-tree-staging-and-history-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.git-foundations.git-foundations-module-1-start-tracking.working-tree-staging-and-history.tryIt.try_working_tree_staging_and_history_sketch0",
+      "language": "bash",
+      "starterCode": "# Community Project\n\nShared schedules and contact notes.\n",
+      "starterFiles": [
+        {
+          "path": "community-project/README.md",
+          "content": "# Community Project\n\nShared schedules and contact notes.\n",
+          "language": "markdown",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "community-project/generated/summary.txt",
+          "content": "Generated summary\n\nCreated automatically from project notes.\n",
+          "language": "text"
+        },
+        {
+          "path": "community-project/schedule.txt",
+          "content": "Community schedule\n\nSaturday cleanup: 10:00 AM\n",
+          "language": "text"
+        },
+        {
+          "path": "community-project/old-notes.txt",
+          "content": "Old planning notes\n\nSpring flyer draft.\n",
+          "language": "text"
+        },
+        {
+          "path": "community-project/contacts.txt",
+          "content": "Community contacts\n\nHelp desk: 555-0100\n",
+          "language": "text"
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^git\\s+commit\\s+\\-m\\s+\"Start\\s+community\\s+project\"$",
+            "message": "@:topics.git-foundations.git-foundations-module-1-start-tracking.working-tree-staging-and-history.tryIt.try_working_tree_staging_and_history_sketch0.terminalExpectations.requiredCommands.0.message"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "@:topics.git-foundations.git-foundations-module-1-start-tracking.working-tree-staging-and-history.tryIt.try_working_tree_staging_and_history_sketch0.terminalExpectations.forbiddenCommands.0.message"
+          }
+        ]
+      },
+      "hiddenShellCheck": {
+        "script": "set -eu\nrepo=community-project\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" branch --show-current)\" = main ] || fail \"The repository is not on main.\"\n[ \"$(git -C \"$repo\" config --local user.name || true)\" = 'ZoeSkoul Learner' ] || fail \"The local author name is not correct.\"\n[ \"$(git -C \"$repo\" config --local user.email || true)\" = learner@zoeskoul.local ] || fail \"The local author email is not correct.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = 1 ] || fail \"The repository has the wrong number of commits.\"\n[ -z \"$(git -C \"$repo\" status --porcelain)\" ] || fail \"The working tree is not clean yet.\"\nexpected=$(printf \"%s\\n\" 'README.md\ngenerated/summary.txt\nschedule.txt\nold-notes.txt\ncontacts.txt' | sort)\nactual=$(git -C \"$repo\" ls-files | sort)\n[ \"$actual\" = \"$expected\" ] || fail \"The tracked file set is not correct.\"",
+        "timeoutMs": 15000
+      },
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "community-project/README.md",
+        "starterCode": "# Community Project\n\nShared schedules and contact notes.\n",
+        "starterFiles": [
+          {
+            "path": "community-project/README.md",
+            "content": "# Community Project\n\nShared schedules and contact notes.\n",
+            "language": "markdown",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "community-project/generated/summary.txt",
+            "content": "Generated summary\n\nCreated automatically from project notes.\n",
+            "language": "text"
+          },
+          {
+            "path": "community-project/schedule.txt",
+            "content": "Community schedule\n\nSaturday cleanup: 10:00 AM\n",
+            "language": "text"
+          },
+          {
+            "path": "community-project/old-notes.txt",
+            "content": "Old planning notes\n\nSpring flyer draft.\n",
+            "language": "text"
+          },
+          {
+            "path": "community-project/contacts.txt",
+            "content": "Community contacts\n\nHelp desk: 555-0100\n",
+            "language": "text"
+          }
+        ],
+        "fixtureFiles": [
+          {
+            "path": ".zoeskoul/setup.sh",
+            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0100\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Old planning notes\n\nSpring flyer draft.\n' > community-project/old-notes.txt\nmkdir -p -- community-project/generated\nprintf %s 'Generated summary\n\nCreated automatically from project notes.\n' > community-project/generated/summary.txt\ngit -C community-project add -A\n",
+            "language": "bash",
+            "readOnly": true
+          },
+          {
+            "path": "community-project/README.md",
+            "content": "# Community Project\n\nShared schedules and contact notes.\n",
+            "language": "markdown"
+          },
+          {
+            "path": "community-project/generated/summary.txt",
+            "content": "Generated summary\n\nCreated automatically from project notes.\n",
+            "language": "text"
+          },
+          {
+            "path": "community-project/schedule.txt",
+            "content": "Community schedule\n\nSaturday cleanup: 10:00 AM\n",
+            "language": "text"
+          },
+          {
+            "path": "community-project/old-notes.txt",
+            "content": "Old planning notes\n\nSpring flyer draft.\n",
+            "language": "text"
+          },
+          {
+            "path": "community-project/contacts.txt",
+            "content": "Community contacts\n\nHelp desk: 555-0100\n",
+            "language": "text"
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "@:topics.git-foundations.git-foundations-module-1-start-tracking.working-tree-staging-and-history.tryIt.try_working_tree_staging_and_history_sketch0.instructions"
+      },
+      "ideConfig": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/community-project",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "serviceOverrides": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/community-project",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "fixtureFiles": [
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0100\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Old planning notes\n\nSpring flyer draft.\n' > community-project/old-notes.txt\nmkdir -p -- community-project/generated\nprintf %s 'Generated summary\n\nCreated automatically from project notes.\n' > community-project/generated/summary.txt\ngit -C community-project add -A\n",
+          "language": "bash",
+          "readOnly": true
+        },
+        {
+          "path": "community-project/README.md",
+          "content": "# Community Project\n\nShared schedules and contact notes.\n",
+          "language": "markdown"
+        },
+        {
+          "path": "community-project/generated/summary.txt",
+          "content": "Generated summary\n\nCreated automatically from project notes.\n",
+          "language": "text"
+        },
+        {
+          "path": "community-project/schedule.txt",
+          "content": "Community schedule\n\nSaturday cleanup: 10:00 AM\n",
+          "language": "text"
+        },
+        {
+          "path": "community-project/old-notes.txt",
+          "content": "Old planning notes\n\nSpring flyer draft.\n",
+          "language": "text"
+        },
+        {
+          "path": "community-project/contacts.txt",
+          "content": "Community contacts\n\nHelp desk: 555-0100\n",
+          "language": "text"
+        }
+      ]
+    },
+    {
+      "id": "try-working-tree-staging-and-history-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.git-foundations.git-foundations-module-1-start-tracking.working-tree-staging-and-history.tryIt.try_working_tree_staging_and_history_sketch1",
+      "language": "bash",
+      "starterCode": "# Community Project\n\nShared schedules and contact notes.\n",
+      "starterFiles": [
+        {
+          "path": "community-project/README.md",
+          "content": "# Community Project\n\nShared schedules and contact notes.\n",
+          "language": "markdown",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "community-project/generated/summary.txt",
+          "content": "Generated summary\n\nCreated automatically from project notes.\n",
+          "language": "text"
+        },
+        {
+          "path": "community-project/schedule.txt",
+          "content": "Community schedule\n\nSaturday cleanup: 10:00 AM\n",
+          "language": "text"
+        },
+        {
+          "path": "community-project/old-notes.txt",
+          "content": "Old planning notes\n\nSpring flyer draft.\n",
+          "language": "text"
+        },
+        {
+          "path": "community-project/contacts.txt",
+          "content": "Community contacts\n\nHelp desk: 555-0100\n",
+          "language": "text"
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^git\\s+log\\s+\\-\\-oneline$",
+            "message": "@:topics.git-foundations.git-foundations-module-1-start-tracking.working-tree-staging-and-history.tryIt.try_working_tree_staging_and_history_sketch1.terminalExpectations.requiredCommands.0.message"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "@:topics.git-foundations.git-foundations-module-1-start-tracking.working-tree-staging-and-history.tryIt.try_working_tree_staging_and_history_sketch1.terminalExpectations.forbiddenCommands.0.message"
+          }
+        ]
+      },
+      "hiddenShellCheck": {
+        "script": "set -eu\nrepo=community-project\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" branch --show-current)\" = main ] || fail \"The repository is not on main.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = 1 ] || fail \"The repository has the wrong number of commits.\"\n[ -z \"$(git -C \"$repo\" status --porcelain)\" ] || fail \"The working tree is not clean yet.\"\nexpected=$(printf \"%s\\n\" 'README.md\ngenerated/summary.txt\nschedule.txt\nold-notes.txt\ncontacts.txt' | sort)\nactual=$(git -C \"$repo\" ls-files | sort)\n[ \"$actual\" = \"$expected\" ] || fail \"The tracked file set is not correct.\"",
+        "timeoutMs": 15000
+      },
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "community-project/README.md",
+        "starterCode": "# Community Project\n\nShared schedules and contact notes.\n",
+        "starterFiles": [
+          {
+            "path": "community-project/README.md",
+            "content": "# Community Project\n\nShared schedules and contact notes.\n",
+            "language": "markdown",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "community-project/generated/summary.txt",
+            "content": "Generated summary\n\nCreated automatically from project notes.\n",
+            "language": "text"
+          },
+          {
+            "path": "community-project/schedule.txt",
+            "content": "Community schedule\n\nSaturday cleanup: 10:00 AM\n",
+            "language": "text"
+          },
+          {
+            "path": "community-project/old-notes.txt",
+            "content": "Old planning notes\n\nSpring flyer draft.\n",
+            "language": "text"
+          },
+          {
+            "path": "community-project/contacts.txt",
+            "content": "Community contacts\n\nHelp desk: 555-0100\n",
+            "language": "text"
+          }
+        ],
+        "fixtureFiles": [
+          {
+            "path": ".zoeskoul/setup.sh",
+            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0100\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Old planning notes\n\nSpring flyer draft.\n' > community-project/old-notes.txt\nmkdir -p -- community-project/generated\nprintf %s 'Generated summary\n\nCreated automatically from project notes.\n' > community-project/generated/summary.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C community-project commit -q -m 'Start community project'\n",
+            "language": "bash",
+            "readOnly": true
+          },
+          {
+            "path": "community-project/README.md",
+            "content": "# Community Project\n\nShared schedules and contact notes.\n",
+            "language": "markdown"
+          },
+          {
+            "path": "community-project/generated/summary.txt",
+            "content": "Generated summary\n\nCreated automatically from project notes.\n",
+            "language": "text"
+          },
+          {
+            "path": "community-project/schedule.txt",
+            "content": "Community schedule\n\nSaturday cleanup: 10:00 AM\n",
+            "language": "text"
+          },
+          {
+            "path": "community-project/old-notes.txt",
+            "content": "Old planning notes\n\nSpring flyer draft.\n",
+            "language": "text"
+          },
+          {
+            "path": "community-project/contacts.txt",
+            "content": "Community contacts\n\nHelp desk: 555-0100\n",
+            "language": "text"
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "@:topics.git-foundations.git-foundations-module-1-start-tracking.working-tree-staging-and-history.tryIt.try_working_tree_staging_and_history_sketch1.instructions"
+      },
+      "ideConfig": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/community-project",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "serviceOverrides": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/community-project",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "fixtureFiles": [
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0100\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Old planning notes\n\nSpring flyer draft.\n' > community-project/old-notes.txt\nmkdir -p -- community-project/generated\nprintf %s 'Generated summary\n\nCreated automatically from project notes.\n' > community-project/generated/summary.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C community-project commit -q -m 'Start community project'\n",
+          "language": "bash",
+          "readOnly": true
+        },
+        {
+          "path": "community-project/README.md",
+          "content": "# Community Project\n\nShared schedules and contact notes.\n",
+          "language": "markdown"
+        },
+        {
+          "path": "community-project/generated/summary.txt",
+          "content": "Generated summary\n\nCreated automatically from project notes.\n",
+          "language": "text"
+        },
+        {
+          "path": "community-project/schedule.txt",
+          "content": "Community schedule\n\nSaturday cleanup: 10:00 AM\n",
+          "language": "text"
+        },
+        {
+          "path": "community-project/old-notes.txt",
+          "content": "Old planning notes\n\nSpring flyer draft.\n",
+          "language": "text"
+        },
+        {
+          "path": "community-project/contacts.txt",
+          "content": "Community contacts\n\nHelp desk: 555-0100\n",
+          "language": "text"
+        }
+      ]
+    },
+    {
+      "id": "try-working-tree-staging-and-history-sketch2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.git-foundations.git-foundations-module-1-start-tracking.working-tree-staging-and-history.tryIt.try_working_tree_staging_and_history_sketch2",
+      "language": "bash",
+      "starterCode": "# Community Project\n\nShared schedules and contact notes.\n",
+      "starterFiles": [
+        {
+          "path": "community-project/README.md",
+          "content": "# Community Project\n\nShared schedules and contact notes.\n",
+          "language": "markdown",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "community-project/generated/summary.txt",
+          "content": "Generated summary\n\nCreated automatically from project notes.\n",
+          "language": "text"
+        },
+        {
+          "path": "community-project/schedule.txt",
+          "content": "Community schedule\n\nSaturday cleanup: 10:00 AM\n",
+          "language": "text"
+        },
+        {
+          "path": "community-project/old-notes.txt",
+          "content": "Old planning notes\n\nSpring flyer draft.\n",
+          "language": "text"
+        },
+        {
+          "path": "community-project/contacts.txt",
+          "content": "Community contacts\n\nHelp desk: 555-0100\n",
+          "language": "text"
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^git\\s+status\\s+\\-\\-short$",
+            "message": "@:topics.git-foundations.git-foundations-module-1-start-tracking.working-tree-staging-and-history.tryIt.try_working_tree_staging_and_history_sketch2.terminalExpectations.requiredCommands.0.message"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "@:topics.git-foundations.git-foundations-module-1-start-tracking.working-tree-staging-and-history.tryIt.try_working_tree_staging_and_history_sketch2.terminalExpectations.forbiddenCommands.0.message"
+          }
+        ]
+      },
+      "hiddenShellCheck": {
+        "script": "set -eu\nrepo=community-project\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" branch --show-current)\" = main ] || fail \"The repository is not on main.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = 1 ] || fail \"The repository has the wrong number of commits.\"\n[ -z \"$(git -C \"$repo\" status --porcelain)\" ] || fail \"The working tree is not clean yet.\"\nexpected=$(printf \"%s\\n\" 'README.md\ngenerated/summary.txt\nschedule.txt\nold-notes.txt\ncontacts.txt' | sort)\nactual=$(git -C \"$repo\" ls-files | sort)\n[ \"$actual\" = \"$expected\" ] || fail \"The tracked file set is not correct.\"",
+        "timeoutMs": 15000
+      },
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "community-project/README.md",
+        "starterCode": "# Community Project\n\nShared schedules and contact notes.\n",
+        "starterFiles": [
+          {
+            "path": "community-project/README.md",
+            "content": "# Community Project\n\nShared schedules and contact notes.\n",
+            "language": "markdown",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "community-project/generated/summary.txt",
+            "content": "Generated summary\n\nCreated automatically from project notes.\n",
+            "language": "text"
+          },
+          {
+            "path": "community-project/schedule.txt",
+            "content": "Community schedule\n\nSaturday cleanup: 10:00 AM\n",
+            "language": "text"
+          },
+          {
+            "path": "community-project/old-notes.txt",
+            "content": "Old planning notes\n\nSpring flyer draft.\n",
+            "language": "text"
+          },
+          {
+            "path": "community-project/contacts.txt",
+            "content": "Community contacts\n\nHelp desk: 555-0100\n",
+            "language": "text"
+          }
+        ],
+        "fixtureFiles": [
+          {
+            "path": ".zoeskoul/setup.sh",
+            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0100\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Old planning notes\n\nSpring flyer draft.\n' > community-project/old-notes.txt\nmkdir -p -- community-project/generated\nprintf %s 'Generated summary\n\nCreated automatically from project notes.\n' > community-project/generated/summary.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C community-project commit -q -m 'Start community project'\n",
+            "language": "bash",
+            "readOnly": true
+          },
+          {
+            "path": "community-project/README.md",
+            "content": "# Community Project\n\nShared schedules and contact notes.\n",
+            "language": "markdown"
+          },
+          {
+            "path": "community-project/generated/summary.txt",
+            "content": "Generated summary\n\nCreated automatically from project notes.\n",
+            "language": "text"
+          },
+          {
+            "path": "community-project/schedule.txt",
+            "content": "Community schedule\n\nSaturday cleanup: 10:00 AM\n",
+            "language": "text"
+          },
+          {
+            "path": "community-project/old-notes.txt",
+            "content": "Old planning notes\n\nSpring flyer draft.\n",
+            "language": "text"
+          },
+          {
+            "path": "community-project/contacts.txt",
+            "content": "Community contacts\n\nHelp desk: 555-0100\n",
+            "language": "text"
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "@:topics.git-foundations.git-foundations-module-1-start-tracking.working-tree-staging-and-history.tryIt.try_working_tree_staging_and_history_sketch2.instructions"
+      },
+      "ideConfig": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/community-project",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "serviceOverrides": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/community-project",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "fixtureFiles": [
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0100\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Old planning notes\n\nSpring flyer draft.\n' > community-project/old-notes.txt\nmkdir -p -- community-project/generated\nprintf %s 'Generated summary\n\nCreated automatically from project notes.\n' > community-project/generated/summary.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C community-project commit -q -m 'Start community project'\n",
+          "language": "bash",
+          "readOnly": true
+        },
+        {
+          "path": "community-project/README.md",
+          "content": "# Community Project\n\nShared schedules and contact notes.\n",
+          "language": "markdown"
+        },
+        {
+          "path": "community-project/generated/summary.txt",
+          "content": "Generated summary\n\nCreated automatically from project notes.\n",
+          "language": "text"
+        },
+        {
+          "path": "community-project/schedule.txt",
+          "content": "Community schedule\n\nSaturday cleanup: 10:00 AM\n",
+          "language": "text"
+        },
+        {
+          "path": "community-project/old-notes.txt",
+          "content": "Old planning notes\n\nSpring flyer draft.\n",
+          "language": "text"
+        },
+        {
+          "path": "community-project/contacts.txt",
+          "content": "Community contacts\n\nHelp desk: 555-0100\n",
+          "language": "text"
+        }
+      ]
+    }
+  ],
+  "topicMeta": {
+    "learningGoals": [
+      "Distinguish the working tree, staging area, and committed history",
+      "Stage a selected path with git add",
+      "Record the staged snapshot with git commit",
+      "Verify the remaining work with short status"
+    ]
+  }
+}

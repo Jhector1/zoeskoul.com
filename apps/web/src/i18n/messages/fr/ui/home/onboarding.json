@@ -62,7 +62,18 @@
       },
       "learningInterests": {
         "title": "Sur quoi voulez-vous vous concentrer en premier ?",
-        "description": "{appName} donnera la priorité aux bonnes matières, aux bons points de départ et aux suggestions d’exercices sur votre page d’accueil."
+        "description": "{appName} donnera la priorité aux bonnes matières, aux bons points de départ et aux suggestions d’exercices sur votre page d’accueil.",
+        "catalogPicker": {
+          "catalogLabel": "Choisissez un catalogue",
+          "catalogHelp": "Les cours ci-dessous se mettent à jour lorsque vous choisissez un autre catalogue.",
+          "coursesTitle": "Cours de {catalog}",
+          "oneCourse": "1 cours",
+          "manyCourses": "{count} cours",
+          "oneSelected": "1 sélectionné",
+          "manySelected": "{count} sélectionnés",
+          "showMore": "Afficher {count} de plus",
+          "showLess": "Afficher moins"
+        }
       },
       "level": {
         "title": "Quel est votre niveau actuel ?",

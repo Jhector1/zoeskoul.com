@@ -120,31 +120,30 @@
       "weight": 1,
       "messageBase": "topics.git-foundations.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_repo_inspection",
       "language": "bash",
-      "starterCode": "# Garden Field Notes\n",
+      "starterCode": "# Volunteer Project\n\nAssignments and meeting times.\n",
       "starterFiles": [
         {
-          "path": "garden-notes/README.md",
-          "content": "# Garden Field Notes\n",
+          "path": "volunteer-project/README.md",
+          "content": "# Volunteer Project\n\nAssignments and meeting times.\n",
           "language": "markdown",
           "isEntry": true,
           "entry": true
         },
         {
-          "path": "garden-notes/observations/plot-a.txt",
-          "content": "Plot A: soil is damp after rain.\n",
-          "language": "text"
-        },
-        {
-          "path": "garden-notes/observations/plot-b.txt",
-          "content": "Plot B: seedlings need labels.\n",
+          "path": "volunteer-project/assignments.txt",
+          "content": "Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n",
           "language": "text"
         }
       ],
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^git\\s+init\\s+-b\\s+main$",
+            "pattern": "^pwd$",
             "message": "@:topics.git-foundations.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_repo_inspection.terminalExpectations.requiredCommands.0.message"
+          },
+          {
+            "pattern": "^ls$",
+            "message": "@:topics.git-foundations.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_repo_inspection.terminalExpectations.requiredCommands.1.message"
           }
         ],
         "forbiddenCommands": [
@@ -155,52 +154,42 @@
         ]
       },
       "hiddenShellCheck": {
-        "script": "set -eu\nrepo='garden-notes'\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail 'Initialize garden-notes as a Git repository.'\n[ \"$(git -C \"$repo\" branch --show-current)\" = 'main' ] || fail 'Initialize the repository on main.'\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = '0' ] || fail 'Do not create a commit yet.'",
+        "script": "set -eu\nrepo=volunteer-project\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\n[ ! -d \"$repo/.git\" ] || fail \"This folder should not be initialized yet.\"\n[ -f \"$repo/README.md\" ] || fail \"The expected file README.md is missing.\"\n[ \"$(cat \"$repo/README.md\")\" = '# Volunteer Project\n\nAssignments and meeting times.' ] || fail \"The content of README.md is not correct yet.\"\n[ -f \"$repo/assignments.txt\" ] || fail \"The expected file assignments.txt is missing.\"\n[ \"$(cat \"$repo/assignments.txt\")\" = 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned' ] || fail \"The content of assignments.txt is not correct yet.\"",
         "timeoutMs": 15000
       },
       "workspace": {
         "language": "bash",
-        "entryFilePath": "garden-notes/README.md",
-        "starterCode": "# Garden Field Notes\n",
+        "entryFilePath": "volunteer-project/README.md",
+        "starterCode": "# Volunteer Project\n\nAssignments and meeting times.\n",
         "starterFiles": [
           {
-            "path": "garden-notes/README.md",
-            "content": "# Garden Field Notes\n",
+            "path": "volunteer-project/README.md",
+            "content": "# Volunteer Project\n\nAssignments and meeting times.\n",
             "language": "markdown",
             "isEntry": true,
             "entry": true
           },
           {
-            "path": "garden-notes/observations/plot-a.txt",
-            "content": "Plot A: soil is damp after rain.\n",
-            "language": "text"
-          },
-          {
-            "path": "garden-notes/observations/plot-b.txt",
-            "content": "Plot B: seedlings need labels.\n",
+            "path": "volunteer-project/assignments.txt",
+            "content": "Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n",
             "language": "text"
           }
         ],
         "fixtureFiles": [
           {
             "path": ".zoeskoul/setup.sh",
-            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf garden-notes\nmkdir -p garden-notes/observations\nprintf '# Garden Field Notes\\n' > garden-notes/README.md\nprintf 'Plot A: soil is damp after rain.\\n' > garden-notes/observations/plot-a.txt\nprintf 'Plot B: seedlings need labels.\\n' > garden-notes/observations/plot-b.txt\n",
+            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- volunteer-project\nmkdir -p -- volunteer-project\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n' > volunteer-project/assignments.txt\n",
             "language": "bash",
             "readOnly": true
           },
           {
-            "path": "garden-notes/README.md",
-            "content": "# Garden Field Notes\n",
+            "path": "volunteer-project/README.md",
+            "content": "# Volunteer Project\n\nAssignments and meeting times.\n",
             "language": "markdown"
           },
           {
-            "path": "garden-notes/observations/plot-a.txt",
-            "content": "Plot A: soil is damp after rain.\n",
-            "language": "text"
-          },
-          {
-            "path": "garden-notes/observations/plot-b.txt",
-            "content": "Plot B: seedlings need labels.\n",
+            "path": "volunteer-project/assignments.txt",
+            "content": "Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n",
             "language": "text"
           }
         ]
@@ -216,7 +205,7 @@
         "runnerBackend": "pty",
         "layoutMode": "default",
         "terminalSessionScope": "exercise",
-        "terminalCwd": "/workspace/garden-notes",
+        "terminalCwd": "/workspace/volunteer-project",
         "fileActions": {
           "enabled": true,
           "createFile": true,
@@ -241,7 +230,7 @@
         "runnerBackend": "pty",
         "layoutMode": "default",
         "terminalSessionScope": "exercise",
-        "terminalCwd": "/workspace/garden-notes",
+        "terminalCwd": "/workspace/volunteer-project",
         "fileActions": {
           "enabled": true,
           "createFile": true,
@@ -264,26 +253,25 @@
       "fixtureFiles": [
         {
           "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf garden-notes\nmkdir -p garden-notes/observations\nprintf '# Garden Field Notes\\n' > garden-notes/README.md\nprintf 'Plot A: soil is damp after rain.\\n' > garden-notes/observations/plot-a.txt\nprintf 'Plot B: seedlings need labels.\\n' > garden-notes/observations/plot-b.txt\n",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- volunteer-project\nmkdir -p -- volunteer-project\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n' > volunteer-project/assignments.txt\n",
           "language": "bash",
           "readOnly": true
         },
         {
-          "path": "garden-notes/README.md",
-          "content": "# Garden Field Notes\n",
+          "path": "volunteer-project/README.md",
+          "content": "# Volunteer Project\n\nAssignments and meeting times.\n",
           "language": "markdown"
         },
         {
-          "path": "garden-notes/observations/plot-a.txt",
-          "content": "Plot A: soil is damp after rain.\n",
-          "language": "text"
-        },
-        {
-          "path": "garden-notes/observations/plot-b.txt",
-          "content": "Plot B: seedlings need labels.\n",
+          "path": "volunteer-project/assignments.txt",
+          "content": "Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n",
           "language": "text"
         }
-      ]
+      ],
+      "tools": {
+        "defaultSurface": "results",
+        "compactDefaultSurface": "results"
+      }
     },
     {
       "id": "try-git-config",
@@ -292,35 +280,26 @@
       "weight": 1,
       "messageBase": "topics.git-foundations.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_config",
       "language": "bash",
-      "starterCode": "# Garden Field Notes\n",
+      "starterCode": "# Volunteer Project\n\nAssignments and meeting times.\n",
       "starterFiles": [
         {
-          "path": "garden-notes/README.md",
-          "content": "# Garden Field Notes\n",
+          "path": "volunteer-project/README.md",
+          "content": "# Volunteer Project\n\nAssignments and meeting times.\n",
           "language": "markdown",
           "isEntry": true,
           "entry": true
         },
         {
-          "path": "garden-notes/observations/plot-a.txt",
-          "content": "Plot A: soil is damp after rain.\n",
-          "language": "text"
-        },
-        {
-          "path": "garden-notes/observations/plot-b.txt",
-          "content": "Plot B: seedlings need labels.\n",
+          "path": "volunteer-project/assignments.txt",
+          "content": "Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n",
           "language": "text"
         }
       ],
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^git\\s+config\\s+--local\\s+user\\.name\\s+(?:\"ZoeSkoul\\s+Learner\"|\\'ZoeSkoul\\s+Learner\\')$",
+            "pattern": "^git\\s+init\\s+-b\\s+main$",
             "message": "@:topics.git-foundations.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_config.terminalExpectations.requiredCommands.0.message"
-          },
-          {
-            "pattern": "^git\\s+config\\s+--local\\s+user\\.email\\s+(?:\"learner@zoeskoul\\.local\"|\\'learner@zoeskoul\\.local\\')$",
-            "message": "@:topics.git-foundations.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_config.terminalExpectations.requiredCommands.1.message"
           }
         ],
         "forbiddenCommands": [
@@ -331,52 +310,42 @@
         ]
       },
       "hiddenShellCheck": {
-        "script": "set -eu\nrepo='garden-notes'\n[ \"$(git -C \"$repo\" config --local --get user.name)\" = 'ZoeSkoul Learner' ]\n[ \"$(git -C \"$repo\" config --local --get user.email)\" = 'learner@zoeskoul.local' ]\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = '0' ]",
+        "script": "set -eu\nrepo=volunteer-project\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" branch --show-current)\" = main ] || fail \"The repository is on the wrong branch.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = 0 ] || fail \"The repository has the wrong number of commits.\"\n[ -z \"$(git -C \"$repo\" config --local --get user.name || true)\" ] || fail \"An author name was configured too early.\"\n[ -z \"$(git -C \"$repo\" config --local --get user.email || true)\" ] || fail \"An author email was configured too early.\"\nactual_status=$(git -C \"$repo\" status --porcelain=v1 --untracked-files=all)\n[ \"$actual_status\" = '?? README.md\n?? assignments.txt' ] || fail \"The staged, unstaged, or untracked state is not correct yet.\"\nactual_tracked=$(git -C \"$repo\" ls-files)\n[ \"$actual_tracked\" = '' ] || fail \"The tracked file set is not correct yet.\"\n[ -f \"$repo/README.md\" ] || fail \"The expected file README.md is missing.\"\n[ \"$(cat \"$repo/README.md\")\" = '# Volunteer Project\n\nAssignments and meeting times.' ] || fail \"The content of README.md is not correct yet.\"\n[ -f \"$repo/assignments.txt\" ] || fail \"The expected file assignments.txt is missing.\"\n[ \"$(cat \"$repo/assignments.txt\")\" = 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned' ] || fail \"The content of assignments.txt is not correct yet.\"",
         "timeoutMs": 15000
       },
       "workspace": {
         "language": "bash",
-        "entryFilePath": "garden-notes/README.md",
-        "starterCode": "# Garden Field Notes\n",
+        "entryFilePath": "volunteer-project/README.md",
+        "starterCode": "# Volunteer Project\n\nAssignments and meeting times.\n",
         "starterFiles": [
           {
-            "path": "garden-notes/README.md",
-            "content": "# Garden Field Notes\n",
+            "path": "volunteer-project/README.md",
+            "content": "# Volunteer Project\n\nAssignments and meeting times.\n",
             "language": "markdown",
             "isEntry": true,
             "entry": true
           },
           {
-            "path": "garden-notes/observations/plot-a.txt",
-            "content": "Plot A: soil is damp after rain.\n",
-            "language": "text"
-          },
-          {
-            "path": "garden-notes/observations/plot-b.txt",
-            "content": "Plot B: seedlings need labels.\n",
+            "path": "volunteer-project/assignments.txt",
+            "content": "Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n",
             "language": "text"
           }
         ],
         "fixtureFiles": [
           {
             "path": ".zoeskoul/setup.sh",
-            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf garden-notes\nmkdir -p garden-notes/observations\nprintf '# Garden Field Notes\\n' > garden-notes/README.md\nprintf 'Plot A: soil is damp after rain.\\n' > garden-notes/observations/plot-a.txt\nprintf 'Plot B: seedlings need labels.\\n' > garden-notes/observations/plot-b.txt\ngit -C garden-notes init -q -b main\n",
+            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- volunteer-project\nmkdir -p -- volunteer-project\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n' > volunteer-project/assignments.txt\n",
             "language": "bash",
             "readOnly": true
           },
           {
-            "path": "garden-notes/README.md",
-            "content": "# Garden Field Notes\n",
+            "path": "volunteer-project/README.md",
+            "content": "# Volunteer Project\n\nAssignments and meeting times.\n",
             "language": "markdown"
           },
           {
-            "path": "garden-notes/observations/plot-a.txt",
-            "content": "Plot A: soil is damp after rain.\n",
-            "language": "text"
-          },
-          {
-            "path": "garden-notes/observations/plot-b.txt",
-            "content": "Plot B: seedlings need labels.\n",
+            "path": "volunteer-project/assignments.txt",
+            "content": "Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n",
             "language": "text"
           }
         ]
@@ -392,7 +361,7 @@
         "runnerBackend": "pty",
         "layoutMode": "default",
         "terminalSessionScope": "exercise",
-        "terminalCwd": "/workspace/garden-notes",
+        "terminalCwd": "/workspace/volunteer-project",
         "fileActions": {
           "enabled": true,
           "createFile": true,
@@ -417,7 +386,7 @@
         "runnerBackend": "pty",
         "layoutMode": "default",
         "terminalSessionScope": "exercise",
-        "terminalCwd": "/workspace/garden-notes",
+        "terminalCwd": "/workspace/volunteer-project",
         "fileActions": {
           "enabled": true,
           "createFile": true,
@@ -440,26 +409,25 @@
       "fixtureFiles": [
         {
           "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf garden-notes\nmkdir -p garden-notes/observations\nprintf '# Garden Field Notes\\n' > garden-notes/README.md\nprintf 'Plot A: soil is damp after rain.\\n' > garden-notes/observations/plot-a.txt\nprintf 'Plot B: seedlings need labels.\\n' > garden-notes/observations/plot-b.txt\ngit -C garden-notes init -q -b main\n",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- volunteer-project\nmkdir -p -- volunteer-project\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n' > volunteer-project/assignments.txt\n",
           "language": "bash",
           "readOnly": true
         },
         {
-          "path": "garden-notes/README.md",
-          "content": "# Garden Field Notes\n",
+          "path": "volunteer-project/README.md",
+          "content": "# Volunteer Project\n\nAssignments and meeting times.\n",
           "language": "markdown"
         },
         {
-          "path": "garden-notes/observations/plot-a.txt",
-          "content": "Plot A: soil is damp after rain.\n",
-          "language": "text"
-        },
-        {
-          "path": "garden-notes/observations/plot-b.txt",
-          "content": "Plot B: seedlings need labels.\n",
+          "path": "volunteer-project/assignments.txt",
+          "content": "Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n",
           "language": "text"
         }
-      ]
+      ],
+      "tools": {
+        "defaultSurface": "results",
+        "compactDefaultSurface": "results"
+      }
     },
     {
       "id": "try-git-init",
@@ -468,31 +436,30 @@
       "weight": 1,
       "messageBase": "topics.git-foundations.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_init",
       "language": "bash",
-      "starterCode": "# Garden Field Notes\n",
+      "starterCode": "# Volunteer Project\n\nAssignments and meeting times.\n",
       "starterFiles": [
         {
-          "path": "garden-notes/README.md",
-          "content": "# Garden Field Notes\n",
+          "path": "volunteer-project/README.md",
+          "content": "# Volunteer Project\n\nAssignments and meeting times.\n",
           "language": "markdown",
           "isEntry": true,
           "entry": true
         },
         {
-          "path": "garden-notes/observations/plot-a.txt",
-          "content": "Plot A: soil is damp after rain.\n",
-          "language": "text"
-        },
-        {
-          "path": "garden-notes/observations/plot-b.txt",
-          "content": "Plot B: seedlings need labels.\n",
+          "path": "volunteer-project/assignments.txt",
+          "content": "Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n",
           "language": "text"
         }
       ],
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^git\\s+status\\s+--short$",
+            "pattern": "^git\\s+config\\s+--local\\s+user\\.name\\s+.+$",
             "message": "@:topics.git-foundations.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_init.terminalExpectations.requiredCommands.0.message"
+          },
+          {
+            "pattern": "^git\\s+config\\s+--local\\s+user\\.email\\s+.+$",
+            "message": "@:topics.git-foundations.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_init.terminalExpectations.requiredCommands.1.message"
           }
         ],
         "forbiddenCommands": [
@@ -503,52 +470,42 @@
         ]
       },
       "hiddenShellCheck": {
-        "script": "set -eu\nrepo='garden-notes'\nstatus=$(git -C \"$repo\" status --short --untracked-files=all)\nprintf '%s\\n' \"$status\" | grep -Fxq '?? README.md'\nprintf '%s\\n' \"$status\" | grep -Fxq '?? observations/plot-a.txt'\nprintf '%s\\n' \"$status\" | grep -Fxq '?? observations/plot-b.txt'\n[ \"$(git -C \"$repo\" diff --cached --name-only | wc -l | tr -d ' ')\" = '0' ]",
+        "script": "set -eu\nrepo=volunteer-project\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" branch --show-current)\" = main ] || fail \"The repository is on the wrong branch.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = 0 ] || fail \"The repository has the wrong number of commits.\"\n[ \"$(git -C \"$repo\" config --local --get user.name)\" = 'ZoeSkoul Learner' ] || fail \"The repository-local author name is incorrect.\"\n[ \"$(git -C \"$repo\" config --local --get user.email)\" = learner@zoeskoul.local ] || fail \"The repository-local author email is incorrect.\"\nactual_status=$(git -C \"$repo\" status --porcelain=v1 --untracked-files=all)\n[ \"$actual_status\" = '?? README.md\n?? assignments.txt' ] || fail \"The staged, unstaged, or untracked state is not correct yet.\"\nactual_tracked=$(git -C \"$repo\" ls-files)\n[ \"$actual_tracked\" = '' ] || fail \"The tracked file set is not correct yet.\"\n[ -f \"$repo/README.md\" ] || fail \"The expected file README.md is missing.\"\n[ \"$(cat \"$repo/README.md\")\" = '# Volunteer Project\n\nAssignments and meeting times.' ] || fail \"The content of README.md is not correct yet.\"\n[ -f \"$repo/assignments.txt\" ] || fail \"The expected file assignments.txt is missing.\"\n[ \"$(cat \"$repo/assignments.txt\")\" = 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned' ] || fail \"The content of assignments.txt is not correct yet.\"",
         "timeoutMs": 15000
       },
       "workspace": {
         "language": "bash",
-        "entryFilePath": "garden-notes/README.md",
-        "starterCode": "# Garden Field Notes\n",
+        "entryFilePath": "volunteer-project/README.md",
+        "starterCode": "# Volunteer Project\n\nAssignments and meeting times.\n",
         "starterFiles": [
           {
-            "path": "garden-notes/README.md",
-            "content": "# Garden Field Notes\n",
+            "path": "volunteer-project/README.md",
+            "content": "# Volunteer Project\n\nAssignments and meeting times.\n",
             "language": "markdown",
             "isEntry": true,
             "entry": true
           },
           {
-            "path": "garden-notes/observations/plot-a.txt",
-            "content": "Plot A: soil is damp after rain.\n",
-            "language": "text"
-          },
-          {
-            "path": "garden-notes/observations/plot-b.txt",
-            "content": "Plot B: seedlings need labels.\n",
+            "path": "volunteer-project/assignments.txt",
+            "content": "Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n",
             "language": "text"
           }
         ],
         "fixtureFiles": [
           {
             "path": ".zoeskoul/setup.sh",
-            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf garden-notes\nmkdir -p garden-notes/observations\nprintf '# Garden Field Notes\\n' > garden-notes/README.md\nprintf 'Plot A: soil is damp after rain.\\n' > garden-notes/observations/plot-a.txt\nprintf 'Plot B: seedlings need labels.\\n' > garden-notes/observations/plot-b.txt\ngit -C garden-notes init -q -b main\ngit -C garden-notes config --local user.name \"ZoeSkoul Learner\"\ngit -C garden-notes config --local user.email \"learner@zoeskoul.local\"\n",
+            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- volunteer-project\nmkdir -p -- volunteer-project\ngit -C volunteer-project init -q -b main\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n' > volunteer-project/assignments.txt\n",
             "language": "bash",
             "readOnly": true
           },
           {
-            "path": "garden-notes/README.md",
-            "content": "# Garden Field Notes\n",
+            "path": "volunteer-project/README.md",
+            "content": "# Volunteer Project\n\nAssignments and meeting times.\n",
             "language": "markdown"
           },
           {
-            "path": "garden-notes/observations/plot-a.txt",
-            "content": "Plot A: soil is damp after rain.\n",
-            "language": "text"
-          },
-          {
-            "path": "garden-notes/observations/plot-b.txt",
-            "content": "Plot B: seedlings need labels.\n",
+            "path": "volunteer-project/assignments.txt",
+            "content": "Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n",
             "language": "text"
           }
         ]
@@ -564,7 +521,7 @@
         "runnerBackend": "pty",
         "layoutMode": "default",
         "terminalSessionScope": "exercise",
-        "terminalCwd": "/workspace/garden-notes",
+        "terminalCwd": "/workspace/volunteer-project",
         "fileActions": {
           "enabled": true,
           "createFile": true,
@@ -589,7 +546,7 @@
         "runnerBackend": "pty",
         "layoutMode": "default",
         "terminalSessionScope": "exercise",
-        "terminalCwd": "/workspace/garden-notes",
+        "terminalCwd": "/workspace/volunteer-project",
         "fileActions": {
           "enabled": true,
           "createFile": true,
@@ -612,26 +569,25 @@
       "fixtureFiles": [
         {
           "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf garden-notes\nmkdir -p garden-notes/observations\nprintf '# Garden Field Notes\\n' > garden-notes/README.md\nprintf 'Plot A: soil is damp after rain.\\n' > garden-notes/observations/plot-a.txt\nprintf 'Plot B: seedlings need labels.\\n' > garden-notes/observations/plot-b.txt\ngit -C garden-notes init -q -b main\ngit -C garden-notes config --local user.name \"ZoeSkoul Learner\"\ngit -C garden-notes config --local user.email \"learner@zoeskoul.local\"\n",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- volunteer-project\nmkdir -p -- volunteer-project\ngit -C volunteer-project init -q -b main\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n' > volunteer-project/assignments.txt\n",
           "language": "bash",
           "readOnly": true
         },
         {
-          "path": "garden-notes/README.md",
-          "content": "# Garden Field Notes\n",
+          "path": "volunteer-project/README.md",
+          "content": "# Volunteer Project\n\nAssignments and meeting times.\n",
           "language": "markdown"
         },
         {
-          "path": "garden-notes/observations/plot-a.txt",
-          "content": "Plot A: soil is damp after rain.\n",
-          "language": "text"
-        },
-        {
-          "path": "garden-notes/observations/plot-b.txt",
-          "content": "Plot B: seedlings need labels.\n",
+          "path": "volunteer-project/assignments.txt",
+          "content": "Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n",
           "language": "text"
         }
-      ]
+      ],
+      "tools": {
+        "defaultSurface": "results",
+        "compactDefaultSurface": "results"
+      }
     },
     {
       "id": "try-git-stage-files",
@@ -640,34 +596,29 @@
       "weight": 1,
       "messageBase": "topics.git-foundations.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_stage_files",
       "language": "bash",
-      "starterCode": "# Garden Field Notes\n",
+      "starterCode": "# Volunteer Project\n\nAssignments and meeting times.\n",
       "starterFiles": [
         {
-          "path": "garden-notes/README.md",
-          "content": "# Garden Field Notes\n",
+          "path": "volunteer-project/README.md",
+          "content": "# Volunteer Project\n\nAssignments and meeting times.\n",
           "language": "markdown",
           "isEntry": true,
           "entry": true
         },
         {
-          "path": "garden-notes/observations/plot-a.txt",
-          "content": "Plot A: soil is damp after rain.\n",
-          "language": "text"
-        },
-        {
-          "path": "garden-notes/observations/plot-b.txt",
-          "content": "Plot B: seedlings need labels.\n",
+          "path": "volunteer-project/assignments.txt",
+          "content": "Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n",
           "language": "text"
         }
       ],
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^git\\s+add\\s+(?=.*(?:README\\.md))(?=.*(?:observations/?))(?:README\\.md\\s+observations/?|observations/?\\s+README\\.md)$",
+            "pattern": "^git\\s+add\\s+(?=.*README\\.md)(?=.*assignments\\.txt).+$",
             "message": "@:topics.git-foundations.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_stage_files.terminalExpectations.requiredCommands.0.message"
           },
           {
-            "pattern": "^git\\s+status\\s+(?:\\-\\-short|\\-s)$",
+            "pattern": "^git\\s+diff\\s+--staged\\s+--stat$",
             "message": "@:topics.git-foundations.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_stage_files.terminalExpectations.requiredCommands.1.message"
           }
         ],
@@ -679,52 +630,42 @@
         ]
       },
       "hiddenShellCheck": {
-        "script": "set -eu\nrepo='garden-notes'\nactual=$(git -C \"$repo\" diff --cached --name-only | sort)\nexpected=$(printf '%s\\n' README.md observations/plot-a.txt observations/plot-b.txt | sort)\n[ \"$actual\" = \"$expected\" ]\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = '0' ]",
+        "script": "set -eu\nrepo=volunteer-project\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" branch --show-current)\" = main ] || fail \"The repository is on the wrong branch.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = 0 ] || fail \"The repository has the wrong number of commits.\"\n[ \"$(git -C \"$repo\" config --local --get user.name)\" = 'ZoeSkoul Learner' ] || fail \"The repository-local author name is incorrect.\"\n[ \"$(git -C \"$repo\" config --local --get user.email)\" = learner@zoeskoul.local ] || fail \"The repository-local author email is incorrect.\"\nactual_status=$(git -C \"$repo\" status --porcelain=v1 --untracked-files=all)\n[ \"$actual_status\" = 'A  README.md\nA  assignments.txt' ] || fail \"The staged, unstaged, or untracked state is not correct yet.\"\nactual_tracked=$(git -C \"$repo\" ls-files)\n[ \"$actual_tracked\" = 'README.md\nassignments.txt' ] || fail \"The tracked file set is not correct yet.\"\n[ -f \"$repo/README.md\" ] || fail \"The expected file README.md is missing.\"\n[ \"$(cat \"$repo/README.md\")\" = '# Volunteer Project\n\nAssignments and meeting times.' ] || fail \"The content of README.md is not correct yet.\"\n[ -f \"$repo/assignments.txt\" ] || fail \"The expected file assignments.txt is missing.\"\n[ \"$(cat \"$repo/assignments.txt\")\" = 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned' ] || fail \"The content of assignments.txt is not correct yet.\"",
         "timeoutMs": 15000
       },
       "workspace": {
         "language": "bash",
-        "entryFilePath": "garden-notes/README.md",
-        "starterCode": "# Garden Field Notes\n",
+        "entryFilePath": "volunteer-project/README.md",
+        "starterCode": "# Volunteer Project\n\nAssignments and meeting times.\n",
         "starterFiles": [
           {
-            "path": "garden-notes/README.md",
-            "content": "# Garden Field Notes\n",
+            "path": "volunteer-project/README.md",
+            "content": "# Volunteer Project\n\nAssignments and meeting times.\n",
             "language": "markdown",
             "isEntry": true,
             "entry": true
           },
           {
-            "path": "garden-notes/observations/plot-a.txt",
-            "content": "Plot A: soil is damp after rain.\n",
-            "language": "text"
-          },
-          {
-            "path": "garden-notes/observations/plot-b.txt",
-            "content": "Plot B: seedlings need labels.\n",
+            "path": "volunteer-project/assignments.txt",
+            "content": "Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n",
             "language": "text"
           }
         ],
         "fixtureFiles": [
           {
             "path": ".zoeskoul/setup.sh",
-            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf garden-notes\nmkdir -p garden-notes/observations\nprintf '# Garden Field Notes\\n' > garden-notes/README.md\nprintf 'Plot A: soil is damp after rain.\\n' > garden-notes/observations/plot-a.txt\nprintf 'Plot B: seedlings need labels.\\n' > garden-notes/observations/plot-b.txt\ngit -C garden-notes init -q -b main\ngit -C garden-notes config --local user.name \"ZoeSkoul Learner\"\ngit -C garden-notes config --local user.email \"learner@zoeskoul.local\"\n",
+            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- volunteer-project\nmkdir -p -- volunteer-project\ngit -C volunteer-project init -q -b main\ngit -C volunteer-project config --local user.name 'ZoeSkoul Learner'\ngit -C volunteer-project config --local user.email learner@zoeskoul.local\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n' > volunteer-project/assignments.txt\n",
             "language": "bash",
             "readOnly": true
           },
           {
-            "path": "garden-notes/README.md",
-            "content": "# Garden Field Notes\n",
+            "path": "volunteer-project/README.md",
+            "content": "# Volunteer Project\n\nAssignments and meeting times.\n",
             "language": "markdown"
           },
           {
-            "path": "garden-notes/observations/plot-a.txt",
-            "content": "Plot A: soil is damp after rain.\n",
-            "language": "text"
-          },
-          {
-            "path": "garden-notes/observations/plot-b.txt",
-            "content": "Plot B: seedlings need labels.\n",
+            "path": "volunteer-project/assignments.txt",
+            "content": "Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n",
             "language": "text"
           }
         ]
@@ -740,7 +681,7 @@
         "runnerBackend": "pty",
         "layoutMode": "default",
         "terminalSessionScope": "exercise",
-        "terminalCwd": "/workspace/garden-notes",
+        "terminalCwd": "/workspace/volunteer-project",
         "fileActions": {
           "enabled": true,
           "createFile": true,
@@ -765,7 +706,7 @@
         "runnerBackend": "pty",
         "layoutMode": "default",
         "terminalSessionScope": "exercise",
-        "terminalCwd": "/workspace/garden-notes",
+        "terminalCwd": "/workspace/volunteer-project",
         "fileActions": {
           "enabled": true,
           "createFile": true,
@@ -788,26 +729,25 @@
       "fixtureFiles": [
         {
           "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf garden-notes\nmkdir -p garden-notes/observations\nprintf '# Garden Field Notes\\n' > garden-notes/README.md\nprintf 'Plot A: soil is damp after rain.\\n' > garden-notes/observations/plot-a.txt\nprintf 'Plot B: seedlings need labels.\\n' > garden-notes/observations/plot-b.txt\ngit -C garden-notes init -q -b main\ngit -C garden-notes config --local user.name \"ZoeSkoul Learner\"\ngit -C garden-notes config --local user.email \"learner@zoeskoul.local\"\n",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- volunteer-project\nmkdir -p -- volunteer-project\ngit -C volunteer-project init -q -b main\ngit -C volunteer-project config --local user.name 'ZoeSkoul Learner'\ngit -C volunteer-project config --local user.email learner@zoeskoul.local\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n' > volunteer-project/assignments.txt\n",
           "language": "bash",
           "readOnly": true
         },
         {
-          "path": "garden-notes/README.md",
-          "content": "# Garden Field Notes\n",
+          "path": "volunteer-project/README.md",
+          "content": "# Volunteer Project\n\nAssignments and meeting times.\n",
           "language": "markdown"
         },
         {
-          "path": "garden-notes/observations/plot-a.txt",
-          "content": "Plot A: soil is damp after rain.\n",
-          "language": "text"
-        },
-        {
-          "path": "garden-notes/observations/plot-b.txt",
-          "content": "Plot B: seedlings need labels.\n",
+          "path": "volunteer-project/assignments.txt",
+          "content": "Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n",
           "language": "text"
         }
-      ]
+      ],
+      "tools": {
+        "defaultSurface": "results",
+        "compactDefaultSurface": "results"
+      }
     },
     {
       "id": "try-git-commit",
@@ -816,35 +756,34 @@
       "weight": 1,
       "messageBase": "topics.git-foundations.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_commit",
       "language": "bash",
-      "starterCode": "# Garden Field Notes\n",
+      "starterCode": "# Volunteer Project\n\nAssignments and meeting times.\n",
       "starterFiles": [
         {
-          "path": "garden-notes/README.md",
-          "content": "# Garden Field Notes\n",
+          "path": "volunteer-project/README.md",
+          "content": "# Volunteer Project\n\nAssignments and meeting times.\n",
           "language": "markdown",
           "isEntry": true,
           "entry": true
         },
         {
-          "path": "garden-notes/observations/plot-a.txt",
-          "content": "Plot A: soil is damp after rain.\n",
-          "language": "text"
-        },
-        {
-          "path": "garden-notes/observations/plot-b.txt",
-          "content": "Plot B: seedlings need labels.\n",
+          "path": "volunteer-project/assignments.txt",
+          "content": "Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n",
           "language": "text"
         }
       ],
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^git\\s+commit\\s+\\-m\\s+(?:\"Start garden field notes\"|\\'Start garden field notes\\')$",
+            "pattern": "^git\\s+commit\\s+-m\\s+.+$",
             "message": "@:topics.git-foundations.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_commit.terminalExpectations.requiredCommands.0.message"
           },
           {
-            "pattern": "^git\\s+status\\s+(?:\\-\\-short|\\-s)$",
+            "pattern": "^git\\s+log\\s+--oneline$",
             "message": "@:topics.git-foundations.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_commit.terminalExpectations.requiredCommands.1.message"
+          },
+          {
+            "pattern": "^git\\s+status\\s+--short$",
+            "message": "@:topics.git-foundations.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_commit.terminalExpectations.requiredCommands.2.message"
           }
         ],
         "forbiddenCommands": [
@@ -855,52 +794,42 @@
         ]
       },
       "hiddenShellCheck": {
-        "script": "set -eu\nrepo='garden-notes'\n[ \"$(git -C \"$repo\" rev-list --count HEAD)\" = '1' ]\n[ \"$(git -C \"$repo\" log -1 --format=%s)\" = 'Start garden field notes' ]\n[ -z \"$(git -C \"$repo\" status --porcelain)\" ]\nactual=$(git -C \"$repo\" ls-files | sort)\nexpected=$(printf '%s\\n' README.md observations/plot-a.txt observations/plot-b.txt | sort)\n[ \"$actual\" = \"$expected\" ]",
+        "script": "set -eu\nrepo=volunteer-project\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" branch --show-current)\" = main ] || fail \"The repository is on the wrong branch.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = 1 ] || fail \"The repository has the wrong number of commits.\"\n[ \"$(git -C \"$repo\" config --local --get user.name)\" = 'ZoeSkoul Learner' ] || fail \"The repository-local author name is incorrect.\"\n[ \"$(git -C \"$repo\" config --local --get user.email)\" = learner@zoeskoul.local ] || fail \"The repository-local author email is incorrect.\"\nactual_status=$(git -C \"$repo\" status --porcelain=v1 --untracked-files=all)\n[ \"$actual_status\" = '' ] || fail \"The staged, unstaged, or untracked state is not correct yet.\"\nactual_tracked=$(git -C \"$repo\" ls-files)\n[ \"$actual_tracked\" = 'README.md\nassignments.txt' ] || fail \"The tracked file set is not correct yet.\"\nactual_subjects=$(git -C \"$repo\" log --format=%s --reverse)\n[ \"$actual_subjects\" = 'Start volunteer project' ] || fail \"The commit history does not match the required project story.\"\n[ -f \"$repo/README.md\" ] || fail \"The expected file README.md is missing.\"\n[ \"$(cat \"$repo/README.md\")\" = '# Volunteer Project\n\nAssignments and meeting times.' ] || fail \"The content of README.md is not correct yet.\"\n[ -f \"$repo/assignments.txt\" ] || fail \"The expected file assignments.txt is missing.\"\n[ \"$(cat \"$repo/assignments.txt\")\" = 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned' ] || fail \"The content of assignments.txt is not correct yet.\"",
         "timeoutMs": 15000
       },
       "workspace": {
         "language": "bash",
-        "entryFilePath": "garden-notes/README.md",
-        "starterCode": "# Garden Field Notes\n",
+        "entryFilePath": "volunteer-project/README.md",
+        "starterCode": "# Volunteer Project\n\nAssignments and meeting times.\n",
         "starterFiles": [
           {
-            "path": "garden-notes/README.md",
-            "content": "# Garden Field Notes\n",
+            "path": "volunteer-project/README.md",
+            "content": "# Volunteer Project\n\nAssignments and meeting times.\n",
             "language": "markdown",
             "isEntry": true,
             "entry": true
           },
           {
-            "path": "garden-notes/observations/plot-a.txt",
-            "content": "Plot A: soil is damp after rain.\n",
-            "language": "text"
-          },
-          {
-            "path": "garden-notes/observations/plot-b.txt",
-            "content": "Plot B: seedlings need labels.\n",
+            "path": "volunteer-project/assignments.txt",
+            "content": "Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n",
             "language": "text"
           }
         ],
         "fixtureFiles": [
           {
             "path": ".zoeskoul/setup.sh",
-            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf garden-notes\nmkdir -p garden-notes/observations\nprintf '# Garden Field Notes\\n' > garden-notes/README.md\nprintf 'Plot A: soil is damp after rain.\\n' > garden-notes/observations/plot-a.txt\nprintf 'Plot B: seedlings need labels.\\n' > garden-notes/observations/plot-b.txt\ngit -C garden-notes init -q -b main\ngit -C garden-notes config --local user.name \"ZoeSkoul Learner\"\ngit -C garden-notes config --local user.email \"learner@zoeskoul.local\"\ngit -C garden-notes add README.md observations/\n",
+            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- volunteer-project\nmkdir -p -- volunteer-project\ngit -C volunteer-project init -q -b main\ngit -C volunteer-project config --local user.name 'ZoeSkoul Learner'\ngit -C volunteer-project config --local user.email learner@zoeskoul.local\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n' > volunteer-project/assignments.txt\ngit -C volunteer-project add -A\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n' > volunteer-project/assignments.txt\n",
             "language": "bash",
             "readOnly": true
           },
           {
-            "path": "garden-notes/README.md",
-            "content": "# Garden Field Notes\n",
+            "path": "volunteer-project/README.md",
+            "content": "# Volunteer Project\n\nAssignments and meeting times.\n",
             "language": "markdown"
           },
           {
-            "path": "garden-notes/observations/plot-a.txt",
-            "content": "Plot A: soil is damp after rain.\n",
-            "language": "text"
-          },
-          {
-            "path": "garden-notes/observations/plot-b.txt",
-            "content": "Plot B: seedlings need labels.\n",
+            "path": "volunteer-project/assignments.txt",
+            "content": "Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n",
             "language": "text"
           }
         ]
@@ -916,7 +845,7 @@
         "runnerBackend": "pty",
         "layoutMode": "default",
         "terminalSessionScope": "exercise",
-        "terminalCwd": "/workspace/garden-notes",
+        "terminalCwd": "/workspace/volunteer-project",
         "fileActions": {
           "enabled": true,
           "createFile": true,
@@ -941,7 +870,7 @@
         "runnerBackend": "pty",
         "layoutMode": "default",
         "terminalSessionScope": "exercise",
-        "terminalCwd": "/workspace/garden-notes",
+        "terminalCwd": "/workspace/volunteer-project",
         "fileActions": {
           "enabled": true,
           "createFile": true,
@@ -964,26 +893,25 @@
       "fixtureFiles": [
         {
           "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf garden-notes\nmkdir -p garden-notes/observations\nprintf '# Garden Field Notes\\n' > garden-notes/README.md\nprintf 'Plot A: soil is damp after rain.\\n' > garden-notes/observations/plot-a.txt\nprintf 'Plot B: seedlings need labels.\\n' > garden-notes/observations/plot-b.txt\ngit -C garden-notes init -q -b main\ngit -C garden-notes config --local user.name \"ZoeSkoul Learner\"\ngit -C garden-notes config --local user.email \"learner@zoeskoul.local\"\ngit -C garden-notes add README.md observations/\n",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- volunteer-project\nmkdir -p -- volunteer-project\ngit -C volunteer-project init -q -b main\ngit -C volunteer-project config --local user.name 'ZoeSkoul Learner'\ngit -C volunteer-project config --local user.email learner@zoeskoul.local\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n' > volunteer-project/assignments.txt\ngit -C volunteer-project add -A\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n' > volunteer-project/assignments.txt\n",
           "language": "bash",
           "readOnly": true
         },
         {
-          "path": "garden-notes/README.md",
-          "content": "# Garden Field Notes\n",
+          "path": "volunteer-project/README.md",
+          "content": "# Volunteer Project\n\nAssignments and meeting times.\n",
           "language": "markdown"
         },
         {
-          "path": "garden-notes/observations/plot-a.txt",
-          "content": "Plot A: soil is damp after rain.\n",
-          "language": "text"
-        },
-        {
-          "path": "garden-notes/observations/plot-b.txt",
-          "content": "Plot B: seedlings need labels.\n",
+          "path": "volunteer-project/assignments.txt",
+          "content": "Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n",
           "language": "text"
         }
-      ]
+      ],
+      "tools": {
+        "defaultSurface": "results",
+        "compactDefaultSurface": "results"
+      }
     }
   ],
   "topicMeta": {

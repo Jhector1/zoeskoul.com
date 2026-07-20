@@ -1,0 +1,230 @@
+{
+  "topics": {
+    "git-foundations": {
+      "git-foundations-module-3-manage-tracked-files": {
+        "restore-without-rewriting-history": {
+          "label": "Recover from Everyday Mistakes",
+          "summary": "Create supplied temporary mistakes and recover them without rewriting history.",
+          "cards": {
+            "sketch0": {
+              "title": "Restore the Layer You Intend"
+            },
+            "sketch1": {
+              "title": "Unstage Without Losing the File"
+            },
+            "sketch2": {
+              "title": "A Staged Mistake May Need Two Actions"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_restore_without_rewriting_history_sketch0": {
+              "title": "Create and Restore an Unstaged README Mistake",
+              "prompt": "Open `community-site/README.md`. Find the exact line `Local events and resources.` and replace it with `Accidental rewrite.` Save the file. Type `git diff -- README.md` and press Enter. Then type `git restore README.md` and press Enter, followed by `git status --short`.",
+              "hint": "Make only the supplied temporary edit, inspect it, and restore that path.",
+              "help": {
+                "concept": "git restore PATH discards an unstaged working-tree change to that path.",
+                "hint_1": "Replace only the supplied README sentence.",
+                "hint_2": "The existing commits must remain unchanged."
+              },
+              "starterCode": "# Community Site\n\nLocal events and resources.\n",
+              "solutionCode": "git diff -- README.md\ngit restore README.md\ngit status --short",
+              "instructions": "Open `community-site/README.md`. Find the exact line `Local events and resources.` and replace it with `Accidental rewrite.` Save the file. Type `git diff -- README.md` and press Enter. Then type `git restore README.md` and press Enter, followed by `git status --short`.",
+              "starterFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-site\nmkdir -p -- community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name 'ZoeSkoul Learner'\ngit -C community-site config --local user.email learner@zoeskoul.local\nmkdir -p -- community-site\nprintf %s '# Community Site\n\nLocal events and resources.\n' > community-site/README.md\nmkdir -p -- community-site\nprintf %s '<!doctype html>\n<title>Community Site</title>\n<h1>Community Events</h1>\n' > community-site/index.html\nmkdir -p -- community-site\nprintf %s 'body { font-family: sans-serif; }\nfooter { margin-top: 12px; }\n' > community-site/styles.css\nmkdir -p -- community-site/notes\nprintf %s 'Archive the spring event list.\n' > community-site/notes/old-events.txt\nmkdir -p -- community-site/dist\nprintf %s 'console.log('\"'\"'legacy preview'\"'\"');\n' > community-site/dist/legacy-preview.js\ngit -C community-site add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C community-site commit -q -m 'Start community site'\nmkdir -p -- community-site\nprintf %s '<!doctype html>\n<title>Community Site</title>\n<h1>Community Events and Resources</h1>\n' > community-site/index.html\ngit -C community-site add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C community-site commit -q -m 'Update community heading'\nmkdir -p -- community-site\nprintf %s 'body { font-family: sans-serif; }\nfooter { margin-top: 24px; }\n' > community-site/styles.css\ngit -C community-site add -A\nGIT_AUTHOR_DATE=2026-01-03T12:00:00Z GIT_COMMITTER_DATE=2026-01-03T12:00:00Z git -C community-site commit -q -m 'Space community footer'\nrm -f -- community-site/index.html\nrm -f -- community-site/notes/old-events.txt\nrmdir -- community-site/notes 2>/dev/null || true\nmkdir -p -- community-site/pages\nprintf %s '<!doctype html>\n<title>Community Site</title>\n<h1>Community Events and Resources</h1>\n' > community-site/pages/events.html\ngit -C community-site add -A\nGIT_AUTHOR_DATE=2026-01-04T12:00:00Z GIT_COMMITTER_DATE=2026-01-04T12:00:00Z git -C community-site commit -q -m 'Organize community files'\nrm -f -- community-site/dist/legacy-preview.js\nrmdir -- community-site/dist 2>/dev/null || true\nmkdir -p -- community-site\nprintf %s 'dist/\n*.log\n' > community-site/.gitignore\ngit -C community-site add -A\nGIT_AUTHOR_DATE=2026-01-05T12:00:00Z GIT_COMMITTER_DATE=2026-01-05T12:00:00Z git -C community-site commit -q -m 'Ignore generated output'\nmkdir -p -- community-site/dist\nprintf %s 'console.log('\"'\"'legacy preview'\"'\"');\n' > community-site/dist/legacy-preview.js\nmkdir -p -- community-site/dist\nprintf %s '' > community-site/dist/preview.js\nmkdir -p -- community-site\nprintf %s '' > community-site/debug.log\n"
+                }
+              },
+              "solutionFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-site\nmkdir -p -- community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name 'ZoeSkoul Learner'\ngit -C community-site config --local user.email learner@zoeskoul.local\nmkdir -p -- community-site\nprintf %s '# Community Site\n\nLocal events and resources.\n' > community-site/README.md\nmkdir -p -- community-site\nprintf %s '<!doctype html>\n<title>Community Site</title>\n<h1>Community Events</h1>\n' > community-site/index.html\nmkdir -p -- community-site\nprintf %s 'body { font-family: sans-serif; }\nfooter { margin-top: 12px; }\n' > community-site/styles.css\nmkdir -p -- community-site/notes\nprintf %s 'Archive the spring event list.\n' > community-site/notes/old-events.txt\nmkdir -p -- community-site/dist\nprintf %s 'console.log('\"'\"'legacy preview'\"'\"');\n' > community-site/dist/legacy-preview.js\ngit -C community-site add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C community-site commit -q -m 'Start community site'\nmkdir -p -- community-site\nprintf %s '<!doctype html>\n<title>Community Site</title>\n<h1>Community Events and Resources</h1>\n' > community-site/index.html\ngit -C community-site add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C community-site commit -q -m 'Update community heading'\nmkdir -p -- community-site\nprintf %s 'body { font-family: sans-serif; }\nfooter { margin-top: 24px; }\n' > community-site/styles.css\ngit -C community-site add -A\nGIT_AUTHOR_DATE=2026-01-03T12:00:00Z GIT_COMMITTER_DATE=2026-01-03T12:00:00Z git -C community-site commit -q -m 'Space community footer'\nrm -f -- community-site/index.html\nrm -f -- community-site/notes/old-events.txt\nrmdir -- community-site/notes 2>/dev/null || true\nmkdir -p -- community-site/pages\nprintf %s '<!doctype html>\n<title>Community Site</title>\n<h1>Community Events and Resources</h1>\n' > community-site/pages/events.html\ngit -C community-site add -A\nGIT_AUTHOR_DATE=2026-01-04T12:00:00Z GIT_COMMITTER_DATE=2026-01-04T12:00:00Z git -C community-site commit -q -m 'Organize community files'\nrm -f -- community-site/dist/legacy-preview.js\nrmdir -- community-site/dist 2>/dev/null || true\nmkdir -p -- community-site\nprintf %s 'dist/\n*.log\n' > community-site/.gitignore\ngit -C community-site add -A\nGIT_AUTHOR_DATE=2026-01-05T12:00:00Z GIT_COMMITTER_DATE=2026-01-05T12:00:00Z git -C community-site commit -q -m 'Ignore generated output'\nmkdir -p -- community-site/dist\nprintf %s 'console.log('\"'\"'legacy preview'\"'\"');\n' > community-site/dist/legacy-preview.js\nmkdir -p -- community-site/dist\nprintf %s '' > community-site/dist/preview.js\nmkdir -p -- community-site\nprintf %s '' > community-site/debug.log\n"
+                }
+              },
+              "terminalExpectations": {
+                "forbiddenCommands": {
+                  "0": {
+                    "message": "That action can discard or rewrite history. Use the safe, layer-specific workflow taught in this course."
+                  }
+                },
+                "requiredCommands": {
+                  "0": {
+                    "message": "Did you run `git diff -- README.md`?"
+                  },
+                  "1": {
+                    "message": "Did you run `git restore README.md`?"
+                  },
+                  "2": {
+                    "message": "Did you run `git status --short`?"
+                  }
+                }
+              }
+            },
+            "try_restore_without_rewriting_history_sketch1": {
+              "title": "Create, Stage, and Unstage a Style Mistake",
+              "prompt": "Open `community-site/styles.css`. Replace all existing content with exactly `body { color: purple; }` on line 1, then save the file. Type `git add styles.css` and press Enter. Then type `git restore --staged styles.css` and press Enter. Do not restore the working copy yet.",
+              "hint": "Create the supplied temporary edit, stage it, then remove only that path from the proposal.",
+              "help": {
+                "concept": "git restore --staged removes a path from the proposed snapshot but preserves its working-tree content.",
+                "hint_1": "Replace the complete file with the one supplied line.",
+                "hint_2": "styles.css should remain modified after unstaging."
+              },
+              "starterCode": "body { font-family: sans-serif; }\nfooter { margin-top: 24px; }\n",
+              "solutionCode": "git add styles.css\ngit restore --staged styles.css",
+              "instructions": "Open `community-site/styles.css`. Replace all existing content with exactly `body { color: purple; }` on line 1, then save the file. Type `git add styles.css` and press Enter. Then type `git restore --staged styles.css` and press Enter. Do not restore the working copy yet.",
+              "starterFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-site\nmkdir -p -- community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name 'ZoeSkoul Learner'\ngit -C community-site config --local user.email learner@zoeskoul.local\nmkdir -p -- community-site\nprintf %s '# Community Site\n\nLocal events and resources.\n' > community-site/README.md\nmkdir -p -- community-site\nprintf %s '<!doctype html>\n<title>Community Site</title>\n<h1>Community Events</h1>\n' > community-site/index.html\nmkdir -p -- community-site\nprintf %s 'body { font-family: sans-serif; }\nfooter { margin-top: 12px; }\n' > community-site/styles.css\nmkdir -p -- community-site/notes\nprintf %s 'Archive the spring event list.\n' > community-site/notes/old-events.txt\nmkdir -p -- community-site/dist\nprintf %s 'console.log('\"'\"'legacy preview'\"'\"');\n' > community-site/dist/legacy-preview.js\ngit -C community-site add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C community-site commit -q -m 'Start community site'\nmkdir -p -- community-site\nprintf %s '<!doctype html>\n<title>Community Site</title>\n<h1>Community Events and Resources</h1>\n' > community-site/index.html\ngit -C community-site add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C community-site commit -q -m 'Update community heading'\nmkdir -p -- community-site\nprintf %s 'body { font-family: sans-serif; }\nfooter { margin-top: 24px; }\n' > community-site/styles.css\ngit -C community-site add -A\nGIT_AUTHOR_DATE=2026-01-03T12:00:00Z GIT_COMMITTER_DATE=2026-01-03T12:00:00Z git -C community-site commit -q -m 'Space community footer'\nrm -f -- community-site/index.html\nrm -f -- community-site/notes/old-events.txt\nrmdir -- community-site/notes 2>/dev/null || true\nmkdir -p -- community-site/pages\nprintf %s '<!doctype html>\n<title>Community Site</title>\n<h1>Community Events and Resources</h1>\n' > community-site/pages/events.html\ngit -C community-site add -A\nGIT_AUTHOR_DATE=2026-01-04T12:00:00Z GIT_COMMITTER_DATE=2026-01-04T12:00:00Z git -C community-site commit -q -m 'Organize community files'\nrm -f -- community-site/dist/legacy-preview.js\nrmdir -- community-site/dist 2>/dev/null || true\nmkdir -p -- community-site\nprintf %s 'dist/\n*.log\n' > community-site/.gitignore\ngit -C community-site add -A\nGIT_AUTHOR_DATE=2026-01-05T12:00:00Z GIT_COMMITTER_DATE=2026-01-05T12:00:00Z git -C community-site commit -q -m 'Ignore generated output'\nmkdir -p -- community-site/dist\nprintf %s 'console.log('\"'\"'legacy preview'\"'\"');\n' > community-site/dist/legacy-preview.js\nmkdir -p -- community-site/dist\nprintf %s '' > community-site/dist/preview.js\nmkdir -p -- community-site\nprintf %s '' > community-site/debug.log\n"
+                }
+              },
+              "solutionFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-site\nmkdir -p -- community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name 'ZoeSkoul Learner'\ngit -C community-site config --local user.email learner@zoeskoul.local\nmkdir -p -- community-site\nprintf %s '# Community Site\n\nLocal events and resources.\n' > community-site/README.md\nmkdir -p -- community-site\nprintf %s '<!doctype html>\n<title>Community Site</title>\n<h1>Community Events</h1>\n' > community-site/index.html\nmkdir -p -- community-site\nprintf %s 'body { font-family: sans-serif; }\nfooter { margin-top: 12px; }\n' > community-site/styles.css\nmkdir -p -- community-site/notes\nprintf %s 'Archive the spring event list.\n' > community-site/notes/old-events.txt\nmkdir -p -- community-site/dist\nprintf %s 'console.log('\"'\"'legacy preview'\"'\"');\n' > community-site/dist/legacy-preview.js\ngit -C community-site add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C community-site commit -q -m 'Start community site'\nmkdir -p -- community-site\nprintf %s '<!doctype html>\n<title>Community Site</title>\n<h1>Community Events and Resources</h1>\n' > community-site/index.html\ngit -C community-site add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C community-site commit -q -m 'Update community heading'\nmkdir -p -- community-site\nprintf %s 'body { font-family: sans-serif; }\nfooter { margin-top: 24px; }\n' > community-site/styles.css\ngit -C community-site add -A\nGIT_AUTHOR_DATE=2026-01-03T12:00:00Z GIT_COMMITTER_DATE=2026-01-03T12:00:00Z git -C community-site commit -q -m 'Space community footer'\nrm -f -- community-site/index.html\nrm -f -- community-site/notes/old-events.txt\nrmdir -- community-site/notes 2>/dev/null || true\nmkdir -p -- community-site/pages\nprintf %s '<!doctype html>\n<title>Community Site</title>\n<h1>Community Events and Resources</h1>\n' > community-site/pages/events.html\ngit -C community-site add -A\nGIT_AUTHOR_DATE=2026-01-04T12:00:00Z GIT_COMMITTER_DATE=2026-01-04T12:00:00Z git -C community-site commit -q -m 'Organize community files'\nrm -f -- community-site/dist/legacy-preview.js\nrmdir -- community-site/dist 2>/dev/null || true\nmkdir -p -- community-site\nprintf %s 'dist/\n*.log\n' > community-site/.gitignore\ngit -C community-site add -A\nGIT_AUTHOR_DATE=2026-01-05T12:00:00Z GIT_COMMITTER_DATE=2026-01-05T12:00:00Z git -C community-site commit -q -m 'Ignore generated output'\nmkdir -p -- community-site/dist\nprintf %s 'console.log('\"'\"'legacy preview'\"'\"');\n' > community-site/dist/legacy-preview.js\nmkdir -p -- community-site/dist\nprintf %s '' > community-site/dist/preview.js\nmkdir -p -- community-site\nprintf %s '' > community-site/debug.log\n"
+                }
+              },
+              "terminalExpectations": {
+                "forbiddenCommands": {
+                  "0": {
+                    "message": "That action can discard or rewrite history. Use the safe, layer-specific workflow taught in this course."
+                  }
+                },
+                "requiredCommands": {
+                  "0": {
+                    "message": "Did you run `git add styles.css`?"
+                  },
+                  "1": {
+                    "message": "Did you run `git restore --staged styles.css`?"
+                  }
+                }
+              }
+            },
+            "try_restore_without_rewriting_history_sketch2": {
+              "title": "Restore the Remaining Working-Tree Mistake",
+              "prompt": "The previous step left the exact `body { color: purple; }` edit unstaged in `community-site/styles.css`. Type `git restore styles.css` and press Enter. Then type `git status --short` and press Enter.",
+              "hint": "Now restore the working-tree copy from the committed snapshot.",
+              "help": {
+                "concept": "After unstaging preserves the edited file, a separate working-tree restore removes the unwanted content.",
+                "hint_1": "Do not use reset --hard.",
+                "hint_2": "The final short status should be empty."
+              },
+              "starterCode": "body { color: purple; }\n",
+              "solutionCode": "git restore styles.css\ngit status --short",
+              "instructions": "The previous step left the exact `body { color: purple; }` edit unstaged in `community-site/styles.css`. Type `git restore styles.css` and press Enter. Then type `git status --short` and press Enter.",
+              "starterFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-site\nmkdir -p -- community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name 'ZoeSkoul Learner'\ngit -C community-site config --local user.email learner@zoeskoul.local\nmkdir -p -- community-site\nprintf %s '# Community Site\n\nLocal events and resources.\n' > community-site/README.md\nmkdir -p -- community-site\nprintf %s '<!doctype html>\n<title>Community Site</title>\n<h1>Community Events</h1>\n' > community-site/index.html\nmkdir -p -- community-site\nprintf %s 'body { font-family: sans-serif; }\nfooter { margin-top: 12px; }\n' > community-site/styles.css\nmkdir -p -- community-site/notes\nprintf %s 'Archive the spring event list.\n' > community-site/notes/old-events.txt\nmkdir -p -- community-site/dist\nprintf %s 'console.log('\"'\"'legacy preview'\"'\"');\n' > community-site/dist/legacy-preview.js\ngit -C community-site add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C community-site commit -q -m 'Start community site'\nmkdir -p -- community-site\nprintf %s '<!doctype html>\n<title>Community Site</title>\n<h1>Community Events and Resources</h1>\n' > community-site/index.html\ngit -C community-site add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C community-site commit -q -m 'Update community heading'\nmkdir -p -- community-site\nprintf %s 'body { font-family: sans-serif; }\nfooter { margin-top: 24px; }\n' > community-site/styles.css\ngit -C community-site add -A\nGIT_AUTHOR_DATE=2026-01-03T12:00:00Z GIT_COMMITTER_DATE=2026-01-03T12:00:00Z git -C community-site commit -q -m 'Space community footer'\nrm -f -- community-site/index.html\nrm -f -- community-site/notes/old-events.txt\nrmdir -- community-site/notes 2>/dev/null || true\nmkdir -p -- community-site/pages\nprintf %s '<!doctype html>\n<title>Community Site</title>\n<h1>Community Events and Resources</h1>\n' > community-site/pages/events.html\ngit -C community-site add -A\nGIT_AUTHOR_DATE=2026-01-04T12:00:00Z GIT_COMMITTER_DATE=2026-01-04T12:00:00Z git -C community-site commit -q -m 'Organize community files'\nrm -f -- community-site/dist/legacy-preview.js\nrmdir -- community-site/dist 2>/dev/null || true\nmkdir -p -- community-site\nprintf %s 'dist/\n*.log\n' > community-site/.gitignore\ngit -C community-site add -A\nGIT_AUTHOR_DATE=2026-01-05T12:00:00Z GIT_COMMITTER_DATE=2026-01-05T12:00:00Z git -C community-site commit -q -m 'Ignore generated output'\nmkdir -p -- community-site/dist\nprintf %s 'console.log('\"'\"'legacy preview'\"'\"');\n' > community-site/dist/legacy-preview.js\nmkdir -p -- community-site/dist\nprintf %s '' > community-site/dist/preview.js\nmkdir -p -- community-site\nprintf %s '' > community-site/debug.log\nmkdir -p -- community-site\nprintf %s 'body { color: purple; }\n' > community-site/styles.css\n"
+                }
+              },
+              "solutionFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-site\nmkdir -p -- community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name 'ZoeSkoul Learner'\ngit -C community-site config --local user.email learner@zoeskoul.local\nmkdir -p -- community-site\nprintf %s '# Community Site\n\nLocal events and resources.\n' > community-site/README.md\nmkdir -p -- community-site\nprintf %s '<!doctype html>\n<title>Community Site</title>\n<h1>Community Events</h1>\n' > community-site/index.html\nmkdir -p -- community-site\nprintf %s 'body { font-family: sans-serif; }\nfooter { margin-top: 12px; }\n' > community-site/styles.css\nmkdir -p -- community-site/notes\nprintf %s 'Archive the spring event list.\n' > community-site/notes/old-events.txt\nmkdir -p -- community-site/dist\nprintf %s 'console.log('\"'\"'legacy preview'\"'\"');\n' > community-site/dist/legacy-preview.js\ngit -C community-site add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C community-site commit -q -m 'Start community site'\nmkdir -p -- community-site\nprintf %s '<!doctype html>\n<title>Community Site</title>\n<h1>Community Events and Resources</h1>\n' > community-site/index.html\ngit -C community-site add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C community-site commit -q -m 'Update community heading'\nmkdir -p -- community-site\nprintf %s 'body { font-family: sans-serif; }\nfooter { margin-top: 24px; }\n' > community-site/styles.css\ngit -C community-site add -A\nGIT_AUTHOR_DATE=2026-01-03T12:00:00Z GIT_COMMITTER_DATE=2026-01-03T12:00:00Z git -C community-site commit -q -m 'Space community footer'\nrm -f -- community-site/index.html\nrm -f -- community-site/notes/old-events.txt\nrmdir -- community-site/notes 2>/dev/null || true\nmkdir -p -- community-site/pages\nprintf %s '<!doctype html>\n<title>Community Site</title>\n<h1>Community Events and Resources</h1>\n' > community-site/pages/events.html\ngit -C community-site add -A\nGIT_AUTHOR_DATE=2026-01-04T12:00:00Z GIT_COMMITTER_DATE=2026-01-04T12:00:00Z git -C community-site commit -q -m 'Organize community files'\nrm -f -- community-site/dist/legacy-preview.js\nrmdir -- community-site/dist 2>/dev/null || true\nmkdir -p -- community-site\nprintf %s 'dist/\n*.log\n' > community-site/.gitignore\ngit -C community-site add -A\nGIT_AUTHOR_DATE=2026-01-05T12:00:00Z GIT_COMMITTER_DATE=2026-01-05T12:00:00Z git -C community-site commit -q -m 'Ignore generated output'\nmkdir -p -- community-site/dist\nprintf %s 'console.log('\"'\"'legacy preview'\"'\"');\n' > community-site/dist/legacy-preview.js\nmkdir -p -- community-site/dist\nprintf %s '' > community-site/dist/preview.js\nmkdir -p -- community-site\nprintf %s '' > community-site/debug.log\nmkdir -p -- community-site\nprintf %s 'body { color: purple; }\n' > community-site/styles.css\n"
+                }
+              },
+              "terminalExpectations": {
+                "forbiddenCommands": {
+                  "0": {
+                    "message": "That action can discard or rewrite history. Use the safe, layer-specific workflow taught in this course."
+                  }
+                },
+                "requiredCommands": {
+                  "0": {
+                    "message": "Did you run `git restore styles.css`?"
+                  },
+                  "1": {
+                    "message": "Did you run `git status --short`?"
+                  }
+                }
+              }
+            }
+          },
+          "practice": {
+            "single-choice-1": {
+              "title": "Purpose of git restore",
+              "prompt": "What is the primary purpose of `git restore path` in this course?",
+              "hint": "Focus on what the command or concept observes or changes at this point in the workflow.",
+              "help": {
+                "concept": "Correct working-tree and staging mistakes at the right layer while leaving existing commits untouched.",
+                "hint_1": "Remove options that act on a different repository layer than the one named in the question.",
+                "hint_2": "Choose the answer that remains accurate even when other unrelated files exist."
+              },
+              "options": {
+                "a": "To discard an unwanted working-tree edit",
+                "b": "To record a new commit",
+                "c": "To stage an untracked file",
+                "d": "To list earlier commits"
+              }
+            },
+            "single-choice-2": {
+              "title": "Effect of git restore --staged",
+              "prompt": "What happens when you use `git restore --staged` on a file?",
+              "hint": "Focus on what the command or concept observes or changes at this point in the workflow.",
+              "help": {
+                "concept": "Correct working-tree and staging mistakes at the right layer while leaving existing commits untouched.",
+                "hint_1": "Remove options that act on a different repository layer than the one named in the question.",
+                "hint_2": "Choose the answer that remains accurate even when other unrelated files exist."
+              },
+              "options": {
+                "a": "The file is removed from the staging area but changes are kept",
+                "b": "The file is deleted from the repository",
+                "c": "The file is committed to the repository",
+                "d": "The file is reverted to the last committed state"
+              }
+            },
+            "multi-choice-1": {
+              "title": "Choosing the Correct Restore Command",
+              "prompt": "Which commands can discard an unwanted working-tree edit and unstage a file?",
+              "hint": "Judge each option independently; choose only the statements that stay true in this exact repository state.",
+              "help": {
+                "concept": "Correct working-tree and staging mistakes at the right layer while leaving existing commits untouched.",
+                "hint_1": "A partly true option is still wrong if it adds an effect Git does not guarantee.",
+                "hint_2": "Use the layer named in the prompt—working tree, staging area, or history—to test each choice."
+              },
+              "options": {
+                "a": "git restore",
+                "b": "git restore --staged",
+                "c": "git commit",
+                "d": "git add"
+              }
+            },
+            "drag-reorder-1": {
+              "title": "Discard a Change That Is Already Staged",
+              "prompt": "Arrange the safe correction steps for a file whose accidental rewrite is both staged and present in the working tree.",
+              "hint": "Start with the state that must exist before the next action can make sense.",
+              "help": {
+                "concept": "Correct working-tree and staging mistakes at the right layer while leaving existing commits untouched.",
+                "hint_1": "Track how the project moves from working files to a proposed snapshot and then to history.",
+                "hint_2": "Read the ordered steps as one continuous repository story."
+              },
+              "tokens": {
+                "t1": "Remove the accidental version from the staging area",
+                "t2": "Restore the working file from the recorded version"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "git-foundations": {
+      "git-foundations-module-3-manage-tracked-files": {
+        "restore-without-rewriting-history": {
+          "restore-sketch-0": {
+            "title": "Restore the Layer You Intend",
+            "bodyMarkdown": "`git restore path` replaces an unstaged working-tree edit with the committed version. It does not rewrite earlier commits."
+          },
+          "restore-sketch-1": {
+            "title": "Unstage Without Losing the File",
+            "bodyMarkdown": "`git restore --staged path` removes a path from the proposed snapshot while preserving its current working-tree content."
+          },
+          "restore-sketch-2": {
+            "title": "A Staged Mistake May Need Two Actions",
+            "bodyMarkdown": "When the same unwanted edit is staged and still present in the file, unstage it first, then restore the working copy. This keeps the recovery explicit and safe."
+          }
+        }
+      }
+    }
+  }
+}

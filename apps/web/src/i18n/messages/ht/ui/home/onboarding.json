@@ -62,7 +62,18 @@
       },
       "learningInterests": {
         "title": "Sou ki sa ou vle konsantre an premye?",
-        "description": "{appName} ap bay priyorite a bon sijè yo, bon pwen depa yo, ak bon sijesyon pratik sou paj dakèy ou."
+        "description": "{appName} ap bay priyorite a bon sijè yo, bon pwen depa yo, ak bon sijesyon pratik sou paj dakèy ou.",
+        "catalogPicker": {
+          "catalogLabel": "Chwazi yon katalòg",
+          "catalogHelp": "Kou ki anba yo ap chanje lè ou chwazi yon lòt katalòg.",
+          "coursesTitle": "Kou nan {catalog}",
+          "oneCourse": "1 kou",
+          "manyCourses": "{count} kou",
+          "oneSelected": "1 chwazi",
+          "manySelected": "{count} chwazi",
+          "showMore": "Montre {count} anplis",
+          "showLess": "Montre mwens"
+        }
       },
       "level": {
         "title": "Ki nivo ou ye kounye a?",

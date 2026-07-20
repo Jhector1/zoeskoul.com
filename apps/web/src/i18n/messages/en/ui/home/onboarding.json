@@ -62,7 +62,18 @@
       },
       "learningInterests": {
         "title": "What do you want to focus on first?",
-        "description": "{appName} will prioritize the right subjects, entry points, and practice suggestions on your home."
+        "description": "{appName} will prioritize the right subjects, entry points, and practice suggestions on your home.",
+        "catalogPicker": {
+          "catalogLabel": "Choose a catalog",
+          "catalogHelp": "The courses below update when you choose a different catalog.",
+          "coursesTitle": "{catalog} courses",
+          "oneCourse": "1 course",
+          "manyCourses": "{count} courses",
+          "oneSelected": "1 selected",
+          "manySelected": "{count} selected",
+          "showMore": "Show {count} more",
+          "showLess": "Show fewer"
+        }
       },
       "level": {
         "title": "What best describes your current level?",

@@ -565,4 +565,232 @@ describe("repairGitDraft", () => {
         ).toHaveLength(6);
     });
 
+
+    it("repairs journey-aware exercises inside the declared cumulative repository", async () => {
+        const result = await repairGitDraft({
+            seed: {
+                profileId: "git",
+                topicId: "configure-and-initialize-a-repository",
+                title: "Configure and Initialize a Repository",
+                projectJourney: {
+                    journeyId: "guided-community-site",
+                    entryMilestone: "ordinary-folder",
+                    exitMilestone: "initialized",
+                },
+                projectJourneys: [
+                    {
+                        id: "guided-community-site",
+                        role: "guided",
+                        title: "Community Site",
+                        repositoryPath: "community-site",
+                        continuity: "course",
+                        supportLevel: "guided",
+                        exactEditInstructionsRequired: true,
+                        milestoneOrder: ["ordinary-folder", "initialized"],
+                    },
+                ],
+                plannedExerciseCounts: {
+                    total: 1,
+                    dominantKind: "code_input",
+                    counts: {
+                        single_choice: 0,
+                        multi_choice: 0,
+                        drag_reorder: 0,
+                        fill_blank_choice: 0,
+                        code_input: 1,
+                    },
+                },
+            } as any,
+            draft: {
+                title: "Configure and Initialize a Repository",
+                summary: "Initialize the cumulative guided repository.",
+                minutes: 10,
+                sketchBlocks: [],
+                quizDraft: [
+                    {
+                        id: "try-configure-and-initialize-a-repository-sketch0",
+                        kind: "code_input",
+                        title: "Initialize Community Site",
+                        prompt: "Initialize the prepared folder with `git init -b main`.",
+                        hint: "Use the exact initialization command.",
+                        help: {
+                            concept: "git init creates local repository metadata.",
+                            hint_1: "The folder is already prepared.",
+                            hint_2: "Use main as the initial branch.",
+                        },
+                        starterCode: "",
+                        solutionCode: "git init -b main",
+                    },
+                ],
+            } as any,
+        });
+
+        const exercise = result.draft.quizDraft[0] as any;
+        expect(exercise.gitExpectations.repositoryPath).toBe("community-site");
+        expect(exercise.prompt).toContain("community-site/");
+        expect(exercise.prompt).not.toContain(".zoeskoul/setup.sh");
+        expect(exercise.solutionCode).toBe("git init -b main\n");
+        expect(exercise.starterFiles).toEqual(
+            expect.arrayContaining([
+                expect.objectContaining({ path: "main.sh" }),
+                expect.objectContaining({
+                    path: ".zoeskoul/setup.sh",
+                    content: expect.stringContaining("community-site"),
+                }),
+            ]),
+        );
+        expect(
+            exercise.starterFiles.some((file: any) =>
+                String(file.content ?? "").includes("project_alpha"),
+            ),
+        ).toBe(false);
+        expect(
+            exercise.terminalExpectations.requiredCommands.some(
+                ({ pattern }: { pattern: string }) => pattern.includes("zoeskoul/setup"),
+            ),
+        ).toBe(false);
+    });
+
+    it("does not revive the legacy resource-guide capstone for a declared journey", async () => {
+        const result = await repairGitDraft({
+            seed: {
+                profileId: "git",
+                topicId: "final-neighborhood-resource-guide-history",
+                title: "Final Capstone",
+                projectJourney: {
+                    journeyId: "independent-neighborhood-guide",
+                    entryMilestone: "ordinary-folder",
+                    exitMilestone: "first-snapshot",
+                },
+                projectJourneys: [
+                    {
+                        id: "independent-neighborhood-guide",
+                        role: "capstone",
+                        title: "Neighborhood Guide",
+                        repositoryPath: "neighborhood-guide",
+                        continuity: "topic",
+                        supportLevel: "independent",
+                        exactEditInstructionsRequired: true,
+                        milestoneOrder: ["ordinary-folder", "first-snapshot"],
+                    },
+                ],
+                plannedExerciseCounts: {
+                    total: 1,
+                    dominantKind: "code_input",
+                    counts: {
+                        single_choice: 0,
+                        multi_choice: 0,
+                        drag_reorder: 0,
+                        fill_blank_choice: 0,
+                        code_input: 1,
+                    },
+                },
+            } as any,
+            draft: {
+                title: "Final Capstone",
+                summary: "Start the independent repository.",
+                minutes: 20,
+                sketchBlocks: [],
+                quizDraft: [
+                    {
+                        id: "try-final-neighborhood-resource-guide-history-sketch0",
+                        kind: "code_input",
+                        title: "Start Neighborhood Guide",
+                        prompt: "Initialize the folder with `git init -b main`.",
+                        hint: "Use the exact command.",
+                        help: {
+                            concept: "Start a fresh local repository.",
+                            hint_1: "Use main.",
+                            hint_2: "Verify the new repository.",
+                        },
+                        starterCode: "",
+                        solutionCode: "git init -b main",
+                    },
+                ],
+            } as any,
+        });
+
+        const exercise = result.draft.quizDraft[0] as any;
+        const setup = exercise.starterFiles.find(
+            (file: any) => file.path === ".zoeskoul/setup.sh",
+        )?.content;
+        expect(exercise.gitExpectations.repositoryPath).toBe(
+            "neighborhood-guide",
+        );
+        expect(setup).toContain("neighborhood-guide");
+        expect(setup).not.toContain("resource-guide");
+    });
+
+    it("keeps an ordinary-folder inspection uninitialized and preserves terminal prerequisites", async () => {
+        const result = await repairGitDraft({
+            seed: {
+                profileId: "git",
+                topicId: "module-1-field-notes-repository",
+                title: "Start Volunteer Hub",
+                projectJourney: {
+                    journeyId: "parallel-volunteer-hub",
+                    entryMilestone: "ordinary-folder",
+                    exitMilestone: "ordinary-folder",
+                },
+                projectJourneys: [
+                    {
+                        id: "parallel-volunteer-hub",
+                        role: "module_project",
+                        title: "Volunteer Hub",
+                        repositoryPath: "volunteer-hub",
+                        continuity: "cross_module",
+                        supportLevel: "reapplication",
+                        exactEditInstructionsRequired: true,
+                        milestoneOrder: ["ordinary-folder", "first-snapshot"],
+                    },
+                ],
+                plannedExerciseCounts: {
+                    total: 1,
+                    dominantKind: "code_input",
+                    counts: {
+                        single_choice: 0,
+                        multi_choice: 0,
+                        drag_reorder: 0,
+                        fill_blank_choice: 0,
+                        code_input: 1,
+                    },
+                },
+            } as any,
+            draft: {
+                title: "Start Volunteer Hub",
+                summary: "Inspect the ordinary project folder.",
+                minutes: 10,
+                sketchBlocks: [],
+                quizDraft: [
+                    {
+                        id: "try-git-repo-inspection",
+                        kind: "code_input",
+                        title: "Inspect the Volunteer Hub Folder",
+                        prompt: "Type `pwd` and press Enter. Then type `ls` and press Enter.",
+                        hint: "Inspect before initializing.",
+                        help: {
+                            concept: "A repository starts as an ordinary folder.",
+                            hint_1: "Check the current directory.",
+                            hint_2: "List the prepared files.",
+                        },
+                        starterCode: "",
+                        solutionCode: "pwd\nls",
+                    },
+                ],
+            } as any,
+        });
+
+        const exercise = result.draft.quizDraft[0] as any;
+        const setup = exercise.starterFiles.find(
+            (file: any) => file.path === ".zoeskoul/setup.sh",
+        )?.content;
+        expect(exercise.solutionCode).toBe("pwd\nls\n");
+        expect(exercise.gitExpectations).toEqual({
+            repositoryPath: "volunteer-hub",
+            repositoryInitialized: false,
+        });
+        expect(setup).toContain("volunteer-hub");
+        expect(setup).not.toContain("git -C \"volunteer-hub\" init");
+    });
+
 });

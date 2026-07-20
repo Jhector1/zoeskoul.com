@@ -130,35 +130,39 @@
       "weight": 1,
       "messageBase": "topics.git--git-foundations--draft.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch0",
       "language": "bash",
-      "starterCode": "# Volunteer Toolkit\n",
+      "starterCode": "# Volunteer Project\n\nAssignments and meeting times.\n",
       "starterFiles": [
         {
-          "path": "release-snapshot/README.md",
-          "content": "# Volunteer Toolkit\n",
+          "path": "volunteer-project/README.md",
+          "content": "# Volunteer Project\n\nAssignments and meeting times.\n",
           "language": "markdown",
           "isEntry": true,
           "entry": true
         },
         {
-          "path": "release-snapshot/docs/guide-draft.md",
-          "content": "# Draft Volunteer Guide\n",
-          "language": "markdown"
+          "path": "volunteer-project/assignments.txt",
+          "content": "Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n",
+          "language": "text"
         },
         {
-          "path": "release-snapshot/docs/old-checklist.md",
-          "content": "Old checklist\n",
-          "language": "markdown"
+          "path": "volunteer-project/meeting-times.txt",
+          "content": "Volunteer meeting times\n\nOrientation: Saturday 9:30 AM\n",
+          "language": "text"
         }
       ],
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^git\\s+status\\s+(?:\\-\\-short|\\-s)$",
+            "pattern": "^git\\s+status\\s+--short$",
             "message": "@:topics.git--git-foundations--draft.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch0.terminalExpectations.requiredCommands.0.message"
           },
           {
-            "pattern": "^git\\s+log\\s+\\-\\-oneline$",
+            "pattern": "^git\\s+add\\s+generated/report\\.txt$",
             "message": "@:topics.git--git-foundations--draft.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch0.terminalExpectations.requiredCommands.1.message"
+          },
+          {
+            "pattern": "^git\\s+commit\\s+-m\\s+.+$",
+            "message": "@:topics.git--git-foundations--draft.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch0.terminalExpectations.requiredCommands.2.message"
           }
         ],
         "forbiddenCommands": [
@@ -169,53 +173,53 @@
         ]
       },
       "hiddenShellCheck": {
-        "script": "set -eu\nrepo=release-snapshot\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" branch --show-current)\" = main ] || fail \"The repository is not on main.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = 1 ] || fail \"The repository has the wrong number of commits.\"\n[ -z \"$(git -C \"$repo\" status --porcelain)\" ] || fail \"The working tree is not clean.\"\nexpected=$(printf \"%s\\n\" README.md docs/guide-draft.md docs/old-checklist.md | sort)\nactual=$(git -C \"$repo\" ls-files | sort)\n[ \"$actual\" = \"$expected\" ] || fail \"The tracked file set is not correct.\"",
+        "script": "set -eu\nrepo=volunteer-project\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" branch --show-current)\" = main ] || fail \"The repository is on the wrong branch.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = 5 ] || fail \"The repository has the wrong number of commits.\"\n[ \"$(git -C \"$repo\" config --local --get user.name)\" = 'ZoeSkoul Learner' ] || fail \"The repository-local author name is incorrect.\"\n[ \"$(git -C \"$repo\" config --local --get user.email)\" = learner@zoeskoul.local ] || fail \"The repository-local author email is incorrect.\"\nactual_status=$(git -C \"$repo\" status --porcelain=v1 --untracked-files=all)\n[ \"$actual_status\" = '' ] || fail \"The staged, unstaged, or untracked state is not correct yet.\"\nactual_tracked=$(git -C \"$repo\" ls-files)\n[ \"$actual_tracked\" = 'README.md\nassignments.txt\ngenerated/report.txt\nmeeting-times.txt' ] || fail \"The tracked file set is not correct yet.\"\nactual_subjects=$(git -C \"$repo\" log --format=%s --reverse)\n[ \"$actual_subjects\" = 'Start volunteer project\nAdd volunteer meeting times\nUpdate volunteer assignments\nUpdate volunteer meeting time\nAdd generated report' ] || fail \"The commit history does not match the required project story.\"\n[ -f \"$repo/README.md\" ] || fail \"The expected file README.md is missing.\"\n[ \"$(cat \"$repo/README.md\")\" = '# Volunteer Project\n\nAssignments and meeting times.' ] || fail \"The content of README.md is not correct yet.\"\n[ -f \"$repo/assignments.txt\" ] || fail \"The expected file assignments.txt is missing.\"\n[ \"$(cat \"$repo/assignments.txt\")\" = 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley' ] || fail \"The content of assignments.txt is not correct yet.\"\n[ -f \"$repo/generated/report.txt\" ] || fail \"The expected file generated/report.txt is missing.\"\n[ \"$(cat \"$repo/generated/report.txt\")\" = 'Generated volunteer report\n\nPrepared automatically from assignments.' ] || fail \"The content of generated/report.txt is not correct yet.\"\n[ -f \"$repo/meeting-times.txt\" ] || fail \"The expected file meeting-times.txt is missing.\"\n[ \"$(cat \"$repo/meeting-times.txt\")\" = 'Volunteer meeting times\n\nOrientation: Saturday 9:30 AM' ] || fail \"The content of meeting-times.txt is not correct yet.\"",
         "timeoutMs": 15000
       },
       "workspace": {
         "language": "bash",
-        "entryFilePath": "release-snapshot/README.md",
-        "starterCode": "# Volunteer Toolkit\n",
+        "entryFilePath": "volunteer-project/README.md",
+        "starterCode": "# Volunteer Project\n\nAssignments and meeting times.\n",
         "starterFiles": [
           {
-            "path": "release-snapshot/README.md",
-            "content": "# Volunteer Toolkit\n",
+            "path": "volunteer-project/README.md",
+            "content": "# Volunteer Project\n\nAssignments and meeting times.\n",
             "language": "markdown",
             "isEntry": true,
             "entry": true
           },
           {
-            "path": "release-snapshot/docs/guide-draft.md",
-            "content": "# Draft Volunteer Guide\n",
-            "language": "markdown"
+            "path": "volunteer-project/assignments.txt",
+            "content": "Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n",
+            "language": "text"
           },
           {
-            "path": "release-snapshot/docs/old-checklist.md",
-            "content": "Old checklist\n",
-            "language": "markdown"
+            "path": "volunteer-project/meeting-times.txt",
+            "content": "Volunteer meeting times\n\nOrientation: Saturday 9:30 AM\n",
+            "language": "text"
           }
         ],
         "fixtureFiles": [
           {
             "path": ".zoeskoul/setup.sh",
-            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-snapshot\nmkdir -p release-snapshot\ngit -C release-snapshot init -q -b main\ngit -C release-snapshot config --local user.name \"ZoeSkoul Learner\"\ngit -C release-snapshot config --local user.email \"learner@zoeskoul.local\"\ncd release-snapshot\nprintf %s '# Volunteer Toolkit\n' > README.md\ncd ..\ncd release-snapshot\nmkdir -p docs\nprintf %s '# Draft Volunteer Guide\n' > docs/guide-draft.md\ncd ..\ncd release-snapshot\nmkdir -p docs\nprintf %s 'Old checklist\n' > docs/old-checklist.md\ncd ..\ngit -C release-snapshot add -A\ngit -C release-snapshot commit -q -m 'Add project baseline'\n",
+            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- volunteer-project\nmkdir -p -- volunteer-project\ngit -C volunteer-project init -q -b main\ngit -C volunteer-project config --local user.name 'ZoeSkoul Learner'\ngit -C volunteer-project config --local user.email learner@zoeskoul.local\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n' > volunteer-project/assignments.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C volunteer-project commit -q -m 'Start volunteer project'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 10:00 AM\n' > volunteer-project/meeting-times.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C volunteer-project commit -q -m 'Add volunteer meeting times'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 10:00 AM\n' > volunteer-project/meeting-times.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-03T12:00:00Z GIT_COMMITTER_DATE=2026-01-03T12:00:00Z git -C volunteer-project commit -q -m 'Update volunteer assignments'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 9:30 AM\n' > volunteer-project/meeting-times.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-04T12:00:00Z GIT_COMMITTER_DATE=2026-01-04T12:00:00Z git -C volunteer-project commit -q -m 'Update volunteer meeting time'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 9:30 AM\n' > volunteer-project/meeting-times.txt\ngit -C volunteer-project add -A\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 9:30 AM\n' > volunteer-project/meeting-times.txt\n",
             "language": "bash",
             "readOnly": true
           },
           {
-            "path": "release-snapshot/README.md",
-            "content": "# Volunteer Toolkit\n",
+            "path": "volunteer-project/README.md",
+            "content": "# Volunteer Project\n\nAssignments and meeting times.\n",
             "language": "markdown"
           },
           {
-            "path": "release-snapshot/docs/guide-draft.md",
-            "content": "# Draft Volunteer Guide\n",
-            "language": "markdown"
+            "path": "volunteer-project/assignments.txt",
+            "content": "Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n",
+            "language": "text"
           },
           {
-            "path": "release-snapshot/docs/old-checklist.md",
-            "content": "Old checklist\n",
-            "language": "markdown"
+            "path": "volunteer-project/meeting-times.txt",
+            "content": "Volunteer meeting times\n\nOrientation: Saturday 9:30 AM\n",
+            "language": "text"
           }
         ]
       },
@@ -230,7 +234,7 @@
         "runnerBackend": "pty",
         "layoutMode": "default",
         "terminalSessionScope": "exercise",
-        "terminalCwd": "/workspace/release-snapshot",
+        "terminalCwd": "/workspace/volunteer-project",
         "fileActions": {
           "enabled": true,
           "createFile": true,
@@ -255,7 +259,7 @@
         "runnerBackend": "pty",
         "layoutMode": "default",
         "terminalSessionScope": "exercise",
-        "terminalCwd": "/workspace/release-snapshot",
+        "terminalCwd": "/workspace/volunteer-project",
         "fileActions": {
           "enabled": true,
           "createFile": true,
@@ -278,26 +282,30 @@
       "fixtureFiles": [
         {
           "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-snapshot\nmkdir -p release-snapshot\ngit -C release-snapshot init -q -b main\ngit -C release-snapshot config --local user.name \"ZoeSkoul Learner\"\ngit -C release-snapshot config --local user.email \"learner@zoeskoul.local\"\ncd release-snapshot\nprintf %s '# Volunteer Toolkit\n' > README.md\ncd ..\ncd release-snapshot\nmkdir -p docs\nprintf %s '# Draft Volunteer Guide\n' > docs/guide-draft.md\ncd ..\ncd release-snapshot\nmkdir -p docs\nprintf %s 'Old checklist\n' > docs/old-checklist.md\ncd ..\ngit -C release-snapshot add -A\ngit -C release-snapshot commit -q -m 'Add project baseline'\n",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- volunteer-project\nmkdir -p -- volunteer-project\ngit -C volunteer-project init -q -b main\ngit -C volunteer-project config --local user.name 'ZoeSkoul Learner'\ngit -C volunteer-project config --local user.email learner@zoeskoul.local\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n' > volunteer-project/assignments.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C volunteer-project commit -q -m 'Start volunteer project'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 10:00 AM\n' > volunteer-project/meeting-times.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C volunteer-project commit -q -m 'Add volunteer meeting times'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 10:00 AM\n' > volunteer-project/meeting-times.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-03T12:00:00Z GIT_COMMITTER_DATE=2026-01-03T12:00:00Z git -C volunteer-project commit -q -m 'Update volunteer assignments'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 9:30 AM\n' > volunteer-project/meeting-times.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-04T12:00:00Z GIT_COMMITTER_DATE=2026-01-04T12:00:00Z git -C volunteer-project commit -q -m 'Update volunteer meeting time'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 9:30 AM\n' > volunteer-project/meeting-times.txt\ngit -C volunteer-project add -A\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 9:30 AM\n' > volunteer-project/meeting-times.txt\n",
           "language": "bash",
           "readOnly": true
         },
         {
-          "path": "release-snapshot/README.md",
-          "content": "# Volunteer Toolkit\n",
+          "path": "volunteer-project/README.md",
+          "content": "# Volunteer Project\n\nAssignments and meeting times.\n",
           "language": "markdown"
         },
         {
-          "path": "release-snapshot/docs/guide-draft.md",
-          "content": "# Draft Volunteer Guide\n",
-          "language": "markdown"
+          "path": "volunteer-project/assignments.txt",
+          "content": "Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n",
+          "language": "text"
         },
         {
-          "path": "release-snapshot/docs/old-checklist.md",
-          "content": "Old checklist\n",
-          "language": "markdown"
+          "path": "volunteer-project/meeting-times.txt",
+          "content": "Volunteer meeting times\n\nOrientation: Saturday 9:30 AM\n",
+          "language": "text"
         }
-      ]
+      ],
+      "tools": {
+        "defaultSurface": "editor",
+        "compactDefaultSurface": "editor"
+      }
     },
     {
       "id": "try-module-3-sketch1",
@@ -306,35 +314,36 @@
       "weight": 1,
       "messageBase": "topics.git--git-foundations--draft.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch1",
       "language": "bash",
-      "starterCode": "# Volunteer Toolkit\n",
+      "starterCode": "# Volunteer Project\n\nAssignments and meeting times.\n",
       "starterFiles": [
         {
-          "path": "release-snapshot/README.md",
-          "content": "# Volunteer Toolkit\n",
+          "path": "volunteer-project/README.md",
+          "content": "# Volunteer Project\n\nAssignments and meeting times.\n",
           "language": "markdown",
           "isEntry": true,
           "entry": true
         },
         {
-          "path": "release-snapshot/docs/guide-draft.md",
-          "content": "# Draft Volunteer Guide\n",
-          "language": "markdown"
+          "path": "volunteer-project/assignments.txt",
+          "content": "Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n",
+          "language": "text"
         },
         {
-          "path": "release-snapshot/docs/old-checklist.md",
-          "content": "Old checklist\n",
-          "language": "markdown"
+          "path": "volunteer-project/generated/report.txt",
+          "content": "Generated volunteer report\n\nPrepared automatically from assignments.\n",
+          "language": "text"
+        },
+        {
+          "path": "volunteer-project/meeting-times.txt",
+          "content": "Volunteer meeting times\n\nOrientation: Saturday 9:30 AM\n",
+          "language": "text"
         }
       ],
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^git\\s+mv\\s+docs/guide\\-draft\\.md\\s+docs/volunteer\\-guide\\.md$",
+            "pattern": "^git\\s+mv\\s+assignments\\.txt\\s+roles\\.txt$",
             "message": "@:topics.git--git-foundations--draft.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch1.terminalExpectations.requiredCommands.0.message"
-          },
-          {
-            "pattern": "^git\\s+diff\\s+(?:\\-\\-staged|\\-\\-cached)\\s+\\-\\-name\\-status$",
-            "message": "@:topics.git--git-foundations--draft.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch1.terminalExpectations.requiredCommands.1.message"
           }
         ],
         "forbiddenCommands": [
@@ -345,53 +354,63 @@
         ]
       },
       "hiddenShellCheck": {
-        "script": "set -eu\nrepo=release-snapshot\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" branch --show-current)\" = main ] || fail \"The repository is not on main.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = 1 ] || fail \"The repository has the wrong number of commits.\"\n[ -n \"$(git -C \"$repo\" status --porcelain)\" ] || fail \"The exercise change is missing.\"\nexpected=$(printf \"%s\\n\" README.md docs/old-checklist.md docs/volunteer-guide.md | sort)\nactual=$(git -C \"$repo\" ls-files | sort)\n[ \"$actual\" = \"$expected\" ] || fail \"The tracked file set is not correct.\"\nexpected_staged=$(printf \"%s\\n\" docs/volunteer-guide.md | sort)\nactual_staged=$(git -C \"$repo\" diff --cached --name-only | sort)\n[ \"$actual_staged\" = \"$expected_staged\" ] || fail \"The staged file set is not correct.\"",
+        "script": "set -eu\nrepo=volunteer-project\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" branch --show-current)\" = main ] || fail \"The repository is on the wrong branch.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = 5 ] || fail \"The repository has the wrong number of commits.\"\n[ \"$(git -C \"$repo\" config --local --get user.name)\" = 'ZoeSkoul Learner' ] || fail \"The repository-local author name is incorrect.\"\n[ \"$(git -C \"$repo\" config --local --get user.email)\" = learner@zoeskoul.local ] || fail \"The repository-local author email is incorrect.\"\nactual_status=$(git -C \"$repo\" status --porcelain=v1 --untracked-files=all)\n[ \"$actual_status\" = 'R  assignments.txt -> roles.txt' ] || fail \"The staged, unstaged, or untracked state is not correct yet.\"\nactual_tracked=$(git -C \"$repo\" ls-files)\n[ \"$actual_tracked\" = 'README.md\ngenerated/report.txt\nmeeting-times.txt\nroles.txt' ] || fail \"The tracked file set is not correct yet.\"\nactual_subjects=$(git -C \"$repo\" log --format=%s --reverse)\n[ \"$actual_subjects\" = 'Start volunteer project\nAdd volunteer meeting times\nUpdate volunteer assignments\nUpdate volunteer meeting time\nAdd generated report' ] || fail \"The commit history does not match the required project story.\"\n[ -f \"$repo/README.md\" ] || fail \"The expected file README.md is missing.\"\n[ \"$(cat \"$repo/README.md\")\" = '# Volunteer Project\n\nAssignments and meeting times.' ] || fail \"The content of README.md is not correct yet.\"\n[ -f \"$repo/generated/report.txt\" ] || fail \"The expected file generated/report.txt is missing.\"\n[ \"$(cat \"$repo/generated/report.txt\")\" = 'Generated volunteer report\n\nPrepared automatically from assignments.' ] || fail \"The content of generated/report.txt is not correct yet.\"\n[ -f \"$repo/meeting-times.txt\" ] || fail \"The expected file meeting-times.txt is missing.\"\n[ \"$(cat \"$repo/meeting-times.txt\")\" = 'Volunteer meeting times\n\nOrientation: Saturday 9:30 AM' ] || fail \"The content of meeting-times.txt is not correct yet.\"\n[ -f \"$repo/roles.txt\" ] || fail \"The expected file roles.txt is missing.\"\n[ \"$(cat \"$repo/roles.txt\")\" = 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley' ] || fail \"The content of roles.txt is not correct yet.\"",
         "timeoutMs": 15000
       },
       "workspace": {
         "language": "bash",
-        "entryFilePath": "release-snapshot/README.md",
-        "starterCode": "# Volunteer Toolkit\n",
+        "entryFilePath": "volunteer-project/README.md",
+        "starterCode": "# Volunteer Project\n\nAssignments and meeting times.\n",
         "starterFiles": [
           {
-            "path": "release-snapshot/README.md",
-            "content": "# Volunteer Toolkit\n",
+            "path": "volunteer-project/README.md",
+            "content": "# Volunteer Project\n\nAssignments and meeting times.\n",
             "language": "markdown",
             "isEntry": true,
             "entry": true
           },
           {
-            "path": "release-snapshot/docs/guide-draft.md",
-            "content": "# Draft Volunteer Guide\n",
-            "language": "markdown"
+            "path": "volunteer-project/assignments.txt",
+            "content": "Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n",
+            "language": "text"
           },
           {
-            "path": "release-snapshot/docs/old-checklist.md",
-            "content": "Old checklist\n",
-            "language": "markdown"
+            "path": "volunteer-project/generated/report.txt",
+            "content": "Generated volunteer report\n\nPrepared automatically from assignments.\n",
+            "language": "text"
+          },
+          {
+            "path": "volunteer-project/meeting-times.txt",
+            "content": "Volunteer meeting times\n\nOrientation: Saturday 9:30 AM\n",
+            "language": "text"
           }
         ],
         "fixtureFiles": [
           {
             "path": ".zoeskoul/setup.sh",
-            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-snapshot\nmkdir -p release-snapshot\ngit -C release-snapshot init -q -b main\ngit -C release-snapshot config --local user.name \"ZoeSkoul Learner\"\ngit -C release-snapshot config --local user.email \"learner@zoeskoul.local\"\ncd release-snapshot\nprintf %s '# Volunteer Toolkit\n' > README.md\ncd ..\ncd release-snapshot\nmkdir -p docs\nprintf %s '# Draft Volunteer Guide\n' > docs/guide-draft.md\ncd ..\ncd release-snapshot\nmkdir -p docs\nprintf %s 'Old checklist\n' > docs/old-checklist.md\ncd ..\ngit -C release-snapshot add -A\ngit -C release-snapshot commit -q -m 'Add project baseline'\n",
+            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- volunteer-project\nmkdir -p -- volunteer-project\ngit -C volunteer-project init -q -b main\ngit -C volunteer-project config --local user.name 'ZoeSkoul Learner'\ngit -C volunteer-project config --local user.email learner@zoeskoul.local\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n' > volunteer-project/assignments.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C volunteer-project commit -q -m 'Start volunteer project'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 10:00 AM\n' > volunteer-project/meeting-times.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C volunteer-project commit -q -m 'Add volunteer meeting times'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 10:00 AM\n' > volunteer-project/meeting-times.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-03T12:00:00Z GIT_COMMITTER_DATE=2026-01-03T12:00:00Z git -C volunteer-project commit -q -m 'Update volunteer assignments'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 9:30 AM\n' > volunteer-project/meeting-times.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-04T12:00:00Z GIT_COMMITTER_DATE=2026-01-04T12:00:00Z git -C volunteer-project commit -q -m 'Update volunteer meeting time'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project/generated\nprintf %s 'Generated volunteer report\n\nPrepared automatically from assignments.\n' > volunteer-project/generated/report.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 9:30 AM\n' > volunteer-project/meeting-times.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-05T12:00:00Z GIT_COMMITTER_DATE=2026-01-05T12:00:00Z git -C volunteer-project commit -q -m 'Add generated report'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project/generated\nprintf %s 'Generated volunteer report\n\nPrepared automatically from assignments.\n' > volunteer-project/generated/report.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 9:30 AM\n' > volunteer-project/meeting-times.txt\ngit -C volunteer-project add -A\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project/generated\nprintf %s 'Generated volunteer report\n\nPrepared automatically from assignments.\n' > volunteer-project/generated/report.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 9:30 AM\n' > volunteer-project/meeting-times.txt\n",
             "language": "bash",
             "readOnly": true
           },
           {
-            "path": "release-snapshot/README.md",
-            "content": "# Volunteer Toolkit\n",
+            "path": "volunteer-project/README.md",
+            "content": "# Volunteer Project\n\nAssignments and meeting times.\n",
             "language": "markdown"
           },
           {
-            "path": "release-snapshot/docs/guide-draft.md",
-            "content": "# Draft Volunteer Guide\n",
-            "language": "markdown"
+            "path": "volunteer-project/assignments.txt",
+            "content": "Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n",
+            "language": "text"
           },
           {
-            "path": "release-snapshot/docs/old-checklist.md",
-            "content": "Old checklist\n",
-            "language": "markdown"
+            "path": "volunteer-project/generated/report.txt",
+            "content": "Generated volunteer report\n\nPrepared automatically from assignments.\n",
+            "language": "text"
+          },
+          {
+            "path": "volunteer-project/meeting-times.txt",
+            "content": "Volunteer meeting times\n\nOrientation: Saturday 9:30 AM\n",
+            "language": "text"
           }
         ]
       },
@@ -406,7 +425,7 @@
         "runnerBackend": "pty",
         "layoutMode": "default",
         "terminalSessionScope": "exercise",
-        "terminalCwd": "/workspace/release-snapshot",
+        "terminalCwd": "/workspace/volunteer-project",
         "fileActions": {
           "enabled": true,
           "createFile": true,
@@ -431,7 +450,7 @@
         "runnerBackend": "pty",
         "layoutMode": "default",
         "terminalSessionScope": "exercise",
-        "terminalCwd": "/workspace/release-snapshot",
+        "terminalCwd": "/workspace/volunteer-project",
         "fileActions": {
           "enabled": true,
           "createFile": true,
@@ -454,26 +473,35 @@
       "fixtureFiles": [
         {
           "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-snapshot\nmkdir -p release-snapshot\ngit -C release-snapshot init -q -b main\ngit -C release-snapshot config --local user.name \"ZoeSkoul Learner\"\ngit -C release-snapshot config --local user.email \"learner@zoeskoul.local\"\ncd release-snapshot\nprintf %s '# Volunteer Toolkit\n' > README.md\ncd ..\ncd release-snapshot\nmkdir -p docs\nprintf %s '# Draft Volunteer Guide\n' > docs/guide-draft.md\ncd ..\ncd release-snapshot\nmkdir -p docs\nprintf %s 'Old checklist\n' > docs/old-checklist.md\ncd ..\ngit -C release-snapshot add -A\ngit -C release-snapshot commit -q -m 'Add project baseline'\n",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- volunteer-project\nmkdir -p -- volunteer-project\ngit -C volunteer-project init -q -b main\ngit -C volunteer-project config --local user.name 'ZoeSkoul Learner'\ngit -C volunteer-project config --local user.email learner@zoeskoul.local\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n' > volunteer-project/assignments.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C volunteer-project commit -q -m 'Start volunteer project'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 10:00 AM\n' > volunteer-project/meeting-times.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C volunteer-project commit -q -m 'Add volunteer meeting times'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 10:00 AM\n' > volunteer-project/meeting-times.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-03T12:00:00Z GIT_COMMITTER_DATE=2026-01-03T12:00:00Z git -C volunteer-project commit -q -m 'Update volunteer assignments'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 9:30 AM\n' > volunteer-project/meeting-times.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-04T12:00:00Z GIT_COMMITTER_DATE=2026-01-04T12:00:00Z git -C volunteer-project commit -q -m 'Update volunteer meeting time'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project/generated\nprintf %s 'Generated volunteer report\n\nPrepared automatically from assignments.\n' > volunteer-project/generated/report.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 9:30 AM\n' > volunteer-project/meeting-times.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-05T12:00:00Z GIT_COMMITTER_DATE=2026-01-05T12:00:00Z git -C volunteer-project commit -q -m 'Add generated report'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project/generated\nprintf %s 'Generated volunteer report\n\nPrepared automatically from assignments.\n' > volunteer-project/generated/report.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 9:30 AM\n' > volunteer-project/meeting-times.txt\ngit -C volunteer-project add -A\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project/generated\nprintf %s 'Generated volunteer report\n\nPrepared automatically from assignments.\n' > volunteer-project/generated/report.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 9:30 AM\n' > volunteer-project/meeting-times.txt\n",
           "language": "bash",
           "readOnly": true
         },
         {
-          "path": "release-snapshot/README.md",
-          "content": "# Volunteer Toolkit\n",
+          "path": "volunteer-project/README.md",
+          "content": "# Volunteer Project\n\nAssignments and meeting times.\n",
           "language": "markdown"
         },
         {
-          "path": "release-snapshot/docs/guide-draft.md",
-          "content": "# Draft Volunteer Guide\n",
-          "language": "markdown"
+          "path": "volunteer-project/assignments.txt",
+          "content": "Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n",
+          "language": "text"
         },
         {
-          "path": "release-snapshot/docs/old-checklist.md",
-          "content": "Old checklist\n",
-          "language": "markdown"
+          "path": "volunteer-project/generated/report.txt",
+          "content": "Generated volunteer report\n\nPrepared automatically from assignments.\n",
+          "language": "text"
+        },
+        {
+          "path": "volunteer-project/meeting-times.txt",
+          "content": "Volunteer meeting times\n\nOrientation: Saturday 9:30 AM\n",
+          "language": "text"
         }
-      ]
+      ],
+      "tools": {
+        "defaultSurface": "results",
+        "compactDefaultSurface": "results"
+      }
     },
     {
       "id": "try-module-3-sketch2",
@@ -482,34 +510,39 @@
       "weight": 1,
       "messageBase": "topics.git--git-foundations--draft.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch2",
       "language": "bash",
-      "starterCode": "# Volunteer Toolkit\n",
+      "starterCode": "# Volunteer Project\n\nAssignments and meeting times.\n",
       "starterFiles": [
         {
-          "path": "release-snapshot/README.md",
-          "content": "# Volunteer Toolkit\n",
+          "path": "volunteer-project/README.md",
+          "content": "# Volunteer Project\n\nAssignments and meeting times.\n",
           "language": "markdown",
           "isEntry": true,
           "entry": true
         },
         {
-          "path": "release-snapshot/docs/old-checklist.md",
-          "content": "Old checklist\n",
-          "language": "markdown"
+          "path": "volunteer-project/generated/report.txt",
+          "content": "Generated volunteer report\n\nPrepared automatically from assignments.\n",
+          "language": "text"
         },
         {
-          "path": "release-snapshot/docs/volunteer-guide.md",
-          "content": "# Draft Volunteer Guide\n",
-          "language": "markdown"
+          "path": "volunteer-project/meeting-times.txt",
+          "content": "Volunteer meeting times\n\nOrientation: Saturday 9:30 AM\n",
+          "language": "text"
+        },
+        {
+          "path": "volunteer-project/roles.txt",
+          "content": "Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n",
+          "language": "text"
         }
       ],
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^git\\s+rm\\s+docs/old\\-checklist\\.md$",
+            "pattern": "^git\\s+rm\\s+meeting-times\\.txt$",
             "message": "@:topics.git--git-foundations--draft.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch2.terminalExpectations.requiredCommands.0.message"
           },
           {
-            "pattern": "^git\\s+diff\\s+(?:\\-\\-staged|\\-\\-cached)\\s+\\-\\-name\\-status$",
+            "pattern": "^git\\s+diff\\s+--staged\\s+--name-status$",
             "message": "@:topics.git--git-foundations--draft.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch2.terminalExpectations.requiredCommands.1.message"
           }
         ],
@@ -521,53 +554,63 @@
         ]
       },
       "hiddenShellCheck": {
-        "script": "set -eu\nrepo=release-snapshot\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" branch --show-current)\" = main ] || fail \"The repository is not on main.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = 1 ] || fail \"The repository has the wrong number of commits.\"\n[ -n \"$(git -C \"$repo\" status --porcelain)\" ] || fail \"The exercise change is missing.\"\nexpected=$(printf \"%s\\n\" README.md docs/volunteer-guide.md | sort)\nactual=$(git -C \"$repo\" ls-files | sort)\n[ \"$actual\" = \"$expected\" ] || fail \"The tracked file set is not correct.\"\nexpected_staged=$(printf \"%s\\n\" docs/old-checklist.md docs/volunteer-guide.md | sort)\nactual_staged=$(git -C \"$repo\" diff --cached --name-only | sort)\n[ \"$actual_staged\" = \"$expected_staged\" ] || fail \"The staged file set is not correct.\"\n[ ! -e \"$repo/docs/old-checklist.md\" ]",
+        "script": "set -eu\nrepo=volunteer-project\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" branch --show-current)\" = main ] || fail \"The repository is on the wrong branch.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = 5 ] || fail \"The repository has the wrong number of commits.\"\n[ \"$(git -C \"$repo\" config --local --get user.name)\" = 'ZoeSkoul Learner' ] || fail \"The repository-local author name is incorrect.\"\n[ \"$(git -C \"$repo\" config --local --get user.email)\" = learner@zoeskoul.local ] || fail \"The repository-local author email is incorrect.\"\nactual_status=$(git -C \"$repo\" status --porcelain=v1 --untracked-files=all)\n[ \"$actual_status\" = 'D  meeting-times.txt\nR  assignments.txt -> roles.txt' ] || fail \"The staged, unstaged, or untracked state is not correct yet.\"\nactual_tracked=$(git -C \"$repo\" ls-files)\n[ \"$actual_tracked\" = 'README.md\ngenerated/report.txt\nroles.txt' ] || fail \"The tracked file set is not correct yet.\"\nactual_subjects=$(git -C \"$repo\" log --format=%s --reverse)\n[ \"$actual_subjects\" = 'Start volunteer project\nAdd volunteer meeting times\nUpdate volunteer assignments\nUpdate volunteer meeting time\nAdd generated report' ] || fail \"The commit history does not match the required project story.\"\n[ -f \"$repo/README.md\" ] || fail \"The expected file README.md is missing.\"\n[ \"$(cat \"$repo/README.md\")\" = '# Volunteer Project\n\nAssignments and meeting times.' ] || fail \"The content of README.md is not correct yet.\"\n[ -f \"$repo/generated/report.txt\" ] || fail \"The expected file generated/report.txt is missing.\"\n[ \"$(cat \"$repo/generated/report.txt\")\" = 'Generated volunteer report\n\nPrepared automatically from assignments.' ] || fail \"The content of generated/report.txt is not correct yet.\"\n[ -f \"$repo/roles.txt\" ] || fail \"The expected file roles.txt is missing.\"\n[ \"$(cat \"$repo/roles.txt\")\" = 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley' ] || fail \"The content of roles.txt is not correct yet.\"",
         "timeoutMs": 15000
       },
       "workspace": {
         "language": "bash",
-        "entryFilePath": "release-snapshot/README.md",
-        "starterCode": "# Volunteer Toolkit\n",
+        "entryFilePath": "volunteer-project/README.md",
+        "starterCode": "# Volunteer Project\n\nAssignments and meeting times.\n",
         "starterFiles": [
           {
-            "path": "release-snapshot/README.md",
-            "content": "# Volunteer Toolkit\n",
+            "path": "volunteer-project/README.md",
+            "content": "# Volunteer Project\n\nAssignments and meeting times.\n",
             "language": "markdown",
             "isEntry": true,
             "entry": true
           },
           {
-            "path": "release-snapshot/docs/old-checklist.md",
-            "content": "Old checklist\n",
-            "language": "markdown"
+            "path": "volunteer-project/generated/report.txt",
+            "content": "Generated volunteer report\n\nPrepared automatically from assignments.\n",
+            "language": "text"
           },
           {
-            "path": "release-snapshot/docs/volunteer-guide.md",
-            "content": "# Draft Volunteer Guide\n",
-            "language": "markdown"
+            "path": "volunteer-project/meeting-times.txt",
+            "content": "Volunteer meeting times\n\nOrientation: Saturday 9:30 AM\n",
+            "language": "text"
+          },
+          {
+            "path": "volunteer-project/roles.txt",
+            "content": "Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n",
+            "language": "text"
           }
         ],
         "fixtureFiles": [
           {
             "path": ".zoeskoul/setup.sh",
-            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-snapshot\nmkdir -p release-snapshot\ngit -C release-snapshot init -q -b main\ngit -C release-snapshot config --local user.name \"ZoeSkoul Learner\"\ngit -C release-snapshot config --local user.email \"learner@zoeskoul.local\"\ncd release-snapshot\nprintf %s '# Volunteer Toolkit\n' > README.md\ncd ..\ncd release-snapshot\nmkdir -p docs\nprintf %s '# Draft Volunteer Guide\n' > docs/guide-draft.md\ncd ..\ncd release-snapshot\nmkdir -p docs\nprintf %s 'Old checklist\n' > docs/old-checklist.md\ncd ..\ngit -C release-snapshot add -A\ngit -C release-snapshot commit -q -m 'Add project baseline'\ngit -C release-snapshot mv docs/guide-draft.md docs/volunteer-guide.md\n",
+            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- volunteer-project\nmkdir -p -- volunteer-project\ngit -C volunteer-project init -q -b main\ngit -C volunteer-project config --local user.name 'ZoeSkoul Learner'\ngit -C volunteer-project config --local user.email learner@zoeskoul.local\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n' > volunteer-project/assignments.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C volunteer-project commit -q -m 'Start volunteer project'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 10:00 AM\n' > volunteer-project/meeting-times.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C volunteer-project commit -q -m 'Add volunteer meeting times'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 10:00 AM\n' > volunteer-project/meeting-times.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-03T12:00:00Z GIT_COMMITTER_DATE=2026-01-03T12:00:00Z git -C volunteer-project commit -q -m 'Update volunteer assignments'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 9:30 AM\n' > volunteer-project/meeting-times.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-04T12:00:00Z GIT_COMMITTER_DATE=2026-01-04T12:00:00Z git -C volunteer-project commit -q -m 'Update volunteer meeting time'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project/generated\nprintf %s 'Generated volunteer report\n\nPrepared automatically from assignments.\n' > volunteer-project/generated/report.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 9:30 AM\n' > volunteer-project/meeting-times.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-05T12:00:00Z GIT_COMMITTER_DATE=2026-01-05T12:00:00Z git -C volunteer-project commit -q -m 'Add generated report'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project/generated\nprintf %s 'Generated volunteer report\n\nPrepared automatically from assignments.\n' > volunteer-project/generated/report.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 9:30 AM\n' > volunteer-project/meeting-times.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n' > volunteer-project/roles.txt\ngit -C volunteer-project add -A\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project/generated\nprintf %s 'Generated volunteer report\n\nPrepared automatically from assignments.\n' > volunteer-project/generated/report.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 9:30 AM\n' > volunteer-project/meeting-times.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n' > volunteer-project/roles.txt\n",
             "language": "bash",
             "readOnly": true
           },
           {
-            "path": "release-snapshot/README.md",
-            "content": "# Volunteer Toolkit\n",
+            "path": "volunteer-project/README.md",
+            "content": "# Volunteer Project\n\nAssignments and meeting times.\n",
             "language": "markdown"
           },
           {
-            "path": "release-snapshot/docs/old-checklist.md",
-            "content": "Old checklist\n",
-            "language": "markdown"
+            "path": "volunteer-project/generated/report.txt",
+            "content": "Generated volunteer report\n\nPrepared automatically from assignments.\n",
+            "language": "text"
           },
           {
-            "path": "release-snapshot/docs/volunteer-guide.md",
-            "content": "# Draft Volunteer Guide\n",
-            "language": "markdown"
+            "path": "volunteer-project/meeting-times.txt",
+            "content": "Volunteer meeting times\n\nOrientation: Saturday 9:30 AM\n",
+            "language": "text"
+          },
+          {
+            "path": "volunteer-project/roles.txt",
+            "content": "Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n",
+            "language": "text"
           }
         ]
       },
@@ -582,7 +625,7 @@
         "runnerBackend": "pty",
         "layoutMode": "default",
         "terminalSessionScope": "exercise",
-        "terminalCwd": "/workspace/release-snapshot",
+        "terminalCwd": "/workspace/volunteer-project",
         "fileActions": {
           "enabled": true,
           "createFile": true,
@@ -607,7 +650,7 @@
         "runnerBackend": "pty",
         "layoutMode": "default",
         "terminalSessionScope": "exercise",
-        "terminalCwd": "/workspace/release-snapshot",
+        "terminalCwd": "/workspace/volunteer-project",
         "fileActions": {
           "enabled": true,
           "createFile": true,
@@ -630,26 +673,35 @@
       "fixtureFiles": [
         {
           "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-snapshot\nmkdir -p release-snapshot\ngit -C release-snapshot init -q -b main\ngit -C release-snapshot config --local user.name \"ZoeSkoul Learner\"\ngit -C release-snapshot config --local user.email \"learner@zoeskoul.local\"\ncd release-snapshot\nprintf %s '# Volunteer Toolkit\n' > README.md\ncd ..\ncd release-snapshot\nmkdir -p docs\nprintf %s '# Draft Volunteer Guide\n' > docs/guide-draft.md\ncd ..\ncd release-snapshot\nmkdir -p docs\nprintf %s 'Old checklist\n' > docs/old-checklist.md\ncd ..\ngit -C release-snapshot add -A\ngit -C release-snapshot commit -q -m 'Add project baseline'\ngit -C release-snapshot mv docs/guide-draft.md docs/volunteer-guide.md\n",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- volunteer-project\nmkdir -p -- volunteer-project\ngit -C volunteer-project init -q -b main\ngit -C volunteer-project config --local user.name 'ZoeSkoul Learner'\ngit -C volunteer-project config --local user.email learner@zoeskoul.local\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n' > volunteer-project/assignments.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C volunteer-project commit -q -m 'Start volunteer project'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 10:00 AM\n' > volunteer-project/meeting-times.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C volunteer-project commit -q -m 'Add volunteer meeting times'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 10:00 AM\n' > volunteer-project/meeting-times.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-03T12:00:00Z GIT_COMMITTER_DATE=2026-01-03T12:00:00Z git -C volunteer-project commit -q -m 'Update volunteer assignments'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 9:30 AM\n' > volunteer-project/meeting-times.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-04T12:00:00Z GIT_COMMITTER_DATE=2026-01-04T12:00:00Z git -C volunteer-project commit -q -m 'Update volunteer meeting time'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project/generated\nprintf %s 'Generated volunteer report\n\nPrepared automatically from assignments.\n' > volunteer-project/generated/report.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 9:30 AM\n' > volunteer-project/meeting-times.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-05T12:00:00Z GIT_COMMITTER_DATE=2026-01-05T12:00:00Z git -C volunteer-project commit -q -m 'Add generated report'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project/generated\nprintf %s 'Generated volunteer report\n\nPrepared automatically from assignments.\n' > volunteer-project/generated/report.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 9:30 AM\n' > volunteer-project/meeting-times.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n' > volunteer-project/roles.txt\ngit -C volunteer-project add -A\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project/generated\nprintf %s 'Generated volunteer report\n\nPrepared automatically from assignments.\n' > volunteer-project/generated/report.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 9:30 AM\n' > volunteer-project/meeting-times.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n' > volunteer-project/roles.txt\n",
           "language": "bash",
           "readOnly": true
         },
         {
-          "path": "release-snapshot/README.md",
-          "content": "# Volunteer Toolkit\n",
+          "path": "volunteer-project/README.md",
+          "content": "# Volunteer Project\n\nAssignments and meeting times.\n",
           "language": "markdown"
         },
         {
-          "path": "release-snapshot/docs/old-checklist.md",
-          "content": "Old checklist\n",
-          "language": "markdown"
+          "path": "volunteer-project/generated/report.txt",
+          "content": "Generated volunteer report\n\nPrepared automatically from assignments.\n",
+          "language": "text"
         },
         {
-          "path": "release-snapshot/docs/volunteer-guide.md",
-          "content": "# Draft Volunteer Guide\n",
-          "language": "markdown"
+          "path": "volunteer-project/meeting-times.txt",
+          "content": "Volunteer meeting times\n\nOrientation: Saturday 9:30 AM\n",
+          "language": "text"
+        },
+        {
+          "path": "volunteer-project/roles.txt",
+          "content": "Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n",
+          "language": "text"
         }
-      ]
+      ],
+      "tools": {
+        "defaultSurface": "results",
+        "compactDefaultSurface": "results"
+      }
     },
     {
       "id": "try-module-3-sketch3",
@@ -658,38 +710,38 @@
       "weight": 1,
       "messageBase": "topics.git--git-foundations--draft.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch3",
       "language": "bash",
-      "starterCode": "# Volunteer Toolkit\n",
+      "starterCode": "# Volunteer Project\n\nAssignments and meeting times.\n",
       "starterFiles": [
         {
-          "path": "release-snapshot/README.md",
-          "content": "# Volunteer Toolkit\n",
+          "path": "volunteer-project/README.md",
+          "content": "# Volunteer Project\n\nAssignments and meeting times.\n",
           "language": "markdown",
           "isEntry": true,
           "entry": true
         },
         {
-          "path": "release-snapshot/docs/volunteer-guide.md",
-          "content": "# Draft Volunteer Guide\n",
-          "language": "markdown"
+          "path": "volunteer-project/generated/report.txt",
+          "content": "Generated volunteer report\n\nPrepared automatically from assignments.\n",
+          "language": "text"
         },
         {
-          "path": "release-snapshot/preview.log",
-          "content": "local preview\n",
+          "path": "volunteer-project/roles.txt",
+          "content": "Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n",
           "language": "text"
         }
       ],
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^git\\s+add\\s+(?:\\-\\-\\s+)?\\.gitignore$",
+            "pattern": "^git\\s+add\\s+\\.gitignore$",
             "message": "@:topics.git--git-foundations--draft.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch3.terminalExpectations.requiredCommands.0.message"
           },
           {
-            "pattern": "^git\\s+status\\s+(?:\\-\\-short|\\-s)$",
+            "pattern": "^git\\s+rm\\s+--cached\\s+generated/report\\.txt$",
             "message": "@:topics.git--git-foundations--draft.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch3.terminalExpectations.requiredCommands.1.message"
           },
           {
-            "pattern": "^git\\s+diff\\s+(?:\\-\\-staged|\\-\\-cached)\\s+\\-\\-name\\-only$",
+            "pattern": "^git\\s+status\\s+--short\\s+--ignored$",
             "message": "@:topics.git--git-foundations--draft.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch3.terminalExpectations.requiredCommands.2.message"
           }
         ],
@@ -701,52 +753,52 @@
         ]
       },
       "hiddenShellCheck": {
-        "script": "set -eu\nrepo=release-snapshot\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" branch --show-current)\" = main ] || fail \"The repository is not on main.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = 1 ] || fail \"The repository has the wrong number of commits.\"\n[ -n \"$(git -C \"$repo\" status --porcelain)\" ] || fail \"The exercise change is missing.\"\nexpected=$(printf \"%s\\n\" .gitignore README.md docs/volunteer-guide.md | sort)\nactual=$(git -C \"$repo\" ls-files | sort)\n[ \"$actual\" = \"$expected\" ] || fail \"The tracked file set is not correct.\"\nexpected_staged=$(printf \"%s\\n\" .gitignore docs/old-checklist.md docs/volunteer-guide.md | sort)\nactual_staged=$(git -C \"$repo\" diff --cached --name-only | sort)\n[ \"$actual_staged\" = \"$expected_staged\" ] || fail \"The staged file set is not correct.\"\ngit -C \"$repo\" check-ignore -q preview.log",
+        "script": "set -eu\nrepo=volunteer-project\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" branch --show-current)\" = main ] || fail \"The repository is on the wrong branch.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = 5 ] || fail \"The repository has the wrong number of commits.\"\n[ \"$(git -C \"$repo\" config --local --get user.name)\" = 'ZoeSkoul Learner' ] || fail \"The repository-local author name is incorrect.\"\n[ \"$(git -C \"$repo\" config --local --get user.email)\" = learner@zoeskoul.local ] || fail \"The repository-local author email is incorrect.\"\nactual_status=$(git -C \"$repo\" status --porcelain=v1 --untracked-files=all)\n[ \"$actual_status\" = 'A  .gitignore\nD  generated/report.txt\nD  meeting-times.txt\nR  assignments.txt -> roles.txt' ] || fail \"The staged, unstaged, or untracked state is not correct yet.\"\nactual_tracked=$(git -C \"$repo\" ls-files)\n[ \"$actual_tracked\" = '.gitignore\nREADME.md\nroles.txt' ] || fail \"The tracked file set is not correct yet.\"\nactual_subjects=$(git -C \"$repo\" log --format=%s --reverse)\n[ \"$actual_subjects\" = 'Start volunteer project\nAdd volunteer meeting times\nUpdate volunteer assignments\nUpdate volunteer meeting time\nAdd generated report' ] || fail \"The commit history does not match the required project story.\"\n[ -f \"$repo/.gitignore\" ] || fail \"The expected file .gitignore is missing.\"\n[ \"$(cat \"$repo/.gitignore\")\" = generated/ ] || fail \"The content of .gitignore is not correct yet.\"\n[ -f \"$repo/README.md\" ] || fail \"The expected file README.md is missing.\"\n[ \"$(cat \"$repo/README.md\")\" = '# Volunteer Project\n\nAssignments and meeting times.' ] || fail \"The content of README.md is not correct yet.\"\n[ -f \"$repo/generated/report.txt\" ] || fail \"The expected file generated/report.txt is missing.\"\n[ \"$(cat \"$repo/generated/report.txt\")\" = 'Generated volunteer report\n\nPrepared automatically from assignments.' ] || fail \"The content of generated/report.txt is not correct yet.\"\n[ -f \"$repo/roles.txt\" ] || fail \"The expected file roles.txt is missing.\"\n[ \"$(cat \"$repo/roles.txt\")\" = 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley' ] || fail \"The content of roles.txt is not correct yet.\"",
         "timeoutMs": 15000
       },
       "workspace": {
         "language": "bash",
-        "entryFilePath": "release-snapshot/README.md",
-        "starterCode": "# Volunteer Toolkit\n",
+        "entryFilePath": "volunteer-project/README.md",
+        "starterCode": "# Volunteer Project\n\nAssignments and meeting times.\n",
         "starterFiles": [
           {
-            "path": "release-snapshot/README.md",
-            "content": "# Volunteer Toolkit\n",
+            "path": "volunteer-project/README.md",
+            "content": "# Volunteer Project\n\nAssignments and meeting times.\n",
             "language": "markdown",
             "isEntry": true,
             "entry": true
           },
           {
-            "path": "release-snapshot/docs/volunteer-guide.md",
-            "content": "# Draft Volunteer Guide\n",
-            "language": "markdown"
+            "path": "volunteer-project/generated/report.txt",
+            "content": "Generated volunteer report\n\nPrepared automatically from assignments.\n",
+            "language": "text"
           },
           {
-            "path": "release-snapshot/preview.log",
-            "content": "local preview\n",
+            "path": "volunteer-project/roles.txt",
+            "content": "Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n",
             "language": "text"
           }
         ],
         "fixtureFiles": [
           {
             "path": ".zoeskoul/setup.sh",
-            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-snapshot\nmkdir -p release-snapshot\ngit -C release-snapshot init -q -b main\ngit -C release-snapshot config --local user.name \"ZoeSkoul Learner\"\ngit -C release-snapshot config --local user.email \"learner@zoeskoul.local\"\ncd release-snapshot\nprintf %s '# Volunteer Toolkit\n' > README.md\ncd ..\ncd release-snapshot\nmkdir -p docs\nprintf %s '# Draft Volunteer Guide\n' > docs/guide-draft.md\ncd ..\ncd release-snapshot\nmkdir -p docs\nprintf %s 'Old checklist\n' > docs/old-checklist.md\ncd ..\ngit -C release-snapshot add -A\ngit -C release-snapshot commit -q -m 'Add project baseline'\ncd release-snapshot\nprintf %s 'local preview\n' > preview.log\ncd ..\ngit -C release-snapshot mv docs/guide-draft.md docs/volunteer-guide.md\ngit -C release-snapshot rm -q docs/old-checklist.md\n",
+            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- volunteer-project\nmkdir -p -- volunteer-project\ngit -C volunteer-project init -q -b main\ngit -C volunteer-project config --local user.name 'ZoeSkoul Learner'\ngit -C volunteer-project config --local user.email learner@zoeskoul.local\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n' > volunteer-project/assignments.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C volunteer-project commit -q -m 'Start volunteer project'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 10:00 AM\n' > volunteer-project/meeting-times.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C volunteer-project commit -q -m 'Add volunteer meeting times'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 10:00 AM\n' > volunteer-project/meeting-times.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-03T12:00:00Z GIT_COMMITTER_DATE=2026-01-03T12:00:00Z git -C volunteer-project commit -q -m 'Update volunteer assignments'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 9:30 AM\n' > volunteer-project/meeting-times.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-04T12:00:00Z GIT_COMMITTER_DATE=2026-01-04T12:00:00Z git -C volunteer-project commit -q -m 'Update volunteer meeting time'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project/generated\nprintf %s 'Generated volunteer report\n\nPrepared automatically from assignments.\n' > volunteer-project/generated/report.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 9:30 AM\n' > volunteer-project/meeting-times.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-05T12:00:00Z GIT_COMMITTER_DATE=2026-01-05T12:00:00Z git -C volunteer-project commit -q -m 'Add generated report'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project/generated\nprintf %s 'Generated volunteer report\n\nPrepared automatically from assignments.\n' > volunteer-project/generated/report.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n' > volunteer-project/roles.txt\ngit -C volunteer-project add -A\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project/generated\nprintf %s 'Generated volunteer report\n\nPrepared automatically from assignments.\n' > volunteer-project/generated/report.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n' > volunteer-project/roles.txt\n",
             "language": "bash",
             "readOnly": true
           },
           {
-            "path": "release-snapshot/README.md",
-            "content": "# Volunteer Toolkit\n",
+            "path": "volunteer-project/README.md",
+            "content": "# Volunteer Project\n\nAssignments and meeting times.\n",
             "language": "markdown"
           },
           {
-            "path": "release-snapshot/docs/volunteer-guide.md",
-            "content": "# Draft Volunteer Guide\n",
-            "language": "markdown"
+            "path": "volunteer-project/generated/report.txt",
+            "content": "Generated volunteer report\n\nPrepared automatically from assignments.\n",
+            "language": "text"
           },
           {
-            "path": "release-snapshot/preview.log",
-            "content": "local preview\n",
+            "path": "volunteer-project/roles.txt",
+            "content": "Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n",
             "language": "text"
           }
         ]
@@ -762,7 +814,7 @@
         "runnerBackend": "pty",
         "layoutMode": "default",
         "terminalSessionScope": "exercise",
-        "terminalCwd": "/workspace/release-snapshot",
+        "terminalCwd": "/workspace/volunteer-project",
         "fileActions": {
           "enabled": true,
           "createFile": true,
@@ -787,7 +839,7 @@
         "runnerBackend": "pty",
         "layoutMode": "default",
         "terminalSessionScope": "exercise",
-        "terminalCwd": "/workspace/release-snapshot",
+        "terminalCwd": "/workspace/volunteer-project",
         "fileActions": {
           "enabled": true,
           "createFile": true,
@@ -810,23 +862,23 @@
       "fixtureFiles": [
         {
           "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-snapshot\nmkdir -p release-snapshot\ngit -C release-snapshot init -q -b main\ngit -C release-snapshot config --local user.name \"ZoeSkoul Learner\"\ngit -C release-snapshot config --local user.email \"learner@zoeskoul.local\"\ncd release-snapshot\nprintf %s '# Volunteer Toolkit\n' > README.md\ncd ..\ncd release-snapshot\nmkdir -p docs\nprintf %s '# Draft Volunteer Guide\n' > docs/guide-draft.md\ncd ..\ncd release-snapshot\nmkdir -p docs\nprintf %s 'Old checklist\n' > docs/old-checklist.md\ncd ..\ngit -C release-snapshot add -A\ngit -C release-snapshot commit -q -m 'Add project baseline'\ncd release-snapshot\nprintf %s 'local preview\n' > preview.log\ncd ..\ngit -C release-snapshot mv docs/guide-draft.md docs/volunteer-guide.md\ngit -C release-snapshot rm -q docs/old-checklist.md\n",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- volunteer-project\nmkdir -p -- volunteer-project\ngit -C volunteer-project init -q -b main\ngit -C volunteer-project config --local user.name 'ZoeSkoul Learner'\ngit -C volunteer-project config --local user.email learner@zoeskoul.local\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n' > volunteer-project/assignments.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C volunteer-project commit -q -m 'Start volunteer project'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 10:00 AM\n' > volunteer-project/meeting-times.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C volunteer-project commit -q -m 'Add volunteer meeting times'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 10:00 AM\n' > volunteer-project/meeting-times.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-03T12:00:00Z GIT_COMMITTER_DATE=2026-01-03T12:00:00Z git -C volunteer-project commit -q -m 'Update volunteer assignments'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 9:30 AM\n' > volunteer-project/meeting-times.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-04T12:00:00Z GIT_COMMITTER_DATE=2026-01-04T12:00:00Z git -C volunteer-project commit -q -m 'Update volunteer meeting time'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project/generated\nprintf %s 'Generated volunteer report\n\nPrepared automatically from assignments.\n' > volunteer-project/generated/report.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 9:30 AM\n' > volunteer-project/meeting-times.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-05T12:00:00Z GIT_COMMITTER_DATE=2026-01-05T12:00:00Z git -C volunteer-project commit -q -m 'Add generated report'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project/generated\nprintf %s 'Generated volunteer report\n\nPrepared automatically from assignments.\n' > volunteer-project/generated/report.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n' > volunteer-project/roles.txt\ngit -C volunteer-project add -A\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project/generated\nprintf %s 'Generated volunteer report\n\nPrepared automatically from assignments.\n' > volunteer-project/generated/report.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n' > volunteer-project/roles.txt\n",
           "language": "bash",
           "readOnly": true
         },
         {
-          "path": "release-snapshot/README.md",
-          "content": "# Volunteer Toolkit\n",
+          "path": "volunteer-project/README.md",
+          "content": "# Volunteer Project\n\nAssignments and meeting times.\n",
           "language": "markdown"
         },
         {
-          "path": "release-snapshot/docs/volunteer-guide.md",
-          "content": "# Draft Volunteer Guide\n",
-          "language": "markdown"
+          "path": "volunteer-project/generated/report.txt",
+          "content": "Generated volunteer report\n\nPrepared automatically from assignments.\n",
+          "language": "text"
         },
         {
-          "path": "release-snapshot/preview.log",
-          "content": "local preview\n",
+          "path": "volunteer-project/roles.txt",
+          "content": "Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n",
           "language": "text"
         }
       ],
@@ -842,40 +894,48 @@
       "weight": 1,
       "messageBase": "topics.git--git-foundations--draft.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch4",
       "language": "bash",
-      "starterCode": "Accidental rewrite\n",
+      "starterCode": "# Volunteer Project\n\nAssignments and meeting times.\n",
       "starterFiles": [
         {
-          "path": "release-snapshot/.gitignore",
-          "content": "*.log\n",
-          "language": "text"
-        },
-        {
-          "path": "release-snapshot/README.md",
-          "content": "Accidental rewrite\n",
+          "path": "volunteer-project/README.md",
+          "content": "# Volunteer Project\n\nAssignments and meeting times.\n",
           "language": "markdown",
           "isEntry": true,
           "entry": true
         },
         {
-          "path": "release-snapshot/docs/volunteer-guide.md",
-          "content": "# Draft Volunteer Guide\n",
-          "language": "markdown"
+          "path": "volunteer-project/.gitignore",
+          "content": "generated/\n",
+          "language": "text"
         },
         {
-          "path": "release-snapshot/preview.log",
-          "content": "local preview\n",
+          "path": "volunteer-project/generated/report.txt",
+          "content": "Generated volunteer report\n\nPrepared automatically from assignments.\n",
+          "language": "text"
+        },
+        {
+          "path": "volunteer-project/roles.txt",
+          "content": "Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n",
           "language": "text"
         }
       ],
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^git\\s+restore\\s+README\\.md$",
+            "pattern": "^git\\s+add\\s+README\\.md$",
             "message": "@:topics.git--git-foundations--draft.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch4.terminalExpectations.requiredCommands.0.message"
           },
           {
-            "pattern": "^git\\s+status\\s+(?:\\-\\-short|\\-s)$",
+            "pattern": "^git\\s+restore\\s+--staged\\s+README\\.md$",
             "message": "@:topics.git--git-foundations--draft.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch4.terminalExpectations.requiredCommands.1.message"
+          },
+          {
+            "pattern": "^git\\s+restore\\s+README\\.md$",
+            "message": "@:topics.git--git-foundations--draft.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch4.terminalExpectations.requiredCommands.2.message"
+          },
+          {
+            "pattern": "^git\\s+diff\\s+--staged\\s+--name-status$",
+            "message": "@:topics.git--git-foundations--draft.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch4.terminalExpectations.requiredCommands.3.message"
           }
         ],
         "forbiddenCommands": [
@@ -886,62 +946,62 @@
         ]
       },
       "hiddenShellCheck": {
-        "script": "set -eu\nrepo=release-snapshot\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" branch --show-current)\" = main ] || fail \"The repository is not on main.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = 1 ] || fail \"The repository has the wrong number of commits.\"\n[ -n \"$(git -C \"$repo\" status --porcelain)\" ] || fail \"The exercise change is missing.\"\nexpected=$(printf \"%s\\n\" .gitignore README.md docs/volunteer-guide.md | sort)\nactual=$(git -C \"$repo\" ls-files | sort)\n[ \"$actual\" = \"$expected\" ] || fail \"The tracked file set is not correct.\"\nexpected_staged=$(printf \"%s\\n\" .gitignore docs/old-checklist.md docs/volunteer-guide.md | sort)\nactual_staged=$(git -C \"$repo\" diff --cached --name-only | sort)\n[ \"$actual_staged\" = \"$expected_staged\" ] || fail \"The staged file set is not correct.\"\ngrep -Fxq \"# Volunteer Toolkit\" \"$repo/README.md\"\ngit -C \"$repo\" check-ignore -q preview.log",
+        "script": "set -eu\nrepo=volunteer-project\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" branch --show-current)\" = main ] || fail \"The repository is on the wrong branch.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = 5 ] || fail \"The repository has the wrong number of commits.\"\n[ \"$(git -C \"$repo\" config --local --get user.name)\" = 'ZoeSkoul Learner' ] || fail \"The repository-local author name is incorrect.\"\n[ \"$(git -C \"$repo\" config --local --get user.email)\" = learner@zoeskoul.local ] || fail \"The repository-local author email is incorrect.\"\nactual_status=$(git -C \"$repo\" status --porcelain=v1 --untracked-files=all)\n[ \"$actual_status\" = 'A  .gitignore\nD  generated/report.txt\nD  meeting-times.txt\nR  assignments.txt -> roles.txt' ] || fail \"The staged, unstaged, or untracked state is not correct yet.\"\nactual_tracked=$(git -C \"$repo\" ls-files)\n[ \"$actual_tracked\" = '.gitignore\nREADME.md\nroles.txt' ] || fail \"The tracked file set is not correct yet.\"\nactual_subjects=$(git -C \"$repo\" log --format=%s --reverse)\n[ \"$actual_subjects\" = 'Start volunteer project\nAdd volunteer meeting times\nUpdate volunteer assignments\nUpdate volunteer meeting time\nAdd generated report' ] || fail \"The commit history does not match the required project story.\"\n[ -f \"$repo/.gitignore\" ] || fail \"The expected file .gitignore is missing.\"\n[ \"$(cat \"$repo/.gitignore\")\" = generated/ ] || fail \"The content of .gitignore is not correct yet.\"\n[ -f \"$repo/README.md\" ] || fail \"The expected file README.md is missing.\"\n[ \"$(cat \"$repo/README.md\")\" = '# Volunteer Project\n\nAssignments and meeting times.' ] || fail \"The content of README.md is not correct yet.\"\n[ -f \"$repo/generated/report.txt\" ] || fail \"The expected file generated/report.txt is missing.\"\n[ \"$(cat \"$repo/generated/report.txt\")\" = 'Generated volunteer report\n\nPrepared automatically from assignments.' ] || fail \"The content of generated/report.txt is not correct yet.\"\n[ -f \"$repo/roles.txt\" ] || fail \"The expected file roles.txt is missing.\"\n[ \"$(cat \"$repo/roles.txt\")\" = 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley' ] || fail \"The content of roles.txt is not correct yet.\"",
         "timeoutMs": 15000
       },
       "workspace": {
         "language": "bash",
-        "entryFilePath": "release-snapshot/README.md",
-        "starterCode": "Accidental rewrite\n",
+        "entryFilePath": "volunteer-project/README.md",
+        "starterCode": "# Volunteer Project\n\nAssignments and meeting times.\n",
         "starterFiles": [
           {
-            "path": "release-snapshot/.gitignore",
-            "content": "*.log\n",
-            "language": "text"
-          },
-          {
-            "path": "release-snapshot/README.md",
-            "content": "Accidental rewrite\n",
+            "path": "volunteer-project/README.md",
+            "content": "# Volunteer Project\n\nAssignments and meeting times.\n",
             "language": "markdown",
             "isEntry": true,
             "entry": true
           },
           {
-            "path": "release-snapshot/docs/volunteer-guide.md",
-            "content": "# Draft Volunteer Guide\n",
-            "language": "markdown"
+            "path": "volunteer-project/.gitignore",
+            "content": "generated/\n",
+            "language": "text"
           },
           {
-            "path": "release-snapshot/preview.log",
-            "content": "local preview\n",
+            "path": "volunteer-project/generated/report.txt",
+            "content": "Generated volunteer report\n\nPrepared automatically from assignments.\n",
+            "language": "text"
+          },
+          {
+            "path": "volunteer-project/roles.txt",
+            "content": "Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n",
             "language": "text"
           }
         ],
         "fixtureFiles": [
           {
             "path": ".zoeskoul/setup.sh",
-            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-snapshot\nmkdir -p release-snapshot\ngit -C release-snapshot init -q -b main\ngit -C release-snapshot config --local user.name \"ZoeSkoul Learner\"\ngit -C release-snapshot config --local user.email \"learner@zoeskoul.local\"\ncd release-snapshot\nprintf %s '# Volunteer Toolkit\n' > README.md\ncd ..\ncd release-snapshot\nmkdir -p docs\nprintf %s '# Draft Volunteer Guide\n' > docs/guide-draft.md\ncd ..\ncd release-snapshot\nmkdir -p docs\nprintf %s 'Old checklist\n' > docs/old-checklist.md\ncd ..\ngit -C release-snapshot add -A\ngit -C release-snapshot commit -q -m 'Add project baseline'\ncd release-snapshot\nprintf %s 'local preview\n' > preview.log\ncd ..\ncd release-snapshot\nprintf %s 'Accidental rewrite\n' > README.md\ncd ..\ncd release-snapshot\nprintf %s '*.log\n' > .gitignore\ncd ..\ngit -C release-snapshot mv docs/guide-draft.md docs/volunteer-guide.md\ngit -C release-snapshot rm -q docs/old-checklist.md\ngit -C release-snapshot add .gitignore\n",
+            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- volunteer-project\nmkdir -p -- volunteer-project\ngit -C volunteer-project init -q -b main\ngit -C volunteer-project config --local user.name 'ZoeSkoul Learner'\ngit -C volunteer-project config --local user.email learner@zoeskoul.local\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n' > volunteer-project/assignments.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C volunteer-project commit -q -m 'Start volunteer project'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 10:00 AM\n' > volunteer-project/meeting-times.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C volunteer-project commit -q -m 'Add volunteer meeting times'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 10:00 AM\n' > volunteer-project/meeting-times.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-03T12:00:00Z GIT_COMMITTER_DATE=2026-01-03T12:00:00Z git -C volunteer-project commit -q -m 'Update volunteer assignments'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 9:30 AM\n' > volunteer-project/meeting-times.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-04T12:00:00Z GIT_COMMITTER_DATE=2026-01-04T12:00:00Z git -C volunteer-project commit -q -m 'Update volunteer meeting time'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project/generated\nprintf %s 'Generated volunteer report\n\nPrepared automatically from assignments.\n' > volunteer-project/generated/report.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 9:30 AM\n' > volunteer-project/meeting-times.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-05T12:00:00Z GIT_COMMITTER_DATE=2026-01-05T12:00:00Z git -C volunteer-project commit -q -m 'Add generated report'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s 'generated/\n' > volunteer-project/.gitignore\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n' > volunteer-project/roles.txt\ngit -C volunteer-project add -A\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s 'generated/\n' > volunteer-project/.gitignore\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project/generated\nprintf %s 'Generated volunteer report\n\nPrepared automatically from assignments.\n' > volunteer-project/generated/report.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n' > volunteer-project/roles.txt\n",
             "language": "bash",
             "readOnly": true
           },
           {
-            "path": "release-snapshot/.gitignore",
-            "content": "*.log\n",
+            "path": "volunteer-project/README.md",
+            "content": "# Volunteer Project\n\nAssignments and meeting times.\n",
+            "language": "markdown"
+          },
+          {
+            "path": "volunteer-project/.gitignore",
+            "content": "generated/\n",
             "language": "text"
           },
           {
-            "path": "release-snapshot/README.md",
-            "content": "Accidental rewrite\n",
-            "language": "markdown"
+            "path": "volunteer-project/generated/report.txt",
+            "content": "Generated volunteer report\n\nPrepared automatically from assignments.\n",
+            "language": "text"
           },
           {
-            "path": "release-snapshot/docs/volunteer-guide.md",
-            "content": "# Draft Volunteer Guide\n",
-            "language": "markdown"
-          },
-          {
-            "path": "release-snapshot/preview.log",
-            "content": "local preview\n",
+            "path": "volunteer-project/roles.txt",
+            "content": "Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n",
             "language": "text"
           }
         ]
@@ -957,7 +1017,7 @@
         "runnerBackend": "pty",
         "layoutMode": "default",
         "terminalSessionScope": "exercise",
-        "terminalCwd": "/workspace/release-snapshot",
+        "terminalCwd": "/workspace/volunteer-project",
         "fileActions": {
           "enabled": true,
           "createFile": true,
@@ -982,7 +1042,7 @@
         "runnerBackend": "pty",
         "layoutMode": "default",
         "terminalSessionScope": "exercise",
-        "terminalCwd": "/workspace/release-snapshot",
+        "terminalCwd": "/workspace/volunteer-project",
         "fileActions": {
           "enabled": true,
           "createFile": true,
@@ -1005,31 +1065,35 @@
       "fixtureFiles": [
         {
           "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-snapshot\nmkdir -p release-snapshot\ngit -C release-snapshot init -q -b main\ngit -C release-snapshot config --local user.name \"ZoeSkoul Learner\"\ngit -C release-snapshot config --local user.email \"learner@zoeskoul.local\"\ncd release-snapshot\nprintf %s '# Volunteer Toolkit\n' > README.md\ncd ..\ncd release-snapshot\nmkdir -p docs\nprintf %s '# Draft Volunteer Guide\n' > docs/guide-draft.md\ncd ..\ncd release-snapshot\nmkdir -p docs\nprintf %s 'Old checklist\n' > docs/old-checklist.md\ncd ..\ngit -C release-snapshot add -A\ngit -C release-snapshot commit -q -m 'Add project baseline'\ncd release-snapshot\nprintf %s 'local preview\n' > preview.log\ncd ..\ncd release-snapshot\nprintf %s 'Accidental rewrite\n' > README.md\ncd ..\ncd release-snapshot\nprintf %s '*.log\n' > .gitignore\ncd ..\ngit -C release-snapshot mv docs/guide-draft.md docs/volunteer-guide.md\ngit -C release-snapshot rm -q docs/old-checklist.md\ngit -C release-snapshot add .gitignore\n",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- volunteer-project\nmkdir -p -- volunteer-project\ngit -C volunteer-project init -q -b main\ngit -C volunteer-project config --local user.name 'ZoeSkoul Learner'\ngit -C volunteer-project config --local user.email learner@zoeskoul.local\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n' > volunteer-project/assignments.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C volunteer-project commit -q -m 'Start volunteer project'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 10:00 AM\n' > volunteer-project/meeting-times.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C volunteer-project commit -q -m 'Add volunteer meeting times'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 10:00 AM\n' > volunteer-project/meeting-times.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-03T12:00:00Z GIT_COMMITTER_DATE=2026-01-03T12:00:00Z git -C volunteer-project commit -q -m 'Update volunteer assignments'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 9:30 AM\n' > volunteer-project/meeting-times.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-04T12:00:00Z GIT_COMMITTER_DATE=2026-01-04T12:00:00Z git -C volunteer-project commit -q -m 'Update volunteer meeting time'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project/generated\nprintf %s 'Generated volunteer report\n\nPrepared automatically from assignments.\n' > volunteer-project/generated/report.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 9:30 AM\n' > volunteer-project/meeting-times.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-05T12:00:00Z GIT_COMMITTER_DATE=2026-01-05T12:00:00Z git -C volunteer-project commit -q -m 'Add generated report'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s 'generated/\n' > volunteer-project/.gitignore\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n' > volunteer-project/roles.txt\ngit -C volunteer-project add -A\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s 'generated/\n' > volunteer-project/.gitignore\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project/generated\nprintf %s 'Generated volunteer report\n\nPrepared automatically from assignments.\n' > volunteer-project/generated/report.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n' > volunteer-project/roles.txt\n",
           "language": "bash",
           "readOnly": true
         },
         {
-          "path": "release-snapshot/.gitignore",
-          "content": "*.log\n",
+          "path": "volunteer-project/README.md",
+          "content": "# Volunteer Project\n\nAssignments and meeting times.\n",
+          "language": "markdown"
+        },
+        {
+          "path": "volunteer-project/.gitignore",
+          "content": "generated/\n",
           "language": "text"
         },
         {
-          "path": "release-snapshot/README.md",
-          "content": "Accidental rewrite\n",
-          "language": "markdown"
+          "path": "volunteer-project/generated/report.txt",
+          "content": "Generated volunteer report\n\nPrepared automatically from assignments.\n",
+          "language": "text"
         },
         {
-          "path": "release-snapshot/docs/volunteer-guide.md",
-          "content": "# Draft Volunteer Guide\n",
-          "language": "markdown"
-        },
-        {
-          "path": "release-snapshot/preview.log",
-          "content": "local preview\n",
+          "path": "volunteer-project/roles.txt",
+          "content": "Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n",
           "language": "text"
         }
-      ]
+      ],
+      "tools": {
+        "defaultSurface": "editor",
+        "compactDefaultSurface": "editor"
+      }
     },
     {
       "id": "try-module-3-sketch5",
@@ -1038,44 +1102,48 @@
       "weight": 1,
       "messageBase": "topics.git--git-foundations--draft.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch5",
       "language": "bash",
-      "starterCode": "# Volunteer Toolkit\n",
+      "starterCode": "# Volunteer Project\n\nAssignments and meeting times.\n",
       "starterFiles": [
         {
-          "path": "release-snapshot/.gitignore",
-          "content": "*.log\n",
-          "language": "text"
-        },
-        {
-          "path": "release-snapshot/README.md",
-          "content": "# Volunteer Toolkit\n",
+          "path": "volunteer-project/README.md",
+          "content": "# Volunteer Project\n\nAssignments and meeting times.\n",
           "language": "markdown",
           "isEntry": true,
           "entry": true
         },
         {
-          "path": "release-snapshot/docs/volunteer-guide.md",
-          "content": "# Draft Volunteer Guide\n",
-          "language": "markdown"
+          "path": "volunteer-project/.gitignore",
+          "content": "generated/\n",
+          "language": "text"
         },
         {
-          "path": "release-snapshot/preview.log",
-          "content": "local preview\n",
+          "path": "volunteer-project/generated/report.txt",
+          "content": "Generated volunteer report\n\nPrepared automatically from assignments.\n",
+          "language": "text"
+        },
+        {
+          "path": "volunteer-project/roles.txt",
+          "content": "Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n",
           "language": "text"
         }
       ],
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^git\\s+commit\\s+\\-m\\s+(?:\"Prepare clean volunteer release\"|\\'Prepare clean volunteer release\\')$",
+            "pattern": "^git\\s+commit\\s+-m\\s+.+$",
             "message": "@:topics.git--git-foundations--draft.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch5.terminalExpectations.requiredCommands.0.message"
           },
           {
-            "pattern": "^git\\s+log\\s+\\-\\-oneline$",
+            "pattern": "^git\\s+log\\s+--oneline$",
             "message": "@:topics.git--git-foundations--draft.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch5.terminalExpectations.requiredCommands.1.message"
           },
           {
-            "pattern": "^git\\s+status\\s+(?:\\-\\-short|\\-s)$",
+            "pattern": "^git\\s+show\\s+--stat\\s+--oneline\\s+HEAD$",
             "message": "@:topics.git--git-foundations--draft.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch5.terminalExpectations.requiredCommands.2.message"
+          },
+          {
+            "pattern": "^git\\s+status\\s+--short$",
+            "message": "@:topics.git--git-foundations--draft.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch5.terminalExpectations.requiredCommands.3.message"
           }
         ],
         "forbiddenCommands": [
@@ -1086,62 +1154,62 @@
         ]
       },
       "hiddenShellCheck": {
-        "script": "set -eu\nrepo=release-snapshot\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" branch --show-current)\" = main ] || fail \"The repository is not on main.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = 2 ] || fail \"The repository has the wrong number of commits.\"\n[ -z \"$(git -C \"$repo\" status --porcelain)\" ] || fail \"The working tree is not clean.\"\nexpected=$(printf \"%s\\n\" .gitignore README.md docs/volunteer-guide.md | sort)\nactual=$(git -C \"$repo\" ls-files | sort)\n[ \"$actual\" = \"$expected\" ] || fail \"The tracked file set is not correct.\"\n[ \"$(git -C \"$repo\" log -1 --format=%s)\" = 'Prepare clean volunteer release' ] || fail \"The latest commit message is not correct.\"\ngit -C \"$repo\" check-ignore -q preview.log",
+        "script": "set -eu\nrepo=volunteer-project\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" branch --show-current)\" = main ] || fail \"The repository is on the wrong branch.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = 6 ] || fail \"The repository has the wrong number of commits.\"\n[ \"$(git -C \"$repo\" config --local --get user.name)\" = 'ZoeSkoul Learner' ] || fail \"The repository-local author name is incorrect.\"\n[ \"$(git -C \"$repo\" config --local --get user.email)\" = learner@zoeskoul.local ] || fail \"The repository-local author email is incorrect.\"\nactual_status=$(git -C \"$repo\" status --porcelain=v1 --untracked-files=all)\n[ \"$actual_status\" = '' ] || fail \"The staged, unstaged, or untracked state is not correct yet.\"\nactual_tracked=$(git -C \"$repo\" ls-files)\n[ \"$actual_tracked\" = '.gitignore\nREADME.md\nroles.txt' ] || fail \"The tracked file set is not correct yet.\"\nactual_subjects=$(git -C \"$repo\" log --format=%s --reverse)\n[ \"$actual_subjects\" = 'Start volunteer project\nAdd volunteer meeting times\nUpdate volunteer assignments\nUpdate volunteer meeting time\nAdd generated report\nPrepare volunteer project handoff' ] || fail \"The commit history does not match the required project story.\"\n[ -f \"$repo/.gitignore\" ] || fail \"The expected file .gitignore is missing.\"\n[ \"$(cat \"$repo/.gitignore\")\" = generated/ ] || fail \"The content of .gitignore is not correct yet.\"\n[ -f \"$repo/README.md\" ] || fail \"The expected file README.md is missing.\"\n[ \"$(cat \"$repo/README.md\")\" = '# Volunteer Project\n\nAssignments and meeting times.' ] || fail \"The content of README.md is not correct yet.\"\n[ -f \"$repo/generated/report.txt\" ] || fail \"The expected file generated/report.txt is missing.\"\n[ \"$(cat \"$repo/generated/report.txt\")\" = 'Generated volunteer report\n\nPrepared automatically from assignments.' ] || fail \"The content of generated/report.txt is not correct yet.\"\n[ -f \"$repo/roles.txt\" ] || fail \"The expected file roles.txt is missing.\"\n[ \"$(cat \"$repo/roles.txt\")\" = 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley' ] || fail \"The content of roles.txt is not correct yet.\"",
         "timeoutMs": 15000
       },
       "workspace": {
         "language": "bash",
-        "entryFilePath": "release-snapshot/README.md",
-        "starterCode": "# Volunteer Toolkit\n",
+        "entryFilePath": "volunteer-project/README.md",
+        "starterCode": "# Volunteer Project\n\nAssignments and meeting times.\n",
         "starterFiles": [
           {
-            "path": "release-snapshot/.gitignore",
-            "content": "*.log\n",
-            "language": "text"
-          },
-          {
-            "path": "release-snapshot/README.md",
-            "content": "# Volunteer Toolkit\n",
+            "path": "volunteer-project/README.md",
+            "content": "# Volunteer Project\n\nAssignments and meeting times.\n",
             "language": "markdown",
             "isEntry": true,
             "entry": true
           },
           {
-            "path": "release-snapshot/docs/volunteer-guide.md",
-            "content": "# Draft Volunteer Guide\n",
-            "language": "markdown"
+            "path": "volunteer-project/.gitignore",
+            "content": "generated/\n",
+            "language": "text"
           },
           {
-            "path": "release-snapshot/preview.log",
-            "content": "local preview\n",
+            "path": "volunteer-project/generated/report.txt",
+            "content": "Generated volunteer report\n\nPrepared automatically from assignments.\n",
+            "language": "text"
+          },
+          {
+            "path": "volunteer-project/roles.txt",
+            "content": "Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n",
             "language": "text"
           }
         ],
         "fixtureFiles": [
           {
             "path": ".zoeskoul/setup.sh",
-            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-snapshot\nmkdir -p release-snapshot\ngit -C release-snapshot init -q -b main\ngit -C release-snapshot config --local user.name \"ZoeSkoul Learner\"\ngit -C release-snapshot config --local user.email \"learner@zoeskoul.local\"\ncd release-snapshot\nprintf %s '# Volunteer Toolkit\n' > README.md\ncd ..\ncd release-snapshot\nmkdir -p docs\nprintf %s '# Draft Volunteer Guide\n' > docs/guide-draft.md\ncd ..\ncd release-snapshot\nmkdir -p docs\nprintf %s 'Old checklist\n' > docs/old-checklist.md\ncd ..\ngit -C release-snapshot add -A\ngit -C release-snapshot commit -q -m 'Add project baseline'\ncd release-snapshot\nprintf %s 'local preview\n' > preview.log\ncd ..\ncd release-snapshot\nprintf %s '*.log\n' > .gitignore\ncd ..\ngit -C release-snapshot mv docs/guide-draft.md docs/volunteer-guide.md\ngit -C release-snapshot rm -q docs/old-checklist.md\ngit -C release-snapshot add .gitignore\n",
+            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- volunteer-project\nmkdir -p -- volunteer-project\ngit -C volunteer-project init -q -b main\ngit -C volunteer-project config --local user.name 'ZoeSkoul Learner'\ngit -C volunteer-project config --local user.email learner@zoeskoul.local\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n' > volunteer-project/assignments.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C volunteer-project commit -q -m 'Start volunteer project'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 10:00 AM\n' > volunteer-project/meeting-times.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C volunteer-project commit -q -m 'Add volunteer meeting times'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 10:00 AM\n' > volunteer-project/meeting-times.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-03T12:00:00Z GIT_COMMITTER_DATE=2026-01-03T12:00:00Z git -C volunteer-project commit -q -m 'Update volunteer assignments'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 9:30 AM\n' > volunteer-project/meeting-times.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-04T12:00:00Z GIT_COMMITTER_DATE=2026-01-04T12:00:00Z git -C volunteer-project commit -q -m 'Update volunteer meeting time'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project/generated\nprintf %s 'Generated volunteer report\n\nPrepared automatically from assignments.\n' > volunteer-project/generated/report.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 9:30 AM\n' > volunteer-project/meeting-times.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-05T12:00:00Z GIT_COMMITTER_DATE=2026-01-05T12:00:00Z git -C volunteer-project commit -q -m 'Add generated report'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s 'generated/\n' > volunteer-project/.gitignore\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n' > volunteer-project/roles.txt\ngit -C volunteer-project add -A\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s 'generated/\n' > volunteer-project/.gitignore\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project/generated\nprintf %s 'Generated volunteer report\n\nPrepared automatically from assignments.\n' > volunteer-project/generated/report.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n' > volunteer-project/roles.txt\n",
             "language": "bash",
             "readOnly": true
           },
           {
-            "path": "release-snapshot/.gitignore",
-            "content": "*.log\n",
+            "path": "volunteer-project/README.md",
+            "content": "# Volunteer Project\n\nAssignments and meeting times.\n",
+            "language": "markdown"
+          },
+          {
+            "path": "volunteer-project/.gitignore",
+            "content": "generated/\n",
             "language": "text"
           },
           {
-            "path": "release-snapshot/README.md",
-            "content": "# Volunteer Toolkit\n",
-            "language": "markdown"
+            "path": "volunteer-project/generated/report.txt",
+            "content": "Generated volunteer report\n\nPrepared automatically from assignments.\n",
+            "language": "text"
           },
           {
-            "path": "release-snapshot/docs/volunteer-guide.md",
-            "content": "# Draft Volunteer Guide\n",
-            "language": "markdown"
-          },
-          {
-            "path": "release-snapshot/preview.log",
-            "content": "local preview\n",
+            "path": "volunteer-project/roles.txt",
+            "content": "Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n",
             "language": "text"
           }
         ]
@@ -1157,7 +1225,7 @@
         "runnerBackend": "pty",
         "layoutMode": "default",
         "terminalSessionScope": "exercise",
-        "terminalCwd": "/workspace/release-snapshot",
+        "terminalCwd": "/workspace/volunteer-project",
         "fileActions": {
           "enabled": true,
           "createFile": true,
@@ -1182,7 +1250,7 @@
         "runnerBackend": "pty",
         "layoutMode": "default",
         "terminalSessionScope": "exercise",
-        "terminalCwd": "/workspace/release-snapshot",
+        "terminalCwd": "/workspace/volunteer-project",
         "fileActions": {
           "enabled": true,
           "createFile": true,
@@ -1205,31 +1273,35 @@
       "fixtureFiles": [
         {
           "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf release-snapshot\nmkdir -p release-snapshot\ngit -C release-snapshot init -q -b main\ngit -C release-snapshot config --local user.name \"ZoeSkoul Learner\"\ngit -C release-snapshot config --local user.email \"learner@zoeskoul.local\"\ncd release-snapshot\nprintf %s '# Volunteer Toolkit\n' > README.md\ncd ..\ncd release-snapshot\nmkdir -p docs\nprintf %s '# Draft Volunteer Guide\n' > docs/guide-draft.md\ncd ..\ncd release-snapshot\nmkdir -p docs\nprintf %s 'Old checklist\n' > docs/old-checklist.md\ncd ..\ngit -C release-snapshot add -A\ngit -C release-snapshot commit -q -m 'Add project baseline'\ncd release-snapshot\nprintf %s 'local preview\n' > preview.log\ncd ..\ncd release-snapshot\nprintf %s '*.log\n' > .gitignore\ncd ..\ngit -C release-snapshot mv docs/guide-draft.md docs/volunteer-guide.md\ngit -C release-snapshot rm -q docs/old-checklist.md\ngit -C release-snapshot add .gitignore\n",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- volunteer-project\nmkdir -p -- volunteer-project\ngit -C volunteer-project init -q -b main\ngit -C volunteer-project config --local user.name 'ZoeSkoul Learner'\ngit -C volunteer-project config --local user.email learner@zoeskoul.local\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n' > volunteer-project/assignments.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C volunteer-project commit -q -m 'Start volunteer project'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 10:00 AM\n' > volunteer-project/meeting-times.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C volunteer-project commit -q -m 'Add volunteer meeting times'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 10:00 AM\n' > volunteer-project/meeting-times.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-03T12:00:00Z GIT_COMMITTER_DATE=2026-01-03T12:00:00Z git -C volunteer-project commit -q -m 'Update volunteer assignments'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 9:30 AM\n' > volunteer-project/meeting-times.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-04T12:00:00Z GIT_COMMITTER_DATE=2026-01-04T12:00:00Z git -C volunteer-project commit -q -m 'Update volunteer meeting time'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project/generated\nprintf %s 'Generated volunteer report\n\nPrepared automatically from assignments.\n' > volunteer-project/generated/report.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 9:30 AM\n' > volunteer-project/meeting-times.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-05T12:00:00Z GIT_COMMITTER_DATE=2026-01-05T12:00:00Z git -C volunteer-project commit -q -m 'Add generated report'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s 'generated/\n' > volunteer-project/.gitignore\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n' > volunteer-project/roles.txt\ngit -C volunteer-project add -A\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s 'generated/\n' > volunteer-project/.gitignore\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project/generated\nprintf %s 'Generated volunteer report\n\nPrepared automatically from assignments.\n' > volunteer-project/generated/report.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n' > volunteer-project/roles.txt\n",
           "language": "bash",
           "readOnly": true
         },
         {
-          "path": "release-snapshot/.gitignore",
-          "content": "*.log\n",
+          "path": "volunteer-project/README.md",
+          "content": "# Volunteer Project\n\nAssignments and meeting times.\n",
+          "language": "markdown"
+        },
+        {
+          "path": "volunteer-project/.gitignore",
+          "content": "generated/\n",
           "language": "text"
         },
         {
-          "path": "release-snapshot/README.md",
-          "content": "# Volunteer Toolkit\n",
-          "language": "markdown"
+          "path": "volunteer-project/generated/report.txt",
+          "content": "Generated volunteer report\n\nPrepared automatically from assignments.\n",
+          "language": "text"
         },
         {
-          "path": "release-snapshot/docs/volunteer-guide.md",
-          "content": "# Draft Volunteer Guide\n",
-          "language": "markdown"
-        },
-        {
-          "path": "release-snapshot/preview.log",
-          "content": "local preview\n",
+          "path": "volunteer-project/roles.txt",
+          "content": "Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n",
           "language": "text"
         }
-      ]
+      ],
+      "tools": {
+        "defaultSurface": "results",
+        "compactDefaultSurface": "results"
+      }
     }
   ],
   "topicMeta": {

@@ -4,7 +4,7 @@ import type {
   CourseVersionStatus,
 } from "./blueprint.js";
 import type { PracticeConfig } from "./practice.js";
-import type { CourseSpecProjectBrief } from "./course-spec.js";
+import type { CourseSpecProjectBrief, CourseSpecTopicProjectJourney } from "./course-spec.js";
 import type { ToolPresentationPolicy } from "./tool-presentation.js";
 
 export type PlannedTopic = {
@@ -17,6 +17,7 @@ export type PlannedTopic = {
   learningGoals: string[];
   practice?: PracticeConfig;
   projectBrief?: CourseSpecProjectBrief | null;
+  projectJourney?: CourseSpecTopicProjectJourney;
   tools?: ToolPresentationPolicy;
   lessonTools?: Record<string, ToolPresentationPolicy>;
   exerciseTools?: Record<string, ToolPresentationPolicy>;

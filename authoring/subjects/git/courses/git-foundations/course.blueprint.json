@@ -7,38 +7,36 @@
   "workspaceProfileId": "terminal-workspace-runner",
   "workspacePolicyId": "git-terminal-workspace",
   "title": "Git Foundations",
-  "subtitle": "Build a clean local history before sharing work anywhere.",
+  "subtitle": "Build one project history step by step, then prove the same Git habits in new repositories.",
   "level": "beginner",
   "moduleCount": 4,
-  "description": "A story-led beginner Git course that starts with an ordinary folder and builds a clean local history in visible, cumulative steps. Learners perform the Git work themselves; fixture preparation stays inside the platform.",
+  "description": "A beginner local-Git course organized around three cumulative repositories. Guided lessons grow one community-site repository across the whole course, module projects continue one parallel volunteer-hub repository, and the final capstone starts a fresh neighborhood-guide repository. Learners inspect, change, and verify repository state without branches, remotes, GitHub, or assumed web-development knowledge.",
   "sourceLocale": "en",
   "targetLocales": [],
   "accessPolicy": "paid",
   "moduleAccessOverrideDefault": null,
   "audience": [
-    "Absolute beginners who completed Linux Terminal Fundamentals.",
-    "Programming learners who want reliable project history before using GitHub.",
-    "New developers replacing duplicate final folders with a real version-control workflow."
+    "Beginners comfortable with basic terminal navigation and simple text-file editing.",
+    "Learners who want local Git foundations before branches, remotes, or GitHub.",
+    "Learners who do not need prior HTML, CSS, or JavaScript knowledge because every file edit is supplied exactly."
   ],
   "prerequisites": [
-    "Complete Linux Terminal Fundamentals or demonstrate equivalent comfort with pwd, ls, cd, mkdir, touch, cat, cp, mv, and rm.",
-    "Read and edit simple text files in the provided workspace.",
-    "No Python, GitHub account, public network access, or prior version-control experience is required."
+    "Complete Linux Terminal Fundamentals or be comfortable using pwd, ls, cd, mkdir, touch, cat, cp, mv, and rm in a terminal.",
+    "Know how to open, edit, and save a simple text file in the provided workspace.",
+    "No HTML, CSS, JavaScript, GitHub account, or previous version-control experience is required. Every required file edit supplies the exact text and location."
   ],
   "goals": [
-    "Explain why version control is more reliable than duplicate final folders.",
-    "Initialize an ordinary folder on main and configure a repository-only identity.",
-    "Read untracked, modified, staged, committed, and clean repository state.",
-    "Inspect changes, stage intentionally, and create focused commits.",
-    "Read history and inspect committed snapshots.",
-    "Rename, remove, ignore, and restore files safely.",
-    "Complete three cumulative module projects and one integrated local-history capstone."
+    "Explain the working tree, staging area, commits, and HEAD using one project that grows across the course.",
+    "Initialize a repository, configure a repository-only identity, and read tracked, untracked, staged, modified, ignored, and clean state.",
+    "Inspect exact file changes, stage one purpose at a time, create meaningful commits, and read the resulting history.",
+    "Rename, remove, ignore, unstage, and restore files safely without rewriting history.",
+    "Reapply the same essential workflow in one cumulative module project and one fresh final capstone."
   ],
   "teachingStyle": {
-    "tone": "story-led, book-like, practical, calm, cumulative, and repository-state-first",
-    "quizWeight": 0.2,
+    "tone": "Practical, book-like, reassuring, and precise. Continue one project story instead of resetting context. Define each Git idea once, then reuse it.",
+    "quizWeight": 0.3,
     "projectWeight": 0.35,
-    "codeInputWeight": 0.45
+    "codeInputWeight": 0.35
   },
   "constraints": {
     "moduleCount": 4,
@@ -60,48 +58,36 @@
   "courseGenerationPolicy": {
     "studentActionStyle": "terminal-workspace",
     "forbidUnavailableWorkspaceActions": true,
-    "avoidTerms": [
-      "GitHub account",
-      "personal access token",
-      "public repository",
-      "branch workflow",
-      "merge conflict",
-      "force push",
-      "reset --hard",
-      "interactive rebase"
-    ],
     "preferredTerms": {
       "editor": "terminal",
       "run button": "type the command and press Enter",
       "output panel": "terminal output",
-      "repository state": "the files, staging area, branches, commits, and remotes Git currently records",
-      "check": "click Check Answer after verifying the repository state"
+      "repository state": "the working tree, staging area, and commit history Git currently records"
     },
     "notes": [
-      "The learner’s first hands-on Git command is git init -b main in an ordinary folder; never pre-initialize that first exercise.",
-      "A hidden .zoeskoul/setup.sh file may restore deterministic prerequisite state, but the runner executes it automatically and silently before the terminal opens.",
-      "Never mention .zoeskoul/setup.sh in learner-facing prose, prompts, hints, starterCode, solutionCode, expected commands, or terminal history.",
-      "For isolated Try It exercises after initialization, restore the exact prerequisite repository state invisibly so the learner can practice only the new Git decision.",
-      "For projects and capstones, each step must represent the complete state produced by the previous milestone; official solutions contain only the commands for the current milestone.",
+      "Use one cumulative guided repository named community-site for every technical teaching exercise in Modules 1-3.",
+      "Use one cumulative parallel module-project repository named volunteer-hub across all three module projects; Module 2 begins from Module 1’s canonical final state, and Module 3 begins from Module 2’s canonical final state.",
+      "Use one fresh cumulative capstone repository named neighborhood-guide for all six capstone steps.",
+      "Every exercise must be independently loadable: reconstruct the exact canonical prerequisite repository state in hidden setup rather than depending on a previous browser session.",
+      "For each cumulative stream, the canonical solution state of milestone N must equal the canonical starter state of milestone N+1, including files, commit history, staged state, unstaged state, ignored state, and terminal working directory.",
+      "This is a Git course, not a web-development course. Never assume HTML, CSS, JavaScript, Markdown, or shell-scripting knowledge beyond the stated prerequisites.",
+      "Whenever learners must edit a file, state the exact file path, the exact text to add or replace, and the exact insertion or replacement location. Grade the repository transition, not web syntax or design skill.",
+      "Keep file contents short, readable, and meaningful as Git changes. Do not ask learners to invent page structure, styling, scripts, copy, or filenames.",
+      "Teach each Git concept once in the guided stream. Later guided exercises, module projects, and the capstone may reuse it in a new repository state but must not reteach the same definition.",
+      "Keep setup state and grading expectations separate. Hidden setup creates the prerequisite milestone; gitExpectations and focused checks verify only the learner transition.",
       "Use profileId git, fixedLanguage bash, recipeType shell_task, and mode terminal_workspace for every Git code_input.",
-      "Use the existing terminal-workspace runner; do not create a Git-specific IDE, runner, recipe type, or programming language.",
-      "Grade final repository state with gitExpectations. Use terminalExpectations only when the exact safe command is itself part of the learning goal.",
-      "Every terminal instruction must explicitly tell the learner to type the command and press Enter.",
-      "Configure the local repository identity as ZoeSkoul Learner and learner@zoeskoul.local before the first commit.",
-      "Set the initial branch to main whenever branch naming matters.",
-      "Never grade exact commit hashes, machine-dependent timestamps, absolute workspace paths, or decorative git log graph spacing.",
-      "Keep independent Try It workspaces isolated with terminalSessionScope exercise; use terminalSessionScope project only for authored progressive projects and capstones.",
-      "Use one synopsis sketch for each module project and capstone, followed by exactly the number of cumulative steps declared in projectBrief.stepCountTarget.",
-      "The complete solution from project step N becomes the complete starter workspace for step N+1.",
-      "Worked examples, Try It tasks, module projects, and final capstones must use different repository stories and different requested outcomes.",
-      "Write lessons like a short practical book chapter: begin with the project situation, define the Git idea, show the command shape, trace the repository-state change, warn about one common mistake, and transition naturally into practice.",
-      "Do not open lessons with internal curriculum language such as learning contract, milestone count, assessment checklist, or concepts you will demonstrate.",
-      "Prepend one standalone reading-only course introduction before the first technical sketch without replacing the first technical lesson.",
-      "The final module contains exactly one capstone section and one capstone topic.",
-      "Do not require public network access, GitHub credentials, personal access tokens, learner secrets, or an external repository.",
-      "Do not introduce branches, merges, remotes, clone, fetch, pull, push, GitHub, stash, reflog, revert, reset, rebase, tags, or force operations in Git Foundations.",
-      "Treat main as environment setup, not as a branching lesson.",
-      "The final capstone must contain exactly six progressive steps and exactly four authored commits."
+      "Use the existing terminal-workspace runner and shared editor/file explorer. Do not create a Git-specific runner or expose hidden setup files.",
+      "Configure repository-local identity as ZoeSkoul Learner and learner@zoeskoul.local before the first commit.",
+      "Set the initial branch to main whenever initialization is part of the task, without turning main into a branching lesson.",
+      "Never grade exact hashes, timestamps, absolute workspace paths, or decorative log formatting.",
+      "Use gitExpectations for repository state and terminalExpectations only when the exact command is itself the learning goal.",
+      "Every terminal instruction must say to type the command and press Enter.",
+      "Keep the course local. Do not introduce branches, merges, remotes, GitHub, stash, reflog, revert, reset, rebase, tags, or force operations.",
+      "Use one synopsis sketch for each module project and capstone, followed by exactly the authored number of cumulative steps.",
+      "Write lessons like a practical book chapter: continue the project story, define one new Git idea, trace the state change, warn about one common mistake, and transition into practice.",
+      "Prepend one reading-only course introduction explaining prerequisites, the three repository journeys, the inspect-change-verify habit, and how deterministic resets preserve cumulative learning.",
+      "Keep quiz distractors inside the Git concepts already taught. Do not use branches, remotes, GitHub, merges, or other later-course features as easy wrong answers.",
+      "Avoid repeating the same concept check in later topics. Each quiz should assess the new repository layer or decision introduced by its teaching topic."
     ]
   },
   "practiceDefaults": {

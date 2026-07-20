@@ -1,0 +1,272 @@
+{
+  "topics": {
+    "git-foundations": {
+      "git-foundations-module-2-meaningful-history": {
+        "stage-intentionally": {
+          "label": "Stage One Purpose at a Time",
+          "summary": "Separate two supplied community-site purposes into focused snapshots.",
+          "cards": {
+            "sketch0": {
+              "title": "One Project Can Hold Several Purposes"
+            },
+            "sketch1": {
+              "title": "Stage the First Purpose by Name"
+            },
+            "sketch2": {
+              "title": "Review the Staged Snapshot"
+            },
+            "sketch3": {
+              "title": "Commit, Then Continue"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_stage_intentionally_sketch0": {
+              "title": "Stage Only the Heading Purpose",
+              "prompt": "`community-site/index.html` contains the supplied heading change, and `styles.css` contains the supplied footer-spacing change. Type `git add index.html` and press Enter. Leave styles.css unstaged.",
+              "hint": "Stage the page change only.",
+              "help": {
+                "concept": "Intentional staging separates unrelated work before a commit exists.",
+                "hint_1": "Name index.html explicitly.",
+                "hint_2": "styles.css should remain only in the working tree."
+              },
+              "starterCode": "<!doctype html>\n<title>Community Site</title>\n<h1>Community Events and Resources</h1>\n",
+              "solutionCode": "git add index.html",
+              "starterFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-site\nmkdir -p -- community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name 'ZoeSkoul Learner'\ngit -C community-site config --local user.email learner@zoeskoul.local\nmkdir -p -- community-site\nprintf %s '# Community Site\n\nLocal events and resources.\n' > community-site/README.md\nmkdir -p -- community-site\nprintf %s '<!doctype html>\n<title>Community Site</title>\n<h1>Community Events</h1>\n' > community-site/index.html\nmkdir -p -- community-site\nprintf %s 'body { font-family: sans-serif; }\nfooter { margin-top: 12px; }\n' > community-site/styles.css\nmkdir -p -- community-site/notes\nprintf %s 'Archive the spring event list.\n' > community-site/notes/old-events.txt\nmkdir -p -- community-site/dist\nprintf %s 'console.log('\"'\"'legacy preview'\"'\"');\n' > community-site/dist/legacy-preview.js\ngit -C community-site add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C community-site commit -q -m 'Start community site'\nmkdir -p -- community-site\nprintf %s '<!doctype html>\n<title>Community Site</title>\n<h1>Community Events and Resources</h1>\n' > community-site/index.html\nmkdir -p -- community-site\nprintf %s 'body { font-family: sans-serif; }\nfooter { margin-top: 24px; }\n' > community-site/styles.css\n"
+                }
+              },
+              "solutionFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-site\nmkdir -p -- community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name 'ZoeSkoul Learner'\ngit -C community-site config --local user.email learner@zoeskoul.local\nmkdir -p -- community-site\nprintf %s '# Community Site\n\nLocal events and resources.\n' > community-site/README.md\nmkdir -p -- community-site\nprintf %s '<!doctype html>\n<title>Community Site</title>\n<h1>Community Events</h1>\n' > community-site/index.html\nmkdir -p -- community-site\nprintf %s 'body { font-family: sans-serif; }\nfooter { margin-top: 12px; }\n' > community-site/styles.css\nmkdir -p -- community-site/notes\nprintf %s 'Archive the spring event list.\n' > community-site/notes/old-events.txt\nmkdir -p -- community-site/dist\nprintf %s 'console.log('\"'\"'legacy preview'\"'\"');\n' > community-site/dist/legacy-preview.js\ngit -C community-site add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C community-site commit -q -m 'Start community site'\nmkdir -p -- community-site\nprintf %s '<!doctype html>\n<title>Community Site</title>\n<h1>Community Events and Resources</h1>\n' > community-site/index.html\nmkdir -p -- community-site\nprintf %s 'body { font-family: sans-serif; }\nfooter { margin-top: 24px; }\n' > community-site/styles.css\n"
+                }
+              },
+              "instructions": "`community-site/index.html` contains the supplied heading change, and `styles.css` contains the supplied footer-spacing change. Type `git add index.html` and press Enter. Leave styles.css unstaged.",
+              "terminalExpectations": {
+                "forbiddenCommands": {
+                  "0": {
+                    "message": "That action can discard or rewrite history. Use the safe, layer-specific workflow taught in this course."
+                  }
+                },
+                "requiredCommands": {
+                  "0": {
+                    "message": "Did you run `git add index.html`?"
+                  }
+                }
+              }
+            },
+            "try_stage_intentionally_sketch1": {
+              "title": "Inspect the Proposed Heading Snapshot",
+              "prompt": "The heading change is staged and the footer-spacing change is not. Type `git diff --staged -- index.html` and press Enter.",
+              "hint": "Inspect the index, not the remaining working-tree change.",
+              "help": {
+                "concept": "git diff --staged shows what the next commit would record.",
+                "hint_1": "Only index.html should appear in the staged patch.",
+                "hint_2": "The styles.css change must stay outside the proposed snapshot."
+              },
+              "starterCode": "<!doctype html>\n<title>Community Site</title>\n<h1>Community Events and Resources</h1>\n",
+              "solutionCode": "git diff --staged -- index.html",
+              "starterFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-site\nmkdir -p -- community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name 'ZoeSkoul Learner'\ngit -C community-site config --local user.email learner@zoeskoul.local\nmkdir -p -- community-site\nprintf %s '# Community Site\n\nLocal events and resources.\n' > community-site/README.md\nmkdir -p -- community-site\nprintf %s '<!doctype html>\n<title>Community Site</title>\n<h1>Community Events</h1>\n' > community-site/index.html\nmkdir -p -- community-site\nprintf %s 'body { font-family: sans-serif; }\nfooter { margin-top: 12px; }\n' > community-site/styles.css\nmkdir -p -- community-site/notes\nprintf %s 'Archive the spring event list.\n' > community-site/notes/old-events.txt\nmkdir -p -- community-site/dist\nprintf %s 'console.log('\"'\"'legacy preview'\"'\"');\n' > community-site/dist/legacy-preview.js\ngit -C community-site add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C community-site commit -q -m 'Start community site'\nmkdir -p -- community-site\nprintf %s '<!doctype html>\n<title>Community Site</title>\n<h1>Community Events and Resources</h1>\n' > community-site/index.html\nmkdir -p -- community-site\nprintf %s 'body { font-family: sans-serif; }\nfooter { margin-top: 24px; }\n' > community-site/styles.css\ngit -C community-site add -- index.html\n"
+                }
+              },
+              "solutionFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-site\nmkdir -p -- community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name 'ZoeSkoul Learner'\ngit -C community-site config --local user.email learner@zoeskoul.local\nmkdir -p -- community-site\nprintf %s '# Community Site\n\nLocal events and resources.\n' > community-site/README.md\nmkdir -p -- community-site\nprintf %s '<!doctype html>\n<title>Community Site</title>\n<h1>Community Events</h1>\n' > community-site/index.html\nmkdir -p -- community-site\nprintf %s 'body { font-family: sans-serif; }\nfooter { margin-top: 12px; }\n' > community-site/styles.css\nmkdir -p -- community-site/notes\nprintf %s 'Archive the spring event list.\n' > community-site/notes/old-events.txt\nmkdir -p -- community-site/dist\nprintf %s 'console.log('\"'\"'legacy preview'\"'\"');\n' > community-site/dist/legacy-preview.js\ngit -C community-site add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C community-site commit -q -m 'Start community site'\nmkdir -p -- community-site\nprintf %s '<!doctype html>\n<title>Community Site</title>\n<h1>Community Events and Resources</h1>\n' > community-site/index.html\nmkdir -p -- community-site\nprintf %s 'body { font-family: sans-serif; }\nfooter { margin-top: 24px; }\n' > community-site/styles.css\ngit -C community-site add -- index.html\n"
+                }
+              },
+              "instructions": "The heading change is staged and the footer-spacing change is not. Type `git diff --staged -- index.html` and press Enter.",
+              "terminalExpectations": {
+                "forbiddenCommands": {
+                  "0": {
+                    "message": "That action can discard or rewrite history. Use the safe, layer-specific workflow taught in this course."
+                  }
+                },
+                "requiredCommands": {
+                  "0": {
+                    "message": "Did you run `git diff --staged -- index.html`?"
+                  }
+                }
+              }
+            },
+            "try_stage_intentionally_sketch2": {
+              "title": "Commit the Heading Separately",
+              "prompt": "The index.html heading change is staged; styles.css remains unstaged. Type `git commit -m \"Update community heading\"` and press Enter. Then type `git status --short` and press Enter.",
+              "hint": "Commit only the staged page purpose with the exact message.",
+              "help": {
+                "concept": "A focused commit can leave unrelated working-tree changes for a later snapshot.",
+                "hint_1": "Use Update community heading exactly.",
+                "hint_2": "After the commit, styles.css should still appear modified."
+              },
+              "starterCode": "<!doctype html>\n<title>Community Site</title>\n<h1>Community Events and Resources</h1>\n",
+              "solutionCode": "git commit -m \"Update community heading\"\ngit status --short",
+              "starterFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-site\nmkdir -p -- community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name 'ZoeSkoul Learner'\ngit -C community-site config --local user.email learner@zoeskoul.local\nmkdir -p -- community-site\nprintf %s '# Community Site\n\nLocal events and resources.\n' > community-site/README.md\nmkdir -p -- community-site\nprintf %s '<!doctype html>\n<title>Community Site</title>\n<h1>Community Events</h1>\n' > community-site/index.html\nmkdir -p -- community-site\nprintf %s 'body { font-family: sans-serif; }\nfooter { margin-top: 12px; }\n' > community-site/styles.css\nmkdir -p -- community-site/notes\nprintf %s 'Archive the spring event list.\n' > community-site/notes/old-events.txt\nmkdir -p -- community-site/dist\nprintf %s 'console.log('\"'\"'legacy preview'\"'\"');\n' > community-site/dist/legacy-preview.js\ngit -C community-site add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C community-site commit -q -m 'Start community site'\nmkdir -p -- community-site\nprintf %s '<!doctype html>\n<title>Community Site</title>\n<h1>Community Events and Resources</h1>\n' > community-site/index.html\nmkdir -p -- community-site\nprintf %s 'body { font-family: sans-serif; }\nfooter { margin-top: 24px; }\n' > community-site/styles.css\ngit -C community-site add -- index.html\n"
+                }
+              },
+              "solutionFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-site\nmkdir -p -- community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name 'ZoeSkoul Learner'\ngit -C community-site config --local user.email learner@zoeskoul.local\nmkdir -p -- community-site\nprintf %s '# Community Site\n\nLocal events and resources.\n' > community-site/README.md\nmkdir -p -- community-site\nprintf %s '<!doctype html>\n<title>Community Site</title>\n<h1>Community Events</h1>\n' > community-site/index.html\nmkdir -p -- community-site\nprintf %s 'body { font-family: sans-serif; }\nfooter { margin-top: 12px; }\n' > community-site/styles.css\nmkdir -p -- community-site/notes\nprintf %s 'Archive the spring event list.\n' > community-site/notes/old-events.txt\nmkdir -p -- community-site/dist\nprintf %s 'console.log('\"'\"'legacy preview'\"'\"');\n' > community-site/dist/legacy-preview.js\ngit -C community-site add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C community-site commit -q -m 'Start community site'\nmkdir -p -- community-site\nprintf %s '<!doctype html>\n<title>Community Site</title>\n<h1>Community Events and Resources</h1>\n' > community-site/index.html\nmkdir -p -- community-site\nprintf %s 'body { font-family: sans-serif; }\nfooter { margin-top: 24px; }\n' > community-site/styles.css\ngit -C community-site add -- index.html\n"
+                }
+              },
+              "instructions": "The index.html heading change is staged; styles.css remains unstaged. Type `git commit -m \"Update community heading\"` and press Enter. Then type `git status --short` and press Enter.",
+              "terminalExpectations": {
+                "forbiddenCommands": {
+                  "0": {
+                    "message": "That action can discard or rewrite history. Use the safe, layer-specific workflow taught in this course."
+                  }
+                },
+                "requiredCommands": {
+                  "0": {
+                    "message": "Did you run `git commit -m \"Update community heading\"`?"
+                  },
+                  "1": {
+                    "message": "Did you run `git status --short`?"
+                  }
+                }
+              }
+            },
+            "try_stage_intentionally_sketch3": {
+              "title": "Record the Footer Spacing Purpose",
+              "prompt": "Only the supplied styles.css change remains. Type `git add styles.css` and press Enter, type `git diff --staged -- styles.css` and press Enter, then type `git commit -m \"Space community footer\"` and press Enter.",
+              "hint": "Stage, review, and commit the remaining purpose.",
+              "help": {
+                "concept": "The second focused commit completes the unrelated style change without mixing it into the heading commit.",
+                "hint_1": "Review the staged patch before recording it.",
+                "hint_2": "The final message is Space community footer."
+              },
+              "starterCode": "body { font-family: sans-serif; }\nfooter { margin-top: 24px; }\n",
+              "solutionCode": "git add styles.css\ngit diff --staged -- styles.css\ngit commit -m \"Space community footer\"",
+              "starterFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-site\nmkdir -p -- community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name 'ZoeSkoul Learner'\ngit -C community-site config --local user.email learner@zoeskoul.local\nmkdir -p -- community-site\nprintf %s '# Community Site\n\nLocal events and resources.\n' > community-site/README.md\nmkdir -p -- community-site\nprintf %s '<!doctype html>\n<title>Community Site</title>\n<h1>Community Events</h1>\n' > community-site/index.html\nmkdir -p -- community-site\nprintf %s 'body { font-family: sans-serif; }\nfooter { margin-top: 12px; }\n' > community-site/styles.css\nmkdir -p -- community-site/notes\nprintf %s 'Archive the spring event list.\n' > community-site/notes/old-events.txt\nmkdir -p -- community-site/dist\nprintf %s 'console.log('\"'\"'legacy preview'\"'\"');\n' > community-site/dist/legacy-preview.js\ngit -C community-site add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C community-site commit -q -m 'Start community site'\nmkdir -p -- community-site\nprintf %s '<!doctype html>\n<title>Community Site</title>\n<h1>Community Events and Resources</h1>\n' > community-site/index.html\ngit -C community-site add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C community-site commit -q -m 'Update community heading'\nmkdir -p -- community-site\nprintf %s 'body { font-family: sans-serif; }\nfooter { margin-top: 24px; }\n' > community-site/styles.css\n"
+                }
+              },
+              "solutionFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-site\nmkdir -p -- community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name 'ZoeSkoul Learner'\ngit -C community-site config --local user.email learner@zoeskoul.local\nmkdir -p -- community-site\nprintf %s '# Community Site\n\nLocal events and resources.\n' > community-site/README.md\nmkdir -p -- community-site\nprintf %s '<!doctype html>\n<title>Community Site</title>\n<h1>Community Events</h1>\n' > community-site/index.html\nmkdir -p -- community-site\nprintf %s 'body { font-family: sans-serif; }\nfooter { margin-top: 12px; }\n' > community-site/styles.css\nmkdir -p -- community-site/notes\nprintf %s 'Archive the spring event list.\n' > community-site/notes/old-events.txt\nmkdir -p -- community-site/dist\nprintf %s 'console.log('\"'\"'legacy preview'\"'\"');\n' > community-site/dist/legacy-preview.js\ngit -C community-site add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C community-site commit -q -m 'Start community site'\nmkdir -p -- community-site\nprintf %s '<!doctype html>\n<title>Community Site</title>\n<h1>Community Events and Resources</h1>\n' > community-site/index.html\ngit -C community-site add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C community-site commit -q -m 'Update community heading'\nmkdir -p -- community-site\nprintf %s 'body { font-family: sans-serif; }\nfooter { margin-top: 24px; }\n' > community-site/styles.css\n"
+                }
+              },
+              "instructions": "Only the supplied styles.css change remains. Type `git add styles.css` and press Enter, type `git diff --staged -- styles.css` and press Enter, then type `git commit -m \"Space community footer\"` and press Enter.",
+              "terminalExpectations": {
+                "forbiddenCommands": {
+                  "0": {
+                    "message": "That action can discard or rewrite history. Use the safe, layer-specific workflow taught in this course."
+                  }
+                },
+                "requiredCommands": {
+                  "0": {
+                    "message": "Did you run `git add styles.css`?"
+                  },
+                  "1": {
+                    "message": "Did you run `git diff --staged -- styles.css`?"
+                  },
+                  "2": {
+                    "message": "Did you run `git commit -m \"Space community footer\"`?"
+                  }
+                }
+              }
+            }
+          },
+          "practice": {
+            "single-choice-1": {
+              "title": "Choose a Focused Snapshot",
+              "prompt": "Two unrelated files are modified. What best keeps the next commit focused?",
+              "hint": "Focus on what the command or concept observes or changes at this point in the workflow.",
+              "help": {
+                "concept": "Build the next snapshot one purpose at a time, review the staged version, and reverse a staging decision without losing work.",
+                "hint_1": "Remove options that act on a different repository layer than the one named in the question.",
+                "hint_2": "Choose the answer that remains accurate even when other unrelated files exist."
+              },
+              "options": {
+                "a": "To prepare selected changes for a commit",
+                "b": "To commit changes automatically",
+                "c": "To discard every working-tree change",
+                "d": "To list the recorded commit history"
+              }
+            },
+            "multi-choice-1": {
+              "title": "A Coherent Snapshot",
+              "prompt": "Which practices help keep a commit focused? Select all that apply.",
+              "hint": "Judge each option independently; choose only the statements that stay true in this exact repository state.",
+              "help": {
+                "concept": "Build the next snapshot one purpose at a time, review the staged version, and reverse a staging decision without losing work.",
+                "hint_1": "A partly true option is still wrong if it adds an effect Git does not guarantee.",
+                "hint_2": "Use the layer named in the prompt—working tree, staging area, or history—to test each choice."
+              },
+              "options": {
+                "a": "Stage files that serve the same project result.",
+                "b": "Review the staged snapshot before committing.",
+                "c": "Stage every changed file so status becomes quiet.",
+                "d": "Use a subject that describes the result."
+              }
+            },
+            "multi-choice-2": {
+              "title": "Inspect the Staged Boundary",
+              "prompt": "Which commands can help verify what is staged?",
+              "hint": "Choose the one answer that describes this command or concept precisely.",
+              "help": {
+                "concept": "Build the next snapshot one purpose at a time, review the staged version, and reverse a staging decision without losing work.",
+                "hint_1": "Remove choices that act on a different repository layer or promise behavior Git does not provide.",
+                "hint_2": "Prefer the exact definition used in this chapter over a nearby Git idea."
+              },
+              "options": {
+                "a": "git diff --staged",
+                "b": "git diff --staged --name-only",
+                "c": "git status --short",
+                "d": "git init"
+              }
+            },
+            "fill-blank-1": {
+              "title": "Write a Focused Commit Subject",
+              "prompt": "The staged change expands the community events heading. Complete the subject: `git commit -m \"[blank1]\"`.",
+              "hint": "Choose the term or symbol that matches the exact state described, not a nearby Git concept.",
+              "help": {
+                "concept": "Build the next snapshot one purpose at a time, review the staged version, and reverse a staging decision without losing work.",
+                "hint_1": "Pay attention to whether the prompt describes an untracked path, a working-tree edit, staged work, or history.",
+                "hint_2": "Read spaces, punctuation, and status columns as meaningful when the question shows Git output."
+              },
+              "template": "git commit -m \"[blank1]\"",
+              "choices": [
+                "Expand community events heading",
+                "changes",
+                "update files",
+                "work in progress"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "git-foundations": {
+      "git-foundations-module-2-meaningful-history": {
+        "stage-intentionally": {
+          "stage-intentionally-sketch0": {
+            "title": "One Project Can Hold Several Purposes",
+            "bodyMarkdown": "The community-site heading and footer spacing are unrelated changes. They can exist together in the working tree without belonging in the same commit."
+          },
+          "stage-intentionally-sketch1": {
+            "title": "Stage the First Purpose by Name",
+            "bodyMarkdown": "Naming `index.html` with `git add` proposes only the heading change. The stylesheet remains outside the snapshot."
+          },
+          "stage-intentionally-sketch2": {
+            "title": "Review the Staged Snapshot",
+            "bodyMarkdown": "`git diff --staged -- path` shows what the next commit will record. It answers a different question from ordinary `git diff`."
+          },
+          "stage-intentionally-sketch3": {
+            "title": "Commit, Then Continue",
+            "bodyMarkdown": "After the heading commit, the stylesheet remains modified. Stage and commit it separately so each history entry explains one project purpose."
+          }
+        }
+      }
+    }
+  }
+}

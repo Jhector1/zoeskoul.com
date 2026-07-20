@@ -3,20 +3,20 @@
     "git--git-foundations--draft": {
       "git-foundations-module-2-meaningful-history": {
         "stage-intentionally": {
-          "label": "Stage and Commit One Purpose",
-          "summary": "Choose a coherent snapshot, review its staged content, and record it with a message that matches the boundary.",
+          "label": "Stage One Purpose at a Time",
+          "summary": "Separate two supplied community-project purposes into focused snapshots.",
           "cards": {
             "sketch0": {
-              "title": "Choose One Purpose"
+              "title": "One Project Can Hold Several Purposes"
             },
             "sketch1": {
-              "title": "Review the Proposed Snapshot"
+              "title": "Stage the First Purpose by Name"
             },
             "sketch2": {
-              "title": "Keep Related Files Together"
+              "title": "Review the Staged Snapshot"
             },
             "sketch3": {
-              "title": "Commit the Boundary You Chose"
+              "title": "Commit, Then Continue"
             },
             "quiz": {
               "title": "Practice"
@@ -25,27 +25,27 @@
           "tryIt": {
             "allowReveal": true,
             "try_stage_intentionally_sketch0": {
-              "title": "Stage One File, Not Everything",
-              "prompt": "You are working in the prepared `community-site/` repository.\n\n`index.html` and `styles.css` both changed, but the next snapshot is only about navigation. Stage `index.html` and list the staged names.",
-              "hint": "Choose only the paths that belong to this checkpoint.",
+              "title": "Stage Only the Schedule Purpose",
+              "prompt": "Two unrelated edits are present: the cleanup time in `schedule.txt` and the help-desk number in `contacts.txt`. Stage only `schedule.txt` so the first proposed snapshot contains one purpose.",
+              "hint": "Name the schedule path explicitly.",
               "help": {
-                "concept": "Path-specific staging selects one coherent change while leaving unrelated working-tree edits outside the next commit.",
-                "hint_1": "Do not broaden the staging boundary just to make status quieter.",
-                "hint_2": "Review the staged paths or patch before moving on."
+                "concept": "`git add schedule.txt` copies only the current schedule into the staging area. The contact edit stays unstaged, allowing the two purposes to become separate commits.",
+                "hint_1": "Do not use `git add .`.",
+                "hint_2": "After staging, short status would show one staged edit and one unstaged edit."
               },
-              "starterCode": "<nav>Home Events</nav>\n",
-              "solutionCode": "git add index.html\ngit diff --staged --name-only",
+              "starterCode": "# Community Project\n\nShared schedules and contact notes.\n",
+              "solutionCode": "git add schedule.txt",
               "starterFiles": {
                 "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-site\nmkdir -p community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name \"ZoeSkoul Learner\"\ngit -C community-site config --local user.email \"learner@zoeskoul.local\"\ncd community-site\nprintf %s '<nav>Home</nav>\n' > index.html\ncd ..\ncd community-site\nprintf %s 'nav { color: navy; }\n' > styles.css\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Add project baseline'\ncd community-site\nprintf %s '<nav>Home Events</nav>\n' > index.html\ncd ..\ncd community-site\nprintf %s 'nav { color: teal; }\n' > styles.css\ncd ..\n"
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C community-project commit -q -m 'Start community project'\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0100\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C community-project commit -q -m 'Add community contacts'\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0100\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0130\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 9:30 AM\n' > community-project/schedule.txt\n"
                 }
               },
               "solutionFiles": {
                 "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-site\nmkdir -p community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name \"ZoeSkoul Learner\"\ngit -C community-site config --local user.email \"learner@zoeskoul.local\"\ncd community-site\nprintf %s '<nav>Home</nav>\n' > index.html\ncd ..\ncd community-site\nprintf %s 'nav { color: navy; }\n' > styles.css\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Add project baseline'\ncd community-site\nprintf %s '<nav>Home Events</nav>\n' > index.html\ncd ..\ncd community-site\nprintf %s 'nav { color: teal; }\n' > styles.css\ncd ..\n"
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C community-project commit -q -m 'Start community project'\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0100\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C community-project commit -q -m 'Add community contacts'\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0100\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0130\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 9:30 AM\n' > community-project/schedule.txt\n"
                 }
               },
-              "instructions": "You are working in the prepared `community-site/` repository.\n\n`index.html` and `styles.css` both changed, but the next snapshot is only about navigation. Stage `index.html` and list the staged names.",
+              "instructions": "Two unrelated edits are present: the cleanup time in `schedule.txt` and the help-desk number in `contacts.txt`. Stage only `schedule.txt` so the first proposed snapshot contains one purpose.",
               "terminalExpectations": {
                 "forbiddenCommands": {
                   "0": {
@@ -54,36 +54,33 @@
                 },
                 "requiredCommands": {
                   "0": {
-                    "message": "Did you stage only the path or paths that belong to this checkpoint?"
-                  },
-                  "1": {
-                    "message": "Did you review the staged path list and confirm that only the requested files are selected?"
+                    "message": "Did you stage only the schedule change?"
                   }
                 }
               }
             },
             "try_stage_intentionally_sketch1": {
-              "title": "Inspect the Exact Staged Patch",
-              "prompt": "You are working in the prepared `community-site/` repository.\n\n`index.html` is already staged while `styles.css` remains unstaged. Inspect the staged patch and then compare it with short status.",
-              "hint": "Inspect the exact version currently selected for the next commit.",
+              "title": "Review the Proposed Schedule Snapshot",
+              "prompt": "Inspect the staged schedule change before committing it. The unstaged contact edit must remain outside this comparison.",
+              "hint": "Read the staging-area diff for `schedule.txt`.",
               "help": {
-                "concept": "git diff --staged previews what the next commit would record, not every working-tree edit.",
-                "hint_1": "A staged patch is different from the unstaged working-tree patch.",
-                "hint_2": "Confirm that the selected content matches the task before recording it."
+                "concept": "`git diff --staged -- schedule.txt` compares the staged schedule with the current commit. `--staged` is essential here because ordinary `git diff` reads unstaged work instead.",
+                "hint_1": "The output should show only the cleanup-time change.",
+                "hint_2": "Do not commit yet."
               },
-              "starterCode": "<nav>Home Events</nav>\n",
-              "solutionCode": "git diff --staged -- index.html\ngit status --short",
+              "starterCode": "# Community Project\n\nShared schedules and contact notes.\n",
+              "solutionCode": "git diff --staged -- schedule.txt",
               "starterFiles": {
                 "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-site\nmkdir -p community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name \"ZoeSkoul Learner\"\ngit -C community-site config --local user.email \"learner@zoeskoul.local\"\ncd community-site\nprintf %s '<nav>Home</nav>\n' > index.html\ncd ..\ncd community-site\nprintf %s 'nav { color: navy; }\n' > styles.css\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Add project baseline'\ncd community-site\nprintf %s '<nav>Home Events</nav>\n' > index.html\ncd ..\ncd community-site\nprintf %s 'nav { color: teal; }\n' > styles.css\ncd ..\ngit -C community-site add -- index.html\n"
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C community-project commit -q -m 'Start community project'\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0100\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C community-project commit -q -m 'Add community contacts'\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0100\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 9:30 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0130\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 9:30 AM\n' > community-project/schedule.txt\n"
                 }
               },
               "solutionFiles": {
                 "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-site\nmkdir -p community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name \"ZoeSkoul Learner\"\ngit -C community-site config --local user.email \"learner@zoeskoul.local\"\ncd community-site\nprintf %s '<nav>Home</nav>\n' > index.html\ncd ..\ncd community-site\nprintf %s 'nav { color: navy; }\n' > styles.css\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Add project baseline'\ncd community-site\nprintf %s '<nav>Home Events</nav>\n' > index.html\ncd ..\ncd community-site\nprintf %s 'nav { color: teal; }\n' > styles.css\ncd ..\ngit -C community-site add -- index.html\n"
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C community-project commit -q -m 'Start community project'\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0100\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C community-project commit -q -m 'Add community contacts'\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0100\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 9:30 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0130\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 9:30 AM\n' > community-project/schedule.txt\n"
                 }
               },
-              "instructions": "You are working in the prepared `community-site/` repository.\n\n`index.html` is already staged while `styles.css` remains unstaged. Inspect the staged patch and then compare it with short status.",
+              "instructions": "Inspect the staged schedule change before committing it. The unstaged contact edit must remain outside this comparison.",
               "terminalExpectations": {
                 "forbiddenCommands": {
                   "0": {
@@ -92,36 +89,33 @@
                 },
                 "requiredCommands": {
                   "0": {
-                    "message": "Did you inspect the staged version of `index.html` before checking?"
-                  },
-                  "1": {
-                    "message": "Did you use the compact status view and read the entry for `index.html`?"
+                    "message": "Did you review the staged schedule snapshot?"
                   }
                 }
               }
             },
             "try_stage_intentionally_sketch2": {
-              "title": "Add a Second Related File",
-              "prompt": "You are working in the prepared `community-site/` repository.\n\nThe staged navigation change also needs `nav.js`; `styles.css` is still unrelated. Stage `nav.js` and verify that exactly two files are staged.",
-              "hint": "Choose only the paths that belong to this checkpoint.",
+              "title": "Commit the Schedule Separately",
+              "prompt": "Record the staged schedule change with the message `Update community schedule`. Then inspect short status and confirm that only the contact edit remains unfinished.",
+              "hint": "Commit the current staging area, then inspect what remains.",
               "help": {
-                "concept": "A focused snapshot may contain several files when they serve the same change.",
-                "hint_1": "Do not broaden the staging boundary just to make status quieter.",
-                "hint_2": "Review the staged paths or patch before moving on."
+                "concept": "`git commit -m \"Update community schedule\"` records only the staged schedule. `git status --short` then reveals the still-unstaged contact edit, proving the commit boundary stayed focused.",
+                "hint_1": "Do not stage `contacts.txt` before this commit.",
+                "hint_2": "The repository should gain one commit and retain one unstaged edit."
               },
-              "starterCode": "<nav>Home Events</nav>\n",
-              "solutionCode": "git add nav.js\ngit diff --staged --name-only",
+              "starterCode": "# Community Project\n\nShared schedules and contact notes.\n",
+              "solutionCode": "git commit -m \"Update community schedule\"\ngit status --short",
               "starterFiles": {
                 "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-site\nmkdir -p community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name \"ZoeSkoul Learner\"\ngit -C community-site config --local user.email \"learner@zoeskoul.local\"\ncd community-site\nprintf %s '<nav>Home</nav>\n' > index.html\ncd ..\ncd community-site\nprintf %s 'export const links = [\"Home\"];\n' > nav.js\ncd ..\ncd community-site\nprintf %s 'nav { color: navy; }\n' > styles.css\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Add project baseline'\ncd community-site\nprintf %s '<nav>Home Events</nav>\n' > index.html\ncd ..\ncd community-site\nprintf %s 'export const links = [\"Home\", \"Events\"];\n' > nav.js\ncd ..\ncd community-site\nprintf %s 'nav { color: teal; }\n' > styles.css\ncd ..\ngit -C community-site add -- index.html\n"
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C community-project commit -q -m 'Start community project'\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0100\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C community-project commit -q -m 'Add community contacts'\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0100\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 9:30 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0130\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 9:30 AM\n' > community-project/schedule.txt\n"
                 }
               },
               "solutionFiles": {
                 "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-site\nmkdir -p community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name \"ZoeSkoul Learner\"\ngit -C community-site config --local user.email \"learner@zoeskoul.local\"\ncd community-site\nprintf %s '<nav>Home</nav>\n' > index.html\ncd ..\ncd community-site\nprintf %s 'export const links = [\"Home\"];\n' > nav.js\ncd ..\ncd community-site\nprintf %s 'nav { color: navy; }\n' > styles.css\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Add project baseline'\ncd community-site\nprintf %s '<nav>Home Events</nav>\n' > index.html\ncd ..\ncd community-site\nprintf %s 'export const links = [\"Home\", \"Events\"];\n' > nav.js\ncd ..\ncd community-site\nprintf %s 'nav { color: teal; }\n' > styles.css\ncd ..\ngit -C community-site add -- index.html\n"
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C community-project commit -q -m 'Start community project'\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0100\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C community-project commit -q -m 'Add community contacts'\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0100\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 9:30 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0130\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 9:30 AM\n' > community-project/schedule.txt\n"
                 }
               },
-              "instructions": "You are working in the prepared `community-site/` repository.\n\nThe staged navigation change also needs `nav.js`; `styles.css` is still unrelated. Stage `nav.js` and verify that exactly two files are staged.",
+              "instructions": "Record the staged schedule change with the message `Update community schedule`. Then inspect short status and confirm that only the contact edit remains unfinished.",
               "terminalExpectations": {
                 "forbiddenCommands": {
                   "0": {
@@ -130,36 +124,36 @@
                 },
                 "requiredCommands": {
                   "0": {
-                    "message": "Did you stage only the path or paths that belong to this checkpoint?"
+                    "message": "Did you record the schedule as its own commit?"
                   },
                   "1": {
-                    "message": "Did you review the staged path list and confirm that only the requested files are selected?"
+                    "message": "Did you verify that the contact edit remains unstaged?"
                   }
                 }
               }
             },
             "try_stage_intentionally_sketch3": {
-              "title": "Commit One Purpose and Leave the Rest",
-              "prompt": "You are working in the prepared `community-site/` repository. Only `README.md` is staged; `styles.css` is an unrelated working-tree experiment. Commit the documentation change as `Clarify volunteer hours`, then use short status to confirm that the style edit remains outside the commit.",
-              "hint": "Record the staged documentation change without trying to make the whole repository quiet.",
+              "title": "Record the Contact Change Separately",
+              "prompt": "Stage `contacts.txt`, review its staged diff, and record it with the message `Update community contacts`.",
+              "hint": "Prepare, inspect, and commit the remaining single-purpose change.",
               "help": {
-                "concept": "A focused commit can finish one purpose while unrelated work remains in the working tree.",
-                "hint_1": "The staged boundary is already prepared.",
-                "hint_2": "After committing, short status should still name the unrelated style file."
+                "concept": "`git add contacts.txt` stages the remaining edit. `git diff --staged -- contacts.txt` reviews the proposal, and the commit records it as a separate history entry.",
+                "hint_1": "The staged diff should contain only the phone-number update.",
+                "hint_2": "The final repository state should be clean."
               },
-              "starterCode": "<nav>Home Events</nav>\n",
-              "solutionCode": "git commit -m \"Clarify volunteer hours\"\ngit status --short",
+              "starterCode": "# Community Project\n\nShared schedules and contact notes.\n",
+              "solutionCode": "git add contacts.txt\ngit diff --staged -- contacts.txt\ngit commit -m \"Update community contacts\"",
               "starterFiles": {
                 "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-site\nmkdir -p community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name \"ZoeSkoul Learner\"\ngit -C community-site config --local user.email \"learner@zoeskoul.local\"\ncd community-site\nprintf %s '<nav>Home</nav>\n' > index.html\ncd ..\ncd community-site\nprintf %s 'export const links = [\"Home\"];\n' > nav.js\ncd ..\ncd community-site\nprintf %s 'nav { color: navy; }\n' > styles.css\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Add project baseline'\ncd community-site\nprintf %s '<nav>Home Events</nav>\n' > index.html\ncd ..\ncd community-site\nprintf %s 'export const links = [\"Home\", \"Events\"];\n' > nav.js\ncd ..\ncd community-site\nprintf %s 'nav { color: teal; }\n' > styles.css\ncd ..\ngit -C community-site add -- index.html nav.js\n"
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C community-project commit -q -m 'Start community project'\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0100\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C community-project commit -q -m 'Add community contacts'\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0100\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 9:30 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-03T12:00:00Z GIT_COMMITTER_DATE=2026-01-03T12:00:00Z git -C community-project commit -q -m 'Update community schedule'\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0100\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 9:30 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0130\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 9:30 AM\n' > community-project/schedule.txt\n"
                 }
               },
               "solutionFiles": {
                 "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-site\nmkdir -p community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name \"ZoeSkoul Learner\"\ngit -C community-site config --local user.email \"learner@zoeskoul.local\"\ncd community-site\nprintf %s '<nav>Home</nav>\n' > index.html\ncd ..\ncd community-site\nprintf %s 'export const links = [\"Home\"];\n' > nav.js\ncd ..\ncd community-site\nprintf %s 'nav { color: navy; }\n' > styles.css\ncd ..\ngit -C community-site add -A\ngit -C community-site commit -q -m 'Add project baseline'\ncd community-site\nprintf %s '<nav>Home Events</nav>\n' > index.html\ncd ..\ncd community-site\nprintf %s 'export const links = [\"Home\", \"Events\"];\n' > nav.js\ncd ..\ncd community-site\nprintf %s 'nav { color: teal; }\n' > styles.css\ncd ..\ngit -C community-site add -- index.html nav.js\n"
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C community-project commit -q -m 'Start community project'\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0100\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C community-project commit -q -m 'Add community contacts'\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0100\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 9:30 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-03T12:00:00Z GIT_COMMITTER_DATE=2026-01-03T12:00:00Z git -C community-project commit -q -m 'Update community schedule'\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0100\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 9:30 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0130\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 9:30 AM\n' > community-project/schedule.txt\n"
                 }
               },
-              "instructions": "You are working in the prepared `community-site/` repository. Only `README.md` is staged; `styles.css` is an unrelated working-tree experiment. Commit the documentation change as `Clarify volunteer hours`, then use short status to confirm that the style edit remains outside the commit.",
+              "instructions": "Stage `contacts.txt`, review its staged diff, and record it with the message `Update community contacts`.",
               "terminalExpectations": {
                 "forbiddenCommands": {
                   "0": {
@@ -168,10 +162,13 @@
                 },
                 "requiredCommands": {
                   "0": {
-                    "message": "Did you record the staged documentation change with the requested subject?"
+                    "message": "Did you stage the remaining contact change?"
                   },
                   "1": {
-                    "message": "Did you confirm that the unrelated style edit remains outside the commit?"
+                    "message": "Did you review the staged contact change?"
+                  },
+                  "2": {
+                    "message": "Did you record the contact update separately?"
                   }
                 }
               }
@@ -179,8 +176,8 @@
           },
           "practice": {
             "single-choice-1": {
-              "title": "Staging Area Purpose",
-              "prompt": "What is the primary purpose of the staging area in Git?",
+              "title": "Choose a Focused Snapshot",
+              "prompt": "Two unrelated files are modified. What best keeps the next commit focused?",
               "hint": "Focus on what the command or concept observes or changes at this point in the workflow.",
               "help": {
                 "concept": "Build the next snapshot one purpose at a time, review the staged version, and reverse a staging decision without losing work.",
@@ -188,10 +185,10 @@
                 "hint_2": "Choose the answer that remains accurate even when other unrelated files exist."
               },
               "options": {
-                "a": "To prepare changes for a commit",
-                "b": "To automatically commit changes",
-                "c": "To discard changes",
-                "d": "To merge branches"
+                "a": "To prepare selected changes for a commit",
+                "b": "To commit changes automatically",
+                "c": "To discard every working-tree change",
+                "d": "To list the recorded commit history"
               }
             },
             "multi-choice-1": {
@@ -228,7 +225,7 @@
             },
             "fill-blank-1": {
               "title": "Write a Focused Commit Subject",
-              "prompt": "The staged change adds event navigation. Complete the subject: `git commit -m \"[blank1]\"`.",
+              "prompt": "The staged change expands the community cleanup time. Complete the subject: `git commit -m \"[blank1]\"`.",
               "hint": "Choose the term or symbol that matches the exact state described, not a nearby Git concept.",
               "help": {
                 "concept": "Build the next snapshot one purpose at a time, review the staged version, and reverse a staging decision without losing work.",
@@ -237,7 +234,7 @@
               },
               "template": "git commit -m \"[blank1]\"",
               "choices": [
-                "Add events navigation",
+                "Update community cleanup time",
                 "changes",
                 "update files",
                 "work in progress"
@@ -254,19 +251,19 @@
         "stage-intentionally": {
           "stage-intentionally-sketch0": {
             "title": "Choose One Purpose",
-            "bodyMarkdown": "You already know how to stage a file. The new skill is deciding **which** files belong together. When navigation and palette edits are both valid, stage only the paths that serve the next project result.\n\nA focused snapshot is easier to review, explain, and reverse than a bundle of unrelated work."
+            "bodyMarkdown": "`git add schedule.txt` stages only the schedule edit. The unrelated contact edit stays in the working tree. Naming the path explicitly is how you build a focused commit when several changes exist together."
           },
           "stage-intentionally-sketch1": {
             "title": "Review the Proposed Snapshot",
-            "bodyMarkdown": "A staged diff answers one precise question: what would the next commit record?\n\n```bash\ngit diff --staged -- index.html\n```\n\nThis is the staged counterpart to the plain diff taught earlier. Review the content and the path list before committing."
+            "bodyMarkdown": "`git diff --staged -- schedule.txt` shows what the next commit would record for the schedule. Ordinary `git diff` shows unstaged work instead, so the `--staged` option changes which repository layer is compared."
           },
           "stage-intentionally-sketch2": {
-            "title": "Keep Related Files Together",
-            "bodyMarkdown": "A focused commit is not necessarily one file. A navigation page and the script that makes it work may represent one result, while an unrelated style experiment should wait.\n\nUse the staged path list to prove the boundary. The decision—not the number of files—is what makes the snapshot coherent."
+            "title": "Commit Only What Is Staged",
+            "bodyMarkdown": "`git commit -m \"Update community schedule\"` records only the staged schedule edit. `git status --short` afterward should still show the unstaged contact edit, proving that Git did not sweep unrelated work into the commit."
           },
           "stage-intentionally-sketch3": {
-            "title": "Commit the Boundary You Chose",
-            "bodyMarkdown": "A clear subject completes the boundary. Write it as a concise action—`Clarify volunteer hours`, not `changes` or `worked on site`.\n\nThe commit records only the staged snapshot. Short status afterward should still show any unrelated edit you intentionally left outside. That remaining work is evidence that the focused boundary worked."
+            "title": "Finish the Second Purpose",
+            "bodyMarkdown": "The remaining contact change follows the same focused sequence: `git add contacts.txt`, inspect it with `git diff --staged -- contacts.txt`, and record it with `git commit -m \"Update community contacts\"`. Reusing the workflow deepens judgment without redefining each command."
           }
         }
       }

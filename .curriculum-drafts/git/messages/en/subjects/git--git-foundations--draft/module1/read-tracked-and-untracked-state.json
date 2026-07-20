@@ -3,17 +3,17 @@
     "git--git-foundations--draft": {
       "git-foundations-module-1-start-tracking": {
         "read-tracked-and-untracked-state": {
-          "label": "Read the Repository State",
-          "summary": "Learn the compact status map once, then use it to distinguish untracked, staged, and unstaged work.",
+          "label": "Read the Community Project State",
+          "summary": "Inspect the two untracked files, stage them, and review the proposed snapshot.",
           "cards": {
             "sketch0": {
-              "title": "Read the Compact Status Map"
+              "title": "Status Compares Three Layers"
             },
             "sketch1": {
-              "title": "Read the Staging Column"
+              "title": "Short Status Is a Compact Map"
             },
             "sketch2": {
-              "title": "Read the Working-Tree Column"
+              "title": "Inspection Does Not Change State"
             },
             "quiz": {
               "title": "Practice"
@@ -22,27 +22,27 @@
           "tryIt": {
             "allowReveal": true,
             "try_read_tracked_and_untracked_state_sketch0": {
-              "title": "Identify an Untracked File",
-              "prompt": "You are working in the prepared `event-board/` repository. Use the compact status view to identify `schedule.md` before it has ever been staged.",
-              "hint": "Read the two-character status marker beside `schedule.md`.",
+              "title": "Read the Initial Repository State",
+              "prompt": "Ask Git for the full repository report. Use it to confirm that the branch is `main`, no commits exist yet, and `README.md` plus `schedule.txt` are untracked. Do not change repository state.",
+              "hint": "Use Git’s full status report as a read-only inspection.",
               "help": {
-                "concept": "A path with no recorded baseline appears with question marks in both short-status columns.",
-                "hint_1": "The file is present in the folder but has never entered the staging area.",
-                "hint_2": "Use the compact status view and focus on the marker beside the named path."
+                "concept": "`git status` describes the current branch and separates staged, unstaged, and untracked work. Running it does not change any file or repository layer.",
+                "hint_1": "Look for the `No commits yet` message and the two untracked file names.",
+                "hint_2": "Do not stage either file in this step."
               },
-              "starterCode": "# Event Schedule\n",
-              "solutionCode": "git status --short",
+              "starterCode": "# Community Project\n\nShared schedules and contact notes.\n",
+              "solutionCode": "git status",
               "starterFiles": {
                 "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf event-board\nmkdir -p event-board\ncd event-board\nprintf %s '# Event Schedule\n' > schedule.md\ncd ..\ngit -C event-board init -q -b main\ngit -C event-board config --local user.name \"ZoeSkoul Learner\"\ngit -C event-board config --local user.email \"learner@zoeskoul.local\"\n"
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\n"
                 }
               },
               "solutionFiles": {
                 "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf event-board\nmkdir -p event-board\ncd event-board\nprintf %s '# Event Schedule\n' > schedule.md\ncd ..\ngit -C event-board init -q -b main\ngit -C event-board config --local user.name \"ZoeSkoul Learner\"\ngit -C event-board config --local user.email \"learner@zoeskoul.local\"\n"
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\n"
                 }
               },
-              "instructions": "You are working in the prepared `event-board/` repository. Use the compact status view to identify `schedule.md` before it has ever been staged.",
+              "instructions": "Ask Git for the full repository report. Use it to confirm that the branch is `main`, no commits exist yet, and `README.md` plus `schedule.txt` are untracked. Do not change repository state.",
               "terminalExpectations": {
                 "forbiddenCommands": {
                   "0": {
@@ -51,33 +51,33 @@
                 },
                 "requiredCommands": {
                   "0": {
-                    "message": "Did you use the compact status view and identify `schedule.md` as untracked?"
+                    "message": "Did you ask Git for the full repository report?"
                   }
                 }
               }
             },
             "try_read_tracked_and_untracked_state_sketch1": {
-              "title": "Identify a Staged File",
-              "prompt": "You are working in the prepared `event-board/` repository. `schedule.md` is already selected for the first snapshot. Use short status and confirm that the staging column marks it as added.",
-              "hint": "Look at the left status column for the staged path.",
+              "title": "Stage the Two Project Files",
+              "prompt": "Prepare the first proposed snapshot by staging only `README.md` and `schedule.txt`. Then inspect compact status and confirm that both paths appear in the staging-area column.",
+              "hint": "Name the two project files explicitly, then read compact status.",
               "help": {
-                "concept": "The left column describes the staging area—the proposed next snapshot.",
-                "hint_1": "The file is new, but it is no longer untracked.",
-                "hint_2": "Use short status and read the first column beside `schedule.md`."
+                "concept": "`git add README.md schedule.txt` copies the current versions of those two files into the staging area. `git status --short` compresses repository state into two columns; an `A` in the left column means the file is staged as an addition.",
+                "hint_1": "There are only two learner files in this module.",
+                "hint_2": "Staging prepares a proposal; it does not create a commit."
               },
-              "starterCode": "# Event Schedule\n",
-              "solutionCode": "git status --short",
+              "starterCode": "# Community Project\n\nShared schedules and contact notes.\n",
+              "solutionCode": "git add README.md schedule.txt\ngit status --short",
               "starterFiles": {
                 "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf event-board\nmkdir -p event-board\ncd event-board\nprintf %s '# Event Schedule\n' > schedule.md\ncd ..\ngit -C event-board init -q -b main\ngit -C event-board config --local user.name \"ZoeSkoul Learner\"\ngit -C event-board config --local user.email \"learner@zoeskoul.local\"\ngit -C event-board add -- schedule.md\n"
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\n"
                 }
               },
               "solutionFiles": {
                 "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf event-board\nmkdir -p event-board\ncd event-board\nprintf %s '# Event Schedule\n' > schedule.md\ncd ..\ngit -C event-board init -q -b main\ngit -C event-board config --local user.name \"ZoeSkoul Learner\"\ngit -C event-board config --local user.email \"learner@zoeskoul.local\"\ngit -C event-board add -- schedule.md\n"
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\n"
                 }
               },
-              "instructions": "You are working in the prepared `event-board/` repository. `schedule.md` is already selected for the first snapshot. Use short status and confirm that the staging column marks it as added.",
+              "instructions": "Prepare the first proposed snapshot by staging only `README.md` and `schedule.txt`. Then inspect compact status and confirm that both paths appear in the staging-area column.",
               "terminalExpectations": {
                 "forbiddenCommands": {
                   "0": {
@@ -86,33 +86,36 @@
                 },
                 "requiredCommands": {
                   "0": {
-                    "message": "Did you read the staging column and confirm that `schedule.md` is selected for the snapshot?"
+                    "message": "Did you stage both `README.md` and `schedule.txt`?"
+                  },
+                  "1": {
+                    "message": "Did you inspect the compact staged state?"
                   }
                 }
               }
             },
             "try_read_tracked_and_untracked_state_sketch2": {
-              "title": "Identify an Unstaged Edit",
-              "prompt": "You are working in the prepared `event-board/` repository. The committed schedule changed in the working tree. Use short status and identify which column marks the unstaged edit.",
-              "hint": "The change has not entered the proposed snapshot.",
+              "title": "Review the Staged File Summary",
+              "prompt": "The two files are staged and no commit exists yet. Inspect the staged summary to verify that the proposed snapshot contains exactly two files without recording it.",
+              "hint": "Ask Git for a statistics-only view of the staging area.",
               "help": {
-                "concept": "A right-column modification means the working file differs from the staging area.",
-                "hint_1": "The path is already tracked, so it will not use the untracked marker.",
-                "hint_2": "Use short status and inspect the second column beside `schedule.md`."
+                "concept": "`git diff --staged --stat` summarizes the files and line counts currently in the staging area. `--staged` reads the proposed snapshot, and `--stat` keeps the output compact. The command does not commit anything.",
+                "hint_1": "The summary should name `README.md` and `schedule.txt`.",
+                "hint_2": "Leave both files staged for the next lesson."
               },
-              "starterCode": "Doors open at 10 AM.\n",
-              "solutionCode": "git status --short",
+              "starterCode": "# Community Project\n\nShared schedules and contact notes.\n",
+              "solutionCode": "git diff --staged --stat",
               "starterFiles": {
                 "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf event-board\nmkdir -p event-board\ngit -C event-board init -q -b main\ngit -C event-board config --local user.name \"ZoeSkoul Learner\"\ngit -C event-board config --local user.email \"learner@zoeskoul.local\"\ncd event-board\nprintf %s 'Doors open at 9 AM.\n' > schedule.md\ncd ..\ngit -C event-board add -A\ngit -C event-board commit -q -m 'Add project baseline'\ncd event-board\nprintf %s 'Doors open at 10 AM.\n' > schedule.md\ncd ..\n"
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\n"
                 }
               },
               "solutionFiles": {
                 "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf event-board\nmkdir -p event-board\ngit -C event-board init -q -b main\ngit -C event-board config --local user.name \"ZoeSkoul Learner\"\ngit -C event-board config --local user.email \"learner@zoeskoul.local\"\ncd event-board\nprintf %s 'Doors open at 9 AM.\n' > schedule.md\ncd ..\ngit -C event-board add -A\ngit -C event-board commit -q -m 'Add project baseline'\ncd event-board\nprintf %s 'Doors open at 10 AM.\n' > schedule.md\ncd ..\n"
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\n"
                 }
               },
-              "instructions": "You are working in the prepared `event-board/` repository. The committed schedule changed in the working tree. Use short status and identify which column marks the unstaged edit.",
+              "instructions": "The two files are staged and no commit exists yet. Inspect the staged summary to verify that the proposed snapshot contains exactly two files without recording it.",
               "terminalExpectations": {
                 "forbiddenCommands": {
                   "0": {
@@ -121,7 +124,7 @@
                 },
                 "requiredCommands": {
                   "0": {
-                    "message": "Did you read the working-tree column and confirm the unstaged schedule edit?"
+                    "message": "Did you inspect the staged two-file summary?"
                   }
                 }
               }
@@ -204,16 +207,16 @@
       "git-foundations-module-1-start-tracking": {
         "read-tracked-and-untracked-state": {
           "sketch0": {
-            "title": "Read the Compact Status Map",
-            "bodyMarkdown": "You already know the full status report. The `--short` option compresses the same repository state into two columns:\n\n```bash\ngit status --short\n```\n\nA new path appears as `?? schedule.md`. The question marks mean Git has no recorded baseline for that file. Short status changes nothing; it gives you a quick map before the next decision."
+            "title": "Read the Full Repository Report",
+            "bodyMarkdown": "`git status` is a read-only report. It names the current branch and groups paths by whether they are staged, unstaged, or untracked. In this two-file project, the first report should show `README.md` and `schedule.txt` as untracked because no snapshot contains them yet."
           },
           "sketch1": {
-            "title": "Read the Staging Column",
-            "bodyMarkdown": "The left status column describes the proposed next snapshot. When a new file has been staged, a line such as `A  schedule.md` places `A` on the left.\n\nThat mark does not mean a commit exists. It means the file is selected for the next commit. The working file can still change before history is recorded."
+            "title": "Stage the Two-File Proposal",
+            "bodyMarkdown": "`git add README.md schedule.txt` copies the current versions of both files into the staging area—the proposed next snapshot. `git status --short` then uses two columns to summarize state. An `A` in the left column means a new path is staged."
           },
           "sketch2": {
-            "title": "Read the Working-Tree Column",
-            "bodyMarkdown": "The right status column describes changes that remain only in the working tree. A line such as ` M schedule.md` means the tracked file differs from the staged version.\n\nThese three patterns are the essential map:\n\n```text\n?? new-file.md\nA  staged-new-file.md\n M modified-file.md\n```\n\nLater exercises will reuse this map in more complicated repositories instead of teaching the symbols again."
+            "title": "Inspect What Is Staged",
+            "bodyMarkdown": "`git diff --staged --stat` reads the staging area and prints a compact file-and-line summary. `--staged` means “compare the proposed snapshot with the current commit,” while `--stat` avoids showing every changed line. This inspection does not create history."
           }
         }
       }

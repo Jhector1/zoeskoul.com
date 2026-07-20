@@ -197,20 +197,25 @@
       "weight": 1,
       "messageBase": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch0",
       "language": "bash",
-      "starterCode": "# Event Schedule\n",
+      "starterCode": "# Community Project\n\nShared schedules and contact notes.\n",
       "starterFiles": [
         {
-          "path": "event-board/schedule.md",
-          "content": "# Event Schedule\n",
+          "path": "community-project/README.md",
+          "content": "# Community Project\n\nShared schedules and contact notes.\n",
           "language": "markdown",
           "isEntry": true,
           "entry": true
+        },
+        {
+          "path": "community-project/schedule.txt",
+          "content": "Community schedule\n\nSaturday cleanup: 10:00 AM\n",
+          "language": "text"
         }
       ],
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^git\\s+status\\s+(?:\\-\\-short|\\-s)$",
+            "pattern": "^git\\s+status$",
             "message": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch0.terminalExpectations.requiredCommands.0.message"
           }
         ],
@@ -223,28 +228,38 @@
       },
       "workspace": {
         "language": "bash",
-        "entryFilePath": "event-board/schedule.md",
-        "starterCode": "# Event Schedule\n",
+        "entryFilePath": "community-project/README.md",
+        "starterCode": "# Community Project\n\nShared schedules and contact notes.\n",
         "starterFiles": [
           {
-            "path": "event-board/schedule.md",
-            "content": "# Event Schedule\n",
+            "path": "community-project/README.md",
+            "content": "# Community Project\n\nShared schedules and contact notes.\n",
             "language": "markdown",
             "isEntry": true,
             "entry": true
+          },
+          {
+            "path": "community-project/schedule.txt",
+            "content": "Community schedule\n\nSaturday cleanup: 10:00 AM\n",
+            "language": "text"
           }
         ],
         "fixtureFiles": [
           {
             "path": ".zoeskoul/setup.sh",
-            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf event-board\nmkdir -p event-board\ncd event-board\nprintf %s '# Event Schedule\n' > schedule.md\ncd ..\ngit -C event-board init -q -b main\ngit -C event-board config --local user.name \"ZoeSkoul Learner\"\ngit -C event-board config --local user.email \"learner@zoeskoul.local\"\n",
+            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\n",
             "language": "bash",
             "readOnly": true
           },
           {
-            "path": "event-board/schedule.md",
-            "content": "# Event Schedule\n",
+            "path": "community-project/README.md",
+            "content": "# Community Project\n\nShared schedules and contact notes.\n",
             "language": "markdown"
+          },
+          {
+            "path": "community-project/schedule.txt",
+            "content": "Community schedule\n\nSaturday cleanup: 10:00 AM\n",
+            "language": "text"
           }
         ]
       },
@@ -255,7 +270,7 @@
         "instructions": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch0.instructions"
       },
       "hiddenShellCheck": {
-        "script": "set -eu\nrepo=event-board\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" branch --show-current)\" = main ] || fail \"The repository is not on main.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = 0 ] || fail \"The repository has the wrong number of commits.\"\n[ -n \"$(git -C \"$repo\" status --porcelain)\" ] || fail \"The exercise change is missing.\"\nexpected_untracked=$(printf \"%s\\n\" schedule.md | sort)\nactual_untracked=$(git -C \"$repo\" ls-files --others --exclude-standard | sort)\n[ \"$actual_untracked\" = \"$expected_untracked\" ] || fail \"The untracked file set is not correct.\"\nexpected_staged=$(printf \"%s\\n\"  | sort)\nactual_staged=$(git -C \"$repo\" diff --cached --name-only | sort)\n[ \"$actual_staged\" = \"$expected_staged\" ] || fail \"The staged file set is not correct.\"",
+        "script": "set -eu\nrepo=community-project\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" branch --show-current)\" = main ] || fail \"The repository is on the wrong branch.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = 0 ] || fail \"The repository has the wrong number of commits.\"\n[ \"$(git -C \"$repo\" config --local --get user.name)\" = 'ZoeSkoul Learner' ] || fail \"The repository-local author name is incorrect.\"\n[ \"$(git -C \"$repo\" config --local --get user.email)\" = learner@zoeskoul.local ] || fail \"The repository-local author email is incorrect.\"\nactual_status=$(git -C \"$repo\" status --porcelain=v1 --untracked-files=all)\n[ \"$actual_status\" = '?? README.md\n?? schedule.txt' ] || fail \"The staged, unstaged, or untracked state is not correct yet.\"\nactual_tracked=$(git -C \"$repo\" ls-files)\n[ \"$actual_tracked\" = '' ] || fail \"The tracked file set is not correct yet.\"\n[ -f \"$repo/README.md\" ] || fail \"The expected file README.md is missing.\"\n[ \"$(cat \"$repo/README.md\")\" = '# Community Project\n\nShared schedules and contact notes.' ] || fail \"The content of README.md is not correct yet.\"\n[ -f \"$repo/schedule.txt\" ] || fail \"The expected file schedule.txt is missing.\"\n[ \"$(cat \"$repo/schedule.txt\")\" = 'Community schedule\n\nSaturday cleanup: 10:00 AM' ] || fail \"The content of schedule.txt is not correct yet.\"",
         "timeoutMs": 15000
       },
       "ideConfig": {
@@ -263,7 +278,7 @@
         "runnerBackend": "pty",
         "layoutMode": "default",
         "terminalSessionScope": "exercise",
-        "terminalCwd": "/workspace/event-board",
+        "terminalCwd": "/workspace/community-project",
         "fileActions": {
           "enabled": true,
           "createFile": true,
@@ -288,7 +303,7 @@
         "runnerBackend": "pty",
         "layoutMode": "default",
         "terminalSessionScope": "exercise",
-        "terminalCwd": "/workspace/event-board",
+        "terminalCwd": "/workspace/community-project",
         "fileActions": {
           "enabled": true,
           "createFile": true,
@@ -311,16 +326,25 @@
       "fixtureFiles": [
         {
           "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf event-board\nmkdir -p event-board\ncd event-board\nprintf %s '# Event Schedule\n' > schedule.md\ncd ..\ngit -C event-board init -q -b main\ngit -C event-board config --local user.name \"ZoeSkoul Learner\"\ngit -C event-board config --local user.email \"learner@zoeskoul.local\"\n",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\n",
           "language": "bash",
           "readOnly": true
         },
         {
-          "path": "event-board/schedule.md",
-          "content": "# Event Schedule\n",
+          "path": "community-project/README.md",
+          "content": "# Community Project\n\nShared schedules and contact notes.\n",
           "language": "markdown"
+        },
+        {
+          "path": "community-project/schedule.txt",
+          "content": "Community schedule\n\nSaturday cleanup: 10:00 AM\n",
+          "language": "text"
         }
-      ]
+      ],
+      "tools": {
+        "defaultSurface": "results",
+        "compactDefaultSurface": "results"
+      }
     },
     {
       "id": "try-read-tracked-and-untracked-state-sketch1",
@@ -329,21 +353,30 @@
       "weight": 1,
       "messageBase": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch1",
       "language": "bash",
-      "starterCode": "# Event Schedule\n",
+      "starterCode": "# Community Project\n\nShared schedules and contact notes.\n",
       "starterFiles": [
         {
-          "path": "event-board/schedule.md",
-          "content": "# Event Schedule\n",
+          "path": "community-project/README.md",
+          "content": "# Community Project\n\nShared schedules and contact notes.\n",
           "language": "markdown",
           "isEntry": true,
           "entry": true
+        },
+        {
+          "path": "community-project/schedule.txt",
+          "content": "Community schedule\n\nSaturday cleanup: 10:00 AM\n",
+          "language": "text"
         }
       ],
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^git\\s+status\\s+(?:\\-\\-short|\\-s)$",
+            "pattern": "^git\\s+add\\s+(?=.*README\\.md)(?=.*schedule\\.txt).+$",
             "message": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch1.terminalExpectations.requiredCommands.0.message"
+          },
+          {
+            "pattern": "^git\\s+status\\s+--short$",
+            "message": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch1.terminalExpectations.requiredCommands.1.message"
           }
         ],
         "forbiddenCommands": [
@@ -355,28 +388,38 @@
       },
       "workspace": {
         "language": "bash",
-        "entryFilePath": "event-board/schedule.md",
-        "starterCode": "# Event Schedule\n",
+        "entryFilePath": "community-project/README.md",
+        "starterCode": "# Community Project\n\nShared schedules and contact notes.\n",
         "starterFiles": [
           {
-            "path": "event-board/schedule.md",
-            "content": "# Event Schedule\n",
+            "path": "community-project/README.md",
+            "content": "# Community Project\n\nShared schedules and contact notes.\n",
             "language": "markdown",
             "isEntry": true,
             "entry": true
+          },
+          {
+            "path": "community-project/schedule.txt",
+            "content": "Community schedule\n\nSaturday cleanup: 10:00 AM\n",
+            "language": "text"
           }
         ],
         "fixtureFiles": [
           {
             "path": ".zoeskoul/setup.sh",
-            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf event-board\nmkdir -p event-board\ncd event-board\nprintf %s '# Event Schedule\n' > schedule.md\ncd ..\ngit -C event-board init -q -b main\ngit -C event-board config --local user.name \"ZoeSkoul Learner\"\ngit -C event-board config --local user.email \"learner@zoeskoul.local\"\ngit -C event-board add -- schedule.md\n",
+            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\n",
             "language": "bash",
             "readOnly": true
           },
           {
-            "path": "event-board/schedule.md",
-            "content": "# Event Schedule\n",
+            "path": "community-project/README.md",
+            "content": "# Community Project\n\nShared schedules and contact notes.\n",
             "language": "markdown"
+          },
+          {
+            "path": "community-project/schedule.txt",
+            "content": "Community schedule\n\nSaturday cleanup: 10:00 AM\n",
+            "language": "text"
           }
         ]
       },
@@ -387,7 +430,7 @@
         "instructions": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch1.instructions"
       },
       "hiddenShellCheck": {
-        "script": "set -eu\nrepo=event-board\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" branch --show-current)\" = main ] || fail \"The repository is not on main.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = 0 ] || fail \"The repository has the wrong number of commits.\"\n[ -n \"$(git -C \"$repo\" status --porcelain)\" ] || fail \"The exercise change is missing.\"\nexpected_untracked=$(printf \"%s\\n\"  | sort)\nactual_untracked=$(git -C \"$repo\" ls-files --others --exclude-standard | sort)\n[ \"$actual_untracked\" = \"$expected_untracked\" ] || fail \"The untracked file set is not correct.\"\nexpected_staged=$(printf \"%s\\n\" schedule.md | sort)\nactual_staged=$(git -C \"$repo\" diff --cached --name-only | sort)\n[ \"$actual_staged\" = \"$expected_staged\" ] || fail \"The staged file set is not correct.\"",
+        "script": "set -eu\nrepo=community-project\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" branch --show-current)\" = main ] || fail \"The repository is on the wrong branch.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = 0 ] || fail \"The repository has the wrong number of commits.\"\n[ \"$(git -C \"$repo\" config --local --get user.name)\" = 'ZoeSkoul Learner' ] || fail \"The repository-local author name is incorrect.\"\n[ \"$(git -C \"$repo\" config --local --get user.email)\" = learner@zoeskoul.local ] || fail \"The repository-local author email is incorrect.\"\nactual_status=$(git -C \"$repo\" status --porcelain=v1 --untracked-files=all)\n[ \"$actual_status\" = 'A  README.md\nA  schedule.txt' ] || fail \"The staged, unstaged, or untracked state is not correct yet.\"\nactual_tracked=$(git -C \"$repo\" ls-files)\n[ \"$actual_tracked\" = 'README.md\nschedule.txt' ] || fail \"The tracked file set is not correct yet.\"\n[ -f \"$repo/README.md\" ] || fail \"The expected file README.md is missing.\"\n[ \"$(cat \"$repo/README.md\")\" = '# Community Project\n\nShared schedules and contact notes.' ] || fail \"The content of README.md is not correct yet.\"\n[ -f \"$repo/schedule.txt\" ] || fail \"The expected file schedule.txt is missing.\"\n[ \"$(cat \"$repo/schedule.txt\")\" = 'Community schedule\n\nSaturday cleanup: 10:00 AM' ] || fail \"The content of schedule.txt is not correct yet.\"",
         "timeoutMs": 15000
       },
       "ideConfig": {
@@ -395,7 +438,7 @@
         "runnerBackend": "pty",
         "layoutMode": "default",
         "terminalSessionScope": "exercise",
-        "terminalCwd": "/workspace/event-board",
+        "terminalCwd": "/workspace/community-project",
         "fileActions": {
           "enabled": true,
           "createFile": true,
@@ -420,7 +463,7 @@
         "runnerBackend": "pty",
         "layoutMode": "default",
         "terminalSessionScope": "exercise",
-        "terminalCwd": "/workspace/event-board",
+        "terminalCwd": "/workspace/community-project",
         "fileActions": {
           "enabled": true,
           "createFile": true,
@@ -443,16 +486,25 @@
       "fixtureFiles": [
         {
           "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf event-board\nmkdir -p event-board\ncd event-board\nprintf %s '# Event Schedule\n' > schedule.md\ncd ..\ngit -C event-board init -q -b main\ngit -C event-board config --local user.name \"ZoeSkoul Learner\"\ngit -C event-board config --local user.email \"learner@zoeskoul.local\"\ngit -C event-board add -- schedule.md\n",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\n",
           "language": "bash",
           "readOnly": true
         },
         {
-          "path": "event-board/schedule.md",
-          "content": "# Event Schedule\n",
+          "path": "community-project/README.md",
+          "content": "# Community Project\n\nShared schedules and contact notes.\n",
           "language": "markdown"
+        },
+        {
+          "path": "community-project/schedule.txt",
+          "content": "Community schedule\n\nSaturday cleanup: 10:00 AM\n",
+          "language": "text"
         }
-      ]
+      ],
+      "tools": {
+        "defaultSurface": "results",
+        "compactDefaultSurface": "results"
+      }
     },
     {
       "id": "try-read-tracked-and-untracked-state-sketch2",
@@ -461,20 +513,25 @@
       "weight": 1,
       "messageBase": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch2",
       "language": "bash",
-      "starterCode": "Doors open at 10 AM.\n",
+      "starterCode": "# Community Project\n\nShared schedules and contact notes.\n",
       "starterFiles": [
         {
-          "path": "event-board/schedule.md",
-          "content": "Doors open at 10 AM.\n",
+          "path": "community-project/README.md",
+          "content": "# Community Project\n\nShared schedules and contact notes.\n",
           "language": "markdown",
           "isEntry": true,
           "entry": true
+        },
+        {
+          "path": "community-project/schedule.txt",
+          "content": "Community schedule\n\nSaturday cleanup: 10:00 AM\n",
+          "language": "text"
         }
       ],
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^git\\s+status\\s+(?:\\-\\-short|\\-s)$",
+            "pattern": "^git\\s+diff\\s+--staged\\s+--stat$",
             "message": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch2.terminalExpectations.requiredCommands.0.message"
           }
         ],
@@ -487,28 +544,38 @@
       },
       "workspace": {
         "language": "bash",
-        "entryFilePath": "event-board/schedule.md",
-        "starterCode": "Doors open at 10 AM.\n",
+        "entryFilePath": "community-project/README.md",
+        "starterCode": "# Community Project\n\nShared schedules and contact notes.\n",
         "starterFiles": [
           {
-            "path": "event-board/schedule.md",
-            "content": "Doors open at 10 AM.\n",
+            "path": "community-project/README.md",
+            "content": "# Community Project\n\nShared schedules and contact notes.\n",
             "language": "markdown",
             "isEntry": true,
             "entry": true
+          },
+          {
+            "path": "community-project/schedule.txt",
+            "content": "Community schedule\n\nSaturday cleanup: 10:00 AM\n",
+            "language": "text"
           }
         ],
         "fixtureFiles": [
           {
             "path": ".zoeskoul/setup.sh",
-            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf event-board\nmkdir -p event-board\ngit -C event-board init -q -b main\ngit -C event-board config --local user.name \"ZoeSkoul Learner\"\ngit -C event-board config --local user.email \"learner@zoeskoul.local\"\ncd event-board\nprintf %s 'Doors open at 9 AM.\n' > schedule.md\ncd ..\ngit -C event-board add -A\ngit -C event-board commit -q -m 'Add project baseline'\ncd event-board\nprintf %s 'Doors open at 10 AM.\n' > schedule.md\ncd ..\n",
+            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\n",
             "language": "bash",
             "readOnly": true
           },
           {
-            "path": "event-board/schedule.md",
-            "content": "Doors open at 10 AM.\n",
+            "path": "community-project/README.md",
+            "content": "# Community Project\n\nShared schedules and contact notes.\n",
             "language": "markdown"
+          },
+          {
+            "path": "community-project/schedule.txt",
+            "content": "Community schedule\n\nSaturday cleanup: 10:00 AM\n",
+            "language": "text"
           }
         ]
       },
@@ -519,7 +586,7 @@
         "instructions": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch2.instructions"
       },
       "hiddenShellCheck": {
-        "script": "set -eu\nrepo=event-board\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" branch --show-current)\" = main ] || fail \"The repository is not on main.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = 1 ] || fail \"The repository has the wrong number of commits.\"\n[ -n \"$(git -C \"$repo\" status --porcelain)\" ] || fail \"The exercise change is missing.\"\nexpected=$(printf \"%s\\n\" schedule.md | sort)\nactual=$(git -C \"$repo\" ls-files | sort)\n[ \"$actual\" = \"$expected\" ] || fail \"The tracked file set is not correct.\"\nexpected_staged=$(printf \"%s\\n\"  | sort)\nactual_staged=$(git -C \"$repo\" diff --cached --name-only | sort)\n[ \"$actual_staged\" = \"$expected_staged\" ] || fail \"The staged file set is not correct.\"",
+        "script": "set -eu\nrepo=community-project\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" branch --show-current)\" = main ] || fail \"The repository is on the wrong branch.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = 0 ] || fail \"The repository has the wrong number of commits.\"\n[ \"$(git -C \"$repo\" config --local --get user.name)\" = 'ZoeSkoul Learner' ] || fail \"The repository-local author name is incorrect.\"\n[ \"$(git -C \"$repo\" config --local --get user.email)\" = learner@zoeskoul.local ] || fail \"The repository-local author email is incorrect.\"\nactual_status=$(git -C \"$repo\" status --porcelain=v1 --untracked-files=all)\n[ \"$actual_status\" = 'A  README.md\nA  schedule.txt' ] || fail \"The staged, unstaged, or untracked state is not correct yet.\"\nactual_tracked=$(git -C \"$repo\" ls-files)\n[ \"$actual_tracked\" = 'README.md\nschedule.txt' ] || fail \"The tracked file set is not correct yet.\"\n[ -f \"$repo/README.md\" ] || fail \"The expected file README.md is missing.\"\n[ \"$(cat \"$repo/README.md\")\" = '# Community Project\n\nShared schedules and contact notes.' ] || fail \"The content of README.md is not correct yet.\"\n[ -f \"$repo/schedule.txt\" ] || fail \"The expected file schedule.txt is missing.\"\n[ \"$(cat \"$repo/schedule.txt\")\" = 'Community schedule\n\nSaturday cleanup: 10:00 AM' ] || fail \"The content of schedule.txt is not correct yet.\"",
         "timeoutMs": 15000
       },
       "ideConfig": {
@@ -527,7 +594,7 @@
         "runnerBackend": "pty",
         "layoutMode": "default",
         "terminalSessionScope": "exercise",
-        "terminalCwd": "/workspace/event-board",
+        "terminalCwd": "/workspace/community-project",
         "fileActions": {
           "enabled": true,
           "createFile": true,
@@ -552,7 +619,7 @@
         "runnerBackend": "pty",
         "layoutMode": "default",
         "terminalSessionScope": "exercise",
-        "terminalCwd": "/workspace/event-board",
+        "terminalCwd": "/workspace/community-project",
         "fileActions": {
           "enabled": true,
           "createFile": true,
@@ -575,16 +642,25 @@
       "fixtureFiles": [
         {
           "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf event-board\nmkdir -p event-board\ngit -C event-board init -q -b main\ngit -C event-board config --local user.name \"ZoeSkoul Learner\"\ngit -C event-board config --local user.email \"learner@zoeskoul.local\"\ncd event-board\nprintf %s 'Doors open at 9 AM.\n' > schedule.md\ncd ..\ngit -C event-board add -A\ngit -C event-board commit -q -m 'Add project baseline'\ncd event-board\nprintf %s 'Doors open at 10 AM.\n' > schedule.md\ncd ..\n",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\n",
           "language": "bash",
           "readOnly": true
         },
         {
-          "path": "event-board/schedule.md",
-          "content": "Doors open at 10 AM.\n",
+          "path": "community-project/README.md",
+          "content": "# Community Project\n\nShared schedules and contact notes.\n",
           "language": "markdown"
+        },
+        {
+          "path": "community-project/schedule.txt",
+          "content": "Community schedule\n\nSaturday cleanup: 10:00 AM\n",
+          "language": "text"
         }
-      ]
+      ],
+      "tools": {
+        "defaultSurface": "results",
+        "compactDefaultSurface": "results"
+      }
     }
   ],
   "topicMeta": {

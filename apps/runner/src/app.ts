@@ -7,6 +7,7 @@ import { streamSessionRoute } from "./routes/sessions.stream.js";
 import { resizeSessionRoute } from "./routes/sessions.resize.js";
 import { snapshotWorkspaceRoute } from "./routes/sessions.snapshotWorkspace.js";
 import { sessionsReplaceWorkspaceRoute } from "./routes/sessions.replaceWorkspaceRoute.js";
+import { heartbeatSessionRoute } from "./routes/sessions.heartbeat.js";
 import { getSessionStats } from "./services/sessions/sessionStore.js";
 
 export const app = express();
@@ -37,6 +38,7 @@ app.post("/sessions/start", startSessionRoute);
 app.post("/sessions/:sessionId/input", inputSessionRoute);
 app.post("/sessions/:sessionId/resize", resizeSessionRoute);
 app.post("/sessions/:sessionId/cancel", cancelSessionRoute);
+app.post("/sessions/:sessionId/heartbeat", heartbeatSessionRoute);
 app.get("/sessions/:sessionId/stream", streamSessionRoute);
 app.post("/sessions/:sessionId/snapshot-workspace", snapshotWorkspaceRoute);
 app.post(

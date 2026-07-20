@@ -40,6 +40,7 @@ export function buildPlanFromSpec(args: {
                         [],
                     practice: topic.practice,
                     projectBrief: topic.projectBrief,
+                    projectJourney: topic.projectJourney,
                     tools: topic.tools,
                     lessonTools: topic.lessonTools,
                     exerciseTools: topic.exerciseTools,

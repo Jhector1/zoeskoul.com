@@ -10,6 +10,7 @@ import {
     ArrowRight,
     ArrowUpRight,
     Check,
+    ChevronDown,
     ChevronRight,
     Code2,
     Globe,
@@ -93,6 +94,16 @@ type SubjectCard = {
     badge: string | null;
     imageUrl?: string | null;
     imageAlt?: string | null;
+    catalogSlug: string;
+    catalogTitle: string;
+    catalogOrder: number;
+};
+
+type SubjectCatalogGroup = {
+    slug: string;
+    title: string;
+    order: number;
+    subjects: SubjectCard[];
 };
 
 type SafeT = ReturnType<typeof useTaggedT>["t"];
@@ -117,6 +128,7 @@ const STORAGE_KEY = "zoeskoul.home.onboarding.v2";
 const DISMISSED_KEY = "zoeskoul.home.avatar.dismissed.v1";
 const TRIAL_LAST_SESSION_KEY = "zoeskoul.trial.lastSessionId";
 const APP_NAME = process.env.NEXT_PUBLIC_APP_NAME ?? "ZoeSkoul";
+const COLLAPSED_COURSE_LIMIT = 3;
 
 const DEFAULT_DATA: OnboardingData = {
     preferredLanguage: "",
@@ -127,7 +139,31 @@ const DEFAULT_DATA: OnboardingData = {
     themePreference: "",
     trialIntent: "",
 };
-// add this helper near DEFAULT_DATA
+
+function groupSubjectsByCatalog(subjects: SubjectCard[]): SubjectCatalogGroup[] {
+    const groups = new Map<string, SubjectCatalogGroup>();
+
+    for (const subject of subjects) {
+        const current = groups.get(subject.catalogSlug);
+
+        if (current) {
+            current.subjects.push(subject);
+            continue;
+        }
+
+        groups.set(subject.catalogSlug, {
+            slug: subject.catalogSlug,
+            title: subject.catalogTitle,
+            order: subject.catalogOrder,
+            subjects: [subject],
+        });
+    }
+
+    return Array.from(groups.values()).sort(
+        (left, right) =>
+            left.order - right.order || left.title.localeCompare(right.title),
+    );
+}
 
 function emptyValueForStep(stepId: StepId): OnboardingData[StepId] {
     if (stepId === "learningInterests") {
@@ -816,6 +852,185 @@ function ChoiceButton({
     );
 }
 
+function CatalogSubjectChoices({
+    subjects,
+    selected,
+    onToggle,
+    disabled,
+}: {
+    subjects: SubjectCard[];
+    selected: string[];
+    onToggle: (slug: string) => void;
+    disabled: boolean;
+}) {
+    const { t, resolve } = useTaggedT("homeOnboarding");
+    const groups = useMemo(() => groupSubjectsByCatalog(subjects), [subjects]);
+    const selectedSet = useMemo(() => new Set(selected), [selected]);
+    const catalogSelectId = React.useId();
+    const [selectedCatalogSlug, setSelectedCatalogSlug] = useState<string>(() => {
+        const selectedCatalog = groups.find((group) =>
+            group.subjects.some((subject) => selectedSet.has(subject.slug)),
+        );
+
+        return selectedCatalog?.slug ?? groups[0]?.slug ?? "";
+    });
+    const [showsAllCourses, setShowsAllCourses] = useState(false);
+
+    useEffect(() => {
+        if (
+            groups.length === 0 ||
+            groups.some((group) => group.slug === selectedCatalogSlug)
+        ) {
+            return;
+        }
+
+        const selectedCatalog = groups.find((group) =>
+            group.subjects.some((subject) => selectedSet.has(subject.slug)),
+        );
+
+        setSelectedCatalogSlug(selectedCatalog?.slug ?? groups[0]?.slug ?? "");
+        setShowsAllCourses(false);
+    }, [groups, selectedCatalogSlug, selectedSet]);
+
+    if (groups.length === 0) return null;
+
+    const activeGroup =
+        groups.find((group) => group.slug === selectedCatalogSlug) ?? groups[0];
+
+    if (!activeGroup) return null;
+
+    const selectedCount = activeGroup.subjects.filter((subject) =>
+        selectedSet.has(subject.slug),
+    ).length;
+    const visibleSubjects = showsAllCourses
+        ? activeGroup.subjects
+        : activeGroup.subjects.slice(0, COLLAPSED_COURSE_LIMIT);
+    const hiddenCount = activeGroup.subjects.length - visibleSubjects.length;
+    const courseCountLabel =
+        activeGroup.subjects.length === 1
+            ? t("steps.learningInterests.catalogPicker.oneCourse")
+            : t("steps.learningInterests.catalogPicker.manyCourses", {
+                  count: activeGroup.subjects.length,
+              });
+    const selectedCountLabel =
+        selectedCount === 1
+            ? t("steps.learningInterests.catalogPicker.oneSelected")
+            : t("steps.learningInterests.catalogPicker.manySelected", {
+                  count: selectedCount,
+              });
+
+    return (
+        <div className="grid gap-3">
+            <div className="grid gap-1.5">
+                <label
+                    htmlFor={catalogSelectId}
+                    className="text-xs font-semibold text-[rgb(var(--ui-text-muted)/0.92)]"
+                >
+                    {t("steps.learningInterests.catalogPicker.catalogLabel")}
+                </label>
+
+                <div className="relative">
+                    <select
+                        id={catalogSelectId}
+                        value={activeGroup.slug}
+                        onChange={(event) => {
+                            setSelectedCatalogSlug(event.target.value);
+                            setShowsAllCourses(false);
+                        }}
+                        disabled={disabled}
+                        className={cn(
+                            "h-11 w-full appearance-none rounded-xl border border-[rgb(var(--ui-border)/1)]",
+                            "bg-[rgb(var(--ui-surface-2)/0.82)] px-3.5 pr-10 text-sm font-semibold text-[rgb(var(--ui-text)/0.96)]",
+                            "outline-none transition-colors focus:border-[rgb(var(--ui-accent)/0.58)] focus:ring-2 focus:ring-[rgb(var(--ui-ring)/0.16)]",
+                            disabled
+                                ? "cursor-not-allowed opacity-70"
+                                : "cursor-pointer hover:border-[rgb(var(--ui-accent)/0.28)]",
+                        )}
+                    >
+                        {groups.map((group) => (
+                            <option key={group.slug} value={group.slug}>
+                                {group.title}
+                            </option>
+                        ))}
+                    </select>
+
+                    <ChevronDown
+                        aria-hidden="true"
+                        className="pointer-events-none absolute right-3.5 top-1/2 size-4 -translate-y-1/2 text-[rgb(var(--ui-text-muted)/0.84)]"
+                    />
+                </div>
+
+                <p className="text-xs text-[rgb(var(--ui-text-muted)/0.78)]">
+                    {t("steps.learningInterests.catalogPicker.catalogHelp")}
+                </p>
+            </div>
+
+            <div className="overflow-hidden rounded-xl border border-[rgb(var(--ui-border)/1)] bg-[rgb(var(--ui-surface-2)/0.52)]">
+                <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[rgb(var(--ui-border)/1)] px-3.5 py-3">
+                    <div className="text-sm font-semibold text-[rgb(var(--ui-text)/0.96)]">
+                        {t("steps.learningInterests.catalogPicker.coursesTitle", {
+                            catalog: activeGroup.title,
+                        })}
+                    </div>
+
+                    <div className="flex flex-wrap items-center gap-x-2 text-xs text-[rgb(var(--ui-text-muted)/0.84)]">
+                        <span>{courseCountLabel}</span>
+                        {selectedCount > 0 ? (
+                            <span className="font-medium text-[rgb(var(--ui-accent)/1)]">
+                                {selectedCountLabel}
+                            </span>
+                        ) : null}
+                    </div>
+                </div>
+
+                <div className="p-2.5">
+                    <div className="grid gap-2">
+                        {visibleSubjects.map((subject) => (
+                            <ChoiceButton
+                                key={subject.slug}
+                                active={selectedSet.has(subject.slug)}
+                                label={resolve(
+                                    subject.title,
+                                    { appName: APP_NAME },
+                                    subject.slug,
+                                )}
+                                hint={resolve(
+                                    subject.badge,
+                                    { appName: APP_NAME },
+                                    undefined,
+                                )}
+                                onClick={() => onToggle(subject.slug)}
+                                disabled={disabled}
+                            />
+                        ))}
+                    </div>
+
+                    {hiddenCount > 0 || showsAllCourses ? (
+                        <button
+                            type="button"
+                            onClick={() => setShowsAllCourses((current) => !current)}
+                            disabled={disabled}
+                            className={cn(
+                                buttonClass("ghost"),
+                                "mt-2 h-8 w-full text-xs",
+                            )}
+                        >
+                            {showsAllCourses
+                                ? t(
+                                      "steps.learningInterests.catalogPicker.showLess",
+                                  )
+                                : t(
+                                      "steps.learningInterests.catalogPicker.showMore",
+                                      { count: hiddenCount },
+                                  )}
+                        </button>
+                    ) : null}
+                </div>
+            </div>
+        </div>
+    );
+}
+
 function SubjectImageStrip({ subjects }: { subjects: SubjectCard[] }) {
     const { t, resolve } = useTaggedT("homeOnboarding");
 
@@ -936,7 +1151,7 @@ function OnboardingPanel({
     }) => void;
     busy: boolean;
 }) {
-    const { t, resolve } = useTaggedT("homeOnboarding");
+    const { t } = useTaggedT("homeOnboarding");
     const [stepIndex, setStepIndex] = useState(initialStepIndex);
 
     useEffect(() => {
@@ -1007,11 +1222,7 @@ function OnboardingPanel({
             if (step.id === "learningInterests") {
                 return {
                     ...step,
-                    choices: subjectOptions.map((subject) => ({
-                        label: resolve(subject.title, { appName: APP_NAME }, subject.slug),
-                        value: subject.slug,
-                        hint: resolve(subject.badge, { appName: APP_NAME }, undefined),
-                    })),
+                    choices: [],
                 };
             }
 
@@ -1050,9 +1261,7 @@ function OnboardingPanel({
     }, [
         localizedStepMeta,
         isAuthenticated,
-        subjectOptions,
         t,
-        resolve,
         themeChoices,
         trialChoices,
         discoveryChoices,
@@ -1223,23 +1432,32 @@ function OnboardingPanel({
                 </div>
 
                 <div className="mt-4 grid gap-2.5">
-                    {step.choices.map((choice) => {
-                        const active = Array.isArray(currentValue)
-                            ? currentValue.includes(choice.value)
-                            : currentValue === choice.value;
+                    {step.id === "learningInterests" ? (
+                        <CatalogSubjectChoices
+                            subjects={subjectOptions}
+                            selected={data.learningInterests}
+                            onToggle={handleToggle}
+                            disabled={busy}
+                        />
+                    ) : (
+                        step.choices.map((choice) => {
+                            const active = Array.isArray(currentValue)
+                                ? currentValue.includes(choice.value)
+                                : currentValue === choice.value;
 
-                        return (
-                            <ChoiceButton
-                                key={choice.value}
-                                active={active}
-                                label={choice.label}
-                                hint={choice.hint}
-                                onClick={() => handleToggle(choice.value)}
-                                Icon={choice.icon}
-                                disabled={busy}
-                            />
-                        );
-                    })}
+                            return (
+                                <ChoiceButton
+                                    key={choice.value}
+                                    active={active}
+                                    label={choice.label}
+                                    hint={choice.hint}
+                                    onClick={() => handleToggle(choice.value)}
+                                    Icon={choice.icon}
+                                    disabled={busy}
+                                />
+                            );
+                        })
+                    )}
                 </div>
 
                 <div className="mt-5 flex flex-col-reverse gap-2.5 sm:flex-row sm:items-center sm:justify-between">

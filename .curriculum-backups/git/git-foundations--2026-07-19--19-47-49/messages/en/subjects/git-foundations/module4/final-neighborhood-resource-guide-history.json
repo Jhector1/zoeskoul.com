@@ -1,0 +1,322 @@
+{
+  "topics": {
+    "git-foundations": {
+      "git-foundations-module-4-final-capstone": {
+        "final-neighborhood-resource-guide-history": {
+          "label": "Final Capstone: Neighborhood Guide History",
+          "summary": "Build a fresh neighborhood-guide repository through six cumulative capstone steps.",
+          "cards": {
+            "sketch0": {
+              "title": "Fresh Repository, Independent Transfer"
+            },
+            "project": {
+              "title": "Complete the Neighborhood Guide Capstone"
+            }
+          },
+          "projectSteps": {
+            "try_final_neighborhood_resource_guide_history_sketch0": {
+              "title": "Initialize and Record the Baseline"
+            },
+            "try_final_neighborhood_resource_guide_history_sketch1": {
+              "title": "Add the Neighborhood Resources File"
+            },
+            "try_final_neighborhood_resource_guide_history_sketch2": {
+              "title": "Update the Help Desk Hours"
+            },
+            "try_final_neighborhood_resource_guide_history_sketch3": {
+              "title": "Add the Generated-File Policy"
+            },
+            "try_final_neighborhood_resource_guide_history_sketch4": {
+              "title": "Clean Tracked Paths and Recover a Mistake"
+            },
+            "try_final_neighborhood_resource_guide_history_sketch5": {
+              "title": "Commit and Audit the Final Handoff"
+            }
+          },
+          "finalCapstone": {
+            "steps": {
+              "try_final_neighborhood_resource_guide_history_sketch0": {
+                "title": "Initialize and Record the Guide Baseline",
+                "prompt": "Inside `neighborhood-guide/`, initialize a repository on `main` and store the supplied local author identity. Stage the four baseline text files—`README.md`, `services.txt`, `hours.txt`, and `old-contacts.txt`—then record them with the message `Start neighborhood guide`.",
+                "hint": "Build the first snapshot from the four supplied text files.",
+                "help": {
+                  "concept": "The capstone starts independently; the files are supplied, but the Git workflow is yours to apply.",
+                  "hint_1": "Use main and the exact local identity.",
+                  "hint_2": "Use the exact first commit message."
+                },
+                "starterCode": "# Neighborhood Guide\n\nLocal services and opening hours.\n",
+                "solutionCode": "git init -b main\ngit config --local user.name \"ZoeSkoul Learner\"\ngit config --local user.email \"learner@zoeskoul.local\"\ngit add README.md services.txt hours.txt old-contacts.txt\ngit commit -m \"Start neighborhood guide\"",
+                "instructions": "Inside `neighborhood-guide/`, initialize a repository on `main` and store the supplied local author identity. Stage the four baseline text files—`README.md`, `services.txt`, `hours.txt`, and `old-contacts.txt`—then record them with the message `Start neighborhood guide`.",
+                "starterFiles": {
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- neighborhood-guide\nmkdir -p -- neighborhood-guide\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\n' > neighborhood-guide/services.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 10 AM - 4 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\n"
+                  }
+                },
+                "solutionFiles": {
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- neighborhood-guide\nmkdir -p -- neighborhood-guide\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\n' > neighborhood-guide/services.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 10 AM - 4 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\n"
+                  }
+                },
+                "terminalExpectations": {
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "That action can discard or rewrite history. Use the safe, layer-specific workflow taught in this course."
+                    }
+                  },
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Did you initialize the fresh guide on `main`?"
+                    },
+                    "1": {
+                      "message": "Did you store the supplied local author name?"
+                    },
+                    "2": {
+                      "message": "Did you store the supplied local author email?"
+                    },
+                    "3": {
+                      "message": "Did you stage exactly the four baseline text files?"
+                    },
+                    "4": {
+                      "message": "Did you record the baseline with the requested message?"
+                    }
+                  }
+                }
+              },
+              "try_final_neighborhood_resource_guide_history_sketch1": {
+                "title": "Add the Neighborhood Resources File",
+                "prompt": "Create `neighborhood-guide/resources.txt`. Starting on line 1, enter exactly these four lines: `Neighborhood resources`, a blank line, `Community pantry`, and `Health clinic`. Save the file, stage it, and record it with the message `Add neighborhood resources`.",
+                "hint": "Create only the supplied text file and record it as its own purpose.",
+                "help": {
+                  "concept": "The capstone tests Git transfer; all required file content is supplied.",
+                  "hint_1": "Create the file at resources.txt.",
+                  "hint_2": "Use the exact commit message."
+                },
+                "starterCode": "# Neighborhood Guide\n\nLocal services and opening hours.\n",
+                "solutionCode": "git add resources.txt\ngit commit -m \"Add neighborhood resources\"",
+                "instructions": "Create `neighborhood-guide/resources.txt`. Starting on line 1, enter exactly these four lines: `Neighborhood resources`, a blank line, `Community pantry`, and `Health clinic`. Save the file, stage it, and record it with the message `Add neighborhood resources`.",
+                "starterFiles": {
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- neighborhood-guide\nmkdir -p -- neighborhood-guide\ngit -C neighborhood-guide init -q -b main\ngit -C neighborhood-guide config --local user.name 'ZoeSkoul Learner'\ngit -C neighborhood-guide config --local user.email learner@zoeskoul.local\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\n' > neighborhood-guide/services.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 10 AM - 4 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\ngit -C neighborhood-guide add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C neighborhood-guide commit -q -m 'Start neighborhood guide'\n"
+                  }
+                },
+                "solutionFiles": {
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- neighborhood-guide\nmkdir -p -- neighborhood-guide\ngit -C neighborhood-guide init -q -b main\ngit -C neighborhood-guide config --local user.name 'ZoeSkoul Learner'\ngit -C neighborhood-guide config --local user.email learner@zoeskoul.local\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\n' > neighborhood-guide/services.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 10 AM - 4 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\ngit -C neighborhood-guide add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C neighborhood-guide commit -q -m 'Start neighborhood guide'\n"
+                  }
+                },
+                "terminalExpectations": {
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "That action can discard or rewrite history. Use the safe, layer-specific workflow taught in this course."
+                    }
+                  },
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Did you stage the new resources text file?"
+                    },
+                    "1": {
+                      "message": "Did you record it as its own focused commit?"
+                    }
+                  }
+                }
+              },
+              "try_final_neighborhood_resource_guide_history_sketch2": {
+                "title": "Update the Help Desk Hours",
+                "prompt": "Open `neighborhood-guide/hours.txt`. Replace `Help desk hours: 10 AM - 4 PM` with `Help desk hours: 9 AM - 5 PM`. Save the file, inspect its unstaged change, stage it, and record it with the message `Update help desk hours`.",
+                "hint": "Review the exact hours change before adding it to history.",
+                "help": {
+                  "concept": "An exact text edit becomes a focused capstone commit.",
+                  "hint_1": "Do not change the filename or add other text.",
+                  "hint_2": "Inspect before staging."
+                },
+                "starterCode": "Help desk hours: 10 AM - 4 PM\n",
+                "solutionCode": "git diff -- hours.txt\ngit add hours.txt\ngit commit -m \"Update help desk hours\"",
+                "instructions": "Open `neighborhood-guide/hours.txt`. Replace `Help desk hours: 10 AM - 4 PM` with `Help desk hours: 9 AM - 5 PM`. Save the file, inspect its unstaged change, stage it, and record it with the message `Update help desk hours`.",
+                "starterFiles": {
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- neighborhood-guide\nmkdir -p -- neighborhood-guide\ngit -C neighborhood-guide init -q -b main\ngit -C neighborhood-guide config --local user.name 'ZoeSkoul Learner'\ngit -C neighborhood-guide config --local user.email learner@zoeskoul.local\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\n' > neighborhood-guide/services.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 10 AM - 4 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\ngit -C neighborhood-guide add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C neighborhood-guide commit -q -m 'Start neighborhood guide'\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood resources\n\nCommunity pantry\nHealth clinic\n' > neighborhood-guide/resources.txt\ngit -C neighborhood-guide add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C neighborhood-guide commit -q -m 'Add neighborhood resources'\n"
+                  }
+                },
+                "solutionFiles": {
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- neighborhood-guide\nmkdir -p -- neighborhood-guide\ngit -C neighborhood-guide init -q -b main\ngit -C neighborhood-guide config --local user.name 'ZoeSkoul Learner'\ngit -C neighborhood-guide config --local user.email learner@zoeskoul.local\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\n' > neighborhood-guide/services.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 10 AM - 4 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\ngit -C neighborhood-guide add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C neighborhood-guide commit -q -m 'Start neighborhood guide'\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood resources\n\nCommunity pantry\nHealth clinic\n' > neighborhood-guide/resources.txt\ngit -C neighborhood-guide add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C neighborhood-guide commit -q -m 'Add neighborhood resources'\n"
+                  }
+                },
+                "terminalExpectations": {
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "That action can discard or rewrite history. Use the safe, layer-specific workflow taught in this course."
+                    }
+                  },
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Did you inspect only the hours change?"
+                    },
+                    "1": {
+                      "message": "Did you stage the hours file?"
+                    },
+                    "2": {
+                      "message": "Did you record the update with the requested message?"
+                    }
+                  }
+                }
+              },
+              "try_final_neighborhood_resource_guide_history_sketch3": {
+                "title": "Add the Generated-File Policy",
+                "prompt": "Create `neighborhood-guide/.gitignore` with exactly `generated/` on line 1. Save it, create `generated/preview.txt`, inspect status with ignored paths included, and stage only `.gitignore`.",
+                "hint": "The preview stays local and ignored; the policy itself joins the next commit.",
+                "help": {
+                  "concept": "The ignore policy is intentional project source; the generated preview is not.",
+                  "hint_1": "The only line is generated/.",
+                  "hint_2": "Stage .gitignore, not the preview file."
+                },
+                "starterCode": "# Neighborhood Guide\n\nLocal services and opening hours.\n",
+                "solutionCode": "mkdir -p generated\ntouch generated/preview.txt\ngit status --short --ignored\ngit add .gitignore",
+                "instructions": "Create `neighborhood-guide/.gitignore` with exactly `generated/` on line 1. Save it, create `generated/preview.txt`, inspect status with ignored paths included, and stage only `.gitignore`.",
+                "starterFiles": {
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- neighborhood-guide\nmkdir -p -- neighborhood-guide\ngit -C neighborhood-guide init -q -b main\ngit -C neighborhood-guide config --local user.name 'ZoeSkoul Learner'\ngit -C neighborhood-guide config --local user.email learner@zoeskoul.local\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\n' > neighborhood-guide/services.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 10 AM - 4 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\ngit -C neighborhood-guide add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C neighborhood-guide commit -q -m 'Start neighborhood guide'\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood resources\n\nCommunity pantry\nHealth clinic\n' > neighborhood-guide/resources.txt\ngit -C neighborhood-guide add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C neighborhood-guide commit -q -m 'Add neighborhood resources'\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 9 AM - 5 PM\n' > neighborhood-guide/hours.txt\ngit -C neighborhood-guide add -A\nGIT_AUTHOR_DATE=2026-01-03T12:00:00Z GIT_COMMITTER_DATE=2026-01-03T12:00:00Z git -C neighborhood-guide commit -q -m 'Update help desk hours'\n"
+                  }
+                },
+                "solutionFiles": {
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- neighborhood-guide\nmkdir -p -- neighborhood-guide\ngit -C neighborhood-guide init -q -b main\ngit -C neighborhood-guide config --local user.name 'ZoeSkoul Learner'\ngit -C neighborhood-guide config --local user.email learner@zoeskoul.local\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\n' > neighborhood-guide/services.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 10 AM - 4 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\ngit -C neighborhood-guide add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C neighborhood-guide commit -q -m 'Start neighborhood guide'\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood resources\n\nCommunity pantry\nHealth clinic\n' > neighborhood-guide/resources.txt\ngit -C neighborhood-guide add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C neighborhood-guide commit -q -m 'Add neighborhood resources'\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 9 AM - 5 PM\n' > neighborhood-guide/hours.txt\ngit -C neighborhood-guide add -A\nGIT_AUTHOR_DATE=2026-01-03T12:00:00Z GIT_COMMITTER_DATE=2026-01-03T12:00:00Z git -C neighborhood-guide commit -q -m 'Update help desk hours'\n"
+                  }
+                },
+                "terminalExpectations": {
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "That action can discard or rewrite history. Use the safe, layer-specific workflow taught in this course."
+                    }
+                  },
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Did you create the generated directory?"
+                    },
+                    "1": {
+                      "message": "Did you create the local preview text file?"
+                    },
+                    "2": {
+                      "message": "Did you inspect status with ignored paths visible?"
+                    },
+                    "3": {
+                      "message": "Did you stage only the ignore policy?"
+                    }
+                  }
+                }
+              },
+              "try_final_neighborhood_resource_guide_history_sketch4": {
+                "title": "Clean Paths and Recover a README Mistake",
+                "prompt": "Open `neighborhood-guide/README.md`. Replace `Local services and opening hours.` with `Accidental rewrite.` and save. Stage that mistake, rename tracked `services.txt` to `community-services.txt`, and remove tracked `old-contacts.txt`. Then unstage and restore only the README mistake. Inspect the staged name-status summary; it should contain the rename, removal, and `.gitignore`, but not README.md.",
+                "hint": "Keep the intended maintenance work staged while recovering the accidental README edit.",
+                "help": {
+                  "concept": "Independent Git work means protecting the desired snapshot while removing one accidental change.",
+                  "hint_1": "Unstage README.md before restoring it.",
+                  "hint_2": "Do not disturb the rename, removal, or .gitignore."
+                },
+                "starterCode": "# Neighborhood Guide\n\nLocal services and opening hours.\n",
+                "solutionCode": "git add README.md\ngit mv services.txt community-services.txt\ngit rm old-contacts.txt\ngit restore --staged README.md\ngit restore README.md\ngit diff --staged --name-status",
+                "instructions": "Open `neighborhood-guide/README.md`. Replace `Local services and opening hours.` with `Accidental rewrite.` and save. Stage that mistake, rename tracked `services.txt` to `community-services.txt`, and remove tracked `old-contacts.txt`. Then unstage and restore only the README mistake. Inspect the staged name-status summary; it should contain the rename, removal, and `.gitignore`, but not README.md.",
+                "starterFiles": {
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- neighborhood-guide\nmkdir -p -- neighborhood-guide\ngit -C neighborhood-guide init -q -b main\ngit -C neighborhood-guide config --local user.name 'ZoeSkoul Learner'\ngit -C neighborhood-guide config --local user.email learner@zoeskoul.local\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\n' > neighborhood-guide/services.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 10 AM - 4 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\ngit -C neighborhood-guide add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C neighborhood-guide commit -q -m 'Start neighborhood guide'\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood resources\n\nCommunity pantry\nHealth clinic\n' > neighborhood-guide/resources.txt\ngit -C neighborhood-guide add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C neighborhood-guide commit -q -m 'Add neighborhood resources'\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 9 AM - 5 PM\n' > neighborhood-guide/hours.txt\ngit -C neighborhood-guide add -A\nGIT_AUTHOR_DATE=2026-01-03T12:00:00Z GIT_COMMITTER_DATE=2026-01-03T12:00:00Z git -C neighborhood-guide commit -q -m 'Update help desk hours'\nmkdir -p -- neighborhood-guide\nprintf %s 'generated/\n' > neighborhood-guide/.gitignore\nmkdir -p -- neighborhood-guide/generated\nprintf %s '' > neighborhood-guide/generated/preview.txt\ngit -C neighborhood-guide add -- .gitignore\n"
+                  }
+                },
+                "solutionFiles": {
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- neighborhood-guide\nmkdir -p -- neighborhood-guide\ngit -C neighborhood-guide init -q -b main\ngit -C neighborhood-guide config --local user.name 'ZoeSkoul Learner'\ngit -C neighborhood-guide config --local user.email learner@zoeskoul.local\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\n' > neighborhood-guide/services.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 10 AM - 4 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\ngit -C neighborhood-guide add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C neighborhood-guide commit -q -m 'Start neighborhood guide'\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood resources\n\nCommunity pantry\nHealth clinic\n' > neighborhood-guide/resources.txt\ngit -C neighborhood-guide add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C neighborhood-guide commit -q -m 'Add neighborhood resources'\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 9 AM - 5 PM\n' > neighborhood-guide/hours.txt\ngit -C neighborhood-guide add -A\nGIT_AUTHOR_DATE=2026-01-03T12:00:00Z GIT_COMMITTER_DATE=2026-01-03T12:00:00Z git -C neighborhood-guide commit -q -m 'Update help desk hours'\nmkdir -p -- neighborhood-guide\nprintf %s 'generated/\n' > neighborhood-guide/.gitignore\nmkdir -p -- neighborhood-guide/generated\nprintf %s '' > neighborhood-guide/generated/preview.txt\ngit -C neighborhood-guide add -- .gitignore\n"
+                  }
+                },
+                "terminalExpectations": {
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "That action can discard or rewrite history. Use the safe, layer-specific workflow taught in this course."
+                    }
+                  },
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Did you stage the supplied README mistake?"
+                    },
+                    "1": {
+                      "message": "Did you rename the tracked services file?"
+                    },
+                    "2": {
+                      "message": "Did you remove the obsolete tracked contacts file?"
+                    },
+                    "3": {
+                      "message": "Did you unstage the README mistake?"
+                    },
+                    "4": {
+                      "message": "Did you restore the committed README?"
+                    },
+                    "5": {
+                      "message": "Did you inspect the remaining staged maintenance work?"
+                    }
+                  }
+                }
+              },
+              "try_final_neighborhood_resource_guide_history_sketch5": {
+                "title": "Commit and Audit the Final Handoff",
+                "prompt": "Record the prepared maintenance snapshot with the message `Prepare neighborhood guide handoff`. Then inspect the concise history, the latest commit summary, and the final short status. The capstone should end with four focused commits and no unfinished tracked work.",
+                "hint": "Verify the full timeline, the final snapshot, and the clean handoff state.",
+                "help": {
+                  "concept": "The final handoff is proven by focused history, intentional tracked files, ignored generated output, and clean state.",
+                  "hint_1": "Use the exact final commit message.",
+                  "hint_2": "The final short status should print no file lines."
+                },
+                "starterCode": "generated/\n",
+                "solutionCode": "git commit -m \"Prepare neighborhood guide handoff\"\ngit log --oneline\ngit show --stat --oneline HEAD\ngit status --short",
+                "instructions": "Record the prepared maintenance snapshot with the message `Prepare neighborhood guide handoff`. Then inspect the concise history, the latest commit summary, and the final short status. The capstone should end with four focused commits and no unfinished tracked work.",
+                "starterFiles": {
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- neighborhood-guide\nmkdir -p -- neighborhood-guide\ngit -C neighborhood-guide init -q -b main\ngit -C neighborhood-guide config --local user.name 'ZoeSkoul Learner'\ngit -C neighborhood-guide config --local user.email learner@zoeskoul.local\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\n' > neighborhood-guide/services.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 10 AM - 4 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\ngit -C neighborhood-guide add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C neighborhood-guide commit -q -m 'Start neighborhood guide'\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood resources\n\nCommunity pantry\nHealth clinic\n' > neighborhood-guide/resources.txt\ngit -C neighborhood-guide add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C neighborhood-guide commit -q -m 'Add neighborhood resources'\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 9 AM - 5 PM\n' > neighborhood-guide/hours.txt\ngit -C neighborhood-guide add -A\nGIT_AUTHOR_DATE=2026-01-03T12:00:00Z GIT_COMMITTER_DATE=2026-01-03T12:00:00Z git -C neighborhood-guide commit -q -m 'Update help desk hours'\nrm -f -- neighborhood-guide/services.txt\nrm -f -- neighborhood-guide/old-contacts.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'generated/\n' > neighborhood-guide/.gitignore\nmkdir -p -- neighborhood-guide/generated\nprintf %s '' > neighborhood-guide/generated/preview.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\n' > neighborhood-guide/community-services.txt\ngit -C neighborhood-guide add -A\n"
+                  }
+                },
+                "solutionFiles": {
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- neighborhood-guide\nmkdir -p -- neighborhood-guide\ngit -C neighborhood-guide init -q -b main\ngit -C neighborhood-guide config --local user.name 'ZoeSkoul Learner'\ngit -C neighborhood-guide config --local user.email learner@zoeskoul.local\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\n' > neighborhood-guide/services.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 10 AM - 4 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\ngit -C neighborhood-guide add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C neighborhood-guide commit -q -m 'Start neighborhood guide'\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood resources\n\nCommunity pantry\nHealth clinic\n' > neighborhood-guide/resources.txt\ngit -C neighborhood-guide add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C neighborhood-guide commit -q -m 'Add neighborhood resources'\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 9 AM - 5 PM\n' > neighborhood-guide/hours.txt\ngit -C neighborhood-guide add -A\nGIT_AUTHOR_DATE=2026-01-03T12:00:00Z GIT_COMMITTER_DATE=2026-01-03T12:00:00Z git -C neighborhood-guide commit -q -m 'Update help desk hours'\nrm -f -- neighborhood-guide/services.txt\nrm -f -- neighborhood-guide/old-contacts.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'generated/\n' > neighborhood-guide/.gitignore\nmkdir -p -- neighborhood-guide/generated\nprintf %s '' > neighborhood-guide/generated/preview.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\n' > neighborhood-guide/community-services.txt\ngit -C neighborhood-guide add -A\n"
+                  }
+                },
+                "terminalExpectations": {
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "That action can discard or rewrite history. Use the safe, layer-specific workflow taught in this course."
+                    }
+                  },
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Did you record the final maintenance snapshot?"
+                    },
+                    "1": {
+                      "message": "Did you inspect the concise history?"
+                    },
+                    "2": {
+                      "message": "Did you inspect the newest snapshot summary?"
+                    },
+                    "3": {
+                      "message": "Did you verify the clean final state?"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "The capstone starts in `neighborhood-guide/` with no history from the other projects. File edits are still supplied exactly because this is a Git assessment. Your responsibility is to apply initialization, focused history, path maintenance, ignore rules, safe restore, and final verification across six cumulative steps.",
+            "title": "Complete the Neighborhood Guide Capstone"
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "git-foundations": {
+      "git-foundations-module-4-final-capstone": {
+        "final-neighborhood-resource-guide-history": {
+          "intro": {
+            "title": "Fresh Repository, Independent Transfer",
+            "bodyMarkdown": "The capstone starts in `neighborhood-guide/` with four small text files and no history from the other projects. Every required edit is supplied exactly because this remains a Git assessment. Across six cumulative steps, you will build focused history, manage paths, add an ignore policy, recover a mistake, and verify a clean handoff."
+          }
+        }
+      }
+    }
+  }
+}

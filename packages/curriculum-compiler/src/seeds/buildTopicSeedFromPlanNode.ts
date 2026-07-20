@@ -492,6 +492,8 @@ export function buildTopicSeedFromPlanNode(args: {
         exerciseTools,
         practice: resolvedPractice,
         projectBrief: authoredProjectBrief,
+        projectJourney: specTopic?.projectJourney ?? args.topic.projectJourney,
+        projectJourneys: args.spec?.projectJourneys,
     };
 }
 

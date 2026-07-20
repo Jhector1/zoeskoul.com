@@ -125,6 +125,16 @@ export type WorkspaceTerminalConfig = {
      * multiple practice cards in the same topic.
      */
     workspaceKey?: string;
+
+    /** Stable browser/IDE host. Sessions are never borrowed across hosts. */
+    terminalHostKey?: string;
+    /** Stable owner for one visible terminal tab inside the host. */
+    terminalOwnerKey?: string;
+    /** Start a fresh session for this owner instead of reattaching its lease. */
+    forceNewSession?: boolean;
+    /** Keep the owned PTY alive while another tab in the same host is selected. */
+    preserveSessionOnUnmount?: boolean;
+
     initialFiles?: WorkspaceSyncEntry[] | Record<string, string>;
     lazy?: boolean;
     title?: string;

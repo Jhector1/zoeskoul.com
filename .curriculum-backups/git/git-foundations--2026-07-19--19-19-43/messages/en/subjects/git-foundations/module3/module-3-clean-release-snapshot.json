@@ -1,0 +1,304 @@
+{
+  "topics": {
+    "git-foundations": {
+      "git-foundations-module-3-manage-tracked-files": {
+        "module-3-clean-release-snapshot": {
+          "label": "Module Project: Clean the Volunteer Hub Repository",
+          "summary": "Continue volunteer-hub and finish a clean release handoff.",
+          "cards": {
+            "sketch0": {
+              "title": "Finish Volunteer Hub Cleanly"
+            },
+            "project": {
+              "title": "Prepare the Volunteer Hub Handoff"
+            }
+          },
+          "projectSteps": {
+            "try_module_3_sketch0": {
+              "title": "Rename the Signup Page"
+            },
+            "try_module_3_sketch1": {
+              "title": "Remove the Obsolete Schedule"
+            },
+            "try_module_3_sketch2": {
+              "title": "Write the Exact Ignore File"
+            },
+            "try_module_3_sketch3": {
+              "title": "Stage the Ignore Policy"
+            },
+            "try_module_3_sketch4": {
+              "title": "Create and Recover a README Mistake"
+            },
+            "try_module_3_sketch5": {
+              "title": "Commit and Verify the Volunteer Hub Handoff"
+            }
+          },
+          "moduleProject": {
+            "steps": {
+              "try_module_3_sketch0": {
+                "title": "Rename the Signup Page",
+                "prompt": "Type `mkdir -p pages` and press Enter. Then type `git mv index.html pages/signup.html` and press Enter.",
+                "hint": "Move the tracked page through Git.",
+                "help": {
+                  "concept": "The Module 3 project reuses the rename skill in the same cumulative repository.",
+                  "hint_1": "The destination is pages/signup.html.",
+                  "hint_2": "Keep the file content unchanged."
+                },
+                "starterCode": "<!doctype html>\n<title>Volunteer Hub</title>\n<h1>Volunteer Signups and Training</h1>\n",
+                "solutionCode": "mkdir -p pages\ngit mv index.html pages/signup.html",
+                "instructions": "Type `mkdir -p pages` and press Enter. Then type `git mv index.html pages/signup.html` and press Enter.",
+                "starterFiles": {
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- volunteer-hub\nmkdir -p -- volunteer-hub\ngit -C volunteer-hub init -q -b main\ngit -C volunteer-hub config --local user.name 'ZoeSkoul Learner'\ngit -C volunteer-hub config --local user.email learner@zoeskoul.local\nmkdir -p -- volunteer-hub\nprintf %s '# Volunteer Hub\n\nVolunteer signups and schedules.\n' > volunteer-hub/README.md\nmkdir -p -- volunteer-hub\nprintf %s '<!doctype html>\n<title>Volunteer Hub</title>\n<h1>Volunteer Signups</h1>\n' > volunteer-hub/index.html\nmkdir -p -- volunteer-hub\nprintf %s 'body { font-family: sans-serif; }\nfooter { margin-top: 12px; }\n' > volunteer-hub/styles.css\nmkdir -p -- volunteer-hub/notes\nprintf %s 'Orientation: Saturday 10 AM\n' > volunteer-hub/notes/schedule.txt\ngit -C volunteer-hub add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C volunteer-hub commit -q -m 'Start volunteer hub'\nmkdir -p -- volunteer-hub\nprintf %s '<!doctype html>\n<title>Volunteer Hub</title>\n<h1>Volunteer Signups and Training</h1>\n' > volunteer-hub/index.html\ngit -C volunteer-hub add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C volunteer-hub commit -q -m 'Add volunteer signup page'\nmkdir -p -- volunteer-hub\nprintf %s 'body { font-family: sans-serif; }\nfooter { margin-top: 24px; }\n' > volunteer-hub/styles.css\ngit -C volunteer-hub add -A\nGIT_AUTHOR_DATE=2026-01-03T12:00:00Z GIT_COMMITTER_DATE=2026-01-03T12:00:00Z git -C volunteer-hub commit -q -m 'Add volunteer page styles'\n"
+                  }
+                },
+                "solutionFiles": {
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- volunteer-hub\nmkdir -p -- volunteer-hub\ngit -C volunteer-hub init -q -b main\ngit -C volunteer-hub config --local user.name 'ZoeSkoul Learner'\ngit -C volunteer-hub config --local user.email learner@zoeskoul.local\nmkdir -p -- volunteer-hub\nprintf %s '# Volunteer Hub\n\nVolunteer signups and schedules.\n' > volunteer-hub/README.md\nmkdir -p -- volunteer-hub\nprintf %s '<!doctype html>\n<title>Volunteer Hub</title>\n<h1>Volunteer Signups</h1>\n' > volunteer-hub/index.html\nmkdir -p -- volunteer-hub\nprintf %s 'body { font-family: sans-serif; }\nfooter { margin-top: 12px; }\n' > volunteer-hub/styles.css\nmkdir -p -- volunteer-hub/notes\nprintf %s 'Orientation: Saturday 10 AM\n' > volunteer-hub/notes/schedule.txt\ngit -C volunteer-hub add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C volunteer-hub commit -q -m 'Start volunteer hub'\nmkdir -p -- volunteer-hub\nprintf %s '<!doctype html>\n<title>Volunteer Hub</title>\n<h1>Volunteer Signups and Training</h1>\n' > volunteer-hub/index.html\ngit -C volunteer-hub add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C volunteer-hub commit -q -m 'Add volunteer signup page'\nmkdir -p -- volunteer-hub\nprintf %s 'body { font-family: sans-serif; }\nfooter { margin-top: 24px; }\n' > volunteer-hub/styles.css\ngit -C volunteer-hub add -A\nGIT_AUTHOR_DATE=2026-01-03T12:00:00Z GIT_COMMITTER_DATE=2026-01-03T12:00:00Z git -C volunteer-hub commit -q -m 'Add volunteer page styles'\n"
+                  }
+                },
+                "terminalExpectations": {
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "That action can discard or rewrite history. Use the safe, layer-specific workflow taught in this course."
+                    }
+                  },
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Did you run `mkdir -p pages`?"
+                    },
+                    "1": {
+                      "message": "Did you run `git mv index.html pages/signup.html`?"
+                    }
+                  }
+                }
+              },
+              "try_module_3_sketch1": {
+                "title": "Remove the Obsolete Schedule",
+                "prompt": "Type `git rm notes/schedule.txt` and press Enter. Then type `git diff --staged --name-status` and press Enter.",
+                "hint": "Remove the tracked schedule and review the staged structure.",
+                "help": {
+                  "concept": "The rename and removal serve one release-cleanup purpose.",
+                  "hint_1": "Use git rm for the tracked note.",
+                  "hint_2": "Preserve README.md, styles.css, and the renamed page."
+                },
+                "starterCode": "<!doctype html>\n<title>Volunteer Hub</title>\n<h1>Volunteer Signups and Training</h1>\n",
+                "solutionCode": "git rm notes/schedule.txt\ngit diff --staged --name-status",
+                "instructions": "Type `git rm notes/schedule.txt` and press Enter. Then type `git diff --staged --name-status` and press Enter.",
+                "starterFiles": {
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- volunteer-hub\nmkdir -p -- volunteer-hub\ngit -C volunteer-hub init -q -b main\ngit -C volunteer-hub config --local user.name 'ZoeSkoul Learner'\ngit -C volunteer-hub config --local user.email learner@zoeskoul.local\nmkdir -p -- volunteer-hub\nprintf %s '# Volunteer Hub\n\nVolunteer signups and schedules.\n' > volunteer-hub/README.md\nmkdir -p -- volunteer-hub\nprintf %s '<!doctype html>\n<title>Volunteer Hub</title>\n<h1>Volunteer Signups</h1>\n' > volunteer-hub/index.html\nmkdir -p -- volunteer-hub\nprintf %s 'body { font-family: sans-serif; }\nfooter { margin-top: 12px; }\n' > volunteer-hub/styles.css\nmkdir -p -- volunteer-hub/notes\nprintf %s 'Orientation: Saturday 10 AM\n' > volunteer-hub/notes/schedule.txt\ngit -C volunteer-hub add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C volunteer-hub commit -q -m 'Start volunteer hub'\nmkdir -p -- volunteer-hub\nprintf %s '<!doctype html>\n<title>Volunteer Hub</title>\n<h1>Volunteer Signups and Training</h1>\n' > volunteer-hub/index.html\ngit -C volunteer-hub add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C volunteer-hub commit -q -m 'Add volunteer signup page'\nmkdir -p -- volunteer-hub\nprintf %s 'body { font-family: sans-serif; }\nfooter { margin-top: 24px; }\n' > volunteer-hub/styles.css\ngit -C volunteer-hub add -A\nGIT_AUTHOR_DATE=2026-01-03T12:00:00Z GIT_COMMITTER_DATE=2026-01-03T12:00:00Z git -C volunteer-hub commit -q -m 'Add volunteer page styles'\nrm -f -- volunteer-hub/index.html\nmkdir -p -- volunteer-hub/pages\nprintf %s '<!doctype html>\n<title>Volunteer Hub</title>\n<h1>Volunteer Signups and Training</h1>\n' > volunteer-hub/pages/signup.html\ngit -C volunteer-hub add -A\n"
+                  }
+                },
+                "solutionFiles": {
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- volunteer-hub\nmkdir -p -- volunteer-hub\ngit -C volunteer-hub init -q -b main\ngit -C volunteer-hub config --local user.name 'ZoeSkoul Learner'\ngit -C volunteer-hub config --local user.email learner@zoeskoul.local\nmkdir -p -- volunteer-hub\nprintf %s '# Volunteer Hub\n\nVolunteer signups and schedules.\n' > volunteer-hub/README.md\nmkdir -p -- volunteer-hub\nprintf %s '<!doctype html>\n<title>Volunteer Hub</title>\n<h1>Volunteer Signups</h1>\n' > volunteer-hub/index.html\nmkdir -p -- volunteer-hub\nprintf %s 'body { font-family: sans-serif; }\nfooter { margin-top: 12px; }\n' > volunteer-hub/styles.css\nmkdir -p -- volunteer-hub/notes\nprintf %s 'Orientation: Saturday 10 AM\n' > volunteer-hub/notes/schedule.txt\ngit -C volunteer-hub add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C volunteer-hub commit -q -m 'Start volunteer hub'\nmkdir -p -- volunteer-hub\nprintf %s '<!doctype html>\n<title>Volunteer Hub</title>\n<h1>Volunteer Signups and Training</h1>\n' > volunteer-hub/index.html\ngit -C volunteer-hub add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C volunteer-hub commit -q -m 'Add volunteer signup page'\nmkdir -p -- volunteer-hub\nprintf %s 'body { font-family: sans-serif; }\nfooter { margin-top: 24px; }\n' > volunteer-hub/styles.css\ngit -C volunteer-hub add -A\nGIT_AUTHOR_DATE=2026-01-03T12:00:00Z GIT_COMMITTER_DATE=2026-01-03T12:00:00Z git -C volunteer-hub commit -q -m 'Add volunteer page styles'\nrm -f -- volunteer-hub/index.html\nmkdir -p -- volunteer-hub/pages\nprintf %s '<!doctype html>\n<title>Volunteer Hub</title>\n<h1>Volunteer Signups and Training</h1>\n' > volunteer-hub/pages/signup.html\ngit -C volunteer-hub add -A\n"
+                  }
+                },
+                "terminalExpectations": {
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "That action can discard or rewrite history. Use the safe, layer-specific workflow taught in this course."
+                    }
+                  },
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Did you run `git rm notes/schedule.txt`?"
+                    },
+                    "1": {
+                      "message": "Did you run `git diff --staged --name-status`?"
+                    }
+                  }
+                }
+              },
+              "try_module_3_sketch2": {
+                "title": "Write the Exact Ignore File",
+                "prompt": "In the Explorer, create `volunteer-hub/.gitignore`. Add exactly these two lines starting on line 1:\n\n`generated/`\n`*.log`\n\nSave it. Type `mkdir -p generated` and press Enter. Type `touch generated/preview.html` and press Enter. Type `touch debug.log` and press Enter. Then type `git status --short --ignored` and press Enter.",
+                "hint": "Create the exact ignore file, then create the supplied local-output paths.",
+                "help": {
+                  "concept": "The edit is supplied exactly; the Git decision is how the ignore policy joins the release snapshot.",
+                  "hint_1": "Use exactly generated/ and *.log on separate lines.",
+                  "hint_2": "The structural cleanup must stay staged."
+                },
+                "starterCode": "# Volunteer Hub\n\nVolunteer signups and schedules.\n",
+                "solutionCode": "mkdir -p generated\ntouch generated/preview.html\ntouch debug.log\ngit status --short --ignored",
+                "instructions": "In the Explorer, create `volunteer-hub/.gitignore`. Add exactly these two lines starting on line 1:\n\n`generated/`\n`*.log`\n\nSave it. Type `mkdir -p generated` and press Enter. Type `touch generated/preview.html` and press Enter. Type `touch debug.log` and press Enter. Then type `git status --short --ignored` and press Enter.",
+                "starterFiles": {
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- volunteer-hub\nmkdir -p -- volunteer-hub\ngit -C volunteer-hub init -q -b main\ngit -C volunteer-hub config --local user.name 'ZoeSkoul Learner'\ngit -C volunteer-hub config --local user.email learner@zoeskoul.local\nmkdir -p -- volunteer-hub\nprintf %s '# Volunteer Hub\n\nVolunteer signups and schedules.\n' > volunteer-hub/README.md\nmkdir -p -- volunteer-hub\nprintf %s '<!doctype html>\n<title>Volunteer Hub</title>\n<h1>Volunteer Signups</h1>\n' > volunteer-hub/index.html\nmkdir -p -- volunteer-hub\nprintf %s 'body { font-family: sans-serif; }\nfooter { margin-top: 12px; }\n' > volunteer-hub/styles.css\nmkdir -p -- volunteer-hub/notes\nprintf %s 'Orientation: Saturday 10 AM\n' > volunteer-hub/notes/schedule.txt\ngit -C volunteer-hub add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C volunteer-hub commit -q -m 'Start volunteer hub'\nmkdir -p -- volunteer-hub\nprintf %s '<!doctype html>\n<title>Volunteer Hub</title>\n<h1>Volunteer Signups and Training</h1>\n' > volunteer-hub/index.html\ngit -C volunteer-hub add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C volunteer-hub commit -q -m 'Add volunteer signup page'\nmkdir -p -- volunteer-hub\nprintf %s 'body { font-family: sans-serif; }\nfooter { margin-top: 24px; }\n' > volunteer-hub/styles.css\ngit -C volunteer-hub add -A\nGIT_AUTHOR_DATE=2026-01-03T12:00:00Z GIT_COMMITTER_DATE=2026-01-03T12:00:00Z git -C volunteer-hub commit -q -m 'Add volunteer page styles'\nrm -f -- volunteer-hub/index.html\nrm -f -- volunteer-hub/notes/schedule.txt\nrmdir -- volunteer-hub/notes 2>/dev/null || true\nmkdir -p -- volunteer-hub/pages\nprintf %s '<!doctype html>\n<title>Volunteer Hub</title>\n<h1>Volunteer Signups and Training</h1>\n' > volunteer-hub/pages/signup.html\ngit -C volunteer-hub add -A\n"
+                  }
+                },
+                "solutionFiles": {
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- volunteer-hub\nmkdir -p -- volunteer-hub\ngit -C volunteer-hub init -q -b main\ngit -C volunteer-hub config --local user.name 'ZoeSkoul Learner'\ngit -C volunteer-hub config --local user.email learner@zoeskoul.local\nmkdir -p -- volunteer-hub\nprintf %s '# Volunteer Hub\n\nVolunteer signups and schedules.\n' > volunteer-hub/README.md\nmkdir -p -- volunteer-hub\nprintf %s '<!doctype html>\n<title>Volunteer Hub</title>\n<h1>Volunteer Signups</h1>\n' > volunteer-hub/index.html\nmkdir -p -- volunteer-hub\nprintf %s 'body { font-family: sans-serif; }\nfooter { margin-top: 12px; }\n' > volunteer-hub/styles.css\nmkdir -p -- volunteer-hub/notes\nprintf %s 'Orientation: Saturday 10 AM\n' > volunteer-hub/notes/schedule.txt\ngit -C volunteer-hub add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C volunteer-hub commit -q -m 'Start volunteer hub'\nmkdir -p -- volunteer-hub\nprintf %s '<!doctype html>\n<title>Volunteer Hub</title>\n<h1>Volunteer Signups and Training</h1>\n' > volunteer-hub/index.html\ngit -C volunteer-hub add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C volunteer-hub commit -q -m 'Add volunteer signup page'\nmkdir -p -- volunteer-hub\nprintf %s 'body { font-family: sans-serif; }\nfooter { margin-top: 24px; }\n' > volunteer-hub/styles.css\ngit -C volunteer-hub add -A\nGIT_AUTHOR_DATE=2026-01-03T12:00:00Z GIT_COMMITTER_DATE=2026-01-03T12:00:00Z git -C volunteer-hub commit -q -m 'Add volunteer page styles'\nrm -f -- volunteer-hub/index.html\nrm -f -- volunteer-hub/notes/schedule.txt\nrmdir -- volunteer-hub/notes 2>/dev/null || true\nmkdir -p -- volunteer-hub/pages\nprintf %s '<!doctype html>\n<title>Volunteer Hub</title>\n<h1>Volunteer Signups and Training</h1>\n' > volunteer-hub/pages/signup.html\ngit -C volunteer-hub add -A\n"
+                  }
+                },
+                "terminalExpectations": {
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "That action can discard or rewrite history. Use the safe, layer-specific workflow taught in this course."
+                    }
+                  },
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Did you run `mkdir -p generated`?"
+                    },
+                    "1": {
+                      "message": "Did you run `touch generated/preview.html`?"
+                    },
+                    "2": {
+                      "message": "Did you run `touch debug.log`?"
+                    },
+                    "3": {
+                      "message": "Did you run `git status --short --ignored`?"
+                    }
+                  }
+                }
+              },
+              "try_module_3_sketch3": {
+                "title": "Stage the Ignore Policy",
+                "prompt": "Type `git status --short --ignored` and press Enter. Confirm `generated/preview.html` and `debug.log` are ignored. Then type `git add .gitignore` and press Enter so the ignore policy joins the tracked cleanup.",
+                "hint": "Use the status view that includes ignored paths, then stage only .gitignore.",
+                "help": {
+                  "concept": "Ignored output can stay on disk without entering the tracked release snapshot.",
+                  "hint_1": "Do not stage the generated files.",
+                  "hint_2": "The .gitignore file itself should remain trackable."
+                },
+                "starterCode": "generated/\n*.log\n",
+                "solutionCode": "git status --short --ignored\ngit add .gitignore",
+                "instructions": "Type `git status --short --ignored` and press Enter. Confirm `generated/preview.html` and `debug.log` are ignored. Then type `git add .gitignore` and press Enter so the ignore policy joins the tracked cleanup.",
+                "starterFiles": {
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- volunteer-hub\nmkdir -p -- volunteer-hub\ngit -C volunteer-hub init -q -b main\ngit -C volunteer-hub config --local user.name 'ZoeSkoul Learner'\ngit -C volunteer-hub config --local user.email learner@zoeskoul.local\nmkdir -p -- volunteer-hub\nprintf %s '# Volunteer Hub\n\nVolunteer signups and schedules.\n' > volunteer-hub/README.md\nmkdir -p -- volunteer-hub\nprintf %s '<!doctype html>\n<title>Volunteer Hub</title>\n<h1>Volunteer Signups</h1>\n' > volunteer-hub/index.html\nmkdir -p -- volunteer-hub\nprintf %s 'body { font-family: sans-serif; }\nfooter { margin-top: 12px; }\n' > volunteer-hub/styles.css\nmkdir -p -- volunteer-hub/notes\nprintf %s 'Orientation: Saturday 10 AM\n' > volunteer-hub/notes/schedule.txt\ngit -C volunteer-hub add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C volunteer-hub commit -q -m 'Start volunteer hub'\nmkdir -p -- volunteer-hub\nprintf %s '<!doctype html>\n<title>Volunteer Hub</title>\n<h1>Volunteer Signups and Training</h1>\n' > volunteer-hub/index.html\ngit -C volunteer-hub add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C volunteer-hub commit -q -m 'Add volunteer signup page'\nmkdir -p -- volunteer-hub\nprintf %s 'body { font-family: sans-serif; }\nfooter { margin-top: 24px; }\n' > volunteer-hub/styles.css\ngit -C volunteer-hub add -A\nGIT_AUTHOR_DATE=2026-01-03T12:00:00Z GIT_COMMITTER_DATE=2026-01-03T12:00:00Z git -C volunteer-hub commit -q -m 'Add volunteer page styles'\nrm -f -- volunteer-hub/index.html\nrm -f -- volunteer-hub/notes/schedule.txt\nrmdir -- volunteer-hub/notes 2>/dev/null || true\nmkdir -p -- volunteer-hub/pages\nprintf %s '<!doctype html>\n<title>Volunteer Hub</title>\n<h1>Volunteer Signups and Training</h1>\n' > volunteer-hub/pages/signup.html\nmkdir -p -- volunteer-hub\nprintf %s 'generated/\n*.log\n' > volunteer-hub/.gitignore\nmkdir -p -- volunteer-hub/generated\nprintf %s '' > volunteer-hub/generated/preview.html\nmkdir -p -- volunteer-hub\nprintf %s '' > volunteer-hub/debug.log\ngit -C volunteer-hub add -A\ngit -C volunteer-hub restore --staged .gitignore\n"
+                  }
+                },
+                "solutionFiles": {
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- volunteer-hub\nmkdir -p -- volunteer-hub\ngit -C volunteer-hub init -q -b main\ngit -C volunteer-hub config --local user.name 'ZoeSkoul Learner'\ngit -C volunteer-hub config --local user.email learner@zoeskoul.local\nmkdir -p -- volunteer-hub\nprintf %s '# Volunteer Hub\n\nVolunteer signups and schedules.\n' > volunteer-hub/README.md\nmkdir -p -- volunteer-hub\nprintf %s '<!doctype html>\n<title>Volunteer Hub</title>\n<h1>Volunteer Signups</h1>\n' > volunteer-hub/index.html\nmkdir -p -- volunteer-hub\nprintf %s 'body { font-family: sans-serif; }\nfooter { margin-top: 12px; }\n' > volunteer-hub/styles.css\nmkdir -p -- volunteer-hub/notes\nprintf %s 'Orientation: Saturday 10 AM\n' > volunteer-hub/notes/schedule.txt\ngit -C volunteer-hub add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C volunteer-hub commit -q -m 'Start volunteer hub'\nmkdir -p -- volunteer-hub\nprintf %s '<!doctype html>\n<title>Volunteer Hub</title>\n<h1>Volunteer Signups and Training</h1>\n' > volunteer-hub/index.html\ngit -C volunteer-hub add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C volunteer-hub commit -q -m 'Add volunteer signup page'\nmkdir -p -- volunteer-hub\nprintf %s 'body { font-family: sans-serif; }\nfooter { margin-top: 24px; }\n' > volunteer-hub/styles.css\ngit -C volunteer-hub add -A\nGIT_AUTHOR_DATE=2026-01-03T12:00:00Z GIT_COMMITTER_DATE=2026-01-03T12:00:00Z git -C volunteer-hub commit -q -m 'Add volunteer page styles'\nrm -f -- volunteer-hub/index.html\nrm -f -- volunteer-hub/notes/schedule.txt\nrmdir -- volunteer-hub/notes 2>/dev/null || true\nmkdir -p -- volunteer-hub/pages\nprintf %s '<!doctype html>\n<title>Volunteer Hub</title>\n<h1>Volunteer Signups and Training</h1>\n' > volunteer-hub/pages/signup.html\nmkdir -p -- volunteer-hub\nprintf %s 'generated/\n*.log\n' > volunteer-hub/.gitignore\nmkdir -p -- volunteer-hub/generated\nprintf %s '' > volunteer-hub/generated/preview.html\nmkdir -p -- volunteer-hub\nprintf %s '' > volunteer-hub/debug.log\ngit -C volunteer-hub add -A\ngit -C volunteer-hub restore --staged .gitignore\n"
+                  }
+                },
+                "terminalExpectations": {
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "That action can discard or rewrite history. Use the safe, layer-specific workflow taught in this course."
+                    }
+                  },
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Did you run `git status --short --ignored`?"
+                    },
+                    "1": {
+                      "message": "Did you run `git add .gitignore`?"
+                    }
+                  }
+                }
+              },
+              "try_module_3_sketch4": {
+                "title": "Create and Recover a README Mistake",
+                "prompt": "Open `volunteer-hub/README.md`. Find the exact line `Volunteer signups and schedules.` and replace it with `Accidental release rewrite.` Save the file. Type `git add README.md` and press Enter. Then type `git restore --staged README.md` and press Enter, followed by `git restore README.md`. Finally, type `git diff --staged --name-status` and press Enter.",
+                "hint": "Make only the supplied temporary README edit, then recover that path without disturbing the intended cleanup.",
+                "help": {
+                  "concept": "Safe layer-specific restore preserves the intended rename, removal, and ignore policy.",
+                  "hint_1": "Unstage README.md before restoring the working copy.",
+                  "hint_2": "Do not use reset --hard."
+                },
+                "starterCode": "# Volunteer Hub\n\nVolunteer signups and schedules.\n",
+                "solutionCode": "git add README.md\ngit restore --staged README.md\ngit restore README.md\ngit diff --staged --name-status",
+                "instructions": "Open `volunteer-hub/README.md`. Find the exact line `Volunteer signups and schedules.` and replace it with `Accidental release rewrite.` Save the file. Type `git add README.md` and press Enter. Then type `git restore --staged README.md` and press Enter, followed by `git restore README.md`. Finally, type `git diff --staged --name-status` and press Enter.",
+                "starterFiles": {
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- volunteer-hub\nmkdir -p -- volunteer-hub\ngit -C volunteer-hub init -q -b main\ngit -C volunteer-hub config --local user.name 'ZoeSkoul Learner'\ngit -C volunteer-hub config --local user.email learner@zoeskoul.local\nmkdir -p -- volunteer-hub\nprintf %s '# Volunteer Hub\n\nVolunteer signups and schedules.\n' > volunteer-hub/README.md\nmkdir -p -- volunteer-hub\nprintf %s '<!doctype html>\n<title>Volunteer Hub</title>\n<h1>Volunteer Signups</h1>\n' > volunteer-hub/index.html\nmkdir -p -- volunteer-hub\nprintf %s 'body { font-family: sans-serif; }\nfooter { margin-top: 12px; }\n' > volunteer-hub/styles.css\nmkdir -p -- volunteer-hub/notes\nprintf %s 'Orientation: Saturday 10 AM\n' > volunteer-hub/notes/schedule.txt\ngit -C volunteer-hub add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C volunteer-hub commit -q -m 'Start volunteer hub'\nmkdir -p -- volunteer-hub\nprintf %s '<!doctype html>\n<title>Volunteer Hub</title>\n<h1>Volunteer Signups and Training</h1>\n' > volunteer-hub/index.html\ngit -C volunteer-hub add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C volunteer-hub commit -q -m 'Add volunteer signup page'\nmkdir -p -- volunteer-hub\nprintf %s 'body { font-family: sans-serif; }\nfooter { margin-top: 24px; }\n' > volunteer-hub/styles.css\ngit -C volunteer-hub add -A\nGIT_AUTHOR_DATE=2026-01-03T12:00:00Z GIT_COMMITTER_DATE=2026-01-03T12:00:00Z git -C volunteer-hub commit -q -m 'Add volunteer page styles'\nrm -f -- volunteer-hub/index.html\nrm -f -- volunteer-hub/notes/schedule.txt\nrmdir -- volunteer-hub/notes 2>/dev/null || true\nmkdir -p -- volunteer-hub/pages\nprintf %s '<!doctype html>\n<title>Volunteer Hub</title>\n<h1>Volunteer Signups and Training</h1>\n' > volunteer-hub/pages/signup.html\nmkdir -p -- volunteer-hub\nprintf %s 'generated/\n*.log\n' > volunteer-hub/.gitignore\nmkdir -p -- volunteer-hub/generated\nprintf %s '' > volunteer-hub/generated/preview.html\nmkdir -p -- volunteer-hub\nprintf %s '' > volunteer-hub/debug.log\ngit -C volunteer-hub add -A\n"
+                  }
+                },
+                "solutionFiles": {
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- volunteer-hub\nmkdir -p -- volunteer-hub\ngit -C volunteer-hub init -q -b main\ngit -C volunteer-hub config --local user.name 'ZoeSkoul Learner'\ngit -C volunteer-hub config --local user.email learner@zoeskoul.local\nmkdir -p -- volunteer-hub\nprintf %s '# Volunteer Hub\n\nVolunteer signups and schedules.\n' > volunteer-hub/README.md\nmkdir -p -- volunteer-hub\nprintf %s '<!doctype html>\n<title>Volunteer Hub</title>\n<h1>Volunteer Signups</h1>\n' > volunteer-hub/index.html\nmkdir -p -- volunteer-hub\nprintf %s 'body { font-family: sans-serif; }\nfooter { margin-top: 12px; }\n' > volunteer-hub/styles.css\nmkdir -p -- volunteer-hub/notes\nprintf %s 'Orientation: Saturday 10 AM\n' > volunteer-hub/notes/schedule.txt\ngit -C volunteer-hub add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C volunteer-hub commit -q -m 'Start volunteer hub'\nmkdir -p -- volunteer-hub\nprintf %s '<!doctype html>\n<title>Volunteer Hub</title>\n<h1>Volunteer Signups and Training</h1>\n' > volunteer-hub/index.html\ngit -C volunteer-hub add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C volunteer-hub commit -q -m 'Add volunteer signup page'\nmkdir -p -- volunteer-hub\nprintf %s 'body { font-family: sans-serif; }\nfooter { margin-top: 24px; }\n' > volunteer-hub/styles.css\ngit -C volunteer-hub add -A\nGIT_AUTHOR_DATE=2026-01-03T12:00:00Z GIT_COMMITTER_DATE=2026-01-03T12:00:00Z git -C volunteer-hub commit -q -m 'Add volunteer page styles'\nrm -f -- volunteer-hub/index.html\nrm -f -- volunteer-hub/notes/schedule.txt\nrmdir -- volunteer-hub/notes 2>/dev/null || true\nmkdir -p -- volunteer-hub/pages\nprintf %s '<!doctype html>\n<title>Volunteer Hub</title>\n<h1>Volunteer Signups and Training</h1>\n' > volunteer-hub/pages/signup.html\nmkdir -p -- volunteer-hub\nprintf %s 'generated/\n*.log\n' > volunteer-hub/.gitignore\nmkdir -p -- volunteer-hub/generated\nprintf %s '' > volunteer-hub/generated/preview.html\nmkdir -p -- volunteer-hub\nprintf %s '' > volunteer-hub/debug.log\ngit -C volunteer-hub add -A\n"
+                  }
+                },
+                "terminalExpectations": {
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "That action can discard or rewrite history. Use the safe, layer-specific workflow taught in this course."
+                    }
+                  },
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Did you run `git add README.md`?"
+                    },
+                    "1": {
+                      "message": "Did you run `git restore --staged README.md`?"
+                    },
+                    "2": {
+                      "message": "Did you run `git restore README.md`?"
+                    },
+                    "3": {
+                      "message": "Did you run `git diff --staged --name-status`?"
+                    }
+                  }
+                }
+              },
+              "try_module_3_sketch5": {
+                "title": "Commit and Verify the Volunteer Hub Handoff",
+                "prompt": "Type `git commit -m \"Prepare volunteer hub handoff\"` and press Enter. Then type `git log --oneline`, `git show --stat --oneline HEAD`, and `git status --short`, pressing Enter after each command.",
+                "hint": "Record the staged maintenance snapshot and audit the complete history.",
+                "help": {
+                  "concept": "The same volunteer-hub repository now carries all three module-project milestones.",
+                  "hint_1": "Use the exact final message.",
+                  "hint_2": "The short status should be empty."
+                },
+                "starterCode": "generated/\n*.log\n",
+                "solutionCode": "git commit -m \"Prepare volunteer hub handoff\"\ngit log --oneline\ngit show --stat --oneline HEAD\ngit status --short",
+                "instructions": "Type `git commit -m \"Prepare volunteer hub handoff\"` and press Enter. Then type `git log --oneline`, `git show --stat --oneline HEAD`, and `git status --short`, pressing Enter after each command.",
+                "starterFiles": {
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- volunteer-hub\nmkdir -p -- volunteer-hub\ngit -C volunteer-hub init -q -b main\ngit -C volunteer-hub config --local user.name 'ZoeSkoul Learner'\ngit -C volunteer-hub config --local user.email learner@zoeskoul.local\nmkdir -p -- volunteer-hub\nprintf %s '# Volunteer Hub\n\nVolunteer signups and schedules.\n' > volunteer-hub/README.md\nmkdir -p -- volunteer-hub\nprintf %s '<!doctype html>\n<title>Volunteer Hub</title>\n<h1>Volunteer Signups</h1>\n' > volunteer-hub/index.html\nmkdir -p -- volunteer-hub\nprintf %s 'body { font-family: sans-serif; }\nfooter { margin-top: 12px; }\n' > volunteer-hub/styles.css\nmkdir -p -- volunteer-hub/notes\nprintf %s 'Orientation: Saturday 10 AM\n' > volunteer-hub/notes/schedule.txt\ngit -C volunteer-hub add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C volunteer-hub commit -q -m 'Start volunteer hub'\nmkdir -p -- volunteer-hub\nprintf %s '<!doctype html>\n<title>Volunteer Hub</title>\n<h1>Volunteer Signups and Training</h1>\n' > volunteer-hub/index.html\ngit -C volunteer-hub add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C volunteer-hub commit -q -m 'Add volunteer signup page'\nmkdir -p -- volunteer-hub\nprintf %s 'body { font-family: sans-serif; }\nfooter { margin-top: 24px; }\n' > volunteer-hub/styles.css\ngit -C volunteer-hub add -A\nGIT_AUTHOR_DATE=2026-01-03T12:00:00Z GIT_COMMITTER_DATE=2026-01-03T12:00:00Z git -C volunteer-hub commit -q -m 'Add volunteer page styles'\nrm -f -- volunteer-hub/index.html\nrm -f -- volunteer-hub/notes/schedule.txt\nrmdir -- volunteer-hub/notes 2>/dev/null || true\nmkdir -p -- volunteer-hub/pages\nprintf %s '<!doctype html>\n<title>Volunteer Hub</title>\n<h1>Volunteer Signups and Training</h1>\n' > volunteer-hub/pages/signup.html\nmkdir -p -- volunteer-hub\nprintf %s 'generated/\n*.log\n' > volunteer-hub/.gitignore\nmkdir -p -- volunteer-hub/generated\nprintf %s '' > volunteer-hub/generated/preview.html\nmkdir -p -- volunteer-hub\nprintf %s '' > volunteer-hub/debug.log\ngit -C volunteer-hub add -A\n"
+                  }
+                },
+                "solutionFiles": {
+                  "zoeskoul_setup_sh": {
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- volunteer-hub\nmkdir -p -- volunteer-hub\ngit -C volunteer-hub init -q -b main\ngit -C volunteer-hub config --local user.name 'ZoeSkoul Learner'\ngit -C volunteer-hub config --local user.email learner@zoeskoul.local\nmkdir -p -- volunteer-hub\nprintf %s '# Volunteer Hub\n\nVolunteer signups and schedules.\n' > volunteer-hub/README.md\nmkdir -p -- volunteer-hub\nprintf %s '<!doctype html>\n<title>Volunteer Hub</title>\n<h1>Volunteer Signups</h1>\n' > volunteer-hub/index.html\nmkdir -p -- volunteer-hub\nprintf %s 'body { font-family: sans-serif; }\nfooter { margin-top: 12px; }\n' > volunteer-hub/styles.css\nmkdir -p -- volunteer-hub/notes\nprintf %s 'Orientation: Saturday 10 AM\n' > volunteer-hub/notes/schedule.txt\ngit -C volunteer-hub add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C volunteer-hub commit -q -m 'Start volunteer hub'\nmkdir -p -- volunteer-hub\nprintf %s '<!doctype html>\n<title>Volunteer Hub</title>\n<h1>Volunteer Signups and Training</h1>\n' > volunteer-hub/index.html\ngit -C volunteer-hub add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C volunteer-hub commit -q -m 'Add volunteer signup page'\nmkdir -p -- volunteer-hub\nprintf %s 'body { font-family: sans-serif; }\nfooter { margin-top: 24px; }\n' > volunteer-hub/styles.css\ngit -C volunteer-hub add -A\nGIT_AUTHOR_DATE=2026-01-03T12:00:00Z GIT_COMMITTER_DATE=2026-01-03T12:00:00Z git -C volunteer-hub commit -q -m 'Add volunteer page styles'\nrm -f -- volunteer-hub/index.html\nrm -f -- volunteer-hub/notes/schedule.txt\nrmdir -- volunteer-hub/notes 2>/dev/null || true\nmkdir -p -- volunteer-hub/pages\nprintf %s '<!doctype html>\n<title>Volunteer Hub</title>\n<h1>Volunteer Signups and Training</h1>\n' > volunteer-hub/pages/signup.html\nmkdir -p -- volunteer-hub\nprintf %s 'generated/\n*.log\n' > volunteer-hub/.gitignore\nmkdir -p -- volunteer-hub/generated\nprintf %s '' > volunteer-hub/generated/preview.html\nmkdir -p -- volunteer-hub\nprintf %s '' > volunteer-hub/debug.log\ngit -C volunteer-hub add -A\n"
+                  }
+                },
+                "terminalExpectations": {
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "That action can discard or rewrite history. Use the safe, layer-specific workflow taught in this course."
+                    }
+                  },
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Did you run `git commit -m \"Prepare volunteer hub handoff\"`?"
+                    },
+                    "1": {
+                      "message": "Did you run `git log --oneline`?"
+                    },
+                    "2": {
+                      "message": "Did you run `git show --stat --oneline HEAD`?"
+                    },
+                    "3": {
+                      "message": "Did you run `git status --short`?"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "The same repository now carries Modules 1 and 2. Rename the tracked page, remove the obsolete schedule, add exact ignore rules, create and recover one supplied README mistake, and record one final handoff commit.",
+            "title": "Prepare the Volunteer Hub Handoff"
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "git-foundations": {
+      "git-foundations-module-3-manage-tracked-files": {
+        "module-3-clean-release-snapshot": {
+          "intro-sketch": {
+            "title": "Finish Volunteer Hub Cleanly",
+            "bodyMarkdown": "The same repository now carries Modules 1 and 2. Rename the tracked page, remove the obsolete schedule, add exact ignore rules, create and recover one supplied README mistake, and record one final handoff commit."
+          }
+        }
+      }
+    }
+  }
+}

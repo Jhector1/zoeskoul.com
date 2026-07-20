@@ -109,6 +109,14 @@ function clearScheduledUnmountCancelsForWorkspace(workspaceKey: string) {
     }
 }
 
+function clearScheduledUnmountCancelsForSession(sessionId: string) {
+    for (const key of terminalUnmountCancelTimers.keys()) {
+        if (key.endsWith(`::${sessionId}`)) {
+            clearScheduledUnmountCancel(key);
+        }
+    }
+}
+
 function scheduleUnmountCancel(args: { workspaceKey: string; sessionId: string }) {
     const key = unmountCancelKey(args.workspaceKey, args.sessionId);
     clearScheduledUnmountCancel(key);
@@ -869,6 +877,20 @@ export function useWorkspaceTerminalController(
         args.cwd,
         args.historyScopeKey,
     ]);
+    const terminalHostKey = React.useMemo(() => {
+        const explicit = String(args.terminalHostKey ?? "").trim();
+        if (explicit) return explicit;
+
+        return `terminal-host:${args.projectId ?? args.historyScopeKey ?? "lesson"}`;
+    }, [args.terminalHostKey, args.projectId, args.historyScopeKey]);
+    const terminalOwnerKey = React.useMemo(() => {
+        const explicit = String(args.terminalOwnerKey ?? "").trim();
+        if (explicit) return explicit;
+
+        return `${terminalHostKey}:owner:primary`;
+    }, [args.terminalOwnerKey, terminalHostKey]);
+    const terminalStartClaimKey = `${terminalOwnerKey}::${terminalLeaseKey}`;
+
     const [terminalFeed, setTerminalFeed] = React.useState<TerminalChunk[]>([]);
     const terminalFeedRef = React.useRef<TerminalChunk[]>([]);
     const [terminalEvidence, setTerminalEvidence] = React.useState<TerminalEvidence>(
@@ -921,7 +943,8 @@ export function useWorkspaceTerminalController(
     const openInFlightRef = React.useRef<Promise<void> | null>(null);
     const workspaceReadyRef = React.useRef(true);
     const openedLeaseKeyRef = React.useRef<string | null>(null);
-    const previousLeaseKeyRef = React.useRef<string | null>(null);
+    const openedOwnerKeyRef = React.useRef<string | null>(null);
+    const previousTerminalIdentityRef = React.useRef<string | null>(null);
     const sessionIdRef = React.useRef<string | null>(sessionId);
     const startedRef = React.useRef(started);
     const startingRef = React.useRef(starting);
@@ -946,12 +969,14 @@ export function useWorkspaceTerminalController(
     const historyStorageKey = React.useMemo(
         () =>
             buildHistoryStorageKey({
-                historyScopeKey: args.historyScopeKey,
+                historyScopeKey: args.historyScopeKey
+                    ? `${args.historyScopeKey}::${terminalOwnerKey}`
+                    : terminalOwnerKey,
                 projectId: args.projectId,
                 cwd: args.cwd,
                 title: args.title,
             }),
-        [args.historyScopeKey, args.projectId, args.cwd, args.title],
+        [args.historyScopeKey, args.projectId, args.cwd, args.title, terminalOwnerKey],
     );
 
     const historyContentRef = React.useRef("");
@@ -969,7 +994,7 @@ export function useWorkspaceTerminalController(
 
     React.useEffect(() => {
         mountedRef.current = true;
-        leaseMountGenerationRef.current = claimLeaseMountGeneration(terminalLeaseKey);
+        leaseMountGenerationRef.current = claimLeaseMountGeneration(terminalOwnerKey);
 
         return () => {
             mountedRef.current = false;
@@ -978,7 +1003,7 @@ export function useWorkspaceTerminalController(
                 promptPrimeTimerRef.current = null;
             }
         };
-    }, [terminalLeaseKey]);
+    }, [terminalOwnerKey, terminalLeaseKey]);
 
     const ensureHistoryLoaded = React.useCallback(async (): Promise<string> => {
         if (historyLoadPromiseRef.current) {
@@ -1710,7 +1735,7 @@ export function useWorkspaceTerminalController(
                 if (now - lastStartAttemptAtRef.current < CLIENT_START_COOLDOWN_MS) {
                     return;
                 }
-                if (!shouldAllowAutomaticTerminalStart(terminalLeaseKey)) {
+                if (!shouldAllowAutomaticTerminalStart(terminalStartClaimKey)) {
                     return;
                 }
                 lastStartAttemptAtRef.current = now;
@@ -1724,6 +1749,7 @@ export function useWorkspaceTerminalController(
 
             if (
                 startedRef.current &&
+                openedOwnerKeyRef.current === terminalOwnerKey &&
                 openedLeaseKeyRef.current === terminalLeaseKey &&
                 !isFinalSessionState(stateRef.current)
             ) {
@@ -1732,17 +1758,15 @@ export function useWorkspaceTerminalController(
 
             if (
                 startedRef.current &&
-                openedLeaseKeyRef.current !== terminalLeaseKey &&
+                (openedOwnerKeyRef.current !== terminalOwnerKey ||
+                    openedLeaseKeyRef.current !== terminalLeaseKey) &&
                 !isFinalSessionState(stateRef.current)
             ) {
-                try {
-                    await cancel();
-                } catch {
-                    // Ignore stale cancel failures; the next start is authoritative.
-                }
-
+                // Detach from the previous owner/workspace without killing it.
+                // The ensure route will reattach this owner or start a new owned PTY.
                 closeSocket();
                 openedLeaseKeyRef.current = null;
+                openedOwnerKeyRef.current = null;
                 setStarted(false);
                 setStarting(false);
                 setBusy(false);
@@ -1809,6 +1833,7 @@ export function useWorkspaceTerminalController(
 
                 try {
                     openedLeaseKeyRef.current = terminalLeaseKey;
+                    openedOwnerKeyRef.current = terminalOwnerKey;
 
                     const startRequest = {
                         kind: "shell",
@@ -1817,6 +1842,9 @@ export function useWorkspaceTerminalController(
                         projectId: args.projectId,
                         cwd: args.cwd,
                         workspaceKey: terminalLeaseKey,
+                        hostKey: terminalHostKey,
+                        ownerKey: terminalOwnerKey,
+                        forceNew: args.forceNewSession === true,
                         ...(fullEntries.length ? { files: fullEntries as any } : {}),
                     } as any;
 
@@ -1825,6 +1853,14 @@ export function useWorkspaceTerminalController(
                     for (let attempt = 0; attempt <= CLIENT_START_CONTENTION_RETRY_ATTEMPTS; attempt += 1) {
                         try {
                             nextSessionId = await start(startRequest);
+
+                            /**
+                             * The ensure route can hand the same live shell from the
+                             * previous exercise to this controller. Cancel the old
+                             * controller's delayed unmount cleanup by session id, not
+                             * only by its now-obsolete workspace key.
+                             */
+                            clearScheduledUnmountCancelsForSession(nextSessionId);
                             break;
                         } catch (error: any) {
                             const message = error?.message ?? String(error ?? "");
@@ -1846,7 +1882,7 @@ export function useWorkspaceTerminalController(
                     }
 
                     const newerLeaseOwnerMounted =
-                        currentLeaseMountGeneration(terminalLeaseKey) !== attemptLeaseGeneration;
+                        currentLeaseMountGeneration(terminalOwnerKey) !== attemptLeaseGeneration;
                     if (!mountedRef.current || newerLeaseOwnerMounted) {
                         /**
                          * React can unmount this controller while an automatic terminal
@@ -1867,7 +1903,7 @@ export function useWorkspaceTerminalController(
 
                     if (
                         !mountedRef.current ||
-                        currentLeaseMountGeneration(terminalLeaseKey) !== attemptLeaseGeneration
+                        currentLeaseMountGeneration(terminalOwnerKey) !== attemptLeaseGeneration
                     ) {
                         return;
                     }
@@ -1895,7 +1931,7 @@ export function useWorkspaceTerminalController(
                     scheduleStartupCwdFlush();
                     lastPushedEntriesRef.current = visibleEntries;
                     startedRef.current = true;
-                    releaseAutomaticTerminalStart(terminalLeaseKey);
+                    releaseAutomaticTerminalStart(terminalStartClaimKey);
                     setStarted(true);
 
                     const latestTerminalState = stateRef.current as string;
@@ -1925,7 +1961,7 @@ export function useWorkspaceTerminalController(
                         pendingRecoveryInputRef.current = "";
                     }
                     if (!tooManySessions) {
-                        releaseAutomaticTerminalStart(terminalLeaseKey);
+                        releaseAutomaticTerminalStart(terminalStartClaimKey);
                     }
                     setBusy(false);
                     setInputEnabled(false);
@@ -1933,8 +1969,12 @@ export function useWorkspaceTerminalController(
                     setStarted(false);
                     setStarting(false);
 
-                    if (openedLeaseKeyRef.current === terminalLeaseKey) {
+                    if (
+                        openedOwnerKeyRef.current === terminalOwnerKey &&
+                        openedLeaseKeyRef.current === terminalLeaseKey
+                    ) {
                         openedLeaseKeyRef.current = null;
+                        openedOwnerKeyRef.current = null;
                     }
 
                     /**
@@ -1964,6 +2004,10 @@ export function useWorkspaceTerminalController(
             start,
             pushChunk,
             terminalLeaseKey,
+            terminalOwnerKey,
+            terminalHostKey,
+            terminalStartClaimKey,
+            args.forceNewSession,
             cancel,
             closeSocket,
             clearStaleStartingTimer,
@@ -1986,6 +2030,7 @@ export function useWorkspaceTerminalController(
             clearQuietTimer();
             clearStaleStartingTimer();
             openedLeaseKeyRef.current = null;
+            openedOwnerKeyRef.current = null;
             clearLocalTerminalState();
             setStopping(false);
         }
@@ -2020,10 +2065,11 @@ export function useWorkspaceTerminalController(
 
                 closeSocket();
                 openedLeaseKeyRef.current = null;
+                openedOwnerKeyRef.current = null;
                 clearLocalTerminalState();
                 terminalProcessExitedRef.current = false;
                 terminalExitCodeRef.current = null;
-                releaseAutomaticTerminalStart(terminalLeaseKey);
+                releaseAutomaticTerminalStart(terminalStartClaimKey);
 
                 setRestarting(true);
 
@@ -2051,18 +2097,13 @@ export function useWorkspaceTerminalController(
     ]);
 
     React.useEffect(() => {
-        const previousLeaseKey = previousLeaseKeyRef.current;
-        previousLeaseKeyRef.current = terminalLeaseKey;
+        const identity = `${terminalOwnerKey}\0${terminalLeaseKey}`;
+        const previousIdentity = previousTerminalIdentityRef.current;
+        previousTerminalIdentityRef.current = identity;
 
-        if (!previousLeaseKey || previousLeaseKey === terminalLeaseKey) {
+        if (!previousIdentity || previousIdentity === identity) {
             return;
         }
-
-        const hadSessionForPreviousLease =
-            openedLeaseKeyRef.current === previousLeaseKey &&
-            (startedRef.current ||
-                startingRef.current ||
-                openInFlightRef.current !== null);
 
         clearQuietTimer();
         clearStaleStartingTimer();
@@ -2080,23 +2121,26 @@ export function useWorkspaceTerminalController(
         stateRef.current = "idle";
         startedRef.current = false;
         startingRef.current = false;
-        releaseAutomaticTerminalStart(previousLeaseKey);
-        releaseAutomaticTerminalStart(terminalLeaseKey);
         setBusy(false);
         setInputEnabled(false);
         setStarted(false);
         setStarting(false);
+        openedLeaseKeyRef.current = null;
+        openedOwnerKeyRef.current = null;
 
-        if (openedLeaseKeyRef.current === previousLeaseKey) {
-            openedLeaseKeyRef.current = null;
-        }
-
-        if (hadSessionForPreviousLease) {
-            void cancel().catch(() => {});
-        }
-
+        // Switching exercise workspaces or terminal tabs detaches the socket only.
+        // The server lease stays alive for that exact owner and can be reattached.
         closeSocket();
-    }, [terminalLeaseKey, cancel, clearQuietTimer, clearRecycleRestartTimer, clearStartupCwdFlushTimer, clearStaleStartingTimer, clearTerminalRecovery, closeSocket]);
+    }, [
+        terminalLeaseKey,
+        terminalOwnerKey,
+        clearQuietTimer,
+        clearRecycleRestartTimer,
+        clearStartupCwdFlushTimer,
+        clearStaleStartingTimer,
+        clearTerminalRecovery,
+        closeSocket,
+    ]);
 
     React.useEffect(() => {
         const desiredCwd = resolveWorkspaceTerminalStartupCwd({
@@ -2160,6 +2204,7 @@ export function useWorkspaceTerminalController(
              * refresh is safe because page JS is destroyed before this timer can fire.
              */
             if (
+                !args.preserveSessionOnUnmount &&
                 currentSessionId &&
                 currentLeaseKey &&
                 !isFinalSessionState(currentState) &&
@@ -2172,19 +2217,26 @@ export function useWorkspaceTerminalController(
                 });
             }
 
-            previousLeaseKeyRef.current = null;
+            previousTerminalIdentityRef.current = null;
             openInFlightRef.current = null;
             recoverInFlightRef.current = null;
             pendingRecoveryInputRef.current = "";
             pendingStartupInputRef.current = null;
             pendingStartupCwdRef.current = undefined;
             openedLeaseKeyRef.current = null;
+            openedOwnerKeyRef.current = null;
             clearQuietTimer();
             clearStaleStartingTimer();
             clearRecycleRestartTimer();
             closeSocket();
         };
-    }, [clearQuietTimer, clearRecycleRestartTimer, clearStaleStartingTimer, closeSocket]);
+    }, [
+        args.preserveSessionOnUnmount,
+        clearQuietTimer,
+        clearRecycleRestartTimer,
+        clearStaleStartingTimer,
+        closeSocket,
+    ]);
     const recoverTerminalAfterInactiveInput = React.useCallback(async (): Promise<void> => {
         if (!args.enabled) return;
         if (restarting || stopping) return;
@@ -2209,7 +2261,7 @@ export function useWorkspaceTerminalController(
             setStarted(false);
             setStarting(false);
             openInFlightRef.current = null;
-            releaseAutomaticTerminalStart(terminalLeaseKey);
+            releaseAutomaticTerminalStart(terminalStartClaimKey);
 
             if (socketReadyState === SOCKET_OPEN_READY_STATE && sessionId) {
                 const ok = await probeConnection().catch(() => false);
@@ -2375,7 +2427,7 @@ export function useWorkspaceTerminalController(
                     if (stoppingRef.current || restartingRef.current) return;
 
                     openInFlightRef.current = null;
-                    releaseAutomaticTerminalStart(terminalLeaseKey);
+                    releaseAutomaticTerminalStart(terminalStartClaimKey);
                     await open();
                 })().catch((error: any) => {
                     setTerminalRecovery({

@@ -3,58 +3,58 @@
     "git--git-foundations--draft": {
       "git-foundations-module-4-final-capstone": {
         "final-neighborhood-resource-guide-history": {
-          "label": "Final Capstone: Build the Resource Guide History",
-          "summary": "Build a four-commit neighborhood resource guide history, make real file edits, recover from an accidental staged change, and prove the final handoff.",
+          "label": "Final Capstone: Neighborhood Guide History",
+          "summary": "Build a compact four-file baseline and a clean four-commit local history.",
           "cards": {
             "sketch0": {
-              "title": "Turn a Working Folder into a Trustworthy Handoff"
+              "title": "Fresh Repository, Independent Transfer"
             },
             "project": {
-              "title": "Neighborhood Resource Guide History"
+              "title": "Complete the Neighborhood Guide Capstone"
             }
           },
           "projectSteps": {
             "try_final_neighborhood_resource_guide_history_sketch0": {
-              "title": "Create the Guide Baseline"
+              "title": "Initialize and Record the Baseline"
             },
             "try_final_neighborhood_resource_guide_history_sketch1": {
-              "title": "Write and Commit the Services Page"
+              "title": "Add the Neighborhood Resources File"
             },
             "try_final_neighborhood_resource_guide_history_sketch2": {
-              "title": "Edit and Commit the Help Desk Hours"
+              "title": "Update the Help Desk Hours"
             },
             "try_final_neighborhood_resource_guide_history_sketch3": {
-              "title": "Ignore Generated Preview Files"
+              "title": "Add the Generated-File Policy"
             },
             "try_final_neighborhood_resource_guide_history_sketch4": {
-              "title": "Recover and Stage the Final Cleanup"
+              "title": "Clean Tracked Paths and Recover a Mistake"
             },
             "try_final_neighborhood_resource_guide_history_sketch5": {
-              "title": "Commit and Verify the Final Handoff"
+              "title": "Commit and Audit the Final Handoff"
             }
           },
           "finalCapstone": {
             "steps": {
               "try_final_neighborhood_resource_guide_history_sketch0": {
-                "title": "Create the First Guide Snapshot",
-                "prompt": "You are working in the prepared `resource-guide/` repository.\n\nInitialize `resource-guide/` on `main`, set the repository-only learner identity, stage the provided starting files, and commit `Start neighborhood resource guide`.",
-                "hint": "The folder still needs its own repository metadata. Keep the first branch name in mind.",
+                "title": "Initialize and Record the Guide Baseline",
+                "prompt": "Inside `neighborhood-guide/`, initialize a repository on `main` and store the supplied local author name and email. Stage the four baseline text files—`README.md`, `services.txt`, `hours.txt`, and `old-contacts.txt`—then record them with the message `Start neighborhood guide`.",
+                "hint": "Build the first snapshot from the four supplied text files.",
                 "help": {
-                  "concept": "The capstone begins with the same honest sequence as the course: initialize, identify, stage, commit, verify.",
-                  "hint_1": "Make sure you are already inside the project folder before initializing it.",
-                  "hint_2": "Work in order: initialize, set the local identity, stage the starting files, commit, then inspect the final status."
+                  "concept": "This capstone combines the Module 1 workflow: initialize, configure local identity, stage the named files, and commit the first snapshot. No programming knowledge is involved.",
+                  "hint_1": "Use the exact four paths and supplied identity.",
+                  "hint_2": "Do not create additional files in this step."
                 },
-                "starterCode": "# Neighborhood Resource Guide\n",
-                "solutionCode": "git init -b main\ngit config --local user.name \"ZoeSkoul Learner\"\ngit config --local user.email \"learner@zoeskoul.local\"\ngit add README.md pages/\ngit commit -m \"Start neighborhood resource guide\"\ngit status --short",
-                "instructions": "You are working in the prepared `resource-guide/` repository.\n\nInitialize `resource-guide/` on `main`, set the repository-only learner identity, stage the provided starting files, and commit `Start neighborhood resource guide`.",
+                "starterCode": "# Neighborhood Guide\n\nLocal services and opening hours.\n",
+                "solutionCode": "git init -b main\ngit config --local user.name \"ZoeSkoul Learner\"\ngit config --local user.email \"learner@zoeskoul.local\"\ngit add README.md services.txt hours.txt old-contacts.txt\ngit commit -m \"Start neighborhood guide\"",
+                "instructions": "Inside `neighborhood-guide/`, initialize a repository on `main` and store the supplied local author name and email. Stage the four baseline text files—`README.md`, `services.txt`, `hours.txt`, and `old-contacts.txt`—then record them with the message `Start neighborhood guide`.",
                 "starterFiles": {
                   "zoeskoul_setup_sh": {
-                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf resource-guide\nmkdir -p resource-guide/pages\nprintf '%s\\n' '# Neighborhood Resource Guide' > resource-guide/README.md\nprintf '%s\\n' 'Help desk closes at 6 PM.' > resource-guide/pages/contact.md\nprintf '%s\\n' 'Welcome to the neighborhood guide.' > resource-guide/pages/welcome.md\nprintf '%s\\n' 'Temporary launch note.' > resource-guide/pages/old-note.md\n"
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- neighborhood-guide\nmkdir -p -- neighborhood-guide\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 10 AM - 4 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\n' > neighborhood-guide/services.txt\n"
                   }
                 },
                 "solutionFiles": {
                   "zoeskoul_setup_sh": {
-                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf resource-guide\nmkdir -p resource-guide/pages\nprintf '%s\\n' '# Neighborhood Resource Guide' > resource-guide/README.md\nprintf '%s\\n' 'Help desk closes at 6 PM.' > resource-guide/pages/contact.md\nprintf '%s\\n' 'Welcome to the neighborhood guide.' > resource-guide/pages/welcome.md\nprintf '%s\\n' 'Temporary launch note.' > resource-guide/pages/old-note.md\n"
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- neighborhood-guide\nmkdir -p -- neighborhood-guide\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 10 AM - 4 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\n' > neighborhood-guide/services.txt\n"
                   }
                 },
                 "terminalExpectations": {
@@ -65,37 +65,43 @@
                   },
                   "requiredCommands": {
                     "0": {
-                      "message": "Did you turn this project folder into a repository with `main` as its first branch?"
+                      "message": "Did you initialize the guide on `main`?"
                     },
                     "1": {
-                      "message": "Did you record the staged snapshot with the message named in the task?"
+                      "message": "Did you store the supplied local name?"
                     },
                     "2": {
-                      "message": "Did you use the compact status view and read the entry for `resource-guide/`?"
+                      "message": "Did you store the supplied local email?"
+                    },
+                    "3": {
+                      "message": "Did you stage the four baseline text files?"
+                    },
+                    "4": {
+                      "message": "Did you record the baseline with the requested message?"
                     }
                   }
                 }
               },
               "try_final_neighborhood_resource_guide_history_sketch1": {
-                "title": "Write the Services Page",
-                "prompt": "The first resource-guide snapshot is already committed. Open `pages/services.md` in the editor and replace the placeholder with these three lines:\n\n```text\n- Food pantry\n- Health clinic\n- Job center\n```\n\nSave the file, then use Terminal to review its state, stage only this page, and commit it as `Add local services page`.",
-                "hint": "Choose only the paths that belong to this checkpoint.",
+                "title": "Update the Neighborhood Services",
+                "prompt": "Open `neighborhood-guide/services.txt`. Add `Health clinic` on a new line immediately after `Food pantry`. Save the file. Inspect the unstaged diff, stage the file, and commit it with the message `Update neighborhood services`.",
+                "hint": "Make the exact one-line addition and record it as one focused purpose.",
                 "help": {
-                  "concept": "A new page earns its own focused snapshot because it is a complete, reviewable addition.",
-                  "hint_1": "Do not broaden the staging boundary just to make status quieter.",
-                  "hint_2": "Review the staged paths or patch before moving on."
+                  "concept": "`git diff -- services.txt` reviews the added service before staging. Staging and committing only that path creates a focused second snapshot without adding another project file.",
+                  "hint_1": "Do not change the existing service lines.",
+                  "hint_2": "The commit should affect only `services.txt`."
                 },
-                "starterCode": "<!-- Replace with the local services list -->\n",
-                "solutionCode": "printf \"%s\\n\" \"- Food pantry\" \"- Health clinic\" \"- Job center\" > pages/services.md\ngit status --short\ngit add pages/services.md\ngit commit -m \"Add local services page\"\ngit status --short",
-                "instructions": "The first resource-guide snapshot is already committed. Open `pages/services.md` in the editor and replace the placeholder with these three lines:\n\n```text\n- Food pantry\n- Health clinic\n- Job center\n```\n\nSave the file, then use Terminal to review its state, stage only this page, and commit it as `Add local services page`.",
+                "starterCode": "# Neighborhood Guide\n\nLocal services and opening hours.\n",
+                "solutionCode": "git diff -- services.txt\ngit add services.txt\ngit commit -m \"Update neighborhood services\"",
+                "instructions": "Open `neighborhood-guide/services.txt`. Add `Health clinic` on a new line immediately after `Food pantry`. Save the file. Inspect the unstaged diff, stage the file, and commit it with the message `Update neighborhood services`.",
                 "starterFiles": {
                   "zoeskoul_setup_sh": {
-                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf resource-guide\nmkdir -p resource-guide/pages\ngit -C resource-guide init -q -b main\ngit -C resource-guide config --local user.name \"ZoeSkoul Learner\"\ngit -C resource-guide config --local user.email \"learner@zoeskoul.local\"\nprintf '%s\\n' '# Neighborhood Resource Guide' > resource-guide/README.md\nprintf '%s\\n' 'Help desk closes at 6 PM.' > resource-guide/pages/contact.md\nprintf '%s\\n' 'Welcome to the neighborhood guide.' > resource-guide/pages/welcome.md\nprintf '%s\\n' 'Temporary launch note.' > resource-guide/pages/old-note.md\ngit -C resource-guide add -A\ngit -C resource-guide commit -q -m 'Start neighborhood resource guide'\n"
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- neighborhood-guide\nmkdir -p -- neighborhood-guide\ngit -C neighborhood-guide init -q -b main\ngit -C neighborhood-guide config --local user.name 'ZoeSkoul Learner'\ngit -C neighborhood-guide config --local user.email learner@zoeskoul.local\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 10 AM - 4 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\n' > neighborhood-guide/services.txt\ngit -C neighborhood-guide add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C neighborhood-guide commit -q -m 'Start neighborhood guide'\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 10 AM - 4 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\n' > neighborhood-guide/services.txt\ngit -C neighborhood-guide add -A\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 10 AM - 4 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\n' > neighborhood-guide/services.txt\n"
                   }
                 },
                 "solutionFiles": {
                   "zoeskoul_setup_sh": {
-                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf resource-guide\nmkdir -p resource-guide/pages\ngit -C resource-guide init -q -b main\ngit -C resource-guide config --local user.name \"ZoeSkoul Learner\"\ngit -C resource-guide config --local user.email \"learner@zoeskoul.local\"\nprintf '%s\\n' '# Neighborhood Resource Guide' > resource-guide/README.md\nprintf '%s\\n' 'Help desk closes at 6 PM.' > resource-guide/pages/contact.md\nprintf '%s\\n' 'Welcome to the neighborhood guide.' > resource-guide/pages/welcome.md\nprintf '%s\\n' 'Temporary launch note.' > resource-guide/pages/old-note.md\ngit -C resource-guide add -A\ngit -C resource-guide commit -q -m 'Start neighborhood resource guide'\n"
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- neighborhood-guide\nmkdir -p -- neighborhood-guide\ngit -C neighborhood-guide init -q -b main\ngit -C neighborhood-guide config --local user.name 'ZoeSkoul Learner'\ngit -C neighborhood-guide config --local user.email learner@zoeskoul.local\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 10 AM - 4 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\n' > neighborhood-guide/services.txt\ngit -C neighborhood-guide add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C neighborhood-guide commit -q -m 'Start neighborhood guide'\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 10 AM - 4 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\n' > neighborhood-guide/services.txt\ngit -C neighborhood-guide add -A\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 10 AM - 4 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\n' > neighborhood-guide/services.txt\n"
                   }
                 },
                 "terminalExpectations": {
@@ -106,34 +112,37 @@
                   },
                   "requiredCommands": {
                     "0": {
-                      "message": "Did you stage only the path or paths that belong to this checkpoint?"
+                      "message": "Did you inspect the service-list change?"
                     },
                     "1": {
-                      "message": "Did you record the staged snapshot with the message named in the task?"
+                      "message": "Did you stage only the service list?"
+                    },
+                    "2": {
+                      "message": "Did you record the service update separately?"
                     }
                   }
                 }
               },
               "try_final_neighborhood_resource_guide_history_sketch2": {
-                "title": "Edit the Help Desk Hours",
-                "prompt": "The services page is committed. Open `pages/contact.md` in the editor and change the closing time from `6 PM` to `5 PM`.\n\nSave the file, inspect the unstaged patch, stage only the contact page, and commit it as `Update help desk hours`.",
-                "hint": "Choose only the paths that belong to this checkpoint.",
+                "title": "Update the Help Desk Hours",
+                "prompt": "Open `neighborhood-guide/hours.txt`. Replace `Help desk hours: 10 AM - 4 PM` with `Help desk hours: 9 AM - 5 PM`. Save the file. Inspect the unstaged diff, stage it, and commit it with the message `Update help desk hours`.",
+                "hint": "Review the exact hours change before recording it.",
                 "help": {
-                  "concept": "Inspecting before staging keeps a small correction precise and easy to review.",
-                  "hint_1": "Do not broaden the staging boundary just to make status quieter.",
-                  "hint_2": "Review the staged paths or patch before moving on."
+                  "concept": "The same focused workflow applies: diff the single file, stage it by name, and commit it as its own purpose.",
+                  "hint_1": "Do not edit another file.",
+                  "hint_2": "The third commit should affect only `hours.txt`."
                 },
-                "starterCode": "Help desk closes at 6 PM.\n",
-                "solutionCode": "printf \"%s\\n\" \"Help desk closes at 5 PM.\" > pages/contact.md\ngit diff -- pages/contact.md\ngit add pages/contact.md\ngit commit -m \"Update help desk hours\"\ngit status --short",
-                "instructions": "The services page is committed. Open `pages/contact.md` in the editor and change the closing time from `6 PM` to `5 PM`.\n\nSave the file, inspect the unstaged patch, stage only the contact page, and commit it as `Update help desk hours`.",
+                "starterCode": "# Neighborhood Guide\n\nLocal services and opening hours.\n",
+                "solutionCode": "git diff -- hours.txt\ngit add hours.txt\ngit commit -m \"Update help desk hours\"",
+                "instructions": "Open `neighborhood-guide/hours.txt`. Replace `Help desk hours: 10 AM - 4 PM` with `Help desk hours: 9 AM - 5 PM`. Save the file. Inspect the unstaged diff, stage it, and commit it with the message `Update help desk hours`.",
                 "starterFiles": {
                   "zoeskoul_setup_sh": {
-                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf resource-guide\nmkdir -p resource-guide/pages\ngit -C resource-guide init -q -b main\ngit -C resource-guide config --local user.name \"ZoeSkoul Learner\"\ngit -C resource-guide config --local user.email \"learner@zoeskoul.local\"\nprintf '%s\\n' '# Neighborhood Resource Guide' > resource-guide/README.md\nprintf '%s\\n' 'Help desk closes at 6 PM.' > resource-guide/pages/contact.md\nprintf '%s\\n' 'Welcome to the neighborhood guide.' > resource-guide/pages/welcome.md\nprintf '%s\\n' 'Temporary launch note.' > resource-guide/pages/old-note.md\ngit -C resource-guide add -A\ngit -C resource-guide commit -q -m 'Start neighborhood resource guide'\nprintf '%s\\n' '- Food pantry' '- Health clinic' '- Job center' > resource-guide/pages/services.md\ngit -C resource-guide add -- pages/services.md\ngit -C resource-guide commit -q -m 'Add local services page'\n"
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- neighborhood-guide\nmkdir -p -- neighborhood-guide\ngit -C neighborhood-guide init -q -b main\ngit -C neighborhood-guide config --local user.name 'ZoeSkoul Learner'\ngit -C neighborhood-guide config --local user.email learner@zoeskoul.local\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 10 AM - 4 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\n' > neighborhood-guide/services.txt\ngit -C neighborhood-guide add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C neighborhood-guide commit -q -m 'Start neighborhood guide'\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 10 AM - 4 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic\n' > neighborhood-guide/services.txt\ngit -C neighborhood-guide add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C neighborhood-guide commit -q -m 'Update neighborhood services'\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 10 AM - 4 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic\n' > neighborhood-guide/services.txt\ngit -C neighborhood-guide add -A\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 10 AM - 4 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic\n' > neighborhood-guide/services.txt\n"
                   }
                 },
                 "solutionFiles": {
                   "zoeskoul_setup_sh": {
-                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf resource-guide\nmkdir -p resource-guide/pages\ngit -C resource-guide init -q -b main\ngit -C resource-guide config --local user.name \"ZoeSkoul Learner\"\ngit -C resource-guide config --local user.email \"learner@zoeskoul.local\"\nprintf '%s\\n' '# Neighborhood Resource Guide' > resource-guide/README.md\nprintf '%s\\n' 'Help desk closes at 6 PM.' > resource-guide/pages/contact.md\nprintf '%s\\n' 'Welcome to the neighborhood guide.' > resource-guide/pages/welcome.md\nprintf '%s\\n' 'Temporary launch note.' > resource-guide/pages/old-note.md\ngit -C resource-guide add -A\ngit -C resource-guide commit -q -m 'Start neighborhood resource guide'\nprintf '%s\\n' '- Food pantry' '- Health clinic' '- Job center' > resource-guide/pages/services.md\ngit -C resource-guide add -- pages/services.md\ngit -C resource-guide commit -q -m 'Add local services page'\n"
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- neighborhood-guide\nmkdir -p -- neighborhood-guide\ngit -C neighborhood-guide init -q -b main\ngit -C neighborhood-guide config --local user.name 'ZoeSkoul Learner'\ngit -C neighborhood-guide config --local user.email learner@zoeskoul.local\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 10 AM - 4 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\n' > neighborhood-guide/services.txt\ngit -C neighborhood-guide add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C neighborhood-guide commit -q -m 'Start neighborhood guide'\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 10 AM - 4 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic\n' > neighborhood-guide/services.txt\ngit -C neighborhood-guide add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C neighborhood-guide commit -q -m 'Update neighborhood services'\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 10 AM - 4 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic\n' > neighborhood-guide/services.txt\ngit -C neighborhood-guide add -A\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 10 AM - 4 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic\n' > neighborhood-guide/services.txt\n"
                   }
                 },
                 "terminalExpectations": {
@@ -144,37 +153,37 @@
                   },
                   "requiredCommands": {
                     "0": {
-                      "message": "Did you inspect the unstaged line changes in `resource-guide/`?"
+                      "message": "Did you inspect the hours change?"
                     },
                     "1": {
-                      "message": "Did you stage only the path or paths that belong to this checkpoint?"
+                      "message": "Did you stage only the hours file?"
                     },
                     "2": {
-                      "message": "Did you record the staged snapshot with the message named in the task?"
+                      "message": "Did you record the hours update separately?"
                     }
                   }
                 }
               },
               "try_final_neighborhood_resource_guide_history_sketch3": {
-                "title": "Add the Ignore Policy",
-                "prompt": "You are working in the prepared resource-guide repository.\n\nCreate `.gitignore` with `generated/`, stage the policy, then use short status and the staged path list to confirm that the preview stays outside the snapshot.",
-                "hint": "Start in the editor and make only the content change described in the task.",
+                "title": "Clean Paths and Recover a README Mistake",
+                "prompt": "Open `neighborhood-guide/README.md`. Replace `Local services and opening hours.` with `Accidental rewrite.` and save. Stage that mistake, rename tracked `services.txt` to `community-services.txt`, and remove tracked `old-contacts.txt`. Then unstage and restore only the README mistake. Inspect the staged name-status summary; it should contain the rename and removal, but not `README.md`.",
+                "hint": "Keep the intended path maintenance staged while recovering the accidental README edit.",
                 "help": {
-                  "concept": "The ignore policy is source-controlled, while generated preview output stays outside history.",
-                  "hint_1": "Keep the file path and exact requested text in view.",
-                  "hint_2": "Switch to the terminal only after the saved file matches the scenario."
+                  "concept": "Use `git mv` and `git rm` for the intended changes. Use `git restore --staged README.md` followed by `git restore README.md` to remove the mistake from both current layers without disturbing the other staged work.",
+                  "hint_1": "Do not remove `hours.txt`.",
+                  "hint_2": "The final staged summary should contain only the rename and removal."
                 },
-                "starterCode": "",
-                "solutionCode": "printf \"generated/\\n\" > .gitignore\ngit add .gitignore\ngit status --short\ngit diff --staged --name-only",
-                "instructions": "You are working in the prepared resource-guide repository.\n\nCreate `.gitignore` with `generated/`, stage the policy, then use short status and the staged path list to confirm that the preview stays outside the snapshot.",
+                "starterCode": "# Neighborhood Guide\n\nLocal services and opening hours.\n",
+                "solutionCode": "git add README.md\ngit mv services.txt community-services.txt\ngit rm old-contacts.txt\ngit restore --staged README.md\ngit restore README.md\ngit diff --staged --name-status",
+                "instructions": "Open `neighborhood-guide/README.md`. Replace `Local services and opening hours.` with `Accidental rewrite.` and save. Stage that mistake, rename tracked `services.txt` to `community-services.txt`, and remove tracked `old-contacts.txt`. Then unstage and restore only the README mistake. Inspect the staged name-status summary; it should contain the rename and removal, but not `README.md`.",
                 "starterFiles": {
                   "zoeskoul_setup_sh": {
-                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf resource-guide\nmkdir -p resource-guide/pages\ngit -C resource-guide init -q -b main\ngit -C resource-guide config --local user.name \"ZoeSkoul Learner\"\ngit -C resource-guide config --local user.email \"learner@zoeskoul.local\"\nprintf '%s\\n' '# Neighborhood Resource Guide' > resource-guide/README.md\nprintf '%s\\n' 'Help desk closes at 6 PM.' > resource-guide/pages/contact.md\nprintf '%s\\n' 'Welcome to the neighborhood guide.' > resource-guide/pages/welcome.md\nprintf '%s\\n' 'Temporary launch note.' > resource-guide/pages/old-note.md\ngit -C resource-guide add -A\ngit -C resource-guide commit -q -m 'Start neighborhood resource guide'\nprintf '%s\\n' '- Food pantry' '- Health clinic' '- Job center' > resource-guide/pages/services.md\ngit -C resource-guide add -- pages/services.md\ngit -C resource-guide commit -q -m 'Add local services page'\nprintf '%s\\n' 'Help desk closes at 5 PM.' > resource-guide/pages/contact.md\ngit -C resource-guide add -- pages/contact.md\ngit -C resource-guide commit -q -m 'Update help desk hours'\nmkdir -p resource-guide/generated\nprintf '%s\\n' '<p>Generated preview</p>' > resource-guide/generated/preview.html\n: > resource-guide/.gitignore\n"
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- neighborhood-guide\nmkdir -p -- neighborhood-guide\ngit -C neighborhood-guide init -q -b main\ngit -C neighborhood-guide config --local user.name 'ZoeSkoul Learner'\ngit -C neighborhood-guide config --local user.email learner@zoeskoul.local\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 10 AM - 4 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\n' > neighborhood-guide/services.txt\ngit -C neighborhood-guide add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C neighborhood-guide commit -q -m 'Start neighborhood guide'\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 10 AM - 4 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic\n' > neighborhood-guide/services.txt\ngit -C neighborhood-guide add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C neighborhood-guide commit -q -m 'Update neighborhood services'\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 9 AM - 5 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic\n' > neighborhood-guide/services.txt\ngit -C neighborhood-guide add -A\nGIT_AUTHOR_DATE=2026-01-03T12:00:00Z GIT_COMMITTER_DATE=2026-01-03T12:00:00Z git -C neighborhood-guide commit -q -m 'Update help desk hours'\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 9 AM - 5 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic\n' > neighborhood-guide/services.txt\ngit -C neighborhood-guide add -A\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 9 AM - 5 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic\n' > neighborhood-guide/services.txt\n"
                   }
                 },
                 "solutionFiles": {
                   "zoeskoul_setup_sh": {
-                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf resource-guide\nmkdir -p resource-guide/pages\ngit -C resource-guide init -q -b main\ngit -C resource-guide config --local user.name \"ZoeSkoul Learner\"\ngit -C resource-guide config --local user.email \"learner@zoeskoul.local\"\nprintf '%s\\n' '# Neighborhood Resource Guide' > resource-guide/README.md\nprintf '%s\\n' 'Help desk closes at 6 PM.' > resource-guide/pages/contact.md\nprintf '%s\\n' 'Welcome to the neighborhood guide.' > resource-guide/pages/welcome.md\nprintf '%s\\n' 'Temporary launch note.' > resource-guide/pages/old-note.md\ngit -C resource-guide add -A\ngit -C resource-guide commit -q -m 'Start neighborhood resource guide'\nprintf '%s\\n' '- Food pantry' '- Health clinic' '- Job center' > resource-guide/pages/services.md\ngit -C resource-guide add -- pages/services.md\ngit -C resource-guide commit -q -m 'Add local services page'\nprintf '%s\\n' 'Help desk closes at 5 PM.' > resource-guide/pages/contact.md\ngit -C resource-guide add -- pages/contact.md\ngit -C resource-guide commit -q -m 'Update help desk hours'\nmkdir -p resource-guide/generated\nprintf '%s\\n' '<p>Generated preview</p>' > resource-guide/generated/preview.html\n: > resource-guide/.gitignore\n"
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- neighborhood-guide\nmkdir -p -- neighborhood-guide\ngit -C neighborhood-guide init -q -b main\ngit -C neighborhood-guide config --local user.name 'ZoeSkoul Learner'\ngit -C neighborhood-guide config --local user.email learner@zoeskoul.local\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 10 AM - 4 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\n' > neighborhood-guide/services.txt\ngit -C neighborhood-guide add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C neighborhood-guide commit -q -m 'Start neighborhood guide'\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 10 AM - 4 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic\n' > neighborhood-guide/services.txt\ngit -C neighborhood-guide add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C neighborhood-guide commit -q -m 'Update neighborhood services'\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 9 AM - 5 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic\n' > neighborhood-guide/services.txt\ngit -C neighborhood-guide add -A\nGIT_AUTHOR_DATE=2026-01-03T12:00:00Z GIT_COMMITTER_DATE=2026-01-03T12:00:00Z git -C neighborhood-guide commit -q -m 'Update help desk hours'\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 9 AM - 5 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic\n' > neighborhood-guide/services.txt\ngit -C neighborhood-guide add -A\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 9 AM - 5 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic\n' > neighborhood-guide/services.txt\n"
                   }
                 },
                 "terminalExpectations": {
@@ -185,37 +194,46 @@
                   },
                   "requiredCommands": {
                     "0": {
-                      "message": "Did you stage the repository ignore policy?"
+                      "message": "Did you stage the supplied README mistake?"
                     },
                     "1": {
-                      "message": "Did you confirm that generated output is absent from repository state?"
+                      "message": "Did you stage the service-file rename?"
                     },
                     "2": {
-                      "message": "Did you review the exact paths selected for the next snapshot?"
+                      "message": "Did you stage the obsolete contact-list removal?"
+                    },
+                    "3": {
+                      "message": "Did you unstage only the README mistake?"
+                    },
+                    "4": {
+                      "message": "Did you restore the README working copy?"
+                    },
+                    "5": {
+                      "message": "Did you review the path-maintenance proposal?"
                     }
                   }
                 }
               },
               "try_final_neighborhood_resource_guide_history_sketch4": {
-                "title": "Recover from the Accidental README Edit",
-                "prompt": "The ignore policy is staged, but an accidental README edit was staged with it. Correct that mistake without rewriting history: remove the README change from the proposed snapshot and return the working file to its recorded version.\n\nThen rename `pages/welcome.md` to `pages/getting-help.md`, remove `pages/old-note.md`, and review the complete staged structural cleanup. Do not commit yet.",
-                "hint": "Move the tracked path through Git so the structural change is staged.",
+                "title": "Add the Generated-File Policy",
+                "prompt": "Create `neighborhood-guide/.gitignore` with exactly `generated/` on line 1. Create `neighborhood-guide/generated/preview.txt` containing `Temporary neighborhood preview.` Inspect status with ignored paths included, then stage only `.gitignore`. Keep the rename and removal staged.",
+                "hint": "Add one policy file and one ignored preview after the obsolete file has already been removed.",
                 "help": {
-                  "concept": "Related cleanup actions can share one final snapshot when they serve the same handoff goal.",
-                  "hint_1": "Confirm that the new path exists and the old path no longer appears as tracked.",
-                  "hint_2": "Review the staged name-status summary before committing."
+                  "concept": "The `generated/` rule keeps the preview outside future snapshots. `git status --short --ignored` verifies it with `!!`, while `git add .gitignore` adds only the policy to the existing maintenance proposal.",
+                  "hint_1": "Do not force-add the preview.",
+                  "hint_2": "The staged set should contain the rename, removal, and `.gitignore`."
                 },
-                "starterCode": "# Neighborhood Resource Guide — accidental draft\n",
-                "solutionCode": "git restore --staged README.md\ngit restore README.md\ngit mv pages/welcome.md pages/getting-help.md\ngit rm pages/old-note.md\ngit diff --staged --name-status",
-                "instructions": "The ignore policy is staged, but an accidental README edit was staged with it. Correct that mistake without rewriting history: remove the README change from the proposed snapshot and return the working file to its recorded version.\n\nThen rename `pages/welcome.md` to `pages/getting-help.md`, remove `pages/old-note.md`, and review the complete staged structural cleanup. Do not commit yet.",
+                "starterCode": "# Neighborhood Guide\n\nLocal services and opening hours.\n",
+                "solutionCode": "git status --short --ignored\ngit add .gitignore",
+                "instructions": "Create `neighborhood-guide/.gitignore` with exactly `generated/` on line 1. Create `neighborhood-guide/generated/preview.txt` containing `Temporary neighborhood preview.` Inspect status with ignored paths included, then stage only `.gitignore`. Keep the rename and removal staged.",
                 "starterFiles": {
                   "zoeskoul_setup_sh": {
-                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf resource-guide\nmkdir -p resource-guide/pages\ngit -C resource-guide init -q -b main\ngit -C resource-guide config --local user.name \"ZoeSkoul Learner\"\ngit -C resource-guide config --local user.email \"learner@zoeskoul.local\"\nprintf '%s\\n' '# Neighborhood Resource Guide' > resource-guide/README.md\nprintf '%s\\n' 'Help desk closes at 6 PM.' > resource-guide/pages/contact.md\nprintf '%s\\n' 'Welcome to the neighborhood guide.' > resource-guide/pages/welcome.md\nprintf '%s\\n' 'Temporary launch note.' > resource-guide/pages/old-note.md\ngit -C resource-guide add -A\ngit -C resource-guide commit -q -m 'Start neighborhood resource guide'\nprintf '%s\\n' '- Food pantry' '- Health clinic' '- Job center' > resource-guide/pages/services.md\ngit -C resource-guide add -- pages/services.md\ngit -C resource-guide commit -q -m 'Add local services page'\nprintf '%s\\n' 'Help desk closes at 5 PM.' > resource-guide/pages/contact.md\ngit -C resource-guide add -- pages/contact.md\ngit -C resource-guide commit -q -m 'Update help desk hours'\nmkdir -p resource-guide/generated\nprintf '%s\\n' '<p>Generated preview</p>' > resource-guide/generated/preview.html\nprintf '%s\\n' 'generated/' > resource-guide/.gitignore\ngit -C resource-guide add -- .gitignore\nprintf '%s\\n' '# Neighborhood Resource Guide — accidental draft' > resource-guide/README.md\ngit -C resource-guide add -- README.md\n"
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- neighborhood-guide\nmkdir -p -- neighborhood-guide\ngit -C neighborhood-guide init -q -b main\ngit -C neighborhood-guide config --local user.name 'ZoeSkoul Learner'\ngit -C neighborhood-guide config --local user.email learner@zoeskoul.local\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 10 AM - 4 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\n' > neighborhood-guide/services.txt\ngit -C neighborhood-guide add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C neighborhood-guide commit -q -m 'Start neighborhood guide'\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 10 AM - 4 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic\n' > neighborhood-guide/services.txt\ngit -C neighborhood-guide add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C neighborhood-guide commit -q -m 'Update neighborhood services'\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 9 AM - 5 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic\n' > neighborhood-guide/services.txt\ngit -C neighborhood-guide add -A\nGIT_AUTHOR_DATE=2026-01-03T12:00:00Z GIT_COMMITTER_DATE=2026-01-03T12:00:00Z git -C neighborhood-guide commit -q -m 'Update help desk hours'\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic\n' > neighborhood-guide/community-services.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 9 AM - 5 PM\n' > neighborhood-guide/hours.txt\ngit -C neighborhood-guide add -A\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic\n' > neighborhood-guide/community-services.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 9 AM - 5 PM\n' > neighborhood-guide/hours.txt\n"
                   }
                 },
                 "solutionFiles": {
                   "zoeskoul_setup_sh": {
-                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf resource-guide\nmkdir -p resource-guide/pages\ngit -C resource-guide init -q -b main\ngit -C resource-guide config --local user.name \"ZoeSkoul Learner\"\ngit -C resource-guide config --local user.email \"learner@zoeskoul.local\"\nprintf '%s\\n' '# Neighborhood Resource Guide' > resource-guide/README.md\nprintf '%s\\n' 'Help desk closes at 6 PM.' > resource-guide/pages/contact.md\nprintf '%s\\n' 'Welcome to the neighborhood guide.' > resource-guide/pages/welcome.md\nprintf '%s\\n' 'Temporary launch note.' > resource-guide/pages/old-note.md\ngit -C resource-guide add -A\ngit -C resource-guide commit -q -m 'Start neighborhood resource guide'\nprintf '%s\\n' '- Food pantry' '- Health clinic' '- Job center' > resource-guide/pages/services.md\ngit -C resource-guide add -- pages/services.md\ngit -C resource-guide commit -q -m 'Add local services page'\nprintf '%s\\n' 'Help desk closes at 5 PM.' > resource-guide/pages/contact.md\ngit -C resource-guide add -- pages/contact.md\ngit -C resource-guide commit -q -m 'Update help desk hours'\nmkdir -p resource-guide/generated\nprintf '%s\\n' '<p>Generated preview</p>' > resource-guide/generated/preview.html\nprintf '%s\\n' 'generated/' > resource-guide/.gitignore\ngit -C resource-guide add -- .gitignore\nprintf '%s\\n' '# Neighborhood Resource Guide — accidental draft' > resource-guide/README.md\ngit -C resource-guide add -- README.md\n"
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- neighborhood-guide\nmkdir -p -- neighborhood-guide\ngit -C neighborhood-guide init -q -b main\ngit -C neighborhood-guide config --local user.name 'ZoeSkoul Learner'\ngit -C neighborhood-guide config --local user.email learner@zoeskoul.local\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 10 AM - 4 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\n' > neighborhood-guide/services.txt\ngit -C neighborhood-guide add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C neighborhood-guide commit -q -m 'Start neighborhood guide'\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 10 AM - 4 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic\n' > neighborhood-guide/services.txt\ngit -C neighborhood-guide add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C neighborhood-guide commit -q -m 'Update neighborhood services'\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 9 AM - 5 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic\n' > neighborhood-guide/services.txt\ngit -C neighborhood-guide add -A\nGIT_AUTHOR_DATE=2026-01-03T12:00:00Z GIT_COMMITTER_DATE=2026-01-03T12:00:00Z git -C neighborhood-guide commit -q -m 'Update help desk hours'\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic\n' > neighborhood-guide/community-services.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 9 AM - 5 PM\n' > neighborhood-guide/hours.txt\ngit -C neighborhood-guide add -A\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic\n' > neighborhood-guide/community-services.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 9 AM - 5 PM\n' > neighborhood-guide/hours.txt\n"
                   }
                 },
                 "terminalExpectations": {
@@ -226,43 +244,34 @@
                   },
                   "requiredCommands": {
                     "0": {
-                      "message": "Did you remove the accidental README edit from the proposed snapshot while keeping the file?"
+                      "message": "Did you verify the ignored preview?"
                     },
                     "1": {
-                      "message": "Did you return the README working copy to its recorded version?"
-                    },
-                    "2": {
-                      "message": "Did you rename the tracked welcome page through Git?"
-                    },
-                    "3": {
-                      "message": "Did you remove the obsolete note through Git?"
-                    },
-                    "4": {
-                      "message": "Did you review the complete staged structural summary before checking?"
+                      "message": "Did you stage only the ignore policy?"
                     }
                   }
                 }
               },
               "try_final_neighborhood_resource_guide_history_sketch5": {
                 "title": "Commit and Audit the Final Handoff",
-                "prompt": "You are working in the prepared resource-guide repository.\n\nCommit the final handoff as `Prepare resource guide handoff`. Then audit the one-line history, inspect the latest commit summary, and confirm a clean state.",
-                "hint": "Record only the staged snapshot and use the message requested by the scenario.",
+                "prompt": "Record the prepared maintenance snapshot with the message `Prepare neighborhood guide handoff`. Then inspect concise history, the newest commit summary, and final short status. The capstone should end with four focused commits and no unfinished tracked work.",
+                "hint": "Commit once, then verify timeline, latest snapshot, and current state.",
                 "help": {
-                  "concept": "A production-ready handoff is proven by its history, current tracked files, ignore behavior, and clean working state.",
-                  "hint_1": "The message should describe the project result, not the commands you used.",
-                  "hint_2": "After recording it, inspect history and any work that remains."
+                  "concept": "The final commit records the ignore policy, service-file rename, and obsolete-file removal. The three inspection commands confirm the complete four-commit story and clean handoff.",
+                  "hint_1": "The ignored preview remains on disk but outside normal status.",
+                  "hint_2": "The newest commit should be the maintenance handoff."
                 },
-                "starterCode": "Welcome to the neighborhood guide.\n",
-                "solutionCode": "git commit -m \"Prepare resource guide handoff\"\ngit log --oneline\ngit show --stat HEAD\ngit status --short",
-                "instructions": "You are working in the prepared resource-guide repository.\n\nCommit the final handoff as `Prepare resource guide handoff`. Then audit the one-line history, inspect the latest commit summary, and confirm a clean state.",
+                "starterCode": "# Neighborhood Guide\n\nLocal services and opening hours.\n",
+                "solutionCode": "git commit -m \"Prepare neighborhood guide handoff\"\ngit log --oneline\ngit show --stat --oneline HEAD\ngit status --short",
+                "instructions": "Record the prepared maintenance snapshot with the message `Prepare neighborhood guide handoff`. Then inspect concise history, the newest commit summary, and final short status. The capstone should end with four focused commits and no unfinished tracked work.",
                 "starterFiles": {
                   "zoeskoul_setup_sh": {
-                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf resource-guide\nmkdir -p resource-guide/pages\ngit -C resource-guide init -q -b main\ngit -C resource-guide config --local user.name \"ZoeSkoul Learner\"\ngit -C resource-guide config --local user.email \"learner@zoeskoul.local\"\nprintf '%s\\n' '# Neighborhood Resource Guide' > resource-guide/README.md\nprintf '%s\\n' 'Help desk closes at 6 PM.' > resource-guide/pages/contact.md\nprintf '%s\\n' 'Welcome to the neighborhood guide.' > resource-guide/pages/welcome.md\nprintf '%s\\n' 'Temporary launch note.' > resource-guide/pages/old-note.md\ngit -C resource-guide add -A\ngit -C resource-guide commit -q -m 'Start neighborhood resource guide'\nprintf '%s\\n' '- Food pantry' '- Health clinic' '- Job center' > resource-guide/pages/services.md\ngit -C resource-guide add -- pages/services.md\ngit -C resource-guide commit -q -m 'Add local services page'\nprintf '%s\\n' 'Help desk closes at 5 PM.' > resource-guide/pages/contact.md\ngit -C resource-guide add -- pages/contact.md\ngit -C resource-guide commit -q -m 'Update help desk hours'\nmkdir -p resource-guide/generated\nprintf '%s\\n' '<p>Generated preview</p>' > resource-guide/generated/preview.html\nprintf '%s\\n' 'generated/' > resource-guide/.gitignore\ngit -C resource-guide add -- .gitignore\ngit -C resource-guide mv pages/welcome.md pages/getting-help.md\ngit -C resource-guide rm -q pages/old-note.md\n"
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- neighborhood-guide\nmkdir -p -- neighborhood-guide\ngit -C neighborhood-guide init -q -b main\ngit -C neighborhood-guide config --local user.name 'ZoeSkoul Learner'\ngit -C neighborhood-guide config --local user.email learner@zoeskoul.local\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 10 AM - 4 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\n' > neighborhood-guide/services.txt\ngit -C neighborhood-guide add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C neighborhood-guide commit -q -m 'Start neighborhood guide'\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 10 AM - 4 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic\n' > neighborhood-guide/services.txt\ngit -C neighborhood-guide add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C neighborhood-guide commit -q -m 'Update neighborhood services'\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 9 AM - 5 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic\n' > neighborhood-guide/services.txt\ngit -C neighborhood-guide add -A\nGIT_AUTHOR_DATE=2026-01-03T12:00:00Z GIT_COMMITTER_DATE=2026-01-03T12:00:00Z git -C neighborhood-guide commit -q -m 'Update help desk hours'\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s 'generated/\n' > neighborhood-guide/.gitignore\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic\n' > neighborhood-guide/community-services.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 9 AM - 5 PM\n' > neighborhood-guide/hours.txt\ngit -C neighborhood-guide add -A\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s 'generated/\n' > neighborhood-guide/.gitignore\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic\n' > neighborhood-guide/community-services.txt\nmkdir -p -- neighborhood-guide/generated\nprintf %s 'Temporary neighborhood preview.\n' > neighborhood-guide/generated/preview.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 9 AM - 5 PM\n' > neighborhood-guide/hours.txt\n"
                   }
                 },
                 "solutionFiles": {
                   "zoeskoul_setup_sh": {
-                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf resource-guide\nmkdir -p resource-guide/pages\ngit -C resource-guide init -q -b main\ngit -C resource-guide config --local user.name \"ZoeSkoul Learner\"\ngit -C resource-guide config --local user.email \"learner@zoeskoul.local\"\nprintf '%s\\n' '# Neighborhood Resource Guide' > resource-guide/README.md\nprintf '%s\\n' 'Help desk closes at 6 PM.' > resource-guide/pages/contact.md\nprintf '%s\\n' 'Welcome to the neighborhood guide.' > resource-guide/pages/welcome.md\nprintf '%s\\n' 'Temporary launch note.' > resource-guide/pages/old-note.md\ngit -C resource-guide add -A\ngit -C resource-guide commit -q -m 'Start neighborhood resource guide'\nprintf '%s\\n' '- Food pantry' '- Health clinic' '- Job center' > resource-guide/pages/services.md\ngit -C resource-guide add -- pages/services.md\ngit -C resource-guide commit -q -m 'Add local services page'\nprintf '%s\\n' 'Help desk closes at 5 PM.' > resource-guide/pages/contact.md\ngit -C resource-guide add -- pages/contact.md\ngit -C resource-guide commit -q -m 'Update help desk hours'\nmkdir -p resource-guide/generated\nprintf '%s\\n' '<p>Generated preview</p>' > resource-guide/generated/preview.html\nprintf '%s\\n' 'generated/' > resource-guide/.gitignore\ngit -C resource-guide add -- .gitignore\ngit -C resource-guide mv pages/welcome.md pages/getting-help.md\ngit -C resource-guide rm -q pages/old-note.md\n"
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- neighborhood-guide\nmkdir -p -- neighborhood-guide\ngit -C neighborhood-guide init -q -b main\ngit -C neighborhood-guide config --local user.name 'ZoeSkoul Learner'\ngit -C neighborhood-guide config --local user.email learner@zoeskoul.local\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 10 AM - 4 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\n' > neighborhood-guide/services.txt\ngit -C neighborhood-guide add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C neighborhood-guide commit -q -m 'Start neighborhood guide'\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 10 AM - 4 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic\n' > neighborhood-guide/services.txt\ngit -C neighborhood-guide add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C neighborhood-guide commit -q -m 'Update neighborhood services'\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 9 AM - 5 PM\n' > neighborhood-guide/hours.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Old contact list\n\nRetired phone tree.\n' > neighborhood-guide/old-contacts.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic\n' > neighborhood-guide/services.txt\ngit -C neighborhood-guide add -A\nGIT_AUTHOR_DATE=2026-01-03T12:00:00Z GIT_COMMITTER_DATE=2026-01-03T12:00:00Z git -C neighborhood-guide commit -q -m 'Update help desk hours'\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s 'generated/\n' > neighborhood-guide/.gitignore\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic\n' > neighborhood-guide/community-services.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 9 AM - 5 PM\n' > neighborhood-guide/hours.txt\ngit -C neighborhood-guide add -A\nfind neighborhood-guide -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- neighborhood-guide\nprintf %s 'generated/\n' > neighborhood-guide/.gitignore\nmkdir -p -- neighborhood-guide\nprintf %s '# Neighborhood Guide\n\nLocal services and opening hours.\n' > neighborhood-guide/README.md\nmkdir -p -- neighborhood-guide\nprintf %s 'Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic\n' > neighborhood-guide/community-services.txt\nmkdir -p -- neighborhood-guide/generated\nprintf %s 'Temporary neighborhood preview.\n' > neighborhood-guide/generated/preview.txt\nmkdir -p -- neighborhood-guide\nprintf %s 'Help desk hours: 9 AM - 5 PM\n' > neighborhood-guide/hours.txt\n"
                   }
                 },
                 "terminalExpectations": {
@@ -273,22 +282,23 @@
                   },
                   "requiredCommands": {
                     "0": {
-                      "message": "Did you record the final handoff with the requested subject?"
+                      "message": "Did you record the final maintenance snapshot?"
                     },
                     "1": {
-                      "message": "Did you audit the complete commit timeline?"
+                      "message": "Did you inspect the four-entry history?"
                     },
                     "2": {
-                      "message": "Did you inspect the latest checkpoint summary?"
+                      "message": "Did you inspect the latest snapshot summary?"
                     },
                     "3": {
-                      "message": "Did you confirm that the final handoff has no unfinished work?"
+                      "message": "Did you verify the clean final state?"
                     }
                   }
                 }
               }
             },
-            "description": "Build a complete local history for the neighborhood resource guide. The six milestones are cumulative: create the baseline, edit and commit two focused content changes, add an ignore policy, recover from an accidental staged README edit, perform the final rename and removal, and audit the four-commit handoff.\n\nThe final repository keeps `README.md`, replaces the welcome page with `pages/getting-help.md`, removes `pages/old-note.md`, ignores generated previews, and ends clean."
+            "description": "The capstone starts in `neighborhood-guide/` with no history from the other projects. File edits are still supplied exactly because this is a Git assessment. Your responsibility is to apply initialization, focused history, path maintenance, ignore rules, safe restore, and final verification across six cumulative steps.",
+            "title": "Complete the Neighborhood Guide Capstone"
           }
         }
       }
@@ -299,8 +309,8 @@
       "git-foundations-module-4-final-capstone": {
         "final-neighborhood-resource-guide-history": {
           "intro": {
-            "title": "Turn a Working Folder into a Trustworthy Handoff",
-            "bodyMarkdown": "A neighborhood resource guide has useful starting content, an obsolete note, and a generated preview that should never enter history. Before another maintainer receives it, the project needs a timeline that explains how the guide became ready.\n\nAcross six cumulative milestones, you will initialize the repository, create its baseline, edit and commit two focused content changes, add an ignore policy, recover from an accidental staged README edit, rename the welcome page, remove the obsolete note, and verify the final snapshot.\n\nNothing is uploaded. The result is a local four-commit repository whose current files, ignore behavior, and clean status all agree with the story in its history."
+            "title": "Fresh Repository, Independent Transfer",
+            "bodyMarkdown": "The capstone starts in `neighborhood-guide/` with four small text files. It never assumes programming knowledge. Across six cumulative steps, use the Git workflow independently: initialize, create focused commits, add one ignore policy, maintain tracked paths, recover a mistake, and verify a clean four-commit handoff."
           }
         }
       }

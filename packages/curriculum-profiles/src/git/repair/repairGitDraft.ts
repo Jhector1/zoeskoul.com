@@ -837,6 +837,214 @@ function finalNeighborhoodResourceGuideFallback(args: {
     };
 }
 
+
+function resolveProjectJourney(seed: TopicSeed) {
+    const reference = seed.projectJourney;
+    if (!reference) return undefined;
+    return seed.projectJourneys?.find(
+        (candidate) => candidate.id === reference.journeyId,
+    );
+}
+
+function safeJourneyRelativePath(args: {
+    repositoryPath: string;
+    exercise: DraftExercise;
+}): string {
+    for (const candidate of extractWorkspaceFiles(args.exercise)) {
+        const normalized = candidate.replaceAll("\\", "/").replace(/^\.\//, "");
+        const relative = normalized.startsWith(`${args.repositoryPath}/`)
+            ? normalized.slice(args.repositoryPath.length + 1)
+            : normalized;
+        if (
+            relative &&
+            !relative.startsWith("../") &&
+            !relative.includes("/../") &&
+            !relative.startsWith(".git/") &&
+            relative !== ".git"
+        ) {
+            return relative;
+        }
+    }
+    return "README.md";
+}
+
+function isSafeFoundationJourneyCommand(command: string): boolean {
+    if (/[;&|`$<>\r\n]/.test(command)) return false;
+    if (command === "pwd") return true;
+    if (/^ls(?:\s+(?:-[A-Za-z]+|[A-Za-z0-9._/-]+))*$/.test(command)) {
+        return true;
+    }
+    if (/^(?:mkdir\s+-p|touch|cat)(?:\s+[A-Za-z0-9._/-]+)+$/.test(command)) {
+        return true;
+    }
+    return /^git\s+(?:init|config|status|add|diff|commit|log|show|mv|rm|restore)(?:\s|$)/.test(
+        command,
+    );
+}
+
+function foundationJourneyCommands(args: {
+    seed: TopicSeed;
+    exercise: DraftExercise;
+}): string[] {
+    const extracted = unique(
+        inlineCode(exerciseText(args.exercise))
+            .map((value) => value.replace(/[.,;:]+$/g, "").trim())
+            .filter(isSafeFoundationJourneyCommand),
+    );
+    const commands = extracted.length > 0
+        ? extracted
+        : [inferGitCommand(args.seed, args.exercise)];
+    const allowed = commands.filter(isSafeFoundationJourneyCommand);
+    return allowed.length > 0 ? allowed : ["git status --short"];
+}
+
+function milestoneIsOrdinaryFolder(milestone: string): boolean {
+    return /(?:ordinary|uninitialized|no-repository|not-a-repository)/i.test(
+        milestone,
+    );
+}
+
+function projectJourneySetup(args: {
+    repositoryPath: string;
+    relativeFile: string;
+    commands: string[];
+    entryMilestone: string;
+}): string {
+    const repository = JSON.stringify(args.repositoryPath);
+    const filePath = JSON.stringify(`${args.repositoryPath}/${args.relativeFile}`);
+    const parent = args.relativeFile.includes("/")
+        ? JSON.stringify(
+              `${args.repositoryPath}/${args.relativeFile.slice(
+                  0,
+                  args.relativeFile.lastIndexOf("/"),
+              )}`,
+          )
+        : repository;
+    const commandText = args.commands.join("\n");
+    const learnerInitializesRepository = /\bgit\s+init(?:\s|$)/.test(commandText);
+    const onlyInspectsFolder = args.commands.every((command) =>
+        /^(?:pwd|ls(?:\s|$))/.test(command),
+    );
+    const setupInitializesRepository =
+        !learnerInitializesRepository &&
+        !(milestoneIsOrdinaryFolder(args.entryMilestone) && onlyInspectsFolder);
+    const needsCommittedBaseline =
+        /\bgit\s+(?:diff|log|show|mv|rm|restore)(?:\s|$)/.test(commandText);
+    const needsStagedChange =
+        /\bgit\s+commit(?:\s|$)/.test(commandText) ||
+        /\bgit\s+restore\s+--staged(?:\s|$)/.test(commandText);
+    const needsWorkingTreeChange =
+        /\bgit\s+diff(?:\s|$)/.test(commandText) ||
+        /\bgit\s+restore(?:\s|$)/.test(commandText);
+
+    const lines = [
+        "#!/usr/bin/env bash",
+        "set -eu",
+        `rm -rf -- ${repository}`,
+        `mkdir -p -- ${parent}`,
+        `printf '%s\\n' 'Cumulative Git practice project' > ${filePath}`,
+    ];
+
+    if (setupInitializesRepository) {
+        lines.push(`git -C ${repository} init -q -b main`);
+    }
+
+    if (needsCommittedBaseline || needsStagedChange) {
+        lines.push(
+            `git -C ${repository} config user.name "ZoeSkoul Learner"`,
+            `git -C ${repository} config user.email "learner@zoeskoul.local"`,
+            `git -C ${repository} add -- ${JSON.stringify(args.relativeFile)}`,
+            `git -C ${repository} commit -q -m "Start cumulative project"`,
+        );
+    }
+
+    if (needsWorkingTreeChange) {
+        lines.push(
+            `printf '%s\\n' 'Prepared practice change' >> ${filePath}`,
+        );
+    }
+
+    if (needsStagedChange) {
+        if (!needsWorkingTreeChange) {
+            lines.push(
+                `printf '%s\\n' 'Prepared practice change' >> ${filePath}`,
+            );
+        }
+        lines.push(
+            `git -C ${repository} add -- ${JSON.stringify(args.relativeFile)}`,
+        );
+    }
+
+    lines.push("");
+    return lines.join("\n");
+}
+
+function projectJourneyFallback(args: {
+    seed: TopicSeed;
+    exercise: DraftExercise;
+    index: number;
+}): CodeInputDraft {
+    const reference = args.seed.projectJourney;
+    const journey = resolveProjectJourney(args.seed);
+    if (!reference || !journey) return genericGitFallback(args);
+
+    const repositoryPath = journey.repositoryPath;
+    const relativeFile = safeJourneyRelativePath({
+        repositoryPath,
+        exercise: args.exercise,
+    });
+    const targetCommands = foundationJourneyCommands({
+        seed: args.seed,
+        exercise: args.exercise,
+    });
+    const setup = projectJourneySetup({
+        repositoryPath,
+        relativeFile,
+        commands: targetCommands,
+        entryMilestone: reference.entryMilestone,
+    });
+    const prompt = [
+        args.exercise.prompt ||
+            args.exercise.title ||
+            `Complete the next ${journey.title} Git task.`,
+        `The terminal opens inside \`${repositoryPath}/\` with the required starting milestone ready. Type each requested terminal command and press Enter.`,
+    ].join("\n\n");
+    const starterCode = LEARNER_STARTER_CODE;
+    const solutionCode = [...targetCommands, ""].join("\n");
+
+    return {
+        id: args.exercise.id,
+        kind: "code_input",
+        title:
+            args.exercise.title ||
+            `${journey.title} practice ${args.index}`,
+        prompt,
+        hint:
+            args.exercise.hint ||
+            "Inspect the prepared repository state before making the requested Git transition.",
+        help: args.exercise.help,
+        starterCode,
+        solutionCode,
+        fixedLanguage: "bash",
+        recipeType: "shell_task",
+        mode: "terminal_workspace",
+        entryFilePath: ENTRY_PATH,
+        instructions: prompt,
+        starterFiles: [entryFile(starterCode), setupFile(setup)],
+        solutionFiles: [entryFile(solutionCode, true), setupFile(setup)],
+        terminalExpectations: requiredCommands(targetCommands),
+        gitExpectations: {
+            repositoryPath,
+            repositoryInitialized: !milestoneIsOrdinaryFolder(
+                reference.exitMilestone,
+            ),
+            ...(!milestoneIsOrdinaryFolder(reference.exitMilestone)
+                ? { currentBranch: "main" }
+                : {}),
+        },
+    };
+}
+
 function genericGitFallback(args: {
     seed: TopicSeed;
     exercise: DraftExercise;
@@ -891,6 +1099,9 @@ function promoteTryIt(args: {
     exercise: DraftExercise;
     index: number;
 }): CodeInputDraft {
+    if (resolveProjectJourney(args.seed)) {
+        return projectJourneyFallback(args);
+    }
     if (args.seed.topicId === "working-tree-staging-and-history") {
         return workingTreeFallback(args);
     }
@@ -915,6 +1126,7 @@ function shouldUseDeterministicTopicFallback(
     exercise: DraftExercise,
 ): boolean {
     return (
+        !resolveProjectJourney(seed) &&
         DETERMINISTIC_TOPIC_FALLBACKS.has(seed.topicId) &&
         exercise.id.startsWith(`try-${safeSlug(seed.topicId)}-sketch`)
     );

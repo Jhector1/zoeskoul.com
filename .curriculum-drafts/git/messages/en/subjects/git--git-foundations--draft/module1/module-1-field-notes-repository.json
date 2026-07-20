@@ -3,55 +3,55 @@
     "git--git-foundations--draft": {
       "git-foundations-module-1-start-tracking": {
         "module-1-field-notes-repository": {
-          "label": "Project: Build the Field Notes Repository",
-          "summary": "Carry one garden-notes project from an ordinary folder to a clean first snapshot, using the same inspect–act–verify rhythm from the module.",
+          "label": "Module Project: Start Volunteer Project History",
+          "summary": "Begin the two-file volunteer-project repository and record its first snapshot.",
           "cards": {
             "sketch0": {
-              "title": "The Garden Notes Need a Beginning"
+              "title": "Parallel Project: Volunteer Project"
             },
             "project": {
-              "title": "Build the Field Notes Repository"
+              "title": "Build the Volunteer Project Baseline"
             }
           },
           "projectSteps": {
             "try_git_repo_inspection": {
-              "title": "Initialize the Repository"
+              "title": "Inspect the Volunteer Project Folder"
             },
             "try_git_config": {
-              "title": "Set the Local Identity"
+              "title": "Initialize Volunteer Project"
             },
             "try_git_init": {
-              "title": "Read the Untracked Files"
+              "title": "Configure the Volunteer Project Identity"
             },
             "try_git_stage_files": {
-              "title": "Stage the Field Notes"
+              "title": "Stage the Volunteer Project Baseline"
             },
             "try_git_commit": {
-              "title": "Create the First Snapshot"
+              "title": "Commit the Volunteer Project Baseline"
             }
           },
           "moduleProject": {
             "steps": {
               "try_git_repo_inspection": {
-                "title": "Initialize the Field Notes Repository",
-                "prompt": "You are already inside the prepared `garden-notes/` project folder. It contains field-note files but is not a Git repository yet.\n\nInitialize this folder with `main` as the first branch. Do not change directories; the terminal starts in the correct folder.",
-                "hint": "Create the repository in the current folder and choose the requested first branch at the same time.",
+                "title": "Inspect the Volunteer Project Folder",
+                "prompt": "The parallel project opens inside `volunteer-project/`. Confirm the current directory and list its two plain-text files: `README.md` and `assignments.txt`. Do not initialize Git yet.",
+                "hint": "Verify the project root and its small two-file starting set.",
                 "help": {
-                  "concept": "Initialization creates repository metadata inside the current folder; it does not stage files or create a commit.",
-                  "hint_1": "The terminal is already inside `garden-notes/`, so the repository should be created here.",
-                  "hint_2": "Use the initialization option that names `main` as the first branch."
+                  "concept": "`pwd` prints the current directory. `ls` lists visible files in that directory. These terminal commands inspect the ordinary folder before Git is initialized.",
+                  "hint_1": "The terminal is already inside `volunteer-project/`.",
+                  "hint_2": "The listing should contain only the two learner files."
                 },
-                "starterCode": "# Garden Field Notes\n",
-                "solutionCode": "git init -b main",
-                "instructions": "You are already inside the prepared `garden-notes/` project folder. It contains field-note files but is not a Git repository yet.\n\nInitialize this folder with `main` as the first branch. Do not change directories; the terminal starts in the correct folder.",
+                "starterCode": "# Volunteer Project\n\nAssignments and meeting times.\n",
+                "solutionCode": "pwd\nls",
+                "instructions": "The parallel project opens inside `volunteer-project/`. Confirm the current directory and list its two plain-text files: `README.md` and `assignments.txt`. Do not initialize Git yet.",
                 "starterFiles": {
                   "zoeskoul_setup_sh": {
-                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf garden-notes\nmkdir -p garden-notes/observations\nprintf '# Garden Field Notes\\n' > garden-notes/README.md\nprintf 'Plot A: soil is damp after rain.\\n' > garden-notes/observations/plot-a.txt\nprintf 'Plot B: seedlings need labels.\\n' > garden-notes/observations/plot-b.txt\n"
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- volunteer-project\nmkdir -p -- volunteer-project\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n' > volunteer-project/assignments.txt\n"
                   }
                 },
                 "solutionFiles": {
                   "zoeskoul_setup_sh": {
-                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf garden-notes\nmkdir -p garden-notes/observations\nprintf '# Garden Field Notes\\n' > garden-notes/README.md\nprintf 'Plot A: soil is damp after rain.\\n' > garden-notes/observations/plot-a.txt\nprintf 'Plot B: seedlings need labels.\\n' > garden-notes/observations/plot-b.txt\n"
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- volunteer-project\nmkdir -p -- volunteer-project\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n' > volunteer-project/assignments.txt\n"
                   }
                 },
                 "terminalExpectations": {
@@ -62,31 +62,34 @@
                   },
                   "requiredCommands": {
                     "0": {
-                      "message": "Did you initialize `garden-notes/` with `main` as its first branch?"
+                      "message": "Did you confirm the current project directory?"
+                    },
+                    "1": {
+                      "message": "Did you list the two supplied text files?"
                     }
                   }
                 }
               },
               "try_git_config": {
-                "title": "Set the Repository Identity",
-                "prompt": "You are working in the prepared `garden-notes/` repository.\n\nThe repository now exists. Set `user.name` to `ZoeSkoul Learner` and `user.email` to `learner@zoeskoul.local` for this repository only, then print both local values.",
-                "hint": "Keep the author identity inside this repository rather than changing machine-wide settings.",
+                "title": "Initialize the Volunteer Project",
+                "prompt": "The two-file folder is ready and still has no repository metadata. Initialize it on `main` without changing either file.",
+                "hint": "Reapply the initialization command from the guided project.",
                 "help": {
-                  "concept": "Repository-local configuration gives commits an author without changing machine-wide Git settings.",
-                  "hint_1": "Both the name and email need repository-local values.",
-                  "hint_2": "Read the stored values back to catch spelling or scope mistakes."
+                  "concept": "`git init -b main` creates repository metadata in the current folder and selects `main` as the first branch. The files remain untracked until you stage them.",
+                  "hint_1": "Do not create another directory.",
+                  "hint_2": "No commit should exist yet."
                 },
-                "starterCode": "# Garden Field Notes\n",
-                "solutionCode": "git config --local user.name \"ZoeSkoul Learner\"\ngit config --local user.email \"learner@zoeskoul.local\"\ngit config --local --get user.name\ngit config --local --get user.email",
-                "instructions": "You are working in the prepared `garden-notes/` repository.\n\nThe repository now exists. Set `user.name` to `ZoeSkoul Learner` and `user.email` to `learner@zoeskoul.local` for this repository only, then print both local values.",
+                "starterCode": "# Volunteer Project\n\nAssignments and meeting times.\n",
+                "solutionCode": "git init -b main",
+                "instructions": "The two-file folder is ready and still has no repository metadata. Initialize it on `main` without changing either file.",
                 "starterFiles": {
                   "zoeskoul_setup_sh": {
-                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf garden-notes\nmkdir -p garden-notes/observations\nprintf '# Garden Field Notes\\n' > garden-notes/README.md\nprintf 'Plot A: soil is damp after rain.\\n' > garden-notes/observations/plot-a.txt\nprintf 'Plot B: seedlings need labels.\\n' > garden-notes/observations/plot-b.txt\ngit -C garden-notes init -q -b main\n"
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- volunteer-project\nmkdir -p -- volunteer-project\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n' > volunteer-project/assignments.txt\n"
                   }
                 },
                 "solutionFiles": {
                   "zoeskoul_setup_sh": {
-                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf garden-notes\nmkdir -p garden-notes/observations\nprintf '# Garden Field Notes\\n' > garden-notes/README.md\nprintf 'Plot A: soil is damp after rain.\\n' > garden-notes/observations/plot-a.txt\nprintf 'Plot B: seedlings need labels.\\n' > garden-notes/observations/plot-b.txt\ngit -C garden-notes init -q -b main\n"
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- volunteer-project\nmkdir -p -- volunteer-project\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n' > volunteer-project/assignments.txt\n"
                   }
                 },
                 "terminalExpectations": {
@@ -97,34 +100,31 @@
                   },
                   "requiredCommands": {
                     "0": {
-                      "message": "Did you save the requested author value for this repository only?"
-                    },
-                    "1": {
-                      "message": "Did you save the requested author value for this repository only?"
+                      "message": "Did you initialize the current volunteer project on `main`?"
                     }
                   }
                 }
               },
               "try_git_init": {
-                "title": "Read the Untracked Project Files",
-                "prompt": "You are working in the prepared `garden-notes/` repository.\n\nThe identity is ready, but Git is not tracking the notes yet. Use short status and identify the README plus both observation files as untracked.",
-                "hint": "Use the compact repository report and read both status columns.",
+                "title": "Configure the Volunteer Project Identity",
+                "prompt": "Store the supplied name `ZoeSkoul Learner` and email `learner@zoeskoul.local` in this repository only.",
+                "hint": "Use the same two repository-local settings as the guided project.",
                 "help": {
-                  "concept": "Carry one garden-notes project from an ordinary folder to a clean first snapshot, using the same inspect–act–verify rhythm from the module.",
-                  "hint_1": "Focus on the path named in the task and decide whether it is untracked, staged, or modified.",
-                  "hint_2": "Compare the final status with the exact state the prompt asks you to prove."
+                  "concept": "`git config --local user.name VALUE` and `git config --local user.email VALUE` prepare this independent repository to record commits without changing global Git settings.",
+                  "hint_1": "Use both exact supplied values.",
+                  "hint_2": "Keep both settings local."
                 },
-                "starterCode": "# Garden Field Notes\n",
-                "solutionCode": "git status --short",
-                "instructions": "You are working in the prepared `garden-notes/` repository.\n\nThe identity is ready, but Git is not tracking the notes yet. Use short status and identify the README plus both observation files as untracked.",
+                "starterCode": "# Volunteer Project\n\nAssignments and meeting times.\n",
+                "solutionCode": "git config --local user.name \"ZoeSkoul Learner\"\ngit config --local user.email \"learner@zoeskoul.local\"",
+                "instructions": "Store the supplied name `ZoeSkoul Learner` and email `learner@zoeskoul.local` in this repository only.",
                 "starterFiles": {
                   "zoeskoul_setup_sh": {
-                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf garden-notes\nmkdir -p garden-notes/observations\nprintf '# Garden Field Notes\\n' > garden-notes/README.md\nprintf 'Plot A: soil is damp after rain.\\n' > garden-notes/observations/plot-a.txt\nprintf 'Plot B: seedlings need labels.\\n' > garden-notes/observations/plot-b.txt\ngit -C garden-notes init -q -b main\ngit -C garden-notes config --local user.name \"ZoeSkoul Learner\"\ngit -C garden-notes config --local user.email \"learner@zoeskoul.local\"\n"
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- volunteer-project\nmkdir -p -- volunteer-project\ngit -C volunteer-project init -q -b main\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n' > volunteer-project/assignments.txt\n"
                   }
                 },
                 "solutionFiles": {
                   "zoeskoul_setup_sh": {
-                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf garden-notes\nmkdir -p garden-notes/observations\nprintf '# Garden Field Notes\\n' > garden-notes/README.md\nprintf 'Plot A: soil is damp after rain.\\n' > garden-notes/observations/plot-a.txt\nprintf 'Plot B: seedlings need labels.\\n' > garden-notes/observations/plot-b.txt\ngit -C garden-notes init -q -b main\ngit -C garden-notes config --local user.name \"ZoeSkoul Learner\"\ngit -C garden-notes config --local user.email \"learner@zoeskoul.local\"\n"
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- volunteer-project\nmkdir -p -- volunteer-project\ngit -C volunteer-project init -q -b main\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n' > volunteer-project/assignments.txt\n"
                   }
                 },
                 "terminalExpectations": {
@@ -135,31 +135,34 @@
                   },
                   "requiredCommands": {
                     "0": {
-                      "message": "Did you use the compact status view and read the entry for `garden-notes/`?"
+                      "message": "Did you store the supplied local author name?"
+                    },
+                    "1": {
+                      "message": "Did you store the supplied local author email?"
                     }
                   }
                 }
               },
               "try_git_stage_files": {
-                "title": "Stage the Field Notes",
-                "prompt": "You are working in the prepared `garden-notes/` repository.\n\nPrepare the first snapshot by staging `README.md` and everything under `observations/`. Use short status to confirm that all three paths are selected.",
-                "hint": "Select the README and observation folder, then read the staging column.",
+                "title": "Prepare the Volunteer Baseline",
+                "prompt": "Stage only `README.md` and `assignments.txt`, then inspect the staged statistics before committing.",
+                "hint": "Prepare the complete two-file baseline and review it.",
                 "help": {
-                  "concept": "The first snapshot should contain the project files and nothing outside them.",
-                  "hint_1": "Both the root README and the observation directory belong together.",
-                  "hint_2": "Short status should show all three files in the staging column."
+                  "concept": "`git add README.md assignments.txt` stages both project files. `git diff --staged --stat` confirms which files the first snapshot would contain without recording it.",
+                  "hint_1": "Do not stage hidden platform files.",
+                  "hint_2": "The staged summary should contain exactly two files."
                 },
-                "starterCode": "# Garden Field Notes\n",
-                "solutionCode": "git add README.md observations/\ngit status --short",
-                "instructions": "You are working in the prepared `garden-notes/` repository.\n\nPrepare the first snapshot by staging `README.md` and everything under `observations/`. Use short status to confirm that all three paths are selected.",
+                "starterCode": "# Volunteer Project\n\nAssignments and meeting times.\n",
+                "solutionCode": "git add README.md assignments.txt\ngit diff --staged --stat",
+                "instructions": "Stage only `README.md` and `assignments.txt`, then inspect the staged statistics before committing.",
                 "starterFiles": {
                   "zoeskoul_setup_sh": {
-                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf garden-notes\nmkdir -p garden-notes/observations\nprintf '# Garden Field Notes\\n' > garden-notes/README.md\nprintf 'Plot A: soil is damp after rain.\\n' > garden-notes/observations/plot-a.txt\nprintf 'Plot B: seedlings need labels.\\n' > garden-notes/observations/plot-b.txt\ngit -C garden-notes init -q -b main\ngit -C garden-notes config --local user.name \"ZoeSkoul Learner\"\ngit -C garden-notes config --local user.email \"learner@zoeskoul.local\"\n"
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- volunteer-project\nmkdir -p -- volunteer-project\ngit -C volunteer-project init -q -b main\ngit -C volunteer-project config --local user.name 'ZoeSkoul Learner'\ngit -C volunteer-project config --local user.email learner@zoeskoul.local\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n' > volunteer-project/assignments.txt\n"
                   }
                 },
                 "solutionFiles": {
                   "zoeskoul_setup_sh": {
-                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf garden-notes\nmkdir -p garden-notes/observations\nprintf '# Garden Field Notes\\n' > garden-notes/README.md\nprintf 'Plot A: soil is damp after rain.\\n' > garden-notes/observations/plot-a.txt\nprintf 'Plot B: seedlings need labels.\\n' > garden-notes/observations/plot-b.txt\ngit -C garden-notes init -q -b main\ngit -C garden-notes config --local user.name \"ZoeSkoul Learner\"\ngit -C garden-notes config --local user.email \"learner@zoeskoul.local\"\n"
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- volunteer-project\nmkdir -p -- volunteer-project\ngit -C volunteer-project init -q -b main\ngit -C volunteer-project config --local user.name 'ZoeSkoul Learner'\ngit -C volunteer-project config --local user.email learner@zoeskoul.local\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n' > volunteer-project/assignments.txt\n"
                   }
                 },
                 "terminalExpectations": {
@@ -170,34 +173,34 @@
                   },
                   "requiredCommands": {
                     "0": {
-                      "message": "Did you stage the README and the complete observations folder?"
+                      "message": "Did you stage both supplied volunteer files?"
                     },
                     "1": {
-                      "message": "Did you use short status to confirm the first-snapshot boundary?"
+                      "message": "Did you inspect the staged file summary?"
                     }
                   }
                 }
               },
               "try_git_commit": {
-                "title": "Create the First Snapshot",
-                "prompt": "You are working in the prepared `garden-notes/` repository.\n\nThe three project files are staged. Commit them as `Start garden field notes`, then use short status to confirm a clean handoff.",
-                "hint": "Record the prepared snapshot, then check whether any current-state work remains.",
+                "title": "Record and Verify the Volunteer Baseline",
+                "prompt": "Record the prepared two-file snapshot with the message `Start volunteer project`. Then inspect concise history and confirm that short status has no unfinished entries.",
+                "hint": "Commit once, then verify history and current state.",
                 "help": {
-                  "concept": "The project is complete when the requested snapshot exists and short status is quiet.",
-                  "hint_1": "Use the exact project result named in the task.",
-                  "hint_2": "A clean status confirms that nothing was left outside the snapshot."
+                  "concept": "`git commit -m ...` records the staged files. `git log --oneline` verifies the history entry, and `git status --short` verifies that no tracked work remains unfinished.",
+                  "hint_1": "Use the exact commit message.",
+                  "hint_2": "The final short status should be empty."
                 },
-                "starterCode": "# Garden Field Notes\n",
-                "solutionCode": "git commit -m \"Start garden field notes\"\ngit status --short",
-                "instructions": "You are working in the prepared `garden-notes/` repository.\n\nThe three project files are staged. Commit them as `Start garden field notes`, then use short status to confirm a clean handoff.",
+                "starterCode": "# Volunteer Project\n\nAssignments and meeting times.\n",
+                "solutionCode": "git commit -m \"Start volunteer project\"\ngit log --oneline\ngit status --short",
+                "instructions": "Record the prepared two-file snapshot with the message `Start volunteer project`. Then inspect concise history and confirm that short status has no unfinished entries.",
                 "starterFiles": {
                   "zoeskoul_setup_sh": {
-                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf garden-notes\nmkdir -p garden-notes/observations\nprintf '# Garden Field Notes\\n' > garden-notes/README.md\nprintf 'Plot A: soil is damp after rain.\\n' > garden-notes/observations/plot-a.txt\nprintf 'Plot B: seedlings need labels.\\n' > garden-notes/observations/plot-b.txt\ngit -C garden-notes init -q -b main\ngit -C garden-notes config --local user.name \"ZoeSkoul Learner\"\ngit -C garden-notes config --local user.email \"learner@zoeskoul.local\"\ngit -C garden-notes add README.md observations/\n"
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- volunteer-project\nmkdir -p -- volunteer-project\ngit -C volunteer-project init -q -b main\ngit -C volunteer-project config --local user.name 'ZoeSkoul Learner'\ngit -C volunteer-project config --local user.email learner@zoeskoul.local\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n' > volunteer-project/assignments.txt\ngit -C volunteer-project add -A\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n' > volunteer-project/assignments.txt\n"
                   }
                 },
                 "solutionFiles": {
                   "zoeskoul_setup_sh": {
-                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf garden-notes\nmkdir -p garden-notes/observations\nprintf '# Garden Field Notes\\n' > garden-notes/README.md\nprintf 'Plot A: soil is damp after rain.\\n' > garden-notes/observations/plot-a.txt\nprintf 'Plot B: seedlings need labels.\\n' > garden-notes/observations/plot-b.txt\ngit -C garden-notes init -q -b main\ngit -C garden-notes config --local user.name \"ZoeSkoul Learner\"\ngit -C garden-notes config --local user.email \"learner@zoeskoul.local\"\ngit -C garden-notes add README.md observations/\n"
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- volunteer-project\nmkdir -p -- volunteer-project\ngit -C volunteer-project init -q -b main\ngit -C volunteer-project config --local user.name 'ZoeSkoul Learner'\ngit -C volunteer-project config --local user.email learner@zoeskoul.local\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n' > volunteer-project/assignments.txt\ngit -C volunteer-project add -A\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n' > volunteer-project/assignments.txt\n"
                   }
                 },
                 "terminalExpectations": {
@@ -208,17 +211,20 @@
                   },
                   "requiredCommands": {
                     "0": {
-                      "message": "Did you record the prepared snapshot with the requested message?"
+                      "message": "Did you record the volunteer baseline with the requested message?"
                     },
                     "1": {
-                      "message": "Did you confirm that the repository has no unfinished work?"
+                      "message": "Did you inspect the concise history?"
+                    },
+                    "2": {
+                      "message": "Did you verify that no unfinished file entries remain?"
                     }
                   }
                 }
               }
             },
-            "title": "Build the Field Notes Repository",
-            "description": "The garden team has three useful files but no trustworthy beginning. Build the repository in five cumulative milestones: initialize on `main`, keep the author identity local, inspect the untracked set, select the first snapshot, and record it.\n\nUse only the essential workflow from this module. Finish with one commit named `Start garden field notes`, all three project files tracked, and a clean short-status result."
+            "title": "Build the Volunteer Project Baseline",
+            "description": "This project starts with only README.md and assignments.txt. Reapply the Module 1 workflow in a different repository, then carry that exact history into later module projects."
           }
         }
       }
@@ -229,8 +235,8 @@
       "git-foundations-module-1-start-tracking": {
         "module-1-field-notes-repository": {
           "intro-to-git-repository": {
-            "title": "A Field Notebook Becomes a Repository",
-            "bodyMarkdown": "The neighborhood garden has useful observations, but the folder has no dependable beginning. A new volunteer can see today’s files yet cannot tell when the notebook started or which version should be trusted.\n\nYou will build that beginning in five milestones: initialize the folder, set a local identity, inspect the untracked notes, stage the intended project files, and record one first snapshot. Each milestone begins from the completed state of the previous one, so the project remains cumulative without exposing platform setup.\n\nThe final repository should contain one commit named `Start garden field notes` and no unfinished changes."
+            "title": "Parallel Project: Volunteer Project",
+            "bodyMarkdown": "`volunteer-project/` begins with only `README.md` and `assignments.txt`. Reapply the Module 1 workflow in a different two-file project: inspect the folder, initialize Git, configure the local identity, stage both files, commit, and verify. The repository continues into later module projects."
           }
         }
       }

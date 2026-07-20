@@ -3,6 +3,11 @@ import { buildPlanFromSpec } from "./buildPlanFromSpec.js";
 
 describe("buildPlanFromSpec", () => {
     it("preserves the authored project brief and exact capstone step target", () => {
+        const projectJourney = {
+            journeyId: "reporting-capstone",
+            entryMilestone: "start",
+            exitMilestone: "finish",
+        };
         const projectBrief = {
             scenario: "Build one final relational report.",
             role: "SQL reporting specialist",
@@ -48,6 +53,7 @@ describe("buildPlanFromSpec", () => {
                                         topicId: "final-report",
                                         title: "Final Report",
                                         projectBrief,
+                                        projectJourney,
                                     },
                                 ],
                             },
@@ -59,6 +65,9 @@ describe("buildPlanFromSpec", () => {
 
         expect(plan.modules[0]?.sections[0]?.topics[0]?.projectBrief).toEqual(
             projectBrief,
+        );
+        expect(plan.modules[0]?.sections[0]?.topics[0]?.projectJourney).toEqual(
+            projectJourney,
         );
     });
 

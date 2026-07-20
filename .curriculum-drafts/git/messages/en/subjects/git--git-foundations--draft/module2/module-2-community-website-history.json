@@ -3,58 +3,58 @@
     "git--git-foundations--draft": {
       "git-foundations-module-2-meaningful-history": {
         "module-2-community-website-history": {
-          "label": "Project: Build the Community Website History",
-          "summary": "Separate a navigation update from a visual palette update, record each as a focused commit, and audit the finished timeline.",
+          "label": "Module Project: Build Volunteer Project History",
+          "summary": "Add one file and record two focused volunteer-project updates.",
           "cards": {
             "sketch0": {
-              "title": "Build a History Another Maintainer Can Read"
+              "title": "Continue Volunteer Project"
             },
             "project": {
-              "title": "Build the Community Website History"
+              "title": "Build Focused Volunteer Project History"
             }
           },
           "projectSteps": {
             "try_module_2_community_website_history_sketch0": {
-              "title": "Inspect the First Website Change"
+              "title": "Edit the Signup Schedule Entry"
             },
             "try_module_2_community_website_history_sketch1": {
-              "title": "Stage Only the Navigation Update"
+              "title": "Commit the Signup Schedule Entry"
             },
             "try_module_2_community_website_history_sketch2": {
-              "title": "Commit the Navigation Update"
+              "title": "Edit the Help Desk Number"
             },
             "try_module_2_community_website_history_sketch3": {
-              "title": "Prepare the Events Update"
+              "title": "Stage and Review the Styles"
             },
             "try_module_2_community_website_history_sketch4": {
-              "title": "Commit the Events Update"
+              "title": "Commit the Styles Separately"
             },
             "try_module_2_community_website_history_sketch5": {
-              "title": "Read and Verify the Finished History"
+              "title": "Audit the Volunteer Project History"
             }
           },
           "moduleProject": {
             "steps": {
               "try_module_2_community_website_history_sketch0": {
-                "title": "Inspect the Two Pending Changes",
-                "prompt": "You are working in the prepared `community-website/` repository.\n\nThe website has a navigation edit and a palette edit. Use status, name-only diff, and a focused diff of `index.html` to understand the work before staging.",
-                "hint": "Inspect the working-tree patch before changing the staging area.",
+                "title": "Add the Meeting-Times File",
+                "prompt": "Continue `volunteer-project/` from its Module 1 snapshot. Create `meeting-times.txt` with exactly three lines: `Volunteer meeting times`, a blank line, and `Orientation: Saturday 10:00 AM`. Save it, stage it, and commit it with the message `Add volunteer meeting times`.",
+                "hint": "Add only the supplied third file and record it separately.",
                 "help": {
-                  "concept": "A project begins with inspection so commit boundaries are chosen from evidence, not guesswork.",
-                  "hint_1": "Focus on the removed and added lines for the path named in the task.",
-                  "hint_2": "The patch should contain only the edit described in the scenario."
+                  "concept": "This step reuses the familiar new-file workflow: create the exact text, stage the path, and commit it. The repository grows from two files to three without introducing unrelated content.",
+                  "hint_1": "Do not edit `README.md` or `assignments.txt`.",
+                  "hint_2": "The new commit should add only `meeting-times.txt`."
                 },
-                "starterCode": "<h1>Community Hub</h1>\n<nav>Home Events</nav>\n",
-                "solutionCode": "git status --short\ngit diff --name-only\ngit diff -- index.html",
-                "instructions": "You are working in the prepared `community-website/` repository.\n\nThe website has a navigation edit and a palette edit. Use status, name-only diff, and a focused diff of `index.html` to understand the work before staging.",
+                "starterCode": "# Volunteer Project\n\nAssignments and meeting times.\n",
+                "solutionCode": "git status --short\ngit add meeting-times.txt\ngit commit -m \"Add volunteer meeting times\"",
+                "instructions": "Continue `volunteer-project/` from its Module 1 snapshot. Create `meeting-times.txt` with exactly three lines: `Volunteer meeting times`, a blank line, and `Orientation: Saturday 10:00 AM`. Save it, stage it, and commit it with the message `Add volunteer meeting times`.",
                 "starterFiles": {
                   "zoeskoul_setup_sh": {
-                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-website\nmkdir -p community-website\ngit -C community-website init -q -b main\ngit -C community-website config --local user.name \"ZoeSkoul Learner\"\ngit -C community-website config --local user.email \"learner@zoeskoul.local\"\ncd community-website\nprintf %s '<h1>Community Hub</h1>\n<nav>Home</nav>\n' > index.html\ncd ..\ncd community-website\nprintf %s 'body { color: navy; }\n' > styles.css\ncd ..\ngit -C community-website add -A\ngit -C community-website commit -q -m 'Add project baseline'\ncd community-website\nprintf %s '<h1>Community Hub</h1>\n<nav>Home Events</nav>\n' > index.html\ncd ..\ncd community-website\nprintf %s 'body { color: teal; }\n' > styles.css\ncd ..\n"
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- volunteer-project\nmkdir -p -- volunteer-project\ngit -C volunteer-project init -q -b main\ngit -C volunteer-project config --local user.name 'ZoeSkoul Learner'\ngit -C volunteer-project config --local user.email learner@zoeskoul.local\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n' > volunteer-project/assignments.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C volunteer-project commit -q -m 'Start volunteer project'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n' > volunteer-project/assignments.txt\ngit -C volunteer-project add -A\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n' > volunteer-project/assignments.txt\n"
                   }
                 },
                 "solutionFiles": {
                   "zoeskoul_setup_sh": {
-                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-website\nmkdir -p community-website\ngit -C community-website init -q -b main\ngit -C community-website config --local user.name \"ZoeSkoul Learner\"\ngit -C community-website config --local user.email \"learner@zoeskoul.local\"\ncd community-website\nprintf %s '<h1>Community Hub</h1>\n<nav>Home</nav>\n' > index.html\ncd ..\ncd community-website\nprintf %s 'body { color: navy; }\n' > styles.css\ncd ..\ngit -C community-website add -A\ngit -C community-website commit -q -m 'Add project baseline'\ncd community-website\nprintf %s '<h1>Community Hub</h1>\n<nav>Home Events</nav>\n' > index.html\ncd ..\ncd community-website\nprintf %s 'body { color: teal; }\n' > styles.css\ncd ..\n"
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- volunteer-project\nmkdir -p -- volunteer-project\ngit -C volunteer-project init -q -b main\ngit -C volunteer-project config --local user.name 'ZoeSkoul Learner'\ngit -C volunteer-project config --local user.email learner@zoeskoul.local\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n' > volunteer-project/assignments.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C volunteer-project commit -q -m 'Start volunteer project'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n' > volunteer-project/assignments.txt\ngit -C volunteer-project add -A\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n' > volunteer-project/assignments.txt\n"
                   }
                 },
                 "terminalExpectations": {
@@ -65,37 +65,37 @@
                   },
                   "requiredCommands": {
                     "0": {
-                      "message": "Did you use the compact status view and read the entry for `index.html`?"
+                      "message": "Did you inspect the new meeting-times file?"
                     },
                     "1": {
-                      "message": "Did you inspect the unstaged line changes in `index.html`?"
+                      "message": "Did you stage only the new meeting-times file?"
                     },
                     "2": {
-                      "message": "Did you inspect the unstaged line changes in `index.html`?"
+                      "message": "Did you record the third file as its own commit?"
                     }
                   }
                 }
               },
               "try_module_2_community_website_history_sketch1": {
-                "title": "Stage the Navigation Update",
-                "prompt": "You are working in the prepared `community-website/` repository.\n\nStage only `index.html`, then inspect the staged file names and patch. Leave the palette edit unstaged.",
-                "hint": "Choose only the paths that belong to this checkpoint.",
+                "title": "Inspect the Assignment Change",
+                "prompt": "Open `volunteer-project/assignments.txt`. Replace `Training desk: unassigned` with `Training desk: Riley`. Save the file, then inspect its unstaged diff.",
+                "hint": "Make the exact one-line change and review it before staging.",
                 "help": {
-                  "concept": "The index can hold one focused part of a larger working tree.",
-                  "hint_1": "Do not broaden the staging boundary just to make status quieter.",
-                  "hint_2": "Review the staged paths or patch before moving on."
+                  "concept": "`git diff -- assignments.txt` shows the unstaged assignment change and leaves repository state untouched.",
+                  "hint_1": "Do not change the welcome-table assignment.",
+                  "hint_2": "Leave the edit unstaged for the next step."
                 },
-                "starterCode": "<h1>Community Hub</h1>\n<nav>Home Events</nav>\n",
-                "solutionCode": "git add index.html\ngit diff --staged --name-only\ngit diff --staged -- index.html",
-                "instructions": "You are working in the prepared `community-website/` repository.\n\nStage only `index.html`, then inspect the staged file names and patch. Leave the palette edit unstaged.",
+                "starterCode": "# Volunteer Project\n\nAssignments and meeting times.\n",
+                "solutionCode": "git diff -- assignments.txt",
+                "instructions": "Open `volunteer-project/assignments.txt`. Replace `Training desk: unassigned` with `Training desk: Riley`. Save the file, then inspect its unstaged diff.",
                 "starterFiles": {
                   "zoeskoul_setup_sh": {
-                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-website\nmkdir -p community-website\ngit -C community-website init -q -b main\ngit -C community-website config --local user.name \"ZoeSkoul Learner\"\ngit -C community-website config --local user.email \"learner@zoeskoul.local\"\ncd community-website\nprintf %s '<h1>Community Hub</h1>\n<nav>Home</nav>\n' > index.html\ncd ..\ncd community-website\nprintf %s 'body { color: navy; }\n' > styles.css\ncd ..\ngit -C community-website add -A\ngit -C community-website commit -q -m 'Add project baseline'\ncd community-website\nprintf %s '<h1>Community Hub</h1>\n<nav>Home Events</nav>\n' > index.html\ncd ..\ncd community-website\nprintf %s 'body { color: teal; }\n' > styles.css\ncd ..\n"
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- volunteer-project\nmkdir -p -- volunteer-project\ngit -C volunteer-project init -q -b main\ngit -C volunteer-project config --local user.name 'ZoeSkoul Learner'\ngit -C volunteer-project config --local user.email learner@zoeskoul.local\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n' > volunteer-project/assignments.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C volunteer-project commit -q -m 'Start volunteer project'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 10:00 AM\n' > volunteer-project/meeting-times.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C volunteer-project commit -q -m 'Add volunteer meeting times'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 10:00 AM\n' > volunteer-project/meeting-times.txt\ngit -C volunteer-project add -A\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 10:00 AM\n' > volunteer-project/meeting-times.txt\n"
                   }
                 },
                 "solutionFiles": {
                   "zoeskoul_setup_sh": {
-                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-website\nmkdir -p community-website\ngit -C community-website init -q -b main\ngit -C community-website config --local user.name \"ZoeSkoul Learner\"\ngit -C community-website config --local user.email \"learner@zoeskoul.local\"\ncd community-website\nprintf %s '<h1>Community Hub</h1>\n<nav>Home</nav>\n' > index.html\ncd ..\ncd community-website\nprintf %s 'body { color: navy; }\n' > styles.css\ncd ..\ngit -C community-website add -A\ngit -C community-website commit -q -m 'Add project baseline'\ncd community-website\nprintf %s '<h1>Community Hub</h1>\n<nav>Home Events</nav>\n' > index.html\ncd ..\ncd community-website\nprintf %s 'body { color: teal; }\n' > styles.css\ncd ..\n"
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- volunteer-project\nmkdir -p -- volunteer-project\ngit -C volunteer-project init -q -b main\ngit -C volunteer-project config --local user.name 'ZoeSkoul Learner'\ngit -C volunteer-project config --local user.email learner@zoeskoul.local\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n' > volunteer-project/assignments.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C volunteer-project commit -q -m 'Start volunteer project'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 10:00 AM\n' > volunteer-project/meeting-times.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C volunteer-project commit -q -m 'Add volunteer meeting times'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 10:00 AM\n' > volunteer-project/meeting-times.txt\ngit -C volunteer-project add -A\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 10:00 AM\n' > volunteer-project/meeting-times.txt\n"
                   }
                 },
                 "terminalExpectations": {
@@ -106,34 +106,31 @@
                   },
                   "requiredCommands": {
                     "0": {
-                      "message": "Did you stage only the path or paths that belong to this checkpoint?"
-                    },
-                    "1": {
-                      "message": "Did you review the staged path list and confirm that only the requested files are selected?"
+                      "message": "Did you inspect the assignment change before staging it?"
                     }
                   }
                 }
               },
               "try_module_2_community_website_history_sketch2": {
-                "title": "Commit the Navigation Update",
-                "prompt": "You are working in the prepared `community-website/` repository.\n\nThe navigation change is staged and the palette edit remains unstaged. Commit `Add events navigation`, then verify the remaining status.",
-                "hint": "Record only the staged snapshot and use the message requested by the scenario.",
+                "title": "Stage and Review the Assignment Change",
+                "prompt": "Stage only `assignments.txt`, then inspect its staged diff.",
+                "hint": "Prepare and review one focused purpose.",
                 "help": {
-                  "concept": "A commit records only the staged navigation work and leaves the unrelated palette edit for its own snapshot.",
-                  "hint_1": "The message should describe the project result, not the commands you used.",
-                  "hint_2": "After recording it, inspect history and any work that remains."
+                  "concept": "`git add assignments.txt` moves the edit into the staging area. `git diff --staged -- assignments.txt` verifies exactly what the next commit would record.",
+                  "hint_1": "No other file should be staged.",
+                  "hint_2": "Do not commit yet."
                 },
-                "starterCode": "<h1>Community Hub</h1>\n<nav>Home Events</nav>\n",
-                "solutionCode": "git commit -m \"Add events navigation\"\ngit status --short",
-                "instructions": "You are working in the prepared `community-website/` repository.\n\nThe navigation change is staged and the palette edit remains unstaged. Commit `Add events navigation`, then verify the remaining status.",
+                "starterCode": "# Volunteer Project\n\nAssignments and meeting times.\n",
+                "solutionCode": "git add assignments.txt\ngit diff --staged -- assignments.txt",
+                "instructions": "Stage only `assignments.txt`, then inspect its staged diff.",
                 "starterFiles": {
                   "zoeskoul_setup_sh": {
-                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-website\nmkdir -p community-website\ngit -C community-website init -q -b main\ngit -C community-website config --local user.name \"ZoeSkoul Learner\"\ngit -C community-website config --local user.email \"learner@zoeskoul.local\"\ncd community-website\nprintf %s '<h1>Community Hub</h1>\n<nav>Home</nav>\n' > index.html\ncd ..\ncd community-website\nprintf %s 'body { color: navy; }\n' > styles.css\ncd ..\ngit -C community-website add -A\ngit -C community-website commit -q -m 'Add project baseline'\ncd community-website\nprintf %s '<h1>Community Hub</h1>\n<nav>Home Events</nav>\n' > index.html\ncd ..\ncd community-website\nprintf %s 'body { color: teal; }\n' > styles.css\ncd ..\ngit -C community-website add -- index.html\n"
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- volunteer-project\nmkdir -p -- volunteer-project\ngit -C volunteer-project init -q -b main\ngit -C volunteer-project config --local user.name 'ZoeSkoul Learner'\ngit -C volunteer-project config --local user.email learner@zoeskoul.local\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n' > volunteer-project/assignments.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C volunteer-project commit -q -m 'Start volunteer project'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 10:00 AM\n' > volunteer-project/meeting-times.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C volunteer-project commit -q -m 'Add volunteer meeting times'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 10:00 AM\n' > volunteer-project/meeting-times.txt\ngit -C volunteer-project add -A\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 10:00 AM\n' > volunteer-project/meeting-times.txt\n"
                   }
                 },
                 "solutionFiles": {
                   "zoeskoul_setup_sh": {
-                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-website\nmkdir -p community-website\ngit -C community-website init -q -b main\ngit -C community-website config --local user.name \"ZoeSkoul Learner\"\ngit -C community-website config --local user.email \"learner@zoeskoul.local\"\ncd community-website\nprintf %s '<h1>Community Hub</h1>\n<nav>Home</nav>\n' > index.html\ncd ..\ncd community-website\nprintf %s 'body { color: navy; }\n' > styles.css\ncd ..\ngit -C community-website add -A\ngit -C community-website commit -q -m 'Add project baseline'\ncd community-website\nprintf %s '<h1>Community Hub</h1>\n<nav>Home Events</nav>\n' > index.html\ncd ..\ncd community-website\nprintf %s 'body { color: teal; }\n' > styles.css\ncd ..\ngit -C community-website add -- index.html\n"
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- volunteer-project\nmkdir -p -- volunteer-project\ngit -C volunteer-project init -q -b main\ngit -C volunteer-project config --local user.name 'ZoeSkoul Learner'\ngit -C volunteer-project config --local user.email learner@zoeskoul.local\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n' > volunteer-project/assignments.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C volunteer-project commit -q -m 'Start volunteer project'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 10:00 AM\n' > volunteer-project/meeting-times.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C volunteer-project commit -q -m 'Add volunteer meeting times'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 10:00 AM\n' > volunteer-project/meeting-times.txt\ngit -C volunteer-project add -A\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 10:00 AM\n' > volunteer-project/meeting-times.txt\n"
                   }
                 },
                 "terminalExpectations": {
@@ -144,34 +141,34 @@
                   },
                   "requiredCommands": {
                     "0": {
-                      "message": "Did you record the staged snapshot with the message named in the task?"
+                      "message": "Did you stage only the assignment change?"
                     },
                     "1": {
-                      "message": "Did you use the compact status view and read the entry for `community-website/`?"
+                      "message": "Did you review the staged assignment change?"
                     }
                   }
                 }
               },
               "try_module_2_community_website_history_sketch3": {
-                "title": "Stage the Palette Update",
-                "prompt": "You are working in the prepared `community-website/` repository.\n\nThe navigation commit now exists. Stage `styles.css` and inspect the staged patch.",
-                "hint": "Choose only the paths that belong to this checkpoint.",
+                "title": "Commit the Assignment Change",
+                "prompt": "Record the staged assignment update with the message `Update volunteer assignments`.",
+                "hint": "Commit the prepared one-file snapshot.",
                 "help": {
-                  "concept": "The second coherent change receives its own staging boundary after the first snapshot is complete.",
-                  "hint_1": "Do not broaden the staging boundary just to make status quieter.",
-                  "hint_2": "Review the staged paths or patch before moving on."
+                  "concept": "`git commit -m \"Update volunteer assignments\"` records the staged assignment change and leaves the repository ready for the meeting-time update.",
+                  "hint_1": "Use the exact message.",
+                  "hint_2": "The repository should be clean immediately afterward."
                 },
-                "starterCode": "<h1>Community Hub</h1>\n<nav>Home Events</nav>\n",
-                "solutionCode": "git add styles.css\ngit diff --staged -- styles.css",
-                "instructions": "You are working in the prepared `community-website/` repository.\n\nThe navigation commit now exists. Stage `styles.css` and inspect the staged patch.",
+                "starterCode": "# Volunteer Project\n\nAssignments and meeting times.\n",
+                "solutionCode": "git commit -m \"Update volunteer assignments\"",
+                "instructions": "Record the staged assignment update with the message `Update volunteer assignments`.",
                 "starterFiles": {
                   "zoeskoul_setup_sh": {
-                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-website\nmkdir -p community-website\ngit -C community-website init -q -b main\ngit -C community-website config --local user.name \"ZoeSkoul Learner\"\ngit -C community-website config --local user.email \"learner@zoeskoul.local\"\ncd community-website\nprintf %s '<h1>Community Hub</h1>\n<nav>Home</nav>\n' > index.html\ncd ..\ncd community-website\nprintf %s 'body { color: navy; }\n' > styles.css\ncd ..\ngit -C community-website add -A\ngit -C community-website commit -q -m 'Start community website'\ncd community-website\nprintf %s '<h1>Community Hub</h1>\n<nav>Home Events</nav>\n' > index.html\ncd ..\ngit -C community-website add -A\ngit -C community-website commit -q -m 'Add events navigation'\ncd community-website\nprintf %s 'body { color: teal; }\n' > styles.css\ncd ..\n"
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- volunteer-project\nmkdir -p -- volunteer-project\ngit -C volunteer-project init -q -b main\ngit -C volunteer-project config --local user.name 'ZoeSkoul Learner'\ngit -C volunteer-project config --local user.email learner@zoeskoul.local\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n' > volunteer-project/assignments.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C volunteer-project commit -q -m 'Start volunteer project'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 10:00 AM\n' > volunteer-project/meeting-times.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C volunteer-project commit -q -m 'Add volunteer meeting times'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 10:00 AM\n' > volunteer-project/meeting-times.txt\ngit -C volunteer-project add -A\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 10:00 AM\n' > volunteer-project/meeting-times.txt\n"
                   }
                 },
                 "solutionFiles": {
                   "zoeskoul_setup_sh": {
-                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-website\nmkdir -p community-website\ngit -C community-website init -q -b main\ngit -C community-website config --local user.name \"ZoeSkoul Learner\"\ngit -C community-website config --local user.email \"learner@zoeskoul.local\"\ncd community-website\nprintf %s '<h1>Community Hub</h1>\n<nav>Home</nav>\n' > index.html\ncd ..\ncd community-website\nprintf %s 'body { color: navy; }\n' > styles.css\ncd ..\ngit -C community-website add -A\ngit -C community-website commit -q -m 'Start community website'\ncd community-website\nprintf %s '<h1>Community Hub</h1>\n<nav>Home Events</nav>\n' > index.html\ncd ..\ngit -C community-website add -A\ngit -C community-website commit -q -m 'Add events navigation'\ncd community-website\nprintf %s 'body { color: teal; }\n' > styles.css\ncd ..\n"
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- volunteer-project\nmkdir -p -- volunteer-project\ngit -C volunteer-project init -q -b main\ngit -C volunteer-project config --local user.name 'ZoeSkoul Learner'\ngit -C volunteer-project config --local user.email learner@zoeskoul.local\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n' > volunteer-project/assignments.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C volunteer-project commit -q -m 'Start volunteer project'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 10:00 AM\n' > volunteer-project/meeting-times.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C volunteer-project commit -q -m 'Add volunteer meeting times'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 10:00 AM\n' > volunteer-project/meeting-times.txt\ngit -C volunteer-project add -A\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 10:00 AM\n' > volunteer-project/meeting-times.txt\n"
                   }
                 },
                 "terminalExpectations": {
@@ -182,34 +179,31 @@
                   },
                   "requiredCommands": {
                     "0": {
-                      "message": "Did you stage only the path or paths that belong to this checkpoint?"
-                    },
-                    "1": {
-                      "message": "Did you inspect the staged version of `styles.css` before checking?"
+                      "message": "Did you record the assignment update as its own commit?"
                     }
                   }
                 }
               },
               "try_module_2_community_website_history_sketch4": {
-                "title": "Commit the Palette Update",
-                "prompt": "You are working in the prepared `community-website/` repository.\n\nThe palette change is staged. Commit `Refresh site palette` and verify a clean working tree.",
-                "hint": "Record only the staged snapshot and use the message requested by the scenario.",
+                "title": "Move the Orientation Earlier",
+                "prompt": "Open `volunteer-project/meeting-times.txt`. Replace `Orientation: Saturday 10:00 AM` with `Orientation: Saturday 9:30 AM`. Save the file. Inspect the unstaged diff, stage the file, review the staged diff, and commit it with the message `Update volunteer meeting time`.",
+                "hint": "Follow the complete inspect, stage, review, commit workflow for the exact time change.",
                 "help": {
-                  "concept": "Separate commits make navigation and design changes independently understandable.",
-                  "hint_1": "The message should describe the project result, not the commands you used.",
-                  "hint_2": "After recording it, inspect history and any work that remains."
+                  "concept": "`git diff` reviews the working-tree edit, `git add` prepares it, `git diff --staged` reviews the proposal, and `git commit` records the focused snapshot.",
+                  "hint_1": "Do not edit another file.",
+                  "hint_2": "The new commit should affect only `meeting-times.txt`."
                 },
-                "starterCode": "<h1>Community Hub</h1>\n<nav>Home Events</nav>\n",
-                "solutionCode": "git commit -m \"Refresh site palette\"\ngit status --short",
-                "instructions": "You are working in the prepared `community-website/` repository.\n\nThe palette change is staged. Commit `Refresh site palette` and verify a clean working tree.",
+                "starterCode": "# Volunteer Project\n\nAssignments and meeting times.\n",
+                "solutionCode": "git diff -- meeting-times.txt\ngit add meeting-times.txt\ngit diff --staged -- meeting-times.txt\ngit commit -m \"Update volunteer meeting time\"",
+                "instructions": "Open `volunteer-project/meeting-times.txt`. Replace `Orientation: Saturday 10:00 AM` with `Orientation: Saturday 9:30 AM`. Save the file. Inspect the unstaged diff, stage the file, review the staged diff, and commit it with the message `Update volunteer meeting time`.",
                 "starterFiles": {
                   "zoeskoul_setup_sh": {
-                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-website\nmkdir -p community-website\ngit -C community-website init -q -b main\ngit -C community-website config --local user.name \"ZoeSkoul Learner\"\ngit -C community-website config --local user.email \"learner@zoeskoul.local\"\ncd community-website\nprintf %s '<h1>Community Hub</h1>\n<nav>Home</nav>\n' > index.html\ncd ..\ncd community-website\nprintf %s 'body { color: navy; }\n' > styles.css\ncd ..\ngit -C community-website add -A\ngit -C community-website commit -q -m 'Start community website'\ncd community-website\nprintf %s '<h1>Community Hub</h1>\n<nav>Home Events</nav>\n' > index.html\ncd ..\ngit -C community-website add -A\ngit -C community-website commit -q -m 'Add events navigation'\ncd community-website\nprintf %s 'body { color: teal; }\n' > styles.css\ncd ..\ngit -C community-website add -- styles.css\n"
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- volunteer-project\nmkdir -p -- volunteer-project\ngit -C volunteer-project init -q -b main\ngit -C volunteer-project config --local user.name 'ZoeSkoul Learner'\ngit -C volunteer-project config --local user.email learner@zoeskoul.local\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n' > volunteer-project/assignments.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C volunteer-project commit -q -m 'Start volunteer project'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 10:00 AM\n' > volunteer-project/meeting-times.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C volunteer-project commit -q -m 'Add volunteer meeting times'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 10:00 AM\n' > volunteer-project/meeting-times.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-03T12:00:00Z GIT_COMMITTER_DATE=2026-01-03T12:00:00Z git -C volunteer-project commit -q -m 'Update volunteer assignments'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 10:00 AM\n' > volunteer-project/meeting-times.txt\ngit -C volunteer-project add -A\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 10:00 AM\n' > volunteer-project/meeting-times.txt\n"
                   }
                 },
                 "solutionFiles": {
                   "zoeskoul_setup_sh": {
-                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-website\nmkdir -p community-website\ngit -C community-website init -q -b main\ngit -C community-website config --local user.name \"ZoeSkoul Learner\"\ngit -C community-website config --local user.email \"learner@zoeskoul.local\"\ncd community-website\nprintf %s '<h1>Community Hub</h1>\n<nav>Home</nav>\n' > index.html\ncd ..\ncd community-website\nprintf %s 'body { color: navy; }\n' > styles.css\ncd ..\ngit -C community-website add -A\ngit -C community-website commit -q -m 'Start community website'\ncd community-website\nprintf %s '<h1>Community Hub</h1>\n<nav>Home Events</nav>\n' > index.html\ncd ..\ngit -C community-website add -A\ngit -C community-website commit -q -m 'Add events navigation'\ncd community-website\nprintf %s 'body { color: teal; }\n' > styles.css\ncd ..\ngit -C community-website add -- styles.css\n"
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- volunteer-project\nmkdir -p -- volunteer-project\ngit -C volunteer-project init -q -b main\ngit -C volunteer-project config --local user.name 'ZoeSkoul Learner'\ngit -C volunteer-project config --local user.email learner@zoeskoul.local\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n' > volunteer-project/assignments.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C volunteer-project commit -q -m 'Start volunteer project'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 10:00 AM\n' > volunteer-project/meeting-times.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C volunteer-project commit -q -m 'Add volunteer meeting times'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 10:00 AM\n' > volunteer-project/meeting-times.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-03T12:00:00Z GIT_COMMITTER_DATE=2026-01-03T12:00:00Z git -C volunteer-project commit -q -m 'Update volunteer assignments'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 10:00 AM\n' > volunteer-project/meeting-times.txt\ngit -C volunteer-project add -A\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 10:00 AM\n' > volunteer-project/meeting-times.txt\n"
                   }
                 },
                 "terminalExpectations": {
@@ -220,34 +214,40 @@
                   },
                   "requiredCommands": {
                     "0": {
-                      "message": "Did you record the staged snapshot with the message named in the task?"
+                      "message": "Did you inspect the meeting-time change?"
                     },
                     "1": {
-                      "message": "Did you use the compact status view to confirm that no unfinished change remains?"
+                      "message": "Did you stage the meeting-time change?"
+                    },
+                    "2": {
+                      "message": "Did you review the staged meeting-time change?"
+                    },
+                    "3": {
+                      "message": "Did you record the meeting-time update separately?"
                     }
                   }
                 }
               },
               "try_module_2_community_website_history_sketch5": {
-                "title": "Read the Finished Website History",
-                "prompt": "You are working in the prepared `community-website/` repository.\n\nRead the three one-line entries, inspect the latest snapshot with `git show --stat HEAD`, and confirm the working tree remains clean.",
-                "hint": "Open the checkpoint named in the task and inspect its evidence.",
+                "title": "Audit the Volunteer Project History",
+                "prompt": "Inspect the concise history, the newest commit summary, and final short status. Confirm that the repository contains four focused commits and no unfinished tracked work.",
+                "hint": "Verify timeline, latest snapshot, and current state.",
                 "help": {
-                  "concept": "The final history explains the project in three focused milestones and remains safe to inspect.",
-                  "hint_1": "Choose a summary view for file shape or a full patch for line-level detail.",
-                  "hint_2": "Confirm that the snapshot contents support its message."
+                  "concept": "`git log --oneline` audits the sequence, `git show --stat --oneline HEAD` audits the newest snapshot, and `git status --short` verifies the handoff is clean.",
+                  "hint_1": "The newest message should be `Update volunteer meeting time`.",
+                  "hint_2": "Short status should produce no file entries."
                 },
-                "starterCode": "<h1>Community Hub</h1>\n<nav>Home Events</nav>\n",
-                "solutionCode": "git log --oneline\ngit show --stat HEAD\ngit status --short",
-                "instructions": "You are working in the prepared `community-website/` repository.\n\nRead the three one-line entries, inspect the latest snapshot with `git show --stat HEAD`, and confirm the working tree remains clean.",
+                "starterCode": "# Volunteer Project\n\nAssignments and meeting times.\n",
+                "solutionCode": "git log --oneline\ngit show --stat --oneline HEAD\ngit status --short",
+                "instructions": "Inspect the concise history, the newest commit summary, and final short status. Confirm that the repository contains four focused commits and no unfinished tracked work.",
                 "starterFiles": {
                   "zoeskoul_setup_sh": {
-                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-website\nmkdir -p community-website\ngit -C community-website init -q -b main\ngit -C community-website config --local user.name \"ZoeSkoul Learner\"\ngit -C community-website config --local user.email \"learner@zoeskoul.local\"\ncd community-website\nprintf %s '<h1>Community Hub</h1>\n<nav>Home</nav>\n' > index.html\ncd ..\ncd community-website\nprintf %s 'body { color: navy; }\n' > styles.css\ncd ..\ngit -C community-website add -A\ngit -C community-website commit -q -m 'Start community website'\ncd community-website\nprintf %s '<h1>Community Hub</h1>\n<nav>Home Events</nav>\n' > index.html\ncd ..\ngit -C community-website add -A\ngit -C community-website commit -q -m 'Add events navigation'\ncd community-website\nprintf %s 'body { color: teal; }\n' > styles.css\ncd ..\ngit -C community-website add -A\ngit -C community-website commit -q -m 'Refresh site palette'\n"
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- volunteer-project\nmkdir -p -- volunteer-project\ngit -C volunteer-project init -q -b main\ngit -C volunteer-project config --local user.name 'ZoeSkoul Learner'\ngit -C volunteer-project config --local user.email learner@zoeskoul.local\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n' > volunteer-project/assignments.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C volunteer-project commit -q -m 'Start volunteer project'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 10:00 AM\n' > volunteer-project/meeting-times.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C volunteer-project commit -q -m 'Add volunteer meeting times'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 10:00 AM\n' > volunteer-project/meeting-times.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-03T12:00:00Z GIT_COMMITTER_DATE=2026-01-03T12:00:00Z git -C volunteer-project commit -q -m 'Update volunteer assignments'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 9:30 AM\n' > volunteer-project/meeting-times.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-04T12:00:00Z GIT_COMMITTER_DATE=2026-01-04T12:00:00Z git -C volunteer-project commit -q -m 'Update volunteer meeting time'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 9:30 AM\n' > volunteer-project/meeting-times.txt\ngit -C volunteer-project add -A\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 9:30 AM\n' > volunteer-project/meeting-times.txt\n"
                   }
                 },
                 "solutionFiles": {
                   "zoeskoul_setup_sh": {
-                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf community-website\nmkdir -p community-website\ngit -C community-website init -q -b main\ngit -C community-website config --local user.name \"ZoeSkoul Learner\"\ngit -C community-website config --local user.email \"learner@zoeskoul.local\"\ncd community-website\nprintf %s '<h1>Community Hub</h1>\n<nav>Home</nav>\n' > index.html\ncd ..\ncd community-website\nprintf %s 'body { color: navy; }\n' > styles.css\ncd ..\ngit -C community-website add -A\ngit -C community-website commit -q -m 'Start community website'\ncd community-website\nprintf %s '<h1>Community Hub</h1>\n<nav>Home Events</nav>\n' > index.html\ncd ..\ngit -C community-website add -A\ngit -C community-website commit -q -m 'Add events navigation'\ncd community-website\nprintf %s 'body { color: teal; }\n' > styles.css\ncd ..\ngit -C community-website add -A\ngit -C community-website commit -q -m 'Refresh site palette'\n"
+                    "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- volunteer-project\nmkdir -p -- volunteer-project\ngit -C volunteer-project init -q -b main\ngit -C volunteer-project config --local user.name 'ZoeSkoul Learner'\ngit -C volunteer-project config --local user.email learner@zoeskoul.local\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n' > volunteer-project/assignments.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C volunteer-project commit -q -m 'Start volunteer project'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 10:00 AM\n' > volunteer-project/meeting-times.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C volunteer-project commit -q -m 'Add volunteer meeting times'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 10:00 AM\n' > volunteer-project/meeting-times.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-03T12:00:00Z GIT_COMMITTER_DATE=2026-01-03T12:00:00Z git -C volunteer-project commit -q -m 'Update volunteer assignments'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 9:30 AM\n' > volunteer-project/meeting-times.txt\ngit -C volunteer-project add -A\nGIT_AUTHOR_DATE=2026-01-04T12:00:00Z GIT_COMMITTER_DATE=2026-01-04T12:00:00Z git -C volunteer-project commit -q -m 'Update volunteer meeting time'\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 9:30 AM\n' > volunteer-project/meeting-times.txt\ngit -C volunteer-project add -A\nfind volunteer-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- volunteer-project\nprintf %s '# Volunteer Project\n\nAssignments and meeting times.\n' > volunteer-project/README.md\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n' > volunteer-project/assignments.txt\nmkdir -p -- volunteer-project\nprintf %s 'Volunteer meeting times\n\nOrientation: Saturday 9:30 AM\n' > volunteer-project/meeting-times.txt\n"
                   }
                 },
                 "terminalExpectations": {
@@ -258,19 +258,20 @@
                   },
                   "requiredCommands": {
                     "0": {
-                      "message": "Did you read the one-line history and confirm the newest checkpoint?"
+                      "message": "Did you inspect the volunteer history?"
                     },
                     "1": {
-                      "message": "Did you open the requested checkpoint and inspect its file summary or patch?"
+                      "message": "Did you inspect the newest snapshot summary?"
                     },
                     "2": {
-                      "message": "Did you use the compact status view to confirm that no unfinished change remains?"
+                      "message": "Did you verify a clean current state?"
                     }
                   }
                 }
               }
             },
-            "description": "The community website contains a navigation update and a palette update. They are both ready, but they should not become one vague commit. Review each change, stage one purpose at a time, create two focused checkpoints, and audit the final timeline.\n\nFinish with readable commit subjects in the requested order and a clean working tree."
+            "description": "Continue the same volunteer-project repository. Add one third file, then create two focused text changes without introducing unrelated files.",
+            "title": "Build Focused Volunteer Project History"
           }
         }
       }
@@ -281,8 +282,8 @@
       "git-foundations-module-2-meaningful-history": {
         "module-2-community-website-history": {
           "intro-sketch": {
-            "title": "Build a History Another Maintainer Can Read",
-            "bodyMarkdown": "The community website has two useful but unrelated updates: a clearer events navigation link and a refreshed visual palette. Combining them would make review harder and the history less informative.\n\nYou will inspect both changes, select one purpose at a time, create two focused commits, and read the resulting timeline. Each milestone starts from the completed state of the previous one, so the project feels cumulative without asking you to repeat setup.\n\nThe finished history should explain the work without requiring another maintainer to open every file."
+            "title": "Continue the Volunteer Project",
+            "bodyMarkdown": "The same repository returns with its two-file Module 1 history. Add one exact third file, then create two focused text updates. Each step reuses commands already taught in the guided project, with less command-level guidance."
           }
         }
       }

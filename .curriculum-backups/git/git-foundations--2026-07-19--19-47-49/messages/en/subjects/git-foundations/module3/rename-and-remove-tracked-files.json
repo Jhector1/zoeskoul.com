@@ -1,0 +1,225 @@
+{
+  "topics": {
+    "git-foundations": {
+      "git-foundations-module-3-manage-tracked-files": {
+        "rename-and-remove-tracked-files": {
+          "label": "Rename and Remove Tracked Files",
+          "summary": "Maintain tracked community-project paths safely and record one structural cleanup.",
+          "cards": {
+            "sketch0": {
+              "title": "Tracked Paths Change with the Project"
+            },
+            "sketch1": {
+              "title": "Structural Changes Need Review"
+            },
+            "sketch3": {
+              "title": "Group One Cleanup Purpose"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_rename_and_remove_tracked_files_sketch0": {
+              "title": "Rename the Tracked Schedule",
+              "prompt": "The project now calls its public schedule `events.txt`. Rename tracked `schedule.txt` to `events.txt` with Git so the path change is staged.",
+              "hint": "Use the Git-aware move for this tracked file; keep it in the repository root.",
+              "help": {
+                "concept": "git mv updates the working tree and stages the tracked rename.",
+                "hint_1": "The destination is events.txt.",
+                "hint_2": "Do not copy the file and leave the old path behind."
+              },
+              "starterCode": "Community schedule\n\nSaturday cleanup: 9:30 AM\n",
+              "solutionCode": "git mv schedule.txt events.txt",
+              "starterFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0100\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Old planning notes\n\nSpring flyer draft.\n' > community-project/old-notes.txt\nmkdir -p -- community-project/generated\nprintf %s 'Generated summary\n\nCreated automatically from project notes.\n' > community-project/generated/summary.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C community-project commit -q -m 'Start community project'\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 9:30 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C community-project commit -q -m 'Update community schedule'\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0130\n' > community-project/contacts.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-03T12:00:00Z GIT_COMMITTER_DATE=2026-01-03T12:00:00Z git -C community-project commit -q -m 'Update community contacts'\n"
+                }
+              },
+              "solutionFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0100\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Old planning notes\n\nSpring flyer draft.\n' > community-project/old-notes.txt\nmkdir -p -- community-project/generated\nprintf %s 'Generated summary\n\nCreated automatically from project notes.\n' > community-project/generated/summary.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C community-project commit -q -m 'Start community project'\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 9:30 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C community-project commit -q -m 'Update community schedule'\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0130\n' > community-project/contacts.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-03T12:00:00Z GIT_COMMITTER_DATE=2026-01-03T12:00:00Z git -C community-project commit -q -m 'Update community contacts'\n"
+                }
+              },
+              "instructions": "The project now calls its public schedule `events.txt`. Rename tracked `schedule.txt` to `events.txt` with Git so the path change is staged.",
+              "terminalExpectations": {
+                "forbiddenCommands": {
+                  "0": {
+                    "message": "That action can discard or rewrite history. Use the safe, layer-specific workflow taught in this course."
+                  }
+                },
+                "requiredCommands": {
+                  "1": {
+                    "message": "Did you use Git to rename the tracked schedule file to `events.txt`?"
+                  }
+                }
+              }
+            },
+            "try_rename_and_remove_tracked_files_sketch1": {
+              "title": "Remove the Obsolete Planning Notes",
+              "prompt": "The schedule rename is already staged. Remove tracked `old-notes.txt`, then inspect the staged name-status summary so both structural changes are visible.",
+              "hint": "Stage the obsolete-file removal and review the full cleanup proposal.",
+              "help": {
+                "concept": "git rm removes a tracked path from the working tree and stages that removal.",
+                "hint_1": "Keep the staged rename intact.",
+                "hint_2": "The summary should show a rename and a deletion."
+              },
+              "starterCode": "Community schedule\n\nSaturday cleanup: 9:30 AM\n",
+              "solutionCode": "git rm old-notes.txt\ngit diff --staged --name-status",
+              "starterFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0100\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Old planning notes\n\nSpring flyer draft.\n' > community-project/old-notes.txt\nmkdir -p -- community-project/generated\nprintf %s 'Generated summary\n\nCreated automatically from project notes.\n' > community-project/generated/summary.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C community-project commit -q -m 'Start community project'\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 9:30 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C community-project commit -q -m 'Update community schedule'\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0130\n' > community-project/contacts.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-03T12:00:00Z GIT_COMMITTER_DATE=2026-01-03T12:00:00Z git -C community-project commit -q -m 'Update community contacts'\nrm -f -- community-project/schedule.txt\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 9:30 AM\n' > community-project/events.txt\ngit -C community-project add -- events.txt\ngit -C community-project add -A\n"
+                }
+              },
+              "solutionFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0100\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Old planning notes\n\nSpring flyer draft.\n' > community-project/old-notes.txt\nmkdir -p -- community-project/generated\nprintf %s 'Generated summary\n\nCreated automatically from project notes.\n' > community-project/generated/summary.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C community-project commit -q -m 'Start community project'\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 9:30 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C community-project commit -q -m 'Update community schedule'\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0130\n' > community-project/contacts.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-03T12:00:00Z GIT_COMMITTER_DATE=2026-01-03T12:00:00Z git -C community-project commit -q -m 'Update community contacts'\nrm -f -- community-project/schedule.txt\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 9:30 AM\n' > community-project/events.txt\ngit -C community-project add -- events.txt\ngit -C community-project add -A\n"
+                }
+              },
+              "instructions": "The schedule rename is already staged. Remove tracked `old-notes.txt`, then inspect the staged name-status summary so both structural changes are visible.",
+              "terminalExpectations": {
+                "forbiddenCommands": {
+                  "0": {
+                    "message": "That action can discard or rewrite history. Use the safe, layer-specific workflow taught in this course."
+                  }
+                },
+                "requiredCommands": {
+                  "0": {
+                    "message": "Did you remove the obsolete tracked planning notes?"
+                  },
+                  "1": {
+                    "message": "Did you inspect the staged structural summary?"
+                  }
+                }
+              }
+            },
+            "try_rename_and_remove_tracked_files_sketch3": {
+              "title": "Commit the Structural Cleanup",
+              "prompt": "The rename and removal form one organization purpose. Record them with the message `Organize community project files`, then confirm that short status is clean.",
+              "hint": "Commit the prepared path cleanup and verify the current state.",
+              "help": {
+                "concept": "Related path maintenance can form one commit when it serves one cleanup purpose.",
+                "hint_1": "Use Organize community project files exactly.",
+                "hint_2": "The short status should be empty afterward."
+              },
+              "starterCode": "Community schedule\n\nSaturday cleanup: 9:30 AM\n",
+              "solutionCode": "git commit -m \"Organize community project files\"\ngit status --short",
+              "starterFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0100\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Old planning notes\n\nSpring flyer draft.\n' > community-project/old-notes.txt\nmkdir -p -- community-project/generated\nprintf %s 'Generated summary\n\nCreated automatically from project notes.\n' > community-project/generated/summary.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C community-project commit -q -m 'Start community project'\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 9:30 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C community-project commit -q -m 'Update community schedule'\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0130\n' > community-project/contacts.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-03T12:00:00Z GIT_COMMITTER_DATE=2026-01-03T12:00:00Z git -C community-project commit -q -m 'Update community contacts'\nrm -f -- community-project/schedule.txt\nrm -f -- community-project/old-notes.txt\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 9:30 AM\n' > community-project/events.txt\ngit -C community-project add -A\n"
+                }
+              },
+              "solutionFiles": {
+                "zoeskoul_setup_sh": {
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0100\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Old planning notes\n\nSpring flyer draft.\n' > community-project/old-notes.txt\nmkdir -p -- community-project/generated\nprintf %s 'Generated summary\n\nCreated automatically from project notes.\n' > community-project/generated/summary.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C community-project commit -q -m 'Start community project'\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 9:30 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C community-project commit -q -m 'Update community schedule'\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0130\n' > community-project/contacts.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-03T12:00:00Z GIT_COMMITTER_DATE=2026-01-03T12:00:00Z git -C community-project commit -q -m 'Update community contacts'\nrm -f -- community-project/schedule.txt\nrm -f -- community-project/old-notes.txt\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 9:30 AM\n' > community-project/events.txt\ngit -C community-project add -A\n"
+                }
+              },
+              "instructions": "The rename and removal form one organization purpose. Record them with the message `Organize community project files`, then confirm that short status is clean.",
+              "terminalExpectations": {
+                "forbiddenCommands": {
+                  "0": {
+                    "message": "That action can discard or rewrite history. Use the safe, layer-specific workflow taught in this course."
+                  }
+                },
+                "requiredCommands": {
+                  "0": {
+                    "message": "Did you record the prepared structural cleanup?"
+                  },
+                  "1": {
+                    "message": "Did you verify that no unfinished tracked paths remain?"
+                  }
+                }
+              }
+            }
+          },
+          "practice": {
+            "single-choice-1": {
+              "title": "Purpose of git mv",
+              "prompt": "What is the primary purpose of the `git mv` command?",
+              "hint": "Focus on what the command or concept observes or changes at this point in the workflow.",
+              "help": {
+                "concept": "Use Git-aware structural operations, review the staged paths, and record a cleanup without losing earlier versions.",
+                "hint_1": "Remove options that act on a different repository layer than the one named in the question.",
+                "hint_2": "Choose the answer that remains accurate even when other unrelated files exist."
+              },
+              "options": {
+                "a": "To move a file without tracking",
+                "b": "To rename a file and stage the change",
+                "c": "To delete a file",
+                "d": "To create a new file"
+              }
+            },
+            "single-choice-2": {
+              "title": "Effect of git rm",
+              "prompt": "What happens when you use the `git rm` command?",
+              "hint": "Focus on what the command or concept observes or changes at this point in the workflow.",
+              "help": {
+                "concept": "Use Git-aware structural operations, review the staged paths, and record a cleanup without losing earlier versions.",
+                "hint_1": "Remove options that act on a different repository layer than the one named in the question.",
+                "hint_2": "Choose the answer that remains accurate even when other unrelated files exist."
+              },
+              "options": {
+                "a": "The file is moved to a new location",
+                "b": "The file is removed from the working directory and staged for deletion",
+                "c": "The file is renamed",
+                "d": "The file is ignored"
+              }
+            },
+            "multi-choice-1": {
+              "title": "Commands to Verify Staged Changes",
+              "prompt": "Which commands can you use to verify staged changes before committing?",
+              "hint": "Judge each option independently; choose only the statements that stay true in this exact repository state.",
+              "help": {
+                "concept": "Use Git-aware structural operations, review the staged paths, and record a cleanup without losing earlier versions.",
+                "hint_1": "A partly true option is still wrong if it adds an effect Git does not guarantee.",
+                "hint_2": "Use the layer named in the prompt—working tree, staging area, or history—to test each choice."
+              },
+              "options": {
+                "a": "git status",
+                "b": "git diff",
+                "c": "git diff --staged",
+                "d": "git log"
+              }
+            },
+            "drag-reorder-1": {
+              "title": "Steps to Rename and Commit a File",
+              "prompt": "Arrange the steps to rename a file and commit the change using Git.",
+              "hint": "Start with the state that must exist before the next action can make sense.",
+              "help": {
+                "concept": "Use Git-aware structural operations, review the staged paths, and record a cleanup without losing earlier versions.",
+                "hint_1": "Track how the project moves from working files to a proposed snapshot and then to history.",
+                "hint_2": "Read the ordered steps as one continuous repository story."
+              },
+              "tokens": {
+                "t1": "Use git mv to rename the file",
+                "t2": "Check the status with git status",
+                "t3": "Commit the change with git commit"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "git-foundations": {
+      "git-foundations-module-3-manage-tracked-files": {
+        "rename-and-remove-tracked-files": {
+          "sketch0": {
+            "title": "Tracked Paths Change with the Project",
+            "bodyMarkdown": "Projects evolve even when they contain only text files. `git mv` stages a tracked rename, and `git rm` stages a tracked removal. Git ultimately records the before-and-after snapshots."
+          },
+          "sketch1": {
+            "title": "Structural Changes Need Review",
+            "bodyMarkdown": "`git diff --staged --name-status` summarizes staged additions, deletions, and likely renames. Review the path changes before recording them."
+          },
+          "sketch3": {
+            "title": "Group One Cleanup Purpose",
+            "bodyMarkdown": "Renaming the schedule and removing obsolete notes serve one organization purpose, so they can share one focused commit."
+          }
+        }
+      }
+    }
+  }
+}

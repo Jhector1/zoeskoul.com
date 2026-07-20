@@ -46,6 +46,23 @@ import type {
 } from "@zoeskoul/curriculum-contracts";
 import { resolveEditableWorkspaceFileId } from "@/components/code/runner/workspaceEditing";
 import { learnerUiFlags } from "@/lib/config/learnerUiFlags";
+import {
+    buildWorkspaceTerminalHostKey,
+    buildWorkspaceTerminalOwnerKey,
+    canCreateWorkspaceTerminalTab,
+    cancelTerminalHostNow,
+    cancelWorkspaceTerminalOwner,
+    clearScheduledTerminalHostCleanup,
+    createWorkspaceTerminalTab,
+    getOrCreateTerminalWindowId,
+    heartbeatTerminalHost,
+    loadWorkspaceTerminalTabs,
+    readTerminalCapacity,
+    saveWorkspaceTerminalTabs,
+    scheduleTerminalHostCleanup,
+    type TerminalCapacity,
+    type WorkspaceTerminalTab,
+} from "@/components/code/runner/workspaceTerminalHosts";
 import type {
     CodeRunnerController,
     WorkspaceTerminalController,
@@ -601,6 +618,119 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         isAuthenticated === true &&
         lang !== "sql" &&
         !isWeb;
+    const [terminalWindowId, setTerminalWindowId] = useState<string | null>(null);
+    const [terminalTabs, setTerminalTabs] = useState<WorkspaceTerminalTab[]>([
+        { id: "primary", label: "Terminal 1" },
+    ]);
+    const [activeTerminalId, setActiveTerminalId] = useState("primary");
+    const [terminalCapacity, setTerminalCapacity] = useState<TerminalCapacity>({
+        activeCount: 0,
+        maxActiveSessions: 4,
+    });
+    const [terminalTabMessage, setTerminalTabMessage] = useState<string | null>(null);
+    const [hydratedTerminalHostKey, setHydratedTerminalHostKey] = useState<string | null>(null);
+
+    useEffect(() => {
+        setTerminalWindowId(getOrCreateTerminalWindowId());
+    }, []);
+
+    const terminalExperienceKey = useMemo(
+        () =>
+            String(
+                workspaceTerminal?.terminalHostKey ??
+                    workspaceTerminal?.historyScopeKey ??
+                    workspaceTerminal?.projectId ??
+                    `standalone:${lang}:${workspaceTerminal?.cwd ?? "/workspace"}`,
+            ),
+        [
+            lang,
+            workspaceTerminal?.cwd,
+            workspaceTerminal?.historyScopeKey,
+            workspaceTerminal?.projectId,
+            workspaceTerminal?.terminalHostKey,
+        ],
+    );
+    const resolvedTerminalHostKey = useMemo(() => {
+        if (!terminalWindowId || !workspaceTerminalEnabled) return null;
+
+        return buildWorkspaceTerminalHostKey({
+            windowId: terminalWindowId,
+            experienceKey: terminalExperienceKey,
+        });
+    }, [terminalExperienceKey, terminalWindowId, workspaceTerminalEnabled]);
+    const activeTerminalOwnerKey = useMemo(
+        () =>
+            resolvedTerminalHostKey
+                ? buildWorkspaceTerminalOwnerKey({
+                      hostKey: resolvedTerminalHostKey,
+                      terminalId: activeTerminalId,
+                  })
+                : null,
+        [activeTerminalId, resolvedTerminalHostKey],
+    );
+
+    useEffect(() => {
+        if (!resolvedTerminalHostKey) return;
+
+        clearScheduledTerminalHostCleanup(resolvedTerminalHostKey);
+        const restored = loadWorkspaceTerminalTabs(resolvedTerminalHostKey);
+        setTerminalTabs(restored.tabs);
+        setActiveTerminalId(restored.activeId);
+        setHydratedTerminalHostKey(resolvedTerminalHostKey);
+
+        const handlePageHide = () => {
+            cancelTerminalHostNow(resolvedTerminalHostKey);
+        };
+        const heartbeat = () => {
+            void heartbeatTerminalHost(resolvedTerminalHostKey);
+        };
+        heartbeat();
+        const heartbeatTimer = window.setInterval(heartbeat, 25_000);
+        window.addEventListener("pagehide", handlePageHide);
+
+        return () => {
+            window.clearInterval(heartbeatTimer);
+            window.removeEventListener("pagehide", handlePageHide);
+            scheduleTerminalHostCleanup(resolvedTerminalHostKey);
+        };
+    }, [resolvedTerminalHostKey]);
+
+    useEffect(() => {
+        if (
+            !resolvedTerminalHostKey ||
+            hydratedTerminalHostKey !== resolvedTerminalHostKey
+        ) {
+            return;
+        }
+        saveWorkspaceTerminalTabs(
+            resolvedTerminalHostKey,
+            terminalTabs,
+            activeTerminalId,
+        );
+    }, [
+        activeTerminalId,
+        hydratedTerminalHostKey,
+        resolvedTerminalHostKey,
+        terminalTabs,
+    ]);
+
+    const refreshTerminalCapacity = useCallback(async () => {
+        if (!workspaceTerminalEnabled) return null;
+
+        try {
+            const next = await readTerminalCapacity();
+            setTerminalCapacity(next);
+            return next;
+        } catch {
+            return null;
+        }
+    }, [workspaceTerminalEnabled]);
+
+    useEffect(() => {
+        if (!workspaceTerminalEnabled) return;
+        void refreshTerminalCapacity();
+    }, [refreshTerminalCapacity, workspaceTerminalEnabled]);
+
     const terminalOnlyMode = !showEditor && showTerminal && workspaceTerminalEnabled;
     const [outputTab, setOutputTab] = useState<OutputTab>(() =>
         resolveRunnerPaneDefaultTab({
@@ -1100,11 +1230,18 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
     } as any);
 
     const workspaceTerm = useWorkspaceTerminalController({
-        enabled: workspaceTerminalEnabled,
+        enabled:
+            workspaceTerminalEnabled &&
+            Boolean(resolvedTerminalHostKey) &&
+            hydratedTerminalHostKey === resolvedTerminalHostKey &&
+            Boolean(activeTerminalOwnerKey),
         projectId: workspaceTerminal?.projectId,
         cwd: workspaceTerminal?.cwd,
         bootstrap: workspaceTerminal?.bootstrap,
         workspaceKey: workspaceTerminal?.workspaceKey ?? effectiveExerciseStateKey,
+        terminalHostKey: resolvedTerminalHostKey ?? undefined,
+        terminalOwnerKey: activeTerminalOwnerKey ?? undefined,
+        preserveSessionOnUnmount: true,
         initialFiles: workspaceTerminal?.initialFiles,
         getWorkspaceFiles: workspaceTerminal?.getWorkspaceFiles,
         onTerminalSnapshotFiles: workspaceTerminal?.onTerminalSnapshotFiles,
@@ -1117,6 +1254,16 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
     useEffect(() => {
         onTerminalEvidenceChange?.(workspaceTerm.terminalEvidence);
     }, [onTerminalEvidenceChange, workspaceTerm.terminalEvidence]);
+
+    useEffect(() => {
+        if (!workspaceTerm.sessionId) return;
+
+        const timer = window.setTimeout(() => {
+            void refreshTerminalCapacity();
+        }, 250);
+
+        return () => window.clearTimeout(timer);
+    }, [refreshTerminalCapacity, workspaceTerm.sessionId]);
 
     const syncWorkspaceAndTerminalEvidenceNow = useCallback(async () => {
         const ok = await workspaceTerm.syncWorkspaceNow();
@@ -1179,7 +1326,10 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
 
 
     const terminalAutoOpenKey = buildTerminalAutoOpenKey({
-        workspaceKey: workspaceTerminal?.workspaceKey,
+        workspaceKey: [
+            workspaceTerminal?.workspaceKey ?? effectiveExerciseStateKey,
+            activeTerminalOwnerKey ?? "pending-owner",
+        ].join("::"),
         exerciseStateKey: effectiveExerciseStateKey,
         projectId: workspaceTerminal?.projectId,
         cwd: workspaceTerminal?.cwd,
@@ -1561,6 +1711,97 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
     });
 
 
+    const selectWorkspaceTerminalTab = useCallback(
+        (terminalId: string) => {
+            setTerminalTabMessage(null);
+            setActiveTerminalId(terminalId);
+            setOutputTab("terminal");
+
+            if (isNarrowScreen && showEditor && showTerminal) {
+                setMobilePane("output");
+            }
+        },
+        [isNarrowScreen, showEditor, showTerminal],
+    );
+
+    const addWorkspaceTerminalTab = useCallback(async () => {
+        if (!resolvedTerminalHostKey || disabled) return;
+
+        const latestCapacity = await refreshTerminalCapacity();
+        const maxActiveSessions =
+            latestCapacity?.maxActiveSessions ?? terminalCapacity.maxActiveSessions;
+        const activeCount = latestCapacity?.activeCount ?? terminalCapacity.activeCount;
+
+        if (
+            !canCreateWorkspaceTerminalTab({
+                activeCount,
+                terminalTabCount: terminalTabs.length,
+                maxActiveSessions,
+            })
+        ) {
+            setTerminalTabMessage(
+                `Terminal limit reached (${maxActiveSessions}). Close a terminal before opening another.`,
+            );
+            return;
+        }
+
+        const nextNumber =
+            terminalTabs.reduce((max, tab) => {
+                const match = tab.label.match(/(\d+)$/);
+                return Math.max(max, match ? Number(match[1]) : 0);
+            }, 0) + 1;
+        const nextTab = createWorkspaceTerminalTab(nextNumber);
+
+        setTerminalTabs((current) => [...current, nextTab]);
+        setActiveTerminalId(nextTab.id);
+        setTerminalTabMessage(null);
+        setOutputTab("terminal");
+        terminalAutoOpenRequestedKeyRef.current = null;
+
+        if (isNarrowScreen && showEditor && showTerminal) {
+            setMobilePane("output");
+        }
+    }, [
+        disabled,
+        isNarrowScreen,
+        refreshTerminalCapacity,
+        resolvedTerminalHostKey,
+        showEditor,
+        showTerminal,
+        terminalCapacity.activeCount,
+        terminalCapacity.maxActiveSessions,
+        terminalTabs,
+    ]);
+
+    const closeWorkspaceTerminalTab = useCallback(
+        async (terminalId: string) => {
+            if (!resolvedTerminalHostKey || terminalTabs.length <= 1) return;
+
+            const ownerKey = buildWorkspaceTerminalOwnerKey({
+                hostKey: resolvedTerminalHostKey,
+                terminalId,
+            });
+            const closingIndex = terminalTabs.findIndex((tab) => tab.id === terminalId);
+            const remaining = terminalTabs.filter((tab) => tab.id !== terminalId);
+            const nextActive =
+                terminalId === activeTerminalId
+                    ? remaining[Math.max(0, Math.min(closingIndex, remaining.length - 1))]?.id
+                    : activeTerminalId;
+
+            setTerminalTabs(remaining);
+            setActiveTerminalId(nextActive ?? remaining[0].id);
+            setTerminalTabMessage(null);
+            await cancelWorkspaceTerminalOwner(ownerKey);
+            await refreshTerminalCapacity();
+        },
+        [
+            activeTerminalId,
+            refreshTerminalCapacity,
+            resolvedTerminalHostKey,
+            terminalTabs,
+        ],
+    );
+
     const openWorkspaceTerminalPane = useCallback(async () => {
         setOutputTab("terminal");
 
@@ -1678,41 +1919,108 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                     ...(typeof panelWidth === "number" ? { width: panelWidth } : {}),
                 }}
             >
-                {showWorkspaceTerminalTab && !terminalOnlyMode ? (
+                {showWorkspaceTerminalTab ? (
                     <div className={cx("p-2", PANEL_TABS)}>
-                        <div className="flex items-center gap-2">
-                            <button
-                                type="button"
-                                onClick={() => setOutputTab("output")}
-                                className={cx(
-                                    MOBILE_TAB_BASE,
-                                    outputTab === "output" ? MOBILE_TAB_OUTPUT_ACTIVE : MOBILE_TAB_IDLE,
-                                )}
-                                aria-pressed={outputTab === "output"}
-                            >
-                                {outputLabel}
-                                {mobileTabAttention && outputTab !== "output" ? (
-                                    <span className="inline-flex h-2 w-2 rounded-full bg-sky-500" />
-                                ) : null}
-                            </button>
+                        <div className="flex min-w-0 items-center gap-2">
+                            {!terminalOnlyMode ? (
+                                <button
+                                    type="button"
+                                    onClick={() => setOutputTab("output")}
+                                    className={cx(
+                                        MOBILE_TAB_BASE,
+                                        outputTab === "output"
+                                            ? MOBILE_TAB_OUTPUT_ACTIVE
+                                            : MOBILE_TAB_IDLE,
+                                    )}
+                                    aria-pressed={outputTab === "output"}
+                                >
+                                    {outputLabel}
+                                    {mobileTabAttention && outputTab !== "output" ? (
+                                        <span className="inline-flex h-2 w-2 rounded-full bg-sky-500" />
+                                    ) : null}
+                                </button>
+                            ) : null}
+
+                            <div className="flex min-w-0 flex-1 items-center gap-1 overflow-x-auto">
+                                {terminalTabs.map((tab) => {
+                                    const active =
+                                        outputTab === "terminal" &&
+                                        tab.id === activeTerminalId;
+
+                                    return (
+                                        <div
+                                            key={tab.id}
+                                            className={cx(
+                                                "inline-flex shrink-0 items-center rounded-lg",
+                                                active
+                                                    ? MOBILE_TAB_ACTIVE
+                                                    : MOBILE_TAB_IDLE,
+                                            )}
+                                        >
+                                            <button
+                                                type="button"
+                                                onClick={() => selectWorkspaceTerminalTab(tab.id)}
+                                                className="inline-flex items-center gap-1 px-2 py-1.5 text-xs font-semibold"
+                                                aria-pressed={active}
+                                            >
+                                                <span>{tab.label}</span>
+                                                {active &&
+                                                (workspaceTerm.started ||
+                                                    workspaceTerm.busy ||
+                                                    workspaceTerm.starting) ? (
+                                                    <span className="inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+                                                ) : null}
+                                            </button>
+
+                                            {terminalTabs.length > 1 ? (
+                                                <button
+                                                    type="button"
+                                                    onClick={() => {
+                                                        void closeWorkspaceTerminalTab(tab.id);
+                                                    }}
+                                                    className="px-1.5 py-1 text-xs opacity-70 hover:opacity-100"
+                                                    aria-label={`Close ${tab.label}`}
+                                                >
+                                                    ×
+                                                </button>
+                                            ) : null}
+                                        </div>
+                                    );
+                                })}
+                            </div>
 
                             <button
                                 type="button"
                                 onClick={() => {
-                                    setOutputTab("terminal");
+                                    void addWorkspaceTerminalTab();
                                 }}
-                                className={cx(
-                                    MOBILE_TAB_BASE,
-                                    outputTab === "terminal" ? MOBILE_TAB_ACTIVE : MOBILE_TAB_IDLE,
-                                )}
-                                aria-pressed={outputTab === "terminal"}
+                                disabled={
+                                    disabled ||
+                                    !canCreateWorkspaceTerminalTab({
+                                        activeCount: terminalCapacity.activeCount,
+                                        terminalTabCount: terminalTabs.length,
+                                        maxActiveSessions:
+                                            terminalCapacity.maxActiveSessions,
+                                    })
+                                }
+                                className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-neutral-300 text-base font-bold text-neutral-700 disabled:cursor-not-allowed disabled:opacity-40 dark:border-white/15 dark:text-white/80"
+                                aria-label="New terminal"
+                                title={`New terminal (${terminalCapacity.activeCount}/${terminalCapacity.maxActiveSessions} active)`}
                             >
-                                <span>{workspaceTerminal?.title ?? t("terminalTab")}</span>
-                                {(workspaceTerm.started || workspaceTerm.busy || workspaceTerm.starting) ? (
-                                    <span className="inline-flex h-2 w-2 rounded-full bg-emerald-500" />
-                                ) : null}
+                                +
                             </button>
+
+                            <span className="shrink-0 text-[10px] font-semibold text-neutral-500 dark:text-white/45">
+                                {terminalCapacity.activeCount}/
+                                {terminalCapacity.maxActiveSessions}
+                            </span>
                         </div>
+
+                        {terminalTabMessage ? (
+                            <div className="mt-1 text-[11px] font-semibold text-amber-600 dark:text-amber-300">
+                                {terminalTabMessage}
+                            </div>
+                        ) : null}
                     </div>
                 ) : null}
 

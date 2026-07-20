@@ -1,0 +1,841 @@
+{
+  "topicId": "read-tracked-and-untracked-state",
+  "subjectSlug": "git-foundations",
+  "moduleSlug": "git-foundations-module-1-start-tracking",
+  "sectionSlug": "git-foundations-git-foundations-section-1-repository-basics",
+  "prefix": "git_foundations_module_1",
+  "minutes": 18,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "bash",
+    "supportsTerminal": true,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "runnerBackend": "pty",
+    "layoutMode": "default",
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": true
+    },
+    "preset": "runner",
+    "terminalBootstrap": {
+      "gitSafeDirectories": [
+        "/workspace/*"
+      ]
+    }
+  },
+  "topic": {
+    "labelKey": "topics.git-foundations.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.label",
+    "summaryKey": "topics.git-foundations.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.git-foundations.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.cards.sketch0.title",
+      "sketchId": "sketch0",
+      "height": 420,
+      "tryIt": {
+        "id": "try-read-tracked-and-untracked-state-sketch0",
+        "titleKey": "topics.git-foundations.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch0.title",
+        "promptKey": "topics.git-foundations.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch0.prompt",
+        "exerciseKey": "try-read-tracked-and-untracked-state-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.git-foundations.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.cards.sketch1.title",
+      "sketchId": "sketch1",
+      "height": 420,
+      "tryIt": {
+        "id": "try-read-tracked-and-untracked-state-sketch1",
+        "titleKey": "topics.git-foundations.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch1.title",
+        "promptKey": "topics.git-foundations.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch1.prompt",
+        "exerciseKey": "try-read-tracked-and-untracked-state-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.git-foundations.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.cards.sketch2.title",
+      "sketchId": "sketch2",
+      "height": 420,
+      "tryIt": {
+        "id": "try-read-tracked-and-untracked-state-sketch2",
+        "titleKey": "topics.git-foundations.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch2.title",
+        "promptKey": "topics.git-foundations.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch2.prompt",
+        "exerciseKey": "try-read-tracked-and-untracked-state-sketch2",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.git-foundations.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 4,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch0",
+      "archetype": "paragraph",
+      "titleKey": "sketches.git-foundations.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.sketch0.title",
+      "bodyKey": "sketches.git-foundations.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.sketch0.bodyMarkdown"
+    },
+    {
+      "id": "sketch1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.git-foundations.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.sketch1.title",
+      "bodyKey": "sketches.git-foundations.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.sketch1.bodyMarkdown"
+    },
+    {
+      "id": "sketch2",
+      "archetype": "paragraph",
+      "titleKey": "sketches.git-foundations.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.sketch2.title",
+      "bodyKey": "sketches.git-foundations.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.sketch2.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "single-choice-2",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.git-foundations.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.practice.single-choice-2",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "c"
+      }
+    },
+    {
+      "id": "multi-choice-1",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.git-foundations.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.practice.multi-choice-1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "fill-blank-choice-1",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.git-foundations.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.practice.fill-blank-choice-1",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "M"
+      }
+    },
+    {
+      "id": "fill-blank-choice-2",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.git-foundations.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.practice.fill-blank-choice-2",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "??"
+      }
+    },
+    {
+      "id": "try-read-tracked-and-untracked-state-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.git-foundations.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch0",
+      "language": "bash",
+      "starterCode": "# Community Site\n\nLocal events and resources.\n",
+      "starterFiles": [
+        {
+          "path": "community-site/README.md",
+          "content": "# Community Site\n\nLocal events and resources.\n",
+          "language": "markdown",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "community-site/dist/legacy-preview.js",
+          "content": "console.log('legacy preview');\n",
+          "language": "javascript"
+        },
+        {
+          "path": "community-site/index.html",
+          "content": "<!doctype html>\n<title>Community Site</title>\n<h1>Community Events</h1>\n",
+          "language": "html"
+        },
+        {
+          "path": "community-site/notes/old-events.txt",
+          "content": "Archive the spring event list.\n",
+          "language": "text"
+        },
+        {
+          "path": "community-site/styles.css",
+          "content": "body { font-family: sans-serif; }\nfooter { margin-top: 12px; }\n",
+          "language": "css"
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^git\\s+status$",
+            "message": "@:topics.git-foundations.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch0.terminalExpectations.requiredCommands.0.message"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "@:topics.git-foundations.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch0.terminalExpectations.forbiddenCommands.0.message"
+          }
+        ]
+      },
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "community-site/README.md",
+        "starterCode": "# Community Site\n\nLocal events and resources.\n",
+        "starterFiles": [
+          {
+            "path": "community-site/README.md",
+            "content": "# Community Site\n\nLocal events and resources.\n",
+            "language": "markdown",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "community-site/dist/legacy-preview.js",
+            "content": "console.log('legacy preview');\n",
+            "language": "javascript"
+          },
+          {
+            "path": "community-site/index.html",
+            "content": "<!doctype html>\n<title>Community Site</title>\n<h1>Community Events</h1>\n",
+            "language": "html"
+          },
+          {
+            "path": "community-site/notes/old-events.txt",
+            "content": "Archive the spring event list.\n",
+            "language": "text"
+          },
+          {
+            "path": "community-site/styles.css",
+            "content": "body { font-family: sans-serif; }\nfooter { margin-top: 12px; }\n",
+            "language": "css"
+          }
+        ],
+        "fixtureFiles": [
+          {
+            "path": ".zoeskoul/setup.sh",
+            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-site\nmkdir -p -- community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name 'ZoeSkoul Learner'\ngit -C community-site config --local user.email learner@zoeskoul.local\nmkdir -p -- community-site\nprintf %s '# Community Site\n\nLocal events and resources.\n' > community-site/README.md\nmkdir -p -- community-site\nprintf %s '<!doctype html>\n<title>Community Site</title>\n<h1>Community Events</h1>\n' > community-site/index.html\nmkdir -p -- community-site\nprintf %s 'body { font-family: sans-serif; }\nfooter { margin-top: 12px; }\n' > community-site/styles.css\nmkdir -p -- community-site/notes\nprintf %s 'Archive the spring event list.\n' > community-site/notes/old-events.txt\nmkdir -p -- community-site/dist\nprintf %s 'console.log('\"'\"'legacy preview'\"'\"');\n' > community-site/dist/legacy-preview.js\n",
+            "language": "bash",
+            "readOnly": true
+          },
+          {
+            "path": "community-site/README.md",
+            "content": "# Community Site\n\nLocal events and resources.\n",
+            "language": "markdown"
+          },
+          {
+            "path": "community-site/dist/legacy-preview.js",
+            "content": "console.log('legacy preview');\n",
+            "language": "javascript"
+          },
+          {
+            "path": "community-site/index.html",
+            "content": "<!doctype html>\n<title>Community Site</title>\n<h1>Community Events</h1>\n",
+            "language": "html"
+          },
+          {
+            "path": "community-site/notes/old-events.txt",
+            "content": "Archive the spring event list.\n",
+            "language": "text"
+          },
+          {
+            "path": "community-site/styles.css",
+            "content": "body { font-family: sans-serif; }\nfooter { margin-top: 12px; }\n",
+            "language": "css"
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "@:topics.git-foundations.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch0.instructions"
+      },
+      "hiddenShellCheck": {
+        "script": "set -eu\nrepo=community-site\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" branch --show-current)\" = main ] || fail \"The repository is not on main.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = 0 ] || fail \"The repository has the wrong number of commits.\"\n[ -n \"$(git -C \"$repo\" status --porcelain)\" ] || fail \"The expected unfinished change is missing.\"\nexpected=$(printf \"%s\\n\" '' | sort)\nactual=$(git -C \"$repo\" ls-files | sort)\n[ \"$actual\" = \"$expected\" ] || fail \"The tracked file set is not correct.\"\nexpected_staged=$(printf \"%s\\n\" '' | sort)\nactual_staged=$(git -C \"$repo\" diff --cached --name-only | sort)\n[ \"$actual_staged\" = \"$expected_staged\" ] || fail \"The staged file set is not correct.\"",
+        "timeoutMs": 15000
+      },
+      "ideConfig": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/community-site",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "serviceOverrides": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/community-site",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "fixtureFiles": [
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-site\nmkdir -p -- community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name 'ZoeSkoul Learner'\ngit -C community-site config --local user.email learner@zoeskoul.local\nmkdir -p -- community-site\nprintf %s '# Community Site\n\nLocal events and resources.\n' > community-site/README.md\nmkdir -p -- community-site\nprintf %s '<!doctype html>\n<title>Community Site</title>\n<h1>Community Events</h1>\n' > community-site/index.html\nmkdir -p -- community-site\nprintf %s 'body { font-family: sans-serif; }\nfooter { margin-top: 12px; }\n' > community-site/styles.css\nmkdir -p -- community-site/notes\nprintf %s 'Archive the spring event list.\n' > community-site/notes/old-events.txt\nmkdir -p -- community-site/dist\nprintf %s 'console.log('\"'\"'legacy preview'\"'\"');\n' > community-site/dist/legacy-preview.js\n",
+          "language": "bash",
+          "readOnly": true
+        },
+        {
+          "path": "community-site/README.md",
+          "content": "# Community Site\n\nLocal events and resources.\n",
+          "language": "markdown"
+        },
+        {
+          "path": "community-site/dist/legacy-preview.js",
+          "content": "console.log('legacy preview');\n",
+          "language": "javascript"
+        },
+        {
+          "path": "community-site/index.html",
+          "content": "<!doctype html>\n<title>Community Site</title>\n<h1>Community Events</h1>\n",
+          "language": "html"
+        },
+        {
+          "path": "community-site/notes/old-events.txt",
+          "content": "Archive the spring event list.\n",
+          "language": "text"
+        },
+        {
+          "path": "community-site/styles.css",
+          "content": "body { font-family: sans-serif; }\nfooter { margin-top: 12px; }\n",
+          "language": "css"
+        }
+      ]
+    },
+    {
+      "id": "try-read-tracked-and-untracked-state-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.git-foundations.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch1",
+      "language": "bash",
+      "starterCode": "# Community Site\n\nLocal events and resources.\n",
+      "starterFiles": [
+        {
+          "path": "community-site/README.md",
+          "content": "# Community Site\n\nLocal events and resources.\n",
+          "language": "markdown",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "community-site/dist/legacy-preview.js",
+          "content": "console.log('legacy preview');\n",
+          "language": "javascript"
+        },
+        {
+          "path": "community-site/index.html",
+          "content": "<!doctype html>\n<title>Community Site</title>\n<h1>Community Events</h1>\n",
+          "language": "html"
+        },
+        {
+          "path": "community-site/notes/old-events.txt",
+          "content": "Archive the spring event list.\n",
+          "language": "text"
+        },
+        {
+          "path": "community-site/styles.css",
+          "content": "body { font-family: sans-serif; }\nfooter { margin-top: 12px; }\n",
+          "language": "css"
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^git\\s+add\\s+README\\.md\\s+index\\.html\\s+styles\\.css\\s+notes/old\\-events\\.txt\\s+dist/legacy\\-preview\\.js$",
+            "message": "@:topics.git-foundations.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch1.terminalExpectations.requiredCommands.0.message"
+          },
+          {
+            "pattern": "^git\\s+status\\s+\\-\\-short$",
+            "message": "@:topics.git-foundations.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch1.terminalExpectations.requiredCommands.1.message"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "@:topics.git-foundations.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch1.terminalExpectations.forbiddenCommands.0.message"
+          }
+        ]
+      },
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "community-site/README.md",
+        "starterCode": "# Community Site\n\nLocal events and resources.\n",
+        "starterFiles": [
+          {
+            "path": "community-site/README.md",
+            "content": "# Community Site\n\nLocal events and resources.\n",
+            "language": "markdown",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "community-site/dist/legacy-preview.js",
+            "content": "console.log('legacy preview');\n",
+            "language": "javascript"
+          },
+          {
+            "path": "community-site/index.html",
+            "content": "<!doctype html>\n<title>Community Site</title>\n<h1>Community Events</h1>\n",
+            "language": "html"
+          },
+          {
+            "path": "community-site/notes/old-events.txt",
+            "content": "Archive the spring event list.\n",
+            "language": "text"
+          },
+          {
+            "path": "community-site/styles.css",
+            "content": "body { font-family: sans-serif; }\nfooter { margin-top: 12px; }\n",
+            "language": "css"
+          }
+        ],
+        "fixtureFiles": [
+          {
+            "path": ".zoeskoul/setup.sh",
+            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-site\nmkdir -p -- community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name 'ZoeSkoul Learner'\ngit -C community-site config --local user.email learner@zoeskoul.local\nmkdir -p -- community-site\nprintf %s '# Community Site\n\nLocal events and resources.\n' > community-site/README.md\nmkdir -p -- community-site\nprintf %s '<!doctype html>\n<title>Community Site</title>\n<h1>Community Events</h1>\n' > community-site/index.html\nmkdir -p -- community-site\nprintf %s 'body { font-family: sans-serif; }\nfooter { margin-top: 12px; }\n' > community-site/styles.css\nmkdir -p -- community-site/notes\nprintf %s 'Archive the spring event list.\n' > community-site/notes/old-events.txt\nmkdir -p -- community-site/dist\nprintf %s 'console.log('\"'\"'legacy preview'\"'\"');\n' > community-site/dist/legacy-preview.js\n",
+            "language": "bash",
+            "readOnly": true
+          },
+          {
+            "path": "community-site/README.md",
+            "content": "# Community Site\n\nLocal events and resources.\n",
+            "language": "markdown"
+          },
+          {
+            "path": "community-site/dist/legacy-preview.js",
+            "content": "console.log('legacy preview');\n",
+            "language": "javascript"
+          },
+          {
+            "path": "community-site/index.html",
+            "content": "<!doctype html>\n<title>Community Site</title>\n<h1>Community Events</h1>\n",
+            "language": "html"
+          },
+          {
+            "path": "community-site/notes/old-events.txt",
+            "content": "Archive the spring event list.\n",
+            "language": "text"
+          },
+          {
+            "path": "community-site/styles.css",
+            "content": "body { font-family: sans-serif; }\nfooter { margin-top: 12px; }\n",
+            "language": "css"
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "@:topics.git-foundations.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch1.instructions"
+      },
+      "hiddenShellCheck": {
+        "script": "set -eu\nrepo=community-site\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" branch --show-current)\" = main ] || fail \"The repository is not on main.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = 0 ] || fail \"The repository has the wrong number of commits.\"\n[ -n \"$(git -C \"$repo\" status --porcelain)\" ] || fail \"The expected unfinished change is missing.\"\nexpected_staged=$(printf \"%s\\n\" 'README.md\ndist/legacy-preview.js\nindex.html\nnotes/old-events.txt\nstyles.css' | sort)\nactual_staged=$(git -C \"$repo\" diff --cached --name-only | sort)\n[ \"$actual_staged\" = \"$expected_staged\" ] || fail \"The staged file set is not correct.\"",
+        "timeoutMs": 15000
+      },
+      "ideConfig": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/community-site",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "serviceOverrides": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/community-site",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "fixtureFiles": [
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-site\nmkdir -p -- community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name 'ZoeSkoul Learner'\ngit -C community-site config --local user.email learner@zoeskoul.local\nmkdir -p -- community-site\nprintf %s '# Community Site\n\nLocal events and resources.\n' > community-site/README.md\nmkdir -p -- community-site\nprintf %s '<!doctype html>\n<title>Community Site</title>\n<h1>Community Events</h1>\n' > community-site/index.html\nmkdir -p -- community-site\nprintf %s 'body { font-family: sans-serif; }\nfooter { margin-top: 12px; }\n' > community-site/styles.css\nmkdir -p -- community-site/notes\nprintf %s 'Archive the spring event list.\n' > community-site/notes/old-events.txt\nmkdir -p -- community-site/dist\nprintf %s 'console.log('\"'\"'legacy preview'\"'\"');\n' > community-site/dist/legacy-preview.js\n",
+          "language": "bash",
+          "readOnly": true
+        },
+        {
+          "path": "community-site/README.md",
+          "content": "# Community Site\n\nLocal events and resources.\n",
+          "language": "markdown"
+        },
+        {
+          "path": "community-site/dist/legacy-preview.js",
+          "content": "console.log('legacy preview');\n",
+          "language": "javascript"
+        },
+        {
+          "path": "community-site/index.html",
+          "content": "<!doctype html>\n<title>Community Site</title>\n<h1>Community Events</h1>\n",
+          "language": "html"
+        },
+        {
+          "path": "community-site/notes/old-events.txt",
+          "content": "Archive the spring event list.\n",
+          "language": "text"
+        },
+        {
+          "path": "community-site/styles.css",
+          "content": "body { font-family: sans-serif; }\nfooter { margin-top: 12px; }\n",
+          "language": "css"
+        }
+      ]
+    },
+    {
+      "id": "try-read-tracked-and-untracked-state-sketch2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.git-foundations.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch2",
+      "language": "bash",
+      "starterCode": "# Community Site\n\nLocal events and resources.\n",
+      "starterFiles": [
+        {
+          "path": "community-site/README.md",
+          "content": "# Community Site\n\nLocal events and resources.\n",
+          "language": "markdown",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "community-site/dist/legacy-preview.js",
+          "content": "console.log('legacy preview');\n",
+          "language": "javascript"
+        },
+        {
+          "path": "community-site/index.html",
+          "content": "<!doctype html>\n<title>Community Site</title>\n<h1>Community Events</h1>\n",
+          "language": "html"
+        },
+        {
+          "path": "community-site/notes/old-events.txt",
+          "content": "Archive the spring event list.\n",
+          "language": "text"
+        },
+        {
+          "path": "community-site/styles.css",
+          "content": "body { font-family: sans-serif; }\nfooter { margin-top: 12px; }\n",
+          "language": "css"
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^git\\s+diff\\s+\\-\\-staged\\s+\\-\\-stat$",
+            "message": "@:topics.git-foundations.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch2.terminalExpectations.requiredCommands.0.message"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "@:topics.git-foundations.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch2.terminalExpectations.forbiddenCommands.0.message"
+          }
+        ]
+      },
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "community-site/README.md",
+        "starterCode": "# Community Site\n\nLocal events and resources.\n",
+        "starterFiles": [
+          {
+            "path": "community-site/README.md",
+            "content": "# Community Site\n\nLocal events and resources.\n",
+            "language": "markdown",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "community-site/dist/legacy-preview.js",
+            "content": "console.log('legacy preview');\n",
+            "language": "javascript"
+          },
+          {
+            "path": "community-site/index.html",
+            "content": "<!doctype html>\n<title>Community Site</title>\n<h1>Community Events</h1>\n",
+            "language": "html"
+          },
+          {
+            "path": "community-site/notes/old-events.txt",
+            "content": "Archive the spring event list.\n",
+            "language": "text"
+          },
+          {
+            "path": "community-site/styles.css",
+            "content": "body { font-family: sans-serif; }\nfooter { margin-top: 12px; }\n",
+            "language": "css"
+          }
+        ],
+        "fixtureFiles": [
+          {
+            "path": ".zoeskoul/setup.sh",
+            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-site\nmkdir -p -- community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name 'ZoeSkoul Learner'\ngit -C community-site config --local user.email learner@zoeskoul.local\nmkdir -p -- community-site\nprintf %s '# Community Site\n\nLocal events and resources.\n' > community-site/README.md\nmkdir -p -- community-site\nprintf %s '<!doctype html>\n<title>Community Site</title>\n<h1>Community Events</h1>\n' > community-site/index.html\nmkdir -p -- community-site\nprintf %s 'body { font-family: sans-serif; }\nfooter { margin-top: 12px; }\n' > community-site/styles.css\nmkdir -p -- community-site/notes\nprintf %s 'Archive the spring event list.\n' > community-site/notes/old-events.txt\nmkdir -p -- community-site/dist\nprintf %s 'console.log('\"'\"'legacy preview'\"'\"');\n' > community-site/dist/legacy-preview.js\ngit -C community-site add -A\n",
+            "language": "bash",
+            "readOnly": true
+          },
+          {
+            "path": "community-site/README.md",
+            "content": "# Community Site\n\nLocal events and resources.\n",
+            "language": "markdown"
+          },
+          {
+            "path": "community-site/dist/legacy-preview.js",
+            "content": "console.log('legacy preview');\n",
+            "language": "javascript"
+          },
+          {
+            "path": "community-site/index.html",
+            "content": "<!doctype html>\n<title>Community Site</title>\n<h1>Community Events</h1>\n",
+            "language": "html"
+          },
+          {
+            "path": "community-site/notes/old-events.txt",
+            "content": "Archive the spring event list.\n",
+            "language": "text"
+          },
+          {
+            "path": "community-site/styles.css",
+            "content": "body { font-family: sans-serif; }\nfooter { margin-top: 12px; }\n",
+            "language": "css"
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "@:topics.git-foundations.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch2.instructions"
+      },
+      "hiddenShellCheck": {
+        "script": "set -eu\nrepo=community-site\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" branch --show-current)\" = main ] || fail \"The repository is not on main.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = 0 ] || fail \"The repository has the wrong number of commits.\"\n[ -n \"$(git -C \"$repo\" status --porcelain)\" ] || fail \"The expected unfinished change is missing.\"\nexpected_staged=$(printf \"%s\\n\" 'README.md\ndist/legacy-preview.js\nindex.html\nnotes/old-events.txt\nstyles.css' | sort)\nactual_staged=$(git -C \"$repo\" diff --cached --name-only | sort)\n[ \"$actual_staged\" = \"$expected_staged\" ] || fail \"The staged file set is not correct.\"",
+        "timeoutMs": 15000
+      },
+      "ideConfig": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/community-site",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "serviceOverrides": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/community-site",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ]
+        }
+      },
+      "fixtureFiles": [
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-site\nmkdir -p -- community-site\ngit -C community-site init -q -b main\ngit -C community-site config --local user.name 'ZoeSkoul Learner'\ngit -C community-site config --local user.email learner@zoeskoul.local\nmkdir -p -- community-site\nprintf %s '# Community Site\n\nLocal events and resources.\n' > community-site/README.md\nmkdir -p -- community-site\nprintf %s '<!doctype html>\n<title>Community Site</title>\n<h1>Community Events</h1>\n' > community-site/index.html\nmkdir -p -- community-site\nprintf %s 'body { font-family: sans-serif; }\nfooter { margin-top: 12px; }\n' > community-site/styles.css\nmkdir -p -- community-site/notes\nprintf %s 'Archive the spring event list.\n' > community-site/notes/old-events.txt\nmkdir -p -- community-site/dist\nprintf %s 'console.log('\"'\"'legacy preview'\"'\"');\n' > community-site/dist/legacy-preview.js\ngit -C community-site add -A\n",
+          "language": "bash",
+          "readOnly": true
+        },
+        {
+          "path": "community-site/README.md",
+          "content": "# Community Site\n\nLocal events and resources.\n",
+          "language": "markdown"
+        },
+        {
+          "path": "community-site/dist/legacy-preview.js",
+          "content": "console.log('legacy preview');\n",
+          "language": "javascript"
+        },
+        {
+          "path": "community-site/index.html",
+          "content": "<!doctype html>\n<title>Community Site</title>\n<h1>Community Events</h1>\n",
+          "language": "html"
+        },
+        {
+          "path": "community-site/notes/old-events.txt",
+          "content": "Archive the spring event list.\n",
+          "language": "text"
+        },
+        {
+          "path": "community-site/styles.css",
+          "content": "body { font-family: sans-serif; }\nfooter { margin-top: 12px; }\n",
+          "language": "css"
+        }
+      ]
+    }
+  ],
+  "topicMeta": {
+    "learningGoals": [
+      "Read the two columns of git status --short",
+      "Distinguish untracked, staged, and unstaged tracked files",
+      "Use repository state to choose the next safe action"
+    ]
+  }
+}

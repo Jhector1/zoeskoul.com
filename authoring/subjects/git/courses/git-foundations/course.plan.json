@@ -7,7 +7,7 @@
   "workspaceProfileId": "terminal-workspace-runner",
   "workspacePolicyId": "git-terminal-workspace",
   "title": "Git Foundations",
-  "description": "A beginner Git course with three standard modules and one final capstone. Learners work locally first, moving from an ordinary folder to a readable repository history without introducing branches, remotes, GitHub, or advanced history rewriting.",
+  "description": "A beginner local-Git course organized around three cumulative repositories. Guided lessons grow one community-site repository across the whole course, module projects continue one parallel volunteer-hub repository, and the final capstone starts a fresh neighborhood-guide repository. Learners inspect, change, and verify repository state without branches, remotes, GitHub, or assumed web-development knowledge.",
   "moduleOrder": [
     "git-foundations-module-1-start-tracking",
     "git-foundations-module-2-meaningful-history",
@@ -16,47 +16,51 @@
   ],
   "modules": [
     {
-      "moduleNumber": 1,
       "moduleSlug": "git-foundations-module-1-start-tracking",
+      "moduleNumber": 1,
       "prefix": "git_foundations_module_1",
-      "title": "Create Your First Repository",
-      "description": "Start with an ordinary folder, initialize Git on main, read what Git sees, and record the project’s first meaningful snapshot.",
-      "purpose": "Build the repository model in the order a beginner actually uses it: initialize, configure, inspect, stage, commit, and verify.",
+      "order": 1,
+      "role": "standard",
+      "title": "Start the Community Site Repository",
+      "description": "Begin with an ordinary community-site folder, initialize Git on main, configure a repository-only identity, read what Git sees, and record the first meaningful snapshot.",
+      "purpose": "Build the repository model in the order a beginner actually uses it: understand the problem, initialize, inspect state, stage, commit, and verify.",
       "learningObjectives": [
-        "Explain why one project with history is safer than a stack of duplicate final folders.",
-        "Initialize an ordinary folder as a Git repository on main.",
-        "Configure a repository-only author identity and read untracked, staged, committed, and clean state.",
-        "Stage a deliberate first snapshot, commit it, and verify the resulting history."
+        "Explain why Git history is safer and clearer than duplicate final folders.",
+        "Initialize the community-site folder on main and configure a repository-only identity.",
+        "Carry the same files from untracked state into a staged proposal and inspect that proposal.",
+        "Create and verify the first meaningful snapshot without mixing unrelated work."
       ],
       "guidedExercises": [
-        "Turn a prepared ordinary folder into a repository with git init -b main.",
-        "Read repository state before and after staging without memorizing decorative output.",
-        "Carry one small project from untracked files to a clean first commit."
+        "Turn the prepared community-site folder into a repository.",
+        "Carry the same five project files from untracked state into one staged proposal.",
+        "Record that proposal as the first commit and verify history plus clean state."
       ],
       "quizFocus": [
-        "the problem version control solves",
-        "repository initialization and local identity",
+        "why local version control matters",
+        "initialization and local identity",
         "working tree and staging area state",
-        "the transition from staged files to a committed snapshot"
+        "first-commit verification"
       ],
-      "moduleProject": "Build a Field Notes repository in five cumulative milestones, ending with one clear initial commit and a clean working tree.",
+      "moduleProject": "Continue the parallel volunteer-hub repository through five cumulative steps, ending with its first clear commit and a clean working tree.",
       "sections": [
         {
           "sectionSlug": "git-foundations-section-1-repository-basics",
-          "title": "From Folder to First Commit",
-          "summary": "Understand the problem Git solves, initialize your first repository, read its state, and move one deliberate change into history.",
+          "order": 1,
+          "title": "From Ordinary Folder to First Snapshot",
+          "description": "Begin with an ordinary community-site folder, initialize Git on main, configure a repository-only identity, read what Git sees, and record the first meaningful snapshot.",
           "topics": [
             {
               "topicId": "why-version-control-matters",
+              "order": 1,
               "title": "Why Version Control Matters",
-              "summary": "Open with a standalone story about a project losing its history, then distinguish Git from duplicate final folders and explain the safe local course workspace.",
+              "summary": "Meet the three repositories used in this course, understand what Git records locally, and learn the inspect-change-verify habit before typing a Git command.",
               "minutes": 16,
               "difficulty": "beginner",
               "technical": true,
               "learningGoals": [
-                "Explain the problem Git solves for a changing project.",
-                "Distinguish Git as a local version-control system from GitHub as a hosted collaboration platform.",
-                "Describe the inspect, change, verify habit used throughout the course."
+                "Explain what Git records locally and why project history is more useful than duplicate final folders.",
+                "Describe the guided, parallel-project, and capstone repository journeys.",
+                "Use inspect, change, and verify as the default course habit."
               ],
               "practice": {
                 "conceptualOnly": true,
@@ -74,15 +78,16 @@
             },
             {
               "topicId": "configure-and-initialize-a-repository",
-              "title": "Initialize Your First Repository",
-              "summary": "Begin with an ordinary project folder, create its Git metadata on main, inspect HEAD, and set a repository-only author identity.",
+              "order": 2,
+              "title": "Initialize the Community Site Repository",
+              "summary": "Turn the prepared community-site folder into a repository on main and store the course identity only inside that repository.",
               "minutes": 22,
               "difficulty": "beginner",
               "technical": true,
               "learningGoals": [
-                "Initialize an existing folder with main as the starting branch.",
-                "Explain what the .git directory and HEAD represent without editing repository metadata directly.",
-                "Configure user.name and user.email for one repository only."
+                "Initialize the existing community-site folder with main as its initial branch.",
+                "Explain that .git stores repository metadata without opening or editing it.",
+                "Configure the supplied author name and email only for community-site."
               ],
               "practice": {
                 "tryIt": true,
@@ -96,19 +101,25 @@
                   "fill_blank_choice",
                   "code_input"
                 ]
+              },
+              "projectJourney": {
+                "journeyId": "guided-community-site",
+                "entryMilestone": "ordinary-folder",
+                "exitMilestone": "identity-configured"
               }
             },
             {
               "topicId": "read-tracked-and-untracked-state",
-              "title": "Read the Repository State",
-              "summary": "Use full and short status views to distinguish new files, tracked changes, staged changes, and a clean working tree.",
+              "order": 3,
+              "title": "Read the Community Site State",
+              "summary": "Carry the same community-site files from untracked state into one staged proposal, then inspect what Git would record.",
               "minutes": 22,
               "difficulty": "beginner",
               "technical": true,
               "learningGoals": [
-                "Interpret the important sections of git status.",
-                "Use git status --short to read compact file state.",
-                "Distinguish untracked, modified, staged, and clean states."
+                "Read the untracked community-site files with full status.",
+                "Stage the five exact project paths and interpret short status.",
+                "Inspect the staged snapshot summary without committing it."
               ],
               "practice": {
                 "tryIt": true,
@@ -122,19 +133,25 @@
                   "fill_blank_choice",
                   "code_input"
                 ]
+              },
+              "projectJourney": {
+                "journeyId": "guided-community-site",
+                "entryMilestone": "identity-configured",
+                "exitMilestone": "state-readable"
               }
             },
             {
               "topicId": "working-tree-staging-and-history",
-              "title": "Move a Change into History",
-              "summary": "Follow one file from an ordinary edit through the staging area into a committed snapshot, checking the repository at each boundary.",
+              "order": 4,
+              "title": "Record the First Community Site Snapshot",
+              "summary": "Carry the staged community-site proposal into its first commit, then verify the new history entry and clean state.",
               "minutes": 20,
               "difficulty": "beginner",
               "technical": true,
               "learningGoals": [
-                "Describe the working tree, staging area, and commit history in plain language.",
-                "Stage one intended change and verify exactly what the next commit will contain.",
-                "Create a meaningful commit and confirm the working tree is clean."
+                "Record the already-staged community-site proposal with the exact first commit message.",
+                "Read the first concise history entry without changing repository state.",
+                "Verify that the committed working tree is clean."
               ],
               "practice": {
                 "tryIt": true,
@@ -148,20 +165,27 @@
                   "fill_blank_choice",
                   "code_input"
                 ]
+              },
+              "projectJourney": {
+                "journeyId": "guided-community-site",
+                "entryMilestone": "state-readable",
+                "exitMilestone": "first-snapshot"
               }
             }
           ]
         },
         {
           "sectionSlug": "git-foundations-section-1-module-project",
+          "order": 2,
+          "title": "Parallel Module Project",
+          "description": "Continue the same volunteer-hub repository and reapply Module 1 without copying the guided community-site task.",
           "role": "module_project",
-          "title": "Module Project",
-          "summary": "Build the Field Notes repository from an ordinary folder to a clean first commit, one milestone at a time.",
           "topics": [
             {
               "topicId": "module-1-field-notes-repository",
-              "title": "Project: Build the Field Notes Repository",
-              "summary": "Guide a neighborhood garden’s field notes through initialization, local identity, status, staging, and the first trustworthy snapshot.",
+              "order": 1,
+              "title": "Module Project: Start Volunteer Hub History",
+              "summary": "Begin the parallel volunteer-hub repository and create its first clean snapshot through five cumulative steps.",
               "minutes": 55,
               "difficulty": "beginner",
               "technical": true,
@@ -182,47 +206,55 @@
                 ]
               },
               "projectBrief": {
-                "scenario": "A neighborhood garden coordinator keeps plot observations in a folder, but every revision currently replaces the previous one. The next volunteer needs a trustworthy starting point before more notes are added.",
-                "role": "Junior developer preparing the garden field-notes repository",
-                "workspace": "A cumulative garden-notes/ project whose completed milestone is restored automatically before the next step opens.",
-                "deliverable": "A five-milestone local repository on main with a repository-only identity, three tracked project files, one meaningful initial commit, and a clean working tree.",
+                "scenario": "A volunteer coordinator has an ordinary volunteer-hub folder with a README and planning notes. Build its first trustworthy local snapshot.",
+                "role": "Act as the person preparing the project for reliable local change tracking.",
+                "workspace": "Use volunteer-hub for every step. This same repository continues in the Module 2 and Module 3 projects.",
+                "deliverable": "One repository on main with local identity, one commit named Start volunteer hub, the authored files tracked, and a clean working tree.",
                 "stepCountTarget": 5,
                 "flow": "progressive",
+                "journeyId": "parallel-volunteer-hub",
+                "continuesFromMilestone": "ordinary-folder",
+                "finalMilestone": "first-snapshot",
+                "exactEditInstructionsRequired": true,
                 "requirements": [
-                  "The learner’s first Git command is git init -b main; platform fixture preparation must remain invisible.",
-                  "Each step begins from the complete state produced by the previous milestone.",
-                  "Use only repository-local configuration for user.name and user.email.",
-                  "Grade repository state rather than exact hashes, timestamps, absolute paths, or decorative output.",
-                  "Every learner-facing prompt names only the Git and prerequisite navigation commands the learner should type, and explicitly says to press Enter.",
-                  "Never expose .zoeskoul/setup.sh in prompts, hints, starterCode, solutionCode, or terminal expectations."
+                  "Inspect the supplied folder before initialization.",
+                  "Initialize volunteer-hub on main.",
+                  "Configure the supplied local identity.",
+                  "Stage only the authored project files.",
+                  "Commit Start volunteer hub and verify clean state."
                 ],
                 "stepLadder": [
                   {
                     "step": 1,
-                    "title": "Initialize the Field Notes Repository",
-                    "requirement": "Enter garden-notes/, initialize the ordinary folder on main, and verify the current branch."
+                    "title": "Inspect the Ordinary Folder",
+                    "requirement": "Inspect volunteer-hub and confirm README.md, index.html, styles.css, and notes/schedule.txt are present before Git is initialized."
                   },
                   {
                     "step": 2,
-                    "title": "Set the Repository Identity",
-                    "requirement": "Set the repository-only learner name and email, then verify both local values."
+                    "title": "Initialize the Repository",
+                    "requirement": "Initialize volunteer-hub with main as the initial branch."
                   },
                   {
                     "step": 3,
-                    "title": "Read the Untracked Project Files",
-                    "requirement": "Use short status to identify README.md and the two observation files before anything is staged."
+                    "title": "Set the Local Identity",
+                    "requirement": "Configure ZoeSkoul Learner and learner@zoeskoul.local only inside volunteer-hub."
                   },
                   {
                     "step": 4,
-                    "title": "Stage the Field Notes",
-                    "requirement": "Stage only README.md and observations/, then inspect the staged file names."
+                    "title": "Stage the First Snapshot",
+                    "requirement": "Stage README.md, index.html, styles.css, and notes/schedule.txt, then inspect the proposed snapshot."
                   },
                   {
                     "step": 5,
-                    "title": "Create the First Snapshot",
-                    "requirement": "Commit the staged files as Start garden field notes, inspect the one-line history, and verify a clean working tree."
+                    "title": "Commit and Verify",
+                    "requirement": "Commit Start volunteer hub, inspect the one-commit history, and confirm the working tree is clean."
                   }
                 ]
+              },
+              "projectJourney": {
+                "journeyId": "parallel-volunteer-hub",
+                "entryMilestone": "ordinary-folder",
+                "exitMilestone": "first-snapshot"
               }
             }
           ]
@@ -230,47 +262,51 @@
       ]
     },
     {
-      "moduleNumber": 2,
       "moduleSlug": "git-foundations-module-2-meaningful-history",
+      "moduleNumber": 2,
       "prefix": "git_foundations_module_2",
+      "order": 2,
+      "role": "standard",
       "title": "Build Meaningful History",
-      "description": "Turn related edits into focused commits that another developer can read and inspect.",
-      "purpose": "Inspect differences, stage intentionally, write meaningful commit messages, and read the resulting history.",
+      "description": "Continue community-site by inspecting exact edits, staging one purpose at a time, creating focused commits, and reading the snapshots already recorded.",
+      "purpose": "Turn file changes into understandable history without introducing another repository story or reteaching Module 1.",
       "learningObjectives": [
-        "Use git diff to inspect unstaged changes.",
-        "Use git add and git diff --staged to prepare one focused snapshot.",
-        "Create cohesive commits with meaningful imperative messages.",
-        "Read history with git log --oneline and inspect a commit with git show."
+        "Use git diff to inspect an exact unstaged text change before staging it.",
+        "Stage one purpose while leaving unrelated work outside the next commit.",
+        "Inspect staged changes, create a focused commit, and verify the remaining work.",
+        "Read concise history and inspect a committed snapshot with log and show."
       ],
       "guidedExercises": [
-        "Separate two unrelated edits before staging.",
-        "Compare working-tree and staged differences.",
-        "Build and inspect a readable multi-commit history."
+        "Inspect supplied HTML, CSS, and text edits without needing web-development knowledge.",
+        "Build two focused community-site commits from separate project purposes.",
+        "Use log and show to answer questions about the history just created."
       ],
       "quizFocus": [
-        "unstaged versus staged diff",
-        "selective staging",
-        "commit purpose",
-        "history inspection"
+        "unstaged versus staged diffs",
+        "intentional staging boundaries",
+        "focused commit messages",
+        "log and show"
       ],
-      "moduleProject": "Build a two-change Community Website history with focused commits and a clean final state.",
+      "moduleProject": "Continue volunteer-hub from Module 1 and build a focused two-change history through six cumulative steps.",
       "sections": [
         {
           "sectionSlug": "git-foundations-section-2-history-workflow",
-          "title": "From Edits to Understandable Snapshots",
-          "summary": "Follow a small change from diff to staging to commit, then read the history it creates.",
+          "order": 1,
+          "title": "From Exact Edits to Focused History",
+          "description": "Continue community-site by inspecting exact edits, staging one purpose at a time, creating focused commits, and reading the snapshots already recorded.",
           "topics": [
             {
               "topicId": "inspect-unstaged-changes-with-diff",
-              "title": "Inspect Unstaged Changes with git diff",
-              "summary": "Read line-level differences before deciding what belongs in the next commit.",
+              "order": 1,
+              "title": "Inspect Exact Project Changes",
+              "summary": "Continue community-site and inspect supplied text edits before deciding what belongs in history.",
               "minutes": 20,
               "difficulty": "beginner",
               "technical": true,
               "learningGoals": [
-                "Use git diff to inspect tracked unstaged edits.",
-                "Read added and removed lines without treating the diff header as file content.",
-                "Notice unrelated edits before they are accidentally grouped together."
+                "Inspect an exact supplied change with git diff before staging it.",
+                "Limit diff inspection to a named file when several files changed.",
+                "Read added and removed lines without needing HTML, CSS, or JavaScript knowledge."
               ],
               "practice": {
                 "tryIt": true,
@@ -284,19 +320,25 @@
                   "fill_blank_choice",
                   "code_input"
                 ]
+              },
+              "projectJourney": {
+                "journeyId": "guided-community-site",
+                "entryMilestone": "first-snapshot",
+                "exitMilestone": "html-change-visible"
               }
             },
             {
               "topicId": "stage-intentionally",
-              "title": "Stage Intentionally",
-              "summary": "Use git add to prepare selected files and git diff --staged to verify the exact snapshot before committing.",
+              "order": 2,
+              "title": "Stage One Purpose at a Time",
+              "summary": "Separate supplied community-site edits so each commit records one understandable project purpose.",
               "minutes": 22,
               "difficulty": "beginner",
               "technical": true,
               "learningGoals": [
-                "Stage one file without automatically staging every workspace change.",
-                "Use git diff --staged to inspect the proposed commit.",
-                "Move a file between unstaged and staged state without losing its content."
+                "Stage only the files that belong to one community-site purpose.",
+                "Inspect the staged snapshot separately from remaining working-tree changes.",
+                "Create a focused commit and verify that unrelated work remains outside it."
               ],
               "practice": {
                 "tryIt": true,
@@ -310,45 +352,25 @@
                   "fill_blank_choice",
                   "code_input"
                 ]
-              }
-            },
-            {
-              "topicId": "create-focused-commits",
-              "title": "Create Focused Commits",
-              "summary": "Record one coherent change with a message that explains the purpose of the snapshot.",
-              "minutes": 24,
-              "difficulty": "beginner",
-              "technical": true,
-              "learningGoals": [
-                "Create a commit from staged changes.",
-                "Write a concise imperative commit subject.",
-                "Explain why commit boundaries should match one meaningful purpose."
-              ],
-              "practice": {
-                "tryIt": true,
-                "requiresTryIt": true,
-                "tryItPlacement": "all_sketches",
-                "runtimeMode": "terminal_workspace",
-                "terminalSessionScope": "exercise",
-                "expectedPracticeKinds": [
-                  "single_choice",
-                  "multi_choice",
-                  "fill_blank_choice",
-                  "code_input"
-                ]
+              },
+              "projectJourney": {
+                "journeyId": "guided-community-site",
+                "entryMilestone": "html-change-visible",
+                "exitMilestone": "focused-history"
               }
             },
             {
               "topicId": "read-history-with-log-and-show",
-              "title": "Read History with log and show",
-              "summary": "Use compact history and commit inspection to understand what changed without opening every file manually.",
+              "order": 3,
+              "title": "Read the History You Built",
+              "summary": "Use concise history and committed-snapshot inspection to answer questions about community-site without changing it.",
               "minutes": 22,
               "difficulty": "beginner",
               "technical": true,
               "learningGoals": [
-                "Read commit order with git log --oneline.",
-                "Inspect one commit with git show.",
-                "Relate the current HEAD snapshot to earlier commits."
+                "Read concise community-site history from newest to oldest.",
+                "Inspect the latest committed snapshot with git show.",
+                "Use history inspection without changing repository state."
               ],
               "practice": {
                 "tryIt": true,
@@ -362,20 +384,27 @@
                   "fill_blank_choice",
                   "code_input"
                 ]
+              },
+              "projectJourney": {
+                "journeyId": "guided-community-site",
+                "entryMilestone": "focused-history",
+                "exitMilestone": "history-readable"
               }
             }
           ]
         },
         {
           "sectionSlug": "git-foundations-section-2-module-project",
+          "order": 2,
+          "title": "Parallel Module Project",
+          "description": "Continue the same volunteer-hub repository and reapply Module 2 without copying the guided community-site task.",
           "role": "module_project",
-          "title": "Module Project",
-          "summary": "Build a two-change Community Website history with focused commits and a clean final state.",
           "topics": [
             {
               "topicId": "module-2-community-website-history",
-              "title": "Project: Build the Community Website History",
-              "summary": "Create a readable sequence of cohesive commits for a small community website instead of saving unrelated changes in one snapshot.",
+              "order": 1,
+              "title": "Module Project: Build Volunteer Hub History",
+              "summary": "Continue the same volunteer-hub repository from Module 1 and create focused content and style commits through six cumulative steps.",
               "minutes": 70,
               "difficulty": "beginner",
               "technical": true,
@@ -396,51 +425,59 @@
                 ]
               },
               "projectBrief": {
-                "scenario": "A community center website has a plain home page and an events page. Staff want the next updates recorded as a history that another developer can understand without opening every file.",
-                "role": "Junior web maintainer organizing a readable local history",
-                "workspace": "One cumulative terminal workspace rooted at community-site/ with index.html, events.html, styles.css, and an initialized repository",
-                "deliverable": "A six-step history with separate navigation and events commits, exact authored messages, preserved file content, and a clean final working tree.",
+                "scenario": "Volunteer Hub already has the clean Module 1 snapshot. Add a supplied page and supplied style change as separate project purposes.",
+                "role": "Act as the maintainer protecting a readable project history.",
+                "workspace": "Continue the same volunteer-hub repository and history from Module 1.",
+                "deliverable": "Three total commits: Start volunteer hub, Add volunteer signup page, and Add volunteer page styles, with a clean working tree.",
                 "stepCountTarget": 6,
                 "flow": "progressive",
+                "journeyId": "parallel-volunteer-hub",
+                "continuesFromMilestone": "first-snapshot",
+                "finalMilestone": "focused-history",
+                "exactEditInstructionsRequired": true,
                 "requirements": [
-                  "Keep each commit focused on one visible purpose.",
-                  "Inspect unstaged and staged differences before every commit.",
-                  "Use the previous complete repository state as the next step starter.",
-                  "Grade commit count, commit messages, HEAD file content, and clean state with gitExpectations.",
-                  "Do not require an exact git log hash or timestamp."
+                  "Use the exact supplied index.html and styles.css text.",
+                  "Inspect unstaged changes before staging.",
+                  "Stage and commit the page separately from styles.",
+                  "Inspect the resulting three-commit history."
                 ],
                 "stepLadder": [
                   {
                     "step": 1,
-                    "title": "Inspect the First Website Change",
-                    "requirement": "Read git status and git diff to identify the provided navigation edit without staging it."
+                    "title": "Edit the Signup Heading",
+                    "requirement": "Replace the exact supplied heading line in volunteer-hub/index.html, then inspect that unstaged change."
                   },
                   {
                     "step": 2,
-                    "title": "Stage Only the Navigation Update",
-                    "requirement": "Stage index.html, inspect git diff --staged, and leave the unrelated events draft unstaged."
+                    "title": "Commit the Signup Page",
+                    "requirement": "Stage only index.html and commit Add volunteer signup page."
                   },
                   {
                     "step": 3,
-                    "title": "Commit the Navigation Update",
-                    "requirement": "Create the commit Add primary navigation and verify that events.html still has an unstaged change."
+                    "title": "Edit the Footer Spacing",
+                    "requirement": "Replace the exact supplied footer line in volunteer-hub/styles.css, then inspect that unstaged change."
                   },
                   {
                     "step": 4,
-                    "title": "Prepare the Events Update",
-                    "requirement": "Finish the requested events copy, inspect its unstaged diff, and stage only events.html."
+                    "title": "Inspect the Proposed Style Snapshot",
+                    "requirement": "Stage styles.css and inspect the staged diff before committing."
                   },
                   {
                     "step": 5,
-                    "title": "Commit the Events Update",
-                    "requirement": "Create the commit Publish weekend events while preserving the earlier navigation commit."
+                    "title": "Commit the Styles",
+                    "requirement": "Commit Add volunteer page styles without changing the earlier commits."
                   },
                   {
                     "step": 6,
-                    "title": "Read and Verify the Finished History",
-                    "requirement": "Use git log --oneline and git show to inspect the two new commits, then finish with the authored files and a clean working tree."
+                    "title": "Audit the Focused History",
+                    "requirement": "Inspect the three-commit history, inspect HEAD, and confirm clean state."
                   }
                 ]
+              },
+              "projectJourney": {
+                "journeyId": "parallel-volunteer-hub",
+                "entryMilestone": "first-snapshot",
+                "exitMilestone": "focused-history"
               }
             }
           ]
@@ -448,73 +485,51 @@
       ]
     },
     {
-      "moduleNumber": 3,
       "moduleSlug": "git-foundations-module-3-manage-tracked-files",
+      "moduleNumber": 3,
       "prefix": "git_foundations_module_3",
-      "title": "Manage Tracked Files Safely",
-      "description": "Keep a repository clean as files are renamed, removed, ignored, or restored.",
-      "purpose": "Use Git-aware file operations, ignore generated artifacts, and recover from staged or unstaged mistakes without rewriting history.",
+      "order": 3,
+      "role": "standard",
+      "title": "Maintain a Clean Repository",
+      "description": "Continue community-site by changing tracked paths safely, ignoring generated output, and recovering from staged or unstaged mistakes without rewriting history.",
+      "purpose": "Teach day-to-day repository maintenance while preserving the meaningful history built in Modules 1 and 2.",
       "learningObjectives": [
-        "Read how tracked file modifications appear before and after staging.",
-        "Rename and remove tracked files with git mv and git rm.",
-        "Create and verify .gitignore rules for generated files.",
-        "Restore staged and unstaged mistakes safely."
+        "Rename and remove tracked files through Git and inspect the staged structural change.",
+        "Write exact ignore rules for generated output and stop tracking a generated file safely.",
+        "Restore an unstaged edit and unstage a proposed change without losing the tracked file.",
+        "Finish with intentional tracked files, ignored artifacts, and a clean working tree."
       ],
       "guidedExercises": [
-        "Trace a tracked file through modification and staging.",
-        "Clean a release tree with Git-aware file operations.",
-        "Recover an accidental edit while preserving intended work."
+        "Rename and remove supplied community-site paths without inventing file content.",
+        "Add exact .gitignore text and verify generated files are excluded.",
+        "Create and recover supplied temporary mistakes at the working-tree and staging layers."
       ],
       "quizFocus": [
-        "tracked file lifecycle",
-        "rename and deletion state",
-        ".gitignore behavior",
-        "safe restore scope"
+        "git-aware rename and removal",
+        "ignore rules and tracked files",
+        "restore versus restore --staged",
+        "clean final state"
       ],
-      "moduleProject": "Prepare a clean Volunteer Handbook release snapshot with ignored previews and a focused cleanup commit.",
+      "moduleProject": "Continue volunteer-hub from Module 2 and prepare one clean release snapshot through six cumulative steps.",
       "sections": [
         {
           "sectionSlug": "git-foundations-section-3-safe-file-management",
-          "title": "A Repository Changes Shape",
-          "summary": "Manage a project whose files are changing names and purposes without losing the history that explains them.",
+          "order": 1,
+          "title": "From Tracked Changes to Clean Handoff",
+          "description": "Continue community-site by changing tracked paths safely, ignoring generated output, and recovering from staged or unstaged mistakes without rewriting history.",
           "topics": [
             {
-              "topicId": "modify-and-verify-tracked-files",
-              "title": "Modify and Verify Tracked Files",
-              "summary": "Follow an already tracked file through editing, diff inspection, staging, and status verification.",
-              "minutes": 20,
-              "difficulty": "beginner",
-              "technical": true,
-              "learningGoals": [
-                "Recognize modified tracked files in full and short status.",
-                "Inspect content changes before staging them.",
-                "Verify which version is in the working tree and which version is staged."
-              ],
-              "practice": {
-                "tryIt": true,
-                "requiresTryIt": true,
-                "tryItPlacement": "all_sketches",
-                "runtimeMode": "terminal_workspace",
-                "terminalSessionScope": "exercise",
-                "expectedPracticeKinds": [
-                  "single_choice",
-                  "multi_choice",
-                  "fill_blank_choice",
-                  "code_input"
-                ]
-              }
-            },
-            {
               "topicId": "rename-and-remove-tracked-files",
+              "order": 1,
               "title": "Rename and Remove Tracked Files",
-              "summary": "Use git mv and git rm so a project cleanup is immediately represented in the staging area.",
+              "summary": "Continue community-site by moving and deleting tracked paths through Git, then inspect the staged structural change.",
               "minutes": 22,
               "difficulty": "beginner",
               "technical": true,
               "learningGoals": [
-                "Rename a tracked file with git mv.",
+                "Rename a tracked community-site file with git mv.",
                 "Remove an obsolete tracked file with git rm.",
-                "Verify staged rename and deletion state before committing."
+                "Inspect staged structural changes before committing them."
               ],
               "practice": {
                 "tryIt": true,
@@ -528,19 +543,25 @@
                   "fill_blank_choice",
                   "code_input"
                 ]
+              },
+              "projectJourney": {
+                "journeyId": "guided-community-site",
+                "entryMilestone": "history-readable",
+                "exitMilestone": "tracked-files-maintained"
               }
             },
             {
               "topicId": "ignore-generated-files",
-              "title": "Ignore Generated Files",
-              "summary": "Write focused .gitignore rules and verify that generated artifacts remain outside the repository history.",
+              "order": 2,
+              "title": "Keep Generated Files Out of History",
+              "summary": "Add exact ignore rules to community-site and stop tracking generated output without deleting the learner’s useful source files.",
               "minutes": 24,
               "difficulty": "beginner",
               "technical": true,
               "learningGoals": [
-                "Create an exact .gitignore rule for a generated file or folder.",
-                "Use git check-ignore to verify why a path is ignored.",
-                "Explain why .gitignore does not automatically untrack a file already committed."
+                "Add the exact supplied patterns to community-site/.gitignore.",
+                "Verify generated output is ignored while source files remain trackable.",
+                "Stop tracking an already-tracked generated file without deleting the working copy."
               ],
               "practice": {
                 "tryIt": true,
@@ -554,19 +575,25 @@
                   "fill_blank_choice",
                   "code_input"
                 ]
+              },
+              "projectJourney": {
+                "journeyId": "guided-community-site",
+                "entryMilestone": "tracked-files-maintained",
+                "exitMilestone": "generated-files-ignored"
               }
             },
             {
               "topicId": "restore-without-rewriting-history",
-              "title": "Restore without Rewriting History",
-              "summary": "Undo an unstaged edit or unstage a file while keeping the committed history intact.",
+              "order": 3,
+              "title": "Recover from Everyday Mistakes",
+              "summary": "Recover prepared working-tree and staging mistakes in community-site while preserving its existing commit history.",
               "minutes": 24,
               "difficulty": "beginner",
               "technical": true,
               "learningGoals": [
-                "Use git restore to return one working-tree file to the staged or committed version.",
-                "Use git restore --staged to unstage a file while keeping its content.",
-                "Choose the narrowest restore operation for the mistake described."
+                "Restore an unstaged community-site edit from the current committed snapshot.",
+                "Remove a file from the staging area while keeping its working copy.",
+                "Recover a staged mistake safely without rewriting commit history."
               ],
               "practice": {
                 "tryIt": true,
@@ -580,20 +607,27 @@
                   "fill_blank_choice",
                   "code_input"
                 ]
+              },
+              "projectJourney": {
+                "journeyId": "guided-community-site",
+                "entryMilestone": "generated-files-ignored",
+                "exitMilestone": "course-ready"
               }
             }
           ]
         },
         {
           "sectionSlug": "git-foundations-section-3-module-project",
+          "order": 2,
+          "title": "Parallel Module Project",
+          "description": "Continue the same volunteer-hub repository and reapply Module 3 without copying the guided community-site task.",
           "role": "module_project",
-          "title": "Module Project",
-          "summary": "Prepare a clean Volunteer Handbook release snapshot with ignored previews and a focused cleanup commit.",
           "topics": [
             {
               "topicId": "module-3-clean-release-snapshot",
-              "title": "Project: Prepare a Clean Release Snapshot",
-              "summary": "Clean a release folder by renaming tracked work, removing an obsolete file, ignoring generated previews, and restoring accidental edits safely.",
+              "order": 1,
+              "title": "Module Project: Clean the Volunteer Hub Repository",
+              "summary": "Continue volunteer-hub from Module 2 and finish a clean release snapshot through six cumulative maintenance steps.",
               "minutes": 80,
               "difficulty": "beginner",
               "technical": true,
@@ -614,51 +648,60 @@
                 ]
               },
               "projectBrief": {
-                "scenario": "A volunteer handbook is ready for release, but the repository still contains a draft filename, an obsolete checklist, a generated preview log, and one accidental edit to the approved introduction.",
-                "role": "Release assistant preparing a clean handbook snapshot",
-                "workspace": "One cumulative terminal workspace rooted at volunteer-handbook/ with tracked docs/, generated preview output, and an existing baseline history",
-                "deliverable": "A six-step cleanup ending with the correct tracked files, ignored generated output, restored approved content, one focused cleanup commit, and a clean working tree.",
+                "scenario": "Volunteer Hub has the focused Module 2 history. Prepare it for handoff by maintaining tracked paths, adding ignore rules, and creating then recovering one supplied mistake safely.",
+                "role": "Act as the maintainer preparing a clean local release snapshot.",
+                "workspace": "Continue the same volunteer-hub repository and history from Modules 1 and 2.",
+                "deliverable": "A clean four-commit repository with pages/signup.html, no obsolete notes file, generated output ignored, and final commit Prepare volunteer hub handoff.",
                 "stepCountTarget": 6,
                 "flow": "progressive",
+                "journeyId": "parallel-volunteer-hub",
+                "continuesFromMilestone": "focused-history",
+                "finalMilestone": "clean-release",
+                "exactEditInstructionsRequired": true,
                 "requirements": [
-                  "Use git mv and git rm for the authored tracked rename and deletion.",
-                  "Keep preview.log present but ignored and untracked.",
-                  "Use git restore and git restore --staged only for the authored recoverable mistakes.",
-                  "Preserve the baseline commit and add exactly one cleanup commit.",
-                  "Grade final files, ignored files, forbidden tracked files, commit message, and clean state with gitExpectations."
+                  "Rename index.html to pages/signup.html through Git.",
+                  "Remove notes/schedule.txt through Git.",
+                  "Add exact generated/ and *.log ignore rules.",
+                  "Create the exact supplied README mistake, then recover it safely.",
+                  "Commit Prepare volunteer hub handoff and verify clean state."
                 ],
                 "stepLadder": [
                   {
                     "step": 1,
-                    "title": "Audit the Release Workspace",
-                    "requirement": "Inspect status, tracked files, and the existing diff before changing the handbook repository."
+                    "title": "Rename the Tracked Page",
+                    "requirement": "Create pages/ if needed and rename index.html to pages/signup.html with git mv."
                   },
                   {
                     "step": 2,
-                    "title": "Rename the Approved Guide",
-                    "requirement": "Rename docs/guide-draft.md to docs/volunteer-guide.md with git mv and verify the staged rename."
+                    "title": "Remove the Obsolete Schedule",
+                    "requirement": "Remove notes/schedule.txt with git rm and inspect the staged structural summary."
                   },
                   {
                     "step": 3,
-                    "title": "Remove the Obsolete Checklist",
-                    "requirement": "Remove docs/old-checklist.md with git rm while preserving the approved guide and README."
+                    "title": "Add Exact Ignore Rules",
+                    "requirement": "Create .gitignore containing generated/ and *.log on separate lines; do not invent other patterns."
                   },
                   {
                     "step": 4,
-                    "title": "Ignore Generated Preview Output",
-                    "requirement": "Add preview.log to .gitignore, verify it with git check-ignore, and ensure preview.log is not tracked."
+                    "title": "Keep Generated Output Out of History",
+                    "requirement": "Verify generated/preview.html and debug.log are ignored, then stage .gitignore with the tracked structural cleanup."
                   },
                   {
                     "step": 5,
-                    "title": "Restore the Accidental Introduction Edit",
-                    "requirement": "Unstage and restore the authored accidental README.md edit without discarding the intended rename, deletion, or .gitignore work."
+                    "title": "Recover the Prepared README Mistake",
+                    "requirement": "Unstage and restore only the prepared accidental README.md edit while preserving the intentional cleanup."
                   },
                   {
                     "step": 6,
-                    "title": "Commit and Verify the Release Cleanup",
-                    "requirement": "Commit with Prepare handbook release and finish with the required files, ignored preview.log, two total commits, and a clean working tree."
+                    "title": "Commit and Verify the Handoff",
+                    "requirement": "Commit Prepare volunteer hub handoff, inspect the four-commit history, and confirm clean state."
                   }
                 ]
+              },
+              "projectJourney": {
+                "journeyId": "parallel-volunteer-hub",
+                "entryMilestone": "focused-history",
+                "exitMilestone": "clean-release"
               }
             }
           ]
@@ -666,37 +709,40 @@
       ]
     },
     {
-      "moduleNumber": 4,
       "moduleSlug": "git-foundations-module-4-final-capstone",
-      "role": "capstone",
+      "moduleNumber": 4,
       "prefix": "git_foundations_module_4",
+      "order": 4,
+      "role": "capstone",
       "title": "Final Capstone",
-      "description": "Build and hand off one complete local history for a neighborhood resource guide.",
-      "purpose": "Combine initialization, status, diff, staging, commits, history inspection, ignore rules, Git-aware file operations, and safe restore habits.",
+      "description": "Start a fresh neighborhood-guide repository and independently reapply the complete local Git workflow through six cumulative steps.",
+      "purpose": "Prove transfer: the learner receives exact file edits but must choose and apply the Git workflow independently.",
       "learningObjectives": [
-        "Create a clean repository from an ordinary project folder.",
-        "Build four purposeful commits whose boundaries match the requested work.",
-        "Keep generated output ignored and obsolete files out of HEAD.",
-        "Verify the final history and clean working state before handoff."
+        "Initialize and configure a fresh local repository.",
+        "Create focused commits from supplied file changes.",
+        "Inspect history and maintain tracked paths safely.",
+        "Ignore generated output, create and recover a supplied temporary mistake, and verify a clean handoff."
       ],
       "guidedExercises": [
-        "Inspect the complete starter workspace before initialization.",
-        "Build the final repository in six exact cumulative steps.",
-        "Validate files, commit messages, ignored paths, forbidden tracked paths, commit count, and clean state."
+        "Complete one six-step cumulative capstone with exact file-edit instructions and progressively less Git guidance."
       ],
-      "quizFocus": [],
-      "moduleProject": "Build the Neighborhood Resource Guide history through six cumulative milestones.",
+      "quizFocus": [
+        "integrated local Git workflow"
+      ],
+      "moduleProject": "Build and verify the neighborhood-guide history through six cumulative steps.",
       "sections": [
         {
           "sectionSlug": "git-foundations-section-4-final-capstone",
-          "role": "capstone",
+          "order": 1,
           "title": "Final Capstone",
-          "summary": "Build and hand off one complete local history for a neighborhood resource guide.",
+          "description": "Build one fresh neighborhood-guide repository through six cumulative steps.",
+          "role": "capstone",
           "topics": [
             {
               "topicId": "final-neighborhood-resource-guide-history",
-              "title": "Final Capstone: Neighborhood Resource Guide History",
-              "summary": "Build a complete local history for a neighborhood resource guide while keeping changes focused, generated artifacts ignored, and the final repository easy to hand off.",
+              "order": 1,
+              "title": "Final Capstone: Neighborhood Guide History",
+              "summary": "Start a fresh neighborhood-guide repository and independently build a clean, readable local history through six cumulative steps.",
               "minutes": 120,
               "difficulty": "intermediate",
               "technical": true,
@@ -717,52 +763,61 @@
                 ]
               },
               "projectBrief": {
-                "scenario": "A neighborhood help desk is replacing a folder of loose text files with a maintained resource guide. Future volunteers must be able to see when service information changed, recover from small mistakes, and trust the final handoff.",
-                "role": "Junior developer preparing the neighborhood resource guide for long-term maintenance",
-                "workspace": "One cumulative terminal workspace rooted at resource-guide/ with pages/, notes/, generated/, README.md, and no starting repository",
-                "deliverable": "One six-step local Git capstone with four meaningful commits, ignored generated previews, a tracked file rename, a safe obsolete-file removal, required final content, and a clean handoff state.",
+                "scenario": "A neighborhood team needs a trustworthy local history for a fresh guide. Build it from an ordinary folder to a clean handoff.",
+                "role": "Act as the sole maintainer applying the complete local Git workflow independently.",
+                "workspace": "Use neighborhood-guide for all six cumulative capstone steps. It does not reuse community-site or volunteer-hub history.",
+                "deliverable": "A clean four-commit repository with focused history, maintained paths, exact ignore rules, and no tracked generated output.",
                 "stepCountTarget": 6,
                 "flow": "progressive",
+                "journeyId": "independent-neighborhood-guide",
+                "continuesFromMilestone": "ordinary-folder",
+                "finalMilestone": "final-handoff",
+                "exactEditInstructionsRequired": true,
                 "requirements": [
-                  "Keep the capstone in exactly one capstone section and one capstone topic.",
-                  "Carry the complete repository and workspace forward through all six steps.",
-                  "Use only concepts taught in Git Foundations; do not use branches, merges, remotes, stash, revert, reset, rebase, or force operations.",
-                  "Use local identity configuration and main as the initial branch.",
-                  "The final history must contain exactly four commits with the authored commit messages.",
-                  "Grade repository state with gitExpectations and never grade exact hashes or timestamps."
+                  "Initialize and configure neighborhood-guide locally.",
+                  "Use exact supplied file text rather than inventing web content.",
+                  "Create focused commits with the authored messages.",
+                  "Rename and remove tracked paths safely.",
+                  "Ignore generated output, then create and recover a supplied temporary mistake.",
+                  "Verify final history, files, ignore behavior, and clean state."
                 ],
                 "stepLadder": [
                   {
                     "step": 1,
-                    "title": "Create the Guide Baseline",
-                    "requirement": "Inspect resource-guide/, configure the local identity, initialize main, stage the initial README and pages, and commit Start neighborhood resource guide."
+                    "title": "Initialize and Record the Baseline",
+                    "requirement": "Initialize neighborhood-guide on main, configure the supplied local identity, stage the authored baseline files, and commit Start neighborhood guide."
                   },
                   {
                     "step": 2,
                     "title": "Add the Services Page",
-                    "requirement": "Create and validate pages/services.md, stage only that focused change, and commit Add local services page."
+                    "requirement": "Create pages/services.html with the exact supplied text, inspect it, and commit Add local services page."
                   },
                   {
                     "step": 3,
-                    "title": "Publish Updated Help Desk Hours",
-                    "requirement": "Update pages/contact.md with the authored hours, inspect the diff, and commit Update help desk hours."
+                    "title": "Update Contact Hours",
+                    "requirement": "Replace the exact hours line in pages/contact.txt with 9 AM - 5 PM, inspect it, and commit Update help desk hours."
                   },
                   {
                     "step": 4,
-                    "title": "Ignore Generated Preview Files",
-                    "requirement": "Create the authored .gitignore rules for generated/ previews, verify the preview file is ignored, and keep the repository changes staged for the release cleanup commit."
+                    "title": "Add the Ignore Policy",
+                    "requirement": "Create .gitignore with generated/ on one line and verify generated/preview.html is ignored."
                   },
                   {
                     "step": 5,
-                    "title": "Rename the Guide and Remove the Obsolete Note",
-                    "requirement": "Use git mv to rename pages/guide-draft.md to pages/getting-help.md, use git rm to remove notes/old-phone-tree.txt, and preserve all earlier content."
+                    "title": "Clean Tracked Paths and Recover the Mistake",
+                    "requirement": "Rename pages/welcome.html to pages/getting-help.html with git mv, remove notes/old-phone-tree.txt with git rm, create the exact supplied README.md mistake, then unstage and restore it."
                   },
                   {
                     "step": 6,
-                    "title": "Commit and Verify the Final Handoff",
-                    "requirement": "Commit Prepare resource guide handoff, then verify the four-commit history, required HEAD files, ignored preview artifact, forbidden obsolete paths, and a clean working tree."
+                    "title": "Commit and Audit the Final Handoff",
+                    "requirement": "Commit Prepare neighborhood guide handoff, inspect the four-commit history and HEAD, and confirm clean state."
                   }
                 ]
+              },
+              "projectJourney": {
+                "journeyId": "independent-neighborhood-guide",
+                "entryMilestone": "ordinary-folder",
+                "exitMilestone": "final-handoff"
               }
             }
           ]
