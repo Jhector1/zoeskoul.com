@@ -1,5 +1,7 @@
 "use client";
 
+import { compactTerminalIdentityKey } from "./terminalIdentity";
+
 export type WorkspaceTerminalTab = {
     id: string;
     label: string;
@@ -10,6 +12,37 @@ export type TerminalCapacity = {
     maxActiveSessions: number;
     hostActiveOwnerKeys: string[];
 };
+
+export type WorkspaceTerminalHydration = {
+    tabs: WorkspaceTerminalTab[];
+    activeId: string;
+    pendingStartId: string;
+    pendingStartMode: "attach";
+};
+
+/**
+ * Hydrating a host is also an activation transaction for its visible tab.
+ * Keeping this policy outside CodeRunner prevents review-route remounts from
+ * rendering a dormant Idle terminal and waiting for a separate auto-open pass.
+ */
+export function resolveWorkspaceTerminalHydration(args: {
+    tabs: WorkspaceTerminalTab[];
+    activeId: string;
+}): WorkspaceTerminalHydration {
+    const tabs = args.tabs.length
+        ? args.tabs
+        : [{ id: "primary", label: "Terminal 1" }];
+    const activeId = tabs.some((tab) => tab.id === args.activeId)
+        ? args.activeId
+        : tabs[0].id;
+
+    return {
+        tabs,
+        activeId,
+        pendingStartId: activeId,
+        pendingStartMode: "attach",
+    };
+}
 
 export function isWorkspaceTerminalOwnerReady(args: {
     activeOwnerKey: string | null;
@@ -98,6 +131,15 @@ const HOST_CLEANUP_GRACE_MS = 5_000;
 const TERMINAL_CAPACITY_CHANNEL = "zoeskoul.terminal.capacity.v1";
 const TERMINAL_CAPACITY_STORAGE_KEY = "zoeskoul.terminal.capacity.signal.v1";
 const hostCleanupTimers = new Map<string, number>();
+
+type TerminalHostHandoffSlot = {
+    activeHostKey: string | null;
+    desiredHostKey: string | null;
+    generation: number;
+    tail: Promise<void>;
+};
+
+const terminalHostHandoffSlots = new Map<string, TerminalHostHandoffSlot>();
 let runtimeWindowId: string | null = null;
 
 function randomId(prefix: string) {
@@ -120,14 +162,22 @@ export function buildWorkspaceTerminalHostKey(args: {
     windowId: string;
     experienceKey: string;
 }) {
-    return `terminal-host-v1:${args.windowId}:${args.experienceKey}`;
+    const experienceKey = compactTerminalIdentityKey(args.experienceKey, 240);
+
+    return compactTerminalIdentityKey(
+        `terminal-host-v2:${args.windowId}:${experienceKey}`,
+        320,
+    );
 }
 
 export function buildWorkspaceTerminalOwnerKey(args: {
     hostKey: string;
     terminalId: string;
 }) {
-    return `${args.hostKey}:owner:${args.terminalId}`;
+    return compactTerminalIdentityKey(
+        `${args.hostKey}:owner:${args.terminalId}`,
+        480,
+    );
 }
 
 function tabsStorageKey(hostKey: string) {
@@ -327,6 +377,97 @@ export function subscribeTerminalCapacityInvalidations(
             channel.close();
         }
     };
+}
+
+
+/**
+ * Atomically move one browser terminal surface from its previous host to the
+ * next host. The old host is canceled before the new host is allowed to mount
+ * a controller, so a topic transition can never temporarily request a third
+ * PTY while the learner is already at the runner limit.
+ *
+ * The slot survives React unmount/remount cycles inside this browser runtime.
+ * Same-host remounts therefore keep their terminals, while a genuinely new
+ * host performs an immediate handoff instead of waiting for the cleanup grace
+ * timer. Rapid A -> B -> C navigation is serialized and only the latest host
+ * receives permission to activate.
+ */
+export async function handoffWorkspaceTerminalHost(args: {
+    slotKey: string;
+    hostKey: string;
+    cancelHost?: (hostKey: string) => Promise<void>;
+}): Promise<boolean> {
+    const slotKey = String(args.slotKey ?? "").trim();
+    const hostKey = String(args.hostKey ?? "").trim();
+
+    if (!slotKey || !hostKey) return false;
+
+    let slot = terminalHostHandoffSlots.get(slotKey);
+    if (!slot) {
+        slot = {
+            activeHostKey: null,
+            desiredHostKey: null,
+            generation: 0,
+            tail: Promise.resolve(),
+        };
+        terminalHostHandoffSlots.set(slotKey, slot);
+    }
+
+    const generation = slot.generation + 1;
+    slot.generation = generation;
+    slot.desiredHostKey = hostKey;
+    clearScheduledTerminalHostCleanup(hostKey);
+
+    const cancelHost = args.cancelHost ?? cancelWorkspaceTerminalHost;
+    let activated = false;
+
+    const transition = slot.tail
+        .catch(() => undefined)
+        .then(async () => {
+            const activeHostKey = slot?.activeHostKey ?? null;
+
+            if (activeHostKey && activeHostKey !== hostKey) {
+                clearScheduledTerminalHostCleanup(activeHostKey);
+
+                try {
+                    await cancelHost(activeHostKey);
+                } catch (error) {
+                    // Keep the ordinary grace cleanup as a fallback if the
+                    // immediate navigation handoff is temporarily unavailable.
+                    scheduleTerminalHostCleanup(activeHostKey);
+                    throw error;
+                }
+
+                if (slot?.activeHostKey === activeHostKey) {
+                    slot.activeHostKey = null;
+                }
+            }
+
+            if (
+                !slot ||
+                slot.generation !== generation ||
+                slot.desiredHostKey !== hostKey
+            ) {
+                return;
+            }
+
+            clearScheduledTerminalHostCleanup(hostKey);
+            slot.activeHostKey = hostKey;
+            activated = true;
+        });
+
+    slot.tail = transition.then(
+        () => undefined,
+        () => undefined,
+    );
+
+    await transition;
+    return activated;
+}
+
+/** Test-only reset for the module-level browser handoff coordinator. */
+export function resetWorkspaceTerminalHostHandoffsForTests() {
+    terminalHostHandoffSlots.clear();
 }
 
 export async function cancelWorkspaceTerminalOwner(ownerKey: string) {

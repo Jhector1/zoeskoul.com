@@ -41,6 +41,7 @@ import {
 } from "@/components/tools/panes/workspaceSnapshot";
 import { learnerUiFlags } from "@/lib/config/learnerUiFlags";
 import { getReviewSubmitBridgeHost } from "@/lib/review/submitBridge";
+import { compactTerminalIdentityKey } from "@/components/code/runner/terminalIdentity";
 
 const FullIDE = dynamic(() => import("@/components/ide/fullide/FullIDE"), {
     ssr: false,
@@ -312,6 +313,20 @@ function asWorkspaceLanguage(language: string | null | undefined): WorkspaceLang
     }
 
     return "python";
+}
+
+export function buildReviewWorkspaceOwnerIdentityKey(args: {
+    workspaceOwnerKey: string;
+    workspaceStarterHash?: string | null;
+}) {
+    const workspaceOwnerKey =
+        String(args.workspaceOwnerKey ?? "general").trim() || "general";
+    const workspaceStarterHash = String(args.workspaceStarterHash ?? "").trim();
+    const identity = workspaceStarterHash
+        ? `${workspaceOwnerKey}:starter:${workspaceStarterHash}`
+        : workspaceOwnerKey;
+
+    return compactTerminalIdentityKey(identity, 320);
 }
 
 export function buildReviewFullIdeExerciseStateKey(
@@ -1613,9 +1628,10 @@ export default function CodeToolPane(props: {
         (cardRuntimeKey ? (cardRuntime as any)?.starterHash : null) ??
         "",
     ).trim();
-    const workspaceOwnerIdentityKey = workspaceStarterHash
-        ? `${workspaceOwnerKey}:starter:${workspaceStarterHash}`
-        : workspaceOwnerKey;
+    const workspaceOwnerIdentityKey = buildReviewWorkspaceOwnerIdentityKey({
+        workspaceOwnerKey,
+        workspaceStarterHash,
+    });
 
     const workspaceContextKey = useMemo(
         () =>

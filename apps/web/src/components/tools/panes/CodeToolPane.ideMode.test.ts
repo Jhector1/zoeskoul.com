@@ -1,12 +1,12 @@
 import { describe, expect, it } from "vitest";
 import {
     buildReviewFullIdeExerciseStateKey,
+    buildReviewWorkspaceOwnerIdentityKey,
     pickDirectReviewRuntimeWorkspace,
     resolveCodeToolPaneFullIdeMode,
     resolveCodeToolPaneReviewWorkspace,
     resolveEffectiveCodeToolPaneIdeConfig,
 } from "@/components/tools/panes/CodeToolPane";
-
 
 describe("resolveCodeToolPaneReviewWorkspace", () => {
     const runtimeWorkspace = {
@@ -95,7 +95,6 @@ describe("resolveCodeToolPaneFullIdeMode", () => {
         expect(resolved.ideShell.services.runner?.allowRun).toBe(false);
     });
 
-
     it("lets the active runtime cwd override stale tool prop cwd in review mode", () => {
         const resolved = resolveEffectiveCodeToolPaneIdeConfig({
             isReviewRouteMode: true,
@@ -169,6 +168,30 @@ describe("resolveCodeToolPaneFullIdeMode", () => {
     });
 });
 
+describe("buildReviewWorkspaceOwnerIdentityKey", () => {
+    it("keeps serialized starter workspaces out of terminal and editor identity keys", () => {
+        const sharedStarterPrefix = JSON.stringify({
+            version: 2,
+            files: Array.from({ length: 80 }, (_, index) => ({
+                path: `community-project/file-${index}.txt`,
+                content: "starter content".repeat(20),
+            })),
+        });
+        const first = buildReviewWorkspaceOwnerIdentityKey({
+            workspaceOwnerKey: "git-foundations:module-1:exercise-a",
+            workspaceStarterHash: `${sharedStarterPrefix}:a`,
+        });
+        const second = buildReviewWorkspaceOwnerIdentityKey({
+            workspaceOwnerKey: "git-foundations:module-1:exercise-a",
+            workspaceStarterHash: `${sharedStarterPrefix}:b`,
+        });
+
+        expect(first).not.toBe(second);
+        expect(first.length).toBeLessThanOrEqual(320);
+        expect(first).not.toContain("community-project/file-79.txt");
+    });
+});
+
 describe("buildReviewFullIdeExerciseStateKey", () => {
     it("changes Monaco and editor-cache identity after an authoritative reset", () => {
         const ownerKey =
@@ -191,7 +214,6 @@ describe("buildReviewFullIdeExerciseStateKey", () => {
         );
     });
 });
-
 
 describe("pickDirectReviewRuntimeWorkspace multi-file starter hydration", () => {
     function pythonWorkspace(args: {

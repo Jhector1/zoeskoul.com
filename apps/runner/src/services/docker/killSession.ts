@@ -19,27 +19,40 @@ function isTerminalState(state: string) {
     );
 }
 
-export async function killSession(
+const sessionTeardowns = new Map<string, Promise<void>>();
+
+/**
+ * Finalize a session synchronously, then tear down its Docker container in the
+ * background of that state transition.
+ *
+ * Browser topic handoff waits for the cancel route before opening the next PTY.
+ * Docker can take several seconds to acknowledge a kill, so keeping the session
+ * active until that acknowledgement unnecessarily holds the user's terminal
+ * capacity at its limit. Marking the session terminal first releases capacity
+ * immediately while the same promise still lets internal callers await the
+ * physical container teardown when they need to.
+ */
+export function killSession(
     sessionId: string,
     finalState: KillFinalState = "canceled",
 ) {
+    const existingTeardown = sessionTeardowns.get(sessionId);
+    if (existingTeardown) return existingTeardown;
+
     const session = getSession(sessionId);
-    if (!session) return;
+    if (!session) return Promise.resolve();
 
     clearAllTimeouts(sessionId);
     closeSessionSockets(sessionId, 1012, `Session ${finalState}`);
     (session.attachStream as { destroy?: () => void } | null | undefined)?.destroy?.();
 
-    if (!isTerminalState(session.state)) {
-        try {
-            const container = docker.getContainer(session.containerId);
-            await container.kill();
-        } catch {
-            // ignore kill errors
-        }
-
-        pushEvent(sessionId, { type: "status", state: finalState });
+    if (isTerminalState(session.state)) {
+        return Promise.resolve();
     }
+
+    // Release runner capacity before waiting on the Docker daemon.
+    pushEvent(sessionId, { type: "status", state: finalState });
+    scheduleWorkspaceCleanup(sessionId, session.workspaceDir);
 
     console.info("RUNNER session cleanup scheduled", {
         sessionId,
@@ -47,9 +60,18 @@ export async function killSession(
         finalState,
     });
 
-    /**
-     * Keep the workspace briefly even after cancel/timeout so the UI can
-     * pull back files that existed at termination time.
-     */
-    scheduleWorkspaceCleanup(sessionId, session.workspaceDir);
+    const teardown = (async () => {
+        try {
+            const container = docker.getContainer(session.containerId);
+            await container.kill();
+        } catch {
+            // The container may already be gone. The session is finalized and its
+            // workspace cleanup is still scheduled, so a kill error is non-fatal.
+        }
+    })().finally(() => {
+        sessionTeardowns.delete(sessionId);
+    });
+
+    sessionTeardowns.set(sessionId, teardown);
+    return teardown;
 }

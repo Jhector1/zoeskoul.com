@@ -57,6 +57,8 @@ const TERMINAL_INPUT_STALE_MS = 60_000;
 const TERMINAL_REVIVE_WATCHDOG_INTERVAL_MS = 15_000;
 const TERMINAL_PROMPT_PRIME_DELAY_MS = 700;
 const TERMINAL_PROMPT_PRIME_MAX_ATTEMPTS = 3;
+const useBrowserLayoutEffect =
+    typeof window === "undefined" ? React.useEffect : React.useLayoutEffect;
 
 const STARTUP_CWD_READY_MARKER = "__ZOESKOUL_STARTUP_CWD_READY__";
 const STARTUP_CWD_OUTPUT_SUPPRESSION_MS = 30_000;
@@ -69,6 +71,68 @@ type StartupCwdOutputSuppression = {
     deadline: number;
     clearLineBeforeRelease?: boolean;
 };
+
+export type WorkspaceTerminalOwnerSnapshot = {
+    terminalFeed: TerminalChunk[];
+    terminalEvidence: TerminalEvidence;
+    lastHandledSeq: number;
+    nextChunkId: number;
+    currentCwd?: string;
+    lastAuthoredCwdApplied?: string;
+    pendingInputLine: string;
+    escapeSequence: string;
+    terminalHasVisibleOutput: boolean;
+};
+
+export function cloneWorkspaceTerminalOwnerSnapshot(
+    snapshot: WorkspaceTerminalOwnerSnapshot,
+): WorkspaceTerminalOwnerSnapshot {
+    return {
+        ...snapshot,
+        terminalFeed: snapshot.terminalFeed.map((chunk) => ({ ...chunk })),
+        terminalEvidence: {
+            ...snapshot.terminalEvidence,
+            commands: [...snapshot.terminalEvidence.commands],
+        },
+    };
+}
+
+export function resolveInitialWorkspaceTerminalCwd(args: {
+    normalizedCwd: string | null;
+    hasPreservedOwnerState: boolean;
+}): string | null {
+    return args.hasPreservedOwnerState ? null : args.normalizedCwd;
+}
+
+export function shouldEnableWorkspaceTerminalInput(args: {
+    state: RunSessionState | "idle";
+    workspaceReady: boolean;
+    pendingStartupInput: string | null;
+}): boolean {
+    return Boolean(
+        args.workspaceReady &&
+            !args.pendingStartupInput &&
+            (args.state === "running" || args.state === "waiting_for_input"),
+    );
+}
+
+/**
+ * A controller may render for the next tab before useRunSession has connected
+ * that tab's socket. Never let the previous owner's stdout/status replay mutate
+ * the newly selected terminal.
+ */
+export function shouldConsumeWorkspaceTerminalEventStream(args: {
+    terminalOwnerKey: string;
+    currentSessionId: string | null;
+    eventsSessionId: string | null;
+    eventsOwnerKey: string | null;
+}): boolean {
+    return Boolean(
+        args.currentSessionId &&
+            args.eventsSessionId === args.currentSessionId &&
+            args.eventsOwnerKey === args.terminalOwnerKey,
+    );
+}
 
 /**
  * Docker/runner recycle often appears to the browser as a shell exit 137
@@ -797,6 +861,8 @@ export function useWorkspaceTerminalController(
         sessionId,
         state: runSessionState,
         events,
+        eventsSessionId,
+        eventsOwnerKey,
         connectionState,
         socketReadyState,
         lastMessageAt,
@@ -888,7 +954,16 @@ export function useWorkspaceTerminalController(
     const [restarting, setRestarting] = React.useState(false);
     const [stopping, setStopping] = React.useState(false);
     const [attachedOwnerKey, setAttachedOwnerKey] = React.useState<string | null>(null);
+    const [displayedOwnerKey, setDisplayedOwnerKey] = React.useState<string | null>(
+        terminalOwnerKey,
+    );
 
+    const ownerSnapshotsRef = React.useRef(
+        new Map<string, WorkspaceTerminalOwnerSnapshot>(),
+    );
+    const displayedIdentityRef = React.useRef(
+        `${terminalOwnerKey}\0${terminalLeaseKey}`,
+    );
     const nextChunkIdRef = React.useRef(1);
     const lastHandledSeqRef = React.useRef(0);
 
@@ -911,6 +986,13 @@ export function useWorkspaceTerminalController(
     const stoppingRef = React.useRef(stopping);
     const restartingRef = React.useRef(restarting);
     const stateRef = React.useRef<RunSessionState | "idle">(state);
+    const setTerminalStateNow = React.useCallback(
+        (nextState: RunSessionState | "idle") => {
+            stateRef.current = nextState;
+            setState(nextState);
+        },
+        [],
+    );
     const restartInFlightRef = React.useRef<Promise<void> | null>(null);
     const staleStartingTimerRef = React.useRef<number | null>(null);
     const recycleRestartTimerRef = React.useRef<number | null>(null);
@@ -1360,6 +1442,56 @@ export function useWorkspaceTerminalController(
         setTerminalRecovery(NO_TERMINAL_RECOVERY);
     }, [setTerminalRecovery]);
 
+    const captureOwnerSnapshot = React.useCallback((identity: string) => {
+        if (!identity) return;
+
+        ownerSnapshotsRef.current.set(
+            identity,
+            cloneWorkspaceTerminalOwnerSnapshot({
+                terminalFeed: terminalFeedRef.current,
+                terminalEvidence: terminalEvidenceRef.current,
+                lastHandledSeq: lastHandledSeqRef.current,
+                nextChunkId: nextChunkIdRef.current,
+                currentCwd: currentCwdRef.current,
+                lastAuthoredCwdApplied: lastAuthoredCwdAppliedRef.current,
+                pendingInputLine: pendingInputLineRef.current,
+                escapeSequence: escapeSequenceRef.current,
+                terminalHasVisibleOutput: terminalHasVisibleOutputRef.current,
+            }),
+        );
+    }, []);
+
+    const restoreOwnerSnapshot = React.useCallback(
+        (identity: string, ownerKey: string): boolean => {
+            const stored = ownerSnapshotsRef.current.get(identity);
+            displayedIdentityRef.current = identity;
+            setDisplayedOwnerKey(ownerKey);
+
+            if (!stored) return false;
+
+            const snapshot = cloneWorkspaceTerminalOwnerSnapshot(stored);
+            terminalFeedRef.current = snapshot.terminalFeed;
+            setTerminalFeed(snapshot.terminalFeed);
+            setTerminalEvidenceNow(snapshot.terminalEvidence);
+            lastHandledSeqRef.current = snapshot.lastHandledSeq;
+            nextChunkIdRef.current = snapshot.nextChunkId;
+            currentCwdRef.current = snapshot.currentCwd;
+            lastAuthoredCwdAppliedRef.current = snapshot.lastAuthoredCwdApplied;
+            pendingInputLineRef.current = snapshot.pendingInputLine;
+            escapeSequenceRef.current = snapshot.escapeSequence;
+            terminalHasVisibleOutputRef.current = snapshot.terminalHasVisibleOutput;
+            return true;
+        },
+        [setTerminalEvidenceNow],
+    );
+
+    const discardCurrentOwnerSnapshot = React.useCallback(() => {
+        const identity = `${terminalOwnerKey}\0${terminalLeaseKey}`;
+        ownerSnapshotsRef.current.delete(identity);
+        displayedIdentityRef.current = identity;
+        setDisplayedOwnerKey(terminalOwnerKey);
+    }, [terminalLeaseKey, terminalOwnerKey]);
+
     const clearLocalTerminalState = React.useCallback(() => {
         lastHandledSeqRef.current = 0;
         nextChunkIdRef.current = 1;
@@ -1380,7 +1512,6 @@ export function useWorkspaceTerminalController(
         startupCwdOutputSuppressionRef.current = null;
         startedRef.current = false;
         startingRef.current = false;
-        stateRef.current = "idle";
         currentCwdRef.current = initialEvidenceCwd;
         lastAuthoredCwdAppliedRef.current =
             initialEvidenceCwd && initialEvidenceCwd !== "/workspace"
@@ -1392,7 +1523,7 @@ export function useWorkspaceTerminalController(
         setAttachedOwnerKey(null);
         setInputEnabled(false);
         setBusy(false);
-        setState("idle");
+        setTerminalStateNow("idle");
         setStarted(false);
         setStarting(false);
         setSyncStatus("idle");
@@ -1406,6 +1537,7 @@ export function useWorkspaceTerminalController(
         clearTerminalRecovery,
         initialEvidenceCwd,
         setTerminalEvidenceNow,
+        setTerminalStateNow,
     ]);
 
     const reset = React.useCallback(() => {
@@ -1414,8 +1546,17 @@ export function useWorkspaceTerminalController(
         clearRecycleRestartTimer();
         void cancel().catch(() => {});
         closeSocket();
+        discardCurrentOwnerSnapshot();
         clearLocalTerminalState();
-    }, [cancel, clearLocalTerminalState, clearQuietTimer, clearRecycleRestartTimer, clearStaleStartingTimer, closeSocket]);
+    }, [
+        cancel,
+        clearLocalTerminalState,
+        clearQuietTimer,
+        clearRecycleRestartTimer,
+        clearStaleStartingTimer,
+        closeSocket,
+        discardCurrentOwnerSnapshot,
+    ]);
 
     const replaceFiles = React.useCallback(
         async (files: WorkspaceSyncEntry[]): Promise<boolean> => {
@@ -1524,7 +1665,12 @@ export function useWorkspaceTerminalController(
         } finally {
             snapshotInFlightRef.current = null;
         }
-    }, [sessionId, snapshotFiles, getWorkspaceEntries, args]);
+    }, [
+        sessionId,
+        snapshotFiles,
+        getWorkspaceEntries,
+        args.onTerminalSnapshotFiles,
+    ]);
 
     const schedulePostEnterSnapshot = React.useCallback(
         (delayMs = 700) => {
@@ -1743,27 +1889,37 @@ export function useWorkspaceTerminalController(
                 const visibleEntries = getWorkspaceEntries();
                 const historyContent = await ensureHistoryLoaded();
                 const fullEntries = augmentEntriesWithHistory(visibleEntries, historyContent);
+                const ownerIdentity = `${terminalOwnerKey}\0${terminalLeaseKey}`;
+                const preservesExistingOwnerState =
+                    displayedIdentityRef.current === ownerIdentity &&
+                    ownerSnapshotsRef.current.has(ownerIdentity);
 
                 workspaceReadyRef.current = fullEntries.length === 0;
 
-                lastHandledSeqRef.current = 0;
-                nextChunkIdRef.current = 1;
+                if (!preservesExistingOwnerState) {
+                    lastHandledSeqRef.current = 0;
+                    nextChunkIdRef.current = 1;
+                    pendingInputLineRef.current = "";
+                    escapeSequenceRef.current = "";
+                    terminalHasVisibleOutputRef.current = false;
+                    terminalFeedRef.current = [];
+                    setTerminalFeed([]);
+                    setTerminalEvidenceNow(createTerminalEvidence(initialEvidenceCwd));
+                }
+
                 awaitingPostEnterSnapshotRef.current = false;
-                pendingInputLineRef.current = "";
-                escapeSequenceRef.current = "";
                 terminalProcessExitedRef.current = false;
                 terminalExitCodeRef.current = null;
-                terminalHasVisibleOutputRef.current = false;
                 promptPrimeAttemptsRef.current = 0;
-                terminalFeedRef.current = [];
-                setTerminalFeed([]);
+                displayedIdentityRef.current = ownerIdentity;
+                setDisplayedOwnerKey(terminalOwnerKey);
                 setAttachedOwnerKey(null);
                 setInputEnabled(false);
                 setBusy(true);
                 stateRef.current = "preparing";
                 startingRef.current = true;
                 startedRef.current = false;
-                setState("preparing");
+                setTerminalStateNow("preparing");
                 setStarting(true);
                 setSyncStatus("idle");
                 clearTerminalRecovery();
@@ -1779,7 +1935,7 @@ export function useWorkspaceTerminalController(
                     setStarting(false);
                     setBusy(false);
                     setInputEnabled(false);
-                    setState("failed");
+                    setTerminalStateNow("failed");
                     setStarted(false);
                     setTerminalRecovery({
                         state: "restart_available",
@@ -1791,8 +1947,12 @@ export function useWorkspaceTerminalController(
                     cwd: args.cwd,
                     bootstrap: resolvedBootstrap,
                 });
-                if (normalizedInitialCwd) {
-                    queueAuthoredCwd(normalizedInitialCwd);
+                const initialCwdToQueue = resolveInitialWorkspaceTerminalCwd({
+                    normalizedCwd: normalizedInitialCwd,
+                    hasPreservedOwnerState: preservesExistingOwnerState,
+                });
+                if (initialCwdToQueue) {
+                    queueAuthoredCwd(initialCwdToQueue);
                 }
 
                 try {
@@ -1904,18 +2064,18 @@ export function useWorkspaceTerminalController(
                     releaseAutomaticTerminalStart(terminalStartClaimKey);
                     setStarted(true);
 
-                    const latestTerminalState = stateRef.current as string;
                     if (
-                        latestTerminalState === "running" ||
-                        latestTerminalState === "waiting_for_input"
+                        shouldEnableWorkspaceTerminalInput({
+                            state: stateRef.current,
+                            workspaceReady: workspaceReadyRef.current,
+                            pendingStartupInput: pendingStartupInputRef.current,
+                        })
                     ) {
-                        if (pendingStartupInputRef.current) {
-                            setInputEnabled(false);
-                            await flushPendingStartupInput();
-                        } else {
-                            setInputEnabled(true);
-                            schedulePromptPrime();
-                        }
+                        setInputEnabled(true);
+                        schedulePromptPrime();
+                    } else if (pendingStartupInputRef.current) {
+                        setInputEnabled(false);
+                        await flushPendingStartupInput();
                     }
                 } catch (e: any) {
                     const message = e?.message ?? "Failed to start workspace terminal.";
@@ -1935,7 +2095,7 @@ export function useWorkspaceTerminalController(
                     }
                     setBusy(false);
                     setInputEnabled(false);
-                    setState("failed");
+                    setTerminalStateNow("failed");
                     setStarted(false);
                     setStarting(false);
 
@@ -1991,6 +2151,8 @@ export function useWorkspaceTerminalController(
             queueAuthoredCwd,
             setTerminalRecovery,
             setTerminalEvidenceNow,
+            setTerminalStateNow,
+            initialEvidenceCwd,
         ],
     );
 
@@ -2005,10 +2167,17 @@ export function useWorkspaceTerminalController(
             clearStaleStartingTimer();
             openedLeaseKeyRef.current = null;
             openedOwnerKeyRef.current = null;
+            discardCurrentOwnerSnapshot();
             clearLocalTerminalState();
             setStopping(false);
         }
-    }, [cancel, clearLocalTerminalState, clearQuietTimer, clearStaleStartingTimer]);
+    }, [
+        cancel,
+        clearLocalTerminalState,
+        clearQuietTimer,
+        clearStaleStartingTimer,
+        discardCurrentOwnerSnapshot,
+    ]);
 
     const restart = React.useCallback(async (): Promise<void> => {
         if (!args.enabled) return;
@@ -2040,6 +2209,7 @@ export function useWorkspaceTerminalController(
                 closeSocket();
                 openedLeaseKeyRef.current = null;
                 openedOwnerKeyRef.current = null;
+                discardCurrentOwnerSnapshot();
                 clearLocalTerminalState();
                 terminalProcessExitedRef.current = false;
                 terminalExitCodeRef.current = null;
@@ -2065,34 +2235,43 @@ export function useWorkspaceTerminalController(
         clearQuietTimer,
         clearStaleStartingTimer,
         closeSocket,
+        discardCurrentOwnerSnapshot,
         open,
         sessionId,
         terminalLeaseKey,
     ]);
 
-    React.useEffect(() => {
+    useBrowserLayoutEffect(() => {
         const identity = `${terminalOwnerKey}\0${terminalLeaseKey}`;
         const previousIdentity = previousTerminalIdentityRef.current;
         previousTerminalIdentityRef.current = identity;
 
         if (!previousIdentity || previousIdentity === identity) {
+            displayedIdentityRef.current = identity;
+            setDisplayedOwnerKey(terminalOwnerKey);
             return;
         }
 
-        // Switching exercise workspaces or terminal tabs detaches only the
-        // active browser socket. The exact owner lease remains alive and can
-        // be reattached later, but no transcript or readiness state may bleed
-        // from the previously selected terminal.
+        /**
+         * A terminal tab switch is a display/connection switch, not a terminal
+         * reset. Preserve the exact transcript, command evidence, cwd, pending
+         * line, and last processed runner sequence for the old owner before
+         * detaching its socket. The backend shell stays alive.
+         */
+        captureOwnerSnapshot(previousIdentity);
         closeSocket();
         clearLocalTerminalState();
+        restoreOwnerSnapshot(identity, terminalOwnerKey);
         workspaceReadyRef.current = false;
         openedLeaseKeyRef.current = null;
         openedOwnerKeyRef.current = null;
     }, [
         terminalLeaseKey,
         terminalOwnerKey,
+        captureOwnerSnapshot,
         clearLocalTerminalState,
         closeSocket,
+        restoreOwnerSnapshot,
     ]);
 
     React.useEffect(() => {
@@ -2496,6 +2675,16 @@ export function useWorkspaceTerminalController(
 
     React.useEffect(() => {
         if (!events.length) return;
+        if (
+            !shouldConsumeWorkspaceTerminalEventStream({
+                terminalOwnerKey,
+                currentSessionId: sessionId,
+                eventsSessionId,
+                eventsOwnerKey,
+            })
+        ) {
+            return;
+        }
 
         const newEvents = events.filter(
             (ev) => ev.seq > lastHandledSeqRef.current,
@@ -2523,7 +2712,7 @@ export function useWorkspaceTerminalController(
             }
 
             if (ev.type === "status") {
-                setState(ev.state);
+                setTerminalStateNow(ev.state);
 
                 if (ev.state === "preparing" || ev.state === "compiling") {
                     setBusy(true);
@@ -2536,8 +2725,11 @@ export function useWorkspaceTerminalController(
                     terminalExitCodeRef.current = null;
                     clearTerminalRecovery();
                     setBusy(true);
-                    const canAcceptInput =
-                        workspaceReadyRef.current && !pendingStartupInputRef.current;
+                    const canAcceptInput = shouldEnableWorkspaceTerminalInput({
+                        state: ev.state,
+                        workspaceReady: workspaceReadyRef.current,
+                        pendingStartupInput: pendingStartupInputRef.current,
+                    });
                     setInputEnabled(canAcceptInput);
                     setStarted(true);
                     setStarting(false);
@@ -2593,9 +2785,13 @@ export function useWorkspaceTerminalController(
                 terminalProcessExitedRef.current = false;
                 terminalExitCodeRef.current = null;
                 clearTerminalRecovery();
-                setState("waiting_for_input");
+                setTerminalStateNow("waiting_for_input");
                 setBusy(true);
-                const canAcceptInput = !pendingStartupInputRef.current;
+                const canAcceptInput = shouldEnableWorkspaceTerminalInput({
+                    state: "waiting_for_input",
+                    workspaceReady: workspaceReadyRef.current,
+                    pendingStartupInput: pendingStartupInputRef.current,
+                });
                 setInputEnabled(canAcceptInput);
                 setStarted(true);
                 setStarting(false);
@@ -2623,7 +2819,7 @@ export function useWorkspaceTerminalController(
                 if (ev.stderr) pushChunk("err", ev.stderr);
                 setBusy(false);
                 setInputEnabled(false);
-                setState("failed");
+                setTerminalStateNow("failed");
                 setStarted(false);
                 openInFlightRef.current = null;
                 setTerminalRecovery({
@@ -2682,7 +2878,7 @@ export function useWorkspaceTerminalController(
                 );
                 setBusy(false);
                 setInputEnabled(false);
-                setState("failed");
+                setTerminalStateNow("failed");
                 setStarted(false);
                 openInFlightRef.current = null;
 
@@ -2693,6 +2889,10 @@ export function useWorkspaceTerminalController(
         }
     }, [
         events,
+        eventsSessionId,
+        eventsOwnerKey,
+        sessionId,
+        terminalOwnerKey,
         pushChunk,
         schedulePostEnterSnapshot,
         flushPendingStartupInput,
@@ -2701,10 +2901,21 @@ export function useWorkspaceTerminalController(
         clearStaleStartingTimer,
         scheduleRestartAfterRunnerRecycle,
         setTerminalRecovery,
+        setTerminalStateNow,
     ]);
 
     React.useEffect(() => {
         if (!args.enabled) return;
+        if (
+            !shouldConsumeWorkspaceTerminalEventStream({
+                terminalOwnerKey,
+                currentSessionId: sessionId,
+                eventsSessionId,
+                eventsOwnerKey,
+            })
+        ) {
+            return;
+        }
         if (runSessionState !== "failed") return;
         if (!startedRef.current && !startingRef.current && !sessionId) return;
         if (recoverStateRef.current === "blocked_too_many_sessions") return;
@@ -2722,7 +2933,7 @@ export function useWorkspaceTerminalController(
         pendingRecoveryInputRef.current = "";
         setBusy(false);
         setInputEnabled(false);
-        setState("failed");
+        setTerminalStateNow("failed");
         setStarted(false);
         setStarting(false);
         openInFlightRef.current = null;
@@ -2737,9 +2948,13 @@ export function useWorkspaceTerminalController(
         args.enabled,
         runSessionState,
         sessionId,
+        eventsSessionId,
+        eventsOwnerKey,
+        terminalOwnerKey,
         clearStaleStartingTimer,
         disconnectReason,
         setTerminalRecovery,
+        setTerminalStateNow,
     ]);
 
     React.useEffect(() => {
@@ -2827,42 +3042,80 @@ export function useWorkspaceTerminalController(
     ]);
 
 
-    return {
-        available: args.enabled,
-        started,
-        starting,
-        stopping,
-        busy,
-        inputEnabled,
-        interactiveReady,
-        disconnectedInputGuardActive,
-        sessionId,
-        attachedOwnerKey,
-        state,
-        terminalFeed,
-        terminalEvidence,
-        getTerminalEvidenceNow,
-        syncStatus,
-        recoverState,
-        recoverMessage,
-        restarting,
-        connectionState,
-        socketReadyState,
-        lastSocketMessageAt: lastMessageAt,
+    return React.useMemo(
+        () => ({
+            available: args.enabled,
+            started,
+            starting,
+            stopping,
+            busy,
+            inputEnabled,
+            interactiveReady,
+            disconnectedInputGuardActive,
+            sessionId,
+            attachedOwnerKey,
+            displayedOwnerKey,
+            state,
+            terminalFeed,
+            terminalEvidence,
+            getTerminalEvidenceNow,
+            syncStatus,
+            recoverState,
+            recoverMessage,
+            restarting,
+            connectionState,
+            socketReadyState,
+            lastSocketMessageAt: lastMessageAt,
 
-        open,
-        stop,
-        reset,
-        restart,
-        handleDisconnectedInputAttempt,
+            open,
+            stop,
+            reset,
+            restart,
+            handleDisconnectedInputAttempt,
 
-        sendData,
-        resize,
+            sendData,
+            resize,
 
-        replaceFiles,
-        snapshotFiles,
-        syncWorkspaceNow: pullSnapshotIntoWorkspace,
-        beforeSubmitEnter,
-        afterSubmitEnter,
-    };
+            replaceFiles,
+            snapshotFiles,
+            syncWorkspaceNow: pullSnapshotIntoWorkspace,
+            beforeSubmitEnter,
+            afterSubmitEnter,
+        }),
+        [
+            args.enabled,
+            attachedOwnerKey,
+            beforeSubmitEnter,
+            busy,
+            connectionState,
+            disconnectedInputGuardActive,
+            displayedOwnerKey,
+            getTerminalEvidenceNow,
+            handleDisconnectedInputAttempt,
+            inputEnabled,
+            interactiveReady,
+            lastMessageAt,
+            open,
+            pullSnapshotIntoWorkspace,
+            recoverMessage,
+            recoverState,
+            replaceFiles,
+            reset,
+            resize,
+            restart,
+            restarting,
+            sendData,
+            sessionId,
+            snapshotFiles,
+            socketReadyState,
+            started,
+            starting,
+            state,
+            stop,
+            stopping,
+            syncStatus,
+            terminalEvidence,
+            terminalFeed,
+        ],
+    );
 }

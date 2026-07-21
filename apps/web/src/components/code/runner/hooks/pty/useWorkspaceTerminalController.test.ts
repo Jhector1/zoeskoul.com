@@ -2,13 +2,140 @@ import { describe, expect, it } from "vitest";
 
 import {
     buildWorkspaceTerminalStartupInput,
+    cloneWorkspaceTerminalOwnerSnapshot,
     mergeWorkspaceSnapshotBaseline,
     normalizeRecoverableTerminalError,
     resolveWorkspacePreparationEntries,
     resolveWorkspaceTerminalStartupCwd,
     settleWorkspaceTerminalOpenForCaller,
     shouldPrimeWorkspacePrompt,
+    resolveInitialWorkspaceTerminalCwd,
+    shouldConsumeWorkspaceTerminalEventStream,
+    shouldEnableWorkspaceTerminalInput,
 } from "./useWorkspaceTerminalController";
+
+
+describe("cloneWorkspaceTerminalOwnerSnapshot", () => {
+    it("preserves one terminal's transcript and shell-facing client state independently", () => {
+        const original = {
+            terminalFeed: [
+                { id: 1, kind: "pty" as const, data: "[zoeskoul]~$ ls\r\n" },
+                { id: 2, kind: "pty" as const, data: "events.txt\r\n" },
+            ],
+            terminalEvidence: {
+                commands: ["ls"],
+                outputText: "events.txt\n",
+                cwd: "/workspace/community-project",
+            },
+            lastHandledSeq: 17,
+            nextChunkId: 3,
+            currentCwd: "/workspace/community-project",
+            lastAuthoredCwdApplied: "/workspace/community-project",
+            pendingInputLine: "git sta",
+            escapeSequence: "",
+            terminalHasVisibleOutput: true,
+        };
+
+        const restored = cloneWorkspaceTerminalOwnerSnapshot(original);
+
+        expect(restored).toEqual(original);
+        expect(restored).not.toBe(original);
+        expect(restored.terminalFeed).not.toBe(original.terminalFeed);
+        expect(restored.terminalEvidence).not.toBe(original.terminalEvidence);
+        expect(restored.terminalEvidence.commands).not.toBe(
+            original.terminalEvidence.commands,
+        );
+
+        restored.terminalFeed[0].data = "changed";
+        restored.terminalEvidence.commands.push("git status");
+
+        expect(original.terminalFeed[0].data).toContain("ls");
+        expect(original.terminalEvidence.commands).toEqual(["ls"]);
+    });
+});
+
+
+describe("shouldConsumeWorkspaceTerminalEventStream", () => {
+    it("rejects stdout and status events retained from the previously selected terminal", () => {
+        expect(
+            shouldConsumeWorkspaceTerminalEventStream({
+                terminalOwnerKey: "host:owner:terminal-2",
+                currentSessionId: "session-terminal-1",
+                eventsSessionId: "session-terminal-1",
+                eventsOwnerKey: "host:owner:terminal-1",
+            }),
+        ).toBe(false);
+    });
+
+    it("accepts events only when both the session and terminal owner match", () => {
+        expect(
+            shouldConsumeWorkspaceTerminalEventStream({
+                terminalOwnerKey: "host:owner:terminal-2",
+                currentSessionId: "session-terminal-2",
+                eventsSessionId: "session-terminal-2",
+                eventsOwnerKey: "host:owner:terminal-2",
+            }),
+        ).toBe(true);
+    });
+});
+
+describe("shouldEnableWorkspaceTerminalInput", () => {
+    it("enables typing when runner status arrived before workspace readiness completed", () => {
+        expect(
+            shouldEnableWorkspaceTerminalInput({
+                state: "running",
+                workspaceReady: true,
+                pendingStartupInput: null,
+            }),
+        ).toBe(true);
+    });
+
+    it("keeps input blocked until startup work is actually complete", () => {
+        expect(
+            shouldEnableWorkspaceTerminalInput({
+                state: "running",
+                workspaceReady: false,
+                pendingStartupInput: null,
+            }),
+        ).toBe(false);
+
+        expect(
+            shouldEnableWorkspaceTerminalInput({
+                state: "waiting_for_input",
+                workspaceReady: true,
+                pendingStartupInput: "cd -- /workspace/community-project\n",
+            }),
+        ).toBe(false);
+
+        expect(
+            shouldEnableWorkspaceTerminalInput({
+                state: "preparing",
+                workspaceReady: true,
+                pendingStartupInput: null,
+            }),
+        ).toBe(false);
+    });
+});
+
+describe("resolveInitialWorkspaceTerminalCwd", () => {
+    it("prepares the authored cwd for a genuinely new terminal", () => {
+        expect(
+            resolveInitialWorkspaceTerminalCwd({
+                normalizedCwd: "/workspace/community-project",
+                hasPreservedOwnerState: false,
+            }),
+        ).toBe("/workspace/community-project");
+    });
+
+    it("does not reset cwd when an existing terminal tab reattaches", () => {
+        expect(
+            resolveInitialWorkspaceTerminalCwd({
+                normalizedCwd: "/workspace/community-project",
+                hasPreservedOwnerState: true,
+            }),
+        ).toBeNull();
+    });
+});
 
 
 describe("normalizeRecoverableTerminalError", () => {

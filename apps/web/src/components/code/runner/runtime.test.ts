@@ -95,7 +95,6 @@ describe("resolveTerminalWorkspaceKey", () => {
         );
     });
 
-
     it("changes the lease identity when the authored workspace state changes", () => {
         const first = workspaceTerminalBootstrapKey({
             setupScriptPath: ".zoeskoul/setup.sh",
@@ -130,6 +129,24 @@ describe("resolveTerminalWorkspaceKey", () => {
                 terminalHistoryScopeKey: "local::actor::review-tool:bound-exercise::bash",
             }),
         ).toBe("local::actor::review-tool:bound-exercise::bash");
+    });
+
+    it("digests oversized review workspace identities without collapsing their suffixes", () => {
+        const sharedPrefix = `review-tool:${"serialized-starter".repeat(120)}`;
+        const first = resolveTerminalWorkspaceKey({
+            exerciseStateKey: `${sharedPrefix}:exercise-a`,
+            terminalSessionScope: "exercise",
+            terminalCwd: "/workspace/community-project",
+        });
+        const second = resolveTerminalWorkspaceKey({
+            exerciseStateKey: `${sharedPrefix}:exercise-b`,
+            terminalSessionScope: "exercise",
+            terminalCwd: "/workspace/community-project",
+        });
+
+        expect(first).not.toBe(second);
+        expect(first?.length).toBeLessThanOrEqual(420);
+        expect(second?.length).toBeLessThanOrEqual(420);
     });
 });
 

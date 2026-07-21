@@ -35,6 +35,7 @@ import {
 } from "@/components/code/runner/hooks/pty/useWorkspaceTerminalController";
 import {
     buildTerminalAutoOpenKey,
+    createTerminalEvidence,
     type WorkspaceSyncEntry,
     type WorkspaceTerminalConfig,
 } from "@/components/code/runner/runtime";
@@ -59,6 +60,7 @@ import {
     clearScheduledTerminalHostCleanup,
     createWorkspaceTerminalTab,
     getOrCreateTerminalWindowId,
+    handoffWorkspaceTerminalHost,
     heartbeatTerminalHost,
     isWorkspaceTerminalOwnerReady,
     loadWorkspaceTerminalTabs,
@@ -66,6 +68,7 @@ import {
     readTerminalCapacity,
     reconcileWorkspaceTerminalTabs,
     resolveWorkspaceTerminalActivationFailure,
+    resolveWorkspaceTerminalHydration,
     saveWorkspaceTerminalTabs,
     scheduleTerminalHostCleanup,
     subscribeTerminalCapacityInvalidations,
@@ -80,6 +83,166 @@ import type {
 type MobilePane = "editor" | "output";
 type OutputTab = RunnerPaneTab;
 type PendingTerminalStartMode = "create" | "attach";
+
+export function resolveWorkspaceTerminalPresentation(args: {
+    activationPending: boolean;
+    mode: PendingTerminalStartMode | null;
+    displayMatches: boolean;
+    controllerMatches: boolean;
+}) {
+    const creating = args.activationPending && args.mode === "create";
+
+    return {
+        /** Only a genuinely new shell should render the Opening banner. */
+        showOpening: creating,
+        /** Existing tabs keep their preserved transcript while the socket reattaches. */
+        showTranscript: args.displayMatches,
+        /** Keystrokes are accepted only after this exact owner is attached. */
+        inputAttached: args.controllerMatches,
+    };
+}
+
+const DORMANT_TERMINAL_EVIDENCE = createTerminalEvidence();
+
+const DORMANT_WORKSPACE_TERMINAL_CONTROLLER: WorkspaceTerminalController = {
+    available: false,
+    started: false,
+    starting: false,
+    stopping: false,
+    busy: false,
+    inputEnabled: false,
+    interactiveReady: false,
+    disconnectedInputGuardActive: false,
+    sessionId: null,
+    attachedOwnerKey: null,
+    displayedOwnerKey: null,
+    state: "idle",
+    terminalFeed: [],
+    terminalEvidence: DORMANT_TERMINAL_EVIDENCE,
+    getTerminalEvidenceNow: () => DORMANT_TERMINAL_EVIDENCE,
+    syncStatus: "idle",
+    recoverState: "none",
+    recoverMessage: null,
+    restarting: false,
+    connectionState: "idle",
+    socketReadyState: null,
+    lastSocketMessageAt: null,
+    open: async () => {},
+    stop: async () => {},
+    reset: () => {},
+    restart: async () => {},
+    handleDisconnectedInputAttempt: async () => {},
+    sendData: () => {},
+    resize: () => {},
+    replaceFiles: async () => false,
+    snapshotFiles: async () => [],
+    syncWorkspaceNow: async () => false,
+    beforeSubmitEnter: async () => {},
+    afterSubmitEnter: async () => {},
+};
+
+type WorkspaceTerminalRuntimeBridgeProps = {
+    terminalId: string;
+    /**
+     * Stable identity for one terminal runtime. Equivalent parent renders must
+     * not recreate the controller or republish it to the parent.
+     */
+    runtimeKey: string;
+    controllerConfig: WorkspaceTerminalConfig & { enabled: boolean };
+    onControllerChange: (
+        terminalId: string,
+        controller: WorkspaceTerminalController | null,
+    ) => void;
+};
+
+export function workspaceTerminalRuntimeBridgePropsEqual(
+    previous: WorkspaceTerminalRuntimeBridgeProps,
+    next: WorkspaceTerminalRuntimeBridgeProps,
+) {
+    return (
+        previous.terminalId === next.terminalId &&
+        previous.runtimeKey === next.runtimeKey &&
+        previous.onControllerChange === next.onControllerChange &&
+        previous.controllerConfig.getWorkspaceFiles ===
+            next.controllerConfig.getWorkspaceFiles &&
+        previous.controllerConfig.onTerminalSnapshotFiles ===
+            next.controllerConfig.onTerminalSnapshotFiles
+    );
+}
+
+/**
+ * One bridge owns one terminal controller for its full tab lifetime.
+ *
+ * Keeping every controller mounted gives each terminal an independent
+ * WebSocket, PTY state, transcript, input queue, cwd, and recovery lifecycle.
+ * Selecting another tab becomes a pure display switch instead of disconnecting
+ * one shell and mutating a single shared controller into another shell.
+ */
+const WorkspaceTerminalRuntimeBridge = React.memo(
+    function WorkspaceTerminalRuntimeBridge({
+        terminalId,
+        runtimeKey,
+        controllerConfig,
+        onControllerChange,
+    }: WorkspaceTerminalRuntimeBridgeProps) {
+        const getWorkspaceFilesRef = useRef(controllerConfig.getWorkspaceFiles);
+        const onTerminalSnapshotFilesRef = useRef(
+            controllerConfig.onTerminalSnapshotFiles,
+        );
+        getWorkspaceFilesRef.current = controllerConfig.getWorkspaceFiles;
+        onTerminalSnapshotFilesRef.current =
+            controllerConfig.onTerminalSnapshotFiles;
+
+        const stableControllerConfig = useMemo(
+            () => ({
+                ...controllerConfig,
+                getWorkspaceFiles: controllerConfig.getWorkspaceFiles
+                    ? () => getWorkspaceFilesRef.current?.() ?? []
+                    : undefined,
+                onTerminalSnapshotFiles: controllerConfig.onTerminalSnapshotFiles
+                    ? (files: WorkspaceSyncEntry[], meta: { dirtyUiPaths: Set<string> }) =>
+                          onTerminalSnapshotFilesRef.current?.(files, meta)
+                    : undefined,
+            }),
+            // runtimeKey captures every lifecycle-setting field. Workspace
+            // callbacks stay current through refs without recreating the hook.
+            [runtimeKey],
+        );
+        const controller = useWorkspaceTerminalController(stableControllerConfig);
+
+        // Publish after commit instead of synchronously from a layout effect.
+        // Parent revision updates must never recursively recreate this bridge.
+        useEffect(() => {
+            onControllerChange(terminalId, controller);
+        }, [controller, onControllerChange, terminalId]);
+
+        useEffect(() => {
+            return () => {
+                onControllerChange(terminalId, null);
+            };
+        }, [onControllerChange, terminalId]);
+
+        return null;
+    },
+    workspaceTerminalRuntimeBridgePropsEqual,
+);
+
+export function shouldAttachWorkspaceTerminalTab(args: {
+    ownerKey: string | null;
+    controller: WorkspaceTerminalController | null | undefined;
+}) {
+    if (!args.ownerKey || !args.controller?.available) return true;
+
+    return !isWorkspaceTerminalOwnerReady({
+        activeOwnerKey: args.ownerKey,
+        attachedOwnerKey: args.controller.attachedOwnerKey,
+        sessionId: args.controller.sessionId,
+        interactiveReady: args.controller.interactiveReady,
+        starting: args.controller.starting,
+        stopping: args.controller.stopping,
+        restarting: args.controller.restarting,
+    });
+}
 
 export function resolveSqlMobilePaneDefault(args: {
     language: WorkspaceLanguage;
@@ -661,6 +824,29 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         hostKey: string;
         workspaceKey: string;
     } | null>(null);
+    const terminalControllersRef = useRef(
+        new Map<string, WorkspaceTerminalController>(),
+    );
+    const [terminalControllerRevision, setTerminalControllerRevision] = useState(0);
+    const registerTerminalController = useCallback(
+        (
+            terminalId: string,
+            controller: WorkspaceTerminalController | null,
+        ) => {
+            const current = terminalControllersRef.current.get(terminalId) ?? null;
+
+            if (controller) {
+                if (current === controller) return;
+                terminalControllersRef.current.set(terminalId, controller);
+            } else {
+                if (!current) return;
+                terminalControllersRef.current.delete(terminalId);
+            }
+
+            setTerminalControllerRevision((revision) => revision + 1);
+        },
+        [],
+    );
 
     useEffect(() => {
         terminalHostMountedRef.current = true;
@@ -719,52 +905,23 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
     );
 
     useEffect(() => {
-        if (!resolvedTerminalHostKey) return;
+        if (!resolvedTerminalHostKey || !terminalWindowId) return;
 
-        clearScheduledTerminalHostCleanup(resolvedTerminalHostKey);
+        let disposed = false;
+        let activated = false;
+        let backgroundHydrationTimer: number | null = null;
+        let heartbeatTimer: number | null = null;
+
+        setHydratedTerminalHostKey(null);
+        setPendingTerminalStartId(null);
+        setPendingTerminalStartMode(null);
+        setTerminalTabMessage(null);
         setTerminalCapacityKnown(false);
         setTerminalCapacity({
             activeCount: 0,
             maxActiveSessions: 0,
             hostActiveOwnerKeys: [],
         });
-        const restored = loadWorkspaceTerminalTabs(resolvedTerminalHostKey);
-        let disposed = false;
-
-        /**
-         * Terminal startup must not wait for background ownership/capacity
-         * bookkeeping. Restore the local tab immediately so the PTY ensure call
-         * can begin on this render. The runner still enforces capacity atomically;
-         * this request only updates the counter and reconciles tabs afterward.
-         */
-        setTerminalTabs(restored.tabs);
-        setActiveTerminalId(restored.activeId);
-        setHydratedTerminalHostKey(resolvedTerminalHostKey);
-
-        const backgroundHydrationTimer = window.setTimeout(() => {
-            void heartbeatTerminalHost(resolvedTerminalHostKey).catch(() => {});
-            void readTerminalCapacity(resolvedTerminalHostKey)
-                .then((capacity) => {
-                    if (disposed) return;
-
-                    setTerminalCapacity(capacity);
-                    setTerminalCapacityKnown(true);
-                    setTerminalTabMessage(null);
-                    const reconciled = reconcileWorkspaceTerminalTabs({
-                        hostKey: resolvedTerminalHostKey,
-                        tabs: restored.tabs,
-                        activeId: restored.activeId,
-                        liveOwnerKeys: capacity.hostActiveOwnerKeys,
-                    });
-                    setTerminalTabs(reconciled.tabs);
-                    setActiveTerminalId(reconciled.activeId);
-                })
-                .catch(() => {
-                    if (disposed) return;
-                    setTerminalCapacityKnown(false);
-                    setTerminalTabMessage("New terminals are temporarily unavailable.");
-                });
-        }, 250);
 
         const handlePageHide = () => {
             cancelTerminalHostNow(resolvedTerminalHostKey);
@@ -772,17 +929,97 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         const heartbeat = () => {
             void heartbeatTerminalHost(resolvedTerminalHostKey);
         };
-        const heartbeatTimer = window.setInterval(heartbeat, 25_000);
-        window.addEventListener("pagehide", handlePageHide);
+
+        /**
+         * A route transition may unmount the previous topic and mount this one
+         * before the old host's cleanup grace timer fires. Gate controller
+         * hydration on an explicit host handoff so the old PTYs are released
+         * before this topic can auto-open Terminal 1. Same-host remounts skip the
+         * cancellation and preserve their existing shells.
+         */
+        void handoffWorkspaceTerminalHost({
+            slotKey: terminalWindowId,
+            hostKey: resolvedTerminalHostKey,
+        })
+            .then((canActivate) => {
+                if (disposed || !canActivate) return;
+
+                activated = true;
+                const restored = loadWorkspaceTerminalTabs(resolvedTerminalHostKey);
+                const hydration = resolveWorkspaceTerminalHydration(restored);
+
+                /**
+                 * Once the handoff is complete, restore local tabs immediately.
+                 * Runner capacity and stale-tab reconciliation remain background
+                 * work, but no new controller can race the previous topic anymore.
+                 */
+                setTerminalTabs(hydration.tabs);
+                setActiveTerminalId(hydration.activeId);
+                setHydratedTerminalHostKey(resolvedTerminalHostKey);
+
+                /**
+                 * Hydrating a terminal host must also activate its visible tab.
+                 * Relying on the independent auto-open effect leaves a newly
+                 * navigated topic in a blank Idle state when the previous
+                 * terminal scope still owns an anti-hammer claim or when review
+                 * hydration remounts the controller during the first attempt.
+                 */
+                setPendingTerminalStartMode(hydration.pendingStartMode);
+                setPendingTerminalStartId(hydration.pendingStartId);
+
+                backgroundHydrationTimer = window.setTimeout(() => {
+                    void heartbeatTerminalHost(resolvedTerminalHostKey).catch(() => {});
+                    void readTerminalCapacity(resolvedTerminalHostKey)
+                        .then((capacity) => {
+                            if (disposed) return;
+
+                            setTerminalCapacity(capacity);
+                            setTerminalCapacityKnown(true);
+                            setTerminalTabMessage(null);
+                            const reconciled = reconcileWorkspaceTerminalTabs({
+                                hostKey: resolvedTerminalHostKey,
+                                tabs: hydration.tabs,
+                                activeId: hydration.activeId,
+                                liveOwnerKeys: capacity.hostActiveOwnerKeys,
+                            });
+                            setTerminalTabs(reconciled.tabs);
+                            setActiveTerminalId(reconciled.activeId);
+                        })
+                        .catch(() => {
+                            if (disposed) return;
+                            setTerminalCapacityKnown(false);
+                            setTerminalTabMessage(
+                                "New terminals are temporarily unavailable.",
+                            );
+                        });
+                }, 250);
+
+                heartbeatTimer = window.setInterval(heartbeat, 25_000);
+                window.addEventListener("pagehide", handlePageHide);
+            })
+            .catch(() => {
+                if (disposed) return;
+
+                setTerminalCapacityKnown(false);
+                setTerminalTabMessage(
+                    "Could not release the previous topic terminals. Try again.",
+                );
+            });
 
         return () => {
             disposed = true;
-            window.clearTimeout(backgroundHydrationTimer);
-            window.clearInterval(heartbeatTimer);
+            if (backgroundHydrationTimer != null) {
+                window.clearTimeout(backgroundHydrationTimer);
+            }
+            if (heartbeatTimer != null) {
+                window.clearInterval(heartbeatTimer);
+            }
             window.removeEventListener("pagehide", handlePageHide);
-            scheduleTerminalHostCleanup(resolvedTerminalHostKey);
+            if (activated) {
+                scheduleTerminalHostCleanup(resolvedTerminalHostKey);
+            }
         };
-    }, [resolvedTerminalHostKey]);
+    }, [resolvedTerminalHostKey, terminalWindowId]);
 
     useEffect(() => {
         if (!resolvedTerminalHostKey) return;
@@ -1435,27 +1672,12 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         onTerminalSnapshotFiles: workspaceTerminal?.onTerminalSnapshotFiles,
     } as any);
 
-    const workspaceTerm = useWorkspaceTerminalController({
-        enabled:
-            workspaceTerminalEnabled &&
-            Boolean(resolvedTerminalHostKey) &&
-            hydratedTerminalHostKey === resolvedTerminalHostKey &&
-            Boolean(activeTerminalOwnerKey),
-        projectId: workspaceTerminal?.projectId,
-        cwd: workspaceTerminal?.cwd,
-        bootstrap: workspaceTerminal?.bootstrap,
-        workspaceKey: workspaceTerminal?.workspaceKey ?? effectiveExerciseStateKey,
-        terminalHostKey: resolvedTerminalHostKey ?? undefined,
-        terminalOwnerKey: activeTerminalOwnerKey ?? undefined,
-        preserveSessionOnUnmount: true,
-        initialFiles: workspaceTerminal?.initialFiles,
-        getWorkspaceFiles: workspaceTerminal?.getWorkspaceFiles,
-        onTerminalSnapshotFiles: workspaceTerminal?.onTerminalSnapshotFiles,
-        lazy: workspaceTerminal?.lazy ?? true,
-        title: workspaceTerminal?.title,
-        historyScopeKey: workspaceTerminal?.historyScopeKey,
-        exerciseStateKey: effectiveExerciseStateKey,
-    });
+    const workspaceTerm = useMemo(
+        () =>
+            terminalControllersRef.current.get(activeTerminalId) ??
+            DORMANT_WORKSPACE_TERMINAL_CONTROLLER,
+        [activeTerminalId, terminalControllerRevision],
+    );
 
     useEffect(() => {
         onTerminalEvidenceChange?.(workspaceTerm.terminalEvidence);
@@ -1490,6 +1712,10 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         activeTerminalOwnerKey &&
             workspaceTerm.attachedOwnerKey === activeTerminalOwnerKey,
     );
+    const activeTerminalDisplayMatches = Boolean(
+        activeTerminalOwnerKey &&
+            workspaceTerm.displayedOwnerKey === activeTerminalOwnerKey,
+    );
     const activeWorkspaceTerminalReady = isWorkspaceTerminalOwnerReady({
         activeOwnerKey: activeTerminalOwnerKey,
         attachedOwnerKey: workspaceTerm.attachedOwnerKey,
@@ -1502,7 +1728,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
 
     useEffect(() => {
         if (pendingTerminalStartId !== activeTerminalId) return;
-        if (!workspaceTerminalEnabled || disabled) return;
+        if (!workspaceTerminalEnabled || disabled || !workspaceTerm.available) return;
 
         const startingTerminalId = pendingTerminalStartId;
         const startingMode = pendingTerminalStartMode ?? "attach";
@@ -1564,6 +1790,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         pendingTerminalStartMode,
         refreshTerminalCapacity,
         terminalTabs,
+        workspaceTerm.available,
         workspaceTerm.open,
         workspaceTerminalEnabled,
     ]);
@@ -1790,6 +2017,8 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
     ]);
 
     useEffect(() => {
+        if (!workspaceTerm.available) return;
+
         if (
             !shouldAutoOpenWorkspaceTerminal({
                 outputTab,
@@ -1844,6 +2073,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
     }, [
         outputTab,
         workspaceTerminalEnabled,
+        workspaceTerm.available,
         workspaceTerm.sessionId,
         workspaceTerm.started,
         workspaceTerm.starting,
@@ -2054,10 +2284,29 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
 
             if (terminalId !== activeTerminalId) {
                 previousActiveTerminalIdRef.current = activeTerminalId;
-                setPendingTerminalStartMode("attach");
-                setPendingTerminalStartId(terminalId);
                 setActiveTerminalId(terminalId);
                 terminalAutoOpenRequestedKeyRef.current = null;
+
+                const ownerKey = resolvedTerminalHostKey
+                    ? buildWorkspaceTerminalOwnerKey({
+                          hostKey: resolvedTerminalHostKey,
+                          terminalId,
+                      })
+                    : null;
+                const controller = terminalControllersRef.current.get(terminalId);
+
+                if (
+                    shouldAttachWorkspaceTerminalTab({
+                        ownerKey,
+                        controller,
+                    })
+                ) {
+                    setPendingTerminalStartMode("attach");
+                    setPendingTerminalStartId(terminalId);
+                } else {
+                    setPendingTerminalStartMode(null);
+                    setPendingTerminalStartId(null);
+                }
             }
 
             if (isNarrowScreen && showEditor && showTerminal) {
@@ -2067,6 +2316,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         [
             activeTerminalId,
             isNarrowScreen,
+            resolvedTerminalHostKey,
             showEditor,
             showTerminal,
         ],
@@ -2174,9 +2424,27 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                 )?.id;
                 previousActiveTerminalIdRef.current =
                     alternateFallback ?? resolvedNextActive;
-                setPendingTerminalStartMode("attach");
-                setPendingTerminalStartId(resolvedNextActive);
                 terminalAutoOpenRequestedKeyRef.current = null;
+
+                const nextOwnerKey = buildWorkspaceTerminalOwnerKey({
+                    hostKey: resolvedTerminalHostKey,
+                    terminalId: resolvedNextActive,
+                });
+                const nextController =
+                    terminalControllersRef.current.get(resolvedNextActive);
+
+                if (
+                    shouldAttachWorkspaceTerminalTab({
+                        ownerKey: nextOwnerKey,
+                        controller: nextController,
+                    })
+                ) {
+                    setPendingTerminalStartMode("attach");
+                    setPendingTerminalStartId(resolvedNextActive);
+                } else {
+                    setPendingTerminalStartMode(null);
+                    setPendingTerminalStartId(null);
+                }
             } else if (pendingTerminalStartId === terminalId) {
                 setPendingTerminalStartId(null);
                 setPendingTerminalStartMode(null);
@@ -2267,22 +2535,30 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
 
     const renderOutputBody = () => {
         if (outputTab === "terminal" && showWorkspaceTerminalTab) {
-            const transitioningOwner =
-                pendingTerminalStartId === activeTerminalId ||
-                !activeTerminalControllerMatches;
+            const activationPending = pendingTerminalStartId === activeTerminalId;
+            const presentation = resolveWorkspaceTerminalPresentation({
+                activationPending,
+                mode: pendingTerminalStartMode,
+                displayMatches: activeTerminalDisplayMatches,
+                controllerMatches: activeTerminalControllerMatches,
+            });
+            const activeTerminalLabel =
+                terminalTabs.find((tab) => tab.id === activeTerminalId)?.label ??
+                "terminal";
 
             return (
                 <XtermTerminal
                     key={activeTerminalOwnerKey ?? activeTerminalId}
                     terminalFeed={
-                        activeTerminalControllerMatches
-                            ? workspaceTerm.terminalFeed
-                            : []
+                        presentation.showTranscript ? workspaceTerm.terminalFeed : []
                     }
                     inputEnabled={
-                        activeTerminalControllerMatches && workspaceTerm.inputEnabled
+                        presentation.inputAttached && workspaceTerm.inputEnabled
                     }
-                    busy={transitioningOwner || workspaceTerm.busy}
+                    busy={
+                        presentation.showOpening ||
+                        (presentation.inputAttached && workspaceTerm.busy)
+                    }
                     disabled={disabled}
                     lastResult={null}
                     onSendData={workspaceTerm.sendData}
@@ -2290,28 +2566,33 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                     onBeforeSubmitEnter={workspaceTerm.beforeSubmitEnter}
                     onAfterSubmitEnter={workspaceTerm.afterSubmitEnter}
                     recoverState={
-                        transitioningOwner ? "starting" : workspaceTerm.recoverState
+                        presentation.showOpening
+                            ? "starting"
+                            : presentation.showTranscript
+                              ? workspaceTerm.recoverState
+                              : "none"
                     }
                     recoverMessage={
-                        transitioningOwner
-                            ? `Opening ${
-                                  terminalTabs.find(
-                                      (tab) => tab.id === activeTerminalId,
-                                  )?.label ?? "terminal"
-                              }…`
-                            : workspaceTerm.recoverMessage
+                        presentation.showOpening
+                            ? `Opening ${activeTerminalLabel}…`
+                            : presentation.showTranscript
+                              ? workspaceTerm.recoverMessage
+                              : null
                     }
-                    restarting={transitioningOwner || workspaceTerm.restarting}
+                    restarting={
+                        presentation.showOpening ||
+                        (presentation.inputAttached && workspaceTerm.restarting)
+                    }
                     interactiveReady={activeWorkspaceTerminalReady}
                     cwdLabel={
-                        activeTerminalControllerMatches
+                        presentation.showTranscript
                             ? workspaceTerm.terminalEvidence.cwd ??
                               workspaceTerminal?.cwd ??
                               null
                             : workspaceTerminal?.cwd ?? null
                     }
                     captureInactiveInput={
-                        activeTerminalControllerMatches &&
+                        presentation.inputAttached &&
                         workspaceTerm.disconnectedInputGuardActive
                     }
                     onRestart={() =>
@@ -2533,6 +2814,54 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
 
     return (
         <div ref={runnerRootRef} className={outerCls} data-testid={testId} style={rootStyle}>
+            {workspaceTerminalEnabled &&
+            resolvedTerminalHostKey &&
+            hydratedTerminalHostKey === resolvedTerminalHostKey
+                ? terminalTabs.map((tab) => (
+                      <WorkspaceTerminalRuntimeBridge
+                          key={`terminal-runtime:${tab.id}`}
+                          terminalId={tab.id}
+                          runtimeKey={[
+                              resolvedTerminalHostKey,
+                              buildWorkspaceTerminalOwnerKey({
+                                  hostKey: resolvedTerminalHostKey,
+                                  terminalId: tab.id,
+                              }),
+                              workspaceTerminal?.workspaceKey ??
+                                  effectiveExerciseStateKey ??
+                                  "workspace",
+                              effectiveExerciseStateKey ?? "exercise",
+                              workspaceTerminal?.projectId ?? "project",
+                              workspaceTerminal?.cwd ?? "/workspace",
+                              workspaceTerminal?.historyScopeKey ?? "history",
+                          ].join("\u0000")}
+                          controllerConfig={{
+                              enabled: true,
+                              projectId: workspaceTerminal?.projectId,
+                              cwd: workspaceTerminal?.cwd,
+                              bootstrap: workspaceTerminal?.bootstrap,
+                              workspaceKey:
+                                  workspaceTerminal?.workspaceKey ??
+                                  effectiveExerciseStateKey,
+                              terminalHostKey: resolvedTerminalHostKey,
+                              terminalOwnerKey: buildWorkspaceTerminalOwnerKey({
+                                  hostKey: resolvedTerminalHostKey,
+                                  terminalId: tab.id,
+                              }),
+                              preserveSessionOnUnmount: true,
+                              initialFiles: workspaceTerminal?.initialFiles,
+                              getWorkspaceFiles: workspaceTerminal?.getWorkspaceFiles,
+                              onTerminalSnapshotFiles:
+                                  workspaceTerminal?.onTerminalSnapshotFiles,
+                              lazy: workspaceTerminal?.lazy ?? true,
+                              title: workspaceTerminal?.title,
+                              historyScopeKey: workspaceTerminal?.historyScopeKey,
+                              exerciseStateKey: effectiveExerciseStateKey,
+                          }}
+                          onControllerChange={registerTerminalController}
+                      />
+                  ))
+                : null}
             {showHeaderBar ? (
                 <div className="relative px-2 z-20 overflow-visible @container">
                     <HeaderBar

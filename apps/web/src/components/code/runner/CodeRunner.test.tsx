@@ -6,6 +6,9 @@ import CodeRunner, {
     resolveMobileKeyboardViewport,
     resolveSqlMobilePaneDefault,
     resolveRunnerPaneDefaultTab,
+    resolveWorkspaceTerminalPresentation,
+    shouldAttachWorkspaceTerminalTab,
+    workspaceTerminalRuntimeBridgePropsEqual,
     shouldCollapseIdleOutputPanel,
     shouldAutoOpenWorkspaceTerminal,
     shouldOpenEditorForWorkspaceFileSelection,
@@ -73,6 +76,7 @@ vi.mock("@/components/code/runner/hooks/pty/useWorkspaceTerminalController", () 
             available: true,
             terminalFeed: [],
             terminalEvidence: { commands: [], outputText: "" },
+            getTerminalEvidenceNow: () => ({ commands: [], outputText: "" }),
             inputEnabled: true,
             interactiveReady: true,
             disconnectedInputGuardActive: false,
@@ -91,6 +95,8 @@ vi.mock("@/components/code/runner/hooks/pty/useWorkspaceTerminalController", () 
             afterSubmitEnter: vi.fn(),
             handleDisconnectedInputAttempt: vi.fn(),
             sessionId: "session-1",
+            attachedOwnerKey: args.terminalOwnerKey ?? null,
+            displayedOwnerKey: args.terminalOwnerKey ?? null,
             started: true,
             starting: false,
             state: "ready",
@@ -100,9 +106,131 @@ vi.mock("@/components/code/runner/hooks/pty/useWorkspaceTerminalController", () 
             restart: vi.fn(),
             replaceFiles: vi.fn(),
             snapshotFiles: vi.fn(),
+            syncWorkspaceNow: vi.fn(),
         };
     },
 }));
+
+describe("CodeRunner persistent terminal controllers", () => {
+    const ownerKey = "terminal-host:window:owner:terminal-1";
+    const DUMMY_CONTROLLER = {
+        starting: false,
+        stopping: false,
+        restarting: false,
+    };
+
+    function controller(overrides: Record<string, unknown> = {}) {
+        return {
+            ...DUMMY_CONTROLLER,
+            available: true,
+            sessionId: "session-1",
+            attachedOwnerKey: ownerKey,
+            interactiveReady: true,
+            ...overrides,
+        } as any;
+    }
+
+    it("does not reattach a terminal whose own persistent controller is already interactive", () => {
+        expect(
+            shouldAttachWorkspaceTerminalTab({
+                ownerKey,
+                controller: controller(),
+            }),
+        ).toBe(false);
+    });
+
+    it("reattaches only when that terminal has no live interactive controller", () => {
+        expect(
+            shouldAttachWorkspaceTerminalTab({
+                ownerKey,
+                controller: controller({
+                    sessionId: null,
+                    attachedOwnerKey: null,
+                    interactiveReady: false,
+                }),
+            }),
+        ).toBe(true);
+    });
+
+    it("does not republish a runtime when only the controller config object is recreated", () => {
+        const getWorkspaceFiles = vi.fn(() => []);
+        const onTerminalSnapshotFiles = vi.fn();
+        const onControllerChange = vi.fn();
+        const base = {
+            terminalId: "primary",
+            runtimeKey: "host\0owner\0workspace",
+            onControllerChange,
+            controllerConfig: {
+                enabled: true,
+                getWorkspaceFiles,
+                onTerminalSnapshotFiles,
+            },
+        } as any;
+
+        expect(
+            workspaceTerminalRuntimeBridgePropsEqual(base, {
+                ...base,
+                controllerConfig: { ...base.controllerConfig },
+            }),
+        ).toBe(true);
+    });
+
+    it("rerenders the bridge when a live workspace callback changes", () => {
+        const base = {
+            terminalId: "primary",
+            runtimeKey: "host\0owner\0workspace",
+            onControllerChange: vi.fn(),
+            controllerConfig: {
+                enabled: true,
+                getWorkspaceFiles: vi.fn(() => []),
+                onTerminalSnapshotFiles: vi.fn(),
+            },
+        } as any;
+
+        expect(
+            workspaceTerminalRuntimeBridgePropsEqual(base, {
+                ...base,
+                controllerConfig: {
+                    ...base.controllerConfig,
+                    getWorkspaceFiles: vi.fn(() => []),
+                },
+            }),
+        ).toBe(false);
+    });
+});
+
+describe("CodeRunner terminal tab presentation", () => {
+    it("keeps an existing terminal transcript visible while its socket reattaches", () => {
+        expect(
+            resolveWorkspaceTerminalPresentation({
+                activationPending: true,
+                mode: "attach",
+                displayMatches: true,
+                controllerMatches: false,
+            }),
+        ).toEqual({
+            showOpening: false,
+            showTranscript: true,
+            inputAttached: false,
+        });
+    });
+
+    it("shows Opening only for a genuinely new terminal session", () => {
+        expect(
+            resolveWorkspaceTerminalPresentation({
+                activationPending: true,
+                mode: "create",
+                displayMatches: true,
+                controllerMatches: false,
+            }),
+        ).toEqual({
+            showOpening: true,
+            showTranscript: true,
+            inputAttached: false,
+        });
+    });
+});
+
 
 describe("CodeRunner SQL narrow-pane defaults", () => {
     it("opens the output surface when a SQL lesson authors a default data tab", () => {

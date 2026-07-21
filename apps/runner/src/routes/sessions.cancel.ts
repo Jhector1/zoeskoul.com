@@ -12,7 +12,18 @@ export const cancelSessionRoute: RequestHandler = async (req, res) => {
         if (!session) return res.json({ ok: true });
         if (session.ownerKey !== actorKey) throw new Error("Forbidden.");
 
-        await killSession(sessionId, "canceled");
+        /**
+         * killSession finalizes the registry entry synchronously, which releases
+         * terminal capacity immediately. Do not keep the HTTP response blocked on
+         * Docker teardown; topic navigation can safely start the replacement PTY
+         * while the old container is being removed in the background.
+         */
+        void killSession(sessionId, "canceled").catch((error) => {
+            console.warn("RUNNER background session teardown failed", {
+                sessionId,
+                message: error instanceof Error ? error.message : String(error),
+            });
+        });
 
         return res.json({ ok: true });
     } catch (e: any) {

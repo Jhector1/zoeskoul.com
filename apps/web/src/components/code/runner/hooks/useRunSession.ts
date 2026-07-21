@@ -33,6 +33,43 @@ type CancelSessionResult =
     | { ok: true }
     | { ok: false; error: string };
 
+/**
+ * Events must stay attached to the exact backend session and terminal owner.
+ * Clearing a React array is asynchronous; without this identity envelope, the
+ * previous terminal's replay can be consumed during the render that opens a
+ * new tab.
+ */
+export type RunEventStream = {
+    sessionId: string | null;
+    ownerKey: string | null;
+    events: RunEvent[];
+};
+
+export function appendRunEventToStream(
+    stream: RunEventStream,
+    args: {
+        sessionId: string;
+        ownerKey: string | null;
+        event: RunEvent;
+    },
+): RunEventStream {
+    if (
+        stream.sessionId !== args.sessionId ||
+        stream.ownerKey !== args.ownerKey
+    ) {
+        return stream;
+    }
+
+    return {
+        ...stream,
+        events: [...stream.events, args.event],
+    };
+}
+
+function normalizeSessionOwnerKey(value: unknown): string | null {
+    return typeof value === "string" && value.trim() ? value.trim() : null;
+}
+
 async function parseJsonSafe<T>(
     res: Response,
     fallbackPrefix: string,
@@ -67,7 +104,11 @@ const SOCKET_PROBE_TIMEOUT_MS = 4_000;
 export function useRunSession() {
     const [sessionId, setSessionId] = React.useState<string | null>(null);
     const [state, setState] = React.useState<RunSessionState>("queued");
-    const [events, setEvents] = React.useState<RunEvent[]>([]);
+    const [eventStream, setEventStream] = React.useState<RunEventStream>({
+        sessionId: null,
+        ownerKey: null,
+        events: [],
+    });
     const [connectionState, setConnectionState] =
         React.useState<TerminalConnectionState>("idle");
     const [socketReadyState, setSocketReadyState] = React.useState<number | null>(null);
@@ -79,6 +120,7 @@ export function useRunSession() {
     const pendingRef = React.useRef<string[]>([]);
     const sessionIdRef = React.useRef<string | null>(null);
     const stateRef = React.useRef<RunSessionState>("queued");
+    const connectionGenerationRef = React.useRef(0);
     const connectionStateRef = React.useRef<TerminalConnectionState>("idle");
     const lastMessageAtRef = React.useRef<number | null>(null);
     const probeInFlightRef = React.useRef<Promise<boolean> | null>(null);
@@ -246,10 +288,23 @@ export function useRunSession() {
     }, [clearProbeTimer, markDisconnected]);
 
     const connect = React.useCallback(
-        (nextSessionId: string, nextState: RunSessionState, rawWsUrl: string) => {
+        (
+            nextSessionId: string,
+            nextState: RunSessionState,
+            rawWsUrl: string,
+            nextOwnerKey?: string | null,
+        ) => {
             closeSocket();
 
-            setEvents([]);
+            const normalizedOwnerKey = normalizeSessionOwnerKey(nextOwnerKey);
+            const connectionGeneration = connectionGenerationRef.current + 1;
+            connectionGenerationRef.current = connectionGeneration;
+            const nextEventStream: RunEventStream = {
+                sessionId: nextSessionId,
+                ownerKey: normalizedOwnerKey,
+                events: [],
+            };
+            setEventStream(nextEventStream);
             setSessionId(nextSessionId);
             sessionIdRef.current = nextSessionId;
             setState(nextState);
@@ -264,8 +319,15 @@ export function useRunSession() {
             const finalWsUrl = toWebSocketUrl(rawWsUrl);
             const ws = new WebSocket(finalWsUrl);
             let socketOpened = false;
+            const isCurrentGeneration = () =>
+                connectionGenerationRef.current === connectionGeneration;
+            const isCurrentConnection = () =>
+                isCurrentGeneration() &&
+                sessionIdRef.current === nextSessionId &&
+                wsRef.current === ws;
 
             ws.onopen = () => {
+                if (!isCurrentConnection()) return;
                 socketOpened = true;
                 const now = Date.now();
                 setSocketHealth({
@@ -282,6 +344,8 @@ export function useRunSession() {
             };
 
             ws.onmessage = (ev) => {
+                if (!isCurrentConnection()) return;
+
                 const now = Date.now();
                 setSocketHealth({
                     connectionState: "connected",
@@ -299,7 +363,15 @@ export function useRunSession() {
 
                 if (msg.type === "event") {
                     const parsedEvent = msg.event;
-                    setEvents((prev) => [...prev, parsedEvent]);
+                    setEventStream((previous) => {
+                        if (!isCurrentConnection()) return previous;
+
+                        return appendRunEventToStream(previous, {
+                            sessionId: nextSessionId,
+                            ownerKey: normalizedOwnerKey,
+                            event: parsedEvent,
+                        });
+                    });
 
                     if (parsedEvent.type === "status") {
                         setState(parsedEvent.state);
@@ -326,6 +398,8 @@ export function useRunSession() {
             };
 
             ws.onerror = () => {
+                if (!isCurrentConnection()) return;
+
                 if (
                     expectedSocketClosuresRef.current.has(ws) ||
                     (wsRef.current !== ws && ws.readyState !== WebSocket.OPEN)
@@ -341,6 +415,10 @@ export function useRunSession() {
 
             ws.onclose = () => {
                 const expected = expectedSocketClosuresRef.current.has(ws);
+                if (!isCurrentGeneration()) {
+                    expectedSocketClosuresRef.current.delete(ws);
+                    return;
+                }
                 expectedSocketClosuresRef.current.delete(ws);
 
                 if (wsRef.current === ws) {
@@ -412,7 +490,12 @@ export function useRunSession() {
                 );
             }
 
-            connect(data.sessionId, data.state, data.wsUrl);
+            connect(
+                data.sessionId,
+                data.state,
+                data.wsUrl,
+                normalizeSessionOwnerKey((req as { ownerKey?: unknown }).ownerKey),
+            );
             return data.sessionId;
         },
         [connect],
@@ -538,7 +621,9 @@ export function useRunSession() {
         () => ({
             sessionId,
             state,
-            events,
+            events: eventStream.events,
+            eventsSessionId: eventStream.sessionId,
+            eventsOwnerKey: eventStream.ownerKey,
             connectionState,
             socketReadyState,
             lastMessageAt,
@@ -554,7 +639,7 @@ export function useRunSession() {
         [
             sessionId,
             state,
-            events,
+            eventStream,
             connectionState,
             socketReadyState,
             lastMessageAt,

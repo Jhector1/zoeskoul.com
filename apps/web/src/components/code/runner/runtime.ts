@@ -10,6 +10,7 @@ import type { BatchRunResult } from "@/lib/code/types/batch";
 import type { SqlDialect, TerminalEvidence } from "@/lib/practice/types";
 import type { WorkspaceStateV2 } from "@/components/ide/types";
 import type { OnRun, RunnerState, TermLine } from "./types";
+import { compactTerminalIdentityKey } from "./terminalIdentity";
 
 export type { WorkspaceSyncEntry };
 export type { TerminalEvidence };
@@ -181,6 +182,8 @@ export type WorkspaceTerminalController = {
     sessionId: string | null;
     /** Browser terminal owner currently attached to this controller. */
     attachedOwnerKey: string | null;
+    /** Owner whose preserved transcript is currently loaded for display. */
+    displayedOwnerKey: string | null;
     state: RunSessionState | "idle";
     terminalFeed: TerminalChunk[];
     terminalEvidence: TerminalEvidence;
@@ -424,9 +427,11 @@ export function resolveTerminalWorkspaceKey(args: {
     const withTerminalCwd = (base: string | undefined) => {
         if (!base) return undefined;
         const withCwd = terminalCwd ? `${base}::cwd:${terminalCwd}` : base;
-        return terminalBootstrapKey
+        const identity = terminalBootstrapKey
             ? `${withCwd}::bootstrap:${terminalBootstrapKey}`
             : withCwd;
+
+        return compactTerminalIdentityKey(identity, 420);
     };
 
     if (scope === "project") {
