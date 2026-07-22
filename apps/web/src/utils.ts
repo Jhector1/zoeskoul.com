@@ -16,6 +16,7 @@ export const ROUTES = {
         `/subjects/${subjectSlug}/modules/${moduleSlug}/practice`,
 
     review: "/review",
+    dailyPractice: "/practice/daily",
     signIn: "/auth/signin",
     pricing: "/billing",
     contact: "/contact",

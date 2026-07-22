@@ -1,8 +1,8 @@
 {
   "topicId": "why-version-control-matters",
-  "subjectSlug": "git",
+  "subjectSlug": "git--git-foundations--draft",
   "moduleSlug": "git-foundations-module-1-start-tracking",
-  "sectionSlug": "git-foundations-section-1-repository-basics",
+  "sectionSlug": "git--git-foundations--draft-git-foundations-section-1-repository-basics",
   "prefix": "git_foundations_module_1",
   "minutes": 16,
   "runtimeDefaults": {
@@ -16,41 +16,56 @@
   },
   "serviceDefaults": {
     "runnerBackend": "pty",
-    "layoutMode": "terminal_workspace",
     "requires": {
       "files": true,
       "multiFile": true,
       "terminal": true
+    },
+    "preset": "runner",
+    "layoutMode": "default",
+    "terminalBootstrap": {
+      "gitSafeDirectories": [
+        "/workspace/*"
+      ],
+      "setupScriptPath": ".zoeskoul/setup.sh"
+    }
+  },
+  "tools": {
+    "defaultSurface": "results",
+    "compactDefaultSurface": "results",
+    "runnerPane": {
+      "defaultTab": "terminal",
+      "compactDefaultTab": "terminal"
     }
   },
   "topic": {
-    "labelKey": "topics.git.git-foundations-module-1-start-tracking.why-version-control-matters.label",
-    "summaryKey": "topics.git.git-foundations-module-1-start-tracking.why-version-control-matters.summary"
+    "labelKey": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.why-version-control-matters.label",
+    "summaryKey": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.why-version-control-matters.summary"
   },
   "cards": [
     {
       "id": "sketch0",
       "kind": "sketch",
-      "titleKey": "topics.git.git-foundations-module-1-start-tracking.why-version-control-matters.cards.sketch0.title",
-      "sketchId": "intro-memory",
+      "titleKey": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.why-version-control-matters.cards.sketch0.title",
+      "sketchId": "intro-why-memory",
       "height": 420
     },
     {
       "id": "sketch1",
       "kind": "sketch",
-      "titleKey": "topics.git.git-foundations-module-1-start-tracking.why-version-control-matters.cards.sketch1.title",
-      "sketchId": "worked-example",
+      "titleKey": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.why-version-control-matters.cards.sketch1.title",
+      "sketchId": "worked-example-snapshot",
       "height": 420
     },
     {
       "id": "quiz",
       "kind": "quiz",
-      "titleKey": "topics.git.git-foundations-module-1-start-tracking.why-version-control-matters.cards.quiz.title",
+      "titleKey": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.why-version-control-matters.cards.quiz.title",
       "quiz": {
         "difficulty": "easy",
         "n": 4,
         "min": 4,
-        "max": 4,
+        "max": 6,
         "selectionMode": "random",
         "allowReveal": true,
         "preferKind": null,
@@ -60,25 +75,25 @@
   ],
   "sketches": [
     {
-      "id": "intro-memory",
+      "id": "intro-why-memory",
       "archetype": "paragraph",
-      "titleKey": "sketches.git.git-foundations-module-1-start-tracking.why-version-control-matters.intro-memory.title",
-      "bodyKey": "sketches.git.git-foundations-module-1-start-tracking.why-version-control-matters.intro-memory.bodyMarkdown"
+      "titleKey": "sketches.git--git-foundations--draft.git-foundations-module-1-start-tracking.why-version-control-matters.intro-why-memory.title",
+      "bodyKey": "sketches.git--git-foundations--draft.git-foundations-module-1-start-tracking.why-version-control-matters.intro-why-memory.bodyMarkdown"
     },
     {
-      "id": "worked-example",
+      "id": "worked-example-snapshot",
       "archetype": "paragraph",
-      "titleKey": "sketches.git.git-foundations-module-1-start-tracking.why-version-control-matters.worked-example.title",
-      "bodyKey": "sketches.git.git-foundations-module-1-start-tracking.why-version-control-matters.worked-example.bodyMarkdown"
+      "titleKey": "sketches.git--git-foundations--draft.git-foundations-module-1-start-tracking.why-version-control-matters.worked-example-snapshot.title",
+      "bodyKey": "sketches.git--git-foundations--draft.git-foundations-module-1-start-tracking.why-version-control-matters.worked-example-snapshot.bodyMarkdown"
     }
   ],
   "exercises": [
     {
-      "id": "sc-1",
+      "id": "sc-why-1",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.git.git-foundations-module-1-start-tracking.why-version-control-matters.practice.sc-1",
+      "messageBase": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.why-version-control-matters.practice.sc-why-1",
       "optionIds": [
         "a",
         "b",
@@ -87,15 +102,15 @@
       ],
       "expected": {
         "kind": "single_choice",
-        "optionId": "a"
+        "optionId": "b"
       }
     },
     {
-      "id": "sc-2",
+      "id": "sc-why-2",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.git.git-foundations-module-1-start-tracking.why-version-control-matters.practice.sc-2",
+      "messageBase": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.why-version-control-matters.practice.sc-why-2",
       "optionIds": [
         "a",
         "b",
@@ -104,15 +119,15 @@
       ],
       "expected": {
         "kind": "single_choice",
-        "optionId": "a"
+        "optionId": "b"
       }
     },
     {
-      "id": "mc-1",
+      "id": "mc-why-1",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.git.git-foundations-module-1-start-tracking.why-version-control-matters.practice.mc-1",
+      "messageBase": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.why-version-control-matters.practice.mc-why-1",
       "optionIds": [
         "a",
         "b",
@@ -123,28 +138,58 @@
         "kind": "multi_choice",
         "optionIds": [
           "a",
-          "b"
+          "b",
+          "c"
         ]
       }
     },
     {
-      "id": "fbc-2",
+      "id": "dr-why-1",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.why-version-control-matters.practice.dr-why-1",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4",
+        "t5"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t2",
+          "t1",
+          "t5",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "fb-why-1",
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.git.git-foundations-module-1-start-tracking.why-version-control-matters.practice.fbc-2",
+      "messageBase": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.why-version-control-matters.practice.fb-why-1",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "locally"
+        "value": "main"
+      }
+    },
+    {
+      "id": "fb-why-2",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.why-version-control-matters.practice.fb-why-2",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": ".gitignore"
       }
     }
-  ],
-  "topicMeta": {
-    "learningGoals": [
-      "Explain why named snapshots are safer than duplicate “final” folders",
-      "Distinguish local Git from hosted collaboration services such as GitHub",
-      "Recognize a focused checkpoint as a meaningful project state"
-    ]
-  }
+  ]
 }

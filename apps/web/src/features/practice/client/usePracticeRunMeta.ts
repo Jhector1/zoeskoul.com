@@ -11,6 +11,7 @@ import { difficultyOptions } from "@/components/vectorpad/types";
 import { useTopicOptions } from "./topicOptions";
 import { readReturnUrlFromSearchParams } from "./storage";
 import type { PracticeExperienceMode } from "@/lib/practice/experience/types";
+import type { PracticeRuntimeSurface } from "@/lib/practice/experience/routePolicy";
 import { resolveClientPracticeExperienceMode } from "./experienceModePolicy";
 
 export type RunMeta = PracticeRunMetaApi;
@@ -19,16 +20,22 @@ export type { TopicValue };
 type UsePracticeRunMetaArgs = {
   subjectSlug?: string;
   moduleSlug?: string;
-  expectedExperienceMode?: PracticeExperienceMode;
+  surface: PracticeRuntimeSurface;
+  initialExperienceMode?: PracticeExperienceMode;
 };
 
-type TopicOption = { id: TopicValue; label: string };
+type TopicOption = {
+  id: TopicValue;
+  label: string;
+  titleKey?: string | null;
+};
 type DifficultyOption = (typeof difficultyOptions)[number];
 
 export function usePracticeRunMeta({
   subjectSlug,
   moduleSlug,
-  expectedExperienceMode,
+  surface,
+  initialExperienceMode,
 }: UsePracticeRunMetaArgs) {
   const sp = useSearchParams();
   const returnUrlFromQuery = useMemo(
@@ -45,9 +52,10 @@ export function usePracticeRunMeta({
   // experience.
   const requestedAssignment = sp.get("type") === "assignment";
   const experienceMode = resolveClientPracticeExperienceMode({
+    surface,
     requestedAssignment,
     runMode: run?.mode ?? null,
-    expectedExperienceMode,
+    initialExperienceMode,
   });
 
   const isAssignmentRun = experienceMode === "assignment";
@@ -78,18 +86,31 @@ export function usePracticeRunMeta({
     if (!hasModuleContext) return [];
     if (run && !run.filters.topicEditable && run.lockTopic != null) {
       if (run.lockTopic === "all") {
-        return [{ id: "all", label: "All topics (locked)" }];
+        return [{ id: "all", label: "All topics (locked)", titleKey: null }];
       }
       const only = topicOptionsFixed.find(
         (option) => String(option.id) === String(run.lockTopic),
       );
       return only
-        ? [{ id: only.id as TopicValue, label: only.label }]
-        : [{ id: run.lockTopic as TopicValue, label: String(run.lockTopic) }];
+        ? [
+            {
+              id: only.id as TopicValue,
+              label: only.label,
+              titleKey: only.titleKey ?? null,
+            },
+          ]
+        : [
+            {
+              id: run.lockTopic as TopicValue,
+              label: String(run.lockTopic),
+              titleKey: null,
+            },
+          ];
     }
     return topicOptionsFixed.map((option) => ({
       id: option.id as TopicValue,
       label: option.label,
+      titleKey: option.titleKey ?? null,
     }));
   }, [hasModuleContext, run, topicOptionsFixed]);
 

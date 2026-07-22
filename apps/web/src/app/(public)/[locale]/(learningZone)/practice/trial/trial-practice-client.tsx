@@ -176,7 +176,8 @@ function TrialShellInner({
         moduleSlug: undefined,
         isTrial: true,
         authoritativeSessionId: true,
-        expectedExperienceMode,
+        surface: "trial_practice",
+        initialExperienceMode: expectedExperienceMode,
         initialSessionStatus,
     });
 

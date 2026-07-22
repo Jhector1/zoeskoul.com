@@ -9,7 +9,7 @@ import { useTranslations, useLocale } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
 import LocaleSwitcher from "./LocaleSwitcher";
 import { ThemeToggle } from "./ThemeToggle";
-import { Settings } from "lucide-react";
+import { BookOpen, Dumbbell, Settings } from "lucide-react";
 import { cn } from "@/lib/cn";
 import Badge from "@/components/billing/Badge";
 import { useBillingStatus } from "@/components/billing/hooks/useBillingStatus";
@@ -18,6 +18,9 @@ import { useSearchParams } from "next/navigation";
 import SoundToggle from "@/lib/sfx/SoundToggle";
 import {useAuthHref} from "@/hooks/useAuthHref";
 import { startGlobalNavigationPending } from "@/components/navigation/GlobalNavigationProgress";
+import LearningEntryButton from "@/components/learning/LearningEntryButton";
+import PracticeEntryButton from "@/components/practice/PracticeEntryButton";
+import NavButton from "@/components/ui/NavButton";
 
 type NavItem = { href: string; label: string };
 type SessionStatus = "loading" | "authenticated" | "unauthenticated";
@@ -310,6 +313,7 @@ export default function HeaderSlick({
         { href: ROUTES.catalogs, label: t("catalogs") },
         { href: ROUTES.catalog, label: t("subjects") },
         { href: ROUTES.pricing, label: t("billing") },
+        { href: START_SESSION_HREF, label: t("startSession") },
       ],
       [t],
   );
@@ -408,6 +412,12 @@ export default function HeaderSlick({
                   <div className="hidden flex-1 xl:block" />
               )}
 
+              <div
+                  data-ai-tutor-header-slot="true"
+                  className="shrink-0"
+                  aria-live="polite"
+              />
+
               <nav className="ml-auto hidden shrink-0 items-center gap-2 lg:flex">
                 {isNav ? (
                     <div className="flex items-center gap-1 rounded-lg border border-neutral-200 bg-white/80 p-1 dark:border-white/10 dark:bg-white/[0.04]">
@@ -425,10 +435,30 @@ export default function HeaderSlick({
                 ) : null}
 
                 {isNav ? (
-                    <Link href={START_SESSION_HREF} className="ui-btn-primary">
-                      {t("startSession")}
-                    </Link>
+                    <LearningEntryButton
+                        isAuthenticated={isAuthed}
+                        continueLabel={t("continueLesson")}
+                        startLabel={t("startLearning")}
+                        guestLabel={t("exploreLessons")}
+                        loadingText={t("learningOpening")}
+                        disabled={status === "loading"}
+                        icon={<BookOpen className="h-4 w-4 shrink-0" />}
+                        className="ui-btn-primary h-8 whitespace-nowrap"
+                    />
                 ) : null}
+
+                {isNav ? (
+                    <PracticeEntryButton
+                        isAuthenticated={isAuthed}
+                        authenticatedLabel={t("practice")}
+                        guestLabel={t("practice")}
+                        loadingText={t("practiceOpening")}
+                        disabled={status === "loading"}
+                        icon={<Dumbbell className="h-4 w-4 shrink-0" />}
+                        className="ui-btn-info-secondary h-8 whitespace-nowrap"
+                    />
+                ) : null}
+
 
                 {isSetting ? <SettingsMenu /> : null}
 
@@ -442,9 +472,14 @@ export default function HeaderSlick({
                             onSignOut={() => hardLogout(locale)}
                         />
                     ) : (
-                        <Link href={authHref} className="ui-btn-secondary">
+                        <NavButton
+                            href={authHref}
+                            className="ui-btn-secondary"
+                            loadingText={t("signInOpening")}
+                            prefetch
+                        >
                           {t("signIn")}
-                        </Link>
+                        </NavButton>
                     )
                     : null}
               </nav>
@@ -500,10 +535,30 @@ export default function HeaderSlick({
                           : null}
 
                       {isNav ? (
-                          <Link href={START_SESSION_HREF} className="ui-btn-primary w-full justify-center">
-                            {t("startSession")}
-                          </Link>
+                          <LearningEntryButton
+                              isAuthenticated={isAuthed}
+                              continueLabel={t("continueLesson")}
+                              startLabel={t("startLearning")}
+                              guestLabel={t("exploreLessons")}
+                              loadingText={t("learningOpening")}
+                              disabled={status === "loading"}
+                              icon={<BookOpen className="h-4 w-4 shrink-0" />}
+                              className="ui-btn-primary min-h-10 w-full justify-center"
+                          />
                       ) : null}
+
+                      {isNav ? (
+                          <PracticeEntryButton
+                              isAuthenticated={isAuthed}
+                              authenticatedLabel={t("practice")}
+                              guestLabel={t("practice")}
+                              loadingText={t("practiceOpening")}
+                              disabled={status === "loading"}
+                              icon={<Dumbbell className="h-4 w-4 shrink-0" />}
+                              className="ui-btn-info-secondary min-h-10 w-full justify-center"
+                          />
+                      ) : null}
+
 
                       {isUser && status !== "loading"
                           ? isAuthed ? (
@@ -523,9 +578,14 @@ export default function HeaderSlick({
                                 </button>
                               </>
                           ) : (
-                              <Link href={authHref} className={mobileItem(false)}>
+                              <NavButton
+                                  href={authHref}
+                                  className={mobileItem(false)}
+                                  loadingText={t("signInOpening")}
+                                  prefetch
+                              >
                                 {t("signIn")}
-                              </Link>
+                              </NavButton>
                           )
                           : null}
 

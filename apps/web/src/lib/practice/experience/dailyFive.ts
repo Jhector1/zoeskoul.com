@@ -5,6 +5,15 @@ import type { Prisma } from "@/lib/prisma";
 import type { PublishedPracticeExerciseOption } from "@/lib/practice/challenges/publishedCatalog";
 import type { GetParams } from "@/lib/practice/api/get/schemas";
 import {
+  applyAuthoredPracticeTarget,
+  authoredPracticeTargetFromOption,
+  authoredPracticeTargetIdentity,
+  normalizeAuthoredPracticeQueue,
+  resolveNextAuthoredPracticeTarget,
+  type AuthoredPracticeTarget,
+} from "./authoredPracticeQueue";
+import { resolveAvailablePracticeTargetCount } from "./availableTargetCount";
+import {
   DAILY_PRACTICE_TARGET_COUNT,
   normalizeDailyPracticeTargetCount,
 } from "./config";
@@ -13,17 +22,7 @@ import {
 export const DAILY_FIVE_TARGET_COUNT = DAILY_PRACTICE_TARGET_COUNT;
 export const DAILY_FIVE_MAX_ATTEMPTS = null;
 
-export type DailyFiveTarget = Pick<
-  PublishedPracticeExerciseOption,
-  | "subjectSlug"
-  | "moduleSlug"
-  | "sectionSlug"
-  | "topicSlug"
-  | "exerciseKey"
-  | "exerciseTitle"
-  | "exerciseKind"
-  | "exercisePurpose"
->;
+export type DailyFiveTarget = AuthoredPracticeTarget;
 
 export type DailyFiveSessionMeta = {
   kind: "daily_five";
@@ -71,27 +70,7 @@ export function readDailyFiveMeta(meta: unknown): DailyFiveSessionMeta | null {
 
   if (!dayKey || queue.length !== targetCount) return null;
 
-  const normalized = queue
-    .map((item) => asRecord(item))
-    .filter(Boolean)
-    .map((item) => ({
-      subjectSlug: String(item!.subjectSlug ?? ""),
-      moduleSlug: String(item!.moduleSlug ?? ""),
-      sectionSlug: String(item!.sectionSlug ?? ""),
-      topicSlug: String(item!.topicSlug ?? ""),
-      exerciseKey: String(item!.exerciseKey ?? ""),
-      exerciseTitle: String(item!.exerciseTitle ?? item!.exerciseKey ?? "Practice"),
-      exerciseKind: String(item!.exerciseKind ?? "code_input"),
-      exercisePurpose: item!.exercisePurpose === "project" ? "project" : "quiz",
-    }))
-    .filter(
-      (item) =>
-        item.subjectSlug &&
-        item.moduleSlug &&
-        item.sectionSlug &&
-        item.topicSlug &&
-        item.exerciseKey,
-    ) as DailyFiveTarget[];
+  const normalized = normalizeAuthoredPracticeQueue(queue);
 
   if (normalized.length !== targetCount) return null;
 
@@ -132,7 +111,7 @@ export function isDailyFiveEligible(option: PublishedPracticeExerciseOption) {
     option.exerciseKind === "code_input" &&
     option.isStandaloneTryIt === true &&
     option.sectionRole === "lesson" &&
-    option.exercisePurpose === "project" &&
+    option.exercisePurpose !== "quiz" &&
     option.isMultiFile !== true &&
     option.requiresTerminal !== true
   );
@@ -148,9 +127,6 @@ export function listDailyPracticeSubjectOptions(args: {
   options: PublishedPracticeExerciseOption[];
   targetCount?: number;
 }): DailyPracticeSubjectOption[] {
-  const targetCount = normalizeDailyPracticeTargetCount(
-    args.targetCount ?? DAILY_PRACTICE_TARGET_COUNT,
-  );
   const bySubject = new Map<
     string,
     {
@@ -173,7 +149,9 @@ export function listDailyPracticeSubjectOptions(args: {
       modules: new Set<string>(),
     };
 
-    current.exercises.add(option.exerciseKey);
+    current.exercises.add(
+      authoredPracticeTargetIdentity(authoredPracticeTargetFromOption(option)),
+    );
     current.modules.add(option.moduleSlug);
     bySubject.set(option.subjectSlug, current);
   }
@@ -187,7 +165,7 @@ export function listDailyPracticeSubjectOptions(args: {
       eligibleExerciseCount: value.exercises.size,
       eligibleModuleCount: value.modules.size,
     }))
-    .filter((subject) => subject.eligibleExerciseCount >= targetCount)
+    .filter((subject) => subject.eligibleExerciseCount > 0)
     .sort(
       (a, b) =>
         a.catalogTitle.localeCompare(b.catalogTitle) ||
@@ -200,7 +178,9 @@ function uniqueEligibleOptions(options: PublishedPracticeExerciseOption[]) {
   const unique = new Map<string, PublishedPracticeExerciseOption>();
 
   for (const option of options) {
-    const key = `${option.subjectSlug}|${option.exerciseKey}`;
+    const key = authoredPracticeTargetIdentity(
+      authoredPracticeTargetFromOption(option),
+    );
     if (!unique.has(key)) unique.set(key, option);
   }
 
@@ -231,6 +211,8 @@ export function pickDailyFiveQueue(args: {
   dayKey: string;
   subjectSlug?: string | null;
   moduleSlug?: string | null;
+  sectionSlug?: string | null;
+  topicSlug?: string | null;
   targetCount?: number;
 }): DailyFiveTarget[] {
   const targetCount = normalizeDailyPracticeTargetCount(
@@ -253,7 +235,7 @@ export function pickDailyFiveQueue(args: {
   }
 
   const subjectCandidates = [...bySubject.entries()]
-    .filter(([, rows]) => rows.length >= targetCount)
+    .filter(([, rows]) => rows.length > 0)
     .sort(([subjectA, rowsA], [subjectB, rowsB]) =>
       score(`${args.userId}|${args.dayKey}|subject`, {
         ...rowsA[0],
@@ -267,7 +249,48 @@ export function pickDailyFiveQueue(args: {
     );
 
   const pool = subjectCandidates[0]?.[1] ?? [];
-  if (pool.length < targetCount) return [];
+  const effectiveTargetCount = resolveAvailablePracticeTargetCount({
+    requested: targetCount,
+    available: pool.length,
+    fallback: DAILY_PRACTICE_TARGET_COUNT,
+  });
+  if (effectiveTargetCount === 0) return [];
+
+  if (args.sectionSlug || args.topicSlug) {
+    const focusSeed = `${args.userId}|${args.dayKey}|focus`;
+    const exactTopic = deterministicOrder(
+      `${focusSeed}|topic`,
+      pool.filter((option) =>
+        args.topicSlug ? option.topicSlug === args.topicSlug : false,
+      ),
+    );
+    const sameSection = deterministicOrder(
+      `${focusSeed}|section`,
+      pool.filter(
+        (option) =>
+          Boolean(args.sectionSlug) &&
+          option.sectionSlug === args.sectionSlug &&
+          (!args.topicSlug || option.topicSlug !== args.topicSlug),
+      ),
+    );
+    const remaining = deterministicOrder(
+      `${focusSeed}|remaining`,
+      pool.filter(
+        (option) =>
+          (!args.topicSlug || option.topicSlug !== args.topicSlug) &&
+          (!args.sectionSlug || option.sectionSlug !== args.sectionSlug),
+      ),
+    );
+    const focused = uniqueEligibleOptions([
+      ...exactTopic,
+      ...sameSection,
+      ...remaining,
+    ]).slice(0, effectiveTargetCount);
+
+    if (focused.length === effectiveTargetCount) {
+      return focused.map(authoredPracticeTargetFromOption);
+    }
+  }
 
   const byModule = new Map<string, PublishedPracticeExerciseOption[]>();
   for (const option of pool) {
@@ -301,7 +324,7 @@ export function pickDailyFiveQueue(args: {
 
   const selected: PublishedPracticeExerciseOption[] = [];
   let round = 0;
-  while (selected.length < targetCount) {
+  while (selected.length < effectiveTargetCount) {
     let added = false;
 
     for (const group of moduleGroups) {
@@ -309,62 +332,54 @@ export function pickDailyFiveQueue(args: {
       if (!option) continue;
       selected.push(option);
       added = true;
-      if (selected.length >= targetCount) break;
+      if (selected.length >= effectiveTargetCount) break;
     }
 
     if (!added) break;
     round += 1;
   }
 
-  return selected.slice(0, targetCount).map((option) => ({
-    subjectSlug: option.subjectSlug,
-    moduleSlug: option.moduleSlug,
-    sectionSlug: option.sectionSlug,
-    topicSlug: option.topicSlug,
-    exerciseKey: option.exerciseKey,
-    exerciseTitle: option.exerciseTitle,
-    exerciseKind: option.exerciseKind,
-    exercisePurpose: option.exercisePurpose,
-  }));
+  return selected
+    .slice(0, effectiveTargetCount)
+    .map(authoredPracticeTargetFromOption);
 }
 
 export function resolveNextDailyFiveTarget(args: {
   meta: unknown;
-  usedExerciseKeys: Array<string | null | undefined>;
+  usedTargets: Array<{
+    exerciseKey?: string | null;
+    topic?: { slug?: string | null } | null;
+  }>;
 }) {
   const meta = readDailyFiveMeta(args.meta);
   if (!meta) return null;
-  const used = new Set(args.usedExerciseKeys.filter(Boolean).map(String));
-  return meta.queue.find((target) => !used.has(target.exerciseKey)) ?? null;
+  return resolveNextAuthoredPracticeTarget({
+    queue: meta.queue,
+    usedTargets: args.usedTargets,
+  });
 }
 
 export function applyDailyFiveParams(
   params: GetParams,
   session: {
     meta?: unknown;
-    instances?: Array<{ exerciseKey?: string | null }>;
+    instances?: Array<{
+      exerciseKey?: string | null;
+      topic?: { slug?: string | null } | null;
+    }>;
   } | null | undefined,
 ): GetParams {
   const target = resolveNextDailyFiveTarget({
     meta: session?.meta,
-    usedExerciseKeys: session?.instances?.map((row) => row.exerciseKey) ?? [],
+    usedTargets: session?.instances ?? [],
   });
 
   if (!target) return params;
 
   const meta = readDailyFiveMeta(session?.meta);
-  return {
-    ...params,
-    subject: target.subjectSlug,
-    module: target.moduleSlug,
-    section: target.sectionSlug,
-    topic: target.topicSlug,
-    exerciseKey: target.exerciseKey,
-    preferKind: "code_input",
-    preferPurpose: "project",
-    purposePolicy: "strict",
-    seedPolicy: "global",
-    salt: `daily-five:${meta?.dayKey ?? "today"}:${target.exerciseKey}`,
-    allowReveal: "true",
-  };
+  return applyAuthoredPracticeTarget({
+    params,
+    target,
+    salt: `daily-five:${meta?.dayKey ?? "today"}:${target.topicSlug}:${target.exerciseKey}`,
+  });
 }

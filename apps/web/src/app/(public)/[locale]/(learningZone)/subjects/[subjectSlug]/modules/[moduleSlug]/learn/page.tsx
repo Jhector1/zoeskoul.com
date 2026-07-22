@@ -1,4 +1,4 @@
-import { redirect } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import ReviewModulePageClient from "./ReviewModulePageClient";
 import { loadReviewModulePageData } from "./loadReviewModulePageData";
 import {
@@ -7,6 +7,7 @@ import {
 } from "@/components/review/module/runtime/reviewRoute";
 
 export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
 
 export default async function Page({
                                        params,
@@ -14,14 +15,26 @@ export default async function Page({
     params: Promise<{ locale: string; subjectSlug: string; moduleSlug: string }>;
 }) {
     const { locale, subjectSlug, moduleSlug } = await params;
-    const { mod, canUnlockAll, catalogSlug } = await loadReviewModulePageData({
+    const pageData = await loadReviewModulePageData({
         subjectSlug,
         moduleSlug,
     });
 
-    if (!mod) {
-        return <ReviewModulePageClient canUnlockAll={canUnlockAll} mod={mod} />;
+    if (pageData.status === "missing") {
+        return notFound();
     }
+
+    if (pageData.status === "unavailable") {
+        return (
+            <ReviewModulePageClient
+                canUnlockAll={pageData.canUnlockAll}
+                mod={null}
+                pageStatus="unavailable"
+            />
+        );
+    }
+
+    const { mod, canUnlockAll, catalogSlug } = pageData;
 
     const defaultTarget = buildDefaultReviewRouteTarget(mod);
     if (defaultTarget) {
@@ -36,5 +49,11 @@ export default async function Page({
         );
     }
 
-    return <ReviewModulePageClient canUnlockAll={canUnlockAll} mod={mod} />;
+    return (
+        <ReviewModulePageClient
+            canUnlockAll={canUnlockAll}
+            mod={mod}
+            pageStatus="ready"
+        />
+    );
 }

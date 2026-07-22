@@ -4,11 +4,11 @@
     "billing": "Prix",
     "settings": "Parametres",
     "home": "Accueil",
-    "practice": "Apprendre & Exercices",
+    "practice": "Pratique",
     "assignments": "Devoirs",
     "subjects": "Matiere",
-    "tagline": "Visuelle • Exercices • Progrès",
-    "startSession": "Commencer",
+    "tagline": "Leçons • Pratique • Progrès",
+    "startSession": "Bac à sable",
     "signIn": "Se connecter",
     "profile": "Profil",
     "logout": "Se déconnecter",
@@ -22,6 +22,14 @@
     "sound": "Son",
     "tip": "Astuce : utilisez Exercices pour suivre vos tentatives, vos bonnes réponses et vos questions manquées.",
     "toggleMenu": "Afficher/masquer le menu",
-    "soundHint": "Activer ou désactiver les sons de l’interface"
+    "soundHint": "Activer ou désactiver les sons de l’interface",
+    "practiceGuest": "Essayer {count} questions",
+    "practiceOpening": "Ouverture de la pratique…",
+    "sandboxOpening": "Ouverture du bac à sable…",
+    "signInOpening": "Ouverture de la connexion…",
+    "continueLesson": "Continuer la leçon",
+    "startLearning": "Commencer à apprendre",
+    "exploreLessons": "Explorer les leçons",
+    "learningOpening": "Ouverture de votre leçon…"
   }
 }

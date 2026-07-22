@@ -231,6 +231,7 @@ export function shouldPrimeWorkspacePrompt(args: {
     workspaceReady: boolean;
     terminalHasVisibleOutput: boolean;
     pendingStartupInput: string | null;
+    startupOutputSuppressed: boolean;
     stopping: boolean;
     restarting: boolean;
     terminalProcessExited: boolean;
@@ -240,6 +241,7 @@ export function shouldPrimeWorkspacePrompt(args: {
         args.workspaceReady &&
         !args.terminalHasVisibleOutput &&
         !args.pendingStartupInput &&
+        !args.startupOutputSuppressed &&
         !args.stopping &&
         !args.restarting &&
         !args.terminalProcessExited,
@@ -1369,6 +1371,9 @@ export function useWorkspaceTerminalController(
                     workspaceReady: workspaceReadyRef.current,
                     terminalHasVisibleOutput: terminalHasVisibleOutputRef.current,
                     pendingStartupInput: pendingStartupInputRef.current,
+                    startupOutputSuppressed: Boolean(
+                        startupCwdOutputSuppressionRef.current,
+                    ),
                     stopping: stoppingRef.current,
                     restarting: restartingRef.current,
                     terminalProcessExited: terminalProcessExitedRef.current,
@@ -1393,6 +1398,9 @@ export function useWorkspaceTerminalController(
                         workspaceReady: workspaceReadyRef.current,
                         terminalHasVisibleOutput: terminalHasVisibleOutputRef.current,
                         pendingStartupInput: pendingStartupInputRef.current,
+                        startupOutputSuppressed: Boolean(
+                            startupCwdOutputSuppressionRef.current,
+                        ),
                         stopping: stoppingRef.current,
                         restarting: restartingRef.current,
                         terminalProcessExited: terminalProcessExitedRef.current,
@@ -1765,6 +1773,13 @@ export function useWorkspaceTerminalController(
             });
             if (!normalizedCwd) return;
 
+            // A prompt-prime newline is only a fallback for a genuinely blank
+            // interactive shell. Once authored startup begins, the shell will
+            // emit its real prompt after the hidden bootstrap command finishes.
+            // Cancel any previously scheduled prime so it cannot land between
+            // the startup marker and that real prompt and create a duplicate.
+            clearPromptPrimeTimer();
+
             const startupMarker = `${STARTUP_CWD_READY_MARKER}_${Date.now().toString(36)}_${Math.random()
                 .toString(36)
                 .slice(2)}`;
@@ -1805,7 +1820,12 @@ export function useWorkspaceTerminalController(
 
             scheduleStartupCwdFlush();
         },
-        [resolvedBootstrap, flushPendingStartupInput, scheduleStartupCwdFlush],
+        [
+            clearPromptPrimeTimer,
+            resolvedBootstrap,
+            flushPendingStartupInput,
+            scheduleStartupCwdFlush,
+        ],
     );
 
     const open = React.useCallback(

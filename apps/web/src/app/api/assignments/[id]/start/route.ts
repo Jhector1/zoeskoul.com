@@ -68,6 +68,8 @@ export async function POST(
       ? `/subjects/${encodeURIComponent(assignment.section.subject.slug)}` +
         `/modules/${encodeURIComponent(assignment.section.module.slug)}`
       : null;
+  const subjectSlug = assignment.section?.subject?.slug ?? null;
+  const moduleSlug = assignment.section?.module?.slug ?? null;
 
   // Reopening an assignment resumes the learner's unfinished run instead of
   // silently consuming another whole-assignment attempt.
@@ -101,6 +103,8 @@ export async function POST(
       runNumber,
       resumed: true,
       returnUrl: reviewReturnUrl,
+      subjectSlug,
+      moduleSlug,
     });
   }
 
@@ -162,6 +166,8 @@ export async function POST(
       runNumber,
       resumed: false,
       returnUrl: reviewReturnUrl,
+      subjectSlug,
+      moduleSlug,
     });
   } catch (error: any) {
     if (String(error?.code ?? "") === "P2002") {
@@ -176,6 +182,8 @@ export async function POST(
           runNumber,
           resumed: true,
           returnUrl: reviewReturnUrl,
+          subjectSlug,
+          moduleSlug,
         });
       }
     }

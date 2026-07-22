@@ -1,0 +1,121 @@
+{
+  "name": "RetryableTopicValidationError",
+  "message": "Curriculum quality gate failed for topic \"stage-intentionally\"\nModule: git-foundations-module-2-meaningful-history\nSection: git-foundations-section-2-history-workflow\nReport dir: /Users/admin/Documents/NextJSProject/zoeskoul.com/.curriculum-drafts/git/reports/git--git-foundations--draft/module2/stage-intentionally\n- Exercise \"try-stage-intentionally-sketch0\" workspace does not reference expected entry file \"README.md\".\n- Exercise \"try-stage-intentionally-sketch0\" uses workspace entry file \"community-site/index.html\" but profile \"git\" expects \"README.md\".\n- Exercise \"try-stage-intentionally-sketch1\" workspace does not reference expected entry file \"README.md\".\n- Exercise \"try-stage-intentionally-sketch1\" uses workspace entry file \"community-site/index.html\" but profile \"git\" expects \"README.md\".\n- Exercise \"try-stage-intentionally-sketch2\" workspace does not reference expected entry file \"README.md\".\n- Exercise \"try-stage-intentionally-sketch2\" uses workspace entry file \"community-site/index.html\" but profile \"git\" expects \"README.md\".\n- Exercise \"try-stage-intentionally-sketch3\" uses workspace entry file \"community-site/README.md\" but profile \"git\" expects \"README.md\".",
+  "stack": "RetryableTopicValidationError: Curriculum quality gate failed for topic \"stage-intentionally\"\nModule: git-foundations-module-2-meaningful-history\nSection: git-foundations-section-2-history-workflow\nReport dir: /Users/admin/Documents/NextJSProject/zoeskoul.com/.curriculum-drafts/git/reports/git--git-foundations--draft/module2/stage-intentionally\n- Exercise \"try-stage-intentionally-sketch0\" workspace does not reference expected entry file \"README.md\".\n- Exercise \"try-stage-intentionally-sketch0\" uses workspace entry file \"community-site/index.html\" but profile \"git\" expects \"README.md\".\n- Exercise \"try-stage-intentionally-sketch1\" workspace does not reference expected entry file \"README.md\".\n- Exercise \"try-stage-intentionally-sketch1\" uses workspace entry file \"community-site/index.html\" but profile \"git\" expects \"README.md\".\n- Exercise \"try-stage-intentionally-sketch2\" workspace does not reference expected entry file \"README.md\".\n- Exercise \"try-stage-intentionally-sketch2\" uses workspace entry file \"community-site/index.html\" but profile \"git\" expects \"README.md\".\n- Exercise \"try-stage-intentionally-sketch3\" uses workspace entry file \"community-site/README.md\" but profile \"git\" expects \"README.md\".\n    at throwRetryableReportFailure (file:///Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-compiler/dist/compile/compileSubjectPipeline.js:85:11)\n    at compileSubjectPipeline (file:///Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-compiler/dist/compile/compileSubjectPipeline.js:443:21)\n    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at async compileCourse (file:///Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-compiler/dist/compile/compileCourse.js:91:11)\n    at async runCompileCourse (file:///Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-cli/dist/commands/compile-course.js:79:21)\n    at async main (file:///Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-cli/dist/index.js:81:13)",
+  "code": "CURRICULUM_QUALITY_GATE_FAILED",
+  "retryable": true,
+  "details": {
+    "ok": false,
+    "profileId": "git",
+    "subjectSlug": "git--git-foundations--draft",
+    "courseSlug": "git-foundations",
+    "topicId": "stage-intentionally",
+    "summary": {
+      "modules": 1,
+      "topicsTotal": 1,
+      "exercises": 10,
+      "exerciseKinds": {
+        "single_choice": 1,
+        "multi_choice": 2,
+        "drag_reorder": 1,
+        "fill_blank_choice": 2,
+        "code_input": 4
+      },
+      "codeInputs": 4,
+      "projects": 4,
+      "capstones": 4,
+      "thinFixedTestCount": 0,
+      "blockers": 4,
+      "errors": 3,
+      "warnings": 1,
+      "infos": 0
+    },
+    "severityCounts": {
+      "blocker": 4,
+      "error": 3,
+      "warning": 1,
+      "info": 0
+    },
+    "issues": [
+      {
+        "code": "MISSING_TOPIC_LEARNING_GOALS",
+        "severity": "warning",
+        "path": "git-foundations-module-2-meaningful-history/git-foundations-section-2-history-workflow/stage-intentionally",
+        "profileId": "git",
+        "moduleId": "git-foundations-module-2-meaningful-history",
+        "topicId": "stage-intentionally",
+        "message": "Topic \"stage-intentionally\" has no learning goals on its seed metadata."
+      },
+      {
+        "code": "EXPECTED_ENTRY_FILE_MISSING",
+        "severity": "error",
+        "path": "git-foundations-module-2-meaningful-history/git-foundations-section-2-history-workflow/stage-intentionally",
+        "profileId": "git",
+        "moduleId": "git-foundations-module-2-meaningful-history",
+        "topicId": "stage-intentionally",
+        "exerciseId": "try-stage-intentionally-sketch0",
+        "message": "Exercise \"try-stage-intentionally-sketch0\" workspace does not reference expected entry file \"README.md\"."
+      },
+      {
+        "code": "WORKSPACE_ENTRY_FILE_LEAK",
+        "severity": "blocker",
+        "path": "git-foundations-module-2-meaningful-history/git-foundations-section-2-history-workflow/stage-intentionally",
+        "profileId": "git",
+        "moduleId": "git-foundations-module-2-meaningful-history",
+        "topicId": "stage-intentionally",
+        "exerciseId": "try-stage-intentionally-sketch0",
+        "message": "Exercise \"try-stage-intentionally-sketch0\" uses workspace entry file \"community-site/index.html\" but profile \"git\" expects \"README.md\"."
+      },
+      {
+        "code": "EXPECTED_ENTRY_FILE_MISSING",
+        "severity": "error",
+        "path": "git-foundations-module-2-meaningful-history/git-foundations-section-2-history-workflow/stage-intentionally",
+        "profileId": "git",
+        "moduleId": "git-foundations-module-2-meaningful-history",
+        "topicId": "stage-intentionally",
+        "exerciseId": "try-stage-intentionally-sketch1",
+        "message": "Exercise \"try-stage-intentionally-sketch1\" workspace does not reference expected entry file \"README.md\"."
+      },
+      {
+        "code": "WORKSPACE_ENTRY_FILE_LEAK",
+        "severity": "blocker",
+        "path": "git-foundations-module-2-meaningful-history/git-foundations-section-2-history-workflow/stage-intentionally",
+        "profileId": "git",
+        "moduleId": "git-foundations-module-2-meaningful-history",
+        "topicId": "stage-intentionally",
+        "exerciseId": "try-stage-intentionally-sketch1",
+        "message": "Exercise \"try-stage-intentionally-sketch1\" uses workspace entry file \"community-site/index.html\" but profile \"git\" expects \"README.md\"."
+      },
+      {
+        "code": "EXPECTED_ENTRY_FILE_MISSING",
+        "severity": "error",
+        "path": "git-foundations-module-2-meaningful-history/git-foundations-section-2-history-workflow/stage-intentionally",
+        "profileId": "git",
+        "moduleId": "git-foundations-module-2-meaningful-history",
+        "topicId": "stage-intentionally",
+        "exerciseId": "try-stage-intentionally-sketch2",
+        "message": "Exercise \"try-stage-intentionally-sketch2\" workspace does not reference expected entry file \"README.md\"."
+      },
+      {
+        "code": "WORKSPACE_ENTRY_FILE_LEAK",
+        "severity": "blocker",
+        "path": "git-foundations-module-2-meaningful-history/git-foundations-section-2-history-workflow/stage-intentionally",
+        "profileId": "git",
+        "moduleId": "git-foundations-module-2-meaningful-history",
+        "topicId": "stage-intentionally",
+        "exerciseId": "try-stage-intentionally-sketch2",
+        "message": "Exercise \"try-stage-intentionally-sketch2\" uses workspace entry file \"community-site/index.html\" but profile \"git\" expects \"README.md\"."
+      },
+      {
+        "code": "WORKSPACE_ENTRY_FILE_LEAK",
+        "severity": "blocker",
+        "path": "git-foundations-module-2-meaningful-history/git-foundations-section-2-history-workflow/stage-intentionally",
+        "profileId": "git",
+        "moduleId": "git-foundations-module-2-meaningful-history",
+        "topicId": "stage-intentionally",
+        "exerciseId": "try-stage-intentionally-sketch3",
+        "message": "Exercise \"try-stage-intentionally-sketch3\" uses workspace entry file \"community-site/README.md\" but profile \"git\" expects \"README.md\"."
+      }
+    ]
+  }
+}

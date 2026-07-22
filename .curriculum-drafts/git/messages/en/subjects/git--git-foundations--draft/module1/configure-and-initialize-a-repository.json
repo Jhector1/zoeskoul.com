@@ -30,17 +30,17 @@
                 "hint_1": "The terminal is already at the project root, so no `cd` command is needed.",
                 "hint_2": "The result should be a repository with zero commits and two untracked files."
               },
-              "starterCode": "# Community Project\n\nShared schedules and contact notes.\n",
+              "starterCode": "# Community Project\n\nShared community activities and updates.\n",
               "solutionCode": "git init -b main",
               "instructions": "The terminal opens inside `community-project/`. The folder contains only `README.md` and `schedule.txt`, and it is not a Git repository yet. Initialize the current folder as a repository whose first branch is `main`. Do not edit or stage either file.",
               "starterFiles": {
                 "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\n"
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared community activities and updates.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community events\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\n"
                 }
               },
               "solutionFiles": {
                 "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\n"
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared community activities and updates.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community events\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\n"
                 }
               },
               "terminalExpectations": {
@@ -65,17 +65,17 @@
                 "hint_1": "Keep quotation marks around the name because it contains a space.",
                 "hint_2": "Do not use `--global`."
               },
-              "starterCode": "# Community Project\n\nShared schedules and contact notes.\n",
+              "starterCode": "# Community Project\n\nShared community activities and updates.\n",
               "solutionCode": "git config --local user.name \"ZoeSkoul Learner\"",
               "instructions": "The repository now exists. Store the supplied author name `ZoeSkoul Learner` in this repository only. Do not change machine-wide Git settings.",
               "starterFiles": {
                 "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\n"
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared community activities and updates.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community events\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\n"
                 }
               },
               "solutionFiles": {
                 "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\n"
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared community activities and updates.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community events\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\n"
                 }
               },
               "terminalExpectations": {
@@ -100,17 +100,17 @@
                 "hint_1": "Use the exact email `learner@zoeskoul.local`.",
                 "hint_2": "The verification output should include both `user.name` and `user.email`."
               },
-              "starterCode": "# Community Project\n\nShared schedules and contact notes.\n",
+              "starterCode": "# Community Project\n\nShared community activities and updates.\n",
               "solutionCode": "git config --local user.email \"learner@zoeskoul.local\"\ngit config --local --list",
               "instructions": "Store `learner@zoeskoul.local` as the repository-local author email. Then read the local configuration and confirm that both the supplied name and email are present.",
               "starterFiles": {
                 "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\n"
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared community activities and updates.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community events\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\n"
                 }
               },
               "solutionFiles": {
                 "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\n"
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared community activities and updates.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community events\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\n"
                 }
               },
               "terminalExpectations": {
@@ -134,7 +134,7 @@
             "single-choice-1": {
               "title": "Repository-Local Identity",
               "prompt": "Why does this course use `git config --local` for the supplied author identity?",
-              "hint": "Focus on what the command or concept observes or changes at this point in the workflow.",
+              "hint": "Choose the scope that changes only the current repository, not every repository on the computer.",
               "help": {
                 "concept": "Turn an ordinary project folder into a Git repository on `main`, inspect the metadata Git created, and keep the author identity local to that repository.",
                 "hint_1": "Remove options that act on a different repository layer than the one named in the question.",
@@ -150,7 +150,7 @@
             "single-choice-2": {
               "title": "Repository Initialization",
               "prompt": "What command is used to initialize a new Git repository?",
-              "hint": "Focus on what the command or concept observes or changes at this point in the workflow.",
+              "hint": "Look for the Git command that creates repository metadata in an ordinary folder.",
               "help": {
                 "concept": "Turn an ordinary project folder into a Git repository on `main`, inspect the metadata Git created, and keep the author identity local to that repository.",
                 "hint_1": "Remove options that act on a different repository layer than the one named in the question.",
@@ -206,11 +206,11 @@
         "configure-and-initialize-a-repository": {
           "sketch0": {
             "title": "Turn the Folder into a Repository",
-            "bodyMarkdown": "A Git repository is an ordinary project folder plus hidden history metadata. The command `git init -b main` creates that metadata in the current folder and names the first branch `main`. `git` runs Git, `init` initializes the repository, and `-b main` selects the initial branch. It does **not** edit, stage, or commit `README.md` or `schedule.txt`."
+            "bodyMarkdown": "A Git repository is an ordinary project folder plus hidden history metadata. When a task asks you to run a command, type it in the terminal and press Enter. The command `git init -b main` creates that metadata in the current folder and names the first branch `main`. `git` runs Git, `init` initializes the repository, and `-b main` selects the initial branch. It does **not** edit, stage, or commit `README.md` or `schedule.txt`."
           },
           "sketch1": {
             "title": "Keep the Author Name Local",
-            "bodyMarkdown": "Before Git can create a commit, it needs an author identity. `git config --local user.name \"ZoeSkoul Learner\"` stores the supplied name inside this repository only. The `--local` scope is important: it avoids changing Git settings for unrelated projects or for the learner’s computer."
+            "bodyMarkdown": "Before Git can create a commit, it needs to know who the author is. The command `git config --local user.name \"ZoeSkoul Learner\"` stores the supplied name in this repository only.\n\nThe `--local` scope is important because it keeps this identity limited to the current project. It does not change Git settings for other repositories or for the learner’s entire computer.\n\nGit also supports the `--global` scope, which applies an identity across all repositories for the current user. In this course, however, you will use `--local` so each practice repository keeps its own project-specific identity."
           },
           "sketch2": {
             "title": "Complete and Verify the Local Identity",

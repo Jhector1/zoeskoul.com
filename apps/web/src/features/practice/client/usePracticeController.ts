@@ -18,9 +18,10 @@ import { useVectorPadRef } from "./useVectorPadRef";
 import { SESSION_DEFAULT } from "./constants";
 import {lastSessionKey} from "@/features/practice/client/storage";
 import {coercePurposeMode, coercePurposePolicy} from "@/lib/subjects/quizClient";
-import {PurposeMode, PurposePolicy} from "@/lib/subjects/types";
 import type { PracticeExperienceMode } from "@/lib/practice/experience/types";
+import { getPracticeRuntimeSurfacePolicy, type PracticeRuntimeSurface } from "@/lib/practice/experience/routePolicy";
 import { resolvePracticeResumePolicy } from "./assignmentResumePolicy";
+import { resolvePracticePurposeDefaults } from "./experienceModePolicy";
 import type { SessionStatus } from "./sessionStatus";
 
 type PendingChange =
@@ -34,7 +35,8 @@ export function usePracticeController(args: {
   sessionId?: string;
   isTrial?: boolean;
   authoritativeSessionId?: boolean;
-  expectedExperienceMode?: PracticeExperienceMode;
+  surface: PracticeRuntimeSurface;
+  initialExperienceMode?: PracticeExperienceMode;
   clientStatePersistence?: "session" | "off";
   initialSessionStatus?: SessionStatus | null;
 }) {
@@ -44,7 +46,8 @@ export function usePracticeController(args: {
     sessionId: initialSessionId,
     isTrial = false,
     authoritativeSessionId = false,
-    expectedExperienceMode,
+    surface,
+    initialExperienceMode,
     clientStatePersistence = "session",
     initialSessionStatus = null,
   } = args;
@@ -79,8 +82,11 @@ export function usePracticeController(args: {
   } = usePracticeRunMeta({
     subjectSlug,
     moduleSlug,
-    expectedExperienceMode,
+    surface,
+    initialExperienceMode,
   });
+
+  const surfacePolicy = getPracticeRuntimeSurfacePolicy(surface);
 
   // filters / phase / misc UI state
   const [topic, setTopic] = useState<TopicValue>("all");
@@ -119,27 +125,17 @@ export function usePracticeController(args: {
   const preferPurposeFromQuery = coercePurposeMode((sp as any)?.get?.("preferPurpose"));
   const purposePolicyFromQuery = coercePurposePolicy((sp as any)?.get?.("purposePolicy"));
 
-  // defaults (good long-term)
-  const projectPracticeRun =
-    experienceMode === "daily_five" ||
-    experienceMode === "standard" ||
-    experienceMode === "practice";
-
-  const preferPurposeRaw: PurposeMode = projectPracticeRun
-    ? "project"
-    : preferPurposeFromQuery ?? "quiz";
-  const purposePolicyRaw: PurposePolicy = projectPracticeRun
-    ? "strict"
-    : purposePolicyFromQuery ?? "fallback";
-
-// ✅ assignments/sessions: don't let URL params influence purpose on client
-  const preferPurpose: PurposeMode = isLockedRun && !projectPracticeRun ? "quiz" : preferPurposeRaw;
-  const purposePolicy: PurposePolicy = isLockedRun && !projectPracticeRun ? "fallback" : purposePolicyRaw;
+  const { preferPurpose, purposePolicy } = resolvePracticePurposeDefaults({
+    experienceMode,
+    requestedPurpose: preferPurposeFromQuery,
+    requestedPolicy: purposePolicyFromQuery,
+    isLockedRun,
+  });
 
   const resumePolicy = resolvePracticeResumePolicy({
     experienceMode,
     requestedPersistence: clientStatePersistence,
-    expectedExperienceMode,
+    expectedExperienceMode: initialExperienceMode,
   });
 
 // ✅ persistence hydrates + persists stack/idx (+ completed)
@@ -240,6 +236,7 @@ export function usePracticeController(args: {
     // ✅ NEW
     preferPurpose,
     purposePolicy,
+    allowedExperienceModes: surfacePolicy.allowedModes,
     expectedExperienceMode: resumePolicy.expectedExperienceMode,
     resumeHistoryOnBoot: resumePolicy.resumeHistoryOnBoot,
     authoritativeSessionId,

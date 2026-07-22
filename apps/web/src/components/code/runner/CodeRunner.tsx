@@ -90,15 +90,33 @@ export function resolveWorkspaceTerminalPresentation(args: {
     displayMatches: boolean;
     controllerMatches: boolean;
 }) {
-    const creating = args.activationPending && args.mode === "create";
-
     return {
-        /** Only a genuinely new shell should render the Opening banner. */
-        showOpening: creating,
+        /** Startup progress belongs in the tab strip, never over the terminal transcript. */
+        showOpening: false,
         /** Existing tabs keep their preserved transcript while the socket reattaches. */
         showTranscript: args.displayMatches,
         /** Keystrokes are accepted only after this exact owner is attached. */
         inputAttached: args.controllerMatches,
+    };
+}
+
+export function resolveWorkspaceTerminalTabStrip(args: {
+    tabs: WorkspaceTerminalTab[];
+    pendingTerminalStartId: string | null;
+    pendingTerminalStartMode: PendingTerminalStartMode | null;
+}) {
+    const pendingTab =
+        args.pendingTerminalStartMode === "create" &&
+        args.pendingTerminalStartId
+            ? args.tabs.find((tab) => tab.id === args.pendingTerminalStartId) ?? null
+            : null;
+
+    return {
+        /** A new terminal is represented by a lightweight placeholder until ready. */
+        pendingTab,
+        visibleTabs: pendingTab
+            ? args.tabs.filter((tab) => tab.id !== pendingTab.id)
+            : args.tabs,
     };
 }
 
@@ -812,6 +830,15 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         useState<PendingTerminalStartMode | null>(null);
     const [terminalTabMessage, setTerminalTabMessage] = useState<string | null>(null);
     const [hydratedTerminalHostKey, setHydratedTerminalHostKey] = useState<string | null>(null);
+    const terminalTabStrip = useMemo(
+        () =>
+            resolveWorkspaceTerminalTabStrip({
+                tabs: terminalTabs,
+                pendingTerminalStartId,
+                pendingTerminalStartMode,
+            }),
+        [terminalTabs, pendingTerminalStartId, pendingTerminalStartMode],
+    );
     const terminalTabAddInFlightRef = useRef(false);
     const terminalHostMountedRef = useRef(true);
     const terminalCapacityRequestRef = useRef<Promise<TerminalCapacity | null> | null>(
@@ -1069,16 +1096,22 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         ) {
             return;
         }
+        const persistedActiveId = terminalTabStrip.visibleTabs.some(
+            (tab) => tab.id === activeTerminalId,
+        )
+            ? activeTerminalId
+            : terminalTabStrip.visibleTabs[0]?.id ?? "primary";
+
         saveWorkspaceTerminalTabs(
             resolvedTerminalHostKey,
-            terminalTabs,
-            activeTerminalId,
+            terminalTabStrip.visibleTabs,
+            persistedActiveId,
         );
     }, [
         activeTerminalId,
         hydratedTerminalHostKey,
         resolvedTerminalHostKey,
-        terminalTabs,
+        terminalTabStrip.visibleTabs,
     ]);
 
     const refreshTerminalCapacity = useCallback(() => {
@@ -1679,6 +1712,25 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         [activeTerminalId, terminalControllerRevision],
     );
 
+    const pendingWorkspaceTerm = useMemo(
+        () =>
+            pendingTerminalStartId
+                ? terminalControllersRef.current.get(pendingTerminalStartId) ??
+                  DORMANT_WORKSPACE_TERMINAL_CONTROLLER
+                : DORMANT_WORKSPACE_TERMINAL_CONTROLLER,
+        [pendingTerminalStartId, terminalControllerRevision],
+    );
+    const pendingTerminalOwnerKey = useMemo(
+        () =>
+            resolvedTerminalHostKey && pendingTerminalStartId
+                ? buildWorkspaceTerminalOwnerKey({
+                      hostKey: resolvedTerminalHostKey,
+                      terminalId: pendingTerminalStartId,
+                  })
+                : null,
+        [pendingTerminalStartId, resolvedTerminalHostKey],
+    );
+
     useEffect(() => {
         onTerminalEvidenceChange?.(workspaceTerm.terminalEvidence);
     }, [onTerminalEvidenceChange, workspaceTerm.terminalEvidence]);
@@ -1725,16 +1777,30 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         stopping: workspaceTerm.stopping,
         restarting: workspaceTerm.restarting,
     });
+    const pendingWorkspaceTerminalReady = Boolean(
+        pendingTerminalStartId &&
+            isWorkspaceTerminalOwnerReady({
+                activeOwnerKey: pendingTerminalOwnerKey,
+                attachedOwnerKey: pendingWorkspaceTerm.attachedOwnerKey,
+                sessionId: pendingWorkspaceTerm.sessionId,
+                interactiveReady: pendingWorkspaceTerm.interactiveReady,
+                starting: pendingWorkspaceTerm.starting,
+                stopping: pendingWorkspaceTerm.stopping,
+                restarting: pendingWorkspaceTerm.restarting,
+            }),
+    );
 
     useEffect(() => {
-        if (pendingTerminalStartId !== activeTerminalId) return;
-        if (!workspaceTerminalEnabled || disabled || !workspaceTerm.available) return;
+        if (!pendingTerminalStartId) return;
+        if (!workspaceTerminalEnabled || disabled || !pendingWorkspaceTerm.available) {
+            return;
+        }
 
         const startingTerminalId = pendingTerminalStartId;
         const startingMode = pendingTerminalStartMode ?? "attach";
-        const startingOwnerKey = activeTerminalOwnerKey;
+        const startingOwnerKey = pendingTerminalOwnerKey;
         const timer = window.setTimeout(() => {
-            void workspaceTerm
+            void pendingWorkspaceTerm
                 .open({ userInitiated: true, throwOnFailure: true })
                 .catch(async (error) => {
                     if (!terminalHostMountedRef.current) return;
@@ -1752,17 +1818,18 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                         previousTerminalId: previousActiveTerminalIdRef.current,
                         mode: startingMode,
                     });
-                    const fallbackTerminalId = failure.fallbackTerminalId;
 
                     if (startingMode === "create") {
+                        // The previously active terminal never stopped being visible, so
+                        // simply remove the failed placeholder instead of reattaching it.
                         setTerminalTabs(failure.tabs);
-                    }
-
-                    if (fallbackTerminalId) {
+                        setPendingTerminalStartId(null);
+                        setPendingTerminalStartMode(null);
+                    } else if (failure.fallbackTerminalId) {
                         previousActiveTerminalIdRef.current = startingTerminalId;
-                        setActiveTerminalId(fallbackTerminalId);
+                        setActiveTerminalId(failure.fallbackTerminalId);
                         setPendingTerminalStartMode("attach");
-                        setPendingTerminalStartId(fallbackTerminalId);
+                        setPendingTerminalStartId(failure.fallbackTerminalId);
                     } else {
                         setPendingTerminalStartId(null);
                         setPendingTerminalStartMode(null);
@@ -1783,23 +1850,32 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
             window.clearTimeout(timer);
         };
     }, [
-        activeTerminalId,
-        activeTerminalOwnerKey,
         disabled,
+        pendingTerminalOwnerKey,
         pendingTerminalStartId,
         pendingTerminalStartMode,
+        pendingWorkspaceTerm.available,
+        pendingWorkspaceTerm.open,
         refreshTerminalCapacity,
         terminalTabs,
-        workspaceTerm.available,
-        workspaceTerm.open,
         workspaceTerminalEnabled,
     ]);
 
     useEffect(() => {
-        if (pendingTerminalStartId !== activeTerminalId) return;
-        if (!activeWorkspaceTerminalReady) return;
+        if (!pendingTerminalStartId || !pendingWorkspaceTerminalReady) return;
 
+        const completedTerminalId = pendingTerminalStartId;
         const completedStartMode = pendingTerminalStartMode;
+
+        if (completedStartMode === "create") {
+            // Promote the tab only after its shell is genuinely interactive. Until
+            // this point the learner keeps using the previous terminal unchanged.
+            previousActiveTerminalIdRef.current = activeTerminalId;
+            setActiveTerminalId(completedTerminalId);
+            setOutputTab("terminal");
+            terminalAutoOpenRequestedKeyRef.current = null;
+        }
+
         setPendingTerminalStartId(null);
         setPendingTerminalStartMode(null);
         terminalTabAddInFlightRef.current = false;
@@ -1811,9 +1887,9 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         }
     }, [
         activeTerminalId,
-        activeWorkspaceTerminalReady,
         pendingTerminalStartId,
         pendingTerminalStartMode,
+        pendingWorkspaceTerminalReady,
         scheduleTerminalCapacityRefreshBurst,
     ]);
 
@@ -2370,11 +2446,10 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
 
             previousActiveTerminalIdRef.current = activeTerminalId;
             setTerminalTabs((current) => [...current, nextTab]);
-            setActiveTerminalId(nextTab.id);
             setPendingTerminalStartMode("create");
             setPendingTerminalStartId(nextTab.id);
             queuedStart = true;
-            setTerminalTabMessage(`Starting ${nextTab.label}…`);
+            setTerminalTabMessage(null);
             setOutputTab("terminal");
             terminalAutoOpenRequestedKeyRef.current = null;
 
@@ -2401,19 +2476,34 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
 
     const closeWorkspaceTerminalTab = useCallback(
         async (terminalId: string) => {
-            if (!resolvedTerminalHostKey || terminalTabs.length <= 1) return;
+            if (
+                !resolvedTerminalHostKey ||
+                terminalTabStrip.visibleTabs.length <= 1
+            ) {
+                return;
+            }
 
             const ownerKey = buildWorkspaceTerminalOwnerKey({
                 hostKey: resolvedTerminalHostKey,
                 terminalId,
             });
-            const closingIndex = terminalTabs.findIndex((tab) => tab.id === terminalId);
+            const closingIndex = terminalTabStrip.visibleTabs.findIndex(
+                (tab) => tab.id === terminalId,
+            );
             const remaining = terminalTabs.filter((tab) => tab.id !== terminalId);
+            const selectableRemaining = terminalTabStrip.visibleTabs.filter(
+                (tab) => tab.id !== terminalId,
+            );
             const closingActiveTerminal = terminalId === activeTerminalId;
             const nextActive = closingActiveTerminal
-                ? remaining[Math.max(0, Math.min(closingIndex, remaining.length - 1))]?.id
+                ? selectableRemaining[
+                      Math.max(
+                          0,
+                          Math.min(closingIndex, selectableRemaining.length - 1),
+                      )
+                  ]?.id
                 : activeTerminalId;
-            const resolvedNextActive = nextActive ?? remaining[0].id;
+            const resolvedNextActive = nextActive ?? selectableRemaining[0].id;
 
             setTerminalTabs(remaining);
             setActiveTerminalId(resolvedNextActive);
@@ -2461,6 +2551,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
             resolvedTerminalHostKey,
             scheduleTerminalCapacityRefreshBurst,
             terminalTabs,
+            terminalTabStrip.visibleTabs,
             pendingTerminalStartId,
         ],
     );
@@ -2648,7 +2739,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                             ) : null}
 
                             <div className="flex min-w-0 flex-1 items-center gap-1 overflow-x-auto">
-                                {terminalTabs.map((tab) => {
+                                {terminalTabStrip.visibleTabs.map((tab) => {
                                     const active =
                                         outputTab === "terminal" &&
                                         tab.id === activeTerminalId;
@@ -2688,7 +2779,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                                                 ) : null}
                                             </button>
 
-                                            {terminalTabs.length > 1 ? (
+                                            {terminalTabStrip.visibleTabs.length > 1 ? (
                                                 <button
                                                     type="button"
                                                     onClick={() => {
@@ -2703,6 +2794,26 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                                         </div>
                                     );
                                 })}
+
+                                {terminalTabStrip.pendingTab ? (
+                                    <div
+                                        role="status"
+                                        aria-live="polite"
+                                        aria-label={`Opening ${terminalTabStrip.pendingTab.label}`}
+                                        className={cx(
+                                            "inline-flex h-8 w-24 shrink-0 items-center justify-center rounded-lg",
+                                            MOBILE_TAB_IDLE,
+                                        )}
+                                    >
+                                        <span
+                                            aria-hidden="true"
+                                            className="inline-flex h-3.5 w-3.5 animate-spin rounded-full border-2 border-current border-r-transparent opacity-60"
+                                        />
+                                        <span className="sr-only">
+                                            Opening {terminalTabStrip.pendingTab.label}
+                                        </span>
+                                    </div>
+                                ) : null}
                             </div>
 
                             <button

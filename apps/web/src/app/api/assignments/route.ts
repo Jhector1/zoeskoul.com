@@ -45,6 +45,12 @@ export async function GET() {
       timeLimitSec: true,
       maxAttempts: true,
       maxQuestionAttempts: true,
+      section: {
+        select: {
+          subject: { select: { slug: true } },
+          module: { select: { slug: true } },
+        },
+      },
     },
   });
 
@@ -80,6 +86,9 @@ export async function GET() {
       return {
         ...a,
         topics: topicSlugs,
+        subjectSlug: a.section?.subject?.slug ?? null,
+        moduleSlug: a.section?.module?.slug ?? null,
+        section: undefined,
 
         attemptsUsed: used,
         attemptsRemaining:

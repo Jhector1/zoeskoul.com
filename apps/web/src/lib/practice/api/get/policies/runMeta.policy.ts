@@ -7,6 +7,7 @@ import {
   readSharedChallengeMeta,
 } from "@/lib/practice/challenges/session";
 import { readDailyFiveMeta } from "@/lib/practice/experience/dailyFive";
+import { readSubscriberPracticeMeta } from "@/lib/practice/experience/subscriberPractice";
 import { getPracticeExperiencePolicy } from "@/lib/practice/experience/policy";
 import { resolvePracticeViewer } from "@/lib/practice/experience/viewer";
 import type { PracticeRunViewer } from "@/lib/practice/experience/types";
@@ -31,8 +32,9 @@ export function buildRunMeta(args: {
   const mode = resolvePracticeRunMode(session);
   const challenge = readSharedChallengeMeta(session?.meta ?? null);
   const daily = readDailyFiveMeta(session?.meta ?? null);
+  const subscriberPractice = readSubscriberPracticeMeta(session?.meta ?? null);
 
-  const policy = getPracticeExperiencePolicy({
+  const basePolicy = getPracticeExperiencePolicy({
     mode,
     viewerTier: viewer.tier,
     difficulty: diff,
@@ -41,6 +43,24 @@ export function buildRunMeta(args: {
     assignmentAllowReveal: Boolean(session?.assignment?.allowReveal),
     assignmentQuestionMaxAttempts: session?.assignment?.maxQuestionAttempts ?? null,
   });
+  const policy = subscriberPractice
+    ? {
+        ...basePolicy,
+        targetCount: subscriberPractice.targetCount,
+        lockDifficulty: diff,
+        lockTopic: subscriberPractice.queue[0]?.topicSlug ?? "all",
+        filters: {
+          topicEditable: false,
+          difficultyEditable: false,
+          purposeEditable: false,
+          countEditable: false,
+        },
+        eligibility: {
+          ...basePolicy.eligibility,
+          allowedPurposes: ["quiz", "project"] as Array<"quiz" | "project">,
+        },
+      }
+    : basePolicy;
 
   const maxAttempts = computeMaxAttempts({
     mode,

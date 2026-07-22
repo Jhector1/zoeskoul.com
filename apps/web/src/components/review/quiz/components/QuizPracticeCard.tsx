@@ -15,6 +15,8 @@ import {
 import { exerciseDebug, summarizeExercisePatch } from "@/components/review/module/runtime/exerciseDebug";
 import { reviewSaveDebug } from "@/components/review/module/runtime/reviewSaveDebug";
 import PracticeHelpPanel from "@/components/practice/PracticeHelpPanel";
+import AiTutorFloating from "@/components/ai-tutor/AiTutorFloating";
+import { shouldOfferAiTutor } from "@/components/ai-tutor/tutorContext";
 import { useOptionalReviewTools } from "@/components/review/module/context/ReviewToolsContext";
 import { getExerciseStateKey } from "@/components/review/module/runtime/exerciseKeys";
 import { useReviewRuntimeStore } from "@/components/review/module/runtime/reviewRuntimeStore";
@@ -1801,6 +1803,7 @@ export default function QuizPracticeCard(props: {
       !unlocked || isCompleted || locked || excused || isFinalized;
 
   const hasOpenedHelp = Boolean(ps?.item?.help?.openedStepKeys?.length);
+  const aiTutorAvailable = shouldOfferAiTutor(ps?.item as any);
 
   const btnLabel = finalizedAction === "finish" ? (
       ui.t("buttons.finish", {}, "Finish →")
@@ -2164,7 +2167,7 @@ export default function QuizPracticeCard(props: {
                     {btnLabel}
                   </button>
 
-                  {!showFinalizedAction && !hasOpenedHelp ? (
+                  {!showFinalizedAction && !hasOpenedHelp && !aiTutorAvailable ? (
                       <button
                           type="button"
                           onClick={() => onHelp(nextHelpStepKey ?? undefined)}
@@ -2183,7 +2186,6 @@ export default function QuizPracticeCard(props: {
                     <span className="whitespace-normal">
                       {t("attempts", {
                         n: ps?.attempts ?? 0,
-                        max: ps?.maxAttempts == null ? "∞" : ps.maxAttempts,
                       })}
                     </span>
 
@@ -2220,6 +2222,12 @@ export default function QuizPracticeCard(props: {
                   updateCurrent={updateItemSafe}
                   onOpenHelp={onHelp}
                   codeInputId={codeInputId}
+              />
+
+              <AiTutorFloating
+                  current={livePracticeItem as any}
+                  exercise={((livePracticeManifest as Exercise) ?? ex) as Exercise}
+                  enabled={unlocked && !isCompleted && !locked && !isFinalized}
               />
             </div>
         ) : (

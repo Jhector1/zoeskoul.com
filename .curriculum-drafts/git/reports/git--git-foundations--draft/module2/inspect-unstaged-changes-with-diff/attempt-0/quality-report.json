@@ -1,5 +1,5 @@
 {
-  "ok": true,
+  "ok": false,
   "profileId": "git",
   "subjectSlug": "git--git-foundations--draft",
   "courseSlug": "git-foundations",
@@ -19,14 +19,14 @@
     "projects": 4,
     "capstones": 4,
     "thinFixedTestCount": 0,
-    "blockers": 0,
-    "errors": 0,
+    "blockers": 4,
+    "errors": 3,
     "warnings": 1,
     "infos": 0
   },
   "severityCounts": {
-    "blocker": 0,
-    "error": 0,
+    "blocker": 4,
+    "error": 3,
     "warning": 1,
     "info": 0
   },
@@ -39,6 +39,76 @@
       "moduleId": "git-foundations-module-2-meaningful-history",
       "topicId": "inspect-unstaged-changes-with-diff",
       "message": "Topic \"inspect-unstaged-changes-with-diff\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "EXPECTED_ENTRY_FILE_MISSING",
+      "severity": "error",
+      "path": "git-foundations-module-2-meaningful-history/git-foundations-section-2-history-workflow/inspect-unstaged-changes-with-diff",
+      "profileId": "git",
+      "moduleId": "git-foundations-module-2-meaningful-history",
+      "topicId": "inspect-unstaged-changes-with-diff",
+      "exerciseId": "try-inspect-unstaged-changes-with-diff-sketch0",
+      "message": "Exercise \"try-inspect-unstaged-changes-with-diff-sketch0\" workspace does not reference expected entry file \"README.md\"."
+    },
+    {
+      "code": "WORKSPACE_ENTRY_FILE_LEAK",
+      "severity": "blocker",
+      "path": "git-foundations-module-2-meaningful-history/git-foundations-section-2-history-workflow/inspect-unstaged-changes-with-diff",
+      "profileId": "git",
+      "moduleId": "git-foundations-module-2-meaningful-history",
+      "topicId": "inspect-unstaged-changes-with-diff",
+      "exerciseId": "try-inspect-unstaged-changes-with-diff-sketch0",
+      "message": "Exercise \"try-inspect-unstaged-changes-with-diff-sketch0\" uses workspace entry file \"community-site/ABOUT.md\" but profile \"git\" expects \"README.md\"."
+    },
+    {
+      "code": "EXPECTED_ENTRY_FILE_MISSING",
+      "severity": "error",
+      "path": "git-foundations-module-2-meaningful-history/git-foundations-section-2-history-workflow/inspect-unstaged-changes-with-diff",
+      "profileId": "git",
+      "moduleId": "git-foundations-module-2-meaningful-history",
+      "topicId": "inspect-unstaged-changes-with-diff",
+      "exerciseId": "try-inspect-unstaged-changes-with-diff-sketch1",
+      "message": "Exercise \"try-inspect-unstaged-changes-with-diff-sketch1\" workspace does not reference expected entry file \"README.md\"."
+    },
+    {
+      "code": "WORKSPACE_ENTRY_FILE_LEAK",
+      "severity": "blocker",
+      "path": "git-foundations-module-2-meaningful-history/git-foundations-section-2-history-workflow/inspect-unstaged-changes-with-diff",
+      "profileId": "git",
+      "moduleId": "git-foundations-module-2-meaningful-history",
+      "topicId": "inspect-unstaged-changes-with-diff",
+      "exerciseId": "try-inspect-unstaged-changes-with-diff-sketch1",
+      "message": "Exercise \"try-inspect-unstaged-changes-with-diff-sketch1\" uses workspace entry file \"community-site/notes.md\" but profile \"git\" expects \"README.md\"."
+    },
+    {
+      "code": "EXPECTED_ENTRY_FILE_MISSING",
+      "severity": "error",
+      "path": "git-foundations-module-2-meaningful-history/git-foundations-section-2-history-workflow/inspect-unstaged-changes-with-diff",
+      "profileId": "git",
+      "moduleId": "git-foundations-module-2-meaningful-history",
+      "topicId": "inspect-unstaged-changes-with-diff",
+      "exerciseId": "try-inspect-unstaged-changes-with-diff-sketch2",
+      "message": "Exercise \"try-inspect-unstaged-changes-with-diff-sketch2\" workspace does not reference expected entry file \"README.md\"."
+    },
+    {
+      "code": "WORKSPACE_ENTRY_FILE_LEAK",
+      "severity": "blocker",
+      "path": "git-foundations-module-2-meaningful-history/git-foundations-section-2-history-workflow/inspect-unstaged-changes-with-diff",
+      "profileId": "git",
+      "moduleId": "git-foundations-module-2-meaningful-history",
+      "topicId": "inspect-unstaged-changes-with-diff",
+      "exerciseId": "try-inspect-unstaged-changes-with-diff-sketch2",
+      "message": "Exercise \"try-inspect-unstaged-changes-with-diff-sketch2\" uses workspace entry file \"community-site/CONTRIBUTING.md\" but profile \"git\" expects \"README.md\"."
+    },
+    {
+      "code": "WORKSPACE_ENTRY_FILE_LEAK",
+      "severity": "blocker",
+      "path": "git-foundations-module-2-meaningful-history/git-foundations-section-2-history-workflow/inspect-unstaged-changes-with-diff",
+      "profileId": "git",
+      "moduleId": "git-foundations-module-2-meaningful-history",
+      "topicId": "inspect-unstaged-changes-with-diff",
+      "exerciseId": "try-inspect-unstaged-changes-with-diff-sketch3",
+      "message": "Exercise \"try-inspect-unstaged-changes-with-diff-sketch3\" uses workspace entry file \"community-site/README.md\" but profile \"git\" expects \"README.md\"."
     }
   ]
 }

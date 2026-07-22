@@ -1,6 +1,8 @@
 // src/features/practice/client/constants.ts
+import { DEFAULT_STANDARD_PRACTICE_TARGET_COUNT } from "@/lib/practice/experience/availableTargetCount";
+
 export const STORAGE_VERSION = 6 as const;
-export const SESSION_DEFAULT = 10 as const;
+export const SESSION_DEFAULT = DEFAULT_STANDARD_PRACTICE_TARGET_COUNT;
 
 export function scorePct(correct: number, answered: number) {
   if (!answered || answered <= 0) return 0;

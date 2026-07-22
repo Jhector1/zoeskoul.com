@@ -1,0 +1,446 @@
+{
+  "title": "Stage One Purpose at a Time",
+  "summary": "Separate supplied community-site edits so each commit records one understandable project purpose.",
+  "minutes": 22,
+  "sketchBlocks": [
+    {
+      "id": "sketch-0",
+      "cardTitle": "Why stage one purpose",
+      "title": "Stage only the changes that belong together",
+      "bodyMarkdown": "Worked example: You edited the community-site to fix a wording mistake on the homepage and also tweaked a color in the stylesheet. These are two different purposes: the wording fix belongs in a \"copy\" commit and the color tweak belongs in a \"style\" commit. Staging only the file(s) that correspond to one purpose keeps each commit focused and meaningful.\n\nExample workspace files (edited, unstaged):\n\n- community-site/index.html — homepage copy corrected\n- community-site/styles.css — temporary color tweak\n\nHow you check and commit a single purpose:\n\n1. Inspect the unstaged changes with git status and git diff to confirm what changed.\n2. Stage only the file for the copy fix with git add community-site/index.html.\n3. Confirm the staged snapshot with git diff --staged so you know exactly what will go into the commit.\n4. Commit with a concise message describing the single purpose, for example:\n\n```\ngit add community-site/index.html\n# then inspect\ngit diff --staged\n# then commit the copy fix\ngit commit -m \"Fix homepage typo\"\n```\n\nWhy this matters: When only one purpose is recorded per commit, the history is readable. A later reader can open a commit with git show and understand its intent without wading through unrelated style changes."
+    },
+    {
+      "id": "sketch-1",
+      "cardTitle": "Inspect the staged snapshot",
+      "title": "See what staging captured before committing",
+      "bodyMarkdown": "Worked example: The staging area holds a snapshot of content you plan to commit. It can differ from the working tree if you staged only some files. Before committing, use git diff --staged to inspect exactly what the next commit will record.\n\nConcrete steps:\n\n1. Make edits across multiple files for different purposes (for example, styles and a contributor note).\n2. Stage only the style change with git add community-site/styles.css.\n3. Run git diff --staged. The output shows only the staged file's changes — what the upcoming commit will include — not the unstaged contributor note.\n\nExample commands (do not copy verbatim into a Try It; use them as an illustration):\n\n```\ngit add community-site/styles.css\ngit diff --staged\n# verify the staged snapshot shows the style change but not other edits\ngit commit -m \"Refine header color\"\n```\n\nInterpretation: If git diff --staged shows only one file, you can be confident the commit will remain purpose-focused."
+    },
+    {
+      "id": "sketch-2",
+      "cardTitle": "Create a focused commit",
+      "title": "Stage, inspect, commit, then leave unrelated work alone",
+      "bodyMarkdown": "Worked example: Suppose you added a short CONTRIBUTING note and also updated the homepage copy in separate files. To keep commits focused, stage only the CONTRIBUTING change and leave the homepage edits unstaged. After committing, use git status and git diff to verify the remaining work is still unstaged and not part of the commit.\n\nStep-by-step:\n\n- Stage the file(s) for the purpose: git add community-site/CONTRIB.txt\n- Inspect staged snapshot: git diff --staged\n- Commit with a purposeful message: git commit -m \"Add contributor guidelines\"\n- Confirm the working tree still contains the other edits: git status and git diff\n\nA single-commit mistake to avoid: staging all modified files by accident (git add .) which mixes unrelated purposes into one commit."
+    },
+    {
+      "id": "sketch-3",
+      "cardTitle": "Verify and read the snapshot",
+      "title": "Use log and show to inspect what you just recorded",
+      "bodyMarkdown": "Worked example: After making a focused commit, use git log --oneline to read the concise history and git show <commit> (or git show HEAD) to inspect the committed snapshot. Reading the commit message plus the staged snapshot verifies the commit really captured the intended purpose.\n\nExample flow:\n\n1. git log --oneline to see the recent commit(s) with their messages.\n2. git show HEAD to view the changes recorded by the latest commit.\n\nSample commands (illustrative):\n\n```\ngit log --oneline -n 5\ngit show HEAD\n```\n\nWhat to check in the show output: file names changed, the hunk content that was staged, and that unrelated edits are absent. This confirms you created a focused, inspectable change."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "try-stage-intentionally-sketch0",
+      "kind": "code_input",
+      "title": "Stage only the copy fix and commit it",
+      "prompt": "You have a community-site repository with two edited files: index.html (homepage copy corrected) and styles.css (color tweak). Stage only the copy fix file and create a single focused commit with the message: Fix homepage typo\n\nType the commands in the terminal and press Enter for each command. The grader will verify that the commit recorded the index.html change and that styles.css remains unstaged in the working tree.",
+      "hint": "Stage only the index.html file, inspect the staged snapshot, then commit with the exact message.",
+      "help": {
+        "concept": "The staging area holds a snapshot of files to be recorded by the next commit; use git add to stage and git diff --staged to inspect exactly what will be committed.",
+        "hint_1": "Run git add community-site/index.html, then git diff --staged to verify only index.html is staged.",
+        "hint_2": "After staging and verifying, run git commit -m \"Fix homepage typo\". Confirm styles.css is still unstaged with git status."
+      },
+      "starterCode": "# Stage only the homepage copy file and commit it.\n# Type the git commands and press Enter. Do not run the solution commands shown in the solution field.\n",
+      "solutionCode": "git add community-site/index.html\ngit diff --staged\ngit commit -m \"Fix homepage typo\"\n",
+      "entryFilePath": "community-site/index.html",
+      "starterFiles": [
+        {
+          "path": "community-site/index.html",
+          "content": "<h1>Welcom to our community site</h1>\n<p>Thanks for visiting.</p>",
+          "language": "html",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/styles.css",
+          "content": "body { background: white; }\n.header { color: #ff0000; }\n/* temporary color tweak */",
+          "language": "css",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/CONTRIB.txt",
+          "content": "Contributing: add your name and role",
+          "language": "text",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "community-site/index.html",
+          "content": "<h1>Welcome to our community site</h1>\n<p>Thanks for visiting.</p>",
+          "language": "html",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/styles.css",
+          "content": "body { background: white; }\n.header { color: #ff0000; }\n/* temporary color tweak */",
+          "language": "css",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/CONTRIB.txt",
+          "content": "Contributing: add your name and role",
+          "language": "text",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        }
+      ],
+      "recipeType": "shell_task",
+      "fixedLanguage": "bash",
+      "mode": "terminal_workspace"
+    },
+    {
+      "id": "try-stage-intentionally-sketch1",
+      "kind": "code_input",
+      "title": "Stage the style tweak and inspect the staged snapshot",
+      "prompt": "In a fresh community-site workspace you edited styles.css (header color refined) and added an unrelated contributor note in CONTRIB.txt. Stage only the style file, use git diff --staged to inspect the snapshot, then commit with the message: Refine header color\n\nType each command and press Enter. The grader will check that the commit recorded styles.css and that CONTRIB.txt is still unstaged.",
+      "hint": "Stage community-site/styles.css, inspect with git diff --staged, then commit with the exact message.",
+      "help": {
+        "concept": "git diff --staged shows the staged snapshot — the exact contents that will be recorded by the next commit; staging only relevant files keeps commits focused.",
+        "hint_1": "Use git add community-site/styles.css followed by git diff --staged to confirm only that file is staged.",
+        "hint_2": "After confirming, run git commit -m \"Refine header color\" and use git status to verify CONTRIB.txt remains unstaged."
+      },
+      "starterCode": "# Stage only the styles.css file, inspect the staged snapshot, then commit.\n# Type the commands and press Enter.\n",
+      "solutionCode": "git add community-site/styles.css\ngit diff --staged\ngit commit -m \"Refine header color\"\n",
+      "entryFilePath": "community-site/styles.css",
+      "starterFiles": [
+        {
+          "path": "community-site/index.html",
+          "content": "<h1>Welcome to our community site</h1>\n<p>Thanks for visiting.</p>",
+          "language": "html",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/styles.css",
+          "content": "body { background: white; }\n.header { color: #00aaff; }\n/* refined header color */",
+          "language": "css",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/CONTRIB.txt",
+          "content": "Contributing: please read the guidelines.",
+          "language": "text",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "community-site/index.html",
+          "content": "<h1>Welcome to our community site</h1>\n<p>Thanks for visiting.</p>",
+          "language": "html",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/styles.css",
+          "content": "body { background: white; }\n.header { color: #00aaff; }\n/* refined header color */",
+          "language": "css",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/CONTRIB.txt",
+          "content": "Contributing: please read the guidelines.",
+          "language": "text",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        }
+      ],
+      "recipeType": "shell_task",
+      "fixedLanguage": "bash",
+      "mode": "terminal_workspace"
+    },
+    {
+      "id": "try-stage-intentionally-sketch2",
+      "kind": "code_input",
+      "title": "Commit the contributor guidelines only",
+      "prompt": "You have edited CONTRIB.txt to add short contributor guidance and also made unrelated edits to index.html. Stage only the contributor file and commit with the message: Add contributor guidelines\n\nType the commands and press Enter. The grader verifies the commit captured CONTRIB.txt and that index.html edits remain unstaged.",
+      "hint": "Stage community-site/CONTRIB.txt only, inspect the staged snapshot, then commit with the exact message.",
+      "help": {
+        "concept": "Staging isolates the snapshot to be recorded; committing only staged file(s) creates a focused change and leaves other edits outside the commit.",
+        "hint_1": "Run git add community-site/CONTRIB.txt and then git diff --staged to see only CONTRIB.txt in the upcoming commit.",
+        "hint_2": "After the commit, use git status and git diff to confirm index.html edits are still unstaged."
+      },
+      "starterCode": "# Stage the contributor guidelines file and commit it. Type each command and press Enter.\n",
+      "solutionCode": "git add community-site/CONTRIB.txt\ngit diff --staged\ngit commit -m \"Add contributor guidelines\"\n",
+      "entryFilePath": "community-site/CONTRIB.txt",
+      "starterFiles": [
+        {
+          "path": "community-site/index.html",
+          "content": "<h1>Welcome to our community site</h1>\n<p>Thanks for visiting. We updated this paragraph to include a new welcome line.</p>",
+          "language": "html",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/CONTRIB.txt",
+          "content": "Contributing Guidelines:\n- Add your name to the list\n- Show your role",
+          "language": "text",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/styles.css",
+          "content": "body { background: white; }\n.header { color: #00aaff; }",
+          "language": "css",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "community-site/index.html",
+          "content": "<h1>Welcome to our community site</h1>\n<p>Thanks for visiting. We updated this paragraph to include a new welcome line.</p>",
+          "language": "html",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/CONTRIB.txt",
+          "content": "Contributing Guidelines:\n- Add your name to the list\n- Show your role",
+          "language": "text",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/styles.css",
+          "content": "body { background: white; }\n.header { color: #00aaff; }",
+          "language": "css",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        }
+      ],
+      "recipeType": "shell_task",
+      "fixedLanguage": "bash",
+      "mode": "terminal_workspace"
+    },
+    {
+      "id": "try-stage-intentionally-sketch3",
+      "kind": "code_input",
+      "title": "Make a focused documentation commit and verify",
+      "prompt": "In a community-site workspace you updated README.md with a short note and also corrected a line in index.html. Stage only README.md and commit with the message: Update README with contributing link\n\nType each command and press Enter. After the commit, use git log --oneline and git show HEAD to confirm the commit message and view the exact recorded snapshot. The grader checks the commit message and that index.html edits remain unstaged.",
+      "hint": "Stage community-site/README.md only, commit with the exact message, then run git log --oneline and git show HEAD.",
+      "help": {
+        "concept": "git log shows commit messages; git show HEAD shows the snapshot recorded by the latest commit. Use these commands to verify your focused commit captured only the intended file(s).",
+        "hint_1": "Run git add community-site/README.md, git commit -m \"Update README with contributing link\", then git log --oneline to see the new message.",
+        "hint_2": "Use git show HEAD to confirm the commit contains README.md changes and not the index.html edits remaining in the working tree."
+      },
+      "starterCode": "# Stage only README.md and commit it. Then use git log --oneline and git show HEAD to verify.\n# Type each command and press Enter.\n",
+      "solutionCode": "git add community-site/README.md\ngit commit -m \"Update README with contributing link\"\ngit log --oneline -n 5\ngit show HEAD\n",
+      "entryFilePath": "community-site/README.md",
+      "starterFiles": [
+        {
+          "path": "community-site/README.md",
+          "content": "# Community Site\n\nThis project welcomes contributors. Add a contributing link here.",
+          "language": "markdown",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/index.html",
+          "content": "<h1>Welcome to our community site</h1>\n<p>Thanks for visiting. (minor text correction pending)</p>",
+          "language": "html",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/CONTRIB.txt",
+          "content": "Contributing: add your name and role",
+          "language": "text",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "community-site/README.md",
+          "content": "# Community Site\n\nThis project welcomes contributors. Add a contributing link here.",
+          "language": "markdown",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/index.html",
+          "content": "<h1>Welcome to our community site</h1>\n<p>Thanks for visiting. (minor text correction pending)</p>",
+          "language": "html",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/CONTRIB.txt",
+          "content": "Contributing: add your name and role",
+          "language": "text",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        }
+      ],
+      "recipeType": "shell_task",
+      "fixedLanguage": "bash",
+      "mode": "terminal_workspace"
+    },
+    {
+      "id": "qc-1-single",
+      "kind": "single_choice",
+      "title": "Which command shows the staged snapshot that will be committed?",
+      "prompt": "Which git command displays the exact snapshot of currently staged changes that will be recorded by the next commit?",
+      "hint": "The command must compare the staging area (index) to HEAD.",
+      "help": {
+        "concept": "git diff --staged compares the staging area (index) with HEAD and shows exactly what will be committed.",
+        "hint_1": "git diff compares working tree to HEAD unless given --staged to compare the index instead.",
+        "hint_2": "Look for the option that explicitly references the staged snapshot."
+      },
+      "options": [
+        "git diff",
+        "git diff --staged",
+        "git status",
+        "git show"
+      ],
+      "correctOptionIds": [
+        "b"
+      ]
+    },
+    {
+      "id": "qc-2-multi",
+      "kind": "multi_choice",
+      "title": "What are correct descriptions of the staging area?",
+      "prompt": "Select all statements that correctly describe the Git staging area (index).",
+      "hint": "Choose the statements that describe what the index does in Git's commit workflow.",
+      "help": {
+        "concept": "The staging area holds snapshots of file content to be recorded by the next commit; it prepares changes and lets you review what will be included.",
+        "hint_1": "The index is not the working tree; it's the snapshot you assemble for the next commit.",
+        "hint_2": "Pick the statements that say it records snapshots and prepares content for commits, not statements that claim it auto-commits or permanently stores uncommitted changes."
+      },
+      "options": [
+        "It records a snapshot of files that will be included in the next commit.",
+        "It permanently stores uncommitted local changes outside of commits.",
+        "It automatically commits files when you stage them.",
+        "It prepares the exact content that will be recorded by the next commit."
+      ],
+      "correctOptionIds": [
+        "a",
+        "d"
+      ]
+    },
+    {
+      "id": "qc-3-multi",
+      "kind": "multi_choice",
+      "title": "Which commands help you read a recent commit and its recorded changes?",
+      "prompt": "Choose the commands that show commit history and details about a single commit.",
+      "hint": "One command lists commits briefly, the other displays a specific commit's changes and metadata.",
+      "help": {
+        "concept": "git log lists commits (a concise view with --oneline), while git show displays the details and patch for a specific commit.",
+        "hint_1": "Look for the command that shows a list of commits and the one that shows the commit snapshot and diff.",
+        "hint_2": "Do not choose commands that only affect the working tree or staging area."
+      },
+      "options": [
+        "git log --oneline",
+        "git show",
+        "git status",
+        "git add -p"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ]
+    },
+    {
+      "id": "qc-4-drag",
+      "kind": "drag_reorder",
+      "title": "Order the steps for making a focused commit",
+      "prompt": "Reorder the actions into the correct sequence for making a focused commit that records only one purpose.",
+      "hint": "Think about inspect → stage → inspect snapshot → commit order.",
+      "help": {
+        "concept": "A focused commit workflow inspects changes, stages only related files, verifies the staged snapshot, and then commits with an appropriate message.",
+        "hint_1": "Start by checking the current changes, not by staging everything immediately.",
+        "hint_2": "After staging, use git diff --staged to confirm before committing."
+      },
+      "tokens": [
+        "Edit files for multiple purposes",
+        "Run git status and git diff to see unstaged edits",
+        "git add only the files for the single purpose",
+        "git diff --staged to inspect the staged snapshot",
+        "git commit -m \"concise message describing the one purpose\"",
+        "Use git status or git diff to verify unrelated edits remain unstaged"
+      ],
+      "correctOrder": [
+        "Edit files for multiple purposes",
+        "Run git status and git diff to see unstaged edits",
+        "git add only the files for the single purpose",
+        "git diff --staged to inspect the staged snapshot",
+        "git commit -m \"concise message describing the one purpose\"",
+        "Use git status or git diff to verify unrelated edits remain unstaged"
+      ]
+    },
+    {
+      "id": "qc-5-fill-1",
+      "kind": "fill_blank_choice",
+      "title": "Command to view staged snapshot",
+      "prompt": "To view exactly what will be committed, run git [blank1].",
+      "hint": "This command compares the staging area to HEAD.",
+      "help": {
+        "concept": "git diff --staged shows the content recorded in the index compared to HEAD; it reveals the staged snapshot for the next commit.",
+        "hint_1": "The missing piece is the diff option that refers to staged content.",
+        "hint_2": "Choose the option that mentions staged content explicitly."
+      },
+      "template": "To view exactly what will be committed, run git [blank1].",
+      "choices": [
+        "status",
+        "diff --staged",
+        "log --oneline",
+        "show"
+      ],
+      "correctValue": "diff --staged"
+    },
+    {
+      "id": "qc-6-fill-2",
+      "kind": "fill_blank_choice",
+      "title": "What a focused commit should represent",
+      "prompt": "A focused commit should contain changes for a single [blank1].",
+      "hint": "Think about the intent behind the changes, not a filename or a branch.",
+      "help": {
+        "concept": "A focused commit groups changes that serve one purpose or intent (for example: 'fix typo', 'update docs', 'style cleanup'), making history easier to read.",
+        "hint_1": "Pick the answer that refers to the reason for the change.",
+        "hint_2": "The right word is about the intention or goal behind edits."
+      },
+      "template": "A focused commit should contain changes for a single [blank1].",
+      "choices": [
+        "purpose",
+        "file",
+        "branch",
+        "repository"
+      ],
+      "correctValue": "purpose"
+    }
+  ]
+}

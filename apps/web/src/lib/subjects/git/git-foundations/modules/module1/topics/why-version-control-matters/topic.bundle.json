@@ -4,7 +4,7 @@
   "moduleSlug": "git-foundations-module-1-start-tracking",
   "sectionSlug": "git-foundations-git-foundations-section-1-repository-basics",
   "prefix": "git_foundations_module_1",
-  "minutes": 16,
+  "minutes": 8,
   "runtimeDefaults": {
     "kind": "code",
     "language": "bash",
@@ -47,21 +47,6 @@
       "titleKey": "topics.git-foundations.git-foundations-module-1-start-tracking.why-version-control-matters.cards.sketch1.title",
       "sketchId": "worked-example",
       "height": 420
-    },
-    {
-      "id": "quiz",
-      "kind": "quiz",
-      "titleKey": "topics.git-foundations.git-foundations-module-1-start-tracking.why-version-control-matters.cards.quiz.title",
-      "quiz": {
-        "difficulty": "easy",
-        "n": 4,
-        "min": 4,
-        "max": 4,
-        "selectionMode": "random",
-        "allowReveal": true,
-        "preferKind": null,
-        "maxAttempts": null
-      }
     }
   ],
   "sketches": [
@@ -78,74 +63,7 @@
       "bodyKey": "sketches.git-foundations.git-foundations-module-1-start-tracking.why-version-control-matters.worked-example.bodyMarkdown"
     }
   ],
-  "exercises": [
-    {
-      "id": "sc-1",
-      "kind": "single_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.git-foundations.git-foundations-module-1-start-tracking.why-version-control-matters.practice.sc-1",
-      "optionIds": [
-        "a",
-        "b",
-        "c",
-        "d"
-      ],
-      "expected": {
-        "kind": "single_choice",
-        "optionId": "a"
-      }
-    },
-    {
-      "id": "sc-2",
-      "kind": "single_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.git-foundations.git-foundations-module-1-start-tracking.why-version-control-matters.practice.sc-2",
-      "optionIds": [
-        "a",
-        "b",
-        "c",
-        "d"
-      ],
-      "expected": {
-        "kind": "single_choice",
-        "optionId": "a"
-      }
-    },
-    {
-      "id": "mc-1",
-      "kind": "multi_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.git-foundations.git-foundations-module-1-start-tracking.why-version-control-matters.practice.mc-1",
-      "optionIds": [
-        "a",
-        "b",
-        "c",
-        "d"
-      ],
-      "expected": {
-        "kind": "multi_choice",
-        "optionIds": [
-          "a",
-          "b"
-        ]
-      }
-    },
-    {
-      "id": "fbc-2",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.git-foundations.git-foundations-module-1-start-tracking.why-version-control-matters.practice.fbc-2",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "locally"
-      }
-    }
-  ],
+  "exercises": [],
   "topicMeta": {
     "learningGoals": [
       "Explain why named snapshots are safer than duplicate “final” folders",

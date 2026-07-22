@@ -5,6 +5,7 @@ import { getToken } from "next-auth/jwt";
 
 import createMiddleware from "next-intl/middleware";
 import { routing } from "@/i18n/routing";
+import { isCatalogLearningPath } from "@/lib/routing/protectedLearningPath";
 
 const handleI18n = createMiddleware(routing);
 
@@ -70,7 +71,8 @@ function isProtectedPath(pathname: string) {
       pathname.startsWith("/admin") ||
       pathname.startsWith("/assignments") ||
       pathname.startsWith("/profile") ||
-      pathname.startsWith("/subjects")
+      pathname.startsWith("/subjects") ||
+      isCatalogLearningPath(pathname)
   );
 }
 

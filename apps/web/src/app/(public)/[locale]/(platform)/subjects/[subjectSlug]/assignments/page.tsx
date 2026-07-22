@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useLocale } from "next-intl";
+import { buildModulePracticeHref } from "@/lib/practice/experience/modulePracticeHref";
 
 // AFTER (accept both shapes to be safe)
 type AssignmentTopic =
@@ -28,6 +30,8 @@ type Assignment = {
   maxAttempts: number | null;
   attemptsUsed?: number;
   attemptsRemaining?: number | null;
+  subjectSlug?: string | null;
+  moduleSlug?: string | null;
 };
 
 function topicSlug(t: AssignmentTopic): string {
@@ -49,6 +53,7 @@ export default function AssignmentsPage() {
   const [items, setItems] = useState<Assignment[]>([]);
   const [busy, setBusy] = useState(true);
   const router = useRouter();
+  const locale = useLocale();
 
   useEffect(() => {
     (async () => {
@@ -97,31 +102,35 @@ export default function AssignmentsPage() {
       return;
     }
 
-    // ✅ Prefer server-provided topicSlugs if present (best source of truth)
-    const slugsFromServer = Array.isArray(data?.topicSlugs)
-      ? (data.topicSlugs as string[])
-      : null;
+    const resolvedSubjectSlug = String(
+      data?.subjectSlug ?? a.subjectSlug ?? "",
+    ).trim();
+    const resolvedModuleSlug = String(
+      data?.moduleSlug ?? a.moduleSlug ?? "",
+    ).trim();
 
-    const slugsFromAssignment =
-      a.topicSlugs?.length
-        ? a.topicSlugs
-        : (a.topics ?? []).map(topicSlug);
+    if (!resolvedSubjectSlug || !resolvedModuleSlug) {
+      alert("This assignment is missing its course route. Please contact support.");
+      return;
+    }
 
-    const slugs = (slugsFromServer ?? slugsFromAssignment ?? [])
-      .map((s) => String(s || "").trim())
-      .filter(Boolean);
-
-    const topicsParam = slugs.length ? slugs.join(",") : "all";
-    const firstTopic = slugs[0] ?? "all";
+    const returnTo = `/${encodeURIComponent(locale)}/subjects/${encodeURIComponent(
+      resolvedSubjectSlug,
+    )}/assignments`;
 
     router.push(
-      `/practice?sessionId=${encodeURIComponent(data.sessionId)}&type=assignment` +
-        `&difficulty=${encodeURIComponent(a.difficulty)}` +
-        `&topics=${encodeURIComponent(topicsParam)}` + // ✅ FULL LIST
-        `&topic=${encodeURIComponent(firstTopic)}` +   // ✅ fallback / convenience
-        `&questionCount=${encodeURIComponent(String(a.questionCount ?? 10))}` +
-        `&allowReveal=${encodeURIComponent(String(a.allowReveal))}` +
-        `&showDebug=${encodeURIComponent(String(a.showDebug))}`
+      buildModulePracticeHref({
+        locale,
+        subjectSlug: resolvedSubjectSlug,
+        moduleSlug: resolvedModuleSlug,
+        sessionId: String(data.sessionId),
+        mode: "assignment",
+        returnTo,
+        topicSlug: (a.topicSlugs?.[0] ?? (a.topics ?? []).map(topicSlug)[0]) || null,
+        questionCount: a.questionCount ?? 10,
+        preferPurpose: "quiz",
+        purposePolicy: "fallback",
+      }),
     );
   };
 
@@ -186,8 +195,8 @@ export default function AssignmentsPage() {
                           Attempts: {a.attemptsRemaining ?? 0} left
                         </span>
                       ) : (
-                        <span className={badge("Attempts: ∞")}>
-                          Attempts: ∞
+                        <span className={badge("Unlimited attempts")}>
+                          Unlimited attempts
                         </span>
                       )}
                     </div>

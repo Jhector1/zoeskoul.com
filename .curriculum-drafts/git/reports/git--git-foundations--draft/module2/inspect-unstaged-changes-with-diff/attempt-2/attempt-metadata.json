@@ -1,0 +1,18 @@
+{
+  "profileId": "git",
+  "subjectSlug": "git--git-foundations--draft",
+  "courseSlug": "git-foundations",
+  "moduleSlug": "git-foundations-module-2-meaningful-history",
+  "sectionSlug": "git-foundations-section-2-history-workflow",
+  "topicId": "inspect-unstaged-changes-with-diff",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "temperature": 1,
+  "modelSeed": null,
+  "generatorVersion": "2026-05-23-topic-authoring-draft-generator-v1",
+  "schemaName": "TopicAuthoringDraft",
+  "schemaVersion": "2026-07-16-topic-authoring-draft-v2",
+  "strictSchema": true,
+  "retryAttempt": 2,
+  "maxRetries": 2
+}

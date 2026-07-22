@@ -3,13 +3,14 @@
 import React, { useMemo } from "react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
-import { ArrowLeft, CheckCircle2, Lock, Sparkles } from "lucide-react";
+import { ArrowLeft, CheckCircle2, Sparkles } from "lucide-react";
 
 import { cn } from "@/lib/cn";
 import { useReviewProgressMany } from "@/components/review/module/hooks/useReviewProgressMany";
 import { ROUTES } from "@/utils";
 import { buildBillingHref } from "@/lib/billing/moduleAccess";
 import NavButton from "@/components/ui/NavButton";
+import { getCourseModuleEntryPolicy } from "@/components/review/module/runtime/courseProgressionPolicy";
 
 type ModuleRow = {
     id: string;
@@ -128,20 +129,6 @@ function ProgressBar({ pct }: { pct: number }) {
     );
 }
 
-function DisabledAction({
-                            children,
-                            fullWidth = false,
-                        }: {
-    children: React.ReactNode;
-    fullWidth?: boolean;
-}) {
-    return (
-        <span className={cn("ui-btn-disabled", fullWidth && "w-full sm:w-auto")}>
-            <span>{children}</span>
-        </span>
-    );
-}
-
 function getActionButtonClass(
     variant: "primary" | "secondary" | "premium" = "primary",
     fullWidth = false,
@@ -163,11 +150,9 @@ function getActionButtonClass(
 function ModuleIcon({
                         idx,
                         completed,
-                        locked,
                     }: {
     idx: number;
     completed?: boolean;
-    locked?: boolean;
 }) {
     return (
         <div
@@ -175,15 +160,11 @@ function ModuleIcon({
                 "ui-icon-box h-8 w-8 rounded-full text-[11px]",
                 completed &&
                 "border-[rgb(var(--ui-accent)/0.20)] bg-[rgb(var(--ui-accent)/0.10)] text-[rgb(var(--ui-accent)/1)]",
-                locked &&
-                "border-[rgb(var(--ui-border)/0.78)] bg-[rgb(var(--ui-surface-2)/0.92)] text-[rgb(var(--ui-text-soft)/0.9)]",
             )}
             aria-hidden
         >
             {completed ? (
                 <CheckCircle2 className="h-3.5 w-3.5" />
-            ) : locked ? (
-                <Lock className="h-3.5 w-3.5" />
             ) : (
                 <span className="font-medium tabular-nums">{idx + 1}</span>
             )}
@@ -234,30 +215,6 @@ export default function SubjectModulesClient(props: Props) {
         enabled: moduleIds.length > 0,
         refreshMs: 0,
     });
-
-    const unlockedBySlug = useMemo(() => {
-        const set = new Set<string>();
-
-        if (unlockAll) {
-            for (const m of sortedModules) set.add(m.slug);
-            return set;
-        }
-
-        for (let i = 0; i < sortedModules.length; i++) {
-            const cur = sortedModules[i];
-
-            if (i === 0) {
-                set.add(cur.slug);
-                continue;
-            }
-
-            const prev = sortedModules[i - 1];
-            const prevDone = Boolean(progByModuleSlug[prev.slug]?.moduleCompleted);
-            if (prevDone) set.add(cur.slug);
-        }
-
-        return set;
-    }, [sortedModules, progByModuleSlug, unlockAll]);
 
     const subjectStats = useMemo(() => {
         let totalTopics = 0;
@@ -348,17 +305,16 @@ export default function SubjectModulesClient(props: Props) {
                                 const modSections = sectionsByModuleDbId.get(String(m.id)) ?? [];
                                 const mp = progByModuleSlug[m.slug];
 
-                                const sequentialUnlocked = unlockedBySlug.has(m.slug);
-                                const seqLocked = !unlockAll && !sequentialUnlocked && idx !== 0;
-
                                 const access = accessByModuleSlug?.[m.slug] ?? {
                                     ok: true,
                                     paid: false,
                                     reason: "unknown",
                                 };
-
-                                const paywallLocked = !unlockAll && !access.ok;
-                                const showPremium = paywallLocked && !seqLocked;
+                                const moduleEntry = getCourseModuleEntryPolicy({
+                                    unlockAll,
+                                    accessOk: access.ok,
+                                });
+                                const showPremium = moduleEntry.accessLocked;
 
                                 const completed = Boolean(mp?.moduleCompleted);
 
@@ -403,13 +359,11 @@ export default function SubjectModulesClient(props: Props) {
 
                                 const statusText = completed
                                     ? t("pillCompleted")
-                                    : seqLocked
-                                        ? t("pillLocked")
-                                        : showPremium
-                                            ? t("pillPremium")
-                                            : hasAnyProgress
-                                                ? t("pillInProgress")
-                                                : t("pillNotStarted");
+                                    : showPremium
+                                        ? t("pillPremium")
+                                        : hasAnyProgress
+                                            ? t("pillInProgress")
+                                            : t("pillNotStarted");
 
                                 const pillTone: "neutral" | "good" | "warn" =
                                     completed ? "good" : showPremium || hasAnyProgress ? "warn" : "neutral";
@@ -419,7 +373,6 @@ export default function SubjectModulesClient(props: Props) {
                                         key={m.slug}
                                         className={cn(
                                             "p-3 sm:p-4 transition-colors",
-                                            !seqLocked &&
                                             "hover:border-[rgb(var(--ui-border-strong)/0.72)] hover:bg-[rgb(var(--ui-surface)/0.98)]",
                                             completed &&
                                             "border-[rgb(var(--ui-accent)/0.18)] bg-[rgb(var(--ui-surface)/0.96)]",
@@ -428,7 +381,7 @@ export default function SubjectModulesClient(props: Props) {
                                         <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                                             <div className="min-w-0 flex-1">
                                                 <div className="flex items-start gap-3">
-                                                    <ModuleIcon idx={idx} completed={completed} locked={seqLocked} />
+                                                    <ModuleIcon idx={idx} completed={completed} />
 
                                                     <div className="min-w-0 flex-1">
                                                         <div className="flex flex-wrap items-center gap-2">
@@ -494,9 +447,7 @@ export default function SubjectModulesClient(props: Props) {
                                             </div>
 
                                             <div className="shrink-0 sm:pl-3">
-                                                {seqLocked ? (
-                                                    <DisabledAction fullWidth>{ctaLabel}</DisabledAction>
-                                                ) : showPremium ? (
+                                                {showPremium ? (
                                                     <NavButton
                                                         href={billingHref}
                                                         fullWidth

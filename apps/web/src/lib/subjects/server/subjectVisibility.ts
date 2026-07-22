@@ -22,6 +22,10 @@ export type SubjectEnrollmentFields = {
     enrolled: boolean;
 };
 
+export type SubjectEnrollmentActivityFields = SubjectEnrollmentFields & {
+    lastSeenAt: Date | null;
+};
+
 export type SubjectDatabaseStateFields = SubjectEnrollmentFields & {
     subjectOrder: number | null;
 };
@@ -30,6 +34,7 @@ type PersistedSubjectState = PersistedSubjectCardPresentation & {
     subjectId: string;
     order: number;
     enrolled: boolean;
+    lastSeenAt: Date | null;
 };
 
 async function loadPersistedSubjectState(
@@ -72,7 +77,7 @@ async function loadPersistedSubjectState(
               })
             : null;
 
-    const enrolledSubjectIds = new Set<string>();
+    const enrollmentBySubjectId = new Map<string, Date | null>();
 
     if (actorKey && dbSubjects.length > 0) {
         const rows = await prisma.subjectEnrollment.findMany({
@@ -87,11 +92,12 @@ async function loadPersistedSubjectState(
             },
             select: {
                 subjectId: true,
+                lastSeenAt: true,
             },
         });
 
         for (const row of rows) {
-            enrolledSubjectIds.add(row.subjectId);
+            enrollmentBySubjectId.set(row.subjectId, row.lastSeenAt ?? null);
         }
     }
 
@@ -101,7 +107,8 @@ async function loadPersistedSubjectState(
             {
                 subjectId: subject.id,
                 order: subject.order,
-                enrolled: enrolledSubjectIds.has(subject.id),
+                enrolled: enrollmentBySubjectId.has(subject.id),
+                lastSeenAt: enrollmentBySubjectId.get(subject.id) ?? null,
                 title: subject.title,
                 description: subject.description,
                 imagePublicId: subject.imagePublicId,
@@ -133,6 +140,29 @@ export async function withSubjectEnrollment<T extends { slug: string }>(
             ...subject,
             subjectId: state?.subjectId ?? null,
             enrolled: state?.enrolled ?? false,
+        };
+    });
+}
+
+/**
+ * Adds the learner's latest course activity for surfaces that need recency,
+ * while sharing the same enrollment lookup used by the catalog helpers.
+ */
+export async function withSubjectEnrollmentActivity<T extends { slug: string }>(
+    subjects: readonly T[],
+): Promise<Array<T & SubjectEnrollmentActivityFields>> {
+    const stateBySlug = await loadPersistedSubjectState(
+        subjects.map((subject) => subject.slug),
+    );
+
+    return subjects.map((subject) => {
+        const state = stateBySlug.get(subject.slug);
+
+        return {
+            ...subject,
+            subjectId: state?.subjectId ?? null,
+            enrolled: state?.enrolled ?? false,
+            lastSeenAt: state?.lastSeenAt ?? null,
         };
     });
 }

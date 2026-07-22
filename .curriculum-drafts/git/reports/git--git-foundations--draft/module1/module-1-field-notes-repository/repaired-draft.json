@@ -1,256 +1,37 @@
 {
-  "title": "Project: Start the Field Notes Repository",
-  "summary": "Turn a small set of neighborhood field notes into a trustworthy first Git repository with a clean initial commit.",
+  "title": "Module Project: Start Volunteer Hub History",
+  "summary": "Continue the parallel volunteer-hub repository through five cumulative steps to produce a trustworthy first snapshot on main with a repository-local identity and a clean working tree.",
   "minutes": 55,
   "sketchBlocks": [
     {
-      "id": "intro-to-git-repository",
-      "title": "Understanding Git Repositories",
-      "bodyMarkdown": "A Git repository is a storage space where your project files and their history are kept. It allows you to track changes, collaborate with others, and revert to previous states if needed. In this project, you'll learn how to set up a Git repository for a neighborhood garden's field notes, ensuring that all changes are tracked and the initial state is preserved.\n\n### Project Brief\n\n\n\n**Scenario:** A neighborhood garden coordinator keeps plot observations in a folder, but every revision currently replaces the previous one. The next volunteer needs a trustworthy starting point before more notes are added.\n\n**Your role:** Junior developer preparing the garden field-notes repository\n\n**Workspace:** One cumulative terminal workspace rooted at garden-notes/ with README.md, observations/, and a deterministic local Git identity\n\n**Deliverable:** A five-step repository setup ending with an initialized main branch, tracked project files, one meaningful initial commit, and a clean working tree."
+      "id": "sketch0",
+      "title": "Prepare a trustworthy snapshot for volunteer-hub",
+      "bodyMarkdown": "This project guides you through turning an ordinary folder named volunteer-hub into a small Git repository with one clear initial commit. You'll act as a volunteer coordinator who wants a reliable local history for the project files (README.md, index.html, styles.css, and notes/schedule.txt). The five progressive steps are: inspect the folder, initialize on main, set a repository-only identity, stage only the authored files, and commit the snapshot named \"Start volunteer hub\".\n\nWhy this order matters: inspection before initialization prevents surprises; setting a local identity keeps commits attributable without changing your global Git configuration; staging lets you control exactly which files belong in the first snapshot; and a single, focused commit makes future history easier to read and revert if necessary. Each sketch below pairs with a hands-on Try It exercise that opens the volunteer-hub workspace and checks one specific repository transition.\n\n### Project Brief\n\n\n\n**Scenario:** A volunteer coordinator has an ordinary volunteer-hub folder with a README and planning notes. Build its first trustworthy local snapshot.\n\n**Your role:** Act as the person preparing the project for reliable local change tracking.\n\n**Workspace:** Use volunteer-hub for every step. This same repository continues in the Module 2 and Module 3 projects.\n\n**Deliverable:** One repository on main with local identity, one commit named Start volunteer hub, the authored files tracked, and a clean working tree."
     }
   ],
   "quizDraft": [
     {
-      "id": "try-git-repo-inspection",
+      "id": "try-module-1-field-notes-repository-sketch0",
       "kind": "code_input",
-      "title": "Inspect the Garden Notes Workspace",
-      "prompt": "Use `pwd` and `ls` to inspect the `garden-notes/` directory. Read the provided `README.md` and observation files before making any changes. Type each command and press Enter.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
-      "hint": "Use `pwd` to check your current directory and `ls` to list files.",
+      "title": "Inspect the Ordinary Folder",
+      "prompt": "Open the workspace and inspect the volunteer-hub folder. Confirm the folder exists and contains README.md, index.html, styles.css, and notes/schedule.txt before the repository is initialized. Type the shell commands you would use to show these files and press Enter for each command.\n\nThe terminal opens inside `volunteer-hub/` with the required starting milestone ready. Type each requested terminal command and press Enter.",
+      "hint": "Read the Git task \"Inspect the Ordinary Folder\" and identify the repository state you need to create.",
       "help": {
-        "concept": "Understanding the current directory and its contents is crucial before initializing a repository.",
-        "hint_1": "Use `pwd` to confirm you're in the correct directory.",
-        "hint_2": "Use `ls` to see the files available in the directory."
-      },
-      "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.",
-      "solutionCode": "bash .zoeskoul/setup.sh\ngit status",
-      "fixedLanguage": "bash",
-      "recipeType": "shell_task",
-      "mode": "terminal_workspace",
-      "entryFilePath": "main.sh",
-      "instructions": "Use `pwd` and `ls` to inspect the `garden-notes/` directory. Read the provided `README.md` and observation files before making any changes. Type each command and press Enter.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
-      "starterFiles": [
-        {
-          "path": "main.sh",
-          "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.\n",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        },
-        {
-          "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 1\\n' > README.md\n",
-          "language": "bash",
-          "readOnly": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "main.sh",
-          "content": "bash .zoeskoul/setup.sh\ngit status\n",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 1\\n' > README.md\n",
-          "language": "bash",
-          "readOnly": true
-        }
-      ],
-      "terminalExpectations": {
-        "requiredCommands": [
-          {
-            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
-          },
-          {
-            "pattern": "^git\\s+status$"
-          }
-        ],
-        "forbiddenCommands": [
-          {
-            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
-            "message": "Do not rewrite shared history in this Git practice task."
-          }
-        ]
-      },
-      "gitExpectations": {
-        "repositoryInitialized": true,
-        "currentBranch": "main"
-      }
-    },
-    {
-      "id": "try-git-config",
-      "kind": "code_input",
-      "title": "Configure the Local Author Identity",
-      "prompt": "Set the local Git identity for the `garden-notes/` repository. Use `git config --local` to set `user.name` to \"ZoeSkoul Learner\" and `user.email` to \"learner@zoeskoul.local\". Type each command and press Enter.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
-      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
-      "help": {
-        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
-      },
-      "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.",
-      "solutionCode": "bash .zoeskoul/setup.sh\ngit config --local\ngit config --local user.name \"ZoeSkoul Learner\"\ngit config --local user.email \"learner@zoeskoul.local\"",
-      "fixedLanguage": "bash",
-      "recipeType": "shell_task",
-      "mode": "terminal_workspace",
-      "entryFilePath": "main.sh",
-      "instructions": "Set the local Git identity for the `garden-notes/` repository. Use `git config --local` to set `user.name` to \"ZoeSkoul Learner\" and `user.email` to \"learner@zoeskoul.local\". Type each command and press Enter.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
-      "starterFiles": [
-        {
-          "path": "main.sh",
-          "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.\n",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        },
-        {
-          "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 2\\n' > user.name\n",
-          "language": "bash",
-          "readOnly": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "main.sh",
-          "content": "bash .zoeskoul/setup.sh\ngit config --local\ngit config --local user.name \"ZoeSkoul Learner\"\ngit config --local user.email \"learner@zoeskoul.local\"\n",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 2\\n' > user.name\n",
-          "language": "bash",
-          "readOnly": true
-        }
-      ],
-      "terminalExpectations": {
-        "requiredCommands": [
-          {
-            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
-          },
-          {
-            "pattern": "^git\\s+config\\s+--local$"
-          },
-          {
-            "pattern": "^git\\s+config\\s+--local\\s+user\\.name\\s+\"ZoeSkoul\\s+Learner\"$"
-          },
-          {
-            "pattern": "^git\\s+config\\s+--local\\s+user\\.email\\s+\"learner@zoeskoul\\.local\"$"
-          }
-        ],
-        "forbiddenCommands": [
-          {
-            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
-            "message": "Do not rewrite shared history in this Git practice task."
-          }
-        ]
-      },
-      "gitExpectations": {
-        "repositoryInitialized": true,
-        "currentBranch": "main"
-      }
-    },
-    {
-      "id": "try-git-init",
-      "kind": "code_input",
-      "title": "Initialize the Repository on main",
-      "prompt": "Initialize the `garden-notes/` directory as a Git repository with the main branch. Use `git init -b main` and inspect the untracked files with `git status`. Type each command and press Enter.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
-      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
-      "help": {
-        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
-      },
-      "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.",
-      "solutionCode": "bash .zoeskoul/setup.sh\ngit init -b main\ngit status",
-      "fixedLanguage": "bash",
-      "recipeType": "shell_task",
-      "mode": "terminal_workspace",
-      "entryFilePath": "main.sh",
-      "instructions": "Initialize the `garden-notes/` directory as a Git repository with the main branch. Use `git init -b main` and inspect the untracked files with `git status`. Type each command and press Enter.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
-      "starterFiles": [
-        {
-          "path": "main.sh",
-          "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.\n",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        },
-        {
-          "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 3\\n' > practice-3.txt\n",
-          "language": "bash",
-          "readOnly": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "main.sh",
-          "content": "bash .zoeskoul/setup.sh\ngit init -b main\ngit status\n",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 3\\n' > practice-3.txt\n",
-          "language": "bash",
-          "readOnly": true
-        }
-      ],
-      "terminalExpectations": {
-        "requiredCommands": [
-          {
-            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
-          },
-          {
-            "pattern": "^git\\s+init\\s+-b\\s+main$"
-          },
-          {
-            "pattern": "^git\\s+status$"
-          }
-        ],
-        "forbiddenCommands": [
-          {
-            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
-            "message": "Do not rewrite shared history in this Git practice task."
-          }
-        ]
-      },
-      "gitExpectations": {
-        "repositoryInitialized": true,
-        "currentBranch": "main"
-      }
-    },
-    {
-      "id": "try-git-stage-files",
-      "kind": "code_input",
-      "title": "Stage the Initial Project Files",
-      "prompt": "Stage the `README.md` and all files in the `observations/` directory. Use `git add` to prepare these files for commit. Type each command and press Enter.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
-      "hint": "Read the Git task \"Stage the Initial Project Files\" and identify the repository state you need to create.",
-      "help": {
-        "concept": "This Git exercise checks the repository state produced by \"Stage the Initial Project Files\".",
+        "concept": "This Git exercise checks the repository state produced by \"Inspect the Ordinary Folder\".",
         "hint_1": "Use git status before and after each small change so you can see what moved between the working tree, staging area, and history.",
         "hint_2": "Match the requested file names, branch names, and commit purpose before clicking Check Answer."
       },
-      "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.",
-      "solutionCode": "bash .zoeskoul/setup.sh\ngit add\ngit add README.md\ngit add observations/",
+      "starterCode": "# Work in the terminal; the starting repository state is ready.\n# Type each requested command and press Enter.",
+      "solutionCode": "git init -b main",
       "fixedLanguage": "bash",
       "recipeType": "shell_task",
       "mode": "terminal_workspace",
       "entryFilePath": "main.sh",
-      "instructions": "Stage the `README.md` and all files in the `observations/` directory. Use `git add` to prepare these files for commit. Type each command and press Enter.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+      "instructions": "Open the workspace and inspect the volunteer-hub folder. Confirm the folder exists and contains README.md, index.html, styles.css, and notes/schedule.txt before the repository is initialized. Type the shell commands you would use to show these files and press Enter for each command.\n\nThe terminal opens inside `volunteer-hub/` with the required starting milestone ready. Type each requested terminal command and press Enter.",
       "starterFiles": [
         {
           "path": "main.sh",
-          "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.\n",
+          "content": "# Work in the terminal; the starting repository state is ready.\n# Type each requested command and press Enter.\n",
           "language": "bash",
           "isEntry": true,
           "entry": true,
@@ -258,7 +39,7 @@
         },
         {
           "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 4\\n' > README.md\n",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"volunteer-hub\"\nmkdir -p -- \"volunteer-hub\"\nprintf '%s\\n' 'Cumulative Git practice project' > \"volunteer-hub/README.md\"\n",
           "language": "bash",
           "readOnly": true
         }
@@ -266,14 +47,14 @@
       "solutionFiles": [
         {
           "path": "main.sh",
-          "content": "bash .zoeskoul/setup.sh\ngit add\ngit add README.md\ngit add observations/\n",
+          "content": "git init -b main\n",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
           "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 4\\n' > README.md\n",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"volunteer-hub\"\nmkdir -p -- \"volunteer-hub\"\nprintf '%s\\n' 'Cumulative Git practice project' > \"volunteer-hub/README.md\"\n",
           "language": "bash",
           "readOnly": true
         }
@@ -281,16 +62,7 @@
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
-          },
-          {
-            "pattern": "^git\\s+add$"
-          },
-          {
-            "pattern": "^git\\s+add\\s+README\\.md$"
-          },
-          {
-            "pattern": "^git\\s+add\\s+observations/$"
+            "pattern": "^git\\s+init\\s+-b\\s+main$"
           }
         ],
         "forbiddenCommands": [
@@ -301,32 +73,33 @@
         ]
       },
       "gitExpectations": {
+        "repositoryPath": "volunteer-hub",
         "repositoryInitialized": true,
         "currentBranch": "main"
       }
     },
     {
-      "id": "try-git-commit",
+      "id": "try-module-1-field-notes-repository-sketch1",
       "kind": "code_input",
-      "title": "Create and Verify the First Commit",
-      "prompt": "Commit the staged files with the message \"Start garden field notes\". Use `git commit` and verify the commit with `git log --oneline`. Type each command and press Enter.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
-      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "title": "Initialize the Repository on main",
+      "prompt": "Initialize the volunteer-hub folder as a Git repository whose initial branch is main. Move into volunteer-hub, initialize on main, and run a status command to show untracked files. Type each command and press Enter.\n\nThe terminal opens inside `volunteer-hub/` with the required starting milestone ready. Type each requested terminal command and press Enter.",
+      "hint": "Read the Git task \"Initialize the Repository on main\" and identify the repository state you need to create.",
       "help": {
-        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+        "concept": "This Git exercise checks the repository state produced by \"Initialize the Repository on main\".",
+        "hint_1": "Use git status before and after each small change so you can see what moved between the working tree, staging area, and history.",
+        "hint_2": "Match the requested file names, branch names, and commit purpose before clicking Check Answer."
       },
-      "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.",
-      "solutionCode": "bash .zoeskoul/setup.sh\ngit commit\ngit log --oneline\ngit commit -m\ngit commit -m \"Start garden field notes\"",
+      "starterCode": "# Work in the terminal; the starting repository state is ready.\n# Type each requested command and press Enter.",
+      "solutionCode": "git add practice.txt",
       "fixedLanguage": "bash",
       "recipeType": "shell_task",
       "mode": "terminal_workspace",
       "entryFilePath": "main.sh",
-      "instructions": "Commit the staged files with the message \"Start garden field notes\". Use `git commit` and verify the commit with `git log --oneline`. Type each command and press Enter.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+      "instructions": "Initialize the volunteer-hub folder as a Git repository whose initial branch is main. Move into volunteer-hub, initialize on main, and run a status command to show untracked files. Type each command and press Enter.\n\nThe terminal opens inside `volunteer-hub/` with the required starting milestone ready. Type each requested terminal command and press Enter.",
       "starterFiles": [
         {
           "path": "main.sh",
-          "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.\n",
+          "content": "# Work in the terminal; the starting repository state is ready.\n# Type each requested command and press Enter.\n",
           "language": "bash",
           "isEntry": true,
           "entry": true,
@@ -334,7 +107,7 @@
         },
         {
           "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 5\\n' > practice-5.txt\n",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"volunteer-hub\"\nmkdir -p -- \"volunteer-hub\"\nprintf '%s\\n' 'Cumulative Git practice project' > \"volunteer-hub/README.md\"\ngit -C \"volunteer-hub\" init -q -b main\n",
           "language": "bash",
           "readOnly": true
         }
@@ -342,14 +115,14 @@
       "solutionFiles": [
         {
           "path": "main.sh",
-          "content": "bash .zoeskoul/setup.sh\ngit commit\ngit log --oneline\ngit commit -m\ngit commit -m \"Start garden field notes\"\n",
+          "content": "git add practice.txt\n",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
           "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 5\\n' > practice-5.txt\n",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"volunteer-hub\"\nmkdir -p -- \"volunteer-hub\"\nprintf '%s\\n' 'Cumulative Git practice project' > \"volunteer-hub/README.md\"\ngit -C \"volunteer-hub\" init -q -b main\n",
           "language": "bash",
           "readOnly": true
         }
@@ -357,19 +130,7 @@
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
-          },
-          {
-            "pattern": "^git\\s+commit$"
-          },
-          {
-            "pattern": "^git\\s+log\\s+--oneline$"
-          },
-          {
-            "pattern": "^git\\s+commit\\s+-m$"
-          },
-          {
-            "pattern": "^git\\s+commit\\s+-m\\s+\"Start\\s+garden\\s+field\\s+notes\"$"
+            "pattern": "^git\\s+add\\s+practice\\.txt$"
           }
         ],
         "forbiddenCommands": [
@@ -380,19 +141,224 @@
         ]
       },
       "gitExpectations": {
+        "repositoryPath": "volunteer-hub",
+        "repositoryInitialized": true,
+        "currentBranch": "main"
+      }
+    },
+    {
+      "id": "try-module-1-field-notes-repository-sketch2",
+      "kind": "code_input",
+      "title": "Configure repository-local identity",
+      "prompt": "Inside the initialized volunteer-hub repository, configure the repository-local user.name and user.email to the required values: user.name = \"ZoeSkoul Learner\" and user.email = \"learner@zoeskoul.local\". Use git config --local and then show the configured values.\n\nThe terminal opens inside `volunteer-hub/` with the required starting milestone ready. Type each requested terminal command and press Enter.",
+      "hint": "Read the Git task \"Configure repository-local identity\" and identify the repository state you need to create.",
+      "help": {
+        "concept": "This Git exercise checks the repository state produced by \"Configure repository-local identity\".",
+        "hint_1": "Use git status before and after each small change so you can see what moved between the working tree, staging area, and history.",
+        "hint_2": "Match the requested file names, branch names, and commit purpose before clicking Check Answer."
+      },
+      "starterCode": "# Work in the terminal; the starting repository state is ready.\n# Type each requested command and press Enter.",
+      "solutionCode": "git init -b main",
+      "fixedLanguage": "bash",
+      "recipeType": "shell_task",
+      "mode": "terminal_workspace",
+      "entryFilePath": "main.sh",
+      "instructions": "Inside the initialized volunteer-hub repository, configure the repository-local user.name and user.email to the required values: user.name = \"ZoeSkoul Learner\" and user.email = \"learner@zoeskoul.local\". Use git config --local and then show the configured values.\n\nThe terminal opens inside `volunteer-hub/` with the required starting milestone ready. Type each requested terminal command and press Enter.",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Work in the terminal; the starting repository state is ready.\n# Type each requested command and press Enter.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"volunteer-hub\"\nmkdir -p -- \"volunteer-hub\"\nprintf '%s\\n' 'Cumulative Git practice project' > \"volunteer-hub/README.md\"\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "git init -b main\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"volunteer-hub\"\nmkdir -p -- \"volunteer-hub\"\nprintf '%s\\n' 'Cumulative Git practice project' > \"volunteer-hub/README.md\"\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^git\\s+init\\s+-b\\s+main$"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "Do not rewrite shared history in this Git practice task."
+          }
+        ]
+      },
+      "gitExpectations": {
+        "repositoryPath": "volunteer-hub",
+        "repositoryInitialized": true,
+        "currentBranch": "main"
+      }
+    },
+    {
+      "id": "try-module-1-field-notes-repository-sketch3",
+      "kind": "code_input",
+      "title": "Stage the First Snapshot",
+      "prompt": "Stage these four files into the index so they form a single proposed snapshot: README.md, index.html, styles.css, and notes/schedule.txt. Change into volunteer-hub, add only those files, and run git status --short to show they are staged. Type the commands and press Enter for each.\n\nThe terminal opens inside `volunteer-hub/` with the required starting milestone ready. Type each requested terminal command and press Enter.",
+      "hint": "Read the Git task \"Stage the First Snapshot\" and identify the repository state you need to create.",
+      "help": {
+        "concept": "This Git exercise checks the repository state produced by \"Stage the First Snapshot\".",
+        "hint_1": "Use git status before and after each small change so you can see what moved between the working tree, staging area, and history.",
+        "hint_2": "Match the requested file names, branch names, and commit purpose before clicking Check Answer."
+      },
+      "starterCode": "# Work in the terminal; the starting repository state is ready.\n# Type each requested command and press Enter.",
+      "solutionCode": "git diff",
+      "fixedLanguage": "bash",
+      "recipeType": "shell_task",
+      "mode": "terminal_workspace",
+      "entryFilePath": "main.sh",
+      "instructions": "Stage these four files into the index so they form a single proposed snapshot: README.md, index.html, styles.css, and notes/schedule.txt. Change into volunteer-hub, add only those files, and run git status --short to show they are staged. Type the commands and press Enter for each.\n\nThe terminal opens inside `volunteer-hub/` with the required starting milestone ready. Type each requested terminal command and press Enter.",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Work in the terminal; the starting repository state is ready.\n# Type each requested command and press Enter.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"volunteer-hub\"\nmkdir -p -- \"volunteer-hub\"\nprintf '%s\\n' 'Cumulative Git practice project' > \"volunteer-hub/README.md\"\ngit -C \"volunteer-hub\" init -q -b main\ngit -C \"volunteer-hub\" config user.name \"ZoeSkoul Learner\"\ngit -C \"volunteer-hub\" config user.email \"learner@zoeskoul.local\"\ngit -C \"volunteer-hub\" add -- \"README.md\"\ngit -C \"volunteer-hub\" commit -q -m \"Start cumulative project\"\nprintf '%s\\n' 'Prepared practice change' >> \"volunteer-hub/README.md\"\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "git diff\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"volunteer-hub\"\nmkdir -p -- \"volunteer-hub\"\nprintf '%s\\n' 'Cumulative Git practice project' > \"volunteer-hub/README.md\"\ngit -C \"volunteer-hub\" init -q -b main\ngit -C \"volunteer-hub\" config user.name \"ZoeSkoul Learner\"\ngit -C \"volunteer-hub\" config user.email \"learner@zoeskoul.local\"\ngit -C \"volunteer-hub\" add -- \"README.md\"\ngit -C \"volunteer-hub\" commit -q -m \"Start cumulative project\"\nprintf '%s\\n' 'Prepared practice change' >> \"volunteer-hub/README.md\"\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^git\\s+diff$"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "Do not rewrite shared history in this Git practice task."
+          }
+        ]
+      },
+      "gitExpectations": {
+        "repositoryPath": "volunteer-hub",
+        "repositoryInitialized": true,
+        "currentBranch": "main"
+      }
+    },
+    {
+      "id": "try-module-1-field-notes-repository-sketch4",
+      "kind": "code_input",
+      "title": "Commit and verify the initial snapshot",
+      "prompt": "Commit the staged snapshot with the message \"Start volunteer hub\", then show the one-line log and confirm the working tree is clean. Type the commands needed and press Enter for each.\n\nThe terminal opens inside `volunteer-hub/` with the required starting milestone ready. Type each requested terminal command and press Enter.",
+      "hint": "Read the Git task \"Commit and verify the initial snapshot\" and identify the repository state you need to create.",
+      "help": {
+        "concept": "This Git exercise checks the repository state produced by \"Commit and verify the initial snapshot\".",
+        "hint_1": "Use git status before and after each small change so you can see what moved between the working tree, staging area, and history.",
+        "hint_2": "Match the requested file names, branch names, and commit purpose before clicking Check Answer."
+      },
+      "starterCode": "# Work in the terminal; the starting repository state is ready.\n# Type each requested command and press Enter.",
+      "solutionCode": "git restore --staged practice.txt",
+      "fixedLanguage": "bash",
+      "recipeType": "shell_task",
+      "mode": "terminal_workspace",
+      "entryFilePath": "main.sh",
+      "instructions": "Commit the staged snapshot with the message \"Start volunteer hub\", then show the one-line log and confirm the working tree is clean. Type the commands needed and press Enter for each.\n\nThe terminal opens inside `volunteer-hub/` with the required starting milestone ready. Type each requested terminal command and press Enter.",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Work in the terminal; the starting repository state is ready.\n# Type each requested command and press Enter.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"volunteer-hub\"\nmkdir -p -- \"volunteer-hub\"\nprintf '%s\\n' 'Cumulative Git practice project' > \"volunteer-hub/README.md\"\ngit -C \"volunteer-hub\" init -q -b main\ngit -C \"volunteer-hub\" config user.name \"ZoeSkoul Learner\"\ngit -C \"volunteer-hub\" config user.email \"learner@zoeskoul.local\"\ngit -C \"volunteer-hub\" add -- \"README.md\"\ngit -C \"volunteer-hub\" commit -q -m \"Start cumulative project\"\nprintf '%s\\n' 'Prepared practice change' >> \"volunteer-hub/README.md\"\ngit -C \"volunteer-hub\" add -- \"README.md\"\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "git restore --staged practice.txt\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"volunteer-hub\"\nmkdir -p -- \"volunteer-hub\"\nprintf '%s\\n' 'Cumulative Git practice project' > \"volunteer-hub/README.md\"\ngit -C \"volunteer-hub\" init -q -b main\ngit -C \"volunteer-hub\" config user.name \"ZoeSkoul Learner\"\ngit -C \"volunteer-hub\" config user.email \"learner@zoeskoul.local\"\ngit -C \"volunteer-hub\" add -- \"README.md\"\ngit -C \"volunteer-hub\" commit -q -m \"Start cumulative project\"\nprintf '%s\\n' 'Prepared practice change' >> \"volunteer-hub/README.md\"\ngit -C \"volunteer-hub\" add -- \"README.md\"\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^git\\s+restore\\s+--staged\\s+practice\\.txt$"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "Do not rewrite shared history in this Git practice task."
+          }
+        ]
+      },
+      "gitExpectations": {
+        "repositoryPath": "volunteer-hub",
         "repositoryInitialized": true,
         "currentBranch": "main"
       }
     }
   ],
   "projectDraft": {
-    "title": "Start the Field Notes Repository",
+    "title": "Start volunteer-hub history",
     "stepIds": [
-      "try-git-repo-inspection",
-      "try-git-config",
-      "try-git-init",
-      "try-git-stage-files",
-      "try-git-commit"
+      "try-module-1-field-notes-repository-sketch0",
+      "try-module-1-field-notes-repository-sketch1",
+      "try-module-1-field-notes-repository-sketch2",
+      "try-module-1-field-notes-repository-sketch3",
+      "try-module-1-field-notes-repository-sketch4"
     ]
   }
 }

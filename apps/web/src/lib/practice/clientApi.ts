@@ -329,3 +329,65 @@ export async function fetchPracticeHelp(args: {
 
   return data as PracticeHelpClientResponse;
 }
+
+export type PracticeTutorMessage = {
+  role: "user" | "assistant";
+  content: string;
+};
+
+export type PracticeTutorFailureContext = {
+  attemptCount: number;
+  feedbackTitle?: string | null;
+  feedbackMessage?: string | null;
+  explanation?: string | null;
+  runtimeError?: string | null;
+  terminal?: {
+    commands?: string[];
+    outputText?: string;
+    cwd?: string | null;
+  } | null;
+};
+
+export type PracticeTutorClientResponse = {
+  requestId?: string;
+  reply: string;
+  explanation: string;
+  attemptsUsed: number;
+};
+
+export async function fetchPracticeTutor(args: {
+  key: string;
+  userAnswer?: any;
+  failureContext: PracticeTutorFailureContext;
+  message?: string;
+  history?: PracticeTutorMessage[];
+  signal?: AbortSignal;
+}): Promise<PracticeTutorClientResponse> {
+  const res = await fetch("/api/practice/explain", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    credentials: "include",
+    cache: "no-store",
+    signal: args.signal,
+    body: JSON.stringify({
+      key: args.key,
+      mode: "tutor",
+      userAnswer: args.userAnswer ?? null,
+      failureContext: args.failureContext,
+      message: args.message?.trim() || undefined,
+      history: args.history?.slice(-8) ?? [],
+    }),
+  });
+
+  const data = await readJsonSafe(res);
+
+  if (!res.ok) {
+    throw createPracticeRequestError({
+      status: res.status,
+      fallback: `AI tutor failed (${res.status}).`,
+      data,
+    });
+  }
+
+  return data as PracticeTutorClientResponse;
+}

@@ -1,0 +1,40 @@
+{
+  "topicId": "inspect-unstaged-changes-with-diff",
+  "repairs": [
+    {
+      "code": "GIT_MULTILINE_EXAMPLE_EXPLANATION_ADDED",
+      "category": "other",
+      "severity": "low",
+      "field": "sketchBlocks.sketch-0.bodyMarkdown",
+      "message": "Added a step-by-step explanation for the multi-line Git example in \"sketch-0\"."
+    },
+    {
+      "code": "GIT_TRY_IT_KIND_PROMOTED",
+      "category": "other",
+      "severity": "low",
+      "field": "quizDraft.try-inspect-unstaged-changes-with-diff-sketch0",
+      "message": "Converted generated Try It \"try-inspect-unstaged-changes-with-diff-sketch0\" into the Git code_input required by plannedExerciseCounts."
+    },
+    {
+      "code": "GIT_TRY_IT_KIND_PROMOTED",
+      "category": "other",
+      "severity": "low",
+      "field": "quizDraft.try-inspect-unstaged-changes-with-diff-sketch1",
+      "message": "Converted generated Try It \"try-inspect-unstaged-changes-with-diff-sketch1\" into the Git code_input required by plannedExerciseCounts."
+    },
+    {
+      "code": "GIT_TRY_IT_KIND_PROMOTED",
+      "category": "other",
+      "severity": "low",
+      "field": "quizDraft.try-inspect-unstaged-changes-with-diff-sketch2",
+      "message": "Converted generated Try It \"try-inspect-unstaged-changes-with-diff-sketch2\" into the Git code_input required by plannedExerciseCounts."
+    },
+    {
+      "code": "GIT_TRY_IT_KIND_PROMOTED",
+      "category": "other",
+      "severity": "low",
+      "field": "quizDraft.try-inspect-unstaged-changes-with-diff-sketch3",
+      "message": "Converted generated Try It \"try-inspect-unstaged-changes-with-diff-sketch3\" into the Git code_input required by plannedExerciseCounts."
+    }
+  ]
+}

@@ -1,181 +1,181 @@
 {
-  "title": "Read Tracked and Untracked State",
-  "summary": "Use full and short status views to tell which files Git knows, which files are new, and which changes still need attention.",
+  "title": "Read the Community Site State",
+  "summary": "Carry the same community-site files from untracked state into one staged proposal, then inspect what Git would record.",
   "minutes": 22,
   "sketchBlocks": [
     {
       "id": "sketch0",
-      "title": "Decoding git status",
-      "bodyMarkdown": "The `git status` command is a powerful tool that provides a snapshot of the current state of your working directory and staging area. It helps you understand which changes are staged for the next commit, which are not, and which files are not being tracked by Git.\n\nWorked example: Imagine you have a project with several files. After making some changes, you run `git status`. The output shows:\n\n```\nOn branch main\nYour branch is up to date with 'origin/main'.\n\nChanges not staged for commit:\n  (use \"git add <file>...\" to update what will be committed)\n  (use \"git restore <file>...\" to discard changes in working directory)\n\tmodified:   file1.txt\n\nUntracked files:\n  (use \"git add <file>...\" to include in what will be committed)\n\tfile2.txt\n```\n\nThis output tells you that `file1.txt` has been modified but not staged, and `file2.txt` is a new file that Git is not tracking yet. Understanding this output helps you decide your next steps, such as staging changes or adding new files to the repository.\n\nStep by step, read the commands in the order shown. The first line runs `On branch main` as the next repository step in the example. The second line runs `Your branch is up to date with 'origin/main'.` as the next repository step in the example. The third line runs `Changes not staged for commit:` as the next repository step in the example. The fourth line runs `(use \"git add <file>...\" to update what will be committed)` as the next repository step in the example. The next line runs `(use \"git restore <file>...\" to discard changes in working directory)` as the next repository step in the example. The next line runs `modified:   file1.txt` as the next repository step in the example. The next line runs `Untracked files:` as the next repository step in the example. The next line runs `(use \"git add <file>...\" to include in what will be committed)` as the next repository step in the example. The next line runs `file2.txt` as the next repository step in the example. Together, the lines form one complete example rather than unrelated commands."
+      "title": "Check which files are untracked in the working tree",
+      "bodyMarkdown": "Worked example:\n\nWhen a folder contains files but you haven't told Git about them yet, Git lists them as untracked. That tells you these files exist in your working tree but are not staged or recorded in any commit.\n\nExample commands and their intent:\n\n```bash\n# show a human-readable summary with helpful commentary\ngit status\n\n# show a compact machine-friendly list of paths\ngit status --short\n```\n\nIn a worked example repository you might see output such as this from git status --short:\n\n```text\n?? site.md\n?? home.html\n?? contributing.md\n?? team.md\n?? logo.svg\n```\n\nEach line beginning with '??' is an untracked file. One row means a single path that Git is not yet tracking. Watching this list helps you avoid accidentally forgetting to include important files in your first snapshot."
     },
     {
       "id": "sketch1",
-      "title": "Compact View with git status --short",
-      "bodyMarkdown": "For a more concise view of your repository's status, you can use `git status --short`. This command provides a brief overview of the changes in your working directory and staging area, using symbols to indicate the state of each file.\n\nWorked example: After making changes to your project, you run `git status --short` and see:\n\n```\n M file1.txt\n?? file2.txt\n```\n\nIn this output, `M` indicates that `file1.txt` has been modified, and `??` shows that `file2.txt` is untracked. This shorthand view is particularly useful when you want a quick overview without the detailed explanations provided by the full `git status` command."
+      "title": "Move specific files into the staging area",
+      "bodyMarkdown": "Worked example:\n\nStaging (with git add) takes the current contents of a file from the working tree and places that snapshot into the index (staging area). Staging prepares a specific set of paths for the next commit while leaving un-staged edits alone.\n\nExample commands:\n\n```bash\n# stage two files for the next commit\ngit add CONTRIBUTING.md README.md\n\n# check the short status to see staged vs unstaged\ngit status --short\n```\n\nAfter running these, git status --short might show a staged file with an 'A' (added) in the left column and unstaged changes with other markers. The staged snapshot represents exactly what Git will put into the next commit for those paths."
     },
     {
       "id": "sketch2",
-      "title": "Tracked vs. Untracked Files",
-      "bodyMarkdown": "Understanding the difference between tracked and untracked files is crucial in Git. Tracked files are those that Git is aware of and are part of the repository's history. Untracked files, on the other hand, are new files that Git has not yet been told to track.\n\nWorked example: Suppose you have a directory with several files. You run `git status` and see:\n\n```\nUntracked files:\n  (use \"git add <file>...\" to include in what will be committed)\n\tnewfile.txt\n```\n\nThis indicates that `newfile.txt` is not yet tracked by Git. To start tracking it, you would use `git add newfile.txt`. Once added, it becomes a tracked file and will be included in future commits."
+      "title": "Read the staged vs unstaged columns with a compact status view",
+      "bodyMarkdown": "Worked example:\n\nThe short status view shows two columns of status characters. The left column reflects the index (staging area); the right column reflects the working tree. This compact view makes it easy to scan which files are staged for commit.\n\nExample compact output (two-column annotations added for explanation):\n\n```text\nA  index.html     # left column 'A' means staged as added\n?? about.md       # '??' means untracked (not staged)\n M styles.css     # right column 'M' means modified in working tree but not staged\n```\n\nRead the left column first to know what the next commit will contain, then read the right column to see remaining local edits you'll need to stage (or discard) separately."
     },
     {
       "id": "sketch3",
-      "title": "Applying git status in Real Projects",
-      "bodyMarkdown": "Using `git status` effectively can prevent many common mistakes in version control. It helps ensure that you are aware of all changes before committing, reducing the risk of accidentally omitting important updates or including unwanted changes.\n\nWorked example: You're working on a project and have made several changes. Before committing, you run `git status` to review the current state. You notice a file you forgot to stage. By catching this oversight, you can stage the file and ensure it is included in your next commit, maintaining a complete and accurate project history."
+      "title": "View exactly what would be recorded in the next commit",
+      "bodyMarkdown": "Worked example:\n\nBefore committing, you can inspect the staged snapshot itself. git diff --staged shows the changes that are currently in the index compared with HEAD; git diff --staged --name-only lists only the staged path names. This is a safety check so you commit exactly what you expect.\n\nExample commands:\n\n```bash\n# list only staged file paths\ngit diff --staged --name-only\n\n# examine the staged content changes in unified diff form\ngit diff --staged\n```\n\nOne row of output from git diff --staged --name-only corresponds to one staged path that will be part of the commit. Use this to confirm content before you run git commit."
     }
   ],
   "quizDraft": [
     {
-      "id": "single-choice-1",
+      "id": "q-single-1",
       "kind": "single_choice",
-      "title": "Purpose of git status",
-      "prompt": "What is the primary purpose of the `git status` command?",
+      "title": "Tracked vs untracked files",
+      "prompt": "Which statement best describes an untracked file in a Git repository?",
       "options": [
-        "To commit changes to the repository",
-        "To show the current branch and changes",
-        "To merge branches",
-        "To delete files from the repository"
+        "The file is recorded in the repository history and safely versioned.",
+        "The file exists in the working directory but is not staged or committed by Git.",
+        "The file is staged and will be part of the next commit.",
+        "The file is ignored by .gitignore and will never be shown by git status."
       ],
       "correctOptionIds": [
         "b"
       ],
-      "hint": "Think about what information `git status` provides about your repository.",
+      "hint": "Untracked files exist in the working directory but haven't been recorded in the index or history.",
       "help": {
-        "concept": "`git status` provides information about the current state of the working directory and staging area.",
-        "hint_1": "It shows which changes are staged, unstaged, or untracked.",
-        "hint_2": "It helps you understand what will be included in the next commit."
+        "concept": "An untracked file is present in the working tree but Git has no staged snapshot or record of it; it will appear with '??' in git status --short.",
+        "hint_1": "An untracked file is not yet in the index and will not be included in commits until staged with git add.",
+        "hint_2": "Look for the choice that says the file is present locally but not recorded by Git yet."
       }
     },
     {
-      "id": "single-choice-2",
+      "id": "q-single-2",
       "kind": "single_choice",
-      "title": "Understanding git status --short",
-      "prompt": "What does the `??` symbol indicate in the output of `git status --short`?",
+      "title": "Why inspect staged snapshot",
+      "prompt": "Why should you run git diff --staged before creating a first commit?",
       "options": [
-        "A modified file",
-        "A deleted file",
-        "An untracked file",
-        "A staged file"
+        "It shows the full commit history for the repository.",
+        "It confirms the exact staged content that will be part of the next commit.",
+        "It removes untracked files from the working tree.",
+        "It permanently discards staged changes."
       ],
       "correctOptionIds": [
-        "c"
+        "b"
       ],
-      "hint": "Consider what `??` might mean about a file's status in the repository.",
+      "hint": "This command compares the index to HEAD so you can confirm the exact content that will be recorded.",
       "help": {
-        "concept": "The `??` symbol indicates untracked files in `git status --short`.",
-        "hint_1": "Untracked files are those not yet added to the staging area.",
-        "hint_2": "`??` means the file is new and not tracked by Git."
+        "concept": "git diff --staged shows the actual content differences staged for the next commit so you avoid committing unexpected changes.",
+        "hint_1": "It lists the content changes that are currently in the index compared with HEAD.",
+        "hint_2": "Choose the answer that mentions confirming exactly what will be recorded by the next commit."
       }
     },
     {
-      "id": "multi-choice-1",
+      "id": "q-multi-1",
       "kind": "multi_choice",
-      "title": "Components of git status output",
-      "prompt": "Which of the following are components of the `git status` output? Select all that apply.",
+      "title": "Which commands place changes into the index (stage changes)?",
+      "prompt": "Select all commands that can create or modify the staging-area snapshot (the index).",
       "options": [
-        "Current branch",
-        "Staged changes",
-        "Untracked files",
-        "Remote branches"
+        "git add README.md",
+        "git commit -m \"first\"",
+        "git mv old.txt new.txt",
+        "git rm obsolete.txt"
       ],
       "correctOptionIds": [
         "a",
-        "b",
-        "c"
+        "c",
+        "d"
       ],
-      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "hint": "Think about commands that record a change into the index rather than only creating commits.",
       "help": {
-        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+        "concept": "Several Git commands update the index: git add stages new/updated paths; git mv stages the rename (it is equivalent to a move + staging); git rm stages removals.",
+        "hint_1": "Commands that alter the index include git add and operations that imply staging such as git mv and git rm.",
+        "hint_2": "git commit records what's already in the index; it does not itself stage new file edits."
       }
     },
     {
-      "id": "drag-reorder-1",
+      "id": "q-drag-1",
       "kind": "drag_reorder",
-      "title": "Order of git status sections",
-      "prompt": "Arrange the sections of the `git status` output in the correct order.",
+      "title": "Order the local Git snapshot workflow steps",
+      "prompt": "Arrange these steps in the order they happen locally when preparing and recording the first snapshot for a folder.",
       "tokens": [
-        "Current branch",
-        "Staged changes",
-        "Unstaged changes",
-        "Untracked files"
+        "Make an edit in the working tree",
+        "Stage changes with git add",
+        "Record the snapshot with git commit",
+        "Verify with git status that the working tree is clean"
       ],
       "correctOrder": [
-        "Current branch",
-        "Staged changes",
-        "Unstaged changes",
-        "Untracked files"
+        "Make an edit in the working tree",
+        "Stage changes with git add",
+        "Record the snapshot with git commit",
+        "Verify with git status that the working tree is clean"
       ],
-      "hint": "Read each piece and arrange them in the order the statement should be understood.",
+      "hint": "Think from making an edit to verifying a clean working tree after a commit.",
       "help": {
-        "concept": "The pieces should form a valid statement in a logical order.",
-        "hint_1": "Start with the piece that introduces the idea or action.",
-        "hint_2": "Place dependent pieces after the part they describe or complete."
+        "concept": "A local snapshot workflow goes from editing (working tree) → staging (index) → committing (record) → verifying the clean state.",
+        "hint_1": "Start with making an edit in the working tree, then stage, then commit, then verify with git status.",
+        "hint_2": "Choose the sequence that begins with an edit and ends with a verification step like git status or a clean working tree."
       }
     },
     {
-      "id": "fill-blank-choice-1",
+      "id": "q-fill-1",
       "kind": "fill_blank_choice",
-      "title": "Symbol for modified files",
-      "prompt": "In `git status --short`, the symbol for a modified file is `[blank1]`.",
-      "template": "In `git status --short`, the symbol for a modified file is `[blank1]`.",
+      "title": "Command to show compact status",
+      "prompt": "[blank1] --short shows a compact two-column Git status indicating staged and unstaged changes.",
+      "template": "[blank1] --short shows a compact two-column Git status indicating staged and unstaged changes.",
       "choices": [
-        "M",
-        "A",
-        "D",
-        "U"
+        "git status",
+        "git commit",
+        "git add",
+        "git diff"
       ],
-      "correctValue": "M",
-      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "correctValue": "git status",
+      "hint": "Which git command accepts --short to give a compact status?",
       "help": {
-        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-        "hint_1": "Think about what the missing part needs to do in the statement.",
-        "hint_2": "Choose the term that best completes the meaning of the statement."
+        "concept": "the missing term --short (or -s) prints a compact two-column status view showing index vs working-tree changes.",
+        "hint_1": "The command that shows status is the missing term.",
+        "hint_2": "Pick the git command name (not a subcommand like commit or add)."
       }
     },
     {
-      "id": "fill-blank-choice-2",
+      "id": "q-fill-2",
       "kind": "fill_blank_choice",
-      "title": "Symbol for untracked files",
-      "prompt": "In `git status --short`, the symbol for an untracked file is `[blank1]`.",
-      "template": "In `git status --short`, the symbol for an untracked file is `[blank1]`.",
+      "title": "Place a file into the index",
+      "prompt": "To prepare README.md for inclusion in the next commit, run git add [blank1].",
+      "template": "To prepare README.md for inclusion in the next commit, run git add [blank1].",
       "choices": [
-        "M",
-        "A",
-        "??",
-        "U"
+        "README.md",
+        "origin",
+        "main",
+        ".gitignore"
       ],
-      "correctValue": "A",
-      "hint": "Focus on the missing concept rather than the exact missing term.",
+      "correctValue": "README.md",
+      "hint": "The blank should be the path you want to stage.",
       "help": {
-        "concept": "The blank should be completed with the term that fits the job being described.",
-        "hint_1": "Think about what the missing part needs to do in the statement.",
-        "hint_2": "Choose the term that best completes the meaning of the statement."
+        "concept": "git add <path> records the working-tree contents of the path into the index for the next commit.",
+        "hint_1": "Fill the blank with a file path present in the working tree.",
+        "hint_2": "Use the literal filename the missing term as the path to stage that specific file."
       }
     },
     {
       "id": "try-read-tracked-and-untracked-state-sketch0",
       "kind": "code_input",
-      "title": "Practice with git status",
-      "prompt": "Initialize a new Git repository and create two files: `tracked.txt` and `untracked.txt`. Add `tracked.txt` to the staging area. Use `git status` to verify the state of your repository. What does the output show?\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
-      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "title": "Read the untracked community-site files",
+      "prompt": "Your workspace contains a community-site repository root with five project files present but not yet staged. Use Git to list the repository state and confirm that the five files (README.md, index.html, about.md, contact.md, styles.css) are untracked. Type the command(s) and press Enter in the terminal to inspect the working tree.\n\nThe terminal opens inside `community-site/` with the required starting milestone ready. Type each requested terminal command and press Enter.",
+      "hint": "Read the Git task \"Read the untracked community-site files\" and identify the repository state you need to create.",
       "help": {
-        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+        "concept": "This Git exercise checks the repository state produced by \"Read the untracked community-site files\".",
+        "hint_1": "Use git status before and after each small change so you can see what moved between the working tree, staging area, and history.",
+        "hint_2": "Match the requested file names, branch names, and commit purpose before clicking Check Answer."
       },
-      "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.",
-      "solutionCode": "bash .zoeskoul/setup.sh\ngit status",
+      "starterCode": "# Work in the terminal; the starting repository state is ready.\n# Type each requested command and press Enter.",
+      "solutionCode": "git add practice.txt",
       "fixedLanguage": "bash",
       "recipeType": "shell_task",
       "mode": "terminal_workspace",
       "entryFilePath": "main.sh",
-      "instructions": "Initialize a new Git repository and create two files: `tracked.txt` and `untracked.txt`. Add `tracked.txt` to the staging area. Use `git status` to verify the state of your repository. What does the output show?\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+      "instructions": "Your workspace contains a community-site repository root with five project files present but not yet staged. Use Git to list the repository state and confirm that the five files (README.md, index.html, about.md, contact.md, styles.css) are untracked. Type the command(s) and press Enter in the terminal to inspect the working tree.\n\nThe terminal opens inside `community-site/` with the required starting milestone ready. Type each requested terminal command and press Enter.",
       "starterFiles": [
         {
           "path": "main.sh",
-          "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.\n",
+          "content": "# Work in the terminal; the starting repository state is ready.\n# Type each requested command and press Enter.\n",
           "language": "bash",
           "isEntry": true,
           "entry": true,
@@ -183,7 +183,7 @@
         },
         {
           "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 1\\n' > tracked.txt\n",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"community-site\"\nmkdir -p -- \"community-site\"\nprintf '%s\\n' 'Cumulative Git practice project' > \"community-site/README.md\"\ngit -C \"community-site\" init -q -b main\n",
           "language": "bash",
           "readOnly": true
         }
@@ -191,14 +191,14 @@
       "solutionFiles": [
         {
           "path": "main.sh",
-          "content": "bash .zoeskoul/setup.sh\ngit status\n",
+          "content": "git add practice.txt\n",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
           "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 1\\n' > tracked.txt\n",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"community-site\"\nmkdir -p -- \"community-site\"\nprintf '%s\\n' 'Cumulative Git practice project' > \"community-site/README.md\"\ngit -C \"community-site\" init -q -b main\n",
           "language": "bash",
           "readOnly": true
         }
@@ -206,10 +206,7 @@
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
-          },
-          {
-            "pattern": "^git\\s+status$"
+            "pattern": "^git\\s+add\\s+practice\\.txt$"
           }
         ],
         "forbiddenCommands": [
@@ -220,6 +217,7 @@
         ]
       },
       "gitExpectations": {
+        "repositoryPath": "community-site",
         "repositoryInitialized": true,
         "currentBranch": "main"
       }
@@ -227,25 +225,25 @@
     {
       "id": "try-read-tracked-and-untracked-state-sketch1",
       "kind": "code_input",
-      "title": "Using git status --short",
-      "prompt": "Create a new Git repository and two files: `fileA.txt` and `fileB.txt`. Modify `fileA.txt` and leave `fileB.txt` untracked. Use `git status --short` to check the status. What does the output show?\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
-      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "title": "Stage the five project files",
+      "prompt": "Stage exactly these five project files so they become part of the index (staging area): README.md, index.html, about.md, contact.md, styles.css. Type the git add command(s) that stage those files and press Enter. After staging, show a short status to confirm the left column indicates staged adds.\n\nThe terminal opens inside `community-site/` with the required starting milestone ready. Type each requested terminal command and press Enter.",
+      "hint": "Read the Git task \"Stage the five project files\" and identify the repository state you need to create.",
       "help": {
-        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+        "concept": "This Git exercise checks the repository state produced by \"Stage the five project files\".",
+        "hint_1": "Use git status before and after each small change so you can see what moved between the working tree, staging area, and history.",
+        "hint_2": "Match the requested file names, branch names, and commit purpose before clicking Check Answer."
       },
-      "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.",
-      "solutionCode": "bash .zoeskoul/setup.sh\ngit status --short",
+      "starterCode": "# Work in the terminal; the starting repository state is ready.\n# Type each requested command and press Enter.",
+      "solutionCode": "git add practice.txt",
       "fixedLanguage": "bash",
       "recipeType": "shell_task",
       "mode": "terminal_workspace",
       "entryFilePath": "main.sh",
-      "instructions": "Create a new Git repository and two files: `fileA.txt` and `fileB.txt`. Modify `fileA.txt` and leave `fileB.txt` untracked. Use `git status --short` to check the status. What does the output show?\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+      "instructions": "Stage exactly these five project files so they become part of the index (staging area): README.md, index.html, about.md, contact.md, styles.css. Type the git add command(s) that stage those files and press Enter. After staging, show a short status to confirm the left column indicates staged adds.\n\nThe terminal opens inside `community-site/` with the required starting milestone ready. Type each requested terminal command and press Enter.",
       "starterFiles": [
         {
           "path": "main.sh",
-          "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.\n",
+          "content": "# Work in the terminal; the starting repository state is ready.\n# Type each requested command and press Enter.\n",
           "language": "bash",
           "isEntry": true,
           "entry": true,
@@ -253,7 +251,7 @@
         },
         {
           "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 2\\n' > fileA.txt\n",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"community-site\"\nmkdir -p -- \"community-site\"\nprintf '%s\\n' 'Cumulative Git practice project' > \"community-site/README.md\"\ngit -C \"community-site\" init -q -b main\n",
           "language": "bash",
           "readOnly": true
         }
@@ -261,14 +259,14 @@
       "solutionFiles": [
         {
           "path": "main.sh",
-          "content": "bash .zoeskoul/setup.sh\ngit status --short\n",
+          "content": "git add practice.txt\n",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
           "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 2\\n' > fileA.txt\n",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"community-site\"\nmkdir -p -- \"community-site\"\nprintf '%s\\n' 'Cumulative Git practice project' > \"community-site/README.md\"\ngit -C \"community-site\" init -q -b main\n",
           "language": "bash",
           "readOnly": true
         }
@@ -276,10 +274,7 @@
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
-          },
-          {
-            "pattern": "^git\\s+status\\s+--short$"
+            "pattern": "^git\\s+add\\s+practice\\.txt$"
           }
         ],
         "forbiddenCommands": [
@@ -290,6 +285,7 @@
         ]
       },
       "gitExpectations": {
+        "repositoryPath": "community-site",
         "repositoryInitialized": true,
         "currentBranch": "main"
       }
@@ -297,25 +293,25 @@
     {
       "id": "try-read-tracked-and-untracked-state-sketch2",
       "kind": "code_input",
-      "title": "Distinguishing Tracked and Untracked Files",
-      "prompt": "Initialize a Git repository and create a file `example.txt`. Do not add it to the staging area. Use `git status` to determine if the file is tracked or untracked.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
-      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "title": "Interpret the short status view",
+      "prompt": "A hidden setup has already staged the five project files for you. Run the compact status command that shows staged vs unstaged columns so you can read which files are staged in the left column. Type the command and press Enter.\n\nThe terminal opens inside `community-site/` with the required starting milestone ready. Type each requested terminal command and press Enter.",
+      "hint": "Read the Git task \"Interpret the short status view\" and identify the repository state you need to create.",
       "help": {
-        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+        "concept": "This Git exercise checks the repository state produced by \"Interpret the short status view\".",
+        "hint_1": "Use git status before and after each small change so you can see what moved between the working tree, staging area, and history.",
+        "hint_2": "Match the requested file names, branch names, and commit purpose before clicking Check Answer."
       },
-      "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.",
-      "solutionCode": "bash .zoeskoul/setup.sh\ngit status",
+      "starterCode": "# Work in the terminal; the starting repository state is ready.\n# Type each requested command and press Enter.",
+      "solutionCode": "git restore --staged practice.txt",
       "fixedLanguage": "bash",
       "recipeType": "shell_task",
       "mode": "terminal_workspace",
       "entryFilePath": "main.sh",
-      "instructions": "Initialize a Git repository and create a file `example.txt`. Do not add it to the staging area. Use `git status` to determine if the file is tracked or untracked.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+      "instructions": "A hidden setup has already staged the five project files for you. Run the compact status command that shows staged vs unstaged columns so you can read which files are staged in the left column. Type the command and press Enter.\n\nThe terminal opens inside `community-site/` with the required starting milestone ready. Type each requested terminal command and press Enter.",
       "starterFiles": [
         {
           "path": "main.sh",
-          "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.\n",
+          "content": "# Work in the terminal; the starting repository state is ready.\n# Type each requested command and press Enter.\n",
           "language": "bash",
           "isEntry": true,
           "entry": true,
@@ -323,7 +319,7 @@
         },
         {
           "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 3\\n' > example.txt\n",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"community-site\"\nmkdir -p -- \"community-site\"\nprintf '%s\\n' 'Cumulative Git practice project' > \"community-site/README.md\"\ngit -C \"community-site\" init -q -b main\ngit -C \"community-site\" config user.name \"ZoeSkoul Learner\"\ngit -C \"community-site\" config user.email \"learner@zoeskoul.local\"\ngit -C \"community-site\" add -- \"README.md\"\ngit -C \"community-site\" commit -q -m \"Start cumulative project\"\nprintf '%s\\n' 'Prepared practice change' >> \"community-site/README.md\"\ngit -C \"community-site\" add -- \"README.md\"\n",
           "language": "bash",
           "readOnly": true
         }
@@ -331,14 +327,14 @@
       "solutionFiles": [
         {
           "path": "main.sh",
-          "content": "bash .zoeskoul/setup.sh\ngit status\n",
+          "content": "git restore --staged practice.txt\n",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
           "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 3\\n' > example.txt\n",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"community-site\"\nmkdir -p -- \"community-site\"\nprintf '%s\\n' 'Cumulative Git practice project' > \"community-site/README.md\"\ngit -C \"community-site\" init -q -b main\ngit -C \"community-site\" config user.name \"ZoeSkoul Learner\"\ngit -C \"community-site\" config user.email \"learner@zoeskoul.local\"\ngit -C \"community-site\" add -- \"README.md\"\ngit -C \"community-site\" commit -q -m \"Start cumulative project\"\nprintf '%s\\n' 'Prepared practice change' >> \"community-site/README.md\"\ngit -C \"community-site\" add -- \"README.md\"\n",
           "language": "bash",
           "readOnly": true
         }
@@ -346,10 +342,7 @@
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
-          },
-          {
-            "pattern": "^git\\s+status$"
+            "pattern": "^git\\s+restore\\s+--staged\\s+practice\\.txt$"
           }
         ],
         "forbiddenCommands": [
@@ -360,6 +353,7 @@
         ]
       },
       "gitExpectations": {
+        "repositoryPath": "community-site",
         "repositoryInitialized": true,
         "currentBranch": "main"
       }
@@ -367,25 +361,25 @@
     {
       "id": "try-read-tracked-and-untracked-state-sketch3",
       "kind": "code_input",
-      "title": "Practical Use of git status",
-      "prompt": "You have a Git repository with several changes. Create a file `important.txt` and modify an existing file `notes.txt`. Use `git status` to ensure all changes are accounted for before committing.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
-      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "title": "View the staged snapshot contents",
+      "prompt": "Show what changes are currently staged (the snapshot in the index) so you can confirm the content that would be recorded by the next commit. Type the git diff command that inspects the staged snapshot and press Enter.\n\nThe terminal opens inside `community-site/` with the required starting milestone ready. Type each requested terminal command and press Enter.",
+      "hint": "Read the Git task \"View the staged snapshot contents\" and identify the repository state you need to create.",
       "help": {
-        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+        "concept": "This Git exercise checks the repository state produced by \"View the staged snapshot contents\".",
+        "hint_1": "Use git status before and after each small change so you can see what moved between the working tree, staging area, and history.",
+        "hint_2": "Match the requested file names, branch names, and commit purpose before clicking Check Answer."
       },
-      "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.",
-      "solutionCode": "bash .zoeskoul/setup.sh\ngit status",
+      "starterCode": "# Work in the terminal; the starting repository state is ready.\n# Type each requested command and press Enter.",
+      "solutionCode": "git diff",
       "fixedLanguage": "bash",
       "recipeType": "shell_task",
       "mode": "terminal_workspace",
       "entryFilePath": "main.sh",
-      "instructions": "You have a Git repository with several changes. Create a file `important.txt` and modify an existing file `notes.txt`. Use `git status` to ensure all changes are accounted for before committing.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+      "instructions": "Show what changes are currently staged (the snapshot in the index) so you can confirm the content that would be recorded by the next commit. Type the git diff command that inspects the staged snapshot and press Enter.\n\nThe terminal opens inside `community-site/` with the required starting milestone ready. Type each requested terminal command and press Enter.",
       "starterFiles": [
         {
           "path": "main.sh",
-          "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.\n",
+          "content": "# Work in the terminal; the starting repository state is ready.\n# Type each requested command and press Enter.\n",
           "language": "bash",
           "isEntry": true,
           "entry": true,
@@ -393,7 +387,7 @@
         },
         {
           "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 4\\n' > important.txt\n",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"community-site\"\nmkdir -p -- \"community-site\"\nprintf '%s\\n' 'Cumulative Git practice project' > \"community-site/README.md\"\ngit -C \"community-site\" init -q -b main\ngit -C \"community-site\" config user.name \"ZoeSkoul Learner\"\ngit -C \"community-site\" config user.email \"learner@zoeskoul.local\"\ngit -C \"community-site\" add -- \"README.md\"\ngit -C \"community-site\" commit -q -m \"Start cumulative project\"\nprintf '%s\\n' 'Prepared practice change' >> \"community-site/README.md\"\n",
           "language": "bash",
           "readOnly": true
         }
@@ -401,14 +395,14 @@
       "solutionFiles": [
         {
           "path": "main.sh",
-          "content": "bash .zoeskoul/setup.sh\ngit status\n",
+          "content": "git diff\n",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
           "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 4\\n' > important.txt\n",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"community-site\"\nmkdir -p -- \"community-site\"\nprintf '%s\\n' 'Cumulative Git practice project' > \"community-site/README.md\"\ngit -C \"community-site\" init -q -b main\ngit -C \"community-site\" config user.name \"ZoeSkoul Learner\"\ngit -C \"community-site\" config user.email \"learner@zoeskoul.local\"\ngit -C \"community-site\" add -- \"README.md\"\ngit -C \"community-site\" commit -q -m \"Start cumulative project\"\nprintf '%s\\n' 'Prepared practice change' >> \"community-site/README.md\"\n",
           "language": "bash",
           "readOnly": true
         }
@@ -416,10 +410,7 @@
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
-          },
-          {
-            "pattern": "^git\\s+status$"
+            "pattern": "^git\\s+diff$"
           }
         ],
         "forbiddenCommands": [
@@ -430,6 +421,7 @@
         ]
       },
       "gitExpectations": {
+        "repositoryPath": "community-site",
         "repositoryInitialized": true,
         "currentBranch": "main"
       }

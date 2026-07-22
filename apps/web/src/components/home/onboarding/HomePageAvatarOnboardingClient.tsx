@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { useRouter as useNextRouter } from "next/navigation";
+import { useRouter as useNextRouter, useSearchParams } from "next/navigation";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useTheme } from "next-themes";
 import {
@@ -13,11 +13,11 @@ import {
     ChevronDown,
     ChevronRight,
     Code2,
+    Dumbbell,
     Globe,
     GraduationCap,
     MessageCircleMore,
     Moon,
-    Sparkles,
     Sun,
     TimerReset,
 } from "lucide-react";
@@ -32,12 +32,29 @@ import {
 } from "@/lib/onboarding/client";
 import { persistLocale } from "@/lib/locale/persistLocale";
 import HeaderSlick from "@/components/HeaderSlick";
+import LearningEntryButton from "@/components/learning/LearningEntryButton";
 import FooterSlick from "@/components/layout/FooterSlick";
 import { resolveDeepTagged } from "@/i18n/resolveDeepTagged";
 import { useTaggedT } from "@/i18n/tagged";
 import RedirectOverlay from "@/components/shared/RedirectOverlay";
 import {useAuthHref} from "@/hooks/useAuthHref";
 import type { PublicChallengeCardData } from "@/lib/practice/challenges/types";
+import {
+    AiTutorAvatar,
+    AiTutorSpeechBubble,
+} from "@/components/ai-tutor/AiTutorAvatar";
+import {
+    buildHomeSubjectShelf,
+    type HomeSubjectShelfItem,
+} from "@/lib/home/buildHomeSubjectShelf";
+import { recordSubjectVisit } from "@/lib/subjects/client/recordSubjectVisit";
+import PracticeEntryButton from "@/components/practice/PracticeEntryButton";
+import {
+    buildPracticeEntryHref,
+    hasPracticeEntryIntent,
+    removePracticeEntryIntent,
+} from "@/lib/practice/entry";
+import { ONBOARDING_TRIAL_TARGET_COUNT } from "@/lib/practice/experience/defaults";
 
 type Choice = {
     label: string;
@@ -89,6 +106,8 @@ type StepConfig = {
 type SubjectCard = {
     id?: string;
     slug: string;
+    enrolled: boolean;
+    lastSeenAt: string | null;
     title: string;
     description: string;
     badge: string | null;
@@ -390,19 +409,6 @@ function buttonClass(variant: "primary" | "secondary" | "ghost" = "secondary") {
     return "ui-btn-secondary bg-transparent shadow-none";
 }
 
-function SparkDot({ className }: { className?: string }) {
-    return (
-        <motion.div
-            className={cn(
-                "absolute size-1 rounded-full bg-emerald-400/35 dark:bg-emerald-300/20",
-                className,
-            )}
-            animate={{ y: [0, -5, 0], opacity: [0.35, 1, 0.35] }}
-            transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
-        />
-    );
-}
-
 function LatestChallengeCard({
                                  challenge,
                              }: {
@@ -489,6 +495,70 @@ function LatestChallengeCard({
     );
 }
 
+function HomePracticeCard({
+                              isAuthenticated,
+                              isSubscriber,
+                              dailyTargetCount,
+                              busy,
+                              onGuestStart,
+                          }: {
+    isAuthenticated: boolean;
+    isSubscriber: boolean;
+    dailyTargetCount: number;
+    busy: boolean;
+    onGuestStart: () => void | Promise<void>;
+}) {
+    const { t } = useTaggedT("homeOnboarding");
+    const questionCount = isAuthenticated
+        ? dailyTargetCount
+        : ONBOARDING_TRIAL_TARGET_COUNT;
+    const copyPrefix = isSubscriber
+        ? "practiceCard.unlimited"
+        : isAuthenticated
+          ? "practiceCard.daily"
+          : "practiceCard.guest";
+
+    return (
+        <section id="practice" className="scroll-mt-24">
+            <div className="ui-surface-info overflow-hidden p-4 sm:p-5">
+                <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
+                    <div className="grid size-12 shrink-0 place-items-center rounded-xl border border-[rgb(var(--ui-info)/0.22)] bg-[rgb(var(--ui-info)/0.12)] text-[rgb(var(--ui-info))]">
+                        <Dumbbell className="size-5" />
+                    </div>
+
+                    <div className="min-w-0 flex-1">
+                        <div className="ui-kicker">
+                            {t(`${copyPrefix}Kicker`)}
+                        </div>
+                        <h2 className="mt-1 text-lg font-semibold tracking-tight text-[rgb(var(--ui-text)/0.96)] sm:text-xl">
+                            {t(`${copyPrefix}Title`, { count: questionCount })}
+                        </h2>
+                        <p className="mt-1.5 max-w-2xl text-sm leading-6 text-[rgb(var(--ui-text-muted)/0.88)]">
+                            {t(`${copyPrefix}Description`, { count: questionCount })}
+                        </p>
+                    </div>
+
+                    <PracticeEntryButton
+                        isAuthenticated={isAuthenticated}
+                        authenticatedLabel={t(
+                            isSubscriber
+                                ? "practiceCard.unlimitedCta"
+                                : "practiceCard.dailyCta",
+                        )}
+                        guestLabel={t("practiceCard.guestCta", { count: questionCount })}
+                        loadingText={t("practiceCard.opening")}
+                        onGuestClick={onGuestStart}
+                        disabled={busy}
+                        icon={<Dumbbell className="size-4 shrink-0" />}
+                        className="ui-btn-info min-h-10 shrink-0 px-4"
+                        fullWidth
+                    />
+                </div>
+            </div>
+        </section>
+    );
+}
+
 /* -------------------- storage / formatting -------------------- */
 
 function readStoredOnboarding(): StoredOnboardingSnapshot {
@@ -543,30 +613,6 @@ function saveStoredOnboarding(
     );
 }
 
-function useTypewriter(text: string, speed = 18, shouldAnimate = true) {
-    const [displayed, setDisplayed] = useState(shouldAnimate ? "" : text);
-
-    useEffect(() => {
-        if (!shouldAnimate) {
-            setDisplayed(text);
-            return;
-        }
-
-        setDisplayed("");
-        let i = 0;
-
-        const timer = window.setInterval(() => {
-            i += 1;
-            setDisplayed(text.slice(0, i));
-            if (i >= text.length) window.clearInterval(timer);
-        }, speed);
-
-        return () => window.clearInterval(timer);
-    }, [text, speed, shouldAnimate]);
-
-    return displayed;
-}
-
 function formatList(locale: string, items: string[]) {
     if (!items.length) return "";
     try {
@@ -618,16 +664,6 @@ function titleFromSlug(
     return resolveText(subject.title, { appName: APP_NAME }, slug);
 }
 
-function getRecommendedSubjects(data: OnboardingData, subjects: SubjectCard[]) {
-    if (!data.learningInterests.length) return subjects.slice(0, 4);
-
-    const selected = new Set(data.learningInterests);
-    const prioritized = subjects.filter((subject) => selected.has(subject.slug));
-    const fallback = subjects.filter((subject) => !selected.has(subject.slug));
-
-    return [...prioritized, ...fallback].slice(0, 4);
-}
-
 function buildWelcomeMessage(
     data: OnboardingData,
     returning: boolean,
@@ -654,118 +690,6 @@ function buildWelcomeMessage(
 
 /* -------------------- avatar / speech -------------------- */
 
-function GuideAvatar({ speaking }: { speaking: boolean }) {
-    const reduceMotion = useReducedMotion();
-    const { t } = useTaggedT("homeOnboarding");
-
-    return (
-        <div className="relative flex h-[78px] w-[78px] items-center justify-center sm:h-[86px] sm:w-[86px]">
-            <motion.div
-                className="absolute inset-2 rounded-full bg-emerald-300/15 blur-xl dark:bg-emerald-300/8"
-                animate={
-                    reduceMotion
-                        ? undefined
-                        : { scale: [1, 1.05, 1], opacity: [0.35, 0.6, 0.35] }
-                }
-                transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
-            />
-
-            <SparkDot className="left-2 top-3" />
-            <SparkDot className="right-3 top-2" />
-            <SparkDot className="bottom-3 right-2" />
-
-            <motion.div
-                className={cn(
-                    "relative flex h-[64px] w-[64px] items-center justify-center sm:h-[70px] sm:w-[70px]",
-                    "ui-page-surface rounded-2xl p-1.5",
-                )}
-                animate={
-                    reduceMotion ? undefined : { y: [0, -2, 0], rotate: [0, -1, 1, 0] }
-                }
-                transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
-            >
-                <div className="ui-surface-muted flex h-full w-full flex-col items-center justify-center rounded-[14px] border p-2">
-                    <div className="flex items-center gap-2.5">
-                        <motion.div
-                            className="h-3.5 w-3.5 rounded-full bg-[rgb(var(--ui-text)/0.92)] sm:h-4 sm:w-4"
-                            animate={reduceMotion ? undefined : { scaleY: [1, 1, 0.12, 1, 1] }}
-                            transition={{
-                                duration: 5,
-                                repeat: Infinity,
-                                times: [0, 0.42, 0.46, 0.5, 1],
-                            }}
-                            style={{ transformOrigin: "center center" }}
-                        />
-                        <motion.div
-                            className="h-3.5 w-3.5 rounded-full bg-[rgb(var(--ui-text)/0.92)] sm:h-4 sm:w-4"
-                            animate={reduceMotion ? undefined : { scaleY: [1, 1, 0.12, 1, 1] }}
-                            transition={{
-                                duration: 5,
-                                repeat: Infinity,
-                                times: [0, 0.42, 0.46, 0.5, 1],
-                            }}
-                            style={{ transformOrigin: "center center" }}
-                        />
-                    </div>
-
-                    <motion.div
-                        className="mt-2 h-2 rounded-full bg-[rgb(var(--ui-text)/0.88)]"
-                        animate={
-                            reduceMotion
-                                ? undefined
-                                : speaking
-                                    ? { width: [12, 18, 10, 16, 12], borderRadius: [999, 8, 999, 8, 999] }
-                                    : { width: 14 }
-                        }
-                        transition={{
-                            duration: 1.05,
-                            repeat: speaking ? Infinity : 0,
-                            ease: "easeInOut",
-                        }}
-                    />
-
-                    <div className="mt-2 inline-flex items-center gap-1 rounded-full border border-emerald-500/15 bg-emerald-500/10 px-1.5 py-0.5 text-[8px] font-medium text-emerald-700 dark:border-emerald-300/15 dark:bg-emerald-300/10 dark:text-emerald-200">
-                        <Sparkles className="size-2" />
-                        {t("common.guide")}
-                    </div>
-                </div>
-            </motion.div>
-        </div>
-    );
-}
-
-function SpeechBubble({
-                          text,
-                          animate = true,
-                          side = "right",
-                      }: {
-    text: string;
-    animate?: boolean;
-    side?: "left" | "right";
-}) {
-    const reduceMotion = useReducedMotion();
-    const rendered = useTypewriter(text, 15, animate && !reduceMotion);
-
-    return (
-        <div className="relative w-[min(220px,62vw)] sm:w-[250px]">
-            <div className="ui-page-surface relative rounded-2xl px-3 py-2.5">
-                <div
-                    className={cn(
-                        "absolute top-[18px] h-2.5 w-2.5 rotate-45 border",
-                        side === "right"
-                            ? "-right-[5px] border-r border-t border-[rgb(var(--ui-border)/1)] bg-[rgb(var(--ui-surface)/0.96)]"
-                            : "-left-[5px] border-b border-l border-[rgb(var(--ui-border)/1)] bg-[rgb(var(--ui-surface)/0.96)]",
-                    )}
-                />
-                <p className="text-[12px] leading-5 text-[rgb(var(--ui-text-muted)/0.9)] sm:text-[13px]">
-                    {rendered}
-                    <span className="ml-0.5 inline-block h-3.5 w-[2px] animate-pulse bg-[rgb(var(--ui-text)/0.65)] align-middle" />
-                </p>
-            </div>
-        </div>
-    );
-}
-
 function AvatarWithQuestion({
                                 text,
                                 speaking,
@@ -775,6 +699,8 @@ function AvatarWithQuestion({
     speaking: boolean;
     side?: "left" | "right";
 }) {
+    const { t } = useTaggedT("homeOnboarding");
+
     return (
         <div className="mx-auto flex w-full max-w-[360px] items-start justify-center">
             <div
@@ -784,10 +710,14 @@ function AvatarWithQuestion({
                 )}
             >
                 <div className="pt-1">
-                    <GuideAvatar speaking={speaking} />
+                    <AiTutorAvatar
+                        speaking={speaking}
+                        size="lg"
+                        label={t("common.guide")}
+                    />
                 </div>
                 <div className="pt-1.5">
-                    <SpeechBubble text={text} side={side} />
+                    <AiTutorSpeechBubble text={text} side={side} />
                 </div>
             </div>
         </div>
@@ -1545,34 +1475,40 @@ function PersonalizedHighlights({ data }: { data: OnboardingData }) {
 }
 
 function SubjectGrid({
-                         data,
-                         subjects,
+                         items,
                          locale,
                      }: {
-    data: OnboardingData;
-    subjects: SubjectCard[];
+    items: Array<HomeSubjectShelfItem<SubjectCard>>;
     locale: string;
 }) {
     const { t, resolve } = useTaggedT("homeOnboarding");
     const reduceMotion = useReducedMotion();
-    const recommended = getRecommendedSubjects(data, subjects);
 
     return (
         <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-            {recommended.map((subject) => {
+            {items.map(({ subject, kind }) => {
                 const title = resolve(subject.title, { appName: APP_NAME }, subject.slug);
                 const description = resolve(subject.description, { appName: APP_NAME }, "");
-                const badge = resolve(
-                    subject.badge,
-                    { appName: APP_NAME },
-                    t("common.featured"),
-                );
+                const statusLabel =
+                    kind === "current"
+                        ? t("recommended.current")
+                        : t("recommended.recommendation");
+                const actionLabel =
+                    kind === "current"
+                        ? t("recommended.continueSubject")
+                        : t("recommended.exploreSubject");
                 const alt = resolve(subject.imageAlt, { appName: APP_NAME }, title);
 
                 return (
                     <Link
                         key={subject.slug}
                         href={`/${encodeURIComponent(locale)}/subjects/${subject.slug}/modules`}
+                        onClick={() => {
+                            // The same endpoint enrolls a new learner and refreshes
+                            // lastSeenAt for a current course. keepalive lets the
+                            // navigation continue without delaying the learner.
+                            void recordSubjectVisit(subject.slug);
+                        }}
                         className="group block"
                     >
                         <motion.div whileHover={reduceMotion ? undefined : { y: -3 }}>
@@ -1590,8 +1526,15 @@ function SubjectGrid({
                                         <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(16,185,129,0.14),rgba(59,130,246,0.10))]" />
                                     )}
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/5 to-transparent" />
-                                    <div className="absolute left-3 top-3 rounded-full border border-white/15 bg-white/15 px-2 py-0.5 text-[11px] font-medium text-white backdrop-blur-md">
-                                        {badge}
+                                    <div
+                                        className={cn(
+                                            "absolute left-3 top-3 rounded-full border px-2 py-0.5 text-[11px] font-medium backdrop-blur-md",
+                                            kind === "current"
+                                                ? "border-[rgb(var(--ui-accent)/0.30)] bg-[rgb(var(--ui-accent)/0.88)] text-[rgb(var(--ui-text-invert)/1)]"
+                                                : "border-white/15 bg-white/15 text-white",
+                                        )}
+                                    >
+                                        {statusLabel}
                                     </div>
                                 </div>
 
@@ -1605,7 +1548,7 @@ function SubjectGrid({
                                     </p>
 
                                     <div className="mt-5 flex items-center gap-2 text-sm font-medium text-[rgb(var(--ui-text)/0.96)]">
-                                        {t("recommended.exploreSubject")}
+                                        {actionLabel}
                                         <ChevronRight className="size-4" />
                                     </div>
                                 </div>
@@ -1624,18 +1567,23 @@ export default function HomePageAvatarOnboardingClient({
                                                            initialSubjects,
                                                            locale,
                                                            isAuthenticated,
+                                                           isSubscriber,
                                                            latestChallenge,
+                                                           dailyPracticeTargetCount,
                                                        }: {
     initialSubjects: SubjectCard[];
     locale: string;
     isAuthenticated: boolean;
+    isSubscriber: boolean;
     latestChallenge: PublicChallengeCardData | null;
+    dailyPracticeTargetCount: number;
 }) {
     const { t, resolve } = useTaggedT("homeOnboarding");
     const reduceMotion = useReducedMotion();
     const { setTheme, resolvedTheme } = useTheme();
     const router = useRouter();
     const nextRouter = useNextRouter();
+    const searchParams = useSearchParams();
     const pathname = usePathname();
 
     const [hydrated, setHydrated] = useState(false);
@@ -1659,9 +1607,11 @@ export default function HomePageAvatarOnboardingClient({
     const [skipped, setSkipped] = useState(false);
 
     const redirectingRef = useRef(false);
+    const practiceEntryHandledRef = useRef(false);
 // 1) add this near your other memo/state setup, after pathname/router
 
     const authHref = useAuthHref() ;
+    const practiceEntryRequested = hasPracticeEntryIntent(searchParams);
     function redirectToTrial(href: string) {
         redirectingRef.current = true;
         nextRouter.replace(href);
@@ -1757,6 +1707,19 @@ export default function HomePageAvatarOnboardingClient({
         const selected = new Set(onboardingData.learningInterests);
         return subjects.filter((s) => selected.has(s.slug));
     }, [subjects, onboardingData.learningInterests]);
+
+    const homeSubjectShelf = useMemo(
+        () =>
+            buildHomeSubjectShelf(
+                subjects,
+                onboardingData.learningInterests,
+            ),
+        [subjects, onboardingData.learningInterests],
+    );
+
+    const hasCurrentHomeSubjects = homeSubjectShelf.some(
+        (item) => item.kind === "current",
+    );
 
     const welcomeText = useMemo(
         () =>
@@ -2002,6 +1965,69 @@ export default function HomePageAvatarOnboardingClient({
     const reopenAssistant = () => {
         openOnboardingFlow();
     };
+
+    const handleGuestPracticeEntry = async () => {
+        if (!canStartTrial) {
+            reopenAssistant();
+            return;
+        }
+
+        await handleStartTrial();
+    };
+
+    useEffect(() => {
+        if (
+            !bootstrapped ||
+            !practiceEntryRequested ||
+            practiceEntryHandledRef.current
+        ) {
+            return;
+        }
+
+        // Wait for the stored subject choice to hydrate before deciding that
+        // the learner needs onboarding again.
+        if (
+            !isAuthenticated &&
+            completed &&
+            onboardingData.learningInterests.length > 0 &&
+            onboardingData.level &&
+            !trialSubjectSlug
+        ) {
+            return;
+        }
+
+        practiceEntryHandledRef.current = true;
+
+        if (isAuthenticated) {
+            router.replace(buildPracticeEntryHref(true) as any);
+            return;
+        }
+
+        if (typeof window !== "undefined") {
+            nextRouter.replace(removePracticeEntryIntent(window.location.href), {
+                scroll: false,
+            });
+        }
+
+        void handleGuestPracticeEntry();
+    }, [
+        bootstrapped,
+        canStartTrial,
+        completed,
+        isAuthenticated,
+        onboardingData.learningInterests.length,
+        onboardingData.level,
+        nextRouter,
+        practiceEntryRequested,
+        router,
+        trialSubjectSlug,
+    ]);
+
+    useEffect(() => {
+        if (!practiceEntryRequested) {
+            practiceEntryHandledRef.current = false;
+        }
+    }, [practiceEntryRequested]);
 
     const mustStayOnboarding =
         !skipped && !completed;
@@ -2291,45 +2317,16 @@ export default function HomePageAvatarOnboardingClient({
                                                     transition={{ delay: 0.16, duration: 0.5 }}
                                                     className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap"
                                                 >
-                                                    {completed ? (
-                                                        isAuthenticated ? (
-                                                            <NavButton
-                                                                href={
-                                                                    trialSubjectSlug
-                                                                        ? `/subjects/${encodeURIComponent(trialSubjectSlug)}/modules`
-                                                                        : `/${encodeURIComponent(locale)}/subjects`
-                                                                }
-                                                                prefetch
-                                                                className={cn(buttonClass("primary"), "h-9 gap-2 sm:w-auto")}
-                                                            >
-                                                                {t("hero.continueLearning")}
-                                                                <ArrowRight className="size-4" />
-                                                            </NavButton>
-                                                        ) : (
-                                                            <button
-                                                                type="button"
-                                                                className={cn(buttonClass("primary"), "h-9 gap-2 sm:w-auto")}
-                                                                onClick={handleStartTrial}
-                                                                disabled={!canStartTrial || trialBusy}
-                                                            >
-                                                                {trialBusy
-                                                                    ? t("hero.startingTrial")
-                                                                    : t("hero.try3Questions")}
-                                                                <ArrowRight className="size-4" />
-                                                            </button>
-                                                        )
-                                                    ) : isAuthenticated ? (
-                                                        <NavButton
-                                                            href={`/subjects`}
-                                                            prefetch
-                                                            className={cn(
-                                                                buttonClass("primary"),
-                                                                "h-9 whitespace-nowrap sm:w-auto inline-flex items-center"
-                                                            )}
-                                                        >
-                                                            <span className="whitespace-nowrap">{t("hero.continueLearning")}</span>
-                                                            {/*<ArrowRight className="size-4 shrink-0" />*/}
-                                                        </NavButton>
+                                                    {isAuthenticated || completed ? (
+                                                        <LearningEntryButton
+                                                            isAuthenticated={isAuthenticated}
+                                                            continueLabel={t("hero.continueLesson")}
+                                                            startLabel={t("hero.startLearning")}
+                                                            guestLabel={t("hero.exploreLessons")}
+                                                            loadingText={t("hero.learningOpening")}
+                                                            icon={<ArrowRight className="size-4" />}
+                                                            className={cn(buttonClass("primary"), "h-9 gap-2 sm:w-auto")}
+                                                        />
                                                     ) : (
                                                         <button
                                                             type="button"
@@ -2400,7 +2397,7 @@ export default function HomePageAvatarOnboardingClient({
                                                             />
                                                         ) : (
                                                             <div className="flex justify-center">
-                                                                <GuideAvatar speaking={false} />
+                                                                <AiTutorAvatar speaking={false} size="lg" label={t("common.guide")} />
                                                             </div>
                                                         )}
 
@@ -2417,58 +2414,6 @@ export default function HomePageAvatarOnboardingClient({
                                                                     </p>
                                                                 </div>
 
-                                                                {completed ? (
-                                                                    isAuthenticated ? (
-                                                                        <NavButton
-                                                                            href={
-                                                                                trialSubjectSlug
-                                                                                    ? `/${encodeURIComponent(locale)}/subjects/${encodeURIComponent(trialSubjectSlug)}/modules`
-                                                                                    : `/${encodeURIComponent(locale)}/subjects`
-                                                                            }
-                                                                            prefetch
-                                                                            className={cn(buttonClass("primary"), "w-full")}
-                                                                        >
-                                                                            {t("hero.continueLearning")}
-                                                                        </NavButton>
-                                                                    ) : (
-                                                                        <div className="flex flex-col gap-2">
-                                                                            <button
-                                                                                type="button"
-                                                                                onClick={handleStartTrial}
-                                                                                disabled={!canStartTrial || trialBusy}
-                                                                                className={cn(buttonClass("primary"), "w-full")}
-                                                                            >
-                                                                                {trialBusy
-                                                                                    ? t("hero.startingTrial")
-                                                                                    : t("hero.try3Questions")}
-                                                                            </button>
-
-                                                                            <button
-                                                                                type="button"
-                                                                                onClick={reopenAssistant}
-                                                                                className={cn(buttonClass("secondary"), "w-full")}
-                                                                            >
-                                                                                {t("guideCard.updatePreferences")}
-                                                                            </button>
-                                                                        </div>
-                                                                    )
-                                                                ) : isAuthenticated ? (
-                                                                    <NavButton
-                                                                        href={`/${encodeURIComponent(locale)}/subjects`}
-                                                                        prefetch
-                                                                        className={cn(buttonClass("primary"), "w-full")}
-                                                                    >
-                                                                        {t("hero.continueLearning")}
-                                                                    </NavButton>
-                                                                ) : (
-                                                                    <button
-                                                                        type="button"
-                                                                        onClick={reopenAssistant}
-                                                                        className={cn(buttonClass("secondary"), "w-full")}
-                                                                    >
-                                                                        {t("guideCard.start")}
-                                                                    </button>
-                                                                )}
                                                             </div>
                                                         </SoftPanel>
                                                     </div>
@@ -2476,6 +2421,14 @@ export default function HomePageAvatarOnboardingClient({
                                             </div>
                                         </div>
                                     </Surface>
+
+                                    <HomePracticeCard
+                                        isAuthenticated={isAuthenticated}
+                                        isSubscriber={isSubscriber}
+                                        dailyTargetCount={dailyPracticeTargetCount}
+                                        busy={trialBusy}
+                                        onGuestStart={handleGuestPracticeEntry}
+                                    />
 
                                     <Surface className="p-4 sm:p-5 lg:p-6">
                                         <div className="max-w-2xl">
@@ -2495,7 +2448,13 @@ export default function HomePageAvatarOnboardingClient({
                                         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
                                             <div>
                                                 <SectionKicker>{t("recommended.kicker")}</SectionKicker>
-                                                <SectionTitle>{t("recommended.title")}</SectionTitle>
+                                                <SectionTitle>
+                                                    {t(
+                                                        hasCurrentHomeSubjects
+                                                            ? "recommended.titleWithCurrent"
+                                                            : "recommended.title",
+                                                    )}
+                                                </SectionTitle>
                                             </div>
 
                                             <Link
@@ -2509,8 +2468,7 @@ export default function HomePageAvatarOnboardingClient({
 
                                         <div className="mt-6">
                                             <SubjectGrid
-                                                data={onboardingData}
-                                                subjects={subjects}
+                                                items={homeSubjectShelf}
                                                 locale={locale}
                                             />
                                         </div>

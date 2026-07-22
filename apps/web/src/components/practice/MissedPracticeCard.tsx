@@ -224,7 +224,7 @@ function ReadOnlyPracticeCard({
           <span className="ui-pill-neutral">
             {t("attemptsLabel", { fallback: "Attempts:" } as any)}{" "}
             <span className="text-[rgb(var(--ui-text)/0.96)]">
-              {(q as any).attempts ?? 0}/{isLockedRun ? maxAttempts : "∞"}
+              {(q as any).attempts ?? 0}
             </span>
           </span>
 

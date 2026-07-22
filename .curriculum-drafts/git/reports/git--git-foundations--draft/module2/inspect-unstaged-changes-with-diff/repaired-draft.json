@@ -1,42 +1,64 @@
 {
-  "title": "Inspect Unstaged Changes with git diff",
-  "summary": "Read line-level differences before deciding what belongs in the next commit.",
+  "title": "Inspect Exact Project Changes",
+  "summary": "Continue community-site and inspect supplied text edits before deciding what belongs in history.",
   "minutes": 20,
   "sketchBlocks": [
     {
-      "id": "sketch0",
-      "title": "Inspecting Unstaged Changes with git diff",
-      "bodyMarkdown": "The `git diff` command is a powerful tool that allows you to see the changes in your working directory that have not yet been staged for commit. This command helps you understand what modifications have been made to your files, so you can decide what to include in your next commit.\n\nWorked example:\nImagine you have a file called `index.html` in your project. You've made some changes to this file, but you're not sure what exactly has been modified. By running `git diff`, you can see a line-by-line comparison of the changes. The output will show lines that have been added, removed, or modified, helping you to review your work before staging it.\n\nFor instance, if you added a new paragraph to `index.html`, `git diff` will highlight this addition with a `+` sign at the beginning of the line. If you removed a line, it will be marked with a `-` sign. This visual representation makes it easy to spot changes and ensure that only the intended modifications are included in your commit."
+      "id": "sketch-0",
+      "title": "Inspect unstaged edits with git diff",
+      "bodyMarkdown": "Worked example:\n\nWhen you have changes in your working tree but haven't staged them yet, git diff shows the exact lines that changed. Imagine the project already had a README and a contact file committed. Someone edited both files locally but didn't add them.\n\nExample git diff output (simplified):\n\n```\ndiff --git a/README.md b/README.md\n@@ -1,3 +1,4 @@\n-Welcome\n+Welcome to the Community site\n+We added a short tagline\ndiff --git a/contact.txt b/contact.txt\n@@ -1 +1 @@\n-Phone: 555-0100\n+Phone: 555-0200\n```\n\nRead this output as: lines prefixed with `-` were removed from the committed snapshot; lines prefixed with `+` were added in the working tree. This helps you confirm whether an edit belongs in the next commit before you stage anything.\n\nStep by step, read the commands in the order shown. The first line runs `diff --git a/README.md b/README.md` as the next repository step in the example. The second line runs `@@ -1,3 +1,4 @@` as the next repository step in the example. The third line runs `-Welcome` as the next repository step in the example. The fourth line runs `+Welcome to the Community site` as the next repository step in the example. The next line runs `+We added a short tagline` as the next repository step in the example. The next line runs `diff --git a/contact.txt b/contact.txt` as the next repository step in the example. The next line runs `@@ -1 +1 @@` as the next repository step in the example. The next line runs `-Phone: 555-0100` as the next repository step in the example. The next line runs `+Phone: 555-0200` as the next repository step in the example. Together, the lines form one complete example rather than unrelated commands."
     },
     {
-      "id": "sketch1",
-      "title": "Interpreting the Diff Output",
-      "bodyMarkdown": "When you run `git diff`, the output can seem overwhelming at first, but it's structured to help you understand the changes clearly. Each change is prefixed with a header that indicates the file being compared. The lines starting with `---` and `+++` show the old and new file versions, respectively.\n\nThe actual changes are displayed with `-` and `+` signs. Lines with a `-` indicate content that was removed, while lines with a `+` show new content. This format allows you to quickly identify what has been added or removed.\n\nConsider a scenario where you have a file `style.css` and you've changed the color scheme. The `git diff` output will show the old color values with `-` and the new ones with `+`. This helps you verify that the changes align with your design intentions before committing."
+      "id": "sketch-1",
+      "title": "Show changes for a single filename",
+      "bodyMarkdown": "Worked example:\n\nYou don't always want to scan every changed file. Ask git diff for one specific file to focus on a single change. For instance, to inspect only the README you would run `git diff README.md`.\n\nExample (focused):\n\n```\n$ git diff README.md\ndiff --git a/README.md b/README.md\n@@ -1,3 +1,4 @@\n-Welcome\n+Welcome to the Community site\n+We added a short tagline\n```\n\nLimiting the diff reduces noise and makes it easier to decide whether that file should be staged."
     },
     {
-      "id": "sketch2",
-      "title": "Spotting Unrelated Edits",
-      "bodyMarkdown": "One of the key benefits of using `git diff` is the ability to spot unrelated changes that might have been made unintentionally. This is crucial for maintaining a clean commit history.\n\nImagine you're working on a feature in `app.js`, but you also made some experimental changes to `config.js` that you don't want to commit yet. By running `git diff`, you can see all the changes across your files. This allows you to selectively stage only the changes related to your feature, leaving the experimental changes for later.\n\nThis practice helps in creating focused commits that are easier to understand and review, ensuring that your commit history remains clear and meaningful."
+      "id": "sketch-2",
+      "title": "Interpret the `+` and `-` lines in a diff",
+      "bodyMarkdown": "Worked example:\n\nA small chunk of git diff shows context lines and the actual additions/removals. The `@@` header shows the chunk location, and the `-` / `+` lines show the removed and added content.\n\nExample snippet:\n\n```\n@@ -10,7 +10,8 @@\n-This paragraph explained old behavior.\n+This paragraph explains the new recommended behavior.\n+It also adds one extra explanatory sentence.\n```\n\nThis tells you exactly what text will disappear from the committed snapshot and what text will be added if you stage the change. You don't need to know HTML or CSS to read these markers—just treat them as plain text edits."
     },
     {
-      "id": "sketch3",
-      "title": "Using git diff in Your Workflow",
-      "bodyMarkdown": "Incorporating `git diff` into your workflow can significantly enhance your development process. It allows you to review changes before staging them, ensuring that only the necessary modifications are included in your commits.\n\nFor example, if you're working on a collaborative project, using `git diff` before committing can help you communicate your changes more effectively to your team. It ensures that your commits are precise and only contain relevant changes, making code reviews smoother and more efficient.\n\nBy regularly using `git diff`, you develop a habit of reviewing your work, which leads to better code quality and a more organized project history."
+      "id": "sketch-3",
+      "title": "Stage one file, then inspect staged vs unstaged",
+      "bodyMarkdown": "Worked example:\n\nSometimes you want to include one purposeful change in the next commit and leave unrelated edits out. Stage the intended file and then use `git diff --staged` to inspect exactly what will become part of the new commit.\n\nExample sequence and results (conceptual):\n\n```\n$ git add README.md\n$ git diff --staged\ndiff --git a/README.md b/README.md\n@@ -1,3 +1,4 @@\n-Welcome\n+Welcome to the Community site\n+We added a short tagline\n```\n\nAfter staging README.md, git diff (unstaged) still shows other working-tree edits that are not yet staged. This two-step inspection—diff before staging and diff --staged after staging—lets you build a focused commit."
     }
   ],
   "quizDraft": [
     {
-      "id": "single-choice-1",
+      "id": "q-single-what-diff",
       "kind": "single_choice",
-      "title": "Using git diff",
-      "prompt": "When should you use `git diff`?",
+      "title": "What does git diff (no arguments) show by default?",
+      "prompt": "Choose the single correct description of git diff with no additional options or filenames.",
       "options": [
-        "After committing changes",
-        "Before staging changes",
-        "After pushing to remote",
-        "Before creating a branch"
+        "Staged changes that will be part of the next commit.",
+        "Unstaged changes in the working tree compared to the index.",
+        "A list of commits in the repository's history.",
+        "Only files ignored by .gitignore."
       ],
       "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Think about what git compares when you haven't staged changes yet.",
+      "help": {
+        "concept": "git diff (without options) compares the working tree to the index (staged snapshot). It shows unstaged line-level changes that are not yet staged for commit.",
+        "hint_1": "It does not show the staged snapshot or the commit history by default.",
+        "hint_2": "If a change is staged, git diff (no args) will not include those staged differences; use git diff --staged to see staged changes."
+      }
+    },
+    {
+      "id": "q-multi-which-commands",
+      "kind": "multi_choice",
+      "title": "Which commands show line-level diffs?",
+      "prompt": "Select all commands that can show line-level differences between snapshots (choose all that apply).",
+      "options": [
+        "git diff",
+        "git diff --staged",
+        "git status",
+        "git log"
+      ],
+      "correctOptionIds": [
+        "a",
         "b"
       ],
       "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
@@ -47,131 +69,114 @@
       }
     },
     {
-      "id": "multi-choice-1",
+      "id": "q-multi-interpret-plusminus",
       "kind": "multi_choice",
-      "title": "Understanding git diff",
-      "prompt": "What does the `git diff` command do?",
+      "title": "Interpreting diff markers",
+      "prompt": "Which of the following are correct interpretations of git diff output? Select all that apply.",
       "options": [
-        "Shows the commit history",
-        "Displays changes in the working directory not yet staged",
-        "Lists all branches",
-        "Shows the current branch"
+        "Lines starting with + are added in the working tree.",
+        "Lines starting with - were removed from the previous snapshot.",
+        "Lines starting with ! indicate a merge conflict in a standard git diff.",
+        "Lines starting with @@ show the chunk header with location information."
       ],
       "correctOptionIds": [
-        "b"
+        "a",
+        "b",
+        "d"
       ],
-      "hint": "Think about what changes `git diff` shows.",
+      "hint": "Review what the symbols `-`, `+`, and `@@` mean in a diff chunk.",
       "help": {
-        "concept": "`git diff` shows changes in the working directory that are not yet staged.",
-        "hint_1": "`git diff` compares the working directory with the staging area.",
-        "hint_2": "It highlights changes that are not yet staged for commit."
+        "concept": "In git diffs, `-` marks lines removed from the earlier snapshot, `+` marks lines added in the later snapshot, and `@@` is the chunk header showing where the change occurred.",
+        "hint_1": "Look for the statements that correctly describe removed and added lines and the chunk header.",
+        "hint_2": "Exclude any option that mentions conflict markers or unrelated outputs."
       }
     },
     {
-      "id": "multi-choice-2",
-      "kind": "multi_choice",
-      "title": "Interpreting Diff Output",
-      "prompt": "Which symbol in `git diff` output indicates a line has been added?",
-      "options": [
-        "-",
-        "+",
-        "*",
-        "/"
-      ],
-      "correctOptionIds": [
-        "b"
-      ],
-      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
-      "help": {
-        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
-      }
-    },
-    {
-      "id": "drag-reorder-1",
+      "id": "q-drag-order-steps",
       "kind": "drag_reorder",
-      "title": "Steps to Use git diff",
-      "prompt": "Arrange the steps to use `git diff` to inspect changes.",
+      "title": "Order the steps to make a focused commit",
+      "prompt": "Arrange these steps in the correct order for inspecting edits and making a single focused commit.",
       "tokens": [
-        "Navigate to the project directory",
-        "Run `git diff`",
-        "Review the output"
+        "Run git status (or git diff) to see all changes",
+        "Stage only the intended file with git add <file>",
+        "Run git diff --staged to inspect the staged snapshot",
+        "Run git commit -m \"focused: short message\" to record the change"
       ],
       "correctOrder": [
-        "Navigate to the project directory",
-        "Run `git diff`",
-        "Review the output"
+        "Run git status (or git diff) to see all changes",
+        "Stage only the intended file with git add <file>",
+        "Run git diff --staged to inspect the staged snapshot",
+        "Run git commit -m \"focused: short message\" to record the change"
       ],
-      "hint": "Read each piece and arrange them in the order the statement should be understood.",
+      "hint": "Think: inspect, stage only intended file, check staged snapshot, then commit.",
       "help": {
-        "concept": "The pieces should form a valid statement in a logical order.",
-        "hint_1": "Start with the piece that introduces the idea or action.",
-        "hint_2": "Place dependent pieces after the part they describe or complete."
+        "concept": "A focused commit workflow inspects unstaged edits, stages just the intended file, verifies the staged snapshot, and then commits so unrelated edits remain out of history.",
+        "hint_1": "Start by checking the current status or unstaged diff, then stage the intended file.",
+        "hint_2": "After staging, use git diff --staged to verify, then commit with an explanatory message."
       }
     },
     {
-      "id": "fill-blank-choice-1",
+      "id": "q-fill-staged-base",
       "kind": "fill_blank_choice",
-      "title": "Symbol for Removed Lines",
-      "prompt": "In `git diff`, lines that have been removed are indicated by the symbol `[blank1]`.",
-      "template": "In `git diff`, lines that have been removed are indicated by the symbol `[blank1]`.",
+      "title": "What does git diff --staged compare?",
+      "prompt": "git diff --staged shows differences between the index and [blank1].",
+      "template": "git diff --staged shows differences between the index and [blank1].",
       "choices": [
-        "-",
-        "+",
-        "*",
-        "/"
+        "working tree",
+        "HEAD",
+        "origin/main",
+        "the staging snapshot"
       ],
-      "correctValue": "-",
-      "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+      "correctValue": "HEAD",
+      "hint": "Think about what the index (staging area) is compared to when inspecting what will be committed next.",
       "help": {
-        "concept": "The blank should be filled with the term that makes the statement accurate.",
-        "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
-        "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+        "concept": "git diff --staged (also shown as git diff --cached) compares the staged snapshot (index) to the missing term, the last commit, so you can see precisely what will be included in the next commit.",
+        "hint_1": "the missing term is the name for the current commit the branch points at.",
+        "hint_2": "Pick the term that names the last committed snapshot the index is compared against."
       }
     },
     {
-      "id": "fill-blank-choice-2",
+      "id": "q-fill-plus-lines",
       "kind": "fill_blank_choice",
-      "title": "Purpose of git diff",
-      "prompt": "The primary purpose of `git diff` is to show changes in the [blank1] that are not yet staged.",
-      "template": "The primary purpose of `git diff` is to show changes in the [blank1] that are not yet staged.",
+      "title": "Meaning of + lines in diff",
+      "prompt": "In git diff output, lines that begin with + are [blank1].",
+      "template": "In git diff output, lines that begin with + are [blank1].",
       "choices": [
-        "working directory",
-        "staging area",
-        "commit history",
-        "remote repository"
+        "removed lines",
+        "added lines",
+        "unchanged lines",
+        "file names"
       ],
-      "correctValue": "working directory",
-      "hint": "Consider where `git diff` looks for changes.",
+      "correctValue": "added lines",
+      "hint": "What does a + at the beginning of a line usually indicate in a line-level diff?",
       "help": {
-        "concept": "`git diff` shows changes in the the missing term that are not yet staged.",
-        "hint_1": "`git diff` compares the the missing term with the staging area.",
-        "hint_2": "It highlights changes that are not yet staged for commit."
+        "concept": "Plus-marked lines in a diff are the lines added in the later snapshot (working tree or staged index) compared to the earlier snapshot.",
+        "hint_1": "Think: the opposite of removed lines, which start with -.",
+        "hint_2": "Choose the phrase that means content was added."
       }
     },
     {
       "id": "try-inspect-unstaged-changes-with-diff-sketch0",
       "kind": "code_input",
-      "title": "Try It: Inspect Changes in index.html",
-      "prompt": "You have made changes to `index.html` in your project. Use `git diff` to inspect the unstaged changes. Type the command and press Enter to see the differences.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
-      "hint": "Read the Git task \"Try It: Inspect Changes in index.html\" and identify the repository state you need to create.",
+      "title": "Inspect all unstaged edits with git diff",
+      "prompt": "You're in the community-site repository. The starter workspace contains two edited files that are not staged. Use the terminal: type the command git diff and press Enter to view all unstaged text changes across the project. Run exactly: git diff\n\nWhen done, click Check Answer.\n\nThe terminal opens inside `community-site/` with the required starting milestone ready. Type each requested terminal command and press Enter.",
+      "hint": "Read the Git task \"Inspect all unstaged edits with git diff\" and identify the repository state you need to create.",
       "help": {
-        "concept": "This Git exercise checks the repository state produced by \"Try It: Inspect Changes in index.html\".",
+        "concept": "This Git exercise checks the repository state produced by \"Inspect all unstaged edits with git diff\".",
         "hint_1": "Use git status before and after each small change so you can see what moved between the working tree, staging area, and history.",
         "hint_2": "Match the requested file names, branch names, and commit purpose before clicking Check Answer."
       },
-      "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.",
-      "solutionCode": "bash .zoeskoul/setup.sh\ngit diff",
+      "starterCode": "# Work in the terminal; the starting repository state is ready.\n# Type each requested command and press Enter.",
+      "solutionCode": "git restore --staged practice.txt",
       "fixedLanguage": "bash",
       "recipeType": "shell_task",
       "mode": "terminal_workspace",
       "entryFilePath": "main.sh",
-      "instructions": "You have made changes to `index.html` in your project. Use `git diff` to inspect the unstaged changes. Type the command and press Enter to see the differences.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+      "instructions": "You're in the community-site repository. The starter workspace contains two edited files that are not staged. Use the terminal: type the command git diff and press Enter to view all unstaged text changes across the project. Run exactly: git diff\n\nWhen done, click Check Answer.\n\nThe terminal opens inside `community-site/` with the required starting milestone ready. Type each requested terminal command and press Enter.",
       "starterFiles": [
         {
           "path": "main.sh",
-          "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.\n",
+          "content": "# Work in the terminal; the starting repository state is ready.\n# Type each requested command and press Enter.\n",
           "language": "bash",
           "isEntry": true,
           "entry": true,
@@ -179,7 +184,7 @@
         },
         {
           "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 1\\n' > index.html\n",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"community-site\"\nmkdir -p -- \"community-site\"\nprintf '%s\\n' 'Cumulative Git practice project' > \"community-site/README.md\"\ngit -C \"community-site\" init -q -b main\ngit -C \"community-site\" config user.name \"ZoeSkoul Learner\"\ngit -C \"community-site\" config user.email \"learner@zoeskoul.local\"\ngit -C \"community-site\" add -- \"README.md\"\ngit -C \"community-site\" commit -q -m \"Start cumulative project\"\nprintf '%s\\n' 'Prepared practice change' >> \"community-site/README.md\"\ngit -C \"community-site\" add -- \"README.md\"\n",
           "language": "bash",
           "readOnly": true
         }
@@ -187,14 +192,14 @@
       "solutionFiles": [
         {
           "path": "main.sh",
-          "content": "bash .zoeskoul/setup.sh\ngit diff\n",
+          "content": "git restore --staged practice.txt\n",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
           "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 1\\n' > index.html\n",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"community-site\"\nmkdir -p -- \"community-site\"\nprintf '%s\\n' 'Cumulative Git practice project' > \"community-site/README.md\"\ngit -C \"community-site\" init -q -b main\ngit -C \"community-site\" config user.name \"ZoeSkoul Learner\"\ngit -C \"community-site\" config user.email \"learner@zoeskoul.local\"\ngit -C \"community-site\" add -- \"README.md\"\ngit -C \"community-site\" commit -q -m \"Start cumulative project\"\nprintf '%s\\n' 'Prepared practice change' >> \"community-site/README.md\"\ngit -C \"community-site\" add -- \"README.md\"\n",
           "language": "bash",
           "readOnly": true
         }
@@ -202,10 +207,7 @@
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
-          },
-          {
-            "pattern": "^git\\s+diff$"
+            "pattern": "^git\\s+restore\\s+--staged\\s+practice\\.txt$"
           }
         ],
         "forbiddenCommands": [
@@ -216,6 +218,7 @@
         ]
       },
       "gitExpectations": {
+        "repositoryPath": "community-site",
         "repositoryInitialized": true,
         "currentBranch": "main"
       }
@@ -223,25 +226,25 @@
     {
       "id": "try-inspect-unstaged-changes-with-diff-sketch1",
       "kind": "code_input",
-      "title": "Try It: Review Changes in style.css",
-      "prompt": "You've updated the color scheme in `style.css`. Use `git diff` to review the changes before staging them. Type the command and press Enter to see the differences.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
-      "hint": "Read the Git task \"Try It: Review Changes in style.css\" and identify the repository state you need to create.",
+      "title": "Inspect a single file's unstaged edits",
+      "prompt": "You're in the community-site repository. Two files were edited but not staged. Use the terminal to view only the unstaged changes for about.md: type git diff about.md and press Enter. Confirm the output shows the added and removed lines from about.md.\n\nThe terminal opens inside `community-site/` with the required starting milestone ready. Type each requested terminal command and press Enter.",
+      "hint": "Run git diff <filename>; replace <filename> with the relative pathname about.md and press Enter.",
       "help": {
-        "concept": "This Git exercise checks the repository state produced by \"Try It: Review Changes in style.css\".",
-        "hint_1": "Use git status before and after each small change so you can see what moved between the working tree, staging area, and history.",
-        "hint_2": "Match the requested file names, branch names, and commit purpose before clicking Check Answer."
+        "concept": "git diff <path> limits the displayed unstaged changes to only that file, reducing noise from other edits.",
+        "hint_1": "Type git diff about.md and press Enter; check for lines beginning with + and - in the output.",
+        "hint_2": "If the diff output contains the changed lines for about.md and no other filenames, you used the file-limited diff correctly."
       },
-      "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.",
-      "solutionCode": "bash .zoeskoul/setup.sh\ngit diff",
+      "starterCode": "# Work in the terminal; the starting repository state is ready.\n# Type each requested command and press Enter.",
+      "solutionCode": "git restore --staged practice.txt",
       "fixedLanguage": "bash",
       "recipeType": "shell_task",
       "mode": "terminal_workspace",
       "entryFilePath": "main.sh",
-      "instructions": "You've updated the color scheme in `style.css`. Use `git diff` to review the changes before staging them. Type the command and press Enter to see the differences.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+      "instructions": "You're in the community-site repository. Two files were edited but not staged. Use the terminal to view only the unstaged changes for about.md: type git diff about.md and press Enter. Confirm the output shows the added and removed lines from about.md.\n\nThe terminal opens inside `community-site/` with the required starting milestone ready. Type each requested terminal command and press Enter.",
       "starterFiles": [
         {
           "path": "main.sh",
-          "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.\n",
+          "content": "# Work in the terminal; the starting repository state is ready.\n# Type each requested command and press Enter.\n",
           "language": "bash",
           "isEntry": true,
           "entry": true,
@@ -249,7 +252,7 @@
         },
         {
           "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 2\\n' > style.css\n",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"community-site\"\nmkdir -p -- \"community-site\"\nprintf '%s\\n' 'Cumulative Git practice project' > \"community-site/README.md\"\ngit -C \"community-site\" init -q -b main\ngit -C \"community-site\" config user.name \"ZoeSkoul Learner\"\ngit -C \"community-site\" config user.email \"learner@zoeskoul.local\"\ngit -C \"community-site\" add -- \"README.md\"\ngit -C \"community-site\" commit -q -m \"Start cumulative project\"\nprintf '%s\\n' 'Prepared practice change' >> \"community-site/README.md\"\ngit -C \"community-site\" add -- \"README.md\"\n",
           "language": "bash",
           "readOnly": true
         }
@@ -257,14 +260,14 @@
       "solutionFiles": [
         {
           "path": "main.sh",
-          "content": "bash .zoeskoul/setup.sh\ngit diff\n",
+          "content": "git restore --staged practice.txt\n",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
           "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 2\\n' > style.css\n",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"community-site\"\nmkdir -p -- \"community-site\"\nprintf '%s\\n' 'Cumulative Git practice project' > \"community-site/README.md\"\ngit -C \"community-site\" init -q -b main\ngit -C \"community-site\" config user.name \"ZoeSkoul Learner\"\ngit -C \"community-site\" config user.email \"learner@zoeskoul.local\"\ngit -C \"community-site\" add -- \"README.md\"\ngit -C \"community-site\" commit -q -m \"Start cumulative project\"\nprintf '%s\\n' 'Prepared practice change' >> \"community-site/README.md\"\ngit -C \"community-site\" add -- \"README.md\"\n",
           "language": "bash",
           "readOnly": true
         }
@@ -272,10 +275,7 @@
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
-          },
-          {
-            "pattern": "^git\\s+diff$"
+            "pattern": "^git\\s+restore\\s+--staged\\s+practice\\.txt$"
           }
         ],
         "forbiddenCommands": [
@@ -286,6 +286,7 @@
         ]
       },
       "gitExpectations": {
+        "repositoryPath": "community-site",
         "repositoryInitialized": true,
         "currentBranch": "main"
       }
@@ -293,25 +294,25 @@
     {
       "id": "try-inspect-unstaged-changes-with-diff-sketch2",
       "kind": "code_input",
-      "title": "Try It: Identify Unrelated Changes",
-      "prompt": "You've made changes to both `app.js` and `config.js`. Use `git diff` to identify unrelated changes that should not be staged together. Type the command and press Enter to see the differences.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
-      "hint": "Read the Git task \"Try It: Identify Unrelated Changes\" and identify the repository state you need to create.",
+      "title": "Read added and removed lines in a diff chunk",
+      "prompt": "You're in the community-site repository. Open the terminal, type git diff NEWS.md and press Enter to inspect the unstaged edits to NEWS.md. Look for `-` and `+` lines and the chunk header `@@` to locate the change.\n\nThe terminal opens inside `community-site/` with the required starting milestone ready. Type each requested terminal command and press Enter.",
+      "hint": "Run git diff NEWS.md and press Enter; look for the chunk header lines starting with @@ and for -/+ markers.",
       "help": {
-        "concept": "This Git exercise checks the repository state produced by \"Try It: Identify Unrelated Changes\".",
-        "hint_1": "Use git status before and after each small change so you can see what moved between the working tree, staging area, and history.",
-        "hint_2": "Match the requested file names, branch names, and commit purpose before clicking Check Answer."
+        "concept": "A diff chunk shows the location (`@@`) and uses `-` for removed lines and `+` for added lines so you can read exact text edits at a glance.",
+        "hint_1": "Type git diff NEWS.md and press Enter; confirm the output contains both - and + lines within an @@ chunk header.",
+        "hint_2": "If the output shows @@ and the +/- lines for NEWS.md, you've inspected the added and removed lines successfully."
       },
-      "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.",
-      "solutionCode": "bash .zoeskoul/setup.sh\ngit diff",
+      "starterCode": "# Work in the terminal; the starting repository state is ready.\n# Type each requested command and press Enter.",
+      "solutionCode": "git restore --staged practice.txt",
       "fixedLanguage": "bash",
       "recipeType": "shell_task",
       "mode": "terminal_workspace",
       "entryFilePath": "main.sh",
-      "instructions": "You've made changes to both `app.js` and `config.js`. Use `git diff` to identify unrelated changes that should not be staged together. Type the command and press Enter to see the differences.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+      "instructions": "You're in the community-site repository. Open the terminal, type git diff NEWS.md and press Enter to inspect the unstaged edits to NEWS.md. Look for `-` and `+` lines and the chunk header `@@` to locate the change.\n\nThe terminal opens inside `community-site/` with the required starting milestone ready. Type each requested terminal command and press Enter.",
       "starterFiles": [
         {
           "path": "main.sh",
-          "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.\n",
+          "content": "# Work in the terminal; the starting repository state is ready.\n# Type each requested command and press Enter.\n",
           "language": "bash",
           "isEntry": true,
           "entry": true,
@@ -319,7 +320,7 @@
         },
         {
           "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 3\\n' > app.js\n",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"community-site\"\nmkdir -p -- \"community-site\"\nprintf '%s\\n' 'Cumulative Git practice project' > \"community-site/README.md\"\ngit -C \"community-site\" init -q -b main\ngit -C \"community-site\" config user.name \"ZoeSkoul Learner\"\ngit -C \"community-site\" config user.email \"learner@zoeskoul.local\"\ngit -C \"community-site\" add -- \"README.md\"\ngit -C \"community-site\" commit -q -m \"Start cumulative project\"\nprintf '%s\\n' 'Prepared practice change' >> \"community-site/README.md\"\ngit -C \"community-site\" add -- \"README.md\"\n",
           "language": "bash",
           "readOnly": true
         }
@@ -327,14 +328,14 @@
       "solutionFiles": [
         {
           "path": "main.sh",
-          "content": "bash .zoeskoul/setup.sh\ngit diff\n",
+          "content": "git restore --staged practice.txt\n",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
           "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 3\\n' > app.js\n",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"community-site\"\nmkdir -p -- \"community-site\"\nprintf '%s\\n' 'Cumulative Git practice project' > \"community-site/README.md\"\ngit -C \"community-site\" init -q -b main\ngit -C \"community-site\" config user.name \"ZoeSkoul Learner\"\ngit -C \"community-site\" config user.email \"learner@zoeskoul.local\"\ngit -C \"community-site\" add -- \"README.md\"\ngit -C \"community-site\" commit -q -m \"Start cumulative project\"\nprintf '%s\\n' 'Prepared practice change' >> \"community-site/README.md\"\ngit -C \"community-site\" add -- \"README.md\"\n",
           "language": "bash",
           "readOnly": true
         }
@@ -342,10 +343,7 @@
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
-          },
-          {
-            "pattern": "^git\\s+diff$"
+            "pattern": "^git\\s+restore\\s+--staged\\s+practice\\.txt$"
           }
         ],
         "forbiddenCommands": [
@@ -356,6 +354,7 @@
         ]
       },
       "gitExpectations": {
+        "repositoryPath": "community-site",
         "repositoryInitialized": true,
         "currentBranch": "main"
       }
@@ -363,25 +362,25 @@
     {
       "id": "try-inspect-unstaged-changes-with-diff-sketch3",
       "kind": "code_input",
-      "title": "Try It: Use git diff in a Collaborative Project",
-      "prompt": "In a collaborative project, you've modified `README.md`. Use `git diff` to ensure your changes are clear and focused before committing. Type the command and press Enter to see the differences.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
-      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "title": "Stage one file and inspect staged changes",
+      "prompt": "You're in the community-site repository. One file should be staged and then inspected. In the terminal, type the commands (each followed by Enter):\n\n1) git add CONTRIBUTORS.txt\n2) git diff --staged\n\nConfirm that git diff --staged shows only the staged file's changes and that git diff (without arguments) still shows other unstaged edits.\n\nThe terminal opens inside `community-site/` with the required starting milestone ready. Type each requested terminal command and press Enter.",
+      "hint": "Read the Git task \"Stage one file and inspect staged changes\" and identify the repository state you need to create.",
       "help": {
-        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+        "concept": "This Git exercise checks the repository state produced by \"Stage one file and inspect staged changes\".",
+        "hint_1": "Use git status before and after each small change so you can see what moved between the working tree, staging area, and history.",
+        "hint_2": "Match the requested file names, branch names, and commit purpose before clicking Check Answer."
       },
-      "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.",
-      "solutionCode": "bash .zoeskoul/setup.sh\ngit diff",
+      "starterCode": "# Work in the terminal; the starting repository state is ready.\n# Type each requested command and press Enter.",
+      "solutionCode": "git restore --staged practice.txt",
       "fixedLanguage": "bash",
       "recipeType": "shell_task",
       "mode": "terminal_workspace",
       "entryFilePath": "main.sh",
-      "instructions": "In a collaborative project, you've modified `README.md`. Use `git diff` to ensure your changes are clear and focused before committing. Type the command and press Enter to see the differences.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter, then type each requested Git command and press Enter.",
+      "instructions": "You're in the community-site repository. One file should be staged and then inspected. In the terminal, type the commands (each followed by Enter):\n\n1) git add CONTRIBUTORS.txt\n2) git diff --staged\n\nConfirm that git diff --staged shows only the staged file's changes and that git diff (without arguments) still shows other unstaged edits.\n\nThe terminal opens inside `community-site/` with the required starting milestone ready. Type each requested terminal command and press Enter.",
       "starterFiles": [
         {
           "path": "main.sh",
-          "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then complete the requested Git task.\n",
+          "content": "# Work in the terminal; the starting repository state is ready.\n# Type each requested command and press Enter.\n",
           "language": "bash",
           "isEntry": true,
           "entry": true,
@@ -389,7 +388,7 @@
         },
         {
           "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 4\\n' > README.md\n",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"community-site\"\nmkdir -p -- \"community-site\"\nprintf '%s\\n' 'Cumulative Git practice project' > \"community-site/README.md\"\ngit -C \"community-site\" init -q -b main\ngit -C \"community-site\" config user.name \"ZoeSkoul Learner\"\ngit -C \"community-site\" config user.email \"learner@zoeskoul.local\"\ngit -C \"community-site\" add -- \"README.md\"\ngit -C \"community-site\" commit -q -m \"Start cumulative project\"\nprintf '%s\\n' 'Prepared practice change' >> \"community-site/README.md\"\ngit -C \"community-site\" add -- \"README.md\"\n",
           "language": "bash",
           "readOnly": true
         }
@@ -397,14 +396,14 @@
       "solutionFiles": [
         {
           "path": "main.sh",
-          "content": "bash .zoeskoul/setup.sh\ngit diff\n",
+          "content": "git restore --staged practice.txt\n",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
           "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 4\\n' > README.md\n",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"community-site\"\nmkdir -p -- \"community-site\"\nprintf '%s\\n' 'Cumulative Git practice project' > \"community-site/README.md\"\ngit -C \"community-site\" init -q -b main\ngit -C \"community-site\" config user.name \"ZoeSkoul Learner\"\ngit -C \"community-site\" config user.email \"learner@zoeskoul.local\"\ngit -C \"community-site\" add -- \"README.md\"\ngit -C \"community-site\" commit -q -m \"Start cumulative project\"\nprintf '%s\\n' 'Prepared practice change' >> \"community-site/README.md\"\ngit -C \"community-site\" add -- \"README.md\"\n",
           "language": "bash",
           "readOnly": true
         }
@@ -412,10 +411,7 @@
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
-          },
-          {
-            "pattern": "^git\\s+diff$"
+            "pattern": "^git\\s+restore\\s+--staged\\s+practice\\.txt$"
           }
         ],
         "forbiddenCommands": [
@@ -426,6 +422,7 @@
         ]
       },
       "gitExpectations": {
+        "repositoryPath": "community-site",
         "repositoryInitialized": true,
         "currentBranch": "main"
       }

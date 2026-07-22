@@ -9,6 +9,7 @@ export type TopicValue = TopicSlug | "all";
 export type TopicOption = {
   id: "all" | TopicSlug;
   label: string;
+  titleKey?: string | null;
   meta?: any;
 };
 
@@ -27,10 +28,14 @@ export async function fetchTopicOptions(
 
   const topics = Array.isArray(data?.topics) ? data.topics : [];
   return [
-    { id: "all" as const, label: "All topics" },
+    { id: "all" as const, label: "All topics", titleKey: null },
     ...topics.map((t: any) => ({
       id: String(t.slug) as TopicSlug,
       label: String(t.label ?? t.slug),
+      titleKey:
+        typeof t.titleKey === "string" && t.titleKey.trim()
+          ? t.titleKey
+          : null,
       meta: t.meta,
     })),
   ];
@@ -38,14 +43,14 @@ export async function fetchTopicOptions(
 
 export function useTopicOptions(subjectSlug: string, moduleSlug: string) {
   const [topicOptionsFixed, setTopicOptionsFixed] = useState<TopicOption[]>([
-    { id: "all", label: "All topics" },
+    { id: "all", label: "All topics", titleKey: null },
   ]);
 
   useEffect(() => {
     const ctrl = new AbortController();
     fetchTopicOptions(subjectSlug, moduleSlug, ctrl.signal)
       .then(setTopicOptionsFixed)
-      .catch(() => setTopicOptionsFixed([{ id: "all", label: "All topics" }]));
+      .catch(() => setTopicOptionsFixed([{ id: "all", label: "All topics", titleKey: null }]));
     return () => ctrl.abort();
   }, [subjectSlug, moduleSlug]);
 

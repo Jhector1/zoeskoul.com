@@ -78,6 +78,7 @@ import { resolveTopicStageRuntimeDefaults } from "../runtime/topicStageRuntimeDe
 import { shouldUseWorkspaceCodeSurface } from "@/components/practice/workspaceExercise";
 import { resolveRightRailIdeConfig } from "./rightRailIdeConfig";
 import { buildBillingHref } from "@/lib/billing/moduleAccess";
+import { buildModulePracticeHref } from "@/lib/practice/experience/modulePracticeHref";
 import { clearReviewWorkspaceDrafts } from "@/components/tools/panes/reviewWorkspaceDrafts";
 import {
     cardHasAuthoredExerciseSurface,
@@ -1450,7 +1451,7 @@ export function useReviewModuleController({
         },
     });
     const handleAssignmentClick = useCallback(async () => {
-        const returnToCurrentModule = `/${locale}/${ROUTES.learningPath(
+        const returnToCurrentModule = `/${locale}${ROUTES.learningPath(
             encodeURIComponent(subjectSlug),
             encodeURIComponent(moduleSlug),
         )}`;
@@ -1504,13 +1505,13 @@ export function useReviewModuleController({
         });
         beginRouteTransition();
         router.push(
-            `/${ROUTES.practicePath(
-                encodeURIComponent(subjectSlug),
-                encodeURIComponent(practiceModuleSlug),
-            )}` +
-            `?sessionId=${encodeURIComponent(newSid)}` +
-            `&type=assignment` +
-            `&returnTo=${encodeURIComponent(returnToCurrentModule)}`,
+            buildModulePracticeHref({
+                subjectSlug,
+                moduleSlug: practiceModuleSlug,
+                sessionId: newSid,
+                mode: "assignment",
+                returnTo: returnToCurrentModule,
+            }),
         );
     }, [
         locale,

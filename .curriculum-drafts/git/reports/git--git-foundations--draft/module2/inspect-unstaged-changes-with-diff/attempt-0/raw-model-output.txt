@@ -1,1 +1,549 @@
-{"title":"Inspect Unstaged Changes with git diff","summary":"Read line-level differences before deciding what belongs in the next commit.","minutes":20,"sketchBlocks":[{"id":"sketch0","cardTitle":"Understanding git diff","title":"Inspecting Unstaged Changes with git diff","bodyMarkdown":"The `git diff` command is a powerful tool that allows you to see the changes in your working directory that have not yet been staged for commit. This command helps you understand what modifications have been made to your files, so you can decide what to include in your next commit.\n\nWorked example:\nImagine you have a file called `index.html` in your project. You've made some changes to this file, but you're not sure what exactly has been modified. By running `git diff`, you can see a line-by-line comparison of the changes. The output will show lines that have been added, removed, or modified, helping you to review your work before staging it.\n\nFor instance, if you added a new paragraph to `index.html`, `git diff` will highlight this addition with a `+` sign at the beginning of the line. If you removed a line, it will be marked with a `-` sign. This visual representation makes it easy to spot changes and ensure that only the intended modifications are included in your commit."},{"id":"sketch1","cardTitle":"Reading the Diff Output","title":"Interpreting the Diff Output","bodyMarkdown":"When you run `git diff`, the output can seem overwhelming at first, but it's structured to help you understand the changes clearly. Each change is prefixed with a header that indicates the file being compared. The lines starting with `---` and `+++` show the old and new file versions, respectively.\n\nThe actual changes are displayed with `-` and `+` signs. Lines with a `-` indicate content that was removed, while lines with a `+` show new content. This format allows you to quickly identify what has been added or removed.\n\nConsider a scenario where you have a file `style.css` and you've changed the color scheme. The `git diff` output will show the old color values with `-` and the new ones with `+`. This helps you verify that the changes align with your design intentions before committing."},{"id":"sketch2","cardTitle":"Avoiding Unintended Changes","title":"Spotting Unrelated Edits","bodyMarkdown":"One of the key benefits of using `git diff` is the ability to spot unrelated changes that might have been made unintentionally. This is crucial for maintaining a clean commit history.\n\nImagine you're working on a feature in `app.js`, but you also made some experimental changes to `config.js` that you don't want to commit yet. By running `git diff`, you can see all the changes across your files. This allows you to selectively stage only the changes related to your feature, leaving the experimental changes for later.\n\nThis practice helps in creating focused commits that are easier to understand and review, ensuring that your commit history remains clear and meaningful."},{"id":"sketch3","cardTitle":"Practical Use of git diff","title":"Using git diff in Your Workflow","bodyMarkdown":"Incorporating `git diff` into your workflow can significantly enhance your development process. It allows you to review changes before staging them, ensuring that only the necessary modifications are included in your commits.\n\nFor example, if you're working on a collaborative project, using `git diff` before committing can help you communicate your changes more effectively to your team. It ensures that your commits are precise and only contain relevant changes, making code reviews smoother and more efficient.\n\nBy regularly using `git diff`, you develop a habit of reviewing your work, which leads to better code quality and a more organized project history."}],"quizDraft":[{"id":"try-inspect-unstaged-changes-with-diff-sketch0","kind":"code_input","title":"Try It: Inspect Changes in index.html","prompt":"You have made changes to `index.html` in your project. Use `git diff` to inspect the unstaged changes. Type the command and press Enter to see the differences.","hint":"Use the `git diff` command to view changes in the working directory.","help":{"concept":"The `git diff` command shows changes in the working directory that are not yet staged.","hint_1":"Ensure you are in the correct directory where `index.html` is located.","hint_2":"Type `git diff` and press Enter to see the changes."},"options":null,"correctOptionIds":null,"tokens":null,"correctOrder":null,"template":null,"choices":null,"correctValue":null,"starterCode":"# Type your command below\n","solutionCode":"git diff\n","entryFilePath":"main.sh","starterFiles":[{"path":"main.sh","content":"# Type your command below\n","language":"bash","isEntry":true,"entry":true,"readOnly":false}],"solutionFiles":[{"path":"main.sh","content":"git diff\n","language":"bash","isEntry":true,"entry":true,"readOnly":false}],"sqlFileOrder":null,"tests":null,"files":null,"semanticChecks":null,"datasetId":null,"recipeType":"sql_query","checkSql":null},{"id":"try-inspect-unstaged-changes-with-diff-sketch1","kind":"code_input","title":"Try It: Review Changes in style.css","prompt":"You've updated the color scheme in `style.css`. Use `git diff` to review the changes before staging them. Type the command and press Enter to see the differences.","hint":"Use `git diff` to see the changes in `style.css`.","help":{"concept":"`git diff` helps you review changes before staging them.","hint_1":"Navigate to the directory containing `style.css`.","hint_2":"Execute `git diff` to view the changes."},"options":null,"correctOptionIds":null,"tokens":null,"correctOrder":null,"template":null,"choices":null,"correctValue":null,"starterCode":"# Type your command below\n","solutionCode":"git diff\n","entryFilePath":"main.sh","starterFiles":[{"path":"main.sh","content":"# Type your command below\n","language":"bash","isEntry":true,"entry":true,"readOnly":false}],"solutionFiles":[{"path":"main.sh","content":"git diff\n","language":"bash","isEntry":true,"entry":true,"readOnly":false}],"sqlFileOrder":null,"tests":null,"files":null,"semanticChecks":null,"datasetId":null,"recipeType":"sql_query","checkSql":null},{"id":"try-inspect-unstaged-changes-with-diff-sketch2","kind":"code_input","title":"Try It: Identify Unrelated Changes","prompt":"You've made changes to both `app.js` and `config.js`. Use `git diff` to identify unrelated changes that should not be staged together. Type the command and press Enter to see the differences.","hint":"Use `git diff` to see changes across multiple files.","help":{"concept":"`git diff` shows changes in all files, helping you identify unrelated edits.","hint_1":"Ensure both files are in the working directory.","hint_2":"Run `git diff` to view changes in both files."},"options":null,"correctOptionIds":null,"tokens":null,"correctOrder":null,"template":null,"choices":null,"correctValue":null,"starterCode":"# Type your command below\n","solutionCode":"git diff\n","entryFilePath":"main.sh","starterFiles":[{"path":"main.sh","content":"# Type your command below\n","language":"bash","isEntry":true,"entry":true,"readOnly":false}],"solutionFiles":[{"path":"main.sh","content":"git diff\n","language":"bash","isEntry":true,"entry":true,"readOnly":false}],"sqlFileOrder":null,"tests":null,"files":null,"semanticChecks":null,"datasetId":null,"recipeType":"sql_query","checkSql":null},{"id":"try-inspect-unstaged-changes-with-diff-sketch3","kind":"code_input","title":"Try It: Use git diff in a Collaborative Project","prompt":"In a collaborative project, you've modified `README.md`. Use `git diff` to ensure your changes are clear and focused before committing. Type the command and press Enter to see the differences.","hint":"Use `git diff` to review changes in `README.md`.","help":{"concept":"`git diff` helps ensure changes are clear before committing.","hint_1":"Navigate to the directory with `README.md`.","hint_2":"Execute `git diff` to review the changes."},"options":null,"correctOptionIds":null,"tokens":null,"correctOrder":null,"template":null,"choices":null,"correctValue":null,"starterCode":"# Type your command below\n","solutionCode":"git diff\n","entryFilePath":"main.sh","starterFiles":[{"path":"main.sh","content":"# Type your command below\n","language":"bash","isEntry":true,"entry":true,"readOnly":false}],"solutionFiles":[{"path":"main.sh","content":"git diff\n","language":"bash","isEntry":true,"entry":true,"readOnly":false}],"sqlFileOrder":null,"tests":null,"files":null,"semanticChecks":null,"datasetId":null,"recipeType":"sql_query","checkSql":null},{"id":"multi-choice-1","kind":"multi_choice","title":"Understanding git diff","prompt":"What does the `git diff` command do?","hint":"Think about what changes `git diff` shows.","help":{"concept":"`git diff` shows changes in the working directory that are not yet staged.","hint_1":"`git diff` compares the working directory with the staging area.","hint_2":"It highlights changes that are not yet staged for commit."},"options":["Shows the commit history","Displays changes in the working directory not yet staged","Lists all branches","Shows the current branch"],"correctOptionIds":["b"] ,"tokens":null,"correctOrder":null,"template":null,"choices":null,"correctValue":null,"starterCode":null,"solutionCode":null,"entryFilePath":null,"starterFiles":null,"solutionFiles":null,"sqlFileOrder":null,"tests":null,"files":null,"semanticChecks":null,"datasetId":null,"recipeType":null,"checkSql":null},{"id":"multi-choice-2","kind":"multi_choice","title":"Interpreting Diff Output","prompt":"Which symbol in `git diff` output indicates a line has been added?","hint":"Look for the symbol that represents additions.","help":{"concept":"In `git diff`, a `+` sign indicates an added line.","hint_1":"The `+` sign is used for additions.","hint_2":"Added lines are prefixed with `+`."},"options":["-","+","*","/"],"correctOptionIds":["b"],"tokens":null,"correctOrder":null,"template":null,"choices":null,"correctValue":null,"starterCode":null,"solutionCode":null,"entryFilePath":null,"starterFiles":null,"solutionFiles":null,"sqlFileOrder":null,"tests":null,"files":null,"semanticChecks":null,"datasetId":null,"recipeType":null,"checkSql":null},{"id":"fill-blank-choice-1","kind":"fill_blank_choice","title":"Symbol for Removed Lines","prompt":"In `git diff`, lines that have been removed are indicated by the symbol `[blank1]`.","hint":"Think about the symbol used for deletions.","help":{"concept":"In `git diff`, a `-` sign indicates a removed line.","hint_1":"The `-` sign is used for deletions.","hint_2":"Removed lines are prefixed with `-`."},"options":null,"correctOptionIds":null,"tokens":null,"correctOrder":null,"template":"In `git diff`, lines that have been removed are indicated by the symbol `[blank1]`.","choices":["-","+","*","/"],"correctValue":"-","starterCode":null,"solutionCode":null,"entryFilePath":null,"starterFiles":null,"solutionFiles":null,"sqlFileOrder":null,"tests":null,"files":null,"semanticChecks":null,"datasetId":null,"recipeType":null,"checkSql":null},{"id":"fill-blank-choice-2","kind":"fill_blank_choice","title":"Purpose of git diff","prompt":"The primary purpose of `git diff` is to show changes in the [blank1] that are not yet staged.","hint":"Consider where `git diff` looks for changes.","help":{"concept":"`git diff` shows changes in the working directory that are not yet staged.","hint_1":"`git diff` compares the working directory with the staging area.","hint_2":"It highlights changes that are not yet staged for commit."},"options":null,"correctOptionIds":null,"tokens":null,"correctOrder":null,"template":"The primary purpose of `git diff` is to show changes in the [blank1] that are not yet staged.","choices":["working directory","staging area","commit history","remote repository"],"correctValue":"working directory","starterCode":null,"solutionCode":null,"entryFilePath":null,"starterFiles":null,"solutionFiles":null,"sqlFileOrder":null,"tests":null,"files":null,"semanticChecks":null,"datasetId":null,"recipeType":null,"checkSql":null},{"id":"single-choice-1","kind":"single_choice","title":"Using git diff","prompt":"When should you use `git diff`?","hint":"Think about when you need to review changes.","help":{"concept":"Use `git diff` to review changes before staging them.","hint_1":"It's useful before staging changes.","hint_2":"Use it to see what has changed in your files."},"options":["After committing changes","Before staging changes","After pushing to remote","Before creating a branch"],"correctOptionIds":["b"],"tokens":null,"correctOrder":null,"template":null,"choices":null,"correctValue":null,"starterCode":null,"solutionCode":null,"entryFilePath":null,"starterFiles":null,"solutionFiles":null,"sqlFileOrder":null,"tests":null,"files":null,"semanticChecks":null,"datasetId":null,"recipeType":null,"checkSql":null},{"id":"drag-reorder-1","kind":"drag_reorder","title":"Steps to Use git diff","prompt":"Arrange the steps to use `git diff` to inspect changes.","hint":"Think about the sequence of actions to inspect changes.","help":{"concept":"Using `git diff` involves checking the working directory for changes.","hint_1":"Start by navigating to the correct directory.","hint_2":"Then, run `git diff` to see the changes."},"options":null,"correctOptionIds":null,"tokens":["Navigate to the project directory","Run `git diff`","Review the output"],"correctOrder":["Navigate to the project directory","Run `git diff`","Review the output"],"template":null,"choices":null,"correctValue":null,"starterCode":null,"solutionCode":null,"entryFilePath":null,"starterFiles":null,"solutionFiles":null,"sqlFileOrder":null,"tests":null,"files":null,"semanticChecks":null,"datasetId":null,"recipeType":null,"checkSql":null}],"projectDraft":null}
+{
+  "title": "Inspect Exact Project Changes",
+  "summary": "Continue community-site and inspect supplied text edits before deciding what belongs in history.",
+  "minutes": 20,
+  "sketchBlocks": [
+    {
+      "id": "sketch-0-intro-diff",
+      "cardTitle": "See unstaged edits",
+      "title": "Inspect unstaged edits with git diff",
+      "bodyMarkdown": "Worked example: Suppose you have a small project and you changed two files but haven't staged anything yet. Running git diff shows the exact lines added and removed in your working tree. Example output (simplified):\n\n```\ndiff --git a/team.txt b/team.txt\nindex e69de29..a1b2c3d 100644\n--- a/team.txt\n+++ b/team.txt\n@@ -0,0 +1,2 @@\n+Alice — Community lead\n+Ben — Outreach coordinator\ndiff --git a/contact.md b/contact.md\nindex e69de29..d4e5f6a 100644\n--- a/contact.md\n+++ b/contact.md\n@@ -1,3 +1,4 @@\n-Email: info@example.org\n+Email: hello@example.org\n+Phone: (555) 123-4567\n```\n\nInterpretation: lines beginning with + are additions; lines with - are removals. The file header lines (diff --git ...) show which files changed. Use git diff before staging so you know exactly which text will be included if you stage everything."
+    },
+    {
+      "id": "sketch-1-file-limited-diff",
+      "cardTitle": "Diff a single file",
+      "title": "Limit inspection to one file",
+      "bodyMarkdown": "Worked example: When several files changed, prefer limiting inspection to the file you care about. Use git diff <path> to see only that file's hunks. Example command and output:\n\n```\n$ git diff docs/privacy.txt\ndiff --git a/docs/privacy.txt b/docs/privacy.txt\nindex 9f8e7d6..7c6b5a4 100644\n--- a/docs/privacy.txt\n+++ b/docs/privacy.txt\n@@ -10,7 +10,7 @@ Data we collect:\n- We collect email addresses for newsletters.\n+ We collect email addresses for announcements and support.\n```\n\nWhy this helps: focusing on one file keeps you from being distracted by unrelated edits and makes the staging decision precise."
+    },
+    {
+      "id": "sketch-2_reading_hunks",
+      "cardTitle": "Read added and removed lines",
+      "title": "Understand hunks and context lines",
+      "bodyMarkdown": "Worked example: A diff hunk shows a few lines of surrounding context so you can see the change in place. Example hunk:\n\n```\n@@ -2,3 +2,4 @@ Welcome to our site.\n-Please send feedback to team@old.org\n+Please send feedback to team@new.org\n+We now also accept in-person volunteers.\n```\n\nHere the @@ header shows the approximate location in the file; the - line is what was removed and the + lines are the new content. Context lines (no prefix) help you verify the surrounding text so you don't accidentally stage unrelated edits."
+    },
+    {
+      "id": "sketch-3_staged_vs_unstaged",
+      "cardTitle": "Staged vs unstaged view",
+      "title": "Compare unstaged diffs with staged diffs",
+      "bodyMarkdown": "Worked example: After you stage a file with git add, git diff shows only unstaged changes while git diff --staged (aka --cached) shows what is ready to commit. Example command sequence and conceptual output:\n\n```\n$ git add docs/guide.md\n$ git diff            # shows remaining unstaged edits in other files\n$ git diff --staged  # shows the snapshot of docs/guide.md that will be committed\n```\n\nCommon mistake: running git add and then assuming everything changed will be committed. Always run git diff and git diff --staged as appropriate to confirm the exact snapshot that will become history."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "try-inspect-unstaged-changes-with-diff-sketch0",
+      "kind": "code_input",
+      "title": "View all unstaged edits with git diff",
+      "prompt": "You are in the community-site repository. Two files have unstaged text edits: community-site/index.html and community-site/ABOUT.md. Type git diff and press Enter to view the unstaged changes across the repository. (Use the terminal; type the command and press Enter.) Then click Check Answer.",
+      "hint": "Run git diff with no extra arguments to see all unstaged edits.",
+      "help": {
+        "concept": "git diff with no path shows unstaged changes across the working tree so you can read every added (+) and removed (-) line before staging.",
+        "hint_1": "Run exactly: git diff",
+        "hint_2": "Type git diff and press Enter; look for lines that start with + or - under the file headers."
+      },
+      "options": null,
+      "correctOptionIds": null,
+      "tokens": null,
+      "correctOrder": null,
+      "template": null,
+      "choices": null,
+      "correctValue": null,
+      "starterCode": "# Open the terminal and type the command shown below (type the command and press Enter):\n# git diff\n",
+      "solutionCode": "git diff\n",
+      "entryFilePath": null,
+      "starterFiles": [
+        {
+          "path": "community-site/index.html",
+          "content": "<!doctype html>\n<html>\n<head><meta charset=\"utf-8\"><title>Community</title></head>\n<body>\n<h1>Welcome</h1>\n-<p>Join us for coffee every Tuesday.</p>\n+<p>Join us for coffee every Wednesday at 7pm.</p>\n</body>\n</html>\n"
+        ,
+          "language": "text"
+        ,
+          "isEntry": false
+        ,
+          "entry": false
+        ,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/ABOUT.md",
+          "content": "# About\n\n-Our mission is to help.\n+Our mission is to help neighbors connect and share time.\n",
+          "language": "markdown",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "community-site/index.html",
+          "content": "<!doctype html>\n<html>\n<head><meta charset=\"utf-8\"><title>Community</title></head>\n<body>\n<h1>Welcome</h1>\n<p>Join us for coffee every Wednesday at 7pm.</p>\n</body>\n</html>\n",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        ,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/ABOUT.md",
+          "content": "# About\n\nOur mission is to help neighbors connect and share time.\n",
+          "language": "markdown",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        }
+      ],
+      "sqlFileOrder": null,
+      "tests": null,
+      "files": null,
+      "semanticChecks": null,
+      "datasetId": null,
+      "recipeType": "sql_query",
+      "checkSql": null
+      },
+    {
+      "id": "try-inspect-unstaged-changes-with-diff-sketch1",
+      "kind": "code_input",
+      "title": "Inspect a single file with git diff <path>",
+      "prompt": "A handful of files were edited. You only want to inspect community-site/styles/site.css. From the repository root, type the command that shows the unstaged diff for that single file and press Enter. Then click Check Answer.",
+      "hint": "Use git diff followed by the file path.",
+      "help": {
+        "concept": "git diff <path> restricts the displayed hunks to just that file, helping you focus on one purpose at a time.",
+        "hint_1": "Run: git diff community-site/styles/site.css",
+        "hint_2": "Type git diff community-site/styles/site.css and press Enter; look for the file header for site.css."
+      },
+      "options": null,
+      "correctOptionIds": null,
+      "tokens": null,
+      "correctOrder": null,
+      "template": null,
+      "choices": null,
+      "correctValue": null,
+      "starterCode": "# Type the command below (type the command and press Enter):\n# git diff community-site/styles/site.css\n",
+      "solutionCode": "git diff community-site/styles/site.css\n",
+      "entryFilePath": null,
+      "starterFiles": [
+        {
+          "path": "community-site/styles/site.css",
+          "content": "body { font-family: Arial; }\n-/* .hero background-color removed */\n-.hero { background-color: #eee; }\n+.hero { background-color: #f7f7f7; }\n",
+          "language": "css",
+          "isEntry": false,
+          "entry": false
+        ,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/notes.md",
+          "content": "Minor notes about deployment.\n",
+          "language": "markdown",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "community-site/styles/site.css",
+          "content": "body { font-family: Arial; }\n/* .hero background-color removed */\n.hero { background-color: #f7f7f7; }\n",
+          "language": "css",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/notes.md",
+          "content": "Minor notes about deployment.\n",
+          "language": "markdown",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        }
+      ],
+      "sqlFileOrder": null,
+      "tests": null,
+      "files": null,
+      "semanticChecks": null,
+      "datasetId": null,
+      "recipeType": "sql_query",
+      "checkSql": null
+    },
+    {
+      "id": "try-inspect-unstaged-changes-with-diff-sketch2",
+      "kind": "code_input",
+      "title": "Read added and removed lines for a file",
+      "prompt": "Inspect only the community-site/CONTRIBUTING.md unstaged edits to read what was added and what was removed. From the repository root, type the appropriate git diff command for that file and press Enter. Then click Check Answer.",
+      "hint": "Use git diff with the target file path.",
+      "help": {
+        "concept": "git diff <file> shows the additions (+) and removals (-) so you can parse exactly what text changed in that file.",
+        "hint_1": "Run: git diff community-site/CONTRIBUTING.md",
+        "hint_2": "Look for - lines (removed) and + lines (added) in the diff output for that file."
+      },
+      "options": null,
+      "correctOptionIds": null,
+      "tokens": null,
+      "correctOrder": null,
+      "template": null,
+      "choices": null,
+      "correctValue": null,
+      "starterCode": "# Type the command below (type the command and press Enter):\n# git diff community-site/CONTRIBUTING.md\n",
+      "solutionCode": "git diff community-site/CONTRIBUTING.md\n",
+      "entryFilePath": null,
+      "starterFiles": [
+        {
+          "path": "community-site/CONTRIBUTING.md",
+          "content": "# Contributing\n\n-Please email patches to old@repo.org\n+Please open a pull request with a clear description of your change.\n+We welcome short onboarding notes for new volunteers.\n",
+          "language": "markdown",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "community-site/CONTRIBUTING.md",
+          "content": "# Contributing\n\nPlease open a pull request with a clear description of your change.\nWe welcome short onboarding notes for new volunteers.\n",
+          "language": "markdown",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        }
+      ],
+      "sqlFileOrder": null,
+      "tests": null,
+      "files": null,
+      "semanticChecks": null,
+      "datasetId": null,
+      "recipeType": "sql_query",
+      "checkSql": null
+    },
+    {
+      "id": "try-inspect-unstaged-changes-with-diff-sketch3",
+      "kind": "code_input",
+      "title": "Confirm unstaged vs staged diffs",
+      "prompt": "In community-site there are three changed files. One file (community-site/TEAM.txt) has already been staged for commit. Show only the remaining unstaged edits by running the command that displays unstaged differences. Type the command and press Enter. (Hint: do not show staged diffs.) Then click Check Answer.",
+      "hint": "Run git diff with no flags to see the unstaged edits; git diff --staged would show the staged snapshot instead.",
+      "help": {
+        "concept": "git diff (no flags) shows what remains unstaged, while git diff --staged shows what is staged and ready to commit. Use them both to confirm exact commit contents.",
+        "hint_1": "Run: git diff",
+        "hint_2": "Make sure you use git diff (not git diff --staged) so the output excludes TEAM.txt which has been staged."
+      },
+      "options": null,
+      "correctOptionIds": null,
+      "tokens": null,
+      "correctOrder": null,
+      "template": null,
+      "choices": null,
+      "correctValue": null,
+      "starterCode": "# Type the command below (type the command and press Enter):\n# git diff\n",
+      "solutionCode": "git diff\n",
+      "entryFilePath": null,
+      "starterFiles": [
+        {
+          "path": "community-site/TEAM.txt",
+          "content": "Alice — lead\nBob — coordinator\n",
+          "language": "text",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/README.md",
+          "content": "# Community Site\n\n-Old tagline\n+New tagline: Neighbors helping neighbors.\n",
+          "language": "markdown",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/TODO.md",
+          "content": "- Update contact info\n+ Update contact info and hours\n",
+          "language": "markdown",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "community-site/TEAM.txt",
+          "content": "Alice — lead\nBob — coordinator\n",
+          "language": "text",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/README.md",
+          "content": "# Community Site\n\nNew tagline: Neighbors helping neighbors.\n",
+          "language": "markdown",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/TODO.md",
+          "content": "- Update contact info and hours\n",
+          "language": "markdown",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        }
+      ],
+      "sqlFileOrder": null,
+      "tests": null,
+      "files": null,
+      "semanticChecks": null,
+      "datasetId": null,
+      "recipeType": "sql_query",
+      "checkSql": null
+    },
+    {
+      "id": "mc-1-diff-purpose",
+      "kind": "multi_choice",
+      "title": "When to use git diff",
+      "prompt": "Which of the following are good reasons to run git diff before staging or committing? (Choose all that apply.)",
+      "hint": "Think about verifying exact text changes and avoiding unrelated edits in history.",
+      "help": {
+        "concept": "git diff reveals exact added/removed lines so you can confirm that staged commits capture one clear purpose and exclude accidental edits.",
+        "hint_1": "Consider preventing unrelated edits from entering a commit and verifying the text your commit would contain.",
+        "hint_2": "Select all choices that describe verifying change contents or preventing accidental staging."
+      },
+      "options": [
+        "To verify exactly which lines were added or removed before including them in history.",
+        "To confirm that a staged snapshot contains only the intended changes.",
+        "To permanently delete a file from history.",
+        "To avoid adding unrelated whitespace or debug text into a commit message."
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ]
+    ,
+      "tokens": null,
+      "correctOrder": null,
+      "template": null,
+      "choices": null,
+      "correctValue": null
+    ,
+      "starterCode": null,
+      "solutionCode": null
+    ,
+      "entryFilePath": null
+    ,
+      "starterFiles": null
+    ,
+      "solutionFiles": null
+    ,
+      "sqlFileOrder": null
+    ,
+      "tests": null
+    ,
+      "files": null
+    ,
+      "semanticChecks": null
+    ,
+      "datasetId": null
+    ,
+      "recipeType": null
+    ,
+      "checkSql": null
+    },
+    {
+      "id": "mc-2-diff-output",
+      "kind": "multi_choice",
+      "title": "Interpret diff symbols",
+      "prompt": "In a git diff hunk, what do lines starting with + and - mean? (Choose all that apply.)",
+      "hint": "Focus on which symbol means addition vs removal.",
+      "help": {
+        "concept": "In diffs, + lines are new additions and - lines are removed; context lines have no prefix.",
+        "hint_1": "Remember + adds, - removes.",
+        "hint_2": "Choose both statements that correctly describe + and -."
+      },
+      "options": [
+        "A + line indicates content that was added in the working tree compared to HEAD.",
+        "A - line indicates content that will be added when committing.",
+        "A - line indicates content that was removed from the working tree compared to HEAD.",
+        "A + line indicates context and is unchanged."
+      ],
+      "correctOptionIds": [
+        "a",
+        "c"
+      ],
+      "tokens": null,
+      "correctOrder": null,
+      "template": null,
+      "choices": null,
+      "correctValue": null,
+      "starterCode": null,
+      "solutionCode": null,
+      "entryFilePath": null,
+      "starterFiles": null,
+      "solutionFiles": null,
+      "sqlFileOrder": null,
+      "tests": null,
+      "files": null,
+      "semanticChecks": null,
+      "datasetId": null,
+      "recipeType": null,
+      "checkSql": null
+    },
+    {
+      "id": "fb-1-which-diff",
+      "kind": "fill_blank_choice",
+      "title": "Choose the command to see staged snapshot",
+      "prompt": "To see only what is staged and will be in the next commit, use [blank1].",
+      "hint": "There's a --staged (or --cached) option.",
+      "help": {
+        "concept": "git diff --staged (also known as --cached) shows the snapshot that's staged and ready to commit, distinct from unstaged working-tree diffs.",
+        "hint_1": "The command is git diff with an option that shows staged changes.",
+        "hint_2": "The correct answer is git diff --staged"
+      },
+      "options": null,
+      "correctOptionIds": null,
+      "tokens": null,
+      "correctOrder": null,
+      "template": "git diff [blank1]",
+      "choices": [
+        "--staged",
+        "--name-only",
+        "--stat",
+        "--no-index"
+      ],
+      "correctValue": "--staged",
+      "starterCode": null,
+      "solutionCode": null,
+      "entryFilePath": null,
+      "starterFiles": null,
+      "solutionFiles": null,
+      "sqlFileOrder": null,
+      "tests": null,
+      "files": null,
+      "semanticChecks": null,
+      "datasetId": null,
+      "recipeType": null,
+      "checkSql": null
+    },
+    {
+      "id": "fb-2-file-diff-flag",
+      "kind": "fill_blank_choice",
+      "title": "Command to view one file's unstaged diff",
+      "prompt": "To inspect only the file community-site/README.md, run: git diff [blank1]",
+      "hint": "Fill in the blank with how to name the file path on the command line.",
+      "help": {
+        "concept": "git diff accepts a path argument to limit the displayed hunks to that file path.",
+        "hint_1": "Put the relative path to the file in the blank.",
+        "hint_2": "The correct answer is community-site/README.md"
+      },
+      "options": null,
+      "correctOptionIds": null,
+      "tokens": null,
+      "correctOrder": null,
+      "template": "git diff [blank1]",
+      "choices": [
+        "community-site/README.md",
+        "README.md",
+        "/community-site/README.md",
+        "\"community-site README.md\""
+      ],
+      "correctValue": "community-site/README.md",
+      "starterCode": null,
+      "solutionCode": null,
+      "entryFilePath": null,
+      "starterFiles": null,
+      "solutionFiles": null,
+      "sqlFileOrder": null,
+      "tests": null,
+      "files": null,
+      "semanticChecks": null,
+      "datasetId": null,
+      "recipeType": null,
+      "checkSql": null
+    },
+    {
+      "id": "dr-1-diff-order",
+      "kind": "drag_reorder",
+      "title": "Correct sequence to inspect and prepare a focused commit",
+      "prompt": "Put these steps in the correct order to inspect an unstaged change and prepare a focused commit:",
+      "hint": "Think: inspect, stage only the wanted file, then confirm staged snapshot.",
+      "help": {
+        "concept": "Best practice: inspect unstaged edits with git diff, stage only the file(s) that belong together, then inspect the staged snapshot with git diff --staged before committing.",
+        "hint_1": "First inspect unstaged edits, then stage targeted files, then inspect staged snapshot.",
+        "hint_2": "The final step before commit is to check git diff --staged to confirm what's ready to commit."
+      },
+      "options": null,
+      "correctOptionIds": null,
+      "tokens": [
+        "Run git diff to read unstaged changes",
+        "Stage the targeted file(s) with git add",
+        "Run git diff --staged to view the snapshot to be committed",
+        "Write a focused commit message and git commit"
+      ],
+      "correctOrder": [
+        "Run git diff to read unstaged changes",
+        "Stage the targeted file(s) with git add",
+        "Run git diff --staged to view the snapshot to be committed",
+        "Write a focused commit message and git commit"
+      ],
+      "template": null,
+      "choices": null,
+      "correctValue": null,
+      "starterCode": null,
+      "solutionCode": null,
+      "entryFilePath": null,
+      "starterFiles": null,
+      "solutionFiles": null,
+      "sqlFileOrder": null,
+      "tests": null,
+      "files": null,
+      "semanticChecks": null,
+      "datasetId": null,
+      "recipeType": null,
+      "checkSql": null
+    },
+    {
+      "id": "sc-1-unstaged-vs-staged",
+      "kind": "single_choice",
+      "title": "What does git diff show by default?",
+      "prompt": "By default, what does git diff (with no options) show?",
+      "hint": "Consider whether git diff shows staged changes or unstaged working-tree edits.",
+      "help": {
+        "concept": "git diff (no flags) displays differences between the working tree and the index (unstaged edits). It does not show what is already staged for commit.",
+        "hint_1": "It compares working tree vs index (unstaged changes).",
+        "hint_2": "Pick the option that says unstaged working-tree edits, not staged snapshots."
+      },
+      "options": [
+        "Only the changes that are staged and ready to commit.",
+        "All unstaged working-tree edits compared to the index (what you've changed but not staged).",
+        "The entire commit history with one-line summaries.",
+        "A list of untracked files in the working directory."
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "tokens": null,
+      "correctOrder": null,
+      "template": null,
+      "choices": null,
+      "correctValue": null,
+      "starterCode": null,
+      "solutionCode": null,
+      "entryFilePath": null,
+      "starterFiles": null,
+      "solutionFiles": null,
+      "sqlFileOrder": null,
+      "tests": null,
+      "files": null,
+      "semanticChecks": null,
+      "datasetId": null,
+      "recipeType": null,
+      "checkSql": null
+    }
+  ],
+  "projectDraft": {
+    "title": "Focused two-change history (community-site)",
+    "stepIds": [
+      "try-inspect-unstaged-changes-with-diff-sketch0",
+      "try-inspect-unstaged-changes-with-diff-sketch1",
+      "try-inspect-unstaged-changes-with-diff-sketch2",
+      "try-inspect-unstaged-changes-with-diff-sketch3"
+    ]
+  }
+}

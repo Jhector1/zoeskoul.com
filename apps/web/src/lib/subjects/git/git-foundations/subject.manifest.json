@@ -15,7 +15,7 @@
     "meta": {
       "curriculum": {
         "plannedModuleCount": 4,
-        "isTerminalRelease": false,
+        "isTerminalRelease": true,
         "moreComingMessageKey": "subjects.git-foundations.moreComingSoon"
       },
       "completionPolicy": {
@@ -26,7 +26,7 @@
       "versioning": {
         "family": "git-foundations",
         "version": 1,
-        "status": "draft",
+        "status": "active",
         "defaultForNewEnrollments": false,
         "supersedes": null,
         "supersededBy": null
@@ -76,7 +76,7 @@
         }
       },
       "meta": {
-        "estimatedMinutes": 119,
+        "estimatedMinutes": 111,
         "prereqKeys": [],
         "outcomeKeys": [
           "modules.git-foundations.git-foundations-module-1-start-tracking.outcomes.0",
@@ -137,10 +137,7 @@
             "module": 1,
             "weeksKey": "sections.git-foundations.git-foundations-module-1-start-tracking.git-foundations-git-foundations-section-1-module-project.weeks",
             "bulletKeys": [
-              "sections.git-foundations.git-foundations-module-1-start-tracking.git-foundations-git-foundations-section-1-module-project.bullets.0",
-              "sections.git-foundations.git-foundations-module-1-start-tracking.git-foundations-git-foundations-section-1-module-project.bullets.1",
-              "sections.git-foundations.git-foundations-module-1-start-tracking.git-foundations-git-foundations-section-1-module-project.bullets.2",
-              "sections.git-foundations.git-foundations-module-1-start-tracking.git-foundations-git-foundations-section-1-module-project.bullets.3"
+              "sections.git-foundations.git-foundations-module-1-start-tracking.git-foundations-git-foundations-section-1-module-project.bullets.0"
             ]
           },
           "serviceDefaults": {
@@ -159,7 +156,7 @@
             }
           },
           "topics": [
-            "module-1-field-notes-repository"
+            "module-1-volunteer-project-history"
           ]
         }
       ]
@@ -225,8 +222,7 @@
             "bulletKeys": [
               "sections.git-foundations.git-foundations-module-2-meaningful-history.git-foundations-git-foundations-section-2-history-workflow.bullets.0",
               "sections.git-foundations.git-foundations-module-2-meaningful-history.git-foundations-git-foundations-section-2-history-workflow.bullets.1",
-              "sections.git-foundations.git-foundations-module-2-meaningful-history.git-foundations-git-foundations-section-2-history-workflow.bullets.2",
-              "sections.git-foundations.git-foundations-module-2-meaningful-history.git-foundations-git-foundations-section-2-history-workflow.bullets.3"
+              "sections.git-foundations.git-foundations-module-2-meaningful-history.git-foundations-git-foundations-section-2-history-workflow.bullets.2"
             ]
           },
           "serviceDefaults": {
@@ -260,10 +256,7 @@
             "module": 2,
             "weeksKey": "sections.git-foundations.git-foundations-module-2-meaningful-history.git-foundations-git-foundations-section-2-module-project.weeks",
             "bulletKeys": [
-              "sections.git-foundations.git-foundations-module-2-meaningful-history.git-foundations-git-foundations-section-2-module-project.bullets.0",
-              "sections.git-foundations.git-foundations-module-2-meaningful-history.git-foundations-git-foundations-section-2-module-project.bullets.1",
-              "sections.git-foundations.git-foundations-module-2-meaningful-history.git-foundations-git-foundations-section-2-module-project.bullets.2",
-              "sections.git-foundations.git-foundations-module-2-meaningful-history.git-foundations-git-foundations-section-2-module-project.bullets.3"
+              "sections.git-foundations.git-foundations-module-2-meaningful-history.git-foundations-git-foundations-section-2-module-project.bullets.0"
             ]
           },
           "serviceDefaults": {
@@ -282,7 +275,7 @@
             }
           },
           "topics": [
-            "module-2-community-website-history"
+            "module-2-volunteer-project-history"
           ]
         }
       ]
@@ -348,8 +341,7 @@
             "bulletKeys": [
               "sections.git-foundations.git-foundations-module-3-manage-tracked-files.git-foundations-git-foundations-section-3-safe-file-management.bullets.0",
               "sections.git-foundations.git-foundations-module-3-manage-tracked-files.git-foundations-git-foundations-section-3-safe-file-management.bullets.1",
-              "sections.git-foundations.git-foundations-module-3-manage-tracked-files.git-foundations-git-foundations-section-3-safe-file-management.bullets.2",
-              "sections.git-foundations.git-foundations-module-3-manage-tracked-files.git-foundations-git-foundations-section-3-safe-file-management.bullets.3"
+              "sections.git-foundations.git-foundations-module-3-manage-tracked-files.git-foundations-git-foundations-section-3-safe-file-management.bullets.2"
             ]
           },
           "serviceDefaults": {
@@ -383,10 +375,7 @@
             "module": 3,
             "weeksKey": "sections.git-foundations.git-foundations-module-3-manage-tracked-files.git-foundations-git-foundations-section-3-module-project.weeks",
             "bulletKeys": [
-              "sections.git-foundations.git-foundations-module-3-manage-tracked-files.git-foundations-git-foundations-section-3-module-project.bullets.0",
-              "sections.git-foundations.git-foundations-module-3-manage-tracked-files.git-foundations-git-foundations-section-3-module-project.bullets.1",
-              "sections.git-foundations.git-foundations-module-3-manage-tracked-files.git-foundations-git-foundations-section-3-module-project.bullets.2",
-              "sections.git-foundations.git-foundations-module-3-manage-tracked-files.git-foundations-git-foundations-section-3-module-project.bullets.3"
+              "sections.git-foundations.git-foundations-module-3-manage-tracked-files.git-foundations-git-foundations-section-3-module-project.bullets.0"
             ]
           },
           "serviceDefaults": {
@@ -405,7 +394,7 @@
             }
           },
           "topics": [
-            "module-3-clean-release-snapshot"
+            "module-3-volunteer-project-maintenance"
           ]
         }
       ]
@@ -471,10 +460,7 @@
             "module": 4,
             "weeksKey": "sections.git-foundations.git-foundations-module-4-final-capstone.git-foundations-git-foundations-section-4-final-capstone.weeks",
             "bulletKeys": [
-              "sections.git-foundations.git-foundations-module-4-final-capstone.git-foundations-git-foundations-section-4-final-capstone.bullets.0",
-              "sections.git-foundations.git-foundations-module-4-final-capstone.git-foundations-git-foundations-section-4-final-capstone.bullets.1",
-              "sections.git-foundations.git-foundations-module-4-final-capstone.git-foundations-git-foundations-section-4-final-capstone.bullets.2",
-              "sections.git-foundations.git-foundations-module-4-final-capstone.git-foundations-git-foundations-section-4-final-capstone.bullets.3"
+              "sections.git-foundations.git-foundations-module-4-final-capstone.git-foundations-git-foundations-section-4-final-capstone.bullets.0"
             ]
           },
           "serviceDefaults": {

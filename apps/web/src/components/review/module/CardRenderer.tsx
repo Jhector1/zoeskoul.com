@@ -18,6 +18,7 @@ import type { SavedSketchState } from "@/components/sketches/subjects/types";
 import { useTaggedT } from "@/i18n/tagged";
 import { resolveDeepTagged } from "@/i18n/resolveDeepTagged";
 import { FlowNavMode } from "@/components/review/navigation/FlowNavigator";
+import { shouldShowExpandedLearnerTitles } from "@/lib/config/learnerUiFlags";
 import { useReviewRuntimeStore } from "@/components/review/module/runtime/reviewRuntimeStore";
 import { buildQuizBlockRuntimeDefaultsProps } from "@/components/review/module/runtime/cardRuntimeDefaults";
 import type { QuizResetTarget } from "@/components/review/module/actions";
@@ -94,6 +95,7 @@ export default function CardRenderer(props: {
     const reviewT = useTranslations("review.cardRenderer");
     const ui = useTaggedT("cardUi");
     const tt = useTaggedT();
+    const showExpandedTitles = shouldShowExpandedLearnerTitles();
 
     const {
         card,
@@ -163,6 +165,7 @@ export default function CardRenderer(props: {
 
     const orderBase = cardIndex * 10000;
     const cardTitle = tt.resolve(card.title ?? null, {}, card.title ?? "");
+    const visibleCardTitle = showExpandedTitles ? cardTitle : null;
 
     const kindLabel = (kind: AssessmentDisplayKind) => {
         if (kind === "quiz") return ui.t("kinds.quiz", {}, "quiz");
@@ -231,7 +234,9 @@ export default function CardRenderer(props: {
 
         return (
             <div className="mt-4 rounded-xl border border-emerald-200 bg-emerald-50/40 p-3 dark:border-emerald-400/20 dark:bg-emerald-950/20">
-                <div className="ui-title-sm">{title || reviewT("tryItYourself")}</div>
+                {showExpandedTitles ? (
+                    <div className="ui-title-sm">{title || reviewT("tryItYourself")}</div>
+                ) : null}
 
                 {process.env.NODE_ENV !== "production" ? (
                     <textarea
@@ -349,7 +354,7 @@ export default function CardRenderer(props: {
 
         return (
             <div className={wrapCls}>
-                <CardTitle title={cardTitle} />
+                <CardTitle title={visibleCardTitle} />
 
                 {showGate ? <GateBanner text={gateText} /> : null}
 
@@ -404,7 +409,7 @@ export default function CardRenderer(props: {
 
         return (
             <div className={wrapCls}>
-                <CardTitle title={cardTitle} />
+                <CardTitle title={visibleCardTitle} />
                 <MathMarkdown className="ui-math [&_.katex]:text-inherit" content={md} />
                 {renderEmbeddedTryIt()}
                 <div className="mt-3 flex justify-end">
@@ -482,7 +487,7 @@ export default function CardRenderer(props: {
 
         return (
             <div className={wrapCls}>
-                <CardTitle title={cardTitle} />
+                <CardTitle title={visibleCardTitle} />
 
                 <div className="mt-3 ui-surface-muted p-3">
                     {isFile ? (

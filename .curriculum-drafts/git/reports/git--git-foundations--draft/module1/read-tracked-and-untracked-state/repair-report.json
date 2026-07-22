@@ -2,39 +2,32 @@
   "topicId": "read-tracked-and-untracked-state",
   "repairs": [
     {
-      "code": "GIT_MULTILINE_EXAMPLE_EXPLANATION_ADDED",
-      "category": "other",
-      "severity": "low",
-      "field": "sketchBlocks.sketch0.bodyMarkdown",
-      "message": "Added a step-by-step explanation for the multi-line Git example in \"sketch0\"."
-    },
-    {
-      "code": "GIT_CODE_INPUT_WORKSPACE_REBUILT",
+      "code": "GIT_TRY_IT_KIND_PROMOTED",
       "category": "other",
       "severity": "low",
       "field": "quizDraft.try-read-tracked-and-untracked-state-sketch0",
-      "message": "Rebuilt generated Git exercise \"try-read-tracked-and-untracked-state-sketch0\" as a self-contained terminal workspace with deterministic setup and grading evidence."
+      "message": "Converted generated Try It \"try-read-tracked-and-untracked-state-sketch0\" into the Git code_input required by plannedExerciseCounts."
     },
     {
-      "code": "GIT_CODE_INPUT_WORKSPACE_REBUILT",
+      "code": "GIT_TRY_IT_KIND_PROMOTED",
       "category": "other",
       "severity": "low",
       "field": "quizDraft.try-read-tracked-and-untracked-state-sketch1",
-      "message": "Rebuilt generated Git exercise \"try-read-tracked-and-untracked-state-sketch1\" as a self-contained terminal workspace with deterministic setup and grading evidence."
+      "message": "Converted generated Try It \"try-read-tracked-and-untracked-state-sketch1\" into the Git code_input required by plannedExerciseCounts."
     },
     {
-      "code": "GIT_CODE_INPUT_WORKSPACE_REBUILT",
+      "code": "GIT_TRY_IT_KIND_PROMOTED",
       "category": "other",
       "severity": "low",
       "field": "quizDraft.try-read-tracked-and-untracked-state-sketch2",
-      "message": "Rebuilt generated Git exercise \"try-read-tracked-and-untracked-state-sketch2\" as a self-contained terminal workspace with deterministic setup and grading evidence."
+      "message": "Converted generated Try It \"try-read-tracked-and-untracked-state-sketch2\" into the Git code_input required by plannedExerciseCounts."
     },
     {
-      "code": "GIT_CODE_INPUT_WORKSPACE_REBUILT",
+      "code": "GIT_TRY_IT_KIND_PROMOTED",
       "category": "other",
       "severity": "low",
       "field": "quizDraft.try-read-tracked-and-untracked-state-sketch3",
-      "message": "Rebuilt generated Git exercise \"try-read-tracked-and-untracked-state-sketch3\" as a self-contained terminal workspace with deterministic setup and grading evidence."
+      "message": "Converted generated Try It \"try-read-tracked-and-untracked-state-sketch3\" into the Git code_input required by plannedExerciseCounts."
     }
   ]
 }

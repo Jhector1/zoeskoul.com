@@ -1,4 +1,5 @@
 import type { PracticeExperienceMode } from "./types";
+import { getPracticeExperienceRuntimePolicy } from "./routePolicy";
 
 export type PracticeExerciseSurface = "embedded" | "tools";
 
@@ -14,24 +15,7 @@ export function resolvePracticeExerciseSurface(args: {
   mode: PracticeExperienceMode;
   exerciseKind?: string | null;
 }): PracticeExerciseSurface {
-  const { mode, exerciseKind } = args;
-
-  if (mode === "assignment" || mode === "onboarding_trial") {
-    return "embedded";
-  }
-
-  if (
-    mode === "daily_five" ||
-    mode === "public_challenge" ||
-    mode === "standard" ||
-    mode === "practice"
-  ) {
-    // The practice page keeps the review shell for every question. The tools
-    // rail binds only when the loaded exercise supports a code workspace.
-    return "tools";
-  }
-
-  return exerciseKind === "code_input" ? "tools" : "embedded";
+  return getPracticeExperienceRuntimePolicy(args.mode).workspace;
 }
 
 export function usesPracticeToolsSurface(args: {

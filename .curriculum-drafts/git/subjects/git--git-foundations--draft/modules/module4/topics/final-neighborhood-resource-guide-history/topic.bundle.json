@@ -158,28 +158,6 @@
         }
       ],
       "terminalExpectations": {
-        "requiredCommands": [
-          {
-            "pattern": "^git\\s+init\\s+-b\\s+main$",
-            "message": "@:topics.git--git-foundations--draft.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch0.terminalExpectations.requiredCommands.0.message"
-          },
-          {
-            "pattern": "^git\\s+config\\s+--local\\s+user\\.name\\s+.+$",
-            "message": "@:topics.git--git-foundations--draft.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch0.terminalExpectations.requiredCommands.1.message"
-          },
-          {
-            "pattern": "^git\\s+config\\s+--local\\s+user\\.email\\s+.+$",
-            "message": "@:topics.git--git-foundations--draft.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch0.terminalExpectations.requiredCommands.2.message"
-          },
-          {
-            "pattern": "^git\\s+add\\s+.+$",
-            "message": "@:topics.git--git-foundations--draft.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch0.terminalExpectations.requiredCommands.3.message"
-          },
-          {
-            "pattern": "^git\\s+commit\\s+-m\\s+.+$",
-            "message": "@:topics.git--git-foundations--draft.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch0.terminalExpectations.requiredCommands.4.message"
-          }
-        ],
         "forbiddenCommands": [
           {
             "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
@@ -370,20 +348,6 @@
         }
       ],
       "terminalExpectations": {
-        "requiredCommands": [
-          {
-            "pattern": "^git\\s+diff\\s+--\\s+services\\.txt$",
-            "message": "@:topics.git--git-foundations--draft.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch1.terminalExpectations.requiredCommands.0.message"
-          },
-          {
-            "pattern": "^git\\s+add\\s+services\\.txt$",
-            "message": "@:topics.git--git-foundations--draft.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch1.terminalExpectations.requiredCommands.1.message"
-          },
-          {
-            "pattern": "^git\\s+commit\\s+-m\\s+.+$",
-            "message": "@:topics.git--git-foundations--draft.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch1.terminalExpectations.requiredCommands.2.message"
-          }
-        ],
         "forbiddenCommands": [
           {
             "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
@@ -574,20 +538,6 @@
         }
       ],
       "terminalExpectations": {
-        "requiredCommands": [
-          {
-            "pattern": "^git\\s+diff\\s+--\\s+hours\\.txt$",
-            "message": "@:topics.git--git-foundations--draft.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch2.terminalExpectations.requiredCommands.0.message"
-          },
-          {
-            "pattern": "^git\\s+add\\s+hours\\.txt$",
-            "message": "@:topics.git--git-foundations--draft.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch2.terminalExpectations.requiredCommands.1.message"
-          },
-          {
-            "pattern": "^git\\s+commit\\s+-m\\s+.+$",
-            "message": "@:topics.git--git-foundations--draft.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch2.terminalExpectations.requiredCommands.2.message"
-          }
-        ],
         "forbiddenCommands": [
           {
             "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
@@ -778,32 +728,6 @@
         }
       ],
       "terminalExpectations": {
-        "requiredCommands": [
-          {
-            "pattern": "^git\\s+add\\s+README\\.md$",
-            "message": "@:topics.git--git-foundations--draft.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch3.terminalExpectations.requiredCommands.0.message"
-          },
-          {
-            "pattern": "^git\\s+mv\\s+services\\.txt\\s+community-services\\.txt$",
-            "message": "@:topics.git--git-foundations--draft.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch3.terminalExpectations.requiredCommands.1.message"
-          },
-          {
-            "pattern": "^git\\s+rm\\s+old-contacts\\.txt$",
-            "message": "@:topics.git--git-foundations--draft.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch3.terminalExpectations.requiredCommands.2.message"
-          },
-          {
-            "pattern": "^git\\s+restore\\s+--staged\\s+README\\.md$",
-            "message": "@:topics.git--git-foundations--draft.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch3.terminalExpectations.requiredCommands.3.message"
-          },
-          {
-            "pattern": "^git\\s+restore\\s+README\\.md$",
-            "message": "@:topics.git--git-foundations--draft.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch3.terminalExpectations.requiredCommands.4.message"
-          },
-          {
-            "pattern": "^git\\s+diff\\s+--staged\\s+--name-status$",
-            "message": "@:topics.git--git-foundations--draft.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch3.terminalExpectations.requiredCommands.5.message"
-          }
-        ],
         "forbiddenCommands": [
           {
             "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
@@ -989,16 +913,6 @@
         }
       ],
       "terminalExpectations": {
-        "requiredCommands": [
-          {
-            "pattern": "^git\\s+status\\s+--short\\s+--ignored$",
-            "message": "@:topics.git--git-foundations--draft.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch4.terminalExpectations.requiredCommands.0.message"
-          },
-          {
-            "pattern": "^git\\s+add\\s+\\.gitignore$",
-            "message": "@:topics.git--git-foundations--draft.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch4.terminalExpectations.requiredCommands.1.message"
-          }
-        ],
         "forbiddenCommands": [
           {
             "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
@@ -1179,24 +1093,6 @@
         }
       ],
       "terminalExpectations": {
-        "requiredCommands": [
-          {
-            "pattern": "^git\\s+commit\\s+-m\\s+.+$",
-            "message": "@:topics.git--git-foundations--draft.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch5.terminalExpectations.requiredCommands.0.message"
-          },
-          {
-            "pattern": "^git\\s+log\\s+--oneline$",
-            "message": "@:topics.git--git-foundations--draft.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch5.terminalExpectations.requiredCommands.1.message"
-          },
-          {
-            "pattern": "^git\\s+show\\s+--stat\\s+--oneline\\s+HEAD$",
-            "message": "@:topics.git--git-foundations--draft.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch5.terminalExpectations.requiredCommands.2.message"
-          },
-          {
-            "pattern": "^git\\s+status\\s+--short$",
-            "message": "@:topics.git--git-foundations--draft.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch5.terminalExpectations.requiredCommands.3.message"
-          }
-        ],
         "forbiddenCommands": [
           {
             "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",

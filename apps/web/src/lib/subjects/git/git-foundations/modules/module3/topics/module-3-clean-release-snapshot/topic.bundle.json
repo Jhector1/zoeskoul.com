@@ -161,7 +161,7 @@
             "message": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch0.terminalExpectations.requiredCommands.1.message"
           },
           {
-            "pattern": "^git\\s+commit\\s+-m\\s+.+$",
+            "pattern": "^git\\s+commit\\s+-m\\s*.+$",
             "message": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch0.terminalExpectations.requiredCommands.2.message"
           }
         ],
@@ -1130,7 +1130,7 @@
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^git\\s+commit\\s+-m\\s+.+$",
+            "pattern": "^git\\s+commit\\s+-m\\s*.+$",
             "message": "@:topics.git-foundations.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch5.terminalExpectations.requiredCommands.0.message"
           },
           {

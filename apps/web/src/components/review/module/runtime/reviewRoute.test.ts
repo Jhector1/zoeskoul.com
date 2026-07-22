@@ -144,6 +144,82 @@ describe("resolveReviewRouteTarget", () => {
         });
     });
 
+    it("round-trips a project step when its route id differs from its exercise key", () => {
+        const topic = {
+            id: "commit-a-prepared-snapshot",
+            label: "Topic",
+            cards: [
+                {
+                    type: "project",
+                    id: "project",
+                    spec: {
+                        mode: "project",
+                        subject: "git-foundations",
+                        steps: [
+                            {
+                                id: "record-the-volunteer-snapshot",
+                                topic: "commit-a-prepared-snapshot",
+                                exerciseKey: "commit-prepared-two-file-snapshot",
+                            },
+                        ],
+                    },
+                },
+            ],
+            meta: {
+                rawManifest: {
+                    topicId: "commit-a-prepared-snapshot",
+                    exercises: [
+                        {
+                            id: "commit-prepared-two-file-snapshot",
+                            kind: "code_input",
+                        },
+                    ],
+                },
+            },
+        };
+        const routeModule = {
+            id: "git-foundations-module-1-start-tracking",
+            title: "Start tracking",
+            startPracticeSectionSlug: "repository-basics",
+            topics: [topic],
+            sections: [
+                {
+                    id: "repository-basics",
+                    slug: "repository-basics",
+                    title: "Repository basics",
+                    order: 1,
+                    topics: [topic],
+                },
+            ],
+        } as any;
+
+        const built = buildReviewExerciseRouteTarget({
+            mod: routeModule,
+            topicId: "commit-a-prepared-snapshot",
+            cardId: "project",
+            exerciseId: "commit-prepared-two-file-snapshot",
+            subjectSlug: "git-foundations",
+            moduleSlug: "git-foundations-module-1-start-tracking",
+        });
+
+        expect(built).toMatchObject({
+            exerciseId: "commit-prepared-two-file-snapshot",
+            targetSlug: "record-the-volunteer-snapshot",
+        });
+
+        const resolved = resolveReviewRouteTarget({
+            mod: routeModule,
+            subjectSlug: "git-foundations",
+            moduleSlug: "git-foundations-module-1-start-tracking",
+            route: built,
+        });
+
+        expect(resolved).toMatchObject({
+            exerciseId: "commit-prepared-two-file-snapshot",
+            targetSlug: "record-the-volunteer-snapshot",
+        });
+    });
+
     it("resolves legacy numbered project exercise aliases against the compiled topic manifest", () => {
         const manifestWithNumberedAliases = {
             topicId: "using-imports-and-helper-files",

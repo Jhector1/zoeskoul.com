@@ -1,87 +1,86 @@
 {
-  "title": "Working Tree, Staging Area, and History",
-  "summary": "Follow one file from an ordinary edit through the staging area into a committed snapshot.",
+  "title": "Record the First Community Site Snapshot",
+  "summary": "Carry the staged community-site proposal into its first commit, then inspect the new history entry and confirm the working tree is clean.",
   "minutes": 20,
   "sketchBlocks": [
     {
-      "id": "working-tree-intro",
-      "title": "The Working Tree Explained",
-      "bodyMarkdown": "The working tree is the directory where you make changes to your files. It's the place where you can freely edit, add, or remove files before deciding to track them with Git. When you modify a file, it exists in the working tree until you stage it for a commit.\n\nWorked example: Imagine you have a project folder with a file named `notes.txt`. You open this file and add some new information. At this point, the changes are only in your working tree. You can check the status of your working tree using the command:\n\n```bash\ngit status\n```\n\nThis command will show you which files have been modified but not yet staged for commit. It's a crucial step to ensure you know what changes are pending before you move them to the staging area."
+      "id": "sketch0",
+      "title": "Initialize community-site and set a repo-local identity",
+      "bodyMarkdown": "Worked example: Start from an ordinary folder and give Git a local identity before you make any commits. A local identity keeps this repository's commits attributable without changing your global Git settings.\n\nExample scenario (different repo name so you won't accidentally repeat it in Try It):\n\n    mkdir meetup-site\n    cd meetup-site\n    git init -b main\n    git config --local user.name \"Alice Example\"\n    git config --local user.email \"alice@example.org\"\n\nWhy this matters: git init creates the .git database and the initial branch (main). Setting user.name and user.email with --local stores the identity in this repository only, which is a safe beginner practice when you share a machine. After these commands, git status shows the working tree and any untracked files; there is no commit yet, so history is empty.\n\nInterpreting the result: After git init -b main the repository exists and HEAD points at an empty main. The local config entries are visible with git config --local --list. A common beginner mistake is to forget --local and accidentally change global identity; using --local prevents that."
     },
     {
-      "id": "staging-area-intro",
-      "title": "The Role of the Staging Area",
-      "bodyMarkdown": "The staging area, also known as the index, is a space where you prepare changes for the next commit. It acts as a buffer between the working tree and the commit history. You add files to the staging area using the `git add` command.\n\nWorked example: Continuing with `notes.txt`, after editing, you decide to include these changes in your next commit. You stage the file by running:\n\n```bash\ngit add notes.txt\n```\n\nNow, `notes.txt` is in the staging area. You can verify this by running `git status` again, which will show the file as staged for commit. This step allows you to selectively choose which changes to include in your next commit, providing flexibility and control over your project history."
+      "id": "sketch1",
+      "title": "Move the proposal files into the staging area",
+      "bodyMarkdown": "Worked example: Staging collects specific files you want into a single focused snapshot. Use git add to stage files and git status --short to inspect exactly what's staged.\n\nExample scenario (uses different filenames than the real community-site Try It):\n\n    # in a different example folder\n    git add draft.txt plans/overview.md\n    git status --short\n\nWhy this matters: Staging lets you prepare only the relevant changes for a commit. The staged snapshot is what git commit records. If you forget to stage, the commit will be empty or only include files that were staged. The status output shows an \"A\" for added files in the index and \"??\" for untracked files in the working tree.\n\nInterpretation: A line that starts with \"A \" means the file is staged for addition. \" M\" (space then M) would mean the file is modified in the working tree but not staged."
     },
     {
-      "id": "commit-history-intro",
-      "title": "The Importance of Commit History",
-      "bodyMarkdown": "Commit history is the record of snapshots of your project at various points in time. Each commit represents a state of the project, capturing the changes made since the last commit.\n\nWorked example: Once `notes.txt` is staged, you can commit the changes with:\n\n```bash\ngit commit -m \"Add new information to notes\"\n```\n\nThis command creates a new commit in the history, with a message describing the changes. You can view the commit history using:\n\n```bash\ngit log --oneline\n```\n\nThis will show a list of commits, each with a unique identifier and message. The commit history is essential for tracking the evolution of your project and understanding what changes were made and why."
+      "id": "sketch2",
+      "title": "Commit the staged proposal with the required message",
+      "bodyMarkdown": "Worked example: Make a focused commit message that explains the snapshot. The example below intentionally uses a different commit message than the Try It so learners practice the same steps without reproducing this exact example.\n\nExample scenario (different commit message):\n\n    git commit -m \"Initial import of website drafts\"\n\nWhy this matters: The commit message becomes the concise human-readable history entry. For this topic, learners will be asked to use a specific message so that automated checks can verify the intended record. A common error is typing a message with a typo or extra punctuation; automated checks expect the exact message text used in the lesson.\n\nInterpretation: After the commit, git log --oneline shows a one-line summary. The working tree should become clean if everything staged was committed."
     },
     {
-      "id": "git-status-bridge",
-      "title": "Git Status as a Bridge",
-      "bodyMarkdown": "`git status` is a powerful command that acts as a bridge between the working tree, staging area, and commit history. It provides a summary of the current state of your project, showing which files are modified, staged, or untracked.\n\nWorked example: After making changes to multiple files, you can run:\n\n```bash\ngit status\n```\n\nThis command will display the status of each file, helping you decide what to stage or commit next. It's an essential tool for managing your workflow and ensuring that you don't accidentally commit unwanted changes."
+      "id": "sketch3",
+      "title": "Inspect the first history entry and verify no pending changes",
+      "bodyMarkdown": "Worked example: Use git log --oneline to read the concise history and git status --short (or git status) to check there are no staged or unstaged changes.\n\nExample commands (different repository example):\n\n    git log --oneline\n    git status --short\n\nWhy this matters: Reading history is a non-destructive operation — it shouldn't change repository state. Verifying the working tree is clean ensures your snapshot recorded exactly what's intended and you don't accidentally carry unrelated work forward. A common trap is running a command that modifies the index; for reading history you only need read-only commands.\n\nInterpretation: git log --oneline lists commits with the newest at top. git status --short returning no lines means the working tree and index are both clean."
     }
   ],
   "quizDraft": [
     {
-      "id": "single-choice-1",
+      "id": "qc-why-local-version-control",
       "kind": "single_choice",
-      "title": "Identify the Working Tree",
-      "prompt": "What is the working tree in Git?",
+      "title": "Why record local history instead of duplicate final folders?",
+      "prompt": "Which single answer best explains why a local Git history is better than copying the current folder to a new folder named with a date?",
       "options": [
-        "The directory where you make changes to files",
-        "The area where changes are staged for commit",
-        "The history of all commits",
-        "The remote repository"
+        "A dated folder is simpler and always preferable for backups.",
+        "Git records small, focused snapshots with messages and authors, making history inspectable without duplicating entire folders.",
+        "Copying folders creates a readable log that Git cannot match.",
+        "A dated folder automatically shows who changed each file and why."
       ],
       "correctOptionIds": [
-        "a"
+        "b"
       ],
-      "hint": "Think about where you make changes before staging them.",
+      "hint": "Think about tracking changes over time and the ability to see specific snapshots with context.",
       "help": {
-        "concept": "The working tree is where you make changes to files before staging.",
-        "hint_1": "It's the directory where your project files are located.",
-        "hint_2": "It's not the staging area or commit history."
+        "concept": "Version control records small, named snapshots and who made them; it avoids duplicate directory clutter and preserves a compact history you can inspect precisely.",
+        "hint_1": "A dated copy creates many folders and doesn't record the sequence of incremental changes or a concise author/message for each snapshot.",
+        "hint_2": "Pick the option that highlights concise change recording, authorship, and inspectable history rather than creating extra folders."
       }
     },
     {
-      "id": "single-choice-2",
+      "id": "qc-initial-identity",
       "kind": "single_choice",
-      "title": "Purpose of the Staging Area",
-      "prompt": "What is the purpose of the staging area in Git?",
+      "title": "Where should you set the repository identity for this lesson?",
+      "prompt": "When preparing the first commit in the course repository, which Git config command reflects the recommended practice taught here?",
       "options": [
-        "To prepare changes for the next commit",
-        "To store the commit history",
-        "To track remote changes",
-        "To initialize a repository"
+        "git config --global user.name \"ZoeSkoul Learner\"",
+        "git config --local user.name \"ZoeSkoul Learner\" && git config --local user.email \"learner@zoeskoul.local\"",
+        "git config user.email \"learner@zoeskoul.local\" without specifying --local or --global",
+        "Edit ~/.gitconfig by hand to add the repository name"
       ],
       "correctOptionIds": [
-        "a"
+        "b"
       ],
-      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "hint": "We want the identity to apply only to this repository, not change the user's global settings.",
       "help": {
-        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+        "concept": "git config --local writes identity into the repository-local config so the setting applies only to that repository.",
+        "hint_1": "Look for the option that uses --local and sets both name and email.",
+        "hint_2": "Avoid options that change the global identity."
       }
     },
     {
-      "id": "multi-choice-1",
+      "id": "mc-status-interpretation",
       "kind": "multi_choice",
-      "title": "Components of a Git Repository",
-      "prompt": "Which of the following are components of a Git repository? Select all that apply.",
+      "title": "Which status lines indicate files are staged?",
+      "prompt": "Select all lines from git status --short that indicate a file is staged (already in the index) rather than only changed in the working tree.",
       "options": [
-        "Working tree",
-        "Staging area",
-        "Commit history",
-        "Remote server"
+        "A README.md",
+        "M index.html",
+        "?? temp.txt",
+        "AM notes.txt"
       ],
       "correctOptionIds": [
         "a",
-        "b",
-        "c"
+        "d"
       ],
       "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
       "help": {
@@ -91,89 +90,91 @@
       }
     },
     {
-      "id": "drag-reorder-1",
+      "id": "dr-order-first-commit",
       "kind": "drag_reorder",
-      "title": "Order of Git Workflow",
-      "prompt": "Arrange the steps of the Git workflow in the correct order.",
+      "title": "Order the steps to create the first commit",
+      "prompt": "Arrange the steps in the correct order to produce the first commit of a repository from an ordinary folder.",
       "tokens": [
-        "Edit files in the working tree",
-        "Stage changes in the staging area",
-        "Commit changes to the commit history"
+        "Create the repository with git init -b main",
+        "Set repository-local user.name and user.email with git config --local",
+        "Stage selected files with git add <files>",
+        "Record the staged snapshot with git commit -m \"…\""
       ],
       "correctOrder": [
-        "Edit files in the working tree",
-        "Stage changes in the staging area",
-        "Commit changes to the commit history"
+        "Create the repository with git init -b main",
+        "Set repository-local user.name and user.email with git config --local",
+        "Stage selected files with git add <files>",
+        "Record the staged snapshot with git commit -m \"…\""
       ],
-      "hint": "Think about the sequence from editing to committing changes.",
+      "hint": "Think of repository creation, local identity, staging, then recording the snapshot.",
       "help": {
-        "concept": "The Git workflow involves editing, staging, and committing changes.",
-        "hint_1": "Start with making changes in the working tree.",
-        "hint_2": "Staging comes before committing."
+        "concept": "The correct sequence is: initialize the repo (so .git exists), configure any repository-local identity, stage the chosen files into the index, then run git commit to record the snapshot.",
+        "hint_1": "git init comes before git config --local when you want the config stored in the repo.",
+        "hint_2": "You must stage (git add) before git commit to include files in the recorded snapshot."
       }
     },
     {
-      "id": "fill-blank-choice-1",
+      "id": "fb-first-commit-message",
       "kind": "fill_blank_choice",
-      "title": "Command to Stage Files",
-      "prompt": "Fill in the blank to stage a file for commit: `git [blank1] filename.txt`.",
-      "template": "git [blank1] filename.txt",
+      "title": "Choose the exact first commit message",
+      "prompt": "The course checks expect the first commit message to be: [blank1]\n\nPick the exact message used by the automated checks.",
+      "template": "[blank1]",
       "choices": [
-        "add",
-        "commit",
-        "status",
-        "log"
+        "First snapshot - community-site proposal",
+        "first snapshot: community-site proposal",
+        "Initial snapshot: Community Site Proposal",
+        "Initial import of site files"
       ],
-      "correctValue": "add",
-      "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+      "correctValue": "first snapshot: community-site proposal",
+      "hint": "Match punctuation and lower/upper case exactly.",
       "help": {
-        "concept": "The blank should be filled with the term that makes the statement accurate.",
-        "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
-        "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+        "concept": "Automated checks compare the commit message text exactly, so the message must match the expected string character for character.",
+        "hint_1": "Look for the full string used in the Try It commit command (it includes a colon and hyphens as typed).",
+        "hint_2": "Do not add extra spaces or different capitalization; select the exact option."
       }
     },
     {
-      "id": "fill-blank-choice-2",
+      "id": "fb-config-local",
       "kind": "fill_blank_choice",
-      "title": "Command to View Commit History",
-      "prompt": "Fill in the blank to view the commit history: `git [blank1] --oneline`.",
-      "template": "git [blank1] --oneline",
+      "title": "Fill the local email configuration command",
+      "prompt": "Set the repository-local email using: git config --local user.email [blank1]",
+      "template": "git config --local user.email [blank1]",
       "choices": [
-        "log",
-        "status",
-        "add",
-        "commit"
+        "learner@zoeskoul.local",
+        "you@example.com",
+        "zoeskoul.learner@local",
+        "learner@localhost"
       ],
-      "correctValue": "log",
-      "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+      "correctValue": "learner@zoeskoul.local",
+      "hint": "Pick the email the course expects for the repository-local identity.",
       "help": {
-        "concept": "The blank should be filled with the term that makes the statement accurate.",
-        "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
-        "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+        "concept": "git config --local user.email sets the email used in commits created in that repository (stored in .git/config). The expected email here is the deterministic learner identity provided in the course.",
+        "hint_1": "The course uses a deterministic learner email so checks are reproducible.",
+        "hint_2": "Choose the exact email 'the missing term'."
       }
     },
     {
-      "id": "try-working-tree-sketch0",
+      "id": "try-working-tree-staging-and-history-sketch0",
       "kind": "code_input",
-      "title": "Explore the Working Tree",
-      "prompt": "Modify a file in your working tree and check its status. Create a file named `example.txt`, add some text, and use `git status` to see its state.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter to prepare the local repository. Then type the requested Git command and press Enter.",
-      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "title": "Initialize the community-site repo and set the repo-local identity",
+      "prompt": "You have an ordinary folder named community-site with proposal files inside. Use the terminal to initialize a Git repository on branch main and set a repository-local name and email.\n\nType the commands and press Enter. After your commands, run git status --short so we can see the repository state.\n\nThe terminal opens inside `community-site/` with the required starting milestone ready. Type each requested terminal command and press Enter.",
+      "hint": "Read the Git task \"Initialize the community-site repo and set the repo-local identity\" and identify the repository state you need to create.",
       "help": {
-        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+        "concept": "This Git exercise checks the repository state produced by \"Initialize the community-site repo and set the repo-local identity\".",
+        "hint_1": "Use git status before and after each small change so you can see what moved between the working tree, staging area, and history.",
+        "hint_2": "Match the requested file names, branch names, and commit purpose before clicking Check Answer."
       },
-      "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then type the Git command requested in the prompt.",
-      "solutionCode": "bash .zoeskoul/setup.sh\ngit status",
+      "starterCode": "# Work in the terminal; the starting repository state is ready.\n# Type each requested command and press Enter.",
+      "solutionCode": "git log --oneline",
       "fixedLanguage": "bash",
       "recipeType": "shell_task",
       "mode": "terminal_workspace",
       "entryFilePath": "main.sh",
-      "instructions": "Modify a file in your working tree and check its status. Create a file named `example.txt`, add some text, and use `git status` to see its state.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter to prepare the local repository. Then type the requested Git command and press Enter.",
+      "instructions": "You have an ordinary folder named community-site with proposal files inside. Use the terminal to initialize a Git repository on branch main and set a repository-local name and email.\n\nType the commands and press Enter. After your commands, run git status --short so we can see the repository state.\n\nThe terminal opens inside `community-site/` with the required starting milestone ready. Type each requested terminal command and press Enter.",
       "starterFiles": [
         {
           "path": "main.sh",
-          "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then type the Git command requested in the prompt.\n",
+          "content": "# Work in the terminal; the starting repository state is ready.\n# Type each requested command and press Enter.\n",
           "language": "bash",
           "isEntry": true,
           "entry": true,
@@ -181,7 +182,7 @@
         },
         {
           "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Project baseline\\n' > example.txt\ngit add example.txt\ngit commit -q -m \"Add project baseline\"\nprintf 'Working tree update\\n' >> example.txt\n",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"community-site\"\nmkdir -p -- \"community-site\"\nprintf '%s\\n' 'Cumulative Git practice project' > \"community-site/README.md\"\ngit -C \"community-site\" init -q -b main\ngit -C \"community-site\" config user.name \"ZoeSkoul Learner\"\ngit -C \"community-site\" config user.email \"learner@zoeskoul.local\"\ngit -C \"community-site\" add -- \"README.md\"\ngit -C \"community-site\" commit -q -m \"Start cumulative project\"\n",
           "language": "bash",
           "readOnly": true
         }
@@ -189,183 +190,20 @@
       "solutionFiles": [
         {
           "path": "main.sh",
-          "content": "bash .zoeskoul/setup.sh\ngit status\n",
+          "content": "git log --oneline\n",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
           "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Project baseline\\n' > example.txt\ngit add example.txt\ngit commit -q -m \"Add project baseline\"\nprintf 'Working tree update\\n' >> example.txt\n",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"community-site\"\nmkdir -p -- \"community-site\"\nprintf '%s\\n' 'Cumulative Git practice project' > \"community-site/README.md\"\ngit -C \"community-site\" init -q -b main\ngit -C \"community-site\" config user.name \"ZoeSkoul Learner\"\ngit -C \"community-site\" config user.email \"learner@zoeskoul.local\"\ngit -C \"community-site\" add -- \"README.md\"\ngit -C \"community-site\" commit -q -m \"Start cumulative project\"\n",
           "language": "bash",
           "readOnly": true
         }
       ],
       "terminalExpectations": {
         "requiredCommands": [
-          {
-            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
-          },
-          {
-            "pattern": "^git\\s+status$"
-          }
-        ],
-        "forbiddenCommands": [
-          {
-            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
-            "message": "Do not rewrite shared history in this Git practice task."
-          }
-        ]
-      },
-      "gitExpectations": {
-        "repositoryInitialized": true,
-        "currentBranch": "main",
-        "exactCommitCount": 1,
-        "cleanWorkingTree": false,
-        "trackedFiles": [
-          "example.txt"
-        ]
-      }
-    },
-    {
-      "id": "try-staging-area-sketch1",
-      "kind": "code_input",
-      "title": "Stage Changes for Commit",
-      "prompt": "Stage a modified file for commit. Edit `example.txt` to add more text, then stage it using `git add`. Verify the staging area with `git status`.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter to prepare the local repository. Then type the requested Git command and press Enter.",
-      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
-      "help": {
-        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
-      },
-      "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then type the Git command requested in the prompt.",
-      "solutionCode": "bash .zoeskoul/setup.sh\ngit add example.txt\ngit status",
-      "fixedLanguage": "bash",
-      "recipeType": "shell_task",
-      "mode": "terminal_workspace",
-      "entryFilePath": "main.sh",
-      "instructions": "Stage a modified file for commit. Edit `example.txt` to add more text, then stage it using `git add`. Verify the staging area with `git status`.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter to prepare the local repository. Then type the requested Git command and press Enter.",
-      "starterFiles": [
-        {
-          "path": "main.sh",
-          "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then type the Git command requested in the prompt.\n",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        },
-        {
-          "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Project baseline\\n' > example.txt\ngit add example.txt\ngit commit -q -m \"Add project baseline\"\nprintf 'Ready to stage\\n' >> example.txt\n",
-          "language": "bash",
-          "readOnly": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "main.sh",
-          "content": "bash .zoeskoul/setup.sh\ngit add example.txt\ngit status\n",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Project baseline\\n' > example.txt\ngit add example.txt\ngit commit -q -m \"Add project baseline\"\nprintf 'Ready to stage\\n' >> example.txt\n",
-          "language": "bash",
-          "readOnly": true
-        }
-      ],
-      "terminalExpectations": {
-        "requiredCommands": [
-          {
-            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
-          },
-          {
-            "pattern": "^git\\s+add\\s+example\\.txt$"
-          },
-          {
-            "pattern": "^git\\s+status$"
-          }
-        ],
-        "forbiddenCommands": [
-          {
-            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
-            "message": "Do not rewrite shared history in this Git practice task."
-          }
-        ]
-      },
-      "gitExpectations": {
-        "repositoryInitialized": true,
-        "currentBranch": "main",
-        "exactCommitCount": 1,
-        "cleanWorkingTree": false,
-        "trackedFiles": [
-          "example.txt"
-        ]
-      },
-      "hiddenShellCheck": {
-        "script": "git diff --cached --name-only | grep -Fxq -- \"example.txt\"",
-        "timeoutMs": 5000
-      }
-    },
-    {
-      "id": "try-commit-history-sketch2",
-      "kind": "code_input",
-      "title": "Commit Your Changes",
-      "prompt": "Commit the staged changes with a meaningful message. Use `git commit` to save the changes to the commit history.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter to prepare the local repository. Then type the requested Git command and press Enter.",
-      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
-      "help": {
-        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
-      },
-      "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then type the Git command requested in the prompt.",
-      "solutionCode": "bash .zoeskoul/setup.sh\ngit commit -m \"Update project file\"\ngit log --oneline",
-      "fixedLanguage": "bash",
-      "recipeType": "shell_task",
-      "mode": "terminal_workspace",
-      "entryFilePath": "main.sh",
-      "instructions": "Commit the staged changes with a meaningful message. Use `git commit` to save the changes to the commit history.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter to prepare the local repository. Then type the requested Git command and press Enter.",
-      "starterFiles": [
-        {
-          "path": "main.sh",
-          "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then type the Git command requested in the prompt.\n",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        },
-        {
-          "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Project baseline\\n' > project.txt\ngit add project.txt\ngit commit -q -m \"Add project baseline\"\nprintf 'Ready to commit\\n' >> project.txt\ngit add project.txt\n",
-          "language": "bash",
-          "readOnly": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "main.sh",
-          "content": "bash .zoeskoul/setup.sh\ngit commit -m \"Update project file\"\ngit log --oneline\n",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Project baseline\\n' > project.txt\ngit add project.txt\ngit commit -q -m \"Add project baseline\"\nprintf 'Ready to commit\\n' >> project.txt\ngit add project.txt\n",
-          "language": "bash",
-          "readOnly": true
-        }
-      ],
-      "terminalExpectations": {
-        "requiredCommands": [
-          {
-            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
-          },
-          {
-            "pattern": "^git\\s+commit\\s+-m\\s+\"Update\\s+project\\s+file\"$"
-          },
           {
             "pattern": "^git\\s+log\\s+--oneline$"
           }
@@ -378,43 +216,33 @@
         ]
       },
       "gitExpectations": {
+        "repositoryPath": "community-site",
         "repositoryInitialized": true,
-        "currentBranch": "main",
-        "exactCommitCount": 2,
-        "cleanWorkingTree": true,
-        "trackedFiles": [
-          "project.txt"
-        ],
-        "commitMessages": [
-          {
-            "position": 0,
-            "matches": "^Update project file$"
-          }
-        ]
+        "currentBranch": "main"
       }
     },
     {
-      "id": "try-git-status-sketch3",
+      "id": "try-working-tree-staging-and-history-sketch1",
       "kind": "code_input",
-      "title": "Use Git Status to Verify Changes",
-      "prompt": "Use `git status` to verify the current state of your repository after committing changes. Ensure the working tree is clean.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter to prepare the local repository. Then type the requested Git command and press Enter.",
-      "hint": "Run `git status` to check the repository state.",
+      "title": "Stage all five proposal files into the index",
+      "prompt": "The community-site repository is initialized and has a repo-local identity, but none of the proposal files are staged. Stage these five files into a single snapshot: README.md, proposal.md, index.html, LICENSE, and NOTES.md. After staging, run git status --short and press Enter.\n\nThe terminal opens inside `community-site/` with the required starting milestone ready. Type each requested terminal command and press Enter.",
+      "hint": "Read the Git task \"Stage all five proposal files into the index\" and identify the repository state you need to create.",
       "help": {
-        "concept": "`git status` shows the current state of the working tree and staging area.",
-        "hint_1": "After committing, `git status` should show a clean working tree.",
-        "hint_2": "Ensure no files are staged or modified."
+        "concept": "This Git exercise checks the repository state produced by \"Stage all five proposal files into the index\".",
+        "hint_1": "Use git status before and after each small change so you can see what moved between the working tree, staging area, and history.",
+        "hint_2": "Match the requested file names, branch names, and commit purpose before clicking Check Answer."
       },
-      "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then type the Git command requested in the prompt.",
-      "solutionCode": "bash .zoeskoul/setup.sh\ngit log --oneline",
+      "starterCode": "# Work in the terminal; the starting repository state is ready.\n# Type each requested command and press Enter.",
+      "solutionCode": "git log --oneline",
       "fixedLanguage": "bash",
       "recipeType": "shell_task",
       "mode": "terminal_workspace",
       "entryFilePath": "main.sh",
-      "instructions": "Use `git status` to verify the current state of your repository after committing changes. Ensure the working tree is clean.\n\nThis practice opens in a fresh workspace. First type `bash .zoeskoul/setup.sh` and press Enter to prepare the local repository. Then type the requested Git command and press Enter.",
+      "instructions": "The community-site repository is initialized and has a repo-local identity, but none of the proposal files are staged. Stage these five files into a single snapshot: README.md, proposal.md, index.html, LICENSE, and NOTES.md. After staging, run git status --short and press Enter.\n\nThe terminal opens inside `community-site/` with the required starting milestone ready. Type each requested terminal command and press Enter.",
       "starterFiles": [
         {
           "path": "main.sh",
-          "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then type the Git command requested in the prompt.\n",
+          "content": "# Work in the terminal; the starting repository state is ready.\n# Type each requested command and press Enter.\n",
           "language": "bash",
           "isEntry": true,
           "entry": true,
@@ -422,7 +250,7 @@
         },
         {
           "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'First project note\\n' > project.txt\ngit add project.txt\ngit commit -q -m \"Add first project note\"\nprintf 'Second project note\\n' >> project.txt\ngit add project.txt\ngit commit -q -m \"Add second project note\"\n",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"community-site\"\nmkdir -p -- \"community-site\"\nprintf '%s\\n' 'Cumulative Git practice project' > \"community-site/README.md\"\ngit -C \"community-site\" init -q -b main\ngit -C \"community-site\" config user.name \"ZoeSkoul Learner\"\ngit -C \"community-site\" config user.email \"learner@zoeskoul.local\"\ngit -C \"community-site\" add -- \"README.md\"\ngit -C \"community-site\" commit -q -m \"Start cumulative project\"\n",
           "language": "bash",
           "readOnly": true
         }
@@ -430,23 +258,20 @@
       "solutionFiles": [
         {
           "path": "main.sh",
-          "content": "bash .zoeskoul/setup.sh\ngit log --oneline\n",
+          "content": "git log --oneline\n",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
           "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'First project note\\n' > project.txt\ngit add project.txt\ngit commit -q -m \"Add first project note\"\nprintf 'Second project note\\n' >> project.txt\ngit add project.txt\ngit commit -q -m \"Add second project note\"\n",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"community-site\"\nmkdir -p -- \"community-site\"\nprintf '%s\\n' 'Cumulative Git practice project' > \"community-site/README.md\"\ngit -C \"community-site\" init -q -b main\ngit -C \"community-site\" config user.name \"ZoeSkoul Learner\"\ngit -C \"community-site\" config user.email \"learner@zoeskoul.local\"\ngit -C \"community-site\" add -- \"README.md\"\ngit -C \"community-site\" commit -q -m \"Start cumulative project\"\n",
           "language": "bash",
           "readOnly": true
         }
       ],
       "terminalExpectations": {
         "requiredCommands": [
-          {
-            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
-          },
           {
             "pattern": "^git\\s+log\\s+--oneline$"
           }
@@ -459,13 +284,145 @@
         ]
       },
       "gitExpectations": {
+        "repositoryPath": "community-site",
         "repositoryInitialized": true,
-        "currentBranch": "main",
-        "exactCommitCount": 2,
-        "cleanWorkingTree": true,
-        "trackedFiles": [
-          "project.txt"
+        "currentBranch": "main"
+      }
+    },
+    {
+      "id": "try-working-tree-staging-and-history-sketch2",
+      "kind": "code_input",
+      "title": "Commit the staged proposal with the exact message",
+      "prompt": "Files are staged in community-site. Create the first commit that records the staged proposal. Use the exact commit message:\n\nfirst snapshot: community-site proposal\n\nType the commit command and press Enter. After committing, run git log --oneline to show the new history.\n\nThe terminal opens inside `community-site/` with the required starting milestone ready. Type each requested terminal command and press Enter.",
+      "hint": "Read the Git task \"Commit the staged proposal with the exact message\" and identify the repository state you need to create.",
+      "help": {
+        "concept": "This Git exercise checks the repository state produced by \"Commit the staged proposal with the exact message\".",
+        "hint_1": "Use git status before and after each small change so you can see what moved between the working tree, staging area, and history.",
+        "hint_2": "Match the requested file names, branch names, and commit purpose before clicking Check Answer."
+      },
+      "starterCode": "# Work in the terminal; the starting repository state is ready.\n# Type each requested command and press Enter.",
+      "solutionCode": "git log --oneline",
+      "fixedLanguage": "bash",
+      "recipeType": "shell_task",
+      "mode": "terminal_workspace",
+      "entryFilePath": "main.sh",
+      "instructions": "Files are staged in community-site. Create the first commit that records the staged proposal. Use the exact commit message:\n\nfirst snapshot: community-site proposal\n\nType the commit command and press Enter. After committing, run git log --oneline to show the new history.\n\nThe terminal opens inside `community-site/` with the required starting milestone ready. Type each requested terminal command and press Enter.",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Work in the terminal; the starting repository state is ready.\n# Type each requested command and press Enter.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"community-site\"\nmkdir -p -- \"community-site\"\nprintf '%s\\n' 'Cumulative Git practice project' > \"community-site/README.md\"\ngit -C \"community-site\" init -q -b main\ngit -C \"community-site\" config user.name \"ZoeSkoul Learner\"\ngit -C \"community-site\" config user.email \"learner@zoeskoul.local\"\ngit -C \"community-site\" add -- \"README.md\"\ngit -C \"community-site\" commit -q -m \"Start cumulative project\"\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "git log --oneline\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"community-site\"\nmkdir -p -- \"community-site\"\nprintf '%s\\n' 'Cumulative Git practice project' > \"community-site/README.md\"\ngit -C \"community-site\" init -q -b main\ngit -C \"community-site\" config user.name \"ZoeSkoul Learner\"\ngit -C \"community-site\" config user.email \"learner@zoeskoul.local\"\ngit -C \"community-site\" add -- \"README.md\"\ngit -C \"community-site\" commit -q -m \"Start cumulative project\"\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^git\\s+log\\s+--oneline$"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "Do not rewrite shared history in this Git practice task."
+          }
         ]
+      },
+      "gitExpectations": {
+        "repositoryPath": "community-site",
+        "repositoryInitialized": true,
+        "currentBranch": "main"
+      }
+    },
+    {
+      "id": "try-working-tree-staging-and-history-sketch3",
+      "kind": "code_input",
+      "title": "Read the first history line and verify a clean working tree",
+      "prompt": "Inspect the repository history and confirm there are no staged or unstaged changes. From the community-site folder run the command that shows the concise one-line log and then run the command that shows short status output. Type each command and press Enter.\n\nYou should NOT change any files for this check.\n\nThe terminal opens inside `community-site/` with the required starting milestone ready. Type each requested terminal command and press Enter.",
+      "hint": "Read the Git task \"Read the first history line and verify a clean working tree\" and identify the repository state you need to create.",
+      "help": {
+        "concept": "This Git exercise checks the repository state produced by \"Read the first history line and verify a clean working tree\".",
+        "hint_1": "Use git status before and after each small change so you can see what moved between the working tree, staging area, and history.",
+        "hint_2": "Match the requested file names, branch names, and commit purpose before clicking Check Answer."
+      },
+      "starterCode": "# Work in the terminal; the starting repository state is ready.\n# Type each requested command and press Enter.",
+      "solutionCode": "git restore --staged practice.txt",
+      "fixedLanguage": "bash",
+      "recipeType": "shell_task",
+      "mode": "terminal_workspace",
+      "entryFilePath": "main.sh",
+      "instructions": "Inspect the repository history and confirm there are no staged or unstaged changes. From the community-site folder run the command that shows the concise one-line log and then run the command that shows short status output. Type each command and press Enter.\n\nYou should NOT change any files for this check.\n\nThe terminal opens inside `community-site/` with the required starting milestone ready. Type each requested terminal command and press Enter.",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Work in the terminal; the starting repository state is ready.\n# Type each requested command and press Enter.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"community-site\"\nmkdir -p -- \"community-site\"\nprintf '%s\\n' 'Cumulative Git practice project' > \"community-site/README.md\"\ngit -C \"community-site\" init -q -b main\ngit -C \"community-site\" config user.name \"ZoeSkoul Learner\"\ngit -C \"community-site\" config user.email \"learner@zoeskoul.local\"\ngit -C \"community-site\" add -- \"README.md\"\ngit -C \"community-site\" commit -q -m \"Start cumulative project\"\nprintf '%s\\n' 'Prepared practice change' >> \"community-site/README.md\"\ngit -C \"community-site\" add -- \"README.md\"\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "git restore --staged practice.txt\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"community-site\"\nmkdir -p -- \"community-site\"\nprintf '%s\\n' 'Cumulative Git practice project' > \"community-site/README.md\"\ngit -C \"community-site\" init -q -b main\ngit -C \"community-site\" config user.name \"ZoeSkoul Learner\"\ngit -C \"community-site\" config user.email \"learner@zoeskoul.local\"\ngit -C \"community-site\" add -- \"README.md\"\ngit -C \"community-site\" commit -q -m \"Start cumulative project\"\nprintf '%s\\n' 'Prepared practice change' >> \"community-site/README.md\"\ngit -C \"community-site\" add -- \"README.md\"\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^git\\s+restore\\s+--staged\\s+practice\\.txt$"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "Do not rewrite shared history in this Git practice task."
+          }
+        ]
+      },
+      "gitExpectations": {
+        "repositoryPath": "community-site",
+        "repositoryInitialized": true,
+        "currentBranch": "main"
       }
     }
   ]

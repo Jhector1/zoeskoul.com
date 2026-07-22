@@ -34,7 +34,7 @@
             "steps": {
               "try_git_repo_inspection": {
                 "title": "Inspect the Volunteer Project Folder",
-                "prompt": "The parallel project opens inside `volunteer-project/`. Confirm the current directory and list its two plain-text files: `README.md` and `assignments.txt`. Do not initialize Git yet.",
+                "prompt": "The project opens inside `volunteer-project/`. Use `pwd` to confirm your current directory, then use `ls` to verify that the folder contains these two plain-text files:\n\n* `README.md`\n* `assignments.txt`\n\nDo not initialize a Git repository yet.",
                 "hint": "Verify the project root and its small two-file starting set.",
                 "help": {
                   "concept": "`pwd` prints the current directory. `ls` lists visible files in that directory. These terminal commands inspect the ordinary folder before Git is initialized.",
@@ -72,7 +72,7 @@
               },
               "try_git_config": {
                 "title": "Initialize the Volunteer Project",
-                "prompt": "The two-file folder is ready and still has no repository metadata. Initialize it on `main` without changing either file.",
+                "prompt": "The two-file folder is ready and still has no Git repository metadata. Using the command you learned in the previous lesson, initialize a new Git repository with `main` as the initial branch. Do not change either file.",
                 "hint": "Reapply the initialization command from the guided project.",
                 "help": {
                   "concept": "`git init -b main` creates repository metadata in the current folder and selects `main` as the first branch. The files remain untracked until you stage them.",
@@ -107,7 +107,7 @@
               },
               "try_git_init": {
                 "title": "Configure the Volunteer Project Identity",
-                "prompt": "Store the supplied name `ZoeSkoul Learner` and email `learner@zoeskoul.local` in this repository only.",
+                "prompt": "Now that you have initialized the local Git repository, configure the commit identity for this repository only. Set the name to `ZoeSkoul Learner` and the email address to `learner@zoeskoul.local`.\n\nDo not change the global Git configuration.",
                 "hint": "Use the same two repository-local settings as the guided project.",
                 "help": {
                   "concept": "`git config --local user.name VALUE` and `git config --local user.email VALUE` prepare this independent repository to record commits without changing global Git settings.",
@@ -145,11 +145,11 @@
               },
               "try_git_stage_files": {
                 "title": "Prepare the Volunteer Baseline",
-                "prompt": "Stage only `README.md` and `assignments.txt`, then inspect the staged statistics before committing.",
+                "prompt": "The repository has been initialized, and its local commit identity is configured. Now it is time to prepare the first snapshot.\n\nStage only `README.md` and `assignments.txt`. Then, before committing, use the command you learned in the previous lesson to inspect the statistics for the staged changes.",
                 "hint": "Prepare the complete two-file baseline and review it.",
                 "help": {
-                  "concept": "`git add README.md assignments.txt` stages both project files. `git diff --staged --stat` confirms which files the first snapshot would contain without recording it.",
-                  "hint_1": "Do not stage hidden platform files.",
+                  "concept": "`git add file1 file2` stages both project files.",
+                  "hint_1": "`git diff --staged --stat` confirms which files the first snapshot would contain without recording it.",
                   "hint_2": "The staged summary should contain exactly two files."
                 },
                 "starterCode": "# Volunteer Project\n\nAssignments and meeting times.\n",
@@ -183,12 +183,12 @@
               },
               "try_git_commit": {
                 "title": "Record and Verify the Volunteer Baseline",
-                "prompt": "Record the prepared two-file snapshot with the message `Start volunteer project`. Then inspect concise history and confirm that short status has no unfinished entries.",
+                "prompt": "Now record the prepared two-file snapshot with the commit message `Start volunteer project`.\n\nAfter the commit is created, use the commands you learned earlier to inspect the concise history and confirm that the short status shows no unfinished changes.",
                 "hint": "Commit once, then verify history and current state.",
                 "help": {
-                  "concept": "`git commit -m ...` records the staged files. `git log --oneline` verifies the history entry, and `git status --short` verifies that no tracked work remains unfinished.",
-                  "hint_1": "Use the exact commit message.",
-                  "hint_2": "The final short status should be empty."
+                  "concept": "`git commit -m ...` records the staged files.  ",
+                  "hint_1": "`git log --oneline` verifies the history entry,",
+                  "hint_2": "and `git status --short` verifies that no tracked work remains unfinished."
                 },
                 "starterCode": "# Volunteer Project\n\nAssignments and meeting times.\n",
                 "solutionCode": "git commit -m \"Start volunteer project\"\ngit log --oneline\ngit status --short",
@@ -236,7 +236,7 @@
         "module-1-field-notes-repository": {
           "intro-to-git-repository": {
             "title": "Parallel Project: Volunteer Project",
-            "bodyMarkdown": "`volunteer-project/` begins with only `README.md` and `assignments.txt`. Reapply the Module 1 workflow in a different two-file project: inspect the folder, initialize Git, configure the local identity, stage both files, commit, and verify. The repository continues into later module projects."
+            "bodyMarkdown": "A neighborhood volunteer team is preparing its first shared project. The `volunteer-project/` folder currently contains only two files: `README.md`, which introduces the project, and `assignments.txt`, which lists the team’s responsibilities.\n\nYour job is to place this small project under version control. Reapply the workflow from Module 1: inspect the folder, initialize Git with `main` as the initial branch, configure the repository-specific identity, stage both files, create the first commit, and verify that the working tree is clean.\n\nKeep the repository organized—the same project will continue to grow in later modules."
           }
         }
       }

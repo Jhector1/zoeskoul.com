@@ -108,7 +108,7 @@ export async function createPracticeInstance(args: {
             : null;
     const experienceItemKey =
         sessionMode === "daily_five" && sessionId && exerciseKey
-            ? `daily-five:${sessionId}:${exerciseKey}`
+            ? `daily-five:${sessionId}:${dbTopicSlug}:${exerciseKey}`
             : null;
 
     const data = {

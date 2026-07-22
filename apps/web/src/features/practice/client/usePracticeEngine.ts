@@ -153,6 +153,7 @@ export function usePracticeEngine(args: {
 
   preferPurpose?: string;
   purposePolicy?: string;
+  allowedExperienceModes?: readonly PracticeExperienceMode[];
   expectedExperienceMode?: PracticeExperienceMode;
   resumeHistoryOnBoot?: boolean;
   authoritativeSessionId?: boolean;
@@ -218,6 +219,7 @@ export function usePracticeEngine(args: {
     setSessionId,
     preferPurpose,
     purposePolicy,
+    allowedExperienceModes,
     expectedExperienceMode,
     resumeHistoryOnBoot = false,
     authoritativeSessionId = false,
@@ -269,20 +271,24 @@ export function usePracticeEngine(args: {
 
   function acceptRunMeta(candidate: RunMeta | null | undefined) {
     if (!candidate?.mode) return true;
-    if (
-      expectedExperienceMode &&
-      candidate.mode !== expectedExperienceMode
-    ) {
-      // Fail closed instead of leaving a previously hydrated assignment stack
-      // visible on the Daily Practice surface.
+
+    const allowed =
+      allowedExperienceModes && allowedExperienceModes.length > 0
+        ? allowedExperienceModes.includes(candidate.mode)
+        : !expectedExperienceMode || candidate.mode === expectedExperienceMode;
+
+    if (!allowed) {
+      // A route may host more than one intentional experience (the shared
+      // module-practice route hosts subscriber practice and assignments), but
+      // it must never hydrate a session owned by another surface such as Daily
+      // Practice or the onboarding trial.
       setRun(null);
       setStack([]);
       setIdx(0);
-      setLoadErr(
-        `This session belongs to ${candidate.mode}, not ${expectedExperienceMode}.`,
-      );
+      setLoadErr("This practice session cannot open on this page.");
       return false;
     }
+
     setRun(candidate);
     return true;
   }
@@ -763,6 +769,7 @@ export function usePracticeEngine(args: {
     resolvedSessionIdRef,
     setRun,
     expectedExperienceMode,
+    allowedExperienceModes,
     resumeHistoryOnBoot,
     authoritativeSessionId,
     initialSessionId,
@@ -825,6 +832,7 @@ export function usePracticeEngine(args: {
     moduleSlug,
     setRun,
     expectedExperienceMode,
+    allowedExperienceModes,
     authoritativeSessionId,
     initialSessionId,
     setCompletionReturnUrl,

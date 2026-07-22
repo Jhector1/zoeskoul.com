@@ -1,6 +1,8 @@
 "use client";
 
 import React from "react";
+import { useTaggedT } from "@/i18n/tagged";
+import { resolvePracticeDisplayTitle } from "@/lib/practice/displayTitle";
 import type { Exercise } from "@/lib/practice/types";
 import type { PracticeShellProps } from "../PracticeShell";
 import ResultPanel from "./ResultPanel";
@@ -97,6 +99,21 @@ export default function PracticeSidebar(
         onOpenHelp,
     } = props;
 
+    const { resolve } = useTaggedT();
+    const resolvedTopicOptions = React.useMemo(
+        () =>
+            topicOptionsFixed.map((option) => ({
+                ...option,
+                label: resolvePracticeDisplayTitle({
+                    title: option.label,
+                    titleKey: option.titleKey ?? null,
+                    resolve,
+                    fallback: option.label,
+                }),
+            })),
+        [resolve, topicOptionsFixed],
+    );
+
     const showTopicFilter =
         !isAssignmentRun &&
         topicOptionsFixed.length > 0 &&
@@ -173,7 +190,7 @@ export default function PracticeSidebar(
                             <div className="mt-1 ui-meta">
                                 {t("progress.attempts")}:{" "}
                                 <span className="font-medium text-[rgb(var(--ui-text)/0.96)]">
-                  {attempts}/{Number.isFinite(maxAttempts) ? maxAttempts : "∞"}
+                  {attempts}
                 </span>
                             </div>
                         ) : null}
@@ -191,7 +208,7 @@ export default function PracticeSidebar(
                             value={String(topic)}
                             onChange={(v) => setTopic(v as any)}
                             disabled={topicLocked}
-                            options={topicOptionsFixed as any}
+                            options={resolvedTopicOptions as any}
                         />
                     ) : null}
 

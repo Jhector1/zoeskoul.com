@@ -1,308 +1,415 @@
 {
-  "title": "Stage Intentionally",
-  "summary": "Use git add to prepare selected files and git diff --staged to verify the exact snapshot before committing.",
+  "title": "Stage One Purpose at a Time",
+  "summary": "Separate supplied community-site edits so each commit records one understandable project purpose.",
   "minutes": 22,
   "sketchBlocks": [
     {
-      "id": "stage-intentionally-sketch0",
-      "title": "Understanding Selective Staging",
-      "bodyMarkdown": "Selective staging allows you to choose specific changes to include in your next commit, rather than staging all changes in your working directory. This is useful when you want to create a commit that addresses a specific issue or feature without including unrelated changes.\n\nWorked example: Suppose you have modified two files, `index.html` and `style.css`, but you only want to commit the changes in `index.html`. You can stage only `index.html` using the command:\n\n```bash\ngit add index.html\n```\n\nThis command stages the changes in `index.html` while leaving the changes in `style.css` unstaged. This way, your commit will only include the changes you intended."
+      "id": "sketch-0-inspect-unstaged",
+      "title": "Look at unstaged text changes before you stage",
+      "bodyMarkdown": "Worked example: You receive a small design tweak and a content update in the same folder. In community-site/index.html the contributor added a new paragraph under the headline; in community-site/styles.css someone adjusted spacing. Before staging anything, check exactly what changed so you don't accidentally group unrelated edits.\n\nRun git status to see changed files. Then run git diff to view line-level unstaged edits. Typical commands:\n\n$ git status\n$ git diff community-site/index.html\n\nThe git diff output shows which lines were added (a plus) or removed (a minus). In this example the diff shows one added paragraph in index.html and several style-rule changes in styles.css. Because you only want the content update in this commit, stage only index.html with:\n\n$ git add community-site/index.html\n\nNow run git diff --staged to view the staged snapshot. It will show the same added paragraph but not the style-rule changes (those remain unstaged). This separation ensures the next commit documents only the content change and leaves the styling edits for a later, separate commit.\n\nInterpretation: Seeing the staged diff guarantees the commit will contain precisely the intended lines. If the staged snapshot included unrelated edits, you'd unstage them (git restore --staged) before committing."
     },
     {
-      "id": "stage-intentionally-sketch1",
-      "title": "Using git diff --staged",
-      "bodyMarkdown": "Once you have staged your changes, it's important to verify what exactly will be included in your commit. The `git diff --staged` command allows you to see the differences between the staged changes and the last commit.\n\nWorked example: After staging `index.html`, you can run:\n\n```bash\ngit diff --staged\n```\n\nThis command will show you the changes that are staged and ready to be committed. It's a good practice to review these changes to ensure that only the intended modifications are included."
+      "id": "sketch-1-stage-one-purpose",
+      "title": "Choose files to stage so each commit has one purpose",
+      "bodyMarkdown": "Worked example: The project needs two focused changes: a typo fix in community-site/about.txt and a new sample image added to community-site/images/. Both were edited in the same working session. To keep history understandable, stage the typo fix alone and leave the images addition unstaged.\n\nStart by listing changed files with git status. Stage only the about.txt change:\n\n$ git add community-site/about.txt\n\nThen confirm the staged snapshot contains only the about change:\n\n$ git diff --staged -- community-site/about.txt\n\nBecause the images remain unstaged, they will not be part of this commit. Committing now with a concise message like \"Fix typo in About page\" creates a focused commit that documents the single purpose of the change."
     },
     {
-      "id": "stage-intentionally-sketch2",
-      "title": "Transitioning Files Between Staged and Unstaged",
-      "bodyMarkdown": "Sometimes, you might stage a file and then realize you need to make further changes or exclude it from the commit. You can move files between staged and unstaged states without losing their content.\n\nWorked example: If you have staged `index.html` but decide to make more changes, you can unstage it using:\n\n```bash\ngit restore --staged index.html\n```\n\nThis command moves `index.html` back to the unstaged state, allowing you to edit it further before staging it again."
+      "id": "sketch-2-inspect-staged-snapshot",
+      "title": "Verify staged snapshot, write a focused message, and commit",
+      "bodyMarkdown": "Worked example: After staging the relevant files (for example, community-site/index.html and community-site/about.txt for content edits), verify the snapshot and compose a focused commit.\n\nVerify staged content:\n\n$ git diff --staged\n\nThis shows exactly what will enter the next commit. Avoid committing if unrelated edits are present. When the staged snapshot looks right, create a focused commit with a clear single-line message:\n\n$ git commit -m \"Update community copy: add paragraph and fix contact wording\"\n\nAfter the commit, run git status and git log --oneline to confirm the working tree is clean and the history contains the focused message. The habit: stage, inspect staged diff, commit with a single purpose message."
     },
     {
-      "id": "stage-intentionally-sketch3",
-      "title": "Building a Practical Staging Workflow",
-      "bodyMarkdown": "A practical staging workflow involves selectively staging changes, reviewing them, and making adjustments as necessary. This ensures that each commit is focused and meaningful.\n\nWorked example: Imagine you're working on a project with multiple changes across different files. You can stage changes file by file, review them with `git diff --staged`, and adjust your staging as needed to ensure each commit is cohesive and addresses a specific part of your project."
+      "id": "sketch-3-read-history-and-show",
+      "title": "Use log and show to answer questions about the last commit",
+      "bodyMarkdown": "Worked example: After making two focused commits (a content commit and a style commit), use git log --oneline to see concise history and git show to inspect a particular commit's snapshot.\n\nList recent commits:\n\n$ git log --oneline -n 5\n\nPick the commit you're curious about (for example, the second newest) and inspect it:\n\n$ git show <that-commit>\n\ngit show prints the commit metadata and the diff that the commit introduced, letting you answer questions such as \"Which file added the new paragraph?\" or \"What changed in about.txt?\". Reading compact history and using git show helps you verify that each commit documents a clear purpose and that the repository history is readable."
     }
   ],
   "quizDraft": [
     {
-      "id": "single-choice-1",
+      "id": "q-single-diff-staged",
       "kind": "single_choice",
-      "title": "Staging Area Purpose",
-      "prompt": "What is the purpose of the staging area in Git?",
+      "title": "What's the main difference between git diff and git diff --staged?",
+      "prompt": "Choose the single best answer.",
       "options": [
-        "To permanently delete files.",
-        "To prepare changes for the next commit.",
-        "To automatically commit changes.",
-        "To track changes in the working directory."
+        "git diff shows unstaged working-tree changes; git diff --staged shows what is staged and will be committed.",
+        "git diff lists only filenames changed; git diff --staged shows full line-level changes.",
+        "git diff only works on untracked files; git diff --staged only works on tracked files.",
+        "git diff always shows committed history; git diff --staged shows uncommitted edits."
       ],
       "correctOptionIds": [
-        "b"
+        "a"
       ],
-      "hint": "Consider what happens to files in the staging area.",
+      "hint": "Think about whether the command shows changes in the working tree or the staged snapshot.",
       "help": {
-        "concept": "The staging area holds changes that are ready to be committed.",
-        "hint_1": "The staging area is a place to prepare changes before committing.",
-        "hint_2": "It allows you to review changes before they become part of the commit history."
+        "concept": "git diff shows unstaged working-tree differences; git diff --staged (aka --cached) shows the differences between HEAD and the staged snapshot that will become the next commit.",
+        "hint_1": "Remember the staging area holds what will go into the next commit. git diff --staged inspects that snapshot.",
+        "hint_2": "If you want to see exactly what will be committed, use git diff --staged rather than git diff."
       }
     },
     {
-      "id": "multi-choice-1",
+      "id": "q-multi-when-to-stage",
       "kind": "multi_choice",
-      "title": "Understanding git add",
-      "prompt": "Which of the following statements about `git add` are true?",
+      "title": "When should you create separate commits instead of one combined commit?",
+      "prompt": "Choose all options that are valid reasons to keep changes in separate commits.",
       "options": [
-        "`git add` stages files for the next commit.",
-        "`git add` commits files to the repository.",
-        "`git add` removes files from the working directory.",
-        "`git add` prepares files for staging."
+        "The edits change unrelated concerns (content vs. styling) and should be separated.",
+        "One set of changes is a small copy fix while another is adding many new files (media); separate them.",
+        "You always stage everything and make a single big commit to reduce the number of commits.",
+        "You want each commit message to document a single, understandable purpose for reviewers and future you."
       ],
       "correctOptionIds": [
         "a",
+        "b",
         "d"
       ],
-      "hint": "Consider what `git add` does to files in the working directory.",
+      "hint": "Think about readability and the purpose of each change.",
       "help": {
-        "concept": "`git add` stages files, preparing them for the next commit.",
-        "hint_1": "`git add` moves files from the working directory to the staging area.",
-        "hint_2": "`git add` does not commit files; it only stages them."
+        "concept": "Good commit granularity groups changes by single, coherent purpose; separate commits help revert, understand, and review changes later.",
+        "hint_1": "Commit messages and diffs should map to a single intention (e.g., fix a bug, update copy, adjust layout).",
+        "hint_2": "Separate commits are useful when changes affect different concerns, like content vs. media, or when one change is risky and likely to be reverted."
       }
     },
     {
-      "id": "multi-choice-2",
+      "id": "q-multi-show-what",
       "kind": "multi_choice",
-      "title": "Purpose of git diff --staged",
-      "prompt": "What is the purpose of using `git diff --staged`?",
+      "title": "What information does git show <commit> display? (Choose all that apply)",
+      "prompt": "Select every true statement about the output of git show for a specific commit.",
       "options": [
-        "To see changes in the working directory.",
-        "To view differences between staged changes and the last commit.",
-        "To commit staged changes.",
-        "To remove staged changes."
+        "The commit's message and author information.",
+        "A diff showing what lines the commit added or removed.",
+        "A list of all files currently in the repository, regardless of the commit.",
+        "The patch that was introduced by that specific commit."
       ],
       "correctOptionIds": [
-        "b"
+        "a",
+        "b",
+        "d"
       ],
-      "hint": "Think about what `git diff --staged` shows you.",
+      "hint": "Think about metadata and the commit's diff.",
       "help": {
-        "concept": "`git diff --staged` shows differences between staged changes and the last commit.",
-        "hint_1": "It helps verify what is about to be committed.",
-        "hint_2": "It shows changes that are staged but not yet committed."
+        "concept": "git show prints the commit metadata (author, date, message) and the patch (diff) introduced by that commit; it does not list unrelated commits unless asked.",
+        "hint_1": "Look for answers referencing the commit message, author, and the diff of files changed in that commit.",
+        "hint_2": "git show does not show the entire project's file contents at arbitrary commits in a single summary unless you ask for tree listings."
       }
     },
     {
-      "id": "drag-reorder-1",
+      "id": "q-drag-order-commit-workflow",
       "kind": "drag_reorder",
-      "title": "Staging Workflow Steps",
-      "prompt": "Arrange the steps of a typical staging workflow in the correct order.",
+      "title": "Order the steps for creating a focused commit",
+      "prompt": "Arrange the four steps in the correct order to create a focused commit from local edits.",
       "tokens": [
-        "Edit files",
-        "Stage changes",
-        "Verify staged changes",
-        "Commit changes"
+        "Stage only the files related to one purpose (git add specific-file)",
+        "Inspect unstaged working-tree changes (git status, git diff)",
+        "Commit the staged snapshot with a focused message (git commit -m \"...\")",
+        "Verify the staged snapshot shows only the intended changes (git diff --staged)"
       ],
       "correctOrder": [
-        "Edit files",
-        "Stage changes",
-        "Verify staged changes",
-        "Commit changes"
+        "Inspect unstaged working-tree changes (git status, git diff)",
+        "Stage only the files related to one purpose (git add specific-file)",
+        "Verify the staged snapshot shows only the intended changes (git diff --staged)",
+        "Commit the staged snapshot with a focused message (git commit -m \"...\")"
       ],
-      "hint": "Think about the sequence from editing to committing.",
+      "hint": "Think: inspect, stage only the right files, verify staged snapshot, then commit.",
       "help": {
-        "concept": "A typical staging workflow involves editing, staging, verifying, and committing changes.",
-        "hint_1": "Start with editing files.",
-        "hint_2": "End with committing the staged changes."
+        "concept": "A focused commit comes from inspecting changes, staging only the files for one purpose, verifying the staged snapshot, and then committing with a clear message.",
+        "hint_1": "Start by inspecting what changed in the working tree, not by immediately staging everything.",
+        "hint_2": "Use git diff and git diff --staged at the appropriate times to confirm what will be committed."
       }
     },
     {
-      "id": "fill-blank-choice-1",
+      "id": "q-fill-which-command",
       "kind": "fill_blank_choice",
-      "title": "Staging Command",
-      "prompt": "Complete the command to stage a file named `example.txt`.",
-      "template": "git add [blank1]",
+      "title": "Complete the command to view what is currently staged",
+      "prompt": "Choose the token that fills the blank so the command shows only the staged snapshot:\n\ngit [blank1] --staged",
+      "template": "git [blank1] --staged",
       "choices": [
-        "example.txt",
-        "commit",
         "status",
-        "diff"
+        "diff",
+        "log",
+        "show"
       ],
-      "correctValue": "example.txt",
-      "hint": "Use the `git add` command.",
+      "correctValue": "diff",
+      "hint": "Read the sentence around the blank and decide what role the missing word plays.",
       "help": {
-        "concept": "`git add` is used to stage files for the next commit.",
-        "hint_1": "The command starts with `git add`.",
-        "hint_2": "The full command is `git add the missing term`."
+        "concept": "The blank should be filled with the term that makes the statement accurate.",
+        "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+        "hint_2": "Pick the choice that completes the statement with the clearest meaning."
       }
     },
     {
-      "id": "fill-blank-choice-2",
+      "id": "q-fill-commit-message",
       "kind": "fill_blank_choice",
-      "title": "Unstaging Command",
-      "prompt": "Complete the command to unstage a file named `data.csv`.",
-      "template": "git restore --staged [blank1]",
+      "title": "Pick the best short commit message for a focused change",
+      "prompt": "Choose the best message to fill the blank for a commit that only fixes a spelling mistake in About page:\n\nCommit message: \"[blank1]\"",
+      "template": "Commit message: \"[blank1]\"",
       "choices": [
-        "data.csv",
-        "commit",
-        "status",
-        "diff"
+        "Misc edits including content and styles",
+        "Fix typo in About page",
+        "Update many files for release",
+        "Stuff I was working on"
       ],
-      "correctValue": "data.csv",
-      "hint": "Use the `git restore --staged` command.",
+      "correctValue": "Fix typo in About page",
+      "hint": "The message should be concise and describe a single purpose.",
       "help": {
-        "concept": "`git restore --staged` is used to unstage files.",
-        "hint_1": "The command starts with `git restore --staged`.",
-        "hint_2": "The full command is `git restore --staged the missing term`."
+        "concept": "A focused commit message briefly describes the single purpose of the change, typically in present-tense imperative style.",
+        "hint_1": "Avoid vague messages like \"misc updates\" or unrelated descriptions.",
+        "hint_2": "Prefer short messages like \"the missing term\"."
       }
     },
     {
       "id": "try-stage-intentionally-sketch0",
       "kind": "code_input",
-      "title": "Try Selective Staging",
-      "prompt": "Stage only the changes in `app.js` without affecting other files in the working directory. Verify the staged changes using `git diff --staged`.",
-      "starterCode": "# Stage the changes in app.js",
-      "entryFilePath": "main.sh",
+      "title": "Stage only the content change, not the styling change",
+      "prompt": "You are working in the community-site folder. Hidden setup placed two unstaged edits: community-site/header.txt now has a corrected headline line, and community-site/styles.css has unrelated spacing changes. Use the terminal to: (1) inspect status, (2) view the unstaged diff for header.txt, (3) stage only community-site/header.txt, (4) confirm the staged snapshot shows the header change but not the styles change, and (5) commit the staged snapshot with the message: \"Fix headline text in header.txt\". Type each command and press Enter. After committing, the repository should be clean.\n\nWhy this matters: You keep the content fix separate from styling edits so future readers understand the change purpose.",
+      "starterCode": "# Work in the terminal; the starting repository state is ready.\n# Type each requested command and press Enter.",
+      "fixedLanguage": "bash",
+      "entryFilePath": "community-site/header.txt",
       "starterFiles": [
         {
-          "path": "main.sh",
-          "content": "# Stage the changes in app.js",
-          "language": "bash",
+          "path": "community-site/header.txt",
+          "content": "# Work in the terminal; the starting repository state is ready.\n# Type each requested command and press Enter.\n",
+          "language": "text",
           "isEntry": true,
           "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/styles.css",
+          "content": "/* spacing rules updated */\n.header { margin-top: 20px; }",
+          "language": "css",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/README.md",
+          "content": "Community site starter files for the guided lesson.",
+          "language": "markdown",
+          "isEntry": false,
+          "entry": false,
           "readOnly": false
         }
       ],
       "solutionFiles": [
         {
-          "path": "main.sh",
-          "content": "git add app.js\ngit diff --staged",
-          "language": "bash",
+          "path": "community-site/header.txt",
+          "content": "# Inspect working tree\ngit status\n# View the unstaged change for the header file\ngit diff community-site/header.txt\n# Stage only the header fix\ngit add community-site/header.txt\n# Verify staged snapshot contains the header change but not styles.css\ngit diff --staged\n# Commit the staged snapshot with the required message\ngit commit -m \"Fix headline text in header.txt\"\n# Confirm the working tree is clean\ngit status\n",
+          "language": "text",
           "isEntry": true,
           "entry": true,
           "readOnly": false
+        },
+        {
+          "path": "community-site/styles.css",
+          "content": "/* spacing rules updated */\n.header { margin-top: 20px; }",
+          "language": "css",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
         }
       ],
-      "solutionCode": "git add app.js\ngit diff --staged",
+      "solutionCode": "# Inspect working tree\ngit status\n# View the unstaged change for the header file\ngit diff community-site/header.txt\n# Stage only the header fix\ngit add community-site/header.txt\n# Verify staged snapshot contains the header change but not styles.css\ngit diff --staged\n# Commit the staged snapshot with the required message\ngit commit -m \"Fix headline text in header.txt\"\n# Confirm the working tree is clean\ngit status",
       "recipeType": "shell_task",
-      "hint": "Read the Git task \"Try Selective Staging\" and identify the repository state you need to create.",
+      "mode": "terminal_workspace",
+      "hint": "Read the Git task \"Stage only the content change, not the styling change\" and identify the repository state you need to create.",
       "help": {
-        "concept": "This Git exercise checks the repository state produced by \"Try Selective Staging\".",
+        "concept": "This Git exercise checks the repository state produced by \"Stage only the content change, not the styling change\".",
         "hint_1": "Use git status before and after each small change so you can see what moved between the working tree, staging area, and history.",
         "hint_2": "Match the requested file names, branch names, and commit purpose before clicking Check Answer."
       },
-      "fixedLanguage": "bash",
-      "mode": "terminal_workspace",
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^git\\s+add\\s+app\\.js$"
+            "pattern": "^git\\s+status$",
+            "message": "Run `git status`, then check your answer again."
           },
           {
-            "pattern": "^git\\s+diff\\s+--staged$"
+            "pattern": "^git\\s+diff\\s+community-site/header\\.txt$",
+            "message": "Run `git diff community-site/header.txt`, then check your answer again."
+          },
+          {
+            "pattern": "^git\\s+add\\s+community-site/header\\.txt$",
+            "message": "Run `git add community-site/header.txt`, then check your answer again."
+          },
+          {
+            "pattern": "^git\\s+diff\\s+--staged$",
+            "message": "Run `git diff --staged`, then check your answer again."
+          },
+          {
+            "pattern": "^git\\s+commit\\s+-m\\s+\"Fix\\s+headline\\s+text\\s+in\\s+header\\.txt\"$",
+            "message": "Run `git commit -m \"Fix headline text in header.txt\"`, then check your answer again."
           }
         ]
-      }
+      },
+      "instructions": "You are working in the community-site folder. Hidden setup placed two unstaged edits: community-site/header.txt now has a corrected headline line, and community-site/styles.css has unrelated spacing changes. Use the terminal to: (1) inspect status, (2) view the unstaged diff for header.txt, (3) stage only community-site/header.txt, (4) confirm the staged snapshot shows the header change but not the styles change, and (5) commit the staged snapshot with the message: \"Fix headline text in header.txt\". Type each command and press Enter. After committing, the repository should be clean.\n\nWhy this matters: You keep the content fix separate from styling edits so future readers understand the change purpose."
     },
     {
       "id": "try-stage-intentionally-sketch1",
       "kind": "code_input",
-      "title": "Verify Staged Changes",
-      "prompt": "After staging `main.py`, use a command to verify the staged changes. Ensure that only the intended modifications are included.",
-      "starterCode": "# Verify the staged changes",
-      "entryFilePath": "main.sh",
+      "title": "Stage a small typo fix and leave media additions unstaged",
+      "prompt": "Hidden setup added two changes in community-site: (1) a one-line typo fix inside community-site/about.txt and (2) a new image file community-site/images/event.jpg (not yet tracked). Use the terminal to: inspect changes, stage only community-site/about.txt, confirm the staged diff shows only the typo fix, commit with message \"Fix typo in About page\", and verify that the new image file is still unstaged/untracked after the commit. Type each command and press Enter.\n\nWhy this matters: Media files often belong to a separate commit or workflow; keep the text fix separate so history stays focused.",
+      "starterCode": "# Work in the terminal; the starting repository state is ready.\n# Type each requested command and press Enter.",
+      "fixedLanguage": "bash",
+      "entryFilePath": "community-site/about.txt",
       "starterFiles": [
         {
-          "path": "main.sh",
-          "content": "# Verify the staged changes",
-          "language": "bash",
+          "path": "community-site/about.txt",
+          "content": "# Work in the terminal; the starting repository state is ready.\n# Type each requested command and press Enter.\n",
+          "language": "text",
           "isEntry": true,
           "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/images/event.jpg",
+          "content": "[binary image placeholder]",
+          "language": "binary",
+          "isEntry": false,
+          "entry": false,
           "readOnly": false
         }
       ],
       "solutionFiles": [
         {
-          "path": "main.sh",
-          "content": "git diff --staged",
-          "language": "bash",
+          "path": "community-site/about.txt",
+          "content": "# Inspect status\ngit status\n# View unstaged diff for about.txt\ngit diff community-site/about.txt\n# Stage only the tracked typo fix\ngit add community-site/about.txt\n# Verify staged snapshot\ngit diff --staged\n# Commit with focused message\ngit commit -m \"Fix typo in About page\"\n# Confirm new image is still untracked\ngit status\n",
+          "language": "text",
           "isEntry": true,
           "entry": true,
           "readOnly": false
+        },
+        {
+          "path": "community-site/images/event.jpg",
+          "content": "[binary image placeholder]",
+          "language": "binary",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
         }
       ],
-      "solutionCode": "git diff --staged",
+      "solutionCode": "# Inspect status\ngit status\n# View unstaged diff for about.txt\ngit diff community-site/about.txt\n# Stage only the tracked typo fix\ngit add community-site/about.txt\n# Verify staged snapshot\ngit diff --staged\n# Commit with focused message\ngit commit -m \"Fix typo in About page\"\n# Confirm new image is still untracked\ngit status",
       "recipeType": "shell_task",
-      "hint": "Read the Git task \"Verify Staged Changes\" and identify the repository state you need to create.",
+      "mode": "terminal_workspace",
+      "hint": "Read the Git task \"Stage a small typo fix and leave media additions unstaged\" and identify the repository state you need to create.",
       "help": {
-        "concept": "This Git exercise checks the repository state produced by \"Verify Staged Changes\".",
+        "concept": "This Git exercise checks the repository state produced by \"Stage a small typo fix and leave media additions unstaged\".",
         "hint_1": "Use git status before and after each small change so you can see what moved between the working tree, staging area, and history.",
         "hint_2": "Match the requested file names, branch names, and commit purpose before clicking Check Answer."
       },
-      "fixedLanguage": "bash",
-      "mode": "terminal_workspace",
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^git\\s+diff\\s+--staged$"
+            "pattern": "^git\\s+status$",
+            "message": "Run `git status`, then check your answer again."
+          },
+          {
+            "pattern": "^git\\s+diff\\s+community-site/about\\.txt$",
+            "message": "Run `git diff community-site/about.txt`, then check your answer again."
+          },
+          {
+            "pattern": "^git\\s+add\\s+community-site/about\\.txt$",
+            "message": "Run `git add community-site/about.txt`, then check your answer again."
+          },
+          {
+            "pattern": "^git\\s+diff\\s+--staged$",
+            "message": "Run `git diff --staged`, then check your answer again."
+          },
+          {
+            "pattern": "^git\\s+commit\\s+-m\\s+\"Fix\\s+typo\\s+in\\s+About\\s+page\"$",
+            "message": "Run `git commit -m \"Fix typo in About page\"`, then check your answer again."
           }
         ]
-      }
+      },
+      "instructions": "Hidden setup added two changes in community-site: (1) a one-line typo fix inside community-site/about.txt and (2) a new image file community-site/images/event.jpg (not yet tracked). Use the terminal to: inspect changes, stage only community-site/about.txt, confirm the staged diff shows only the typo fix, commit with message \"Fix typo in About page\", and verify that the new image file is still unstaged/untracked after the commit. Type each command and press Enter.\n\nWhy this matters: Media files often belong to a separate commit or workflow; keep the text fix separate so history stays focused."
     },
     {
       "id": "try-stage-intentionally-sketch2",
       "kind": "code_input",
-      "title": "Unstage a File",
-      "prompt": "Unstage the file `config.json` after it has been staged. Ensure it returns to the unstaged state without losing its content.",
-      "starterCode": "# Unstage the file config.json",
-      "entryFilePath": "main.sh",
+      "title": "Verify staged snapshot and commit with a focused message",
+      "prompt": "Hidden setup provided two staged changes: community-site/contact.txt (staged) and community-site/notes.txt (unstaged). Your task in the terminal: (1) show the staged snapshot only, (2) if the staged snapshot contains exactly the contact change, commit it with message \"Update contact info\", and (3) leave notes.txt unstaged. Use git diff --staged and git commit -m. Type each command and press Enter. After committing, confirm the working tree still includes the unstaged notes.txt change.",
+      "starterCode": "# Work in the terminal; the starting repository state is ready.\n# Type each requested command and press Enter.",
+      "fixedLanguage": "bash",
+      "entryFilePath": "community-site/contact.txt",
       "starterFiles": [
         {
-          "path": "main.sh",
-          "content": "# Unstage the file config.json",
-          "language": "bash",
+          "path": "community-site/contact.txt",
+          "content": "# Work in the terminal; the starting repository state is ready.\n# Type each requested command and press Enter.\n",
+          "language": "text",
           "isEntry": true,
           "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/notes.txt",
+          "content": "Draft notes to discuss next week's volunteer meetup (unsaved edits).",
+          "language": "text",
+          "isEntry": false,
+          "entry": false,
           "readOnly": false
         }
       ],
       "solutionFiles": [
         {
-          "path": "main.sh",
-          "content": "git restore --staged config.json",
-          "language": "bash",
+          "path": "community-site/contact.txt",
+          "content": "# Show staged snapshot\ngit diff --staged\n# Commit the staged snapshot with the specified message\ngit commit -m \"Update contact info\"\n# Verify notes.txt is still unstaged\ngit status\n# Optionally view unstaged diff for notes.txt\ngit diff community-site/notes.txt\n",
+          "language": "text",
           "isEntry": true,
           "entry": true,
           "readOnly": false
+        },
+        {
+          "path": "community-site/notes.txt",
+          "content": "Draft notes to discuss next week's volunteer meetup (unsaved edits).",
+          "language": "text",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
         }
       ],
-      "solutionCode": "git restore --staged config.json",
+      "solutionCode": "# Show staged snapshot\ngit diff --staged\n# Commit the staged snapshot with the specified message\ngit commit -m \"Update contact info\"\n# Verify notes.txt is still unstaged\ngit status\n# Optionally view unstaged diff for notes.txt\ngit diff community-site/notes.txt",
       "recipeType": "shell_task",
-      "hint": "Read the Git task \"Unstage a File\" and identify the repository state you need to create.",
+      "mode": "terminal_workspace",
+      "hint": "Read the Git task \"Verify staged snapshot and commit with a focused message\" and identify the repository state you need to create.",
       "help": {
-        "concept": "This Git exercise checks the repository state produced by \"Unstage a File\".",
+        "concept": "This Git exercise checks the repository state produced by \"Verify staged snapshot and commit with a focused message\".",
         "hint_1": "Use git status before and after each small change so you can see what moved between the working tree, staging area, and history.",
         "hint_2": "Match the requested file names, branch names, and commit purpose before clicking Check Answer."
       },
-      "fixedLanguage": "bash",
-      "mode": "terminal_workspace",
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^git\\s+restore\\s+--staged\\s+config\\.json$"
+            "pattern": "^git\\s+diff\\s+--staged$",
+            "message": "Run `git diff --staged`, then check your answer again."
+          },
+          {
+            "pattern": "^git\\s+commit\\s+-m\\s+\"Update\\s+contact\\s+info\"$",
+            "message": "Run `git commit -m \"Update contact info\"`, then check your answer again."
+          },
+          {
+            "pattern": "^git\\s+status$",
+            "message": "Run `git status`, then check your answer again."
+          },
+          {
+            "pattern": "^git\\s+diff\\s+community-site/notes\\.txt$",
+            "message": "Run `git diff community-site/notes.txt`, then check your answer again."
           }
         ]
-      }
+      },
+      "instructions": "Hidden setup provided two staged changes: community-site/contact.txt (staged) and community-site/notes.txt (unstaged). Your task in the terminal: (1) show the staged snapshot only, (2) if the staged snapshot contains exactly the contact change, commit it with message \"Update contact info\", and (3) leave notes.txt unstaged. Use git diff --staged and git commit -m. Type each command and press Enter. After committing, confirm the working tree still includes the unstaged notes.txt change."
     },
     {
       "id": "try-stage-intentionally-sketch3",
       "kind": "code_input",
-      "title": "Practical Staging Workflow",
-      "prompt": "Stage changes in `README.md` and `LICENSE` files, verify them, and ensure they are ready for a focused commit.",
-      "starterCode": "# Stage and verify changes",
-      "entryFilePath": "main.sh",
+      "title": "Answer history questions using log and show after making a focused commit",
+      "prompt": "Hidden setup created a repository state with one unstaged change to community-site/footer.txt. Stage and commit only the footer change with message \"Adjust footer copy\". Then run git log --oneline -n 3 and use git show on the newest commit to confirm which file changed and what the commit message contains. Type each command and press Enter. Finally, report (by viewing git log and git show) that the newest commit message exactly matches \"Adjust footer copy\" and that the commit modified community-site/footer.txt.",
+      "starterCode": "# Work in the terminal; the starting repository state is ready.\n# Type each requested command and press Enter.",
+      "fixedLanguage": "bash",
+      "entryFilePath": "community-site/footer.txt",
       "starterFiles": [
         {
-          "path": "main.sh",
-          "content": "# Stage and verify changes",
-          "language": "bash",
+          "path": "community-site/footer.txt",
+          "content": "# Work in the terminal; the starting repository state is ready.\n# Type each requested command and press Enter.\n",
+          "language": "text",
           "isEntry": true,
           "entry": true,
           "readOnly": false
@@ -310,37 +417,53 @@
       ],
       "solutionFiles": [
         {
-          "path": "main.sh",
-          "content": "git add README.md\n git add LICENSE\n git diff --staged",
-          "language": "bash",
+          "path": "community-site/footer.txt",
+          "content": "# Stage the footer change\ngit add community-site/footer.txt\n# Commit with the required message\ngit commit -m \"Adjust footer copy\"\n# Show concise history\ngit log --oneline -n 3\n# Inspect the newest commit\ngit show HEAD\n# Confirm message and that community-site/footer.txt was changed\n",
+          "language": "text",
           "isEntry": true,
           "entry": true,
           "readOnly": false
         }
       ],
-      "solutionCode": "git add README.md\n git add LICENSE\n git diff --staged",
+      "solutionCode": "# Stage the footer change\ngit add community-site/footer.txt\n# Commit with the required message\ngit commit -m \"Adjust footer copy\"\n# Show concise history\ngit log --oneline -n 3\n# Inspect the newest commit\ngit show HEAD\n# Confirm message and that community-site/footer.txt was changed",
       "recipeType": "shell_task",
-      "hint": "Read the Git task \"Practical Staging Workflow\" and identify the repository state you need to create.",
+      "mode": "terminal_workspace",
+      "hint": "Read the Git task \"Answer history questions using log and show after making a focused commit\" and identify the repository state you need to create.",
       "help": {
-        "concept": "This Git exercise checks the repository state produced by \"Practical Staging Workflow\".",
+        "concept": "This Git exercise checks the repository state produced by \"Answer history questions using log and show after making a focused commit\".",
         "hint_1": "Use git status before and after each small change so you can see what moved between the working tree, staging area, and history.",
         "hint_2": "Match the requested file names, branch names, and commit purpose before clicking Check Answer."
       },
-      "fixedLanguage": "bash",
-      "mode": "terminal_workspace",
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^git\\s+add\\s+README\\.md$"
+            "pattern": "^git\\s+add\\s+community-site/footer\\.txt$",
+            "message": "Run `git add community-site/footer.txt`, then check your answer again."
           },
           {
-            "pattern": "^git\\s+add\\s+LICENSE$"
+            "pattern": "^git\\s+commit\\s+-m\\s+\"Adjust\\s+footer\\s+copy\"$",
+            "message": "Run `git commit -m \"Adjust footer copy\"`, then check your answer again."
           },
           {
-            "pattern": "^git\\s+diff\\s+--staged$"
+            "pattern": "^git\\s+log\\s+--oneline\\s+-n\\s+3$",
+            "message": "Run `git log --oneline -n 3`, then check your answer again."
+          },
+          {
+            "pattern": "^git\\s+show\\s+HEAD$",
+            "message": "Run `git show HEAD`, then check your answer again."
           }
         ]
-      }
+      },
+      "instructions": "Hidden setup created a repository state with one unstaged change to community-site/footer.txt. Stage and commit only the footer change with message \"Adjust footer copy\". Then run git log --oneline -n 3 and use git show on the newest commit to confirm which file changed and what the commit message contains. Type each command and press Enter. Finally, report (by viewing git log and git show) that the newest commit message exactly matches \"Adjust footer copy\" and that the commit modified community-site/footer.txt."
     }
-  ]
+  ],
+  "projectDraft": {
+    "title": "Module 2: Focused two-change history",
+    "stepIds": [
+      "try-stage-intentionally-sketch0",
+      "try-stage-intentionally-sketch1",
+      "try-stage-intentionally-sketch2",
+      "try-stage-intentionally-sketch3"
+    ]
+  }
 }

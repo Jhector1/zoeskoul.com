@@ -1,11 +1,19 @@
 import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { afterAll, beforeEach, describe, expect, it, vi } from "vitest";
 
 import type { ReviewCard } from "@/lib/subjects/types";
+import { learnerUiFlags } from "@/lib/config/learnerUiFlags";
 
 import { buildQuizBlockRuntimeDefaultsProps } from "./runtime/cardRuntimeDefaults";
 import CardRenderer from "./CardRenderer";
+
+
+const mutableLearnerUiFlags = learnerUiFlags as {
+    compactLearnerUi: boolean;
+    showDebugLearningUi: boolean;
+};
+const originalLearnerUiFlags = { ...mutableLearnerUiFlags };
 
 const mocked = vi.hoisted(() => ({
     quizBlockProps: [] as Array<Record<string, unknown>>,
@@ -181,6 +189,8 @@ describe("buildQuizBlockRuntimeDefaultsProps", () => {
 
 describe("CardRenderer try it handling", () => {
     beforeEach(() => {
+        mutableLearnerUiFlags.compactLearnerUi = false;
+        mutableLearnerUiFlags.showDebugLearningUi = false;
         mocked.quizBlockProps.length = 0;
         mocked.sketchBlockProps.length = 0;
         mocked.ensureCard.mockClear();
@@ -275,6 +285,33 @@ describe("CardRenderer try it handling", () => {
         expect(tryLoadingHtml).toContain("Loading saved try it yourself task state");
         expect(projectGateHtml).toContain("unlock this project");
         expect(projectGateHtml).not.toContain("try it yourself task");
+    });
+
+    it("shows local card and try-it titles only outside compact learner UI", () => {
+        mutableLearnerUiFlags.compactLearnerUi = true;
+
+        const compactHtml = renderToStaticMarkup(
+            React.createElement(
+                CardRenderer,
+                baseProps(textCard({ tryIt: embeddedTryIt() })),
+            ),
+        );
+
+        expect(compactHtml).not.toContain("Text card");
+        expect(compactHtml).not.toContain("Embedded Try It");
+        expect(mocked.quizBlockProps.at(-1)?.quizId).toBe("try-append-ten-to-list");
+
+        mutableLearnerUiFlags.compactLearnerUi = false;
+
+        const expandedHtml = renderToStaticMarkup(
+            React.createElement(
+                CardRenderer,
+                baseProps(textCard({ tryIt: embeddedTryIt() })),
+            ),
+        );
+
+        expect(expandedHtml).toContain("Text card");
+        expect(expandedHtml).toContain("Embedded Try It");
     });
 
     it("renders embedded try it inside a text card, disables Mark as done before pass, and stores state under the tryIt id", () => {
@@ -379,4 +416,8 @@ describe("CardRenderer try it handling", () => {
             "Mark this lesson as read",
         );
     });
+});
+
+afterAll(() => {
+    Object.assign(mutableLearnerUiFlags, originalLearnerUiFlags);
 });

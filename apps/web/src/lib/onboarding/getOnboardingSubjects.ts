@@ -7,11 +7,16 @@ import {
 } from "@/lib/subjects/catalogs.generated";
 import { getResolvedSubjectCatalogMap } from "@/lib/subjects/server/resolveSubjectPresentation";
 
-import {selectVisibleSubjectsForActor, withSubjectEnrollment} from "@/lib/subjects/server/subjectVisibility";
+import {
+    selectVisibleSubjectsForActor,
+    withSubjectEnrollmentActivity,
+} from "@/lib/subjects/server/subjectVisibility";
 
 export type OnboardingSubjectOption = {
     id?: string;
     slug: string;
+    enrolled: boolean;
+    lastSeenAt: string | null;
     title: string;
     description: string;
     badge: string | null;
@@ -36,7 +41,6 @@ export async function getOnboardingSubjects(): Promise<OnboardingSubjectOption[]
         prisma.practiceSubject.findMany({
             where: {
                 status: "active",
-                showInOnboarding: true,
             },
             orderBy: [{ order: "asc" }, { title: "asc" }],
             select: {
@@ -48,6 +52,7 @@ export async function getOnboardingSubjects(): Promise<OnboardingSubjectOption[]
                 imageAlt: true,
                 accessPolicy: true,
                 entitlementKey: true,
+                showInOnboarding: true,
             },
         }),
         getResolvedSubjectCatalogMap(),
@@ -69,11 +74,11 @@ export async function getOnboardingSubjects(): Promise<OnboardingSubjectOption[]
         .filter((subject): subject is NonNullable<typeof subject> => Boolean(subject));
 
     const visibleSubjects = selectVisibleSubjectsForActor(
-        await withSubjectEnrollment(mappedSubjects),
-        { familyPreference: "default" },
-    );
+        await withSubjectEnrollmentActivity(mappedSubjects),
+        { familyPreference: "enrolled" },
+    ).filter(({ db, enrolled }) => enrolled || db.showInOnboarding);
 
-    return visibleSubjects.map(({ db: s, resolved }) => {
+    return visibleSubjects.map(({ db: s, resolved, enrolled, lastSeenAt }) => {
         const imagePublicId = resolved?.imagePublicId ?? s.imagePublicId;
         const catalogSlug = SUBJECT_CATALOG_SLUGS[s.slug] ?? "other";
         const catalog = CATALOG_MANIFESTS[catalogSlug]?.catalog;
@@ -81,6 +86,8 @@ export async function getOnboardingSubjects(): Promise<OnboardingSubjectOption[]
         return {
             id: s.id,
             slug: s.slug,
+            enrolled,
+            lastSeenAt: lastSeenAt?.toISOString() ?? null,
             title: resolved?.title ?? s.title,
             description: resolved?.description ?? s.description ?? "",
             badge: badgeFromSubject({

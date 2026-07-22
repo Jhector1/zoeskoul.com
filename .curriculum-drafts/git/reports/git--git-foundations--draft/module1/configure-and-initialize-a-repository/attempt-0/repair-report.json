@@ -5,36 +5,36 @@
       "code": "GIT_MULTILINE_EXAMPLE_EXPLANATION_ADDED",
       "category": "other",
       "severity": "low",
-      "field": "sketchBlocks.sketch0.bodyMarkdown",
-      "message": "Added a step-by-step explanation for the multi-line Git example in \"sketch0\"."
+      "field": "sketchBlocks.sketch-1-git-directory.bodyMarkdown",
+      "message": "Added a step-by-step explanation for the multi-line Git example in \"sketch-1-git-directory\"."
     },
     {
-      "code": "GIT_CODE_INPUT_WORKSPACE_REBUILT",
+      "code": "GIT_TRY_IT_KIND_PROMOTED",
       "category": "other",
       "severity": "low",
       "field": "quizDraft.try-configure-and-initialize-a-repository-sketch0",
-      "message": "Rebuilt generated Git exercise \"try-configure-and-initialize-a-repository-sketch0\" as a self-contained terminal workspace with deterministic setup and grading evidence."
+      "message": "Converted generated Try It \"try-configure-and-initialize-a-repository-sketch0\" into the Git code_input required by plannedExerciseCounts."
     },
     {
-      "code": "GIT_CODE_INPUT_WORKSPACE_REBUILT",
+      "code": "GIT_TRY_IT_KIND_PROMOTED",
       "category": "other",
       "severity": "low",
       "field": "quizDraft.try-configure-and-initialize-a-repository-sketch1",
-      "message": "Rebuilt generated Git exercise \"try-configure-and-initialize-a-repository-sketch1\" as a self-contained terminal workspace with deterministic setup and grading evidence."
+      "message": "Converted generated Try It \"try-configure-and-initialize-a-repository-sketch1\" into the Git code_input required by plannedExerciseCounts."
     },
     {
-      "code": "GIT_CODE_INPUT_WORKSPACE_REBUILT",
+      "code": "GIT_TRY_IT_KIND_PROMOTED",
       "category": "other",
       "severity": "low",
       "field": "quizDraft.try-configure-and-initialize-a-repository-sketch2",
-      "message": "Rebuilt generated Git exercise \"try-configure-and-initialize-a-repository-sketch2\" as a self-contained terminal workspace with deterministic setup and grading evidence."
+      "message": "Converted generated Try It \"try-configure-and-initialize-a-repository-sketch2\" into the Git code_input required by plannedExerciseCounts."
     },
     {
-      "code": "GIT_CODE_INPUT_WORKSPACE_REBUILT",
+      "code": "GIT_TRY_IT_KIND_PROMOTED",
       "category": "other",
       "severity": "low",
       "field": "quizDraft.try-configure-and-initialize-a-repository-sketch3",
-      "message": "Rebuilt generated Git exercise \"try-configure-and-initialize-a-repository-sketch3\" as a self-contained terminal workspace with deterministic setup and grading evidence."
+      "message": "Converted generated Try It \"try-configure-and-initialize-a-repository-sketch3\" into the Git code_input required by plannedExerciseCounts."
     }
   ]
 }

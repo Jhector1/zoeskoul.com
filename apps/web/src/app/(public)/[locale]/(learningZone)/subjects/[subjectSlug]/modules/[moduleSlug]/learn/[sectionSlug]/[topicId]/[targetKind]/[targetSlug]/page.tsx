@@ -1,12 +1,14 @@
-import { redirect } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import ReviewModulePageClient from "../../../../ReviewModulePageClient";
 import { loadReviewModulePageData } from "../../../../loadReviewModulePageData";
 import {
+    buildDefaultReviewRouteTarget,
     buildReviewRoutePath,
     resolveReviewRouteTarget,
 } from "@/components/review/module/runtime/reviewRoute";
 
 export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
 
 export default async function Page({
     params,
@@ -30,13 +32,29 @@ export default async function Page({
         targetKind,
         targetSlug,
     } = await params;
-    const { mod, canUnlockAll, catalogSlug } = await loadReviewModulePageData({
+    const pageData = await loadReviewModulePageData({
         subjectSlug,
         moduleSlug,
     });
 
-    if (mod && catalogSlug) {
-        const target = resolveReviewRouteTarget({
+    if (pageData.status === "missing") {
+        return notFound();
+    }
+
+    if (pageData.status === "unavailable") {
+        return (
+            <ReviewModulePageClient
+                canUnlockAll={pageData.canUnlockAll}
+                mod={null}
+                pageStatus="unavailable"
+            />
+        );
+    }
+
+    const { mod, canUnlockAll, catalogSlug } = pageData;
+
+    const target =
+        resolveReviewRouteTarget({
             mod,
             subjectSlug,
             moduleSlug,
@@ -46,9 +64,16 @@ export default async function Page({
                 targetKind,
                 targetSlug,
             },
-        });
+        }) ?? buildDefaultReviewRouteTarget(mod);
 
-        if (target) {
+    if (target) {
+        const routeIsCanonical =
+            target.sectionSlug === sectionSlug &&
+            target.topicSlug === topicId &&
+            target.targetKind === targetKind &&
+            target.targetSlug === targetSlug;
+
+        if (catalogSlug || !routeIsCanonical) {
             redirect(
                 buildReviewRoutePath({
                     locale,
@@ -61,5 +86,11 @@ export default async function Page({
         }
     }
 
-    return <ReviewModulePageClient canUnlockAll={canUnlockAll} mod={mod} />;
+    return (
+        <ReviewModulePageClient
+            canUnlockAll={canUnlockAll}
+            mod={mod}
+            pageStatus="ready"
+        />
+    );
 }

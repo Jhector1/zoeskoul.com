@@ -28,12 +28,26 @@ function versioningForSubject(
   );
 }
 
-export async function filterDailyPracticeOptionsForActor(args: {
+export type PracticeAccessModel = {
+  subjects: DailyAccessSubject[];
+  modules: DailyAccessModule[];
+  snapshot: Awaited<ReturnType<typeof getAccessSnapshot>>;
+  requireAll: boolean;
+};
+
+export async function loadPracticeAccessModelForActor(args: {
   prisma: PrismaClient;
   actor: Actor;
   options: readonly PublishedPracticeExerciseOption[];
-}): Promise<PublishedPracticeExerciseOption[]> {
-  if (args.options.length === 0) return [];
+}): Promise<PracticeAccessModel> {
+  if (args.options.length === 0) {
+    return {
+      subjects: [],
+      modules: [],
+      snapshot: await getAccessSnapshot(args.prisma, args.actor),
+      requireAll: process.env.BILLING_REQUIRE_ALL_MODULES === "1",
+    };
+  }
 
   const subjectSlugs = [...new Set(args.options.map((option) => option.subjectSlug))];
   const moduleSlugs = [...new Set(args.options.map((option) => option.moduleSlug))];
@@ -61,8 +75,6 @@ export async function filterDailyPracticeOptionsForActor(args: {
       },
     },
   });
-
-  if (dbModules.length === 0) return [];
 
   const dbSubjects = new Map(
     dbModules
@@ -123,11 +135,26 @@ export async function filterDailyPracticeOptionsForActor(args: {
       : [],
   );
 
-  return selectAccessibleDailyPracticeOptions({
-    options: args.options,
+  return {
     subjects,
     modules,
     snapshot,
     requireAll: process.env.BILLING_REQUIRE_ALL_MODULES === "1",
+  };
+}
+
+export async function filterDailyPracticeOptionsForActor(args: {
+  prisma: PrismaClient;
+  actor: Actor;
+  options: readonly PublishedPracticeExerciseOption[];
+}): Promise<PublishedPracticeExerciseOption[]> {
+  const model = await loadPracticeAccessModelForActor(args);
+
+  return selectAccessibleDailyPracticeOptions({
+    options: args.options,
+    subjects: model.subjects,
+    modules: model.modules,
+    snapshot: model.snapshot,
+    requireAll: model.requireAll,
   });
 }

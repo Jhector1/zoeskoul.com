@@ -7,6 +7,7 @@ import CodeRunner, {
     resolveSqlMobilePaneDefault,
     resolveRunnerPaneDefaultTab,
     resolveWorkspaceTerminalPresentation,
+    resolveWorkspaceTerminalTabStrip,
     shouldAttachWorkspaceTerminalTab,
     workspaceTerminalRuntimeBridgePropsEqual,
     shouldCollapseIdleOutputPanel,
@@ -200,6 +201,37 @@ describe("CodeRunner persistent terminal controllers", () => {
 });
 
 describe("CodeRunner terminal tab presentation", () => {
+    const tabs = [
+        { id: "primary", label: "Terminal 1" },
+        { id: "terminal-2", label: "Terminal 2" },
+    ];
+
+    it("shows a creating terminal as a placeholder until its shell is ready", () => {
+        expect(
+            resolveWorkspaceTerminalTabStrip({
+                tabs,
+                pendingTerminalStartId: "terminal-2",
+                pendingTerminalStartMode: "create",
+            }),
+        ).toEqual({
+            visibleTabs: [{ id: "primary", label: "Terminal 1" }],
+            pendingTab: { id: "terminal-2", label: "Terminal 2" },
+        });
+    });
+
+    it("keeps an existing tab visible while it reattaches", () => {
+        expect(
+            resolveWorkspaceTerminalTabStrip({
+                tabs,
+                pendingTerminalStartId: "terminal-2",
+                pendingTerminalStartMode: "attach",
+            }),
+        ).toEqual({
+            visibleTabs: tabs,
+            pendingTab: null,
+        });
+    });
+
     it("keeps an existing terminal transcript visible while its socket reattaches", () => {
         expect(
             resolveWorkspaceTerminalPresentation({
@@ -215,7 +247,7 @@ describe("CodeRunner terminal tab presentation", () => {
         });
     });
 
-    it("shows Opening only for a genuinely new terminal session", () => {
+    it("keeps new-terminal startup messaging out of the terminal viewport", () => {
         expect(
             resolveWorkspaceTerminalPresentation({
                 activationPending: true,
@@ -224,7 +256,7 @@ describe("CodeRunner terminal tab presentation", () => {
                 controllerMatches: false,
             }),
         ).toEqual({
-            showOpening: true,
+            showOpening: false,
             showTranscript: true,
             inputAttached: false,
         });

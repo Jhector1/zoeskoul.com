@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { useTranslations } from "next-intl";
+import { useTaggedT } from "@/i18n/tagged";
 
 import type { PracticeShellProps } from "@/components/practice/PracticeShell";
 import PracticeScopeSelector from "@/components/practice/shell/PracticeScopeSelector";
@@ -9,6 +10,7 @@ import PracticeLeaderboardRail from "@/components/practice/leaderboard/PracticeL
 import { shouldShowPracticeLeaderboard } from "@/components/practice/leaderboard/visibility";
 import { cn } from "@/lib/cn";
 import { resolvePracticeQueueStatus } from "@/lib/practice/experience/queueStatus";
+import { resolvePracticeDisplayTitle } from "@/lib/practice/displayTitle";
 import {
   resolvePracticeDisplayStack,
   resolvePracticeQueuePlaceholderStatus,
@@ -93,6 +95,7 @@ function experienceCopy(
 export default function PracticeNavigator(props: PracticeNavigatorProps) {
   const t = useTranslations("Practice");
   const tw = useTranslations("Practice.workspace");
+  const { resolve } = useTaggedT();
   const [activePanel, setActivePanel] = useState<NavigatorPanel>("controls");
   const copy = experienceCopy(props, tw);
   const locale = props.locale || "en";
@@ -102,6 +105,19 @@ export default function PracticeNavigator(props: PracticeNavigatorProps) {
     reviewStack: props.reviewStack,
     answeredCount: props.answeredCount,
   });
+  const resolvedTopicOptions = React.useMemo(
+    () =>
+      props.topicOptionsFixed.map((option) => ({
+        ...option,
+        label: resolvePracticeDisplayTitle({
+          title: option.label,
+          titleKey: option.titleKey ?? null,
+          resolve,
+          fallback: option.label,
+        }),
+      })),
+    [props.topicOptionsFixed, resolve],
+  );
   const canChooseCatalog =
     props.experienceMode === "standard" && props.viewer.subscribed;
   const catalogVisible =
@@ -225,7 +241,7 @@ export default function PracticeNavigator(props: PracticeNavigatorProps) {
                   label={t("filters.topic")}
                   value={props.topic as any}
                   disabled={props.topicLocked || !canChooseCatalog}
-                  options={props.topicOptionsFixed as any}
+                  options={resolvedTopicOptions as any}
                   onChange={(value) => props.setTopic(value as any)}
                 />
                 <SelectField
@@ -299,10 +315,17 @@ export default function PracticeNavigator(props: PracticeNavigatorProps) {
                         </span>
                         <span className="min-w-0 flex-1">
                           <span className="block truncate text-sm font-bold">
-                            {item?.exercise?.title ||
-                              tw("navigator.exerciseFallback", {
-                                number: index + 1,
-                              })}
+                            {item
+                              ? resolvePracticeDisplayTitle({
+                                  title: item.exercise.title,
+                                  resolve,
+                                  fallback: tw("navigator.exerciseFallback", {
+                                    number: index + 1,
+                                  }),
+                                })
+                              : tw("navigator.exerciseFallback", {
+                                  number: index + 1,
+                                })}
                           </span>
                           <span className="mt-0.5 block truncate text-[11px] text-[rgb(var(--ui-text-muted)/0.84)]">
                             {isCorrect

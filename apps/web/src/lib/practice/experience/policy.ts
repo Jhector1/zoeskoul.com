@@ -4,7 +4,10 @@ import type {
   PracticeExperiencePolicy,
   PracticeViewerTier,
 } from "./types";
-import { DEFAULT_DAILY_PRACTICE_TARGET_COUNT } from "./defaults";
+import {
+  DEFAULT_DAILY_PRACTICE_TARGET_COUNT,
+  ONBOARDING_TRIAL_TARGET_COUNT,
+} from "./defaults";
 
 const FULL_HELP = true;
 
@@ -87,7 +90,7 @@ export function getPracticeExperiencePolicy(args: {
       return {
         mode: "onboarding_trial",
         label: "Onboarding trial",
-        targetCount: args.targetCount ?? 3,
+        targetCount: args.targetCount ?? ONBOARDING_TRIAL_TARGET_COUNT,
         maxAttempts: 3,
         allowReveal: FULL_HELP,
         lockDifficulty: difficulty,
@@ -164,7 +167,7 @@ export function getPracticeExperiencePolicy(args: {
         },
         eligibility: {
           allowedKinds: null,
-          allowedPurposes: ["project"],
+          allowedPurposes: editable ? ["quiz", "project"] : ["project"],
           allowMultiFile: true,
           allowTerminal: true,
         },

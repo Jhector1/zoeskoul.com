@@ -1,38 +1,50 @@
 {
-  "title": "Project: Start the Field Notes Repository",
-  "summary": "Turn a small set of neighborhood field notes into a trustworthy first Git repository with a clean initial commit.",
+  "title": "Module Project: Start Volunteer Hub History",
+  "summary": "Continue the parallel volunteer-hub repository through five cumulative steps to produce a trustworthy first snapshot on main with a repository-local identity and a clean working tree.",
   "minutes": 55,
   "sketchBlocks": [
     {
-      "id": "intro-to-git-repository",
-      "cardTitle": "Introduction to Git Repositories",
-      "title": "Understanding Git Repositories",
-      "bodyMarkdown": "A Git repository is a storage space where your project files and their history are kept. It allows you to track changes, collaborate with others, and revert to previous states if needed. In this project, you'll learn how to set up a Git repository for a neighborhood garden's field notes, ensuring that all changes are tracked and the initial state is preserved."
+      "id": "sketch0",
+      "cardTitle": "Project synopsis",
+      "title": "Prepare a trustworthy snapshot for volunteer-hub",
+      "bodyMarkdown": "This project guides you through turning an ordinary folder named volunteer-hub into a small Git repository with one clear initial commit. You'll act as a volunteer coordinator who wants a reliable local history for the project files (README.md, index.html, styles.css, and notes/schedule.txt). The five progressive steps are: inspect the folder, initialize on main, set a repository-only identity, stage only the authored files, and commit the snapshot named \"Start volunteer hub\".\n\nWhy this order matters: inspection before initialization prevents surprises; setting a local identity keeps commits attributable without changing your global Git configuration; staging lets you control exactly which files belong in the first snapshot; and a single, focused commit makes future history easier to read and revert if necessary. Each sketch below pairs with a hands-on Try It exercise that opens the volunteer-hub workspace and checks one specific repository transition."
     },
     {
-      "id": "working-with-git",
-      "cardTitle": "Working with Git",
-      "title": "Configuring and Initializing a Repository",
-      "bodyMarkdown": "To start using Git, you need to configure your identity and initialize a repository. This involves setting your name and email, which will be associated with your commits. Once configured, you can initialize a repository, which creates a .git directory to track changes. \n\nWorked example:\n\n```bash\ngit config --local user.name \"ZoeSkoul Learner\"\ngit config --local user.email \"learner@zoeskoul.local\"\ngit init -b main\n```\n\nThis example sets the local Git identity and initializes a new repository on the main branch. The `git init` command creates a new Git repository, and the `-b main` option sets the initial branch to main."
+      "id": "sketch1",
+      "cardTitle": "Look before you init",
+      "title": "Inspect the ordinary folder before creating history",
+      "bodyMarkdown": "Before you run git init, look around the folder to confirm what's already there and to get comfortable with the state of untracked files. The goal is to be intentional: know the file names and their locations so you stage only the intended project files later.\n\nWhat to check: current directory, the volunteer-hub folder contents, and the notes folder contents. A couple of useful commands are pwd and ls -R. Observing files now makes it obvious when Git reports \"untracked files\" after you initialize the repository.\n\nInterpretation tip: Untracked files are just files Git doesn't know about yet. Seeing the README.md and notes/schedule.txt now means later you'll stage the exact same files into your first snapshot."
     },
     {
-      "id": "tracking-changes",
-      "cardTitle": "Tracking Changes",
-      "title": "Staging and Committing Files",
-      "bodyMarkdown": "Once your repository is initialized, you can start tracking changes. This involves staging files you want to include in your next commit and then committing them to the repository. Staging allows you to prepare a snapshot of your changes, and committing saves this snapshot to the repository's history.\n\nWorked example:\n\n```bash\ngit add README.md observations/\ngit commit -m \"Start garden field notes\"\n```\n\nIn this example, the `git add` command stages the README.md and all files in the observations/ directory. The `git commit` command then saves these changes with a descriptive message."
+      "id": "sketch2",
+      "cardTitle": "Worked example: initialize",
+      "title": "Worked example: initializing a different ordinary folder",
+      "bodyMarkdown": "Worked example: here is a short, concrete walkthrough that shows the same idea applied to a different folder so you don't copy exact commands in the Try It. Imagine a folder park-log with two files. We initialize on main and check status.\n\n```bash\n# Move into the example folder and initialize on main\ncd park-log\ngit init -b main\n\n# Check repository status (shows untracked files)\ngit status --short\n```\n\nExplanation: git init -b main creates a new repository and ensures the initial branch is named main right away. The subsequent git status --short lists untracked files with a leading ? character; these are the files you will later stage. This worked example uses park-log and a different commit message scenario so your volunteer-hub Try Its practice the same skills on different files and a different project name."
+    },
+    {
+      "id": "sketch3",
+      "cardTitle": "Set repo identity",
+      "title": "Configure a repository-local identity",
+      "bodyMarkdown": "A repository-local identity is an identity recorded inside this repository only. Use git config --local so you won't change the global git config used for other projects. For this course, the required local identity is:\n\n- user.name: ZoeSkoul Learner\n- user.email: learner@zoeskoul.local\n\nWhy it matters: commits record the author name and email. Using a repository-local identity keeps your global settings untouched and helps make each commit traceable to the intended project workspace. After configuring, use git config --local --list or git config --local user.name to confirm the values."
+    },
+    {
+      "id": "sketch4",
+      "cardTitle": "Stage and commit",
+      "title": "Stage the project files and record the first commit",
+      "bodyMarkdown": "Staging is how you assemble the exact snapshot to commit. Use git add to place the four authored files into the staging area, then git status --short or git diff --staged to inspect the snapshot. When it looks right, run git commit -m \"Start volunteer hub\" to create the first commit.\n\nAfter the commit, verify the one-commit history with git log --oneline and confirm the working tree is clean with git status --short. A clean working tree means your tracked files match HEAD and there are no staged or unstaged changes."
     }
   ],
   "quizDraft": [
     {
-      "id": "try-git-repo-inspection",
+      "id": "try-module-1-field-notes-repository-sketch0",
       "kind": "fill_blank_choice",
-      "title": "Inspect the Garden Notes Workspace",
-      "prompt": "Use `pwd` and `ls` to inspect the `garden-notes/` directory. Read the provided `README.md` and observation files before making any changes. Type each command and press Enter.",
-      "hint": "Use `pwd` to check your current directory and `ls` to list files.",
+      "title": "Inspect the Ordinary Folder",
+      "prompt": "Open the workspace and inspect the volunteer-hub folder. Confirm the folder exists and contains README.md, index.html, styles.css, and notes/schedule.txt before the repository is initialized. Type the shell commands you would use to show these files and press Enter for each command.",
+      "hint": "List the directory recursively and show the contents of the notes directory.",
       "help": {
-        "concept": "Understanding the current directory and its contents is crucial before initializing a repository.",
-        "hint_1": "Use `pwd` to confirm you're in the correct directory.",
-        "hint_2": "Use `ls` to see the files available in the directory."
+        "concept": "Before initializing Git, use shell commands like pwd and ls to confirm the folder and files exist so you know what will be reported as untracked files after initialization.",
+        "hint_1": "Use pwd to confirm your current directory and ls -R or ls volunteer-hub to list the volunteer-hub contents.",
+        "hint_2": "To see the schedule file, use a command that prints its contents such as cat volunteer-hub/notes/schedule.txt."
       },
       "template": "A file-writing code exercise should also ____ so automated tests can check it.",
       "choices": [
@@ -44,35 +56,15 @@
       "correctValue": "print an observable result"
     },
     {
-      "id": "try-git-config",
-      "kind": "fill_blank_choice",
-      "title": "Configure the Local Author Identity",
-      "prompt": "Set the local Git identity for the `garden-notes/` repository. Use `git config --local` to set `user.name` to \"ZoeSkoul Learner\" and `user.email` to \"learner@zoeskoul.local\". Type each command and press Enter.",
-      "hint": "Use `git config --local` to set the user name and email.",
-      "help": {
-        "concept": "Configuring a local Git identity ensures that your commits are associated with the correct author.",
-        "hint_1": "Use `git config --local user.name \"ZoeSkoul Learner\"`.",
-        "hint_2": "Use `git config --local user.email \"learner@zoeskoul.local\"`."
-      },
-      "template": "A file-writing code exercise should also ____ so automated tests can check it.",
-      "choices": [
-        "print an observable result",
-        "hide all output",
-        "delete the file immediately",
-        "skip the program"
-      ],
-      "correctValue": "print an observable result"
-    },
-    {
-      "id": "try-git-init",
+      "id": "try-module-1-field-notes-repository-sketch1",
       "kind": "fill_blank_choice",
       "title": "Initialize the Repository on main",
-      "prompt": "Initialize the `garden-notes/` directory as a Git repository with the main branch. Use `git init -b main` and inspect the untracked files with `git status`. Type each command and press Enter.",
-      "hint": "Use `git init -b main` to initialize the repository on the main branch.",
+      "prompt": "Initialize the volunteer-hub folder as a Git repository whose initial branch is main. Move into volunteer-hub, initialize on main, and run a status command to show untracked files. Type each command and press Enter.",
+      "hint": "Use git init with -b main and then git status --short to see untracked files.",
       "help": {
-        "concept": "Initializing a repository creates a .git directory to track changes.",
-        "hint_1": "Use `git init -b main` to start the repository.",
-        "hint_2": "Use `git status` to check the status of your files."
+        "concept": "git init -b main creates a new repository with main as its initial branch. After initialization, untracked files appear in git status output until staged.",
+        "hint_1": "Change into the volunteer-hub directory, run git init -b main, then run git status --short.",
+        "hint_2": "After git init -b main, confirm current branch is main with git branch or rely on gitExpectations verifying branch main for this exercise."
       },
       "template": "A file-writing code exercise should also ____ so automated tests can check it.",
       "choices": [
@@ -84,15 +76,15 @@
       "correctValue": "print an observable result"
     },
     {
-      "id": "try-git-stage-files",
+      "id": "try-module-1-field-notes-repository-sketch2",
       "kind": "fill_blank_choice",
-      "title": "Stage the Initial Project Files",
-      "prompt": "Stage the `README.md` and all files in the `observations/` directory. Use `git add` to prepare these files for commit. Type each command and press Enter.",
-      "hint": "Use `git add` to stage files for commit.",
+      "title": "Configure repository-local identity",
+      "prompt": "Inside the initialized volunteer-hub repository, configure the repository-local user.name and user.email to the required values: user.name = \"ZoeSkoul Learner\" and user.email = \"learner@zoeskoul.local\". Use git config --local and then show the configured values.",
+      "hint": "Use git config --local user.name and git config --local user.email to set and verify the values.",
       "help": {
-        "concept": "Staging files prepares them to be included in the next commit.",
-        "hint_1": "Use `git add README.md` to stage the README file.",
-        "hint_2": "Use `git add observations/` to stage all files in the directory."
+        "concept": "git config --local writes configuration that applies only inside the current repository. This is useful when a project needs a specific author identity without changing your global Git settings.",
+        "hint_1": "Run git config --local user.name \"ZoeSkoul Learner\" and git config --local user.email \"learner@zoeskoul.local\", then verify with git config --local --list or by querying each value.",
+        "hint_2": "Make sure you run these commands from inside the volunteer-hub folder (cd volunteer-hub) so the settings are repository-local rather than global."
       },
       "template": "A file-writing code exercise should also ____ so automated tests can check it.",
       "choices": [
@@ -104,15 +96,35 @@
       "correctValue": "print an observable result"
     },
     {
-      "id": "try-git-commit",
+      "id": "try-module-1-field-notes-repository-sketch3",
       "kind": "fill_blank_choice",
-      "title": "Create and Verify the First Commit",
-      "prompt": "Commit the staged files with the message \"Start garden field notes\". Use `git commit` and verify the commit with `git log --oneline`. Type each command and press Enter.",
-      "hint": "Use `git commit -m` to commit with a message.",
+      "title": "Stage the First Snapshot",
+      "prompt": "Stage these four files into the index so they form a single proposed snapshot: README.md, index.html, styles.css, and notes/schedule.txt. Change into volunteer-hub, add only those files, and run git status --short to show they are staged. Type the commands and press Enter for each.",
+      "hint": "Use git add with the explicit file paths and then git status --short to show staged (A) entries.",
       "help": {
-        "concept": "Committing saves the staged changes to the repository's history.",
-        "hint_1": "Use `git commit -m \"Start garden field notes\"`.",
-        "hint_2": "Use `git log --oneline` to verify the commit."
+        "concept": "git add moves files from the working tree into the staging area. Inspect the staging area with git status --short or git diff --staged to confirm what will be committed.",
+        "hint_1": "Run cd volunteer-hub and then git add README.md index.html styles.css notes/schedule.txt, followed by git status --short.",
+        "hint_2": "Staged files appear with an A or other two-letter code in git status --short; the grader checks that only the specified files are in the staging area."
+      },
+      "template": "A file-writing code exercise should also ____ so automated tests can check it.",
+      "choices": [
+        "print an observable result",
+        "hide all output",
+        "delete the file immediately",
+        "skip the program"
+      ],
+      "correctValue": "print an observable result"
+    },
+    {
+      "id": "try-module-1-field-notes-repository-sketch4",
+      "kind": "fill_blank_choice",
+      "title": "Commit and verify the initial snapshot",
+      "prompt": "Commit the staged snapshot with the message \"Start volunteer hub\", then show the one-line log and confirm the working tree is clean. Type the commands needed and press Enter for each.",
+      "hint": "Use git commit -m \"Start volunteer hub\", then git log --oneline and git status --short.",
+      "help": {
+        "concept": "A commit records the staged snapshot permanently in the repository history. After the commit, a clean working tree means there are no staged or unstaged changes.",
+        "hint_1": "Run cd volunteer-hub, git commit -m \"Start volunteer hub\", then git log --oneline and git status --short to confirm the one-commit history and a clean tree.",
+        "hint_2": "The grader checks there is exactly one commit with the message Start volunteer hub, the tracked files are in HEAD, and the working tree is clean."
       },
       "template": "A file-writing code exercise should also ____ so automated tests can check it.",
       "choices": [
@@ -125,13 +137,13 @@
     }
   ],
   "projectDraft": {
-    "title": "Start the Field Notes Repository",
+    "title": "Start volunteer-hub history",
     "stepIds": [
-      "try-git-repo-inspection",
-      "try-git-config",
-      "try-git-init",
-      "try-git-stage-files",
-      "try-git-commit"
+      "try-module-1-field-notes-repository-sketch0",
+      "try-module-1-field-notes-repository-sketch1",
+      "try-module-1-field-notes-repository-sketch2",
+      "try-module-1-field-notes-repository-sketch3",
+      "try-module-1-field-notes-repository-sketch4"
     ]
   }
 }

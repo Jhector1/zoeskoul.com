@@ -5,36 +5,36 @@
       "code": "GIT_TRY_IT_KIND_PROMOTED",
       "category": "other",
       "severity": "low",
-      "field": "quizDraft.try-git-repo-inspection",
-      "message": "Converted generated Try It \"try-git-repo-inspection\" into the Git code_input required by plannedExerciseCounts."
+      "field": "quizDraft.try-module-1-field-notes-repository-sketch0",
+      "message": "Converted generated Try It \"try-module-1-field-notes-repository-sketch0\" into the Git code_input required by plannedExerciseCounts."
     },
     {
       "code": "GIT_TRY_IT_KIND_PROMOTED",
       "category": "other",
       "severity": "low",
-      "field": "quizDraft.try-git-config",
-      "message": "Converted generated Try It \"try-git-config\" into the Git code_input required by plannedExerciseCounts."
+      "field": "quizDraft.try-module-1-field-notes-repository-sketch1",
+      "message": "Converted generated Try It \"try-module-1-field-notes-repository-sketch1\" into the Git code_input required by plannedExerciseCounts."
     },
     {
       "code": "GIT_TRY_IT_KIND_PROMOTED",
       "category": "other",
       "severity": "low",
-      "field": "quizDraft.try-git-init",
-      "message": "Converted generated Try It \"try-git-init\" into the Git code_input required by plannedExerciseCounts."
+      "field": "quizDraft.try-module-1-field-notes-repository-sketch2",
+      "message": "Converted generated Try It \"try-module-1-field-notes-repository-sketch2\" into the Git code_input required by plannedExerciseCounts."
     },
     {
       "code": "GIT_TRY_IT_KIND_PROMOTED",
       "category": "other",
       "severity": "low",
-      "field": "quizDraft.try-git-stage-files",
-      "message": "Converted generated Try It \"try-git-stage-files\" into the Git code_input required by plannedExerciseCounts."
+      "field": "quizDraft.try-module-1-field-notes-repository-sketch3",
+      "message": "Converted generated Try It \"try-module-1-field-notes-repository-sketch3\" into the Git code_input required by plannedExerciseCounts."
     },
     {
       "code": "GIT_TRY_IT_KIND_PROMOTED",
       "category": "other",
       "severity": "low",
-      "field": "quizDraft.try-git-commit",
-      "message": "Converted generated Try It \"try-git-commit\" into the Git code_input required by plannedExerciseCounts."
+      "field": "quizDraft.try-module-1-field-notes-repository-sketch4",
+      "message": "Converted generated Try It \"try-module-1-field-notes-repository-sketch4\" into the Git code_input required by plannedExerciseCounts."
     }
   ]
 }

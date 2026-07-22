@@ -1,53 +1,84 @@
 {
-  "title": "Read Tracked and Untracked State",
-  "summary": "Use full and short status views to tell which files Git knows, which files are new, and which changes still need attention.",
+  "title": "Read the Community Site State",
+  "summary": "Look at an initialized community-site repository that still has five untracked project files. Learn to read Git status and short-status, stage the five exact project paths, and inspect the staged snapshot (what Git would record) before committing.",
   "minutes": 22,
   "sketchBlocks": [
     {
-      "id": "sketch0",
-      "cardTitle": "Understanding git status",
-      "title": "Decoding git status",
-      "bodyMarkdown": "The `git status` command is a powerful tool that provides a snapshot of the current state of your working directory and staging area. It helps you understand which changes are staged for the next commit, which are not, and which files are not being tracked by Git.\n\nWorked example: Imagine you have a project with several files. After making some changes, you run `git status`. The output shows:\n\n```\nOn branch main\nYour branch is up to date with 'origin/main'.\n\nChanges not staged for commit:\n  (use \"git add <file>...\" to update what will be committed)\n  (use \"git restore <file>...\" to discard changes in working directory)\n\tmodified:   file1.txt\n\nUntracked files:\n  (use \"git add <file>...\" to include in what will be committed)\n\tfile2.txt\n```\n\nThis output tells you that `file1.txt` has been modified but not staged, and `file2.txt` is a new file that Git is not tracking yet. Understanding this output helps you decide your next steps, such as staging changes or adding new files to the repository."
+      "id": "sketch-0",
+      "cardTitle": "Untracked files and short status",
+      "title": "Read untracked files with git status and the short view",
+      "bodyMarkdown": "Worked example:\n\nYou have a repository folder with several files that Git has never seen. To learn what Git would record, start by asking Git for the status. Example commands (illustrative only):\n\n```\n# show the normal, human-readable status\ngit status\n\n# show the compact two-column short status\ngit status --short\n```\n\nImagine git status prints a list of untracked files and git status --short shows lines that begin with `??` for each one. The short output is useful because each two-character prefix tells you both the staged and working-tree state for a file: the first column shows the staged state (A, M, D, or a space) and the second column shows the working-tree changes. When you see `?? file.txt`, that means Git considers file.txt untracked — it is present in the working tree but not staged and not in any commit yet.\n\nInterpretation: an untracked file will not be recorded by a commit until you stage it. Short status makes it easy to scan many files quickly and confirm whether the five project paths you care about are still untracked or already staged."
     },
     {
-      "id": "sketch1",
-      "cardTitle": "Using git status --short",
-      "title": "Compact View with git status --short",
-      "bodyMarkdown": "For a more concise view of your repository's status, you can use `git status --short`. This command provides a brief overview of the changes in your working directory and staging area, using symbols to indicate the state of each file.\n\nWorked example: After making changes to your project, you run `git status --short` and see:\n\n```\n M file1.txt\n?? file2.txt\n```\n\nIn this output, `M` indicates that `file1.txt` has been modified, and `??` shows that `file2.txt` is untracked. This shorthand view is particularly useful when you want a quick overview without the detailed explanations provided by the full `git status` command."
+      "id": "sketch-1",
+      "cardTitle": "Stage the five project files",
+      "title": "Move the same five files from \"untracked\" into the staging area",
+      "bodyMarkdown": "Staging copies the current working-tree contents into the index (staging area) so that those exact versions will be recorded by the next commit. Use git add with the file paths you want to include in a proposal.\n\nA compact workflow:\n\n- Run git status --short to see which files are untracked (look for `??`).\n- Use git add <path> (or list of paths) to stage them.\n- Re-run git status --short: staged additions show up with `A ` in the first column.\n\nWorked small example (explain): if `git status --short` changes from `?? README.md` to `A  README.md` after git add README.md, that means README.md is now staged and will be part of the next commit. The first-column `A` is the important signal: the index contains a new file. This lets you stage exactly the five project paths you intend to commit next, preventing accidental inclusions."
     },
     {
-      "id": "sketch2",
-      "cardTitle": "Distinguishing Tracked and Untracked Files",
-      "title": "Tracked vs. Untracked Files",
-      "bodyMarkdown": "Understanding the difference between tracked and untracked files is crucial in Git. Tracked files are those that Git is aware of and are part of the repository's history. Untracked files, on the other hand, are new files that Git has not yet been told to track.\n\nWorked example: Suppose you have a directory with several files. You run `git status` and see:\n\n```\nUntracked files:\n  (use \"git add <file>...\" to include in what will be committed)\n\tnewfile.txt\n```\n\nThis indicates that `newfile.txt` is not yet tracked by Git. To start tracking it, you would use `git add newfile.txt`. Once added, it becomes a tracked file and will be included in future commits."
+      "id": "sketch-2",
+      "cardTitle": "Inspect the staged snapshot",
+      "title": "View exactly what the staged snapshot would record",
+      "bodyMarkdown": "After staging files, the staging area contains the exact contents that a commit will record. To inspect that snapshot without creating a commit, use git diff --staged (also known as --cached) and tools like git diff --staged --name-only.\n\nWhat to look for:\n\n- git status --short shows which paths are staged (first-column markers). For staged additions you typically see `A  path`.\n- git diff --staged shows the differences between HEAD (what's recorded) and the staging area. For a brand-new repository with no commit yet, the staged files appear as new file additions in the diff output.\n\nInterpretation: git diff --staged lets you double-check file contents and prevents committing the wrong content. Use it if you want to confirm that the snapshot contains the exact lines you expect before running git commit."
     },
     {
-      "id": "sketch3",
-      "cardTitle": "Practical Use of git status",
-      "title": "Applying git status in Real Projects",
-      "bodyMarkdown": "Using `git status` effectively can prevent many common mistakes in version control. It helps ensure that you are aware of all changes before committing, reducing the risk of accidentally omitting important updates or including unwanted changes.\n\nWorked example: You're working on a project and have made several changes. Before committing, you run `git status` to review the current state. You notice a file you forgot to stage. By catching this oversight, you can stage the file and ensure it is included in your next commit, maintaining a complete and accurate project history."
+      "id": "sketch-3",
+      "cardTitle": "Read the snapshot summary",
+      "title": "Translate short-status and staged diff into the commit you will make",
+      "bodyMarkdown": "Before you commit, combine the short status and staged diff to predict the commit record.\n\n- Short status (`git status --short`) tells you which files are staged and which remain untracked. Look at the first column for staged markers.\n- The staged snapshot (`git diff --staged`) shows the exact content differences that the forthcoming commit will capture.\n\nCommon pitfall: forgetting to stage a file (it remains `??`) or staging a file you didn't mean to include. The inspect-change-verify habit (status → add → status → diff --staged) prevents both mistakes and gives you confidence about what your first commit will contain."
     }
   ],
   "quizDraft": [
     {
       "id": "try-read-tracked-and-untracked-state-sketch0",
       "kind": "code_input",
-      "title": "Practice with git status",
-      "prompt": "Initialize a new Git repository and create two files: `tracked.txt` and `untracked.txt`. Add `tracked.txt` to the staging area. Use `git status` to verify the state of your repository. What does the output show?",
-      "hint": "Remember to initialize the repository and add only one file to the staging area.",
+      "title": "Inspect and stage five community-site files (set A)",
+      "prompt": "The workspace contains an initialized community-site repository with five untracked project files in community-site/: homepage.html, team.md, events.md, style.css, and README.md. Using the terminal, stage exactly those five files so they appear in the staging area. Then run git status --short and git diff --staged --name-only to confirm the staged snapshot lists those five paths. Type each command and press Enter.\n\nExpected verification: git status --short shows each path with `A ` in the first column, and git diff --staged --name-only prints the five file paths (one per line).",
+      "hint": "Start by listing the workspace, then stage the five files with git add. Re-check with git status --short and git diff --staged --name-only.",
       "help": {
-        "concept": "The `git status` command shows the state of the working directory and staging area.",
-        "hint_1": "Initialize the repository with `git init`.",
-        "hint_2": "Add `tracked.txt` to the staging area using `git add tracked.txt`."
+        "concept": "Staging copies the working-tree file contents into the index so the next commit will record those exact files. git status --short shows staged files with an `A` in the first column; git diff --staged shows what will be recorded.",
+        "hint_1": "Run git status --short to see `??` markers for untracked files, then use git add with the five community-site paths.",
+        "hint_2": "After staging, git status --short should show lines starting with `A ` for each of the five paths and git diff --staged --name-only should list exactly those paths."
       },
-      "starterCode": "# Initialize a new Git repository\n# Create two files: tracked.txt and untracked.txt\n# Add tracked.txt to the staging area\n# Use git status to verify the state",
-      "solutionCode": "git init\ntouch tracked.txt untracked.txt\ngit add tracked.txt\ngit status",
-      "entryFilePath": "main.sh",
+      "starterCode": "# The repository and files are ready in the workspace.\n# Use terminal commands to inspect and stage the five files.\n# Example checks you might run (do not copy as the final check):\n# pwd\n# ls community-site\n# git status --short\n\n# Type the git commands and press Enter in the terminal to perform the task.",
+      "solutionCode": "git status --short\n# stage the five specific project files (type the command and press Enter)\ngit add community-site/homepage.html community-site/team.md community-site/events.md community-site/style.css community-site/README.md\n# verify the index and staged snapshot\ngit status --short\ngit diff --staged --name-only",
       "starterFiles": [
         {
-          "path": "main.sh",
-          "content": "# Initialize a new Git repository\n# Create two files: tracked.txt and untracked.txt\n# Add tracked.txt to the staging area\n# Use git status to verify the state",
-          "language": "bash",
+          "path": "community-site/homepage.html",
+          "content": "<h1>Community homepage</h1>",
+          "language": "text",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/team.md",
+          "content": "# Team\nVolunteers and maintainers.",
+          "language": "markdown",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/events.md",
+          "content": "# Events\nUpcoming volunteer events.",
+          "language": "markdown",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/style.css",
+          "content": "/* minimal styles */\nbody { font-family: sans-serif; }",
+          "language": "css",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/README.md",
+          "content": "# Community Site\nShort description of the project.",
+          "language": "markdown",
           "isEntry": true,
           "entry": true,
           "readOnly": false
@@ -55,35 +86,101 @@
       ],
       "solutionFiles": [
         {
-          "path": "main.sh",
-          "content": "git init\ntouch tracked.txt untracked.txt\ngit add tracked.txt\ngit status",
-          "language": "bash",
+          "path": "community-site/homepage.html",
+          "content": "<h1>Community homepage</h1>",
+          "language": "text",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/team.md",
+          "content": "# Team\nVolunteers and maintainers.",
+          "language": "markdown",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/events.md",
+          "content": "# Events\nUpcoming volunteer events.",
+          "language": "markdown",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/style.css",
+          "content": "/* minimal styles */\nbody { font-family: sans-serif; }",
+          "language": "css",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/README.md",
+          "content": "# Community Site\nShort description of the project.",
+          "language": "markdown",
           "isEntry": true,
           "entry": true,
           "readOnly": false
         }
       ],
-      "recipeType": "sql_query"
+      "recipeType": "shell_task",
+      "fixedLanguage": "bash",
+      "mode": "terminal_workspace",
+      "entryFilePath": "community-site/README.md"
     },
     {
       "id": "try-read-tracked-and-untracked-state-sketch1",
       "kind": "code_input",
-      "title": "Using git status --short",
-      "prompt": "Create a new Git repository and two files: `fileA.txt` and `fileB.txt`. Modify `fileA.txt` and leave `fileB.txt` untracked. Use `git status --short` to check the status. What does the output show?",
-      "hint": "Use `git status --short` to see a concise view of the changes.",
+      "title": "Stage five community-site files (set B) and read short status",
+      "prompt": "This exercise uses a different set of five project files in community-site/: index.html, about.md, contact.md, main.css, and CONTRIBUTING.md. Stage exactly those five files so the staging area contains them. Then show git status --short and git diff --staged --name-only to confirm your staged snapshot. Type each command and press Enter.",
+      "hint": "List the folder, then add the five exact paths. Re-run git status --short to see `A ` for each staged file.",
       "help": {
-        "concept": "`git status --short` provides a brief overview of changes using symbols.",
-        "hint_1": "Initialize the repository and create the files.",
-        "hint_2": "Modify `fileA.txt` and check the status with `git status --short`."
+        "concept": "git add places working-tree contents into the index. Short status shows staged files with an `A` in the first column; git diff --staged --name-only lists the files staged for the next commit.",
+        "hint_1": "Use git add with the five community-site paths (index.html, about.md, contact.md, main.css, CONTRIBUTING.md).",
+        "hint_2": "After staging, git status --short should show lines beginning with `A ` for those five files; git diff --staged --name-only should print the same paths."
       },
-      "starterCode": "# Initialize a new Git repository\n# Create two files: fileA.txt and fileB.txt\n# Modify fileA.txt\n# Use git status --short to check the status",
-      "solutionCode": "git init\ntouch fileA.txt fileB.txt\necho 'modification' > fileA.txt\ngit status --short",
-      "entryFilePath": "main.sh",
+      "starterCode": "# The repository is initialized and the files exist in community-site/.\n# Use the terminal: inspect with ls and git status --short, then stage the exact five files.\n# Type commands and press Enter to run them.",
+      "solutionCode": "git status --short\n# stage the required five files (type the command and press Enter)\ngit add community-site/index.html community-site/about.md community-site/contact.md community-site/main.css community-site/CONTRIBUTING.md\n# confirm the staging area\ngit status --short\ngit diff --staged --name-only",
       "starterFiles": [
         {
-          "path": "main.sh",
-          "content": "# Initialize a new Git repository\n# Create two files: fileA.txt and fileB.txt\n# Modify fileA.txt\n# Use git status --short to check the status",
-          "language": "bash",
+          "path": "community-site/index.html",
+          "content": "<h1>Index</h1>",
+          "language": "text",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/about.md",
+          "content": "# About\nWho we are.",
+          "language": "markdown",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/contact.md",
+          "content": "# Contact\nHow to reach us.",
+          "language": "markdown",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/main.css",
+          "content": "/* main stylesheet */",
+          "language": "css",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/CONTRIBUTING.md",
+          "content": "# Contributing\nGuidelines for contributions.",
+          "language": "markdown",
           "isEntry": true,
           "entry": true,
           "readOnly": false
@@ -91,35 +188,101 @@
       ],
       "solutionFiles": [
         {
-          "path": "main.sh",
-          "content": "git init\ntouch fileA.txt fileB.txt\necho 'modification' > fileA.txt\ngit status --short",
-          "language": "bash",
+          "path": "community-site/index.html",
+          "content": "<h1>Index</h1>",
+          "language": "text",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/about.md",
+          "content": "# About\nWho we are.",
+          "language": "markdown",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/contact.md",
+          "content": "# Contact\nHow to reach us.",
+          "language": "markdown",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/main.css",
+          "content": "/* main stylesheet */",
+          "language": "css",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/CONTRIBUTING.md",
+          "content": "# Contributing\nGuidelines for contributions.",
+          "language": "markdown",
           "isEntry": true,
           "entry": true,
           "readOnly": false
         }
       ],
-      "recipeType": "sql_query"
+      "recipeType": "shell_task",
+      "fixedLanguage": "bash",
+      "mode": "terminal_workspace",
+      "entryFilePath": "community-site/CONTRIBUTING.md"
     },
     {
       "id": "try-read-tracked-and-untracked-state-sketch2",
       "kind": "code_input",
-      "title": "Distinguishing Tracked and Untracked Files",
-      "prompt": "Initialize a Git repository and create a file `example.txt`. Do not add it to the staging area. Use `git status` to determine if the file is tracked or untracked.",
-      "hint": "Files not added to the staging area remain untracked.",
+      "title": "Stage five community-site files (set C) and inspect staged diff",
+      "prompt": "Stage these five community-site files: welcome.html, mission.md, volunteers.md, site.css, and README.md. After staging them, run git status --short and git diff --staged to inspect what content will be recorded. Type each command and press Enter.\n\nExpected verification: git status --short shows `A ` for each of the five files; git diff --staged prints the additions (new-file hunks) for those files.",
+      "hint": "Use git add with the listed paths, then check with git status --short and git diff --staged.",
       "help": {
-        "concept": "Untracked files are those not yet added to the staging area.",
-        "hint_1": "Initialize the repository and create the file.",
-        "hint_2": "Use `git status` to see the file's status."
+        "concept": "git diff --staged displays the differences between the index and HEAD — exactly the changes that will be recorded by the next commit. For new files it shows the new-file additions.",
+        "hint_1": "Stage the files with git add community-site/welcome.html community-site/mission.md community-site/volunteers.md community-site/site.css community-site/README.md.",
+        "hint_2": "After staging, git status --short should show `A ` for each path and git diff --staged should include the new-file contents for those files."
       },
-      "starterCode": "# Initialize a new Git repository\n# Create a file: example.txt\n# Use git status to check if it's tracked or untracked",
-      "solutionCode": "git init\ntouch example.txt\ngit status",
-      "entryFilePath": "main.sh",
+      "starterCode": "# Files exist under community-site/. Use the terminal to stage and inspect the snapshot.\n# Helpful checks: git status --short and git diff --staged\n# Type each command and press Enter.",
+      "solutionCode": "git status --short\n# stage the required five files (type the command and press Enter)\ngit add community-site/welcome.html community-site/mission.md community-site/volunteers.md community-site/site.css community-site/README.md\n# confirm\ngit status --short\ngit diff --staged",
       "starterFiles": [
         {
-          "path": "main.sh",
-          "content": "# Initialize a new Git repository\n# Create a file: example.txt\n# Use git status to check if it's tracked or untracked",
-          "language": "bash",
+          "path": "community-site/welcome.html",
+          "content": "<h1>Welcome</h1>",
+          "language": "text",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/mission.md",
+          "content": "# Mission\nOur mission statement.",
+          "language": "markdown",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/volunteers.md",
+          "content": "# Volunteers\nHow to volunteer.",
+          "language": "markdown",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/site.css",
+          "content": "/* site styles */",
+          "language": "css",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/README.md",
+          "content": "# Community Site\nShort description of the project.",
+          "language": "markdown",
           "isEntry": true,
           "entry": true,
           "readOnly": false
@@ -127,35 +290,101 @@
       ],
       "solutionFiles": [
         {
-          "path": "main.sh",
-          "content": "git init\ntouch example.txt\ngit status",
-          "language": "bash",
+          "path": "community-site/welcome.html",
+          "content": "<h1>Welcome</h1>",
+          "language": "text",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/mission.md",
+          "content": "# Mission\nOur mission statement.",
+          "language": "markdown",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/volunteers.md",
+          "content": "# Volunteers\nHow to volunteer.",
+          "language": "markdown",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/site.css",
+          "content": "/* site styles */",
+          "language": "css",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/README.md",
+          "content": "# Community Site\nShort description of the project.",
+          "language": "markdown",
           "isEntry": true,
           "entry": true,
           "readOnly": false
         }
       ],
-      "recipeType": "sql_query"
+      "recipeType": "shell_task",
+      "fixedLanguage": "bash",
+      "mode": "terminal_workspace",
+      "entryFilePath": "community-site/README.md"
     },
     {
       "id": "try-read-tracked-and-untracked-state-sketch3",
       "kind": "code_input",
-      "title": "Practical Use of git status",
-      "prompt": "You have a Git repository with several changes. Create a file `important.txt` and modify an existing file `notes.txt`. Use `git status` to ensure all changes are accounted for before committing.",
-      "hint": "Check the status to see which files are modified or untracked.",
+      "title": "Stage five community-site files (set D) including a nested path",
+      "prompt": "Stage these five community-site paths: home.html, team.txt, contact_us.md, styles/main.css, and README.md (note one file is in a styles/ subfolder). After staging, confirm with git status --short and git diff --staged --name-only. Type each command and press Enter.\n\nExpected verification: git status --short shows `A ` for each path (including the nested styles/main.css), and git diff --staged --name-only lists the five paths.",
+      "hint": "Remember to include the subfolder path exactly: community-site/styles/main.css. After git add, check git status --short and git diff --staged --name-only.",
       "help": {
-        "concept": "`git status` helps ensure all changes are accounted for before committing.",
-        "hint_1": "Create and modify the files as described.",
-        "hint_2": "Use `git status` to verify the changes."
+        "concept": "Git stages files by path. Paths inside subfolders must be given exactly to git add. The short status and staged diff both reflect those exact paths.",
+        "hint_1": "Run git add community-site/home.html community-site/team.txt community-site/contact_us.md community-site/styles/main.css community-site/README.md.",
+        "hint_2": "Verify with git status --short (first column `A `) and git diff --staged --name-only to list the staged paths."
       },
-      "starterCode": "# Assume a Git repository with changes\n# Create a file: important.txt\n# Modify an existing file: notes.txt\n# Use git status to ensure all changes are accounted for",
-      "solutionCode": "touch important.txt\necho 'update' >> notes.txt\ngit status",
-      "entryFilePath": "main.sh",
+      "starterCode": "# Files are present under community-site/, including a styles/ subfolder.\n# Use the terminal to add the exact paths and then confirm the staged snapshot.\n# Type commands and press Enter.",
+      "solutionCode": "git status --short\n# stage the five exact paths (type the command and press Enter)\ngit add community-site/home.html community-site/team.txt community-site/contact_us.md community-site/styles/main.css community-site/README.md\n# confirm staging\ngit status --short\ngit diff --staged --name-only",
       "starterFiles": [
         {
-          "path": "main.sh",
-          "content": "# Assume a Git repository with changes\n# Create a file: important.txt\n# Modify an existing file: notes.txt\n# Use git status to ensure all changes are accounted for",
-          "language": "bash",
+          "path": "community-site/home.html",
+          "content": "<h1>Home</h1>",
+          "language": "text",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/team.txt",
+          "content": "Team: volunteers and organizers",
+          "language": "text",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/contact_us.md",
+          "content": "# Contact Us\nEmail and phone.",
+          "language": "markdown",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/styles/main.css",
+          "content": "/* nested stylesheet */",
+          "language": "css",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/README.md",
+          "content": "# Community Site\nShort description of the project.",
+          "language": "markdown",
           "isEntry": true,
           "entry": true,
           "readOnly": false
@@ -163,144 +392,178 @@
       ],
       "solutionFiles": [
         {
-          "path": "main.sh",
-          "content": "touch important.txt\necho 'update' >> notes.txt\ngit status",
-          "language": "bash",
+          "path": "community-site/home.html",
+          "content": "<h1>Home</h1>",
+          "language": "text",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/team.txt",
+          "content": "Team: volunteers and organizers",
+          "language": "text",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/contact_us.md",
+          "content": "# Contact Us\nEmail and phone.",
+          "language": "markdown",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/styles/main.css",
+          "content": "/* nested stylesheet */",
+          "language": "css",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/README.md",
+          "content": "# Community Site\nShort description of the project.",
+          "language": "markdown",
           "isEntry": true,
           "entry": true,
           "readOnly": false
         }
       ],
-      "recipeType": "sql_query"
+      "recipeType": "shell_task",
+      "fixedLanguage": "bash",
+      "mode": "terminal_workspace",
+      "entryFilePath": "community-site/README.md"
     },
     {
-      "id": "single-choice-1",
+      "id": "q-why-local-vc",
       "kind": "single_choice",
-      "title": "Purpose of git status",
-      "prompt": "What is the primary purpose of the `git status` command?",
-      "hint": "Think about what information `git status` provides about your repository.",
+      "title": "Why local version control matters",
+      "prompt": "Which of the following best explains why a local Git repository is preferable to keeping duplicate final folders (like copy_v1, copy_v2)?",
+      "hint": "Think about what Git tracks and how history is reconstructed.",
       "help": {
-        "concept": "`git status` provides information about the current state of the working directory and staging area.",
-        "hint_1": "It shows which changes are staged, unstaged, or untracked.",
-        "hint_2": "It helps you understand what will be included in the next commit."
+        "concept": "Git records changes as a chain of snapshots and metadata rather than storing multiple full copies of a project. This makes history smaller, easier to read, and safer to manage than many duplicate final folders.",
+        "hint_1": "Git stores precise snapshots and change metadata so you can see what changed and why without keeping multiple full copies.",
+        "hint_2": "Look for the option that mentions clear history, smaller storage, and safer tracking of changes rather than manual folder copying."
       },
       "options": [
-        "To commit changes to the repository",
-        "To show the current branch and changes",
-        "To merge branches",
-        "To delete files from the repository"
+        "Git keeps a compact, readable history of changes so you can see and restore exact changes without many full duplicate folders.",
+        "Git makes a separate full copy of your project for each save so you have multiple folders to compare manually.",
+        "Using duplicate folders is faster and safer than Git because it avoids learning commands.",
+        "Git automatically uploads every folder copy to a remote server so you never need local backups."
       ],
       "correctOptionIds": [
-        "b"
+        "a"
       ]
     },
     {
-      "id": "single-choice-2",
+      "id": "q-status-untracked-marker",
       "kind": "single_choice",
-      "title": "Understanding git status --short",
-      "prompt": "What does the `??` symbol indicate in the output of `git status --short`?",
-      "hint": "Consider what `??` might mean about a file's status in the repository.",
+      "title": "Meaning of the short-status `??` marker",
+      "prompt": "In the output of git status --short, what does a line beginning with `??` for a path mean?",
+      "hint": "Which column describes staged vs. working-tree state in the short status?",
       "help": {
-        "concept": "The `??` symbol indicates untracked files in `git status --short`.",
-        "hint_1": "Untracked files are those not yet added to the staging area.",
-        "hint_2": "`??` means the file is new and not tracked by Git."
+        "concept": "In git status --short the two-character prefix encodes staged state (first column) and working-tree changes (second column). `??` indicates the file is untracked (not staged and not in any commit).",
+        "hint_1": "The `??` marker appears when Git has never tracked the file and it is not in the index.",
+        "hint_2": "It means the file is present in the working tree but will not be included in a commit unless you git add it."
       },
       "options": [
-        "A modified file",
-        "A deleted file",
-        "An untracked file",
-        "A staged file"
+        "The path is untracked — Git has not staged it and it is not in any commit.",
+        "The path is staged for deletion and will be removed by the next commit.",
+        "The path is modified in the working tree but the index still has the previous version.",
+        "The path is staged and ready to commit."
       ],
       "correctOptionIds": [
-        "c"
+        "a"
       ]
     },
     {
-      "id": "multi-choice-1",
+      "id": "q-multiple-indicators-staged",
       "kind": "multi_choice",
-      "title": "Components of git status output",
-      "prompt": "Which of the following are components of the `git status` output? Select all that apply.",
-      "hint": "Think about the different sections `git status` might show.",
+      "title": "Which outputs indicate a file has been staged?",
+      "prompt": "Select all outputs or signs that indicate a file is staged (present in the index) and will be included in the next commit.",
+      "hint": "Look for both short-status markers and staged-diff behavior.",
       "help": {
-        "concept": "`git status` shows the current branch, staged changes, unstaged changes, and untracked files.",
-        "hint_1": "It provides a comprehensive view of the repository's state.",
-        "hint_2": "Consider what information is necessary to understand the current state of your project."
+        "concept": "Staged files are shown by an `A` (added) or `M` (modified) in the first column of git status --short and they appear in git diff --staged output because the index differs from HEAD.",
+        "hint_1": "Check the first column of git status --short (it shows the index/staged state) and whether git diff --staged prints the file's changes.",
+        "hint_2": "Pick the options that reference the first-column markers and the staged diff listing, not only working-tree modifications."
       },
       "options": [
-        "Current branch",
-        "Staged changes",
-        "Untracked files",
-        "Remote branches"
+        "\"A  README.md\" appearing in git status --short",
+        "\"?? README.md\" appearing in git status --short",
+        "git diff --staged shows a diff hunk for README.md",
+        "git diff (unstaged) shows a change for README.md"
       ],
       "correctOptionIds": [
         "a",
-        "b",
         "c"
       ]
     },
     {
-      "id": "drag-reorder-1",
+      "id": "q-order-inspect-before-commit",
       "kind": "drag_reorder",
-      "title": "Order of git status sections",
-      "prompt": "Arrange the sections of the `git status` output in the correct order.",
-      "hint": "Consider the logical flow of information in `git status`.",
+      "title": "Correct order to inspect and stage before committing",
+      "prompt": "Put these actions in the order you would normally perform them to inspect and stage a set of files before making a commit.",
+      "hint": "Start by seeing what Git currently shows, then add files, then confirm the staged snapshot.",
       "help": {
-        "concept": "`git status` typically shows the current branch, followed by staged changes, unstaged changes, and untracked files.",
-        "hint_1": "Think about what information is most immediately relevant.",
-        "hint_2": "The order reflects the progression from tracked to untracked changes."
+        "concept": "A safe inspect-and-stage habit is: check status, add files, re-check status, then inspect the staged snapshot (diff --staged) before committing.",
+        "hint_1": "The first step is to look at git status to find untracked files.",
+        "hint_2": "After staging, inspect the index with git status --short and git diff --staged to confirm what will be committed."
       },
       "tokens": [
-        "Current branch",
-        "Staged changes",
-        "Unstaged changes",
-        "Untracked files"
+        "Run git status (or git status --short) to list untracked files",
+        "Use git add with the exact file paths you want to include",
+        "Run git status --short again to see staged markers (first column)",
+        "Run git diff --staged to inspect the snapshot that will be recorded"
       ],
       "correctOrder": [
-        "Current branch",
-        "Staged changes",
-        "Unstaged changes",
-        "Untracked files"
+        "Run git status (or git status --short) to list untracked files",
+        "Use git add with the exact file paths you want to include",
+        "Run git status --short again to see staged markers (first column)",
+        "Run git diff --staged to inspect the snapshot that will be recorded"
       ]
     },
     {
-      "id": "fill-blank-choice-1",
+      "id": "q-blank-short-status",
       "kind": "fill_blank_choice",
-      "title": "Symbol for modified files",
-      "prompt": "In `git status --short`, the symbol for a modified file is `[blank1]`.",
-      "hint": "Think about the symbol used to indicate modifications.",
+      "title": "Fill the short-status blank: untracked marker",
+      "prompt": "Fill the blank: The short-status marker for an untracked file is [blank1]",
+      "hint": "Short-status uses two characters; untracked files have a distinctive two-character marker.",
       "help": {
-        "concept": "The `M` symbol indicates a modified file in `git status --short`.",
-        "hint_1": "It's a single letter symbol.",
-        "hint_2": "This symbol is used for files that have been changed but not staged."
+        "concept": "git status --short uses `??` to mark untracked files explicitly. This is different from staged markers like `A` or modified markers like `M`.",
+        "hint_1": "Look for the option that is a two-character question-mark pair.",
+        "hint_2": "Remember: `??` means Git has never tracked that path."
       },
-      "template": "In `git status --short`, the symbol for a modified file is `[blank1]`.",
+      "template": "The short-status marker for an untracked file is [blank1]",
       "choices": [
-        "M",
-        "A",
-        "D",
-        "U"
-      ],
-      "correctValue": "M"
-    },
-    {
-      "id": "fill-blank-choice-2",
-      "kind": "fill_blank_choice",
-      "title": "Symbol for untracked files",
-      "prompt": "In `git status --short`, the symbol for an untracked file is `[blank1]`.",
-      "hint": "Consider the symbol used for files not yet added to the repository.",
-      "help": {
-        "concept": "The `??` symbol indicates an untracked file in `git status --short`.",
-        "hint_1": "It's a two-character symbol.",
-        "hint_2": "This symbol is used for files that are new and not tracked by Git."
-      },
-      "template": "In `git status --short`, the symbol for an untracked file is `[blank1]`.",
-      "choices": [
-        "M",
-        "A",
         "??",
-        "U"
+        "A",
+        "M",
+        "D"
       ],
       "correctValue": "??"
+    },
+    {
+      "id": "q-blank-capture-staged",
+      "kind": "fill_blank_choice",
+      "title": "Fill the blank: capture staged changes into history",
+      "prompt": "Fill the blank: To capture staged changes into history, run git [blank1]",
+      "hint": "Which command creates a new commit from the staged contents?",
+      "help": {
+        "concept": "git commit creates a new commit object from the current index (staging area) and records it in the repository history (HEAD).",
+        "hint_1": "Staging is done with git add; the next command to record it is git commit.",
+        "hint_2": "Choose the command that creates a new commit object from what's in the index."
+      },
+      "template": "To capture staged changes into history, run git [blank1]",
+      "choices": [
+        "add",
+        "commit",
+        "status",
+        "init"
+      ],
+      "correctValue": "commit"
     }
   ]
 }

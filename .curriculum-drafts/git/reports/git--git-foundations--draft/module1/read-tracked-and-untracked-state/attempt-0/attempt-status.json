@@ -1,6 +1,8 @@
 {
   "attempt": 0,
-  "status": "success",
+  "status": "failed",
+  "retryable": true,
+  "errorCode": "CURRICULUM_QUALITY_GATE_FAILED",
   "validationState": {
     "unsafeSkipValidation": false,
     "requested": {

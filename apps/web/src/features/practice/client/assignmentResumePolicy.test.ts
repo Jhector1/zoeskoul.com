@@ -19,7 +19,34 @@ describe("resolvePracticeResumePolicy", () => {
     });
   });
 
-  it("preserves non-assignment persistence policy", () => {
+  it("makes subscriber practice resume from server history", () => {
+    expect(
+      resolvePracticeResumePolicy({
+        experienceMode: "standard",
+        requestedPersistence: "session",
+      }),
+    ).toEqual({
+      clientStatePersistence: "off",
+      expectedExperienceMode: "standard",
+      resumeHistoryOnBoot: true,
+    });
+  });
+
+  it("honors an expected subscriber mode before run metadata arrives", () => {
+    expect(
+      resolvePracticeResumePolicy({
+        experienceMode: "practice",
+        requestedPersistence: "session",
+        expectedExperienceMode: "standard",
+      }),
+    ).toEqual({
+      clientStatePersistence: "off",
+      expectedExperienceMode: "standard",
+      resumeHistoryOnBoot: true,
+    });
+  });
+
+  it("preserves non-server-backed persistence policy", () => {
     expect(
       resolvePracticeResumePolicy({
         experienceMode: "daily_five",
@@ -35,7 +62,7 @@ describe("resolvePracticeResumePolicy", () => {
 });
 
 describe("buildServerResumePlan", () => {
-  it("seeds four answered assignment questions before loading question five", () => {
+  it("seeds answered questions before loading the next unanswered question", () => {
     const plan = buildServerResumePlan({
       enabled: true,
       complete: false,

@@ -26,11 +26,13 @@ export default function SketchRenderer({
                                            value,
                                            onChange,
                                            readOnly,
+                                           showTitle = true,
                                        }: {
     spec: SketchSpec;
     value: SavedSketchState;
     onChange: (s: SavedSketchState) => void;
     readOnly?: boolean;
+    showTitle?: boolean;
 }) {
     const messages = useMessages();
 
@@ -47,7 +49,7 @@ export default function SketchRenderer({
 
     switch (specT.archetype) {
         case "paragraph":
-            return <ParagraphSketch spec={specT as any} />;
+            return <ParagraphSketch spec={specT as any} showTitle={showTitle} />;
 
         case "image":
             return (

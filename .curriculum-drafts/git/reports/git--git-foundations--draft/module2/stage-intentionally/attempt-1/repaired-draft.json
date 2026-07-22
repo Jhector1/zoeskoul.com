@@ -1,61 +1,83 @@
 {
-  "title": "Stage Intentionally",
-  "summary": "Use git add to prepare selected files and git diff --staged to verify the exact snapshot before committing.",
+  "title": "Stage One Purpose at a Time",
+  "summary": "Separate supplied community-site edits so each commit records one understandable project purpose.",
   "minutes": 22,
   "sketchBlocks": [
     {
-      "id": "stage-intentionally-sketch0",
-      "title": "The Role of Staging in Git",
-      "bodyMarkdown": "Staging in Git is a crucial step in the version control process. It allows you to prepare specific changes for a commit, ensuring that only the desired modifications are included. This selective staging helps maintain a clean and understandable commit history.\n\nWorked example: Suppose you have modified two files, `index.html` and `style.css`. You only want to commit changes from `index.html`. By using `git add index.html`, you stage only this file, leaving `style.css` unstaged. This way, your commit will only include the changes from `index.html`, keeping your history focused and relevant."
+      "id": "sketch-0",
+      "title": "Stage only the changes for one purpose",
+      "bodyMarkdown": "Worked example: Imagine you edited both the homepage text and the site stylesheet while working in the community-site folder. You want the history to show a single, focused change that updates the homepage copy, and keep the stylesheet edits for a later commit. The sequence below inspects the unstaged change, stages only the HTML file, confirms the staged snapshot, commits, and then inspects remaining work.\n\nExample commands (illustrative):\n\n- Inspect all unstaged differences so you can see both the HTML and CSS edits: git diff\n- Stage the homepage change only: git add community-site/index.html\n- Look at the staged snapshot to confirm it contains only the homepage edit: git diff --staged\n- Commit the staged snapshot with a concise purpose message: git commit -m \"Update homepage heading copy\"\n- Verify the commit and inspect what remains unstaged: git log --oneline -n 1 && git show --name-only HEAD && git status\n\nWhy this matters: Staging one purpose at a time keeps each commit focused and the history easier to read. Confirming the staged snapshot before committing prevents accidental inclusion of unrelated edits."
     },
     {
-      "id": "stage-intentionally-sketch1",
-      "title": "Inspecting Staged Changes",
-      "bodyMarkdown": "Once you've staged your changes, it's important to verify them before committing. The `git diff --staged` command allows you to see the differences between the staged snapshot and the last commit.\n\nWorked example: After staging `index.html`, running `git diff --staged` will show you the exact changes that are ready to be committed. This ensures that you are aware of what will be included in your next commit, preventing accidental inclusion of unwanted changes."
+      "id": "sketch-1",
+      "title": "Compare unstaged changes with the staged snapshot",
+      "bodyMarkdown": "Worked example: You changed content in README.md and a layout file. Before committing, you want to be sure only the README change is recorded by the next commit.\n\nIllustration of the habit:\n\n- See what is currently changed but not staged: git diff README.md\n- Stage the README change: git add community-site/README.md\n- Inspect what will actually be committed: git diff --staged\n- If the staged snapshot is correct, commit: git commit -m \"Improve README introduction\"\n\nInterpretation: git diff shows working-tree edits; git diff --staged shows the exact snapshot that will become the commit. Use both to avoid mixing unrelated changes."
     },
     {
-      "id": "stage-intentionally-sketch2",
-      "title": "Transitioning Files Between Staged and Unstaged",
-      "bodyMarkdown": "Sometimes, you may need to move files between staged and unstaged states without altering their content. This flexibility is crucial for managing your commit preparation effectively.\n\nWorked example: If you have staged `index.html` but decide to make further edits before committing, you can use `git restore --staged index.html` to unstage it. This command moves the file back to the unstaged state, allowing you to continue editing without committing prematurely."
+      "id": "sketch-2",
+      "title": "Commit the staged snapshot with a clear, single-purpose message",
+      "bodyMarkdown": "Worked example: After staging the files that belong to one purpose, create a short commit message that describes that purpose precisely.\n\nSteps and rationale:\n\n- Confirm staged files: git status --short or git diff --staged --name-only\n- Make the commit with a message that names the purpose, not a list of file names: git commit -m \"Add author credit to project page\"\n- Read the recent history to confirm the single-purpose commit: git log --oneline -n 3\n- Inspect the committed snapshot to check the actual content recorded: git show HEAD --name-only\n\nA focused message makes the commit useful to later readers and to release notes. Prefer a verb phrase describing the intent (Add, Fix, Remove, Update) and the surface affected."
     },
     {
-      "id": "stage-intentionally-sketch3",
-      "title": "Applying Staging in Real Projects",
-      "bodyMarkdown": "In real-world projects, staging helps manage complex changes by allowing you to focus on specific parts of your work. This practice leads to more meaningful and manageable commit histories.\n\nWorked example: Imagine working on a project where you need to update documentation and fix a bug simultaneously. By staging only the documentation changes first, you can commit them separately from the bug fix, resulting in a clear and organized history that reflects the distinct purposes of each change."
+      "id": "sketch-3",
+      "title": "Confirm unrelated edits remain outside the commit",
+      "bodyMarkdown": "Worked example: After making a focused commit, confirm that other edits are still in the working tree and were not accidentally included.\n\nActions:\n\n- Check working tree and staging area: git status\n- View unstaged differences for a leftover file: git diff community-site/styles.css\n- Confirm the staged snapshot is now clean: git diff --staged (should be empty if nothing is staged)\n\nWhat to watch for: A commit that accidentally included unrelated changes usually comes from running git add . or a too-broad pattern. Use targeted git add <path> and git diff --staged to avoid that mistake."
     }
   ],
   "quizDraft": [
     {
-      "id": "single-choice-1",
+      "id": "quiz-1-singlechoice",
       "kind": "single_choice",
-      "title": "Staging Area Purpose",
-      "prompt": "What is the primary purpose of the staging area in Git?",
+      "title": "Which command shows the staged snapshot differences?",
+      "prompt": "Which Git command displays the differences between the staged snapshot and HEAD (i.e., what will be committed)?",
       "options": [
-        "To prepare changes for a commit",
-        "To automatically commit changes",
-        "To discard changes",
-        "To merge branches"
+        "git diff",
+        "git diff --staged",
+        "git status",
+        "git add"
       ],
       "correctOptionIds": [
-        "a"
+        "b"
       ],
-      "hint": "Consider how the staging area affects commits.",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
       "help": {
-        "concept": "The staging area allows you to prepare specific changes for a commit.",
-        "hint_1": "The staging area helps manage what changes are included in a commit.",
-        "hint_2": "It acts as a buffer between the working directory and the commit."
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
       }
     },
     {
-      "id": "multi-choice-1",
+      "id": "quiz-2-multichoice",
       "kind": "multi_choice",
-      "title": "Purpose of Staging",
-      "prompt": "What is the purpose of staging in Git? Select all that apply.",
+      "title": "What belongs in a focused commit?",
+      "prompt": "Choose the statements that describe best practices for a focused commit (select all that apply).",
       "options": [
-        "To prepare specific changes for a commit",
-        "To automatically commit all changes",
-        "To review changes before committing",
-        "To discard unwanted changes"
+        "Stage only files that implement the one purpose before committing.",
+        "Include multiple unrelated fixes in the same commit to reduce commit count.",
+        "Write a concise message that describes the purpose, not a list of filenames.",
+        "Use git add . to be safe and stage everything before committing."
+      ],
+      "correctOptionIds": [
+        "a",
+        "c"
+      ],
+      "hint": "A focused commit groups changes that serve one purpose and has a clear message.",
+      "help": {
+        "concept": "A focused commit contains only changes related to a single purpose and uses a concise, descriptive commit message; avoid grouping unrelated edits.",
+        "hint_1": "Select options that emphasize single-purpose staging and clear messages.",
+        "hint_2": "Do not select items that encourage grouping unrelated files or very long, vague messages."
+      }
+    },
+    {
+      "id": "quiz-6-multichoice-2",
+      "kind": "multi_choice",
+      "title": "How to confirm a focused commit recorded only the intended files",
+      "prompt": "After committing, which commands help you confirm that the commit contains only the intended file(s)? (Select all that apply.)",
+      "options": [
+        "git show --name-only HEAD",
+        "git ls-files --staged",
+        "git log --oneline -n 1",
+        "git status --short"
       ],
       "correctOptionIds": [
         "a",
@@ -69,271 +91,410 @@
       }
     },
     {
-      "id": "multi-choice-2",
-      "kind": "multi_choice",
-      "title": "Inspecting Staged Changes",
-      "prompt": "Which command allows you to inspect staged changes in Git?",
-      "options": [
-        "git diff",
-        "git diff --staged",
-        "git status",
-        "git log"
-      ],
-      "correctOptionIds": [
-        "b"
-      ],
-      "hint": "Think about the command that shows differences between staged changes and the last commit.",
-      "help": {
-        "concept": "Inspecting staged changes helps verify what will be committed.",
-        "hint_1": "The command shows differences between staged changes and the last commit.",
-        "hint_2": "It is similar to `git diff` but for staged changes."
-      }
-    },
-    {
-      "id": "drag-reorder-1",
+      "id": "quiz-3-dragreorder",
       "kind": "drag_reorder",
-      "title": "Staging Workflow Steps",
-      "prompt": "Arrange the steps in the correct order for staging and committing a file in Git.",
+      "title": "Order the steps for a focused commit",
+      "prompt": "Arrange these steps in the usual order for creating a focused commit.",
       "tokens": [
-        "Stage the file",
-        "Verify staged changes",
-        "Commit the changes"
+        "Check unstaged differences with git diff",
+        "Stage specific file(s) for the purpose with git add <path>",
+        "Inspect the staged snapshot with git diff --staged",
+        "Commit the staged snapshot with a concise message",
+        "Confirm the commit with git log or git show"
       ],
       "correctOrder": [
-        "Stage the file",
-        "Verify staged changes",
-        "Commit the changes"
+        "Check unstaged differences with git diff",
+        "Stage specific file(s) for the purpose with git add <path>",
+        "Inspect the staged snapshot with git diff --staged",
+        "Commit the staged snapshot with a concise message",
+        "Confirm the commit with git log or git show"
       ],
-      "hint": "Start with staging the file and end with committing it.",
+      "hint": "Inspect first, stage specifically, confirm staged snapshot, then commit.",
       "help": {
-        "concept": "Staging and committing involve specific steps in Git.",
-        "hint_1": "Begin with adding the file to the staging area.",
-        "hint_2": "End with committing the staged changes."
+        "concept": "The normal flow is: inspect working-tree diffs, stage the exact files for the single purpose, check the staged snapshot, then commit with a focused message.",
+        "hint_1": "Start by checking unstaged differences (git diff), then stage, then check git diff --staged, then commit.",
+        "hint_2": "The final verification step is to inspect the latest commit with git show or git log."
       }
     },
     {
-      "id": "fill-blank-1",
+      "id": "quiz-4-fillblank-1",
       "kind": "fill_blank_choice",
-      "title": "Command to Stage a File",
-      "prompt": "Fill in the blank to stage a file named `index.html`.",
-      "template": "git add [blank1]",
+      "title": "Remove a file from the staging area",
+      "prompt": "To unstage a file without changing its working-tree contents you run: git restore --staged [blank1]",
+      "template": "To unstage a file without changing its working-tree contents you run: git restore --staged [blank1]",
       "choices": [
-        "index.html",
-        "README.md",
-        "style.css"
+        "community-site/styles.css",
+        "git restore --staged",
+        "git add community-site/styles.css",
+        "community-site/index.html"
       ],
-      "correctValue": "index.html",
-      "hint": "Use the `git add` command.",
+      "correctValue": "community-site/styles.css",
+      "hint": "The command takes a file path after the option.",
       "help": {
-        "concept": "Staging a file prepares it for commit.",
-        "hint_1": "The command starts with `git add`.",
-        "hint_2": "Specify the file name after `git add`."
+        "concept": "git restore --staged <path> removes a path from the index (staging area) but leaves the working-tree file unchanged.",
+        "hint_1": "Provide the file path as the single missing token.",
+        "hint_2": "Example usage: git restore --staged the missing term"
       }
     },
     {
-      "id": "fill-blank-2",
+      "id": "quiz-5-fillblank-2",
       "kind": "fill_blank_choice",
-      "title": "Unstaging a File",
-      "prompt": "Fill in the blank to unstage a file named `index.html`.",
-      "template": "git restore --staged [blank1]",
+      "title": "Command to stage a single file",
+      "prompt": "To stage just the community-site README file you run: git add [blank1]",
+      "template": "To stage just the community-site README file you run: git add [blank1]",
       "choices": [
-        "index.html",
-        "README.md",
-        "style.css"
+        "community-site/README.md",
+        "community-site",
+        "git add README.md",
+        "README.md"
       ],
-      "correctValue": "index.html",
-      "hint": "Use the `git restore --staged` command.",
+      "correctValue": "community-site/README.md",
+      "hint": "Fill the missing file path exactly.",
       "help": {
-        "concept": "Unstaging a file moves it back to the working directory without losing changes.",
-        "hint_1": "The command starts with `git restore --staged`.",
-        "hint_2": "Specify the file name after `git restore --staged`."
+        "concept": "git add <path> stages the named file into the index so it will be included in the next commit.",
+        "hint_1": "Use the repository-relative path to the README file.",
+        "hint_2": "Example: git add the missing term"
       }
     },
     {
       "id": "try-stage-intentionally-sketch0",
       "kind": "code_input",
-      "title": "Stage a Specific File",
-      "prompt": "Stage the file `index.html` without staging any other changes in the workspace. Verify the staged changes using `git diff --staged`.",
-      "starterCode": "# Stage the file index.html\n# Verify the staged changes",
-      "entryFilePath": "main.sh",
+      "title": "Stage and commit the site description change",
+      "prompt": "The community-site workspace already has two edits: an updated about page and a separate change to the homepage. Stage only the about page change and commit it with the exact message: Update site description\n\nType the commands and press Enter.",
+      "starterCode": "# Work in the terminal; the starting repository state is ready.\n# Type each requested command and press Enter.",
+      "fixedLanguage": "bash",
+      "entryFilePath": "community-site/README.md",
       "starterFiles": [
         {
-          "path": "main.sh",
-          "content": "# Stage the file index.html\n# Verify the staged changes",
-          "language": "bash",
+          "path": "community-site/README.md",
+          "content": "# Work in the terminal; the starting repository state is ready.\n# Type each requested command and press Enter.\n",
+          "language": "text",
           "isEntry": true,
           "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/index.html",
+          "content": "<h1>Welcome to Our Community</h1>\n<p>Homepage content has some in-progress wording.</p>",
+          "language": "html",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/about.md",
+          "content": "# About\n\nA friendly community for neighbors and volunteers. New introductory sentence added.",
+          "language": "markdown",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/styles.css",
+          "content": "/* Working stylesheet: visual tweak in progress */\nbody { font-family: sans-serif; }",
+          "language": "css",
+          "isEntry": false,
+          "entry": false,
           "readOnly": false
         }
       ],
       "solutionFiles": [
         {
-          "path": "main.sh",
-          "content": "git add index.html\ngit diff --staged",
-          "language": "bash",
+          "path": "community-site/README.md",
+          "content": "git add community-site/about.md\n\ngit commit -m \"Update site description\"\n\ngit log --oneline -n 1\n\ngit show --name-only HEAD\n",
+          "language": "text",
           "isEntry": true,
           "entry": true,
           "readOnly": false
+        },
+        {
+          "path": "community-site/index.html",
+          "content": "<h1>Welcome to Our Community</h1>\n<p>Homepage content has some in-progress wording.</p>",
+          "language": "html",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/about.md",
+          "content": "# About\n\nA friendly community for neighbors and volunteers. New introductory sentence added.",
+          "language": "markdown",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/styles.css",
+          "content": "/* Working stylesheet: visual tweak in progress */\nbody { font-family: sans-serif; }",
+          "language": "css",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
         }
       ],
-      "solutionCode": "git add index.html\ngit diff --staged",
+      "solutionCode": "git add community-site/about.md\n\ngit commit -m \"Update site description\"\n\ngit log --oneline -n 1\n\ngit show --name-only HEAD",
       "recipeType": "shell_task",
-      "hint": "Read the Git task \"Stage a Specific File\" and identify the repository state you need to create.",
+      "mode": "terminal_workspace",
+      "hint": "Read the Git task \"Stage and commit the site description change\" and identify the repository state you need to create.",
       "help": {
-        "concept": "This Git exercise checks the repository state produced by \"Stage a Specific File\".",
+        "concept": "This Git exercise checks the repository state produced by \"Stage and commit the site description change\".",
         "hint_1": "Use git status before and after each small change so you can see what moved between the working tree, staging area, and history.",
         "hint_2": "Match the requested file names, branch names, and commit purpose before clicking Check Answer."
       },
-      "fixedLanguage": "bash",
-      "mode": "terminal_workspace",
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^git\\s+add\\s+index\\.html$"
+            "pattern": "^git\\s+add\\s+community-site/about\\.md$",
+            "message": "Run `git add community-site/about.md`, then check your answer again."
           },
           {
-            "pattern": "^git\\s+diff\\s+--staged$"
+            "pattern": "^git\\s+commit\\s+-m\\s+\"Update\\s+site\\s+description\"$",
+            "message": "Run `git commit -m \"Update site description\"`, then check your answer again."
+          },
+          {
+            "pattern": "^git\\s+log\\s+--oneline\\s+-n\\s+1$",
+            "message": "Run `git log --oneline -n 1`, then check your answer again."
+          },
+          {
+            "pattern": "^git\\s+show\\s+--name-only\\s+HEAD$",
+            "message": "Run `git show --name-only HEAD`, then check your answer again."
           }
         ]
-      }
+      },
+      "instructions": "The community-site workspace already has two edits: an updated about page and a separate change to the homepage. Stage only the about page change and commit it with the exact message: Update site description\n\nType the commands and press Enter."
     },
     {
       "id": "try-stage-intentionally-sketch1",
       "kind": "code_input",
-      "title": "Inspect Staged Changes",
-      "prompt": "After staging `index.html`, inspect the staged changes to ensure only this file is prepared for commit.",
-      "starterCode": "# Inspect the staged changes",
-      "entryFilePath": "main.sh",
+      "title": "Stage and commit only the stylesheet polish",
+      "prompt": "The community-site workspace has a stylesheet tweak and an unrelated copy edit to index.html. Stage only the stylesheet change and commit with the exact message: Polish site styles\n\nType the commands and press Enter.",
+      "starterCode": "# Work in the terminal; the starting repository state is ready.\n# Type each requested command and press Enter.",
+      "fixedLanguage": "bash",
+      "entryFilePath": "community-site/index.html",
       "starterFiles": [
         {
-          "path": "main.sh",
-          "content": "# Inspect the staged changes",
-          "language": "bash",
+          "path": "community-site/index.html",
+          "content": "# Work in the terminal; the starting repository state is ready.\n# Type each requested command and press Enter.\n",
+          "language": "html",
           "isEntry": true,
           "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/styles.css",
+          "content": "/* Tweak: increase spacing for headings */\nh1 { margin-top: 1.2rem; }\nbody { font-family: system-ui; }",
+          "language": "css",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/README.md",
+          "content": "Community Site\n\nThis local site collects neighborhood volunteer resources.",
+          "language": "text",
+          "isEntry": false,
+          "entry": false,
           "readOnly": false
         }
       ],
       "solutionFiles": [
         {
-          "path": "main.sh",
-          "content": "git diff --staged",
-          "language": "bash",
+          "path": "community-site/index.html",
+          "content": "git add community-site/styles.css\n\ngit commit -m \"Polish site styles\"\n\ngit show --name-only HEAD\n",
+          "language": "html",
           "isEntry": true,
           "entry": true,
           "readOnly": false
+        },
+        {
+          "path": "community-site/styles.css",
+          "content": "/* Tweak: increase spacing for headings */\nh1 { margin-top: 1.2rem; }\nbody { font-family: system-ui; }",
+          "language": "css",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/README.md",
+          "content": "Community Site\n\nThis local site collects neighborhood volunteer resources.",
+          "language": "text",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
         }
       ],
-      "solutionCode": "git diff --staged",
+      "solutionCode": "git add community-site/styles.css\n\ngit commit -m \"Polish site styles\"\n\ngit show --name-only HEAD",
       "recipeType": "shell_task",
-      "hint": "Read the Git task \"Inspect Staged Changes\" and identify the repository state you need to create.",
+      "mode": "terminal_workspace",
+      "hint": "Read the Git task \"Stage and commit only the stylesheet polish\" and identify the repository state you need to create.",
       "help": {
-        "concept": "This Git exercise checks the repository state produced by \"Inspect Staged Changes\".",
+        "concept": "This Git exercise checks the repository state produced by \"Stage and commit only the stylesheet polish\".",
         "hint_1": "Use git status before and after each small change so you can see what moved between the working tree, staging area, and history.",
         "hint_2": "Match the requested file names, branch names, and commit purpose before clicking Check Answer."
       },
-      "fixedLanguage": "bash",
-      "mode": "terminal_workspace",
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^git\\s+diff\\s+--staged$"
+            "pattern": "^git\\s+add\\s+community-site/styles\\.css$",
+            "message": "Run `git add community-site/styles.css`, then check your answer again."
+          },
+          {
+            "pattern": "^git\\s+commit\\s+-m\\s+\"Polish\\s+site\\s+styles\"$",
+            "message": "Run `git commit -m \"Polish site styles\"`, then check your answer again."
+          },
+          {
+            "pattern": "^git\\s+show\\s+--name-only\\s+HEAD$",
+            "message": "Run `git show --name-only HEAD`, then check your answer again."
           }
         ]
-      }
+      },
+      "instructions": "The community-site workspace has a stylesheet tweak and an unrelated copy edit to index.html. Stage only the stylesheet change and commit with the exact message: Polish site styles\n\nType the commands and press Enter."
     },
     {
       "id": "try-stage-intentionally-sketch2",
       "kind": "code_input",
-      "title": "Unstage a File",
-      "prompt": "Unstage the file `index.html` after it has been staged, without losing any changes.",
-      "starterCode": "# Unstage the file index.html",
-      "entryFilePath": "main.sh",
+      "title": "Commit the README improvement only",
+      "prompt": "community-site contains a README update and a new contributors note in a separate file. Stage only community-site/README.md and commit with the exact message: Add contributor instructions\n\nType the commands and press Enter.",
+      "starterCode": "# Work in the terminal; the starting repository state is ready.\n# Type each requested command and press Enter.",
+      "fixedLanguage": "bash",
+      "entryFilePath": "community-site/README.md",
       "starterFiles": [
         {
-          "path": "main.sh",
-          "content": "# Unstage the file index.html",
-          "language": "bash",
+          "path": "community-site/README.md",
+          "content": "# Work in the terminal; the starting repository state is ready.\n# Type each requested command and press Enter.\n",
+          "language": "text",
           "isEntry": true,
           "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/CONTRIB.txt",
+          "content": "Draft contributor notes: Please add your name and area of interest.",
+          "language": "text",
+          "isEntry": false,
+          "entry": false,
           "readOnly": false
         }
       ],
       "solutionFiles": [
         {
-          "path": "main.sh",
-          "content": "git restore --staged index.html",
-          "language": "bash",
+          "path": "community-site/README.md",
+          "content": "git add community-site/README.md\n\ngit commit -m \"Add contributor instructions\"\n\ngit log --oneline -n 1\n\ngit show --name-only HEAD\n",
+          "language": "text",
           "isEntry": true,
           "entry": true,
           "readOnly": false
+        },
+        {
+          "path": "community-site/CONTRIB.txt",
+          "content": "Draft contributor notes: Please add your name and area of interest.",
+          "language": "text",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
         }
       ],
-      "solutionCode": "git restore --staged index.html",
+      "solutionCode": "git add community-site/README.md\n\ngit commit -m \"Add contributor instructions\"\n\ngit log --oneline -n 1\n\ngit show --name-only HEAD",
       "recipeType": "shell_task",
-      "hint": "Read the Git task \"Unstage a File\" and identify the repository state you need to create.",
+      "mode": "terminal_workspace",
+      "hint": "Read the Git task \"Commit the README improvement only\" and identify the repository state you need to create.",
       "help": {
-        "concept": "This Git exercise checks the repository state produced by \"Unstage a File\".",
+        "concept": "This Git exercise checks the repository state produced by \"Commit the README improvement only\".",
         "hint_1": "Use git status before and after each small change so you can see what moved between the working tree, staging area, and history.",
         "hint_2": "Match the requested file names, branch names, and commit purpose before clicking Check Answer."
       },
-      "fixedLanguage": "bash",
-      "mode": "terminal_workspace",
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^git\\s+restore\\s+--staged\\s+index\\.html$"
+            "pattern": "^git\\s+add\\s+community-site/README\\.md$",
+            "message": "Run `git add community-site/README.md`, then check your answer again."
+          },
+          {
+            "pattern": "^git\\s+commit\\s+-m\\s+\"Add\\s+contributor\\s+instructions\"$",
+            "message": "Run `git commit -m \"Add contributor instructions\"`, then check your answer again."
+          },
+          {
+            "pattern": "^git\\s+log\\s+--oneline\\s+-n\\s+1$",
+            "message": "Run `git log --oneline -n 1`, then check your answer again."
+          },
+          {
+            "pattern": "^git\\s+show\\s+--name-only\\s+HEAD$",
+            "message": "Run `git show --name-only HEAD`, then check your answer again."
           }
         ]
-      }
+      },
+      "instructions": "community-site contains a README update and a new contributors note in a separate file. Stage only community-site/README.md and commit with the exact message: Add contributor instructions\n\nType the commands and press Enter."
     },
     {
       "id": "try-stage-intentionally-sketch3",
       "kind": "code_input",
-      "title": "Stage and Commit Documentation",
-      "prompt": "Stage only the changes in `README.md` and commit them with the message 'Update documentation'.",
-      "starterCode": "# Stage the README.md file\n# Commit with a message",
-      "entryFilePath": "main.sh",
+      "title": "Rename a contributor file and commit only that rename",
+      "prompt": "A contributor draft file must be renamed from community-site/CONTRIB.txt to community-site/CONTRIB.md. Perform the rename using git so the rename is recorded, then commit with the exact message: Rename contrib file\n\nLeave any other working-tree edits alone. Type the commands and press Enter.",
+      "starterCode": "# Work in the terminal; the starting repository state is ready.\n# Type each requested command and press Enter.",
+      "fixedLanguage": "bash",
+      "entryFilePath": "community-site/CONTRIB.txt",
       "starterFiles": [
         {
-          "path": "main.sh",
-          "content": "# Stage the README.md file\n# Commit with a message",
-          "language": "bash",
+          "path": "community-site/CONTRIB.txt",
+          "content": "# Work in the terminal; the starting repository state is ready.\n# Type each requested command and press Enter.\n",
+          "language": "text",
           "isEntry": true,
           "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/index.html",
+          "content": "<h1>Community Events</h1>\n<p>Upcoming events: (draft list)</p>",
+          "language": "html",
+          "isEntry": false,
+          "entry": false,
           "readOnly": false
         }
       ],
       "solutionFiles": [
         {
-          "path": "main.sh",
-          "content": "git add README.md\ngit commit -m 'Update documentation'",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true,
+          "path": "community-site/CONTRIB.md",
+          "content": "Draft contributor notes: Please add your name and area of interest.",
+          "language": "markdown",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/index.html",
+          "content": "<h1>Community Events</h1>\n<p>Upcoming events: (draft list)</p>",
+          "language": "html",
+          "isEntry": false,
+          "entry": false,
           "readOnly": false
         }
       ],
-      "solutionCode": "git add README.md\ngit commit -m 'Update documentation'",
+      "solutionCode": "git mv community-site/CONTRIB.txt community-site/CONTRIB.md\n\ngit commit -m \"Rename contrib file\"\n\ngit show --name-only HEAD",
       "recipeType": "shell_task",
-      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
-      "help": {
-        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
-      },
-      "fixedLanguage": "bash",
       "mode": "terminal_workspace",
+      "hint": "Read the Git task \"Rename a contributor file and commit only that rename\" and identify the repository state you need to create.",
+      "help": {
+        "concept": "This Git exercise checks the repository state produced by \"Rename a contributor file and commit only that rename\".",
+        "hint_1": "Use git status before and after each small change so you can see what moved between the working tree, staging area, and history.",
+        "hint_2": "Match the requested file names, branch names, and commit purpose before clicking Check Answer."
+      },
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^git\\s+add\\s+README\\.md$"
+            "pattern": "^git\\s+mv\\s+community-site/CONTRIB\\.txt\\s+community-site/CONTRIB\\.md$",
+            "message": "Run `git mv community-site/CONTRIB.txt community-site/CONTRIB.md`, then check your answer again."
           },
           {
-            "pattern": "^git\\s+commit\\s+-m\\s+'Update\\s+documentation'$"
+            "pattern": "^git\\s+commit\\s+-m\\s+\"Rename\\s+contrib\\s+file\"$",
+            "message": "Run `git commit -m \"Rename contrib file\"`, then check your answer again."
+          },
+          {
+            "pattern": "^git\\s+show\\s+--name-only\\s+HEAD$",
+            "message": "Run `git show --name-only HEAD`, then check your answer again."
           }
         ]
-      }
+      },
+      "instructions": "A contributor draft file must be renamed from community-site/CONTRIB.txt to community-site/CONTRIB.md. Perform the rename using git so the rename is recorded, then commit with the exact message: Rename contrib file\n\nLeave any other working-tree edits alone. Type the commands and press Enter."
     }
   ]
 }

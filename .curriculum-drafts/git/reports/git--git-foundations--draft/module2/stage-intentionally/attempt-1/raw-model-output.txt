@@ -1,1 +1,663 @@
-{"title":"Stage Intentionally","summary":"Use git add to prepare selected files and git diff --staged to verify the exact snapshot before committing.","minutes":22,"sketchBlocks":[{"id":"stage-intentionally-sketch0","cardTitle":"Understanding Staging","title":"The Role of Staging in Git","bodyMarkdown":"Staging in Git is a crucial step in the version control process. It allows you to prepare specific changes for a commit, ensuring that only the desired modifications are included. This selective staging helps maintain a clean and understandable commit history.\n\nWorked example: Suppose you have modified two files, `index.html` and `style.css`. You only want to commit changes from `index.html`. By using `git add index.html`, you stage only this file, leaving `style.css` unstaged. This way, your commit will only include the changes from `index.html`, keeping your history focused and relevant."},{"id":"stage-intentionally-sketch1","cardTitle":"Using git diff --staged","title":"Inspecting Staged Changes","bodyMarkdown":"Once you've staged your changes, it's important to verify them before committing. The `git diff --staged` command allows you to see the differences between the staged snapshot and the last commit.\n\nWorked example: After staging `index.html`, running `git diff --staged` will show you the exact changes that are ready to be committed. This ensures that you are aware of what will be included in your next commit, preventing accidental inclusion of unwanted changes."},{"id":"stage-intentionally-sketch2","cardTitle":"Moving Files Between States","title":"Transitioning Files Between Staged and Unstaged","bodyMarkdown":"Sometimes, you may need to move files between staged and unstaged states without altering their content. This flexibility is crucial for managing your commit preparation effectively.\n\nWorked example: If you have staged `index.html` but decide to make further edits before committing, you can use `git restore --staged index.html` to unstage it. This command moves the file back to the unstaged state, allowing you to continue editing without committing prematurely."},{"id":"stage-intentionally-sketch3","cardTitle":"Practical Staging Workflow","title":"Applying Staging in Real Projects","bodyMarkdown":"In real-world projects, staging helps manage complex changes by allowing you to focus on specific parts of your work. This practice leads to more meaningful and manageable commit histories.\n\nWorked example: Imagine working on a project where you need to update documentation and fix a bug simultaneously. By staging only the documentation changes first, you can commit them separately from the bug fix, resulting in a clear and organized history that reflects the distinct purposes of each change."}],"quizDraft":[{"id":"try-stage-intentionally-sketch0","kind":"code_input","title":"Stage a Specific File","prompt":"Stage the file `index.html` without staging any other changes in the workspace. Verify the staged changes using `git diff --staged`.","hint":"Use `git add` to stage the specific file and `git diff --staged` to verify.","help":{"concept":"Staging allows you to prepare specific changes for a commit.","hint_1":"Use `git add <file>` to stage a specific file.","hint_2":"Verify staged changes with `git diff --staged`."},"options":null,"correctOptionIds":null,"tokens":null,"correctOrder":null,"template":null,"choices":null,"correctValue":null,"starterCode":"# Stage the file index.html\n# Verify the staged changes\n","solutionCode":"git add index.html\ngit diff --staged\n","entryFilePath":"main.sh","starterFiles":[{"path":"main.sh","content":"# Stage the file index.html\n# Verify the staged changes\n","language":"bash","isEntry":true,"entry":true,"readOnly":false}],"solutionFiles":[{"path":"main.sh","content":"git add index.html\ngit diff --staged\n","language":"bash","isEntry":true,"entry":true,"readOnly":false}],"sqlFileOrder":null,"tests":null,"files":null,"semanticChecks":null,"datasetId":null,"recipeType":"sql_query","checkSql":null},{"id":"try-stage-intentionally-sketch1","kind":"code_input","title":"Inspect Staged Changes","prompt":"After staging `index.html`, inspect the staged changes to ensure only this file is prepared for commit.","hint":"Use `git diff --staged` to see the staged changes.","help":{"concept":"Inspecting staged changes helps verify what will be committed.","hint_1":"Run `git diff --staged` to view staged changes.","hint_2":"Ensure only `index.html` is staged."},"options":null,"correctOptionIds":null,"tokens":null,"correctOrder":null,"template":null,"choices":null,"correctValue":null,"starterCode":"# Inspect the staged changes\n","solutionCode":"git diff --staged\n","entryFilePath":"main.sh","starterFiles":[{"path":"main.sh","content":"# Inspect the staged changes\n","language":"bash","isEntry":true,"entry":true,"readOnly":false}],"solutionFiles":[{"path":"main.sh","content":"git diff --staged\n","language":"bash","isEntry":true,"entry":true,"readOnly":false}],"sqlFileOrder":null,"tests":null,"files":null,"semanticChecks":null,"datasetId":null,"recipeType":"sql_query","checkSql":null},{"id":"try-stage-intentionally-sketch2","kind":"code_input","title":"Unstage a File","prompt":"Unstage the file `index.html` after it has been staged, without losing any changes.","hint":"Use `git restore --staged` to unstage a file.","help":{"concept":"Unstaging a file moves it back to the working directory without losing changes.","hint_1":"Use `git restore --staged <file>` to unstage.","hint_2":"Ensure the file remains in the working directory."},"options":null,"correctOptionIds":null,"tokens":null,"correctOrder":null,"template":null,"choices":null,"correctValue":null,"starterCode":"# Unstage the file index.html\n","solutionCode":"git restore --staged index.html\n","entryFilePath":"main.sh","starterFiles":[{"path":"main.sh","content":"# Unstage the file index.html\n","language":"bash","isEntry":true,"entry":true,"readOnly":false}],"solutionFiles":[{"path":"main.sh","content":"git restore --staged index.html\n","language":"bash","isEntry":true,"entry":true,"readOnly":false}],"sqlFileOrder":null,"tests":null,"files":null,"semanticChecks":null,"datasetId":null,"recipeType":"sql_query","checkSql":null},{"id":"try-stage-intentionally-sketch3","kind":"code_input","title":"Stage and Commit Documentation","prompt":"Stage only the changes in `README.md` and commit them with the message 'Update documentation'.","hint":"Stage the file and use `git commit` with a message.","help":{"concept":"Staging specific files allows for focused commits.","hint_1":"Use `git add <file>` to stage.","hint_2":"Commit with `git commit -m 'message'`."},"options":null,"correctOptionIds":null,"tokens":null,"correctOrder":null,"template":null,"choices":null,"correctValue":null,"starterCode":"# Stage the README.md file\n# Commit with a message\n","solutionCode":"git add README.md\ngit commit -m 'Update documentation'\n","entryFilePath":"main.sh","starterFiles":[{"path":"main.sh","content":"# Stage the README.md file\n# Commit with a message\n","language":"bash","isEntry":true,"entry":true,"readOnly":false}],"solutionFiles":[{"path":"main.sh","content":"git add README.md\ngit commit -m 'Update documentation'\n","language":"bash","isEntry":true,"entry":true,"readOnly":false}],"sqlFileOrder":null,"tests":null,"files":null,"semanticChecks":null,"datasetId":null,"recipeType":"sql_query","checkSql":null},{"id":"multi-choice-1","kind":"multi_choice","title":"Purpose of Staging","prompt":"What is the purpose of staging in Git? Select all that apply.","hint":"Consider how staging affects the commit process.","help":{"concept":"Staging allows you to prepare specific changes for a commit.","hint_1":"Staging helps manage what changes are included in a commit.","hint_2":"Staging can prevent unwanted changes from being committed."},"options":["To prepare specific changes for a commit","To automatically commit all changes","To review changes before committing","To discard unwanted changes"],"correctOptionIds":["a","c"] ,"tokens":null,"correctOrder":null,"template":null,"choices":null,"correctValue":null,"starterCode":null,"solutionCode":null,"entryFilePath":null,"starterFiles":null,"solutionFiles":null,"sqlFileOrder":null,"tests":null,"files":null,"semanticChecks":null,"datasetId":null,"recipeType":null,"checkSql":null},{"id":"multi-choice-2","kind":"multi_choice","title":"Inspecting Staged Changes","prompt":"Which command allows you to inspect staged changes in Git?","hint":"Think about the command that shows differences between staged changes and the last commit.","help":{"concept":"Inspecting staged changes helps verify what will be committed.","hint_1":"The command shows differences between staged changes and the last commit.","hint_2":"It is similar to `git diff` but for staged changes."},"options":["git diff","git diff --staged","git status","git log"],"correctOptionIds":["b"],"tokens":null,"correctOrder":null,"template":null,"choices":null,"correctValue":null,"starterCode":null,"solutionCode":null,"entryFilePath":null,"starterFiles":null,"solutionFiles":null,"sqlFileOrder":null,"tests":null,"files":null,"semanticChecks":null,"datasetId":null,"recipeType":null,"checkSql":null},{"id":"fill-blank-1","kind":"fill_blank_choice","title":"Command to Stage a File","prompt":"Fill in the blank to stage a file named `index.html`.","hint":"Use the `git add` command.","help":{"concept":"Staging a file prepares it for commit.","hint_1":"The command starts with `git add`.","hint_2":"Specify the file name after `git add`."},"options":null,"correctOptionIds":null,"tokens":null,"correctOrder":null,"template":"git add [blank1]","choices":["index.html","README.md","style.css"],"correctValue":"index.html","starterCode":null,"solutionCode":null,"entryFilePath":null,"starterFiles":null,"solutionFiles":null,"sqlFileOrder":null,"tests":null,"files":null,"semanticChecks":null,"datasetId":null,"recipeType":null,"checkSql":null},{"id":"fill-blank-2","kind":"fill_blank_choice","title":"Unstaging a File","prompt":"Fill in the blank to unstage a file named `index.html`.","hint":"Use the `git restore --staged` command.","help":{"concept":"Unstaging a file moves it back to the working directory without losing changes.","hint_1":"The command starts with `git restore --staged`.","hint_2":"Specify the file name after `git restore --staged`."},"options":null,"correctOptionIds":null,"tokens":null,"correctOrder":null,"template":"git restore --staged [blank1]","choices":["index.html","README.md","style.css"],"correctValue":"index.html","starterCode":null,"solutionCode":null,"entryFilePath":null,"starterFiles":null,"solutionFiles":null,"sqlFileOrder":null,"tests":null,"files":null,"semanticChecks":null,"datasetId":null,"recipeType":null,"checkSql":null},{"id":"single-choice-1","kind":"single_choice","title":"Staging Area Purpose","prompt":"What is the primary purpose of the staging area in Git?","hint":"Consider how the staging area affects commits.","help":{"concept":"The staging area allows you to prepare specific changes for a commit.","hint_1":"The staging area helps manage what changes are included in a commit.","hint_2":"It acts as a buffer between the working directory and the commit."},"options":["To prepare changes for a commit","To automatically commit changes","To discard changes","To merge branches"],"correctOptionIds":["a"],"tokens":null,"correctOrder":null,"template":null,"choices":null,"correctValue":null,"starterCode":null,"solutionCode":null,"entryFilePath":null,"starterFiles":null,"solutionFiles":null,"sqlFileOrder":null,"tests":null,"files":null,"semanticChecks":null,"datasetId":null,"recipeType":null,"checkSql":null},{"id":"drag-reorder-1","kind":"drag_reorder","title":"Staging Workflow Steps","prompt":"Arrange the steps in the correct order for staging and committing a file in Git.","hint":"Start with staging the file and end with committing it.","help":{"concept":"Staging and committing involve specific steps in Git.","hint_1":"Begin with adding the file to the staging area.","hint_2":"End with committing the staged changes."},"options":null,"correctOptionIds":null,"tokens":["Stage the file","Verify staged changes","Commit the changes"],"correctOrder":["Stage the file","Verify staged changes","Commit the changes"],"template":null,"choices":null,"correctValue":null,"starterCode":null,"solutionCode":null,"entryFilePath":null,"starterFiles":null,"solutionFiles":null,"sqlFileOrder":null,"tests":null,"files":null,"semanticChecks":null,"datasetId":null,"recipeType":null,"checkSql":null}],"projectDraft":null}
+{
+  "title": "Stage One Purpose at a Time",
+  "summary": "Separate supplied community-site edits so each commit records one understandable project purpose.",
+  "minutes": 22,
+  "sketchBlocks": [
+    {
+      "id": "sketch-0",
+      "cardTitle": "Single-purpose staging",
+      "title": "Stage only the changes for one purpose",
+      "bodyMarkdown": "Worked example: Imagine you edited both the homepage text and the site stylesheet while working in the community-site folder. You want the history to show a single, focused change that updates the homepage copy, and keep the stylesheet edits for a later commit. The sequence below inspects the unstaged change, stages only the HTML file, confirms the staged snapshot, commits, and then inspects remaining work.\n\nExample commands (illustrative):\n\n- Inspect all unstaged differences so you can see both the HTML and CSS edits: git diff\n- Stage the homepage change only: git add community-site/index.html\n- Look at the staged snapshot to confirm it contains only the homepage edit: git diff --staged\n- Commit the staged snapshot with a concise purpose message: git commit -m \"Update homepage heading copy\"\n- Verify the commit and inspect what remains unstaged: git log --oneline -n 1 && git show --name-only HEAD && git status\n\nWhy this matters: Staging one purpose at a time keeps each commit focused and the history easier to read. Confirming the staged snapshot before committing prevents accidental inclusion of unrelated edits."
+    },
+    {
+      "id": "sketch-1",
+      "cardTitle": "Unstaged vs staged diffs",
+      "title": "Compare unstaged changes with the staged snapshot",
+      "bodyMarkdown": "Worked example: You changed content in README.md and a layout file. Before committing, you want to be sure only the README change is recorded by the next commit.\n\nIllustration of the habit:\n\n- See what is currently changed but not staged: git diff README.md\n- Stage the README change: git add community-site/README.md\n- Inspect what will actually be committed: git diff --staged\n- If the staged snapshot is correct, commit: git commit -m \"Improve README introduction\"\n\nInterpretation: git diff shows working-tree edits; git diff --staged shows the exact snapshot that will become the commit. Use both to avoid mixing unrelated changes."
+    },
+    {
+      "id": "sketch-2",
+      "cardTitle": "Write a focused message",
+      "title": "Commit the staged snapshot with a clear, single-purpose message",
+      "bodyMarkdown": "Worked example: After staging the files that belong to one purpose, create a short commit message that describes that purpose precisely.\n\nSteps and rationale:\n\n- Confirm staged files: git status --short or git diff --staged --name-only\n- Make the commit with a message that names the purpose, not a list of file names: git commit -m \"Add author credit to project page\"\n- Read the recent history to confirm the single-purpose commit: git log --oneline -n 3\n- Inspect the committed snapshot to check the actual content recorded: git show HEAD --name-only\n\nA focused message makes the commit useful to later readers and to release notes. Prefer a verb phrase describing the intent (Add, Fix, Remove, Update) and the surface affected."
+    },
+    {
+      "id": "sketch-3",
+      "cardTitle": "Verify leftover work",
+      "title": "Confirm unrelated edits remain outside the commit",
+      "bodyMarkdown": "Worked example: After making a focused commit, confirm that other edits are still in the working tree and were not accidentally included.\n\nActions:\n\n- Check working tree and staging area: git status\n- View unstaged differences for a leftover file: git diff community-site/styles.css\n- Confirm the staged snapshot is now clean: git diff --staged (should be empty if nothing is staged)\n\nWhat to watch for: A commit that accidentally included unrelated changes usually comes from running git add . or a too-broad pattern. Use targeted git add <path> and git diff --staged to avoid that mistake."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "try-stage-intentionally-sketch0",
+      "kind": "code_input",
+      "title": "Stage and commit the site description change",
+      "prompt": "The community-site workspace already has two edits: an updated about page and a separate change to the homepage. Stage only the about page change and commit it with the exact message: Update site description\n\nType the commands and press Enter.",
+      "hint": "Stage the single file path under community-site, confirm the staged snapshot, then commit with the exact message.",
+      "help": {
+        "concept": "Stage only the file(s) that belong to the single purpose. Use git diff to inspect unstaged edits and git diff --staged to inspect the snapshot that will be committed.",
+        "hint_1": "Run git add with the exact path community-site/about.md, then git diff --staged to confirm what will be committed.",
+        "hint_2": "After committing, use git log --oneline -n 1 or check git show --name-only HEAD to confirm the commit message and the file recorded."
+      },
+      "options": null,
+      "correctOptionIds": null,
+      "tokens": null,
+      "correctOrder": null,
+      "template": null,
+      "choices": null,
+      "correctValue": null,
+      "starterCode": "# Stage only the about page and commit\n# Type the commands and press Enter",
+      "solutionCode": "git add community-site/about.md\n\ngit commit -m \"Update site description\"\n\ngit log --oneline -n 1\n\ngit show --name-only HEAD",
+      "entryFilePath": null,
+      "starterFiles": [
+        {
+          "path": "community-site/README.md",
+          "content": "Community Site\n\nThis local site collects neighborhood volunteer resources.\n"
+        ,
+          "language": "text"
+        ,
+          "isEntry": false
+        ,
+          "entry": false
+        ,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/index.html",
+          "content": "<h1>Welcome to Our Community</h1>\n<p>Homepage content has some in-progress wording.</p>\n",
+          "language": "html",
+          "isEntry": false,
+          "entry": false
+        ,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/about.md",
+          "content": "# About\n\nA friendly community for neighbors and volunteers. New introductory sentence added.\n",
+          "language": "markdown",
+          "isEntry": false,
+          "entry": false
+        ,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/styles.css",
+          "content": "/* Working stylesheet: visual tweak in progress */\nbody { font-family: sans-serif; }\n",
+          "language": "css",
+          "isEntry": false,
+          "entry": false
+        ,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "community-site/README.md",
+          "content": "Community Site\n\nThis local site collects neighborhood volunteer resources.\n",
+          "language": "text"
+        ,
+          "isEntry": false
+        ,
+          "entry": false
+        ,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/index.html",
+          "content": "<h1>Welcome to Our Community</h1>\n<p>Homepage content has some in-progress wording.</p>\n",
+          "language": "html",
+          "isEntry": false,
+          "entry": false
+        ,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/about.md",
+          "content": "# About\n\nA friendly community for neighbors and volunteers. New introductory sentence added.\n",
+          "language": "markdown",
+          "isEntry": false,
+          "entry": false
+        ,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/styles.css",
+          "content": "/* Working stylesheet: visual tweak in progress */\nbody { font-family: sans-serif; }\n",
+          "language": "css",
+          "isEntry": false,
+          "entry": false
+        ,
+          "readOnly": false
+        }
+      ],
+      "sqlFileOrder": null,
+      "tests": null,
+      "files": null,
+      "semanticChecks": null,
+      "datasetId": null,
+      "recipeType": "sql_query",
+      "checkSql": null
+    },
+    {
+      "id": "try-stage-intentionally-sketch1",
+      "kind": "code_input",
+      "title": "Stage and commit only the stylesheet polish",
+      "prompt": "The community-site workspace has a stylesheet tweak and an unrelated copy edit to index.html. Stage only the stylesheet change and commit with the exact message: Polish site styles\n\nType the commands and press Enter.",
+      "hint": "Add the stylesheet file path, confirm staged contents, then commit with the exact message.",
+      "help": {
+        "concept": "Use git add <path> to stage specific files and git diff --staged to inspect the snapshot you will commit.",
+        "hint_1": "Run git add community-site/styles.css and then git diff --staged to verify only the CSS change is staged.",
+        "hint_2": "Commit with git commit -m \"Polish site styles\" and verify with git show --name-only HEAD."
+      },
+      "options": null,
+      "correctOptionIds": null,
+      "tokens": null,
+      "correctOrder": null,
+      "template": null,
+      "choices": null,
+      "correctValue": null,
+      "starterCode": "# Stage only the stylesheet and commit\n# Type the commands and press Enter",
+      "solutionCode": "git add community-site/styles.css\n\ngit commit -m \"Polish site styles\"\n\ngit show --name-only HEAD",
+      "entryFilePath": null,
+      "starterFiles": [
+        {
+          "path": "community-site/index.html",
+          "content": "<h1>Welcome to Our Community</h1>\n<p>Small copy edit: welcome sentence updated.</p>\n",
+          "language": "html"
+        ,
+          "isEntry": false
+        ,
+          "entry": false
+        ,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/styles.css",
+          "content": "/* Tweak: increase spacing for headings */\nh1 { margin-top: 1.2rem; }\nbody { font-family: system-ui; }\n",
+          "language": "css",
+          "isEntry": false,
+          "entry": false
+        ,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/README.md",
+          "content": "Community Site\n\nThis local site collects neighborhood volunteer resources.\n",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        ,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "community-site/index.html",
+          "content": "<h1>Welcome to Our Community</h1>\n<p>Small copy edit: welcome sentence updated.</p>\n",
+          "language": "html",
+          "isEntry": false,
+          "entry": false
+        ,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/styles.css",
+          "content": "/* Tweak: increase spacing for headings */\nh1 { margin-top: 1.2rem; }\nbody { font-family: system-ui; }\n",
+          "language": "css",
+          "isEntry": false,
+          "entry": false
+        ,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/README.md",
+          "content": "Community Site\n\nThis local site collects neighborhood volunteer resources.\n",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        ,
+          "readOnly": false
+        }
+      ],
+      "sqlFileOrder": null,
+      "tests": null,
+      "files": null,
+      "semanticChecks": null,
+      "datasetId": null,
+      "recipeType": "sql_query",
+      "checkSql": null
+    },
+    {
+      "id": "try-stage-intentionally-sketch2",
+      "kind": "code_input",
+      "title": "Commit the README improvement only",
+      "prompt": "community-site contains a README update and a new contributors note in a separate file. Stage only community-site/README.md and commit with the exact message: Add contributor instructions\n\nType the commands and press Enter.",
+      "hint": "Stage the README path explicitly, confirm the staged snapshot, then commit with the exact message.",
+      "help": {
+        "concept": "Targeted staging plus a single-purpose commit creates a clear historical unit. Confirm the staged snapshot with git diff --staged.",
+        "hint_1": "Run git add community-site/README.md, then git diff --staged to ensure only README.md will be committed.",
+        "hint_2": "After committing, use git log --oneline -n 1 and git show --name-only HEAD to confirm the commit message and recorded file."
+      },
+      "options": null,
+      "correctOptionIds": null,
+      "tokens": null,
+      "correctOrder": null,
+      "template": null,
+      "choices": null,
+      "correctValue": null,
+      "starterCode": "# Stage only community-site/README.md and commit\n# Type the commands and press Enter",
+      "solutionCode": "git add community-site/README.md\n\ngit commit -m \"Add contributor instructions\"\n\ngit log --oneline -n 1\n\ngit show --name-only HEAD",
+      "entryFilePath": null,
+      "starterFiles": [
+        {
+          "path": "community-site/README.md",
+          "content": "Community Site\n\nThis local site collects neighborhood volunteer resources.\n\nUpdated: Added instructions for contributors.\n",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        ,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/CONTRIB.txt",
+          "content": "Draft contributor notes: Please add your name and area of interest.\n",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        ,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "community-site/README.md",
+          "content": "Community Site\n\nThis local site collects neighborhood volunteer resources.\n\nUpdated: Added instructions for contributors.\n",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        ,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/CONTRIB.txt",
+          "content": "Draft contributor notes: Please add your name and area of interest.\n",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        ,
+          "readOnly": false
+        }
+      ],
+      "sqlFileOrder": null,
+      "tests": null,
+      "files": null,
+      "semanticChecks": null,
+      "datasetId": null,
+      "recipeType": "sql_query",
+      "checkSql": null
+    },
+    {
+      "id": "try-stage-intentionally-sketch3",
+      "kind": "code_input",
+      "title": "Rename a contributor file and commit only that rename",
+      "prompt": "A contributor draft file must be renamed from community-site/CONTRIB.txt to community-site/CONTRIB.md. Perform the rename using git so the rename is recorded, then commit with the exact message: Rename contrib file\n\nLeave any other working-tree edits alone. Type the commands and press Enter.",
+      "hint": "Use git mv to rename, then commit with the exact message.",
+      "help": {
+        "concept": "Use git mv to record a rename in the index as a single-purpose staged change before committing. This keeps commits focused and preserves rename history metadata.",
+        "hint_1": "Run git mv community-site/CONTRIB.txt community-site/CONTRIB.md, then git commit -m \"Rename contrib file\".",
+        "hint_2": "After committing, use git show --name-only HEAD to verify the rename is recorded in the most recent commit."
+      },
+      "options": null,
+      "correctOptionIds": null,
+      "tokens": null,
+      "correctOrder": null,
+      "template": null,
+      "choices": null,
+      "correctValue": null,
+      "starterCode": "# Rename the contributor file with git and commit\n# Type the commands and press Enter",
+      "solutionCode": "git mv community-site/CONTRIB.txt community-site/CONTRIB.md\n\ngit commit -m \"Rename contrib file\"\n\ngit show --name-only HEAD",
+      "entryFilePath": null,
+      "starterFiles": [
+        {
+          "path": "community-site/CONTRIB.txt",
+          "content": "Draft contributor notes: Please add your name and area of interest.\n",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        ,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/index.html",
+          "content": "<h1>Community Events</h1>\n<p>Upcoming events: (draft list)</p>\n",
+          "language": "html",
+          "isEntry": false,
+          "entry": false
+        ,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "community-site/CONTRIB.md",
+          "content": "Draft contributor notes: Please add your name and area of interest.\n",
+          "language": "markdown",
+          "isEntry": false,
+          "entry": false
+        ,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/index.html",
+          "content": "<h1>Community Events</h1>\n<p>Upcoming events: (draft list)</p>\n",
+          "language": "html",
+          "isEntry": false,
+          "entry": false
+        ,
+          "readOnly": false
+        }
+      ],
+      "sqlFileOrder": null,
+      "tests": null,
+      "files": null,
+      "semanticChecks": null,
+      "datasetId": null,
+      "recipeType": "sql_query",
+      "checkSql": null
+    },
+    {
+      "id": "quiz-1-singlechoice",
+      "kind": "single_choice",
+      "title": "Which command shows the staged snapshot differences?",
+      "prompt": "Which Git command displays the differences between the staged snapshot and HEAD (i.e., what will be committed)?",
+      "hint": "The staged snapshot is compared to HEAD, not the working tree.",
+      "help": {
+        "concept": "git diff --staged (or git diff --cached) compares the staged snapshot to the current HEAD and shows what will become part of the next commit.",
+        "hint_1": "Look for the option that mentions 'staged' or 'cached' rather than the unstaged working-tree diff.",
+        "hint_2": "The command is git diff --staged (or equivalently git diff --cached)."
+      },
+      "options": [
+        "git diff",
+        "git diff --staged",
+        "git status",
+        "git add"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "tokens": null,
+      "correctOrder": null,
+      "template": null,
+      "choices": null,
+      "correctValue": null,
+      "starterCode": null,
+      "solutionCode": null
+    ,
+      "entryFilePath": null
+    ,
+      "starterFiles": null
+    ,
+      "solutionFiles": null
+    ,
+      "sqlFileOrder": null
+    ,
+      "tests": null
+    ,
+      "files": null
+    ,
+      "semanticChecks": null
+    ,
+      "datasetId": null
+    ,
+      "recipeType": null
+    ,
+      "checkSql": null
+    },
+    {
+      "id": "quiz-2-multichoice",
+      "kind": "multi_choice",
+      "title": "What belongs in a focused commit?",
+      "prompt": "Choose the statements that describe best practices for a focused commit (select all that apply).",
+      "hint": "A focused commit groups changes that serve one purpose and has a clear message.",
+      "help": {
+        "concept": "A focused commit contains only changes related to a single purpose and uses a concise, descriptive commit message; avoid grouping unrelated edits.",
+        "hint_1": "Select options that emphasize single-purpose staging and clear messages.",
+        "hint_2": "Do not select items that encourage grouping unrelated files or very long, vague messages."
+      },
+      "options": [
+        "Stage only files that implement the one purpose before committing.",
+        "Include multiple unrelated fixes in the same commit to reduce commit count.",
+        "Write a concise message that describes the purpose, not a list of filenames.",
+        "Use git add . to be safe and stage everything before committing."
+      ],
+      "correctOptionIds": [
+        "a",
+        "c"
+      ],
+      "tokens": null,
+      "correctOrder": null,
+      "template": null,
+      "choices": null,
+      "correctValue": null,
+      "starterCode": null,
+      "solutionCode": null
+    ,
+      "entryFilePath": null
+    ,
+      "starterFiles": null
+    ,
+      "solutionFiles": null
+    ,
+      "sqlFileOrder": null
+    ,
+      "tests": null
+    ,
+      "files": null
+    ,
+      "semanticChecks": null
+    ,
+      "datasetId": null
+    ,
+      "recipeType": null
+    ,
+      "checkSql": null
+    },
+    {
+      "id": "quiz-3-dragreorder",
+      "kind": "drag_reorder",
+      "title": "Order the steps for a focused commit",
+      "prompt": "Arrange these steps in the usual order for creating a focused commit.",
+      "hint": "Inspect first, stage specifically, confirm staged snapshot, then commit.",
+      "help": {
+        "concept": "The normal flow is: inspect working-tree diffs, stage the exact files for the single purpose, check the staged snapshot, then commit with a focused message.",
+        "hint_1": "Start by checking unstaged differences (git diff), then stage, then check git diff --staged, then commit.",
+        "hint_2": "The final verification step is to inspect the latest commit with git show or git log."
+      },
+      "options": null,
+      "correctOptionIds": null,
+      "tokens": [
+        "Check unstaged differences with git diff",
+        "Stage specific file(s) for the purpose with git add <path>",
+        "Inspect the staged snapshot with git diff --staged",
+        "Commit the staged snapshot with a concise message",
+        "Confirm the commit with git log or git show"
+      ],
+      "correctOrder": [
+        "Check unstaged differences with git diff",
+        "Stage specific file(s) for the purpose with git add <path>",
+        "Inspect the staged snapshot with git diff --staged",
+        "Commit the staged snapshot with a concise message",
+        "Confirm the commit with git log or git show"
+      ],
+      "template": null,
+      "choices": null,
+      "correctValue": null,
+      "starterCode": null,
+      "solutionCode": null
+    ,
+      "entryFilePath": null
+    ,
+      "starterFiles": null
+    ,
+      "solutionFiles": null
+    ,
+      "sqlFileOrder": null
+    ,
+      "tests": null
+    ,
+      "files": null
+    ,
+      "semanticChecks": null
+    ,
+      "datasetId": null
+    ,
+      "recipeType": null
+    ,
+      "checkSql": null
+    },
+    {
+      "id": "quiz-4-fillblank-1",
+      "kind": "fill_blank_choice",
+      "title": "Remove a file from the staging area",
+      "prompt": "To unstage a file without changing its working-tree contents you run: git restore --staged [blank1]",
+      "hint": "The command takes a file path after the option.",
+      "help": {
+        "concept": "git restore --staged <path> removes a path from the index (staging area) but leaves the working-tree file unchanged.",
+        "hint_1": "Provide the file path as the single missing token.",
+        "hint_2": "Example usage: git restore --staged community-site/styles.css"
+      },
+      "options": null,
+      "correctOptionIds": null,
+      "tokens": null,
+      "correctOrder": null,
+      "template": "To unstage a file without changing its working-tree contents you run: git restore --staged [blank1]",
+      "choices": [
+        "community-site/styles.css",
+        "git restore --staged",
+        "git add community-site/styles.css",
+        "community-site/index.html"
+      ],
+      "correctValue": "community-site/styles.css",
+      "starterCode": null,
+      "solutionCode": null
+    ,
+      "entryFilePath": null
+    ,
+      "starterFiles": null
+    ,
+      "solutionFiles": null
+    ,
+      "sqlFileOrder": null
+    ,
+      "tests": null
+    ,
+      "files": null
+    ,
+      "semanticChecks": null
+    ,
+      "datasetId": null
+    ,
+      "recipeType": null
+    ,
+      "checkSql": null
+    },
+    {
+      "id": "quiz-5-fillblank-2",
+      "kind": "fill_blank_choice",
+      "title": "Command to stage a single file",
+      "prompt": "To stage just the community-site README file you run: git add [blank1]",
+      "hint": "Fill the missing file path exactly.",
+      "help": {
+        "concept": "git add <path> stages the named file into the index so it will be included in the next commit.",
+        "hint_1": "Use the repository-relative path to the README file.",
+        "hint_2": "Example: git add community-site/README.md"
+      },
+      "options": null,
+      "correctOptionIds": null,
+      "tokens": null,
+      "correctOrder": null,
+      "template": "To stage just the community-site README file you run: git add [blank1]",
+      "choices": [
+        "community-site/README.md",
+        "community-site",
+        "git add README.md",
+        "README.md"
+      ],
+      "correctValue": "community-site/README.md",
+      "starterCode": null,
+      "solutionCode": null
+    ,
+      "entryFilePath": null
+    ,
+      "starterFiles": null
+    ,
+      "solutionFiles": null
+    ,
+      "sqlFileOrder": null
+    ,
+      "tests": null
+    ,
+      "files": null
+    ,
+      "semanticChecks": null
+    ,
+      "datasetId": null
+    ,
+      "recipeType": null
+    ,
+      "checkSql": null
+    },
+    {
+      "id": "quiz-6-multichoice-2",
+      "kind": "multi_choice",
+      "title": "How to confirm a focused commit recorded only the intended files",
+      "prompt": "After committing, which commands help you confirm that the commit contains only the intended file(s)? (Select all that apply.)",
+      "hint": "One command shows the latest commit's files; another inspects recent history.",
+      "help": {
+        "concept": "Use git show (or git show --name-only HEAD) to list files recorded in a commit; git log shows the commit message and history for context.",
+        "hint_1": "Look for commands that show HEAD's contents or the file list recorded by the latest commit.",
+        "hint_2": "git status alone shows working-tree state but not the exact files recorded by the last commit."
+      },
+      "options": [
+        "git show --name-only HEAD",
+        "git ls-files --staged",
+        "git log --oneline -n 1",
+        "git status --short"
+      ],
+      "correctOptionIds": [
+        "a",
+        "c"
+      ],
+      "tokens": null,
+      "correctOrder": null,
+      "template": null,
+      "choices": null,
+      "correctValue": null,
+      "starterCode": null,
+      "solutionCode": null
+    ,
+      "entryFilePath": null
+    ,
+      "starterFiles": null
+    ,
+      "solutionFiles": null
+    ,
+      "sqlFileOrder": null
+    ,
+      "tests": null
+    ,
+      "files": null
+    ,
+      "semanticChecks": null
+    ,
+      "datasetId": null
+    ,
+      "recipeType": null
+    ,
+      "checkSql": null
+    }
+  ]
+,
+  "projectDraft": null
+}

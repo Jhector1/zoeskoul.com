@@ -3,7 +3,7 @@ import "server-only";
 import { prisma } from "@/lib/prisma";
 import { CATALOG_MANIFESTS } from "@/lib/subjects/catalogs.generated";
 import { SUBJECT_GENERATOR_SOURCES } from "@/lib/subjects/subjects.generated";
-import { resolveSharedChallengeTarget } from "./target";
+import { resolvePublishedPracticeTarget } from "./target";
 import {
   collectStandaloneTryItExerciseKeys,
   resolvePublishedExerciseCapabilities,
@@ -17,18 +17,22 @@ export type PublishedPracticeExerciseOption = {
   catalogTitle: string;
   subjectSlug: string;
   subjectTitle: string;
+  subjectTitleKey?: string | null;
   releaseStatus: "active" | "legacy";
   moduleSlug: string;
   moduleTitle: string;
+  moduleTitleKey?: string | null;
   sectionSlug: string;
   sectionTitle: string;
+  sectionTitleKey?: string | null;
   sectionRole: PublishedPracticeSectionRole;
   topicSlug: string;
   topicTitle: string;
+  topicTitleKey?: string | null;
   exerciseKey: string;
   exerciseTitle: string;
   exerciseKind: string;
-  exercisePurpose: "quiz" | "project";
+  exercisePurpose: "quiz" | "project" | "try_it";
   isMultiFile: boolean;
   requiresTerminal: boolean;
   isStandaloneTryIt: boolean;
@@ -62,6 +66,10 @@ function titleFromKey(value: unknown, fallback: string) {
   return humanize(candidate || fallback);
 }
 
+function authoredTitleKey(value: unknown) {
+  const key = typeof value === "string" ? value.trim() : "";
+  return key || null;
+}
 
 function releaseStatusForSubject(
   source: (typeof SUBJECT_GENERATOR_SOURCES)[string],
@@ -159,14 +167,14 @@ export async function listPublishedPracticeExerciseOptions(): Promise<
             for (let exerciseIndex = 0; exerciseIndex < topic.exercises.length; exerciseIndex += 1) {
               const exercise = topic.exercises[exerciseIndex] as Record<string, unknown>;
               const purpose = String(exercise.purpose ?? "");
-              if (purpose !== "quiz" && purpose !== "project") continue;
+              if (purpose !== "quiz" && purpose !== "project" && purpose !== "try_it") continue;
 
               try {
                 const capabilities = resolvePublishedExerciseCapabilities(
                   exercise,
                   topicRecord,
                 );
-                const target = resolveSharedChallengeTarget({
+                const target = resolvePublishedPracticeTarget({
                   subjectSlug,
                   moduleSlug: module.slug,
                   sectionSlug: section.slug,
@@ -189,14 +197,18 @@ export async function listPublishedPracticeExerciseOptions(): Promise<
                   catalogTitle: catalog.title,
                   subjectSlug,
                   subjectTitle: titleFromKey(subject.titleKey, subjectSlug),
+                  subjectTitleKey: authoredTitleKey(subject.titleKey),
                   releaseStatus,
                   moduleSlug: module.slug,
                   moduleTitle: titleFromKey(module.titleKey, module.slug),
+                  moduleTitleKey: authoredTitleKey(module.titleKey),
                   sectionSlug: section.slug,
                   sectionTitle: titleFromKey(section.titleKey, section.slug),
+                  sectionTitleKey: authoredTitleKey(section.titleKey),
                   sectionRole,
                   topicSlug: target.topicSlug,
                   topicTitle: titleFromKey(topic.topic?.labelKey, target.topicSlug),
+                  topicTitleKey: authoredTitleKey(topic.topic?.labelKey),
                   exerciseKey: target.exerciseKey,
                   exerciseTitle: target.exerciseTitle,
                   exerciseKind: target.exerciseKind,
@@ -216,8 +228,8 @@ export async function listPublishedPracticeExerciseOptions(): Promise<
                   ].join("|"),
                 });
               } catch {
-                // The publisher page intentionally lists only targets that can
-                // run anonymously through the existing practice-trial runtime.
+                // Skip malformed or stale authored targets. Authenticated practice
+                // eligibility is decided later by the selected product policy.
               }
             }
           }

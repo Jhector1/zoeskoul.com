@@ -11,9 +11,11 @@ import CourseContentUpdateBanner from "@/components/review/module/components/Cou
 export default function ReviewModulePageClient({
                                                    canUnlockAll,
                                                    mod,
+                                                   pageStatus = mod ? "ready" : "missing",
                                                }: {
     canUnlockAll: boolean;
     mod: ReviewModule | null;
+    pageStatus?: "ready" | "unavailable" | "missing";
 }) {
     const params = useParams<{
         locale: string;
@@ -29,13 +31,27 @@ export default function ReviewModulePageClient({
     });
 
     if (!mod) {
+        const unavailable = pageStatus === "unavailable";
+
         return (
             <div className="min-h-screen p-6 bg-[radial-gradient(1200px_700px_at_20%_0%,#151a2c_0%,#0b0d12_50%)] text-white/90">
                 <div className="mx-auto max-w-3xl rounded-2xl border border-white/10 bg-white/[0.04] p-5">
-                    <div className="text-lg font-black">Review module not found</div>
+                    <div className="text-lg font-black">
+                        {unavailable ? "Course unavailable" : "Review module not found"}
+                    </div>
                     <div className="mt-2 text-sm text-white/70">
-                        Subject <code className="text-white/90">{subjectSlug}</code>, module{" "}
-                        <code className="text-white/90">{moduleId}</code> is not registered.
+                        {unavailable ? (
+                            <>
+                                This module exists, but it is not currently published for this
+                                account. Return after the course is published or sign in with an
+                                account that can review draft content.
+                            </>
+                        ) : (
+                            <>
+                                Subject <code className="text-white/90">{subjectSlug}</code>, module{" "}
+                                <code className="text-white/90">{moduleId}</code> is not registered.
+                            </>
+                        )}
                     </div>
                 </div>
             </div>

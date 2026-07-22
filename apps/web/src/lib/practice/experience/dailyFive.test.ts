@@ -50,6 +50,9 @@ describe("daily practice selection", () => {
     ).toBe(false);
     expect(isDailyFiveEligible(option("project"))).toBe(true);
     expect(
+      isDailyFiveEligible(option("try-it", { exercisePurpose: "try_it" })),
+    ).toBe(true);
+    expect(
       isDailyFiveEligible(option("not-try-it", { isStandaloneTryIt: false })),
     ).toBe(false);
     expect(
@@ -92,6 +95,23 @@ describe("daily practice selection", () => {
   });
 
 
+
+  it("uses the remaining eligible exercises when the daily pool is smaller", () => {
+    const options = [option("ci-a"), option("ci-b")];
+
+    const queue = pickDailyFiveQueue({
+      options,
+      userId: "user-1",
+      dayKey: "2026-07-05",
+      targetCount: 3,
+    });
+
+    expect(queue).toHaveLength(2);
+    expect(new Set(queue.map((row) => row.exerciseKey))).toEqual(
+      new Set(["ci-a", "ci-b"]),
+    );
+  });
+
   it("builds one queue across several sections in the same module", () => {
     const options = [
       option("ci-a", { sectionSlug: "section-a", topicSlug: "topic-a" }),
@@ -132,7 +152,60 @@ describe("daily practice selection", () => {
     expect(new Set(queue.map((row) => row.moduleSlug)).size).toBe(2);
   });
 
-  it("offers only subjects with enough unique eligible exercises", () => {
+
+  it("prioritizes the selected topic, then fills from its section and module", () => {
+    const options = [
+      option("focus-a", {
+        moduleSlug: "module-1",
+        sectionSlug: "section-a",
+        topicSlug: "focus-topic",
+      }),
+      option("section-b", {
+        moduleSlug: "module-1",
+        sectionSlug: "section-a",
+        topicSlug: "other-topic",
+      }),
+      option("module-c", {
+        moduleSlug: "module-1",
+        sectionSlug: "section-b",
+        topicSlug: "third-topic",
+      }),
+      option("other-module", {
+        moduleSlug: "module-2",
+        sectionSlug: "section-c",
+        topicSlug: "fourth-topic",
+      }),
+    ];
+
+    const queue = pickDailyFiveQueue({
+      options,
+      userId: "user-1",
+      dayKey: "2026-07-05",
+      subjectSlug: "python-v2",
+      moduleSlug: "module-1",
+      sectionSlug: "section-a",
+      topicSlug: "focus-topic",
+      targetCount: 3,
+    });
+
+    expect(queue.map((row) => row.exerciseKey)).toContain("focus-a");
+    expect(queue[0]?.topicSlug).toBe("focus-topic");
+    expect(queue.every((row) => row.moduleSlug === "module-1")).toBe(true);
+  });
+
+  it("counts repeated exercise keys separately when they belong to different topics", () => {
+    const options = [
+      option("code-1", { id: "topic-a-code-1", topicSlug: "topic-a" }),
+      option("code-1", { id: "topic-b-code-1", topicSlug: "topic-b" }),
+    ];
+
+    expect(
+      listDailyPracticeSubjectOptions({ options, targetCount: 3 })[0]
+        ?.eligibleExerciseCount,
+    ).toBe(2);
+  });
+
+  it("offers every subject that has at least one eligible exercise", () => {
     const options = [
       option("py-a"),
       option("py-b", { moduleSlug: "python-v2-1" }),
@@ -153,7 +226,7 @@ describe("daily practice selection", () => {
       listDailyPracticeSubjectOptions({ options, targetCount: 3 }).map(
         (subject) => subject.subjectSlug,
       ),
-    ).toEqual(["python-v2"]);
+    ).toEqual(["python-v2", "sql-v2"]);
   });
 
   it("deduplicates repeated authored exercise references", () => {
@@ -214,7 +287,10 @@ describe("daily practice selection", () => {
           targetCount: queue.length,
           maxAttempts: null,
         },
-        usedExerciseKeys: ["ci-0", "ci-1"],
+        usedTargets: [
+          { exerciseKey: "ci-0", topic: { slug: "topic-ci-0" } },
+          { exerciseKey: "ci-1", topic: { slug: "topic-ci-1" } },
+        ],
       })?.exerciseKey,
     ).toBe("ci-2");
   });
@@ -246,7 +322,9 @@ describe("daily practice selection", () => {
           queue: legacyQueue,
           maxAttempts: 3,
         },
-        usedExerciseKeys: ["legacy-0"],
+        usedTargets: [
+          { exerciseKey: "legacy-0", topic: { slug: "topic-legacy-0" } },
+        ],
       })?.exerciseKey,
     ).toBe("legacy-1");
   });

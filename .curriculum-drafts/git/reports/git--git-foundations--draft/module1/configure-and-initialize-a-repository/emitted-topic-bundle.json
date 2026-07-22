@@ -1,10 +1,10 @@
 {
   "topicId": "configure-and-initialize-a-repository",
-  "subjectSlug": "git",
+  "subjectSlug": "git--git-foundations--draft",
   "moduleSlug": "git-foundations-module-1-start-tracking",
-  "sectionSlug": "git-foundations-section-1-repository-basics",
+  "sectionSlug": "git--git-foundations--draft-git-foundations-section-1-repository-basics",
   "prefix": "git_foundations_module_1",
-  "minutes": 18,
+  "minutes": 22,
   "runtimeDefaults": {
     "kind": "code",
     "language": "bash",
@@ -16,28 +16,43 @@
   },
   "serviceDefaults": {
     "runnerBackend": "pty",
-    "layoutMode": "terminal_workspace",
     "requires": {
       "files": true,
       "multiFile": true,
       "terminal": true
+    },
+    "preset": "runner",
+    "layoutMode": "default",
+    "terminalBootstrap": {
+      "gitSafeDirectories": [
+        "/workspace/*"
+      ],
+      "setupScriptPath": ".zoeskoul/setup.sh"
+    }
+  },
+  "tools": {
+    "defaultSurface": "results",
+    "compactDefaultSurface": "results",
+    "runnerPane": {
+      "defaultTab": "terminal",
+      "compactDefaultTab": "terminal"
     }
   },
   "topic": {
-    "labelKey": "topics.git.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.label",
-    "summaryKey": "topics.git.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.summary"
+    "labelKey": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.label",
+    "summaryKey": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.summary"
   },
   "cards": [
     {
       "id": "sketch0",
       "kind": "sketch",
-      "titleKey": "topics.git.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.cards.sketch0.title",
-      "sketchId": "sketch0",
+      "titleKey": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.cards.sketch0.title",
+      "sketchId": "sketch-0-orientation",
       "height": 420,
       "tryIt": {
         "id": "try-configure-and-initialize-a-repository-sketch0",
-        "titleKey": "topics.git.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch0.title",
-        "promptKey": "topics.git.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch0.prompt",
+        "titleKey": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch0.title",
+        "promptKey": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch0.prompt",
         "exerciseKey": "try-configure-and-initialize-a-repository-sketch0",
         "difficulty": "easy",
         "preferKind": "code_input",
@@ -50,13 +65,13 @@
     {
       "id": "sketch1",
       "kind": "sketch",
-      "titleKey": "topics.git.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.cards.sketch1.title",
-      "sketchId": "sketch1",
+      "titleKey": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.cards.sketch1.title",
+      "sketchId": "sketch-1-git-directory",
       "height": 420,
       "tryIt": {
         "id": "try-configure-and-initialize-a-repository-sketch1",
-        "titleKey": "topics.git.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch1.title",
-        "promptKey": "topics.git.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch1.prompt",
+        "titleKey": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch1.title",
+        "promptKey": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch1.prompt",
         "exerciseKey": "try-configure-and-initialize-a-repository-sketch1",
         "difficulty": "easy",
         "preferKind": "code_input",
@@ -69,14 +84,33 @@
     {
       "id": "sketch2",
       "kind": "sketch",
-      "titleKey": "topics.git.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.cards.sketch2.title",
-      "sketchId": "sketch2",
+      "titleKey": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.cards.sketch2.title",
+      "sketchId": "sketch-2-staging",
       "height": 420,
       "tryIt": {
         "id": "try-configure-and-initialize-a-repository-sketch2",
-        "titleKey": "topics.git.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch2.title",
-        "promptKey": "topics.git.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch2.prompt",
+        "titleKey": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch2.title",
+        "promptKey": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch2.prompt",
         "exerciseKey": "try-configure-and-initialize-a-repository-sketch2",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch3",
+      "kind": "sketch",
+      "titleKey": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.cards.sketch3.title",
+      "sketchId": "sketch-3-first-commit",
+      "height": 420,
+      "tryIt": {
+        "id": "try-configure-and-initialize-a-repository-sketch3",
+        "titleKey": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch3.title",
+        "promptKey": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch3.prompt",
+        "exerciseKey": "try-configure-and-initialize-a-repository-sketch3",
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -88,12 +122,12 @@
     {
       "id": "quiz",
       "kind": "quiz",
-      "titleKey": "topics.git.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.cards.quiz.title",
+      "titleKey": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.cards.quiz.title",
       "quiz": {
         "difficulty": "easy",
         "n": 4,
         "min": 4,
-        "max": 4,
+        "max": 6,
         "selectionMode": "random",
         "allowReveal": true,
         "preferKind": null,
@@ -103,31 +137,37 @@
   ],
   "sketches": [
     {
-      "id": "sketch0",
+      "id": "sketch-0-orientation",
       "archetype": "paragraph",
-      "titleKey": "sketches.git.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.sketch0.title",
-      "bodyKey": "sketches.git.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.sketch0.bodyMarkdown"
+      "titleKey": "sketches.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.sketch-0-orientation.title",
+      "bodyKey": "sketches.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.sketch-0-orientation.bodyMarkdown"
     },
     {
-      "id": "sketch1",
+      "id": "sketch-1-git-directory",
       "archetype": "paragraph",
-      "titleKey": "sketches.git.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.sketch1.title",
-      "bodyKey": "sketches.git.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.sketch1.bodyMarkdown"
+      "titleKey": "sketches.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.sketch-1-git-directory.title",
+      "bodyKey": "sketches.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.sketch-1-git-directory.bodyMarkdown"
     },
     {
-      "id": "sketch2",
+      "id": "sketch-2-staging",
       "archetype": "paragraph",
-      "titleKey": "sketches.git.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.sketch2.title",
-      "bodyKey": "sketches.git.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.sketch2.bodyMarkdown"
+      "titleKey": "sketches.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.sketch-2-staging.title",
+      "bodyKey": "sketches.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.sketch-2-staging.bodyMarkdown"
+    },
+    {
+      "id": "sketch-3-first-commit",
+      "archetype": "paragraph",
+      "titleKey": "sketches.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.sketch-3-first-commit.title",
+      "bodyKey": "sketches.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.sketch-3-first-commit.bodyMarkdown"
     }
   ],
   "exercises": [
     {
-      "id": "single-choice-1",
+      "id": "sc-why-local-history",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.git.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.practice.single-choice-1",
+      "messageBase": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.practice.sc-why-local-history",
       "optionIds": [
         "a",
         "b",
@@ -136,15 +176,15 @@
       ],
       "expected": {
         "kind": "single_choice",
-        "optionId": "a"
+        "optionId": "b"
       }
     },
     {
-      "id": "single-choice-2",
+      "id": "sc-what-is-dotgit",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.git.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.practice.single-choice-2",
+      "messageBase": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.practice.sc-what-is-dotgit",
       "optionIds": [
         "a",
         "b",
@@ -153,23 +193,45 @@
       ],
       "expected": {
         "kind": "single_choice",
-        "optionId": "a"
+        "optionId": "b"
       }
     },
     {
-      "id": "drag-reorder-1",
+      "id": "mc-git-status-entries",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.practice.mc-git-status-entries",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "dr-commit-flow",
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.git.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.practice.drag-reorder-1",
+      "messageBase": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.practice.dr-commit-flow",
       "tokenIds": [
         "t1",
         "t2",
-        "t3"
+        "t3",
+        "t4"
       ],
       "expected": {
         "kind": "drag_reorder",
         "tokenIds": [
+          "t4",
           "t1",
           "t2",
           "t3"
@@ -177,15 +239,27 @@
       }
     },
     {
-      "id": "fill-blank-choice-1",
+      "id": "fb-init-branch",
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.git.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.practice.fill-blank-choice-1",
+      "messageBase": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.practice.fb-init-branch",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "\"ZoeSkoul Learner\""
+        "value": "main"
+      }
+    },
+    {
+      "id": "fb-config-local",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.practice.fb-config-local",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "learner@zoeskoul.local"
       }
     },
     {
@@ -193,45 +267,120 @@
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.git.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch0",
+      "messageBase": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch0",
       "language": "bash",
-      "starterCode": "@:topics.git.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch0.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.sh",
-          "content": "@:topics.git.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch0.starterCode",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        },
-        {
-          "path": ".zoeskoul/setup.sh",
-          "content": "@:topics.git.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch0.starterFiles.zoeskoul_setup_sh.content",
-          "language": "bash",
-          "readOnly": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "main.sh",
-          "content": "bash .zoeskoul/setup.sh\ncd project_alpha\ngit init -b main\n",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"project_alpha\"\nmkdir -p -- \"project_alpha\"\n",
-          "language": "bash",
-          "readOnly": true
-        }
-      ],
+      "starterCode": "",
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
-          },
+            "pattern": "^git\\s+commit\\s+-m\\s+\"Complete\\s+initialize-community-site-and-configure-local-identity\"$"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch0.terminalExpectations.forbiddenCommands.0.message"
+          }
+        ]
+      },
+      "hiddenShellCheck": {
+        "script": "set -eu\nrepo='community-site'\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ncommand -v git >/dev/null 2>&1 || fail \"Git is not available in this workspace.\"\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail 'Initialize a Git repository in community-site.'\nactual_branch=$(git -C \"$repo\" branch --show-current 2>/dev/null || true)\n[ \"$actual_branch\" = 'main' ] || fail 'Switch to the main branch.'",
+        "timeoutMs": 15000
+      },
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "README.md",
+        "starterCode": "",
+        "starterFiles": [],
+        "fixtureFiles": [
+          {
+            "path": ".zoeskoul/setup.sh",
+            "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch0.starterFiles.zoeskoul_setup_sh.content",
+            "language": "bash",
+            "readOnly": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch0.instructions"
+      },
+      "starterFiles": [],
+      "serviceOverrides": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ],
+          "setupScriptPath": ".zoeskoul/setup.sh",
+          "workspaceStateKey": "git-state-v1-1nm1djd"
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/community-site",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        }
+      },
+      "ideConfig": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ],
+          "setupScriptPath": ".zoeskoul/setup.sh",
+          "workspaceStateKey": "git-state-v1-1nm1djd"
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/community-site",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        }
+      },
+      "fixtureFiles": [
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch0.starterFiles.zoeskoul_setup_sh.content",
+          "language": "bash",
+          "readOnly": true
+        }
+      ]
+    },
+    {
+      "id": "try-configure-and-initialize-a-repository-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch1",
+      "language": "bash",
+      "starterCode": "",
+      "terminalExpectations": {
+        "requiredCommands": [
           {
             "pattern": "^git\\s+init\\s+-b\\s+main$"
           }
@@ -239,30 +388,23 @@
         "forbiddenCommands": [
           {
             "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
-            "message": "@:topics.git.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch0.terminalExpectations.forbiddenCommands.0.message"
+            "message": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch1.terminalExpectations.forbiddenCommands.0.message"
           }
         ]
       },
       "hiddenShellCheck": {
-        "script": "set -eu\nrepo='project_alpha'\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ncommand -v git >/dev/null 2>&1 || fail \"Git is not available in this workspace.\"\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail 'Initialize a Git repository in project_alpha.'\nactual_branch=$(git -C \"$repo\" branch --show-current 2>/dev/null || true)\n[ \"$actual_branch\" = 'main' ] || fail 'Switch to the main branch.'",
+        "script": "set -eu\nrepo='community-site'\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ncommand -v git >/dev/null 2>&1 || fail \"Git is not available in this workspace.\"\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail 'Initialize a Git repository in community-site.'\nactual_branch=$(git -C \"$repo\" branch --show-current 2>/dev/null || true)\n[ \"$actual_branch\" = 'main' ] || fail 'Switch to the main branch.'",
         "timeoutMs": 15000
       },
       "workspace": {
         "language": "bash",
-        "entryFilePath": "main.sh",
-        "starterCode": "@:topics.git.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch0.starterCode",
-        "starterFiles": [
-          {
-            "path": "main.sh",
-            "content": "@:topics.git.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch0.starterCode",
-            "language": "bash",
-            "isEntry": true,
-            "entry": true,
-            "readOnly": false
-          },
+        "entryFilePath": "README.md",
+        "starterCode": "",
+        "starterFiles": [],
+        "fixtureFiles": [
           {
             "path": ".zoeskoul/setup.sh",
-            "content": "@:topics.git.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch0.starterFiles.zoeskoul_setup_sh.content",
+            "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch1.starterFiles.zoeskoul_setup_sh.content",
             "language": "bash",
             "readOnly": true
           }
@@ -272,174 +414,106 @@
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "@:topics.git.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch0.instructions"
-      }
-    },
-    {
-      "id": "try-configure-and-initialize-a-repository-sketch1",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.git.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch1",
-      "language": "bash",
-      "starterCode": "@:topics.git.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch1.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.sh",
-          "content": "@:topics.git.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch1.starterCode",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
+        "instructions": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch1.instructions"
+      },
+      "starterFiles": [],
+      "serviceOverrides": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ],
+          "setupScriptPath": ".zoeskoul/setup.sh",
+          "workspaceStateKey": "git-state-v1-ixazvq"
         },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/community-site",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        }
+      },
+      "ideConfig": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ],
+          "setupScriptPath": ".zoeskoul/setup.sh",
+          "workspaceStateKey": "git-state-v1-ixazvq"
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/community-site",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        }
+      },
+      "fixtureFiles": [
         {
           "path": ".zoeskoul/setup.sh",
-          "content": "@:topics.git.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch1.starterFiles.zoeskoul_setup_sh.content",
+          "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch1.starterFiles.zoeskoul_setup_sh.content",
           "language": "bash",
           "readOnly": true
         }
-      ],
-      "solutionFiles": [
-        {
-          "path": "main.sh",
-          "content": "bash .zoeskoul/setup.sh\ncd project_beta\nls .git\ncat .git/HEAD\n",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"project_beta\"\nmkdir -p -- \"project_beta\"\ngit -C \"project_beta\" init -q -b main\ngit -C \"project_beta\" config user.name \"ZoeSkoul Learner\"\ngit -C \"project_beta\" config user.email \"learner@zoeskoul.local\"\n",
-          "language": "bash",
-          "readOnly": true
-        }
-      ],
-      "terminalExpectations": {
-        "requiredCommands": [
-          {
-            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
-          },
-          {
-            "pattern": "^ls\\s+\\.git$"
-          },
-          {
-            "pattern": "^cat\\s+\\.git/HEAD$"
-          }
-        ],
-        "forbiddenCommands": [
-          {
-            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
-            "message": "@:topics.git.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch1.terminalExpectations.forbiddenCommands.0.message"
-          }
-        ]
-      },
-      "hiddenShellCheck": {
-        "script": "set -eu\nrepo='project_beta'\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ncommand -v git >/dev/null 2>&1 || fail \"Git is not available in this workspace.\"\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail 'Initialize a Git repository in project_beta.'\nactual_branch=$(git -C \"$repo\" branch --show-current 2>/dev/null || true)\n[ \"$actual_branch\" = 'main' ] || fail 'Switch to the main branch.'",
-        "timeoutMs": 15000
-      },
-      "workspace": {
-        "language": "bash",
-        "entryFilePath": "main.sh",
-        "starterCode": "@:topics.git.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch1.starterCode",
-        "starterFiles": [
-          {
-            "path": "main.sh",
-            "content": "@:topics.git.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch1.starterCode",
-            "language": "bash",
-            "isEntry": true,
-            "entry": true,
-            "readOnly": false
-          },
-          {
-            "path": ".zoeskoul/setup.sh",
-            "content": "@:topics.git.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch1.starterFiles.zoeskoul_setup_sh.content",
-            "language": "bash",
-            "readOnly": true
-          }
-        ]
-      },
-      "showExpectedExample": false,
-      "recipe": {
-        "type": "shell_task",
-        "mode": "terminal_workspace",
-        "instructions": "@:topics.git.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch1.instructions"
-      }
+      ]
     },
     {
       "id": "try-configure-and-initialize-a-repository-sketch2",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.git.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch2",
+      "messageBase": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch2",
       "language": "bash",
-      "starterCode": "@:topics.git.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch2.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.sh",
-          "content": "@:topics.git.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch2.starterCode",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        },
-        {
-          "path": ".zoeskoul/setup.sh",
-          "content": "@:topics.git.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch2.starterFiles.zoeskoul_setup_sh.content",
-          "language": "bash",
-          "readOnly": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "main.sh",
-          "content": "bash .zoeskoul/setup.sh\ncd project_gamma\ngit status --short\n",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"project_gamma\"\nmkdir -p -- \"project_gamma\"\ngit -C \"project_gamma\" init -q -b main\ngit -C \"project_gamma\" config user.name \"ZoeSkoul Learner\"\ngit -C \"project_gamma\" config user.email \"learner@zoeskoul.local\"\nprintf %s \"Draft launch checklist\\n\" > \"project_gamma/launch-notes.txt\"\n",
-          "language": "bash",
-          "readOnly": true
-        }
-      ],
+      "starterCode": "",
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
-          },
-          {
-            "pattern": "^git\\s+status\\s+--short$"
+            "pattern": "^git\\s+add\\s+practice\\.txt$"
           }
         ],
         "forbiddenCommands": [
           {
             "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
-            "message": "@:topics.git.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch2.terminalExpectations.forbiddenCommands.0.message"
+            "message": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch2.terminalExpectations.forbiddenCommands.0.message"
           }
         ]
       },
       "hiddenShellCheck": {
-        "script": "set -eu\nrepo='project_gamma'\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ncommand -v git >/dev/null 2>&1 || fail \"Git is not available in this workspace.\"\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail 'Initialize a Git repository in project_gamma.'\nactual_branch=$(git -C \"$repo\" branch --show-current 2>/dev/null || true)\n[ \"$actual_branch\" = 'main' ] || fail 'Switch to the main branch.'\nstatus_output=$(git -C \"$repo\" status --porcelain --untracked-files=all)\n[ -n \"$status_output\" ] || fail 'Make the requested repository change before checking the task.'\ngit -C \"$repo\" ls-files --others --exclude-standard -- 'launch-notes.txt' | grep -Fxq -- 'launch-notes.txt' || fail 'Leave launch-notes.txt untracked.'",
+        "script": "set -eu\nrepo='community-site'\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ncommand -v git >/dev/null 2>&1 || fail \"Git is not available in this workspace.\"\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail 'Initialize a Git repository in community-site.'\nactual_branch=$(git -C \"$repo\" branch --show-current 2>/dev/null || true)\n[ \"$actual_branch\" = 'main' ] || fail 'Switch to the main branch.'",
         "timeoutMs": 15000
       },
       "workspace": {
         "language": "bash",
-        "entryFilePath": "main.sh",
-        "starterCode": "@:topics.git.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch2.starterCode",
-        "starterFiles": [
-          {
-            "path": "main.sh",
-            "content": "@:topics.git.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch2.starterCode",
-            "language": "bash",
-            "isEntry": true,
-            "entry": true,
-            "readOnly": false
-          },
+        "entryFilePath": "README.md",
+        "starterCode": "",
+        "starterFiles": [],
+        "fixtureFiles": [
           {
             "path": ".zoeskoul/setup.sh",
-            "content": "@:topics.git.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch2.starterFiles.zoeskoul_setup_sh.content",
+            "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch2.starterFiles.zoeskoul_setup_sh.content",
             "language": "bash",
             "readOnly": true
           }
@@ -449,15 +523,180 @@
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "@:topics.git.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch2.instructions"
-      }
+        "instructions": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch2.instructions"
+      },
+      "starterFiles": [],
+      "serviceOverrides": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ],
+          "setupScriptPath": ".zoeskoul/setup.sh",
+          "workspaceStateKey": "git-state-v1-tyexox"
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/community-site",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        }
+      },
+      "ideConfig": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ],
+          "setupScriptPath": ".zoeskoul/setup.sh",
+          "workspaceStateKey": "git-state-v1-tyexox"
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/community-site",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        }
+      },
+      "fixtureFiles": [
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch2.starterFiles.zoeskoul_setup_sh.content",
+          "language": "bash",
+          "readOnly": true
+        }
+      ]
+    },
+    {
+      "id": "try-configure-and-initialize-a-repository-sketch3",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch3",
+      "language": "bash",
+      "starterCode": "",
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^git\\s+log\\s+--oneline$"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch3.terminalExpectations.forbiddenCommands.0.message"
+          }
+        ]
+      },
+      "hiddenShellCheck": {
+        "script": "set -eu\nrepo='community-site'\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ncommand -v git >/dev/null 2>&1 || fail \"Git is not available in this workspace.\"\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail 'Initialize a Git repository in community-site.'\nactual_branch=$(git -C \"$repo\" branch --show-current 2>/dev/null || true)\n[ \"$actual_branch\" = 'main' ] || fail 'Switch to the main branch.'",
+        "timeoutMs": 15000
+      },
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "README.md",
+        "starterCode": "",
+        "starterFiles": [],
+        "fixtureFiles": [
+          {
+            "path": ".zoeskoul/setup.sh",
+            "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch3.starterFiles.zoeskoul_setup_sh.content",
+            "language": "bash",
+            "readOnly": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch3.instructions"
+      },
+      "starterFiles": [],
+      "serviceOverrides": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ],
+          "setupScriptPath": ".zoeskoul/setup.sh",
+          "workspaceStateKey": "git-state-v1-9ve1my"
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/community-site",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        }
+      },
+      "ideConfig": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ],
+          "setupScriptPath": ".zoeskoul/setup.sh",
+          "workspaceStateKey": "git-state-v1-9ve1my"
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/community-site",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        }
+      },
+      "fixtureFiles": [
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.configure-and-initialize-a-repository.tryIt.try_configure_and_initialize_a_repository_sketch3.starterFiles.zoeskoul_setup_sh.content",
+          "language": "bash",
+          "readOnly": true
+        }
+      ]
     }
-  ],
-  "topicMeta": {
-    "learningGoals": [
-      "Initialize the current project folder with main as its first branch",
-      "Use the full status report to confirm a new repository state",
-      "Set and verify repository-local author identity"
-    ]
-  }
+  ]
 }

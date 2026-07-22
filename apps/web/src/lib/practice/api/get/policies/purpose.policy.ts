@@ -4,6 +4,7 @@ import {
     coercePurposePolicy,
 } from "@/lib/subjects/quizClient";
 import { resolvePracticeExperienceMode } from "@/lib/practice/experience/resolve";
+import { readSubscriberPracticeMeta } from "@/lib/practice/experience/subscriberPractice";
 
 export type PracticePurposeDecision =
     | {
@@ -24,6 +25,10 @@ export type PracticePurposeDecision =
 
 function pickAllowedPurposesFromSession(session: any): Array<"quiz" | "project"> {
     const experienceMode = resolvePracticeExperienceMode(session);
+    if (experienceMode === "standard" && readSubscriberPracticeMeta(session?.meta)) {
+        return ["quiz", "project"];
+    }
+
     if (experienceMode === "daily_five" || experienceMode === "standard" || experienceMode === "practice") {
         return ["project"];
     }
@@ -74,6 +79,21 @@ export function computePurposeDecision(args: {
             policy: "strict",
             source: "session",
             reason: "onboarding_trial_uses_quiz_purpose",
+        };
+    }
+
+    if (experienceMode === "standard" && readSubscriberPracticeMeta(session?.meta)) {
+        const requested = coercePurposeMode(args.preferPurposeParam);
+        const effective = requested === "quiz" ? "quiz" : "project";
+
+        return {
+            ok: true,
+            effective,
+            requested,
+            allowed: ["quiz", "project"],
+            policy: "strict",
+            source: requested ? "param" : "session",
+            reason: "subscriber_practice_uses_authored_queue_purpose",
         };
     }
 

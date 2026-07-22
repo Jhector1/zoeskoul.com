@@ -1,0 +1,10 @@
+{
+  "name": "RetryableTopicValidationError",
+  "message": "Invalid TopicAuthoringDraft: quizDraft[6] fill_blank_choice needs exactly 1 blank placeholder",
+  "stack": "RetryableTopicValidationError: Invalid TopicAuthoringDraft: quizDraft[6] fill_blank_choice needs exactly 1 blank placeholder\n    at compileSubjectPipeline (file:///Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-compiler/dist/compile/compileSubjectPipeline.js:276:27)\n    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at async compileCourse (file:///Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-compiler/dist/compile/compileCourse.js:91:11)\n    at async runCompileCourse (file:///Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-cli/dist/commands/compile-course.js:79:21)\n    at async main (file:///Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-cli/dist/index.js:81:13)",
+  "code": "TOPIC_GENERATION_OUTPUT_INVALID",
+  "retryable": true,
+  "details": {
+    "topicId": "inspect-unstaged-changes-with-diff"
+  }
+}

@@ -1,6 +1,8 @@
 {
   "attempt": 1,
-  "status": "success",
+  "status": "failed",
+  "retryable": true,
+  "errorCode": "CRITIQUE_VALIDATION_FAILED",
   "validationState": {
     "unsafeSkipValidation": false,
     "requested": {

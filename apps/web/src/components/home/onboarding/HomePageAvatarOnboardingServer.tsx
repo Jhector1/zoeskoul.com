@@ -3,6 +3,9 @@ import { getOnboardingSubjects } from "@/lib/onboarding/getOnboardingSubjects";
 import { buildPublicChallengePresentation } from "@/lib/practice/challenges/presentation";
 import { getLatestActivePracticeChallengeLink } from "@/lib/practice/challenges/shortLink";
 import type { PublicChallengeCardData } from "@/lib/practice/challenges/types";
+import { DAILY_PRACTICE_TARGET_COUNT } from "@/lib/practice/experience/config";
+import { resolvePracticeViewer } from "@/lib/practice/experience/viewer";
+import { prisma } from "@/lib/prisma";
 import HomePageAvatarOnboardingClient from "./HomePageAvatarOnboardingClient";
 
 function supportedLocale(value: string) {
@@ -40,10 +43,18 @@ export default async function HomePageAvatarOnboardingServer({
                                                              }: {
     locale: string;
 }) {
-    const [session, subjects, latestChallenge] = await Promise.all([
-        auth(),
+    const session = await auth();
+    const userId = (session?.user as any)?.id as string | undefined;
+    const [subjects, latestChallenge, viewer] = await Promise.all([
         getOnboardingSubjects(),
         getLatestChallengeCard(locale),
+        userId
+            ? resolvePracticeViewer(prisma, { userId, guestId: null })
+            : Promise.resolve({
+                  tier: "guest" as const,
+                  authenticated: false,
+                  subscribed: false,
+              }),
     ]);
 
     return (
@@ -51,7 +62,9 @@ export default async function HomePageAvatarOnboardingServer({
             locale={locale}
             initialSubjects={subjects}
             isAuthenticated={Boolean(session?.user)}
+            isSubscriber={viewer.subscribed}
             latestChallenge={latestChallenge}
+            dailyPracticeTargetCount={DAILY_PRACTICE_TARGET_COUNT}
         />
     );
 }

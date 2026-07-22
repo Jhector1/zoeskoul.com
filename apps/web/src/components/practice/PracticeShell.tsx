@@ -12,6 +12,7 @@ import PracticeView from "./shell/PracticeView";
 import PracticeReviewWorkspace from "./review/PracticeReviewWorkspace";
 import EmbeddedPracticeReviewWorkspace from "./review/EmbeddedPracticeReviewWorkspace";
 import { useConceptExplain } from "./hooks/useConceptExplain";
+import AiTutorFloating from "@/components/ai-tutor/AiTutorFloating";
 import { isExcusedPracticeItem } from "@/lib/flow/excuse";
 import { isPracticeItemFinalized } from "@/lib/practice/runtime";
 import type { PracticeExperienceMode, PracticeRunViewer } from "@/lib/practice/experience/types";
@@ -67,7 +68,11 @@ export type PracticeShellProps = {
   section: string | null;
   setSection: (s: string | null) => void;
 
-  topicOptionsFixed: { id: TopicValue; label: string }[];
+  topicOptionsFixed: {
+    id: TopicValue;
+    label: string;
+    titleKey?: string | null;
+  }[];
   difficultyOptions: { id: Difficulty | "all"; label: string }[];
 
   badge: string;
@@ -172,30 +177,49 @@ export default function PracticeShell(props: PracticeShellProps) {
     props.experienceMode,
   );
 
+  const tutor = (
+    <AiTutorFloating
+      current={current}
+      exercise={exercise}
+      enabled={phase !== "summary"}
+    />
+  );
+
   if (embeddedPresentation) {
     return (
-      <EmbeddedPracticeReviewWorkspace
-        props={props}
-        presentation={embeddedPresentation}
-      />
+      <>
+        <EmbeddedPracticeReviewWorkspace
+          props={props}
+          presentation={embeddedPresentation}
+        />
+        {tutor}
+      </>
     );
   }
 
   if (surface === "tools") {
-    return <PracticeReviewWorkspace {...sharedViewProps} />;
+    return (
+      <>
+        <PracticeReviewWorkspace {...sharedViewProps} />
+        {tutor}
+      </>
+    );
   }
 
   if (phase === "summary") return <SummaryView {...props} />;
 
   return (
+    <>
       <PracticeView
-          {...props}
-          canSubmitNow={canSubmitNow}
-          finalized={finalized}
-          attempts={attempts}
-          outOfAttempts={outOfAttempts}
-          resultBoxClass={resultBoxClass}
-          concept={concept}
+        {...props}
+        canSubmitNow={canSubmitNow}
+        finalized={finalized}
+        attempts={attempts}
+        outOfAttempts={outOfAttempts}
+        resultBoxClass={resultBoxClass}
+        concept={concept}
       />
+      {tutor}
+    </>
   );
 }

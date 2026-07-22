@@ -1,0 +1,33 @@
+{
+  "topicId": "read-tracked-and-untracked-state",
+  "repairs": [
+    {
+      "code": "GIT_TRY_IT_KIND_PROMOTED",
+      "category": "other",
+      "severity": "low",
+      "field": "quizDraft.try-read-tracked-and-untracked-state-sketch0",
+      "message": "Converted generated Try It \"try-read-tracked-and-untracked-state-sketch0\" into the Git code_input required by plannedExerciseCounts."
+    },
+    {
+      "code": "GIT_TRY_IT_KIND_PROMOTED",
+      "category": "other",
+      "severity": "low",
+      "field": "quizDraft.try-read-tracked-and-untracked-state-sketch1",
+      "message": "Converted generated Try It \"try-read-tracked-and-untracked-state-sketch1\" into the Git code_input required by plannedExerciseCounts."
+    },
+    {
+      "code": "GIT_TRY_IT_KIND_PROMOTED",
+      "category": "other",
+      "severity": "low",
+      "field": "quizDraft.try-read-tracked-and-untracked-state-sketch2",
+      "message": "Converted generated Try It \"try-read-tracked-and-untracked-state-sketch2\" into the Git code_input required by plannedExerciseCounts."
+    },
+    {
+      "code": "GIT_TRY_IT_KIND_PROMOTED",
+      "category": "other",
+      "severity": "low",
+      "field": "quizDraft.try-read-tracked-and-untracked-state-sketch3",
+      "message": "Converted generated Try It \"try-read-tracked-and-untracked-state-sketch3\" into the Git code_input required by plannedExerciseCounts."
+    }
+  ]
+}

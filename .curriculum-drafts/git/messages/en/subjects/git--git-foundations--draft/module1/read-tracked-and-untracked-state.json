@@ -13,7 +13,7 @@
               "title": "Short Status Is a Compact Map"
             },
             "sketch2": {
-              "title": "Inspection Does Not Change State"
+              "title": "Read the Staged Summary"
             },
             "quiz": {
               "title": "Practice"
@@ -30,16 +30,16 @@
                 "hint_1": "Look for the `No commits yet` message and the two untracked file names.",
                 "hint_2": "Do not stage either file in this step."
               },
-              "starterCode": "# Community Project\n\nShared schedules and contact notes.\n",
+              "starterCode": "# Community Project\n\nShared community activities and updates.\n",
               "solutionCode": "git status",
               "starterFiles": {
                 "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\n"
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared community activities and updates.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community events\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\n"
                 }
               },
               "solutionFiles": {
                 "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\n"
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared community activities and updates.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community events\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\n"
                 }
               },
               "instructions": "Ask Git for the full repository report. Use it to confirm that the branch is `main`, no commits exist yet, and `README.md` plus `schedule.txt` are untracked. Do not change repository state.",
@@ -65,16 +65,16 @@
                 "hint_1": "There are only two learner files in this module.",
                 "hint_2": "Staging prepares a proposal; it does not create a commit."
               },
-              "starterCode": "# Community Project\n\nShared schedules and contact notes.\n",
+              "starterCode": "# Community Project\n\nShared community activities and updates.\n",
               "solutionCode": "git add README.md schedule.txt\ngit status --short",
               "starterFiles": {
                 "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\n"
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared community activities and updates.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community events\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\n"
                 }
               },
               "solutionFiles": {
                 "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\n"
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared community activities and updates.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community events\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\n"
                 }
               },
               "instructions": "Prepare the first proposed snapshot by staging only `README.md` and `schedule.txt`. Then inspect compact status and confirm that both paths appear in the staging-area column.",
@@ -96,23 +96,23 @@
             },
             "try_read_tracked_and_untracked_state_sketch2": {
               "title": "Review the Staged File Summary",
-              "prompt": "The two files are staged and no commit exists yet. Inspect the staged summary to verify that the proposed snapshot contains exactly two files without recording it.",
+              "prompt": "Both files are staged, but no commit has been created yet. Use the command you learned earlier to inspect the staged summary and confirm that the proposed snapshot contains exactly two files.\n\nDo not create the commit yet.",
               "hint": "Ask Git for a statistics-only view of the staging area.",
               "help": {
                 "concept": "`git diff --staged --stat` summarizes the files and line counts currently in the staging area. `--staged` reads the proposed snapshot, and `--stat` keeps the output compact. The command does not commit anything.",
                 "hint_1": "The summary should name `README.md` and `schedule.txt`.",
                 "hint_2": "Leave both files staged for the next lesson."
               },
-              "starterCode": "# Community Project\n\nShared schedules and contact notes.\n",
+              "starterCode": "# Community Project\n\nShared community activities and updates.\n",
               "solutionCode": "git diff --staged --stat",
               "starterFiles": {
                 "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\n"
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared community activities and updates.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community events\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared community activities and updates.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community events\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\n"
                 }
               },
               "solutionFiles": {
                 "zoeskoul_setup_sh": {
-                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\n"
+                  "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared community activities and updates.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community events\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared community activities and updates.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community events\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\n"
                 }
               },
               "instructions": "The two files are staged and no commit exists yet. Inspect the staged summary to verify that the proposed snapshot contains exactly two files without recording it.",
@@ -134,7 +134,7 @@
             "single-choice-2": {
               "title": "Understanding git status --short",
               "prompt": "What does the `??` symbol indicate in the output of `git status --short`?",
-              "hint": "Focus on what the command or concept observes or changes at this point in the workflow.",
+              "hint": "In short status, two question marks appear beside a file Git has not started tracking.",
               "help": {
                 "concept": "Read full and short status reports to tell untracked files, unstaged edits, staged work, and clean state apart.",
                 "hint_1": "Remove options that act on a different repository layer than the one named in the question.",
@@ -215,8 +215,8 @@
             "bodyMarkdown": "`git add README.md schedule.txt` copies the current versions of both files into the staging area—the proposed next snapshot. `git status --short` then uses two columns to summarize state. An `A` in the left column means a new path is staged."
           },
           "sketch2": {
-            "title": "Inspect What Is Staged",
-            "bodyMarkdown": "`git diff --staged --stat` reads the staging area and prints a compact file-and-line summary. `--staged` means “compare the proposed snapshot with the current commit,” while `--stat` avoids showing every changed line. This inspection does not create history."
+            "title": "Read the Staged Summary",
+            "bodyMarkdown": "After both files are staged, run:\n\n```bash\ngit diff --staged --stat\n```\n\nThis command shows a compact summary of **all changes currently in the staging area**—the changes prepared for the next commit.\n\nIts output may look like this:\n\n```text\nREADME.md    | 3 +++\nschedule.txt | 3 +++\n2 files changed, 6 insertions(+)\n```\n\nThe lines `README.md | 3 +++` and `schedule.txt | 3 +++` show that each staged file contains three added lines. The final line summarizes the proposed snapshot: two files changed and six total insertions.\n\nThis is different from:\n\n```bash\ngit diff -- schedule.txt\n```\n\nThat command shows the actual line-by-line **unstaged changes** in `schedule.txt` only. It compares the file in the working tree with its staged version.\n\nRemember:\n\n* `git diff --staged --stat` summarizes everything already staged.\n* `git diff -- schedule.txt` displays unstaged line-by-line changes in one file.\n\nNeither command creates a commit or changes any file. They only inspect the repository’s current state.\n"
           }
         }
       }

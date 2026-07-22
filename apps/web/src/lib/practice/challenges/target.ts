@@ -3,23 +3,39 @@ import "server-only";
 import { resolveManifestExercise } from "@/lib/curriculum/resolveManifestExercise";
 import { resolveTopicBundleManifest } from "@/lib/curriculum/resolveTopicBundleManifest";
 
-export type SharedChallengePurpose = "quiz" | "project";
+export type PublishedPracticePurpose = "quiz" | "project" | "try_it";
+export type SharedChallengePurpose = Exclude<PublishedPracticePurpose, "try_it">;
 
-export type SharedChallengeTargetInput = {
+export type PublishedPracticeTargetInput = {
   subjectSlug: string;
   moduleSlug: string;
   sectionSlug: string;
   topicSlug: string;
   exerciseKey: string;
+  exercisePurpose?: PublishedPracticePurpose;
+};
+
+export type SharedChallengeTargetInput = Omit<
+  PublishedPracticeTargetInput,
+  "exercisePurpose"
+> & {
   exercisePurpose?: SharedChallengePurpose;
 };
 
-export type ResolvedSharedChallengeTarget = Omit<
-  SharedChallengeTargetInput,
+export type ResolvedPublishedPracticeTarget = Omit<
+  PublishedPracticeTargetInput,
   "exercisePurpose"
 > & {
   exerciseTitle: string;
   exerciseKind: string;
+  exercisePurpose: PublishedPracticePurpose;
+  requiresAuthenticatedRunner: boolean;
+};
+
+export type ResolvedSharedChallengeTarget = Omit<
+  ResolvedPublishedPracticeTarget,
+  "exercisePurpose" | "requiresAuthenticatedRunner"
+> & {
   exercisePurpose: SharedChallengePurpose;
 };
 
@@ -54,17 +70,17 @@ function readableExerciseTitle(
   return fallback.replace(/[-_]+/g, " ");
 }
 
-function resolvePurpose(
+function resolvePublishedPurpose(
   exercise: Record<string, unknown>,
-): SharedChallengePurpose {
+): PublishedPracticePurpose {
   const purpose = String(exercise.purpose ?? "").trim();
 
-  if (purpose === "quiz" || purpose === "project") {
+  if (purpose === "quiz" || purpose === "project" || purpose === "try_it") {
     return purpose;
   }
 
   throw new Error(
-    `Only quiz and project exercises can be shared publicly. This exercise uses purpose "${purpose || "unknown"}".`,
+    `Only quiz, project, and try-it exercises can be used for practice. This exercise uses purpose "${purpose || "unknown"}".`,
   );
 }
 
@@ -112,9 +128,16 @@ function requiresAuthenticatedPtyRunner(args: {
   );
 }
 
-export function resolveSharedChallengeTarget(
-  input: SharedChallengeTargetInput,
-): ResolvedSharedChallengeTarget {
+/**
+ * Resolve an authored practice target from the compiled curriculum.
+ *
+ * This resolver intentionally accepts authenticated terminal exercises and the
+ * authored `try_it` purpose. Public challenges apply their stricter anonymous
+ * safety policy in `resolveSharedChallengeTarget` below.
+ */
+export function resolvePublishedPracticeTarget(
+  input: PublishedPracticeTargetInput,
+): ResolvedPublishedPracticeTarget {
   const requested = {
     subjectSlug: required(input.subjectSlug, "subjectSlug"),
     moduleSlug: required(input.moduleSlug, "moduleSlug"),
@@ -154,21 +177,10 @@ export function resolveSharedChallengeTarget(
     exerciseKey: requested.exerciseKey,
   }) as Record<string, unknown>;
 
-  const purpose = resolvePurpose(exercise);
+  const purpose = resolvePublishedPurpose(exercise);
   if (input.exercisePurpose && input.exercisePurpose !== purpose) {
     throw new Error(
-      `This challenge link expected a ${input.exercisePurpose} exercise, but the published exercise is now ${purpose}. Create a new link.`,
-    );
-  }
-
-  if (
-    requiresAuthenticatedPtyRunner({
-      exercise,
-      topicBundle: bundleRecord,
-    })
-  ) {
-    throw new Error(
-      `"${requested.exerciseKey}" requires an authenticated terminal runner and cannot be used as an anonymous public challenge yet.`,
+      `This practice target expected a ${input.exercisePurpose} exercise, but the published exercise is now ${purpose}.`,
     );
   }
 
@@ -183,5 +195,35 @@ export function resolveSharedChallengeTarget(
     exerciseTitle: readableExerciseTitle(exercise, requested.exerciseKey),
     exerciseKind: String(exercise.kind ?? "unknown"),
     exercisePurpose: purpose,
+    requiresAuthenticatedRunner: requiresAuthenticatedPtyRunner({
+      exercise,
+      topicBundle: bundleRecord,
+    }),
+  };
+}
+
+export function resolveSharedChallengeTarget(
+  input: SharedChallengeTargetInput,
+): ResolvedSharedChallengeTarget {
+  const resolved = resolvePublishedPracticeTarget(input);
+
+  if (resolved.exercisePurpose === "try_it") {
+    throw new Error(
+      `"${resolved.exerciseKey}" is an authenticated lesson try-it and cannot be shared as an anonymous public challenge.`,
+    );
+  }
+
+  if (resolved.requiresAuthenticatedRunner) {
+    throw new Error(
+      `"${resolved.exerciseKey}" requires an authenticated terminal runner and cannot be used as an anonymous public challenge yet.`,
+    );
+  }
+
+  const { requiresAuthenticatedRunner: _requiresAuthenticatedRunner, ...target } =
+    resolved;
+
+  return {
+    ...target,
+    exercisePurpose: resolved.exercisePurpose,
   };
 }

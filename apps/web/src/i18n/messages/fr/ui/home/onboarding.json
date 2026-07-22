@@ -47,13 +47,32 @@
       "descriptionFresh": "Choisissez ce que vous voulez apprendre, adoptez un rythme qui convient à votre semaine, puis lancez une leçon ou un défi quand vous êtes prêt.",
       "chooseSubject": "Choisissez une matière à essayer",
       "continueLearning": "Continuer",
-      "try3Questions": "Essayer 3 questions",
+      "try3Questions": "Commencer 3 questions",
       "startingTrial": "Démarrage de l’essai...",
       "openGuide": "Configurer mon apprentissage",
       "exploreSubjects": "Parcourir les matières",
       "editPreferences": "Ajuster ma configuration",
       "editAnswers": "Modifier mes réponses",
-      "currentTheme": "Thème : {theme}"
+      "currentTheme": "Thème : {theme}",
+      "continueLesson": "Continuer la leçon",
+      "startLearning": "Commencer à apprendre",
+      "exploreLessons": "Explorer les leçons",
+      "learningOpening": "Ouverture de votre leçon…"
+    },
+    "practiceCard": {
+      "guestKicker": "Pratique gratuite",
+      "dailyKicker": "Pratique quotidienne",
+      "guestTitle": "Commencez avec {count} questions gratuites.",
+      "dailyTitle": "Prenez un moment pour la pratique du jour.",
+      "guestDescription": "Découvrez rapidement ZoeSkoul avec une courte série guidée. Aucun compte n’est nécessaire.",
+      "dailyDescription": "Répondez à {count} questions ciblées et gardez votre élan d’apprentissage.",
+      "guestCta": "Commencer {count} questions gratuites",
+      "dailyCta": "Commencer la pratique",
+      "opening": "Ouverture de la pratique…",
+      "unlimitedKicker": "Pratique illimitée",
+      "unlimitedTitle": "Travaillez exactement ce dont vous avez besoin.",
+      "unlimitedDescription": "Choisissez un catalogue, un cours, un module, une section et un sujet, puis pratiquez autant que vous le souhaitez avec votre forfait.",
+      "unlimitedCta": "Choisir une pratique"
     },
     "steps": {
       "preferredLanguage": {
@@ -126,8 +145,8 @@
     },
     "highlights": {
       "kicker": "Pensé pour vous",
-      "title": "Un accueil simple qui devient plus utile à mesure que vous progressez.",
-      "description": "Vos leçons, vos exercices et vos progrès restent au même endroit, pour que la prochaine étape soit toujours facile à trouver.",
+      "title": "Un parcours d’apprentissage adapté à vos objectifs.",
+      "description": "Votre langue, votre niveau d’expérience et votre rythme hebdomadaire aident ZoeSkoul à vous proposer la bonne prochaine étape.",
       "cards": {
         "language": {
           "title": "Langue",
@@ -146,7 +165,11 @@
     "recommended": {
       "kicker": "Choisissez la suite",
       "title": "Commencez par quelque chose que vous avez envie de construire.",
+      "titleWithCurrent": "Continuez à apprendre ou choisissez la suite.",
       "viewAll": "Voir toutes les matières",
+      "current": "En cours",
+      "recommendation": "Recommandé",
+      "continueSubject": "Continuer le cours",
       "exploreSubject": "Explorer la matière"
     },
     "floatingAssistant": {
@@ -171,7 +194,7 @@
     "latestChallenge": {
       "eyebrow": "Dernier défi quotidien",
       "noAccount": "Aucun compte requis",
-      "cta": "Relever le défi"
+      "cta": "Ouvrir le défi"
     }
   }
 }

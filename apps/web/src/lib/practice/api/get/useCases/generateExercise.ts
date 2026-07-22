@@ -79,7 +79,7 @@ function isGeneratorTopicMismatch(e: any) {
     );
 }
 
-function resolveAuthoredProjectExercise(args: {
+function resolveAuthoredExercise(args: {
     subjectSlug: string;
     topicSlug: string;
     topicId: string;
@@ -110,7 +110,7 @@ function resolveAuthoredProjectExercise(args: {
                 userId: null,
                 guestId: null,
                 sessionId: null,
-                salt: `authored-project|${args.subjectSlug}|${args.topicSlug}|${args.exerciseKey}|${args.diff}`,
+                salt: `authored-exercise|${args.subjectSlug}|${args.topicSlug}|${args.exerciseKey}|${args.diff}`,
             }) as any,
             diff: args.diff,
             id: args.exerciseKey,
@@ -499,14 +499,16 @@ export async function generatePracticeExercise(
                 sessionId: session?.id ?? null,
             };
 
-    const canResolveExactAuthoredProjectExercise =
+    const canResolveExactAuthoredExercise =
         (!isOnboardingTrial || isSharedChallenge) &&
-        purposeMode === "project" &&
+        (purposeMode === "project" || purposeMode === "quiz") &&
         hasRequestedTopic &&
         hasRequestedExerciseKey &&
         Boolean(effectiveSubjectSlug);
 
-    if (canResolveExactAuthoredProjectExercise) {
+    if (canResolveExactAuthoredExercise) {
+        const authoredPurpose: "quiz" | "project" =
+            purposeMode === "quiz" ? "quiz" : "project";
         let authoredResolved = await resolveTopicFromScope({
             prisma,
             subjectSlug: scopedSubjectSlug,
@@ -549,7 +551,7 @@ export async function generatePracticeExercise(
             authoredResolved = manifestFallback;
         }
 
-        const authored = resolveAuthoredProjectExercise({
+        const authored = resolveAuthoredExercise({
             subjectSlug: String(effectiveSubjectSlug),
             topicSlug: String(authoredResolved.topicSlug),
             topicId: String(authoredResolved.topicId),
@@ -566,7 +568,7 @@ export async function generatePracticeExercise(
             topicSlug: authoredResolved.topicSlug as TopicSlug,
             difficulty: diff,
             topicIdHint: authoredResolved.topicId as string,
-            purpose: "project",
+            purpose: authoredPurpose,
         });
 
         const key = signKey({
@@ -595,7 +597,7 @@ export async function generatePracticeExercise(
                     salt: reqSalt ?? null,
                     purposeMode,
                     preferPurposeForGenerator,
-                    chosenPurpose: "project",
+                    chosenPurpose: authoredPurpose,
                     authored: true,
                     source: "topic-bundle",
                     purpose: {

@@ -1,0 +1,33 @@
+{
+  "attempt": 2,
+  "status": "success",
+  "validationState": {
+    "unsafeSkipValidation": false,
+    "requested": {
+      "skipQualityGates": false,
+      "skipSemantic": false,
+      "skipGolden": false,
+      "unsafeSkipValidation": false
+    },
+    "structural": {
+      "ran": true,
+      "skipped": false,
+      "required": true
+    },
+    "qualityGates": {
+      "ran": true,
+      "skipped": false,
+      "required": true
+    },
+    "semantic": {
+      "ran": true,
+      "skipped": false,
+      "required": true
+    },
+    "golden": {
+      "ran": true,
+      "skipped": false,
+      "required": true
+    }
+  }
+}

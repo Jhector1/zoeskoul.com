@@ -1,301 +1,237 @@
 {
-  "title": "Read Tracked and Untracked State",
-  "summary": "Use full and short status views to tell which files Git knows, which files are new, and which changes still need attention.",
+  "title": "Read the Community Site State",
+  "summary": "Carry the same community-site files from untracked state into one staged proposal, then inspect what Git would record.",
   "minutes": 22,
   "sketchBlocks": [
     {
       "id": "sketch0",
-      "title": "Decoding git status",
-      "bodyMarkdown": "The `git status` command is a powerful tool that provides a snapshot of the current state of your working directory and staging area. It helps you understand which changes are staged for the next commit, which are not, and which files are not being tracked by Git.\n\nWorked example: Imagine you have a project with several files. After making some changes, you run `git status`. The output shows:\n\n```\nOn branch main\nYour branch is up to date with 'origin/main'.\n\nChanges not staged for commit:\n  (use \"git add <file>...\" to update what will be committed)\n  (use \"git restore <file>...\" to discard changes in working directory)\n\tmodified:   file1.txt\n\nUntracked files:\n  (use \"git add <file>...\" to include in what will be committed)\n\tfile2.txt\n```\n\nThis output tells you that `file1.txt` has been modified but not staged, and `file2.txt` is a new file that Git is not tracking yet. Understanding this output helps you decide your next steps, such as staging changes or adding new files to the repository."
+      "title": "Check which files are untracked in the working tree",
+      "bodyMarkdown": "Worked example:\n\nWhen a folder contains files but you haven't told Git about them yet, Git lists them as untracked. That tells you these files exist in your working tree but are not staged or recorded in any commit.\n\nExample commands and their intent:\n\n```bash\n# show a human-readable summary with helpful commentary\ngit status\n\n# show a compact machine-friendly list of paths\ngit status --short\n```\n\nIn a worked example repository you might see output such as this from git status --short:\n\n```text\n?? site.md\n?? home.html\n?? contributing.md\n?? team.md\n?? logo.svg\n```\n\nEach line beginning with '??' is an untracked file. One row means a single path that Git is not yet tracking. Watching this list helps you avoid accidentally forgetting to include important files in your first snapshot."
     },
     {
       "id": "sketch1",
-      "title": "Compact View with git status --short",
-      "bodyMarkdown": "For a more concise view of your repository's status, you can use `git status --short`. This command provides a brief overview of the changes in your working directory and staging area, using symbols to indicate the state of each file.\n\nWorked example: After making changes to your project, you run `git status --short` and see:\n\n```\n M file1.txt\n?? file2.txt\n```\n\nIn this output, `M` indicates that `file1.txt` has been modified, and `??` shows that `file2.txt` is untracked. This shorthand view is particularly useful when you want a quick overview without the detailed explanations provided by the full `git status` command."
+      "title": "Move specific files into the staging area",
+      "bodyMarkdown": "Worked example:\n\nStaging (with git add) takes the current contents of a file from the working tree and places that snapshot into the index (staging area). Staging prepares a specific set of paths for the next commit while leaving un-staged edits alone.\n\nExample commands:\n\n```bash\n# stage two files for the next commit\ngit add CONTRIBUTING.md README.md\n\n# check the short status to see staged vs unstaged\ngit status --short\n```\n\nAfter running these, git status --short might show a staged file with an 'A' (added) in the left column and unstaged changes with other markers. The staged snapshot represents exactly what Git will put into the next commit for those paths."
     },
     {
       "id": "sketch2",
-      "title": "Tracked vs. Untracked Files",
-      "bodyMarkdown": "Understanding the difference between tracked and untracked files is crucial in Git. Tracked files are those that Git is aware of and are part of the repository's history. Untracked files, on the other hand, are new files that Git has not yet been told to track.\n\nWorked example: Suppose you have a directory with several files. You run `git status` and see:\n\n```\nUntracked files:\n  (use \"git add <file>...\" to include in what will be committed)\n\tnewfile.txt\n```\n\nThis indicates that `newfile.txt` is not yet tracked by Git. To start tracking it, you would use `git add newfile.txt`. Once added, it becomes a tracked file and will be included in future commits."
+      "title": "Read the staged vs unstaged columns with a compact status view",
+      "bodyMarkdown": "Worked example:\n\nThe short status view shows two columns of status characters. The left column reflects the index (staging area); the right column reflects the working tree. This compact view makes it easy to scan which files are staged for commit.\n\nExample compact output (two-column annotations added for explanation):\n\n```text\nA  index.html     # left column 'A' means staged as added\n?? about.md       # '??' means untracked (not staged)\n M styles.css     # right column 'M' means modified in working tree but not staged\n```\n\nRead the left column first to know what the next commit will contain, then read the right column to see remaining local edits you'll need to stage (or discard) separately."
     },
     {
       "id": "sketch3",
-      "title": "Applying git status in Real Projects",
-      "bodyMarkdown": "Using `git status` effectively can prevent many common mistakes in version control. It helps ensure that you are aware of all changes before committing, reducing the risk of accidentally omitting important updates or including unwanted changes.\n\nWorked example: You're working on a project and have made several changes. Before committing, you run `git status` to review the current state. You notice a file you forgot to stage. By catching this oversight, you can stage the file and ensure it is included in your next commit, maintaining a complete and accurate project history."
+      "title": "View exactly what would be recorded in the next commit",
+      "bodyMarkdown": "Worked example:\n\nBefore committing, you can inspect the staged snapshot itself. git diff --staged shows the changes that are currently in the index compared with HEAD; git diff --staged --name-only lists only the staged path names. This is a safety check so you commit exactly what you expect.\n\nExample commands:\n\n```bash\n# list only staged file paths\ngit diff --staged --name-only\n\n# examine the staged content changes in unified diff form\ngit diff --staged\n```\n\nOne row of output from git diff --staged --name-only corresponds to one staged path that will be part of the commit. Use this to confirm content before you run git commit."
     }
   ],
   "quizDraft": [
     {
       "id": "try-read-tracked-and-untracked-state-sketch0",
-      "kind": "code_input",
-      "title": "Practice with git status",
-      "prompt": "Initialize a new Git repository and create two files: `tracked.txt` and `untracked.txt`. Add `tracked.txt` to the staging area. Use `git status` to verify the state of your repository. What does the output show?",
-      "starterCode": "# Initialize a new Git repository\n# Create two files: tracked.txt and untracked.txt\n# Add tracked.txt to the staging area\n# Use git status to verify the state",
-      "entryFilePath": "main.sh",
-      "starterFiles": [
-        {
-          "path": "main.sh",
-          "content": "# Initialize a new Git repository\n# Create two files: tracked.txt and untracked.txt\n# Add tracked.txt to the staging area\n# Use git status to verify the state",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        }
+      "kind": "fill_blank_choice",
+      "title": "Read the untracked community-site files",
+      "prompt": "Your workspace contains a community-site repository root with five project files present but not yet staged. Use Git to list the repository state and confirm that the five files (README.md, index.html, about.md, contact.md, styles.css) are untracked. Type the command(s) and press Enter in the terminal to inspect the working tree.",
+      "template": "A file-writing code exercise should also ____ so automated tests can check it.",
+      "choices": [
+        "print an observable result",
+        "hide all output",
+        "delete the file immediately",
+        "skip the program"
       ],
-      "solutionFiles": [
-        {
-          "path": "main.sh",
-          "content": "git init\ntouch tracked.txt untracked.txt\ngit add tracked.txt\ngit status",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        }
-      ],
-      "solutionCode": "git init\ntouch tracked.txt untracked.txt\ngit add tracked.txt\ngit status",
-      "recipeType": "sql_query",
-      "hint": "Remember to initialize the repository and add only one file to the staging area.",
+      "correctValue": "print an observable result",
+      "hint": "Run the Git status command that shows a compact list of paths.",
       "help": {
-        "concept": "The `git status` command shows the state of the working directory and staging area.",
-        "hint_1": "Initialize the repository with `git init`.",
-        "hint_2": "Add `tracked.txt` to the staging area using `git add tracked.txt`."
+        "concept": "Untracked files appear in the working tree but are not staged or committed; git status and git status --short reveal them.",
+        "hint_1": "Use git status or git status --short to see untracked files listed with '??'.",
+        "hint_2": "Run git status --short and check for lines beginning with '??' for each expected path."
       }
     },
     {
       "id": "try-read-tracked-and-untracked-state-sketch1",
-      "kind": "code_input",
-      "title": "Using git status --short",
-      "prompt": "Create a new Git repository and two files: `fileA.txt` and `fileB.txt`. Modify `fileA.txt` and leave `fileB.txt` untracked. Use `git status --short` to check the status. What does the output show?",
-      "starterCode": "# Initialize a new Git repository\n# Create two files: fileA.txt and fileB.txt\n# Modify fileA.txt\n# Use git status --short to check the status",
-      "entryFilePath": "main.sh",
-      "starterFiles": [
-        {
-          "path": "main.sh",
-          "content": "# Initialize a new Git repository\n# Create two files: fileA.txt and fileB.txt\n# Modify fileA.txt\n# Use git status --short to check the status",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        }
+      "kind": "fill_blank_choice",
+      "title": "Stage the five project files",
+      "prompt": "Stage exactly these five project files so they become part of the index (staging area): README.md, index.html, about.md, contact.md, styles.css. Type the git add command(s) that stage those files and press Enter. After staging, show a short status to confirm the left column indicates staged adds.",
+      "template": "A file-writing code exercise should also ____ so automated tests can check it.",
+      "choices": [
+        "print an observable result",
+        "hide all output",
+        "delete the file immediately",
+        "skip the program"
       ],
-      "solutionFiles": [
-        {
-          "path": "main.sh",
-          "content": "git init\ntouch fileA.txt fileB.txt\necho 'modification' > fileA.txt\ngit status --short",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        }
-      ],
-      "solutionCode": "git init\ntouch fileA.txt fileB.txt\necho 'modification' > fileA.txt\ngit status --short",
-      "recipeType": "sql_query",
-      "hint": "Use `git status --short` to see a concise view of the changes.",
+      "correctValue": "print an observable result",
+      "hint": "Use git add with the five explicit paths, then git status --short.",
       "help": {
-        "concept": "`git status --short` provides a brief overview of changes using symbols.",
-        "hint_1": "Initialize the repository and create the files.",
-        "hint_2": "Modify `fileA.txt` and check the status with `git status --short`."
+        "concept": "git add records the working-tree contents of given paths into the index so they will be part of the next commit.",
+        "hint_1": "Run git add README.md index.html about.md contact.md styles.css to stage those five files.",
+        "hint_2": "After adding, run git status --short and look for an 'A' or other left-column marker for each staged path."
       }
     },
     {
       "id": "try-read-tracked-and-untracked-state-sketch2",
-      "kind": "code_input",
-      "title": "Distinguishing Tracked and Untracked Files",
-      "prompt": "Initialize a Git repository and create a file `example.txt`. Do not add it to the staging area. Use `git status` to determine if the file is tracked or untracked.",
-      "starterCode": "# Initialize a new Git repository\n# Create a file: example.txt\n# Use git status to check if it's tracked or untracked",
-      "entryFilePath": "main.sh",
-      "starterFiles": [
-        {
-          "path": "main.sh",
-          "content": "# Initialize a new Git repository\n# Create a file: example.txt\n# Use git status to check if it's tracked or untracked",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        }
+      "kind": "fill_blank_choice",
+      "title": "Interpret the short status view",
+      "prompt": "A hidden setup has already staged the five project files for you. Run the compact status command that shows staged vs unstaged columns so you can read which files are staged in the left column. Type the command and press Enter.",
+      "template": "A file-writing code exercise should also ____ so automated tests can check it.",
+      "choices": [
+        "print an observable result",
+        "hide all output",
+        "delete the file immediately",
+        "skip the program"
       ],
-      "solutionFiles": [
-        {
-          "path": "main.sh",
-          "content": "git init\ntouch example.txt\ngit status",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        }
-      ],
-      "solutionCode": "git init\ntouch example.txt\ngit status",
-      "recipeType": "sql_query",
-      "hint": "Files not added to the staging area remain untracked.",
+      "correctValue": "print an observable result",
+      "hint": "Run the short status form of git status to see two columns of markers.",
       "help": {
-        "concept": "Untracked files are those not yet added to the staging area.",
-        "hint_1": "Initialize the repository and create the file.",
-        "hint_2": "Use `git status` to see the file's status."
+        "concept": "git status --short shows a left column (index/staging area) and a right column (working tree) so you can quickly see what will be committed.",
+        "hint_1": "The command is git status --short (or git status -s).",
+        "hint_2": "Look at the left column characters to confirm those five paths are staged (e.g., 'A' for added)."
       }
     },
     {
       "id": "try-read-tracked-and-untracked-state-sketch3",
-      "kind": "code_input",
-      "title": "Practical Use of git status",
-      "prompt": "You have a Git repository with several changes. Create a file `important.txt` and modify an existing file `notes.txt`. Use `git status` to ensure all changes are accounted for before committing.",
-      "starterCode": "# Assume a Git repository with changes\n# Create a file: important.txt\n# Modify an existing file: notes.txt\n# Use git status to ensure all changes are accounted for",
-      "entryFilePath": "main.sh",
-      "starterFiles": [
-        {
-          "path": "main.sh",
-          "content": "# Assume a Git repository with changes\n# Create a file: important.txt\n# Modify an existing file: notes.txt\n# Use git status to ensure all changes are accounted for",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        }
+      "kind": "fill_blank_choice",
+      "title": "View the staged snapshot contents",
+      "prompt": "Show what changes are currently staged (the snapshot in the index) so you can confirm the content that would be recorded by the next commit. Type the git diff command that inspects the staged snapshot and press Enter.",
+      "template": "A file-writing code exercise should also ____ so automated tests can check it.",
+      "choices": [
+        "print an observable result",
+        "hide all output",
+        "delete the file immediately",
+        "skip the program"
       ],
-      "solutionFiles": [
-        {
-          "path": "main.sh",
-          "content": "touch important.txt\necho 'update' >> notes.txt\ngit status",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        }
-      ],
-      "solutionCode": "touch important.txt\necho 'update' >> notes.txt\ngit status",
-      "recipeType": "sql_query",
-      "hint": "Check the status to see which files are modified or untracked.",
+      "correctValue": "print an observable result",
+      "hint": "Use git diff --staged or git diff --staged --name-only to inspect staged changes or path names.",
       "help": {
-        "concept": "`git status` helps ensure all changes are accounted for before committing.",
-        "hint_1": "Create and modify the files as described.",
-        "hint_2": "Use `git status` to verify the changes."
+        "concept": "git diff --staged compares the index to HEAD to show exactly what content will be recorded in the next commit.",
+        "hint_1": "Run git diff --staged --name-only to list only staged paths, or git diff --staged to see content diffs.",
+        "hint_2": "Use the staged snapshot output to verify there are exactly the five intended paths and no unexpected changes before committing."
       }
     },
     {
-      "id": "single-choice-1",
+      "id": "q-single-1",
       "kind": "single_choice",
-      "title": "Purpose of git status",
-      "prompt": "What is the primary purpose of the `git status` command?",
+      "title": "Tracked vs untracked files",
+      "prompt": "Which statement best describes an untracked file in a Git repository?",
       "options": [
-        "To commit changes to the repository",
-        "To show the current branch and changes",
-        "To merge branches",
-        "To delete files from the repository"
+        "The file is recorded in the repository history and safely versioned.",
+        "The file exists in the working directory but is not staged or committed by Git.",
+        "The file is staged and will be part of the next commit.",
+        "The file is ignored by .gitignore and will never be shown by git status."
       ],
       "correctOptionIds": [
         "b"
       ],
-      "hint": "Think about what information `git status` provides about your repository.",
+      "hint": "Untracked files exist in the working directory but haven't been recorded in the index or history.",
       "help": {
-        "concept": "`git status` provides information about the current state of the working directory and staging area.",
-        "hint_1": "It shows which changes are staged, unstaged, or untracked.",
-        "hint_2": "It helps you understand what will be included in the next commit."
+        "concept": "An untracked file is present in the working tree but Git has no staged snapshot or record of it; it will appear with '??' in git status --short.",
+        "hint_1": "An untracked file is not yet in the index and will not be included in commits until staged with git add.",
+        "hint_2": "Look for the choice that says the file is present locally but not recorded by Git yet."
       }
     },
     {
-      "id": "single-choice-2",
+      "id": "q-single-2",
       "kind": "single_choice",
-      "title": "Understanding git status --short",
-      "prompt": "What does the `??` symbol indicate in the output of `git status --short`?",
+      "title": "Why inspect staged snapshot",
+      "prompt": "Why should you run git diff --staged before creating a first commit?",
       "options": [
-        "A modified file",
-        "A deleted file",
-        "An untracked file",
-        "A staged file"
+        "It shows the full commit history for the repository.",
+        "It confirms the exact staged content that will be part of the next commit.",
+        "It removes untracked files from the working tree.",
+        "It permanently discards staged changes."
       ],
       "correctOptionIds": [
-        "c"
+        "b"
       ],
-      "hint": "Consider what `??` might mean about a file's status in the repository.",
+      "hint": "This command compares the index to HEAD so you can confirm the exact content that will be recorded.",
       "help": {
-        "concept": "The `??` symbol indicates untracked files in `git status --short`.",
-        "hint_1": "Untracked files are those not yet added to the staging area.",
-        "hint_2": "`??` means the file is new and not tracked by Git."
+        "concept": "git diff --staged shows the actual content differences staged for the next commit so you avoid committing unexpected changes.",
+        "hint_1": "It lists the content changes that are currently in the index compared with HEAD.",
+        "hint_2": "Choose the answer that mentions confirming exactly what will be recorded by the next commit."
       }
     },
     {
-      "id": "multi-choice-1",
+      "id": "q-multi-1",
       "kind": "multi_choice",
-      "title": "Components of git status output",
-      "prompt": "Which of the following are components of the `git status` output? Select all that apply.",
+      "title": "Which commands place changes into the index (stage changes)?",
+      "prompt": "Select all commands that can create or modify the staging-area snapshot (the index).",
       "options": [
-        "Current branch",
-        "Staged changes",
-        "Untracked files",
-        "Remote branches"
+        "git add README.md",
+        "git commit -m \"first\"",
+        "git mv old.txt new.txt",
+        "git rm obsolete.txt"
       ],
       "correctOptionIds": [
         "a",
-        "b",
-        "c"
+        "c",
+        "d"
       ],
-      "hint": "Think about the different sections `git status` might show.",
+      "hint": "Think about commands that record a change into the index rather than only creating commits.",
       "help": {
-        "concept": "`git status` shows the current branch, staged changes, unstaged changes, and untracked files.",
-        "hint_1": "It provides a comprehensive view of the repository's state.",
-        "hint_2": "Consider what information is necessary to understand the current state of your project."
+        "concept": "Several Git commands update the index: git add stages new/updated paths; git mv stages the rename (it is equivalent to a move + staging); git rm stages removals.",
+        "hint_1": "Commands that alter the index include git add and operations that imply staging such as git mv and git rm.",
+        "hint_2": "git commit records what's already in the index; it does not itself stage new file edits."
       }
     },
     {
-      "id": "drag-reorder-1",
+      "id": "q-drag-1",
       "kind": "drag_reorder",
-      "title": "Order of git status sections",
-      "prompt": "Arrange the sections of the `git status` output in the correct order.",
+      "title": "Order the local Git snapshot workflow steps",
+      "prompt": "Arrange these steps in the order they happen locally when preparing and recording the first snapshot for a folder.",
       "tokens": [
-        "Current branch",
-        "Staged changes",
-        "Unstaged changes",
-        "Untracked files"
+        "Make an edit in the working tree",
+        "Stage changes with git add",
+        "Record the snapshot with git commit",
+        "Verify with git status that the working tree is clean"
       ],
       "correctOrder": [
-        "Current branch",
-        "Staged changes",
-        "Unstaged changes",
-        "Untracked files"
+        "Make an edit in the working tree",
+        "Stage changes with git add",
+        "Record the snapshot with git commit",
+        "Verify with git status that the working tree is clean"
       ],
-      "hint": "Consider the logical flow of information in `git status`.",
+      "hint": "Think from making an edit to verifying a clean working tree after a commit.",
       "help": {
-        "concept": "`git status` typically shows the current branch, followed by staged changes, unstaged changes, and untracked files.",
-        "hint_1": "Think about what information is most immediately relevant.",
-        "hint_2": "The order reflects the progression from tracked to untracked changes."
+        "concept": "A local snapshot workflow goes from editing (working tree) → staging (index) → committing (record) → verifying the clean state.",
+        "hint_1": "Start with making an edit in the working tree, then stage, then commit, then verify with git status.",
+        "hint_2": "Choose the sequence that begins with an edit and ends with a verification step like git status or a clean working tree."
       }
     },
     {
-      "id": "fill-blank-choice-1",
+      "id": "q-fill-1",
       "kind": "fill_blank_choice",
-      "title": "Symbol for modified files",
-      "prompt": "In `git status --short`, the symbol for a modified file is `[blank1]`.",
-      "template": "In `git status --short`, the symbol for a modified file is `[blank1]`.",
+      "title": "Command to show compact status",
+      "prompt": "[blank1] --short shows a compact two-column Git status indicating staged and unstaged changes.",
+      "template": "[blank1] --short shows a compact two-column Git status indicating staged and unstaged changes.",
       "choices": [
-        "M",
-        "A",
-        "D",
-        "U"
+        "git status",
+        "git commit",
+        "git add",
+        "git diff"
       ],
-      "correctValue": "M",
-      "hint": "Think about the symbol used to indicate modifications.",
+      "correctValue": "git status",
+      "hint": "Which git command accepts --short to give a compact status?",
       "help": {
-        "concept": "The `the missing term` symbol indicates a modified file in `git status --short`.",
-        "hint_1": "It's a single letter symbol.",
-        "hint_2": "This symbol is used for files that have been changed but not staged."
+        "concept": "the missing term --short (or -s) prints a compact two-column status view showing index vs working-tree changes.",
+        "hint_1": "The command that shows status is the missing term.",
+        "hint_2": "Pick the git command name (not a subcommand like commit or add)."
       }
     },
     {
-      "id": "fill-blank-choice-2",
+      "id": "q-fill-2",
       "kind": "fill_blank_choice",
-      "title": "Symbol for untracked files",
-      "prompt": "In `git status --short`, the symbol for an untracked file is `[blank1]`.",
-      "template": "In `git status --short`, the symbol for an untracked file is `[blank1]`.",
+      "title": "Place a file into the index",
+      "prompt": "To prepare README.md for inclusion in the next commit, run git add [blank1].",
+      "template": "To prepare README.md for inclusion in the next commit, run git add [blank1].",
       "choices": [
-        "M",
-        "A",
-        "??",
-        "U"
+        "README.md",
+        "origin",
+        "main",
+        ".gitignore"
       ],
-      "correctValue": "??",
-      "hint": "Consider the symbol used for files not yet added to the repository.",
+      "correctValue": "README.md",
+      "hint": "The blank should be the path you want to stage.",
       "help": {
-        "concept": "The `??` symbol indicates an untracked file in `git status --short`.",
-        "hint_1": "It's a two-character symbol.",
-        "hint_2": "This symbol is used for files that are new and not tracked by Git."
+        "concept": "git add <path> records the working-tree contents of the path into the index for the next commit.",
+        "hint_1": "Fill the blank with a file path present in the working tree.",
+        "hint_2": "Use the literal filename the missing term as the path to stage that specific file."
       }
     }
   ]

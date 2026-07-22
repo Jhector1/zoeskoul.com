@@ -9,6 +9,7 @@ import {
   readDailyFiveMeta,
   listDailyPracticeSubjectOptions,
   pickDailyFiveQueue,
+  isDailyFiveEligible,
   utcDayKey,
 } from "@/lib/practice/experience/dailyFive";
 import { DAILY_PRACTICE_TARGET_COUNT } from "@/lib/practice/experience/config";
@@ -20,6 +21,9 @@ export const runtime = "nodejs";
 type StartDailyFiveBody = {
   locale?: string;
   subjectSlug?: string;
+  moduleSlug?: string;
+  sectionSlug?: string;
+  topicSlug?: string;
 };
 
 type DailySessionCandidate = {
@@ -89,6 +93,9 @@ export async function POST(req: Request) {
   const body = (await req.json().catch(() => ({}))) as StartDailyFiveBody;
   const locale = String(body.locale ?? "en");
   const requestedSubjectSlug = String(body.subjectSlug ?? "").trim() || null;
+  const requestedModuleSlug = String(body.moduleSlug ?? "").trim() || null;
+  const requestedSectionSlug = String(body.sectionSlug ?? "").trim() || null;
+  const requestedTopicSlug = String(body.topicSlug ?? "").trim() || null;
   const dayKey = utcDayKey();
   const experienceKey = dailyFiveExperienceKey(actor.userId, dayKey);
 
@@ -153,7 +160,26 @@ export async function POST(req: Request) {
   if (!selectedSubject) {
     return subjectSelectionResponse(
       subjects,
-      "That subject does not currently have enough eligible daily-practice exercises.",
+      "That course does not currently have eligible daily-practice exercises.",
+    );
+  }
+
+  const requestedScopeExists = options.some(
+    (option) =>
+      isDailyFiveEligible(option) &&
+      option.subjectSlug === selectedSubject.subjectSlug &&
+      (!requestedModuleSlug || option.moduleSlug === requestedModuleSlug) &&
+      (!requestedSectionSlug || option.sectionSlug === requestedSectionSlug) &&
+      (!requestedTopicSlug || option.topicSlug === requestedTopicSlug),
+  );
+
+  if (!requestedScopeExists) {
+    return NextResponse.json(
+      {
+        message: "That practice path is not available for this account.",
+        code: "DAILY_SCOPE_UNAVAILABLE",
+      },
+      { status: 403 },
     );
   }
 
@@ -162,15 +188,18 @@ export async function POST(req: Request) {
     userId: actor.userId,
     dayKey,
     subjectSlug: selectedSubject.subjectSlug,
+    moduleSlug: requestedModuleSlug,
+    sectionSlug: requestedSectionSlug,
+    topicSlug: requestedTopicSlug,
     targetCount: DAILY_PRACTICE_TARGET_COUNT,
   });
 
-  if (queue.length !== DAILY_PRACTICE_TARGET_COUNT) {
+  if (queue.length === 0) {
     return NextResponse.json(
       {
-        message: `The selected subject does not currently have ${DAILY_PRACTICE_TARGET_COUNT} unique eligible standalone single-file code exercises.`,
-        code: "DAILY_PRACTICE_POOL_INCOMPLETE",
-        targetCount: DAILY_PRACTICE_TARGET_COUNT,
+        message: "The selected practice path does not currently have eligible exercises.",
+        code: "DAILY_PRACTICE_POOL_EMPTY",
+        targetCount: 0,
         subjects,
       },
       { status: 409 },
@@ -220,7 +249,7 @@ export async function POST(req: Request) {
         sectionId: section.id,
         moduleId: section.moduleId,
         difficulty,
-        targetCount: DAILY_PRACTICE_TARGET_COUNT,
+        targetCount: queue.length,
         preferPurpose: first.exercisePurpose,
         returnUrl: `/${encodeURIComponent(locale)}/practice/daily`,
         meta: buildDailyFiveMeta({ dayKey, locale, queue }),

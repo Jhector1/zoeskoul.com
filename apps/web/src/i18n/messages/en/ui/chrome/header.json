@@ -4,10 +4,10 @@
     "home": "Home",
     "billing": "Billing",
     "settings": "Settings",
-    "practice": "Learn & Practice",
+    "practice": "Practice",
     "assignments": "Assignments",
     "subjects": "Subjects",
-    "tagline": "Visual • Practice • Progress",
+    "tagline": "Lessons • Practice • Progress",
     "startSession": "Sandbox",
     "signIn": "Sign in",
     "profile": "Profile",
@@ -28,6 +28,14 @@
     "fontNormal": "A",
     "fontLarge": "A+",
     "fontExtraLarge": "A++",
-    "soundHint": "Turn interface sounds on or off"
+    "soundHint": "Turn interface sounds on or off",
+    "practiceGuest": "Try {count} questions",
+    "practiceOpening": "Opening practice…",
+    "sandboxOpening": "Opening sandbox…",
+    "signInOpening": "Opening sign in…",
+    "continueLesson": "Continue lesson",
+    "startLearning": "Start learning",
+    "exploreLessons": "Explore lessons",
+    "learningOpening": "Opening your lesson…"
   }
 }

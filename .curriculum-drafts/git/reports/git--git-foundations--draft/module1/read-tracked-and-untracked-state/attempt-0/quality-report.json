@@ -1,5 +1,5 @@
 {
-  "ok": true,
+  "ok": false,
   "profileId": "git",
   "subjectSlug": "git--git-foundations--draft",
   "courseSlug": "git-foundations",
@@ -17,16 +17,16 @@
     },
     "codeInputs": 4,
     "projects": 4,
-    "capstones": 0,
+    "capstones": 4,
     "thinFixedTestCount": 0,
-    "blockers": 0,
-    "errors": 0,
+    "blockers": 4,
+    "errors": 1,
     "warnings": 1,
     "infos": 0
   },
   "severityCounts": {
-    "blocker": 0,
-    "error": 0,
+    "blocker": 4,
+    "error": 1,
     "warning": 1,
     "info": 0
   },
@@ -39,6 +39,56 @@
       "moduleId": "git-foundations-module-1-start-tracking",
       "topicId": "read-tracked-and-untracked-state",
       "message": "Topic \"read-tracked-and-untracked-state\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "WORKSPACE_ENTRY_FILE_LEAK",
+      "severity": "blocker",
+      "path": "git-foundations-module-1-start-tracking/git-foundations-section-1-repository-basics/read-tracked-and-untracked-state",
+      "profileId": "git",
+      "moduleId": "git-foundations-module-1-start-tracking",
+      "topicId": "read-tracked-and-untracked-state",
+      "exerciseId": "try-read-tracked-and-untracked-state-sketch0",
+      "message": "Exercise \"try-read-tracked-and-untracked-state-sketch0\" uses workspace entry file \"community-site/README.md\" but profile \"git\" expects \"README.md\"."
+    },
+    {
+      "code": "EXPECTED_ENTRY_FILE_MISSING",
+      "severity": "error",
+      "path": "git-foundations-module-1-start-tracking/git-foundations-section-1-repository-basics/read-tracked-and-untracked-state",
+      "profileId": "git",
+      "moduleId": "git-foundations-module-1-start-tracking",
+      "topicId": "read-tracked-and-untracked-state",
+      "exerciseId": "try-read-tracked-and-untracked-state-sketch1",
+      "message": "Exercise \"try-read-tracked-and-untracked-state-sketch1\" workspace does not reference expected entry file \"README.md\"."
+    },
+    {
+      "code": "WORKSPACE_ENTRY_FILE_LEAK",
+      "severity": "blocker",
+      "path": "git-foundations-module-1-start-tracking/git-foundations-section-1-repository-basics/read-tracked-and-untracked-state",
+      "profileId": "git",
+      "moduleId": "git-foundations-module-1-start-tracking",
+      "topicId": "read-tracked-and-untracked-state",
+      "exerciseId": "try-read-tracked-and-untracked-state-sketch1",
+      "message": "Exercise \"try-read-tracked-and-untracked-state-sketch1\" uses workspace entry file \"community-site/about.md\" but profile \"git\" expects \"README.md\"."
+    },
+    {
+      "code": "WORKSPACE_ENTRY_FILE_LEAK",
+      "severity": "blocker",
+      "path": "git-foundations-module-1-start-tracking/git-foundations-section-1-repository-basics/read-tracked-and-untracked-state",
+      "profileId": "git",
+      "moduleId": "git-foundations-module-1-start-tracking",
+      "topicId": "read-tracked-and-untracked-state",
+      "exerciseId": "try-read-tracked-and-untracked-state-sketch2",
+      "message": "Exercise \"try-read-tracked-and-untracked-state-sketch2\" uses workspace entry file \"community-site/README.md\" but profile \"git\" expects \"README.md\"."
+    },
+    {
+      "code": "WORKSPACE_ENTRY_FILE_LEAK",
+      "severity": "blocker",
+      "path": "git-foundations-module-1-start-tracking/git-foundations-section-1-repository-basics/read-tracked-and-untracked-state",
+      "profileId": "git",
+      "moduleId": "git-foundations-module-1-start-tracking",
+      "topicId": "read-tracked-and-untracked-state",
+      "exerciseId": "try-read-tracked-and-untracked-state-sketch3",
+      "message": "Exercise \"try-read-tracked-and-untracked-state-sketch3\" uses workspace entry file \"community-site/README.md\" but profile \"git\" expects \"README.md\"."
     }
   ]
 }

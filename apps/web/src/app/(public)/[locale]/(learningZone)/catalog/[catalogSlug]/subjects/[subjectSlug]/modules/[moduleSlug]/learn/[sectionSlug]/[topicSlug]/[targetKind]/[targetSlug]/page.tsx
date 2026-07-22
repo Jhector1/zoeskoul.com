@@ -1,9 +1,14 @@
 import ReviewModulePageClient from "@/app/(public)/[locale]/(learningZone)/subjects/[subjectSlug]/modules/[moduleSlug]/learn/ReviewModulePageClient";
 import { loadReviewModulePageData } from "@/app/(public)/[locale]/(learningZone)/subjects/[subjectSlug]/modules/[moduleSlug]/learn/loadReviewModulePageData";
-import { resolveReviewRouteTarget } from "@/components/review/module/runtime/reviewRoute";
-import { notFound } from "next/navigation";
+import {
+    buildDefaultReviewRouteTarget,
+    buildReviewRoutePath,
+    resolveReviewRouteTarget,
+} from "@/components/review/module/runtime/reviewRoute";
+import { notFound, redirect } from "next/navigation";
 
 export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
 
 type PageSearchParams = Record<string, string | string[] | undefined>;
 
@@ -32,6 +37,21 @@ function allowE2eUnlockAll(searchParams: PageSearchParams) {
     return searchParamIsTrue(searchParams, "e2eUnlockAll");
 }
 
+function appendSearchParams(pathname: string, searchParams: PageSearchParams) {
+    const query = new URLSearchParams();
+
+    for (const [key, value] of Object.entries(searchParams)) {
+        if (Array.isArray(value)) {
+            for (const item of value) query.append(key, item);
+        } else if (typeof value === "string") {
+            query.set(key, value);
+        }
+    }
+
+    const serialized = query.toString();
+    return serialized ? `${pathname}?${serialized}` : pathname;
+}
+
 export default async function Page({
                                        params,
                                        searchParams,
@@ -49,6 +69,8 @@ export default async function Page({
     searchParams?: Promise<PageSearchParams>;
 }) {
     const {
+        locale,
+        catalogSlug,
         subjectSlug,
         moduleSlug,
         sectionSlug,
@@ -59,41 +81,70 @@ export default async function Page({
 
     const resolvedSearchParams = (await searchParams) ?? {};
 
-    const { mod, canUnlockAll } = await loadReviewModulePageData({
+    const pageData = await loadReviewModulePageData({
         subjectSlug,
         moduleSlug,
     });
 
-    if (!mod) {
-        notFound();
+    if (pageData.status === "missing") {
+        return notFound();
     }
 
-    const target = resolveReviewRouteTarget({
+    if (pageData.status === "unavailable") {
+        return (
+            <ReviewModulePageClient
+                canUnlockAll={pageData.canUnlockAll}
+                mod={null}
+                pageStatus="unavailable"
+            />
+        );
+    }
+
+    const { mod, canUnlockAll } = pageData;
+
+    const requestedRoute = {
+        sectionSlug,
+        topicSlug,
+        targetKind,
+        targetSlug,
+    };
+    const resolvedTarget = resolveReviewRouteTarget({
         mod,
         subjectSlug,
         moduleSlug,
-        route: {
-            sectionSlug,
-            topicSlug,
-            targetKind,
-            targetSlug,
-        },
+        route: requestedRoute,
     });
+    const canonicalTarget = resolvedTarget ?? buildDefaultReviewRouteTarget(mod);
 
-    if (
-        !target ||
-        target.sectionSlug !== sectionSlug ||
-        target.topicSlug !== topicSlug ||
-        target.targetKind !== targetKind ||
-        target.targetSlug !== targetSlug
-    ) {
-        // Keep current behavior: let the client shell handle canonicalization.
+    if (canonicalTarget) {
+        const routeIsCanonical =
+            resolvedTarget !== null &&
+            canonicalTarget.sectionSlug === sectionSlug &&
+            canonicalTarget.topicSlug === topicSlug &&
+            canonicalTarget.targetKind === targetKind &&
+            canonicalTarget.targetSlug === targetSlug;
+
+        if (!routeIsCanonical) {
+            redirect(
+                appendSearchParams(
+                    buildReviewRoutePath({
+                        locale,
+                        catalogSlug,
+                        subjectSlug,
+                        moduleSlug,
+                        target: canonicalTarget,
+                    }),
+                    resolvedSearchParams,
+                ),
+            );
+        }
     }
 
     return (
         <ReviewModulePageClient
             canUnlockAll={canUnlockAll || allowE2eUnlockAll(resolvedSearchParams)}
             mod={mod}
+            pageStatus="ready"
         />
     );
 }

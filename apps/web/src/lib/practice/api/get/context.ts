@@ -6,6 +6,7 @@ import { loadPracticeGetSession } from "./repositories/session.repo";
 import type { Actor } from "@/lib/practice/actor";
 import { applySharedChallengeParams } from "@/lib/practice/challenges/session";
 import { applyDailyFiveParams } from "@/lib/practice/experience/dailyFive";
+import { applySubscriberPracticeParams } from "@/lib/practice/experience/subscriberPractice";
 
 export async function buildPracticeGetContext(args: {
     prisma: PrismaClient;
@@ -30,7 +31,8 @@ export async function buildPracticeGetContext(args: {
         session?.meta ?? null,
     );
 
-    const params = applyDailyFiveParams(challengeParams, session);
+    const dailyParams = applyDailyFiveParams(challengeParams, session);
+    const params = applySubscriberPracticeParams(dailyParams, session);
 
     return {
         prisma: args.prisma,

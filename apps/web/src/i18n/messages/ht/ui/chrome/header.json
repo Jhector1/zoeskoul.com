@@ -4,10 +4,10 @@
     "home": "Akèy",
     "billing": "Faktirasyon",
     "settings": "Paramèt",
-    "practice": "Aprann & Pratike",
+    "practice": "Pratike",
     "assignments": "Devwa",
     "subjects": "Matyè",
-    "tagline": "Vizyèl • Pratik • Pwogrè",
+    "tagline": "Leson • Pratik • Pwogrè",
     "startSession": "Sandbox",
     "signIn": "Konekte",
     "profile": "Pwofil",
@@ -28,6 +28,14 @@
     "fontNormal": "A",
     "fontLarge": "A+",
     "fontExtraLarge": "A++",
-    "soundHint": "Limen oswa etenn son koòdone a"
+    "soundHint": "Limen oswa etenn son koòdone a",
+    "practiceGuest": "Eseye {count} kesyon",
+    "practiceOpening": "Ap ouvri pratik la…",
+    "sandboxOpening": "Ap ouvri sandbox la…",
+    "signInOpening": "Ap ouvri koneksyon an…",
+    "continueLesson": "Kontinye leson an",
+    "startLearning": "Kòmanse aprann",
+    "exploreLessons": "Eksplore leson yo",
+    "learningOpening": "Ap ouvri leson ou an…"
   }
 }

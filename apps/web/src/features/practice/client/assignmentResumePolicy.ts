@@ -1,4 +1,5 @@
 import type { PracticeExperienceMode } from "@/lib/practice/experience/types";
+import { shouldResumePracticeFromServer } from "@/lib/practice/experience/routePolicy";
 
 export type PracticeClientStatePersistence = "session" | "off";
 
@@ -7,15 +8,21 @@ export function resolvePracticeResumePolicy(args: {
   requestedPersistence: PracticeClientStatePersistence;
   expectedExperienceMode?: PracticeExperienceMode;
 }) {
-  const assignment = args.experienceMode === "assignment";
+  const resolvedMode = args.expectedExperienceMode ?? args.experienceMode;
+  const serverBacked = shouldResumePracticeFromServer(resolvedMode);
 
   return {
-    clientStatePersistence: assignment
+    // Persisted assignment and subscriber sessions must hydrate from the
+    // server. Session storage can be stale after another tab or a resumed
+    // practice session advances, which would otherwise reopen question one
+    // while the server correctly reports later progress.
+    clientStatePersistence: serverBacked
       ? ("off" as const)
       : args.requestedPersistence,
-    expectedExperienceMode:
-      args.expectedExperienceMode ?? (assignment ? "assignment" : undefined),
-    resumeHistoryOnBoot: assignment,
+    expectedExperienceMode: serverBacked
+      ? resolvedMode
+      : args.expectedExperienceMode,
+    resumeHistoryOnBoot: serverBacked,
   };
 }
 

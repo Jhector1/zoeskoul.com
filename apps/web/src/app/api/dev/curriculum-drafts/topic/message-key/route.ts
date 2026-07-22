@@ -19,7 +19,6 @@ export async function PATCH(request: Request) {
     const write = await writeDraftJsonFile({
       filePath: loaded.messagesPath,
       value: nextMessages,
-      reason: `dev curriculum editor message-key save: ${body.keyPath}`,
     });
     const refreshed = await loadDraftTopic(body);
     const diagnostics = analyzeDraftTopic({ bundleJson: refreshed.bundleJson, messagesJson: refreshed.messagesJson });

@@ -5,6 +5,7 @@ import DiagnosticsPanel from "./DiagnosticsPanel";
 import ExerciseTable from "./ExerciseTable";
 import ExerciseJsonEditor from "./ExerciseJsonEditor";
 import ExerciseMessageEditor from "./ExerciseMessageEditor";
+import { keepEditorSelection } from "./editorSelection";
 import FilePairEditor from "./FilePairEditor";
 import JsonEditor from "./JsonEditor";
 import ProjectFlowPanel from "./ProjectFlowPanel";
@@ -21,6 +22,15 @@ type CommandResult = {
   command?: string;
   exitCode?: number | null;
   output?: string;
+  error?: string;
+};
+
+type BackupResult = {
+  ok?: boolean;
+  backup?: {
+    backupRoot: string;
+    paths: string[];
+  };
   error?: string;
 };
 
@@ -249,9 +259,11 @@ export default function CurriculumDraftEditor() {
   const [bundleText, setBundleText] = useState("{}");
   const [messagesText, setMessagesText] = useState("{}");
   const [selectedExerciseId, setSelectedExerciseId] = useState<string | null>(null);
+  const [selectedSketchId, setSelectedSketchId] = useState<string | null>(null);
   const [status, setStatus] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [backupRunning, setBackupRunning] = useState(false);
   const [commandRunning, setCommandRunning] = useState(false);
   const [commandResult, setCommandResult] = useState<CommandResult | null>(null);
 
@@ -338,7 +350,10 @@ export default function CurriculumDraftEditor() {
     setLoadedTopic(null);
   };
 
-  const loadTopic = async (topicOverride?: DraftTopicSummary) => {
+  const loadTopic = async (
+    topicOverride?: DraftTopicSummary,
+    options: { preserveEditorSelection?: boolean } = {},
+  ) => {
     if (!selectedCatalog || !selectedSubject || !selectedModule || !(topicOverride?.topicDir || selectedTopic)) return;
     setLoading(true);
     setError(null);
@@ -357,7 +372,25 @@ export default function CurriculumDraftEditor() {
       setBundleText(jsonPretty(topic.bundleJson));
       setMessagesText(jsonPretty(topic.messagesJson ?? {}));
       setSelectedTopic(topic.topicDir);
-      setSelectedExerciseId(topic.exercises.find((exercise) => exercise.kind === "code_input")?.id ?? topic.exercises[0]?.id ?? null);
+
+      const exerciseIds = topic.exercises.map((exercise) => exercise.id);
+      const defaultExerciseId = topic.exercises.find((exercise) => exercise.kind === "code_input")?.id ?? exerciseIds[0] ?? null;
+      setSelectedExerciseId((current) =>
+        options.preserveEditorSelection
+          ? keepEditorSelection(current, exerciseIds, defaultExerciseId)
+          : defaultExerciseId,
+      );
+
+      const bundle = asObject(topic.bundleJson);
+      const sketchIds = Array.isArray(bundle?.sketches)
+        ? bundle.sketches.map(sketchId).filter((id): id is string => Boolean(id))
+        : [];
+      setSelectedSketchId((current) =>
+        options.preserveEditorSelection
+          ? keepEditorSelection(current, sketchIds, sketchIds[0] ?? null)
+          : sketchIds[0] ?? null,
+      );
+
       setStatus(`Loaded ${topic.paths.bundle}`);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Unable to load topic");
@@ -366,14 +399,14 @@ export default function CurriculumDraftEditor() {
     }
   };
 
+  const reloadCurrentTopic = () => loadTopic(undefined, { preserveEditorSelection: true });
+
   const saveBundle = async () => {
     if (!loadedTopic) return;
     if (bundleParse.error) {
       setError(bundleParse.error);
       return;
     }
-    if (!window.confirm("Save topic.bundle.json? A backup will be created first.")) return;
-
     setLoading(true);
     setError(null);
     try {
@@ -382,9 +415,9 @@ export default function CurriculumDraftEditor() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...loadedTopic, module: loadedTopic.moduleDir, topic: loadedTopic.topicDir, bundleJson: bundleParse.value }),
       });
-      const body = await readJsonResponse<LoadedTopic & { write?: { backupPath?: string } }>(response);
-      await loadTopic();
-      setStatus(`Saved bundle. Backup: ${body.write?.backupPath ?? "created"}`);
+      await readJsonResponse(response);
+      await reloadCurrentTopic();
+      setStatus("Saved topic.bundle.json directly to the draft.");
     } catch (err) {
       setError(err instanceof Error ? err.message : "Unable to save bundle");
     } finally {
@@ -398,8 +431,6 @@ export default function CurriculumDraftEditor() {
       setError(messagesParse.error);
       return;
     }
-    if (!window.confirm("Save messages JSON? A backup will be created first.")) return;
-
     setLoading(true);
     setError(null);
     try {
@@ -408,9 +439,9 @@ export default function CurriculumDraftEditor() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...loadedTopic, module: loadedTopic.moduleDir, topic: loadedTopic.topicDir, messagesJson: messagesParse.value }),
       });
-      const body = await readJsonResponse<LoadedTopic & { write?: { backupPath?: string } }>(response);
-      await loadTopic();
-      setStatus(`Saved messages. Backup: ${body.write?.backupPath ?? "created"}`);
+      await readJsonResponse(response);
+      await reloadCurrentTopic();
+      setStatus("Saved messages JSON directly to the draft.");
     } catch (err) {
       setError(err instanceof Error ? err.message : "Unable to save messages");
     } finally {
@@ -420,8 +451,6 @@ export default function CurriculumDraftEditor() {
 
   const saveMessageKey = async (keyPath: string, value: string) => {
     if (!loadedTopic) return;
-    if (!window.confirm(`Save message key ${keyPath}? A backup will be created first.`)) return;
-
     setLoading(true);
     setError(null);
     try {
@@ -431,7 +460,7 @@ export default function CurriculumDraftEditor() {
         body: JSON.stringify({ ...loadedTopic, module: loadedTopic.moduleDir, topic: loadedTopic.topicDir, keyPath, value }),
       });
       await readJsonResponse(response);
-      await loadTopic();
+      await reloadCurrentTopic();
       setStatus(`Saved ${keyPath}`);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Unable to save message key");
@@ -542,6 +571,33 @@ export default function CurriculumDraftEditor() {
     }
   };
 
+  const backupDraft = async () => {
+    if (!selectedCatalog || !selectedSubject) {
+      setError("Choose a subject draft before creating a backup.");
+      return;
+    }
+
+    setBackupRunning(true);
+    setError(null);
+    try {
+      const response = await fetch("/api/dev/curriculum-drafts/backup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          catalog: selectedCatalog,
+          subject: selectedSubject,
+          locale: loadedTopic?.locale || "en",
+        }),
+      });
+      const body = await readJsonResponse<BackupResult>(response);
+      setStatus(`Backup created: ${body.backup?.backupRoot ?? ".curriculum-backups"}`);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Unable to back up draft");
+    } finally {
+      setBackupRunning(false);
+    }
+  };
+
   const runCommand = async (command: string) => {
     if (!loadedTopic && command.startsWith("course:")) {
       setError("Load a topic first so the editor knows which catalog/subject to check.");
@@ -569,7 +625,7 @@ export default function CurriculumDraftEditor() {
   return (
     <div className="min-h-screen bg-slate-100 text-slate-950">
       <div className="border-b border-amber-200 bg-amber-50 px-6 py-3 text-sm text-amber-950">
-        <span className="font-semibold">Local dev draft editor</span> — writes directly to <span className="font-mono">.curriculum-drafts</span>. Every save creates a backup.
+        <span className="font-semibold">Local dev draft editor</span> — saves update <span className="font-mono">.curriculum-drafts</span> directly. Use <span className="font-semibold">Backup draft</span> when you want a manual snapshot.
       </div>
 
       <div className="grid min-h-[calc(100vh-45px)] grid-cols-1 xl:grid-cols-[320px_minmax(0,1fr)_360px]">
@@ -652,8 +708,17 @@ export default function CurriculumDraftEditor() {
                 </p>
               </div>
               <div className="flex flex-wrap gap-2">
-                <button type="button" onClick={() => void loadTopic()} disabled={loading || !selectedTopic} className="rounded-xl border border-slate-200 px-3 py-2 text-sm font-semibold hover:bg-slate-50 disabled:opacity-40">
+                <button type="button" onClick={() => void reloadCurrentTopic()} disabled={loading || !selectedTopic} className="rounded-xl border border-slate-200 px-3 py-2 text-sm font-semibold hover:bg-slate-50 disabled:opacity-40">
                   {loading ? "Loading…" : "Load"}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => void backupDraft()}
+                  disabled={backupRunning || !selectedCatalog || !selectedSubject}
+                  title="Back up the currently saved subject draft and its messages"
+                  className="rounded-xl border border-amber-300 bg-amber-50 px-3 py-2 text-sm font-semibold text-amber-950 hover:bg-amber-100 disabled:opacity-40"
+                >
+                  {backupRunning ? "Backing up…" : "Backup draft"}
                 </button>
                 <button type="button" onClick={() => previewLoadedTopic("draft")} disabled={!loadedTopic} className="rounded-xl bg-indigo-600 px-3 py-2 text-sm font-semibold text-white disabled:opacity-40">Preview Draft</button>
                 <button type="button" onClick={() => previewLoadedTopic("generated")} disabled={!loadedTopic} className="rounded-xl border border-indigo-200 px-3 py-2 text-sm font-semibold text-indigo-700 hover:bg-indigo-50 disabled:opacity-40">Preview Generated</button>
@@ -712,6 +777,8 @@ export default function CurriculumDraftEditor() {
             <SketchesEditor
               bundleJson={bundleParse.value}
               messagesJson={messagesParse.value}
+              selectedSketchId={selectedSketchId}
+              onSelectSketch={setSelectedSketchId}
               onApplySketchJson={applySketchJson}
               onSaveMessageKey={saveMessageKey}
             />
@@ -738,6 +805,7 @@ export default function CurriculumDraftEditor() {
           ) : null}
           {loadedTopic && tab === "files" ? (
             <FilePairEditor
+              topicKey={`${loadedTopic.catalog}:${loadedTopic.subject}:${loadedTopic.moduleDir}:${loadedTopic.topicDir}`}
               filePairs={loadedTopic.filePairs}
               selectedExerciseId={selectedExerciseId}
               onSaveMessageKey={saveMessageKey}

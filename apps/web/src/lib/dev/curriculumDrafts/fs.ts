@@ -86,6 +86,11 @@ export type LoadedDraftModule = {
   topics: LoadedDraftTopic[];
 };
 
+export type DraftBackupResult = {
+  backupRoot: string;
+  paths: string[];
+};
+
 type JsonObject = Record<string, unknown>;
 
 const DRAFT_ROOT_NAME = ".curriculum-drafts";
@@ -527,39 +532,55 @@ function timestampForBackup() {
   return new Date().toISOString().replace(/[:.]/g, "-");
 }
 
-async function backupFile(args: { repoRoot: string; sourcePath: string; reason?: string }) {
+export async function backupDraftSubject(args: {
+  catalog: string;
+  subject: string;
+  locale?: string;
+}): Promise<DraftBackupResult> {
+  const repoRoot = await findRepoRoot();
   const draftRoot = await findDraftRoot();
-  const source = safeJoin(draftRoot, path.relative(draftRoot, args.sourcePath));
-  const backupRoot = path.join(args.repoRoot, BACKUP_ROOT_NAME, "dev-editor", timestampForBackup());
-  const relative = path.relative(draftRoot, source);
-  const backupPath = safeJoin(backupRoot, DRAFT_ROOT_NAME, relative);
+  const locale = args.locale || "en";
+  const catalogRoot = safeJoin(draftRoot, args.catalog);
+  const snapshotRoot = safeJoin(repoRoot, BACKUP_ROOT_NAME, "dev-editor", timestampForBackup());
+  const sourcePaths = [
+    safeJoin(catalogRoot, "subjects", args.subject),
+    safeJoin(catalogRoot, "messages", locale, "subjects", args.subject),
+  ];
+  const copiedPaths: string[] = [];
 
-  await fs.mkdir(path.dirname(backupPath), { recursive: true });
-  if (await pathExists(source)) {
-    await fs.copyFile(source, backupPath);
-  } else {
-    await fs.writeFile(`${backupPath}.missing`, args.reason ?? "file did not exist before write", "utf8");
+  for (const sourcePath of sourcePaths) {
+    if (!(await pathExists(sourcePath))) continue;
+
+    const relativePath = path.relative(draftRoot, sourcePath);
+    const backupPath = safeJoin(snapshotRoot, DRAFT_ROOT_NAME, relativePath);
+    await fs.mkdir(path.dirname(backupPath), { recursive: true });
+    await fs.cp(sourcePath, backupPath, { recursive: true });
+    copiedPaths.push(toRepoRelative(repoRoot, backupPath));
   }
 
-  return backupPath;
+  if (copiedPaths.length === 0) {
+    throw new Error(`Draft subject not found: ${args.catalog}/${args.subject}`);
+  }
+
+  return {
+    backupRoot: toRepoRelative(repoRoot, snapshotRoot),
+    paths: copiedPaths,
+  };
 }
 
 export async function writeDraftJsonFile(args: {
   filePath: string;
   value: unknown;
-  reason?: string;
 }) {
   const repoRoot = await findRepoRoot();
   const draftRoot = await findDraftRoot();
   const safePath = safeJoin(draftRoot, path.relative(draftRoot, args.filePath));
-  const backupPath = await backupFile({ repoRoot, sourcePath: safePath, reason: args.reason });
 
   await fs.mkdir(path.dirname(safePath), { recursive: true });
   await fs.writeFile(safePath, `${JSON.stringify(args.value, null, 2)}\n`, "utf8");
 
   return {
     path: toRepoRelative(repoRoot, safePath),
-    backupPath: toRepoRelative(repoRoot, backupPath),
   };
 }
 

@@ -6,6 +6,7 @@ import {
 } from "@/lib/onboarding/trialPolicy";
 import { buildTrialReturnUrl } from "@/lib/onboarding/client";
 import { ownerWhereForActor } from "@/lib/practice/sessionStart";
+import { ONBOARDING_TRIAL_TARGET_COUNT } from "@/lib/practice/experience/defaults";
 import { actorKeyOf } from "@/lib/practice/actor";
 import {
   buildSharedChallengeMeta,
@@ -317,7 +318,7 @@ export async function startOrResumeOnboardingTrial(ctx: TrialStartContext): Prom
       difficulty,
       returnUrl,
       meta,
-      targetCount: 3,
+      targetCount: ONBOARDING_TRIAL_TARGET_COUNT,
       preferPurpose: "quiz",
     });
 
@@ -349,7 +350,7 @@ export async function startOrResumeOnboardingTrial(ctx: TrialStartContext): Prom
       difficulty,
       returnUrl,
       meta,
-      targetCount: 3,
+      targetCount: ONBOARDING_TRIAL_TARGET_COUNT,
       preferPurpose: "quiz",
     });
 
@@ -375,7 +376,7 @@ export async function startOrResumeOnboardingTrial(ctx: TrialStartContext): Prom
       difficulty,
       returnUrl,
       meta,
-      targetCount: 3,
+      targetCount: ONBOARDING_TRIAL_TARGET_COUNT,
       preferPurpose: "quiz",
     });
 

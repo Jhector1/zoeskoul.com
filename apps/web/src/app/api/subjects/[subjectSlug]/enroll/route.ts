@@ -56,6 +56,21 @@ export async function POST(
         safeUserId = dbUser?.id ?? null;
     }
 
+    const existingEnrollment = await prisma.subjectEnrollment.findUnique({
+        where: {
+            actorKey_subjectId: {
+                actorKey,
+                subjectId: subject.id,
+            },
+        },
+        select: {
+            status: true,
+        },
+    });
+
+    const nextStatus =
+        existingEnrollment?.status === "completed" ? "completed" : "enrolled";
+
     await prisma.subjectEnrollment.upsert({
         where: {
             actorKey_subjectId: {
@@ -73,7 +88,7 @@ export async function POST(
         },
         update: {
             lastSeenAt: new Date(),
-            status: "enrolled",
+            status: nextStatus,
             archivedAt: null,
             ...(safeUserId ? { userId: safeUserId } : {}),
         },

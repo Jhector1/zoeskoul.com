@@ -47,13 +47,32 @@
       "descriptionFresh": "Choose what you want to learn, set a pace that fits your week, and jump into a lesson or challenge when you’re ready.",
       "chooseSubject": "Choose a subject to try",
       "continueLearning": "Keep learning",
-      "try3Questions": "Try 3 questions",
+      "try3Questions": "Start 3 questions",
       "startingTrial": "Starting trial...",
       "openGuide": "Set up my learning",
       "exploreSubjects": "Browse subjects",
       "editPreferences": "Adjust my setup",
       "editAnswers": "Adjust my answers",
-      "currentTheme": "Theme: {theme}"
+      "currentTheme": "Theme: {theme}",
+      "continueLesson": "Continue lesson",
+      "startLearning": "Start learning",
+      "exploreLessons": "Explore lessons",
+      "learningOpening": "Opening your lesson…"
+    },
+    "practiceCard": {
+      "guestKicker": "Free practice",
+      "dailyKicker": "Daily practice",
+      "guestTitle": "Start with {count} free questions.",
+      "dailyTitle": "Make time for today’s practice.",
+      "guestDescription": "Get a quick feel for ZoeSkoul with a short guided set. No account is needed.",
+      "dailyDescription": "Work through {count} focused questions and keep your learning momentum.",
+      "guestCta": "Start {count} free questions",
+      "dailyCta": "Start daily practice",
+      "opening": "Opening practice…",
+      "unlimitedKicker": "Unlimited practice",
+      "unlimitedTitle": "Practice exactly what you need.",
+      "unlimitedDescription": "Choose a catalog, course, module, section, and topic, then practice as much as you want with your plan.",
+      "unlimitedCta": "Choose practice"
     },
     "steps": {
       "preferredLanguage": {
@@ -126,8 +145,8 @@
     },
     "highlights": {
       "kicker": "Built around you",
-      "title": "A simple home that gets more useful as you learn.",
-      "description": "Your lessons, practice, and progress stay in one place, so it’s easy to see what to do next.",
+      "title": "A learning path shaped around your goals.",
+      "description": "Your language, experience level, and weekly pace help ZoeSkoul recommend the right next step.",
       "cards": {
         "language": {
           "title": "Language",
@@ -146,7 +165,11 @@
     "recommended": {
       "kicker": "Choose your next path",
       "title": "Start with something you’re excited to build.",
+      "titleWithCurrent": "Continue learning or choose what’s next.",
       "viewAll": "View all subjects",
+      "current": "Current",
+      "recommendation": "Recommended",
+      "continueSubject": "Continue course",
       "exploreSubject": "Explore subject"
     },
     "floatingAssistant": {
@@ -171,7 +194,7 @@
     "latestChallenge": {
       "eyebrow": "Latest daily challenge",
       "noAccount": "No account needed",
-      "cta": "Try the challenge"
+      "cta": "Open challenge"
     }
   }
 }

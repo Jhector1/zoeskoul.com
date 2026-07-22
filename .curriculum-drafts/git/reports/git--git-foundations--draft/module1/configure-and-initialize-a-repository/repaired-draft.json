@@ -1,179 +1,180 @@
 {
-  "title": "Configure and Initialize a Repository",
-  "summary": "Set a repository-local author identity and turn an existing project folder into a repository on main.",
+  "title": "Initialize the Community Site Repository",
+  "summary": "Turn the prepared community-site folder into a repository on main and store the course identity only inside that repository.",
   "minutes": 22,
   "sketchBlocks": [
     {
-      "id": "sketch0",
-      "title": "Configure Local Git Identity",
-      "bodyMarkdown": "To start using Git effectively, it's crucial to set up your local identity. This involves configuring your name and email address, which will be associated with your commits. This information is stored in the repository's configuration file and helps identify the author of changes.\n\nWorked example:\n\n```bash\ngit config --local user.name \"ZoeSkoul Learner\"\ngit config --local user.email \"learner@zoeskoul.local\"\n```\n\nThis command sets the local user name and email for the repository. It's important to use `--local` to ensure these settings apply only to the current repository, not globally. This setup is essential for tracking contributions accurately.\n\nStep by step, read the commands in the order shown. The first line stores the commit author name in this repository's local Git configuration. The second line stores the matching author email in the same local configuration. Together, the lines form one complete example rather than unrelated commands."
+      "id": "sketch-0-orientation",
+      "title": "Turn a folder into a safe, inspectable repository",
+      "bodyMarkdown": "A repository records the changes you make to a folder so you can read its history, compare versions, and recover earlier work. Instead of keeping multiple copies of a finished folder (which loses the story of how the files changed), Git keeps a compact chain of snapshots and metadata. That chain is safer and clearer because each snapshot names who made it, when (locally), and which files were part of that snapshot.\n\nWhat you will learn in this topic:\n- How to make the ordinary community-site folder into a repository whose initial branch is main.\n- Why the .git directory holds repository metadata and should not be edited directly.\n- How to set a repository-local author name and email so commits are attributed inside this repository only.\n\nA good habit: inspect the working tree and staging area with git status before and after each change. This habit helps you confirm what Git will record and avoids accidental snapshots of unrelated files."
     },
     {
-      "id": "sketch1",
-      "title": "Initialize a Git Repository",
-      "bodyMarkdown": "Once your identity is configured, the next step is to initialize a Git repository. This process creates a `.git` directory in your project folder, which contains all the metadata and history for your project.\n\nWorked example:\n\n```bash\ngit init\n```\n\nThis command initializes a new Git repository in the current directory. By default, it sets the initial branch to `main`. This step is crucial as it transforms your project folder into a version-controlled repository, allowing you to track changes over time."
+      "id": "sketch-1-git-directory",
+      "title": "Worked example: What git init creates and why you should not edit it",
+      "bodyMarkdown": "Worked example:\n\nRun git init -b main in a folder to create a repository whose initial branch is main. The command creates a hidden .git directory that stores repository metadata. You usually do not open or edit files inside .git; Git manages them for you.\n\nExample commands and annotated output:\n\n```\n$ git init -b main\nInitialized empty Git repository in /home/you/project/.git/\n$ ls -a\n.  ..  .git  README.md  index.html\n$ cat .git/HEAD\nref: refs/heads/main\n```\n\nExplanation:\n- git init -b main: creates the .git directory and sets the repository's initial branch name to main. This avoids depending on the system default branch name.\n- ls -a shows .git as a hidden folder; .git is not a tracked project file — it's repository metadata.\n- .git/HEAD contains a reference line such as ref: refs/heads/main, which tells Git where HEAD points. Reading it helps you confirm the branch name, but you should not edit it manually.\n\nWhy this matters: editing files inside .git can corrupt the repository. Use Git commands (git config, git status, git log) to inspect and change repository state instead of editing metadata files directly.\n\nStep by step, read the commands in the order shown. The first line creates the repository metadata that lets Git track this directory. The second line runs `Initialized empty Git repository in /home/you/project/.git/` as the next repository step in the example. The third line runs `ls -a` as the next repository step in the example. The fourth line runs `.  ..  .git  README.md  index.html` as the next repository step in the example. The next line inspects repository metadata without changing it. The next line runs `ref: refs/heads/main` as the next repository step in the example. Together, the lines form one complete example rather than unrelated commands."
     },
     {
-      "id": "sketch2",
-      "title": "Explore the .git Directory",
-      "bodyMarkdown": "The `.git` directory is the heart of a Git repository. It contains all the metadata, including configuration, commit history, and references to branches and tags. Understanding its structure helps in managing the repository effectively.\n\nWorked example:\n\n```bash\nls -a .git\n```\n\nThis command lists the contents of the `.git` directory. It's important to note that while you can view these files, you should not edit them directly. They are managed by Git and any manual changes can corrupt the repository."
+      "id": "sketch-2-staging",
+      "title": "Move work from the working tree into the staging area",
+      "bodyMarkdown": "The staging area (the index) is where you prepare a set of changes that will become the next commit. git add copies the current content of files from the working tree into the staging area; git commit then records exactly what is staged.\n\nShort example (conceptual):\n\n```\n# working tree: five new files exist but are untracked\n$ git status --short\n?? README.md\n?? index.html\n?? about.md\n?? LICENSE\n?? CONTRIBUTING.md\n\n# stage all five files\n$ git add README.md index.html about.md LICENSE CONTRIBUTING.md\n$ git status --short\nA  README.md\nA  index.html\nA  about.md\nA  LICENSE\nA  CONTRIBUTING.md\n```\n\nInterpretation: lines that start with A in git status --short mean the file is staged for commit. Lines that start with ?? are untracked and not yet staged. Staging selectively (only some files) helps you make focused commits that document a single logical change instead of mixing unrelated edits."
     },
     {
-      "id": "sketch3",
-      "title": "Verify Repository Status",
-      "bodyMarkdown": "After initializing a repository, it's important to check its status to understand the current state of your working directory and staging area. This helps in identifying untracked files and changes that need to be committed.\n\nWorked example:\n\n```bash\ngit status\n```\n\nThis command provides a summary of the repository's status, showing which files are staged, unstaged, or untracked. It's a vital tool for managing your workflow and ensuring that all changes are tracked and committed properly."
+      "id": "sketch-3-first-commit",
+      "title": "Make a meaningful initial commit and verify a clean working tree",
+      "bodyMarkdown": "After staging the files you want, record them with git commit. Commits are the durable snapshots that become your repository history.\n\nA minimal sequence to create a clear, verifiable first commit:\n\n```\n# set identity for this repository only\n$ git config --local user.name \"ZoeSkoul Learner\"\n$ git config --local user.email learner@zoeskoul.local\n\n# stage files and commit\n$ git add README.md index.html about.md LICENSE CONTRIBUTING.md\n$ git commit -m \"Initial site snapshot\"\n$ git status --short\n# (empty output, meaning the working tree is clean)\n$ git log --oneline\n<one-line commit id> Initial site snapshot\n```\n\nWhy verify: after the commit you should see a single commit in the log and a clean working tree. That tells you the snapshot was recorded and no unintended changes remain uncommitted."
     }
   ],
   "quizDraft": [
     {
-      "id": "single-choice-1",
+      "id": "sc-why-local-history",
       "kind": "single_choice",
-      "title": "Purpose of Version Control",
-      "prompt": "What is the primary purpose of version control systems like Git?",
+      "title": "Why keep local history instead of duplicate folders?",
+      "prompt": "Which statement best explains why Git history is safer and clearer than keeping multiple copies of a final folder?",
       "options": [
-        "To track changes and collaborate on projects",
-        "To permanently delete files",
-        "To increase file size",
-        "To encrypt files"
+        "Keeping copies is safer because each copy is a full backup of the final files.",
+        "Git records snapshots with author and change history so you can inspect and recover specific changes without copying folders.",
+        "Duplicate folders are simpler because they avoid repository metadata and hidden files.",
+        "A single final copy is enough; you don't usually need earlier versions or commit messages."
       ],
       "correctOptionIds": [
-        "a"
+        "b"
       ],
-      "hint": "Think about how version control helps manage changes over time.",
+      "hint": "Think about what history records that duplicate folders do not.",
       "help": {
-        "concept": "Version control systems help manage changes to files and coordinate work on those files among multiple people.",
-        "hint_1": "Version control allows you to track changes and collaborate with others.",
-        "hint_2": "It helps prevent data loss and manage project history."
+        "concept": "Git records a sequence of named snapshots with metadata (who, when, what changed) so you can inspect differences and reasoning; duplicates only keep final states.",
+        "hint_1": "Git stores both the change content and metadata for each commit; duplicates store only final file contents, not the change story.",
+        "hint_2": "Choose the option that emphasizes a readable history and the ability to inspect changes rather than separate final copies."
       }
     },
     {
-      "id": "single-choice-2",
+      "id": "sc-what-is-dotgit",
       "kind": "single_choice",
-      "title": "Repository Initialization",
-      "prompt": "What command is used to initialize a new Git repository?",
+      "title": "What does .git contain?",
+      "prompt": "Which answer best describes the purpose of the .git directory inside a project folder?",
       "options": [
-        "git init",
-        "git start",
-        "git create",
-        "git new"
+        "A copy of all project files that you can edit directly as the tracked source files.",
+        "Repository metadata and internal bookkeeping (objects, refs, HEAD, config) that Git manages.",
+        "A list of remote hosts and personal credentials used to push changes.",
+        "Temporary cached build artifacts generated by the project toolchain."
       ],
       "correctOptionIds": [
-        "a"
+        "b"
       ],
-      "hint": "This command sets up the .git directory.",
+      "hint": "Think about metadata vs. project files.",
       "help": {
-        "concept": "Initializing a repository is the first step in using Git for version control.",
-        "hint_1": "The command is short and starts with 'git'.",
-        "hint_2": "It creates the necessary metadata for version control."
+        "concept": ".git stores repository metadata (object database, refs, configuration, and internal bookkeeping) that Git uses to build history and branches.",
+        "hint_1": ".git contains Git's internal data: objects, refs, HEAD, config; it does not contain the project's editable content as tracked files.",
+        "hint_2": "Pick the option that names metadata and internal repository bookkeeping rather than project content."
       }
     },
     {
-      "id": "multi-choice-1",
+      "id": "mc-git-status-entries",
       "kind": "multi_choice",
-      "title": "Components of a Git Repository",
-      "prompt": "Which of the following are components of a Git repository? Select all that apply.",
+      "title": "What git status --short shows",
+      "prompt": "In a repository that has several new untracked files and one file that was just staged, which git status --short entries are correct examples you might see?",
       "options": [
-        ".git directory",
-        "Working tree",
-        "Staging area",
-        "Remote server"
+        "Lines starting with '?? README.md' for an untracked README.md",
+        "Lines starting with 'A README.md' for a staged README.md",
+        "Lines starting with 'U README.md' to show an untracked file",
+        "Lines starting with 'D README.md' to show a staged new file"
       ],
       "correctOptionIds": [
         "a",
-        "b",
-        "c"
+        "b"
       ],
-      "hint": "Think about the parts that make up the repository's structure.",
+      "hint": "Remember git status --short uses two-character prefixes like ?? for untracked and A for added (staged).",
       "help": {
-        "concept": "A Git repository consists of several components that manage the project's history and configuration.",
-        "hint_1": "Consider what stores the history and configuration of the repository.",
-        "hint_2": "These components are essential for tracking changes and managing the repository."
+        "concept": "git status --short uses concise two-character markers: '??' for untracked files, 'A ' for files staged for addition, 'M ' for modified and staged, etc.",
+        "hint_1": "Look for entries that show untracked files with ?? and staged files with A or M in the short status output.",
+        "hint_2": "Select both the marker for untracked files and the marker that indicates a file is staged for commit."
       }
     },
     {
-      "id": "drag-reorder-1",
+      "id": "dr-commit-flow",
       "kind": "drag_reorder",
-      "title": "Order of Git Setup Steps",
-      "prompt": "Arrange the steps to set up a new Git repository in the correct order.",
+      "title": "Order to create the first commit",
+      "prompt": "Reorder these steps into the sequence you would follow to create the repository and record the first commit.",
       "tokens": [
-        "Configure local identity",
-        "Initialize the repository",
-        "Check repository status"
+        "Edit files in the working tree",
+        "git add to stage changes",
+        "git commit to record snapshot",
+        "git init -b main to create repository"
       ],
       "correctOrder": [
-        "Configure local identity",
-        "Initialize the repository",
-        "Check repository status"
+        "git init -b main to create repository",
+        "Edit files in the working tree",
+        "git add to stage changes",
+        "git commit to record snapshot"
       ],
-      "hint": "Start with configuring the identity and end with checking the status.",
+      "hint": "Initialization must happen before staging, and staging happens before committing.",
       "help": {
-        "concept": "Setting up a Git repository involves several key steps to ensure it's ready for version control.",
-        "hint_1": "Begin with identity configuration and end with verifying the setup.",
-        "hint_2": "Think about the logical sequence of preparing a repository."
+        "concept": "Creating an initial commit requires creating the repository, preparing files in the working tree, staging chosen files, and then committing the staged snapshot.",
+        "hint_1": "Start with creating the repository (git init -b main), then place files in the working tree, then git add to stage, and finally git commit.",
+        "hint_2": "The full correct sequence begins with repository creation, then working-tree edits, then staging, then the commit."
       }
     },
     {
-      "id": "fill-blank-choice-1",
+      "id": "fb-init-branch",
       "kind": "fill_blank_choice",
-      "title": "Git Identity Configuration",
-      "prompt": "Complete the command to set the local Git user name: `git config --local user.name [blank1]`",
-      "template": "git config --local user.name [blank1]",
+      "title": "Set the initial branch name",
+      "prompt": "To set the initial branch name explicitly when creating a new repository use: git init -b [blank1]",
+      "template": "To set the initial branch name explicitly when creating a new repository use: git init -b [blank1]",
       "choices": [
-        "\"ZoeSkoul Learner\"",
-        "\"John Doe\"",
-        "\"Jane Smith\"",
-        "\"Git User\""
+        "main",
+        "master",
+        "trunk",
+        "default"
       ],
-      "correctValue": "\"ZoeSkoul Learner\"",
-      "hint": "The name should be enclosed in quotes.",
+      "correctValue": "main",
+      "hint": "The course uses a short, conventional initial branch name.",
       "help": {
-        "concept": "Setting the local user name is crucial for identifying the author of commits.",
-        "hint_1": "The name should match the format used in the example.",
-        "hint_2": "Ensure the name is enclosed in quotes."
+        "concept": "git init -b <name> creates a repository whose first branch has the given name instead of relying on the system default.",
+        "hint_1": "The course standard initial branch name is a single short word commonly used today.",
+        "hint_2": "Choose the missing term as the explicit initial branch name used in these lessons."
       }
     },
     {
-      "id": "fill-blank-choice-2",
+      "id": "fb-config-local",
       "kind": "fill_blank_choice",
-      "title": "Git Email Configuration",
-      "prompt": "Complete the command to set the local Git user email: `git config --local user.email [blank1]`",
-      "template": "git config --local user.email [blank1]",
+      "title": "Repository-local author email",
+      "prompt": "Set the repository-local author email with: git config --local user.email [blank1]",
+      "template": "Set the repository-local author email with: git config --local user.email [blank1]",
       "choices": [
-        "\"learner@zoeskoul.local\"",
-        "\"user@example.com\"",
-        "\"admin@domain.com\"",
-        "\"contact@website.com\""
+        "learner@zoeskoul.local",
+        "user@example.com",
+        "no-reply@github.com",
+        "me@local"
       ],
-      "correctValue": "\"learner@zoeskoul.local\"",
-      "hint": "The email should be enclosed in quotes.",
+      "correctValue": "learner@zoeskoul.local",
+      "hint": "Use the deterministic, repository-local email used in these lessons.",
       "help": {
-        "concept": "Setting the local user email is crucial for identifying the author of commits.",
-        "hint_1": "The email should match the format used in the example.",
-        "hint_2": "Ensure the email is enclosed in quotes."
+        "concept": "git config --local sets configuration values that apply only to the repository in the current directory rather than globally.",
+        "hint_1": "The lessons use a deterministic local identity email for reproducible grading.",
+        "hint_2": "Choose the missing term as the repository-local email."
       }
     },
     {
       "id": "try-configure-and-initialize-a-repository-sketch0",
       "kind": "code_input",
-      "title": "Configure Local Identity",
-      "prompt": "Initialize a new Git repository in the `project_alpha` directory with `main` as its initial branch.\n\nFirst type `bash .zoeskoul/setup.sh` and press Enter to create the empty directory. Then enter the directory, initialize Git with the requested branch name, and press Enter after each command.",
-      "hint": "Read the Git task \"Configure Local Identity\" and identify the repository state you need to create.",
+      "title": "Initialize community-site and configure local identity",
+      "prompt": "You have an ordinary folder named community-site with five project files. In the terminal, initialize a Git repository whose initial branch is main and set the repository-local author name and email to exactly these values:\n\nuser.name: ZoeSkoul Learner\nuser.email: learner@zoeskoul.local\n\nType the commands and press Enter. Do not create any commits yet. After your commands the repository should exist on branch main and the local config must show the specified name and email.\n\nThe terminal opens inside `community-site/` with the required starting milestone ready. Type each requested terminal command and press Enter.",
+      "hint": "Read the Git task \"Initialize community-site and configure local identity\" and identify the repository state you need to create.",
       "help": {
-        "concept": "This Git exercise checks the repository state produced by \"Configure Local Identity\".",
+        "concept": "This Git exercise checks the repository state produced by \"Initialize community-site and configure local identity\".",
         "hint_1": "Use git status before and after each small change so you can see what moved between the working tree, staging area, and history.",
         "hint_2": "Match the requested file names, branch names, and commit purpose before clicking Check Answer."
       },
-      "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then follow the task in the lesson prompt.",
-      "solutionCode": "bash .zoeskoul/setup.sh\ncd project_alpha\ngit init -b main",
+      "starterCode": "# Work in the terminal; the starting repository state is ready.\n# Type each requested command and press Enter.",
+      "solutionCode": "git commit -m \"Complete initialize-community-site-and-configure-local-identity\"",
       "fixedLanguage": "bash",
       "recipeType": "shell_task",
       "mode": "terminal_workspace",
       "entryFilePath": "main.sh",
-      "instructions": "Initialize a new Git repository in the `project_alpha` directory with `main` as its initial branch.\n\nFirst type `bash .zoeskoul/setup.sh` and press Enter to create the empty directory. Then enter the directory, initialize Git with the requested branch name, and press Enter after each command.",
+      "instructions": "You have an ordinary folder named community-site with five project files. In the terminal, initialize a Git repository whose initial branch is main and set the repository-local author name and email to exactly these values:\n\nuser.name: ZoeSkoul Learner\nuser.email: learner@zoeskoul.local\n\nType the commands and press Enter. Do not create any commits yet. After your commands the repository should exist on branch main and the local config must show the specified name and email.\n\nThe terminal opens inside `community-site/` with the required starting milestone ready. Type each requested terminal command and press Enter.",
       "starterFiles": [
         {
           "path": "main.sh",
-          "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then follow the task in the lesson prompt.\n",
+          "content": "# Work in the terminal; the starting repository state is ready.\n# Type each requested command and press Enter.\n",
           "language": "bash",
           "isEntry": true,
           "entry": true,
@@ -181,7 +182,7 @@
         },
         {
           "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"project_alpha\"\nmkdir -p -- \"project_alpha\"\n",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"community-site\"\nmkdir -p -- \"community-site\"\nprintf '%s\\n' 'Cumulative Git practice project' > \"community-site/README.md\"\ngit -C \"community-site\" init -q -b main\ngit -C \"community-site\" config user.name \"ZoeSkoul Learner\"\ngit -C \"community-site\" config user.email \"learner@zoeskoul.local\"\ngit -C \"community-site\" add -- \"README.md\"\ngit -C \"community-site\" commit -q -m \"Start cumulative project\"\nprintf '%s\\n' 'Prepared practice change' >> \"community-site/README.md\"\ngit -C \"community-site\" add -- \"README.md\"\n",
           "language": "bash",
           "readOnly": true
         }
@@ -189,14 +190,14 @@
       "solutionFiles": [
         {
           "path": "main.sh",
-          "content": "bash .zoeskoul/setup.sh\ncd project_alpha\ngit init -b main\n",
+          "content": "git commit -m \"Complete initialize-community-site-and-configure-local-identity\"\n",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
           "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"project_alpha\"\nmkdir -p -- \"project_alpha\"\n",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"community-site\"\nmkdir -p -- \"community-site\"\nprintf '%s\\n' 'Cumulative Git practice project' > \"community-site/README.md\"\ngit -C \"community-site\" init -q -b main\ngit -C \"community-site\" config user.name \"ZoeSkoul Learner\"\ngit -C \"community-site\" config user.email \"learner@zoeskoul.local\"\ngit -C \"community-site\" add -- \"README.md\"\ngit -C \"community-site\" commit -q -m \"Start cumulative project\"\nprintf '%s\\n' 'Prepared practice change' >> \"community-site/README.md\"\ngit -C \"community-site\" add -- \"README.md\"\n",
           "language": "bash",
           "readOnly": true
         }
@@ -204,8 +205,73 @@
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
-          },
+            "pattern": "^git\\s+commit\\s+-m\\s+\"Complete\\s+initialize-community-site-and-configure-local-identity\"$"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "Do not rewrite shared history in this Git practice task."
+          }
+        ]
+      },
+      "gitExpectations": {
+        "repositoryPath": "community-site",
+        "repositoryInitialized": true,
+        "currentBranch": "main"
+      }
+    },
+    {
+      "id": "try-configure-and-initialize-a-repository-sketch1",
+      "kind": "code_input",
+      "title": "Verify .git/HEAD shows main",
+      "prompt": "Initialize a Git repository inside the community-site folder with main as the initial branch, then display the contents of .git/HEAD to confirm it points to refs/heads/main. Type the commands and press Enter.\n\nThe terminal opens inside `community-site/` with the required starting milestone ready. Type each requested terminal command and press Enter.",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      },
+      "starterCode": "# Work in the terminal; the starting repository state is ready.\n# Type each requested command and press Enter.",
+      "solutionCode": "git init -b main",
+      "fixedLanguage": "bash",
+      "recipeType": "shell_task",
+      "mode": "terminal_workspace",
+      "entryFilePath": "main.sh",
+      "instructions": "Initialize a Git repository inside the community-site folder with main as the initial branch, then display the contents of .git/HEAD to confirm it points to refs/heads/main. Type the commands and press Enter.\n\nThe terminal opens inside `community-site/` with the required starting milestone ready. Type each requested terminal command and press Enter.",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Work in the terminal; the starting repository state is ready.\n# Type each requested command and press Enter.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"community-site\"\nmkdir -p -- \"community-site\"\nprintf '%s\\n' 'Cumulative Git practice project' > \"community-site/README.md\"\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "git init -b main\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"community-site\"\nmkdir -p -- \"community-site\"\nprintf '%s\\n' 'Cumulative Git practice project' > \"community-site/README.md\"\n",
+          "language": "bash",
+          "readOnly": true
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
           {
             "pattern": "^git\\s+init\\s+-b\\s+main$"
           }
@@ -218,81 +284,7 @@
         ]
       },
       "gitExpectations": {
-        "repositoryPath": "project_alpha",
-        "repositoryInitialized": true,
-        "currentBranch": "main"
-      }
-    },
-    {
-      "id": "try-configure-and-initialize-a-repository-sketch1",
-      "kind": "code_input",
-      "title": "Initialize a Repository",
-      "prompt": "Inspect the repository metadata in `project_beta` and confirm which branch `HEAD` points to.\n\nFirst type `bash .zoeskoul/setup.sh` and press Enter. Enter project_beta, type `ls .git` and press Enter, then type `cat .git/HEAD` and press Enter. The final output should show `ref: refs/heads/main`.",
-      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
-      "help": {
-        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
-      },
-      "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then follow the task in the lesson prompt.",
-      "solutionCode": "bash .zoeskoul/setup.sh\ncd project_beta\nls .git\ncat .git/HEAD",
-      "fixedLanguage": "bash",
-      "recipeType": "shell_task",
-      "mode": "terminal_workspace",
-      "entryFilePath": "main.sh",
-      "instructions": "Inspect the repository metadata in `project_beta` and confirm which branch `HEAD` points to.\n\nFirst type `bash .zoeskoul/setup.sh` and press Enter. Enter project_beta, type `ls .git` and press Enter, then type `cat .git/HEAD` and press Enter. The final output should show `ref: refs/heads/main`.",
-      "starterFiles": [
-        {
-          "path": "main.sh",
-          "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then follow the task in the lesson prompt.\n",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        },
-        {
-          "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"project_beta\"\nmkdir -p -- \"project_beta\"\ngit -C \"project_beta\" init -q -b main\ngit -C \"project_beta\" config user.name \"ZoeSkoul Learner\"\ngit -C \"project_beta\" config user.email \"learner@zoeskoul.local\"\n",
-          "language": "bash",
-          "readOnly": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "main.sh",
-          "content": "bash .zoeskoul/setup.sh\ncd project_beta\nls .git\ncat .git/HEAD\n",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"project_beta\"\nmkdir -p -- \"project_beta\"\ngit -C \"project_beta\" init -q -b main\ngit -C \"project_beta\" config user.name \"ZoeSkoul Learner\"\ngit -C \"project_beta\" config user.email \"learner@zoeskoul.local\"\n",
-          "language": "bash",
-          "readOnly": true
-        }
-      ],
-      "terminalExpectations": {
-        "requiredCommands": [
-          {
-            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
-          },
-          {
-            "pattern": "^ls\\s+\\.git$"
-          },
-          {
-            "pattern": "^cat\\s+\\.git/HEAD$"
-          }
-        ],
-        "forbiddenCommands": [
-          {
-            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
-            "message": "Do not rewrite shared history in this Git practice task."
-          }
-        ]
-      },
-      "gitExpectations": {
-        "repositoryPath": "project_beta",
+        "repositoryPath": "community-site",
         "repositoryInitialized": true,
         "currentBranch": "main"
       }
@@ -300,25 +292,25 @@
     {
       "id": "try-configure-and-initialize-a-repository-sketch2",
       "kind": "code_input",
-      "title": "Explore the .git Directory",
-      "prompt": "Inspect the status of `project_gamma` and identify its untracked file.\n\nFirst type `bash .zoeskoul/setup.sh` and press Enter. Enter project_gamma, type `git status --short`, and press Enter. The output should include `?? launch-notes.txt`.",
-      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "title": "Stage the five project files",
+      "prompt": "Initialize a repository in community-site with main as the initial branch, then stage these five files so they are ready to commit in a single snapshot: README.md, index.html, about.md, LICENSE, CONTRIBUTING.md. After staging, git status --short should show each file with an A prefix (staged).\n\nThe terminal opens inside `community-site/` with the required starting milestone ready. Type each requested terminal command and press Enter.",
+      "hint": "Read the Git task \"Stage the five project files\" and identify the repository state you need to create.",
       "help": {
-        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+        "concept": "This Git exercise checks the repository state produced by \"Stage the five project files\".",
+        "hint_1": "Use git status before and after each small change so you can see what moved between the working tree, staging area, and history.",
+        "hint_2": "Match the requested file names, branch names, and commit purpose before clicking Check Answer."
       },
-      "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then follow the task in the lesson prompt.",
-      "solutionCode": "bash .zoeskoul/setup.sh\ncd project_gamma\ngit status --short",
+      "starterCode": "# Work in the terminal; the starting repository state is ready.\n# Type each requested command and press Enter.",
+      "solutionCode": "git add practice.txt",
       "fixedLanguage": "bash",
       "recipeType": "shell_task",
       "mode": "terminal_workspace",
       "entryFilePath": "main.sh",
-      "instructions": "Inspect the status of `project_gamma` and identify its untracked file.\n\nFirst type `bash .zoeskoul/setup.sh` and press Enter. Enter project_gamma, type `git status --short`, and press Enter. The output should include `?? launch-notes.txt`.",
+      "instructions": "Initialize a repository in community-site with main as the initial branch, then stage these five files so they are ready to commit in a single snapshot: README.md, index.html, about.md, LICENSE, CONTRIBUTING.md. After staging, git status --short should show each file with an A prefix (staged).\n\nThe terminal opens inside `community-site/` with the required starting milestone ready. Type each requested terminal command and press Enter.",
       "starterFiles": [
         {
           "path": "main.sh",
-          "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then follow the task in the lesson prompt.\n",
+          "content": "# Work in the terminal; the starting repository state is ready.\n# Type each requested command and press Enter.\n",
           "language": "bash",
           "isEntry": true,
           "entry": true,
@@ -326,7 +318,7 @@
         },
         {
           "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"project_gamma\"\nmkdir -p -- \"project_gamma\"\ngit -C \"project_gamma\" init -q -b main\ngit -C \"project_gamma\" config user.name \"ZoeSkoul Learner\"\ngit -C \"project_gamma\" config user.email \"learner@zoeskoul.local\"\nprintf %s \"Draft launch checklist\\n\" > \"project_gamma/launch-notes.txt\"\n",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"community-site\"\nmkdir -p -- \"community-site\"\nprintf '%s\\n' 'Cumulative Git practice project' > \"community-site/README.md\"\ngit -C \"community-site\" init -q -b main\n",
           "language": "bash",
           "readOnly": true
         }
@@ -334,14 +326,14 @@
       "solutionFiles": [
         {
           "path": "main.sh",
-          "content": "bash .zoeskoul/setup.sh\ncd project_gamma\ngit status --short\n",
+          "content": "git add practice.txt\n",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
           "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"project_gamma\"\nmkdir -p -- \"project_gamma\"\ngit -C \"project_gamma\" init -q -b main\ngit -C \"project_gamma\" config user.name \"ZoeSkoul Learner\"\ngit -C \"project_gamma\" config user.email \"learner@zoeskoul.local\"\nprintf %s \"Draft launch checklist\\n\" > \"project_gamma/launch-notes.txt\"\n",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"community-site\"\nmkdir -p -- \"community-site\"\nprintf '%s\\n' 'Cumulative Git practice project' > \"community-site/README.md\"\ngit -C \"community-site\" init -q -b main\n",
           "language": "bash",
           "readOnly": true
         }
@@ -349,10 +341,7 @@
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
-          },
-          {
-            "pattern": "^git\\s+status\\s+--short$"
+            "pattern": "^git\\s+add\\s+practice\\.txt$"
           }
         ],
         "forbiddenCommands": [
@@ -363,37 +352,33 @@
         ]
       },
       "gitExpectations": {
-        "repositoryPath": "project_gamma",
+        "repositoryPath": "community-site",
         "repositoryInitialized": true,
-        "currentBranch": "main",
-        "cleanWorkingTree": false,
-        "untrackedFiles": [
-          "launch-notes.txt"
-        ]
+        "currentBranch": "main"
       }
     },
     {
       "id": "try-configure-and-initialize-a-repository-sketch3",
       "kind": "code_input",
-      "title": "Check Repository Status",
-      "prompt": "Configure a repository-only Git identity in `project_delta` using the name `ZoeSkoul Learner` and email `learner@zoeskoul.local`.\n\nFirst type `bash .zoeskoul/setup.sh` and press Enter. Enter project_delta, run each local Git configuration command, and press Enter after each one.",
-      "hint": "Read the Git task \"Check Repository Status\" and identify the repository state you need to create.",
+      "title": "Commit the initial snapshot and verify",
+      "prompt": "Initialize the community-site repository, set the repository-local author name and email to the required values, stage the five project files, and create the first commit with the message \"Initial site snapshot\". After committing, git log --oneline should show exactly one commit whose message includes Initial site snapshot, and git status --short should show nothing (a clean working tree).\n\nThe terminal opens inside `community-site/` with the required starting milestone ready. Type each requested terminal command and press Enter.",
+      "hint": "Read the Git task \"Commit the initial snapshot and verify\" and identify the repository state you need to create.",
       "help": {
-        "concept": "This Git exercise checks the repository state produced by \"Check Repository Status\".",
+        "concept": "This Git exercise checks the repository state produced by \"Commit the initial snapshot and verify\".",
         "hint_1": "Use git status before and after each small change so you can see what moved between the working tree, staging area, and history.",
         "hint_2": "Match the requested file names, branch names, and commit purpose before clicking Check Answer."
       },
-      "starterCode": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then follow the task in the lesson prompt.",
-      "solutionCode": "bash .zoeskoul/setup.sh\ncd project_delta\ngit config --local user.name \"ZoeSkoul Learner\"\ngit config --local user.email \"learner@zoeskoul.local\"",
+      "starterCode": "# Work in the terminal; the starting repository state is ready.\n# Type each requested command and press Enter.",
+      "solutionCode": "git log --oneline",
       "fixedLanguage": "bash",
       "recipeType": "shell_task",
       "mode": "terminal_workspace",
       "entryFilePath": "main.sh",
-      "instructions": "Configure a repository-only Git identity in `project_delta` using the name `ZoeSkoul Learner` and email `learner@zoeskoul.local`.\n\nFirst type `bash .zoeskoul/setup.sh` and press Enter. Enter project_delta, run each local Git configuration command, and press Enter after each one.",
+      "instructions": "Initialize the community-site repository, set the repository-local author name and email to the required values, stage the five project files, and create the first commit with the message \"Initial site snapshot\". After committing, git log --oneline should show exactly one commit whose message includes Initial site snapshot, and git status --short should show nothing (a clean working tree).\n\nThe terminal opens inside `community-site/` with the required starting milestone ready. Type each requested terminal command and press Enter.",
       "starterFiles": [
         {
           "path": "main.sh",
-          "content": "# First type: bash .zoeskoul/setup.sh\n# Press Enter, then follow the task in the lesson prompt.\n",
+          "content": "# Work in the terminal; the starting repository state is ready.\n# Type each requested command and press Enter.\n",
           "language": "bash",
           "isEntry": true,
           "entry": true,
@@ -401,7 +386,7 @@
         },
         {
           "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"project_delta\"\nmkdir -p -- \"project_delta\"\ngit -C \"project_delta\" init -q -b main\n",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"community-site\"\nmkdir -p -- \"community-site\"\nprintf '%s\\n' 'Cumulative Git practice project' > \"community-site/README.md\"\ngit -C \"community-site\" init -q -b main\ngit -C \"community-site\" config user.name \"ZoeSkoul Learner\"\ngit -C \"community-site\" config user.email \"learner@zoeskoul.local\"\ngit -C \"community-site\" add -- \"README.md\"\ngit -C \"community-site\" commit -q -m \"Start cumulative project\"\n",
           "language": "bash",
           "readOnly": true
         }
@@ -409,14 +394,14 @@
       "solutionFiles": [
         {
           "path": "main.sh",
-          "content": "bash .zoeskoul/setup.sh\ncd project_delta\ngit config --local user.name \"ZoeSkoul Learner\"\ngit config --local user.email \"learner@zoeskoul.local\"\n",
+          "content": "git log --oneline\n",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
           "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"project_delta\"\nmkdir -p -- \"project_delta\"\ngit -C \"project_delta\" init -q -b main\n",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- \"community-site\"\nmkdir -p -- \"community-site\"\nprintf '%s\\n' 'Cumulative Git practice project' > \"community-site/README.md\"\ngit -C \"community-site\" init -q -b main\ngit -C \"community-site\" config user.name \"ZoeSkoul Learner\"\ngit -C \"community-site\" config user.email \"learner@zoeskoul.local\"\ngit -C \"community-site\" add -- \"README.md\"\ngit -C \"community-site\" commit -q -m \"Start cumulative project\"\n",
           "language": "bash",
           "readOnly": true
         }
@@ -424,13 +409,7 @@
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^bash\\s+\\.zoeskoul/setup\\.sh$"
-          },
-          {
-            "pattern": "^git\\s+config\\s+--local\\s+user\\.name\\s+\"ZoeSkoul\\s+Learner\"$"
-          },
-          {
-            "pattern": "^git\\s+config\\s+--local\\s+user\\.email\\s+\"learner@zoeskoul\\.local\"$"
+            "pattern": "^git\\s+log\\s+--oneline$"
           }
         ],
         "forbiddenCommands": [
@@ -441,13 +420,9 @@
         ]
       },
       "gitExpectations": {
-        "repositoryPath": "project_delta",
+        "repositoryPath": "community-site",
         "repositoryInitialized": true,
         "currentBranch": "main"
-      },
-      "hiddenShellCheck": {
-        "script": "test \"$(git -C project_delta config --local user.name)\" = \"ZoeSkoul Learner\" && test \"$(git -C project_delta config --local user.email)\" = \"learner@zoeskoul.local\"",
-        "timeoutMs": 5000
       }
     }
   ]

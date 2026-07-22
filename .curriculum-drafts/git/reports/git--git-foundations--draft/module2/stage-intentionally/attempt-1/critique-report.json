@@ -1,5 +1,13 @@
 {
   "topicId": "stage-intentionally",
-  "ok": true,
-  "issues": []
+  "ok": false,
+  "issues": [
+    {
+      "code": "MULTI_FILE_SOLUTION_FILES_INCOMPLETE",
+      "category": "clarity",
+      "severity": "error",
+      "exerciseId": "try-stage-intentionally-sketch3",
+      "message": "Exercise \"try-stage-intentionally-sketch3\" solutionFiles are missing starter paths: community-site/CONTRIB.txt. Reveal/fill solution must cover the full workspace."
+    }
+  ]
 }

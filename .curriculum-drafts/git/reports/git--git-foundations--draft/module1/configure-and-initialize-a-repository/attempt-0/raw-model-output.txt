@@ -1,1 +1,798 @@
-{"title":"Configure and Initialize a Repository","summary":"Set a repository-local author identity and turn an existing project folder into a repository on main.","minutes":22,"sketchBlocks":[{"id":"sketch0","cardTitle":"Setting Up Local Identity","title":"Configure Local Git Identity","bodyMarkdown":"To start using Git effectively, it's crucial to set up your local identity. This involves configuring your name and email address, which will be associated with your commits. This information is stored in the repository's configuration file and helps identify the author of changes.\n\nWorked example:\n\n```bash\ngit config --local user.name \"ZoeSkoul Learner\"\ngit config --local user.email \"learner@zoeskoul.local\"\n```\n\nThis command sets the local user name and email for the repository. It's important to use `--local` to ensure these settings apply only to the current repository, not globally. This setup is essential for tracking contributions accurately."},{"id":"sketch1","cardTitle":"Initializing a Repository","title":"Initialize a Git Repository","bodyMarkdown":"Once your identity is configured, the next step is to initialize a Git repository. This process creates a `.git` directory in your project folder, which contains all the metadata and history for your project.\n\nWorked example:\n\n```bash\ngit init\n```\n\nThis command initializes a new Git repository in the current directory. By default, it sets the initial branch to `main`. This step is crucial as it transforms your project folder into a version-controlled repository, allowing you to track changes over time."},{"id":"sketch2","cardTitle":"Understanding the .git Directory","title":"Explore the .git Directory","bodyMarkdown":"The `.git` directory is the heart of a Git repository. It contains all the metadata, including configuration, commit history, and references to branches and tags. Understanding its structure helps in managing the repository effectively.\n\nWorked example:\n\n```bash\nls -a .git\n```\n\nThis command lists the contents of the `.git` directory. It's important to note that while you can view these files, you should not edit them directly. They are managed by Git and any manual changes can corrupt the repository."},{"id":"sketch3","cardTitle":"Checking Repository Status","title":"Verify Repository Status","bodyMarkdown":"After initializing a repository, it's important to check its status to understand the current state of your working directory and staging area. This helps in identifying untracked files and changes that need to be committed.\n\nWorked example:\n\n```bash\ngit status\n```\n\nThis command provides a summary of the repository's status, showing which files are staged, unstaged, or untracked. It's a vital tool for managing your workflow and ensuring that all changes are tracked and committed properly."}],"quizDraft":[{"id":"try-configure-and-initialize-a-repository-sketch0","kind":"code_input","title":"Configure Local Identity","prompt":"Set the local Git identity for the current repository to ZoeSkoul Learner with the email learner@zoeskoul.local. Type the command and press Enter.","hint":"Use git config with --local to set user details.","help":{"concept":"Configuring a local Git identity ensures that your commits are associated with the correct author information.","hint_1":"Use git config --local user.name and user.email to set the identity.","hint_2":"Ensure you use the correct name and email format in the command."},"options":null,"correctOptionIds":null,"tokens":null,"correctOrder":null,"template":null,"choices":null,"correctValue":null,"starterCode":"# Set the local Git identity\n","solutionCode":"git config --local user.name \"ZoeSkoul Learner\"\ngit config --local user.email \"learner@zoeskoul.local\"\n","entryFilePath":"main.sh","starterFiles":[{"path":"main.sh","content":"# Set the local Git identity\n","language":"bash","isEntry":true,"entry":true,"readOnly":false}],"solutionFiles":[{"path":"main.sh","content":"git config --local user.name \"ZoeSkoul Learner\"\ngit config --local user.email \"learner@zoeskoul.local\"\n","language":"bash","isEntry":true,"entry":true,"readOnly":false}],"sqlFileOrder":null,"tests":null,"files":null,"semanticChecks":null,"datasetId":null,"recipeType":"sql_query","checkSql":null},{"id":"try-configure-and-initialize-a-repository-sketch1","kind":"code_input","title":"Initialize a Repository","prompt":"Initialize a new Git repository in the current directory. Type the command and press Enter.","hint":"Use git init to start a new repository.","help":{"concept":"Initializing a repository creates the .git directory, which stores all the metadata for version control.","hint_1":"The command to initialize a repository is simple and direct.","hint_2":"Ensure you are in the correct directory before running the command."},"options":null,"correctOptionIds":null,"tokens":null,"correctOrder":null,"template":null,"choices":null,"correctValue":null,"starterCode":"# Initialize a new Git repository\n","solutionCode":"git init\n","entryFilePath":"main.sh","starterFiles":[{"path":"main.sh","content":"# Initialize a new Git repository\n","language":"bash","isEntry":true,"entry":true,"readOnly":false}],"solutionFiles":[{"path":"main.sh","content":"git init\n","language":"bash","isEntry":true,"entry":true,"readOnly":false}],"sqlFileOrder":null,"tests":null,"files":null,"semanticChecks":null,"datasetId":null,"recipeType":"sql_query","checkSql":null},{"id":"try-configure-and-initialize-a-repository-sketch2","kind":"code_input","title":"Explore the .git Directory","prompt":"List the contents of the .git directory to understand its structure. Type the command and press Enter.","hint":"Use ls -a to view hidden files and directories.","help":{"concept":"The .git directory contains all the metadata for the repository, including configuration and history.","hint_1":"Ensure you are in the root of the repository before listing the .git directory.","hint_2":"Use the correct option to list all files, including hidden ones."},"options":null,"correctOptionIds":null,"tokens":null,"correctOrder":null,"template":null,"choices":null,"correctValue":null,"starterCode":"# List the contents of the .git directory\n","solutionCode":"ls -a .git\n","entryFilePath":"main.sh","starterFiles":[{"path":"main.sh","content":"# List the contents of the .git directory\n","language":"bash","isEntry":true,"entry":true,"readOnly":false}],"solutionFiles":[{"path":"main.sh","content":"ls -a .git\n","language":"bash","isEntry":true,"entry":true,"readOnly":false}],"sqlFileOrder":null,"tests":null,"files":null,"semanticChecks":null,"datasetId":null,"recipeType":"sql_query","checkSql":null},{"id":"try-configure-and-initialize-a-repository-sketch3","kind":"code_input","title":"Check Repository Status","prompt":"Check the status of your Git repository to see the current state of your working directory. Type the command and press Enter.","hint":"Use git status to view the repository status.","help":{"concept":"Checking the repository status helps you understand which files are staged, unstaged, or untracked.","hint_1":"The command provides a summary of the current state of the repository.","hint_2":"Ensure you are in the correct directory before running the command."},"options":null,"correctOptionIds":null,"tokens":null,"correctOrder":null,"template":null,"choices":null,"correctValue":null,"starterCode":"# Check the status of the Git repository\n","solutionCode":"git status\n","entryFilePath":"main.sh","starterFiles":[{"path":"main.sh","content":"# Check the status of the Git repository\n","language":"bash","isEntry":true,"entry":true,"readOnly":false}],"solutionFiles":[{"path":"main.sh","content":"git status\n","language":"bash","isEntry":true,"entry":true,"readOnly":false}],"sqlFileOrder":null,"tests":null,"files":null,"semanticChecks":null,"datasetId":null,"recipeType":"sql_query","checkSql":null},{"id":"single-choice-1","kind":"single_choice","title":"Purpose of Version Control","prompt":"What is the primary purpose of version control systems like Git?","hint":"Think about how version control helps manage changes over time.","help":{"concept":"Version control systems help manage changes to files and coordinate work on those files among multiple people.","hint_1":"Version control allows you to track changes and collaborate with others.","hint_2":"It helps prevent data loss and manage project history."},"options":["To track changes and collaborate on projects","To permanently delete files","To increase file size","To encrypt files"],"correctOptionIds":["a"],"tokens":null,"correctOrder":null,"template":null,"choices":null,"correctValue":null,"starterCode":null,"solutionCode":null,"entryFilePath":null,"starterFiles":null,"solutionFiles":null,"sqlFileOrder":null,"tests":null,"files":null,"semanticChecks":null,"datasetId":null,"recipeType":null,"checkSql":null},{"id":"single-choice-2","kind":"single_choice","title":"Repository Initialization","prompt":"What command is used to initialize a new Git repository?","hint":"This command sets up the .git directory.","help":{"concept":"Initializing a repository is the first step in using Git for version control.","hint_1":"The command is short and starts with 'git'.","hint_2":"It creates the necessary metadata for version control."},"options":["git init","git start","git create","git new"],"correctOptionIds":["a"],"tokens":null,"correctOrder":null,"template":null,"choices":null,"correctValue":null,"starterCode":null,"solutionCode":null,"entryFilePath":null,"starterFiles":null,"solutionFiles":null,"sqlFileOrder":null,"tests":null,"files":null,"semanticChecks":null,"datasetId":null,"recipeType":null,"checkSql":null},{"id":"multi-choice-1","kind":"multi_choice","title":"Components of a Git Repository","prompt":"Which of the following are components of a Git repository? Select all that apply.","hint":"Think about the parts that make up the repository's structure.","help":{"concept":"A Git repository consists of several components that manage the project's history and configuration.","hint_1":"Consider what stores the history and configuration of the repository.","hint_2":"These components are essential for tracking changes and managing the repository."},"options":[".git directory","Working tree","Staging area","Remote server"],"correctOptionIds":["a","b","c"],"tokens":null,"correctOrder":null,"template":null,"choices":null,"correctValue":null,"starterCode":null,"solutionCode":null,"entryFilePath":null,"starterFiles":null,"solutionFiles":null,"sqlFileOrder":null,"tests":null,"files":null,"semanticChecks":null,"datasetId":null,"recipeType":null,"checkSql":null},{"id":"drag-reorder-1","kind":"drag_reorder","title":"Order of Git Setup Steps","prompt":"Arrange the steps to set up a new Git repository in the correct order.","hint":"Start with configuring the identity and end with checking the status.","help":{"concept":"Setting up a Git repository involves several key steps to ensure it's ready for version control.","hint_1":"Begin with identity configuration and end with verifying the setup.","hint_2":"Think about the logical sequence of preparing a repository."},"options":null,"correctOptionIds":null,"tokens":["Configure local identity","Initialize the repository","Check repository status"],"correctOrder":["Configure local identity","Initialize the repository","Check repository status"],"template":null,"choices":null,"correctValue":null,"starterCode":null,"solutionCode":null,"entryFilePath":null,"starterFiles":null,"solutionFiles":null,"sqlFileOrder":null,"tests":null,"files":null,"semanticChecks":null,"datasetId":null,"recipeType":null,"checkSql":null},{"id":"fill-blank-choice-1","kind":"fill_blank_choice","title":"Git Identity Configuration","prompt":"Complete the command to set the local Git user name: `git config --local user.name [blank1]`","hint":"The name should be enclosed in quotes.","help":{"concept":"Setting the local user name is crucial for identifying the author of commits.","hint_1":"The name should match the format used in the example.","hint_2":"Ensure the name is enclosed in quotes."},"options":null,"correctOptionIds":null,"tokens":null,"correctOrder":null,"template":"git config --local user.name [blank1]","choices":["\"ZoeSkoul Learner\"","\"John Doe\"","\"Jane Smith\"","\"Git User\""],"correctValue":"\"ZoeSkoul Learner\"","starterCode":null,"solutionCode":null,"entryFilePath":null,"starterFiles":null,"solutionFiles":null,"sqlFileOrder":null,"tests":null,"files":null,"semanticChecks":null,"datasetId":null,"recipeType":null,"checkSql":null},{"id":"fill-blank-choice-2","kind":"fill_blank_choice","title":"Git Email Configuration","prompt":"Complete the command to set the local Git user email: `git config --local user.email [blank1]`","hint":"The email should be enclosed in quotes.","help":{"concept":"Setting the local user email is crucial for identifying the author of commits.","hint_1":"The email should match the format used in the example.","hint_2":"Ensure the email is enclosed in quotes."},"options":null,"correctOptionIds":null,"tokens":null,"correctOrder":null,"template":"git config --local user.email [blank1]","choices":["\"learner@zoeskoul.local\"","\"user@example.com\"","\"admin@domain.com\"","\"contact@website.com\""],"correctValue":"\"learner@zoeskoul.local\"","starterCode":null,"solutionCode":null,"entryFilePath":null,"starterFiles":null,"solutionFiles":null,"sqlFileOrder":null,"tests":null,"files":null,"semanticChecks":null,"datasetId":null,"recipeType":null,"checkSql":null}],"projectDraft":null}
+{
+  "title": "Initialize the Community Site Repository",
+  "summary": "Turn the prepared community-site folder into a repository on main and store the course identity only inside that repository.",
+  "minutes": 22,
+  "sketchBlocks": [
+    {
+      "id": "sketch-0-orientation",
+      "cardTitle": "Why track this folder?",
+      "title": "Turn a folder into a safe, inspectable repository",
+      "bodyMarkdown": "A repository records the changes you make to a folder so you can read its history, compare versions, and recover earlier work. Instead of keeping multiple copies of a finished folder (which loses the story of how the files changed), Git keeps a compact chain of snapshots and metadata. That chain is safer and clearer because each snapshot names who made it, when (locally), and which files were part of that snapshot.\n\nWhat you will learn in this topic:\n- How to make the ordinary community-site folder into a repository whose initial branch is main.\n- Why the .git directory holds repository metadata and should not be edited directly.\n- How to set a repository-local author name and email so commits are attributed inside this repository only.\n\nA good habit: inspect the working tree and staging area with git status before and after each change. This habit helps you confirm what Git will record and avoids accidental snapshots of unrelated files."
+    },
+    {
+      "id": "sketch-1-git-directory",
+      "cardTitle": "Inspect .git contents",
+      "title": "Worked example: What git init creates and why you should not edit it",
+      "bodyMarkdown": "Worked example:\n\nRun git init -b main in a folder to create a repository whose initial branch is main. The command creates a hidden .git directory that stores repository metadata. You usually do not open or edit files inside .git; Git manages them for you.\n\nExample commands and annotated output:\n\n```\n$ git init -b main\nInitialized empty Git repository in /home/you/project/.git/\n$ ls -a\n.  ..  .git  README.md  index.html\n$ cat .git/HEAD\nref: refs/heads/main\n```\n\nExplanation:\n- git init -b main: creates the .git directory and sets the repository's initial branch name to main. This avoids depending on the system default branch name.\n- ls -a shows .git as a hidden folder; .git is not a tracked project file — it's repository metadata.\n- .git/HEAD contains a reference line such as ref: refs/heads/main, which tells Git where HEAD points. Reading it helps you confirm the branch name, but you should not edit it manually.\n\nWhy this matters: editing files inside .git can corrupt the repository. Use Git commands (git config, git status, git log) to inspect and change repository state instead of editing metadata files directly."
+    },
+    {
+      "id": "sketch-2-staging",
+      "cardTitle": "Staging area basics",
+      "title": "Move work from the working tree into the staging area",
+      "bodyMarkdown": "The staging area (the index) is where you prepare a set of changes that will become the next commit. git add copies the current content of files from the working tree into the staging area; git commit then records exactly what is staged.\n\nShort example (conceptual):\n\n```\n# working tree: five new files exist but are untracked\n$ git status --short\n?? README.md\n?? index.html\n?? about.md\n?? LICENSE\n?? CONTRIBUTING.md\n\n# stage all five files\n$ git add README.md index.html about.md LICENSE CONTRIBUTING.md\n$ git status --short\nA  README.md\nA  index.html\nA  about.md\nA  LICENSE\nA  CONTRIBUTING.md\n```\n\nInterpretation: lines that start with A in git status --short mean the file is staged for commit. Lines that start with ?? are untracked and not yet staged. Staging selectively (only some files) helps you make focused commits that document a single logical change instead of mixing unrelated edits."
+    },
+    {
+      "id": "sketch-3-first-commit",
+      "cardTitle": "Record the first snapshot",
+      "title": "Make a meaningful initial commit and verify a clean working tree",
+      "bodyMarkdown": "After staging the files you want, record them with git commit. Commits are the durable snapshots that become your repository history.\n\nA minimal sequence to create a clear, verifiable first commit:\n\n```\n# set identity for this repository only\n$ git config --local user.name \"ZoeSkoul Learner\"\n$ git config --local user.email learner@zoeskoul.local\n\n# stage files and commit\n$ git add README.md index.html about.md LICENSE CONTRIBUTING.md\n$ git commit -m \"Initial site snapshot\"\n$ git status --short\n# (empty output, meaning the working tree is clean)\n$ git log --oneline\n<one-line commit id> Initial site snapshot\n```\n\nWhy verify: after the commit you should see a single commit in the log and a clean working tree. That tells you the snapshot was recorded and no unintended changes remain uncommitted."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "try-configure-and-initialize-a-repository-sketch0",
+      "kind": "code_input",
+      "title": "Initialize community-site and configure local identity",
+      "prompt": "You have an ordinary folder named community-site with five project files. In the terminal, initialize a Git repository whose initial branch is main and set the repository-local author name and email to exactly these values:\n\nuser.name: ZoeSkoul Learner\nuser.email: learner@zoeskoul.local\n\nType the commands and press Enter. Do not create any commits yet. After your commands the repository should exist on branch main and the local config must show the specified name and email.",
+      "hint": "Run git init with -b to name the initial branch, then set user.name and user.email with --local.",
+      "help": {
+        "concept": "git init -b <name> creates a .git metadata directory and sets the repository's initial branch; git config --local stores name/email only for that repository.",
+        "hint_1": "Use git init -b main to create the repository and git config --local user.name and git config --local user.email to set identity locally.",
+        "hint_2": "After initializing, git status will work; git config --local --get user.name and --get user.email will show the repository-local values."
+      },
+      "options": null,
+      "correctOptionIds": null,
+      "tokens": null,
+      "correctOrder": null,
+      "template": null,
+      "choices": null,
+      "correctValue": null,
+      "starterCode": "# In this task you should initialize the community-site folder and set a repository-local name and email.\n# Use git init -b main and git config --local commands. Do not create a commit.\n# Available files: community-site/README.md, community-site/index.html, community-site/about.md, community-site/LICENSE, community-site/CONTRIBUTING.md\n",
+      "solutionCode": "cd community-site\n# initialize the repo with main as the initial branch\ngit init -b main\n# configure the repository-local identity\ngit config --local user.name \"ZoeSkoul Learner\"\ngit config --local user.email learner@zoeskoul.local\n# optional checks (not required by the grading, but useful):\n# git status\n# git config --local --get user.name\n# git config --local --get user.email\n",
+      "entryFilePath": null,
+      "starterFiles": [
+        {
+          "path": "community-site/README.md",
+          "content": "# Community site\nA short README for the community site.",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+            ,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/index.html",
+          "content": "<!-- index placeholder -->\n",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        ,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/about.md",
+          "content": "About the community site.\n",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        ,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/LICENSE",
+          "content": "MIT License\n",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        ,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/CONTRIBUTING.md",
+          "content": "How to contribute.\n",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        ,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "community-site/README.md",
+          "content": "# Community site\nA short README for the community site.",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        ,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/index.html",
+          "content": "<!-- index placeholder -->\n",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        ,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/about.md",
+          "content": "About the community site.\n",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        ,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/LICENSE",
+          "content": "MIT License\n",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        ,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/CONTRIBUTING.md",
+          "content": "How to contribute.\n",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        ,
+          "readOnly": false
+        }
+      ],
+      "sqlFileOrder": null,
+      "tests": null,
+      "files": null,
+      "semanticChecks": null,
+      "datasetId": null,
+      "recipeType": "fixed_tests",
+      "checkSql": null
+    },
+    {
+      "id": "try-configure-and-initialize-a-repository-sketch1",
+      "kind": "code_input",
+      "title": "Verify .git/HEAD shows main",
+      "prompt": "Initialize a Git repository inside the community-site folder with main as the initial branch, then display the contents of .git/HEAD to confirm it points to refs/heads/main. Type the commands and press Enter.",
+      "hint": "Use git init -b main, then cat .git/HEAD to read the HEAD file.",
+      "help": {
+        "concept": ".git/HEAD is a small metadata file that shows where HEAD points; after git init -b main it should reference refs/heads/main.",
+        "hint_1": "Run git init -b main to create the repository and then cat .git/HEAD to read its contents.",
+        "hint_2": "The expected HEAD content begins with 'ref: refs/heads/main'. Do not edit files inside .git."
+      },
+      "options": null,
+      "correctOptionIds": null,
+      "tokens": null,
+      "correctOrder": null,
+      "template": null,
+      "choices": null,
+      "correctValue": null,
+      "starterCode": "# Initialize the repository and inspect the .git/HEAD file.\n# Use git init -b main and cat .git/HEAD.\n# Available files in community-site: README.md, index.html, about.md, LICENSE, CONTRIBUTING.md\n",
+      "solutionCode": "cd community-site\ngit init -b main\n# show HEAD to confirm it points at the main branch\ncat .git/HEAD\n",
+      "entryFilePath": null,
+      "starterFiles": [
+        {
+          "path": "community-site/README.md",
+          "content": "# Community site\nA short README for the community site.",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        ,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/index.html",
+          "content": "<!-- index placeholder -->\n",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        ,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/about.md",
+          "content": "About the community site.\n",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        ,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/LICENSE",
+          "content": "MIT License\n",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        ,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/CONTRIBUTING.md",
+          "content": "How to contribute.\n",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        ,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "community-site/README.md",
+          "content": "# Community site\nA short README for the community site.",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        ,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/index.html",
+          "content": "<!-- index placeholder -->\n",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        ,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/about.md",
+          "content": "About the community site.\n",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        ,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/LICENSE",
+          "content": "MIT License\n",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        ,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/CONTRIBUTING.md",
+          "content": "How to contribute.\n",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        ,
+          "readOnly": false
+        }
+      ],
+      "sqlFileOrder": null,
+      "tests": null,
+      "files": null,
+      "semanticChecks": null,
+      "datasetId": null,
+      "recipeType": "fixed_tests",
+      "checkSql": null
+    },
+    {
+      "id": "try-configure-and-initialize-a-repository-sketch2",
+      "kind": "code_input",
+      "title": "Stage the five project files",
+      "prompt": "Initialize a repository in community-site with main as the initial branch, then stage these five files so they are ready to commit in a single snapshot: README.md, index.html, about.md, LICENSE, CONTRIBUTING.md. After staging, git status --short should show each file with an A prefix (staged).",
+      "hint": "Use git init -b main and then git add to stage the listed files.",
+      "help": {
+        "concept": "git add places the current file contents into the staging area (index). Staged files are shown by git status --short with an A prefix.",
+        "hint_1": "Run git init -b main, then git add README.md index.html about.md LICENSE CONTRIBUTING.md and check git status --short.",
+        "hint_2": "Staged files will appear as lines starting with 'A ' in git status --short."
+      },
+      "options": null,
+      "correctOptionIds": null,
+      "tokens": null,
+      "correctOrder": null,
+      "template": null,
+      "choices": null,
+      "correctValue": null,
+      "starterCode": "# Initialize the repository and stage the five project files.\n# After staging, git status --short should list each file prefixed by 'A '.\n",
+      "solutionCode": "cd community-site\ngit init -b main\n# stage the five files\ngit add README.md index.html about.md LICENSE CONTRIBUTING.md\n# verify staging\ngit status --short\n",
+      "entryFilePath": null,
+      "starterFiles": [
+        {
+          "path": "community-site/README.md",
+          "content": "# Community site\nA short README for the community site.",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        ,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/index.html",
+          "content": "<!-- index placeholder -->\n",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        ,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/about.md",
+          "content": "About the community site.\n",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        ,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/LICENSE",
+          "content": "MIT License\n",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        ,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/CONTRIBUTING.md",
+          "content": "How to contribute.\n",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        ,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "community-site/README.md",
+          "content": "# Community site\nA short README for the community site.",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        ,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/index.html",
+          "content": "<!-- index placeholder -->\n",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        ,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/about.md",
+          "content": "About the community site.\n",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        ,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/LICENSE",
+          "content": "MIT License\n",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        ,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/CONTRIBUTING.md",
+          "content": "How to contribute.\n",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        ,
+          "readOnly": false
+        }
+      ],
+      "sqlFileOrder": null,
+      "tests": null,
+      "files": null,
+      "semanticChecks": null,
+      "datasetId": null,
+      "recipeType": "fixed_tests",
+      "checkSql": null
+    },
+    {
+      "id": "try-configure-and-initialize-a-repository-sketch3",
+      "kind": "code_input",
+      "title": "Commit the initial snapshot and verify",
+      "prompt": "Initialize the community-site repository, set the repository-local author name and email to the required values, stage the five project files, and create the first commit with the message \"Initial site snapshot\". After committing, git log --oneline should show exactly one commit whose message includes Initial site snapshot, and git status --short should show nothing (a clean working tree).",
+      "hint": "Set the local identity with git config --local before committing, then git add the files and git commit -m \"Initial site snapshot\".",
+      "help": {
+        "concept": "A git commit records the staged snapshot along with the committer identity and message. After a successful commit the working tree is clean until you modify files again.",
+        "hint_1": "Use git config --local user.name and user.email, then git add the five files and git commit -m \"Initial site snapshot\". Verify with git log --oneline and git status --short.",
+        "hint_2": "After the first commit, git log --oneline should show a single commit line containing the given commit message and git status --short should print nothing."
+      },
+      "options": null,
+      "correctOptionIds": null,
+      "tokens": null,
+      "correctOrder": null,
+      "template": null,
+      "choices": null,
+      "correctValue": null,
+      "starterCode": "# Initialize the repo, set the repository-local identity, stage the five files, and commit with the message \"Initial site snapshot\".\n# After committing, ensure git log --oneline shows one commit and git status --short is empty.\n",
+      "solutionCode": "cd community-site\ngit init -b main\n# set repo-local identity\ngit config --local user.name \"ZoeSkoul Learner\"\ngit config --local user.email learner@zoeskoul.local\n# stage files and commit\ngit add README.md index.html about.md LICENSE CONTRIBUTING.md\ngit commit -m \"Initial site snapshot\"\n# verify\ngit log --oneline\ngit status --short\n",
+      "entryFilePath": null,
+      "starterFiles": [
+        {
+          "path": "community-site/README.md",
+          "content": "# Community site\nA short README for the community site.",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        ,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/index.html",
+          "content": "<!-- index placeholder -->\n",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        ,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/about.md",
+          "content": "About the community site.\n",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        ,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/LICENSE",
+          "content": "MIT License\n",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        ,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/CONTRIBUTING.md",
+          "content": "How to contribute.\n",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        ,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "community-site/README.md",
+          "content": "# Community site\nA short README for the community site.",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        ,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/index.html",
+          "content": "<!-- index placeholder -->\n",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        ,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/about.md",
+          "content": "About the community site.\n",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        ,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/LICENSE",
+          "content": "MIT License\n",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        ,
+          "readOnly": false
+        },
+        {
+          "path": "community-site/CONTRIBUTING.md",
+          "content": "How to contribute.\n",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        ,
+          "readOnly": false
+        }
+      ],
+      "sqlFileOrder": null,
+      "tests": null,
+      "files": null,
+      "semanticChecks": null,
+      "datasetId": null,
+      "recipeType": "fixed_tests",
+      "checkSql": null
+    },
+    {
+      "id": "sc-why-local-history",
+      "kind": "single_choice",
+      "title": "Why keep local history instead of duplicate folders?",
+      "prompt": "Which statement best explains why Git history is safer and clearer than keeping multiple copies of a final folder?",
+      "hint": "Think about what history records that duplicate folders do not.",
+      "help": {
+        "concept": "Git records a sequence of named snapshots with metadata (who, when, what changed) so you can inspect differences and reasoning; duplicates only keep final states.",
+        "hint_1": "Git stores both the change content and metadata for each commit; duplicates store only final file contents, not the change story.",
+        "hint_2": "Choose the option that emphasizes a readable history and the ability to inspect changes rather than separate final copies."
+      },
+      "options": [
+        "Keeping copies is safer because each copy is a full backup of the final files.",
+        "Git records snapshots with author and change history so you can inspect and recover specific changes without copying folders.",
+        "Duplicate folders are simpler because they avoid repository metadata and hidden files.",
+        "A single final copy is enough; you don't usually need earlier versions or commit messages."
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "tokens": null,
+      "correctOrder": null,
+      "template": null,
+      "choices": null,
+      "correctValue": null
+    ,
+      "starterCode": null,
+      "solutionCode": null
+    ,
+      "entryFilePath": null
+    ,
+      "starterFiles": null
+    ,
+      "solutionFiles": null
+    ,
+      "sqlFileOrder": null
+    ,
+      "tests": null
+    ,
+      "files": null
+    ,
+      "semanticChecks": null
+    ,
+      "datasetId": null
+    ,
+      "recipeType": null
+    ,
+      "checkSql": null
+    },
+    {
+      "id": "sc-what-is-dotgit",
+      "kind": "single_choice",
+      "title": "What does .git contain?",
+      "prompt": "Which answer best describes the purpose of the .git directory inside a project folder?",
+      "hint": "Think about metadata vs. project files.",
+      "help": {
+        "concept": ".git stores repository metadata (object database, refs, configuration, and internal bookkeeping) that Git uses to build history and branches.",
+        "hint_1": ".git contains Git's internal data: objects, refs, HEAD, config; it does not contain the project's editable content as tracked files.",
+        "hint_2": "Pick the option that names metadata and internal repository bookkeeping rather than project content."
+      },
+      "options": [
+        "A copy of all project files that you can edit directly as the tracked source files.",
+        "Repository metadata and internal bookkeeping (objects, refs, HEAD, config) that Git manages.",
+        "A list of remote hosts and personal credentials used to push changes.",
+        "Temporary cached build artifacts generated by the project toolchain."
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "tokens": null,
+      "correctOrder": null,
+      "template": null,
+      "choices": null,
+      "correctValue": null
+    ,
+      "starterCode": null,
+      "solutionCode": null
+    ,
+      "entryFilePath": null
+    ,
+      "starterFiles": null
+    ,
+      "solutionFiles": null
+    ,
+      "sqlFileOrder": null
+    ,
+      "tests": null
+    ,
+      "files": null
+    ,
+      "semanticChecks": null
+    ,
+      "datasetId": null
+    ,
+      "recipeType": null
+    ,
+      "checkSql": null
+    },
+    {
+      "id": "mc-git-status-entries",
+      "kind": "multi_choice",
+      "title": "What git status --short shows",
+      "prompt": "In a repository that has several new untracked files and one file that was just staged, which git status --short entries are correct examples you might see?",
+      "hint": "Remember git status --short uses two-character prefixes like ?? for untracked and A for added (staged).",
+      "help": {
+        "concept": "git status --short uses concise two-character markers: '??' for untracked files, 'A ' for files staged for addition, 'M ' for modified and staged, etc.",
+        "hint_1": "Look for entries that show untracked files with ?? and staged files with A or M in the short status output.",
+        "hint_2": "Select both the marker for untracked files and the marker that indicates a file is staged for commit."
+      },
+      "options": [
+        "Lines starting with '?? README.md' for an untracked README.md",
+        "Lines starting with 'A README.md' for a staged README.md",
+        "Lines starting with 'U README.md' to show an untracked file",
+        "Lines starting with 'D README.md' to show a staged new file"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ],
+      "tokens": null,
+      "correctOrder": null,
+      "template": null,
+      "choices": null,
+      "correctValue": null
+    ,
+      "starterCode": null,
+      "solutionCode": null
+    ,
+      "entryFilePath": null
+    ,
+      "starterFiles": null
+    ,
+      "solutionFiles": null
+    ,
+      "sqlFileOrder": null
+    ,
+      "tests": null
+    ,
+      "files": null
+    ,
+      "semanticChecks": null
+    ,
+      "datasetId": null
+    ,
+      "recipeType": null
+    ,
+      "checkSql": null
+    },
+    {
+      "id": "dr-commit-flow",
+      "kind": "drag_reorder",
+      "title": "Order to create the first commit",
+      "prompt": "Reorder these steps into the sequence you would follow to create the repository and record the first commit.",
+      "hint": "Initialization must happen before staging, and staging happens before committing.",
+      "help": {
+        "concept": "Creating an initial commit requires creating the repository, preparing files in the working tree, staging chosen files, and then committing the staged snapshot.",
+        "hint_1": "Start with creating the repository (git init -b main), then place files in the working tree, then git add to stage, and finally git commit.",
+        "hint_2": "The full correct sequence begins with repository creation, then working-tree edits, then staging, then the commit."
+      },
+      "options": null,
+      "correctOptionIds": null,
+      "tokens": [
+        "Edit files in the working tree",
+        "git add to stage changes",
+        "git commit to record snapshot",
+        "git init -b main to create repository"
+      ],
+      "correctOrder": [
+        "git init -b main to create repository",
+        "Edit files in the working tree",
+        "git add to stage changes",
+        "git commit to record snapshot"
+      ],
+      "template": null,
+      "choices": null,
+      "correctValue": null
+    ,
+      "starterCode": null,
+      "solutionCode": null
+    ,
+      "entryFilePath": null
+    ,
+      "starterFiles": null
+    ,
+      "solutionFiles": null
+    ,
+      "sqlFileOrder": null
+    ,
+      "tests": null
+    ,
+      "files": null
+    ,
+      "semanticChecks": null
+    ,
+      "datasetId": null
+    ,
+      "recipeType": null
+    ,
+      "checkSql": null
+    },
+    {
+      "id": "fb-init-branch",
+      "kind": "fill_blank_choice",
+      "title": "Set the initial branch name",
+      "prompt": "To set the initial branch name explicitly when creating a new repository use: git init -b [blank1]",
+      "hint": "The course uses a short, conventional initial branch name.",
+      "help": {
+        "concept": "git init -b <name> creates a repository whose first branch has the given name instead of relying on the system default.",
+        "hint_1": "The course standard initial branch name is a single short word commonly used today.",
+        "hint_2": "Choose main as the explicit initial branch name used in these lessons."
+      },
+      "options": null,
+      "correctOptionIds": null,
+      "tokens": null,
+      "correctOrder": null,
+      "template": "To set the initial branch name explicitly when creating a new repository use: git init -b [blank1]",
+      "choices": [
+        "main",
+        "master",
+        "trunk",
+        "default"
+      ],
+      "correctValue": "main",
+      "starterCode": null,
+      "solutionCode": null,
+      "entryFilePath": null,
+      "starterFiles": null,
+      "solutionFiles": null,
+      "sqlFileOrder": null,
+      "tests": null,
+      "files": null,
+      "semanticChecks": null,
+      "datasetId": null,
+      "recipeType": null,
+      "checkSql": null
+    },
+    {
+      "id": "fb-config-local",
+      "kind": "fill_blank_choice",
+      "title": "Repository-local author email",
+      "prompt": "Set the repository-local author email with: git config --local user.email [blank1]",
+      "hint": "Use the deterministic, repository-local email used in these lessons.",
+      "help": {
+        "concept": "git config --local sets configuration values that apply only to the repository in the current directory rather than globally.",
+        "hint_1": "The lessons use a deterministic local identity email for reproducible grading.",
+        "hint_2": "Choose learner@zoeskoul.local as the repository-local email."
+      },
+      "options": null,
+      "correctOptionIds": null,
+      "tokens": null,
+      "correctOrder": null,
+      "template": "Set the repository-local author email with: git config --local user.email [blank1]",
+      "choices": [
+        "learner@zoeskoul.local",
+        "user@example.com",
+        "no-reply@github.com",
+        "me@local"
+      ],
+      "correctValue": "learner@zoeskoul.local",
+      "starterCode": null,
+      "solutionCode": null,
+      "entryFilePath": null,
+      "starterFiles": null,
+      "solutionFiles": null,
+      "sqlFileOrder": null,
+      "tests": null,
+      "files": null,
+      "semanticChecks": null,
+      "datasetId": null,
+      "recipeType": null,
+      "checkSql": null
+    }
+  ],
+  "projectDraft": null
+}

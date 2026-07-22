@@ -1,6 +1,7 @@
 import type { AccessSnapshot } from "@/lib/access/accessSnapshot";
 import { resolveModuleAccess } from "@/lib/access/resolveModuleAccess";
 import type { PublishedPracticeExerciseOption } from "@/lib/practice/challenges/publishedCatalog";
+import { practiceModuleAccessKey } from "./practiceAccessKey";
 import {
   selectVisibleSubjectsForActor,
   type SubjectVersioningLike,
@@ -44,7 +45,7 @@ export function selectAccessibleDailyPracticeOptions(args: {
   const subjectBySlug = new Map(
     args.subjects.map((subject) => [subject.slug, subject] as const),
   );
-  const allowedModuleSlugs = new Set<string>();
+  const allowedModuleKeys = new Set<string>();
 
   for (const module of args.modules) {
     if (!visibleSubjectSlugs.has(module.subjectSlug)) continue;
@@ -69,12 +70,18 @@ export function selectAccessibleDailyPracticeOptions(args: {
       requireAll: args.requireAll,
     });
 
-    if (decision.ok) allowedModuleSlugs.add(module.slug);
+    if (decision.ok) {
+      allowedModuleKeys.add(
+        practiceModuleAccessKey(module.subjectSlug, module.slug),
+      );
+    }
   }
 
   return args.options.filter(
     (option) =>
       visibleSubjectSlugs.has(option.subjectSlug) &&
-      allowedModuleSlugs.has(option.moduleSlug),
+      allowedModuleKeys.has(
+        practiceModuleAccessKey(option.subjectSlug, option.moduleSlug),
+      ),
   );
 }

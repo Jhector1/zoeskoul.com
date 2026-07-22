@@ -1,15 +1,17 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { draftFilePairKey, keepEditorSelection } from "./editorSelection";
 import type { FilePairSummary } from "./types";
 
 type FileSide = "starter" | "solution";
 
 function draftKey(pair: FilePairSummary, side: FileSide) {
-  return `${pair.exerciseId}:${pair.path}:${side}`;
+  return `${draftFilePairKey(pair)}:${side}`;
 }
 
 export default function FilePairEditor(props: {
+  topicKey: string;
   filePairs: FilePairSummary[];
   selectedExerciseId: string | null;
   onSaveMessageKey: (keyPath: string, value: string) => Promise<void>;
@@ -23,12 +25,16 @@ export default function FilePairEditor(props: {
   const [draftValues, setDraftValues] = useState<Record<string, string>>({});
 
   useEffect(() => {
-    const first = pairs[0];
-    setSelectedPairKey(first ? `${first.exerciseId}:${first.path}` : "");
+    setSelectedPairKey("");
     setDraftValues({});
+  }, [props.topicKey]);
+
+  useEffect(() => {
+    const pairKeys = pairs.map(draftFilePairKey);
+    setSelectedPairKey((current) => keepEditorSelection(current || null, pairKeys) ?? "");
   }, [pairs]);
 
-  const selectedPair = pairs.find((pair) => `${pair.exerciseId}:${pair.path}` === selectedPairKey) ?? pairs[0] ?? null;
+  const selectedPair = pairs.find((pair) => draftFilePairKey(pair) === selectedPairKey) ?? pairs[0] ?? null;
   const setDraft = (key: string, value: string) => setDraftValues((current) => ({ ...current, [key]: value }));
 
   const renderPane = (pair: FilePairSummary, side: FileSide) => {
@@ -108,13 +114,13 @@ export default function FilePairEditor(props: {
         </div>
         <div className="mt-3 flex flex-wrap gap-2">
           {pairs.map((pair) => {
-            const key = `${pair.exerciseId}:${pair.path}`;
+            const key = draftFilePairKey(pair);
             return (
               <button
                 key={key}
                 type="button"
                 onClick={() => setSelectedPairKey(key)}
-                className={`rounded-lg border px-2 py-1 font-mono text-xs ${key === `${selectedPair.exerciseId}:${selectedPair.path}` ? "border-emerald-300 bg-emerald-50 text-emerald-800" : "border-slate-200 bg-white text-slate-600 hover:bg-slate-50"}`}
+                className={`rounded-lg border px-2 py-1 font-mono text-xs ${key === draftFilePairKey(selectedPair) ? "border-emerald-300 bg-emerald-50 text-emerald-800" : "border-slate-200 bg-white text-slate-600 hover:bg-slate-50"}`}
               >
                 {pair.path}
               </button>

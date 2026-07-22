@@ -74,6 +74,15 @@ export function parseMessageKeyBody(body: unknown) {
   };
 }
 
+export function parseBackupBody(body: unknown) {
+  const object = asObject(body);
+  return {
+    catalog: requiredString(object, "catalog"),
+    subject: requiredString(object, "subject"),
+    locale: typeof object.locale === "string" ? object.locale : "en",
+  };
+}
+
 export function parseCommandBody(body: unknown) {
   const object = asObject(body);
   return {

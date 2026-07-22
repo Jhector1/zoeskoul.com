@@ -156,7 +156,7 @@
             "message": "@:topics.git-foundations.git-foundations-module-2-meaningful-history.module-2-community-website-history.moduleProject.steps.try_module_2_community_website_history_sketch0.terminalExpectations.requiredCommands.1.message"
           },
           {
-            "pattern": "^git\\s+commit\\s+-m\\s+.+$",
+            "pattern": "^git\\s+commit\\s+-m\\s*.+$",
             "message": "@:topics.git-foundations.git-foundations-module-2-meaningful-history.module-2-community-website-history.moduleProject.steps.try_module_2_community_website_history_sketch0.terminalExpectations.requiredCommands.2.message"
           }
         ],
@@ -673,7 +673,7 @@
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^git\\s+commit\\s+-m\\s+.+$",
+            "pattern": "^git\\s+commit\\s+-m\\s*.+$",
             "message": "@:topics.git-foundations.git-foundations-module-2-meaningful-history.module-2-community-website-history.moduleProject.steps.try_module_2_community_website_history_sketch3.terminalExpectations.requiredCommands.0.message"
           }
         ],
@@ -861,7 +861,7 @@
             "message": "@:topics.git-foundations.git-foundations-module-2-meaningful-history.module-2-community-website-history.moduleProject.steps.try_module_2_community_website_history_sketch4.terminalExpectations.requiredCommands.2.message"
           },
           {
-            "pattern": "^git\\s+commit\\s+-m\\s+.+$",
+            "pattern": "^git\\s+commit\\s+-m\\s*.+$",
             "message": "@:topics.git-foundations.git-foundations-module-2-meaningful-history.module-2-community-website-history.moduleProject.steps.try_module_2_community_website_history_sketch4.terminalExpectations.requiredCommands.3.message"
           }
         ],

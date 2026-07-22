@@ -1,0 +1,239 @@
+{
+  "title": "Inspect Exact Project Changes",
+  "summary": "Continue community-site and inspect supplied text edits before deciding what belongs in history.",
+  "minutes": 20,
+  "sketchBlocks": [
+    {
+      "id": "sketch-0",
+      "title": "Inspect unstaged edits with git diff",
+      "bodyMarkdown": "Worked example:\n\nWhen you have changes in your working tree but haven't staged them yet, git diff shows the exact lines that changed. Imagine the project already had a README and a contact file committed. Someone edited both files locally but didn't add them.\n\nExample git diff output (simplified):\n\n```\ndiff --git a/README.md b/README.md\n@@ -1,3 +1,4 @@\n-Welcome\n+Welcome to the Community site\n+We added a short tagline\ndiff --git a/contact.txt b/contact.txt\n@@ -1 +1 @@\n-Phone: 555-0100\n+Phone: 555-0200\n```\n\nRead this output as: lines prefixed with `-` were removed from the committed snapshot; lines prefixed with `+` were added in the working tree. This helps you confirm whether an edit belongs in the next commit before you stage anything."
+    },
+    {
+      "id": "sketch-1",
+      "title": "Show changes for a single filename",
+      "bodyMarkdown": "Worked example:\n\nYou don't always want to scan every changed file. Ask git diff for one specific file to focus on a single change. For instance, to inspect only the README you would run `git diff README.md`.\n\nExample (focused):\n\n```\n$ git diff README.md\ndiff --git a/README.md b/README.md\n@@ -1,3 +1,4 @@\n-Welcome\n+Welcome to the Community site\n+We added a short tagline\n```\n\nLimiting the diff reduces noise and makes it easier to decide whether that file should be staged."
+    },
+    {
+      "id": "sketch-2",
+      "title": "Interpret the `+` and `-` lines in a diff",
+      "bodyMarkdown": "Worked example:\n\nA small chunk of git diff shows context lines and the actual additions/removals. The `@@` header shows the chunk location, and the `-` / `+` lines show the removed and added content.\n\nExample snippet:\n\n```\n@@ -10,7 +10,8 @@\n-This paragraph explained old behavior.\n+This paragraph explains the new recommended behavior.\n+It also adds one extra explanatory sentence.\n```\n\nThis tells you exactly what text will disappear from the committed snapshot and what text will be added if you stage the change. You don't need to know HTML or CSS to read these markers—just treat them as plain text edits."
+    },
+    {
+      "id": "sketch-3",
+      "title": "Stage one file, then inspect staged vs unstaged",
+      "bodyMarkdown": "Worked example:\n\nSometimes you want to include one purposeful change in the next commit and leave unrelated edits out. Stage the intended file and then use `git diff --staged` to inspect exactly what will become part of the new commit.\n\nExample sequence and results (conceptual):\n\n```\n$ git add README.md\n$ git diff --staged\ndiff --git a/README.md b/README.md\n@@ -1,3 +1,4 @@\n-Welcome\n+Welcome to the Community site\n+We added a short tagline\n```\n\nAfter staging README.md, git diff (unstaged) still shows other working-tree edits that are not yet staged. This two-step inspection—diff before staging and diff --staged after staging—lets you build a focused commit."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "try-inspect-unstaged-changes-with-diff-sketch0",
+      "kind": "fill_blank_choice",
+      "title": "Inspect all unstaged edits with git diff",
+      "prompt": "You're in the community-site repository. The starter workspace contains two edited files that are not staged. Use the terminal: type the command git diff and press Enter to view all unstaged text changes across the project. Run exactly: git diff\n\nWhen done, click Check Answer.",
+      "template": "A file-writing code exercise should also ____ so automated tests can check it.",
+      "choices": [
+        "print an observable result",
+        "hide all output",
+        "delete the file immediately",
+        "skip the program"
+      ],
+      "correctValue": "print an observable result",
+      "hint": "Run git diff with no filename to see all unstaged changes in the working tree.",
+      "help": {
+        "concept": "git diff (no args) compares the working tree to the index and shows unstaged line-level changes across all files.",
+        "hint_1": "Type git diff and press Enter in the terminal; the output will show lines starting with + and - for added and removed text.",
+        "hint_2": "If you see both + and - lines for the two files listed, you successfully inspected the unstaged edits."
+      }
+    },
+    {
+      "id": "try-inspect-unstaged-changes-with-diff-sketch1",
+      "kind": "fill_blank_choice",
+      "title": "Inspect a single file's unstaged edits",
+      "prompt": "You're in the community-site repository. Two files were edited but not staged. Use the terminal to view only the unstaged changes for about.md: type git diff about.md and press Enter. Confirm the output shows the added and removed lines from about.md.",
+      "template": "A file-writing code exercise should also ____ so automated tests can check it.",
+      "choices": [
+        "print an observable result",
+        "hide all output",
+        "delete the file immediately",
+        "skip the program"
+      ],
+      "correctValue": "print an observable result",
+      "hint": "Run git diff <filename>; replace <filename> with the relative pathname about.md and press Enter.",
+      "help": {
+        "concept": "git diff <path> limits the displayed unstaged changes to only that file, reducing noise from other edits.",
+        "hint_1": "Type git diff about.md and press Enter; check for lines beginning with + and - in the output.",
+        "hint_2": "If the diff output contains the changed lines for about.md and no other filenames, you used the file-limited diff correctly."
+      }
+    },
+    {
+      "id": "try-inspect-unstaged-changes-with-diff-sketch2",
+      "kind": "fill_blank_choice",
+      "title": "Read added and removed lines in a diff chunk",
+      "prompt": "You're in the community-site repository. Open the terminal, type git diff NEWS.md and press Enter to inspect the unstaged edits to NEWS.md. Look for `-` and `+` lines and the chunk header `@@` to locate the change.",
+      "template": "A file-writing code exercise should also ____ so automated tests can check it.",
+      "choices": [
+        "print an observable result",
+        "hide all output",
+        "delete the file immediately",
+        "skip the program"
+      ],
+      "correctValue": "print an observable result",
+      "hint": "Run git diff NEWS.md and press Enter; look for the chunk header lines starting with @@ and for -/+ markers.",
+      "help": {
+        "concept": "A diff chunk shows the location (`@@`) and uses `-` for removed lines and `+` for added lines so you can read exact text edits at a glance.",
+        "hint_1": "Type git diff NEWS.md and press Enter; confirm the output contains both - and + lines within an @@ chunk header.",
+        "hint_2": "If the output shows @@ and the +/- lines for NEWS.md, you've inspected the added and removed lines successfully."
+      }
+    },
+    {
+      "id": "try-inspect-unstaged-changes-with-diff-sketch3",
+      "kind": "fill_blank_choice",
+      "title": "Stage one file and inspect staged changes",
+      "prompt": "You're in the community-site repository. One file should be staged and then inspected. In the terminal, type the commands (each followed by Enter):\n\n1) git add CONTRIBUTORS.txt\n2) git diff --staged\n\nConfirm that git diff --staged shows only the staged file's changes and that git diff (without arguments) still shows other unstaged edits.",
+      "template": "A file-writing code exercise should also ____ so automated tests can check it.",
+      "choices": [
+        "print an observable result",
+        "hide all output",
+        "delete the file immediately",
+        "skip the program"
+      ],
+      "correctValue": "print an observable result",
+      "hint": "Use git add <file> to stage a single file, then git diff --staged to view what's staged for the next commit.",
+      "help": {
+        "concept": "Staging isolates a snapshot in the index; git diff --staged compares the index to HEAD and shows exactly what would be committed next.",
+        "hint_1": "Type git add CONTRIBUTORS.txt and press Enter, then type git diff --staged and press Enter to inspect the staged snapshot.",
+        "hint_2": "If the staged diff output contains the expected +/- lines for CONTRIBUTORS.txt and running git diff still shows other edits, you staged only that file."
+      }
+    },
+    {
+      "id": "q-single-what-diff",
+      "kind": "single_choice",
+      "title": "What does git diff (no arguments) show by default?",
+      "prompt": "Choose the single correct description of git diff with no additional options or filenames.",
+      "options": [
+        "Staged changes that will be part of the next commit.",
+        "Unstaged changes in the working tree compared to the index.",
+        "A list of commits in the repository's history.",
+        "Only files ignored by .gitignore."
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Think about what git compares when you haven't staged changes yet.",
+      "help": {
+        "concept": "git diff (without options) compares the working tree to the index (staged snapshot). It shows unstaged line-level changes that are not yet staged for commit.",
+        "hint_1": "It does not show the staged snapshot or the commit history by default.",
+        "hint_2": "If a change is staged, git diff (no args) will not include those staged differences; use git diff --staged to see staged changes."
+      }
+    },
+    {
+      "id": "q-multi-which-commands",
+      "kind": "multi_choice",
+      "title": "Which commands show line-level diffs?",
+      "prompt": "Select all commands that can show line-level differences between snapshots (choose all that apply).",
+      "options": [
+        "git diff",
+        "git diff --staged",
+        "git status",
+        "git log"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ],
+      "hint": "Which git commands produce +/- style diffs?",
+      "help": {
+        "concept": "git diff and git diff --staged both print line-level diffs; git status and git log show different kinds of information (status lists changed files; log shows commit history).",
+        "hint_1": "Line-level diff output uses +/- markers; both unstaged and staged diffs use git diff (with different targets).",
+        "hint_2": "Pick the options that actually print the +/- style text diff."
+      }
+    },
+    {
+      "id": "q-multi-interpret-plusminus",
+      "kind": "multi_choice",
+      "title": "Interpreting diff markers",
+      "prompt": "Which of the following are correct interpretations of git diff output? Select all that apply.",
+      "options": [
+        "Lines starting with + are added in the working tree.",
+        "Lines starting with - were removed from the previous snapshot.",
+        "Lines starting with ! indicate a merge conflict in a standard git diff.",
+        "Lines starting with @@ show the chunk header with location information."
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "d"
+      ],
+      "hint": "Review what the symbols `-`, `+`, and `@@` mean in a diff chunk.",
+      "help": {
+        "concept": "In git diffs, `-` marks lines removed from the earlier snapshot, `+` marks lines added in the later snapshot, and `@@` is the chunk header showing where the change occurred.",
+        "hint_1": "Look for the statements that correctly describe removed and added lines and the chunk header.",
+        "hint_2": "Exclude any option that mentions conflict markers or unrelated outputs."
+      }
+    },
+    {
+      "id": "q-drag-order-steps",
+      "kind": "drag_reorder",
+      "title": "Order the steps to make a focused commit",
+      "prompt": "Arrange these steps in the correct order for inspecting edits and making a single focused commit.",
+      "tokens": [
+        "Run git status (or git diff) to see all changes",
+        "Stage only the intended file with git add <file>",
+        "Run git diff --staged to inspect the staged snapshot",
+        "Run git commit -m \"focused: short message\" to record the change"
+      ],
+      "correctOrder": [
+        "Run git status (or git diff) to see all changes",
+        "Stage only the intended file with git add <file>",
+        "Run git diff --staged to inspect the staged snapshot",
+        "Run git commit -m \"focused: short message\" to record the change"
+      ],
+      "hint": "Think: inspect, stage only intended file, check staged snapshot, then commit.",
+      "help": {
+        "concept": "A focused commit workflow inspects unstaged edits, stages just the intended file, verifies the staged snapshot, and then commits so unrelated edits remain out of history.",
+        "hint_1": "Start by checking the current status or unstaged diff, then stage the intended file.",
+        "hint_2": "After staging, use git diff --staged to verify, then commit with an explanatory message."
+      }
+    },
+    {
+      "id": "q-fill-staged-base",
+      "kind": "fill_blank_choice",
+      "title": "What does git diff --staged compare?",
+      "prompt": "git diff --staged shows differences between the index and [blank1].",
+      "template": "git diff --staged shows differences between the index and [blank1].",
+      "choices": [
+        "working tree",
+        "HEAD",
+        "origin/main",
+        "the staging snapshot"
+      ],
+      "correctValue": "HEAD",
+      "hint": "Think about what the index (staging area) is compared to when inspecting what will be committed next.",
+      "help": {
+        "concept": "git diff --staged (also shown as git diff --cached) compares the staged snapshot (index) to the missing term, the last commit, so you can see precisely what will be included in the next commit.",
+        "hint_1": "the missing term is the name for the current commit the branch points at.",
+        "hint_2": "Pick the term that names the last committed snapshot the index is compared against."
+      }
+    },
+    {
+      "id": "q-fill-plus-lines",
+      "kind": "fill_blank_choice",
+      "title": "Meaning of + lines in diff",
+      "prompt": "In git diff output, lines that begin with + are [blank1].",
+      "template": "In git diff output, lines that begin with + are [blank1].",
+      "choices": [
+        "removed lines",
+        "added lines",
+        "unchanged lines",
+        "file names"
+      ],
+      "correctValue": "added lines",
+      "hint": "What does a + at the beginning of a line usually indicate in a line-level diff?",
+      "help": {
+        "concept": "Plus-marked lines in a diff are the lines added in the later snapshot (working tree or staged index) compared to the earlier snapshot.",
+        "hint_1": "Think: the opposite of removed lines, which start with -.",
+        "hint_2": "Choose the phrase that means content was added."
+      }
+    }
+  ]
+}

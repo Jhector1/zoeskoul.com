@@ -183,7 +183,7 @@
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "working directory"
+        "value": "working tree"
       }
     },
     {
@@ -193,36 +193,22 @@
       "weight": 1,
       "messageBase": "topics.git-foundations.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.tryIt.try_inspect_unstaged_changes_with_diff_sketch0",
       "language": "bash",
-      "starterCode": "# Community Project\n\nShared schedules and contact notes.\n",
+      "starterCode": "# Community Project\n\nShared community activities and updates.\n",
       "starterFiles": [
         {
           "path": "community-project/README.md",
-          "content": "# Community Project\n\nShared schedules and contact notes.\n",
+          "content": "# Community Project\n\nShared community activities and updates.\n",
           "language": "markdown",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "community-project/schedule.txt",
-          "content": "Community schedule\n\nSaturday cleanup: 10:00 AM\n",
+          "content": "Community events\n\nSaturday cleanup: 10:00 AM\n",
           "language": "text"
         }
       ],
       "terminalExpectations": {
-        "requiredCommands": [
-          {
-            "pattern": "^git\\s+status\\s+--short$",
-            "message": "@:topics.git-foundations.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.tryIt.try_inspect_unstaged_changes_with_diff_sketch0.terminalExpectations.requiredCommands.0.message"
-          },
-          {
-            "pattern": "^git\\s+add\\s+contacts\\.txt$",
-            "message": "@:topics.git-foundations.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.tryIt.try_inspect_unstaged_changes_with_diff_sketch0.terminalExpectations.requiredCommands.1.message"
-          },
-          {
-            "pattern": "^git\\s+commit\\s+-m\\s+.+$",
-            "message": "@:topics.git-foundations.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.tryIt.try_inspect_unstaged_changes_with_diff_sketch0.terminalExpectations.requiredCommands.2.message"
-          }
-        ],
         "forbiddenCommands": [
           {
             "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
@@ -233,36 +219,36 @@
       "workspace": {
         "language": "bash",
         "entryFilePath": "community-project/README.md",
-        "starterCode": "# Community Project\n\nShared schedules and contact notes.\n",
+        "starterCode": "# Community Project\n\nShared community activities and updates.\n",
         "starterFiles": [
           {
             "path": "community-project/README.md",
-            "content": "# Community Project\n\nShared schedules and contact notes.\n",
+            "content": "# Community Project\n\nShared community activities and updates.\n",
             "language": "markdown",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "community-project/schedule.txt",
-            "content": "Community schedule\n\nSaturday cleanup: 10:00 AM\n",
+            "content": "Community events\n\nSaturday cleanup: 10:00 AM\n",
             "language": "text"
           }
         ],
         "fixtureFiles": [
           {
             "path": ".zoeskoul/setup.sh",
-            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C community-project commit -q -m 'Start community project'\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\n",
+            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared community activities and updates.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community events\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C community-project commit -q -m 'Start community project'\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared community activities and updates.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community events\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared community activities and updates.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community events\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\n",
             "language": "bash",
             "readOnly": true
           },
           {
             "path": "community-project/README.md",
-            "content": "# Community Project\n\nShared schedules and contact notes.\n",
+            "content": "# Community Project\n\nShared community activities and updates.\n",
             "language": "markdown"
           },
           {
             "path": "community-project/schedule.txt",
-            "content": "Community schedule\n\nSaturday cleanup: 10:00 AM\n",
+            "content": "Community events\n\nSaturday cleanup: 10:00 AM\n",
             "language": "text"
           }
         ]
@@ -274,7 +260,7 @@
         "instructions": "@:topics.git-foundations.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.tryIt.try_inspect_unstaged_changes_with_diff_sketch0.instructions"
       },
       "hiddenShellCheck": {
-        "script": "set -eu\nrepo=community-project\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" branch --show-current)\" = main ] || fail \"The repository is on the wrong branch.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = 2 ] || fail \"The repository has the wrong number of commits.\"\n[ \"$(git -C \"$repo\" config --local --get user.name)\" = 'ZoeSkoul Learner' ] || fail \"The repository-local author name is incorrect.\"\n[ \"$(git -C \"$repo\" config --local --get user.email)\" = learner@zoeskoul.local ] || fail \"The repository-local author email is incorrect.\"\nactual_status=$(git -C \"$repo\" status --porcelain=v1 --untracked-files=all)\n[ \"$actual_status\" = '' ] || fail \"The staged, unstaged, or untracked state is not correct yet.\"\nactual_tracked=$(git -C \"$repo\" ls-files)\n[ \"$actual_tracked\" = 'README.md\ncontacts.txt\nschedule.txt' ] || fail \"The tracked file set is not correct yet.\"\nactual_subjects=$(git -C \"$repo\" log --format=%s --reverse)\n[ \"$actual_subjects\" = 'Start community project\nAdd community contacts' ] || fail \"The commit history does not match the required project story.\"\n[ -f \"$repo/README.md\" ] || fail \"The expected file README.md is missing.\"\n[ \"$(cat \"$repo/README.md\")\" = '# Community Project\n\nShared schedules and contact notes.' ] || fail \"The content of README.md is not correct yet.\"\n[ -f \"$repo/contacts.txt\" ] || fail \"The expected file contacts.txt is missing.\"\n[ \"$(cat \"$repo/contacts.txt\")\" = 'Community contacts\n\nHelp desk: 555-0100' ] || fail \"The content of contacts.txt is not correct yet.\"\n[ -f \"$repo/schedule.txt\" ] || fail \"The expected file schedule.txt is missing.\"\n[ \"$(cat \"$repo/schedule.txt\")\" = 'Community schedule\n\nSaturday cleanup: 10:00 AM' ] || fail \"The content of schedule.txt is not correct yet.\"",
+        "script": "set -eu\nrepo=community-project\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" branch --show-current)\" = main ] || fail \"The repository is on the wrong branch.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = 2 ] || fail \"The repository has the wrong number of commits.\"\n[ \"$(git -C \"$repo\" config --local --get user.name)\" = 'ZoeSkoul Learner' ] || fail \"The repository-local author name is incorrect.\"\n[ \"$(git -C \"$repo\" config --local --get user.email)\" = learner@zoeskoul.local ] || fail \"The repository-local author email is incorrect.\"\nactual_status=$(git -C \"$repo\" status --porcelain=v1 --untracked-files=all)\n[ \"$actual_status\" = '' ] || fail \"The staged, unstaged, or untracked state is not correct yet.\"\nactual_tracked=$(git -C \"$repo\" ls-files)\n[ \"$actual_tracked\" = 'README.md\ncontacts.txt\nschedule.txt' ] || fail \"The tracked file set is not correct yet.\"\nactual_subjects=$(git -C \"$repo\" log --format=%s --reverse)\n[ \"$actual_subjects\" = 'Start community project\nAdd community contacts' ] || fail \"The commit history does not match the required project story.\"\n[ -f \"$repo/README.md\" ] || fail \"The expected file README.md is missing.\"\n[ \"$(cat \"$repo/README.md\")\" = '# Community Project\n\nShared community activities and updates.' ] || fail \"The content of README.md is not correct yet.\"\n[ -f \"$repo/contacts.txt\" ] || fail \"The expected file contacts.txt is missing.\"\n[ \"$(cat \"$repo/contacts.txt\")\" = 'Community contacts\n\nHelp desk: 555-0100' ] || fail \"The content of contacts.txt is not correct yet.\"\n[ -f \"$repo/schedule.txt\" ] || fail \"The expected file schedule.txt is missing.\"\n[ \"$(cat \"$repo/schedule.txt\")\" = 'Community events\n\nSaturday cleanup: 10:00 AM' ] || fail \"The content of schedule.txt is not correct yet.\"",
         "timeoutMs": 15000
       },
       "ideConfig": {
@@ -330,18 +316,18 @@
       "fixtureFiles": [
         {
           "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C community-project commit -q -m 'Start community project'\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\n",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared community activities and updates.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community events\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C community-project commit -q -m 'Start community project'\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared community activities and updates.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community events\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared community activities and updates.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community events\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\n",
           "language": "bash",
           "readOnly": true
         },
         {
           "path": "community-project/README.md",
-          "content": "# Community Project\n\nShared schedules and contact notes.\n",
+          "content": "# Community Project\n\nShared community activities and updates.\n",
           "language": "markdown"
         },
         {
           "path": "community-project/schedule.txt",
-          "content": "Community schedule\n\nSaturday cleanup: 10:00 AM\n",
+          "content": "Community events\n\nSaturday cleanup: 10:00 AM\n",
           "language": "text"
         }
       ],
@@ -357,11 +343,11 @@
       "weight": 1,
       "messageBase": "topics.git-foundations.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.tryIt.try_inspect_unstaged_changes_with_diff_sketch2",
       "language": "bash",
-      "starterCode": "# Community Project\n\nShared schedules and contact notes.\n",
+      "starterCode": "# Community Project\n\nShared community activities and updates.\n",
       "starterFiles": [
         {
           "path": "community-project/README.md",
-          "content": "# Community Project\n\nShared schedules and contact notes.\n",
+          "content": "# Community Project\n\nShared community activities and updates.\n",
           "language": "markdown",
           "isEntry": true,
           "entry": true
@@ -373,14 +359,14 @@
         },
         {
           "path": "community-project/schedule.txt",
-          "content": "Community schedule\n\nSaturday cleanup: 10:00 AM\n",
+          "content": "Community events\n\nSaturday cleanup: 10:00 AM\n",
           "language": "text"
         }
       ],
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^git\\s+diff\\s+--\\s+schedule\\.txt$",
+            "pattern": "^git\\s+diff(?!.*\\s(?:--staged|--cached)(?:\\s|$))(?=.*\\s(?:--\\s+)?schedule\\.txt(?:\\s|$)).*$",
             "message": "@:topics.git-foundations.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.tryIt.try_inspect_unstaged_changes_with_diff_sketch2.terminalExpectations.requiredCommands.0.message"
           }
         ],
@@ -394,11 +380,11 @@
       "workspace": {
         "language": "bash",
         "entryFilePath": "community-project/README.md",
-        "starterCode": "# Community Project\n\nShared schedules and contact notes.\n",
+        "starterCode": "# Community Project\n\nShared community activities and updates.\n",
         "starterFiles": [
           {
             "path": "community-project/README.md",
-            "content": "# Community Project\n\nShared schedules and contact notes.\n",
+            "content": "# Community Project\n\nShared community activities and updates.\n",
             "language": "markdown",
             "isEntry": true,
             "entry": true
@@ -410,20 +396,20 @@
           },
           {
             "path": "community-project/schedule.txt",
-            "content": "Community schedule\n\nSaturday cleanup: 10:00 AM\n",
+            "content": "Community events\n\nSaturday cleanup: 10:00 AM\n",
             "language": "text"
           }
         ],
         "fixtureFiles": [
           {
             "path": ".zoeskoul/setup.sh",
-            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C community-project commit -q -m 'Start community project'\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0100\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C community-project commit -q -m 'Add community contacts'\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0100\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0100\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\n",
+            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared community activities and updates.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community events\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C community-project commit -q -m 'Start community project'\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared community activities and updates.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0100\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Community events\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C community-project commit -q -m 'Add community contacts'\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared community activities and updates.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0100\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Community events\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared community activities and updates.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0100\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Community events\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\n",
             "language": "bash",
             "readOnly": true
           },
           {
             "path": "community-project/README.md",
-            "content": "# Community Project\n\nShared schedules and contact notes.\n",
+            "content": "# Community Project\n\nShared community activities and updates.\n",
             "language": "markdown"
           },
           {
@@ -433,7 +419,7 @@
           },
           {
             "path": "community-project/schedule.txt",
-            "content": "Community schedule\n\nSaturday cleanup: 10:00 AM\n",
+            "content": "Community events\n\nSaturday cleanup: 10:00 AM\n",
             "language": "text"
           }
         ]
@@ -445,7 +431,7 @@
         "instructions": "@:topics.git-foundations.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.tryIt.try_inspect_unstaged_changes_with_diff_sketch2.instructions"
       },
       "hiddenShellCheck": {
-        "script": "set -eu\nrepo=community-project\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" branch --show-current)\" = main ] || fail \"The repository is on the wrong branch.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = 2 ] || fail \"The repository has the wrong number of commits.\"\n[ \"$(git -C \"$repo\" config --local --get user.name)\" = 'ZoeSkoul Learner' ] || fail \"The repository-local author name is incorrect.\"\n[ \"$(git -C \"$repo\" config --local --get user.email)\" = learner@zoeskoul.local ] || fail \"The repository-local author email is incorrect.\"\nactual_status=$(git -C \"$repo\" status --porcelain=v1 --untracked-files=all)\n[ \"$actual_status\" = ' M schedule.txt' ] || fail \"The staged, unstaged, or untracked state is not correct yet.\"\nactual_tracked=$(git -C \"$repo\" ls-files)\n[ \"$actual_tracked\" = 'README.md\ncontacts.txt\nschedule.txt' ] || fail \"The tracked file set is not correct yet.\"\nactual_subjects=$(git -C \"$repo\" log --format=%s --reverse)\n[ \"$actual_subjects\" = 'Start community project\nAdd community contacts' ] || fail \"The commit history does not match the required project story.\"\n[ -f \"$repo/README.md\" ] || fail \"The expected file README.md is missing.\"\n[ \"$(cat \"$repo/README.md\")\" = '# Community Project\n\nShared schedules and contact notes.' ] || fail \"The content of README.md is not correct yet.\"\n[ -f \"$repo/contacts.txt\" ] || fail \"The expected file contacts.txt is missing.\"\n[ \"$(cat \"$repo/contacts.txt\")\" = 'Community contacts\n\nHelp desk: 555-0100' ] || fail \"The content of contacts.txt is not correct yet.\"\n[ -f \"$repo/schedule.txt\" ] || fail \"The expected file schedule.txt is missing.\"\n[ \"$(cat \"$repo/schedule.txt\")\" = 'Community schedule\n\nSaturday cleanup: 9:30 AM' ] || fail \"The content of schedule.txt is not correct yet.\"",
+        "script": "set -eu\nrepo=community-project\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" branch --show-current)\" = main ] || fail \"The repository is on the wrong branch.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = 2 ] || fail \"The repository has the wrong number of commits.\"\n[ \"$(git -C \"$repo\" config --local --get user.name)\" = 'ZoeSkoul Learner' ] || fail \"The repository-local author name is incorrect.\"\n[ \"$(git -C \"$repo\" config --local --get user.email)\" = learner@zoeskoul.local ] || fail \"The repository-local author email is incorrect.\"\nactual_status=$(git -C \"$repo\" status --porcelain=v1 --untracked-files=all)\n[ \"$actual_status\" = ' M schedule.txt' ] || fail \"The staged, unstaged, or untracked state is not correct yet.\"\nactual_tracked=$(git -C \"$repo\" ls-files)\n[ \"$actual_tracked\" = 'README.md\ncontacts.txt\nschedule.txt' ] || fail \"The tracked file set is not correct yet.\"\nactual_subjects=$(git -C \"$repo\" log --format=%s --reverse)\n[ \"$actual_subjects\" = 'Start community project\nAdd community contacts' ] || fail \"The commit history does not match the required project story.\"\n[ -f \"$repo/README.md\" ] || fail \"The expected file README.md is missing.\"\n[ \"$(cat \"$repo/README.md\")\" = '# Community Project\n\nShared community activities and updates.' ] || fail \"The content of README.md is not correct yet.\"\n[ -f \"$repo/contacts.txt\" ] || fail \"The expected file contacts.txt is missing.\"\n[ \"$(cat \"$repo/contacts.txt\")\" = 'Community contacts\n\nHelp desk: 555-0100' ] || fail \"The content of contacts.txt is not correct yet.\"\n[ -f \"$repo/schedule.txt\" ] || fail \"The expected file schedule.txt is missing.\"\n[ \"$(cat \"$repo/schedule.txt\")\" = 'Community events\n\nSaturday cleanup: 9:30 AM' ] || fail \"The content of schedule.txt is not correct yet.\"",
         "timeoutMs": 15000
       },
       "ideConfig": {
@@ -501,13 +487,13 @@
       "fixtureFiles": [
         {
           "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C community-project commit -q -m 'Start community project'\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0100\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C community-project commit -q -m 'Add community contacts'\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0100\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0100\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\n",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared community activities and updates.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community events\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C community-project commit -q -m 'Start community project'\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared community activities and updates.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0100\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Community events\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C community-project commit -q -m 'Add community contacts'\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared community activities and updates.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0100\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Community events\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared community activities and updates.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0100\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Community events\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\n",
           "language": "bash",
           "readOnly": true
         },
         {
           "path": "community-project/README.md",
-          "content": "# Community Project\n\nShared schedules and contact notes.\n",
+          "content": "# Community Project\n\nShared community activities and updates.\n",
           "language": "markdown"
         },
         {
@@ -517,7 +503,7 @@
         },
         {
           "path": "community-project/schedule.txt",
-          "content": "Community schedule\n\nSaturday cleanup: 10:00 AM\n",
+          "content": "Community events\n\nSaturday cleanup: 10:00 AM\n",
           "language": "text"
         }
       ],
@@ -533,11 +519,11 @@
       "weight": 1,
       "messageBase": "topics.git-foundations.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.tryIt.try_inspect_unstaged_changes_with_diff_sketch3",
       "language": "bash",
-      "starterCode": "# Community Project\n\nShared schedules and contact notes.\n",
+      "starterCode": "# Community Project\n\nShared community activities and updates.\n",
       "starterFiles": [
         {
           "path": "community-project/README.md",
-          "content": "# Community Project\n\nShared schedules and contact notes.\n",
+          "content": "# Community Project\n\nShared community activities and updates.\n",
           "language": "markdown",
           "isEntry": true,
           "entry": true
@@ -549,14 +535,14 @@
         },
         {
           "path": "community-project/schedule.txt",
-          "content": "Community schedule\n\nSaturday cleanup: 9:30 AM\n",
+          "content": "Community events\n\nSaturday cleanup: 9:30 AM\n",
           "language": "text"
         }
       ],
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^git\\s+diff\\s+--\\s+contacts\\.txt$",
+            "pattern": "^git\\s+diff(?!.*\\s(?:--staged|--cached)(?:\\s|$))(?=.*\\s(?:--\\s+)?contacts\\.txt(?:\\s|$)).*$",
             "message": "@:topics.git-foundations.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.tryIt.try_inspect_unstaged_changes_with_diff_sketch3.terminalExpectations.requiredCommands.0.message"
           }
         ],
@@ -570,11 +556,11 @@
       "workspace": {
         "language": "bash",
         "entryFilePath": "community-project/README.md",
-        "starterCode": "# Community Project\n\nShared schedules and contact notes.\n",
+        "starterCode": "# Community Project\n\nShared community activities and updates.\n",
         "starterFiles": [
           {
             "path": "community-project/README.md",
-            "content": "# Community Project\n\nShared schedules and contact notes.\n",
+            "content": "# Community Project\n\nShared community activities and updates.\n",
             "language": "markdown",
             "isEntry": true,
             "entry": true
@@ -586,20 +572,20 @@
           },
           {
             "path": "community-project/schedule.txt",
-            "content": "Community schedule\n\nSaturday cleanup: 9:30 AM\n",
+            "content": "Community events\n\nSaturday cleanup: 9:30 AM\n",
             "language": "text"
           }
         ],
         "fixtureFiles": [
           {
             "path": ".zoeskoul/setup.sh",
-            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C community-project commit -q -m 'Start community project'\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0100\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C community-project commit -q -m 'Add community contacts'\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0100\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0100\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 9:30 AM\n' > community-project/schedule.txt\n",
+            "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared community activities and updates.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community events\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C community-project commit -q -m 'Start community project'\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared community activities and updates.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0100\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Community events\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C community-project commit -q -m 'Add community contacts'\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared community activities and updates.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0100\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Community events\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared community activities and updates.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0100\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Community events\n\nSaturday cleanup: 9:30 AM\n' > community-project/schedule.txt\n",
             "language": "bash",
             "readOnly": true
           },
           {
             "path": "community-project/README.md",
-            "content": "# Community Project\n\nShared schedules and contact notes.\n",
+            "content": "# Community Project\n\nShared community activities and updates.\n",
             "language": "markdown"
           },
           {
@@ -609,7 +595,7 @@
           },
           {
             "path": "community-project/schedule.txt",
-            "content": "Community schedule\n\nSaturday cleanup: 9:30 AM\n",
+            "content": "Community events\n\nSaturday cleanup: 9:30 AM\n",
             "language": "text"
           }
         ]
@@ -621,7 +607,7 @@
         "instructions": "@:topics.git-foundations.git-foundations-module-2-meaningful-history.inspect-unstaged-changes-with-diff.tryIt.try_inspect_unstaged_changes_with_diff_sketch3.instructions"
       },
       "hiddenShellCheck": {
-        "script": "set -eu\nrepo=community-project\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" branch --show-current)\" = main ] || fail \"The repository is on the wrong branch.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = 2 ] || fail \"The repository has the wrong number of commits.\"\n[ \"$(git -C \"$repo\" config --local --get user.name)\" = 'ZoeSkoul Learner' ] || fail \"The repository-local author name is incorrect.\"\n[ \"$(git -C \"$repo\" config --local --get user.email)\" = learner@zoeskoul.local ] || fail \"The repository-local author email is incorrect.\"\nactual_status=$(git -C \"$repo\" status --porcelain=v1 --untracked-files=all)\n[ \"$actual_status\" = ' M contacts.txt\n M schedule.txt' ] || fail \"The staged, unstaged, or untracked state is not correct yet.\"\nactual_tracked=$(git -C \"$repo\" ls-files)\n[ \"$actual_tracked\" = 'README.md\ncontacts.txt\nschedule.txt' ] || fail \"The tracked file set is not correct yet.\"\nactual_subjects=$(git -C \"$repo\" log --format=%s --reverse)\n[ \"$actual_subjects\" = 'Start community project\nAdd community contacts' ] || fail \"The commit history does not match the required project story.\"\n[ -f \"$repo/README.md\" ] || fail \"The expected file README.md is missing.\"\n[ \"$(cat \"$repo/README.md\")\" = '# Community Project\n\nShared schedules and contact notes.' ] || fail \"The content of README.md is not correct yet.\"\n[ -f \"$repo/contacts.txt\" ] || fail \"The expected file contacts.txt is missing.\"\n[ \"$(cat \"$repo/contacts.txt\")\" = 'Community contacts\n\nHelp desk: 555-0130' ] || fail \"The content of contacts.txt is not correct yet.\"\n[ -f \"$repo/schedule.txt\" ] || fail \"The expected file schedule.txt is missing.\"\n[ \"$(cat \"$repo/schedule.txt\")\" = 'Community schedule\n\nSaturday cleanup: 9:30 AM' ] || fail \"The content of schedule.txt is not correct yet.\"",
+        "script": "set -eu\nrepo=community-project\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail \"The expected Git repository is missing.\"\n[ \"$(git -C \"$repo\" branch --show-current)\" = main ] || fail \"The repository is on the wrong branch.\"\n[ \"$(git -C \"$repo\" rev-list --count HEAD 2>/dev/null || printf 0)\" = 2 ] || fail \"The repository has the wrong number of commits.\"\n[ \"$(git -C \"$repo\" config --local --get user.name)\" = 'ZoeSkoul Learner' ] || fail \"The repository-local author name is incorrect.\"\n[ \"$(git -C \"$repo\" config --local --get user.email)\" = learner@zoeskoul.local ] || fail \"The repository-local author email is incorrect.\"\nactual_status=$(git -C \"$repo\" status --porcelain=v1 --untracked-files=all)\n[ \"$actual_status\" = ' M contacts.txt\n M schedule.txt' ] || fail \"The staged, unstaged, or untracked state is not correct yet.\"\nactual_tracked=$(git -C \"$repo\" ls-files)\n[ \"$actual_tracked\" = 'README.md\ncontacts.txt\nschedule.txt' ] || fail \"The tracked file set is not correct yet.\"\nactual_subjects=$(git -C \"$repo\" log --format=%s --reverse)\n[ \"$actual_subjects\" = 'Start community project\nAdd community contacts' ] || fail \"The commit history does not match the required project story.\"\n[ -f \"$repo/README.md\" ] || fail \"The expected file README.md is missing.\"\n[ \"$(cat \"$repo/README.md\")\" = '# Community Project\n\nShared community activities and updates.' ] || fail \"The content of README.md is not correct yet.\"\n[ -f \"$repo/contacts.txt\" ] || fail \"The expected file contacts.txt is missing.\"\n[ \"$(cat \"$repo/contacts.txt\")\" = 'Community contacts\n\nHelp desk: 555-0130' ] || fail \"The content of contacts.txt is not correct yet.\"\n[ -f \"$repo/schedule.txt\" ] || fail \"The expected file schedule.txt is missing.\"\n[ \"$(cat \"$repo/schedule.txt\")\" = 'Community events\n\nSaturday cleanup: 9:30 AM' ] || fail \"The content of schedule.txt is not correct yet.\"",
         "timeoutMs": 15000
       },
       "ideConfig": {
@@ -677,13 +663,13 @@
       "fixtureFiles": [
         {
           "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C community-project commit -q -m 'Start community project'\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0100\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C community-project commit -q -m 'Add community contacts'\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0100\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared schedules and contact notes.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0100\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Community schedule\n\nSaturday cleanup: 9:30 AM\n' > community-project/schedule.txt\n",
+          "content": "#!/usr/bin/env bash\nset -eu\nrm -rf -- community-project\nmkdir -p -- community-project\ngit -C community-project init -q -b main\ngit -C community-project config --local user.name 'ZoeSkoul Learner'\ngit -C community-project config --local user.email learner@zoeskoul.local\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared community activities and updates.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community events\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-01T12:00:00Z GIT_COMMITTER_DATE=2026-01-01T12:00:00Z git -C community-project commit -q -m 'Start community project'\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared community activities and updates.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0100\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Community events\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nGIT_AUTHOR_DATE=2026-01-02T12:00:00Z GIT_COMMITTER_DATE=2026-01-02T12:00:00Z git -C community-project commit -q -m 'Add community contacts'\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared community activities and updates.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0100\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Community events\n\nSaturday cleanup: 10:00 AM\n' > community-project/schedule.txt\ngit -C community-project add -A\nfind community-project -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +\nmkdir -p -- community-project\nprintf %s '# Community Project\n\nShared community activities and updates.\n' > community-project/README.md\nmkdir -p -- community-project\nprintf %s 'Community contacts\n\nHelp desk: 555-0100\n' > community-project/contacts.txt\nmkdir -p -- community-project\nprintf %s 'Community events\n\nSaturday cleanup: 9:30 AM\n' > community-project/schedule.txt\n",
           "language": "bash",
           "readOnly": true
         },
         {
           "path": "community-project/README.md",
-          "content": "# Community Project\n\nShared schedules and contact notes.\n",
+          "content": "# Community Project\n\nShared community activities and updates.\n",
           "language": "markdown"
         },
         {
@@ -693,7 +679,7 @@
         },
         {
           "path": "community-project/schedule.txt",
-          "content": "Community schedule\n\nSaturday cleanup: 9:30 AM\n",
+          "content": "Community events\n\nSaturday cleanup: 9:30 AM\n",
           "language": "text"
         }
       ],

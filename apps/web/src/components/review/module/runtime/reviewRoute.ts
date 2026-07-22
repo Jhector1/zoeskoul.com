@@ -462,7 +462,10 @@ export function buildReviewExerciseRouteTarget(args: {
         matchedStep && matchedLegacyAlias
             ? exerciseToken || rawExerciseId
             : canonicalExerciseId;
-    const routeSlug = cleanSegment(exerciseToken || rawExerciseId, "exercise");
+    const routeSlug =
+        matchedStep && !matchedLegacyAlias
+            ? matchedStep.routeSlug
+            : cleanSegment(exerciseToken || rawExerciseId, "exercise");
 
     return {
         kind: "exercise" as const,

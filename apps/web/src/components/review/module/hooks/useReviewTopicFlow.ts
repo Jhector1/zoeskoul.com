@@ -1,6 +1,7 @@
 import { useCallback, useMemo } from "react";
 import type { ReviewModule } from "@/lib/subjects/types";
 import { isTopicComplete } from "../utils";
+import { isModuleTopicUnlocked } from "../runtime/courseProgressionPolicy";
 
 type Args = {
     topics: ReviewModule["topics"] | undefined;
@@ -32,16 +33,21 @@ export function useReviewTopicFlow({
 
     const topicUnlocked = useCallback(
         (tid: string) => {
-            if (unlockAll) return true;
-
             const idx = safeTopics.findIndex((x) => x.id === tid);
-            if (idx <= 0) return true;
+            if (idx < 0) return false;
 
-            const prev = safeTopics[idx - 1];
-            const prevCards = Array.isArray(prev.cards) ? prev.cards : [];
-            const prevState = progress?.topics?.[prev.id];
+            const prev = idx > 0 ? safeTopics[idx - 1] : null;
+            const prevCards = Array.isArray(prev?.cards) ? prev.cards : [];
+            const prevState = prev ? progress?.topics?.[prev.id] : null;
+            const previousTopicComplete = prev
+                ? isTopicComplete(prevCards, prevState, prev.id)
+                : false;
 
-            return isTopicComplete(prevCards, prevState, prev.id);
+            return isModuleTopicUnlocked({
+                topicIndex: idx,
+                previousTopicComplete,
+                unlockAll,
+            });
         },
         [safeTopics, progress, unlockAll],
     );

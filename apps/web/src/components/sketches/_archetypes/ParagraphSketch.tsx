@@ -5,12 +5,19 @@ import RichMarkdownContent from "@/components/sketches/shared/RichMarkdownConten
 import {ParagraphSpec} from "@/components/sketches/subjects/specTypes";
 import MathMarkdown from "@/components/markdown/MathMarkdown";
 
-export function ParagraphSketch({ spec }: { spec: ParagraphSpec }) {
+export function ParagraphSketch({
+    spec,
+    showTitle = true,
+}: {
+    spec: ParagraphSpec;
+    showTitle?: boolean;
+}) {
     const md = (spec.bodyMarkdown ?? spec.text ?? "").trim();
+    const hasVisibleTitle = Boolean(showTitle && spec.title);
 
     return (
         <div>
-            {spec.title ? (
+            {hasVisibleTitle ? (
                 <div className="text-sm font-extrabold text-neutral-900 dark:text-white">
                     {spec.title}
                 </div>
@@ -19,7 +26,7 @@ export function ParagraphSketch({ spec }: { spec: ParagraphSpec }) {
             <RichMarkdownContent
                 content={md}
                 images={spec.images}
-                className="mt-2"
+                className={hasVisibleTitle ? "mt-2" : undefined}
                 renderMarkdown={(content, key) => (
                     <MathMarkdown key={key} content={content} />
                 )}

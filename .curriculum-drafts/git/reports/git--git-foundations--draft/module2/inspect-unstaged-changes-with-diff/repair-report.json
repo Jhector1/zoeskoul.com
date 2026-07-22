@@ -2,32 +2,39 @@
   "topicId": "inspect-unstaged-changes-with-diff",
   "repairs": [
     {
-      "code": "GIT_CODE_INPUT_WORKSPACE_REBUILT",
+      "code": "GIT_MULTILINE_EXAMPLE_EXPLANATION_ADDED",
+      "category": "other",
+      "severity": "low",
+      "field": "sketchBlocks.sketch-0.bodyMarkdown",
+      "message": "Added a step-by-step explanation for the multi-line Git example in \"sketch-0\"."
+    },
+    {
+      "code": "GIT_TRY_IT_KIND_PROMOTED",
       "category": "other",
       "severity": "low",
       "field": "quizDraft.try-inspect-unstaged-changes-with-diff-sketch0",
-      "message": "Rebuilt generated Git exercise \"try-inspect-unstaged-changes-with-diff-sketch0\" as a self-contained terminal workspace with deterministic setup and grading evidence."
+      "message": "Converted generated Try It \"try-inspect-unstaged-changes-with-diff-sketch0\" into the Git code_input required by plannedExerciseCounts."
     },
     {
-      "code": "GIT_CODE_INPUT_WORKSPACE_REBUILT",
+      "code": "GIT_TRY_IT_KIND_PROMOTED",
       "category": "other",
       "severity": "low",
       "field": "quizDraft.try-inspect-unstaged-changes-with-diff-sketch1",
-      "message": "Rebuilt generated Git exercise \"try-inspect-unstaged-changes-with-diff-sketch1\" as a self-contained terminal workspace with deterministic setup and grading evidence."
+      "message": "Converted generated Try It \"try-inspect-unstaged-changes-with-diff-sketch1\" into the Git code_input required by plannedExerciseCounts."
     },
     {
-      "code": "GIT_CODE_INPUT_WORKSPACE_REBUILT",
+      "code": "GIT_TRY_IT_KIND_PROMOTED",
       "category": "other",
       "severity": "low",
       "field": "quizDraft.try-inspect-unstaged-changes-with-diff-sketch2",
-      "message": "Rebuilt generated Git exercise \"try-inspect-unstaged-changes-with-diff-sketch2\" as a self-contained terminal workspace with deterministic setup and grading evidence."
+      "message": "Converted generated Try It \"try-inspect-unstaged-changes-with-diff-sketch2\" into the Git code_input required by plannedExerciseCounts."
     },
     {
-      "code": "GIT_CODE_INPUT_WORKSPACE_REBUILT",
+      "code": "GIT_TRY_IT_KIND_PROMOTED",
       "category": "other",
       "severity": "low",
       "field": "quizDraft.try-inspect-unstaged-changes-with-diff-sketch3",
-      "message": "Rebuilt generated Git exercise \"try-inspect-unstaged-changes-with-diff-sketch3\" as a self-contained terminal workspace with deterministic setup and grading evidence."
+      "message": "Converted generated Try It \"try-inspect-unstaged-changes-with-diff-sketch3\" into the Git code_input required by plannedExerciseCounts."
     }
   ]
 }

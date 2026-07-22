@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { keepEditorSelection } from "./editorSelection";
 
 type JsonObject = Record<string, unknown>;
 
@@ -17,6 +18,8 @@ type SketchRow = {
 type SketchesEditorProps = {
   bundleJson: unknown;
   messagesJson: unknown | null;
+  selectedSketchId: string | null;
+  onSelectSketch: (sketchId: string | null) => void;
   onApplySketchJson: (sketchId: string, sketchJson: unknown) => void;
   onSaveMessageKey: (keyPath: string, value: string) => void | Promise<void>;
 };
@@ -104,12 +107,19 @@ function messageValue(messagesJson: unknown | null, keyPath: string | null) {
   return typeof value === "string" ? value : "";
 }
 
-export default function SketchesEditor({ bundleJson, messagesJson, onApplySketchJson, onSaveMessageKey }: SketchesEditorProps) {
+export default function SketchesEditor({
+  bundleJson,
+  messagesJson,
+  selectedSketchId,
+  onSelectSketch,
+  onApplySketchJson,
+  onSaveMessageKey,
+}: SketchesEditorProps) {
   const sketches = useMemo(() => getSketchRows(bundleJson), [bundleJson]);
-  const [selectedSketchId, setSelectedSketchId] = useState<string | null>(null);
+  const resolvedSketchId = keepEditorSelection(selectedSketchId, sketches.map((sketch) => sketch.id));
   const selectedSketch = useMemo(
-    () => sketches.find((sketch) => sketch.id === selectedSketchId) ?? sketches[0] ?? null,
-    [selectedSketchId, sketches],
+    () => sketches.find((sketch) => sketch.id === resolvedSketchId) ?? null,
+    [resolvedSketchId, sketches],
   );
 
   const [sketchJsonText, setSketchJsonText] = useState("{}");
@@ -119,8 +129,11 @@ export default function SketchesEditor({ bundleJson, messagesJson, onApplySketch
   const [localError, setLocalError] = useState<string | null>(null);
 
   useEffect(() => {
+    if (resolvedSketchId !== selectedSketchId) onSelectSketch(resolvedSketchId);
+  }, [onSelectSketch, resolvedSketchId, selectedSketchId]);
+
+  useEffect(() => {
     if (!selectedSketch) {
-      setSelectedSketchId(null);
       setSketchJsonText("{}");
       setTitleText("");
       setBodyText("");
@@ -128,7 +141,6 @@ export default function SketchesEditor({ bundleJson, messagesJson, onApplySketch
       return;
     }
 
-    setSelectedSketchId(selectedSketch.id);
     setSketchJsonText(jsonPretty(selectedSketch.raw));
     setTitleText(messageValue(messagesJson, selectedSketch.titleKey));
     setBodyText(messageValue(messagesJson, selectedSketch.bodyKey));
@@ -192,7 +204,7 @@ export default function SketchesEditor({ bundleJson, messagesJson, onApplySketch
                 <tr
                   key={sketch.id}
                   className={`cursor-pointer border-t border-slate-100 hover:bg-slate-50 ${selectedSketch?.id === sketch.id ? "bg-emerald-50" : ""}`}
-                  onClick={() => setSelectedSketchId(sketch.id)}
+                  onClick={() => onSelectSketch(sketch.id)}
                 >
                   <td className="px-4 py-2 font-mono text-xs font-semibold">{sketch.id}</td>
                   <td className="px-4 py-2">{sketch.archetype ?? "—"}</td>
@@ -212,7 +224,7 @@ export default function SketchesEditor({ bundleJson, messagesJson, onApplySketch
             <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200 px-4 py-3">
               <div>
                 <div className="font-semibold">Sketch content messages</div>
-                <p className="mt-1 text-xs text-slate-500">These saves update messages JSON directly and create backups.</p>
+                <p className="mt-1 text-xs text-slate-500">These saves update the current messages JSON directly.</p>
               </div>
               {localError ? <span className="rounded-full bg-red-50 px-2 py-1 text-xs text-red-700">{localError}</span> : null}
             </div>

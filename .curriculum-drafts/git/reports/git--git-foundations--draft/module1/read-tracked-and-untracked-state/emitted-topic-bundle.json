@@ -1,10 +1,10 @@
 {
   "topicId": "read-tracked-and-untracked-state",
-  "subjectSlug": "git",
+  "subjectSlug": "git--git-foundations--draft",
   "moduleSlug": "git-foundations-module-1-start-tracking",
-  "sectionSlug": "git-foundations-section-1-repository-basics",
+  "sectionSlug": "git--git-foundations--draft-git-foundations-section-1-repository-basics",
   "prefix": "git_foundations_module_1",
-  "minutes": 18,
+  "minutes": 22,
   "runtimeDefaults": {
     "kind": "code",
     "language": "bash",
@@ -16,28 +16,43 @@
   },
   "serviceDefaults": {
     "runnerBackend": "pty",
-    "layoutMode": "terminal_workspace",
     "requires": {
       "files": true,
       "multiFile": true,
       "terminal": true
+    },
+    "preset": "runner",
+    "layoutMode": "default",
+    "terminalBootstrap": {
+      "gitSafeDirectories": [
+        "/workspace/*"
+      ],
+      "setupScriptPath": ".zoeskoul/setup.sh"
+    }
+  },
+  "tools": {
+    "defaultSurface": "results",
+    "compactDefaultSurface": "results",
+    "runnerPane": {
+      "defaultTab": "terminal",
+      "compactDefaultTab": "terminal"
     }
   },
   "topic": {
-    "labelKey": "topics.git.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.label",
-    "summaryKey": "topics.git.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.summary"
+    "labelKey": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.label",
+    "summaryKey": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.summary"
   },
   "cards": [
     {
       "id": "sketch0",
       "kind": "sketch",
-      "titleKey": "topics.git.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.cards.sketch0.title",
+      "titleKey": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.cards.sketch0.title",
       "sketchId": "sketch0",
       "height": 420,
       "tryIt": {
         "id": "try-read-tracked-and-untracked-state-sketch0",
-        "titleKey": "topics.git.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch0.title",
-        "promptKey": "topics.git.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch0.prompt",
+        "titleKey": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch0.title",
+        "promptKey": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch0.prompt",
         "exerciseKey": "try-read-tracked-and-untracked-state-sketch0",
         "difficulty": "easy",
         "preferKind": "code_input",
@@ -50,13 +65,13 @@
     {
       "id": "sketch1",
       "kind": "sketch",
-      "titleKey": "topics.git.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.cards.sketch1.title",
+      "titleKey": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.cards.sketch1.title",
       "sketchId": "sketch1",
       "height": 420,
       "tryIt": {
         "id": "try-read-tracked-and-untracked-state-sketch1",
-        "titleKey": "topics.git.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch1.title",
-        "promptKey": "topics.git.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch1.prompt",
+        "titleKey": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch1.title",
+        "promptKey": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch1.prompt",
         "exerciseKey": "try-read-tracked-and-untracked-state-sketch1",
         "difficulty": "easy",
         "preferKind": "code_input",
@@ -69,14 +84,33 @@
     {
       "id": "sketch2",
       "kind": "sketch",
-      "titleKey": "topics.git.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.cards.sketch2.title",
+      "titleKey": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.cards.sketch2.title",
       "sketchId": "sketch2",
       "height": 420,
       "tryIt": {
         "id": "try-read-tracked-and-untracked-state-sketch2",
-        "titleKey": "topics.git.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch2.title",
-        "promptKey": "topics.git.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch2.prompt",
+        "titleKey": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch2.title",
+        "promptKey": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch2.prompt",
         "exerciseKey": "try-read-tracked-and-untracked-state-sketch2",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch3",
+      "kind": "sketch",
+      "titleKey": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.cards.sketch3.title",
+      "sketchId": "sketch3",
+      "height": 420,
+      "tryIt": {
+        "id": "try-read-tracked-and-untracked-state-sketch3",
+        "titleKey": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch3.title",
+        "promptKey": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch3.prompt",
+        "exerciseKey": "try-read-tracked-and-untracked-state-sketch3",
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -88,12 +122,12 @@
     {
       "id": "quiz",
       "kind": "quiz",
-      "titleKey": "topics.git.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.cards.quiz.title",
+      "titleKey": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.cards.quiz.title",
       "quiz": {
         "difficulty": "easy",
         "n": 4,
         "min": 4,
-        "max": 4,
+        "max": 6,
         "selectionMode": "random",
         "allowReveal": true,
         "preferKind": null,
@@ -105,29 +139,35 @@
     {
       "id": "sketch0",
       "archetype": "paragraph",
-      "titleKey": "sketches.git.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.sketch0.title",
-      "bodyKey": "sketches.git.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.sketch0.bodyMarkdown"
+      "titleKey": "sketches.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.sketch0.title",
+      "bodyKey": "sketches.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.sketch0.bodyMarkdown"
     },
     {
       "id": "sketch1",
       "archetype": "paragraph",
-      "titleKey": "sketches.git.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.sketch1.title",
-      "bodyKey": "sketches.git.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.sketch1.bodyMarkdown"
+      "titleKey": "sketches.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.sketch1.title",
+      "bodyKey": "sketches.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.sketch1.bodyMarkdown"
     },
     {
       "id": "sketch2",
       "archetype": "paragraph",
-      "titleKey": "sketches.git.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.sketch2.title",
-      "bodyKey": "sketches.git.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.sketch2.bodyMarkdown"
+      "titleKey": "sketches.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.sketch2.title",
+      "bodyKey": "sketches.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.sketch2.bodyMarkdown"
+    },
+    {
+      "id": "sketch3",
+      "archetype": "paragraph",
+      "titleKey": "sketches.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.sketch3.title",
+      "bodyKey": "sketches.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.sketch3.bodyMarkdown"
     }
   ],
   "exercises": [
     {
-      "id": "single-choice-2",
+      "id": "q-single-1",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.git.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.practice.single-choice-2",
+      "messageBase": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.practice.q-single-1",
       "optionIds": [
         "a",
         "b",
@@ -136,15 +176,32 @@
       ],
       "expected": {
         "kind": "single_choice",
-        "optionId": "c"
+        "optionId": "b"
       }
     },
     {
-      "id": "multi-choice-1",
+      "id": "q-single-2",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.practice.q-single-2",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "q-multi-1",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.git.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.practice.multi-choice-1",
+      "messageBase": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.practice.q-multi-1",
       "optionIds": [
         "a",
         "b",
@@ -155,33 +212,55 @@
         "kind": "multi_choice",
         "optionIds": [
           "a",
-          "b",
-          "c"
+          "c",
+          "d"
         ]
       }
     },
     {
-      "id": "fill-blank-choice-1",
-      "kind": "fill_blank_choice",
+      "id": "q-drag-1",
+      "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.git.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.practice.fill-blank-choice-1",
-      "choiceCount": 4,
+      "messageBase": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.practice.q-drag-1",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
       "expected": {
-        "kind": "fill_blank_choice",
-        "value": "M"
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
       }
     },
     {
-      "id": "fill-blank-choice-2",
+      "id": "q-fill-1",
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.git.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.practice.fill-blank-choice-2",
+      "messageBase": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.practice.q-fill-1",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "??"
+        "value": "git status"
+      }
+    },
+    {
+      "id": "q-fill-2",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.practice.q-fill-2",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "README.md"
       }
     },
     {
@@ -189,74 +268,35 @@
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.git.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch0",
+      "messageBase": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch0",
       "language": "bash",
-      "starterCode": "@:topics.git.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch0.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.sh",
-          "content": "@:topics.git.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch0.starterCode",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        },
-        {
-          "path": ".zoeskoul/setup.sh",
-          "content": "@:topics.git.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch0.starterFiles.zoeskoul_setup_sh.content",
-          "language": "bash",
-          "readOnly": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "main.sh",
-          "content": "bash .zoeskoul/setup.sh\ngit status\n",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 1\\n' > tracked.txt\n",
-          "language": "bash",
-          "readOnly": true
-        }
-      ],
+      "starterCode": "",
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^git\\s+status\\s+(?:\\-\\-short|\\-s)$",
-            "message": "@:topics.git.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch0.terminalExpectations.requiredCommands.0.message"
+            "pattern": "^git\\s+add\\s+practice\\.txt$"
           }
         ],
         "forbiddenCommands": [
           {
             "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
-            "message": "@:topics.git.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch0.terminalExpectations.forbiddenCommands.0.message"
+            "message": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch0.terminalExpectations.forbiddenCommands.0.message"
           }
         ]
       },
       "hiddenShellCheck": {
-        "script": "set -eu\nrepo='.'\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ncommand -v git >/dev/null 2>&1 || fail \"Git is not available in this workspace.\"\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail 'Initialize a Git repository in ..'\nactual_branch=$(git -C \"$repo\" branch --show-current 2>/dev/null || true)\n[ \"$actual_branch\" = 'main' ] || fail 'Switch to the main branch.'",
+        "script": "set -eu\nrepo='community-site'\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ncommand -v git >/dev/null 2>&1 || fail \"Git is not available in this workspace.\"\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail 'Initialize a Git repository in community-site.'\nactual_branch=$(git -C \"$repo\" branch --show-current 2>/dev/null || true)\n[ \"$actual_branch\" = 'main' ] || fail 'Switch to the main branch.'",
         "timeoutMs": 15000
       },
       "workspace": {
         "language": "bash",
-        "entryFilePath": "main.sh",
-        "starterCode": "@:topics.git.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch0.starterCode",
-        "starterFiles": [
-          {
-            "path": "main.sh",
-            "content": "@:topics.git.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch0.starterCode",
-            "language": "bash",
-            "isEntry": true,
-            "entry": true,
-            "readOnly": false
-          },
+        "entryFilePath": "README.md",
+        "starterCode": "",
+        "starterFiles": [],
+        "fixtureFiles": [
           {
             "path": ".zoeskoul/setup.sh",
-            "content": "@:topics.git.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch0.starterFiles.zoeskoul_setup_sh.content",
+            "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch0.starterFiles.zoeskoul_setup_sh.content",
             "language": "bash",
             "readOnly": true
           }
@@ -266,82 +306,106 @@
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "@:topics.git.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch0.instructions"
-      }
+        "instructions": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch0.instructions"
+      },
+      "starterFiles": [],
+      "serviceOverrides": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ],
+          "setupScriptPath": ".zoeskoul/setup.sh",
+          "workspaceStateKey": "git-state-v1-tyexox"
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/community-site",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        }
+      },
+      "ideConfig": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ],
+          "setupScriptPath": ".zoeskoul/setup.sh",
+          "workspaceStateKey": "git-state-v1-tyexox"
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/community-site",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        }
+      },
+      "fixtureFiles": [
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch0.starterFiles.zoeskoul_setup_sh.content",
+          "language": "bash",
+          "readOnly": true
+        }
+      ]
     },
     {
       "id": "try-read-tracked-and-untracked-state-sketch1",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.git.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch1",
+      "messageBase": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch1",
       "language": "bash",
-      "starterCode": "@:topics.git.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch1.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.sh",
-          "content": "@:topics.git.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch1.starterCode",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        },
-        {
-          "path": ".zoeskoul/setup.sh",
-          "content": "@:topics.git.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch1.starterFiles.zoeskoul_setup_sh.content",
-          "language": "bash",
-          "readOnly": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "main.sh",
-          "content": "bash .zoeskoul/setup.sh\ngit status --short\n",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 2\\n' > fileA.txt\n",
-          "language": "bash",
-          "readOnly": true
-        }
-      ],
+      "starterCode": "",
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^git\\s+status\\s+(?:\\-\\-short|\\-s)$",
-            "message": "@:topics.git.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch1.terminalExpectations.requiredCommands.0.message"
+            "pattern": "^git\\s+add\\s+practice\\.txt$"
           }
         ],
         "forbiddenCommands": [
           {
             "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
-            "message": "@:topics.git.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch1.terminalExpectations.forbiddenCommands.0.message"
+            "message": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch1.terminalExpectations.forbiddenCommands.0.message"
           }
         ]
       },
       "hiddenShellCheck": {
-        "script": "set -eu\nrepo='.'\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ncommand -v git >/dev/null 2>&1 || fail \"Git is not available in this workspace.\"\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail 'Initialize a Git repository in ..'\nactual_branch=$(git -C \"$repo\" branch --show-current 2>/dev/null || true)\n[ \"$actual_branch\" = 'main' ] || fail 'Switch to the main branch.'",
+        "script": "set -eu\nrepo='community-site'\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ncommand -v git >/dev/null 2>&1 || fail \"Git is not available in this workspace.\"\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail 'Initialize a Git repository in community-site.'\nactual_branch=$(git -C \"$repo\" branch --show-current 2>/dev/null || true)\n[ \"$actual_branch\" = 'main' ] || fail 'Switch to the main branch.'",
         "timeoutMs": 15000
       },
       "workspace": {
         "language": "bash",
-        "entryFilePath": "main.sh",
-        "starterCode": "@:topics.git.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch1.starterCode",
-        "starterFiles": [
-          {
-            "path": "main.sh",
-            "content": "@:topics.git.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch1.starterCode",
-            "language": "bash",
-            "isEntry": true,
-            "entry": true,
-            "readOnly": false
-          },
+        "entryFilePath": "README.md",
+        "starterCode": "",
+        "starterFiles": [],
+        "fixtureFiles": [
           {
             "path": ".zoeskoul/setup.sh",
-            "content": "@:topics.git.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch1.starterFiles.zoeskoul_setup_sh.content",
+            "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch1.starterFiles.zoeskoul_setup_sh.content",
             "language": "bash",
             "readOnly": true
           }
@@ -351,82 +415,106 @@
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "@:topics.git.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch1.instructions"
-      }
+        "instructions": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch1.instructions"
+      },
+      "starterFiles": [],
+      "serviceOverrides": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ],
+          "setupScriptPath": ".zoeskoul/setup.sh",
+          "workspaceStateKey": "git-state-v1-tyexox"
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/community-site",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        }
+      },
+      "ideConfig": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ],
+          "setupScriptPath": ".zoeskoul/setup.sh",
+          "workspaceStateKey": "git-state-v1-tyexox"
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/community-site",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        }
+      },
+      "fixtureFiles": [
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch1.starterFiles.zoeskoul_setup_sh.content",
+          "language": "bash",
+          "readOnly": true
+        }
+      ]
     },
     {
       "id": "try-read-tracked-and-untracked-state-sketch2",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.git.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch2",
+      "messageBase": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch2",
       "language": "bash",
-      "starterCode": "@:topics.git.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch2.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.sh",
-          "content": "@:topics.git.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch2.starterCode",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        },
-        {
-          "path": ".zoeskoul/setup.sh",
-          "content": "@:topics.git.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch2.starterFiles.zoeskoul_setup_sh.content",
-          "language": "bash",
-          "readOnly": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "main.sh",
-          "content": "bash .zoeskoul/setup.sh\ngit status\n",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": ".zoeskoul/setup.sh",
-          "content": "#!/usr/bin/env bash\nset -eu\ngit init -q -b main\ngit config user.name \"ZoeSkoul Learner\"\ngit config user.email \"learner@zoeskoul.local\"\nprintf '.zoeskoul/\nmain.sh\n' >> .git/info/exclude\nprintf 'Git practice file 3\\n' > example.txt\n",
-          "language": "bash",
-          "readOnly": true
-        }
-      ],
+      "starterCode": "",
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^git\\s+status\\s+(?:\\-\\-short|\\-s)$",
-            "message": "@:topics.git.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch2.terminalExpectations.requiredCommands.0.message"
+            "pattern": "^git\\s+restore\\s+--staged\\s+practice\\.txt$"
           }
         ],
         "forbiddenCommands": [
           {
             "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
-            "message": "@:topics.git.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch2.terminalExpectations.forbiddenCommands.0.message"
+            "message": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch2.terminalExpectations.forbiddenCommands.0.message"
           }
         ]
       },
       "hiddenShellCheck": {
-        "script": "set -eu\nrepo='.'\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ncommand -v git >/dev/null 2>&1 || fail \"Git is not available in this workspace.\"\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail 'Initialize a Git repository in ..'\nactual_branch=$(git -C \"$repo\" branch --show-current 2>/dev/null || true)\n[ \"$actual_branch\" = 'main' ] || fail 'Switch to the main branch.'",
+        "script": "set -eu\nrepo='community-site'\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ncommand -v git >/dev/null 2>&1 || fail \"Git is not available in this workspace.\"\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail 'Initialize a Git repository in community-site.'\nactual_branch=$(git -C \"$repo\" branch --show-current 2>/dev/null || true)\n[ \"$actual_branch\" = 'main' ] || fail 'Switch to the main branch.'",
         "timeoutMs": 15000
       },
       "workspace": {
         "language": "bash",
-        "entryFilePath": "main.sh",
-        "starterCode": "@:topics.git.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch2.starterCode",
-        "starterFiles": [
-          {
-            "path": "main.sh",
-            "content": "@:topics.git.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch2.starterCode",
-            "language": "bash",
-            "isEntry": true,
-            "entry": true,
-            "readOnly": false
-          },
+        "entryFilePath": "README.md",
+        "starterCode": "",
+        "starterFiles": [],
+        "fixtureFiles": [
           {
             "path": ".zoeskoul/setup.sh",
-            "content": "@:topics.git.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch2.starterFiles.zoeskoul_setup_sh.content",
+            "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch2.starterFiles.zoeskoul_setup_sh.content",
             "language": "bash",
             "readOnly": true
           }
@@ -436,15 +524,180 @@
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "@:topics.git.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch2.instructions"
-      }
+        "instructions": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch2.instructions"
+      },
+      "starterFiles": [],
+      "serviceOverrides": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ],
+          "setupScriptPath": ".zoeskoul/setup.sh",
+          "workspaceStateKey": "git-state-v1-1nm1djd"
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/community-site",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        }
+      },
+      "ideConfig": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ],
+          "setupScriptPath": ".zoeskoul/setup.sh",
+          "workspaceStateKey": "git-state-v1-1nm1djd"
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/community-site",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        }
+      },
+      "fixtureFiles": [
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch2.starterFiles.zoeskoul_setup_sh.content",
+          "language": "bash",
+          "readOnly": true
+        }
+      ]
+    },
+    {
+      "id": "try-read-tracked-and-untracked-state-sketch3",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch3",
+      "language": "bash",
+      "starterCode": "",
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^git\\s+diff$"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "git\\s+reset\\s+--hard|git\\s+push\\s+--force(?:-with-lease)?",
+            "message": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch3.terminalExpectations.forbiddenCommands.0.message"
+          }
+        ]
+      },
+      "hiddenShellCheck": {
+        "script": "set -eu\nrepo='community-site'\nfail() { printf \"%s\\n\" \"$1\" >&2; exit 1; }\ncommand -v git >/dev/null 2>&1 || fail \"Git is not available in this workspace.\"\ngit -C \"$repo\" rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail 'Initialize a Git repository in community-site.'\nactual_branch=$(git -C \"$repo\" branch --show-current 2>/dev/null || true)\n[ \"$actual_branch\" = 'main' ] || fail 'Switch to the main branch.'",
+        "timeoutMs": 15000
+      },
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "README.md",
+        "starterCode": "",
+        "starterFiles": [],
+        "fixtureFiles": [
+          {
+            "path": ".zoeskoul/setup.sh",
+            "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch3.starterFiles.zoeskoul_setup_sh.content",
+            "language": "bash",
+            "readOnly": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch3.instructions"
+      },
+      "starterFiles": [],
+      "serviceOverrides": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ],
+          "setupScriptPath": ".zoeskoul/setup.sh",
+          "workspaceStateKey": "git-state-v1-16mo8xe"
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/community-site",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        }
+      },
+      "ideConfig": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ],
+          "setupScriptPath": ".zoeskoul/setup.sh",
+          "workspaceStateKey": "git-state-v1-16mo8xe"
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/community-site",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        }
+      },
+      "fixtureFiles": [
+        {
+          "path": ".zoeskoul/setup.sh",
+          "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch3.starterFiles.zoeskoul_setup_sh.content",
+          "language": "bash",
+          "readOnly": true
+        }
+      ]
     }
-  ],
-  "topicMeta": {
-    "learningGoals": [
-      "Read the two columns of git status --short",
-      "Distinguish untracked, staged, and unstaged tracked files",
-      "Use repository state to choose the next safe action"
-    ]
-  }
+  ]
 }

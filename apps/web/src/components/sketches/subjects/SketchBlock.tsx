@@ -15,7 +15,10 @@ import { cn, SKETCH_BTN, SKETCH_BTN_PRIMARY } from "@/components/sketches/_share
 import { SketchShell } from "@/components/sketches/_shared/shells";
 import SketchRenderer from "./SketchRenderer";
 import { useTaggedT } from "@/i18n/tagged";
-import { learnerUiFlags } from "@/lib/config/learnerUiFlags";
+import {
+    isCompactLearnerUiActive,
+    shouldShowExpandedLearnerTitles,
+} from "@/lib/config/learnerUiFlags";
 import { getDistinctSketchShellTitle } from "./getDistinctSketchShellTitle";
 
 function mergeSpec(base: SketchSpec, patch?: Record<string, unknown>): SketchSpec {
@@ -115,8 +118,8 @@ export default function SketchBlock(props: {
     useDebouncedEmit(state, (s) => s && emit(s), { enabled: Boolean(onStateChange), delayMs: 350 });
 
     const readOnly = locked || !prereqsMet;
-    const compactFooterControls =
-        learnerUiFlags.compactLearnerUi && !learnerUiFlags.showDebugLearningUi;
+    const compactFooterControls = isCompactLearnerUiActive();
+    const showExpandedTitles = shouldShowExpandedLearnerTitles();
 
     if (!entry) {
         return (
@@ -178,7 +181,9 @@ export default function SketchBlock(props: {
     if (entry.kind === "custom") {
         const Comp = entry.Component;
 
-        const shellTitle = tt.resolve(title ?? null);
+        const shellTitle = showExpandedTitles
+            ? tt.resolve(title ?? null)
+            : null;
 
         return (
             <>
@@ -230,8 +235,12 @@ export default function SketchBlock(props: {
     const spec: SketchSpec = resolved?.spec;
     const s: SavedSketchState = state ?? defaultStateForSpec(spec);
 
-    const resolvedCardTitle = tt.resolve(title ?? null);
-    const resolvedContentTitle = tt.resolve(spec.title ?? null);
+    const resolvedCardTitle = showExpandedTitles
+        ? tt.resolve(title ?? null)
+        : null;
+    const resolvedContentTitle = showExpandedTitles
+        ? tt.resolve(spec.title ?? null)
+        : null;
     const shellTitle = getDistinctSketchShellTitle(
         resolvedCardTitle,
         resolvedContentTitle,
@@ -251,6 +260,7 @@ export default function SketchBlock(props: {
                 left={
                     <SketchRenderer
                         spec={spec}
+                        showTitle={showExpandedTitles}
                         value={s}
                         onChange={(next) => {
                             setState(next);

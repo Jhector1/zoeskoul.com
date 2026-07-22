@@ -95,7 +95,7 @@
           "description": "Add contacts.txt as the third file, inspect two exact edits, separate them into focused commits, and read the resulting history.",
           "weeks": null,
           "bullets": [
-            "Inspect Exact Project Changes",
+            "Add and Inspect Exact Project Changes",
             "Stage One Purpose at a Time",
             "Read the History You Built"
           ]

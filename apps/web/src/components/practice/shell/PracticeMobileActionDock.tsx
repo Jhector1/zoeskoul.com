@@ -74,7 +74,6 @@ export default function PracticeMobileActionDock({
     submit,
     answeredCount,
     sessionSize,
-    maxAttempts,
     pendingRevealCompletion,
     finishRevealedSession,
   } = props;
@@ -131,7 +130,7 @@ export default function PracticeMobileActionDock({
           </span>
           <span className="shrink-0 tabular-nums">
             {answeredCount}/{sessionSize}
-            {current ? ` • ${attempts}/${Number.isFinite(maxAttempts) ? maxAttempts : "∞"}` : ""}
+            {current ? ` • ${t("progress.attempts")}: ${attempts}` : ""}
           </span>
         </button>
 

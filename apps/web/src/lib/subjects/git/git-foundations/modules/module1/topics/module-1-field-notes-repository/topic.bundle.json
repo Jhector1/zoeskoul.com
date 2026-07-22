@@ -774,7 +774,7 @@
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^git\\s+commit\\s+-m\\s+.+$",
+            "pattern": "^git\\s+commit\\s+-m\\s*.+$",
             "message": "@:topics.git-foundations.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_commit.terminalExpectations.requiredCommands.0.message"
           },
           {

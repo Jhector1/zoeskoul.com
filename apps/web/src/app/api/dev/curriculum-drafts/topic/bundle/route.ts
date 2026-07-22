@@ -18,7 +18,6 @@ export async function PUT(request: Request) {
     const write = await writeDraftJsonFile({
       filePath: paths.bundlePath,
       value: body.bundleJson,
-      reason: "dev curriculum editor bundle save",
     });
     const loaded = await loadDraftTopic(body);
     const diagnostics = analyzeDraftTopic({ bundleJson: loaded.bundleJson, messagesJson: loaded.messagesJson });

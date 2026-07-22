@@ -47,13 +47,32 @@
       "descriptionFresh": "Chwazi sa ou vle aprann, mete yon ritm ki mache ak semèn ou, epi antre nan yon leson oswa yon defi lè ou pare.",
       "chooseSubject": "Chwazi yon sijè pou eseye",
       "continueLearning": "Kontinye aprann",
-      "try3Questions": "Eseye 3 kestyon",
+      "try3Questions": "Kòmanse 3 kestyon",
       "startingTrial": "N ap kòmanse esè a...",
       "openGuide": "Konfigire aprantisaj mwen",
       "exploreSubjects": "Gade sijè yo",
       "editPreferences": "Ajiste konfigirasyon mwen",
       "editAnswers": "Modifye repons mwen yo",
-      "currentTheme": "Tèm: {theme}"
+      "currentTheme": "Tèm: {theme}",
+      "continueLesson": "Kontinye leson an",
+      "startLearning": "Kòmanse aprann",
+      "exploreLessons": "Eksplore leson yo",
+      "learningOpening": "Ap ouvri leson ou an…"
+    },
+    "practiceCard": {
+      "guestKicker": "Pratik gratis",
+      "dailyKicker": "Pratik chak jou",
+      "guestTitle": "Kòmanse ak {count} kestyon gratis.",
+      "dailyTitle": "Pran yon ti tan pou pratike jodi a.",
+      "guestDescription": "Dekouvri ZoeSkoul ak yon ti seri kesyon gide. Ou pa bezwen yon kont.",
+      "dailyDescription": "Travay sou {count} kesyon ki konsantre epi kontinye avanse nan aprantisaj ou.",
+      "guestCta": "Kòmanse {count} kestyon gratis",
+      "dailyCta": "Kòmanse pratik jodi a",
+      "opening": "Ap ouvri pratik la…",
+      "unlimitedKicker": "Pratik san limit",
+      "unlimitedTitle": "Pratike egzakteman sa ou bezwen.",
+      "unlimitedDescription": "Chwazi yon katalòg, yon kou, yon modil, yon seksyon ak yon sijè, epi pratike kantite ou vle avèk plan ou.",
+      "unlimitedCta": "Chwazi pratik"
     },
     "steps": {
       "preferredLanguage": {
@@ -126,8 +145,8 @@
     },
     "highlights": {
       "kicker": "Fèt pou ou",
-      "title": "Yon paj dakèy senp ki vin pi itil pandan w ap aprann.",
-      "description": "Leson, pratik, ak pwogrè ou rete nan menm kote a, konsa li fasil pou wè pwochen etap la.",
+      "title": "Yon chemen aprantisaj ki adapte ak objektif ou yo.",
+      "description": "Lang ou, nivo eksperyans ou, ak ritm chak semèn ou ede ZoeSkoul rekòmande bon pwochen etap la.",
       "cards": {
         "language": {
           "title": "Lang",
@@ -146,7 +165,11 @@
     "recommended": {
       "kicker": "Chwazi pwochen chemen ou",
       "title": "Kòmanse ak yon bagay ou anvi bati.",
+      "titleWithCurrent": "Kontinye aprann oswa chwazi sa k ap vini apre.",
       "viewAll": "Gade tout sijè yo",
+      "current": "Aktyèl",
+      "recommendation": "Rekòmande",
+      "continueSubject": "Kontinye kou a",
       "exploreSubject": "Eksplore sijè a"
     },
     "floatingAssistant": {
@@ -171,7 +194,7 @@
     "latestChallenge": {
       "eyebrow": "Dènye defi chak jou",
       "noAccount": "Ou pa bezwen kont",
-      "cta": "Eseye defi a"
+      "cta": "Ouvri defi a"
     }
   }
 }

@@ -1,147 +1,152 @@
 {
   "title": "Why Version Control Matters",
-  "summary": "Open with a standalone story about a project losing its history, then distinguish Git from duplicate final folders and explain the safe local course workspace.",
+  "summary": "Meet the three repositories used in this course, understand what Git records locally, and learn the inspect → change → verify habit you will use before typing any Git command.",
   "minutes": 16,
   "sketchBlocks": [
     {
-      "id": "intro-memory",
-      "cardTitle": "A Project Needs a Memory",
-      "title": "The Importance of Project History",
-      "bodyMarkdown": "Imagine working on a large project with multiple collaborators. Each person saves their work in separate folders labeled 'final', 'final_v2', 'final_v3', and so on. Over time, it becomes nearly impossible to track changes, understand why certain decisions were made, or revert to a previous state if something goes wrong. This is where version control systems like Git come into play. They provide a structured way to manage changes, track history, and collaborate effectively without the chaos of multiple 'final' folders."
+      "id": "intro-why-memory",
+      "cardTitle": "Course introduction",
+      "title": "A project needs a memory",
+      "bodyMarkdown": "A clear, local project history answers questions a lone folder cannot: what changed, when, and why. This introduction explains prerequisites, the three repository journeys you will see across the course, the safe terminal workspace you'll use, and the simple habit you'll repeat whenever you touch project files.\n\nStart role: you are a volunteer helping a community group build a small website. You have a folder of files on your computer — drafts, images, and notes. The course uses three separate repositories for three teaching goals:\n\n- Guided (community-site): one repository that grows with step-by-step instruction so you learn each Git idea inside a single evolving project.\n- Parallel module project (volunteer-hub): a different repository used across module projects to reapply learned workflows with less guidance.\n- Capstone (neighborhood-guide): a fresh repository used only for the final capstone steps to prove independent transfer.\n\nPrerequisites and safe workspace: you'll use the terminal-only runner inside the lesson workspace. You do not need network access, GitHub credentials, or package installs. When a hands-on exercise runs, hidden setup reconstructs the exact starting folder so your check focuses on the intended repository change, not accidental prior state.\n\nThe inspect → change → verify habit: before you run any Git command, follow three short steps: (1) inspect the current state with file and Git views, (2) make a small, focused change, and (3) verify the repository state shows only the intended change. This habit prevents accidental commits that mix unrelated work and makes history readable to collaborators and your future self.\n\nWhy we teach local history: saving a copy named site-final-2 or site-final-july leaves no recorded reason for differences and makes it hard to recover an intermediate idea. A recorded commit ties a message (the reason) to an exact snapshot of tracked files so you can compare, revert, or explain changes later. This course will show the same idea applied repeatedly until it becomes automatic."
     },
     {
-      "id": "worked-example",
-      "cardTitle": "Worked Example: Recovering from Mistakes",
-      "title": "Worked Example: How Git Solves Project Chaos",
-      "bodyMarkdown": "Worked example: Consider a project where a team is developing a new software application. Initially, they save their work in a folder named 'Project'. As changes are made, they create copies like 'Project_final', 'Project_final_v2', and so on. One day, a team member accidentally overwrites a crucial file. Without a version control system, recovering the original file is difficult. However, with Git, every change is recorded as a snapshot. If a mistake occurs, the team can easily revert to a previous version, ensuring no work is lost. This reliable history contrasts sharply with the ambiguous nature of final-copy folder names."
+      "id": "worked-example-snapshot",
+      "cardTitle": "Snapshot story",
+      "title": "Worked example: Recovering from an accidental overwrite",
+      "bodyMarkdown": "Worked example: imagine the community-site folder contained five simple files on Day 1: index.html (homepage draft), about.md (project background), contact.md (contact details), styles.css (basic styles), and data.json (a small test dataset). You inspected the folder and decided these five files together were ready to record as a meaningful snapshot with a concise message like \"Initial site structure\".\n\nLater the team copied a final-export folder into the same place and, by accident, replaced index.html with a flattened file missing some local edits. Looking only at the final-export copy on disk, it's hard to see what was lost: the new filename and a duplicate folder name tell no story about what changed or why. A set of folders named final, final-v2, or final-july quickly becomes ambiguous.\n\nBecause you recorded the earlier snapshot, the project history stores a named moment that captured the exact contents of the five tracked files and the short message describing your intent. Looking at that snapshot (the commit) answers the concrete question: what did the project contain at the moment I said \"ready to record\"? The recorded snapshot contains file contents as a coherent package, not just a list of filenames; it preserves the exact text of index.html and other tracked files at that moment.\n\nRecovering from the overwrite is straightforward when you have a history: you inspect the history to find the commit message you wrote, open that snapshot to confirm it contains the expected content for index.html, and restore the tracked file from that snapshot. The repository history gives you a safe, explainable rewind point; duplicate final folders cannot provide the same context or selective restoration without guesswork.\n\nWhat one snapshot/commit row means: a single commit entry in the history represents a complete recorded state of the tracked files at one moment plus the message you wrote to explain intent. If you see a history row labeled \"Initial site structure,\" it means exactly the set of files you and your collaborators agreed were part of that meaningful milestone.\n\nA common mistake this example prevents: committing many unrelated edits at once (for example, content, style, and data changes in one snapshot) mixes motivations. The inspect → change → verify habit keeps commits focused so each history row remains useful as a narrative of the project."
     }
   ],
   "quizDraft": [
     {
-      "id": "sc-1",
+      "id": "sc-why-1",
       "kind": "single_choice",
-      "title": "Purpose of Version Control",
-      "prompt": "What is the primary purpose of a version control system like Git?",
-      "hint": "Think about how version control helps manage changes.",
+      "title": "Main benefit of recorded commits",
+      "prompt": "Which single statement best describes why recording commits locally is more useful than keeping several final-copy folders (like site-final, site-final-2)?",
+      "hint": "Think about what information a commit stores that a copied folder name does not.",
       "help": {
-        "concept": "Version control systems help manage changes to projects over time.",
-        "hint_1": "Consider how version control tracks changes.",
-        "hint_2": "Version control allows you to revert to previous states."
+        "concept": "A commit records a snapshot of tracked files plus a message that explains the change; a copied folder lacks that structured history and explanation.",
+        "hint_1": "A commit ties an exact set of file contents to a descriptive message and a point in project history.",
+        "hint_2": "Compare: a folder named \"final-july\" only shows a copy without the reason it differs from other copies; a commit records both contents and context."
       },
       "options": [
-        "To manage changes and track project history",
-        "To create backups of files",
-        "To increase the speed of development",
-        "To replace the need for project management tools"
+        "It uses less disk space than keeping multiple copies.",
+        "It stores snapshots with descriptive messages so changes and intent are clear.",
+        "It automatically deploys the site to a server.",
+        "It prevents anyone from editing files outside the repository."
       ],
       "correctOptionIds": [
-        "a"
-      ]
-    },
-    {
-      "id": "sc-2",
-      "kind": "single_choice",
-      "title": "Git vs. GitHub",
-      "prompt": "How does Git differ from GitHub?",
-      "hint": "Consider the role of GitHub in relation to Git.",
-      "help": {
-        "concept": "Git is a local version control system, while GitHub is a hosted platform for collaboration.",
-        "hint_1": "Git is used locally, while GitHub is online.",
-        "hint_2": "GitHub hosts repositories for collaboration."
-      },
-      "options": [
-        "Git is a local version control system, while GitHub is a hosted platform for collaboration",
-        "Git and GitHub are the same",
-        "GitHub is a version control system, while Git is a platform for collaboration",
-        "Git is used for managing code, while GitHub is used for managing documents"
-      ],
-      "correctOptionIds": [
-        "a"
-      ]
-    },
-    {
-      "id": "mc-1",
-      "kind": "multi_choice",
-      "title": "Benefits of Using Git",
-      "prompt": "Which of the following are benefits of using Git? Select all that apply.",
-      "hint": "Think about how Git helps in managing project changes and collaboration.",
-      "help": {
-        "concept": "Git provides a structured way to manage changes, track history, and collaborate.",
-        "hint_1": "Consider how Git helps track changes and manage history.",
-        "hint_2": "Git allows multiple people to work on the same project efficiently."
-      },
-      "options": [
-        "Tracks changes to files over time",
-        "Allows multiple people to work on the same project",
-        "Requires internet access to function",
-        "Automatically resolves all conflicts"
-      ],
-      "correctOptionIds": [
-        "a",
         "b"
       ]
     },
     {
-      "id": "dr-1",
-      "kind": "drag_reorder",
-      "title": "Steps in a Git Workflow",
-      "prompt": "Arrange the steps in a typical Git workflow in the correct order.",
-      "hint": "Think about the sequence of actions from making changes to committing them.",
+      "id": "sc-why-2",
+      "kind": "single_choice",
+      "title": "Setting a repository-local identity",
+      "prompt": "Which command sets a repository-local user name so commits in that repository record the local identity?",
+      "hint": "The question asks for a repository-local (not global) configuration setting.",
       "help": {
-        "concept": "A typical Git workflow involves making changes, staging them, and then committing.",
-        "hint_1": "Consider what happens after you make changes to files.",
-        "hint_2": "Staging occurs before committing changes."
+        "concept": "Use git config --local (or without --global) inside a repository to write a configuration value that applies only to that repository.",
+        "hint_1": "Repository-local settings are stored in the repository's config and use --local when you want them confined to one repository.",
+        "hint_2": "The command includes git config, the --local flag, the key user.name, and the quoted name value."
       },
-      "tokens": [
-        "Make changes to files",
-        "Stage changes",
-        "Commit changes"
+      "options": [
+        "git config --global user.name \"ZoeSkoul Learner\"",
+        "git config --local user.name \"ZoeSkoul Learner\"",
+        "git init -b main",
+        "git status --short"
       ],
-      "correctOrder": [
-        "Make changes to files",
-        "Stage changes",
-        "Commit changes"
+      "correctOptionIds": [
+        "b"
       ]
     },
     {
-      "id": "fbc-1",
-      "kind": "fill_blank_choice",
-      "title": "Git Command for Initialization",
-      "prompt": "Fill in the blank to complete the command used to initialize a new Git repository.",
-      "hint": "This command sets up a new repository in the current directory.",
+      "id": "mc-why-1",
+      "kind": "multi_choice",
+      "title": "What Git records locally",
+      "prompt": "Which of the following are recorded as part of the local repository state? (Select all that apply.)",
+      "hint": "Think about the three places you inspect: working tree, staging area, and commit history.",
       "help": {
-        "concept": "The command to initialize a new Git repository is 'git init'.",
-        "hint_1": "The command starts with 'git'.",
-        "hint_2": "The command ends with 'init'."
+        "concept": "Git's local repository state includes working-tree file contents, the staging area (what will be committed), and the commit history (recorded snapshots and messages). It does not record unrelated system-only metadata like arbitrary folder copies or external timestamps as a project history substitute.",
+        "hint_1": "Consider what you see with git status (untracked/modified/staged) and git log (past commits).",
+        "hint_2": "Choose the options that represent tracked snapshots, staged proposals, and the current working files — not external duplicate folders or system-only timestamps."
       },
-      "template": "The command to initialize a new Git repository is '[blank1]'.",
-      "choices": [
-        "git init",
-        "git start",
-        "git create",
-        "git new"
+      "options": [
+        "The current working-tree file contents (what files look like right now)",
+        "Changes staged in the index waiting to become a commit",
+        "The repository's commit history of snapshots and messages",
+        "Local file modification timestamps only (OS-level times)"
       ],
-      "correctValue": "git init"
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c"
+      ]
     },
     {
-      "id": "fbc-2",
-      "kind": "fill_blank_choice",
-      "title": "Git Status Command",
-      "prompt": "Fill in the blank to complete the command that checks the status of your Git repository.",
-      "hint": "This command shows the current state of the working directory and staging area.",
+      "id": "dr-why-1",
+      "kind": "drag_reorder",
+      "title": "Inspect → Change → Verify sequence",
+      "prompt": "Put the inspect → change → verify habit steps in the correct order for a focused Git workflow.",
+      "hint": "Start by looking at the current state, then make a small change, and finish by checking the repository reflects only that intended change.",
       "help": {
-        "concept": "The command to check the status of a Git repository is 'git status'.",
-        "hint_1": "The command starts with 'git'.",
-        "hint_2": "The command ends with 'status'."
+        "concept": "The recommended habit is a short, repeatable sequence: first inspect current repository state, then make a focused change and stage it, commit with a clear message, and finally verify the history and working tree are clean.",
+        "hint_1": "The first step uses commands like ls and git status; verification includes checking the history and that git status shows a clean working tree.",
+        "hint_2": "Order the steps so you do not commit unrelated edits or leave unintended changes staged."
       },
-      "template": "The command to check the status of a Git repository is '[blank1]'.",
-      "choices": [
-        "git status",
-        "git check",
-        "git verify",
-        "git inspect"
+      "tokens": [
+        "Make focused changes to the files",
+        "Inspect the current working tree and Git status",
+        "Commit with a clear message",
+        "Verify history and that the working tree is clean",
+        "Stage the intended changes"
       ],
-      "correctValue": "git status"
+      "correctOrder": [
+        "Inspect the current working tree and Git status",
+        "Make focused changes to the files",
+        "Stage the intended changes",
+        "Commit with a clear message",
+        "Verify history and that the working tree is clean"
+      ]
+    },
+    {
+      "id": "fb-why-1",
+      "kind": "fill_blank_choice",
+      "title": "Initialize with main branch",
+      "prompt": "Fill the blank: To create a new repository and set the initial branch to main, run: git init -b [blank1]",
+      "hint": "Which branch name sets the primary branch to the modern default we use in this course?",
+      "help": {
+        "concept": "git init -b <name> initializes a repository and sets the initial branch name; the course uses main as the default primary branch when initialization is part of the lesson.",
+        "hint_1": "The initial branch commonly used now is named main rather than master.",
+        "hint_2": "Choose the branch name that the course requires when teaching initialization."
+      },
+      "template": "git init -b [blank1]",
+      "choices": [
+        "origin",
+        "main",
+        "master",
+        "HEAD"
+      ],
+      "correctValue": "main"
+    },
+    {
+      "id": "fb-why-2",
+      "kind": "fill_blank_choice",
+      "title": "Where to list files to ignore",
+      "prompt": "Fill the blank: A file that should never be tracked by Git (for example, temporary build output) belongs in [blank1]",
+      "hint": "What file name stores patterns of files Git should ignore in a repository?",
+      "help": {
+        "concept": ".gitignore is the repository file that lists patterns for files Git should ignore so they remain untracked.",
+        "hint_1": "This filename starts with a dot and is placed at the repository root or in subfolders to list ignore patterns.",
+        "hint_2": "The file used to declare ignore patterns is named .gitignore, not a repository name or a hidden Git internal folder."
+      },
+      "template": "[blank1]",
+      "choices": [
+        ".gitignore",
+        "README.md",
+        ".git",
+        "HEAD"
+      ],
+      "correctValue": ".gitignore"
     }
   ]
 }

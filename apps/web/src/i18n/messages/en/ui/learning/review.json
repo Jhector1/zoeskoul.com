@@ -27,7 +27,7 @@
       "excused": "Excused",
       "continue": "Continue",
       "loadingExercise": "Loading exercise…",
-      "attempts": "Attempts: {n}/{max}",
+      "attempts": "Attempts: {n}",
       "correct": "✓ Correct",
       "notCorrect": "✕ Not correct"
     }

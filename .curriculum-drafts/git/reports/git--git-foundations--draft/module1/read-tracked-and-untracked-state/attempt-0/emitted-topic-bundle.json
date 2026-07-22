@@ -16,11 +16,26 @@
   },
   "serviceDefaults": {
     "runnerBackend": "pty",
-    "layoutMode": "terminal_workspace",
     "requires": {
       "files": true,
       "multiFile": true,
       "terminal": true
+    },
+    "preset": "runner",
+    "layoutMode": "default",
+    "terminalBootstrap": {
+      "gitSafeDirectories": [
+        "/workspace/*"
+      ],
+      "setupScriptPath": ".zoeskoul/setup.sh"
+    }
+  },
+  "tools": {
+    "defaultSurface": "results",
+    "compactDefaultSurface": "results",
+    "runnerPane": {
+      "defaultTab": "terminal",
+      "compactDefaultTab": "terminal"
     }
   },
   "topic": {
@@ -32,7 +47,7 @@
       "id": "sketch0",
       "kind": "sketch",
       "titleKey": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.cards.sketch0.title",
-      "sketchId": "sketch0",
+      "sketchId": "sketch-0",
       "height": 420,
       "tryIt": {
         "id": "try-read-tracked-and-untracked-state-sketch0",
@@ -51,7 +66,7 @@
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.cards.sketch1.title",
-      "sketchId": "sketch1",
+      "sketchId": "sketch-1",
       "height": 420,
       "tryIt": {
         "id": "try-read-tracked-and-untracked-state-sketch1",
@@ -70,7 +85,7 @@
       "id": "sketch2",
       "kind": "sketch",
       "titleKey": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.cards.sketch2.title",
-      "sketchId": "sketch2",
+      "sketchId": "sketch-2",
       "height": 420,
       "tryIt": {
         "id": "try-read-tracked-and-untracked-state-sketch2",
@@ -89,7 +104,7 @@
       "id": "sketch3",
       "kind": "sketch",
       "titleKey": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.cards.sketch3.title",
-      "sketchId": "sketch3",
+      "sketchId": "sketch-3",
       "height": 420,
       "tryIt": {
         "id": "try-read-tracked-and-untracked-state-sketch3",
@@ -122,37 +137,37 @@
   ],
   "sketches": [
     {
-      "id": "sketch0",
+      "id": "sketch-0",
       "archetype": "paragraph",
-      "titleKey": "sketches.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.sketch0.title",
-      "bodyKey": "sketches.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.sketch0.bodyMarkdown"
+      "titleKey": "sketches.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.sketch-0.title",
+      "bodyKey": "sketches.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.sketch-0.bodyMarkdown"
     },
     {
-      "id": "sketch1",
+      "id": "sketch-1",
       "archetype": "paragraph",
-      "titleKey": "sketches.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.sketch1.title",
-      "bodyKey": "sketches.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.sketch1.bodyMarkdown"
+      "titleKey": "sketches.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.sketch-1.title",
+      "bodyKey": "sketches.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.sketch-1.bodyMarkdown"
     },
     {
-      "id": "sketch2",
+      "id": "sketch-2",
       "archetype": "paragraph",
-      "titleKey": "sketches.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.sketch2.title",
-      "bodyKey": "sketches.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.sketch2.bodyMarkdown"
+      "titleKey": "sketches.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.sketch-2.title",
+      "bodyKey": "sketches.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.sketch-2.bodyMarkdown"
     },
     {
-      "id": "sketch3",
+      "id": "sketch-3",
       "archetype": "paragraph",
-      "titleKey": "sketches.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.sketch3.title",
-      "bodyKey": "sketches.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.sketch3.bodyMarkdown"
+      "titleKey": "sketches.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.sketch-3.title",
+      "bodyKey": "sketches.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.sketch-3.bodyMarkdown"
     }
   ],
   "exercises": [
     {
-      "id": "single-choice-1",
+      "id": "q-why-local-vc",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.practice.single-choice-1",
+      "messageBase": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.practice.q-why-local-vc",
       "optionIds": [
         "a",
         "b",
@@ -161,15 +176,15 @@
       ],
       "expected": {
         "kind": "single_choice",
-        "optionId": "b"
+        "optionId": "a"
       }
     },
     {
-      "id": "single-choice-2",
+      "id": "q-status-untracked-marker",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.practice.single-choice-2",
+      "messageBase": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.practice.q-status-untracked-marker",
       "optionIds": [
         "a",
         "b",
@@ -178,15 +193,15 @@
       ],
       "expected": {
         "kind": "single_choice",
-        "optionId": "c"
+        "optionId": "a"
       }
     },
     {
-      "id": "multi-choice-1",
+      "id": "q-multiple-indicators-staged",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.practice.multi-choice-1",
+      "messageBase": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.practice.q-multiple-indicators-staged",
       "optionIds": [
         "a",
         "b",
@@ -197,17 +212,16 @@
         "kind": "multi_choice",
         "optionIds": [
           "a",
-          "b",
           "c"
         ]
       }
     },
     {
-      "id": "drag-reorder-1",
+      "id": "q-order-inspect-before-commit",
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.practice.drag-reorder-1",
+      "messageBase": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.practice.q-order-inspect-before-commit",
       "tokenIds": [
         "t1",
         "t2",
@@ -225,27 +239,27 @@
       }
     },
     {
-      "id": "fill-blank-choice-1",
+      "id": "q-blank-short-status",
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.practice.fill-blank-choice-1",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "M"
-      }
-    },
-    {
-      "id": "fill-blank-choice-2",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.practice.fill-blank-choice-2",
+      "messageBase": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.practice.q-blank-short-status",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
         "value": "A"
+      }
+    },
+    {
+      "id": "q-blank-capture-staged",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.practice.q-blank-capture-staged",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "commit"
       }
     },
     {
@@ -256,50 +270,89 @@
       "messageBase": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch0",
       "language": "bash",
       "starterCode": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch0.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.sh",
-          "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch0.starterCode",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "main.sh",
-          "content": "git init\ntouch tracked.txt untracked.txt\ngit add tracked.txt\ngit status",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        }
-      ],
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^git\\s+init$"
+            "pattern": "^git\\s+status\\s+--short$",
+            "message": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch0.terminalExpectations.requiredCommands.0.message"
           },
           {
-            "pattern": "^git\\s+add\\s+tracked\\.txt$"
+            "pattern": "^git\\s+add\\s+community-site/homepage\\.html\\s+community-site/team\\.md\\s+community-site/events\\.md\\s+community-site/style\\.css\\s+community-site/README\\.md$",
+            "message": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch0.terminalExpectations.requiredCommands.1.message"
           },
           {
-            "pattern": "^git\\s+status$"
+            "pattern": "^git\\s+diff\\s+--staged\\s+--name-only$",
+            "message": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch0.terminalExpectations.requiredCommands.2.message"
           }
         ]
       },
       "workspace": {
         "language": "bash",
-        "entryFilePath": "main.sh",
+        "entryFilePath": "community-site/README.md",
         "starterCode": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch0.starterCode",
         "starterFiles": [
           {
-            "path": "main.sh",
+            "path": "community-site/homepage.html",
+            "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch0.starterFiles.community_site_homepage_html.content",
+            "language": "html",
+            "readOnly": false
+          },
+          {
+            "path": "community-site/team.md",
+            "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch0.starterFiles.community_site_team_md.content",
+            "language": "markdown",
+            "readOnly": false
+          },
+          {
+            "path": "community-site/events.md",
+            "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch0.starterFiles.community_site_events_md.content",
+            "language": "markdown",
+            "readOnly": false
+          },
+          {
+            "path": "community-site/style.css",
+            "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch0.starterFiles.community_site_style_css.content",
+            "language": "css",
+            "readOnly": false
+          },
+          {
+            "path": "community-site/README.md",
             "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch0.starterCode",
-            "language": "bash",
+            "language": "markdown",
+            "readOnly": false,
             "isEntry": true,
-            "entry": true,
+            "entry": true
+          }
+        ],
+        "fixtureFiles": [
+          {
+            "path": "community-site/homepage.html",
+            "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch0.starterFiles.community_site_homepage_html.content",
+            "language": "html",
+            "readOnly": false
+          },
+          {
+            "path": "community-site/team.md",
+            "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch0.starterFiles.community_site_team_md.content",
+            "language": "markdown",
+            "readOnly": false
+          },
+          {
+            "path": "community-site/events.md",
+            "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch0.starterFiles.community_site_events_md.content",
+            "language": "markdown",
+            "readOnly": false
+          },
+          {
+            "path": "community-site/style.css",
+            "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch0.starterFiles.community_site_style_css.content",
+            "language": "css",
+            "readOnly": false
+          },
+          {
+            "path": "community-site/README.md",
+            "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch0.starterCode",
+            "language": "markdown",
             "readOnly": false
           }
         ]
@@ -308,8 +361,128 @@
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch0.prompt"
-      }
+        "instructions": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch0.instructions"
+      },
+      "starterFiles": [
+        {
+          "path": "community-site/homepage.html",
+          "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch0.starterFiles.community_site_homepage_html.content",
+          "language": "html",
+          "readOnly": false
+        },
+        {
+          "path": "community-site/team.md",
+          "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch0.starterFiles.community_site_team_md.content",
+          "language": "markdown",
+          "readOnly": false
+        },
+        {
+          "path": "community-site/events.md",
+          "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch0.starterFiles.community_site_events_md.content",
+          "language": "markdown",
+          "readOnly": false
+        },
+        {
+          "path": "community-site/style.css",
+          "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch0.starterFiles.community_site_style_css.content",
+          "language": "css",
+          "readOnly": false
+        },
+        {
+          "path": "community-site/README.md",
+          "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch0.starterCode",
+          "language": "markdown",
+          "readOnly": false,
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "serviceOverrides": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ],
+          "setupScriptPath": ".zoeskoul/setup.sh",
+          "workspaceStateKey": "git-state-v1-1kd28x7"
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        }
+      },
+      "ideConfig": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ],
+          "setupScriptPath": ".zoeskoul/setup.sh",
+          "workspaceStateKey": "git-state-v1-1kd28x7"
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        }
+      },
+      "fixtureFiles": [
+        {
+          "path": "community-site/homepage.html",
+          "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch0.starterFiles.community_site_homepage_html.content",
+          "language": "html",
+          "readOnly": false
+        },
+        {
+          "path": "community-site/team.md",
+          "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch0.starterFiles.community_site_team_md.content",
+          "language": "markdown",
+          "readOnly": false
+        },
+        {
+          "path": "community-site/events.md",
+          "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch0.starterFiles.community_site_events_md.content",
+          "language": "markdown",
+          "readOnly": false
+        },
+        {
+          "path": "community-site/style.css",
+          "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch0.starterFiles.community_site_style_css.content",
+          "language": "css",
+          "readOnly": false
+        },
+        {
+          "path": "community-site/README.md",
+          "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch0.starterCode",
+          "language": "markdown",
+          "readOnly": false
+        }
+      ]
     },
     {
       "id": "try-read-tracked-and-untracked-state-sketch1",
@@ -318,48 +491,90 @@
       "weight": 1,
       "messageBase": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch1",
       "language": "bash",
-      "starterCode": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch1.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.sh",
-          "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch1.starterCode",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "main.sh",
-          "content": "git init\ntouch fileA.txt fileB.txt\necho 'modification' > fileA.txt\ngit status --short",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        }
-      ],
+      "starterCode": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch1.starterFiles.community_site_about_md.content",
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^git\\s+init$"
+            "pattern": "^git\\s+status\\s+--short$",
+            "message": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch1.terminalExpectations.requiredCommands.0.message"
           },
           {
-            "pattern": "^git\\s+status\\s+--short$"
+            "pattern": "^git\\s+add\\s+community-site/index\\.html\\s+community-site/about\\.md\\s+community-site/contact\\.md\\s+community-site/main\\.css\\s+community-site/CONTRIBUTING\\.md$",
+            "message": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch1.terminalExpectations.requiredCommands.1.message"
+          },
+          {
+            "pattern": "^git\\s+diff\\s+--staged\\s+--name-only$",
+            "message": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch1.terminalExpectations.requiredCommands.2.message"
           }
         ]
       },
       "workspace": {
         "language": "bash",
-        "entryFilePath": "main.sh",
-        "starterCode": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch1.starterCode",
+        "entryFilePath": "community-site/about.md",
+        "starterCode": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch1.starterFiles.community_site_about_md.content",
         "starterFiles": [
           {
-            "path": "main.sh",
-            "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch1.starterCode",
-            "language": "bash",
+            "path": "community-site/index.html",
+            "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch1.starterFiles.community_site_index_html.content",
+            "language": "html",
+            "readOnly": false
+          },
+          {
+            "path": "community-site/about.md",
+            "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch1.starterFiles.community_site_about_md.content",
+            "language": "markdown",
+            "readOnly": false,
             "isEntry": true,
-            "entry": true,
+            "entry": true
+          },
+          {
+            "path": "community-site/contact.md",
+            "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch1.starterFiles.community_site_contact_md.content",
+            "language": "markdown",
+            "readOnly": false
+          },
+          {
+            "path": "community-site/main.css",
+            "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch1.starterFiles.community_site_main_css.content",
+            "language": "css",
+            "readOnly": false
+          },
+          {
+            "path": "community-site/CONTRIBUTING.md",
+            "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch1.starterCode",
+            "language": "markdown",
+            "readOnly": false
+          }
+        ],
+        "fixtureFiles": [
+          {
+            "path": "community-site/index.html",
+            "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch1.starterFiles.community_site_index_html.content",
+            "language": "html",
+            "readOnly": false
+          },
+          {
+            "path": "community-site/about.md",
+            "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch1.starterFiles.community_site_about_md.content",
+            "language": "markdown",
+            "readOnly": false
+          },
+          {
+            "path": "community-site/contact.md",
+            "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch1.starterFiles.community_site_contact_md.content",
+            "language": "markdown",
+            "readOnly": false
+          },
+          {
+            "path": "community-site/main.css",
+            "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch1.starterFiles.community_site_main_css.content",
+            "language": "css",
+            "readOnly": false
+          },
+          {
+            "path": "community-site/CONTRIBUTING.md",
+            "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch1.starterCode",
+            "language": "markdown",
             "readOnly": false
           }
         ]
@@ -368,8 +583,128 @@
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch1.prompt"
-      }
+        "instructions": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch1.instructions"
+      },
+      "starterFiles": [
+        {
+          "path": "community-site/index.html",
+          "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch1.starterFiles.community_site_index_html.content",
+          "language": "html",
+          "readOnly": false
+        },
+        {
+          "path": "community-site/about.md",
+          "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch1.starterFiles.community_site_about_md.content",
+          "language": "markdown",
+          "readOnly": false,
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "community-site/contact.md",
+          "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch1.starterFiles.community_site_contact_md.content",
+          "language": "markdown",
+          "readOnly": false
+        },
+        {
+          "path": "community-site/main.css",
+          "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch1.starterFiles.community_site_main_css.content",
+          "language": "css",
+          "readOnly": false
+        },
+        {
+          "path": "community-site/CONTRIBUTING.md",
+          "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch1.starterCode",
+          "language": "markdown",
+          "readOnly": false
+        }
+      ],
+      "serviceOverrides": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ],
+          "setupScriptPath": ".zoeskoul/setup.sh",
+          "workspaceStateKey": "git-state-v1-1kd28x7"
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        }
+      },
+      "ideConfig": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ],
+          "setupScriptPath": ".zoeskoul/setup.sh",
+          "workspaceStateKey": "git-state-v1-1kd28x7"
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        }
+      },
+      "fixtureFiles": [
+        {
+          "path": "community-site/index.html",
+          "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch1.starterFiles.community_site_index_html.content",
+          "language": "html",
+          "readOnly": false
+        },
+        {
+          "path": "community-site/about.md",
+          "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch1.starterFiles.community_site_about_md.content",
+          "language": "markdown",
+          "readOnly": false
+        },
+        {
+          "path": "community-site/contact.md",
+          "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch1.starterFiles.community_site_contact_md.content",
+          "language": "markdown",
+          "readOnly": false
+        },
+        {
+          "path": "community-site/main.css",
+          "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch1.starterFiles.community_site_main_css.content",
+          "language": "css",
+          "readOnly": false
+        },
+        {
+          "path": "community-site/CONTRIBUTING.md",
+          "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch1.starterCode",
+          "language": "markdown",
+          "readOnly": false
+        }
+      ]
     },
     {
       "id": "try-read-tracked-and-untracked-state-sketch2",
@@ -379,47 +714,89 @@
       "messageBase": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch2",
       "language": "bash",
       "starterCode": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch2.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.sh",
-          "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch2.starterCode",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "main.sh",
-          "content": "git init\ntouch example.txt\ngit status",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        }
-      ],
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^git\\s+init$"
+            "pattern": "^git\\s+status\\s+--short$",
+            "message": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch2.terminalExpectations.requiredCommands.0.message"
           },
           {
-            "pattern": "^git\\s+status$"
+            "pattern": "^git\\s+add\\s+community-site/welcome\\.html\\s+community-site/mission\\.md\\s+community-site/volunteers\\.md\\s+community-site/site\\.css\\s+community-site/README\\.md$",
+            "message": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch2.terminalExpectations.requiredCommands.1.message"
+          },
+          {
+            "pattern": "^git\\s+diff\\s+--staged$",
+            "message": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch2.terminalExpectations.requiredCommands.2.message"
           }
         ]
       },
       "workspace": {
         "language": "bash",
-        "entryFilePath": "main.sh",
+        "entryFilePath": "community-site/README.md",
         "starterCode": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch2.starterCode",
         "starterFiles": [
           {
-            "path": "main.sh",
+            "path": "community-site/welcome.html",
+            "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch2.starterFiles.community_site_welcome_html.content",
+            "language": "html",
+            "readOnly": false
+          },
+          {
+            "path": "community-site/mission.md",
+            "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch2.starterFiles.community_site_mission_md.content",
+            "language": "markdown",
+            "readOnly": false
+          },
+          {
+            "path": "community-site/volunteers.md",
+            "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch2.starterFiles.community_site_volunteers_md.content",
+            "language": "markdown",
+            "readOnly": false
+          },
+          {
+            "path": "community-site/site.css",
+            "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch2.starterFiles.community_site_site_css.content",
+            "language": "css",
+            "readOnly": false
+          },
+          {
+            "path": "community-site/README.md",
             "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch2.starterCode",
-            "language": "bash",
+            "language": "markdown",
+            "readOnly": false,
             "isEntry": true,
-            "entry": true,
+            "entry": true
+          }
+        ],
+        "fixtureFiles": [
+          {
+            "path": "community-site/welcome.html",
+            "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch2.starterFiles.community_site_welcome_html.content",
+            "language": "html",
+            "readOnly": false
+          },
+          {
+            "path": "community-site/mission.md",
+            "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch2.starterFiles.community_site_mission_md.content",
+            "language": "markdown",
+            "readOnly": false
+          },
+          {
+            "path": "community-site/volunteers.md",
+            "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch2.starterFiles.community_site_volunteers_md.content",
+            "language": "markdown",
+            "readOnly": false
+          },
+          {
+            "path": "community-site/site.css",
+            "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch2.starterFiles.community_site_site_css.content",
+            "language": "css",
+            "readOnly": false
+          },
+          {
+            "path": "community-site/README.md",
+            "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch2.starterCode",
+            "language": "markdown",
             "readOnly": false
           }
         ]
@@ -428,8 +805,128 @@
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch2.prompt"
-      }
+        "instructions": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch2.instructions"
+      },
+      "starterFiles": [
+        {
+          "path": "community-site/welcome.html",
+          "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch2.starterFiles.community_site_welcome_html.content",
+          "language": "html",
+          "readOnly": false
+        },
+        {
+          "path": "community-site/mission.md",
+          "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch2.starterFiles.community_site_mission_md.content",
+          "language": "markdown",
+          "readOnly": false
+        },
+        {
+          "path": "community-site/volunteers.md",
+          "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch2.starterFiles.community_site_volunteers_md.content",
+          "language": "markdown",
+          "readOnly": false
+        },
+        {
+          "path": "community-site/site.css",
+          "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch2.starterFiles.community_site_site_css.content",
+          "language": "css",
+          "readOnly": false
+        },
+        {
+          "path": "community-site/README.md",
+          "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch2.starterCode",
+          "language": "markdown",
+          "readOnly": false,
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "serviceOverrides": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ],
+          "setupScriptPath": ".zoeskoul/setup.sh",
+          "workspaceStateKey": "git-state-v1-1kd28x7"
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        }
+      },
+      "ideConfig": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ],
+          "setupScriptPath": ".zoeskoul/setup.sh",
+          "workspaceStateKey": "git-state-v1-1kd28x7"
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        }
+      },
+      "fixtureFiles": [
+        {
+          "path": "community-site/welcome.html",
+          "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch2.starterFiles.community_site_welcome_html.content",
+          "language": "html",
+          "readOnly": false
+        },
+        {
+          "path": "community-site/mission.md",
+          "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch2.starterFiles.community_site_mission_md.content",
+          "language": "markdown",
+          "readOnly": false
+        },
+        {
+          "path": "community-site/volunteers.md",
+          "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch2.starterFiles.community_site_volunteers_md.content",
+          "language": "markdown",
+          "readOnly": false
+        },
+        {
+          "path": "community-site/site.css",
+          "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch2.starterFiles.community_site_site_css.content",
+          "language": "css",
+          "readOnly": false
+        },
+        {
+          "path": "community-site/README.md",
+          "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch2.starterCode",
+          "language": "markdown",
+          "readOnly": false
+        }
+      ]
     },
     {
       "id": "try-read-tracked-and-untracked-state-sketch3",
@@ -439,44 +936,89 @@
       "messageBase": "topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch3",
       "language": "bash",
       "starterCode": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch3.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.sh",
-          "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch3.starterCode",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "main.sh",
-          "content": "touch important.txt\necho 'update' >> notes.txt\ngit status",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        }
-      ],
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^git\\s+status$"
+            "pattern": "^git\\s+status\\s+--short$",
+            "message": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch3.terminalExpectations.requiredCommands.0.message"
+          },
+          {
+            "pattern": "^git\\s+add\\s+community-site/home\\.html\\s+community-site/team\\.txt\\s+community-site/contact_us\\.md\\s+community-site/styles/main\\.css\\s+community-site/README\\.md$",
+            "message": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch3.terminalExpectations.requiredCommands.1.message"
+          },
+          {
+            "pattern": "^git\\s+diff\\s+--staged\\s+--name-only$",
+            "message": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch3.terminalExpectations.requiredCommands.2.message"
           }
         ]
       },
       "workspace": {
         "language": "bash",
-        "entryFilePath": "main.sh",
+        "entryFilePath": "community-site/README.md",
         "starterCode": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch3.starterCode",
         "starterFiles": [
           {
-            "path": "main.sh",
+            "path": "community-site/home.html",
+            "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch3.starterFiles.community_site_home_html.content",
+            "language": "html",
+            "readOnly": false
+          },
+          {
+            "path": "community-site/team.txt",
+            "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch3.starterFiles.community_site_team_txt.content",
+            "language": "text",
+            "readOnly": false
+          },
+          {
+            "path": "community-site/contact_us.md",
+            "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch3.starterFiles.community_site_contact_us_md.content",
+            "language": "markdown",
+            "readOnly": false
+          },
+          {
+            "path": "community-site/styles/main.css",
+            "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch3.starterFiles.community_site_styles_main_css.content",
+            "language": "css",
+            "readOnly": false
+          },
+          {
+            "path": "community-site/README.md",
             "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch3.starterCode",
-            "language": "bash",
+            "language": "markdown",
+            "readOnly": false,
             "isEntry": true,
-            "entry": true,
+            "entry": true
+          }
+        ],
+        "fixtureFiles": [
+          {
+            "path": "community-site/home.html",
+            "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch3.starterFiles.community_site_home_html.content",
+            "language": "html",
+            "readOnly": false
+          },
+          {
+            "path": "community-site/team.txt",
+            "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch3.starterFiles.community_site_team_txt.content",
+            "language": "text",
+            "readOnly": false
+          },
+          {
+            "path": "community-site/contact_us.md",
+            "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch3.starterFiles.community_site_contact_us_md.content",
+            "language": "markdown",
+            "readOnly": false
+          },
+          {
+            "path": "community-site/styles/main.css",
+            "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch3.starterFiles.community_site_styles_main_css.content",
+            "language": "css",
+            "readOnly": false
+          },
+          {
+            "path": "community-site/README.md",
+            "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch3.starterCode",
+            "language": "markdown",
             "readOnly": false
           }
         ]
@@ -485,8 +1027,128 @@
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch3.prompt"
-      }
+        "instructions": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch3.instructions"
+      },
+      "starterFiles": [
+        {
+          "path": "community-site/home.html",
+          "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch3.starterFiles.community_site_home_html.content",
+          "language": "html",
+          "readOnly": false
+        },
+        {
+          "path": "community-site/team.txt",
+          "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch3.starterFiles.community_site_team_txt.content",
+          "language": "text",
+          "readOnly": false
+        },
+        {
+          "path": "community-site/contact_us.md",
+          "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch3.starterFiles.community_site_contact_us_md.content",
+          "language": "markdown",
+          "readOnly": false
+        },
+        {
+          "path": "community-site/styles/main.css",
+          "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch3.starterFiles.community_site_styles_main_css.content",
+          "language": "css",
+          "readOnly": false
+        },
+        {
+          "path": "community-site/README.md",
+          "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch3.starterCode",
+          "language": "markdown",
+          "readOnly": false,
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "serviceOverrides": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ],
+          "setupScriptPath": ".zoeskoul/setup.sh",
+          "workspaceStateKey": "git-state-v1-1kd28x7"
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        }
+      },
+      "ideConfig": {
+        "preset": "runner",
+        "runnerBackend": "pty",
+        "layoutMode": "default",
+        "terminalBootstrap": {
+          "gitSafeDirectories": [
+            "/workspace/*"
+          ],
+          "setupScriptPath": ".zoeskoul/setup.sh",
+          "workspaceStateKey": "git-state-v1-1kd28x7"
+        },
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace",
+        "fileActions": {
+          "enabled": true,
+          "createFile": true,
+          "createFolder": true,
+          "rename": true,
+          "delete": true,
+          "dragDrop": false
+        }
+      },
+      "fixtureFiles": [
+        {
+          "path": "community-site/home.html",
+          "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch3.starterFiles.community_site_home_html.content",
+          "language": "html",
+          "readOnly": false
+        },
+        {
+          "path": "community-site/team.txt",
+          "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch3.starterFiles.community_site_team_txt.content",
+          "language": "text",
+          "readOnly": false
+        },
+        {
+          "path": "community-site/contact_us.md",
+          "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch3.starterFiles.community_site_contact_us_md.content",
+          "language": "markdown",
+          "readOnly": false
+        },
+        {
+          "path": "community-site/styles/main.css",
+          "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch3.starterFiles.community_site_styles_main_css.content",
+          "language": "css",
+          "readOnly": false
+        },
+        {
+          "path": "community-site/README.md",
+          "content": "@:topics.git--git-foundations--draft.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch3.starterCode",
+          "language": "markdown",
+          "readOnly": false
+        }
+      ]
     }
   ]
 }

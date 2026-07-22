@@ -1,8 +1,10 @@
 {
   "reportDir": "/Users/admin/Documents/NextJSProject/zoeskoul.com/.curriculum-drafts/git/reports/git--git-foundations--draft/module2/stage-intentionally",
-  "status": "success",
-  "attempts": 2,
-  "finalAttempt": 1,
+  "status": "failed",
+  "attempts": 3,
+  "finalAttempt": 2,
+  "errorCode": "CURRICULUM_QUALITY_GATE_FAILED",
+  "errorMessage": "Curriculum quality gate failed for topic \"stage-intentionally\"\nModule: git-foundations-module-2-meaningful-history\nSection: git-foundations-section-2-history-workflow\nReport dir: /Users/admin/Documents/NextJSProject/zoeskoul.com/.curriculum-drafts/git/reports/git--git-foundations--draft/module2/stage-intentionally\n- Exercise \"try-stage-intentionally-sketch0\" workspace does not reference expected entry file \"README.md\".\n- Exercise \"try-stage-intentionally-sketch0\" uses workspace entry file \"community-site/index.html\" but profile \"git\" expects \"README.md\".\n- Exercise \"try-stage-intentionally-sketch1\" workspace does not reference expected entry file \"README.md\".\n- Exercise \"try-stage-intentionally-sketch1\" uses workspace entry file \"community-site/index.html\" but profile \"git\" expects \"README.md\".\n- Exercise \"try-stage-intentionally-sketch2\" workspace does not reference expected entry file \"README.md\".\n- Exercise \"try-stage-intentionally-sketch2\" uses workspace entry file \"community-site/index.html\" but profile \"git\" expects \"README.md\".\n- Exercise \"try-stage-intentionally-sketch3\" uses workspace entry file \"community-site/README.md\" but profile \"git\" expects \"README.md\".",
   "validationState": {
     "unsafeSkipValidation": false,
     "requested": {

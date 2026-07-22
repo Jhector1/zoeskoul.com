@@ -59,7 +59,7 @@ vi.mock("next-intl", () => ({
     useTranslations: () => (key: string, paramsOrFallback?: unknown, fallback?: string) => {
         if (key === "attempts" && paramsOrFallback && typeof paramsOrFallback === "object") {
             const params = paramsOrFallback as { n?: unknown; max?: unknown };
-            return `Attempts: ${params.n ?? 0}/${params.max ?? "∞"}`;
+            return `Attempts: ${params.n ?? 0}`;
         }
         if (typeof paramsOrFallback === "string") return paramsOrFallback;
         return fallback ?? "";
@@ -1095,7 +1095,8 @@ describe("QuizPracticeCard project-step fallback", () => {
             />,
         );
 
-        expect(html).toContain("Attempts: 0/∞");
+        expect(html).toContain("Attempts: 0");
+        expect(html).not.toContain("∞");
 
         mutableLearnerUiFlags.compactLearnerUi = false;
     });
