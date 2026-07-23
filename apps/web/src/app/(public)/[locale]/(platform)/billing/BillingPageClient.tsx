@@ -73,6 +73,35 @@ export default function BillingPageClient({
         return <BillingPageSkeleton showPaywall={Boolean(paywall?.reason)} />;
     }
 
+    if (status?.billingExempt) {
+        return (
+            <BillingShell>
+                <div className="relative mx-auto grid max-w-5xl gap-4">
+                    <BillingCard>
+                        <BillingHeader
+                            busy={busy}
+                            loading={loading}
+                            status={status}
+                            headlineBadge={headlineBadge}
+                            onManageBilling={openPortal}
+                            onSignIn={authRedirect}
+                        />
+
+                        <div className="p-5 pt-0">
+                            <BillingSoftPanel className="p-5">
+                                <div className="ui-title-sm">{t("includedAccess.title")}</div>
+                                <div className="mt-2 text-sm text-neutral-700 dark:text-white/70">
+                                    {t("includedAccess.body")}
+                                </div>
+                                <div className="mt-2 ui-meta">{t("includedAccess.note")}</div>
+                            </BillingSoftPanel>
+                        </div>
+                    </BillingCard>
+                </div>
+            </BillingShell>
+        );
+    }
+
     return (
         <BillingShell>
             <div className="relative mx-auto grid max-w-5xl gap-4">

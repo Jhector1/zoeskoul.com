@@ -11,7 +11,7 @@ export type ReviewAccessResolved =
     | {
     ok: true;
     mode: "standard";
-    bypassBilling: false;
+    bypassBilling: boolean;
     scope: {
         subjectSlug: string;
         moduleSlug: string;
@@ -88,7 +88,7 @@ export async function resolveReviewAccess(args: {
     return {
         ok: true,
         mode: "standard",
-        bypassBilling: false,
+        bypassBilling: access.bypassBilling,
         scope: {
             subjectSlug,
             moduleSlug: resolved.module.slug,

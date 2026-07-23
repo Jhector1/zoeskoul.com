@@ -5,6 +5,7 @@ import type { Actor } from "@/lib/practice/actor";
 import { gatePracticeModuleAccess } from "@/lib/billing/gatePracticeModuleAccess";
 import { resolvePracticeExperienceMode } from "@/lib/practice/experience/resolve";
 import type { PracticeExperienceMode } from "@/lib/practice/experience/types";
+import { resolveActorRoleCapabilities } from "@/lib/access/roleCapabilitiesServer";
 
 export type PracticeAccessResolved =
   | {
@@ -47,6 +48,11 @@ export async function resolvePracticeAccess(args: {
     mode === "daily_five" ||
     mode === "assignment"
   ) {
+    return { ok: true, mode, bypassBilling: true };
+  }
+
+  const capabilities = await resolveActorRoleCapabilities(prisma, actor);
+  if (capabilities.canBypassBilling) {
     return { ok: true, mode, bypassBilling: true };
   }
 

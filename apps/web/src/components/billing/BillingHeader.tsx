@@ -46,13 +46,16 @@ export default function BillingHeader({
                 </div>
 
                 <div className="flex flex-wrap gap-2">
-                    <button
-                        onClick={onManageBilling}
-                        disabled={busy || loading || !status?.isAuthenticated}
-                        className={cn("ui-btn-secondary px-4", "disabled:cursor-not-allowed disabled:opacity-40")}
-                    >
-                        {t("header.manageBilling")}
-                    </button>
+                    {status?.isAuthenticated &&
+                    (!status.billingExempt || Boolean(status.subscriptionId)) ? (
+                        <button
+                            onClick={onManageBilling}
+                            disabled={busy || loading}
+                            className={cn("ui-btn-secondary px-4", "disabled:cursor-not-allowed disabled:opacity-40")}
+                        >
+                            {t("header.manageBilling")}
+                        </button>
+                    ) : null}
 
                     {!status?.isAuthenticated ? (
                         <button

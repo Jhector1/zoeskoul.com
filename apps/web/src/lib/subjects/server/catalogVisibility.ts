@@ -50,7 +50,7 @@ async function getCatalogActorAccess(): Promise<CatalogActorAccess> {
     });
 
     const roles = access.roles ?? [];
-    const isAdmin = roles.includes("admin");
+    const isAdmin = access.isAdmin;
 
     /**
      * Keep this admin-only for catalog visibility.

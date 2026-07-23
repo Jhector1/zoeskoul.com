@@ -1,13 +1,11 @@
+import { resolveRoleCapabilities } from "@/lib/access/roleCapabilities";
+
 export type TeachingRoleAccess = {
   allowed: boolean;
   isAdmin: boolean;
   isTeacher: boolean;
   roles: string[];
 };
-
-function normalizeRoles(roles: readonly unknown[]) {
-  return [...new Set(roles.map((role) => String(role).trim().toLowerCase()).filter(Boolean))];
-}
 
 function normalizeAdminEmails(values: readonly string[]) {
   return new Set(values.map((value) => value.trim().toLowerCase()).filter(Boolean));
@@ -18,11 +16,14 @@ export function resolveTeachingRoleAccess(args: {
   email?: string | null;
   configuredAdminEmails?: readonly string[];
 }): TeachingRoleAccess {
-  const roles = normalizeRoles(args.roles);
+  const roleCapabilities = resolveRoleCapabilities(args.roles);
   const configuredAdminEmails = normalizeAdminEmails(args.configuredAdminEmails ?? []);
   const email = args.email?.trim().toLowerCase() ?? null;
-  const isAdmin = roles.includes("admin") || Boolean(email && configuredAdminEmails.has(email));
-  const isTeacher = roles.includes("teacher");
+  const isAdmin =
+    roleCapabilities.isAdmin ||
+    Boolean(email && configuredAdminEmails.has(email));
+  const isTeacher = roleCapabilities.isTeacher;
+  const roles = roleCapabilities.roles;
 
   return {
     allowed: isAdmin || isTeacher,

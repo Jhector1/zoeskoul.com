@@ -6,6 +6,7 @@ function status(overrides: Partial<BillingStatus> = {}): BillingStatus {
   return {
     isAuthenticated: true,
     isSubscribed: false,
+    billingExempt: false,
     stripeStatus: null,
     subscriptionId: null,
     priceId: null,
@@ -25,6 +26,15 @@ function status(overrides: Partial<BillingStatus> = {}): BillingStatus {
 }
 
 describe("deriveBillingHeadline", () => {
+
+  it("shows included access instead of a payment call to action for privileged accounts", () => {
+    expect(
+      deriveBillingHeadline(
+        status({ billingExempt: true, isSubscribed: true }),
+        "en-US",
+      ),
+    ).toEqual({ tone: "good", text: "Access included" });
+  });
   it("offers the free trial when the learner has not used it", () => {
     expect(deriveBillingHeadline(status({ trialEligible: true }), "en-US")).toMatchObject({
       text: "Start free trial",

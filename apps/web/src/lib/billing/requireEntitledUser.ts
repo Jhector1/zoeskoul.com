@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { getEntitlementForUser } from "@/lib/billing/entitlement";
 import { syncSubscriptionsForUser } from "@/lib/billing/stripeService";
+import { resolvePrivilegedLearningAccess } from "@/lib/access/resolvePrivilegedLearningAccess";
 
 export async function requireEntitledUser() {
   const s = await auth();
@@ -10,6 +11,19 @@ export async function requireEntitledUser() {
 
   if (!userId) {
     return { ok: false as const, res: NextResponse.json({ message: "Unauthorized" }, { status: 401 }) };
+  }
+
+  const privileged = await resolvePrivilegedLearningAccess({
+    userId,
+    email: s?.user?.email ?? null,
+  });
+  if (privileged.canBypassBilling) {
+    return {
+      ok: true as const,
+      userId,
+      entitlement: null,
+      billingExempt: true as const,
+    };
   }
 
   // ✅ makes Stripe truth “instant” if webhook is delayed
@@ -34,5 +48,5 @@ export async function requireEntitledUser() {
     };
   }
 
-  return { ok: true as const, userId, entitlement: ent };
+  return { ok: true as const, userId, entitlement: ent, billingExempt: false as const };
 }

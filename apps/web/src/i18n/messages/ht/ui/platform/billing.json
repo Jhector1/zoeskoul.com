@@ -19,6 +19,11 @@
       "subjectLabel": "sijè",
       "moduleLabel": "modil"
     },
+    "includedAccess": {
+      "title": "Kont sa a pa bezwen peye",
+      "body": "Wòl privilejye ou a gen ladan tout fonksyon aprantisaj ki peye yo, modil, devwa, pratik, ak kapasite IDE yo.",
+      "note": "Ou pa bezwen abònman Stripe oswa checkout pandan wòl sa a toujou sou kont lan."
+    },
     "plans": {
       "sectionTitle": "Plan yo",
       "trialInfo": "Esè disponib si ou elijib.",

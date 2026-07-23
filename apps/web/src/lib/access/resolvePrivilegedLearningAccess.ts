@@ -1,6 +1,7 @@
 import "server-only";
 
 import { prisma } from "@/lib/prisma";
+import { resolveRoleCapabilities } from "@/lib/access/roleCapabilities";
 
 type Args = {
     userId?: string | null;
@@ -8,26 +9,26 @@ type Args = {
 };
 
 export async function resolvePrivilegedLearningAccess(args: Args) {
+    const byId = args.userId
+        ? await prisma.user.findUnique({
+              where: { id: args.userId },
+              select: { roles: true },
+          })
+        : null;
+
     const user =
-        args.userId
+        byId ??
+        (args.email
             ? await prisma.user.findUnique({
-                  where: { id: args.userId },
+                  where: { email: args.email },
                   select: { roles: true },
               })
-            : args.email
-              ? await prisma.user.findUnique({
-                    where: { email: args.email },
-                    select: { roles: true },
-                })
-              : null;
+            : null);
 
-    const roles: string[] = (user as any)?.roles ?? [];
-    const canUnlockAll =
-        roles.includes("teacher") || roles.includes("admin");
+    const capabilities = resolveRoleCapabilities(user?.roles);
 
     return {
-        canUnlockAll,
-        bypass: canUnlockAll,
-        roles,
+        ...capabilities,
+        bypass: capabilities.canUnlockAll,
     };
 }

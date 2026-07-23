@@ -3,6 +3,7 @@ import "server-only";
 import type { PrismaClient } from "@/lib/prisma";
 import type { Actor } from "@/lib/practice/actor";
 import type { PracticeRunViewer } from "./types";
+import { resolveActorRoleCapabilities } from "@/lib/access/roleCapabilitiesServer";
 
 function future(value: Date | null | undefined) {
   return !value || value.getTime() > Date.now();
@@ -16,7 +17,7 @@ export async function resolvePracticeViewer(
     return { tier: "guest", authenticated: false, subscribed: false };
   }
 
-  const [subscription, user] = await Promise.all([
+  const [subscription, capabilities] = await Promise.all([
     prisma.subscription.findFirst({
       where: {
         userId: actor.userId,
@@ -29,16 +30,11 @@ export async function resolvePracticeViewer(
         trialEnd: true,
       },
     }),
-    prisma.user.findUnique({
-      where: { id: actor.userId },
-      select: { roles: true },
-    }),
+    resolveActorRoleCapabilities(prisma, actor),
   ]);
 
-  const roles = (user?.roles ?? []).map(String);
-  const privileged = roles.includes("teacher") || roles.includes("admin");
   const subscribed = Boolean(
-    privileged ||
+    capabilities.canUseUnlimitedPractice ||
       (subscription &&
         (subscription.status === "active" ||
           (subscription.status === "trialing" && future(subscription.trialEnd)) ||

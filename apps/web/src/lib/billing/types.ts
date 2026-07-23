@@ -1,6 +1,7 @@
 export type BillingStatus = {
     isAuthenticated: boolean;
     isSubscribed: boolean;
+    billingExempt: boolean;
 
     // Stripe details for display
     stripeStatus: string | null; // "trialing" | "active" | "past_due" | ...

@@ -19,6 +19,11 @@
       "subjectLabel": "matière",
       "moduleLabel": "module"
     },
+    "includedAccess": {
+      "title": "Aucun paiement n’est requis pour ce compte",
+      "body": "Votre rôle privilégié inclut toutes les fonctionnalités d’apprentissage payantes, les modules, les devoirs, la pratique et les capacités de l’IDE.",
+      "note": "Aucun abonnement Stripe ni paiement n’est nécessaire tant que ce rôle reste attribué."
+    },
     "plans": {
       "sectionTitle": "Formules",
       "trialInfo": "Essai disponible si vous êtes éligible.",

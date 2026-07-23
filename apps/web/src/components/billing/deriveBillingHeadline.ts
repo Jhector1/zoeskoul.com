@@ -16,6 +16,13 @@ export function deriveBillingHeadline(
 ): BillingHeadline | null {
   if (!status?.isAuthenticated) return null;
 
+  if (status.billingExempt) {
+    return {
+      tone: "good",
+      text: "Access included",
+    };
+  }
+
   const stripeStatus = status.stripeStatus;
 
   if (stripeStatus === "trialing" && status.isSubscribed) {

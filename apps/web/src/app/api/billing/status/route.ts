@@ -12,6 +12,7 @@ import { getEntitlementForUser } from "@/lib/billing/entitlement";
 import { getLocaleFromCookie } from "@/serverUtils";
 import { toIntlLocale } from "@/i18n/money";
 import {resolveBillingCurrency} from "@/lib/billing/currency";
+import { resolveRoleCapabilities } from "@/lib/access/roleCapabilities";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -31,6 +32,7 @@ export async function GET() {
     return NextResponse.json({
       isAuthenticated: false,
       isSubscribed: false,
+      billingExempt: false,
 
       stripeStatus: null,
       subscriptionId: null,
@@ -51,16 +53,20 @@ export async function GET() {
 
   const userId = (session.user as any).id as string;
 
-  // Stripe-first freshness
-  await syncSubscriptionsForUser(userId).catch(() => {});
-
   const u = await prisma.user.findUnique({
     where: { id: userId },
-    select: { trialUsedAt: true },
+    select: { trialUsedAt: true, roles: true },
   });
+  const capabilities = resolveRoleCapabilities(u?.roles);
+  const billingExempt = capabilities.canBypassBilling;
+
+  if (!billingExempt) {
+    // Stripe-first freshness for accounts whose access depends on payment.
+    await syncSubscriptionsForUser(userId).catch(() => {});
+  }
 
   const ent = await getEntitlementForUser(userId);
-  const isSubscribed = ent.ok;
+  const isSubscribed = billingExempt || ent.ok;
 
   const currentPlan =
       ent.priceId === monthlyPriceId
@@ -72,13 +78,14 @@ export async function GET() {
   return NextResponse.json({
     isAuthenticated: true,
     isSubscribed,
+    billingExempt,
 
     stripeStatus: ent.status ?? null,
     subscriptionId: ent.subscriptionId ?? null,
     priceId: ent.priceId ?? null,
 
     currentPlan,
-    trialEligible: !u?.trialUsedAt,
+    trialEligible: !billingExempt && !u?.trialUsedAt,
 
     trialEndsAt: ent.trialEnd ? ent.trialEnd.toISOString() : null,
     currentPeriodEnd: ent.currentPeriodEnd ? ent.currentPeriodEnd.toISOString() : null,

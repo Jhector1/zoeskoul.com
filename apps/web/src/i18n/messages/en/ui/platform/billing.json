@@ -19,6 +19,11 @@
       "subjectLabel": "subject",
       "moduleLabel": "module"
     },
+    "includedAccess": {
+      "title": "Payment is not required for this account",
+      "body": "Your privileged role includes all paid learning features, modules, assignments, practice, and IDE capabilities.",
+      "note": "No Stripe subscription or checkout is needed while this role remains assigned."
+    },
     "plans": {
       "sectionTitle": "Plans",
       "trialInfo": "Trial available if eligible.",

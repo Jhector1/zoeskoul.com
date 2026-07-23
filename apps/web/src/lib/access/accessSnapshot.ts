@@ -2,6 +2,7 @@ import { FeatureKey } from "@zoeskoul/db";
 import type { PrismaClient } from "@/lib/prisma";
 import { Actor, actorKeyOf } from "@/lib/practice/actor";
 import { getAssignedSubjectIdsForUser } from "@/lib/learningAssignments/assignmentAccessServer";
+import { resolveActorRoleCapabilities } from "@/lib/access/roleCapabilitiesServer";
 
 function isWithinWindow(now: Date, startsAt?: Date | null, endsAt?: Date | null) {
     if (startsAt && startsAt > now) return false;
@@ -32,21 +33,28 @@ export async function getAccessSnapshot(
     const hasUser = Boolean(actor.userId);
 
     let isSubscribed = false;
+    let canUnlockAll = false;
 
     if (actor.userId) {
-        const sub = await prisma.subscription.findFirst({
-            where: {
-                userId: actor.userId,
-                status: { in: ["active", "trialing"] },
-            },
-            select: {
-                currentPeriodEnd: true,
-                status: true,
-            },
-            orderBy: {
-                updatedAt: "desc",
-            },
-        });
+        const [sub, capabilities] = await Promise.all([
+            prisma.subscription.findFirst({
+                where: {
+                    userId: actor.userId,
+                    status: { in: ["active", "trialing"] },
+                },
+                select: {
+                    currentPeriodEnd: true,
+                    status: true,
+                },
+                orderBy: {
+                    updatedAt: "desc",
+                },
+            }),
+            resolveActorRoleCapabilities(prisma, actor),
+        ]);
+
+        canUnlockAll = capabilities.canUnlockAll;
+        isSubscribed = capabilities.canBypassBilling;
 
         if (sub && (!sub.currentPeriodEnd || sub.currentPeriodEnd > now)) {
             isSubscribed = true;
@@ -59,6 +67,10 @@ export async function getAccessSnapshot(
 
     const subjectIds = args?.subjectIds?.length ? args.subjectIds : null;
     if (subjectIds) {
+        if (canUnlockAll) {
+            for (const subjectId of subjectIds) subjectAccess.add(subjectId);
+        }
+
         const grants = await prisma.subjectAccessGrant.findMany({
             where: {
                 actorKey,
@@ -92,6 +104,10 @@ export async function getAccessSnapshot(
 
     const moduleIds = args?.moduleIds?.length ? args.moduleIds : null;
     if (moduleIds) {
+        if (canUnlockAll) {
+            for (const moduleId of moduleIds) moduleAccess.add(moduleId);
+        }
+
         const grants = await prisma.moduleAccessGrant.findMany({
             where: {
                 actorKey,

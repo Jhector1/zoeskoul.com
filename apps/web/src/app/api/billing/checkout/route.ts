@@ -5,6 +5,7 @@ import { prisma } from "@/lib/prisma";
 import { createCheckoutSession, billingConfig } from "@/lib/billing/stripeService";
 import {getLocaleFromCookie} from "@/serverUtils";
 import {resolveBillingCurrency} from "@/lib/billing/currency";
+import { resolveRoleCapabilities } from "@/lib/access/roleCapabilities";
 
 function safeInternalPath(path: unknown, fallback = "/") {
   const raw = typeof path === "string" ? path.trim() : "";
@@ -36,8 +37,18 @@ export async function POST(req: Request) {
 
   const u = await prisma.user.findUnique({
     where: { id: userId },
-    select: { trialUsedAt: true },
+    select: { trialUsedAt: true, roles: true },
   });
+  const capabilities = resolveRoleCapabilities(u?.roles);
+  if (capabilities.canBypassBilling) {
+    return NextResponse.json(
+      {
+        message: "This account already includes paid access.",
+        code: "BILLING_NOT_REQUIRED",
+      },
+      { status: 409 },
+    );
+  }
 
   const canUseTrial = useTrial && !u?.trialUsedAt && trialDays > 0;
   const appLocale = await getLocaleFromCookie();     // "en", "fr", ...
