@@ -10,6 +10,7 @@ npx dotenv-cli -e ../../apps/web/.env.production.local -- npx prisma db seed
 # 1) format + validate schema
 npx prisma format
 npx prisma validate
+.
 
 # 2) create + apply migration (pick a good name)
 npx prisma migrate dev --name access-policy
