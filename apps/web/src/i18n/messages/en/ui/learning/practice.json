@@ -90,7 +90,8 @@
       "close": "Close chat",
       "open": "Open AI tutor",
       "available": "AI tutor available",
-      "error": "The tutor could not respond right now. Your exercise is still safe."
+      "error": "The tutor could not respond right now. Your exercise is still safe.",
+      "repeatError": "The tutor did not produce a new explanation. Ask about the specific checker message or the part of your attempt that is confusing."
     },
     "review": {
       "emptyAll": "No questions yet.",

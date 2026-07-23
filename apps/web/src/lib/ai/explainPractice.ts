@@ -29,8 +29,57 @@ function fallbackShort(input: ConceptInput): string {
   return "Check the next step only. Compare what the exercise asks for with what your current attempt actually changes or returns.";
 }
 
-function fallbackTutor(): string {
-  return "One requirement still does not match the result of your attempt. Compare the latest feedback with the state your work actually produced, then inspect that one mismatch before changing anything else.";
+function record(value: unknown): Record<string, unknown> | null {
+  return value && typeof value === "object" && !Array.isArray(value)
+    ? (value as Record<string, unknown>)
+    : null;
+}
+
+function firstVisibleFailureText(value: unknown): string | null {
+  const failure = record(value);
+  if (!failure) return null;
+
+  for (const key of [
+    "feedbackMessage",
+    "explanation",
+    "runtimeError",
+    "feedbackTitle",
+  ]) {
+    const candidate = failure[key];
+    if (typeof candidate === "string" && candidate.trim()) {
+      return candidate.trim().slice(0, 700);
+    }
+  }
+
+  return null;
+}
+
+export function buildPracticeTutorFallback(
+  input: PracticeTutorInput,
+): string {
+  const feedback = firstVisibleFailureText(input.diagnosticContext.failedChecks);
+  const asksForExplanation = /\b(explain|meaning|mean|why|understand)\b/i.test(
+    input.message?.trim() ?? "",
+  );
+
+  if (feedback && asksForExplanation) {
+    return `The latest checker message means this is the part that still differs: ${feedback} Compare that message with the exact state currently shown in your terminal or editor, then inspect only that mismatch.`;
+  }
+
+  if (feedback) {
+    return `The latest check points to this specific mismatch: ${feedback} Compare it with the result your current attempt produced before changing anything else.`;
+  }
+
+  switch (input.diagnosticContext.domain) {
+    case "terminal":
+      return "Compare the last terminal feedback with the repository or workspace state that now exists. Check the files, current folder, and recorded command result for the first mismatch.";
+    case "sql":
+      return "Compare the requested columns, filters, grouping, ordering, and result shape with the latest checker feedback. Inspect the first place where your query result differs.";
+    case "programming":
+      return "Compare the latest runtime or validation feedback with your current files and output. Inspect the first behavior or structure that does not match the exercise.";
+    default:
+      return "Compare the latest feedback with the result your attempt actually produced, then inspect the first requirement that does not match.";
+  }
 }
 
 function stringifyContext(value: unknown, max = 16000): string {
@@ -193,6 +242,8 @@ export function buildPracticeTutorPrompt(input: PracticeTutorInput) {
     "For programming, compare the learner files, runtime error, behavior checks, and required program structure as relevant.",
     "If the learner's work appears correct and the check appears stale or overly strict, say that clearly without inventing a change.",
     "Be warm, specific, and conversational. Ask one small diagnostic question when useful.",
+    "Answer the learner's newest question directly and do not repeat a previous assistant response.",
+    "When the learner asks for an explanation, restate the latest failed check in simpler terms and connect it to the learner's current work.",
     "Never give the final answer, correct option, exact command, exact SQL query, or complete code solution.",
     "If asked for the answer, continue coaching instead.",
     "Stay focused on this exercise and keep each response under 140 words.",
@@ -231,7 +282,7 @@ export function buildPracticeTutorPrompt(input: PracticeTutorInput) {
 export async function explainPracticeTutor(
   input: PracticeTutorInput,
 ): Promise<string> {
-  const fallback = fallbackTutor();
+  const fallback = buildPracticeTutorFallback(input);
   const prompt = buildPracticeTutorPrompt(input);
   const content = await requestOpenAi({
     system: prompt.system,

@@ -73,7 +73,8 @@
       "close": "Fèmen konvèsasyon an",
       "open": "Louvri titè IA a",
       "available": "Titè IA a disponib",
-      "error": "Titè a pa ka reponn kounye a. Egzèsis ou a toujou an sekirite."
+      "error": "Titè a pa ka reponn kounye a. Egzèsis ou a toujou an sekirite.",
+      "repeatError": "Titè a pa t bay yon nouvo eksplikasyon. Mande sou mesaj verifikatè a oswa sou pati nan tantativ ou ki pa klè pou ou."
     },
     "review": {
       "emptyAll": "Pa gen kesyon ankò.",

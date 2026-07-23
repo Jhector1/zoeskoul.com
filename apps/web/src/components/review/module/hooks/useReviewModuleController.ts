@@ -87,6 +87,7 @@ import {
 import { resolveActiveToolScopeKey } from "./activeToolScopeKey";
 import { resolveCompactAssignmentCtaVisibility } from "../assignmentCtaVisibility";
 import {
+    COMPACT_PRACTICE_NAV_LABEL,
     isAtFinalModuleNavigationStep,
     type CompactQuizNavigationState,
 } from "../compactFlowNavigation";
@@ -140,7 +141,7 @@ function compactCardDestinationLabel(card: unknown) {
 
     if (record.type === "quiz") return "Quiz";
 
-    if (hasRequiredEmbeddedTryIt(card as any)) return "Practice";
+    if (hasRequiredEmbeddedTryIt(card as any)) return COMPACT_PRACTICE_NAV_LABEL;
 
     return "Next";
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import React, {
+  useCallback,
   useEffect,
   useMemo,
   useRef,
@@ -76,9 +77,11 @@ function messageId(role: PracticeTutorMessage["role"]) {
 function TutorAssistantMessage({
   message,
   label,
+  onReveal,
 }: {
   message: TutorUiMessage;
   label: string;
+  onReveal: () => void;
 }) {
   const reduceMotion = useReducedMotion();
   const rendered = useAiTutorTypewriter(
@@ -86,6 +89,11 @@ function TutorAssistantMessage({
     8,
     Boolean(message.animate && !reduceMotion),
   );
+
+  useEffect(() => {
+    if (!message.animate || reduceMotion) return;
+    onReveal();
+  }, [message.animate, onReveal, reduceMotion, rendered]);
 
   return (
     <div className="flex items-start gap-2">
@@ -111,6 +119,7 @@ export default function AiTutorFloating({
   const dragControls = useDragControls();
   const constraintsRef = useRef<HTMLDivElement | null>(null);
   const scrollRef = useRef<HTMLDivElement | null>(null);
+  const scrollFrameRef = useRef<number | null>(null);
   const requestRef = useRef<AbortController | null>(null);
 
   const [mounted, setMounted] = useState(false);
@@ -192,15 +201,30 @@ export default function AiTutorFloating({
     setMessages([]);
   }, [exerciseKey]);
 
-  useEffect(() => {
-    if (!open) return;
-    requestAnimationFrame(() => {
+  const keepLatestMessageVisible = useCallback(() => {
+    if (scrollFrameRef.current !== null) return;
+
+    scrollFrameRef.current = window.requestAnimationFrame(() => {
+      scrollFrameRef.current = null;
       const node = scrollRef.current;
       if (node) node.scrollTop = node.scrollHeight;
     });
-  }, [messages, busy, open]);
+  }, []);
 
-  useEffect(() => () => requestRef.current?.abort(), []);
+  useEffect(() => {
+    if (!open) return;
+    keepLatestMessageVisible();
+  }, [busy, error, keepLatestMessageVisible, messages, open]);
+
+  useEffect(
+    () => () => {
+      requestRef.current?.abort();
+      if (scrollFrameRef.current !== null) {
+        window.cancelAnimationFrame(scrollFrameRef.current);
+      }
+    },
+    [],
+  );
 
   const offerText = t(
     "aiTutor.offer",
@@ -247,12 +271,28 @@ export default function AiTutorFloating({
         signal: controller.signal,
       });
 
+      const reply = response.reply.trim();
+      const previousAssistant = [...history]
+        .reverse()
+        .find((item) => item.role === "assistant");
+
+      if (previousAssistant?.content.trim() === reply) {
+        setError(
+          t(
+            "aiTutor.repeatError",
+            undefined,
+            "The tutor did not produce a new explanation. Ask about the specific checker message or the part of your attempt that is confusing.",
+          ),
+        );
+        return;
+      }
+
       setMessages((items) => [
         ...items,
         {
           id: messageId("assistant"),
           role: "assistant",
-          content: response.reply,
+          content: reply,
           animate: true,
         },
       ]);
@@ -509,6 +549,7 @@ export default function AiTutorFloating({
                     key={message.id}
                     message={message}
                     label={t("aiTutor.avatarLabel", undefined, "Tutor")}
+                    onReveal={keepLatestMessageVisible}
                   />
                 ) : (
                   <div key={message.id} className="flex justify-end">

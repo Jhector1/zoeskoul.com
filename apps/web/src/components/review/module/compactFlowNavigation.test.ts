@@ -1,6 +1,9 @@
 import { describe, expect, it } from "vitest";
 
-import { isAtFinalModuleNavigationStep } from "./compactFlowNavigation";
+import {
+  COMPACT_PRACTICE_NAV_LABEL,
+  isAtFinalModuleNavigationStep,
+} from "./compactFlowNavigation";
 
 describe("isAtFinalModuleNavigationStep", () => {
   it("keeps module navigation hidden while a nested project or quiz step remains", () => {
@@ -39,5 +42,11 @@ describe("isAtFinalModuleNavigationStep", () => {
         hasNextTopic: false,
       }),
     ).toBe(true);
+  });
+});
+
+describe("COMPACT_PRACTICE_NAV_LABEL", () => {
+  it("keeps practice transitions labeled as the neutral next action", () => {
+    expect(COMPACT_PRACTICE_NAV_LABEL).toBe("Next");
   });
 });

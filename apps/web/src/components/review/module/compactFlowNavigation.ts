@@ -1,3 +1,5 @@
+export const COMPACT_PRACTICE_NAV_LABEL = "Next";
+
 export type CompactProgressStepStatus = "complete" | "revealed" | "upcoming";
 
 export type CompactQuizNavigationState = {

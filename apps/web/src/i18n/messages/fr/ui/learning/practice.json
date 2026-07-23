@@ -73,7 +73,8 @@
       "close": "Fermer la discussion",
       "open": "Ouvrir le tuteur IA",
       "available": "Tuteur IA disponible",
-      "error": "Le tuteur ne peut pas répondre pour le moment. Votre exercice reste enregistré."
+      "error": "Le tuteur ne peut pas répondre pour le moment. Votre exercice reste enregistré.",
+      "repeatError": "Le tuteur n’a pas produit de nouvelle explication. Posez une question sur le message précis du vérificateur ou sur la partie de votre tentative qui vous pose problème."
     },
     "review": {
       "emptyAll": "Aucune question pour le moment.",

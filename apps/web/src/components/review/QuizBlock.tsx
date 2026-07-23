@@ -47,9 +47,10 @@ import { clearReviewWorkspaceDrafts } from "@/components/tools/panes/reviewWorks
 import FlowNavigator, {
   type FlowNavMode,
 } from "@/components/review/navigation/FlowNavigator";
-import type {
-  CompactProgressStepStatus,
-  CompactQuizNavigationState,
+import {
+  COMPACT_PRACTICE_NAV_LABEL,
+  type CompactProgressStepStatus,
+  type CompactQuizNavigationState,
 } from "@/components/review/module/compactFlowNavigation";
 import {
     computeReviewQuizCompletionSummary,
@@ -1775,7 +1776,7 @@ export default function QuizBlock({
         : activeQuestionCanFinalizeFlow
             ? `Finish ${compactFlowKindLabel}`
             : compactFlowKindLabel === "practice"
-                ? "Practice"
+                ? COMPACT_PRACTICE_NAV_LABEL
                 : compactFlowKindLabel === "quiz"
                     ? "Quiz"
                     : compactFlowKindLabel === "capstone"

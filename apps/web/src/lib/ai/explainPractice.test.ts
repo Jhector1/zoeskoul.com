@@ -1,6 +1,9 @@
 import { describe, expect, it } from "vitest";
 
-import { buildPracticeTutorPrompt } from "./explainPractice";
+import {
+  buildPracticeTutorFallback,
+  buildPracticeTutorPrompt,
+} from "./explainPractice";
 
 describe("buildPracticeTutorPrompt", () => {
   it("gives the model private expected state while explicitly forbidding disclosure", () => {
@@ -42,5 +45,50 @@ describe("buildPracticeTutorPrompt", () => {
     expect(userMessage).toContain("PRIVATE REFERENCE");
     expect(prompt.system).toContain("never reveal");
     expect(prompt.system).toContain("resulting workspace or repository state");
+  });
+});
+
+describe("buildPracticeTutorFallback", () => {
+  const diagnosticContext = {
+    version: 1 as const,
+    domain: "terminal" as const,
+    task: {
+      title: "Inspect the event desk",
+      prompt: "Use terminal commands to inspect the event desk.",
+      kind: "code_input",
+      topicSlug: "inspect-event-desk",
+    },
+    learnerVisibleContext: { language: "bash" },
+    environment: { language: "bash" },
+    starterState: {},
+    learnerState: {
+      currentAttempt: {},
+      recentSubmittedAttempts: [],
+    },
+    failedChecks: {
+      feedbackMessage: "Use `ls` to inspect the event desk.",
+    },
+    privateReference: {
+      expected: {},
+      expectedAnswer: null,
+      authoredExplanation: null,
+    },
+  };
+
+  it("uses learner-visible checker feedback instead of one static sentence", () => {
+    expect(
+      buildPracticeTutorFallback({ diagnosticContext }),
+    ).toContain("Use `ls` to inspect the event desk.");
+  });
+
+  it("answers an explanation request differently from the initial fallback", () => {
+    const initial = buildPracticeTutorFallback({ diagnosticContext });
+    const explained = buildPracticeTutorFallback({
+      diagnosticContext,
+      message: "explain",
+    });
+
+    expect(explained).not.toBe(initial);
+    expect(explained).toContain("means this is the part that still differs");
   });
 });
