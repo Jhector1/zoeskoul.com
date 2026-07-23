@@ -1,0 +1,497 @@
+{
+  "topicId": "detect-equal-pair-sums",
+  "subjectSlug": "c--c-data-structures--draft",
+  "moduleSlug": "c--c-data-structures--draft-module-1-algorithm-design-lab",
+  "sectionSlug": "c--c-data-structures--draft-algorithm-design-lab",
+  "prefix": "cds1",
+  "minutes": 35,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "c",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "preset": "runner",
+    "runnerBackend": "judge0",
+    "layoutMode": "default",
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": false
+    }
+  },
+  "topic": {
+    "labelKey": "topics.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.detect-equal-pair-sums.label",
+    "summaryKey": "topics.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.detect-equal-pair-sums.summary"
+  },
+  "cards": [
+    {
+      "id": "question-2-problem",
+      "kind": "sketch",
+      "titleKey": "topics.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.detect-equal-pair-sums.cards.question-2-problem.title",
+      "sketchId": "question-2-problem",
+      "height": 760
+    },
+    {
+      "id": "pair-sums-animation",
+      "kind": "sketch",
+      "titleKey": "topics.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.detect-equal-pair-sums.cards.pair-sums-animation.title",
+      "sketchId": "pair-sums-animation",
+      "height": 820
+    },
+    {
+      "id": "pair-sums-project",
+      "kind": "project",
+      "titleKey": "topics.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.detect-equal-pair-sums.cards.pair-sums-project.title",
+      "project": {
+        "difficulty": "hard",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "displayKind": "project",
+        "uiKind": "project",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "equal_pair_sums",
+            "titleKey": "topics.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.detect-equal-pair-sums.projectSteps.equal_pair_sums.title",
+            "exerciseKey": "equal-pair-sums",
+            "difficulty": "hard",
+            "preferKind": "code_input",
+            "seedPolicy": "step",
+            "maxAttempts": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "analysis-quiz",
+      "kind": "quiz",
+      "titleKey": "topics.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.detect-equal-pair-sums.label",
+      "quiz": {
+        "difficulty": "medium",
+        "n": 1,
+        "min": 1,
+        "max": 1,
+        "selectionMode": "fixed",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "question-2-problem",
+      "archetype": "paragraph",
+      "titleKey": "sketches.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.detect-equal-pair-sums.question-2-problem.title",
+      "bodyKey": "sketches.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.detect-equal-pair-sums.question-2-problem.bodyMarkdown"
+    },
+    {
+      "id": "pair-sums-animation",
+      "archetype": "algorithm_animation",
+      "titleKey": "sketches.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.detect-equal-pair-sums.pair-sums-animation.title",
+      "contextKey": "sketches.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.detect-equal-pair-sums.pair-sums-animation.context",
+      "intervalMs": 1400,
+      "autoPlay": false,
+      "showControls": true,
+      "showStepCounter": true,
+      "canvasHeight": 300,
+      "steps": [
+        {
+          "id": "pair-sums-animation-1",
+          "titleKey": "sketches.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.detect-equal-pair-sums.pair-sums-animation.steps.0.title",
+          "bodyKey": "sketches.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.detect-equal-pair-sums.pair-sums-animation.steps.0.body",
+          "formula": "$1+4=2+3=5$",
+          "nodes": [
+            {
+              "id": "a",
+              "label": "(1, 4)",
+              "x": 25,
+              "y": 48,
+              "tone": "good",
+              "active": true,
+              "width": 24
+            },
+            {
+              "id": "goal",
+              "label": "same sum",
+              "detail": "four distinct values",
+              "x": 50,
+              "y": 48,
+              "shape": "pill",
+              "tone": "info",
+              "width": 28
+            },
+            {
+              "id": "b",
+              "label": "(2, 3)",
+              "x": 77,
+              "y": 48,
+              "tone": "good",
+              "active": true,
+              "width": 24
+            }
+          ],
+          "edges": [
+            {
+              "from": "a",
+              "to": "goal"
+            },
+            {
+              "from": "b",
+              "to": "goal"
+            }
+          ]
+        },
+        {
+          "id": "pair-sums-animation-2",
+          "titleKey": "sketches.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.detect-equal-pair-sums.pair-sums-animation.steps.1.title",
+          "bodyKey": "sketches.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.detect-equal-pair-sums.pair-sums-animation.steps.1.body",
+          "code": "for (i = 0; i < n; i++)\n    for (j = i + 1; j < n; j++)",
+          "nodes": [
+            {
+              "id": "vals",
+              "label": "n values",
+              "x": 28,
+              "y": 48,
+              "shape": "pill",
+              "tone": "info",
+              "width": 24
+            },
+            {
+              "id": "pairs",
+              "label": "n(n - 1) / 2 pairs",
+              "detail": "only i < j",
+              "x": 70,
+              "y": 48,
+              "shape": "pill",
+              "tone": "good",
+              "active": true,
+              "width": 38
+            }
+          ],
+          "edges": [
+            {
+              "from": "vals",
+              "to": "pairs",
+              "active": true
+            }
+          ]
+        },
+        {
+          "id": "pair-sums-animation-3",
+          "titleKey": "sketches.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.detect-equal-pair-sums.pair-sums-animation.steps.2.title",
+          "bodyKey": "sketches.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.detect-equal-pair-sums.pair-sums-animation.steps.2.body",
+          "formula": "$0 < L[i]+L[j] < 2k$",
+          "nodes": [
+            {
+              "id": "pair",
+              "label": "pair (1, 4)",
+              "x": 20,
+              "y": 48,
+              "tone": "info",
+              "active": true,
+              "width": 25
+            },
+            {
+              "id": "sum",
+              "label": "sum = 5",
+              "x": 50,
+              "y": 48,
+              "shape": "pill",
+              "width": 24
+            },
+            {
+              "id": "bucket",
+              "label": "bucket[5]",
+              "x": 80,
+              "y": 48,
+              "tone": "good",
+              "width": 25
+            }
+          ],
+          "edges": [
+            {
+              "from": "pair",
+              "to": "sum",
+              "active": true
+            },
+            {
+              "from": "sum",
+              "to": "bucket",
+              "active": true
+            }
+          ]
+        },
+        {
+          "id": "pair-sums-animation-4",
+          "titleKey": "sketches.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.detect-equal-pair-sums.pair-sums-animation.steps.3.title",
+          "bodyKey": "sketches.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.detect-equal-pair-sums.pair-sums-animation.steps.3.body",
+          "nodes": [
+            {
+              "id": "bucket",
+              "label": "bucket[5]",
+              "detail": "stored pair: indices of 1 and 4",
+              "x": 50,
+              "y": 48,
+              "shape": "pill",
+              "tone": "good",
+              "active": true,
+              "width": 48
+            }
+          ]
+        },
+        {
+          "id": "pair-sums-animation-5",
+          "titleKey": "sketches.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.detect-equal-pair-sums.pair-sums-animation.steps.4.title",
+          "bodyKey": "sketches.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.detect-equal-pair-sums.pair-sums-animation.steps.4.body",
+          "code": "if (old_i != i && old_i != j &&\n    old_j != i && old_j != j) return true;",
+          "nodes": [
+            {
+              "id": "old",
+              "label": "stored (1, 4)",
+              "x": 23,
+              "y": 48,
+              "tone": "good",
+              "width": 28
+            },
+            {
+              "id": "check",
+              "label": "all four indices differ?",
+              "x": 50,
+              "y": 48,
+              "shape": "pill",
+              "tone": "info",
+              "active": true,
+              "width": 32
+            },
+            {
+              "id": "new",
+              "label": "new (2, 3)",
+              "x": 79,
+              "y": 48,
+              "tone": "good",
+              "width": 26
+            }
+          ],
+          "edges": [
+            {
+              "from": "old",
+              "to": "check"
+            },
+            {
+              "from": "new",
+              "to": "check"
+            }
+          ]
+        },
+        {
+          "id": "pair-sums-animation-6",
+          "titleKey": "sketches.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.detect-equal-pair-sums.pair-sums-animation.steps.5.title",
+          "bodyKey": "sketches.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.detect-equal-pair-sums.pair-sums-animation.steps.5.body",
+          "formula": "$\\Theta(n^2)\\text{ pairs}\\times O(1)\\text{ table work}=\\Theta(n^2)$",
+          "nodes": [
+            {
+              "id": "yes",
+              "label": "return true",
+              "detail": "equal disjoint pair sums exist",
+              "x": 50,
+              "y": 48,
+              "shape": "pill",
+              "tone": "good",
+              "active": true,
+              "width": 46
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "exercises": [
+    {
+      "id": "equal-pair-sums",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.detect-equal-pair-sums.finalLab.steps.equal_pair_sums",
+      "language": "c",
+      "starterCode": "@:topics.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.detect-equal-pair-sums.finalLab.steps.equal_pair_sums.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.c",
+          "content": "@:topics.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.detect-equal-pair-sums.finalLab.steps.equal_pair_sums.starterFiles.main_c.content",
+          "language": "c",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "algorithms/pair_sums.c",
+          "content": "@:topics.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.detect-equal-pair-sums.finalLab.steps.equal_pair_sums.starterFiles.algorithms_pair_sums_c.content",
+          "language": "c",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "algorithms/pair_sums.h",
+          "content": "@:topics.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.detect-equal-pair-sums.finalLab.steps.equal_pair_sums.starterFiles.algorithms_pair_sums_h.content",
+          "language": "c",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.c",
+          "content": "@:topics.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.detect-equal-pair-sums.finalLab.steps.equal_pair_sums.solutionFiles.main_c.content",
+          "language": "c",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "algorithms/pair_sums.c",
+          "content": "@:topics.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.detect-equal-pair-sums.finalLab.steps.equal_pair_sums.solutionFiles.algorithms_pair_sums_c.content",
+          "language": "c",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "algorithms/pair_sums.h",
+          "content": "@:topics.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.detect-equal-pair-sums.finalLab.steps.equal_pair_sums.solutionFiles.algorithms_pair_sums_h.content",
+          "language": "c",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "c",
+        "entryFilePath": "main.c",
+        "starterCode": "@:topics.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.detect-equal-pair-sums.finalLab.steps.equal_pair_sums.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.c",
+            "content": "@:topics.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.detect-equal-pair-sums.finalLab.steps.equal_pair_sums.starterFiles.main_c.content",
+            "language": "c",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "algorithms/pair_sums.c",
+            "content": "@:topics.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.detect-equal-pair-sums.finalLab.steps.equal_pair_sums.starterFiles.algorithms_pair_sums_c.content",
+            "language": "c",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "algorithms/pair_sums.h",
+            "content": "@:topics.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.detect-equal-pair-sums.finalLab.steps.equal_pair_sums.starterFiles.algorithms_pair_sums_h.content",
+            "language": "c",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.c",
+            "content": "@:topics.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.detect-equal-pair-sums.finalLab.steps.equal_pair_sums.solutionFiles.main_c.content",
+            "language": "c",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "algorithms/pair_sums.c",
+            "content": "@:topics.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.detect-equal-pair-sums.finalLab.steps.equal_pair_sums.solutionFiles.algorithms_pair_sums_c.content",
+            "language": "c",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "algorithms/pair_sums.h",
+            "content": "@:topics.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.detect-equal-pair-sums.finalLab.steps.equal_pair_sums.solutionFiles.algorithms_pair_sums_h.content",
+            "language": "c",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "case1=yes\ncase2=no\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.detect-equal-pair-sums.finalLab.steps.equal_pair_sums.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.c",
+            "content": "@:topics.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.detect-equal-pair-sums.finalLab.steps.equal_pair_sums.solutionFiles.main_c.content",
+            "language": "c",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "algorithms/pair_sums.c",
+            "content": "@:topics.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.detect-equal-pair-sums.finalLab.steps.equal_pair_sums.solutionFiles.algorithms_pair_sums_c.content",
+            "language": "c",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "algorithms/pair_sums.h",
+            "content": "@:topics.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.detect-equal-pair-sums.finalLab.steps.equal_pair_sums.solutionFiles.algorithms_pair_sums_h.content",
+            "language": "c",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "path": "algorithms/pair_sums.c",
+            "pattern": "for (size_t i = 0",
+            "message": "@:topics.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.detect-equal-pair-sums.finalLab.steps.equal_pair_sums.checks.0.message",
+            "normalizeWhitespace": false
+          },
+          {
+            "type": "source_contains",
+            "path": "algorithms/pair_sums.c",
+            "pattern": "for (size_t j = i + 1",
+            "message": "@:topics.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.detect-equal-pair-sums.finalLab.steps.equal_pair_sums.checks.1.message",
+            "normalizeWhitespace": false
+          },
+          {
+            "type": "source_contains",
+            "path": "algorithms/pair_sums.c",
+            "pattern": "2 * k",
+            "message": "@:topics.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.detect-equal-pair-sums.finalLab.steps.equal_pair_sums.checks.2.message",
+            "normalizeWhitespace": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "pair-sum-table",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.detect-equal-pair-sums.quiz.pair-sum-table",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "c"
+      }
+    }
+  ]
+}

@@ -4,6 +4,7 @@ import type { PrismaClient } from "@/lib/prisma";
 import { checkModuleAccess } from "@/lib/access/moduleAccessServer";
 import { buildBillingHref, safeInternalPath } from "@/lib/billing/moduleAccess";
 import type { Actor } from "@/lib/practice/actor";
+import { describeModuleAccessDenial } from "@/lib/access/moduleAccessDenial";
 
 export async function gatePracticeModuleAccess(args: {
     prisma: PrismaClient;
@@ -52,6 +53,7 @@ export async function gatePracticeModuleAccess(args: {
 
     if (decision.ok) return { ok: true as const };
 
+    const denial = describeModuleAccessDenial(decision);
     const resolvedSubject = decision.subjectSlug ?? subjectSlug ?? "";
 
     // where to return AFTER subscribing
@@ -73,30 +75,33 @@ export async function gatePracticeModuleAccess(args: {
         (args.back ? safeInternalPath(args.back) : null) ??
         defaultBack;
 
-    const billingHref = buildBillingHref({
-        locale: args.locale,
-        next: nextPath,
-        back: backPath,
-        reason: "module",
-        subject: resolvedSubject || undefined,
-        module: moduleSlug,
-    });
+    const redirectTo =
+        denial.kind === "assignment"
+            ? `/${encodeURIComponent(args.locale)}/assignments`
+            : denial.kind === "auth"
+              ? `/api/auth/signin?callbackUrl=${encodeURIComponent(nextPath)}`
+              : buildBillingHref({
+                    locale: args.locale,
+                    next: nextPath,
+                    back: backPath,
+                    reason: "module",
+                    subject: resolvedSubject || undefined,
+                    module: moduleSlug,
+                });
 
     return {
         ok: false as const,
         res: NextResponse.json(
             {
-                message:
-                    decision.reason === "requires_login"
-                        ? "Sign in to subscribe and unlock this module."
-                        : "This module requires payment.",
-                paywall: true,
-                reason: "module",
-                redirectTo: billingHref,
+                message: denial.message,
+                code: denial.code,
+                paywall: denial.kind === "billing",
+                reason: denial.kind,
+                redirectTo,
                 subject: resolvedSubject || null,
                 module: moduleSlug,
             },
-            { status: 402 },
+            { status: denial.status },
         ),
     };
 }

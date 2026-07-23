@@ -1,0 +1,85 @@
+{
+  "subjectSlug": "c",
+  "courseSlug": "c-data-structures",
+  "catalogSlug": "c",
+  "trackSlug": "c",
+  "profileId": "c",
+  "workspaceProfileId": "browser-code-runner",
+  "workspacePolicyId": "c-multifile-workspace",
+  "title": "C Data Structures and Algorithm Analysis",
+  "subtitle": "Animate the invariant, implement it in C, and prove the runtime.",
+  "level": "intermediate",
+  "moduleCount": 1,
+  "description": "A five-part intermediate C lab based on recursive runtime analysis, equal pair sums, balanced BSTs, priority queues built from stacks, and logarithmic insertion into pointer-based heaps.",
+  "sourceLocale": "en",
+  "targetLocales": [],
+  "accessPolicy": "paid",
+  "visibility": "private",
+  "moduleAccessOverrideDefault": null,
+  "audience": [
+    "Learners who know C syntax, pointers, structs, recursion, and dynamic memory.",
+    "Students preparing for data-structures and algorithm-analysis assignments."
+  ],
+  "prerequisites": [
+    "Comfort writing functions, structs, arrays, loops, and recursive C code.",
+    "Understand pointers, dynamic allocation, and basic asymptotic notation."
+  ],
+  "goals": [
+    "Trace recursive branching and derive a tight runtime bound.",
+    "Detect equal pair sums in quadratic time without reusing an index.",
+    "Build and rebalance binary search trees in linear time.",
+    "Implement a priority queue using only stack operations.",
+    "Find a linked heap insertion position in logarithmic time and restore heap order."
+  ],
+  "teachingStyle": {
+    "tone": "Visual, precise, book-like, and implementation-focused. Trace the invariant before writing code.",
+    "quizWeight": 0.3,
+    "projectWeight": 0.2,
+    "codeInputWeight": 0.5
+  },
+  "constraints": {
+    "moduleCount": 1,
+    "topicsPerModuleMin": 5,
+    "topicsPerModuleMax": 5,
+    "moduleSlugFormat": "<courseSlug>-module-<number>-<short-topic-area>",
+    "sectionSlugFormat": "<courseSlug>-section-<number>-<short-section-role>",
+    "prefixFormat": "<course_slug_with_underscores>_module_<number>"
+  },
+  "seedModules": [
+    "c-data-structures-module-1-algorithm-lab"
+  ],
+  "courseGenerationPolicy": {
+    "studentActionStyle": "full-ide",
+    "forbidUnavailableWorkspaceActions": true,
+    "preferredTerms": {
+      "terminal": "output panel",
+      "run button": "Run",
+      "implementation file": "the named .c file"
+    },
+    "notes": [
+      "For every assignment problem, generate a paragraph question sketch that faithfully states the original task, translates it into plain English, lists the constraints and required runtime, and names the exact assignment subparts covered by the executable lab.",
+      "Generate exactly one manual algorithm_animation immediately after that question sketch. Give the animation a contextKey that keeps the question and animation goal visible on every frame.",
+      "Place a single-step project card for the matching code_input immediately after its question sketch and animation. Keep each question, animation, and exercise together; never group all animations before one five-step project.",
+      "Use recursive-tree frames for recursive-boolean-configurations, bucket and pair frames for detect-equal-pair-sums, midpoint and inorder-rebuild frames for build-and-rebalance-bsts, legal two-stack transfer frames for priority-queue-with-stacks, and bit-path pointer frames for insert-linked-binary-heap.",
+      "Starter workspaces must include main.c, the public header, and the implementation file with a focused TODO.",
+      "Solution workspaces must include every starter path with complete compilable content.",
+      "Use deterministic stdout tests that cover an ordinary case, an edge case, and duplicate or structural behavior when relevant.",
+      "Do not require learners to create files or remember compiler commands; the full IDE compiles the workspace through the shared C profile.",
+      "Use C11-compatible code and avoid compiler-specific extensions."
+    ]
+  },
+  "practiceDefaults": {
+    "tryIt": true,
+    "requiresTryIt": true,
+    "tryItPlacement": "all_sketches"
+  },
+  "runtimePolicy": {
+    "language": "c",
+    "backend": "judge0",
+    "mode": "multi_file",
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  }
+}

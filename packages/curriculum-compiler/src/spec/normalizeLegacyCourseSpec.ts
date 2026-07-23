@@ -533,6 +533,10 @@ export function normalizeLegacyCourseSpec(raw: unknown): CourseSpec {
             input.accessPolicy === "free" || input.accessPolicy === "paid"
                 ? input.accessPolicy
                 : undefined,
+        visibility:
+            input.visibility === "private" || input.visibility === "organization"
+                ? input.visibility
+                : "public",
         moduleAccessOverrideDefault:
             input.moduleAccessOverrideDefault === "free" ||
             input.moduleAccessOverrideDefault === "paid"

@@ -1,0 +1,562 @@
+{
+  "topicId": "recursive-boolean-configurations",
+  "subjectSlug": "c-data-structures",
+  "moduleSlug": "c-data-structures-module-1-algorithm-design-lab",
+  "sectionSlug": "c-data-structures-algorithm-design-lab",
+  "prefix": "cds1",
+  "minutes": 35,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "c",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "preset": "runner",
+    "runnerBackend": "judge0",
+    "layoutMode": "default",
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": false
+    }
+  },
+  "topic": {
+    "labelKey": "topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.label",
+    "summaryKey": "topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.summary"
+  },
+  "cards": [
+    {
+      "id": "introduction",
+      "kind": "sketch",
+      "titleKey": "topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.cards.introduction.title",
+      "sketchId": "introduction",
+      "height": 440
+    },
+    {
+      "id": "question-1-problem",
+      "kind": "sketch",
+      "titleKey": "topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.cards.question-1-problem.title",
+      "sketchId": "question-1-problem",
+      "height": 760
+    },
+    {
+      "id": "recursion-animation",
+      "kind": "sketch",
+      "titleKey": "topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.cards.recursion-animation.title",
+      "sketchId": "recursion-animation",
+      "height": 820
+    },
+    {
+      "id": "recursion-project",
+      "kind": "project",
+      "titleKey": "topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.cards.recursion-project.title",
+      "project": {
+        "difficulty": "hard",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "displayKind": "project",
+        "uiKind": "project",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "recursion_runtime",
+            "titleKey": "topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.projectSteps.recursion_runtime.title",
+            "exerciseKey": "recursion-runtime",
+            "difficulty": "hard",
+            "preferKind": "code_input",
+            "seedPolicy": "step",
+            "maxAttempts": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "analysis-quiz",
+      "kind": "quiz",
+      "titleKey": "topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.label",
+      "quiz": {
+        "difficulty": "medium",
+        "n": 2,
+        "min": 2,
+        "max": 2,
+        "selectionMode": "fixed",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "introduction",
+      "archetype": "paragraph",
+      "titleKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.introduction.title",
+      "bodyKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.introduction.bodyMarkdown"
+    },
+    {
+      "id": "question-1-problem",
+      "archetype": "paragraph",
+      "titleKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.question-1-problem.title",
+      "bodyKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.question-1-problem.bodyMarkdown"
+    },
+    {
+      "id": "recursion-animation",
+      "archetype": "algorithm_animation",
+      "titleKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.recursion-animation.title",
+      "contextKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.recursion-animation.context",
+      "intervalMs": 1400,
+      "autoPlay": false,
+      "showControls": true,
+      "showStepCounter": true,
+      "canvasHeight": 300,
+      "steps": [
+        {
+          "id": "recursion-animation-1",
+          "titleKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.recursion-animation.steps.0.title",
+          "bodyKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.recursion-animation.steps.0.body",
+          "code": "m = n - i",
+          "nodes": [
+            {
+              "id": "call",
+              "label": "fooRec(L, n, i)",
+              "detail": "m = n - i positions remain",
+              "x": 50,
+              "y": 48,
+              "shape": "pill",
+              "tone": "info",
+              "active": true,
+              "width": 46
+            }
+          ]
+        },
+        {
+          "id": "recursion-animation-2",
+          "titleKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.recursion-animation.steps.1.title",
+          "bodyKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.recursion-animation.steps.1.body",
+          "formula": "$T(0)=c_0=\\Theta(1)$",
+          "code": "if (i == n) {\n    print(L);\n    return;\n}",
+          "nodes": [
+            {
+              "id": "base",
+              "label": "m = 0",
+              "detail": "i == n",
+              "x": 32,
+              "y": 48,
+              "shape": "pill",
+              "tone": "good",
+              "active": true,
+              "width": 28
+            },
+            {
+              "id": "work",
+              "label": "print and return",
+              "detail": "constant work",
+              "x": 70,
+              "y": 48,
+              "shape": "pill",
+              "tone": "info",
+              "width": 32
+            }
+          ],
+          "edges": [
+            {
+              "from": "base",
+              "to": "work",
+              "tone": "good",
+              "active": true
+            }
+          ]
+        },
+        {
+          "id": "recursion-animation-3",
+          "titleKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.recursion-animation.steps.2.title",
+          "bodyKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.recursion-animation.steps.2.body",
+          "formula": "$T(m)=2T(m-1)+c$",
+          "code": "L[i] = true;  fooRec(L, n, i + 1);\nL[i] = false; fooRec(L, n, i + 1);",
+          "nodes": [
+            {
+              "id": "r",
+              "label": "size m",
+              "x": 50,
+              "y": 18,
+              "shape": "circle",
+              "tone": "info"
+            },
+            {
+              "id": "t",
+              "label": "true branch",
+              "detail": "size m - 1",
+              "x": 28,
+              "y": 65,
+              "tone": "good",
+              "active": true,
+              "width": 30
+            },
+            {
+              "id": "f",
+              "label": "false branch",
+              "detail": "size m - 1",
+              "x": 72,
+              "y": 65,
+              "tone": "warn",
+              "active": true,
+              "width": 30
+            }
+          ],
+          "edges": [
+            {
+              "from": "r",
+              "to": "t",
+              "label": "T(m-1)",
+              "active": true
+            },
+            {
+              "from": "r",
+              "to": "f",
+              "label": "T(m-1)",
+              "active": true
+            }
+          ]
+        },
+        {
+          "id": "recursion-animation-4",
+          "titleKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.recursion-animation.steps.3.title",
+          "bodyKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.recursion-animation.steps.3.body",
+          "formula": "$2^2=4$ leaves when $n=2$",
+          "nodes": [
+            {
+              "id": "r",
+              "label": "start",
+              "x": 50,
+              "y": 10,
+              "shape": "circle"
+            },
+            {
+              "id": "a",
+              "label": "T",
+              "x": 28,
+              "y": 38,
+              "shape": "circle"
+            },
+            {
+              "id": "b",
+              "label": "F",
+              "x": 72,
+              "y": 38,
+              "shape": "circle"
+            },
+            {
+              "id": "l1",
+              "label": "TT",
+              "x": 12,
+              "y": 82,
+              "tone": "good",
+              "active": true
+            },
+            {
+              "id": "l2",
+              "label": "TF",
+              "x": 38,
+              "y": 82,
+              "tone": "good",
+              "active": true
+            },
+            {
+              "id": "l3",
+              "label": "FT",
+              "x": 62,
+              "y": 82,
+              "tone": "good",
+              "active": true
+            },
+            {
+              "id": "l4",
+              "label": "FF",
+              "x": 88,
+              "y": 82,
+              "tone": "good",
+              "active": true
+            }
+          ],
+          "edges": [
+            {
+              "from": "r",
+              "to": "a"
+            },
+            {
+              "from": "r",
+              "to": "b"
+            },
+            {
+              "from": "a",
+              "to": "l1"
+            },
+            {
+              "from": "a",
+              "to": "l2"
+            },
+            {
+              "from": "b",
+              "to": "l3"
+            },
+            {
+              "from": "b",
+              "to": "l4"
+            }
+          ]
+        },
+        {
+          "id": "recursion-animation-5",
+          "titleKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.recursion-animation.steps.4.title",
+          "bodyKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.recursion-animation.steps.4.body",
+          "formula": "$T(m)=2^kT(m-k)+c\\sum_{j=0}^{k-1}2^j$",
+          "nodes": [
+            {
+              "id": "sub",
+              "label": "substitute k times",
+              "detail": "double the recursive term each time",
+              "x": 50,
+              "y": 48,
+              "shape": "pill",
+              "tone": "info",
+              "active": true,
+              "width": 48
+            }
+          ]
+        },
+        {
+          "id": "recursion-animation-6",
+          "titleKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.recursion-animation.steps.5.title",
+          "bodyKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.recursion-animation.steps.5.body",
+          "formula": "$T(m)=2^mT(0)+c(2^m-1)=\\Theta(2^m)$",
+          "nodes": [
+            {
+              "id": "leaves",
+              "label": "2^m leaves",
+              "detail": "all Boolean assignments",
+              "x": 30,
+              "y": 48,
+              "tone": "good",
+              "active": true,
+              "width": 30
+            },
+            {
+              "id": "calls",
+              "label": "2^(m+1) - 1 calls",
+              "detail": "all nodes in the full tree",
+              "x": 72,
+              "y": 48,
+              "tone": "info",
+              "active": true,
+              "width": 34
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "exercises": [
+    {
+      "id": "recursion-runtime",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.finalLab.steps.recursion_runtime",
+      "language": "c",
+      "starterCode": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.finalLab.steps.recursion_runtime.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.c",
+          "content": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.finalLab.steps.recursion_runtime.starterFiles.main_c.content",
+          "language": "c",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "algorithms/recursion.c",
+          "content": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.finalLab.steps.recursion_runtime.starterFiles.algorithms_recursion_c.content",
+          "language": "c",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "algorithms/recursion.h",
+          "content": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.finalLab.steps.recursion_runtime.starterFiles.algorithms_recursion_h.content",
+          "language": "c",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.c",
+          "content": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.finalLab.steps.recursion_runtime.solutionFiles.main_c.content",
+          "language": "c",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "algorithms/recursion.c",
+          "content": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.finalLab.steps.recursion_runtime.solutionFiles.algorithms_recursion_c.content",
+          "language": "c",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "algorithms/recursion.h",
+          "content": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.finalLab.steps.recursion_runtime.solutionFiles.algorithms_recursion_h.content",
+          "language": "c",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "c",
+        "entryFilePath": "main.c",
+        "starterCode": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.finalLab.steps.recursion_runtime.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.c",
+            "content": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.finalLab.steps.recursion_runtime.starterFiles.main_c.content",
+            "language": "c",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "algorithms/recursion.c",
+            "content": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.finalLab.steps.recursion_runtime.starterFiles.algorithms_recursion_c.content",
+            "language": "c",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "algorithms/recursion.h",
+            "content": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.finalLab.steps.recursion_runtime.starterFiles.algorithms_recursion_h.content",
+            "language": "c",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.c",
+            "content": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.finalLab.steps.recursion_runtime.solutionFiles.main_c.content",
+            "language": "c",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "algorithms/recursion.c",
+            "content": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.finalLab.steps.recursion_runtime.solutionFiles.algorithms_recursion_c.content",
+            "language": "c",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "algorithms/recursion.h",
+            "content": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.finalLab.steps.recursion_runtime.solutionFiles.algorithms_recursion_h.content",
+            "language": "c",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "leaves=16\ncalls=31\ntight=Theta(2^n)\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.finalLab.steps.recursion_runtime.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.c",
+            "content": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.finalLab.steps.recursion_runtime.solutionFiles.main_c.content",
+            "language": "c",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "algorithms/recursion.c",
+            "content": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.finalLab.steps.recursion_runtime.solutionFiles.algorithms_recursion_c.content",
+            "language": "c",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "algorithms/recursion.h",
+            "content": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.finalLab.steps.recursion_runtime.solutionFiles.algorithms_recursion_h.content",
+            "language": "c",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "path": "algorithms/recursion.c",
+            "pattern": "if (i == n)",
+            "message": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.finalLab.steps.recursion_runtime.checks.0.message",
+            "normalizeWhitespace": false
+          },
+          {
+            "type": "source_contains",
+            "path": "algorithms/recursion.c",
+            "pattern": "bits[i] = true",
+            "message": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.finalLab.steps.recursion_runtime.checks.1.message",
+            "normalizeWhitespace": false
+          },
+          {
+            "type": "source_contains",
+            "path": "algorithms/recursion.c",
+            "pattern": "bits[i] = false",
+            "message": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.finalLab.steps.recursion_runtime.checks.2.message",
+            "normalizeWhitespace": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "recurrence",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.quiz.recurrence",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "tight-bound",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.quiz.tight-bound",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "d"
+      }
+    }
+  ]
+}

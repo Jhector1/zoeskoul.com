@@ -60,6 +60,7 @@ export type SubjectSeed = {
   meta?: SeedJsonObject | null;
 
   accessPolicy?: "free" | "paid";
+  visibility?: "public" | "private" | "organization";
   status?: SubjectStatus;
   entitlementKey?: string | null;
 };

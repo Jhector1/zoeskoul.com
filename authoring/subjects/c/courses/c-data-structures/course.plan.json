@@ -1,0 +1,21 @@
+{
+  "subjectSlug": "c",
+  "courseSlug": "c-data-structures",
+  "catalogSlug": "c",
+  "trackSlug": "c",
+  "profileId": "c",
+  "workspaceProfileId": "browser-code-runner",
+  "workspacePolicyId": "c-multifile-workspace",
+  "title": "C Data Structures and Algorithm Analysis",
+  "description": "A five-part intermediate C lab based on recursive runtime analysis, equal pair sums, balanced BSTs, priority queues built from stacks, and logarithmic insertion into pointer-based heaps.",
+  "moduleOrder": [
+    "c-data-structures-module-1-algorithm-lab"
+  ],
+  "modules": [
+    {
+      "moduleSlug": "c-data-structures-module-1-algorithm-lab",
+      "moduleNumber": 1,
+      "title": "Algorithm Analysis and Pointer-Based Structures"
+    }
+  ]
+}

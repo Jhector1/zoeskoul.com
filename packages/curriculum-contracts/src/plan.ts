@@ -86,6 +86,7 @@ export type SubjectPlan = {
   catalogSlug?: string;
   profileId: string;
   accessPolicy?: "free" | "paid";
+  visibility?: "public" | "private" | "organization";
   courseOrder: string[];
   courses?: Array<{
     courseSlug: string;

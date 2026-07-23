@@ -34,9 +34,13 @@ const KeySchema = z.object({
     scopeKey: z.string().min(1), // "general" | "exercise:<id>"
 });
 
+const MAX_TOOL_DOCUMENT_BYTES = 2_000_000;
+
 const PutSchema = KeySchema.extend({
     format: z.enum(["markdown", "plain"]).default("markdown"),
-    body: z.string().max(200_000).default(""),
+    // Notes stay small, while vector boards can legitimately contain many
+    // points. ToolDoc remains the single persistence path for both.
+    body: z.string().max(MAX_TOOL_DOCUMENT_BYTES).default(""),
 });
 
 /* -------------------------------- GET -------------------------------- */

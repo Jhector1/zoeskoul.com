@@ -8,6 +8,8 @@ export function defaultExt(lang: WorkspaceLanguage): string {
             return ".java";
         case "javascript":
             return ".js";
+        case "typescript":
+            return ".ts";
         case "c":
             return ".c";
         case "cpp":
@@ -31,6 +33,8 @@ export function defaultMainFile(lang: WorkspaceLanguage): string {
             return "Main.java";
         case "javascript":
             return "main.js";
+        case "typescript":
+            return "main.ts";
         case "c":
             return "main.c";
         case "cpp":
@@ -54,6 +58,8 @@ export function defaultMainCode(lang: WorkspaceLanguage): string {
             return `public class Main {\n  public static void main(String[] args) {\n    System.out.println("Hello from Java!");\n  }\n}\n`;
         case "javascript":
             return `console.log("Hello from JavaScript!");\n`;
+        case "typescript":
+            return `const message: string = "Hello from TypeScript!";\nconsole.log(message);\n`;
         case "c":
             return `#include <stdio.h>\n\nint main() {\n  printf("Hello from C!\\n");\n  return 0;\n}\n`;
         case "cpp":

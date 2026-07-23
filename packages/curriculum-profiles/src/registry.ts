@@ -13,14 +13,16 @@ import { bashProfile, bashProfileAdapter } from "./bash/index.js";
 import { gitProfile, gitProfileAdapter } from "./git/index.js";
 import { sqlProfile, sqlProfileAdapter } from "./sql/index.js";
 import { pythonProfile, pythonProfileAdapter } from "./python/index.js";
+import { cProfile, cProfileAdapter } from "./c/index.js";
 import { mathProfile, mathProfileAdapter } from "./math/index.js";
 
-const builtinProfiles = [bashProfile, gitProfile, sqlProfile, pythonProfile, mathProfile] satisfies CourseProfile[];
+const builtinProfiles = [bashProfile, gitProfile, sqlProfile, pythonProfile, cProfile, mathProfile] satisfies CourseProfile[];
 const builtinAdapters = [
     bashProfileAdapter,
     gitProfileAdapter,
     sqlProfileAdapter,
     pythonProfileAdapter,
+    cProfileAdapter,
     mathProfileAdapter,
 ] satisfies CourseProfileAdapter[];
 

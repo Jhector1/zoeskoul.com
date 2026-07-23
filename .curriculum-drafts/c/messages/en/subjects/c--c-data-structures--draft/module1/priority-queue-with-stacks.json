@@ -1,0 +1,149 @@
+{
+  "topics": {
+    "c--c-data-structures--draft": {
+      "c--c-data-structures--draft-module-1-algorithm-design-lab": {
+        "priority-queue-with-stacks": {
+          "label": "Question 4 — How Can a Priority Queue Use Only Stacks?",
+          "summary": "Question 4 Walkthrough: Extract One Minimum",
+          "cards": {
+            "question-4-problem": {
+              "title": "Question 4: Read the Stack-Only Priority Queue Problem"
+            },
+            "priority-queue-animation": {
+              "title": "Question 4 Walkthrough: Extract One Minimum"
+            },
+            "priority-queue-project": {
+              "title": "Question 4 C Lab: Priority Queue with Stacks"
+            }
+          },
+          "projectSteps": {
+            "priority_queue_stacks": {
+              "title": "Implement a Priority Queue with Stacks"
+            }
+          },
+          "finalLab": {
+            "steps": {
+              "priority_queue_stacks": {
+                "title": "Implement a Priority Queue with Stacks",
+                "prompt": "Open `structures/priority_queue.c`. Keep `insert` as one stack push. Implement `extract_min` using only `push`, `pop`, and `isEmpty` behavior: pop every priority, retain exactly one smallest value, move all other values through the scratch stack, and restore them to the data stack. Duplicate minimum priorities must be removed one at a time.",
+                "hint": "Initialize the minimum from the first pop. When a smaller value appears, move the old minimum into the scratch stack.",
+                "help": {
+                  "concept": "This design makes `insert` `O(1)`. `extract_min` performs a scan and a restore pass, both linear in the number of stored priorities, so it is `O(n)` and uses `O(n)` auxiliary stack capacity.",
+                  "hint_1": "Run the supplied test harness after each focused change.",
+                  "hint_2": "Keep the implementation general; do not print the expected output directly."
+                },
+                "starterCode": "#include <stdio.h>\n#include \"structures/priority_queue.h\"\n\nint main(void) {\n    PriorityQueue queue;\n    pq_init(&queue);\n    const int values[] = {4, 1, 3, 1, 2};\n    for (size_t i = 0; i < sizeof(values) / sizeof(values[0]); i++) {\n        pq_insert(&queue, values[i]);\n    }\n\n    printf(\"order=\");\n    int value;\n    while (pq_extract_min(&queue, &value)) {\n        printf(\"%d \", value);\n    }\n    printf(\"\\ninsert=O(1)\\nextract=O(n)\\n\");\n    return 0;\n}\n",
+                "solutionCode": "#include <stdio.h>\n#include \"structures/priority_queue.h\"\n\nint main(void) {\n    PriorityQueue queue;\n    pq_init(&queue);\n    const int values[] = {4, 1, 3, 1, 2};\n    for (size_t i = 0; i < sizeof(values) / sizeof(values[0]); i++) {\n        pq_insert(&queue, values[i]);\n    }\n\n    printf(\"order=\");\n    int value;\n    while (pq_extract_min(&queue, &value)) {\n        printf(\"%d \", value);\n    }\n    printf(\"\\ninsert=O(1)\\nextract=O(n)\\n\");\n    return 0;\n}\n",
+                "starterFiles": {
+                  "main_c": {
+                    "content": "#include <stdio.h>\n#include \"structures/priority_queue.h\"\n\nint main(void) {\n    PriorityQueue queue;\n    pq_init(&queue);\n    const int values[] = {4, 1, 3, 1, 2};\n    for (size_t i = 0; i < sizeof(values) / sizeof(values[0]); i++) {\n        pq_insert(&queue, values[i]);\n    }\n\n    printf(\"order=\");\n    int value;\n    while (pq_extract_min(&queue, &value)) {\n        printf(\"%d \", value);\n    }\n    printf(\"\\ninsert=O(1)\\nextract=O(n)\\n\");\n    return 0;\n}\n"
+                  },
+                  "structures_priority_queue_c": {
+                    "content": "#include \"priority_queue.h\"\n\nvoid pq_init(PriorityQueue *queue) { stack_init(&queue->data); stack_init(&queue->scratch); }\nbool pq_insert(PriorityQueue *queue, int priority) { return stack_push(&queue->data, priority); }\n\nbool pq_extract_min(PriorityQueue *queue, int *priority) {\n    (void)queue;\n    (void)priority;\n    /* TODO: pop through data, keep one minimum aside, then restore all other values. */\n    return false;\n}\n"
+                  },
+                  "structures_priority_queue_h": {
+                    "content": "#ifndef PRIORITY_QUEUE_H\n#define PRIORITY_QUEUE_H\n\n#include <stdbool.h>\n#include \"stack.h\"\n\ntypedef struct { Stack data; Stack scratch; } PriorityQueue;\nvoid pq_init(PriorityQueue *queue);\nbool pq_insert(PriorityQueue *queue, int priority);\nbool pq_extract_min(PriorityQueue *queue, int *priority);\n\n#endif\n"
+                  },
+                  "structures_stack_c": {
+                    "content": "#include \"stack.h\"\n\nvoid stack_init(Stack *stack) { stack->size = 0; }\nbool stack_push(Stack *stack, int value) { if (stack->size == STACK_CAPACITY) return false; stack->values[stack->size++] = value; return true; }\nbool stack_pop(Stack *stack, int *value) { if (stack->size == 0) return false; *value = stack->values[--stack->size]; return true; }\nbool stack_is_empty(const Stack *stack) { return stack->size == 0; }\n"
+                  },
+                  "structures_stack_h": {
+                    "content": "#ifndef STACK_H\n#define STACK_H\n\n#include <stdbool.h>\n#include <stddef.h>\n\n#define STACK_CAPACITY 64\n\ntypedef struct { int values[STACK_CAPACITY]; size_t size; } Stack;\nvoid stack_init(Stack *stack);\nbool stack_push(Stack *stack, int value);\nbool stack_pop(Stack *stack, int *value);\nbool stack_is_empty(const Stack *stack);\n\n#endif\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_c": {
+                    "content": "#include <stdio.h>\n#include \"structures/priority_queue.h\"\n\nint main(void) {\n    PriorityQueue queue;\n    pq_init(&queue);\n    const int values[] = {4, 1, 3, 1, 2};\n    for (size_t i = 0; i < sizeof(values) / sizeof(values[0]); i++) {\n        pq_insert(&queue, values[i]);\n    }\n\n    printf(\"order=\");\n    int value;\n    while (pq_extract_min(&queue, &value)) {\n        printf(\"%d \", value);\n    }\n    printf(\"\\ninsert=O(1)\\nextract=O(n)\\n\");\n    return 0;\n}\n"
+                  },
+                  "structures_priority_queue_c": {
+                    "content": "#include \"priority_queue.h\"\n\nvoid pq_init(PriorityQueue *queue) { stack_init(&queue->data); stack_init(&queue->scratch); }\nbool pq_insert(PriorityQueue *queue, int priority) { return stack_push(&queue->data, priority); }\n\nbool pq_extract_min(PriorityQueue *queue, int *priority) {\n    if (stack_is_empty(&queue->data)) return false;\n\n    int minimum;\n    stack_pop(&queue->data, &minimum);\n\n    int current;\n    while (stack_pop(&queue->data, &current)) {\n        if (current < minimum) {\n            stack_push(&queue->scratch, minimum);\n            minimum = current;\n        } else {\n            stack_push(&queue->scratch, current);\n        }\n    }\n\n    while (stack_pop(&queue->scratch, &current)) {\n        stack_push(&queue->data, current);\n    }\n\n    *priority = minimum;\n    return true;\n}\n"
+                  },
+                  "structures_priority_queue_h": {
+                    "content": "#ifndef PRIORITY_QUEUE_H\n#define PRIORITY_QUEUE_H\n\n#include <stdbool.h>\n#include \"stack.h\"\n\ntypedef struct { Stack data; Stack scratch; } PriorityQueue;\nvoid pq_init(PriorityQueue *queue);\nbool pq_insert(PriorityQueue *queue, int priority);\nbool pq_extract_min(PriorityQueue *queue, int *priority);\n\n#endif\n"
+                  },
+                  "structures_stack_c": {
+                    "content": "#include \"stack.h\"\n\nvoid stack_init(Stack *stack) { stack->size = 0; }\nbool stack_push(Stack *stack, int value) { if (stack->size == STACK_CAPACITY) return false; stack->values[stack->size++] = value; return true; }\nbool stack_pop(Stack *stack, int *value) { if (stack->size == 0) return false; *value = stack->values[--stack->size]; return true; }\nbool stack_is_empty(const Stack *stack) { return stack->size == 0; }\n"
+                  },
+                  "structures_stack_h": {
+                    "content": "#ifndef STACK_H\n#define STACK_H\n\n#include <stdbool.h>\n#include <stddef.h>\n\n#define STACK_CAPACITY 64\n\ntypedef struct { int values[STACK_CAPACITY]; size_t size; } Stack;\nvoid stack_init(Stack *stack);\nbool stack_push(Stack *stack, int value);\nbool stack_pop(Stack *stack, int *value);\nbool stack_is_empty(const Stack *stack);\n\n#endif\n"
+                  }
+                },
+                "checks": [
+                  {
+                    "message": "Scan the data stack using only pop operations."
+                  },
+                  {
+                    "message": "Use the scratch stack to preserve every nonremoved priority."
+                  },
+                  {
+                    "message": "Return exactly one minimum priority."
+                  }
+                ]
+              }
+            }
+          },
+          "quiz": {
+            "operation-costs": {
+              "title": "Which runtime combination matches the lesson designs?",
+              "prompt": "Which runtime combination matches the lesson designs?",
+              "hint": "Trace the relevant animation and identify the operation that dominates the runtime.",
+              "help": {
+                "concept": "The stack design defers work to extraction, while the heap follows one root-to-leaf path and then upheaps along that path.",
+                "hint_1": "Separate correctness from runtime: first identify what the algorithm must do.",
+                "hint_2": "Then count the loops, recursion branches, stack transfers, or pointer levels involved."
+              },
+              "options": {
+                "a": "stack-PQ insert O(1), extractMin O(n), pointer-heap insert Θ(log n)",
+                "b": "stack-PQ insert O(n), extractMin O(1), pointer-heap insert Θ(n)",
+                "c": "stack-PQ insert O(log n), extractMin O(log n), pointer-heap insert Θ(1)",
+                "d": "all three operations are Θ(n²)"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "c--c-data-structures--draft": {
+      "c--c-data-structures--draft-module-1-algorithm-design-lab": {
+        "priority-queue-with-stacks": {
+          "question-4-problem": {
+            "title": "Question 4 — How Can a Priority Queue Use Only Stacks?",
+            "bodyMarkdown": "### Original assignment question\n\nDesign a priority queue using only one or more stacks. The priority queue must support:\n\n- `insert(priority)`\n- `extractMin()` — remove and return the smallest priority\n\nThe stacks allow only:\n\n- `push(x)`\n- `pop()`\n- `isEmpty()`\n\nYou may **not** read an element at an arbitrary stack index. Duplicate priorities must be handled correctly.\n\n### Concepts in plain English\n\n- A **priority queue** removes the item with the best priority; here, the smallest integer leaves first.\n- A **stack** is last-in, first-out. Only its top item is accessible.\n- A **scratch stack** temporarily holds items while the data stack is being scanned.\n- The design may place the linear cost in either operation. This lesson uses O(1) `insert` and O(n) `extractMin`.\n\n### The design used in this lab\n\n- `insert`: push once onto the data stack.\n- `extractMin`: pop every stored priority, hold one smallest value aside, move all other values to the scratch stack, then restore them.\n\nFor `[4, 1, 3, 1, 2]`, one extraction must remove only **one** `1`. The other `1` must remain for the next extraction.\n\n### What to watch in the animation\n\nWatch only legal stack operations: pop, compare, move to scratch, preserve an equal minimum, restore, and return. The C lab immediately afterward implements the same steps."
+          },
+          "priority-queue-animation": {
+            "title": "Question 4: Implement extractMin with Only Stacks",
+            "context": "**Question 4:** implement priority-queue operations using only `push`, `pop`, and `isEmpty`. This lesson chooses O(1) insertion and O(n) extraction.",
+            "steps": [
+              {
+                "title": "Step 1: Respect the stack interface",
+                "body": "Priority-queue code may inspect only the top element by popping it. Reading `stack.items[i]` directly would violate the assignment."
+              },
+              {
+                "title": "Step 2: Choose where to pay the linear cost",
+                "body": "This design makes `insert` cheap: one push onto the data stack. The full scan is delayed until `extractMin`."
+              },
+              {
+                "title": "Step 3: Pop every priority and hold one minimum",
+                "body": "Scan the data stack. Keep the smallest value seen so far in a variable and move every other value to the scratch stack."
+              },
+              {
+                "title": "Step 4: Replace the held value only when smaller",
+                "body": "If a new value is strictly smaller, move the old held minimum to scratch and hold the new value instead."
+              },
+              {
+                "title": "Step 5: Preserve duplicate minima",
+                "body": "When a value equals the held minimum, move the equal value to scratch. That removes exactly one minimum and keeps all duplicates beyond the one returned."
+              },
+              {
+                "title": "Step 6: Restore and analyze",
+                "body": "Move the scratch values back to the data stack, then return the held minimum. Each element moves a constant number of times, so extraction is O(n)."
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

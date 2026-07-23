@@ -1,0 +1,20 @@
+{
+  "rubricId": "c-module-project",
+  "criteria": [
+    {
+      "id": "correctness",
+      "label": "Correct behavior",
+      "weight": 0.5
+    },
+    {
+      "id": "structure",
+      "label": "Required C structure and invariants",
+      "weight": 0.3
+    },
+    {
+      "id": "analysis",
+      "label": "Clear runtime analysis",
+      "weight": 0.2
+    }
+  ]
+}

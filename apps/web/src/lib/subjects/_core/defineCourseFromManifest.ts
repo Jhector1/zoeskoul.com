@@ -168,6 +168,7 @@ export function defineCourseFromManifest(args: {
             imagePublicId: manifest.subject.imagePublicId ?? undefined,
             imageAlt: manifest.subject.imageAlt ?? undefined,
             accessPolicy: manifest.subject.accessPolicy ?? "free",
+            visibility: manifest.subject.visibility ?? "public",
             status: manifest.subject.status ?? "active",
             meta: {
                 ...(manifest.subject.meta?.versioning

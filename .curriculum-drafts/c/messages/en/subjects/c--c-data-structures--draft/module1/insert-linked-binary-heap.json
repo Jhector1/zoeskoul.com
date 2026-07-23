@@ -1,0 +1,119 @@
+{
+  "topics": {
+    "c--c-data-structures--draft": {
+      "c--c-data-structures--draft-module-1-algorithm-design-lab": {
+        "insert-linked-binary-heap": {
+          "label": "Question 5 — How Do We Find a Heap Position Without an Array?",
+          "summary": "Question 5 Walkthrough: Follow the Binary Pointer Path",
+          "cards": {
+            "question-5-problem": {
+              "title": "Question 5: Read the Linked Heap Problem First"
+            },
+            "heap-animation": {
+              "title": "Question 5 Walkthrough: Follow the Binary Pointer Path"
+            },
+            "heap-project": {
+              "title": "Question 5 C Lab: Insert into the Linked Heap"
+            }
+          },
+          "projectSteps": {
+            "pointer_heap_insert": {
+              "title": "Insert into a Pointer-Based Heap in O(log n)"
+            }
+          },
+          "finalLab": {
+            "steps": {
+              "pointer_heap_insert": {
+                "title": "Insert into a Pointer-Based Heap in O(log n)",
+                "prompt": "Open `structures/heap.c`. Implement `heap_insert` without scanning the tree. The next node occupies conceptual array index `n + 1`. Read that index in binary: after the leading `1`, each remaining bit selects left (`0`) or right (`1`). Traverse all path bits except the final attachment bit, link the new node with its parent, then upheap by swapping keys.",
+                "hint": "For index `8`, binary `1000` means root → left → left, then attach as the left child.",
+                "help": {
+                  "concept": "The complete-tree height is `Θ(log n)`. Decoding the index path takes one pointer step per tree level, and upheap also moves at most one level at a time, so insertion is `Θ(log n)`.",
+                  "hint_1": "Run the supplied test harness after each focused change.",
+                  "hint_2": "Keep the implementation general; do not print the expected output directly."
+                },
+                "starterCode": "#include <stdio.h>\n#include \"structures/heap.h\"\n\nint main(void) {\n    const int initial[] = {10, 20, 15, 30, 40, 50, 60};\n    HeapNode *root = heap_from_level_order(initial, 7);\n    root = heap_insert(root, 7, 5);\n\n    printf(\"level=\");\n    heap_print_level_order(root);\n    printf(\"\\nparent-links=%s\\n\", heap_parent_links_valid(root, NULL) ? \"yes\" : \"no\");\n\n    heap_free(root);\n    return 0;\n}\n",
+                "solutionCode": "#include <stdio.h>\n#include \"structures/heap.h\"\n\nint main(void) {\n    const int initial[] = {10, 20, 15, 30, 40, 50, 60};\n    HeapNode *root = heap_from_level_order(initial, 7);\n    root = heap_insert(root, 7, 5);\n\n    printf(\"level=\");\n    heap_print_level_order(root);\n    printf(\"\\nparent-links=%s\\n\", heap_parent_links_valid(root, NULL) ? \"yes\" : \"no\");\n\n    heap_free(root);\n    return 0;\n}\n",
+                "starterFiles": {
+                  "main_c": {
+                    "content": "#include <stdio.h>\n#include \"structures/heap.h\"\n\nint main(void) {\n    const int initial[] = {10, 20, 15, 30, 40, 50, 60};\n    HeapNode *root = heap_from_level_order(initial, 7);\n    root = heap_insert(root, 7, 5);\n\n    printf(\"level=\");\n    heap_print_level_order(root);\n    printf(\"\\nparent-links=%s\\n\", heap_parent_links_valid(root, NULL) ? \"yes\" : \"no\");\n\n    heap_free(root);\n    return 0;\n}\n"
+                  },
+                  "structures_heap_c": {
+                    "content": "#include \"heap.h\"\n#include <stdio.h>\n#include <stdlib.h>\n\nstatic HeapNode *new_node(int key, HeapNode *parent) {\n    HeapNode *node = malloc(sizeof(*node));\n    if (node == NULL) return NULL;\n    node->key = key; node->left = NULL; node->right = NULL; node->parent = parent;\n    return node;\n}\n\nHeapNode *heap_insert(HeapNode *root, size_t n, int value) {\n    (void)n;\n    (void)value;\n    /* TODO: follow the binary path for index n + 1, attach the node, and upheap. */\n    return root;\n}\n\nHeapNode *heap_from_level_order(const int *values, size_t n) {\n    if (n == 0) return NULL;\n    HeapNode **nodes = calloc(n, sizeof(*nodes));\n    if (nodes == NULL) return NULL;\n    for (size_t i = 0; i < n; i++) nodes[i] = new_node(values[i], NULL);\n    for (size_t i = 0; i < n; i++) {\n        size_t left = 2 * i + 1, right = left + 1;\n        if (left < n) { nodes[i]->left = nodes[left]; nodes[left]->parent = nodes[i]; }\n        if (right < n) { nodes[i]->right = nodes[right]; nodes[right]->parent = nodes[i]; }\n    }\n    HeapNode *root = nodes[0]; free(nodes); return root;\n}\n\nvoid heap_print_level_order(const HeapNode *root) {\n    if (root == NULL) return;\n    const HeapNode *queue[128]; size_t first=0, count=0; queue[count++]=root;\n    while (first < count) { const HeapNode *node=queue[first++]; printf(\"%d \", node->key); if(node->left) queue[count++]=node->left; if(node->right) queue[count++]=node->right; }\n}\nbool heap_parent_links_valid(const HeapNode *root, const HeapNode *parent) { return root == NULL || (root->parent == parent && heap_parent_links_valid(root->left, root) && heap_parent_links_valid(root->right, root)); }\nvoid heap_free(HeapNode *root) { if(root == NULL) return; heap_free(root->left); heap_free(root->right); free(root); }\n"
+                  },
+                  "structures_heap_h": {
+                    "content": "#ifndef HEAP_H\n#define HEAP_H\n\n#include <stdbool.h>\n#include <stddef.h>\n\ntypedef struct HeapNode {\n    int key;\n    struct HeapNode *left;\n    struct HeapNode *right;\n    struct HeapNode *parent;\n} HeapNode;\n\nHeapNode *heap_from_level_order(const int *values, size_t n);\nHeapNode *heap_insert(HeapNode *root, size_t n, int value);\nvoid heap_print_level_order(const HeapNode *root);\nbool heap_parent_links_valid(const HeapNode *root, const HeapNode *parent);\nvoid heap_free(HeapNode *root);\n\n#endif\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_c": {
+                    "content": "#include <stdio.h>\n#include \"structures/heap.h\"\n\nint main(void) {\n    const int initial[] = {10, 20, 15, 30, 40, 50, 60};\n    HeapNode *root = heap_from_level_order(initial, 7);\n    root = heap_insert(root, 7, 5);\n\n    printf(\"level=\");\n    heap_print_level_order(root);\n    printf(\"\\nparent-links=%s\\n\", heap_parent_links_valid(root, NULL) ? \"yes\" : \"no\");\n\n    heap_free(root);\n    return 0;\n}\n"
+                  },
+                  "structures_heap_c": {
+                    "content": "#include \"heap.h\"\n#include <stdio.h>\n#include <stdlib.h>\n\nstatic HeapNode *new_node(int key, HeapNode *parent) {\n    HeapNode *node = malloc(sizeof(*node));\n    if (node == NULL) return NULL;\n    node->key = key; node->left = NULL; node->right = NULL; node->parent = parent;\n    return node;\n}\n\nHeapNode *heap_insert(HeapNode *root, size_t n, int value) {\n    if (root == NULL) return new_node(value, NULL);\n\n    const size_t index = n + 1;\n    size_t highest_bit = 1;\n    while ((highest_bit << 1) <= index) highest_bit <<= 1;\n\n    HeapNode *parent = root;\n    for (size_t bit = highest_bit >> 1; bit > 1; bit >>= 1) {\n        parent = (index & bit) ? parent->right : parent->left;\n    }\n\n    HeapNode *node = new_node(value, parent);\n    if (node == NULL) return root;\n    if (index & 1) parent->right = node; else parent->left = node;\n\n    while (node->parent != NULL && node->key < node->parent->key) {\n        int temp = node->key;\n        node->key = node->parent->key;\n        node->parent->key = temp;\n        node = node->parent;\n    }\n\n    return root;\n}\n\nHeapNode *heap_from_level_order(const int *values, size_t n) {\n    if (n == 0) return NULL;\n    HeapNode **nodes = calloc(n, sizeof(*nodes));\n    if (nodes == NULL) return NULL;\n    for (size_t i = 0; i < n; i++) nodes[i] = new_node(values[i], NULL);\n    for (size_t i = 0; i < n; i++) {\n        size_t left = 2 * i + 1, right = left + 1;\n        if (left < n) { nodes[i]->left = nodes[left]; nodes[left]->parent = nodes[i]; }\n        if (right < n) { nodes[i]->right = nodes[right]; nodes[right]->parent = nodes[i]; }\n    }\n    HeapNode *root = nodes[0]; free(nodes); return root;\n}\n\nvoid heap_print_level_order(const HeapNode *root) {\n    if (root == NULL) return;\n    const HeapNode *queue[128]; size_t first=0, count=0; queue[count++]=root;\n    while (first < count) { const HeapNode *node=queue[first++]; printf(\"%d \", node->key); if(node->left) queue[count++]=node->left; if(node->right) queue[count++]=node->right; }\n}\nbool heap_parent_links_valid(const HeapNode *root, const HeapNode *parent) { return root == NULL || (root->parent == parent && heap_parent_links_valid(root->left, root) && heap_parent_links_valid(root->right, root)); }\nvoid heap_free(HeapNode *root) { if(root == NULL) return; heap_free(root->left); heap_free(root->right); free(root); }\n"
+                  },
+                  "structures_heap_h": {
+                    "content": "#ifndef HEAP_H\n#define HEAP_H\n\n#include <stdbool.h>\n#include <stddef.h>\n\ntypedef struct HeapNode {\n    int key;\n    struct HeapNode *left;\n    struct HeapNode *right;\n    struct HeapNode *parent;\n} HeapNode;\n\nHeapNode *heap_from_level_order(const int *values, size_t n);\nHeapNode *heap_insert(HeapNode *root, size_t n, int value);\nvoid heap_print_level_order(const HeapNode *root);\nbool heap_parent_links_valid(const HeapNode *root, const HeapNode *parent);\nvoid heap_free(HeapNode *root);\n\n#endif\n"
+                  }
+                },
+                "checks": [
+                  {
+                    "message": "Use the conceptual next array index."
+                  },
+                  {
+                    "message": "Find the leading binary bit before traversing the path."
+                  },
+                  {
+                    "message": "Maintain parent links and use them during upheap."
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "c--c-data-structures--draft": {
+      "c--c-data-structures--draft-module-1-algorithm-design-lab": {
+        "insert-linked-binary-heap": {
+          "question-5-problem": {
+            "title": "Question 5 — How Do We Find a Heap Position Without an Array?",
+            "bodyMarkdown": "### Original assignment question\n\nA heap is stored as linked nodes rather than an array. You are given only:\n\n- the `root` node,\n- the current number of nodes `n`, and\n- a new value `x`.\n\nEach node has `left`, `right`, and `parent` pointers. Design an efficient insertion algorithm and analyze its runtime. You may assume the ordinary `upheap` operation is already available.\n\n### Concepts in plain English\n\n- A **complete binary tree** fills every level from left to right. A heap must keep this shape after insertion.\n- A **min-heap** also keeps every parent's key less than or equal to its children's keys.\n- **Upheap** restores that ordering by moving the new key toward the root while it is smaller than its parent.\n- Even without an array, conceptual heap indices still identify each complete-tree position.\n\n### The key idea\n\nUse the usual conceptual positions:\n\n- root: index `1`\n- left child of `i`: index `2i`\n- right child of `i`: index `2i + 1`\n\nThe new node belongs at index `n + 1`. Write that index in binary and remove the leading `1`:\n\n- `0` → go left\n- `1` → go right\n\nFollow every remaining bit except the last to reach the parent. The last bit says which child pointer receives the new node.\n\n### Concrete example\n\nIf `n = 7`, the new position is `8 = 1000₂`. Removing the leading `1` leaves `000`: go left, then left, then attach as the left child.\n\n### What to watch in the animation\n\nThe animation turns `n + 1` into pointer directions, then shows attachment and upheap. Both phases follow at most one root-to-leaf path, giving O(log n) time."
+          },
+          "heap-animation": {
+            "title": "Question 5: Use n + 1 to Find the Linked Heap Position",
+            "context": "**Question 5:** insert `x` into a complete pointer-based heap without a linear scan. The binary representation of `n + 1` gives the root-to-position path.",
+            "steps": [
+              {
+                "title": "Step 1: Keep the conceptual array numbering",
+                "body": "Even though the heap stores pointers, number its complete-tree positions as `1, 2, 3, ...`. This numbering describes the shape without storing an array."
+              },
+              {
+                "title": "Step 2: Compute the new node index",
+                "body": "A heap with `n` nodes fills positions `1` through `n`. The new node must occupy position `n + 1`."
+              },
+              {
+                "title": "Step 3: Convert the index to directions",
+                "body": "Write `n + 1` in binary and ignore the leading `1`. Every remaining `0` means left and every `1` means right."
+              },
+              {
+                "title": "Step 4: Stop at the parent",
+                "body": "Follow all direction bits except the last one. You now stand at the parent of the new position. The final bit selects the left or right child pointer."
+              },
+              {
+                "title": "Step 5: Attach every pointer correctly",
+                "body": "Create the node, set its `parent`, initialize `left` and `right` to null, and assign the matching child pointer in the parent."
+              },
+              {
+                "title": "Step 6: Restore heap order and analyze",
+                "body": "Run the supplied upheap operation by swapping keys toward the root. The pointer path and upheap each follow at most the tree height, so insertion is O(log n)."
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

@@ -46,6 +46,42 @@ describe("getCourseProfile", () => {
         ).toBe("python");
     });
 
+    it("resolves a C data structures course from profile metadata", () => {
+        expect(
+            getCourseProfile({
+                subjectSlug: "c-data-structures",
+                profileId: "c",
+                versionFamily: "c-data-structures",
+            }),
+        ).toEqual({
+            id: "c",
+            subjectSlug: "c-data-structures",
+            defaultLanguage: "c",
+            supportsRuntimeDefaultDataset: false,
+        });
+    });
+
+    it("maps Git and Linux profiles to the shared Bash workspace", () => {
+        expect(
+            getCourseProfile({
+                subjectSlug: "git-foundations",
+                profileId: "git",
+            }),
+        ).toEqual({
+            id: "bash",
+            subjectSlug: "git-foundations",
+            defaultLanguage: "bash",
+            supportsRuntimeDefaultDataset: false,
+        });
+
+        expect(
+            getCourseProfile({
+                subjectSlug: "linux-terminal-fundamentals",
+                profileId: "linux",
+            }).defaultLanguage,
+        ).toBe("bash");
+    });
+
     it("keeps unknown subjects generic without metadata", () => {
         expect(
             getCourseProfile({
@@ -179,6 +215,25 @@ describe("resolveCourseFileSeed", () => {
                 content: "Hello from workspace.files",
             },
         ]);
+    });
+
+    it("uses main.c as the fallback entry file for C profiles", () => {
+        const resolved = resolveCourseFileSeed({
+            subjectSlug: "c-data-structures",
+            profileId: "c",
+            versionFamily: "c-data-structures",
+            target: {
+                starterCode: "int main(void) { return 0; }\n",
+            },
+        });
+
+        expect(resolved.starterCode).toBe("int main(void) { return 0; }\n");
+        expect(
+            resolveCourseLanguage({
+                subjectSlug: "c-data-structures",
+                profileId: "c",
+            }),
+        ).toBe("c");
     });
 
     it("preserves the first main file instead of letting later sources overwrite it", () => {

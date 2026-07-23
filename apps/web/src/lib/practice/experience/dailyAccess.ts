@@ -70,6 +70,7 @@ export async function loadPracticeAccessModelForActor(args: {
           id: true,
           slug: true,
           accessPolicy: true,
+          visibility: true,
           entitlementKey: true,
         },
       },
@@ -113,6 +114,7 @@ export async function loadPracticeAccessModelForActor(args: {
     id: subject.id,
     slug: subject.slug,
     accessPolicy: subject.accessPolicy as "free" | "paid",
+    visibility: subject.visibility as "public" | "private" | "organization",
     entitlementKey: subject.entitlementKey,
     enrolled: enrolledSubjectIds.has(subject.id),
     versioning: versioningForSubject(

@@ -1,0 +1,22 @@
+{
+  "catalog": {
+    "slug": "c",
+    "order": 50,
+    "title": "C Programming",
+    "defaultSubjectSlug": "c-data-structures",
+    "description": "A systems-programming path for implementing data structures, tracing pointer-based state, and analyzing efficient algorithms in C.",
+    "imageAlt": "C programming and data structures catalog cover",
+    "status": "active",
+    "subjectSlugs": [
+      "c-data-structures"
+    ],
+    "meta": {
+      "family": "programming",
+      "featured": true
+    }
+  },
+  "subjectSlugs": [
+    "c-data-structures"
+  ],
+  "defaultSubjectSlug": "c-data-structures"
+}

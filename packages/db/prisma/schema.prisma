@@ -428,8 +428,12 @@ model User {
   subjectAccessGrants  SubjectAccessGrant[]
   subjectEnrollments   SubjectEnrollment[]
   subscriptions        Subscription[]
-  onboardingProfile    UserOnboardingProfile?
-  practiceChallengeLinks PracticeChallengeLink[] @relation("UserPracticeChallengeLinks")
+  onboardingProfile            UserOnboardingProfile?
+  practiceChallengeLinks       PracticeChallengeLink[]  @relation("UserPracticeChallengeLinks")
+  learningGroupsOwned          LearningGroup[]           @relation("LearningGroupOwner")
+  learningGroupMemberships     LearningGroupMember[]
+  learningAssignmentsOwned     LearningAssignment[]      @relation("LearningAssignmentOwner")
+  learningAssignmentRecipients LearningAssignmentUser[]
 }
 
 model Account {
@@ -521,6 +525,7 @@ model PracticeSubject {
   accessPolicy        AccessPolicy             @default(free)
   entitlementKey      String?
   status              SubjectStatus            @default(active)
+  visibility          SubjectVisibility         @default(public)
   catalogId           String?
   showInOnboarding    Boolean                  @default(true)
   catalog             PracticeCatalog?         @relation(fields: [catalogId], references: [id])
@@ -530,11 +535,13 @@ model PracticeSubject {
   topics              PracticeTopic[]
   accessGrants        SubjectAccessGrant[]
   enrollments         SubjectEnrollment[]
+  learningAssignments LearningAssignment[]
   onboardingInterests UserOnboardingInterest[]
 
   @@index([order])
   @@index([catalogId, order])
   @@index([status, order])
+  @@index([visibility, status, order])
   @@index([showInOnboarding, status, order])
 }
 
@@ -685,6 +692,78 @@ model SubjectEnrollment {
   @@index([actorKey, status])
 }
 
+model LearningGroup {
+  id          String                    @id @default(cuid())
+  slug        String                    @unique
+  name        String
+  description String?
+  ownerId     String
+  createdAt   DateTime                  @default(now())
+  updatedAt   DateTime                  @updatedAt
+  owner       User                      @relation("LearningGroupOwner", fields: [ownerId], references: [id], onDelete: Cascade)
+  members     LearningGroupMember[]
+  assignments LearningAssignmentGroup[]
+
+  @@index([ownerId, updatedAt])
+}
+
+model LearningGroupMember {
+  groupId  String
+  userId   String
+  role     LearningGroupMemberRole @default(student)
+  joinedAt DateTime                @default(now())
+  group    LearningGroup           @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  user     User                    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([groupId, userId])
+  @@index([userId])
+}
+
+model LearningAssignment {
+  id                 String                     @id @default(cuid())
+  slug               String                     @unique
+  title              String
+  description        String?
+  subjectId          String
+  ownerId            String
+  status             LearningAssignmentStatus   @default(draft)
+  availableFrom      DateTime?
+  dueAt              DateTime?
+  solutionVisibility LearningSolutionVisibility @default(instructor_only)
+  createdAt          DateTime                   @default(now())
+  updatedAt          DateTime                   @updatedAt
+  subject            PracticeSubject            @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  owner              User                       @relation("LearningAssignmentOwner", fields: [ownerId], references: [id], onDelete: Cascade)
+  users              LearningAssignmentUser[]
+  groups             LearningAssignmentGroup[]
+
+  @@index([subjectId, status])
+  @@index([ownerId, updatedAt])
+  @@index([status, availableFrom, dueAt])
+}
+
+model LearningAssignmentUser {
+  assignmentId String
+  userId       String
+  assignedAt   DateTime           @default(now())
+  assignment   LearningAssignment @relation(fields: [assignmentId], references: [id], onDelete: Cascade)
+  user         User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([assignmentId, userId])
+  @@index([userId])
+}
+
+model LearningAssignmentGroup {
+  assignmentId String
+  groupId      String
+  assignedAt   DateTime           @default(now())
+  assignment   LearningAssignment @relation(fields: [assignmentId], references: [id], onDelete: Cascade)
+  group        LearningGroup      @relation(fields: [groupId], references: [id], onDelete: Cascade)
+
+  @@id([assignmentId, groupId])
+  @@index([groupId])
+}
+
 model PracticeHelpEvent {
   id         String                   @id @default(cuid())
   sessionId  String?
@@ -705,6 +784,30 @@ model PracticeHelpEvent {
   @@index([instanceId, stepKey, createdAt])
   @@index([instanceId, userId, createdAt])
   @@index([instanceId, guestId, createdAt])
+}
+
+enum SubjectVisibility {
+  public
+  private
+  organization
+}
+
+enum LearningAssignmentStatus {
+  draft
+  assigned
+  closed
+}
+
+enum LearningSolutionVisibility {
+  instructor_only
+  after_completion
+  after_due_date
+  always
+}
+
+enum LearningGroupMemberRole {
+  student
+  instructor
 }
 
 enum UserRole {

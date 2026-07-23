@@ -13,7 +13,17 @@ import { resolveEffectiveExerciseRuntime } from "@zoeskoul/curriculum-runtime/ru
 
 type UnknownRecord = Record<string, unknown>;
 
-export type CourseProfileId = "python" | "sql" | "java" | "javascript" | "cpp" | "c" | "generic";
+export type CourseProfileId =
+  | "python"
+  | "sql"
+  | "java"
+  | "javascript"
+  | "typescript"
+  | "cpp"
+  | "c"
+  | "bash"
+  | "web"
+  | "generic";
 
 export type CourseProfile = {
   id: CourseProfileId;
@@ -52,6 +62,45 @@ function cleanLanguage(value: unknown): WorkspaceLanguage | undefined {
   return raw as WorkspaceLanguage;
 }
 
+type CanonicalProfile = Exclude<CourseProfileId, "generic">;
+
+const PROFILE_LANGUAGE_BY_ID: Record<
+  string,
+  { id: CanonicalProfile; language: WorkspaceLanguage }
+> = {
+  python: { id: "python", language: "python" },
+  sql: { id: "sql", language: "sql" },
+  java: { id: "java", language: "java" },
+  javascript: { id: "javascript", language: "javascript" },
+  typescript: { id: "typescript", language: "typescript" },
+  c: { id: "c", language: "c" },
+  cpp: { id: "cpp", language: "cpp" },
+  bash: { id: "bash", language: "bash" },
+  git: { id: "bash", language: "bash" },
+  linux: { id: "bash", language: "bash" },
+  web: { id: "web", language: "web" },
+};
+
+const SUBJECT_PROFILE_ALIASES: Record<string, string> = {
+  "python-for-beginners": "python",
+};
+
+function canonicalProfile(value: unknown) {
+  const key = cleanString(value)?.toLowerCase();
+  return key ? PROFILE_LANGUAGE_BY_ID[key] ?? null : null;
+}
+
+function buildCourseProfile(args: {
+  id: CourseProfileId;
+  subjectSlug: string;
+  defaultLanguage: WorkspaceLanguage;
+}): CourseProfile {
+  return {
+    ...args,
+    supportsRuntimeDefaultDataset: args.id === "sql",
+  };
+}
+
 export function getCourseProfile(args: {
   subjectSlug?: string | null;
   language?: string | null;
@@ -60,88 +109,28 @@ export function getCourseProfile(args: {
 }): CourseProfile {
   const subjectSlug = cleanString(args.subjectSlug)?.toLowerCase() ?? "";
   const explicitLanguage = cleanLanguage(args.language);
-  const profileId = cleanString(args.profileId)?.toLowerCase();
-  const versionFamily = cleanString(args.versionFamily)?.toLowerCase();
 
-  const canonicalProfile =
-    explicitLanguage === "sql" || profileId === "sql" || versionFamily === "sql"
-      ? "sql"
-      : explicitLanguage === "python" ||
-          profileId === "python" ||
-          versionFamily === "python"
-        ? "python"
-        : null;
+  for (const candidate of [
+    explicitLanguage,
+    args.profileId,
+    args.versionFamily,
+    SUBJECT_PROFILE_ALIASES[subjectSlug] ?? subjectSlug,
+  ]) {
+    const resolved = canonicalProfile(candidate);
+    if (!resolved) continue;
 
-  if (canonicalProfile === "sql") {
-    return {
-      id: "sql",
+    return buildCourseProfile({
+      id: resolved.id,
       subjectSlug,
-      defaultLanguage: "sql" as WorkspaceLanguage,
-      supportsRuntimeDefaultDataset: true,
-    };
+      defaultLanguage: resolved.language,
+    });
   }
 
-  if (canonicalProfile === "python") {
-    return {
-      id: "python",
-      subjectSlug,
-      defaultLanguage: "python" as WorkspaceLanguage,
-      supportsRuntimeDefaultDataset: false,
-    };
-  }
-
-  switch (subjectSlug) {
-    case "sql":
-      return {
-        id: "sql",
-        subjectSlug,
-        defaultLanguage: "sql" as WorkspaceLanguage,
-        supportsRuntimeDefaultDataset: true,
-      };
-    case "java":
-      return {
-        id: "java",
-        subjectSlug,
-        defaultLanguage: "java" as WorkspaceLanguage,
-        supportsRuntimeDefaultDataset: false,
-      };
-    case "javascript":
-      return {
-        id: "javascript",
-        subjectSlug,
-        defaultLanguage: "javascript" as WorkspaceLanguage,
-        supportsRuntimeDefaultDataset: false,
-      };
-    case "c":
-      return {
-        id: "c",
-        subjectSlug,
-        defaultLanguage: "c" as WorkspaceLanguage,
-        supportsRuntimeDefaultDataset: false,
-      };
-    case "cpp":
-      return {
-        id: "cpp",
-        subjectSlug,
-        defaultLanguage: "cpp" as WorkspaceLanguage,
-        supportsRuntimeDefaultDataset: false,
-      };
-    case "python":
-    case "python-for-beginners":
-      return {
-        id: "python",
-        subjectSlug,
-        defaultLanguage: "python" as WorkspaceLanguage,
-        supportsRuntimeDefaultDataset: false,
-      };
-    default:
-      return {
-        id: "generic",
-        subjectSlug,
-        defaultLanguage: explicitLanguage ?? ("python" as WorkspaceLanguage),
-        supportsRuntimeDefaultDataset: false,
-      };
-  }
+  return buildCourseProfile({
+    id: "generic",
+    subjectSlug,
+    defaultLanguage: explicitLanguage ?? ("python" as WorkspaceLanguage),
+  });
 }
 
 export function resolveCourseLanguage(args: {
@@ -277,6 +266,10 @@ export function resolveJavaFileSeed(target: unknown): FileSeed {
   return resolveFileSeed(target, defaultMainFile("java" as WorkspaceLanguage));
 }
 
+export function resolveCFileSeed(target: unknown): FileSeed {
+  return resolveFileSeed(target, defaultMainFile("c" as WorkspaceLanguage));
+}
+
 export function resolveGenericFileSeed(
   target: unknown,
   language: WorkspaceLanguage = "python" as WorkspaceLanguage,
@@ -303,6 +296,8 @@ export function resolveCourseFileSeed(args: {
       return resolveFileSeed(args.target, defaultMainFile("python" as WorkspaceLanguage));
     case "java":
       return resolveFileSeed(args.target, defaultMainFile("java" as WorkspaceLanguage));
+    case "c":
+      return resolveCFileSeed(args.target);
     case "sql":
       // SQL can still have starter/query/support files, but dataset resolution
       // remains SQL-only and is handled by resolveRuntimeDefaultDataset.

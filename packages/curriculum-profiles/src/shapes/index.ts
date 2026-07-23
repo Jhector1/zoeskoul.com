@@ -1,5 +1,6 @@
 import { getCurriculumProfile } from "../registry.js";
 import { bashShape } from "./bashShape.js";
+import { cShape } from "./cShape.js";
 import { gitShape } from "./gitShape.js";
 import { mathShape } from "./mathShape.js";
 import { pythonShape } from "./pythonShape.js";
@@ -10,5 +11,5 @@ export function getSubjectShape(profileId: string): SubjectShapePack {
     return getCurriculumProfile(profileId).shape;
 }
 
-export { bashShape, gitShape, sqlShape, pythonShape, mathShape };
+export { bashShape, cShape, gitShape, sqlShape, pythonShape, mathShape };
 export type * from "./types.js";

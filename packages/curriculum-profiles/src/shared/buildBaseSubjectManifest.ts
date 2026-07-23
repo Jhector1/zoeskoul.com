@@ -25,6 +25,7 @@ export function buildBaseSubjectManifest(
       genKey: blueprint.subjectSlug,
       order: 10,
       accessPolicy: blueprint.accessPolicy ?? "free",
+      visibility: blueprint.visibility ?? "public",
       status: "active",
       titleKey: buildSubjectTitleKey(blueprint.subjectSlug),
       descriptionKey: buildSubjectDescriptionKey(blueprint.subjectSlug),

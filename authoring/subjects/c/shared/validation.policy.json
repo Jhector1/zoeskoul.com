@@ -1,0 +1,31 @@
+{
+  "policyId": "c-shared-validation",
+  "extendsValidation": [
+    "course-structure",
+    "versioning",
+    "workspace-language"
+  ],
+  "runtime": {
+    "language": "c",
+    "backend": "judge0",
+    "mode": "multi_file"
+  },
+  "validationRequirements": {
+    "cCodeInputNeedsGoldenCoverage": true,
+    "fixedTestsRequired": true,
+    "completeSolutionFilesRequired": true,
+    "c11CompilationRequired": true,
+    "multiFileWorkspaceRequired": true
+  },
+  "rules": {
+    "executionValidation": [
+      "Every C code_input has deterministic fixed tests and complete starterFiles and solutionFiles.",
+      "The official solution must compile and pass the same tests published to learners.",
+      "The entry file is main.c and reusable data structures are implemented in named .h/.c pairs."
+    ],
+    "pedagogy": [
+      "Use algorithm_animation for recursive trees, pointer links, tree balancing, stack transfers, and heap insertion paths.",
+      "Do not hide memory ownership or pointer invariants when they are central to the lesson."
+    ]
+  }
+}

@@ -7,6 +7,8 @@ import type {
   TopicManifestRefMap,
 } from "@/lib/subjects/_core/subjectManifestTypes";
 
+import cDataStructures from "./c/c-data-structures/subject.manifest.json";
+import { TOPIC_MANIFESTS as cDataStructuresTopicManifests } from "./c/c-data-structures/topics.generated";
 import gitFoundations from "./git/git-foundations/subject.manifest.json";
 import { TOPIC_MANIFESTS as gitFoundationsTopicManifests } from "./git/git-foundations/topics.generated";
 import linuxTerminalFundamentals from "./linux/linux-terminal-fundamentals/subject.manifest.json";
@@ -31,9 +33,10 @@ import sql from "./sql/sql/subject.manifest.json";
 import { TOPIC_MANIFESTS as sqlTopicManifests } from "./sql/sql/topics.generated";
 
 
-export type GeneratedSubjectGenKey = "git_course" | "bash_course" | "python_part1" | "sql_for_beginners";
+export type GeneratedSubjectGenKey = "c_course" | "git_course" | "bash_course" | "python_part1" | "sql_for_beginners";
 
 export const SUBJECT_MANIFESTS: Record<string, SubjectManifest> = {
+  "c-data-structures": cDataStructures as SubjectManifest,
   "git-foundations": gitFoundations as SubjectManifest,
   "linux-terminal-fundamentals": linuxTerminalFundamentals as SubjectManifest,
   "applied-python-projects": appliedPythonProjects as SubjectManifest,
@@ -56,6 +59,12 @@ export const SUBJECT_GENERATOR_SOURCES: Record<
     topicManifests: TopicManifestRefMap;
   }
 > = {
+  "c-data-structures": {
+    subjectSlug: "c-data-structures",
+    genKey: "c_course",
+    manifest: cDataStructures as SubjectManifest,
+    topicManifests: cDataStructuresTopicManifests as TopicManifestRefMap,
+  },
   "git-foundations": {
     subjectSlug: "git-foundations",
     genKey: "git_course",
@@ -128,6 +137,7 @@ export const SUBJECT_GENERATOR_SOURCES_BY_GENKEY: Record<
   GeneratedSubjectGenKey,
   Array<(typeof SUBJECT_GENERATOR_SOURCES)[keyof typeof SUBJECT_GENERATOR_SOURCES]>
 > = {
+  "c_course": [SUBJECT_GENERATOR_SOURCES["c-data-structures"]],
   "git_course": [SUBJECT_GENERATOR_SOURCES["git-foundations"]],
   "bash_course": [SUBJECT_GENERATOR_SOURCES["linux-terminal-fundamentals"]],
   "python_part1": [SUBJECT_GENERATOR_SOURCES["applied-python-projects"], SUBJECT_GENERATOR_SOURCES["python-data-functions"], SUBJECT_GENERATOR_SOURCES["python-v2"], SUBJECT_GENERATOR_SOURCES["python"]],

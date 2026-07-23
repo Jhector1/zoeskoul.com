@@ -24,7 +24,8 @@ export const ROUTES = {
     authenticate: "/authenticate",
     terms: "/terms",
     sandbox:"/sandbox",
-    achievements:"/achievements"
+    achievements:"/achievements",
+    assignments:"/assignments"
 };
 
 export function toWebSocketUrl(input: string) {

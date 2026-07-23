@@ -6,6 +6,7 @@ import { getResolvedModuleIntroFromManifest } from "@/lib/subjects/server/resolv
 import { auth } from "@/lib/auth";
 import { resolvePrivilegedLearningAccess } from "@/lib/access/resolvePrivilegedLearningAccess";
 import { getManifestSubjectPublicationStatus } from "@/lib/subjects/server/subjectPublication";
+import { checkSubjectAudienceAccess } from "@/lib/access/subjectAudienceAccess";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -36,7 +37,7 @@ export default async function ModuleIntroPage({
             weekStart: true,
             weekEnd: true,
             subject: {
-                select: { status: true },
+                select: { id: true, status: true, visibility: true },
             },
         },
     });
@@ -50,6 +51,15 @@ export default async function ModuleIntroPage({
         (moduleDb.subject.status !== "active" || manifestStatus !== "active")
     ) {
         notFound();
+    }
+
+    if (!canUnlockAll) {
+        const audienceAccess = await checkSubjectAudienceAccess(prisma, {
+            actor: { userId: (session?.user as any)?.id ?? null, guestId: null },
+            subjectId: moduleDb.subject.id,
+            visibility: moduleDb.subject.visibility,
+        });
+        if (!audienceAccess.ok) notFound();
     }
 
     const manifestView = await getResolvedModuleIntroFromManifest(subjectSlug, moduleSlug);

@@ -1,0 +1,46 @@
+{
+  "subjects": {
+    "c-data-structures": {
+      "title": "Data Structures in C",
+      "description": "Build and analyze recursive algorithms, hash-based pair detection, balanced search trees, stack-backed priority queues, and pointer-based heaps in a multi-file C workspace.",
+      "moreComingSoon": "Later modules can add linked structures, graph traversal, sorting, and deeper asymptotic analysis."
+    }
+  },
+  "modules": {
+    "c-data-structures": {
+      "c-data-structures-module-1-algorithm-design-lab": {
+        "title": "Algorithm Design Lab",
+        "description": "Turn five written algorithm-design problems into executable C experiments with visual traces, correctness checks, and runtime analysis.",
+        "outcomes": [
+          "Connect a recursive call tree to a recurrence and a tight asymptotic bound.",
+          "Use bounded pair sums to detect equal-sum disjoint pairs in quadratic time.",
+          "Build and rebuild almost-balanced binary search trees in linear time.",
+          "Implement a priority queue using only legal stack operations.",
+          "Insert into a pointer-based complete heap by following the binary path of the next index."
+        ],
+        "why": [
+          "Executable experiments make written runtime arguments concrete without replacing the required reasoning.",
+          "The same C profile, file workspace, compiler, and grader can support later systems and data-structures courses."
+        ]
+      }
+    }
+  },
+  "sections": {
+    "c-data-structures": {
+      "c-data-structures-module-1-algorithm-design-lab": {
+        "c-data-structures-algorithm-design-lab": {
+          "title": "From Written Algorithms to Working C",
+          "description": "Study each algorithm with a step animation, then implement and verify it in a focused multi-file C project.",
+          "weeks": null,
+          "bullets": [
+            "Recursive call trees and recurrences",
+            "Equal pair sums in O(n²)",
+            "Almost-balanced BST construction and rebuilding",
+            "Priority queues built from stacks",
+            "O(log n) insertion in a pointer-based heap"
+          ]
+        }
+      }
+    }
+  }
+}

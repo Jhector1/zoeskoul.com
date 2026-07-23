@@ -14,3 +14,11 @@ describe("languageDefaults bash", () => {
         expect(defaultMainCode("bash")).toBe('echo "Hello from Bash!"\n');
     });
 });
+
+
+describe("languageDefaults typescript", () => {
+    it("uses main.ts and a TypeScript starter", () => {
+        expect(defaultMainFile("typescript")).toBe("main.ts");
+        expect(defaultMainCode("typescript")).toContain("const message: string");
+    });
+});

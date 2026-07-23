@@ -4,16 +4,19 @@ export * from "./shapes/index.js";
 
 export * from "./shared/profileServices.js";
 export * from "./shared/createProfileServices.js";
+export * from "./shared/createCodeProfileAdapter.js";
 export * from "./shared/generationPolicy.js";
 export * from "./shared/messageTags.js";
 export * from "./shared/validateGoldenTopicBundle.js";
 export * from "./base/codeInputExpected.js";
 
 export * from "./families/code/index.js";
+export * from "./families/code/createCompiledLanguageProfile.js";
 export * from "./families/query/index.js";
 
 export * from "./sql/index.js";
 export * from "./python/index.js";
+export * from "./c/index.js";
 export * from "./bash/index.js";
 export * from "./git/index.js";
 export * from "./terminal/index.js";

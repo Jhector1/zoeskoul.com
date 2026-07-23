@@ -182,6 +182,18 @@ describe("buildSubjectManifestFromPlan", () => {
         });
     });
 
+    it("preserves private course visibility in the generated manifest", () => {
+        const manifest = buildSubjectManifestFromPlan(
+            makeArgs({
+                blueprint: {
+                    visibility: "private",
+                },
+            }),
+        );
+
+        expect(manifest.subject.visibility).toBe("private");
+    });
+
     it("does not hardcode the first modules as free", () => {
         const manifest = buildSubjectManifestFromPlan(
             makeArgs({

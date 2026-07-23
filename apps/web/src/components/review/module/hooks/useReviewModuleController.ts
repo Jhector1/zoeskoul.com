@@ -55,7 +55,6 @@ import {
 import type {ReviewModulePageProps, HeaderGamificationVm} from "../types";
 import {useReviewRuntimeStore} from "../runtime/reviewRuntimeStore";
 import { mergeRuntimeIntoProgress } from "../runtime/runtimeProgressBridge";
-import {getCardStateKey} from "../runtime/exerciseKeys";
 import {
     buildReviewCardRouteTarget,
     buildReviewExerciseRouteTarget,
@@ -94,7 +93,7 @@ import {
 import { shouldShowFinalCertificateCta } from "../certificateNavigation";
 import {
     resolveToolsRailVisibility,
-    shouldDefaultCollapseToolsRailForCompactQuiz,
+    shouldDefaultCollapseToolsRail,
     toolPresentationPolicyFromManifest,
 } from "../toolsRailVisibility";
 
@@ -1249,8 +1248,7 @@ export function useReviewModuleController({
             activeCardWorkspaceExercise?.manifest,
         );
 
-    const shouldDefaultCollapseRightRail = shouldDefaultCollapseToolsRailForCompactQuiz({
-        compactLearnerUi: learnerUiFlags.compactLearnerUi,
+    const shouldDefaultCollapseRightRail = shouldDefaultCollapseToolsRail({
         showDebugLearningUi: learnerUiFlags.showDebugLearningUi,
         activeCard,
         topicTools: viewTopic?.meta?.tools,
@@ -1328,15 +1326,6 @@ export function useReviewModuleController({
     const activeToolScopeKey = resolveActiveToolScopeKey({
         activeExerciseStateKey: activeExerciseTarget?.exerciseStateKey ?? null,
         activeCardWorkspaceExerciseKey: activeCardWorkspaceExercise?.exerciseKey ?? null,
-        fallbackCardScopeKey: activeCard?.id
-            ? `${getCardStateKey({
-                subjectSlug,
-                moduleSlug,
-                sectionSlug: routeTarget?.sectionSlug ?? sectionSlug,
-                topicId: viewTid,
-                cardId: activeCard.id,
-            })}:general`
-            : "general",
     });
 
     const tool = useToolCodeRunnerState({
@@ -2308,9 +2297,11 @@ export function useReviewModuleController({
         })
             ? routeEditorEntry
             : null;
+    const boardEnabled = true;
+    const boardScopeKey = `card:${viewTid}:${activeCard?.id ?? routeTarget?.targetSlug ?? "general"}`;
     const shouldRenderStackedTools = Boolean(
         toolsRailVisibility.isAvailable &&
-        (routeWorkspaceExercise || activeCardWorkspaceExercise || activeCardRegistryExerciseEntry),
+        (boardEnabled || routeWorkspaceExercise || activeCardWorkspaceExercise || activeCardRegistryExerciseEntry),
     );
 
     useEffect(() => {
@@ -2567,9 +2558,13 @@ export function useReviewModuleController({
                 moduleId: moduleSlug,
                 locale,
                 codeEnabled: runtime.codeEnabled,
-                // Course lessons already expose Exercise/Code navigation. Keep the
-                // secondary Tools/Run/More header for dedicated review/practice only.
+                boardEnabled,
+                boardScopeKey,
+                notesEnabled: false,
+                // Course lessons use a compact Code/Board switcher rather than the
+                // larger review-practice Tools/Run/More header.
                 showHeader: false,
+                showToolTabs: true,
                 showLanguagePicker: false,
                 showSqlDialectPicker: false,
                 toolSqlDialect: rightRailSqlProps.toolSqlDialect,
@@ -2677,6 +2672,8 @@ export function useReviewModuleController({
             routeExerciseId: activeExerciseTarget?.exerciseId ?? null,
             defaultToolLanguage: runtime.toolDefaults.defaultLang,
             showMobileWorkspaceTabs: shouldRenderStackedTools && !panels.showDesktopRight,
+            desktopToolsVisible:
+                panels.showDesktopRight && !panels.rightCollapsedEff,
             activeMobileWorkspaceTab,
             onMobileWorkspaceTabChange: setActiveMobileWorkspaceTab,
             subjectFinish,

@@ -59,6 +59,7 @@ describe("daily practice access filtering", () => {
           id: "s1",
           slug: "python-v1",
           accessPolicy: "free",
+          visibility: "public",
           enrolled: true,
           versioning: { family: "python", status: "legacy", defaultForNewEnrollments: false },
         },
@@ -66,6 +67,7 @@ describe("daily practice access filtering", () => {
           id: "s2",
           slug: "python-v2",
           accessPolicy: "free",
+          visibility: "public",
           enrolled: false,
           versioning: { family: "python", status: "active", defaultForNewEnrollments: true },
         },
@@ -93,6 +95,7 @@ describe("daily practice access filtering", () => {
           id: "python",
           slug: "python-v2",
           accessPolicy: "free",
+          visibility: "public",
           enrolled: false,
           versioning: {
             family: "python",
@@ -104,6 +107,7 @@ describe("daily practice access filtering", () => {
           id: "sql",
           slug: "sql-v2",
           accessPolicy: "paid",
+          visibility: "public",
           enrolled: false,
           versioning: {
             family: "sql",
@@ -139,6 +143,7 @@ describe("daily practice access filtering", () => {
         id: "s2",
         slug: "python-v2",
         accessPolicy: "free" as const,
+        visibility: "public" as const,
         enrolled: false,
         versioning: { family: "python", status: "active" as const, defaultForNewEnrollments: true },
       },
@@ -170,4 +175,45 @@ describe("daily practice access filtering", () => {
       }),
     ).toHaveLength(1);
   });
+
+  it("only includes a private course when the shared subject access snapshot grants it", () => {
+    const options = [option({ subjectSlug: "c-data-structures", moduleSlug: "c-module-1" })];
+    const subjects = [
+      {
+        id: "c-subject",
+        slug: "c-data-structures",
+        accessPolicy: "free" as const,
+        visibility: "private" as const,
+        enrolled: true,
+        versioning: null,
+      },
+    ];
+    const modules = [
+      {
+        id: "c-module",
+        slug: "c-module-1",
+        accessOverride: "inherit" as const,
+        subjectSlug: "c-data-structures",
+      },
+    ];
+
+    expect(
+      selectAccessibleDailyPracticeOptions({
+        options,
+        subjects,
+        modules,
+        snapshot: snapshot(),
+      }),
+    ).toEqual([]);
+
+    expect(
+      selectAccessibleDailyPracticeOptions({
+        options,
+        subjects,
+        modules,
+        snapshot: snapshot({ subjectAccess: new Set(["c-subject"]) }),
+      }),
+    ).toHaveLength(1);
+  });
+
 });

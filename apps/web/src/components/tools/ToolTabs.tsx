@@ -9,12 +9,13 @@ export default function ToolTabs(props: {
     ctx: ToolsCtx;
     value: ToolId;
     onChange: (v: ToolId) => void;
+    hideDisabled?: boolean;
 }) {
-    const { ctx, value, onChange } = props;
+    const { ctx, value, onChange, hideDisabled = false } = props;
 
     return (
         <div className="flex rounded-xl border border-neutral-200 overflow-hidden dark:border-white/10">
-            {TOOL_SPECS.map((t) => {
+            {TOOL_SPECS.filter((t) => !hideDisabled || t.enabled(ctx)).map((t) => {
                 const disabled = !t.enabled(ctx);
                 const active = value === t.id;
                 const Icon = t.Icon;

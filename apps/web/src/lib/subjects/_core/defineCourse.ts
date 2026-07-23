@@ -40,6 +40,7 @@ export type SubjectInput = {
     meta?: SubjectMeta | null;
 
     accessPolicy?: "free" | "paid";
+    visibility?: "public" | "private" | "organization";
     status?: SubjectStatus;
     entitlementKey?: string | null;
 };

@@ -24,10 +24,11 @@ vi.mock("./ReviewTopicCompletion", () => ({
     default: () => React.createElement("div", { "data-testid": "topic-completion" }),
 }));
 
-function renderStage(card: any) {
+function renderStage(card: any, desktopToolsVisible = false) {
     return renderToStaticMarkup(
         React.createElement(ReviewTopicStage, {
             leftCollapsedEff: false,
+            desktopToolsVisible,
             onOpenTopics: vi.fn(),
             mainScrollRef: { current: null },
             padStyle: {},
@@ -57,32 +58,45 @@ function renderStage(card: any) {
 }
 
 describe("ReviewTopicStage width constraints", () => {
-    it("constrains hidden-tools sketch cards even outside compact learner mode", () => {
+    it("centers the lesson column whenever desktop Tools are not visible", () => {
         const html = renderStage({
             type: "sketch",
             id: "sketch0",
-            title: "Sketch",
-            sketchId: "what-sql-means",
-            tools: {
-                defaultVisible: false,
-                allowOpen: false,
-            },
+            title: "Question walkthrough",
+            sketchId: "recurrence-walkthrough",
         });
 
-        expect(html).toContain("max-w-4xl");
+        expect(html).toContain("mx-auto w-full max-w-4xl");
     });
 
-    it("does not constrain normal sketch cards when tools are available", () => {
-        const html = renderStage({
-            type: "sketch",
-            id: "sketch1",
-            title: "Sketch",
-            sketchId: "try-it-sketch",
-            tools: {
-                defaultVisible: true,
-                allowOpen: true,
+    it("keeps the split-workspace width while desktop Tools are visible", () => {
+        const html = renderStage(
+            {
+                type: "sketch",
+                id: "sketch1",
+                title: "Embedded editor walkthrough",
+                sketchId: "try-it-sketch",
             },
-        });
+            true,
+        );
+
+        expect(html).not.toContain("max-w-4xl");
+    });
+
+    it("uses shell visibility instead of card-local tool metadata", () => {
+        const html = renderStage(
+            {
+                type: "sketch",
+                id: "sketch2",
+                title: "Hidden tools policy",
+                sketchId: "plain-sketch",
+                tools: {
+                    defaultVisible: false,
+                    allowOpen: false,
+                },
+            },
+            true,
+        );
 
         expect(html).not.toContain("max-w-4xl");
     });

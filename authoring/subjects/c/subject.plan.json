@@ -1,0 +1,31 @@
+{
+  "subjectSlug": "c",
+  "catalogSlug": "c",
+  "profileId": "c",
+  "accessPolicy": "paid",
+  "visibility": "private",
+  "courseOrder": [
+    "c-data-structures"
+  ],
+  "publishTarget": {
+    "liveSubjectSlug": "c-data-structures",
+    "courseSlug": "c-data-structures",
+    "channel": "draft"
+  },
+  "versioning": {
+    "family": "c-data-structures",
+    "version": 1,
+    "status": "draft",
+    "defaultForNewEnrollments": false,
+    "supersedes": null,
+    "supersededBy": null
+  },
+  "courses": [
+    {
+      "courseSlug": "c-data-structures",
+      "title": "C Data Structures and Algorithm Analysis",
+      "order": 1,
+      "path": "courses/c-data-structures/course.spec.json"
+    }
+  ]
+}

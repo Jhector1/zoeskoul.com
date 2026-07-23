@@ -149,6 +149,45 @@ export type ManifestSketch =
     }
   | {
       id: string;
+      archetype: "algorithm_animation";
+      titleKey: string;
+      contextKey?: string;
+      runtime?: ManifestRuntimeDefaults | null;
+      intervalMs?: number;
+      autoPlay?: boolean;
+      showControls?: boolean;
+      showStepCounter?: boolean;
+      canvasHeight?: number;
+      steps: Array<{
+        id: string;
+        titleKey: string;
+        bodyKey?: string;
+        formula?: string;
+        code?: string;
+        nodes: Array<{
+          id: string;
+          label: string;
+          detail?: string;
+          x: number;
+          y: number;
+          width?: number;
+          shape?: "box" | "circle" | "pill";
+          tone?: "neutral" | "good" | "info" | "warn" | "danger";
+          active?: boolean;
+          dimmed?: boolean;
+        }>;
+        edges?: Array<{
+          from: string;
+          to: string;
+          label?: string;
+          tone?: "neutral" | "good" | "info" | "warn" | "danger";
+          active?: boolean;
+          dashed?: boolean;
+        }>;
+      }>;
+    }
+  | {
+      id: string;
       archetype: "image";
       titleKey: string;
       src?: string;

@@ -1,5 +1,8 @@
 import { describe, expect, it } from "vitest";
-import { resolveActiveToolScopeKey } from "./activeToolScopeKey";
+import {
+    DEFAULT_TOPIC_TOOL_SCOPE_KEY,
+    resolveActiveToolScopeKey,
+} from "./activeToolScopeKey";
 
 describe("resolveActiveToolScopeKey", () => {
     it("prefers the route-owned exercise when present", () => {
@@ -7,7 +10,6 @@ describe("resolveActiveToolScopeKey", () => {
             resolveActiveToolScopeKey({
                 activeExerciseStateKey: "python-v2:module-1:section:topic:exercise:q9",
                 activeCardWorkspaceExerciseKey: "python-v2:module-1:section:topic:exercise:q10",
-                fallbackCardScopeKey: "card-scope:general",
             }),
         ).toBe("python-v2:module-1:section:topic:exercise:q9");
     });
@@ -17,18 +19,26 @@ describe("resolveActiveToolScopeKey", () => {
             resolveActiveToolScopeKey({
                 activeExerciseStateKey: null,
                 activeCardWorkspaceExerciseKey: "python-v2:module-1:section:topic:exercise:q9",
-                fallbackCardScopeKey: "card-scope:general",
             }),
         ).toBe("python-v2:module-1:section:topic:exercise:q9");
     });
 
-    it("falls back to the card scope when no exercise runtime exists yet", () => {
+    it("reuses one default workspace across ordinary cards in a topic", () => {
         expect(
             resolveActiveToolScopeKey({
                 activeExerciseStateKey: null,
                 activeCardWorkspaceExerciseKey: null,
-                fallbackCardScopeKey: "card-scope:general",
             }),
-        ).toBe("card-scope:general");
+        ).toBe(DEFAULT_TOPIC_TOOL_SCOPE_KEY);
+    });
+
+    it("allows a caller to provide a narrower shared fallback scope", () => {
+        expect(
+            resolveActiveToolScopeKey({
+                activeExerciseStateKey: null,
+                activeCardWorkspaceExerciseKey: null,
+                fallbackWorkspaceScopeKey: "topic-tool:module-review",
+            }),
+        ).toBe("topic-tool:module-review");
     });
 });

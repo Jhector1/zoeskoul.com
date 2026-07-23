@@ -10,6 +10,7 @@ export type SubjectPublicationState = {
     slug: string;
     databaseStatus: SubjectPublicationStatus | null;
     manifestStatus: SubjectPublicationStatus | null;
+    visibility: "public" | "private" | "organization" | null;
     isAvailable: boolean;
 };
 
@@ -37,6 +38,7 @@ export async function getSubjectPublicationState(
                 id: true,
                 slug: true,
                 status: true,
+                visibility: true,
             },
         }),
         Promise.resolve(getManifestSubjectPublicationStatus(subjectSlug)),
@@ -49,6 +51,7 @@ export async function getSubjectPublicationState(
         slug: subjectSlug,
         databaseStatus,
         manifestStatus,
+        visibility: databaseSubject?.visibility ?? null,
         isAvailable:
             databaseStatus === "active" && manifestStatus === "active",
     };

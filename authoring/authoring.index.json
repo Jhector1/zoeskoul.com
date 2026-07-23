@@ -93,6 +93,19 @@
           "path": "subjects/git/courses/github-collaboration/course.spec.json"
         }
       ]
+    },
+    {
+      "subjectSlug": "c",
+      "path": "subjects/c",
+      "courseOrder": [
+        "c-data-structures"
+      ],
+      "courses": [
+        {
+          "courseSlug": "c-data-structures",
+          "path": "subjects/c/courses/c-data-structures/course.spec.json"
+        }
+      ]
     }
   ]
 }

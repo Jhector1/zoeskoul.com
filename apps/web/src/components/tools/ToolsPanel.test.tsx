@@ -9,6 +9,8 @@ describe("resolveCompactToolsHeaderModel", () => {
         locale: "en",
         boundId: null,
         codeEnabled: true,
+        boardEnabled: false,
+        notesEnabled: true,
     };
 
     it("keeps Run as the primary action in compact mode", () => {

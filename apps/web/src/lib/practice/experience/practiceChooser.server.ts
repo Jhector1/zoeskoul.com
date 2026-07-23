@@ -53,6 +53,7 @@ export async function loadPracticeChooser(args: {
             id: subject.id,
             slug: subject.slug,
             accessPolicy: subject.accessPolicy,
+            visibility: subject.visibility,
             entitlementKey: subject.entitlementKey ?? null,
           }
         : null,

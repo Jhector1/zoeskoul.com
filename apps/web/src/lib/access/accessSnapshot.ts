@@ -1,6 +1,7 @@
 import { FeatureKey } from "@zoeskoul/db";
 import type { PrismaClient } from "@/lib/prisma";
 import { Actor, actorKeyOf } from "@/lib/practice/actor";
+import { getAssignedSubjectIdsForUser } from "@/lib/learningAssignments/assignmentAccessServer";
 
 function isWithinWindow(now: Date, startsAt?: Date | null, endsAt?: Date | null) {
     if (startsAt && startsAt > now) return false;
@@ -74,6 +75,17 @@ export async function getAccessSnapshot(
         for (const g of grants) {
             if (isWithinWindow(now, g.startsAt, g.endsAt)) {
                 subjectAccess.add(g.subjectId);
+            }
+        }
+
+        if (actor.userId) {
+            const assignedSubjectIds = await getAssignedSubjectIdsForUser(prisma, {
+                userId: actor.userId,
+                subjectIds,
+                now,
+            });
+            for (const subjectId of assignedSubjectIds) {
+                subjectAccess.add(subjectId);
             }
         }
     }

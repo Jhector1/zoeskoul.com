@@ -229,6 +229,7 @@ export function buildSubjectManifestFromPlan(args: {
             accessPolicy:
                 blueprint.accessPolicy ??
                 shape.subjectManifest.accessPolicyDefault,
+            visibility: blueprint.visibility ?? "public",
             status: shape.subjectManifest.statusDefault,
             imagePublicId: null,
             imageAlt: null,

@@ -1,0 +1,16 @@
+{
+  "profileId": "c",
+  "language": "c",
+  "runtime": {
+    "kind": "code",
+    "backend": "judge0",
+    "standard": "c11"
+  },
+  "workspaceProfileId": "browser-code-runner",
+  "workspacePolicyId": "c-multifile-workspace",
+  "checker": {
+    "defaultRecipe": "fixed_tests",
+    "compileAllWorkspaceFiles": true,
+    "goldenValidation": "execute_official_solution"
+  }
+}

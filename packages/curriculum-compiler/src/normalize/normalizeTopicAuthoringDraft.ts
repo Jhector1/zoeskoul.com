@@ -258,6 +258,7 @@ function normalizeSourceChecks(
                 item.type === "source_regex" ? "source_regex" : item.type === "source_contains"
                     ? "source_contains"
                     : null;
+            const path = asOptionalString(item.path);
             const pattern = asOptionalString(item.pattern);
             const message = asOptionalString(item.message);
 
@@ -265,6 +266,9 @@ function normalizeSourceChecks(
 
             return {
                 type,
+                ...(path
+                    ? { path: normalizeWorkspacePath(path) }
+                    : {}),
                 pattern,
                 message,
                 ...(typeof item.normalizeWhitespace === "boolean"

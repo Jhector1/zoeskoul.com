@@ -1,0 +1,583 @@
+{
+  "topicId": "priority-queue-with-stacks",
+  "subjectSlug": "c--c-data-structures--draft",
+  "moduleSlug": "c--c-data-structures--draft-module-1-algorithm-design-lab",
+  "sectionSlug": "c--c-data-structures--draft-algorithm-design-lab",
+  "prefix": "cds1",
+  "minutes": 40,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "c",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "preset": "runner",
+    "runnerBackend": "judge0",
+    "layoutMode": "default",
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": false
+    }
+  },
+  "topic": {
+    "labelKey": "topics.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.priority-queue-with-stacks.label",
+    "summaryKey": "topics.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.priority-queue-with-stacks.summary"
+  },
+  "cards": [
+    {
+      "id": "question-4-problem",
+      "kind": "sketch",
+      "titleKey": "topics.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.priority-queue-with-stacks.cards.question-4-problem.title",
+      "sketchId": "question-4-problem",
+      "height": 760
+    },
+    {
+      "id": "priority-queue-animation",
+      "kind": "sketch",
+      "titleKey": "topics.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.priority-queue-with-stacks.cards.priority-queue-animation.title",
+      "sketchId": "priority-queue-animation",
+      "height": 820
+    },
+    {
+      "id": "priority-queue-project",
+      "kind": "project",
+      "titleKey": "topics.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.priority-queue-with-stacks.cards.priority-queue-project.title",
+      "project": {
+        "difficulty": "hard",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "displayKind": "project",
+        "uiKind": "project",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "priority_queue_stacks",
+            "titleKey": "topics.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.priority-queue-with-stacks.projectSteps.priority_queue_stacks.title",
+            "exerciseKey": "priority-queue-stacks",
+            "difficulty": "hard",
+            "preferKind": "code_input",
+            "seedPolicy": "step",
+            "maxAttempts": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "analysis-quiz",
+      "kind": "quiz",
+      "titleKey": "topics.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.priority-queue-with-stacks.label",
+      "quiz": {
+        "difficulty": "medium",
+        "n": 1,
+        "min": 1,
+        "max": 1,
+        "selectionMode": "fixed",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "question-4-problem",
+      "archetype": "paragraph",
+      "titleKey": "sketches.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.priority-queue-with-stacks.question-4-problem.title",
+      "bodyKey": "sketches.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.priority-queue-with-stacks.question-4-problem.bodyMarkdown"
+    },
+    {
+      "id": "priority-queue-animation",
+      "archetype": "algorithm_animation",
+      "titleKey": "sketches.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.priority-queue-with-stacks.priority-queue-animation.title",
+      "contextKey": "sketches.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.priority-queue-with-stacks.priority-queue-animation.context",
+      "intervalMs": 1400,
+      "autoPlay": false,
+      "showControls": true,
+      "showStepCounter": true,
+      "canvasHeight": 320,
+      "steps": [
+        {
+          "id": "priority-queue-animation-1",
+          "titleKey": "sketches.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.priority-queue-with-stacks.priority-queue-animation.steps.0.title",
+          "bodyKey": "sketches.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.priority-queue-with-stacks.priority-queue-animation.steps.0.body",
+          "code": "allowed: push(x), pop(), isEmpty()\nforbidden: stack.items[i]",
+          "nodes": [
+            {
+              "id": "top",
+              "label": "top only",
+              "detail": "pop to inspect",
+              "x": 30,
+              "y": 48,
+              "shape": "pill",
+              "tone": "good",
+              "active": true,
+              "width": 28
+            },
+            {
+              "id": "no",
+              "label": "no random access",
+              "detail": "no arbitrary index",
+              "x": 70,
+              "y": 48,
+              "shape": "pill",
+              "tone": "danger",
+              "width": 34
+            }
+          ]
+        },
+        {
+          "id": "priority-queue-animation-2",
+          "titleKey": "sketches.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.priority-queue-with-stacks.priority-queue-animation.steps.1.title",
+          "bodyKey": "sketches.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.priority-queue-with-stacks.priority-queue-animation.steps.1.body",
+          "formula": "$insert=O(1),\\quad extractMin=O(n)$",
+          "nodes": [
+            {
+              "id": "insert",
+              "label": "insert(priority)",
+              "detail": "one push",
+              "x": 28,
+              "y": 48,
+              "shape": "pill",
+              "tone": "good",
+              "active": true,
+              "width": 30
+            },
+            {
+              "id": "extract",
+              "label": "extractMin()",
+              "detail": "scan all priorities",
+              "x": 72,
+              "y": 48,
+              "shape": "pill",
+              "tone": "info",
+              "width": 32
+            }
+          ]
+        },
+        {
+          "id": "priority-queue-animation-3",
+          "titleKey": "sketches.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.priority-queue-with-stacks.priority-queue-animation.steps.2.title",
+          "bodyKey": "sketches.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.priority-queue-with-stacks.priority-queue-animation.steps.2.body",
+          "nodes": [
+            {
+              "id": "data",
+              "label": "data stack",
+              "detail": "4, 1, 3, 1, 2",
+              "x": 22,
+              "y": 48,
+              "shape": "pill",
+              "tone": "info",
+              "width": 28
+            },
+            {
+              "id": "held",
+              "label": "held minimum = 1",
+              "x": 50,
+              "y": 25,
+              "shape": "pill",
+              "tone": "good",
+              "active": true,
+              "width": 30
+            },
+            {
+              "id": "scratch",
+              "label": "scratch stack",
+              "detail": "all other values",
+              "x": 78,
+              "y": 65,
+              "shape": "pill",
+              "tone": "info",
+              "width": 28
+            }
+          ],
+          "edges": [
+            {
+              "from": "data",
+              "to": "held",
+              "active": true
+            },
+            {
+              "from": "data",
+              "to": "scratch",
+              "active": true
+            }
+          ]
+        },
+        {
+          "id": "priority-queue-animation-4",
+          "titleKey": "sketches.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.priority-queue-with-stacks.priority-queue-animation.steps.3.title",
+          "bodyKey": "sketches.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.priority-queue-with-stacks.priority-queue-animation.steps.3.body",
+          "code": "if (value < minimum) {\n    push(scratch, minimum);\n    minimum = value;\n}",
+          "nodes": [
+            {
+              "id": "old",
+              "label": "held 3",
+              "x": 23,
+              "y": 48,
+              "tone": "warn",
+              "width": 22
+            },
+            {
+              "id": "new",
+              "label": "see 1",
+              "x": 50,
+              "y": 48,
+              "shape": "pill",
+              "tone": "good",
+              "active": true,
+              "width": 22
+            },
+            {
+              "id": "move",
+              "label": "move 3 to scratch",
+              "x": 78,
+              "y": 48,
+              "tone": "info",
+              "width": 28
+            }
+          ],
+          "edges": [
+            {
+              "from": "old",
+              "to": "new"
+            },
+            {
+              "from": "new",
+              "to": "move",
+              "active": true
+            }
+          ]
+        },
+        {
+          "id": "priority-queue-animation-5",
+          "titleKey": "sketches.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.priority-queue-with-stacks.priority-queue-animation.steps.4.title",
+          "bodyKey": "sketches.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.priority-queue-with-stacks.priority-queue-animation.steps.4.body",
+          "code": "if (value == minimum)\n    push(scratch, value);",
+          "nodes": [
+            {
+              "id": "held",
+              "label": "held minimum = 1",
+              "x": 30,
+              "y": 48,
+              "shape": "pill",
+              "tone": "good",
+              "active": true,
+              "width": 32
+            },
+            {
+              "id": "equal",
+              "label": "another 1",
+              "detail": "send to scratch",
+              "x": 72,
+              "y": 48,
+              "shape": "pill",
+              "tone": "info",
+              "width": 30
+            }
+          ],
+          "edges": [
+            {
+              "from": "held",
+              "to": "equal",
+              "label": "equal, not smaller"
+            }
+          ]
+        },
+        {
+          "id": "priority-queue-animation-6",
+          "titleKey": "sketches.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.priority-queue-with-stacks.priority-queue-animation.steps.5.title",
+          "bodyKey": "sketches.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.priority-queue-with-stacks.priority-queue-animation.steps.5.body",
+          "formula": "$O(1)\\text{ moves per priority}\\Rightarrow O(n)$",
+          "nodes": [
+            {
+              "id": "restore",
+              "label": "restore scratch",
+              "detail": "remaining queue: 4, 1, 3, 2",
+              "x": 32,
+              "y": 48,
+              "shape": "pill",
+              "tone": "info",
+              "width": 38
+            },
+            {
+              "id": "out",
+              "label": "return 1",
+              "detail": "remove exactly one minimum",
+              "x": 74,
+              "y": 48,
+              "shape": "pill",
+              "tone": "good",
+              "active": true,
+              "width": 32
+            }
+          ],
+          "edges": [
+            {
+              "from": "restore",
+              "to": "out",
+              "active": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "exercises": [
+    {
+      "id": "priority-queue-stacks",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.priority-queue-with-stacks.finalLab.steps.priority_queue_stacks",
+      "language": "c",
+      "starterCode": "@:topics.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.priority-queue-with-stacks.finalLab.steps.priority_queue_stacks.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.c",
+          "content": "@:topics.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.priority-queue-with-stacks.finalLab.steps.priority_queue_stacks.starterFiles.main_c.content",
+          "language": "c",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "structures/priority_queue.c",
+          "content": "@:topics.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.priority-queue-with-stacks.finalLab.steps.priority_queue_stacks.starterFiles.structures_priority_queue_c.content",
+          "language": "c",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "structures/priority_queue.h",
+          "content": "@:topics.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.priority-queue-with-stacks.finalLab.steps.priority_queue_stacks.starterFiles.structures_priority_queue_h.content",
+          "language": "c",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "structures/stack.c",
+          "content": "@:topics.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.priority-queue-with-stacks.finalLab.steps.priority_queue_stacks.starterFiles.structures_stack_c.content",
+          "language": "c",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "structures/stack.h",
+          "content": "@:topics.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.priority-queue-with-stacks.finalLab.steps.priority_queue_stacks.starterFiles.structures_stack_h.content",
+          "language": "c",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.c",
+          "content": "@:topics.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.priority-queue-with-stacks.finalLab.steps.priority_queue_stacks.solutionFiles.main_c.content",
+          "language": "c",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "structures/priority_queue.c",
+          "content": "@:topics.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.priority-queue-with-stacks.finalLab.steps.priority_queue_stacks.solutionFiles.structures_priority_queue_c.content",
+          "language": "c",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "structures/priority_queue.h",
+          "content": "@:topics.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.priority-queue-with-stacks.finalLab.steps.priority_queue_stacks.solutionFiles.structures_priority_queue_h.content",
+          "language": "c",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "structures/stack.c",
+          "content": "@:topics.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.priority-queue-with-stacks.finalLab.steps.priority_queue_stacks.solutionFiles.structures_stack_c.content",
+          "language": "c",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "structures/stack.h",
+          "content": "@:topics.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.priority-queue-with-stacks.finalLab.steps.priority_queue_stacks.solutionFiles.structures_stack_h.content",
+          "language": "c",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "c",
+        "entryFilePath": "main.c",
+        "starterCode": "@:topics.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.priority-queue-with-stacks.finalLab.steps.priority_queue_stacks.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.c",
+            "content": "@:topics.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.priority-queue-with-stacks.finalLab.steps.priority_queue_stacks.starterFiles.main_c.content",
+            "language": "c",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "structures/priority_queue.c",
+            "content": "@:topics.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.priority-queue-with-stacks.finalLab.steps.priority_queue_stacks.starterFiles.structures_priority_queue_c.content",
+            "language": "c",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "structures/priority_queue.h",
+            "content": "@:topics.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.priority-queue-with-stacks.finalLab.steps.priority_queue_stacks.starterFiles.structures_priority_queue_h.content",
+            "language": "c",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "structures/stack.c",
+            "content": "@:topics.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.priority-queue-with-stacks.finalLab.steps.priority_queue_stacks.starterFiles.structures_stack_c.content",
+            "language": "c",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "structures/stack.h",
+            "content": "@:topics.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.priority-queue-with-stacks.finalLab.steps.priority_queue_stacks.starterFiles.structures_stack_h.content",
+            "language": "c",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.c",
+            "content": "@:topics.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.priority-queue-with-stacks.finalLab.steps.priority_queue_stacks.solutionFiles.main_c.content",
+            "language": "c",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "structures/priority_queue.c",
+            "content": "@:topics.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.priority-queue-with-stacks.finalLab.steps.priority_queue_stacks.solutionFiles.structures_priority_queue_c.content",
+            "language": "c",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "structures/priority_queue.h",
+            "content": "@:topics.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.priority-queue-with-stacks.finalLab.steps.priority_queue_stacks.solutionFiles.structures_priority_queue_h.content",
+            "language": "c",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "structures/stack.c",
+            "content": "@:topics.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.priority-queue-with-stacks.finalLab.steps.priority_queue_stacks.solutionFiles.structures_stack_c.content",
+            "language": "c",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "structures/stack.h",
+            "content": "@:topics.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.priority-queue-with-stacks.finalLab.steps.priority_queue_stacks.solutionFiles.structures_stack_h.content",
+            "language": "c",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "order=1 1 2 3 4 \ninsert=O(1)\nextract=O(n)\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.priority-queue-with-stacks.finalLab.steps.priority_queue_stacks.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.c",
+            "content": "@:topics.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.priority-queue-with-stacks.finalLab.steps.priority_queue_stacks.solutionFiles.main_c.content",
+            "language": "c",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "structures/priority_queue.c",
+            "content": "@:topics.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.priority-queue-with-stacks.finalLab.steps.priority_queue_stacks.solutionFiles.structures_priority_queue_c.content",
+            "language": "c",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "structures/priority_queue.h",
+            "content": "@:topics.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.priority-queue-with-stacks.finalLab.steps.priority_queue_stacks.solutionFiles.structures_priority_queue_h.content",
+            "language": "c",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "structures/stack.c",
+            "content": "@:topics.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.priority-queue-with-stacks.finalLab.steps.priority_queue_stacks.solutionFiles.structures_stack_c.content",
+            "language": "c",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "structures/stack.h",
+            "content": "@:topics.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.priority-queue-with-stacks.finalLab.steps.priority_queue_stacks.solutionFiles.structures_stack_h.content",
+            "language": "c",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "path": "structures/priority_queue.c",
+            "pattern": "while (stack_pop(&queue->data",
+            "message": "@:topics.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.priority-queue-with-stacks.finalLab.steps.priority_queue_stacks.checks.0.message",
+            "normalizeWhitespace": false
+          },
+          {
+            "type": "source_contains",
+            "path": "structures/priority_queue.c",
+            "pattern": "stack_push(&queue->scratch",
+            "message": "@:topics.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.priority-queue-with-stacks.finalLab.steps.priority_queue_stacks.checks.1.message",
+            "normalizeWhitespace": false
+          },
+          {
+            "type": "source_contains",
+            "path": "structures/priority_queue.c",
+            "pattern": "*priority = minimum",
+            "message": "@:topics.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.priority-queue-with-stacks.finalLab.steps.priority_queue_stacks.checks.2.message",
+            "normalizeWhitespace": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "operation-costs",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.priority-queue-with-stacks.quiz.operation-costs",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    }
+  ]
+}

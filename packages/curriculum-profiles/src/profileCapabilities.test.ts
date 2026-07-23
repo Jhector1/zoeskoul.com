@@ -7,7 +7,7 @@ import {
     profileSupportsCodeInput,
     validateProfileShapeConsistency,
 } from "./registry.js";
-import { bashShape, gitShape, mathShape, pythonShape, sqlShape } from "./shapes/index.js";
+import { bashShape, cShape, gitShape, mathShape, pythonShape, sqlShape } from "./shapes/index.js";
 import type { CourseProfile } from "./types.js";
 import { WORKSPACE_PROFILES } from "./workspaceProfiles.js";
 
@@ -62,10 +62,11 @@ describe("workspace profile file and folder creation capabilities", () => {
     });
 });
 describe("profile code_input capabilities", () => {
-    it("marks math as concept-only and keeps bash/git/python/sql code-capable", () => {
+    it("marks math as concept-only and keeps bash/git/c/python/sql code-capable", () => {
         const mathProfile = getCurriculumProfile("math");
         const bashProfile = getCurriculumProfile("bash");
         const gitProfile = getCurriculumProfile("git");
+        const cProfile = getCurriculumProfile("c");
         const pythonProfile = getCurriculumProfile("python");
         const sqlProfile = getCurriculumProfile("sql");
 
@@ -81,6 +82,7 @@ describe("profile code_input capabilities", () => {
 
         expect(profileSupportsCodeInput(bashProfile)).toBe(true);
         expect(profileSupportsCodeInput(gitProfile)).toBe(true);
+        expect(profileSupportsCodeInput(cProfile)).toBe(true);
         expect(profileSupportsCodeInput(pythonProfile)).toBe(true);
         expect(profileSupportsCodeInput(sqlProfile)).toBe(true);
     });
@@ -101,8 +103,9 @@ describe("profile code_input capabilities", () => {
         expect(mathShape.topicBundle.allowedExerciseKinds).not.toContain("code_input");
     });
 
-    it("accepts built-in Bash, Git, Python, and SQL code-capable profiles", () => {
+    it("accepts built-in Bash, C, Git, Python, and SQL code-capable profiles", () => {
         expect(validateProfileShapeConsistency(getCurriculumProfile("bash"))).toEqual([]);
+        expect(validateProfileShapeConsistency(getCurriculumProfile("c"))).toEqual([]);
         expect(validateProfileShapeConsistency(getCurriculumProfile("git"))).toEqual([]);
         expect(validateProfileShapeConsistency(getCurriculumProfile("python"))).toEqual([]);
         expect(validateProfileShapeConsistency(getCurriculumProfile("sql"))).toEqual([]);
@@ -113,6 +116,11 @@ describe("profile code_input capabilities", () => {
         expect(gitShape.topicBundle.allowedExerciseKinds).toContain("code_input");
         expect(bashShape.profileId).toBe("bash");
         expect(gitShape.profileId).toBe("git");
+    });
+
+    it("keeps the C shape code-capable and profile-specific", () => {
+        expect(cShape.topicBundle.allowedExerciseKinds).toContain("code_input");
+        expect(cShape.profileId).toBe("c");
     });
 
     it("exposes a project capability for the Python profile", () => {

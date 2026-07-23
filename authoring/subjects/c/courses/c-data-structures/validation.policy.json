@@ -1,0 +1,59 @@
+{
+  "policyId": "c-data-structures-validation",
+  "allowedConcepts": [
+    "recurrence",
+    "substitution method",
+    "geometric series",
+    "tight bound",
+    "hash table",
+    "direct addressing",
+    "binary search tree",
+    "inorder traversal",
+    "almost balanced tree",
+    "stack",
+    "priority queue",
+    "min heap",
+    "complete binary tree",
+    "parent pointer",
+    "upheap",
+    "Big O",
+    "Theta"
+  ],
+  "disallowedConcepts": [
+    "AVL rotations",
+    "red-black trees",
+    "B-trees",
+    "Dijkstra algorithm",
+    "dynamic programming",
+    "concurrent data structures"
+  ],
+  "validationRequirements": {
+    "profileId": "c",
+    "language": "c",
+    "recipeType": "fixed_tests",
+    "moduleCount": 1,
+    "technicalTopicCount": 5,
+    "algorithmAnimationPerTopic": true,
+    "completeSolutionFiles": true,
+    "c11GoldenExecution": true
+  },
+  "globalRules": [
+    "Each topic has one algorithm_animation before its full-IDE code_input.",
+    "Each code_input supplies a deterministic main.c harness, headers, implementation starter files, and matching complete solutionFiles.",
+    "Goldens execute the official C solution against every published fixed test.",
+    "Complexity explanations are concept-graded; executable tests grade algorithm behavior.",
+    "Do not hard-code expected stdout or bypass the required data structure."
+  ],
+  "moduleRules": {
+    "1": {
+      "focus": [
+        "recursive runtime",
+        "pair sums",
+        "balanced BSTs",
+        "priority queues from stacks",
+        "linked heap insertion"
+      ],
+      "requiredTopicCount": 5
+    }
+  }
+}

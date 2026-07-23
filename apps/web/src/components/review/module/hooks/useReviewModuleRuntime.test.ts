@@ -26,3 +26,25 @@ describe("resolveReviewModuleToolDefaults", () => {
         expect(resolved.defaultCode).not.toContain("Hello Python");
     });
 });
+
+it("returns C tool defaults for a nonstandard C course slug", () => {
+    const resolved = resolveReviewModuleToolDefaults({
+        subjectSlug: "c-data-structures",
+        mod: {
+            id: "c-data-structures-1",
+            title: "Algorithm Design Lab",
+            startPracticeSectionSlug: "algorithm-design",
+            profileId: "c",
+            versionFamily: "c-data-structures",
+            runtimeDefaults: {
+                kind: "code",
+                language: "c",
+            },
+            topics: [],
+        } as any,
+        viewTopic: null,
+    });
+
+    expect(resolved.defaultLang).toBe("c");
+    expect(resolved.defaultCode).toContain("#include <stdio.h>");
+});

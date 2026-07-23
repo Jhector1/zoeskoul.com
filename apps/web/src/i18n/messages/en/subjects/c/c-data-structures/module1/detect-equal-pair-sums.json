@@ -1,0 +1,137 @@
+{
+  "topics": {
+    "c-data-structures": {
+      "c-data-structures-module-1-algorithm-design-lab": {
+        "detect-equal-pair-sums": {
+          "label": "Question 2 — What Counts as Two Equal Disjoint Pairs?",
+          "summary": "Question 2 Walkthrough: Pair Sums and Buckets",
+          "cards": {
+            "question-2-problem": {
+              "title": "Question 2: Read the Equal Pair-Sum Problem First"
+            },
+            "pair-sums-animation": {
+              "title": "Question 2 Walkthrough: Pair Sums and Buckets"
+            },
+            "pair-sums-project": {
+              "title": "Question 2 C Lab: Detect Equal Disjoint Pair Sums"
+            }
+          },
+          "projectSteps": {
+            "equal_pair_sums": {
+              "title": "Detect Equal Disjoint Pair Sums"
+            }
+          },
+          "finalLab": {
+            "steps": {
+              "equal_pair_sums": {
+                "title": "Detect Equal Disjoint Pair Sums",
+                "prompt": "Open `algorithms/pair_sums.c`. Implement `has_equal_disjoint_pair_sums` in `O(n²)` time. Every value is a unique positive integer smaller than `k`, so a direct table of possible sums is allowed. Examine each unordered pair once, remember the first pair that produced each sum, and return `true` when a later pair with four distinct indices reaches the same sum.",
+                "hint": "The largest possible sum is smaller than `2 * k`, so the sum itself can index a collision-free table.",
+                "help": {
+                  "concept": "Nested loops generate `Θ(n²)` pairs. A direct-address table makes each lookup and insertion `O(1)`, producing `Θ(n²)` total time and `O(k)` auxiliary space.",
+                  "hint_1": "Run the supplied test harness after each focused change.",
+                  "hint_2": "Keep the implementation general; do not print the expected output directly."
+                },
+                "starterCode": "#include <stdio.h>\n#include \"algorithms/pair_sums.h\"\n\nint main(void) {\n    const int case1[] = {1, 2, 3, 4};\n    const int case2[] = {1, 2, 4, 8};\n\n    printf(\"case1=%s\\n\", has_equal_disjoint_pair_sums(case1, 4, 10) ? \"yes\" : \"no\");\n    printf(\"case2=%s\\n\", has_equal_disjoint_pair_sums(case2, 4, 10) ? \"yes\" : \"no\");\n    return 0;\n}\n",
+                "solutionCode": "#include <stdio.h>\n#include \"algorithms/pair_sums.h\"\n\nint main(void) {\n    const int case1[] = {1, 2, 3, 4};\n    const int case2[] = {1, 2, 4, 8};\n\n    printf(\"case1=%s\\n\", has_equal_disjoint_pair_sums(case1, 4, 10) ? \"yes\" : \"no\");\n    printf(\"case2=%s\\n\", has_equal_disjoint_pair_sums(case2, 4, 10) ? \"yes\" : \"no\");\n    return 0;\n}\n",
+                "starterFiles": {
+                  "main_c": {
+                    "content": "#include <stdio.h>\n#include \"algorithms/pair_sums.h\"\n\nint main(void) {\n    const int case1[] = {1, 2, 3, 4};\n    const int case2[] = {1, 2, 4, 8};\n\n    printf(\"case1=%s\\n\", has_equal_disjoint_pair_sums(case1, 4, 10) ? \"yes\" : \"no\");\n    printf(\"case2=%s\\n\", has_equal_disjoint_pair_sums(case2, 4, 10) ? \"yes\" : \"no\");\n    return 0;\n}\n"
+                  },
+                  "algorithms_pair_sums_c": {
+                    "content": "#include \"pair_sums.h\"\n\nbool has_equal_disjoint_pair_sums(const int *values, size_t n, int k) {\n    (void)values;\n    (void)n;\n    (void)k;\n    /* TODO: examine each unordered pair and remember the first pair for each sum. */\n    return false;\n}\n"
+                  },
+                  "algorithms_pair_sums_h": {
+                    "content": "#ifndef PAIR_SUMS_H\n#define PAIR_SUMS_H\n\n#include <stdbool.h>\n#include <stddef.h>\n\nbool has_equal_disjoint_pair_sums(const int *values, size_t n, int k);\n\n#endif\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_c": {
+                    "content": "#include <stdio.h>\n#include \"algorithms/pair_sums.h\"\n\nint main(void) {\n    const int case1[] = {1, 2, 3, 4};\n    const int case2[] = {1, 2, 4, 8};\n\n    printf(\"case1=%s\\n\", has_equal_disjoint_pair_sums(case1, 4, 10) ? \"yes\" : \"no\");\n    printf(\"case2=%s\\n\", has_equal_disjoint_pair_sums(case2, 4, 10) ? \"yes\" : \"no\");\n    return 0;\n}\n"
+                  },
+                  "algorithms_pair_sums_c": {
+                    "content": "#include \"pair_sums.h\"\n#include <stdlib.h>\n\ntypedef struct {\n    int first;\n    int second;\n} PairSlot;\n\nbool has_equal_disjoint_pair_sums(const int *values, size_t n, int k) {\n    if (values == NULL || n < 4 || k <= 0) {\n        return false;\n    }\n\n    const int slot_count = 2 * k;\n    PairSlot *seen = malloc((size_t)slot_count * sizeof(*seen));\n    if (seen == NULL) {\n        return false;\n    }\n\n    for (int sum = 0; sum < slot_count; sum++) {\n        seen[sum].first = -1;\n        seen[sum].second = -1;\n    }\n\n    for (size_t i = 0; i < n; i++) {\n        for (size_t j = i + 1; j < n; j++) {\n            const int sum = values[i] + values[j];\n            PairSlot *slot = &seen[sum];\n\n            if (slot->first >= 0) {\n                const size_t a = (size_t)slot->first;\n                const size_t b = (size_t)slot->second;\n                if (a != i && a != j && b != i && b != j) {\n                    free(seen);\n                    return true;\n                }\n            } else {\n                slot->first = (int)i;\n                slot->second = (int)j;\n            }\n        }\n    }\n\n    free(seen);\n    return false;\n}\n"
+                  },
+                  "algorithms_pair_sums_h": {
+                    "content": "#ifndef PAIR_SUMS_H\n#define PAIR_SUMS_H\n\n#include <stdbool.h>\n#include <stddef.h>\n\nbool has_equal_disjoint_pair_sums(const int *values, size_t n, int k);\n\n#endif\n"
+                  }
+                },
+                "checks": [
+                  {
+                    "message": "Use an outer loop over the first pair index."
+                  },
+                  {
+                    "message": "Use an inner loop that visits each unordered pair once."
+                  },
+                  {
+                    "message": "Size the direct-address table from the bounded sum range."
+                  }
+                ]
+              }
+            }
+          },
+          "quiz": {
+            "pair-sum-table": {
+              "title": "Why can the O(n²) pair-sum algorithm use a direct-address table?",
+              "prompt": "Why can the O(n²) pair-sum algorithm use a direct-address table?",
+              "hint": "Trace the relevant animation and identify the operation that dominates the runtime.",
+              "help": {
+                "concept": "The bounded value range turns each possible sum into a valid table index, so no hash function is needed.",
+                "hint_1": "Separate correctness from runtime: first identify what the algorithm must do.",
+                "hint_2": "Then count the loops, recursion branches, stack transfers, or pointer levels involved."
+              },
+              "options": {
+                "a": "The input is already sorted.",
+                "b": "Every pair has a different sum.",
+                "c": "Each value is positive and smaller than k, so every sum is in a bounded range below 2k.",
+                "d": "C arrays automatically resolve hash collisions."
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "c-data-structures": {
+      "c-data-structures-module-1-algorithm-design-lab": {
+        "detect-equal-pair-sums": {
+          "question-2-problem": {
+            "title": "Question 2 — What Counts as Two Equal Disjoint Pairs?",
+            "bodyMarkdown": "### Original assignment question\n\nGiven a list `L` of `n` **unique positive integers**, where every value is smaller than `k`, determine whether there are two pairs `(p, q)` and `(r, t)` such that:\n\n- `p`, `q`, `r`, and `t` are all different elements of `L`, and\n- `p + q = r + t`.\n\nThe algorithm must run in **O(n²)** time. Memory usage is not a concern, and you only need to report whether such pairs exist.\n\n### Concepts in plain English\n\n- An **unordered pair** uses two different positions, and `(i, j)` is the same pair as `(j, i)`. Generate it once by requiring `i < j`.\n- Two pairs are **disjoint** when they do not reuse an index.\n- A **direct-address table** is an array where the key itself is the index. Because every sum is below `2k`, the sum can directly select a bucket.\n- A **collision** means two different pairs reach the same sum bucket. In this problem, that repeated sum is exactly the event we want to inspect.\n\n### A concrete example\n\nFor `L = [1, 2, 3, 4]`:\n\n- `1 + 4 = 5`\n- `2 + 3 = 5`\n\nThe two pairs use four different values, so the answer is **yes**.\n\n### What the question is really asking\n\nComparing every pair with every other pair would take O(n⁴). The O(n²) target means: generate each unordered pair once, then process that pair in constant time.\n\nStore the first pair that reaches each sum bucket. When another pair reaches the same bucket, check that its two indices are different from both stored indices.\n\n### What to watch in the animation\n\nWatch one pair enter a sum bucket, then watch a second disjoint pair reach the same bucket. The next C lab implements that exact O(n²) invariant."
+          },
+          "pair-sums-animation": {
+            "title": "Question 2: Find a Repeated Sum in O(n²)",
+            "context": "**Question 2:** determine whether two disjoint pairs have the same sum, using O(n²) time. The animation uses `L = [1, 2, 3, 4]` to show the exact table invariant.",
+            "steps": [
+              {
+                "title": "Step 1: Translate the goal into one example",
+                "body": "We need four distinct values whose pair sums match. Here, `(1, 4)` and `(2, 3)` are the target because both sums equal `5`."
+              },
+              {
+                "title": "Step 2: Generate each unordered pair once",
+                "body": "Use nested loops with `i < j`. This visits `n(n-1)/2` pairs, which is Θ(n²), and never repeats the same pair in reverse order."
+              },
+              {
+                "title": "Step 3: Use the sum as a direct table index",
+                "body": "Every value is below `k`, so every sum is below `2k`. A table indexed by the sum gives constant-time lookup and avoids a separate hash-collision policy."
+              },
+              {
+                "title": "Step 4: Store the first pair for a sum",
+                "body": "When `(1, 4)` produces `5`, store its two indices in `bucket[5]`. The bucket now remembers a witness for that sum."
+              },
+              {
+                "title": "Step 5: Check the later pair is disjoint",
+                "body": "When `(2, 3)` also produces `5`, compare its indices with the stored pair. The four indices are different, so the required two pairs exist."
+              },
+              {
+                "title": "Step 6: State the runtime",
+                "body": "There are Θ(n²) generated pairs and O(1) work per pair. The total runtime is Θ(n²), which satisfies the required O(n²) bound."
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

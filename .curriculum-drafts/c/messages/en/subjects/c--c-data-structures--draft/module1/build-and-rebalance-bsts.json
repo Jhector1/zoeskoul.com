@@ -1,0 +1,141 @@
+{
+  "topics": {
+    "c--c-data-structures--draft": {
+      "c--c-data-structures--draft-module-1-algorithm-design-lab": {
+        "build-and-rebalance-bsts": {
+          "label": "Question 3 — What Does Almost Balanced Mean?",
+          "summary": "Question 3 Walkthrough: Build and Rebalance the BST",
+          "cards": {
+            "question-3-problem": {
+              "title": "Question 3: Read the BST Problem First"
+            },
+            "bst-animation": {
+              "title": "Question 3 Walkthrough: Build and Rebalance the BST"
+            },
+            "bst-project": {
+              "title": "Question 3 C Lab: Build and Rebalance a BST"
+            }
+          },
+          "projectSteps": {
+            "almost_balanced_bst": {
+              "title": "Build and Rebalance an Almost-Balanced BST"
+            }
+          },
+          "finalLab": {
+            "steps": {
+              "almost_balanced_bst": {
+                "title": "Build and Rebalance an Almost-Balanced BST",
+                "prompt": "Open `structures/bst.c`. Implement `bst_build_balanced` from a sorted array and `bst_rebalance` for an arbitrary BST. The required approach is linear: inorder traversal writes the keys in sorted order, and midpoint recursion rebuilds a tree whose left and right subtree sizes differ by at most one at every node.",
+                "hint": "Use half-open array ranges. Choose one middle key as the root, then recurse on the left and right ranges.",
+                "help": {
+                  "concept": "Inorder traversal visits each node once, and midpoint construction creates each replacement node once. The two passes are `Θ(n)`, and every recursive range splits into sizes that differ by at most one.",
+                  "hint_1": "Run the supplied test harness after each focused change.",
+                  "hint_2": "Keep the implementation general; do not print the expected output directly."
+                },
+                "starterCode": "#include <stdio.h>\n#include \"structures/bst.h\"\n\nint main(void) {\n    Node *root = NULL;\n    for (int value = 1; value <= 7; value++) {\n        root = bst_insert(root, value);\n    }\n\n    root = bst_rebalance(root);\n    printf(\"balanced=%s\\n\", bst_is_almost_balanced(root) ? \"yes\" : \"no\");\n    printf(\"inorder=\");\n    bst_print_inorder(root);\n    printf(\"\\nheight=%d\\n\", bst_height(root));\n\n    bst_free(root);\n    return 0;\n}\n",
+                "solutionCode": "#include <stdio.h>\n#include \"structures/bst.h\"\n\nint main(void) {\n    Node *root = NULL;\n    for (int value = 1; value <= 7; value++) {\n        root = bst_insert(root, value);\n    }\n\n    root = bst_rebalance(root);\n    printf(\"balanced=%s\\n\", bst_is_almost_balanced(root) ? \"yes\" : \"no\");\n    printf(\"inorder=\");\n    bst_print_inorder(root);\n    printf(\"\\nheight=%d\\n\", bst_height(root));\n\n    bst_free(root);\n    return 0;\n}\n",
+                "starterFiles": {
+                  "main_c": {
+                    "content": "#include <stdio.h>\n#include \"structures/bst.h\"\n\nint main(void) {\n    Node *root = NULL;\n    for (int value = 1; value <= 7; value++) {\n        root = bst_insert(root, value);\n    }\n\n    root = bst_rebalance(root);\n    printf(\"balanced=%s\\n\", bst_is_almost_balanced(root) ? \"yes\" : \"no\");\n    printf(\"inorder=\");\n    bst_print_inorder(root);\n    printf(\"\\nheight=%d\\n\", bst_height(root));\n\n    bst_free(root);\n    return 0;\n}\n"
+                  },
+                  "structures_bst_c": {
+                    "content": "#include \"bst.h\"\n#include <stdio.h>\n#include <stdlib.h>\n\nstatic Node *new_node(int key, Node *parent) {\n    Node *node = malloc(sizeof(*node));\n    if (node == NULL) return NULL;\n    node->key = key;\n    node->left = NULL;\n    node->right = NULL;\n    node->parent = parent;\n    return node;\n}\n\nNode *bst_insert(Node *root, int key) {\n    if (root == NULL) return new_node(key, NULL);\n    Node *current = root;\n    for (;;) {\n        if (key < current->key) {\n            if (current->left == NULL) { current->left = new_node(key, current); break; }\n            current = current->left;\n        } else {\n            if (current->right == NULL) { current->right = new_node(key, current); break; }\n            current = current->right;\n        }\n    }\n    return root;\n}\n\nNode *bst_build_balanced(const int *sorted, size_t n) {\n    (void)sorted;\n    (void)n;\n    /* TODO: choose a middle element and recursively build equal-size halves. */\n    return NULL;\n}\n\nNode *bst_rebalance(Node *root) {\n    /* TODO: collect inorder keys, free the old tree, and rebuild from the sorted keys. */\n    return root;\n}\n\nstatic size_t check_balance(const Node *root, bool *ok) {\n    if (root == NULL) return 0;\n    size_t left = check_balance(root->left, ok);\n    size_t right = check_balance(root->right, ok);\n    if (left > right + 1 || right > left + 1) *ok = false;\n    return left + right + 1;\n}\n\nbool bst_is_almost_balanced(const Node *root) { bool ok = true; check_balance(root, &ok); return ok; }\nint bst_height(const Node *root) { if (root == NULL) return 0; int l=bst_height(root->left), r=bst_height(root->right); return 1 + (l > r ? l : r); }\nvoid bst_print_inorder(const Node *root) { if (root == NULL) return; bst_print_inorder(root->left); printf(\"%d \", root->key); bst_print_inorder(root->right); }\nvoid bst_free(Node *root) { if (root == NULL) return; bst_free(root->left); bst_free(root->right); free(root); }\n"
+                  },
+                  "structures_bst_h": {
+                    "content": "#ifndef BST_H\n#define BST_H\n\n#include <stdbool.h>\n#include <stddef.h>\n\ntypedef struct Node {\n    int key;\n    struct Node *left;\n    struct Node *right;\n    struct Node *parent;\n} Node;\n\nNode *bst_insert(Node *root, int key);\nNode *bst_build_balanced(const int *sorted, size_t n);\nNode *bst_rebalance(Node *root);\nbool bst_is_almost_balanced(const Node *root);\nint bst_height(const Node *root);\nvoid bst_print_inorder(const Node *root);\nvoid bst_free(Node *root);\n\n#endif\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_c": {
+                    "content": "#include <stdio.h>\n#include \"structures/bst.h\"\n\nint main(void) {\n    Node *root = NULL;\n    for (int value = 1; value <= 7; value++) {\n        root = bst_insert(root, value);\n    }\n\n    root = bst_rebalance(root);\n    printf(\"balanced=%s\\n\", bst_is_almost_balanced(root) ? \"yes\" : \"no\");\n    printf(\"inorder=\");\n    bst_print_inorder(root);\n    printf(\"\\nheight=%d\\n\", bst_height(root));\n\n    bst_free(root);\n    return 0;\n}\n"
+                  },
+                  "structures_bst_c": {
+                    "content": "#include \"bst.h\"\n#include <stdio.h>\n#include <stdlib.h>\n\nstatic Node *new_node(int key, Node *parent) {\n    Node *node = malloc(sizeof(*node));\n    if (node == NULL) return NULL;\n    node->key = key;\n    node->left = NULL;\n    node->right = NULL;\n    node->parent = parent;\n    return node;\n}\n\nNode *bst_insert(Node *root, int key) {\n    if (root == NULL) return new_node(key, NULL);\n    Node *current = root;\n    for (;;) {\n        if (key < current->key) {\n            if (current->left == NULL) { current->left = new_node(key, current); break; }\n            current = current->left;\n        } else {\n            if (current->right == NULL) { current->right = new_node(key, current); break; }\n            current = current->right;\n        }\n    }\n    return root;\n}\n\nstatic Node *build_range(const int *sorted, size_t begin, size_t end, Node *parent) {\n    if (begin >= end) return NULL;\n    const size_t middle = begin + (end - begin) / 2;\n    Node *root = new_node(sorted[middle], parent);\n    if (root == NULL) return NULL;\n    root->left = build_range(sorted, begin, middle, root);\n    root->right = build_range(sorted, middle + 1, end, root);\n    return root;\n}\n\nNode *bst_build_balanced(const int *sorted, size_t n) {\n    return build_range(sorted, 0, n, NULL);\n}\n\nstatic size_t bst_count(const Node *root) {\n    return root == NULL ? 0 : 1 + bst_count(root->left) + bst_count(root->right);\n}\n\nstatic void inorder_fill(const Node *root, int *values, size_t *next) {\n    if (root == NULL) return;\n    inorder_fill(root->left, values, next);\n    values[(*next)++] = root->key;\n    inorder_fill(root->right, values, next);\n}\n\nNode *bst_rebalance(Node *root) {\n    const size_t n = bst_count(root);\n    if (n < 2) return root;\n\n    int *values = malloc(n * sizeof(*values));\n    if (values == NULL) return root;\n\n    size_t next = 0;\n    inorder_fill(root, values, &next);\n    bst_free(root);\n    Node *balanced = bst_build_balanced(values, n);\n    free(values);\n    return balanced;\n}\n\nstatic size_t check_balance(const Node *root, bool *ok) {\n    if (root == NULL) return 0;\n    size_t left = check_balance(root->left, ok);\n    size_t right = check_balance(root->right, ok);\n    if (left > right + 1 || right > left + 1) *ok = false;\n    return left + right + 1;\n}\n\nbool bst_is_almost_balanced(const Node *root) { bool ok = true; check_balance(root, &ok); return ok; }\nint bst_height(const Node *root) { if (root == NULL) return 0; int l=bst_height(root->left), r=bst_height(root->right); return 1 + (l > r ? l : r); }\nvoid bst_print_inorder(const Node *root) { if (root == NULL) return; bst_print_inorder(root->left); printf(\"%d \", root->key); bst_print_inorder(root->right); }\nvoid bst_free(Node *root) { if (root == NULL) return; bst_free(root->left); bst_free(root->right); free(root); }\n"
+                  },
+                  "structures_bst_h": {
+                    "content": "#ifndef BST_H\n#define BST_H\n\n#include <stdbool.h>\n#include <stddef.h>\n\ntypedef struct Node {\n    int key;\n    struct Node *left;\n    struct Node *right;\n    struct Node *parent;\n} Node;\n\nNode *bst_insert(Node *root, int key);\nNode *bst_build_balanced(const int *sorted, size_t n);\nNode *bst_rebalance(Node *root);\nbool bst_is_almost_balanced(const Node *root);\nint bst_height(const Node *root);\nvoid bst_print_inorder(const Node *root);\nvoid bst_free(Node *root);\n\n#endif\n"
+                  }
+                },
+                "checks": [
+                  {
+                    "message": "Choose a midpoint from each sorted subrange."
+                  },
+                  {
+                    "message": "Collect the original BST keys with an inorder traversal."
+                  },
+                  {
+                    "message": "Rebuild the tree from the sorted key array."
+                  }
+                ]
+              }
+            }
+          },
+          "quiz": {
+            "same-bst": {
+              "title": "Which two insertion orders generate the same BST?",
+              "prompt": "Which two insertion orders generate the same BST?",
+              "hint": "Trace the relevant animation and identify the operation that dominates the runtime.",
+              "help": {
+                "concept": "The root must remain 4, and the relative insertion order must preserve the same left and right ancestor relationships.",
+                "hint_1": "Separate correctness from runtime: first identify what the algorithm must do.",
+                "hint_2": "Then count the loops, recursion branches, stack transfers, or pointer levels involved."
+              },
+              "options": {
+                "a": "(4, 2, 6, 1, 3, 5, 7) and (4, 6, 2, 5, 7, 1, 3)",
+                "b": "(4, 2, 6, 1, 3, 5, 7) and (2, 1, 3, 4, 5, 6, 7)",
+                "c": "(4, 2, 6, 1, 3, 5, 7) and (7, 6, 5, 4, 3, 2, 1)",
+                "d": "(4, 2, 6, 1, 3, 5, 7) and (4, 3, 2, 1, 5, 6, 7)"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "c--c-data-structures--draft": {
+      "c--c-data-structures--draft-module-1-algorithm-design-lab": {
+        "build-and-rebalance-bsts": {
+          "question-3-problem": {
+            "title": "Question 3 — What Does Almost Balanced Mean?",
+            "bodyMarkdown": "### Original assignment question\n\nThis question has three parts about binary search trees (BSTs):\n\n1. Give two different insertion sequences containing the same unique values that create the **same BST**.\n2. Given a **sorted array** of `n` unique integers, build an **almost-balanced BST** in Θ(n) time.\n3. Convert **any BST** with `n` nodes into an almost-balanced BST in Θ(n) time.\n\nAn almost-balanced tree means that, at **every node**, the number of nodes in the left and right subtrees differs by at most one.\n\n### Concepts in plain English\n\n- In a **BST**, every key in a node's left subtree is smaller, and every key in its right subtree is larger.\n- An **inorder traversal** visits left subtree → node → right subtree. On a BST, this produces the keys in sorted order.\n- **Almost balanced** here refers to subtree **node counts**, not merely subtree heights.\n- Choosing the middle key of a sorted range makes the left and right ranges differ in size by at most one.\n\n### A same-tree example for part (a)\n\n- `A  = (4, 2, 6, 1, 3, 5, 7)`\n- `A' = (4, 6, 2, 7, 5, 3, 1)`\n\nBoth choose `4` as the root, `2` as the left-subtree root, and `6` as the right-subtree root, with the same children below them.\n\n### What the executable lab covers\n\nThe C workspace implements parts **(b)** and **(c)**:\n\n1. choose the middle key of a sorted range,\n2. recursively build both halves,\n3. collect an arbitrary BST's keys with inorder traversal,\n4. rebuild from the sorted keys.\n\nThe final quiz checks the insertion-order idea from part **(a)**.\n\n### What to watch in the animation\n\nFollow one midpoint choice at a time, then connect inorder traversal plus rebuilding to the Θ(n) conversion."
+          },
+          "bst-animation": {
+            "title": "Question 3: Build and Rebuild an Almost-Balanced BST",
+            "context": "**Question 3:** first recognize that different insertion orders can produce the same BST, then build from a sorted array and rebalance any BST in Θ(n) time.",
+            "steps": [
+              {
+                "title": "Step 1: Preserve ancestor relationships",
+                "body": "Two insertion orders can differ while still choosing the same root and the same root for every subtree. The example sequences both create the same seven-node BST."
+              },
+              {
+                "title": "Step 2: Read “almost balanced” correctly",
+                "body": "At every node, compare the **number of nodes** in the left and right subtrees. Their counts may differ by at most one."
+              },
+              {
+                "title": "Step 3: Start with sorted keys",
+                "body": "For a sorted array, every key before the midpoint is smaller and belongs in the left subtree; every key after it belongs in the right subtree."
+              },
+              {
+                "title": "Step 4: Choose the midpoint as the root",
+                "body": "The midpoint splits the range into two pieces whose sizes differ by at most one. That establishes the required balance condition at the current node."
+              },
+              {
+                "title": "Step 5: Repeat on each half",
+                "body": "Apply the same midpoint rule recursively. Each key becomes exactly one node, and each array position is processed once."
+              },
+              {
+                "title": "Step 6: Convert an arbitrary BST to sorted keys",
+                "body": "An inorder traversal visits left subtree, node, then right subtree. For a BST, that writes all `n` keys in sorted order in Θ(n) time."
+              },
+              {
+                "title": "Step 7: Rebuild and add the costs",
+                "body": "Build the midpoint tree from the sorted keys in Θ(n). Traversal Θ(n) plus rebuilding Θ(n) is still Θ(n), and the resulting tree is almost balanced."
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

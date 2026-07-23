@@ -16,6 +16,7 @@ export type SubjectManifest = {
     genKey: string;
     order: number;
     accessPolicy?: "free" | "paid";
+    visibility?: "public" | "private" | "organization";
     status?: "active" | "coming_soon" | "disabled";
     imagePublicId?: string | null;
     imageAlt?: string | null;

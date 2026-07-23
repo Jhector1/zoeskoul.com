@@ -78,7 +78,7 @@ docker compose -f docker-compose.prod.yml logs -f runner
 
 
 
-pnpm curr:course -- publish git git-foundations  --live-subject git-foundations   --force
+pnpm curr:course -- publish c c-data-structures  --live-subject c-data-structures   --force
 
 
 
@@ -156,7 +156,7 @@ sudo docker compose up -d judge0 worker
 
 
 
-RUN_DRAFT_CODE_INPUT_GOLDENS=1 pnpm curr:course -- draft-goldens git git-foundations
+RUN_DRAFT_CODE_INPUT_GOLDENS=1 pnpm curr:course -- draft-goldens c c-data-structures
 
 sudo scp -r deploy@5.78.159.224:/opt/edge-proxy ~/Downloads/
 

@@ -56,6 +56,8 @@ export default async function AdminDashboardPage() {
     sectionsCount,
     assignmentsCount,
     publishedAssignmentsCount,
+    courseAssignmentsCount,
+    learningGroupsCount,
     sessions7d,
     attempts7d,
     correct7d,
@@ -66,6 +68,8 @@ export default async function AdminDashboardPage() {
     prisma.practiceSection.count(),
     prisma.assignment.count(),
     prisma.assignment.count({ where: { status: "published" } }),
+    prisma.learningAssignment.count(),
+    prisma.learningGroup.count(),
 
     prisma.practiceSession.count({ where: { startedAt: { gte: d7 } } }),
 
@@ -120,6 +124,12 @@ export default async function AdminDashboardPage() {
 
         <div className="flex flex-wrap items-center gap-2">
           <Link
+            href="/admin/course-assignments"
+            className="rounded-lg border border-neutral-300 bg-white px-4 py-2 text-sm font-medium hover:bg-neutral-50"
+          >
+            Private courses
+          </Link>
+          <Link
             href="/admin/assignments"
             className="rounded-lg border border-neutral-300 bg-white px-4 py-2 text-sm font-medium hover:bg-neutral-50"
           >
@@ -141,13 +151,15 @@ export default async function AdminDashboardPage() {
       </div>
 
       {/* KPIs */}
-      <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
         <Card title="Practice sections" value={sectionsCount} />
         <Card
           title="Assignments"
           value={assignmentsCount}
           hint={`${publishedAssignmentsCount} published`}
         />
+        <Card title="Private course assignments" value={courseAssignmentsCount} />
+        <Card title="Student groups" value={learningGroupsCount} />
         <Card title="Sessions (last 7d)" value={sessions7d} />
         <Card
           title="Accuracy (last 7d)"
@@ -178,6 +190,18 @@ export default async function AdminDashboardPage() {
         <div className="rounded-xl border border-neutral-200 bg-white p-5">
           <div className="text-sm font-medium text-neutral-900">Quick actions</div>
           <div className="mt-3 flex flex-col gap-2">
+            <Link
+              href="/admin/course-assignments/new"
+              className="rounded-lg bg-black px-4 py-2 text-sm font-medium text-white hover:bg-neutral-800"
+            >
+              Assign private course
+            </Link>
+            <Link
+              href="/admin/learning-groups"
+              className="rounded-lg border border-neutral-300 px-4 py-2 text-sm font-medium hover:bg-neutral-50"
+            >
+              Manage student groups
+            </Link>
             <Link
               href="/admin/assignments/new"
               className="rounded-lg bg-black px-4 py-2 text-sm font-medium text-white hover:bg-neutral-800"

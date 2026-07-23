@@ -2,9 +2,24 @@ import { describe, expect, it } from "vitest";
 
 import {
     resolveToolsRailVisibility,
+    shouldDefaultCollapseToolsRail,
     shouldDefaultCollapseToolsRailForCompactQuiz,
     toolPresentationPolicyFromManifest,
 } from "./toolsRailVisibility";
+
+const readingSketch = {
+    type: "sketch" as const,
+    id: "sketch-1",
+    title: "Sketch",
+    sketchId: "sketch-1",
+};
+
+const baseArgs = {
+    routeTargetKind: "card",
+    routeTargetTargetKind: "sketch",
+    cardHasEmbeddedTryIt: false,
+    hasWorkspaceExercise: false,
+};
 
 describe("toolPresentationPolicyFromManifest", () => {
     it("returns a typed policy from a runtime manifest record", () => {
@@ -38,92 +53,56 @@ describe("toolPresentationPolicyFromManifest", () => {
                 tools: "results",
             }),
         ).toBeNull();
-        expect(
-            toolPresentationPolicyFromManifest({
-                tools: ["results"],
-            }),
-        ).toBeNull();
     });
 });
 
-describe("shouldDefaultCollapseToolsRailForCompactQuiz", () => {
-    it("collapses the tools rail for compact quiz cards by default", () => {
+describe("resolveToolsRailVisibility", () => {
+    it("keeps a reusable workspace available but hidden on reading cards", () => {
         expect(
-            shouldDefaultCollapseToolsRailForCompactQuiz({
-                compactLearnerUi: true,
-                showDebugLearningUi: false,
-                activeCard: {
-                    type: "quiz",
-                    id: "quiz-1",
-                    title: "Quiz",
-                    spec: { subject: "python-v2" },
-                },
-                routeTargetKind: "card",
-                cardHasEmbeddedTryIt: false,
-                hasWorkspaceExercise: false,
+            resolveToolsRailVisibility({
+                ...baseArgs,
+                activeCard: readingSketch,
             }),
-        ).toBe(true);
+        ).toMatchObject({
+            defaultVisible: false,
+            allowOpen: true,
+            isAvailable: true,
+            shouldCollapseByDefault: true,
+            inferredNeedsTools: false,
+        });
     });
 
-    it("keeps tools visible for sketch try-it cards", () => {
+    it("opens the workspace for an embedded try-it in every course profile", () => {
         expect(
-            shouldDefaultCollapseToolsRailForCompactQuiz({
-                compactLearnerUi: true,
-                showDebugLearningUi: false,
+            resolveToolsRailVisibility({
+                ...baseArgs,
                 activeCard: {
-                    type: "sketch",
-                    id: "sketch-1",
-                    title: "Sketch",
-                    sketchId: "sketch-1",
+                    ...readingSketch,
                     tryIt: {
                         id: "try-1",
                         exerciseKey: "try-1",
                         spec: {
                             mode: "project",
-                            subject: "python-v2",
+                            subject: "c-data-structures",
                             steps: [],
                         },
                     },
                 },
-                routeTargetKind: "card",
                 cardHasEmbeddedTryIt: true,
-                hasWorkspaceExercise: false,
             }),
-        ).toBe(false);
+        ).toMatchObject({
+            defaultVisible: true,
+            allowOpen: true,
+            isAvailable: true,
+            shouldCollapseByDefault: false,
+            inferredNeedsTools: true,
+        });
     });
 
-    it("keeps tools visible for text cards with embedded try-it", () => {
+    it("opens the workspace for project cards", () => {
         expect(
-            shouldDefaultCollapseToolsRailForCompactQuiz({
-                compactLearnerUi: true,
-                showDebugLearningUi: false,
-                activeCard: {
-                    type: "text",
-                    id: "text-1",
-                    title: "Lesson",
-                    markdown: "Intro",
-                    tryIt: {
-                        id: "try-1",
-                        exerciseKey: "try-1",
-                        spec: {
-                            mode: "project",
-                            subject: "python-v2",
-                            steps: [],
-                        },
-                    },
-                },
-                routeTargetKind: "card",
-                cardHasEmbeddedTryIt: true,
-                hasWorkspaceExercise: false,
-            }),
-        ).toBe(false);
-    });
-
-    it("keeps tools visible for project cards", () => {
-        expect(
-            shouldDefaultCollapseToolsRailForCompactQuiz({
-                compactLearnerUi: true,
-                showDebugLearningUi: false,
+            resolveToolsRailVisibility({
+                ...baseArgs,
                 activeCard: {
                     type: "project",
                     id: "project-1",
@@ -134,131 +113,25 @@ describe("shouldDefaultCollapseToolsRailForCompactQuiz", () => {
                         steps: [],
                     },
                 },
-                routeTargetKind: "card",
-                cardHasEmbeddedTryIt: false,
-                hasWorkspaceExercise: false,
             }),
-        ).toBe(false);
+        ).toMatchObject({
+            defaultVisible: true,
+            isAvailable: true,
+            inferredNeedsTools: true,
+        });
     });
 
-    it("preserves old behavior outside compact mode", () => {
-        expect(
-            shouldDefaultCollapseToolsRailForCompactQuiz({
-                compactLearnerUi: false,
-                showDebugLearningUi: false,
-                activeCard: {
-                    type: "quiz",
-                    id: "quiz-1",
-                    title: "Quiz",
-                    spec: { subject: "python-v2" },
-                },
-                routeTargetKind: "card",
-                cardHasEmbeddedTryIt: false,
-                hasWorkspaceExercise: false,
-            }),
-        ).toBe(false);
-    });
-
-    it("preserves debug behavior for quiz cards", () => {
-        expect(
-            shouldDefaultCollapseToolsRailForCompactQuiz({
-                compactLearnerUi: true,
-                showDebugLearningUi: true,
-                activeCard: {
-                    type: "quiz",
-                    id: "quiz-1",
-                    title: "Quiz",
-                    spec: { subject: "python-v2" },
-                },
-                routeTargetKind: "card",
-                cardHasEmbeddedTryIt: false,
-                hasWorkspaceExercise: false,
-            }),
-        ).toBe(false);
-    });
-
-    it("honors explicit tools.defaultVisible=false on non-quiz cards", () => {
-        expect(
-            shouldDefaultCollapseToolsRailForCompactQuiz({
-                compactLearnerUi: true,
-                showDebugLearningUi: false,
-                activeCard: {
-                    type: "sketch",
-                    id: "sketch-1",
-                    title: "Sketch",
-                    sketchId: "sketch-1",
-                    tools: {
-                        defaultVisible: false,
-                        allowOpen: true,
-                    },
-                },
-                routeTargetKind: "card",
-                cardHasEmbeddedTryIt: false,
-                hasWorkspaceExercise: false,
-            }),
-        ).toBe(true);
-    });
-
-    it("honors explicit tools.defaultVisible=true on sketch cards", () => {
-        expect(
-            shouldDefaultCollapseToolsRailForCompactQuiz({
-                compactLearnerUi: true,
-                showDebugLearningUi: false,
-                activeCard: {
-                    type: "sketch",
-                    id: "sketch-1",
-                    title: "Sketch",
-                    sketchId: "sketch-1",
-                    tools: {
-                        defaultVisible: true,
-                        allowOpen: true,
-                    },
-                },
-                routeTargetKind: "card",
-                cardHasEmbeddedTryIt: false,
-                hasWorkspaceExercise: false,
-            }),
-        ).toBe(false);
-    });
-
-    it("keeps existing quiz-card default collapsed when tools is not authored", () => {
-        expect(
-            shouldDefaultCollapseToolsRailForCompactQuiz({
-                compactLearnerUi: true,
-                showDebugLearningUi: false,
-                activeCard: {
-                    type: "quiz",
-                    id: "quiz-1",
-                    title: "Quiz",
-                    spec: { subject: "python-v2" },
-                },
-                routeTargetKind: "card",
-                cardHasEmbeddedTryIt: false,
-                hasWorkspaceExercise: false,
-            }),
-        ).toBe(true);
-    });
-
-});
-
-describe("resolveToolsRailVisibility", () => {
-    it("makes the rail unavailable when a reading card explicitly hides and disallows tools", () => {
+    it("removes the rail only when authors explicitly hide and disallow it", () => {
         expect(
             resolveToolsRailVisibility({
+                ...baseArgs,
                 activeCard: {
-                    type: "sketch",
-                    id: "sketch-1",
-                    title: "Sketch",
-                    sketchId: "sketch-1",
+                    ...readingSketch,
                     tools: {
                         defaultVisible: false,
                         allowOpen: false,
                     },
                 },
-                routeTargetKind: "card",
-                routeTargetTargetKind: "sketch",
-                cardHasEmbeddedTryIt: false,
-                hasWorkspaceExercise: false,
             }),
         ).toMatchObject({
             defaultVisible: false,
@@ -268,33 +141,7 @@ describe("resolveToolsRailVisibility", () => {
         });
     });
 
-    it("keeps the rail available but collapsed when a card hides tools by default and still allows opening", () => {
-        expect(
-            resolveToolsRailVisibility({
-                activeCard: {
-                    type: "sketch",
-                    id: "sketch-1",
-                    title: "Sketch",
-                    sketchId: "sketch-1",
-                    tools: {
-                        defaultVisible: false,
-                        allowOpen: true,
-                    },
-                },
-                routeTargetKind: "card",
-                routeTargetTargetKind: "sketch",
-                cardHasEmbeddedTryIt: false,
-                hasWorkspaceExercise: false,
-            }),
-        ).toMatchObject({
-            defaultVisible: false,
-            allowOpen: true,
-            isAvailable: true,
-            shouldCollapseByDefault: true,
-        });
-    });
-
-    it("keeps exercise routes available even when tools were explicitly hidden on the outer card", () => {
+    it("keeps exercise routes available even under an outer hidden policy", () => {
         expect(
             resolveToolsRailVisibility({
                 activeCard: {
@@ -322,21 +169,16 @@ describe("resolveToolsRailVisibility", () => {
             allowOpen: false,
         });
     });
+
     it("merges topic, lesson, and exercise visibility by specificity", () => {
         const visibility = resolveToolsRailVisibility({
+            ...baseArgs,
             topicTools: { defaultVisible: false, allowOpen: true },
             activeCard: {
-                type: "sketch",
-                id: "sketch-1",
-                title: "Sketch",
-                sketchId: "sketch-1",
+                ...readingSketch,
                 tools: { defaultVisible: true },
             },
             exerciseTools: { allowOpen: false },
-            routeTargetKind: "card",
-            routeTargetTargetKind: "sketch",
-            cardHasEmbeddedTryIt: false,
-            hasWorkspaceExercise: false,
         });
 
         expect(visibility.effectiveTools).toEqual({
@@ -349,5 +191,46 @@ describe("resolveToolsRailVisibility", () => {
             isAvailable: true,
         });
     });
+});
 
+describe("shouldDefaultCollapseToolsRail", () => {
+    it("collapses ordinary reading cards in compact and standard layouts", () => {
+        expect(
+            shouldDefaultCollapseToolsRail({
+                ...baseArgs,
+                activeCard: readingSketch,
+                showDebugLearningUi: false,
+            }),
+        ).toBe(true);
+
+        expect(
+            shouldDefaultCollapseToolsRailForCompactQuiz({
+                ...baseArgs,
+                activeCard: readingSketch,
+                compactLearnerUi: false,
+                showDebugLearningUi: false,
+            }),
+        ).toBe(true);
+    });
+
+    it("does not collapse an embedded try-it", () => {
+        expect(
+            shouldDefaultCollapseToolsRail({
+                ...baseArgs,
+                activeCard: readingSketch,
+                cardHasEmbeddedTryIt: true,
+                showDebugLearningUi: false,
+            }),
+        ).toBe(false);
+    });
+
+    it("keeps Tools open in debug UI", () => {
+        expect(
+            shouldDefaultCollapseToolsRail({
+                ...baseArgs,
+                activeCard: readingSketch,
+                showDebugLearningUi: true,
+            }),
+        ).toBe(false);
+    });
 });

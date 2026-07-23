@@ -6,6 +6,7 @@ export function defaultStateForSpec(spec: SketchSpec): SavedSketchState {
 
     switch (spec.archetype) {
         case "intro_stepper":
+        case "algorithm_animation":
             return { version: spec.specVersion, updatedAt: now, data: { step: 0 } };
 
         case "checklist":

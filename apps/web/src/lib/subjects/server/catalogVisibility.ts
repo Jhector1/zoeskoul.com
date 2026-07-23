@@ -103,6 +103,9 @@ export async function selectCatalogSubjectsForActor<
     const selected = selectCatalogSubjectsForMode(
         subjectsWithState,
         access.mode,
+    ).filter(
+        (subject) =>
+            access.canSeeAllCatalogSubjects || subject.visibility === "public",
     );
 
     return selected.map(

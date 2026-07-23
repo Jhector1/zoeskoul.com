@@ -1,7 +1,7 @@
 import type React from "react";
 import type { LucideIcon } from "lucide-react";
 
-export type ToolId = "code" | "notes"; // add more later
+export type ToolId = "code" | "board" | "notes";
 
 export type ToolsCtx = {
     subjectSlug: string;
@@ -11,6 +11,8 @@ export type ToolsCtx = {
 
     // policy:
     codeEnabled: boolean;
+    boardEnabled: boolean;
+    notesEnabled: boolean;
 };
 
 export type ToolSpec = {

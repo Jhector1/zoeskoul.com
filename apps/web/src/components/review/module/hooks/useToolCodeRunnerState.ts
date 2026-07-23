@@ -6,6 +6,7 @@ import type { WorkspaceLanguage, SqlDialect } from "@/lib/practice/types";
 import { useDebouncedCommit } from "@/lib/client/persistence/useDebouncedCommit";
 import { useFlushOnPageExit } from "@/lib/client/persistence/useFlushOnPageExit";
 import { DEFAULT_SQL_DIALECT } from "@/components/code/runner/constants";
+import { defaultMainCode } from "@/components/ide/languageDefaults";
 import {
     resolveSqlRunnerConfig,
     type SqlTableSnapshots,
@@ -232,16 +233,35 @@ function resolveHydrationFallbackCode(args: {
     return isExerciseToolKey(args.toolKey) ? "" : args.defaultCode;
 }
 
+const GENERIC_TOOL_SAMPLE_LANGUAGES: WorkspaceLanguage[] = [
+    "python",
+    "sql",
+    "java",
+    "javascript",
+    "typescript",
+    "c",
+    "cpp",
+    "bash",
+    "web",
+];
+
+const LEGACY_GENERIC_TOOL_SAMPLE_CODES = new Set([
+    'print("Hello World!")',
+    'print("Hello Python!")',
+    "SELECT 'Hello SQL' AS message;",
+    'console.log("Hello JavaScript!");',
+]);
+
 function isGenericToolSampleCode(code: string | null | undefined) {
     const normalized = String(code ?? "").trim();
     if (!normalized) return false;
 
-    return [
-        'print("Hello Python!")',
-        'print("Hello World!")',
-        "SELECT 'Hello SQL' AS message;",
-        'console.log("Hello JavaScript!");',
-    ].includes(normalized);
+    return (
+        LEGACY_GENERIC_TOOL_SAMPLE_CODES.has(normalized) ||
+        GENERIC_TOOL_SAMPLE_LANGUAGES.some(
+            (language) => defaultMainCode(language).trim() === normalized,
+        )
+    );
 }
 function isExercisePlaceholderSeed(args: {
     saved: any;
@@ -525,6 +545,10 @@ function isExerciseToolKey(toolKey: string | null | undefined) {
     return typeof toolKey === "string" && toolKey.startsWith("exercise:");
 }
 
+function isTopicToolKey(toolKey: string | null | undefined) {
+    return typeof toolKey === "string" && toolKey.startsWith("topic-tool:");
+}
+
 function matchesExerciseStateScopeKey(value: string | null | undefined) {
     if (typeof value !== "string") return false;
 
@@ -539,7 +563,7 @@ function matchesExerciseStateScopeKey(value: string | null | undefined) {
 
 function isCardToolKey(toolKey: string | null | undefined) {
     if (typeof toolKey !== "string" || !toolKey.trim()) return false;
-    if (isExerciseToolKey(toolKey)) return false;
+    if (isExerciseToolKey(toolKey) || isTopicToolKey(toolKey)) return false;
 
     // Legacy card scope.
     if (toolKey.startsWith("card:")) return true;
@@ -549,8 +573,9 @@ function isCardToolKey(toolKey: string | null | undefined) {
     // subject:module:section:topic:cardId
     //
     // The second shape is what CodeRunner logs as editorOwnerKey/cardRuntimeKey.
-    // Treat any non-exercise review tool key as a card/sketch tool key so edits
-    // are persisted through patchCard.
+    // Treat any remaining non-exercise review tool key as a card/sketch tool
+    // key so edits are persisted through patchCard. Shared topic-tool keys are
+    // handled above and persist through topic.toolState instead.
     return true;
 }
 
@@ -695,7 +720,7 @@ export function useToolCodeRunnerState(args: {
         progressHydrated,
         setProgress,
         viewTid,
-        scopeKey = "card:general",
+        scopeKey = "topic-tool:default",
         defaultLang = "python",
         defaultCode = `print("Hello World!")`,
         defaultStdin = "",

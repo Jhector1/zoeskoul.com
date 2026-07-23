@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { getActor } from "@/lib/practice/actor";
 import { checkModuleAccess } from "@/lib/access/moduleAccessServer";
+import { describeModuleAccessDenial } from "@/lib/access/moduleAccessDenial";
 import { startOrResumePracticeSession } from "@/lib/practice/sessionStart";
 import {
   MODULE_ASSIGNMENT_META_KIND,
@@ -67,18 +68,19 @@ export async function POST(
     moduleSlug: mod.slug,
   });
   if (!access.ok) {
+    const denial = describeModuleAccessDenial(access);
     return NextResponse.json(
       {
-        message:
-          access.reason === "requires_login"
-            ? "Sign in to start this assignment."
-            : "This module requires access before its assignment can be started.",
-        code:
-          access.reason === "requires_login"
-            ? "AUTH_REQUIRED"
-            : "MODULE_ACCESS_REQUIRED",
+        message: denial.message,
+        code: denial.code,
+        redirectTo:
+          denial.kind === "assignment"
+            ? "/assignments"
+            : denial.kind === "auth"
+              ? "/api/auth/signin"
+              : "/billing",
       },
-      { status: access.reason === "requires_login" ? 401 : 403 },
+      { status: denial.status },
     );
   }
 

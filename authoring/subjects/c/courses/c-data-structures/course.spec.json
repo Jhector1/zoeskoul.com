@@ -1,0 +1,353 @@
+{
+  "authoringFormatVersion": "2.0",
+  "subjectSlug": "c",
+  "courseSlug": "c-data-structures",
+  "catalogSlug": "c",
+  "trackSlug": "c",
+  "profileId": "c",
+  "workspaceProfileId": "browser-code-runner",
+  "workspacePolicyId": "c-multifile-workspace",
+  "courseNumber": 1,
+  "title": "C Data Structures and Algorithm Analysis",
+  "subtitle": "Animate the invariant, implement it in C, and prove the runtime.",
+  "description": "A five-part intermediate C lab based on recursive runtime analysis, equal pair sums, balanced BSTs, priority queues built from stacks, and logarithmic insertion into pointer-based heaps.",
+  "level": "intermediate",
+  "sourceLocale": "en",
+  "targetLocales": [],
+  "accessPolicy": "paid",
+  "visibility": "private",
+  "moduleAccessOverrideDefault": null,
+  "moduleCount": 1,
+  "moduleRange": {
+    "start": 1,
+    "end": 1,
+    "label": "Written Assignment 2 Lab"
+  },
+  "prerequisites": [
+    "Comfort writing functions, structs, arrays, loops, and recursive C code.",
+    "Understand pointers, dynamic allocation, and basic asymptotic notation."
+  ],
+  "intendedFor": "Learners who know C fundamentals and want to connect algorithm analysis with executable data-structure implementations.",
+  "learningGoals": [
+    "Trace recursive branching and derive a tight runtime bound.",
+    "Detect equal pair sums in quadratic time without reusing an index.",
+    "Build and rebalance binary search trees in linear time.",
+    "Implement a priority queue using only stack operations.",
+    "Find a linked heap insertion position in logarithmic time and restore heap order."
+  ],
+  "practiceDefaults": {
+    "tryIt": true,
+    "requiresTryIt": true,
+    "tryItPlacement": "all_sketches"
+  },
+  "courseOverview": {
+    "recommendedSequence": "Complete one assignment question at a time: read the original question sketch, step through its self-contained animation, then complete the matching single-step full-IDE C lab before moving to the next question.",
+    "summary": "Convert written CS260-style algorithm questions into tested C implementations while preserving the expected runtime.",
+    "moduleSummary": [
+      {
+        "moduleNumber": 1,
+        "title": "Algorithm Analysis and Pointer-Based Structures",
+        "coreSkill": "Implement efficient algorithms while preserving structure invariants.",
+        "outputFocus": "Five runnable C workspaces with deterministic harnesses and runtime explanations."
+      }
+    ]
+  },
+  "releasePlan": {
+    "currentRelease": {
+      "name": "c-data-structures-v1",
+      "startModuleNumber": 1,
+      "endModuleNumber": 1
+    },
+    "releases": [
+      {
+        "name": "c-data-structures-v1",
+        "startModuleNumber": 1,
+        "endModuleNumber": 1
+      }
+    ]
+  },
+  "policy": {
+    "exercisePolicy": {
+      "defaultMix": {
+        "single_choice": 0.15,
+        "multi_choice": 0.1,
+        "drag_reorder": 0.1,
+        "fill_blank_choice": 0.15,
+        "code_input": 0.5
+      },
+      "minimums": {
+        "technicalTopicCodeInputMin": 1,
+        "topicExerciseMin": 4
+      }
+    },
+    "projectPolicy": {
+      "minProjectsBeforeCapstone": 0,
+      "capstoneRequired": false
+    },
+    "qualityPolicy": {
+      "allowBlankTopicIds": false,
+      "allowDuplicateTopicIds": false,
+      "requireUniqueModuleSlugs": true,
+      "requireUniqueSectionSlugs": true,
+      "slugConvention": "explicit_module_section",
+      "requireModuleProject": false
+    }
+  },
+  "authoringGuidance": [
+    "This course must always use subjectSlug c, courseSlug c-data-structures, and profileId c.",
+    "Every technical topic begins with one algorithm_animation that supports previous, next, play or pause, and replay.",
+    "Every C code_input uses fixedLanguage c, recipeType fixed_tests, entryFilePath main.c, and a complete starterFiles and solutionFiles workspace.",
+    "Compile every authored .c implementation file together with main.c; do not collapse the solution into one file.",
+    "Keep main.c as a deterministic harness and put the learner TODO in the named implementation .c file.",
+    "Use path-specific source checks only when the asymptotic technique is essential, such as midpoint recursion, stack-only access, or binary-index heap navigation.",
+    "Never grade a recurrence or Big-O explanation through exact prose matching; assess it with concept questions while executable tests grade the C implementation.",
+    "Initialize child and parent pointers explicitly and free official-solution allocations before exit."
+  ],
+  "courseGenerationPolicy": {
+    "studentActionStyle": "full-ide",
+    "forbidUnavailableWorkspaceActions": true,
+    "preferredTerms": {
+      "terminal": "output panel",
+      "run button": "Run",
+      "implementation file": "the named .c file"
+    },
+    "notes": [
+      "For every assignment problem, generate a paragraph question sketch that faithfully states the original task, translates it into plain English, lists the constraints and required runtime, and names the exact assignment subparts covered by the executable lab.",
+      "Generate exactly one manual algorithm_animation immediately after that question sketch. Give the animation a contextKey that keeps the question and animation goal visible on every frame.",
+      "Place a single-step project card for the matching code_input immediately after its question sketch and animation. Keep each question, animation, and exercise together; never group all animations before one five-step project.",
+      "Use recursive-tree frames for recursive-boolean-configurations, bucket and pair frames for detect-equal-pair-sums, midpoint and inorder-rebuild frames for build-and-rebalance-bsts, legal two-stack transfer frames for priority-queue-with-stacks, and bit-path pointer frames for insert-linked-binary-heap.",
+      "Starter workspaces must include main.c, the public header, and the implementation file with a focused TODO.",
+      "Solution workspaces must include every starter path with complete compilable content.",
+      "Use deterministic stdout tests that cover an ordinary case, an edge case, and duplicate or structural behavior when relevant.",
+      "Do not require learners to create files or remember compiler commands; the full IDE compiles the workspace through the shared C profile.",
+      "Use C11-compatible code and avoid compiler-specific extensions."
+    ]
+  },
+  "topicPolicies": {
+    "recursive-boolean-configurations": {
+      "notes": [
+        "Use a multi-file C workspace with exactly these required starter paths: main.c, boolean_configurations.h, boolean_configurations.c.",
+        "Publish complete solutionFiles for every starter path and execute the official solution in draft goldens.",
+        "Keep the learner task focused in the implementation .c file; preserve the supplied main.c harness and public header."
+      ]
+    },
+    "detect-equal-pair-sums": {
+      "notes": [
+        "Use a multi-file C workspace with exactly these required starter paths: main.c, pair_sums.h, pair_sums.c.",
+        "Publish complete solutionFiles for every starter path and execute the official solution in draft goldens.",
+        "Keep the learner task focused in the implementation .c file; preserve the supplied main.c harness and public header."
+      ]
+    },
+    "build-and-rebalance-bsts": {
+      "notes": [
+        "Use a multi-file C workspace with exactly these required starter paths: main.c, bst.h, bst.c.",
+        "Publish complete solutionFiles for every starter path and execute the official solution in draft goldens.",
+        "Keep the learner task focused in the implementation .c file; preserve the supplied main.c harness and public header."
+      ]
+    },
+    "priority-queue-with-stacks": {
+      "notes": [
+        "Use a multi-file C workspace with exactly these required starter paths: main.c, stack.h, stack.c, priority_queue.h, priority_queue.c.",
+        "Publish complete solutionFiles for every starter path and execute the official solution in draft goldens.",
+        "Keep the learner task focused in the implementation .c file; preserve the supplied main.c harness and public header."
+      ]
+    },
+    "insert-linked-binary-heap": {
+      "notes": [
+        "Use a multi-file C workspace with exactly these required starter paths: main.c, heap.h, heap.c.",
+        "Publish complete solutionFiles for every starter path and execute the official solution in draft goldens.",
+        "Keep the learner task focused in the implementation .c file; preserve the supplied main.c harness and public header."
+      ]
+    }
+  },
+  "assessmentAndDelivery": {
+    "suggestedBeginnerRhythm": "One animated concept and one implementation lab per study session.",
+    "recommendedCourseDeliverables": [
+      "Five algorithm traces",
+      "Five multi-file C implementations",
+      "Runtime analysis checks",
+      "Final assignment review quiz"
+    ],
+    "toolingSuggestions": [
+      "C11 compiler through the shared Judge0 runner",
+      "Full IDE with explorer, editor, and output panel"
+    ],
+    "closingNote": "Learners finish able to move from a written invariant and runtime target to a tested C implementation."
+  },
+  "modules": [
+    {
+      "moduleNumber": 1,
+      "moduleSlug": "c-data-structures-module-1-algorithm-lab",
+      "order": 1,
+      "prefix": "c_data_structures_module_1",
+      "role": "standard",
+      "title": "Algorithm Analysis and Pointer-Based Structures",
+      "description": "Turn five written algorithm-design problems into animated traces and runnable multi-file C implementations.",
+      "purpose": "Connect recurrence analysis and data-structure invariants to executable C programs.",
+      "learningObjectives": [
+        "Trace recursive branching and derive a tight runtime bound.",
+        "Detect equal pair sums in quadratic time without reusing an index.",
+        "Build and rebalance binary search trees in linear time.",
+        "Implement a priority queue using only stack operations.",
+        "Find a linked heap insertion position in logarithmic time and restore heap order."
+      ],
+      "guidedExercises": [
+        "Five independent full-IDE C labs, each introduced by a manual step-through animation."
+      ],
+      "quizFocus": [
+        "recurrences",
+        "tight bounds",
+        "hash collisions",
+        "BST invariants",
+        "stack-only priority queues",
+        "binary heap index paths"
+      ],
+      "recommendedPacing": "Complete one section at a time and run every supplied harness before moving forward.",
+      "typicalOutcome": "A set of tested C implementations and written runtime explanations for the five assignment problems.",
+      "runtimePolicy": {
+        "language": "c",
+        "supportsMultiFile": true,
+        "supportsFileSystem": true,
+        "supportsStdInStdOut": true,
+        "supportsPackageInstall": false
+      },
+      "sections": [
+        {
+          "sectionNumber": "1",
+          "sectionSlug": "c-data-structures-section-1-algorithm-design-lab",
+          "title": "From Written Algorithms to Working C",
+          "description": "Study each algorithm with a step animation, then implement and verify it in a focused multi-file C project.",
+          "role": "lesson",
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true
+          },
+          "topics": [
+            {
+              "topicNumber": "1.1",
+              "topicId": "recursive-boolean-configurations",
+              "title": "Recursive Boolean Configurations",
+              "summary": "Trace every recursive call, count the leaves, and connect the implementation to T(n) = 2T(n-1) + Θ(1).",
+              "minutes": 35,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c",
+                "data-structures",
+                "algorithm-analysis"
+              ],
+              "learningGoals": [
+                "Write foo_rec so it explores the true branch and false branch for every position.",
+                "Use the supplied boolean array and print harness without allocating a new array in each call.",
+                "State the recurrence, show the substitution expansion, and conclude Θ(2^n)."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches"
+              }
+            },
+            {
+              "topicNumber": "1.2",
+              "topicId": "detect-equal-pair-sums",
+              "title": "Detect Equal Pair Sums",
+              "summary": "Check whether two disjoint pairs have the same sum in O(n²) time.",
+              "minutes": 35,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c",
+                "data-structures",
+                "algorithm-analysis"
+              ],
+              "learningGoals": [
+                "Inspect every unordered pair exactly once.",
+                "Store enough information for each sum to reject pairs that reuse an index.",
+                "Handle multiple prior pairs with the same sum instead of overwriting the only witness."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches"
+              }
+            },
+            {
+              "topicNumber": "1.3",
+              "topicId": "build-and-rebalance-bsts",
+              "title": "Build and Rebalance BSTs",
+              "summary": "Build an almost-balanced BST from sorted data and convert an arbitrary BST in Θ(n) time.",
+              "minutes": 45,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c",
+                "data-structures",
+                "algorithm-analysis"
+              ],
+              "learningGoals": [
+                "Implement sorted-array-to-BST construction with a midpoint at every recursive range.",
+                "Flatten an existing BST with inorder traversal into a sorted array.",
+                "Rebuild from the sorted array and preserve parent pointers in the official solution."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches"
+              }
+            },
+            {
+              "topicNumber": "1.4",
+              "topicId": "priority-queue-with-stacks",
+              "title": "Priority Queue with Stacks",
+              "summary": "Implement insert and extract_min using only push, pop, and is_empty.",
+              "minutes": 40,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c",
+                "data-structures",
+                "algorithm-analysis"
+              ],
+              "learningGoals": [
+                "Use one or more stacks but never index into their internal arrays from priority-queue operations.",
+                "Preserve duplicate priorities.",
+                "Document the chosen tradeoff: O(n) insert with O(1) extract-min, or O(1) insert with O(n) extract-min."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches"
+              }
+            },
+            {
+              "topicNumber": "1.5",
+              "topicId": "insert-linked-binary-heap",
+              "title": "Insert into a Linked Binary Heap",
+              "summary": "Insert a node into a complete pointer-based min-heap in O(log n) time.",
+              "minutes": 45,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c",
+                "data-structures",
+                "algorithm-analysis"
+              ],
+              "learningGoals": [
+                "Use n + 1 as the conceptual array index of the new node.",
+                "Follow the binary bits after the leading 1 to reach the insertion parent from the root.",
+                "Attach the new node, initialize left/right/parent pointers, and call the supplied upheap routine."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches"
+              }
+            }
+          ]
+        }
+      ],
+      "sectionCount": 1,
+      "topicCount": 5
+    }
+  ]
+}

@@ -74,6 +74,8 @@ export type ProgrammingCodeInputStarterFileDraft = {
 
 export type ProgrammingCodeInputSourceCheckDraft = {
     type: "source_contains" | "source_regex";
+    /** Optional workspace-relative file path for multi-file exercises. */
+    path?: string;
     pattern: string;
     message: string;
     normalizeWhitespace?: boolean;

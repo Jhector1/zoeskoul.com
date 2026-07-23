@@ -27,6 +27,7 @@ const PANE_TRANSITION = {
 };
 
 const CODE_SPEC = TOOL_SPECS.find((t) => t.id === "code");
+const BOARD_SPEC = TOOL_SPECS.find((t) => t.id === "board");
 const NOTES_SPEC = TOOL_SPECS.find((t) => t.id === "notes");
 
 export type ToolsPanelProps = {
@@ -58,6 +59,10 @@ export type ToolsPanelProps = {
     moduleId: string;
     locale: string;
     codeEnabled: boolean;
+    boardEnabled?: boolean;
+    boardReadOnly?: boolean;
+    boardScopeKey?: string;
+    notesEnabled?: boolean;
 
     onChangeLang?: (l: WorkspaceLanguage) => void;
     onChangeSqlDialect?: (d: SqlDialect) => void;
@@ -88,6 +93,8 @@ export type ToolsPanelProps = {
      * review/practice workspaces where Notes and collapse controls are useful.
      */
     showHeader?: boolean;
+    /** Keep a compact Code/Board switcher when the full review header is hidden. */
+    showToolTabs?: boolean;
 };
 
 function ToolsPanelInner(props: ToolsPanelProps) {
@@ -99,20 +106,23 @@ function ToolsPanelInner(props: ToolsPanelProps) {
             locale: props.locale,
             boundId: props.boundId ?? null,
             codeEnabled: props.codeEnabled,
+            boardEnabled: props.boardEnabled === true,
+            notesEnabled: props.notesEnabled !== false,
         }),
-        [props.subjectSlug, props.moduleId, props.locale, props.boundId, props.codeEnabled],
+        [props.subjectSlug, props.moduleId, props.locale, props.boundId, props.codeEnabled, props.boardEnabled, props.notesEnabled],
     );
 
     const { active, setActive } = useActiveTool(ctx);
     const showHeader = props.showHeader !== false;
+    const showToolTabs = props.showToolTabs ?? showHeader;
 
     useEffect(() => {
-        if (showHeader || !ctx.codeEnabled || active === "code") return;
-
-        // A previously persisted Notes tab must not strand a headerless lesson
-        // workspace on a pane the learner can no longer switch away from.
-        setActive("code");
-    }, [active, ctx.codeEnabled, setActive, showHeader]);
+        if (showHeader || showToolTabs) return;
+        const activeSpec = TOOL_SPECS.find((spec) => spec.id === active);
+        if (activeSpec?.enabled(ctx)) return;
+        const firstEnabled = TOOL_SPECS.find((spec) => spec.enabled(ctx));
+        if (firstEnabled) setActive(firstEnabled.id);
+    }, [active, ctx, setActive, showHeader, showToolTabs]);
 
     const scopeKey = props.toolScopeKey ?? (props.boundId ? `exercise:${props.boundId}` : "general");
 
@@ -129,6 +139,17 @@ function ToolsPanelInner(props: ToolsPanelProps) {
         [props.subjectSlug, props.moduleId, props.locale, scopeKey],
     );
 
+    const boardKey = useMemo(
+        () => ({
+            subjectSlug: props.subjectSlug,
+            moduleId: props.moduleId,
+            locale: props.locale,
+            toolId: "board",
+            scopeKey: props.boardScopeKey ?? scopeKey,
+        }),
+        [props.subjectSlug, props.moduleId, props.locale, props.boardScopeKey, scopeKey],
+    );
+
     return (
         <div className="flex h-full min-h-0 flex-col overflow-visible ui-surface-muted rounded-none">
             {showHeader ? (
@@ -141,6 +162,19 @@ function ToolsPanelInner(props: ToolsPanelProps) {
                     onUnbind={props.onUnbind}
                     onCollapse={props.onCollapse}
                 />
+            ) : showToolTabs ? (
+                <div className="flex items-center justify-between gap-2 border-b border-[rgb(var(--ui-border)/0.7)] px-2 py-2">
+                    <ToolTabs ctx={ctx} value={active} onChange={setActive} hideDisabled />
+                    <button
+                        type="button"
+                        className="ui-btn ui-btn-ghost h-9 w-9 p-0"
+                        title={t("collapse")}
+                        aria-label={t("collapse")}
+                        onClick={props.onCollapse}
+                    >
+                        <ListIcon className="h-4 w-4" />
+                    </button>
+                </div>
             ) : null}
 
             <div
@@ -180,6 +214,13 @@ function ToolsPanelInner(props: ToolsPanelProps) {
                         sqlInitialTableSnapshots={props.sqlInitialTableSnapshots}
                         showLanguagePicker={props.showLanguagePicker}
                         showSqlDialectPicker={props.showSqlDialectPicker}
+                    />
+
+                    <MemoBoardPaneLayer
+                        isActive={active === "board"}
+                        boardEnabled={ctx.boardEnabled}
+                        boardKey={boardKey}
+                        readOnly={props.boardReadOnly === true}
                     />
 
                     <MemoNotesPaneLayer
@@ -552,6 +593,46 @@ const MemoCodePaneLayer = React.memo(
         prev.showSqlDialectPicker === next.showSqlDialectPicker,
 );
 
+
+function BoardPaneLayer(props: {
+    isActive: boolean;
+    boardEnabled: boolean;
+    boardKey: {
+        subjectSlug: string;
+        moduleId: string;
+        locale: string;
+        toolId: string;
+        scopeKey: string;
+    };
+    readOnly: boolean;
+}) {
+    const pane = props.boardEnabled && BOARD_SPEC
+        ? BOARD_SPEC.render({ boardKey: props.boardKey, readOnly: props.readOnly })
+        : null;
+
+    return (
+        <motion.div
+            className="absolute inset-0"
+            variants={PANE_ANIM}
+            animate={props.isActive ? "show" : "hide"}
+            transition={PANE_TRANSITION}
+            style={{ pointerEvents: props.isActive ? "auto" : "none" }}
+            aria-hidden={!props.isActive}
+        >
+            {pane}
+        </motion.div>
+    );
+}
+
+const MemoBoardPaneLayer = React.memo(
+    BoardPaneLayer,
+    (prev, next) =>
+        prev.isActive === next.isActive &&
+        prev.boardEnabled === next.boardEnabled &&
+        prev.boardKey === next.boardKey &&
+        prev.readOnly === next.readOnly,
+);
+
 function NotesPaneLayer(props: {
     isActive: boolean;
     noteKey: {
@@ -609,6 +690,10 @@ function areToolsPanelPropsEqual(prev: ToolsPanelProps, next: ToolsPanelProps) {
         prev.moduleId === next.moduleId &&
         prev.locale === next.locale &&
         prev.codeEnabled === next.codeEnabled &&
+        prev.boardEnabled === next.boardEnabled &&
+        prev.boardReadOnly === next.boardReadOnly &&
+        prev.boardScopeKey === next.boardScopeKey &&
+        prev.notesEnabled === next.notesEnabled &&
         prev.onChangeLang === next.onChangeLang &&
         prev.onChangeSqlDialect === next.onChangeSqlDialect &&
         prev.sqlDatasetId === next.sqlDatasetId &&
@@ -622,7 +707,8 @@ function areToolsPanelPropsEqual(prev: ToolsPanelProps, next: ToolsPanelProps) {
         prev.sqlInitialTableSnapshots === next.sqlInitialTableSnapshots &&
         prev.showLanguagePicker === next.showLanguagePicker &&
         prev.showSqlDialectPicker === next.showSqlDialectPicker &&
-        prev.showHeader === next.showHeader
+        prev.showHeader === next.showHeader &&
+        prev.showToolTabs === next.showToolTabs
     );
 }
 

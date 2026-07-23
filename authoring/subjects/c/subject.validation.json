@@ -1,0 +1,22 @@
+{
+  "validationSuite": "cSubjectValidation",
+  "appliesTo": "c_courses",
+  "runtime": {
+    "language": "c",
+    "backend": "judge0",
+    "mode": "multi_file"
+  },
+  "rules": {
+    "executionValidation": [
+      "Every C code_input uses profileId c, fixedLanguage c, recipeType fixed_tests, and a complete multi-file workspace.",
+      "Every official solution compiles as C11 and passes its deterministic stdout tests during golden validation.",
+      "Every multi-file exercise publishes a complete solutionFiles set covering every starter workspace path.",
+      "Source checks target the implementation file that owns the required algorithm rather than grading main.c formatting."
+    ],
+    "pedagogy": [
+      "Animate state changes before learners implement pointer-heavy or recursive algorithms.",
+      "Keep runtime analysis in the lesson explanation while executable tests verify observable behavior.",
+      "Use supplied harnesses so learners focus on one algorithmic responsibility at a time."
+    ]
+  }
+}

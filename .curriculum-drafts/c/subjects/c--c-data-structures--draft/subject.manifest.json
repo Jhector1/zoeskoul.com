@@ -1,0 +1,144 @@
+{
+  "subject": {
+    "slug": "c--c-data-structures--draft",
+    "profileId": "c",
+    "catalogSlug": "c",
+    "genKey": "c_course",
+    "order": 1,
+    "accessPolicy": "paid",
+    "status": "active",
+    "imagePublicId": null,
+    "imageAlt": null,
+    "titleKey": "subjects.c--c-data-structures--draft.title",
+    "descriptionKey": "subjects.c--c-data-structures--draft.description",
+    "serviceDefaults": {
+      "preset": "runner",
+      "runnerBackend": "judge0",
+      "layoutMode": "default",
+      "requires": {
+        "files": true,
+        "multiFile": true,
+        "terminal": false
+      },
+      "fileActions": {
+        "enabled": true,
+        "createFile": true,
+        "createFolder": true,
+        "rename": true,
+        "delete": true,
+        "dragDrop": true
+      }
+    },
+    "runtimeDefaults": {
+      "kind": "code",
+      "language": "c",
+      "supportsTerminal": false,
+      "supportsMultiFile": true,
+      "supportsFileSystem": true,
+      "supportsStdInStdOut": true,
+      "supportsPackageInstall": false
+    },
+    "meta": {
+      "curriculum": {
+        "plannedModuleCount": 1,
+        "isTerminalRelease": false,
+        "moreComingMessageKey": "subjects.c--c-data-structures--draft.moreComingSoon"
+      },
+      "completionPolicy": {
+        "requireAllPublishedModules": true,
+        "rewardEnabledByDefault": true,
+        "certificateEnabledByDefault": true
+      },
+      "versioning": {
+        "family": "c--c-data-structures--draft",
+        "version": 1,
+        "status": "active",
+        "defaultForNewEnrollments": true,
+        "supersedes": null,
+        "supersededBy": null
+      }
+    }
+  },
+  "modules": [
+    {
+      "slug": "c--c-data-structures--draft-module-1-algorithm-design-lab",
+      "prefix": "cds1",
+      "order": 1,
+      "titleKey": "modules.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.title",
+      "descriptionKey": "modules.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.description",
+      "weekStart": null,
+      "weekEnd": null,
+      "accessOverride": null,
+      "runtimeDefaults": {
+        "kind": "code",
+        "language": "c",
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true,
+        "supportsStdInStdOut": true,
+        "supportsPackageInstall": false
+      },
+      "serviceDefaults": {
+        "preset": "runner",
+        "runnerBackend": "judge0",
+        "layoutMode": "default",
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": false
+        }
+      },
+      "meta": {
+        "estimatedMinutes": 240,
+        "prereqKeys": [],
+        "outcomeKeys": [
+          "modules.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.outcomes.0",
+          "modules.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.outcomes.1",
+          "modules.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.outcomes.2",
+          "modules.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.outcomes.3",
+          "modules.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.outcomes.4"
+        ],
+        "whyKeys": [
+          "modules.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.why.0",
+          "modules.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.why.1"
+        ]
+      },
+      "sections": [
+        {
+          "slug": "c--c-data-structures--draft-algorithm-design-lab",
+          "order": 1,
+          "titleKey": "sections.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.c--c-data-structures--draft-algorithm-design-lab.title",
+          "descriptionKey": "sections.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.c--c-data-structures--draft-algorithm-design-lab.description",
+          "meta": {
+            "module": 1,
+            "weeksKey": "sections.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.c--c-data-structures--draft-algorithm-design-lab.weeks",
+            "bulletKeys": [
+              "sections.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.c--c-data-structures--draft-algorithm-design-lab.bullets.0",
+              "sections.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.c--c-data-structures--draft-algorithm-design-lab.bullets.1",
+              "sections.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.c--c-data-structures--draft-algorithm-design-lab.bullets.2",
+              "sections.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.c--c-data-structures--draft-algorithm-design-lab.bullets.3",
+              "sections.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.c--c-data-structures--draft-algorithm-design-lab.bullets.4"
+            ]
+          },
+          "serviceDefaults": {
+            "preset": "runner",
+            "runnerBackend": "judge0",
+            "layoutMode": "default",
+            "requires": {
+              "files": true,
+              "multiFile": true,
+              "terminal": false
+            }
+          },
+          "topics": [
+            "recursive-boolean-configurations",
+            "detect-equal-pair-sums",
+            "build-and-rebalance-bsts",
+            "priority-queue-with-stacks",
+            "insert-linked-binary-heap"
+          ]
+        }
+      ]
+    }
+  ]
+}

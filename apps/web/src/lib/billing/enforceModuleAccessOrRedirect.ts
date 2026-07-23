@@ -5,6 +5,7 @@ import type { PrismaClient } from "@/lib/prisma";
 import { checkModuleAccess } from "@/lib/access/moduleAccessServer";
 import { buildBillingHref } from "@/lib/billing/moduleAccess";
 import type { Actor } from "@/lib/practice/actor";
+import { describeModuleAccessDenial } from "@/lib/access/moduleAccessDenial";
 
 export async function enforceModuleAccessOrRedirect(args: {
     prisma: PrismaClient;
@@ -24,6 +25,14 @@ export async function enforceModuleAccessOrRedirect(args: {
     });
 
     if (decision.ok) return;
+
+    const denial = describeModuleAccessDenial(decision);
+    if (denial.kind === "assignment") {
+        redirect(`/${encodeURIComponent(args.locale)}/assignments`);
+    }
+    if (denial.kind === "auth") {
+        redirect(`/api/auth/signin?callbackUrl=${encodeURIComponent(args.nextPath)}`);
+    }
 
     // ✅ SAFE back: modules list (never paywalled)
     const back =

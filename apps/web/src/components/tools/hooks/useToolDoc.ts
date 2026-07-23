@@ -19,6 +19,7 @@ export function useToolDoc(key: ToolDocKey, opts?: { format?: "markdown" | "plai
     const [body, setBody] = useState("");
     const [state, setState] = useState<SaveState>("loading");
     const [updatedAt, setUpdatedAt] = useState<string | null>(null);
+    const [loadedQuery, setLoadedQuery] = useState<string | null>(null);
 
     const lastSavedRef = useRef("");
     const loadedRef = useRef(false);
@@ -39,6 +40,7 @@ export function useToolDoc(key: ToolDocKey, opts?: { format?: "markdown" | "plai
     useEffect(() => {
         let alive = true;
         loadedRef.current = false;
+        setLoadedQuery(null);
         setState("loading");
 
         (async () => {
@@ -53,11 +55,13 @@ export function useToolDoc(key: ToolDocKey, opts?: { format?: "markdown" | "plai
                 latestBodyRef.current = v;
                 lastSavedRef.current = v;
                 loadedRef.current = true;
+                setLoadedQuery(qs);
                 setUpdatedAt(j?.updatedAt ? String(j.updatedAt) : null);
                 setState("idle");
             } catch {
                 if (!alive) return;
                 loadedRef.current = true;
+                setLoadedQuery(null);
                 setState("error");
             }
         })();
@@ -141,5 +145,5 @@ export function useToolDoc(key: ToolDocKey, opts?: { format?: "markdown" | "plai
         }
     }
 
-    return { body, setBody, state, updatedAt, flush };
+    return { body, setBody, state, updatedAt, hydrated: loadedQuery === qs, flush };
 }

@@ -33,6 +33,28 @@
         "noExerciseEditorBound": "No exercise editor is bound",
         "sketchWorkspaceNotReady": "This sketch does not have a ready workspace yet.",
         "exerciseWorkspaceNotReady": "This exercise does not have a ready workspace yet."
+      },
+      "board": {
+        "select": "Select and move",
+        "pen": "Draw",
+        "text": "Add text",
+        "rectangle": "Rectangle",
+        "ellipse": "Ellipse",
+        "arrow": "Arrow",
+        "eraser": "Erase",
+        "color": "Board color",
+        "strokeWidth": "Stroke width",
+        "undo": "Undo",
+        "redo": "Redo",
+        "clear": "Clear board",
+        "canvas": "Editable lesson board",
+        "textPlaceholder": "Type a label…",
+        "hint": "Draw, label, and move diagram parts. Changes save for this lesson card.",
+        "readOnly": "This shared board is read-only.",
+        "loading": "Loading board…",
+        "saving": "Saving…",
+        "saved": "Saved",
+        "saveFailed": "Save failed"
       }
     }
   }

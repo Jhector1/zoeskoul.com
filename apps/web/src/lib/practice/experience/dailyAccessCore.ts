@@ -11,6 +11,7 @@ export type DailyAccessSubject = {
   id: string;
   slug: string;
   accessPolicy: "free" | "paid";
+  visibility: "public" | "private" | "organization";
   entitlementKey?: string | null;
   enrolled: boolean;
   versioning: SubjectVersioningLike;
@@ -57,6 +58,7 @@ export function selectAccessibleDailyPracticeOptions(args: {
             id: subject.id,
             slug: subject.slug,
             accessPolicy: subject.accessPolicy,
+            visibility: subject.visibility,
             entitlementKey: subject.entitlementKey ?? null,
           }
         : null,

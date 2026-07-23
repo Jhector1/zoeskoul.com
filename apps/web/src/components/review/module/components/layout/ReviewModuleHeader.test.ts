@@ -43,7 +43,8 @@ vi.mock("next-intl", () => ({
 }));
 
 vi.mock("@/components/HeaderSlick", () => ({
-    default: ({ slot }: { slot: React.ReactNode }) => <div data-testid="header-slick">{slot}</div>,
+    default: ({ slot }: { slot: React.ReactNode }) =>
+        React.createElement("div", { "data-testid": "header-slick" }, slot),
 }));
 
 vi.mock("@/components/ui/NavButton", () => ({
@@ -57,43 +58,39 @@ vi.mock("@/components/ui/NavButton", () => ({
         hardReloadCurrent: _hardReloadCurrent,
         prefetch: _prefetch,
         ...props
-    }: any) => (
-        <a href={href} {...props}>
-            {children}
-        </a>
-    ),
+    }: any) => React.createElement("a", { href, ...props }, children),
 }));
 
 function renderHeader(overrides: Partial<React.ComponentProps<typeof ReviewModuleHeader>> = {}) {
     return renderToStaticMarkup(
-        <ReviewModuleHeader
-            locale="en"
-            toolsUiEnabled
-            showDesktopLeft={false}
-            showDesktopRight={false}
-            leftCollapsed={true}
-            rightCollapsed={true}
-            modulesHref="/en/subjects/python/modules"
-            onOpenModulesDrawer={vi.fn()}
-            onToggleLeftPanel={vi.fn()}
-            onToggleRightPanel={vi.fn()}
-            resetOptions={[
+        React.createElement(ReviewModuleHeader, {
+            locale: "en",
+            toolsUiEnabled: true,
+            showDesktopLeft: false,
+            showDesktopRight: false,
+            leftCollapsed: true,
+            rightCollapsed: true,
+            modulesHref: "/en/subjects/python/modules",
+            onOpenModulesDrawer: vi.fn(),
+            onToggleLeftPanel: vi.fn(),
+            onToggleRightPanel: vi.fn(),
+            resetOptions: [
                 {
                     id: "topic",
                     label: "This topic",
                     description: "Clear the current topic and start it over.",
                     onSelect: vi.fn(),
                 },
-            ]}
-            onPrevTopic={vi.fn()}
-            onNextTopic={vi.fn()}
-            prevTopic={{ id: "topic-1" }}
-            nextTopic={{ id: "topic-2" }}
-            unlockAll={false}
-            viewIsComplete={false}
-            headerGamification={null}
-            {...overrides}
-        />,
+            ],
+            onPrevTopic: vi.fn(),
+            onNextTopic: vi.fn(),
+            prevTopic: { id: "topic-1" },
+            nextTopic: { id: "topic-2" },
+            unlockAll: false,
+            viewIsComplete: false,
+            headerGamification: null,
+            ...overrides,
+        }),
     );
 }
 
@@ -114,7 +111,7 @@ describe("ReviewModuleHeader compact toolbar", () => {
         expect(html).not.toContain('href="/en/subjects/python/modules"');
     });
 
-    it("hides the duplicate desktop Topics and Tools buttons in compact mode", () => {
+    it("keeps the Tools close toggle while hiding the duplicate Topics button in compact mode", () => {
         const html = renderHeader({
             showDesktopLeft: true,
             showDesktopRight: true,
@@ -123,7 +120,8 @@ describe("ReviewModuleHeader compact toolbar", () => {
         });
 
         expect(html).not.toContain("Topics");
-        expect(html).not.toContain("Tools");
+        expect(html).toContain("Tools ◀");
+        expect(html).toContain('aria-expanded="true"');
         expect(html).toContain("Reset");
         expect(html).toContain("Modules");
     });
@@ -137,7 +135,8 @@ describe("ReviewModuleHeader compact toolbar", () => {
         });
 
         expect(html).toContain("Topics");
-        expect(html).toContain("Tools");
+        expect(html).toContain("Tools ▶");
+        expect(html).toContain('aria-expanded="false"');
     });
 
     it("hides the Tools button when the active card disallows opening tools", () => {

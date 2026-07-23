@@ -1,0 +1,591 @@
+{
+  "topics": {
+    "c-data-structures": {
+      "c-data-structures-module-1-algorithm-design-lab": {
+        "written-assignment-2-lab": {
+          "label": "CS260-Style Algorithm Design Lab",
+          "summary": "Use animations and executable C projects to solve five recurrence and data-structure design problems.",
+          "cards": {
+            "introduction": {
+              "title": "How This Lesson Uses the Original Assignment"
+            },
+            "question-1-problem": {
+              "title": "Question 1: Read the Recurrence Problem First"
+            },
+            "recursion-animation": {
+              "title": "Question 1 Walkthrough: Recurrence to Tight Bound"
+            },
+            "recursion-project": {
+              "title": "Question 1 C Lab: Build and Measure the Recursion"
+            },
+            "question-2-problem": {
+              "title": "Question 2: Read the Equal Pair-Sum Problem First"
+            },
+            "pair-sums-animation": {
+              "title": "Question 2 Walkthrough: Pair Sums and Buckets"
+            },
+            "pair-sums-project": {
+              "title": "Question 2 C Lab: Detect Equal Disjoint Pair Sums"
+            },
+            "question-3-problem": {
+              "title": "Question 3: Read the BST Problem First"
+            },
+            "bst-animation": {
+              "title": "Question 3 Walkthrough: Build and Rebalance the BST"
+            },
+            "bst-project": {
+              "title": "Question 3 C Lab: Build and Rebalance a BST"
+            },
+            "question-4-problem": {
+              "title": "Question 4: Read the Stack-Only Priority Queue Problem"
+            },
+            "priority-queue-animation": {
+              "title": "Question 4 Walkthrough: Extract One Minimum"
+            },
+            "priority-queue-project": {
+              "title": "Question 4 C Lab: Priority Queue with Stacks"
+            },
+            "question-5-problem": {
+              "title": "Question 5: Read the Linked Heap Problem First"
+            },
+            "heap-animation": {
+              "title": "Question 5 Walkthrough: Follow the Binary Pointer Path"
+            },
+            "heap-project": {
+              "title": "Question 5 C Lab: Insert into the Linked Heap"
+            },
+            "analysis-quiz": {
+              "title": "Check the Five Design and Runtime Arguments"
+            }
+          },
+          "projectSteps": {
+            "recursion_runtime": {
+              "title": "Instrument the Recursive Call Tree"
+            },
+            "equal_pair_sums": {
+              "title": "Detect Equal Disjoint Pair Sums"
+            },
+            "almost_balanced_bst": {
+              "title": "Build and Rebalance an Almost-Balanced BST"
+            },
+            "priority_queue_stacks": {
+              "title": "Implement a Priority Queue with Stacks"
+            },
+            "pointer_heap_insert": {
+              "title": "Insert into a Pointer-Based Heap in O(log n)"
+            }
+          },
+          "finalLab": {
+            "steps": {
+              "recursion_runtime": {
+                "title": "Instrument the Recursive Call Tree",
+                "prompt": "Open `algorithms/recursion.c`. Complete `foo_rec` so every non-base call explores both Boolean choices and advances to `i + 1`. The supplied `main.c` runs `foo(4)` and reports the number of leaves and total calls. Use the animation to connect the measurements to `T(n) = 2T(n - 1) + Θ(1)`.",
+                "hint": "Each non-base call must make two recursive calls after assigning the current slot.",
+                "help": {
+                  "concept": "The recursion forms a full binary tree. There are `2^n` leaves and `2^(n+1)-1` total calls, so the runtime is `Θ(2^n)` when printing a completed list is treated as constant time.",
+                  "hint_1": "Run the supplied test harness after each focused change.",
+                  "hint_2": "Keep the implementation general; do not print the expected output directly."
+                },
+                "starterCode": "#include <stdio.h>\n#include \"algorithms/recursion.h\"\n\nint main(void) {\n    FooStats stats = foo(4);\n    printf(\"leaves=%ld\\n\", stats.leaves);\n    printf(\"calls=%ld\\n\", stats.calls);\n    printf(\"tight=Theta(2^n)\\n\");\n    return 0;\n}\n",
+                "solutionCode": "#include <stdio.h>\n#include \"algorithms/recursion.h\"\n\nint main(void) {\n    FooStats stats = foo(4);\n    printf(\"leaves=%ld\\n\", stats.leaves);\n    printf(\"calls=%ld\\n\", stats.calls);\n    printf(\"tight=Theta(2^n)\\n\");\n    return 0;\n}\n",
+                "starterFiles": {
+                  "main_c": {
+                    "content": "#include <stdio.h>\n#include \"algorithms/recursion.h\"\n\nint main(void) {\n    FooStats stats = foo(4);\n    printf(\"leaves=%ld\\n\", stats.leaves);\n    printf(\"calls=%ld\\n\", stats.calls);\n    printf(\"tight=Theta(2^n)\\n\");\n    return 0;\n}\n"
+                  },
+                  "algorithms_recursion_c": {
+                    "content": "#include \"recursion.h\"\n#include <stdbool.h>\n\nstatic void foo_rec(bool *bits, int n, int i, FooStats *stats) {\n    stats->calls++;\n\n    if (i == n) {\n        stats->leaves++;\n        return;\n    }\n\n    /* TODO: explore the branch where bits[i] is true. */\n    /* TODO: explore the branch where bits[i] is false. */\n}\n\nFooStats foo(int n) {\n    FooStats stats = {0, 0};\n    bool bits[n > 0 ? n : 1];\n    foo_rec(bits, n, 0, &stats);\n    return stats;\n}\n"
+                  },
+                  "algorithms_recursion_h": {
+                    "content": "#ifndef RECURSION_H\n#define RECURSION_H\n\ntypedef struct {\n    long calls;\n    long leaves;\n} FooStats;\n\nFooStats foo(int n);\n\n#endif\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_c": {
+                    "content": "#include <stdio.h>\n#include \"algorithms/recursion.h\"\n\nint main(void) {\n    FooStats stats = foo(4);\n    printf(\"leaves=%ld\\n\", stats.leaves);\n    printf(\"calls=%ld\\n\", stats.calls);\n    printf(\"tight=Theta(2^n)\\n\");\n    return 0;\n}\n"
+                  },
+                  "algorithms_recursion_c": {
+                    "content": "#include \"recursion.h\"\n#include <stdbool.h>\n\nstatic void foo_rec(bool *bits, int n, int i, FooStats *stats) {\n    stats->calls++;\n\n    if (i == n) {\n        stats->leaves++;\n        return;\n    }\n\n    bits[i] = true;\n    foo_rec(bits, n, i + 1, stats);\n\n    bits[i] = false;\n    foo_rec(bits, n, i + 1, stats);\n}\n\nFooStats foo(int n) {\n    FooStats stats = {0, 0};\n    bool bits[n > 0 ? n : 1];\n    foo_rec(bits, n, 0, &stats);\n    return stats;\n}\n"
+                  },
+                  "algorithms_recursion_h": {
+                    "content": "#ifndef RECURSION_H\n#define RECURSION_H\n\ntypedef struct {\n    long calls;\n    long leaves;\n} FooStats;\n\nFooStats foo(int n);\n\n#endif\n"
+                  }
+                },
+                "checks": [
+                  {
+                    "message": "Keep the base case at `i == n`."
+                  },
+                  {
+                    "message": "Assign the true branch before its recursive call."
+                  },
+                  {
+                    "message": "Assign the false branch before its recursive call."
+                  }
+                ]
+              },
+              "equal_pair_sums": {
+                "title": "Detect Equal Disjoint Pair Sums",
+                "prompt": "Open `algorithms/pair_sums.c`. Implement `has_equal_disjoint_pair_sums` in `O(n²)` time. Every value is a unique positive integer smaller than `k`, so a direct table of possible sums is allowed. Examine each unordered pair once, remember the first pair that produced each sum, and return `true` when a later pair with four distinct indices reaches the same sum.",
+                "hint": "The largest possible sum is smaller than `2 * k`, so the sum itself can index a collision-free table.",
+                "help": {
+                  "concept": "Nested loops generate `Θ(n²)` pairs. A direct-address table makes each lookup and insertion `O(1)`, producing `Θ(n²)` total time and `O(k)` auxiliary space.",
+                  "hint_1": "Run the supplied test harness after each focused change.",
+                  "hint_2": "Keep the implementation general; do not print the expected output directly."
+                },
+                "starterCode": "#include <stdio.h>\n#include \"algorithms/pair_sums.h\"\n\nint main(void) {\n    const int case1[] = {1, 2, 3, 4};\n    const int case2[] = {1, 2, 4, 8};\n\n    printf(\"case1=%s\\n\", has_equal_disjoint_pair_sums(case1, 4, 10) ? \"yes\" : \"no\");\n    printf(\"case2=%s\\n\", has_equal_disjoint_pair_sums(case2, 4, 10) ? \"yes\" : \"no\");\n    return 0;\n}\n",
+                "solutionCode": "#include <stdio.h>\n#include \"algorithms/pair_sums.h\"\n\nint main(void) {\n    const int case1[] = {1, 2, 3, 4};\n    const int case2[] = {1, 2, 4, 8};\n\n    printf(\"case1=%s\\n\", has_equal_disjoint_pair_sums(case1, 4, 10) ? \"yes\" : \"no\");\n    printf(\"case2=%s\\n\", has_equal_disjoint_pair_sums(case2, 4, 10) ? \"yes\" : \"no\");\n    return 0;\n}\n",
+                "starterFiles": {
+                  "main_c": {
+                    "content": "#include <stdio.h>\n#include \"algorithms/pair_sums.h\"\n\nint main(void) {\n    const int case1[] = {1, 2, 3, 4};\n    const int case2[] = {1, 2, 4, 8};\n\n    printf(\"case1=%s\\n\", has_equal_disjoint_pair_sums(case1, 4, 10) ? \"yes\" : \"no\");\n    printf(\"case2=%s\\n\", has_equal_disjoint_pair_sums(case2, 4, 10) ? \"yes\" : \"no\");\n    return 0;\n}\n"
+                  },
+                  "algorithms_pair_sums_c": {
+                    "content": "#include \"pair_sums.h\"\n\nbool has_equal_disjoint_pair_sums(const int *values, size_t n, int k) {\n    (void)values;\n    (void)n;\n    (void)k;\n    /* TODO: examine each unordered pair and remember the first pair for each sum. */\n    return false;\n}\n"
+                  },
+                  "algorithms_pair_sums_h": {
+                    "content": "#ifndef PAIR_SUMS_H\n#define PAIR_SUMS_H\n\n#include <stdbool.h>\n#include <stddef.h>\n\nbool has_equal_disjoint_pair_sums(const int *values, size_t n, int k);\n\n#endif\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_c": {
+                    "content": "#include <stdio.h>\n#include \"algorithms/pair_sums.h\"\n\nint main(void) {\n    const int case1[] = {1, 2, 3, 4};\n    const int case2[] = {1, 2, 4, 8};\n\n    printf(\"case1=%s\\n\", has_equal_disjoint_pair_sums(case1, 4, 10) ? \"yes\" : \"no\");\n    printf(\"case2=%s\\n\", has_equal_disjoint_pair_sums(case2, 4, 10) ? \"yes\" : \"no\");\n    return 0;\n}\n"
+                  },
+                  "algorithms_pair_sums_c": {
+                    "content": "#include \"pair_sums.h\"\n#include <stdlib.h>\n\ntypedef struct {\n    int first;\n    int second;\n} PairSlot;\n\nbool has_equal_disjoint_pair_sums(const int *values, size_t n, int k) {\n    if (values == NULL || n < 4 || k <= 0) {\n        return false;\n    }\n\n    const int slot_count = 2 * k;\n    PairSlot *seen = malloc((size_t)slot_count * sizeof(*seen));\n    if (seen == NULL) {\n        return false;\n    }\n\n    for (int sum = 0; sum < slot_count; sum++) {\n        seen[sum].first = -1;\n        seen[sum].second = -1;\n    }\n\n    for (size_t i = 0; i < n; i++) {\n        for (size_t j = i + 1; j < n; j++) {\n            const int sum = values[i] + values[j];\n            PairSlot *slot = &seen[sum];\n\n            if (slot->first >= 0) {\n                const size_t a = (size_t)slot->first;\n                const size_t b = (size_t)slot->second;\n                if (a != i && a != j && b != i && b != j) {\n                    free(seen);\n                    return true;\n                }\n            } else {\n                slot->first = (int)i;\n                slot->second = (int)j;\n            }\n        }\n    }\n\n    free(seen);\n    return false;\n}\n"
+                  },
+                  "algorithms_pair_sums_h": {
+                    "content": "#ifndef PAIR_SUMS_H\n#define PAIR_SUMS_H\n\n#include <stdbool.h>\n#include <stddef.h>\n\nbool has_equal_disjoint_pair_sums(const int *values, size_t n, int k);\n\n#endif\n"
+                  }
+                },
+                "checks": [
+                  {
+                    "message": "Use an outer loop over the first pair index."
+                  },
+                  {
+                    "message": "Use an inner loop that visits each unordered pair once."
+                  },
+                  {
+                    "message": "Size the direct-address table from the bounded sum range."
+                  }
+                ]
+              },
+              "almost_balanced_bst": {
+                "title": "Build and Rebalance an Almost-Balanced BST",
+                "prompt": "Open `structures/bst.c`. Implement `bst_build_balanced` from a sorted array and `bst_rebalance` for an arbitrary BST. The required approach is linear: inorder traversal writes the keys in sorted order, and midpoint recursion rebuilds a tree whose left and right subtree sizes differ by at most one at every node.",
+                "hint": "Use half-open array ranges. Choose one middle key as the root, then recurse on the left and right ranges.",
+                "help": {
+                  "concept": "Inorder traversal visits each node once, and midpoint construction creates each replacement node once. The two passes are `Θ(n)`, and every recursive range splits into sizes that differ by at most one.",
+                  "hint_1": "Run the supplied test harness after each focused change.",
+                  "hint_2": "Keep the implementation general; do not print the expected output directly."
+                },
+                "starterCode": "#include <stdio.h>\n#include \"structures/bst.h\"\n\nint main(void) {\n    Node *root = NULL;\n    for (int value = 1; value <= 7; value++) {\n        root = bst_insert(root, value);\n    }\n\n    root = bst_rebalance(root);\n    printf(\"balanced=%s\\n\", bst_is_almost_balanced(root) ? \"yes\" : \"no\");\n    printf(\"inorder=\");\n    bst_print_inorder(root);\n    printf(\"\\nheight=%d\\n\", bst_height(root));\n\n    bst_free(root);\n    return 0;\n}\n",
+                "solutionCode": "#include <stdio.h>\n#include \"structures/bst.h\"\n\nint main(void) {\n    Node *root = NULL;\n    for (int value = 1; value <= 7; value++) {\n        root = bst_insert(root, value);\n    }\n\n    root = bst_rebalance(root);\n    printf(\"balanced=%s\\n\", bst_is_almost_balanced(root) ? \"yes\" : \"no\");\n    printf(\"inorder=\");\n    bst_print_inorder(root);\n    printf(\"\\nheight=%d\\n\", bst_height(root));\n\n    bst_free(root);\n    return 0;\n}\n",
+                "starterFiles": {
+                  "main_c": {
+                    "content": "#include <stdio.h>\n#include \"structures/bst.h\"\n\nint main(void) {\n    Node *root = NULL;\n    for (int value = 1; value <= 7; value++) {\n        root = bst_insert(root, value);\n    }\n\n    root = bst_rebalance(root);\n    printf(\"balanced=%s\\n\", bst_is_almost_balanced(root) ? \"yes\" : \"no\");\n    printf(\"inorder=\");\n    bst_print_inorder(root);\n    printf(\"\\nheight=%d\\n\", bst_height(root));\n\n    bst_free(root);\n    return 0;\n}\n"
+                  },
+                  "structures_bst_c": {
+                    "content": "#include \"bst.h\"\n#include <stdio.h>\n#include <stdlib.h>\n\nstatic Node *new_node(int key, Node *parent) {\n    Node *node = malloc(sizeof(*node));\n    if (node == NULL) return NULL;\n    node->key = key;\n    node->left = NULL;\n    node->right = NULL;\n    node->parent = parent;\n    return node;\n}\n\nNode *bst_insert(Node *root, int key) {\n    if (root == NULL) return new_node(key, NULL);\n    Node *current = root;\n    for (;;) {\n        if (key < current->key) {\n            if (current->left == NULL) { current->left = new_node(key, current); break; }\n            current = current->left;\n        } else {\n            if (current->right == NULL) { current->right = new_node(key, current); break; }\n            current = current->right;\n        }\n    }\n    return root;\n}\n\nNode *bst_build_balanced(const int *sorted, size_t n) {\n    (void)sorted;\n    (void)n;\n    /* TODO: choose a middle element and recursively build equal-size halves. */\n    return NULL;\n}\n\nNode *bst_rebalance(Node *root) {\n    /* TODO: collect inorder keys, free the old tree, and rebuild from the sorted keys. */\n    return root;\n}\n\nstatic size_t check_balance(const Node *root, bool *ok) {\n    if (root == NULL) return 0;\n    size_t left = check_balance(root->left, ok);\n    size_t right = check_balance(root->right, ok);\n    if (left > right + 1 || right > left + 1) *ok = false;\n    return left + right + 1;\n}\n\nbool bst_is_almost_balanced(const Node *root) { bool ok = true; check_balance(root, &ok); return ok; }\nint bst_height(const Node *root) { if (root == NULL) return 0; int l=bst_height(root->left), r=bst_height(root->right); return 1 + (l > r ? l : r); }\nvoid bst_print_inorder(const Node *root) { if (root == NULL) return; bst_print_inorder(root->left); printf(\"%d \", root->key); bst_print_inorder(root->right); }\nvoid bst_free(Node *root) { if (root == NULL) return; bst_free(root->left); bst_free(root->right); free(root); }\n"
+                  },
+                  "structures_bst_h": {
+                    "content": "#ifndef BST_H\n#define BST_H\n\n#include <stdbool.h>\n#include <stddef.h>\n\ntypedef struct Node {\n    int key;\n    struct Node *left;\n    struct Node *right;\n    struct Node *parent;\n} Node;\n\nNode *bst_insert(Node *root, int key);\nNode *bst_build_balanced(const int *sorted, size_t n);\nNode *bst_rebalance(Node *root);\nbool bst_is_almost_balanced(const Node *root);\nint bst_height(const Node *root);\nvoid bst_print_inorder(const Node *root);\nvoid bst_free(Node *root);\n\n#endif\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_c": {
+                    "content": "#include <stdio.h>\n#include \"structures/bst.h\"\n\nint main(void) {\n    Node *root = NULL;\n    for (int value = 1; value <= 7; value++) {\n        root = bst_insert(root, value);\n    }\n\n    root = bst_rebalance(root);\n    printf(\"balanced=%s\\n\", bst_is_almost_balanced(root) ? \"yes\" : \"no\");\n    printf(\"inorder=\");\n    bst_print_inorder(root);\n    printf(\"\\nheight=%d\\n\", bst_height(root));\n\n    bst_free(root);\n    return 0;\n}\n"
+                  },
+                  "structures_bst_c": {
+                    "content": "#include \"bst.h\"\n#include <stdio.h>\n#include <stdlib.h>\n\nstatic Node *new_node(int key, Node *parent) {\n    Node *node = malloc(sizeof(*node));\n    if (node == NULL) return NULL;\n    node->key = key;\n    node->left = NULL;\n    node->right = NULL;\n    node->parent = parent;\n    return node;\n}\n\nNode *bst_insert(Node *root, int key) {\n    if (root == NULL) return new_node(key, NULL);\n    Node *current = root;\n    for (;;) {\n        if (key < current->key) {\n            if (current->left == NULL) { current->left = new_node(key, current); break; }\n            current = current->left;\n        } else {\n            if (current->right == NULL) { current->right = new_node(key, current); break; }\n            current = current->right;\n        }\n    }\n    return root;\n}\n\nstatic Node *build_range(const int *sorted, size_t begin, size_t end, Node *parent) {\n    if (begin >= end) return NULL;\n    const size_t middle = begin + (end - begin) / 2;\n    Node *root = new_node(sorted[middle], parent);\n    if (root == NULL) return NULL;\n    root->left = build_range(sorted, begin, middle, root);\n    root->right = build_range(sorted, middle + 1, end, root);\n    return root;\n}\n\nNode *bst_build_balanced(const int *sorted, size_t n) {\n    return build_range(sorted, 0, n, NULL);\n}\n\nstatic size_t bst_count(const Node *root) {\n    return root == NULL ? 0 : 1 + bst_count(root->left) + bst_count(root->right);\n}\n\nstatic void inorder_fill(const Node *root, int *values, size_t *next) {\n    if (root == NULL) return;\n    inorder_fill(root->left, values, next);\n    values[(*next)++] = root->key;\n    inorder_fill(root->right, values, next);\n}\n\nNode *bst_rebalance(Node *root) {\n    const size_t n = bst_count(root);\n    if (n < 2) return root;\n\n    int *values = malloc(n * sizeof(*values));\n    if (values == NULL) return root;\n\n    size_t next = 0;\n    inorder_fill(root, values, &next);\n    bst_free(root);\n    Node *balanced = bst_build_balanced(values, n);\n    free(values);\n    return balanced;\n}\n\nstatic size_t check_balance(const Node *root, bool *ok) {\n    if (root == NULL) return 0;\n    size_t left = check_balance(root->left, ok);\n    size_t right = check_balance(root->right, ok);\n    if (left > right + 1 || right > left + 1) *ok = false;\n    return left + right + 1;\n}\n\nbool bst_is_almost_balanced(const Node *root) { bool ok = true; check_balance(root, &ok); return ok; }\nint bst_height(const Node *root) { if (root == NULL) return 0; int l=bst_height(root->left), r=bst_height(root->right); return 1 + (l > r ? l : r); }\nvoid bst_print_inorder(const Node *root) { if (root == NULL) return; bst_print_inorder(root->left); printf(\"%d \", root->key); bst_print_inorder(root->right); }\nvoid bst_free(Node *root) { if (root == NULL) return; bst_free(root->left); bst_free(root->right); free(root); }\n"
+                  },
+                  "structures_bst_h": {
+                    "content": "#ifndef BST_H\n#define BST_H\n\n#include <stdbool.h>\n#include <stddef.h>\n\ntypedef struct Node {\n    int key;\n    struct Node *left;\n    struct Node *right;\n    struct Node *parent;\n} Node;\n\nNode *bst_insert(Node *root, int key);\nNode *bst_build_balanced(const int *sorted, size_t n);\nNode *bst_rebalance(Node *root);\nbool bst_is_almost_balanced(const Node *root);\nint bst_height(const Node *root);\nvoid bst_print_inorder(const Node *root);\nvoid bst_free(Node *root);\n\n#endif\n"
+                  }
+                },
+                "checks": [
+                  {
+                    "message": "Choose a midpoint from each sorted subrange."
+                  },
+                  {
+                    "message": "Collect the original BST keys with an inorder traversal."
+                  },
+                  {
+                    "message": "Rebuild the tree from the sorted key array."
+                  }
+                ]
+              },
+              "priority_queue_stacks": {
+                "title": "Implement a Priority Queue with Stacks",
+                "prompt": "Open `structures/priority_queue.c`. Keep `insert` as one stack push. Implement `extract_min` using only `push`, `pop`, and `isEmpty` behavior: pop every priority, retain exactly one smallest value, move all other values through the scratch stack, and restore them to the data stack. Duplicate minimum priorities must be removed one at a time.",
+                "hint": "Initialize the minimum from the first pop. When a smaller value appears, move the old minimum into the scratch stack.",
+                "help": {
+                  "concept": "This design makes `insert` `O(1)`. `extract_min` performs a scan and a restore pass, both linear in the number of stored priorities, so it is `O(n)` and uses `O(n)` auxiliary stack capacity.",
+                  "hint_1": "Run the supplied test harness after each focused change.",
+                  "hint_2": "Keep the implementation general; do not print the expected output directly."
+                },
+                "starterCode": "#include <stdio.h>\n#include \"structures/priority_queue.h\"\n\nint main(void) {\n    PriorityQueue queue;\n    pq_init(&queue);\n    const int values[] = {4, 1, 3, 1, 2};\n    for (size_t i = 0; i < sizeof(values) / sizeof(values[0]); i++) {\n        pq_insert(&queue, values[i]);\n    }\n\n    printf(\"order=\");\n    int value;\n    while (pq_extract_min(&queue, &value)) {\n        printf(\"%d \", value);\n    }\n    printf(\"\\ninsert=O(1)\\nextract=O(n)\\n\");\n    return 0;\n}\n",
+                "solutionCode": "#include <stdio.h>\n#include \"structures/priority_queue.h\"\n\nint main(void) {\n    PriorityQueue queue;\n    pq_init(&queue);\n    const int values[] = {4, 1, 3, 1, 2};\n    for (size_t i = 0; i < sizeof(values) / sizeof(values[0]); i++) {\n        pq_insert(&queue, values[i]);\n    }\n\n    printf(\"order=\");\n    int value;\n    while (pq_extract_min(&queue, &value)) {\n        printf(\"%d \", value);\n    }\n    printf(\"\\ninsert=O(1)\\nextract=O(n)\\n\");\n    return 0;\n}\n",
+                "starterFiles": {
+                  "main_c": {
+                    "content": "#include <stdio.h>\n#include \"structures/priority_queue.h\"\n\nint main(void) {\n    PriorityQueue queue;\n    pq_init(&queue);\n    const int values[] = {4, 1, 3, 1, 2};\n    for (size_t i = 0; i < sizeof(values) / sizeof(values[0]); i++) {\n        pq_insert(&queue, values[i]);\n    }\n\n    printf(\"order=\");\n    int value;\n    while (pq_extract_min(&queue, &value)) {\n        printf(\"%d \", value);\n    }\n    printf(\"\\ninsert=O(1)\\nextract=O(n)\\n\");\n    return 0;\n}\n"
+                  },
+                  "structures_priority_queue_c": {
+                    "content": "#include \"priority_queue.h\"\n\nvoid pq_init(PriorityQueue *queue) { stack_init(&queue->data); stack_init(&queue->scratch); }\nbool pq_insert(PriorityQueue *queue, int priority) { return stack_push(&queue->data, priority); }\n\nbool pq_extract_min(PriorityQueue *queue, int *priority) {\n    (void)queue;\n    (void)priority;\n    /* TODO: pop through data, keep one minimum aside, then restore all other values. */\n    return false;\n}\n"
+                  },
+                  "structures_priority_queue_h": {
+                    "content": "#ifndef PRIORITY_QUEUE_H\n#define PRIORITY_QUEUE_H\n\n#include <stdbool.h>\n#include \"stack.h\"\n\ntypedef struct { Stack data; Stack scratch; } PriorityQueue;\nvoid pq_init(PriorityQueue *queue);\nbool pq_insert(PriorityQueue *queue, int priority);\nbool pq_extract_min(PriorityQueue *queue, int *priority);\n\n#endif\n"
+                  },
+                  "structures_stack_c": {
+                    "content": "#include \"stack.h\"\n\nvoid stack_init(Stack *stack) { stack->size = 0; }\nbool stack_push(Stack *stack, int value) { if (stack->size == STACK_CAPACITY) return false; stack->values[stack->size++] = value; return true; }\nbool stack_pop(Stack *stack, int *value) { if (stack->size == 0) return false; *value = stack->values[--stack->size]; return true; }\nbool stack_is_empty(const Stack *stack) { return stack->size == 0; }\n"
+                  },
+                  "structures_stack_h": {
+                    "content": "#ifndef STACK_H\n#define STACK_H\n\n#include <stdbool.h>\n#include <stddef.h>\n\n#define STACK_CAPACITY 64\n\ntypedef struct { int values[STACK_CAPACITY]; size_t size; } Stack;\nvoid stack_init(Stack *stack);\nbool stack_push(Stack *stack, int value);\nbool stack_pop(Stack *stack, int *value);\nbool stack_is_empty(const Stack *stack);\n\n#endif\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_c": {
+                    "content": "#include <stdio.h>\n#include \"structures/priority_queue.h\"\n\nint main(void) {\n    PriorityQueue queue;\n    pq_init(&queue);\n    const int values[] = {4, 1, 3, 1, 2};\n    for (size_t i = 0; i < sizeof(values) / sizeof(values[0]); i++) {\n        pq_insert(&queue, values[i]);\n    }\n\n    printf(\"order=\");\n    int value;\n    while (pq_extract_min(&queue, &value)) {\n        printf(\"%d \", value);\n    }\n    printf(\"\\ninsert=O(1)\\nextract=O(n)\\n\");\n    return 0;\n}\n"
+                  },
+                  "structures_priority_queue_c": {
+                    "content": "#include \"priority_queue.h\"\n\nvoid pq_init(PriorityQueue *queue) { stack_init(&queue->data); stack_init(&queue->scratch); }\nbool pq_insert(PriorityQueue *queue, int priority) { return stack_push(&queue->data, priority); }\n\nbool pq_extract_min(PriorityQueue *queue, int *priority) {\n    if (stack_is_empty(&queue->data)) return false;\n\n    int minimum;\n    stack_pop(&queue->data, &minimum);\n\n    int current;\n    while (stack_pop(&queue->data, &current)) {\n        if (current < minimum) {\n            stack_push(&queue->scratch, minimum);\n            minimum = current;\n        } else {\n            stack_push(&queue->scratch, current);\n        }\n    }\n\n    while (stack_pop(&queue->scratch, &current)) {\n        stack_push(&queue->data, current);\n    }\n\n    *priority = minimum;\n    return true;\n}\n"
+                  },
+                  "structures_priority_queue_h": {
+                    "content": "#ifndef PRIORITY_QUEUE_H\n#define PRIORITY_QUEUE_H\n\n#include <stdbool.h>\n#include \"stack.h\"\n\ntypedef struct { Stack data; Stack scratch; } PriorityQueue;\nvoid pq_init(PriorityQueue *queue);\nbool pq_insert(PriorityQueue *queue, int priority);\nbool pq_extract_min(PriorityQueue *queue, int *priority);\n\n#endif\n"
+                  },
+                  "structures_stack_c": {
+                    "content": "#include \"stack.h\"\n\nvoid stack_init(Stack *stack) { stack->size = 0; }\nbool stack_push(Stack *stack, int value) { if (stack->size == STACK_CAPACITY) return false; stack->values[stack->size++] = value; return true; }\nbool stack_pop(Stack *stack, int *value) { if (stack->size == 0) return false; *value = stack->values[--stack->size]; return true; }\nbool stack_is_empty(const Stack *stack) { return stack->size == 0; }\n"
+                  },
+                  "structures_stack_h": {
+                    "content": "#ifndef STACK_H\n#define STACK_H\n\n#include <stdbool.h>\n#include <stddef.h>\n\n#define STACK_CAPACITY 64\n\ntypedef struct { int values[STACK_CAPACITY]; size_t size; } Stack;\nvoid stack_init(Stack *stack);\nbool stack_push(Stack *stack, int value);\nbool stack_pop(Stack *stack, int *value);\nbool stack_is_empty(const Stack *stack);\n\n#endif\n"
+                  }
+                },
+                "checks": [
+                  {
+                    "message": "Scan the data stack using only pop operations."
+                  },
+                  {
+                    "message": "Use the scratch stack to preserve every nonremoved priority."
+                  },
+                  {
+                    "message": "Return exactly one minimum priority."
+                  }
+                ]
+              },
+              "pointer_heap_insert": {
+                "title": "Insert into a Pointer-Based Heap in O(log n)",
+                "prompt": "Open `structures/heap.c`. Implement `heap_insert` without scanning the tree. The next node occupies conceptual array index `n + 1`. Read that index in binary: after the leading `1`, each remaining bit selects left (`0`) or right (`1`). Traverse all path bits except the final attachment bit, link the new node with its parent, then upheap by swapping keys.",
+                "hint": "For index `8`, binary `1000` means root → left → left, then attach as the left child.",
+                "help": {
+                  "concept": "The complete-tree height is `Θ(log n)`. Decoding the index path takes one pointer step per tree level, and upheap also moves at most one level at a time, so insertion is `Θ(log n)`.",
+                  "hint_1": "Run the supplied test harness after each focused change.",
+                  "hint_2": "Keep the implementation general; do not print the expected output directly."
+                },
+                "starterCode": "#include <stdio.h>\n#include \"structures/heap.h\"\n\nint main(void) {\n    const int initial[] = {10, 20, 15, 30, 40, 50, 60};\n    HeapNode *root = heap_from_level_order(initial, 7);\n    root = heap_insert(root, 7, 5);\n\n    printf(\"level=\");\n    heap_print_level_order(root);\n    printf(\"\\nparent-links=%s\\n\", heap_parent_links_valid(root, NULL) ? \"yes\" : \"no\");\n\n    heap_free(root);\n    return 0;\n}\n",
+                "solutionCode": "#include <stdio.h>\n#include \"structures/heap.h\"\n\nint main(void) {\n    const int initial[] = {10, 20, 15, 30, 40, 50, 60};\n    HeapNode *root = heap_from_level_order(initial, 7);\n    root = heap_insert(root, 7, 5);\n\n    printf(\"level=\");\n    heap_print_level_order(root);\n    printf(\"\\nparent-links=%s\\n\", heap_parent_links_valid(root, NULL) ? \"yes\" : \"no\");\n\n    heap_free(root);\n    return 0;\n}\n",
+                "starterFiles": {
+                  "main_c": {
+                    "content": "#include <stdio.h>\n#include \"structures/heap.h\"\n\nint main(void) {\n    const int initial[] = {10, 20, 15, 30, 40, 50, 60};\n    HeapNode *root = heap_from_level_order(initial, 7);\n    root = heap_insert(root, 7, 5);\n\n    printf(\"level=\");\n    heap_print_level_order(root);\n    printf(\"\\nparent-links=%s\\n\", heap_parent_links_valid(root, NULL) ? \"yes\" : \"no\");\n\n    heap_free(root);\n    return 0;\n}\n"
+                  },
+                  "structures_heap_c": {
+                    "content": "#include \"heap.h\"\n#include <stdio.h>\n#include <stdlib.h>\n\nstatic HeapNode *new_node(int key, HeapNode *parent) {\n    HeapNode *node = malloc(sizeof(*node));\n    if (node == NULL) return NULL;\n    node->key = key; node->left = NULL; node->right = NULL; node->parent = parent;\n    return node;\n}\n\nHeapNode *heap_insert(HeapNode *root, size_t n, int value) {\n    (void)n;\n    (void)value;\n    /* TODO: follow the binary path for index n + 1, attach the node, and upheap. */\n    return root;\n}\n\nHeapNode *heap_from_level_order(const int *values, size_t n) {\n    if (n == 0) return NULL;\n    HeapNode **nodes = calloc(n, sizeof(*nodes));\n    if (nodes == NULL) return NULL;\n    for (size_t i = 0; i < n; i++) nodes[i] = new_node(values[i], NULL);\n    for (size_t i = 0; i < n; i++) {\n        size_t left = 2 * i + 1, right = left + 1;\n        if (left < n) { nodes[i]->left = nodes[left]; nodes[left]->parent = nodes[i]; }\n        if (right < n) { nodes[i]->right = nodes[right]; nodes[right]->parent = nodes[i]; }\n    }\n    HeapNode *root = nodes[0]; free(nodes); return root;\n}\n\nvoid heap_print_level_order(const HeapNode *root) {\n    if (root == NULL) return;\n    const HeapNode *queue[128]; size_t first=0, count=0; queue[count++]=root;\n    while (first < count) { const HeapNode *node=queue[first++]; printf(\"%d \", node->key); if(node->left) queue[count++]=node->left; if(node->right) queue[count++]=node->right; }\n}\nbool heap_parent_links_valid(const HeapNode *root, const HeapNode *parent) { return root == NULL || (root->parent == parent && heap_parent_links_valid(root->left, root) && heap_parent_links_valid(root->right, root)); }\nvoid heap_free(HeapNode *root) { if(root == NULL) return; heap_free(root->left); heap_free(root->right); free(root); }\n"
+                  },
+                  "structures_heap_h": {
+                    "content": "#ifndef HEAP_H\n#define HEAP_H\n\n#include <stdbool.h>\n#include <stddef.h>\n\ntypedef struct HeapNode {\n    int key;\n    struct HeapNode *left;\n    struct HeapNode *right;\n    struct HeapNode *parent;\n} HeapNode;\n\nHeapNode *heap_from_level_order(const int *values, size_t n);\nHeapNode *heap_insert(HeapNode *root, size_t n, int value);\nvoid heap_print_level_order(const HeapNode *root);\nbool heap_parent_links_valid(const HeapNode *root, const HeapNode *parent);\nvoid heap_free(HeapNode *root);\n\n#endif\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_c": {
+                    "content": "#include <stdio.h>\n#include \"structures/heap.h\"\n\nint main(void) {\n    const int initial[] = {10, 20, 15, 30, 40, 50, 60};\n    HeapNode *root = heap_from_level_order(initial, 7);\n    root = heap_insert(root, 7, 5);\n\n    printf(\"level=\");\n    heap_print_level_order(root);\n    printf(\"\\nparent-links=%s\\n\", heap_parent_links_valid(root, NULL) ? \"yes\" : \"no\");\n\n    heap_free(root);\n    return 0;\n}\n"
+                  },
+                  "structures_heap_c": {
+                    "content": "#include \"heap.h\"\n#include <stdio.h>\n#include <stdlib.h>\n\nstatic HeapNode *new_node(int key, HeapNode *parent) {\n    HeapNode *node = malloc(sizeof(*node));\n    if (node == NULL) return NULL;\n    node->key = key; node->left = NULL; node->right = NULL; node->parent = parent;\n    return node;\n}\n\nHeapNode *heap_insert(HeapNode *root, size_t n, int value) {\n    if (root == NULL) return new_node(value, NULL);\n\n    const size_t index = n + 1;\n    size_t highest_bit = 1;\n    while ((highest_bit << 1) <= index) highest_bit <<= 1;\n\n    HeapNode *parent = root;\n    for (size_t bit = highest_bit >> 1; bit > 1; bit >>= 1) {\n        parent = (index & bit) ? parent->right : parent->left;\n    }\n\n    HeapNode *node = new_node(value, parent);\n    if (node == NULL) return root;\n    if (index & 1) parent->right = node; else parent->left = node;\n\n    while (node->parent != NULL && node->key < node->parent->key) {\n        int temp = node->key;\n        node->key = node->parent->key;\n        node->parent->key = temp;\n        node = node->parent;\n    }\n\n    return root;\n}\n\nHeapNode *heap_from_level_order(const int *values, size_t n) {\n    if (n == 0) return NULL;\n    HeapNode **nodes = calloc(n, sizeof(*nodes));\n    if (nodes == NULL) return NULL;\n    for (size_t i = 0; i < n; i++) nodes[i] = new_node(values[i], NULL);\n    for (size_t i = 0; i < n; i++) {\n        size_t left = 2 * i + 1, right = left + 1;\n        if (left < n) { nodes[i]->left = nodes[left]; nodes[left]->parent = nodes[i]; }\n        if (right < n) { nodes[i]->right = nodes[right]; nodes[right]->parent = nodes[i]; }\n    }\n    HeapNode *root = nodes[0]; free(nodes); return root;\n}\n\nvoid heap_print_level_order(const HeapNode *root) {\n    if (root == NULL) return;\n    const HeapNode *queue[128]; size_t first=0, count=0; queue[count++]=root;\n    while (first < count) { const HeapNode *node=queue[first++]; printf(\"%d \", node->key); if(node->left) queue[count++]=node->left; if(node->right) queue[count++]=node->right; }\n}\nbool heap_parent_links_valid(const HeapNode *root, const HeapNode *parent) { return root == NULL || (root->parent == parent && heap_parent_links_valid(root->left, root) && heap_parent_links_valid(root->right, root)); }\nvoid heap_free(HeapNode *root) { if(root == NULL) return; heap_free(root->left); heap_free(root->right); free(root); }\n"
+                  },
+                  "structures_heap_h": {
+                    "content": "#ifndef HEAP_H\n#define HEAP_H\n\n#include <stdbool.h>\n#include <stddef.h>\n\ntypedef struct HeapNode {\n    int key;\n    struct HeapNode *left;\n    struct HeapNode *right;\n    struct HeapNode *parent;\n} HeapNode;\n\nHeapNode *heap_from_level_order(const int *values, size_t n);\nHeapNode *heap_insert(HeapNode *root, size_t n, int value);\nvoid heap_print_level_order(const HeapNode *root);\nbool heap_parent_links_valid(const HeapNode *root, const HeapNode *parent);\nvoid heap_free(HeapNode *root);\n\n#endif\n"
+                  }
+                },
+                "checks": [
+                  {
+                    "message": "Use the conceptual next array index."
+                  },
+                  {
+                    "message": "Find the leading binary bit before traversing the path."
+                  },
+                  {
+                    "message": "Maintain parent links and use them during upheap."
+                  }
+                ]
+              }
+            }
+          },
+          "quiz": {
+            "recurrence": {
+              "title": "Which recurrence matches fooRec when printing a completed list is O(1)?",
+              "prompt": "Which recurrence matches fooRec when printing a completed list is O(1)?",
+              "hint": "Trace the relevant animation and identify the operation that dominates the runtime.",
+              "help": {
+                "concept": "Every non-base call performs constant local work and makes two calls with one fewer undecided position.",
+                "hint_1": "Separate correctness from runtime: first identify what the algorithm must do.",
+                "hint_2": "Then count the loops, recursion branches, stack transfers, or pointer levels involved."
+              },
+              "options": {
+                "a": "T(n) = T(n - 1) + Θ(1)",
+                "b": "T(n) = 2T(n - 1) + Θ(1)",
+                "c": "T(n) = T(n / 2) + Θ(n)",
+                "d": "T(n) = 2T(n / 2) + Θ(n)"
+              }
+            },
+            "tight-bound": {
+              "title": "What tight bound follows after unrolling the recurrence?",
+              "prompt": "What tight bound follows after unrolling the recurrence?",
+              "hint": "Trace the relevant animation and identify the operation that dominates the runtime.",
+              "help": {
+                "concept": "The recursion tree doubles at every level and has 2^n leaves.",
+                "hint_1": "Separate correctness from runtime: first identify what the algorithm must do.",
+                "hint_2": "Then count the loops, recursion branches, stack transfers, or pointer levels involved."
+              },
+              "options": {
+                "a": "Θ(log n)",
+                "b": "Θ(n)",
+                "c": "Θ(n²)",
+                "d": "Θ(2^n)"
+              }
+            },
+            "same-bst": {
+              "title": "Which two insertion orders generate the same BST?",
+              "prompt": "Which two insertion orders generate the same BST?",
+              "hint": "Trace the relevant animation and identify the operation that dominates the runtime.",
+              "help": {
+                "concept": "The root must remain 4, and the relative insertion order must preserve the same left and right ancestor relationships.",
+                "hint_1": "Separate correctness from runtime: first identify what the algorithm must do.",
+                "hint_2": "Then count the loops, recursion branches, stack transfers, or pointer levels involved."
+              },
+              "options": {
+                "a": "(4, 2, 6, 1, 3, 5, 7) and (4, 6, 2, 5, 7, 1, 3)",
+                "b": "(4, 2, 6, 1, 3, 5, 7) and (2, 1, 3, 4, 5, 6, 7)",
+                "c": "(4, 2, 6, 1, 3, 5, 7) and (7, 6, 5, 4, 3, 2, 1)",
+                "d": "(4, 2, 6, 1, 3, 5, 7) and (4, 3, 2, 1, 5, 6, 7)"
+              }
+            },
+            "pair-sum-table": {
+              "title": "Why can the O(n²) pair-sum algorithm use a direct-address table?",
+              "prompt": "Why can the O(n²) pair-sum algorithm use a direct-address table?",
+              "hint": "Trace the relevant animation and identify the operation that dominates the runtime.",
+              "help": {
+                "concept": "The bounded value range turns each possible sum into a valid table index, so no hash function is needed.",
+                "hint_1": "Separate correctness from runtime: first identify what the algorithm must do.",
+                "hint_2": "Then count the loops, recursion branches, stack transfers, or pointer levels involved."
+              },
+              "options": {
+                "a": "The input is already sorted.",
+                "b": "Every pair has a different sum.",
+                "c": "Each value is positive and smaller than k, so every sum is in a bounded range below 2k.",
+                "d": "C arrays automatically resolve hash collisions."
+              }
+            },
+            "operation-costs": {
+              "title": "Which runtime combination matches the lesson designs?",
+              "prompt": "Which runtime combination matches the lesson designs?",
+              "hint": "Trace the relevant animation and identify the operation that dominates the runtime.",
+              "help": {
+                "concept": "The stack design defers work to extraction, while the heap follows one root-to-leaf path and then upheaps along that path.",
+                "hint_1": "Separate correctness from runtime: first identify what the algorithm must do.",
+                "hint_2": "Then count the loops, recursion branches, stack transfers, or pointer levels involved."
+              },
+              "options": {
+                "a": "stack-PQ insert O(1), extractMin O(n), pointer-heap insert Θ(log n)",
+                "b": "stack-PQ insert O(n), extractMin O(1), pointer-heap insert Θ(n)",
+                "c": "stack-PQ insert O(log n), extractMin O(log n), pointer-heap insert Θ(1)",
+                "d": "all three operations are Θ(n²)"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "c-data-structures": {
+      "c-data-structures-module-1-algorithm-design-lab": {
+        "written-assignment-2-lab": {
+          "introduction": {
+            "title": "Read → Watch → Build → Explain",
+            "bodyMarkdown": "This lesson follows the five questions in the included **CS260 Written Assignment 2**. Each question now uses the same four-part learning sequence:\n\n1. **Read the original problem.** A question sketch states the exact task, constraints, and required runtime.\n2. **Watch the reasoning.** The animation stays tied to that question and explains one decision at a time.\n3. **Build the matching C solution.** The next lesson opens the full IDE with starter files, a focused TODO, tests, and a revealable official solution.\n4. **Explain correctness and runtime.** Passing the program is evidence, but you should still be able to state why the algorithm works and why it meets the required bound.\n\nDo the questions in order. The question, animation, and C lab for one problem are kept together before the next problem begins."
+          },
+          "recursion-animation": {
+            "title": "Question 1: From the Code to Θ(2^n)",
+            "context": "**Question 1, parts (a)-(c):** derive a recurrence for `foo`, solve it by substitution, and state the tight bound. Each frame below completes one piece of that written argument.",
+            "steps": [
+              {
+                "title": "Step 1: Name the remaining problem size",
+                "body": "At a call `fooRec(L, n, i)`, let `m = n - i`. This is the number of Boolean positions that still need a choice. The original call starts with `m = n`."
+              },
+              {
+                "title": "Step 2: Identify the base case",
+                "body": "When `i == n`, no positions remain, so `m = 0`. The function prints once and returns. The assignment says printing is constant time, so `T(0) = c₀`."
+              },
+              {
+                "title": "Step 3: Write the recurrence",
+                "body": "A recurrence is an equation for a runtime in terms of smaller inputs. When `m > 0`, this call does constant local work and makes **two** calls with `m - 1` positions remaining, so `T(m) = 2T(m - 1) + c`."
+              },
+              {
+                "title": "Step 4: Check the branching with a small example",
+                "body": "For `n = 2`, the leaves are `TT`, `TF`, `FT`, and `FF`. That is `2² = 4` leaves. In general, doubling for `n` levels produces `2^n` leaves."
+              },
+              {
+                "title": "Step 5: Substitute repeatedly",
+                "body": "Substitution means replacing the smaller runtime repeatedly. After `k` replacements, the recursive term is `2^k T(m-k)`, and the local work is `c(1 + 2 + ... + 2^(k-1))`."
+              },
+              {
+                "title": "Step 6: Stop at the base case and simplify",
+                "body": "Set `k = m`, use `1 + 2 + ... + 2^(m-1) = 2^m - 1`, and apply the constant base case. A tight `Θ` bound records the matching growth rate, so `foo(n)` is `Θ(2^n)`."
+              }
+            ]
+          },
+          "pair-sums-animation": {
+            "title": "Question 2: Find a Repeated Sum in O(n²)",
+            "context": "**Question 2:** determine whether two disjoint pairs have the same sum, using O(n²) time. The animation uses `L = [1, 2, 3, 4]` to show the exact table invariant.",
+            "steps": [
+              {
+                "title": "Step 1: Translate the goal into one example",
+                "body": "We need four distinct values whose pair sums match. Here, `(1, 4)` and `(2, 3)` are the target because both sums equal `5`."
+              },
+              {
+                "title": "Step 2: Generate each unordered pair once",
+                "body": "Use nested loops with `i < j`. This visits `n(n-1)/2` pairs, which is Θ(n²), and never repeats the same pair in reverse order."
+              },
+              {
+                "title": "Step 3: Use the sum as a direct table index",
+                "body": "Every value is below `k`, so every sum is below `2k`. A table indexed by the sum gives constant-time lookup and avoids a separate hash-collision policy."
+              },
+              {
+                "title": "Step 4: Store the first pair for a sum",
+                "body": "When `(1, 4)` produces `5`, store its two indices in `bucket[5]`. The bucket now remembers a witness for that sum."
+              },
+              {
+                "title": "Step 5: Check the later pair is disjoint",
+                "body": "When `(2, 3)` also produces `5`, compare its indices with the stored pair. The four indices are different, so the required two pairs exist."
+              },
+              {
+                "title": "Step 6: State the runtime",
+                "body": "There are Θ(n²) generated pairs and O(1) work per pair. The total runtime is Θ(n²), which satisfies the required O(n²) bound."
+              }
+            ]
+          },
+          "bst-animation": {
+            "title": "Question 3: Build and Rebuild an Almost-Balanced BST",
+            "context": "**Question 3:** first recognize that different insertion orders can produce the same BST, then build from a sorted array and rebalance any BST in Θ(n) time.",
+            "steps": [
+              {
+                "title": "Step 1: Preserve ancestor relationships",
+                "body": "Two insertion orders can differ while still choosing the same root and the same root for every subtree. The example sequences both create the same seven-node BST."
+              },
+              {
+                "title": "Step 2: Read “almost balanced” correctly",
+                "body": "At every node, compare the **number of nodes** in the left and right subtrees. Their counts may differ by at most one."
+              },
+              {
+                "title": "Step 3: Start with sorted keys",
+                "body": "For a sorted array, every key before the midpoint is smaller and belongs in the left subtree; every key after it belongs in the right subtree."
+              },
+              {
+                "title": "Step 4: Choose the midpoint as the root",
+                "body": "The midpoint splits the range into two pieces whose sizes differ by at most one. That establishes the required balance condition at the current node."
+              },
+              {
+                "title": "Step 5: Repeat on each half",
+                "body": "Apply the same midpoint rule recursively. Each key becomes exactly one node, and each array position is processed once."
+              },
+              {
+                "title": "Step 6: Convert an arbitrary BST to sorted keys",
+                "body": "An inorder traversal visits left subtree, node, then right subtree. For a BST, that writes all `n` keys in sorted order in Θ(n) time."
+              },
+              {
+                "title": "Step 7: Rebuild and add the costs",
+                "body": "Build the midpoint tree from the sorted keys in Θ(n). Traversal Θ(n) plus rebuilding Θ(n) is still Θ(n), and the resulting tree is almost balanced."
+              }
+            ]
+          },
+          "priority-queue-animation": {
+            "title": "Question 4: Implement extractMin with Only Stacks",
+            "context": "**Question 4:** implement priority-queue operations using only `push`, `pop`, and `isEmpty`. This lesson chooses O(1) insertion and O(n) extraction.",
+            "steps": [
+              {
+                "title": "Step 1: Respect the stack interface",
+                "body": "Priority-queue code may inspect only the top element by popping it. Reading `stack.items[i]` directly would violate the assignment."
+              },
+              {
+                "title": "Step 2: Choose where to pay the linear cost",
+                "body": "This design makes `insert` cheap: one push onto the data stack. The full scan is delayed until `extractMin`."
+              },
+              {
+                "title": "Step 3: Pop every priority and hold one minimum",
+                "body": "Scan the data stack. Keep the smallest value seen so far in a variable and move every other value to the scratch stack."
+              },
+              {
+                "title": "Step 4: Replace the held value only when smaller",
+                "body": "If a new value is strictly smaller, move the old held minimum to scratch and hold the new value instead."
+              },
+              {
+                "title": "Step 5: Preserve duplicate minima",
+                "body": "When a value equals the held minimum, move the equal value to scratch. That removes exactly one minimum and keeps all duplicates beyond the one returned."
+              },
+              {
+                "title": "Step 6: Restore and analyze",
+                "body": "Move the scratch values back to the data stack, then return the held minimum. Each element moves a constant number of times, so extraction is O(n)."
+              }
+            ]
+          },
+          "heap-animation": {
+            "title": "Question 5: Use n + 1 to Find the Linked Heap Position",
+            "context": "**Question 5:** insert `x` into a complete pointer-based heap without a linear scan. The binary representation of `n + 1` gives the root-to-position path.",
+            "steps": [
+              {
+                "title": "Step 1: Keep the conceptual array numbering",
+                "body": "Even though the heap stores pointers, number its complete-tree positions as `1, 2, 3, ...`. This numbering describes the shape without storing an array."
+              },
+              {
+                "title": "Step 2: Compute the new node index",
+                "body": "A heap with `n` nodes fills positions `1` through `n`. The new node must occupy position `n + 1`."
+              },
+              {
+                "title": "Step 3: Convert the index to directions",
+                "body": "Write `n + 1` in binary and ignore the leading `1`. Every remaining `0` means left and every `1` means right."
+              },
+              {
+                "title": "Step 4: Stop at the parent",
+                "body": "Follow all direction bits except the last one. You now stand at the parent of the new position. The final bit selects the left or right child pointer."
+              },
+              {
+                "title": "Step 5: Attach every pointer correctly",
+                "body": "Create the node, set its `parent`, initialize `left` and `right` to null, and assign the matching child pointer in the parent."
+              },
+              {
+                "title": "Step 6: Restore heap order and analyze",
+                "body": "Run the supplied upheap operation by swapping keys toward the root. The pointer path and upheap each follow at most the tree height, so insertion is O(log n)."
+              }
+            ]
+          },
+          "question-1-problem": {
+            "title": "Question 1 — What Runtime Are We Counting?",
+            "bodyMarkdown": "### Original assignment question\n\nConsider this recursive procedure:\n\n```text\nfunction fooRec(L, n, i) {\n    if (i == n) {\n        print(L)    // Assume this takes O(1) time\n        return\n    }\n\n    L[i] = true\n    fooRec(L, n, i + 1)\n    L[i] = false\n    fooRec(L, n, i + 1)\n}\n\nfunction foo(n) {\n    Create empty array L with capacity n   // O(1)\n    fooRec(L, n, 0)\n}\n```\n\nYou must answer three connected parts:\n\n1. **Part (a):** Give a recurrence for the runtime of `foo`.\n2. **Part (b):** Solve the recurrence using substitution.\n3. **Part (c):** State a tight asymptotic bound.\n\n### Concepts in plain English\n\n- A **recurrence** is an equation that describes the work for a problem using the work for a smaller version of the same problem. Here, `T(m)` means the time needed when `m` Boolean positions remain.\n- The **base case** is where recursion stops. Here, no positions remain, so `T(0)` is constant.\n- **Substitution** means replacing the smaller runtime again and again until the base case appears.\n- A **tight bound**, written with `Θ`, gives the actual growth rate up to constant factors. `Θ(2^n)` means the runtime grows proportionally to `2^n`.\n\n### What the question is really asking\n\nDo **not** focus on the Boolean values themselves. Count how much work the function performs. At every unfinished position, the function creates two recursive calls: one for `true` and one for `false`.\n\nUse `m = n - i` for the number of positions still undecided. Then ask:\n\n- What happens when `m = 0`?\n- How many subproblems of size `m - 1` are created?\n- How much extra work happens outside those recursive calls?\n\n### What to watch in the animation\n\nThe animation follows the exact assignment path: **define the input size → find the base case → write the recurrence → substitute → state the tight bound**. The C lab then verifies the predicted number of leaves and total calls."
+          },
+          "question-2-problem": {
+            "title": "Question 2 — What Counts as Two Equal Disjoint Pairs?",
+            "bodyMarkdown": "### Original assignment question\n\nGiven a list `L` of `n` **unique positive integers**, where every value is smaller than `k`, determine whether there are two pairs `(p, q)` and `(r, t)` such that:\n\n- `p`, `q`, `r`, and `t` are all different elements of `L`, and\n- `p + q = r + t`.\n\nThe algorithm must run in **O(n²)** time. Memory usage is not a concern, and you only need to report whether such pairs exist.\n\n### Concepts in plain English\n\n- An **unordered pair** uses two different positions, and `(i, j)` is the same pair as `(j, i)`. Generate it once by requiring `i < j`.\n- Two pairs are **disjoint** when they do not reuse an index.\n- A **direct-address table** is an array where the key itself is the index. Because every sum is below `2k`, the sum can directly select a bucket.\n- A **collision** means two different pairs reach the same sum bucket. In this problem, that repeated sum is exactly the event we want to inspect.\n\n### A concrete example\n\nFor `L = [1, 2, 3, 4]`:\n\n- `1 + 4 = 5`\n- `2 + 3 = 5`\n\nThe two pairs use four different values, so the answer is **yes**.\n\n### What the question is really asking\n\nComparing every pair with every other pair would take O(n⁴). The O(n²) target means: generate each unordered pair once, then process that pair in constant time.\n\nStore the first pair that reaches each sum bucket. When another pair reaches the same bucket, check that its two indices are different from both stored indices.\n\n### What to watch in the animation\n\nWatch one pair enter a sum bucket, then watch a second disjoint pair reach the same bucket. The next C lab implements that exact O(n²) invariant."
+          },
+          "question-3-problem": {
+            "title": "Question 3 — What Does Almost Balanced Mean?",
+            "bodyMarkdown": "### Original assignment question\n\nThis question has three parts about binary search trees (BSTs):\n\n1. Give two different insertion sequences containing the same unique values that create the **same BST**.\n2. Given a **sorted array** of `n` unique integers, build an **almost-balanced BST** in Θ(n) time.\n3. Convert **any BST** with `n` nodes into an almost-balanced BST in Θ(n) time.\n\nAn almost-balanced tree means that, at **every node**, the number of nodes in the left and right subtrees differs by at most one.\n\n### Concepts in plain English\n\n- In a **BST**, every key in a node's left subtree is smaller, and every key in its right subtree is larger.\n- An **inorder traversal** visits left subtree → node → right subtree. On a BST, this produces the keys in sorted order.\n- **Almost balanced** here refers to subtree **node counts**, not merely subtree heights.\n- Choosing the middle key of a sorted range makes the left and right ranges differ in size by at most one.\n\n### A same-tree example for part (a)\n\n- `A  = (4, 2, 6, 1, 3, 5, 7)`\n- `A' = (4, 6, 2, 7, 5, 3, 1)`\n\nBoth choose `4` as the root, `2` as the left-subtree root, and `6` as the right-subtree root, with the same children below them.\n\n### What the executable lab covers\n\nThe C workspace implements parts **(b)** and **(c)**:\n\n1. choose the middle key of a sorted range,\n2. recursively build both halves,\n3. collect an arbitrary BST's keys with inorder traversal,\n4. rebuild from the sorted keys.\n\nThe final quiz checks the insertion-order idea from part **(a)**.\n\n### What to watch in the animation\n\nFollow one midpoint choice at a time, then connect inorder traversal plus rebuilding to the Θ(n) conversion."
+          },
+          "question-4-problem": {
+            "title": "Question 4 — How Can a Priority Queue Use Only Stacks?",
+            "bodyMarkdown": "### Original assignment question\n\nDesign a priority queue using only one or more stacks. The priority queue must support:\n\n- `insert(priority)`\n- `extractMin()` — remove and return the smallest priority\n\nThe stacks allow only:\n\n- `push(x)`\n- `pop()`\n- `isEmpty()`\n\nYou may **not** read an element at an arbitrary stack index. Duplicate priorities must be handled correctly.\n\n### Concepts in plain English\n\n- A **priority queue** removes the item with the best priority; here, the smallest integer leaves first.\n- A **stack** is last-in, first-out. Only its top item is accessible.\n- A **scratch stack** temporarily holds items while the data stack is being scanned.\n- The design may place the linear cost in either operation. This lesson uses O(1) `insert` and O(n) `extractMin`.\n\n### The design used in this lab\n\n- `insert`: push once onto the data stack.\n- `extractMin`: pop every stored priority, hold one smallest value aside, move all other values to the scratch stack, then restore them.\n\nFor `[4, 1, 3, 1, 2]`, one extraction must remove only **one** `1`. The other `1` must remain for the next extraction.\n\n### What to watch in the animation\n\nWatch only legal stack operations: pop, compare, move to scratch, preserve an equal minimum, restore, and return. The C lab immediately afterward implements the same steps."
+          },
+          "question-5-problem": {
+            "title": "Question 5 — How Do We Find a Heap Position Without an Array?",
+            "bodyMarkdown": "### Original assignment question\n\nA heap is stored as linked nodes rather than an array. You are given only:\n\n- the `root` node,\n- the current number of nodes `n`, and\n- a new value `x`.\n\nEach node has `left`, `right`, and `parent` pointers. Design an efficient insertion algorithm and analyze its runtime. You may assume the ordinary `upheap` operation is already available.\n\n### Concepts in plain English\n\n- A **complete binary tree** fills every level from left to right. A heap must keep this shape after insertion.\n- A **min-heap** also keeps every parent's key less than or equal to its children's keys.\n- **Upheap** restores that ordering by moving the new key toward the root while it is smaller than its parent.\n- Even without an array, conceptual heap indices still identify each complete-tree position.\n\n### The key idea\n\nUse the usual conceptual positions:\n\n- root: index `1`\n- left child of `i`: index `2i`\n- right child of `i`: index `2i + 1`\n\nThe new node belongs at index `n + 1`. Write that index in binary and remove the leading `1`:\n\n- `0` → go left\n- `1` → go right\n\nFollow every remaining bit except the last to reach the parent. The last bit says which child pointer receives the new node.\n\n### Concrete example\n\nIf `n = 7`, the new position is `8 = 1000₂`. Removing the leading `1` leaves `000`: go left, then left, then attach as the left child.\n\n### What to watch in the animation\n\nThe animation turns `n + 1` into pointer directions, then shows attachment and upheap. Both phases follow at most one root-to-leaf path, giving O(log n) time."
+          }
+        }
+      }
+    }
+  }
+}

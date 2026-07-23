@@ -30,6 +30,41 @@ export function buildSketchesFromManifest(
 
         const runtime = sketch.runtime ?? manifest.runtimeDefaults ?? null;
 
+        if (sketch.archetype === "algorithm_animation") {
+            const entry: SketchEntry = {
+                kind: "archetype",
+                spec: {
+                    archetype: "algorithm_animation",
+                    specVersion: 1,
+                    title: `@:${sketch.titleKey}`,
+                    ...(sketch.contextKey
+                        ? { contextMarkdown: `@:${sketch.contextKey}` }
+                        : {}),
+                    steps: sketch.steps.map((step) => ({
+                        id: step.id,
+                        title: `@:${step.titleKey}`,
+                        ...(step.bodyKey ? { bodyMarkdown: `@:${step.bodyKey}` } : {}),
+                        ...(step.formula ? { formula: step.formula } : {}),
+                        ...(step.code ? { code: step.code } : {}),
+                        nodes: step.nodes.map((node) => ({ ...node })),
+                        ...(step.edges?.length
+                            ? { edges: step.edges.map((edge) => ({ ...edge })) }
+                            : {}),
+                    })),
+                    ...(sketch.intervalMs != null ? { intervalMs: sketch.intervalMs } : {}),
+                    ...(sketch.autoPlay != null ? { autoPlay: sketch.autoPlay } : {}),
+                    ...(sketch.showControls != null ? { showControls: sketch.showControls } : {}),
+                    ...(sketch.showStepCounter != null
+                        ? { showStepCounter: sketch.showStepCounter }
+                        : {}),
+                    ...(sketch.canvasHeight != null ? { canvasHeight: sketch.canvasHeight } : {}),
+                    ...(runtime ? { runtime } : {}),
+                },
+            };
+
+            return [sketchId, entry];
+        }
+
         if (sketch.archetype === "image") {
             const entry: SketchEntry = {
                 kind: "archetype",

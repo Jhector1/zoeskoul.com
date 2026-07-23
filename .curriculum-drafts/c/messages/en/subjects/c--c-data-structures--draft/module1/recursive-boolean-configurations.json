@@ -1,0 +1,160 @@
+{
+  "topics": {
+    "c--c-data-structures--draft": {
+      "c--c-data-structures--draft-module-1-algorithm-design-lab": {
+        "recursive-boolean-configurations": {
+          "label": "Question 1 — What Runtime Are We Counting?",
+          "summary": "Question 1 Walkthrough: Recurrence to Tight Bound",
+          "cards": {
+            "introduction": {
+              "title": "How This Lesson Uses the Original Assignment"
+            },
+            "question-1-problem": {
+              "title": "Question 1: Read the Recurrence Problem First"
+            },
+            "recursion-animation": {
+              "title": "Question 1 Walkthrough: Recurrence to Tight Bound"
+            },
+            "recursion-project": {
+              "title": "Question 1 C Lab: Build and Measure the Recursion"
+            }
+          },
+          "projectSteps": {
+            "recursion_runtime": {
+              "title": "Instrument the Recursive Call Tree"
+            }
+          },
+          "finalLab": {
+            "steps": {
+              "recursion_runtime": {
+                "title": "Instrument the Recursive Call Tree",
+                "prompt": "Open `algorithms/recursion.c`. Complete `foo_rec` so every non-base call explores both Boolean choices and advances to `i + 1`. The supplied `main.c` runs `foo(4)` and reports the number of leaves and total calls. Use the animation to connect the measurements to `T(n) = 2T(n - 1) + Θ(1)`.",
+                "hint": "Each non-base call must make two recursive calls after assigning the current slot.",
+                "help": {
+                  "concept": "The recursion forms a full binary tree. There are `2^n` leaves and `2^(n+1)-1` total calls, so the runtime is `Θ(2^n)` when printing a completed list is treated as constant time.",
+                  "hint_1": "Run the supplied test harness after each focused change.",
+                  "hint_2": "Keep the implementation general; do not print the expected output directly."
+                },
+                "starterCode": "#include <stdio.h>\n#include \"algorithms/recursion.h\"\n\nint main(void) {\n    FooStats stats = foo(4);\n    printf(\"leaves=%ld\\n\", stats.leaves);\n    printf(\"calls=%ld\\n\", stats.calls);\n    printf(\"tight=Theta(2^n)\\n\");\n    return 0;\n}\n",
+                "solutionCode": "#include <stdio.h>\n#include \"algorithms/recursion.h\"\n\nint main(void) {\n    FooStats stats = foo(4);\n    printf(\"leaves=%ld\\n\", stats.leaves);\n    printf(\"calls=%ld\\n\", stats.calls);\n    printf(\"tight=Theta(2^n)\\n\");\n    return 0;\n}\n",
+                "starterFiles": {
+                  "main_c": {
+                    "content": "#include <stdio.h>\n#include \"algorithms/recursion.h\"\n\nint main(void) {\n    FooStats stats = foo(4);\n    printf(\"leaves=%ld\\n\", stats.leaves);\n    printf(\"calls=%ld\\n\", stats.calls);\n    printf(\"tight=Theta(2^n)\\n\");\n    return 0;\n}\n"
+                  },
+                  "algorithms_recursion_c": {
+                    "content": "#include \"recursion.h\"\n#include <stdbool.h>\n\nstatic void foo_rec(bool *bits, int n, int i, FooStats *stats) {\n    stats->calls++;\n\n    if (i == n) {\n        stats->leaves++;\n        return;\n    }\n\n    /* TODO: explore the branch where bits[i] is true. */\n    /* TODO: explore the branch where bits[i] is false. */\n}\n\nFooStats foo(int n) {\n    FooStats stats = {0, 0};\n    bool bits[n > 0 ? n : 1];\n    foo_rec(bits, n, 0, &stats);\n    return stats;\n}\n"
+                  },
+                  "algorithms_recursion_h": {
+                    "content": "#ifndef RECURSION_H\n#define RECURSION_H\n\ntypedef struct {\n    long calls;\n    long leaves;\n} FooStats;\n\nFooStats foo(int n);\n\n#endif\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_c": {
+                    "content": "#include <stdio.h>\n#include \"algorithms/recursion.h\"\n\nint main(void) {\n    FooStats stats = foo(4);\n    printf(\"leaves=%ld\\n\", stats.leaves);\n    printf(\"calls=%ld\\n\", stats.calls);\n    printf(\"tight=Theta(2^n)\\n\");\n    return 0;\n}\n"
+                  },
+                  "algorithms_recursion_c": {
+                    "content": "#include \"recursion.h\"\n#include <stdbool.h>\n\nstatic void foo_rec(bool *bits, int n, int i, FooStats *stats) {\n    stats->calls++;\n\n    if (i == n) {\n        stats->leaves++;\n        return;\n    }\n\n    bits[i] = true;\n    foo_rec(bits, n, i + 1, stats);\n\n    bits[i] = false;\n    foo_rec(bits, n, i + 1, stats);\n}\n\nFooStats foo(int n) {\n    FooStats stats = {0, 0};\n    bool bits[n > 0 ? n : 1];\n    foo_rec(bits, n, 0, &stats);\n    return stats;\n}\n"
+                  },
+                  "algorithms_recursion_h": {
+                    "content": "#ifndef RECURSION_H\n#define RECURSION_H\n\ntypedef struct {\n    long calls;\n    long leaves;\n} FooStats;\n\nFooStats foo(int n);\n\n#endif\n"
+                  }
+                },
+                "checks": [
+                  {
+                    "message": "Keep the base case at `i == n`."
+                  },
+                  {
+                    "message": "Assign the true branch before its recursive call."
+                  },
+                  {
+                    "message": "Assign the false branch before its recursive call."
+                  }
+                ]
+              }
+            }
+          },
+          "quiz": {
+            "recurrence": {
+              "title": "Which recurrence matches fooRec when printing a completed list is O(1)?",
+              "prompt": "Which recurrence matches fooRec when printing a completed list is O(1)?",
+              "hint": "Trace the relevant animation and identify the operation that dominates the runtime.",
+              "help": {
+                "concept": "Every non-base call performs constant local work and makes two calls with one fewer undecided position.",
+                "hint_1": "Separate correctness from runtime: first identify what the algorithm must do.",
+                "hint_2": "Then count the loops, recursion branches, stack transfers, or pointer levels involved."
+              },
+              "options": {
+                "a": "T(n) = T(n - 1) + Θ(1)",
+                "b": "T(n) = 2T(n - 1) + Θ(1)",
+                "c": "T(n) = T(n / 2) + Θ(n)",
+                "d": "T(n) = 2T(n / 2) + Θ(n)"
+              }
+            },
+            "tight-bound": {
+              "title": "What tight bound follows after unrolling the recurrence?",
+              "prompt": "What tight bound follows after unrolling the recurrence?",
+              "hint": "Trace the relevant animation and identify the operation that dominates the runtime.",
+              "help": {
+                "concept": "The recursion tree doubles at every level and has 2^n leaves.",
+                "hint_1": "Separate correctness from runtime: first identify what the algorithm must do.",
+                "hint_2": "Then count the loops, recursion branches, stack transfers, or pointer levels involved."
+              },
+              "options": {
+                "a": "Θ(log n)",
+                "b": "Θ(n)",
+                "c": "Θ(n²)",
+                "d": "Θ(2^n)"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "c--c-data-structures--draft": {
+      "c--c-data-structures--draft-module-1-algorithm-design-lab": {
+        "recursive-boolean-configurations": {
+          "introduction": {
+            "title": "Read → Watch → Build → Explain",
+            "bodyMarkdown": "This lesson follows the five questions in the included **CS260 Written Assignment 2**. Each question now uses the same four-part learning sequence:\n\n1. **Read the original problem.** A question sketch states the exact task, constraints, and required runtime.\n2. **Watch the reasoning.** The animation stays tied to that question and explains one decision at a time.\n3. **Build the matching C solution.** The next lesson opens the full IDE with starter files, a focused TODO, tests, and a revealable official solution.\n4. **Explain correctness and runtime.** Passing the program is evidence, but you should still be able to state why the algorithm works and why it meets the required bound.\n\nDo the questions in order. The question, animation, and C lab for one problem are kept together before the next problem begins."
+          },
+          "question-1-problem": {
+            "title": "Question 1 — What Runtime Are We Counting?",
+            "bodyMarkdown": "### Original assignment question\n\nConsider this recursive procedure:\n\n```text\nfunction fooRec(L, n, i) {\n    if (i == n) {\n        print(L)    // Assume this takes O(1) time\n        return\n    }\n\n    L[i] = true\n    fooRec(L, n, i + 1)\n    L[i] = false\n    fooRec(L, n, i + 1)\n}\n\nfunction foo(n) {\n    Create empty array L with capacity n   // O(1)\n    fooRec(L, n, 0)\n}\n```\n\nYou must answer three connected parts:\n\n1. **Part (a):** Give a recurrence for the runtime of `foo`.\n2. **Part (b):** Solve the recurrence using substitution.\n3. **Part (c):** State a tight asymptotic bound.\n\n### Concepts in plain English\n\n- A **recurrence** is an equation that describes the work for a problem using the work for a smaller version of the same problem. Here, `T(m)` means the time needed when `m` Boolean positions remain.\n- The **base case** is where recursion stops. Here, no positions remain, so `T(0)` is constant.\n- **Substitution** means replacing the smaller runtime again and again until the base case appears.\n- A **tight bound**, written with `Θ`, gives the actual growth rate up to constant factors. `Θ(2^n)` means the runtime grows proportionally to `2^n`.\n\n### What the question is really asking\n\nDo **not** focus on the Boolean values themselves. Count how much work the function performs. At every unfinished position, the function creates two recursive calls: one for `true` and one for `false`.\n\nUse `m = n - i` for the number of positions still undecided. Then ask:\n\n- What happens when `m = 0`?\n- How many subproblems of size `m - 1` are created?\n- How much extra work happens outside those recursive calls?\n\n### What to watch in the animation\n\nThe animation follows the exact assignment path: **define the input size → find the base case → write the recurrence → substitute → state the tight bound**. The C lab then verifies the predicted number of leaves and total calls."
+          },
+          "recursion-animation": {
+            "title": "Question 1: From the Code to Θ(2^n)",
+            "context": "**Question 1, parts (a)-(c):** derive a recurrence for `foo`, solve it by substitution, and state the tight bound. Each frame below completes one piece of that written argument.",
+            "steps": [
+              {
+                "title": "Step 1: Name the remaining problem size",
+                "body": "At a call `fooRec(L, n, i)`, let `m = n - i`. This is the number of Boolean positions that still need a choice. The original call starts with `m = n`."
+              },
+              {
+                "title": "Step 2: Identify the base case",
+                "body": "When `i == n`, no positions remain, so `m = 0`. The function prints once and returns. The assignment says printing is constant time, so `T(0) = c₀`."
+              },
+              {
+                "title": "Step 3: Write the recurrence",
+                "body": "A recurrence is an equation for a runtime in terms of smaller inputs. When `m > 0`, this call does constant local work and makes **two** calls with `m - 1` positions remaining, so `T(m) = 2T(m - 1) + c`."
+              },
+              {
+                "title": "Step 4: Check the branching with a small example",
+                "body": "For `n = 2`, the leaves are `TT`, `TF`, `FT`, and `FF`. That is `2² = 4` leaves. In general, doubling for `n` levels produces `2^n` leaves."
+              },
+              {
+                "title": "Step 5: Substitute repeatedly",
+                "body": "Substitution means replacing the smaller runtime repeatedly. After `k` replacements, the recursive term is `2^k T(m-k)`, and the local work is `c(1 + 2 + ... + 2^(k-1))`."
+              },
+              {
+                "title": "Step 6: Stop at the base case and simplify",
+                "body": "Set `k = m`, use `1 + 2 + ... + 2^(m-1) = 2^m - 1`, and apply the constant base case. A tight `Θ` bound records the matching growth rate, so `foo(n)` is `Θ(2^n)`."
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

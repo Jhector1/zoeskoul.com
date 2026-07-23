@@ -21,6 +21,7 @@ type SubjectManifest = {
     imagePublicId?: string | null;
     imageAlt?: string | null;
     accessPolicy?: "free" | "paid";
+    visibility?: SubjectSeed["visibility"];
     status?: SubjectSeed["status"];
     meta?: Record<string, unknown> | null;
   };
@@ -354,6 +355,7 @@ export function buildSeedData(selection: SeedDataSelection = {}) {
       imagePublicId: subject.imagePublicId ?? null,
       imageAlt: subject.imageAlt ?? null,
       accessPolicy: subject.accessPolicy ?? "free",
+      visibility: subject.visibility ?? "public",
       status: subject.status ?? "active",
       meta: subject.meta ?? null,
     });

@@ -20,7 +20,8 @@ export type ArchetypeId =
     | "paragraph"
     | "video_lesson"
     | "image"
-    | "code_sketch";
+    | "code_sketch"
+    | "algorithm_animation";
 
 export type SketchSpecBase = {
     archetype: ArchetypeId;
@@ -80,6 +81,50 @@ export type ImageSketchSpec = SketchSpecBase & {
     showControls?: boolean;
     className?: string;
     rememberTransform?: boolean;
+};
+
+
+export type AlgorithmAnimationNode = {
+    id: string;
+    label: string;
+    detail?: string;
+    x: number;
+    y: number;
+    width?: number;
+    shape?: "box" | "circle" | "pill";
+    tone?: SketchTone;
+    active?: boolean;
+    dimmed?: boolean;
+};
+
+export type AlgorithmAnimationEdge = {
+    from: string;
+    to: string;
+    label?: string;
+    tone?: SketchTone;
+    active?: boolean;
+    dashed?: boolean;
+};
+
+export type AlgorithmAnimationStep = {
+    id: string;
+    title: string;
+    bodyMarkdown?: string;
+    formula?: string;
+    code?: string;
+    nodes: AlgorithmAnimationNode[];
+    edges?: AlgorithmAnimationEdge[];
+};
+
+export type AlgorithmAnimationSpec = SketchSpecBase & {
+    archetype: "algorithm_animation";
+    contextMarkdown?: string;
+    steps: AlgorithmAnimationStep[];
+    intervalMs?: number;
+    autoPlay?: boolean;
+    showControls?: boolean;
+    showStepCounter?: boolean;
+    canvasHeight?: number;
 };
 
 export type IntroStepperSpec = SketchSpecBase & {
@@ -189,4 +234,5 @@ export type SketchSpec =
     | UIPathGuideSpec
     | CodeSketchSpec
     | ParagraphSpec
-    | ImageSketchSpec;
+    | ImageSketchSpec
+    | AlgorithmAnimationSpec;

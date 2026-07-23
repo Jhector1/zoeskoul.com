@@ -28,6 +28,7 @@ type Props = {
     mobileToolsPanel?: React.ReactNode;
     showMobileWorkspaceTabs?: boolean;
     activeMobileWorkspaceTab?: "lesson" | "code";
+    desktopToolsVisible: boolean;
     onMobileWorkspaceTabChange?: (tab: "lesson" | "code") => void;
     mainScrollRef: React.RefObject<HTMLElement | null>;
     padStyle: React.CSSProperties;
@@ -82,6 +83,7 @@ export default function ReviewTopicStage({
     mobileToolsPanel,
     showMobileWorkspaceTabs = false,
     activeMobileWorkspaceTab = "lesson",
+    desktopToolsVisible,
     onMobileWorkspaceTabChange,
     mainScrollRef,
     padStyle,
@@ -134,18 +136,17 @@ export default function ReviewTopicStage({
     const useWorkspaceTabs = Boolean(showMobileWorkspaceTabs && mobileToolsPanel);
     const activeTab = useWorkspaceTabs ? activeMobileWorkspaceTab : "lesson";
     const activeCard = viewCards[activeCardIndex] ?? null;
-    const cardExplicitlyHidesTools = activeCard?.tools?.defaultVisible === false;
     const shouldConstrainQuizWidth =
         learnerUiFlags.compactLearnerUi &&
         !learnerUiFlags.showDebugLearningUi &&
         activeCard?.type === "quiz";
-    const shouldConstrainReadingWidth =
-        cardExplicitlyHidesTools &&
-        (activeCard?.type === "sketch" ||
-            activeCard?.type === "text" ||
-            activeCard?.type === "video");
+    // The lesson column should react to the shared shell state, not to
+    // subject-specific or card-local tool metadata. Whenever the desktop
+    // Tools rail is absent or collapsed, center the same readable column for
+    // SQL, Python, C, and every other profile.
+    const shouldCenterWithoutDesktopTools = !desktopToolsVisible;
     const constrainContentWidth =
-        shouldConstrainQuizWidth || shouldConstrainReadingWidth;
+        shouldConstrainQuizWidth || shouldCenterWithoutDesktopTools;
     const setActiveTab = (tab: "lesson" | "code") => {
         onMobileWorkspaceTabChange?.(tab);
     };

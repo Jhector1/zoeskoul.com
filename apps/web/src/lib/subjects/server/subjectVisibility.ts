@@ -28,11 +28,13 @@ export type SubjectEnrollmentActivityFields = SubjectEnrollmentFields & {
 
 export type SubjectDatabaseStateFields = SubjectEnrollmentFields & {
     subjectOrder: number | null;
+    visibility: "public" | "private" | "organization";
 };
 
 type PersistedSubjectState = PersistedSubjectCardPresentation & {
     subjectId: string;
     order: number;
+    visibility: "public" | "private" | "organization";
     enrolled: boolean;
     lastSeenAt: Date | null;
 };
@@ -56,6 +58,7 @@ async function loadPersistedSubjectState(
                 id: true,
                 slug: true,
                 order: true,
+                visibility: true,
                 title: true,
                 description: true,
                 imagePublicId: true,
@@ -107,6 +110,7 @@ async function loadPersistedSubjectState(
             {
                 subjectId: subject.id,
                 order: subject.order,
+                visibility: subject.visibility,
                 enrolled: enrollmentBySubjectId.has(subject.id),
                 lastSeenAt: enrollmentBySubjectId.get(subject.id) ?? null,
                 title: subject.title,
@@ -188,6 +192,7 @@ export async function withSubjectCardState<T extends SubjectCardPresentation>(
             subjectId: state?.subjectId ?? null,
             enrolled: state?.enrolled ?? false,
             subjectOrder: state?.order ?? null,
+            visibility: state?.visibility ?? "public",
         };
     });
 }

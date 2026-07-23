@@ -33,6 +33,16 @@ export async function POST(
         return json({ message: "Subject is not available yet" }, 409);
     }
 
+    if (publication.visibility !== "public") {
+        return json(
+            {
+                message: "This course is private. Open it from your assigned learning list.",
+                code: "PRIVATE_COURSE_REQUIRES_ASSIGNMENT",
+            },
+            403,
+        );
+    }
+
     const subject = {
         id: publication.subjectId,
         slug: publication.slug,

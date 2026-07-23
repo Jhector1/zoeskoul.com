@@ -160,6 +160,11 @@ function withLiveSubjectIdentity(args: {
             args.subjectPlan.accessPolicy ??
             args.spec.accessPolicy ??
             args.blueprint.accessPolicy,
+        visibility:
+            args.subjectPlan.visibility ??
+            args.spec.visibility ??
+            args.blueprint.visibility ??
+            "public",
         moduleAccessOverrideDefault:
             args.spec.moduleAccessOverrideDefault ??
             args.blueprint.moduleAccessOverrideDefault ??

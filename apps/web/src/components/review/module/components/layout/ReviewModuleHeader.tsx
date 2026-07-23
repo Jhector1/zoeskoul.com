@@ -187,10 +187,12 @@ export default function ReviewModuleHeader({
     const showTopicsButton =
         topicsToggleAllowed &&
         (!compactModeActive || !showDesktopLeft || leftCollapsed);
-    const showToolsButton =
-        toolsUiEnabled &&
-        toolsToggleAllowed &&
-        (!compactModeActive || !showDesktopRight || rightCollapsed);
+    // Tools is the only shared desktop control that can collapse the whole
+    // workspace rail. Keep the same toggle in the header while the rail is
+    // open so learners are never trapped in split view. Card policy still
+    // decides whether the control is available at all.
+    const showToolsButton = toolsUiEnabled && toolsToggleAllowed;
+    const toolsExpanded = showDesktopRight && !rightCollapsed;
     const showTopicArrowButtons = !compactModeActive;
 
     const resetMenuPortal =
@@ -302,10 +304,11 @@ export default function ReviewModuleHeader({
                             <button
                                 type="button"
                                 onClick={onToggleRightPanel}
+                                aria-expanded={toolsExpanded}
                                 className="ui-btn ui-btn-secondary text-xs font-extrabold whitespace-nowrap"
                                 title={t("toolsTitle")}
                             >
-                                {rightCollapsed ? t("toolsButtonCollapsed") : t("toolsButtonExpanded")}
+                                {toolsExpanded ? t("toolsButtonExpanded") : t("toolsButtonCollapsed")}
                             </button>
                         ) : null}
 

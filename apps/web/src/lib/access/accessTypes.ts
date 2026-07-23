@@ -6,6 +6,7 @@ export type SubjectAccessConfig = {
     slug: string;
     id: string;
     accessPolicy: AccessPolicy;
+    visibility?: "public" | "private" | "organization";
     entitlementKey?: string | null;
 };
 

@@ -1,0 +1,548 @@
+{
+  "topicId": "insert-linked-binary-heap",
+  "subjectSlug": "c-data-structures",
+  "moduleSlug": "c-data-structures-module-1-algorithm-design-lab",
+  "sectionSlug": "c-data-structures-algorithm-design-lab",
+  "prefix": "cds1",
+  "minutes": 45,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "c",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "preset": "runner",
+    "runnerBackend": "judge0",
+    "layoutMode": "default",
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": false
+    }
+  },
+  "topic": {
+    "labelKey": "topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.insert-linked-binary-heap.label",
+    "summaryKey": "topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.insert-linked-binary-heap.summary"
+  },
+  "cards": [
+    {
+      "id": "question-5-problem",
+      "kind": "sketch",
+      "titleKey": "topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.insert-linked-binary-heap.cards.question-5-problem.title",
+      "sketchId": "question-5-problem",
+      "height": 760
+    },
+    {
+      "id": "heap-animation",
+      "kind": "sketch",
+      "titleKey": "topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.insert-linked-binary-heap.cards.heap-animation.title",
+      "sketchId": "heap-animation",
+      "height": 820
+    },
+    {
+      "id": "heap-project",
+      "kind": "project",
+      "titleKey": "topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.insert-linked-binary-heap.cards.heap-project.title",
+      "project": {
+        "difficulty": "hard",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "displayKind": "project",
+        "uiKind": "project",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "pointer_heap_insert",
+            "titleKey": "topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.insert-linked-binary-heap.projectSteps.pointer_heap_insert.title",
+            "exerciseKey": "pointer-heap-insert",
+            "difficulty": "hard",
+            "preferKind": "code_input",
+            "seedPolicy": "step",
+            "maxAttempts": null
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "question-5-problem",
+      "archetype": "paragraph",
+      "titleKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.insert-linked-binary-heap.question-5-problem.title",
+      "bodyKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.insert-linked-binary-heap.question-5-problem.bodyMarkdown"
+    },
+    {
+      "id": "heap-animation",
+      "archetype": "algorithm_animation",
+      "titleKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.insert-linked-binary-heap.heap-animation.title",
+      "contextKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.insert-linked-binary-heap.heap-animation.context",
+      "intervalMs": 1400,
+      "autoPlay": false,
+      "showControls": true,
+      "showStepCounter": true,
+      "canvasHeight": 340,
+      "steps": [
+        {
+          "id": "heap-animation-1",
+          "titleKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.insert-linked-binary-heap.heap-animation.steps.0.title",
+          "bodyKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.insert-linked-binary-heap.heap-animation.steps.0.body",
+          "formula": "$left(i)=2i,\\quad right(i)=2i+1$",
+          "nodes": [
+            {
+              "id": "1",
+              "label": "1",
+              "detail": "root",
+              "x": 50,
+              "y": 10,
+              "shape": "circle",
+              "tone": "info"
+            },
+            {
+              "id": "2",
+              "label": "2",
+              "x": 28,
+              "y": 40,
+              "shape": "circle"
+            },
+            {
+              "id": "3",
+              "label": "3",
+              "x": 72,
+              "y": 40,
+              "shape": "circle"
+            },
+            {
+              "id": "4",
+              "label": "4",
+              "x": 14,
+              "y": 80,
+              "shape": "circle"
+            },
+            {
+              "id": "5",
+              "label": "5",
+              "x": 39,
+              "y": 80,
+              "shape": "circle"
+            },
+            {
+              "id": "6",
+              "label": "6",
+              "x": 61,
+              "y": 80,
+              "shape": "circle"
+            },
+            {
+              "id": "7",
+              "label": "7",
+              "x": 86,
+              "y": 80,
+              "shape": "circle"
+            }
+          ],
+          "edges": [
+            {
+              "from": "1",
+              "to": "2"
+            },
+            {
+              "from": "1",
+              "to": "3"
+            },
+            {
+              "from": "2",
+              "to": "4"
+            },
+            {
+              "from": "2",
+              "to": "5"
+            },
+            {
+              "from": "3",
+              "to": "6"
+            },
+            {
+              "from": "3",
+              "to": "7"
+            }
+          ]
+        },
+        {
+          "id": "heap-animation-2",
+          "titleKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.insert-linked-binary-heap.heap-animation.steps.1.title",
+          "bodyKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.insert-linked-binary-heap.heap-animation.steps.1.body",
+          "formula": "$new\\ index=n+1$",
+          "nodes": [
+            {
+              "id": "n",
+              "label": "n = 7",
+              "detail": "occupied positions 1 through 7",
+              "x": 28,
+              "y": 48,
+              "shape": "pill",
+              "tone": "info",
+              "width": 34
+            },
+            {
+              "id": "next",
+              "label": "n + 1 = 8",
+              "detail": "new position",
+              "x": 72,
+              "y": 48,
+              "shape": "pill",
+              "tone": "good",
+              "active": true,
+              "width": 32
+            }
+          ],
+          "edges": [
+            {
+              "from": "n",
+              "to": "next",
+              "active": true
+            }
+          ]
+        },
+        {
+          "id": "heap-animation-3",
+          "titleKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.insert-linked-binary-heap.heap-animation.steps.2.title",
+          "bodyKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.insert-linked-binary-heap.heap-animation.steps.2.body",
+          "formula": "$8=1000_2\\Rightarrow 000\\Rightarrow left,left,left$",
+          "nodes": [
+            {
+              "id": "bits",
+              "label": "1 0 0 0",
+              "detail": "drop the leading 1",
+              "x": 28,
+              "y": 48,
+              "shape": "pill",
+              "tone": "info",
+              "width": 32
+            },
+            {
+              "id": "path",
+              "label": "left → left → left",
+              "x": 72,
+              "y": 48,
+              "shape": "pill",
+              "tone": "good",
+              "active": true,
+              "width": 36
+            }
+          ],
+          "edges": [
+            {
+              "from": "bits",
+              "to": "path",
+              "active": true
+            }
+          ]
+        },
+        {
+          "id": "heap-animation-4",
+          "titleKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.insert-linked-binary-heap.heap-animation.steps.3.title",
+          "bodyKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.insert-linked-binary-heap.heap-animation.steps.3.body",
+          "nodes": [
+            {
+              "id": "1",
+              "label": "root",
+              "x": 50,
+              "y": 10,
+              "shape": "circle"
+            },
+            {
+              "id": "2",
+              "label": "left",
+              "x": 28,
+              "y": 40,
+              "shape": "circle",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "id": "4",
+              "label": "parent",
+              "detail": "follow first two 0 bits",
+              "x": 14,
+              "y": 76,
+              "shape": "circle",
+              "tone": "good",
+              "active": true
+            },
+            {
+              "id": "8",
+              "label": "attach left",
+              "detail": "final 0 bit",
+              "x": 14,
+              "y": 94,
+              "shape": "pill",
+              "tone": "good",
+              "width": 26
+            }
+          ],
+          "edges": [
+            {
+              "from": "1",
+              "to": "2",
+              "label": "0",
+              "active": true
+            },
+            {
+              "from": "2",
+              "to": "4",
+              "label": "0",
+              "active": true
+            },
+            {
+              "from": "4",
+              "to": "8",
+              "label": "0",
+              "active": true
+            }
+          ]
+        },
+        {
+          "id": "heap-animation-5",
+          "titleKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.insert-linked-binary-heap.heap-animation.steps.4.title",
+          "bodyKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.insert-linked-binary-heap.heap-animation.steps.4.body",
+          "code": "node->parent = parent;\nnode->left = NULL;\nnode->right = NULL;\nparent->left = node;",
+          "nodes": [
+            {
+              "id": "parent",
+              "label": "parent node",
+              "x": 30,
+              "y": 42,
+              "shape": "pill",
+              "tone": "info",
+              "width": 30
+            },
+            {
+              "id": "child",
+              "label": "new node x",
+              "detail": "left/right = NULL",
+              "x": 72,
+              "y": 62,
+              "shape": "pill",
+              "tone": "good",
+              "active": true,
+              "width": 32
+            }
+          ],
+          "edges": [
+            {
+              "from": "parent",
+              "to": "child",
+              "label": "left or right",
+              "active": true
+            }
+          ]
+        },
+        {
+          "id": "heap-animation-6",
+          "titleKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.insert-linked-binary-heap.heap-animation.steps.5.title",
+          "bodyKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.insert-linked-binary-heap.heap-animation.steps.5.body",
+          "formula": "$O(\\log n)\\text{ path}+O(\\log n)\\text{ upheap}=O(\\log n)$",
+          "nodes": [
+            {
+              "id": "attach",
+              "label": "shape restored",
+              "x": 28,
+              "y": 48,
+              "shape": "pill",
+              "tone": "info",
+              "width": 28
+            },
+            {
+              "id": "up",
+              "label": "upheap x",
+              "detail": "swap keys toward root",
+              "x": 72,
+              "y": 48,
+              "shape": "pill",
+              "tone": "good",
+              "active": true,
+              "width": 32
+            }
+          ],
+          "edges": [
+            {
+              "from": "attach",
+              "to": "up",
+              "active": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "exercises": [
+    {
+      "id": "pointer-heap-insert",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.insert-linked-binary-heap.finalLab.steps.pointer_heap_insert",
+      "language": "c",
+      "starterCode": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.insert-linked-binary-heap.finalLab.steps.pointer_heap_insert.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.c",
+          "content": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.insert-linked-binary-heap.finalLab.steps.pointer_heap_insert.starterFiles.main_c.content",
+          "language": "c",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "structures/heap.c",
+          "content": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.insert-linked-binary-heap.finalLab.steps.pointer_heap_insert.starterFiles.structures_heap_c.content",
+          "language": "c",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "structures/heap.h",
+          "content": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.insert-linked-binary-heap.finalLab.steps.pointer_heap_insert.starterFiles.structures_heap_h.content",
+          "language": "c",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.c",
+          "content": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.insert-linked-binary-heap.finalLab.steps.pointer_heap_insert.solutionFiles.main_c.content",
+          "language": "c",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "structures/heap.c",
+          "content": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.insert-linked-binary-heap.finalLab.steps.pointer_heap_insert.solutionFiles.structures_heap_c.content",
+          "language": "c",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "structures/heap.h",
+          "content": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.insert-linked-binary-heap.finalLab.steps.pointer_heap_insert.solutionFiles.structures_heap_h.content",
+          "language": "c",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "c",
+        "entryFilePath": "main.c",
+        "starterCode": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.insert-linked-binary-heap.finalLab.steps.pointer_heap_insert.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.c",
+            "content": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.insert-linked-binary-heap.finalLab.steps.pointer_heap_insert.starterFiles.main_c.content",
+            "language": "c",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "structures/heap.c",
+            "content": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.insert-linked-binary-heap.finalLab.steps.pointer_heap_insert.starterFiles.structures_heap_c.content",
+            "language": "c",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "structures/heap.h",
+            "content": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.insert-linked-binary-heap.finalLab.steps.pointer_heap_insert.starterFiles.structures_heap_h.content",
+            "language": "c",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.c",
+            "content": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.insert-linked-binary-heap.finalLab.steps.pointer_heap_insert.solutionFiles.main_c.content",
+            "language": "c",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "structures/heap.c",
+            "content": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.insert-linked-binary-heap.finalLab.steps.pointer_heap_insert.solutionFiles.structures_heap_c.content",
+            "language": "c",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "structures/heap.h",
+            "content": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.insert-linked-binary-heap.finalLab.steps.pointer_heap_insert.solutionFiles.structures_heap_h.content",
+            "language": "c",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "level=5 10 15 20 40 50 60 30 \nparent-links=yes\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.insert-linked-binary-heap.finalLab.steps.pointer_heap_insert.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.c",
+            "content": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.insert-linked-binary-heap.finalLab.steps.pointer_heap_insert.solutionFiles.main_c.content",
+            "language": "c",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "structures/heap.c",
+            "content": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.insert-linked-binary-heap.finalLab.steps.pointer_heap_insert.solutionFiles.structures_heap_c.content",
+            "language": "c",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "structures/heap.h",
+            "content": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.insert-linked-binary-heap.finalLab.steps.pointer_heap_insert.solutionFiles.structures_heap_h.content",
+            "language": "c",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "path": "structures/heap.c",
+            "pattern": "const size_t index = n + 1",
+            "message": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.insert-linked-binary-heap.finalLab.steps.pointer_heap_insert.checks.0.message",
+            "normalizeWhitespace": false
+          },
+          {
+            "type": "source_contains",
+            "path": "structures/heap.c",
+            "pattern": "highest_bit",
+            "message": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.insert-linked-binary-heap.finalLab.steps.pointer_heap_insert.checks.1.message",
+            "normalizeWhitespace": false
+          },
+          {
+            "type": "source_contains",
+            "path": "structures/heap.c",
+            "pattern": "node->parent",
+            "message": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.insert-linked-binary-heap.finalLab.steps.pointer_heap_insert.checks.2.message",
+            "normalizeWhitespace": false
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -8,6 +8,7 @@ import type { SketchSpec } from "./specTypes";
 
 import { ParagraphSketch } from "@/components/sketches/_archetypes/ParagraphSketch";
 import ImageSketch from "@/components/sketches/_archetypes/ImageSketch";
+import AlgorithmAnimationSketch from "@/components/sketches/_archetypes/AlgorithmAnimationSketch";
 
 function getByPath(obj: unknown, path: string): unknown {
     const parts = path.split(".");
@@ -54,6 +55,16 @@ export default function SketchRenderer({
         case "image":
             return (
                 <ImageSketch
+                    spec={specT as any}
+                    value={value}
+                    onChange={onChange}
+                    readOnly={readOnly}
+                />
+            );
+
+        case "algorithm_animation":
+            return (
+                <AlgorithmAnimationSketch
                     spec={specT as any}
                     value={value}
                     onChange={onChange}

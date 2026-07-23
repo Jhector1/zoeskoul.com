@@ -200,6 +200,7 @@ export type CourseSpec = {
     courseSlug: string;
     catalogSlug: string;
     accessPolicy?: "free" | "paid";
+    visibility?: "public" | "private" | "organization";
     moduleAccessOverrideDefault?: "free" | "paid" | null;
     profileId: string;
     title: string;

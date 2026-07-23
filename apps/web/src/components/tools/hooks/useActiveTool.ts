@@ -28,8 +28,8 @@ export function useActiveTool(ctx: ToolsCtx) {
         const raw = safeGet(key);
         const candidate = (raw ?? "") as ToolId;
 
-        // If code just became available for this subject/module, prefer opening
-        // the code pane instead of restoring a stale notes-only selection.
+        // If code just became available, do not restore a stale notes-only
+        // selection. Explicit Board selection remains stable across cards.
         if (ctx.codeEnabled && candidate === "notes") {
             setActive(pickDefault(ctx));
             return;
@@ -42,7 +42,7 @@ export function useActiveTool(ctx: ToolsCtx) {
             setActive(pickDefault(ctx));
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [key, ctx.codeEnabled]);
+    }, [key, ctx.codeEnabled, ctx.boardEnabled, ctx.notesEnabled]);
 
     // persist on change
     useEffect(() => {
@@ -56,7 +56,7 @@ export function useActiveTool(ctx: ToolsCtx) {
             setActive(pickDefault(ctx));
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [ctx.codeEnabled]);
+    }, [ctx.codeEnabled, ctx.boardEnabled, ctx.notesEnabled]);
 
     return { active, setActive };
 }

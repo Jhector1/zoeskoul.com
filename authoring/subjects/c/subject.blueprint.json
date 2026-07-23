@@ -1,0 +1,16 @@
+{
+  "subjectSlug": "c",
+  "catalogSlug": "c",
+  "profileId": "c",
+  "title": "C Programming",
+  "summary": "Implement and analyze recursive algorithms, hashing, trees, stacks, priority queues, and pointer-based heaps in multi-file C workspaces.",
+  "courseOrder": [
+    "c-data-structures"
+  ],
+  "milestones": [
+    {
+      "courseSlug": "c-data-structures",
+      "outcome": "Implement core data structures in C, explain their invariants, and justify tight runtime bounds."
+    }
+  ]
+}

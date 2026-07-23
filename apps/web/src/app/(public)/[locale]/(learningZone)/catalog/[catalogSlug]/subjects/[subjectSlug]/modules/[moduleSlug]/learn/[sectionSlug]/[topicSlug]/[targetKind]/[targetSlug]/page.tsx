@@ -84,6 +84,7 @@ export default async function Page({
     const pageData = await loadReviewModulePageData({
         subjectSlug,
         moduleSlug,
+        locale,
     });
 
     if (pageData.status === "missing") {

@@ -1,6 +1,9 @@
 import { describe, expect, it } from "vitest";
 
-import { resolveToolDefaults } from "./resolveToolDefaults";
+import {
+    resolveToolDefaults,
+    toolDefaultsForLanguage,
+} from "./resolveToolDefaults";
 
 describe("resolveToolDefaults", () => {
     it("resolves sql-v2 to SQL from profile metadata", () => {
@@ -13,7 +16,6 @@ describe("resolveToolDefaults", () => {
 
         expect(resolved.defaultLang).toBe("sql");
         expect(resolved.defaultCode).toContain("SELECT");
-        expect(resolved.defaultCode).toContain("Hello SQL");
     });
 
     it("resolves sql-v2 to SQL from runtime kind alone", () => {
@@ -33,7 +35,7 @@ describe("resolveToolDefaults", () => {
         });
 
         expect(resolved.defaultLang).toBe("sql");
-        expect(resolved.defaultCode).toContain("Hello SQL");
+        expect(resolved.defaultCode).toContain("SELECT");
     });
 
     it("keeps python-v2 on Python defaults from metadata", () => {
@@ -44,7 +46,32 @@ describe("resolveToolDefaults", () => {
         });
 
         expect(resolved.defaultLang).toBe("python");
-        expect(resolved.defaultCode).toContain('print("Hello Python!")');
+        expect(resolved.defaultCode).toContain("print(");
+    });
+
+    it("resolves a nonstandard C course from profile metadata", () => {
+        const resolved = resolveToolDefaults({
+            subjectSlug: "c-data-structures",
+            profileId: "c",
+            versionFamily: "c-data-structures",
+        });
+
+        expect(resolved.defaultLang).toBe("c");
+        expect(resolved.defaultCode).toContain("#include <stdio.h>");
+        expect(resolved.defaultCode).not.toContain("Hello from Python");
+    });
+
+    it("uses an authored language override through the same shared defaults", () => {
+        const resolved = resolveToolDefaults({
+            subjectSlug: "custom-course",
+            moduleMeta: {
+                toolDefaults: {
+                    defaultLang: "javascript",
+                },
+            },
+        });
+
+        expect(resolved).toEqual(toolDefaultsForLanguage("javascript"));
     });
 });
 
@@ -61,6 +88,6 @@ it("resolves Git terminal courses to Bash defaults", () => {
     });
 
     expect(resolved.defaultLang).toBe("bash");
-    expect(resolved.defaultCode).toContain("#!/usr/bin/env bash");
-    expect(resolved.defaultCode).not.toContain("Hello Python");
+    expect(resolved.defaultCode).toContain("echo");
+    expect(resolved.defaultCode).not.toContain("Hello from Python");
 });

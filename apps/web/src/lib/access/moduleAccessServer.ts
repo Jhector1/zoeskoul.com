@@ -24,6 +24,7 @@ export async function checkModuleAccess(prisma: PrismaClient, args: {
                     id: true,
                     slug: true,
                     accessPolicy: true,
+                    visibility: true,
                     entitlementKey: true,
                 },
             },
@@ -47,6 +48,7 @@ export async function checkModuleAccess(prisma: PrismaClient, args: {
                 id: subject.id,
                 slug: subject.slug,
                 accessPolicy: subject.accessPolicy as any,
+                visibility: subject.visibility as any,
                 entitlementKey: subject.entitlementKey,
             }
             : null,

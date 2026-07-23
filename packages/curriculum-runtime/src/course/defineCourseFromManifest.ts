@@ -80,6 +80,7 @@ export function defineCourseFromManifest(args: {
       titleKey: manifest.subject.titleKey,
       descriptionKey: manifest.subject.descriptionKey ?? undefined,
       accessPolicy: manifest.subject.accessPolicy ?? "free",
+      visibility: manifest.subject.visibility ?? "public",
       status: manifest.subject.status ?? "active",
       meta: manifest.subject.meta ?? null,
     },

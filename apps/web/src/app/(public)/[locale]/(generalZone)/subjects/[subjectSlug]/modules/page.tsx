@@ -15,6 +15,7 @@ import {
 import { notFound } from "next/navigation";
 import { normalizeTopicProgressKey } from "@/lib/review/progressTopicKeys";
 import { getManifestSubjectPublicationStatus } from "@/lib/subjects/server/subjectPublication";
+import { checkSubjectAudienceAccess } from "@/lib/access/subjectAudienceAccess";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -57,6 +58,7 @@ export default async function SubjectModulesPage({
       accessPolicy: true as any,
       entitlementKey: true,
       status: true,
+      visibility: true,
       modules: {
         orderBy: [{ order: "asc" }, { slug: "asc" }],
         select: {
@@ -91,6 +93,15 @@ export default async function SubjectModulesPage({
     (subject.status !== "active" || manifestStatus !== "active")
   ) {
     notFound();
+  }
+
+  if (!canUnlockAll) {
+    const audienceAccess = await checkSubjectAudienceAccess(prisma, {
+      actor,
+      subjectId: subject.id,
+      visibility: subject.visibility,
+    });
+    if (!audienceAccess.ok) notFound();
   }
 
   const manifestView = await getResolvedSubjectModulesFromManifest(subjectSlug);
@@ -163,6 +174,7 @@ export default async function SubjectModulesPage({
         id: subject.id,
         slug: subject.slug,
         accessPolicy: (subject as any).accessPolicy,
+        visibility: subject.visibility,
         entitlementKey: (subject as any).entitlementKey ?? null,
       },
       module: {

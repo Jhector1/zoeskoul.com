@@ -1,12 +1,14 @@
 "use client";
 
 import React from "react";
-import { NotebookPen, TerminalSquare } from "lucide-react";
+import { NotebookPen, PenTool, TerminalSquare } from "lucide-react";
 import type { ToolSpec, ToolsCtx } from "./types";
 import CodeToolPane from "./panes/CodeToolPane";
 import{ SqlDialect } from "@/lib/practice/types";
 import {RunnerLanguage} from "@zoeskoul/code-contracts";
 import NotesToolPane from "@/components/tools/panes/NotesToolPane";
+import BoardToolPane from "@/components/tools/panes/BoardToolPane";
+import type { ToolDocKey } from "@/components/tools/hooks/useToolDoc";
 import type { LearningIdeConfig } from "@/lib/ide/learningIdeConfig";
 import type { WorkspaceStateV2 } from "@/components/ide/types";
 import type { SqlPaneOptions } from "@/components/code/runner/components/sql/results-pane";
@@ -62,6 +64,12 @@ export type CodeToolProps = {
     showSqlDialectPicker?: boolean;
 };
 
+
+export type BoardToolProps = {
+    boardKey: ToolDocKey;
+    readOnly?: boolean;
+};
+
 export type NotesToolProps = {
     noteKey: {
         subjectSlug: string;
@@ -84,12 +92,21 @@ export const TOOL_SPECS: ToolSpec[] = [
         render: (props: CodeToolProps) => <CodeToolPane {...props} />,
     },
     {
+        id: "board",
+        label: "Board",
+        Icon: PenTool,
+        keepMounted: true,
+        enabled: (ctx: ToolsCtx) => ctx.boardEnabled,
+        isDefault: (ctx: ToolsCtx) => !ctx.codeEnabled && ctx.boardEnabled,
+        render: (props: BoardToolProps) => <BoardToolPane {...props} />,
+    },
+    {
         id: "notes",
         label: "Notes",
         Icon: NotebookPen,
         keepMounted: true,
-        enabled: (_ctx: ToolsCtx) => true,
-        isDefault: (ctx: ToolsCtx) => !ctx.codeEnabled,
+        enabled: (ctx: ToolsCtx) => ctx.notesEnabled,
+        isDefault: (ctx: ToolsCtx) => !ctx.codeEnabled && !ctx.boardEnabled && ctx.notesEnabled,
         render: (props: NotesToolProps) => <NotesToolPane {...props} />,
     },
 ];

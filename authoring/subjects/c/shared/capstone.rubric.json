@@ -1,0 +1,25 @@
+{
+  "rubricId": "c-capstone",
+  "criteria": [
+    {
+      "id": "correctness",
+      "label": "Correct data-structure behavior",
+      "weight": 0.45
+    },
+    {
+      "id": "memory",
+      "label": "Safe pointer and memory handling",
+      "weight": 0.25
+    },
+    {
+      "id": "complexity",
+      "label": "Efficient algorithm and justified complexity",
+      "weight": 0.2
+    },
+    {
+      "id": "clarity",
+      "label": "Readable multi-file design",
+      "weight": 0.1
+    }
+  ]
+}

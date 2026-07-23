@@ -121,7 +121,7 @@ export type TopicBundleShape = {
     ];
     topicFields: readonly ["labelKey", "summaryKey"];
     allowedCardKinds: readonly ["sketch", "project", "quiz"];
-    allowedSketchArchetypes: readonly ["paragraph"];
+    allowedSketchArchetypes: readonly ("paragraph" | "image" | "algorithm_animation")[];
     allowedExerciseKinds: readonly (
         | "single_choice"
         | "multi_choice"

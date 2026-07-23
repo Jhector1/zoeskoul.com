@@ -5,6 +5,25 @@
 import type { CatalogManifest } from "@/lib/subjects/_core/subjectManifestTypes";
 
 export const CATALOG_MANIFESTS: Record<string, CatalogManifest> = {
+  "c": {
+    "catalog": {
+      "slug": "c",
+      "order": 50,
+      "title": "C Programming",
+      "description": "A systems-programming path for implementing data structures, tracing pointer-based state, and analyzing efficient algorithms in C.",
+      "imagePublicId": null,
+      "imageAlt": "C programming and data structures catalog cover",
+      "defaultSubjectSlug": "c-data-structures",
+      "status": "active",
+      "subjectSlugs": [
+        "c-data-structures"
+      ],
+      "meta": {
+        "family": "programming",
+        "featured": true
+      }
+    }
+  },
   "git": {
     "catalog": {
       "slug": "git",
@@ -91,6 +110,7 @@ export const CATALOG_MANIFESTS: Record<string, CatalogManifest> = {
 
 export const SUBJECT_CATALOG_SLUGS: Record<string, string> = {
   "applied-python-projects": "python",
+  "c-data-structures": "c",
   "git-foundations": "git",
   "linux-terminal-fundamentals": "linux",
   "multi-table-sql": "sql",

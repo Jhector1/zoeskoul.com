@@ -1,0 +1,39 @@
+{
+  "policyId": "c-multifile-workspace",
+  "workspaceProfileId": "browser-code-runner",
+  "workspacePolicyId": "c-multifile-workspace",
+  "uiTerms": {
+    "editor": "code editor",
+    "explorer": "file explorer",
+    "runButton": "Run",
+    "output": "output panel"
+  },
+  "preferredTerms": {
+    "terminal": "output panel",
+    "run file": "click Run",
+    "implementation file": "the named .c file"
+  },
+  "learnerInstructions": [
+    "Read the animated trace before opening the implementation file.",
+    "Edit only the file named in the exercise unless the task explicitly asks for another file.",
+    "Keep the supplied header and main.c test harness intact.",
+    "Click Run and compare the output with the expected behavior."
+  ],
+  "forbiddenActions": [
+    "Install packages",
+    "Use operating-system-specific libraries",
+    "Depend on network access",
+    "Replace the supplied harness with hard-coded output"
+  ],
+  "notes": [
+    "The C profile compiles all authored .c files together and keeps headers in the same workspace.",
+    "Starter and solution workspaces must contain matching paths so reveal and golden validation are deterministic."
+  ],
+  "validationRequirements": {
+    "multiFile": true,
+    "entryFilePath": "main.c",
+    "language": "c",
+    "standard": "c11",
+    "networkAccessRequired": false
+  }
+}

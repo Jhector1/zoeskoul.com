@@ -337,6 +337,12 @@ export default function ProfileForm({ initialUser }: { initialUser: Me }) {
             </div>
 
             <NavCard
+                href={ROUTES.assignments}
+                title="Assigned courses"
+                description="Open private interactive courses shared by your instructor or group."
+            />
+
+            <NavCard
                 href="/billing"
                 title="Billing"
                 description="Manage subscription, invoices, and payment method."

@@ -73,17 +73,13 @@ export function resolveToolsRailVisibility(args: ResolveToolsRailVisibilityArgs)
         isProjectCard ||
         cardHasTryIt ||
         args.hasWorkspaceExercise;
-    const defaultVisible =
-        authoredDefaultVisible ??
-        (isQuizCard
-            ? false
-            : inferredNeedsTools
-                ? true
-                : true);
+
+    // A reading/animation card starts with the reusable workspace hidden.
+    // Exercises and embedded try-its start with that same workspace visible.
+    // Explicit authored policy still wins at topic, card, and exercise scope.
+    const defaultVisible = authoredDefaultVisible ?? inferredNeedsTools;
     const allowOpen = authoredAllowOpen ?? true;
-    const explicitlyHideAndDisallow =
-        authoredDefaultVisible === false && authoredAllowOpen === false;
-    const isAvailable = inferredNeedsTools || !explicitlyHideAndDisallow;
+    const isAvailable = inferredNeedsTools || defaultVisible || allowOpen;
 
     return {
         effectiveTools,
@@ -98,6 +94,29 @@ export function resolveToolsRailVisibility(args: ResolveToolsRailVisibilityArgs)
     };
 }
 
+/**
+ * Resolve the default panel state for every learner UI mode.
+ *
+ * Debug UI deliberately keeps Tools open. Otherwise the effective authored
+ * policy and current card capability decide the initial state. The reusable
+ * workspace remains mounted in controller state even while the rail is hidden.
+ */
+export function shouldDefaultCollapseToolsRail(args: {
+    showDebugLearningUi: boolean;
+    activeCard: ReviewCard | null;
+    topicTools?: ToolPresentationPolicy | null;
+    exerciseTools?: ToolPresentationPolicy | null;
+    routeTargetKind?: string | null;
+    routeTargetTargetKind?: string | null;
+    cardHasEmbeddedTryIt: boolean;
+    hasWorkspaceExercise: boolean;
+}) {
+    if (args.showDebugLearningUi) return false;
+
+    return resolveToolsRailVisibility(args).shouldCollapseByDefault;
+}
+
+/** @deprecated Use shouldDefaultCollapseToolsRail. */
 export function shouldDefaultCollapseToolsRailForCompactQuiz(args: {
     compactLearnerUi: boolean;
     showDebugLearningUi: boolean;
@@ -109,27 +128,5 @@ export function shouldDefaultCollapseToolsRailForCompactQuiz(args: {
     cardHasEmbeddedTryIt: boolean;
     hasWorkspaceExercise: boolean;
 }) {
-    const visibility = resolveToolsRailVisibility(args);
-
-    if (!args.compactLearnerUi || args.showDebugLearningUi) {
-        return false;
-    }
-
-    if (visibility.isExerciseTarget) {
-        return false;
-    }
-
-    if (visibility.isProjectCard) {
-        return false;
-    }
-
-    if (visibility.inferredNeedsTools) {
-        return false;
-    }
-
-    if (authoredBoolean(visibility.effectiveTools, "defaultVisible") !== null) {
-        return visibility.shouldCollapseByDefault;
-    }
-
-    return visibility.isQuizCard;
+    return shouldDefaultCollapseToolsRail(args);
 }
