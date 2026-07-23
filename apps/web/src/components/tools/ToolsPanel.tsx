@@ -62,6 +62,9 @@ export type ToolsPanelProps = {
     boardEnabled?: boolean;
     boardReadOnly?: boolean;
     boardScopeKey?: string;
+    boardDocumentEndpoint?: string;
+    boardDocumentRequestKey?: Record<string, string>;
+    boardDocumentRefreshMs?: number;
     notesEnabled?: boolean;
 
     onChangeLang?: (l: WorkspaceLanguage) => void;
@@ -221,6 +224,9 @@ function ToolsPanelInner(props: ToolsPanelProps) {
                         boardEnabled={ctx.boardEnabled}
                         boardKey={boardKey}
                         readOnly={props.boardReadOnly === true}
+                        documentEndpoint={props.boardDocumentEndpoint}
+                        documentRequestKey={props.boardDocumentRequestKey}
+                        documentRefreshMs={props.boardDocumentRefreshMs}
                     />
 
                     <MemoNotesPaneLayer
@@ -605,9 +611,18 @@ function BoardPaneLayer(props: {
         scopeKey: string;
     };
     readOnly: boolean;
+    documentEndpoint?: string;
+    documentRequestKey?: Record<string, string>;
+    documentRefreshMs?: number;
 }) {
     const pane = props.boardEnabled && BOARD_SPEC
-        ? BOARD_SPEC.render({ boardKey: props.boardKey, readOnly: props.readOnly })
+        ? BOARD_SPEC.render({
+            boardKey: props.boardKey,
+            readOnly: props.readOnly,
+            documentEndpoint: props.documentEndpoint,
+            documentRequestKey: props.documentRequestKey,
+            documentRefreshMs: props.documentRefreshMs,
+        })
         : null;
 
     return (
@@ -630,7 +645,10 @@ const MemoBoardPaneLayer = React.memo(
         prev.isActive === next.isActive &&
         prev.boardEnabled === next.boardEnabled &&
         prev.boardKey === next.boardKey &&
-        prev.readOnly === next.readOnly,
+        prev.readOnly === next.readOnly &&
+        prev.documentEndpoint === next.documentEndpoint &&
+        prev.documentRequestKey === next.documentRequestKey &&
+        prev.documentRefreshMs === next.documentRefreshMs,
 );
 
 function NotesPaneLayer(props: {

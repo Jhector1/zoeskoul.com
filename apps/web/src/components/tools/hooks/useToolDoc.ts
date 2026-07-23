@@ -12,9 +12,20 @@ export type ToolDocKey = {
 
 type SaveState = "loading" | "idle" | "saving" | "saved" | "error";
 
-export function useToolDoc(key: ToolDocKey, opts?: { format?: "markdown" | "plain"; debounceMs?: number }) {
+export function useToolDoc(
+    key: ToolDocKey,
+    opts?: {
+        format?: "markdown" | "plain";
+        debounceMs?: number;
+        endpoint?: string;
+        requestKey?: Record<string, string>;
+        refreshMs?: number;
+    },
+) {
     const format = opts?.format ?? "markdown";
     const debounceMs = opts?.debounceMs ?? 450;
+    const endpoint = opts?.endpoint ?? "/api/tools/doc";
+    const refreshMs = opts?.refreshMs ?? 0;
 
     const [body, setBody] = useState("");
     const [state, setState] = useState<SaveState>("loading");
@@ -28,9 +39,9 @@ export function useToolDoc(key: ToolDocKey, opts?: { format?: "markdown" | "plai
     const inflightRef = useRef<AbortController | null>(null);
 
     const qs = useMemo(() => {
-        const p = new URLSearchParams(key as any);
+        const p = new URLSearchParams((opts?.requestKey ?? key) as any);
         return p.toString();
-    }, [key]);
+    }, [key, opts?.requestKey]);
 
     useEffect(() => {
         latestBodyRef.current = body;
@@ -45,7 +56,7 @@ export function useToolDoc(key: ToolDocKey, opts?: { format?: "markdown" | "plai
 
         (async () => {
             try {
-                const res = await fetch(`/api/tools/doc?${qs}`, { cache: "no-store" });
+                const res = await fetch(`${endpoint}?${qs}`, { cache: "no-store" });
                 const j = await res.json();
 
                 if (!alive) return;
@@ -69,7 +80,7 @@ export function useToolDoc(key: ToolDocKey, opts?: { format?: "markdown" | "plai
         return () => {
             alive = false;
         };
-    }, [qs]);
+    }, [endpoint, qs]);
 
     // Debounced save
     useEffect(() => {
@@ -92,10 +103,10 @@ export function useToolDoc(key: ToolDocKey, opts?: { format?: "markdown" | "plai
                 savingUiTimer = window.setTimeout(() => setState("saving"), 350);
 
                 const requestTimeout = window.setTimeout(() => ac.abort(), 12000);
-                const res = await fetch(`/api/tools/doc`, {
+                const res = await fetch(endpoint, {
                     method: "PUT",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ ...key, format, body: bodyToSave }),
+                    body: JSON.stringify({ ...(opts?.requestKey ?? key), format, body: bodyToSave }),
                     signal: ac.signal,
                 }).finally(() => window.clearTimeout(requestTimeout));
 
@@ -123,16 +134,39 @@ export function useToolDoc(key: ToolDocKey, opts?: { format?: "markdown" | "plai
         return () => {
             if (timerRef.current) window.clearTimeout(timerRef.current);
         };
-    }, [body, key, format, debounceMs]);
+    }, [body, key, format, debounceMs, endpoint, opts?.requestKey]);
+
+
+    useEffect(() => {
+        if (!refreshMs || refreshMs < 1000) return;
+        const timer = window.setInterval(async () => {
+            if (latestBodyRef.current !== lastSavedRef.current) return;
+            try {
+                const res = await fetch(`${endpoint}?${qs}`, { cache: "no-store" });
+                if (!res.ok) return;
+                const j = await res.json();
+                const next = String(j?.body ?? "");
+                if (next !== lastSavedRef.current) {
+                    setBody(next);
+                    latestBodyRef.current = next;
+                    lastSavedRef.current = next;
+                    setUpdatedAt(j?.updatedAt ? String(j.updatedAt) : null);
+                }
+            } catch {
+                // Polling is best-effort; normal save state remains authoritative.
+            }
+        }, refreshMs);
+        return () => window.clearInterval(timer);
+    }, [endpoint, qs, refreshMs]);
 
     async function flush() {
         const bodyToSave = latestBodyRef.current;
         if (bodyToSave === lastSavedRef.current) return;
         try {
-            const res = await fetch(`/api/tools/doc`, {
+            const res = await fetch(endpoint, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ ...key, format, body: bodyToSave }),
+                body: JSON.stringify({ ...(opts?.requestKey ?? key), format, body: bodyToSave }),
                 keepalive: true,
             });
             if (!res.ok) throw new Error("flush failed");

@@ -59,7 +59,9 @@ import {
     buildReviewCardRouteTarget,
     buildReviewExerciseRouteTarget,
     parseReviewRouteFromPath,
+    applyReviewRoutePrefix,
     buildReviewRoutePath,
+    removeReviewRoutePrefix,
     resolveReviewRouteTarget,
     type ReviewResolvedRouteTarget,
 } from "../runtime/reviewRoute";
@@ -286,6 +288,8 @@ export function useReviewModuleController({
                                               canUnlockAll = false,
                                               footerInsetPx = 0,
                                               navigationMode,
+                                              routePrefix = null,
+                                              tutoringSession = null,
                                           }: ReviewModulePageProps) {
     const params = useParams<{
         locale: string;
@@ -305,6 +309,14 @@ export function useReviewModuleController({
     const subjectSlug = params?.subjectSlug ?? "";
     const moduleSlug = params?.moduleSlug ?? "";
     const sectionSlug = (params as any)?.sectionSlug;
+    const tutoringSessionId = tutoringSession?.id ?? null;
+    const isTutoringSession = Boolean(tutoringSessionId);
+    const tutoringProgressEndpoint = tutoringSessionId
+        ? `/api/tutoring-sessions/${encodeURIComponent(tutoringSessionId)}/progress`
+        : undefined;
+    const tutoringDocumentEndpoint = tutoringSessionId
+        ? `/api/tutoring-sessions/${encodeURIComponent(tutoringSessionId)}/documents`
+        : undefined;
     const unlockAll = Boolean(canUnlockAll);
     const compactModeActive =
         learnerUiFlags.compactLearnerUi && !learnerUiFlags.showDebugLearningUi;
@@ -330,15 +342,20 @@ export function useReviewModuleController({
                 );
             }
 
-            return buildReviewRoutePath({
+            const standardPath = buildReviewRoutePath({
                 locale,
                 catalogSlug,
                 subjectSlug,
                 moduleSlug,
                 target,
             });
+            return applyReviewRoutePrefix({
+                standardPath,
+                locale,
+                routePrefix,
+            });
         },
-        [catalogSlug, locale, moduleSlug, subjectSlug],
+        [catalogSlug, locale, moduleSlug, routePrefix, subjectSlug],
     );
     const resolvedNavModes = useMemo(
         () => resolveFlowNavigationConfig(navigationMode),
@@ -360,7 +377,14 @@ export function useReviewModuleController({
         flush,
         saveStatus,
         lastSaveError,
-    } = useReviewProgress({subjectSlug, moduleSlug, locale, firstTopicId});
+    } = useReviewProgress({
+        subjectSlug,
+        moduleSlug,
+        locale,
+        firstTopicId,
+        endpoint: tutoringProgressEndpoint,
+        gamificationEnabled: !isTutoringSession,
+    });
 
     const store = useReviewRuntimeStore();
     const flushToolLatestRef = useRef<null | (() => Promise<void>)>(null);
@@ -607,7 +631,11 @@ export function useReviewModuleController({
 
         const syncFromLocation = () => {
             const nextRoute = parseReviewRouteFromPath({
-                pathname: window.location.pathname,
+                pathname: removeReviewRoutePrefix({
+                    pathname: window.location.pathname,
+                    locale,
+                    routePrefix,
+                }),
                 locale,
                 catalogSlug,
                 subjectSlug,
@@ -696,6 +724,7 @@ export function useReviewModuleController({
         moduleSlug,
         progressHydrated,
         progressiveUnlock.unlockedTargetKeys,
+        routePrefix,
         showProgressiveLockMessage,
         subjectSlug,
         targetRegistry,
@@ -789,7 +818,7 @@ export function useReviewModuleController({
     const subjectFinish = useSubjectFinish({
         subjectSlug,
         moduleSlug,
-        enabled: Boolean(subjectSlug && moduleSlug),
+        enabled: !isTutoringSession && Boolean(subjectSlug && moduleSlug),
         refreshKey:
             progressHydrated &&
             `${subjectSlug}:${moduleSlug}:${String(moduleCompleteFromProgress(progress, topics))}:${String(
@@ -857,14 +886,19 @@ export function useReviewModuleController({
                 ? `${assignmentStatus.answeredCount}/${assignmentStatus.targetCount} questions`
                 : undefined;
 
-    const nav = useModuleNav({subjectSlug, moduleSlug, catalogSlug});
+    const nav = useModuleNav({
+        subjectSlug,
+        moduleSlug,
+        catalogSlug,
+        enabled: !isTutoringSession,
+    });
 
     const canGoNextModule =
         unlockAll ||
         (moduleComplete || Boolean((progress as any)?.moduleCompleted));
 
-    const navLoading = nav === undefined;
-    const navError = nav === null;
+    const navLoading = !isTutoringSession && nav === undefined;
+    const navError = !isTutoringSession && nav === null;
     const [courseModulesOpen, setCourseModulesOpen] = useState(false);
 
     useEffect(() => {
@@ -2050,7 +2084,7 @@ export function useReviewModuleController({
         (progress as any)?.topics?.[viewTid],
         viewTid,
     );
-    const showAssignmentCta = resolveCompactAssignmentCtaVisibility({
+    const showAssignmentCta = !isTutoringSession && resolveCompactAssignmentCtaVisibility({
         compactLearnerUi: learnerUiFlags.compactLearnerUi,
         showDebugLearningUi: learnerUiFlags.showDebugLearningUi,
         topics,
@@ -2299,6 +2333,17 @@ export function useReviewModuleController({
             : null;
     const boardEnabled = true;
     const boardScopeKey = `card:${viewTid}:${activeCard?.id ?? routeTarget?.targetSlug ?? "general"}`;
+    const tutoringBoardRequestKey = useMemo(
+        () =>
+            tutoringSessionId
+                ? {
+                    moduleKey: moduleSlug,
+                    cardKey: boardScopeKey,
+                    toolId: "board",
+                }
+                : undefined,
+        [boardScopeKey, moduleSlug, tutoringSessionId],
+    );
     const shouldRenderStackedTools = Boolean(
         toolsRailVisibility.isAvailable &&
         (boardEnabled || routeWorkspaceExercise || activeCardWorkspaceExercise || activeCardRegistryExerciseEntry),
@@ -2399,12 +2444,13 @@ export function useReviewModuleController({
             showDesktopRight: panels.showDesktopRight,
             leftCollapsed: panels.leftCollapsed,
             rightCollapsed: panels.rightCollapsed,
-            modulesHref:
-                `/${encodeURIComponent(locale)}` +
-                (catalogSlug
-                    ? `/catalog/${encodeURIComponent(catalogSlug)}`
-                    : "") +
-                `/subjects/${encodeURIComponent(subjectSlug)}/modules`,
+            modulesHref: isTutoringSession
+                ? routePrefix || `/${encodeURIComponent(locale)}/tutoring-sessions`
+                : `/${encodeURIComponent(locale)}` +
+                  (catalogSlug
+                      ? `/catalog/${encodeURIComponent(catalogSlug)}`
+                      : "") +
+                  `/subjects/${encodeURIComponent(subjectSlug)}/modules`,
             onOpenModulesDrawer: handleOpenCourseModules,
             onToggleLeftPanel: panels.handleToggleLeftPanel,
             onToggleRightPanel: panels.handleToggleRightPanel,
@@ -2559,7 +2605,11 @@ export function useReviewModuleController({
                 locale,
                 codeEnabled: runtime.codeEnabled,
                 boardEnabled,
+                boardReadOnly: isTutoringSession && tutoringSession?.canEdit !== true,
                 boardScopeKey,
+                boardDocumentEndpoint: tutoringDocumentEndpoint,
+                boardDocumentRequestKey: tutoringBoardRequestKey,
+                boardDocumentRefreshMs: isTutoringSession ? 2000 : undefined,
                 notesEnabled: false,
                 // Course lessons use a compact Code/Board switcher rather than the
                 // larger review-practice Tools/Run/More header.

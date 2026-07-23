@@ -434,6 +434,8 @@ model User {
   learningGroupMemberships     LearningGroupMember[]
   learningAssignmentsOwned     LearningAssignment[]      @relation("LearningAssignmentOwner")
   learningAssignmentRecipients LearningAssignmentUser[]
+  tutoringSessionsOwned        TutoringSession[]          @relation("TutoringSessionOwner")
+  tutoringSessionMemberships   TutoringSessionUser[]
 }
 
 model Account {
@@ -536,6 +538,7 @@ model PracticeSubject {
   accessGrants        SubjectAccessGrant[]
   enrollments         SubjectEnrollment[]
   learningAssignments LearningAssignment[]
+  tutoringSessions     TutoringSession[]
   onboardingInterests UserOnboardingInterest[]
 
   @@index([order])
@@ -702,7 +705,8 @@ model LearningGroup {
   updatedAt   DateTime                  @updatedAt
   owner       User                      @relation("LearningGroupOwner", fields: [ownerId], references: [id], onDelete: Cascade)
   members     LearningGroupMember[]
-  assignments LearningAssignmentGroup[]
+  assignments      LearningAssignmentGroup[]
+  tutoringSessions TutoringSessionGroup[]
 
   @@index([ownerId, updatedAt])
 }
@@ -764,6 +768,76 @@ model LearningAssignmentGroup {
   @@index([groupId])
 }
 
+
+model TutoringSession {
+  id                  String                    @id @default(cuid())
+  slug                String                    @unique
+  title               String
+  description         String?
+  ownerId             String
+  subjectId           String
+  sourceSubjectSlug   String
+  selectionScope      TutoringSelectionScope
+  sourceModuleSlug    String?
+  sourceSectionSlug   String?
+  sourceTopicId       String?
+  snapshot            Json
+  status              TutoringSessionStatus     @default(draft)
+  allowStudentEditing Boolean                    @default(true)
+  sharedAt            DateTime?
+  createdAt           DateTime                   @default(now())
+  updatedAt           DateTime                   @updatedAt
+  owner               User                      @relation("TutoringSessionOwner", fields: [ownerId], references: [id], onDelete: Cascade)
+  subject             PracticeSubject           @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  users               TutoringSessionUser[]
+  groups              TutoringSessionGroup[]
+  documents           TutoringSessionDocument[]
+
+  @@index([ownerId, updatedAt])
+  @@index([subjectId, status])
+  @@index([status, sharedAt])
+}
+
+model TutoringSessionUser {
+  sessionId String
+  userId    String
+  role      TutoringParticipantRole @default(learner)
+  addedAt   DateTime                 @default(now())
+  session   TutoringSession          @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  user      User                     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([sessionId, userId])
+  @@index([userId])
+}
+
+model TutoringSessionGroup {
+  sessionId String
+  groupId   String
+  addedAt   DateTime        @default(now())
+  session   TutoringSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  group     LearningGroup   @relation(fields: [groupId], references: [id], onDelete: Cascade)
+
+  @@id([sessionId, groupId])
+  @@index([groupId])
+}
+
+model TutoringSessionDocument {
+  id        String          @id @default(cuid())
+  sessionId String
+  moduleKey String
+  cardKey   String
+  toolId    String
+  format    ToolDocFormat   @default(markdown)
+  body      String
+  revision  Int             @default(1)
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+  session   TutoringSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+
+  @@unique([sessionId, moduleKey, cardKey, toolId], name: "tutoring_session_document")
+  @@index([sessionId, updatedAt])
+}
+
 model PracticeHelpEvent {
   id         String                   @id @default(cuid())
   sessionId  String?
@@ -803,6 +877,25 @@ enum LearningSolutionVisibility {
   after_completion
   after_due_date
   always
+}
+
+enum TutoringSessionStatus {
+  draft
+  live
+  shared
+  archived
+}
+
+enum TutoringSelectionScope {
+  course
+  module
+  section
+  topic
+}
+
+enum TutoringParticipantRole {
+  learner
+  observer
 }
 
 enum LearningGroupMemberRole {

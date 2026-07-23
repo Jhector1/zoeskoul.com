@@ -26,11 +26,23 @@ export function useModuleNav(args: {
     subjectSlug: string;
     moduleSlug: string;
     catalogSlug?: string | null;
+    enabled?: boolean;
 }) {
-    const { subjectSlug, moduleSlug, catalogSlug = null } = args;
-    const [nav, setNav] = useState<ModuleNavInfo | undefined>(undefined);
+    const {
+        subjectSlug,
+        moduleSlug,
+        catalogSlug = null,
+        enabled = true,
+    } = args;
+    const [nav, setNav] = useState<ModuleNavInfo | undefined>(
+        enabled ? undefined : null,
+    );
 
     useEffect(() => {
+        if (!enabled) {
+            setNav(null);
+            return;
+        }
         if (!subjectSlug || !moduleSlug) return;
         setNav(undefined);
 
@@ -55,7 +67,7 @@ export function useModuleNav(args: {
             });
 
         return () => ctrl.abort();
-    }, [catalogSlug, subjectSlug, moduleSlug]);
+    }, [catalogSlug, enabled, subjectSlug, moduleSlug]);
 
     return nav;
 }

@@ -57,11 +57,19 @@ export async function fetchReviewProgressGET(args: {
     moduleSlug: string;
     locale: string;
     signal?: AbortSignal;
+    endpoint?: string;
 }) {
-    const { subjectSlug, moduleSlug, locale, signal } = args;
+    const {
+        subjectSlug,
+        moduleSlug,
+        locale,
+        signal,
+        endpoint = "/api/review/progress",
+    } = args;
 
+    const separator = endpoint.includes("?") ? "&" : "?";
     const url =
-        `/api/review/progress?subjectSlug=${encodeURIComponent(subjectSlug)}` +
+        `${endpoint}${separator}subjectSlug=${encodeURIComponent(subjectSlug)}` +
         `&moduleSlug=${encodeURIComponent(moduleSlug)}` +
         `&locale=${encodeURIComponent(locale)}`;
 

@@ -26,7 +26,14 @@ export default function LearningGroupEditor({ initialGroup }: { initialGroup: an
       ...state,
       slug: state.slug || slugify(state.name),
       description: state.description || null,
-      memberEmails: [...new Set(state.memberEmails.split(/[\n,;]+/).map((value) => value.trim().toLowerCase()).filter(Boolean))],
+      memberEmails: [
+        ...new Set(
+          state.memberEmails
+            .split(/[\n,;]+/)
+            .map((value: string) => value.trim().toLowerCase())
+            .filter(Boolean),
+        ),
+      ],
     };
     const response = await fetch(isNew ? "/api/admin/learning-groups" : `/api/admin/learning-groups/${initialGroup.id}`, {
       method: isNew ? "POST" : "PATCH",

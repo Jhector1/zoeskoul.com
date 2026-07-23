@@ -1,5 +1,10 @@
 import { describe, expect, it } from "vitest";
-import { buildReviewExerciseRouteTarget, resolveReviewRouteTarget } from "./reviewRoute";
+import {
+    applyReviewRoutePrefix,
+    buildReviewExerciseRouteTarget,
+    removeReviewRoutePrefix,
+    resolveReviewRouteTarget,
+} from "./reviewRoute";
 
 describe("resolveReviewRouteTarget", () => {
     const mod = {
@@ -294,5 +299,50 @@ describe("resolveReviewRouteTarget", () => {
             exerciseId: "quiz9",
             targetSlug: "quiz9",
         });
+    });
+});
+
+describe("review route prefixes", () => {
+    const standardPath =
+        "/en/subjects/c-data-structures/modules/session-module/learn/section/topic/sketch/intro";
+    const tutoringPrefix = "/en/tutoring-sessions/session-123";
+
+    it("keeps normal course routes unchanged when no prefix is supplied", () => {
+        expect(
+            applyReviewRoutePrefix({
+                standardPath,
+                locale: "en",
+                routePrefix: null,
+            }),
+        ).toBe(standardPath);
+    });
+
+    it("builds and restores a tutoring route without duplicating the locale", () => {
+        const tutoringPath = applyReviewRoutePrefix({
+            standardPath,
+            locale: "en",
+            routePrefix: `${tutoringPrefix}/`,
+        });
+
+        expect(tutoringPath).toBe(
+            "/en/tutoring-sessions/session-123/subjects/c-data-structures/modules/session-module/learn/section/topic/sketch/intro",
+        );
+        expect(
+            removeReviewRoutePrefix({
+                pathname: tutoringPath,
+                locale: "en",
+                routePrefix: tutoringPrefix,
+            }),
+        ).toBe(standardPath);
+    });
+
+    it("does not rewrite unrelated routes", () => {
+        expect(
+            removeReviewRoutePrefix({
+                pathname: standardPath,
+                locale: "en",
+                routePrefix: tutoringPrefix,
+            }),
+        ).toBe(standardPath);
     });
 });

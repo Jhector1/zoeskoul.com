@@ -660,8 +660,17 @@ export function useReviewProgress(args: {
     moduleSlug: string;
     locale: string;
     firstTopicId: string;
+    endpoint?: string;
+    gamificationEnabled?: boolean;
 }) {
-    const { subjectSlug, moduleSlug, locale, firstTopicId } = args;
+    const {
+        subjectSlug,
+        moduleSlug,
+        locale,
+        firstTopicId,
+        endpoint = "/api/review/progress",
+        gamificationEnabled = endpoint === "/api/review/progress",
+    } = args;
 
     const [progress, setProgress] = useState<ReviewProgressState>(
         emptyReviewProgress(),
@@ -841,7 +850,7 @@ export function useReviewProgress(args: {
             const timeout = ac ? window.setTimeout(() => ac.abort(), 15000) : null;
 
             const putOnce = async (requestBody: string) => {
-                return fetch("/api/review/progress", {
+                return fetch(endpoint, {
                     method: "PUT",
                     headers: { "Content-Type": "application/json" },
                     body: requestBody,
@@ -860,6 +869,7 @@ export function useReviewProgress(args: {
                     subjectSlug: payloadToSave.subjectSlug,
                     moduleSlug: payloadToSave.moduleSlug,
                     locale: payloadToSave.locale,
+                    endpoint,
                 });
                 const mergedState = mergeProgressStatesForSave(
                     latestRemote,
@@ -910,7 +920,7 @@ export function useReviewProgress(args: {
             setSaveStatus("saved");
             setLastSaveError(null);
 
-            const gamification = data?.gamification ?? null;
+            const gamification = gamificationEnabled ? data?.gamification ?? null : null;
             if (gamification?.summary) {
                 emitGamificationUpdate({
                     source: "review_progress",
@@ -921,7 +931,7 @@ export function useReviewProgress(args: {
                 });
             }
         },
-        [meaningfulBodyForPayload],
+        [endpoint, gamificationEnabled, meaningfulBodyForPayload],
     );
 
     const drainSaveQueueRef = useRef<() => Promise<void>>(async () => undefined);
@@ -1624,6 +1634,7 @@ export function useReviewProgress(args: {
                     moduleSlug,
                     locale,
                     signal: ctrl.signal,
+                    endpoint,
                 });
                 if (useReviewRuntimeStore.getState().resetRevision !== startedGeneration) {
                     return;
@@ -1685,6 +1696,7 @@ export function useReviewProgress(args: {
         subjectSlug,
         moduleSlug,
         locale,
+        endpoint,
         firstTopicId,
         setProgressSafe,
         setActiveTopicId,
@@ -1720,6 +1732,7 @@ export function useReviewProgress(args: {
                         moduleSlug,
                         locale,
                         signal,
+                        endpoint,
                     }),
                 );
                 if (useReviewRuntimeStore.getState().resetRevision !== startedGeneration) {
@@ -1796,6 +1809,7 @@ export function useReviewProgress(args: {
             subjectSlug,
             moduleSlug,
             locale,
+            endpoint,
             hydrated,
             flush,
             cancel,

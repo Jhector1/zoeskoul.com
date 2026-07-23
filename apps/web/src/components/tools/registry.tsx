@@ -68,6 +68,9 @@ export type CodeToolProps = {
 export type BoardToolProps = {
     boardKey: ToolDocKey;
     readOnly?: boolean;
+    documentEndpoint?: string;
+    documentRequestKey?: Record<string, string>;
+    documentRefreshMs?: number;
 };
 
 export type NotesToolProps = {

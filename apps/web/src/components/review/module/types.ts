@@ -6,6 +6,11 @@ export type ReviewModulePageProps = {
     canUnlockAll?: boolean;
     footerInsetPx?: number;
     navigationMode?: FlowNavigationConfig;
+    routePrefix?: string | null;
+    tutoringSession?: {
+        id: string;
+        canEdit: boolean;
+    } | null;
 };
 
 export type ModuleProgressVm = {

@@ -324,6 +324,52 @@ export function resolveReviewRouteTarget(args: {
     return null;
 }
 
+
+function normalizeRoutePrefix(value: unknown) {
+    const raw = typeof value === "string" ? value.trim() : "";
+    if (!raw) return "";
+
+    const withLeadingSlash = raw.startsWith("/") ? raw : `/${raw}`;
+    return withLeadingSlash.replace(/\/+$/, "");
+}
+
+function localePathPrefix(locale: string) {
+    return `/${encodeURIComponent(cleanSegment(locale, "en"))}`;
+}
+
+export function applyReviewRoutePrefix(args: {
+    standardPath: string;
+    locale: string;
+    routePrefix?: string | null;
+}) {
+    const prefix = normalizeRoutePrefix(args.routePrefix);
+    if (!prefix) return args.standardPath;
+
+    const localePrefix = localePathPrefix(args.locale);
+    const suffix = args.standardPath.startsWith(`${localePrefix}/`)
+        ? args.standardPath.slice(localePrefix.length)
+        : args.standardPath;
+
+    return `${prefix}${suffix.startsWith("/") ? suffix : `/${suffix}`}`;
+}
+
+export function removeReviewRoutePrefix(args: {
+    pathname: string;
+    locale: string;
+    routePrefix?: string | null;
+}) {
+    const prefix = normalizeRoutePrefix(args.routePrefix);
+    if (!prefix) return args.pathname;
+
+    const matchesPrefix =
+        args.pathname === prefix || args.pathname.startsWith(`${prefix}/`);
+    if (!matchesPrefix) return args.pathname;
+
+    const suffix = args.pathname.slice(prefix.length);
+    const localePrefix = localePathPrefix(args.locale);
+    return `${localePrefix}${suffix.startsWith("/") ? suffix : `/${suffix}`}`;
+}
+
 export function buildReviewRoutePath(args: {
     locale: string;
     catalogSlug?: string | null;

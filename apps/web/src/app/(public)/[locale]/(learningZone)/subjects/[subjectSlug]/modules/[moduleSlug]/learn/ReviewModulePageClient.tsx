@@ -12,10 +12,14 @@ export default function ReviewModulePageClient({
                                                    canUnlockAll,
                                                    mod,
                                                    pageStatus = mod ? "ready" : "missing",
+                                                   routePrefix = null,
+                                                   tutoringSession = null,
                                                }: {
     canUnlockAll: boolean;
     mod: ReviewModule | null;
     pageStatus?: "ready" | "unavailable" | "missing";
+    routePrefix?: string | null;
+    tutoringSession?: { id: string; canEdit: boolean } | null;
 }) {
     const params = useParams<{
         locale: string;
@@ -74,6 +78,8 @@ export default function ReviewModulePageClient({
                         mod={mod}
                         canUnlockAll={canUnlockAll}
                         navigationMode={{ cards: "slideshow", quiz: "slideshow" }}
+                        routePrefix={routePrefix}
+                        tutoringSession={tutoringSession}
                     />
                 </div>
             </div>

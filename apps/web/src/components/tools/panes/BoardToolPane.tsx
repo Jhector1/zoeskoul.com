@@ -66,6 +66,9 @@ type TextDraft = {
 export type BoardToolPaneProps = {
   boardKey: ToolDocKey;
   readOnly?: boolean;
+  documentEndpoint?: string;
+  documentRequestKey?: Record<string, string>;
+  documentRefreshMs?: number;
 };
 
 function cloneDocument(document: BoardDocument): BoardDocument {
@@ -203,9 +206,21 @@ function BoardElementView({ element }: { element: BoardElement }) {
   return null;
 }
 
-export default function BoardToolPane({ boardKey, readOnly = false }: BoardToolPaneProps) {
+export default function BoardToolPane({
+  boardKey,
+  readOnly = false,
+  documentEndpoint,
+  documentRequestKey,
+  documentRefreshMs,
+}: BoardToolPaneProps) {
   const t = useTranslations("ide.tools.board");
-  const { body, setBody, state, hydrated } = useToolDoc(boardKey, { format: "plain", debounceMs: 500 });
+  const { body, setBody, state, hydrated } = useToolDoc(boardKey, {
+    format: "plain",
+    debounceMs: 500,
+    endpoint: documentEndpoint,
+    requestKey: documentRequestKey,
+    refreshMs: documentRefreshMs,
+  });
   const [document, setDocument] = useState<BoardDocument>(() => emptyBoardDocument());
   const [tool, setTool] = useState<BoardTool>("select");
   const [color, setColor] = useState(DEFAULT_COLOR);
