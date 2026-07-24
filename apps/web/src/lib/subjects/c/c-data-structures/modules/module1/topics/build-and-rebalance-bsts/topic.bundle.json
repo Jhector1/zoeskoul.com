@@ -4,7 +4,7 @@
   "moduleSlug": "c-data-structures-module-1-algorithm-design-lab",
   "sectionSlug": "c-data-structures-algorithm-design-lab",
   "prefix": "cds1",
-  "minutes": 45,
+  "minutes": 60,
   "runtimeDefaults": {
     "kind": "code",
     "language": "c",
@@ -41,7 +41,7 @@
       "kind": "sketch",
       "titleKey": "topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.build-and-rebalance-bsts.cards.bst-animation.title",
       "sketchId": "bst-animation",
-      "height": 820
+      "height": 900
     },
     {
       "id": "bst-project",
@@ -95,11 +95,11 @@
       "archetype": "algorithm_animation",
       "titleKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.build-and-rebalance-bsts.bst-animation.title",
       "contextKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.build-and-rebalance-bsts.bst-animation.context",
-      "intervalMs": 1400,
+      "intervalMs": 2150,
       "autoPlay": false,
       "showControls": true,
       "showStepCounter": true,
-      "canvasHeight": 330,
+      "canvasHeight": 510,
       "steps": [
         {
           "id": "bst-animation-1",
@@ -107,72 +107,53 @@
           "bodyKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.build-and-rebalance-bsts.bst-animation.steps.0.body",
           "nodes": [
             {
-              "id": "a",
-              "label": "4, 2, 6, 1, 3, 5, 7",
-              "detail": "sequence A",
+              "id": "r",
+              "label": "4",
               "x": 50,
-              "y": 30,
-              "shape": "pill",
+              "y": 9,
+              "width": 11,
               "tone": "info",
-              "width": 60
-            },
-            {
-              "id": "b",
-              "label": "4, 6, 2, 7, 5, 3, 1",
-              "detail": "sequence A'",
-              "x": 50,
-              "y": 70,
-              "shape": "pill",
-              "tone": "good",
               "active": true,
-              "width": 60
+              "shape": "circle"
             }
-          ]
+          ],
+          "edges": [],
+          "code": "root = insert(NULL, 4);"
         },
         {
           "id": "bst-animation-2",
           "titleKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.build-and-rebalance-bsts.bst-animation.steps.1.title",
           "bodyKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.build-and-rebalance-bsts.bst-animation.steps.1.body",
-          "formula": "$|\\,size(left)-size(right)\\,|\\le 1$ at every node",
           "nodes": [
             {
-              "id": "left",
-              "label": "3 nodes",
-              "detail": "left subtree",
-              "x": 25,
-              "y": 58,
-              "tone": "info",
-              "width": 25
-            },
-            {
-              "id": "root",
-              "label": "root",
+              "id": "r",
+              "label": "4",
               "x": 50,
-              "y": 22,
-              "shape": "circle",
-              "tone": "good",
-              "active": true
+              "y": 9,
+              "width": 11,
+              "shape": "circle"
             },
             {
-              "id": "right",
-              "label": "3 nodes",
-              "detail": "right subtree",
-              "x": 75,
-              "y": 58,
+              "id": "l",
+              "label": "2",
+              "x": 28,
+              "y": 32,
+              "width": 11,
               "tone": "info",
-              "width": 25
+              "active": true,
+              "shape": "circle"
             }
           ],
           "edges": [
             {
-              "from": "root",
-              "to": "left"
-            },
-            {
-              "from": "root",
-              "to": "right"
+              "from": "r",
+              "to": "l",
+              "label": "<",
+              "tone": "info",
+              "active": true
             }
-          ]
+          ],
+          "code": "compare 2 with 4: 2 < 4"
         },
         {
           "id": "bst-animation-3",
@@ -180,51 +161,47 @@
           "bodyKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.build-and-rebalance-bsts.bst-animation.steps.2.body",
           "nodes": [
             {
-              "id": "1",
-              "label": "1",
-              "x": 8,
-              "y": 50
-            },
-            {
-              "id": "2",
-              "label": "2",
-              "x": 22,
-              "y": 50
-            },
-            {
-              "id": "3",
-              "label": "3",
-              "x": 36,
-              "y": 50
-            },
-            {
-              "id": "4",
+              "id": "r",
               "label": "4",
-              "detail": "midpoint",
               "x": 50,
-              "y": 50,
-              "tone": "good",
-              "active": true
+              "y": 9,
+              "width": 11,
+              "shape": "circle"
             },
             {
-              "id": "5",
-              "label": "5",
-              "x": 64,
-              "y": 50
+              "id": "l",
+              "label": "2",
+              "x": 28,
+              "y": 32,
+              "width": 11,
+              "shape": "circle"
             },
             {
-              "id": "6",
+              "id": "rr",
               "label": "6",
-              "x": 78,
-              "y": 50
+              "x": 72,
+              "y": 32,
+              "width": 11,
+              "tone": "info",
+              "active": true,
+              "shape": "circle"
+            }
+          ],
+          "edges": [
+            {
+              "from": "r",
+              "to": "l",
+              "label": "<"
             },
             {
-              "id": "7",
-              "label": "7",
-              "x": 92,
-              "y": 50
+              "from": "r",
+              "to": "rr",
+              "label": ">",
+              "tone": "info",
+              "active": true
             }
-          ]
+          ],
+          "code": "compare 6 with 4: 6 > 4"
         },
         {
           "id": "bst-animation-4",
@@ -232,47 +209,60 @@
           "bodyKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.build-and-rebalance-bsts.bst-animation.steps.3.body",
           "nodes": [
             {
-              "id": "4",
+              "id": "r",
               "label": "4",
               "x": 50,
-              "y": 15,
-              "shape": "circle",
-              "tone": "good",
-              "active": true
+              "y": 9,
+              "width": 11,
+              "shape": "circle"
             },
             {
-              "id": "left",
-              "label": "[1, 2, 3]",
-              "detail": "3 keys",
-              "x": 25,
-              "y": 67,
-              "shape": "pill",
-              "tone": "info",
-              "width": 30
+              "id": "l",
+              "label": "2",
+              "x": 28,
+              "y": 32,
+              "width": 11,
+              "shape": "circle"
             },
             {
-              "id": "right",
-              "label": "[5, 6, 7]",
-              "detail": "3 keys",
-              "x": 75,
-              "y": 67,
-              "shape": "pill",
+              "id": "rr",
+              "label": "6",
+              "x": 72,
+              "y": 32,
+              "width": 11,
+              "shape": "circle"
+            },
+            {
+              "id": "ll",
+              "label": "1",
+              "x": 14,
+              "y": 59,
+              "width": 11,
               "tone": "info",
-              "width": 30
+              "active": true,
+              "shape": "circle"
             }
           ],
           "edges": [
             {
-              "from": "4",
-              "to": "left",
-              "active": true
+              "from": "r",
+              "to": "l",
+              "label": "<"
             },
             {
-              "from": "4",
-              "to": "right",
+              "from": "r",
+              "to": "rr",
+              "label": ">"
+            },
+            {
+              "from": "l",
+              "to": "ll",
+              "label": "<",
+              "tone": "info",
               "active": true
             }
-          ]
+          ],
+          "code": "1 < 4; 1 < 2"
         },
         {
           "id": "bst-animation-5",
@@ -280,119 +270,1112 @@
           "bodyKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.build-and-rebalance-bsts.bst-animation.steps.4.body",
           "nodes": [
             {
-              "id": "4",
+              "id": "r",
               "label": "4",
               "x": 50,
-              "y": 10,
+              "y": 9,
+              "width": 11,
               "shape": "circle"
             },
             {
-              "id": "2",
+              "id": "l",
               "label": "2",
-              "x": 27,
-              "y": 38,
-              "shape": "circle",
-              "tone": "good",
-              "active": true
+              "x": 28,
+              "y": 32,
+              "width": 11,
+              "shape": "circle"
             },
             {
-              "id": "6",
+              "id": "rr",
               "label": "6",
-              "x": 73,
-              "y": 38,
-              "shape": "circle",
-              "tone": "good",
-              "active": true
+              "x": 72,
+              "y": 32,
+              "width": 11,
+              "shape": "circle"
             },
             {
-              "id": "1",
+              "id": "ll",
               "label": "1",
               "x": 14,
-              "y": 78,
+              "y": 59,
+              "width": 11,
               "shape": "circle"
             },
             {
-              "id": "3",
+              "id": "lr",
               "label": "3",
-              "x": 39,
-              "y": 78,
-              "shape": "circle"
-            },
-            {
-              "id": "5",
-              "label": "5",
-              "x": 61,
-              "y": 78,
-              "shape": "circle"
-            },
-            {
-              "id": "7",
-              "label": "7",
-              "x": 86,
-              "y": 78,
+              "x": 40,
+              "y": 59,
+              "width": 11,
+              "tone": "info",
+              "active": true,
               "shape": "circle"
             }
           ],
           "edges": [
             {
-              "from": "4",
-              "to": "2"
+              "from": "r",
+              "to": "l",
+              "label": "<"
             },
             {
-              "from": "4",
-              "to": "6"
+              "from": "r",
+              "to": "rr",
+              "label": ">"
             },
             {
-              "from": "2",
-              "to": "1"
+              "from": "l",
+              "to": "ll",
+              "label": "<"
             },
             {
-              "from": "2",
-              "to": "3"
-            },
-            {
-              "from": "6",
-              "to": "5"
-            },
-            {
-              "from": "6",
-              "to": "7"
+              "from": "l",
+              "to": "lr",
+              "label": ">",
+              "tone": "info",
+              "active": true
             }
-          ]
+          ],
+          "code": "3 < 4; 3 > 2"
         },
         {
           "id": "bst-animation-6",
           "titleKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.build-and-rebalance-bsts.bst-animation.steps.5.title",
           "bodyKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.build-and-rebalance-bsts.bst-animation.steps.5.body",
-          "code": "inorder(node):\n    inorder(node->left)\n    output node->key\n    inorder(node->right)",
+          "nodes": [
+            {
+              "id": "r",
+              "label": "4",
+              "x": 50,
+              "y": 9,
+              "width": 11,
+              "shape": "circle"
+            },
+            {
+              "id": "l",
+              "label": "2",
+              "x": 28,
+              "y": 32,
+              "width": 11,
+              "shape": "circle"
+            },
+            {
+              "id": "rr",
+              "label": "6",
+              "x": 72,
+              "y": 32,
+              "width": 11,
+              "shape": "circle"
+            },
+            {
+              "id": "ll",
+              "label": "1",
+              "x": 14,
+              "y": 59,
+              "width": 11,
+              "shape": "circle"
+            },
+            {
+              "id": "lr",
+              "label": "3",
+              "x": 40,
+              "y": 59,
+              "width": 11,
+              "shape": "circle"
+            },
+            {
+              "id": "rl",
+              "label": "5",
+              "x": 60,
+              "y": 59,
+              "width": 11,
+              "tone": "info",
+              "active": true,
+              "shape": "circle"
+            }
+          ],
+          "edges": [
+            {
+              "from": "r",
+              "to": "l",
+              "label": "<"
+            },
+            {
+              "from": "r",
+              "to": "rr",
+              "label": ">"
+            },
+            {
+              "from": "l",
+              "to": "ll",
+              "label": "<"
+            },
+            {
+              "from": "l",
+              "to": "lr",
+              "label": ">"
+            },
+            {
+              "from": "rr",
+              "to": "rl",
+              "label": "<",
+              "tone": "info",
+              "active": true
+            }
+          ],
+          "code": "5 > 4; 5 < 6"
+        },
+        {
+          "id": "bst-animation-7",
+          "titleKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.build-and-rebalance-bsts.bst-animation.steps.6.title",
+          "bodyKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.build-and-rebalance-bsts.bst-animation.steps.6.body",
+          "nodes": [
+            {
+              "id": "r",
+              "label": "4",
+              "x": 50,
+              "y": 9,
+              "width": 11,
+              "shape": "circle"
+            },
+            {
+              "id": "l",
+              "label": "2",
+              "x": 28,
+              "y": 32,
+              "width": 11,
+              "shape": "circle"
+            },
+            {
+              "id": "rr",
+              "label": "6",
+              "x": 72,
+              "y": 32,
+              "width": 11,
+              "shape": "circle"
+            },
+            {
+              "id": "ll",
+              "label": "1",
+              "x": 14,
+              "y": 59,
+              "width": 11,
+              "shape": "circle"
+            },
+            {
+              "id": "lr",
+              "label": "3",
+              "x": 40,
+              "y": 59,
+              "width": 11,
+              "shape": "circle"
+            },
+            {
+              "id": "rl",
+              "label": "5",
+              "x": 60,
+              "y": 59,
+              "width": 11,
+              "shape": "circle"
+            },
+            {
+              "id": "rrr",
+              "label": "7",
+              "x": 86,
+              "y": 59,
+              "width": 11,
+              "tone": "info",
+              "active": true,
+              "shape": "circle"
+            }
+          ],
+          "edges": [
+            {
+              "from": "r",
+              "to": "l",
+              "label": "<"
+            },
+            {
+              "from": "r",
+              "to": "rr",
+              "label": ">"
+            },
+            {
+              "from": "l",
+              "to": "ll",
+              "label": "<"
+            },
+            {
+              "from": "l",
+              "to": "lr",
+              "label": ">"
+            },
+            {
+              "from": "rr",
+              "to": "rl",
+              "label": "<"
+            },
+            {
+              "from": "rr",
+              "to": "rrr",
+              "label": ">",
+              "tone": "info",
+              "active": true
+            }
+          ],
+          "code": "7 > 4; 7 > 6"
+        },
+        {
+          "id": "bst-animation-8",
+          "titleKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.build-and-rebalance-bsts.bst-animation.steps.7.title",
+          "bodyKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.build-and-rebalance-bsts.bst-animation.steps.7.body",
+          "nodes": [
+            {
+              "id": "r",
+              "label": "4",
+              "x": 50,
+              "y": 9,
+              "width": 11,
+              "tone": "info",
+              "active": true,
+              "shape": "circle"
+            },
+            {
+              "id": "l",
+              "label": "2",
+              "x": 28,
+              "y": 32,
+              "width": 11,
+              "tone": "info",
+              "active": true,
+              "shape": "circle"
+            },
+            {
+              "id": "rr",
+              "label": "6",
+              "x": 72,
+              "y": 32,
+              "width": 11,
+              "tone": "info",
+              "active": true,
+              "shape": "circle"
+            },
+            {
+              "id": "ll",
+              "label": "1",
+              "x": 14,
+              "y": 59,
+              "width": 11,
+              "tone": "info",
+              "active": true,
+              "shape": "circle"
+            },
+            {
+              "id": "lr",
+              "label": "3",
+              "x": 40,
+              "y": 59,
+              "width": 11,
+              "tone": "info",
+              "active": true,
+              "shape": "circle"
+            },
+            {
+              "id": "rl",
+              "label": "5",
+              "x": 60,
+              "y": 59,
+              "width": 11,
+              "tone": "info",
+              "active": true,
+              "shape": "circle"
+            },
+            {
+              "id": "rrr",
+              "label": "7",
+              "x": 86,
+              "y": 59,
+              "width": 11,
+              "tone": "info",
+              "active": true,
+              "shape": "circle"
+            }
+          ],
+          "edges": [
+            {
+              "from": "r",
+              "to": "l",
+              "label": "<",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "from": "r",
+              "to": "rr",
+              "label": ">",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "from": "l",
+              "to": "ll",
+              "label": "<",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "from": "l",
+              "to": "lr",
+              "label": ">",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "from": "rr",
+              "to": "rl",
+              "label": "<",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "from": "rr",
+              "to": "rrr",
+              "label": ">",
+              "tone": "info",
+              "active": true
+            }
+          ],
+          "code": "A  = 4,2,6,1,3,5,7\nA' = 4,6,2,7,5,3,1",
+          "formula": "$BST(A)=BST(A')$"
+        },
+        {
+          "id": "bst-animation-9",
+          "titleKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.build-and-rebalance-bsts.bst-animation.steps.8.title",
+          "bodyKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.build-and-rebalance-bsts.bst-animation.steps.8.body",
+          "nodes": [
+            {
+              "id": "a",
+              "label": "Build[0,8) → 4",
+              "x": 50,
+              "y": 8,
+              "width": 23,
+              "tone": "info",
+              "active": true
+            }
+          ],
+          "edges": [],
+          "code": "Build(sorted, 0, 8, NULL)\nmiddle = 3\nroot->key = 4",
+          "formula": "$|3-4|=1$"
+        },
+        {
+          "id": "bst-animation-10",
+          "titleKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.build-and-rebalance-bsts.bst-animation.steps.9.title",
+          "bodyKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.build-and-rebalance-bsts.bst-animation.steps.9.body",
+          "nodes": [
+            {
+              "id": "a",
+              "label": "Build[0,8) → 4",
+              "x": 50,
+              "y": 8,
+              "width": 23,
+              "tone": "info",
+              "active": true
+            },
+            {
+              "id": "b",
+              "label": "Build[0,3) → 2",
+              "x": 27,
+              "y": 31,
+              "width": 22
+            },
+            {
+              "id": "c",
+              "label": "Build[4,8) → 6",
+              "x": 73,
+              "y": 31,
+              "width": 22
+            }
+          ],
+          "edges": [
+            {
+              "from": "a",
+              "to": "b",
+              "label": "left"
+            },
+            {
+              "from": "a",
+              "to": "c",
+              "label": "right"
+            }
+          ],
+          "code": "root->left  = Build(sorted, 0, 3, root);\nroot->right = Build(sorted, 4, 8, root);"
+        },
+        {
+          "id": "bst-animation-11",
+          "titleKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.build-and-rebalance-bsts.bst-animation.steps.10.title",
+          "bodyKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.build-and-rebalance-bsts.bst-animation.steps.10.body",
+          "nodes": [
+            {
+              "id": "a",
+              "label": "Build[0,8) → 4",
+              "x": 50,
+              "y": 8,
+              "width": 23,
+              "tone": "info",
+              "active": true
+            },
+            {
+              "id": "b",
+              "label": "Build[0,3) → 2",
+              "x": 27,
+              "y": 31,
+              "width": 22
+            },
+            {
+              "id": "c",
+              "label": "Build[4,8) → 6",
+              "x": 73,
+              "y": 31,
+              "width": 22
+            },
+            {
+              "id": "d",
+              "label": "Build[0,1) → 1",
+              "x": 10,
+              "y": 57,
+              "width": 19
+            },
+            {
+              "id": "e",
+              "label": "Build[2,3) → 3",
+              "x": 36,
+              "y": 57,
+              "width": 19
+            },
+            {
+              "id": "f",
+              "label": "Build[4,5) → 5",
+              "x": 62,
+              "y": 57,
+              "width": 19
+            },
+            {
+              "id": "g",
+              "label": "Build[6,8) → 7",
+              "x": 88,
+              "y": 57,
+              "width": 19
+            }
+          ],
+          "edges": [
+            {
+              "from": "a",
+              "to": "b",
+              "label": "left"
+            },
+            {
+              "from": "a",
+              "to": "c",
+              "label": "right"
+            },
+            {
+              "from": "b",
+              "to": "d",
+              "label": "left"
+            },
+            {
+              "from": "b",
+              "to": "e",
+              "label": "right"
+            },
+            {
+              "from": "c",
+              "to": "f",
+              "label": "left"
+            },
+            {
+              "from": "c",
+              "to": "g",
+              "label": "right"
+            }
+          ],
+          "code": "Build[0,1) -> 1\nBuild[2,3) -> 3\nBuild[4,5) -> 5\nBuild[6,8) -> 7"
+        },
+        {
+          "id": "bst-animation-12",
+          "titleKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.build-and-rebalance-bsts.bst-animation.steps.11.title",
+          "bodyKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.build-and-rebalance-bsts.bst-animation.steps.11.body",
+          "nodes": [
+            {
+              "id": "a",
+              "label": "Build[0,8) → 4",
+              "x": 50,
+              "y": 8,
+              "width": 23,
+              "tone": "info",
+              "active": true
+            },
+            {
+              "id": "b",
+              "label": "Build[0,3) → 2",
+              "x": 27,
+              "y": 31,
+              "width": 22
+            },
+            {
+              "id": "c",
+              "label": "Build[4,8) → 6",
+              "x": 73,
+              "y": 31,
+              "width": 22
+            },
+            {
+              "id": "d",
+              "label": "Build[0,1) → 1",
+              "x": 10,
+              "y": 57,
+              "width": 19
+            },
+            {
+              "id": "e",
+              "label": "Build[2,3) → 3",
+              "x": 36,
+              "y": 57,
+              "width": 19
+            },
+            {
+              "id": "f",
+              "label": "Build[4,5) → 5",
+              "x": 62,
+              "y": 57,
+              "width": 19
+            },
+            {
+              "id": "g",
+              "label": "Build[6,8) → 7",
+              "x": 88,
+              "y": 57,
+              "width": 19
+            },
+            {
+              "id": "h",
+              "label": "Build[7,8) → 8",
+              "x": 88,
+              "y": 84,
+              "width": 19
+            }
+          ],
+          "edges": [
+            {
+              "from": "a",
+              "to": "b",
+              "label": "left"
+            },
+            {
+              "from": "a",
+              "to": "c",
+              "label": "right"
+            },
+            {
+              "from": "b",
+              "to": "d",
+              "label": "left"
+            },
+            {
+              "from": "b",
+              "to": "e",
+              "label": "right"
+            },
+            {
+              "from": "c",
+              "to": "f",
+              "label": "left"
+            },
+            {
+              "from": "c",
+              "to": "g",
+              "label": "right"
+            },
+            {
+              "from": "g",
+              "to": "h",
+              "label": "right"
+            }
+          ],
+          "code": "Build[6,8) -> 7\nBuild[7,8) -> 8"
+        },
+        {
+          "id": "bst-animation-13",
+          "titleKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.build-and-rebalance-bsts.bst-animation.steps.12.title",
+          "bodyKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.build-and-rebalance-bsts.bst-animation.steps.12.body",
+          "nodes": [
+            {
+              "id": "r",
+              "label": "4",
+              "x": 50,
+              "y": 9,
+              "width": 11,
+              "tone": "info",
+              "active": true,
+              "shape": "circle"
+            },
+            {
+              "id": "l",
+              "label": "2",
+              "x": 28,
+              "y": 32,
+              "width": 11,
+              "tone": "info",
+              "active": true,
+              "shape": "circle"
+            },
+            {
+              "id": "rr",
+              "label": "6",
+              "x": 72,
+              "y": 32,
+              "width": 11,
+              "tone": "info",
+              "active": true,
+              "shape": "circle"
+            },
+            {
+              "id": "ll",
+              "label": "1",
+              "x": 14,
+              "y": 59,
+              "width": 11,
+              "tone": "info",
+              "active": true,
+              "shape": "circle"
+            },
+            {
+              "id": "lr",
+              "label": "3",
+              "x": 40,
+              "y": 59,
+              "width": 11,
+              "tone": "info",
+              "active": true,
+              "shape": "circle"
+            },
+            {
+              "id": "rl",
+              "label": "5",
+              "x": 60,
+              "y": 59,
+              "width": 11,
+              "tone": "info",
+              "active": true,
+              "shape": "circle"
+            },
+            {
+              "id": "rrr",
+              "label": "7",
+              "x": 86,
+              "y": 59,
+              "width": 11,
+              "tone": "info",
+              "active": true,
+              "shape": "circle"
+            },
+            {
+              "id": "rrrr",
+              "label": "8",
+              "x": 94,
+              "y": 84,
+              "width": 11,
+              "tone": "info",
+              "active": true,
+              "shape": "circle"
+            }
+          ],
+          "edges": [
+            {
+              "from": "r",
+              "to": "l",
+              "label": "<",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "from": "r",
+              "to": "rr",
+              "label": ">",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "from": "l",
+              "to": "ll",
+              "label": "<",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "from": "l",
+              "to": "lr",
+              "label": ">",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "from": "rr",
+              "to": "rl",
+              "label": "<",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "from": "rr",
+              "to": "rrr",
+              "label": ">",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "from": "rrr",
+              "to": "rrrr",
+              "label": ">",
+              "tone": "info",
+              "active": true
+            }
+          ],
+          "code": "return root;  // key 4",
+          "formula": "$left<root<right\\quad\\text{and}\\quad |L-R|\\le1$"
+        },
+        {
+          "id": "bst-animation-14",
+          "titleKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.build-and-rebalance-bsts.bst-animation.steps.13.title",
+          "bodyKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.build-and-rebalance-bsts.bst-animation.steps.13.body",
+          "nodes": [
+            {
+              "id": "a",
+              "label": "Build[0,8) → 4",
+              "x": 50,
+              "y": 8,
+              "width": 23,
+              "tone": "info",
+              "active": true
+            },
+            {
+              "id": "b",
+              "label": "Build[0,3) → 2",
+              "x": 27,
+              "y": 31,
+              "width": 22
+            },
+            {
+              "id": "c",
+              "label": "Build[4,8) → 6",
+              "x": 73,
+              "y": 31,
+              "width": 22
+            },
+            {
+              "id": "d",
+              "label": "Build[0,1) → 1",
+              "x": 10,
+              "y": 57,
+              "width": 19
+            },
+            {
+              "id": "e",
+              "label": "Build[2,3) → 3",
+              "x": 36,
+              "y": 57,
+              "width": 19
+            },
+            {
+              "id": "f",
+              "label": "Build[4,5) → 5",
+              "x": 62,
+              "y": 57,
+              "width": 19
+            },
+            {
+              "id": "g",
+              "label": "Build[6,8) → 7",
+              "x": 88,
+              "y": 57,
+              "width": 19
+            },
+            {
+              "id": "h",
+              "label": "Build[7,8) → 8",
+              "x": 88,
+              "y": 84,
+              "width": 19
+            }
+          ],
+          "edges": [
+            {
+              "from": "a",
+              "to": "b",
+              "label": "left"
+            },
+            {
+              "from": "a",
+              "to": "c",
+              "label": "right"
+            },
+            {
+              "from": "b",
+              "to": "d",
+              "label": "left"
+            },
+            {
+              "from": "b",
+              "to": "e",
+              "label": "right"
+            },
+            {
+              "from": "c",
+              "to": "f",
+              "label": "left"
+            },
+            {
+              "from": "c",
+              "to": "g",
+              "label": "right"
+            },
+            {
+              "from": "g",
+              "to": "h",
+              "label": "right"
+            }
+          ],
+          "code": "T(n)=T(L)+T(R)+Theta(1)\nL+R=n-1",
+          "formula": "$T(n)=\\Theta(n)$"
+        },
+        {
+          "id": "bst-animation-15",
+          "titleKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.build-and-rebalance-bsts.bst-animation.steps.14.title",
+          "bodyKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.build-and-rebalance-bsts.bst-animation.steps.14.body",
+          "nodes": [
+            {
+              "id": "n1",
+              "label": "1",
+              "x": 10,
+              "y": 8,
+              "width": 10,
+              "tone": "warn",
+              "active": true,
+              "shape": "circle"
+            },
+            {
+              "id": "n2",
+              "label": "2",
+              "x": 23,
+              "y": 21,
+              "width": 10,
+              "shape": "circle"
+            },
+            {
+              "id": "n3",
+              "label": "3",
+              "x": 36,
+              "y": 34,
+              "width": 10,
+              "shape": "circle"
+            },
+            {
+              "id": "n4",
+              "label": "4",
+              "x": 49,
+              "y": 47,
+              "width": 10,
+              "shape": "circle"
+            },
+            {
+              "id": "n5",
+              "label": "5",
+              "x": 62,
+              "y": 60,
+              "width": 10,
+              "shape": "circle"
+            },
+            {
+              "id": "n6",
+              "label": "6",
+              "x": 75,
+              "y": 73,
+              "width": 10,
+              "shape": "circle"
+            },
+            {
+              "id": "n7",
+              "label": "7",
+              "x": 88,
+              "y": 86,
+              "width": 10,
+              "shape": "circle"
+            }
+          ],
+          "edges": [
+            {
+              "from": "n1",
+              "to": "n2",
+              "label": "right",
+              "tone": "warn",
+              "active": true
+            },
+            {
+              "from": "n2",
+              "to": "n3",
+              "label": "right",
+              "tone": "warn",
+              "active": true
+            },
+            {
+              "from": "n3",
+              "to": "n4",
+              "label": "right",
+              "tone": "warn",
+              "active": true
+            },
+            {
+              "from": "n4",
+              "to": "n5",
+              "label": "right",
+              "tone": "warn",
+              "active": true
+            },
+            {
+              "from": "n5",
+              "to": "n6",
+              "label": "right",
+              "tone": "warn",
+              "active": true
+            },
+            {
+              "from": "n6",
+              "to": "n7",
+              "label": "right",
+              "tone": "warn",
+              "active": true
+            }
+          ],
+          "code": "for value = 1..7:\n    root = bst_insert(root, value)",
+          "formula": "$|0-6|=6>1$"
+        },
+        {
+          "id": "bst-animation-16",
+          "titleKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.build-and-rebalance-bsts.bst-animation.steps.15.title",
+          "bodyKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.build-and-rebalance-bsts.bst-animation.steps.15.body",
+          "nodes": [
+            {
+              "id": "c1",
+              "label": "inorder(1)",
+              "x": 12,
+              "y": 12,
+              "width": 18,
+              "tone": "info",
+              "active": true
+            },
+            {
+              "id": "w1",
+              "label": "write 1",
+              "x": 29,
+              "y": 28,
+              "width": 15,
+              "shape": "pill"
+            },
+            {
+              "id": "c2",
+              "label": "inorder(2)",
+              "x": 44,
+              "y": 43,
+              "width": 18
+            },
+            {
+              "id": "w2",
+              "label": "write 2",
+              "x": 59,
+              "y": 58,
+              "width": 15,
+              "shape": "pill"
+            },
+            {
+              "id": "c3",
+              "label": "inorder(3)",
+              "x": 74,
+              "y": 73,
+              "width": 18
+            },
+            {
+              "id": "more",
+              "label": "… → 7",
+              "x": 89,
+              "y": 88,
+              "width": 15,
+              "shape": "pill"
+            }
+          ],
+          "edges": [
+            {
+              "from": "c1",
+              "to": "w1",
+              "label": "left=NULL",
+              "active": true
+            },
+            {
+              "from": "w1",
+              "to": "c2",
+              "label": "right"
+            },
+            {
+              "from": "c2",
+              "to": "w2",
+              "label": "left=NULL"
+            },
+            {
+              "from": "w2",
+              "to": "c3",
+              "label": "right"
+            },
+            {
+              "from": "c3",
+              "to": "more",
+              "label": "continue"
+            }
+          ],
+          "code": "inorder(node->left);\nappend(node->key);\ninorder(node->right);"
+        },
+        {
+          "id": "bst-animation-17",
+          "titleKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.build-and-rebalance-bsts.bst-animation.steps.16.title",
+          "bodyKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.build-and-rebalance-bsts.bst-animation.steps.16.body",
           "nodes": [
             {
               "id": "old",
-              "label": "arbitrary BST",
-              "x": 20,
-              "y": 48,
-              "shape": "pill",
-              "tone": "warn",
-              "width": 26
+              "label": "skewed BST",
+              "x": 18,
+              "y": 45,
+              "width": 24,
+              "detail": "7 nodes",
+              "tone": "warn"
             },
             {
               "id": "walk",
-              "label": "inorder traversal",
+              "label": "inorder",
               "x": 50,
-              "y": 48,
-              "shape": "pill",
+              "y": 45,
+              "width": 20,
+              "detail": "visit each once",
               "tone": "info",
-              "active": true,
-              "width": 28
+              "active": true
             },
             {
               "id": "arr",
-              "label": "sorted keys",
-              "x": 80,
-              "y": 48,
-              "shape": "pill",
+              "label": "[1,2,3,4,5,6,7]",
+              "x": 82,
+              "y": 45,
+              "width": 30,
+              "detail": "sorted",
               "tone": "good",
-              "width": 26
+              "active": true,
+              "shape": "pill"
             }
           ],
           "edges": [
@@ -404,57 +1387,275 @@
             {
               "from": "walk",
               "to": "arr",
+              "tone": "good",
               "active": true
             }
-          ]
+          ],
+          "code": "nodes = [1, 2, 3, 4, 5, 6, 7]",
+          "formula": "$\\Theta(n)\\text{ traversal}$"
         },
         {
-          "id": "bst-animation-7",
-          "titleKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.build-and-rebalance-bsts.bst-animation.steps.6.title",
-          "bodyKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.build-and-rebalance-bsts.bst-animation.steps.6.body",
-          "formula": "$\\Theta(n)\\text{ inorder}+\\Theta(n)\\text{ rebuild}=\\Theta(n)$",
+          "id": "bst-animation-18",
+          "titleKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.build-and-rebalance-bsts.bst-animation.steps.17.title",
+          "bodyKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.build-and-rebalance-bsts.bst-animation.steps.17.body",
           "nodes": [
             {
-              "id": "arr",
-              "label": "sorted keys",
-              "x": 24,
-              "y": 48,
-              "shape": "pill",
-              "tone": "info",
-              "width": 26
-            },
-            {
-              "id": "build",
-              "label": "midpoint recursion",
+              "id": "a",
+              "label": "Build[0,7) → 4",
               "x": 50,
-              "y": 48,
-              "shape": "pill",
-              "tone": "good",
-              "active": true,
-              "width": 30
+              "y": 8,
+              "width": 23,
+              "tone": "info",
+              "active": true
             },
             {
-              "id": "tree",
-              "label": "almost-balanced BST",
-              "x": 80,
-              "y": 48,
-              "shape": "pill",
-              "tone": "good",
-              "width": 30
+              "id": "b",
+              "label": "Build[0,3) → 2",
+              "x": 27,
+              "y": 34,
+              "width": 22
+            },
+            {
+              "id": "c",
+              "label": "Build[4,7) → 6",
+              "x": 73,
+              "y": 34,
+              "width": 22
+            },
+            {
+              "id": "d",
+              "label": "1",
+              "x": 12,
+              "y": 67,
+              "width": 10,
+              "shape": "circle"
+            },
+            {
+              "id": "e",
+              "label": "3",
+              "x": 40,
+              "y": 67,
+              "width": 10,
+              "shape": "circle"
+            },
+            {
+              "id": "f",
+              "label": "5",
+              "x": 60,
+              "y": 67,
+              "width": 10,
+              "shape": "circle"
+            },
+            {
+              "id": "g",
+              "label": "7",
+              "x": 88,
+              "y": 67,
+              "width": 10,
+              "shape": "circle"
             }
           ],
           "edges": [
             {
-              "from": "arr",
-              "to": "build",
+              "from": "a",
+              "to": "b",
+              "label": "left"
+            },
+            {
+              "from": "a",
+              "to": "c",
+              "label": "right"
+            },
+            {
+              "from": "b",
+              "to": "d"
+            },
+            {
+              "from": "b",
+              "to": "e"
+            },
+            {
+              "from": "c",
+              "to": "f"
+            },
+            {
+              "from": "c",
+              "to": "g"
+            }
+          ],
+          "code": "return BuildFromSorted(nodes, 0, 7, NULL);"
+        },
+        {
+          "id": "bst-animation-19",
+          "titleKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.build-and-rebalance-bsts.bst-animation.steps.18.title",
+          "bodyKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.build-and-rebalance-bsts.bst-animation.steps.18.body",
+          "nodes": [
+            {
+              "id": "r",
+              "label": "4",
+              "x": 50,
+              "y": 9,
+              "width": 11,
+              "tone": "info",
+              "active": true,
+              "shape": "circle"
+            },
+            {
+              "id": "l",
+              "label": "2",
+              "x": 28,
+              "y": 32,
+              "width": 11,
+              "tone": "info",
+              "active": true,
+              "shape": "circle"
+            },
+            {
+              "id": "rr",
+              "label": "6",
+              "x": 72,
+              "y": 32,
+              "width": 11,
+              "tone": "info",
+              "active": true,
+              "shape": "circle"
+            },
+            {
+              "id": "ll",
+              "label": "1",
+              "x": 14,
+              "y": 59,
+              "width": 11,
+              "tone": "info",
+              "active": true,
+              "shape": "circle"
+            },
+            {
+              "id": "lr",
+              "label": "3",
+              "x": 40,
+              "y": 59,
+              "width": 11,
+              "tone": "info",
+              "active": true,
+              "shape": "circle"
+            },
+            {
+              "id": "rl",
+              "label": "5",
+              "x": 60,
+              "y": 59,
+              "width": 11,
+              "tone": "info",
+              "active": true,
+              "shape": "circle"
+            },
+            {
+              "id": "rrr",
+              "label": "7",
+              "x": 86,
+              "y": 59,
+              "width": 11,
+              "tone": "info",
+              "active": true,
+              "shape": "circle"
+            }
+          ],
+          "edges": [
+            {
+              "from": "r",
+              "to": "l",
+              "label": "<",
+              "tone": "info",
               "active": true
             },
             {
-              "from": "build",
-              "to": "tree",
+              "from": "r",
+              "to": "rr",
+              "label": ">",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "from": "l",
+              "to": "ll",
+              "label": "<",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "from": "l",
+              "to": "lr",
+              "label": ">",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "from": "rr",
+              "to": "rl",
+              "label": "<",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "from": "rr",
+              "to": "rrr",
+              "label": ">",
+              "tone": "info",
               "active": true
             }
-          ]
+          ],
+          "code": "inorder = 1 2 3 4 5 6 7\nheight = 3\nbalanced = true"
+        },
+        {
+          "id": "bst-animation-20",
+          "titleKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.build-and-rebalance-bsts.bst-animation.steps.19.title",
+          "bodyKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.build-and-rebalance-bsts.bst-animation.steps.19.body",
+          "nodes": [
+            {
+              "id": "p1",
+              "label": "inorder",
+              "x": 20,
+              "y": 45,
+              "width": 22,
+              "detail": "n visits",
+              "tone": "info"
+            },
+            {
+              "id": "p2",
+              "label": "sorted array",
+              "x": 50,
+              "y": 45,
+              "width": 24,
+              "detail": "n references",
+              "tone": "info"
+            },
+            {
+              "id": "p3",
+              "label": "rebuild",
+              "x": 80,
+              "y": 45,
+              "width": 22,
+              "detail": "n calls",
+              "tone": "good",
+              "active": true
+            }
+          ],
+          "edges": [
+            {
+              "from": "p1",
+              "to": "p2",
+              "active": true
+            },
+            {
+              "from": "p2",
+              "to": "p3",
+              "tone": "good",
+              "active": true
+            }
+          ],
+          "code": "traverse: Theta(n)\nrebuild:  Theta(n)\ntotal:    Theta(n)",
+          "formula": "$\\boxed{\\Theta(n)}$"
         }
       ]
     }
@@ -571,7 +1772,7 @@
         "tests": [
           {
             "stdin": "",
-            "stdout": "balanced=yes\ninorder=1 2 3 4 5 6 7 \nheight=3\n",
+            "stdout": "build7 balanced=yes height=3 parents=yes inorder=1 2 3 4 5 6 7 \nbuild6 balanced=yes height=3 parents=yes inorder=-3 0 4 8 12 15 \nrebalance8 balanced=yes height=4 parents=yes inorder=1 2 3 4 5 6 7 8 \nempty balanced=yes height=0 parents=yes inorder=\n",
             "match": "exact"
           }
         ],
@@ -597,29 +1798,6 @@
             "language": "c",
             "isEntry": false,
             "entry": false
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_contains",
-            "path": "structures/bst.c",
-            "pattern": "(end - begin) / 2",
-            "message": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.build-and-rebalance-bsts.finalLab.steps.almost_balanced_bst.checks.0.message",
-            "normalizeWhitespace": false
-          },
-          {
-            "type": "source_contains",
-            "path": "structures/bst.c",
-            "pattern": "inorder_fill",
-            "message": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.build-and-rebalance-bsts.finalLab.steps.almost_balanced_bst.checks.1.message",
-            "normalizeWhitespace": false
-          },
-          {
-            "type": "source_contains",
-            "path": "structures/bst.c",
-            "pattern": "bst_build_balanced(values, n)",
-            "message": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.build-and-rebalance-bsts.finalLab.steps.almost_balanced_bst.checks.2.message",
-            "normalizeWhitespace": false
           }
         ]
       }

@@ -41,7 +41,7 @@
       "kind": "sketch",
       "titleKey": "topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.insert-linked-binary-heap.cards.heap-animation.title",
       "sketchId": "heap-animation",
-      "height": 820
+      "height": 900
     },
     {
       "id": "heap-project",
@@ -80,167 +80,302 @@
       "archetype": "algorithm_animation",
       "titleKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.insert-linked-binary-heap.heap-animation.title",
       "contextKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.insert-linked-binary-heap.heap-animation.context",
-      "intervalMs": 1400,
+      "intervalMs": 2100,
       "autoPlay": false,
       "showControls": true,
       "showStepCounter": true,
-      "canvasHeight": 340,
+      "canvasHeight": 480,
       "steps": [
         {
           "id": "heap-animation-1",
           "titleKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.insert-linked-binary-heap.heap-animation.steps.0.title",
           "bodyKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.insert-linked-binary-heap.heap-animation.steps.0.body",
-          "formula": "$left(i)=2i,\\quad right(i)=2i+1$",
           "nodes": [
             {
-              "id": "1",
-              "label": "1",
-              "detail": "root",
+              "id": "p1",
+              "label": "10",
               "x": 50,
-              "y": 10,
-              "shape": "circle",
-              "tone": "info"
-            },
-            {
-              "id": "2",
-              "label": "2",
-              "x": 28,
-              "y": 40,
+              "y": 8,
+              "width": 10,
               "shape": "circle"
             },
             {
-              "id": "3",
-              "label": "3",
-              "x": 72,
-              "y": 40,
+              "id": "p2",
+              "label": "20",
+              "x": 27,
+              "y": 31,
+              "width": 10,
               "shape": "circle"
             },
             {
-              "id": "4",
-              "label": "4",
+              "id": "p3",
+              "label": "15",
+              "x": 73,
+              "y": 31,
+              "width": 10,
+              "shape": "circle"
+            },
+            {
+              "id": "p4",
+              "label": "30",
               "x": 14,
-              "y": 80,
+              "y": 56,
+              "width": 10,
               "shape": "circle"
             },
             {
-              "id": "5",
-              "label": "5",
-              "x": 39,
-              "y": 80,
+              "id": "p5",
+              "label": "40",
+              "x": 40,
+              "y": 56,
+              "width": 10,
               "shape": "circle"
             },
             {
-              "id": "6",
-              "label": "6",
-              "x": 61,
-              "y": 80,
+              "id": "p6",
+              "label": "50",
+              "x": 60,
+              "y": 56,
+              "width": 10,
               "shape": "circle"
             },
             {
-              "id": "7",
-              "label": "7",
+              "id": "p7",
+              "label": "60",
               "x": 86,
-              "y": 80,
+              "y": 56,
+              "width": 10,
               "shape": "circle"
             }
           ],
           "edges": [
             {
-              "from": "1",
-              "to": "2"
+              "from": "p1",
+              "to": "p2",
+              "label": "0"
             },
             {
-              "from": "1",
-              "to": "3"
+              "from": "p1",
+              "to": "p3",
+              "label": "1"
             },
             {
-              "from": "2",
-              "to": "4"
+              "from": "p2",
+              "to": "p4",
+              "label": "0"
             },
             {
-              "from": "2",
-              "to": "5"
+              "from": "p2",
+              "to": "p5",
+              "label": "1"
             },
             {
-              "from": "3",
-              "to": "6"
+              "from": "p3",
+              "to": "p6",
+              "label": "0"
             },
             {
-              "from": "3",
-              "to": "7"
+              "from": "p3",
+              "to": "p7",
+              "label": "1"
             }
-          ]
+          ],
+          "code": "n = 7;\nvalue = 5;\nindex = n + 1;  // 8"
         },
         {
           "id": "heap-animation-2",
           "titleKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.insert-linked-binary-heap.heap-animation.steps.1.title",
           "bodyKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.insert-linked-binary-heap.heap-animation.steps.1.body",
-          "formula": "$new\\ index=n+1$",
           "nodes": [
             {
-              "id": "n",
-              "label": "n = 7",
-              "detail": "occupied positions 1 through 7",
-              "x": 28,
-              "y": 48,
-              "shape": "pill",
+              "id": "p1",
+              "label": "10",
+              "x": 50,
+              "y": 8,
+              "width": 10,
               "tone": "info",
-              "width": 34
+              "active": true,
+              "shape": "circle"
             },
             {
-              "id": "next",
-              "label": "n + 1 = 8",
-              "detail": "new position",
-              "x": 72,
-              "y": 48,
-              "shape": "pill",
-              "tone": "good",
+              "id": "p2",
+              "label": "20",
+              "x": 27,
+              "y": 31,
+              "width": 10,
+              "tone": "info",
               "active": true,
-              "width": 32
+              "shape": "circle"
+            },
+            {
+              "id": "p3",
+              "label": "15",
+              "x": 73,
+              "y": 31,
+              "width": 10,
+              "shape": "circle"
+            },
+            {
+              "id": "p4",
+              "label": "30",
+              "x": 14,
+              "y": 56,
+              "width": 10,
+              "tone": "info",
+              "active": true,
+              "shape": "circle"
+            },
+            {
+              "id": "p5",
+              "label": "40",
+              "x": 40,
+              "y": 56,
+              "width": 10,
+              "shape": "circle"
+            },
+            {
+              "id": "p6",
+              "label": "50",
+              "x": 60,
+              "y": 56,
+              "width": 10,
+              "shape": "circle"
+            },
+            {
+              "id": "p7",
+              "label": "60",
+              "x": 86,
+              "y": 56,
+              "width": 10,
+              "shape": "circle"
+            },
+            {
+              "id": "p8",
+              "label": "target 8",
+              "x": 7,
+              "y": 83,
+              "width": 10,
+              "tone": "info",
+              "active": true,
+              "dimmed": true,
+              "shape": "circle"
             }
           ],
           "edges": [
             {
-              "from": "n",
-              "to": "next",
+              "from": "p1",
+              "to": "p2",
+              "label": "0",
+              "tone": "info",
               "active": true
+            },
+            {
+              "from": "p1",
+              "to": "p3",
+              "label": "1"
+            },
+            {
+              "from": "p2",
+              "to": "p4",
+              "label": "0",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "from": "p2",
+              "to": "p5",
+              "label": "1"
+            },
+            {
+              "from": "p3",
+              "to": "p6",
+              "label": "0"
+            },
+            {
+              "from": "p3",
+              "to": "p7",
+              "label": "1"
+            },
+            {
+              "from": "p4",
+              "to": "p8",
+              "label": "0",
+              "tone": "info",
+              "active": true,
+              "dashed": true
             }
-          ]
+          ],
+          "code": "index = 8;        // binary 1000\nhighest_bit = 8;\n// path bits after the leading 1: 0, 0, 0",
+          "formula": "$8=1000_2$"
         },
         {
           "id": "heap-animation-3",
           "titleKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.insert-linked-binary-heap.heap-animation.steps.2.title",
           "bodyKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.insert-linked-binary-heap.heap-animation.steps.2.body",
-          "formula": "$8=1000_2\\Rightarrow 000\\Rightarrow left,left,left$",
           "nodes": [
             {
-              "id": "bits",
-              "label": "1 0 0 0",
-              "detail": "drop the leading 1",
-              "x": 28,
-              "y": 48,
-              "shape": "pill",
+              "id": "rootbit",
+              "label": "1",
+              "x": 18,
+              "y": 45,
+              "width": 11,
+              "detail": "root",
               "tone": "info",
-              "width": 32
+              "shape": "circle"
             },
             {
-              "id": "path",
-              "label": "left → left → left",
-              "x": 72,
-              "y": 48,
-              "shape": "pill",
+              "id": "walk1",
+              "label": "0",
+              "x": 40,
+              "y": 45,
+              "width": 11,
+              "detail": "walk left",
+              "tone": "info",
+              "active": true,
+              "shape": "circle"
+            },
+            {
+              "id": "walk2",
+              "label": "0",
+              "x": 61,
+              "y": 45,
+              "width": 11,
+              "detail": "walk left",
+              "tone": "info",
+              "active": true,
+              "shape": "circle"
+            },
+            {
+              "id": "attach",
+              "label": "0",
+              "x": 84,
+              "y": 45,
+              "width": 11,
+              "detail": "attach left",
               "tone": "good",
               "active": true,
-              "width": 36
+              "shape": "circle"
             }
           ],
           "edges": [
             {
-              "from": "bits",
-              "to": "path",
+              "from": "rootbit",
+              "to": "walk1"
+            },
+            {
+              "from": "walk1",
+              "to": "walk2",
+              "active": true
+            },
+            {
+              "from": "walk2",
+              "to": "attach",
+              "tone": "good",
               "active": true
             }
-          ]
+          ],
+          "code": "path bits after leading 1: 0 0 | 0\n                           walk | attach",
+          "formula": "$1000_2=1\\;00\\mid0$"
         },
         {
           "id": "heap-animation-4",
@@ -248,133 +383,911 @@
           "bodyKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.insert-linked-binary-heap.heap-animation.steps.3.body",
           "nodes": [
             {
-              "id": "1",
-              "label": "root",
+              "id": "p1",
+              "label": "10",
               "x": 50,
-              "y": 10,
+              "y": 8,
+              "width": 10,
+              "tone": "info",
+              "active": true,
               "shape": "circle"
             },
             {
-              "id": "2",
-              "label": "left",
-              "x": 28,
-              "y": 40,
-              "shape": "circle",
+              "id": "p2",
+              "label": "20",
+              "x": 27,
+              "y": 31,
+              "width": 10,
               "tone": "info",
-              "active": true
+              "active": true,
+              "shape": "circle"
             },
             {
-              "id": "4",
-              "label": "parent",
-              "detail": "follow first two 0 bits",
-              "x": 14,
-              "y": 76,
-              "shape": "circle",
-              "tone": "good",
-              "active": true
+              "id": "p3",
+              "label": "15",
+              "x": 73,
+              "y": 31,
+              "width": 10,
+              "shape": "circle"
             },
             {
-              "id": "8",
-              "label": "attach left",
-              "detail": "final 0 bit",
+              "id": "p4",
+              "label": "30",
               "x": 14,
-              "y": 94,
-              "shape": "pill",
-              "tone": "good",
-              "width": 26
+              "y": 56,
+              "width": 10,
+              "tone": "info",
+              "active": true,
+              "shape": "circle"
+            },
+            {
+              "id": "p5",
+              "label": "40",
+              "x": 40,
+              "y": 56,
+              "width": 10,
+              "shape": "circle"
+            },
+            {
+              "id": "p6",
+              "label": "50",
+              "x": 60,
+              "y": 56,
+              "width": 10,
+              "shape": "circle"
+            },
+            {
+              "id": "p7",
+              "label": "60",
+              "x": 86,
+              "y": 56,
+              "width": 10,
+              "shape": "circle"
+            },
+            {
+              "id": "p8",
+              "label": "target 8",
+              "x": 7,
+              "y": 83,
+              "width": 10,
+              "tone": "info",
+              "active": true,
+              "dimmed": true,
+              "shape": "circle"
             }
           ],
           "edges": [
             {
-              "from": "1",
-              "to": "2",
+              "from": "p1",
+              "to": "p2",
               "label": "0",
+              "tone": "info",
               "active": true
             },
             {
-              "from": "2",
-              "to": "4",
+              "from": "p1",
+              "to": "p3",
+              "label": "1"
+            },
+            {
+              "from": "p2",
+              "to": "p4",
               "label": "0",
+              "tone": "info",
               "active": true
             },
             {
-              "from": "4",
-              "to": "8",
+              "from": "p2",
+              "to": "p5",
+              "label": "1"
+            },
+            {
+              "from": "p3",
+              "to": "p6",
+              "label": "0"
+            },
+            {
+              "from": "p3",
+              "to": "p7",
+              "label": "1"
+            },
+            {
+              "from": "p4",
+              "to": "p8",
               "label": "0",
-              "active": true
+              "tone": "info",
+              "active": true,
+              "dashed": true
             }
-          ]
+          ],
+          "code": "parent = root;          // index 1, key 10\nparent = parent->left;  // index 2, key 20\nparent = parent->left;  // index 4, key 30"
         },
         {
           "id": "heap-animation-5",
           "titleKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.insert-linked-binary-heap.heap-animation.steps.4.title",
           "bodyKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.insert-linked-binary-heap.heap-animation.steps.4.body",
-          "code": "node->parent = parent;\nnode->left = NULL;\nnode->right = NULL;\nparent->left = node;",
           "nodes": [
             {
-              "id": "parent",
-              "label": "parent node",
-              "x": 30,
-              "y": 42,
-              "shape": "pill",
-              "tone": "info",
-              "width": 30
+              "id": "p1",
+              "label": "10",
+              "x": 50,
+              "y": 8,
+              "width": 10,
+              "shape": "circle"
             },
             {
-              "id": "child",
-              "label": "new node x",
-              "detail": "left/right = NULL",
-              "x": 72,
-              "y": 62,
-              "shape": "pill",
-              "tone": "good",
+              "id": "p2",
+              "label": "20",
+              "x": 27,
+              "y": 31,
+              "width": 10,
+              "shape": "circle"
+            },
+            {
+              "id": "p3",
+              "label": "15",
+              "x": 73,
+              "y": 31,
+              "width": 10,
+              "shape": "circle"
+            },
+            {
+              "id": "p4",
+              "label": "30",
+              "x": 14,
+              "y": 56,
+              "width": 10,
+              "tone": "info",
               "active": true,
-              "width": 32
+              "shape": "circle"
+            },
+            {
+              "id": "p5",
+              "label": "40",
+              "x": 40,
+              "y": 56,
+              "width": 10,
+              "shape": "circle"
+            },
+            {
+              "id": "p6",
+              "label": "50",
+              "x": 60,
+              "y": 56,
+              "width": 10,
+              "shape": "circle"
+            },
+            {
+              "id": "p7",
+              "label": "60",
+              "x": 86,
+              "y": 56,
+              "width": 10,
+              "shape": "circle"
+            },
+            {
+              "id": "p8",
+              "label": "5",
+              "x": 7,
+              "y": 83,
+              "width": 10,
+              "tone": "info",
+              "active": true,
+              "shape": "circle"
             }
           ],
           "edges": [
             {
-              "from": "parent",
-              "to": "child",
-              "label": "left or right",
+              "from": "p1",
+              "to": "p2",
+              "label": "0"
+            },
+            {
+              "from": "p1",
+              "to": "p3",
+              "label": "1"
+            },
+            {
+              "from": "p2",
+              "to": "p4",
+              "label": "0"
+            },
+            {
+              "from": "p2",
+              "to": "p5",
+              "label": "1"
+            },
+            {
+              "from": "p3",
+              "to": "p6",
+              "label": "0"
+            },
+            {
+              "from": "p3",
+              "to": "p7",
+              "label": "1"
+            },
+            {
+              "from": "p4",
+              "to": "p8",
+              "label": "0",
+              "tone": "info",
               "active": true
             }
-          ]
+          ],
+          "code": "HeapNode *node = new_node(5, parent);\nparent->left = node;\n// node->parent already points to key 30"
         },
         {
           "id": "heap-animation-6",
           "titleKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.insert-linked-binary-heap.heap-animation.steps.5.title",
           "bodyKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.insert-linked-binary-heap.heap-animation.steps.5.body",
-          "formula": "$O(\\log n)\\text{ path}+O(\\log n)\\text{ upheap}=O(\\log n)$",
           "nodes": [
             {
-              "id": "attach",
-              "label": "shape restored",
-              "x": 28,
-              "y": 48,
-              "shape": "pill",
-              "tone": "info",
-              "width": 28
+              "id": "p1",
+              "label": "10",
+              "x": 50,
+              "y": 8,
+              "width": 10,
+              "shape": "circle"
             },
             {
-              "id": "up",
-              "label": "upheap x",
-              "detail": "swap keys toward root",
-              "x": 72,
-              "y": 48,
-              "shape": "pill",
-              "tone": "good",
+              "id": "p2",
+              "label": "20",
+              "x": 27,
+              "y": 31,
+              "width": 10,
+              "shape": "circle"
+            },
+            {
+              "id": "p3",
+              "label": "15",
+              "x": 73,
+              "y": 31,
+              "width": 10,
+              "shape": "circle"
+            },
+            {
+              "id": "p4",
+              "label": "5",
+              "x": 14,
+              "y": 56,
+              "width": 10,
+              "tone": "info",
               "active": true,
-              "width": 32
+              "shape": "circle"
+            },
+            {
+              "id": "p5",
+              "label": "40",
+              "x": 40,
+              "y": 56,
+              "width": 10,
+              "shape": "circle"
+            },
+            {
+              "id": "p6",
+              "label": "50",
+              "x": 60,
+              "y": 56,
+              "width": 10,
+              "shape": "circle"
+            },
+            {
+              "id": "p7",
+              "label": "60",
+              "x": 86,
+              "y": 56,
+              "width": 10,
+              "shape": "circle"
+            },
+            {
+              "id": "p8",
+              "label": "30",
+              "x": 7,
+              "y": 83,
+              "width": 10,
+              "tone": "info",
+              "active": true,
+              "shape": "circle"
             }
           ],
           "edges": [
+            {
+              "from": "p1",
+              "to": "p2",
+              "label": "0"
+            },
+            {
+              "from": "p1",
+              "to": "p3",
+              "label": "1"
+            },
+            {
+              "from": "p2",
+              "to": "p4",
+              "label": "0"
+            },
+            {
+              "from": "p2",
+              "to": "p5",
+              "label": "1"
+            },
+            {
+              "from": "p3",
+              "to": "p6",
+              "label": "0"
+            },
+            {
+              "from": "p3",
+              "to": "p7",
+              "label": "1"
+            },
+            {
+              "from": "p4",
+              "to": "p8",
+              "label": "0",
+              "tone": "info",
+              "active": true
+            }
+          ],
+          "code": "5 < 30  // true\nswap(node->key, node->parent->key);\nnode = node->parent;"
+        },
+        {
+          "id": "heap-animation-7",
+          "titleKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.insert-linked-binary-heap.heap-animation.steps.6.title",
+          "bodyKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.insert-linked-binary-heap.heap-animation.steps.6.body",
+          "nodes": [
+            {
+              "id": "p1",
+              "label": "10",
+              "x": 50,
+              "y": 8,
+              "width": 10,
+              "shape": "circle"
+            },
+            {
+              "id": "p2",
+              "label": "5",
+              "x": 27,
+              "y": 31,
+              "width": 10,
+              "tone": "info",
+              "active": true,
+              "shape": "circle"
+            },
+            {
+              "id": "p3",
+              "label": "15",
+              "x": 73,
+              "y": 31,
+              "width": 10,
+              "shape": "circle"
+            },
+            {
+              "id": "p4",
+              "label": "20",
+              "x": 14,
+              "y": 56,
+              "width": 10,
+              "tone": "info",
+              "active": true,
+              "shape": "circle"
+            },
+            {
+              "id": "p5",
+              "label": "40",
+              "x": 40,
+              "y": 56,
+              "width": 10,
+              "shape": "circle"
+            },
+            {
+              "id": "p6",
+              "label": "50",
+              "x": 60,
+              "y": 56,
+              "width": 10,
+              "shape": "circle"
+            },
+            {
+              "id": "p7",
+              "label": "60",
+              "x": 86,
+              "y": 56,
+              "width": 10,
+              "shape": "circle"
+            },
+            {
+              "id": "p8",
+              "label": "30",
+              "x": 7,
+              "y": 83,
+              "width": 10,
+              "shape": "circle"
+            }
+          ],
+          "edges": [
+            {
+              "from": "p1",
+              "to": "p2",
+              "label": "0"
+            },
+            {
+              "from": "p1",
+              "to": "p3",
+              "label": "1"
+            },
+            {
+              "from": "p2",
+              "to": "p4",
+              "label": "0",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "from": "p2",
+              "to": "p5",
+              "label": "1"
+            },
+            {
+              "from": "p3",
+              "to": "p6",
+              "label": "0"
+            },
+            {
+              "from": "p3",
+              "to": "p7",
+              "label": "1"
+            },
+            {
+              "from": "p4",
+              "to": "p8",
+              "label": "0"
+            }
+          ],
+          "code": "5 < 20  // true\nswap keys;\nnode = node->parent;"
+        },
+        {
+          "id": "heap-animation-8",
+          "titleKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.insert-linked-binary-heap.heap-animation.steps.7.title",
+          "bodyKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.insert-linked-binary-heap.heap-animation.steps.7.body",
+          "nodes": [
+            {
+              "id": "p1",
+              "label": "5",
+              "x": 50,
+              "y": 8,
+              "width": 10,
+              "tone": "info",
+              "active": true,
+              "shape": "circle"
+            },
+            {
+              "id": "p2",
+              "label": "10",
+              "x": 27,
+              "y": 31,
+              "width": 10,
+              "tone": "info",
+              "active": true,
+              "shape": "circle"
+            },
+            {
+              "id": "p3",
+              "label": "15",
+              "x": 73,
+              "y": 31,
+              "width": 10,
+              "shape": "circle"
+            },
+            {
+              "id": "p4",
+              "label": "20",
+              "x": 14,
+              "y": 56,
+              "width": 10,
+              "shape": "circle"
+            },
+            {
+              "id": "p5",
+              "label": "40",
+              "x": 40,
+              "y": 56,
+              "width": 10,
+              "shape": "circle"
+            },
+            {
+              "id": "p6",
+              "label": "50",
+              "x": 60,
+              "y": 56,
+              "width": 10,
+              "shape": "circle"
+            },
+            {
+              "id": "p7",
+              "label": "60",
+              "x": 86,
+              "y": 56,
+              "width": 10,
+              "shape": "circle"
+            },
+            {
+              "id": "p8",
+              "label": "30",
+              "x": 7,
+              "y": 83,
+              "width": 10,
+              "shape": "circle"
+            }
+          ],
+          "edges": [
+            {
+              "from": "p1",
+              "to": "p2",
+              "label": "0",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "from": "p1",
+              "to": "p3",
+              "label": "1"
+            },
+            {
+              "from": "p2",
+              "to": "p4",
+              "label": "0"
+            },
+            {
+              "from": "p2",
+              "to": "p5",
+              "label": "1"
+            },
+            {
+              "from": "p3",
+              "to": "p6",
+              "label": "0"
+            },
+            {
+              "from": "p3",
+              "to": "p7",
+              "label": "1"
+            },
+            {
+              "from": "p4",
+              "to": "p8",
+              "label": "0"
+            }
+          ],
+          "code": "5 < 10  // true\nswap keys;\nnode = node->parent;  // root\nnode->parent == NULL  // stop"
+        },
+        {
+          "id": "heap-animation-9",
+          "titleKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.insert-linked-binary-heap.heap-animation.steps.8.title",
+          "bodyKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.insert-linked-binary-heap.heap-animation.steps.8.body",
+          "nodes": [
+            {
+              "id": "p1",
+              "label": "5",
+              "x": 50,
+              "y": 8,
+              "width": 10,
+              "tone": "info",
+              "active": true,
+              "shape": "circle"
+            },
+            {
+              "id": "p2",
+              "label": "10",
+              "x": 27,
+              "y": 31,
+              "width": 10,
+              "tone": "info",
+              "active": true,
+              "shape": "circle"
+            },
+            {
+              "id": "p3",
+              "label": "15",
+              "x": 73,
+              "y": 31,
+              "width": 10,
+              "tone": "info",
+              "active": true,
+              "shape": "circle"
+            },
+            {
+              "id": "p4",
+              "label": "20",
+              "x": 14,
+              "y": 56,
+              "width": 10,
+              "tone": "info",
+              "active": true,
+              "shape": "circle"
+            },
+            {
+              "id": "p5",
+              "label": "40",
+              "x": 40,
+              "y": 56,
+              "width": 10,
+              "tone": "info",
+              "active": true,
+              "shape": "circle"
+            },
+            {
+              "id": "p6",
+              "label": "50",
+              "x": 60,
+              "y": 56,
+              "width": 10,
+              "tone": "info",
+              "active": true,
+              "shape": "circle"
+            },
+            {
+              "id": "p7",
+              "label": "60",
+              "x": 86,
+              "y": 56,
+              "width": 10,
+              "tone": "info",
+              "active": true,
+              "shape": "circle"
+            },
+            {
+              "id": "p8",
+              "label": "30",
+              "x": 7,
+              "y": 83,
+              "width": 10,
+              "tone": "info",
+              "active": true,
+              "shape": "circle"
+            }
+          ],
+          "edges": [
+            {
+              "from": "p1",
+              "to": "p2",
+              "label": "0",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "from": "p1",
+              "to": "p3",
+              "label": "1",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "from": "p2",
+              "to": "p4",
+              "label": "0",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "from": "p2",
+              "to": "p5",
+              "label": "1",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "from": "p3",
+              "to": "p6",
+              "label": "0",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "from": "p3",
+              "to": "p7",
+              "label": "1",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "from": "p4",
+              "to": "p8",
+              "label": "0",
+              "tone": "info",
+              "active": true
+            }
+          ],
+          "code": "level order: 5 10 15 20 40 50 60 30\ncount = 8\nheap order = valid\nparent links = valid"
+        },
+        {
+          "id": "heap-animation-10",
+          "titleKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.insert-linked-binary-heap.heap-animation.steps.9.title",
+          "bodyKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.insert-linked-binary-heap.heap-animation.steps.9.body",
+          "nodes": [
+            {
+              "id": "p1",
+              "label": "5",
+              "x": 50,
+              "y": 8,
+              "width": 10,
+              "tone": "info",
+              "active": true,
+              "shape": "circle"
+            },
+            {
+              "id": "p2",
+              "label": "10",
+              "x": 27,
+              "y": 31,
+              "width": 10,
+              "tone": "info",
+              "active": true,
+              "shape": "circle"
+            },
+            {
+              "id": "p3",
+              "label": "15",
+              "x": 73,
+              "y": 31,
+              "width": 10,
+              "shape": "circle"
+            },
+            {
+              "id": "p4",
+              "label": "20",
+              "x": 14,
+              "y": 56,
+              "width": 10,
+              "tone": "info",
+              "active": true,
+              "shape": "circle"
+            },
+            {
+              "id": "p5",
+              "label": "40",
+              "x": 40,
+              "y": 56,
+              "width": 10,
+              "shape": "circle"
+            },
+            {
+              "id": "p6",
+              "label": "50",
+              "x": 60,
+              "y": 56,
+              "width": 10,
+              "shape": "circle"
+            },
+            {
+              "id": "p7",
+              "label": "60",
+              "x": 86,
+              "y": 56,
+              "width": 10,
+              "shape": "circle"
+            },
+            {
+              "id": "p8",
+              "label": "30",
+              "x": 7,
+              "y": 83,
+              "width": 10,
+              "shape": "circle"
+            },
+            {
+              "id": "p9",
+              "label": "next",
+              "x": 21,
+              "y": 83,
+              "width": 10,
+              "tone": "info",
+              "active": true,
+              "dimmed": true,
+              "shape": "circle"
+            }
+          ],
+          "edges": [
+            {
+              "from": "p1",
+              "to": "p2",
+              "label": "0",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "from": "p1",
+              "to": "p3",
+              "label": "1"
+            },
+            {
+              "from": "p2",
+              "to": "p4",
+              "label": "0",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "from": "p2",
+              "to": "p5",
+              "label": "1"
+            },
+            {
+              "from": "p3",
+              "to": "p6",
+              "label": "0"
+            },
+            {
+              "from": "p3",
+              "to": "p7",
+              "label": "1"
+            },
+            {
+              "from": "p4",
+              "to": "p8",
+              "label": "0"
+            },
+            {
+              "from": "p4",
+              "to": "p9",
+              "label": "1",
+              "tone": "info",
+              "active": true,
+              "dashed": true
+            }
+          ],
+          "code": "9 = 1001₂\nwalk: left, left\nattach: right",
+          "formula": "$9=1001_2$"
+        },
+        {
+          "id": "heap-animation-11",
+          "titleKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.insert-linked-binary-heap.heap-animation.steps.10.title",
+          "bodyKey": "sketches.c-data-structures.c-data-structures-module-1-algorithm-design-lab.insert-linked-binary-heap.heap-animation.steps.10.body",
+          "nodes": [
+            {
+              "id": "index",
+              "label": "binary index path",
+              "x": 22,
+              "y": 45,
+              "width": 27,
+              "detail": "O(log n)",
+              "tone": "info"
+            },
+            {
+              "id": "attach",
+              "label": "attach once",
+              "x": 52,
+              "y": 45,
+              "width": 20,
+              "detail": "O(1)",
+              "tone": "info"
+            },
+            {
+              "id": "up",
+              "label": "upheap",
+              "x": 80,
+              "y": 45,
+              "width": 22,
+              "detail": "O(log n)",
+              "tone": "good",
+              "active": true
+            }
+          ],
+          "edges": [
+            {
+              "from": "index",
+              "to": "attach",
+              "active": true
+            },
             {
               "from": "attach",
               "to": "up",
               "active": true
             }
-          ]
+          ],
+          "code": "path length <= floor(log2(n + 1))\nupheap swaps <= tree height",
+          "formula": "$O(\\log n)+O(\\log n)=O(\\log n)$"
         }
       ]
     }
@@ -491,7 +1404,7 @@
         "tests": [
           {
             "stdin": "",
-            "stdout": "level=5 10 15 20 40 50 60 30 \nparent-links=yes\n",
+            "stdout": "single level=7  count=1 heap=yes parents=yes\nindex8 level=5 10 15 20 40 50 60 30  count=8 heap=yes parents=yes\nindex9 level=5 10 15 12 40 50 60 30 20  count=9 heap=yes parents=yes\n",
             "match": "exact"
           }
         ],
@@ -517,29 +1430,6 @@
             "language": "c",
             "isEntry": false,
             "entry": false
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_contains",
-            "path": "structures/heap.c",
-            "pattern": "const size_t index = n + 1",
-            "message": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.insert-linked-binary-heap.finalLab.steps.pointer_heap_insert.checks.0.message",
-            "normalizeWhitespace": false
-          },
-          {
-            "type": "source_contains",
-            "path": "structures/heap.c",
-            "pattern": "highest_bit",
-            "message": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.insert-linked-binary-heap.finalLab.steps.pointer_heap_insert.checks.1.message",
-            "normalizeWhitespace": false
-          },
-          {
-            "type": "source_contains",
-            "path": "structures/heap.c",
-            "pattern": "node->parent",
-            "message": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.insert-linked-binary-heap.finalLab.steps.pointer_heap_insert.checks.2.message",
-            "normalizeWhitespace": false
           }
         ]
       }
