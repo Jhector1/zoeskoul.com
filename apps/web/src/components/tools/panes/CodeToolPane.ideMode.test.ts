@@ -5,8 +5,112 @@ import {
     pickDirectReviewRuntimeWorkspace,
     resolveCodeToolPaneFullIdeMode,
     resolveCodeToolPaneReviewWorkspace,
+    resolveCodeToolPaneSketchWorkspace,
     resolveEffectiveCodeToolPaneIdeConfig,
+    reviewRuntimeTargetKeysMatch,
 } from "@/components/tools/panes/CodeToolPane";
+
+describe("reviewRuntimeTargetKeysMatch", () => {
+    const ownerKey =
+        "python-v2:module-1:section-1:topic-1:sketch-1";
+
+    it("treats registry card target keys and card owner keys as the same target", () => {
+        expect(reviewRuntimeTargetKeysMatch(`card:${ownerKey}`, ownerKey)).toBe(true);
+        expect(reviewRuntimeTargetKeysMatch(ownerKey, `card:${ownerKey}`)).toBe(true);
+    });
+
+    it("does not merge workspaces from a different card", () => {
+        expect(
+            reviewRuntimeTargetKeysMatch(
+                `card:${ownerKey}`,
+                "python-v2:module-1:section-1:topic-1:sketch-2",
+            ),
+        ).toBe(false);
+    });
+});
+
+describe("resolveCodeToolPaneSketchWorkspace", () => {
+    it("creates an editable card-scoped fallback after progress hydration", () => {
+        const workspace = resolveCodeToolPaneSketchWorkspace({
+            directWorkspace: null,
+            isReviewRouteMode: true,
+            isSketchEditorMode: true,
+            toolHydrated: true,
+            runtimeStatus: "pending",
+            workspaceSeedMode: "empty",
+            language: "python",
+        });
+
+        expect(workspace?.version).toBe(2);
+        expect(workspace?.language).toBe("python");
+        expect(workspace?.nodes).toHaveLength(1);
+        expect((workspace?.nodes[0] as any)?.name).toBe("main.py");
+        expect((workspace?.nodes[0] as any)?.content).toBe("");
+    });
+
+    it("waits for progress hydration before creating the fallback", () => {
+        expect(
+            resolveCodeToolPaneSketchWorkspace({
+                directWorkspace: null,
+                isReviewRouteMode: true,
+                isSketchEditorMode: true,
+                toolHydrated: false,
+                runtimeStatus: "pending",
+                language: "python",
+            }),
+        ).toBeNull();
+    });
+
+    it("does not mask a starter-backed sketch while its workspace resolves", () => {
+        expect(
+            resolveCodeToolPaneSketchWorkspace({
+                directWorkspace: null,
+                isReviewRouteMode: true,
+                isSketchEditorMode: true,
+                toolHydrated: true,
+                runtimeStatus: "pending",
+                workspaceSeedMode: "starter",
+                language: "python",
+            }),
+        ).toBeNull();
+    });
+
+    it("never replaces an authored or restored direct workspace", () => {
+        const directWorkspace = {
+            version: 2 as const,
+            language: "python" as const,
+            nodes: [
+                {
+                    id: "file:lesson.py",
+                    kind: "file" as const,
+                    name: "lesson.py",
+                    parentId: null,
+                    content: "print('keep me')",
+                    createdAt: 0,
+                    updatedAt: 0,
+                },
+            ],
+            openTabs: ["file:lesson.py"],
+            activeFileId: "file:lesson.py",
+            entryFileId: "file:lesson.py",
+            stdin: "",
+            expanded: [],
+            leftPct: 40,
+        };
+
+        expect(
+            resolveCodeToolPaneSketchWorkspace({
+                directWorkspace,
+                isReviewRouteMode: true,
+                isSketchEditorMode: true,
+                toolHydrated: true,
+                runtimeStatus: "ready",
+                workspaceSeedMode: "starter",
+                language: "python",
+            }),
+        ).toBe(directWorkspace);
+    });
+});
 
 describe("resolveCodeToolPaneReviewWorkspace", () => {
     const runtimeWorkspace = {

@@ -315,6 +315,35 @@ function asWorkspaceLanguage(language: string | null | undefined): WorkspaceLang
     return "python";
 }
 
+function createDefaultToolWorkspace(language: string | null | undefined): WorkspaceStateV2 {
+    const now = Date.now();
+    const normalizedLanguage = asWorkspaceLanguage(language);
+    const fileName = defaultMainFile(normalizedLanguage);
+    const fileId = `file:${fileName}`;
+
+    return {
+        version: 2,
+        language: normalizedLanguage,
+        nodes: [
+            {
+                id: fileId,
+                kind: "file",
+                name: fileName,
+                parentId: null,
+                content: "",
+                createdAt: now,
+                updatedAt: now,
+            },
+        ],
+        openTabs: [fileId],
+        activeFileId: fileId,
+        entryFileId: fileId,
+        stdin: "",
+        expanded: [],
+        leftPct: 40,
+    };
+}
+
 export function buildReviewWorkspaceOwnerIdentityKey(args: {
     workspaceOwnerKey: string;
     workspaceStarterHash?: string | null;
@@ -729,6 +758,38 @@ function forceWorkspaceHasContent(workspace: WorkspaceStateV2 | null | undefined
     return workspaceHasAnyFile(workspace);
 }
 
+export function resolveCodeToolPaneSketchWorkspace(args: {
+    directWorkspace: WorkspaceStateV2 | null | undefined;
+    isReviewRouteMode: boolean;
+    isSketchEditorMode: boolean;
+    toolHydrated: boolean;
+    runtimeStatus?: string | null;
+    workspaceSeedMode?: string | null;
+    language: string | null | undefined;
+}): WorkspaceStateV2 | null {
+    if (forceWorkspaceHasContent(args.directWorkspace)) {
+        return args.directWorkspace ?? null;
+    }
+
+    /**
+     * A card-scoped sketch with no authored Try It/workspace still needs a real
+     * editable workspace. Wait until progress hydration finishes so a blank
+     * fallback cannot win over restored learner files. The fallback stays
+     * ephemeral until FullIDE reports an actual user edit.
+     */
+    if (
+        !args.isReviewRouteMode ||
+        !args.isSketchEditorMode ||
+        !args.toolHydrated ||
+        args.runtimeStatus === "error" ||
+        args.workspaceSeedMode === "starter"
+    ) {
+        return null;
+    }
+
+    return createDefaultToolWorkspace(args.language);
+}
+
 function reviewRuntimeWorkspaceIsUsable(runtime: any, workspace: WorkspaceStateV2 | null | undefined) {
     if (!workspace || !workspaceHasAnyFile(workspace)) return false;
 
@@ -827,6 +888,31 @@ function runtimeWorkspaceTargetKeyOf(runtime: any) {
     return value == null ? null : String(value);
 }
 
+export function reviewRuntimeTargetKeysMatch(
+    candidateTargetKey: string | null | undefined,
+    targetKey: string | null | undefined,
+) {
+    const candidate = String(candidateTargetKey ?? "").trim();
+    const target = String(targetKey ?? "").trim();
+
+    if (!candidate || !target) return true;
+    if (candidate === target) return true;
+
+    const prefixes = ["card:", "exercise:"];
+
+    for (const prefix of prefixes) {
+        if (candidate.startsWith(prefix) && candidate.slice(prefix.length) === target) {
+            return true;
+        }
+
+        if (target.startsWith(prefix) && target.slice(prefix.length) === candidate) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
 function runtimeCandidateMatchesTarget(
     candidate: {
         runtime?: any;
@@ -835,13 +921,10 @@ function runtimeCandidateMatchesTarget(
 ) {
     if (!candidate) return false;
 
-    const normalizedTargetKey = targetKey == null ? null : String(targetKey);
-    if (!normalizedTargetKey) return true;
-
-    const candidateTargetKey = runtimeWorkspaceTargetKeyOf(candidate.runtime);
-    if (!candidateTargetKey) return true;
-
-    return candidateTargetKey === normalizedTargetKey;
+    return reviewRuntimeTargetKeysMatch(
+        runtimeWorkspaceTargetKeyOf(candidate.runtime),
+        targetKey,
+    );
 }
 
 function mergeMissingFilesFromRuntimeCandidates(
@@ -1755,35 +1838,6 @@ export default function CodeToolPane(props: {
         cardRuntimeKey && forceWorkspaceHasContent(cardRuntime?.toolWorkspace),
     );
 
-    function createDefaultToolWorkspace(language: string | null | undefined): WorkspaceStateV2 {
-        const now = Date.now();
-        const normalizedLanguage = asWorkspaceLanguage(language);
-        const fileName = defaultMainFile(normalizedLanguage);
-        const fileId = `file:${fileName}`;
-
-        return {
-            version: 2,
-            language: normalizedLanguage,
-            nodes: [
-                {
-                    id: fileId,
-                    kind: "file",
-                    name: fileName,
-                    parentId: null,
-                    content: "",
-                    createdAt: now,
-                    updatedAt: now,
-                },
-            ],
-            openTabs: [fileId],
-            activeFileId: fileId,
-            entryFileId: fileId,
-            stdin: "",
-            expanded: [],
-            leftPct: 40,
-        };
-    }
-
     const runtimeWorkspaceError = Boolean(
         isReviewRouteMode && canonicalReviewRuntime?.workspaceStatus === "error",
     );
@@ -1797,7 +1851,15 @@ export default function CodeToolPane(props: {
 
     const directRuntimeWorkspace = useMemo(() => {
         if (isReviewRouteMode) {
-            return reviewDirectWorkspace;
+            return resolveCodeToolPaneSketchWorkspace({
+                directWorkspace: reviewDirectWorkspace,
+                isReviewRouteMode,
+                isSketchEditorMode,
+                toolHydrated,
+                runtimeStatus: canonicalReviewRuntime?.workspaceStatus ?? null,
+                workspaceSeedMode: cardRuntime?.workspaceSeedMode ?? null,
+                language: effectiveLanguage,
+            });
         }
 
         // Normal tool/sketch route: blank file workspace is still valid.
@@ -1812,10 +1874,14 @@ export default function CodeToolPane(props: {
 
         return createDefaultToolWorkspace(effectiveLanguage);
     }, [
-        isReviewRouteMode,
-        reviewDirectWorkspace,
-        normalizedToolWorkspace,
+        canonicalReviewRuntime?.workspaceStatus,
+        cardRuntime?.workspaceSeedMode,
         effectiveLanguage,
+        isReviewRouteMode,
+        isSketchEditorMode,
+        normalizedToolWorkspace,
+        reviewDirectWorkspace,
+        toolHydrated,
     ]);
     const finalReviewRuntimeUserEdited = Boolean(
         canonicalReviewRuntime?.userEdited === true ||
