@@ -45,18 +45,34 @@ export default function PendingAccountInvites({
       });
       const json = await response.json().catch(() => ({}));
       if (!response.ok) {
-        throw new Error(json.error ?? "Could not create invitation.");
+        let manualFallback = "";
+
+        if (typeof json.inviteUrl === "string" && json.inviteUrl) {
+          try {
+            await navigator.clipboard.writeText(json.inviteUrl);
+            manualFallback =
+              " The invite link was copied so you can send it manually.";
+          } catch {
+            manualFallback =
+              ' Use "Copy invite link" to send the invitation manually.';
+          }
+        }
+
+        throw new Error(
+          `${json.error ?? "Could not deliver invitation email."}${manualFallback}`,
+        );
       }
 
       if (action === "link") {
         await navigator.clipboard.writeText(json.inviteUrl);
         onNotice(`Invitation link copied for ${email}.`);
       } else if (json.delivery === "email") {
-        onNotice(`Invitation email sent to ${email}.`);
+        onNotice(`Invitation email accepted for delivery to ${email}.`);
       } else {
         await navigator.clipboard.writeText(json.inviteUrl);
-        onNotice(`Invitation link copied. Your email app is opening for ${email}.`);
-        window.location.href = json.mailtoHref;
+        throw new Error(
+          `Automatic email delivery was unavailable for ${email}. The invite link was copied so you can send it manually.`,
+        );
       }
     } catch (cause) {
       onError(

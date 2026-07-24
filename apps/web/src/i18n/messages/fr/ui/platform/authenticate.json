@@ -52,13 +52,12 @@
         "body": "Connectez-vous afin que ZoeSkoul confirme qu’un enseignant ou un administrateur vous a attribué ce cours. Les cours attribués ne nécessitent aucun abonnement personnel."
       },
       "tutoringSession": {
-        "title": "Connectez-vous pour rejoindre cette classe de tutorat",
-        "body": "Créez un compte ou connectez-vous avec l’adresse invitée. Après l’authentification, ZoeSkoul vous ramènera directement dans la classe que vous avez ouverte."
+        "title": "Connectez-vous pour rejoindre cette séance de tutorat",
+        "body": "Créez un compte ou connectez-vous avec l’adresse invitée. Après votre connexion, ZoeSkoul vous conduira directement à votre séance de tutorat."
       },
       "tutoringInvite": {
-        "title": "Vous avez été invité à une salle de tutorat",
-        "body": "Créez un compte ou connectez-vous avec l’adresse qui a reçu l’invitation pour {resource}. Vous serez ensuite redirigé directement vers la salle de tutorat.",
-        "fallbackResource": "cette séance de tutorat"
+        "title": "Vous êtes invité à une séance de tutorat ZoeSkoul",
+        "body": "Créez un compte ou connectez-vous avec l’adresse e-mail qui a reçu cette invitation. Vous serez conduit directement à votre séance de tutorat."
       }
     }
   }

@@ -118,26 +118,64 @@ export async function POST(req: Request, context: Context) {
     expiresAt: rotated.invite.expiresAt,
   });
 
-  if (delivery.delivered) {
-    await prisma.learningAssignmentInvite.update({
-      where: { id: rotated.invite.id },
-      data: { sentAt: new Date() },
+  if (!delivery.delivered) {
+    const status = delivery.reason === "not_configured" ? 503 : 502;
+    const error =
+      delivery.reason === "not_configured"
+        ? "Automatic invitation email delivery is not configured. Add BREVO_API_KEY, BREVO_FROM_EMAIL, and BREVO_FROM_NAME in production."
+        : "Brevo did not accept the course invitation email.";
+
+    console.error("[course-assignment-invite] email delivery failed", {
+      assignmentId: assignment.id,
+      inviteId: rotated.invite.id,
+      recipient: email,
+      provider: delivery.provider,
+      reason: delivery.reason,
+      detail:
+        delivery.reason === "provider_error" ? delivery.detail : undefined,
     });
+
+    return NextResponse.json(
+      {
+        ok: false,
+        error,
+        code: "INVITE_EMAIL_NOT_DELIVERED",
+        inviteUrl,
+        mailtoHref,
+        expiresAt: rotated.invite.expiresAt,
+        delivery: "failed",
+        emailProvider: delivery.provider,
+        emailReason: delivery.reason,
+        ...(delivery.reason === "provider_error"
+          ? { emailDetail: delivery.detail }
+          : {}),
+      },
+      { status },
+    );
   }
+
+  const sentAt = new Date();
+  await prisma.learningAssignmentInvite.update({
+    where: { id: rotated.invite.id },
+    data: { sentAt },
+  });
+
+  console.info("[course-assignment-invite] email accepted by provider", {
+    assignmentId: assignment.id,
+    inviteId: rotated.invite.id,
+    recipient: email,
+    provider: delivery.provider,
+    messageId: delivery.messageId,
+  });
 
   return NextResponse.json({
     ok: true,
     inviteUrl,
     mailtoHref,
     expiresAt: rotated.invite.expiresAt,
-    delivery: delivery.delivered ? "email" : "manual",
+    delivery: "email",
     emailProvider: delivery.provider,
-    ...(delivery.delivered
-      ? {}
-      : {
-          emailReason: delivery.reason,
-          emailDetail:
-            delivery.reason === "provider_error" ? delivery.detail : undefined,
-        }),
+    emailMessageId: delivery.messageId,
+    sentAt,
   });
 }

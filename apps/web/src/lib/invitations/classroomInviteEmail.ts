@@ -9,15 +9,13 @@ function escapeHtml(value: string) {
     .replaceAll("'", "&#039;");
 }
 
-export type ClassroomInviteEmailResult =
-  | { delivered: true; provider: "resend" }
-  | { delivered: false; provider: "manual"; reason: "not_configured" }
-  | {
-      delivered: false;
-      provider: "resend";
-      reason: "provider_error";
-      detail?: string;
-    };
+import {
+  resolveTransactionalEmailSender,
+  sendTransactionalEmail,
+  type TransactionalEmailResult,
+} from "@/lib/email/transactionalEmail";
+
+export type ClassroomInviteEmailResult = TransactionalEmailResult;
 
 export type ClassroomInviteArgs = {
   to: string;
@@ -32,28 +30,51 @@ export type ClassroomInviteEmailArgs = ClassroomInviteArgs & {
   expiresAt: Date;
 };
 
+function resolveInviteSender() {
+  return resolveTransactionalEmailSender({
+    from:
+      process.env.BREVO_INVITE_FROM_EMAIL ??
+      process.env.BREVO_FROM_EMAIL ??
+      process.env.CLASSROOM_INVITE_FROM_EMAIL ??
+      process.env.LEARNING_INVITE_FROM_EMAIL ??
+      process.env.EMAIL_FROM,
+    name:
+      process.env.BREVO_INVITE_FROM_NAME ?? process.env.BREVO_FROM_NAME,
+    defaultName: "ZoeSkoul",
+  });
+}
+
 function classroomInviteCopy(args: ClassroomInviteArgs) {
-  const subject = `${args.instructorName} invited you to ${args.classroomTitle}`;
   const intro = `${args.instructorName} invited you to a ZoeSkoul ${args.classroomKind} for ${args.courseTitle}.`;
-  const accountInstruction =
-    "Create an account or sign in with the email address that received this invitation. You will be taken directly to the classroom.";
-  return { subject, intro, accountInstruction };
+
+  if (args.classroomKind === "tutoring session") {
+    return {
+      subject: `${args.instructorName} invited you to a ZoeSkoul tutoring session`,
+      heading: "You are invited to a ZoeSkoul tutoring session",
+      intro,
+      detailLabel: "Course",
+      detailValue: args.courseTitle,
+      actionLabel: "Join tutoring session",
+      accountInstruction:
+        "Create an account or sign in using the email address that received this invitation. You will be taken directly to your tutoring session.",
+    };
+  }
+
+  return {
+    subject: `${args.instructorName} invited you to ${args.classroomTitle}`,
+    heading: "You have been invited to a ZoeSkoul classroom",
+    intro,
+    detailLabel: "Classroom",
+    detailValue: args.classroomTitle,
+    actionLabel: "Open classroom",
+    accountInstruction:
+      "Create an account or sign in with the email address that received this invitation. You will be taken directly to the classroom.",
+  };
 }
 
 export async function sendClassroomInviteEmail(
   args: ClassroomInviteEmailArgs,
 ): Promise<ClassroomInviteEmailResult> {
-  const apiKey = process.env.RESEND_API_KEY?.trim();
-  const from = (
-    process.env.CLASSROOM_INVITE_FROM_EMAIL ??
-    process.env.LEARNING_INVITE_FROM_EMAIL ??
-    process.env.EMAIL_FROM
-  )?.trim();
-
-  if (!apiKey || !from) {
-    return { delivered: false, provider: "manual", reason: "not_configured" };
-  }
-
   const copy = classroomInviteCopy(args);
   const expires = args.expiresAt.toLocaleDateString("en-US", {
     dateStyle: "medium",
@@ -61,8 +82,8 @@ export async function sendClassroomInviteEmail(
   const text = [
     copy.intro,
     "",
-    `Classroom: ${args.classroomTitle}`,
-    `Open classroom: ${args.inviteUrl}`,
+    `${copy.detailLabel}: ${copy.detailValue}`,
+    `${copy.actionLabel}: ${args.inviteUrl}`,
     "",
     copy.accountInstruction,
     `This invitation expires ${expires}.`,
@@ -70,52 +91,24 @@ export async function sendClassroomInviteEmail(
 
   const html = `
     <div style="font-family:Inter,Arial,sans-serif;line-height:1.55;color:#111827">
-      <h2 style="margin:0 0 12px">You have been invited to a ZoeSkoul classroom</h2>
+      <h2 style="margin:0 0 12px">${escapeHtml(copy.heading)}</h2>
       <p>${escapeHtml(copy.intro)}</p>
-      <p><strong>Classroom:</strong> ${escapeHtml(args.classroomTitle)}</p>
+      <p><strong>${escapeHtml(copy.detailLabel)}:</strong> ${escapeHtml(copy.detailValue)}</p>
       <p style="margin:24px 0">
-        <a href="${escapeHtml(args.inviteUrl)}" style="display:inline-block;padding:12px 18px;border-radius:8px;background:#111827;color:white;text-decoration:none;font-weight:600">Open classroom</a>
+        <a href="${escapeHtml(args.inviteUrl)}" style="display:inline-block;padding:12px 18px;border-radius:8px;background:#111827;color:white;text-decoration:none;font-weight:600">${escapeHtml(copy.actionLabel)}</a>
       </p>
       <p>${escapeHtml(copy.accountInstruction)}</p>
       <p style="color:#6b7280;font-size:13px">This invitation expires ${escapeHtml(expires)}.</p>
     </div>
   `;
 
-  try {
-    const response = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        authorization: `Bearer ${apiKey}`,
-        "content-type": "application/json",
-      },
-      body: JSON.stringify({
-        from,
-        to: [args.to],
-        subject: copy.subject,
-        text,
-        html,
-      }),
-      cache: "no-store",
-    });
-
-    if (!response.ok) {
-      return {
-        delivered: false,
-        provider: "resend",
-        reason: "provider_error",
-        detail: (await response.text()).slice(0, 500),
-      };
-    }
-
-    return { delivered: true, provider: "resend" };
-  } catch (error) {
-    return {
-      delivered: false,
-      provider: "resend",
-      reason: "provider_error",
-      detail: error instanceof Error ? error.message : "Unknown email error",
-    };
-  }
+  return sendTransactionalEmail({
+    to: args.to,
+    sender: resolveInviteSender(),
+    subject: copy.subject,
+    textContent: text,
+    htmlContent: html,
+  });
 }
 
 export function buildClassroomInviteMailto(args: ClassroomInviteArgs) {
@@ -123,8 +116,8 @@ export function buildClassroomInviteMailto(args: ClassroomInviteArgs) {
   const body = [
     copy.intro,
     "",
-    `Classroom: ${args.classroomTitle}`,
-    `Open classroom: ${args.inviteUrl}`,
+    `${copy.detailLabel}: ${copy.detailValue}`,
+    `${copy.actionLabel}: ${args.inviteUrl}`,
     "",
     copy.accountInstruction,
   ].join("\n");

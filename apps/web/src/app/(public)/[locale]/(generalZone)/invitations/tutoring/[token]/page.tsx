@@ -102,7 +102,7 @@ export default async function TutoringInvitationPage({
 
     return (
       <InviteMessage
-        title="This tutoring classroom is not available"
+        title="This tutoring session is not available"
         body={
           accepted.reason === "session_unavailable"
             ? "The tutor has not made this session Live or Shared, or the session has been archived."

@@ -530,7 +530,7 @@ export default function TutoringSessionEditor({
           endpoint={`/api/admin/tutoring-sessions/${initialSession.id}/invites`}
           enabled={invitationsEnabled}
           disabledMessage="Change the status to Live or Shared and save before sending invitation links."
-          description="These students do not have matching ZoeSkoul accounts yet. The invitation takes them through account creation and then directly into this tutoring classroom."
+          description="These students do not have matching ZoeSkoul accounts yet. The invitation takes them through account creation and then directly into this tutoring session."
           onNotice={setNotice}
           onError={(message) => setError(message || null)}
         />

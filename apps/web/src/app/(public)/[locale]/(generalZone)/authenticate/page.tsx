@@ -91,9 +91,7 @@ export default function AuthenticatePage() {
         if (accessReason === "tutoring_invite") {
             return {
                 title: t("context.tutoringInvite.title"),
-                body: t("context.tutoringInvite.body", {
-                    resource: accessResource || t("context.tutoringInvite.fallbackResource"),
-                }),
+                body: t("context.tutoringInvite.body"),
             };
         }
         if (accessReason === "tutoring_session") {

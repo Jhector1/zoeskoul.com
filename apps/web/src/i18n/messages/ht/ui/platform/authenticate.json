@@ -52,13 +52,12 @@
         "body": "Konekte pou ZoeSkoul ka konfime yon pwofesè oswa admin te ba ou kou sa a. Kou yo ba ou yo pa bezwen yon abònman pèsonèl."
       },
       "tutoringSession": {
-        "title": "Konekte pou antre nan klas leson patikilye sa a",
-        "body": "Kreye yon kont oswa konekte ak imèl yo te envite a. Apre koneksyon an, ZoeSkoul ap mennen w dirèkteman tounen nan klas ou te ouvri a."
+        "title": "Konekte pou patisipe nan sesyon leson patikilye sa a",
+        "body": "Kreye yon kont oswa konekte ak imèl yo te envite a. Apre ou konekte, ZoeSkoul ap mennen w dirèkteman nan sesyon leson patikilye ou a."
       },
       "tutoringInvite": {
-        "title": "Yo envite w nan yon sal leson patikilye",
-        "body": "Kreye yon kont oswa konekte ak imèl ki te resevwa envitasyon an pou {resource}. Apre sa, n ap mennen w dirèkteman nan sal leson an.",
-        "fallbackResource": "sesyon leson patikilye sa a"
+        "title": "Yo envite w nan yon sesyon leson patikilye ZoeSkoul",
+        "body": "Kreye yon kont oswa konekte ak adrès imèl ki te resevwa envitasyon sa a. N ap mennen w dirèkteman nan sesyon leson patikilye ou a."
       }
     }
   }

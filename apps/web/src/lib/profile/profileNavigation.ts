@@ -72,7 +72,7 @@ const teacherItems: ProfileNavigationItem[] = [
     id: "teacher-tutoring",
     href: ROUTES.teachingTutoringSessions,
     title: "Tutoring sessions",
-    description: "Create, teach, share, and reopen private tutoring classrooms.",
+    description: "Create, teach, share, and reopen private tutoring sessions.",
     icon: "message",
   },
 ];

@@ -205,6 +205,7 @@ export default function ProfileForm({
 }) {
     const { data: session, status: sessionStatus, update } = useSession();
     const fileInputRef = useRef<HTMLInputElement | null>(null);
+    const attemptedInitialSessionRefresh = useRef(false);
     const navigationSections = useMemo(
         () => resolveProfileNavigation(workspaceRole),
         [workspaceRole],
@@ -228,6 +229,41 @@ export default function ProfileForm({
     const [saving, setSaving] = useState(false);
     const [msg, setMsg] = useState<string | null>(null);
     const [err, setErr] = useState<string | null>(null);
+
+    useEffect(() => {
+        if (
+            attemptedInitialSessionRefresh.current ||
+            sessionStatus !== "authenticated"
+        ) {
+            return;
+        }
+
+        const sessionProfile = {
+            name: (session?.user?.name ?? "").trim(),
+            email: (session?.user?.email ?? "").trim(),
+            image: (session?.user?.image ?? "").trim(),
+        };
+        const sessionIsCurrent =
+            sessionProfile.name === initialProfile.name &&
+            sessionProfile.email === initialProfile.email &&
+            sessionProfile.image === initialProfile.image;
+
+        if (sessionIsCurrent) return;
+
+        // Repair older JWTs as soon as the authoritative profile page detects
+        // stale session data, so the shared header updates without another edit.
+        attemptedInitialSessionRefresh.current = true;
+        void update({ refreshProfile: true }).catch(() => {
+            attemptedInitialSessionRefresh.current = false;
+        });
+    }, [
+        initialProfile,
+        session?.user?.email,
+        session?.user?.image,
+        session?.user?.name,
+        sessionStatus,
+        update,
+    ]);
 
     useEffect(() => {
         setSavedProfile(initialProfile);
@@ -342,10 +378,10 @@ export default function ProfileForm({
             clearAvatarSelection();
             setRemoveAvatar(false);
 
-            await update?.({
-                name: out.user.name ?? undefined,
-                image: out.user.image ?? null,
-            });
+            // Re-read the authoritative profile from Prisma through Auth.js.
+            // The explicit marker guarantees the JWT update callback runs, while
+            // the callback ignores client profile values and reloads from Prisma.
+            await update({ refreshProfile: true });
 
             setMsg("Profile updated");
         } catch (e: any) {
