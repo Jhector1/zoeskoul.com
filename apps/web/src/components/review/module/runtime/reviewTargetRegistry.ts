@@ -1,6 +1,10 @@
 import type {ReviewCard, ReviewEmbeddedTryIt, ReviewModule} from "@/lib/subjects/types";
 import type { UnknownRecord } from "./reviewRuntimeTypes";
-import { getCardStateKey, getExerciseStateKey } from "./exerciseKeys";
+import {
+  getCardStateKey,
+  getCardToolScopeKey,
+  getExerciseStateKey,
+} from "./exerciseKeys";
 import { resolveCourseLanguage, resolveCourseFileSeed, resolveRuntimeDefaultDataset } from "./courseProfiles";
 import {tag} from "@/lib/practice/generator/shared/i18n";
 import {hasStarterIntentValue, isUsableStarterCode} from "@/components/review/module/runtime/starterContent";
@@ -747,7 +751,7 @@ export function buildReviewTargetRegistry(args: {
           ownerKey: cardKey,
           cardKey,
           tryIt: embeddedTryIt,
-          toolScopeKey: `${cardKey}:general`,
+          toolScopeKey: getCardToolScopeKey(cardKey),
           language: cardRuntimeContext.language,
           starterFiles: pickStarterFiles(cardToolManifest, subjectSlug, cardRuntimeContext.language, profileId, versionFamily),
           solutionFiles: pickSolutionFiles(cardToolManifest, subjectSlug, cardRuntimeContext.language, profileId, versionFamily),

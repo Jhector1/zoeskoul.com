@@ -23,22 +23,36 @@ describe("resolveActiveToolScopeKey", () => {
         ).toBe("python-v2:module-1:section:topic:exercise:q9");
     });
 
-    it("reuses one default workspace across ordinary cards in a topic", () => {
+    it("uses a card-scoped fallback for an ordinary sketch card", () => {
+        expect(
+            resolveActiveToolScopeKey({
+                activeExerciseStateKey: null,
+                activeCardWorkspaceExerciseKey: null,
+                fallbackWorkspaceScopeKey:
+                    "card:python-v2:module-1:section-1:topic-1:sketch-1",
+            }),
+        ).toBe("card:python-v2:module-1:section-1:topic-1:sketch-1");
+    });
+
+    it("keeps different ordinary cards on different fallback scopes", () => {
+        const first = resolveActiveToolScopeKey({
+            fallbackWorkspaceScopeKey:
+                "card:python-v2:module-1:section-1:topic-1:sketch-1",
+        });
+        const second = resolveActiveToolScopeKey({
+            fallbackWorkspaceScopeKey:
+                "card:python-v2:module-1:section-1:topic-1:sketch-2",
+        });
+
+        expect(first).not.toBe(second);
+    });
+
+    it("uses the topic fallback only when no card target is available", () => {
         expect(
             resolveActiveToolScopeKey({
                 activeExerciseStateKey: null,
                 activeCardWorkspaceExerciseKey: null,
             }),
         ).toBe(DEFAULT_TOPIC_TOOL_SCOPE_KEY);
-    });
-
-    it("allows a caller to provide a narrower shared fallback scope", () => {
-        expect(
-            resolveActiveToolScopeKey({
-                activeExerciseStateKey: null,
-                activeCardWorkspaceExerciseKey: null,
-                fallbackWorkspaceScopeKey: "topic-tool:module-review",
-            }),
-        ).toBe("topic-tool:module-review");
     });
 });

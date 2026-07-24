@@ -40,6 +40,7 @@ function getRestoredWorkspace(state: any): WorkspaceStateV2 | null {
     const restoredWorkspace =
         state?.topics?.e2e_topic?.runtimeStateV2?.cards?.e2e_card
             ?.toolWorkspace ??
+        state?.topics?.e2e_topic?.toolState?.["card:e2e_card"]?.workspace ??
         state?.topics?.e2e_topic?.toolState?.["e2e_card:general"]?.workspace;
 
     if (restoredWorkspace?.version === 2 && Array.isArray(restoredWorkspace.nodes)) {
@@ -146,13 +147,13 @@ export default function E2ESketchSavePage() {
                                         toolStdin: nextStdin,
                                         toolLang: nextWorkspace.language,
                                         updatedAt: Date.now(),
-                                        toolKey: "e2e_card:general",
+                                        toolKey: "card:e2e_card",
                                     },
                                 },
                                 exercises: {},
                             },
                             toolState: {
-                                "e2e_card:general": {
+                                "card:e2e_card": {
                                     lang: nextWorkspace.language,
                                     code: nextCode,
                                     stdin: nextStdin,

@@ -13,6 +13,10 @@ import {
 } from "@/lib/subjects/sql/sql/runtime/resolveSqlRunnerConfig";
 import type { LearningIdeConfig } from "@/lib/ide/learningIdeConfig";
 import { useReviewRuntimeStore } from "../runtime/reviewRuntimeStore";
+import {
+    getCardIdFromToolScopeKey,
+    getCardStateKeyFromToolScopeKey,
+} from "../runtime/exerciseKeys";
 import { deriveEntryCode } from "../runtime/exerciseWorkspaceResolver";
 import { reviewSaveDebug, summarizeWorkspaceForSave } from "../runtime/reviewSaveDebug";
 import { getTopicProgressState, normalizeTopicProgressKey } from "@/lib/review/progressTopicKeys";
@@ -565,41 +569,17 @@ function isCardToolKey(toolKey: string | null | undefined) {
     if (typeof toolKey !== "string" || !toolKey.trim()) return false;
     if (isExerciseToolKey(toolKey) || isTopicToolKey(toolKey)) return false;
 
-    // Legacy card scope.
+    // Canonical card/sketch scope: card:<full-card-key>.
     if (toolKey.startsWith("card:")) return true;
 
-    // Current review card/sketch scope shapes:
-    // subject:module:topic:cardId:general
+    // Historical card/sketch scope shapes remain readable during migration:
+    // subject:module:section:topic:cardId:general
     // subject:module:section:topic:cardId
     //
-    // The second shape is what CodeRunner logs as editorOwnerKey/cardRuntimeKey.
     // Treat any remaining non-exercise review tool key as a card/sketch tool
     // key so edits are persisted through patchCard. Shared topic-tool keys are
     // handled above and persist through topic.toolState instead.
     return true;
-}
-
-function cardIdFromToolKey(toolKey: string) {
-    if (toolKey.startsWith("card:")) {
-        return toolKey.replace(/^card:/, "");
-    }
-
-    const parts = toolKey.split(":").filter(Boolean);
-
-    if (parts.length >= 2 && parts[parts.length - 1] === "general") {
-        return parts[parts.length - 2];
-    }
-
-    return parts[parts.length - 1] || toolKey;
-}
-
-function cardStateKeyFromToolKey(toolKey: string) {
-    if (toolKey.startsWith("card:")) return toolKey.replace(/^card:/, "");
-    if (toolKey.endsWith(":general")) return toolKey.replace(/:general$/, "");
-
-    // Keep the full current review scope key.
-    // This must match CodeToolPane/CodeRunner editorOwnerKey/cardRuntimeKey.
-    return toolKey;
 }
 
 function cardToolWorkspaceStorageKey(topicId: string, toolKey: string) {
@@ -619,7 +599,7 @@ function writeCardToolWorkspaceBackup(args: {
     if (typeof window === "undefined") return;
     if (!args.snap.workspace) return;
 
-    const cardId = cardIdFromToolKey(args.toolKey);
+    const cardId = getCardIdFromToolScopeKey(args.toolKey);
 
     const aliases = Array.from(
         new Set([
@@ -651,7 +631,7 @@ function writeCardToolWorkspaceBackup(args: {
 function readCardToolWorkspaceBackup(topicId: string, toolKey: string) {
     if (typeof window === "undefined") return null;
 
-    const cardId = cardIdFromToolKey(toolKey);
+    const cardId = getCardIdFromToolScopeKey(toolKey);
 
     function parse(raw: string | null) {
         if (!raw) return null;
@@ -688,7 +668,7 @@ function readCardToolWorkspaceBackup(topicId: string, toolKey: string) {
 
         const storedToolKey = key.slice(prefix.length);
 
-        if (cardIdFromToolKey(storedToolKey) !== cardId) continue;
+        if (getCardIdFromToolScopeKey(storedToolKey) !== cardId) continue;
 
         const candidate = parse(window.localStorage.getItem(key));
         if (candidate) return candidate;
@@ -1307,7 +1287,7 @@ export function useToolCodeRunnerState(args: {
                 s = pendingExercise;
             } else {
                 const cardKey = isCardToolKey(effectiveToolKey)
-                    ? cardStateKeyFromToolKey(effectiveToolKey)
+                    ? getCardStateKeyFromToolScopeKey(effectiveToolKey)
                     : null;
 
                 const runtimeCards = useReviewRuntimeStore.getState().cards ?? {};
@@ -2059,8 +2039,8 @@ dismissFeedbackOnEdit: true,
         }
 
         if (isCardToolKey(effectiveToolKey)) {
-            const cardKey = cardStateKeyFromToolKey(effectiveToolKey);
-            const cardId = cardIdFromToolKey(effectiveToolKey);
+            const cardKey = getCardStateKeyFromToolScopeKey(effectiveToolKey);
+            const cardId = getCardIdFromToolScopeKey(effectiveToolKey);
 
             patchCard(cardKey, {
                 topicId: viewTid,
@@ -2124,8 +2104,8 @@ dismissFeedbackOnEdit: true,
         }
 
         if (isCardToolKey(effectiveToolKey)) {
-            const cardKey = cardStateKeyFromToolKey(effectiveToolKey);
-            const cardId = cardIdFromToolKey(effectiveToolKey);
+            const cardKey = getCardStateKeyFromToolScopeKey(effectiveToolKey);
+            const cardId = getCardIdFromToolScopeKey(effectiveToolKey);
 
             patchCard(cardKey, {
                 topicId: viewTid,
@@ -2202,8 +2182,8 @@ dismissFeedbackOnEdit: true,
          * Otherwise navigation works in-memory, but refresh restores old DB state.
          */
         if (isCardToolKey(effectiveToolKey)) {
-            const cardKey = cardStateKeyFromToolKey(effectiveToolKey);
-            const cardId = cardIdFromToolKey(effectiveToolKey);
+            const cardKey = getCardStateKeyFromToolScopeKey(effectiveToolKey);
+            const cardId = getCardIdFromToolScopeKey(effectiveToolKey);
             const existingCard = useReviewRuntimeStore.getState().cards?.[cardKey] ?? null;
 
             const cardAlreadyMatches = Boolean(

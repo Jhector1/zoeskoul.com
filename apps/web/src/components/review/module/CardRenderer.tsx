@@ -20,6 +20,7 @@ import { resolveDeepTagged } from "@/i18n/resolveDeepTagged";
 import { FlowNavMode } from "@/components/review/navigation/FlowNavigator";
 import { shouldShowExpandedLearnerTitles } from "@/lib/config/learnerUiFlags";
 import { useReviewRuntimeStore } from "@/components/review/module/runtime/reviewRuntimeStore";
+import { getCardToolScopeKey } from "@/components/review/module/runtime/exerciseKeys";
 import { buildQuizBlockRuntimeDefaultsProps } from "@/components/review/module/runtime/cardRuntimeDefaults";
 import type { QuizResetTarget } from "@/components/review/module/actions";
 import type { CompactQuizNavigationState } from "@/components/review/module/compactFlowNavigation";
@@ -154,7 +155,7 @@ export default function CardRenderer(props: {
                 toolManifest: {
                     workspace: specWorkspace ?? null,
                 },
-                toolKey: `${cardKey}:general`,
+                toolKey: getCardToolScopeKey(cardKey),
             });
         }
     }, [progressHydrated, cardKey, topicId, card.id, tp, ensureCard, card, defaultToolLanguage]);

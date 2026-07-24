@@ -13,7 +13,12 @@ import { emitGamificationUpdate } from "@/lib/gamification/browserEvents";
 import { useReviewRuntimeStore } from "../runtime/reviewRuntimeStore";
 import { mergeRuntimeIntoProgress } from "../runtime/runtimeProgressBridge";
 import { reviewSaveDebug, summarizeWorkspaceForSave } from "../runtime/reviewSaveDebug";
-import { getExerciseStateKey } from "../runtime/exerciseKeys";
+import {
+    getCardIdFromToolScopeKey,
+    getCardStateKeyFromToolScopeKey,
+    getCardToolScopeKey,
+    getExerciseStateKey,
+} from "../runtime/exerciseKeys";
 import { deriveEntryCode } from "../runtime/exerciseWorkspaceResolver";
 import { stateLanguageMatches } from "../runtime/workspaceCodeSource";
 import { isUsableStarterCode } from "../runtime/starterContent";
@@ -21,24 +26,8 @@ import { isUsableStarterCode } from "../runtime/starterContent";
 function isPersistedCardToolKey(toolKey: string) {
     if (typeof toolKey !== "string" || !toolKey.trim()) return false;
     if (toolKey.startsWith("exercise:")) return false;
+    if (toolKey.startsWith("topic-tool:")) return false;
     return true;
-}
-
-function cardIdFromPersistedToolKey(toolKey: string) {
-    if (toolKey.startsWith("card:")) return toolKey.replace(/^card:/, "");
-
-    const parts = toolKey.split(":").filter(Boolean);
-    if (parts.length >= 2 && parts[parts.length - 1] === "general") {
-        return parts[parts.length - 2];
-    }
-
-    return parts[parts.length - 1] || toolKey;
-}
-
-function cardStateKeyFromPersistedToolKey(toolKey: string) {
-    if (toolKey.startsWith("card:")) return toolKey.replace(/^card:/, "");
-    if (toolKey.endsWith(":general")) return toolKey.replace(/:general$/, "");
-    return toolKey;
 }
 
 function normalizeTopicProgressKey(topicId: string | null | undefined) {
@@ -1494,8 +1483,9 @@ export function useReviewProgress(args: {
 
                         if (!isPersistedCardToolKey(key)) return;
 
-                        const cardId = cardIdFromPersistedToolKey(key);
-                        const cardKey = cardStateKeyFromPersistedToolKey(key);
+                        const cardId = getCardIdFromToolScopeKey(key);
+                        const cardKey = getCardStateKeyFromToolScopeKey(key);
+                        const canonicalToolKey = getCardToolScopeKey(cardKey);
                         const userEdited = isUserSavedState(entry);
 
                         reviewSaveDebug("hydrate toolState from DB", {
@@ -1514,6 +1504,7 @@ export function useReviewProgress(args: {
                             cardKey,
                             topicId: tid,
                             cardId,
+                            toolKey: canonicalToolKey,
                             initial: {
                                 cardKey,
                                 topicId: tid,
@@ -1537,7 +1528,7 @@ export function useReviewProgress(args: {
                         runtimeApi.patchCard(cardKey, {
                             topicId: tid,
                             cardId,
-                            toolKey: key,
+                            toolKey: canonicalToolKey,
                             toolWorkspace: workspace,
                             toolCode: entry.code,
                             toolStdin: entry.stdin,
@@ -1571,6 +1562,7 @@ export function useReviewProgress(args: {
                             cardKey: ckey,
                             topicId: tid,
                             cardId: savedCard.cardId || "",
+                            toolKey: getCardToolScopeKey(ckey),
                             initial: {
                                 ...savedCard,
                                 userEdited,

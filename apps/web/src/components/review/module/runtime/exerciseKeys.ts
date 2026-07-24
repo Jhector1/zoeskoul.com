@@ -23,6 +23,28 @@ export function getCardStateKey(ctx: ExerciseKeyContext): CardStateKey {
   ].join(":");
 }
 
+export function getCardToolScopeKey(cardKey: string): string {
+  const normalized = typeof cardKey === "string" ? cardKey.trim() : "";
+  return `card:${normalized || "unknown"}`;
+}
+
+/**
+ * Accept both the canonical card:<full-card-key> scope and the historical
+ * <full-card-key>:general scope while existing progress records migrate.
+ */
+export function getCardStateKeyFromToolScopeKey(toolScopeKey: string): string {
+  const raw = typeof toolScopeKey === "string" ? toolScopeKey.trim() : "";
+  if (raw.startsWith("card:")) return raw.replace(/^card:/, "");
+  if (raw.endsWith(":general")) return raw.replace(/:general$/, "");
+  return raw;
+}
+
+export function getCardIdFromToolScopeKey(toolScopeKey: string): string {
+  const cardStateKey = getCardStateKeyFromToolScopeKey(toolScopeKey);
+  const parts = cardStateKey.split(":").filter(Boolean);
+  return parts[parts.length - 1] || cardStateKey;
+}
+
 export function getExerciseStateKey(
   ctx: ExerciseKeyContext,
   exerciseId: string,

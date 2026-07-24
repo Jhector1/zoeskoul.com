@@ -127,16 +127,28 @@ describe("mergeRuntimeIntoProgress", () => {
     it("persists sketch/card tool workspaces for refresh and navigation restore", () => {
         const workspace = buildWorkspace("sql");
 
+        const legacyToolKey =
+            "sql:sql_module_12:section_12_1:what-update-does:sk1:general";
+
         const next = mergeRuntimeIntoProgress(
-            { topics: {} },
+            {
+                topics: {
+                    "what-update-does": {
+                        toolState: {
+                            [legacyToolKey]: { workspace },
+                            "card:sk1": { workspace },
+                        },
+                    },
+                },
+            },
             {
                 exercises: {},
                 cards: {
-                    sk1: {
-                        cardKey: "sk1",
+                    "sql:sql_module_12:section_12_1:what-update-does:sk1": {
+                        cardKey: "sql:sql_module_12:section_12_1:what-update-does:sk1",
                         topicId: "what-update-does",
                         cardId: "sk1",
-                        toolKey: "sql:sql_module_12:section_12_1:what-update-does:sk1:general",
+                        toolKey: legacyToolKey,
                         toolLang: "sql",
                         toolWorkspace: workspace,
                         toolCode: "select * from inventory_items;",
@@ -151,9 +163,10 @@ describe("mergeRuntimeIntoProgress", () => {
         );
 
         const topic = next.topics?.["what-update-does"]!;
-        expect(topic.runtimeStateV2!.cards!.sk1.toolWorkspace).toEqual(workspace);
-        expect(topic.toolState!["sql:sql_module_12:section_12_1:what-update-does:sk1:general"].workspace).toEqual(workspace);
-        expect(topic.toolState!["card:sk1"].workspace).toEqual(workspace);
+        expect(topic.runtimeStateV2!.cards!["sql:sql_module_12:section_12_1:what-update-does:sk1"].toolWorkspace).toEqual(workspace);
+        expect(topic.toolState!["card:sql:sql_module_12:section_12_1:what-update-does:sk1"].workspace).toEqual(workspace);
+        expect(topic.toolState!["card:sk1"]).toBeUndefined();
+        expect(topic.toolState![legacyToolKey]).toBeUndefined();
         expect(topic.sketchState!.sk1).toEqual({ kind: "sql-sketch" });
     });
 });

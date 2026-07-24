@@ -54,6 +54,7 @@ import {
 
 import type {ReviewModulePageProps, HeaderGamificationVm} from "../types";
 import {useReviewRuntimeStore} from "../runtime/reviewRuntimeStore";
+import {getCardStateKey, getCardToolScopeKey} from "../runtime/exerciseKeys";
 import { mergeRuntimeIntoProgress } from "../runtime/runtimeProgressBridge";
 import {
     buildReviewCardRouteTarget,
@@ -1358,9 +1359,25 @@ export function useReviewModuleController({
         setCourseModulesOpen(true);
     }, [panels.setMobileTopicsOpen]);
 
+    const fallbackCardId = activeCard?.id ?? routeTarget?.cardId ?? null;
     const activeToolScopeKey = resolveActiveToolScopeKey({
         activeExerciseStateKey: activeExerciseTarget?.exerciseStateKey ?? null,
         activeCardWorkspaceExerciseKey: activeCardWorkspaceExercise?.exerciseKey ?? null,
+        fallbackWorkspaceScopeKey: fallbackCardId
+            ? getCardToolScopeKey(
+                getCardStateKey({
+                    subjectSlug,
+                    moduleSlug,
+                    sectionSlug: activeCard?.id
+                        ? sectionSlug
+                        : routeTarget?.sectionSlug ?? sectionSlug,
+                    topicId: activeCard?.id
+                        ? viewTid
+                        : routeTarget?.topicId ?? viewTid,
+                    cardId: fallbackCardId,
+                }),
+            )
+            : null,
     });
 
     const tool = useToolCodeRunnerState({

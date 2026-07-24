@@ -17,7 +17,7 @@ import type {
     UnknownRecord,
     WorkspaceOrigin,
 } from "./reviewRuntimeTypes";
-import {getCardStateKey, getExerciseStateKey} from "./exerciseKeys";
+import {getCardStateKey, getCardToolScopeKey, getExerciseStateKey} from "./exerciseKeys";
 import {resolveExerciseWorkspace} from "./exerciseWorkspaceResolver";
 import type { ReviewTargetEntry } from "./reviewTargetRegistry";
 import type { ReviewResolvedRouteTarget } from "./reviewRoute";
@@ -3199,6 +3199,8 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
                 existing,
                 entry,
             });
+            const resolvedCardToolKey =
+                toolKey ?? existing?.toolKey ?? getCardToolScopeKey(cardKey);
 
             starterLoopTrace("runtime.ensureCard.compare", {
                 cardKey,
@@ -3220,7 +3222,8 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
                     String(existing.starterHash ?? "") === String(resolvedTool.starterHash ?? "") &&
                     String(existing.toolCode ?? "") === String(resolvedTool.code ?? "") &&
                     String(existing.toolStdin ?? "") === String(resolvedTool.stdin ?? "") &&
-                    String(existing.toolLang ?? "") === String(resolvedTool.lang ?? "")
+                    String(existing.toolLang ?? "") === String(resolvedTool.lang ?? "") &&
+                    String(existing.toolKey ?? "") === resolvedCardToolKey
                 ),
             });
 
@@ -3234,7 +3237,8 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
                 String(existing.starterHash ?? "") === String(resolvedTool.starterHash ?? "") &&
                 String(existing.toolCode ?? "") === String(resolvedTool.code ?? "") &&
                 String(existing.toolStdin ?? "") === String(resolvedTool.stdin ?? "") &&
-                String(existing.toolLang ?? "") === String(resolvedTool.lang ?? "")
+                String(existing.toolLang ?? "") === String(resolvedTool.lang ?? "") &&
+                String(existing.toolKey ?? "") === resolvedCardToolKey
             ) {
                 return state;
             }
@@ -3268,7 +3272,7 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
                 userEdited: resolvedTool.userEdited,
                 workspaceGeneration: state.resetRevision,
                 starterHash: resolvedTool.starterHash,
-                toolKey: existing?.toolKey ?? toolKey ?? `${cardKey}:general`,
+                toolKey: resolvedCardToolKey,
                 toolWorkspace: resolvedTool.workspace,
                 toolCode: resolvedTool.code,
                 toolStdin: resolvedTool.stdin,
@@ -4191,7 +4195,7 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
                         existing.starterWorkspace ??
                         nextCardWorkspace,
                     starterHash: existing.starterHash,
-                    toolKey: existing.toolScopeKey || `${ownerKey}:general`,
+                    toolKey: getCardToolScopeKey(ownerKey),
                     toolWorkspace: nextCardWorkspace,
                     toolCode: nextCode,
                     toolStdin: nextStdin,
@@ -4203,7 +4207,7 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
                     ...state.cards,
                     [ownerKey]: {
                         ...baseCard,
-                        toolKey: baseCard.toolKey ?? existing.toolScopeKey ?? `${ownerKey}:general`,
+                        toolKey: getCardToolScopeKey(ownerKey),
                         toolWorkspace: nextCardWorkspace,
                         toolCode: nextCode,
                         toolStdin: nextStdin,
@@ -4447,7 +4451,7 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
                 cardId: target.cardId,
                 toolLanguage: registryEntry?.language ?? "python",
                 toolManifest: registryEntry?.toolManifest ?? registryEntry?.item ?? null,
-                toolKey: registryEntry?.toolScopeKey ?? `${cardKey}:general`,
+                toolKey: registryEntry?.toolScopeKey ?? getCardToolScopeKey(cardKey),
             });
 
             /**

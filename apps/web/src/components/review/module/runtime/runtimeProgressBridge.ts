@@ -8,6 +8,7 @@ import type {
 import { reviewDebug, summarizePracticePatch, summarizeWorkspace } from "./reviewDebug";
 import { deriveEntryCode } from "./exerciseWorkspaceResolver";
 import { reviewSaveDebug } from "./reviewSaveDebug";
+import { getCardToolScopeKey } from "./exerciseKeys";
 
 type RuntimeLike = Pick<ReviewRuntimeStore, "exercises" | "cards">;
 type UnknownRecord = Record<string, unknown>;
@@ -440,13 +441,25 @@ export function mergeRuntimeIntoProgress(
      * workspaces, so they must be persisted under the card toolState key.
      */
     if (cstate.toolWorkspace) {
-      const exactToolKey =
-        typeof cstate.toolKey === "string" && cstate.toolKey
-          ? cstate.toolKey
-          : `card:${cardId}`;
+      const exactToolKey = getCardToolScopeKey(cardKey);
+      const legacyToolKeys = new Set([
+        `${cardKey}:general`,
+        getCardToolScopeKey(cardId),
+      ]);
 
-      const legacyToolKey = `card:${cardId}`;
-      const oldToolState = topic.toolState ?? {};
+      if (
+        typeof cstate.toolKey === "string" &&
+        cstate.toolKey &&
+        cstate.toolKey !== exactToolKey
+      ) {
+        legacyToolKeys.add(cstate.toolKey);
+      }
+
+      const oldToolState = Object.fromEntries(
+        Object.entries(topic.toolState ?? {}).filter(
+          ([key]) => !legacyToolKeys.has(key),
+        ),
+      ) as Record<string, UnknownRecord>;
 
       const buildToolEntry = (oldEntry: UnknownRecord | undefined) => ({
         ...oldEntry,
@@ -463,7 +476,6 @@ export function mergeRuntimeIntoProgress(
       const nextToolState = {
         ...oldToolState,
         [exactToolKey]: buildToolEntry(oldToolState[exactToolKey]),
-        [legacyToolKey]: buildToolEntry(oldToolState[legacyToolKey]),
       };
 
       topic.toolState = nextToolState;
