@@ -6,7 +6,8 @@
     },
     "card": {
       "title": "Antre",
-      "subtitle": "Chwazi yon metòd koneksyon pou kontinye."
+      "subtitle": "Chwazi yon metòd koneksyon pou kontinye.",
+      "eyebrow": "Aksè sekirize"
     },
     "providers": {
       "sso": "Kontinye ak SSO",
@@ -35,6 +36,30 @@
       "CredentialsSignin": "Enfòmasyon yo pa bon. Tanpri eseye ankò.",
       "SessionRequired": "Tanpri konekte pou kontinye.",
       "Default": "Gen yon bagay ki pa mache. Tanpri eseye ankò."
+    },
+    "context": {
+      "courseInvite": {
+        "title": "Yo envite w nan yon klas",
+        "body": "Kreye yon kont oswa konekte ak imèl ki te resevwa envitasyon an pou {resource}. Apre sa, n ap mennen w dirèkteman nan klas la.",
+        "fallbackResource": "kou yo te ba ou a"
+      },
+      "paymentRequired": {
+        "title": "Konekte pou kontinye",
+        "body": "Konekte anvan pou ZoeSkoul ka verifye aksè ou. Si yon pwofesè te ba ou kou a, ou pa bezwen yon abònman pèsonèl."
+      },
+      "privateCourse": {
+        "title": "Konekte pou ouvri kou prive sa a",
+        "body": "Konekte pou ZoeSkoul ka konfime yon pwofesè oswa admin te ba ou kou sa a. Kou yo ba ou yo pa bezwen yon abònman pèsonèl."
+      },
+      "tutoringSession": {
+        "title": "Konekte pou antre nan klas leson patikilye sa a",
+        "body": "Kreye yon kont oswa konekte ak imèl yo te envite a. Apre koneksyon an, ZoeSkoul ap mennen w dirèkteman tounen nan klas ou te ouvri a."
+      },
+      "tutoringInvite": {
+        "title": "Yo envite w nan yon sal leson patikilye",
+        "body": "Kreye yon kont oswa konekte ak imèl ki te resevwa envitasyon an pou {resource}. Apre sa, n ap mennen w dirèkteman nan sal leson an.",
+        "fallbackResource": "sesyon leson patikilye sa a"
+      }
     }
   }
 }

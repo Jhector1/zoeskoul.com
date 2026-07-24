@@ -1,10 +1,9 @@
 import { Link } from "@/i18n/navigation";
 
 export default function TutoringSessionCard({ session }: { session: any }) {
-  const snapshot = session.snapshot as any;
-  const first = snapshot?.modules?.[0];
-  const href = first
-    ? `/tutoring-sessions/${session.id}/subjects/${session.sourceSubjectSlug}/modules/${first.sessionModuleSlug}/learn`
+  const firstModuleSlug = session.moduleKeys?.[0] as string | undefined;
+  const href = firstModuleSlug
+    ? `/tutoring-sessions/${session.id}/subjects/${session.sourceSubjectSlug}/modules/${firstModuleSlug}/learn`
     : `/tutoring-sessions/${session.id}`;
 
   return (

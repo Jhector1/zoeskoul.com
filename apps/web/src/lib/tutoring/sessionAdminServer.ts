@@ -1,14 +1,22 @@
 import "server-only";
 
+import { randomUUID } from "node:crypto";
 import type { Prisma, PrismaClient } from "@/lib/prisma";
 import type { TeachingUser } from "@/lib/teaching/teachingAccess";
 import { ownedTeachingRecordWhere } from "@/lib/teaching/teachingAccess";
-import { resolveUsersByEmail } from "@/lib/teaching/recipientResolution";
+import {
+  normalizeEmails,
+  resolveUsersByEmail,
+} from "@/lib/teaching/recipientResolution";
 import type {
   TutoringSessionInput,
   TutoringSessionUpdateInput,
 } from "@/lib/validators/tutoringSession";
-import { buildTutoringSnapshot } from "./sessionSnapshot";
+import { TUTORING_SESSION_LIMITS } from "./sessionLimits";
+import { buildTutoringSnapshot, serializeTutoringSnapshot } from "./sessionSnapshot";
+import { syncPendingTutoringSessionInvites } from "./sessionInvites";
+
+class TutoringSessionQuotaError extends Error {}
 
 export async function resolveTutoringRecipients(
   prisma: PrismaClient,
@@ -18,9 +26,10 @@ export async function resolveTutoringRecipients(
     groupIds: readonly string[];
   },
 ) {
+  const recipientEmails = normalizeEmails(args.userEmails);
   const uniqueGroupIds = [...new Set(args.groupIds.filter(Boolean))];
   const [users, groups] = await Promise.all([
-    resolveUsersByEmail(prisma, args.userEmails),
+    resolveUsersByEmail(prisma, recipientEmails),
     uniqueGroupIds.length
       ? prisma.learningGroup.findMany({
           where: {
@@ -32,14 +41,6 @@ export async function resolveTutoringRecipients(
       : Promise.resolve([]),
   ]);
 
-  if (users.missingEmails.length) {
-    return {
-      ok: false as const,
-      status: 400 as const,
-      error: "Some students do not have ZoeSkoul accounts.",
-      missingEmails: users.missingEmails,
-    };
-  }
   if (groups.length !== uniqueGroupIds.length) {
     return {
       ok: false as const,
@@ -48,7 +49,13 @@ export async function resolveTutoringRecipients(
     };
   }
 
-  return { ok: true as const, users: users.users, groups };
+  return {
+    ok: true as const,
+    users: users.users,
+    pendingEmails: users.missingEmails,
+    recipientEmails,
+    groups,
+  };
 }
 
 export async function resolveTutoringAudience(
@@ -76,6 +83,8 @@ export async function resolveTutoringAudience(
     ok: true as const,
     subject,
     users: recipients.users,
+    pendingEmails: recipients.pendingEmails,
+    recipientEmails: recipients.recipientEmails,
     groups: recipients.groups,
   };
 }
@@ -87,53 +96,112 @@ export async function createTutoringSession(
   const resolved = await resolveTutoringAudience(prisma, args);
   if (!resolved.ok) return resolved;
 
-  const created = await prisma.tutoringSession.create({
-    data: {
-      slug: args.input.slug,
-      title: args.input.title,
-      description: args.input.description ?? null,
-      ownerId: args.teachingUser.id,
-      subjectId: resolved.subject.id,
-      sourceSubjectSlug: resolved.subject.slug,
-      selectionScope: args.input.selectionScope,
-      sourceModuleSlug: args.input.sourceModuleSlug ?? null,
-      sourceSectionSlug: args.input.sourceSectionSlug ?? null,
-      sourceTopicId: args.input.sourceTopicId ?? null,
-      snapshot: { version: 1, subjectSlug: resolved.subject.slug, modules: [] },
-      status: args.input.status,
-      allowStudentEditing: args.input.allowStudentEditing,
-      sharedAt: args.input.status === "shared" ? new Date() : null,
-      users: resolved.users.length
-        ? { createMany: { data: resolved.users.map((user) => ({ userId: user.id })) } }
-        : undefined,
-      groups: resolved.groups.length
-        ? { createMany: { data: resolved.groups.map((group) => ({ groupId: group.id })) } }
-        : undefined,
+  // Build and validate the frozen payload before a visible database row exists.
+  // A UUID is a valid Prisma String id and lets snapshot module ids remain stable.
+  const sessionId = randomUUID();
+  const snapshot = await buildTutoringSnapshot({
+    sessionId,
+    subjectSlug: resolved.subject.slug,
+    selection: {
+      scope: args.input.selectionScope,
+      moduleSlug: args.input.sourceModuleSlug,
+      sectionSlug: args.input.sourceSectionSlug,
+      topicId: args.input.sourceTopicId,
     },
   });
+  const serialized = serializeTutoringSnapshot(snapshot);
 
   try {
-    const snapshot = await buildTutoringSnapshot({
-      sessionId: created.id,
-      subjectSlug: resolved.subject.slug,
-      selection: {
-        scope: args.input.selectionScope,
-        moduleSlug: args.input.sourceModuleSlug,
-        sectionSlug: args.input.sourceSectionSlug,
-        topicId: args.input.sourceTopicId,
+    const session = await prisma.$transaction(
+      async (tx) => {
+        const usage = await tx.tutoringSession.aggregate({
+          where: { ownerId: args.teachingUser.id },
+          _count: { _all: true },
+          _sum: { snapshotBytes: true },
+        });
+        if (usage._count._all >= TUTORING_SESSION_LIMITS.maxSessionsPerOwner) {
+          throw new TutoringSessionQuotaError(
+            `Tutoring session limit reached (${TUTORING_SESSION_LIMITS.maxSessionsPerOwner}).`,
+          );
+        }
+        if (
+          (usage._sum.snapshotBytes ?? 0) + serialized.snapshotBytes >
+          TUTORING_SESSION_LIMITS.maxSnapshotBytesPerOwner
+        ) {
+          throw new TutoringSessionQuotaError(
+            "Tutoring snapshot storage limit reached.",
+          );
+        }
+
+        const created = await tx.tutoringSession.create({
+          data: {
+            id: sessionId,
+            slug: args.input.slug,
+            title: args.input.title,
+            description: args.input.description ?? null,
+            ownerId: args.teachingUser.id,
+            subjectId: resolved.subject.id,
+            sourceSubjectSlug: resolved.subject.slug,
+            selectionScope: args.input.selectionScope,
+            sourceModuleSlug: args.input.sourceModuleSlug ?? null,
+            sourceSectionSlug: args.input.sourceSectionSlug ?? null,
+            sourceTopicId: args.input.sourceTopicId ?? null,
+            snapshot: JSON.parse(serialized.serialized) as Prisma.InputJsonValue,
+            snapshotVersion: snapshot.version,
+            snapshotBytes: serialized.snapshotBytes,
+            moduleKeys: serialized.moduleKeys,
+            boardKeys: serialized.boardKeys,
+            status: args.input.status,
+            allowStudentEditing: args.input.allowStudentEditing,
+            sharedAt: args.input.status === "shared" ? new Date() : null,
+            users: resolved.users.length
+              ? {
+                  createMany: {
+                    data: resolved.users.map((user) => ({ userId: user.id })),
+                  },
+                }
+              : undefined,
+            groups: resolved.groups.length
+              ? {
+                  createMany: {
+                    data: resolved.groups.map((group) => ({ groupId: group.id })),
+                  },
+                }
+              : undefined,
+          },
+          select: {
+            id: true,
+            slug: true,
+            title: true,
+            status: true,
+            allowStudentEditing: true,
+            createdAt: true,
+            updatedAt: true,
+          },
+        });
+
+        await syncPendingTutoringSessionInvites(tx, {
+          sessionId: created.id,
+          pendingEmails: resolved.pendingEmails,
+        });
+        return created;
       },
-    });
+      { isolationLevel: "Serializable" },
+    );
+
     return {
       ok: true as const,
-      session: await prisma.tutoringSession.update({
-        where: { id: created.id },
-        data: {
-          snapshot: JSON.parse(JSON.stringify(snapshot)) as Prisma.InputJsonValue,
-        },
-      }),
+      session,
+      pendingInvites: resolved.pendingEmails,
     };
   } catch (error) {
-    await prisma.tutoringSession.delete({ where: { id: created.id } });
+    if (error instanceof TutoringSessionQuotaError) {
+      return {
+        ok: false as const,
+        status: 409 as const,
+        error: error.message,
+      };
+    }
     throw error;
   }
 }
@@ -160,6 +228,10 @@ export async function updateTutoringSession(
       sharedAt: true,
       users: { include: { user: { select: { email: true } } } },
       groups: { select: { groupId: true } },
+      invites: {
+        where: { acceptedAt: null, revokedAt: null },
+        select: { email: true },
+      },
     },
   });
   if (!existing) {
@@ -173,9 +245,12 @@ export async function updateTutoringSession(
         teachingUser: args.teachingUser,
         userEmails:
           args.input.userEmails ??
-          existing.users
-            .map((row) => row.user.email)
-            .filter((email): email is string => Boolean(email)),
+          [
+            ...existing.users
+              .map((row) => row.user.email)
+              .filter((email): email is string => Boolean(email)),
+            ...existing.invites.map((invite) => invite.email),
+          ],
         groupIds: args.input.groupIds ?? existing.groups.map((row) => row.groupId),
       })
     : null;
@@ -207,6 +282,13 @@ export async function updateTutoringSession(
       }
     }
 
+    if (args.input.userEmails !== undefined && recipients?.ok) {
+      await syncPendingTutoringSessionInvites(tx, {
+        sessionId: args.sessionId,
+        pendingEmails: recipients.pendingEmails,
+      });
+    }
+
     return tx.tutoringSession.update({
       where: { id: args.sessionId },
       data: {
@@ -227,8 +309,23 @@ export async function updateTutoringSession(
           ? { allowStudentEditing: args.input.allowStudentEditing }
           : {}),
       },
+      select: {
+        id: true,
+        title: true,
+        description: true,
+        status: true,
+        allowStudentEditing: true,
+        updatedAt: true,
+      },
     });
   });
 
-  return { ok: true as const, session };
+  return {
+    ok: true as const,
+    session,
+    pendingInvites:
+      recipients?.ok
+        ? recipients.pendingEmails
+        : existing.invites.map((invite) => invite.email),
+  };
 }

@@ -6,6 +6,7 @@ import {
   buildCloudinaryImageUrl,
   type CloudinaryImageOpts,
 } from "./url";
+import { profileAvatarFileError } from "@/lib/profile/profileAvatar";
 
 const MAX_CHALLENGE_OG_IMAGE_BYTES = 4 * 1024 * 1024;
 const ALLOWED_CHALLENGE_OG_IMAGE_TYPES = new Set([
@@ -17,6 +18,7 @@ const ALLOWED_CHALLENGE_OG_IMAGE_TYPES = new Set([
 export type UploadedCloudinaryImage = {
   publicId: string;
   secureUrl: string;
+  version: number | null;
   width: number | null;
   height: number | null;
   format: string | null;
@@ -37,6 +39,7 @@ const CLOUDINARY_SIGNATURE_ALGORITHM = "sha256";
 type CloudinaryUploadResponse = {
   public_id?: unknown;
   secure_url?: unknown;
+  version?: unknown;
   width?: unknown;
   height?: unknown;
   format?: unknown;
@@ -199,7 +202,12 @@ export function validateChallengeOgImageFile(file: File) {
   }
 }
 
-async function validateChallengeOgImageSignature(file: File) {
+export function validateProfileAvatarFile(file: File) {
+  const error = profileAvatarFileError(file);
+  if (error) throw new Error(error);
+}
+
+async function validateSupportedImageSignature(file: File) {
   const header = new Uint8Array(await file.slice(0, 16).arrayBuffer());
   const valid =
     (file.type === "image/jpeg" && hasJpegSignature(header)) ||
@@ -222,23 +230,17 @@ export function cloudinaryServerImageUrl(
   );
 }
 
-export async function uploadChallengeOgImage(file: File): Promise<UploadedCloudinaryImage> {
-  validateChallengeOgImageFile(file);
-  await validateChallengeOgImageSignature(file);
+async function uploadCloudinaryImage(
+  file: File,
+  params: Record<string, string | number | boolean>,
+): Promise<UploadedCloudinaryImage> {
+  await validateSupportedImageSignature(file);
 
   const config = getCloudinaryConfig();
-  const timestamp = Math.floor(Date.now() / 1000);
-  const params = {
-    folder: "zoeskoul/challenges/og",
-    overwrite: false,
-    timestamp,
-    unique_filename: true,
-    use_filename: false,
-  };
   const signature = signCloudinaryParams(params, config.apiSecret);
   const form = new FormData();
 
-  form.set("file", file, file.name || "challenge-preview");
+  form.set("file", file, file.name || "image");
   form.set("api_key", config.apiKey);
   form.set("signature", signature);
   for (const [key, value] of Object.entries(params)) {
@@ -268,11 +270,44 @@ export async function uploadChallengeOgImage(file: File): Promise<UploadedCloudi
   return {
     publicId: body.public_id,
     secureUrl: typeof body.secure_url === "string" ? body.secure_url : "",
+    version: typeof body.version === "number" ? body.version : null,
     width: typeof body.width === "number" ? body.width : null,
     height: typeof body.height === "number" ? body.height : null,
     format: typeof body.format === "string" ? body.format : null,
     bytes: typeof body.bytes === "number" ? body.bytes : null,
   };
+}
+
+export async function uploadChallengeOgImage(file: File): Promise<UploadedCloudinaryImage> {
+  validateChallengeOgImageFile(file);
+
+  const timestamp = Math.floor(Date.now() / 1000);
+  return uploadCloudinaryImage(file, {
+    folder: "zoeskoul/challenges/og",
+    overwrite: false,
+    timestamp,
+    unique_filename: true,
+    use_filename: false,
+  });
+}
+
+export async function uploadProfileAvatar(
+  file: File,
+  userId: string,
+): Promise<UploadedCloudinaryImage> {
+  validateProfileAvatarFile(file);
+
+  const safeUserId = userId.replace(/[^a-zA-Z0-9_-]/g, "-");
+  const timestamp = Math.floor(Date.now() / 1000);
+  return uploadCloudinaryImage(file, {
+    folder: "zoeskoul/avatars",
+    invalidate: true,
+    overwrite: true,
+    public_id: safeUserId,
+    timestamp,
+    unique_filename: false,
+    use_filename: false,
+  });
 }
 
 export async function destroyCloudinaryImage(publicId: string) {

@@ -24,6 +24,51 @@ export type BoardTextEditorRect = {
   fontSize: number;
 };
 
+export type BoardTextEditorLogicalSize = {
+  logicalWidth: number;
+  logicalHeight: number;
+};
+
+/**
+ * Sizes the text editor from its current content. Explicit newlines grow the
+ * editor vertically, while long lines grow horizontally until the visible
+ * board edge and then wrap into additional rows.
+ */
+export function getBoardTextEditorLogicalSize(
+  text: string,
+  fontSize: number,
+  viewport: Pick<BoardViewport, "width" | "height">,
+): BoardTextEditorLogicalSize {
+  const safeFontSize = clamp(fontSize, 16, 72);
+  const horizontalPadding = 32;
+  const verticalPadding = 28;
+  const minWidth = Math.min(220, Math.max(96, viewport.width - 32));
+  const maxWidth = Math.max(minWidth, viewport.width - 32);
+  const minHeight = Math.min(72, Math.max(64, viewport.height - 32));
+  const maxHeight = Math.max(minHeight, viewport.height - 32);
+  const characterWidth = safeFontSize * 0.58;
+  const lineHeight = safeFontSize * 1.25;
+  const lines = text.replace(/\r\n?/g, "\n").split("\n");
+  const longestLineLength = Math.max(1, ...lines.map((line) => line.length));
+  const logicalWidth = clamp(
+    longestLineLength * characterWidth + horizontalPadding,
+    minWidth,
+    maxWidth,
+  );
+  const usableLineWidth = Math.max(characterWidth, logicalWidth - horizontalPadding);
+  const visualLineCount = lines.reduce(
+    (count, line) => count + Math.max(1, Math.ceil(Math.max(1, line.length) * characterWidth / usableLineWidth)),
+    0,
+  );
+  const logicalHeight = clamp(
+    visualLineCount * lineHeight + verticalPadding,
+    minHeight,
+    maxHeight,
+  );
+
+  return { logicalWidth, logicalHeight };
+}
+
 function clamp(value: number, min: number, max: number) {
   return Math.min(max, Math.max(min, value));
 }

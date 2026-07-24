@@ -1,5 +1,9 @@
 import { describe, expect, it } from "vitest";
-import { getBoardTextEditorRect, getBoardViewport } from "./layout";
+import {
+  getBoardTextEditorLogicalSize,
+  getBoardTextEditorRect,
+  getBoardViewport,
+} from "./layout";
 
 describe("getBoardViewport", () => {
   it("fills a wide panel by extending the logical width", () => {
@@ -63,5 +67,29 @@ describe("getBoardTextEditorRect", () => {
 
   it("returns null before the board surface has been measured", () => {
     expect(getBoardTextEditorRect({ x: 20, y: 20 }, { width: 0, height: 0 })).toBeNull();
+  });
+});
+
+describe("getBoardTextEditorLogicalSize", () => {
+  it("expands horizontally while a single line is typed", () => {
+    const short = getBoardTextEditorLogicalSize("hello", 30, { width: 1200, height: 800 });
+    const long = getBoardTextEditorLogicalSize("hello ".repeat(6), 30, { width: 1200, height: 800 });
+
+    expect(long.logicalWidth).toBeGreaterThan(short.logicalWidth);
+    expect(long.logicalHeight).toBe(short.logicalHeight);
+  });
+
+  it("expands vertically for explicit newlines", () => {
+    const oneLine = getBoardTextEditorLogicalSize("one", 30, { width: 1200, height: 800 });
+    const threeLines = getBoardTextEditorLogicalSize("one\ntwo\nthree", 30, { width: 1200, height: 800 });
+
+    expect(threeLines.logicalHeight).toBeGreaterThan(oneLine.logicalHeight);
+  });
+
+  it("adds wrapped rows after reaching the board width", () => {
+    const size = getBoardTextEditorLogicalSize("x".repeat(240), 30, { width: 420, height: 800 });
+
+    expect(size.logicalWidth).toBe(388);
+    expect(size.logicalHeight).toBeGreaterThan(72);
   });
 });

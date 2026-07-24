@@ -6,6 +6,7 @@ import { checkModuleAccess } from "@/lib/access/moduleAccessServer";
 import { buildBillingHref } from "@/lib/billing/moduleAccess";
 import type { Actor } from "@/lib/practice/actor";
 import { describeModuleAccessDenial } from "@/lib/access/moduleAccessDenial";
+import { buildAuthenticateAccessHref } from "@/lib/access/accessGate";
 
 export async function enforceModuleAccessOrRedirect(args: {
     prisma: PrismaClient;
@@ -31,12 +32,19 @@ export async function enforceModuleAccessOrRedirect(args: {
         redirect(`/${encodeURIComponent(args.locale)}/assignments`);
     }
     if (denial.kind === "auth") {
-        redirect(`/api/auth/signin?callbackUrl=${encodeURIComponent(args.nextPath)}`);
+        redirect(
+            buildAuthenticateAccessHref({
+                locale: args.locale,
+                next: args.nextPath,
+                reason: "private_course",
+                resource: args.subjectSlug,
+            }),
+        );
     }
 
     // ✅ SAFE back: modules list (never paywalled)
     const back =
-        `/${encodeURIComponent(args.locale)}/subjects/${encodeURIComponent(args.subjectSlug)}/modules/${encodeURIComponent(args.moduleSlug)}/learn`;
+        `/${encodeURIComponent(args.locale)}/subjects/${encodeURIComponent(args.subjectSlug)}/modules`;
 
     const billingHref = buildBillingHref({
         locale: args.locale,

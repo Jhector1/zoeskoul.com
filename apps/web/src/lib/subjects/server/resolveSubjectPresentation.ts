@@ -51,6 +51,7 @@ export type ResolvedSubjectCatalogItem = {
     imagePublicId: string | null;
     imageAlt: string | null;
     defaultModuleSlug: string | null;
+    visibility: "public" | "private" | "organization";
     versioning?: ResolvedSubjectVersioning;
 };
 
@@ -267,6 +268,7 @@ async function resolveSubjectCatalogItem(
         imagePublicId: resolved.imagePublicId ?? null,
         imageAlt: resolved.imageAlt ?? resolved.title ?? subject.slug,
         defaultModuleSlug,
+        visibility: subject.visibility ?? "public",
         status: getSubjectStatus(subject),
         versioning: subject.meta?.versioning as ResolvedSubjectVersioning | undefined,    };
 }

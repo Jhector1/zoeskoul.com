@@ -6,7 +6,8 @@
     },
     "card": {
       "title": "Se connecter",
-      "subtitle": "Choisissez une méthode de connexion pour continuer."
+      "subtitle": "Choisissez une méthode de connexion pour continuer.",
+      "eyebrow": "Accès sécurisé"
     },
     "providers": {
       "sso": "Continuer avec le SSO",
@@ -35,6 +36,30 @@
       "CredentialsSignin": "Identifiants invalides. Veuillez réessayer.",
       "SessionRequired": "Veuillez vous connecter pour continuer.",
       "Default": "Une erreur s’est produite. Veuillez réessayer."
+    },
+    "context": {
+      "courseInvite": {
+        "title": "Vous avez été invité(e) dans une classe",
+        "body": "Créez un compte ou connectez-vous avec l’adresse qui a reçu l’invitation pour {resource}. Vous serez ensuite redirigé(e) directement vers la classe.",
+        "fallbackResource": "ce cours attribué"
+      },
+      "paymentRequired": {
+        "title": "Connectez-vous pour continuer",
+        "body": "Connectez-vous afin que ZoeSkoul vérifie votre accès. Si le cours vous a été attribué par un enseignant, aucun abonnement personnel n’est requis."
+      },
+      "privateCourse": {
+        "title": "Connectez-vous pour ouvrir ce cours privé",
+        "body": "Connectez-vous afin que ZoeSkoul confirme qu’un enseignant ou un administrateur vous a attribué ce cours. Les cours attribués ne nécessitent aucun abonnement personnel."
+      },
+      "tutoringSession": {
+        "title": "Connectez-vous pour rejoindre cette classe de tutorat",
+        "body": "Créez un compte ou connectez-vous avec l’adresse invitée. Après l’authentification, ZoeSkoul vous ramènera directement dans la classe que vous avez ouverte."
+      },
+      "tutoringInvite": {
+        "title": "Vous avez été invité à une salle de tutorat",
+        "body": "Créez un compte ou connectez-vous avec l’adresse qui a reçu l’invitation pour {resource}. Vous serez ensuite redirigé directement vers la salle de tutorat.",
+        "fallbackResource": "cette séance de tutorat"
+      }
     }
   }
 }

@@ -3,7 +3,10 @@ import "server-only";
 import type { PrismaClient } from "@/lib/prisma";
 import type { TeachingUser } from "@/lib/teaching/teachingAccess";
 import { ownedTeachingRecordWhere } from "@/lib/teaching/teachingAccess";
-import { resolveUsersByEmail } from "@/lib/teaching/recipientResolution";
+import {
+  normalizeEmails,
+  resolveUsersByEmail,
+} from "@/lib/teaching/recipientResolution";
 import type { LearningAssignmentInput } from "@/lib/validators/learningDelivery";
 
 export type LearningAssignmentWriteResolution =
@@ -11,18 +14,21 @@ export type LearningAssignmentWriteResolution =
       ok: false;
       status: 400 | 404;
       error: string;
-      missingEmails?: string[];
     }
   | {
       ok: true;
       subject: { id: string };
       users: Array<{ id: string; email: string | null }>;
+      pendingEmails: string[];
+      recipientEmails: string[];
       groups: Array<{ id: string }>;
     };
 
 /**
  * Authoring owns content; this delivery service only validates that an active,
  * private course and an audience can be connected by an assignment record.
+ * Emails without accounts are preserved as pending invitations instead of
+ * blocking assignment creation.
  */
 export async function resolveLearningAssignmentWrite(
   prisma: PrismaClient,
@@ -31,6 +37,7 @@ export async function resolveLearningAssignmentWrite(
     input: LearningAssignmentInput;
   },
 ): Promise<LearningAssignmentWriteResolution> {
+  const recipientEmails = normalizeEmails(args.input.userEmails);
   const [subject, resolvedUsers, groups] = await Promise.all([
     prisma.practiceSubject.findFirst({
       where: {
@@ -40,7 +47,7 @@ export async function resolveLearningAssignmentWrite(
       },
       select: { id: true },
     }),
-    resolveUsersByEmail(prisma, args.input.userEmails),
+    resolveUsersByEmail(prisma, recipientEmails),
     args.input.groupIds.length
       ? prisma.learningGroup.findMany({
           where: {
@@ -60,15 +67,6 @@ export async function resolveLearningAssignmentWrite(
     };
   }
 
-  if (resolvedUsers.missingEmails.length > 0) {
-    return {
-      ok: false,
-      status: 400,
-      error: "Some students do not have ZoeSkoul accounts.",
-      missingEmails: resolvedUsers.missingEmails,
-    };
-  }
-
   if (groups.length !== args.input.groupIds.length) {
     return {
       ok: false,
@@ -81,6 +79,8 @@ export async function resolveLearningAssignmentWrite(
     ok: true,
     subject,
     users: resolvedUsers.users,
+    pendingEmails: resolvedUsers.missingEmails,
+    recipientEmails,
     groups,
   };
 }

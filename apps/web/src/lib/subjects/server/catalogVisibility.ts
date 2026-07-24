@@ -16,6 +16,7 @@ import {
 import type { SubjectCardPresentation } from "@/lib/subjects/subjectCardPresentation";
 import {
     selectCatalogSubjectsForMode,
+    selectPublicCatalogSubjects,
     type CatalogVisibilityMode,
 } from "@/lib/subjects/server/catalogVisibilityCore";
 
@@ -100,12 +101,8 @@ export async function selectCatalogSubjectsForActor<
     const access = actorAccess ?? (await getCatalogActorAccess());
     const subjectsWithState = await withSubjectCardState(subjects);
 
-    const selected = selectCatalogSubjectsForMode(
-        subjectsWithState,
-        access.mode,
-    ).filter(
-        (subject) =>
-            access.canSeeAllCatalogSubjects || subject.visibility === "public",
+    const selected = selectPublicCatalogSubjects(
+        selectCatalogSubjectsForMode(subjectsWithState, access.mode),
     );
 
     return selected.map(
@@ -182,15 +179,8 @@ export async function getAvailableVisibleCatalogsForActor(): Promise<
         }),
     );
 
-    /**
-     * Learner: hide empty catalogs.
-     * Admin: keep catalogs even if empty, because admin should be able to inspect
-     * catalog config drift.
-     */
-    if (actorAccess.canSeeAllCatalogSubjects) {
-        return catalogs;
-    }
-
+    // Public catalog routes do not render private-only or empty catalog shells.
+    // Administrative diagnostics belong in the administration workspace.
     return catalogs.filter((catalog) => catalog.subjects.length > 0);
 }
 
@@ -214,7 +204,7 @@ export async function getAvailableVisibleCatalogForActor(
         actorAccess,
     );
 
-    if (subjects.length === 0 && !actorAccess.canSeeAllCatalogSubjects) {
+    if (subjects.length === 0) {
         return null;
     }
 

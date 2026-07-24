@@ -384,6 +384,7 @@ export function useReviewModuleController({
         firstTopicId,
         endpoint: tutoringProgressEndpoint,
         gamificationEnabled: !isTutoringSession,
+        readOnly: isTutoringSession && tutoringSession?.canEdit !== true,
     });
 
     const store = useReviewRuntimeStore();
@@ -2451,6 +2452,13 @@ export function useReviewModuleController({
                       ? `/catalog/${encodeURIComponent(catalogSlug)}`
                       : "") +
                   `/subjects/${encodeURIComponent(subjectSlug)}/modules`,
+            contextBadge:
+                isTutoringSession && tutoringSession?.title
+                    ? {
+                        label: tutoringSession.title,
+                        detail: tutoringSession.viewLabel,
+                    }
+                    : null,
             onOpenModulesDrawer: handleOpenCourseModules,
             onToggleLeftPanel: panels.handleToggleLeftPanel,
             onToggleRightPanel: panels.handleToggleRightPanel,
@@ -2605,11 +2613,12 @@ export function useReviewModuleController({
                 locale,
                 codeEnabled: runtime.codeEnabled,
                 boardEnabled,
-                boardReadOnly: isTutoringSession && tutoringSession?.canEdit !== true,
+                boardReadOnly:
+                    isTutoringSession && tutoringSession?.canEditBoard !== true,
                 boardScopeKey,
                 boardDocumentEndpoint: tutoringDocumentEndpoint,
                 boardDocumentRequestKey: tutoringBoardRequestKey,
-                boardDocumentRefreshMs: isTutoringSession ? 2000 : undefined,
+                boardDocumentRefreshMs: isTutoringSession ? 5000 : undefined,
                 notesEnabled: false,
                 // Course lessons use a compact Code/Board switcher rather than the
                 // larger review-practice Tools/Run/More header.

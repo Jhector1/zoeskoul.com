@@ -10,6 +10,9 @@ export type ReviewModulePageProps = {
     tutoringSession?: {
         id: string;
         canEdit: boolean;
+        canEditBoard?: boolean;
+        title?: string;
+        viewLabel?: string;
     } | null;
 };
 

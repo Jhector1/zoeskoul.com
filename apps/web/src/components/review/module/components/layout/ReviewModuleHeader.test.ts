@@ -139,6 +139,20 @@ describe("ReviewModuleHeader compact toolbar", () => {
         expect(html).toContain('aria-expanded="false"');
     });
 
+    it("renders an optional session context inside the existing header", () => {
+        const html = renderHeader({
+            contextBadge: {
+                label: "c-data-structure",
+                detail: "Shared session",
+            },
+        });
+
+        expect(html).toContain('data-testid="review-context-badge"');
+        expect(html).toContain("c-data-structure");
+        expect(html).toContain("Shared session");
+        expect(html).not.toContain("Next module");
+    });
+
     it("hides the Tools button when the active card disallows opening tools", () => {
         const html = renderHeader({
             toolsToggleAllowed: false,

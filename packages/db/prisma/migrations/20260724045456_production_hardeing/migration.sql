@@ -1,0 +1,2 @@
+-- RenameIndex
+ALTER INDEX "TutoringSessionDocument_sessionId_ownerKey_moduleKey_cardKey_to" RENAME TO "TutoringSessionDocument_sessionId_ownerKey_moduleKey_cardKe_key";

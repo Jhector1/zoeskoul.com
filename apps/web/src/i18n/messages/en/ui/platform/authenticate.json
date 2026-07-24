@@ -36,6 +36,30 @@
       "CredentialsSignin": "Invalid credentials. Please try again.",
       "SessionRequired": "Please sign in to continue.",
       "Default": "Something went wrong. Please try again."
+    },
+    "context": {
+      "courseInvite": {
+        "title": "You were invited to a classroom",
+        "body": "Create an account or sign in with the email that received the invitation for {resource}. You will be taken directly to the classroom afterward.",
+        "fallbackResource": "this assigned course"
+      },
+      "paymentRequired": {
+        "title": "Sign in to continue",
+        "body": "Sign in first so ZoeSkoul can check your access. If the course was assigned by a teacher, no personal subscription is required."
+      },
+      "privateCourse": {
+        "title": "Sign in to open this private course",
+        "body": "Sign in so ZoeSkoul can confirm that a teacher or admin assigned this course to you. Assigned courses do not require a personal subscription."
+      },
+      "tutoringSession": {
+        "title": "Sign in to join this tutoring classroom",
+        "body": "Create an account or sign in with the invited email. After authentication, ZoeSkoul will return you directly to the classroom you opened."
+      },
+      "tutoringInvite": {
+        "title": "You were invited to a tutoring classroom",
+        "body": "Create an account or sign in with the email that received the invitation for {resource}. You will be taken directly to the tutoring classroom afterward.",
+        "fallbackResource": "this tutoring session"
+      }
     }
   }
 }

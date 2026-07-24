@@ -50,6 +50,8 @@ export default function AuthenticatePage() {
     const fallback = `/${locale}`;
     const rawCallbackUrl = sp.get("callbackUrl");
     const rawError = sp.get("error");
+    const accessReason = sp.get("reason");
+    const accessResource = (sp.get("resource") ?? "").slice(0, 180);
 
     const callbackUrl = useMemo(
         () =>
@@ -65,6 +67,44 @@ export default function AuthenticatePage() {
         [rawError, t],
     );
 
+    const accessContext = useMemo(() => {
+        if (accessReason === "course_invite") {
+            return {
+                title: t("context.courseInvite.title"),
+                body: t("context.courseInvite.body", {
+                    resource: accessResource || t("context.courseInvite.fallbackResource"),
+                }),
+            };
+        }
+        if (accessReason === "payment_required") {
+            return {
+                title: t("context.paymentRequired.title"),
+                body: t("context.paymentRequired.body"),
+            };
+        }
+        if (accessReason === "private_course") {
+            return {
+                title: t("context.privateCourse.title"),
+                body: t("context.privateCourse.body"),
+            };
+        }
+        if (accessReason === "tutoring_invite") {
+            return {
+                title: t("context.tutoringInvite.title"),
+                body: t("context.tutoringInvite.body", {
+                    resource: accessResource || t("context.tutoringInvite.fallbackResource"),
+                }),
+            };
+        }
+        if (accessReason === "tutoring_session") {
+            return {
+                title: t("context.tutoringSession.title"),
+                body: t("context.tutoringSession.body"),
+            };
+        }
+        return null;
+    }, [accessReason, accessResource, t]);
+
     const [loadingProvider, setLoadingProvider] = useState<string | null>(null);
 
     function onProvider(providerId: string) {
@@ -73,7 +113,7 @@ export default function AuthenticatePage() {
         void signIn(providerId, {callbackUrl});
     }
 
-    const appName = process.env.NEXT_PUBLIC_APP_NAME ?? "Learnoir";
+    const appName = process.env.NEXT_PUBLIC_APP_NAME ?? "ZoeSkoul";
 
     return (
         <main
@@ -112,6 +152,13 @@ export default function AuthenticatePage() {
                         </div>
 
                         <div className="p-6">
+                            {accessContext ? (
+                                <div className="ui-surface-warn mb-4 p-4">
+                                    <div className="ui-title-sm">{accessContext.title}</div>
+                                    <div className="ui-meta mt-1">{accessContext.body}</div>
+                                </div>
+                            ) : null}
+
                             {errorText ? (
                                 <div className="ui-surface-danger mb-4 p-4">
                                     <div className="ui-title-sm">{t("errors.title")}</div>

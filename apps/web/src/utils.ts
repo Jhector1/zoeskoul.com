@@ -25,7 +25,16 @@ export const ROUTES = {
     terms: "/terms",
     sandbox:"/sandbox",
     achievements:"/achievements",
-    assignments:"/assignments"
+    assignments: "/assignments",
+    tutoringSessions: "/tutoring-sessions",
+
+    teachingCourseAssignments: "/admin/course-assignments",
+    teachingLearningGroups: "/admin/learning-groups",
+    teachingTutoringSessions: "/admin/tutoring-sessions",
+
+    adminDashboard: "/admin",
+    adminAssignments: "/admin/assignments",
+    adminPublicChallenges: "/admin/public-challenges",
 };
 
 export function toWebSocketUrl(input: string) {

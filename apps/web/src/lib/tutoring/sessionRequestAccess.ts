@@ -10,18 +10,30 @@ export async function getTutoringRequestAccess(sessionId: string) {
   const userId = (authSession?.user as { id?: string } | undefined)?.id;
   if (!userId) return null;
 
-  const teachingUser = await getTeachingUser();
-  const tutoringSession = await getTutoringSessionAccess(prisma, {
+  // Learners, invited teachers, and the owner resolve in one narrow query.
+  // Only fall back to the teaching lookup when an otherwise unrelated user may
+  // be a platform administrator.
+  let access = await getTutoringSessionAccess(prisma, {
     sessionId,
     userId,
-    teachingUser,
+    teachingUser: null,
   });
-  if (!tutoringSession) return null;
+  let teachingUser = null;
+
+  if (!access) {
+    teachingUser = await getTeachingUser();
+    if (!teachingUser?.isAdmin) return null;
+    access = await getTutoringSessionAccess(prisma, {
+      sessionId,
+      userId,
+      teachingUser,
+    });
+  }
+  if (!access) return null;
 
   return {
     userId,
     teachingUser,
-    tutoringSession,
-    canEdit: Boolean(teachingUser || tutoringSession.allowStudentEditing),
+    ...access,
   };
 }

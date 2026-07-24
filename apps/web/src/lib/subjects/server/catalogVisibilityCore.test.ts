@@ -4,6 +4,7 @@ vi.mock("server-only", () => ({}));
 
 import {
     selectCatalogSubjectsForMode,
+    selectPublicCatalogSubjects,
     selectSeededVisibleSubjectsForActor,
 } from "./catalogVisibilityCore";
 
@@ -412,4 +413,26 @@ describe("selectSeededVisibleSubjectsForActor", () => {
         ]);
     });
 
+});
+
+describe("selectPublicCatalogSubjects", () => {
+    it("keeps private and organization courses out of public catalog surfaces", () => {
+        const visible = selectPublicCatalogSubjects([
+            { slug: "python-v2", visibility: "public" as const },
+            { slug: "c-data-structures", visibility: "private" as const },
+            { slug: "team-course", visibility: "organization" as const },
+        ]);
+
+        expect(visible.map((subject) => subject.slug)).toEqual(["python-v2"]);
+    });
+
+    it("treats legacy entries without visibility as public", () => {
+        const visible = selectPublicCatalogSubjects([
+            { slug: "legacy-public-course" },
+        ]);
+
+        expect(visible.map((subject) => subject.slug)).toEqual([
+            "legacy-public-course",
+        ]);
+    });
 });

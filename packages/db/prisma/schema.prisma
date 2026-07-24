@@ -434,6 +434,8 @@ model User {
   learningGroupMemberships     LearningGroupMember[]
   learningAssignmentsOwned     LearningAssignment[]      @relation("LearningAssignmentOwner")
   learningAssignmentRecipients LearningAssignmentUser[]
+  learningAssignmentInvitesAccepted LearningAssignmentInvite[] @relation("LearningAssignmentInviteAcceptedBy")
+  tutoringSessionInvitesAccepted TutoringSessionInvite[]   @relation("TutoringSessionInviteAcceptedBy")
   tutoringSessionsOwned        TutoringSession[]          @relation("TutoringSessionOwner")
   tutoringSessionMemberships   TutoringSessionUser[]
 }
@@ -740,6 +742,7 @@ model LearningAssignment {
   owner              User                       @relation("LearningAssignmentOwner", fields: [ownerId], references: [id], onDelete: Cascade)
   users              LearningAssignmentUser[]
   groups             LearningAssignmentGroup[]
+  invites            LearningAssignmentInvite[]
 
   @@index([subjectId, status])
   @@index([ownerId, updatedAt])
@@ -768,6 +771,27 @@ model LearningAssignmentGroup {
   @@index([groupId])
 }
 
+model LearningAssignmentInvite {
+  id               String             @id @default(cuid())
+  assignmentId     String
+  email            String
+  tokenHash        String             @unique @db.VarChar(64)
+  expiresAt        DateTime
+  sentAt           DateTime?
+  acceptedAt       DateTime?
+  acceptedByUserId String?
+  revokedAt        DateTime?
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  assignment       LearningAssignment @relation(fields: [assignmentId], references: [id], onDelete: Cascade)
+  acceptedBy       User?              @relation("LearningAssignmentInviteAcceptedBy", fields: [acceptedByUserId], references: [id], onDelete: SetNull)
+
+  @@unique([assignmentId, email])
+  @@index([assignmentId, revokedAt, expiresAt])
+  @@index([email, revokedAt])
+  @@index([acceptedByUserId])
+}
+
 
 model TutoringSession {
   id                  String                    @id @default(cuid())
@@ -782,20 +806,46 @@ model TutoringSession {
   sourceSectionSlug   String?
   sourceTopicId       String?
   snapshot            Json
+  snapshotVersion     Int                       @default(1)
+  snapshotBytes       Int                       @default(0)
+  moduleKeys          String[]                  @default([])
+  boardKeys           String[]                  @default([])
   status              TutoringSessionStatus     @default(draft)
-  allowStudentEditing Boolean                    @default(true)
+  allowStudentEditing Boolean                    @default(false)
   sharedAt            DateTime?
   createdAt           DateTime                   @default(now())
   updatedAt           DateTime                   @updatedAt
   owner               User                      @relation("TutoringSessionOwner", fields: [ownerId], references: [id], onDelete: Cascade)
-  subject             PracticeSubject           @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  subject             PracticeSubject           @relation(fields: [subjectId], references: [id], onDelete: Restrict)
   users               TutoringSessionUser[]
   groups              TutoringSessionGroup[]
+  invites             TutoringSessionInvite[]
   documents           TutoringSessionDocument[]
 
   @@index([ownerId, updatedAt])
   @@index([subjectId, status])
   @@index([status, sharedAt])
+}
+
+model TutoringSessionInvite {
+  id               String          @id @default(cuid())
+  sessionId        String
+  email            String
+  tokenHash        String          @unique @db.VarChar(64)
+  expiresAt        DateTime
+  sentAt           DateTime?
+  acceptedAt       DateTime?
+  acceptedByUserId String?
+  revokedAt        DateTime?
+  createdAt        DateTime        @default(now())
+  updatedAt        DateTime        @updatedAt
+  session          TutoringSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  acceptedBy       User?           @relation("TutoringSessionInviteAcceptedBy", fields: [acceptedByUserId], references: [id], onDelete: SetNull)
+
+  @@unique([sessionId, email])
+  @@index([sessionId, revokedAt, expiresAt])
+  @@index([email, revokedAt])
+  @@index([acceptedByUserId])
 }
 
 model TutoringSessionUser {
@@ -822,20 +872,24 @@ model TutoringSessionGroup {
 }
 
 model TutoringSessionDocument {
-  id        String          @id @default(cuid())
-  sessionId String
-  moduleKey String
-  cardKey   String
-  toolId    String
-  format    ToolDocFormat   @default(markdown)
-  body      String
-  revision  Int             @default(1)
-  createdAt DateTime        @default(now())
-  updatedAt DateTime        @updatedAt
-  session   TutoringSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  id              String          @id @default(cuid())
+  sessionId       String
+  ownerKey        String          @default("shared")
+  moduleKey       String
+  cardKey         String
+  toolId          String
+  format          ToolDocFormat   @default(markdown)
+  body            String
+  byteSize        Int             @default(0)
+  revision        Int             @default(1)
+  updatedByUserId String?
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+  session         TutoringSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
 
-  @@unique([sessionId, moduleKey, cardKey, toolId], name: "tutoring_session_document")
-  @@index([sessionId, updatedAt])
+  @@unique([sessionId, ownerKey, moduleKey, cardKey, toolId], name: "tutoring_session_document")
+  @@index([sessionId, ownerKey, toolId, updatedAt])
+  @@index([sessionId, toolId, updatedAt])
 }
 
 model PracticeHelpEvent {

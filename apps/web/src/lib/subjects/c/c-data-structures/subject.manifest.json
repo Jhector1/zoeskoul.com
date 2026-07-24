@@ -6,6 +6,7 @@
     "genKey": "c_course",
     "order": 1,
     "accessPolicy": "paid",
+    "visibility": "private",
     "status": "active",
     "imagePublicId": null,
     "imageAlt": null,

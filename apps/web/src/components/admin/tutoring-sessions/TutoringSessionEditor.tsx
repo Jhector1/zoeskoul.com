@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { useRouter } from "@/i18n/navigation";
+import PendingAccountInvites from "@/components/admin/invitations/PendingAccountInvites";
 
 type Course = {
   id: string;
@@ -17,6 +18,15 @@ type Course = {
 
 type Group = { id: string; name: string; memberCount: number };
 
+type PendingInvite = {
+  id: string;
+  email: string;
+  expiresAt: string | Date;
+  sentAt: string | Date | null;
+  acceptedAt: string | Date | null;
+  revokedAt: string | Date | null;
+};
+
 type InitialSession = {
   id: string;
   slug: string;
@@ -31,6 +41,7 @@ type InitialSession = {
   allowStudentEditing: boolean;
   users: Array<{ user: { email: string | null } }>;
   groups: Array<{ groupId: string }>;
+  invites: PendingInvite[];
 } | null;
 
 const field =
@@ -55,6 +66,28 @@ function emailsFromText(value: string) {
   ];
 }
 
+
+function initialRecipientText(session: Exclude<InitialSession, null>) {
+  return [
+    ...new Set(
+      [
+        ...session.users.map((row) => row.user.email),
+        ...session.invites
+          .filter((invite) => !invite.acceptedAt && !invite.revokedAt)
+          .map((invite) => invite.email),
+      ]
+        .filter((email): email is string => Boolean(email))
+        .map((email) => email.toLowerCase()),
+    ),
+  ].join("\n");
+}
+
+function pendingInvites(session: InitialSession) {
+  return (session?.invites ?? []).filter(
+    (invite) => !invite.acceptedAt && !invite.revokedAt,
+  );
+}
+
 function openLabel(status: "draft" | "live" | "shared" | "archived") {
   if (status === "draft") return "Open draft";
   if (status === "shared") return "Open shared session";
@@ -75,6 +108,7 @@ export default function TutoringSessionEditor({
   const isNew = !initialSession;
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [notice, setNotice] = useState<string | null>(null);
   const [state, setState] = useState(() => ({
     subjectId: initialSession?.subjectId ?? courses[0]?.id ?? "",
     selectionScope: initialSession?.selectionScope ?? ("course" as const),
@@ -84,13 +118,10 @@ export default function TutoringSessionEditor({
     title: initialSession?.title ?? "",
     slug: initialSession?.slug ?? "",
     description: initialSession?.description ?? "",
-    userEmails: (initialSession?.users ?? [])
-      .map((row) => row.user.email)
-      .filter(Boolean)
-      .join("\n"),
+    userEmails: initialSession ? initialRecipientText(initialSession) : "",
     groupIds: (initialSession?.groups ?? []).map((row) => row.groupId),
     status: initialSession?.status ?? ("draft" as const),
-    allowStudentEditing: initialSession?.allowStudentEditing ?? true,
+    allowStudentEditing: initialSession?.allowStudentEditing ?? false,
   }));
 
   const course = useMemo(
@@ -104,10 +135,14 @@ export default function TutoringSessionEditor({
   const topics = module?.topics ?? [];
   const selectedSectionSlug = state.sourceSectionSlug || sections[0]?.slug || "";
   const selectedTopicId = state.sourceTopicId || topics[0]?.id || "";
+  const invites = pendingInvites(initialSession);
+  const invitationsEnabled =
+    initialSession?.status === "live" || initialSession?.status === "shared";
 
   async function save() {
     setBusy(true);
     setError(null);
+    setNotice(null);
     try {
       const createPayload = {
         title: state.title,
@@ -144,11 +179,16 @@ export default function TutoringSessionEditor({
       });
       const json = await response.json().catch(() => ({}));
       if (!response.ok) {
-        const missing = Array.isArray(json.missingEmails)
-          ? ` Missing: ${json.missingEmails.join(", ")}`
-          : "";
-        throw new Error(`${json.error ?? "Could not save tutoring session."}${missing}`);
+        throw new Error(json.error ?? "Could not save tutoring session.");
       }
+      const pendingCount = Array.isArray(json.pendingInvites)
+        ? json.pendingInvites.length
+        : 0;
+      setNotice(
+        pendingCount
+          ? `Saved. ${pendingCount} student${pendingCount === 1 ? " is" : "s are"} waiting for an account invitation.`
+          : "Tutoring session saved.",
+      );
       router.replace(`/admin/tutoring-sessions/${json.session.id}`);
       router.refresh();
     } catch (cause: any) {
@@ -230,6 +270,11 @@ export default function TutoringSessionEditor({
       {error ? (
         <div className="rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-700">
           {error}
+        </div>
+      ) : null}
+      {notice ? (
+        <div className="rounded-lg border border-emerald-200 bg-emerald-50 p-3 text-sm text-emerald-800">
+          {notice}
         </div>
       ) : null}
 
@@ -438,7 +483,7 @@ export default function TutoringSessionEditor({
             placeholder="student@example.com"
           />
           <span className="mt-1 block text-xs text-neutral-500">
-            One email per line. Students must already have ZoeSkoul accounts.
+            Existing accounts are added immediately. Emails without accounts become pending invitations that you can copy or send after saving.
           </span>
         </label>
         <div>
@@ -478,6 +523,18 @@ export default function TutoringSessionEditor({
           </div>
         </div>
       </section>
+
+      {!isNew && initialSession ? (
+        <PendingAccountInvites
+          invites={invites}
+          endpoint={`/api/admin/tutoring-sessions/${initialSession.id}/invites`}
+          enabled={invitationsEnabled}
+          disabledMessage="Change the status to Live or Shared and save before sending invitation links."
+          description="These students do not have matching ZoeSkoul accounts yet. The invitation takes them through account creation and then directly into this tutoring classroom."
+          onNotice={setNotice}
+          onError={(message) => setError(message || null)}
+        />
+      ) : null}
     </div>
   );
 }

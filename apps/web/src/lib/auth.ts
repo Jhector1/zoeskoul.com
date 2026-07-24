@@ -84,6 +84,13 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   adapter: PrismaAdapter(prisma as any),
   session: { strategy: "jwt" },
 
+  // Keep every Auth.js entry point on the branded ZoeSkoul authentication page.
+  // This also catches legacy /api/auth/signin redirects without duplicating UI.
+  pages: {
+    signIn: "/authenticate",
+    error: "/authenticate",
+  },
+
   providers: [
     Keycloak({
       [customFetch]: keycloakFetch,

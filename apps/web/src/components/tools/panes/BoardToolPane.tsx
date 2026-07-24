@@ -18,7 +18,11 @@ import { useTranslations } from "next-intl";
 import { useToolDoc, type ToolDocKey } from "../hooks/useToolDoc";
 import { useElementSize } from "../hooks/useElementSize";
 import { clientPointToBoardPoint } from "../board/coordinates";
-import { getBoardTextEditorRect, getBoardViewport } from "../board/layout";
+import {
+  getBoardTextEditorLogicalSize,
+  getBoardTextEditorRect,
+  getBoardViewport,
+} from "../board/layout";
 import {
   boardElementBounds,
   boardTextBounds,
@@ -57,10 +61,19 @@ type Interaction =
   | null;
 
 type TextDraft = {
-  elementId?: string;
+  elementId: string;
   x: number;
   y: number;
   value: string;
+  fontSize: number;
+};
+
+type TextEditSession = {
+  originalDocument: BoardDocument;
+  originalHistory: BoardDocument[];
+  originalFuture: BoardDocument[];
+  originalSelectedId: string | null;
+  checkpointed: boolean;
 };
 
 export type BoardToolPaneProps = {
@@ -69,6 +82,7 @@ export type BoardToolPaneProps = {
   documentEndpoint?: string;
   documentRequestKey?: Record<string, string>;
   documentRefreshMs?: number;
+  documentRefreshEnabled?: boolean;
 };
 
 function cloneDocument(document: BoardDocument): BoardDocument {
@@ -87,6 +101,45 @@ function normalizeBox(start: BoardPoint, current: BoardPoint) {
     y: Math.min(start.y, current.y),
     width: Math.abs(current.x - start.x),
     height: Math.abs(current.y - start.y),
+  };
+}
+
+function applyTextDraft(
+  document: BoardDocument,
+  draft: TextDraft,
+  color: string,
+  strokeWidth: number,
+): BoardDocument {
+  const value = draft.value.replace(/\r\n?/g, "\n");
+  const withoutDraft = document.elements.filter((element) => element.id !== draft.elementId);
+
+  if (!value.trim()) {
+    return withoutDraft.length === document.elements.length
+      ? document
+      : { ...document, elements: withoutDraft };
+  }
+
+  const textElement: Extract<BoardElement, { type: "text" }> = {
+    id: draft.elementId,
+    type: "text",
+    color,
+    strokeWidth,
+    x: draft.x,
+    y: draft.y,
+    text: value,
+    fontSize: draft.fontSize,
+  };
+  const existingIndex = document.elements.findIndex((element) => element.id === draft.elementId);
+
+  if (existingIndex < 0) {
+    return { ...document, elements: [...document.elements, textElement] };
+  }
+
+  return {
+    ...document,
+    elements: document.elements.map((element) =>
+      element.id === draft.elementId ? textElement : element,
+    ),
   };
 }
 
@@ -212,6 +265,7 @@ export default function BoardToolPane({
   documentEndpoint,
   documentRequestKey,
   documentRefreshMs,
+  documentRefreshEnabled = true,
 }: BoardToolPaneProps) {
   const t = useTranslations("ide.tools.board");
   const { body, setBody, state, hydrated } = useToolDoc(boardKey, {
@@ -220,6 +274,7 @@ export default function BoardToolPane({
     endpoint: documentEndpoint,
     requestKey: documentRequestKey,
     refreshMs: documentRefreshMs,
+    refreshEnabled: documentRefreshEnabled,
   });
   const [document, setDocument] = useState<BoardDocument>(() => emptyBoardDocument());
   const [tool, setTool] = useState<BoardTool>("select");
@@ -234,6 +289,7 @@ export default function BoardToolPane({
   const historyRef = useRef<BoardDocument[]>([]);
   const futureRef = useRef<BoardDocument[]>([]);
   const textInputRef = useRef<HTMLTextAreaElement | null>(null);
+  const textEditSessionRef = useRef<TextEditSession | null>(null);
   const { ref: boardSurfaceRef, size: boardSurfaceSize } = useElementSize<HTMLDivElement>();
   const boardViewport = useMemo(
     () => getBoardViewport({ width: boardSurfaceSize.w, height: boardSurfaceSize.h }),
@@ -261,6 +317,7 @@ export default function BoardToolPane({
     setHistoryVersion((value) => value + 1);
     setSelectedId(null);
     setTextDraft(null);
+    textEditSessionRef.current = null;
     setInteraction(null);
   }, [keyString]);
 
@@ -319,11 +376,37 @@ export default function BoardToolPane({
   }, [checkpoint]);
 
   const beginTextEdit = useCallback((element: Extract<BoardElement, { type: "text" }>) => {
+    textEditSessionRef.current = {
+      originalDocument: cloneDocument(document),
+      originalHistory: historyRef.current.map(cloneDocument),
+      originalFuture: futureRef.current.map(cloneDocument),
+      originalSelectedId: element.id,
+      checkpointed: false,
+    };
     setSelectedId(element.id);
     setColor(element.color);
     setStrokeWidth(element.strokeWidth);
-    setTextDraft({ elementId: element.id, x: element.x, y: element.y, value: element.text });
-  }, []);
+    setTextDraft({
+      elementId: element.id,
+      x: element.x,
+      y: element.y,
+      value: element.text,
+      fontSize: element.fontSize,
+    });
+  }, [document]);
+
+  const beginNewTextEdit = useCallback((target: BoardPoint) => {
+    const elementId = makeId();
+    textEditSessionRef.current = {
+      originalDocument: cloneDocument(document),
+      originalHistory: historyRef.current.map(cloneDocument),
+      originalFuture: futureRef.current.map(cloneDocument),
+      originalSelectedId: selectedId,
+      checkpointed: false,
+    };
+    setSelectedId(elementId);
+    setTextDraft({ elementId, x: target.x, y: target.y, value: "", fontSize: 30 });
+  }, [document, selectedId]);
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -401,8 +484,7 @@ export default function BoardToolPane({
       if (hit?.type === "text") {
         beginTextEdit(hit);
       } else {
-        setSelectedId(null);
-        setTextDraft({ x: target.x, y: target.y, value: "" });
+        beginNewTextEdit(target);
       }
       return;
     }
@@ -443,7 +525,7 @@ export default function BoardToolPane({
     setSelectedId(id);
     setInteraction({ type: "draw", elementId: id, start: target });
     event.currentTarget.setPointerCapture(event.pointerId);
-  }, [beginTextEdit, checkpoint, color, document.elements, eventPoint, readOnly, removeElement, selectedId, strokeWidth, tool]);
+  }, [beginNewTextEdit, beginTextEdit, checkpoint, color, document.elements, eventPoint, readOnly, removeElement, selectedId, strokeWidth, tool]);
 
   const onPointerMove = useCallback((event: React.PointerEvent<SVGSVGElement>) => {
     if (!interaction || readOnly) return;
@@ -494,37 +576,56 @@ export default function BoardToolPane({
     setInteraction(null);
   }, [interaction, tool]);
 
+  const updateTextDraftValue = useCallback((value: string) => {
+    if (!textDraft) return;
+    const nextDraft = { ...textDraft, value: value.slice(0, 2000) };
+    const session = textEditSessionRef.current;
+
+    if (session && !session.checkpointed) {
+      historyRef.current = [
+        ...session.originalHistory.slice(-49),
+        cloneDocument(session.originalDocument),
+      ];
+      futureRef.current = [];
+      session.checkpointed = true;
+      setHistoryVersion((current) => current + 1);
+    }
+
+    setTextDraft(nextDraft);
+    setDocument((current) => applyTextDraft(current, nextDraft, color, strokeWidth));
+  }, [color, strokeWidth, textDraft]);
+
   const commitText = useCallback(() => {
     if (!textDraft) return;
-    const value = textDraft.value.trim();
-    if (!value) {
-      setTextDraft(null);
-      return;
+    const finalDocument = applyTextDraft(document, textDraft, color, strokeWidth);
+    const session = textEditSessionRef.current;
+
+    if (session && serializeBoardDocument(finalDocument) === serializeBoardDocument(session.originalDocument)) {
+      historyRef.current = session.originalHistory.map(cloneDocument);
+      futureRef.current = session.originalFuture.map(cloneDocument);
+      setHistoryVersion((current) => current + 1);
     }
-    checkpoint();
-    if (textDraft.elementId) {
-      setDocument((current) => ({
-        ...current,
-        elements: current.elements.map((element) =>
-          element.id === textDraft.elementId && element.type === "text"
-            ? { ...element, text: value, color }
-            : element,
-        ),
-      }));
-    } else {
-      const id = makeId();
-      setDocument((current) => ({
-        ...current,
-        elements: [
-          ...current.elements,
-          { id, type: "text", color, strokeWidth, x: textDraft.x, y: textDraft.y, text: value, fontSize: 30 },
-        ],
-      }));
-      setSelectedId(id);
+
+    setDocument(finalDocument);
+    setSelectedId(textDraft.value.trim() ? textDraft.elementId : session?.originalSelectedId ?? null);
+    setTextDraft(null);
+    textEditSessionRef.current = null;
+    setTool("select");
+  }, [color, document, strokeWidth, textDraft]);
+
+  const cancelText = useCallback(() => {
+    const session = textEditSessionRef.current;
+    if (session) {
+      setDocument(cloneDocument(session.originalDocument));
+      historyRef.current = session.originalHistory.map(cloneDocument);
+      futureRef.current = session.originalFuture.map(cloneDocument);
+      setSelectedId(session.originalSelectedId);
+      setHistoryVersion((current) => current + 1);
     }
     setTextDraft(null);
+    textEditSessionRef.current = null;
     setTool("select");
-  }, [checkpoint, color, strokeWidth, textDraft]);
+  }, []);
 
   const selected = document.elements.find((element) => element.id === selectedId) ?? null;
 
@@ -553,11 +654,19 @@ export default function BoardToolPane({
   const canRedo = futureRef.current.length > 0;
   void historyVersion;
 
-  const textEditorRect = textDraft
+  const textEditorLogicalSize = textDraft
+    ? getBoardTextEditorLogicalSize(textDraft.value, textDraft.fontSize, boardViewport)
+    : null;
+  const textEditorRect = textDraft && textEditorLogicalSize
     ? getBoardTextEditorRect(
         { x: textDraft.x, y: textDraft.y },
         { width: boardSurfaceSize.w, height: boardSurfaceSize.h },
-        { viewport: boardViewport },
+        {
+          viewport: boardViewport,
+          logicalWidth: textEditorLogicalSize.logicalWidth,
+          logicalHeight: textEditorLogicalSize.logicalHeight,
+          logicalFontSize: textDraft.fontSize,
+        },
       )
     : null;
 
@@ -590,8 +699,8 @@ export default function BoardToolPane({
             aria-pressed={tool === item}
             disabled={readOnly && item !== "select"}
             onClick={() => {
+              if (textDraft) commitText();
               setTool(item);
-              setTextDraft(null);
             }}
           >
             <Icon className="h-4 w-4" />
@@ -783,22 +892,20 @@ export default function BoardToolPane({
                 value={textDraft.value}
                 onPointerDown={(event) => event.stopPropagation()}
                 onClick={(event) => event.stopPropagation()}
-                onChange={(event) => setTextDraft((current) => current ? { ...current, value: event.target.value } : current)}
+                onChange={(event) => updateTextDraftValue(event.target.value)}
                 onBlur={commitText}
                 onKeyDown={(event) => {
                   if (event.key === "Escape") {
                     event.preventDefault();
-                    setTextDraft(null);
-                  } else if (event.key === "Enter" && !event.shiftKey) {
-                    event.preventDefault();
-                    commitText();
+                    cancelText();
                   }
                 }}
-                className="h-full w-full resize-none rounded-lg border-2 border-emerald-500 bg-white/95 px-3 py-2 leading-tight text-slate-950 shadow-xl outline-none ring-2 ring-emerald-500/15 placeholder:text-slate-400"
+                className="h-full w-full resize-none overflow-auto rounded-lg border-2 border-emerald-500 bg-white/95 px-3 py-2 leading-tight text-slate-950 shadow-xl outline-none ring-2 ring-emerald-500/15 placeholder:text-slate-400"
                 style={{ fontSize: textEditorRect.fontSize }}
                 placeholder={t("textPlaceholder")}
                 aria-label={t("textPlaceholder")}
                 spellCheck={false}
+                maxLength={2000}
               />
             </div>
           ) : null}

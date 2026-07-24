@@ -4,6 +4,7 @@ import React from "react";
 import { useParams } from "next/navigation";
 
 import type { ReviewModule } from "@/lib/subjects/types";
+import type { ReviewModulePageProps } from "@/components/review/module/types";
 import ReviewModuleView from "@/components/review/module/ReviewModuleView";
 import { useReviewContentUpdate } from "@/components/review/module/hooks/useReviewContentUpdate";
 import CourseContentUpdateBanner from "@/components/review/module/components/CourseContentUpdateBanner";
@@ -19,7 +20,7 @@ export default function ReviewModulePageClient({
     mod: ReviewModule | null;
     pageStatus?: "ready" | "unavailable" | "missing";
     routePrefix?: string | null;
-    tutoringSession?: { id: string; canEdit: boolean } | null;
+    tutoringSession?: ReviewModulePageProps["tutoringSession"];
 }) {
     const params = useParams<{
         locale: string;

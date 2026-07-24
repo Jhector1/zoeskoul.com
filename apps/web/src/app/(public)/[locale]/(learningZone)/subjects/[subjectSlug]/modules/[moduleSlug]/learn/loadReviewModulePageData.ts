@@ -14,6 +14,7 @@ import {
     resolveReviewModulePageData,
     type ReviewModulePageData,
 } from "./reviewModulePageData";
+import { enforceModuleAccessOrRedirect } from "@/lib/billing/enforceModuleAccessOrRedirect";
 
 export type { ReviewModulePageData } from "./reviewModulePageData";
 
@@ -21,6 +22,7 @@ export async function loadReviewModulePageData(args: {
     subjectSlug: string;
     moduleSlug: string;
     locale: string;
+    nextPath?: string;
 }): Promise<ReviewModulePageData> {
     const { subjectSlug, moduleSlug, locale } = args;
     const session = await auth();
@@ -35,6 +37,20 @@ export async function loadReviewModulePageData(args: {
         }),
         getSubjectPublicationState(subjectSlug),
     ]);
+
+    if (publication.isAvailable || canUnlockAll) {
+        await enforceModuleAccessOrRedirect({
+            prisma,
+            actor: { userId, guestId: null },
+            bypass: canUnlockAll,
+            locale,
+            subjectSlug,
+            moduleSlug,
+            nextPath:
+                args.nextPath ??
+                `/${encodeURIComponent(locale)}/subjects/${encodeURIComponent(subjectSlug)}/modules/${encodeURIComponent(moduleSlug)}/learn`,
+        });
+    }
 
     let audienceAvailable = true;
     let canViewSolutions = true;

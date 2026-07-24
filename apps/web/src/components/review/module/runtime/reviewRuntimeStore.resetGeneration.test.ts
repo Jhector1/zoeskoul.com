@@ -119,7 +119,6 @@ function resetRuntimeStore() {
       pendingCardKeys: new Set(),
     },
     targetRegistry: null,
-    _flushToolSnapshotCb: null,
   } as any);
 }
 

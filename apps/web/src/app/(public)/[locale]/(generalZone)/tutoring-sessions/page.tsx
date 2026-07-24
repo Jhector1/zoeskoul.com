@@ -3,6 +3,7 @@ import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { tutoringParticipantWhere } from "@/lib/tutoring/sessionAccess";
 import TutoringSessionCard from "@/components/tutoring/TutoringSessionCard";
+import { buildTutoringSignInHref } from "@/lib/tutoring/tutoringSignInHref";
 import { resolveSubjectDeliveryPresentations } from "@/lib/subjects/resolveSubjectDeliveryPresentation";
 
 export const dynamic = "force-dynamic";
@@ -16,7 +17,7 @@ export default async function TutoringSessionsPage({
   const authSession = await auth();
   const userId = (authSession?.user as any)?.id as string | undefined;
   if (!userId) {
-    redirect(`/api/auth/signin?callbackUrl=${encodeURIComponent(`/${locale}/tutoring-sessions`)}`);
+    redirect(buildTutoringSignInHref({ locale }));
   }
 
   const raw = await prisma.tutoringSession.findMany({
@@ -25,7 +26,15 @@ export default async function TutoringSessionsPage({
       ...tutoringParticipantWhere(userId),
     },
     orderBy: { updatedAt: "desc" },
-    include: {
+    take: 100,
+    select: {
+      id: true,
+      title: true,
+      description: true,
+      status: true,
+      sourceSubjectSlug: true,
+      moduleKeys: true,
+      updatedAt: true,
       subject: { select: { id: true, slug: true, title: true, description: true, visibility: true } },
       owner: { select: { name: true, email: true } },
     },

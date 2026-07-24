@@ -26,7 +26,13 @@ export default async function Page({
   const rawSessions = await prisma.tutoringSession.findMany({
     where: ownedTeachingRecordWhere(user),
     orderBy: { updatedAt: "desc" },
-    include: {
+    take: 100,
+    select: {
+      id: true,
+      title: true,
+      selectionScope: true,
+      status: true,
+      updatedAt: true,
       subject: {
         select: {
           id: true,
@@ -36,7 +42,13 @@ export default async function Page({
           visibility: true,
         },
       },
-      _count: { select: { users: true, groups: true, documents: true } },
+      _count: {
+        select: {
+          users: true,
+          groups: true,
+          documents: { where: { ownerKey: "shared", toolId: "board" } },
+        },
+      },
     },
   });
   const subjects = await resolveSubjectDeliveryPresentations(

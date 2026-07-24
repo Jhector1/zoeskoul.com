@@ -71,6 +71,7 @@ function isProtectedPath(pathname: string) {
       pathname.startsWith("/admin") ||
       pathname.startsWith("/assignments") ||
       pathname.startsWith("/profile") ||
+      pathname.startsWith("/tutoring-sessions") ||
       pathname.startsWith("/subjects") ||
       isCatalogLearningPath(pathname)
   );
@@ -84,6 +85,24 @@ const POSSIBLE_SESSION_COOKIES = [
 ] as const;
 
 const LOCALE_COOKIE = "NEXT_LOCALE";
+
+function redirectToAuthenticate(args: {
+  req: NextRequest;
+  locale: string;
+  callbackUrl: string;
+  protectedPath: string;
+}) {
+  const url = args.req.nextUrl.clone();
+  url.pathname = `/${args.locale}/authenticate`;
+  url.search = "";
+  url.searchParams.set("callbackUrl", args.callbackUrl);
+
+  if (args.protectedPath.startsWith("/tutoring-sessions")) {
+    url.searchParams.set("reason", "tutoring_session");
+  }
+
+  return NextResponse.redirect(url);
+}
 
 export default async function middleware(req: NextRequest) {
   const { pathname, search } = req.nextUrl;
@@ -129,10 +148,12 @@ export default async function middleware(req: NextRequest) {
   const secret = process.env.AUTH_SECRET ?? process.env.NEXTAUTH_SECRET;
 
   if (!secret) {
-    const url = req.nextUrl.clone();
-    url.pathname = `/${locale}/authenticate`;
-    url.searchParams.set("callbackUrl", localizedPathname + search);
-    return NextResponse.redirect(url);
+    return redirectToAuthenticate({
+      req,
+      locale,
+      callbackUrl: localizedPathname + search,
+      protectedPath: path,
+    });
   }
 
   const cookieName =
@@ -148,10 +169,12 @@ export default async function middleware(req: NextRequest) {
   const token = await getToken(opts);
 
   if (!token) {
-    const url = req.nextUrl.clone();
-    url.pathname = `/${locale}/authenticate`;
-    url.searchParams.set("callbackUrl", localizedPathname + search);
-    return NextResponse.redirect(url);
+    return redirectToAuthenticate({
+      req,
+      locale,
+      callbackUrl: localizedPathname + search,
+      protectedPath: path,
+    });
   }
 
   return res;

@@ -57,5 +57,6 @@ describe("TutoringSessionInputSchema", () => {
     expect(parsed.userEmails).toEqual([]);
     expect(parsed.groupIds).toEqual([]);
     expect(parsed.status).toBe("draft");
+    expect(parsed.allowStudentEditing).toBe(false);
   });
 });

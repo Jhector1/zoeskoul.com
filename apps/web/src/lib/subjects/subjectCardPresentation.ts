@@ -5,6 +5,7 @@ export type SubjectCardPresentation = {
     imagePublicId: string | null;
     imageAlt: string | null;
     defaultModuleSlug: string | null;
+    visibility?: "public" | "private" | "organization";
 };
 
 export type PersistedSubjectCardPresentation = {

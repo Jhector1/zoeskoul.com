@@ -227,6 +227,7 @@ function ToolsPanelInner(props: ToolsPanelProps) {
                         documentEndpoint={props.boardDocumentEndpoint}
                         documentRequestKey={props.boardDocumentRequestKey}
                         documentRefreshMs={props.boardDocumentRefreshMs}
+                        documentRefreshEnabled={active === "board"}
                     />
 
                     <MemoNotesPaneLayer
@@ -614,6 +615,7 @@ function BoardPaneLayer(props: {
     documentEndpoint?: string;
     documentRequestKey?: Record<string, string>;
     documentRefreshMs?: number;
+    documentRefreshEnabled: boolean;
 }) {
     const pane = props.boardEnabled && BOARD_SPEC
         ? BOARD_SPEC.render({
@@ -622,6 +624,7 @@ function BoardPaneLayer(props: {
             documentEndpoint: props.documentEndpoint,
             documentRequestKey: props.documentRequestKey,
             documentRefreshMs: props.documentRefreshMs,
+            documentRefreshEnabled: props.documentRefreshEnabled,
         })
         : null;
 
@@ -648,7 +651,8 @@ const MemoBoardPaneLayer = React.memo(
         prev.readOnly === next.readOnly &&
         prev.documentEndpoint === next.documentEndpoint &&
         prev.documentRequestKey === next.documentRequestKey &&
-        prev.documentRefreshMs === next.documentRefreshMs,
+        prev.documentRefreshMs === next.documentRefreshMs &&
+        prev.documentRefreshEnabled === next.documentRefreshEnabled,
 );
 
 function NotesPaneLayer(props: {

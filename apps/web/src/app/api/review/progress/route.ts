@@ -13,12 +13,16 @@ import {
     readJsonSafe,
 } from "@/lib/practice/api/shared/http";
 import { pickLocale } from "@/lib/review/api/shared/schemas";
-import type { ReviewProgressState, ReviewTopicProgress } from "@/lib/review/progressTypes";
+import type { ReviewProgressState } from "@/lib/review/progressTypes";
 import {
-    mergeTopicProgressStates,
     normalizeProgressTopics,
     normalizeTopicProgressKey,
 } from "@/lib/review/progressTopicKeys";
+import {
+    getReviewProgressSaveRevision,
+    mergeReviewProgressForSave,
+    reviewProgressStateBytes,
+} from "@/lib/review/api/progress/mergeProgressForSave";
 import {
     REVIEW_PROGRESS_LIMITS,
     ReviewProgressWriteSchema,
@@ -41,191 +45,6 @@ async function resolveReviewProgressScope(args: {
 
     return { actor, setGuestId, resolved };
 }
-
-
-
-
-
-
-
-function numericVersion(value: unknown) {
-    const n = Number(value ?? 0);
-    return Number.isFinite(n) ? n : 0;
-}
-
-function isEmptyRecord(value: unknown) {
-    return (
-        !value ||
-        (typeof value === "object" &&
-            !Array.isArray(value) &&
-            Object.keys(value as Record<string, unknown>).length === 0)
-    );
-}
-
-function isAuthoritativeModuleReset(args: {
-    previous: ReviewProgressState;
-    incoming: ReviewProgressState;
-}) {
-    const previousVersion = numericVersion(args.previous.quizVersion);
-    const incomingVersion = numericVersion(args.incoming.quizVersion);
-
-    return (
-        incomingVersion > previousVersion &&
-        args.incoming.moduleCompleted === false &&
-        !args.incoming.moduleCompletedAt &&
-        isEmptyRecord(args.incoming.topics)
-    );
-}
-
-function isAuthoritativeTopicReset(args: {
-    previousTopic: ReviewTopicProgress | undefined;
-    incomingTopic: ReviewTopicProgress;
-}) {
-    const incomingVersion = numericVersion(args.incomingTopic.quizVersion);
-    const previousVersion = numericVersion(args.previousTopic?.quizVersion);
-
-    return (
-        incomingVersion > previousVersion &&
-        args.incomingTopic.completed === false &&
-        !args.incomingTopic.completedAt
-    );
-}
-
-
-function getSaveRevision(state: any) {
-    const n = Number(state?.__saveRevision ?? 0);
-    return Number.isFinite(n) ? n : 0;
-}
-
-function stateBytes(state: any) {
-    try {
-        return JSON.stringify(state ?? null).length;
-    } catch {
-        return 0;
-    }
-}
-
-function timeMs(value: unknown) {
-    const n = Number(new Date(String(value ?? "")));
-    return Number.isFinite(n) ? n : 0;
-}
-
-function pickLatestIso(a: unknown, b: unknown) {
-    const aMs = timeMs(a);
-    const bMs = timeMs(b);
-    if (!aMs && !bMs) return undefined;
-    return bMs >= aMs ? (b as string | undefined) : (a as string | undefined);
-}
-
-function mergeReviewProgressForSave(args: {
-    previousState: ReviewProgressState | null;
-    incomingState: ReviewProgressState;
-    saveRevision: number;
-}) {
-    const previous = normalizeProgressTopics(args.previousState ?? {});
-    const incoming = normalizeProgressTopics(args.incomingState ?? {});
-
-    /**
-     * Reset Module is authoritative.
-     *
-     * Do not merge old topics/moduleCompleted back in.
-     */
-    if (isAuthoritativeModuleReset({ previous, incoming })) {
-        return {
-            ...incoming,
-            quizVersion: Math.max(
-                numericVersion(previous.quizVersion),
-                numericVersion(incoming.quizVersion),
-            ),
-            moduleCompleted: false,
-            moduleCompletedAt: undefined,
-            topics: {},
-            activeTopicId: normalizeTopicProgressKey(
-                incoming.activeTopicId ?? previous.activeTopicId,
-            ),
-            assignmentSessionId:
-                incoming.assignmentSessionId ?? previous.assignmentSessionId,
-            __saveRevision: args.saveRevision,
-        } as ReviewProgressState & { __saveRevision: number };
-    }
-
-    const nextTopics: Record<string, ReviewTopicProgress> = {
-        ...(previous.topics ?? {}),
-    };
-
-    let hasAuthoritativeTopicReset = false;
-
-    const incomingTopicEntries = Object.entries(
-        incoming.topics ?? {},
-    ) as Array<[string, ReviewTopicProgress]>;
-
-    for (const [topicKey, incomingTopic] of incomingTopicEntries) {
-        const normalizedTopicKey = normalizeTopicProgressKey(topicKey);
-        const previousTopic = nextTopics[normalizedTopicKey];
-
-        if (
-            isAuthoritativeTopicReset({
-                previousTopic,
-                incomingTopic,
-            })
-        ) {
-            hasAuthoritativeTopicReset = true;
-
-            /**
-             * Reset Topic / Reset Quiz is authoritative for completion maps.
-             * The incoming state already contains the correct remaining
-             * runtime/tool state after reset.
-             */
-            nextTopics[normalizedTopicKey] = incomingTopic;
-            continue;
-        }
-
-        const mergedTopic = mergeTopicProgressStates(previousTopic, incomingTopic);
-
-        if (previousTopic?.completed || incomingTopic.completed) {
-            mergedTopic.completed = true;
-        }
-
-        mergedTopic.completedAt = pickLatestIso(
-            previousTopic?.completedAt,
-            incomingTopic.completedAt,
-        );
-
-        nextTopics[normalizedTopicKey] = mergedTopic;
-    }
-
-    const incomingExplicitlyClearsModule =
-        incoming.moduleCompleted === false && !incoming.moduleCompletedAt;
-
-    const moduleCompleted =
-        hasAuthoritativeTopicReset || incomingExplicitlyClearsModule
-            ? false
-            : Boolean(previous.moduleCompleted || incoming.moduleCompleted);
-
-    const moduleCompletedAt =
-        hasAuthoritativeTopicReset || incomingExplicitlyClearsModule
-            ? undefined
-            : pickLatestIso(previous.moduleCompletedAt, incoming.moduleCompletedAt);
-
-    return {
-        ...previous,
-        ...incoming,
-        quizVersion: Math.max(
-            numericVersion(previous.quizVersion),
-            numericVersion(incoming.quizVersion),
-        ),
-        moduleCompleted,
-        moduleCompletedAt,
-        activeTopicId: normalizeTopicProgressKey(
-            incoming.activeTopicId ?? previous.activeTopicId,
-        ),
-        assignmentSessionId:
-            incoming.assignmentSessionId ?? previous.assignmentSessionId,
-        topics: nextTopics,
-        __saveRevision: args.saveRevision,
-    } as ReviewProgressState & { __saveRevision: number };
-}
-
 
 export async function GET(req: Request) {
     const { searchParams } = new URL(req.url);
@@ -383,8 +202,8 @@ export async function PUT(req: Request) {
     });
 
     const previousState = (previous?.state ?? null) as ReviewProgressState | null;
-    const existingRevision = getSaveRevision(previousState);
-    const incomingRevision = getSaveRevision(state);
+    const existingRevision = getReviewProgressSaveRevision(previousState);
+    const incomingRevision = getReviewProgressSaveRevision(state);
 
     if (previous && incomingRevision < existingRevision) {
         console.warn("[review-progress] ignored stale save", {
@@ -394,8 +213,8 @@ export async function PUT(req: Request) {
             locale,
             incomingRevision,
             existingRevision,
-            incomingBytes: stateBytes(state),
-            existingBytes: stateBytes(previousState),
+            incomingBytes: reviewProgressStateBytes(state),
+            existingBytes: reviewProgressStateBytes(previousState),
         });
 
         return bodyJsonWithGuestCookie(

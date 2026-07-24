@@ -22,6 +22,10 @@ type Props = {
     modulesButtonLabel?: string;
     modulesButtonTitle?: string;
     modulesButtonLoadingText?: string;
+    contextBadge?: {
+        label: string;
+        detail?: string;
+    } | null;
     onOpenModulesDrawer?: () => void;
     showResetButton?: boolean;
     onToggleLeftPanel: () => void;
@@ -69,6 +73,7 @@ export default function ReviewModuleHeader({
                                                modulesButtonLabel,
                                                modulesButtonTitle,
                                                modulesButtonLoadingText,
+                                               contextBadge = null,
                                                onOpenModulesDrawer,
                                                showResetButton = true,
                                                onToggleLeftPanel,
@@ -283,6 +288,21 @@ export default function ReviewModuleHeader({
                                     {modulesButtonLabel ?? t("modulesButton")}
                                 </NavButton>
                             )
+                        ) : null}
+
+                        {contextBadge ? (
+                            <div
+                                data-testid="review-context-badge"
+                                className="inline-flex min-w-0 max-w-[min(42vw,22rem)] items-center gap-1.5 rounded-full border border-[rgb(var(--ui-border)/0.9)] bg-[rgb(var(--ui-surface)/0.88)] px-2.5 py-1 text-xs text-[rgb(var(--ui-text)/0.96)]"
+                                title={[contextBadge.label, contextBadge.detail].filter(Boolean).join(" · ")}
+                            >
+                                <span className="truncate font-extrabold">{contextBadge.label}</span>
+                                {contextBadge.detail ? (
+                                    <span className="hidden shrink-0 text-[rgb(var(--ui-text-muted)/0.96)] md:inline">
+                                        · {contextBadge.detail}
+                                    </span>
+                                ) : null}
+                            </div>
                         ) : null}
 
                         {showTopicsButton ? (

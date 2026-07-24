@@ -51,13 +51,16 @@ export default function BillingPageClient({
     const { status, loading, error, setError, reload, trialState, canUseTrial, headlineBadge } =
         useBillingStatus();
 
+    const showPaywall = Boolean(paywall?.reason);
+    const accessResource = [paywall?.subject, paywall?.module].filter(Boolean).join(" — ") || null;
+
     const { busy, authRedirect, openPortal, startCheckout } = useBillingActions({
         status,
         callbackUrl,
         onError: setError,
+        accessReason: showPaywall ? "payment_required" : null,
+        accessResource,
     });
-
-    const showPaywall = Boolean(paywall?.reason);
     const backHref = safeInternalPath(paywall?.back);
 
     const paywallTitle =
@@ -148,6 +151,9 @@ export default function BillingPageClient({
                                 </div>
 
                                 <div className="mt-2 ui-meta">{t("paywall.afterCheckout")}</div>
+                                <div className="mt-2 rounded-lg border border-emerald-200 bg-emerald-50 px-3 py-2 text-xs text-emerald-900 dark:border-emerald-400/20 dark:bg-emerald-400/10 dark:text-emerald-100">
+                                    {t("paywall.assignedCourseIncluded")}
+                                </div>
                             </div>
                         </div>
                     ) : null}

@@ -36,6 +36,17 @@ export default async function CourseAssignmentPage({
           include: {
             users: { include: { user: { select: { email: true } } } },
             groups: { select: { groupId: true } },
+            invites: {
+              orderBy: { email: "asc" },
+              select: {
+                id: true,
+                email: true,
+                expiresAt: true,
+                sentAt: true,
+                acceptedAt: true,
+                revokedAt: true,
+              },
+            },
           },
         }),
   ]);

@@ -65,4 +65,23 @@ describe("resolveModuleAccess private course delivery", () => {
       }),
     ).toEqual({ ok: true, paid: true });
   });
+
+  it("does not require a subscription for a teacher-assigned paid course", () => {
+    expect(
+      resolveModuleAccess({
+        subject: {
+          id: "s1",
+          slug: "assigned-paid-course",
+          visibility: "private",
+          accessPolicy: "paid",
+        },
+        module: moduleConfig,
+        snapshot: snapshot({
+          isSubscribed: false,
+          subjectAccess: new Set(["s1"]),
+        }),
+        requireAll: true,
+      }),
+    ).toEqual({ ok: true, paid: true });
+  });
 });

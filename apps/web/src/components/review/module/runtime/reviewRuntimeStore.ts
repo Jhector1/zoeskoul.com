@@ -36,8 +36,18 @@ import {
     workspaceHasUsableStarterContent
 } from "@/components/review/module/runtime/starterContent";
 
-type InternalStore = ReviewRuntimeStore & {
-    _flushToolSnapshotCb: (() => void) | null;
+type InternalStore = ReviewRuntimeStore;
+
+/**
+ * Imperative bridge for the currently mounted review tools provider.
+ *
+ * This callback is intentionally kept outside Zustand state. Registering a
+ * React callback is not application state and must not publish a store update;
+ * doing so can cause the provider effect to re-run recursively while exercise
+ * bindings are reconciling.
+ */
+const toolSnapshotFlushBridge: { current: (() => void) | null } = {
+    current: null,
 };
 
 type RuntimeManifestRecord = LooseManifestRecord;
@@ -2337,8 +2347,6 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
 
     targetRegistry: null,
 
-    _flushToolSnapshotCb: null,
-
     setTargetRegistry: (registry) => {
         if (get().targetRegistry === registry) return;
         set({targetRegistry: registry});
@@ -4328,12 +4336,11 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
     },
 
     setFlushToolSnapshotCallback: (cb) => {
-        set({_flushToolSnapshotCb: cb});
+        toolSnapshotFlushBridge.current = cb;
     },
 
     flushToolSnapshot: () => {
-        const cb = get()._flushToolSnapshotCb;
-        if (cb) cb();
+        toolSnapshotFlushBridge.current?.();
     },
 
     flushBeforeNavigation: (callbacks) => {

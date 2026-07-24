@@ -13,7 +13,7 @@ export default function CourseAssignmentsTable({ assignments }: { assignments: a
             <tr key={assignment.id} className="border-t border-neutral-200">
               <td className="px-4 py-3"><div className="font-medium">{assignment.title}</div><div className="text-xs text-neutral-500">{assignment.slug}</div></td>
               <td className="px-4 py-3"><div>{assignment.subject.title}</div><div className="text-xs text-neutral-500">{assignment.subject.visibility}</div></td>
-              <td className="px-4 py-3">{assignment._count.users} students · {assignment._count.groups} groups</td>
+              <td className="px-4 py-3">{assignment._count.users} students · {assignment._count.invites ?? 0} pending invites · {assignment._count.groups} groups</td>
               <td className="px-4 py-3 capitalize">{assignment.status}</td>
               <td className="px-4 py-3">{assignment.dueAt ? new Date(assignment.dueAt).toLocaleString() : "—"}</td>
               <td className="px-4 py-3 text-right"><Link href={`/admin/course-assignments/${assignment.id}`} className="rounded-lg border border-neutral-300 px-3 py-1.5 text-xs font-medium">Edit</Link></td>

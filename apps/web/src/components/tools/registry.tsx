@@ -71,6 +71,7 @@ export type BoardToolProps = {
     documentEndpoint?: string;
     documentRequestKey?: Record<string, string>;
     documentRefreshMs?: number;
+    documentRefreshEnabled?: boolean;
 };
 
 export type NotesToolProps = {

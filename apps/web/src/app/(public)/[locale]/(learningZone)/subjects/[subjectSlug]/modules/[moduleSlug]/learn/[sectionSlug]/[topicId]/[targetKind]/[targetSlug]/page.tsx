@@ -36,6 +36,19 @@ export default async function Page({
         subjectSlug,
         moduleSlug,
         locale,
+        nextPath: [
+            "",
+            encodeURIComponent(locale),
+            "subjects",
+            encodeURIComponent(subjectSlug),
+            "modules",
+            encodeURIComponent(moduleSlug),
+            "learn",
+            encodeURIComponent(sectionSlug),
+            encodeURIComponent(topicId),
+            encodeURIComponent(targetKind),
+            encodeURIComponent(targetSlug),
+        ].join("/"),
     });
 
     if (pageData.status === "missing") {

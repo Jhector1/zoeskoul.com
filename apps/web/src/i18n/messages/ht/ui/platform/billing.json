@@ -2,7 +2,7 @@
   "billing": {
     "header": {
       "kicker": "Pri",
-      "title": "Debloke devwa + pratik prim",
+      "title": "Debloke katalòg prim + pratik",
       "subtitle": "Chwazi yon plan ki mache ak ritm aprantisaj ou. Ou ka anile nenpòt lè nan pòtal la.",
       "manageBilling": "Jere bòdwo",
       "signIn": "Konekte",
@@ -17,7 +17,8 @@
       "body": "Abòne pou debloke aksè epi kontinye.",
       "afterCheckout": "Apre ou fin peye, ou pral retounen otomatikman.",
       "subjectLabel": "sijè",
-      "moduleLabel": "modil"
+      "moduleLabel": "modil",
+      "assignedCourseIncluded": "Kou yon pwofesè oswa admin ba ou deja ladan epi yo pa mande yon abònman pèsonèl. Louvri kou yo ba ou yo nan Aprantisaj mwen."
     },
     "includedAccess": {
       "title": "Kont sa a pa bezwen peye",
@@ -34,7 +35,7 @@
         "subtitle": "Fleksib chak mwa. Anile nenpòt lè.",
         "features": [
           "Sesyon pratik san limit",
-          "Aksè pou devwa",
+          "Aksè ak kou katalòg ki peye yo",
           "Swivi pwogrè",
           "Modil revizyon prim"
         ],
@@ -67,7 +68,7 @@
       "items": {
         "assignments": {
           "title": "Devywa",
-          "desc": "Devywa pou pwofesè/admin ak swivi sesyon ak etap fini."
+          "desc": "Kou pwofesè/admin ba ou yo ladan san yon abònman pèsonèl."
         },
         "unlimitedPractice": {
           "title": "Pratik san limit",
@@ -82,7 +83,7 @@
           "desc": "Sèvi ak Learnoir an Anglè, Fransè, ak Kreyòl Ayisyen."
         }
       },
-      "tip": "Ti konsèy: Si yon devwa bloke, abònman ap debloke li touswit."
+      "tip": "Ti konsèy: Kou yo ba ou yo ladan. Abòne sèlman pou kontni katalòg ki peye yo pa t ba ou."
     },
     "statusPanel": {
       "statusPrefix": "Estati: {label}",

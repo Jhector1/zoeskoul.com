@@ -192,7 +192,7 @@ export async function withSubjectCardState<T extends SubjectCardPresentation>(
             subjectId: state?.subjectId ?? null,
             enrolled: state?.enrolled ?? false,
             subjectOrder: state?.order ?? null,
-            visibility: state?.visibility ?? "public",
+            visibility: state?.visibility ?? subject.visibility ?? "public",
         };
     });
 }

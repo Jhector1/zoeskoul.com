@@ -4,20 +4,28 @@ import { useCallback, useState } from "react";
 import { useRouter } from "next/navigation";
 import type { BillingStatus } from "@/lib/billing/types";
 import { startGlobalNavigationPending } from "@/components/navigation/GlobalNavigationProgress";
+import { buildAccessGateSearchParams } from "@/lib/access/accessGate";
 
 export function useBillingActions(args: {
     status: BillingStatus | null;
     callbackUrl: string;
     onError: (msg: string | null) => void;
+    accessReason?: "payment_required" | null;
+    accessResource?: string | null;
 }) {
-    const { status, callbackUrl, onError } = args;
+    const { status, callbackUrl, onError, accessReason, accessResource } = args;
     const router = useRouter();
     const [busy, setBusy] = useState(false);
 
     const authRedirect = useCallback(() => {
         startGlobalNavigationPending({ label: "Loading…", source: "billing-auth-redirect" });
-        router.push(`/authenticate?callbackUrl=${encodeURIComponent(callbackUrl || "/")}`);
-    }, [router, callbackUrl]);
+        const params = buildAccessGateSearchParams({
+            next: callbackUrl || "/",
+            reason: accessReason ?? "payment_required",
+            resource: accessResource,
+        });
+        router.push(`/authenticate?${params.toString()}`);
+    }, [router, callbackUrl, accessReason, accessResource]);
 
     const startCheckout = useCallback(
         async (plan: "monthly" | "yearly", useTrial = false) => {

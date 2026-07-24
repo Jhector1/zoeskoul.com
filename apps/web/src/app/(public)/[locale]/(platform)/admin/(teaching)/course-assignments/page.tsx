@@ -23,7 +23,7 @@ export default async function CourseAssignmentsPage({
     orderBy: { updatedAt: "desc" },
     include: {
       subject: { select: { id: true, slug: true, title: true, description: true, visibility: true } },
-      _count: { select: { users: true, groups: true } },
+      _count: { select: { users: true, groups: true, invites: true } },
     },
   });
 

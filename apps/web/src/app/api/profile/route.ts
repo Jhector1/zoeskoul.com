@@ -4,6 +4,11 @@ import { z } from "zod";
 import { prisma } from "@/lib/prisma";
 import { auth } from "@/lib/auth";
 import { rateLimit } from "@/lib/security/ratelimit";
+import {
+  cloudinaryServerImageUrl,
+  uploadProfileAvatar,
+  validateProfileAvatarFile,
+} from "@/lib/cloudinary/server";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -82,6 +87,39 @@ const UpdateProfileSchema = z.object({
       .refine((v) => v === null || isAllowedImageHost(v), "Avatar host is not allowed."),
 });
 
+type ParsedProfileUpdate = {
+  raw: unknown;
+  avatar: File | null;
+};
+
+async function readProfileUpdateRequest(
+  req: Request,
+  currentImage: string | null,
+): Promise<ParsedProfileUpdate> {
+  const contentType = req.headers.get("content-type") ?? "";
+
+  if (contentType.includes("application/json")) {
+    return { raw: await req.json(), avatar: null };
+  }
+
+  if (!contentType.includes("multipart/form-data")) {
+    throw new Error("Unsupported content-type");
+  }
+
+  const form = await req.formData();
+  const avatarValue = form.get("avatar");
+  const removeImage = form.get("removeImage") === "true";
+
+  return {
+    raw: {
+      name: form.get("name"),
+      image: removeImage ? null : currentImage,
+    },
+    avatar:
+      avatarValue instanceof File && avatarValue.size > 0 ? avatarValue : null,
+  };
+}
+
 async function requireUser() {
   const session = await auth();
   // Prefer id if available
@@ -125,22 +163,45 @@ export async function PUT(req: Request) {
     return json({ error: "Service unavailable" }, 503);
   }
 
-  const ct = req.headers.get("content-type") ?? "";
-  if (!ct.includes("application/json")) return json({ error: "Unsupported content-type" }, 415);
-
-  let body: unknown;
+  let request: ParsedProfileUpdate;
   try {
-    body = await req.json();
-  } catch {
-    return json({ error: "Invalid JSON body" }, 400);
+    request = await readProfileUpdateRequest(req, user.image);
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "Invalid request body";
+    return json(
+      { error: message },
+      message === "Unsupported content-type" ? 415 : 400,
+    );
   }
 
-  const parsed = UpdateProfileSchema.safeParse(body);
+  const parsed = UpdateProfileSchema.safeParse(request.raw);
   if (!parsed.success) {
     return json({ error: "Validation failed", issues: parsed.error.flatten() }, 400);
   }
 
-  const { name, image } = parsed.data;
+  const { name } = parsed.data;
+  let image = parsed.data.image;
+
+  if (request.avatar) {
+    try {
+      validateProfileAvatarFile(request.avatar);
+      const uploaded = await uploadProfileAvatar(request.avatar, user.id);
+      image = cloudinaryServerImageUrl(uploaded.publicId, {
+        w: 512,
+        h: 512,
+        crop: "fill",
+        gravity: "faces",
+        quality: "auto",
+        format: "auto",
+        v: uploaded.version ?? undefined,
+      });
+    } catch (error) {
+      const message =
+        error instanceof Error ? error.message : "Could not upload profile image.";
+      const status = message.includes("not configured") ? 503 : 400;
+      return json({ error: message }, status);
+    }
+  }
 
   const updated = await prisma.user.update({
     where: { id: user.id },

@@ -20,12 +20,14 @@ export function useToolDoc(
         endpoint?: string;
         requestKey?: Record<string, string>;
         refreshMs?: number;
+        refreshEnabled?: boolean;
     },
 ) {
     const format = opts?.format ?? "markdown";
     const debounceMs = opts?.debounceMs ?? 450;
     const endpoint = opts?.endpoint ?? "/api/tools/doc";
     const refreshMs = opts?.refreshMs ?? 0;
+    const refreshEnabled = opts?.refreshEnabled ?? true;
 
     const [body, setBody] = useState("");
     const [state, setState] = useState<SaveState>("loading");
@@ -33,6 +35,7 @@ export function useToolDoc(
     const [loadedQuery, setLoadedQuery] = useState<string | null>(null);
 
     const lastSavedRef = useRef("");
+    const revisionRef = useRef(0);
     const loadedRef = useRef(false);
     const latestBodyRef = useRef("");
     const timerRef = useRef<number | null>(null);
@@ -65,6 +68,7 @@ export function useToolDoc(
                 setBody(v);
                 latestBodyRef.current = v;
                 lastSavedRef.current = v;
+                revisionRef.current = Number(j?.revision ?? 0) || 0;
                 loadedRef.current = true;
                 setLoadedQuery(qs);
                 setUpdatedAt(j?.updatedAt ? String(j.updatedAt) : null);
@@ -94,6 +98,7 @@ export function useToolDoc(
             if (bodyToSave === lastSavedRef.current) return;
 
             let savingUiTimer: number | null = null;
+            let requestTimeout: number | null = null;
             try {
                 inflightRef.current?.abort();
                 const ac = new AbortController();
@@ -102,18 +107,36 @@ export function useToolDoc(
                 // Do not flip the whole UI into a busy state for fast saves.
                 savingUiTimer = window.setTimeout(() => setState("saving"), 350);
 
-                const requestTimeout = window.setTimeout(() => ac.abort(), 12000);
-                const res = await fetch(endpoint, {
+                requestTimeout = window.setTimeout(() => ac.abort(), 12000);
+                const requestBody = JSON.stringify({
+                    ...(opts?.requestKey ?? key),
+                    format,
+                    body: bodyToSave,
+                    baseBody: lastSavedRef.current,
+                    expectedRevision: revisionRef.current,
+                });
+                const putOnce = () => fetch(endpoint, {
                     method: "PUT",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ ...(opts?.requestKey ?? key), format, body: bodyToSave }),
+                    body: requestBody,
                     signal: ac.signal,
-                }).finally(() => window.clearTimeout(requestTimeout));
+                });
+                let res = await putOnce();
+                if (res.status === 409) {
+                    await new Promise((resolve) => window.setTimeout(resolve, 75));
+                    res = await putOnce();
+                }
+                if (requestTimeout != null) window.clearTimeout(requestTimeout);
+                requestTimeout = null;
 
                 if (!res.ok) throw new Error("save failed");
                 const j = await res.json();
+                const canonicalBody = typeof j?.body === "string" ? j.body : bodyToSave;
 
-                lastSavedRef.current = bodyToSave;
+                lastSavedRef.current = canonicalBody;
+                latestBodyRef.current = canonicalBody;
+                revisionRef.current = Number(j?.revision ?? revisionRef.current) || 0;
+                if (canonicalBody !== bodyToSave) setBody(canonicalBody);
                 setUpdatedAt(j?.updatedAt ? String(j.updatedAt) : null);
                 setState("saved");
 
@@ -128,6 +151,7 @@ export function useToolDoc(
                 setState("error");
             } finally {
                 if (savingUiTimer != null) window.clearTimeout(savingUiTimer);
+                if (requestTimeout != null) window.clearTimeout(requestTimeout);
             }
         }, Math.max(debounceMs, 900));
 
@@ -138,26 +162,28 @@ export function useToolDoc(
 
 
     useEffect(() => {
-        if (!refreshMs || refreshMs < 1000) return;
+        if (!refreshEnabled || !refreshMs || refreshMs < 1000) return;
         const timer = window.setInterval(async () => {
+            if (document.visibilityState !== "visible") return;
             if (latestBodyRef.current !== lastSavedRef.current) return;
             try {
                 const res = await fetch(`${endpoint}?${qs}`, { cache: "no-store" });
                 if (!res.ok) return;
                 const j = await res.json();
                 const next = String(j?.body ?? "");
+                revisionRef.current = Number(j?.revision ?? revisionRef.current) || 0;
+                setUpdatedAt(j?.updatedAt ? String(j.updatedAt) : null);
                 if (next !== lastSavedRef.current) {
                     setBody(next);
                     latestBodyRef.current = next;
                     lastSavedRef.current = next;
-                    setUpdatedAt(j?.updatedAt ? String(j.updatedAt) : null);
                 }
             } catch {
                 // Polling is best-effort; normal save state remains authoritative.
             }
         }, refreshMs);
         return () => window.clearInterval(timer);
-    }, [endpoint, qs, refreshMs]);
+    }, [endpoint, qs, refreshEnabled, refreshMs]);
 
     async function flush() {
         const bodyToSave = latestBodyRef.current;
@@ -166,12 +192,22 @@ export function useToolDoc(
             const res = await fetch(endpoint, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ ...(opts?.requestKey ?? key), format, body: bodyToSave }),
+                body: JSON.stringify({
+                    ...(opts?.requestKey ?? key),
+                    format,
+                    body: bodyToSave,
+                    baseBody: lastSavedRef.current,
+                    expectedRevision: revisionRef.current,
+                }),
                 keepalive: true,
             });
             if (!res.ok) throw new Error("flush failed");
             const j = await res.json();
-            lastSavedRef.current = bodyToSave;
+            const canonicalBody = typeof j?.body === "string" ? j.body : bodyToSave;
+            lastSavedRef.current = canonicalBody;
+            latestBodyRef.current = canonicalBody;
+            revisionRef.current = Number(j?.revision ?? revisionRef.current) || 0;
+            if (canonicalBody !== bodyToSave) setBody(canonicalBody);
             setUpdatedAt(j?.updatedAt ? String(j.updatedAt) : null);
             setState("idle");
         } catch {

@@ -1,8 +1,14 @@
 import { z } from "zod";
 
+import { TUTORING_SESSION_LIMITS } from "@/lib/tutoring/sessionLimits";
+
 const TutoringStatusSchema = z.enum(["draft", "live", "shared", "archived"]);
-const UserEmailsSchema = z.array(z.string().email());
-const GroupIdsSchema = z.array(z.string().min(1));
+const UserEmailsSchema = z
+  .array(z.string().email())
+  .max(TUTORING_SESSION_LIMITS.maxDirectUserEmails);
+const GroupIdsSchema = z
+  .array(z.string().min(1))
+  .max(TUTORING_SESSION_LIMITS.maxGroups);
 
 export const TutoringSessionInputSchema = z.object({
   slug: z.string().trim().min(2).max(80).regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/),
@@ -14,7 +20,7 @@ export const TutoringSessionInputSchema = z.object({
   sourceSectionSlug: z.string().trim().nullable().optional(),
   sourceTopicId: z.string().trim().nullable().optional(),
   status: TutoringStatusSchema.default("draft"),
-  allowStudentEditing: z.boolean().default(true),
+  allowStudentEditing: z.boolean().default(false),
   userEmails: UserEmailsSchema.default([]),
   groupIds: GroupIdsSchema.default([]),
 });

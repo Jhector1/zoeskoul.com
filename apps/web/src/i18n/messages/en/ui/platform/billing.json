@@ -2,7 +2,7 @@
   "billing": {
     "header": {
       "kicker": "Pricing",
-      "title": "Unlock assignments + premium practice",
+      "title": "Unlock premium catalog + practice",
       "subtitle": "Choose a plan that matches your learning pace. Cancel anytime from the portal.",
       "manageBilling": "Manage billing",
       "signIn": "Sign in",
@@ -17,7 +17,8 @@
       "body": "Subscribe to unlock access and continue.",
       "afterCheckout": "After checkout, you’ll be returned automatically.",
       "subjectLabel": "subject",
-      "moduleLabel": "module"
+      "moduleLabel": "module",
+      "assignedCourseIncluded": "Courses assigned by a teacher or admin are already included and do not require a personal subscription. Open assigned courses from My Learning."
     },
     "includedAccess": {
       "title": "Payment is not required for this account",
@@ -34,7 +35,7 @@
         "subtitle": "Flexible month-to-month. Cancel anytime.",
         "features": [
           "Unlimited practice sessions",
-          "Assignments access",
+          "Paid catalog course access",
           "Progress tracking",
           "Premium review modules"
         ],
@@ -67,7 +68,7 @@
       "items": {
         "assignments": {
           "title": "Assignments",
-          "desc": "Teacher/admin assignments with session tracking and completion flow."
+          "desc": "Teacher/admin assigned courses are included without a personal subscription."
         },
         "unlimitedPractice": {
           "title": "Unlimited practice",
@@ -82,7 +83,7 @@
           "desc": "Use Zoeskoul in English, French, and Haitian Creole."
         }
       },
-      "tip": "Tip: If an assignment is locked, subscribing here will unlock it immediately."
+      "tip": "Tip: Assigned courses are included. Subscribe only for paid catalog content that was not assigned to you."
     },
     "statusPanel": {
       "statusPrefix": "Status: {label}",

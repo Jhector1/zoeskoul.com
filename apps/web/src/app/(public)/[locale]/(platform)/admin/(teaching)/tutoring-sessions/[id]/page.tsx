@@ -23,9 +23,31 @@ export default async function TutoringSessionPage({
     loadTutoringSessionEditorData({ locale, teachingUser }),
     prisma.tutoringSession.findFirst({
       where: { id, ...ownedTeachingRecordWhere(teachingUser) },
-      include: {
+      select: {
+        id: true,
+        slug: true,
+        title: true,
+        description: true,
+        subjectId: true,
+        selectionScope: true,
+        sourceModuleSlug: true,
+        sourceSectionSlug: true,
+        sourceTopicId: true,
+        status: true,
+        allowStudentEditing: true,
         users: { include: { user: { select: { email: true } } } },
         groups: { select: { groupId: true } },
+        invites: {
+          orderBy: { email: "asc" },
+          select: {
+            id: true,
+            email: true,
+            expiresAt: true,
+            sentAt: true,
+            acceptedAt: true,
+            revokedAt: true,
+          },
+        },
       },
     }),
   ]);

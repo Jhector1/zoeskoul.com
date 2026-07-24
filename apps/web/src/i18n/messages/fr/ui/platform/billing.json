@@ -2,7 +2,7 @@
   "billing": {
     "header": {
       "kicker": "Tarifs",
-      "title": "Débloquez les devoirs + la pratique premium",
+      "title": "Débloquez le catalogue premium + la pratique",
       "subtitle": "Choisissez une formule adaptée à votre rythme d’apprentissage. Annulez à tout moment depuis le portail.",
       "manageBilling": "Gérer la facturation",
       "signIn": "Se connecter",
@@ -17,7 +17,8 @@
       "body": "Abonnez-vous pour débloquer l’accès et continuer.",
       "afterCheckout": "Après le paiement, vous serez redirigé automatiquement.",
       "subjectLabel": "matière",
-      "moduleLabel": "module"
+      "moduleLabel": "module",
+      "assignedCourseIncluded": "Les cours attribués par un enseignant ou un administrateur sont déjà inclus et ne nécessitent aucun abonnement personnel. Ouvrez-les depuis Mon apprentissage."
     },
     "includedAccess": {
       "title": "Aucun paiement n’est requis pour ce compte",
@@ -34,7 +35,7 @@
         "subtitle": "Flexible mois par mois. Annulez à tout moment.",
         "features": [
           "Sessions de pratique illimitées",
-          "Accès aux devoirs",
+          "Accès aux cours payants du catalogue",
           "Suivi de progression",
           "Modules de révision premium"
         ],
@@ -67,7 +68,7 @@
       "items": {
         "assignments": {
           "title": "Devoirs",
-          "desc": "Devoirs enseignant/admin avec suivi de session et parcours de validation."
+          "desc": "Les cours attribués par un enseignant ou un administrateur sont inclus sans abonnement personnel."
         },
         "unlimitedPractice": {
           "title": "Pratique illimitée",
@@ -82,7 +83,7 @@
           "desc": "Utilisez Learnoir en anglais, français et créole haïtien."
         }
       },
-      "tip": "Astuce : si un devoir est verrouillé, l’abonnement le déverrouille immédiatement."
+      "tip": "Astuce : les cours attribués sont inclus. Abonnez-vous uniquement pour le contenu payant du catalogue qui ne vous a pas été attribué."
     },
     "statusPanel": {
       "statusPrefix": "Statut : {label}",

@@ -590,14 +590,22 @@ export function ReviewToolsProvider({
         [getRegistryEntryForToolKey, patchExercise],
     );
 
-  useEffect(() => {
-    const flush = () => {
-      flushByToolKey((externalBoundId ?? storeBoundId) ?? null);
-    };
+  const activeFlushToolKeyRef = useRef<string | null>(
+    (externalBoundId ?? storeBoundId) ?? null,
+  );
+  activeFlushToolKeyRef.current = (externalBoundId ?? storeBoundId) ?? null;
 
-    setFlushToolSnapshotCallback(flush);
+  const flushByToolKeyRef = useRef(flushByToolKey);
+  flushByToolKeyRef.current = flushByToolKey;
+
+  const flushRegisteredToolSnapshot = useCallback(() => {
+    flushByToolKeyRef.current(activeFlushToolKeyRef.current);
+  }, []);
+
+  useEffect(() => {
+    setFlushToolSnapshotCallback(flushRegisteredToolSnapshot);
     return () => setFlushToolSnapshotCallback(null);
-  }, [externalBoundId, storeBoundId, flushByToolKey, setFlushToolSnapshotCallback]);
+  }, [flushRegisteredToolSnapshot, setFlushToolSnapshotCallback]);
 
   const bindNow = useCallback(
     async (id: string) => {

@@ -662,6 +662,7 @@ export function useReviewProgress(args: {
     firstTopicId: string;
     endpoint?: string;
     gamificationEnabled?: boolean;
+    readOnly?: boolean;
 }) {
     const {
         subjectSlug,
@@ -670,6 +671,7 @@ export function useReviewProgress(args: {
         firstTopicId,
         endpoint = "/api/review/progress",
         gamificationEnabled = endpoint === "/api/review/progress",
+        readOnly = false,
     } = args;
 
     const [progress, setProgress] = useState<ReviewProgressState>(
@@ -826,6 +828,11 @@ export function useReviewProgress(args: {
 
     const savePayloadToApi = useCallback(
         async (nextPayload: typeof payload, options?: { keepalive?: boolean; reason?: string }) => {
+            if (readOnly) {
+                setSaveStatus("idle");
+                setLastSaveError(null);
+                return;
+            }
             let payloadToSave = nextPayload;
             let body = stableJson(payloadToSave);
             let meaningfulBody = meaningfulBodyForPayload(payloadToSave);
@@ -931,7 +938,7 @@ export function useReviewProgress(args: {
                 });
             }
         },
-        [endpoint, gamificationEnabled, meaningfulBodyForPayload],
+        [endpoint, gamificationEnabled, meaningfulBodyForPayload, readOnly],
     );
 
     const drainSaveQueueRef = useRef<() => Promise<void>>(async () => undefined);

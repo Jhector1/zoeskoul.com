@@ -7,8 +7,14 @@ import {
 
 export type CatalogVisibilityMode = "learner" | "admin";
 
+export type CatalogSubjectVisibility =
+    | "public"
+    | "private"
+    | "organization";
+
 export type SubjectAvailabilityInput = SubjectVisibilityInput & {
     subjectId?: string | null;
+    visibility?: CatalogSubjectVisibility;
 };
 
 export type SeededSubject<T extends SubjectAvailabilityInput> = T & {
@@ -58,6 +64,19 @@ export function selectAllCatalogSubjectsForAdmin<
     T extends SubjectAvailabilityInput,
 >(subjects: readonly T[]): T[] {
     return [...subjects];
+}
+
+/**
+ * Public catalog routes never expose private or organization-only courses.
+ * Elevated roles may inspect additional public lifecycle versions, but private
+ * delivery remains available only through assignment and tutoring tooling.
+ */
+export function selectPublicCatalogSubjects<
+    T extends { visibility?: CatalogSubjectVisibility },
+>(subjects: readonly T[]): T[] {
+    return subjects.filter(
+        (subject) => (subject.visibility ?? "public") === "public",
+    );
 }
 
 export function selectCatalogSubjectsForMode<
