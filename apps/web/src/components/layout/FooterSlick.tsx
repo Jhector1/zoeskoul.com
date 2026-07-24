@@ -89,7 +89,8 @@ export default function FooterSlick({
             title: t("sections.explore"),
             links: [
                 { href: ROUTES.home, label: t("links.home") },
-                { href: ROUTES.catalog, label: t("links.subjects") },
+                { href: ROUTES.catalogs, label: t("links.catalogs") },
+                { href: ROUTES.myLearning, label: t("links.myLearning") },
                 { href: ROUTES.pricing, label: t("links.pricing") },
                 { href: "/sandbox", label: t("links.sandbox") },
             ],
@@ -200,11 +201,11 @@ export default function FooterSlick({
 
                         <div className="flex flex-wrap gap-3">
                             <Link
-                                href={ROUTES.catalog}
+                                href={ROUTES.catalogs}
                                 className="ui-btn-primary inline-flex items-center gap-2"
                             >
                                 <BookOpen className="h-4 w-4" />
-                                {t("actions.browseSubjects")}
+                                {t("actions.browseCatalogs")}
                             </Link>
 
                             <Link

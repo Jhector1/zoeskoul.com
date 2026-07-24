@@ -1,5 +1,6 @@
 export const ROUTES = {
     home: "/",
+    myLearning: "/subjects",
     catalog: "/subjects",
     catalogs: "/catalogs",
     catalogDetail: (catalogSlug: string) => `/catalogs/${catalogSlug}`,

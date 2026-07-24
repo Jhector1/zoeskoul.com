@@ -35,6 +35,12 @@ export default function SubjectPicker({
     browseHref,
     browseLabel,
     allowEnrollment = true,
+    summaryPills = [],
+    beforeSubjects,
+    afterSubjects,
+    subjectSectionId,
+    subjectSectionTitle,
+    subjectSectionSubtitle,
 }: {
     initialSubjects: SubjectCard[];
     pageTitle?: string;
@@ -45,6 +51,16 @@ export default function SubjectPicker({
     browseHref?: string | null;
     browseLabel?: string;
     allowEnrollment?: boolean;
+    summaryPills?: Array<{
+        label: string;
+        href?: string;
+        tone?: "neutral" | "good" | "warn" | "info" | "danger";
+    }>;
+    beforeSubjects?: React.ReactNode;
+    afterSubjects?: React.ReactNode;
+    subjectSectionId?: string;
+    subjectSectionTitle?: string;
+    subjectSectionSubtitle?: string;
 }) {
     const { t } = useTaggedT("subjectsUi");
     const [q, setQ] = useState("");
@@ -103,6 +119,17 @@ export default function SubjectPicker({
                                             {counts.comingSoon} coming soon
                                         </Pill>
                                     ) : null}
+                                    {summaryPills.map((item) =>
+                                        item.href ? (
+                                            <a key={`${item.href}:${item.label}`} href={item.href}>
+                                                <Pill tone={item.tone}>{item.label}</Pill>
+                                            </a>
+                                        ) : (
+                                            <Pill key={item.label} tone={item.tone}>
+                                                {item.label}
+                                            </Pill>
+                                        ),
+                                    )}
                                     {browseHref && browseLabel ? (
                                         <Link href={browseHref} className="ui-btn-secondary">
                                             {browseLabel}
@@ -142,6 +169,20 @@ export default function SubjectPicker({
                             </div>
                         </div>
                     </Surface>
+
+                    {beforeSubjects}
+
+                    {subjectSectionTitle ? (
+                        <section id={subjectSectionId} className="scroll-mt-24">
+                            <div className="mb-4">
+                                <div className="ui-section-kicker">My learning</div>
+                                <h2 className="mt-1 ui-title-md">{subjectSectionTitle}</h2>
+                                {subjectSectionSubtitle ? (
+                                    <p className="mt-1 ui-meta">{subjectSectionSubtitle}</p>
+                                ) : null}
+                            </div>
+                        </section>
+                    ) : null}
 
                     {filtered.length ? (
                         <SubjectCardGrid
@@ -183,6 +224,8 @@ export default function SubjectPicker({
                             ) : null}
                         </Surface>
                     )}
+
+                    {afterSubjects}
                 </div>
             </div>
         </div>

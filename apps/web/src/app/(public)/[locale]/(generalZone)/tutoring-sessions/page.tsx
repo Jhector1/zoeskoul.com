@@ -1,10 +1,8 @@
 import { redirect } from "next/navigation";
 import { auth } from "@/lib/auth";
-import { prisma } from "@/lib/prisma";
-import { tutoringParticipantWhere } from "@/lib/tutoring/sessionAccess";
 import TutoringSessionCard from "@/components/tutoring/TutoringSessionCard";
 import { buildTutoringSignInHref } from "@/lib/tutoring/tutoringSignInHref";
-import { resolveSubjectDeliveryPresentations } from "@/lib/subjects/resolveSubjectDeliveryPresentation";
+import { loadTutoringLearningForUser } from "@/lib/learning/myLearningData";
 
 export const dynamic = "force-dynamic";
 
@@ -20,27 +18,7 @@ export default async function TutoringSessionsPage({
     redirect(buildTutoringSignInHref({ locale }));
   }
 
-  const raw = await prisma.tutoringSession.findMany({
-    where: {
-      status: { in: ["live", "shared"] },
-      ...tutoringParticipantWhere(userId),
-    },
-    orderBy: { updatedAt: "desc" },
-    take: 100,
-    select: {
-      id: true,
-      title: true,
-      description: true,
-      status: true,
-      sourceSubjectSlug: true,
-      moduleKeys: true,
-      updatedAt: true,
-      subject: { select: { id: true, slug: true, title: true, description: true, visibility: true } },
-      owner: { select: { name: true, email: true } },
-    },
-  });
-  const subjects = await resolveSubjectDeliveryPresentations(raw.map((item) => item.subject), locale);
-  const sessions = raw.map((item, index) => ({ ...item, subject: subjects[index] }));
+  const sessions = await loadTutoringLearningForUser({ userId, locale });
 
   return (
     <main className="ui-container py-8">

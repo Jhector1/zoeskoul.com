@@ -15,6 +15,8 @@
       "legal": "Legal"
     },
     "links": {
+      "catalogs": "Catalogs",
+      "myLearning": "My Learning",
       "home": "Home",
       "subjects": "Subjects",
       "pricing": "Pricing",
@@ -34,6 +36,7 @@
       "acceptableUse": "Acceptable Use"
     },
     "actions": {
+      "browseCatalogs": "Browse catalogs",
       "browseSubjects": "Browse subjects",
       "legalCenter": "Legal center"
     },

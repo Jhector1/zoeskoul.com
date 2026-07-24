@@ -311,7 +311,7 @@ export default function HeaderSlick({
       () => [
         { href: ROUTES.home, label: t("home") },
         { href: ROUTES.catalogs, label: t("catalogs") },
-        { href: ROUTES.catalog, label: t("subjects") },
+        { href: ROUTES.myLearning, label: t("myLearning") },
         { href: ROUTES.pricing, label: t("billing") },
         { href: START_SESSION_HREF, label: t("startSession") },
       ],

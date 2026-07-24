@@ -35,8 +35,8 @@ export default async function CatalogDetailPage({
                             <Link href={ROUTES.catalogs} className="ui-btn-secondary px-3">
                                 Back to catalogs
                             </Link>
-                            <Link href={ROUTES.catalog} className="ui-btn-secondary px-3">
-                                My courses
+                            <Link href={ROUTES.myLearning} className="ui-btn-secondary px-3">
+                                My Learning
                             </Link>
                             <div className="ui-kicker">{catalog.slug}</div>
                         </div>

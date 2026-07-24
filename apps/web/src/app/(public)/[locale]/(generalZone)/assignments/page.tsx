@@ -1,9 +1,7 @@
 import { redirect } from "next/navigation";
 import { auth } from "@/lib/auth";
-import { prisma } from "@/lib/prisma";
-import { getLearningAssignmentsForUser } from "@/lib/learningAssignments/assignmentAccessServer";
-import { resolveSubjectDeliveryPresentations } from "@/lib/subjects/resolveSubjectDeliveryPresentation";
 import AssignedCourseCard from "@/components/learningAssignments/AssignedCourseCard";
+import { loadAssignedLearningForUser } from "@/lib/learning/myLearningData";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -26,24 +24,7 @@ export default async function AssignedCoursesPage({
     redirect(`/api/auth/signin?callbackUrl=${encodeURIComponent(`/${locale}/assignments`)}`);
   }
 
-  const rawAssignments = await getLearningAssignmentsForUser(prisma, { userId });
-  const resolvedSubjects = await resolveSubjectDeliveryPresentations(
-    rawAssignments.map((assignment) => assignment.subject),
-    locale,
-  );
-  const assignments = rawAssignments.map((assignment, index) => ({
-    ...assignment,
-    subject: resolvedSubjects[index],
-  }));
-
-  const subjectIds = [...new Set(assignments.map((assignment) => assignment.subject.id))];
-  const enrollments = subjectIds.length
-    ? await prisma.subjectEnrollment.findMany({
-        where: { userId, subjectId: { in: subjectIds }, status: { in: ["enrolled", "completed"] } },
-        select: { subjectId: true },
-      })
-    : [];
-  const enrolledSubjectIds = new Set(enrollments.map((row) => row.subjectId));
+  const assignments = await loadAssignedLearningForUser({ userId, locale });
 
   return (
     <main className="ui-container py-8">
@@ -66,7 +47,7 @@ export default async function AssignedCoursesPage({
           {assignments.map((assignment) => (
             <AssignedCourseCard
               key={assignment.id}
-              assignment={{ ...assignment, enrolled: enrolledSubjectIds.has(assignment.subject.id) } as any}
+              assignment={assignment}
             />
           ))}
         </div>
