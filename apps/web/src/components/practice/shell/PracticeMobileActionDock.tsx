@@ -3,6 +3,17 @@
 import React from "react";
 import type { PracticeShellProps } from "../PracticeShell";
 import { resolvePracticeMobilePrimaryAction } from "./mobileActionState";
+import { shouldOfferAiTutor } from "@/components/ai-tutor/tutorContext";
+import { useAiTutorRuntimeStatus } from "@/components/ai-tutor/useAiTutorRuntimeStatus";
+import {
+  isAiTutorFallbackRequired,
+  resolveAiTutorExerciseKey,
+} from "@/components/ai-tutor/tutorAvailability";
+import {
+  canRevealPracticeAnswer,
+  DEFAULT_PRACTICE_HELP_POLICY,
+  getFallbackPracticeHintStepKey,
+} from "@/lib/practice/help/steps";
 
 function TrophyIcon() {
   return (
@@ -79,22 +90,56 @@ export default function PracticeMobileActionDock({
   } = props;
 
   const attempts = current?.attempts ?? 0;
+  const revealed = Boolean(
+    current?.revealed ||
+      (current?.result as any)?.revealUsed ||
+      (current?.result as any)?.revealAnswer,
+  );
+  const exerciseKey = resolveAiTutorExerciseKey(exercise, current);
+  const aiTutorRuntimeStatus = useAiTutorRuntimeStatus(exerciseKey);
+  const enabledHelpSteps = props.helpPolicy?.stepKeys?.length
+    ? props.helpPolicy.stepKeys
+    : DEFAULT_PRACTICE_HELP_POLICY.stepKeys;
+  const fallbackHintStepKey = getFallbackPracticeHintStepKey(
+    enabledHelpSteps,
+    current?.help?.openedStepKeys ?? [],
+  );
+  const showFallbackHint = Boolean(
+    current &&
+      fallbackHintStepKey &&
+      shouldOfferAiTutor(current) &&
+      isAiTutorFallbackRequired(aiTutorRuntimeStatus),
+  );
+  const revealAvailable = canRevealPracticeAnswer({
+    allowReveal: props.allowReveal,
+    attempts,
+    solved: current?.result?.ok === true,
+    revealed,
+  });
+  const showHelpAction = Boolean(
+    revealAvailable ||
+      showFallbackHint ||
+      revealed ||
+      current?.help?.openedStepKeys?.length,
+  );
+
   const primaryAction = resolvePracticeMobilePrimaryAction({
     hasCurrent: Boolean(current),
     submitted: Boolean(current?.submitted),
     finalized,
     outOfAttempts,
     canGoNext,
+    revealAvailable,
   });
   const canFinishReveal = Boolean(pendingRevealCompletion);
   const canAdvance = primaryAction === "next";
   const primaryLabel = canFinishReveal
-    ? t("mobile.continue")
+    ? t("buttons.next")
     : canAdvance
       ? t("buttons.next")
-    : submitBusy
-      ? t("mobile.submitting")
-      : t("buttons.submit");
+      : submitBusy
+        ? t("mobile.submitting")
+        : t("buttons.submit");
   const primaryDisabled = canFinishReveal
     ? busy || !finishRevealedSession
     : canAdvance
@@ -134,7 +179,14 @@ export default function PracticeMobileActionDock({
           </span>
         </button>
 
-        <div className="grid grid-cols-[minmax(0,1fr)_auto_auto] gap-2">
+        <div
+          className={[
+            "grid gap-2",
+            showHelpAction
+              ? "grid-cols-[minmax(0,1fr)_auto_auto]"
+              : "grid-cols-[minmax(0,1fr)_auto]",
+          ].join(" ")}
+        >
           <button
             type="button"
             className="ui-btn-primary min-h-12 w-full justify-center px-4 text-sm disabled:cursor-not-allowed disabled:opacity-50"
@@ -145,15 +197,21 @@ export default function PracticeMobileActionDock({
             <span>{primaryLabel}</span>
           </button>
 
-          <button
-            type="button"
-            className="ui-btn-secondary min-h-12 min-w-12 justify-center px-3 text-xs"
-            onClick={onOpenHelp}
-            aria-label={t("mobile.help")}
-          >
-            <HelpIcon />
-            <span className="hidden min-[430px]:inline">{t("mobile.help")}</span>
-          </button>
+          {showHelpAction ? (
+            <button
+              type="button"
+              className="ui-btn-secondary min-h-12 min-w-12 justify-center px-3 text-xs"
+              onClick={onOpenHelp}
+              aria-label={
+                revealAvailable ? t("buttons.reveal") : t("mobile.help")
+              }
+            >
+              {revealAvailable ? null : <HelpIcon />}
+              <span className={revealAvailable ? "inline" : "hidden min-[430px]:inline"}>
+                {revealAvailable ? t("buttons.reveal") : t("mobile.help")}
+              </span>
+            </button>
+          ) : null}
 
           <button
             type="button"

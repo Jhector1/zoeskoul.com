@@ -248,38 +248,73 @@ export async function POST(req: Request) {
     );
   }
 
-  const explanation =
-    parsed.data.mode === "tutor"
-      ? await explainPracticeTutor({
-          diagnosticContext: buildPracticeTutorDiagnosticContext({
-            title: instance.title,
-            prompt: instance.prompt,
-            kind: String(instance.kind),
-            topicSlug: instance.topic?.slug ?? "unknown",
-            publicPayload: instance.publicPayload,
-            secretPayload: instance.secretPayload,
-            userAnswer: parsed.data.userAnswer ?? null,
-            failureContext: {
-              ...(parsed.data.failureContext ?? {}),
-              attemptCount: attemptsUsed,
-            },
-            recentAttempts: recentAttempts.map((attempt) => ({
-              ok: attempt.ok,
-              answer: attempt.answerPayload,
-              createdAt: attempt.createdAt.toISOString(),
-            })),
-          }),
-          message: parsed.data.message ?? null,
-          history: parsed.data.history ?? [],
-        })
-      : await explainPracticeConcept({
-          mode: parsed.data.mode,
-          title: instance.title,
-          prompt: instance.prompt,
-          kind: instance.kind,
-          topicSlug: instance.topic?.slug ?? "unknown",
-          userAnswer: parsed.data.userAnswer ?? null,
-        });
+  if (parsed.data.mode === "tutor" && !process.env.OPENAI_API_KEY) {
+    const res = NextResponse.json(
+      {
+        code: "AI_TUTOR_UNAVAILABLE",
+        message: "The AI tutor is unavailable right now. Use the authored hint instead.",
+        requestId,
+      },
+      { status: 503 },
+    );
+    return attachGuestCookie(
+      hardenApiResponse(withRequestId(res, requestId)),
+      setGuestId,
+    );
+  }
+
+  let explanation: string;
+
+  if (parsed.data.mode === "tutor") {
+    const tutor = await explainPracticeTutor({
+      diagnosticContext: buildPracticeTutorDiagnosticContext({
+        title: instance.title,
+        prompt: instance.prompt,
+        kind: String(instance.kind),
+        topicSlug: instance.topic?.slug ?? "unknown",
+        publicPayload: instance.publicPayload,
+        secretPayload: instance.secretPayload,
+        userAnswer: parsed.data.userAnswer ?? null,
+        failureContext: {
+          ...(parsed.data.failureContext ?? {}),
+          attemptCount: attemptsUsed,
+        },
+        recentAttempts: recentAttempts.map((attempt) => ({
+          ok: attempt.ok,
+          answer: attempt.answerPayload,
+          createdAt: attempt.createdAt.toISOString(),
+        })),
+      }),
+      message: parsed.data.message ?? null,
+      history: parsed.data.history ?? [],
+    });
+
+    if (!tutor.providerResponded) {
+      const res = NextResponse.json(
+        {
+          code: "AI_TUTOR_UNAVAILABLE",
+          message: "The AI tutor could not respond right now. Use the authored hint instead.",
+          requestId,
+        },
+        { status: 503 },
+      );
+      return attachGuestCookie(
+        hardenApiResponse(withRequestId(res, requestId)),
+        setGuestId,
+      );
+    }
+
+    explanation = tutor.explanation;
+  } else {
+    explanation = await explainPracticeConcept({
+      mode: parsed.data.mode,
+      title: instance.title,
+      prompt: instance.prompt,
+      kind: instance.kind,
+      topicSlug: instance.topic?.slug ?? "unknown",
+      userAnswer: parsed.data.userAnswer ?? null,
+    });
+  }
 
   const res = NextResponse.json({
     requestId,

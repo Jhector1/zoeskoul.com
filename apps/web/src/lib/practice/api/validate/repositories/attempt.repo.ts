@@ -103,6 +103,23 @@ export async function countPriorNonRevealAttempts(
     });
 }
 
+export async function countPriorFailedAttempts(
+    prisma: PrismaClient,
+    args: {
+        instanceId: string;
+        actor: ActorIdentity;
+    },
+) {
+    return prisma.practiceAttempt.count({
+        where: {
+            instanceId: args.instanceId,
+            ok: false,
+            revealUsed: false,
+            OR: actorOrWhere(args.actor),
+        },
+    });
+}
+
 async function buildCompletedSessionSummary(
     prisma: PrismaClient,
     args: {

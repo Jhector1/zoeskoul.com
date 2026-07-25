@@ -92,6 +92,17 @@ describe("standalone Review-style auto advance", () => {
     ).toBe(true);
   });
 
+
+  it("waits for reveal after the final failed attempt when reveal is allowed", () => {
+    expect(
+      isStandaloneAnswerResolved({
+        current: item({ result: { ok: false } as any, attempts: 3 }),
+        maxAttempts: 3,
+        allowReveal: true,
+      }),
+    ).toBe(false);
+  });
+
   it("shows Next after reveal when another onboarding question remains", () => {
     expect(
       resolveStandaloneFinalizedAction({

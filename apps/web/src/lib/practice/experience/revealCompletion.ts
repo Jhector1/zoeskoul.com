@@ -1,22 +1,14 @@
 import type { PracticeExperienceMode } from "./types";
 
-export type RevealCompletionTransition = "immediate" | "explicit";
+export type RevealCompletionTransition = "explicit";
 
 /**
- * Revealing an answer finalizes the current practice item with zero credit.
- *
- * Review-style workspaces do not have the old standalone result panel that
- * carried a separate "Continue" button, so their completion transition must
- * happen immediately when the server says the session is complete. Embedded
- * assignment/trial flows keep the explicit acknowledgement step so the learner
- * can inspect the revealed answer before leaving the question.
+ * Revealing an answer finalizes the current item with zero credit, but never
+ * navigates away automatically. Every practice surface keeps the revealed
+ * solution on screen until the learner presses Next or Finish.
  */
 export function resolveRevealCompletionTransition(
-  mode: PracticeExperienceMode | null | undefined,
+  _mode: PracticeExperienceMode | null | undefined,
 ): RevealCompletionTransition {
-  if (mode === "assignment" || mode === "onboarding_trial") {
-    return "explicit";
-  }
-
-  return "immediate";
+  return "explicit";
 }

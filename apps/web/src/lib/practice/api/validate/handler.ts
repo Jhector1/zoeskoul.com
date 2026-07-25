@@ -10,6 +10,7 @@ import { gradeInstance } from "./services/grading.service";
 import { assertAnswerKindMatchesInstance } from "./guards/instance.guard";
 import { computeCanReveal } from "./policies/validate.policy";
 import {
+    countPriorFailedAttempts,
     loadFinalizedValidateSnapshot,
     persistValidatedAttempt,
 } from "./repositories/attempt.repo";
@@ -36,6 +37,7 @@ import {
     resolvePracticeExperienceMode,
 } from "@/lib/practice/experience/resolve";
 import { readDailyFiveMeta } from "@/lib/practice/experience/dailyFive";
+import { PRACTICE_REVEAL_FAILURE_THRESHOLD } from "@/lib/practice/help/steps";
 
 function duplicateValidateResponse(args: {
     req: Request;
@@ -202,6 +204,25 @@ export async function handlePracticeValidate(ctx: PracticeValidateContext) {
             }),
             setGuestId ?? undefined,
         );
+    }
+
+    if (isReveal) {
+        const failedAttempts = await countPriorFailedAttempts(prisma, {
+            instanceId: instance.id,
+            actor,
+        });
+
+        if (failedAttempts < PRACTICE_REVEAL_FAILURE_THRESHOLD) {
+            return attachGuestCookie(
+                jsonApiResponse({
+                    requestId,
+                    message: `Reveal is available after ${PRACTICE_REVEAL_FAILURE_THRESHOLD} unsuccessful attempts.`,
+                    status: 403,
+                    extra: { code: "REVEAL_NOT_READY" },
+                }),
+                setGuestId ?? undefined,
+            );
+        }
     }
 
     const mode = resolvePracticeRunMode(session);

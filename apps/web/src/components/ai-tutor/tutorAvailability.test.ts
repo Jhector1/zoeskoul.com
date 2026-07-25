@@ -1,9 +1,14 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 
 import {
+  getAiTutorRuntimeStatus,
+  isAiTutorFallbackRequired,
+  markAiTutorAvailable,
   readAiTutorUnlocked,
   rememberAiTutorUnlocked,
   resolveAiTutorSurface,
+  setAiTutorRuntimeStatus,
+  subscribeAiTutorRuntimeStatus,
 } from "./tutorAvailability";
 
 function memoryStorage() {
@@ -59,5 +64,36 @@ describe("AI tutor durable exercise unlock", () => {
 
     expect(readAiTutorUnlocked("exercise-a", storage)).toBe(false);
     expect(() => rememberAiTutorUnlocked("exercise-a", storage)).not.toThrow();
+  });
+});
+
+
+describe("AI tutor runtime availability", () => {
+  it("notifies help surfaces when the tutor API becomes unavailable", () => {
+    const key = "runtime-unavailable-exercise";
+    const listener = vi.fn();
+    const unsubscribe = subscribeAiTutorRuntimeStatus(key, listener);
+
+    markAiTutorAvailable(key);
+    expect(getAiTutorRuntimeStatus(key)).toBe("available");
+    expect(isAiTutorFallbackRequired(getAiTutorRuntimeStatus(key))).toBe(false);
+
+    setAiTutorRuntimeStatus(key, "unavailable");
+    expect(getAiTutorRuntimeStatus(key)).toBe("unavailable");
+    expect(isAiTutorFallbackRequired(getAiTutorRuntimeStatus(key))).toBe(true);
+    expect(listener).toHaveBeenCalledTimes(2);
+
+    unsubscribe();
+  });
+
+  it("hides the fallback again after a later tutor response succeeds", () => {
+    const key = "runtime-recovered-exercise";
+    setAiTutorRuntimeStatus(key, "failed");
+    expect(isAiTutorFallbackRequired(getAiTutorRuntimeStatus(key))).toBe(true);
+
+    markAiTutorAvailable(key);
+
+    expect(getAiTutorRuntimeStatus(key)).toBe("available");
+    expect(isAiTutorFallbackRequired(getAiTutorRuntimeStatus(key))).toBe(false);
   });
 });

@@ -11,13 +11,17 @@ import {
     hardenApiResponse,
 } from "@/lib/practice/api/shared/http";
 import { getExpectedCanon } from "@/lib/practice/api/validate/mappers/expected.mapper";
-import { persistAttemptAndFinalize } from "@/lib/practice/api/validate/repositories/attempt.repo";
+import {
+    countPriorFailedAttempts,
+    persistAttemptAndFinalize,
+} from "@/lib/practice/api/validate/repositories/attempt.repo";
 import { buildRevealForInstance } from "@/lib/practice/api/help/reveal/buildRevealForInstance";
 import {
     canOpenHelpStep,
     getPracticeHelpStepDef,
     getPracticeHelpStepIndex,
     isRevealStepKey,
+    PRACTICE_REVEAL_FAILURE_THRESHOLD,
     resolveEffectivePracticeHelpPolicy,
 } from "@/lib/practice/help/steps";
 import { assertSessionOwnerMatchesActor } from "@/lib/practice/api/shared/sessionAccess";
@@ -59,7 +63,7 @@ function getAuthoredHelpContent(publicPayload: any, stepKey: string): string | n
     }
 
     if (
-        stepKey === "hint_1" &&
+        (stepKey === "concept" || stepKey === "hint_1") &&
         typeof publicPayload?.hint === "string" &&
         publicPayload.hint.trim()
     ) {
@@ -242,6 +246,24 @@ export async function POST(req: Request) {
 
     if (isRevealStepKey(stepKey)) {
         source = "system";
+
+        const failedAttempts = await countPriorFailedAttempts(prisma, {
+            instanceId: instance.id,
+            actor,
+        });
+
+        if (failedAttempts < PRACTICE_REVEAL_FAILURE_THRESHOLD) {
+            const res = NextResponse.json(
+                {
+                    code: "REVEAL_NOT_READY",
+                    message: `Reveal is available after ${PRACTICE_REVEAL_FAILURE_THRESHOLD} unsuccessful attempts.`,
+                    requestId,
+                },
+                { status: 403 },
+            );
+            res.headers.set("X-Request-Id", requestId);
+            return attachGuestCookie(hardenApiResponse(res), setGuestId);
+        }
 
         const expectedCanon = getExpectedCanon(instance as any);
         if (!expectedCanon) {

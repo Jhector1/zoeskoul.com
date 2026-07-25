@@ -41,6 +41,10 @@ import {
 import { PurposeMode, PurposePolicy } from "@/lib/subjects/types";
 import { samePracticeExerciseIdentity } from "@/lib/practice/exerciseIdentity";
 import { resolveRevealCompletionTransition } from "@/lib/practice/experience/revealCompletion";
+import {
+  canRevealPracticeAnswer,
+  isRevealStepKey,
+} from "@/lib/practice/help/steps";
 import type { PracticeExperienceMode } from "@/lib/practice/experience/types";
 import { buildServerResumePlan } from "./assignmentResumePolicy";
 import { resolvePracticePurposeRequestParams } from "./practiceRequestPolicy";
@@ -968,6 +972,22 @@ export function usePracticeEngine(args: {
       });
 
       if ((submitted.data as any)?.sessionComplete) {
+        const waitForReveal = canRevealPracticeAnswer({
+          allowReveal,
+          attempts: submitted.used,
+          solved: submitted.ok,
+          revealed: false,
+        });
+
+        if (waitForReveal) {
+          // The server may consider the final failed attempt terminal, but the
+          // learner still owns the reveal decision. Keep the exercise visible
+          // so Reveal answer can fill the solution before explicit navigation.
+          setCompleted(false);
+          setAutoSummarized(false);
+          return;
+        }
+
         await hydrateCompletedSessionSnapshot();
         setCompleted(true);
         setAutoSummarized(true);
@@ -992,15 +1012,28 @@ export function usePracticeEngine(args: {
   async function openHelp(stepKey?: string) {
     if (completed) return;
     if (!current || !exercise || busy) return;
-    if (isPracticeItemFinalized(current, maxAttempts, isLockedRun)) return;
+
+    const chosenKey =
+      stepKey ??
+      (allowReveal ? "reveal" : "hint_1");
+    const openingReveal = isRevealStepKey(chosenKey);
+    const alreadyRevealed = Boolean(
+      current.revealed ||
+      (current.result as any)?.revealUsed ||
+      (current.result as any)?.revealAnswer,
+    );
+
+    if (
+      isPracticeItemFinalized(current, maxAttempts, isLockedRun) &&
+      !(openingReveal && !alreadyRevealed)
+    ) {
+      return;
+    }
 
     setBusy(true);
     setActionErr(null);
 
     try {
-      const chosenKey =
-        stepKey ??
-        (allowReveal ? "reveal" : "hint_1");
 
       let activeItem = current;
       let activeExercise = exercise;
@@ -1035,8 +1068,8 @@ export function usePracticeEngine(args: {
         : [...previousHelp.openedStepKeys, chosenKey];
 
       updateCurrent({
-        ...(opened.dragA ? { dragA: opened.dragA } : {}),
-        ...(opened.dragB ? { dragB: opened.dragB } : {}),
+        ...(!openingReveal && opened.dragA ? { dragA: opened.dragA } : {}),
+        ...(!openingReveal && opened.dragB ? { dragB: opened.dragB } : {}),
         ...(opened.data.finalized
           ? {
               revealed: true,
@@ -1089,8 +1122,12 @@ export function usePracticeEngine(args: {
         }
       }
 
-      if (opened.dragA) padRef.current.a = cloneVec(opened.dragA) as any;
-      if (opened.dragB) padRef.current.b = cloneVec(opened.dragB) as any;
+      if (!openingReveal && opened.dragA) {
+        padRef.current.a = cloneVec(opened.dragA) as any;
+      }
+      if (!openingReveal && opened.dragB) {
+        padRef.current.b = cloneVec(opened.dragB) as any;
+      }
     } catch (e: any) {
       setActionErr(e?.message ?? t("errors.failedToSubmit"));
     } finally {

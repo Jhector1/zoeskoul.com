@@ -281,7 +281,7 @@ export function buildPracticeTutorPrompt(input: PracticeTutorInput) {
 
 export async function explainPracticeTutor(
   input: PracticeTutorInput,
-): Promise<string> {
+): Promise<{ explanation: string; providerResponded: boolean }> {
   const fallback = buildPracticeTutorFallback(input);
   const prompt = buildPracticeTutorPrompt(input);
   const content = await requestOpenAi({
@@ -290,5 +290,8 @@ export async function explainPracticeTutor(
     maxTokens: 300,
   });
 
-  return sanitizeAiText(content ?? "", fallback, 1100);
+  return {
+    explanation: sanitizeAiText(content ?? "", fallback, 1100),
+    providerResponded: Boolean(content),
+  };
 }

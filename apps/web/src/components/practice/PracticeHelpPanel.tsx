@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useMemo, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import MathMarkdown from "@/components/markdown/MathMarkdown";
 import type { Exercise } from "@/lib/practice/types";
 import type { PracticeHelpState, QItem } from "@/lib/practice/uiTypes";
@@ -8,8 +8,6 @@ import RevealAnswerCard from "@/components/practice/RevealAnswerCard";
 import { useTaggedT } from "@/i18n/tagged";
 import { scrollIntoViewSmart } from "@/lib/ui/flowScroll";
 import {
-    DEFAULT_PRACTICE_HELP_POLICY,
-    getNextPracticeHelpStepKey,
     PRACTICE_HELP_STEP_DEF_MAP,
     type PracticeHelpPolicy,
 } from "@/lib/practice/help/steps";
@@ -18,9 +16,7 @@ export default function PracticeHelpPanel({
                                               exercise,
                                               current,
                                               help,
-                                              helpPolicy,
                                               updateCurrent,
-                                              onOpenHelp,
                                               codeInputId,
                                           }: {
     exercise: Exercise | null;
@@ -35,14 +31,6 @@ export default function PracticeHelpPanel({
     const cardRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
     const openedStepKeys = help?.openedStepKeys ?? [];
-
-    const enabledStepKeys = useMemo(
-        () =>
-            helpPolicy?.stepKeys?.length
-                ? helpPolicy.stepKeys
-                : DEFAULT_PRACTICE_HELP_POLICY.stepKeys,
-        [helpPolicy],
-    );
 
     const activeStepKey =
         help?.activeStepKey ??
@@ -71,17 +59,6 @@ export default function PracticeHelpPanel({
                 if (!entry) return null;
 
                 const isActive = stepKey === activeStepKey;
-
-                const nextStepKey = isActive
-                    ? getNextPracticeHelpStepKey(enabledStepKeys, openedStepKeys)
-                    : null;
-
-                const nextStepLabel = nextStepKey
-                    ? PRACTICE_HELP_STEP_DEF_MAP.get(nextStepKey)?.label ?? nextStepKey
-                    : null;
-
-                const openingNext =
-                    Boolean(nextStepKey) && help?.busyStepKey === nextStepKey;
 
                 const resolvedContent =
                     typeof entry.content === "string"
@@ -122,22 +99,6 @@ export default function PracticeHelpPanel({
                                     autoScroll={false}
                                     codeInputId={codeInputId}
                                 />
-                            </div>
-                        ) : null}
-
-                        {isActive && nextStepKey && onOpenHelp ? (
-                            <div className="mt-3 flex items-center justify-end">
-                                <button
-                                    type="button"
-                                    onClick={() => onOpenHelp(nextStepKey)}
-                                    disabled={openingNext}
-                                    className={[
-                                        "ui-btn-secondary",
-                                        openingNext ? "opacity-70" : "",
-                                    ].join(" ")}
-                                >
-                                    {openingNext ? "Opening…" : nextStepLabel}
-                                </button>
                             </div>
                         ) : null}
 

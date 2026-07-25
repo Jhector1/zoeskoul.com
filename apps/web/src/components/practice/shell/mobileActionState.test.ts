@@ -27,6 +27,19 @@ describe("resolvePracticeMobilePrimaryAction", () => {
     ).toBe("next");
   });
 
+  it("keeps Submit visible when Reveal answer is available", () => {
+    expect(
+      resolvePracticeMobilePrimaryAction({
+        hasCurrent: true,
+        submitted: false,
+        finalized: true,
+        outOfAttempts: true,
+        canGoNext: true,
+        revealAvailable: true,
+      }),
+    ).toBe("submit");
+  });
+
   it("switches to Next after attempts are exhausted", () => {
     expect(
       resolvePracticeMobilePrimaryAction({

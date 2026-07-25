@@ -5,7 +5,6 @@ import ConfirmResetModal from "../ConfirmResetModal";
 import type { PracticeShellProps } from "../PracticeShell";
 import PracticeSidebar from "./PracticeSidebar";
 import QuestionPanel from "./QuestionPanel";
-import type { UseConceptExplainResult } from "../hooks/useConceptExplain";
 import PracticeLeaderboardRail from "../leaderboard/PracticeLeaderboardRail";
 import { shouldShowPracticeLeaderboard } from "../leaderboard/visibility";
 import PracticeMobileActionDock from "./PracticeMobileActionDock";
@@ -37,7 +36,6 @@ export default function PracticeView(
     attempts: number;
     outOfAttempts: boolean;
     resultBoxClass: string;
-    concept: UseConceptExplainResult;
   },
 ) {
   const {
@@ -53,7 +51,6 @@ export default function PracticeView(
     attempts,
     outOfAttempts,
     resultBoxClass,
-    concept,
     experienceMode,
     leaderboardUrl,
     viewer,
@@ -168,7 +165,6 @@ export default function PracticeView(
               attempts={attempts}
               outOfAttempts={outOfAttempts}
               resultBoxClass={resultBoxClass}
-              concept={concept}
             />
           </div>
 
@@ -222,7 +218,6 @@ export default function PracticeView(
               attempts={attempts}
               outOfAttempts={outOfAttempts}
               resultBoxClass={resultBoxClass}
-              concept={concept}
               onOpenHelp={openHelp}
             />
           </PracticeMobileSheet>

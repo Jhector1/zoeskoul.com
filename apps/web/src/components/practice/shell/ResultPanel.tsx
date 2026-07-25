@@ -6,13 +6,11 @@ import type { Exercise } from "@/lib/practice/types";
 import type { QItem } from "@/lib/practice/uiTypes";
 import RevealAnswerCard from "../RevealAnswerCard";
 import MathMarkdown from "@/components/markdown/MathMarkdown";
-import type { UseConceptExplainResult } from "../hooks/useConceptExplain";
 import { isExcusedPracticeItem } from "@/lib/flow/excuse";
 
 export default function ResultPanel({
                                         t,
                                         busy,
-                                        allowReveal,
                                         isLockedRun,
                                         maxAttempts,
                                         attempts,
@@ -21,7 +19,6 @@ export default function ResultPanel({
                                         exercise,
                                         updateCurrent,
                                         resultBoxClass,
-                                        concept,
                                         excuseAndNext,
                                         codeInputId,
                                         pendingRevealCompletion,
@@ -32,7 +29,6 @@ export default function ResultPanel({
                                     }: {
     t: any;
     busy: boolean;
-    allowReveal: boolean;
     isLockedRun: boolean;
     maxAttempts: number;
     attempts: number;
@@ -46,7 +42,6 @@ export default function ResultPanel({
     goNext?: () => Promise<void> | void;
     updateCurrent: (patch: Partial<QItem>) => void;
     resultBoxClass: string;
-    concept: UseConceptExplainResult;
     excuseAndNext?: (reason?: string | null) => Promise<void> | void;
 }) {
     const excused = isExcusedPracticeItem(current);
@@ -122,7 +117,7 @@ export default function ResultPanel({
                                 className="ui-btn-primary mt-3 min-h-10 px-4 text-xs"
                                 onClick={() => void finishRevealedSession?.()}
                             >
-                                {t("mobile.continue")}
+                                {t("buttons.next")}
                             </button>
                         ) : revealed && canGoNext ? (
                             <button
@@ -154,38 +149,6 @@ export default function ResultPanel({
                     </>
                 )}
 
-                {concept.canExplain ? (
-                    <div className="mt-3">
-                        {allowReveal ? (
-                            <div className="flex flex-wrap items-center gap-2">
-                                <button
-                                    type="button"
-                                    onClick={concept.explainConcept}
-                                    disabled={busy || concept.aiBusy}
-                                    className="ui-btn-secondary px-3 disabled:cursor-not-allowed disabled:opacity-50"
-                                >
-                                    {concept.aiBusy ? t("ai.explaining") : t("ai.explainConcept")}
-                                </button>
-                                <div className="ui-meta">{t("ai.helperLine")}</div>
-                            </div>
-                        ) : null}
-
-                        {concept.aiErr ? (
-                            <div className="mt-2 text-[11px] text-[rgb(var(--ui-danger)/1)]">
-                                {concept.aiErr}
-                            </div>
-                        ) : null}
-
-                        {concept.aiText ? (
-                            <div className="ui-surface-muted mt-2 p-3">
-                                <MathMarkdown
-                                    content={concept.aiText}
-                                    className="ui-quiz-markdown"
-                                />
-                            </div>
-                        ) : null}
-                    </div>
-                ) : null}
             </div>
         </div>
     );

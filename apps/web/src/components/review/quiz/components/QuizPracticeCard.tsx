@@ -17,6 +17,11 @@ import { reviewSaveDebug } from "@/components/review/module/runtime/reviewSaveDe
 import PracticeHelpPanel from "@/components/practice/PracticeHelpPanel";
 import AiTutorFloating from "@/components/ai-tutor/AiTutorFloating";
 import { shouldOfferAiTutor } from "@/components/ai-tutor/tutorContext";
+import { useAiTutorRuntimeStatus } from "@/components/ai-tutor/useAiTutorRuntimeStatus";
+import {
+  isAiTutorFallbackRequired,
+  resolveAiTutorExerciseKey,
+} from "@/components/ai-tutor/tutorAvailability";
 import { useOptionalReviewTools } from "@/components/review/module/context/ReviewToolsContext";
 import { getExerciseStateKey } from "@/components/review/module/runtime/exerciseKeys";
 import { useReviewRuntimeStore } from "@/components/review/module/runtime/reviewRuntimeStore";
@@ -33,9 +38,9 @@ import { useTaggedT } from "@/i18n/tagged";
 import { resolveDeepTagged } from "@/i18n/resolveDeepTagged";
 import type { Exercise } from "@/lib/practice/types";
 import {
+  canRevealPracticeAnswer,
   DEFAULT_PRACTICE_HELP_POLICY,
-  getNextPracticeHelpStepKey,
-  PRACTICE_HELP_STEP_DEF_MAP,
+  getFallbackPracticeHintStepKey,
 } from "@/lib/practice/help/steps";
 import { normalizeCurrentPracticeItem } from "@/lib/practice/runtime";
 import { deriveEntryCode } from "@/components/review/module/runtime/exerciseWorkspaceResolver";
@@ -1565,6 +1570,11 @@ export default function QuizPracticeCard(props: {
       checkedResult?.revealAnswer != null,
   );
 
+  const tutorExercise = ((livePracticeManifest as Exercise) ?? ex) as Exercise | null;
+  const tutorItem = (livePracticeItem ?? ps?.item ?? null) as any;
+  const aiTutorExerciseKey = resolveAiTutorExerciseKey(tutorExercise, tutorItem);
+  const aiTutorRuntimeStatus = useAiTutorRuntimeStatus(aiTutorExerciseKey);
+
   useEffect(() => {
     setFinalizedActionConsumed(persistedFinalizedActionConsumed);
   }, [
@@ -1751,6 +1761,30 @@ export default function QuizPracticeCard(props: {
   ]);
 
 
+  const enabledHelpSteps = ps?.helpPolicy?.stepKeys?.length
+      ? ps.helpPolicy.stepKeys
+      : DEFAULT_PRACTICE_HELP_POLICY.stepKeys;
+
+  const openedHelpSteps = ps?.item?.help?.openedStepKeys ?? [];
+  const fallbackHintStepKey = getFallbackPracticeHintStepKey(
+      enabledHelpSteps,
+      openedHelpSteps,
+  );
+  const aiTutorEligible = shouldOfferAiTutor(ps?.item as any);
+  const showFallbackHint = Boolean(
+      aiTutorEligible &&
+      fallbackHintStepKey &&
+      isAiTutorFallbackRequired(aiTutorRuntimeStatus),
+  );
+  const revealAvailable = canRevealPracticeAnswer({
+      allowReveal:
+          enabledHelpSteps.includes("reveal") &&
+          Boolean((q as any)?.fetch?.allowReveal ?? true),
+      attempts: ps?.attempts ?? 0,
+      solved: isCorrect,
+      revealed: isRevealed,
+  });
+
   const finalizedAction = resolveReviewFinalizedPracticeAction({
     action: requestedFinalizedAction,
     revealed: isRevealed,
@@ -1760,6 +1794,8 @@ export default function QuizPracticeCard(props: {
     excused,
     hasHandler: Boolean(onFinalizedNext),
   });
+  // Reveal is a secondary fallback after the third unsuccessful attempt.
+  // It must never replace the learner's normal Check answer action.
   const showFinalizedAction = finalizedAction != null;
 
   const disableCheck =
@@ -1771,39 +1807,19 @@ export default function QuizPracticeCard(props: {
       isFinalized ||
       !hasInput;
 
-  const primaryActionDisabled = showFinalizedAction
-      ? finalizedActionConsumed || isCompleted
-      : disableCheck;
-
-  const enabledHelpSteps = ps?.helpPolicy?.stepKeys?.length
-      ? ps.helpPolicy.stepKeys
-      : DEFAULT_PRACTICE_HELP_POLICY.stepKeys;
-
-  const openedHelpSteps = ps?.item?.help?.openedStepKeys ?? [];
-
-  const nextHelpStepKey = getNextPracticeHelpStepKey(
-      enabledHelpSteps,
-      openedHelpSteps,
-  );
-
-  const nextHelpLabel = nextHelpStepKey
-      ? PRACTICE_HELP_STEP_DEF_MAP.get(nextHelpStepKey)?.label ?? nextHelpStepKey
-      : null;
-
-  const disableHelp =
+  const disableHelpAction =
       (!isCodeExerciseWithInput && !unlocked) ||
       isCompleted ||
       (locked && !isCodeExerciseWithInput) ||
       excused ||
-      (ps?.busy ?? false) ||
-      isFinalized ||
-      !nextHelpStepKey;
+      (ps?.busy ?? false);
+
+  const primaryActionDisabled = showFinalizedAction
+      ? finalizedActionConsumed || isCompleted
+      : disableCheck;
 
   const disableSkip =
       !unlocked || isCompleted || locked || excused || isFinalized;
-
-  const hasOpenedHelp = Boolean(ps?.item?.help?.openedStepKeys?.length);
-  const aiTutorAvailable = shouldOfferAiTutor(ps?.item as any);
 
   const btnLabel = finalizedAction === "finish" ? (
       ui.t("buttons.finish", {}, "Finish →")
@@ -2167,51 +2183,69 @@ export default function QuizPracticeCard(props: {
                     {btnLabel}
                   </button>
 
-                  {!showFinalizedAction && !hasOpenedHelp && !aiTutorAvailable ? (
-                      <button
-                          type="button"
-                          onClick={() => onHelp(nextHelpStepKey ?? undefined)}
-                          disabled={disableHelp}
-                          className={[
-                            "ui-quiz-action",
-                            disableHelp ? "ui-quiz-action--disabled" : "ui-quiz-action--ghost",
-                          ].join(" ")}
-                      >
-                        {nextHelpLabel ?? ui.t("buttons.help", {}, "Help")}
-                      </button>
-                  ) : null}
                 </div>
 
-                <div className="ui-quiz-checkrow-status">
-                    <span className="whitespace-normal">
-                      {t("attempts", {
-                        n: ps?.attempts ?? 0,
-                      })}
-                    </span>
+                <div className="flex flex-wrap items-center justify-end gap-2">
+                  {!showFinalizedAction && !isRevealed && showFallbackHint ? (
+                      <button
+                          type="button"
+                          onClick={() => onHelp(fallbackHintStepKey ?? undefined)}
+                          disabled={disableHelpAction}
+                          className={[
+                            "ui-quiz-action",
+                            disableHelpAction ? "ui-quiz-action--disabled" : "ui-quiz-action--ghost",
+                          ].join(" ")}
+                      >
+                        {ui.t("buttons.hint", {}, "Need a hint?")}
+                      </button>
+                  ) : null}
 
-                    {isCorrect ? (
-                        <span
-                            className={!compactLearnerUi ? "ml-2 whitespace-nowrap ui-quiz-status-good" : "whitespace-nowrap ui-quiz-status-good"}
-                            data-testid="review-practice-result-correct"
-                        >
-        {t("correct")}
-      </span>
-                    ) : isRevealed ? (
-                        <span
-                            className={!compactLearnerUi ? "ml-2 whitespace-nowrap ui-quiz-status-warn" : "whitespace-nowrap ui-quiz-status-warn"}
-                            data-testid="review-practice-result-revealed"
-                        >
-        {ui.t("status.revealed", {}, "Answer revealed")}
-      </span>
-                    ) : !feedbackDismissed && resultOk === false && ps?.item?.result ? (
-                        <span
-                            className={!compactLearnerUi ? "ml-2 whitespace-nowrap ui-quiz-status-danger" : "whitespace-nowrap ui-quiz-status-danger"}
-                            data-testid="review-practice-result-incorrect"
-                        >
-        {t("notCorrect")}
-      </span>
-                    ) : null}
+                  {!showFinalizedAction && revealAvailable ? (
+                      <button
+                          type="button"
+                          onClick={() => onHelp("reveal")}
+                          disabled={disableHelpAction}
+                          data-testid="review-practice-reveal-button"
+                          className={[
+                            "ui-quiz-action",
+                            disableHelpAction ? "ui-quiz-action--disabled" : "ui-quiz-action--ghost",
+                          ].join(" ")}
+                      >
+                        {ui.t("buttons.reveal", {}, "Reveal answer")}
+                      </button>
+                  ) : null}
+
+                  <div className="ui-quiz-checkrow-status">
+                      <span className="whitespace-normal">
+                        {t("attempts", {
+                          n: ps?.attempts ?? 0,
+                        })}
+                      </span>
+
+                      {isCorrect ? (
+                          <span
+                              className={!compactLearnerUi ? "ml-2 whitespace-nowrap ui-quiz-status-good" : "whitespace-nowrap ui-quiz-status-good"}
+                              data-testid="review-practice-result-correct"
+                          >
+          {t("correct")}
+        </span>
+                      ) : isRevealed ? (
+                          <span
+                              className={!compactLearnerUi ? "ml-2 whitespace-nowrap ui-quiz-status-warn" : "whitespace-nowrap ui-quiz-status-warn"}
+                              data-testid="review-practice-result-revealed"
+                          >
+          {ui.t("status.revealed", {}, "Answer revealed")}
+        </span>
+                      ) : !feedbackDismissed && resultOk === false && ps?.item?.result ? (
+                          <span
+                              className={!compactLearnerUi ? "ml-2 whitespace-nowrap ui-quiz-status-danger" : "whitespace-nowrap ui-quiz-status-danger"}
+                              data-testid="review-practice-result-incorrect"
+                          >
+          {t("notCorrect")}
+        </span>
+                      ) : null}
                   </div>
+                </div>
               </div>
 
               <PracticeHelpPanel

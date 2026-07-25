@@ -60,6 +60,10 @@ import {
 } from "@/components/review/quiz/reviewQuizCompletion";
 import { resolveReviewQuizRestoreIndex } from "@/components/review/quiz/reviewQuizNavigation";
 import {
+  canRevealPracticeAnswer,
+  DEFAULT_PRACTICE_HELP_POLICY,
+} from "@/lib/practice/help/steps";
+import {
     buildReviewFinalizedActionConsumedPatch,
     findReviewPracticeCompletionForExercise,
     flushBeforeExerciseRouteNavigation,
@@ -936,14 +940,50 @@ export default function QuizBlock({
 
         if (q.kind === "practice") {
             const ps = getPracticeStateForQuestion(q);
-            const completion = getPracticeCompletionStatus(q);
+            const liveItem = getPracticeItemCompletionState(
+              ps?.item as PracticeItemRecord | undefined,
+            );
+            const saved = getSavedPracticeCompletion(q);
+            const completion = resolveReviewPracticeCompletionStatus({
+              live: ps
+                ? {
+                    attempts: ps.attempts,
+                    ok: ps.ok,
+                    finalized: ps.finalized ?? liveItem?.finalized ?? false,
+                  }
+                : null,
+              liveItem,
+              saved: saved.savedMeta,
+              savedItem: saved.savedItem,
+            });
+            const enabledHelpSteps = ps?.helpPolicy?.stepKeys?.length
+              ? ps.helpPolicy.stepKeys
+              : DEFAULT_PRACTICE_HELP_POLICY.stepKeys;
+            const revealed = Boolean(
+              liveItem?.revealed ||
+              liveItem?.revealUsed ||
+              liveItem?.hasRevealAnswer ||
+              saved.savedItem?.revealed ||
+              saved.savedItem?.revealUsed ||
+              saved.savedItem?.hasRevealAnswer,
+            );
+            const revealPending = canRevealPracticeAnswer({
+              allowReveal:
+                enabledHelpSteps.includes("reveal") &&
+                Boolean((q as PracticeRuntimeQuestion)?.fetch?.allowReveal ?? true),
+              attempts: ps?.attempts ?? saved.savedMeta?.attempts ?? 0,
+              solved: completion.ok === true,
+              revealed,
+            });
 
             /**
              * Keep this in sync with QuizPracticeCard and saved project state.
-             * Route-owned project steps are not all mounted at the same time,
-             * so inactive steps must still count from persisted metadata.
+             * A third failed attempt may be server-finalized, but it is not
+             * navigation-complete until the learner chooses Reveal answer.
              */
-            if (completion.ok === true || completion.finalized) return true;
+            if (completion.ok === true) return true;
+            if (revealPending) return false;
+            if (completion.finalized) return true;
 
             const maxA = ps?.maxAttempts;
             const outOfAttempts =

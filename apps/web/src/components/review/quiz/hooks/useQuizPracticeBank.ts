@@ -22,6 +22,7 @@ import { resolveDeepTagged } from "@/i18n/resolveDeepTagged";
 import {
   DEFAULT_PRACTICE_HELP_POLICY,
   getNextPracticeHelpStepKey,
+  isRevealStepKey,
 } from "@/lib/practice/help/steps";
 import { emitGamificationUpdate } from "@/lib/gamification/browserEvents";
 import { reviewDebug, summarizePracticePatch } from "@/components/review/module/runtime/reviewDebug";
@@ -2299,6 +2300,7 @@ export function useQuizPracticeBank(args: {
 
         if (!stepKey) return;
 
+        const openingReveal = isRevealStepKey(stepKey);
         const existing = ps.item.help?.entries?.[stepKey];
 
         if (existing) {
@@ -2375,7 +2377,7 @@ export function useQuizPracticeBank(args: {
             padRef: getPadRef(key),
           });
 
-          if (opened.dragA || opened.dragB) {
+          if (!openingReveal && (opened.dragA || opened.dragB)) {
             const pr = getPadRef(key);
 
             if (pr.current) {
@@ -2415,8 +2417,12 @@ export function useQuizPracticeBank(args: {
               item: {
                 ...current.item,
                 ...(revealCompletionPatch ?? {}),
-                dragA: opened.dragA ?? current.item.dragA,
-                dragB: opened.dragB ?? current.item.dragB,
+                dragA: openingReveal
+                    ? current.item.dragA
+                    : opened.dragA ?? current.item.dragA,
+                dragB: openingReveal
+                    ? current.item.dragB
+                    : opened.dragB ?? current.item.dragB,
                 help: {
                   ...prevHelp,
                   openedStepKeys: openedKeys,

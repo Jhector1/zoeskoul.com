@@ -63,6 +63,7 @@ export default function StandaloneReviewExerciseFlow({
       isStandaloneAnswerResolved({
         current: props.current,
         maxAttempts: props.maxAttempts,
+        allowReveal: props.allowReveal,
       }),
   );
 

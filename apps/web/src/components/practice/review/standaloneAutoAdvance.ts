@@ -67,10 +67,16 @@ export function resolveStandaloneFinalizedAction(args: {
 export function isStandaloneAnswerResolved(args: {
   current: QItem | null;
   maxAttempts: number;
+  allowReveal?: boolean;
 }) {
   const current = args.current;
   if (!current || current.revealed) return false;
   if (current.result?.ok === true) return true;
+
+  // When reveal is allowed, the final failed attempt must remain visible so
+  // the learner can choose Reveal answer. Reveal itself supplies the explicit
+  // Next/Finish transition.
+  if (args.allowReveal) return false;
 
   const maxAttempts = Number(args.maxAttempts);
   const attempts = Number(current.attempts ?? 0);

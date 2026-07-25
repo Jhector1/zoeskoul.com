@@ -4,13 +4,20 @@ import React, { useMemo, useState } from "react";
 import type { Exercise } from "@/lib/practice/types";
 import type { PracticeHelpPolicy } from "@/lib/practice/help/steps";
 import {
+  canRevealPracticeAnswer,
   DEFAULT_PRACTICE_HELP_POLICY,
-  PRACTICE_HELP_STEP_DEF_MAP,
+  getFallbackPracticeHintStepKey,
 } from "@/lib/practice/help/steps";
 import type { QItem } from "@/lib/practice/uiTypes";
 import PracticeHelpPanel from "../PracticeHelpPanel";
 import type { TFn } from "../PracticeShell";
 import { resolveMobilePracticeHelpState } from "./mobileHelpState";
+import { shouldOfferAiTutor } from "@/components/ai-tutor/tutorContext";
+import { useAiTutorRuntimeStatus } from "@/components/ai-tutor/useAiTutorRuntimeStatus";
+import {
+  isAiTutorFallbackRequired,
+  resolveAiTutorExerciseKey,
+} from "@/components/ai-tutor/tutorAvailability";
 
 export default function PracticeMobileHelpPanel({
   t,
@@ -49,6 +56,8 @@ export default function PracticeMobileHelpPanel({
         : DEFAULT_PRACTICE_HELP_POLICY.stepKeys,
     [helpPolicy],
   );
+  const exerciseKey = resolveAiTutorExerciseKey(exercise, current);
+  const aiTutorRuntimeStatus = useAiTutorRuntimeStatus(exerciseKey);
   const openedStepKeys = current?.help?.openedStepKeys ?? [];
   const state = useMemo(
     () =>
@@ -75,11 +84,23 @@ export default function PracticeMobileHelpPanel({
       (current.result as any)?.revealUsed ||
       state.revealOpened,
   );
-  const canReveal = state.revealEnabled && !solved && !revealed;
-  const nextHintLabel = state.nextHintKey
-    ? PRACTICE_HELP_STEP_DEF_MAP.get(state.nextHintKey)?.label ??
-      t("mobile.showHint")
-    : null;
+  const fallbackHintStepKey = getFallbackPracticeHintStepKey(
+    enabledStepKeys,
+    openedStepKeys,
+  );
+  const showFallbackHint = Boolean(
+    fallbackHintStepKey &&
+      shouldOfferAiTutor(current) &&
+      isAiTutorFallbackRequired(aiTutorRuntimeStatus),
+  );
+  const canReveal =
+    state.revealEnabled &&
+    canRevealPracticeAnswer({
+      allowReveal,
+      attempts: attemptsUsed,
+      solved,
+      revealed,
+    });
 
   async function openStep(stepKey: string) {
     if (stepKey === "reveal") {
@@ -109,24 +130,18 @@ export default function PracticeMobileHelpPanel({
           ) : null}
         </div>
 
-        <div className="mt-3 flex items-center justify-between gap-3 text-xs">
-          <span className="text-[rgb(var(--ui-text-muted)/0.9)]">
-            {t("mobile.hintsUsed", {
-              used: state.openedHintKeys.length,
-              total: state.hintKeys.length,
-            })}
-          </span>
-          {state.nextHintKey && !solved && !revealed ? (
+        {showFallbackHint && !solved && !revealed ? (
+          <div className="mt-3 flex justify-end">
             <button
               type="button"
               className="ui-btn-primary min-h-10 px-3 text-xs disabled:opacity-60"
               disabled={helpBusy}
-              onClick={() => void openStep(state.nextHintKey as string)}
+              onClick={() => void openStep(fallbackHintStepKey as string)}
             >
-              {helpBusy ? t("mobile.openingHelp") : nextHintLabel}
+              {helpBusy ? t("mobile.openingHelp") : t("buttons.hint")}
             </button>
-          ) : null}
-        </div>
+          </div>
+        ) : null}
       </div>
 
       <PracticeHelpPanel
@@ -140,12 +155,6 @@ export default function PracticeMobileHelpPanel({
         }}
         codeInputId={codeInputId}
       />
-
-      {state.hintKeys.length > 0 && !state.nextHintKey && !revealed ? (
-        <div className="ui-surface-muted p-3 text-xs text-[rgb(var(--ui-text-muted)/0.95)]">
-          {t("mobile.noMoreHints")}
-        </div>
-      ) : null}
 
       {canReveal ? (
         <div className="ui-surface-warn p-3">
@@ -199,7 +208,7 @@ export default function PracticeMobileHelpPanel({
             className="ui-btn-primary mt-3 min-h-11 w-full justify-center px-4 text-sm"
             onClick={() => void finishRevealedSession?.()}
           >
-            {t("mobile.continue")}
+            {t("buttons.next")}
           </button>
         </div>
       ) : null}

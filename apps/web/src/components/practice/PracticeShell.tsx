@@ -11,7 +11,6 @@ import SummaryView from "./shell/SummaryView";
 import PracticeView from "./shell/PracticeView";
 import PracticeReviewWorkspace from "./review/PracticeReviewWorkspace";
 import EmbeddedPracticeReviewWorkspace from "./review/EmbeddedPracticeReviewWorkspace";
-import { useConceptExplain } from "./hooks/useConceptExplain";
 import AiTutorFloating from "@/components/ai-tutor/AiTutorFloating";
 import { isExcusedPracticeItem } from "@/lib/flow/excuse";
 import { isPracticeItemFinalized } from "@/lib/practice/runtime";
@@ -157,7 +156,6 @@ export default function PracticeShell(props: PracticeShellProps) {
       isLockedRun && attempts >= maxAttempts && current?.result?.ok !== true;
 
   const resultBoxClass = useMemo(() => getResultBoxClass(current), [current]);
-  const concept = useConceptExplain({ current, exercise });
   const surface = resolvePracticeExerciseSurface({
     mode: props.experienceMode,
     exerciseKind: exercise?.kind ?? null,
@@ -170,7 +168,6 @@ export default function PracticeShell(props: PracticeShellProps) {
     attempts,
     outOfAttempts,
     resultBoxClass,
-    concept,
   };
 
   const embeddedPresentation = resolveEmbeddedPracticeWorkspacePresentation(
@@ -217,7 +214,6 @@ export default function PracticeShell(props: PracticeShellProps) {
         attempts={attempts}
         outOfAttempts={outOfAttempts}
         resultBoxClass={resultBoxClass}
-        concept={concept}
       />
       {tutor}
     </>

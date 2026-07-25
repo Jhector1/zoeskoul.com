@@ -42,9 +42,12 @@ import {
   shouldOfferAiTutor,
 } from "./tutorContext";
 import {
+  markAiTutorAvailable,
   readAiTutorUnlocked,
   rememberAiTutorUnlocked,
+  resolveAiTutorExerciseKey,
   resolveAiTutorSurface,
+  setAiTutorRuntimeStatus,
 } from "./tutorAvailability";
 
 type TutorUiMessage = PracticeTutorMessage & {
@@ -135,9 +138,7 @@ export default function AiTutorFloating({
   const [draft, setDraft] = useState("");
   const [messages, setMessages] = useState<TutorUiMessage[]>([]);
 
-  const exerciseKey = exercise
-    ? `${exercise.topic}:${exercise.id}`
-    : current?.key ?? null;
+  const exerciseKey = resolveAiTutorExerciseKey(exercise, current);
   const thresholdMet = Boolean(
     enabled && exercise && shouldOfferAiTutor(current),
   );
@@ -271,6 +272,7 @@ export default function AiTutorFloating({
         signal: controller.signal,
       });
 
+      markAiTutorAvailable(exerciseKey);
       const reply = response.reply.trim();
       const previousAssistant = [...history]
         .reverse()
@@ -304,6 +306,14 @@ export default function AiTutorFloating({
         setOfferDismissed(true);
         return;
       }
+
+      setAiTutorRuntimeStatus(
+        exerciseKey,
+        reason?.code === "AI_TUTOR_UNAVAILABLE" ? "unavailable" : "failed",
+      );
+      setOpen(false);
+      setConsented(false);
+      setOfferDismissed(true);
       setError(
         reason?.message ??
           t(

@@ -45,6 +45,43 @@ export const PRACTICE_HELP_STEP_DEFS: readonly PracticeHelpStepDef[] = [
     },
 ] as const;
 
+
+export const PRACTICE_REVEAL_FAILURE_THRESHOLD = 3;
+
+function nonNegativeWholeNumber(value: unknown) {
+    const parsed = Number(value);
+    if (!Number.isFinite(parsed) || parsed <= 0) return 0;
+    return Math.floor(parsed);
+}
+
+export function getPracticeHintStepKeys(enabledStepKeys: string[]) {
+    return enabledStepKeys.filter((key) => !isRevealStepKey(key));
+}
+
+export function getFallbackPracticeHintStepKey(
+    enabledStepKeys: string[],
+    openedStepKeys: string[] = [],
+): string | null {
+    // The AI tutor owns progressive help. The authored content is one durable
+    // fallback, not a second multi-step hint ladder beside the tutor.
+    const fallbackKey = getPracticeHintStepKeys(enabledStepKeys)[0] ?? null;
+    if (!fallbackKey) return null;
+    return openedStepKeys.includes(fallbackKey) ? null : fallbackKey;
+}
+
+export function canRevealPracticeAnswer(args: {
+    allowReveal: boolean;
+    attempts: unknown;
+    solved?: boolean;
+    revealed?: boolean;
+}) {
+    if (!args.allowReveal || args.solved || args.revealed) return false;
+    return (
+        nonNegativeWholeNumber(args.attempts) >=
+        PRACTICE_REVEAL_FAILURE_THRESHOLD
+    );
+}
+
 export const PRACTICE_HELP_STEP_DEF_MAP = new Map(
     PRACTICE_HELP_STEP_DEFS.map((step) => [step.key, step]),
 );

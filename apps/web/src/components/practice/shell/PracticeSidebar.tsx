@@ -6,7 +6,17 @@ import { resolvePracticeDisplayTitle } from "@/lib/practice/displayTitle";
 import type { Exercise } from "@/lib/practice/types";
 import type { PracticeShellProps } from "../PracticeShell";
 import ResultPanel from "./ResultPanel";
-import type { UseConceptExplainResult } from "../hooks/useConceptExplain";
+import { shouldOfferAiTutor } from "@/components/ai-tutor/tutorContext";
+import { useAiTutorRuntimeStatus } from "@/components/ai-tutor/useAiTutorRuntimeStatus";
+import {
+    isAiTutorFallbackRequired,
+    resolveAiTutorExerciseKey,
+} from "@/components/ai-tutor/tutorAvailability";
+import {
+    canRevealPracticeAnswer,
+    DEFAULT_PRACTICE_HELP_POLICY,
+    getFallbackPracticeHintStepKey,
+} from "@/lib/practice/help/steps";
 
 function SelectField<T extends string>({
                                            label,
@@ -47,7 +57,6 @@ export default function PracticeSidebar(
         attempts: number;
         outOfAttempts: boolean;
         resultBoxClass: string;
-        concept: UseConceptExplainResult;
         compact?: boolean;
         onOpenHelp?: () => void;
     },
@@ -83,6 +92,7 @@ export default function PracticeSidebar(
         goPrev,
         goNext,
         submit,
+        openHelp,
         reveal,
 
         answeredCount,
@@ -94,7 +104,6 @@ export default function PracticeSidebar(
         finalized,
         outOfAttempts,
         resultBoxClass,
-        concept,
         compact = false,
         onOpenHelp,
     } = props;
@@ -113,6 +122,35 @@ export default function PracticeSidebar(
             })),
         [resolve, topicOptionsFixed],
     );
+
+    const exerciseKey = resolveAiTutorExerciseKey(props.exercise, current);
+    const aiTutorRuntimeStatus = useAiTutorRuntimeStatus(exerciseKey);
+    const enabledHelpSteps = props.helpPolicy?.stepKeys?.length
+        ? props.helpPolicy.stepKeys
+        : DEFAULT_PRACTICE_HELP_POLICY.stepKeys;
+    const fallbackHintStepKey = getFallbackPracticeHintStepKey(
+        enabledHelpSteps,
+        current?.help?.openedStepKeys ?? [],
+    );
+    const showFallbackHint = Boolean(
+        current &&
+        fallbackHintStepKey &&
+        shouldOfferAiTutor(current) &&
+        isAiTutorFallbackRequired(aiTutorRuntimeStatus),
+    );
+    const revealed = Boolean(
+        current?.revealed ||
+        (current?.result as any)?.revealUsed ||
+        (current?.result as any)?.revealAnswer,
+    );
+    const revealAvailable = canRevealPracticeAnswer({
+        allowReveal,
+        attempts,
+        solved: current?.result?.ok === true,
+        revealed,
+    });
+    const nextBlockedByReveal = revealAvailable && !revealed;
+    const helpAvailable = showFallbackHint || revealAvailable;
 
     const showTopicFilter =
         !isAssignmentRun &&
@@ -222,64 +260,73 @@ export default function PracticeSidebar(
                         />
                     ) : null}
 
-                    <div className="mt-2 flex flex-wrap gap-2">
-                        <button
-                            type="button"
-                            className="ui-btn-secondary px-3 disabled:cursor-not-allowed disabled:opacity-50"
-                            onClick={goPrev}
-                            disabled={busy || !canGoPrev}
-                        >
-                            {t("buttons.prev")}
-                        </button>
-
-                        <button
-                            type="button"
-                            className="ui-btn-secondary px-3 disabled:cursor-not-allowed disabled:opacity-50"
-                            onClick={() => goNext()}
-                            disabled={busy || !canGoNext}
-                        >
-                            {t("buttons.next")}
-                        </button>
-
-                        <button
-                            type="button"
-                            className="ui-btn-primary px-3 disabled:cursor-not-allowed disabled:opacity-50"
-                            onClick={() => submit()}
-                            disabled={submitBusy || !props.exercise || finalized || outOfAttempts || !canSubmitNow}
-                        >
-              <span className="inline-flex items-center gap-2">
-                {submitBusy ? <span className="ui-quiz-spinner" aria-hidden /> : null}
-                  <span>{submitBusy ? "Submitting..." : t("buttons.submit")}</span>
-              </span>
-                        </button>
-
-                        {compact && onOpenHelp ? (
+                    <div className="mt-2 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+                        <div className="flex flex-wrap gap-2">
                             <button
                                 type="button"
                                 className="ui-btn-secondary px-3 disabled:cursor-not-allowed disabled:opacity-50"
-                                onClick={onOpenHelp}
-                                disabled={busy || !props.exercise}
+                                onClick={goPrev}
+                                disabled={busy || !canGoPrev}
                             >
-                                {t("mobile.help")}
+                                {t("buttons.prev")}
                             </button>
-                        ) : (
+
                             <button
                                 type="button"
                                 className="ui-btn-secondary px-3 disabled:cursor-not-allowed disabled:opacity-50"
-                                onClick={() => reveal()}
-                                disabled={
-                                    busy ||
-                                    !props.exercise ||
-                                    !allowReveal ||
-                                    Boolean(
-                                        current?.revealed ||
-                                        (current?.result as any)?.revealUsed,
-                                    )
-                                }
+                                onClick={() => goNext()}
+                                disabled={busy || !canGoNext || nextBlockedByReveal}
                             >
-                                {t("buttons.reveal")}
+                                {t("buttons.next")}
                             </button>
-                        )}
+
+                            <button
+                                type="button"
+                                className="ui-btn-primary px-3 disabled:cursor-not-allowed disabled:opacity-50"
+                                onClick={() => submit()}
+                                disabled={submitBusy || !props.exercise || finalized || outOfAttempts || !canSubmitNow}
+                            >
+                                <span className="inline-flex items-center gap-2">
+                                    {submitBusy ? <span className="ui-quiz-spinner" aria-hidden /> : null}
+                                    <span>{submitBusy ? "Submitting..." : t("buttons.submit")}</span>
+                                </span>
+                            </button>
+                        </div>
+
+                        <div className="flex flex-wrap justify-end gap-2">
+                            {compact && onOpenHelp && helpAvailable ? (
+                                <button
+                                    type="button"
+                                    className="ui-btn-secondary px-3 disabled:cursor-not-allowed disabled:opacity-50"
+                                    onClick={onOpenHelp}
+                                    disabled={busy || !props.exercise}
+                                >
+                                    {revealAvailable ? t("buttons.reveal") : t("buttons.hint")}
+                                </button>
+                            ) : null}
+
+                            {!compact && showFallbackHint ? (
+                                <button
+                                    type="button"
+                                    className="ui-btn-secondary px-3 disabled:cursor-not-allowed disabled:opacity-50"
+                                    onClick={() => openHelp(fallbackHintStepKey ?? undefined)}
+                                    disabled={busy || !props.exercise}
+                                >
+                                    {t("buttons.hint")}
+                                </button>
+                            ) : null}
+
+                            {!compact && revealAvailable ? (
+                                <button
+                                    type="button"
+                                    className="ui-btn-secondary px-3 disabled:cursor-not-allowed disabled:opacity-50"
+                                    onClick={() => reveal()}
+                                    disabled={busy || !props.exercise}
+                                >
+                                    {t("buttons.reveal")}
+                                </button>
+                            ) : null}
+                        </div>
                     </div>
 
                     {isLockedRun && !allowReveal ? (
@@ -291,7 +338,6 @@ export default function PracticeSidebar(
             <ResultPanel
                 t={t}
                 busy={busy}
-                allowReveal={allowReveal}
                 isLockedRun={isLockedRun}
                 maxAttempts={maxAttempts}
                 attempts={attempts}
@@ -300,7 +346,6 @@ export default function PracticeSidebar(
                 exercise={props.exercise as Exercise | null}
                 updateCurrent={props.updateCurrent}
                 resultBoxClass={resultBoxClass}
-                concept={concept}
                 excuseAndNext={props.excuseAndNext}
                 codeInputId={props.codeInputId}
                 pendingRevealCompletion={props.pendingRevealCompletion}

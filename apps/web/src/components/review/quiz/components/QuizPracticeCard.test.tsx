@@ -1215,6 +1215,63 @@ describe("applyPracticeWorkspaceHydration", () => {
             "class Car:\n    pass\n",
         );
     });
+    it("keeps Check this answer and shows Reveal answer on the right after three failed attempts", () => {
+        const exercise = makeCodeInputExercise();
+        const item = {
+            ...makeQItem({
+                exercise,
+                code: "print('still trying')",
+                result: {
+                    ok: false,
+                    finalized: false,
+                } as any,
+            }),
+            attempts: 3,
+            submitted: false,
+        } as any;
+
+        const html = renderToStaticMarkup(
+            <QuizPracticeCard
+                q={{
+                    id: "practice-reveal-secondary",
+                    kind: "practice",
+                    fetch: {
+                        subject: "python",
+                        module: "module-1",
+                        section: "section-1",
+                        topic: "topic-1",
+                    },
+                } as any}
+                ownerCardId="card-1"
+                ps={makePracticeState({
+                    item,
+                    exercise,
+                    attempts: 3,
+                    ok: false,
+                })}
+                toolsActive={false}
+                unlocked
+                isCompleted={false}
+                locked={false}
+                unlimitedAttempts
+                strictSequential
+                seqOrder={1}
+                padRef={{ current: null } as any}
+                onUpdateItem={vi.fn()}
+                onSubmit={vi.fn()}
+                onHelp={vi.fn()}
+            />,
+        );
+
+        expect(html).toContain('data-testid="review-practice-submit-button"');
+        expect(html).toContain('data-testid="review-practice-reveal-button"');
+        expect(html).toContain("Check this answer");
+        expect(html).toContain("Reveal answer");
+        expect(html.indexOf("Check this answer")).toBeLessThan(
+            html.indexOf("Reveal answer"),
+        );
+    });
+
     it("shows Next instead of Check this answer after a revealed answer is finalized", () => {
         const exercise = makeCodeInputExercise();
         const item = {

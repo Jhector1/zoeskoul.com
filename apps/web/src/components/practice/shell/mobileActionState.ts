@@ -6,9 +6,11 @@ export function resolvePracticeMobilePrimaryAction(args: {
   finalized: boolean;
   outOfAttempts: boolean;
   canGoNext: boolean;
+  revealAvailable?: boolean;
 }): PracticeMobilePrimaryAction {
   const completeEnoughToAdvance =
-    !args.hasCurrent || args.submitted || args.finalized || args.outOfAttempts;
+    !args.revealAvailable &&
+    (!args.hasCurrent || args.submitted || args.finalized || args.outOfAttempts);
 
   return completeEnoughToAdvance && args.canGoNext ? "next" : "submit";
 }
