@@ -16,7 +16,8 @@ export const CATALOG_MANIFESTS: Record<string, CatalogManifest> = {
       "defaultSubjectSlug": "c-data-structures",
       "status": "active",
       "subjectSlugs": [
-        "c-data-structures"
+        "c-data-structures",
+        "c-runtime-analysis-asymptotics"
       ],
       "meta": {
         "family": "programming",
@@ -111,6 +112,7 @@ export const CATALOG_MANIFESTS: Record<string, CatalogManifest> = {
 export const SUBJECT_CATALOG_SLUGS: Record<string, string> = {
   "applied-python-projects": "python",
   "c-data-structures": "c",
+  "c-runtime-analysis-asymptotics": "c",
   "git-foundations": "git",
   "linux-terminal-fundamentals": "linux",
   "multi-table-sql": "sql",

@@ -9,6 +9,8 @@ import type {
 
 import cDataStructures from "./c/c-data-structures/subject.manifest.json";
 import { TOPIC_MANIFESTS as cDataStructuresTopicManifests } from "./c/c-data-structures/topics.generated";
+import cRuntimeAnalysisAsymptotics from "./c/c-runtime-analysis-asymptotics/subject.manifest.json";
+import { TOPIC_MANIFESTS as cRuntimeAnalysisAsymptoticsTopicManifests } from "./c/c-runtime-analysis-asymptotics/topics.generated";
 import gitFoundations from "./git/git-foundations/subject.manifest.json";
 import { TOPIC_MANIFESTS as gitFoundationsTopicManifests } from "./git/git-foundations/topics.generated";
 import linuxTerminalFundamentals from "./linux/linux-terminal-fundamentals/subject.manifest.json";
@@ -37,6 +39,7 @@ export type GeneratedSubjectGenKey = "c_course" | "git_course" | "bash_course" |
 
 export const SUBJECT_MANIFESTS: Record<string, SubjectManifest> = {
   "c-data-structures": cDataStructures as SubjectManifest,
+  "c-runtime-analysis-asymptotics": cRuntimeAnalysisAsymptotics as SubjectManifest,
   "git-foundations": gitFoundations as SubjectManifest,
   "linux-terminal-fundamentals": linuxTerminalFundamentals as SubjectManifest,
   "applied-python-projects": appliedPythonProjects as SubjectManifest,
@@ -64,6 +67,12 @@ export const SUBJECT_GENERATOR_SOURCES: Record<
     genKey: "c_course",
     manifest: cDataStructures as SubjectManifest,
     topicManifests: cDataStructuresTopicManifests as TopicManifestRefMap,
+  },
+  "c-runtime-analysis-asymptotics": {
+    subjectSlug: "c-runtime-analysis-asymptotics",
+    genKey: "c_course",
+    manifest: cRuntimeAnalysisAsymptotics as SubjectManifest,
+    topicManifests: cRuntimeAnalysisAsymptoticsTopicManifests as TopicManifestRefMap,
   },
   "git-foundations": {
     subjectSlug: "git-foundations",
@@ -137,7 +146,7 @@ export const SUBJECT_GENERATOR_SOURCES_BY_GENKEY: Record<
   GeneratedSubjectGenKey,
   Array<(typeof SUBJECT_GENERATOR_SOURCES)[keyof typeof SUBJECT_GENERATOR_SOURCES]>
 > = {
-  "c_course": [SUBJECT_GENERATOR_SOURCES["c-data-structures"]],
+  "c_course": [SUBJECT_GENERATOR_SOURCES["c-data-structures"], SUBJECT_GENERATOR_SOURCES["c-runtime-analysis-asymptotics"]],
   "git_course": [SUBJECT_GENERATOR_SOURCES["git-foundations"]],
   "bash_course": [SUBJECT_GENERATOR_SOURCES["linux-terminal-fundamentals"]],
   "python_part1": [SUBJECT_GENERATOR_SOURCES["applied-python-projects"], SUBJECT_GENERATOR_SOURCES["python-data-functions"], SUBJECT_GENERATOR_SOURCES["python-v2"], SUBJECT_GENERATOR_SOURCES["python"]],

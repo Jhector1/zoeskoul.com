@@ -1,0 +1,148 @@
+{
+  "topics": {
+    "c-runtime-analysis-asymptotics": {
+      "c-runtime-analysis-asymptotics-module-1-frequency-counting": {
+        "sequential-loops-and-linear-recursion": {
+          "label": "Sequential Loops and Linear Recursion",
+          "summary": "Finish the runtime-analysis set with Foo5 and Foo6.",
+          "cards": {
+            "foo5-foo6-walkthrough": {
+              "title": "Foo5 and Foo6: Add Sequential Work and Trace a Call Chain"
+            },
+            "sequential-recursion-animation": {
+              "title": "Add Blocks; Follow Recursive Calls"
+            },
+            "guided-lab": {
+              "title": "Guided C Lab"
+            },
+            "check-understanding": {
+              "title": "Check Your Understanding"
+            }
+          },
+          "projectSteps": {
+            "count_foo5_foo6": {
+              "title": "Count Sequential Loops and a Recursive Chain"
+            }
+          },
+          "finalLab": {
+            "steps": {
+              "count_foo5_foo6": {
+                "title": "Count Sequential Loops and a Recursive Chain",
+                "prompt": "Complete the five helpers. Keep tuple prints, total calls, and stack depth distinct.",
+                "hint": "Foo6 makes one extra base-case call after the last printed pair.",
+                "help": {
+                  "concept": "Sequential loops add. A single recursive call per level forms a chain with n printed levels and one additional base-case call.",
+                  "hint_1": "Work from the traced values to an exact count before simplifying.",
+                  "hint_2": "Run the supplied test harness after each focused change."
+                },
+                "starterCode": "#include <stdio.h>\n#include \"analysis.h\"\nint main(void) {\n    const long long n = 8;\n    printf(\"foo5 tuples=%lld all=%lld\\n\", foo5_tuple_prints(n), foo5_all_printf_calls(n));\n    printf(\"foo6 tuples=%lld calls=%lld stack=%lld\\n\", foo6_tuple_prints(n), foo6_total_calls(n), foo6_stack_depth(n));\n    return 0;\n}\n",
+                "solutionCode": "#include <stdio.h>\n#include \"analysis.h\"\nint main(void) {\n    const long long n = 8;\n    printf(\"foo5 tuples=%lld all=%lld\\n\", foo5_tuple_prints(n), foo5_all_printf_calls(n));\n    printf(\"foo6 tuples=%lld calls=%lld stack=%lld\\n\", foo6_tuple_prints(n), foo6_total_calls(n), foo6_stack_depth(n));\n    return 0;\n}\n",
+                "starterFiles": {
+                  "main_c": {
+                    "content": "#include <stdio.h>\n#include \"analysis.h\"\nint main(void) {\n    const long long n = 8;\n    printf(\"foo5 tuples=%lld all=%lld\\n\", foo5_tuple_prints(n), foo5_all_printf_calls(n));\n    printf(\"foo6 tuples=%lld calls=%lld stack=%lld\\n\", foo6_tuple_prints(n), foo6_total_calls(n), foo6_stack_depth(n));\n    return 0;\n}\n"
+                  },
+                  "analysis_h": {
+                    "content": "#ifndef ANALYSIS_H\n#define ANALYSIS_H\nlong long foo5_tuple_prints(long long n);\nlong long foo5_all_printf_calls(long long n);\nlong long foo6_tuple_prints(long long n);\nlong long foo6_total_calls(long long n);\nlong long foo6_stack_depth(long long n);\n#endif\n"
+                  },
+                  "analysis_c": {
+                    "content": "#include \"analysis.h\"\nlong long foo5_tuple_prints(long long n) { (void)n; return 0; }\nlong long foo5_all_printf_calls(long long n) { (void)n; return 0; }\nlong long foo6_tuple_prints(long long n) { (void)n; return 0; }\nlong long foo6_total_calls(long long n) { (void)n; return 0; }\nlong long foo6_stack_depth(long long n) { (void)n; return 0; }\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_c": {
+                    "content": "#include <stdio.h>\n#include \"analysis.h\"\nint main(void) {\n    const long long n = 8;\n    printf(\"foo5 tuples=%lld all=%lld\\n\", foo5_tuple_prints(n), foo5_all_printf_calls(n));\n    printf(\"foo6 tuples=%lld calls=%lld stack=%lld\\n\", foo6_tuple_prints(n), foo6_total_calls(n), foo6_stack_depth(n));\n    return 0;\n}\n"
+                  },
+                  "analysis_h": {
+                    "content": "#ifndef ANALYSIS_H\n#define ANALYSIS_H\nlong long foo5_tuple_prints(long long n);\nlong long foo5_all_printf_calls(long long n);\nlong long foo6_tuple_prints(long long n);\nlong long foo6_total_calls(long long n);\nlong long foo6_stack_depth(long long n);\n#endif\n"
+                  },
+                  "analysis_c": {
+                    "content": "#include \"analysis.h\"\nlong long foo5_tuple_prints(long long n) { return n + n; }\nlong long foo5_all_printf_calls(long long n) { return foo5_tuple_prints(n) + 2; }\nlong long foo6_tuple_prints(long long n) { return n; }\nlong long foo6_total_calls(long long n) { return n + 1; }\nlong long foo6_stack_depth(long long n) { return n; }\n"
+                  }
+                },
+                "checks": [
+                  {
+                    "message": "Add the two sequential Foo5 loop counts."
+                  },
+                  {
+                    "message": "Include Foo6’s final base-case call."
+                  },
+                  {
+                    "message": "Report linear tuple prints and stack depth."
+                  }
+                ]
+              }
+            }
+          },
+          "quiz": {
+            "sequential-cost": {
+              "title": "Sequential loops",
+              "prompt": "Two separate n-iteration loops have what combined tight bound?",
+              "hint": "Add the two blocks.",
+              "help": {
+                "concept": "n+n=2n, and constant factors do not change Θ.",
+                "hint_1": "Trace a small input or simplify the exact expression before choosing.",
+                "hint_2": "Check whether the work adds, multiplies, or forms a changing sum."
+              },
+              "options": {
+                "a": "Θ(1)",
+                "b": "Θ(n)",
+                "c": "Θ(n²)",
+                "d": "Θ(2ⁿ)"
+              }
+            },
+            "foo6-base": {
+              "title": "Foo6 base case",
+              "prompt": "Does the call Foo6(n,n,n) print a pair?",
+              "hint": "Read the order of statements.",
+              "help": {
+                "concept": "The base-case test runs first, so the final call returns without printing.",
+                "hint_1": "Trace a small input or simplify the exact expression before choosing.",
+                "hint_2": "Check whether the work adds, multiplies, or forms a changing sum."
+              },
+              "options": {
+                "a": "Yes, before testing the base case",
+                "b": "Yes, because n is included",
+                "c": "No, it returns before printing",
+                "d": "Only when n is even"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "c-runtime-analysis-asymptotics": {
+      "c-runtime-analysis-asymptotics-module-1-frequency-counting": {
+        "sequential-loops-and-linear-recursion": {
+          "foo5-foo6-walkthrough": {
+            "title": "Foo5 and Foo6: Add Sequential Work and Trace a Call Chain",
+            "bodyMarkdown": "### Foo5: two loops one after another\n\nThe first loop prints `n` pairs while `j` remains `0`. When it finishes, `i == n`. The second loop then prints another `n` pairs while `i` remains `n`.\n\n$$\nP(n)=n+n=2n.\n$$\n\nThe normalized version contains two newline calls, so all `printf` calls total `2n + 2`. Because the loops are sequential rather than nested, their work **adds**. `Foo5` is `Θ(n)`.\n\n### Foo6: one recursive call per level\n\n```c\nvoid Foo6(int n, int i, int j) {\n    if (i >= n && j >= n)\n        return;\n    printf(\"(%d,%d) \", i, j);\n    Foo6(n, i + 1, j + 1);\n}\n```\n\nStarting from `(0,0)`, the function prints `(0,0)` through `(n−1,n−1)`, then makes one final base-case call at `(n,n)` that does not print.\n\n- tuple prints: `n`\n- total function calls: `n + 1`\n- maximum active recursive frames: proportional to `n`\n- time: `Θ(n)`\n- call-stack space: `Θ(n)`\n\nThe earlier slide uses equality in the base case and the solution slide uses `>=`. With these starting values and updates, both reach `(n,n)` exactly; the `>=` form is safer."
+          },
+          "sequential-recursion-animation": {
+            "title": "Add Blocks; Follow Recursive Calls",
+            "context": "The same linear bound arises for different structural reasons: sequential addition in Foo5 and a single recursive chain in Foo6.",
+            "steps": [
+              {
+                "title": "Foo5: finish the first loop",
+                "body": "The first loop contributes n prints and leaves i equal to n."
+              },
+              {
+                "title": "Foo5: add the second loop",
+                "body": "The second independent block contributes another n prints. Sequential costs add."
+              },
+              {
+                "title": "Foo6: follow one recursive path",
+                "body": "Each call creates exactly one smaller call, so the recursion is a chain rather than a branching tree."
+              },
+              {
+                "title": "Separate time from stack space",
+                "body": "n printing calls give linear time; n simultaneously active frames give linear auxiliary stack space."
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

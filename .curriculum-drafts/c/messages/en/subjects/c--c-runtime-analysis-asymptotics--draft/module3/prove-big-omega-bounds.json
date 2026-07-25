@@ -1,0 +1,103 @@
+{
+  "topics": {
+    "c--c-runtime-analysis-asymptotics--draft": {
+      "c--c-runtime-analysis-asymptotics--draft-module-3-inequality-proofs": {
+        "prove-big-omega-bounds": {
+          "label": "A Big-Ω Inequality Proof",
+          "summary": "Prove the cubic eventually stays above the quadratic expression.",
+          "cards": {
+            "omega-proof": {
+              "title": "Prove a Big-Ω Lower Bound"
+            },
+            "omega-proof-animation": {
+              "title": "Build a Lower-Bound Inequality Chain"
+            },
+            "check-understanding": {
+              "title": "Check Your Understanding"
+            }
+          },
+          "quiz": {
+            "omega-direction": {
+              "title": "Ω inequality direction",
+              "prompt": "Which inequality matches T(n)=Ω(g(n))?",
+              "hint": "Ω is a lower bound on T.",
+              "help": {
+                "concept": "A positive multiple of g must lie below T eventually.",
+                "hint_1": "Trace a small input or simplify the exact expression before choosing.",
+                "hint_2": "Check whether the work adds, multiplies, or forms a changing sum."
+              },
+              "options": {
+                "a": "0≤T(n)≤cg(n)",
+                "b": "0≤cg(n)≤T(n)",
+                "c": "T(n)=g(n) for all n",
+                "d": "cg(n)≤0"
+              }
+            },
+            "omega-threshold": {
+              "title": "Why n₀=2?",
+              "prompt": "Why does the proof choose n₀=2?",
+              "hint": "Inspect the final comparison 3n²≤2n³.",
+              "help": {
+                "concept": "Dividing by n² gives 3≤2n, which is true for n≥2.",
+                "hint_1": "Trace a small input or simplify the exact expression before choosing.",
+                "hint_2": "Check whether the work adds, multiplies, or forms a changing sum."
+              },
+              "options": {
+                "a": "Because n²+n+1 is negative before 2",
+                "b": "Because 3≤2n begins at n=2",
+                "c": "Because c must equal n₀",
+                "d": "Because cubic functions start at 2"
+              }
+            },
+            "omega-middle": {
+              "title": "Purpose of 3n²",
+              "prompt": "Why introduce 3n² in the proof?",
+              "hint": "The middle expression should connect the two sides.",
+              "help": {
+                "concept": "Bounding all three terms by n² makes the comparison simple.",
+                "hint_1": "Trace a small input or simplify the exact expression before choosing.",
+                "hint_2": "Check whether the work adds, multiplies, or forms a changing sum."
+              },
+              "options": {
+                "a": "To make the expression exponential",
+                "b": "To create an easy upper bound for n²+n+1 that still lies below 2n³",
+                "c": "To change Ω into O",
+                "d": "To eliminate n₀"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "c--c-runtime-analysis-asymptotics--draft": {
+      "c--c-runtime-analysis-asymptotics--draft-module-3-inequality-proofs": {
+        "prove-big-omega-bounds": {
+          "omega-proof": {
+            "title": "Prove a Big-Ω Lower Bound",
+            "bodyMarkdown": "### Definition\n\n`T(n) = Ω(g(n))` when positive constants `c` and `n₀` satisfy\n\n$$\n0\\le c\\,g(n)\\le T(n)\\quad\\text{for every }n\\ge n_0.\n$$\n\n### Prove `2n³ = Ω(n² + n + 1)`\n\n**Step 1 — Write the target inequality.**\n\n$$\n0\\le c(n^2+n+1)\\le 2n^3.\n$$\n\n**Step 2 — Choose `c = 1`.**\n\n**Step 3 — Bound the smaller terms.** For `n ≥ 1`, both `n` and `1` are at most `n²`, so\n\n$$\nn^2+n+1\\le 3n^2.\n$$\n\n**Step 4 — Compare with the cubic.** For `n ≥ 2`, `3 ≤ 2n`, hence\n\n$$\n3n^2\\le 2n^3.\n$$\n\n**Step 5 — Combine and conclude.**\n\n$$\n0\\le n^2+n+1\\le 3n^2\\le 2n^3\\quad(n\\ge2).\n$$\n\nTherefore `c = 1` and `n₀ = 2` prove `2n³ = Ω(n²+n+1)`."
+          },
+          "omega-proof-animation": {
+            "title": "Build a Lower-Bound Inequality Chain",
+            "context": "A useful proof can insert a simpler middle expression between g(n) and T(n).",
+            "steps": [
+              {
+                "title": "Start with the Ω inequality",
+                "body": "The comparison function belongs on the left after multiplication by c."
+              },
+              {
+                "title": "Replace lower-order terms by n²",
+                "body": "For n≥1, n≤n² and 1≤n²."
+              },
+              {
+                "title": "Finish the chain",
+                "body": "For n≥2, 3n²≤2n³. The same n₀ must satisfy every link."
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

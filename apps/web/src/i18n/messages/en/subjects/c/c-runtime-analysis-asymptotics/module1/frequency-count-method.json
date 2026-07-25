@@ -1,0 +1,156 @@
+{
+  "topics": {
+    "c-runtime-analysis-asymptotics": {
+      "c-runtime-analysis-asymptotics-module-1-frequency-counting": {
+        "frequency-count-method": {
+          "label": "The Frequency-Count Method",
+          "summary": "Trace first, derive the exact count, then classify.",
+          "cards": {
+            "method-overview": {
+              "title": "The Tutor-Style Frequency-Count Method"
+            },
+            "method-animation": {
+              "title": "Think → Trace → Count → Sum → Simplify → Classify"
+            },
+            "guided-lab": {
+              "title": "Guided C Lab"
+            },
+            "check-understanding": {
+              "title": "Check Your Understanding"
+            }
+          },
+          "projectSteps": {
+            "count_patterns": {
+              "title": "Count Three Common Loop Shapes"
+            }
+          },
+          "finalLab": {
+            "steps": {
+              "count_patterns": {
+                "title": "Count Three Common Loop Shapes",
+                "prompt": "Open `analysis.c`. Complete the three exact-count helpers. Use multiplication for the fixed strip and square, and the arithmetic-series formula for the triangle. Do not simulate enormous loops.",
+                "hint": "The triangle contains `0 + 1 + ... + (n - 1)` points.",
+                "help": {
+                  "concept": "Exact counts come before asymptotic labels. The functions should return `n·width`, `n²`, and `n(n−1)/2`.",
+                  "hint_1": "Work from the traced values to an exact count before simplifying.",
+                  "hint_2": "Run the supplied test harness after each focused change."
+                },
+                "starterCode": "#include <stdio.h>\n#include \"analysis.h\"\n\nint main(void) {\n    const long long n = 5;\n    printf(\"n=%lld\\n\", n);\n    printf(\"constant=%lld\\n\", count_constant_inner(n, 3));\n    printf(\"square=%lld\\n\", count_square(n));\n    printf(\"triangle=%lld\\n\", count_triangle(n));\n    return 0;\n}\n",
+                "solutionCode": "#include <stdio.h>\n#include \"analysis.h\"\n\nint main(void) {\n    const long long n = 5;\n    printf(\"n=%lld\\n\", n);\n    printf(\"constant=%lld\\n\", count_constant_inner(n, 3));\n    printf(\"square=%lld\\n\", count_square(n));\n    printf(\"triangle=%lld\\n\", count_triangle(n));\n    return 0;\n}\n",
+                "starterFiles": {
+                  "main_c": {
+                    "content": "#include <stdio.h>\n#include \"analysis.h\"\n\nint main(void) {\n    const long long n = 5;\n    printf(\"n=%lld\\n\", n);\n    printf(\"constant=%lld\\n\", count_constant_inner(n, 3));\n    printf(\"square=%lld\\n\", count_square(n));\n    printf(\"triangle=%lld\\n\", count_triangle(n));\n    return 0;\n}\n"
+                  },
+                  "analysis_h": {
+                    "content": "#ifndef ANALYSIS_H\n#define ANALYSIS_H\nlong long count_constant_inner(long long n, long long width);\nlong long count_square(long long n);\nlong long count_triangle(long long n);\n#endif\n"
+                  },
+                  "analysis_c": {
+                    "content": "#include \"analysis.h\"\n\nlong long count_constant_inner(long long n, long long width) {\n    /* TODO: exact count for n rows of fixed width. */\n    return 0;\n}\n\nlong long count_square(long long n) {\n    /* TODO: exact count for an n by n rectangle. */\n    return 0;\n}\n\nlong long count_triangle(long long n) {\n    /* TODO: exact count for row lengths 0 through n - 1. */\n    return 0;\n}\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_c": {
+                    "content": "#include <stdio.h>\n#include \"analysis.h\"\n\nint main(void) {\n    const long long n = 5;\n    printf(\"n=%lld\\n\", n);\n    printf(\"constant=%lld\\n\", count_constant_inner(n, 3));\n    printf(\"square=%lld\\n\", count_square(n));\n    printf(\"triangle=%lld\\n\", count_triangle(n));\n    return 0;\n}\n"
+                  },
+                  "analysis_h": {
+                    "content": "#ifndef ANALYSIS_H\n#define ANALYSIS_H\nlong long count_constant_inner(long long n, long long width);\nlong long count_square(long long n);\nlong long count_triangle(long long n);\n#endif\n"
+                  },
+                  "analysis_c": {
+                    "content": "#include \"analysis.h\"\n\nlong long count_constant_inner(long long n, long long width) {\n    return n * width;\n}\n\nlong long count_square(long long n) {\n    return n * n;\n}\n\nlong long count_triangle(long long n) {\n    return n * (n - 1) / 2;\n}\n"
+                  }
+                },
+                "checks": [
+                  {
+                    "message": "Multiply the number of rows by the fixed inner width."
+                  },
+                  {
+                    "message": "Use n times n for the rectangular pattern."
+                  },
+                  {
+                    "message": "Use the arithmetic-series formula for the triangle."
+                  }
+                ]
+              }
+            }
+          },
+          "quiz": {
+            "fixed-inner": {
+              "title": "Fixed inner loop",
+              "prompt": "An outer loop runs n times and its inner loop always runs 3 times. What is the tight bound?",
+              "hint": "The inner bound is a constant, not n.",
+              "help": {
+                "concept": "The exact body count is 3n, and constant factors disappear in Θ notation.",
+                "hint_1": "Trace a small input or simplify the exact expression before choosing.",
+                "hint_2": "Check whether the work adds, multiplies, or forms a changing sum."
+              },
+              "options": {
+                "a": "Θ(1)",
+                "b": "Θ(log n)",
+                "c": "Θ(n)",
+                "d": "Θ(n²)"
+              }
+            },
+            "sequential-rule": {
+              "title": "Sequential blocks",
+              "prompt": "Two separate loops each run n times. How are their costs combined?",
+              "hint": "The second loop is not inside the first.",
+              "help": {
+                "concept": "Sequential work adds: n + n = 2n = Θ(n).",
+                "hint_1": "Trace a small input or simplify the exact expression before choosing.",
+                "hint_2": "Check whether the work adds, multiplies, or forms a changing sum."
+              },
+              "options": {
+                "a": "Multiply them to get n²",
+                "b": "Add them to get 2n",
+                "c": "Keep only the first loop",
+                "d": "Treat them as logarithmic"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "c-runtime-analysis-asymptotics": {
+      "c-runtime-analysis-asymptotics-module-1-frequency-counting": {
+        "frequency-count-method": {
+          "method-overview": {
+            "title": "The Tutor-Style Frequency-Count Method",
+            "bodyMarkdown": "### The method used throughout this course\n\n**Source boundary:** The worked examples, formulas, and corrections in Modules 1–3 follow the uploaded recitation and its worked-solution PDF. The runnable C labs, review checks, and capstone are new course practice built from those same methods.\n\nUse the same six moves every time:\n\n1. **Mark the changing variables.** Record each start value, stopping test, and update.\n2. **Trace a small input.** Use `n = 4` or `n = 5` and write the actual values reached.\n3. **Count the important statement.** Multiply independent nested loops, add sequential blocks, and sum a dependent inner loop row by row.\n4. **Build the exact expression.** Keep `3n`, `n² + n`, or `n(n - 1)/2` before simplifying.\n5. **Simplify the exact expression.** Expand only when it makes the dominant term clearer.\n6. **State the strongest asymptotic result.** When upper and lower growth match, report a tight `Θ` bound.\n\n```c\nfor (int i = 0; i < n; i++) {\n    for (int j = 0; j < 3; j++) {\n        work();\n    }\n}\n```\n\nThe inner loop contributes exactly `3` executions for every one of the `n` outer iterations, so the exact count is `3n` and the tight bound is `Θ(n)`.\n\n### Three shapes to recognize\n\n- A fixed-width strip gives `cn`.\n- An `n` by `n` rectangle gives `n²`.\n- A triangle with row lengths `0, 1, 2, …, n - 1` gives `n(n - 1)/2`.\n\nA full primitive-operation analysis may count the loop condition `n + 1` times. The recitation primarily counts the body’s print statement, so this course always labels exactly what is being counted."
+          },
+          "method-animation": {
+            "title": "Think → Trace → Count → Sum → Simplify → Classify",
+            "context": "The animation mirrors the hand-solution teaching pattern used in the source: make the execution visible before naming the complexity.",
+            "steps": [
+              {
+                "title": "Step 1: Think",
+                "body": "Read the loop headers and identify which variables change."
+              },
+              {
+                "title": "Step 2: Trace",
+                "body": "Use a small n and list the values or printed pairs."
+              },
+              {
+                "title": "Step 3: Count",
+                "body": "Write the frequency beside the statement being measured."
+              },
+              {
+                "title": "Step 4: Sum",
+                "body": "Multiply independent dimensions, add sequential blocks, or sum changing rows."
+              },
+              {
+                "title": "Step 5: Simplify",
+                "body": "Keep the exact formula, then reduce it to its dominant term."
+              },
+              {
+                "title": "Step 6: Classify",
+                "body": "State Θ when the exact count supplies matching upper and lower growth."
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

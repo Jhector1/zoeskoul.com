@@ -1,0 +1,103 @@
+{
+  "topics": {
+    "c--c-runtime-analysis-asymptotics--draft": {
+      "c--c-runtime-analysis-asymptotics--draft-module-2-limit-method": {
+        "big-o-omega-theta-by-limits": {
+          "label": "Big-O, Big-Ω, and Big-Θ by Limits",
+          "summary": "Use one ratio and interpret its limiting outcome.",
+          "cards": {
+            "limit-rule": {
+              "title": "Classify Growth with the Ratio Limit"
+            },
+            "limit-outcomes-animation": {
+              "title": "Three Possible Ratio Outcomes"
+            },
+            "check-understanding": {
+              "title": "Check Your Understanding"
+            }
+          },
+          "quiz": {
+            "limit-zero": {
+              "title": "Ratio equals zero",
+              "prompt": "If lim f(n)/g(n)=0, which requested classification is correct?",
+              "hint": "f becomes small relative to g.",
+              "help": {
+                "concept": "A zero ratio means f grows strictly slower, so f=O(g).",
+                "hint_1": "Trace a small input or simplify the exact expression before choosing.",
+                "hint_2": "Check whether the work adds, multiplies, or forms a changing sum."
+              },
+              "options": {
+                "a": "f=Ω(g)",
+                "b": "f=Θ(g)",
+                "c": "f=O(g)",
+                "d": "g=O(f) only"
+              }
+            },
+            "limit-constant": {
+              "title": "Positive finite ratio",
+              "prompt": "If lim f(n)/g(n)=3/2, what follows?",
+              "hint": "A positive finite constant indicates matching rates.",
+              "help": {
+                "concept": "Constant-factor differences are exactly what Θ ignores.",
+                "hint_1": "Trace a small input or simplify the exact expression before choosing.",
+                "hint_2": "Check whether the work adds, multiplies, or forms a changing sum."
+              },
+              "options": {
+                "a": "f=Θ(g)",
+                "b": "f=O(1)",
+                "c": "f=Ω(2ⁿ)",
+                "d": "No asymptotic relation"
+              }
+            },
+            "limit-infinity": {
+              "title": "Ratio diverges",
+              "prompt": "If lim f(n)/g(n)=∞, what follows?",
+              "hint": "The numerator dominates the denominator.",
+              "help": {
+                "concept": "An infinite ratio means f grows strictly faster than g.",
+                "hint_1": "Trace a small input or simplify the exact expression before choosing.",
+                "hint_2": "Check whether the work adds, multiplies, or forms a changing sum."
+              },
+              "options": {
+                "a": "f=O(g)",
+                "b": "f=Ω(g)",
+                "c": "f=Θ(g)",
+                "d": "f=Θ(1)"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "c--c-runtime-analysis-asymptotics--draft": {
+      "c--c-runtime-analysis-asymptotics--draft-module-2-limit-method": {
+        "big-o-omega-theta-by-limits": {
+          "limit-rule": {
+            "title": "Classify Growth with the Ratio Limit",
+            "bodyMarkdown": "For positive functions, form the ratio\n\n$$\nL=\\lim_{n\\to\\infty}\\frac{f(n)}{g(n)}.\n$$\n\nThen interpret the result in the direction asked:\n\n- If `L = 0`, then `f` grows strictly slower and `f(n) = O(g(n))`.\n- If `0 < L < ∞`, the functions grow at the same asymptotic rate and `f(n) = Θ(g(n))`.\n- If `L = ∞`, then `f` grows strictly faster and `f(n) = Ω(g(n))`.\n\nThe stronger little-o and little-omega statements also apply in the first and third cases, but the handout asks for `O`, `Ω`, or `Θ`.\n\n### Direction matters\n\nAlways compute `f(n) / g(n)`, not whichever ratio looks easier. Reversing the ratio swaps the zero and infinity outcomes.\n\n### Source clarification\n\nOn the handout’s refresher slide, the nearby “upper bound” and “lower bound” headings are visually paired with the opposite ratio outcomes. The equations show the intended standard rule above: ratio `0` gives `O`; ratio `∞` gives `Ω`."
+          },
+          "limit-outcomes-animation": {
+            "title": "Three Possible Ratio Outcomes",
+            "context": "The position of the ratio determines which asymptotic statement is justified.",
+            "steps": [
+              {
+                "title": "Ratio tends to zero",
+                "body": "f becomes negligible compared with g. Report f = O(g)."
+              },
+              {
+                "title": "Ratio tends to a positive constant",
+                "body": "Neither function becomes negligible. They differ only by bounded constant factors."
+              },
+              {
+                "title": "Ratio tends to infinity",
+                "body": "f dominates g. Report f = Ω(g)."
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

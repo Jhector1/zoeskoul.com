@@ -1,0 +1,318 @@
+{
+  "topicId": "polynomial-and-log-limit-comparisons",
+  "subjectSlug": "c--c-runtime-analysis-asymptotics--draft",
+  "moduleSlug": "c--c-runtime-analysis-asymptotics--draft-module-2-limit-method",
+  "sectionSlug": "c--c-runtime-analysis-asymptotics--draft-limit-method",
+  "prefix": "cra2",
+  "minutes": 55,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "c",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "preset": "runner",
+    "runnerBackend": "judge0",
+    "layoutMode": "default",
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": false
+    }
+  },
+  "topic": {
+    "labelKey": "topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-2-limit-method.polynomial-and-log-limit-comparisons.label",
+    "summaryKey": "topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-2-limit-method.polynomial-and-log-limit-comparisons.summary"
+  },
+  "cards": [
+    {
+      "id": "worked-limits-one-eight",
+      "kind": "sketch",
+      "titleKey": "topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-2-limit-method.polynomial-and-log-limit-comparisons.cards.worked-limits-one-eight.title",
+      "sketchId": "worked-limits-one-eight",
+      "height": 620
+    },
+    {
+      "id": "polynomial-log-animation",
+      "kind": "sketch",
+      "titleKey": "topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-2-limit-method.polynomial-and-log-limit-comparisons.cards.polynomial-log-animation.title",
+      "sketchId": "polynomial-log-animation",
+      "height": 820
+    },
+    {
+      "id": "check-understanding",
+      "kind": "quiz",
+      "titleKey": "topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-2-limit-method.polynomial-and-log-limit-comparisons.cards.check-understanding.title",
+      "quiz": {
+        "difficulty": "medium",
+        "n": 4,
+        "min": 4,
+        "max": 4,
+        "selectionMode": "fixed",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "worked-limits-one-eight",
+      "archetype": "paragraph",
+      "titleKey": "sketches.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-2-limit-method.polynomial-and-log-limit-comparisons.worked-limits-one-eight.title",
+      "bodyKey": "sketches.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-2-limit-method.polynomial-and-log-limit-comparisons.worked-limits-one-eight.bodyMarkdown"
+    },
+    {
+      "id": "polynomial-log-animation",
+      "archetype": "algorithm_animation",
+      "titleKey": "sketches.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-2-limit-method.polynomial-and-log-limit-comparisons.polynomial-log-animation.title",
+      "contextKey": "sketches.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-2-limit-method.polynomial-and-log-limit-comparisons.polynomial-log-animation.context",
+      "intervalMs": 1300,
+      "autoPlay": false,
+      "showControls": true,
+      "showStepCounter": true,
+      "canvasHeight": 310,
+      "steps": [
+        {
+          "id": "polynomial-log-animation-1",
+          "titleKey": "sketches.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-2-limit-method.polynomial-and-log-limit-comparisons.polynomial-log-animation.steps.0.title",
+          "nodes": [
+            {
+              "id": "lead",
+              "label": "3n² / 2n²",
+              "x": 24,
+              "y": 40,
+              "shape": "pill",
+              "detail": "→ 3/2",
+              "tone": "good",
+              "active": true,
+              "width": 24
+            },
+            {
+              "id": "low",
+              "label": "7n / 2n²",
+              "x": 24,
+              "y": 72,
+              "shape": "pill",
+              "detail": "→ 0",
+              "tone": "warn",
+              "width": 24
+            },
+            {
+              "id": "sum",
+              "label": "3/2",
+              "x": 76,
+              "y": 55,
+              "shape": "pill",
+              "tone": "info",
+              "active": true,
+              "width": 18
+            }
+          ],
+          "bodyKey": "sketches.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-2-limit-method.polynomial-and-log-limit-comparisons.polynomial-log-animation.steps.0.body",
+          "formula": "$\\frac{3n^2+7n}{2n^2}=\\frac32+\\frac{7}{2n}\\to\\frac32$",
+          "edges": [
+            {
+              "from": "lead",
+              "to": "sum"
+            },
+            {
+              "from": "low",
+              "to": "sum"
+            }
+          ]
+        },
+        {
+          "id": "polynomial-log-animation-2",
+          "titleKey": "sketches.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-2-limit-method.polynomial-and-log-limit-comparisons.polynomial-log-animation.steps.1.title",
+          "nodes": [
+            {
+              "id": "a",
+              "label": "2/n",
+              "x": 20,
+              "y": 50,
+              "shape": "pill",
+              "tone": "warn"
+            },
+            {
+              "id": "b",
+              "label": "−3/n³",
+              "x": 45,
+              "y": 50,
+              "shape": "pill",
+              "tone": "warn"
+            },
+            {
+              "id": "c",
+              "label": "7/n⁵",
+              "x": 70,
+              "y": 50,
+              "shape": "pill",
+              "tone": "warn"
+            },
+            {
+              "id": "z",
+              "label": "0",
+              "x": 92,
+              "y": 50,
+              "shape": "pill",
+              "tone": "info",
+              "active": true,
+              "width": 10
+            }
+          ],
+          "bodyKey": "sketches.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-2-limit-method.polynomial-and-log-limit-comparisons.polynomial-log-animation.steps.1.body",
+          "formula": "$2/n-3/n^3+7/n^5\\to0$",
+          "edges": [
+            {
+              "from": "a",
+              "to": "z"
+            },
+            {
+              "from": "b",
+              "to": "z"
+            },
+            {
+              "from": "c",
+              "to": "z"
+            }
+          ]
+        },
+        {
+          "id": "polynomial-log-animation-3",
+          "titleKey": "sketches.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-2-limit-method.polynomial-and-log-limit-comparisons.polynomial-log-animation.steps.2.title",
+          "nodes": [
+            {
+              "id": "r0",
+              "label": "n/log²n",
+              "x": 15,
+              "y": 50,
+              "shape": "pill",
+              "tone": "info",
+              "width": 20
+            },
+            {
+              "id": "r1",
+              "label": "n/(2log n)",
+              "x": 45,
+              "y": 50,
+              "shape": "pill",
+              "width": 22
+            },
+            {
+              "id": "r2",
+              "label": "n/2",
+              "x": 72,
+              "y": 50,
+              "shape": "pill",
+              "tone": "good",
+              "width": 15
+            },
+            {
+              "id": "inf",
+              "label": "∞",
+              "x": 92,
+              "y": 50,
+              "shape": "pill",
+              "tone": "info",
+              "active": true,
+              "width": 10
+            }
+          ],
+          "bodyKey": "sketches.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-2-limit-method.polynomial-and-log-limit-comparisons.polynomial-log-animation.steps.2.body",
+          "formula": "$n/(\\log n)^2\\to n/(2\\log n)\\to n/2\\to\\infty$",
+          "edges": [
+            {
+              "from": "r0",
+              "to": "r1",
+              "label": "L’Hôpital"
+            },
+            {
+              "from": "r1",
+              "to": "r2",
+              "label": "L’Hôpital"
+            },
+            {
+              "from": "r2",
+              "to": "inf"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "exercises": [
+    {
+      "id": "poly-same-degree",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-2-limit-method.polynomial-and-log-limit-comparisons.quiz.poly-same-degree",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "c"
+      }
+    },
+    {
+      "id": "lower-degree",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-2-limit-method.polynomial-and-log-limit-comparisons.quiz.lower-degree",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "log-square",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-2-limit-method.polynomial-and-log-limit-comparisons.quiz.log-square",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "c"
+      }
+    },
+    {
+      "id": "nlog-over-log",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-2-limit-method.polynomial-and-log-limit-comparisons.quiz.nlog-over-log",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    }
+  ]
+}

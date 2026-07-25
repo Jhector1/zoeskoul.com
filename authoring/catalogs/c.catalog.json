@@ -8,7 +8,8 @@
     "imageAlt": "C programming and data structures catalog cover",
     "status": "active",
     "subjectSlugs": [
-      "c-data-structures"
+      "c-data-structures",
+      "c-runtime-analysis-asymptotics"
     ],
     "meta": {
       "family": "programming",
@@ -16,7 +17,8 @@
     }
   },
   "subjectSlugs": [
-    "c-data-structures"
+    "c-data-structures",
+    "c-runtime-analysis-asymptotics"
   ],
   "defaultSubjectSlug": "c-data-structures"
 }

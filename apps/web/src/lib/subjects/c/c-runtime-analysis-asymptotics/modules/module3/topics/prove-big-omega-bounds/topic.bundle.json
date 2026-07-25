@@ -1,0 +1,273 @@
+{
+  "topicId": "prove-big-omega-bounds",
+  "subjectSlug": "c-runtime-analysis-asymptotics",
+  "moduleSlug": "c-runtime-analysis-asymptotics-module-3-inequality-proofs",
+  "sectionSlug": "c-runtime-analysis-asymptotics-inequality-proofs",
+  "prefix": "cra3",
+  "minutes": 45,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "c",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "preset": "runner",
+    "runnerBackend": "judge0",
+    "layoutMode": "default",
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": false
+    }
+  },
+  "topic": {
+    "labelKey": "topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-3-inequality-proofs.prove-big-omega-bounds.label",
+    "summaryKey": "topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-3-inequality-proofs.prove-big-omega-bounds.summary"
+  },
+  "cards": [
+    {
+      "id": "omega-proof",
+      "kind": "sketch",
+      "titleKey": "topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-3-inequality-proofs.prove-big-omega-bounds.cards.omega-proof.title",
+      "sketchId": "omega-proof",
+      "height": 620
+    },
+    {
+      "id": "omega-proof-animation",
+      "kind": "sketch",
+      "titleKey": "topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-3-inequality-proofs.prove-big-omega-bounds.cards.omega-proof-animation.title",
+      "sketchId": "omega-proof-animation",
+      "height": 820
+    },
+    {
+      "id": "check-understanding",
+      "kind": "quiz",
+      "titleKey": "topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-3-inequality-proofs.prove-big-omega-bounds.cards.check-understanding.title",
+      "quiz": {
+        "difficulty": "medium",
+        "n": 3,
+        "min": 3,
+        "max": 3,
+        "selectionMode": "fixed",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "omega-proof",
+      "archetype": "paragraph",
+      "titleKey": "sketches.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-3-inequality-proofs.prove-big-omega-bounds.omega-proof.title",
+      "bodyKey": "sketches.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-3-inequality-proofs.prove-big-omega-bounds.omega-proof.bodyMarkdown"
+    },
+    {
+      "id": "omega-proof-animation",
+      "archetype": "algorithm_animation",
+      "titleKey": "sketches.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-3-inequality-proofs.prove-big-omega-bounds.omega-proof-animation.title",
+      "contextKey": "sketches.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-3-inequality-proofs.prove-big-omega-bounds.omega-proof-animation.context",
+      "intervalMs": 1300,
+      "autoPlay": false,
+      "showControls": true,
+      "showStepCounter": true,
+      "canvasHeight": 300,
+      "steps": [
+        {
+          "id": "omega-proof-animation-1",
+          "titleKey": "sketches.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-3-inequality-proofs.prove-big-omega-bounds.omega-proof-animation.steps.0.title",
+          "nodes": [
+            {
+              "id": "g",
+              "label": "c·g(n)",
+              "x": 28,
+              "y": 50,
+              "shape": "pill",
+              "tone": "info",
+              "active": true,
+              "width": 24
+            },
+            {
+              "id": "t",
+              "label": "T(n)",
+              "x": 72,
+              "y": 50,
+              "shape": "pill",
+              "tone": "good",
+              "active": true,
+              "width": 20
+            }
+          ],
+          "bodyKey": "sketches.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-3-inequality-proofs.prove-big-omega-bounds.omega-proof-animation.steps.0.body",
+          "formula": "$0\\le c(n^2+n+1)\\le2n^3$",
+          "edges": [
+            {
+              "from": "g",
+              "to": "t",
+              "label": "≤"
+            }
+          ]
+        },
+        {
+          "id": "omega-proof-animation-2",
+          "titleKey": "sketches.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-3-inequality-proofs.prove-big-omega-bounds.omega-proof-animation.steps.1.title",
+          "nodes": [
+            {
+              "id": "n2",
+              "label": "n²",
+              "x": 18,
+              "y": 50,
+              "shape": "pill",
+              "tone": "good"
+            },
+            {
+              "id": "n",
+              "label": "n≤n²",
+              "x": 42,
+              "y": 50,
+              "shape": "pill"
+            },
+            {
+              "id": "one",
+              "label": "1≤n²",
+              "x": 66,
+              "y": 50,
+              "shape": "pill"
+            },
+            {
+              "id": "three",
+              "label": "3n²",
+              "x": 90,
+              "y": 50,
+              "shape": "pill",
+              "tone": "info",
+              "active": true,
+              "width": 14
+            }
+          ],
+          "bodyKey": "sketches.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-3-inequality-proofs.prove-big-omega-bounds.omega-proof-animation.steps.1.body",
+          "formula": "$n^2+n+1\\le3n^2$",
+          "edges": [
+            {
+              "from": "n2",
+              "to": "three"
+            },
+            {
+              "from": "n",
+              "to": "three"
+            },
+            {
+              "from": "one",
+              "to": "three"
+            }
+          ]
+        },
+        {
+          "id": "omega-proof-animation-3",
+          "titleKey": "sketches.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-3-inequality-proofs.prove-big-omega-bounds.omega-proof-animation.steps.2.title",
+          "nodes": [
+            {
+              "id": "g",
+              "label": "n²+n+1",
+              "x": 20,
+              "y": 50,
+              "shape": "pill",
+              "tone": "info",
+              "width": 22
+            },
+            {
+              "id": "mid",
+              "label": "3n²",
+              "x": 52,
+              "y": 50,
+              "shape": "pill"
+            },
+            {
+              "id": "t",
+              "label": "2n³",
+              "x": 82,
+              "y": 50,
+              "shape": "pill",
+              "tone": "good",
+              "active": true,
+              "width": 16
+            }
+          ],
+          "bodyKey": "sketches.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-3-inequality-proofs.prove-big-omega-bounds.omega-proof-animation.steps.2.body",
+          "formula": "$0\\le n^2+n+1\\le3n^2\\le2n^3$",
+          "edges": [
+            {
+              "from": "g",
+              "to": "mid",
+              "label": "≤"
+            },
+            {
+              "from": "mid",
+              "to": "t",
+              "label": "≤",
+              "tone": "good",
+              "active": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "exercises": [
+    {
+      "id": "omega-direction",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-3-inequality-proofs.prove-big-omega-bounds.quiz.omega-direction",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "omega-threshold",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-3-inequality-proofs.prove-big-omega-bounds.quiz.omega-threshold",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "omega-middle",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-3-inequality-proofs.prove-big-omega-bounds.quiz.omega-middle",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    }
+  ]
+}

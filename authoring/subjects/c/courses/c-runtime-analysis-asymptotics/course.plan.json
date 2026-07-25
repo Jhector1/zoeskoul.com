@@ -1,0 +1,39 @@
+{
+  "subjectSlug": "c",
+  "courseSlug": "c-runtime-analysis-asymptotics",
+  "catalogSlug": "c",
+  "trackSlug": "c",
+  "profileId": "c",
+  "workspaceProfileId": "browser-code-runner",
+  "workspacePolicyId": "c-multifile-workspace",
+  "title": "Runtime Analysis and Asymptotics in C",
+  "description": "Trace C loops and recursive calls, derive exact runtime functions, compare growth with limits, and prove O, Ω, and Θ bounds.",
+  "moduleOrder": [
+    "c-runtime-analysis-asymptotics-module-1-frequency-counting",
+    "c-runtime-analysis-asymptotics-module-2-limit-method",
+    "c-runtime-analysis-asymptotics-module-3-inequality-proofs",
+    "c-runtime-analysis-asymptotics-module-4-capstone"
+  ],
+  "modules": [
+    {
+      "moduleSlug": "c-runtime-analysis-asymptotics-module-1-frequency-counting",
+      "moduleNumber": 1,
+      "title": "Frequency Counting in C"
+    },
+    {
+      "moduleSlug": "c-runtime-analysis-asymptotics-module-2-limit-method",
+      "moduleNumber": 2,
+      "title": "Asymptotics with Limits"
+    },
+    {
+      "moduleSlug": "c-runtime-analysis-asymptotics-module-3-inequality-proofs",
+      "moduleNumber": 3,
+      "title": "Proofs from the Definitions"
+    },
+    {
+      "moduleSlug": "c-runtime-analysis-asymptotics-module-4-capstone",
+      "moduleNumber": 4,
+      "title": "Runtime Analysis Capstone"
+    }
+  ]
+}

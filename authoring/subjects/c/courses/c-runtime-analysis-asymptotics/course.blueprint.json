@@ -1,0 +1,83 @@
+{
+  "subjectSlug": "c",
+  "courseSlug": "c-runtime-analysis-asymptotics",
+  "catalogSlug": "c",
+  "trackSlug": "c",
+  "profileId": "c",
+  "workspaceProfileId": "browser-code-runner",
+  "workspacePolicyId": "c-multifile-workspace",
+  "title": "Runtime Analysis and Asymptotics in C",
+  "subtitle": "Trace it, count it, simplify it, and prove it.",
+  "level": "intermediate",
+  "moduleCount": 4,
+  "description": "A private, animation-supported C course that turns loop traces and recursive call chains into exact execution counts, limit comparisons, growth ordering, and formal O, Ω, and Θ proofs.",
+  "sourceLocale": "en",
+  "targetLocales": [],
+  "accessPolicy": "paid",
+  "visibility": "private",
+  "moduleAccessOverrideDefault": null,
+  "audience": [
+    "Learners who know basic C syntax and want a rigorous introduction to runtime analysis.",
+    "Students preparing for data-structures and algorithms coursework."
+  ],
+  "prerequisites": [
+    "Comfort reading C loops, functions, arrays, and simple recursion.",
+    "Basic algebra, including powers, logarithms, and finite sums."
+  ],
+  "goals": [
+    "Trace loop variables and recursive arguments.",
+    "Build exact frequency-count runtime functions.",
+    "Classify growth with limits.",
+    "Order standard complexity classes.",
+    "Prove asymptotic bounds with explicit constants and thresholds."
+  ],
+  "teachingStyle": {
+    "tone": "Tutor-style, visual, precise, and step-by-step. Trace concrete values before introducing a formula.",
+    "quizWeight": 0.35,
+    "projectWeight": 0.2,
+    "codeInputWeight": 0.45
+  },
+  "constraints": {
+    "moduleCount": 4,
+    "topicsPerModuleMin": 1,
+    "topicsPerModuleMax": 5,
+    "moduleSlugFormat": "<courseSlug>-module-<number>-<short-topic-area>",
+    "sectionSlugFormat": "<courseSlug>-section-<number>-<short-section-role>",
+    "prefixFormat": "<course_slug_with_underscores>_module_<number>"
+  },
+  "seedModules": [
+    "c-runtime-analysis-asymptotics-module-1-frequency-counting",
+    "c-runtime-analysis-asymptotics-module-2-limit-method",
+    "c-runtime-analysis-asymptotics-module-3-inequality-proofs",
+    "c-runtime-analysis-asymptotics-module-4-capstone"
+  ],
+  "courseGenerationPolicy": {
+    "studentActionStyle": "full-ide",
+    "forbidUnavailableWorkspaceActions": true,
+    "preferredTerms": {
+      "terminal": "output panel",
+      "run button": "Run",
+      "implementation file": "the named .c file"
+    },
+    "notes": [
+      "Follow the teaching sequence: predict, trace values, count executions, form T(n), simplify, then classify.",
+      "Keep exact runtime analysis and asymptotic classification conceptually distinct even when they appear in the same topic.",
+      "Use manual animations for loop tables, triangular sums, moving bounds, recursive call chains, ratio limits, and proof thresholds.",
+      "Use C11-compatible code and deterministic fixed tests."
+    ]
+  },
+  "practiceDefaults": {
+    "tryIt": true,
+    "requiresTryIt": true,
+    "tryItPlacement": "all_sketches"
+  },
+  "runtimePolicy": {
+    "language": "c",
+    "backend": "judge0",
+    "mode": "multi_file",
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  }
+}

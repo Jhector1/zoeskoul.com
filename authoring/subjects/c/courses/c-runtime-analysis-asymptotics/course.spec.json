@@ -1,0 +1,689 @@
+{
+  "authoringFormatVersion": "2.0",
+  "subjectSlug": "c",
+  "courseSlug": "c-runtime-analysis-asymptotics",
+  "catalogSlug": "c",
+  "trackSlug": "c",
+  "profileId": "c",
+  "workspaceProfileId": "browser-code-runner",
+  "workspacePolicyId": "c-multifile-workspace",
+  "courseNumber": 2,
+  "title": "Runtime Analysis and Asymptotics in C",
+  "subtitle": "Trace it, count it, simplify it, and prove it.",
+  "description": "A private, animation-supported C course that turns loop traces and recursive call chains into exact execution counts, limit comparisons, growth ordering, and formal O, Ω, and Θ proofs.",
+  "level": "intermediate",
+  "sourceLocale": "en",
+  "targetLocales": [],
+  "accessPolicy": "paid",
+  "visibility": "private",
+  "moduleAccessOverrideDefault": null,
+  "moduleCount": 4,
+  "moduleRange": {
+    "start": 1,
+    "end": 4,
+    "label": "Runtime Analysis and Asymptotics"
+  },
+  "prerequisites": [
+    "Comfort reading C loops, functions, arrays, and simple recursion.",
+    "Basic algebra, including powers, logarithms, and finite sums."
+  ],
+  "intendedFor": "Learners who want to turn concrete C execution traces into exact runtime functions and rigorous asymptotic conclusions.",
+  "learningGoals": [
+    "Trace loop variables and recursive arguments.",
+    "Build exact frequency-count runtime functions.",
+    "Classify function growth with the limit method.",
+    "Order common complexity classes.",
+    "Prove O, Ω, and Θ bounds with explicit constants and thresholds."
+  ],
+  "practiceDefaults": {
+    "tryIt": true,
+    "requiresTryIt": true,
+    "tryItPlacement": "all_sketches"
+  },
+  "courseOverview": {
+    "recommendedSequence": "Complete the modules in order: exact counting, limit comparisons, inequality proofs, then the cumulative capstone.",
+    "summary": "Use a repeatable tutor-style method: trace, count, sum, simplify, classify, and prove.",
+    "moduleSummary": [
+      {
+        "moduleNumber": 1,
+        "title": "Frequency Counting in C",
+        "coreSkill": "Make every iteration visible before introducing asymptotic notation.",
+        "outputFocus": "Exact formulas for the Foo1 through Foo6 patterns and a justified dominant term."
+      },
+      {
+        "moduleNumber": 2,
+        "title": "Asymptotics with Limits",
+        "coreSkill": "Move from exact formulas to formal asymptotic comparisons.",
+        "outputFocus": "Correct O, Ω, and Θ classifications supported by limit calculations."
+      },
+      {
+        "moduleNumber": 3,
+        "title": "Proofs from the Definitions",
+        "coreSkill": "Turn observed growth into definition-level proofs.",
+        "outputFocus": "Formal Big-O, Big-Ω, and Big-Θ proofs with explicit constants."
+      },
+      {
+        "moduleNumber": 4,
+        "title": "Runtime Analysis Capstone",
+        "coreSkill": "Combine the complete course method in one cumulative workspace.",
+        "outputFocus": "A complete analysis from source code to exact function and formal asymptotic bound."
+      }
+    ]
+  },
+  "releasePlan": {
+    "currentRelease": {
+      "name": "c-runtime-analysis-asymptotics-v1",
+      "startModuleNumber": 1,
+      "endModuleNumber": 4
+    },
+    "releases": [
+      {
+        "name": "c-runtime-analysis-asymptotics-v1",
+        "startModuleNumber": 1,
+        "endModuleNumber": 4
+      }
+    ]
+  },
+  "policy": {
+    "exercisePolicy": {
+      "defaultMix": {
+        "single_choice": 0.55,
+        "multi_choice": 0.05,
+        "drag_reorder": 0.1,
+        "fill_blank_choice": 0.1,
+        "code_input": 0.2
+      },
+      "minimums": {
+        "technicalTopicCodeInputMin": 0,
+        "topicExerciseMin": 3
+      }
+    },
+    "projectPolicy": {
+      "minProjectsBeforeCapstone": 0,
+      "capstoneRequired": true
+    },
+    "qualityPolicy": {
+      "allowBlankTopicIds": false,
+      "allowDuplicateTopicIds": false,
+      "requireUniqueModuleSlugs": true,
+      "requireUniqueSectionSlugs": true,
+      "slugConvention": "explicit_module_section",
+      "requireModuleProject": false
+    }
+  },
+  "authoringGuidance": [
+    "This course must always use subjectSlug c, courseSlug c-runtime-analysis-asymptotics, and profileId c.",
+    "Teach with the sequence predict → trace → count → sum → simplify → classify.",
+    "Each topic begins with a tutor-style explanation and a manual step animation when state changes are central.",
+    "Do not replace exact counts with “two loops means n squared”; derive the actual frequency from the bounds.",
+    "Use symbolic reasoning as the proof and numerical C output only as a sanity check.",
+    "Use C11-compatible multi-file workspaces and deterministic fixed tests."
+  ],
+  "courseGenerationPolicy": {
+    "studentActionStyle": "full-ide",
+    "forbidUnavailableWorkspaceActions": true,
+    "preferredTerms": {
+      "terminal": "output panel",
+      "run button": "Run",
+      "implementation file": "the named .c file"
+    },
+    "notes": [
+      "Follow the teaching sequence: predict, trace values, count executions, form T(n), simplify, then classify.",
+      "Keep exact runtime analysis and asymptotic classification conceptually distinct even when they appear in the same topic.",
+      "Use manual animations for loop tables, triangular sums, moving bounds, recursive call chains, ratio limits, and proof thresholds.",
+      "Use C11-compatible code and deterministic fixed tests."
+    ]
+  },
+  "assessmentAndDelivery": {
+    "suggestedBeginnerRhythm": "One worked trace and one guided practice set per study session.",
+    "recommendedCourseDeliverables": [
+      "Foo1–Foo6 frequency tables",
+      "Limit-comparison worksheet",
+      "Three definition-based proofs",
+      "Runtime-analysis capstone"
+    ],
+    "toolingSuggestions": [
+      "C11 compiler through the shared Judge0 runner",
+      "Full IDE with explorer, editor, and output panel"
+    ],
+    "closingNote": "Learners finish able to justify runtime bounds instead of guessing from surface syntax."
+  },
+  "modules": [
+    {
+      "moduleNumber": 1,
+      "moduleSlug": "c-runtime-analysis-asymptotics-module-1-frequency-counting",
+      "order": 1,
+      "prefix": "c_runtime_analysis_asymptotics_module_1",
+      "role": "standard",
+      "title": "Frequency Counting in C",
+      "description": "Trace loops and recursion, derive exact execution counts, and simplify the resulting runtime functions.",
+      "purpose": "Make every iteration visible before introducing asymptotic notation.",
+      "learningObjectives": [
+        "Use the frequency-count method on C statements, loops, and recursive calls.",
+        "Derive exact counts for constant, rectangular, triangular, shifted-bound, sequential, and recursive patterns.",
+        "Separate an exact runtime function from its dominant growth term."
+      ],
+      "guidedExercises": [
+        "Five animated loop and recursion traces with focused C counting labs."
+      ],
+      "quizFocus": [
+        "frequency counts",
+        "loop bounds",
+        "arithmetic sums",
+        "nested versus sequential work",
+        "recursive call counts"
+      ],
+      "recommendedPacing": "Trace each example by hand before running the matching C counting lab.",
+      "typicalOutcome": "Exact formulas for the Foo1 through Foo6 patterns and a justified dominant term.",
+      "sections": [
+        {
+          "sectionNumber": "1",
+          "sectionSlug": "c-runtime-analysis-asymptotics-section-1-frequency-counting",
+          "title": "Frequency Counting in C",
+          "description": "Turn concrete traces into exact statement counts.",
+          "role": "lesson",
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true
+          },
+          "topics": [
+            {
+              "topicNumber": "1.1",
+              "topicId": "frequency-count-method",
+              "title": "The Frequency-Count Method",
+              "summary": "Trace first, derive the exact count, then classify.",
+              "minutes": 45,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c",
+                "runtime-analysis",
+                "asymptotics"
+              ],
+              "learningGoals": [
+                "Explain the reasoning pattern used in The Frequency-Count Method.",
+                "Trace the relevant values before simplifying the runtime.",
+                "State the exact or asymptotic conclusion with justification."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches"
+              }
+            },
+            {
+              "topicNumber": "1.2",
+              "topicId": "constant-and-rectangular-loops",
+              "title": "Fixed and Rectangular Nested Loops",
+              "summary": "Compare Foo1’s fixed strip with Foo2’s growing square.",
+              "minutes": 50,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c",
+                "runtime-analysis",
+                "asymptotics"
+              ],
+              "learningGoals": [
+                "Explain the reasoning pattern used in Fixed and Rectangular Nested Loops.",
+                "Trace the relevant values before simplifying the runtime.",
+                "State the exact or asymptotic conclusion with justification."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches"
+              }
+            },
+            {
+              "topicNumber": "1.3",
+              "topicId": "dependent-triangular-loops",
+              "title": "Dependent Inner Loops Form Triangles",
+              "summary": "Derive Foo3 by summing row lengths.",
+              "minutes": 45,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c",
+                "runtime-analysis",
+                "asymptotics"
+              ],
+              "learningGoals": [
+                "Explain the reasoning pattern used in Dependent Inner Loops Form Triangles.",
+                "Trace the relevant values before simplifying the runtime.",
+                "State the exact or asymptotic conclusion with justification."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches"
+              }
+            },
+            {
+              "topicNumber": "1.4",
+              "topicId": "moving-loop-bounds",
+              "title": "Moving Loop Bounds and Cubic Work",
+              "summary": "Analyze Foo4 and Foo4_5 with exact interval counts.",
+              "minutes": 55,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c",
+                "runtime-analysis",
+                "asymptotics"
+              ],
+              "learningGoals": [
+                "Explain the reasoning pattern used in Moving Loop Bounds and Cubic Work.",
+                "Trace the relevant values before simplifying the runtime.",
+                "State the exact or asymptotic conclusion with justification."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches"
+              }
+            },
+            {
+              "topicNumber": "1.5",
+              "topicId": "sequential-loops-and-linear-recursion",
+              "title": "Sequential Loops and Linear Recursion",
+              "summary": "Finish the runtime-analysis set with Foo5 and Foo6.",
+              "minutes": 55,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c",
+                "runtime-analysis",
+                "asymptotics"
+              ],
+              "learningGoals": [
+                "Explain the reasoning pattern used in Sequential Loops and Linear Recursion.",
+                "Trace the relevant values before simplifying the runtime.",
+                "State the exact or asymptotic conclusion with justification."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleNumber": 2,
+      "moduleSlug": "c-runtime-analysis-asymptotics-module-2-limit-method",
+      "order": 2,
+      "prefix": "c_runtime_analysis_asymptotics_module_2",
+      "role": "standard",
+      "title": "Asymptotics with Limits",
+      "description": "Compare functions with the ratio limit and order common growth classes.",
+      "purpose": "Move from exact formulas to formal asymptotic comparisons.",
+      "learningObjectives": [
+        "Interpret ratio limits of zero, a positive finite constant, and infinity.",
+        "Classify polynomial, logarithmic, and exponential function pairs.",
+        "Order standard growth functions from logarithmic through factorial."
+      ],
+      "guidedExercises": [
+        "Worked limit comparisons followed by a sampled-ratio C lab."
+      ],
+      "quizFocus": [
+        "Big-O",
+        "Big-Omega",
+        "Big-Theta",
+        "ratio limits",
+        "growth ordering"
+      ],
+      "recommendedPacing": "Simplify each symbolic ratio before using numerical samples as a sanity check.",
+      "typicalOutcome": "Correct O, Ω, and Θ classifications supported by limit calculations.",
+      "sections": [
+        {
+          "sectionNumber": "1",
+          "sectionSlug": "c-runtime-analysis-asymptotics-section-2-limit-method",
+          "title": "Asymptotics with Limits",
+          "description": "Use one limiting ratio to compare growth rates.",
+          "role": "lesson",
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true
+          },
+          "topics": [
+            {
+              "topicNumber": "2.1",
+              "topicId": "big-o-omega-theta-by-limits",
+              "title": "Big-O, Big-Ω, and Big-Θ by Limits",
+              "summary": "Use one ratio and interpret its limiting outcome.",
+              "minutes": 45,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c",
+                "runtime-analysis",
+                "asymptotics"
+              ],
+              "learningGoals": [
+                "Explain the reasoning pattern used in Big-O, Big-Ω, and Big-Θ by Limits.",
+                "Trace the relevant values before simplifying the runtime.",
+                "State the exact or asymptotic conclusion with justification."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches"
+              }
+            },
+            {
+              "topicNumber": "2.2",
+              "topicId": "polynomial-and-log-limit-comparisons",
+              "title": "Polynomial and Logarithmic Limit Comparisons",
+              "summary": "Work through the handout’s first eight ratio problems.",
+              "minutes": 55,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c",
+                "runtime-analysis",
+                "asymptotics"
+              ],
+              "learningGoals": [
+                "Explain the reasoning pattern used in Polynomial and Logarithmic Limit Comparisons.",
+                "Trace the relevant values before simplifying the runtime.",
+                "State the exact or asymptotic conclusion with justification."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches"
+              }
+            },
+            {
+              "topicNumber": "2.3",
+              "topicId": "exponential-limits-and-growth-order",
+              "title": "Exponential Comparisons and Growth Ordering",
+              "summary": "Finish the limit problems and order the major growth classes.",
+              "minutes": 55,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c",
+                "runtime-analysis",
+                "asymptotics"
+              ],
+              "learningGoals": [
+                "Explain the reasoning pattern used in Exponential Comparisons and Growth Ordering.",
+                "Trace the relevant values before simplifying the runtime.",
+                "State the exact or asymptotic conclusion with justification."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches"
+              }
+            },
+            {
+              "topicNumber": "2.4",
+              "topicId": "limit-method-review",
+              "title": "Limit-Method Review Lab",
+              "summary": "Use sampled ratios to support, not replace, symbolic conclusions.",
+              "minutes": 65,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c",
+                "runtime-analysis",
+                "asymptotics"
+              ],
+              "learningGoals": [
+                "Explain the reasoning pattern used in Limit-Method Review Lab.",
+                "Trace the relevant values before simplifying the runtime.",
+                "State the exact or asymptotic conclusion with justification."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleNumber": 3,
+      "moduleSlug": "c-runtime-analysis-asymptotics-module-3-inequality-proofs",
+      "order": 3,
+      "prefix": "c_runtime_analysis_asymptotics_module_3",
+      "role": "standard",
+      "title": "Proofs from the Definitions",
+      "description": "Choose constants and thresholds that prove Big-O, Big-Ω, and Big-Θ statements.",
+      "purpose": "Turn observed growth into definition-level proofs.",
+      "learningObjectives": [
+        "Write the required asymptotic inequality before choosing constants.",
+        "Find valid c, c1, c2, and n0 values.",
+        "Verify that a proposed threshold works for every larger input."
+      ],
+      "guidedExercises": [
+        "Three proof recipes, a bound-checking C lab, and a Θ-equivalence review."
+      ],
+      "quizFocus": [
+        "upper bounds",
+        "lower bounds",
+        "tight bounds",
+        "constant choices",
+        "threshold verification"
+      ],
+      "recommendedPacing": "State the definition, choose constants, solve the inequality, and verify the threshold.",
+      "typicalOutcome": "Formal Big-O, Big-Ω, and Big-Θ proofs with explicit constants.",
+      "sections": [
+        {
+          "sectionNumber": "1",
+          "sectionSlug": "c-runtime-analysis-asymptotics-section-3-inequality-proofs",
+          "title": "Proofs from the Definitions",
+          "description": "Prove asymptotic bounds with constants and thresholds.",
+          "role": "lesson",
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true
+          },
+          "topics": [
+            {
+              "topicNumber": "3.1",
+              "topicId": "inequality-definition-recipe-and-big-o",
+              "title": "Big-O Proofs from the Definition",
+              "summary": "Prove two upper bounds and repair an invalid threshold.",
+              "minutes": 55,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c",
+                "runtime-analysis",
+                "asymptotics"
+              ],
+              "learningGoals": [
+                "Explain the reasoning pattern used in Big-O Proofs from the Definition.",
+                "Trace the relevant values before simplifying the runtime.",
+                "State the exact or asymptotic conclusion with justification."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches"
+              }
+            },
+            {
+              "topicNumber": "3.2",
+              "topicId": "prove-big-omega-bounds",
+              "title": "A Big-Ω Inequality Proof",
+              "summary": "Prove the cubic eventually stays above the quadratic expression.",
+              "minutes": 45,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c",
+                "runtime-analysis",
+                "asymptotics"
+              ],
+              "learningGoals": [
+                "Explain the reasoning pattern used in A Big-Ω Inequality Proof.",
+                "Trace the relevant values before simplifying the runtime.",
+                "State the exact or asymptotic conclusion with justification."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches"
+              }
+            },
+            {
+              "topicNumber": "3.3",
+              "topicId": "prove-big-theta-bounds",
+              "title": "A Big-Θ Inequality Proof",
+              "summary": "Prove a cubic polynomial has tight cubic growth.",
+              "minutes": 60,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c",
+                "runtime-analysis",
+                "asymptotics"
+              ],
+              "learningGoals": [
+                "Explain the reasoning pattern used in A Big-Θ Inequality Proof.",
+                "Trace the relevant values before simplifying the runtime.",
+                "State the exact or asymptotic conclusion with justification."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches"
+              }
+            },
+            {
+              "topicNumber": "3.4",
+              "topicId": "theta-equivalence-review",
+              "title": "Θ Equivalence: True or False",
+              "summary": "Decide when two expressions describe the same growth class.",
+              "minutes": 50,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c",
+                "runtime-analysis",
+                "asymptotics"
+              ],
+              "learningGoals": [
+                "Explain the reasoning pattern used in Θ Equivalence: True or False.",
+                "Trace the relevant values before simplifying the runtime.",
+                "State the exact or asymptotic conclusion with justification."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleNumber": 4,
+      "moduleSlug": "c-runtime-analysis-asymptotics-module-4-capstone",
+      "order": 4,
+      "prefix": "c_runtime_analysis_asymptotics_module_4",
+      "role": "capstone",
+      "title": "Runtime Analysis Capstone",
+      "description": "Apply exact counting, Θ classification, and a formal bound to unfamiliar C fragments.",
+      "purpose": "Combine the complete course method in one cumulative workspace.",
+      "learningObjectives": [
+        "Analyze unfamiliar C fragments without relying on memorized loop labels.",
+        "Connect exact formulas to tight Θ classifications.",
+        "Verify a proposed Θ bound with explicit constants."
+      ],
+      "guidedExercises": [
+        "One cumulative multi-step C analysis project."
+      ],
+      "quizFocus": [
+        "exact counts",
+        "dominant terms",
+        "tight bounds",
+        "proof verification"
+      ],
+      "recommendedPacing": "Complete the trace and exact count before writing any asymptotic answer.",
+      "typicalOutcome": "A complete analysis from source code to exact function and formal asymptotic bound.",
+      "sections": [
+        {
+          "sectionNumber": "1",
+          "sectionSlug": "c-runtime-analysis-asymptotics-section-4-capstone",
+          "title": "Runtime Analysis Capstone",
+          "description": "Analyze new C fragments from exact count to formal bound.",
+          "role": "capstone",
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true
+          },
+          "topics": [
+            {
+              "topicNumber": "4.1",
+              "topicId": "runtime-analysis-capstone",
+              "title": "Runtime Analysis Capstone",
+              "summary": "Combine exact counting, Θ classification, and a formal bound.",
+              "minutes": 120,
+              "difficulty": "intermediate",
+              "technical": true,
+              "tags": [
+                "c",
+                "runtime-analysis",
+                "asymptotics"
+              ],
+              "learningGoals": [
+                "Explain the reasoning pattern used in Runtime Analysis Capstone.",
+                "Trace the relevant values before simplifying the runtime.",
+                "State the exact or asymptotic conclusion with justification."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches"
+              },
+              "projectBrief": {
+                "scenario": "A teaching team needs a dependable runtime-analysis report for three unfamiliar C functions before adding them to an algorithms lesson. The report must show exact counts, tight growth classes, and a checked two-sided bound rather than guesses based only on the number of loops.",
+                "role": "Junior C algorithm analyst preparing a reviewable complexity handoff",
+                "workspace": "Browser multi-file C workspace with main.c, capstone.c, capstone.h, proof.c, and proof.h as required by the cumulative steps",
+                "deliverable": "One three-step cumulative runtime-analysis project that derives exact operation counts for three functions, records their tight Theta classifications, and verifies explicit constants for a quadratic Theta proof.",
+                "stepCountTarget": 3,
+                "flow": "progressive",
+                "requirements": [
+                  "Keep every step runnable as a complete C11 workspace.",
+                  "Use tracing and frequency counting to derive exact formulas before stating asymptotic classes.",
+                  "Preserve each earlier result when moving to the next cumulative step.",
+                  "Classify each exact formula with a justified tight Theta bound.",
+                  "Verify the final two-sided inequality with explicit c1, c2, and n0 values.",
+                  "Use program output only as a deterministic check; the mathematical derivation remains the justification."
+                ],
+                "stepLadder": [
+                  {
+                    "step": 1,
+                    "title": "Derive the Exact Counts",
+                    "requirement": "Complete the counting functions so the workspace reports the exact Bar1, Bar2, and Bar3 operation totals for the authored input."
+                  },
+                  {
+                    "step": 2,
+                    "title": "Classify the Dominant Terms",
+                    "requirement": "Preserve the exact-count work and record the tight Theta class for each of the three runtime functions."
+                  },
+                  {
+                    "step": 3,
+                    "title": "Verify the Theta Proof",
+                    "requirement": "Preserve the earlier analysis and verify that 6n^2 <= T(n) <= 11n^2 for every n >= 1 using the authored proof workspace."
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

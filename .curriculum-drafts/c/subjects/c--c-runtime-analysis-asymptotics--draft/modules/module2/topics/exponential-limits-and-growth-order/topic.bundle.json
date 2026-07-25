@@ -1,0 +1,338 @@
+{
+  "topicId": "exponential-limits-and-growth-order",
+  "subjectSlug": "c--c-runtime-analysis-asymptotics--draft",
+  "moduleSlug": "c--c-runtime-analysis-asymptotics--draft-module-2-limit-method",
+  "sectionSlug": "c--c-runtime-analysis-asymptotics--draft-limit-method",
+  "prefix": "cra2",
+  "minutes": 55,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "c",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "preset": "runner",
+    "runnerBackend": "judge0",
+    "layoutMode": "default",
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": false
+    }
+  },
+  "topic": {
+    "labelKey": "topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-2-limit-method.exponential-limits-and-growth-order.label",
+    "summaryKey": "topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-2-limit-method.exponential-limits-and-growth-order.summary"
+  },
+  "cards": [
+    {
+      "id": "exponential-and-ordering",
+      "kind": "sketch",
+      "titleKey": "topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-2-limit-method.exponential-limits-and-growth-order.cards.exponential-and-ordering.title",
+      "sketchId": "exponential-and-ordering",
+      "height": 620
+    },
+    {
+      "id": "growth-order-animation",
+      "kind": "sketch",
+      "titleKey": "topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-2-limit-method.exponential-limits-and-growth-order.cards.growth-order-animation.title",
+      "sketchId": "growth-order-animation",
+      "height": 820
+    },
+    {
+      "id": "check-understanding",
+      "kind": "quiz",
+      "titleKey": "topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-2-limit-method.exponential-limits-and-growth-order.cards.check-understanding.title",
+      "quiz": {
+        "difficulty": "medium",
+        "n": 4,
+        "min": 4,
+        "max": 4,
+        "selectionMode": "fixed",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "exponential-and-ordering",
+      "archetype": "paragraph",
+      "titleKey": "sketches.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-2-limit-method.exponential-limits-and-growth-order.exponential-and-ordering.title",
+      "bodyKey": "sketches.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-2-limit-method.exponential-limits-and-growth-order.exponential-and-ordering.bodyMarkdown"
+    },
+    {
+      "id": "growth-order-animation",
+      "archetype": "algorithm_animation",
+      "titleKey": "sketches.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-2-limit-method.exponential-limits-and-growth-order.growth-order-animation.title",
+      "contextKey": "sketches.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-2-limit-method.exponential-limits-and-growth-order.growth-order-animation.context",
+      "intervalMs": 1300,
+      "autoPlay": false,
+      "showControls": true,
+      "showStepCounter": true,
+      "canvasHeight": 300,
+      "steps": [
+        {
+          "id": "growth-order-animation-1",
+          "titleKey": "sketches.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-2-limit-method.exponential-limits-and-growth-order.growth-order-animation.steps.0.title",
+          "nodes": [
+            {
+              "id": "poly",
+              "label": "10n²",
+              "x": 22,
+              "y": 70,
+              "shape": "pill",
+              "detail": "polynomial",
+              "tone": "warn",
+              "width": 20
+            },
+            {
+              "id": "exp",
+              "label": "2ⁿ",
+              "x": 22,
+              "y": 25,
+              "shape": "pill",
+              "detail": "exponential",
+              "tone": "good",
+              "active": true,
+              "width": 18
+            },
+            {
+              "id": "ratio",
+              "label": "2ⁿ/(10n²) → ∞",
+              "x": 70,
+              "y": 48,
+              "shape": "pill",
+              "tone": "info",
+              "active": true,
+              "width": 30
+            }
+          ],
+          "bodyKey": "sketches.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-2-limit-method.exponential-limits-and-growth-order.growth-order-animation.steps.0.body",
+          "edges": [
+            {
+              "from": "poly",
+              "to": "ratio"
+            },
+            {
+              "from": "exp",
+              "to": "ratio"
+            }
+          ]
+        },
+        {
+          "id": "growth-order-animation-2",
+          "titleKey": "sketches.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-2-limit-method.exponential-limits-and-growth-order.growth-order-animation.steps.1.title",
+          "nodes": [
+            {
+              "id": "two",
+              "label": "2ⁿ",
+              "x": 22,
+              "y": 65,
+              "shape": "pill",
+              "tone": "warn"
+            },
+            {
+              "id": "three",
+              "label": "3ⁿ",
+              "x": 22,
+              "y": 25,
+              "shape": "pill",
+              "tone": "good",
+              "active": true
+            },
+            {
+              "id": "ratio",
+              "label": "ratio → 0",
+              "x": 70,
+              "y": 48,
+              "shape": "pill",
+              "tone": "info",
+              "active": true,
+              "width": 22
+            }
+          ],
+          "bodyKey": "sketches.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-2-limit-method.exponential-limits-and-growth-order.growth-order-animation.steps.1.body",
+          "formula": "$(2/3)^n\\to0$",
+          "edges": [
+            {
+              "from": "two",
+              "to": "ratio"
+            },
+            {
+              "from": "three",
+              "to": "ratio"
+            }
+          ]
+        },
+        {
+          "id": "growth-order-animation-3",
+          "titleKey": "sketches.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-2-limit-method.exponential-limits-and-growth-order.growth-order-animation.steps.2.title",
+          "nodes": [
+            {
+              "id": "log",
+              "label": "log n",
+              "x": 7,
+              "y": 50,
+              "shape": "pill",
+              "width": 12
+            },
+            {
+              "id": "sqrt",
+              "label": "√n",
+              "x": 21,
+              "y": 50,
+              "shape": "pill",
+              "width": 10
+            },
+            {
+              "id": "n",
+              "label": "n",
+              "x": 34,
+              "y": 50,
+              "shape": "pill",
+              "width": 8
+            },
+            {
+              "id": "nlog",
+              "label": "n log n",
+              "x": 49,
+              "y": 50,
+              "shape": "pill",
+              "width": 14
+            },
+            {
+              "id": "n2",
+              "label": "n²",
+              "x": 64,
+              "y": 50,
+              "shape": "pill",
+              "width": 9
+            },
+            {
+              "id": "exp",
+              "label": "2ⁿ",
+              "x": 78,
+              "y": 50,
+              "shape": "pill",
+              "tone": "good",
+              "width": 9
+            },
+            {
+              "id": "fact",
+              "label": "n!",
+              "x": 92,
+              "y": 50,
+              "shape": "pill",
+              "tone": "info",
+              "active": true,
+              "width": 9
+            }
+          ],
+          "bodyKey": "sketches.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-2-limit-method.exponential-limits-and-growth-order.growth-order-animation.steps.2.body",
+          "edges": [
+            {
+              "from": "log",
+              "to": "sqrt"
+            },
+            {
+              "from": "sqrt",
+              "to": "n"
+            },
+            {
+              "from": "n",
+              "to": "nlog"
+            },
+            {
+              "from": "nlog",
+              "to": "n2"
+            },
+            {
+              "from": "n2",
+              "to": "exp"
+            },
+            {
+              "from": "exp",
+              "to": "fact"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "exercises": [
+    {
+      "id": "exp-poly",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-2-limit-method.exponential-limits-and-growth-order.quiz.exp-poly",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "c"
+      }
+    },
+    {
+      "id": "two-vs-four",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-2-limit-method.exponential-limits-and-growth-order.quiz.two-vs-four",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "correct-order",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-2-limit-method.exponential-limits-and-growth-order.quiz.correct-order",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "factorial-reason",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-2-limit-method.exponential-limits-and-growth-order.quiz.factorial-reason",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    }
+  ]
+}

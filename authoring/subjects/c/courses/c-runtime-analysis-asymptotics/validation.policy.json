@@ -1,0 +1,86 @@
+{
+  "policyId": "c-runtime-analysis-asymptotics-validation",
+  "allowedConcepts": [
+    "frequency count",
+    "exact runtime function",
+    "loop tracing",
+    "nested loops",
+    "dependent loop bounds",
+    "arithmetic series",
+    "recursion trace",
+    "Big O",
+    "Big Omega",
+    "Big Theta",
+    "limit method",
+    "growth ordering",
+    "polynomial growth",
+    "logarithmic growth",
+    "exponential growth",
+    "factorial growth",
+    "inequality proof",
+    "constant factor",
+    "dominant term"
+  ],
+  "disallowedConcepts": [
+    "amortized analysis",
+    "Master theorem",
+    "Akra-Bazzi method",
+    "probabilistic analysis",
+    "parallel complexity",
+    "NP-completeness"
+  ],
+  "validationRequirements": {
+    "profileId": "c",
+    "language": "c",
+    "recipeType": "fixed_tests",
+    "moduleCount": 4,
+    "technicalTopicCount": 14,
+    "manualAnimationPerTopic": true,
+    "completeSolutionFiles": true,
+    "c11GoldenExecution": true
+  },
+  "globalRules": [
+    "Teach the trace and exact count before the asymptotic label.",
+    "Every code_input supplies complete starterFiles and solutionFiles and uses deterministic tests.",
+    "Limit-method topics must state which ratio is being evaluated and how the limit determines the relation.",
+    "Definition-proof topics must name explicit constants and a threshold.",
+    "Do not grade free-form proof wording by exact string matching."
+  ],
+  "moduleRules": {
+    "1": {
+      "focus": [
+        "frequency counts",
+        "nested loops",
+        "dependent bounds",
+        "sequential loops",
+        "linear recursion"
+      ],
+      "requiredTopicCount": 5
+    },
+    "2": {
+      "focus": [
+        "ratio limits",
+        "polynomials",
+        "logarithms",
+        "exponentials",
+        "growth ordering"
+      ],
+      "requiredTopicCount": 4
+    },
+    "3": {
+      "focus": [
+        "Big-O proof",
+        "Big-Omega proof",
+        "Big-Theta proof",
+        "Theta equivalence"
+      ],
+      "requiredTopicCount": 4
+    },
+    "4": {
+      "focus": [
+        "cumulative runtime analysis capstone"
+      ],
+      "requiredTopicCount": 1
+    }
+  }
+}

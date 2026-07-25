@@ -1,0 +1,119 @@
+{
+  "subjects": {
+    "c--c-runtime-analysis-asymptotics--draft": {
+      "title": "Runtime Analysis and Asymptotics in C",
+      "description": "A private, animation-supported C course that turns loop traces and recursive call chains into exact execution counts, limit comparisons, growth ordering, and formal O, Ω, and Θ proofs.",
+      "moreComingSoon": "This course is complete: frequency counting, limit comparisons, inequality proofs, and the cumulative C capstone are all included."
+    }
+  },
+  "modules": {
+    "c--c-runtime-analysis-asymptotics--draft": {
+      "c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting": {
+        "title": "Frequency Counting in C",
+        "description": "Trace loops and recursion, derive exact execution counts, and simplify them to tight asymptotic bounds.",
+        "outcomes": [
+          "Use the frequency-count method on C loops and recursive calls.",
+          "Distinguish constant, rectangular, triangular, cubic, sequential, and recursive patterns.",
+          "Report both exact statement counts and tight Θ bounds."
+        ],
+        "why": [
+          "The recitation begins with concrete C fragments, so the course starts by making every iteration visible.",
+          "Animations turn each output shape into the sum or product that determines the runtime."
+        ]
+      },
+      "c--c-runtime-analysis-asymptotics--draft-module-2-limit-method": {
+        "title": "Asymptotics with Limits",
+        "description": "Compare functions by evaluating the limiting ratio f(n)/g(n), then order common growth classes.",
+        "outcomes": [
+          "Interpret ratio limits of 0, a positive constant, and infinity.",
+          "Classify polynomial, logarithmic, and exponential pairs.",
+          "Order standard growth functions from logarithmic through factorial."
+        ],
+        "why": [
+          "Limit comparisons provide a repeatable bridge from algebra to O, Ω, and Θ.",
+          "The module preserves the handout’s worked pairs while making the standard ratio rule explicit."
+        ]
+      },
+      "c--c-runtime-analysis-asymptotics--draft-module-3-inequality-proofs": {
+        "title": "Proofs from the Definitions",
+        "description": "Choose constants and thresholds that prove Big-O, Big-Ω, and Big-Θ statements.",
+        "outcomes": [
+          "Write the required inequality before choosing constants.",
+          "Find valid c, c1, c2, and n0 values.",
+          "Explain why finite prefixes do not affect asymptotic classes."
+        ],
+        "why": [
+          "The handout ends with formal proofs, so learners move from observed growth to definition-level justification.",
+          "Each proof follows the same visible recipe: choose constants, solve the inequality, test the threshold, conclude."
+        ]
+      },
+      "c--c-runtime-analysis-asymptotics--draft-module-4-capstone": {
+        "title": "Runtime Analysis Capstone",
+        "description": "Apply tracing, exact counting, asymptotic classification, and inequality bounds in one cumulative C project.",
+        "outcomes": [
+          "Analyze unfamiliar C fragments without relying on memorized labels.",
+          "Connect exact formulas to Θ classifications.",
+          "Verify a proposed Θ bound with explicit constants."
+        ],
+        "why": [
+          "The capstone combines the entire course method in a compact multi-step workspace.",
+          "Learners finish with reusable analysis functions rather than isolated multiple-choice answers."
+        ]
+      }
+    }
+  },
+  "sections": {
+    "c--c-runtime-analysis-asymptotics--draft": {
+      "c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting": {
+        "c--c-runtime-analysis-asymptotics--draft-frequency-counting": {
+          "title": "Frequency Counting in C",
+          "description": "Trace loops and recursion, derive exact execution counts, and simplify them to tight asymptotic bounds.",
+          "weeks": null,
+          "bullets": [
+            "Frequency-count method and exact formulas",
+            "Foo1 and Foo2: fixed strip versus rectangle",
+            "Foo3: dependent triangular sums",
+            "Foo4 and Foo4_5: cubic moving bounds",
+            "Foo5 and Foo6: sequential and recursive linear work"
+          ]
+        }
+      },
+      "c--c-runtime-analysis-asymptotics--draft-module-2-limit-method": {
+        "c--c-runtime-analysis-asymptotics--draft-limit-method": {
+          "title": "Asymptotics with Limits",
+          "description": "Compare functions by evaluating the limiting ratio f(n)/g(n), then order common growth classes.",
+          "weeks": null,
+          "bullets": [
+            "The standard ratio-limit decision rule",
+            "Constants, polynomials, and logarithms",
+            "Exponentials, factorials, and growth ordering",
+            "Numerical ratio sanity checks in C"
+          ]
+        }
+      },
+      "c--c-runtime-analysis-asymptotics--draft-module-3-inequality-proofs": {
+        "c--c-runtime-analysis-asymptotics--draft-inequality-proofs": {
+          "title": "Proofs from the Definitions",
+          "description": "Choose constants and thresholds that prove Big-O, Big-Ω, and Big-Θ statements.",
+          "weeks": null,
+          "bullets": [
+            "Big-O definitions and two upper-bound proofs",
+            "A chained Big-Ω proof",
+            "A two-sided polynomial Θ proof",
+            "Five Θ-equivalence true/false decisions"
+          ]
+        }
+      },
+      "c--c-runtime-analysis-asymptotics--draft-module-4-capstone": {
+        "c--c-runtime-analysis-asymptotics--draft-capstone": {
+          "title": "Runtime Analysis Capstone",
+          "description": "Apply tracing, exact counting, asymptotic classification, and inequality bounds in one cumulative C project.",
+          "weeks": null,
+          "bullets": [
+            "Cumulative exact-count, classification, and proof project"
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,443 @@
+{
+  "topicId": "limit-method-review",
+  "subjectSlug": "c-runtime-analysis-asymptotics",
+  "moduleSlug": "c-runtime-analysis-asymptotics-module-2-limit-method",
+  "sectionSlug": "c-runtime-analysis-asymptotics-limit-method",
+  "prefix": "cra2",
+  "minutes": 65,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "c",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "preset": "runner",
+    "runnerBackend": "judge0",
+    "layoutMode": "default",
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": false
+    }
+  },
+  "topic": {
+    "labelKey": "topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.limit-method-review.label",
+    "summaryKey": "topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.limit-method-review.summary"
+  },
+  "cards": [
+    {
+      "id": "limit-review",
+      "kind": "sketch",
+      "titleKey": "topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.limit-method-review.cards.limit-review.title",
+      "sketchId": "limit-review",
+      "height": 620
+    },
+    {
+      "id": "limit-review-animation",
+      "kind": "sketch",
+      "titleKey": "topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.limit-method-review.cards.limit-review-animation.title",
+      "sketchId": "limit-review-animation",
+      "height": 820
+    },
+    {
+      "id": "guided-lab",
+      "kind": "project",
+      "titleKey": "topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.limit-method-review.cards.guided-lab.title",
+      "project": {
+        "difficulty": "medium",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "displayKind": "project",
+        "uiKind": "project",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "sample_ratios",
+            "titleKey": "topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.limit-method-review.projectSteps.sample_ratios.title",
+            "exerciseKey": "sample-ratios",
+            "difficulty": "medium",
+            "preferKind": "code_input",
+            "seedPolicy": "step",
+            "maxAttempts": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "check-understanding",
+      "kind": "quiz",
+      "titleKey": "topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.limit-method-review.cards.check-understanding.title",
+      "quiz": {
+        "difficulty": "medium",
+        "n": 2,
+        "min": 2,
+        "max": 2,
+        "selectionMode": "fixed",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "limit-review",
+      "archetype": "paragraph",
+      "titleKey": "sketches.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.limit-method-review.limit-review.title",
+      "bodyKey": "sketches.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.limit-method-review.limit-review.bodyMarkdown"
+    },
+    {
+      "id": "limit-review-animation",
+      "archetype": "algorithm_animation",
+      "titleKey": "sketches.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.limit-method-review.limit-review-animation.title",
+      "contextKey": "sketches.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.limit-method-review.limit-review-animation.context",
+      "intervalMs": 1300,
+      "autoPlay": false,
+      "showControls": true,
+      "showStepCounter": true,
+      "canvasHeight": 290,
+      "steps": [
+        {
+          "id": "limit-review-animation-1",
+          "titleKey": "sketches.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.limit-method-review.limit-review-animation.steps.0.title",
+          "nodes": [
+            {
+              "id": "f",
+              "label": "f(n)",
+              "x": 22,
+              "y": 30,
+              "shape": "pill",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "id": "bar",
+              "label": "÷",
+              "x": 50,
+              "y": 50,
+              "shape": "circle",
+              "width": 9
+            },
+            {
+              "id": "g",
+              "label": "g(n)",
+              "x": 78,
+              "y": 70,
+              "shape": "pill",
+              "tone": "good",
+              "active": true
+            },
+            {
+              "id": "ratio",
+              "label": "f/g",
+              "x": 50,
+              "y": 82,
+              "shape": "pill",
+              "tone": "info",
+              "width": 14
+            }
+          ],
+          "bodyKey": "sketches.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.limit-method-review.limit-review-animation.steps.0.body",
+          "edges": [
+            {
+              "from": "f",
+              "to": "bar"
+            },
+            {
+              "from": "g",
+              "to": "bar"
+            },
+            {
+              "from": "bar",
+              "to": "ratio"
+            }
+          ]
+        },
+        {
+          "id": "limit-review-animation-2",
+          "titleKey": "sketches.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.limit-method-review.limit-review-animation.steps.1.title",
+          "nodes": [
+            {
+              "id": "raw",
+              "label": "raw ratio",
+              "x": 18,
+              "y": 50,
+              "shape": "pill",
+              "tone": "warn",
+              "width": 20
+            },
+            {
+              "id": "cancel",
+              "label": "simplify",
+              "x": 50,
+              "y": 50,
+              "shape": "pill",
+              "tone": "info",
+              "active": true,
+              "width": 20
+            },
+            {
+              "id": "clean",
+              "label": "limit-ready",
+              "x": 82,
+              "y": 50,
+              "shape": "pill",
+              "tone": "good",
+              "width": 20
+            }
+          ],
+          "bodyKey": "sketches.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.limit-method-review.limit-review-animation.steps.1.body",
+          "edges": [
+            {
+              "from": "raw",
+              "to": "cancel"
+            },
+            {
+              "from": "cancel",
+              "to": "clean"
+            }
+          ]
+        },
+        {
+          "id": "limit-review-animation-3",
+          "titleKey": "sketches.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.limit-method-review.limit-review-animation.steps.2.title",
+          "nodes": [
+            {
+              "id": "zero",
+              "label": "0 → O",
+              "x": 18,
+              "y": 50,
+              "shape": "pill",
+              "tone": "warn",
+              "width": 18
+            },
+            {
+              "id": "const",
+              "label": "L → Θ",
+              "x": 50,
+              "y": 50,
+              "shape": "pill",
+              "tone": "good",
+              "active": true,
+              "width": 18
+            },
+            {
+              "id": "inf",
+              "label": "∞ → Ω",
+              "x": 82,
+              "y": 50,
+              "shape": "pill",
+              "tone": "info",
+              "width": 18
+            }
+          ],
+          "bodyKey": "sketches.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.limit-method-review.limit-review-animation.steps.2.body"
+        }
+      ]
+    }
+  ],
+  "exercises": [
+    {
+      "id": "sample-ratios",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.limit-method-review.finalLab.steps.sample_ratios",
+      "language": "c",
+      "starterCode": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.limit-method-review.finalLab.steps.sample_ratios.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.c",
+          "content": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.limit-method-review.finalLab.steps.sample_ratios.starterFiles.main_c.content",
+          "language": "c",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "ratios.h",
+          "content": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.limit-method-review.finalLab.steps.sample_ratios.starterFiles.ratios_h.content",
+          "language": "c",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "ratios.c",
+          "content": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.limit-method-review.finalLab.steps.sample_ratios.starterFiles.ratios_c.content",
+          "language": "c",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.c",
+          "content": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.limit-method-review.finalLab.steps.sample_ratios.solutionFiles.main_c.content",
+          "language": "c",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "ratios.h",
+          "content": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.limit-method-review.finalLab.steps.sample_ratios.solutionFiles.ratios_h.content",
+          "language": "c",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "ratios.c",
+          "content": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.limit-method-review.finalLab.steps.sample_ratios.solutionFiles.ratios_c.content",
+          "language": "c",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "c",
+        "entryFilePath": "main.c",
+        "starterCode": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.limit-method-review.finalLab.steps.sample_ratios.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.c",
+            "content": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.limit-method-review.finalLab.steps.sample_ratios.starterFiles.main_c.content",
+            "language": "c",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "ratios.h",
+            "content": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.limit-method-review.finalLab.steps.sample_ratios.starterFiles.ratios_h.content",
+            "language": "c",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "ratios.c",
+            "content": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.limit-method-review.finalLab.steps.sample_ratios.starterFiles.ratios_c.content",
+            "language": "c",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.c",
+            "content": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.limit-method-review.finalLab.steps.sample_ratios.solutionFiles.main_c.content",
+            "language": "c",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "ratios.h",
+            "content": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.limit-method-review.finalLab.steps.sample_ratios.solutionFiles.ratios_h.content",
+            "language": "c",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "ratios.c",
+            "content": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.limit-method-review.finalLab.steps.sample_ratios.solutionFiles.ratios_c.content",
+            "language": "c",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "poly_ratio_n1000=1.503500\ndegree_ratio_n1000=0.002000\nexp_ratio_n20=0.000301\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.limit-method-review.finalLab.steps.sample_ratios.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.c",
+            "content": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.limit-method-review.finalLab.steps.sample_ratios.solutionFiles.main_c.content",
+            "language": "c",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "ratios.h",
+            "content": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.limit-method-review.finalLab.steps.sample_ratios.solutionFiles.ratios_h.content",
+            "language": "c",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "ratios.c",
+            "content": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.limit-method-review.finalLab.steps.sample_ratios.solutionFiles.ratios_c.content",
+            "language": "c",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "path": "ratios.c",
+            "pattern": "3.0 * n * n + 7.0 * n",
+            "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.limit-method-review.finalLab.steps.sample_ratios.checks.0.message",
+            "normalizeWhitespace": false
+          },
+          {
+            "type": "source_contains",
+            "path": "ratios.c",
+            "pattern": "n * n * n * n * n",
+            "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.limit-method-review.finalLab.steps.sample_ratios.checks.1.message",
+            "normalizeWhitespace": false
+          },
+          {
+            "type": "source_contains",
+            "path": "ratios.c",
+            "pattern": "ratio *= 2.0 / 3.0",
+            "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.limit-method-review.finalLab.steps.sample_ratios.checks.2.message",
+            "normalizeWhitespace": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "sampling-proof",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.limit-method-review.quiz.sampling-proof",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "ratio-direction",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.limit-method-review.quiz.ratio-direction",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    }
+  ]
+}

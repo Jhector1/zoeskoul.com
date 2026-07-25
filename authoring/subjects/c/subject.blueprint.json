@@ -5,12 +5,17 @@
   "title": "C Programming",
   "summary": "Implement and analyze recursive algorithms, hashing, trees, stacks, priority queues, and pointer-based heaps in multi-file C workspaces.",
   "courseOrder": [
-    "c-data-structures"
+    "c-data-structures",
+    "c-runtime-analysis-asymptotics"
   ],
   "milestones": [
     {
       "courseSlug": "c-data-structures",
       "outcome": "Implement core data structures in C, explain their invariants, and justify tight runtime bounds."
+    },
+    {
+      "courseSlug": "c-runtime-analysis-asymptotics",
+      "outcome": "Trace C code, derive exact runtime functions, compare growth rates, and prove asymptotic bounds."
     }
   ]
 }

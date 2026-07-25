@@ -5,7 +5,8 @@
   "accessPolicy": "paid",
   "visibility": "private",
   "courseOrder": [
-    "c-data-structures"
+    "c-data-structures",
+    "c-runtime-analysis-asymptotics"
   ],
   "publishTarget": {
     "liveSubjectSlug": "c-data-structures",
@@ -26,6 +27,12 @@
       "title": "C Data Structures and Algorithm Analysis",
       "order": 1,
       "path": "courses/c-data-structures/course.spec.json"
+    },
+    {
+      "courseSlug": "c-runtime-analysis-asymptotics",
+      "title": "Runtime Analysis and Asymptotics in C",
+      "order": 2,
+      "path": "courses/c-runtime-analysis-asymptotics/course.spec.json"
     }
   ]
 }

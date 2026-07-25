@@ -1,0 +1,145 @@
+{
+  "topics": {
+    "c--c-runtime-analysis-asymptotics--draft": {
+      "c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting": {
+        "dependent-triangular-loops": {
+          "label": "Dependent Inner Loops Form Triangles",
+          "summary": "Derive Foo3 by summing row lengths.",
+          "cards": {
+            "foo3-walkthrough": {
+              "title": "Foo3: Sum a Dependent Inner Loop"
+            },
+            "triangle-animation": {
+              "title": "Build the Triangular Count One Row at a Time"
+            },
+            "guided-lab": {
+              "title": "Guided C Lab"
+            },
+            "check-understanding": {
+              "title": "Check Your Understanding"
+            }
+          },
+          "projectSteps": {
+            "count_foo3": {
+              "title": "Count Foo3’s Triangle"
+            }
+          },
+          "finalLab": {
+            "steps": {
+              "count_foo3": {
+                "title": "Count Foo3’s Triangle",
+                "prompt": "Complete `foo3_tuple_prints` by accumulating each row length. Then include the `n` newline calls in `foo3_all_printf_calls`.",
+                "hint": "The inner loop runs i times for the current row.",
+                "help": {
+                  "concept": "A dependent inner loop becomes a sum over i. The exact tuple count is n(n−1)/2.",
+                  "hint_1": "Work from the traced values to an exact count before simplifying.",
+                  "hint_2": "Run the supplied test harness after each focused change."
+                },
+                "starterCode": "#include <stdio.h>\n#include \"analysis.h\"\nint main(void) {\n    const long long n = 7;\n    printf(\"foo3 tuples=%lld all=%lld theta=n^2\\n\", foo3_tuple_prints(n), foo3_all_printf_calls(n));\n    return 0;\n}\n",
+                "solutionCode": "#include <stdio.h>\n#include \"analysis.h\"\nint main(void) {\n    const long long n = 7;\n    printf(\"foo3 tuples=%lld all=%lld theta=n^2\\n\", foo3_tuple_prints(n), foo3_all_printf_calls(n));\n    return 0;\n}\n",
+                "starterFiles": {
+                  "main_c": {
+                    "content": "#include <stdio.h>\n#include \"analysis.h\"\nint main(void) {\n    const long long n = 7;\n    printf(\"foo3 tuples=%lld all=%lld theta=n^2\\n\", foo3_tuple_prints(n), foo3_all_printf_calls(n));\n    return 0;\n}\n"
+                  },
+                  "analysis_h": {
+                    "content": "#ifndef ANALYSIS_H\n#define ANALYSIS_H\nlong long foo3_tuple_prints(long long n);\nlong long foo3_all_printf_calls(long long n);\n#endif\n"
+                  },
+                  "analysis_c": {
+                    "content": "#include \"analysis.h\"\nlong long foo3_tuple_prints(long long n) {\n    /* TODO: add row lengths 0 through n - 1. */\n    return 0;\n}\nlong long foo3_all_printf_calls(long long n) {\n    /* TODO: include one newline for every outer iteration. */\n    return 0;\n}\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_c": {
+                    "content": "#include <stdio.h>\n#include \"analysis.h\"\nint main(void) {\n    const long long n = 7;\n    printf(\"foo3 tuples=%lld all=%lld theta=n^2\\n\", foo3_tuple_prints(n), foo3_all_printf_calls(n));\n    return 0;\n}\n"
+                  },
+                  "analysis_h": {
+                    "content": "#ifndef ANALYSIS_H\n#define ANALYSIS_H\nlong long foo3_tuple_prints(long long n);\nlong long foo3_all_printf_calls(long long n);\n#endif\n"
+                  },
+                  "analysis_c": {
+                    "content": "#include \"analysis.h\"\nlong long foo3_tuple_prints(long long n) {\n    long long total = 0;\n    for (long long i = 0; i < n; i++) {\n        total += i;\n    }\n    return total;\n}\nlong long foo3_all_printf_calls(long long n) {\n    return foo3_tuple_prints(n) + n;\n}\n"
+                  }
+                },
+                "checks": [
+                  {
+                    "message": "Add the current row length i to the running count."
+                  },
+                  {
+                    "message": "Add one newline for each outer-loop iteration."
+                  }
+                ]
+              }
+            }
+          },
+          "quiz": {
+            "triangle-exact": {
+              "title": "Exact triangular count",
+              "prompt": "What is the exact number of tuple prints in Foo3?",
+              "hint": "Write the row lengths from i=0 through i=n−1.",
+              "help": {
+                "concept": "The sum 0+1+...+(n−1) equals n(n−1)/2.",
+                "hint_1": "Trace a small input or simplify the exact expression before choosing.",
+                "hint_2": "Check whether the work adds, multiplies, or forms a changing sum."
+              },
+              "options": {
+                "a": "n²",
+                "b": "n(n−1)/2",
+                "c": "n(n+1)",
+                "d": "n−1"
+              }
+            },
+            "triangle-theta": {
+              "title": "Tight bound",
+              "prompt": "Why is n(n−1)/2 still Θ(n²)?",
+              "hint": "Expand the expression.",
+              "help": {
+                "concept": "n(n−1)/2 = (n²−n)/2 has dominant term n²/2.",
+                "hint_1": "Trace a small input or simplify the exact expression before choosing.",
+                "hint_2": "Check whether the work adds, multiplies, or forms a changing sum."
+              },
+              "options": {
+                "a": "The 1/2 factor changes only the constant",
+                "b": "Every triangle is a square",
+                "c": "The −n term becomes exponential",
+                "d": "Θ ignores n"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "c--c-runtime-analysis-asymptotics--draft": {
+      "c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting": {
+        "dependent-triangular-loops": {
+          "foo3-walkthrough": {
+            "title": "Foo3: Sum a Dependent Inner Loop",
+            "bodyMarkdown": "```c\nvoid Foo3(int n) {\n    for (int i = 0; i < n; i++) {\n        for (int j = 0; j < i; j++) {\n            printf(\"(%d,%d) \", i, j);\n        }\n        printf(\"\\n\");\n    }\n}\n```\n\n### Step 1 — Notice the dependency\n\nThe inner stopping condition is `j < i`, so the inner length changes as `i` changes.\n\n### Step 2 — Trace rows\n\n- `i = 0`: `0` tuple prints\n- `i = 1`: `1` tuple print\n- `i = 2`: `2` tuple prints\n- …\n- `i = n - 1`: `n - 1` tuple prints\n\n### Step 3 — Sum instead of blindly multiplying\n\n$$\nP(n)=\\sum_{i=0}^{n-1}i=0+1+2+\\cdots +(n-1)=\\frac{n(n-1)}{2}.\n$$\n\n### Step 4 — Count every printf when requested\n\nThe outer loop still prints `n` newlines, including the blank row at `i = 0`:\n\n$$\n\\frac{n(n-1)}{2}+n=\\frac{n(n+1)}{2}.\n$$\n\n### Step 5 — Classify\n\nBoth exact expressions are quadratic, so `Foo3` is `Θ(n²)`. The triangle is about half of an `n × n` square, but one-half is only a constant factor."
+          },
+          "triangle-animation": {
+            "title": "Build the Triangular Count One Row at a Time",
+            "context": "Because `j < i`, the row length is not constant. The animation makes the changing sum visible.",
+            "steps": [
+              {
+                "title": "Start with the empty row",
+                "body": "Each new outer-loop value contributes a row whose length equals i."
+              },
+              {
+                "title": "Add row i=1",
+                "body": "Each new outer-loop value contributes a row whose length equals i."
+              },
+              {
+                "title": "Add row i=2",
+                "body": "Each new outer-loop value contributes a row whose length equals i."
+              },
+              {
+                "title": "Generalize the triangle",
+                "body": "Each new outer-loop value contributes a row whose length equals i."
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

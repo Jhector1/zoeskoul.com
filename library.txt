@@ -79,7 +79,7 @@ docker compose -f docker-compose.prod.yml logs -f runner
 
 
 
-pnpm curr:course -- publish c c-data-structures  --live-subject c-data-structures   --force
+pnpm curr:course -- publish c c-runtime-analysis-asymptotics  --live-subject c-runtime-analysis-asymptotics   --force
 
 
 

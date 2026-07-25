@@ -98,12 +98,17 @@
       "subjectSlug": "c",
       "path": "subjects/c",
       "courseOrder": [
-        "c-data-structures"
+        "c-data-structures",
+        "c-runtime-analysis-asymptotics"
       ],
       "courses": [
         {
           "courseSlug": "c-data-structures",
           "path": "subjects/c/courses/c-data-structures/course.spec.json"
+        },
+        {
+          "courseSlug": "c-runtime-analysis-asymptotics",
+          "path": "subjects/c/courses/c-runtime-analysis-asymptotics/course.spec.json"
         }
       ]
     }

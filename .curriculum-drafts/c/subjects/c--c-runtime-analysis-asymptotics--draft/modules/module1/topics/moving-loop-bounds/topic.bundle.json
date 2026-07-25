@@ -1,0 +1,497 @@
+{
+  "topicId": "moving-loop-bounds",
+  "subjectSlug": "c--c-runtime-analysis-asymptotics--draft",
+  "moduleSlug": "c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting",
+  "sectionSlug": "c--c-runtime-analysis-asymptotics--draft-frequency-counting",
+  "prefix": "cra1",
+  "minutes": 55,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "c",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "preset": "runner",
+    "runnerBackend": "judge0",
+    "layoutMode": "default",
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": false
+    }
+  },
+  "topic": {
+    "labelKey": "topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.moving-loop-bounds.label",
+    "summaryKey": "topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.moving-loop-bounds.summary"
+  },
+  "cards": [
+    {
+      "id": "foo4-walkthrough",
+      "kind": "sketch",
+      "titleKey": "topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.moving-loop-bounds.cards.foo4-walkthrough.title",
+      "sketchId": "foo4-walkthrough",
+      "height": 620
+    },
+    {
+      "id": "moving-bounds-animation",
+      "kind": "sketch",
+      "titleKey": "topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.moving-loop-bounds.cards.moving-bounds-animation.title",
+      "sketchId": "moving-bounds-animation",
+      "height": 820
+    },
+    {
+      "id": "guided-lab",
+      "kind": "project",
+      "titleKey": "topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.moving-loop-bounds.cards.guided-lab.title",
+      "project": {
+        "difficulty": "medium",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "displayKind": "project",
+        "uiKind": "project",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "count_foo4_variants",
+            "titleKey": "topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.moving-loop-bounds.projectSteps.count_foo4_variants.title",
+            "exerciseKey": "count-foo4-variants",
+            "difficulty": "medium",
+            "preferKind": "code_input",
+            "seedPolicy": "step",
+            "maxAttempts": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "check-understanding",
+      "kind": "quiz",
+      "titleKey": "topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.moving-loop-bounds.cards.check-understanding.title",
+      "quiz": {
+        "difficulty": "medium",
+        "n": 2,
+        "min": 2,
+        "max": 2,
+        "selectionMode": "fixed",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "foo4-walkthrough",
+      "archetype": "paragraph",
+      "titleKey": "sketches.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.moving-loop-bounds.foo4-walkthrough.title",
+      "bodyKey": "sketches.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.moving-loop-bounds.foo4-walkthrough.bodyMarkdown"
+    },
+    {
+      "id": "moving-bounds-animation",
+      "archetype": "algorithm_animation",
+      "titleKey": "sketches.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.moving-loop-bounds.moving-bounds-animation.title",
+      "contextKey": "sketches.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.moving-loop-bounds.moving-bounds-animation.context",
+      "intervalMs": 1300,
+      "autoPlay": false,
+      "showControls": true,
+      "showStepCounter": true,
+      "canvasHeight": 330,
+      "steps": [
+        {
+          "id": "moving-bounds-animation-1",
+          "titleKey": "sketches.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.moving-loop-bounds.moving-bounds-animation.steps.0.title",
+          "nodes": [
+            {
+              "id": "start",
+              "label": "j=n",
+              "x": 20,
+              "y": 50,
+              "shape": "pill",
+              "tone": "info",
+              "active": true,
+              "width": 16
+            },
+            {
+              "id": "mid",
+              "label": "…",
+              "x": 50,
+              "y": 50,
+              "shape": "pill",
+              "width": 10
+            },
+            {
+              "id": "end",
+              "label": "j=n²−1",
+              "x": 80,
+              "y": 50,
+              "shape": "pill",
+              "tone": "good",
+              "active": true,
+              "width": 18
+            }
+          ],
+          "bodyKey": "sketches.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.moving-loop-bounds.moving-bounds-animation.steps.0.body",
+          "formula": "$(n^2-1)-n+1=n^2-n$",
+          "edges": [
+            {
+              "from": "start",
+              "to": "mid"
+            },
+            {
+              "from": "mid",
+              "to": "end"
+            }
+          ]
+        },
+        {
+          "id": "moving-bounds-animation-2",
+          "titleKey": "sketches.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.moving-loop-bounds.moving-bounds-animation.steps.1.title",
+          "nodes": [
+            {
+              "id": "rows",
+              "label": "n rows",
+              "x": 25,
+              "y": 50,
+              "shape": "pill",
+              "tone": "info",
+              "active": true,
+              "width": 20
+            },
+            {
+              "id": "width",
+              "label": "n²−n each",
+              "x": 58,
+              "y": 50,
+              "shape": "pill",
+              "tone": "good",
+              "active": true,
+              "width": 22
+            },
+            {
+              "id": "total",
+              "label": "n³−n²",
+              "x": 87,
+              "y": 50,
+              "shape": "pill",
+              "tone": "info",
+              "active": true,
+              "width": 18
+            }
+          ],
+          "bodyKey": "sketches.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.moving-loop-bounds.moving-bounds-animation.steps.1.body",
+          "formula": "$n(n^2-n)=n^3-n^2$",
+          "edges": [
+            {
+              "from": "rows",
+              "to": "total",
+              "label": "×"
+            },
+            {
+              "from": "width",
+              "to": "total",
+              "label": "×"
+            }
+          ]
+        },
+        {
+          "id": "moving-bounds-animation-3",
+          "titleKey": "sketches.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.moving-loop-bounds.moving-bounds-animation.steps.2.title",
+          "nodes": [
+            {
+              "id": "r0",
+              "label": "row 0: n²",
+              "x": 18,
+              "y": 22,
+              "shape": "pill",
+              "tone": "good",
+              "width": 20
+            },
+            {
+              "id": "r1",
+              "label": "row 1: n²−1",
+              "x": 38,
+              "y": 40,
+              "shape": "pill",
+              "width": 22
+            },
+            {
+              "id": "r2",
+              "label": "row 2: n²−2",
+              "x": 60,
+              "y": 58,
+              "shape": "pill",
+              "width": 22
+            },
+            {
+              "id": "rn",
+              "label": "row n−1",
+              "x": 82,
+              "y": 78,
+              "shape": "pill",
+              "detail": "n²−(n−1)",
+              "tone": "warn",
+              "active": true,
+              "width": 22
+            }
+          ],
+          "bodyKey": "sketches.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.moving-loop-bounds.moving-bounds-animation.steps.2.body",
+          "formula": "$n^2-i$"
+        },
+        {
+          "id": "moving-bounds-animation-4",
+          "titleKey": "sketches.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.moving-loop-bounds.moving-bounds-animation.steps.3.title",
+          "nodes": [
+            {
+              "id": "cube",
+              "label": "n³ rectangle",
+              "x": 28,
+              "y": 50,
+              "shape": "pill",
+              "tone": "info",
+              "active": true,
+              "width": 24
+            },
+            {
+              "id": "tri",
+              "label": "triangle removed",
+              "x": 60,
+              "y": 50,
+              "shape": "pill",
+              "tone": "warn",
+              "active": true,
+              "width": 24
+            },
+            {
+              "id": "remain",
+              "label": "cubic remains",
+              "x": 88,
+              "y": 50,
+              "shape": "pill",
+              "tone": "good",
+              "active": true,
+              "width": 18
+            }
+          ],
+          "bodyKey": "sketches.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.moving-loop-bounds.moving-bounds-animation.steps.3.body",
+          "formula": "$n^3-\\frac{n(n-1)}{2}=\\Theta(n^3)$",
+          "edges": [
+            {
+              "from": "cube",
+              "to": "remain",
+              "label": "−"
+            },
+            {
+              "from": "tri",
+              "to": "remain",
+              "label": "−"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "exercises": [
+    {
+      "id": "count-foo4-variants",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.moving-loop-bounds.finalLab.steps.count_foo4_variants",
+      "language": "c",
+      "starterCode": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.moving-loop-bounds.finalLab.steps.count_foo4_variants.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.c",
+          "content": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.moving-loop-bounds.finalLab.steps.count_foo4_variants.starterFiles.main_c.content",
+          "language": "c",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "analysis.h",
+          "content": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.moving-loop-bounds.finalLab.steps.count_foo4_variants.starterFiles.analysis_h.content",
+          "language": "c",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "analysis.c",
+          "content": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.moving-loop-bounds.finalLab.steps.count_foo4_variants.starterFiles.analysis_c.content",
+          "language": "c",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.c",
+          "content": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.moving-loop-bounds.finalLab.steps.count_foo4_variants.solutionFiles.main_c.content",
+          "language": "c",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "analysis.h",
+          "content": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.moving-loop-bounds.finalLab.steps.count_foo4_variants.solutionFiles.analysis_h.content",
+          "language": "c",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "analysis.c",
+          "content": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.moving-loop-bounds.finalLab.steps.count_foo4_variants.solutionFiles.analysis_c.content",
+          "language": "c",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "c",
+        "entryFilePath": "main.c",
+        "starterCode": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.moving-loop-bounds.finalLab.steps.count_foo4_variants.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.c",
+            "content": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.moving-loop-bounds.finalLab.steps.count_foo4_variants.starterFiles.main_c.content",
+            "language": "c",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "analysis.h",
+            "content": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.moving-loop-bounds.finalLab.steps.count_foo4_variants.starterFiles.analysis_h.content",
+            "language": "c",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "analysis.c",
+            "content": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.moving-loop-bounds.finalLab.steps.count_foo4_variants.starterFiles.analysis_c.content",
+            "language": "c",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.c",
+            "content": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.moving-loop-bounds.finalLab.steps.count_foo4_variants.solutionFiles.main_c.content",
+            "language": "c",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "analysis.h",
+            "content": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.moving-loop-bounds.finalLab.steps.count_foo4_variants.solutionFiles.analysis_h.content",
+            "language": "c",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "analysis.c",
+            "content": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.moving-loop-bounds.finalLab.steps.count_foo4_variants.solutionFiles.analysis_c.content",
+            "language": "c",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "foo4 tuples=48 all=52 theta=n^3\nfoo45 tuples=58 all=62 theta=n^3\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.moving-loop-bounds.finalLab.steps.count_foo4_variants.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.c",
+            "content": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.moving-loop-bounds.finalLab.steps.count_foo4_variants.solutionFiles.main_c.content",
+            "language": "c",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "analysis.h",
+            "content": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.moving-loop-bounds.finalLab.steps.count_foo4_variants.solutionFiles.analysis_h.content",
+            "language": "c",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "analysis.c",
+            "content": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.moving-loop-bounds.finalLab.steps.count_foo4_variants.solutionFiles.analysis_c.content",
+            "language": "c",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "path": "analysis.c",
+            "pattern": "n * (n * n - n)",
+            "message": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.moving-loop-bounds.finalLab.steps.count_foo4_variants.checks.0.message",
+            "normalizeWhitespace": false
+          },
+          {
+            "type": "source_contains",
+            "path": "analysis.c",
+            "pattern": "n * n * n - n * (n - 1) / 2",
+            "message": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.moving-loop-bounds.finalLab.steps.count_foo4_variants.checks.1.message",
+            "normalizeWhitespace": false
+          },
+          {
+            "type": "source_contains",
+            "path": "analysis.c",
+            "pattern": "+ n",
+            "message": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.moving-loop-bounds.finalLab.steps.count_foo4_variants.checks.2.message",
+            "normalizeWhitespace": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "foo4-row",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.moving-loop-bounds.quiz.foo4-row",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "c"
+      }
+    },
+    {
+      "id": "foo45-row",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.moving-loop-bounds.quiz.foo45-row",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    }
+  ]
+}

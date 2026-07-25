@@ -1,0 +1,293 @@
+{
+  "topicId": "theta-equivalence-review",
+  "subjectSlug": "c--c-runtime-analysis-asymptotics--draft",
+  "moduleSlug": "c--c-runtime-analysis-asymptotics--draft-module-3-inequality-proofs",
+  "sectionSlug": "c--c-runtime-analysis-asymptotics--draft-inequality-proofs",
+  "prefix": "cra3",
+  "minutes": 50,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "c",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "preset": "runner",
+    "runnerBackend": "judge0",
+    "layoutMode": "default",
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": false
+    }
+  },
+  "topic": {
+    "labelKey": "topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-3-inequality-proofs.theta-equivalence-review.label",
+    "summaryKey": "topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-3-inequality-proofs.theta-equivalence-review.summary"
+  },
+  "cards": [
+    {
+      "id": "theta-true-false",
+      "kind": "sketch",
+      "titleKey": "topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-3-inequality-proofs.theta-equivalence-review.cards.theta-true-false.title",
+      "sketchId": "theta-true-false",
+      "height": 620
+    },
+    {
+      "id": "theta-equivalence-animation",
+      "kind": "sketch",
+      "titleKey": "topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-3-inequality-proofs.theta-equivalence-review.cards.theta-equivalence-animation.title",
+      "sketchId": "theta-equivalence-animation",
+      "height": 820
+    },
+    {
+      "id": "check-understanding",
+      "kind": "quiz",
+      "titleKey": "topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-3-inequality-proofs.theta-equivalence-review.cards.check-understanding.title",
+      "quiz": {
+        "difficulty": "medium",
+        "n": 5,
+        "min": 5,
+        "max": 5,
+        "selectionMode": "fixed",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "theta-true-false",
+      "archetype": "paragraph",
+      "titleKey": "sketches.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-3-inequality-proofs.theta-equivalence-review.theta-true-false.title",
+      "bodyKey": "sketches.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-3-inequality-proofs.theta-equivalence-review.theta-true-false.bodyMarkdown"
+    },
+    {
+      "id": "theta-equivalence-animation",
+      "archetype": "algorithm_animation",
+      "titleKey": "sketches.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-3-inequality-proofs.theta-equivalence-review.theta-equivalence-animation.title",
+      "contextKey": "sketches.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-3-inequality-proofs.theta-equivalence-review.theta-equivalence-animation.context",
+      "intervalMs": 1300,
+      "autoPlay": false,
+      "showControls": true,
+      "showStepCounter": true,
+      "canvasHeight": 290,
+      "steps": [
+        {
+          "id": "theta-equivalence-animation-1",
+          "titleKey": "sketches.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-3-inequality-proofs.theta-equivalence-review.theta-equivalence-animation.steps.0.title",
+          "nodes": [
+            {
+              "id": "a",
+              "label": "7n²",
+              "x": 22,
+              "y": 50,
+              "shape": "pill",
+              "tone": "info"
+            },
+            {
+              "id": "strip",
+              "label": "remove ×7",
+              "x": 50,
+              "y": 50,
+              "shape": "pill",
+              "tone": "warn",
+              "active": true,
+              "width": 20
+            },
+            {
+              "id": "b",
+              "label": "n²",
+              "x": 80,
+              "y": 50,
+              "shape": "pill",
+              "tone": "good",
+              "active": true
+            }
+          ],
+          "bodyKey": "sketches.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-3-inequality-proofs.theta-equivalence-review.theta-equivalence-animation.steps.0.body",
+          "formula": "$7n^2=\\Theta(n^2)$",
+          "edges": [
+            {
+              "from": "a",
+              "to": "strip"
+            },
+            {
+              "from": "strip",
+              "to": "b"
+            }
+          ]
+        },
+        {
+          "id": "theta-equivalence-animation-2",
+          "titleKey": "sketches.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-3-inequality-proofs.theta-equivalence-review.theta-equivalence-animation.steps.1.title",
+          "nodes": [
+            {
+              "id": "a",
+              "label": "n²+7",
+              "x": 20,
+              "y": 35,
+              "shape": "pill",
+              "tone": "info"
+            },
+            {
+              "id": "b",
+              "label": "n²+n",
+              "x": 20,
+              "y": 72,
+              "shape": "pill",
+              "tone": "info"
+            },
+            {
+              "id": "dom",
+              "label": "dominant n²",
+              "x": 72,
+              "y": 52,
+              "shape": "pill",
+              "tone": "good",
+              "active": true,
+              "width": 24
+            }
+          ],
+          "bodyKey": "sketches.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-3-inequality-proofs.theta-equivalence-review.theta-equivalence-animation.steps.1.body",
+          "edges": [
+            {
+              "from": "a",
+              "to": "dom"
+            },
+            {
+              "from": "b",
+              "to": "dom"
+            }
+          ]
+        },
+        {
+          "id": "theta-equivalence-animation-3",
+          "titleKey": "sketches.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-3-inequality-proofs.theta-equivalence-review.theta-equivalence-animation.steps.2.title",
+          "nodes": [
+            {
+              "id": "n2",
+              "label": "n²",
+              "x": 22,
+              "y": 70,
+              "shape": "pill",
+              "tone": "warn"
+            },
+            {
+              "id": "n3",
+              "label": "n³",
+              "x": 78,
+              "y": 25,
+              "shape": "pill",
+              "tone": "good",
+              "active": true
+            },
+            {
+              "id": "ratio",
+              "label": "1/n → 0",
+              "x": 50,
+              "y": 50,
+              "shape": "pill",
+              "tone": "danger",
+              "active": true,
+              "width": 20
+            }
+          ],
+          "bodyKey": "sketches.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-3-inequality-proofs.theta-equivalence-review.theta-equivalence-animation.steps.2.body",
+          "formula": "$\\Theta(n^2)\\ne\\Theta(n^3)$",
+          "edges": [
+            {
+              "from": "n2",
+              "to": "ratio"
+            },
+            {
+              "from": "n3",
+              "to": "ratio"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "exercises": [
+    {
+      "id": "theta-a",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-3-inequality-proofs.theta-equivalence-review.quiz.theta-a",
+      "optionIds": [
+        "a",
+        "b"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "theta-b",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-3-inequality-proofs.theta-equivalence-review.quiz.theta-b",
+      "optionIds": [
+        "a",
+        "b"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "theta-c",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-3-inequality-proofs.theta-equivalence-review.quiz.theta-c",
+      "optionIds": [
+        "a",
+        "b"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "theta-d",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-3-inequality-proofs.theta-equivalence-review.quiz.theta-d",
+      "optionIds": [
+        "a",
+        "b"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "theta-e",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-3-inequality-proofs.theta-equivalence-review.quiz.theta-e",
+      "optionIds": [
+        "a",
+        "b"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    }
+  ]
+}

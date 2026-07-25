@@ -1,0 +1,795 @@
+{
+  "topicId": "runtime-analysis-capstone",
+  "subjectSlug": "c--c-runtime-analysis-asymptotics--draft",
+  "moduleSlug": "c--c-runtime-analysis-asymptotics--draft-module-4-capstone",
+  "sectionSlug": "c--c-runtime-analysis-asymptotics--draft-capstone",
+  "prefix": "cra4",
+  "minutes": 120,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "c",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "preset": "runner",
+    "runnerBackend": "judge0",
+    "layoutMode": "default",
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": false
+    }
+  },
+  "topic": {
+    "labelKey": "topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.label",
+    "summaryKey": "topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.summary"
+  },
+  "cards": [
+    {
+      "id": "capstone-brief",
+      "kind": "sketch",
+      "titleKey": "topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.cards.capstone-brief.title",
+      "sketchId": "capstone-brief",
+      "height": 620
+    },
+    {
+      "id": "capstone-animation",
+      "kind": "sketch",
+      "titleKey": "topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.cards.capstone-animation.title",
+      "sketchId": "capstone-animation",
+      "height": 820
+    },
+    {
+      "id": "capstone-project",
+      "kind": "project",
+      "titleKey": "topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.cards.capstone-project.title",
+      "project": {
+        "difficulty": "hard",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "displayKind": "project",
+        "uiKind": "project",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "derive_exact_counts",
+            "titleKey": "topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.projectSteps.derive_exact_counts.title",
+            "exerciseKey": "derive-exact-counts",
+            "difficulty": "hard",
+            "preferKind": "code_input",
+            "seedPolicy": "step",
+            "maxAttempts": null
+          },
+          {
+            "id": "classify_dominant_terms",
+            "titleKey": "topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.projectSteps.classify_dominant_terms.title",
+            "exerciseKey": "classify-dominant-terms",
+            "difficulty": "hard",
+            "preferKind": "code_input",
+            "seedPolicy": "step",
+            "maxAttempts": null
+          },
+          {
+            "id": "verify_new_theta_proof",
+            "titleKey": "topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.projectSteps.verify_new_theta_proof.title",
+            "exerciseKey": "verify-new-theta-proof",
+            "difficulty": "hard",
+            "preferKind": "code_input",
+            "seedPolicy": "step",
+            "maxAttempts": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "check-understanding",
+      "kind": "quiz",
+      "titleKey": "topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.cards.check-understanding.title",
+      "quiz": {
+        "difficulty": "medium",
+        "n": 2,
+        "min": 2,
+        "max": 2,
+        "selectionMode": "fixed",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "capstone-brief",
+      "archetype": "paragraph",
+      "titleKey": "sketches.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.capstone-brief.title",
+      "bodyKey": "sketches.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.capstone-brief.bodyMarkdown"
+    },
+    {
+      "id": "capstone-animation",
+      "archetype": "algorithm_animation",
+      "titleKey": "sketches.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.capstone-animation.title",
+      "contextKey": "sketches.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.capstone-animation.context",
+      "intervalMs": 1300,
+      "autoPlay": false,
+      "showControls": true,
+      "showStepCounter": true,
+      "canvasHeight": 310,
+      "steps": [
+        {
+          "id": "capstone-animation-1",
+          "titleKey": "sketches.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.capstone-animation.steps.0.title",
+          "nodes": [
+            {
+              "id": "b1",
+              "label": "Bar1 strip",
+              "x": 18,
+              "y": 30,
+              "shape": "pill",
+              "detail": "5 per row",
+              "tone": "info"
+            },
+            {
+              "id": "b2",
+              "label": "Bar2 triangle",
+              "x": 50,
+              "y": 50,
+              "shape": "pill",
+              "detail": "n down to 1",
+              "tone": "good",
+              "active": true
+            },
+            {
+              "id": "b3",
+              "label": "Bar3 blocks",
+              "x": 82,
+              "y": 70,
+              "shape": "pill",
+              "detail": "n then n²",
+              "tone": "warn"
+            }
+          ],
+          "bodyKey": "sketches.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.capstone-animation.steps.0.body"
+        },
+        {
+          "id": "capstone-animation-2",
+          "titleKey": "sketches.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.capstone-animation.steps.1.title",
+          "nodes": [
+            {
+              "id": "b1",
+              "label": "5n",
+              "x": 18,
+              "y": 50,
+              "shape": "pill",
+              "tone": "info"
+            },
+            {
+              "id": "b2",
+              "label": "n(n+1)/2",
+              "x": 50,
+              "y": 50,
+              "shape": "pill",
+              "tone": "good",
+              "active": true,
+              "width": 22
+            },
+            {
+              "id": "b3",
+              "label": "n+n²",
+              "x": 82,
+              "y": 50,
+              "shape": "pill",
+              "tone": "warn"
+            }
+          ],
+          "bodyKey": "sketches.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.capstone-animation.steps.1.body",
+          "formula": "$5n,\\quad n(n+1)/2,\\quad n+n^2$"
+        },
+        {
+          "id": "capstone-animation-3",
+          "titleKey": "sketches.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.capstone-animation.steps.2.title",
+          "nodes": [
+            {
+              "id": "b1",
+              "label": "Θ(n)",
+              "x": 18,
+              "y": 50,
+              "shape": "pill",
+              "tone": "info"
+            },
+            {
+              "id": "b2",
+              "label": "Θ(n²)",
+              "x": 50,
+              "y": 50,
+              "shape": "pill",
+              "tone": "good",
+              "active": true
+            },
+            {
+              "id": "b3",
+              "label": "Θ(n²)",
+              "x": 82,
+              "y": 50,
+              "shape": "pill",
+              "tone": "good",
+              "active": true
+            }
+          ],
+          "bodyKey": "sketches.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.capstone-animation.steps.2.body"
+        },
+        {
+          "id": "capstone-animation-4",
+          "titleKey": "sketches.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.capstone-animation.steps.3.title",
+          "nodes": [
+            {
+              "id": "low",
+              "label": "6n²",
+              "x": 18,
+              "y": 50,
+              "shape": "pill",
+              "tone": "good",
+              "active": true
+            },
+            {
+              "id": "t",
+              "label": "T(n)",
+              "x": 50,
+              "y": 50,
+              "shape": "pill",
+              "tone": "info",
+              "active": true
+            },
+            {
+              "id": "up",
+              "label": "11n²",
+              "x": 82,
+              "y": 50,
+              "shape": "pill",
+              "tone": "good",
+              "active": true
+            }
+          ],
+          "bodyKey": "sketches.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.capstone-animation.steps.3.body",
+          "formula": "$6n^2\\le T(n)\\le11n^2$",
+          "edges": [
+            {
+              "from": "low",
+              "to": "t",
+              "label": "≤"
+            },
+            {
+              "from": "t",
+              "to": "up",
+              "label": "≤"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "exercises": [
+    {
+      "id": "derive-exact-counts",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.finalLab.steps.derive_exact_counts",
+      "language": "c",
+      "starterCode": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.finalLab.steps.derive_exact_counts.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.c",
+          "content": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.finalLab.steps.derive_exact_counts.starterFiles.main_c.content",
+          "language": "c",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "capstone.h",
+          "content": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.finalLab.steps.derive_exact_counts.starterFiles.capstone_h.content",
+          "language": "c",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "capstone.c",
+          "content": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.finalLab.steps.derive_exact_counts.starterFiles.capstone_c.content",
+          "language": "c",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.c",
+          "content": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.finalLab.steps.derive_exact_counts.solutionFiles.main_c.content",
+          "language": "c",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "capstone.h",
+          "content": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.finalLab.steps.derive_exact_counts.solutionFiles.capstone_h.content",
+          "language": "c",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "capstone.c",
+          "content": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.finalLab.steps.derive_exact_counts.solutionFiles.capstone_c.content",
+          "language": "c",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "c",
+        "entryFilePath": "main.c",
+        "starterCode": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.finalLab.steps.derive_exact_counts.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.c",
+            "content": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.finalLab.steps.derive_exact_counts.starterFiles.main_c.content",
+            "language": "c",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "capstone.h",
+            "content": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.finalLab.steps.derive_exact_counts.starterFiles.capstone_h.content",
+            "language": "c",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "capstone.c",
+            "content": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.finalLab.steps.derive_exact_counts.starterFiles.capstone_c.content",
+            "language": "c",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.c",
+            "content": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.finalLab.steps.derive_exact_counts.solutionFiles.main_c.content",
+            "language": "c",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "capstone.h",
+            "content": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.finalLab.steps.derive_exact_counts.solutionFiles.capstone_h.content",
+            "language": "c",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "capstone.c",
+            "content": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.finalLab.steps.derive_exact_counts.solutionFiles.capstone_c.content",
+            "language": "c",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "bar1=30\nbar2=21\nbar3=42\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.finalLab.steps.derive_exact_counts.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.c",
+            "content": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.finalLab.steps.derive_exact_counts.solutionFiles.main_c.content",
+            "language": "c",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "capstone.h",
+            "content": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.finalLab.steps.derive_exact_counts.solutionFiles.capstone_h.content",
+            "language": "c",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "capstone.c",
+            "content": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.finalLab.steps.derive_exact_counts.solutionFiles.capstone_c.content",
+            "language": "c",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "path": "capstone.c",
+            "pattern": "5 * n",
+            "message": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.finalLab.steps.derive_exact_counts.checks.0.message",
+            "normalizeWhitespace": false
+          },
+          {
+            "type": "source_contains",
+            "path": "capstone.c",
+            "pattern": "n * (n + 1) / 2",
+            "message": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.finalLab.steps.derive_exact_counts.checks.1.message",
+            "normalizeWhitespace": false
+          },
+          {
+            "type": "source_contains",
+            "path": "capstone.c",
+            "pattern": "n + n * n",
+            "message": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.finalLab.steps.derive_exact_counts.checks.2.message",
+            "normalizeWhitespace": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "classify-dominant-terms",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.finalLab.steps.classify_dominant_terms",
+      "language": "c",
+      "starterCode": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.finalLab.steps.classify_dominant_terms.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.c",
+          "content": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.finalLab.steps.classify_dominant_terms.starterFiles.main_c.content",
+          "language": "c",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "classify.h",
+          "content": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.finalLab.steps.classify_dominant_terms.starterFiles.classify_h.content",
+          "language": "c",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "classify.c",
+          "content": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.finalLab.steps.classify_dominant_terms.starterFiles.classify_c.content",
+          "language": "c",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.c",
+          "content": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.finalLab.steps.classify_dominant_terms.solutionFiles.main_c.content",
+          "language": "c",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "classify.h",
+          "content": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.finalLab.steps.classify_dominant_terms.solutionFiles.classify_h.content",
+          "language": "c",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "classify.c",
+          "content": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.finalLab.steps.classify_dominant_terms.solutionFiles.classify_c.content",
+          "language": "c",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "c",
+        "entryFilePath": "main.c",
+        "starterCode": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.finalLab.steps.classify_dominant_terms.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.c",
+            "content": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.finalLab.steps.classify_dominant_terms.starterFiles.main_c.content",
+            "language": "c",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "classify.h",
+            "content": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.finalLab.steps.classify_dominant_terms.starterFiles.classify_h.content",
+            "language": "c",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "classify.c",
+            "content": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.finalLab.steps.classify_dominant_terms.starterFiles.classify_c.content",
+            "language": "c",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.c",
+            "content": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.finalLab.steps.classify_dominant_terms.solutionFiles.main_c.content",
+            "language": "c",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "classify.h",
+            "content": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.finalLab.steps.classify_dominant_terms.solutionFiles.classify_h.content",
+            "language": "c",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "classify.c",
+            "content": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.finalLab.steps.classify_dominant_terms.solutionFiles.classify_c.content",
+            "language": "c",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "bar1=Theta(n)\nbar2=Theta(n^2)\nbar3=Theta(n^2)\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.finalLab.steps.classify_dominant_terms.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.c",
+            "content": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.finalLab.steps.classify_dominant_terms.solutionFiles.main_c.content",
+            "language": "c",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "classify.h",
+            "content": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.finalLab.steps.classify_dominant_terms.solutionFiles.classify_h.content",
+            "language": "c",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "classify.c",
+            "content": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.finalLab.steps.classify_dominant_terms.solutionFiles.classify_c.content",
+            "language": "c",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "path": "classify.c",
+            "pattern": "Theta(n)",
+            "message": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.finalLab.steps.classify_dominant_terms.checks.0.message",
+            "normalizeWhitespace": false
+          },
+          {
+            "type": "source_contains",
+            "path": "classify.c",
+            "pattern": "Theta(n^2)",
+            "message": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.finalLab.steps.classify_dominant_terms.checks.1.message",
+            "normalizeWhitespace": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "verify-new-theta-proof",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.finalLab.steps.verify_new_theta_proof",
+      "language": "c",
+      "starterCode": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.finalLab.steps.verify_new_theta_proof.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.c",
+          "content": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.finalLab.steps.verify_new_theta_proof.starterFiles.main_c.content",
+          "language": "c",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "proof.h",
+          "content": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.finalLab.steps.verify_new_theta_proof.starterFiles.proof_h.content",
+          "language": "c",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "proof.c",
+          "content": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.finalLab.steps.verify_new_theta_proof.starterFiles.proof_c.content",
+          "language": "c",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.c",
+          "content": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.finalLab.steps.verify_new_theta_proof.solutionFiles.main_c.content",
+          "language": "c",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "proof.h",
+          "content": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.finalLab.steps.verify_new_theta_proof.solutionFiles.proof_h.content",
+          "language": "c",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "proof.c",
+          "content": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.finalLab.steps.verify_new_theta_proof.solutionFiles.proof_c.content",
+          "language": "c",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "c",
+        "entryFilePath": "main.c",
+        "starterCode": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.finalLab.steps.verify_new_theta_proof.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.c",
+            "content": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.finalLab.steps.verify_new_theta_proof.starterFiles.main_c.content",
+            "language": "c",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "proof.h",
+            "content": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.finalLab.steps.verify_new_theta_proof.starterFiles.proof_h.content",
+            "language": "c",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "proof.c",
+            "content": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.finalLab.steps.verify_new_theta_proof.starterFiles.proof_c.content",
+            "language": "c",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.c",
+            "content": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.finalLab.steps.verify_new_theta_proof.solutionFiles.main_c.content",
+            "language": "c",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "proof.h",
+            "content": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.finalLab.steps.verify_new_theta_proof.solutionFiles.proof_h.content",
+            "language": "c",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "proof.c",
+            "content": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.finalLab.steps.verify_new_theta_proof.solutionFiles.proof_c.content",
+            "language": "c",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "c1=6 c2=11 n0=1\nn=1 valid\nn=25 valid\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.finalLab.steps.verify_new_theta_proof.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.c",
+            "content": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.finalLab.steps.verify_new_theta_proof.solutionFiles.main_c.content",
+            "language": "c",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "proof.h",
+            "content": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.finalLab.steps.verify_new_theta_proof.solutionFiles.proof_h.content",
+            "language": "c",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "proof.c",
+            "content": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.finalLab.steps.verify_new_theta_proof.solutionFiles.proof_c.content",
+            "language": "c",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "path": "proof.c",
+            "pattern": "n < 1",
+            "message": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.finalLab.steps.verify_new_theta_proof.checks.0.message",
+            "normalizeWhitespace": false
+          },
+          {
+            "type": "source_contains",
+            "path": "proof.c",
+            "pattern": "6 * n2 <= t",
+            "message": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.finalLab.steps.verify_new_theta_proof.checks.1.message",
+            "normalizeWhitespace": false
+          },
+          {
+            "type": "source_contains",
+            "path": "proof.c",
+            "pattern": "t <= 11 * n2",
+            "message": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.finalLab.steps.verify_new_theta_proof.checks.2.message",
+            "normalizeWhitespace": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "capstone-method",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.quiz.capstone-method",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "bar2-shape",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-4-capstone.runtime-analysis-capstone.quiz.bar2-shape",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    }
+  ]
+}

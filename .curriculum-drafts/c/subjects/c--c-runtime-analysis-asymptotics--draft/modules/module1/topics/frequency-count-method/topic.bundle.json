@@ -1,0 +1,826 @@
+{
+  "topicId": "frequency-count-method",
+  "subjectSlug": "c--c-runtime-analysis-asymptotics--draft",
+  "moduleSlug": "c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting",
+  "sectionSlug": "c--c-runtime-analysis-asymptotics--draft-frequency-counting",
+  "prefix": "cra1",
+  "minutes": 45,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "c",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "preset": "runner",
+    "runnerBackend": "judge0",
+    "layoutMode": "default",
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": false
+    }
+  },
+  "topic": {
+    "labelKey": "topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.frequency-count-method.label",
+    "summaryKey": "topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.frequency-count-method.summary"
+  },
+  "cards": [
+    {
+      "id": "method-overview",
+      "kind": "sketch",
+      "titleKey": "topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.frequency-count-method.cards.method-overview.title",
+      "sketchId": "method-overview",
+      "height": 620
+    },
+    {
+      "id": "method-animation",
+      "kind": "sketch",
+      "titleKey": "topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.frequency-count-method.cards.method-animation.title",
+      "sketchId": "method-animation",
+      "height": 820
+    },
+    {
+      "id": "guided-lab",
+      "kind": "project",
+      "titleKey": "topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.frequency-count-method.cards.guided-lab.title",
+      "project": {
+        "difficulty": "medium",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "displayKind": "project",
+        "uiKind": "project",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "count_patterns",
+            "titleKey": "topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.frequency-count-method.projectSteps.count_patterns.title",
+            "exerciseKey": "count-patterns",
+            "difficulty": "medium",
+            "preferKind": "code_input",
+            "seedPolicy": "step",
+            "maxAttempts": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "check-understanding",
+      "kind": "quiz",
+      "titleKey": "topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.frequency-count-method.cards.check-understanding.title",
+      "quiz": {
+        "difficulty": "medium",
+        "n": 2,
+        "min": 2,
+        "max": 2,
+        "selectionMode": "fixed",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "method-overview",
+      "archetype": "paragraph",
+      "titleKey": "sketches.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.frequency-count-method.method-overview.title",
+      "bodyKey": "sketches.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.frequency-count-method.method-overview.bodyMarkdown"
+    },
+    {
+      "id": "method-animation",
+      "archetype": "algorithm_animation",
+      "titleKey": "sketches.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.frequency-count-method.method-animation.title",
+      "contextKey": "sketches.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.frequency-count-method.method-animation.context",
+      "intervalMs": 1300,
+      "autoPlay": false,
+      "showControls": true,
+      "showStepCounter": true,
+      "canvasHeight": 300,
+      "steps": [
+        {
+          "id": "method-animation-1",
+          "titleKey": "sketches.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.frequency-count-method.method-animation.steps.0.title",
+          "nodes": [
+            {
+              "id": "n0",
+              "label": "Think",
+              "x": 8,
+              "y": 50,
+              "shape": "pill",
+              "tone": "info",
+              "active": true,
+              "width": 14
+            },
+            {
+              "id": "n1",
+              "label": "Trace",
+              "x": 25,
+              "y": 50,
+              "shape": "pill",
+              "dimmed": true,
+              "width": 14
+            },
+            {
+              "id": "n2",
+              "label": "Count",
+              "x": 42,
+              "y": 50,
+              "shape": "pill",
+              "dimmed": true,
+              "width": 14
+            },
+            {
+              "id": "n3",
+              "label": "Sum",
+              "x": 59,
+              "y": 50,
+              "shape": "pill",
+              "dimmed": true,
+              "width": 14
+            },
+            {
+              "id": "n4",
+              "label": "Simplify",
+              "x": 76,
+              "y": 50,
+              "shape": "pill",
+              "dimmed": true,
+              "width": 14
+            },
+            {
+              "id": "n5",
+              "label": "Classify",
+              "x": 93,
+              "y": 50,
+              "shape": "pill",
+              "dimmed": true,
+              "width": 14
+            }
+          ],
+          "bodyKey": "sketches.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.frequency-count-method.method-animation.steps.0.body",
+          "edges": [
+            {
+              "from": "n0",
+              "to": "n1"
+            },
+            {
+              "from": "n1",
+              "to": "n2"
+            },
+            {
+              "from": "n2",
+              "to": "n3"
+            },
+            {
+              "from": "n3",
+              "to": "n4"
+            },
+            {
+              "from": "n4",
+              "to": "n5"
+            }
+          ]
+        },
+        {
+          "id": "method-animation-2",
+          "titleKey": "sketches.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.frequency-count-method.method-animation.steps.1.title",
+          "nodes": [
+            {
+              "id": "n0",
+              "label": "Think",
+              "x": 8,
+              "y": 50,
+              "shape": "pill",
+              "width": 14
+            },
+            {
+              "id": "n1",
+              "label": "Trace",
+              "x": 25,
+              "y": 50,
+              "shape": "pill",
+              "tone": "info",
+              "active": true,
+              "width": 14
+            },
+            {
+              "id": "n2",
+              "label": "Count",
+              "x": 42,
+              "y": 50,
+              "shape": "pill",
+              "dimmed": true,
+              "width": 14
+            },
+            {
+              "id": "n3",
+              "label": "Sum",
+              "x": 59,
+              "y": 50,
+              "shape": "pill",
+              "dimmed": true,
+              "width": 14
+            },
+            {
+              "id": "n4",
+              "label": "Simplify",
+              "x": 76,
+              "y": 50,
+              "shape": "pill",
+              "dimmed": true,
+              "width": 14
+            },
+            {
+              "id": "n5",
+              "label": "Classify",
+              "x": 93,
+              "y": 50,
+              "shape": "pill",
+              "dimmed": true,
+              "width": 14
+            }
+          ],
+          "bodyKey": "sketches.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.frequency-count-method.method-animation.steps.1.body",
+          "edges": [
+            {
+              "from": "n0",
+              "to": "n1",
+              "tone": "good",
+              "active": true
+            },
+            {
+              "from": "n1",
+              "to": "n2"
+            },
+            {
+              "from": "n2",
+              "to": "n3"
+            },
+            {
+              "from": "n3",
+              "to": "n4"
+            },
+            {
+              "from": "n4",
+              "to": "n5"
+            }
+          ]
+        },
+        {
+          "id": "method-animation-3",
+          "titleKey": "sketches.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.frequency-count-method.method-animation.steps.2.title",
+          "nodes": [
+            {
+              "id": "n0",
+              "label": "Think",
+              "x": 8,
+              "y": 50,
+              "shape": "pill",
+              "width": 14
+            },
+            {
+              "id": "n1",
+              "label": "Trace",
+              "x": 25,
+              "y": 50,
+              "shape": "pill",
+              "width": 14
+            },
+            {
+              "id": "n2",
+              "label": "Count",
+              "x": 42,
+              "y": 50,
+              "shape": "pill",
+              "tone": "info",
+              "active": true,
+              "width": 14
+            },
+            {
+              "id": "n3",
+              "label": "Sum",
+              "x": 59,
+              "y": 50,
+              "shape": "pill",
+              "dimmed": true,
+              "width": 14
+            },
+            {
+              "id": "n4",
+              "label": "Simplify",
+              "x": 76,
+              "y": 50,
+              "shape": "pill",
+              "dimmed": true,
+              "width": 14
+            },
+            {
+              "id": "n5",
+              "label": "Classify",
+              "x": 93,
+              "y": 50,
+              "shape": "pill",
+              "dimmed": true,
+              "width": 14
+            }
+          ],
+          "bodyKey": "sketches.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.frequency-count-method.method-animation.steps.2.body",
+          "edges": [
+            {
+              "from": "n0",
+              "to": "n1",
+              "tone": "good",
+              "active": true
+            },
+            {
+              "from": "n1",
+              "to": "n2",
+              "tone": "good",
+              "active": true
+            },
+            {
+              "from": "n2",
+              "to": "n3"
+            },
+            {
+              "from": "n3",
+              "to": "n4"
+            },
+            {
+              "from": "n4",
+              "to": "n5"
+            }
+          ]
+        },
+        {
+          "id": "method-animation-4",
+          "titleKey": "sketches.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.frequency-count-method.method-animation.steps.3.title",
+          "nodes": [
+            {
+              "id": "n0",
+              "label": "Think",
+              "x": 8,
+              "y": 50,
+              "shape": "pill",
+              "width": 14
+            },
+            {
+              "id": "n1",
+              "label": "Trace",
+              "x": 25,
+              "y": 50,
+              "shape": "pill",
+              "width": 14
+            },
+            {
+              "id": "n2",
+              "label": "Count",
+              "x": 42,
+              "y": 50,
+              "shape": "pill",
+              "width": 14
+            },
+            {
+              "id": "n3",
+              "label": "Sum",
+              "x": 59,
+              "y": 50,
+              "shape": "pill",
+              "tone": "info",
+              "active": true,
+              "width": 14
+            },
+            {
+              "id": "n4",
+              "label": "Simplify",
+              "x": 76,
+              "y": 50,
+              "shape": "pill",
+              "dimmed": true,
+              "width": 14
+            },
+            {
+              "id": "n5",
+              "label": "Classify",
+              "x": 93,
+              "y": 50,
+              "shape": "pill",
+              "dimmed": true,
+              "width": 14
+            }
+          ],
+          "bodyKey": "sketches.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.frequency-count-method.method-animation.steps.3.body",
+          "edges": [
+            {
+              "from": "n0",
+              "to": "n1",
+              "tone": "good",
+              "active": true
+            },
+            {
+              "from": "n1",
+              "to": "n2",
+              "tone": "good",
+              "active": true
+            },
+            {
+              "from": "n2",
+              "to": "n3",
+              "tone": "good",
+              "active": true
+            },
+            {
+              "from": "n3",
+              "to": "n4"
+            },
+            {
+              "from": "n4",
+              "to": "n5"
+            }
+          ]
+        },
+        {
+          "id": "method-animation-5",
+          "titleKey": "sketches.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.frequency-count-method.method-animation.steps.4.title",
+          "nodes": [
+            {
+              "id": "n0",
+              "label": "Think",
+              "x": 8,
+              "y": 50,
+              "shape": "pill",
+              "width": 14
+            },
+            {
+              "id": "n1",
+              "label": "Trace",
+              "x": 25,
+              "y": 50,
+              "shape": "pill",
+              "width": 14
+            },
+            {
+              "id": "n2",
+              "label": "Count",
+              "x": 42,
+              "y": 50,
+              "shape": "pill",
+              "width": 14
+            },
+            {
+              "id": "n3",
+              "label": "Sum",
+              "x": 59,
+              "y": 50,
+              "shape": "pill",
+              "width": 14
+            },
+            {
+              "id": "n4",
+              "label": "Simplify",
+              "x": 76,
+              "y": 50,
+              "shape": "pill",
+              "tone": "info",
+              "active": true,
+              "width": 14
+            },
+            {
+              "id": "n5",
+              "label": "Classify",
+              "x": 93,
+              "y": 50,
+              "shape": "pill",
+              "dimmed": true,
+              "width": 14
+            }
+          ],
+          "bodyKey": "sketches.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.frequency-count-method.method-animation.steps.4.body",
+          "edges": [
+            {
+              "from": "n0",
+              "to": "n1",
+              "tone": "good",
+              "active": true
+            },
+            {
+              "from": "n1",
+              "to": "n2",
+              "tone": "good",
+              "active": true
+            },
+            {
+              "from": "n2",
+              "to": "n3",
+              "tone": "good",
+              "active": true
+            },
+            {
+              "from": "n3",
+              "to": "n4",
+              "tone": "good",
+              "active": true
+            },
+            {
+              "from": "n4",
+              "to": "n5"
+            }
+          ]
+        },
+        {
+          "id": "method-animation-6",
+          "titleKey": "sketches.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.frequency-count-method.method-animation.steps.5.title",
+          "nodes": [
+            {
+              "id": "n0",
+              "label": "Think",
+              "x": 8,
+              "y": 50,
+              "shape": "pill",
+              "width": 14
+            },
+            {
+              "id": "n1",
+              "label": "Trace",
+              "x": 25,
+              "y": 50,
+              "shape": "pill",
+              "width": 14
+            },
+            {
+              "id": "n2",
+              "label": "Count",
+              "x": 42,
+              "y": 50,
+              "shape": "pill",
+              "width": 14
+            },
+            {
+              "id": "n3",
+              "label": "Sum",
+              "x": 59,
+              "y": 50,
+              "shape": "pill",
+              "width": 14
+            },
+            {
+              "id": "n4",
+              "label": "Simplify",
+              "x": 76,
+              "y": 50,
+              "shape": "pill",
+              "width": 14
+            },
+            {
+              "id": "n5",
+              "label": "Classify",
+              "x": 93,
+              "y": 50,
+              "shape": "pill",
+              "tone": "info",
+              "active": true,
+              "width": 14
+            }
+          ],
+          "bodyKey": "sketches.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.frequency-count-method.method-animation.steps.5.body",
+          "edges": [
+            {
+              "from": "n0",
+              "to": "n1",
+              "tone": "good",
+              "active": true
+            },
+            {
+              "from": "n1",
+              "to": "n2",
+              "tone": "good",
+              "active": true
+            },
+            {
+              "from": "n2",
+              "to": "n3",
+              "tone": "good",
+              "active": true
+            },
+            {
+              "from": "n3",
+              "to": "n4",
+              "tone": "good",
+              "active": true
+            },
+            {
+              "from": "n4",
+              "to": "n5",
+              "tone": "good",
+              "active": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "exercises": [
+    {
+      "id": "count-patterns",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.frequency-count-method.finalLab.steps.count_patterns",
+      "language": "c",
+      "starterCode": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.frequency-count-method.finalLab.steps.count_patterns.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.c",
+          "content": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.frequency-count-method.finalLab.steps.count_patterns.starterFiles.main_c.content",
+          "language": "c",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "analysis.h",
+          "content": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.frequency-count-method.finalLab.steps.count_patterns.starterFiles.analysis_h.content",
+          "language": "c",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "analysis.c",
+          "content": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.frequency-count-method.finalLab.steps.count_patterns.starterFiles.analysis_c.content",
+          "language": "c",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.c",
+          "content": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.frequency-count-method.finalLab.steps.count_patterns.solutionFiles.main_c.content",
+          "language": "c",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "analysis.h",
+          "content": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.frequency-count-method.finalLab.steps.count_patterns.solutionFiles.analysis_h.content",
+          "language": "c",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "analysis.c",
+          "content": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.frequency-count-method.finalLab.steps.count_patterns.solutionFiles.analysis_c.content",
+          "language": "c",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "c",
+        "entryFilePath": "main.c",
+        "starterCode": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.frequency-count-method.finalLab.steps.count_patterns.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.c",
+            "content": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.frequency-count-method.finalLab.steps.count_patterns.starterFiles.main_c.content",
+            "language": "c",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "analysis.h",
+            "content": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.frequency-count-method.finalLab.steps.count_patterns.starterFiles.analysis_h.content",
+            "language": "c",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "analysis.c",
+            "content": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.frequency-count-method.finalLab.steps.count_patterns.starterFiles.analysis_c.content",
+            "language": "c",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.c",
+            "content": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.frequency-count-method.finalLab.steps.count_patterns.solutionFiles.main_c.content",
+            "language": "c",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "analysis.h",
+            "content": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.frequency-count-method.finalLab.steps.count_patterns.solutionFiles.analysis_h.content",
+            "language": "c",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "analysis.c",
+            "content": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.frequency-count-method.finalLab.steps.count_patterns.solutionFiles.analysis_c.content",
+            "language": "c",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "n=5\nconstant=15\nsquare=25\ntriangle=10\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.frequency-count-method.finalLab.steps.count_patterns.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.c",
+            "content": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.frequency-count-method.finalLab.steps.count_patterns.solutionFiles.main_c.content",
+            "language": "c",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "analysis.h",
+            "content": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.frequency-count-method.finalLab.steps.count_patterns.solutionFiles.analysis_h.content",
+            "language": "c",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "analysis.c",
+            "content": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.frequency-count-method.finalLab.steps.count_patterns.solutionFiles.analysis_c.content",
+            "language": "c",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "path": "analysis.c",
+            "pattern": "n * width",
+            "message": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.frequency-count-method.finalLab.steps.count_patterns.checks.0.message",
+            "normalizeWhitespace": false
+          },
+          {
+            "type": "source_contains",
+            "path": "analysis.c",
+            "pattern": "n * n",
+            "message": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.frequency-count-method.finalLab.steps.count_patterns.checks.1.message",
+            "normalizeWhitespace": false
+          },
+          {
+            "type": "source_contains",
+            "path": "analysis.c",
+            "pattern": "n * (n - 1) / 2",
+            "message": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.frequency-count-method.finalLab.steps.count_patterns.checks.2.message",
+            "normalizeWhitespace": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "fixed-inner",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.frequency-count-method.quiz.fixed-inner",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "c"
+      }
+    },
+    {
+      "id": "sequential-rule",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.frequency-count-method.quiz.sequential-rule",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    }
+  ]
+}

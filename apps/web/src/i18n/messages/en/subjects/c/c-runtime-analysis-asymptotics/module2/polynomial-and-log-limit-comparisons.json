@@ -1,0 +1,119 @@
+{
+  "topics": {
+    "c-runtime-analysis-asymptotics": {
+      "c-runtime-analysis-asymptotics-module-2-limit-method": {
+        "polynomial-and-log-limit-comparisons": {
+          "label": "Polynomial and Logarithmic Limit Comparisons",
+          "summary": "Work through the handout’s first eight ratio problems.",
+          "cards": {
+            "worked-limits-one-eight": {
+              "title": "Worked Limit Comparisons: Constants, Polynomials, and Logs"
+            },
+            "polynomial-log-animation": {
+              "title": "Cancel, Normalize, or Differentiate"
+            },
+            "check-understanding": {
+              "title": "Check Your Understanding"
+            }
+          },
+          "quiz": {
+            "poly-same-degree": {
+              "title": "Same polynomial degree",
+              "prompt": "For f=3n²+7n and g=2n², what is the relation?",
+              "hint": "Divide numerator and denominator by n².",
+              "help": {
+                "concept": "The ratio tends to 3/2, a positive finite constant.",
+                "hint_1": "Trace a small input or simplify the exact expression before choosing.",
+                "hint_2": "Check whether the work adds, multiplies, or forms a changing sum."
+              },
+              "options": {
+                "a": "f=O(g) only",
+                "b": "f=Ω(g) only",
+                "c": "f=Θ(g)",
+                "d": "No relation"
+              }
+            },
+            "lower-degree": {
+              "title": "Lower numerator degree",
+              "prompt": "For f=2n⁴−3n²+7 and g=n⁵, what is the relation?",
+              "hint": "Compare the highest polynomial degrees.",
+              "help": {
+                "concept": "The ratio tends to 0 because degree 4 grows more slowly than degree 5.",
+                "hint_1": "Trace a small input or simplify the exact expression before choosing.",
+                "hint_2": "Check whether the work adds, multiplies, or forms a changing sum."
+              },
+              "options": {
+                "a": "f=O(g)",
+                "b": "f=Ω(g)",
+                "c": "f=Θ(g)",
+                "d": "f=Θ(2ⁿ)"
+              }
+            },
+            "log-square": {
+              "title": "Polynomial versus log",
+              "prompt": "For f=n and g=(log n)², what is the relation?",
+              "hint": "Any positive power of n outruns a fixed log power.",
+              "help": {
+                "concept": "The ratio n/(log n)² tends to infinity.",
+                "hint_1": "Trace a small input or simplify the exact expression before choosing.",
+                "hint_2": "Check whether the work adds, multiplies, or forms a changing sum."
+              },
+              "options": {
+                "a": "f=O(g)",
+                "b": "f=Θ(g)",
+                "c": "f=Ω(g)",
+                "d": "Both are constant"
+              }
+            },
+            "nlog-over-log": {
+              "title": "Cancel the log factor",
+              "prompt": "For f=n log n+n and g=log n, what is the relation?",
+              "hint": "Divide each numerator term by log n.",
+              "help": {
+                "concept": "The ratio is n+n/log n, which tends to infinity.",
+                "hint_1": "Trace a small input or simplify the exact expression before choosing.",
+                "hint_2": "Check whether the work adds, multiplies, or forms a changing sum."
+              },
+              "options": {
+                "a": "f=O(g)",
+                "b": "f=Ω(g)",
+                "c": "f=Θ(g)",
+                "d": "f=Θ(1)"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "c-runtime-analysis-asymptotics": {
+      "c-runtime-analysis-asymptotics-module-2-limit-method": {
+        "polynomial-and-log-limit-comparisons": {
+          "worked-limits-one-eight": {
+            "title": "Worked Limit Comparisons: Constants, Polynomials, and Logs",
+            "bodyMarkdown": "Apply the ratio rule to the first eight pairs from the handout.\n\n1. `2 / 5 → 2/5`, so `2 = Θ(5)`.\n2. `(5n) / 7 → ∞`, so `5n = Ω(7)`.\n3. `(3n²) / n² → 3`, so `3n² = Θ(n²)`.\n4. `(3n² + 7n) / (2n²) = 3/2 + 7/(2n) → 3/2`, so the pair is `Θ`.\n5. `(2n⁴ - 3n² + 7) / n⁵ = 2/n - 3/n³ + 7/n⁵ → 0`, so `f = O(g)`.\n6. `log(n²) / (log n + 5) = 2log n / (log n + 5) → 2`, so `f = Θ(g)`.\n7. `n / (log n)² → ∞`. Applying L’Hôpital twice produces `n/(2log n)` and then `n/2`, so `f = Ω(g)`.\n8. `(n log n + n) / log n = n + n/log n → ∞`, so `f = Ω(g)`.\n\n### What to notice\n\n- Equal highest powers leave a positive constant.\n- A lower-degree numerator over a higher-degree denominator tends to zero.\n- Every positive power of `n` eventually outgrows every fixed power of `log n`.\n- Changing the base of a logarithm multiplies by a constant and does not change a `Θ` class."
+          },
+          "polynomial-log-animation": {
+            "title": "Cancel, Normalize, or Differentiate",
+            "context": "Choose the algebraic move that exposes the dominant growth.",
+            "steps": [
+              {
+                "title": "Cancel matching highest powers",
+                "body": "When numerator and denominator have degree 2, divide every term by n²."
+              },
+              {
+                "title": "Higher denominator degree wins",
+                "body": "After dividing by n⁵, every term contains a negative power of n."
+              },
+              {
+                "title": "A power of n outruns log powers",
+                "body": "Repeated L’Hôpital differentiation eventually exposes a linear term that diverges."
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}
