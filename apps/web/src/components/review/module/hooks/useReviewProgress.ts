@@ -22,6 +22,11 @@ import {
 import { deriveEntryCode } from "../runtime/exerciseWorkspaceResolver";
 import { stateLanguageMatches } from "../runtime/workspaceCodeSource";
 import { isUsableStarterCode } from "../runtime/starterContent";
+import {
+    canPollReviewRemoteProgress,
+    shouldApplyRemoteReviewWorkspace,
+    shouldTrackReviewRuntimeMutation,
+} from "./reviewProgressRemoteSyncPolicy";
 
 function isPersistedCardToolKey(toolKey: string) {
     if (typeof toolKey !== "string" || !toolKey.trim()) return false;
@@ -856,9 +861,19 @@ export function useReviewProgress(args: {
         }
     }, []);
 
+    useEffect(() => {
+        if (!readOnly) return;
+        cancel();
+        localDirtyRef.current = false;
+        setSaveStatus("idle");
+        setLastSaveError(null);
+    }, [cancel, readOnly]);
+
     const savePayloadToApi = useCallback(
         async (nextPayload: typeof payload, options?: { keepalive?: boolean; reason?: string }) => {
             if (readOnly) {
+                pendingSavePayloadRef.current = null;
+                localDirtyRef.current = false;
                 setSaveStatus("idle");
                 setLastSaveError(null);
                 return;
@@ -1024,7 +1039,11 @@ export function useReviewProgress(args: {
         (nextState: ReviewProgressState, options?: { immediate?: boolean; reason?: string }) => {
             if (!subjectSlug || !moduleSlug) return;
             if (!hydrationCompleteRef.current) return;
-            if (applyingRemoteRef.current) return;
+            if (readOnly || applyingRemoteRef.current) {
+                pendingSavePayloadRef.current = null;
+                localDirtyRef.current = false;
+                return;
+            }
 
             const latestRuntime = useReviewRuntimeStore.getState();
             const mergedState = mergeRuntimeIntoProgress(nextState, latestRuntime);
@@ -1057,13 +1076,20 @@ export function useReviewProgress(args: {
                 void drainSaveQueueRef.current();
             }, 2500);
         },
-        [subjectSlug, moduleSlug, buildPayloadFromState, meaningfulBodyForPayload],
+        [subjectSlug, moduleSlug, buildPayloadFromState, meaningfulBodyForPayload, readOnly],
     );
     const sleep = (ms: number) =>
         new Promise<void>((resolve) => window.setTimeout(resolve, ms));
 
 
     const flush = useCallback(async () => {
+        if (readOnly) {
+            cancel();
+            pendingSavePayloadRef.current = null;
+            localDirtyRef.current = false;
+            return;
+        }
+
         if (pendingSaveTimerRef.current != null) {
             window.clearTimeout(pendingSaveTimerRef.current);
             pendingSaveTimerRef.current = null;
@@ -1107,7 +1133,7 @@ export function useReviewProgress(args: {
         }
 
         await drainSaveQueueRef.current();
-    }, [queueProgressSave]);
+    }, [cancel, queueProgressSave, readOnly]);
 
 
     const putProgressNow = useCallback(
@@ -1122,6 +1148,11 @@ export function useReviewProgress(args: {
         ) => {
             if (!subjectSlug || !moduleSlug) return;
             if (!hydrationCompleteRef.current) return;
+            if (readOnly) {
+                pendingSavePayloadRef.current = null;
+                localDirtyRef.current = false;
+                return;
+            }
 
             const mergeRuntime = options?.mergeRuntime !== false;
             const stateForSave = mergeRuntime
@@ -1180,7 +1211,7 @@ export function useReviewProgress(args: {
                 setProgressSafe(stateToSave);
             }
         },
-        [subjectSlug, moduleSlug, buildPayloadFromState, meaningfulBodyForPayload, savePayloadToApi, setProgressSafe],
+        [subjectSlug, moduleSlug, buildPayloadFromState, meaningfulBodyForPayload, readOnly, savePayloadToApi, setProgressSafe],
     );
 
     const hydrateRuntimeFromProgress = useCallback(
@@ -1449,12 +1480,14 @@ export function useReviewProgress(args: {
                     updatedAt: saved?.updatedAt ?? Date.now(),
                 };
 
-                if (
-                    !looksLikeBetterExerciseRestoreCandidate(
+                if (!shouldApplyRemoteReviewWorkspace({
+                    readOnly,
+                    reason,
+                    looksLikeBetterCandidate: looksLikeBetterExerciseRestoreCandidate(
                         existingExercise,
                         incomingExercise,
-                    )
-                ) {
+                    ),
+                })) {
                     return;
                 }
 
@@ -1661,7 +1694,7 @@ export function useReviewProgress(args: {
                 }
             });
         },
-        [firstTopicId, followRemoteNavigation, moduleSlug, subjectSlug],
+        [firstTopicId, followRemoteNavigation, moduleSlug, readOnly, subjectSlug],
     );
 
     useEffect(() => {
@@ -1774,11 +1807,27 @@ export function useReviewProgress(args: {
             remoteSyncInFlightRef.current = true;
 
             try {
-                if (localDirtyRef.current) {
+                if (!readOnly && localDirtyRef.current) {
                     await flush();
                 }
 
-                if (localDirtyRef.current || saveInFlightRef.current || pendingSavePayloadRef.current) {
+                if (readOnly) {
+                    // Read-only tutor/reference/learner views must never become
+                    // locally dirty just because Monaco or the runtime store
+                    // mounted. Otherwise the dirty guard permanently blocks the
+                    // next tutor workspace poll.
+                    cancel();
+                    pendingSavePayloadRef.current = null;
+                    localDirtyRef.current = false;
+                }
+
+                if (!canPollReviewRemoteProgress({
+                    readOnly,
+                    localDirty: localDirtyRef.current,
+                    remoteSyncInFlight: false,
+                    saveInFlight: saveInFlightRef.current,
+                    hasPendingSave: Boolean(pendingSavePayloadRef.current),
+                })) {
                     return;
                 }
 
@@ -1879,6 +1928,7 @@ export function useReviewProgress(args: {
             setActiveTopicId,
             meaningfulBodyForPayload,
             prime,
+            readOnly,
         ],
     );
 
@@ -1899,7 +1949,13 @@ export function useReviewProgress(args: {
             // no unsaved local work and no save/sync is in flight. That lets a
             // second computer's newer DB save appear automatically without
             // racing against active editing in the current tab.
-            if (localDirtyRef.current || remoteSyncInFlightRef.current || saveInFlightRef.current) return;
+            if (!canPollReviewRemoteProgress({
+                readOnly,
+                localDirty: localDirtyRef.current,
+                remoteSyncInFlight: remoteSyncInFlightRef.current,
+                saveInFlight: saveInFlightRef.current,
+                hasPendingSave: Boolean(pendingSavePayloadRef.current),
+            })) return;
             poll("poll");
         }, 4000);
 
@@ -1923,18 +1979,18 @@ export function useReviewProgress(args: {
             window.removeEventListener("online", onOnline);
             ctrl.abort();
         };
-    }, [subjectSlug, moduleSlug, hydrated, syncRemoteProgress]);
+    }, [subjectSlug, moduleSlug, hydrated, readOnly, syncRemoteProgress]);
 
     useEffect(() => {
         if (!hydrated || !hydrationCompleteRef.current) return;
-        if (applyingRemoteRef.current) return;
+        if (readOnly || applyingRemoteRef.current) return;
         if (!localDirtyRef.current) return;
 
         queueProgressSave(progressRef.current, { reason: "progress-change" });
-    }, [payload, hydrated, queueProgressSave]);
+    }, [payload, hydrated, queueProgressSave, readOnly]);
 
     useEffect(() => {
-        if (!hydrated || typeof window === "undefined") return;
+        if (!hydrated || readOnly || typeof window === "undefined") return;
 
         const onBeforeUnload = (event: BeforeUnloadEvent) => {
             if (!localDirtyRef.current && !saveInFlightRef.current && !pendingSavePayloadRef.current) return;
@@ -1944,10 +2000,10 @@ export function useReviewProgress(args: {
 
         window.addEventListener("beforeunload", onBeforeUnload);
         return () => window.removeEventListener("beforeunload", onBeforeUnload);
-    }, [hydrated]);
+    }, [hydrated, readOnly]);
 
     useFlushOnPageExit(() => {
-        if (!hydrated || !hydrationCompleteRef.current) return;
+        if (!hydrated || readOnly || !hydrationCompleteRef.current) return;
 
         cancel();
 
@@ -1965,10 +2021,10 @@ export function useReviewProgress(args: {
             // the runtime, so keep this final DB write alive during page teardown.
             keepalive: true,
         });
-    }, hydrated);
+    }, hydrated && !readOnly);
 
     useEffect(() => {
-        if (!hydrated || !hydrationCompleteRef.current) return;
+        if (!hydrated || readOnly || !hydrationCompleteRef.current) return;
 
         return () => {
             cancel();
@@ -1985,14 +2041,17 @@ export function useReviewProgress(args: {
                 keepalive: false,
             });
         };
-    }, [hydrated, subjectSlug, moduleSlug, locale, cancel, putProgressNow]);
+    }, [hydrated, readOnly, subjectSlug, moduleSlug, locale, cancel, putProgressNow]);
 
     useEffect(() => {
         if (!hydrated || !hydrationCompleteRef.current) return;
 
         const unsub = useReviewRuntimeStore.subscribe((runtimeState) => {
             if (!hydrationCompleteRef.current) return;
-            if (applyingRemoteRef.current) return;
+            if (!shouldTrackReviewRuntimeMutation({
+                readOnly,
+                applyingRemote: applyingRemoteRef.current,
+            })) return;
 
             localDirtyRef.current = true;
 
@@ -2023,7 +2082,7 @@ export function useReviewProgress(args: {
                 runtimeSaveTimerRef.current = null;
             }
         };
-    }, [hydrated, queueProgressSave]);
+    }, [hydrated, queueProgressSave, readOnly]);
 
     return {
         hydrated,
