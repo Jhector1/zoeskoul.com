@@ -1,4 +1,8 @@
 import { PurposeMode, PurposePolicy } from "@/lib/subjects/types";
+import {
+  tutoringContentRequestDedupeKey,
+  withTutoringContentRequestHeaders,
+} from "@/lib/tutoring/clientContentRequestContext";
 import type {
   PracticeGetResponse,
   PracticeStatusResponse,
@@ -168,7 +172,7 @@ export async function fetchPracticeExercise(args: Record<string, any>) {
     url.searchParams.set(key, String(value));
   }
 
-  const dedupeKey = url.toString();
+  const dedupeKey = `${tutoringContentRequestDedupeKey()}:${url.toString()}`;
   const existing = practiceGetInFlight.get(dedupeKey);
   if (existing) return existing;
 
@@ -180,6 +184,7 @@ export async function fetchPracticeExercise(args: Record<string, any>) {
     const res = await fetch(url.toString(), {
       method: "GET",
       cache: "no-store",
+      headers: withTutoringContentRequestHeaders(),
       /**
        * Do not pass each caller's AbortSignal into the shared GET. Multiple
        * React effects can ask for the same exercise; one soft timeout/cancel

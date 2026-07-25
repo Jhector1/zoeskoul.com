@@ -1,4 +1,8 @@
 import type { ReviewQuizSpec } from "@/lib/subjects/types";
+import {
+  tutoringContentRequestDedupeKey,
+  withTutoringContentRequestHeaders,
+} from "@/lib/tutoring/clientContentRequestContext";
 
 // src/lib/review/clientApi.ts
 // import type { ReviewQuizSpec } from "@/lib/review/types";
@@ -23,7 +27,8 @@ function waitForAbort(signal: AbortSignal): Promise<never> {
 
 export async function fetchReviewQuiz(spec: ReviewQuizSpec, signal?: AbortSignal) {
   const body = JSON.stringify(spec);
-  const existing = reviewQuizInFlight.get(body);
+  const requestKey = `${tutoringContentRequestDedupeKey()}:${body}`;
+  const existing = reviewQuizInFlight.get(requestKey);
 
   if (existing) {
     return signal ? Promise.race([existing, waitForAbort(signal)]) : existing;
@@ -32,7 +37,9 @@ export async function fetchReviewQuiz(spec: ReviewQuizSpec, signal?: AbortSignal
   const promise = (async () => {
     const res = await fetch("/api/review/quiz", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: withTutoringContentRequestHeaders({
+        "Content-Type": "application/json",
+      }),
       body,
       signal,
       cache: "no-store",
@@ -61,10 +68,10 @@ export async function fetchReviewQuiz(spec: ReviewQuizSpec, signal?: AbortSignal
     return json as ReviewQuizResponse;
   })();
 
-  reviewQuizInFlight.set(body, promise);
+  reviewQuizInFlight.set(requestKey, promise);
   promise.finally(() => {
-    if (reviewQuizInFlight.get(body) === promise) {
-      reviewQuizInFlight.delete(body);
+    if (reviewQuizInFlight.get(requestKey) === promise) {
+      reviewQuizInFlight.delete(requestKey);
     }
   }).catch(() => undefined);
 

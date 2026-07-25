@@ -6,6 +6,7 @@ import { gatePracticeModuleAccess } from "@/lib/billing/gatePracticeModuleAccess
 import { resolvePracticeExperienceMode } from "@/lib/practice/experience/resolve";
 import type { PracticeExperienceMode } from "@/lib/practice/experience/types";
 import { resolveActorRoleCapabilities } from "@/lib/access/roleCapabilitiesServer";
+import { resolveTutoringContentAccess } from "@/lib/tutoring/sessionContentAccess";
 
 export type PracticeAccessResolved =
   | {
@@ -39,6 +40,20 @@ export async function resolvePracticeAccess(args: {
 }): Promise<PracticeAccessResolved> {
   const { prisma, actor, locale, params, session } = args;
   const mode = resolvePracticeExperienceMode(session);
+
+  const tutoringAccess = await resolveTutoringContentAccess({
+    prisma,
+    req: args.req,
+    actor,
+    subjectSlug: params.subject ?? null,
+    moduleSlug: params.module ?? null,
+  });
+  if (tutoringAccess.kind === "denied") {
+    return { ok: false, res: tutoringAccess.res };
+  }
+  if (tutoringAccess.kind === "allowed") {
+    return { ok: true, mode, bypassBilling: true };
+  }
 
   // These experiences are deliberately accessible without module billing.
   // Assignment entitlement is enforced separately against the assignment owner.

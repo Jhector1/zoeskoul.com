@@ -6,6 +6,7 @@ import type { Actor } from "@/lib/practice/actor";
 import { resolvePracticeAccess } from "@/lib/practice/access/resolvePracticeAccess";
 import { bodyJsonResponse } from "@/lib/practice/api/shared/http";
 import { resolveReviewModuleForSubject } from "@/lib/review/api/shared/modules";
+import { resolveTutoringContentAccess } from "@/lib/tutoring/sessionContentAccess";
 
 export type ReviewAccessResolved =
     | {
@@ -49,6 +50,35 @@ export async function resolveReviewAccess(args: {
                 },
                 resolved.statusCode,
             ),
+        };
+    }
+
+    const tutoringAccess = await resolveTutoringContentAccess({
+        prisma,
+        req,
+        actor,
+        subjectSlug,
+        moduleSlug: resolved.module.slug,
+    });
+
+    if (tutoringAccess.kind === "denied") {
+        return {
+            ok: false,
+            res: tutoringAccess.res,
+        };
+    }
+
+    if (tutoringAccess.kind === "allowed") {
+        return {
+            ok: true,
+            mode: "standard",
+            bypassBilling: true,
+            scope: {
+                subjectSlug,
+                moduleSlug: resolved.module.slug,
+                subjectDbId: null,
+                moduleDbId: null,
+            },
         };
     }
 
