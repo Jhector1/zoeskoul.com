@@ -24,6 +24,10 @@
       "terminal": false
     }
   },
+  "tools": {
+    "defaultVisible": true,
+    "allowOpen": true
+  },
   "topic": {
     "labelKey": "topics.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.build-and-rebalance-bsts.label",
     "summaryKey": "topics.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.build-and-rebalance-bsts.summary"

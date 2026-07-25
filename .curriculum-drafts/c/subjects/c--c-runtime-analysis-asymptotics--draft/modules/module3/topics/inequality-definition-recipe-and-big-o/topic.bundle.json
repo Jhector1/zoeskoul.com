@@ -24,6 +24,10 @@
       "terminal": false
     }
   },
+  "tools": {
+    "defaultVisible": true,
+    "allowOpen": true
+  },
   "topic": {
     "labelKey": "topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-3-inequality-proofs.inequality-definition-recipe-and-big-o.label",
     "summaryKey": "topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-3-inequality-proofs.inequality-definition-recipe-and-big-o.summary"

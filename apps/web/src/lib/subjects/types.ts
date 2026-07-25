@@ -82,6 +82,8 @@ export type ReviewProjectStep = {
     /** @deprecated Prefer codeSurface: "embedded". */
     embeddedCodeInput?: boolean;
     ui?: CodeInputUiSpec;
+    /** Optional exercise-level Tools presentation override. */
+    tools?: ToolPresentationPolicy | null;
 
     /**
      * Optional project-step authored workspace fallback.

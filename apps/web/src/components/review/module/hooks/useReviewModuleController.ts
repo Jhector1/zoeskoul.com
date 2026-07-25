@@ -1,6 +1,7 @@
 import React, {useCallback, useEffect, useMemo, useRef, useState, useTransition} from "react";
 import {useParams, usePathname} from "next/navigation";
 import {useRouter} from "@/i18n/navigation";
+import { mergeToolPresentationPolicies } from "@zoeskoul/curriculum-contracts";
 
 import type {ReviewProgressState} from "@/lib/subjects/progressTypes";
 
@@ -101,6 +102,7 @@ import {
     resolveToolsRailVisibility,
     shouldDefaultCollapseToolsRail,
     toolPresentationPolicyFromManifest,
+    toolPresentationPolicyFromTopic,
 } from "../toolsRailVisibility";
 import {
     resolveReviewWorkspaceCapabilities,
@@ -1379,35 +1381,71 @@ export function useReviewModuleController({
             ) ?? null;
     }, [targetRegistry, activeCard?.id, viewTid]);
 
-    const activeCardExerciseTools =
+    const activeRouteRegistryExerciseEntry = useMemo(() => {
+        if (!targetRegistry || !activeExerciseTarget?.exerciseStateKey) return null;
+
+        return (
+            targetRegistry.byKey[
+                `exercise:${activeExerciseTarget.exerciseStateKey}`
+            ] ?? null
+        );
+    }, [targetRegistry, activeExerciseTarget?.exerciseStateKey]);
+    const activeWorkspaceRegistryExerciseEntry = useMemo(() => {
+        if (!targetRegistry || !activeCardWorkspaceExercise?.exerciseKey) {
+            return null;
+        }
+
+        return (
+            targetRegistry.byKey[
+                `exercise:${activeCardWorkspaceExercise.exerciseKey}`
+            ] ?? null
+        );
+    }, [targetRegistry, activeCardWorkspaceExercise?.exerciseKey]);
+
+    const activeExerciseRegistryEntry =
+        activeRouteRegistryExerciseEntry ??
+        activeWorkspaceRegistryExerciseEntry ??
+        activeCardRegistryExerciseEntry;
+    const activeCardExerciseTools = mergeToolPresentationPolicies(
+        toolPresentationPolicyFromManifest(
+            activeExerciseRegistryEntry?.toolManifest,
+        ),
         toolPresentationPolicyFromManifest(
             activeCardWorkspaceExercise?.manifest,
-        );
+        ),
+    );
+    const activeTopicTools = toolPresentationPolicyFromTopic(viewTopic);
+    const cardHasEmbeddedTryIt = Boolean(
+        (activeCard?.type === "text" || activeCard?.type === "sketch") &&
+        activeCard.tryIt,
+    );
+    const hasRegistryWorkspaceExercise = Boolean(
+        activeExerciseRegistryEntry &&
+        shouldUseWorkspaceCodeSurface({
+            exercise: activeExerciseRegistryEntry.toolManifest as any,
+        }),
+    );
 
     const shouldDefaultCollapseRightRail = shouldDefaultCollapseToolsRail({
         showDebugLearningUi: learnerUiFlags.showDebugLearningUi,
         activeCard,
-        topicTools: viewTopic?.meta?.tools,
+        topicTools: activeTopicTools,
         exerciseTools: activeCardExerciseTools,
         routeTargetKind: routeTarget?.kind ?? null,
         routeTargetTargetKind: routeTarget?.targetKind ?? null,
-        cardHasEmbeddedTryIt: Boolean(
-            (activeCard?.type === "text" || activeCard?.type === "sketch") &&
-            activeCard.tryIt,
-        ),
+        cardHasEmbeddedTryIt,
         hasWorkspaceExercise: Boolean(activeCardWorkspaceExercise),
+        hasRegistryWorkspaceExercise,
     });
     const toolsRailVisibility = resolveToolsRailVisibility({
         activeCard,
-        topicTools: viewTopic?.meta?.tools,
+        topicTools: activeTopicTools,
         exerciseTools: activeCardExerciseTools,
         routeTargetKind: routeTarget?.kind ?? null,
         routeTargetTargetKind: routeTarget?.targetKind ?? null,
-        cardHasEmbeddedTryIt: Boolean(
-            (activeCard?.type === "text" || activeCard?.type === "sketch") &&
-            activeCard.tryIt,
-        ),
+        cardHasEmbeddedTryIt,
         hasWorkspaceExercise: Boolean(activeCardWorkspaceExercise),
+        hasRegistryWorkspaceExercise,
     });
     const routeExerciseStateKey =
         routeTarget?.kind === "exercise" ? routeTarget.exerciseStateKey : "";
@@ -2547,9 +2585,7 @@ export function useReviewModuleController({
         routeCanUseBoundExercise,
         tool,
         topicSqlFallback: runtime.topicSqlFallback,
-        topicTools:
-            (viewTopic?.meta?.tools as import("@zoeskoul/curriculum-contracts").ToolPresentationPolicy | null | undefined) ??
-            null,
+        topicTools: activeTopicTools,
         cardTools: activeCard?.tools ?? null,
         compactLayout: !panels.showDesktopRight,
     });

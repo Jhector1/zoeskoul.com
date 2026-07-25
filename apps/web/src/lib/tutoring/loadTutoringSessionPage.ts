@@ -5,11 +5,13 @@ import { prisma } from "@/lib/prisma";
 import { getTeachingUser } from "@/lib/teaching/teachingAccess";
 import { redactReviewModuleSolutions } from "@/lib/learningAssignments/redactReviewModuleSolutions";
 import type { ReviewModule } from "@/lib/subjects/types";
+import { getResolvedReviewModule } from "@/lib/subjects/server/resolveSubjectPresentation";
 import { getTutoringSessionAccess } from "./sessionAccess";
 import { TUTORING_DOCUMENT_LIMITS } from "./sessionDocumentPolicy";
 import { parseTutoringSnapshot } from "./sessionSnapshot";
 import { loadTutoringParticipants } from "./sessionParticipants";
 import { getTutoringWorkspaceMeta } from "./sessionWorkspace";
+import { rebaseTutoringModuleToolPresentation } from "./sessionToolPresentation";
 
 export async function loadTutoringSessionPage(args: {
   sessionId: string;
@@ -81,9 +83,25 @@ export async function loadTutoringSessionPage(args: {
     };
   }
 
+  let currentSourceModule: ReviewModule | null = null;
+  try {
+    currentSourceModule = await getResolvedReviewModule(
+      snapshot.subjectSlug,
+      selected.sourceModuleSlug,
+    );
+  } catch {
+    // Frozen tutoring content remains usable if the source course is removed
+    // or temporarily cannot be resolved.
+  }
+
+  const moduleWithCurrentToolPresentation =
+    rebaseTutoringModuleToolPresentation({
+      frozenModule: selected.module,
+      currentModule: currentSourceModule,
+    });
   const module = access.canViewSolutions
-    ? selected.module
-    : redactReviewModuleSolutions(selected.module);
+    ? moduleWithCurrentToolPresentation
+    : redactReviewModuleSolutions(moduleWithCurrentToolPresentation);
   const [workspaceMeta, participants] = await Promise.all([
     getTutoringWorkspaceMeta(prisma, {
       sessionId: args.sessionId,

@@ -5,6 +5,7 @@ import {
     shouldDefaultCollapseToolsRail,
     shouldDefaultCollapseToolsRailForCompactQuiz,
     toolPresentationPolicyFromManifest,
+    toolPresentationPolicyFromTopic,
 } from "./toolsRailVisibility";
 
 const readingSketch = {
@@ -19,10 +20,11 @@ const baseArgs = {
     routeTargetTargetKind: "sketch",
     cardHasEmbeddedTryIt: false,
     hasWorkspaceExercise: false,
+    hasRegistryWorkspaceExercise: false,
 };
 
 describe("toolPresentationPolicyFromManifest", () => {
-    it("returns a typed policy from a runtime manifest record", () => {
+    it("returns a normalized policy from a runtime manifest record", () => {
         expect(
             toolPresentationPolicyFromManifest({
                 kind: "code_input",
@@ -56,8 +58,41 @@ describe("toolPresentationPolicyFromManifest", () => {
     });
 });
 
+describe("toolPresentationPolicyFromTopic", () => {
+    it("prefers the materialized inherited topic policy", () => {
+        expect(
+            toolPresentationPolicyFromTopic({
+                id: "topic-1",
+                label: "Topic",
+                cards: [],
+                meta: {
+                    tools: { defaultVisible: true, allowOpen: true },
+                    rawManifest: {
+                        tools: { defaultVisible: false },
+                    },
+                },
+            }),
+        ).toEqual({ defaultVisible: true, allowOpen: true });
+    });
+
+    it("falls back to a raw topic override for older frozen snapshots", () => {
+        expect(
+            toolPresentationPolicyFromTopic({
+                id: "topic-1",
+                label: "Topic",
+                cards: [],
+                meta: {
+                    rawManifest: {
+                        tools: { defaultVisible: true },
+                    },
+                },
+            }),
+        ).toEqual({ defaultVisible: true });
+    });
+});
+
 describe("resolveToolsRailVisibility", () => {
-    it("keeps a reusable workspace available but hidden on reading cards", () => {
+    it("keeps a non-exercise workspace available but closed by default", () => {
         expect(
             resolveToolsRailVisibility({
                 ...baseArgs,
@@ -68,11 +103,30 @@ describe("resolveToolsRailVisibility", () => {
             allowOpen: true,
             isAvailable: true,
             shouldCollapseByDefault: true,
-            inferredNeedsTools: false,
+            isExerciseBound: false,
         });
     });
 
-    it("opens the workspace for an embedded try-it in every course profile", () => {
+    it("opens a non-exercise workspace when an inherited policy explicitly requests it", () => {
+        expect(
+            resolveToolsRailVisibility({
+                ...baseArgs,
+                activeCard: readingSketch,
+                topicTools: {
+                    defaultVisible: true,
+                    allowOpen: true,
+                },
+            }),
+        ).toMatchObject({
+            defaultVisible: true,
+            allowOpen: true,
+            isAvailable: true,
+            shouldCollapseByDefault: false,
+            isExerciseBound: false,
+        });
+    });
+
+    it("opens embedded try-it and registry-backed exercise workspaces by default", () => {
         expect(
             resolveToolsRailVisibility({
                 ...baseArgs,
@@ -92,85 +146,131 @@ describe("resolveToolsRailVisibility", () => {
             }),
         ).toMatchObject({
             defaultVisible: true,
-            allowOpen: true,
-            isAvailable: true,
-            shouldCollapseByDefault: false,
-            inferredNeedsTools: true,
+            isExerciseBound: true,
+        });
+
+        expect(
+            resolveToolsRailVisibility({
+                ...baseArgs,
+                activeCard: readingSketch,
+                hasRegistryWorkspaceExercise: true,
+            }),
+        ).toMatchObject({
+            defaultVisible: true,
+            isExerciseBound: true,
         });
     });
 
-    it("opens the workspace for project cards", () => {
+    it("does not open Tools for a non-workspace exercise route", () => {
         expect(
             resolveToolsRailVisibility({
                 ...baseArgs,
                 activeCard: {
-                    type: "project",
-                    id: "project-1",
-                    title: "Project",
+                    type: "quiz",
+                    id: "quiz-1",
+                    title: "Quiz",
                     spec: {
-                        mode: "project",
-                        subject: "python-v2",
-                        steps: [],
+                        subject: "c-data-structures",
                     },
                 },
+                routeTargetKind: "exercise",
+                routeTargetTargetKind: "exercise",
+            }),
+        ).toMatchObject({
+            isExerciseTarget: true,
+            isExerciseBound: false,
+            defaultVisible: false,
+        });
+    });
+
+    it("opens a project only when it has an exercise-bound workspace", () => {
+        const projectCard = {
+            type: "project" as const,
+            id: "project-1",
+            title: "Project",
+            spec: {
+                mode: "project" as const,
+                subject: "python-v2",
+                steps: [],
+            },
+        };
+
+        expect(
+            resolveToolsRailVisibility({
+                ...baseArgs,
+                activeCard: projectCard,
+            }),
+        ).toMatchObject({
+            defaultVisible: false,
+            isExerciseBound: false,
+        });
+
+        expect(
+            resolveToolsRailVisibility({
+                ...baseArgs,
+                activeCard: projectCard,
+                hasRegistryWorkspaceExercise: true,
             }),
         ).toMatchObject({
             defaultVisible: true,
             isAvailable: true,
-            inferredNeedsTools: true,
+            isExerciseBound: true,
         });
     });
 
-    it("removes the rail only when authors explicitly hide and disallow it", () => {
+    it("lets an explicit policy hide or remove an exercise workspace", () => {
         expect(
             resolveToolsRailVisibility({
                 ...baseArgs,
                 activeCard: {
-                    ...readingSketch,
-                    tools: {
-                        defaultVisible: false,
-                        allowOpen: false,
-                    },
-                },
-            }),
-        ).toMatchObject({
-            defaultVisible: false,
-            allowOpen: false,
-            isAvailable: false,
-            shouldCollapseByDefault: true,
-        });
-    });
-
-    it("keeps exercise routes available even under an outer hidden policy", () => {
-        expect(
-            resolveToolsRailVisibility({
-                activeCard: {
                     type: "project",
                     id: "project-1",
                     title: "Project",
-                    tools: {
-                        defaultVisible: false,
-                        allowOpen: false,
-                    },
                     spec: {
                         mode: "project",
                         subject: "sql-v2",
                         steps: [],
                     },
                 },
-                routeTargetKind: "exercise",
-                routeTargetTargetKind: "exercise",
-                cardHasEmbeddedTryIt: false,
-                hasWorkspaceExercise: true,
+                exerciseTools: {
+                    defaultVisible: false,
+                },
+                hasRegistryWorkspaceExercise: true,
             }),
         ).toMatchObject({
+            defaultVisible: false,
+            allowOpen: true,
             isAvailable: true,
+            shouldCollapseByDefault: true,
+        });
+
+        expect(
+            resolveToolsRailVisibility({
+                ...baseArgs,
+                activeCard: {
+                    type: "project",
+                    id: "project-1",
+                    title: "Project",
+                    spec: {
+                        mode: "project",
+                        subject: "sql-v2",
+                        steps: [],
+                    },
+                },
+                exerciseTools: {
+                    defaultVisible: false,
+                    allowOpen: false,
+                },
+                hasRegistryWorkspaceExercise: true,
+            }),
+        ).toMatchObject({
             defaultVisible: false,
             allowOpen: false,
+            isAvailable: false,
         });
     });
 
-    it("merges topic, lesson, and exercise visibility by specificity", () => {
+    it("merges topic, card, and exercise policy by specificity", () => {
         const visibility = resolveToolsRailVisibility({
             ...baseArgs,
             topicTools: { defaultVisible: false, allowOpen: true },
@@ -178,16 +278,34 @@ describe("resolveToolsRailVisibility", () => {
                 ...readingSketch,
                 tools: { defaultVisible: true },
             },
-            exerciseTools: { allowOpen: false },
+            exerciseTools: { defaultVisible: false, allowOpen: false },
+            hasRegistryWorkspaceExercise: true,
         });
 
         expect(visibility.effectiveTools).toEqual({
-            defaultVisible: true,
+            defaultVisible: false,
             allowOpen: false,
         });
         expect(visibility).toMatchObject({
-            defaultVisible: true,
+            defaultVisible: false,
             allowOpen: false,
+            isAvailable: false,
+        });
+    });
+
+    it("allows a lower-level policy to reopen a parent-hidden workspace", () => {
+        expect(
+            resolveToolsRailVisibility({
+                ...baseArgs,
+                topicTools: { defaultVisible: false, allowOpen: false },
+                activeCard: {
+                    ...readingSketch,
+                    tools: { defaultVisible: true, allowOpen: true },
+                },
+            }),
+        ).toMatchObject({
+            defaultVisible: true,
+            allowOpen: true,
             isAvailable: true,
         });
     });
@@ -213,12 +331,12 @@ describe("shouldDefaultCollapseToolsRail", () => {
         ).toBe(true);
     });
 
-    it("does not collapse an embedded try-it", () => {
+    it("does not collapse an exercise-bound workspace", () => {
         expect(
             shouldDefaultCollapseToolsRail({
                 ...baseArgs,
                 activeCard: readingSketch,
-                cardHasEmbeddedTryIt: true,
+                hasRegistryWorkspaceExercise: true,
                 showDebugLearningUi: false,
             }),
         ).toBe(false);

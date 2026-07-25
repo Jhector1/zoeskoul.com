@@ -152,4 +152,72 @@ describe("defineCourseFromManifest", () => {
             },
         });
     });
+
+    it("inherits tools from subject scope and lets lower scopes override fields", () => {
+        const course = defineCourseFromManifest({
+            manifest: {
+                subject: {
+                    slug: "c-runtime-analysis-asymptotics",
+                    profileId: "c",
+                    catalogSlug: "c",
+                    genKey: "c_course",
+                    order: 1,
+                    titleKey: "subjects.c.title",
+                    tools: {
+                        defaultVisible: true,
+                        allowOpen: true,
+                    },
+                },
+                modules: [
+                    {
+                        slug: "module-1",
+                        prefix: "c1",
+                        order: 1,
+                        titleKey: "modules.c.1.title",
+                        tools: {
+                            allowOpen: false,
+                        },
+                        sections: [
+                            {
+                                slug: "section-1",
+                                order: 1,
+                                titleKey: "sections.c.1.title",
+                                tools: {
+                                    allowOpen: true,
+                                },
+                                topics: ["runtime-basics"],
+                            },
+                        ],
+                    },
+                ],
+            } as any,
+            topicManifests: {
+                "runtime-basics": {
+                    topicId: "runtime-basics",
+                    minutes: 5,
+                    topic: {
+                        labelKey: "topics.c.runtime_basics.label",
+                        summaryKey: "topics.c.runtime_basics.summary",
+                    },
+                    tools: {
+                        defaultVisible: false,
+                    },
+                    cards: [],
+                    sketches: [],
+                    exercises: [],
+                },
+            },
+        });
+
+        const topicBundle = course.modules[0]?.sections[0]?.topics[0];
+        expect(topicBundle?.review?.meta?.tools).toEqual({
+            defaultVisible: false,
+            allowOpen: true,
+        });
+        expect(topicBundle?.def.meta.tools).toEqual({
+            defaultVisible: false,
+            allowOpen: true,
+        });
+    });
+
 });

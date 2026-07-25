@@ -147,6 +147,7 @@ export function buildReviewFromManifest(args: {
 
     const rawCards = Array.isArray(args.manifest.cards) ? args.manifest.cards : [];
     const topicSlug = `${args.manifest.prefix}.${args.manifest.topicId}`;
+    const topicTools = normalizeToolPresentationPolicy(args.manifest.tools);
 
     const cards = built.topic.cards.map((card, index) => {
         const rawCard =
@@ -260,8 +261,21 @@ export function buildReviewFromManifest(args: {
 
     return {
         ...built,
+        def: topicTools
+            ? {
+                ...built.def,
+                meta: {
+                    ...built.def.meta,
+                    tools: topicTools,
+                },
+            }
+            : built.def,
         topic: {
             ...built.topic,
+            meta: {
+                ...(built.topic.meta ?? {}),
+                ...(topicTools ? { tools: topicTools } : {}),
+            },
             cards,
         },
     };

@@ -24,6 +24,10 @@
       "terminal": false
     }
   },
+  "tools": {
+    "defaultVisible": true,
+    "allowOpen": true
+  },
   "topic": {
     "labelKey": "topics.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.recursive-boolean-configurations.label",
     "summaryKey": "topics.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.recursive-boolean-configurations.summary"

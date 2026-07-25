@@ -24,6 +24,10 @@
       "terminal": false
     }
   },
+  "tools": {
+    "defaultVisible": true,
+    "allowOpen": true
+  },
   "topic": {
     "labelKey": "topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-2-limit-method.big-o-omega-theta-by-limits.label",
     "summaryKey": "topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-2-limit-method.big-o-omega-theta-by-limits.summary"

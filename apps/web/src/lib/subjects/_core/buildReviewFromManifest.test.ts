@@ -280,4 +280,38 @@ describe("buildReviewFromManifest try-it project cards", () => {
         });
     });
 
+    it("publishes topic tools policy into review and definition metadata", () => {
+        const built = buildReviewFromManifest({
+            manifest: {
+                prefix: "c1",
+                topicId: "runtime-basics",
+                subjectSlug: "c-runtime-analysis-asymptotics",
+                moduleSlug: "module-1",
+                sectionSlug: "section-1",
+                minutes: 5,
+                tools: {
+                    defaultVisible: true,
+                    allowOpen: true,
+                },
+                topic: {
+                    labelKey: "topic.label",
+                    summaryKey: "topic.summary",
+                },
+                cards: [],
+                sketches: [],
+                exercises: [],
+            } as any,
+            pool: [],
+        });
+
+        expect(built.topic.meta?.tools).toEqual({
+            defaultVisible: true,
+            allowOpen: true,
+        });
+        expect(built.def.meta.tools).toEqual({
+            defaultVisible: true,
+            allowOpen: true,
+        });
+    });
+
 });

@@ -1,4 +1,5 @@
 import { buildReviewFromManifestCore } from "@zoeskoul/curriculum-runtime/review";
+import { normalizeToolPresentationPolicy } from "@zoeskoul/curriculum-contracts";
 import { makeTopicDef } from "@/lib/subjects/_core/topicMeta";
 import type { TopicBundleManifest } from "@/lib/subjects/_core/manifestTypes";
 import type {
@@ -45,6 +46,7 @@ const TRY_IT_EXERCISE_STEP_FIELDS = [
   "sqlSchemaSql",
   "sqlSeedSql",
   "sqlInitialTableSnapshots",
+  "tools",
 ] as const;
 
 function asRecord(value: unknown): JsonObject | null {
@@ -271,7 +273,10 @@ function enrichReviewTopic(args: {
       );
     if (!rawCard) return card;
 
-    let nextCard: typeof card = card;
+    const rawToolsSpec = normalizeToolPresentationPolicy(rawCard.tools);
+    let nextCard: typeof card = rawToolsSpec
+      ? ({ ...card, tools: rawToolsSpec } as typeof card)
+      : card;
 
     if (nextCard.type === "sketch") {
       const rawSketchId = asString(rawCard.sketchId) || asString((nextCard as any).sketchId);
@@ -411,6 +416,9 @@ function enrichReviewTopic(args: {
       rawManifest: resolvedManifest,
       runtimeDefaults: args.manifest.runtimeDefaults ?? args.topic.meta?.runtimeDefaults ?? null,
       serviceDefaults: (args.manifest as any).serviceDefaults ?? args.topic.meta?.serviceDefaults ?? null,
+      ...(normalizeToolPresentationPolicy(args.manifest.tools)
+        ? { tools: normalizeToolPresentationPolicy(args.manifest.tools) }
+        : {}),
       draftPreview: true,
     },
     cards,

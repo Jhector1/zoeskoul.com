@@ -4,10 +4,14 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import {
   Circle,
   Eraser,
+  Maximize2,
+  Minus,
   MousePointer2,
   MoveUpRight,
   Pencil,
+  Plus,
   Redo2,
+  RotateCcw,
   Square,
   Trash2,
   Type,
@@ -21,7 +25,6 @@ import { clientPointToBoardPoint } from "../board/coordinates";
 import {
   getBoardTextEditorLogicalSize,
   getBoardTextEditorRect,
-  getBoardViewport,
 } from "../board/layout";
 import {
   boardElementBounds,
@@ -40,6 +43,15 @@ import type {
   BoardPoint,
   BoardTool,
 } from "../board/types";
+import {
+  DEFAULT_BOARD_CAMERA,
+  fitBoardCameraToBounds,
+  getBoardCameraViewport,
+  panBoardCameraByClientDelta,
+  zoomBoardCameraAtClientPoint,
+  type BoardCamera,
+  type BoardClientPoint,
+} from "../board/viewport";
 
 const DEFAULT_COLOR = "#0f766e";
 const DEFAULT_STROKE_WIDTH = 4;
@@ -58,6 +70,19 @@ type Interaction =
   | { type: "draw"; elementId: string; start: BoardPoint }
   | { type: "move"; elementId: string; start: BoardPoint; original: BoardElement }
   | { type: "resize"; elementId: string; handle: BoardResizeHandle; original: BoardElement }
+  | {
+      type: "pan";
+      pointerId: number;
+      startClient: BoardClientPoint;
+      originalCamera: BoardCamera;
+    }
+  | {
+      type: "pinch";
+      pointerIds: [number, number];
+      startDistance: number;
+      startMidpoint: BoardClientPoint;
+      startCamera: BoardCamera;
+    }
   | null;
 
 type TextDraft = {
@@ -168,6 +193,45 @@ function handlePoint(
   if (handle === "north-east") return { x: bounds.x + bounds.width, y: bounds.y };
   if (handle === "south-west") return { x: bounds.x, y: bounds.y + bounds.height };
   return { x: bounds.x + bounds.width, y: bounds.y + bounds.height };
+}
+
+
+function clientPointWithinSurface(
+  surface: SVGSVGElement,
+  clientX: number,
+  clientY: number,
+): BoardClientPoint {
+  const bounds = surface.getBoundingClientRect();
+  return {
+    x: clientX - bounds.left,
+    y: clientY - bounds.top,
+  };
+}
+
+function clientPointDistance(a: BoardClientPoint, b: BoardClientPoint) {
+  return Math.hypot(b.x - a.x, b.y - a.y);
+}
+
+function clientPointMidpoint(a: BoardClientPoint, b: BoardClientPoint): BoardClientPoint {
+  return {
+    x: (a.x + b.x) / 2,
+    y: (a.y + b.y) / 2,
+  };
+}
+
+function boardDocumentBounds(document: BoardDocument) {
+  if (document.elements.length === 0) return null;
+  const bounds = document.elements.map(boardElementBounds);
+  const minX = Math.min(...bounds.map((value) => value.x));
+  const minY = Math.min(...bounds.map((value) => value.y));
+  const maxX = Math.max(...bounds.map((value) => value.x + value.width));
+  const maxY = Math.max(...bounds.map((value) => value.y + value.height));
+  return {
+    x: minX,
+    y: minY,
+    width: Math.max(1, maxX - minX),
+    height: Math.max(1, maxY - minY),
+  };
 }
 
 function BoardElementView({ element }: { element: BoardElement }) {
@@ -283,6 +347,8 @@ export default function BoardToolPane({
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [textDraft, setTextDraft] = useState<TextDraft | null>(null);
   const [interaction, setInteraction] = useState<Interaction>(null);
+  const [camera, setCamera] = useState<BoardCamera>(DEFAULT_BOARD_CAMERA);
+  const [spacePressed, setSpacePressed] = useState(false);
   const [historyVersion, setHistoryVersion] = useState(0);
   const hydratedRef = useRef(false);
   const keyRef = useRef("");
@@ -290,10 +356,17 @@ export default function BoardToolPane({
   const futureRef = useRef<BoardDocument[]>([]);
   const textInputRef = useRef<HTMLTextAreaElement | null>(null);
   const textEditSessionRef = useRef<TextEditSession | null>(null);
+  const boardSvgRef = useRef<SVGSVGElement | null>(null);
+  const activePointersRef = useRef(new Map<number, BoardClientPoint>());
+  const boardHoverRef = useRef(false);
   const { ref: boardSurfaceRef, size: boardSurfaceSize } = useElementSize<HTMLDivElement>();
-  const boardViewport = useMemo(
-    () => getBoardViewport({ width: boardSurfaceSize.w, height: boardSurfaceSize.h }),
+  const boardSurface = useMemo(
+    () => ({ width: boardSurfaceSize.w, height: boardSurfaceSize.h }),
     [boardSurfaceSize.h, boardSurfaceSize.w],
+  );
+  const boardViewport = useMemo(
+    () => getBoardCameraViewport(boardSurface, camera),
+    [boardSurface, camera],
   );
   const boardScale = Math.max(
     0.01,
@@ -318,7 +391,10 @@ export default function BoardToolPane({
     setSelectedId(null);
     setTextDraft(null);
     textEditSessionRef.current = null;
+    activePointersRef.current.clear();
     setInteraction(null);
+    setCamera(DEFAULT_BOARD_CAMERA);
+    setSpacePressed(false);
   }, [keyString]);
 
   useEffect(() => {
@@ -410,9 +486,16 @@ export default function BoardToolPane({
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (readOnly || textDraft) return;
       const target = event.target as HTMLElement | null;
-      if (target?.matches("input, textarea, [contenteditable='true']")) return;
+      const isFormControl = target?.matches("input, textarea, [contenteditable='true']");
+
+      if (event.code === "Space" && boardHoverRef.current && !isFormControl) {
+        event.preventDefault();
+        setSpacePressed(true);
+        return;
+      }
+
+      if (readOnly || textDraft || isFormControl) return;
       if ((event.key === "Backspace" || event.key === "Delete") && selectedId) {
         event.preventDefault();
         removeElement(selectedId);
@@ -432,8 +515,19 @@ export default function BoardToolPane({
         if (event.shiftKey) redo(); else undo();
       }
     };
+    const handleKeyUp = (event: KeyboardEvent) => {
+      if (event.code === "Space") setSpacePressed(false);
+    };
+    const handleWindowBlur = () => setSpacePressed(false);
+
     window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
+    window.addEventListener("keyup", handleKeyUp);
+    window.addEventListener("blur", handleWindowBlur);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("keyup", handleKeyUp);
+      window.removeEventListener("blur", handleWindowBlur);
+    };
   }, [beginTextEdit, document.elements, readOnly, redo, removeElement, selectedId, textDraft, undo]);
 
   const eventPoints = useCallback((event: React.PointerEvent<SVGSVGElement>): BoardPoint[] => {
@@ -444,7 +538,12 @@ export default function BoardToolPane({
     const source = samples.length > 0 ? samples : [nativeEvent];
 
     return source.map((sample) =>
-      clientPointToBoardPoint(event.currentTarget, sample.clientX, sample.clientY),
+      clientPointToBoardPoint(
+        event.currentTarget,
+        sample.clientX,
+        sample.clientY,
+        { clamp: false },
+      ),
     );
   }, []);
 
@@ -454,6 +553,36 @@ export default function BoardToolPane({
   }, [eventPoints]);
 
   const onPointerDown = useCallback((event: React.PointerEvent<SVGSVGElement>) => {
+    if (event.button !== 0 && event.button !== 1) return;
+    event.currentTarget.focus({ preventScroll: true });
+
+    const client = clientPointWithinSurface(
+      event.currentTarget,
+      event.clientX,
+      event.clientY,
+    );
+    activePointersRef.current.set(event.pointerId, client);
+
+    if (
+      event.pointerType === "touch" &&
+      (tool === "select" || readOnly) &&
+      activePointersRef.current.size >= 2
+    ) {
+      const entries = [...activePointersRef.current.entries()].slice(0, 2);
+      const first = entries[0];
+      const second = entries[1];
+      const midpoint = clientPointMidpoint(first[1], second[1]);
+      setInteraction({
+        type: "pinch",
+        pointerIds: [first[0], second[0]],
+        startDistance: Math.max(1, clientPointDistance(first[1], second[1])),
+        startMidpoint: midpoint,
+        startCamera: camera,
+      });
+      event.currentTarget.setPointerCapture(event.pointerId);
+      return;
+    }
+
     const target = eventPoint(event);
     const rawHandle = (event.target as SVGElement | null)?.getAttribute("data-board-resize-handle");
     const selectedForHandle = selectedId
@@ -473,6 +602,22 @@ export default function BoardToolPane({
     }
 
     const hit = findTopBoardElement(document.elements, target);
+    const shouldPan =
+      event.button === 1 ||
+      spacePressed ||
+      ((tool === "select" || readOnly) && !hit);
+
+    if (shouldPan) {
+      if (!hit) setSelectedId(null);
+      setInteraction({
+        type: "pan",
+        pointerId: event.pointerId,
+        startClient: client,
+        originalCamera: camera,
+      });
+      event.currentTarget.setPointerCapture(event.pointerId);
+      return;
+    }
 
     if (readOnly) {
       setSelectedId(hit?.id ?? null);
@@ -525,10 +670,53 @@ export default function BoardToolPane({
     setSelectedId(id);
     setInteraction({ type: "draw", elementId: id, start: target });
     event.currentTarget.setPointerCapture(event.pointerId);
-  }, [beginNewTextEdit, beginTextEdit, checkpoint, color, document.elements, eventPoint, readOnly, removeElement, selectedId, strokeWidth, tool]);
+  }, [beginNewTextEdit, beginTextEdit, camera, checkpoint, color, document.elements, eventPoint, readOnly, removeElement, selectedId, spacePressed, strokeWidth, tool]);
 
   const onPointerMove = useCallback((event: React.PointerEvent<SVGSVGElement>) => {
-    if (!interaction || readOnly) return;
+    const client = clientPointWithinSurface(
+      event.currentTarget,
+      event.clientX,
+      event.clientY,
+    );
+    if (activePointersRef.current.has(event.pointerId)) {
+      activePointersRef.current.set(event.pointerId, client);
+    }
+
+    if (!interaction) return;
+
+    if (interaction.type === "pan") {
+      if (interaction.pointerId !== event.pointerId) return;
+      setCamera(
+        panBoardCameraByClientDelta(boardSurface, interaction.originalCamera, {
+          x: client.x - interaction.startClient.x,
+          y: client.y - interaction.startClient.y,
+        }),
+      );
+      return;
+    }
+
+    if (interaction.type === "pinch") {
+      const first = activePointersRef.current.get(interaction.pointerIds[0]);
+      const second = activePointersRef.current.get(interaction.pointerIds[1]);
+      if (!first || !second) return;
+      const midpoint = clientPointMidpoint(first, second);
+      const ratio = clientPointDistance(first, second) / interaction.startDistance;
+      const zoomed = zoomBoardCameraAtClientPoint(
+        boardSurface,
+        interaction.startCamera,
+        interaction.startMidpoint,
+        interaction.startCamera.zoom * ratio,
+      );
+      setCamera(
+        panBoardCameraByClientDelta(boardSurface, zoomed, {
+          x: midpoint.x - interaction.startMidpoint.x,
+          y: midpoint.y - interaction.startMidpoint.y,
+        }),
+      );
+      return;
+    }
+
+    if (readOnly) return;
     const pointerPoints = eventPoints(event);
     const currentPoint = pointerPoints[pointerPoints.length - 1];
     setDocument((current) => ({
@@ -566,15 +754,67 @@ export default function BoardToolPane({
         return element;
       }),
     }));
-  }, [eventPoints, interaction, readOnly]);
+  }, [boardSurface, eventPoints, interaction, readOnly]);
 
   const finishInteraction = useCallback((event: React.PointerEvent<SVGSVGElement>) => {
+    if (interaction?.type === "pinch") {
+      activePointersRef.current.clear();
+    } else {
+      activePointersRef.current.delete(event.pointerId);
+    }
     if (event.currentTarget.hasPointerCapture(event.pointerId)) {
       event.currentTarget.releasePointerCapture(event.pointerId);
     }
     if (interaction?.type === "draw" && tool !== "pen") setTool("select");
     setInteraction(null);
   }, [interaction, tool]);
+
+  const onWheel = useCallback((event: WheelEvent) => {
+    const surface = boardSvgRef.current;
+    if (!surface) return;
+    event.preventDefault();
+    const client = clientPointWithinSurface(
+      surface,
+      event.clientX,
+      event.clientY,
+    );
+    const zoomFactor = Math.exp(-event.deltaY * 0.0015);
+    setCamera((current) =>
+      zoomBoardCameraAtClientPoint(
+        boardSurface,
+        current,
+        client,
+        current.zoom * zoomFactor,
+      ),
+    );
+  }, [boardSurface]);
+
+  useEffect(() => {
+    const surface = boardSvgRef.current;
+    if (!surface) return;
+    surface.addEventListener("wheel", onWheel, { passive: false });
+    return () => surface.removeEventListener("wheel", onWheel);
+  }, [onWheel]);
+
+  const zoomFromCenter = useCallback((factor: number) => {
+    setCamera((current) =>
+      zoomBoardCameraAtClientPoint(
+        boardSurface,
+        current,
+        { x: boardSurface.width / 2, y: boardSurface.height / 2 },
+        current.zoom * factor,
+      ),
+    );
+  }, [boardSurface]);
+
+  const fitContent = useCallback(() => {
+    const bounds = boardDocumentBounds(document);
+    setCamera(
+      bounds
+        ? fitBoardCameraToBounds(boardSurface, bounds)
+        : DEFAULT_BOARD_CAMERA,
+    );
+  }, [boardSurface, document]);
 
   const updateTextDraftValue = useCallback((value: string) => {
     if (!textDraft) return;
@@ -642,7 +882,12 @@ export default function BoardToolPane({
 
   const onDoubleClick = useCallback((event: React.MouseEvent<SVGSVGElement>) => {
     if (readOnly) return;
-    const target = clientPointToBoardPoint(event.currentTarget, event.clientX, event.clientY);
+    const target = clientPointToBoardPoint(
+      event.currentTarget,
+      event.clientX,
+      event.clientY,
+      { clamp: false },
+    );
     const hit = findTopBoardElement(document.elements, target);
     if (hit?.type === "text") {
       event.preventDefault();
@@ -739,6 +984,52 @@ export default function BoardToolPane({
           <option value={12}>12 px</option>
         </select>
 
+        <div className="mx-1 h-6 w-px bg-[rgb(var(--ui-border))]" />
+        <div className="flex items-center gap-1" role="group" aria-label={t("zoomLevel")}>
+          <button
+            type="button"
+            className="ui-btn ui-btn-ghost h-9 w-9 p-0"
+            onClick={() => zoomFromCenter(1 / 1.2)}
+            title={t("zoomOut")}
+            aria-label={t("zoomOut")}
+          >
+            <Minus className="h-4 w-4" />
+          </button>
+          <span
+            className="min-w-[3.5rem] text-center text-xs font-semibold tabular-nums text-[rgb(var(--ui-text-muted))]"
+            aria-live="polite"
+          >
+            {Math.round(camera.zoom * 100)}%
+          </span>
+          <button
+            type="button"
+            className="ui-btn ui-btn-ghost h-9 w-9 p-0"
+            onClick={() => zoomFromCenter(1.2)}
+            title={t("zoomIn")}
+            aria-label={t("zoomIn")}
+          >
+            <Plus className="h-4 w-4" />
+          </button>
+          <button
+            type="button"
+            className="ui-btn ui-btn-ghost h-9 w-9 p-0"
+            onClick={fitContent}
+            title={t("fitContent")}
+            aria-label={t("fitContent")}
+          >
+            <Maximize2 className="h-4 w-4" />
+          </button>
+          <button
+            type="button"
+            className="ui-btn ui-btn-ghost h-9 w-9 p-0"
+            onClick={() => setCamera(DEFAULT_BOARD_CAMERA)}
+            title={t("resetView")}
+            aria-label={t("resetView")}
+          >
+            <RotateCcw className="h-4 w-4" />
+          </button>
+        </div>
+
         <div className="ml-auto flex items-center gap-1">
           <button type="button" className="ui-btn ui-btn-ghost h-9 w-9 p-0" onClick={undo} disabled={readOnly || !canUndo} title={t("undo")} aria-label={t("undo")}>
             <Undo2 className="h-4 w-4" />
@@ -769,25 +1060,34 @@ export default function BoardToolPane({
           className="relative h-full min-h-[240px] w-full overflow-hidden rounded-xl border border-slate-300 bg-white shadow-inner dark:border-white/10 dark:bg-slate-900"
         >
           <svg
+            ref={boardSvgRef}
             viewBox={`${boardViewport.x} ${boardViewport.y} ${boardViewport.width} ${boardViewport.height}`}
             preserveAspectRatio="xMinYMin meet"
             className={`absolute inset-0 h-full w-full touch-none ${
-              tool === "pen"
-                ? "cursor-crosshair"
-                : tool === "eraser"
-                  ? "cursor-cell"
-                  : tool === "text"
-                    ? "cursor-text"
-                    : tool === "select"
-                      ? "cursor-default"
-                      : "cursor-crosshair"
+              interaction?.type === "pan" || interaction?.type === "pinch"
+                ? "cursor-grabbing"
+                : spacePressed || tool === "select" || readOnly
+                  ? "cursor-grab"
+                  : tool === "pen"
+                    ? "cursor-crosshair"
+                    : tool === "eraser"
+                      ? "cursor-cell"
+                      : tool === "text"
+                        ? "cursor-text"
+                        : "cursor-crosshair"
             }`}
+            onPointerEnter={() => { boardHoverRef.current = true; }}
+            onPointerLeave={() => {
+              boardHoverRef.current = false;
+              setSpacePressed(false);
+            }}
             onPointerDown={onPointerDown}
             onPointerMove={onPointerMove}
             onPointerUp={finishInteraction}
             onPointerCancel={finishInteraction}
             onLostPointerCapture={finishInteraction}
             onDoubleClick={onDoubleClick}
+            tabIndex={0}
             role="application"
             aria-label={t("canvas")}
           >

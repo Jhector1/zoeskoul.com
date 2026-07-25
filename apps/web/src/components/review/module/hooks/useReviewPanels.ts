@@ -64,30 +64,42 @@ export function useReviewPanels({
     }, [mdUp]);
 
     useEffect(() => {
-        const previousScopeKey = previousRightRailDefaultScopeKeyRef.current;
-        const nextScopeKey = rightRailDefaultScopeKey ?? null;
-
-        if (!shouldResetManualPanelChoice(previousScopeKey, nextScopeKey)) {
-            return;
-        }
-
-        previousRightRailDefaultScopeKeyRef.current = nextScopeKey;
-        rightRailChoiceTouchedRef.current = false;
-    }, [rightRailDefaultScopeKey]);
-
-    useEffect(() => {
         if (!showDesktopLeft) return;
         if (leftSidebarChoiceTouchedRef.current) return;
 
         panels.setLeftCollapsed(shouldDefaultCollapseSidebar);
-    }, [panels, showDesktopLeft, shouldDefaultCollapseSidebar]);
+    }, [panels.setLeftCollapsed, showDesktopLeft, shouldDefaultCollapseSidebar]);
 
     useEffect(() => {
-        if (!showDesktopRight) return;
-        if (rightRailChoiceTouchedRef.current) return;
+        const previousScopeKey = previousRightRailDefaultScopeKeyRef.current;
+        const nextScopeKey = rightRailDefaultScopeKey ?? null;
+        const scopeChanged = shouldResetManualPanelChoice(
+            previousScopeKey,
+            nextScopeKey,
+        );
 
+        if (scopeChanged) {
+            previousRightRailDefaultScopeKeyRef.current = nextScopeKey;
+            rightRailChoiceTouchedRef.current = false;
+        }
+
+        if (!showDesktopRight) return;
+        if (!scopeChanged && rightRailChoiceTouchedRef.current) return;
+
+        /**
+         * Apply the new card/exercise default in the same effect that resets
+         * the manual-choice guard. Keeping these as separate effects made the
+         * reset depend on incidental object identity from useResizablePanels.
+         * It also allowed a previous card's collapsed choice to survive when
+         * two consecutive scopes happened to share the same boolean default.
+         */
         panels.setRightCollapsed(shouldDefaultCollapseRightRail);
-    }, [panels, showDesktopRight, shouldDefaultCollapseRightRail]);
+    }, [
+        panels.setRightCollapsed,
+        rightRailDefaultScopeKey,
+        showDesktopRight,
+        shouldDefaultCollapseRightRail,
+    ]);
 
     const leftCollapsedEff = showDesktopLeft ? panels.leftCollapsed : true;
     const rightCollapsedEff = showDesktopRight ? panels.rightCollapsed : true;

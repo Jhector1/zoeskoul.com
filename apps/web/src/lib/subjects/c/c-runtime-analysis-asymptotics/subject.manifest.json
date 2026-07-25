@@ -58,6 +58,10 @@
         "supersedes": null,
         "supersededBy": null
       }
+    },
+    "tools": {
+      "defaultVisible": true,
+      "allowOpen": true
     }
   },
   "modules": [

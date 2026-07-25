@@ -24,6 +24,10 @@
       "terminal": false
     }
   },
+  "tools": {
+    "defaultVisible": true,
+    "allowOpen": true
+  },
   "topic": {
     "labelKey": "topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.constant-and-rectangular-loops.label",
     "summaryKey": "topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.constant-and-rectangular-loops.summary"
