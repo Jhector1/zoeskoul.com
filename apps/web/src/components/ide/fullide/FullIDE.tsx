@@ -51,6 +51,7 @@ type FullIDEInnerProps = {
     projectTitle?: string | null;
     projectDescription?: string | null;
     projectScope: FullIDEProps["projectScope"];
+    readOnly: boolean;
     router: ReturnType<typeof useRouter>;
     splitRef: React.RefObject<HTMLDivElement | null>;
     rootRef: React.RefObject<HTMLDivElement | null>;
@@ -154,6 +155,7 @@ function FullIDEInner({
                           projectTitle,
                           projectDescription,
                           projectScope,
+                          readOnly,
                           exerciseStateKey,
                           workspaceReplacementRevision,
                           router,
@@ -240,13 +242,15 @@ function FullIDEInner({
 
     const emitImmediateWorkspaceChange = useCallback(
         (workspace: WorkspaceStateV2 | null) => {
+            if (readOnly) return;
             onWorkspaceChange?.(workspace, { origin: "user" });
         },
-        [onWorkspaceChange],
+        [onWorkspaceChange, readOnly],
     );
 
     const handleChangeFileCode = useCallback(
         (fileId: string, nextCode: string) => {
+            if (readOnly) return;
             const current = currentWorkspaceRef.current;
 
             if (
@@ -288,10 +292,11 @@ function FullIDEInner({
             actions.replaceWorkspace(nextWorkspace);
             emitImmediateWorkspaceChange(nextWorkspace);
         },
-        [actions, emitImmediateWorkspaceChange],
+        [actions, emitImmediateWorkspaceChange, readOnly],
     );
     const handleChangeStdin = useCallback(
         (nextStdin: string) => {
+            if (readOnly) return;
             actions.setStdin(nextStdin);
 
             const current = currentWorkspaceRef.current;
@@ -305,7 +310,7 @@ function FullIDEInner({
                 stdin: nextStdin,
             });
         },
-        [actions, emitImmediateWorkspaceChange],
+        [actions, emitImmediateWorkspaceChange, readOnly],
     );
     useEffect(() => {
         currentWorkspaceRef.current = currentWorkspace;
@@ -422,10 +427,11 @@ function FullIDEInner({
 
     const setLangUI = useCallback(
         (nextLanguage: any) => {
+            if (readOnly) return;
             if (onChangeLanguage) onChangeLanguage(nextLanguage);
             else actions.switchLanguage(nextLanguage);
         },
-        [onChangeLanguage, actions],
+        [onChangeLanguage, actions, readOnly],
     );
 
     const goBack = useCallback(() => {
@@ -436,6 +442,7 @@ function FullIDEInner({
             files: WorkspaceSyncEntry[],
             meta: { dirtyUiPaths: Set<string> },
         ) => {
+            if (readOnly) return;
             const prior = currentWorkspaceRef.current;
             if (!prior) return;
 
@@ -460,7 +467,7 @@ function FullIDEInner({
              */
             emitImmediateWorkspaceChange(nextWorkspace);
         },
-        [actions, emitImmediateWorkspaceChange],
+        [actions, emitImmediateWorkspaceChange, readOnly],
     );
     const handleOpenWorkspaceFile = useCallback(
         (id: string) => {
@@ -477,6 +484,23 @@ function FullIDEInner({
         },
         [actions],
     );
+    const explorerPolicy = useMemo(
+        () =>
+            readOnly
+                ? {
+                      ...state.policy,
+                      canCreateFiles: false,
+                      canCreateFolders: false,
+                      canRenameNodes: false,
+                      canDeleteNodes: false,
+                      canMoveNodes: false,
+                      canUploadFiles: false,
+                      canUploadBinaryFiles: false,
+                  }
+                : state.policy,
+        [readOnly, state.policy],
+    );
+    const noOp = useCallback(() => undefined, []);
     const explorerPane = (
         <IdeExplorerPane
             isSql={isSql}
@@ -492,14 +516,14 @@ function FullIDEInner({
             inlineEdit={inlineEdit}
             stdin={stdin}
             access={access}
-            policy={state.policy}
+            policy={explorerPolicy}
             onUpgrade={() => router.push(access.hasUser ? billingHref : loginHref)}
             onChangeFilter={actions.setFilter}
             onChangeStdin={handleChangeStdin}
-            canUndo={history.canUndo}
-            canRedo={history.canRedo}
-            onUndo={actions.undo}
-            onRedo={actions.redo}
+            canUndo={!readOnly && history.canUndo}
+            canRedo={!readOnly && history.canRedo}
+            onUndo={readOnly ? noOp : actions.undo}
+            onRedo={readOnly ? noOp : actions.redo}
             onToggleExplorer={
                 viewport.isDesktop
                     ? () => setExplorerCollapsed(true)
@@ -509,18 +533,18 @@ function FullIDEInner({
             }
             services={services}
             actions={{
-                setInlineEdit: actions.setInlineEdit,
+                setInlineEdit: readOnly ? noOp : actions.setInlineEdit,
                 setToast: actions.setToast,
                 openFile: handleOpenWorkspaceFile,
                 toggleFolder: actions.toggleFolder,
-                startNewFile: actions.startNewFile,
-                startNewFolder: actions.startNewFolder,
-                startRename: actions.startRename,
-                setEntry: actions.setEntry,
-                moveNode: actions.moveNode,
-                importExternalFiles: actions.importExternalFiles,
-                requestDelete: actions.requestDelete,
-                commitInlineEdit: actions.commitInlineEdit,
+                startNewFile: readOnly ? noOp : actions.startNewFile,
+                startNewFolder: readOnly ? noOp : actions.startNewFolder,
+                startRename: readOnly ? noOp : actions.startRename,
+                setEntry: readOnly ? noOp : actions.setEntry,
+                moveNode: readOnly ? noOp : actions.moveNode,
+                importExternalFiles: readOnly ? noOp : actions.importExternalFiles,
+                requestDelete: readOnly ? noOp : actions.requestDelete,
+                commitInlineEdit: readOnly ? noOp : actions.commitInlineEdit,
                 cancelInlineEdit: actions.cancelInlineEdit,
             }}
         />
@@ -574,6 +598,7 @@ function FullIDEInner({
             exerciseStateKey={exerciseStateKey}
             workspace={currentWorkspace}
             workspaceReplacementRevision={workspaceReplacementRevision}
+            readOnly={readOnly}
             terminalHistoryScopeKey={terminalHistoryScopeKey}
             onApplyTerminalSnapshotFiles={applyTerminalSnapshotFiles}
             onTerminalSyncReady={onTerminalSyncReady}
@@ -591,11 +616,12 @@ function FullIDEInner({
     );
 
     const handleConfirmDelete = () => {
-        if (!pendingDeleteId) return;
+        if (readOnly || !pendingDeleteId) return;
         actions.performDelete();
     };
 
     const handlePrimarySave = () => {
+        if (readOnly) return;
         if (!access.canSaveCloud) {
             router.push(access.hasUser ? billingHref : loginHref);
             return;
@@ -604,6 +630,7 @@ function FullIDEInner({
     };
 
     const handleSaveAsIntent = () => {
+        if (readOnly) return;
         if (!access.canSaveCloud) {
             router.push(access.hasUser ? billingHref : loginHref);
             return;
@@ -645,7 +672,7 @@ function FullIDEInner({
                     showActivePath={services.chrome.showActivePath}
                     showStatus={services.chrome.showStatus}
                     showSaveControls={services.projects.showSaveControls}
-                    showSaveAs={services.projects.showSaveAs}
+                    showSaveAs={!readOnly && services.projects.showSaveAs}
                     showLessonLink={services.chrome.showLessonLink}
                     language={language}
                     sqlDialect={sqlDialect}
@@ -665,12 +692,15 @@ function FullIDEInner({
                     lessonHref={lessonHref}
                     lessonLabel={lessonLabel}
                     saveDisabled={
+                        readOnly ||
                         projectSession.isSavingProject ||
                         projectSession.loadingProject ||
                         !currentWorkspace
                     }
                     saveBusy={projectSession.isSavingProject}
-                    saveAsDisabled={projectSession.loadingProject || !currentWorkspace}
+                    saveAsDisabled={
+                        readOnly || projectSession.loadingProject || !currentWorkspace
+                    }
                     canSaveCloud={access.canSaveCloud}
                     hasUser={access.hasUser}
                     onSave={handlePrimarySave}
@@ -712,10 +742,10 @@ function FullIDEInner({
             </div>
 
             <IdeProjectModals
-                showDeleteModal={services.explorer.showActions}
+                showDeleteModal={!readOnly && services.explorer.showActions}
                 showProjects={showProjectsUi}
                 showSaveAs={services.projects.showSaveAs}
-                showRename={services.projects.showCloudProjects}
+                showRename={!readOnly && services.projects.showCloudProjects}
                 nodes={nodes}
                 pendingDeleteId={pendingDeleteId}
                 onCancelDelete={() => actions.setPendingDeleteId(null)}
@@ -827,6 +857,7 @@ export default function FullIDE(props: FullIDEProps) {
         projectDescription = null,
         projectScope,
         draftStorageMode = "local",
+        readOnly = false,
         onReadyChange,
         servicePreset,
         services: serviceOverrides,
@@ -1148,6 +1179,7 @@ export default function FullIDE(props: FullIDEProps) {
                 projectTitle={projectTitle}
                 projectDescription={projectDescription}
                 projectScope={projectScope}
+                readOnly={readOnly}
                 exerciseStateKey={props.exerciseStateKey}
                 workspaceReplacementRevision={
                     readyWorkspaceReplacementRevision

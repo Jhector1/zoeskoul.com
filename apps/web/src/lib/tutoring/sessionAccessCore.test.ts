@@ -34,8 +34,13 @@ describe("resolveTutoringAccess", () => {
     });
   });
 
-  it("allows an invited teacher through participant access", () => {
-    expect(resolveTutoringAccess(base)).not.toBeNull();
+  it("keeps the tutor master workspace read-only for learners", () => {
+    expect(resolveTutoringAccess({ ...base, allowStudentEditing: true })).toMatchObject({
+      canViewMasterWorkspace: true,
+      canEditMasterWorkspace: false,
+      canEditSharedDocuments: false,
+      canEditPersonalDocuments: true,
+    });
   });
 
   it("does not expose draft sessions to participants", () => {

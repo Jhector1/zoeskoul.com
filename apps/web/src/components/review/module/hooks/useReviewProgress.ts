@@ -69,6 +69,45 @@ function workspaceContentHash(workspace: any) {
     });
 }
 
+function preserveLocalWorkspaceNavigation(
+    incomingWorkspace: any,
+    localWorkspace: any,
+) {
+    if (
+        !incomingWorkspace ||
+        incomingWorkspace.version !== 2 ||
+        !Array.isArray(incomingWorkspace.nodes) ||
+        !localWorkspace ||
+        localWorkspace.version !== 2 ||
+        !Array.isArray(localWorkspace.nodes)
+    ) {
+        return incomingWorkspace;
+    }
+
+    const incomingIds = new Set(
+        incomingWorkspace.nodes.map((node: any) => String(node?.id ?? "")),
+    );
+    const localActiveFileId = String(localWorkspace.activeFileId ?? "");
+    const activeFileId = incomingIds.has(localActiveFileId)
+        ? localActiveFileId
+        : incomingWorkspace.activeFileId;
+    const localTabs = Array.isArray(localWorkspace.openTabs)
+        ? localWorkspace.openTabs.filter((id: unknown) => incomingIds.has(String(id)))
+        : [];
+    const incomingTabs = Array.isArray(incomingWorkspace.openTabs)
+        ? incomingWorkspace.openTabs
+        : [];
+
+    return {
+        ...incomingWorkspace,
+        activeFileId,
+        openTabs: [...new Set([...localTabs, ...incomingTabs])],
+        expanded: Array.isArray(localWorkspace.expanded)
+            ? localWorkspace.expanded
+            : incomingWorkspace.expanded,
+    };
+}
+
 function savedStarterHashMatchesRuntimeStarter(args: {
     saved: any;
     existingStarterHash?: string | null;
@@ -652,6 +691,7 @@ export function useReviewProgress(args: {
     endpoint?: string;
     gamificationEnabled?: boolean;
     readOnly?: boolean;
+    followRemoteNavigation?: boolean;
 }) {
     const {
         subjectSlug,
@@ -661,6 +701,7 @@ export function useReviewProgress(args: {
         endpoint = "/api/review/progress",
         gamificationEnabled = endpoint === "/api/review/progress",
         readOnly = false,
+        followRemoteNavigation = true,
     } = args;
 
     const [progress, setProgress] = useState<ReviewProgressState>(
@@ -1307,13 +1348,21 @@ export function useReviewProgress(args: {
                     !shouldDropSavedWorkspace &&
                     savedMatchesExistingLanguage;
 
+                const existingWorkspace =
+                    existingExercise?.workspace ??
+                    existingExercise?.codeWorkspace ??
+                    existingExercise?.ideWorkspace ??
+                    null;
+                const hydratedWorkspace = !shouldHydrateEditorState
+                    ? existingWorkspace
+                    : savedWorkspace;
                 const workspace =
-                    !shouldHydrateEditorState
-                        ? existingExercise?.workspace ??
-                        existingExercise?.codeWorkspace ??
-                        existingExercise?.ideWorkspace ??
-                        null
-                        : savedWorkspace;
+                    !followRemoteNavigation && reason !== "initial"
+                        ? preserveLocalWorkspaceNavigation(
+                            hydratedWorkspace,
+                            existingWorkspace,
+                        )
+                        : hydratedWorkspace;
 
                 const code = !shouldHydrateEditorState
                     ? existingExercise?.code ?? existingExercise?.source ?? undefined
@@ -1344,9 +1393,18 @@ export function useReviewProgress(args: {
                     : saved?.workspaceOrigin ??
                     (userEdited ? "saved" : Boolean(savedWorkspace) ? "starter" : undefined);
 
+                const explicitRemoteWorkspaceApply =
+                    reason !== "initial" && reason !== "runtime-contract-ready";
                 const incomingExercise = {
                     ...saved,
                     exerciseKey: canonicalExerciseKey,
+                    workspaceApplyRevision: explicitRemoteWorkspaceApply
+                        ? Math.max(
+                            Number(existingExercise?.workspaceApplyRevision ?? 0),
+                            Number(saved?.workspaceApplyRevision ?? 0),
+                          ) + 1
+                        : saved?.workspaceApplyRevision ??
+                          existingExercise?.workspaceApplyRevision,
                     subjectSlug:
                         saved?.subjectSlug ??
                         existingExercise?.subjectSlug ??
@@ -1603,7 +1661,7 @@ export function useReviewProgress(args: {
                 }
             });
         },
-        [firstTopicId, moduleSlug, subjectSlug],
+        [firstTopicId, followRemoteNavigation, moduleSlug, subjectSlug],
     );
 
     useEffect(() => {
@@ -1776,8 +1834,10 @@ export function useReviewProgress(args: {
 
                 progressRef.current = remoteProgress;
                 setProgressSafe(remoteProgress);
-                setActiveTopicId(nextActive);
-                setViewTopicId(nextActive);
+                if (followRemoteNavigation) {
+                    setActiveTopicId(nextActive);
+                    setViewTopicId(nextActive);
+                }
                 localDirtyRef.current = false;
 
                 const canonicalRemotePayload = buildReviewProgressPayload({
@@ -1814,6 +1874,7 @@ export function useReviewProgress(args: {
             cancel,
             hydrateRuntimeFromProgress,
             firstTopicId,
+            followRemoteNavigation,
             setProgressSafe,
             setActiveTopicId,
             meaningfulBodyForPayload,

@@ -83,6 +83,9 @@ import { buildBillingHref } from "@/lib/billing/moduleAccess";
 import { buildModulePracticeHref } from "@/lib/practice/experience/modulePracticeHref";
 import { clearReviewWorkspaceDrafts } from "@/components/tools/panes/reviewWorkspaceDrafts";
 import {
+    resolveReviewWorkspacePersistencePolicy,
+} from "@/components/tools/panes/reviewWorkspaceRuntimeCommit";
+import {
     cardHasAuthoredExerciseSurface,
     shouldRightRailUseBoundExercise,
 } from "./rightRailExerciseBinding";
@@ -312,8 +315,27 @@ export function useReviewModuleController({
     const sectionSlug = (params as any)?.sectionSlug;
     const tutoringSessionId = tutoringSession?.id ?? null;
     const isTutoringSession = Boolean(tutoringSessionId);
+    const tutoringWorkspaceView = tutoringSession?.workspaceView ?? "mine";
+    const tutoringLearnerId = tutoringSession?.learnerId ?? null;
+    const tutoringWorkspaceRevision = tutoringSession?.workspaceRevision ?? 0;
+    const tutoringWorkspaceQuery = useMemo(() => {
+        if (!tutoringSessionId) return "";
+        const params = new URLSearchParams({
+            workspaceView: tutoringWorkspaceView,
+            workspaceRevision: String(tutoringWorkspaceRevision),
+        });
+        if (tutoringWorkspaceView === "learner" && tutoringLearnerId) {
+            params.set("learnerId", tutoringLearnerId);
+        }
+        return params.toString();
+    }, [
+        tutoringLearnerId,
+        tutoringSessionId,
+        tutoringWorkspaceRevision,
+        tutoringWorkspaceView,
+    ]);
     const tutoringProgressEndpoint = tutoringSessionId
-        ? `/api/tutoring-sessions/${encodeURIComponent(tutoringSessionId)}/progress`
+        ? `/api/tutoring-sessions/${encodeURIComponent(tutoringSessionId)}/progress?${tutoringWorkspaceQuery}`
         : undefined;
     const tutoringDocumentEndpoint = tutoringSessionId
         ? `/api/tutoring-sessions/${encodeURIComponent(tutoringSessionId)}/documents`
@@ -350,13 +372,29 @@ export function useReviewModuleController({
                 moduleSlug,
                 target,
             });
-            return applyReviewRoutePrefix({
+            const prefixedPath = applyReviewRoutePrefix({
                 standardPath,
                 locale,
                 routePrefix,
             });
+            if (!tutoringSessionId) return prefixedPath;
+
+            const query = new URLSearchParams({ workspace: tutoringWorkspaceView });
+            if (tutoringWorkspaceView === "learner" && tutoringLearnerId) {
+                query.set("learnerId", tutoringLearnerId);
+            }
+            return `${prefixedPath}?${query.toString()}`;
         },
-        [catalogSlug, locale, moduleSlug, routePrefix, subjectSlug],
+        [
+            catalogSlug,
+            locale,
+            moduleSlug,
+            routePrefix,
+            subjectSlug,
+            tutoringLearnerId,
+            tutoringSessionId,
+            tutoringWorkspaceView,
+        ],
     );
     const resolvedNavModes = useMemo(
         () => resolveFlowNavigationConfig(navigationMode),
@@ -386,8 +424,17 @@ export function useReviewModuleController({
         endpoint: tutoringProgressEndpoint,
         gamificationEnabled: !isTutoringSession,
         readOnly: isTutoringSession && tutoringSession?.canEdit !== true,
+        followRemoteNavigation: tutoringSession?.followTutor !== false,
     });
 
+    const reviewWorkspacePersistencePolicy = useMemo(
+        () =>
+            resolveReviewWorkspacePersistencePolicy({
+                isTutoringSession,
+                canEdit: tutoringSession?.canEdit === true,
+            }),
+        [isTutoringSession, tutoringSession?.canEdit],
+    );
     const store = useReviewRuntimeStore();
     const flushToolLatestRef = useRef<null | (() => Promise<void>)>(null);
 
@@ -2358,9 +2405,21 @@ export function useReviewModuleController({
                     moduleKey: moduleSlug,
                     cardKey: boardScopeKey,
                     toolId: "board",
+                    workspaceView: tutoringWorkspaceView,
+                    workspaceRevision: String(tutoringWorkspaceRevision),
+                    ...(tutoringWorkspaceView === "learner" && tutoringLearnerId
+                        ? { learnerId: tutoringLearnerId }
+                        : {}),
                 }
                 : undefined,
-        [boardScopeKey, moduleSlug, tutoringSessionId],
+        [
+            boardScopeKey,
+            moduleSlug,
+            tutoringLearnerId,
+            tutoringSessionId,
+            tutoringWorkspaceRevision,
+            tutoringWorkspaceView,
+        ],
     );
     const shouldRenderStackedTools = Boolean(
         toolsRailVisibility.isAvailable &&
@@ -2463,7 +2522,17 @@ export function useReviewModuleController({
             leftCollapsed: panels.leftCollapsed,
             rightCollapsed: panels.rightCollapsed,
             modulesHref: isTutoringSession
-                ? routePrefix || `/${encodeURIComponent(locale)}/tutoring-sessions`
+                ? (() => {
+                    const base =
+                        routePrefix || `/${encodeURIComponent(locale)}/tutoring-sessions`;
+                    const query = new URLSearchParams({
+                        workspace: tutoringWorkspaceView,
+                    });
+                    if (tutoringWorkspaceView === "learner" && tutoringLearnerId) {
+                        query.set("learnerId", tutoringLearnerId);
+                    }
+                    return `${base}?${query.toString()}`;
+                })()
                 : `/${encodeURIComponent(locale)}` +
                   (catalogSlug
                       ? `/catalog/${encodeURIComponent(catalogSlug)}`
@@ -2480,6 +2549,10 @@ export function useReviewModuleController({
             onToggleLeftPanel: panels.handleToggleLeftPanel,
             onToggleRightPanel: panels.handleToggleRightPanel,
             resetOptions: headerResetOptions,
+            resetDisabledReason:
+                isTutoringSession && tutoringSession?.canEdit !== true
+                    ? "This workspace is read only. Switch to an editable workspace to reset progress."
+                    : null,
             onPrevTopic: topicFlow.prevTopic?.id
                 ? () => {
                     const topic = topics.find((item) => item.id === topicFlow.prevTopic?.id) ?? null;
@@ -2620,7 +2693,15 @@ export function useReviewModuleController({
                 // Review workspaces are persisted only through the runtime store
                 // and ReviewProgress DB. Disable both CodeToolPane local drafts
                 // and FullIDE local draft storage with the same policy prop.
-                draftStorageMode: "off" as const,
+                draftStorageMode:
+                    reviewWorkspacePersistencePolicy.draftStorageMode,
+                workspaceRuntimeCommitMode:
+                    reviewWorkspacePersistencePolicy.runtimeCommitMode,
+                onWorkspaceRuntimeCommit:
+                    reviewWorkspacePersistencePolicy.runtimeCommitMode ===
+                    "runtime-debounced"
+                        ? flush
+                        : undefined,
                 onChangeCode: tool.setToolCode,
                 onChangeStdin: tool.setToolStdin,
                 onChangeWorkspace: tool.setToolWorkspace,
@@ -2629,6 +2710,8 @@ export function useReviewModuleController({
                 moduleId: moduleSlug,
                 locale,
                 codeEnabled: runtime.codeEnabled,
+                codeReadOnly:
+                    isTutoringSession && tutoringSession?.canEdit !== true,
                 boardEnabled,
                 boardReadOnly:
                     isTutoringSession && tutoringSession?.canEditBoard !== true,

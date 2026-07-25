@@ -72,6 +72,12 @@ export type ExerciseRuntimeState = {
   fileEditState?: RuntimeFileEditState;
   starterWorkspace?: WorkspaceStateV2 | null;
 
+  /**
+   * Monotonic command revision used to replace an already-mounted editor.
+   * Normal learner typing does not increment this value.
+   */
+  workspaceApplyRevision?: number;
+
   subjectSlug: string;
   moduleSlug: string;
   sectionSlug?: string;

@@ -15,6 +15,7 @@ import type { WorkspaceStateV2 } from "@/components/ide/types";
 import type { SqlPaneOptions } from "@/components/code/runner/components/sql/results-pane";
 import type { ToolRunnerPanePolicy, ToolSurface } from "@zoeskoul/curriculum-contracts";
 import { learnerUiFlags } from "@/lib/config/learnerUiFlags";
+import type { ReviewWorkspaceRuntimeCommitMode } from "@/components/tools/panes/reviewWorkspaceRuntimeCommit";
 
 const PANE_ANIM = {
     show: { opacity: 1, scale: 1, y: 0, filter: "blur(0px)" },
@@ -46,9 +47,12 @@ export type ToolsPanelProps = {
     toolCode: string;
     toolStdin: string;
     toolWorkspace?: WorkspaceStateV2 | null;
+    codeReadOnly?: boolean;
     toolSqlDialect: SqlDialect;
     ideConfig?: LearningIdeConfig | null;
     draftStorageMode?: "off" | "local";
+    workspaceRuntimeCommitMode?: ReviewWorkspaceRuntimeCommitMode;
+    onWorkspaceRuntimeCommit?: () => void | Promise<void>;
     onChangeCode: (c: string) => void;
     onChangeStdin: (s: string) => void;
     onChangeWorkspace?: (workspace: WorkspaceStateV2 | null) => void;
@@ -197,9 +201,12 @@ function ToolsPanelInner(props: ToolsPanelProps) {
                         toolCode={props.toolCode}
                         toolStdin={props.toolStdin}
                         toolWorkspace={props.toolWorkspace}
+                        readOnly={props.codeReadOnly === true}
                         toolSqlDialect={props.toolSqlDialect}
                         ideConfig={props.ideConfig}
                         draftStorageMode={props.draftStorageMode}
+                        workspaceRuntimeCommitMode={props.workspaceRuntimeCommitMode}
+                        onWorkspaceRuntimeCommit={props.onWorkspaceRuntimeCommit}
                         onChangeLang={props.onChangeLang}
                         onChangeCode={props.onChangeCode}
                         onChangeStdin={props.onChangeStdin}
@@ -479,9 +486,12 @@ function CodePaneLayer(props: {
     toolCode: string;
     toolStdin: string;
     toolWorkspace?: WorkspaceStateV2 | null;
+    readOnly: boolean;
     toolSqlDialect: SqlDialect;
     ideConfig?: LearningIdeConfig | null;
     draftStorageMode?: "off" | "local";
+    workspaceRuntimeCommitMode?: ReviewWorkspaceRuntimeCommitMode;
+    onWorkspaceRuntimeCommit?: () => void | Promise<void>;
     onChangeLang?: (l: WorkspaceLanguage) => void;
     onChangeCode: (c: string) => void;
     onChangeStdin: (s: string) => void;
@@ -527,9 +537,12 @@ function CodePaneLayer(props: {
             toolCode: props.toolCode,
             toolStdin: props.toolStdin,
             toolWorkspace: props.toolWorkspace,
+            readOnly: props.readOnly,
             toolSqlDialect: props.toolSqlDialect,
             ideConfig: props.ideConfig,
             draftStorageMode: props.draftStorageMode,
+            workspaceRuntimeCommitMode: props.workspaceRuntimeCommitMode,
+            onWorkspaceRuntimeCommit: props.onWorkspaceRuntimeCommit,
             onChangeLang: props.onChangeLang,
             onChangeCode: props.onChangeCode,
             onChangeStdin: props.onChangeStdin,
@@ -578,9 +591,12 @@ const MemoCodePaneLayer = React.memo(
         prev.toolCode === next.toolCode &&
         prev.toolStdin === next.toolStdin &&
         prev.toolWorkspace === next.toolWorkspace &&
+        prev.readOnly === next.readOnly &&
         prev.toolSqlDialect === next.toolSqlDialect &&
         prev.ideConfig === next.ideConfig &&
         prev.draftStorageMode === next.draftStorageMode &&
+        prev.workspaceRuntimeCommitMode === next.workspaceRuntimeCommitMode &&
+        prev.onWorkspaceRuntimeCommit === next.onWorkspaceRuntimeCommit &&
         prev.onChangeLang === next.onChangeLang &&
         prev.onChangeCode === next.onChangeCode &&
         prev.onChangeStdin === next.onChangeStdin &&
@@ -701,9 +717,12 @@ function areToolsPanelPropsEqual(prev: ToolsPanelProps, next: ToolsPanelProps) {
         prev.toolCode === next.toolCode &&
         prev.toolStdin === next.toolStdin &&
         prev.toolWorkspace === next.toolWorkspace &&
+        prev.codeReadOnly === next.codeReadOnly &&
         prev.toolSqlDialect === next.toolSqlDialect &&
         prev.ideConfig === next.ideConfig &&
         prev.draftStorageMode === next.draftStorageMode &&
+        prev.workspaceRuntimeCommitMode === next.workspaceRuntimeCommitMode &&
+        prev.onWorkspaceRuntimeCommit === next.onWorkspaceRuntimeCommit &&
         prev.onChangeCode === next.onChangeCode &&
         prev.onChangeStdin === next.onChangeStdin &&
         prev.onChangeWorkspace === next.onChangeWorkspace &&

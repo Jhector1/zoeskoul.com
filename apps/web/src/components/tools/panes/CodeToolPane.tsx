@@ -39,6 +39,11 @@ import {
     selectWorkspaceForSubmit,
     type WorkspaceSubmitCache,
 } from "@/components/tools/panes/workspaceSnapshot";
+import {
+    REVIEW_WORKSPACE_RUNTIME_COMMIT_DELAY_MS,
+    shouldCommitReviewWorkspaceToRuntimeAfterIdle,
+    type ReviewWorkspaceRuntimeCommitMode,
+} from "@/components/tools/panes/reviewWorkspaceRuntimeCommit";
 import { learnerUiFlags } from "@/lib/config/learnerUiFlags";
 import { getReviewSubmitBridgeHost } from "@/lib/review/submitBridge";
 import { compactTerminalIdentityKey } from "@/components/code/runner/terminalIdentity";
@@ -1341,6 +1346,7 @@ export default function CodeToolPane(props: {
     toolCode: string;
     toolStdin: string;
     toolWorkspace?: WorkspaceStateV2 | null;
+    readOnly?: boolean;
     onChangeCode: (c: string) => void;
     onChangeStdin: (s: string) => void;
     onChangeWorkspace?: (workspace: WorkspaceStateV2 | null) => void;
@@ -1351,6 +1357,11 @@ export default function CodeToolPane(props: {
      * pane's reviewWorkspaceDrafts layer and FullIDE's own local draft store.
      */
     draftStorageMode?: "off" | "local";
+    /**
+     * Optional runtime/DB commit policy. This never enables browser-local drafts.
+     */
+    workspaceRuntimeCommitMode?: ReviewWorkspaceRuntimeCommitMode;
+    onWorkspaceRuntimeCommit?: () => void | Promise<void>;
     sqlDialect?: SqlDialect;
     sqlDatasetId?: string;
     sqlResultShape?: "table";
@@ -1372,12 +1383,15 @@ export default function CodeToolPane(props: {
         toolCode,
         toolStdin,
         toolWorkspace,
+        readOnly = false,
         onChangeCode,
         onChangeStdin,
         onChangeWorkspace,
         onBeforeRun,
         ideConfig,
         draftStorageMode = "local",
+        workspaceRuntimeCommitMode = "deferred",
+        onWorkspaceRuntimeCommit,
         sqlDialect = "sqlite",
         sqlDatasetId,
         sqlResultShape,
@@ -1390,7 +1404,9 @@ export default function CodeToolPane(props: {
         sqlInitialTableSnapshots,
     } = props;
 
-    const localWorkspacePersistenceEnabled = draftStorageMode === "local";
+    const localWorkspacePersistenceEnabled =
+        draftStorageMode === "local" &&
+        workspaceRuntimeCommitMode !== "runtime-debounced";
 
     const tools = useReviewTools();
     const boundId = tools?.boundId ?? null;
@@ -2335,6 +2351,24 @@ export default function CodeToolPane(props: {
         emitWorkspaceUpstreamRef.current = emitWorkspaceUpstream;
     }, [emitWorkspaceUpstream]);
 
+    const emitWorkspaceUpstreamAndCommit = useCallback((
+        workspace: WorkspaceStateV2 | null,
+        forceUserEdit: boolean,
+    ) => {
+        emitWorkspaceUpstreamRef.current(workspace, forceUserEdit);
+
+        if (!forceUserEdit || workspaceRuntimeCommitMode !== "runtime-debounced") return;
+
+        try {
+            const pending = onWorkspaceRuntimeCommit?.();
+            if (pending && typeof (pending as Promise<void>).catch === "function") {
+                void (pending as Promise<void>).catch(() => undefined);
+            }
+        } catch {
+            // Save status and retry behavior are owned by useReviewProgress.
+        }
+    }, [onWorkspaceRuntimeCommit, workspaceRuntimeCommitMode]);
+
     const flushPendingWorkspace = useCallback(() => {
         if (typeof pendingTerminalEvidenceRef.current !== "undefined" && boundId) {
             const nextEvidence = pendingTerminalEvidenceRef.current ?? null;
@@ -2368,8 +2402,8 @@ export default function CodeToolPane(props: {
         const forceUserEdit = pendingWorkspaceForceUserEditRef.current;
         pendingWorkspaceRef.current = undefined;
         pendingWorkspaceForceUserEditRef.current = false;
-        emitWorkspaceUpstreamRef.current(pending, forceUserEdit);
-    }, [boundId, syncCodeInputSnapshot]);
+        emitWorkspaceUpstreamAndCommit(pending, forceUserEdit);
+    }, [boundId, emitWorkspaceUpstreamAndCommit, syncCodeInputSnapshot]);
 
     useEffect(() => {
         if (!boundId) return;
@@ -2414,6 +2448,7 @@ export default function CodeToolPane(props: {
         workspace: WorkspaceStateV2 | null,
         meta?: { origin?: "user" | "sync" | "programmatic" },
     ) => {
+        if (readOnly && meta?.origin === "user") return;
         /**
          * FullIDE can briefly emit a null/blank workspace while its internal
          * workspace bridge is booting. In route-owned review mode the runtime
@@ -2488,21 +2523,34 @@ export default function CodeToolPane(props: {
 
         if (shouldDeferReviewEditorContentEdit) {
             /**
-             * Keep Monaco local-first while the learner is actively typing.
+             * Keep Monaco local-first while the user is actively typing.
              *
-             * Do not push the workspace back into the route runtime from a typing
-             * timer. That feedback loop re-enters FullIDE/CodeRunner with a new
-             * controlled value and can make Monaco blink or briefly lose focus.
-             *
-             * The pending workspace is still flushed before Run/Check/submit, on
-             * page hide, and on unmount. The lightweight same-tab draft below is
-             * only a safety net for navigation/reload while typing.
+             * Normal review routes keep the historical deferred behavior and flush
+             * before Run/Check/navigation. Editable tutoring workspaces opt into a
+             * bounded idle commit: the mounted editor stays uncontrolled, while the
+             * runtime snapshot is persisted for remote tutor/learner observation.
              */
             pendingWorkspaceRef.current = workspace;
             pendingWorkspaceForceUserEditRef.current = true;
 
             if (persistTimerRef.current != null) {
                 window.clearTimeout(persistTimerRef.current);
+            }
+
+            if (
+                shouldCommitReviewWorkspaceToRuntimeAfterIdle({
+                    mode: workspaceRuntimeCommitMode,
+                    isReviewRouteMode,
+                    isDirectUserWorkspaceEdit,
+                    structureChanged,
+                    hasWorkspaceContent: forceWorkspaceHasContent(workspace),
+                })
+            ) {
+                persistTimerRef.current = window.setTimeout(() => {
+                    persistTimerRef.current = null;
+                    flushPendingWorkspace();
+                }, REVIEW_WORKSPACE_RUNTIME_COMMIT_DELAY_MS);
+                return;
             }
 
             persistTimerRef.current = window.setTimeout(() => {
@@ -2532,7 +2580,7 @@ export default function CodeToolPane(props: {
             };
             pendingWorkspaceRef.current = undefined;
             pendingWorkspaceForceUserEditRef.current = false;
-            emitWorkspaceUpstreamRef.current(workspace, true);
+            emitWorkspaceUpstreamAndCommit(workspace, true);
             return;
         }
 
@@ -2544,7 +2592,7 @@ export default function CodeToolPane(props: {
             }
 
             pendingWorkspaceRef.current = undefined;
-            emitWorkspaceUpstream(workspace, isEffectiveUserWorkspaceEdit);
+            emitWorkspaceUpstreamAndCommit(workspace, isEffectiveUserWorkspaceEdit);
             return;
         }
 
@@ -2555,7 +2603,7 @@ export default function CodeToolPane(props: {
             }
 
             pendingWorkspaceRef.current = undefined;
-            emitWorkspaceUpstream(workspace, isEffectiveUserWorkspaceEdit);
+            emitWorkspaceUpstreamAndCommit(workspace, isEffectiveUserWorkspaceEdit);
             return;
         }
 
@@ -2572,13 +2620,14 @@ export default function CodeToolPane(props: {
             const forceUserEdit = pendingWorkspaceForceUserEditRef.current;
             pendingWorkspaceRef.current = undefined;
             pendingWorkspaceForceUserEditRef.current = false;
-            emitWorkspaceUpstreamRef.current(pending ?? null, forceUserEdit);
+            emitWorkspaceUpstreamAndCommit(pending ?? null, forceUserEdit);
         }, 220);
     }, [
         boundId,
         effectiveLanguage,
-        emitWorkspaceUpstream,
+        emitWorkspaceUpstreamAndCommit,
         finalReviewWorkspace,
+        flushPendingWorkspace,
         isReviewRouteMode,
         localWorkspacePersistenceEnabled,
         onChangeCode,
@@ -2587,8 +2636,10 @@ export default function CodeToolPane(props: {
         patchExerciseRuntime,
         patchEditorWorkspace,
         resolvedEditorOwnerKey,
+        readOnly,
         syncCodeInputSnapshot,
         usesWorkspaceShell,
+        workspaceRuntimeCommitMode,
         workspaceContextKey,
     ]);
 
@@ -3075,6 +3126,7 @@ export default function CodeToolPane(props: {
                         loginHref="/authenticate"
                         billingHref="/billing"
                         draftStorageMode={draftStorageMode}
+                        readOnly={readOnly}
                         servicePreset={ideShell.servicePreset}
                         forceDesktopLayout={paneIdeMode.forceDesktopLayout}
                         services={{

@@ -138,6 +138,8 @@ export type CommonProps = {
 
     allowReset?: boolean;
     allowRun?: boolean;
+    /** Makes editor and interactive terminal input read-only without disabling Run. */
+    readOnly?: boolean;
     disabled?: boolean;
 
     resetTerminalOnRun?: boolean;

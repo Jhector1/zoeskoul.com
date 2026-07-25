@@ -15,12 +15,14 @@ export default function ReviewModulePageClient({
                                                    pageStatus = mod ? "ready" : "missing",
                                                    routePrefix = null,
                                                    tutoringSession = null,
+                                                   supplementalHeader = null,
                                                }: {
     canUnlockAll: boolean;
     mod: ReviewModule | null;
     pageStatus?: "ready" | "unavailable" | "missing";
     routePrefix?: string | null;
     tutoringSession?: ReviewModulePageProps["tutoringSession"];
+    supplementalHeader?: React.ReactNode;
 }) {
     const params = useParams<{
         locale: string;
@@ -81,6 +83,7 @@ export default function ReviewModulePageClient({
                         navigationMode={{ cards: "slideshow", quiz: "slideshow" }}
                         routePrefix={routePrefix}
                         tutoringSession={tutoringSession}
+                        supplementalHeader={supplementalHeader}
                     />
                 </div>
             </div>

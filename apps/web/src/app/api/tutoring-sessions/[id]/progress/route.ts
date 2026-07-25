@@ -18,15 +18,17 @@ import { rateLimit } from "@/lib/security/ratelimit";
 import {
   TUTORING_DOCUMENT_LIMITS,
   isValidModuleKey,
-  participantOwnerKey,
   utf8Bytes,
 } from "@/lib/tutoring/sessionDocumentPolicy";
 import { getTutoringRequestAccess } from "@/lib/tutoring/sessionRequestAccess";
+import {
+  TUTORING_PROGRESS_CARD_KEY,
+  TUTORING_PROGRESS_TOOL_ID,
+} from "@/lib/tutoring/sessionWorkspace";
+import { withTutoringBaseline } from "@/lib/tutoring/sessionWorkspaceMerge";
+import { resolveTutoringRequestWorkspace } from "@/lib/tutoring/sessionWorkspaceRequest";
 
 export const runtime = "nodejs";
-
-const PROGRESS_CARD_KEY = "review-progress";
-const PROGRESS_TOOL_ID = "progress";
 
 function emptyProgress(): ReviewProgressState {
   return { topics: {} };
@@ -65,6 +67,25 @@ function retryAfterResponse(resetMs: number) {
   return response;
 }
 
+async function findProgressDocument(args: {
+  sessionId: string;
+  ownerKey: string;
+  moduleKey: string;
+}) {
+  return prisma.tutoringSessionDocument.findUnique({
+    where: {
+      tutoring_session_document: {
+        sessionId: args.sessionId,
+        ownerKey: args.ownerKey,
+        moduleKey: args.moduleKey,
+        cardKey: TUTORING_PROGRESS_CARD_KEY,
+        toolId: TUTORING_PROGRESS_TOOL_ID,
+      },
+    },
+    select: { body: true, updatedAt: true, revision: true },
+  });
+}
+
 export async function GET(
   req: Request,
   { params }: { params: Promise<{ id: string }> },
@@ -79,25 +100,40 @@ export async function GET(
     return bodyJsonResponse({ error: "Module not found" }, 404);
   }
 
-  const ownerKey = participantOwnerKey(allowed.userId);
-  const document = await prisma.tutoringSessionDocument.findUnique({
-    where: {
-      tutoring_session_document: {
-        sessionId: id,
-        ownerKey,
-        moduleKey: moduleSlug,
-        cardKey: PROGRESS_CARD_KEY,
-        toolId: PROGRESS_TOOL_ID,
-      },
-    },
-    select: { body: true, updatedAt: true, revision: true },
+  const { resolved, meta } = await resolveTutoringRequestWorkspace({
+    request: req,
+    access: allowed,
   });
+  if (!resolved) return bodyJsonResponse({ error: "Forbidden" }, 403);
+
+  const direct = await findProgressDocument({
+    sessionId: id,
+    ownerKey: resolved.ownerKey,
+    moduleKey: moduleSlug,
+  });
+  const fallback =
+    !direct && resolved.sourceOwnerKey
+      ? await findProgressDocument({
+          sessionId: id,
+          ownerKey: resolved.sourceOwnerKey,
+          moduleKey: moduleSlug,
+        })
+      : null;
+  const source = direct ?? fallback;
+  let progress = parseStoredProgress(source?.body);
+  if (!direct && resolved.view === "mine") {
+    progress = withTutoringBaseline(progress, resolved.baselineVersion);
+  }
 
   return bodyJsonResponse({
-    progress: parseStoredProgress(document?.body),
-    updatedAt: document?.updatedAt ?? null,
-    revision: document?.revision ?? 0,
-    readOnly: !allowed.canEditOwnProgress,
+    progress,
+    updatedAt: source?.updatedAt ?? null,
+    revision: source?.revision ?? 0,
+    readOnly: resolved.readOnly,
+    workspaceView: resolved.view,
+    publishedVersion: meta.publishedVersion,
+    baselineVersion: resolved.baselineVersion,
+    derivedFromTutorWorkspace: !direct && Boolean(fallback),
   });
 }
 
@@ -115,13 +151,6 @@ export async function PUT(
   const { id } = await params;
   const allowed = await getTutoringRequestAccess(id);
   if (!allowed) return bodyJsonResponse({ error: "Forbidden" }, 403);
-  if (!allowed.canEditOwnProgress) {
-    return bodyJsonResponse({ error: "Read only" }, 403);
-  }
-
-  const limited = await enforceWriteRateLimit(allowed.userId, id);
-  if (!limited) return bodyJsonResponse({ error: "Service unavailable" }, 503);
-  if (!limited.ok) return retryAfterResponse(limited.resetMs);
 
   const payload = await readJsonSafe(req);
   const parsed = ReviewProgressWriteSchema.safeParse(payload);
@@ -132,13 +161,34 @@ export async function PUT(
     );
   }
 
+  const payloadRecord =
+    payload && typeof payload === "object" && !Array.isArray(payload)
+      ? (payload as Record<string, unknown>)
+      : null;
+  const { resolved, meta } = await resolveTutoringRequestWorkspace({
+    request: req,
+    access: allowed,
+    payload: payloadRecord,
+  });
+  if (!resolved) return bodyJsonResponse({ error: "Forbidden" }, 403);
+  if (resolved.readOnly || resolved.view === "reference" || resolved.view === "learner") {
+    return bodyJsonResponse({ error: "Read only" }, 403);
+  }
+
+  const limited = await enforceWriteRateLimit(allowed.userId, id);
+  if (!limited) return bodyJsonResponse({ error: "Service unavailable" }, 503);
+  if (!limited.ok) return retryAfterResponse(limited.resetMs);
+
   const moduleSlug = parsed.data.moduleRef;
   if (!isValidModuleKey(allowed.tutoringSession.moduleKeys, moduleSlug)) {
     return bodyJsonResponse({ error: "Module not found" }, 404);
   }
 
-  const state = parsed.data.state as ReviewProgressState;
-  const ownerKey = participantOwnerKey(allowed.userId);
+  let state = parsed.data.state as ReviewProgressState;
+  if (resolved.view === "mine") {
+    state = withTutoringBaseline(state, meta.publishedVersion);
+  }
+  const ownerKey = resolved.ownerKey;
 
   try {
     const saved = await prisma.$transaction(
@@ -149,8 +199,8 @@ export async function PUT(
               sessionId: id,
               ownerKey,
               moduleKey: moduleSlug,
-              cardKey: PROGRESS_CARD_KEY,
-              toolId: PROGRESS_TOOL_ID,
+              cardKey: TUTORING_PROGRESS_CARD_KEY,
+              toolId: TUTORING_PROGRESS_TOOL_ID,
             },
           },
           select: { id: true, body: true, byteSize: true, revision: true },
@@ -180,7 +230,7 @@ export async function PUT(
         }
 
         const aggregate = await tx.tutoringSessionDocument.aggregate({
-          where: { sessionId: id, ownerKey, toolId: PROGRESS_TOOL_ID },
+          where: { sessionId: id, ownerKey, toolId: TUTORING_PROGRESS_TOOL_ID },
           _count: { _all: true },
           _sum: { byteSize: true },
         });
@@ -201,8 +251,8 @@ export async function PUT(
               sessionId: id,
               ownerKey,
               moduleKey: moduleSlug,
-              cardKey: PROGRESS_CARD_KEY,
-              toolId: PROGRESS_TOOL_ID,
+              cardKey: TUTORING_PROGRESS_CARD_KEY,
+              toolId: TUTORING_PROGRESS_TOOL_ID,
               format: "plain",
               body: serialized,
               byteSize,
@@ -237,6 +287,8 @@ export async function PUT(
       state: saved.state,
       updatedAt: saved.updatedAt,
       revision: saved.revision,
+      workspaceView: resolved.view,
+      publishedVersion: meta.publishedVersion,
     });
   } catch (error) {
     const message = error instanceof Error ? error.message : "";

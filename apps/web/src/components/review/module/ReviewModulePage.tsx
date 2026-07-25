@@ -40,6 +40,7 @@ export default function ReviewModulePage(props: ReviewModulePageProps) {
                 leftW={vm.layout.leftW}
                 rightW={vm.layout.rightW}
                 header={<ReviewModuleHeader {...vm.header} />}
+                supplementalHeader={props.supplementalHeader}
                 leftRail={<ReviewModuleLeftRail {...vm.leftRail} />}
                 rightRail={<ReviewModuleRightRail {...vm.rightRail} />}
                 mobileDrawer={

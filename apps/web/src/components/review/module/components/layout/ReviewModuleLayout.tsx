@@ -16,6 +16,7 @@ type Props = {
     leftW: number;
     rightW: number;
     header: React.ReactNode;
+    supplementalHeader?: React.ReactNode;
     leftRail?: React.ReactNode;
     rightRail?: React.ReactNode;
     mobileDrawer?: React.ReactNode;
@@ -71,6 +72,7 @@ export default function ReviewModuleLayout({
                                                leftW,
                                                rightW,
                                                header,
+                                               supplementalHeader,
                                                leftRail,
                                                rightRail,
                                                mobileDrawer,
@@ -123,6 +125,11 @@ export default function ReviewModuleLayout({
                         <div data-mobile-workspace-header="true" className="shrink-0">
                             {header}
                         </div>
+                        {supplementalHeader ? (
+                            <div data-review-supplemental-header="true" className="shrink-0">
+                                {supplementalHeader}
+                            </div>
+                        ) : null}
                         <div className="flex-1 min-h-0 w-full">
                             <div className="h-full min-h-0 flex">
                                 {leftRail}

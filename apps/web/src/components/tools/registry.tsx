@@ -13,6 +13,7 @@ import type { LearningIdeConfig } from "@/lib/ide/learningIdeConfig";
 import type { WorkspaceStateV2 } from "@/components/ide/types";
 import type { SqlPaneOptions } from "@/components/code/runner/components/sql/results-pane";
 import type { ToolRunnerPanePolicy, ToolSurface } from "@zoeskoul/curriculum-contracts";
+import type { ReviewWorkspaceRuntimeCommitMode } from "@/components/tools/panes/reviewWorkspaceRuntimeCommit";
 
 export type CodeToolProps = {
     height: number;
@@ -24,6 +25,7 @@ export type CodeToolProps = {
     toolCode: string;
     toolStdin: string;
     toolWorkspace?: WorkspaceStateV2 | null;
+    readOnly?: boolean;
     toolSqlDialect?: SqlDialect;
     ideConfig?: LearningIdeConfig | null;
 
@@ -33,6 +35,8 @@ export type CodeToolProps = {
      * runtime store and ReviewProgress DB can restore learner work.
      */
     draftStorageMode?: "off" | "local";
+    workspaceRuntimeCommitMode?: ReviewWorkspaceRuntimeCommitMode;
+    onWorkspaceRuntimeCommit?: () => void | Promise<void>;
 
     onChangeLang?: (l: RunnerLanguage) => void;
     onChangeCode: (c: string) => void;

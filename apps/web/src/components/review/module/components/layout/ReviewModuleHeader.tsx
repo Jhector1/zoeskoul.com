@@ -28,6 +28,7 @@ type Props = {
     } | null;
     onOpenModulesDrawer?: () => void;
     showResetButton?: boolean;
+    resetDisabledReason?: string | null;
     onToggleLeftPanel: () => void;
     onToggleRightPanel: () => void;
     resetOptions: Array<{
@@ -76,6 +77,7 @@ export default function ReviewModuleHeader({
                                                contextBadge = null,
                                                onOpenModulesDrawer,
                                                showResetButton = true,
+                                               resetDisabledReason = null,
                                                onToggleLeftPanel,
                                                onToggleRightPanel,
                                                resetOptions,
@@ -91,6 +93,7 @@ export default function ReviewModuleHeader({
                                            }: Props) {
     const t = useTranslations("review.header");
     const resetMenuId = React.useId();
+    const resetDisabled = Boolean(resetDisabledReason);
     const [resetMenuOpen, setResetMenuOpen] = React.useState(false);
     const [resetMenuPlacement, setResetMenuPlacement] = React.useState<ResetMenuPlacement | null>(null);
     const resetMenuRef = React.useRef<HTMLDivElement | null>(null);
@@ -137,6 +140,7 @@ export default function ReviewModuleHeader({
     }, []);
 
     const toggleResetMenu = React.useCallback((button: HTMLButtonElement) => {
+        if (resetDisabled) return;
         resetButtonAnchorRef.current = button;
 
         setResetMenuOpen((open) => {
@@ -148,7 +152,13 @@ export default function ReviewModuleHeader({
             }
             return true;
         });
-    }, [getResetMenuPlacement]);
+    }, [getResetMenuPlacement, resetDisabled]);
+
+    React.useEffect(() => {
+        if (resetDisabled && resetMenuOpen) {
+            setResetMenuOpen(false);
+        }
+    }, [resetDisabled, resetMenuOpen]);
 
     React.useEffect(() => {
         if (!resetMenuOpen) return;
@@ -341,6 +351,9 @@ export default function ReviewModuleHeader({
                                     aria-expanded={resetMenuOpen}
                                     aria-haspopup="menu"
                                     aria-controls={resetMenuOpen ? resetMenuId : undefined}
+                                    aria-disabled={resetDisabled}
+                                    disabled={resetDisabled}
+                                    title={resetDisabledReason ?? undefined}
                                     className="ui-btn ui-btn-secondary gap-1.5 text-xs font-extrabold whitespace-nowrap"
                                 >
                                     <span>{t("resetButton")}</span>

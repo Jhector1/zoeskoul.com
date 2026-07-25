@@ -642,6 +642,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
 
         allowReset = true,
         allowRun = true,
+        readOnly = false,
         disabled = false,
 
         resetTerminalOnRun = true,
@@ -2645,13 +2646,13 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                         presentation.showTranscript ? workspaceTerm.terminalFeed : []
                     }
                     inputEnabled={
-                        presentation.inputAttached && workspaceTerm.inputEnabled
+                        presentation.inputAttached && workspaceTerm.inputEnabled && !readOnly
                     }
                     busy={
                         presentation.showOpening ||
                         (presentation.inputAttached && workspaceTerm.busy)
                     }
-                    disabled={disabled}
+                    disabled={disabled || readOnly}
                     lastResult={null}
                     onSendData={workspaceTerm.sendData}
                     onResize={workspaceTerm.resize}
@@ -2886,7 +2887,10 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                             data-testid="code-editor-e2e-input"
                             aria-label="E2E code editor input"
                             value={code}
-                            onChange={(e) => setCode(e.target.value)}
+                            readOnly={readOnly}
+                            onChange={(e) => {
+                                if (!readOnly) setCode(e.target.value);
+                            }}
                             style={{
                                 position: "absolute",
                                 width: 1,
@@ -2905,6 +2909,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                         theme={editorTheme}
                         height={editorHeight}
                         disabled={disabled || term.busy}
+                        readOnly={readOnly}
                         modelKey={effectiveEditorModelKey}
                         exerciseStateKey={effectiveExerciseStateKey}
                         workspace={workspace}
@@ -3003,7 +3008,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                         allowedSqlDialects={allowedDialects}
                         sqlDialect={sqlDialect}
                         onSwitchSqlDialect={setSqlDialect}
-                        allowReset={allowReset}
+                        allowReset={allowReset && !readOnly}
                         onReset={() => {
                             setCode(DEFAULT_CODE[lang]);
                             setOutputTab(runnerPaneDefaultTab);
@@ -3067,7 +3072,10 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                         <textarea
                             data-testid={stdinTestId}
                             value={stdin}
-                            onChange={(e) => setStdin(e.target.value)}
+                            readOnly={readOnly}
+                            onChange={(e) => {
+                                if (!readOnly) setStdin(e.target.value);
+                            }}
                             placeholder={stdinPlaceholder}
                             disabled={disabled || term.busy}
                             rows={4}

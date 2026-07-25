@@ -15,6 +15,7 @@ import type {
 import { TUTORING_SESSION_LIMITS } from "./sessionLimits";
 import { buildTutoringSnapshot, serializeTutoringSnapshot } from "./sessionSnapshot";
 import { syncPendingTutoringSessionInvites } from "./sessionInvites";
+import { publishTutoringWorkspaceSnapshot } from "./sessionWorkspace";
 
 class TutoringSessionQuotaError extends Error {}
 
@@ -184,6 +185,13 @@ export async function createTutoringSession(
           sessionId: created.id,
           pendingEmails: resolved.pendingEmails,
         });
+        if (args.input.status === "shared") {
+          await publishTutoringWorkspaceSnapshot(tx, {
+            sessionId: created.id,
+            moduleKeys: serialized.moduleKeys,
+            publishedByUserId: args.teachingUser.id,
+          });
+        }
         return created;
       },
       { isolationLevel: "Serializable" },
@@ -226,6 +234,7 @@ export async function updateTutoringSession(
       status: true,
       allowStudentEditing: true,
       sharedAt: true,
+      moduleKeys: true,
       users: { include: { user: { select: { email: true } } } },
       groups: { select: { groupId: true } },
       invites: {
@@ -289,7 +298,7 @@ export async function updateTutoringSession(
       });
     }
 
-    return tx.tutoringSession.update({
+    const updated = await tx.tutoringSession.update({
       where: { id: args.sessionId },
       data: {
         ...(args.input.title !== undefined ? { title: args.input.title } : {}),
@@ -318,6 +327,16 @@ export async function updateTutoringSession(
         updatedAt: true,
       },
     });
+
+    if (nextStatus === "shared" && existing.status !== "shared") {
+      await publishTutoringWorkspaceSnapshot(tx, {
+        sessionId: args.sessionId,
+        moduleKeys: existing.moduleKeys,
+        publishedByUserId: args.teachingUser.id,
+      });
+    }
+
+    return updated;
   });
 
   return {

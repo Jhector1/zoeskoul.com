@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import type { ReviewModule } from "@/lib/subjects/types";
 import type { FlowNavigationConfig } from "@/components/review/navigation/FlowNavigator";
 
@@ -7,12 +8,19 @@ export type ReviewModulePageProps = {
     footerInsetPx?: number;
     navigationMode?: FlowNavigationConfig;
     routePrefix?: string | null;
+    supplementalHeader?: ReactNode;
     tutoringSession?: {
         id: string;
         canEdit: boolean;
         canEditBoard?: boolean;
         title?: string;
         viewLabel?: string;
+        workspaceView?: "master" | "reference" | "mine" | "learner";
+        learnerId?: string | null;
+        status?: "draft" | "live" | "shared" | "archived";
+        publishedVersion?: number;
+        workspaceRevision?: number;
+        followTutor?: boolean;
     } | null;
 };
 

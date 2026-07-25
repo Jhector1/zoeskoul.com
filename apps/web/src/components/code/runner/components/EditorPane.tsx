@@ -276,6 +276,7 @@ export default function EditorPane(props: {
     theme: "vs" | "vs-dark";
     height: number;
     disabled?: boolean;
+    readOnly?: boolean;
     onMount?: (ed: any) => void;
     modelKey?: string;
     exerciseStateKey?: string;
@@ -291,6 +292,7 @@ export default function EditorPane(props: {
         theme,
         height,
         disabled = false,
+        readOnly = false,
         onMount,
         modelKey,
         exerciseStateKey,
@@ -609,7 +611,7 @@ export default function EditorPane(props: {
     const showMobileEditButton = !disabled && useMobileScrollGuard;
 
     const effectiveReadOnly =
-        disabled || (useMobileScrollGuard && !mobileEditing);
+        readOnly || disabled || (useMobileScrollGuard && !mobileEditing);
 
     const passThroughOnMobile =
         frame === "card" && isNarrowScreen && effectiveReadOnly;
@@ -862,6 +864,7 @@ export default function EditorPane(props: {
                         editorDisposablesRef.current = disposables;
                     }}
                     onChange={(v) => {
+                        if (readOnly) return;
                         if (!mountedRef.current || applyingExternalRef.current) {
                             return;
                         }

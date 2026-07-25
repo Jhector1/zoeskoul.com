@@ -38,6 +38,7 @@ type Props = {
     exerciseStateKey?: string;
     workspace: WorkspaceStateV2 | null;
     workspaceReplacementRevision?: string | number;
+    readOnly?: boolean;
     terminalHistoryScopeKey?: string;
     onApplyTerminalSnapshotFiles?: (
         files: WorkspaceSyncEntry[],
@@ -92,6 +93,7 @@ export default function IdeEditorPane({
     exerciseStateKey,
     workspace,
     workspaceReplacementRevision,
+    readOnly = false,
     terminalHistoryScopeKey,
     onApplyTerminalSnapshotFiles,
     onChangeLanguage,
@@ -173,7 +175,7 @@ export default function IdeEditorPane({
     );
     const handleBoundCodeChange = React.useCallback(
         (nextCode: string) => {
-            if (isBinaryFileNode(activeFile)) return;
+            if (readOnly || isBinaryFileNode(activeFile)) return;
 
             const fileId = String(activeFile?.id ?? activeFileId ?? "");
 
@@ -183,7 +185,7 @@ export default function IdeEditorPane({
 
             onChangeFileCode(fileId, nextCode);
         },
-        [activeFile?.binary, activeFile?.id, activeFileId, onChangeFileCode],
+        [activeFile?.binary, activeFile?.id, activeFileId, onChangeFileCode, readOnly],
     );
     const terminalWorkspaceKey = React.useMemo(
         () =>
@@ -229,6 +231,7 @@ export default function IdeEditorPane({
                         data-testid="fullide-editor-e2e-input"
                         aria-label={t("e2eInputLabel")}
                         value={activeFile.content ?? ""}
+                        readOnly={readOnly}
                         onChange={(e) => handleBoundCodeChange(e.target.value)}
                         style={{
                             position: "absolute",
@@ -280,13 +283,16 @@ export default function IdeEditorPane({
                             showRestartTerminalButton={false}
 
                             showSqlDialectPicker={services.runner.showSqlDialectPicker}
-                            allowReset={isDesktop && !learnerUiFlags.compactLearnerUi}
+                            allowReset={
+                                !readOnly && isDesktop && !learnerUiFlags.compactLearnerUi
+                            }
                             allowRun={
                                 services.runner.allowRun &&
                                 !isWeb &&
                                 !isBinaryFileNode(activeFile)
                             }
                             runtime={runtime}
+                            readOnly={readOnly}
                             showTerminal={services.runner.showTerminal}
                             showEditorThemeToggle={services.runner.showThemeToggle}
                             showTerminalDockToggle={

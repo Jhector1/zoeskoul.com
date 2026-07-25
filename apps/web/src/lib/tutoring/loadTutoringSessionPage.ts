@@ -8,6 +8,8 @@ import type { ReviewModule } from "@/lib/subjects/types";
 import { getTutoringSessionAccess } from "./sessionAccess";
 import { TUTORING_DOCUMENT_LIMITS } from "./sessionDocumentPolicy";
 import { parseTutoringSnapshot } from "./sessionSnapshot";
+import { loadTutoringParticipants } from "./sessionParticipants";
+import { getTutoringWorkspaceMeta } from "./sessionWorkspace";
 
 export async function loadTutoringSessionPage(args: {
   sessionId: string;
@@ -82,6 +84,15 @@ export async function loadTutoringSessionPage(args: {
   const module = access.canViewSolutions
     ? selected.module
     : redactReviewModuleSolutions(selected.module);
+  const [workspaceMeta, participants] = await Promise.all([
+    getTutoringWorkspaceMeta(prisma, {
+      sessionId: args.sessionId,
+      moduleKeys: access.tutoringSession.moduleKeys,
+    }),
+    access.canViewParticipantWork
+      ? loadTutoringParticipants(prisma, args.sessionId)
+      : Promise.resolve([]),
+  ]);
 
   return {
     status: "ready" as const,
@@ -93,6 +104,12 @@ export async function loadTutoringSessionPage(args: {
     },
     canEdit: access.canEditOwnProgress,
     canEditBoard: access.canEditSharedDocuments,
+    canManage: access.canManage,
+    canEditMasterWorkspace: access.canEditMasterWorkspace,
+    participantRole: access.participantRole,
+    publishedVersion: workspaceMeta.publishedVersion,
+    publishedAt: workspaceMeta.publishedAt,
+    participants,
     isTutor: access.canManage,
   };
 }

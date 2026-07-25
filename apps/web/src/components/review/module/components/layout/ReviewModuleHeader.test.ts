@@ -153,6 +153,19 @@ describe("ReviewModuleHeader compact toolbar", () => {
         expect(html).not.toContain("Next module");
     });
 
+
+    it("keeps Reset visible but disables it for a read-only tutoring workspace", () => {
+        const html = renderHeader({
+            resetDisabledReason:
+                "This workspace is read only. Switch to an editable workspace to reset progress.",
+        });
+
+        expect(html).toContain("Reset");
+        expect(html).toContain('disabled=""');
+        expect(html).toContain('aria-disabled="true"');
+        expect(html).toContain("This workspace is read only");
+    });
+
     it("hides the Tools button when the active card disallows opening tools", () => {
         const html = renderHeader({
             toolsToggleAllowed: false,

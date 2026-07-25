@@ -118,6 +118,8 @@ export type FullIDEProps = {
     projectDescription?: string | null;
     projectScope?: ProjectScopeInput;
     draftStorageMode?: "off" | "local";
+    /** Prevent local edits while still allowing navigation and remote hydration. */
+    readOnly?: boolean;
     onReadyChange?: (ready: boolean) => void;
     servicePreset?: FullIDEServicePreset;
     services?: FullIDEServicesInput;

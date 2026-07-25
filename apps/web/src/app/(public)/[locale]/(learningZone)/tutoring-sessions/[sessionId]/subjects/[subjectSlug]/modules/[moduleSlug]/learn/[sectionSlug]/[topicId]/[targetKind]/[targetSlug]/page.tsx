@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import ReviewModulePageClient from "@/app/(public)/[locale]/(learningZone)/subjects/[subjectSlug]/modules/[moduleSlug]/learn/ReviewModulePageClient";
+import TutoringSessionPlayer from "@/components/tutoring/TutoringSessionPlayer";
 import { loadTutoringSessionPage } from "@/lib/tutoring/loadTutoringSessionPage";
 import { buildTutoringSignInHref } from "@/lib/tutoring/tutoringSignInHref";
 
@@ -7,6 +7,7 @@ export const dynamic = "force-dynamic";
 
 export default async function TutoringPlayerPage({
   params,
+  searchParams,
 }: {
   params: Promise<{
     locale: string;
@@ -18,6 +19,7 @@ export default async function TutoringPlayerPage({
     targetKind: string;
     targetSlug: string;
   }>;
+  searchParams: Promise<{ workspace?: string; learnerId?: string }>;
 }) {
   const {
     locale,
@@ -29,6 +31,7 @@ export default async function TutoringPlayerPage({
     targetKind,
     targetSlug,
   } = await params;
+  const query = await searchParams;
   const data = await loadTutoringSessionPage({ sessionId, moduleSlug });
   if (data.status === "signed_out") {
     redirect(
@@ -56,19 +59,30 @@ export default async function TutoringPlayerPage({
   const prefix = `/${locale}/tutoring-sessions/${sessionId}`;
 
   return (
-    <div className="relative h-screen w-screen overflow-hidden">
-      <ReviewModulePageClient
-        mod={data.selected.module}
-        canUnlockAll
-        routePrefix={prefix}
-        tutoringSession={{
-          id: sessionId,
-          canEdit: data.canEdit,
-          canEditBoard: data.canEditBoard,
-          title: data.session.title,
-          viewLabel: data.isTutor ? "Tutor view" : "Shared session",
-        }}
-      />
-    </div>
+    <TutoringSessionPlayer
+      mod={data.selected.module}
+      routePrefix={prefix}
+      moduleKey={data.selected.sessionModuleSlug}
+      session={{
+        id: sessionId,
+        title: data.session.title,
+        status: data.session.status,
+        canManage: data.canManage,
+        canEditOwnProgress: data.canEdit,
+        canEditMasterWorkspace: data.canEditMasterWorkspace,
+        publishedVersion: data.publishedVersion,
+        publishedAt: data.publishedAt,
+        participants: data.participants,
+      }}
+      initialWorkspaceView={
+        query.workspace === "master" ||
+        query.workspace === "reference" ||
+        query.workspace === "mine" ||
+        query.workspace === "learner"
+          ? query.workspace
+          : null
+      }
+      initialLearnerId={query.learnerId ?? null}
+    />
   );
 }

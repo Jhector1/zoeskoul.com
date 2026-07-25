@@ -19,10 +19,11 @@ import {
   validateBoardDocumentInput,
 } from "@/lib/tutoring/sessionDocumentPolicy";
 import { getTutoringRequestAccess } from "@/lib/tutoring/sessionRequestAccess";
+import { TUTORING_BOARD_TOOL_ID } from "@/lib/tutoring/sessionWorkspace";
+import { resolveTutoringRequestWorkspace } from "@/lib/tutoring/sessionWorkspaceRequest";
 
 export const runtime = "nodejs";
 
-const OWNER_KEY = "shared";
 const MAX_REQUEST_BYTES = TUTORING_DOCUMENT_LIMITS.maxBoardBytes * 2 + 64 * 1024;
 
 function retryAfterResponse(resetMs: number) {
@@ -46,6 +47,26 @@ async function enforceWriteRateLimit(userId: string, sessionId: string) {
   }
 }
 
+async function findBoardDocument(args: {
+  sessionId: string;
+  ownerKey: string;
+  moduleKey: string;
+  cardKey: string;
+}) {
+  return prisma.tutoringSessionDocument.findUnique({
+    where: {
+      tutoring_session_document: {
+        sessionId: args.sessionId,
+        ownerKey: args.ownerKey,
+        moduleKey: args.moduleKey,
+        cardKey: args.cardKey,
+        toolId: TUTORING_BOARD_TOOL_ID,
+      },
+    },
+    select: { body: true, updatedAt: true, revision: true },
+  });
+}
+
 export async function GET(
   req: Request,
   { params }: { params: Promise<{ id: string }> },
@@ -61,7 +82,7 @@ export async function GET(
   if (
     !isValidModuleKey(allowed.tutoringSession.moduleKeys, moduleKey) ||
     !isValidBoardCardKey(cardKey) ||
-    toolId !== "board"
+    toolId !== TUTORING_BOARD_TOOL_ID
   ) {
     return bodyJsonResponse({ error: "Document not found" }, 404);
   }
@@ -74,24 +95,37 @@ export async function GET(
   });
   if (!scope) return bodyJsonResponse({ error: "Document not found" }, 404);
 
-  const document = await prisma.tutoringSessionDocument.findUnique({
-    where: {
-      tutoring_session_document: {
-        sessionId: id,
-        ownerKey: OWNER_KEY,
-        moduleKey,
-        cardKey,
-        toolId,
-      },
-    },
-    select: { body: true, updatedAt: true, revision: true },
+  const { resolved, meta } = await resolveTutoringRequestWorkspace({
+    request: req,
+    access: allowed,
   });
+  if (!resolved) return bodyJsonResponse({ error: "Forbidden" }, 403);
+
+  const direct = await findBoardDocument({
+    sessionId: id,
+    ownerKey: resolved.ownerKey,
+    moduleKey,
+    cardKey,
+  });
+  const fallback =
+    !direct && resolved.sourceOwnerKey
+      ? await findBoardDocument({
+          sessionId: id,
+          ownerKey: resolved.sourceOwnerKey,
+          moduleKey,
+          cardKey,
+        })
+      : null;
+  const document = direct ?? fallback;
 
   const response = bodyJsonResponse({
     body: document?.body ?? "",
     updatedAt: document?.updatedAt ?? null,
     revision: document?.revision ?? 0,
-    readOnly: !allowed.canEditSharedDocuments,
+    readOnly: resolved.readOnly,
+    workspaceView: resolved.view,
+    publishedVersion: meta.publishedVersion,
+    derivedFromTutorWorkspace: !direct && Boolean(fallback),
   });
   response.headers.set("ETag", `W/\"${document?.revision ?? 0}\"`);
   return response;
@@ -111,7 +145,19 @@ export async function PUT(
   const { id } = await params;
   const allowed = await getTutoringRequestAccess(id);
   if (!allowed) return bodyJsonResponse({ error: "Forbidden" }, 403);
-  if (!allowed.canEditSharedDocuments) {
+
+  const payload = await readJsonSafe(req);
+  if (!payload || typeof payload !== "object" || Array.isArray(payload)) {
+    return bodyJsonResponse({ error: "Invalid document" }, 400);
+  }
+  const raw = payload as Record<string, unknown>;
+  const { resolved, meta } = await resolveTutoringRequestWorkspace({
+    request: req,
+    access: allowed,
+    payload: raw,
+  });
+  if (!resolved) return bodyJsonResponse({ error: "Forbidden" }, 403);
+  if (resolved.readOnly || resolved.view === "reference" || resolved.view === "learner") {
     return bodyJsonResponse({ error: "Read only" }, 403);
   }
 
@@ -119,12 +165,6 @@ export async function PUT(
   if (!limited) return bodyJsonResponse({ error: "Service unavailable" }, 503);
   if (!limited.ok) return retryAfterResponse(limited.resetMs);
 
-  const payload = await readJsonSafe(req);
-  if (!payload || typeof payload !== "object" || Array.isArray(payload)) {
-    return bodyJsonResponse({ error: "Invalid document" }, 400);
-  }
-
-  const raw = payload as Record<string, unknown>;
   const moduleKey = String(raw.moduleKey ?? "").trim();
   const cardKey = String(raw.cardKey ?? "").trim();
   const toolId = String(raw.toolId ?? "").trim();
@@ -137,7 +177,7 @@ export async function PUT(
   if (!isValidModuleKey(allowed.tutoringSession.moduleKeys, moduleKey)) {
     return bodyJsonResponse({ error: "Module not found" }, 404);
   }
-  if (!isValidBoardCardKey(cardKey) || toolId !== "board") {
+  if (!isValidBoardCardKey(cardKey) || toolId !== TUTORING_BOARD_TOOL_ID) {
     return bodyJsonResponse({ error: "Invalid document key" }, 400);
   }
   if (utf8Bytes(baseBody) > TUTORING_DOCUMENT_LIMITS.maxBoardBytes) {
@@ -168,6 +208,7 @@ export async function PUT(
     return bodyJsonResponse({ error: validated.error }, validated.status);
   }
 
+  const ownerKey = resolved.ownerKey;
   try {
     const saved = await prisma.$transaction(
       async (tx) => {
@@ -175,7 +216,7 @@ export async function PUT(
           where: {
             tutoring_session_document: {
               sessionId: id,
-              ownerKey: OWNER_KEY,
+              ownerKey,
               moduleKey,
               cardKey,
               toolId,
@@ -183,16 +224,31 @@ export async function PUT(
           },
           select: { id: true, body: true, byteSize: true, revision: true },
         });
+        const inherited =
+          !existing && resolved.sourceOwnerKey
+            ? await tx.tutoringSessionDocument.findUnique({
+                where: {
+                  tutoring_session_document: {
+                    sessionId: id,
+                    ownerKey: resolved.sourceOwnerKey,
+                    moduleKey,
+                    cardKey,
+                    toolId,
+                  },
+                },
+                select: { body: true, revision: true },
+              })
+            : null;
 
         let nextBody = canonicalBody;
-        if (existing && expectedRevision !== existing.revision) {
+        const currentRevision = existing?.revision ?? inherited?.revision ?? 0;
+        const currentBody = existing?.body ?? inherited?.body ?? "";
+        if (expectedRevision !== currentRevision) {
           nextBody = mergeBoardBodies({
             baseBody,
             incomingBody: canonicalBody,
-            currentBody: existing.body,
+            currentBody,
           });
-        } else if (!existing && expectedRevision !== 0) {
-          throw new Error("TUTORING_DOCUMENT_CONFLICT");
         }
 
         const nextBytes = utf8Bytes(nextBody);
@@ -201,7 +257,7 @@ export async function PUT(
         }
 
         const aggregate = await tx.tutoringSessionDocument.aggregate({
-          where: { sessionId: id, ownerKey: OWNER_KEY, toolId: "board" },
+          where: { sessionId: id, ownerKey, toolId: TUTORING_BOARD_TOOL_ID },
           _count: { _all: true },
           _sum: { byteSize: true },
         });
@@ -221,7 +277,7 @@ export async function PUT(
           return tx.tutoringSessionDocument.create({
             data: {
               sessionId: id,
-              ownerKey: OWNER_KEY,
+              ownerKey,
               moduleKey,
               cardKey,
               toolId,
@@ -258,6 +314,8 @@ export async function PUT(
       body: saved.body,
       updatedAt: saved.updatedAt,
       revision: saved.revision,
+      workspaceView: resolved.view,
+      publishedVersion: meta.publishedVersion,
     });
   } catch (error) {
     const message = error instanceof Error ? error.message : "";

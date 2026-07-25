@@ -198,6 +198,36 @@ export default function TutoringSessionEditor({
     }
   }
 
+
+  async function publishWorkspaceUpdate() {
+    if (!initialSession || busy) return;
+    setBusy(true);
+    setError(null);
+    setNotice(null);
+    try {
+      const response = await fetch(
+        `/api/admin/tutoring-sessions/${initialSession.id}/publish`,
+        { method: "POST" },
+      );
+      const json = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        throw new Error(json.error ?? "Could not publish the tutoring workspace.");
+      }
+      const version = Number(json?.meta?.publishedVersion ?? 0);
+      setState((current) => ({ ...current, status: "shared" }));
+      setNotice(
+        version > 0
+          ? `Published session reference version ${version}. Learners can compare it with their own workspace.`
+          : "Tutor workspace published.",
+      );
+      router.refresh();
+    } catch (cause: any) {
+      setError(cause?.message ?? "Could not publish the tutoring workspace.");
+    } finally {
+      setBusy(false);
+    }
+  }
+
   async function destroy() {
     if (!initialSession || !confirm("Delete this tutoring session and its saved boards?")) return;
     setBusy(true);
@@ -244,6 +274,16 @@ export default function TutoringSessionEditor({
               disabled={busy}
             >
               {openLabel(state.status)}
+            </button>
+          ) : null}
+          {!isNew && state.status === "shared" ? (
+            <button
+              type="button"
+              className="rounded-lg border border-neutral-300 bg-white px-4 py-2 text-sm font-medium"
+              onClick={publishWorkspaceUpdate}
+              disabled={busy}
+            >
+              {busy ? "Publishing…" : "Publish workspace update"}
             </button>
           ) : null}
           {!isNew ? (
@@ -455,19 +495,9 @@ export default function TutoringSessionEditor({
               <option value="archived">Archived — hidden from learners</option>
             </select>
           </label>
-          <label className="flex items-center gap-2 text-sm">
-            <input
-              type="checkbox"
-              checked={state.allowStudentEditing}
-              onChange={(event) =>
-                setState((current) => ({
-                  ...current,
-                  allowStudentEditing: event.target.checked,
-                }))
-              }
-            />
-            Students may edit the shared session workspace
-          </label>
+          <div className="rounded-lg bg-neutral-50 p-3 text-xs text-neutral-600">
+            Learners can view the tutor workspace live and edit only their private My workspace. Publishing creates a read-only session reference; learner copies are never overwritten automatically.
+          </div>
         </section>
       </div>
 

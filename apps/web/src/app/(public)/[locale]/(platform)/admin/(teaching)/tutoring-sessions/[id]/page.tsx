@@ -1,10 +1,12 @@
 import { notFound } from "next/navigation";
 
 import TutoringSessionEditor from "@/components/admin/tutoring-sessions/TutoringSessionEditor";
+import TutoringLearnerDashboard from "@/components/admin/tutoring-sessions/TutoringLearnerDashboard";
 import { prisma } from "@/lib/prisma";
 import { ownedTeachingRecordWhere } from "@/lib/teaching/teachingAccess";
 import { requireTeachingPageUser } from "@/lib/teaching/requireTeachingPageUser";
 import { loadTutoringSessionEditorData } from "@/lib/tutoring/sessionEditorData";
+import { loadTutoringLearnerDashboard } from "@/lib/tutoring/sessionProgressSummary";
 
 export const dynamic = "force-dynamic";
 
@@ -35,6 +37,7 @@ export default async function TutoringSessionPage({
         sourceTopicId: true,
         status: true,
         allowStudentEditing: true,
+        moduleKeys: true,
         users: { include: { user: { select: { email: true } } } },
         groups: { select: { groupId: true } },
         invites: {
@@ -53,13 +56,21 @@ export default async function TutoringSessionPage({
   ]);
 
   if (!session) notFound();
+  const learnerDashboard = await loadTutoringLearnerDashboard(prisma, {
+    sessionId: session.id,
+    moduleKeys: session.moduleKeys,
+  });
 
   return (
-    <main className="mx-auto max-w-6xl p-6">
+    <main className="mx-auto max-w-6xl space-y-6 p-6">
       <TutoringSessionEditor
         initialSession={session as any}
         courses={courses}
         groups={groups}
+      />
+      <TutoringLearnerDashboard
+        sessionId={session.id}
+        rows={learnerDashboard}
       />
     </main>
   );

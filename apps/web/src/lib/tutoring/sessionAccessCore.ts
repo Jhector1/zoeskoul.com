@@ -26,8 +26,11 @@ export function resolveTutoringAccess(args: {
     isAdmin: args.isAdmin,
     canManage,
     canViewSolutions: canManage,
-    canEditSharedDocuments:
-      canManage || (isLearner && args.allowStudentEditing),
-    canEditOwnProgress: canManage || isLearner,
+    canViewMasterWorkspace: canManage || participantCanView,
+    canEditMasterWorkspace: canManage && args.status !== "archived",
+    canViewParticipantWork: canManage,
+    canEditSharedDocuments: canManage && args.status !== "archived",
+    canEditOwnProgress: isLearner && args.status !== "archived",
+    canEditPersonalDocuments: isLearner && args.status !== "archived",
   };
 }

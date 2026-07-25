@@ -9,6 +9,8 @@ export const TUTORING_DOCUMENT_LIMITS = {
   maxParticipantProgressBytes: 64 * 1024 * 1024,
   maxSnapshotBytes: 24 * 1024 * 1024,
   maxSnapshotModules: 64,
+  maxPublishedWorkspaceVersions: 50,
+  maxPublishedWorkspaceBytes: 256 * 1024 * 1024,
   maxBoardKeys: 10_000,
 } as const;
 
