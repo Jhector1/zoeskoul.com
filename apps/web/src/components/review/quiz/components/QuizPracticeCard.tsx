@@ -1029,6 +1029,7 @@ export default function QuizPracticeCard(props: {
   unlocked: boolean;
   isCompleted: boolean;
   locked: boolean;
+  readOnly?: boolean;
   unlimitedAttempts: boolean;
   strictSequential: boolean;
 
@@ -1062,6 +1063,7 @@ export default function QuizPracticeCard(props: {
     unlocked,
     isCompleted,
     locked,
+    readOnly = false,
     unlimitedAttempts,
     strictSequential,
     seqOrder,
@@ -1630,6 +1632,8 @@ export default function QuizPracticeCard(props: {
 
   const updateItemSafe = useCallback(
       (patch: any) => {
+        if (readOnly) return;
+
         const isRevealFill =
             patch?.updateOrigin === "reveal-fill" &&
             patch?.revealed === true;
@@ -1682,6 +1686,7 @@ export default function QuizPracticeCard(props: {
         isFinalized,
         isCodeInput,
         onUpdateItem,
+        readOnly,
       ],
   );
 
@@ -1696,7 +1701,13 @@ export default function QuizPracticeCard(props: {
         isCorrect || isFinalized || excused || (!strictSequential && attemptsCapped);
 
     const eligible =
-        toolsActive && unlocked && !locked && !isCompleted && !excused && !isFinalized;
+        toolsActive &&
+        unlocked &&
+        !locked &&
+        !readOnly &&
+        !isCompleted &&
+        !excused &&
+        !isFinalized;
 
     toolsAny.setCodeInputMeta?.(codeInputId ?? effectiveToolId, {
       order: seqOrder,
@@ -1712,6 +1723,7 @@ export default function QuizPracticeCard(props: {
     toolsActive,
     unlocked,
     locked,
+    readOnly,
     isCompleted,
     excused,
     strictSequential,
@@ -1799,6 +1811,7 @@ export default function QuizPracticeCard(props: {
   const showFinalizedAction = finalizedAction != null;
 
   const disableCheck =
+      readOnly ||
       (!isCodeExerciseWithInput && !unlocked) ||
       isCompleted ||
       (locked && !isCodeExerciseWithInput) ||
@@ -1808,6 +1821,7 @@ export default function QuizPracticeCard(props: {
       !hasInput;
 
   const disableHelpAction =
+      readOnly ||
       (!isCodeExerciseWithInput && !unlocked) ||
       isCompleted ||
       (locked && !isCodeExerciseWithInput) ||
@@ -1819,7 +1833,7 @@ export default function QuizPracticeCard(props: {
       : disableCheck;
 
   const disableSkip =
-      !unlocked || isCompleted || locked || excused || isFinalized;
+      readOnly || !unlocked || isCompleted || locked || excused || isFinalized;
 
   const btnLabel = finalizedAction === "finish" ? (
       ui.t("buttons.finish", {}, "Finish →")
@@ -1979,19 +1993,21 @@ export default function QuizPracticeCard(props: {
                     </button>
                 ) : null}
 
-                <button
-                    type="button"
-                    onClick={props.onExcused}
-                    disabled={disableSkip}
-                    className={[
-                      "ui-quiz-action",
-                      disableSkip ? "ui-quiz-action--disabled" : "ui-quiz-action--ghost",
-                    ].join(" ")}
-                >
-                  {props.excused
-                      ? t("excused")
-                      : t("continue")}
-                </button>
+                {!readOnly ? (
+                  <button
+                      type="button"
+                      onClick={props.onExcused}
+                      disabled={disableSkip}
+                      className={[
+                        "ui-quiz-action",
+                        disableSkip ? "ui-quiz-action--disabled" : "ui-quiz-action--ghost",
+                      ].join(" ")}
+                  >
+                    {props.excused
+                        ? t("excused")
+                        : t("continue")}
+                  </button>
+                ) : null}
               </div>
             </div>
         ) : isInitialLoading ? (
@@ -2013,19 +2029,21 @@ export default function QuizPracticeCard(props: {
                     </button>
                 ) : null}
 
-                <button
-                    type="button"
-                    onClick={props.onExcused}
-                    disabled={disableSkip}
-                    className={[
-                      "ui-quiz-action",
-                      disableSkip ? "ui-quiz-action--disabled" : "ui-quiz-action--ghost",
-                    ].join(" ")}
-                >
-                  {props.excused
-                      ? t("excused")
-                      : t("continue")}
-                </button>
+                {!readOnly ? (
+                  <button
+                      type="button"
+                      onClick={props.onExcused}
+                      disabled={disableSkip}
+                      className={[
+                        "ui-quiz-action",
+                        disableSkip ? "ui-quiz-action--disabled" : "ui-quiz-action--ghost",
+                      ].join(" ")}
+                  >
+                    {props.excused
+                        ? t("excused")
+                        : t("continue")}
+                  </button>
+                ) : null}
               </div>
             </div>
         ) : ex && livePracticeItem && practiceResolvedForToolBinding ? (
@@ -2086,12 +2104,21 @@ export default function QuizPracticeCard(props: {
                           : (livePracticeItem as any)
                     }
                     exerciseStateId={stableExerciseSlotId}
-                    busy={Boolean(ps?.busy) || !unlocked || isCompleted || locked || isFinalized}
+                    busy={
+                      Boolean(ps?.busy) ||
+                      !unlocked ||
+                      isCompleted ||
+                      locked ||
+                      readOnly ||
+                      isFinalized
+                    }
                     isAssignmentRun={false}
                     maxAttempts={maxForRenderer as any}
                     padRef={padRef as any}
                     updateCurrent={updateItemSafe}
-                    readOnly={!unlocked || isCompleted || locked || isFinalized}
+                    readOnly={
+                      readOnly || !unlocked || isCompleted || locked || isFinalized
+                    }
                     codeRunnerMode={codeRunnerMode}
                     codeTools={codeTools}
                     codeInputId={codeInputId}
@@ -2114,6 +2141,14 @@ export default function QuizPracticeCard(props: {
 
               <div className="mt-3 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between sm:gap-3">
                 <div className="flex flex-wrap items-center gap-2">
+                  {readOnly ? (
+                    <span
+                      className="ui-quiz-status-soft"
+                      data-testid="review-practice-read-only"
+                    >
+                      {ui.t("status.readOnly", {}, "Read only")}
+                    </span>
+                  ) : (
                   <button
                       type="button"
                       onClick={async () => {
@@ -2182,11 +2217,12 @@ export default function QuizPracticeCard(props: {
                   >
                     {btnLabel}
                   </button>
+                  )}
 
                 </div>
 
                 <div className="flex flex-wrap items-center justify-end gap-2">
-                  {!showFinalizedAction && !isRevealed && showFallbackHint ? (
+                  {!readOnly && !showFinalizedAction && !isRevealed && showFallbackHint ? (
                       <button
                           type="button"
                           onClick={() => onHelp(fallbackHintStepKey ?? undefined)}
@@ -2200,7 +2236,7 @@ export default function QuizPracticeCard(props: {
                       </button>
                   ) : null}
 
-                  {!showFinalizedAction && revealAvailable ? (
+                  {!readOnly && !showFinalizedAction && revealAvailable ? (
                       <button
                           type="button"
                           onClick={() => onHelp("reveal")}
@@ -2256,12 +2292,15 @@ export default function QuizPracticeCard(props: {
                   updateCurrent={updateItemSafe}
                   onOpenHelp={onHelp}
                   codeInputId={codeInputId}
+                  readOnly={readOnly}
               />
 
               <AiTutorFloating
                   current={livePracticeItem as any}
                   exercise={((livePracticeManifest as Exercise) ?? ex) as Exercise}
-                  enabled={unlocked && !isCompleted && !locked && !isFinalized}
+                  enabled={
+                    !readOnly && unlocked && !isCompleted && !locked && !isFinalized
+                  }
               />
             </div>
         ) : (

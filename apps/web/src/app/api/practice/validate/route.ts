@@ -11,6 +11,10 @@ import {
   readJsonSafe,
 } from "@/lib/practice/api/shared/http";
 
+import {
+  enforceTutoringWorkspaceMutationAccess,
+} from "@/lib/tutoring/sessionWorkspaceMutationAccess";
+
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
@@ -24,6 +28,10 @@ export async function POST(req: Request) {
       status: 403,
     });
   }
+
+  const tutoringAccessError =
+    await enforceTutoringWorkspaceMutationAccess(req);
+  if (tutoringAccessError) return tutoringAccessError;
 
   const ct = req.headers.get("content-type") ?? "";
   if (!ct.includes("application/json")) {

@@ -44,6 +44,7 @@ import { scrollIntoViewSmart } from "@/lib/ui/flowScroll";
 import { useTaggedT } from "@/i18n/tagged";
 import { learnerUiFlags } from "@/lib/config/learnerUiFlags";
 import { clearReviewWorkspaceDrafts } from "@/components/tools/panes/reviewWorkspaceDrafts";
+import { withTutoringContentRequestHeaders } from "@/lib/tutoring/clientContentRequestContext";
 import FlowNavigator, {
   type FlowNavMode,
 } from "@/components/review/navigation/FlowNavigator";
@@ -644,6 +645,8 @@ export default function QuizBlock({
                                     onFinalize,
                                     onCompactNavigationStateChange,
                                     compactNavigationKind,
+                                    readOnly = false,
+                                    freeNavigation = false,
                                   }: {
   prereqsMet?: boolean;
   quizId: string;
@@ -678,6 +681,10 @@ export default function QuizBlock({
   onNavigateToExerciseRoute?: (args: { cardId: string; exerciseId: string }) => Promise<void> | void;
   onCompactNavigationStateChange?: (state: CompactQuizNavigationState | null) => void;
   compactNavigationKind?: CompactQuizNavigationState["kind"];
+  /** Observation mode: show saved state without allowing any mutation. */
+  readOnly?: boolean;
+  /** Ignore learner completion gates while inspecting/teaching. */
+  freeNavigation?: boolean;
 }) {
   const initState = initialState ?? null;
 
@@ -832,7 +839,7 @@ export default function QuizBlock({
 
   useEffect(() => {
     local.hydrate(initState);
-  }, [resetKey]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [readOnly, resetKey]); // eslint-disable-line react-hooks/exhaustive-deps
 
   function getPracticeStateForQuestion(q: ReviewQuestion) {
     if (q.kind !== "practice") return null;
@@ -1029,6 +1036,7 @@ export default function QuizBlock({
     return Boolean(local.checkedById[q.id]);
   }
     function isUnlocked(index: number): boolean {
+        if (freeNavigation) return true;
         if (!prereqsMet) return false;
 
         /**
@@ -1139,6 +1147,7 @@ export default function QuizBlock({
     });
 
     useEffect(() => {
+        if (readOnly) return;
         if (!autoCompletionReason) return;
         if (autoKeyRef.current === resetKey) return;
 
@@ -1150,15 +1159,16 @@ export default function QuizBlock({
         }
 
         (onFinalizeRef.current ?? onPassRef.current)();
-    }, [autoCompletionReason, resetKey]);
+    }, [autoCompletionReason, readOnly, resetKey]);
 
   const finalizeCardOnce = useCallback(() => {
+    if (readOnly) return false;
     if (autoKeyRef.current === resetKey) return false;
 
     autoKeyRef.current = resetKey;
     (onFinalizeRef.current ?? onPassRef.current)();
     return true;
-  }, [resetKey]);
+  }, [readOnly, resetKey]);
 
   const nextState = useMemo<SavedQuizState>(() => {
     const base = initState;
@@ -1618,7 +1628,8 @@ export default function QuizBlock({
     ? questions.find((question) => question.id === autoAdvanceActionQid) ?? null
     : null;
   const autoAdvanceResolved = Boolean(
-    prereqsMet &&
+    !readOnly &&
+      prereqsMet &&
       !locked &&
       !isCompleted &&
       autoAdvanceQuestion &&
@@ -1648,13 +1659,16 @@ export default function QuizBlock({
   });
 
   const emitState = useCallback(
-      (s: SavedQuizState) => onStateChange?.(s),
-      [onStateChange],
+      (state: SavedQuizState) => {
+        if (readOnly) return;
+        onStateChange?.(state);
+      },
+      [onStateChange, readOnly],
   );
   const ui = useTaggedT("reviewQuizUi");
   const emitter = useDebouncedEmit(nextState, emitState, {
     delayMs: 400,
-    enabled: Boolean(onStateChange && questions.length),
+    enabled: Boolean(!readOnly && onStateChange && questions.length),
   });
 
   const emitterFlushRef = useRef<() => void>(() => {});
@@ -1665,6 +1679,8 @@ export default function QuizBlock({
 
   const persistFinalizedActionConsumed = useCallback(
       (practiceKey: string, consumed: boolean) => {
+        if (readOnly) return;
+
         /**
          * Route-owned project steps unmount as soon as Next is clicked. Force the
          * consumed marker into the practice bank before flushing so it survives
@@ -1679,7 +1695,7 @@ export default function QuizBlock({
 
         emitterFlushRef.current();
       },
-      [practiceBank.updatePracticeItem],
+      [practiceBank.updatePracticeItem, readOnly],
   );
 
   useEffect(() => {
@@ -1699,7 +1715,7 @@ export default function QuizBlock({
   }, [resetKey]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
-    if (!onStateChange || !questions.length) return;
+    if (readOnly || !onStateChange || !questions.length) return;
 
     const flush = () => emitterFlushRef.current();
 
@@ -1714,14 +1730,16 @@ export default function QuizBlock({
       window.removeEventListener("pagehide", flush);
       document.removeEventListener("visibilitychange", onVisibilityChange);
     };
-  }, [onStateChange, questions.length]);
+  }, [onStateChange, questions.length, readOnly]);
 
   async function resetThisQuiz() {
+    if (readOnly) return;
     const key = (serverQuizKey || stableKey).trim();
     if (!key) return;
 
     await fetch(`/api/review/quiz?quizKey=${encodeURIComponent(key)}`, {
       method: "DELETE",
+      headers: withTutoringContentRequestHeaders(),
       cache: "no-store",
     });
 
@@ -1747,7 +1765,7 @@ export default function QuizBlock({
     const routeOwnedPracticeNextIndex =
         routeOwnedProjectPracticeNavigation &&
         hasNextQuestion &&
-        activeQuestionDone &&
+        (freeNavigation || activeQuestionDone) &&
         activeQuestion?.kind === "practice" &&
         questions[activeIndex + 1]?.kind === "practice"
             ? activeIndex + 1
@@ -1756,8 +1774,10 @@ export default function QuizBlock({
     const nextSlideIndex =
         routeOwnedPracticeNextIndex >= 0
             ? routeOwnedPracticeNextIndex
-            : navigationMode === "slideshow" && hasNextQuestion && activeQuestionDone
-            ? activeIndex + 1
+            : navigationMode === "slideshow" &&
+                hasNextQuestion &&
+                (freeNavigation || activeQuestionDone)
+              ? activeIndex + 1
             : -1;
 
     const activeNextUnlockedIndex = activeQuestion
@@ -1766,6 +1786,7 @@ export default function QuizBlock({
     const activeQuestionIsLast = activeNextUnlockedIndex < 0;
     const activeQuestionManualNextAvailable = Boolean(
         activeQuestion &&
+        !readOnly &&
         awaitNextQid === activeQuestion.id &&
         prereqsMet &&
         !locked &&
@@ -1779,6 +1800,7 @@ export default function QuizBlock({
         : false;
     const activeQuestionCanFinalizeFlow = Boolean(
         activeQuestion &&
+        !readOnly &&
         activeQuestionDone &&
         activeQuestionIsLast &&
         shouldFinalizeReviewCardFromManualNext({
@@ -1994,6 +2016,7 @@ export default function QuizBlock({
         (navigationMode !== "slideshow" || idx === activeIndex);
 
     const showNext =
+        !readOnly &&
         awaitNextQid === q.id &&
         prereqsMet &&
         !locked &&
@@ -2041,6 +2064,7 @@ export default function QuizBlock({
                   unlocked={unlocked}
                   isCompleted={isCompleted}
                   locked={locked}
+                  readOnly={readOnly}
                   unlimitedAttempts={unlimitedAttempts}
                   strictSequential={strictSequential}
                   seqOrder={orderBase + idx}
@@ -2098,7 +2122,7 @@ export default function QuizBlock({
                   }}
                   onRetryExercise={() => practiceBank.retryPracticeQuestion(stablePracticeKey)}
                   onExcused={() => {
-                    if (!unlocked) return;
+                    if (readOnly || !unlocked) return;
                     const ps0 = practiceBank.practice[stablePracticeKey] ?? practiceBank.practice[q.id];
                     if (!ps0?.error) return;
 
@@ -2106,15 +2130,18 @@ export default function QuizBlock({
                     lastActionQidRef.current = q.id;
                     scheduleScroll(q.id, "end");
                   }}
-                  onUpdateItem={(patch) =>
-                      practiceBank.updatePracticeItem(stablePracticeKey, patch)
-                  }
+                  onUpdateItem={(patch) => {
+                    if (readOnly) return;
+                    practiceBank.updatePracticeItem(stablePracticeKey, patch);
+                  }}
                   onSubmit={() => {
+                    if (readOnly) return;
                     lastActionQidRef.current = q.id;
                     scheduleScroll(q.id, "end");
                     void practiceBank.submitPractice(q);
                   }}
                   onHelp={(stepKey) => {
+                    if (readOnly) return;
                     scheduleScroll(q.id, "end");
                     void practiceBank.openPracticeHelp(q, stepKey);
                   }}
@@ -2126,13 +2153,16 @@ export default function QuizBlock({
                   unlocked={unlocked}
                   isCompleted={isCompleted}
                   locked={locked}
+                  readOnly={readOnly}
                   value={local.answers[q.id]}
                   checked={Boolean(local.checkedById[q.id])}
                   ok={getQuestionOk(q)}
-                  onPick={(val) => local.setAnswer(q.id, val)}
+                  onPick={(val) => {
+                    if (!readOnly) local.setAnswer(q.id, val);
+                  }}
                   explainRef={setExplainEl(q.id)}
                   onCheck={() => {
-                    if (isCompleted || locked) return;
+                    if (readOnly || isCompleted || locked) return;
                     if (local.checkedById[q.id]) return;
 
                     lastActionQidRef.current = q.id;
@@ -2207,7 +2237,8 @@ export default function QuizBlock({
 
         {!compactModeActive ? (
           <div ref={footerElRef}>
-            <div className="ui-quiz-toggle-row">
+            {!readOnly ? (
+              <div className="ui-quiz-toggle-row">
               <label className="ui-quiz-toggle-label">
                 <input
                     type="checkbox"
@@ -2219,7 +2250,8 @@ export default function QuizBlock({
                 />
                 {ui.t("autoAdvance", {}, "Auto-advance")}
               </label>
-            </div>
+              </div>
+            ) : null}
 
             <QuizFooter
                 checkedCount={summary.checkedCount}
@@ -2233,7 +2265,8 @@ export default function QuizBlock({
           </div>
         ) : null}
 
-        <ConfirmDialog
+        {!readOnly ? (
+          <ConfirmDialog
             open={confirmResetQuiz}
             onOpenChange={setConfirmResetQuiz}
             danger
@@ -2271,7 +2304,8 @@ export default function QuizBlock({
               </div>
             }
             onConfirm={resetThisQuiz}
-        />
+          />
+        ) : null}
       </div>
   );
 }

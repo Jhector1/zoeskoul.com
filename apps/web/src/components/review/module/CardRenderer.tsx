@@ -24,6 +24,7 @@ import { getCardToolScopeKey } from "@/components/review/module/runtime/exercise
 import { buildQuizBlockRuntimeDefaultsProps } from "@/components/review/module/runtime/cardRuntimeDefaults";
 import type { QuizResetTarget } from "@/components/review/module/actions";
 import type { CompactQuizNavigationState } from "@/components/review/module/compactFlowNavigation";
+import type { ReviewWorkspaceCapabilities } from "@/components/review/module/workspaceCapabilities";
 import {
     getAssessmentDisplayKind,
     type AssessmentDisplayKind,
@@ -92,6 +93,7 @@ export default function CardRenderer(props: {
      * Try It first. Production learner routes keep this false.
      */
     unlockAll?: boolean;
+    workspaceCapabilities: ReviewWorkspaceCapabilities;
 }) {
     const reviewT = useTranslations("review.cardRenderer");
     const ui = useTaggedT("cardUi");
@@ -129,7 +131,12 @@ export default function CardRenderer(props: {
         defaultToolLanguage = "python",
         onNavigateToExerciseRoute,
         onCompactQuizNavigationChange,
+        workspaceCapabilities,
     } = props;
+
+    const readOnlyPractice = !workspaceCapabilities.canSubmitPractice;
+    const freeNavigation = !workspaceCapabilities.usesProgressGating;
+    const mayMutateProgress = workspaceCapabilities.canMutateProgress;
 
     const ensureCard = useReviewRuntimeStore((s) => s.ensureCard);
 
@@ -273,20 +280,28 @@ export default function CardRenderer(props: {
                         spec={resolvedTryItSpec}
                         quizKey={key}
                         passScore={1.0}
-                        prereqsMet={prereqsMet}
+                        prereqsMet={freeNavigation ? true : prereqsMet}
                         locked={locked}
+                        readOnly={readOnlyPractice}
+                        freeNavigation={freeNavigation}
                         isCompleted={tryItDone}
                         isLastTopicCard={isLastTopicCard}
                         initialState={savedTryIt}
-                        onPass={() => onEmbeddedTryItPass?.(tryItId, "passed")}
-                        onFinalize={() => onEmbeddedTryItPass?.(tryItId, "finalized")}
-                        onStateChange={(s: SavedQuizState) => onQuizStateChange(tryItId, s)}
-                        onReset={() => onQuizReset({
+                        onPass={() => {
+                            if (mayMutateProgress) onEmbeddedTryItPass?.(tryItId, "passed");
+                        }}
+                        onFinalize={() => {
+                            if (mayMutateProgress) onEmbeddedTryItPass?.(tryItId, "finalized");
+                        }}
+                        onStateChange={mayMutateProgress
+                            ? (s: SavedQuizState) => onQuizStateChange(tryItId, s)
+                            : undefined}
+                        onReset={mayMutateProgress ? () => onQuizReset({
                             progressId: tryItId,
                             runtimeCardId: card.id,
                             cardProgressKeys: [card.id, tryItId],
                             exerciseId: tryIt.exerciseKey,
-                        })}
+                        }) : undefined}
                         sequential={true}
                         strictSequential={true}
                         unlimitedAttempts={true}
@@ -307,8 +322,9 @@ export default function CardRenderer(props: {
         const key = buildReviewQuizKey(card.spec, card.id, versionStr);
         const displayKind = getAssessmentDisplayKind(card, kind);
 
-        const showGate = !done && !prereqsMet;
-        const canMountQuizBlock = progressHydrated && (prereqsMet || done);
+        const showGate = !freeNavigation && !done && !prereqsMet;
+        const canMountQuizBlock =
+            progressHydrated && (freeNavigation || prereqsMet || done);
 
         const kp = kindLabel(displayKind);
 
@@ -371,15 +387,23 @@ export default function CardRenderer(props: {
                             spec={quizCard.spec}
                             quizKey={key}
                             passScore={quizBlockProps.passScore}
-                            prereqsMet={prereqsMet}
+                            prereqsMet={freeNavigation ? true : prereqsMet}
                             locked={locked}
+                            readOnly={readOnlyPractice}
+                            freeNavigation={freeNavigation}
                             isCompleted={Boolean(done)}
                             isLastTopicCard={isLastTopicCard}
                             initialState={savedQuiz ?? null}
-                            onPass={() => onQuizPass(card.id, "passed")}
-                            onFinalize={() => onQuizPass(card.id, "finalized")}
-                            onStateChange={(s: SavedQuizState) => onQuizStateChange(card.id, s)}
-                            onReset={() => onQuizReset(card.id)}
+                            onPass={() => {
+                                if (mayMutateProgress) onQuizPass(card.id, "passed");
+                            }}
+                            onFinalize={() => {
+                                if (mayMutateProgress) onQuizPass(card.id, "finalized");
+                            }}
+                            onStateChange={mayMutateProgress
+                                ? (s: SavedQuizState) => onQuizStateChange(card.id, s)
+                                : undefined}
+                            onReset={mayMutateProgress ? () => onQuizReset(card.id) : undefined}
                             sequential={quizBlockProps.sequential}
                             strictSequential={quizBlockProps.strictSequential}
                             unlimitedAttempts={quizBlockProps.unlimitedAttempts}
@@ -413,22 +437,20 @@ export default function CardRenderer(props: {
                 <CardTitle title={visibleCardTitle} />
                 <MathMarkdown className="ui-math [&_.katex]:text-inherit" content={md} />
                 {renderEmbeddedTryIt()}
-                <div className="mt-3 flex justify-end">
-                    <button
-                        type="button"
-                        onClick={onMarkDone}
-                        className={actionBtn}
-                        disabled={markReadDisabled}
-                        title={
-                            markReadDisabled
-                                ? tryItCopy.disabledReason
-                                : undefined
-                        }
-                        data-flow-focus="1"
-                    >
-                        {tryItCopy.buttonText}
-                    </button>
-                </div>
+                {mayMutateProgress ? (
+                    <div className="mt-3 flex justify-end">
+                        <button
+                            type="button"
+                            onClick={onMarkDone}
+                            className={actionBtn}
+                            disabled={markReadDisabled}
+                            title={markReadDisabled ? tryItCopy.disabledReason : undefined}
+                            data-flow-focus="1"
+                        >
+                            {tryItCopy.buttonText}
+                        </button>
+                    </div>
+                ) : null}
             </div>
         );
     }
@@ -448,11 +470,15 @@ export default function CardRenderer(props: {
                     height={card.height}
                     propsPatch={card.props}
                     initialState={savedSketch}
-                    onStateChange={(s) => onSketchStateChange(card.id, s)}
+                    onStateChange={workspaceCapabilities.canEditWorkspace
+                        ? (s) => onSketchStateChange(card.id, s)
+                        : undefined}
                     done={done}
-                    onMarkDone={hasEmbeddedTryIt ? undefined : onMarkDone}
-                    prereqsMet={prereqsMet}
-                    locked={locked}
+                    onMarkDone={
+                        mayMutateProgress && !hasEmbeddedTryIt ? onMarkDone : undefined
+                    }
+                    prereqsMet={freeNavigation ? true : prereqsMet}
+                    locked={locked || !workspaceCapabilities.canEditWorkspace}
                     markDoneLabel={
                         hasEmbeddedTryIt
                             ? undefined
@@ -512,11 +538,13 @@ export default function CardRenderer(props: {
                     ) : null}
                 </div>
 
-                <div className="mt-3 flex justify-end">
-                    <button type="button" onClick={onMarkDone} className={actionBtn} data-flow-focus="1">
-                        {btnText}
-                    </button>
-                </div>
+                {mayMutateProgress ? (
+                    <div className="mt-3 flex justify-end">
+                        <button type="button" onClick={onMarkDone} className={actionBtn} data-flow-focus="1">
+                            {btnText}
+                        </button>
+                    </div>
+                ) : null}
             </div>
         );
     }

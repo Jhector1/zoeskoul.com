@@ -15,6 +15,7 @@ import type { SubjectFinishState } from "../../types/subjectFinish.types";
 import { useDebouncedSketchState } from "../../hooks/useDebouncedSketchState";
 import { learnerUiFlags } from "@/lib/config/learnerUiFlags";
 import type { CompactQuizNavigationState } from "../../compactFlowNavigation";
+import type { ReviewWorkspaceCapabilities } from "../../workspaceCapabilities";
 import { isCardDoneFromState } from "../../progressKeys";
 import {
     resolveLearningActivityLabel,
@@ -37,6 +38,7 @@ type Props = {
     viewTid: string;
     activeCardIndex: number;
     unlockAll?: boolean;
+    workspaceCapabilities: ReviewWorkspaceCapabilities;
     maxUnlockedCardIndex?: number;
     progressiveLockMessage?: string | null;
     onLockedNavigate?: () => void;
@@ -92,6 +94,7 @@ export default function ReviewTopicStage({
     viewTid,
     activeCardIndex,
     unlockAll = false,
+    workspaceCapabilities,
                                              maxUnlockedCardIndex,
                                              progressiveLockMessage,
                                              onLockedNavigate,
@@ -224,6 +227,7 @@ export default function ReviewTopicStage({
                     viewCards={viewCards}
                     activeCardIndex={activeCardIndex}
                     unlockAll={unlockAll}
+                    workspaceCapabilities={workspaceCapabilities}
                     navModes={navModes}
                     reduceMotion={reduceMotion}
                     tp={tp}

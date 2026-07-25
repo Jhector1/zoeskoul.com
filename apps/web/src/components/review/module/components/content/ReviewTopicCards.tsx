@@ -36,6 +36,7 @@ import { getCardStateKey } from "../../runtime/exerciseKeys";
 import { useDebouncedSketchState } from "../../hooks/useDebouncedSketchState";
 import { learnerUiFlags } from "@/lib/config/learnerUiFlags";
 import type { CompactQuizNavigationState } from "../../compactFlowNavigation";
+import type { ReviewWorkspaceCapabilities } from "../../workspaceCapabilities";
 
 const TOPIC_PANE_ANIM = {
   initial: { opacity: 0, y: 10 },
@@ -53,6 +54,7 @@ type Props = {
   viewCards: ReviewCard[];
   activeCardIndex: number;
   unlockAll?: boolean;
+  workspaceCapabilities: ReviewWorkspaceCapabilities;
   maxUnlockedCardIndex?: number;
   progressiveLockMessage?: string | null;
   onLockedNavigate?: () => void;
@@ -93,6 +95,7 @@ export default function ReviewTopicCards({
   viewCards,
   activeCardIndex,
   unlockAll = false,
+  workspaceCapabilities,
                                            maxUnlockedCardIndex,
                                            progressiveLockMessage,
                                            onLockedNavigate,
@@ -127,7 +130,8 @@ export default function ReviewTopicCards({
   onCompactQuizNavigationChange,
 }: Props) {
   const storeCards = useReviewRuntimeStore((s) => s.cards);
-  const safeMaxUnlockedCardIndex = unlockAll
+  const freeNavigation = !workspaceCapabilities.usesProgressGating;
+  const safeMaxUnlockedCardIndex = unlockAll || freeNavigation
     ? Math.max(0, viewCards.length - 1)
     : Math.max(
       0,
@@ -137,9 +141,15 @@ export default function ReviewTopicCards({
       async (index: number) => {
         const clampedIndex = Math.max(0, Math.min(viewCards.length - 1, index));
         if (clampedIndex === activeCardIndex) return;
-        if (!unlockAll && clampedIndex > safeMaxUnlockedCardIndex) {
+        if (!unlockAll && !freeNavigation && clampedIndex > safeMaxUnlockedCardIndex) {
           return;
         }
+
+        if (!workspaceCapabilities.canMutateProgress) {
+          onActiveCardIndexChange?.(clampedIndex);
+          return;
+        }
+
         const fromCard = viewCards[activeCardIndex] ?? null;
 
         /**
@@ -203,18 +213,22 @@ export default function ReviewTopicCards({
         onLockedNavigate,
         safeMaxUnlockedCardIndex,
         unlockAll,
+        freeNavigation,
+        workspaceCapabilities.canMutateProgress,
       ],
   );
   const activeCard = viewCards[activeCardIndex] ?? null;
   const activeCardDone = activeCard ? isCardDoneFromState(activeCard, tp) : false;
   const activeCardCanAdvance =
       unlockAll ||
+      freeNavigation ||
       activeCardDone ||
       (activeCard
         ? !isQuizLikeCard(activeCard) && !hasRequiredEmbeddedTryIt(activeCard)
         : false);
   const hasNextCard = activeCardIndex < Math.max(0, viewCards.length - 1);
-  const nextCardUnlocked = unlockAll || activeCardIndex + 1 <= safeMaxUnlockedCardIndex;
+  const nextCardUnlocked =
+      unlockAll || freeNavigation || activeCardIndex + 1 <= safeMaxUnlockedCardIndex;
   const compactModeActive =
       learnerUiFlags.compactLearnerUi && !learnerUiFlags.showDebugLearningUi;
 
@@ -276,9 +290,11 @@ export default function ReviewTopicCards({
                 null;
 
               const done = isCardDoneFromState(card, tp);
-              const prereqsMet = isQuizLikeCard(card)
-                ? prereqsForAllQuizzes
-                : true;
+              const prereqsMet = freeNavigation
+                ? true
+                : isQuizLikeCard(card)
+                  ? prereqsForAllQuizzes
+                  : true;
 
               return (
                 <div key={cardKey} ref={setCardEl(card.id)}>
@@ -296,18 +312,21 @@ export default function ReviewTopicCards({
                     savedQuiz={progressHydrated ? savedQuiz : null}
                     versionStr={versionStr}
                     savedSketch={savedSketch}
-                    onRun={onRun}
-                    onReveal={onReveal}
-                    onSubmit={onSubmit}
+                    onRun={workspaceCapabilities.canSubmitPractice ? onRun : undefined}
+                    onReveal={workspaceCapabilities.canSubmitPractice ? onReveal : undefined}
+                    onSubmit={workspaceCapabilities.canSubmitPractice ? onSubmit : undefined}
                     routeExerciseId={routeExerciseId}
                     defaultToolLanguage={defaultToolLanguage}
                     onNavigateToExerciseRoute={onNavigateToExerciseRoute}
                     onCompactQuizNavigationChange={cardIndex === activeCardIndex ? onCompactQuizNavigationChange : undefined}
-                    unlockAll={unlockAll}
+                    unlockAll={unlockAll || freeNavigation}
+                    workspaceCapabilities={workspaceCapabilities}
                     onSketchStateChange={(_sketchCardId, state) => {
+                      if (!workspaceCapabilities.canEditWorkspace) return;
                       sketch?.saveSketchDebounced?.(cardKey, state, false);
                     }}
                     onMarkDone={() => {
+                      if (!workspaceCapabilities.canMutateProgress) return;
                       setProgress((prev) => {
                         const next = buildMarkCardDoneProgress(prev, viewTid, card);
                         queueMicrotask(() => {
@@ -318,6 +337,7 @@ export default function ReviewTopicCards({
                       });
                     }}
                     onEmbeddedTryItPass={(tryItId, reason) => {
+                      if (!workspaceCapabilities.canMutateProgress) return;
                       // Reveal finalization completes navigation with zero credit.
                       // Only a real pass triggers the existing submit/credit hook.
                       if (reason === "passed") onSubmit?.();
@@ -335,6 +355,7 @@ export default function ReviewTopicCards({
                     }}
                     tp={tp}
                     onQuizPass={(quizId, reason) => {
+                      if (!workspaceCapabilities.canMutateProgress) return;
                       // Keep completion separate from correctness/credit.
                       if (reason === "passed") onSubmit?.();
 
@@ -348,6 +369,7 @@ export default function ReviewTopicCards({
                       });
                     }}
                     onQuizStateChange={(quizCardId, state) => {
+                      if (!workspaceCapabilities.canMutateProgress) return;
                       if ("revealUsed" in state && state.revealUsed) onReveal?.();
 
                       setProgress((prev) => {
@@ -361,6 +383,7 @@ export default function ReviewTopicCards({
                     }}
 
                     onQuizReset={(target: string | QuizResetTarget) => {
+                      if (!workspaceCapabilities.canMutateProgress) return;
                       const resetTarget: QuizResetTarget =
                           typeof target === "string"
                               ? { progressId: target, runtimeCardId: target, cardProgressKeys: [target] }

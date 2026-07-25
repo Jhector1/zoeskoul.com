@@ -2,6 +2,10 @@ import "server-only";
 
 import { prisma } from "@/lib/prisma";
 import {
+  TUTORING_LEARNER_ID_HEADER,
+  TUTORING_WORKSPACE_VIEW_HEADER,
+} from "./contentRequestProtocol";
+import {
   getTutoringWorkspaceMeta,
   isTutoringParticipant,
   readRequestedTutoringWorkspaceView,
@@ -15,10 +19,15 @@ export async function resolveTutoringRequestWorkspace(args: {
 }) {
   const url = new URL(args.request.url);
   const requestedView = readRequestedTutoringWorkspaceView(
-    args.payload?.workspaceView ?? url.searchParams.get("workspaceView"),
+    args.payload?.workspaceView ??
+      url.searchParams.get("workspaceView") ??
+      args.request.headers.get(TUTORING_WORKSPACE_VIEW_HEADER),
   );
   const requestedLearnerId = String(
-    args.payload?.learnerId ?? url.searchParams.get("learnerId") ?? "",
+    args.payload?.learnerId ??
+      url.searchParams.get("learnerId") ??
+      args.request.headers.get(TUTORING_LEARNER_ID_HEADER) ??
+      "",
   ).trim();
   const meta = await getTutoringWorkspaceMeta(prisma, {
     sessionId: args.access.tutoringSession.id,

@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import type { ReviewModule } from "@/lib/subjects/types";
 import type { FlowNavigationConfig } from "@/components/review/navigation/FlowNavigator";
+import type { ReviewWorkspaceCapabilities } from "./workspaceCapabilities";
 
 export type ReviewModulePageProps = {
     mod: ReviewModule;
@@ -21,6 +22,7 @@ export type ReviewModulePageProps = {
         publishedVersion?: number;
         workspaceRevision?: number;
         followTutor?: boolean;
+        capabilities?: ReviewWorkspaceCapabilities;
     } | null;
 };
 

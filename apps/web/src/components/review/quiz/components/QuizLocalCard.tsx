@@ -12,6 +12,7 @@ export default function QuizLocalCard(props: {
     unlocked: boolean;
     isCompleted: boolean;
     locked: boolean;
+    readOnly?: boolean;
     skipped?: boolean;
     onSkip?: () => void;
     value: any;
@@ -24,8 +25,18 @@ export default function QuizLocalCard(props: {
 
     explainRef?: React.Ref<HTMLDivElement>;
 }) {
-    const { q, unlocked, isCompleted, locked, skipped, onSkip, prereqsMet } = props;
-    const disabled = !unlocked || isCompleted || locked || Boolean(skipped) || !prereqsMet;
+    const {
+        q,
+        unlocked,
+        isCompleted,
+        locked,
+        readOnly = false,
+        skipped,
+        onSkip,
+        prereqsMet,
+    } = props;
+    const disabled =
+        readOnly || !unlocked || isCompleted || locked || Boolean(skipped) || !prereqsMet;
     const tt = useTaggedT();
     const ui = useTaggedT("reviewQuizUi");
     const prompt = tt.resolve(String((q as any).prompt ?? ""), {}, "");
@@ -85,17 +96,26 @@ export default function QuizLocalCard(props: {
             )}
 
             <div className="mt-3 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between sm:gap-3">
-                <button
-                    type="button"
-                    data-flow-focus="1"
-                    disabled={disabled}
-                    onClick={() => !disabled && props.onCheck()}
-                    className={cn("ui-quiz-action", disabled ? "ui-quiz-action--disabled" : "ui-quiz-action--primary")}
-                >
-                    {ui.t("buttons.checkQuestion", {}, "Check this question")}
-                </button>
+                {readOnly ? (
+                    <span className="ui-quiz-status-soft" data-testid="review-quiz-read-only">
+                        {ui.t("status.readOnly", {}, "Read only")}
+                    </span>
+                ) : (
+                    <button
+                        type="button"
+                        data-flow-focus="1"
+                        disabled={disabled}
+                        onClick={() => !disabled && props.onCheck()}
+                        className={cn(
+                            "ui-quiz-action",
+                            disabled ? "ui-quiz-action--disabled" : "ui-quiz-action--primary",
+                        )}
+                    >
+                        {ui.t("buttons.checkQuestion", {}, "Check this question")}
+                    </button>
+                )}
 
-                {onSkip ? (
+                {onSkip && !readOnly ? (
                     <button
                         type="button"
                         disabled={!unlocked || isCompleted || locked || Boolean(props.skipped)}

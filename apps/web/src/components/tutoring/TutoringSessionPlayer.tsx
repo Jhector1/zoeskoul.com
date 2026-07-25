@@ -5,6 +5,9 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import ReviewModulePageClient from "@/app/(public)/[locale]/(learningZone)/subjects/[subjectSlug]/modules/[moduleSlug]/learn/ReviewModulePageClient";
 import { useReviewRuntimeStore } from "@/components/review/module/runtime/reviewRuntimeStore";
 import type { ReviewModule } from "@/lib/subjects/types";
+import {
+  resolveTutoringReviewWorkspaceCapabilities,
+} from "@/components/review/module/workspaceCapabilities";
 import TutoringWorkspaceBar, {
   getTutoringWorkspaceViewLabel,
   type TutoringWorkspaceParticipant as Participant,
@@ -255,6 +258,11 @@ export default function TutoringSessionPlayer({
         ? session.canEditOwnProgress
         : false;
   const canEditBoard = canEdit;
+  const capabilities = resolveTutoringReviewWorkspaceCapabilities({
+    canManage: session.canManage,
+    canEdit,
+    workspaceView: view,
+  });
   const viewLabel = getTutoringWorkspaceViewLabel({
     session: {
       canManage: session.canManage,
@@ -306,6 +314,7 @@ export default function TutoringSessionPlayer({
           publishedVersion,
           workspaceRevision,
           followTutor,
+          capabilities,
         }}
       />
     </div>

@@ -18,6 +18,7 @@ export default function PracticeHelpPanel({
                                               help,
                                               updateCurrent,
                                               codeInputId,
+                                              readOnly = false,
                                           }: {
     exercise: Exercise | null;
     current: QItem;
@@ -26,6 +27,7 @@ export default function PracticeHelpPanel({
     updateCurrent: (patch: Partial<QItem>) => void;
     onOpenHelp?: (stepKey?: string) => void;
     codeInputId?: string;
+    readOnly?: boolean;
 }) {
     const tt = useTaggedT();
     const cardRefs = useRef<Record<string, HTMLDivElement | null>>({});
@@ -98,6 +100,7 @@ export default function PracticeHelpPanel({
                                     updateCurrent={updateCurrent}
                                     autoScroll={false}
                                     codeInputId={codeInputId}
+                                    readOnly={readOnly}
                                 />
                             </div>
                         ) : null}

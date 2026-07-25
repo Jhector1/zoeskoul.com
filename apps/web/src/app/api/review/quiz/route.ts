@@ -35,6 +35,7 @@ import { hasReviewModule } from "@/lib/subjects/registry";
 // import { SECTIONS, TOPICS } from "@/lib/subjects/data";
 import { getLocaleFromCookie } from "@/serverUtils";
 import { SECTIONS, TOPICS } from "@/lib/subjects";
+import { enforceTutoringWorkspaceMutationAccess } from "@/lib/tutoring/sessionWorkspaceMutationAccess";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -841,6 +842,10 @@ export async function DELETE(req: Request) {
   if (!enforceSameOriginPost(req)) {
     return bodyJsonResponse({ message: "Forbidden." }, 403);
   }
+
+  const tutoringAccessError =
+    await enforceTutoringWorkspaceMutationAccess(req);
+  if (tutoringAccessError) return tutoringAccessError;
 
   const actor0 = await getActor();
   const ensured = ensureGuestId(actor0);

@@ -22,6 +22,10 @@ import {
   resolveAiTutorFailureCount,
 } from "@/lib/practice/aiTutorPolicy";
 
+import {
+  enforceTutoringWorkspaceMutationAccess,
+} from "@/lib/tutoring/sessionWorkspaceMutationAccess";
+
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
@@ -57,6 +61,10 @@ function withRequestId(res: NextResponse, requestId: string) {
 
 export async function POST(req: Request) {
   const requestId = crypto.randomUUID();
+  const tutoringAccessError =
+    await enforceTutoringWorkspaceMutationAccess(req);
+  if (tutoringAccessError) return tutoringAccessError;
+
   const parsed = BodySchema.safeParse(await req.json().catch(() => null));
 
   if (!parsed.success) {

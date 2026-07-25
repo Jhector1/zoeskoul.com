@@ -27,6 +27,10 @@ import {
 import { assertSessionOwnerMatchesActor } from "@/lib/practice/api/shared/sessionAccess";
 import { resolvePracticeExperienceMode } from "@/lib/practice/experience/resolve";
 
+import {
+    enforceTutoringWorkspaceMutationAccess,
+} from "@/lib/tutoring/sessionWorkspaceMutationAccess";
+
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
@@ -75,6 +79,10 @@ function getAuthoredHelpContent(publicPayload: any, stepKey: string): string | n
 
 export async function POST(req: Request) {
     const requestId = crypto.randomUUID();
+
+    const tutoringAccessError =
+        await enforceTutoringWorkspaceMutationAccess(req);
+    if (tutoringAccessError) return tutoringAccessError;
 
     const parsedBody = BodySchema.safeParse(await req.json().catch(() => null));
     if (!parsedBody.success) {

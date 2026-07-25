@@ -1,7 +1,14 @@
-import { TUTORING_SESSION_HEADER } from "./contentRequestProtocol";
+import {
+  TUTORING_LEARNER_ID_HEADER,
+  TUTORING_SESSION_HEADER,
+  TUTORING_WORKSPACE_VIEW_HEADER,
+  type TutoringWorkspaceView,
+} from "./contentRequestProtocol";
 
 export type TutoringClientContentRequestContext = {
   sessionId: string;
+  workspaceView: TutoringWorkspaceView;
+  learnerId: string | null;
   dedupeKey: string;
 };
 
@@ -16,25 +23,42 @@ function readSessionIdFromPathname(pathname: string) {
   }
 }
 
+function readWorkspaceView(search: string): TutoringWorkspaceView {
+  const value = new URLSearchParams(search).get("workspace");
+  return value === "master" ||
+    value === "reference" ||
+    value === "mine" ||
+    value === "learner"
+    ? value
+    : "mine";
+}
+
 /**
  * Practice/review APIs live outside the tutoring route tree, so they cannot
- * infer tutoring authorization from their own URL. Resolve the current
- * tutoring session once from the browser route and send only its opaque ID.
- *
- * Workspace ownership is intentionally not sent here. Progress/documents keep
- * using their own workspace-aware APIs; this context only authorizes access to
- * exercise definitions contained in the frozen tutoring snapshot.
+ * infer tutoring authorization or the selected workspace from their own URL.
+ * Send only the opaque session/workspace identity needed for authorization.
  */
 export function getTutoringClientContentRequestContext(
-  locationLike: Pick<Location, "pathname"> | null | undefined =
-    typeof window !== "undefined" ? window.location : null,
+  locationLike:
+    | Pick<Location, "pathname" | "search">
+    | null
+    | undefined = typeof window !== "undefined" ? window.location : null,
 ): TutoringClientContentRequestContext | null {
   const sessionId = readSessionIdFromPathname(locationLike?.pathname ?? "");
   if (!sessionId) return null;
 
+  const workspaceView = readWorkspaceView(locationLike?.search ?? "");
+  const learnerId =
+    workspaceView === "learner"
+      ? new URLSearchParams(locationLike?.search ?? "").get("learnerId")?.trim() ||
+        null
+      : null;
+
   return {
     sessionId,
-    dedupeKey: `tutoring:${sessionId}`,
+    workspaceView,
+    learnerId,
+    dedupeKey: `tutoring:${sessionId}:${workspaceView}:${learnerId ?? "self"}`,
   };
 }
 
@@ -45,6 +69,12 @@ export function withTutoringContentRequestHeaders(
   const headers = new Headers(headersInit);
   if (context?.sessionId) {
     headers.set(TUTORING_SESSION_HEADER, context.sessionId);
+    headers.set(TUTORING_WORKSPACE_VIEW_HEADER, context.workspaceView);
+    if (context.learnerId) {
+      headers.set(TUTORING_LEARNER_ID_HEADER, context.learnerId);
+    } else {
+      headers.delete(TUTORING_LEARNER_ID_HEADER);
+    }
   }
   return headers;
 }

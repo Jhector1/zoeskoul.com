@@ -258,7 +258,9 @@ export async function submitPracticeAnswer(args: {
   const promise = (async () => {
     const res = await fetch("/api/practice/validate", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: withTutoringContentRequestHeaders({
+        "Content-Type": "application/json",
+      }),
       credentials: "include",
       body: JSON.stringify({
         key: args.key,
@@ -311,7 +313,9 @@ export async function fetchPracticeHelp(args: {
 }): Promise<PracticeHelpClientResponse> {
   const res = await fetch("/api/practice/help", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: withTutoringContentRequestHeaders({
+      "Content-Type": "application/json",
+    }),
     credentials: "include",
     cache: "no-store",
     signal: args.signal,
@@ -370,7 +374,9 @@ export async function fetchPracticeTutor(args: {
 }): Promise<PracticeTutorClientResponse> {
   const res = await fetch("/api/practice/explain", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: withTutoringContentRequestHeaders({
+      "Content-Type": "application/json",
+    }),
     credentials: "include",
     cache: "no-store",
     signal: args.signal,

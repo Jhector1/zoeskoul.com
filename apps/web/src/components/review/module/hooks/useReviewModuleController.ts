@@ -102,6 +102,9 @@ import {
     shouldDefaultCollapseToolsRail,
     toolPresentationPolicyFromManifest,
 } from "../toolsRailVisibility";
+import {
+    resolveReviewWorkspaceCapabilities,
+} from "../workspaceCapabilities";
 
 function normalizeCompactNavKind(value: unknown) {
     return String(value ?? "")
@@ -341,6 +344,30 @@ export function useReviewModuleController({
         ? `/api/tutoring-sessions/${encodeURIComponent(tutoringSessionId)}/documents`
         : undefined;
     const unlockAll = Boolean(canUnlockAll);
+    const workspaceCapabilities = useMemo(
+        () =>
+            resolveReviewWorkspaceCapabilities(
+                tutoringSession?.capabilities ??
+                (isTutoringSession
+                    ? {
+                        canEditWorkspace: tutoringSession?.canEdit === true,
+                        canSubmitPractice: tutoringSession?.canEdit === true,
+                        canMutateProgress: tutoringSession?.canEdit === true,
+                        usesProgressGating:
+                            tutoringSession?.workspaceView === "mine" &&
+                            tutoringSession?.canEdit === true,
+                    }
+                    : null),
+            ),
+        [
+            isTutoringSession,
+            tutoringSession?.canEdit,
+            tutoringSession?.capabilities,
+            tutoringSession?.workspaceView,
+        ],
+    );
+    const navigationUnlockAll =
+        unlockAll || !workspaceCapabilities.usesProgressGating;
     const compactModeActive =
         learnerUiFlags.compactLearnerUi && !learnerUiFlags.showDebugLearningUi;
     const routeFamilyRef = useRef<"devReviewClone" | "standard">(
@@ -407,13 +434,13 @@ export function useReviewModuleController({
     const {
         hydrated: progressHydrated,
         progress,
-        setProgress,
+        setProgress: setProgressUnsafe,
         activeTopicId,
         setActiveTopicId,
         viewTopicId,
         setViewTopicId,
-        flushNow,
-        flush,
+        flushNow: flushNowUnsafe,
+        flush: flushUnsafe,
         saveStatus,
         lastSaveError,
     } = useReviewProgress({
@@ -423,17 +450,43 @@ export function useReviewModuleController({
         firstTopicId,
         endpoint: tutoringProgressEndpoint,
         gamificationEnabled: !isTutoringSession,
-        readOnly: isTutoringSession && tutoringSession?.canEdit !== true,
+        readOnly: !workspaceCapabilities.canMutateProgress,
         followRemoteNavigation: tutoringSession?.followTutor !== false,
     });
+    const setProgress = useCallback<React.Dispatch<React.SetStateAction<ReviewProgressState>>>(
+        (update) => {
+            if (!workspaceCapabilities.canMutateProgress) return;
+            setProgressUnsafe(update);
+        },
+        [setProgressUnsafe, workspaceCapabilities.canMutateProgress],
+    );
+    const flushNow = useCallback(
+        (...args: Parameters<typeof flushNowUnsafe>) => {
+            if (!workspaceCapabilities.canMutateProgress) {
+                return Promise.resolve();
+            }
+            return flushNowUnsafe(...args);
+        },
+        [flushNowUnsafe, workspaceCapabilities.canMutateProgress],
+    );
+    const flush = useCallback(async () => {
+        if (!workspaceCapabilities.canMutateProgress) return;
+        await flushUnsafe();
+    }, [flushUnsafe, workspaceCapabilities.canMutateProgress]);
 
     const reviewWorkspacePersistencePolicy = useMemo(
         () =>
             resolveReviewWorkspacePersistencePolicy({
                 isTutoringSession,
-                canEdit: tutoringSession?.canEdit === true,
+                canEdit:
+                    workspaceCapabilities.canEditWorkspace &&
+                    workspaceCapabilities.canMutateProgress,
             }),
-        [isTutoringSession, tutoringSession?.canEdit],
+        [
+            isTutoringSession,
+            workspaceCapabilities.canEditWorkspace,
+            workspaceCapabilities.canMutateProgress,
+        ],
     );
     const store = useReviewRuntimeStore();
     const flushToolLatestRef = useRef<null | (() => Promise<void>)>(null);
@@ -596,9 +649,9 @@ export function useReviewModuleController({
                 registry: targetRegistry,
                 progress,
                 progressHydrated,
-                unlockAll,
+                unlockAll: navigationUnlockAll,
             }),
-        [targetRegistry, progress, progressHydrated, unlockAll],
+        [targetRegistry, progress, progressHydrated, navigationUnlockAll],
     );
 
     const trustedProgressiveBypassTargetKeyRef = useRef<string | null>(null);
@@ -614,7 +667,7 @@ export function useReviewModuleController({
 
     const routeTargetUnlocked =
         routeTargetTrustedBypass ||
-        unlockAll ||
+        navigationUnlockAll ||
         !progressHydrated ||
         !routeTargetKey ||
         progressiveUnlock.unlockedTargetKeys.has(routeTargetKey);
@@ -727,7 +780,7 @@ export function useReviewModuleController({
             const nextIsUnlocked =
                 nextIsBrowserHistoryExercise ||
                 nextTargetTrustedBypass ||
-                unlockAll ||
+                navigationUnlockAll ||
                 !progressHydrated ||
                 !nextTargetKey ||
                 progressiveUnlock.unlockedTargetKeys.has(nextTargetKey);
@@ -777,7 +830,7 @@ export function useReviewModuleController({
         showProgressiveLockMessage,
         subjectSlug,
         targetRegistry,
-        unlockAll,
+        navigationUnlockAll,
     ]);
 
     const effectiveViewTopicId = routeTarget?.topicId ?? viewTopicId;
@@ -943,7 +996,7 @@ export function useReviewModuleController({
     });
 
     const canGoNextModule =
-        unlockAll ||
+        navigationUnlockAll ||
         (moduleComplete || Boolean((progress as any)?.moduleCompleted));
 
     const navLoading = !isTutoringSession && nav === undefined;
@@ -992,7 +1045,7 @@ export function useReviewModuleController({
 
     const topicFlow = useReviewTopicFlow({
         topics,
-        unlockAll,
+        unlockAll: navigationUnlockAll,
         progress,
         activeTopicId,
         setActiveTopicId,
@@ -1021,7 +1074,7 @@ export function useReviewModuleController({
 
             const nextIsUnlocked =
                 bypassProgressiveLock ||
-                unlockAll ||
+                navigationUnlockAll ||
                 !progressHydrated ||
                 !nextTargetKey ||
                 progressiveUnlock.unlockedTargetKeys.has(nextTargetKey);
@@ -1076,7 +1129,7 @@ export function useReviewModuleController({
             showProgressiveLockMessage,
             subjectSlug,
             targetRegistry,
-            unlockAll,
+            navigationUnlockAll,
         ],
     );
 
@@ -1156,7 +1209,7 @@ export function useReviewModuleController({
         const clamped = Math.max(0, Math.min(viewCards.length - 1, index));
         const bypassProgressiveLock = Boolean(options.bypassProgressiveLock);
 
-        if (!bypassProgressiveLock && !unlockAll && clamped > maxUnlockedCardIndex) {
+        if (!bypassProgressiveLock && !navigationUnlockAll && clamped > maxUnlockedCardIndex) {
             showProgressiveLockMessage();
             return;
         }
@@ -1178,7 +1231,7 @@ export function useReviewModuleController({
         mod,
         navigateToResolvedTarget,
         showProgressiveLockMessage,
-        unlockAll,
+        navigationUnlockAll,
         viewCards,
         viewTid,
     ]);
@@ -1218,7 +1271,7 @@ export function useReviewModuleController({
         progressHydrated,
         navModes: resolvedNavModes,
         reduceMotion,
-        unlockAll,
+        unlockAll: navigationUnlockAll,
         showSkeleton,
         routeOwned: true,
         onNavigateToCardIndex: handleNavigateCardIndex,
@@ -1455,7 +1508,7 @@ export function useReviewModuleController({
             }
         };
     }, [tool.flushLatest]);
-    const prereqsForAllQuizzes = unlockAll
+    const prereqsForAllQuizzes = navigationUnlockAll
         ? true
         : prereqsMetForAnyQuizOrProject(viewCards, viewProg, viewTid);
 
@@ -1889,11 +1942,11 @@ export function useReviewModuleController({
                 activeTopicId,
                 viewTopicId,
                 topicUnlocked: topicFlow.topicUnlocked,
-                unlockAll,
+                unlockAll: navigationUnlockAll,
                 progressHydrated,
                 progress,
             }).map((item) => {
-                if (unlockAll) return item;
+                if (navigationUnlockAll) return item;
 
                 const hasUnlockedTarget = Boolean(
                     firstRouteTargetForUnlockedTopic({
@@ -1914,7 +1967,7 @@ export function useReviewModuleController({
             activeTopicId,
             viewTopicId,
             topicFlow.topicUnlocked,
-            unlockAll,
+            navigationUnlockAll,
             progressHydrated,
             progress,
             progressiveUnlock.unlockedTargetKeys,
@@ -2169,7 +2222,7 @@ export function useReviewModuleController({
 
     const activeCardDone = activeCard ? isCardDoneFromState(activeCard, viewProg) : false;
     const activeCardCanAdvance =
-        unlockAll ||
+        navigationUnlockAll ||
         activeCardDone ||
         (activeCard
             ? !isQuizLikeCard(activeCard) && !hasRequiredEmbeddedTryIt(activeCard)
@@ -2200,7 +2253,7 @@ export function useReviewModuleController({
         atFinalModuleNavigationStep,
     );
     const nextCardUnlocked =
-        unlockAll || activeCardIndex + 1 <= maxUnlockedCardIndex;
+        navigationUnlockAll || activeCardIndex + 1 <= maxUnlockedCardIndex;
     const canGoNextCard =
         hasNextCard && activeCardCanAdvance && nextCardUnlocked;
     const certificateLabel = subjectFinish?.certificateIssued
@@ -2272,6 +2325,8 @@ export function useReviewModuleController({
     ]);
 
     const persistBeforeUnifiedNavigation = useCallback(async () => {
+        if (!workspaceCapabilities.canMutateProgress) return;
+
         await flushAll();
 
         setProgress((prev) => {
@@ -2289,7 +2344,14 @@ export function useReviewModuleController({
             queueMicrotask(() => flushNow(next));
             return next;
         });
-    }, [activeCard, flushAll, flushNow, setProgress, viewTid]);
+    }, [
+        activeCard,
+        flushAll,
+        flushNow,
+        setProgress,
+        viewTid,
+        workspaceCapabilities.canMutateProgress,
+    ]);
 
     const navigateToTopicEdgeCard = useCallback((topicId: string | null | undefined, edge: "first" | "last") => {
         if (!topicId) return false;
@@ -2550,7 +2612,7 @@ export function useReviewModuleController({
             onToggleRightPanel: panels.handleToggleRightPanel,
             resetOptions: headerResetOptions,
             resetDisabledReason:
-                isTutoringSession && tutoringSession?.canEdit !== true
+                !workspaceCapabilities.canMutateProgress
                     ? "This workspace is read only. Switch to an editable workspace to reset progress."
                     : null,
             onPrevTopic: topicFlow.prevTopic?.id
@@ -2585,7 +2647,7 @@ export function useReviewModuleController({
                 : undefined,
             prevTopic: topicFlow.prevTopic,
             nextTopic: topicFlow.nextTopic,
-            unlockAll,
+            unlockAll: navigationUnlockAll,
             viewIsComplete,
             headerGamification,
             saveStatus,
@@ -2601,7 +2663,7 @@ export function useReviewModuleController({
             sidebarProps: {
                 mod,
                 topicItems: sidebarTopicItems,
-                unlockAll,
+                unlockAll: navigationUnlockAll,
                 moduleProgress,
                 onGoToTopic: (tid: string) => {
                     const unlockedEntry = firstRouteTargetForUnlockedTopic({
@@ -2612,7 +2674,7 @@ export function useReviewModuleController({
 
                     const unlockedTarget = registryEntryToRouteTarget(unlockedEntry);
 
-                    if (!unlockedTarget && !unlockAll) {
+                    if (!unlockedTarget && !navigationUnlockAll) {
                         showProgressiveLockMessage();
                         return;
                     }
@@ -2710,8 +2772,7 @@ export function useReviewModuleController({
                 moduleId: moduleSlug,
                 locale,
                 codeEnabled: runtime.codeEnabled,
-                codeReadOnly:
-                    isTutoringSession && tutoringSession?.canEdit !== true,
+                codeReadOnly: !workspaceCapabilities.canEditWorkspace,
                 boardEnabled,
                 boardReadOnly:
                     isTutoringSession && tutoringSession?.canEditBoard !== true,
@@ -2746,7 +2807,7 @@ export function useReviewModuleController({
             sidebarProps: {
                 mod,
                 topicItems: sidebarTopicItems,
-                unlockAll,
+                unlockAll: navigationUnlockAll,
                 moduleProgress,
                 onGoToTopic: (tid: string) => {
                     const unlockedEntry = firstRouteTargetForUnlockedTopic({
@@ -2757,7 +2818,7 @@ export function useReviewModuleController({
 
                     const unlockedTarget = registryEntryToRouteTarget(unlockedEntry);
 
-                    if (!unlockedTarget && !unlockAll) {
+                    if (!unlockedTarget && !navigationUnlockAll) {
                         showProgressiveLockMessage();
                         return;
                     }
@@ -2803,7 +2864,8 @@ export function useReviewModuleController({
             viewCards,
             viewTid,
             activeCardIndex,
-            unlockAll,
+            unlockAll: navigationUnlockAll,
+            workspaceCapabilities,
             navModes: resolvedNavModes,
             maxUnlockedCardIndex,
             progressiveLockMessage,

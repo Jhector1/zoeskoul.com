@@ -510,6 +510,7 @@ export default function RevealAnswerCard({
                                              autoScroll = true,
                                              autoFill = false,
                                              codeInputId,
+                                             readOnly = false,
                                          }: {
     exercise: Exercise | null;
     current: QItem;
@@ -519,6 +520,7 @@ export default function RevealAnswerCard({
     autoScroll?: boolean;
     autoFill?: boolean;
     codeInputId?: string;
+    readOnly?: boolean;
 }) {
     const [copied, setCopied] = useState(false);
     const [copiedFilePath, setCopiedFilePath] = useState<string | null>(null);
@@ -994,7 +996,7 @@ export default function RevealAnswerCard({
     const autoFilledRef = useRef(false);
 
     const fillAnswer = useCallback(() => {
-        if (!model?.fillPatch) return;
+        if (readOnly || !model?.fillPatch) return;
 
         const fillPatchAny = model.fillPatch as Record<string, unknown>;
         const hasCodeWorkspace =
@@ -1024,6 +1026,7 @@ export default function RevealAnswerCard({
         model,
         reveal,
         revealT?.kind,
+        readOnly,
         tools?.boundId,
         tools?.patchCodeInput,
         updateCurrent,
@@ -1034,10 +1037,10 @@ export default function RevealAnswerCard({
     }, [current.key]);
 
     useEffect(() => {
-        if (!autoFill || !model?.fillPatch || autoFilledRef.current) return;
+        if (readOnly || !autoFill || !model?.fillPatch || autoFilledRef.current) return;
         autoFilledRef.current = true;
         fillAnswer();
-    }, [autoFill, fillAnswer, model?.fillPatch]);
+    }, [autoFill, fillAnswer, model?.fillPatch, readOnly]);
 
     useEffect(() => {
         if (!autoScroll) return;
@@ -1087,7 +1090,7 @@ export default function RevealAnswerCard({
                         </button>
                     ) : null}
 
-                    {!autoFill ? (
+                    {!autoFill && !readOnly ? (
                         <button
                             onClick={onFill}
                             disabled={!m.fillPatch}
