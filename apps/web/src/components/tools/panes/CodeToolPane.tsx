@@ -2040,6 +2040,17 @@ export default function CodeToolPane(props: {
         pendingExerciseBinding ||
         resetHydrationActive,
     );
+    const mountedEditorApplyRevision = Math.max(
+        0,
+        Number(editorRuntime?.workspaceApplyRevision ?? 0),
+    );
+    const shouldApplyWorkspaceToMountedEditor = Boolean(
+        isReviewRouteMode && mountedEditorApplyRevision > 0,
+    );
+    const mountedEditorExternalWorkspaceRevision =
+        shouldApplyWorkspaceToMountedEditor
+            ? `${workspaceContextKey}:${mountedEditorApplyRevision}`
+            : undefined;
     /**
      * Do not show the editor loading fallback when the tools rail is not bound
      * to an exercise/sketch/code target. In that state there is no workspace to
@@ -3077,9 +3088,13 @@ export default function CodeToolPane(props: {
                         }}
                         initialWorkspace={finalReviewWorkspace}
                         externalWorkspace={
-                            shouldControlFullIdeWorkspace
+                            shouldControlFullIdeWorkspace ||
+                            shouldApplyWorkspaceToMountedEditor
                                 ? finalReviewWorkspace
                                 : undefined
+                        }
+                        externalWorkspaceRevision={
+                            mountedEditorExternalWorkspaceRevision
                         }
                         exerciseStateKey={fullIdeExerciseStateKey}
                         projectScope={{

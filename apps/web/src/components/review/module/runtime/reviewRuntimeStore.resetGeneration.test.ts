@@ -765,3 +765,72 @@ describe("reviewRuntimeStore reset generation boundary", () => {
     );
   });
 });
+
+describe("reviewRuntimeStore mounted editor replacement command", () => {
+  beforeEach(() => {
+    resetRuntimeStore();
+  });
+
+  it("increments only the mounted-editor apply revision and can reapply the same workspace", () => {
+    const ownerKey = "exercise:reveal-fill";
+    const workspace = makeWorkspace([
+      { path: "main.py", content: "print('solution')\n" },
+      { path: "models/car.py", content: "class Car:\n    pass\n" },
+    ]);
+
+    useReviewRuntimeStore.setState((state) => ({
+      editorRuntimes: {
+        ...state.editorRuntimes,
+        [ownerKey]: {
+          ownerKey,
+          ownerKind: "exercise",
+          targetKey: ownerKey,
+          toolScopeKey: ownerKey,
+          language: "python",
+          workspaceStatus: "ready",
+          workspaceSeedMode: "restored",
+          workspaceOrigin: "user",
+          userEdited: true,
+          workspace,
+          code: "print('solution')\n",
+          stdin: "",
+          updatedAt: Date.now(),
+        },
+      },
+    }));
+
+    const runtime = useReviewRuntimeStore.getState();
+
+    runtime.patchEditorWorkspace(ownerKey, workspace, {
+      generation: 0,
+      source: "reveal-fill",
+      applyToMountedEditor: true,
+    });
+
+    expect(
+      useReviewRuntimeStore.getState().editorRuntimes[ownerKey]
+        ?.workspaceApplyRevision,
+    ).toBe(1);
+
+    runtime.patchEditorWorkspace(ownerKey, workspace, {
+      generation: 0,
+      source: "reveal-fill",
+      applyToMountedEditor: true,
+    });
+
+    expect(
+      useReviewRuntimeStore.getState().editorRuntimes[ownerKey]
+        ?.workspaceApplyRevision,
+    ).toBe(2);
+
+    runtime.patchEditorWorkspace(ownerKey, workspace, {
+      generation: 0,
+      source: "normal-sync",
+    });
+
+    expect(
+      useReviewRuntimeStore.getState().editorRuntimes[ownerKey]
+        ?.workspaceApplyRevision,
+    ).toBe(2);
+  });
+});

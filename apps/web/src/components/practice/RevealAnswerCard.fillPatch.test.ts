@@ -1,10 +1,26 @@
+import React from "react";
+import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it, vi } from "vitest";
 
-import {
+import RevealAnswerCard, {
     applyRevealFillAnswer,
     buildSolutionWorkspace,
     buildRevealFillPatches,
+    mergeSolutionWorkspace,
 } from "./RevealAnswerCard";
+
+vi.mock("@/i18n/tagged", () => ({
+    isTaggedKey: (value: unknown) =>
+        typeof value === "string" && value.startsWith("@:"),
+    stripTag: (value: string) => value.slice(2),
+    useTaggedT: () => ({
+        raw: (_key: string, fallback?: string) => fallback ?? "",
+    }),
+}));
+
+vi.mock("@/components/review/module/context/ReviewToolsContext", () => ({
+    useOptionalReviewTools: () => null,
+}));
 
 function workspacePathMap(workspace: NonNullable<ReturnType<typeof buildSolutionWorkspace>>) {
     const byId = new Map(workspace.nodes.map((node) => [node.id, node] as const));
@@ -65,6 +81,7 @@ describe("buildRevealFillPatches", () => {
             userEdited: true,
             preferSnapshot: true,
             workspaceOrigin: "reveal-fill",
+            applyToMountedEditor: true,
         });
     });
 
@@ -140,6 +157,106 @@ describe("buildRevealFillPatches", () => {
         expect(workspace?.openTabs).toEqual([workspace?.activeFileId]);
     });
 
+    it("adds revealed solution files without deleting the learner workspace", () => {
+        const learnerWorkspace = buildSolutionWorkspace({
+            language: "python",
+            solutionCode: "print('learner')\n",
+            stdin: "",
+            solutionFiles: {
+                "main.py": "print('learner')\n",
+                "notes.txt": "keep this file\n",
+            },
+        });
+        const solutionWorkspace = buildSolutionWorkspace({
+            language: "python",
+            solutionCode: "from tools.helper import answer\nprint(answer())\n",
+            stdin: "",
+            solutionFiles: {
+                "main.py": "from tools.helper import answer\nprint(answer())\n",
+                "tools/helper.py": "def answer():\n    return 42\n",
+            },
+        });
+
+        const merged = mergeSolutionWorkspace(
+            learnerWorkspace,
+            solutionWorkspace,
+        );
+
+        expect(merged).not.toBeNull();
+        const paths = workspacePathMap(merged!);
+        expect(paths.get("main.py")).toBe(
+            "from tools.helper import answer\nprint(answer())\n",
+        );
+        expect(paths.get("tools/helper.py")).toBe(
+            "def answer():\n    return 42\n",
+        );
+        expect(paths.get("notes.txt")).toBe("keep this file\n");
+    });
+
+    it("shows solution files for comparison and waits for Fill in editor", () => {
+        const exercise = {
+            id: "compare-solution",
+            kind: "code_input",
+            topic: "topic-1",
+            difficulty: "easy",
+            title: "Compare solution",
+            prompt: "Write code",
+            language: "python",
+        } as any;
+        const current = {
+            key: exercise.id,
+            exercise,
+            code: "print('learner work')\n",
+            codeLang: "python",
+            codeStdin: "",
+            single: "",
+            multi: [],
+            num: "",
+            dragA: { x: 0, y: 0, z: 0 },
+            dragB: { x: 0, y: 0, z: 0 },
+            matRows: 0,
+            matCols: 0,
+            mat: [],
+            result: { ok: false, finalized: true },
+            submitted: true,
+            attempts: 3,
+            text: "",
+            voiceTranscript: "",
+            help: {
+                openedStepKeys: ["reveal"],
+                activeStepKey: "reveal",
+                entries: {},
+                busyStepKey: null,
+                error: null,
+            },
+        } as any;
+
+        const html = renderToStaticMarkup(
+            React.createElement(RevealAnswerCard, {
+                exercise,
+                current,
+                reveal: {
+                    kind: "code_input",
+                    language: "python",
+                    solutionCode: "from tools.helper import answer\nprint(answer())\n",
+                    solutionFiles: {
+                        "main.py": "from tools.helper import answer\nprint(answer())\n",
+                        "tools/helper.py": "def answer():\n    return 42\n",
+                    },
+                },
+                updateCurrent: vi.fn(),
+                autoScroll: false,
+            }),
+        );
+
+        expect(html).toContain("Compare the revealed solution with your workspace");
+        expect(html).toContain("Fill in editor");
+        expect(html).toContain("Copy all files");
+        expect(html).toContain("main.py");
+        expect(html).toContain("tools/helper.py");
+        expect(html).not.toContain("has been filled into the editor");
+    });
+
     it("applies code_input Fill answer to both item state and registered CodeToolPane input", () => {
         const updateCurrent = vi.fn();
         const patchCodeInput = vi.fn();
@@ -167,6 +284,10 @@ describe("buildRevealFillPatches", () => {
                 ideWorkspace: workspace,
             } as any,
         });
+
+        expect(patchCodeInput.mock.invocationCallOrder[0]).toBeLessThan(
+            updateCurrent.mock.invocationCallOrder[0],
+        );
 
         expect(updateCurrent).toHaveBeenCalledWith(
             expect.objectContaining({
@@ -200,6 +321,7 @@ describe("buildRevealFillPatches", () => {
                 userEdited: true,
                 preferSnapshot: true,
                 workspaceOrigin: "reveal-fill",
+                applyToMountedEditor: true,
                 workspace,
                 codeWorkspace: workspace,
                 ideWorkspace: workspace,

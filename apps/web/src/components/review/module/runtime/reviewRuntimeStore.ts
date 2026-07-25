@@ -3927,6 +3927,7 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
 
     patchEditorWorkspace: (ownerKey, workspace, options) => {
         let didPatch = false;
+        let shouldQueueAutosave = false;
 
         set((state) => {
             const existing = state.editorRuntimes[ownerKey];
@@ -4027,19 +4028,40 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
                     : existing.stdin ?? "";
             const nextWorkspaceKey = workspaceContentKey(reconciledWorkspace ?? null);
             const existingWorkspaceKey = workspaceContentKey(existing.workspace ?? null);
-
-            if (
+            const applyToMountedEditor = Boolean(
+                options?.applyToMountedEditor && reconciledWorkspace,
+            );
+            const workspaceAlreadyMatches =
                 existingWorkspaceKey === nextWorkspaceKey &&
                 String(existing.code ?? "") === String(nextCode) &&
-                String(existing.stdin ?? "") === String(nextStdin)
-            ) {
+                String(existing.stdin ?? "") === String(nextStdin);
+
+            if (workspaceAlreadyMatches && !applyToMountedEditor) {
                 return state;
+            }
+
+            if (workspaceAlreadyMatches && applyToMountedEditor) {
+                didPatch = true;
+                return {
+                    editorRuntimes: {
+                        ...state.editorRuntimes,
+                        [ownerKey]: {
+                            ...existing,
+                            workspaceApplyRevision:
+                                (existing.workspaceApplyRevision ?? 0) + 1,
+                            updatedAt: Date.now(),
+                        },
+                    },
+                };
             }
 
             const nextEditorRuntime: EditorRuntimeState = {
                 ...existing,
                 workspaceGeneration: nextWorkspaceGeneration,
                 workspace: reconciledWorkspace,
+                workspaceApplyRevision: applyToMountedEditor
+                    ? (existing.workspaceApplyRevision ?? 0) + 1
+                    : existing.workspaceApplyRevision,
                 code: nextCode,
                 stdin: nextStdin,
                 workspaceStatus: reconciledWorkspace ? "ready" : "pending",
@@ -4238,6 +4260,7 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
             }
 
             if (persistenceDirty) {
+                shouldQueueAutosave = true;
                 nextState.persistence = {
                     ...state.persistence,
                     dirty: true,
@@ -4250,7 +4273,7 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
             return nextState;
         });
 
-        if (didPatch) {
+        if (didPatch && shouldQueueAutosave) {
             get().queueAutosave();
         }
     },

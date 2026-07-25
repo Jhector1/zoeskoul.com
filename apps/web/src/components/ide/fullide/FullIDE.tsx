@@ -29,6 +29,7 @@ import { CodeRunnerRuntime, ExecutionBackend } from "@/components/code/runner/ru
 import { mergeTerminalSnapshotIntoWorkspace } from "@/lib/projects/mergeTerminalSnapshotIntoWorkspace";
 import {FullIDEServices, resolveFullIDEServices} from "./services";
 import { resolveLearnerWorkspacePresentation } from "./workspacePresentation";
+import { resolveExternalWorkspaceApplyKey } from "./externalWorkspaceControl";
 // import {
 //     FullIDEServices,
 //     resolveFullIDEServices,
@@ -61,6 +62,7 @@ type FullIDEInnerProps = {
     onRunResult?: FullIDEProps["onRunResult"];
     forceDesktopLayout?: boolean;
     exerciseStateKey?: string;
+    workspaceReplacementRevision?: string | number;
     sqlDatasetId?: FullIDEProps["sqlDatasetId"];
     sqlResultShape?: FullIDEProps["sqlResultShape"];
     sqlPaneOptions?: FullIDEProps["sqlPaneOptions"];
@@ -153,6 +155,7 @@ function FullIDEInner({
                           projectDescription,
                           projectScope,
                           exerciseStateKey,
+                          workspaceReplacementRevision,
                           router,
                           splitRef,
                           rootRef,
@@ -569,6 +572,8 @@ function FullIDEInner({
             isDesktop={viewport.isDesktop}
             projectId={projectSession.projectId}
             exerciseStateKey={exerciseStateKey}
+            workspace={currentWorkspace}
+            workspaceReplacementRevision={workspaceReplacementRevision}
             terminalHistoryScopeKey={terminalHistoryScopeKey}
             onApplyTerminalSnapshotFiles={applyTerminalSnapshotFiles}
             onTerminalSyncReady={onTerminalSyncReady}
@@ -827,6 +832,7 @@ export default function FullIDE(props: FullIDEProps) {
         services: serviceOverrides,
         initialWorkspace,
         externalWorkspace,
+        externalWorkspaceRevision,
         onWorkspaceChange,
         onTerminalEvidenceChange,
         onTerminalSyncReady,
@@ -933,6 +939,19 @@ export default function FullIDE(props: FullIDEProps) {
         () => workspaceNotifyKey(initialWorkspace),
         [initialWorkspace],
     );
+    const externalWorkspaceApplyKey = useMemo(
+        () =>
+            resolveExternalWorkspaceApplyKey({
+                externalWorkspaceKey: externalWorkspaceControlKey,
+                initialWorkspaceKey: initialWorkspaceControlKey,
+                revision: externalWorkspaceRevision,
+            }),
+        [
+            externalWorkspaceControlKey,
+            externalWorkspaceRevision,
+            initialWorkspaceControlKey,
+        ],
+    );
     const lastAppliedExternalWorkspaceJsonRef = useRef<string | null>(null);
     const suppressWorkspaceEchoKeyRef = useRef<string | null>(null);
 
@@ -987,7 +1006,7 @@ export default function FullIDE(props: FullIDEProps) {
     useEffect(() => {
         if (!hasExternalWorkspaceProp) return;
 
-        const applyKey = `${externalWorkspaceControlKey}::initial:${initialWorkspaceControlKey}`;
+        const applyKey = externalWorkspaceApplyKey;
         if (lastAppliedExternalWorkspaceJsonRef.current === applyKey) return;
 
         const nextWorkspace =
@@ -998,7 +1017,10 @@ export default function FullIDE(props: FullIDEProps) {
         lastAppliedExternalWorkspaceJsonRef.current = applyKey;
 
         if (nextWorkspace) {
-            if (nextNotifyKey !== currentWorkspaceNotifyKeyRef.current) {
+            if (
+                typeof externalWorkspaceRevision !== "undefined" ||
+                nextNotifyKey !== currentWorkspaceNotifyKeyRef.current
+            ) {
                 /**
                  * This hydration is parent-controlled/programmatic.
                  * The next internal workspace emission should not be sent back upward,
@@ -1019,10 +1041,23 @@ export default function FullIDE(props: FullIDEProps) {
         }
     }, [
         hasExternalWorkspaceProp,
-        externalWorkspaceControlKey,
-        initialWorkspaceControlKey,
+        externalWorkspaceApplyKey,
+        externalWorkspaceRevision,
         forcedLanguage,
     ]);
+
+    /**
+     * Deliver a Monaco replacement command only after the workspace hook has
+     * committed its requested snapshot. This avoids consuming the revision
+     * against the previous active file during the hydration render. When React
+     * state already matches but Monaco is stale, the command is ready immediately.
+     */
+    const readyWorkspaceReplacementRevision =
+        typeof externalWorkspaceRevision !== "undefined" &&
+        workspaceNotifyKey(externalWorkspaceRef.current ?? null) ===
+            currentWorkspaceNotifyKey
+            ? externalWorkspaceRevision
+            : undefined;
 
     useEffect(() => {
         const current = workspace.derived.currentWorkspace;
@@ -1114,6 +1149,9 @@ export default function FullIDE(props: FullIDEProps) {
                 projectDescription={projectDescription}
                 projectScope={projectScope}
                 exerciseStateKey={props.exerciseStateKey}
+                workspaceReplacementRevision={
+                    readyWorkspaceReplacementRevision
+                }
                 router={router}
                 splitRef={splitRef}
                 rootRef={rootRef}

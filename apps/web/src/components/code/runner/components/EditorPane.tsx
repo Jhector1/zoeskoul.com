@@ -10,7 +10,9 @@ import React, {
 } from "react";
 import dynamic from "next/dynamic";
 import { cn } from "@/components/ide/utils";
+import type { WorkspaceStateV2 } from "@/components/ide/types";
 import type { editor } from "monaco-editor";
+import { resolveWorkspaceEditorLanguage } from "@zoeskoul/code-contracts";
 
 const Monaco = dynamic(() => import("@monaco-editor/react"), { ssr: false });
 
@@ -105,7 +107,7 @@ function sanitizePathPart(x: string) {
     );
 }
 
-function buildModelPath(args: {
+export function buildModelPath(args: {
     modelKey?: string;
     exerciseStateKey?: string;
     instanceKey: string;
@@ -120,12 +122,68 @@ function buildModelPath(args: {
     return `inmemory://zoeskoul-runner/${base}.${extForLang(args.lang)}`;
 }
 
+export function buildWorkspaceModelReplacements(args: {
+    workspace: WorkspaceStateV2 | null | undefined;
+    exerciseStateKey: string;
+}): Array<{ path: string; content: string }> {
+    const { workspace, exerciseStateKey } = args;
+    if (!workspace?.nodes?.length || !exerciseStateKey) return [];
+
+    return workspace.nodes.flatMap((node) => {
+        if (node.kind !== "file" || node.binary) return [];
+
+        return [{
+            path: buildModelPath({
+                modelKey: `${exerciseStateKey}:${node.id}`,
+                exerciseStateKey,
+                instanceKey: exerciseStateKey,
+                lang: resolveWorkspaceEditorLanguage(
+                    node.name,
+                    String(workspace.language),
+                ),
+            }),
+            content: node.content ?? "",
+        }];
+    });
+}
+
 function isDisposedModel(model: any) {
     try {
         return !model || model.isDisposed?.() === true;
     } catch {
         return true;
     }
+}
+
+export function replaceMountedWorkspaceModels(args: {
+    monaco: any;
+    replacements: Array<{ path: string; content: string }>;
+}): number {
+    const { monaco, replacements } = args;
+    if (!monaco?.Uri?.parse || !monaco?.editor?.getModel) return 0;
+
+    let updated = 0;
+
+    for (const replacement of replacements) {
+        try {
+            const model = monaco.editor.getModel(
+                monaco.Uri.parse(replacement.path),
+            );
+            if (
+                isDisposedModel(model) ||
+                model.getValue?.() === replacement.content
+            ) {
+                continue;
+            }
+
+            model.setValue?.(replacement.content);
+            updated += 1;
+        } catch {
+            // A model can be disposed while tabs or exercises are changing.
+        }
+    }
+
+    return updated;
 }
 
 function getLiveEditorModel(ed: any) {
@@ -221,7 +279,8 @@ export default function EditorPane(props: {
     onMount?: (ed: any) => void;
     modelKey?: string;
     exerciseStateKey?: string;
-    workspace?: any;
+    workspace?: WorkspaceStateV2 | null;
+    workspaceReplacementRevision?: string | number;
     frame?: RunnerFrame;
     mobileEditMode?: MobileEditMode;
 }) {
@@ -235,6 +294,8 @@ export default function EditorPane(props: {
         onMount,
         modelKey,
         exerciseStateKey,
+        workspace,
+        workspaceReplacementRevision,
         frame = "card",
         mobileEditMode = "auto",
     } = props;
@@ -243,6 +304,7 @@ export default function EditorPane(props: {
 
     const instanceKeyRef = useRef(`editor-${reactId.replace(/[:]/g, "")}`);
     const editorRef = useRef<any>(null);
+    const monacoRef = useRef<any>(null);
     const editorDisposablesRef = useRef<Array<{ dispose: () => void }>>([]);
 
     const mountedRef = useRef(false);
@@ -251,6 +313,7 @@ export default function EditorPane(props: {
     const pendingExternalValueRef = useRef<string | null>(null);
     const lastLocalValueRef = useRef<string>(String(code ?? ""));
     const prevPathRef = useRef<string>("");
+    const lastWorkspaceReplacementRevisionRef = useRef<string | null>(null);
 
     const [isNarrowScreen, setIsNarrowScreen] = useState(false);
     const [mobileEditing, setMobileEditing] = useState(false);
@@ -444,6 +507,45 @@ export default function EditorPane(props: {
         applyExternalValue(pending);
     }, [applyExternalValue]);
 
+    const applyWorkspaceReplacement = useCallback(() => {
+        if (typeof workspaceReplacementRevision === "undefined") return false;
+
+        const revisionKey = String(workspaceReplacementRevision);
+        if (lastWorkspaceReplacementRevisionRef.current === revisionKey) {
+            return false;
+        }
+
+        const replacements = buildWorkspaceModelReplacements({
+            workspace,
+            exerciseStateKey: effectiveExerciseStateKey,
+        });
+
+        for (const replacement of replacements) {
+            if (cacheScope) {
+                writeCachedEditorValue(
+                    cacheScope,
+                    replacement.path,
+                    replacement.content,
+                );
+            }
+        }
+
+        replaceMountedWorkspaceModels({
+            monaco: monacoRef.current,
+            replacements,
+        });
+        applyExternalValue(String(code ?? ""));
+        lastWorkspaceReplacementRevisionRef.current = revisionKey;
+        return true;
+    }, [
+        applyExternalValue,
+        cacheScope,
+        code,
+        effectiveExerciseStateKey,
+        workspace,
+        workspaceReplacementRevision,
+    ]);
+
     useEffect(() => {
         mountedRef.current = true;
 
@@ -568,13 +670,31 @@ export default function EditorPane(props: {
             return;
         }
 
+        const explicitWorkspaceReplacement =
+            typeof workspaceReplacementRevision !== "undefined" &&
+            lastWorkspaceReplacementRevisionRef.current !==
+                String(workspaceReplacementRevision);
+
+        if (explicitWorkspaceReplacement) {
+            applyWorkspaceReplacement();
+            return;
+        }
+
         if (isEditorFocusedRef.current && !pathChanged) {
             pendingExternalValueRef.current = next;
             return;
         }
 
         applyExternalValue(next);
-    }, [code, path, cacheScope, applyExternalValue, onChange]);
+    }, [
+        code,
+        path,
+        cacheScope,
+        applyExternalValue,
+        applyWorkspaceReplacement,
+        onChange,
+        workspaceReplacementRevision,
+    ]);
 
     const options = useMemo<editor.IStandaloneEditorConstructionOptions>(() => {
         return {
@@ -636,7 +756,7 @@ export default function EditorPane(props: {
                     })()}
                     theme={theme}
                     saveViewState
-                    onMount={(ed: any) => {
+                    onMount={(ed: any, monaco: any) => {
                         disposeEditorListeners();
 
                         if (!mountedRef.current || !ed || ed.isDisposed?.() === true) {
@@ -644,12 +764,14 @@ export default function EditorPane(props: {
                         }
 
                         editorRef.current = ed;
+                        monacoRef.current = monaco;
                         lastLocalValueRef.current = safeEditorValue(
                             ed,
                             String(code ?? ""),
                         );
 
                         onMount?.(ed);
+                        applyWorkspaceReplacement();
 
                         refreshMobileEditNeed();
 

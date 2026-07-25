@@ -50,6 +50,11 @@ type CodeInputPatch = UnknownRecord & {
   dismissFeedbackOnEdit?: boolean;
   feedbackDismissed?: boolean;
   preferSnapshot?: boolean;
+  /**
+   * Explicit programmatic replacement command for the live mounted editor.
+   * This is intentionally separate from normal user/snapshot synchronization.
+   */
+  applyToMountedEditor?: boolean;
   exerciseKey?: string;
   workspace?: WorkspaceStateV2 | null;
   codeWorkspace?: WorkspaceStateV2 | null;
@@ -854,12 +859,23 @@ export function ReviewToolsProvider({
                         : cur.toolPresentation,
             };
 
-            if (codeInputRegistrationKey(cur) === codeInputRegistrationKey(next)) {
+            const registrationChanged =
+                codeInputRegistrationKey(cur) !== codeInputRegistrationKey(next);
+
+            /**
+             * A mounted-editor replacement is a command, not only a state diff.
+             * The persisted/registry workspace may already contain the solution
+             * while Monaco is still showing its previous local model. Do not let
+             * registration dedupe swallow that command.
+             */
+            if (!registrationChanged && patch?.applyToMountedEditor !== true) {
                 return;
             }
 
-            registryRef.current.set(id, next);
-            cur.onPatch?.(patch);
+            if (registrationChanged) {
+                registryRef.current.set(id, next);
+                cur.onPatch?.(patch);
+            }
 
             const feedbackDismissPatch =
                 userEdited &&
@@ -948,6 +964,8 @@ export function ReviewToolsProvider({
                         mutation:
                             patch?.workspaceMutation ??
                             cur.workspaceMutation,
+                        applyToMountedEditor:
+                            patch?.applyToMountedEditor === true,
                     });
 
                     if (ownerKey !== targetKey) {
@@ -1063,6 +1081,8 @@ export function ReviewToolsProvider({
                         runtimeStore.patchEditorWorkspace(ownerKey, normalizedPair.workspace, {
                             generation: currentResetRevision,
                             source: "review-tools-patch-user",
+                            applyToMountedEditor:
+                                patch?.applyToMountedEditor === true,
                         });
                     }
                 }
@@ -1079,7 +1099,12 @@ export function ReviewToolsProvider({
                 workspaceOrigin: "user",
             });
 
-            defer(() => bindNow(id));
+            // patchCodeInput is an explicit learner action (for example, Fill in
+            // editor). Start the visible Tools rebind immediately while the
+            // registry entry is still mounted. Deferring this until a microtask
+            // can race with the finalized-item rerender and leave the editor on
+            // its old snapshot until the page is refreshed.
+            void bindNow(id);
         },
         [bindNow, clearRunFeedback, currentResetRevision, syncCodeInputSnapshot],
     );

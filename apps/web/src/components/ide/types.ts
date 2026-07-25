@@ -123,6 +123,12 @@ export type FullIDEProps = {
     services?: FullIDEServicesInput;
     initialWorkspace?: WorkspaceStateV2 | null;
     externalWorkspace?: WorkspaceStateV2 | null;
+    /**
+     * Optional command revision for one-shot external workspace replacement.
+     * When provided, FullIDE applies externalWorkspace only when this revision
+     * changes instead of reacting to every parent workspace object update.
+     */
+    externalWorkspaceRevision?: string | number;
     onWorkspaceChange?: (
         workspace: WorkspaceStateV2 | null,
         meta?: { origin?: "user" | "sync" | "programmatic" },

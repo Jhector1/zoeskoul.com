@@ -260,9 +260,9 @@ export function buildSolutionWorkspace(args: {
         file.path === entryPath
             ? {
                 ...file,
-                // Prefer the explicit multi-file solution content. Only fall back to
-                // solutionCode when the entry file was not included or has no content.
-                content: file.content || args.solutionCode,
+                // solutionCode is the canonical entry-file answer when supplied;
+                // solutionFiles contributes the rest of the multi-file workspace.
+                content: args.solutionCode || file.content,
                 entry: true,
             }
             : file,
@@ -344,6 +344,38 @@ export function buildSolutionWorkspace(args: {
 
 type RevealFillPatch = Partial<QItem> & Record<string, unknown>;
 
+export function mergeSolutionWorkspace(
+    baseWorkspace: WorkspaceStateV2 | null | undefined,
+    solutionWorkspace: WorkspaceStateV2 | null | undefined,
+): WorkspaceStateV2 | null {
+    if (!solutionWorkspace) return baseWorkspace ?? null;
+    if (!baseWorkspace) return solutionWorkspace;
+
+    const files = new Map<string, { path: string; content: string }>();
+    for (const file of getWorkspaceFileEntries(baseWorkspace)) {
+        files.set(file.path, file);
+    }
+    for (const file of getWorkspaceFileEntries(solutionWorkspace)) {
+        files.set(file.path, file);
+    }
+
+    const solutionEntryPath = solutionWorkspace.entryFileId
+        ? workspacePathForNode(solutionWorkspace.nodes, solutionWorkspace.entryFileId)
+        : "";
+    const baseEntryPath = baseWorkspace.entryFileId
+        ? workspacePathForNode(baseWorkspace.nodes, baseWorkspace.entryFileId)
+        : "";
+
+    return buildSolutionWorkspace({
+        language: String(solutionWorkspace.language || baseWorkspace.language || "python"),
+        solutionCode: "",
+        stdin: solutionWorkspace.stdin ?? baseWorkspace.stdin ?? "",
+        solutionFiles: Array.from(files.values()),
+        entryFile: solutionEntryPath || baseEntryPath || undefined,
+    });
+}
+
+
 export function buildRevealFillPatches(args: {
     fillPatch: RevealFillPatch;
     isCodeInput: boolean;
@@ -368,6 +400,10 @@ export function buildRevealFillPatches(args: {
             userEdited: true,
             preferSnapshot: true,
             workspaceOrigin: "reveal-fill",
+            // This is an explicit replacement command, not a normal editor echo.
+            // The mounted FullIDE stays local-first for typing and only replaces
+            // its workspace when this command is present.
+            applyToMountedEditor: true,
         }
         : itemPatch;
 
@@ -389,11 +425,16 @@ export function applyRevealFillAnswer(args: {
         isCodeInput: args.isCodeInput,
     });
 
-    args.updateCurrent(itemPatch as Partial<QItem>);
-
+    // Update the registered Tools editor before the parent item state. Revealed
+    // items can become read-only/finalized as soon as updateCurrent runs, which
+    // may unregister or re-key the visible code input before the imperative
+    // editor patch reaches it. Applying the live editor patch first keeps Fill
+    // in editor immediate while updateCurrent remains the persisted source of truth.
     if (args.isCodeInput && args.codeInputId) {
         args.patchCodeInput?.(args.codeInputId, toolsPatch);
     }
+
+    args.updateCurrent(itemPatch as Partial<QItem>);
 
     return {
         itemPatch,
@@ -416,6 +457,9 @@ type RevealModel = {
     copyText: string;
     fillPatch: RevealFillPatch | null;
     node: React.ReactNode;
+    copyLabel?: string;
+    fillLabel?: string;
+    showCopyAction?: boolean;
 };
 
 const REVEAL_PANEL = "ui-surface-muted p-3";
@@ -425,6 +469,38 @@ const REVEAL_PRE =
     "mt-1 overflow-x-auto rounded-md border p-3 font-mono text-xs leading-relaxed ui-border ui-bg-surface ui-text";
 const REVEAL_SMALL_LABEL = "ui-meta-strong";
 
+function SolutionFileBlock({
+    path,
+    content,
+    copied,
+    onCopy,
+}: {
+    path: string;
+    content: string;
+    copied: boolean;
+    onCopy: () => void;
+}) {
+    return (
+        <div>
+            <div className="flex items-center justify-between gap-3 border-b px-3 py-2 ui-border ui-bg-surface-soft">
+                <div className="min-w-0 truncate font-mono text-xs font-semibold ui-text">
+                    {path}
+                </div>
+                <button
+                    type="button"
+                    onClick={onCopy}
+                    className="ui-btn-secondary min-h-8 shrink-0 px-2.5 text-[11px]"
+                >
+                    {copied ? "Copied ✓" : "Copy"}
+                </button>
+            </div>
+            <pre className="overflow-x-auto p-3 font-mono text-xs leading-relaxed ui-text">
+                <code>{content.trim() ? content : "# (empty file)"}</code>
+            </pre>
+        </div>
+    );
+}
+
 export default function RevealAnswerCard({
                                              exercise,
                                              current,
@@ -432,6 +508,7 @@ export default function RevealAnswerCard({
                                              title = "Revealed answer",
                                              updateCurrent,
                                              autoScroll = true,
+                                             autoFill = false,
                                              codeInputId,
                                          }: {
     exercise: Exercise | null;
@@ -440,9 +517,11 @@ export default function RevealAnswerCard({
     title?: string;
     updateCurrent: (patch: Partial<QItem>) => void;
     autoScroll?: boolean;
+    autoFill?: boolean;
     codeInputId?: string;
 }) {
     const [copied, setCopied] = useState(false);
+    const [copiedFilePath, setCopiedFilePath] = useState<string | null>(null);
     const [filled, setFilled] = useState(false);
     const rootRef = useRef<HTMLDivElement | null>(null);
     const tools = useOptionalReviewTools();
@@ -529,8 +608,13 @@ export default function RevealAnswerCard({
                             : typeof exWorkspace?.entryFile === "string"
                                 ? exWorkspace.entryFile
                                 : undefined;
-            const workspace =
-                explicitWorkspace ??
+            const currentWorkspace = firstPresentValue(
+                (current as any)?.workspace,
+                (current as any)?.codeWorkspace,
+                (current as any)?.ideWorkspace,
+            ) as WorkspaceStateV2 | null | undefined;
+            const solutionWorkspace =
+                (explicitWorkspace as WorkspaceStateV2 | null) ??
                 buildSolutionWorkspace({
                     language: lang,
                     solutionCode: code,
@@ -538,25 +622,41 @@ export default function RevealAnswerCard({
                     solutionFiles,
                     entryFile,
                 });
-            const workspaceFiles = getWorkspaceFilePaths(workspace);
-            const workspaceFileEntries = getWorkspaceFileEntries(workspace);
-            const entryCode = getWorkspaceEntryCode(workspace) || code;
+            // Keep the revealed solution separate from the learner workspace so
+            // the learner can compare both versions before choosing to fill.
+            const displayWorkspace = solutionWorkspace;
+            const fillWorkspace = mergeSolutionWorkspace(
+                currentWorkspace,
+                solutionWorkspace,
+            );
+            const solutionPaths = getWorkspaceFilePaths(displayWorkspace);
+            const solutionEntries = getWorkspaceFileEntries(displayWorkspace);
+            const entryCode = getWorkspaceEntryCode(displayWorkspace) || code;
             const copyText =
-                workspaceFileEntries.length > 1
-                    ? formatWorkspaceFilesForCopy(workspace)
+                solutionEntries.length > 1
+                    ? formatWorkspaceFilesForCopy(displayWorkspace)
                     : entryCode;
             const entryPath =
-                workspace && workspace.entryFileId
-                    ? workspacePathForNode(workspace.nodes, workspace.entryFileId)
+                displayWorkspace && displayWorkspace.entryFileId
+                    ? workspacePathForNode(
+                        displayWorkspace.nodes,
+                        displayWorkspace.entryFileId,
+                    )
                     : entryFile ?? defaultMainFile(lang as any);
 
             return {
                 title: `Solution code (${lang})`,
                 copyText,
-                fillPatch: entryCode || workspace
+                copyLabel: solutionEntries.length > 1 ? "Copy all files" : "Copy",
+                fillLabel: "Fill in editor",
+                // Every code block has its own Copy button. Keep the top-level
+                // Copy action only when it can copy the complete multi-file answer.
+                showCopyAction: solutionEntries.length > 1,
+                fillPatch: entryCode || fillWorkspace
                     ? ({
                         // Keep code/source as the entry file for legacy single-file state,
-                        // but pass the full workspace so Fill answer updates every file.
+                        // while the merged workspace updates every authored solution file
+                        // and preserves unrelated learner-created files.
                         code: entryCode,
                         source: entryCode,
                         codeLang: lang,
@@ -564,11 +664,11 @@ export default function RevealAnswerCard({
                         lang,
                         codeStdin: stdin,
                         stdin,
-                        ...(workspace
+                        ...(fillWorkspace
                             ? {
-                                workspace,
-                                codeWorkspace: workspace,
-                                ideWorkspace: workspace,
+                                workspace: fillWorkspace,
+                                codeWorkspace: fillWorkspace,
+                                ideWorkspace: fillWorkspace,
                             }
                             : {}),
                     } as Partial<QItem>)
@@ -578,41 +678,63 @@ export default function RevealAnswerCard({
                         <div className="flex flex-col gap-1.5 border-b px-3 py-2 ui-border ui-bg-surface-soft @md:flex-row @md:items-center @md:justify-between">
                             <div className="ui-meta-strong">{lang.toUpperCase()}</div>
                             <div className="min-w-0 ui-meta [overflow-wrap:anywhere]">
-                                Copy it into the editor, run it, then check your answer.
+                                Compare the revealed solution with your workspace. Fill it into the editor only when you are ready.
                             </div>
                         </div>
 
-                        {workspaceFiles.length > 1 ? (
+                        {solutionPaths.length > 1 ? (
                             <div className="border-b px-3 py-2 ui-border">
                                 <div className={REVEAL_SMALL_LABEL}>Files included</div>
                                 <div className="mt-2 flex flex-col gap-1 font-mono text-xs ui-text">
-                                    {workspaceFiles.map((path) => (
+                                    {solutionPaths.map((path) => (
                                         <span key={path}>{path}</span>
                                     ))}
                                 </div>
                             </div>
                         ) : null}
 
-                        {workspaceFileEntries.length > 1 ? (
-                            <div className="divide-y ui-border">
-                                {workspaceFileEntries.map((file) => (
-                                    <div key={file.path}>
-                                        <div className="border-b px-3 py-2 font-mono text-xs font-semibold ui-border ui-bg-surface-soft ui-text">
-                                            {file.path}
-                                        </div>
-                                        <pre className="p-3 overflow-x-auto font-mono text-xs leading-relaxed ui-text">
-                                            <code>{file.content?.trim() ? file.content : "# (empty file)"}</code>
-                                        </pre>
-                                    </div>
-                                ))}
-                            </div>
-                        ) : (
-                            <pre className="p-3 overflow-x-auto font-mono text-xs leading-relaxed ui-text">
-                                <code>{entryCode?.trim() ? entryCode : "// (no solutionCode provided)"}</code>
-                            </pre>
-                        )}
+                        <div className="divide-y ui-border">
+                            {solutionEntries.length ? (
+                                solutionEntries.map((file) => (
+                                    <SolutionFileBlock
+                                        key={file.path}
+                                        path={file.path}
+                                        content={file.content}
+                                        copied={copiedFilePath === file.path}
+                                        onCopy={() => {
+                                            void copyToClipboard(file.content).then((ok) => {
+                                                if (!ok) return;
+                                                setCopiedFilePath(file.path);
+                                                window.setTimeout(() => {
+                                                    setCopiedFilePath((active) =>
+                                                        active === file.path ? null : active,
+                                                    );
+                                                }, 1200);
+                                            });
+                                        }}
+                                    />
+                                ))
+                            ) : (
+                                <SolutionFileBlock
+                                    path={entryPath}
+                                    content={entryCode || "// (no solutionCode provided)"}
+                                    copied={copiedFilePath === entryPath}
+                                    onCopy={() => {
+                                        void copyToClipboard(entryCode).then((ok) => {
+                                            if (!ok) return;
+                                            setCopiedFilePath(entryPath);
+                                            window.setTimeout(() => {
+                                                setCopiedFilePath((active) =>
+                                                    active === entryPath ? null : active,
+                                                );
+                                            }, 1200);
+                                        });
+                                    }}
+                                />
+                            )}
+                        </div>
 
-                        {workspaceFiles.length > 1 ? (
+                        {solutionPaths.length > 1 ? (
                             <div className="border-t px-3 py-2 ui-border">
                                 <div className={REVEAL_SMALL_LABEL}>Entry file</div>
                                 <div className="mt-1 font-mono text-xs ui-text">{entryPath}</div>
@@ -867,7 +989,55 @@ export default function RevealAnswerCard({
         }
 
         return null;
-    }, [revealT, exT, exercise, current.codeLang]);
+    }, [revealT, exT, exercise, current.codeLang, copiedFilePath]);
+
+    const autoFilledRef = useRef(false);
+
+    const fillAnswer = useCallback(() => {
+        if (!model?.fillPatch) return;
+
+        const fillPatchAny = model.fillPatch as Record<string, unknown>;
+        const hasCodeWorkspace =
+            Boolean(fillPatchAny.workspace) ||
+            Boolean(fillPatchAny.codeWorkspace) ||
+            Boolean(fillPatchAny.ideWorkspace);
+        const hasCodeValue =
+            typeof fillPatchAny.code === "string" || typeof fillPatchAny.source === "string";
+        const isCodeInput =
+            String(revealT?.kind ?? reveal?.kind ?? exT?.kind ?? exercise?.kind ?? "") ===
+                "code_input" ||
+            hasCodeWorkspace ||
+            hasCodeValue;
+        const fillCodeInputId = codeInputId ?? tools?.boundId ?? undefined;
+
+        applyRevealFillAnswer({
+            fillPatch: model.fillPatch,
+            isCodeInput,
+            codeInputId: fillCodeInputId,
+            updateCurrent,
+            patchCodeInput: tools?.patchCodeInput,
+        });
+    }, [
+        codeInputId,
+        exT?.kind,
+        exercise?.kind,
+        model,
+        reveal,
+        revealT?.kind,
+        tools?.boundId,
+        tools?.patchCodeInput,
+        updateCurrent,
+    ]);
+
+    useEffect(() => {
+        autoFilledRef.current = false;
+    }, [current.key]);
+
+    useEffect(() => {
+        if (!autoFill || !model?.fillPatch || autoFilledRef.current) return;
+        autoFilledRef.current = true;
+        fillAnswer();
+    }, [autoFill, fillAnswer, model?.fillPatch]);
 
     useEffect(() => {
         if (!autoScroll) return;
@@ -897,30 +1067,7 @@ export default function RevealAnswerCard({
     }
 
     function onFill() {
-        if (!m.fillPatch) return;
-
-        const fillPatchAny = m.fillPatch as Record<string, unknown>;
-        const hasCodeWorkspace =
-            Boolean(fillPatchAny.workspace) ||
-            Boolean(fillPatchAny.codeWorkspace) ||
-            Boolean(fillPatchAny.ideWorkspace);
-        const hasCodeValue =
-            typeof fillPatchAny.code === "string" || typeof fillPatchAny.source === "string";
-        const isCodeInput =
-            String(revealT?.kind ?? reveal?.kind ?? exT?.kind ?? exercise?.kind ?? "") ===
-                "code_input" ||
-            hasCodeWorkspace ||
-            hasCodeValue;
-        const fillCodeInputId = codeInputId ?? tools?.boundId ?? undefined;
-
-        applyRevealFillAnswer({
-            fillPatch: m.fillPatch,
-            isCodeInput,
-            codeInputId: fillCodeInputId,
-            updateCurrent,
-            patchCodeInput: tools?.patchCodeInput,
-        });
-
+        fillAnswer();
         setFilled(true);
         window.setTimeout(() => setFilled(false), 1200);
     }
@@ -930,22 +1077,26 @@ export default function RevealAnswerCard({
                 <div className="min-w-0 ui-meta-strong">{title}</div>
 
                 <div className="flex w-full flex-wrap gap-2 @md:w-auto @md:justify-end">
-                    <button
-                        onClick={onCopy}
-                        disabled={!m.copyText}
-                        className="ui-btn-secondary min-w-[8.5rem] flex-1 justify-center whitespace-normal px-3 text-center @sm:flex-none"
-                    >
-                        {copied ? "Copied ✓" : "Copy"}
-                    </button>
+                    {m.showCopyAction !== false ? (
+                        <button
+                            onClick={onCopy}
+                            disabled={!m.copyText}
+                            className="ui-btn-secondary min-w-[8.5rem] flex-1 justify-center whitespace-normal px-3 text-center @sm:flex-none"
+                        >
+                            {copied ? "Copied ✓" : (m.copyLabel ?? "Copy")}
+                        </button>
+                    ) : null}
 
-                    <button
-                        onClick={onFill}
-                        disabled={!m.fillPatch}
-                        className="ui-btn-secondary min-w-[8.5rem] flex-1 justify-center whitespace-normal px-3 text-center @sm:flex-none"
-                        title="Fill the input with the revealed answer"
-                    >
-                        {filled ? "Filled ✓" : "Fill answer"}
-                    </button>
+                    {!autoFill ? (
+                        <button
+                            onClick={onFill}
+                            disabled={!m.fillPatch}
+                            className="ui-btn-secondary min-w-[8.5rem] flex-1 justify-center whitespace-normal px-3 text-center @sm:flex-none"
+                            title="Fill the input with the revealed answer"
+                        >
+                            {filled ? "Filled ✓" : (m.fillLabel ?? "Fill answer")}
+                        </button>
+                    ) : null}
                 </div>
             </div>
 

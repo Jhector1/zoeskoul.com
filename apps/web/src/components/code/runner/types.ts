@@ -96,6 +96,11 @@ export type CommonProps = {
     toolScopeKey?: string;
     exerciseStateKey?: string;
     workspace?: WorkspaceStateV2 | null;
+    /**
+     * One-shot command revision for replacing mounted Monaco model contents.
+     * Routine controlled-code renders leave this undefined.
+     */
+    workspaceReplacementRevision?: string | number;
     activeWorkspaceFileId?: string;
     /** Binary files bypass Monaco and use a capability-specific read-only preview. */
     activeBinaryFile?: {

@@ -661,6 +661,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         toolScopeKey,
         exerciseStateKey,
         workspace,
+        workspaceReplacementRevision,
         activeBinaryFile,
         onBeforeRun,
         isAuthenticated,
@@ -2907,6 +2908,9 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                         modelKey={effectiveEditorModelKey}
                         exerciseStateKey={effectiveExerciseStateKey}
                         workspace={workspace}
+                        workspaceReplacementRevision={
+                            workspaceReplacementRevision
+                        }
                         onMount={(ed) => {
                             monacoEditorRef.current = ed;
                             requestLayout();

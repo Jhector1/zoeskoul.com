@@ -189,6 +189,11 @@ export type EditorRuntimeState = {
   userEdited?: boolean;
   starterHash?: string;
   workspace: WorkspaceStateV2 | null;
+  /**
+   * Monotonic command revision used to replace an already-mounted editor.
+   * Normal learner typing does not increment this value.
+   */
+  workspaceApplyRevision?: number;
   code: string;
   stdin: string;
   terminalEvidence?: TerminalEvidence;
@@ -305,6 +310,8 @@ export type ReviewRuntimeActions = {
       generation?: number;
       source?: string;
       mutation?: RuntimeWorkspaceMutation;
+      /** Force the currently mounted editor to replace its local workspace. */
+      applyToMountedEditor?: boolean;
     },
   ) => void;
 

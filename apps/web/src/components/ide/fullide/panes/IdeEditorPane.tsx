@@ -11,7 +11,7 @@ import {
     type CodeRunnerRuntime,
 } from "@/components/code/runner/runtime";
 import type { FullIDEServices } from "@/components/ide/fullide/services";
-import type { FileNode } from "@/components/ide/types";
+import type { FileNode, WorkspaceStateV2 } from "@/components/ide/types";
 import type { WorkspaceSyncEntry } from "@zoeskoul/code-contracts";
 import { resolveWorkspaceEditorLanguage } from "@zoeskoul/code-contracts";
 import { isBinaryFileNode } from "@/lib/ide/workspaceFileContent";
@@ -36,6 +36,8 @@ type Props = {
     runtime: CodeRunnerRuntime;
     projectId?: string | null;
     exerciseStateKey?: string;
+    workspace: WorkspaceStateV2 | null;
+    workspaceReplacementRevision?: string | number;
     terminalHistoryScopeKey?: string;
     onApplyTerminalSnapshotFiles?: (
         files: WorkspaceSyncEntry[],
@@ -88,6 +90,8 @@ export default function IdeEditorPane({
     runtime,
     projectId,
     exerciseStateKey,
+    workspace,
+    workspaceReplacementRevision,
     terminalHistoryScopeKey,
     onApplyTerminalSnapshotFiles,
     onChangeLanguage,
@@ -296,6 +300,10 @@ export default function IdeEditorPane({
                             // }
                             resetTerminalOnRun={!terminalWorkspaceOnly}
                             exerciseStateKey={exerciseStateKey}
+                            workspace={workspace}
+                            workspaceReplacementRevision={
+                                workspaceReplacementRevision
+                            }
                             editorModelKey={
                                 exerciseStateKey
                                     ? `${exerciseStateKey}:${activeFileId ?? "no-file"}`
