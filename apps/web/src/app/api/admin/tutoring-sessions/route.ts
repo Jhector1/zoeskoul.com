@@ -4,6 +4,7 @@ import { rateLimit } from "@/lib/security/ratelimit";
 import { getTeachingUser, ownedTeachingRecordWhere } from "@/lib/teaching/teachingAccess";
 import { TutoringSessionInputSchema } from "@/lib/validators/tutoringSession";
 import { createTutoringSession } from "@/lib/tutoring/sessionAdminServer";
+import { autoDeliverTutoringSessionInvites } from "@/lib/tutoring/sessionInviteDelivery";
 
 export const runtime = "nodejs";
 
@@ -63,7 +64,19 @@ export async function POST(req: Request) {
   try {
     const result = await createTutoringSession(prisma, { teachingUser, input: parsed.data });
     if (!result.ok) return bodyJsonResponse(result, result.status);
-    return bodyJsonResponse({ session: result.session, pendingInvites: result.pendingInvites }, 201);
+    const invitationDelivery = await autoDeliverTutoringSessionInvites(prisma, {
+      sessionId: result.session.id,
+      origin: new URL(req.url).origin,
+      locale: parsed.data.locale,
+    });
+    return bodyJsonResponse(
+      {
+        session: result.session,
+        pendingInvites: result.pendingInvites,
+        invitationDelivery,
+      },
+      201,
+    );
   } catch (error) {
     const message = error instanceof Error ? error.message : "";
     const expectedMessages = new Set([

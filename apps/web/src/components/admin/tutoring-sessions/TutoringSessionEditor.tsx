@@ -2,7 +2,8 @@
 
 import { useMemo, useState } from "react";
 import { useRouter } from "@/i18n/navigation";
-import PendingAccountInvites from "@/components/admin/invitations/PendingAccountInvites";
+import { useLocale } from "next-intl";
+import TutoringSessionInvites from "./TutoringSessionInvites";
 
 type Course = {
   id: string;
@@ -18,13 +19,19 @@ type Course = {
 
 type Group = { id: string; name: string; memberCount: number };
 
-type PendingInvite = {
+type TutoringInvite = {
   id: string;
   email: string;
+  invitedUserId: string | null;
+  viewedAt: string | Date | null;
   expiresAt: string | Date;
   sentAt: string | Date | null;
   acceptedAt: string | Date | null;
+  declinedAt: string | Date | null;
   revokedAt: string | Date | null;
+  emailStatus: "NOT_SENT" | "SENT" | "FAILED";
+  emailLastAttemptAt: string | Date | null;
+  emailError: string | null;
 };
 
 type InitialSession = {
@@ -41,7 +48,7 @@ type InitialSession = {
   allowStudentEditing: boolean;
   users: Array<{ user: { email: string | null } }>;
   groups: Array<{ groupId: string }>;
-  invites: PendingInvite[];
+  invites: TutoringInvite[];
 } | null;
 
 const field =
@@ -73,19 +80,13 @@ function initialRecipientText(session: Exclude<InitialSession, null>) {
       [
         ...session.users.map((row) => row.user.email),
         ...session.invites
-          .filter((invite) => !invite.acceptedAt && !invite.revokedAt)
+          .filter((invite) => !invite.revokedAt)
           .map((invite) => invite.email),
       ]
         .filter((email): email is string => Boolean(email))
         .map((email) => email.toLowerCase()),
     ),
   ].join("\n");
-}
-
-function pendingInvites(session: InitialSession) {
-  return (session?.invites ?? []).filter(
-    (invite) => !invite.acceptedAt && !invite.revokedAt,
-  );
 }
 
 function openLabel(status: "draft" | "live" | "shared" | "archived") {
@@ -105,6 +106,7 @@ export default function TutoringSessionEditor({
   groups: Group[];
 }) {
   const router = useRouter();
+  const locale = useLocale() as "en" | "es" | "fr" | "ht";
   const isNew = !initialSession;
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -135,9 +137,8 @@ export default function TutoringSessionEditor({
   const topics = module?.topics ?? [];
   const selectedSectionSlug = state.sourceSectionSlug || sections[0]?.slug || "";
   const selectedTopicId = state.sourceTopicId || topics[0]?.id || "";
-  const invites = pendingInvites(initialSession);
-  const invitationsEnabled =
-    initialSession?.status === "live" || initialSession?.status === "shared";
+  const invites = initialSession?.invites ?? [];
+  const invitationsEnabled = initialSession?.status !== "archived";
 
   async function save() {
     setBusy(true);
@@ -160,6 +161,7 @@ export default function TutoringSessionEditor({
         allowStudentEditing: state.allowStudentEditing,
         userEmails: emailsFromText(state.userEmails),
         groupIds: state.groupIds,
+        locale,
       };
       const updatePayload = {
         title: state.title,
@@ -168,6 +170,7 @@ export default function TutoringSessionEditor({
         allowStudentEditing: state.allowStudentEditing,
         userEmails: emailsFromText(state.userEmails),
         groupIds: state.groupIds,
+        locale,
       };
       const endpoint = isNew
         ? "/api/admin/tutoring-sessions"
@@ -181,12 +184,14 @@ export default function TutoringSessionEditor({
       if (!response.ok) {
         throw new Error(json.error ?? "Could not save tutoring session.");
       }
-      const pendingCount = Array.isArray(json.pendingInvites)
+      const invitationCount = Array.isArray(json.pendingInvites)
         ? json.pendingInvites.length
         : 0;
+      const sentCount = Number(json.invitationDelivery?.sent ?? 0);
+      const failedCount = Number(json.invitationDelivery?.failed ?? 0);
       setNotice(
-        pendingCount
-          ? `Saved. ${pendingCount} student${pendingCount === 1 ? " is" : "s are"} waiting for an account invitation.`
+        invitationCount
+          ? `Tutoring session saved. ${invitationCount} invitation${invitationCount === 1 ? "" : "s"} ${invitationCount === 1 ? "is" : "are"} visible in My Learning${sentCount ? `; ${sentCount} email${sentCount === 1 ? " was" : "s were"} sent` : ""}${failedCount ? `; ${failedCount} email${failedCount === 1 ? " failed" : "s failed"}` : ""}.`
           : "Tutoring session saved.",
       );
       router.replace(`/admin/tutoring-sessions/${json.session.id}`);
@@ -513,7 +518,7 @@ export default function TutoringSessionEditor({
             placeholder="student@example.com"
           />
           <span className="mt-1 block text-xs text-neutral-500">
-            Existing accounts are added immediately. Emails without accounts become pending invitations that you can copy or send after saving.
+            Every email creates one invitation. Existing students see it immediately in My Learning as Invitation pending; students without accounts receive the same link through email and see it after signup.
           </span>
         </label>
         <div>
@@ -555,14 +560,21 @@ export default function TutoringSessionEditor({
       </section>
 
       {!isNew && initialSession ? (
-        <PendingAccountInvites
+        <TutoringSessionInvites
           invites={invites}
           endpoint={`/api/admin/tutoring-sessions/${initialSession.id}/invites`}
           enabled={invitationsEnabled}
-          disabledMessage="Change the status to Live or Shared and save before sending invitation links."
-          description="These students do not have matching ZoeSkoul accounts yet. The invitation takes them through account creation and then directly into this tutoring session."
+          disabledMessage="Restore the tutoring session before sending email or copying an entry link."
           onNotice={setNotice}
           onError={(message) => setError(message || null)}
+          onCancelled={(email) =>
+            setState((current) => ({
+              ...current,
+              userEmails: emailsFromText(current.userEmails)
+                .filter((candidate) => candidate !== email)
+                .join("\n"),
+            }))
+          }
         />
       ) : null}
     </div>

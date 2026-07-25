@@ -5,12 +5,13 @@ import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { buildAuthenticateAccessHref } from "@/lib/access/accessGate";
 import {
-  acceptTutoringSessionInvite,
   findTutoringSessionInviteByToken,
+  markTutoringSessionInviteViewed,
   maskTutoringInviteEmail,
   tutoringSessionInviteState,
 } from "@/lib/tutoring/sessionInvites";
 import InvitationAccountActions from "@/components/learningAssignments/InvitationAccountActions";
+import TutoringInvitationActions from "@/components/tutoring/TutoringInvitationActions";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -57,11 +58,19 @@ export default async function TutoringInvitationPage({
   }
 
   const inviteState = tutoringSessionInviteState(invite);
-  if (inviteState === "expired" || inviteState === "revoked") {
+  if (inviteState === "expired" || inviteState === "cancelled") {
     return (
       <InviteMessage
-        title={inviteState === "expired" ? "Invitation expired" : "Invitation withdrawn"}
+        title={inviteState === "expired" ? "Invitation expired" : "Invitation cancelled"}
         body="Ask your tutor to create a new invitation link for this session."
+      />
+    );
+  }
+  if (inviteState === "declined") {
+    return (
+      <InviteMessage
+        title="Invitation declined"
+        body="You declined this tutoring invitation. Ask your tutor to resend it if you want to join."
       />
     );
   }
@@ -82,35 +91,50 @@ export default async function TutoringInvitationPage({
     );
   }
 
-  const accepted = await acceptTutoringSessionInvite(prisma, {
-    token,
-    userId,
-    userEmail,
-  });
-
-  if (!accepted.ok) {
-    if (accepted.reason === "email_mismatch") {
-      return (
-        <InviteMessage
-          title="Use the account that received this invitation"
-          body={`This link was sent to ${maskTutoringInviteEmail(accepted.invitedEmail)}. You are currently signed in as ${userEmail ?? "another account"}.`}
-        >
-          <InvitationAccountActions callbackUrl={invitePath} />
-        </InviteMessage>
-      );
-    }
-
+  const normalizedUserEmail = userEmail?.trim().toLowerCase() ?? null;
+  const matchesUser = invite.invitedUserId
+    ? invite.invitedUserId === userId
+    : normalizedUserEmail === invite.email;
+  if (!matchesUser) {
     return (
       <InviteMessage
-        title="This tutoring session is not available"
-        body={
-          accepted.reason === "session_unavailable"
-            ? "The tutor has not made this session Live or Shared, or the session has been archived."
-            : "This invitation cannot be used. Ask your tutor for a new link."
-        }
-      />
+        title="Use the account that received this invitation"
+        body={`This link was sent to ${maskTutoringInviteEmail(invite.email)}. You are currently signed in as ${userEmail ?? "another account"}.`}
+      >
+        <InvitationAccountActions callbackUrl={invitePath} />
+      </InviteMessage>
     );
   }
 
-  redirect(`/${locale}/tutoring-sessions/${accepted.session.id}`);
+  if (invite.acceptedAt) {
+    redirect(`/${locale}/tutoring-sessions/${invite.session.id}`);
+  }
+
+  await markTutoringSessionInviteViewed(prisma, {
+    inviteId: invite.id,
+    userId,
+  });
+
+  const canAccept =
+    invite.session.status === "live" || invite.session.status === "shared";
+  return (
+    <InviteMessage
+      title={`Join ${invite.session.title}`}
+      body={
+        canAccept
+          ? `Accept this invitation to add the tutoring session to your confirmed learning and enter the workspace.`
+          : "This invitation is linked to your ZoeSkoul account. The tutor has not opened the session yet."
+      }
+    >
+      <div className="rounded-lg bg-neutral-50 p-3 text-sm text-neutral-700">
+        <div><strong>Course:</strong> {invite.session.subject.title}</div>
+        <div className="mt-1"><strong>Tutor:</strong> {invite.session.owner.name || invite.session.owner.email || "ZoeSkoul tutor"}</div>
+      </div>
+      <TutoringInvitationActions
+        invitationId={invite.id}
+        sessionId={invite.session.id}
+        canAccept={canAccept}
+      />
+    </InviteMessage>
+  );
 }

@@ -3,6 +3,7 @@ import { z } from "zod";
 import { TUTORING_SESSION_LIMITS } from "@/lib/tutoring/sessionLimits";
 
 const TutoringStatusSchema = z.enum(["draft", "live", "shared", "archived"]);
+const TutoringInviteLocaleSchema = z.enum(["en", "es", "fr", "ht"]);
 const UserEmailsSchema = z
   .array(z.string().email())
   .max(TUTORING_SESSION_LIMITS.maxDirectUserEmails);
@@ -23,6 +24,7 @@ export const TutoringSessionInputSchema = z.object({
   allowStudentEditing: z.boolean().default(false),
   userEmails: UserEmailsSchema.default([]),
   groupIds: GroupIdsSchema.default([]),
+  locale: TutoringInviteLocaleSchema.default("en"),
 });
 
 export const TutoringSessionUpdateSchema = z
@@ -33,6 +35,7 @@ export const TutoringSessionUpdateSchema = z
     allowStudentEditing: z.boolean().optional(),
     userEmails: UserEmailsSchema.optional(),
     groupIds: GroupIdsSchema.optional(),
+    locale: TutoringInviteLocaleSchema.optional(),
   })
   .refine((value) => Object.keys(value).length > 0, {
     message: "At least one tutoring session field is required.",

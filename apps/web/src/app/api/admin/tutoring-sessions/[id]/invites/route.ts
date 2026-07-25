@@ -1,27 +1,28 @@
 import { z } from "zod";
 
 import { prisma } from "@/lib/prisma";
-import { bodyJsonResponse, enforceSameOriginPost, exceedsContentLength, readJsonSafe } from "@/lib/practice/api/shared/http";
+import {
+  bodyJsonResponse,
+  enforceSameOriginPost,
+  exceedsContentLength,
+  readJsonSafe,
+} from "@/lib/practice/api/shared/http";
 import { rateLimit } from "@/lib/security/ratelimit";
 import {
   getTeachingUser,
   ownedTeachingRecordWhere,
 } from "@/lib/teaching/teachingAccess";
+import { deliverPreparedTutoringInvite } from "@/lib/tutoring/sessionInviteDelivery";
 import { rotateTutoringSessionInvite } from "@/lib/tutoring/sessionInvites";
-import { resolveSubjectTitle } from "@/lib/subjects/resolveSubjectTitle";
-import {
-  buildClassroomInviteMailto,
-  sendClassroomInviteEmail,
-} from "@/lib/invitations/classroomInviteEmail";
 
 export const runtime = "nodejs";
 
 type Context = { params: Promise<{ id: string }> };
 
-const InviteDeliverySchema = z.object({
+const InviteActionSchema = z.object({
   email: z.string().trim().email(),
-  action: z.enum(["link", "email"]),
-  locale: z.enum(["en", "fr", "ht"]).default("en"),
+  action: z.enum(["link", "email", "cancel"]),
+  locale: z.enum(["en", "es", "fr", "ht"]).default("en"),
 });
 
 export async function POST(req: Request, context: Context) {
@@ -30,11 +31,9 @@ export async function POST(req: Request, context: Context) {
     return bodyJsonResponse({ error: "Request body is too large" }, 413);
   }
   const teachingUser = await getTeachingUser();
-  if (!teachingUser) {
-    return bodyJsonResponse({ error: "Forbidden" }, 403);
-  }
+  if (!teachingUser) return bodyJsonResponse({ error: "Forbidden" }, 403);
 
-  const parsed = InviteDeliverySchema.safeParse(await readJsonSafe(req));
+  const parsed = InviteActionSchema.safeParse(await readJsonSafe(req));
   if (!parsed.success) {
     return bodyJsonResponse(
       { error: "Invalid invitation request", details: parsed.error.flatten() },
@@ -53,138 +52,98 @@ export async function POST(req: Request, context: Context) {
   } catch {
     return bodyJsonResponse({ error: "Service unavailable" }, 503);
   }
+
   const email = parsed.data.email.toLowerCase();
   const tutoringSession = await prisma.tutoringSession.findFirst({
     where: { id, ...ownedTeachingRecordWhere(teachingUser) },
     select: {
       id: true,
-      title: true,
       status: true,
-      owner: { select: { name: true, email: true } },
-      subject: { select: { title: true, slug: true } },
       invites: {
-        where: { email, acceptedAt: null, revokedAt: null },
-        select: { id: true },
+        where: { email },
+        select: {
+          id: true,
+          acceptedAt: true,
+          revokedAt: true,
+        },
         take: 1,
       },
     },
   });
-
   if (!tutoringSession) {
     return bodyJsonResponse({ error: "Tutoring session not found" }, 404);
   }
-  if (tutoringSession.status !== "live" && tutoringSession.status !== "shared") {
+  const invite = tutoringSession.invites[0];
+  if (!invite) return bodyJsonResponse({ error: "Invitation not found" }, 404);
+
+  if (parsed.data.action === "cancel") {
+    if (invite.acceptedAt) {
+      return bodyJsonResponse(
+        { error: "Accepted students must be removed from the session audience instead." },
+        409,
+      );
+    }
+    const revokedAt = new Date();
+    await prisma.tutoringSessionInvite.update({
+      where: { id: invite.id },
+      data: { revokedAt },
+    });
+    return bodyJsonResponse({ ok: true, delivery: "cancelled", revokedAt });
+  }
+
+  if (tutoringSession.status === "archived") {
     return bodyJsonResponse(
-      { error: "Set the tutoring session to Live or Shared before sending invitations." },
+      { error: "Restore the tutoring session before sending invitations." },
       409,
     );
   }
-  if (!tutoringSession.invites.length) {
-    return bodyJsonResponse(
-      { error: "This email is no longer waiting for an account invitation." },
-      404,
-    );
+  if (invite.acceptedAt) {
+    return bodyJsonResponse({ error: "This invitation was already accepted." }, 409);
   }
 
   const rotated = await rotateTutoringSessionInvite(prisma, {
     sessionId: tutoringSession.id,
     email,
   });
-  if (!rotated) {
-    return bodyJsonResponse({ error: "Invitation not found" }, 404);
-  }
+  if (!rotated) return bodyJsonResponse({ error: "Invitation not found" }, 404);
 
   const origin = new URL(req.url).origin;
-  const inviteUrl = `${origin}/${parsed.data.locale}/invitations/tutoring/${encodeURIComponent(rotated.token)}`;
-  const instructorName =
-    tutoringSession.owner.name?.trim() ||
-    tutoringSession.owner.email?.trim() ||
-    "Your tutor";
-  const courseTitle = await resolveSubjectTitle({
-    subjectSlug: tutoringSession.subject.slug,
-    locale: parsed.data.locale,
-    fallback: tutoringSession.subject.title,
-  });
-  const emailArgs = {
-    to: email,
-    inviteUrl,
-    classroomTitle: tutoringSession.title,
-    courseTitle,
-    instructorName,
-    expiresAt: rotated.invite.expiresAt,
-    classroomKind: "tutoring session" as const,
-  };
-  const mailtoHref = buildClassroomInviteMailto(emailArgs);
-
   if (parsed.data.action === "link") {
+    const inviteUrl = `${origin}/${parsed.data.locale}/invitations/tutoring/${encodeURIComponent(rotated.token)}`;
     return bodyJsonResponse({
       ok: true,
       inviteUrl,
-      mailtoHref,
       expiresAt: rotated.invite.expiresAt,
       delivery: "link",
     });
   }
 
-  const delivery = await sendClassroomInviteEmail(emailArgs);
+  const delivery = await deliverPreparedTutoringInvite(prisma, {
+    sessionId: tutoringSession.id,
+    origin,
+    locale: parsed.data.locale,
+    prepared: {
+      id: rotated.invite.id,
+      email: rotated.invite.email,
+      token: rotated.token,
+      expiresAt: rotated.invite.expiresAt,
+    },
+  });
   if (!delivery.delivered) {
-    const status = delivery.reason === "not_configured" ? 503 : 502;
-    const error =
-      delivery.reason === "not_configured"
-        ? "Automatic invitation email delivery is not configured. Add BREVO_API_KEY, BREVO_FROM_EMAIL, and BREVO_FROM_NAME in production."
-        : "Brevo did not accept the tutoring invitation email.";
-
-    console.error("[tutoring-invite] email delivery failed", {
-      sessionId: tutoringSession.id,
-      inviteId: rotated.invite.id,
-      recipient: email,
-      provider: delivery.provider,
-      reason: delivery.reason,
-      detail:
-        delivery.reason === "provider_error" ? delivery.detail : undefined,
-    });
-
     return bodyJsonResponse(
       {
         ok: false,
-        error,
+        error:
+          delivery.reason === "not_configured"
+            ? "Automatic invitation email delivery is not configured."
+            : "The tutoring invitation email could not be delivered.",
         code: "INVITE_EMAIL_NOT_DELIVERED",
-        inviteUrl,
-        mailtoHref,
-        expiresAt: rotated.invite.expiresAt,
+        ...delivery,
         delivery: "failed",
-        emailProvider: delivery.provider,
-        emailReason: delivery.reason,
-        ...(delivery.reason === "provider_error"
-          ? { emailDetail: delivery.detail }
-          : {}),
       },
-      status,
+      delivery.reason === "not_configured" ? 503 : 502,
     );
   }
 
-  const sentAt = new Date();
-  await prisma.tutoringSessionInvite.update({
-    where: { id: rotated.invite.id },
-    data: { sentAt },
-  });
-
-  console.info("[tutoring-invite] email accepted by provider", {
-    sessionId: tutoringSession.id,
-    inviteId: rotated.invite.id,
-    recipient: email,
-    provider: delivery.provider,
-    messageId: delivery.messageId,
-  });
-
-  return bodyJsonResponse({
-    ok: true,
-    inviteUrl,
-    mailtoHref,
-    expiresAt: rotated.invite.expiresAt,
-    delivery: "email",
-    emailProvider: delivery.provider,
-    emailMessageId: delivery.messageId,
-    sentAt,
-  });
+  return bodyJsonResponse({ ok: true, ...delivery, delivery: "email" });
 }

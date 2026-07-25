@@ -14,7 +14,7 @@ import type {
 } from "@/lib/validators/tutoringSession";
 import { TUTORING_SESSION_LIMITS } from "./sessionLimits";
 import { buildTutoringSnapshot, serializeTutoringSnapshot } from "./sessionSnapshot";
-import { syncPendingTutoringSessionInvites } from "./sessionInvites";
+import { syncTutoringSessionInvites } from "./sessionInvites";
 import { publishTutoringWorkspaceSnapshot } from "./sessionWorkspace";
 
 class TutoringSessionQuotaError extends Error {}
@@ -50,11 +50,21 @@ export async function resolveTutoringRecipients(
     };
   }
 
+  const usersByEmail = new Map(
+    users.users
+      .filter((user): user is { id: string; email: string } => Boolean(user.email))
+      .map((user) => [user.email.toLowerCase(), user.id]),
+  );
+
   return {
     ok: true as const,
     users: users.users,
     pendingEmails: users.missingEmails,
     recipientEmails,
+    inviteRecipients: recipientEmails.map((email) => ({
+      email,
+      userId: usersByEmail.get(email) ?? null,
+    })),
     groups,
   };
 }
@@ -86,6 +96,7 @@ export async function resolveTutoringAudience(
     users: recipients.users,
     pendingEmails: recipients.pendingEmails,
     recipientEmails: recipients.recipientEmails,
+    inviteRecipients: recipients.inviteRecipients,
     groups: recipients.groups,
   };
 }
@@ -155,13 +166,6 @@ export async function createTutoringSession(
             status: args.input.status,
             allowStudentEditing: args.input.allowStudentEditing,
             sharedAt: args.input.status === "shared" ? new Date() : null,
-            users: resolved.users.length
-              ? {
-                  createMany: {
-                    data: resolved.users.map((user) => ({ userId: user.id })),
-                  },
-                }
-              : undefined,
             groups: resolved.groups.length
               ? {
                   createMany: {
@@ -181,9 +185,9 @@ export async function createTutoringSession(
           },
         });
 
-        await syncPendingTutoringSessionInvites(tx, {
+        await syncTutoringSessionInvites(tx, {
           sessionId: created.id,
-          pendingEmails: resolved.pendingEmails,
+          recipients: resolved.inviteRecipients,
         });
         if (args.input.status === "shared") {
           await publishTutoringWorkspaceSnapshot(tx, {
@@ -200,7 +204,7 @@ export async function createTutoringSession(
     return {
       ok: true as const,
       session,
-      pendingInvites: resolved.pendingEmails,
+      pendingInvites: resolved.recipientEmails,
     };
   } catch (error) {
     if (error instanceof TutoringSessionQuotaError) {
@@ -238,8 +242,13 @@ export async function updateTutoringSession(
       users: { include: { user: { select: { email: true } } } },
       groups: { select: { groupId: true } },
       invites: {
-        where: { acceptedAt: null, revokedAt: null },
-        select: { email: true },
+        where: { revokedAt: null },
+        select: {
+          email: true,
+          acceptedAt: true,
+          acceptedByUserId: true,
+          invitedUserId: true,
+        },
       },
     },
   });
@@ -267,18 +276,6 @@ export async function updateTutoringSession(
 
   const nextStatus = args.input.status ?? existing.status;
   const session = await prisma.$transaction(async (tx) => {
-    if (args.input.userEmails !== undefined) {
-      await tx.tutoringSessionUser.deleteMany({ where: { sessionId: args.sessionId } });
-      if (recipients?.ok && recipients.users.length) {
-        await tx.tutoringSessionUser.createMany({
-          data: recipients.users.map((user) => ({
-            sessionId: args.sessionId,
-            userId: user.id,
-          })),
-        });
-      }
-    }
-
     if (args.input.groupIds !== undefined) {
       await tx.tutoringSessionGroup.deleteMany({ where: { sessionId: args.sessionId } });
       if (recipients?.ok && recipients.groups.length) {
@@ -292,9 +289,9 @@ export async function updateTutoringSession(
     }
 
     if (args.input.userEmails !== undefined && recipients?.ok) {
-      await syncPendingTutoringSessionInvites(tx, {
+      await syncTutoringSessionInvites(tx, {
         sessionId: args.sessionId,
-        pendingEmails: recipients.pendingEmails,
+        recipients: recipients.inviteRecipients,
       });
     }
 
@@ -344,7 +341,7 @@ export async function updateTutoringSession(
     session,
     pendingInvites:
       recipients?.ok
-        ? recipients.pendingEmails
+        ? recipients.recipientEmails
         : existing.invites.map((invite) => invite.email),
   };
 }

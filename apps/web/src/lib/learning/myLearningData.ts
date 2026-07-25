@@ -4,6 +4,10 @@ import { prisma } from "@/lib/prisma";
 import { getLearningAssignmentsForUser } from "@/lib/learningAssignments/assignmentAccessServer";
 import { resolveSubjectDeliveryPresentations } from "@/lib/subjects/resolveSubjectDeliveryPresentation";
 import { tutoringParticipantWhere } from "@/lib/tutoring/sessionAccess";
+import {
+  linkTutoringSessionInvitesToUser,
+  tutoringSessionInviteState,
+} from "@/lib/tutoring/sessionInvites";
 
 export async function loadAssignedLearningForUser(args: {
   userId: string;
@@ -44,39 +48,105 @@ export async function loadTutoringLearningForUser(args: {
   userId: string;
   locale: string;
 }) {
-  const rawSessions = await prisma.tutoringSession.findMany({
-    where: {
-      status: { in: ["live", "shared"] },
-      ...tutoringParticipantWhere(args.userId),
-    },
-    orderBy: { updatedAt: "desc" },
-    take: 100,
-    select: {
-      id: true,
-      title: true,
-      description: true,
-      status: true,
-      sourceSubjectSlug: true,
-      moduleKeys: true,
-      updatedAt: true,
-      subject: {
-        select: {
-          id: true,
-          slug: true,
-          title: true,
-          description: true,
-          visibility: true,
-        },
-      },
-      owner: { select: { name: true, email: true } },
-    },
+  const user = await prisma.user.findUnique({
+    where: { id: args.userId },
+    select: { email: true },
   });
+  const email = user?.email?.trim().toLowerCase() ?? null;
+  await linkTutoringSessionInvitesToUser(prisma, {
+    userId: args.userId,
+    userEmail: email,
+  });
+
+  const sessionSelect = {
+    id: true,
+    title: true,
+    description: true,
+    status: true,
+    sourceSubjectSlug: true,
+    moduleKeys: true,
+    updatedAt: true,
+    subject: {
+      select: {
+        id: true,
+        slug: true,
+        title: true,
+        description: true,
+        visibility: true,
+      },
+    },
+    owner: { select: { name: true, email: true } },
+  } as const;
+
+  const [participantSessions, invitations] = await Promise.all([
+    prisma.tutoringSession.findMany({
+      where: {
+        status: { in: ["live", "shared"] },
+        ...tutoringParticipantWhere(args.userId),
+      },
+      orderBy: { updatedAt: "desc" },
+      take: 100,
+      select: sessionSelect,
+    }),
+    prisma.tutoringSessionInvite.findMany({
+      where: {
+        acceptedAt: null,
+        revokedAt: null,
+        OR: [
+          { invitedUserId: args.userId },
+          ...(email ? [{ email }] : []),
+        ],
+        session: { status: { not: "archived" } },
+      },
+      orderBy: { updatedAt: "desc" },
+      take: 100,
+      select: {
+        id: true,
+        email: true,
+        viewedAt: true,
+        acceptedAt: true,
+        declinedAt: true,
+        revokedAt: true,
+        expiresAt: true,
+        sentAt: true,
+        emailStatus: true,
+        emailLastAttemptAt: true,
+        session: { select: sessionSelect },
+      },
+    }),
+  ]);
+
+  const rowsBySessionId = new Map<string, any>();
+  for (const session of participantSessions) {
+    rowsBySessionId.set(session.id, { ...session, invitation: null });
+  }
+  for (const invite of invitations) {
+    if (rowsBySessionId.has(invite.session.id)) continue;
+    rowsBySessionId.set(invite.session.id, {
+      ...invite.session,
+      invitation: {
+        id: invite.id,
+        email: invite.email,
+        state: tutoringSessionInviteState(invite),
+        emailStatus: invite.emailStatus,
+        viewedAt: invite.viewedAt,
+        expiresAt: invite.expiresAt,
+        sentAt: invite.sentAt,
+        emailLastAttemptAt: invite.emailLastAttemptAt,
+      },
+    });
+  }
+
+  const rows = [...rowsBySessionId.values()].sort(
+    (left, right) =>
+      new Date(right.updatedAt).getTime() - new Date(left.updatedAt).getTime(),
+  );
   const subjects = await resolveSubjectDeliveryPresentations(
-    rawSessions.map((session) => session.subject),
+    rows.map((session) => session.subject),
     args.locale,
   );
 
-  return rawSessions.map((session, index) => ({
+  return rows.map((session, index) => ({
     ...session,
     subject: subjects[index],
   }));

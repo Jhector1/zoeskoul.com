@@ -8,6 +8,7 @@ import {
 import { rateLimit } from "@/lib/security/ratelimit";
 import { getTeachingUser, ownedTeachingRecordWhere } from "@/lib/teaching/teachingAccess";
 import { updateTutoringSession } from "@/lib/tutoring/sessionAdminServer";
+import { autoDeliverTutoringSessionInvites } from "@/lib/tutoring/sessionInviteDelivery";
 import { safeParseTutoringSessionUpdate } from "@/lib/validators/tutoringSession";
 
 export const runtime = "nodejs";
@@ -54,9 +55,15 @@ export async function PATCH(
     input: parsed.data,
   });
   if (!result.ok) return bodyJsonResponse(result, result.status);
+  const invitationDelivery = await autoDeliverTutoringSessionInvites(prisma, {
+    sessionId: result.session.id,
+    origin: new URL(req.url).origin,
+    locale: parsed.data.locale ?? "en",
+  });
   return bodyJsonResponse({
     session: result.session,
     pendingInvites: result.pendingInvites,
+    invitationDelivery,
   });
 }
 
