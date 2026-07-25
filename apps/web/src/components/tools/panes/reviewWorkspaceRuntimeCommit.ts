@@ -9,9 +9,10 @@ export type ReviewWorkspaceRuntimeCommitMode =
 export const REVIEW_WORKSPACE_DRAFT_STORAGE_MODE = "off" as const;
 
 /**
- * Keep Monaco local-first while typing, then commit an editable tutoring
- * workspace to the review runtime after a short idle period. This is entirely
- * independent from browser-local draft storage.
+ * Keep Monaco local-first while typing, then commit every editable review
+ * workspace to the review runtime after a short idle period. This covers both
+ * public-course review and tutoring while remaining independent from
+ * browser-local draft storage.
  */
 export const REVIEW_WORKSPACE_RUNTIME_COMMIT_DELAY_MS = 700;
 
@@ -24,10 +25,7 @@ export function resolveReviewWorkspacePersistencePolicy(args: {
 } {
   return {
     draftStorageMode: REVIEW_WORKSPACE_DRAFT_STORAGE_MODE,
-    runtimeCommitMode:
-      args.isTutoringSession && args.canEdit
-        ? "runtime-debounced"
-        : "deferred",
+    runtimeCommitMode: args.canEdit ? "runtime-debounced" : "deferred",
   };
 }
 

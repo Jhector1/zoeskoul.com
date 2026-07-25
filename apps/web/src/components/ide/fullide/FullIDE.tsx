@@ -30,6 +30,10 @@ import { mergeTerminalSnapshotIntoWorkspace } from "@/lib/projects/mergeTerminal
 import {FullIDEServices, resolveFullIDEServices} from "./services";
 import { resolveLearnerWorkspacePresentation } from "./workspacePresentation";
 import { resolveExternalWorkspaceApplyKey } from "./externalWorkspaceControl";
+import {
+    resolveFullIdeWorkspaceChangeOrigin,
+    type PendingUserWorkspaceMutation,
+} from "./workspaceChangeOrigin";
 // import {
 //     FullIDEServices,
 //     resolveFullIDEServices,
@@ -946,6 +950,45 @@ export default function FullIDE(props: FullIDEProps) {
         [serviceOverrides, servicePreset, showTopLanguageButtons],
     );
 
+    const pendingUserWorkspaceMutationRef =
+        useRef<PendingUserWorkspaceMutation | null>(null);
+    const pendingUserWorkspaceMutationTokenRef = useRef(0);
+    const pendingUserWorkspaceMutationTimerRef = useRef<number | null>(null);
+
+    const clearPendingUserWorkspaceMutation = useCallback(() => {
+        pendingUserWorkspaceMutationRef.current = null;
+
+        if (pendingUserWorkspaceMutationTimerRef.current != null) {
+            window.clearTimeout(pendingUserWorkspaceMutationTimerRef.current);
+            pendingUserWorkspaceMutationTimerRef.current = null;
+        }
+    }, []);
+
+    const markNextWorkspaceChangeAsUser = useCallback(
+        (workspaceBeforeMutation: WorkspaceStateV2 | null) => {
+            const token = ++pendingUserWorkspaceMutationTokenRef.current;
+
+            pendingUserWorkspaceMutationRef.current = {
+                beforeKey: workspaceNotifyKey(workspaceBeforeMutation),
+                token,
+            };
+
+            if (pendingUserWorkspaceMutationTimerRef.current != null) {
+                window.clearTimeout(pendingUserWorkspaceMutationTimerRef.current);
+            }
+
+            pendingUserWorkspaceMutationTimerRef.current = window.setTimeout(() => {
+                if (pendingUserWorkspaceMutationRef.current?.token === token) {
+                    pendingUserWorkspaceMutationRef.current = null;
+                }
+                pendingUserWorkspaceMutationTimerRef.current = null;
+            }, 2_000);
+        },
+        [],
+    );
+
+    useEffect(() => clearPendingUserWorkspaceMutation, [clearPendingUserWorkspaceMutation]);
+
     const workspace = useIdeWorkspace({
         storageKey: scopedStorageKey,
         forcedLanguage,
@@ -959,6 +1002,7 @@ export default function FullIDE(props: FullIDEProps) {
         draftStorageMode: effectiveDraftStorageMode,
         localWorkspaceId,
         fileActions: services.explorer.fileActions,
+        onUserWorkspaceMutation: markNextWorkspaceChangeAsUser,
     });
 
     const externalWorkspaceControlKey = useMemo(
@@ -996,6 +1040,21 @@ export default function FullIDE(props: FullIDEProps) {
     const suppressNextWorkspaceEchoRef = useRef(false);
 
     const lastNotifiedWorkspaceKeyRef = useRef<string | null>(null);
+
+    const emitWorkspaceChange = useCallback<
+        NonNullable<FullIDEProps["onWorkspaceChange"]>
+    >(
+        (nextWorkspace, meta) => {
+            lastNotifiedWorkspaceKeyRef.current = workspaceNotifyKey(nextWorkspace);
+
+            if (meta?.origin === "user") {
+                clearPendingUserWorkspaceMutation();
+            }
+
+            onWorkspaceChange?.(nextWorkspace, meta);
+        },
+        [clearPendingUserWorkspaceMutation, onWorkspaceChange],
+    );
 
     const replaceWorkspaceActionRef = useRef(workspace.actions.replaceWorkspace);
     const resetWorkspaceForLanguageActionRef = useRef(workspace.actions.resetWorkspaceForLanguage);
@@ -1046,6 +1105,7 @@ export default function FullIDE(props: FullIDEProps) {
         const nextNotifyKey = workspaceNotifyKey(nextWorkspace);
 
         lastAppliedExternalWorkspaceJsonRef.current = applyKey;
+        clearPendingUserWorkspaceMutation();
 
         if (nextWorkspace) {
             if (
@@ -1075,6 +1135,7 @@ export default function FullIDE(props: FullIDEProps) {
         externalWorkspaceApplyKey,
         externalWorkspaceRevision,
         forcedLanguage,
+        clearPendingUserWorkspaceMutation,
     ]);
 
     /**
@@ -1108,9 +1169,22 @@ export default function FullIDE(props: FullIDEProps) {
             return;
         }
 
-        lastNotifiedWorkspaceKeyRef.current = currentKey;
-        onWorkspaceChange?.(current, { origin: "sync" });
-    }, [onWorkspaceChange, workspace.derived.currentWorkspace, currentWorkspaceNotifyKey]);
+        const resolvedOrigin = resolveFullIdeWorkspaceChangeOrigin({
+            pending: pendingUserWorkspaceMutationRef.current,
+            currentKey,
+        });
+
+        if (resolvedOrigin.consumePending) {
+            clearPendingUserWorkspaceMutation();
+        }
+
+        emitWorkspaceChange(current, { origin: resolvedOrigin.origin });
+    }, [
+        clearPendingUserWorkspaceMutation,
+        emitWorkspaceChange,
+        workspace.derived.currentWorkspace,
+        currentWorkspaceNotifyKey,
+    ]);
     const sessionRemountKey = useMemo(
         () =>
             [
@@ -1210,7 +1284,7 @@ export default function FullIDE(props: FullIDEProps) {
                 state={workspace.state}
                 derived={workspace.derived}
                 actions={workspace.actions}
-                onWorkspaceChange={onWorkspaceChange}
+                onWorkspaceChange={emitWorkspaceChange}
                 onTerminalEvidenceChange={onTerminalEvidenceChange}
                 onTerminalSyncReady={onTerminalSyncReady}
             />

@@ -1960,7 +1960,10 @@ export function useReviewProgress(args: {
 
         void putProgressNow(latestProgress, {
             reason: "page-exit",
-            keepalive: false,
+            // A normal fetch may be cancelled by refresh/navigation. The Code
+            // pane capture listener has already flushed pending editor state into
+            // the runtime, so keep this final DB write alive during page teardown.
+            keepalive: true,
         });
     }, hydrated);
 

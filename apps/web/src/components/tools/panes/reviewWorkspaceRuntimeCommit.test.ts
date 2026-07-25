@@ -32,7 +32,7 @@ describe("review workspace persistence policy", () => {
     });
   });
 
-  it("keeps browser-local draft storage off for ordinary review routes", () => {
+  it("commits editable ordinary review workspaces after a short idle period", () => {
     expect(
       resolveReviewWorkspacePersistencePolicy({
         isTutoringSession: false,
@@ -40,11 +40,23 @@ describe("review workspace persistence policy", () => {
       }),
     ).toEqual({
       draftStorageMode: "off",
+      runtimeCommitMode: "runtime-debounced",
+    });
+  });
+
+  it("keeps read-only ordinary review workspaces deferred", () => {
+    expect(
+      resolveReviewWorkspacePersistencePolicy({
+        isTutoringSession: false,
+        canEdit: false,
+      }),
+    ).toEqual({
+      draftStorageMode: "off",
       runtimeCommitMode: "deferred",
     });
   });
 
-  it("commits an editable tutoring workspace after the user stops typing", () => {
+  it("commits an editable review workspace after the user stops typing", () => {
     expect(
       shouldCommitReviewWorkspaceToRuntimeAfterIdle({
         mode: "runtime-debounced",

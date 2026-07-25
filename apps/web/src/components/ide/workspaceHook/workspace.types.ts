@@ -39,6 +39,15 @@ export type UseIdeWorkspaceOpts = {
 
   policy?: IdeWorkspacePolicy;
   fileActions?: IdeFileActionsConfig | null;
+
+  /**
+   * Called immediately before a learner action is expected to mutate the
+   * workspace tree/content. FullIDE uses the pre-mutation snapshot to label the
+   * next committed workspace emission as user-authored instead of hydration.
+   */
+  onUserWorkspaceMutation?: (
+    workspaceBeforeMutation: WorkspaceStateV2 | null,
+  ) => void;
 };
 
 export type WorkspaceMeta = {

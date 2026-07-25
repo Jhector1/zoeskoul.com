@@ -356,6 +356,30 @@ export function useIdeWorkspace(opts?: UseIdeWorkspaceOpts): UseIdeWorkspaceResu
     );
 
 
+    const currentWorkspace = useMemo<WorkspaceStateV2 | null>(() => {
+        if (!nodes.length || !activeFileId || !entryFileId) return null;
+
+        return {
+            version: 2,
+            language,
+            nodes,
+            openTabs: openTabs.length ? openTabs : [activeFileId],
+            activeFileId,
+            entryFileId,
+            stdin,
+            expanded: Array.from(expanded),
+            leftPct,
+        };
+    }, [language, nodes, openTabs, activeFileId, entryFileId, stdin, expanded, leftPct]);
+
+    const currentWorkspaceRef = useRef<WorkspaceStateV2 | null>(null);
+    currentWorkspaceRef.current = currentWorkspace;
+
+    const notifyUserWorkspaceMutation = useCallback(() => {
+        opts?.onUserWorkspaceMutation?.(currentWorkspaceRef.current);
+    }, [opts?.onUserWorkspaceMutation]);
+
+
     const lastHydratedWorkspaceKeyRef = useRef<string>("");
     const hydrateWorkspace = useCallback(
         (ws: WorkspaceStateV2) => {
@@ -496,6 +520,7 @@ export function useIdeWorkspace(opts?: UseIdeWorkspaceOpts): UseIdeWorkspaceResu
         const prev = historyRef.current.past.pop();
         if (!prev) return;
 
+        notifyUserWorkspaceMutation();
         const current = cloneSnapshot(takeHistorySnapshot());
         historyRef.current.future.push(current);
 
@@ -505,12 +530,13 @@ export function useIdeWorkspace(opts?: UseIdeWorkspaceOpts): UseIdeWorkspaceResu
 
         restoreHistorySnapshot(prev);
         syncHistoryFlags();
-    }, [takeHistorySnapshot, restoreHistorySnapshot, syncHistoryFlags]);
+    }, [notifyUserWorkspaceMutation, takeHistorySnapshot, restoreHistorySnapshot, syncHistoryFlags]);
 
     const redo = useCallback(() => {
         const next = historyRef.current.future.pop();
         if (!next) return;
 
+        notifyUserWorkspaceMutation();
         const current = cloneSnapshot(takeHistorySnapshot());
         historyRef.current.past.push(current);
 
@@ -520,7 +546,7 @@ export function useIdeWorkspace(opts?: UseIdeWorkspaceOpts): UseIdeWorkspaceResu
 
         restoreHistorySnapshot(next);
         syncHistoryFlags();
-    }, [takeHistorySnapshot, restoreHistorySnapshot, syncHistoryFlags]);
+    }, [notifyUserWorkspaceMutation, takeHistorySnapshot, restoreHistorySnapshot, syncHistoryFlags]);
 
     useEffect(() => {
         const onKeyDown = (e: KeyboardEvent) => {
@@ -583,25 +609,6 @@ export function useIdeWorkspace(opts?: UseIdeWorkspaceOpts): UseIdeWorkspaceResu
         },
         [hydrateWorkspace, clearTransientUi, materializeWorkspaceForAccess],
     );
-
-    const currentWorkspace = useMemo<WorkspaceStateV2 | null>(() => {
-        if (!nodes.length || !activeFileId || !entryFileId) return null;
-
-        return {
-            version: 2,
-            language,
-            nodes,
-            openTabs: openTabs.length ? openTabs : [activeFileId],
-            activeFileId,
-            entryFileId,
-            stdin,
-            expanded: Array.from(expanded),
-            leftPct,
-        };
-    }, [language, nodes, openTabs, activeFileId, entryFileId, stdin, expanded, leftPct]);
-
-    const currentWorkspaceRef = useRef<WorkspaceStateV2 | null>(null);
-    currentWorkspaceRef.current = currentWorkspace;
 
     const loadWorkspaceForLanguage = useCallback(
         async (next: WorkspaceLanguage) =>
@@ -960,13 +967,15 @@ export function useIdeWorkspace(opts?: UseIdeWorkspaceOpts): UseIdeWorkspaceResu
     );
 
     const onChangeCode = useCallback(
-        (code: string) =>
-            onChangeCodeAction({
+        (code: string) => {
+            notifyUserWorkspaceMutation();
+            return onChangeCodeAction({
                 activeFile,
                 code,
                 setNodes,
-            }),
-        [activeFile],
+            });
+        },
+        [activeFile, notifyUserWorkspaceMutation],
     );
 
     const toggleFolder = useCallback(
@@ -981,6 +990,7 @@ export function useIdeWorkspace(opts?: UseIdeWorkspaceOpts): UseIdeWorkspaceResu
 
     const importExternalFiles = useCallback(
         (files: ImportedWorkspaceFile[]) => {
+            notifyUserWorkspaceMutation();
             pushUndoSnapshot();
             return importExternalFilesAction({
                 access,
@@ -995,7 +1005,7 @@ export function useIdeWorkspace(opts?: UseIdeWorkspaceOpts): UseIdeWorkspaceResu
                 setToast,
             });
         },
-        [pushUndoSnapshot, access, policy, nodes, activeFileId],
+        [notifyUserWorkspaceMutation, pushUndoSnapshot, access, policy, nodes, activeFileId],
     );
 
     const startNewFile = useCallback(
@@ -1040,6 +1050,7 @@ export function useIdeWorkspace(opts?: UseIdeWorkspaceOpts): UseIdeWorkspaceResu
     );
 
     const commitInlineEdit = useCallback(() => {
+        notifyUserWorkspaceMutation();
         pushUndoSnapshot();
         return commitInlineEditAction({
             access,
@@ -1056,6 +1067,7 @@ export function useIdeWorkspace(opts?: UseIdeWorkspaceOpts): UseIdeWorkspaceResu
             setToast,
         });
     }, [
+        notifyUserWorkspaceMutation,
         pushUndoSnapshot,
         access,
         policy,
@@ -1081,6 +1093,7 @@ export function useIdeWorkspace(opts?: UseIdeWorkspaceOpts): UseIdeWorkspaceResu
 
     const moveNode = useCallback(
         (id: NodeId, parentId: NodeId | null) => {
+            notifyUserWorkspaceMutation();
             pushUndoSnapshot();
             return moveNodeAction({
                 policy,
@@ -1092,21 +1105,24 @@ export function useIdeWorkspace(opts?: UseIdeWorkspaceOpts): UseIdeWorkspaceResu
                 setToast,
             });
         },
-        [pushUndoSnapshot, policy, nodes],
+        [notifyUserWorkspaceMutation, pushUndoSnapshot, policy, nodes],
     );
 
     const cancelInlineEdit = useCallback(() => setInlineEdit(null), []);
     const setEntry = useCallback(
         (id: NodeId) => {
+            if (id === entryFileId) return;
+            notifyUserWorkspaceMutation();
             pushUndoSnapshot();
             setEntryFileId(id);
         },
-        [pushUndoSnapshot],
+        [entryFileId, notifyUserWorkspaceMutation, pushUndoSnapshot],
     );
 
     const performDelete = useCallback(() => {
         if (!pendingDeleteId) return;
 
+        notifyUserWorkspaceMutation();
         pushUndoSnapshot();
 
         return performDeleteAction({
@@ -1122,6 +1138,7 @@ export function useIdeWorkspace(opts?: UseIdeWorkspaceOpts): UseIdeWorkspaceResu
             setToast,
         });
     }, [
+        notifyUserWorkspaceMutation,
         pushUndoSnapshot,
         nodes,
         pendingDeleteId,

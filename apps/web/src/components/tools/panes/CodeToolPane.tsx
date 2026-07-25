@@ -2523,12 +2523,10 @@ export default function CodeToolPane(props: {
 
         if (shouldDeferReviewEditorContentEdit) {
             /**
-             * Keep Monaco local-first while the user is actively typing.
-             *
-             * Normal review routes keep the historical deferred behavior and flush
-             * before Run/Check/navigation. Editable tutoring workspaces opt into a
-             * bounded idle commit: the mounted editor stays uncontrolled, while the
-             * runtime snapshot is persisted for remote tutor/learner observation.
+             * Keep Monaco local-first while the user is actively typing, then move
+             * the complete workspace into the review runtime after a bounded idle
+             * period. The runtime/ReviewProgress document remains canonical; local
+             * browser draft restoration stays disabled for review and tutoring.
              */
             pendingWorkspaceRef.current = workspace;
             pendingWorkspaceForceUserEditRef.current = true;
@@ -2645,14 +2643,19 @@ export default function CodeToolPane(props: {
 
     useEffect(() => {
         return () => {
-            if (!usesWorkspaceShell) return;
+            if (!isReviewRouteMode) return;
             flushPendingWorkspace();
         };
-    }, [workspaceContextKey, usesWorkspaceShell, flushPendingWorkspace]);
+    }, [workspaceContextKey, isReviewRouteMode, flushPendingWorkspace]);
 
     useEffect(() => {
-        if (!usesWorkspaceShell) return;
+        if (!isReviewRouteMode) return;
 
+        /**
+         * Run in the capture phase so the pending Monaco snapshot reaches the
+         * runtime before useReviewProgress performs its page-exit DB save.
+         * This applies to both full workspace shells and one-file exercise IDEs.
+         */
         const flushForPageExit = () => {
             flushPendingWorkspace();
         };
@@ -2670,7 +2673,7 @@ export default function CodeToolPane(props: {
             window.removeEventListener("pagehide", flushForPageExit, { capture: true });
             document.removeEventListener("visibilitychange", onVisibilityChange, { capture: true });
         };
-    }, [usesWorkspaceShell, flushPendingWorkspace]);
+    }, [isReviewRouteMode, flushPendingWorkspace]);
 
     const flushReviewWorkspaceForSubmit = useCallback(() => {
         const workspaceForSubmit = selectWorkspaceForSubmit({
