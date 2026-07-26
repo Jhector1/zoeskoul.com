@@ -4,7 +4,11 @@ prisma migrate reset --force&&prisma migrate deploy && prisma generate&&
 npx dotenv-cli -e ../../apps/web/.env.production.local -- npx prisma migrate deploy
 npx dotenv-cli -e ../../apps/web/.env.production.local -- npx prisma db seed
 
+cd /Users/admin/Documents/NextJSProject/zoeskoul.com/packages/db
 
+npx dotenv-cli -e ../../apps/web/.env.production.local -- \
+  npx prisma db seed -- \
+  --subject c-runtime-analysis-asymptotics
 
 
 # 1) format + validate schema

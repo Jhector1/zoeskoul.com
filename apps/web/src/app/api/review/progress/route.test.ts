@@ -8,13 +8,27 @@ vi.mock("@/lib/prisma", () => ({
     prisma: {
         reviewProgress: {
             findUnique: vi.fn(async () => mockDb.row),
-            upsert: vi.fn(async ({ create, update }: any) => {
-                const state = mockDb.row ? update.state : create.state;
+            create: vi.fn(async ({ data }: any) => {
                 mockDb.row = {
                     id: "review-progress-1",
                     updatedAt: new Date("2026-05-07T12:00:00.000Z"),
-                    state,
+                    state: data.state,
                 };
+                return mockDb.row;
+            }),
+            updateMany: vi.fn(async ({ data }: any) => {
+                if (!mockDb.row) return { count: 0 };
+                mockDb.row = {
+                    ...mockDb.row,
+                    updatedAt: new Date(
+                        mockDb.row.updatedAt.getTime() + 1,
+                    ),
+                    state: data.state,
+                };
+                return { count: 1 };
+            }),
+            findUniqueOrThrow: vi.fn(async () => {
+                if (!mockDb.row) throw new Error("missing");
                 return mockDb.row;
             }),
         },
@@ -451,6 +465,76 @@ describe("/api/review/progress route", () => {
         expect(topic.quizzesDone["quiz-b"]).toBe(true);
         expect(topic.quizState["quiz-b"].answers).toEqual({
             q2: "keep",
+        });
+    });
+
+    it("rejects a delayed older request after a newer revision is stored", async () => {
+        const route = await import("./route");
+
+        mockDb.row = {
+            id: "review-progress-1",
+            updatedAt: new Date("2026-05-07T12:00:00.000Z"),
+            state: {
+                topics: {},
+                __saveRevision: 50,
+            },
+        };
+
+        const response = await route.PUT(
+            new Request("http://localhost:3000/api/review/progress", {
+                method: "PUT",
+                headers: { "content-type": "application/json" },
+                body: JSON.stringify({
+                    subjectSlug: "sql",
+                    moduleSlug: "sql_module_12",
+                    locale: "en",
+                    state: {
+                        topics: {},
+                        __saveRevision: 49,
+                    },
+                }),
+            }),
+        );
+
+        expect(response.status).toBe(409);
+        expect(mockDb.row.state.__saveRevision).toBe(50);
+    });
+
+    it("uses compare-and-swap so a concurrent writer cannot be overwritten", async () => {
+        const route = await import("./route");
+        const { prisma } = await import("@/lib/prisma");
+
+        mockDb.row = {
+            id: "review-progress-1",
+            updatedAt: new Date("2026-05-07T12:00:00.000Z"),
+            state: {
+                topics: {},
+                __saveRevision: 50,
+            },
+        };
+        vi.mocked(prisma.reviewProgress.updateMany).mockResolvedValueOnce({
+            count: 0,
+        });
+
+        const response = await route.PUT(
+            new Request("http://localhost:3000/api/review/progress", {
+                method: "PUT",
+                headers: { "content-type": "application/json" },
+                body: JSON.stringify({
+                    subjectSlug: "sql",
+                    moduleSlug: "sql_module_12",
+                    locale: "en",
+                    state: {
+                        topics: {},
+                        __saveRevision: 51,
+                    },
+                }),
+            }),
+        );
+
+        expect(response.status).toBe(409);
+        await expect(response.json()).resolves.toMatchObject({
+            reason: "concurrent_write",
         });
     });
 });

@@ -34,4 +34,27 @@ describe("tutoring workspace mutation access", () => {
     expect(resolved?.readOnly).toBe(false);
     expect(canMutateTutoringWorkspace(resolved)).toBe(true);
   });
+
+  it("keeps two selected learner reviews on distinct read-only owner keys", () => {
+    const first = resolveTutoringWorkspaceAccess({
+      ...base,
+      requestedView: "learner",
+      requestedLearnerId: "student-1",
+      learnerIsParticipant: true,
+    });
+    const second = resolveTutoringWorkspaceAccess({
+      ...base,
+      requestedView: "learner",
+      requestedLearnerId: "student-2",
+      learnerIsParticipant: true,
+    });
+
+    expect(first?.ownerKey).toBe("user:student-1");
+    expect(second?.ownerKey).toBe("user:student-2");
+    expect(first?.ownerKey).not.toBe(second?.ownerKey);
+    expect(first?.ownerKey).not.toBe("shared");
+    expect(second?.ownerKey).not.toBe("shared");
+    expect(first?.readOnly).toBe(true);
+    expect(second?.readOnly).toBe(true);
+  });
 });

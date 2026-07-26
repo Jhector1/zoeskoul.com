@@ -1,3 +1,5 @@
+import { WORKSPACE_TEXT_SAVE_DEBOUNCE_MS } from "@/lib/review/workspacePersistenceContract";
+
 export type ReviewWorkspaceRuntimeCommitMode =
   | "deferred"
   | "runtime-debounced";
@@ -14,7 +16,8 @@ export const REVIEW_WORKSPACE_DRAFT_STORAGE_MODE = "off" as const;
  * public-course review and tutoring while remaining independent from
  * browser-local draft storage.
  */
-export const REVIEW_WORKSPACE_RUNTIME_COMMIT_DELAY_MS = 700;
+export const REVIEW_WORKSPACE_RUNTIME_COMMIT_DELAY_MS =
+  WORKSPACE_TEXT_SAVE_DEBOUNCE_MS;
 
 export function resolveReviewWorkspacePersistencePolicy(args: {
   isTutoringSession: boolean;

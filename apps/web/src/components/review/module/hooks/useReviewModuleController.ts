@@ -2688,6 +2688,9 @@ export function useReviewModuleController({
             headerGamification,
             saveStatus,
             lastSaveError,
+            onRetrySave: () => {
+                void flush();
+            },
         },
 
         leftRail: {

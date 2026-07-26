@@ -9,6 +9,13 @@ import {
 } from "@/lib/review/progressClient";
 import { stableJson } from "@/lib/client/persistence/stableJson";
 import { useFlushOnPageExit } from "@/lib/client/persistence/useFlushOnPageExit";
+import {
+    buildCanonicalWorkspaceIdentity,
+    nextWorkspaceSaveRevision,
+    shouldApplyWorkspaceResponse,
+    WORKSPACE_PROGRESS_SAVE_DEBOUNCE_MS,
+    WORKSPACE_RUNTIME_SAVE_COALESCE_MS,
+} from "@/lib/review/workspacePersistenceContract";
 import { emitGamificationUpdate } from "@/lib/gamification/browserEvents";
 import { useReviewRuntimeStore } from "../runtime/reviewRuntimeStore";
 import { mergeRuntimeIntoProgress } from "../runtime/runtimeProgressBridge";
@@ -684,7 +691,13 @@ function looksLikeBetterExerciseRestoreCandidate(existing: any, incoming: any) {
     return numericUpdatedAt(incoming) >= numericUpdatedAt(existing);
 }
 
-type ReviewSaveStatus = "idle" | "saving" | "saved" | "error" | "conflict";
+type ReviewSaveStatus =
+    | "idle"
+    | "unsaved"
+    | "saving"
+    | "saved"
+    | "error"
+    | "conflict";
 
 type ReviewProgressSetter = Dispatch<SetStateAction<ReviewProgressState>>;
 
@@ -804,7 +817,7 @@ export function useReviewProgress(args: {
         const stateWithRuntime = mergeRuntimeIntoProgress(state, latestRuntime);
 
         const previousRevision = getSaveRevision(stateWithRuntime);
-        const nextRevision = Math.max(previousRevision + 1, Date.now());
+        const nextRevision = nextWorkspaceSaveRevision({ previousRevision });
 
         const stateToSave = {
             ...(stateWithRuntime as any),
@@ -1009,10 +1022,9 @@ export function useReviewProgress(args: {
         saveInFlightRef.current = true;
         setLastSaveError(null);
 
-        let savingUiTimer: number | null = null;
         let failed = false;
         try {
-            savingUiTimer = window.setTimeout(() => setSaveStatus("saving"), 400);
+            setSaveStatus("saving");
             await savePayloadToApi(nextPayload);
         } catch (error: any) {
             failed = true;
@@ -1023,7 +1035,6 @@ export function useReviewProgress(args: {
             // Preserve the newest known payload. Do not overwrite it with older snapshots.
             pendingSavePayloadRef.current = pendingSavePayloadRef.current ?? nextPayload;
         } finally {
-            if (savingUiTimer != null) window.clearTimeout(savingUiTimer);
             saveInFlightRef.current = false;
             if (!failed && pendingSavePayloadRef.current) {
                 void drainSaveQueueRef.current();
@@ -1067,14 +1078,16 @@ export function useReviewProgress(args: {
             }
 
             if (options?.immediate) {
+                setSaveStatus("saving");
                 void drainSaveQueueRef.current();
                 return;
             }
 
+            setSaveStatus("unsaved");
             pendingSaveTimerRef.current = window.setTimeout(() => {
                 pendingSaveTimerRef.current = null;
                 void drainSaveQueueRef.current();
-            }, 2500);
+            }, WORKSPACE_PROGRESS_SAVE_DEBOUNCE_MS);
         },
         [subjectSlug, moduleSlug, buildPayloadFromState, meaningfulBodyForPayload, readOnly],
     );
@@ -1206,7 +1219,19 @@ export function useReviewProgress(args: {
 
             pendingSavePayloadRef.current = nextPayload as any;
             localDirtyRef.current = true;
-            await drainSaveQueueRef.current();
+
+            const startedAt = Date.now();
+            while (Date.now() - startedAt < 15_000) {
+                await drainSaveQueueRef.current();
+                if (
+                    !saveInFlightRef.current &&
+                    !pendingSavePayloadRef.current
+                ) {
+                    break;
+                }
+                await sleep(50);
+            }
+
             if (saveSeq === saveSeqRef.current && lastSavedMeaningfulBodyRef.current === meaningfulBody) {
                 setProgressSafe(stateToSave);
             }
@@ -1701,11 +1726,16 @@ export function useReviewProgress(args: {
         if (!hydrated) return;
         if (!pendingRuntimeHydrationRef.current) return;
 
-        hydrateRuntimeFromProgress(
-            progressRef.current,
-            "runtime-contract-ready",
-            useReviewRuntimeStore.getState().resetRevision,
-        );
+        applyingRemoteRef.current = true;
+        try {
+            hydrateRuntimeFromProgress(
+                progressRef.current,
+                "runtime-contract-ready",
+                useReviewRuntimeStore.getState().resetRevision,
+            );
+        } finally {
+            applyingRemoteRef.current = false;
+        }
     }, [hydrated, hydrateRuntimeFromProgress, runtimeExerciseContractsKey]);
 
     useEffect(() => {
@@ -1726,6 +1756,7 @@ export function useReviewProgress(args: {
                     signal: ctrl.signal,
                     endpoint,
                 });
+                if (ctrl.signal.aborted) return;
                 if (useReviewRuntimeStore.getState().resetRevision !== startedGeneration) {
                     return;
                 }
@@ -1755,7 +1786,8 @@ export function useReviewProgress(args: {
                     state: withoutSaveRevision(hydratedPayload.state),
                 });
                 localDirtyRef.current = false;
-            } catch {
+            } catch (error: any) {
+                if (ctrl.signal.aborted || error?.name === "AbortError") return;
                 const ep = emptyReviewProgress();
 
                 setProgressSafe(ep);
@@ -1776,6 +1808,7 @@ export function useReviewProgress(args: {
                 });
                 localDirtyRef.current = false;
             } finally {
+                if (ctrl.signal.aborted) return;
                 hydrationCompleteRef.current = true;
                 setHydrated(true);
             }
@@ -1841,6 +1874,7 @@ export function useReviewProgress(args: {
                         endpoint,
                     }),
                 );
+                if (signal?.aborted) return;
                 if (useReviewRuntimeStore.getState().resetRevision !== startedGeneration) {
                     return;
                 }
@@ -1868,7 +1902,20 @@ export function useReviewProgress(args: {
                 });
                 const localMeaningfulBody = meaningfulBodyForPayload(localPayload as typeof payload);
 
-                if (remoteRevision <= localRevision && remoteMeaningfulBody === localMeaningfulBody) {
+                const requestIdentity = buildCanonicalWorkspaceIdentity({
+                    endpoint,
+                    subjectSlug,
+                    moduleSlug,
+                    locale,
+                });
+                if (!shouldApplyWorkspaceResponse({
+                    expectedIdentity: requestIdentity,
+                    responseIdentity: requestIdentity,
+                    requestAborted: signal?.aborted === true,
+                    currentRevision: localRevision,
+                    responseRevision: remoteRevision,
+                    sameContent: remoteMeaningfulBody === localMeaningfulBody,
+                })) {
                     return;
                 }
 
@@ -2071,8 +2118,11 @@ export function useReviewProgress(args: {
                 if (next === progressRef.current) return;
 
                 progressRef.current = next;
-                queueProgressSave(next, { reason: "runtime-store" });
-            }, 1800);
+                queueProgressSave(next, {
+                    immediate: true,
+                    reason: "runtime-store",
+                });
+            }, WORKSPACE_RUNTIME_SAVE_COALESCE_MS);
         });
 
         return () => {

@@ -87,7 +87,14 @@ export async function fetchReviewProgressGET(args: {
          * component must not abort the canonical request for the others.
          */
         const res = await fetch(url, { cache: "no-store" });
-        if (!res.ok) return emptyReviewProgress();
+        if (!res.ok) {
+            const message = await res.text().catch(() => "");
+            const error = new Error(
+                message || `Progress fetch failed: ${res.status}`,
+            );
+            (error as Error & { status?: number }).status = res.status;
+            throw error;
+        }
 
         const data = await res.json().catch(() => null);
         return normalizeProgressTopics(

@@ -197,7 +197,9 @@ export async function PUT(req: Request) {
             },
         },
         select: {
+            id: true,
             state: true,
+            updatedAt: true,
         },
     });
 
@@ -237,31 +239,71 @@ export async function PUT(req: Request) {
         saveRevision: nextRevision,
     });
 
-    const saved = await prisma.reviewProgress.upsert({
-        where: {
-            actorKey_subjectSlug_moduleId_locale: {
-                actorKey,
-                subjectSlug,
-                moduleId: resolved.module.slug,
-                locale,
-            },
-        },
-        create: {
-            actorKey,
-            subjectSlug,
-            moduleId: resolved.module.slug,
-            locale,
-            state: stateToPersist,
-        },
-        update: {
-            state: stateToPersist,
-        },
-        select: {
-            id: true,
-            updatedAt: true,
-            state: true,
-        },
-    });
+    let saved;
+    try {
+        if (!previous) {
+            saved = await prisma.reviewProgress.create({
+                data: {
+                    actorKey,
+                    subjectSlug,
+                    moduleId: resolved.module.slug,
+                    locale,
+                    state: stateToPersist,
+                },
+                select: {
+                    id: true,
+                    updatedAt: true,
+                    state: true,
+                },
+            });
+        } else {
+            const updated = await prisma.reviewProgress.updateMany({
+                where: {
+                    id: previous.id,
+                    updatedAt: previous.updatedAt,
+                },
+                data: {
+                    state: stateToPersist,
+                },
+            });
+
+            if (updated.count !== 1) {
+                return bodyJsonWithGuestCookie(
+                    {
+                        ok: false,
+                        ignored: true,
+                        reason: "concurrent_write",
+                    },
+                    409,
+                    setGuestId,
+                );
+            }
+
+            saved = await prisma.reviewProgress.findUniqueOrThrow({
+                where: { id: previous.id },
+                select: {
+                    id: true,
+                    updatedAt: true,
+                    state: true,
+                },
+            });
+        }
+    } catch (error) {
+        if (
+            String((error as { code?: unknown } | null)?.code ?? "") === "P2002"
+        ) {
+            return bodyJsonWithGuestCookie(
+                {
+                    ok: false,
+                    ignored: true,
+                    reason: "concurrent_create",
+                },
+                409,
+                setGuestId,
+            );
+        }
+        throw error;
+    }
 
     let gamification = null;
 

@@ -66,10 +66,12 @@
       "nextDisabledTitle": "No next topic",
       "nextLockedTitle": "Complete the topic to continue",
       "saveStatus": {
+        "unsaved": "Unsaved changes",
         "saving": "Saving...",
         "saved": "Saved",
         "error": "Save failed",
-        "conflict": "Sync conflict"
+        "conflict": "Sync conflict",
+        "retry": "Retry"
       },
       "level": "Lv {level}",
       "xp": "{count} XP"

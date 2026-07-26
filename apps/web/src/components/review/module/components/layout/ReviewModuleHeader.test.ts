@@ -27,9 +27,11 @@ vi.mock("next-intl", () => ({
             "review.header.nextDisabledTitle": "No next topic",
             "review.header.nextLockedTitle": "Complete the topic to continue",
             "review.header.saveStatus.saving": "Saving...",
+            "review.header.saveStatus.unsaved": "Unsaved changes",
             "review.header.saveStatus.saved": "Saved",
             "review.header.saveStatus.error": "Save failed",
             "review.header.saveStatus.conflict": "Sync conflict",
+            "review.header.saveStatus.retry": "Retry",
             "review.header.level": "Lv {level}",
             "review.header.xp": "{count} XP",
         };
@@ -95,6 +97,22 @@ function renderHeader(overrides: Partial<React.ComponentProps<typeof ReviewModul
 }
 
 describe("ReviewModuleHeader compact toolbar", () => {
+    it("shows unsaved state and a retry action after a failed save", () => {
+        expect(
+            renderHeader({
+                saveStatus: "unsaved",
+            }),
+        ).toContain("Unsaved changes");
+
+        expect(
+            renderHeader({
+                saveStatus: "error",
+                lastSaveError: "network unavailable",
+                onRetrySave: vi.fn(),
+            }),
+        ).toContain("Retry");
+    });
+
     it("keeps Topics and Tools buttons when desktop side panels are not visible", () => {
         const html = renderHeader();
 

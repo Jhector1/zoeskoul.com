@@ -1,8 +1,16 @@
+import { shouldPersistWorkspaceMutation } from "@/lib/review/workspacePersistenceContract";
+
 export function shouldTrackReviewRuntimeMutation(args: {
     readOnly: boolean;
     applyingRemote: boolean;
 }) {
-    return !args.readOnly && !args.applyingRemote;
+    return shouldPersistWorkspaceMutation({
+        readOnly: args.readOnly,
+        hydrated: true,
+        applyingRemote: args.applyingRemote,
+        hasAuthoritativeContent: true,
+        wouldReplaceNonEmptyWithEmpty: false,
+    });
 }
 
 export function canPollReviewRemoteProgress(args: {

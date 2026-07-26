@@ -44,8 +44,9 @@ type Props = {
     unlockAll: boolean;
     viewIsComplete: boolean;
     headerGamification: HeaderGamificationVm | null;
-    saveStatus?: "idle" | "saving" | "saved" | "error" | "conflict";
+    saveStatus?: "idle" | "unsaved" | "saving" | "saved" | "error" | "conflict";
     lastSaveError?: string | null;
+    onRetrySave?: () => void;
 };
 
 type ResetMenuPlacement = {
@@ -90,6 +91,7 @@ export default function ReviewModuleHeader({
                                                headerGamification,
                                                saveStatus = "idle",
                                                lastSaveError,
+                                               onRetrySave,
                                            }: Props) {
     const t = useTranslations("review.header");
     const resetMenuId = React.useId();
@@ -404,13 +406,26 @@ export default function ReviewModuleHeader({
                                 className="rounded-full border border-[rgb(var(--ui-border)/0.9)] bg-[rgb(var(--ui-surface)/0.88)] px-2.5 py-1 text-xs font-semibold text-[rgb(var(--ui-text)/0.96)]"
                                 title={lastSaveError ?? undefined}
                             >
-                                {saveStatus === "saving"
+                                {saveStatus === "unsaved"
+                                    ? t("saveStatus.unsaved")
+                                    : saveStatus === "saving"
                                     ? t("saveStatus.saving")
                                     : saveStatus === "error"
                                         ? t("saveStatus.error")
                                         : saveStatus === "conflict"
                                             ? t("saveStatus.conflict")
                                             : t("saveStatus.saved")}
+                                {(saveStatus === "error" ||
+                                    saveStatus === "conflict") &&
+                                onRetrySave ? (
+                                    <button
+                                        type="button"
+                                        className="ml-2 underline underline-offset-2"
+                                        onClick={onRetrySave}
+                                    >
+                                        {t("saveStatus.retry")}
+                                    </button>
+                                ) : null}
                             </div>
                         ) : null}
 
