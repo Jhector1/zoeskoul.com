@@ -186,6 +186,27 @@ export function replaceMountedWorkspaceModels(args: {
     return updated;
 }
 
+export function canApplyMountedWorkspaceReplacement(args: {
+    revision: string | number | undefined;
+    lastAppliedRevision: string | null;
+    mounted: boolean;
+    hasEditor: boolean;
+    hasMonaco: boolean;
+    hasWorkspace: boolean;
+    exerciseStateKey: string;
+}) {
+    if (typeof args.revision === "undefined") return false;
+    if (args.lastAppliedRevision === String(args.revision)) return false;
+
+    return Boolean(
+        args.mounted &&
+        args.hasEditor &&
+        args.hasMonaco &&
+        args.hasWorkspace &&
+        args.exerciseStateKey,
+    );
+}
+
 function getLiveEditorModel(ed: any) {
     try {
         if (!ed || ed.isDisposed?.() === true) return null;
@@ -510,13 +531,22 @@ export default function EditorPane(props: {
     }, [applyExternalValue]);
 
     const applyWorkspaceReplacement = useCallback(() => {
-        if (typeof workspaceReplacementRevision === "undefined") return false;
-
-        const revisionKey = String(workspaceReplacementRevision);
-        if (lastWorkspaceReplacementRevisionRef.current === revisionKey) {
+        if (
+            !canApplyMountedWorkspaceReplacement({
+                revision: workspaceReplacementRevision,
+                lastAppliedRevision:
+                    lastWorkspaceReplacementRevisionRef.current,
+                mounted: mountedRef.current,
+                hasEditor: Boolean(getLiveEditorModel(editorRef.current)),
+                hasMonaco: Boolean(monacoRef.current),
+                hasWorkspace: Boolean(workspace?.nodes?.length),
+                exerciseStateKey: effectiveExerciseStateKey,
+            })
+        ) {
             return false;
         }
 
+        const revisionKey = String(workspaceReplacementRevision);
         const replacements = buildWorkspaceModelReplacements({
             workspace,
             exerciseStateKey: effectiveExerciseStateKey,

@@ -3,6 +3,7 @@ import { describe, expect, it, vi } from "vitest";
 import type { WorkspaceStateV2 } from "@/components/ide/types";
 import {
     buildWorkspaceModelReplacements,
+    canApplyMountedWorkspaceReplacement,
     replaceMountedWorkspaceModels,
 } from "./EditorPane";
 
@@ -38,6 +39,33 @@ const workspace: WorkspaceStateV2 = {
 };
 
 describe("mounted Monaco workspace replacement", () => {
+    it("does not consume a reveal replacement before Monaco is mounted", () => {
+        const base = {
+            revision: "exercise-1:4",
+            lastAppliedRevision: null,
+            mounted: true,
+            hasEditor: true,
+            hasMonaco: true,
+            hasWorkspace: true,
+            exerciseStateKey: "review:exercise-1",
+        };
+
+        expect(
+            canApplyMountedWorkspaceReplacement({
+                ...base,
+                hasEditor: false,
+                hasMonaco: false,
+            }),
+        ).toBe(false);
+        expect(canApplyMountedWorkspaceReplacement(base)).toBe(true);
+        expect(
+            canApplyMountedWorkspaceReplacement({
+                ...base,
+                lastAppliedRevision: base.revision,
+            }),
+        ).toBe(false);
+    });
+
     it("builds deterministic replacements for every text file", () => {
         const replacements = buildWorkspaceModelReplacements({
             workspace,
