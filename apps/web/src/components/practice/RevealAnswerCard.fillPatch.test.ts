@@ -1,6 +1,7 @@
 import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it, vi } from "vitest";
+import type { QItem } from "@/lib/practice/uiTypes";
 
 import RevealAnswerCard, {
     applyRevealFillAnswer,
@@ -8,6 +9,7 @@ import RevealAnswerCard, {
     buildRevealFillPatches,
     mergeSolutionWorkspace,
 } from "./RevealAnswerCard";
+import { resolveRevealAnswerForResult } from "./shell/ResultPanel";
 
 vi.mock("@/i18n/tagged", () => ({
     isTaggedKey: (value: unknown) =>
@@ -21,6 +23,35 @@ vi.mock("@/i18n/tagged", () => ({
 vi.mock("@/components/review/module/context/ReviewToolsContext", () => ({
     useOptionalReviewTools: () => null,
 }));
+
+describe("persisted reveal answer", () => {
+    it("restores the reveal payload when transient help entries are empty", () => {
+        const revealAnswer = {
+            kind: "code_input",
+            language: "python",
+            solutionCode: "print('solution')\n",
+        };
+
+        expect(
+            resolveRevealAnswerForResult({
+                revealed: true,
+                result: {
+                    ok: false,
+                    finalized: true,
+                    revealUsed: true,
+                    revealAnswer,
+                },
+                help: {
+                    openedStepKeys: ["reveal"],
+                    activeStepKey: "reveal",
+                    entries: {},
+                    busyStepKey: null,
+                    error: null,
+                },
+            } as unknown as QItem),
+        ).toBe(revealAnswer);
+    });
+});
 
 function workspacePathMap(workspace: NonNullable<ReturnType<typeof buildSolutionWorkspace>>) {
     const byId = new Map(workspace.nodes.map((node) => [node.id, node] as const));

@@ -8,6 +8,26 @@ import RevealAnswerCard from "../RevealAnswerCard";
 import MathMarkdown from "@/components/markdown/MathMarkdown";
 import { isExcusedPracticeItem } from "@/lib/flow/excuse";
 
+export function resolveRevealAnswerForResult(current: QItem | null | undefined) {
+    const activeHelpEntry =
+        current?.help?.activeStepKey
+            ? current.help.entries[current.help.activeStepKey]
+            : null;
+
+    if (activeHelpEntry?.reveal) return activeHelpEntry.reveal;
+    const persistedResult =
+        current?.result as (Record<string, unknown> | null | undefined);
+    const persistedRevealAnswer = persistedResult?.revealAnswer;
+    if (
+        persistedRevealAnswer &&
+        (current?.revealed || persistedResult?.revealUsed === true)
+    ) {
+        return persistedRevealAnswer;
+    }
+
+    return null;
+}
+
 export default function ResultPanel({
                                         t,
                                         busy,
@@ -50,10 +70,7 @@ export default function ResultPanel({
         (current?.result as any)?.revealUsed ||
         (current?.result as any)?.revealAnswer,
     );
-    const activeHelpEntry =
-        current?.help?.activeStepKey
-            ? current.help.entries[current.help.activeStepKey]
-            : null;
+    const revealAnswer = resolveRevealAnswerForResult(current);
 
     return (
         <div className="p-4">
@@ -101,11 +118,11 @@ export default function ResultPanel({
                             </div>
                         ) : null}
 
-                        {activeHelpEntry?.reveal ? (
+                        {revealAnswer ? (
                             <RevealAnswerCard
                                 exercise={exercise}
                                 current={current}
-                                reveal={activeHelpEntry.reveal}
+                                reveal={revealAnswer}
                                 updateCurrent={updateCurrent}
                                 codeInputId={codeInputId}
                             />
