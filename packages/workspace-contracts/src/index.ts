@@ -346,3 +346,33 @@ export function shouldApplyRemoteReviewWorkspace(args: {
     // code. Editable learner work still keeps the conservative restore guard.
     return (args.readOnly && isRemoteRefresh) || args.looksLikeBetterCandidate;
 }
+
+export function getWorkspaceEntryCode(
+  workspace: any,
+): string | null {
+  if (
+    !workspace ||
+    workspace.version !== 2 ||
+    !Array.isArray(workspace.nodes)
+  ) {
+    return null;
+  }
+
+  const entryId =
+    workspace.entryFileId ||
+    workspace.activeFileId;
+  const file =
+    workspace.nodes.find(
+      (node: any) =>
+        node?.kind === "file" &&
+        node?.id === entryId,
+    ) ??
+    workspace.nodes.find(
+      (node: any) =>
+        node?.kind === "file",
+    );
+
+  return file?.kind === "file"
+    ? String(file.content ?? "")
+    : null;
+}

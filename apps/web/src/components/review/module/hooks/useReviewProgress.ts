@@ -14,8 +14,19 @@ import {
     mergeReviewProgressForConflictRetry as mergeProgressStatesForSave,
     normalizeReviewProgressForClientSync as normalizeProgressTopics,
     normalizeTopicProgressKey,
+    isReviewWorkspaceState as isWorkspaceState,
     reviewSavedStateUpdatedAt as numericUpdatedAt,
     withoutReviewProgressSaveRevision as withoutSaveRevision,
+    canonicalizeReviewExerciseStateKey as canonicalizeExerciseStateKey,
+    getReviewSavedWorkspace as getSavedWorkspace,
+    getSavedReviewExerciseCode as getSavedExerciseCode,
+    getSavedReviewExerciseLanguage as getSavedExerciseLanguage,
+    getSavedReviewExerciseStdin as getSavedExerciseStdin,
+    hasSavedReviewExerciseContent as hasSavedExerciseContent,
+    hasSavedReviewExerciseEditorContent as hasSavedExerciseEditorContent,
+    isScopedReviewExerciseStateKey as isScopedExerciseStateKey,
+    looksLikeBetterReviewExerciseRestoreCandidate as looksLikeBetterExerciseRestoreCandidate,
+    savedReviewExerciseLooksLikeLearnerEditorWork as savedExerciseLooksLikeLearnerEditorWork,
 } from "@zoeskoul/learning-runtime";
 import { stableJson } from "@/lib/client/persistence/stableJson";
 import { useFlushOnPageExit } from "@/lib/client/persistence/useFlushOnPageExit";
@@ -25,7 +36,6 @@ import {
     shouldApplyWorkspaceResponse,
     preserveLocalWorkspaceNavigation,
     savedStarterHashMatchesRuntimeStarter,
-    workspaceContentHash,
     WORKSPACE_PROGRESS_SAVE_DEBOUNCE_MS,
     WORKSPACE_RUNTIME_SAVE_COALESCE_MS,
 } from "@/lib/review/workspacePersistenceContract";
@@ -39,9 +49,7 @@ import {
     getCardToolScopeKey,
     getExerciseStateKey,
 } from "../runtime/exerciseKeys";
-import { deriveEntryCode } from "../runtime/exerciseWorkspaceResolver";
 import { stateLanguageMatches } from "../runtime/workspaceCodeSource";
-import { isUsableStarterCode } from "../runtime/starterContent";
 import {
     canPollReviewRemoteProgress,
     shouldApplyRemoteReviewWorkspace,
@@ -53,204 +61,6 @@ function isPersistedCardToolKey(toolKey: string) {
     if (toolKey.startsWith("exercise:")) return false;
     if (toolKey.startsWith("topic-tool:")) return false;
     return true;
-}
-
-function canonicalizeExerciseStateKey(
-    exerciseKey: string | null | undefined,
-    fallbackTopicId?: string | null,
-) {
-    const raw = String(exerciseKey ?? "").trim();
-    if (!raw) return "";
-
-    const parts = raw.split(":").filter(Boolean);
-    if (parts.length < 6) return raw;
-
-    const [subjectSlug, moduleSlug, sectionSlug, topicId, cardId, ...exerciseIdParts] = parts;
-    if (!exerciseIdParts.length) return raw;
-
-    return getExerciseStateKey(
-        {
-            subjectSlug,
-            moduleSlug,
-            sectionSlug,
-            topicId: normalizeTopicProgressKey(fallbackTopicId ?? topicId),
-            cardId,
-        },
-        exerciseIdParts.join(":"),
-    );
-}
-
-function isScopedExerciseStateKey(value: string | null | undefined) {
-    const raw = String(value ?? "").trim();
-    if (!raw) return false;
-    return raw.split(":").filter(Boolean).length >= 6;
-}
-
-function summarizeSavedWorkspaceFiles(workspace: any) {
-    if (!workspace || workspace.version !== 2 || !Array.isArray(workspace.nodes)) {
-        return { fileCount: 0, contentLength: 0 };
-    }
-
-    const files = workspace.nodes.filter((node: any) => node?.kind === "file");
-    return {
-        fileCount: files.length,
-        contentLength: files.reduce(
-            (sum: number, node: any) => sum + String(node?.content ?? "").length,
-            0,
-        ),
-    };
-}
-
-function isWorkspaceState(value: any) {
-    return Boolean(value && value.version === 2 && Array.isArray(value.nodes));
-}
-
-function getSavedWorkspace(value: any) {
-    if (isWorkspaceState(value?.workspace)) return value.workspace;
-    if (isWorkspaceState(value?.codeWorkspace)) return value.codeWorkspace;
-    if (isWorkspaceState(value?.ideWorkspace)) return value.ideWorkspace;
-    if (isWorkspaceState(value?.toolWorkspace)) return value.toolWorkspace;
-    return null;
-}
-
-function workspaceHasNonBlankCode(workspace: any) {
-    if (!workspace || workspace.version !== 2 || !Array.isArray(workspace.nodes)) {
-        return false;
-    }
-
-    const code = deriveEntryCode(workspace);
-    return isUsableStarterCode(code);
-}
-
-function hasUsableSavedCode(value: unknown) {
-    return isUsableStarterCode(value);
-}
-
-function hasSavedExerciseContent(value: any) {
-    const workspace = getSavedWorkspace(value);
-
-    const hasNonBlankCode =
-        workspaceHasNonBlankCode(workspace) ||
-        hasUsableSavedCode(value?.code) ||
-        hasUsableSavedCode(value?.source);
-
-    const hasSketch = Boolean(value?.sketch);
-
-    /**
-     * Progress-only state must still hydrate.
-     * This preserves checked/correct/submitted/completed progress even when
-     * stale editor code is intentionally dropped because the starter changed.
-     */
-    const hasProgressState =
-        value?.checked === true ||
-        value?.correct === true ||
-        value?.submitted === true ||
-        value?.completed === true ||
-        typeof value?.attempts === "number" ||
-        typeof value?.score === "number" ||
-        typeof value?.selectedChoice === "string" ||
-        Array.isArray(value?.selectedChoices) ||
-        Array.isArray(value?.orderedIds) ||
-        typeof value?.blankValue === "string" ||
-        typeof value?.answer === "string";
-
-    return Boolean(hasNonBlankCode || hasSketch || hasProgressState);
-}
-
-function hasSavedExerciseEditorContent(value: any) {
-    const workspace = getSavedWorkspace(value);
-
-    return Boolean(
-        workspaceHasNonBlankCode(workspace) ||
-        hasUsableSavedCode(value?.code) ||
-        hasUsableSavedCode(value?.source),
-    );
-}
-
-function savedExerciseLooksLikeLearnerEditorWork(value: any, workspace: any) {
-    if (!hasSavedExerciseEditorContent(value)) return false;
-
-    /**
-     * User/saved owned work is allowed to survive starter regeneration. A
-     * starter hash mismatch means the authored starter changed; it should not
-     * erase a learner's saved answer.
-     */
-    if (isUserSavedState(value)) return true;
-
-    /**
-     * Passive starter snapshots are runtime bookkeeping, not learner work.
-     */
-    if (
-        value?.workspaceOrigin === "starter" ||
-        value?.workspaceOrigin === "empty" ||
-        value?.userEdited === false
-    ) {
-        return false;
-    }
-
-    /**
-     * Legacy saves may be missing userEdited/workspaceOrigin. If they carry a
-     * starterHash and the saved workspace content differs from that hash, treat
-     * it as edited learner work. If it matches, it is just an old starter.
-     */
-    const savedStarterHash =
-        typeof value?.starterHash === "string" ? value.starterHash : "";
-    if (workspace && savedStarterHash) {
-        return workspaceContentHash(workspace) !== savedStarterHash;
-    }
-
-    return Boolean(workspace);
-}
-
-function getSavedExerciseCode(value: any, workspace: any) {
-    const workspaceCode = deriveEntryCode(workspace) ?? "";
-    if (isUsableStarterCode(workspaceCode)) return workspaceCode;
-    if (isUsableStarterCode(value?.code)) return value.code;
-    if (isUsableStarterCode(value?.source)) return value.source;
-    return "";
-}
-
-function getSavedExerciseStdin(value: any, workspace: any) {
-    if (typeof workspace?.stdin === "string") return workspace.stdin;
-    if (typeof value?.codeStdin === "string") return value.codeStdin;
-    if (typeof value?.stdin === "string") return value.stdin;
-    return "";
-}
-
-function getSavedExerciseLanguage(value: any, workspace: any, fallback = "python") {
-    if (typeof workspace?.language === "string") return workspace.language;
-    if (typeof value?.codeLang === "string") return value.codeLang;
-    if (typeof value?.lang === "string") return value.lang;
-    if (typeof value?.language === "string") return value.language;
-    return fallback;
-}
-
-function looksLikeBetterExerciseRestoreCandidate(existing: any, incoming: any) {
-    if (!incoming) return false;
-    if (!existing) return true;
-
-    const existingUser = isUserSavedState(existing);
-    const incomingUser = isUserSavedState(incoming);
-    if (incomingUser !== existingUser) {
-        return incomingUser;
-    }
-
-    const existingSummary = summarizeSavedWorkspaceFiles(
-        existing.workspace ?? existing.codeWorkspace ?? existing.ideWorkspace ?? null,
-    );
-    const incomingSummary = summarizeSavedWorkspaceFiles(
-        incoming.workspace ?? incoming.codeWorkspace ?? incoming.ideWorkspace ?? null,
-    );
-
-    if (incomingSummary.fileCount !== existingSummary.fileCount) {
-        return incomingSummary.fileCount > existingSummary.fileCount;
-    }
-
-    if (incomingSummary.contentLength !== existingSummary.contentLength) {
-        return incomingSummary.contentLength > existingSummary.contentLength;
-    }
-
-    return numericUpdatedAt(incoming) >= numericUpdatedAt(existing);
 }
 
 type ReviewSaveStatus =

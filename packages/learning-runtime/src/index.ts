@@ -105,3 +105,19 @@ export {
   reviewSavedStateUpdatedAt,
   withoutReviewProgressSaveRevision,
 } from "./progressClientSync";
+
+export {
+  canonicalizeReviewExerciseStateKey,
+  getReviewSavedWorkspace,
+  getSavedReviewExerciseCode,
+  getSavedReviewExerciseLanguage,
+  getSavedReviewExerciseStdin,
+  hasSavedReviewExerciseContent,
+  hasSavedReviewExerciseEditorContent,
+  isReviewWorkspaceState,
+  isScopedReviewExerciseStateKey,
+  looksLikeBetterReviewExerciseRestoreCandidate,
+  reviewWorkspaceHasNonBlankCode,
+  savedReviewExerciseLooksLikeLearnerEditorWork,
+  summarizeReviewSavedWorkspaceFiles,
+} from "./workspaceRestore";

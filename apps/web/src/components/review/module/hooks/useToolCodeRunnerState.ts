@@ -1,5 +1,9 @@
 "use client";
 
+import {
+    canonicalizeReviewExerciseStateKey as canonicalizeExerciseStateKey,
+} from "@zoeskoul/learning-runtime";
+
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { WorkspaceStateV2 } from "@/components/ide/types";
 import type { WorkspaceLanguage, SqlDialect } from "@/lib/practice/types";
@@ -519,30 +523,6 @@ function resolveExerciseStoreKey(
     }
 
     return inputId ?? null;
-}
-
-function canonicalizeExerciseStateKey(exerciseKey: string | null | undefined) {
-    if (typeof exerciseKey !== "string") return null;
-
-    const raw = exerciseKey.trim();
-    if (!raw) return null;
-
-    const parts = raw.split(":").filter(Boolean);
-    if (parts.length < 6) return raw;
-
-    const [subjectSlug, moduleSlug, sectionSlug, topicId, cardId, ...exerciseParts] = parts;
-    if (!exerciseParts.length) return raw;
-
-    const normalizedTopicId = normalizeTopicProgressKey(topicId);
-
-    return [
-        subjectSlug,
-        moduleSlug,
-        sectionSlug,
-        normalizedTopicId,
-        cardId,
-        ...exerciseParts,
-    ].join(":");
 }
 
 function isExerciseToolKey(toolKey: string | null | undefined) {
