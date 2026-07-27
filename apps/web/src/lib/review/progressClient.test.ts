@@ -1,6 +1,11 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 
-import { fetchReviewProgressGET } from "./progressClient";
+import {
+  buildReviewProgressPayload,
+  fetchReviewProgressGET,
+  ReviewProgressClientError,
+  saveReviewProgressPUT,
+} from "./progressClient";
 
 describe("fetchReviewProgressGET", () => {
   afterEach(() => {
@@ -121,4 +126,171 @@ describe("fetchReviewProgressGET", () => {
     await expect(Promise.all([first, second])).resolves.toHaveLength(2);
     expect(fetchImpl).toHaveBeenCalledTimes(1);
   });
+  it("writes progress to the configured origin with credentials", async () => {
+    const fetchImpl = vi.fn(
+      async (
+        _input: RequestInfo | URL,
+        _init?: RequestInit,
+      ) =>
+        Response.json({
+          state: {
+            topics: {
+              introduction: {
+                completed: true,
+              },
+            },
+            activeTopicId: "introduction",
+          },
+          gamification: {
+            summary: {
+              level: 3,
+            },
+          },
+        }),
+    );
+
+    const payload = buildReviewProgressPayload({
+      subjectSlug: "python",
+      moduleSlug: "module-1",
+      locale: "en",
+      activeTopicId: "section.introduction",
+      state: {
+        topics: {},
+      },
+    });
+
+    const saved = await saveReviewProgressPUT({
+      payload,
+      endpoint:
+        "/api/tutoring-sessions/session-1/progress?workspaceView=mine",
+      apiOrigin: "https://zoeskoul.com",
+      fetchImpl,
+    });
+
+    expect(fetchImpl).toHaveBeenCalledTimes(1);
+    const [input, init] = fetchImpl.mock.calls[0]!;
+    const url = new URL(String(input));
+
+    expect(url.origin).toBe("https://zoeskoul.com");
+    expect(url.pathname).toBe(
+      "/api/tutoring-sessions/session-1/progress",
+    );
+    expect(url.searchParams.get("workspaceView")).toBe("mine");
+    expect(init?.method).toBe("PUT");
+    expect(init?.credentials).toBe("include");
+    expect(init?.cache).toBe("no-store");
+    expect(
+      new Headers(init?.headers).get("Content-Type"),
+    ).toBe("application/json");
+
+    expect(JSON.parse(String(init?.body))).toMatchObject({
+      subjectSlug: "python",
+      moduleSlug: "module-1",
+      locale: "en",
+      state: {
+        activeTopicId: "introduction",
+      },
+    });
+    expect(
+      saved.state.topics?.introduction?.completed,
+    ).toBe(true);
+    expect(saved.data?.gamification?.summary).toEqual({
+      level: 3,
+    });
+  });
+
+  it("surfaces stale revision details as a typed conflict", async () => {
+    const fetchImpl = vi.fn(
+      async (
+        _input: RequestInfo | URL,
+        _init?: RequestInit,
+      ) =>
+        Response.json(
+          {
+            ok: false,
+            ignored: true,
+            reason: "stale_revision",
+            incomingRevision: 49,
+            existingRevision: 50,
+          },
+          {
+            status: 409,
+          },
+        ),
+    );
+
+    const payload = buildReviewProgressPayload({
+      subjectSlug: "sql",
+      moduleSlug: "sql_module_12",
+      locale: "en",
+      state: {
+        topics: {},
+        __saveRevision: 49,
+      },
+    });
+
+    let captured: unknown;
+
+    try {
+      await saveReviewProgressPUT({
+        payload,
+        endpoint: "/api/review/progress",
+        apiOrigin: "https://zoeskoul.com",
+        fetchImpl,
+      });
+    } catch (error) {
+      captured = error;
+    }
+
+    expect(captured).toBeInstanceOf(
+      ReviewProgressClientError,
+    );
+    expect(captured).toMatchObject({
+      status: 409,
+      reason: "stale_revision",
+      incomingRevision: 49,
+      existingRevision: 50,
+    });
+  });
+
+  it("preserves tutoring conflict messages without inventing a reason", async () => {
+    const fetchImpl = vi.fn(
+      async (
+        _input: RequestInfo | URL,
+        _init?: RequestInit,
+      ) =>
+        Response.json(
+          {
+            error: "Progress changed; retry the save",
+          },
+          {
+            status: 409,
+          },
+        ),
+    );
+
+    const payload = buildReviewProgressPayload({
+      subjectSlug: "python",
+      moduleSlug: "module-1",
+      locale: "en",
+      state: {
+        topics: {},
+      },
+    });
+
+    await expect(
+      saveReviewProgressPUT({
+        payload,
+        endpoint:
+          "/api/tutoring-sessions/session-1/progress",
+        apiOrigin: "https://zoeskoul.com",
+        fetchImpl,
+      }),
+    ).rejects.toMatchObject({
+      status: 409,
+      message: "Progress changed; retry the save",
+      reason: undefined,
+    });
+  });
+
 });

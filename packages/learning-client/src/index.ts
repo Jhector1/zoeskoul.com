@@ -116,6 +116,8 @@ export {
   createReviewProgressClient,
   emptyReviewProgress,
   fetchReviewProgressGET,
+  ReviewProgressClientError,
+  saveReviewProgressPUT,
 } from "./reviewProgress";
 
 export type {
@@ -123,4 +125,7 @@ export type {
   ReviewProgressClientOptions,
   ReviewProgressFetchArgs,
   ReviewProgressPayload,
+  ReviewProgressSaveArgs,
+  ReviewProgressSaveResponseData,
+  ReviewProgressSaveResult,
 } from "./reviewProgress";

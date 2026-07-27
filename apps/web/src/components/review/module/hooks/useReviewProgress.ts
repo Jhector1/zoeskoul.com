@@ -6,6 +6,7 @@ import {
     emptyReviewProgress,
     fetchReviewProgressGET,
     buildReviewProgressPayload,
+    saveReviewProgressPUT,
 } from "@/lib/review/progressClient";
 import { stableJson } from "@/lib/client/persistence/stableJson";
 import { useFlushOnPageExit } from "@/lib/client/persistence/useFlushOnPageExit";
@@ -914,22 +915,33 @@ export function useReviewProgress(args: {
             const ac = options?.keepalive ? null : new AbortController();
             const timeout = ac ? window.setTimeout(() => ac.abort(), 15000) : null;
 
-            const putOnce = async (requestBody: string) => {
-                return fetch(endpoint, {
-                    method: "PUT",
-                    headers: { "Content-Type": "application/json" },
-                    body: requestBody,
+            const putOnce = async (
+                requestPayload: typeof payloadToSave,
+            ) => {
+                return saveReviewProgressPUT({
+                    payload: requestPayload,
+                    endpoint,
                     keepalive: options?.keepalive === true,
-                    cache: "no-store",
                     signal: ac?.signal,
                 });
             };
 
-            let res = await putOnce(body).finally(() => {
-                if (timeout != null) window.clearTimeout(timeout);
-            });
+            let saveResult: Awaited<
+                ReturnType<typeof saveReviewProgressPUT>
+            >;
 
-            if (res.status === 409 && !options?.keepalive) {
+            try {
+                saveResult = await putOnce(payloadToSave).finally(() => {
+                    if (timeout != null) window.clearTimeout(timeout);
+                });
+            } catch (error: any) {
+                if (
+                    Number(error?.status ?? 0) !== 409 ||
+                    options?.keepalive
+                ) {
+                    throw error;
+                }
+
                 const latestRemote = await fetchReviewProgressGET({
                     subjectSlug: payloadToSave.subjectSlug,
                     moduleSlug: payloadToSave.moduleSlug,
@@ -946,28 +958,18 @@ export function useReviewProgress(args: {
                     locale: payloadToSave.locale,
                     state: mergedState,
                     activeTopicId: normalizeTopicProgressKey(
-                        (payloadToSave.state as any).activeTopicId ?? activeTopicIdRef.current,
+                        (payloadToSave.state as any).activeTopicId ??
+                            activeTopicIdRef.current,
                     ),
                 }) as typeof payload;
                 body = stableJson(payloadToSave);
-                meaningfulBody = meaningfulBodyForPayload(payloadToSave);
-                res = await putOnce(body);
+                meaningfulBody =
+                    meaningfulBodyForPayload(payloadToSave);
+                saveResult = await putOnce(payloadToSave);
             }
 
-            if (!res.ok) {
-                const message = await res.text().catch(() => "");
-                if (res.status === 409) {
-                    const error = new Error(message || "Review progress conflict");
-                    (error as any).status = 409;
-                    throw error;
-                }
-                throw new Error(message || `Progress save failed: ${res.status}`);
-            }
-
-            const data = await res.json().catch(() => null);
-            const canonicalState = data?.state
-                ? normalizeProgressTopics(data.state as ReviewProgressState)
-                : (payloadToSave.state as ReviewProgressState);
+            const data = saveResult.data;
+            const canonicalState = saveResult.state;
             const canonicalPayload = buildReviewProgressPayload({
                 subjectSlug: payloadToSave.subjectSlug,
                 moduleSlug: payloadToSave.moduleSlug,
