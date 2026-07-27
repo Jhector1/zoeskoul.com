@@ -1,5 +1,4 @@
-import "katex/dist/katex.min.css";
-import "highlight.js/styles/github-dark.css";
+import "@zoeskoul/lesson-renderer/styles.css";
 import "../../globals.css";
 import type { Metadata, Viewport } from "next";
 import React from "react";

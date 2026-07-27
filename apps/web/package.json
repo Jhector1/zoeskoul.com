@@ -71,6 +71,7 @@
     "@zoeskoul/learning-client": "workspace:*",
     "@zoeskoul/learning-contracts": "workspace:*",
     "@zoeskoul/learning-runtime": "workspace:*",
+    "@zoeskoul/lesson-renderer": "workspace:*",
     "@zoeskoul/permissions": "workspace:*",
     "@zoeskoul/practice-checks": "workspace:*",
     "@zoeskoul/practice-contracts": "workspace:*",

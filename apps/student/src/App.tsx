@@ -1,3 +1,4 @@
+import "@zoeskoul/lesson-renderer/styles.css";
 import {
   getLocalAppOrigin,
 } from "@zoeskoul/app-config";

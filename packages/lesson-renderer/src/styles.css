@@ -1,0 +1,268 @@
+@import "katex/dist/katex.min.css";
+@import "highlight.js/styles/github-dark.css";
+
+.zoe-lesson-markdown {
+  --zoe-markdown-text: #42506a;
+  --zoe-markdown-heading: #172033;
+  --zoe-markdown-muted: #68758c;
+  --zoe-markdown-border: rgba(32, 51, 84, 0.15);
+  --zoe-markdown-soft: rgba(96, 70, 220, 0.08);
+  --zoe-markdown-accent: #6046dc;
+  color: var(--zoe-markdown-text);
+  font-size: 0.96rem;
+  line-height: 1.75;
+  min-width: 0;
+}
+
+.dark .zoe-lesson-markdown {
+  --zoe-markdown-text: #d8dfeb;
+  --zoe-markdown-heading: #f7f8fc;
+  --zoe-markdown-muted: #aab4c5;
+  --zoe-markdown-border: rgba(255, 255, 255, 0.14);
+  --zoe-markdown-soft: rgba(149, 128, 255, 0.13);
+  --zoe-markdown-accent: #b8a7ff;
+}
+
+.zoe-lesson-markdown.is-inline {
+  display: inline;
+}
+
+.zoe-lesson-markdown :where(h1, h2, h3, h4, h5, h6) {
+  color: var(--zoe-markdown-heading);
+  line-height: 1.25;
+  margin: 1.35em 0 0.55em;
+}
+
+.zoe-lesson-markdown :where(h1, h2, h3, h4, h5, h6):first-child {
+  margin-top: 0;
+}
+
+.zoe-lesson-markdown h1 {
+  font-size: 1.8rem;
+}
+
+.zoe-lesson-markdown h2 {
+  font-size: 1.45rem;
+}
+
+.zoe-lesson-markdown h3 {
+  font-size: 1.2rem;
+}
+
+.zoe-lesson-markdown :where(p, ul, ol, blockquote, table) {
+  margin: 0.85rem 0;
+}
+
+.zoe-lesson-markdown :where(ul, ol) {
+  padding-left: 1.5rem;
+}
+
+.zoe-lesson-markdown li + li {
+  margin-top: 0.3rem;
+}
+
+.zoe-lesson-markdown strong {
+  color: var(--zoe-markdown-heading);
+  font-weight: 750;
+}
+
+.zoe-lesson-markdown a {
+  color: var(--zoe-markdown-accent);
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.16em;
+}
+
+.zoe-lesson-markdown blockquote {
+  background: var(--zoe-markdown-soft);
+  border-left: 0.25rem solid var(--zoe-markdown-accent);
+  border-radius: 0 0.75rem 0.75rem 0;
+  color: var(--zoe-markdown-muted);
+  padding: 0.75rem 1rem;
+}
+
+.zoe-lesson-markdown table {
+  border-collapse: collapse;
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  width: max-content;
+}
+
+.zoe-lesson-markdown :where(th, td) {
+  border: 1px solid var(--zoe-markdown-border);
+  padding: 0.55rem 0.75rem;
+  text-align: left;
+}
+
+.zoe-lesson-markdown th {
+  background: var(--zoe-markdown-soft);
+  color: var(--zoe-markdown-heading);
+}
+
+.zoe-lesson-markdown :where(.katex-display) {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.35rem 0;
+}
+
+.zoe-inline-code {
+  background: var(--zoe-markdown-soft);
+  border: 1px solid var(--zoe-markdown-border);
+  border-radius: 0.4rem;
+  color: var(--zoe-markdown-heading);
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    "Liberation Mono",
+    monospace;
+  font-size: 0.88em;
+  padding: 0.12rem 0.35rem;
+}
+
+.zoe-code-frame {
+  background: #020817;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 0.9rem;
+  margin: 1rem 0;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.zoe-code-toolbar {
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  justify-content: space-between;
+  min-height: 2.65rem;
+  padding: 0.35rem 0.55rem 0.35rem 0.85rem;
+}
+
+.zoe-code-language {
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.zoe-code-copy {
+  align-items: center;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.55rem;
+  color: rgba(255, 255, 255, 0.76);
+  cursor: pointer;
+  display: inline-flex;
+  font: inherit;
+  font-size: 0.72rem;
+  font-weight: 750;
+  gap: 0.35rem;
+  padding: 0.38rem 0.55rem;
+}
+
+.zoe-code-copy:hover,
+.zoe-code-copy:focus-visible {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.zoe-code-copy svg {
+  height: 0.95rem;
+  width: 0.95rem;
+}
+
+.zoe-code-frame pre {
+  background: transparent;
+  border: 0;
+  color: white;
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    "Liberation Mono",
+    monospace;
+  font-size: 0.82rem;
+  line-height: 1.65;
+  margin: 0;
+  overflow-x: auto;
+  padding: 1rem;
+}
+
+.zoe-code-frame code,
+.zoe-code-frame code.hljs {
+  background: transparent;
+  display: block;
+  margin: 0;
+  min-width: 100%;
+  padding: 0;
+}
+
+.zoe-terminal-example {
+  background: #0a1020;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 0.9rem;
+  margin: 1rem 0;
+  overflow: hidden;
+}
+
+.zoe-terminal-example.is-accepted {
+  border-color: rgba(36, 163, 103, 0.55);
+}
+
+.zoe-terminal-example.is-error {
+  border-color: rgba(226, 84, 84, 0.55);
+}
+
+.zoe-terminal-example header {
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  padding: 0.7rem 0.9rem;
+}
+
+.zoe-terminal-example header span {
+  color: rgba(255, 255, 255, 0.58);
+  font-size: 0.75rem;
+}
+
+.zoe-terminal-example pre {
+  color: #e7edf7;
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    "Liberation Mono",
+    monospace;
+  font-size: 0.8rem;
+  line-height: 1.65;
+  margin: 0;
+  max-height: 18rem;
+  overflow: auto;
+  padding: 1rem;
+  white-space: pre-wrap;
+}
+
+.zoe-terminal-example .is-system {
+  color: #93a4bd;
+}
+
+.zoe-terminal-example .is-error {
+  color: #ff9d9d;
+  font-weight: 700;
+}
+
+.zoe-terminal-example .is-output {
+  color: #e7edf7;
+}

@@ -7,6 +7,8 @@ import {
   useLessonContent,
 } from "@zoeskoul/learning-client/react";
 import {
+  lazy,
+  Suspense,
   useEffect,
   useMemo,
   useState,
@@ -37,6 +39,38 @@ function errorMessage(error: unknown): string {
   return error instanceof Error
     ? error.message
     : "Saved progress could not be loaded.";
+}
+
+const LessonMarkdown = lazy(async () => {
+  const renderer = await import(
+    "@zoeskoul/lesson-renderer"
+  );
+
+  return {
+    default: renderer.LessonMarkdown,
+  };
+});
+
+function RenderedLessonMarkdown(props: {
+  content: string;
+}) {
+  return (
+    <Suspense
+      fallback={
+        <div
+          className="lesson-reading-content"
+          aria-busy="true"
+        >
+          Loading lesson content…
+        </div>
+      }
+    >
+      <LessonMarkdown
+        className="lesson-reading-content"
+        content={props.content}
+      />
+    </Suspense>
+  );
 }
 
 export function StudentLessonHost(props: {
@@ -304,9 +338,9 @@ export function StudentLessonHost(props: {
 
                         {card.type === "text" ? (
                           <>
-                            <div className="lesson-reading-content">
-                              {card.markdown}
-                            </div>
+                            <RenderedLessonMarkdown
+                              content={card.markdown}
+                            />
 
                             {card.runtimeRequired ? (
                               <div className="lesson-runtime-handoff">
@@ -335,9 +369,9 @@ export function StudentLessonHost(props: {
                             </div>
 
                             {card.captionMarkdown ? (
-                              <div className="lesson-reading-content">
-                                {card.captionMarkdown}
-                              </div>
+                              <RenderedLessonMarkdown
+                                content={card.captionMarkdown}
+                              />
                             ) : null}
                           </>
                         ) : (
