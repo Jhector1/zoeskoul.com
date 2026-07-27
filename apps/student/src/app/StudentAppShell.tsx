@@ -4,10 +4,13 @@ import {
   useState,
 } from "react";
 
+import { CourseOverviewView } from "../courses/CourseOverviewView";
+import { ModuleOverviewView } from "../courses/ModuleOverviewView";
 import { MyLearningView } from "../learning/MyLearningView";
 import {
+  activeStudentRouteId,
   navigateStudentApp,
-  resolveStudentRoute,
+  resolveStudentLocation,
   studentRoutes,
 } from "./studentRoutes";
 
@@ -62,12 +65,51 @@ export function StudentAppShell(props: {
     }
   }, []);
 
-  const route = resolveStudentRoute(pathname);
-  const heading = routeHeadings[route.id];
+  const location = resolveStudentLocation(pathname);
+  const activeRouteId = activeStudentRouteId(location);
+  const heading =
+    location.kind === "course"
+      ? {
+          eyebrow: "Course",
+          title: "Course overview",
+          description:
+            "Review modules and choose where to continue.",
+        }
+      : location.kind === "module"
+        ? {
+            eyebrow: "Module",
+            title: "Module outline",
+            description:
+              "Review sections and topics before opening the interactive lesson.",
+          }
+        : routeHeadings[location.route.id];
+
   const displayName =
     props.session.user.name ??
     props.session.user.email ??
     "Learner";
+
+  const content =
+    location.kind === "course" ? (
+      <CourseOverviewView
+        apiOrigin={props.apiOrigin}
+        websiteOrigin={props.websiteOrigin}
+        subjectSlug={location.subjectSlug}
+      />
+    ) : location.kind === "module" ? (
+      <ModuleOverviewView
+        apiOrigin={props.apiOrigin}
+        websiteOrigin={props.websiteOrigin}
+        subjectSlug={location.subjectSlug}
+        moduleSlug={location.moduleSlug}
+      />
+    ) : (
+      <MyLearningView
+        apiOrigin={props.apiOrigin}
+        websiteOrigin={props.websiteOrigin}
+        routeId={location.route.id}
+      />
+    );
 
   return (
     <div className="student-layout">
@@ -86,7 +128,7 @@ export function StudentAppShell(props: {
 
         <nav className="student-navigation" aria-label="Student navigation">
           {studentRoutes.map((item) => {
-            const active = item.id === route.id;
+            const active = item.id === activeRouteId;
 
             return (
               <a
@@ -136,11 +178,7 @@ export function StudentAppShell(props: {
           </div>
         </header>
 
-        <MyLearningView
-          apiOrigin={props.apiOrigin}
-          websiteOrigin={props.websiteOrigin}
-          routeId={route.id}
-        />
+        {content}
       </main>
     </div>
   );

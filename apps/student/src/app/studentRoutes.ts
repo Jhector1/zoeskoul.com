@@ -12,6 +12,21 @@ export type StudentRoute = {
   description: string;
 };
 
+export type StudentLocation =
+  | {
+      kind: "page";
+      route: StudentRoute;
+    }
+  | {
+      kind: "course";
+      subjectSlug: string;
+    }
+  | {
+      kind: "module";
+      subjectSlug: string;
+      moduleSlug: string;
+    };
+
 export const studentRoutes: readonly StudentRoute[] = [
   {
     id: "learning",
@@ -33,11 +48,69 @@ export const studentRoutes: readonly StudentRoute[] = [
   },
 ] as const;
 
-export function resolveStudentRoute(pathname: string): StudentRoute {
-  return (
-    studentRoutes.find((route) => pathname === route.href) ??
-    studentRoutes[0]
-  );
+function cleanPathSegments(pathname: string): string[] {
+  return pathname
+    .split("/")
+    .map((segment) => segment.trim())
+    .filter(Boolean)
+    .map((segment) => decodeURIComponent(segment));
+}
+
+export function resolveStudentLocation(
+  pathname: string,
+): StudentLocation {
+  const segments = cleanPathSegments(pathname);
+
+  if (
+    segments.length === 4 &&
+    segments[0] === "courses" &&
+    segments[2] === "modules"
+  ) {
+    return {
+      kind: "module",
+      subjectSlug: segments[1],
+      moduleSlug: segments[3],
+    };
+  }
+
+  if (
+    segments.length === 2 &&
+    segments[0] === "courses"
+  ) {
+    return {
+      kind: "course",
+      subjectSlug: segments[1],
+    };
+  }
+
+  const route =
+    studentRoutes.find(
+      (item) => pathname === item.href,
+    ) ?? studentRoutes[0];
+
+  return {
+    kind: "page",
+    route,
+  };
+}
+
+export function activeStudentRouteId(
+  location: StudentLocation,
+): StudentRouteId {
+  return location.kind === "page"
+    ? location.route.id
+    : "learning";
+}
+
+export function coursePath(subjectSlug: string): string {
+  return `/courses/${encodeURIComponent(subjectSlug)}`;
+}
+
+export function modulePath(
+  subjectSlug: string,
+  moduleSlug: string,
+): string {
+  return `${coursePath(subjectSlug)}/modules/${encodeURIComponent(moduleSlug)}`;
 }
 
 export function navigateStudentApp(

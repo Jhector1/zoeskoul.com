@@ -82,8 +82,90 @@ export type MyLearningResponse = {
   tutoringSessions: LearningTutoringSummary[];
 };
 
+export type LearningModuleAccess = {
+  ok: boolean;
+  paid: boolean;
+  reason: string;
+};
+
+export type LearningCourseModuleSummary = {
+  id: string;
+  slug: string;
+  title: string;
+  description: string | null;
+  order: number;
+  weekStart: number | null;
+  weekEnd: number | null;
+  sectionsCount: number;
+  topicsCount: number;
+  access: LearningModuleAccess;
+};
+
+export type LearningCourseOverviewResponse = {
+  subject: {
+    id: string;
+    slug: string;
+    title: string;
+    description: string | null;
+    imagePublicId: string | null;
+    imageAlt: string | null;
+  };
+  modules: LearningCourseModuleSummary[];
+};
+
+export type LearningModuleTopicSummary = {
+  slug: string;
+  title: string;
+  order: number;
+};
+
+export type LearningModuleSectionSummary = {
+  slug: string;
+  title: string;
+  description: string | null;
+  order: number;
+  topics: LearningModuleTopicSummary[];
+};
+
+export type LearningModuleOverviewResponse = {
+  subject: LearningCourseOverviewResponse["subject"];
+  module: {
+    id: string;
+    slug: string;
+    title: string;
+    description: string | null;
+    order: number;
+    weekStart: number | null;
+    weekEnd: number | null;
+    meta: {
+      estimatedMinutes: number | null;
+      prereqs: string[];
+      outcomes: string[];
+      why: string[];
+      videoUrl: string | null;
+    };
+  };
+  stats: {
+    sectionsCount: number;
+    topicsCount: number;
+  };
+  access: LearningModuleAccess;
+  sections: LearningModuleSectionSummary[];
+};
+
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null;
+}
+
+function isLearningModuleAccess(
+  value: unknown,
+): value is LearningModuleAccess {
+  return (
+    isRecord(value) &&
+    typeof value.ok === "boolean" &&
+    typeof value.paid === "boolean" &&
+    typeof value.reason === "string"
+  );
 }
 
 export function isMyLearningResponse(
@@ -114,6 +196,67 @@ export function isMyLearningResponse(
         isRecord(session) &&
         typeof session.id === "string" &&
         typeof session.title === "string",
+    )
+  );
+}
+
+export function isLearningCourseOverviewResponse(
+  value: unknown,
+): value is LearningCourseOverviewResponse {
+  if (!isRecord(value) || !isRecord(value.subject)) return false;
+  if (!Array.isArray(value.modules)) return false;
+
+  return (
+    typeof value.subject.id === "string" &&
+    typeof value.subject.slug === "string" &&
+    typeof value.subject.title === "string" &&
+    value.modules.every(
+      (module) =>
+        isRecord(module) &&
+        typeof module.id === "string" &&
+        typeof module.slug === "string" &&
+        typeof module.title === "string" &&
+        typeof module.sectionsCount === "number" &&
+        typeof module.topicsCount === "number" &&
+        isLearningModuleAccess(module.access),
+    )
+  );
+}
+
+export function isLearningModuleOverviewResponse(
+  value: unknown,
+): value is LearningModuleOverviewResponse {
+  if (
+    !isRecord(value) ||
+    !isRecord(value.subject) ||
+    !isRecord(value.module) ||
+    !isRecord(value.stats) ||
+    !Array.isArray(value.sections)
+  ) {
+    return false;
+  }
+
+  return (
+    typeof value.subject.id === "string" &&
+    typeof value.subject.slug === "string" &&
+    typeof value.module.id === "string" &&
+    typeof value.module.slug === "string" &&
+    typeof value.module.title === "string" &&
+    typeof value.stats.sectionsCount === "number" &&
+    typeof value.stats.topicsCount === "number" &&
+    isLearningModuleAccess(value.access) &&
+    value.sections.every(
+      (section) =>
+        isRecord(section) &&
+        typeof section.slug === "string" &&
+        typeof section.title === "string" &&
+        Array.isArray(section.topics) &&
+        section.topics.every(
+          (topic) =>
+            isRecord(topic) &&
+            typeof topic.slug === "string" &&
+            typeof topic.title === "string",
+        ),
     )
   );
 }

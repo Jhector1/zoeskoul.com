@@ -6,10 +6,12 @@ import {
 
 import {
   createLearningClient,
+  type LearningCourseOverviewResponse,
+  type LearningModuleOverviewResponse,
   type MyLearningResponse,
 } from "./index.js";
 
-export type MyLearningLoadState =
+export type AsyncLoadState<T> =
   | {
       status: "loading";
       data: null;
@@ -17,7 +19,7 @@ export type MyLearningLoadState =
     }
   | {
       status: "ready";
-      data: MyLearningResponse;
+      data: T;
       error: null;
     }
   | {
@@ -26,10 +28,19 @@ export type MyLearningLoadState =
       error: string;
     };
 
+function errorMessage(
+  error: unknown,
+  fallback: string,
+): string {
+  return error instanceof Error
+    ? error.message
+    : fallback;
+}
+
 export function useMyLearning(args: {
   apiOrigin: string;
   locale?: string;
-}): MyLearningLoadState {
+}): AsyncLoadState<MyLearningResponse> {
   const client = useMemo(
     () => createLearningClient({
       apiOrigin: args.apiOrigin,
@@ -37,7 +48,9 @@ export function useMyLearning(args: {
     [args.apiOrigin],
   );
 
-  const [state, setState] = useState<MyLearningLoadState>({
+  const [state, setState] = useState<
+    AsyncLoadState<MyLearningResponse>
+  >({
     status: "loading",
     data: null,
     error: null,
@@ -59,29 +72,148 @@ export function useMyLearning(args: {
       })
       .then((data) => {
         if (controller.signal.aborted) return;
-
-        setState({
-          status: "ready",
-          data,
-          error: null,
-        });
+        setState({ status: "ready", data, error: null });
       })
       .catch((error: unknown) => {
         if (controller.signal.aborted) return;
-
         setState({
           status: "error",
           data: null,
-          error:
-            error instanceof Error
-              ? error.message
-              : "My Learning could not be loaded.",
+          error: errorMessage(
+            error,
+            "My Learning could not be loaded.",
+          ),
         });
       });
 
     return () => controller.abort();
   }, [
     args.locale,
+    client,
+  ]);
+
+  return state;
+}
+
+export function useCourseOverview(args: {
+  apiOrigin: string;
+  subjectSlug: string;
+  locale?: string;
+}): AsyncLoadState<LearningCourseOverviewResponse> {
+  const client = useMemo(
+    () => createLearningClient({
+      apiOrigin: args.apiOrigin,
+    }),
+    [args.apiOrigin],
+  );
+
+  const [state, setState] = useState<
+    AsyncLoadState<LearningCourseOverviewResponse>
+  >({
+    status: "loading",
+    data: null,
+    error: null,
+  });
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    setState({
+      status: "loading",
+      data: null,
+      error: null,
+    });
+
+    void client
+      .fetchCourseOverview({
+        subjectSlug: args.subjectSlug,
+        locale: args.locale,
+        signal: controller.signal,
+      })
+      .then((data) => {
+        if (controller.signal.aborted) return;
+        setState({ status: "ready", data, error: null });
+      })
+      .catch((error: unknown) => {
+        if (controller.signal.aborted) return;
+        setState({
+          status: "error",
+          data: null,
+          error: errorMessage(
+            error,
+            "The course overview could not be loaded.",
+          ),
+        });
+      });
+
+    return () => controller.abort();
+  }, [
+    args.locale,
+    args.subjectSlug,
+    client,
+  ]);
+
+  return state;
+}
+
+export function useModuleOverview(args: {
+  apiOrigin: string;
+  subjectSlug: string;
+  moduleSlug: string;
+  locale?: string;
+}): AsyncLoadState<LearningModuleOverviewResponse> {
+  const client = useMemo(
+    () => createLearningClient({
+      apiOrigin: args.apiOrigin,
+    }),
+    [args.apiOrigin],
+  );
+
+  const [state, setState] = useState<
+    AsyncLoadState<LearningModuleOverviewResponse>
+  >({
+    status: "loading",
+    data: null,
+    error: null,
+  });
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    setState({
+      status: "loading",
+      data: null,
+      error: null,
+    });
+
+    void client
+      .fetchModuleOverview({
+        subjectSlug: args.subjectSlug,
+        moduleSlug: args.moduleSlug,
+        locale: args.locale,
+        signal: controller.signal,
+      })
+      .then((data) => {
+        if (controller.signal.aborted) return;
+        setState({ status: "ready", data, error: null });
+      })
+      .catch((error: unknown) => {
+        if (controller.signal.aborted) return;
+        setState({
+          status: "error",
+          data: null,
+          error: errorMessage(
+            error,
+            "The module overview could not be loaded.",
+          ),
+        });
+      });
+
+    return () => controller.abort();
+  }, [
+    args.locale,
+    args.moduleSlug,
+    args.subjectSlug,
     client,
   ]);
 

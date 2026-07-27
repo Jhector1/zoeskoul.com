@@ -1,5 +1,9 @@
 import {
+  isLearningCourseOverviewResponse,
+  isLearningModuleOverviewResponse,
   isMyLearningResponse,
+  type LearningCourseOverviewResponse,
+  type LearningModuleOverviewResponse,
   type MyLearningResponse,
 } from "@zoeskoul/learning-contracts";
 import {
@@ -9,7 +13,12 @@ import {
 
 export type {
   LearningAssignmentSummary,
+  LearningCourseModuleSummary,
+  LearningCourseOverviewResponse,
   LearningCourseSummary,
+  LearningModuleOverviewResponse,
+  LearningModuleSectionSummary,
+  LearningModuleTopicSummary,
   LearningTutoringSummary,
   MyLearningResponse,
 } from "@zoeskoul/learning-contracts";
@@ -18,6 +27,10 @@ export type LearningClientOptions = {
   apiOrigin: string;
   fetchImpl?: ApiClientOptions["fetchImpl"];
 };
+
+function localeQuery(locale: string | undefined): string {
+  return encodeURIComponent(locale?.trim() || "en");
+}
 
 export function createLearningClient(
   options: LearningClientOptions,
@@ -32,9 +45,8 @@ export function createLearningClient(
       locale?: string;
       signal?: AbortSignal;
     }): Promise<MyLearningResponse> {
-      const locale = args?.locale?.trim() || "en";
       const response = await api.request<unknown>(
-        `/api/student/my-learning?locale=${encodeURIComponent(locale)}`,
+        `/api/student/my-learning?locale=${localeQuery(args?.locale)}`,
         {
           method: "GET",
           cache: "no-store",
@@ -44,6 +56,49 @@ export function createLearningClient(
 
       if (!isMyLearningResponse(response)) {
         throw new Error("The My Learning response was invalid.");
+      }
+
+      return response;
+    },
+
+    async fetchCourseOverview(args: {
+      subjectSlug: string;
+      locale?: string;
+      signal?: AbortSignal;
+    }): Promise<LearningCourseOverviewResponse> {
+      const response = await api.request<unknown>(
+        `/api/student/courses/${encodeURIComponent(args.subjectSlug)}?locale=${localeQuery(args.locale)}`,
+        {
+          method: "GET",
+          cache: "no-store",
+          signal: args.signal,
+        },
+      );
+
+      if (!isLearningCourseOverviewResponse(response)) {
+        throw new Error("The course overview response was invalid.");
+      }
+
+      return response;
+    },
+
+    async fetchModuleOverview(args: {
+      subjectSlug: string;
+      moduleSlug: string;
+      locale?: string;
+      signal?: AbortSignal;
+    }): Promise<LearningModuleOverviewResponse> {
+      const response = await api.request<unknown>(
+        `/api/student/courses/${encodeURIComponent(args.subjectSlug)}/modules/${encodeURIComponent(args.moduleSlug)}?locale=${localeQuery(args.locale)}`,
+        {
+          method: "GET",
+          cache: "no-store",
+          signal: args.signal,
+        },
+      );
+
+      if (!isLearningModuleOverviewResponse(response)) {
+        throw new Error("The module overview response was invalid.");
       }
 
       return response;

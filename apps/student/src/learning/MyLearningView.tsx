@@ -5,7 +5,11 @@ import type {
 } from "@zoeskoul/learning-client";
 import { useMyLearning } from "@zoeskoul/learning-client/react";
 
-import type { StudentRouteId } from "../app/studentRoutes";
+import {
+  coursePath,
+  navigateStudentApp,
+  type StudentRouteId,
+} from "../app/studentRoutes";
 
 function websiteHref(
   websiteOrigin: string,
@@ -26,12 +30,8 @@ function formatDate(value: string | null): string | null {
 
 function CourseCard(props: {
   course: LearningCourseSummary;
-  websiteOrigin: string;
 }) {
-  const href = websiteHref(
-    props.websiteOrigin,
-    `/en/subjects/${encodeURIComponent(props.course.slug)}/modules`,
-  );
+  const href = coursePath(props.course.slug);
 
   return (
     <article className="learning-card">
@@ -44,7 +44,11 @@ function CourseCard(props: {
         </span>
         <h3>{props.course.title}</h3>
         <p>{props.course.description}</p>
-        <a href={href} className="learning-card-action">
+        <a
+          href={href}
+          className="learning-card-action"
+          onClick={(event) => navigateStudentApp(event, href)}
+        >
           Continue course
         </a>
       </div>
@@ -297,7 +301,6 @@ export function MyLearningView(props: {
               <CourseCard
                 key={course.subjectId}
                 course={course}
-                websiteOrigin={props.websiteOrigin}
               />
             ))}
           </div>

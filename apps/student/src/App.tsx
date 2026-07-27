@@ -7,6 +7,7 @@ import { StudentAppShell } from "./app/StudentAppShell";
 import "./shell.css";
 import "./learning/learning.css";
 import "./learning/shell-overrides.css";
+import "./courses/course-reader.css";
 
 export function App() {
   const apiOrigin =
