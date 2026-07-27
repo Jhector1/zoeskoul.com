@@ -83,3 +83,16 @@ export function createEmptyReviewProgress():
     moduleCompletedAt: undefined,
   };
 }
+
+export {
+  getTopicProgressState,
+  mergeTopicProgressStates,
+  normalizeProgressTopics,
+  normalizeTopicProgressKey,
+} from "./progressNormalization";
+
+export {
+  getReviewProgressSaveRevision,
+  mergeReviewProgressForSave,
+  reviewProgressStateBytes,
+} from "./progressSaveMerge";
