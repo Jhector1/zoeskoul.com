@@ -5,6 +5,8 @@ import {
 import { StudentAccessGate } from "./app/StudentAccessGate";
 import { StudentAppShell } from "./app/StudentAppShell";
 import "./shell.css";
+import "./learning/learning.css";
+import "./learning/shell-overrides.css";
 
 export function App() {
   const apiOrigin =
@@ -21,7 +23,11 @@ export function App() {
       websiteOrigin={websiteOrigin}
     >
       {(session) => (
-        <StudentAppShell session={session} />
+        <StudentAppShell
+          apiOrigin={apiOrigin}
+          websiteOrigin={websiteOrigin}
+          session={session}
+        />
       )}
     </StudentAccessGate>
   );

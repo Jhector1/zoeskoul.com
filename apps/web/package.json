@@ -68,6 +68,7 @@
     "@zoeskoul/curriculum-profiles": "workspace:*",
     "@zoeskoul/curriculum-runtime": "workspace:*",
     "@zoeskoul/db": "workspace:*",
+    "@zoeskoul/learning-contracts": "workspace:*",
     "@zoeskoul/permissions": "workspace:*",
     "@zoeskoul/practice-checks": "workspace:*",
     "@zoeskoul/practice-contracts": "workspace:*",

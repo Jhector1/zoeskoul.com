@@ -148,6 +148,9 @@ importers:
       '@zoeskoul/auth-client':
         specifier: workspace:*
         version: link:../../packages/auth-client
+      '@zoeskoul/learning-client':
+        specifier: workspace:*
+        version: link:../../packages/learning-client
       react:
         specifier: 19.2.3
         version: 19.2.3
@@ -249,6 +252,9 @@ importers:
       '@zoeskoul/db':
         specifier: workspace:*
         version: link:../../packages/db
+      '@zoeskoul/learning-contracts':
+        specifier: workspace:*
+        version: link:../../packages/learning-contracts
       '@zoeskoul/permissions':
         specifier: workspace:*
         version: link:../../packages/permissions
@@ -583,6 +589,24 @@ importers:
       typescript:
         specifier: latest
         version: 6.0.3
+
+  packages/learning-client:
+    dependencies:
+      '@zoeskoul/api-client':
+        specifier: workspace:*
+        version: link:../api-client
+      '@zoeskoul/learning-contracts':
+        specifier: workspace:*
+        version: link:../learning-contracts
+      react:
+        specifier: '>=18.0.0'
+        version: 19.2.3
+    devDependencies:
+      '@types/react':
+        specifier: ^19.0.0
+        version: 19.2.14
+
+  packages/learning-contracts: {}
 
   packages/permissions: {}
 

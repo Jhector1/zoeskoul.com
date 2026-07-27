@@ -4,6 +4,7 @@ import {
   useState,
 } from "react";
 
+import { MyLearningView } from "../learning/MyLearningView";
 import {
   navigateStudentApp,
   resolveStudentRoute,
@@ -15,40 +16,30 @@ type AuthenticatedSession = Extract<
   { authenticated: true }
 >;
 
-function routeContent(routeId: string) {
-  if (routeId === "assignments") {
-    return {
-      eyebrow: "Assignments",
-      title: "Your assigned learning",
-      body:
-        "Course assignments, invitation status, due dates, and progress will move into this application next.",
-      action:
-        "Assignment migration is the next data-backed screen after My Learning.",
-    };
-  }
-
-  if (routeId === "tutoring") {
-    return {
-      eyebrow: "Tutoring",
-      title: "Your tutoring sessions",
-      body:
-        "Upcoming sessions, invitations, and saved tutoring workspaces will be available here.",
-      action:
-        "Live workspace migration remains separate from the initial course reader.",
-    };
-  }
-
-  return {
+const routeHeadings = {
+  learning: {
     eyebrow: "My Learning",
-    title: "Welcome back to your learning space",
-    body:
-      "This becomes the home for enrolled courses, teacher-assigned courses, recent progress, and recommended next steps.",
-    action:
-      "The next implementation will connect this shell to the existing My Learning API boundary.",
-  };
-}
+    title: "Your learning",
+    description:
+      "Continue courses, open assigned learning, and return to tutoring.",
+  },
+  assignments: {
+    eyebrow: "Assignments",
+    title: "Assigned learning",
+    description:
+      "Courses shared by a teacher, tutor, or learning group.",
+  },
+  tutoring: {
+    eyebrow: "Tutoring",
+    title: "Tutoring sessions",
+    description:
+      "Join active sessions and reopen work shared by your tutor.",
+  },
+} as const;
 
 export function StudentAppShell(props: {
+  apiOrigin: string;
+  websiteOrigin: string;
   session: AuthenticatedSession;
 }) {
   const [pathname, setPathname] = useState(
@@ -72,7 +63,7 @@ export function StudentAppShell(props: {
   }, []);
 
   const route = resolveStudentRoute(pathname);
-  const content = routeContent(route.id);
+  const heading = routeHeadings[route.id];
   const displayName =
     props.session.user.name ??
     props.session.user.email ??
@@ -135,51 +126,21 @@ export function StudentAppShell(props: {
       </aside>
 
       <main className="student-main">
-        <header className="student-topbar">
+        <header className="student-topbar student-real-topbar">
           <div>
-            <p>{content.eyebrow}</p>
-            <h1>{content.title}</h1>
+            <p>{heading.eyebrow}</p>
+            <h1>{heading.title}</h1>
+            <span className="student-page-description">
+              {heading.description}
+            </span>
           </div>
-
-          <span className="student-session-pill">
-            Database access verified
-          </span>
         </header>
 
-        <section className="student-welcome-panel">
-          <div>
-            <p className="student-panel-eyebrow">
-              Student application migration
-            </p>
-            <h2>{content.title}</h2>
-            <p>{content.body}</p>
-          </div>
-
-          <div className="student-next-card">
-            <span>Next boundary</span>
-            <strong>{content.action}</strong>
-          </div>
-        </section>
-
-        <section className="student-grid" aria-label="Student overview">
-          <article>
-            <span>Courses in progress</span>
-            <strong>—</strong>
-            <p>Connected data arrives with the My Learning endpoint.</p>
-          </article>
-
-          <article>
-            <span>Open assignments</span>
-            <strong>—</strong>
-            <p>Assigned-course access continues to bypass billing.</p>
-          </article>
-
-          <article>
-            <span>Upcoming tutoring</span>
-            <strong>—</strong>
-            <p>Session invitations and schedules will be loaded here.</p>
-          </article>
-        </section>
+        <MyLearningView
+          apiOrigin={props.apiOrigin}
+          websiteOrigin={props.websiteOrigin}
+          routeId={route.id}
+        />
       </main>
     </div>
   );
