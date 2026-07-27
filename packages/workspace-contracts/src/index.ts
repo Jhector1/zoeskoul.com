@@ -1,3 +1,5 @@
+import type { WorkspaceLanguage } from "@zoeskoul/curriculum-contracts";
+
 export const REVIEW_WORKSPACE_VIEWS = [
   "master",
   "reference",
@@ -67,6 +69,52 @@ export function resolveTutoringReviewWorkspaceCapabilities(
   };
 }
 
+
+export type NodeId = string;
+
+export type FolderNode = {
+  id: NodeId;
+  kind: "folder";
+  name: string;
+  parentId: NodeId | null;
+  createdAt: number;
+  updatedAt: number;
+};
+
+export type BinaryFileContent = {
+  encoding: "base64";
+  data: string;
+  mimeType: string;
+  sizeBytes: number;
+  checksum?: string;
+};
+
+export type FileNode = {
+  id: NodeId;
+  kind: "file";
+  name: string;
+  parentId: NodeId | null;
+  /** UTF-8 content for Monaco-editable text files. Empty for binary files. */
+  content: string;
+  /** Binary bytes stay outside Monaco and are rendered by a dedicated viewer. */
+  binary?: BinaryFileContent;
+  createdAt: number;
+  updatedAt: number;
+};
+
+export type FSNode = FolderNode | FileNode;
+
+export type WorkspaceStateV2 = {
+  version: 2;
+  language: WorkspaceLanguage;
+  nodes: FSNode[];
+  openTabs: NodeId[];
+  activeFileId: NodeId;
+  entryFileId: NodeId;
+  stdin: string;
+  expanded: NodeId[];
+  leftPct: number;
+};
 
 /**
  * Shared timing and ordering rules for every persisted learning workspace.
