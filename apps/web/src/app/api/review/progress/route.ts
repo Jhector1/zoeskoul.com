@@ -105,7 +105,7 @@ export async function GET(req: Request) {
     });
 
     if (!resolved.ok) {
-        return progressJsonWithGuestCookie(req, 
+        return progressJsonWithGuestCookie(req,
             {
                 message: resolved.message,
                 detail: resolved.detail,
@@ -130,7 +130,7 @@ export async function GET(req: Request) {
 
     const state = (row?.state ?? null) as ReviewProgressState | null;
 
-    return progressJsonWithGuestCookie(req, 
+    return progressJsonWithGuestCookie(req,
         {
             progress: state,
         },
@@ -153,7 +153,7 @@ export async function PUT(req: Request) {
     }
 
     if (exceedsContentLength(req, REVIEW_PROGRESS_LIMITS.maxPayloadBytes)) {
-        return progressJsonResponse(req, 
+        return progressJsonResponse(req,
             {
                 message: `Payload exceeds the ${REVIEW_PROGRESS_LIMITS.maxPayloadBytes} byte limit.`,
             },
@@ -168,7 +168,7 @@ export async function PUT(req: Request) {
 
     const parsed = ReviewProgressWriteSchema.safeParse(body);
     if (!parsed.success) {
-        return progressJsonResponse(req, 
+        return progressJsonResponse(req,
             {
                 message: "Invalid body.",
                 issues: parsed.error.issues,
@@ -188,7 +188,7 @@ export async function PUT(req: Request) {
     });
 
     if (!resolved.ok) {
-        return progressJsonWithGuestCookie(req, 
+        return progressJsonWithGuestCookie(req,
             {
                 message: resolved.message,
                 detail: resolved.detail,
@@ -209,7 +209,7 @@ export async function PUT(req: Request) {
         });
 
         if (!rl.ok) {
-            const res = progressJsonWithGuestCookie(req, 
+            const res = progressJsonWithGuestCookie(req,
                 {
                     message: "Too many requests.",
                 },
@@ -221,7 +221,7 @@ export async function PUT(req: Request) {
             return res;
         }
     } catch {
-        return progressJsonWithGuestCookie(req, 
+        return progressJsonWithGuestCookie(req,
             {
                 message: "Service unavailable.",
             },
@@ -262,7 +262,7 @@ export async function PUT(req: Request) {
             existingBytes: reviewProgressStateBytes(previousState),
         });
 
-        return progressJsonWithGuestCookie(req, 
+        return progressJsonWithGuestCookie(req,
             {
                 ok: false,
                 ignored: true,
@@ -311,7 +311,7 @@ export async function PUT(req: Request) {
             });
 
             if (updated.count !== 1) {
-                return progressJsonWithGuestCookie(req, 
+                return progressJsonWithGuestCookie(req,
                     {
                         ok: false,
                         ignored: true,
@@ -335,7 +335,7 @@ export async function PUT(req: Request) {
         if (
             String((error as { code?: unknown } | null)?.code ?? "") === "P2002"
         ) {
-            return progressJsonWithGuestCookie(req, 
+            return progressJsonWithGuestCookie(req,
                 {
                     ok: false,
                     ignored: true,
@@ -368,7 +368,7 @@ export async function PUT(req: Request) {
         });
     }
 
-    return progressJsonWithGuestCookie(req, 
+    return progressJsonWithGuestCookie(req,
         {
             ok: true,
             saved,
@@ -408,7 +408,7 @@ export async function DELETE(req: Request) {
     });
 
     if (!resolved.ok) {
-        return progressJsonWithGuestCookie(req, 
+        return progressJsonWithGuestCookie(req,
             {
                 message: resolved.message,
                 detail: resolved.detail,
@@ -441,7 +441,7 @@ export async function DELETE(req: Request) {
         }),
     ]);
 
-    return progressJsonWithGuestCookie(req, 
+    return progressJsonWithGuestCookie(req,
         {
             ok: true,
         },
