@@ -14,7 +14,8 @@
   },
   "dependencies": {
     "@zoeskoul/api-client": "workspace:*",
-    "@zoeskoul/learning-contracts": "workspace:*"
+    "@zoeskoul/learning-contracts": "workspace:*",
+    "@zoeskoul/learning-runtime": "workspace:*"
   },
   "peerDependencies": {
     "react": ">=18.0.0"

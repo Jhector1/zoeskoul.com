@@ -109,3 +109,18 @@ export function createLearningClient(
 export type LearningClient = ReturnType<
   typeof createLearningClient
 >;
+
+export {
+  buildReviewProgressPayload,
+  completedTopicKeysFromProgress,
+  createReviewProgressClient,
+  emptyReviewProgress,
+  fetchReviewProgressGET,
+} from "./reviewProgress";
+
+export type {
+  ReviewProgressClient,
+  ReviewProgressClientOptions,
+  ReviewProgressFetchArgs,
+  ReviewProgressPayload,
+} from "./reviewProgress";

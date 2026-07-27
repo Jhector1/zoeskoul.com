@@ -252,6 +252,9 @@ importers:
       '@zoeskoul/db':
         specifier: workspace:*
         version: link:../../packages/db
+      '@zoeskoul/learning-client':
+        specifier: workspace:*
+        version: link:../../packages/learning-client
       '@zoeskoul/learning-contracts':
         specifier: workspace:*
         version: link:../../packages/learning-contracts
@@ -604,6 +607,9 @@ importers:
       '@zoeskoul/learning-contracts':
         specifier: workspace:*
         version: link:../learning-contracts
+      '@zoeskoul/learning-runtime':
+        specifier: workspace:*
+        version: link:../learning-runtime
       react:
         specifier: '>=18.0.0'
         version: 19.2.3
