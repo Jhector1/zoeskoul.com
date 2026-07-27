@@ -145,6 +145,9 @@ importers:
       '@zoeskoul/app-config':
         specifier: workspace:*
         version: link:../../packages/app-config
+      '@zoeskoul/auth-client':
+        specifier: workspace:*
+        version: link:../../packages/auth-client
       react:
         specifier: 19.2.3
         version: 19.2.3
@@ -170,6 +173,9 @@ importers:
       '@zoeskoul/app-config':
         specifier: workspace:*
         version: link:../../packages/app-config
+      '@zoeskoul/auth-client':
+        specifier: workspace:*
+        version: link:../../packages/auth-client
       react:
         specifier: 19.2.3
         version: 19.2.3
@@ -222,6 +228,12 @@ importers:
       '@upstash/redis':
         specifier: ^1.36.3
         version: 1.37.0
+      '@zoeskoul/api-contracts':
+        specifier: workspace:*
+        version: link:../../packages/api-contracts
+      '@zoeskoul/app-config':
+        specifier: workspace:*
+        version: link:../../packages/app-config
       '@zoeskoul/code-contracts':
         specifier: workspace:*
         version: link:../../packages/code-contracts
@@ -237,6 +249,9 @@ importers:
       '@zoeskoul/db':
         specifier: workspace:*
         version: link:../../packages/db
+      '@zoeskoul/permissions':
+        specifier: workspace:*
+        version: link:../../packages/permissions
       '@zoeskoul/practice-checks':
         specifier: workspace:*
         version: link:../../packages/practice-checks
@@ -407,7 +422,31 @@ importers:
         specifier: ^5
         version: 5.9.3
 
+  packages/api-client: {}
+
+  packages/api-contracts:
+    dependencies:
+      '@zoeskoul/permissions':
+        specifier: workspace:*
+        version: link:../permissions
+
   packages/app-config: {}
+
+  packages/auth-client:
+    dependencies:
+      '@zoeskoul/api-client':
+        specifier: workspace:*
+        version: link:../api-client
+      '@zoeskoul/api-contracts':
+        specifier: workspace:*
+        version: link:../api-contracts
+      react:
+        specifier: '>=18.0.0'
+        version: 19.2.3
+    devDependencies:
+      '@types/react':
+        specifier: ^19.0.0
+        version: 19.2.14
 
   packages/code-contracts:
     dependencies:
@@ -544,6 +583,8 @@ importers:
       typescript:
         specifier: latest
         version: 6.0.3
+
+  packages/permissions: {}
 
   packages/practice-checks:
     dependencies:
