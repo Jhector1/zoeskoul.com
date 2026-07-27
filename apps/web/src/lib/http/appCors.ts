@@ -4,7 +4,7 @@ import {
   getProductionAppOrigin,
 } from "@zoeskoul/app-config";
 
-const ALLOWED_METHODS = "GET, OPTIONS";
+const ALLOWED_METHODS = "GET, POST, PUT, DELETE, OPTIONS";
 const ALLOWED_HEADERS = "Accept, Content-Type";
 
 function requestOrigin(request: Request): string {
