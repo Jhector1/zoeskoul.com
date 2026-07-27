@@ -7,6 +7,7 @@ import {
 import {
   createLearningClient,
   type LearningCourseOverviewResponse,
+  type LearningLessonContentResponse,
   type LearningModuleOverviewResponse,
   type MyLearningResponse,
 } from "./index.js";
@@ -205,6 +206,70 @@ export function useModuleOverview(args: {
           error: errorMessage(
             error,
             "The module overview could not be loaded.",
+          ),
+        });
+      });
+
+    return () => controller.abort();
+  }, [
+    args.locale,
+    args.moduleSlug,
+    args.subjectSlug,
+    client,
+  ]);
+
+  return state;
+}
+
+export function useLessonContent(args: {
+  apiOrigin: string;
+  subjectSlug: string;
+  moduleSlug: string;
+  locale?: string;
+}): AsyncLoadState<LearningLessonContentResponse> {
+  const client = useMemo(
+    () => createLearningClient({
+      apiOrigin: args.apiOrigin,
+    }),
+    [args.apiOrigin],
+  );
+
+  const [state, setState] = useState<
+    AsyncLoadState<LearningLessonContentResponse>
+  >({
+    status: "loading",
+    data: null,
+    error: null,
+  });
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    setState({
+      status: "loading",
+      data: null,
+      error: null,
+    });
+
+    void client
+      .fetchLessonContent({
+        subjectSlug: args.subjectSlug,
+        moduleSlug: args.moduleSlug,
+        locale: args.locale,
+        signal: controller.signal,
+      })
+      .then((data) => {
+        if (controller.signal.aborted) return;
+        setState({ status: "ready", data, error: null });
+      })
+      .catch((error: unknown) => {
+        if (controller.signal.aborted) return;
+        setState({
+          status: "error",
+          data: null,
+          error: errorMessage(
+            error,
+            "The lesson content could not be loaded.",
           ),
         });
       });

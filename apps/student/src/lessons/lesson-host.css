@@ -177,3 +177,64 @@
     flex-direction: column;
   }
 }
+
+.lesson-card-stack {
+  display: grid;
+  gap: 1rem;
+}
+
+.lesson-content-card {
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(32, 51, 84, 0.13);
+  border-radius: 1.25rem;
+  padding: 1.25rem;
+}
+
+.lesson-content-card h4 {
+  color: #172033;
+  font-size: 1.08rem;
+  margin: 0 0 0.85rem;
+}
+
+.lesson-reading-content {
+  color: #536078;
+  line-height: 1.75;
+  white-space: pre-wrap;
+}
+
+.lesson-video-frame {
+  aspect-ratio: 16 / 9;
+  background: #111827;
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.lesson-video-frame iframe {
+  border: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.lesson-runtime-handoff {
+  align-items: center;
+  border-top: 1px solid rgba(32, 51, 84, 0.1);
+  color: #69758b;
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  margin-top: 1rem;
+  padding-top: 1rem;
+}
+
+.lesson-runtime-handoff a {
+  color: #6046dc;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .lesson-runtime-handoff {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}

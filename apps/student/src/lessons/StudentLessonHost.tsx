@@ -1,8 +1,10 @@
 import {
+  completedTopicKeysFromProgress,
   fetchReviewProgressGET,
+  type LearningLessonCard,
 } from "@zoeskoul/learning-client";
 import {
-  useModuleOverview,
+  useLessonContent,
 } from "@zoeskoul/learning-client/react";
 import {
   useEffect,
@@ -43,7 +45,7 @@ export function StudentLessonHost(props: {
   subjectSlug: string;
   moduleSlug: string;
 }) {
-  const moduleState = useModuleOverview({
+  const lessonState = useLessonContent({
     apiOrigin: props.apiOrigin,
     subjectSlug: props.subjectSlug,
     moduleSlug: props.moduleSlug,
@@ -98,11 +100,11 @@ export function StudentLessonHost(props: {
   ]);
 
   const topics = useMemo(() => {
-    if (moduleState.status !== "ready") {
+    if (lessonState.status !== "ready") {
       return [];
     }
 
-    return moduleState.data.sections.flatMap(
+    return lessonState.data.sections.flatMap(
       (section) =>
         section.topics.map((topic) => ({
           ...topic,
@@ -110,7 +112,7 @@ export function StudentLessonHost(props: {
           sectionTitle: section.title,
         })),
     );
-  }, [moduleState]);
+  }, [lessonState]);
 
   const activeTopic =
     topics.find(
@@ -135,7 +137,7 @@ export function StudentLessonHost(props: {
   );
 
   if (
-    moduleState.status === "loading" ||
+    lessonState.status === "loading" ||
     progressState.status === "loading"
   ) {
     return (
@@ -155,11 +157,11 @@ export function StudentLessonHost(props: {
     );
   }
 
-  if (moduleState.status === "error") {
+  if (lessonState.status === "error") {
     return (
       <section className="lesson-host-state">
         <strong>Lesson unavailable</strong>
-        <p>{moduleState.error}</p>
+        <p>{lessonState.error}</p>
         <a
           className="course-reader-link"
           href={backHref}
@@ -177,6 +179,13 @@ export function StudentLessonHost(props: {
     progressState.status === "ready"
       ? progressState.progress
       : null;
+  const completedTopicKeys = useMemo(
+    () =>
+      completedTopicKeysFromProgress(
+        progress,
+      ),
+    [progress],
+  );
   const currentRuntimeHref =
     `${props.websiteOrigin}/en/subjects/` +
     `${encodeURIComponent(props.subjectSlug)}/modules/` +
@@ -197,7 +206,7 @@ export function StudentLessonHost(props: {
           Module outline
         </a>
         <span>/</span>
-        <span>{moduleState.data.module.title}</span>
+        <span>{lessonState.data.module.title}</span>
       </nav>
 
       <header className="lesson-host-header">
@@ -205,10 +214,10 @@ export function StudentLessonHost(props: {
           <span className="course-reader-kicker">
             Vite lesson host
           </span>
-          <h2>{moduleState.data.module.title}</h2>
-          {moduleState.data.module.description ? (
+          <h2>{lessonState.data.module.title}</h2>
+          {lessonState.data.module.description ? (
             <p>
-              {moduleState.data.module.description}
+              {lessonState.data.module.description}
             </p>
           ) : null}
         </div>
@@ -225,15 +234,16 @@ export function StudentLessonHost(props: {
           className="lesson-host-topics"
           aria-label="Lesson topics"
         >
-          {moduleState.data.sections.map(
+          {lessonState.data.sections.map(
             (section) => (
               <section key={section.slug}>
                 <span>{section.title}</span>
 
                 {section.topics.map((topic) => {
                   const completed =
-                    progress?.topics?.[topic.slug]
-                      ?.completed === true;
+                    completedTopicKeys.has(
+                      topic.slug,
+                    );
                   const active =
                     activeTopic?.slug === topic.slug;
 
@@ -280,24 +290,79 @@ export function StudentLessonHost(props: {
                 </p>
               </div>
 
-              <article className="lesson-runtime-checkpoint">
-                <div>
-                  <strong>
-                    Lesson runtime host is active
-                  </strong>
-                  <p>
-                    The Vite app owns the lesson URL,
-                    module outline, active-topic state,
-                    authentication, and database progress
-                    hydration. Card rendering and IDE tools
-                    are the next subsystem to move.
-                  </p>
-                </div>
+              <div className="lesson-card-stack">
+                {activeTopic.cards.length ? (
+                  activeTopic.cards.map(
+                    (card: LearningLessonCard) => (
+                      <article
+                        className="lesson-content-card"
+                        key={card.id}
+                      >
+                        {card.title ? (
+                          <h4>{card.title}</h4>
+                        ) : null}
 
-                <a href={currentRuntimeHref}>
-                  Open current card runtime
-                </a>
-              </article>
+                        {card.type === "text" ? (
+                          <>
+                            <div className="lesson-reading-content">
+                              {card.markdown}
+                            </div>
+
+                            {card.runtimeRequired ? (
+                              <div className="lesson-runtime-handoff">
+                                <span>
+                                  This reading includes an
+                                  interactive Try It.
+                                </span>
+                                <a href={currentRuntimeHref}>
+                                  Open Try It
+                                </a>
+                              </div>
+                            ) : null}
+                          </>
+                        ) : card.type === "video" ? (
+                          <>
+                            <div className="lesson-video-frame">
+                              <iframe
+                                src={card.url}
+                                title={
+                                  card.title ??
+                                  "Lesson video"
+                                }
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowFullScreen
+                              />
+                            </div>
+
+                            {card.captionMarkdown ? (
+                              <div className="lesson-reading-content">
+                                {card.captionMarkdown}
+                              </div>
+                            ) : null}
+                          </>
+                        ) : (
+                          <div className="lesson-runtime-handoff">
+                            <span>
+                              This {card.runtimeKind} card
+                              uses the current interactive
+                              runtime.
+                            </span>
+                            <a href={currentRuntimeHref}>
+                              Open {card.runtimeKind}
+                            </a>
+                          </div>
+                        )}
+                      </article>
+                    ),
+                  )
+                ) : (
+                  <section className="lesson-host-state">
+                    <strong>
+                      No lesson cards found
+                    </strong>
+                  </section>
+                )}
+              </div>
 
               {progressState.status === "error" ? (
                 <div className="lesson-progress-warning">

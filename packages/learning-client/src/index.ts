@@ -1,8 +1,10 @@
 import {
   isLearningCourseOverviewResponse,
+  isLearningLessonContentResponse,
   isLearningModuleOverviewResponse,
   isMyLearningResponse,
   type LearningCourseOverviewResponse,
+  type LearningLessonContentResponse,
   type LearningModuleOverviewResponse,
   type MyLearningResponse,
 } from "@zoeskoul/learning-contracts";
@@ -16,6 +18,13 @@ export type {
   LearningCourseModuleSummary,
   LearningCourseOverviewResponse,
   LearningCourseSummary,
+  LearningLessonCard,
+  LearningLessonContentResponse,
+  LearningLessonRuntimeCard,
+  LearningLessonSection,
+  LearningLessonTextCard,
+  LearningLessonTopic,
+  LearningLessonVideoCard,
   LearningModuleOverviewResponse,
   LearningModuleSectionSummary,
   LearningModuleTopicSummary,
@@ -99,6 +108,28 @@ export function createLearningClient(
 
       if (!isLearningModuleOverviewResponse(response)) {
         throw new Error("The module overview response was invalid.");
+      }
+
+      return response;
+    },
+
+    async fetchLessonContent(args: {
+      subjectSlug: string;
+      moduleSlug: string;
+      locale?: string;
+      signal?: AbortSignal;
+    }): Promise<LearningLessonContentResponse> {
+      const response = await api.request<unknown>(
+        `/api/student/courses/${encodeURIComponent(args.subjectSlug)}/modules/${encodeURIComponent(args.moduleSlug)}/lesson?locale=${localeQuery(args.locale)}`,
+        {
+          method: "GET",
+          cache: "no-store",
+          signal: args.signal,
+        },
+      );
+
+      if (!isLearningLessonContentResponse(response)) {
+        throw new Error("The lesson content response was invalid.");
       }
 
       return response;
