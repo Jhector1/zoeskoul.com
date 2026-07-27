@@ -219,3 +219,130 @@ export function shouldPersistWorkspaceMutation(args: {
     !args.wouldReplaceNonEmptyWithEmpty
   );
 }
+
+export function workspaceContentHash(workspace: any) {
+    if (!workspace || workspace.version !== 2 || !Array.isArray(workspace.nodes)) {
+        return "null";
+    }
+
+    const files = workspace.nodes
+        .filter((node: any) => node?.kind === "file")
+        .map((node: any) => ({
+            id: String(node.id ?? ""),
+            name: String(node.name ?? ""),
+            content: String(node.content ?? ""),
+        }))
+        .sort((a: any, b: any) => a.id.localeCompare(b.id));
+
+    return JSON.stringify({
+        version: 2,
+        language: workspace.language ?? null,
+        stdin: typeof workspace.stdin === "string" ? workspace.stdin : "",
+        entryFileId: workspace.entryFileId ?? null,
+        activeFileId: workspace.activeFileId ?? null,
+        files,
+    });
+}
+
+export function preserveLocalWorkspaceNavigation(
+    incomingWorkspace: any,
+    localWorkspace: any,
+) {
+    if (
+        !incomingWorkspace ||
+        incomingWorkspace.version !== 2 ||
+        !Array.isArray(incomingWorkspace.nodes) ||
+        !localWorkspace ||
+        localWorkspace.version !== 2 ||
+        !Array.isArray(localWorkspace.nodes)
+    ) {
+        return incomingWorkspace;
+    }
+
+    const incomingIds = new Set(
+        incomingWorkspace.nodes.map((node: any) => String(node?.id ?? "")),
+    );
+    const localActiveFileId = String(localWorkspace.activeFileId ?? "");
+    const activeFileId = incomingIds.has(localActiveFileId)
+        ? localActiveFileId
+        : incomingWorkspace.activeFileId;
+    const localTabs = Array.isArray(localWorkspace.openTabs)
+        ? localWorkspace.openTabs.filter((id: unknown) => incomingIds.has(String(id)))
+        : [];
+    const incomingTabs = Array.isArray(incomingWorkspace.openTabs)
+        ? incomingWorkspace.openTabs
+        : [];
+
+    return {
+        ...incomingWorkspace,
+        activeFileId,
+        openTabs: [...new Set([...localTabs, ...incomingTabs])],
+        expanded: Array.isArray(localWorkspace.expanded)
+            ? localWorkspace.expanded
+            : incomingWorkspace.expanded,
+    };
+}
+
+export function savedStarterHashMatchesRuntimeStarter(args: {
+    saved: any;
+    existingStarterHash?: string | null;
+    existingWorkspace?: any;
+}) {
+    const savedStarterHash =
+        typeof args.saved?.starterHash === "string" ? args.saved.starterHash : "";
+
+    if (!savedStarterHash) {
+        return false;
+    }
+
+    const runtimeStarterHash =
+        typeof args.existingStarterHash === "string" && args.existingStarterHash
+            ? args.existingStarterHash
+            : workspaceContentHash(args.existingWorkspace);
+
+    return savedStarterHash === runtimeStarterHash;
+}
+
+export function shouldTrackReviewRuntimeMutation(args: {
+    readOnly: boolean;
+    applyingRemote: boolean;
+}) {
+    return shouldPersistWorkspaceMutation({
+        readOnly: args.readOnly,
+        hydrated: true,
+        applyingRemote: args.applyingRemote,
+        hasAuthoritativeContent: true,
+        wouldReplaceNonEmptyWithEmpty: false,
+    });
+}
+
+export function canPollReviewRemoteProgress(args: {
+    readOnly: boolean;
+    localDirty: boolean;
+    remoteSyncInFlight: boolean;
+    saveInFlight: boolean;
+    hasPendingSave: boolean;
+}) {
+    if (args.remoteSyncInFlight || args.saveInFlight) return false;
+
+    // A read-only workspace cannot own local edits. Runtime churn caused by
+    // mounting Monaco, rebinding Tools, or hydrating a remote workspace must
+    // never prevent it from receiving the tutor's next saved snapshot.
+    if (args.readOnly) return true;
+
+    return !args.localDirty && !args.hasPendingSave;
+}
+
+export function shouldApplyRemoteReviewWorkspace(args: {
+    readOnly: boolean;
+    reason: string;
+    looksLikeBetterCandidate: boolean;
+}) {
+    const isRemoteRefresh =
+        args.reason !== "initial" && args.reason !== "runtime-contract-ready";
+
+    // In a read-only master/reference/learner view, the server-owned snapshot is
+    // authoritative even when the tutor's newest code is shorter than the old
+    // code. Editable learner work still keeps the conservative restore guard.
+    return (args.readOnly && isRemoteRefresh) || args.looksLikeBetterCandidate;
+}

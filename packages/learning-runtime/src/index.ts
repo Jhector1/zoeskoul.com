@@ -96,3 +96,12 @@ export {
   mergeReviewProgressForSave,
   reviewProgressStateBytes,
 } from "./progressSaveMerge";
+
+export {
+  getReviewProgressClientSaveRevision,
+  isReviewUserSavedState,
+  mergeReviewProgressForConflictRetry,
+  normalizeReviewProgressForClientSync,
+  reviewSavedStateUpdatedAt,
+  withoutReviewProgressSaveRevision,
+} from "./progressClientSync";

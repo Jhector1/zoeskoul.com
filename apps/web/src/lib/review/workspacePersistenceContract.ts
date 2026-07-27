@@ -11,3 +11,9 @@ export {
 export type {
   CanonicalWorkspaceIdentityInput,
 } from "@zoeskoul/workspace-contracts";
+
+export {
+  preserveLocalWorkspaceNavigation,
+  savedStarterHashMatchesRuntimeStarter,
+  workspaceContentHash,
+} from "@zoeskoul/workspace-contracts";
