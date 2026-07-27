@@ -20,19 +20,22 @@ export async function GET(request: Request) {
   }
 
   const access = await getCurrentUserAccess();
-  const authenticated = access.authenticated && Boolean(access.user);
 
-  const body: AppSessionResponse = {
-    authenticated,
-    user:
-      authenticated && access.user
-        ? {
+  const body: AppSessionResponse =
+    access.authenticated && access.user
+      ? {
+          authenticated: true,
+          user: {
             ...access.user,
             roles: access.capabilities.appRoles,
-          }
-        : null,
-    capabilities: access.capabilities,
-  };
+          },
+          capabilities: access.capabilities,
+        }
+      : {
+          authenticated: false,
+          user: null,
+          capabilities: access.capabilities,
+        };
 
   return appCorsJson(request, body);
 }

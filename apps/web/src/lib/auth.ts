@@ -6,6 +6,7 @@ import Google from "next-auth/providers/google";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { sendWelcomeEmail } from "@/lib/email/welcomeEmail";
 import { prisma } from "@/lib/prisma";
+import { resolveAuthRedirect } from "@/lib/auth/resolveAuthRedirect";
 
 const KEYCLOAK_DISCOVERY_SUFFIX = "/.well-known/openid-configuration";
 
@@ -212,18 +213,11 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 
   callbacks: {
     async redirect({ url, baseUrl }) {
-      if (url.startsWith("/") && !url.startsWith("//")) {
-        return `${baseUrl}${url}`;
-      }
-
-      try {
-        const parsed = new URL(url);
-        if (parsed.origin === baseUrl) return url;
-      } catch {
-        // ignore
-      }
-
-      return `${baseUrl}/en`;
+      return resolveAuthRedirect({
+        url,
+        baseUrl,
+        includeLocalApps: process.env.NODE_ENV !== "production",
+      });
     },
 
     async jwt({ token, user, account, trigger, session }) {

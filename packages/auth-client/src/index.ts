@@ -17,6 +17,28 @@ export type AuthClientOptions = {
   fetchImpl?: ApiClientOptions["fetchImpl"];
 };
 
+export type AuthenticateUrlOptions = {
+  websiteOrigin: string;
+  callbackUrl: string;
+  locale?: string;
+};
+
+function normalizeLocale(locale: string | undefined): string {
+  const normalized = locale?.trim().toLowerCase();
+  return normalized && /^[a-z]{2}(?:-[a-z]{2})?$/.test(normalized)
+    ? normalized
+    : "en";
+}
+
+export function buildAuthenticateUrl(
+  options: AuthenticateUrlOptions,
+): string {
+  const locale = normalizeLocale(options.locale);
+  const url = new URL(`/${locale}/authenticate`, options.websiteOrigin);
+  url.searchParams.set("callbackUrl", options.callbackUrl);
+  return url.toString();
+}
+
 export function createAuthClient(options: AuthClientOptions) {
   const api = createApiClient({
     baseOrigin: options.apiOrigin,

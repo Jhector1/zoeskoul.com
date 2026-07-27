@@ -42,3 +42,24 @@ export function getLocalAppOrigin(appId: ZoeSkoulAppId): string {
 export function getProductionAppOrigin(appId: ZoeSkoulAppId): string {
   return zoeSkoulApps[appId].productionOrigin;
 }
+
+export function getTrustedBrowserAppOrigins(args?: {
+  includeLocal?: boolean;
+}): string[] {
+  const origins = browserAppIds.map(getProductionAppOrigin);
+
+  if (args?.includeLocal) {
+    origins.push(...browserAppIds.map(getLocalAppOrigin));
+  }
+
+  return origins;
+}
+
+export function isTrustedBrowserAppOrigin(
+  origin: string,
+  args?: {
+    includeLocal?: boolean;
+  },
+): boolean {
+  return getTrustedBrowserAppOrigins(args).includes(origin);
+}

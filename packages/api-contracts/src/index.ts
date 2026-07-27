@@ -11,11 +11,17 @@ export type AppSessionUser = {
   roles: AppRole[];
 };
 
-export type AppSessionResponse = {
-  authenticated: boolean;
-  user: AppSessionUser | null;
-  capabilities: RoleCapabilities;
-};
+export type AppSessionResponse =
+  | {
+      authenticated: true;
+      user: AppSessionUser;
+      capabilities: RoleCapabilities;
+    }
+  | {
+      authenticated: false;
+      user: null;
+      capabilities: RoleCapabilities;
+    };
 
 export type ApiErrorResponse = {
   error: string;
