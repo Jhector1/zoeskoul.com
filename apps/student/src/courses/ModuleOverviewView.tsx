@@ -2,6 +2,7 @@ import { useModuleOverview } from "@zoeskoul/learning-client/react";
 
 import {
   coursePath,
+  lessonPath,
   navigateStudentApp,
 } from "../app/studentRoutes";
 
@@ -63,11 +64,11 @@ export function ModuleOverviewView(props: {
   } = state.data;
 
   const courseHref = coursePath(subject.slug);
-  const learnHref = websiteHref(
-    props.websiteOrigin,
-    `/en/subjects/${encodeURIComponent(subject.slug)}/modules/${encodeURIComponent(module.slug)}/learn`,
+  const learnHref = lessonPath(
+    subject.slug,
+    module.slug,
   );
-  const accessHref = websiteHref(
+const accessHref = websiteHref(
     props.websiteOrigin,
     `/en/subjects/${encodeURIComponent(subject.slug)}/modules/${encodeURIComponent(module.slug)}`,
   );
@@ -124,6 +125,15 @@ export function ModuleOverviewView(props: {
           <a
             className="student-primary-button"
             href={access.ok ? learnHref : accessHref}
+            onClick={
+              access.ok
+                ? (event) =>
+                    navigateStudentApp(
+                      event,
+                      learnHref,
+                    )
+                : undefined
+            }
           >
             {access.ok
               ? "Start learning"
@@ -200,6 +210,15 @@ export function ModuleOverviewView(props: {
         <a
           className="student-primary-button"
           href={access.ok ? learnHref : accessHref}
+          onClick={
+            access.ok
+              ? (event) =>
+                  navigateStudentApp(
+                    event,
+                    learnHref,
+                  )
+              : undefined
+          }
         >
           {access.ok
             ? "Open interactive lesson"

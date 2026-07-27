@@ -1,0 +1,179 @@
+.lesson-host {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.lesson-host-header {
+  align-items: flex-start;
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(124, 92, 255, 0.18),
+      transparent 36%
+    ),
+    rgba(255, 255, 255, 0.76);
+  border: 1px solid rgba(32, 51, 84, 0.14);
+  border-radius: 1.5rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  padding: 1.5rem;
+}
+
+.lesson-host-header h2,
+.lesson-topic-heading h3 {
+  margin: 0;
+}
+
+.lesson-host-header p,
+.lesson-topic-heading p,
+.lesson-runtime-checkpoint p,
+.lesson-host-state p {
+  color: #66738a;
+  line-height: 1.7;
+}
+
+.lesson-host-live-pill {
+  background: rgba(36, 163, 103, 0.12);
+  border: 1px solid rgba(36, 163, 103, 0.24);
+  border-radius: 999px;
+  color: #167548;
+  font-size: 0.78rem;
+  font-weight: 800;
+  padding: 0.45rem 0.75rem;
+  white-space: nowrap;
+}
+
+.lesson-host-layout {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: minmax(220px, 0.32fr) minmax(0, 1fr);
+}
+
+.lesson-host-topics {
+  align-self: start;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(32, 51, 84, 0.13);
+  border-radius: 1.25rem;
+  display: grid;
+  gap: 1rem;
+  padding: 1rem;
+  position: sticky;
+  top: 1rem;
+}
+
+.lesson-host-topics section {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.lesson-host-topics section > span {
+  color: #7b879a;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  padding: 0 0.45rem;
+  text-transform: uppercase;
+}
+
+.lesson-topic-button {
+  align-items: center;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 0.85rem;
+  color: #435069;
+  cursor: pointer;
+  display: grid;
+  font: inherit;
+  gap: 0.65rem;
+  grid-template-columns: auto 1fr;
+  padding: 0.75rem;
+  text-align: left;
+}
+
+.lesson-topic-button:hover,
+.lesson-topic-button.is-active {
+  background: rgba(109, 86, 240, 0.09);
+  border-color: rgba(109, 86, 240, 0.18);
+  color: #30256d;
+}
+
+.lesson-topic-button.is-complete > span:first-child {
+  color: #168252;
+}
+
+.lesson-host-stage {
+  min-width: 0;
+}
+
+.lesson-topic-heading {
+  margin-bottom: 1rem;
+}
+
+.lesson-topic-heading > span {
+  color: #7058e8;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.lesson-runtime-checkpoint {
+  align-items: center;
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(32, 51, 84, 0.13);
+  border-radius: 1.25rem;
+  display: flex;
+  gap: 1.25rem;
+  justify-content: space-between;
+  padding: 1.25rem;
+}
+
+.lesson-runtime-checkpoint a {
+  background: #6046dc;
+  border-radius: 0.85rem;
+  color: white;
+  font-weight: 800;
+  padding: 0.75rem 1rem;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.lesson-progress-warning {
+  background: rgba(255, 172, 53, 0.12);
+  border: 1px solid rgba(255, 172, 53, 0.24);
+  border-radius: 0.85rem;
+  color: #8a5600;
+  margin-top: 1rem;
+  padding: 0.85rem 1rem;
+}
+
+.lesson-host-state {
+  align-items: center;
+  background: rgba(255, 255, 255, 0.76);
+  border: 1px solid rgba(32, 51, 84, 0.13);
+  border-radius: 1.25rem;
+  display: grid;
+  justify-items: center;
+  min-height: 12rem;
+  padding: 2rem;
+  text-align: center;
+}
+
+@media (max-width: 900px) {
+  .lesson-host-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .lesson-host-topics {
+    position: static;
+  }
+}
+
+@media (max-width: 640px) {
+  .lesson-host-header,
+  .lesson-runtime-checkpoint {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}

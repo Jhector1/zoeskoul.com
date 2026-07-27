@@ -25,6 +25,11 @@ export type StudentLocation =
       kind: "module";
       subjectSlug: string;
       moduleSlug: string;
+    }
+  | {
+      kind: "lesson";
+      subjectSlug: string;
+      moduleSlug: string;
     };
 
 export const studentRoutes: readonly StudentRoute[] = [
@@ -60,6 +65,19 @@ export function resolveStudentLocation(
   pathname: string,
 ): StudentLocation {
   const segments = cleanPathSegments(pathname);
+
+  if (
+    segments.length === 5 &&
+    segments[0] === "courses" &&
+    segments[2] === "modules" &&
+    segments[4] === "learn"
+  ) {
+    return {
+      kind: "lesson",
+      subjectSlug: segments[1],
+      moduleSlug: segments[3],
+    };
+  }
 
   if (
     segments.length === 4 &&
@@ -111,6 +129,13 @@ export function modulePath(
   moduleSlug: string,
 ): string {
   return `${coursePath(subjectSlug)}/modules/${encodeURIComponent(moduleSlug)}`;
+}
+
+export function lessonPath(
+  subjectSlug: string,
+  moduleSlug: string,
+): string {
+  return `${modulePath(subjectSlug, moduleSlug)}/learn`;
 }
 
 export function navigateStudentApp(

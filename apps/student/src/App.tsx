@@ -8,6 +8,7 @@ import "./shell.css";
 import "./learning/learning.css";
 import "./learning/shell-overrides.css";
 import "./courses/course-reader.css";
+import "./lessons/lesson-host.css";
 
 export function App() {
   const apiOrigin =

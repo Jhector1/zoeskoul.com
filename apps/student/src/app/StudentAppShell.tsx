@@ -7,6 +7,7 @@ import {
 import { CourseOverviewView } from "../courses/CourseOverviewView";
 import { ModuleOverviewView } from "../courses/ModuleOverviewView";
 import { MyLearningView } from "../learning/MyLearningView";
+import { StudentLessonHost } from "../lessons/StudentLessonHost";
 import {
   activeStudentRouteId,
   navigateStudentApp,
@@ -82,7 +83,14 @@ export function StudentAppShell(props: {
             description:
               "Review sections and topics before opening the interactive lesson.",
           }
-        : routeHeadings[location.route.id];
+        : location.kind === "lesson"
+          ? {
+              eyebrow: "Lesson",
+              title: "Interactive lesson",
+              description:
+                "The lesson route and saved progress now run in the Vite student app.",
+            }
+          : routeHeadings[location.route.id];
 
   const displayName =
     props.session.user.name ??
@@ -98,6 +106,13 @@ export function StudentAppShell(props: {
       />
     ) : location.kind === "module" ? (
       <ModuleOverviewView
+        apiOrigin={props.apiOrigin}
+        websiteOrigin={props.websiteOrigin}
+        subjectSlug={location.subjectSlug}
+        moduleSlug={location.moduleSlug}
+      />
+    ) : location.kind === "lesson" ? (
+      <StudentLessonHost
         apiOrigin={props.apiOrigin}
         websiteOrigin={props.websiteOrigin}
         subjectSlug={location.subjectSlug}
