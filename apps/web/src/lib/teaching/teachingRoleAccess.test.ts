@@ -19,14 +19,12 @@ describe("resolveTeachingRoleAccess", () => {
     });
   });
 
-  it("supports configured admin emails", () => {
-    expect(
-      resolveTeachingRoleAccess({
-        roles: [],
-        email: "ADMIN@example.com",
-        configuredAdminEmails: ["admin@example.com"],
-      }),
-    ).toMatchObject({ allowed: true, isAdmin: true });
+  it("does not infer administrator access from identity information", () => {
+    expect(resolveTeachingRoleAccess({ roles: [] })).toMatchObject({
+      allowed: false,
+      isAdmin: false,
+      isTeacher: false,
+    });
   });
 
   it("rejects ordinary learners", () => {

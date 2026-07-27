@@ -2,9 +2,7 @@
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 
-import { auth } from "@/lib/auth";
-
-import { resolveTeachingRoleAccess } from "@/lib/teaching/teachingRoleAccess";
+import { getCurrentUserAccess } from "@/lib/access/currentUserAccess";
 import type { ProfileWorkspaceRole } from "@/lib/profile/profileNavigation";
 import { parseMarketingProviderName } from "@/lib/marketing/provider";
 
@@ -14,16 +12,15 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 export default async function ProfilePage() {
-    const session = await auth();
-    const email = session?.user?.email ?? null;
+    const access = await getCurrentUserAccess();
 
-    if (!email) {
+    if (!access.authenticated || !access.user) {
         // Product-ready: bounce to sign-in with callback
         redirect(`/api/auth/signin?callbackUrl=${encodeURIComponent("/profile")}`);
     }
 
     const user = await prisma.user.findUnique({
-        where: { email },
+        where: { id: access.user.id },
         select: {
             id: true,
             name: true,
@@ -49,14 +46,9 @@ export default async function ProfilePage() {
         // If session exists but user row doesn't, safest is sign-in again
         redirect(`/api/auth/signin?callbackUrl=${encodeURIComponent("/profile")}`);
     }
-    const roleAccess = resolveTeachingRoleAccess({
-        roles: user.roles ?? [],
-        email: user.email,
-        configuredAdminEmails: (process.env.ADMIN_EMAILS ?? "").split(","),
-    });
-    const workspaceRole: ProfileWorkspaceRole = roleAccess.isAdmin
+    const workspaceRole: ProfileWorkspaceRole = access.capabilities.isAdmin
         ? "admin"
-        : roleAccess.isTeacher
+        : access.capabilities.isTeacher
             ? "teacher"
             : "student";
     const appName = process.env.NEXT_PUBLIC_APP_NAME?.trim() || "ZoeSkoul";
