@@ -59,6 +59,17 @@
         "title": "You are invited to a ZoeSkoul tutoring session",
         "body": "Create an account or sign in using the email address that received this invitation. You will be taken directly to your tutoring session."
       }
+    },
+    "marketingPrompt": {
+      "eyebrow": "Email preferences",
+      "title": "Would you like ZoeSkoul updates?",
+      "description": "Get occasional emails about new courses, product improvements, and learning resources.",
+      "optionalNote": "This is optional. Account verification, receipts, tutoring invitations, and security emails remain separate.",
+      "accept": "Yes, send me updates",
+      "decline": "Not now",
+      "saving": "Saving…",
+      "loadError": "We could not check your email preference.",
+      "saveError": "We could not save your choice. Please try again."
     }
   }
 }

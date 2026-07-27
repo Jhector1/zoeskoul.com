@@ -59,6 +59,17 @@
         "title": "Vous êtes invité à une séance de tutorat ZoeSkoul",
         "body": "Créez un compte ou connectez-vous avec l’adresse e-mail qui a reçu cette invitation. Vous serez conduit directement à votre séance de tutorat."
       }
+    },
+    "marketingPrompt": {
+      "eyebrow": "Préférences e-mail",
+      "title": "Souhaitez-vous recevoir les actualités ZoeSkoul ?",
+      "description": "Recevez occasionnellement des e-mails sur les nouveaux cours, les améliorations du produit et les ressources pédagogiques.",
+      "optionalNote": "Ce choix est facultatif. La vérification du compte, les reçus, les invitations de tutorat et les e-mails de sécurité restent séparés.",
+      "accept": "Oui, envoyez-moi les actualités",
+      "decline": "Pas maintenant",
+      "saving": "Enregistrement…",
+      "loadError": "Nous n’avons pas pu vérifier votre préférence e-mail.",
+      "saveError": "Nous n’avons pas pu enregistrer votre choix. Veuillez réessayer."
     }
   }
 }

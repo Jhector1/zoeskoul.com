@@ -386,6 +386,7 @@ const loaders: Record<string, Array<() => Promise<AnyObj>>> = {
     () => import("./messages/es/subjects/sql/sql/module5/what-expressions-are.json").then((m) => (m?.default ?? {}) as AnyObj),
     () => import("./messages/es/subjects/sql/sql/module5/writing-readable-output.json").then((m) => (m?.default ?? {}) as AnyObj),
     () => import("./messages/es/subjects/sql/sql/subject.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/es/ui/platform/authenticate.json").then((m) => (m?.default ?? {}) as AnyObj),
   ],
 
   "fr": [

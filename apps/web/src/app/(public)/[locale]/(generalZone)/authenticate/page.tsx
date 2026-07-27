@@ -105,10 +105,15 @@ export default function AuthenticatePage() {
 
     const [loadingProvider, setLoadingProvider] = useState<string | null>(null);
 
-    function onProvider(providerId: string) {
+    async function onProvider(providerId: string) {
         if (loadingProvider) return;
         setLoadingProvider(providerId);
-        void signIn(providerId, {callbackUrl});
+
+        try {
+            await signIn(providerId, {callbackUrl});
+        } catch {
+            setLoadingProvider(null);
+        }
     }
 
     const appName = process.env.NEXT_PUBLIC_APP_NAME ?? "ZoeSkoul";
@@ -175,7 +180,7 @@ export default function AuthenticatePage() {
                                         <button
                                             key={provider.id}
                                             type="button"
-                                            onClick={() => onProvider(provider.id)}
+                                            onClick={() => void onProvider(provider.id)}
                                             disabled={!!loadingProvider}
                                             className={cn(
                                                 provider.variant === "primary"
@@ -199,14 +204,31 @@ export default function AuthenticatePage() {
                           </span>
 
                               {provider.noteKey ? (
-                                  <span className="ui-meta mt-0.5 block truncate">
+                                  <span
+                                      className={cn(
+                                          "mt-0.5 block truncate text-[11px] font-semibold",
+                                          provider.variant === "primary"
+                                              ? "text-[rgb(var(--ui-text-invert)/0.82)]"
+                                              : "text-[rgb(var(--ui-text-muted)/0.96)]",
+                                      )}
+                                  >
                               {t(provider.noteKey)}
                             </span>
                               ) : null}
                         </span>
                       </span>
 
-                                            <span className="ui-meta-strong">→</span>
+                                            <span
+                                                aria-hidden="true"
+                                                className={cn(
+                                                    "shrink-0 text-base font-bold leading-none",
+                                                    provider.variant === "primary"
+                                                        ? "text-[rgb(var(--ui-text-invert)/0.92)]"
+                                                        : "text-[rgb(var(--ui-text)/0.9)]",
+                                                )}
+                                            >
+                                                →
+                                            </span>
                                         </button>
                                     );
                                 })}
@@ -278,11 +300,27 @@ function KeycloakIcon({className = ""}: { className?: string }) {
 
 function GoogleIcon({className = ""}: { className?: string }) {
     return (
-        <svg className={className} viewBox="0 0 24 24" aria-hidden="true">
+        <svg
+            className={className}
+            viewBox="0 0 18 18"
+            role="img"
+            aria-label="Google"
+        >
             <path
-                fill="currentColor"
-                d="M12 10.2v3.8h5.3c-.2 1.2-1.4 3.5-5.3 3.5A6 6 0 1 1 12 6c1.7 0 2.9.7 3.6 1.3l2.4-2.3C16.5 3.6 14.5 2.6 12 2.6 6.9 2.6 2.8 6.7 2.8 11.8S6.9 21 12 21c6.2 0 8.4-4.3 8.4-6.6 0-.4-.05-.7-.1-1H12Z"
-                opacity="0.9"
+                fill="#4285F4"
+                d="M17.64 9.205c0-.638-.057-1.252-.164-1.841H9v3.481h4.844a4.14 4.14 0 0 1-1.797 2.716v2.258h2.909c1.703-1.568 2.684-3.878 2.684-6.614Z"
+            />
+            <path
+                fill="#34A853"
+                d="M9 18c2.43 0 4.468-.806 5.956-2.181l-2.909-2.258c-.806.54-1.835.859-3.047.859-2.344 0-4.328-1.585-5.037-3.714H.956v2.332A9 9 0 0 0 9 18Z"
+            />
+            <path
+                fill="#FBBC05"
+                d="M3.963 10.706A5.42 5.42 0 0 1 3.682 9c0-.592.102-1.168.281-1.706V4.962H.956A9 9 0 0 0 0 9c0 1.45.347 2.823.956 4.038l3.007-2.332Z"
+            />
+            <path
+                fill="#EA4335"
+                d="M9 3.58c1.321 0 2.507.454 3.441 1.346l2.581-2.581C13.464.892 11.426 0 9 0A9 9 0 0 0 .956 4.962l3.007 2.332C4.672 5.165 6.656 3.58 9 3.58Z"
             />
         </svg>
     );

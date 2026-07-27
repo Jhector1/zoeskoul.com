@@ -6,6 +6,7 @@ import { auth } from "@/lib/auth";
 
 import { resolveTeachingRoleAccess } from "@/lib/teaching/teachingRoleAccess";
 import type { ProfileWorkspaceRole } from "@/lib/profile/profileNavigation";
+import { parseMarketingProviderName } from "@/lib/marketing/provider";
 
 import ProfileForm from "./ProfileForm";
 
@@ -23,7 +24,25 @@ export default async function ProfilePage() {
 
     const user = await prisma.user.findUnique({
         where: { email },
-        select: { id: true, name: true, email: true, image: true, roles: true },
+        select: {
+            id: true,
+            name: true,
+            email: true,
+            image: true,
+            roles: true,
+            marketingPreference: {
+                select: {
+                    marketingEmails: true,
+                    consentAt: true,
+                    consentSource: true,
+                    declinedAt: true,
+                    unsubscribedAt: true,
+                    provider: true,
+                    syncStatus: true,
+                    syncedAt: true,
+                },
+            },
+        },
     });
 
     if (!user) {
@@ -61,6 +80,25 @@ export default async function ProfilePage() {
                 }}
                 workspaceRole={workspaceRole}
                 appName={appName}
+                initialMarketingPreference={user.marketingPreference ? {
+                    marketingEmails: user.marketingPreference.marketingEmails,
+                    consentAt: user.marketingPreference.consentAt?.toISOString() ?? null,
+                    consentSource: user.marketingPreference.consentSource,
+                    declinedAt: user.marketingPreference.declinedAt?.toISOString() ?? null,
+                    unsubscribedAt: user.marketingPreference.unsubscribedAt?.toISOString() ?? null,
+                    provider: parseMarketingProviderName(user.marketingPreference.provider),
+                    syncStatus: user.marketingPreference.syncStatus,
+                    syncedAt: user.marketingPreference.syncedAt?.toISOString() ?? null,
+                } : {
+                    marketingEmails: false,
+                    consentAt: null,
+                    consentSource: null,
+                    declinedAt: null,
+                    unsubscribedAt: null,
+                    provider: null,
+                    syncStatus: null,
+                    syncedAt: null,
+                }}
             />
         </div>
     );

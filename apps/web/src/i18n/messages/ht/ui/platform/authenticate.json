@@ -59,6 +59,17 @@
         "title": "Yo envite w nan yon sesyon leson patikilye ZoeSkoul",
         "body": "Kreye yon kont oswa konekte ak adrès imèl ki te resevwa envitasyon sa a. N ap mennen w dirèkteman nan sesyon leson patikilye ou a."
       }
+    },
+    "marketingPrompt": {
+      "eyebrow": "Preferans imèl",
+      "title": "Èske ou vle resevwa nouvèl ZoeSkoul?",
+      "description": "Resevwa imèl detanzantan sou nouvo kou, amelyorasyon pwodwi, ak resous aprantisaj.",
+      "optionalNote": "Sa pa obligatwa. Verifikasyon kont, resi, envitasyon leson patikilye, ak imèl sekirite rete apa.",
+      "accept": "Wi, voye nouvèl yo ban mwen",
+      "decline": "Pa kounye a",
+      "saving": "N ap anrejistre…",
+      "loadError": "Nou pa t kapab verifye preferans imèl ou.",
+      "saveError": "Nou pa t kapab anrejistre chwa ou. Tanpri eseye ankò."
     }
   }
 }

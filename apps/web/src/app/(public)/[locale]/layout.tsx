@@ -13,6 +13,7 @@ import { auth } from "@/lib/auth";
 import { SfxProvider } from "@/lib/sfx/SfxProvider";
 import { inter, playfair, greatVibes } from "@/app/fonts";
 import { getSiteUrl } from "@/lib/seo/site";
+import MarketingConsentPrompt from "@/components/marketing/MarketingConsentPrompt";
 
 type LayoutProps = Readonly<{
     children: React.ReactNode;
@@ -83,7 +84,10 @@ export default async function LocaleLayout({ children, params }: LayoutProps) {
         <div className="min-h-dvh w-full min-w-0 overflow-x-hidden bg-[radial-gradient(1200px_700px_at_20%_0%,var(--app-bg-ink)_0%,transparent_60%)]">
             <Providers session={session}>
                 <NextIntlClientProvider messages={messages}>
-                    <SfxProvider>{children}</SfxProvider>
+                    <SfxProvider>
+                        {children}
+                        <MarketingConsentPrompt />
+                    </SfxProvider>
                 </NextIntlClientProvider>
             </Providers>
         </div>

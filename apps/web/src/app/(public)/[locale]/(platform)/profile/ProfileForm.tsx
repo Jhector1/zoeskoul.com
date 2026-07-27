@@ -26,6 +26,7 @@ import {
     type ProfileNavigationSection,
     type ProfileWorkspaceRole,
 } from "@/lib/profile/profileNavigation";
+import MarketingEmailPreferencesCard from "./MarketingEmailPreferencesCard";
 import {
     PROFILE_AVATAR_ACCEPT,
     profileAvatarFileError,
@@ -45,6 +46,17 @@ type SavedProfile = {
 };
 
 type SaveResponse = { user: Me };
+
+type MarketingPreference = {
+    marketingEmails: boolean;
+    consentAt: string | null;
+    consentSource: string | null;
+    declinedAt: string | null;
+    unsubscribedAt: string | null;
+    provider: "brevo" | "beehiiv" | null;
+    syncStatus: string | null;
+    syncedAt: string | null;
+};
 
 function cn(...cls: Array<string | false | undefined | null>) {
     return cls.filter(Boolean).join(" ");
@@ -198,10 +210,12 @@ export default function ProfileForm({
     initialUser,
     workspaceRole,
     appName,
+    initialMarketingPreference,
 }: {
     initialUser: Me;
     workspaceRole: ProfileWorkspaceRole;
     appName: string;
+    initialMarketingPreference: MarketingPreference;
 }) {
     const { data: session, status: sessionStatus, update } = useSession();
     const fileInputRef = useRef<HTMLInputElement | null>(null);
@@ -575,6 +589,10 @@ export default function ProfileForm({
                     </div>
                 </form>
             </div>
+
+            <MarketingEmailPreferencesCard
+                initialPreference={initialMarketingPreference}
+            />
 
             {navigationSections.map((section) => (
                 <NavigationSection key={section.id} section={section} />
