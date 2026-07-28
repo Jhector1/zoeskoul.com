@@ -123,6 +123,7 @@ export {
 } from "./workspaceRestore";
 
 export {
+  buildLessonAssessmentDoneProgress,
   buildLessonCardDoneProgress,
   canAutoCompleteLessonCard,
   isLessonCardComplete,

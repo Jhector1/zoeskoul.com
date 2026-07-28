@@ -1,6 +1,7 @@
 import "server-only";
 
 import type {
+  LearningPracticeExercise,
   LearningPracticeLaunchResponse,
   LearningRuntimeTarget,
 } from "@zoeskoul/learning-contracts";
@@ -13,6 +14,7 @@ import { handlePracticeGet } from "@/lib/practice/api/get/handler";
 import { GetParamsSchema } from "@/lib/practice/api/get/schemas";
 import { resolveManifestExercise } from "@/lib/curriculum/resolveManifestExercise";
 import { resolveTopicBundleManifest } from "@/lib/curriculum/resolveTopicBundleManifest";
+import { resolveTaggedOnServer } from "@/i18n/server";
 import type {
   ReviewModule,
 } from "@/lib/subjects/types";
@@ -265,10 +267,18 @@ export async function buildStudentSimpleQuizPracticeLaunch(
     };
   }
 
-  const exercise =
+  /**
+   * Project first so secret grading fields never reach the translation layer.
+   * The server resolver then replaces learner-visible @: tags recursively.
+   */
+  const projectedExercise =
     projectStudentPracticeExercise(
       rawExercise,
     );
+  const exercise =
+    await resolveTaggedOnServer(
+      projectedExercise,
+    ) as LearningPracticeExercise;
 
   if (
     !isStudentSimpleQuizKind(
@@ -290,8 +300,8 @@ export async function buildStudentSimpleQuizPracticeLaunch(
     response: {
       target: args.target,
       title:
-        descriptor.card.title?.trim() ||
         exercise.title ||
+        descriptor.card.title?.trim() ||
         null,
       exercise,
       key,

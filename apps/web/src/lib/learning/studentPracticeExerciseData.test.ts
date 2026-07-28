@@ -150,7 +150,7 @@ describe("projectStudentPracticeExercise", () => {
         },
         {
           id: "b",
-          text: "1 = x",
+          label: "1 = x",
           correct: false,
         },
       ],
@@ -161,11 +161,11 @@ describe("projectStudentPracticeExercise", () => {
       options: [
         {
           id: "a",
-          text: "x = 1",
+          label: "x = 1",
         },
         {
           id: "b",
-          text: "1 = x",
+          label: "1 = x",
         },
       ],
     });

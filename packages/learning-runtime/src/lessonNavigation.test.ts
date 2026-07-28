@@ -8,6 +8,7 @@ import type {
   ReviewProgressState,
 } from "./index";
 import {
+  buildLessonAssessmentDoneProgress,
   buildLessonCardDoneProgress,
   canAutoCompleteLessonCard,
   isLessonCardComplete,
@@ -113,6 +114,41 @@ describe("lesson navigation contracts", () => {
     expect(
       progress.topics?.intro?.completed,
     ).toBe(false);
+  });
+
+  it("marks an assessment complete through quizzesDone", () => {
+    const progress =
+      buildLessonAssessmentDoneProgress({
+        progress: {
+          topics: {
+            intro: {
+              completed: true,
+            },
+            practice: {
+              readingDone: {
+                "sketch-1": true,
+              },
+            },
+          },
+        },
+        topicSlug: "py8.practice",
+        card: topics[1].cards[1] as Extract<
+          (typeof topics)[number]["cards"][number],
+          { type: "runtime" }
+        >,
+        topics,
+        now: "2026-07-28T12:00:00.000Z",
+      });
+
+    expect(
+      progress.topics?.practice?.quizzesDone,
+    ).toEqual({
+      "quiz-1": true,
+    });
+    expect(
+      progress.topics?.practice?.completed,
+    ).toBe(true);
+    expect(progress.moduleCompleted).toBe(true);
   });
 
   it("marks a topic complete when its final reading unit completes", () => {

@@ -115,43 +115,17 @@ export function withActiveLessonTopic(
   };
 }
 
-export function buildLessonCardDoneProgress(args: {
+function finalizeLessonTopicProgress(args: {
   progress: ReviewProgressState;
   topicSlug: string;
-  card: LessonNavigationCard;
+  nextTopic: ReviewTopicProgress;
   topics: readonly LessonNavigationTopic[];
   now?: string;
 }): ReviewProgressState {
-  if (!canAutoCompleteLessonCard(args.card)) {
-    return args.progress;
-  }
-
   const now =
     args.now ?? new Date().toISOString();
   const canonicalTopicKey =
     normalizeTopicProgressKey(args.topicSlug);
-  const currentTopic =
-    getTopicProgressState(
-      args.progress.topics,
-      args.topicSlug,
-    ).topic ?? {};
-
-  const nextTopic: ReviewTopicProgress = {
-    ...currentTopic,
-    readingDone: {
-      ...(currentTopic.readingDone ?? {}),
-      [args.card.id]: true,
-    },
-    /**
-     * Keep the old map populated while existing clients still read it.
-     * readingDone remains the durable semantic source of truth.
-     */
-    cardsDone: {
-      ...(currentTopic.cardsDone ?? {}),
-      [args.card.id]: true,
-    },
-  };
-
   const topicDefinition =
     args.topics.find(
       (topic) =>
@@ -159,17 +133,25 @@ export function buildLessonCardDoneProgress(args: {
           topic.slug,
         ) === canonicalTopicKey,
     ) ?? null;
+  const currentTopic =
+    getTopicProgressState(
+      args.progress.topics,
+      args.topicSlug,
+    ).topic ?? {};
   const complete = topicDefinition
     ? isLessonTopicComplete(
         topicDefinition.cards,
-        nextTopic,
+        args.nextTopic,
       )
     : false;
 
-  nextTopic.completed = complete;
-  nextTopic.completedAt = complete
-    ? currentTopic.completedAt ?? now
-    : undefined;
+  const nextTopic: ReviewTopicProgress = {
+    ...args.nextTopic,
+    completed: complete,
+    completedAt: complete
+      ? currentTopic.completedAt ?? now
+      : undefined,
+  };
 
   const nextProgress: ReviewProgressState = {
     ...args.progress,
@@ -201,6 +183,84 @@ export function buildLessonCardDoneProgress(args: {
       ? args.progress.moduleCompletedAt ?? now
       : undefined,
   };
+}
+
+export function buildLessonCardDoneProgress(args: {
+  progress: ReviewProgressState;
+  topicSlug: string;
+  card: LessonNavigationCard;
+  topics: readonly LessonNavigationTopic[];
+  now?: string;
+}): ReviewProgressState {
+  if (!canAutoCompleteLessonCard(args.card)) {
+    return args.progress;
+  }
+
+  const currentTopic =
+    getTopicProgressState(
+      args.progress.topics,
+      args.topicSlug,
+    ).topic ?? {};
+
+  return finalizeLessonTopicProgress({
+    progress: args.progress,
+    topicSlug: args.topicSlug,
+    topics: args.topics,
+    now: args.now,
+    nextTopic: {
+      ...currentTopic,
+      readingDone: {
+        ...(currentTopic.readingDone ?? {}),
+        [args.card.id]: true,
+      },
+      /**
+       * Keep the old map populated while existing clients still read it.
+       * readingDone remains the durable semantic source of truth.
+       */
+      cardsDone: {
+        ...(currentTopic.cardsDone ?? {}),
+        [args.card.id]: true,
+      },
+    },
+  });
+}
+
+export function buildLessonAssessmentDoneProgress(args: {
+  progress: ReviewProgressState;
+  topicSlug: string;
+  card: Extract<
+    LessonNavigationCard,
+    { type: "runtime" }
+  >;
+  topics: readonly LessonNavigationTopic[];
+  now?: string;
+}): ReviewProgressState {
+  if (
+    args.card.runtimeKind !== "quiz" &&
+    args.card.runtimeKind !== "project"
+  ) {
+    return args.progress;
+  }
+
+  const currentTopic =
+    getTopicProgressState(
+      args.progress.topics,
+      args.topicSlug,
+    ).topic ?? {};
+
+  return finalizeLessonTopicProgress({
+    progress: args.progress,
+    topicSlug: args.topicSlug,
+    topics: args.topics,
+    now: args.now,
+    nextTopic: {
+      ...currentTopic,
+      quizzesDone: {
+        ...(currentTopic.quizzesDone ?? {}),
+        [args.card.id]: true,
+      },
+    },
+  });
 }
 
 export function resolveInitialLessonTopicSlug(

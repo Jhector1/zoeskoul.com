@@ -204,6 +204,28 @@ function sanitizePublicValue(
   return out;
 }
 
+function canonicalChoiceOptions(
+  value: unknown,
+): Array<{
+  id: string;
+  label: string;
+}> {
+  if (!Array.isArray(value)) return [];
+
+  return value.flatMap((entry) => {
+    if (!isRecord(entry)) return [];
+
+    const id = cleanString(entry.id);
+    const label =
+      cleanString(entry.label) ||
+      cleanString(entry.text);
+
+    return id && label
+      ? [{ id, label }]
+      : [];
+  });
+}
+
 function publicPayload(
   source: JsonRecord,
   kind: LearningPracticeExerciseKind,
@@ -216,9 +238,18 @@ function publicPayload(
   ]) {
     if (!(field in source)) continue;
 
-    const projected = sanitizePublicValue(
-      source[field],
-    );
+    const projected =
+      field === "options" &&
+      (
+        kind === "single_choice" ||
+        kind === "multi_choice"
+      )
+        ? canonicalChoiceOptions(
+            source[field],
+          )
+        : sanitizePublicValue(
+            source[field],
+          );
 
     if (projected !== undefined) {
       out[field] = projected;

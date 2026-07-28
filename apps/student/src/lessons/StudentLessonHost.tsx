@@ -7,6 +7,7 @@ import {
   useLessonContent,
 } from "@zoeskoul/learning-client/react";
 import {
+  buildLessonAssessmentDoneProgress,
   buildLessonCardDoneProgress,
   canAutoCompleteLessonCard,
   getTopicProgressState,
@@ -31,6 +32,9 @@ import {
   modulePath,
   navigateStudentApp,
 } from "../app/studentRoutes";
+import {
+  StudentSimpleQuizCard,
+} from "./StudentSimpleQuizCard";
 
 type ProgressState =
   Awaited<ReturnType<typeof fetchReviewProgressGET>>;
@@ -437,6 +441,28 @@ export function StudentLessonHost(props: {
     );
   }
 
+  async function completeCurrentQuiz() {
+    if (
+      !progress ||
+      !activeTopic ||
+      !activeCard ||
+      activeCard.type !== "runtime" ||
+      activeCard.runtimeKind !== "quiz" ||
+      isSaving
+    ) {
+      return;
+    }
+
+    await persistProgress(
+      buildLessonAssessmentDoneProgress({
+        progress,
+        topicSlug: activeTopic.slug,
+        card: activeCard,
+        topics,
+      }),
+    );
+  }
+
   async function goNext() {
     if (
       !nextPosition ||
@@ -749,7 +775,11 @@ export function StudentLessonHost(props: {
                 />
               </div>
 
-              <article className="lesson-content-card">
+              <article
+                className="lesson-content-card"
+                data-testid="lesson-content-card"
+                data-card-id={activeCard.id}
+              >
                 <header className="lesson-card-header">
                   <div>
                     <span>
@@ -763,6 +793,7 @@ export function StudentLessonHost(props: {
                   </div>
 
                   <strong
+                    data-testid="lesson-card-status"
                     className={
                       activeCardComplete
                         ? "is-complete"
@@ -867,6 +898,18 @@ export function StudentLessonHost(props: {
                       </button>
                     </div>
                   </>
+                ) : activeCard.type === "runtime" &&
+                  activeCard.runtimeKind === "quiz" ? (
+                  <StudentSimpleQuizCard
+                    apiOrigin={props.apiOrigin}
+                    subjectSlug={props.subjectSlug}
+                    moduleSlug={props.moduleSlug}
+                    card={activeCard}
+                    completed={activeCardComplete}
+                    disabled={isSaving}
+                    onComplete={completeCurrentQuiz}
+                    onOpenLegacy={openCurrentRuntime}
+                  />
                 ) : (
                   <div className="lesson-runtime-handoff">
                     <span>
@@ -929,6 +972,7 @@ export function StudentLessonHost(props: {
                 <button
                   type="button"
                   className="is-primary"
+                  data-testid="lesson-next-button"
                   onClick={() => void goNext()}
                   disabled={
                     !canGoNext || isSaving

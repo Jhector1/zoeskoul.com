@@ -34,6 +34,13 @@ type TargetRef = ModuleRef & {
 
 type LaunchCandidate = TargetRef & {
   launch: Record<string, unknown>;
+  lesson: unknown;
+};
+
+type LessonCardSnapshot = {
+  id: string;
+  type: string | null;
+  runtimeKind: string | null;
 };
 
 const websiteOrigin =
@@ -197,6 +204,79 @@ function collectQuizTargets(
   });
 
   return out;
+}
+
+/**
+ * derive prerequisite card ids from the learner-safe lesson response
+ *
+ * This is the same DTO rendered by StudentLessonHost. Never infer card
+ * ids from raw manifest positions or synthesized naming conventions.
+ */
+function lessonCardsBeforeTarget(
+  value: unknown,
+  target: RuntimeTarget,
+): LessonCardSnapshot[] | null {
+  if (Array.isArray(value)) {
+    for (const item of value) {
+      const found = lessonCardsBeforeTarget(
+        item,
+        target,
+      );
+
+      if (found) return found;
+    }
+
+    return null;
+  }
+
+  if (!isRecord(value)) return null;
+
+  if (Array.isArray(value.cards)) {
+    const targetIndex =
+      value.cards.findIndex(
+        (card) =>
+          isRecord(card) &&
+          card.id === target.ownerCardId,
+      );
+
+    if (targetIndex >= 0) {
+      return value.cards
+        .slice(0, targetIndex)
+        .flatMap((card) => {
+          if (
+            !isRecord(card) ||
+            typeof card.id !== "string"
+          ) {
+            return [];
+          }
+
+          return [
+            {
+              id: card.id,
+              type:
+                typeof card.type === "string"
+                  ? card.type
+                  : null,
+              runtimeKind:
+                typeof card.runtimeKind === "string"
+                  ? card.runtimeKind
+                  : null,
+            },
+          ];
+        });
+    }
+  }
+
+  for (const nested of Object.values(value)) {
+    const found = lessonCardsBeforeTarget(
+      nested,
+      target,
+    );
+
+    if (found) return found;
+  }
+
+  return null;
 }
 
 async function browserJson(
@@ -438,7 +518,7 @@ test.describe.configure({
 });
 
 test(
-  "Vite student launches and validates a protected simple quiz",
+  "Vite student renders, validates, and persists a protected simple quiz",
   async ({ page }) => {
     test.setTimeout(180_000);
 
@@ -640,12 +720,29 @@ test(
 
         if (
           item.response.status === 200 &&
-          isRecord(item.response.body)
+          isRecord(item.response.body) &&
+          isRecord(
+            item.response.body.exercise,
+          ) &&
+          item.response.body.exercise.kind ===
+            "single_choice"
         ) {
+          const lessonResult =
+            lessonResults.find(
+              (result) =>
+                result.subjectSlug ===
+                  item.targetRef.subjectSlug &&
+                result.moduleSlug ===
+                  item.targetRef.moduleSlug,
+            );
+
           ready = {
             ...item.targetRef,
             launch:
               item.response.body,
+            lesson:
+              lessonResult?.response.body ??
+              null,
           };
           break;
         }
@@ -715,48 +812,566 @@ test(
         unknown
       >;
 
-    expect([
+    expect(exercise.kind).toBe(
       "single_choice",
-      "multi_choice",
-      "numeric",
-    ]).toContain(exercise.kind);
+    );
 
-    const answer =
-      answerForExercise(exercise);
-    const submissionId =
-      randomUUID();
-
-    const validation = await browserJson(
+    const resetProgress = await browserJson(
       page,
-      `${websiteOrigin}` +
-        `${String(
-          launch.validationPath,
-        )}`,
+      `${websiteOrigin}/api/review/progress?` +
+        new URLSearchParams({
+          subjectSlug:
+            ready!.subjectSlug,
+          moduleSlug:
+            ready!.moduleSlug,
+          locale: "en",
+        }).toString(),
       {
-        method: "POST",
-        headers: {
-          "Content-Type":
-            "application/json",
-        },
-        body: {
-          key: launch.key,
-          answer,
-          submissionId,
-        },
+        method: "DELETE",
       },
     );
 
-    expect(validation.status).toBe(200);
-    expect(
-      collectForbiddenPaths(
-        validation.body,
-      ),
-    ).toEqual([]);
-    expect(validation.body).toMatchObject({
-      finalized: expect.any(Boolean),
-      duplicate: false,
-      sessionComplete: expect.any(Boolean),
+    expect(resetProgress.status).toBe(200);
+    expect(resetProgress.body).toMatchObject({
+      ok: true,
     });
+
+    const prerequisiteCards =
+      lessonCardsBeforeTarget(
+        ready!.lesson,
+        ready!.target,
+      );
+
+    expect(
+      prerequisiteCards,
+      "Expected to find the discovered quiz in its learner-safe lesson response.",
+    ).not.toBeNull();
+
+    expect(
+      prerequisiteCards!.length,
+      "Expected the migrated quiz to have prerequisite lesson cards.",
+    ).toBeGreaterThan(0);
+
+    const readingPrerequisiteIds =
+      prerequisiteCards!
+        .filter(
+          (card) =>
+            card.type !== "runtime" ||
+            card.runtimeKind === "sketch",
+        )
+        .map((card) => card.id);
+    const assessmentPrerequisiteIds =
+      prerequisiteCards!
+        .filter(
+          (card) =>
+            card.type === "runtime" &&
+            (
+              card.runtimeKind === "quiz" ||
+              card.runtimeKind === "project"
+            ),
+        )
+        .map((card) => card.id);
+
+    const readingPrerequisiteDone =
+      Object.fromEntries(
+        readingPrerequisiteIds.map(
+          (cardId) => [cardId, true],
+        ),
+      );
+    const assessmentPrerequisiteDone =
+      Object.fromEntries(
+        assessmentPrerequisiteIds.map(
+          (cardId) => [cardId, true],
+        ),
+      );
+    const canonicalTopicKey =
+      ready!.target.topicSlug
+        .split(".")
+        .filter(Boolean)
+        .at(-1) ??
+      ready!.target.topicSlug;
+
+    const seededProgress =
+      await browserJson(
+        page,
+        `${websiteOrigin}/api/review/progress`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type":
+              "application/json",
+          },
+          body: {
+            subjectSlug:
+              ready!.subjectSlug,
+            moduleSlug:
+              ready!.moduleSlug,
+            locale: "en",
+            state: {
+              activeTopicId:
+                canonicalTopicKey,
+              moduleCompleted: false,
+              topics: {
+                [canonicalTopicKey]: {
+                  completed: false,
+                  readingDone:
+                    readingPrerequisiteDone,
+                  cardsDone:
+                    readingPrerequisiteDone,
+                  quizzesDone:
+                    assessmentPrerequisiteDone,
+                },
+              },
+              __saveRevision:
+                Date.now(),
+            },
+          },
+        },
+      );
+
+    expect(seededProgress.status).toBe(200);
+
+    /**
+     * Verify that the exact learner-safe prerequisite card ids survive
+     * PUT -> GET before StudentLessonHost hydrates the lesson.
+     */
+    const restoredProgress =
+      await browserJson(
+        page,
+        `${websiteOrigin}/api/review/progress?` +
+          new URLSearchParams({
+            subjectSlug:
+              ready!.subjectSlug,
+            moduleSlug:
+              ready!.moduleSlug,
+            locale: "en",
+          }).toString(),
+      );
+
+    expect(restoredProgress.status).toBe(200);
+    expect(isRecord(restoredProgress.body)).toBe(true);
+
+    const restoredState =
+      isRecord(restoredProgress.body) &&
+      isRecord(
+        restoredProgress.body.progress,
+      )
+        ? restoredProgress.body.progress
+        : null;
+
+    expect(
+      restoredState,
+      "Expected review-progress GET to return the seeded state.",
+    ).not.toBeNull();
+
+    const restoredTopics =
+      isRecord(restoredState) &&
+      isRecord(restoredState.topics)
+        ? restoredState.topics
+        : null;
+    const restoredTopic =
+      restoredTopics &&
+      isRecord(
+        restoredTopics[
+          canonicalTopicKey
+        ],
+      )
+        ? restoredTopics[
+            canonicalTopicKey
+          ]
+        : null;
+
+    expect(
+      restoredTopic,
+      `Expected restored topic ${canonicalTopicKey}.`,
+    ).not.toBeNull();
+
+    const restoredReadingDone =
+      restoredTopic &&
+      isRecord(restoredTopic.readingDone)
+        ? restoredTopic.readingDone
+        : null;
+    const restoredCardsDone =
+      restoredTopic &&
+      isRecord(restoredTopic.cardsDone)
+        ? restoredTopic.cardsDone
+        : null;
+
+    for (const cardId of readingPrerequisiteIds) {
+      expect(
+        restoredReadingDone?.[cardId],
+        `Expected readingDone[${cardId}] after PUT -> GET.`,
+      ).toBe(true);
+      expect(
+        restoredCardsDone?.[cardId],
+        `Expected cardsDone[${cardId}] after PUT -> GET.`,
+      ).toBe(true);
+    }
+
+    const lessonUrl =
+      `/courses/${encodeURIComponent(
+        ready!.subjectSlug,
+      )}` +
+      `/modules/${encodeURIComponent(
+        ready!.moduleSlug,
+      )}/learn`;
+
+    await page.goto(lessonUrl, {
+      waitUntil: "domcontentloaded",
+    });
+
+    expect(new URL(page.url()).origin).toBe(
+      studentOrigin,
+    );
+
+    const lessonContentCard =
+      page.getByTestId(
+        "lesson-content-card",
+      );
+
+    await expect(
+      lessonContentCard,
+    ).toBeVisible();
+
+    const visibleCardId =
+      await lessonContentCard.getAttribute(
+        "data-card-id",
+      );
+
+    expect(
+      visibleCardId,
+      "Expected the lesson to open on the first prerequisite card.",
+    ).toBe(prerequisiteCards![0]?.id);
+
+    await expect(
+      page.getByTestId(
+        "lesson-card-status",
+      ),
+      `Expected StudentLessonHost to hydrate completion for ${String(
+        visibleCardId,
+      )}.`,
+    ).toHaveText("Complete");
+
+    const quiz = page.getByTestId(
+      "student-simple-quiz",
+    );
+    const nextButton = page.getByTestId(
+      "lesson-next-button",
+    );
+
+    for (
+      let step = 0;
+      step < 32;
+      step += 1
+    ) {
+      const currentCardId =
+        await lessonContentCard.getAttribute(
+          "data-card-id",
+        );
+
+      /**
+       * Break as soon as the semantic target card is active.
+       * The quiz component may still be mounting, while its Next button is
+       * already correctly disabled until the learner answers.
+       */
+      if (
+        currentCardId ===
+          ready!.target.ownerCardId ||
+        await quiz
+          .isVisible()
+          .catch(() => false)
+      ) {
+        break;
+      }
+
+      const completionButton =
+        page.getByRole("button", {
+          name: /Mark as read|Mark watched/,
+        });
+
+      if (
+        await completionButton
+          .isVisible()
+          .catch(() => false)
+      ) {
+        await completionButton.click();
+      }
+
+      await expect(nextButton).toBeEnabled();
+      await nextButton.click();
+
+      /**
+       * Wait for the visible card to change before checking the next step.
+       * The destination can be the migrated quiz, whose Next button is
+       * correctly disabled until the learner answers it.
+       */
+      await expect
+        .poll(
+          async () => {
+            if (
+              await quiz
+                .isVisible()
+                .catch(() => false)
+            ) {
+              return "quiz";
+            }
+
+            const nextCardId =
+              await lessonContentCard.getAttribute(
+                "data-card-id",
+              );
+
+            return (
+              nextCardId &&
+              nextCardId !== currentCardId
+                ? nextCardId
+                : null
+            );
+          },
+          {
+            message:
+              "Expected Next to display a different lesson card.",
+          },
+        )
+        .not.toBeNull();
+    }
+
+    await expect(
+      lessonContentCard,
+    ).toHaveAttribute(
+      "data-card-id",
+      ready!.target.ownerCardId,
+    );
+    await expect(quiz).toBeVisible();
+    await expect(quiz).toHaveAttribute(
+      "data-owner-card-id",
+      ready!.target.ownerCardId,
+    );
+    await expect(quiz).toHaveAttribute(
+      "data-exercise-kind",
+      "single_choice",
+    );
+
+    const visibleOptions =
+      quiz.locator(
+        'input[type="radio"]',
+      );
+    const optionCount =
+      await visibleOptions.count();
+
+    expect(
+      optionCount,
+      "The migrated single-choice quiz must expose learner-visible options.",
+    ).toBeGreaterThan(0);
+
+    const progressSaveStatuses:
+      number[] = [];
+
+    page.on("response", (response) => {
+      const request = response.request();
+      const url = new URL(response.url());
+
+      if (
+        request.method() === "PUT" &&
+        url.origin === websiteOrigin &&
+        url.pathname ===
+          "/api/review/progress"
+      ) {
+        progressSaveStatuses.push(
+          response.status(),
+        );
+      }
+    });
+
+    let correctValidation:
+      Record<string, unknown> | null = null;
+    let duplicateRequestBody:
+      Record<string, unknown> | null = null;
+
+    for (
+      let optionIndex = 0;
+      optionIndex < optionCount;
+      optionIndex += 1
+    ) {
+      await visibleOptions
+        .nth(optionIndex)
+        .check();
+
+      const validationResponsePromise =
+        page.waitForResponse(
+          (response) => {
+            const request =
+              response.request();
+            const url =
+              new URL(response.url());
+
+            return (
+              request.method() ===
+                "POST" &&
+              url.origin ===
+                websiteOrigin &&
+              url.pathname ===
+                "/api/student/runtime/practice/validate"
+            );
+          },
+        );
+
+      await page
+        .getByTestId(
+          "student-simple-quiz-submit",
+        )
+        .click();
+
+      const validationResponse =
+        await validationResponsePromise;
+      expect(
+        validationResponse.status(),
+      ).toBe(200);
+
+      const validationBody =
+        await validationResponse.json();
+
+      expect(
+        collectForbiddenPaths(
+          validationBody,
+        ),
+      ).toEqual([]);
+      expect(validationBody).toMatchObject({
+        finalized: expect.any(Boolean),
+        duplicate: false,
+        sessionComplete: expect.any(Boolean),
+      });
+
+      if (
+        isRecord(validationBody) &&
+        validationBody.ok === true
+      ) {
+        const posted =
+          validationResponse
+            .request()
+            .postDataJSON();
+
+        expect(isRecord(posted)).toBe(true);
+
+        correctValidation =
+          validationBody;
+        duplicateRequestBody =
+          posted as Record<
+            string,
+            unknown
+          >;
+        break;
+      }
+
+      await expect(
+        page.getByTestId(
+          "student-simple-quiz-feedback",
+        ),
+      ).toContainText(
+        "Try again",
+      );
+    }
+
+    expect(
+      correctValidation,
+      "Expected one visible option to validate correctly.",
+    ).not.toBeNull();
+    expect(
+      duplicateRequestBody,
+    ).not.toBeNull();
+
+    await expect(
+      page.getByTestId(
+        "student-simple-quiz-feedback",
+      ),
+    ).toContainText("Correct");
+
+    await expect(
+      page.getByTestId(
+        "student-simple-quiz-submit",
+      ),
+    ).toContainText("Complete");
+
+    await expect(
+      page.getByTestId(
+        "lesson-card-status",
+      ),
+    ).toHaveText("Complete");
+
+    await expect(nextButton).toBeEnabled();
+
+    await expect
+      .poll(
+        () =>
+          progressSaveStatuses.some(
+            (status) => status === 200,
+          ),
+        {
+          message:
+            "Expected the visible correct answer to persist review progress.",
+        },
+      )
+      .toBe(true);
+
+    await expect
+      .poll(
+        async () => {
+          const progressResult =
+            await browserJson(
+              page,
+              `${websiteOrigin}/api/review/progress?` +
+                new URLSearchParams({
+                  subjectSlug:
+                    ready!.subjectSlug,
+                  moduleSlug:
+                    ready!.moduleSlug,
+                  locale: "en",
+                }).toString(),
+            );
+
+          if (
+            progressResult.status !==
+              200 ||
+            !isRecord(
+              progressResult.body,
+            ) ||
+            !isRecord(
+              progressResult.body
+                .progress,
+            )
+          ) {
+            return false;
+          }
+
+          const topics =
+            progressResult.body
+              .progress.topics;
+
+          if (!isRecord(topics)) {
+            return false;
+          }
+
+          const topic =
+            topics[
+              canonicalTopicKey
+            ];
+
+          return (
+            isRecord(topic) &&
+            isRecord(
+              topic.quizzesDone,
+            ) &&
+            topic.quizzesDone[
+              ready!.target.ownerCardId
+            ] === true
+          );
+        },
+        {
+          message:
+            "Expected quizzesDone to contain the visible runtime card id.",
+        },
+      )
+      .toBe(true);
 
     const duplicate = await browserJson(
       page,
@@ -770,11 +1385,8 @@ test(
           "Content-Type":
             "application/json",
         },
-        body: {
-          key: launch.key,
-          answer,
-          submissionId,
-        },
+        body:
+          duplicateRequestBody!,
       },
     );
 
