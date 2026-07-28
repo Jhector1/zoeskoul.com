@@ -391,7 +391,7 @@ function isNullableString(
   return value === null || typeof value === "string";
 }
 
-function isLearningRuntimeTarget(
+export function isLearningRuntimeTarget(
   value: unknown,
 ): value is LearningRuntimeTarget {
   return (
@@ -631,4 +631,33 @@ export function isLearningPracticeExercise(
   }
 
   return !hasForbiddenLearningPracticeFields(value);
+}
+
+export type LearningRuntimeLaunchActivity = {
+  kind: "legacy_handoff";
+  href: string;
+  reason: "runtime_not_migrated";
+};
+
+export type LearningRuntimeLaunchResponse = {
+  target: LearningRuntimeTarget;
+  title: string | null;
+  activity: LearningRuntimeLaunchActivity;
+};
+
+export function isLearningRuntimeLaunchResponse(
+  value: unknown,
+): value is LearningRuntimeLaunchResponse {
+  return (
+    isRecord(value) &&
+    isLearningRuntimeTarget(value.target) &&
+    isNullableString(value.title) &&
+    isRecord(value.activity) &&
+    value.activity.kind === "legacy_handoff" &&
+    typeof value.activity.href === "string" &&
+    value.activity.href.startsWith("/") &&
+    value.activity.reason === "runtime_not_migrated" &&
+    !hasForbiddenLearningLessonFields(value) &&
+    !hasForbiddenLearningPracticeFields(value)
+  );
 }

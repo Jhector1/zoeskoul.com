@@ -2,10 +2,13 @@ import {
   isLearningCourseOverviewResponse,
   isLearningLessonContentResponse,
   isLearningModuleOverviewResponse,
+  isLearningRuntimeLaunchResponse,
   isMyLearningResponse,
   type LearningCourseOverviewResponse,
   type LearningLessonContentResponse,
   type LearningModuleOverviewResponse,
+  type LearningRuntimeLaunchResponse,
+  type LearningRuntimeTarget,
   type MyLearningResponse,
 } from "@zoeskoul/learning-contracts";
 import {
@@ -26,6 +29,9 @@ export type {
   LearningLessonTopic,
   LearningLessonVideoCard,
   LearningModuleOverviewResponse,
+  LearningRuntimeLaunchActivity,
+  LearningRuntimeLaunchResponse,
+  LearningRuntimeTarget,
   LearningModuleSectionSummary,
   LearningModuleTopicSummary,
   LearningTutoringSummary,
@@ -130,6 +136,44 @@ export function createLearningClient(
 
       if (!isLearningLessonContentResponse(response)) {
         throw new Error("The lesson content response was invalid.");
+      }
+
+      return response;
+    },
+
+    async fetchRuntimeLaunch(args: {
+      subjectSlug: string;
+      moduleSlug: string;
+      target: LearningRuntimeTarget;
+      locale?: string;
+      signal?: AbortSignal;
+    }): Promise<LearningRuntimeLaunchResponse> {
+      const query = new URLSearchParams({
+        locale: args.locale?.trim() || "en",
+        version: String(args.target.version),
+        sectionSlug: args.target.sectionSlug,
+        topicSlug: args.target.topicSlug,
+        ownerCardId: args.target.ownerCardId,
+        targetKind: args.target.targetKind,
+        targetId: args.target.targetId,
+        runtimeKind: args.target.runtimeKind,
+      });
+
+      const response = await api.request<unknown>(
+        `/api/student/courses/${encodeURIComponent(args.subjectSlug)}` +
+          `/modules/${encodeURIComponent(args.moduleSlug)}` +
+          `/runtime?${query.toString()}`,
+        {
+          method: "GET",
+          cache: "no-store",
+          signal: args.signal,
+        },
+      );
+
+      if (!isLearningRuntimeLaunchResponse(response)) {
+        throw new Error(
+          "The runtime launch response was invalid.",
+        );
       }
 
       return response;
