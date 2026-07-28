@@ -204,3 +204,122 @@ export type {
   ReviewProgressSaveResponseData,
   ReviewProgressSaveResult,
 } from "./reviewProgress";
+
+// ---------------------------------------------------------------------------
+// Protected Vite practice gateway client.
+// ---------------------------------------------------------------------------
+
+import {
+  isLearningPracticeLaunchResponse,
+  isLearningPracticeValidationResponse,
+  type LearningPracticeLaunchResponse,
+  type LearningPracticeValidationResponse,
+  type LearningSimplePracticeAnswer,
+} from "@zoeskoul/learning-contracts";
+
+export type {
+  LearningPracticeLaunchResponse,
+  LearningPracticeValidationResponse,
+  LearningSimplePracticeAnswer,
+} from "@zoeskoul/learning-contracts";
+
+function appendRuntimeTarget(
+  search: URLSearchParams,
+  target: LearningRuntimeTarget,
+) {
+  search.set("version", String(target.version));
+  search.set("sectionSlug", target.sectionSlug);
+  search.set("topicSlug", target.topicSlug);
+  search.set("ownerCardId", target.ownerCardId);
+  search.set("targetKind", target.targetKind);
+  search.set("targetId", target.targetId);
+  search.set("runtimeKind", target.runtimeKind);
+}
+
+export function createStudentPracticeClient(
+  options: LearningClientOptions,
+) {
+  const api = createApiClient({
+    baseOrigin: options.apiOrigin,
+    fetchImpl: options.fetchImpl,
+  });
+
+  return {
+    async launch(args: {
+      subjectSlug: string;
+      moduleSlug: string;
+      target: LearningRuntimeTarget;
+      locale?: string;
+      signal?: AbortSignal;
+    }): Promise<LearningPracticeLaunchResponse> {
+      const search = new URLSearchParams();
+      search.set(
+        "locale",
+        args.locale?.trim() || "en",
+      );
+      appendRuntimeTarget(search, args.target);
+
+      const path =
+        `/api/student/courses/${encodeURIComponent(args.subjectSlug)}` +
+        `/modules/${encodeURIComponent(args.moduleSlug)}` +
+        `/runtime/practice?${search.toString()}`;
+
+      const payload = await api.request<unknown>(
+        path,
+        {
+          method: "GET",
+          cache: "no-store",
+          signal: args.signal,
+        },
+      );
+
+      if (
+        !isLearningPracticeLaunchResponse(payload)
+      ) {
+        throw new Error(
+          "The student practice launch response was invalid.",
+        );
+      }
+
+      return payload;
+    },
+
+    async validate(args: {
+      key: string;
+      answer: LearningSimplePracticeAnswer;
+      submissionId?: string;
+      signal?: AbortSignal;
+    }): Promise<LearningPracticeValidationResponse> {
+      const payload = await api.request<unknown>(
+        "/api/student/runtime/practice/validate",
+        {
+          method: "POST",
+          cache: "no-store",
+          signal: args.signal,
+          json: {
+            key: args.key,
+            answer: args.answer,
+            submissionId:
+              args.submissionId?.trim() ||
+              undefined,
+          },
+        },
+      );
+
+      if (
+        !isLearningPracticeValidationResponse(
+          payload,
+        )
+      ) {
+        throw new Error(
+          "The student practice validation response was invalid.",
+        );
+      }
+
+      return payload;
+    },
+  };
+}
+
+export type StudentPracticeClient =
+  ReturnType<typeof createStudentPracticeClient>;

@@ -661,3 +661,153 @@ export function isLearningRuntimeLaunchResponse(
     !hasForbiddenLearningPracticeFields(value)
   );
 }
+
+// ---------------------------------------------------------------------------
+// Protected Vite practice gateway contracts.
+// ---------------------------------------------------------------------------
+
+export type LearningSimplePracticeAnswer =
+  | {
+      kind: "single_choice";
+      optionId: string;
+    }
+  | {
+      kind: "multi_choice";
+      optionIds: string[];
+    }
+  | {
+      kind: "numeric";
+      value: number;
+    };
+
+export type LearningPracticeLaunchResponse = {
+  target: LearningRuntimeTarget;
+  title: string | null;
+  exercise: LearningPracticeExercise;
+  key: string;
+  sessionId: string | null;
+  run: Record<string, unknown> | null;
+  validationPath:
+    "/api/student/runtime/practice/validate";
+};
+
+export type LearningPracticeValidationAttempts = {
+  used: number;
+  max: number | null;
+  left: number | null;
+};
+
+export type LearningPracticeValidationResponse = {
+  ok: boolean | null;
+  message: string | null;
+  code: string | null;
+  explanation: string | null;
+  feedback: unknown;
+  finalized: boolean;
+  duplicate: boolean;
+  attempts: LearningPracticeValidationAttempts | null;
+  sessionComplete: boolean;
+  requestId: string | null;
+};
+
+function isLearningNullableString(
+  value: unknown,
+): value is string | null {
+  return value === null || typeof value === "string";
+}
+
+function isLearningNullableFiniteNumber(
+  value: unknown,
+): value is number | null {
+  return (
+    value === null ||
+    (
+      typeof value === "number" &&
+      Number.isFinite(value)
+    )
+  );
+}
+
+export function isLearningSimplePracticeAnswer(
+  value: unknown,
+): value is LearningSimplePracticeAnswer {
+  if (!isRecord(value)) return false;
+
+  if (value.kind === "single_choice") {
+    return typeof value.optionId === "string";
+  }
+
+  if (value.kind === "multi_choice") {
+    return (
+      Array.isArray(value.optionIds) &&
+      value.optionIds.every(
+        (optionId) => typeof optionId === "string",
+      )
+    );
+  }
+
+  return (
+    value.kind === "numeric" &&
+    typeof value.value === "number" &&
+    Number.isFinite(value.value)
+  );
+}
+
+export function isLearningPracticeLaunchResponse(
+  value: unknown,
+): value is LearningPracticeLaunchResponse {
+  if (!isRecord(value)) return false;
+
+  return (
+    isLearningRuntimeTarget(value.target) &&
+    isLearningNullableString(value.title) &&
+    isLearningPracticeExercise(value.exercise) &&
+    !hasForbiddenLearningPracticeFields(
+      value.exercise,
+    ) &&
+    typeof value.key === "string" &&
+    value.key.length >= 16 &&
+    isLearningNullableString(value.sessionId) &&
+    (
+      value.run === null ||
+      (
+        isRecord(value.run) &&
+        !Array.isArray(value.run)
+      )
+    ) &&
+    value.validationPath ===
+      "/api/student/runtime/practice/validate"
+  );
+}
+
+export function isLearningPracticeValidationResponse(
+  value: unknown,
+): value is LearningPracticeValidationResponse {
+  if (!isRecord(value)) return false;
+
+  const attempts = value.attempts;
+  const attemptsValid =
+    attempts === null ||
+    (
+      isRecord(attempts) &&
+      typeof attempts.used === "number" &&
+      Number.isFinite(attempts.used) &&
+      isLearningNullableFiniteNumber(attempts.max) &&
+      isLearningNullableFiniteNumber(attempts.left)
+    );
+
+  return (
+    (
+      value.ok === null ||
+      typeof value.ok === "boolean"
+    ) &&
+    isLearningNullableString(value.message) &&
+    isLearningNullableString(value.code) &&
+    isLearningNullableString(value.explanation) &&
+    typeof value.finalized === "boolean" &&
+    typeof value.duplicate === "boolean" &&
+    attemptsValid &&
+    typeof value.sessionComplete === "boolean" &&
+    isLearningNullableString(value.requestId)
+  );
+}
