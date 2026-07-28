@@ -525,3 +525,110 @@ export function isLearningLessonContentResponse(
     )
   );
 }
+
+export const LEARNING_PRACTICE_EXERCISE_KINDS = [
+  "single_choice",
+  "multi_choice",
+  "numeric",
+  "vector_drag_target",
+  "vector_drag_dot",
+  "matrix_input",
+  "code_input",
+  "text_input",
+  "drag_reorder",
+  "voice_input",
+  "word_bank_arrange",
+  "listen_build",
+  "fill_blank_choice",
+] as const;
+
+export type LearningPracticeExerciseKind =
+  (typeof LEARNING_PRACTICE_EXERCISE_KINDS)[number];
+
+export const LEARNING_PRACTICE_FORBIDDEN_FIELDS = [
+  "answer",
+  "answerId",
+  "answerKey",
+  "checkSql",
+  "correct",
+  "correctAnswer",
+  "correctValue",
+  "expected",
+  "expectedAnswerPayload",
+  "expectedSolution",
+  "hiddenTests",
+  "recipe",
+  "reveal",
+  "revealAnswer",
+  "secretPayload",
+  "solutionCode",
+  "solutionFiles",
+  "sourceChecks",
+  "tests",
+] as const;
+
+const learningPracticeForbiddenFieldSet = new Set<string>(
+  LEARNING_PRACTICE_FORBIDDEN_FIELDS,
+);
+
+export type LearningPracticeExercise = {
+  id: string;
+  exerciseKey: string | null;
+  kind: LearningPracticeExerciseKind;
+  topic: string;
+  difficulty: "easy" | "medium" | "hard";
+  title: string;
+  prompt: string;
+  payload: Record<string, unknown>;
+};
+
+export function hasForbiddenLearningPracticeFields(
+  value: unknown,
+): boolean {
+  if (Array.isArray(value)) {
+    return value.some(hasForbiddenLearningPracticeFields);
+  }
+
+  if (!isRecord(value)) return false;
+
+  for (const [key, nested] of Object.entries(value)) {
+    if (learningPracticeForbiddenFieldSet.has(key)) {
+      return true;
+    }
+
+    if (hasForbiddenLearningPracticeFields(nested)) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
+export function isLearningPracticeExercise(
+  value: unknown,
+): value is LearningPracticeExercise {
+  if (
+    !isRecord(value) ||
+    typeof value.id !== "string" ||
+    !(
+      value.exerciseKey === null ||
+      typeof value.exerciseKey === "string"
+    ) ||
+    !LEARNING_PRACTICE_EXERCISE_KINDS.includes(
+      value.kind as LearningPracticeExerciseKind,
+    ) ||
+    typeof value.topic !== "string" ||
+    (
+      value.difficulty !== "easy" &&
+      value.difficulty !== "medium" &&
+      value.difficulty !== "hard"
+    ) ||
+    typeof value.title !== "string" ||
+    typeof value.prompt !== "string" ||
+    !isRecord(value.payload)
+  ) {
+    return false;
+  }
+
+  return !hasForbiddenLearningPracticeFields(value);
+}
