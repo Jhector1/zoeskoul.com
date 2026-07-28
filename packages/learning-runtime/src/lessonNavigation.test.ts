@@ -13,6 +13,7 @@ import {
   buildLessonEmbeddedTryItDoneProgress,
   canAutoCompleteLessonCard,
   isLessonCardComplete,
+  isLessonEmbeddedTryItPassed,
   isLessonTopicComplete,
   isLessonTopicUnlocked,
   nextLessonPosition,
@@ -275,6 +276,12 @@ describe("lesson navigation contracts", () => {
         progress.topics?.["dictionary-basics"],
       ),
     ).toBe(false);
+    expect(
+      isLessonEmbeddedTryItPassed(
+        card,
+        progress.topics?.["dictionary-basics"],
+      ),
+    ).toBe(true);
   });
 
   it("marks the parent reading card only after its embedded Try It passes", () => {
@@ -288,6 +295,12 @@ describe("lesson navigation contracts", () => {
     });
 
     expect(beforePass.topics).toEqual({});
+    expect(
+      isLessonEmbeddedTryItPassed(
+        card,
+        beforePass.topics?.["dictionary-basics"],
+      ),
+    ).toBe(false);
 
     const passed = buildLessonEmbeddedTryItDoneProgress({
       progress: beforePass,

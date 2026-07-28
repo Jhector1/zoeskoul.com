@@ -554,3 +554,126 @@
   border: 1px solid rgba(205, 53, 70, 0.2);
   color: #8b2532;
 }
+.student-embedded-try-it {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.2rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid rgba(32, 51, 84, 0.1);
+}
+
+.student-embedded-try-it.is-loading {
+  min-height: 14rem;
+  place-content: center;
+  justify-items: center;
+}
+
+.student-embedded-try-it.is-error {
+  padding: 1rem;
+  border: 1px solid rgba(205, 53, 70, 0.2);
+  border-radius: 0.95rem;
+  background: rgba(205, 53, 70, 0.08);
+  color: #8b2532;
+}
+
+.student-embedded-try-it.is-error p {
+  margin: 0.4rem 0 0;
+}
+
+.student-embedded-try-it-heading {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.student-embedded-try-it-heading > span {
+  color: #6046dc;
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.student-embedded-try-it-heading h5,
+.student-embedded-try-it-heading p {
+  margin: 0;
+}
+
+.student-embedded-try-it-heading h5 {
+  font-size: 1.2rem;
+}
+
+.student-embedded-try-it-filebar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: -0.35rem;
+  padding: 0.7rem 0.85rem;
+  border: 1px solid rgba(32, 51, 84, 0.14);
+  border-bottom: 0;
+  border-radius: 0.9rem 0.9rem 0 0;
+  background: #f6f7fb;
+  color: #59667d;
+  font-size: 0.76rem;
+}
+
+.student-embedded-try-it-filebar strong {
+  color: #203354;
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    monospace;
+}
+
+.student-embedded-try-it .zoe-controlled-code-editor {
+  border-radius: 0 0 0.95rem 0.95rem;
+}
+
+.student-embedded-try-it-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+}
+
+.student-embedded-try-it-actions button {
+  padding: 0.75rem 1rem;
+  border: 0;
+  border-radius: 0.8rem;
+  background: #6046dc;
+  color: white;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 800;
+}
+
+.student-embedded-try-it-actions button.is-secondary {
+  background: rgba(32, 51, 84, 0.08);
+  color: #203354;
+}
+
+.student-embedded-try-it-actions button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.student-embedded-try-it-next {
+  margin: 0;
+  color: #176b4a;
+  font-size: 0.82rem;
+  font-weight: 750;
+}
+
+@media (max-width: 640px) {
+  .student-embedded-try-it-filebar {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .student-embedded-try-it-actions button {
+    flex: 1 1 100%;
+  }
+}

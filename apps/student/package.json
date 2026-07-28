@@ -12,6 +12,7 @@
   "dependencies": {
     "@zoeskoul/app-config": "workspace:*",
     "@zoeskoul/auth-client": "workspace:*",
+    "@zoeskoul/editor-surface": "workspace:*",
     "@zoeskoul/learning-client": "workspace:*",
     "@zoeskoul/learning-runtime": "workspace:*",
     "@zoeskoul/lesson-renderer": "workspace:*",

@@ -1,0 +1,17 @@
+.zoe-controlled-code-editor {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid rgba(32, 51, 84, 0.16);
+  border-radius: 0.95rem;
+  background: #1e1e1e;
+}
+
+.zoe-controlled-code-editor-loading {
+  display: grid;
+  min-height: 12rem;
+  place-items: center;
+  background: #1e1e1e;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.82rem;
+  font-weight: 700;
+}

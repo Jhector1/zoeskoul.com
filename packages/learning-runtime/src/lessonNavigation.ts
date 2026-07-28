@@ -75,7 +75,7 @@ function embeddedTryItTargetId(
     : null;
 }
 
-function embeddedTryItPassed(
+export function isLessonEmbeddedTryItPassed(
   card: Extract<
     LessonNavigationCard,
     { type: "text" }
@@ -116,7 +116,7 @@ export function isLessonCardComplete(
      * assessment alone must not complete the parent card.
      */
     return (
-      embeddedTryItPassed(card, topic) &&
+      isLessonEmbeddedTryItPassed(card, topic) &&
       readingComplete(topic, card.id)
     );
   }
@@ -282,7 +282,7 @@ export function buildLessonCardDoneProgress(args: {
   const requiredRuntimeReady =
     args.card.type === "text" &&
     args.card.runtimeRequired === true &&
-    embeddedTryItPassed(args.card, currentTopic);
+    isLessonEmbeddedTryItPassed(args.card, currentTopic);
 
   if (
     !canAutoCompleteLessonCard(args.card) &&

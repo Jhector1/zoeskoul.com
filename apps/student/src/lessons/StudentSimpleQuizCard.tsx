@@ -14,7 +14,13 @@ import {
   useState,
 } from "react";
 
-type JsonRecord = Record<string, unknown>;
+import {
+  isNotMigratedError,
+  isRecord,
+  messageFromError,
+  practiceFeedbackText,
+  studentSubmissionId,
+} from "./studentPracticeUi";
 
 type PracticeOption = {
   id: string;
@@ -38,37 +44,6 @@ type LoadState =
       message: string;
     };
 
-function isRecord(value: unknown): value is JsonRecord {
-  return (
-    typeof value === "object" &&
-    value !== null &&
-    !Array.isArray(value)
-  );
-}
-
-function messageFromError(
-  error: unknown,
-  fallback: string,
-): string {
-  return error instanceof Error
-    ? error.message
-    : fallback;
-}
-
-function isNotMigratedError(
-  error: unknown,
-): boolean {
-  if (!isRecord(error) || error.status !== 409) {
-    return false;
-  }
-
-  const payload = error.payload;
-  return (
-    isRecord(payload) &&
-    payload.code === "RUNTIME_NOT_MIGRATED"
-  );
-}
-
 function practiceOptions(
   launch: LearningPracticeLaunchResponse,
 ): PracticeOption[] {
@@ -91,22 +66,6 @@ function practiceOptions(
       ? [{ id, label }]
       : [];
   });
-}
-
-function feedbackText(
-  validation: LearningPracticeValidationResponse,
-): string {
-  return (
-    validation.explanation ??
-    validation.message ??
-    (
-      validation.ok === true
-        ? "Correct."
-        : validation.ok === false
-          ? "That answer is not correct yet."
-          : "Your answer was checked."
-    )
-  );
 }
 
 export function StudentSimpleQuizCard(props: {
@@ -346,8 +305,7 @@ export function StudentSimpleQuizCard(props: {
         key: launch.key,
         answer,
         submissionId:
-          globalThis.crypto?.randomUUID?.() ??
-          `student-${Date.now()}`,
+          studentSubmissionId(),
       });
 
       setValidation(result);
@@ -480,7 +438,7 @@ export function StudentSimpleQuizCard(props: {
                 ? "Try again"
                 : "Answer checked"}
           </strong>
-          <p>{feedbackText(validation)}</p>
+          <p>{practiceFeedbackText(validation)}</p>
           {validation.attempts ? (
             <small>
               Attempts used:{" "}

@@ -9,9 +9,11 @@ import {
 import {
   buildLessonAssessmentDoneProgress,
   buildLessonCardDoneProgress,
+  buildLessonEmbeddedTryItDoneProgress,
   canAutoCompleteLessonCard,
   getTopicProgressState,
   isLessonCardComplete,
+  isLessonEmbeddedTryItPassed,
   isLessonTopicComplete,
   isLessonTopicUnlocked,
   nextLessonPosition,
@@ -32,6 +34,9 @@ import {
   modulePath,
   navigateStudentApp,
 } from "../app/studentRoutes";
+import {
+  StudentEmbeddedTryItCard,
+} from "./StudentEmbeddedTryItCard";
 import {
   StudentSimpleQuizCard,
 } from "./StudentSimpleQuizCard";
@@ -261,13 +266,23 @@ export function StudentLessonHost(props: {
           activeCard,
         )
       : false;
+  const activeEmbeddedTryItPassed =
+    activeCard?.type === "text"
+      ? isLessonEmbeddedTryItPassed(
+          activeCard,
+          topicProgress,
+        )
+      : false;
+  const activeCardCompletableNow =
+    activeCardAutoCompletable ||
+    activeEmbeddedTryItPassed;
 
   const previewProgress =
     progress &&
     activeTopic &&
     activeCard &&
     !activeCardComplete &&
-    activeCardAutoCompletable
+    activeCardCompletableNow
       ? buildLessonCardDoneProgress({
           progress,
           topicSlug: activeTopic.slug,
@@ -331,7 +346,7 @@ export function StudentLessonHost(props: {
     Boolean(nextPosition) &&
     (
       activeCardComplete ||
-      activeCardAutoCompletable
+      activeCardCompletableNow
     );
   const isSaving = saveState === "saving";
 
@@ -463,6 +478,33 @@ export function StudentLessonHost(props: {
     );
   }
 
+  async function completeCurrentEmbeddedTryIt() {
+    if (
+      !progress ||
+      !activeTopic ||
+      !activeCard ||
+      activeCard.type !== "text" ||
+      activeCard.runtimeRequired !== true ||
+      !activeCard.runtime ||
+      activeCard.runtime.targetKind !==
+        "embedded_try_it" ||
+      activeCard.runtime.runtimeKind !==
+        "try_it" ||
+      isSaving
+    ) {
+      return;
+    }
+
+    await persistProgress(
+      buildLessonEmbeddedTryItDoneProgress({
+        progress,
+        topicSlug: activeTopic.slug,
+        card: activeCard,
+        topics,
+      }),
+    );
+  }
+
   async function goNext() {
     if (
       !nextPosition ||
@@ -479,7 +521,7 @@ export function StudentLessonHost(props: {
     if (
       nextProgress &&
       !activeCardComplete &&
-      activeCardAutoCompletable
+      activeCardCompletableNow
     ) {
       nextProgress =
         buildLessonCardDoneProgress({
@@ -812,7 +854,28 @@ export function StudentLessonHost(props: {
                       content={activeCard.markdown}
                     />
 
-                    {activeCard.runtimeRequired ? (
+                    {activeCard.runtimeRequired &&
+                    activeCard.runtime?.targetKind ===
+                      "embedded_try_it" &&
+                    activeCard.runtime.runtimeKind ===
+                      "try_it" ? (
+                      <StudentEmbeddedTryItCard
+                        apiOrigin={props.apiOrigin}
+                        subjectSlug={props.subjectSlug}
+                        moduleSlug={props.moduleSlug}
+                        card={activeCard}
+                        passed={
+                          activeEmbeddedTryItPassed
+                        }
+                        disabled={isSaving}
+                        onPass={
+                          completeCurrentEmbeddedTryIt
+                        }
+                        onOpenLegacy={
+                          openCurrentRuntime
+                        }
+                      />
+                    ) : activeCard.runtimeRequired ? (
                       <div className="lesson-runtime-handoff">
                         <span>
                           Complete the embedded Try It in

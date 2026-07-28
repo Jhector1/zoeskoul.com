@@ -128,6 +128,7 @@ export {
   buildLessonEmbeddedTryItDoneProgress,
   canAutoCompleteLessonCard,
   isLessonCardComplete,
+  isLessonEmbeddedTryItPassed,
   isLessonTopicComplete,
   isLessonTopicUnlocked,
   nextLessonPosition,

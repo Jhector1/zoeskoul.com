@@ -148,6 +148,9 @@ importers:
       '@zoeskoul/auth-client':
         specifier: workspace:*
         version: link:../../packages/auth-client
+      '@zoeskoul/editor-surface':
+        specifier: workspace:*
+        version: link:../../packages/editor-surface
       '@zoeskoul/learning-client':
         specifier: workspace:*
         version: link:../../packages/learning-client
@@ -607,6 +610,28 @@ importers:
       typescript:
         specifier: latest
         version: 6.0.3
+
+  packages/editor-surface:
+    dependencies:
+      '@monaco-editor/react':
+        specifier: ^4.7.0
+        version: 4.7.0(monaco-editor@0.55.1)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      monaco-editor:
+        specifier: ^0.55.1
+        version: 0.55.1
+      react:
+        specifier: '>=18.0.0'
+        version: 19.2.3
+      react-dom:
+        specifier: '>=18.0.0'
+        version: 19.2.3(react@19.2.3)
+    devDependencies:
+      '@types/react':
+        specifier: ^19.0.0
+        version: 19.2.14
+      '@types/react-dom':
+        specifier: ^19.0.0
+        version: 19.2.3(@types/react@19.2.14)
 
   packages/learning-client:
     dependencies:
