@@ -12,6 +12,16 @@ export type LessonNavigationCard =
       type: "text";
       id: string;
       runtimeRequired?: boolean;
+      runtime?: {
+        ownerCardId: string;
+        targetKind: "card" | "embedded_try_it";
+        targetId: string;
+        runtimeKind:
+          | "sketch"
+          | "quiz"
+          | "project"
+          | "try_it";
+      } | null;
     }
   | {
       type: "video";
@@ -43,6 +53,41 @@ function readingComplete(
   );
 }
 
+function embeddedTryItTargetId(
+  card: Extract<
+    LessonNavigationCard,
+    { type: "text" }
+  >,
+): string | null {
+  if (
+    card.runtimeRequired !== true ||
+    !card.runtime ||
+    card.runtime.ownerCardId !== card.id ||
+    card.runtime.targetKind !== "embedded_try_it" ||
+    card.runtime.runtimeKind !== "try_it"
+  ) {
+    return null;
+  }
+
+  const targetId = card.runtime.targetId.trim();
+  return targetId && targetId !== card.id
+    ? targetId
+    : null;
+}
+
+function embeddedTryItPassed(
+  card: Extract<
+    LessonNavigationCard,
+    { type: "text" }
+  >,
+  topic: ReviewTopicProgress | null | undefined,
+): boolean {
+  const targetId = embeddedTryItTargetId(card);
+  return Boolean(
+    targetId && topic?.quizzesDone?.[targetId],
+  );
+}
+
 export function isLessonCardComplete(
   card: LessonNavigationCard,
   topic: ReviewTopicProgress | null | undefined,
@@ -66,11 +111,14 @@ export function isLessonCardComplete(
     card.runtimeRequired === true
   ) {
     /**
-     * The solution-safe lesson DTO intentionally omits the embedded Try It
-     * identifier. Vite must not mark this card complete from readingDone
-     * alone because the interactive runtime owns that assessment.
+     * Required embedded activities have two ordered completion units:
+     * the Try It assessment target and its parent reading card. A passing
+     * assessment alone must not complete the parent card.
      */
-    return false;
+    return (
+      embeddedTryItPassed(card, topic) &&
+      readingComplete(topic, card.id)
+    );
   }
 
   return readingComplete(topic, card.id);
@@ -185,6 +233,40 @@ function finalizeLessonTopicProgress(args: {
   };
 }
 
+export function buildLessonEmbeddedTryItDoneProgress(args: {
+  progress: ReviewProgressState;
+  topicSlug: string;
+  card: Extract<
+    LessonNavigationCard,
+    { type: "text" }
+  >;
+  topics: readonly LessonNavigationTopic[];
+  now?: string;
+}): ReviewProgressState {
+  const targetId = embeddedTryItTargetId(args.card);
+  if (!targetId) return args.progress;
+
+  const currentTopic =
+    getTopicProgressState(
+      args.progress.topics,
+      args.topicSlug,
+    ).topic ?? {};
+
+  return finalizeLessonTopicProgress({
+    progress: args.progress,
+    topicSlug: args.topicSlug,
+    topics: args.topics,
+    now: args.now,
+    nextTopic: {
+      ...currentTopic,
+      quizzesDone: {
+        ...(currentTopic.quizzesDone ?? {}),
+        [targetId]: true,
+      },
+    },
+  });
+}
+
 export function buildLessonCardDoneProgress(args: {
   progress: ReviewProgressState;
   topicSlug: string;
@@ -192,15 +274,22 @@ export function buildLessonCardDoneProgress(args: {
   topics: readonly LessonNavigationTopic[];
   now?: string;
 }): ReviewProgressState {
-  if (!canAutoCompleteLessonCard(args.card)) {
-    return args.progress;
-  }
-
   const currentTopic =
     getTopicProgressState(
       args.progress.topics,
       args.topicSlug,
     ).topic ?? {};
+  const requiredRuntimeReady =
+    args.card.type === "text" &&
+    args.card.runtimeRequired === true &&
+    embeddedTryItPassed(args.card, currentTopic);
+
+  if (
+    !canAutoCompleteLessonCard(args.card) &&
+    !requiredRuntimeReady
+  ) {
+    return args.progress;
+  }
 
   return finalizeLessonTopicProgress({
     progress: args.progress,

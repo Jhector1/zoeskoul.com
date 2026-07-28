@@ -125,6 +125,7 @@ export {
 export {
   buildLessonAssessmentDoneProgress,
   buildLessonCardDoneProgress,
+  buildLessonEmbeddedTryItDoneProgress,
   canAutoCompleteLessonCard,
   isLessonCardComplete,
   isLessonTopicComplete,

@@ -666,6 +666,27 @@ export function isLearningRuntimeLaunchResponse(
 // Protected Vite practice gateway contracts.
 // ---------------------------------------------------------------------------
 
+export type LearningCodeInputAnswerFile =
+  | {
+      kind: "directory";
+      path: string;
+    }
+  | {
+      kind?: "file";
+      path: string;
+      content: string;
+    };
+
+export type LearningCodeInputPracticeAnswer = {
+  kind: "code_input";
+  language?: "python";
+  code?: string;
+  source?: string;
+  stdin?: string;
+  entry?: string;
+  files?: LearningCodeInputAnswerFile[];
+};
+
 export type LearningSimplePracticeAnswer =
   | {
       kind: "single_choice";
@@ -678,7 +699,8 @@ export type LearningSimplePracticeAnswer =
   | {
       kind: "numeric";
       value: number;
-    };
+    }
+  | LearningCodeInputPracticeAnswer;
 
 export type LearningPracticeLaunchResponse = {
   target: LearningRuntimeTarget;
@@ -728,6 +750,23 @@ function isLearningNullableFiniteNumber(
   );
 }
 
+function isLearningCodeInputAnswerFile(
+  value: unknown,
+): value is LearningCodeInputAnswerFile {
+  if (!isRecord(value) || typeof value.path !== "string") {
+    return false;
+  }
+
+  if (value.kind === "directory") {
+    return !("content" in value);
+  }
+
+  return (
+    (value.kind === undefined || value.kind === "file") &&
+    typeof value.content === "string"
+  );
+}
+
 export function isLearningSimplePracticeAnswer(
   value: unknown,
 ): value is LearningSimplePracticeAnswer {
@@ -746,10 +785,33 @@ export function isLearningSimplePracticeAnswer(
     );
   }
 
+  if (value.kind === "numeric") {
+    return (
+      typeof value.value === "number" &&
+      Number.isFinite(value.value)
+    );
+  }
+
+  if (value.kind !== "code_input") return false;
+
   return (
-    value.kind === "numeric" &&
-    typeof value.value === "number" &&
-    Number.isFinite(value.value)
+    (value.language === undefined || value.language === "python") &&
+    (value.code === undefined || typeof value.code === "string") &&
+    (value.source === undefined || typeof value.source === "string") &&
+    (value.stdin === undefined || typeof value.stdin === "string") &&
+    (value.entry === undefined || typeof value.entry === "string") &&
+    (
+      value.files === undefined ||
+      (
+        Array.isArray(value.files) &&
+        value.files.every(isLearningCodeInputAnswerFile)
+      )
+    ) &&
+    (
+      typeof value.code === "string" ||
+      typeof value.source === "string" ||
+      (Array.isArray(value.files) && value.files.length > 0)
+    )
   );
 }
 

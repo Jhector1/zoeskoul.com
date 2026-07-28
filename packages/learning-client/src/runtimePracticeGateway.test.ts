@@ -147,4 +147,66 @@ describe("student practice client", () => {
         "submission-1",
     });
   });
+
+  it("submits the signed key and one-file code-input answer", async () => {
+    const fetchImpl = vi.fn<typeof fetch>(
+      async () =>
+        Response.json({
+          ok: true,
+          message: null,
+          code: null,
+          explanation: "Correct.",
+          feedback: null,
+          finalized: true,
+          duplicate: false,
+          attempts: { used: 1, max: null, left: null },
+          sessionComplete: false,
+          requestId: "request-2",
+        }),
+    );
+
+    const client = createStudentPracticeClient({
+      apiOrigin: "http://localhost:3000",
+      fetchImpl: fetchImpl as typeof fetch,
+    });
+
+    await client.validate({
+      key: "signed-practice-key-123456",
+      answer: {
+        kind: "code_input",
+        language: "python",
+        code: "print('Ava')\n",
+        entry: "main.py",
+        files: [
+          {
+            kind: "file",
+            path: "main.py",
+            content: "print('Ava')\n",
+          },
+        ],
+      },
+      submissionId: "submission-2",
+    });
+
+    const [, requestInit] = fetchImpl.mock.calls[0];
+
+    expect(JSON.parse(String(requestInit?.body))).toEqual({
+      key: "signed-practice-key-123456",
+      answer: {
+        kind: "code_input",
+        language: "python",
+        code: "print('Ava')\n",
+        entry: "main.py",
+        files: [
+          {
+            kind: "file",
+            path: "main.py",
+            content: "print('Ava')\n",
+          },
+        ],
+      },
+      submissionId: "submission-2",
+    });
+  });
+
 });

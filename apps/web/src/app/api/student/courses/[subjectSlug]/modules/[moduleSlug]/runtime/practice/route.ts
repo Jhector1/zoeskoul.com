@@ -15,8 +15,8 @@ import {
   parseStudentRuntimeTarget,
 } from "@/lib/learning/studentRuntimeLaunchData";
 import {
-  buildStudentSimpleQuizPracticeLaunch,
-} from "@/lib/learning/studentSimpleQuizPracticeLaunch";
+  buildStudentRuntimePracticeLaunch,
+} from "@/lib/learning/studentRuntimePracticeLaunch";
 import {
   getClientIp,
 } from "@/lib/practice/api/shared/http";
@@ -109,10 +109,17 @@ export async function GET(
     );
   }
 
-  if (
-    target.targetKind !== "card" ||
-    target.runtimeKind !== "quiz"
-  ) {
+  const supportedTarget =
+    (
+      target.targetKind === "card" &&
+      target.runtimeKind === "quiz"
+    ) ||
+    (
+      target.targetKind === "embedded_try_it" &&
+      target.runtimeKind === "try_it"
+    );
+
+  if (!supportedTarget) {
     return appCorsJson(
       request,
       {
@@ -254,7 +261,7 @@ export async function GET(
   }
 
   const result =
-    await buildStudentSimpleQuizPracticeLaunch({
+    await buildStudentRuntimePracticeLaunch({
       request,
       actor: {
         userId: access.user.id,

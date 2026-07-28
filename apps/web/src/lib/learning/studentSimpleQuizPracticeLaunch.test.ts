@@ -5,6 +5,13 @@ import {
 } from "vitest";
 
 import {
+  resolveStudentEmbeddedTryItDescriptor,
+} from "./studentEmbeddedTryItPracticeDescriptor";
+import {
+  isEligibleStudentEmbeddedPythonTryIt,
+  isProjectedStudentEmbeddedPythonTryIt,
+} from "./studentEmbeddedTryItEligibility";
+import {
   isStudentSimpleQuizKind,
   resolveStudentSimpleQuizDescriptor,
 } from "./studentSimpleQuizPracticeDescriptor";
@@ -133,5 +140,188 @@ describe("student simple quiz practice launch", () => {
         "code_input",
       ),
     ).toBe(false);
+  });
+});
+
+const embeddedTarget = {
+  version: 1 as const,
+  sectionSlug: "section-1",
+  topicSlug: "py5.dictionary-basics",
+  ownerCardId: "sketch0",
+  targetKind: "embedded_try_it" as const,
+  targetId: "try-dictionary-basics-sketch0",
+  runtimeKind: "try_it" as const,
+};
+
+function moduleWithEmbeddedTryIt() {
+  return {
+    id: "python-5-lists-tuples-and-dictionaries",
+    title: "Lists, Tuples, and Dictionaries",
+    startPracticeSectionSlug: "section-1",
+    topics: [
+      {
+        id: "dictionary-basics",
+        label: "Dictionary basics",
+        cards: [
+          {
+            type: "sketch",
+            id: "sketch0",
+            title: "Dictionary idea",
+            tryIt: {
+              id: "try-dictionary-basics-sketch0",
+              exerciseKey: "try-dictionary-basics-sketch0",
+              difficulty: "easy",
+            },
+          },
+        ],
+      },
+    ],
+  };
+}
+
+function eligibleEmbeddedTryIt() {
+  return {
+    id: "try-dictionary-basics-sketch0",
+    kind: "code_input",
+    purpose: "try_it",
+    language: "python",
+    starterCode: "profile = {}\n",
+    starterFiles: [
+      {
+        path: "main.py",
+        content: "profile = {}\n",
+        language: "python",
+        isEntry: true,
+      },
+    ],
+    workspace: {
+      entryFilePath: "main.py",
+      starterFiles: [
+        {
+          path: "main.py",
+          content: "profile = {}\n",
+          language: "python",
+          isEntry: true,
+        },
+      ],
+    },
+    recipe: {
+      type: "fixed_tests",
+      tests: [
+        {
+          stdin: "",
+          stdout: "Ava\n",
+          match: "exact",
+        },
+      ],
+      sourceChecks: [
+        {
+          type: "uses_dict_key",
+          key: "name",
+        },
+      ],
+    },
+    sourceChecks: [
+      {
+        type: "uses_dict_key",
+        key: "name",
+      },
+    ],
+  };
+}
+
+describe("student embedded Try It practice launch", () => {
+  it("resolves the exact owner card to Try It to exercise chain", () => {
+    expect(
+      resolveStudentEmbeddedTryItDescriptor({
+        reviewModule: moduleWithEmbeddedTryIt() as never,
+        target: embeddedTarget,
+      }),
+    ).toMatchObject({
+      exerciseKey: "try-dictionary-basics-sketch0",
+      topicSlug: "dictionary-basics",
+      difficulty: "easy",
+    });
+
+    expect(
+      resolveStudentEmbeddedTryItDescriptor({
+        reviewModule: moduleWithEmbeddedTryIt() as never,
+        target: {
+          ...embeddedTarget,
+          targetId: "another-try-it",
+        },
+      }),
+    ).toBeNull();
+  });
+
+  it("accepts only the narrow one-file Python fixed-test slice", () => {
+    const eligible = eligibleEmbeddedTryIt();
+
+    expect(
+      isEligibleStudentEmbeddedPythonTryIt(eligible),
+    ).toBe(true);
+    expect(
+      isEligibleStudentEmbeddedPythonTryIt({
+        ...eligible,
+        starterFiles: [
+          ...eligible.starterFiles,
+          { path: "helper.py", content: "" },
+        ],
+      }),
+    ).toBe(false);
+    expect(
+      isEligibleStudentEmbeddedPythonTryIt({
+        ...eligible,
+        fixtureFiles: [
+          { path: "input.txt", content: "secret" },
+        ],
+      }),
+    ).toBe(false);
+    expect(
+      isEligibleStudentEmbeddedPythonTryIt({
+        ...eligible,
+        recipe: {
+          ...eligible.recipe,
+          semanticChecks: [{ type: "custom" }],
+        },
+      }),
+    ).toBe(false);
+    expect(
+      isEligibleStudentEmbeddedPythonTryIt({
+        ...eligible,
+        recipe: {
+          ...eligible.recipe,
+          tests: [
+            { stdin: "Ava\n", stdout: "Ava\n" },
+          ],
+        },
+      }),
+    ).toBe(false);
+  });
+
+  it("accepts the learner-safe projected starter workspace", () => {
+    expect(
+      isProjectedStudentEmbeddedPythonTryIt({
+        id: "try-dictionary-basics-sketch0",
+        exerciseKey: "try-dictionary-basics-sketch0",
+        kind: "code_input",
+        topic: "dictionary-basics",
+        difficulty: "easy",
+        title: "Try dictionaries",
+        prompt: "Create and read a dictionary.",
+        payload: {
+          language: "python",
+          starterFiles: [
+            { path: "main.py", content: "profile = {}\n" },
+          ],
+          workspace: {
+            entryFilePath: "main.py",
+            starterFiles: [
+              { path: "main.py", content: "profile = {}\n" },
+            ],
+          },
+        },
+      }),
+    ).toBe(true);
   });
 });

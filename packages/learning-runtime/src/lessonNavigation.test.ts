@@ -10,6 +10,7 @@ import type {
 import {
   buildLessonAssessmentDoneProgress,
   buildLessonCardDoneProgress,
+  buildLessonEmbeddedTryItDoneProgress,
   canAutoCompleteLessonCard,
   isLessonCardComplete,
   isLessonTopicComplete,
@@ -47,6 +48,25 @@ const topics = [
         type: "runtime" as const,
         id: "quiz-1",
         runtimeKind: "quiz" as const,
+      },
+    ],
+  },
+];
+
+const embeddedTopics = [
+  {
+    slug: "py5.dictionary-basics",
+    cards: [
+      {
+        type: "text" as const,
+        id: "sketch0",
+        runtimeRequired: true,
+        runtime: {
+          ownerCardId: "sketch0",
+          targetKind: "embedded_try_it" as const,
+          targetId: "try-dictionary-basics-sketch0",
+          runtimeKind: "try_it" as const,
+        },
       },
     ],
   },
@@ -225,6 +245,80 @@ describe("lesson navigation contracts", () => {
         },
       ),
     ).toBe(false);
+  });
+
+  it("records an embedded Try It pass without completing its parent card", () => {
+    const card = embeddedTopics[0].cards[0];
+    const progress =
+      buildLessonEmbeddedTryItDoneProgress({
+        progress: { topics: {} },
+        topicSlug: embeddedTopics[0].slug,
+        card,
+        topics: embeddedTopics,
+        now: "2026-07-28T13:00:00.000Z",
+      });
+
+    expect(
+      progress.topics?.["dictionary-basics"]?.quizzesDone,
+    ).toEqual({
+      "try-dictionary-basics-sketch0": true,
+    });
+    expect(
+      progress.topics?.["dictionary-basics"]?.readingDone,
+    ).toBeUndefined();
+    expect(
+      progress.topics?.["dictionary-basics"]?.cardsDone,
+    ).toBeUndefined();
+    expect(
+      isLessonCardComplete(
+        card,
+        progress.topics?.["dictionary-basics"],
+      ),
+    ).toBe(false);
+  });
+
+  it("marks the parent reading card only after its embedded Try It passes", () => {
+    const card = embeddedTopics[0].cards[0];
+    const beforePass = buildLessonCardDoneProgress({
+      progress: { topics: {} },
+      topicSlug: embeddedTopics[0].slug,
+      card,
+      topics: embeddedTopics,
+      now: "2026-07-28T13:01:00.000Z",
+    });
+
+    expect(beforePass.topics).toEqual({});
+
+    const passed = buildLessonEmbeddedTryItDoneProgress({
+      progress: beforePass,
+      topicSlug: embeddedTopics[0].slug,
+      card,
+      topics: embeddedTopics,
+      now: "2026-07-28T13:02:00.000Z",
+    });
+    const completed = buildLessonCardDoneProgress({
+      progress: passed,
+      topicSlug: embeddedTopics[0].slug,
+      card,
+      topics: embeddedTopics,
+      now: "2026-07-28T13:03:00.000Z",
+    });
+
+    expect(
+      completed.topics?.["dictionary-basics"]?.readingDone,
+    ).toEqual({ sketch0: true });
+    expect(
+      completed.topics?.["dictionary-basics"]?.cardsDone,
+    ).toEqual({ sketch0: true });
+    expect(
+      completed.topics?.["dictionary-basics"]?.quizzesDone,
+    ).toEqual({
+      "try-dictionary-basics-sketch0": true,
+    });
+    expect(
+      completed.topics?.["dictionary-basics"]?.completed,
+    ).toBe(true);
+    expect(completed.moduleCompleted).toBe(true);
   });
 
   it("unlocks the first topic and gates the next topic on previous completion", () => {

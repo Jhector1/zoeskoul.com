@@ -7,6 +7,7 @@ import {
 import {
   isLearningPracticeLaunchResponse,
   isLearningPracticeValidationResponse,
+  isLearningSimplePracticeAnswer,
 } from "./index";
 
 const target = {
@@ -17,6 +18,16 @@ const target = {
   targetKind: "card" as const,
   targetId: "quiz-1",
   runtimeKind: "quiz" as const,
+};
+
+const embeddedTarget = {
+  version: 1 as const,
+  sectionSlug: "section-1",
+  topicSlug: "dictionary-basics",
+  ownerCardId: "sketch0",
+  targetKind: "embedded_try_it" as const,
+  targetId: "try-dictionary-basics-sketch0",
+  runtimeKind: "try_it" as const,
 };
 
 describe("runtime practice gateway contracts", () => {
@@ -54,6 +65,66 @@ describe("runtime practice gateway contracts", () => {
           "/api/student/runtime/practice/validate",
       }),
     ).toBe(true);
+  });
+
+  it("accepts a learner-safe embedded Python Try It launch", () => {
+    expect(
+      isLearningPracticeLaunchResponse({
+        target: embeddedTarget,
+        title: "Try dictionaries",
+        exercise: {
+          id: "try-dictionary-basics-sketch0",
+          exerciseKey: "try-dictionary-basics-sketch0",
+          kind: "code_input",
+          title: "Try dictionaries",
+          prompt: "Create and read a dictionary.",
+          topic: "dictionary-basics",
+          difficulty: "easy",
+          payload: {
+            language: "python",
+            starterFiles: [
+              { path: "main.py", content: "profile = {}\n" },
+            ],
+            workspace: {
+              entryFilePath: "main.py",
+              starterFiles: [
+                { path: "main.py", content: "profile = {}\n" },
+              ],
+            },
+          },
+        },
+        key: "signed-practice-key-123456",
+        sessionId: null,
+        run: null,
+        validationPath: "/api/student/runtime/practice/validate",
+      }),
+    ).toBe(true);
+  });
+
+  it("accepts the one-file code-input answer contract", () => {
+    expect(
+      isLearningSimplePracticeAnswer({
+        kind: "code_input",
+        language: "python",
+        code: "print('Ava')\n",
+        entry: "main.py",
+        files: [
+          {
+            kind: "file",
+            path: "main.py",
+            content: "print('Ava')\n",
+          },
+        ],
+      }),
+    ).toBe(true);
+
+    expect(
+      isLearningSimplePracticeAnswer({
+        kind: "code_input",
+        language: "javascript",
+        code: "console.log('Ava')",
+      }),
+    ).toBe(false);
   });
 
   it("rejects a launch carrying answer material", () => {

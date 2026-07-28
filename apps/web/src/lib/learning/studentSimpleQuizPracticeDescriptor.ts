@@ -5,8 +5,12 @@ import type {
 import type {
   ReviewCard,
   ReviewModule,
-  ReviewTopic,
 } from "@/lib/subjects/types";
+
+import {
+  findStudentRuntimeTopic,
+  studentRuntimeDifficulty,
+} from "./studentRuntimePracticeDescriptorShared";
 
 const SIMPLE_QUIZ_KINDS = new Set([
   "single_choice",
@@ -20,42 +24,6 @@ export type StudentSimpleQuizDescriptor = {
   topicSlug: string;
   difficulty: "easy" | "medium" | "hard";
 };
-
-function aliases(value: string): string[] {
-  const normalized = value.trim();
-  if (!normalized) return [];
-
-  const out = new Set([normalized]);
-  const dot = normalized.lastIndexOf(".");
-
-  if (
-    dot >= 0 &&
-    dot < normalized.length - 1
-  ) {
-    out.add(normalized.slice(dot + 1));
-  }
-
-  return Array.from(out);
-}
-
-function findTopic(
-  module: ReviewModule,
-  topicSlug: string,
-): ReviewTopic | null {
-  const wanted = new Set(aliases(topicSlug));
-
-  for (const topic of module.topics) {
-    if (
-      aliases(topic.id).some(
-        (value) => wanted.has(value),
-      )
-    ) {
-      return topic;
-    }
-  }
-
-  return null;
-}
 
 function selectedExerciseKey(
   card: Extract<ReviewCard, { type: "quiz" }>,
@@ -77,14 +45,6 @@ function selectedExerciseKey(
   return exact.length === 1
     ? exact[0]
     : null;
-}
-
-function difficulty(
-  value: unknown,
-): "easy" | "medium" | "hard" {
-  return value === "medium" || value === "hard"
-    ? value
-    : "easy";
 }
 
 export function isStudentSimpleQuizKind(
@@ -113,7 +73,7 @@ export function resolveStudentSimpleQuizDescriptor(
     return null;
   }
 
-  const topic = findTopic(
+  const topic = findStudentRuntimeTopic(
     args.reviewModule,
     args.target.topicSlug,
   );
@@ -144,7 +104,7 @@ export function resolveStudentSimpleQuizDescriptor(
     topicSlug:
       card.spec.topic?.trim() ||
       topic.id,
-    difficulty: difficulty(
+    difficulty: studentRuntimeDifficulty(
       card.spec.difficulty,
     ),
   };
