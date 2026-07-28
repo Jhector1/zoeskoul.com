@@ -21,6 +21,7 @@ const target = {
 
 function moduleWithKeys(
   exerciseKeys: string[],
+  studentRuntimeExerciseKey?: string,
 ) {
   return {
     id: "module-1",
@@ -36,6 +37,7 @@ function moduleWithKeys(
             type: "quiz",
             id: "quiz-1",
             title: "Quick check",
+            studentRuntimeExerciseKey,
             spec: {
               subject: "python",
               moduleSlug:
@@ -66,6 +68,26 @@ describe("student simple quiz practice launch", () => {
         "exercise-1",
       topicSlug: "topic-1",
       difficulty: "easy",
+    });
+  });
+
+  it("uses a migration-only selector without changing the legacy quiz pool", () => {
+    expect(
+      resolveStudentSimpleQuizDescriptor({
+        reviewModule:
+          moduleWithKeys(
+            [
+              "legacy-exercise-1",
+              "legacy-exercise-2",
+              "legacy-exercise-3",
+            ],
+            "student-runtime-exercise",
+          ) as never,
+        target,
+      }),
+    ).toMatchObject({
+      exerciseKey:
+        "student-runtime-exercise",
     });
   });
 

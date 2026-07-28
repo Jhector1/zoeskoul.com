@@ -57,16 +57,26 @@ function findTopic(
   return null;
 }
 
-function exactExerciseKeys(
+function selectedExerciseKey(
   card: Extract<ReviewCard, { type: "quiz" }>,
-): string[] {
-  return Array.from(
+): string | null {
+  const migrated =
+    card.studentRuntimeExerciseKey
+      ?.trim();
+
+  if (migrated) return migrated;
+
+  const exact = Array.from(
     new Set(
       (card.spec.exerciseKeys ?? [])
         .map((value) => value.trim())
         .filter(Boolean),
     ),
   );
+
+  return exact.length === 1
+    ? exact[0]
+    : null;
 }
 
 function difficulty(
@@ -124,12 +134,13 @@ export function resolveStudentSimpleQuizDescriptor(
 
   if (!card) return null;
 
-  const keys = exactExerciseKeys(card);
-  if (keys.length !== 1) return null;
+  const exerciseKey =
+    selectedExerciseKey(card);
+  if (!exerciseKey) return null;
 
   return {
     card,
-    exerciseKey: keys[0],
+    exerciseKey,
     topicSlug:
       card.spec.topic?.trim() ||
       topic.id,

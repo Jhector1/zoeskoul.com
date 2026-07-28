@@ -78,6 +78,7 @@
       "id": "quiz",
       "kind": "quiz",
       "titleKey": "topics.python-v2.python-v2-0.what-python-is.cards.quiz.title",
+      "studentRuntimeExerciseKey": "sc-python-use-general",
       "quiz": {
         "difficulty": "easy",
         "n": 4,

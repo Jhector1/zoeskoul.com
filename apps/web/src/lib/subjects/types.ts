@@ -185,6 +185,11 @@ export type ReviewCard =
     id: string;
     title?: string;
     passScore?: number;
+    /**
+     * Exact exercise selected for the migrated student runtime.
+     * Legacy quiz rendering continues to use spec.exerciseKeys and spec.n.
+     */
+    studentRuntimeExerciseKey?: string;
     spec: ReviewQuizSpec;
     tools?: ReviewCardToolsSpec | null;
 })

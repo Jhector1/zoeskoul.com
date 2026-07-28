@@ -169,13 +169,23 @@ export function buildReviewFromManifest(args: {
             : card;
 
         if (cardWithTools.type === "quiz") {
+            const studentRuntimeExerciseKey = asString(
+                rawCard.studentRuntimeExerciseKey,
+            );
+            const quizCard = studentRuntimeExerciseKey
+                ? {
+                    ...cardWithTools,
+                    studentRuntimeExerciseKey,
+                }
+                : cardWithTools;
+
             const exerciseKeys = authoredQuizExerciseKeys(args.manifest, rawCard);
-            if (!exerciseKeys.length) return cardWithTools;
+            if (!exerciseKeys.length) return quizCard;
 
             return {
-                ...cardWithTools,
+                ...quizCard,
                 spec: {
-                    ...(cardWithTools as any).spec,
+                    ...(quizCard as any).spec,
                     topic: topicSlug,
                     exerciseKeys,
                     n: exerciseKeys.length,

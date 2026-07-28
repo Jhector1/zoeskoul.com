@@ -103,6 +103,12 @@ export type ManifestCard =
       kind: "quiz";
       titleKey: string;
       tools?: ToolPresentationPolicy;
+      /**
+       * Exact exercise used by the migrated student runtime.
+       *
+       * This does not change the legacy quiz pool, count, or selection mode.
+       */
+      studentRuntimeExerciseKey?: string;
   quiz: {
     difficulty: "easy" | "medium" | "hard";
     n: number;
