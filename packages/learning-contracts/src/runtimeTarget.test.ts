@@ -108,6 +108,45 @@ describe("learner-safe runtime targets", () => {
     ).toBe(false);
   });
 
+  it("accepts an identity-only Try It target on its sketch owner", () => {
+    const value = response() as any;
+    const card =
+      value.sections[0].topics[0].cards[1];
+
+    card.id = "sketch-1";
+    card.title = "Sketch";
+    card.runtimeKind = "sketch";
+    card.runtime = {
+      version: 1,
+      sectionSlug: "section-1",
+      topicSlug: "topic-1",
+      ownerCardId: "sketch-1",
+      targetKind: "card",
+      targetId: "sketch-1",
+      runtimeKind: "sketch",
+    };
+    card.embeddedRuntime = {
+      version: 1,
+      sectionSlug: "section-1",
+      topicSlug: "topic-1",
+      ownerCardId: "sketch-1",
+      targetKind: "embedded_try_it",
+      targetId: "try-sketch-1",
+      runtimeKind: "try_it",
+    };
+
+    expect(
+      isLearningLessonContentResponse(value),
+    ).toBe(true);
+
+    card.embeddedRuntime.ownerCardId =
+      "another-card";
+
+    expect(
+      isLearningLessonContentResponse(value),
+    ).toBe(false);
+  });
+
   it("requires runtime-card identity to match the owner card", () => {
     const value = response() as any;
     value.sections[0].topics[0].cards[1].runtime.targetId =

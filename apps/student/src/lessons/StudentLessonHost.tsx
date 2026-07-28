@@ -96,11 +96,37 @@ function runtimeActionLabel(
   return `Open ${label}`;
 }
 
+function embeddedTryItTarget(
+  card: LearningLessonCard | null,
+) {
+  if (!card) return null;
+
+  const target =
+    card.type === "text"
+      ? card.runtime
+      : card.type === "runtime"
+        ? card.embeddedRuntime
+        : null;
+
+  return (
+    target?.targetKind ===
+      "embedded_try_it" &&
+    target.runtimeKind === "try_it" &&
+    target.ownerCardId === card.id
+  )
+    ? target
+    : null;
+}
+
 function completionMessage(
   card: LearningLessonCard | null,
 ): string {
   if (!card) {
     return "Complete this activity to continue.";
+  }
+
+  if (embeddedTryItTarget(card)) {
+    return "Complete this Try It to continue.";
   }
 
   if (card.type === "runtime") {
@@ -320,7 +346,12 @@ export function StudentLessonHost(props: {
         )
       : false;
   const activeEmbeddedTryItPassed =
-    activeCard?.type === "text"
+    activeCard &&
+    (
+      activeCard.type === "text" ||
+      activeCard.type === "runtime"
+    ) &&
+    embeddedTryItTarget(activeCard)
       ? isLessonEmbeddedTryItPassed(
           activeCard,
           topicProgress,
@@ -532,13 +563,13 @@ export function StudentLessonHost(props: {
       !progress ||
       !activeTopic ||
       !activeCard ||
-      activeCard.type !== "text" ||
-      activeCard.runtimeRequired !== true ||
-      !activeCard.runtime ||
-      activeCard.runtime.targetKind !==
-        "embedded_try_it" ||
-      activeCard.runtime.runtimeKind !==
-        "try_it" ||
+      (
+        activeCard.type !== "text" &&
+        activeCard.type !== "runtime"
+      ) ||
+      !embeddedTryItTarget(
+        activeCard,
+      ) ||
       isSaving
     ) {
       return;
@@ -964,6 +995,27 @@ export function StudentLessonHost(props: {
                     </button>
                   </div>
                 </>
+              ) : activeCard.type === "runtime" &&
+                activeCard.runtimeKind === "sketch" &&
+                embeddedTryItTarget(
+                  activeCard,
+                ) ? (
+                <StudentEmbeddedTryItCard
+                  apiOrigin={props.apiOrigin}
+                  subjectSlug={props.subjectSlug}
+                  moduleSlug={props.moduleSlug}
+                  card={activeCard}
+                  passed={
+                    activeEmbeddedTryItPassed
+                  }
+                  disabled={isSaving}
+                  onPass={
+                    completeCurrentEmbeddedTryIt
+                  }
+                  onOpenLegacy={
+                    openCurrentRuntime
+                  }
+                />
               ) : activeCard.type === "runtime" &&
                 activeCard.runtimeKind === "quiz" ? (
                 <StudentSimpleQuizCard

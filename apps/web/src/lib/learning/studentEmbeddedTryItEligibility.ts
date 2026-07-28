@@ -53,9 +53,10 @@ function oneMainPythonStarterFile(
 }
 
 /**
- * Deliberately narrow first Vite code-input slice. Source checks may remain
- * authored and server-side; only semantic-check arrays and fixtures are
- * excluded. The learner projection strips every grading field before launch.
+ * Learner-safe one-file Vite code-input slice. Source checks may remain
+ * authored and server-side; semantic-check arrays, fixtures, stdin-driven
+ * exercises, and multi-file workspaces continue through the legacy runtime.
+ * The learner projection strips every grading field before launch.
  */
 export function isEligibleStudentEmbeddedPythonTryIt(
   value: unknown,

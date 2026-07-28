@@ -3,6 +3,7 @@ import {
 } from "@zoeskoul/editor-surface";
 import {
   createStudentPracticeClient,
+  type LearningLessonRuntimeCard,
   type LearningLessonTextCard,
   type LearningPracticeLaunchResponse,
   type LearningPracticeValidationResponse,
@@ -48,7 +49,9 @@ export function StudentEmbeddedTryItCard(
     apiOrigin: string;
     subjectSlug: string;
     moduleSlug: string;
-    card: LearningLessonTextCard;
+    card:
+      | LearningLessonTextCard
+      | LearningLessonRuntimeCard;
     passed: boolean;
     disabled: boolean;
     onPass: () => Promise<void>;
@@ -56,7 +59,9 @@ export function StudentEmbeddedTryItCard(
   },
 ) {
   const target =
-    props.card.runtime;
+    props.card.type === "text"
+      ? props.card.runtime
+      : props.card.embeddedRuntime;
   const client = useMemo(
     () =>
       createStudentPracticeClient({

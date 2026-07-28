@@ -54,6 +54,26 @@ const topics = [
   },
 ];
 
+const embeddedSketchTopics = [
+  {
+    slug: "py5.list-basics",
+    cards: [
+      {
+        type: "runtime" as const,
+        id: "sketch0",
+        runtimeKind: "sketch" as const,
+        embeddedRuntime: {
+          ownerCardId: "sketch0",
+          targetKind: "embedded_try_it" as const,
+          targetId:
+            "try-creating-and-indexing-lists-sketch0",
+          runtimeKind: "try_it" as const,
+        },
+      },
+    ],
+  },
+];
+
 const embeddedTopics = [
   {
     slug: "py5.dictionary-basics",
@@ -332,6 +352,68 @@ describe("lesson navigation contracts", () => {
       completed.topics?.["dictionary-basics"]?.completed,
     ).toBe(true);
     expect(completed.moduleCompleted).toBe(true);
+  });
+
+  it("keeps a sketch owner incomplete until its embedded Try It and parent unit are done", () => {
+    const card =
+      embeddedSketchTopics[0].cards[0];
+    const passed =
+      buildLessonEmbeddedTryItDoneProgress({
+        progress: { topics: {} },
+        topicSlug:
+          embeddedSketchTopics[0].slug,
+        card,
+        topics:
+          embeddedSketchTopics,
+        now:
+          "2026-07-28T14:00:00.000Z",
+      });
+
+    const topic =
+      passed.topics?.["list-basics"];
+
+    expect(
+      topic?.quizzesDone,
+    ).toEqual({
+      "try-creating-and-indexing-lists-sketch0":
+        true,
+    });
+    expect(
+      isLessonCardComplete(
+        card,
+        topic,
+      ),
+    ).toBe(false);
+
+    const completed =
+      buildLessonCardDoneProgress({
+        progress: passed,
+        topicSlug:
+          embeddedSketchTopics[0].slug,
+        card,
+        topics:
+          embeddedSketchTopics,
+        now:
+          "2026-07-28T14:01:00.000Z",
+      });
+
+    expect(
+      completed.topics?.["list-basics"]
+        ?.readingDone,
+    ).toEqual({
+      sketch0: true,
+    });
+    expect(
+      isLessonCardComplete(
+        card,
+        completed.topics?.[
+          "list-basics"
+        ],
+      ),
+    ).toBe(true);
+    expect(
+      completed.moduleCompleted,
+    ).toBe(true);
   });
 
   it("unlocks the first topic and gates the next topic on previous completion", () => {

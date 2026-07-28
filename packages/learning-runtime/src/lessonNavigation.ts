@@ -7,21 +7,25 @@ import {
   normalizeTopicProgressKey,
 } from "./progressNormalization";
 
+type LessonNavigationRuntimeTarget = {
+  ownerCardId: string;
+  targetKind: "card" | "embedded_try_it";
+  targetId: string;
+  runtimeKind:
+    | "sketch"
+    | "quiz"
+    | "project"
+    | "try_it";
+};
+
 export type LessonNavigationCard =
   | {
       type: "text";
       id: string;
       runtimeRequired?: boolean;
-      runtime?: {
-        ownerCardId: string;
-        targetKind: "card" | "embedded_try_it";
-        targetId: string;
-        runtimeKind:
-          | "sketch"
-          | "quiz"
-          | "project"
-          | "try_it";
-      } | null;
+      runtime?:
+        LessonNavigationRuntimeTarget |
+        null;
     }
   | {
       type: "video";
@@ -31,6 +35,9 @@ export type LessonNavigationCard =
       type: "runtime";
       id: string;
       runtimeKind: "sketch" | "quiz" | "project";
+      embeddedRuntime?:
+        LessonNavigationRuntimeTarget |
+        null;
     };
 
 export type LessonNavigationTopic = {
@@ -53,33 +60,49 @@ function readingComplete(
   );
 }
 
+type LessonEmbeddedTryItOwner =
+  | Extract<
+      LessonNavigationCard,
+      { type: "text" }
+    >
+  | Extract<
+      LessonNavigationCard,
+      { type: "runtime" }
+    >;
+
 function embeddedTryItTargetId(
-  card: Extract<
-    LessonNavigationCard,
-    { type: "text" }
-  >,
+  card: LessonEmbeddedTryItOwner,
 ): string | null {
+  const runtime =
+    card.type === "text"
+      ? (
+          card.runtimeRequired === true
+            ? card.runtime
+            : null
+        )
+      : (
+          card.runtimeKind === "sketch"
+            ? card.embeddedRuntime
+            : null
+        );
+
   if (
-    card.runtimeRequired !== true ||
-    !card.runtime ||
-    card.runtime.ownerCardId !== card.id ||
-    card.runtime.targetKind !== "embedded_try_it" ||
-    card.runtime.runtimeKind !== "try_it"
+    !runtime ||
+    runtime.ownerCardId !== card.id ||
+    runtime.targetKind !== "embedded_try_it" ||
+    runtime.runtimeKind !== "try_it"
   ) {
     return null;
   }
 
-  const targetId = card.runtime.targetId.trim();
+  const targetId = runtime.targetId.trim();
   return targetId && targetId !== card.id
     ? targetId
     : null;
 }
 
 export function isLessonEmbeddedTryItPassed(
-  card: Extract<
-    LessonNavigationCard,
-    { type: "text" }
-  >,
+  card: LessonEmbeddedTryItOwner,
   topic: ReviewTopicProgress | null | undefined,
 ): boolean {
   const targetId = embeddedTryItTargetId(card);
@@ -98,7 +121,25 @@ export function isLessonCardComplete(
 
   if (card.type === "runtime") {
     if (card.runtimeKind === "sketch") {
-      return readingComplete(topic, card.id);
+      const targetId =
+        embeddedTryItTargetId(card);
+
+      return targetId
+        ? (
+            Boolean(
+              topic?.quizzesDone?.[
+                targetId
+              ],
+            ) &&
+            readingComplete(
+              topic,
+              card.id,
+            )
+          )
+        : readingComplete(
+            topic,
+            card.id,
+          );
     }
 
     return Boolean(
@@ -236,10 +277,7 @@ function finalizeLessonTopicProgress(args: {
 export function buildLessonEmbeddedTryItDoneProgress(args: {
   progress: ReviewProgressState;
   topicSlug: string;
-  card: Extract<
-    LessonNavigationCard,
-    { type: "text" }
-  >;
+  card: LessonEmbeddedTryItOwner;
   topics: readonly LessonNavigationTopic[];
   now?: string;
 }): ReviewProgressState {
@@ -279,10 +317,22 @@ export function buildLessonCardDoneProgress(args: {
       args.progress.topics,
       args.topicSlug,
     ).topic ?? {};
+  const embeddedOwner =
+    args.card.type === "text" ||
+    args.card.type === "runtime"
+      ? args.card
+      : null;
   const requiredRuntimeReady =
-    args.card.type === "text" &&
-    args.card.runtimeRequired === true &&
-    isLessonEmbeddedTryItPassed(args.card, currentTopic);
+    Boolean(
+      embeddedOwner &&
+      embeddedTryItTargetId(
+        embeddedOwner,
+      ) &&
+      isLessonEmbeddedTryItPassed(
+        embeddedOwner,
+        currentTopic,
+      ),
+    );
 
   if (
     !canAutoCompleteLessonCard(args.card) &&

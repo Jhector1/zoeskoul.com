@@ -21,13 +21,14 @@ function nullableString(
 function embeddedTryItId(
   card: ReviewCard,
 ): string | null {
-  const value = (
-    card as {
-      tryIt?: {
-        id?: unknown;
-      } | null;
-    }
-  ).tryIt;
+  if (
+    card.type !== "text" &&
+    card.type !== "sketch"
+  ) {
+    return null;
+  }
+
+  const value = card.tryIt;
 
   return typeof value?.id === "string" &&
     value.id.trim()
@@ -108,7 +109,15 @@ function projectCard(args: {
     };
   }
 
-  return {
+  const tryItId =
+    card.type === "sketch"
+      ? embeddedTryItId(card)
+      : null;
+
+  const runtimeCard: Extract<
+    LearningLessonCard,
+    { type: "runtime" }
+  > = {
     type: "runtime",
     id: card.id,
     title: nullableString(card.title),
@@ -122,6 +131,20 @@ function projectCard(args: {
       runtimeKind: card.type,
     }),
   };
+
+  return tryItId
+    ? {
+        ...runtimeCard,
+        embeddedRuntime: runtimeTarget({
+          sectionSlug,
+          topicSlug,
+          ownerCardId: card.id,
+          targetKind: "embedded_try_it",
+          targetId: tryItId,
+          runtimeKind: "try_it",
+        }),
+      }
+    : runtimeCard;
 }
 
 function reviewTopicAliases(

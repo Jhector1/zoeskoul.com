@@ -23,6 +23,14 @@ const target = {
   runtimeKind: "sketch" as const,
 };
 
+const embeddedTarget = {
+  ...target,
+  targetKind:
+    "embedded_try_it" as const,
+  targetId: "try-sketch-1",
+  runtimeKind: "try_it" as const,
+};
+
 const lesson = {
   subject: {
     id: "python",
@@ -72,6 +80,8 @@ const lesson = {
               title: "Sketch",
               runtimeKind: "sketch",
               runtime: target,
+              embeddedRuntime:
+                embeddedTarget,
             },
           ],
         },
@@ -141,6 +151,26 @@ describe("student runtime launch data", () => {
     expect(
       isLearningRuntimeLaunchResponse(result),
     ).toBe(true);
+  });
+
+  it("accepts a sketch-owned embedded Try It target", () => {
+    const result = buildStudentRuntimeLaunch({
+      lesson: lesson as never,
+      target: embeddedTarget,
+      locale: "en",
+      subjectSlug: "python",
+      moduleSlug: "module-1",
+    });
+
+    expect(result).toMatchObject({
+      target: embeddedTarget,
+      title: "Sketch",
+      activity: {
+        kind: "legacy_handoff",
+        href:
+          "/en/subjects/python/modules/module-1/learn",
+      },
+    });
   });
 
   it("does not accept a target outside the protected lesson outline", () => {

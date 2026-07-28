@@ -124,20 +124,34 @@ export function buildStudentRuntimeLaunch(args: {
       }
 
       for (const card of topic.cards) {
-        const runtime =
+        const runtimes:
+          Array<
+            LearningRuntimeTarget |
+            null |
+            undefined
+          > =
           card.type === "runtime"
-            ? card.runtime
+            ? [
+                card.runtime,
+                card.embeddedRuntime,
+              ]
             : card.type === "text"
-              ? card.runtime
-              : null;
+              ? [card.runtime]
+              : [];
 
-        if (
-          !runtime ||
-          !sameRuntimeTarget(
-            runtime,
-            args.target,
-          )
-        ) {
+        const runtime =
+          runtimes.find(
+            (candidate) =>
+              Boolean(
+                candidate &&
+                sameRuntimeTarget(
+                  candidate,
+                  args.target,
+                ),
+              ),
+          ) ?? null;
+
+        if (!runtime) {
           continue;
         }
 

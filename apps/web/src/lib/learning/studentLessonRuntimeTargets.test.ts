@@ -99,6 +99,15 @@ function reviewModule() {
             props: {
               expectedSolution: "secret",
             },
+            tryIt: {
+              id: "try-sketch-1",
+              exerciseKey:
+                "secret-sketch-exercise-key",
+              spec: {
+                solutionCode:
+                  "print('secret')",
+              },
+            },
           },
           {
             type: "quiz",
@@ -162,6 +171,12 @@ describe("student lesson runtime target projection", () => {
           targetKind: "card",
           targetId: "sketch-1",
         },
+        embeddedRuntime: {
+          ownerCardId: "sketch-1",
+          targetKind: "embedded_try_it",
+          targetId: "try-sketch-1",
+          runtimeKind: "try_it",
+        },
       },
       {
         type: "runtime",
@@ -194,6 +209,9 @@ describe("student lesson runtime target projection", () => {
     expect(serialized).not.toContain("secret-answer");
     expect(serialized).not.toContain("secret test");
     expect(serialized).not.toContain("hidden-exercise-key");
+    expect(serialized).not.toContain(
+      "secret-sketch-exercise-key",
+    );
     expect(serialized).not.toContain("secret-sketch-registry-id");
     expect(serialized).not.toContain("solutionCode");
     expect(serialized).not.toContain("solutionFiles");

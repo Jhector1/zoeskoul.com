@@ -355,6 +355,12 @@ export type LearningLessonRuntimeCard = {
   title: string | null;
   runtimeKind: "sketch" | "quiz" | "project";
   runtime: LearningRuntimeTarget;
+  /**
+   * Identity-only target for a Try It owned by this runtime card.
+   * Authored prompts, starters, tests, and solutions remain behind the
+   * protected practice boundary.
+   */
+  embeddedRuntime?: LearningRuntimeTarget | null;
 };
 
 export type LearningLessonCard =
@@ -468,12 +474,39 @@ function isLearningLessonCard(
       return false;
     }
 
+    if (
+      !isLearningRuntimeTarget(value.runtime) ||
+      value.runtime.ownerCardId !== value.id ||
+      value.runtime.targetKind !== "card" ||
+      value.runtime.targetId !== value.id ||
+      value.runtime.runtimeKind !== value.runtimeKind
+    ) {
+      return false;
+    }
+
+    const embeddedRuntime =
+      value.embeddedRuntime;
+
+    if (
+      embeddedRuntime == null
+    ) {
+      return true;
+    }
+
     return (
-      isLearningRuntimeTarget(value.runtime) &&
-      value.runtime.ownerCardId === value.id &&
-      value.runtime.targetKind === "card" &&
-      value.runtime.targetId === value.id &&
-      value.runtime.runtimeKind === value.runtimeKind
+      value.runtimeKind === "sketch" &&
+      isLearningRuntimeTarget(
+        embeddedRuntime,
+      ) &&
+      embeddedRuntime.ownerCardId === value.id &&
+      embeddedRuntime.targetKind ===
+        "embedded_try_it" &&
+      embeddedRuntime.targetId !== value.id &&
+      embeddedRuntime.runtimeKind === "try_it" &&
+      embeddedRuntime.sectionSlug ===
+        value.runtime.sectionSlug &&
+      embeddedRuntime.topicSlug ===
+        value.runtime.topicSlug
     );
   }
 
