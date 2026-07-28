@@ -151,6 +151,9 @@ importers:
       '@zoeskoul/learning-client':
         specifier: workspace:*
         version: link:../../packages/learning-client
+      '@zoeskoul/learning-runtime':
+        specifier: workspace:*
+        version: link:../../packages/learning-runtime
       '@zoeskoul/lesson-renderer':
         specifier: workspace:*
         version: link:../../packages/lesson-renderer

@@ -121,3 +121,18 @@ export {
   savedReviewExerciseLooksLikeLearnerEditorWork,
   summarizeReviewSavedWorkspaceFiles,
 } from "./workspaceRestore";
+
+export {
+  buildLessonCardDoneProgress,
+  canAutoCompleteLessonCard,
+  isLessonCardComplete,
+  isLessonTopicComplete,
+  isLessonTopicUnlocked,
+  nextLessonPosition,
+  previousLessonPosition,
+  resolveInitialLessonTopicSlug,
+  withActiveLessonTopic,
+  type LessonNavigationCard,
+  type LessonNavigationTopic,
+  type LessonPosition,
+} from "./lessonNavigation";

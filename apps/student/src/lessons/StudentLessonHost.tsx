@@ -1,11 +1,24 @@
 import {
-  completedTopicKeysFromProgress,
+  buildReviewProgressPayload,
   fetchReviewProgressGET,
-  type LearningLessonCard,
+  saveReviewProgressPUT,
 } from "@zoeskoul/learning-client";
 import {
   useLessonContent,
 } from "@zoeskoul/learning-client/react";
+import {
+  buildLessonCardDoneProgress,
+  canAutoCompleteLessonCard,
+  getTopicProgressState,
+  isLessonCardComplete,
+  isLessonTopicComplete,
+  isLessonTopicUnlocked,
+  nextLessonPosition,
+  previousLessonPosition,
+  resolveInitialLessonTopicSlug,
+  withActiveLessonTopic,
+  type ReviewProgressState,
+} from "@zoeskoul/learning-runtime";
 import {
   lazy,
   Suspense,
@@ -34,6 +47,12 @@ type ProgressLoadState =
       status: "error";
       message: string;
     };
+
+type ProgressSaveState =
+  | "idle"
+  | "saving"
+  | "saved"
+  | "error";
 
 function errorMessage(error: unknown): string {
   return error instanceof Error
@@ -90,12 +109,23 @@ export function StudentLessonHost(props: {
     useState<ProgressLoadState>({
       status: "loading",
     });
+  const [saveState, setSaveState] =
+    useState<ProgressSaveState>("idle");
+  const [saveError, setSaveError] =
+    useState<string | null>(null);
   const [activeTopicSlug, setActiveTopicSlug] =
     useState<string | null>(null);
+  const [activeCardIndex, setActiveCardIndex] =
+    useState(0);
 
   useEffect(() => {
     const controller = new AbortController();
+
     setProgressState({ status: "loading" });
+    setSaveState("idle");
+    setSaveError(null);
+    setActiveTopicSlug(null);
+    setActiveCardIndex(0);
 
     void fetchReviewProgressGET({
       subjectSlug: props.subjectSlug,
@@ -148,22 +178,361 @@ export function StudentLessonHost(props: {
     );
   }, [lessonState]);
 
-  const activeTopic =
-    topics.find(
-      (topic) =>
-        topic.slug === activeTopicSlug,
-    ) ??
-    topics[0] ??
-    null;
+  const progress =
+    progressState.status === "ready"
+      ? progressState.progress
+      : null;
 
   useEffect(() => {
-    if (
-      activeTopic &&
-      activeTopic.slug !== activeTopicSlug
-    ) {
-      setActiveTopicSlug(activeTopic.slug);
+    if (!topics.length) return;
+
+    const currentStillExists =
+      activeTopicSlug &&
+      topics.some(
+        (topic) =>
+          topic.slug === activeTopicSlug,
+      );
+
+    if (currentStillExists) return;
+
+    setActiveTopicSlug(
+      resolveInitialLessonTopicSlug(
+        topics,
+        progress?.activeTopicId,
+      ),
+    );
+    setActiveCardIndex(0);
+  }, [
+    activeTopicSlug,
+    progress?.activeTopicId,
+    topics,
+  ]);
+
+  const activeTopicIndex =
+    topics.findIndex(
+      (topic) =>
+        topic.slug === activeTopicSlug,
+    );
+  const activeTopic =
+    activeTopicIndex >= 0
+      ? topics[activeTopicIndex]
+      : topics[0] ?? null;
+
+  useEffect(() => {
+    if (!activeTopic) {
+      setActiveCardIndex(0);
+      return;
     }
-  }, [activeTopic, activeTopicSlug]);
+
+    setActiveCardIndex((current) =>
+      Math.min(
+        Math.max(0, current),
+        Math.max(
+          0,
+          activeTopic.cards.length - 1,
+        ),
+      ),
+    );
+  }, [activeTopic]);
+
+  const topicProgress = activeTopic
+    ? getTopicProgressState(
+        progress?.topics,
+        activeTopic.slug,
+      ).topic
+    : null;
+  const activeCard =
+    activeTopic?.cards[activeCardIndex] ??
+    null;
+  const activeCardComplete =
+    activeCard
+      ? isLessonCardComplete(
+          activeCard,
+          topicProgress,
+        )
+      : false;
+  const activeCardAutoCompletable =
+    activeCard
+      ? canAutoCompleteLessonCard(
+          activeCard,
+        )
+      : false;
+
+  const previewProgress =
+    progress &&
+    activeTopic &&
+    activeCard &&
+    !activeCardComplete &&
+    activeCardAutoCompletable
+      ? buildLessonCardDoneProgress({
+          progress,
+          topicSlug: activeTopic.slug,
+          card: activeCard,
+          topics,
+        })
+      : progress;
+
+  const previewTopicProgress =
+    activeTopic
+      ? getTopicProgressState(
+          previewProgress?.topics,
+          activeTopic.slug,
+        ).topic
+      : null;
+  const topicComplete =
+    activeTopic
+      ? isLessonTopicComplete(
+          activeTopic.cards,
+          topicProgress,
+        )
+      : false;
+  const topicCompleteAfterAction =
+    activeTopic
+      ? isLessonTopicComplete(
+          activeTopic.cards,
+          previewTopicProgress,
+        )
+      : false;
+
+  const previousPosition =
+    activeTopic
+      ? previousLessonPosition(
+          topics,
+          {
+            topicIndex:
+              activeTopicIndex >= 0
+                ? activeTopicIndex
+                : 0,
+            cardIndex: activeCardIndex,
+          },
+        )
+      : null;
+  const nextPosition =
+    activeTopic
+      ? nextLessonPosition({
+          topics,
+          current: {
+            topicIndex:
+              activeTopicIndex >= 0
+                ? activeTopicIndex
+                : 0,
+            cardIndex: activeCardIndex,
+          },
+          allowNextTopic:
+            topicCompleteAfterAction,
+        })
+      : null;
+
+  const canGoNext =
+    Boolean(nextPosition) &&
+    (
+      activeCardComplete ||
+      activeCardAutoCompletable
+    );
+  const isSaving = saveState === "saving";
+
+  async function persistProgress(
+    next: ReviewProgressState,
+  ): Promise<ReviewProgressState> {
+    setProgressState({
+      status: "ready",
+      progress: next,
+    });
+    setSaveState("saving");
+    setSaveError(null);
+
+    try {
+      const saved =
+        await saveReviewProgressPUT({
+          apiOrigin: props.apiOrigin,
+          payload: buildReviewProgressPayload({
+            subjectSlug: props.subjectSlug,
+            moduleSlug: props.moduleSlug,
+            locale: "en",
+            state: next,
+            activeTopicId:
+              next.activeTopicId,
+          }),
+        });
+
+      setProgressState({
+        status: "ready",
+        progress: saved.state,
+      });
+      setSaveState("saved");
+
+      return saved.state;
+    } catch (error: unknown) {
+      setSaveState("error");
+      setSaveError(errorMessage(error));
+
+      /**
+       * Keep the optimistic state visible. The learner can retry the same
+       * action after the save error instead of losing their local navigation.
+       */
+      return next;
+    }
+  }
+
+  function applyPosition(args: {
+    topicIndex: number;
+    cardIndex: number;
+  }) {
+    const topic = topics[args.topicIndex];
+    if (!topic) return;
+
+    setActiveTopicSlug(topic.slug);
+    setActiveCardIndex(args.cardIndex);
+  }
+
+  async function selectTopic(
+    topicIndex: number,
+  ) {
+    const topic = topics[topicIndex];
+    if (!topic || isSaving) return;
+
+    if (
+      !isLessonTopicUnlocked({
+        topics,
+        topicIndex,
+        progress,
+      })
+    ) {
+      return;
+    }
+
+    applyPosition({
+      topicIndex,
+      cardIndex: 0,
+    });
+
+    if (progress) {
+      await persistProgress(
+        withActiveLessonTopic(
+          progress,
+          topic.slug,
+        ),
+      );
+    }
+  }
+
+  async function markCurrentCardDone() {
+    if (
+      !progress ||
+      !activeTopic ||
+      !activeCard ||
+      !activeCardAutoCompletable ||
+      isSaving
+    ) {
+      return;
+    }
+
+    await persistProgress(
+      buildLessonCardDoneProgress({
+        progress,
+        topicSlug: activeTopic.slug,
+        card: activeCard,
+        topics,
+      }),
+    );
+  }
+
+  async function goNext() {
+    if (
+      !nextPosition ||
+      !canGoNext ||
+      !activeTopic ||
+      !activeCard ||
+      isSaving
+    ) {
+      return;
+    }
+
+    let nextProgress = progress;
+
+    if (
+      nextProgress &&
+      !activeCardComplete &&
+      activeCardAutoCompletable
+    ) {
+      nextProgress =
+        buildLessonCardDoneProgress({
+          progress: nextProgress,
+          topicSlug: activeTopic.slug,
+          card: activeCard,
+          topics,
+        });
+    }
+
+    const destinationTopic =
+      topics[nextPosition.topicIndex];
+
+    if (
+      nextProgress &&
+      destinationTopic &&
+      destinationTopic.slug !==
+        activeTopic.slug
+    ) {
+      nextProgress = withActiveLessonTopic(
+        nextProgress,
+        destinationTopic.slug,
+      );
+    }
+
+    applyPosition(nextPosition);
+
+    if (nextProgress) {
+      await persistProgress(nextProgress);
+    }
+  }
+
+  async function goPrevious() {
+    if (!previousPosition || isSaving) {
+      return;
+    }
+
+    const destinationTopic =
+      topics[previousPosition.topicIndex];
+
+    applyPosition(previousPosition);
+
+    if (
+      progress &&
+      destinationTopic &&
+      destinationTopic.slug !==
+        activeTopic?.slug
+    ) {
+      await persistProgress(
+        withActiveLessonTopic(
+          progress,
+          destinationTopic.slug,
+        ),
+      );
+    }
+  }
+
+  async function openCurrentRuntime() {
+    if (!activeTopic || isSaving) return;
+
+    if (progress) {
+      await persistProgress(
+        withActiveLessonTopic(
+          progress,
+          activeTopic.slug,
+        ),
+      );
+    }
+
+    window.location.assign(
+      `${props.websiteOrigin}/en/subjects/` +
+        `${encodeURIComponent(
+          props.subjectSlug,
+        )}/modules/` +
+        `${encodeURIComponent(
+          props.moduleSlug,
+        )}/learn`,
+    );
+  }
 
   const backHref = modulePath(
     props.subjectSlug,
@@ -209,21 +578,12 @@ export function StudentLessonHost(props: {
     );
   }
 
-  const progress =
-    progressState.status === "ready"
-      ? progressState.progress
-      : null;
-  const completedTopicKeys = useMemo(
-    () =>
-      completedTopicKeysFromProgress(
-        progress,
-      ),
-    [progress],
-  );
-  const currentRuntimeHref =
-    `${props.websiteOrigin}/en/subjects/` +
-    `${encodeURIComponent(props.subjectSlug)}/modules/` +
-    `${encodeURIComponent(props.moduleSlug)}/learn`;
+  const nextCrossesTopic =
+    Boolean(
+      nextPosition &&
+      nextPosition.topicIndex !==
+        activeTopicIndex,
+    );
 
   return (
     <div className="lesson-host">
@@ -256,11 +616,33 @@ export function StudentLessonHost(props: {
           ) : null}
         </div>
 
-        <span className="lesson-host-live-pill">
-          {progress
-            ? "Progress connected"
-            : "Progress temporarily unavailable"}
-        </span>
+        <div className="lesson-host-status-group">
+          <span className="lesson-host-live-pill">
+            {progress
+              ? "Progress connected"
+              : "Progress temporarily unavailable"}
+          </span>
+
+          <span
+            className={[
+              "lesson-save-status",
+              saveState === "error"
+                ? "is-error"
+                : "",
+            ]
+              .filter(Boolean)
+              .join(" ")}
+            aria-live="polite"
+          >
+            {saveState === "saving"
+              ? "Saving…"
+              : saveState === "saved"
+                ? "Saved"
+                : saveState === "error"
+                  ? "Save failed"
+                  : ""}
+          </span>
+        </div>
       </header>
 
       <div className="lesson-host-layout">
@@ -274,12 +656,29 @@ export function StudentLessonHost(props: {
                 <span>{section.title}</span>
 
                 {section.topics.map((topic) => {
-                  const completed =
-                    completedTopicKeys.has(
+                  const topicIndex =
+                    topics.findIndex(
+                      (candidate) =>
+                        candidate.slug === topic.slug,
+                    );
+                  const state =
+                    getTopicProgressState(
+                      progress?.topics,
                       topic.slug,
+                    ).topic;
+                  const completed =
+                    isLessonTopicComplete(
+                      topic.cards,
+                      state,
                     );
                   const active =
                     activeTopic?.slug === topic.slug;
+                  const unlocked =
+                    isLessonTopicUnlocked({
+                      topics,
+                      topicIndex,
+                      progress,
+                    });
 
                   return (
                     <button
@@ -294,12 +693,24 @@ export function StudentLessonHost(props: {
                       ]
                         .filter(Boolean)
                         .join(" ")}
+                      disabled={
+                        !unlocked || isSaving
+                      }
+                      title={
+                        unlocked
+                          ? undefined
+                          : "Complete the previous topic first."
+                      }
                       onClick={() =>
-                        setActiveTopicSlug(topic.slug)
+                        void selectTopic(topicIndex)
                       }
                     >
                       <span aria-hidden="true">
-                        {completed ? "✓" : "•"}
+                        {completed
+                          ? "✓"
+                          : unlocked
+                            ? "•"
+                            : "○"}
                       </span>
                       <span>{topic.title}</span>
                     </button>
@@ -311,7 +722,7 @@ export function StudentLessonHost(props: {
         </aside>
 
         <main className="lesson-host-stage">
-          {activeTopic ? (
+          {activeTopic && activeCard ? (
             <>
               <div className="lesson-topic-heading">
                 <span>
@@ -319,84 +730,216 @@ export function StudentLessonHost(props: {
                 </span>
                 <h3>{activeTopic.title}</h3>
                 <p>
-                  This topic is now routed and hydrated
-                  inside the Vite student application.
+                  {activeTopic.summary ??
+                    "Work through each lesson card in order."}
                 </p>
               </div>
 
-              <div className="lesson-card-stack">
-                {activeTopic.cards.length ? (
-                  activeTopic.cards.map(
-                    (card: LearningLessonCard) => (
-                      <article
-                        className="lesson-content-card"
-                        key={card.id}
-                      >
-                        {card.title ? (
-                          <h4>{card.title}</h4>
-                        ) : null}
-
-                        {card.type === "text" ? (
-                          <>
-                            <RenderedLessonMarkdown
-                              content={card.markdown}
-                            />
-
-                            {card.runtimeRequired ? (
-                              <div className="lesson-runtime-handoff">
-                                <span>
-                                  This reading includes an
-                                  interactive Try It.
-                                </span>
-                                <a href={currentRuntimeHref}>
-                                  Open Try It
-                                </a>
-                              </div>
-                            ) : null}
-                          </>
-                        ) : card.type === "video" ? (
-                          <>
-                            <div className="lesson-video-frame">
-                              <iframe
-                                src={card.url}
-                                title={
-                                  card.title ??
-                                  "Lesson video"
-                                }
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowFullScreen
-                              />
-                            </div>
-
-                            {card.captionMarkdown ? (
-                              <RenderedLessonMarkdown
-                                content={card.captionMarkdown}
-                              />
-                            ) : null}
-                          </>
-                        ) : (
-                          <div className="lesson-runtime-handoff">
-                            <span>
-                              This {card.runtimeKind} card
-                              uses the current interactive
-                              runtime.
-                            </span>
-                            <a href={currentRuntimeHref}>
-                              Open {card.runtimeKind}
-                            </a>
-                          </div>
-                        )}
-                      </article>
-                    ),
-                  )
-                ) : (
-                  <section className="lesson-host-state">
-                    <strong>
-                      No lesson cards found
-                    </strong>
-                  </section>
-                )}
+              <div className="lesson-card-progress">
+                <span>
+                  Card {activeCardIndex + 1} of{" "}
+                  {activeTopic.cards.length}
+                </span>
+                <progress
+                  value={activeCardIndex + 1}
+                  max={Math.max(
+                    1,
+                    activeTopic.cards.length,
+                  )}
+                />
               </div>
+
+              <article className="lesson-content-card">
+                <header className="lesson-card-header">
+                  <div>
+                    <span>
+                      {activeCard.type === "runtime"
+                        ? activeCard.runtimeKind
+                        : activeCard.type}
+                    </span>
+                    {activeCard.title ? (
+                      <h4>{activeCard.title}</h4>
+                    ) : null}
+                  </div>
+
+                  <strong
+                    className={
+                      activeCardComplete
+                        ? "is-complete"
+                        : undefined
+                    }
+                  >
+                    {activeCardComplete
+                      ? "Complete"
+                      : "In progress"}
+                  </strong>
+                </header>
+
+                {activeCard.type === "text" ? (
+                  <>
+                    <RenderedLessonMarkdown
+                      content={activeCard.markdown}
+                    />
+
+                    {activeCard.runtimeRequired ? (
+                      <div className="lesson-runtime-handoff">
+                        <span>
+                          Complete the embedded Try It in
+                          the current interactive runtime.
+                        </span>
+                        <button
+                          type="button"
+                          onClick={() =>
+                            void openCurrentRuntime()
+                          }
+                          disabled={isSaving}
+                        >
+                          Open Try It
+                        </button>
+                      </div>
+                    ) : (
+                      <div className="lesson-card-actions">
+                        <button
+                          type="button"
+                          className={
+                            activeCardComplete
+                              ? "is-complete"
+                              : undefined
+                          }
+                          onClick={() =>
+                            void markCurrentCardDone()
+                          }
+                          disabled={
+                            activeCardComplete ||
+                            isSaving ||
+                            !progress
+                          }
+                        >
+                          {activeCardComplete
+                            ? "✓ Read"
+                            : "Mark as read"}
+                        </button>
+                      </div>
+                    )}
+                  </>
+                ) : activeCard.type === "video" ? (
+                  <>
+                    <div className="lesson-video-frame">
+                      <iframe
+                        src={activeCard.url}
+                        title={
+                          activeCard.title ??
+                          "Lesson video"
+                        }
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                      />
+                    </div>
+
+                    {activeCard.captionMarkdown ? (
+                      <RenderedLessonMarkdown
+                        content={
+                          activeCard.captionMarkdown
+                        }
+                      />
+                    ) : null}
+
+                    <div className="lesson-card-actions">
+                      <button
+                        type="button"
+                        className={
+                          activeCardComplete
+                            ? "is-complete"
+                            : undefined
+                        }
+                        onClick={() =>
+                          void markCurrentCardDone()
+                        }
+                        disabled={
+                          activeCardComplete ||
+                          isSaving ||
+                          !progress
+                        }
+                      >
+                        {activeCardComplete
+                          ? "✓ Watched"
+                          : "Mark watched"}
+                      </button>
+                    </div>
+                  </>
+                ) : (
+                  <div className="lesson-runtime-handoff">
+                    <span>
+                      This {activeCard.runtimeKind} card
+                      uses the current interactive runtime.
+                      Your completion returns here through
+                      saved progress.
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() =>
+                        void openCurrentRuntime()
+                      }
+                      disabled={isSaving}
+                    >
+                      Open {activeCard.runtimeKind}
+                    </button>
+                  </div>
+                )}
+              </article>
+
+              {topicComplete &&
+              !nextPosition ? (
+                <section className="lesson-topic-complete">
+                  <strong>Topic complete</strong>
+                  <p>
+                    You completed every activity in this
+                    topic.
+                  </p>
+                </section>
+              ) : null}
+
+              <nav
+                className="lesson-card-navigation"
+                aria-label="Lesson card navigation"
+              >
+                <button
+                  type="button"
+                  onClick={() =>
+                    void goPrevious()
+                  }
+                  disabled={
+                    !previousPosition || isSaving
+                  }
+                >
+                  ← Previous
+                </button>
+
+                <span>
+                  {saveError ??
+                    (
+                      !canGoNext &&
+                      nextPosition === null &&
+                      !topicCompleteAfterAction
+                        ? "Complete this activity to continue."
+                        : ""
+                    )}
+                </span>
+
+                <button
+                  type="button"
+                  className="is-primary"
+                  onClick={() => void goNext()}
+                  disabled={
+                    !canGoNext || isSaving
+                  }
+                >
+                  {nextCrossesTopic
+                    ? "Next topic"
+                    : "Next"}{" "}
+                  →
+                </button>
+              </nav>
 
               {progressState.status === "error" ? (
                 <div className="lesson-progress-warning">
@@ -406,7 +949,11 @@ export function StudentLessonHost(props: {
             </>
           ) : (
             <section className="lesson-host-state">
-              <strong>No topics found</strong>
+              <strong>
+                {activeTopic
+                  ? "No lesson cards found"
+                  : "No topics found"}
+              </strong>
             </section>
           )}
         </main>
